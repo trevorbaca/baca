@@ -189,8 +189,7 @@ def interpretMusic(arg):
             
 def removeEffectiveDurations(expr):
    '''
-   Helper function for kludgy old divide() function;
-   to deprecate clean().
+   Helper function for kludgy old interpretMusic() function.
    '''
 
    for l in expr.leaves:
@@ -522,7 +521,7 @@ def beamMany(m, partsList, rip = True, span = False, lone = 'flat'):
    TODO: incorporate into beam();
    TODO: create unified rhythmic specification.
 
-   >>> t = divide([1, 1, 1], 2, 32)
+   >>> t = divide.pair([1, 1, 1], (2, 32))
    >>> m = clone(t, 3)
    >>> beamMany(m, [[(2, 32)], [(2, 32), (2, 32)]], span = 2)
    >>> f(voice.Voice(m))
@@ -731,135 +730,6 @@ def paint(music, pitches):
    else:
       return reconstruct([music], reconstructor)[0]
 
-def divide(l, (n, d), together = False):
-   '''
-   Divide duration (n, d) according to list l.
-   Note that denominator d is interpreter as the basic tuplet unit;
-   this explains why the function accepts a pair rather than a Rational.
-
-   >>> divide([1], 7, 16)
-   (c'4..)
-
-   >>> divide([1, 2], 7, 16)
-   (6:7, c'8, c'4)
-
-   >>> divide([1, 2, 4], 7, 16)
-   (c'16, c'8, c'4)
-
-   >>> divide([1, 2, 4, 1], 7, 16)
-   (8:7, c'16, c'8, c'4, c'16)
-
-   >>> divide([1, 2, 4, 1, 2], 7, 16)
-   (10:7, c'16, c'8, c'4, c'16, c'8)
-
-   >>> divide([1, 2, 4, 1, 2, 4], 7, 16)
-   (c'32, c'16, c'8, c'32, c'16, c'8)
-   '''
-
-   from abjad.exceptions.exceptions import AssignabilityError
-   from abjad.tools import construct
-   from math import log
-
-   duration = (n, d)
-
-   if len(l) == 0:
-      raise ValueError('must divide list l of length > 0.')
-
-   if len(l) == 1:
-      if l[0] > 0:
-         try:
-            return Container([Note(0, duration)])
-         except AssignabilityError:
-            return Container(construct.notes(0, duration))
-      elif l[0] < 0:
-         try:
-            return Container([Rest(duration)])
-         except AssignabilityError:
-            return Container(construct.rests(duration))
-      else:
-         raise ValueError('no divide zero values.')
-
-   if len(l) > 1:
-      exponent = mathtools.chop(log(weight(l), 2) - log(n, 2))
-      denominator = int(d * 2 ** exponent)
-      music = [ ]
-      for x in l:
-         if not x:
-            raise ValueError('no divide zero values.')
-         if x > 0:
-            try:
-               music.append(Note(0, (x, denominator)))
-            except AssignabilityError:
-               music.extend(construct.notes(0, (x, denominator)))
-         else:
-            music.append(Rest((-x, denominator)))
-      return FixedDurationTuplet(duration, music)
-      
-def olddivide(l, n, d, together = False):
-   '''
-   >>> divide([1], 7, 16)
-   (c'4..)
-
-   >>> divide([1, 2], 7, 16)
-   (6:7, c'8, c'4)
-
-   >>> divide([1, 2, 4], 7, 16)
-   (c'16, c'8, c'4)
-
-   >>> divide([1, 2, 4, 1], 7, 16)
-   (8:7, c'16, c'8, c'4, c'16)
-
-   >>> divide([1, 2, 4, 1, 2], 7, 16)
-   (10:7, c'16, c'8, c'4, c'16, c'8)
-
-   >>> divide([1, 2, 4, 1, 2, 4], 7, 16)
-   (c'32, c'16, c'8, c'32, c'16, c'8)
-   '''
-
-   # divide([1], 7, 16)
-   if len(l) == 1:
-
-      contents = Note(0, n, d) if l[0] > 0 else Rest(n, d)
-      result = expression.Expression([contents])
-
-   else:
-
-      r = float(sum([abs(x) for x in l])) / n
-      if 0.5 < r < 2.0:
-         #print 'normal'
-         dn = duration.durationLogToName(math.log(d, 2))
-         t = tuplet.SmartTuplet(n, d, music(l + [dn, 'music list']).music)
-      elif r <= 0.5:
-         #print 'protracted'
-         adjustment = int(math.log(r, 2))
-         dn = duration.durationLogToName(math.log(d, 2) + adjustment)
-         t = tuplet.SmartTuplet(n, d, music(l + [dn, 'music list']).music)
-      elif r >= 2.0:
-         #print 'contracted'
-         #print r
-         adjustment = int(math.log(r, 2))
-         #print adjustment
-         dn = duration.durationLogToName(math.log(d, 2) + adjustment)
-         #print dn
-         t = tuplet.SmartTuplet(n, d, music(l + [dn, 'music list']).music)
-         #print t
-
-      # if cases like 7:14, 14:7, 7:28, 28:7, etc
-      if int(math.log(r, 2)) == math.log(r, 2) and \
-         t.music[0].__class__.__name__ == 'Tuplet':
-         # strip outer music list, return inner music list
-         result = t.music[0]
-      else:
-          result = t
-
-   #if beam != None and hasattr(result, 'beam'):
-   #   result.beam(beam)
-
-   if together:
-      beam(result, [(n, d)])
-
-   return result
-
 def skeleton(l):
    '''
    Return skeleton of LilyObject, list or tuple.
@@ -1057,7 +927,7 @@ def restsToNotes(expr):
    '''
    Cast rests to notes in expr.
 
-   >>> t = music.divide([1, 1, 1, -2], 4, 16)
+   >>> t = divide.pair([1, 1, 1, -2], (4, 16))
    >>> t
    (5:4, c'16, c'16, c'16, r8)
 
@@ -1205,7 +1075,7 @@ def effectiveDurations(m):
    '''
    List the effective durations of the leaves in m.
 
-   >>> t = divide([1, 1, 1], 1, 8)
+   >>> t = divide.pair([1, 1, 1], (1, 8))
 
    >>> effectiveDurations(t)
    [DURATION 1/24, DURATION 1/24, DURATION 1/24]
@@ -1222,7 +1092,7 @@ def effectiveDuration(m):
    '''
    Sum the effective durations of the leaves in m.
 
-   >>> t = divide([1, 1, 1], 1, 8)
+   >>> t = divide.pair([1, 1, 1], (1, 8))
 
    >>> effectiveDuration(t)
    8
@@ -1417,11 +1287,6 @@ def nest(measures, outer, inner):
    Structures time.
    '''
    
-#  dd = durations([measure.Measure([divide(x[0], *x[1])]) for x in zip(outer, measures)])
-#  mm = [divide(x[0], x[1].n, x[1].d) for x in zip(inner, dd)]
-#  partition(mm, [len(x) for x in outer])
-#  result = [measure.Measure([tuplet.SmartTuplet(x[1][0], x[1][1], x[0])]) for x in zip(mm, measures)]
-
    inner = partition(inner, [len(x) for x in outer], action = 'new')
 
    result = []
@@ -1430,11 +1295,11 @@ def nest(measures, outer, inner):
       m = measures[i]
       o = outer[i]
       n = inner[i]
-      dd = writtenDurations([measure.Measure([divide(o, m[0], m[1])])])
+      dd = writtenDurations([measure.Measure([divide.pair(o, (m[0], m[1]))])])
       body = []
       for j, d in enumerate(dd):
          if o[j] > 0:
-            body.append(divide(n[j], d.n, d.d))
+            body.append(divide.pair(n[j], (d.n, d.d)))
          else:
             body.append(Rest(d.n, d.d))
       
@@ -1457,7 +1322,7 @@ def build(measures, outer):
       print o
       print m
       print ''
-      result.append(measure.Measure([divide(o, m[0], m[1])]))
+      result.append(measure.Measure([divide.pair(o, (m[0], m[1]))]))
       result[-1].before.append(r'\time %s/%s' % (m[0], m[1]))
 
    return result
@@ -1857,7 +1722,7 @@ def specify(s, t, span = None):
    three-dimensional specification s;
    unit duration with denominator t.
 
-   Wrapper around divide() and beam().
+   Wrapper around divide.pair() and beam().
 
    >>> s = [[[-3, 1, 1], [1, 1, -3]], [[1, 1, -2], [-2, 1, 1]]]
    >>> specify(s, 32, span = 2)
@@ -1886,7 +1751,7 @@ def specify(s, t, span = None):
       parts = [weight(subbeam) for subbeam in beamfig]
       parts = [(n, t) for n in parts]
       stream = listtools.flatten(beamfig, action = 'new')
-      new = divide(stream, weight(stream), t)
+      new = divide.pair(stream, (weight(stream), t))
       beam(new, parts, span = span)
       result.append(new)
 
@@ -1934,7 +1799,7 @@ def stellate(k, s, t, d, b, span ='from duration', rests = True):
 
    denominators = copy.copy(k)
    pairs = zip(signatures, denominators)
-   tuplets = [divide(pair[0], (pair[1], d)) for pair in pairs]
+   tuplets = [divide.pair(pair[0], (pair[1], d)) for pair in pairs]
 
    if span == 'from duration':
       span = int(math.log(d, 2)) - 3
@@ -2014,7 +1879,7 @@ def coruscate(n, s, t, z, d, rests = True):
    if debug: print signatures
 
    pairs = zip(signatures, t)
-   result = [divide(pair[0], (pair[1], d)) for pair in pairs]
+   result = [divide.pair(pair[0], (pair[1], d)) for pair in pairs]
    
    for i, element in enumerate(result):
       if debug:
@@ -2625,7 +2490,7 @@ def partitionLeaves(leaves, type = 'notes and rests', cut = (0,), gap = (0,)):
    Partition leaf list leaves into sublists;
    chunking suitable for repeated hairpin application.
 
-   >>> t = divide([1, 1, -1, -1, 1, 1, -1, -1, -1], 8, 16)
+   >>> t = divide.pair([1, 1, -1, -1, 1, 1, -1, -1, -1], (8, 16))
    >>> t
    (9:8, c'16, c'16, r16, r16, c'16, c'16, r16, r16, r16)
 
@@ -2653,7 +2518,7 @@ def partitionLeaves(leaves, type = 'notes and rests', cut = (0,), gap = (0,)):
    >>> partitionLeaves(t.leaves, type = 'paired notes', gap = (2, 18))
    [([c'16, c'16], [c'16, c'16])]
 
-   >>> t = divide([1, -1, 1, -3, 1, -1, -1, 1], 10, 16)
+   >>> t = divide.pair([1, -1, 1, -3, 1, -1, -1, 1], (10, 16))
    >>> t
    (c'16, r16, c'16, r8., c'16, r16, r16, c'16)
 
@@ -2843,7 +2708,7 @@ def segmentLeaves(leaves, cut = (0,), gap = (0,)):
    include rests of duration less than or equal to cut in each stage;
    rests of duration greater than or equal to gap begin new stages.
 
-   >>> t = divide([1, -1, 1, -2, 1, -1, 1, -3, 1, -1, 1], 14, 16)
+   >>> t = divide.pair([1, -1, 1, -2, 1, -1, 1, -3, 1, -1, 1], (14, 16))
    >>> t
    (c'16, r16, c'16, r8, c'16, r16, c'16, r8., c'16, r16, c'16)
 
@@ -3135,7 +3000,7 @@ def cauterize(leaves, start, stop):
 
 def partitionLeavesByDurations(leaves, durations = None):
    '''
-   >>> v = Voice([divide([1, -4, 1], (1, 4)), divide([1, -4, 1, 1], (1, 4))])
+   >>> v = Voice([divide.pair([1, -4, 1], (1, 4)), divide.pair([1, -4, 1, 1], (1, 4))])
    >>> v.leaves
    [c'16, r4, c'16, c'16, r4, c'16, c'16]
 
