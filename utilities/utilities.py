@@ -1,13 +1,17 @@
-import copy, math, operator, sys, sets
+from baca.utilities import utilities
+import copy
+import math
+import operator
+import sys
+
 
 def clone(expr):
 
    return expr.clone() if hasattr(expr, 'clone') else expr
 
 def phi(n):
-   from math import log
    assert isinstance(n, (int, float, long)), n >= 1
-   return 2 ** int(log(n, 2))
+   return 2 ** int(math.log(n, 2))
 
 def chop(x):
    if x >= 0:
@@ -1029,7 +1033,7 @@ def subset(l, m):
    True
    '''
 
-   return sets.Set(l).issubset(sets.Set(m))
+   return set(l).issubset(set(m))
 
 def sums(l, action = 'in place'):
    '''
@@ -2617,10 +2621,8 @@ def constellate(psets, r):
    Returns the outer product of the registrations of psets in r.
    '''
 
-   from utilities import outer, flatten
-
-   result = outer([registrations(pset, r) for pset in psets])
-   [flatten(x) for x in result]
+   result = utilities.outer([registrations(pset, r) for pset in psets])
+   [utilities.flatten(x) for x in result]
    [x.sort( ) for x in result]
    return result
 
