@@ -11,18 +11,6 @@ import sys
 def clone(expr):
    return expr.clone() if hasattr(expr, 'clone') else expr
 
-def sign(n):
-   '''
-   Return -1, 0, 1 for negative, zero, positive numbers.
-   '''
-
-   if n < 0:
-      return -1
-   elif n == 0:
-      return 0
-   else:
-      return 1
-
 def direction(n):
    '''
    Return -1 or 1 (but not 0) for direction-flipping or -preserving numbers.
@@ -127,7 +115,7 @@ def repeat(l, length = False, times = False, weight = False,
          if remainder == 'less':
             result = result[:-1]
          elif remainder == 'chop':
-            result = result[:-1] + [sign(result[-1]) * \
+            result = result[:-1] + [mathtools.sign(result[-1]) * \
                (weight - sum([abs(x) for x in result[:-1]]))]
          elif remainder == 'more':
             pass
@@ -347,7 +335,7 @@ def partition(l, s, overhang = False, cyclic = False,
                if total == s:
                   result.append([])
                else:
-                  d = sign(result[-1][-1])
+                  d = mathtools.sign(result[-1][-1])
                   next = total - s
                   last = abs(result[-1][-1]) - next
                   result[-1][-1] = last * d
@@ -366,7 +354,7 @@ def partition(l, s, overhang = False, cyclic = False,
                if total == s[i % len(s)]:
                   result.append([])
                else:
-                  d = sign(result[-1][-1])
+                  d = mathtools.sign(result[-1][-1])
                   next = total - s[i % len(s)]
                   last = abs(result[-1][-1]) - next
                   result[-1][-1] = last * d
@@ -2042,7 +2030,7 @@ def corrugate(w, target = 'positives', action = 'in place'):
             if element == 0:
                result.insert(0, element)
             else:
-               result[0:0] = [sign(element) * 1] * abs(element)
+               result[0:0] = [mathtools.sign(element) * 1] * abs(element)
          else:
             print 'Unkown target %s.' % target
             raise ValueError
@@ -2386,7 +2374,7 @@ def smelt(ll):
    result = listtools.pairwise(result)
 
    new = []
-   if sign(first) == 1:
+   if mathtools.sign(first) == 1:
       for i, pair in enumerate(result):
          if i % 2 == 0:
             new.append(pair)
