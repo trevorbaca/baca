@@ -1524,10 +1524,10 @@ def specify(s, t, span = None):
    result = []
 
    for beamfig in s:
-      parts = [weight(subbeam) for subbeam in beamfig]
+      parts = [listtools.weight(subbeam) for subbeam in beamfig]
       parts = [(n, t) for n in parts]
       stream = listtools.flatten(beamfig, action = 'new')
-      new = divide.pair(stream, (weight(stream), t))
+      new = divide.pair(stream, (listtools.weight(stream), t))
       beam(new, parts, span = span)
       result.append(new)
 
@@ -1561,7 +1561,7 @@ def stellate(k, s, t, d, b, span ='from duration', rests = True):
    prolation = helianthate(s, 'right', 'right', action = 'new')
    numerators = listtools.increase_cyclic(k, prolation, action = 'new')
    mask = helianthate(t, 'right', 'right', action = 'new')
-   repeat(mask, weight = weight(numerators))
+   repeat(mask, weight = listtools.weight(numerators))
    corrugate(mask)
    signatures = partition(
       mask, numerators, mode = 'weight', overhang = 'true', action = 'new')
@@ -1637,7 +1637,7 @@ def coruscate(n, s, t, z, d, rests = True):
    signatures = []
    for i, element in enumerate(fit):
       new = []
-      while weight(new) < element:
+      while listtools.weight(new) < element:
          if cut[j % len(cut)] == 0:
             new.append(signal[j % len(signal)])
          elif cut[j % len(cut)] == 1:

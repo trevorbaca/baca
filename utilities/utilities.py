@@ -107,10 +107,10 @@ def repeat(l, length = False, times = False, weight = False,
    elif weight:
       result.append(clone.unspan(l[0]))
       i = 1
-      while sum([abs(x) for x in result]) < weight:
+      while listtools.weight(result) < weight:
          result.append(l[i % len(l)])
          i += 1
-      if sum([abs(x) for x in result]) > weight:
+      if weight < listtools.weight(result):
          if remainder == 'less':
             result = result[:-1]
          elif remainder == 'chop':
@@ -318,8 +318,8 @@ def partition(l, s, overhang = False, cyclic = False,
       if isinstance(s, int):
          for element in l:
             result[-1].append(element)
-            while weight(result[-1]) >= s:
-               total = weight(result[-1])
+            while s <= listtools.weight(result[-1]):
+               total = listtools.weight(result[-1])
                if total == s:
                   result.append([])
                else:
@@ -337,8 +337,8 @@ def partition(l, s, overhang = False, cyclic = False,
          result = [[]]
          for element in l:
             result[-1].append(element)
-            while weight(result[-1]) >= s[i % len(s)]:
-               total = weight(result[-1])
+            while s[i % len(s)] <= listtools.weight(result[-1]):
+               total = listtools.weight(result[-1])
                if total == s[i % len(s)]:
                   result.append([])
                else:
@@ -1928,13 +1928,6 @@ def corrugate(w, target = 'positives', action = 'in place'):
    elif action == 'new':
       return result
 
-def weight(l):
-   '''
-   Sum absolute value of elements in l.
-   '''
-
-   return sum([abs(element) for element in l])
-
 def intaglio(l, s, t = 1):
    '''
    Repeat s and weight-partition according to l.
@@ -1978,8 +1971,8 @@ def intaglio(l, s, t = 1):
    partition(result, l, mode = 'weight', overhang = True)
 
    for i, sublist in enumerate(result):
-      if weight(sublist) <= t:
-         result[i] = [weight(sublist)]
+      if listtools.weight(sublist) <= t:
+         result[i] = [listtools.weight(sublist)]
 
    return result
 
