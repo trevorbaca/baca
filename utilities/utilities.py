@@ -2270,17 +2270,3 @@ def constellate(psets, r):
    [listtools.flatten(x) for x in result]
    [x.sort( ) for x in result]
    return result
-
-def inAggregate(snippet, aggregate):
-   '''
-   True if all pitches in snippet appear in 
-   octave-relative positions in aggregate.
-
-   >>> inAggregate([2, 7, 10], [6, 9, 12, 13, 14, 19, 22, 27, 28, 29, 32, 35])
-   True
-   '''
-
-   snippetStartIndex = [p % 12 for p in aggregate].index(snippet[0] % 12)
-   snippetTransposition = aggregate[snippetStartIndex] - snippet[0]
-   transposedSnippet = [p + snippetTransposition for p in snippet]   
-   return set(transposedSnippet).issubset(set(aggregate))
