@@ -743,7 +743,6 @@ def draw(l, pairs, history = False):
    if isinstance(l[0], Note):
       for pair in reversed(pairs):
          new = []
-         #for i in range(pair[0], sum(pair)):
          for i in range(pair[0], pair[0] + pair[1]):
             source = l[i % len(l)]
             newest = source.__class__(
@@ -752,7 +751,6 @@ def draw(l, pairs, history = False):
                newest.history = source.history + history if \
                   hasattr(source, 'history') else history
             new.append(newest)
-         #inserts.append((sum(pair), new))
          if len(pair) == 2:
             reps = 1
          else:
@@ -762,10 +760,8 @@ def draw(l, pairs, history = False):
    if isinstance(l[0], int):
       for pair in reversed(pairs):
          new = []
-         #for i in range(pair[0], sum(pair)):
          for i in range(pair[0], pair[0] + pair[1]):
             new.append(l[i % len(l)])
-         #inserts.append((sum(pair) % len(l), new))
          if len(pair) == 2:
             reps = 1
          else:
@@ -840,26 +836,6 @@ def project(l, spec, history = False):
    for insert in reversed(sorted(inserts)):
       l[insert[0] : insert[0] + 1] = insert[-1]
       
-def unique(l, action = 'in place'):
-   '''
-   Return list of unique elements in l;
-   does not sort.
-
-   Recipe from Chris Mora.
-
-   >>> l = [1, 1, 5, 2, 2, 4]
-   >>> utilities.unique(l)
-   >>> l
-   [1, 5, 2, 4]
-   '''
- 
-   result = [x for x in l if x not in locals()['_[1]']]
-
-   if action == 'in place':
-      l[:] = result
-   else:
-      return result
-
 def pure(l):
    '''
    True if the elements in l are unique, otherwise False;
@@ -874,7 +850,7 @@ def pure(l):
    True
    '''
    
-   return len(l) == len(unique(l, action = 'new'))
+   return len(l) == len(listtools.unique(l))
 
 def subset(l, m):
    '''
