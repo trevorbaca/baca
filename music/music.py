@@ -583,59 +583,6 @@ def beams(music):
       except:
          pass
 
-#def correctBeams(music, debug = False):
-#   '''
-#   Correct three of six different beam error cases.
-#   '''
-#
-#   openBeam = False
-#   for v in instances(music, 'Voice'):
-#      for l in instances(v, '_Leaf'):
-#         # if we're trying to open a beam within an open beam
-#         if l.startBeam:
-#            if openBeam:
-#               if debug:
-#                  print 'found 1'
-#                  l.right.append(r' ^ \markup { ERROR 1 }')
-#            else:
-#               openBeam = True
-#         # if we're trying to close a beam outside of an open beam
-#         if not openBeam and l.stopBeam:
-#            if debug:
-#               print 'found 2'
-#               l.right.append(r' ^ \markup { ERROR 2 }')
-#         # if we're trying to beam over a quarter note or greater
-#         if openBeam and l.duration >= Rational(1, 4):
-#            if debug:
-#               print 'found 3'
-#               l.right.append(r' ^ \markup { ERROR 3 }')
-#         # if we have a nibbed eighth note or greater
-#         if l.duration >= Rational(1, 8) and l.startBeam and l.stopBeam:
-#            if debug:
-#               print 'found 4'
-#               l.right.append(r' ^ \markup { ERROR 4 }')
-#            l.unbeam()
-#            openBeam = False
-#         # if we have a left-pointing eighth note nib
-#         if l.startBeam and l.leftCount == 1:
-#            if debug:
-#               print 'found 5'
-#               l.right.append(r' ^ \markup { ERROR 5 }')
-#            new = r'\beam #0 #%s' % l.rightCount
-#            l.removeBeamCounts()
-#            l.left.append(new)
-#         # if we have a right-pointing eighth note nib
-#         if l.stopBeam and l.rightCount == 1:
-#            if debug:
-#               print 'found 6'
-#               l.right.append(r' ^ \markup { ERROR 6 }')
-#            new = r'\beam #%s #0' % l.leftCount
-#            l.removeBeamCounts()
-#            l.left.append(new)
-#         if l.stopBeam:
-#            openBeam = False      
-
-
 def trim_beam_nibs(expr):
    leaves = instances(expr, '_Leaf')
    for leaf in leaves:
@@ -645,21 +592,6 @@ def trim_beam_nibs(expr):
                leaf.beam.counts = 0, leaf.beam._flags
             if leaf.beam.last:
                leaf.beam.counts = leaf.beam._flags, 0
-
-
-#def trim_beam_nibs(expr):
-#   '''Use optionally immediately after copy to clean things up.'''
-#   leaves = instances(expr, '_Leaf')
-#   if len(leaves) == 1:
-#      leaf = leaves[0]
-#      if hasattr(leaf, 'beam') and leaf.beam.only:
-#         leaf.beam.counts = 0, leaf.beam._flags
-#   elif len(leaves) > 1:
-#      left, right = leaves[0], leaves[-1] 
-#      if hasattr(left, 'beam') and left.beam.first:
-#         left.beam.counts = 0, left.beam._flags
-#      if hasattr(right, 'beam') and right.beam.last:
-#         right.beam.counts = right.beam._flags, 0
 
 
 def splitPitches(pitches, split = -1):
@@ -690,25 +622,9 @@ def splitPitches(pitches, split = -1):
             #treble.append(Chord(components['treble'], (1, 4)))
             components[register] = Chord(components[register], (1, 4))
       
-#      if len(components['treble']) == 0:
-#         treble.append(skip.Skip((1, 4)))
-#      elif len(components['treble']) == 1:
-#         treble.append(Note(components['treble'], (1, 4)))
-#      else:
-#         treble.append(Chord(components['treble'], (1, 4)))
-#
-#      if len(components['bass']) == 0:
-#         bass.append(skip.Skip((1, 4)))
-#      elif len(components['bass']) == 1:
-#         treble.append(Note(components['bass'], (1, 4)))
-#      else:
-#         bass.append(Chord(components['bass'], (1, 4)))
-
-#   return treble, bass
    return components['treble'], components['bass']
 
 def makeFixedLayoutVoice(d, systems, alignments, offsets):
-
    '''
    Doc.
    '''
@@ -2144,150 +2060,6 @@ def coruscate(n, s, t, z, d, rests = True):
 #         new = []
 #
 #   ml[:] = result 
-
-#def openBeam(m, continuation):
-#   '''
-#   Docs.
-#
-#   continuation either True or False.
-#   '''
-#
-#   if continuation:
-#      open = True
-#   else:
-#      open = False
-#
-#   leaves = instances(m, '_Leaf')
-#
-#   for l in leaves:
-#      if l.startBeam and not l.stopBeam:
-#         open = True
-#      #if l.cleanClosedRight:
-#      if l.stopBeam:
-#         open = False
-#
-#   return open
-      
-#def closeLeftBeamEdge(m):
-#   '''
-#   Adds [ to first Leaf in m where typographically appropriate.
-#   '''
-#
-#   leaves = instances(m, '_Leaf')
-#
-#   if len(leaves) == 1:
-#      if leaves[0].kind('Note'):
-#         leaves[0].unbeam()
-#   elif len(leaves) >= 2:
-#      if leaves[0].kind('Note'):
-#         # 4er then something
-#         if leaves[0].duration._flags < 1:
-#            leaves[0].unbeam()
-#         # 8th then something
-#         elif leaves[0].duration._flags == 1:
-#            # 8th then rest
-#            if not leaves[1].kind('Note'):
-#               leaves[0].unbeam()
-#            # 8th then nonbeaming note
-#            elif leaves[1].duration._flags < 1:
-#               leaves[0].unbeam()
-#            # 8th then new beam start
-#            elif leaves[1].startBeam:
-#               leaves[0].unbeam()
-#            # 8th then beaming note
-#            else:
-#               leaves[0].unbeam()
-#               leaves[0].right.append(r'[')
-#               leaves[0].left.append(r'\beam #0 #1')
-#         # 16th then something
-#         elif leaves[0].duration._flags > 1:
-#            if '[' not in leaves[0].right:
-#               leaves[0].right.append('[')
-#            leaves[0].removeBeamCounts()
-#            f = leaves[0].duration._flags
-#            leaves[0].left.append(r'\beam #0 #%s' % f)
-
-#def closeRightBeamEdge(m):
-#   '''
-#   Adds ] to last Leaf in m where typographically appropriate.
-#   '''
-#
-#   leaves = instances(m, '_Leaf')
-#
-#   if len(leaves) == 1:
-#      if leaves[-1].kind('Note'):
-#         leaves[-1].unbeam()
-#   elif len(leaves) >= 2:
-#      if leaves[-1].kind('Note'):
-#         # something then 4er
-#         if leaves[-1].duration._flags < 1:
-#            leaves[-1].unbeam()
-#         # something then 8th
-#         elif leaves[-1].duration._flags == 1:
-#            # rest then 8th
-#            if not leaves[-2].kind('Note'):
-#               leaves[-1].unbeam()
-#            # nonbeaming note then 8th
-#            elif leaves[-2].duration._flags < 1:
-#               leaves[-1].unbeam()
-#            # beaming note then 8th
-#            else:
-#               leaves[-1].unbeam()
-#               leaves[-1].right.append(r']')
-#               leaves[-1].left.append(r'\beam #1 #0')
-#         # something then 16th
-#         elif leaves[-1].duration._flags > 1:
-#            if ']' not in leaves[-1].right:
-#               leaves[-1].right.append(']')
-#            leaves[-1].removeBeamCounts()
-#            f = leaves[-1].duration._flags
-#            leaves[-1].left.append(r'\beam #%s #0' % f)
-
-#def partitionBeams(ml, l):
-#   '''
-#   Partition beams in music list ml according to elements in l;
-#   always cyclic overhang.
-#   '''
-#
-#   period = sum(l)
-#   positions = [x % period for x in sums(l, action = 'new')]
-#
-#   result = []
-#   new = []
-#   total = len(ml)
-#   openPrev = False
-#   openCur = None
-#   
-#   for i, m in enumerate(ml):
-#      new.append(m)
-#
-#      if ((i + 1) % period) in positions or i + 1 == total:
-#
-#         if openPrev:
-#            closeLeftBeamEdge(new)
-#
-#         openCur = openBeam(new, openPrev)
-#
-#         if openCur:
-#            closeRightBeamEdge(new)
-#
-#         openPrev = openCur
-#         openCur = None
-#         result.append(new)
-#         new = []
-#
-#   listtools.flatten(result)
-#   ml[:] = result
-
-#def severBeams(m, start, length):
-#   '''
-#   For all voices in m, sever length elements from start.
-#   '''
-#
-#   voices = instances(m, 'Voice')
-#   for v in voices:
-#      s = [start, length, len(v.music) - (start + length)]
-#      partitionBeams(v.music, s)
 
 def makeMeasures(m, meters):
    '''

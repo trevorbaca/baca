@@ -769,7 +769,6 @@ def inheritence(expr):
    return result
 
 def kind(expr, s):
-
    return s in inheritence(expr)
 
 def draw(l, pairs, history = False):
