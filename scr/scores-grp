@@ -1,0 +1,11 @@
+#! /usr/bin/env python
+
+import os
+import sys
+
+base = 'grep -Irn "%s" /Users/trevorbaca/Documents/work/%s/* | grep -v svn'
+
+os.system('clear')
+
+for work in ('cary', 'snow', 'lidercfeny', 'manifolds', ):
+   os.system(base % (sys.argv[1], work))

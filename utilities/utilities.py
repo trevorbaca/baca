@@ -6,7 +6,6 @@ from abjad.tools import listtools
 from abjad.tools import mathtools
 import copy
 import math
-import operator
 import sys
 
 
