@@ -2273,7 +2273,8 @@ def constellate(psets, r):
 
 def inAggregate(snippet, aggregate):
    '''
-   True if all pitches in snippet appear in octave-relative positions in aggregate.
+   True if all pitches in snippet appear in 
+   octave-relative positions in aggregate.
 
    >>> inAggregate([2, 7, 10], [6, 9, 12, 13, 14, 19, 22, 27, 28, 29, 32, 35])
    True
@@ -2283,51 +2284,3 @@ def inAggregate(snippet, aggregate):
    snippetTransposition = aggregate[snippetStartIndex] - snippet[0]
    transposedSnippet = [p + snippetTransposition for p in snippet]   
    return set(transposedSnippet).issubset(set(aggregate))
-   
-diatonicPCs = [0, 2, 4, 5, 7, 9, 11]
-solfegeShapeTable = [
-   (1, 'do', 'triangle'),
-   (2, 're', 'semicircle'),
-   (3, 'mi', 'blackdiamond'),
-   (4, 'fa', 'tiltedtriangle'),
-   (5, '#f', 'normal'),
-   (6, 'la', 'square'),
-   (7, 'ti', 'wedge')]
-
-solfegeShapes = [s[-1] for s in solfegeShapeTable]
-
-noteheadOverrideShapes = ['harmonic', 'cross']
-
-def pcToDiatonicPosition(pc):
-   if pc == 0:
-      return 1
-   elif pc == 2:
-      return 2
-   elif pc == 4:
-      return 3
-   elif pc == 5:
-      return 4
-   elif pc == 7:
-      return 5
-   elif pc == 9:
-      return 6
-   elif pc == 11:
-      return 7
-   else:
-      return None
-
-def makeShapeString(pc, shape):
-
-   result = []
-
-   if pc not in diatonicPCs:
-      raise Exception, 'PC %s not in diatonic PCs %s.' % (pc, diatonicPCs)
-   if shape in solfegeShapes:
-      symbolName = [s[1] for s in solfegeShapeTable if s[2] == shape][0]
-   elif shape in noteheadOverrideShapes:
-      symbolName = shape
-   vector = ['#f'] * 7
-   vector[pcToDiatonicPosition(pc) - 1] = symbolName
-   result.append(r'\once \set shapeNoteStyles = ##(' + ' '.join(vector) + ')')
-
-   return result
