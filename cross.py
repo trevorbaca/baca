@@ -1,3 +1,7 @@
+'''Staff-crossing code used in Lidercfeny.
+   
+   TODO: move to Lidercfeny repository.'''
+
 from abjad import *
 
 
