@@ -10,16 +10,6 @@ import operator
 import sys
 
 
-def direction(n):
-   '''
-   Return -1 or 1 (but not 0) for direction-flipping or -preserving numbers.
-   '''
-
-   if n < 0:
-      return -1
-   else:
-      return 1
-
 def snip(l, w, position = 0, action = 'in place'):
    '''
    Snip elements of l totalling weight w from position.
