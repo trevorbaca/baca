@@ -1,5 +1,7 @@
+'''Music-generation functions used in Cary and Sekka.'''
+
 from abjad import *
-from utilities import *
+from baca.utilities.utilities import *
 from copy import deepcopy
 from math import ceil
 from time import time

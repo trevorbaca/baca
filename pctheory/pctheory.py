@@ -1,4 +1,5 @@
-from utilities import binary, rotate, unique
+from baca.utilities.utilities import binary, rotate, unique
+
 
 U = [''.join(list(reversed(binary(x).zfill(12)))) for x in range(4096)]
 def helper(binaryString):

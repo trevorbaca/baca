@@ -1,4 +1,5 @@
-from baca.utilities import constellate
+from baca.utilities.utilities import constellate
+
 
 C = [[set(x) for x in y] for y in [
       constellate(p, [-39, 48]) for p in [ 
