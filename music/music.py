@@ -2,9 +2,8 @@
 
 from abjad import *
 from baca.utilities.utilities import *
-from copy import deepcopy
-from math import ceil
-from time import time
+import copy
+import math
 import re
 
 
@@ -780,7 +779,7 @@ class Reconstructor(object):
 
 def reconstruct(music, reconstructor):
    # EXPENSIVE: deepcopy
-   result = deepcopy(music)
+   result = copy.deepcopy(music)
    traverse(result, reconstructor)
    return reconstructor.stack
 
@@ -790,7 +789,7 @@ class Painter(object):
    def visit(self, node):
       if len(self.pitches) > 0 and node.__class__.__name__ in ['Note', 'Chord']:
          p = self.pitches.pop(0)
-         result = deepcopy(node)
+         result = copy.deepcopy(node)
          if p.__class__.__name__ != 'list':
             if node.__class__.__name__ == 'Note':
                result.pitch = p
@@ -814,7 +813,7 @@ def paint(music, pitches):
       processedPitches = pitches
    elif pitches[0].__class__.__name__ == 'int':
       processedPitches = [pitch(p) for p in pitches]
-   reconstructor = Reconstructor(Painter(deepcopy(processedPitches)))
+   reconstructor = Reconstructor(Painter(copy.deepcopy(processedPitches)))
    if music.__class__.__name__ == 'list':
       return reconstruct(music, reconstructor)
    else:
@@ -2491,7 +2490,8 @@ def doubleNote(structure, index, before, right, write = None):
    '''
 
    sourceNote = structure[index]
-   up = expression.Expression([deepcopy(sourceNote)], enclosure = 'sequential')
+   up = expression.Expression(
+      [copy.deepcopy(sourceNote)], enclosure = 'sequential')
    down = Note(sourceNote.pitch.number, *sourceNote.duration.pair)
    down.before.extend(before)
    down.right.extend(right)
