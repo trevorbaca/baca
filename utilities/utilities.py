@@ -2263,54 +2263,10 @@ def scan(ll, start = 0, stop = None):
          next = ll[i + 1]
       yield (i, cur, prev, next)
 
-def registrations(pitches, r):
-   '''
-   Lists all registrations of pitches in r.
-
-   >>> registrations([0, 2, 4], [0, 48])
-   [[0, 2, 4], [12, 14, 16], [24, 26, 28], [36, 38, 40]]
-   '''
-
-   result = []
-   ps = set(pitches)
-   R = set(range(r[0], r[-1] + 1))
-   while ps.issubset(R):
-      next = list(ps)
-      next.sort()
-      result.extend([next])
-      ps = set([p + 12 for p in ps])
-   ps = set([p - 12 for p in pitches])
-   while ps.issubset(R):
-      next = list(ps)
-      next.sort()
-      result.extend([next])
-      ps = set([p - 12 for p in ps])
-   result.sort()
-   return result
-
-def registrate(pset, pcs):
-   '''
-   Registrates pcs according to pset.
-
-   >>> registrate([10, 19, 20, 23, 24, 26, 27, 29, 30, 33, 37, 40], [10, 0, 2, 6, 8, 7, 5, 3, 1, 9, 4, 11])
-   [10, 24, 26, 30, 20, 19, 29, 27, 37, 33, 40, 23]
-   '''
-   
-   if isinstance(pcs, list):
-      r = [[p for p in pset if p % 12 == pc] for pc in [x % 12 for x in pcs]]
-      listtools.flatten(r)
-   elif isinstance(pcs, int):
-      r = [p for p in pset if p % 12 == pcs][0]
-   else:
-      raise ValueError
-   return r
-
 def constellate(psets, r):
-   '''
-   Returns the outer product of the registrations of psets in r.
-   '''
+   '''Return outer product of octave transpositions of psets in r.'''
 
-   result = utilities.outer([registrations(pset, r) for pset in psets])
+   result = outer([pitchtools.octave_transpositions(pset, r) for pset in psets])
    [listtools.flatten(x) for x in result]
    [x.sort( ) for x in result]
    return result
