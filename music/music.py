@@ -945,59 +945,6 @@ def restsToNotes(expr):
 
    change(expr, RestsToNotes())
          
-#def instances(l, name):
-#   class Visitor(object):
-#      def __init__(self, name):
-#         self.name = name
-#         self.result = []
-#      def visit(self, node):
-#         if hasattr(node, 'kind') and node.kind(name):
-#            self.result.append(node)
-#   v = Visitor(name)
-#   traverse(l, v)
-#   return v.result         
-
-def testForParents(expr):
-   class Visitor(object):
-      def __init__(self):
-         self.total = 0
-      def visit(self, node):
-         if not hasattr(node, 'parent'):
-            self.total += 1
-            print node.lily
-   v = Visitor()
-   traverse(expr, v)
-   print '%s total nodes incorrectly formatted without parents.' % v.total
-
-def find(ll, *names):
-   '''
-   >>> ll = [
-   ...     voice.Voice([Note(0, 1, 4)], name = 'v1'),
-   ...     voice.Voice([Note(2, 1, 4)], name = 'v2')]
-
-   >>> find(ll, 'v1')
-   VOICE (1)
-
-   >>> find(ll, 'v1', 'v2')
-   [VOICE (1), VOICE (1)]
-   '''
-
-   class Visitor(object):
-      def __init__(self, names):
-         self.names = names
-         self.result = []
-      def visit(self, node):
-         if hasattr(node, 'name') and node.name in self.names:
-            self.result.append(node)
-   v = Visitor(names)
-   traverse(ll, v)
-   if len(names) == 1 and len(v.result) > 0:
-      return v.result[0]         
-   elif len(names) > 1 and len(v.result) > 0:
-      return v.result
-   else:
-      return None
-
 def into(ll, ss, location):
    if hasattr(ll, 'music'):
       for i, l in enumerate(ll.music):
@@ -1190,7 +1137,7 @@ def unnumber(music):
 #   '''   
 #
 #   vv = instances(l, 'Voice')
-#   rv = find(l, 'reference voice') # hack
+#   rv = scoretools.find(l, 'reference voice') # hack
 #   if rv != None:
 #      vv.append(rv)
 #
@@ -2931,7 +2878,8 @@ def trimVoices(expr, nMeasures):
 
    customVoiceContexts = [
       'attack voice', 'nucleus voice', 'release voice', 'reference voice']
-   voices = instances(expr, 'Voice') + find(expr, *customVoiceContexts)
+   voices = instances(expr, 'Voice') + scoretools.find(
+      expr, *customVoiceContexts)
    for v in voices:
       v.music = v.music[:nMeasures]
 
