@@ -7,59 +7,6 @@ from math import ceil
 from time import time
 import re
 
-### TODO - remove all of these ###
-
-def dotRatio(n):
-   numerator = 2 ** (n + 1) - 1
-   denominator = 2 ** n
-   return Rational(numerator, denominator)
-
-def ratio(s):
-   return Rational(int(s.split(':')[1]), int(s.split(':')[0]))
-
-durations = (('doublewhole', -1),
-   ('whole', 0),
-   ('half', 1),
-   ('quarter', 2),
-   ('eighth', 3),
-   ('sixteenth', 4),
-   ('thirtysecond', 5),
-   ('sixtyfourth', 6),
-   ('onehundredtwentyeighth', 7),
-   ('twohundredfiftysixth', 8))
-
-durationNames = [d[0] for d in durations]
-
-def durationNameToLog(dn):
-   '''
-   >>> durationNameToLog('eighth')
-   3
-   '''
-
-   return [d[1] for d in durations if d[0] == dn][0]
-
-def durationLogToName(dl):
-   '''
-   >>> durationLogToName(3)
-   'eighth'
-   '''
-
-   return [d[0] for d in durations if d[1] == dl][0]
-
-def phi(n):
-   '''
-   Returns greatest integer power of 2 less than or equal to n.
-   m <= n
-   m == (2 ** j) for some positive integer j
-   '''
- 
-   return 2 ** int(log(n, 2))
-
-def binaryExponentQ(be):
-   return int(log(abs(be), 2)) == log(abs(be), 2)
-
-### END remove ###
-
 
 # TODO clean this whole function up and remove or greatly simply beam spec
 def music(*args):
