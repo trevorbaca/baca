@@ -1,5 +1,6 @@
 '''List tools used in Cary, Sekka and Lidercfeny.'''
 
+from abjad.leaf.leaf import _Leaf
 from abjad.tools import listtools
 from abjad.tools import mathtools
 import copy
@@ -692,7 +693,7 @@ def helianthate(l, outer, inner, action = 'in place', flattened = True):
    [cs'4, d'4, ef'4, e'4, f'4, fs'4, g'4, af'4, f'4, e'4, af'4, fs'4, g'4, ef'4, cs'4, d'4, g'4, af'4]
    '''
 
-   if kind(l[0][0], '_Leaf'):
+   if isinstance(l[0][0], _Leaf):
       start = [[n.pitch.pc for n in sublist] for sublist in l]
       result = []
       for sublist in l:
@@ -718,7 +719,7 @@ def helianthate(l, outer, inner, action = 'in place', flattened = True):
                
       next = circumrotate(input, outer, inner)
 
-      if next == start or (kind(next[0][0], 'Note') and \
+      if next == start or (isinstance(next[0][0], Note) and \
          [[n.pitch.pc for n in sublist] for sublist in next] == start):
          if flattened == True:
             listtools.flatten(result)
@@ -730,34 +731,6 @@ def helianthate(l, outer, inner, action = 'in place', flattened = True):
       l[:] = result
    else:
       return result
-
-def inheritence(expr):
-   '''
-   >>> inheritence(1)
-   ['int']
-
-   >>> inheritence('text')
-   ['str', 'basestring']
-
-   >>> inheritence(note.Note(0, 1, 4))
-   ['Note', 'Event', '_Leaf', 'LilyObject']
-   '''
-
-   result = [expr.__class__.__name__]
-   
-   i = 1
-   while True:
-      parent = eval('expr.__class__.%s.__name__' % '.'.join(['__base__'] * i))
-      if parent == 'object':
-         break
-      else:
-         result.append(parent)
-         i += 1
-
-   return result
-
-def kind(expr, s):
-   return s in inheritence(expr)
 
 def draw(l, pairs, history = False):
    '''
@@ -1803,7 +1776,7 @@ def adhere(l, action = 'in place'):
       for element in l[1:]:
          if element != result[-1]:
             result.append(element)
-   elif l[0].kind('Note'):
+   elif isinstance(l[0], Note):
       for element in l[1:]:
          if element.pitch.number != result[-1].pitch.number:
             result.append(element.clone())

@@ -1,6 +1,7 @@
 '''Music-generation functions used in Cary and Sekka.'''
 
 from abjad import *
+from abjad.leaf.leaf import _Leaf
 from baca.utilities.utilities import *
 import copy
 import math
@@ -376,7 +377,7 @@ def beam(m, b = None, rip = True, span = False, nib = False, lone = 'flat'):
                if debug: print '2'
                if span and i > 0 and beamablePrevLeaf:
                   curLeaf.left.append(r'\beam #%s #%s' % (backSpan, f))
-               elif span and i > 0 and prevLeaf.kind('Rest'):
+               elif span and i > 0 and isinstance(prevLeaf, Rest):
                   curLeaf.right.append('[')
                   if span == 1 and not nib:
                      curLeaf.left.append(r'\beam #0 #%s' % f)
@@ -405,7 +406,7 @@ def beam(m, b = None, rip = True, span = False, nib = False, lone = 'flat'):
                if span and i < t - 1 and beamableNextLeaf:
                   if debug: print '4a'
                   curLeaf.left.append(r'\beam #%s #%s' % (f, foreSpan))
-               elif span and i < t - 1 and nextLeaf.kind('Rest'):
+               elif span and i < t - 1 and isinstance(nextLeaf, Rest):
                   curLeaf.right.append(']')
                   if span == 1 and not nib:
                      if debug: print '4b1'
@@ -794,7 +795,7 @@ class TestSlice(object):
    def __init__(self):
       self.i = -1
    def visit(self, node):
-      if node.kind('_Leaf'):
+      if isinstance(node, _Leaf):
          self.i += 1
          if self.i % 2 == 0:
             try:
@@ -938,7 +939,7 @@ def restsToNotes(expr):
 
    class RestsToNotes(object):
       def visit(self, node):
-         if node.kind('Rest'):
+         if isinstance(node, Rest):
             return Note(0, *node.duration.pair)
          else:
             return node
@@ -1151,7 +1152,7 @@ def trill(l, p = False, indices = 'all', d = Rational(0)):
          sd = element.scaledDuration
       else:
          sd = element.duration
-      if element.kind('Note') and i in indices and sd >= d:
+      if isinstance(element, Note) and i in indices and sd >= d:
          #if p:
          #  element.before.append(r'\pitchedTrill')
          #  element.after.append(r'\startTrillSpan ' + p[i % len(p)].lily)
@@ -1185,7 +1186,7 @@ def grace(l,
       else:
          ck = True
 
-      if i in indices and element.kind(m) and sd >= dm and ck:
+      if i in indices and isinstance(element, m) and sd >= dm and ck:
          new = 0
          if cyclic:
             new = s[candidate % len(s)]
@@ -1327,7 +1328,7 @@ class Subdivide(object):
       self.positions = positions
       self.position = -1
    def visit(self, node):
-      if node.kind('_Leaf'):
+      if isinstance(node, _Leaf):
          self.position += 1
          n = self.positions[self.position]
          if n > 0:
@@ -1363,7 +1364,7 @@ class FiveRemover(object):
    '''
 
    def visit(self, node):
-      if node.kind('Note') and node.duration.n == 5:
+      if isinstance(node, Note) and node.duration.n == 5:
          denominator = node.duration.d
          return expression.Expression(
             [Note(0, 4, denominator), Note(0, 1, denominator)])
@@ -1878,9 +1879,9 @@ def spget(arg):
    '''Get lowest pitch in either Note or Chord;
       else None.'''
 
-   if arg.kind('Note'):
+   if isinstance(arg, Note):
       return arg.pitch.number
-   elif arg.kind('Chord'):
+   elif isinstance(arg, Chord):
       return arg.pitches[0].number
    else:
       #raise ValueError('arg %s must be note or chord.' % str(arg))
@@ -1893,7 +1894,7 @@ def octavate(n, base = (-4, 30)):
    TODO: move to bound Leaf method.
    '''
 
-   if not n.kind('Note'):
+   if not isinstance(Note):
       return
 
    assert hasattr(n, 'core')
@@ -1926,7 +1927,7 @@ def previous(leaves, cur, name):
 
    j = 1
    while True:
-      if leaves[cur - j].kind(name):
+      if isinstance(leaves[cur - j], name):
          return leaves[cur - j]
       else:
          j += 1
@@ -1964,7 +1965,7 @@ def setPitch(l, spec = 0):
    Sets l.pitch based on l.core.
    '''
 
-   if not l.kind('Note'):
+   if not isinstance(l, Note):
       return
 
    # setPitch(l, 'core'):
@@ -2024,7 +2025,7 @@ def setPitchIterator(voice, start, stop, spec = 0):
 def clonePitches(voice, start, stop, offset):
    leaves = voice.leaves 
    for i, l in enumerate(leaves[start : stop + 1]):
-      if l.kind('Note'):
+      if isinstance(l, Note):
          l.pitch = leaves[start + i + offset].pitch.pair
 
 def setPitchesByPitchCycle(voice, start, stop, pcyc):
@@ -2065,7 +2066,7 @@ def setPitchesBySplitHands(leaves, start, stop, crossLeaves):
 
    for j, l in enumerate(leaves[start : stop + 1]):
       i = start + j
-      if l.kind('Note'):
+      if isinstance(l, Note):
          # upper will always be nonempty
          upper, lower = splitHands(l.core)
          if lower == [ ]:
@@ -2136,7 +2137,7 @@ def setArticulations(voice, articulations, *args, **kwargs):
       exclude = True
 
    for l in leafSlice:
-      if l.kind(('Note', 'Chord')) or not exclude:
+      if instance(l, (Note, Chord)) or not exclude:
          if isinstance(articulations, str):
             l.articulations = [articulations]
          elif isinstance(articulations, list):
@@ -2151,7 +2152,7 @@ def setArticulationsByPitch(voice, start, stop, articulations, min):
 
    leaves = voice.leaves
    for l in leaves[start : stop + 1]:
-      if l.kind(('Note', 'Chord')) and spget(l) >= min:
+      if isinstance(l, (Note, Chord)) and spget(l) >= min:
          l.articulations = articulations
 
 def setArticulationsByDuration(voice, start, stop, long, min, short):
@@ -2163,7 +2164,7 @@ def setArticulationsByDuration(voice, start, stop, long, min, short):
    leaves = voice.leaves
    min = Rational(*min)
    for l in leaves[start : stop + 1]:
-      if l.kind(('Note', 'Chord')):
+      if isinstance(l, (Note, Chord)):
          if l.duration.prolated >= min:
             l.articulations = long
          else:
@@ -2204,7 +2205,7 @@ def appendArticulations(voice, articulations, *args, **kwargs):
       exclude = True
 
    for l in leaves:
-      if l.kind(('Note', 'Chord')) or not exclude:
+      if isinstance(l, (Note, Chord)) or not exclude:
          if isinstance(articulations, str):
             l.articulations.append(articulations)
          elif isinstance(articulations, list):
@@ -2235,7 +2236,7 @@ def applyArtificialHarmonic(voice, *args):
    else:
       raise ValueError
    for l in leaves[start : stop + 1]:
-      if l.kind('Note'):
+      if isinstance(l, Note):
          add_artificial_harmonic(l, diatonicInterval)
 
 
@@ -2342,7 +2343,7 @@ def partitionLeaves(leaves, type = 'notes and rests', cut = (0,), gap = (0,)):
             lastChunk.append(l)
          else:
             lastLeaf = lastChunk[-1]
-            if lastLeaf.kind('Note') == l.kind('Note'):
+            if isinstance(lastLeaf, Note) == isinstance(l, Note):
                lastChunk.append(l)
             else:
                result.append([l])
@@ -2350,7 +2351,7 @@ def partitionLeaves(leaves, type = 'notes and rests', cut = (0,), gap = (0,)):
    elif type == 'notes only':
       for l in leaves:
          lastChunk = result[-1]
-         if l.kind('Note'):
+         if isinstance(l, Note):
             lastChunk.append(l)
          else:
             if len(lastChunk) > 0:
@@ -2360,17 +2361,17 @@ def partitionLeaves(leaves, type = 'notes and rests', cut = (0,), gap = (0,)):
 
    elif type == 'cut notes':
       firstResult = partitionLeaves(leaves, type = 'notes and rests')
-      if not firstResult[0][0].kind('Note'):
+      if not isinstance(firstResult[0][0], Note):
          firstResult.pop(0)
       result = [firstResult.pop(0)]
       for chunk in firstResult:
          lastChunk = result[-1]
-         if chunk[0].kind('Note'):
+         if isinstance(chunk[0], Note):
             # empty
             if len(lastChunk) == 0:
                lastChunk.extend(chunk)
             # note-terminated
-            elif lastChunk[-1].kind('Note'):
+            elif isinstance(lastChunk[-1], Note):
                result.append(chunk)
             # rest-terminated
             else:
@@ -2385,13 +2386,13 @@ def partitionLeaves(leaves, type = 'notes and rests', cut = (0,), gap = (0,)):
 
    elif type == 'cut paired notes':
       firstResult = partitionLeaves(leaves, type = 'notes and rests')
-      if not firstResult[0][0].kind('Note'):
+      if not isinstance(firstResult[0][0], Note):
          firstResult.pop(0)
       result = [[[]]]
       for chunk in firstResult:
          lastPair = result[-1]
          lastChunk = lastPair[-1]
-         if chunk[0].kind('Note'):
+         if isinstance(chunk[0], Note):
             lastChunk.extend(chunk)
          else:
             if effectiveDuration(chunk) <= cut:
@@ -2409,7 +2410,7 @@ def partitionLeaves(leaves, type = 'notes and rests', cut = (0,), gap = (0,)):
                raise Exception
       lastChunk = result[-1][-1]
       for m in reversed(lastChunk):
-         if not m.kind('Note'):
+         if not isinstance(m, Note):
             lastChunk.pop(-1)
          else:
             break
@@ -2419,7 +2420,7 @@ def partitionLeaves(leaves, type = 'notes and rests', cut = (0,), gap = (0,)):
    elif type == 'rests only':
       for l in leaves:
          lastChunk = result[-1]
-         if l.kind('Rest'):
+         if isinstance(l, Rest):
             lastChunk.append(l)
          else:
             if len(lastChunk) > 0:
@@ -2430,32 +2431,32 @@ def partitionLeaves(leaves, type = 'notes and rests', cut = (0,), gap = (0,)):
    elif type == 'rest-terminated':
       for l in leaves:
          lastChunk = result[-1]
-         if l.kind('Note'):
+         if isinstance(l, Note):
             if len(lastChunk) == 0:
                lastChunk.append(l)
             else:
                lastLeaf = lastChunk[-1]
-               if lastLeaf.kind('Note'):
+               if isinstance(lastLeaf, Note):
                   lastChunk.append(l)
                else:
                   result.append([l])
-         elif l.kind('Rest'):
+         elif isinstance(l, Rest):
             if len(lastChunk) > 0:
                lastLeaf = lastChunk[-1]
-               if lastLeaf.kind('Note'):
+               if isinstance(lastLeaf, Note):
                   lastChunk.append(l)
 
    # the gap input parameter is the duration of rest run to bridge over;
    # accepting gap = (0,) makes rest-gapped return like rest-terminated
    elif type == 'rest-gapped':
       firstResult = partitionLeaves(leaves, type = 'notes and rests')
-      if not firstResult[0][0].kind('Note'):
+      if not isinstance(firstResult[0][0], Note):
          firstResult.pop(0)
       result = [[firstResult.pop(0)]]
       bridged = False
       bridgeNext = False
       for chunk in firstResult:
-         if not chunk[0].kind('Note'):
+         if not isinstance(chunk[0], Note):
             result[-1][-1].append(chunk[0])
             if effectiveDuration(chunk) <= gap:
                if not bridged:
@@ -2474,13 +2475,13 @@ def partitionLeaves(leaves, type = 'notes and rests', cut = (0,), gap = (0,)):
 
    elif type == 'paired notes':
       firstResult = partitionLeaves(leaves, type = 'notes and rests')
-      if not firstResult[0][0].kind('Note'):
+      if not isinstance(firstResult[0][0], Note):
          firstResult.pop(0)
       result = [[firstResult.pop(0)]]
       bridged = False
       bridgeNext = False
       for chunk in firstResult:
-         if not chunk[0].kind('Note'):
+         if not isinstance(chunk[0], Note):
             if effectiveDuration(chunk) <= gap:
                if not bridged:
                   bridgeNext = True
@@ -2529,13 +2530,13 @@ def segmentLeaves(leaves, cut = (0,), gap = (0,)):
    cut = Rational(*cut)
    gap = Rational(*gap)
    parts = partitionLeaves(leaves)
-   if not parts[0][0].kind('Note'):
+   if not isinstance(parts[0][0], Note):
       parts.pop(0)
    segments = [[[]]]
    for part in parts:
       segment = segments[-1]
       stage = segment[-1]
-      if part[0].kind('Note'):
+      if isinstance(part[0], Note):
          stage.extend(part)
       else:
          if effectiveDuration(part) <= cut:
@@ -2555,7 +2556,7 @@ def segmentLeaves(leaves, cut = (0,), gap = (0,)):
 
 def trimRests(leaves):
    for l in reversed(leaves):
-      if l.kind('Rest'):
+      if isinstance(l, rest):
          leaves.pop(-1)
       else:
          break
@@ -2763,7 +2764,7 @@ def crossStavesDown(voice, start, stop, bp, target,
    leaves = voice.leaves
    for j, l in enumerate(leaves[start : stop + 1]):
       i = start + j
-      if l.kind('Note'):
+      if isinstance(l, Note):
          #if (l.safePitchNumber >= bp or i in includes) and i not in excludes:
          if (spget(l) >= bp or i in includes) and i not in excludes:
             l.staff = target
