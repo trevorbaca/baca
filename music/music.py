@@ -197,23 +197,6 @@ def removeEffectiveDurations(expr):
       if hasattr(l, 'scaledDuration'):
          delattr(l, 'scaledDuration')
 
-def beamable(expr):
-   '''
-   >>> beamable(Note(0, 1, 4))
-   False
-
-   >>> beamable(Note(0, 1, 8))
-   True
-   '''
-
-   try:
-      if expr.__class__.__name__ == 'Note' and expr.duration._flags > 0:
-         return True
-      else:
-         return False
-   except:
-      return False
-
 def beam(m, b = None, rip = True, span = False, nib = False, lone = 'flat'):
    '''
    NOTE: this beam() procedure is 14 times faster than LilyObject.beam();
@@ -289,7 +272,7 @@ def beam(m, b = None, rip = True, span = False, nib = False, lone = 'flat'):
          prevFlags = 0
       else:
          prevLeaf = leaves[i - 1]
-         beamablePrevLeaf = beamable(prevLeaf)
+         beamablePrevLeaf = prevLeaf.beam.beamable
          if beamablePrevLeaf:
             prevFlags = prevLeaf.duration._flags
          else:
@@ -303,7 +286,7 @@ def beam(m, b = None, rip = True, span = False, nib = False, lone = 'flat'):
          nextFlags = 0
       else:
          nextLeaf = leaves[i + 1]
-         beamableNextLeaf = beamable(nextLeaf)
+         beamableNextLeaf = nextLeaf.beam.beamable
          if beamableNextLeaf:
             nextFlags = nextLeaf.duration._flags
          else:
@@ -332,7 +315,7 @@ def beam(m, b = None, rip = True, span = False, nib = False, lone = 'flat'):
          backSpan = min(candidateCurSpan, candidateBackSpan, span)
          foreSpan = min(candidateCurSpan, candidateForeSpan, span)
 
-      if beamable(curLeaf):
+      if curLeaf.beam.beamable:
          # occupies full slot
          if prevLeafEncounteredBeam and curLeafEncountersBeam:
             if span:
