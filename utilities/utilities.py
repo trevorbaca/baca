@@ -496,38 +496,6 @@ def outer(lists):
    lists[0] = [[x] for x in lists[0]]
    return reduce(helper, lists)
 
-def rotate(l, direction, n = 1, action = 'in place'):
-   """
-   >>> l = range(10)
-   >>> rotate(l, 'left', 3)
-   >>> l
-   [3, 4, 5, 6, 7, 8, 9, 0, 1, 2]
-   >>> rotate(l, 'right', 4)
-   >>> l
-   [9, 0, 1, 2, 3, 4, 5, 6, 7, 8]
-
-   >>> l = range(10)
-   >>> rotate(l, 'left', 3, action = 'new')
-   [3, 4, 5, 6, 7, 8, 9, 0, 1, 2]
-   >>> l
-   [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
-
-   >>> l = [note.Note(n, 1, 4) for n in range(10)]
-   >>> rotate(l, 'left', 3) 
-   >>> l
-   [ef'4, e'4, f'4, fs'4, g'4, af'4, a'4, c'4, cs'4, d'4]
-   """
-
-   if direction == 'left':
-      result = l[n:] + l[:n]
-   else:
-      result = l[-n:] + l[:-n]
-
-   if action == 'in place':
-      l[:] = result
-   else:
-      return [clone(element) for element in result]
-
 def segment(l, s, cycle = 'knife', action = 'in place'):
    '''
    Segment l into sublists of weights not less than s.
@@ -675,17 +643,21 @@ def circumrotate(l, outer, inner):
 
    if outer == 'right':
       if inner == 'right':
-         return rotate([rotate(x, 'right', action = 'new') for x in l], 
+         return listtools.rotate(
+            [listtools.rotate(x, 'right', action = 'new') for x in l], 
             'right', action = 'new')
       elif inner == 'left':
-         return rotate([rotate(x, 'left', action = 'new') for x in l], 
+         return listtools.rotate(
+            [listtools.rotate(x, 'left', action = 'new') for x in l], 
             'right', action = 'new')
    elif outer == 'left':
       if inner == 'right':
-         return rotate([rotate(x, 'right', action = 'new') for x in l], 
+         return listtools.rotate(
+            [listtools.rotate(x, 'right', action = 'new') for x in l], 
             'left', action = 'new')
       elif inner == 'left':
-         return rotate([rotate(x, 'left', action = 'new') for x in l], 
+         return listtools.rotate(
+            [listtools.rotate(x, 'left', action = 'new') for x in l], 
             'left', action = 'new')
    else:
       print 'Unknown direction %s.' % outer
