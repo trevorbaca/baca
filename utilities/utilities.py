@@ -2,6 +2,7 @@
 
 from abjad.leaf.leaf import _Leaf
 from abjad.note.note import Note
+from abjad.rational.rational import Rational
 from abjad.tools import clone
 from abjad.tools import listtools
 from abjad.tools import mathtools
@@ -57,6 +58,8 @@ def repeat(l, length = False, times = False, weight = False,
    >>> repeat(range(5), times = 2, action = 'new')
    [0, 1, 2, 3, 4, 0, 1, 2, 3, 4]
 
+   ## DEPRECATED: Do not use repeat( ) on Abjad components ##
+
    >>> l = [note.Note(n, 1, 4) for n in range(5)]
    >>> repeat(l, times = 2)
    >>> l
@@ -85,17 +88,18 @@ def repeat(l, length = False, times = False, weight = False,
    [-5, -5, 5, -5, -3]
    '''
 
-   result = []
+   assert all([isinstance(x, (int, float, Rational)) for x in l])
+   result = [ ]
 
    if length:
       for i in range(length):
-         result.append(clone.unspan(l[i % len(l)]))
+         result.append(l[i % len(l)])
    elif times:
       for i in range(times):
          for element in l:
-            result.append(clone.unspan(element))
+            result.append(element)
    elif weight:
-      result.append(clone.unspan(l[0]))
+      result.append(l[0])
       i = 1
       while listtools.weight(result) < weight:
          result.append(l[i % len(l)])
@@ -672,7 +676,7 @@ def helianthate(l, outer, inner, action = 'in place', flattened = True):
 
    if isinstance(l[0][0], _Leaf):
       start = [[n.pitch.pc for n in sublist] for sublist in l]
-      result = []
+      result = [ ]
       for sublist in l:
          result.append([clone.unspan(element) for element in sublist])
    else:
