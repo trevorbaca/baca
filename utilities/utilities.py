@@ -2110,20 +2110,6 @@ def recombine(target, s, insert, t, loci):
 
    return result
 
-def differences(l):
-   '''
-   >>> l = [1, 1, 2, 3, 5, 5, 6]
-   >>> differences(l)
-   [0, 1, 1, 2, 0, 1]
-   '''
-
-   result = []
-   
-   for i in range(len(l) - 1):
-      result.append(l[i + 1] - l[i])
-
-   return result
-
 def read(l, start, length):
    '''
    >>> l = [1, 1, 2, 3, 5, 5, 6]
