@@ -1081,42 +1081,6 @@ def blank(l, positions):
             m.meter.pair,
             [Rest((x, d)) for x in untie([n])])
 
-# TODO combine blank() and cast() into a single function
-def cast(m, source = '_Leaf', target = 'Rest', positions = 'all'):
-   '''
-   Cast instances of class source into class target.
-
-   cast(m, target = 'Rest')
-   cast(m, target = 'Skip') 
-   '''
-
-   change(m, ClassTransformer(source, target, positions))
-
-class ClassTransformer(object):
-   def __init__(self, source = '_Leaf', target = 'Rest', positions = 'all'):
-      self.source = source
-      self.target = target
-      self.positions = positions
-      self.i = -1
-   def visit(self, node):
-      if node.kind(self.source):
-         self.i += 1
-         if (self.positions == 'all') or (self.i in self.positions):
-            if self.target == 'Rest':
-               new = Rest(node.duration.n, node.duration.d)
-            elif self.target == 'Skip':
-               new = skip.Skip(node.duration.n, node.duration.d)
-            elif self.target == 'Note':
-               new = Note(0, node.duration.n, node.duration.d)
-            else:
-               print 'Unknown target %s.' % self.target
-               raise ValueError
-            # round-about way of setting new.effectiveDuration
-            new.scaledDuration = Rational(
-               node.effectiveDuration.n, node.effectiveDuration.d)
-            return new
-      return node
-
 def nest(measures, outer, inner):
    '''
    Structures time.
