@@ -852,18 +852,6 @@ def pure(l):
    
    return len(l) == len(listtools.unique(l))
 
-def subset(l, m):
-   '''
-   Return True if l is a subset of m, otherwise False.
-
-   >>> l = [2, 2, 3, 5]
-   >>> m = [1, 2, 3, 4, 5]
-   >>> utilities.subset(l, m)
-   True
-   '''
-
-   return set(l).issubset(set(m))
-
 def piles(ll):
    '''
    Return the cumulative sums of the absolute values of the l in ll.
@@ -2419,7 +2407,7 @@ def inAggregate(snippet, aggregate):
    snippetStartIndex = [p % 12 for p in aggregate].index(snippet[0] % 12)
    snippetTransposition = aggregate[snippetStartIndex] - snippet[0]
    transposedSnippet = [p + snippetTransposition for p in snippet]   
-   return utilities.subset(transposedSnippet, aggregate)
+   return set(transposedSnippet).issubset(set(aggregate))
    
 diatonicPCs = [0, 2, 4, 5, 7, 9, 11]
 solfegeShapeTable = [
