@@ -127,7 +127,9 @@ def interpretMusic(arg):
             elif n < 0:
                body.append(Rest(abs(n), denominator))
          bodyDuration = sum([m.duration for m in body], Rational(0))
-         m = tuplet.SmartTuplet(bodyDuration.phi.effective.numerator, bodyDuration.phi.effective.denominator, body)
+         m = tuplet.SmartTuplet(
+            bodyDuration.phi.effective.numerator, 
+            bodyDuration.phi.effective.denominator, body)
          try:
             m.beam(*beamSpec)
          except:
@@ -139,7 +141,11 @@ def interpretMusic(arg):
          body = interpretMusic(arg[:-1]).music
          bodyDuration = sum([m.duration for m in body], Rational(0))
          r = ratio(arg[-1]) * bodyDuration
-         m = tuplet.SmartTuplet(r.effective.numerator, r.effective.denominator, body, rewritten = tuple([int(part) for part in arg[-1].split(':')]))
+         m = tuplet.SmartTuplet(
+            r.effective.numerator, 
+            r.effective.denominator, 
+            body, 
+            rewritten = tuple([int(part) for part in arg[-1].split(':')]))
          try:
             m.beam(*beamSpec)
          except:
@@ -151,7 +157,8 @@ def interpretMusic(arg):
          prolationIndicator = None
          body = arg[:]
       # [1, 1, 2, '5:6']
-      elif arg[-1].__class__.__name__ == 'str' and arg[-1] not in duration.durationNames:
+      elif arg[-1].__class__.__name__ == 'str' and \
+         arg[-1] not in duration.durationNames:
          prolationIndicator = arg[-1]
          body = arg[:-1]
       #print prolationIndicator
@@ -160,14 +167,20 @@ def interpretMusic(arg):
       bodyDuration = sum([m.duration for m in body], Rational(0))
       #print bodyDuration
       if prolationIndicator == None:
-         prolationRatio = Rational(duration.phi(bodyDuration.numerator), bodyDuration.numerator) 
+         prolationRatio = Rational(
+            duration.phi(bodyDuration.numerator), bodyDuration.numerator) 
       else:
-         prolationRatio = Rational(int(prolationIndicator.split(':')[1]), int(prolationIndicator.split(':')[0]))
+         prolationRatio = Rational(
+            int(prolationIndicator.split(':')[1]), 
+            int(prolationIndicator.split(':')[0]))
       #print prolationRatio
       tupletDuration = bodyDuration * prolationRatio 
       #print tupletDuration
       #print 'writtenFraction is %s' % prolationIndicator
-      m = tuplet.SmartTuplet(tupletDuration.effective.numerator, tupletDuration.effective.denominator, body, writtenFraction = prolationIndicator)
+      m = tuplet.SmartTuplet(
+         tupletDuration.effective.numerator, 
+         tupletDuration.effective.denominator, 
+         body, writtenFraction = prolationIndicator)
       try:
          m.beam(*beamSpec)
       except:
@@ -933,7 +946,8 @@ def olddivide(l, n, d, together = False):
          #print t
 
       # if cases like 7:14, 14:7, 7:28, 28:7, etc
-      if int(math.log(r, 2)) == math.log(r, 2) and t.music[0].__class__.__name__ == 'Tuplet':
+      if int(math.log(r, 2)) == math.log(r, 2) and \
+         t.music[0].__class__.__name__ == 'Tuplet':
          # strip outer music list, return inner music list
          result = t.music[0]
       else:
@@ -1000,7 +1014,8 @@ def changeslice(expr, visitor):
    elif hasattr(expr, 'music'):
       for m in expr.music[:]:
          #print 'into   ', m
-         expr.music[expr.music.index(m) : (expr.music.index(m) + 1)] = changeslice(m, visitor)
+         expr.music[expr.music.index(m) : (expr.music.index(m) + 1)] = \
+            changeslice(m, visitor)
          #print 'out of ', m
       return [expr]
    else:
@@ -1129,7 +1144,8 @@ class TestCompress5(object):
          for pair in reversed(self.pairs[-1]):
             #print pair
             if len(pair) > 1 and pair[0] == '.':
-               node[pair[1] : (pair[-1] + 1)] = ['replaced %s' % (pair[-1] - pair[1] + 1)]
+               node[pair[1] : (pair[-1] + 1)] = [
+                  'replaced %s' % (pair[-1] - pair[1] + 1)]
          try:
             self.pairs.pop()
          except:
@@ -1251,7 +1267,8 @@ def build(t):
       exponent = int(math.log(s / t[0][0], 2)) if s >= t[0][0] else 0
       denominator = t[0][1] * 2 ** exponent
       #print 'denominator is %s.' % denominator
-      w = [[(x[0], x[1]), x[2]] for x in zip(t[1][0], [denominator] * len(t[1][0]), t[1][1])]
+      w = [[(x[0], x[1]), x[2]] 
+         for x in zip(t[1][0], [denominator] * len(t[1][0]), t[1][1])]
       music = [build(token) for token in w]
       l = math.log(max(t[0][0], s) * 1.0 / min(t[0][0], s), 2)
       if l == int(l):
@@ -1261,7 +1278,8 @@ def build(t):
 
    # [(3, 8), [1]]
    elif len(t[1]) == 1:
-      return Note(0, t[0][0], t[0][1]) if t[1][0] > 0 else Rest(abs(t[0][0]), t[0][1])
+      return Note(0, t[0][0], t[0][1]) if t[1][0] > 0 \
+         else Rest(abs(t[0][0]), t[0][1])
    
    # [(3, 8), [1, 2, 4]]
    elif len(t[1]) > 1:
@@ -1269,7 +1287,8 @@ def build(t):
       exponent = int(math.log(s / t[0][0], 2)) if s >= t[0][0] else 0
       denominator = t[0][1] * 2 ** exponent
       #print 'denominator is %s.' % denominator
-      music = [Note(0, n, denominator) if n > 0 else Rest(abs(n), denominator) for n in t[1]]
+      music = [Note(0, n, denominator) if n > 0 
+         else Rest(abs(n), denominator) for n in t[1]]
       l = math.log(max(t[0][0], s) * 1.0 / min(t[0][0], s), 2)
       if l == int(l):
          return expression.Expression(music)
@@ -1377,7 +1396,8 @@ class ClassTransformer(object):
                print 'Unknown target %s.' % self.target
                raise ValueError
             # round-about way of setting new.effectiveDuration
-            new.scaledDuration = Rational(node.effectiveDuration.n, node.effectiveDuration.d)
+            new.scaledDuration = Rational(
+               node.effectiveDuration.n, node.effectiveDuration.d)
             return new
       return node
 
@@ -1483,11 +1503,13 @@ class TupletBeamer(object):
       self.style = style
 
    def visit(self, node):
-      if hasattr(node, 'kind') and (node.kind('Tuplet') or node.kind('Expression')):
+      if hasattr(node, 'kind') and (node.kind('Tuplet') or \
+         node.kind('Expression')):
          self.current = id(node)
 
    def unvisit(self, node):
-      if hasattr(node, 'kind') and (node.kind('Tuplet') or node.kind('Expression')):
+      if hasattr(node, 'kind') and (node.kind('Tuplet') or \
+         node.kind('Expression')):
          if id(node) == self.current:
             node.beam(self.style)
 
@@ -1685,7 +1707,11 @@ def breaks(signatures, durations, pages, verticals, staves = None):
       for l, line in enumerate(page):
          for measure in range(line):
             d = durations[total] 
-            s = skip.Skip(d.written.numerator, d.written.denominator, d.multiplier.numerator, d.multiplier.denominator)
+            s = skip.Skip(
+               d.written.numerator, 
+               d.written.denominator, 
+               d.multiplier.numerator, 
+               d.multiplier.denominator)
             tabs = ''.join(['\t'] * int(math.ceil((10 - len(s.body)) / 3.0)))
             result.append(s)
             result[-1].left.append(signatures[total] + '\t')
@@ -1699,11 +1725,15 @@ def breaks(signatures, durations, pages, verticals, staves = None):
          result[-1].right = ['%s\\break\t\t' % tabs]
          if len(result[-(measure + 1)].before) == 0:
             result[-(measure + 1)].before.append('')
-         result[-(measure + 1)].before.append('\overrideProperty #"Score.NonMusicalPaperColumn"')
+         result[-(measure + 1)].before.append(
+            '\overrideProperty #"Score.NonMusicalPaperColumn"')
          if staves == None:
-            result[-(measure + 1)].before.append("#'line-break-system-details #'((Y-offset . %s))" % verticals[p][l])
+            result[-(measure + 1)].before.append(
+               "#'line-break-system-details #'((Y-offset . %s))" % 
+               verticals[p][l])
          else:
-            result[-(measure + 1)].before.append("#'line-break-system-details #'((Y-offset . %s) (alignment-offsets . (%s)))" % (verticals[p][l], staves))
+            result[-(measure + 1)].before.append(
+               "#'line-break-system-details #'((Y-offset . %s) (alignment-offsets . (%s)))" % (verticals[p][l], staves))
       result[-1].right = []
       tabs = ''.join(['\t'] * int(math.ceil((10 - len(s.body)) / 3.0)))
       result[-1].right = ['%s\\pageBreak\t' % tabs]
@@ -1741,7 +1771,8 @@ class Subdivide(object):
             denominator = int(2 ** (n + 2))
             quotient = node.duration / Rational(1, denominator)
             if quotient.d == 1 and quotient.n > 1:
-               new = expression.Expression([Note(0, 1, denominator) for x in range(quotient.n)])
+               new = expression.Expression(
+                  [Note(0, 1, denominator) for x in range(quotient.n)])
                if len(new.music) > 1:
                   #new.music[0].right.append('[')
                   #new.music[-1].right.append(']')
@@ -1771,7 +1802,8 @@ class FiveRemover(object):
    def visit(self, node):
       if node.kind('Note') and node.duration.n == 5:
          denominator = node.duration.d
-         return expression.Expression([Note(0, 4, denominator), Note(0, 1, denominator)])
+         return expression.Expression(
+            [Note(0, 4, denominator), Note(0, 1, denominator)])
       else:
          return node
 
