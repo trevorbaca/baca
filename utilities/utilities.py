@@ -1,3 +1,5 @@
+'''List tools used in Cary, Sekka and Lidercfeny.'''
+
 import copy
 import math
 import operator
@@ -86,7 +88,8 @@ def pairwise(l):
 
    return result
 
-def repeat(l, length = False, times = False, weight = False, remainder = 'chop', action = 'in place'):
+def repeat(l, length = False, times = False, weight = False, 
+   remainder = 'chop', action = 'in place'):
    '''
    >>> l = range(5)
    >>> repeat(l, length = 11)
@@ -148,7 +151,8 @@ def repeat(l, length = False, times = False, weight = False, remainder = 'chop',
          if remainder == 'less':
             result = result[:-1]
          elif remainder == 'chop':
-            result = result[:-1] + [sign(result[-1]) * (weight - sum([abs(x) for x in result[:-1]]))]
+            result = result[:-1] + [sign(result[-1]) * \
+               (weight - sum([abs(x) for x in result[:-1]]))]
          elif remainder == 'more':
             pass
 
@@ -301,7 +305,8 @@ def accumulate(f, expr):
 
    return [reduce(f, expr[:x]) for x in range(1, len(expr) + 1)]
 
-def partition(l, s, overhang = False, cyclic = False, mode = 'length', action = 'in place'):
+def partition(l, s, overhang = False, cyclic = False, 
+   mode = 'length', action = 'in place'):
    '''
    TODO: set overhang = True and cyclic = True by default.
 
@@ -372,7 +377,8 @@ def partition(l, s, overhang = False, cyclic = False, mode = 'length', action = 
 
    if mode == 'length':
       if isinstance(s, int):
-         result = [list(element) for element in zip(*[l[x::s] for x in range(s)])]
+         result = [list(element) 
+            for element in zip(*[l[x::s] for x in range(s)])]
          if overhang:
             if len(l) % s != 0:
                result.append(l[-(len(l) % s):])
@@ -449,7 +455,8 @@ def cpartition(l, s, mode = 'length', action = 'in place'):
    Replace once cyclic and overhang default to True in partition().
    '''
 
-   result = partition(l, s, cyclic = True, overhang = True, mode = mode, action = 'new')
+   result = partition(l, s, cyclic = True, overhang = True, 
+      mode = mode, action = 'new')
 
    if action == 'in place':
       l[:] = result
@@ -503,7 +510,8 @@ def sectionalize(n, r):
 
    return picket(ratio(n - (len(r) - 1), r), [1])
 
-def flatten(l, type = type, ltype = (list, tuple), maxint = sys.maxint, action = 'in place'):
+def flatten(l, type = type, ltype = (list, tuple), 
+   maxint = sys.maxint, action = 'in place'):
    '''
    >>> l = [[1, [2]], 3, 4, 5]
    >>> flatten(l)
@@ -749,14 +757,18 @@ def circumrotate(l, outer, inner):
 
    if outer == 'right':
       if inner == 'right':
-         return rotate([rotate(x, 'right', action = 'new') for x in l], 'right', action = 'new')
+         return rotate([rotate(x, 'right', action = 'new') for x in l], 
+            'right', action = 'new')
       elif inner == 'left':
-         return rotate([rotate(x, 'left', action = 'new') for x in l], 'right', action = 'new')
+         return rotate([rotate(x, 'left', action = 'new') for x in l], 
+            'right', action = 'new')
    elif outer == 'left':
       if inner == 'right':
-         return rotate([rotate(x, 'right', action = 'new') for x in l], 'left', action = 'new')
+         return rotate([rotate(x, 'right', action = 'new') for x in l], 
+            'left', action = 'new')
       elif inner == 'left':
-         return rotate([rotate(x, 'left', action = 'new') for x in l], 'left', action = 'new')
+         return rotate([rotate(x, 'left', action = 'new') for x in l], 
+            'left', action = 'new')
    else:
       print 'Unknown direction %s.' % outer
       raise ValueError
@@ -897,9 +909,11 @@ def draw(l, pairs, history = False):
          #for i in range(pair[0], sum(pair)):
          for i in range(pair[0], pair[0] + pair[1]):
             source = l[i % len(l)]
-            newest = source.__class__(source.pitch.number, source.duration.n, source.duration.d)
+            newest = source.__class__(
+               source.pitch.number, source.duration.n, source.duration.d)
             if isinstance(history, basestring):
-               newest.history = source.history + history if hasattr(source, 'history') else history
+               newest.history = source.history + history if \
+                  hasattr(source, 'history') else history
             new.append(newest)
          #inserts.append((sum(pair), new))
          if len(pair) == 2:
@@ -952,9 +966,11 @@ def project(l, spec, history = False):
       # for (0, [2, 4])
       for token in spec:
          # pairs are [(0, 2), (1, 4)]
-         for pair in [(token[0] + i, token[1][i]) for i in range(len(token[1]))]:
+         for pair in [
+            (token[0] + i, token[1][i]) for i in range(len(token[1]))]:
             anchor = l[pair[0] % len(l)]
-            anchor = anchor.__class__(anchor.pitch.number, anchor.duration.n, anchor.duration.d)
+            anchor = anchor.__class__(
+               anchor.pitch.number, anchor.duration.n, anchor.duration.d)
             if hasattr(l[pair[0] % len(l)], 'history'):
                anchor.history = l[pair[0] % len(l)].history
             new = [anchor]
@@ -963,9 +979,12 @@ def project(l, spec, history = False):
                start = l[index % len(l)]
                interval = stop.pitch.pc - start.pitch.pc
                source = new[-1]
-               newest = source.__class__((source.pitch.pc + interval) % 12, source.duration.n, source.duration.d)
+               newest = source.__class__(
+                  (source.pitch.pc + interval) % 12, 
+                  source.duration.n, source.duration.d)
                if isinstance(history, basestring):
-                  newest.history = anchor.history + history if hasattr(anchor, 'history') else history
+                  newest.history = anchor.history + history if \
+                     hasattr(anchor, 'history') else history
                new.append(newest)
             inserts.append((pair[0], new))
 
@@ -973,7 +992,8 @@ def project(l, spec, history = False):
       # for (0, [2, 4])
       for token in spec:
          # pairs are [(0, 2), (1, 4)]
-         for pair in [(token[0] + i, token[1][i]) for i in range(len(token[1]))]:
+         for pair in [
+            (token[0] + i, token[1][i]) for i in range(len(token[1]))]:
             anchor = l[pair[0] % len(l)]
             new = [anchor]
             for index in range(pair[0] + 1, pair[0] + pair[-1] + 1):
