@@ -1,5 +1,6 @@
 '''List tools used in Cary, Sekka and Lidercfeny.'''
 
+from abjad.tools import mathtools
 import copy
 import math
 import operator
@@ -7,18 +8,7 @@ import sys
 
 
 def clone(expr):
-
    return expr.clone() if hasattr(expr, 'clone') else expr
-
-def phi(n):
-   assert isinstance(n, (int, float, long)), n >= 1
-   return 2 ** int(math.log(n, 2))
-
-def chop(x):
-   if x >= 0:
-      return int(x)
-   else:
-      return -int(abs(x))
 
 def sign(n):
    '''

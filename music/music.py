@@ -881,7 +881,7 @@ def divide(l, (n, d), together = False):
          raise ValueError('no divide zero values.')
 
    if len(l) > 1:
-      exponent = chop(log(weight(l), 2) - log(n, 2))
+      exponent = mathtools.chop(log(weight(l), 2) - log(n, 2))
       denominator = int(d * 2 ** exponent)
       music = [ ]
       for x in l:
