@@ -570,7 +570,7 @@ def beamMany(m, partsList, rip = True, span = False, lone = 'flat'):
    for i, sublist in enumerate(m):
       beam(sublist, partsList[i], rip = rip, span = span, lone = lone)
 
-   flatten(m)
+   listtools.flatten(m)
    
 def beams(music):
    '''
@@ -784,10 +784,10 @@ class Reconstructor(object):
    def unvisit(self, node):
       if node.__class__.__name__ == 'list':
          # FIXME: flatten now in-place
-         self.stack = flatten(self.stack[-1])
+         self.stack = listtools.flatten(self.stack[-1])
       elif hasattr(node, 'music'):
          # FIXME: flatten now in-place
-         node.music = flatten(self.stack.pop())
+         node.music = listtools.flatten(self.stack.pop())
          self.stack[-1].append(node)
 
 def reconstruct(music, reconstructor):
@@ -1986,7 +1986,7 @@ def specify(s, t, span = None):
    for beamfig in s:
       parts = [weight(subbeam) for subbeam in beamfig]
       parts = [(n, t) for n in parts]
-      stream = flatten(beamfig, action = 'new')
+      stream = listtools.flatten(beamfig, action = 'new')
       new = divide(stream, weight(stream), t)
       beam(new, parts, span = span)
       result.append(new)
@@ -2057,7 +2057,7 @@ def stellate(k, s, t, d, b, span ='from duration', rests = True):
       #beamRunsByDuration(tmp.leaves, durations, span = span)
       ComplexBeam(sublist, durations, span = span)
       i += 1
-   flatten(tuplets)
+   listtools.flatten(tuplets)
 
    return tuplets
 
@@ -2276,7 +2276,7 @@ def coruscate(n, s, t, z, d, rests = True):
 #         result.append(new)
 #         new = []
 #
-#   flatten(result)
+#   listtools.flatten(result)
 #   ml[:] = result
 
 #def severBeams(m, start, length):
@@ -2341,7 +2341,7 @@ def recombineVoices(target, s, insert, t, loci):
 #      partition(insm, t, cyclic = True, overhang = True)
 #      print insm
 #      replace(tgtm, loci, insm)
-#      flatten(tgtm)
+#      listtools.flatten(tgtm)
 
    def P(n, s):
       return partition(

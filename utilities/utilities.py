@@ -148,7 +148,8 @@ def spot(l, s, positions, action = 'in place'):
    '''
 
    # assert no overlaps
-   assert pure(flatten([range(p, len(s)) for p in positions], action = 'new'))
+   assert pure(listtools.flatten(
+      [range(p, len(s)) for p in positions], action = 'new'))
 
    result = l[:]
 
@@ -452,31 +453,6 @@ def sectionalize(n, r):
 
    return picket(ratio(n - (len(r) - 1), r), [1])
 
-def flatten(l, type = type, ltype = (list, tuple), 
-   maxint = sys.maxint, action = 'in place'):
-   '''
-   >>> l = [[1, [2]], 3, 4, 5]
-   >>> flatten(l)
-   >>> l
-   [1, 2, 3, 4, 5]
-   '''
-
-   if action == 'new':
-      result = l[:]
-      flatten(result)
-      return result
-
-   try:
-      # for every possible index
-      for ind in xrange(maxint):
-         # while that index currently holds a list
-         while isinstance(l[ind], ltype):
-            # expand that list into the index (and subsequent indices)
-            l[ind:ind+1] = list(l[ind])
-         #ind = ind+1
-   except IndexError:
-      pass
-
 def picket(l, ins, overhang = (0, 0)):
    '''
    >>> picket([0, 1, 2, 3, 4], ['A', 'B'])
@@ -725,7 +701,7 @@ def cycle(outer, inner, l, flattened = True):
       next = circumrotate(result[-1], outer, inner)
       if next == result[0]:
          if flattened == True:
-            flatten(result)
+            listtools.flatten(result)
             return result
          else:
             return result
@@ -785,7 +761,7 @@ def helianthate(l, outer, inner, action = 'in place', flattened = True):
       if next == start or (kind(next[0][0], 'Note') and \
          [[n.pitch.pc for n in sublist] for sublist in next] == start):
          if flattened == True:
-            flatten(result)
+            listtools.flatten(result)
          break
       else:
          result.extend(next)
@@ -1497,7 +1473,7 @@ def unfive(l, target = 'negative', action = 'in place'):
          # 5 in middle
          if 5 in new:
             new = [(4, 1) if element == 5 else element for element in new]
-            flatten(new)
+            listtools.flatten(new)
 
          result.append(new)
 
@@ -2540,7 +2516,7 @@ def registrate(pset, pcs):
    
    if isinstance(pcs, list):
       r = [[p for p in pset if p % 12 == pc] for pc in [x % 12 for x in pcs]]
-      utilities.flatten(r)
+      listtools.flatten(r)
    elif isinstance(pcs, int):
       r = [p for p in pset if p % 12 == pcs][0]
    else:
@@ -2553,7 +2529,7 @@ def constellate(psets, r):
    '''
 
    result = utilities.outer([registrations(pset, r) for pset in psets])
-   [utilities.flatten(x) for x in result]
+   [listtools.flatten(x) for x in result]
    [x.sort( ) for x in result]
    return result
 
