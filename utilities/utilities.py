@@ -71,7 +71,7 @@ def repeat(l, length = False, times = False, weight = False,
    >>> repeat(l, times = 2)
    >>> l
    [c'4, cs'4, d'4, ef'4, e'4, c'4, cs'4, d'4, ef'4, e'4]
-   >>> pure(_)
+   >>> len(l) == len(set(l))
    True
 
    >>> l = [5, 5, 5]
@@ -135,8 +135,8 @@ def spot(l, s, positions, action = 'in place'):
    '''
 
    # assert no overlaps
-   assert pure(listtools.flatten(
-      [range(p, len(s)) for p in positions], action = 'new'))
+   tmp = listtools.flatten([range(p, len(s)) for p in positions])
+   assert len(tmp) == len(set(tmp))
 
    result = l[:]
 
@@ -836,22 +836,6 @@ def project(l, spec, history = False):
    for insert in reversed(sorted(inserts)):
       l[insert[0] : insert[0] + 1] = insert[-1]
       
-def pure(l):
-   '''
-   True if the elements in l are unique, otherwise False;
-   predicate form of unique().
-   
-   >>> l = [1, 1, 5, 2, 2, 4]
-   >>> utilities.pure(l)
-   False
-
-   >>> l = [1, 2, 4]
-   >>> utilities.pure(l)
-   True
-   '''
-   
-   return len(l) == len(listtools.unique(l))
-
 def piles(ll):
    '''
    Return the cumulative sums of the absolute values of the l in ll.
@@ -2330,19 +2314,6 @@ def scan(ll, start = 0, stop = None):
       else:
          next = ll[i + 1]
       yield (i, cur, prev, next)
-
-#def pickle(expr, f):
-#   pkl = file(f, 'w')
-#   pickler = Pickler(pkl)
-#   pickler.dump(expr)
-#   pkl.close()
-#
-#def unpickle(f):
-#   pkl = file(f, 'r')
-#   unpickler = Unpickler(pkl)
-#   expr = unpickler.load()
-#   pkl.close()
-#   return expr
 
 def registrations(pitches, r):
    '''
