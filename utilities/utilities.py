@@ -1,6 +1,7 @@
 '''List tools used in Cary, Sekka and Lidercfeny.'''
 
 from abjad.leaf.leaf import _Leaf
+from abjad.note.note import Note
 from abjad.tools import clone
 from abjad.tools import listtools
 from abjad.tools import mathtools
@@ -638,7 +639,7 @@ def cycle(outer, inner, l, flattened = True):
       next = circumrotate(result[-1], outer, inner)
       if next == result[0]:
          if flattened == True:
-            listtools.flatten(result)
+            result = listtools.flatten(result)
             return result
          else:
             return result
@@ -698,7 +699,7 @@ def helianthate(l, outer, inner, action = 'in place', flattened = True):
       if next == start or (isinstance(next[0][0], Note) and \
          [[n.pitch.pc for n in sublist] for sublist in next] == start):
          if flattened == True:
-            listtools.flatten(result)
+            result = listtools.flatten(result)
          break
       else:
          result.extend(next)
@@ -1278,7 +1279,7 @@ def unfive(l, target = 'negative', action = 'in place'):
          # 5 in middle
          if 5 in new:
             new = [(4, 1) if element == 5 else element for element in new]
-            listtools.flatten(new)
+            new = listtools.flatten(new)
 
          result.append(new)
 
@@ -2256,6 +2257,8 @@ def constellate(psets, r):
    '''Return outer product of octave transpositions of psets in r.'''
 
    result = outer([pitchtools.octave_transpositions(pset, r) for pset in psets])
-   [listtools.flatten(x) for x in result]
+   #[listtools.flatten(x) for x in result]
+   for i, part in enumerate(result):
+      result[i] = listtools.flatten(part)
    [x.sort( ) for x in result]
    return result
