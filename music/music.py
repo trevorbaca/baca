@@ -1117,26 +1117,6 @@ class ClassTransformer(object):
             return new
       return node
 
-class TupletBeamer(object):
-   '''
-   Beams lowest-level tuplets and expressions in place.
-   '''
-
-   def __init__(self, style):
-      self.current = 0
-      self.style = style
-
-   def visit(self, node):
-      if hasattr(node, 'kind') and (node.kind('Tuplet') or \
-         node.kind('Expression')):
-         self.current = id(node)
-
-   def unvisit(self, node):
-      if hasattr(node, 'kind') and (node.kind('Tuplet') or \
-         node.kind('Expression')):
-         if id(node) == self.current:
-            node.beam(self.style)
-
 def nest(measures, outer, inner):
    '''
    Structures time.
