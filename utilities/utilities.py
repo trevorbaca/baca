@@ -461,8 +461,8 @@ def picket(l, ins, overhang = (0, 0)):
    return result
 
 def outer(lists):
-   '''
-   '''
+   '''Return outer product of lists in lists.'''
+
    def helper(list1, list2):
       result = []
       for l1 in list1:
@@ -740,7 +740,7 @@ def draw(l, pairs, history = False):
 
    inserts = []
 
-   if l[0].__class__.__name__ == 'Note':
+   if isinstance(l[0], Note):
       for pair in reversed(pairs):
          new = []
          #for i in range(pair[0], sum(pair)):
@@ -796,7 +796,7 @@ def project(l, spec, history = False):
 
    inserts = []
 
-   if l[0].__class__.__name__ == 'Note':
+   if isinstance(l[0], Note):
       # for (0, [2, 4])
       for token in spec:
          # pairs are [(0, 2), (1, 4)]

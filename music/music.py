@@ -40,7 +40,7 @@ def interpretMusic(arg):
                B[i] = tuple([tuple([int(y) for y in x.split(',')]) for \
                   x in b.split('=')])
       beamSpec = B
-      if beamSpec.__class__.__name__ == 'list':
+      if isinstance(beamSpec, list):
          beamSpec = [tuple(beamSpec)]
       print 'found beam spec %s' % str(beamSpec)
       arg = arg[:-1]
@@ -154,11 +154,11 @@ def interpretMusic(arg):
          return m
 
       # [1, 1, 2] or [2, (1, 4)]
-      elif arg[-1].__class__.__name__ != 'str':
+      elif not isinstance(arg[-1], str):
          prolationIndicator = None
          body = arg[:]
       # [1, 1, 2, '5:6']
-      elif arg[-1].__class__.__name__ == 'str' and \
+      elif isinstance(arg[-1], str) and \
          arg[-1] not in duration.durationNames:
          prolationIndicator = arg[-1]
          body = arg[:-1]
@@ -245,7 +245,7 @@ def beam(m, b = None, rip = True, span = False, nib = False, lone = 'flat'):
       d.append(effectiveDuration(m))
    else:
       for part in b:
-         if part.__class__.__name__ == 'Duration':
+         if isinstance(part, Duration):
             d.append(Rational(part.n, part.d))
          elif isinstance(part, tuple):
             d.append(Rational(part[0], part[1]))
@@ -674,14 +674,14 @@ class Reconstructor(object):
       self.visitor = visitor
       self.stack = [[]]
    def visit(self, node):
-      if node.__class__.__name__ == 'list':
+      if isinstance(node, list):
          pass
       elif hasattr(node, 'music'):
          self.stack.append([])
       else:
          self.stack[-1].append(self.visitor.visit(node))
    def unvisit(self, node):
-      if node.__class__.__name__ == 'list':
+      if isinstance(node, list):
          # FIXME: flatten now in-place
          self.stack = listtools.flatten(self.stack[-1])
       elif hasattr(node, 'music'):
@@ -699,20 +699,20 @@ class Painter(object):
    def __init__(self, pitches):
       self.pitches = pitches
    def visit(self, node):
-      if len(self.pitches) > 0 and node.__class__.__name__ in ['Note', 'Chord']:
+      if 0 < len(self.pitches) and isinstance(node, (Note, Chord)):
          p = self.pitches.pop(0)
          result = copy.deepcopy(node)
-         if p.__class__.__name__ != 'list':
-            if node.__class__.__name__ == 'Note':
+         if not isinstance(p, list):
+            if isinstance(node, Note):
                result.pitch = p
-            elif node.__class__.__name__ == 'Chord':
+            elif isinstance(node, Chord):
                result.pitches = [p]
             else:
                raise ValueError
-         elif p.__class__.__name__ == 'list':
-            if node.__class__.__name__ == 'Note':
+         elif isinstance(p, list):
+            if isintance(node, Note):
                result = chord(p, node.duration, *node.directives)
-            elif node.__class__.__name__ == 'Chord':
+            elif isinstance(node, Chord):
                result.pitches = p
             else:
                raise ValueError
@@ -721,12 +721,12 @@ class Painter(object):
          return node
    
 def paint(music, pitches):
-   if pitches[0].__class__.__name__ == 'Pitch':
+   if isinstance(pitches[0], Pitch):
       processedPitches = pitches
-   elif pitches[0].__class__.__name__ == 'int':
+   elif isinstance(pitches[0], int):
       processedPitches = [pitch(p) for p in pitches]
    reconstructor = Reconstructor(Painter(copy.deepcopy(processedPitches)))
-   if music.__class__.__name__ == 'list':
+   if isinstance(music, list):
       return reconstruct(music, reconstructor)
    else:
       return reconstruct([music], reconstructor)[0]
@@ -743,13 +743,12 @@ def skeleton(l):
 
    if hasattr(l, 'skeleton'):
       return l.skeleton
-   elif l.__class__.__name__ == 'list':
+   elif isinstance(l, list):
       return '[%s]' % ', '.join([skeleton(x) for x in l])
-   elif l.__class__.__name__ == 'tuple':
+   elif isinstance(l, tuple):
       return '(%s)' % ', '.join([skeleton(x) for x in l])
    else:
-      print 'Unknown class %s.' % l.__class__.__name__
-      raise ValueError
+      raise TypeError('object %s of unknown type.' % l)
 
 def clean(l):
    return eval(skeleton(l))
