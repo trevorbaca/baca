@@ -664,9 +664,9 @@ def circumrotate(l, outer, inner):
       raise ValueError
 
 def cycle(outer, inner, l, flattened = True):
-   """
+   '''
    cycle('right', 'right', [[4, 5, 5], [5, 6], [3, 4, 5]])
-   """
+   '''
 
    result = [copy.deepcopy(l)]
    while True:
@@ -977,7 +977,7 @@ def piles(ll):
    return result
 
 def halve(n, bigger = 'left', even = 'allowed'):
-   """
+   '''
    >>> halve(7)
    (4, 3)
    >>> halve(7, bigger = 'right')
@@ -993,7 +993,7 @@ def halve(n, bigger = 'left', even = 'allowed'):
    (5, 3)
    >>> halve(8, bigger = 'right', even = 'disallowed')
    (3, 5)
-   """
+   '''
 
    smallerHalf = int(math.floor(n / 2))
    biggerHalf = n - smallerHalf
@@ -1454,7 +1454,7 @@ def unfive(l, target = 'negative', action = 'in place'):
       return result
 
 def convolve(l, s, action = 'in place'):
-   """
+   '''
    Add elements in s to the first and last positions of corresponding elements in l.
 
    >>> l = [[2, 2, 2], [2, 2], [2, 2, 2]]     
@@ -1467,7 +1467,7 @@ def convolve(l, s, action = 'in place'):
    [[12, 2, 7], [3, 12], [7, 2, 3]]
    >>> l
    [[2, 2, 2], [2, 2], [2, 2, 2]]
-   """
+   '''
 
    if len(l) != len(s):
       print 'convolve(l, s): len(l) must equal len(s).'
@@ -1501,7 +1501,7 @@ def convolve(l, s, action = 'in place'):
       return result
 
 def caulk(l, s, action = 'in place'):
-   """
+   '''
    Transforms sublists-with-negatives to sublists-with-positives;
    'caulks' sublists in l according to elements in s.
 
@@ -1519,7 +1519,7 @@ def caulk(l, s, action = 'in place'):
    >>> caulk(l, [1, 1, 1])
    >>> l
    [[-1, 1, 1], [1, -1, 1], [1, 1, -1]]
-   """
+   '''
 
    result = []
 
@@ -1552,7 +1552,7 @@ def caulk(l, s, action = 'in place'):
       return result
 
 def glob(l, s, action = 'in place'):
-   """
+   '''
    >>> glob([[1, 2, 3], [4, 5], [6, 7, 8, 9]], (1, 1, 1))
    [[-6], [-9], [-30]]
    >>> glob([[1, 2, 3], [4, 5], [6, 7, 8, 9]], (1, 1, 0))
@@ -1561,7 +1561,7 @@ def glob(l, s, action = 'in place'):
    [[-6], [4, 5], [6, 7, 8, 9]]
    >>> glob([[1, 2, 3], [4, 5], [6, 7, 8, 9]], (0, 0, 0))
    [[1, 2, 3], [4, 5], [6, 7, 8, 9]]
-   """
+   '''
 
    result = []
 
@@ -1607,7 +1607,7 @@ def flamingo(l, s, period = False, action = 'in place'):
       return result
 
 def negate(l, s, action = 'in place'):
-   """
+   '''
    Cyclically negate 1-element sublists in l according to s.
 
    >>> l = [[1], [2, 3], [4], [5, 6]]
@@ -1624,7 +1624,7 @@ def negate(l, s, action = 'in place'):
    >>> negate(l, [0, 1])
    >>> l
    [[1], [2, 3], [-4], [5, 6]]
-   """
+   '''
 
    result = []
    
@@ -1656,7 +1656,7 @@ def negate(l, s, action = 'in place'):
       return result
 
 def permute(l, s, action = 'in place'):
-   """
+   '''
    Permutes integer pitch list or note list l by integer pc list s.
 
    >>> l = [note.Note(n, 1, 4) for n in [17, -10, -2, 11]]
@@ -1669,7 +1669,7 @@ def permute(l, s, action = 'in place'):
    ...     [10, 0, 2, 6, 8, 7, 5, 3, 1, 9, 4, 11],
    ...     action = 'new')
    [bf4, d4, f''4, b'4]
-   """
+   '''
 
    result = []
 
@@ -1686,7 +1686,7 @@ def permute(l, s, action = 'in place'):
       return result 
       
 def ones(l, action = 'in place'):
-   """
+   '''
    >>> l = range(1, 5)
    >>> ones(l)
    >>> l
@@ -1697,7 +1697,7 @@ def ones(l, action = 'in place'):
    [[1], [1, 1], [1, 1, 1], [1, 1, 1, 1]]
    >>> l
    [1, 2, 3, 4]
-   """
+   '''
 
    result = []
    for element in l:

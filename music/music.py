@@ -19,9 +19,9 @@ def music(*args):
       return expression.Expression([interpretMusic(arg) for arg in args])
 
 def interpretMusic(arg):
-   """
+   '''
    Helper function for music().
-   """
+   '''
 
    # get beam spec if there is one
    # '2 2 3' or '2 2=1=2' or '3=1=3 3=1=3 -2'
@@ -1007,7 +1007,7 @@ def into(ll, ss, location):
          eval('l.%s.append(ss[i])' % location)
 
 def build(t):
-   """
+   '''
    >>> music.t1
    [(3, 8), [1]]
    >>> music.build(_)  
@@ -1028,7 +1028,7 @@ def build(t):
    [(3, 8), [(2, 3), [[1, 1], [(2, 2, 1), [[1], [1], [1, 1]]]]]]
    >>> music.build(_)
    (5:3, (c'8, c'8), (5:3, c'4, c'4, (c'16, c'16)))
-   """
+   '''
 
    # [(3, 8), [(3, 4), [[1, 1], [2, 2, 1]]]]
    if isinstance(t[1][0], tuple):
@@ -1313,9 +1313,9 @@ def nest(measures, outer, inner):
    return result
 
 def build(measures, outer):
-   """
+   '''
    Structures time.
-   """
+   '''
 
    result = []
    for o, m in zip(outer, measures):
@@ -1328,7 +1328,7 @@ def build(measures, outer):
    return result
 
 def trill(l, p = False, indices = 'all', d = Rational(0)):
-   """
+   '''
    Cyclically trills notes at indices with scaled duration >= d.
 
    When p is set, cyclically applies pitches in p.
@@ -1340,7 +1340,7 @@ def trill(l, p = False, indices = 'all', d = Rational(0)):
    trill(l, indices = [0, 2], p = [pitch.Pitch(2)])
 
    NOTE: temporarily sets note.trill to True only.
-   """
+   '''
 
    if indices == 'all':
       indices = range(len(instances(l, '_Leaf')))
@@ -1428,8 +1428,8 @@ def untrill(l):
          delattr(element, 'trill')
 
 def ungrace(l, keep = 'first', length = 1):
-   """
-   """
+   '''
+   '''
 
    for element in instances(l, '_Leaf'):
       if hasattr(element, 'grace'):
