@@ -1,7 +1,10 @@
-from baca.utilities.utilities import binary, rotate, unique
+from abjad.tools import listtools
+from abjad.tools import mathtools
 
 
-U = [''.join(list(reversed(binary(x).zfill(12)))) for x in range(4096)]
+U = [''.join(list(reversed(mathtools.binary_string(x).zfill(12)))) 
+   for x in range(4096)]
+
 def helper(binaryString):
    result = zip(binaryString, range(len(binaryString)))
    result = [x[1] for x in result if x[0] == '1']
@@ -25,12 +28,12 @@ def C(pset):
    st = sorted(pset)
    result = []
    for i in range(len(st)):
-      result.append(rotate(st, 'left', i, action = 'new'))
+      result.append(listtools.rotate(st, 'left', i, action = 'new'))
    return result
 
 def CI(pset):
    result = C(pset) + C(I(pset))
-   unique(result)
+   listtools.unique(result)
    return result
    
 def T0(pset):
@@ -58,7 +61,7 @@ def P(pset, TTOs = 'TI'):
    return candidates[0]
 
 def reps(TTOs = 'TI'):
-   primeForms = unique([P(x, TTOs) for x in U], action = 'new')
+   primeForms = listtools.unique([P(x, TTOs) for x in U], action = 'new')
    result = [[]] * 13
    for i in range(13):
       result[i] = sorted([x for x in primeForms if len(x) == i]) 
