@@ -1,5 +1,6 @@
 '''List tools used in Cary, Sekka and Lidercfeny.'''
 
+from abjad.tools import listtools
 from abjad.tools import mathtools
 import copy
 import math
@@ -62,21 +63,6 @@ def snip(l, w, position = 0, action = 'in place'):
       l[:] = result
    else:
       return result
-
-def pairwise(l):
-   '''
-   Return len(l) - 1 pairs from l.
-
-   >>> pairwise(l)
-   [(1, 1), (1, 2), (2, 3), (3, 5), (5, 5), (5, 6)]
-   '''
-
-   result = []
-
-   for i in range(1, len(l)):
-      result.append((l[i - 1], l[i]))
-
-   return result
 
 def repeat(l, length = False, times = False, weight = False, 
    remainder = 'chop', action = 'in place'):
@@ -378,7 +364,7 @@ def partition(l, s, overhang = False, cyclic = False,
          if cyclic == True and overhang == False:
             repeat(s, weight = len(l), remainder = 'less')
          sliceIndices = sums(s, action = 'new')
-         sliceIndices = list(pairwise([0] + sliceIndices))
+         sliceIndices = list(listtools.pairwise([0] + sliceIndices))
          result = [l[x[0]:x[-1]] for x in sliceIndices]
       else:
          print 'Unknown directive %s.' % s
@@ -2484,7 +2470,7 @@ def smelt(ll):
    result = piles(result)
    result = [0] + result
    result = [1 + n for n in result]
-   result = pairwise(result)
+   result = listtools.pairwise(result)
 
    new = []
    if sign(first) == 1:
