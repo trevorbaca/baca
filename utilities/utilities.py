@@ -99,15 +99,12 @@ def repeat(l, length = False, times = False, weight = False,
 
    if length:
       for i in range(length):
-         #result.append(clone(l[i % len(l)]))
          result.append(clone.unspan(l[i % len(l)]))
    elif times:
       for i in range(times):
          for element in l:
-            #result.append(clone(element))
             result.append(clone.unspan(element))
    elif weight:
-      #result.append(clone(l[0]))
       result.append(clone.unspan(l[0]))
       i = 1
       while sum([abs(x) for x in result]) < weight:
@@ -227,17 +224,6 @@ def overwrite(l, source, positions, mode = 'length', action = 'in place'):
    else:
       return result
 
-def accumulate(f, expr):
-   '''
-   >>> utilities.accumulate(lambda x, y: x + y, range(10))
-   [0, 1, 3, 6, 10, 15, 21, 28, 36, 45]
-
-   >>> utilities.accumulate(lambda x, y: str(x) + str(y), range(10))
-   [0, '01', '012', '0123', '01234', '012345', '0123456', '01234567', '012345678', '0123456789']
-   '''
-
-   return [reduce(f, expr[:x]) for x in range(1, len(expr) + 1)]
-
 def partition(l, s, overhang = False, cyclic = False, 
    mode = 'length', action = 'in place'):
    '''
@@ -320,7 +306,7 @@ def partition(l, s, overhang = False, cyclic = False,
             repeat(s, weight = len(l))
          if cyclic == True and overhang == False:
             repeat(s, weight = len(l), remainder = 'less')
-         sliceIndices = sums(s, action = 'new')
+         sliceIndices = mathtools.sums(s)
          sliceIndices = list(listtools.pairwise([0] + sliceIndices))
          result = [l[x[0]:x[-1]] for x in sliceIndices]
       else:
@@ -423,7 +409,7 @@ def ratio(n, s):
 
    result = [0]
 
-   for element in sums([float(n) * x / sum(s) for x in s], action = 'new'):
+   for element in mathtools.sums([float(n) * x / sum(s) for x in s]):
       result.append(int(round(element)) - sum(result))   
    result = result[1:]
 
@@ -698,7 +684,6 @@ def helianthate(l, outer, inner, action = 'in place', flattened = True):
       start = [[n.pitch.pc for n in sublist] for sublist in l]
       result = []
       for sublist in l:
-         #result.append([element.clone() for element in sublist])
          result.append([clone.unspan(element) for element in sublist])
    else:
       start = l[:]
@@ -716,7 +701,6 @@ def helianthate(l, outer, inner, action = 'in place', flattened = True):
             new = []
             print sublist
             for n in sublist:
-               #new.append(n.clone())
                new.append(clone.unspan(n))
             input.append(new)
                
@@ -903,23 +887,6 @@ def subset(l, m):
    '''
 
    return set(l).issubset(set(m))
-
-def sums(l, action = 'in place'):
-   '''
-   >>> l = range(10)
-   >>> sums(l)
-   >>> l
-   [0, 1, 3, 6, 10, 15, 21, 28, 36, 45]
-   '''
-
-   result = []
-
-   result = accumulate(operator.add, l)
-
-   if action == 'in place':
-      l[:] = result
-   else:
-      return result
 
 def piles(ll):
    '''
@@ -1779,7 +1746,6 @@ def adhere(l, action = 'in place'):
    elif isinstance(l[0], Note):
       for element in l[1:]:
          if element.pitch.number != result[-1].pitch.number:
-            #result.append(element.clone())
             result.append(clone.unspan(element))
    else:
       print 'Must be integer or Note.'

@@ -1746,7 +1746,7 @@ def recombineVoices(target, s, insert, t, loci):
 
    def makeIndexPairs(n, s):
       return listtools.pairwise(
-         sums([0] + [len(part) for part in P(n, s)], action = 'new'))
+         mathtools.sums([0] + [len(part) for part in P(n, s)], action = 'new'))
 
    targetIndexPairs = makeIndexPairs(len(targetVoices[0]), s)
    insertIndexPairs = makeIndexPairs(len(insertVoices[0]), t)
