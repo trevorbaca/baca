@@ -1378,36 +1378,6 @@ def stack(l, n, until = 'under'):
          reps = int(math.ceil(reps))
       return l * reps
          
-def binary(n): 
-   '''
-   Converts integer n (base 10) to binary string (base 2).
-
-   >>> pprint(zip(range(10), [binary(n) for n in range(10)]))
-   [(0, '0'),
-    (1, '1'),
-    (2, '10'),
-    (3, '11'),
-    (4, '100'),
-    (5, '101'),
-    (6, '110'),
-    (7, '111'),
-    (8, '1000'),
-    (9, '1001')]
-   '''
-
-   if n < 0: 
-      print 'Must be a positive integer.'
-      raise ValueError
-
-   if n == 0:
-      return '0' 
-
-   b = '' 
-   while n > 0: 
-      b = str (n % 2) + b 
-      n = n >> 1 
-   return b 
-
 def untie(expr, signs = 'all positive'):
    '''
    TODO: deprecate unfive(); will require a direction input parameter here.
@@ -1456,7 +1426,7 @@ def untie(expr, signs = 'all positive'):
       exponent = 1
       result = []
       total = 0
-      for cur in reversed(binary(abs(expr))):
+      for cur in reversed(mathtools.binary_string(abs(expr))):
          if cur == '1':
             total += exponent
          else:
