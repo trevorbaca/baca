@@ -1,0 +1,66 @@
+#! /usr/bin/env python
+
+###  Name: test-next
+###  Author: Trevor Baca
+###  Creation: 2008-11-29
+###  Revision: 2
+###  
+###  Summary: Some directory on the system is supposed to be designated
+###  as the LilyPond test directory under the name LILYPONDTEST.
+###  The LilyPond test directory should be used for opening
+###  small LilyPond test files with a couple of lines of code
+###  per file to test small bits of syntax, snippets from larger
+###  pieces, or examples from mail or the web.
+###  Files in the LilyPond test directory should all carry
+###  four-digit numeric names with the .ly extension appended,
+###  such as 0000.ly, 0001.ly, 0002.ly, etc.
+###
+###  This 'next' script inspects the LilyPond test directory
+###  and creates the next LilyPond test file in numeric order.
+###  Version specification is added automatically.
+###  The \include "english.ly" note entry specification is, too.
+###
+###  Boundary cases: when LILYPONDTEST contains no four-digit numeric 
+###  filenames, this 'next' script opens 0000.ly.
+###
+###  When LILYPONDTEST contains file 9999.ly, this 'next' script
+###  wraps around and opens 0000.ly; note that this means that
+###  this script *overwrites* files starting after the ten thousandth.
+###
+###  Nonnumeric files in LILYPONDTEST are allowed; 
+###  this script ignores them.
+
+import os
+import re
+
+
+LILYPONDTEST = os.environ.get('LILYPONDTEST')
+pattern = re.compile('\d{4,4}.ly')
+
+all_filenames = os.listdir(LILYPONDTEST)
+lily_filenames = [fn for fn in all_filenames if pattern.match(fn)]
+
+if lily_filenames == [ ]:
+   next_lily_filename = '0000.ly'
+else:
+   most_recent_lily_filename = sorted(lily_filenames)[-1]
+   most_recent_lily_number = int(most_recent_lily_filename[:-3])
+   if most_recent_lily_number == 9999:
+      next_lily_filename = '0000.ly'
+   next_lily_number = most_recent_lily_number + 1
+   next_lily_filename = '%04d.ly' % next_lily_number
+
+next_lily_filename = LILYPONDTEST + os.sep + next_lily_filename
+
+start_directory = os.path.abspath('.')
+os.chdir(LILYPONDTEST)
+lilypond_version = os.popen('lily-version').read( )
+next_lily_file = file(next_lily_filename, 'w')
+next_lily_file.write(r'\version "%s"' % lilypond_version  + '\n')
+next_lily_file.write(r'\include "english.ly"' + '\n')
+next_lily_file.write('\n\n')
+next_lily_file.close( )
+
+os.system('vi +$ %s' % next_lily_filename)
+os.system('lily %s' % next_lily_filename)
+os.chdir(start_directory)

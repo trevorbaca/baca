@@ -1,0 +1,11 @@
+#! /usr/bin/env python
+# revision 1
+
+import glob
+import os
+
+
+LILYPONDOUTPUT = os.environ.get('LILYPONDOUTPUT')
+
+last = glob.glob(LILYPONDOUTPUT + '/*.ly')[-1]
+os.system('vi %s' % last)

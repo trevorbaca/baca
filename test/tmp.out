@@ -1,0 +1,22 @@
+		\beam #0 #3 c'32 [
+		\beam #3 #3 c'32
+		\beam #3 #3 c'32
+		\beam #3 #0 c'32 ]
+	\times 4/7 {
+		\beam #0 #3 c'32 [
+		\beam #3 #3 c'32
+		\beam #3 #3 c'32
+		\beam #3 #3 c'32
+		\beam #3 #3 c'32
+		\beam #3 #3 c'32
+		\beam #3 #0 c'32 ]
+	}
+	\times 4/7 {
+		\beam #0 #3 c'32 [
+		\beam #3 #3 c'32
+		\beam #3 #3 c'32
+		\beam #3 #3 c'32
+		\beam #3 #3 c'32
+		\beam #3 #3 c'32
+		\beam #3 #0 c'32 ]
+	}

@@ -1,0 +1,18 @@
+#! /usr/bin/env python
+# revision 1
+
+import os
+import re
+
+LILYPONDTEST = os.environ.get('LILYPONDTEST')
+pattern = re.compile('\d{4,4}.ly')
+
+all_filenames = os.listdir(LILYPONDTEST)
+lily_files = [fn for fn in all_filenames if pattern.match(fn)]
+last_lily_filename = sorted(lily_files)[-1]
+
+start_directory = os.path.abspath('.')
+os.chdir(LILYPONDTEST)
+os.system('vi + %s' % last_lily_filename)
+os.system('lily %s' % last_lily_filename)
+os.chdir(start_directory)

@@ -1,0 +1,9 @@
+#! /usr/bin/env python
+# revision 1
+
+import glob
+import os
+
+
+LILYPONDOUTPUT = os.environ.get('LILYPONDOUTPUT')
+os.system('vi %s%s%s' % (LILYPONDOUTPUT, os.sep, 'lily.log'))
