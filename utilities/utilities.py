@@ -1,6 +1,7 @@
 '''List tools used in Cary, Sekka and Lidercfeny.'''
 
 from abjad.leaf.leaf import _Leaf
+from abjad.tools import clone
 from abjad.tools import listtools
 from abjad.tools import mathtools
 import copy
@@ -8,9 +9,6 @@ import math
 import operator
 import sys
 
-
-def clone(expr):
-   return expr.clone() if hasattr(expr, 'clone') else expr
 
 def direction(n):
    '''
@@ -101,13 +99,16 @@ def repeat(l, length = False, times = False, weight = False,
 
    if length:
       for i in range(length):
-         result.append(clone(l[i % len(l)]))
+         #result.append(clone(l[i % len(l)]))
+         result.append(clone.unspan(l[i % len(l)]))
    elif times:
       for i in range(times):
          for element in l:
-            result.append(clone(element))
+            #result.append(clone(element))
+            result.append(clone.unspan(element))
    elif weight:
-      result.append(clone(l[0]))
+      #result.append(clone(l[0]))
+      result.append(clone.unspan(l[0]))
       i = 1
       while sum([abs(x) for x in result]) < weight:
          result.append(l[i % len(l)])
@@ -697,7 +698,8 @@ def helianthate(l, outer, inner, action = 'in place', flattened = True):
       start = [[n.pitch.pc for n in sublist] for sublist in l]
       result = []
       for sublist in l:
-         result.append([element.clone() for element in sublist])
+         #result.append([element.clone() for element in sublist])
+         result.append([clone.unspan(element) for element in sublist])
    else:
       start = l[:]
       result = l[:]
@@ -714,7 +716,8 @@ def helianthate(l, outer, inner, action = 'in place', flattened = True):
             new = []
             print sublist
             for n in sublist:
-               new.append(n.clone())
+               #new.append(n.clone())
+               new.append(clone.unspan(n))
             input.append(new)
                
       next = circumrotate(input, outer, inner)
@@ -785,11 +788,8 @@ def draw(l, pairs, history = False):
             reps = pair[-1]
          inserts.append(((pair[0] + pair[1]) % len(l), new, reps))
 
-   #for insert in reversed(sorted(inserts)):
-   #   l[insert[0] : insert[0]] = insert[-1]
    for insert in reversed(sorted(inserts)):
-      # TODO remove reference multiplication and clone instead
-      l[insert[0] : insert[0]] = insert[1] * reps
+      l[insert[0]:insert[0]] = clone.unspan(insert[1], reps)
 
 def project(l, spec, history = False):
    '''
@@ -1779,7 +1779,8 @@ def adhere(l, action = 'in place'):
    elif isinstance(l[0], Note):
       for element in l[1:]:
          if element.pitch.number != result[-1].pitch.number:
-            result.append(element.clone())
+            #result.append(element.clone())
+            result.append(clone.unspan(element))
    else:
       print 'Must be integer or Note.'
       raise ValueError

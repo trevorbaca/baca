@@ -523,7 +523,7 @@ def beamMany(m, partsList, rip = True, span = False, lone = 'flat'):
    TODO: create unified rhythmic specification.
 
    >>> t = divide.pair([1, 1, 1], (2, 32))
-   >>> m = clone(t, 3)
+   >>> m = clone.unspan(t, 3)
    >>> beamMany(m, [[(2, 32)], [(2, 32), (2, 32)]], span = 2)
    >>> f(voice.Voice(m))
    \\new Voice {
@@ -799,7 +799,7 @@ class TestSlice(object):
          self.i += 1
          if self.i % 2 == 0:
             try:
-               return clone(node, 3)
+               return clone.unspan(node, 3)
             except:
                return [node] * 3
          else:
@@ -1013,8 +1013,7 @@ def build(t):
          return tuplet.SmartTuplet(t[0][0], t[0][1], music)
        
 def writtenDurations(m):
-   #return clean([l.duration for l in instances(m, '_Leaf')])
-   return [l.duration.clone() for l in m.leaves]
+   return [l.duration for l in m.leaves]
 
 def writtenDuration(m):
    return sum(writtenDurations(m), Rational(0))
@@ -1031,9 +1030,6 @@ def effectiveDurations(m):
    >>> effectiveDurations(t.leaves) 
    [DURATION 1/24, DURATION 1/24, DURATION 1/24]
    '''
-   #return clean([l.effectiveDuration for l in instances(m, '_Leaf')])
-   #return [l.effectiveDuration.clone() for l in m.leaves]
-   #return [l.effectiveDuration.copy() for l in instances(m, '_Leaf')]
    return [l.duration.prolated for l in instances(m, '_Leaf')]
 
 def effectiveDuration(m):
@@ -1237,25 +1233,6 @@ def ungrace(l, keep = 'first', length = 1):
             element.grace = element.grace[:length]
          elif keep == 'last':
             element.grace = element.grace[-length:]
-
-def clone(m, n):
-   '''
-   Clone m n times.
-
-   >>> clone(Note(0, 1, 8), 4)
-   [c'8, c'8, c'8, c'8]
-   >>> [id(n) for n in _]
-   [17387440, 8015952, 8015920, 8016144]
-   '''
-
-#   result = []
-#
-#   for i in range(n):
-#      result.append(clean(m))
-#
-#   return result
-
-   return m * n
 
 def breaks(signatures, durations, pages, verticals, staves = None):
    '''
