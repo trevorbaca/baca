@@ -1,0 +1,6 @@
+#! /bin/sh
+
+clear
+/Applications/LilyPond.app/Contents/Resources/bin/lilypond -dno-point-and-click $1
+rm ${1:0:${#1}-3}".ps"
+open ${1:0:${#1}-3}".pdf"
