@@ -1659,26 +1659,6 @@ def replace(l, indices, material, action = 'in place'):
    else:
       return result  
 
-def adhere(l):
-   '''Remove consecutive duplicate values in l.
-
-   >>> l = [1, 1, 2, 3, 3, 3, 9, 4, 4, 4]
-   >>> utilities.adhere(l)
-   [1, 2, 3, 9, 4]'''
-
-   assert isinstance(l, list)
-   assert all([isinstance(x, (int, float, Rational)) for x in l])
-
-   result = [ ]
-
-   if l:
-      result.append(l[0])
-      for element in l[1:]:
-         if not element ==result[-1]:
-            result.append(element)
-
-   return result
-
 def permIter(seq):
    '''
    Given some sequence 'seq', returns an iterator that gives
