@@ -6,6 +6,7 @@ from abjad.rational.rational import Rational
 from abjad.tools import clone
 from abjad.tools import listtools
 from abjad.tools import mathtools
+from abjad.tools import pitchtools
 import copy
 import math
 import sys
@@ -88,12 +89,16 @@ def repeat(l, length = False, times = False, weight = False,
    [-5, -5, 5, -5, -3]
    '''
 
-   assert all([isinstance(x, (int, float, Rational)) for x in l])
    result = [ ]
 
    if length:
       for i in range(length):
-         result.append(l[i % len(l)])
+         cur = l[i % len(l)]
+         if isinstance(cur, _Leaf):
+            result.append(clone.unspan(cur))
+         else:
+            assert isinstance(cur, (int, float, Rational))
+            result.append(cur)
    elif times:
       for i in range(times):
          for element in l:
@@ -714,36 +719,37 @@ def helianthate(l, outer, inner, action = 'in place', flattened = True):
       return result
 
 def draw(l, pairs, history = False):
-   '''
-   In-line repetition, in-place.
+   '''In-line repetition, in-place.
 
-   Defined on both notes and arbitrary elements.
+      Defined on both notes and arbitrary elements.
 
-   >>> l = [note.Note(n, 1, 4) for n in [0, 2, 4, 5, 7, 9, 11]]
-   >>> draw(l, [(0, 4), (2, 4)])
-   >>> l
-   [c'4, d'4, e'4, f'4, c'4, d'4, e'4, f'4, g'4, a'4, e'4, f'4, g'4, a'4, b'4]
-                        ^    ^    ^    ^              ^    ^    ^    ^
+      >>> l = [note.Note(n, 1, 4) for n in [0, 2, 4, 5, 7, 9, 11]]
+      >>> draw(l, [(0, 4), (2, 4)])
+      >>> l
+      [c'4, d'4, e'4, f'4, c'4, d'4, e'4, f'4, g'4, a'4, e'4, f'4, g'4, a'4, b'4]
+                           ^    ^    ^    ^              ^    ^    ^    ^
 
-   >>> l = range(7)
-   >>> draw(l, [(0, 4), (2, 4)])
-   >>> l
-   [0, 1, 2, 3, 0, 1, 2, 3, 4, 5, 2, 3, 4, 5, 6]
-                ^  ^  ^  ^        ^  ^  ^  ^
-   '''
+      >>> l = range(7)
+      >>> draw(l, [(0, 4), (2, 4)])
+      >>> l
+      [0, 1, 2, 3, 0, 1, 2, 3, 4, 5, 2, 3, 4, 5, 6]
+                   ^  ^  ^  ^        ^  ^  ^  ^     '''
 
-   inserts = []
+   inserts = [ ]
 
    if isinstance(l[0], Note):
       for pair in reversed(pairs):
-         new = []
+         new = [ ]
          for i in range(pair[0], pair[0] + pair[1]):
             source = l[i % len(l)]
-            newest = source.__class__(
-               source.pitch.number, source.duration.n, source.duration.d)
-            if isinstance(history, basestring):
-               newest.history = source.history + history if \
-                  hasattr(source, 'history') else history
+            #newest = source.__class__(
+            #   source.pitch.number, source.duration.n, source.duration.d)
+            newest = Note(source.pitch.number, source.duration.written)
+#            if isinstance(history, basestring):
+#               newest.history = source.history + history if \
+#                  hasattr(source, 'history') else history
+            if isinstance(history, str):
+               newest.history['tag'] = source.history.get('tag', history)
             new.append(newest)
          if len(pair) == 2:
             reps = 1
@@ -771,7 +777,7 @@ def project(l, spec, history = False):
 
    Defined on both notes and integer pcs.
 
-   >>> l = [note.Note(n, 1, 4, ) for n in [0, 2, 7, 9, 5, 11, 4]]
+   >>> l = [Note(n, (1, 4)) for n in [0, 2, 7, 9, 5, 11, 4]]
    >>> project(l, [(0, [2, 4]), (4, [3, 1])])
    >>> l
    [c'4, f'4, g'4, d'4, e'4, c'4, fs'4, b'4, g'4, a'4, f'4, bf'4, fs'4, af'4, b'4, g'4, e'4]
@@ -784,7 +790,7 @@ def project(l, spec, history = False):
        ^  ^     ^  ^  ^  ^            ^   ^  ^      ^
    '''
 
-   inserts = []
+   inserts = [ ]
 
    if isinstance(l[0], Note):
       # for (0, [2, 4])
@@ -793,22 +799,32 @@ def project(l, spec, history = False):
          for pair in [
             (token[0] + i, token[1][i]) for i in range(len(token[1]))]:
             anchor = l[pair[0] % len(l)]
-            anchor = anchor.__class__(
-               anchor.pitch.number, anchor.duration.n, anchor.duration.d)
+            #anchor = anchor.__class__(
+            #   anchor.pitch.number, anchor.duration.n, anchor.duration.d)
+            anchor = clone.unspan([anchor])[0]
             if hasattr(l[pair[0] % len(l)], 'history'):
-               anchor.history = l[pair[0] % len(l)].history
+               #anchor.history = l[pair[0] % len(l)].history
+               anchor.history['tag'] = l[pair[0] % len(l)].history['tag']
             new = [anchor]
             for index in range(pair[0] + 1, pair[0] + pair[-1] + 1):
                stop = l[(index + 1) % len(l)]
                start = l[index % len(l)]
                interval = stop.pitch.pc - start.pitch.pc
                source = new[-1]
-               newest = source.__class__(
-                  (source.pitch.pc + interval) % 12, 
-                  source.duration.n, source.duration.d)
-               if isinstance(history, basestring):
-                  newest.history = anchor.history + history if \
-                     hasattr(anchor, 'history') else history
+               
+               #newest = source.__class__(
+               #   (source.pitch.pc + interval) % 12, 
+               #   source.duration.n, source.duration.d)
+
+               new_pitch = (source.pitch.pc + interval) % 12
+               newest = Note(new_pitch, source.duration.written)
+
+               #if isinstance(history, basestring):
+               #   newest.history = anchor.history + history if \
+               #      hasattr(anchor, 'history') else history
+               if isinstance(history, str):
+                  newest.history['tag'] = anchor.history['tag'] + history if \
+                     anchor.history.has_key('tag') else history
                new.append(newest)
             inserts.append((pair[0], new))
 
@@ -1644,9 +1660,11 @@ def replace(l, indices, material, action = 'in place'):
       return result  
 
 def adhere(l, action = 'in place'):
-   '''
-   Doc string.
-   '''
+   '''Remove consecutive duplicate values in l.
+
+   >>> l = [1, 1, 2, 3, 3, 3, 9, 4, 4, 4]
+   >>> utilities.adhere(l, action = 'new')
+   [1, 2, 3, 9, 4]'''
 
    result = [l[0]]
 
@@ -1657,7 +1675,7 @@ def adhere(l, action = 'in place'):
    elif isinstance(l[0], Note):
       for element in l[1:]:
          if element.pitch.number != result[-1].pitch.number:
-            result.append(clone.unspan(element))
+            result.append(clone.unspan([element])[0])
    else:
       print 'Must be integer or Note.'
       raise ValueError
@@ -1724,7 +1742,7 @@ def intize(w, action = 'in place'):
    '''
    Map 1.0, 2.0, 3.0, ... to 1, 2, 3, ....
 
-   Leave nonzero floats unchanged.
+   Leave noninteger floats unchanged.
 
    >>> w = [[1.0, 2, 4], [2, 4.0], [2, 4.0, 4.0, 4.5]]
    >>> intize(w)
@@ -1960,40 +1978,42 @@ def emboss(l, s, p, action = 'in place'):
    elif action == 'new':
       return result
 
-def elide(w, action = 'in place'):
-   '''
-   Map 1 to -1.
-   
-   Remove beam isolates.
+## TODO: Remove elide( ). No longer used. Probably old beam code ##
 
-   >>> l = [1, 1, 2, 4]   
-   >>> elide(l)
-   >>> l
-   [-1, -1, 2, 4]
-
-   >>> w = [[1, 2], [1, 1, 2], [2, 4]]
-   >>> elide(w)
-   >>> w
-   [[-1, 2], [-1, -1, 2], [2, 4]]
-   '''
-
-   result = []
-
-   # two-dimensional w
-   if isinstance(w[0], list):
-      for sublist in w:
-         result.append(elide(sublist, action = 'new'))
-   else:
-      for element in w:
-         if element == 1:
-            result.append(-1)
-         else:
-            result.append(element)
-
-   if action == 'in place':
-      w[:] = result
-   elif action == 'new':
-      return result
+#def elide(w, action = 'in place'):
+#   '''
+#   Map 1 to -1.
+#   
+#   Remove beam isolates.
+#
+#   >>> l = [1, 1, 2, 4]   
+#   >>> elide(l)
+#   >>> l
+#   [-1, -1, 2, 4]
+#
+#   >>> w = [[1, 2], [1, 1, 2], [2, 4]]
+#   >>> elide(w)
+#   >>> w
+#   [[-1, 2], [-1, -1, 2], [2, 4]]
+#   '''
+#
+#   result = []
+#
+#   # two-dimensional w
+#   if isinstance(w[0], list):
+#      for sublist in w:
+#         result.append(elide(sublist, action = 'new'))
+#   else:
+#      for element in w:
+#         if element == 1:
+#            result.append(-1)
+#         else:
+#            result.append(element)
+#
+#   if action == 'in place':
+#      w[:] = result
+#   elif action == 'new':
+#      return result
 
 def times(w, n, action = 'in place'):
    '''
@@ -2120,16 +2140,14 @@ def read(l, start, length):
    return result
 
 def positivize(w):
-   '''
-   Turn all negatives positive;
-   leave positives and zeros unchanged.
+   '''Turn all negative numbers positive.
+      Leave nonpositive numbers unchanged.
 
-   >>> w = [[-1, -1, 2, 3, -5], [1, 2, 5, -5, -6]]
-   >>> positivize(w)
-   [[1, 1, 2, 3, 5], [1, 2, 5, 5, 6]]
-   '''
+      >>> w = [[-1, -1, 2, 3, -5], [1, 2, 5, -5, -6]]
+      >>> positivize(w)
+      [[1, 1, 2, 3, 5], [1, 2, 5, 5, 6]]'''
 
-   result = []
+   result = [ ]
 
    if isinstance(w[0], list):
       for sublist in w:
@@ -2171,28 +2189,25 @@ def sieve(pairs, window):
    return result
 
 def pleat(ll, n):
-   '''
-   Return n of each of the l in ll.
+   '''Return n of each of the l in ll.
 
-   >>> pleat([1, 1, 2, 3, 5, 5, 6], 2)
-   [1, 1, 1, 1, 2, 2, 3, 3, 5, 5, 5, 5, 6, 6]
-   '''
+      >>> pleat([1, 1, 2, 3, 5, 5, 6], 2)
+      [1, 1, 1, 1, 2, 2, 3, 3, 5, 5, 5, 5, 6, 6]'''
 
-   result = []
+   result = [ ]
 
    for l in ll:
       result.extend([l] * n)
 
    return result
 
-def smelt(ll):
-   '''
-   Return positive subsequences in the absolute cumulative sums of ll.
 
-   >>> ll = [1, -1, -2, 1, -2, -1, -2, 2, 1, -3, -1, 2, -2, -1, -1]
-   >>> smelt(ll)
-   [[1], [5], [11, 12, 13], [18, 19]]
-   '''
+def smelt(ll):
+   '''Return positive subsequences in the absolute cumulative sums of ll.
+
+      >>> ll = [1, -1, -2, 1, -2, -1, -2, 2, 1, -3, -1, 2, -2, -1, -1]
+      >>> smelt(ll)
+      [[1], [5], [11, 12, 13], [18, 19]]'''
 
    result = clump(ll, action = 'new')
    result = lump(result)
@@ -2203,7 +2218,7 @@ def smelt(ll):
    result = [1 + n for n in result]
    result = listtools.pairwise(result)
 
-   new = []
+   new = [ ]
    if mathtools.sign(first) == 1:
       for i, pair in enumerate(result):
          if i % 2 == 0:
@@ -2217,27 +2232,43 @@ def smelt(ll):
       
    return result
 
-def mapInto(M, n):
-   '''
-   >>> M = [((-39, -13), 0), ((-12, 23), 12), ((24, 48), 24)]
-   >>> [mapInto(M, n) for n in [-30, -18, -6, 6, 18, 30, 42]]
-   [6, 6, 18, 18, 18, 30, 30]
 
-   >>> M = [((-39, -1), 0), ((0, 48), 6)]
-   >>> [mapInto(M, n) for n in [-30, -18, -6, 6, 18, 30, 42]]
-   [6, 6, 6, 6, 6, 6, 6]
-   >>> [mapInto(M, n) for n in [-34, -22, -10, 2, 14, 26, 38]]
-   [2, 2, 2, 14, 14, 14, 14]
-   '''
+def mapInto(M, n):
+   '''>>> M = [((-39, -13), 0), ((-12, 23), 12), ((24, 48), 24)]
+      >>> [mapInto(M, n) for n in [-30, -18, -6, 6, 18, 30, 42]]
+      [6, 6, 18, 18, 18, 30, 30]
+
+      >>> M = [((-39, -1), 0), ((0, 48), 6)]
+      >>> [mapInto(M, n) for n in [-30, -18, -6, 6, 18, 30, 42]]
+      [6, 6, 6, 6, 6, 6, 6]
+      >>> [mapInto(M, n) for n in [-34, -22, -10, 2, 14, 26, 38]]
+      [2, 2, 2, 14, 14, 14, 14]'''
 
    for ((start, stop), offset) in M:
       if n in range(start, stop + 1):
          return [x for x in range(offset, offset + 12) if x % 12 == n % 12][0]
 
+
+## TODO: Deprecate scan( ). Used only in Lidercfeny to iterate leaves. ##
+
 def scan(ll, start = 0, stop = None):
-   '''
-   NOT python-indexed!
-   '''
+   '''Yield successive 1-indexed elements of ll from start to stop.
+      
+      >>> l = [15, 16, 17, 18]
+      >>> g = utilities.scan(l)
+
+      >>> g.next( )
+      (0, 15, None, 16)
+      >>> g.next( )
+      (1, 16, 15, 17)
+      >>> g.next( )
+      (2, 17, 16, 18)
+      >>> g.next( )
+      (3, 18, 17, None)
+      >>> g.next( )
+      Traceback (most recent call last):
+        File <stdin>, line 1, in <module>
+      StopIteration'''
 
    if not stop:
       stop = len(ll) - 1
@@ -2256,6 +2287,7 @@ def scan(ll, start = 0, stop = None):
       else:
          next = ll[i + 1]
       yield (i, cur, prev, next)
+
 
 def constellate(psets, r):
    '''Return outer product of octave transpositions of psets in r.'''
