@@ -1978,43 +1978,6 @@ def emboss(l, s, p, action = 'in place'):
    elif action == 'new':
       return result
 
-## TODO: Remove elide( ). No longer used. Probably old beam code ##
-
-#def elide(w, action = 'in place'):
-#   '''
-#   Map 1 to -1.
-#   
-#   Remove beam isolates.
-#
-#   >>> l = [1, 1, 2, 4]   
-#   >>> elide(l)
-#   >>> l
-#   [-1, -1, 2, 4]
-#
-#   >>> w = [[1, 2], [1, 1, 2], [2, 4]]
-#   >>> elide(w)
-#   >>> w
-#   [[-1, 2], [-1, -1, 2], [2, 4]]
-#   '''
-#
-#   result = []
-#
-#   # two-dimensional w
-#   if isinstance(w[0], list):
-#      for sublist in w:
-#         result.append(elide(sublist, action = 'new'))
-#   else:
-#      for element in w:
-#         if element == 1:
-#            result.append(-1)
-#         else:
-#            result.append(element)
-#
-#   if action == 'in place':
-#      w[:] = result
-#   elif action == 'new':
-#      return result
-
 def times(w, n, action = 'in place'):
    '''
    Multiply sublists or elements of w by n.
