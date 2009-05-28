@@ -12,37 +12,6 @@ import math
 import sys
 
 
-def snip(l, w, position = 0, action = 'in place'):
-   '''
-   Snip elements of l totalling weight w from position.
-
-   >>> l = [1, 1, 2, 3, 5, 5, 1, 2, 5, 5, 6]
-   >>> snip(l, 8, 0)
-   >>> l
-   [4, 5, 1, 2, 5, 5, 6]
-
-   >>> l = [1, 1, 2, 3, 5, 5, 1, 2, 5, 5, 6]
-   >>> snip(l, 13, 4)
-   >>> l
-   [1, 1, 2, 3, 5, 5, 6]
-   '''
-
-   result = l[:position]
-
-   total = 0
-
-   for element in l[position:]:
-      if total >= w:
-         result.append(element)
-      elif total + element > w:
-         result.append(total + element - w)
-      total += element
-
-   if action == 'in place':
-      l[:] = result
-   else:
-      return result
-
 def repeat(l, length = False, times = False, weight = False, 
    remainder = 'chop', action = 'in place'):
    '''
