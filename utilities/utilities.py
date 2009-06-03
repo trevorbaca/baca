@@ -12,86 +12,6 @@ import math
 import sys
 
 
-def repeat(l, length = False, times = False, weight = False, 
-   remainder = 'chop', action = 'in place'):
-   '''
-   >>> l = range(5)
-   >>> repeat(l, length = 11)
-   >>> l
-   [0, 1, 2, 3, 4, 0, 1, 2, 3, 4, 0]
-
-   >>> l = range(5)
-   >>> repeat(l, times = 2)
-   >>> l
-   [0, 1, 2, 3, 4, 0, 1, 2, 3, 4]
-
-   >>> repeat(range(5), times = 2, action = 'new')
-   [0, 1, 2, 3, 4, 0, 1, 2, 3, 4]
-
-   ## DEPRECATED: Do not use repeat( ) on Abjad components ##
-
-   >>> l = [note.Note(n, 1, 4) for n in range(5)]
-   >>> repeat(l, times = 2)
-   >>> l
-   [c'4, cs'4, d'4, ef'4, e'4, c'4, cs'4, d'4, ef'4, e'4]
-   >>> len(l) == len(set(l))
-   True
-
-   >>> l = [5, 5, 5]
-   >>> repeat(l, weight = 23)       
-   >>> l
-   [5, 5, 5, 5, 3]
-
-   >>> l = [5, 5, 5]
-   >>> repeat(l, weight = 23, remainder = 'less')
-   >>> l
-   [5, 5, 5, 5]
-
-   >>> l = [5, 5, 5]
-   >>> repeat(l, weight = 23, remainder = 'more')
-   >>> l
-   [5, 5, 5, 5, 5]
-
-   >>> l = [-5, -5, 5]
-   >>> repeat(l, weight = 23)
-   >>> l
-   [-5, -5, 5, -5, -3]
-   '''
-
-   result = [ ]
-
-   if length:
-      for i in range(length):
-         cur = l[i % len(l)]
-         if isinstance(cur, _Leaf):
-            result.append(clone.unspan(cur))
-         else:
-            assert isinstance(cur, (int, float, Rational))
-            result.append(cur)
-   elif times:
-      for i in range(times):
-         for element in l:
-            result.append(element)
-   elif weight:
-      result.append(l[0])
-      i = 1
-      while listtools.weight(result) < weight:
-         result.append(l[i % len(l)])
-         i += 1
-      if weight < listtools.weight(result):
-         if remainder == 'less':
-            result = result[:-1]
-         elif remainder == 'chop':
-            result = result[:-1] + [mathtools.sign(result[-1]) * \
-               (weight - sum([abs(x) for x in result[:-1]]))]
-         elif remainder == 'more':
-            pass
-
-   if action == 'in place':
-      l[:] = result
-   else:
-      return result
-
 def spot(l, s, positions, action = 'in place'):
    '''
    Increase the elements of l by the elements of s at positions.
@@ -271,9 +191,9 @@ def partition(l, s, overhang = False, cyclic = False,
                result.append(l[-(len(l) % s):])
       elif isinstance(s, list):
          if cyclic == True and overhang == True:
-            repeat(s, weight = len(l))
+            listtools.repeat_to_weight(s, len(l))
          if cyclic == True and overhang == False:
-            repeat(s, weight = len(l), remainder = 'less')
+            listtools.repeat_to_weight(s, len(l), remainder = 'less')
          sliceIndices = mathtools.sums(s)
          sliceIndices = list(listtools.pairwise([0] + sliceIndices))
          result = [l[x[0]:x[-1]] for x in sliceIndices]
@@ -1891,7 +1811,7 @@ def intaglio(l, s, t = 1):
 
    result = [ ]
 
-   result = repeat(s, weight = sum(l), action = 'new')
+   result = listtools.repeat_to_weight(s, sum(l))
    partition(result, l, mode = 'weight', overhang = True)
 
    for i, sublist in enumerate(result):
@@ -1911,7 +1831,7 @@ def emboss(l, s, p, action = 'in place'):
 
    result = []
 
-   result = repeat(s, weight = sum(l), action = 'new')
+   result = listtools.repeat_to_weight(s, sum(l))
    partition(result, l, mode = 'weight', overhang = True)
    corrugate(result)
    partition(result, [len(part) for part in p])

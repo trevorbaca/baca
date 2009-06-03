@@ -1561,7 +1561,7 @@ def stellate(k, s, t, d, b, span ='from duration', rests = True):
    prolation = helianthate(s, 'right', 'right', action = 'new')
    numerators = listtools.increase_cyclic(k, prolation, action = 'new')
    mask = helianthate(t, 'right', 'right', action = 'new')
-   repeat(mask, weight = listtools.weight(numerators))
+   mask = listtools.repeat_to_weight(mask, listtools.weight(numerators))
    corrugate(mask)
    signatures = partition(
       mask, numerators, mode = 'weight', overhang = 'true', action = 'new')
