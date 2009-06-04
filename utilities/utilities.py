@@ -12,38 +12,6 @@ import math
 import sys
 
 
-def brush(l, s, interval, offset = 0, action = 'in place'):
-   '''
-   Increase the elements of l by the elements of s at interval.
-
-   >>> l = [1, 1, 2, 3, 5, 5, 1, 2, 5, 5, 6]
-   >>> utilities.brush(l, (0.5, 0.5), 4, offset = 2)
-   >>> l
-   [1, 1, 2.5, 3.5, 5, 5, 1.5, 2.5, 5, 5, 6.5]
-   '''
-
-   # no overlaps
-   assert interval >= len(s)
-
-   result = l[:]
-
-   size = len(s)
-   next = offset
-   j = 0
-
-   for i, element in enumerate(l):
-      if i >= next:
-         result[i] += s[j]
-         j += 1
-         if j == len(s):
-            next += interval
-            j = 0
-
-   if action == 'in place':
-      l[:] = result
-   else:
-      return result
-
 def overwrite(l, source, positions, mode = 'length', action = 'in place'):
    '''
    Overwrite elements in l with sublists in source;
