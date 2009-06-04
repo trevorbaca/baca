@@ -3,7 +3,7 @@
 import os
 import sys
 
-base = 'grep -Irn "%s" /Users/trevorbaca/Documents/work/%s/* | grep -v svn'
+base = 'grep -Irn "%s" /Users/trevorbaca/Documents/work/%s/* | grep -v svn | grep -v crito-1 | grep -v crito-2'
 
 os.system('clear')
 
