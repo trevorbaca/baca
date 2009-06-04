@@ -62,17 +62,6 @@ def picket(l, ins, overhang = (0, 0)):
 
    return result
 
-def outer(lists):
-   '''Return outer product of lists in lists.'''
-
-   def helper(list1, list2):
-      result = []
-      for l1 in list1:
-         for l2 in list2:
-            result.extend([l1 + [l2]])
-      return result
-   lists[0] = [[x] for x in lists[0]]
-   return reduce(helper, lists)
 
 def segment(l, s, cycle = 'knife', action = 'in place'):
    '''
@@ -172,6 +161,7 @@ def segment(l, s, cycle = 'knife', action = 'in place'):
    else:
       return result
 
+
 def bunch(l, s, cycle = True, action = 'in place'):
    '''
    Segment l into sublists of weights not greater than s.
@@ -202,6 +192,7 @@ def bunch(l, s, cycle = True, action = 'in place'):
       l[:] = result
    else:
       return result
+
 
 def circumrotate(l, outer, inner):
    '''
@@ -241,6 +232,7 @@ def circumrotate(l, outer, inner):
       print 'Unknown direction %s.' % outer
       raise ValueError
 
+
 def cycle(outer, inner, l, flattened = True):
    '''
    cycle('right', 'right', [[4, 5, 5], [5, 6], [3, 4, 5]])
@@ -257,6 +249,7 @@ def cycle(outer, inner, l, flattened = True):
             return result
       else:
          result.append(next)
+
 
 def helianthate(l, outer, inner, action = 'in place', flattened = True):
    '''
@@ -321,6 +314,7 @@ def helianthate(l, outer, inner, action = 'in place', flattened = True):
    else:
       return result
 
+
 def draw(l, pairs, history = False):
    '''In-line repetition, in-place.
 
@@ -373,6 +367,7 @@ def draw(l, pairs, history = False):
 
    for insert in reversed(sorted(inserts)):
       l[insert[0]:insert[0]] = clone.unspan(insert[1], reps)
+
 
 def project(l, spec, history = False):
    '''
@@ -449,6 +444,7 @@ def project(l, spec, history = False):
    for insert in reversed(sorted(inserts)):
       l[insert[0] : insert[0] + 1] = insert[-1]
       
+
 def piles(ll):
    '''
    Return the cumulative sums of the absolute values of the l in ll.
@@ -465,6 +461,7 @@ def piles(ll):
 
    return result
 
+
 def smear(l, s):
    '''
    Repeatedly overwrite elements in l according to s.
@@ -480,6 +477,7 @@ def smear(l, s):
    for pair in s:
       for i in range(pair[0], pair[0] + pair[1]):
          l[i] = cp[pair[0]]
+
 
 def ripple(l, s):
    '''
@@ -508,6 +506,7 @@ def ripple(l, s):
    
    return result
    
+
 def flip(l, s, action = 'in place'):
    '''
    Flip elements in sublists of w according to directives cyclically in s.
@@ -552,6 +551,7 @@ def flip(l, s, action = 'in place'):
       l[:] = result
    else:
       return result
+
 
 def flipHelper(l, part, n, d):
    '''
@@ -640,6 +640,7 @@ def flipHelper(l, part, n, d):
             
    return l    
 
+
 def plough(w, s, cur = 0, action = 'in place'):
    '''
    Cyclically negate elements in w according to s.
@@ -676,6 +677,7 @@ def plough(w, s, cur = 0, action = 'in place'):
    elif action == 'recurse':
       return cur, result
 
+
 def rout(w, s, cur = 0, recurse = False):
    '''
    Cyclically turn elements in w absolutely negative according to s;
@@ -709,6 +711,7 @@ def rout(w, s, cur = 0, recurse = False):
    else:
       return result
 
+
 def braid(*lists):
    '''
    >>> braid(range(5), range(10, 15))
@@ -733,6 +736,7 @@ def braid(*lists):
 
    return fr
 
+
 def stack(l, n, until = 'under'):
    if len(l) >= n:
       return l
@@ -744,6 +748,7 @@ def stack(l, n, until = 'under'):
          reps = int(math.ceil(reps))
       return l * reps
          
+
 def untie(expr, signs = 'all positive'):
    '''
    TODO: deprecate unfive(); will require a direction input parameter here.
@@ -831,6 +836,7 @@ def untie(expr, signs = 'all positive'):
       #   return result
       return result
 
+
 def unfive(l, target = 'negative', action = 'in place'):
    '''
    TODO - fully implement target, including 'both' value.
@@ -911,6 +917,7 @@ def unfive(l, target = 'negative', action = 'in place'):
    else:
       return result
 
+
 def convolve(l, s, action = 'in place'):
    '''
    Add elements in s to the first and last positions of corresponding elements in l.
@@ -957,6 +964,7 @@ def convolve(l, s, action = 'in place'):
       l[:] = result
    else:
       return result
+
 
 def caulk(l, s, action = 'in place'):
    '''
@@ -1009,6 +1017,7 @@ def caulk(l, s, action = 'in place'):
    else:
       return result
 
+
 def glob(l, s, action = 'in place'):
    '''
    >>> glob([[1, 2, 3], [4, 5], [6, 7, 8, 9]], (1, 1, 1))
@@ -1033,6 +1042,7 @@ def glob(l, s, action = 'in place'):
       l[:] = result
    else:
       return result
+
 
 # TODO merge flamingo() and negate()
 def flamingo(l, s, period = False, action = 'in place'):
@@ -1063,6 +1073,7 @@ def flamingo(l, s, period = False, action = 'in place'):
       l[:] = result
    else:
       return result
+
 
 def negate(l, s, action = 'in place'):
    '''
@@ -1112,6 +1123,7 @@ def negate(l, s, action = 'in place'):
       l[:] = result
    else:
       return result
+
 
 def permute(l, s, action = 'in place'):
    '''
@@ -1835,7 +1847,8 @@ def scan(ll, start = 0, stop = None):
 def constellate(psets, r):
    '''Return outer product of octave transpositions of psets in r.'''
 
-   result = outer([pitchtools.octave_transpositions(pset, r) for pset in psets])
+   transpositions = [pitchtools.octave_transposition(pset, r) for pset in psets]
+   result = listtools.outer_product(transpositions)
    #[listtools.flatten(x) for x in result]
    for i, part in enumerate(result):
       result[i] = listtools.flatten(part)
