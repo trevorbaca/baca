@@ -1155,6 +1155,7 @@ def permute(l, s, action = 'in place'):
    else:
       return result 
       
+
 def ones(l, action = 'in place'):
    '''
    >>> l = range(1, 5)
@@ -1178,6 +1179,7 @@ def ones(l, action = 'in place'):
    else:
       return result
 
+
 def within(i, indices):
    '''
    Returns True if i in indices token, and False otherwise.
@@ -1199,6 +1201,7 @@ def within(i, indices):
       return i % indices[-1] in indices[0]
    else:
       return i in indices  
+
 
 def pick(i, token):
    '''
@@ -1230,6 +1233,7 @@ def pick(i, token):
          return material[i]
       except:
          return None
+
 
 def replace(l, indices, material, action = 'in place'):
    '''
@@ -1274,6 +1278,7 @@ def replace(l, indices, material, action = 'in place'):
    else:
       return result  
 
+
 def permIter(seq):
    '''
    Given some sequence 'seq', returns an iterator that gives
@@ -1292,6 +1297,7 @@ def permIter(seq):
       for rest in rest_iter:
          yield(element_slice + rest)
    raise StopIteration
+
 
 def series(start = 0, step = 0, offsets = [0], max = sys.maxint):
    '''
@@ -1327,6 +1333,7 @@ def series(start = 0, step = 0, offsets = [0], max = sys.maxint):
 
    raise StopIteration
 
+
 def intize(w, action = 'in place'):
    '''
    Map 1.0, 2.0, 3.0, ... to 1, 2, 3, ....
@@ -1355,6 +1362,7 @@ def intize(w, action = 'in place'):
       w[:] = result
    else:
       return result
+
 
 def resegment(w, s, max = False, overhang = True):
    '''
@@ -1444,6 +1452,7 @@ def stripe(w, s, action = 'in place'):
    else:
       return result
 
+
 def corrugate(w, target = 'positives', action = 'in place'):
    '''
    Replace positive integers with 1-sequences;
@@ -1498,6 +1507,7 @@ def corrugate(w, target = 'positives', action = 'in place'):
    elif action == 'new':
       return result
 
+
 def intaglio(l, s, t = 1):
    '''
    Repeat s and weight-partition according to l.
@@ -1546,6 +1556,7 @@ def intaglio(l, s, t = 1):
 
    return result
 
+
 def emboss(l, s, p, action = 'in place'):
    '''   
    Corrugate elements of l;
@@ -1567,6 +1578,7 @@ def emboss(l, s, p, action = 'in place'):
       l[:] = result
    elif action == 'new':
       return result
+
 
 def times(w, n, action = 'in place'):
    '''
@@ -1590,6 +1602,7 @@ def times(w, n, action = 'in place'):
       w[:] = result
    elif action == 'new':
       return result
+
 
 def clump(w, action = 'in place'):
    '''
@@ -1624,6 +1637,7 @@ def clump(w, action = 'in place'):
    elif action == 'new':
       return result
 
+
 def lump(w):
    '''
    Add together runs of positive numbers.
@@ -1653,6 +1667,7 @@ def lump(w):
 
    return result
 
+
 def recombine(target, s, insert, t, loci):
    '''
    Partition target list cyclically according to s;
@@ -1679,6 +1694,7 @@ def recombine(target, s, insert, t, loci):
 
    return result
 
+
 def read(l, start, length):
    '''
    >>> l = [1, 1, 2, 3, 5, 5, 6]
@@ -1693,6 +1709,7 @@ def read(l, start, length):
       result.append(l[i % m])
 
    return result
+
 
 def positivize(w):
    '''Turn all negative numbers positive.
@@ -1715,6 +1732,7 @@ def positivize(w):
             result.append(x)
 
    return result
+
 
 def sieve(pairs, window):
    '''
@@ -1742,6 +1760,7 @@ def sieve(pairs, window):
             break
 
    return result
+
 
 def pleat(ll, n):
    '''Return n of each of the l in ll.
