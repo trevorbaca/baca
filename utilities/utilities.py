@@ -12,31 +12,6 @@ import math
 import sys
 
 
-def spot(l, s, positions, action = 'in place'):
-   '''
-   Increase the elements of l by the elements of s at positions.
-
-   >>> l = [1, 1, 2, 3, 5, 5, 1, 2, 5, 5, 6]
-   >>> spot(l, (0.5, 0.5), (0, 4, 8))
-   >>> l
-   [1.5, 1.5, 2, 3, 5.5, 5.5, 1, 2, 5.5, 5.5, 6]
-   '''
-
-   # assert no overlaps
-   tmp = listtools.flatten([range(p, len(s)) for p in positions])
-   assert len(tmp) == len(set(tmp))
-
-   result = l[:]
-
-   for p in positions:
-      for i in range(len(s)):
-         result[p + i] += s[i]
-
-   if action == 'in place':
-      l[:] = result
-   else:
-      return result
-      
 def brush(l, s, interval, offset = 0, action = 'in place'):
    '''
    Increase the elements of l by the elements of s at interval.
