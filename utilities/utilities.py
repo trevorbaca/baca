@@ -112,174 +112,6 @@ def overwrite(l, source, positions, mode = 'length', action = 'in place'):
    else:
       return result
 
-#def partition(l, s, overhang = False, cyclic = False, 
-#   mode = 'length', action = 'in place'):
-#   '''
-#   TODO: set overhang = True and cyclic = True by default.
-#
-#   >>> l = range(10)
-#   >>> partition(l, 3) 
-#   >>> l
-#   [[0, 1, 2], [3, 4, 5], [6, 7, 8]]
-#
-#   >>> l = range(10)
-#   >>> partition(l, 3, overhang = True)
-#   >>> l
-#   [[0, 1, 2], [3, 4, 5], [6, 7, 8], [9]]
-#
-#   >>> l = range(20)
-#   >>> partition(l, [4, 2])
-#   >>> l
-#   [[0, 1, 2, 3], [4, 5]]
-#
-#   >>> l = range(20)
-#   >>> partition(l, [4, 2], cyclic = True)
-#   >>> l
-#   [[0, 1, 2, 3], [4, 5], [6, 7, 8, 9], [10, 11], [12, 13, 14, 15], [16, 17]]
-#
-#   >>> l = range(20)
-#   >>> partition(l, [4, 2], cyclic = True, overhang = True)
-#   >>> l
-#   [[0, 1, 2, 3], [4, 5], [6, 7, 8, 9], [10, 11], [12, 13, 14, 15], [16, 17], [18, 19]]
-#
-#   >>> l = range(10)
-#   >>> partition(l, (1, 1))
-#   >>> l
-#   [[0, 1, 2, 3, 4], [5, 6, 7, 8, 9]]
-#
-#   >>> l = range(10)
-#   >>> partition(l, (1, 4))
-#   >>> l
-#   [[0, 1], [2, 3, 4, 5, 6, 7, 8, 9]]
-#
-#   >>> l = [20, 20] 
-#   >>> partition(l, 15, mode = 'weight')
-#   >>> l
-#   [[15], [5, 10]]
-#
-#   >>> l = [20, 20]
-#   >>> partition(l, 15, mode = 'weight', overhang = True)
-#   >>> l
-#   [[15], [5, 10], [10]]
-#
-#   >>> l = [20, 20]
-#   >>> partition(l, [7, 15], mode = 'weight')                 
-#   >>> l
-#   [[7], [13, 2]]
-#
-#   >>> l = [20, 20]
-#   >>> partition(l, [7, 15], mode = 'weight', cyclic = True)
-#   >>> l
-#   [[7], [13, 2], [7]]
-#
-#   >>> l = [20, 20]
-#   >>> partition(l, [7, 15], mode = 'weight', cyclic = True, overhang = True)
-#   >>> l
-#   [[7], [13, 2], [7], [11]]
-#
-#   >>> partition(l, [7, 15], mode = 'weight', cyclic = True, overhang = True)
-#   >>> l
-#   [[7], [13, -2], [-7], [-11]]
-#   '''
-#
-#   if mode == 'length':
-#      if isinstance(s, int):
-#         result = [list(element) 
-#            for element in zip(*[l[x::s] for x in range(s)])]
-#         if overhang:
-#            if len(l) % s != 0:
-#               result.append(l[-(len(l) % s):])
-#      elif isinstance(s, list):
-#         if cyclic == True and overhang == True:
-#            listtools.repeat_to_weight(s, len(l))
-#         if cyclic == True and overhang == False:
-#            listtools.repeat_to_weight(s, len(l), remainder = 'less')
-#         sliceIndices = mathtools.sums(s)
-#         sliceIndices = list(listtools.pairwise([0] + sliceIndices))
-#         result = [l[x[0]:x[-1]] for x in sliceIndices]
-#      else:
-#         print 'Unknown directive %s.' % s
-#         raise ValueError
-#
-#   elif mode == 'weight':
-#      result = [[]]
-#      if isinstance(s, int):
-#         for element in l:
-#            result[-1].append(element)
-#            while s <= listtools.weight(result[-1]):
-#               total = listtools.weight(result[-1])
-#               if total == s:
-#                  result.append([])
-#               else:
-#                  d = mathtools.sign(result[-1][-1])
-#                  next = total - s
-#                  last = abs(result[-1][-1]) - next
-#                  result[-1][-1] = last * d
-#                  result.append([next * d])
-#         if result[-1] == []:
-#            result = result[:-1]
-#         if sum(result[-1]) < s and not overhang:
-#            result = result[:-1]
-#      elif isinstance(s, list):
-#         i = 0
-#         result = [[]]
-#         for element in l:
-#            result[-1].append(element)
-#            while s[i % len(s)] <= listtools.weight(result[-1]):
-#               total = listtools.weight(result[-1])
-#               if total == s[i % len(s)]:
-#                  result.append([])
-#               else:
-#                  d = mathtools.sign(result[-1][-1])
-#                  next = total - s[i % len(s)]
-#                  last = abs(result[-1][-1]) - next
-#                  result[-1][-1] = last * d
-#                  result.append([next * d])
-#               i += 1
-#         if result[-1] == []:
-#            result = result[:-1]
-#         if sum(result[-1]) < s and not overhang:
-#            result = result[:-1]
-#         if not cyclic and len(result) > len(s):
-#            result = result[:len(s)]
-#      else:
-#         print 'Unknown s directive %s.' % s
-#         raise ValueError
-#
-#   else:
-#      print 'Unkown mode %s.' % mode
-#      raise ValueError
-#   
-#   if action == 'in place':
-#      l[:] = result
-#   else:
-#      return result
-#
-#def cpartition(l, s, mode = 'length', action = 'in place'):
-#   '''
-#   Facade around partition().
-#
-#   Replace once cyclic and overhang default to True in partition().
-#   '''
-#
-#   result = partition(l, s, cyclic = True, overhang = True, 
-#      mode = mode, action = 'new')
-#
-#   if action == 'in place':
-#      l[:] = result
-#   elif action == 'new':
-#      return result
-
-def chunk(ll, s, overhang = True, cyclic = True):
-   '''
-   Partition ll by weight according to s.
-
-   TODO: move code from partition to chunk.
-   '''
-
-   return partition(ll, s, mode = 'weight', 
-      overhang = overhang, cyclic = cyclic, action = 'new')
-
 def ratio(n, s):
    '''
    >>> ratio(10, (1, 1))
@@ -561,7 +393,7 @@ def helianthate(l, outer, inner, action = 'in place', flattened = True):
    [1, 2, 3, 4, 5, 6, 7, 8, 5, 4, 8, 6, 7, 3, 1, 2, 7, 8, 6, 2, 3, 1, 4, 5]
 
    >>> l = [note.Note(n, 1, 4) for n in range(1, 9)]
-   >>> partition(l, [3, 2, 3])
+   >>> l = listtools.partition_by_counts(l, [3, 2, 3])
    >>> helianthate(l, 'left', 'right')  
    >>> l[:24]
    >>> l[:18]
@@ -1812,7 +1644,7 @@ def intaglio(l, s, t = 1):
    result = [ ]
 
    result = listtools.repeat_to_weight(s, sum(l))
-   partition(result, l, mode = 'weight', overhang = True)
+   result = listtools.partition_by_weights(result, l, overhang = True)
 
    for i, sublist in enumerate(result):
       if listtools.weight(sublist) <= t:
@@ -1832,9 +1664,10 @@ def emboss(l, s, p, action = 'in place'):
    result = []
 
    result = listtools.repeat_to_weight(s, sum(l))
-   partition(result, l, mode = 'weight', overhang = True)
+   result = listtools.partition_by_weights(result, l, overhang = True)
    corrugate(result)
-   partition(result, [len(part) for part in p])
+   part_lengths = [len(part) for part in p]
+   result = listtools.partition_by_counts(result, part_lengths)
 
    if action == 'in place':
       l[:] = result
@@ -1940,11 +1773,13 @@ def recombine(target, s, insert, t, loci):
    [9, 9, 2, 3, 4, 5, 9, 9, 8, 9, 9, 9, 9, 9, 9, 9]
    '''
 
-   a = partition(target, s, cyclic = True, overhang = True, action = 'new')
-   b = partition(insert, t, cyclic = True, overhang = True, action = 'new')
+   a = listtools.partition_by_counts(
+      target, [s], cyclic = True, overhang = True)
+   b = listtools.partition_by_counts(
+      insert, [t], cyclic = True, overhang = True)
    replace(a, loci, b)
    
-   result = []
+   result = [ ]
    for sublist in a:
       result.extend(sublist)
 
