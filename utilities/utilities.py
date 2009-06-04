@@ -12,30 +12,7 @@ import math
 import sys
 
 
-def ratio(n, s):
-   '''
-   >>> ratio(10, (1, 1))
-   [5, 5]
-
-   >>> ratio(10, (1, 2))
-   [3, 7]
-
-   >>> ratio(10, (3, 1))
-   [8, 2]
-
-   >>> ratio(10, (3, 2))
-   [6, 4]
-   '''
-
-   result = [0]
-
-   for element in mathtools.sums([float(n) * x / sum(s) for x in s]):
-      result.append(int(round(element)) - sum(result))   
-   result = result[1:]
-
-   return result
-
-def sectionalize(n, r):
+def sectionalize(n, ratio):
    '''
    >>> sectionalize(20, (1, 1, 1))
    [6, 1, 6, 1, 6]
@@ -47,7 +24,12 @@ def sectionalize(n, r):
    [24, 1, 24, 1, 47]
    '''
 
-   return picket(ratio(n - (len(r) - 1), r), [1])
+   #return picket(ratio(n - (len(r) - 1), r), [1])
+
+   parts = mathtools.integer_partition_by_ratio(n - (len(ratio) - 1), ratio)
+   result = picket(parts, [1])
+   return result
+
 
 def picket(l, ins, overhang = (0, 0)):
    '''
