@@ -12,49 +12,6 @@ import math
 import sys
 
 
-def overwrite(l, source, positions, mode = 'length', action = 'in place'):
-   '''
-   Overwrite elements in l with sublists in source;
-   read source cyclically; 
-   read positions only once.
-
-   >>> l = [1, 1, 2, 3, 5, 5, 1, 2, 5, 5, 6]
-   >>> overwrite(l, [(6, 6)], [4, 8])
-   >>> l
-   [1, 1, 2, 3, 6, 6, 1, 2, 6, 6, 6]
-
-   >>> l = [1, 1, 2, 3, 5, 5, 1, 2, 5, 5, 6]
-   >>> overwrite(l, [(2, 2, 2)], [0, 6], mode = 'weight')
-   >>> l
-   [2, 2, 2, 1, 5, 5, 2, 2, 2, 2, 5, 6]
-   '''
-
-   assert positions == sorted(positions)
-
-   result = l[:]
-
-   s = 0
-
-   if mode == 'length':
-      for p in positions:
-         cur = source[s % len(source)]
-         result[p:p + len(cur)] = cur[:]
-         s += 1
-   elif mode == 'weight':
-      for p in reversed(positions):
-         cur = source[(len(positions) - 1 - s) % len(source)]
-         snip(result, sum(cur), p)
-         result[p:p] = cur[:]
-         s += 1
-   else:
-      print 'Unknown overwrite mode %s.' % mode
-      raise ValueError
-
-   if action == 'in place':
-      l[:] = result
-   else:
-      return result
-
 def ratio(n, s):
    '''
    >>> ratio(10, (1, 1))
