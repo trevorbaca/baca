@@ -12,6 +12,12 @@ Functions migrated from baca/utilities.py to Abjad:
    listtools.partition_by_weights(l, counts, overhang = False, cyclic = False)
 
 
+   utilities.scan(l)
+   ==>
+   for i, leaf in enumerate(l)
+   next, prev, = leaf.next, leaf.prev 
+
+
    utilities.snip(l, weight, i) 
    ==> 
    listtools.remove_weighted_subrun_at(l, weight, i)
@@ -20,3 +26,4 @@ Functions migrated from baca/utilities.py to Abjad:
    utilities.spot(l, s, positions, action = 'in place')
    ==>
    listtools.increase_at_indices(l, addenda, indices)
+

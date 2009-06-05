@@ -1823,46 +1823,6 @@ def mapInto(M, n):
          return [x for x in range(offset, offset + 12) if x % 12 == n % 12][0]
 
 
-## TODO: Deprecate scan( ). Used only in Lidercfeny to iterate leaves. ##
-
-def scan(ll, start = 0, stop = None):
-   '''Yield successive 1-indexed elements of ll from start to stop.
-      
-      >>> l = [15, 16, 17, 18]
-      >>> g = utilities.scan(l)
-
-      >>> g.next( )
-      (0, 15, None, 16)
-      >>> g.next( )
-      (1, 16, 15, 17)
-      >>> g.next( )
-      (2, 17, 16, 18)
-      >>> g.next( )
-      (3, 18, 17, None)
-      >>> g.next( )
-      Traceback (most recent call last):
-        File <stdin>, line 1, in <module>
-      StopIteration'''
-
-   if not stop:
-      stop = len(ll) - 1
-
-   for i in range(start, stop + 1):
-      if i - 1 < 0 or i - 1 > len(ll) - 1:
-         prev = None
-      else:
-         prev = ll[i - 1]
-      if i < 0 or i > len(ll) - 1:
-         cur = None
-      else:
-         cur = ll[i]
-      if i + 1 < 0 or i + 1 > len(ll) - 1:
-         next = None
-      else:
-         next = ll[i + 1]
-      yield (i, cur, prev, next)
-
-
 def constellate(psets, r):
    '''Return outer product of octave transpositions of psets in r.'''
 
