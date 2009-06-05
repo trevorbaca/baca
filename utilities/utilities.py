@@ -1810,7 +1810,8 @@ def smelt(ll):
 def constellate(psets, r):
    '''Return outer product of octave transpositions of psets in r.'''
 
-   transpositions = [pitchtools.octave_transposition(pset, r) for pset in psets]
+   transpositions = [
+      pitchtools.octave_transpositions(pset, r) for pset in psets]
    result = listtools.outer_product(transpositions)
    #[listtools.flatten(x) for x in result]
    for i, part in enumerate(result):

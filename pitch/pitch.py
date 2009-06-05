@@ -1,4 +1,3 @@
-from baca.utilities.utilities import constellate
 from baca.utilities import utilities
 
 
@@ -6,7 +5,7 @@ from baca.utilities import utilities
    an (unordered) set because lists are not hashable.'''
 
 C = [
-      constellate(p, [-39, 48]) for p in [ 
+      utilities.constellate(p, [-39, 48]) for p in [ 
          [[-12, -10, 4], [-2, 8, 11, 17], [19, 27, 30, 33, 37]],
          [[-12, -10, -2], [4, 11, 27, 33, 37], [8, 17, 19, 30]],
          [[-8, 2, 15, 25], [-1, 20, 29, 31], [0, 10, 21, 42]],
@@ -20,7 +19,7 @@ C = [
 
 
 D = [
-      constellate(p, [0, 37]) for p in [
+      utilities.constellate(p, [0, 37]) for p in [
          [[0, 2, 10], [16, 19, 20], [23, 30, 33], [27, 29, 37]],
          [[4, 8, 11], [7, 15, 17], [18, 21, 24], [25, 26, 34]],
          [[6, 9, 13], [12, 14, 22], [19, 27, 29], [28, 32, 35]]
