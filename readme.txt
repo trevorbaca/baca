@@ -6,6 +6,11 @@ Functions migrated from baca/utilities.py to Abjad:
    listtools.partition_by_weights(l, s, overhang = overhang, cyclic = cyclic)
 
 
+   utilities.mapInto(M, n)
+   ==>
+   pitchtools.send_pitch_number_to_octave(pitch_number, mapping)
+
+
    utilities.partition(l, s, mode = 'length', overhang = False, cyclic = False)
    ==>
    listtools.partition_by_counts(l, counts, overhang = False, cyclic = False)

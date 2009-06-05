@@ -1807,22 +1807,6 @@ def smelt(ll):
    return result
 
 
-def mapInto(M, n):
-   '''>>> M = [((-39, -13), 0), ((-12, 23), 12), ((24, 48), 24)]
-      >>> [mapInto(M, n) for n in [-30, -18, -6, 6, 18, 30, 42]]
-      [6, 6, 18, 18, 18, 30, 30]
-
-      >>> M = [((-39, -1), 0), ((0, 48), 6)]
-      >>> [mapInto(M, n) for n in [-30, -18, -6, 6, 18, 30, 42]]
-      [6, 6, 6, 6, 6, 6, 6]
-      >>> [mapInto(M, n) for n in [-34, -22, -10, 2, 14, 26, 38]]
-      [2, 2, 2, 14, 14, 14, 14]'''
-
-   for ((start, stop), offset) in M:
-      if n in range(start, stop + 1):
-         return [x for x in range(offset, offset + 12) if x % 12 == n % 12][0]
-
-
 def constellate(psets, r):
    '''Return outer product of octave transpositions of psets in r.'''
 
