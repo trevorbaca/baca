@@ -15,6 +15,7 @@ for key, value in utilities.__dict__.items( ):
 from flip import flip
 from intaglio import intaglio
 from sectionalize import sectionalize
+from segment import segment
 from resegment import resegment
 
 del key
