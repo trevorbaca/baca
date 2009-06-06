@@ -12,6 +12,7 @@ for key, value in utilities.__dict__.items( ):
    if isinstance(value, types.FunctionType):
       locals( )[key] = value
 
+from flip.flip import flip
 from sectionalize.sectionalize import sectionalize
 
 del key
