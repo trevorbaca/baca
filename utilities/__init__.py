@@ -12,7 +12,7 @@ for key, value in utilities.__dict__.items( ):
    if isinstance(value, types.FunctionType):
       locals( )[key] = value
 
-from sectionalize import sectionalize
+from sectionalize.sectionalize import sectionalize
 
 del key
 del types
