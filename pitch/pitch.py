@@ -1,4 +1,4 @@
-from baca.utilities import utilities
+from baca import utilities
 
 
 '''Each constellation must be an (ordered) list rather than
