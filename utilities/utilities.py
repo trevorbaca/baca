@@ -162,21 +162,17 @@ def circumrotate(l, outer, inner):
    if outer == 'right':
       if inner == 'right':
          return listtools.rotate(
-            [listtools.rotate(x, 'right', action = 'new') for x in l], 
-            'right', action = 'new')
+            [listtools.rotate(x, 'right') for x in l], 'right')
       elif inner == 'left':
          return listtools.rotate(
-            [listtools.rotate(x, 'left', action = 'new') for x in l], 
-            'right', action = 'new')
+            [listtools.rotate(x, 'left') for x in l], 'right')
    elif outer == 'left':
       if inner == 'right':
          return listtools.rotate(
-            [listtools.rotate(x, 'right', action = 'new') for x in l], 
-            'left', action = 'new')
+            [listtools.rotate(x, 'right') for x in l], 'left')
       elif inner == 'left':
          return listtools.rotate(
-            [listtools.rotate(x, 'left', action = 'new') for x in l], 
-            'left', action = 'new')
+            [listtools.rotate(x, 'left') for x in l], 'left')
    else:
       print 'Unknown direction %s.' % outer
       raise ValueError
