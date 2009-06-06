@@ -523,18 +523,6 @@ def rout(w, s, cur = 0, recurse = False):
       return result
 
 
-def stack(l, n, until = 'under'):
-   if len(l) >= n:
-      return l
-   else:
-      reps = float(n) / len(l)
-      if until == 'under':
-         reps = int(math.floor(reps))
-      else:
-         reps = int(math.ceil(reps))
-      return l * reps
-         
-
 def untie(expr, signs = 'all positive'):
    '''
    TODO: deprecate unfive(); will require a direction input parameter here.
