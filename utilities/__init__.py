@@ -12,8 +12,10 @@ for key, value in utilities.__dict__.items( ):
    if isinstance(value, types.FunctionType):
       locals( )[key] = value
 
-from flip.flip import flip
-from sectionalize.sectionalize import sectionalize
+from flip import flip
+from intaglio import intaglio
+from sectionalize import sectionalize
+from resegment import resegment
 
 del key
 del types
