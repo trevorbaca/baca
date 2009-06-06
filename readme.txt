@@ -6,6 +6,11 @@ Functions migrated from baca/utilities.py to Abjad:
    listtools.partition_by_weights(l, s, overhang = overhang, cyclic = cyclic)
 
 
+   utilities.flamingo(l, s, period = None)
+   ==>
+   listtools.negate_elements_at_indices(l, indices, period = None)
+
+
    utilities.mapInto(M, n)
    ==>
    pitchtools.send_pitch_number_to_octave(pitch_number, mapping)

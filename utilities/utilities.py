@@ -834,37 +834,6 @@ def glob(l, s, action = 'in place'):
       return result
 
 
-# TODO merge flamingo() and negate()
-def flamingo(l, s, period = False, action = 'in place'):
-   '''
-   Negate elements in l at indices in s.
-
-   >>> s = [0, 1, 2]
-   >>> l = range(10)
-   >>> flamingo(l, s)
-   >>> l
-   [0, -1, -2, 3, 4, 5, 6, 7, 8, 9]
-
-   >>> l = range(10)
-   >>> flamingo(l, s, period = 5)
-   >>> l
-   [0, -1, -2, 3, 4, -5, -6, -7, 8, 9]
-   '''
-
-   result = []
-
-   for i, element in enumerate(l):  
-      if (i in s) or (period and i % period in s):
-         result.append(-element)
-      else:
-         result.append(element)
-
-   if action == 'in place':
-      l[:] = result
-   else:
-      return result
-
-
 def negate(l, s, action = 'in place'):
    '''
    Cyclically negate 1-element sublists in l according to s.
