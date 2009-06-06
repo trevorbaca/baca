@@ -1,4 +1,5 @@
 from abjad import *
+from abjad.leaf.leaf import _Leaf
 
 
 def beamRunsByDuration(
@@ -51,7 +52,7 @@ def beamRunsByDuration(
    }
    '''
 
-   from music import instances, partitionLeavesByDurations
+   from baca import music
 
 #   print m
 #   print b
@@ -64,7 +65,10 @@ def beamRunsByDuration(
    #import pdb
    #pdb.set_trace( )
 
-   runs = partitionLeavesByDurations(instances(m, '_Leaf'), b)
+   runs = music.partitionLeavesByDurations(
+      list(iterate.naive(m, _Leaf)), 
+      b)
+
    for run in runs:
       applyBeamSpanners(run, lone) # ok
       setBeamCountsForRun(run, rip = rip, lone = lone) # bad
@@ -138,36 +142,36 @@ def _setBeamCountsForFirstLeafInRun(l, rip = True):
    if l.beam.spanned:
       if l.beam.only:
          if rip:
-            l.beam.counts = 0, l.beam._flags
+            l.beam.counts = 0, l.duration._flags
       else:
-         l.beam.counts = 0, l.beam._flags
+         l.beam.counts = 0, l.duration._flags
 
 
 def _setBeamCountsForMiddleLeafInRun(l, rip = True):
    if l.beam.spanned:
       if l.beam.only:
          if rip:
-            l.beam.counts = l.beam._flags, l.beam._flags
+            l.beam.counts = l.duration._flags, l.duration._flags
       elif l.beam.first:
-         l.beam.counts = 0, l.beam._flags
+         l.beam.counts = 0, l.duration._flags
       elif l.beam.last:
-         l.beam.counts = l.beam._flags, 0
+         l.beam.counts = l.duration._flags, 0
       else:
          if l.prev:
-            prev = l.prev.beam._flags
+            prev = l.prev.duration._flags
          else:
             prev = 0
          if l.next:
-            next = l.next.beam._flags
+            next = l.next.duration._flags
          else:
             next = 0
-         #print l, prev, l.beam._flags, next,
-         left = min(l.beam._flags, prev)
-         right = min(l.beam._flags, next)
-         if l.beam._flags == left or l.beam._flags == right:
+         #print l, prev, l.duration._flags, next,
+         left = min(l.duration._flags, prev)
+         right = min(l.duration._flags, next)
+         if l.duration._flags == left or l.duration._flags == right:
             l.beam.counts = left, right
          else:
-            l.beam.counts = l.beam._flags, right
+            l.beam.counts = l.duration._flags, right
          #print l.beam.counts
           
 
@@ -175,9 +179,9 @@ def _setBeamCountsForLastLeafInRun(l, rip = True):
    if l.beam.spanned:
       if l.beam.only:
          if rip:
-            l.beam.counts = l.beam._flags, 0
+            l.beam.counts = l.duration._flags, 0
       elif l.beam.last:
-         l.beam.counts = l.beam._flags, 0
+         l.beam.counts = l.duration._flags, 0
 
 
 ### TODO - port instances( ) into ajbad and uncomment ###
@@ -188,17 +192,17 @@ def _setBeamCountsForLastLeafInRun(l, rip = True):
 #   if len(leaves) == 1:
 #      leaf = leaves[0]
 #      if hasattr(leaf, 'beam') and leaf.beam.only:
-#         leaf.beam.counts = 0, leaf.beam._flags
+#         leaf.beam.counts = 0, leaf.duration._flags
 #   elif len(leaves) > 1:
 #      left, right = leaves[0], leaves[-1] 
 #      if hasattr(left, 'beam') and left.beam.first:
-#         left.beam.counts = 0, left.beam._flags
+#         left.beam.counts = 0, left.duration._flags
 #      if hasattr(right, 'beam') and right.beam.last:
-#         right.beam.counts = right.beam._flags, 0
+#         right.beam.counts = right.duration._flags, 0
 
 
 def unbeam_lone_eighths(expr):
    for leaf in expr.leaves:
       if hasattr(leaf, 'beam'):
-         if leaf.beam.only and leaf.beam._flags == 1:
+         if leaf.beam.only and leaf.duration._flags == 1:
             leaf.beam.spanners[0].die( ) 

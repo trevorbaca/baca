@@ -2,7 +2,7 @@
 
 from abjad import *
 from abjad.leaf.leaf import _Leaf
-from baca.utilities.utilities import *
+from baca.utilities import *
 import copy
 import math
 import re
@@ -1029,7 +1029,8 @@ def effectiveDurations(m):
    >>> effectiveDurations(t.leaves) 
    [DURATION 1/24, DURATION 1/24, DURATION 1/24]
    '''
-   return [l.duration.prolated for l in instances(m, '_Leaf')]
+   #return [l.duration.prolated for l in instances(m, '_Leaf')]
+   return [l.duration.prolated for l in list(iterate.naive(m, _Leaf))]
 
 def effectiveDuration(m):
    '''
@@ -1550,7 +1551,6 @@ def stellate(k, s, t, d, b, span ='from duration', rests = True):
    '''
 
    #from beamtools import beamRunsByDuration
-   from complexbeam import ComplexBeam
 
    if t == [[0]]:
       print 't == [[0]] will cause an infinite loop.'
@@ -1595,7 +1595,8 @@ def stellate(k, s, t, d, b, span ='from duration', rests = True):
       #tmp = Voice(sublist)
       durations = [tuplet.duration.pair for tuplet in sublist]
       #beamRunsByDuration(tmp.leaves, durations, span = span)
-      ComplexBeam(sublist, durations, span = span)
+      #ComplexBeam(sublist, durations, span = span)
+      BeamComplex(sublist, durations, span = span)
       i += 1
    listtools.flatten(tuplets)
 
@@ -1622,7 +1623,6 @@ def coruscate(n, s, t, z, d, rests = True):
 
    debug = False
    #from beamtools import beamRunsByDuration
-   from complexbeam import ComplexBeam
 
    # zero-valued signals not allowed
    signal = helianthate(n, 'right', 'right', action = 'new')
@@ -1662,7 +1662,9 @@ def coruscate(n, s, t, z, d, rests = True):
          element.music[0].right.append(r'_ \markup \fontsize #6 { %s }' % i)
       #beam(element)
       #beamRunsByDuration(element, [element.duration.pair])
-      ComplexBeam(element, [element.duration.pair])
+      #ComplexBeam(element, [element.duration.pair])
+      #BeamComplex(element, [element.duration.pair])
+      BeamComplexDurated(element.leaves, [element.duration.prolated])
 
    return result
 
@@ -1693,20 +1695,23 @@ def makeMeasures(m, meters):
    '''
 
    durations = [Rational(*meter) for meter in meters]
-   voices = instances(m, 'Voice')
-   for v in voices:
-      assert v.duration == sum(durations, Rational(0))
+   #voices = instances(m, 'Voice')
+   #for v in voices:
+   for v in iterate.naive(m, Voice):
+      assert v.duration.prolated == sum(durations, Rational(0))
       d = 0
-      measure = Measure(meters[d], [ ])
+      #measure = Measure(meters[d], [ ])
+      measure = RigidMeasure(meters[d], [ ])
       for x in v[ : ]:
          measure.append(x)
-         if measure.duration >= durations[d]:
+         if measure.duration.prolated >= durations[d]:
             v[d : 2 * d + len(measure) - 1] = [measure]
             d += 1
             if d == len(durations):
                break
             else:
-               measure = Measure(meters[d], [ ])
+               #measure = Measure(meters[d], [ ])
+               measure = RigidMeasure(meters[d], [ ])
 
 def recombineVoices(target, s, insert, t, loci):
    '''

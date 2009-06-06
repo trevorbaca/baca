@@ -1,5 +1,5 @@
 from abjad import *
-from baca.utilities import utilities
+from baca import utilities
 import py.test
 
 

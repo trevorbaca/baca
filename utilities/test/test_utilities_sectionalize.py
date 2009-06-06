@@ -1,4 +1,4 @@
-from baca.utilities import utilities
+from baca import utilities
 
 
 def test_utilities_sectionalize_01( ):
