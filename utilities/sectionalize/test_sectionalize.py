@@ -1,7 +1,7 @@
 from baca import utilities
 
 
-def test_utilities_sectionalize_01( ):
+def test_sectionalize_01( ):
 
    t = utilities.sectionalize(20, (1, 1, 1))
    assert t == [6, 1, 6, 1, 6]
