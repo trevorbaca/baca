@@ -527,31 +527,6 @@ def rout(w, s, cur = 0, recurse = False):
       return result
 
 
-def braid(*lists):
-   '''
-   >>> braid(range(5), range(10, 15))
-   [0, 10, 1, 11, 2, 12, 3, 13, 4, 14]
-
-   >>> braid([1, 2, 3], [11, 12, 13, 14, 15])
-   [1, 11, 2, 12, 3, 13, [], 14, [], 15]
-   '''
-
-   lengths = [len(l) for l in lists]
-   lengths.sort()
-   longestLength = lengths[-1]
-
-   for i, l in enumerate(lists):
-      if len(l) < longestLength:
-         lists[i].extend([[]] * (longestLength - len(l)))
-
-   result = zip(*lists)
-   fr = []
-   for r in result:
-      fr.extend(r)
-
-   return fr
-
-
 def stack(l, n, until = 'under'):
    if len(l) >= n:
       return l

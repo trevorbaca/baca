@@ -17,6 +17,11 @@ Functions migrated from baca/utilities.py to Abjad:
    listtools.partition_by_weights(l, counts, overhang = False, cyclic = False)
 
    
+   utilities.permIter(seq)
+   ==>
+   listtools.permtutations(l)
+
+   
    utilities.picket(l, ins, overhang = (0, 0))
    ==>
    listtools.insert_slice_cyclic(l, s, overhang = (0, 0))
