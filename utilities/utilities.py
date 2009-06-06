@@ -1026,35 +1026,6 @@ def intize(w, action = 'in place'):
       return result
 
 
-def stripe(w, s, action = 'in place'):
-   '''
-   Cyclically negate every sth element in flattened w.
-
-   >>> w = [[3, 3, 2], [1, 3, 3, 3, 2], [1, 3], [3, 3, 3, 3, 3, 1]]
-   >>> utilities.stripe(w, [0, 0, 1])
-   >>> w
-   [[3, 3, -2], [1, 3, -3, 3, 2], [-1, 3], [3, -3, 3, 3, -3, 1]]
-   '''
-
-   result = []
-   cur = 0
-
-   for sublist in w:
-      new = []
-      for element in sublist:
-         if s[cur % len(s)] == 1:
-            new.append(-element)
-         else:
-            new.append(element)
-         cur += 1
-      result.append(new)
-
-   if action == 'in place':
-      w[:] = result
-   else:
-      return result
-
-
 def corrugate(w, target = 'positives', action = 'in place'):
    '''
    Replace positive integers with 1-sequences;
