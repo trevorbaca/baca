@@ -1008,41 +1008,6 @@ def replace(l, indices, material, action = 'in place'):
       return result  
 
 
-def series(start = 0, step = 0, offsets = [0], max = sys.maxint):
-   '''
-   >>> s = series()
-   >>> [s.next(), s.next(), s.next(), s.next(), s.next(), s.next()]
-   [0, 0, 0, 0, 0, 0]
-
-   >>> s = series(24)      
-   >>> [s.next(), s.next(), s.next(), s.next(), s.next(), s.next()]
-   [24, 24, 24, 24, 24, 24]
-
-   >>> s = series(24, 3)
-   >>> [s.next(), s.next(), s.next(), s.next(), s.next(), s.next()]
-   [24, 27, 30, 33, 36, 39]
-
-   >>> s = series(0, 0, [0, 2, 7])
-   >>> [s.next(), s.next(), s.next(), s.next(), s.next(), s.next()]
-   [0, 0, 2, 9, 9, 11]
-
-   >>> s = series(0, 4, [1, 2])
-   >>> [s.next(), s.next(), s.next(), s.next(), s.next(), s.next()]
-   [0, 5, 11, 16, 22, 27]
-   '''
-
-   n = start
-   i = 0
-
-   while n < sys.maxint:
-      yield n
-      n += step
-      n += offsets[i % len(offsets)]
-      i += 1
-
-   raise StopIteration
-
-
 def intize(w, action = 'in place'):
    '''
    Map 1.0, 2.0, 3.0, ... to 1, 2, 3, ....
