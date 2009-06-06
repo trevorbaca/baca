@@ -1104,30 +1104,6 @@ def emboss(l, s, p, action = 'in place'):
       return result
 
 
-def times(w, n, action = 'in place'):
-   '''
-   Multiply sublists or elements of w by n.
-
-   >>> w = [[1, 2, 4], [2, 4], [2, 4, 4, 5]]
-   >>> times(w, 3)
-   >>> w
-   [[3, 6, 12], [6, 12], [6, 12, 12, 15]]
-   '''
-
-   result = []
-
-   if isinstance(w[0], list):
-      for sublist in w:
-         result.append(times(sublist, n, action = 'new'))
-   else:
-      result = [element * n for element in w]
-
-   if action == 'in place':
-      w[:] = result
-   elif action == 'new':
-      return result
-
-
 def clump(w, action = 'in place'):
    '''
    Add together runs of negative numbers.
