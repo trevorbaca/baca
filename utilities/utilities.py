@@ -1299,34 +1299,6 @@ def positivize(w):
    return result
 
 
-def sieve(pairs, window):
-   '''
-   Xenakis sieves;
-
-   return all integers in window congruent to some residue in pairs.
-
-   >>> sieve([(5, 0), (5, 1)], [(0, 20)])
-   [0, 1, 5, 6, 10, 11, 15, 16]
-
-   >>> sieve([(5, 0), (5, 1)], [(0, 20), (50, 20)])
-   [0, 1, 5, 6, 10, 11, 15, 16, 50, 51, 55, 56, 60, 61, 65, 66]
-   '''
-
-   result = []
-
-   domain = []
-   for start, length in window:
-      domain.extend(range(start, start + length))
-
-   for i in domain:
-      for modulus, residue in pairs:
-         if i % modulus == residue % modulus:
-            result.append(i)
-            break
-
-   return result
-
-
 def pleat(ll, n):
    '''Return n of each of the l in ll.
 
