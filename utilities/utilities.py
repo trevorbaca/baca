@@ -12,28 +12,25 @@ import math
 import sys
 
 
-def segment(l, s, cycle = 'knife', action = 'in place'):
+#def segment(l, s, cycle = 'knife', action = 'in place'):
+def segment(l, s, cycle = 'knife'):
    '''
    Segment l into sublists of weights not less than s.
 
    >>> l = [1] * 10
    >>> segment(l, 2)
-   >>> l
    [[1, 1], [1, 1], [1, 1], [1, 1], [1, 1]]
 
    >>> l = [1] * 10
    >>> segment(l, [2, 3])
-   >>> l
    [[1, 1], [1, 1, 1], [1, 1], [1, 1, 1]]
 
    >>> l = [1] * 10
    >>> segment(l, [2, 3], cycle = False)
-   >>> l
    [[1, 1], [1, 1, 1]]
 
    >>> l = [1]
    >>> segment(l, [2, 3, 2, 3]) 
-   >>> l
    [[1]]
 
    >>> l = [1]
@@ -42,19 +39,17 @@ def segment(l, s, cycle = 'knife', action = 'in place'):
    [[1, 1], [1, 1, 1], [1, 1], [1, 1, 1]]
 
    >>> l = [1] * 10
-   >>> segment(l, [2, 3], action = 'new')
+   >>> segment(l, [2, 3])
    [[1, 1], [1, 1, 1], [1, 1], [1, 1, 1]]
-   >>> l
-   [1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
 
-   >>> segment(['(1, 1, 1)', 1, 2, -2, 3, '(1, 1, 1)', -2, 4], 8, action = 'new')
+   >>> segment(['(1, 1, 1)', 1, 2, -2, 3, '(1, 1, 1)', -2, 4], 8)
    [[1, 1, 1, 1, 2, -2], [3, 1, 1, 1, -2], [4]]
    '''
 
    if isinstance(s, int):
       s = [s]
 
-   result = []
+   result = [ ]
 
    if cycle == False:
       j = 0
@@ -104,11 +99,6 @@ def segment(l, s, cycle = 'knife', action = 'in place'):
    else:
       print 'Unknown value %s for cycle.' % cycle
       raise ValueError
-
-   if action == 'in place':
-      l[:] = result
-   else:
-      return result
 
 
 def bunch(l, s, cycle = True, action = 'in place'):
