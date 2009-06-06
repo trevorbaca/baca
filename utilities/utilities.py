@@ -14,52 +14,18 @@ import sys
 
 def sectionalize(n, ratio):
    '''
-   >>> sectionalize(20, (1, 1, 1))
+   >>> utilities.sectionalize(20, (1, 1, 1))
    [6, 1, 6, 1, 6]
 
-   >>> sectionalize(97, (1, 1, 1))
+   >>> utilities.sectionalize(97, (1, 1, 1))
    [32, 1, 31, 1, 32]
 
-   >>> sectionalize(97, (1, 1, 2))
+   >>> utilities.sectionalize(97, (1, 1, 2))
    [24, 1, 24, 1, 47]
    '''
 
-   #return picket(ratio(n - (len(r) - 1), r), [1])
-
    parts = mathtools.integer_partition_by_ratio(n - (len(ratio) - 1), ratio)
-   result = picket(parts, [1])
-   return result
-
-
-def picket(l, ins, overhang = (0, 0)):
-   '''
-   >>> picket([0, 1, 2, 3, 4], ['A', 'B'])
-   [0, 'A', 'B', 1, 'A', 'B', 2, 'A', 'B', 3, 'A', 'B', 4]
-
-   >>> picket([0, 1, 2, 3, 4], ['A', 'B'], overhang = (0, 1))
-   [0, 'A', 'B', 1, 'A', 'B', 2, 'A', 'B', 3, 'A', 'B', 4, 'A', 'B']
-
-   >>> picket([0, 1, 2, 3, 4], ['A', 'B'], overhang = (1, 0))
-   ['A', 'B', 0, 'A', 'B', 1, 'A', 'B', 2, 'A', 'B', 3, 'A', 'B', 4]
-
-   >>> picket([0, 1, 2, 3, 4], ['A', 'B'], overhang = (1, 1))
-   ['A', 'B', 0, 'A', 'B', 1, 'A', 'B', 2, 'A', 'B', 3, 'A', 'B', 4, 'A', 'B']
-   '''
-
-   result = []
-
-   if overhang[0] == 1:
-      result.extend(ins)
-
-   for element in l[ : -1]:
-      result.append(element)
-      result.extend(ins)
-
-   result.append(l[-1])
-
-   if overhang[-1] == 1:
-      result.extend(ins)
-
+   result = listtools.insert_slice_cyclic(parts, [1])
    return result
 
 
