@@ -804,32 +804,6 @@ def caulk(l, s, action = 'in place'):
       return result
 
 
-def glob(l, s, action = 'in place'):
-   '''
-   >>> glob([[1, 2, 3], [4, 5], [6, 7, 8, 9]], (1, 1, 1))
-   [[-6], [-9], [-30]]
-   >>> glob([[1, 2, 3], [4, 5], [6, 7, 8, 9]], (1, 1, 0))
-   [[-6], [-9], [6, 7, 8, 9]]
-   >>> glob([[1, 2, 3], [4, 5], [6, 7, 8, 9]], (1, 0, 0))
-   [[-6], [4, 5], [6, 7, 8, 9]]
-   >>> glob([[1, 2, 3], [4, 5], [6, 7, 8, 9]], (0, 0, 0))
-   [[1, 2, 3], [4, 5], [6, 7, 8, 9]]
-   '''
-
-   result = []
-
-   for i, sublist in enumerate(l):
-      if s[i % len(s)] == 0:
-         result.append(sublist)
-      else:
-         result.append([-sum([abs(element) for element in sublist])])
-
-   if action == 'in place':
-      l[:] = result
-   else:
-      return result
-
-
 def negate(l, s, action = 'in place'):
    '''
    Cyclically negate 1-element sublists in l according to s.
