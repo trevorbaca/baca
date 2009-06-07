@@ -13,6 +13,7 @@ for key, value in utilities.__dict__.items( ):
       locals( )[key] = value
 
 from flip import flip
+from helianthate import helianthate
 from intaglio import intaglio
 from sectionalize import sectionalize
 from segment import segment
