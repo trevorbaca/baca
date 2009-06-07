@@ -15,19 +15,14 @@ import sys
 def draw(l, pairs, history = False):
    '''In-line repetition, in-place.
 
-      Defined on both notes and arbitrary elements.
+      Defined on Abjad components.
 
-      >>> l = [note.Note(n, (1, 4)) for n in [0, 2, 4, 5, 7, 9, 11]]
+      >>> l = [Note(n, (1, 4)) for n in [0, 2, 4, 5, 7, 9, 11]]
       >>> draw(l, [(0, 4), (2, 4)])
       >>> l
      [c'4, d'4, e'4, f'4, c'4, d'4, e'4, f'4, g'4, a'4, e'4, f'4, g'4, a'4, b'4]
                            ^    ^    ^    ^              ^    ^    ^    ^
-
-      >>> l = range(7)
-      >>> draw(l, [(0, 4), (2, 4)])
-      >>> l
-      [0, 1, 2, 3, 0, 1, 2, 3, 4, 5, 2, 3, 4, 5, 6]
-                   ^  ^  ^  ^        ^  ^  ^  ^     '''
+   '''
 
    inserts = [ ]
 
@@ -37,30 +32,17 @@ def draw(l, pairs, history = False):
          for i in range(pair[0], pair[0] + pair[1]):
             source = l[i % len(l)]
             newest = Note(source.pitch.number, source.duration.written)
+            newest.history['tag'] = source.history['tag']
             if isinstance(history, str):
-               newest.history['tag'] = source.history.get('tag', history)
+               newest.history['tag'] += history
             new.append(newest)
          if len(pair) == 2:
             reps = 1
          else:
             reps = pair[-1]
          inserts.append((pair[0] + pair[1], new, reps))
-      for insert in reversed(sorted(inserts)):
-         l[insert[0]:insert[0]] = clone.unspan(insert[1], reps)
-
-   elif isinstance(l[0], int):
-      for pair in reversed(pairs):
-         new = [ ]
-         for i in range(pair[0], pair[0] + pair[1]):
-            new.append(l[i % len(l)])
-         if len(pair) == 2:
-            reps = 1
-         else:
-            reps = pair[-1]
-         inserts.append(((pair[0] + pair[1]) % len(l), new, reps))
-      for index, new, reps in reversed(sorted(inserts)):
-         for i in range(reps):
-            l[index:index] = new
+      for index, new_slice, reps in reversed(sorted(inserts)):
+         l[index:index] = clone.unspan(new_slice, reps)
 
 
 def project(l, spec, history = False):
