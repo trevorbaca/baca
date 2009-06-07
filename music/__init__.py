@@ -12,3 +12,5 @@ del key
 del music
 del types
 del value
+
+from repeat_subruns_cyclic import repeat_subruns_cyclic

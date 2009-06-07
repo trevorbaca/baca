@@ -12,39 +12,6 @@ import math
 import sys
 
 
-def draw(l, pairs, history = False):
-   '''In-line repetition, in-place.
-
-      Defined on Abjad components.
-
-      >>> l = [Note(n, (1, 4)) for n in [0, 2, 4, 5, 7, 9, 11]]
-      >>> draw(l, [(0, 4), (2, 4)])
-      >>> l
-     [c'4, d'4, e'4, f'4, c'4, d'4, e'4, f'4, g'4, a'4, e'4, f'4, g'4, a'4, b'4]
-                           ^    ^    ^    ^              ^    ^    ^    ^
-   '''
-
-   inserts = [ ]
-
-   if isinstance(l[0], Note):
-      for pair in reversed(pairs):
-         new = [ ]
-         for i in range(pair[0], pair[0] + pair[1]):
-            source = l[i % len(l)]
-            newest = Note(source.pitch.number, source.duration.written)
-            newest.history['tag'] = source.history['tag']
-            if isinstance(history, str):
-               newest.history['tag'] += history
-            new.append(newest)
-         if len(pair) == 2:
-            reps = 1
-         else:
-            reps = pair[-1]
-         inserts.append((pair[0] + pair[1], new, reps))
-      for index, new_slice, reps in reversed(sorted(inserts)):
-         l[index:index] = clone.unspan(new_slice, reps)
-
-
 def project(l, spec, history = False):
    '''
    Interval project, in-place.
