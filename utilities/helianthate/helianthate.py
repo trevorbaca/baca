@@ -2,7 +2,7 @@ from abjad.leaf.leaf import _Leaf
 from abjad.note.note import Note
 from abjad.tools import clone
 from abjad.tools import listtools
-from baca.utilities import circumrotate as utilities_circumrotate
+from baca.utilities import rotate_nested as utilities_rotate_nested
 
 
 ## TODO: Clean up docstring with examples from test file instead. ##
@@ -49,7 +49,7 @@ def helianthate(l, outer, inner, action = 'in place', flattened = True):
                new.append(clone.unspan([n])[0])
             input.append(new)
                
-      next = utilities_circumrotate(input, outer, inner)
+      next = utilities_rotate_nested(input, outer, inner)
 
       if next == start or (isinstance(next[0][0], Note) and \
          [[n.pitch.pc for n in sublist] for sublist in next] == start):

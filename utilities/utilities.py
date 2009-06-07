@@ -12,19 +12,19 @@ import math
 import sys
 
 
-def circumrotate(l, outer, inner):
+def rotate_nested(l, outer, inner):
    '''
    >>> l = [[1, 2, 3], [4, 5], [6, 7, 8]]
-   >>> circumrotate('right', 'right', l)
+   >>> rotate_nested(l, 'right', 'right')
    [[8, 6, 7], [3, 1, 2], [5, 4]]
 
-   >>> circumrotate('right', 'left', l)
+   >>> rotate_nested(l, 'right', 'left')
    [[7, 8, 6], [2, 3, 1], [5, 4]]
 
-   >>> circumrotate('left', 'right', l)
+   >>> rotate_nested(l, 'left', 'right')
    [[5, 4], [8, 6, 7], [3, 1, 2]]
 
-   >>> circumrotate('left', 'left', l)
+   >>> rotate_nested(l, 'left', 'left')
    [[5, 4], [7, 8, 6], [2, 3, 1]]
    '''
 
@@ -54,7 +54,7 @@ def cycle(outer, inner, l, flattened = True):
 
    result = [copy.deepcopy(l)]
    while True:
-      next = circumrotate(result[-1], outer, inner)
+      next = rotate_nested(result[-1], outer, inner)
       if next == result[0]:
          if flattened == True:
             result = listtools.flatten(result)
