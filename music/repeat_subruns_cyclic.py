@@ -6,7 +6,7 @@ def repeat_subruns_cyclic(notes, pairs, history = False):
    '''Repeat components according to pairs.
 
    >>> l = [Note(n, (1, 4)) for n in [0, 2, 4, 5, 7, 9, 11]]
-   >>> draw(l, [(0, 4), (2, 4)])
+   >>> music.repeat_subruns_cyclic(l, [(0, 4, 1), (2, 4, 1)])
    >>> l
    [c'4, d'4, e'4, f'4, c'4, d'4, e'4, f'4, 
    g'4, a'4, e'4, f'4, g'4, a'4, b'4]'''
