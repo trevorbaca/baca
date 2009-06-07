@@ -1,6 +1,11 @@
 Functions migrated from baca/utilities.py to Abjad:
 
 
+   utilities.bunch(l, s, cycle = True)
+   ==>
+   listtools.group_by_weights(l, s, fill = 'exact', cyclic = False, overhang = False)
+
+
    utilities.chunk(ll, s)
    ==>
    listtools.partition_by_weights(l, s, overhang = overhang, cyclic = cyclic)
