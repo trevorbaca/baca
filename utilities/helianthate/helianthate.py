@@ -2,7 +2,8 @@ from abjad.leaf.leaf import _Leaf
 from abjad.note.note import Note
 from abjad.tools import clone
 from abjad.tools import listtools
-from baca.utilities import rotate_nested as utilities_rotate_nested
+from baca.utilities.rotate_nested import rotate_nested as \
+   utilities_rotate_nested
 
 
 ## TODO: Clean up docstring with examples from test file instead. ##
@@ -37,14 +38,14 @@ def helianthate(l, outer, inner, action = 'in place', flattened = True):
    while True:
       last = result[-len(start):]
 
-      if isinstance(last[0][0], int) or isinstance(last[0][0], str) or \
-         isinstance(last[0][0], float) or isinstance(last[0][0], tuple):
+      #if isinstance(last[0][0], int) or isinstance(last[0][0], str) or \
+      #   isinstance(last[0][0], float) or isinstance(last[0][0], tuple):
+      if isinstance(last[0][0], (int, float, str, tuple)):
          input = last
       else:
          input = [ ]
          for sublist in last:
             new = [ ]
-            print sublist
             for n in sublist:
                new.append(clone.unspan([n])[0])
             input.append(new)

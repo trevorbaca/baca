@@ -17,6 +17,8 @@ def cycle(outer, inner, l, flattened = True):
    cycle('right', 'right', [[4, 5, 5], [5, 6], [3, 4, 5]])
    '''
 
+   from baca.utilities.rotate_nested import rotate_nested
+
    result = [copy.deepcopy(l)]
    while True:
       next = rotate_nested(result[-1], outer, inner)
