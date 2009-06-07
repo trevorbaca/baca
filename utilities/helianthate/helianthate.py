@@ -12,15 +12,10 @@ def helianthate(l, outer, inner, action = 'in place', flattened = True):
    results until identity.
 
    >>> l = [[1, 2, 3], [4, 5], [6, 7, 8]]
-   >>> utilities.helianthate(l, 'left', 'right')                   
-   >>> l[:24]
-   [1, 2, 3, 4, 5, 6, 7, 8, 5, 4, 8, 6, 7, 3, 1, 2, 7, 8, 6, 2, 3, 1, 4, 5]
+   >>> utilities.helianthate(l, 'left', 'right', action = 'new')
 
    >>> l = [[1, 2, 3], [4, 5], [6, 7, 8]]
-   >>> utilities.helianthate(l, 'left', 'right', flattened = False)
-   >>> l[:9]
-   [[1, 2, 3], [4, 5], [6, 7, 8], [5, 4], [8, 6, 7], 
-   [3, 1, 2], [7, 8, 6], [2, 3, 1], [4, 5]]
+   >>> utilities.helianthate(l, 'left', 'right', flattened = False, action = 'new')
 
    >>> l = [[1, 2, 3], [4, 5], [6, 7, 8]]
    >>> utilities.helianthate(l, 'left', 'right', action = 'new')[:24]
@@ -28,12 +23,7 @@ def helianthate(l, outer, inner, action = 'in place', flattened = True):
 
    >>> l = [note.Note(n, 1, 4) for n in range(1, 9)]
    >>> l = listtools.partition_by_counts(l, [3, 2, 3])
-   >>> utilities.helianthate(l, 'left', 'right')  
-   >>> l[:24]
-   >>> l[:18]
-   [cs'4, d'4, ef'4, e'4, f'4, fs'4, g'4, af'4, 
-   f'4, e'4, af'4, fs'4, g'4, ef'4, cs'4, d'4, g'4, af'4]
-   '''
+   >>> utilities.helianthate(l, 'left', 'right', action = 'new')'''
 
    if isinstance(l[0][0], _Leaf):
       start = [[n.pitch.pc for n in sublist] for sublist in l]
