@@ -12,41 +12,6 @@ import math
 import sys
 
 
-def rotate_nested(l, outer, inner):
-   '''
-   >>> l = [[1, 2, 3], [4, 5], [6, 7, 8]]
-   >>> rotate_nested(l, 'right', 'right')
-   [[8, 6, 7], [3, 1, 2], [5, 4]]
-
-   >>> rotate_nested(l, 'right', 'left')
-   [[7, 8, 6], [2, 3, 1], [5, 4]]
-
-   >>> rotate_nested(l, 'left', 'right')
-   [[5, 4], [8, 6, 7], [3, 1, 2]]
-
-   >>> rotate_nested(l, 'left', 'left')
-   [[5, 4], [7, 8, 6], [2, 3, 1]]
-   '''
-
-   if outer == 'right':
-      if inner == 'right':
-         return listtools.rotate(
-            [listtools.rotate(x, 'right') for x in l], 'right')
-      elif inner == 'left':
-         return listtools.rotate(
-            [listtools.rotate(x, 'left') for x in l], 'right')
-   elif outer == 'left':
-      if inner == 'right':
-         return listtools.rotate(
-            [listtools.rotate(x, 'right') for x in l], 'left')
-      elif inner == 'left':
-         return listtools.rotate(
-            [listtools.rotate(x, 'left') for x in l], 'left')
-   else:
-      print 'Unknown direction %s.' % outer
-      raise ValueError
-
-
 def cycle(outer, inner, l, flattened = True):
    '''
    cycle('right', 'right', [[4, 5, 5], [5, 6], [3, 4, 5]])

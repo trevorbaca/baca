@@ -11,6 +11,11 @@ Functions migrated from baca/utilities.py to Abjad:
    listtools.partition_by_weights(l, s, overhang = overhang, cyclic = cyclic)
 
 
+   utilities.circumrotate(l, inner, outer)
+   ==>
+   utilities.rotate_nested(l, inner, outer)
+
+
    utilities.flamingo(l, s, period = None)
    ==>
    listtools.negate_elements_at_indices(l, indices, period = None)
