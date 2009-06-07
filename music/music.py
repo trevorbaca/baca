@@ -1558,9 +1558,9 @@ def stellate(k, s, t, d, b, span ='from duration', rests = True):
 
    debug = False
 
-   prolation = helianthate(s, 'right', 'right', action = 'new')
+   prolation = helianthate(s, 'right', 'right')
    numerators = listtools.increase_cyclic(k, prolation, action = 'new')
-   mask = helianthate(t, 'right', 'right', action = 'new')
+   mask = helianthate(t, 'right', 'right')
    mask = listtools.repeat_to_weight(mask, listtools.weight(numerators))
    corrugate(mask)
    signatures = partition(
@@ -1625,12 +1625,12 @@ def coruscate(n, s, t, z, d, rests = True):
    #from beamtools import beamRunsByDuration
 
    # zero-valued signals not allowed
-   signal = helianthate(n, 'right', 'right', action = 'new')
+   signal = helianthate(n, 'right', 'right')
    assert all(signal)
 
-   cut = helianthate(s, 'right', 'right', action = 'new')
+   cut = helianthate(s, 'right', 'right')
 
-   dilation = helianthate(z, 'right', 'right', action = 'new')
+   dilation = helianthate(z, 'right', 'right')
    fit = listtools.increase_cyclic(t, dilation, action = 'new')
 
    j = 0

@@ -8,23 +8,23 @@ from baca.utilities.rotate_nested import rotate_nested as \
 
 ## TODO: Clean up docstring with examples from test file instead. ##
 
-def helianthate(l, outer, inner, action = 'in place', flattened = True):
+def helianthate(l, outer, inner, flattened = True):
    '''Rotate inner lists and outer list simultaneously and accumulate
    results until identity.
 
    >>> l = [[1, 2, 3], [4, 5], [6, 7, 8]]
-   >>> utilities.helianthate(l, 'left', 'right', action = 'new')
+   >>> utilities.helianthate(l, 'left', 'right')
 
    >>> l = [[1, 2, 3], [4, 5], [6, 7, 8]]
-   >>> utilities.helianthate(l, 'left', 'right', flattened = False, action = 'new')
+   >>> utilities.helianthate(l, 'left', 'right', flattened = False)
 
    >>> l = [[1, 2, 3], [4, 5], [6, 7, 8]]
-   >>> utilities.helianthate(l, 'left', 'right', action = 'new')[:24]
+   >>> utilities.helianthate(l, 'left', 'right')[:24]
    [1, 2, 3, 4, 5, 6, 7, 8, 5, 4, 8, 6, 7, 3, 1, 2, 7, 8, 6, 2, 3, 1, 4, 5]
 
    >>> l = [note.Note(n, 1, 4) for n in range(1, 9)]
    >>> l = listtools.partition_by_counts(l, [3, 2, 3])
-   >>> utilities.helianthate(l, 'left', 'right', action = 'new')'''
+   >>> utilities.helianthate(l, 'left', 'right')'''
 
    if isinstance(l[0][0], _Leaf):
       start = [[n.pitch.pc for n in sublist] for sublist in l]
@@ -38,8 +38,6 @@ def helianthate(l, outer, inner, action = 'in place', flattened = True):
    while True:
       last = result[-len(start):]
 
-      #if isinstance(last[0][0], int) or isinstance(last[0][0], str) or \
-      #   isinstance(last[0][0], float) or isinstance(last[0][0], tuple):
       if isinstance(last[0][0], (int, float, str, tuple)):
          input = last
       else:
@@ -60,7 +58,4 @@ def helianthate(l, outer, inner, action = 'in place', flattened = True):
       else:
          result.extend(next)
 
-   if action == 'in place':
-      l[:] = result
-   else:
-      return result
+   return result
