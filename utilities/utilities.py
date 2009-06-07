@@ -591,37 +591,6 @@ def negate(l, s, action = 'in place'):
       return result
 
 
-def permute(l, s, action = 'in place'):
-   '''
-   Permutes integer pitch list or note list l by integer pc list s.
-
-   >>> l = [note.Note(n, 1, 4) for n in [17, -10, -2, 11]]
-   >>> permute(l, [10, 0, 2, 6, 8, 7, 5, 3, 1, 9, 4, 11])
-   >>> l
-   [bf4, d4, f''4, b'4]
-
-   >>> permute(
-   ...     [note.Note(n, 1, 4) for n in [17, -10, -2, 11]],
-   ...     [10, 0, 2, 6, 8, 7, 5, 3, 1, 9, 4, 11],
-   ...     action = 'new')
-   [bf4, d4, f''4, b'4]
-   '''
-
-   result = []
-
-   if isinstance(l[0], int):
-      for element in s:
-         result.extend([note for note in l if note % 12 == element])
-   else:
-      for element in s:
-         result.extend([note for note in l if note.pitch.pc == element])
-
-   if action == 'in place':
-      l[:] = result
-   else:
-      return result 
-      
-
 def ones(l, action = 'in place'):
    '''
    >>> l = range(1, 5)

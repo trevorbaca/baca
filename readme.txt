@@ -42,6 +42,11 @@ Functions migrated from baca/utilities.py to Abjad:
    listtools.permtutations(l)
 
    
+   utilities.permute(l, s, action = 'in place')
+   ==>
+   pitchtools.permute_by_row(pitches, row)
+
+
    utilities.picket(l, ins, overhang = (0, 0))
    ==>
    listtools.insert_slice_cyclic(l, s, overhang = (0, 0))
