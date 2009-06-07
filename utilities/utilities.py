@@ -12,19 +12,39 @@ import math
 import sys
 
 
-def bunch(l, s, cycle = True, action = 'in place'):
-   '''
-   Segment l into sublists of weights not greater than s.
+def bunch(l, s, cycle = True):
+   '''Segment l into sublists of weights not greater than s.
 
+   NOTE: utilities.bunch( ) is CLEARLY WRONG in curWeight = -1.
+
+   HERE are the two original examples in the docstring:
    >>> l = [3] * 15
-   >>> utilities.bunch(l, [8, 10], action = 'new')
+   >>> utilities.bunch(l, [8, 10])
    [[3, 3, 3], [3, 3], [3, 3, 3], [3, 3], [3, 3, 3], [3, 3]]
-
-   >>> utilities.bunch(l, [8, 10], action = 'new', cycle = False)
+   >>> utilities.bunch(l, [8, 10], cycle = False)
    [[3, 3, 3], [3, 3]]
-   '''
 
-   result = [[]]
+   These two examples are clearly incorrect. Correct behavior is this:
+   >>> utilities.bunch(l, [8, 10])
+   [[3, 3], [3, 3, 3], [3, 3], [3, 3, 3], [3, 3], [3, 3, 3]]
+   >>> utilities.bunch(l, [8, 10], cycle = False)
+   [[3, 3], [3, 3, 3]]
+
+   The implementation incorrectly starts with weight 10 instead of 8.
+
+   The utilities.bunch( ) function was apparently being used in Lidercfeny:
+
+      * lidercfeny/layout/present.py
+      * lidercfeny/layout/visualize.py
+
+   HOWEVER the problem never materialized because the two calls are these:
+
+      * measuresPerLine = utilities.bunch(eighths, [10])
+      * measuresPerLine = utilities.bunch(eighths, [10])
+
+   CONCLUSION: Deprecated in favor of listtools.group_by_weights( ).'''
+
+   result = [[ ]]
 
    curWeight = -1
 
@@ -38,10 +58,7 @@ def bunch(l, s, cycle = True, action = 'in place'):
       else:
          result[-1].append(element)
 
-   if action == 'in place':
-      l[:] = result
-   else:
-      return result
+   return result
 
 
 def circumrotate(l, outer, inner):
