@@ -15,6 +15,11 @@ Functions migrated from baca/utilities.py to Abjad:
    ==>
    utilities.rotate_nested(l, inner, outer)
 
+   
+   utilities.cycle(outer, inner, l, flattened = True)
+   ==>
+   utilities.helianthate(l, outer, inner, flattened = True)
+
 
    utilities.flamingo(l, s, period = None)
    ==>
