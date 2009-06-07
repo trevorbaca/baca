@@ -18,18 +18,18 @@ def repeat_subruns_cyclic(notes, pairs, history = False):
    instructions = [ ]
    len_notes = len(notes)
    for pair in reversed(pairs):
-      new = [ ]
+      new_notes = [ ]
       for i in range(pair[0], pair[0] + pair[1]):
          source = notes[i % len_notes]
-         newest = Note(source.pitch.number, source.duration.written)
-         if source.history.get('tag', None):
-            newest.history['tag'] = source.history['tag']
+         new_note = Note(source.pitch.number, source.duration.written)
+         if source.history.has_key('tag'):
+            new_note.history['tag'] = source.history['tag']
          if isinstance(history, str):
-            newest.history['tag'] += history
-         new.append(newest)
+            new_note.history['tag'] += history
+         new_notes.append(new_note)
       reps = pair[-1]
-      instruction = (pair[0] + pair[1], new, reps)
+      instruction = (pair[0] + pair[1], new_notes, reps)
       instructions.append(instruction)
 
-   for index, new_slice, reps in reversed(sorted(instructions)):
-      notes[index:index] = clone.unspan(new_slice, reps)
+   for index, new_notes, reps in reversed(sorted(instructions)):
+      notes[index:index] = clone.unspan(new_notes, reps)
