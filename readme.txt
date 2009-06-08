@@ -41,6 +41,11 @@ Functions migrated from baca/utilities.py to Abjad:
    pitchtools.send_pitch_number_to_octave(pitch_number, mapping)
 
 
+   utilities.ones(l, action = 'in place')
+   ==>
+   use [[1] * x for x in l] instead
+   
+   
    utilities.partition(l, s, mode = 'length', overhang = False, cyclic = False)
    ==>
    listtools.partition_by_counts(l, counts, overhang = False, cyclic = False)

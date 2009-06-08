@@ -398,31 +398,6 @@ def negate(l, s, action = 'in place'):
    else:
       return result
 
-
-def ones(l, action = 'in place'):
-   '''
-   >>> l = range(1, 5)
-   >>> ones(l)
-   >>> l
-   [[1], [1, 1], [1, 1, 1], [1, 1, 1, 1]]
-
-   >>> l = range(1, 5)
-   >>> ones(l, action = 'new')
-   [[1], [1, 1], [1, 1, 1], [1, 1, 1, 1]]
-   >>> l
-   [1, 2, 3, 4]
-   '''
-
-   result = []
-   for element in l:
-      result.append([1] * element)
-
-   if action == 'in place':
-      l[:] = result
-   else:
-      return result
-
-
 def within(i, indices):
    '''
    Returns True if i in indices token, and False otherwise.
