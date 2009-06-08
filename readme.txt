@@ -68,6 +68,11 @@ Functions migrated from baca/utilities.py to Abjad:
    next, prev, = leaf.next, leaf.prev 
 
 
+   utilities.smear(l, s)
+   ==>
+   listtools.overwrite_slices_at(l, pairs)
+
+
    utilities.snip(l, weight, i) 
    ==> 
    listtools.remove_weighted_subrun_at(l, weight, i)

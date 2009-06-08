@@ -29,23 +29,6 @@ def piles(ll):
    return result
 
 
-def smear(l, s):
-   '''
-   Repeatedly overwrite elements in l according to s.
-
-   >>> l = range(10)
-   >>> smear(l, [(0, 3), (5, 3)])
-   >>> l
-   [0, 0, 0, 3, 4, 5, 5, 5, 8, 9]
-   '''
-
-   cp = copy.deepcopy(l)
-
-   for pair in s:
-      for i in range(pair[0], pair[0] + pair[1]):
-         l[i] = cp[pair[0]]
-
-
 def ripple(l, s):
    '''
    Repeat elements in l according to s.
