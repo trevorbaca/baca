@@ -12,7 +12,6 @@ for key, value in utilities.__dict__.items( ):
    if isinstance(value, types.FunctionType):
       locals( )[key] = value
 
-from flip import flip
 from helianthate import helianthate
 from increase_sublist_end_elements import increase_sublist_end_elements
 from intaglio import intaglio
