@@ -14,6 +14,7 @@ for key, value in utilities.__dict__.items( ):
 
 from flip import flip
 from helianthate import helianthate
+from increase_sublist_end_elements import increase_sublist_end_elements
 from intaglio import intaglio
 from resegment import resegment
 from rotate_nested import rotate_nested

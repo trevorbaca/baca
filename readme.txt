@@ -15,6 +15,11 @@ Functions migrated from baca/utilities.py to Abjad:
    ==>
    utilities.rotate_nested(l, inner, outer)
 
+
+   utilities.convolve(l, s, action = 'in place')
+   ==>
+   utilities.increase_sublist_end_elements(l, s) 
+
    
    utilities.cycle(outer, inner, l, flattened = True)
    ==>

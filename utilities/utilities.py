@@ -297,54 +297,6 @@ def unfive(l, target = 'negative', action = 'in place'):
       return result
 
 
-def convolve(l, s, action = 'in place'):
-   '''
-   Add elements in s to the first and last positions of corresponding elements in l.
-
-   >>> l = [[2, 2, 2], [2, 2], [2, 2, 2]]     
-   >>> convolve(l, [1, 5, 10])
-   >>> l
-   [[12, 2, 7], [3, 12], [7, 2, 3]]
-
-   >>> l = [[2, 2, 2], [2, 2], [2, 2, 2]]
-   >>> convolve(l, [1, 5, 10], action = 'new')
-   [[12, 2, 7], [3, 12], [7, 2, 3]]
-   >>> l
-   [[2, 2, 2], [2, 2], [2, 2, 2]]
-   '''
-
-   if len(l) != len(s):
-      print 'convolve(l, s): len(l) must equal len(s).'
-      raise ValueError
-
-   result = []
-
-   for i in range(len(l)):
-
-      new = []
-      for element in l[i]:
-         new.append(element)
-
-      if len(new) > 1:
-
-         if i == 0:
-            new[0] += int(s[-1])
-            new[-1] += int(s[i + 1])
-         elif 0 < i < len(l) - 1:
-            new[0] += int(s[i - 1])
-            new[-1] += int(s[i + 1])
-         elif i == len(l) - 1:
-            new[0] += int(s[i - 1])
-            new[-1] += int(s[0])
-
-      result.append(new)
-   
-   if action == 'in place':
-      l[:] = result
-   else:
-      return result
-
-
 def caulk(l, s, action = 'in place'):
    '''
    Transforms sublists-with-negatives to sublists-with-positives;
