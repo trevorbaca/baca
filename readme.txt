@@ -57,6 +57,11 @@ Functions migrated from baca/utilities.py to Abjad:
    listtools.insert_slice_cyclic(l, s, overhang = (0, 0))
 
 
+   utilities.project(l, spec, history = False)
+   ==>
+   pitchtools.insert_transposed_pc_subruns(notes, subrun_indicators, history = False)
+
+
    utilities.scan(l)
    ==>
    for i, leaf in enumerate(l)
