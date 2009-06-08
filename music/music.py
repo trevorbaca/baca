@@ -2,6 +2,8 @@
 
 from abjad import *
 from abjad.leaf.leaf import _Leaf
+from abjad.skip.skip import Skip
+from abjad.voice.voice import Voice
 from baca.utilities import *
 import copy
 import math
@@ -1248,38 +1250,39 @@ def breaks(signatures, durations, pages, verticals, staves = None):
       for l, line in enumerate(page):
          for measure in range(line):
             d = durations[total] 
-            s = skip.Skip(
-               d.written.numerator, 
-               d.written.denominator, 
-               d.multiplier.numerator, 
-               d.multiplier.denominator)
+            s = Skip((1))
+            s.duration.multiplier = d
             tabs = ''.join(['\t'] * int(math.ceil((10 - len(s.body)) / 3.0)))
             result.append(s)
-            result[-1].left.append(signatures[total] + '\t')
-            result[-1].right = ['%s\\noBreak\t\t' % tabs]
-            result[-1].label.append('measure %s' % (total + 1))
+            result[-1].directives.before.append(signatures[total] + '\t')
+            result[-1].directives.right = None
+            result[-1].directives.right.append('%s\\noBreak\t\t' % tabs)
+            result[-1].comments.before.append('measure %s' % (total + 1))
             if l == 0 and measure == 0:
-               result[-1].before = ['\n%% page %s' % (p + 1)]
+               result[-1].directives.before.append('\n%% page %s' % (p + 1))
             total += 1
-         result[-1].right = []
+         result[-1].right = [ ]
          tabs = ''.join(['\t'] * int(math.ceil((10 - len(s.body)) / 3.0)))
-         result[-1].right = ['%s\\break\t\t' % tabs]
-         if len(result[-(measure + 1)].before) == 0:
-            result[-(measure + 1)].before.append('')
-         result[-(measure + 1)].before.append(
+         result[-1].directives.right = None
+         result[-1].directives.right.append('%s\\break\t\t' % tabs)
+         if len(result[-(measure + 1)].directives.before) == 0:
+            result[-(measure + 1)].directives.before.append('')
+         result[-(measure + 1)].directives.before.append(
             '\overrideProperty #"Score.NonMusicalPaperColumn"')
          if staves == None:
-            result[-(measure + 1)].before.append(
+            result[-(measure + 1)].directives.before.append(
                "#'line-break-system-details #'((Y-offset . %s))" % 
                verticals[p][l])
          else:
-            result[-(measure + 1)].before.append(
+            result[-(measure + 1)].directives.before.append(
                "#'line-break-system-details #'((Y-offset . %s) (alignment-offsets . (%s)))" % (verticals[p][l], staves))
-      result[-1].right = []
+      result[-1].directives.right = None
       tabs = ''.join(['\t'] * int(math.ceil((10 - len(s.body)) / 3.0)))
-      result[-1].right = ['%s\\pageBreak\t' % tabs]
+      result[-1].directives.right = None
+      result[-1].directives.right.append('%s\\pageBreak\t' % tabs)
 
-   result = voice.Voice(result, name = 'breaks')
+   result = Voice(result)
+   result.name = 'breaks'
    return result
 
 def sectionalize(m, pairs, kind = '_Leaf'):
