@@ -36,6 +36,11 @@ Functions migrated from baca/utilities.py to Abjad:
    listtools.negate_elements_at_indices(l, indices, period = None)
 
 
+   utilities.flip(l, s, action = 'in place')
+   ==>
+   cary.transforms.flip_sublist_element_signs(l, s)
+
+
    utilities.mapInto(M, n)
    ==>
    pitchtools.send_pitch_number_to_octave(pitch_number, mapping)
