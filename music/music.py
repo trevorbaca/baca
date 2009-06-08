@@ -2,7 +2,10 @@
 
 from abjad import *
 from abjad.leaf.leaf import _Leaf
+from abjad.measure.rigid.measure import RigidMeasure
 from abjad.skip.skip import Skip
+from abjad.tools import construct
+from abjad.tools import tietools
 from abjad.voice.voice import Voice
 from baca.utilities import *
 import copy
@@ -1075,38 +1078,51 @@ def blank(l, positions):
 
    for i, m in enumerate(l):
       if (i + 1) in positions:
-         n, d = m.duration.pair
-         l[i] = Measure(
-            m.meter.pair,
-            [Rest((x, d)) for x in untie([n])])
+         #n, d = m.duration.pair
+         rests = construct.rests(m.duration.contents)
+         new_measure = RigidMeasure(m.meter.effective, rests)
+         #l[i] = RigidMeasure(m.meter,
+         #   [Rest((x, d)) for x in untie([n])])
+         l[i] = new_measure
 
 def nest(measures, outer, inner):
    '''
    Structures time.
    '''
    
-   inner = partition(inner, [len(x) for x in outer], action = 'new')
+   #inner = partition(inner, [len(x) for x in outer], action = 'new')
+   inner = listtools.partition_by_counts(inner, [len(x) for x in outer])
 
-   result = []
+   result = [ ]
    
    for i in range(len(measures)):
       m = measures[i]
       o = outer[i]
       n = inner[i]
-      dd = writtenDurations([measure.Measure([divide.pair(o, (m[0], m[1]))])])
-      body = []
+      #print i, m, o, n
+      measure_numerator, measure_denominator = m
+      tuplet = divide.pair(o, (measure_numerator, measure_denominator))
+      #print tuplet
+      #dd = writtenDurations([RigidMeasure([divide.pair(o, (m[0], m[1]))])])
+      tie_chains = list(iterate.tie_chains(tuplet.leaves))
+      dd = [tietools.get_duration_written(x) for x in tie_chains]
+      body = [ ]
       for j, d in enumerate(dd):
-         if o[j] > 0:
-            body.append(divide.pair(n[j], (d.n, d.d)))
+         #if o[j] > 0:
+         if 0 < o[j]:
+            #body.append(divide.pair(n[j], (d.n, d.d)))
+            body.append(divide.pair(n[j], (d._n, d._d)))
          else:
-            body.append(Rest(d.n, d.d))
-      
-      t = tuplet.SmartTuplet(m[0], m[1], body)
-      result.append(measure.Measure([t]))
+            #body.append(Rest(d.n, d.d))
+            body.append(Rest(d))
+         
+      #t = tuplet.SmartTuplet(m[0], m[1], body)
+      t = FixedDurationTuplet(m, body)
+      result.append(RigidMeasure(m, [t]))
       
    #into(result, [r'\time %s/%s' % (x[0], x[1]) for x in measures], 'before')
-   for i, element in enumerate(result):
-      result[i].time = measures[i]
+   #for i, element in enumerate(result):
+   #   result[i].time = measures[i]
    
    return result
 
