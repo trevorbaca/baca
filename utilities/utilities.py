@@ -556,36 +556,6 @@ def emboss(l, s, p, action = 'in place'):
       return result
 
 
-def lump(w):
-   '''
-   Add together runs of positive numbers.
-
-   [[-1, -1, 2, 3, -5], [1, 2, 5, -5, -6]]
-   >>> lump(w) 
-   [[-1, -1, 5, -5], [8, -5, -6]]
-   '''
-
-   result = []
-
-   if isinstance(w[0], list):
-      for sublist in w:
-         result.append(lump(sublist))
-   else:
-      total = 0
-      for x in w:
-         if x <= 0:
-            if total != 0:
-               result.append(total)
-               total = 0
-            result.append(x)
-         else:
-            total += x
-      if total != 0:
-         result.append(total)
-
-   return result
-
-
 def recombine(target, s, insert, t, loci):
    '''
    Partition target list cyclically according to s;
@@ -673,8 +643,7 @@ def smelt(ll):
       >>> smelt(ll)
       [[1], [5], [11, 12, 13], [18, 19]]'''
 
-   result = [list(listtools.sum_by_sign(x, sign = [-1])) for x in ll]
-   result = lump(result)
+   result = list(listtools.sum_by_sign(ll))
    first  = result[0]
 
    result = piles(result)

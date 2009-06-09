@@ -51,6 +51,11 @@ Functions migrated from baca/utilities.py to Abjad:
    utilities.clump(l)
 
 
+   utilities.lump(w, action = 'in place')
+   ==>
+   [list(listtools.sum_by_sign(x, sign = [1])) for x in w]
+
+
    utilities.mapInto(M, n)
    ==>
    pitchtools.send_pitch_number_to_octave(pitch_number, mapping)
