@@ -216,33 +216,25 @@ def untie(expr, signs = 'all positive'):
       return result
 
 
-def unfive(l, target = 'negative', action = 'in place'):
-   '''
-   TODO - fully implement target, including 'both' value.
+def unfive(l, target = 'negative'):
+   '''TODO - fully implement target, including 'both' value.
 
    >>> l = [[1, 1, 5]]
    >>> unfive(l)
-   >>> l
    [[1, 1, 5]]
 
    >>> l = [[1, 1, -5]]
    >>> unfive(l)
-   >>> l
    [[1, 1, 1, -4]]
 
    >>> l = [[1], [5], [5, 1], [1, 5], [5, 5], [1, 5, 1]]
    >>> unfive(l, target = 'positive')
-   >>> l
    [[1], [4, 1], [4, 1, 1], [1, 1, 4], [4, 1, 1, 4], [1, 4, 1, 1]]
 
    >>> l = [[1, 1, -5]]
-   >>> unfive(l, action = 'new')
-   [[1, 1, 1, -4]]
-   >>> l
-   [[1, 1, 5]]
-   '''
+   [[1, 1, 1, -4]]'''
 
-   result = []
+   result = [ ]
 
    if target == 'negative':
 
@@ -291,10 +283,7 @@ def unfive(l, target = 'negative', action = 'in place'):
 
          result.append(new)
 
-   if action == 'in place':
-      l[:] = result
-   else:
-      return result
+   return result
 
 
 def caulk(l, s, action = 'in place'):
