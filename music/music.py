@@ -1665,7 +1665,8 @@ def coruscate(n, s, t, z, d, rests = True):
             raise ValueError
          j += 1
       signatures.append(new)
-   clump(signatures)
+   def helper(x): return list(listtools.sum_by_sign(x, sign = [-1]))
+   signatures = [helper(signature) for signature in signatures]
    signatures = untie(signatures)
 
    if not rests:

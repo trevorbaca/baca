@@ -556,50 +556,6 @@ def emboss(l, s, p, action = 'in place'):
       return result
 
 
-## DEPRECATED: Use 
-##
-## [list(listtools.sum_by_sign(x, sign = [-1])) for x in w]
-##
-## instead.
-
-#def clump(w, action = 'in place'):
-#   '''
-#   Add together runs of negative numbers.
-#
-#   >>> w = [[-1, -1, 2, 3, -5], [1, 2, 5, -5, -6]]
-#   >>> clump(w)
-#   >>> w
-#   [[-2, 2, 3, -5], [1, 2, 5, -11]]
-#   '''
-#
-#   return [list(listtools.sum_by_sign(x, sign = [-1])) for x in w]
-#
-#   result = []
-#
-#   if isinstance(w[0], list):
-#      for sublist in w:
-#         result.append(clump(sublist, action = 'new'))
-#   else:
-#      total = 0
-#      for x in w:
-#         if x >= 0:
-#            if total != 0:
-#               result.append(total)
-#               total = 0
-#            result.append(x)
-#         else:
-#            total += x
-#      if total != 0:
-#         result.append(total)
-#
-#   if action == 'in place':
-#      w[:] = result
-#   elif action == 'new':
-#      return result
-#
-#   return result
-
-
 def lump(w):
    '''
    Add together runs of positive numbers.
@@ -717,7 +673,7 @@ def smelt(ll):
       >>> smelt(ll)
       [[1], [5], [11, 12, 13], [18, 19]]'''
 
-   result = clump(ll, action = 'new')
+   result = [list(listtools.sum_by_sign(x, sign = [-1])) for x in ll]
    result = lump(result)
    first  = result[0]
 
