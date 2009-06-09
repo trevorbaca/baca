@@ -41,6 +41,11 @@ Functions migrated from baca/utilities.py to Abjad:
    cary.transforms.flip_sublist_element_signs(l, s)
 
 
+   utilities.glom(l)
+   ==>
+   utilities.clump(l)
+
+
    utilities.mapInto(M, n)
    ==>
    pitchtools.send_pitch_number_to_octave(pitch_number, mapping)
