@@ -349,55 +349,6 @@ def caulk(l, s, action = 'in place'):
       return result
 
 
-def negate(l, s, action = 'in place'):
-   '''
-   Cyclically negate 1-element sublists in l according to s.
-
-   >>> l = [[1], [2, 3], [4], [5, 6]]
-   >>> negate(l, [0])
-   >>> l
-   [[1], [2, 3], [4], [5, 6]]
-
-   >>> l = [[1], [2, 3], [4], [5, 6]]
-   >>> negate(l, [1])
-   >>> l
-   [[-1], [2, 3], [-4], [5, 6]]
-
-   >>> l = [[1], [2, 3], [4], [5, 6]]
-   >>> negate(l, [0, 1])
-   >>> l
-   [[1], [2, 3], [-4], [5, 6]]
-   '''
-
-   result = []
-   
-   k = 0
-
-   # scan every sublist in l
-   for i, sublist in enumerate(l):
-
-      # if the sublist has length 1 like [-9] or [9]
-      if len(sublist) == 1: 
-
-         # and if directed, negate sublist
-         if s[k % len(s)] == 1:
-            result.append([-sublist[0]])
-
-         # otherwise copy sublist over directly
-         else:
-            result.append(sublist)
-
-         # increment only after a length-1 sublist
-         k += 1
-
-      else:
-         result.append(sublist)
-
-   if action == 'in place':
-      l[:] = result
-   else:
-      return result
-
 def within(i, indices):
    '''
    Returns True if i in indices token, and False otherwise.
