@@ -13,14 +13,14 @@ def helianthate(l, outer, inner, flattened = True):
    '''Rotate inner lists and outer list simultaneously and accumulate
    results until identity.
 
-   >>> l = [[1, 2, 3], [4, 5], [6, 7, 8]]
-   >>> utilities.helianthate(l, 'left', 'right')
+   abjad> l = [[1, 2, 3], [4, 5], [6, 7, 8]]
+   abjad> utilities.helianthate(l, -1, 1)
 
-   >>> l = [[1, 2, 3], [4, 5], [6, 7, 8]]
-   >>> utilities.helianthate(l, 'left', 'right', flattened = False)
+   abjad> l = [[1, 2, 3], [4, 5], [6, 7, 8]]
+   abjad> utilities.helianthate(l, -1, 1, flattened = False)
 
-   >>> l = [[1, 2, 3], [4, 5], [6, 7, 8]]
-   >>> utilities.helianthate(l, 'left', 'right')[:24]
+   abjad> l = [[1, 2, 3], [4, 5], [6, 7, 8]]
+   abjad> utilities.helianthate(l, -1, 1)[:24]
    [1, 2, 3, 4, 5, 6, 7, 8, 5, 4, 8, 6, 7, 3, 1, 2, 7, 8, 6, 2, 3, 1, 4, 5]'''
 
    assert all([not isinstance(x, _Component) for x in l])
@@ -28,19 +28,22 @@ def helianthate(l, outer, inner, flattened = True):
    start = l[:]
    result = l[:]
 
-   if inner == 'right':
-      inner = 1
-   elif inner == 'left':
-      inner = -1
-   else:
-      raise ValueError
+#   if inner == 'right':
+#      inner = 1
+#   elif inner == 'left':
+#      inner = -1
+#   else:
+#      raise ValueError
+#
+#   if outer == 'right':
+#      outer = 1
+#   elif outer == 'left':
+#      outer = -1
+#   else:
+#      raise ValueError
 
-   if outer == 'right':
-      outer = 1
-   elif outer == 'left':
-      outer = -1
-   else:
-      raise ValueError
+   assert isinstance(inner, (int, long))
+   assert isinstance(outer, (int, long))
 
    while True:
       last = result[-len(start):]
