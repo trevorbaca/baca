@@ -14,6 +14,6 @@ def sectionalize(n, ratio):
    [24, 1, 24, 1, 47]
    '''
 
-   parts = mathtools.integer_partition_by_ratio(n - (len(ratio) - 1), ratio)
+   parts = mathtools.partition_integer_by_ratio(n - (len(ratio) - 1), ratio)
    result = listtools.insert_slice_cyclic(parts, [1])
    return result
