@@ -1578,7 +1578,7 @@ def stellate(k, s, t, d, b, span ='from duration', rests = True):
    debug = False
 
    prolation = helianthate(s, 'right', 'right')
-   numerators = listtools.increase_cyclic(k, prolation, action = 'new')
+   numerators = listtools.increase_cyclic(k, prolation)
    mask = helianthate(t, 'right', 'right')
    mask = listtools.repeat_to_weight(mask, listtools.weight(numerators))
    corrugate(mask)
@@ -1650,7 +1650,7 @@ def coruscate(n, s, t, z, d, rests = True):
    cut = helianthate(s, 'right', 'right')
 
    dilation = helianthate(z, 'right', 'right')
-   fit = listtools.increase_cyclic(t, dilation, action = 'new')
+   fit = listtools.increase_cyclic(t, dilation)
 
    j = 0
    signatures = []
