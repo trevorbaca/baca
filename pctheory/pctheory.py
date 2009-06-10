@@ -28,7 +28,7 @@ def C(pset):
    st = sorted(pset)
    result = []
    for i in range(len(st)):
-      result.append(listtools.rotate(st, 'left', i))
+      result.append(listtools.rotate(st, -i))
    return result
 
 def CI(pset):
