@@ -12,43 +12,6 @@ import math
 import sys
 
 
-def plough(w, s, cur = 0, action = 'in place'):
-   '''
-   Cyclically negate elements in w according to s.
-
-   >>> l = [1, 2, 3, 5, 5, 1, 2, 5, 5, 6]
-   >>> plough(l, [0, 0, 0, 1, 1])
-   >>> l
-   [1, 2, 3, -5, -5, 1, 2, 5, -5, -6]
-
-   >>> w = [[1, 2, 2], [1, 2, 3, 5, 5], [1, 2, 5, 5, 6]]
-   >>> plough(w, [0, 0, 0, 1, 1])
-   >>> w
-   [[1, 2, 2], [-1, -2, 3, 5, 5], [-1, -2, 5, 5, 6]]
-   '''
-   
-   result = []
-
-   if isinstance(w[0], list):
-      for sublist in w:
-         cur, new = plough(sublist, s, cur, action = 'recurse')
-         result.append(new)
-   else:
-      for element in w:
-         if s[cur % len(s)] == 1:
-            result.append(-element)
-         else:
-            result.append(element)
-         cur += 1
-
-   if action == 'in place':
-      w[:] = result
-   elif action == 'new':
-      return result
-   elif action == 'recurse':
-      return cur, result
-
-
 def rout(w, s, cur = 0, recurse = False):
    '''
    Cyclically turn elements in w absolutely negative according to s;

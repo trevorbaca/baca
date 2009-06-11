@@ -97,6 +97,16 @@ Functions migrated from baca/utilities.py to Abjad:
    unused: cumulative sums of absolute values of elements in ll.
 
 
+   utilities.plough(w, s, cur = 0, action = 'in place')
+   ==>
+   s = period_s
+   s = listtools.true_indices(s)
+   w_part_counts = [len(x) for x in w]
+   w = listtools.flatten(w)
+   w = listtools.negate_elements_at_indices(w, s, period = period_s)
+   w = listtools.partition_by_counts(w, w_part_counts)
+   
+
    utilities.project(l, spec, history = False)
    ==>
    pitchtools.insert_transposed_pc_subruns(notes, subrun_indicators, history = False)
