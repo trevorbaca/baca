@@ -371,20 +371,6 @@ def positivize(w):
    return result
 
 
-def pleat(ll, n):
-   '''Return n of each of the l in ll.
-
-      >>> pleat([1, 1, 2, 3, 5, 5, 6], 2)
-      [1, 1, 1, 1, 2, 2, 3, 3, 5, 5, 5, 5, 6, 6]'''
-
-   result = [ ]
-
-   for l in ll:
-      result.extend([l] * n)
-
-   return result
-
-
 def smelt(ll):
    '''Return positive subsequences in the absolute cumulative sums of ll.
 

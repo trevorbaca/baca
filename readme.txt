@@ -97,6 +97,11 @@ Functions migrated from baca/utilities.py to Abjad:
    unused: cumulative sums of absolute values of elements in ll.
 
 
+   utilities.pleat(l, n)
+   ==>
+   listtools.repeat_elements_to_length(l, n)
+
+
    utilities.plough(w, s, cur = 0, action = 'in place')
    ==>
    s = period_s
