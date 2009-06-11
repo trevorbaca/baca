@@ -124,6 +124,13 @@ Functions migrated from baca/utilities.py to Abjad:
    ie, listtools.repeat_subruns_cyclic(l, [(i, length, n - 1), ...])
 
 
+   utilities.rout(l, s, cur = 0, recurse = False)
+   ==>
+   period_s = len(s)
+   s_true_indices = listtools.true_indices(s)
+   listtools.negate_elements_at_indices_absolutely(l, s_true_indices, period_s)
+
+
    utilities.scan(l)
    ==>
    for i, leaf in enumerate(l)

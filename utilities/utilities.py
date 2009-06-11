@@ -12,40 +12,6 @@ import math
 import sys
 
 
-def rout(w, s, cur = 0, recurse = False):
-   '''
-   Cyclically turn elements in w absolutely negative according to s;
-   
-   stronger form of plough().
-
-   >>> l = [1, 1, 2, 3, 5, 5, 6]
-   >>> rout(l, [0, 1, 1])
-   [1, -1, -2, 3, -5, -5, 6]
-
-   >>> rout(_, [1])
-   [-1, -1, -2, -3, -5, -5, -6]
-   '''
-   
-   result = []
-
-   if isinstance(w[0], list):
-      for sublist in w:
-         cur, new = rout(sublist, s, cur, recurse = True)
-         result.append(new)
-   else:
-      for element in w:
-         if s[cur % len(s)] == 1:
-            result.append(-abs(element))
-         else:
-            result.append(element)
-         cur += 1
-
-   if recurse:
-      return cur, result
-   else:
-      return result
-
-
 def caulk(l, s, action = 'in place'):
    '''
    Transforms sublists-with-negatives to sublists-with-positives;
