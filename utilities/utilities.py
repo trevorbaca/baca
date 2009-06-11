@@ -12,23 +12,6 @@ import math
 import sys
 
 
-def piles(ll):
-   '''
-   Return the cumulative sums of the absolute values of the l in ll.
-
-   >>> l = [1, -1, -2, 3, -5, -5, 6]
-   >>> piles(l)
-   [1, 2, 4, 7, 12, 17, 23]
-   '''
-
-   result = [abs(ll[0])]
-
-   for l in ll[1 : ]:
-      result.append(result[-1] + abs(l))
-
-   return result
-
-
 def ripple(l, s):
    '''
    Repeat elements in l according to s.

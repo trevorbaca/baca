@@ -91,6 +91,11 @@ Functions migrated from baca/utilities.py to Abjad:
    ==>
    listtools.insert_slice_cyclic(l, s, overhang = (0, 0))
 
+   
+   utilities.piles(ll)
+   ==> 
+   unused: cumulative sums of absolute values of elements in ll.
+
 
    utilities.project(l, spec, history = False)
    ==>
