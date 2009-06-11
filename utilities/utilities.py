@@ -12,34 +12,6 @@ import math
 import sys
 
 
-def ripple(l, s):
-   '''
-   Repeat elements in l according to s.
-
-   >>> l = [1, 1, 2, 3, 5, 5, 6]
-   >>> ripple(l, [(2, [2, 3]), (6, [1, 4])])
-   [1, 1, 2, 3, 2, 3, 2, 3, 5, 5, 6, 6, 6, 6]
-   '''
-
-   spec = dict(s)
-   result = l[:]
-
-   for i in reversed(range(len(result))):
-      try:
-         length = spec[i][0]
-         reps = spec[i][1]
-      except:
-         length = 1
-         reps = 1
-      cur = l[i : i + length]
-      new = []
-      for j in range(reps):
-         new.extend(cur)
-      result[i : i + length] = new
-   
-   return result
-   
-
 def plough(w, s, cur = 0, action = 'in place'):
    '''
    Cyclically negate elements in w according to s.

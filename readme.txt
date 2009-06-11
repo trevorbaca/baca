@@ -102,6 +102,13 @@ Functions migrated from baca/utilities.py to Abjad:
    pitchtools.insert_transposed_pc_subruns(notes, subrun_indicators, history = False)
 
 
+   utilities.ripple(l, [(anchor, (length, total_appearances)), ...])
+   ie, utilities.ripple(l, [(i, (length, n), ...])
+   ==>
+   listtools.repeat_subruns_cyclic(l, [(achor, length, new_appearances), ...])
+   ie, listtools.repeat_subruns_cyclic(l, [(i, length, n - 1), ...])
+
+
    utilities.scan(l)
    ==>
    for i, leaf in enumerate(l)
