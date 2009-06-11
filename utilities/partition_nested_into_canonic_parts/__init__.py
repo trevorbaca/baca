@@ -1,0 +1,2 @@
+from partition_nested_into_canonic_parts import \
+   partition_nested_into_canonic_parts

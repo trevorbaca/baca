@@ -1067,9 +1067,10 @@ def fill(l, positions):
    for i, m in enumerate(l):
       if (i + 1) in positions:
          n, d = m.duration.pair
+         parts = mathtools.partition_integer_into_canonic_parts(n)
          l[i] = Measure(
             m.meter.pair,
-            [Note(0, (x, d)) for x in untie([n])])
+            [Note(0, (x, d)) for x in parts])
 
 def blank(l, positions):
    '''
@@ -1080,11 +1081,8 @@ def blank(l, positions):
 
    for i, m in enumerate(l):
       if (i + 1) in positions:
-         #n, d = m.duration.pair
          rests = construct.rests(m.duration.contents)
          new_measure = RigidMeasure(m.meter.effective, rests)
-         #l[i] = RigidMeasure(m.meter,
-         #   [Rest((x, d)) for x in untie([n])])
          l[i] = new_measure
 
 def nest(measures, outer, inner):
@@ -1370,9 +1368,6 @@ class FiveRemover(object):
          return node
 
 def unfive(music):
-   '''
-   TODO: generalize to untie()
-   '''
 
    change(music, FiveRemover())
 
@@ -1498,7 +1493,8 @@ def makeMeasure(d, process, **kwargs):
    '''
 
    if process == 'comprehension':
-      numerators = untie(d[0], **kwargs)
+      numerators = \
+         mathtools.partition_integer_into_canonic_parts(d[0], **kwargs)
       m = []
       for numerator in numerators:
          if numerator > 0:
@@ -1591,7 +1587,7 @@ def stellate(k, s, t, d, b, span ='from duration', rests = True):
    for i, signature in enumerate(signatures):
       if signature == [1]:
          signatures[i] = [-1]
-   signatures = utilities.untie(signatures)
+   signatures = utilities.partition_nested_into_canonic_parts(signatures)
 
    if not rests:
       signatures = utilities.positivize(signatures)
@@ -1677,7 +1673,7 @@ def coruscate(n, s, t, z, d, rests = True):
       signatures.append(new)
    def helper(x): return list(listtools.sum_by_sign(x, sign = [-1]))
    signatures = [helper(signature) for signature in signatures]
-   signatures = untie(signatures)
+   signatures = utilities.partition_nested_into_canonic_parts(signatures)
 
    if not rests:
       signatures = positivize(signatures)

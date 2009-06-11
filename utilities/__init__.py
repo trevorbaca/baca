@@ -15,6 +15,8 @@ for key, value in utilities.__dict__.items( ):
 from helianthate import helianthate
 from increase_sublist_end_elements import increase_sublist_end_elements
 from intaglio import intaglio
+from partition_nested_into_canonic_parts import \
+   partition_nested_into_canonic_parts
 from resegment import resegment
 from rotate_nested import rotate_nested
 from sectionalize import sectionalize

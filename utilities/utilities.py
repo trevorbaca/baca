@@ -128,37 +128,6 @@ def rout(w, s, cur = 0, recurse = False):
       return result
 
 
-def untie(expr):
-   '''
-   abjad> utilities.untie(41)
-   (32, 8, 1)
-
-   abjad> utilities.untie(-41)
-   (-32, -8, -1)
-
-   abjad> utilities.untie([2, 3, 9, 41])
-   [2, 3, 8, 1, 32, 8, 1]
-
-   abjad> utilities.untie([-2, -3, -9, -41])
-   [-2, -3, -8, -1, -32, -8, -1]
-
-   abjad> utilities.untie([2, [3, 9], 41])
-   [2, [3, 8, 1], 32, 8, 1]
-   '''
-
-   if isinstance(expr, (int, long)):
-      return mathtools.partition_integer_into_canonic_parts(expr)
-   elif isinstance(expr, list):
-      result = []
-      for subexpr in expr:
-         new = untie(subexpr, signs)
-         if isinstance(subexpr, int):
-            result.extend(new)
-         elif isinstance(subexpr, list):
-            result.append(new)
-      return result
-
-
 def unfive(l, target = 'negative'):
    '''TODO - fully implement target, including 'both' value.
 
