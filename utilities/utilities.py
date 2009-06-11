@@ -128,79 +128,26 @@ def rout(w, s, cur = 0, recurse = False):
       return result
 
 
-def untie(expr, signs = 'all positive'):
+def untie(expr):
    '''
-   TODO: deprecate unfive(); will require a direction input parameter here.
-
-   >>> untie(41, action = 'new')
-   (32, 8, 1)
-   >>> untie(41, action = 'new', signs = 'change head')
-   (-32, 8, 1)
-   >>> untie(41, action = 'new', signs = 'change tail')
-   (32, -8, -1)
-   >>> untie(41, action = 'new', signs = 'change all')
-   (-32, -8, -1)
-
-   >>> untie(-41, action = 'new')
-   (-32, -8, -1)
-   >>> untie(-41, action = 'new', signs = 'change head')
-   (32, -8, -1)
-   >>> untie(-41, action = 'new', signs = 'change tail')
-   (-32, 8, 1)
-   >>> untie(-41, action = 'new', signs = 'change all')
+   abjad> utilities.untie(41)
    (32, 8, 1)
 
-   >>> untie([2, 3, 9, 41], action = 'new')
-   [2, 3, 8, 1, 32, 8, 1]
-   >>> untie([2, 3, 9, 41], action = 'new', signs = 'change head')
-   [-2, -3, -8, 1, -32, 8, 1]
-   >>> untie([2, 3, 9, 41], action = 'new', signs = 'change tail')
-   [2, 3, 8, -1, 32, -8, -1]
-   >>> untie([2, 3, 9, 41], action = 'new', signs = 'change all')
-   [-2, -3, -8, -1, -32, -8, -1]
+   abjad> utilities.untie(-41)
+   (-32, -8, -1)
 
-   >>> untie([-2, -3, -9, -41], action = 'new')
-   [-2, -3, -8, -1, -32, -8, -1]
-   >>> untie([-2, -3, -9, -41], action = 'new', signs = 'change head')
-   [2, 3, 8, -1, 32, -8, -1]
-   >>> untie([-2, -3, -9, -41], action = 'new', signs = 'change tail')
-   [-2, -3, -8, 1, -32, 8, 1]
-   >>> untie([-2, -3, -9, -41], action = 'new', signs = 'change all')
+   abjad> utilities.untie([2, 3, 9, 41])
    [2, 3, 8, 1, 32, 8, 1]
 
-   >>> untie([2, [3, 9], 41], action = 'new')
+   abjad> utilities.untie([-2, -3, -9, -41])
+   [-2, -3, -8, -1, -32, -8, -1]
+
+   abjad> utilities.untie([2, [3, 9], 41])
    [2, [3, 8, 1], 32, 8, 1]
    '''
 
-   if isinstance(expr, int):
-      exponent = 1
-      result = []
-      total = 0
-      for cur in reversed(mathtools.binary_string(abs(expr))):
-         if cur == '1':
-            total += exponent
-         else:
-            if total > 0:
-               result.append(total)
-            total = 0
-         exponent *= 2
-      result.append(total)
-      result.reverse()
-      if expr < 0:
-         result = [-n for n in result]
-      if signs == 'change head':
-         result[0] = -result[0]
-      elif signs == 'change tail':
-         result[1:] = [-n for n in result[1:]]
-      elif signs == 'change all':
-         result = [-n for n in result]
-      result = tuple(result)
-      #if action == 'in place': 
-      #   expr[:] = result
-      #else:
-      #   return tuple(result)
-      return tuple(result)
-
+   if isinstance(expr, (int, long)):
+      return mathtools.partition_integer_into_canonic_parts(expr)
    elif isinstance(expr, list):
       result = []
       for subexpr in expr:
@@ -209,10 +156,6 @@ def untie(expr, signs = 'all positive'):
             result.extend(new)
          elif isinstance(subexpr, list):
             result.append(new)
-      #if action == 'in place':
-      #   expr[:] = result
-      #else:
-      #   return result
       return result
 
 
