@@ -5,8 +5,10 @@ from abjad.leaf.leaf import _Leaf
 from abjad.measure.rigid.measure import RigidMeasure
 from abjad.skip.skip import Skip
 from abjad.tools import construct
+from abjad.tools import divide
 from abjad.tools import tietools
 from abjad.voice.voice import Voice
+from baca import utilities
 from baca.utilities import *
 import copy
 import math
@@ -1582,15 +1584,17 @@ def stellate(k, s, t, d, b, span ='from duration', rests = True):
    mask = helianthate(t, 1, 1)
    mask = listtools.repeat_to_weight(mask, listtools.weight(numerators))
    corrugate(mask)
-   signatures = partition(
-      mask, numerators, mode = 'weight', overhang = 'true', action = 'new')
+   #signatures = partition(
+   #   mask, numerators, mode = 'weight', overhang = 'true', action = 'new')
+   signatures = listtools.partition_by_weights(
+      mask, numerators, overhang = True)
    for i, signature in enumerate(signatures):
       if signature == [1]:
          signatures[i] = [-1]
-   signatures = untie(signatures)
+   signatures = utilities.untie(signatures)
 
    if not rests:
-      signatures = positivize(signatures)
+      signatures = utilities.positivize(signatures)
 
    denominators = copy.copy(k)
    pairs = zip(signatures, denominators)
@@ -1602,7 +1606,10 @@ def stellate(k, s, t, d, b, span ='from duration', rests = True):
    if isinstance(span, int) and span < 1:
       span = None
 
-   partition(tuplets, b, cyclic = True, overhang = True)
+   dummy_container = Container(tuplets)
+   #partition(tuplets, b, cyclic = True, overhang = True)
+   tuplets = listtools.partition_by_counts(
+      tuplets, b, cyclic = True, overhang = True)
    for i, sublist in enumerate(tuplets):
       #if t == [[4, -5, 8], [4, -8], [-4, 6, -6, 8]] and i == 7:
       #   import pdb
@@ -1612,12 +1619,15 @@ def stellate(k, s, t, d, b, span ='from duration', rests = True):
          sublist[0][0].formatter.right.append(
             r'_ \markup \fontsize #6 { %s }' % i)
       #tmp = Voice(sublist)
-      durations = [tuplet.duration.pair for tuplet in sublist]
+      #durations = [tuplet.duration.pair for tuplet in sublist]
+      durations = [tuplet.duration.prolated for tuplet in sublist]
       #beamRunsByDuration(tmp.leaves, durations, span = span)
       #ComplexBeam(sublist, durations, span = span)
-      BeamComplex(sublist, durations, span = span)
+      #BeamComplex(sublist, durations, span = span)
+      BeamComplexDurated(sublist, durations, span = span)
       i += 1
-   listtools.flatten(tuplets)
+   dummy_container[:] = [ ]
+   tuplets = listtools.flatten(tuplets)
 
    return tuplets
 
