@@ -1355,10 +1355,6 @@ def subdivide(m, positions):
    change(m, Subdivide(positions))
 
 class FiveRemover(object):
-   '''
-   TODO: generalize to TieRemover.
-   '''
-
    def visit(self, node):
       if isinstance(node, Note) and node.duration.n == 5:
          denominator = node.duration.d
@@ -1368,7 +1364,6 @@ class FiveRemover(object):
          return node
 
 def unfive(music):
-
    change(music, FiveRemover())
 
 class BeamBalancer(object):
