@@ -120,6 +120,11 @@ Functions migrated from baca/utilities.py to Abjad:
    w = listtools.flatten(w)
    w = listtools.negate_elements_at_indices(w, s, period = period_s)
    w = listtools.partition_by_counts(w, w_part_counts)
+
+
+   utilities.positivize(w)
+   ==>
+   l = [abs(x) for x in l]
    
 
    utilities.project(l, spec, history = False)

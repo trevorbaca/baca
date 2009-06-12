@@ -167,29 +167,6 @@ def recombine(target, s, insert, t, loci):
    return result
 
 
-def positivize(w):
-   '''Turn all negative numbers positive.
-      Leave nonpositive numbers unchanged.
-
-      >>> w = [[-1, -1, 2, 3, -5], [1, 2, 5, -5, -6]]
-      >>> positivize(w)
-      [[1, 1, 2, 3, 5], [1, 2, 5, 5, 6]]'''
-
-   result = [ ]
-
-   if isinstance(w[0], list):
-      for sublist in w:
-         result.append(positivize(sublist))
-   else:
-      for x in w:
-         if x < 0:
-            result.append(-x)
-         else:
-            result.append(x)
-
-   return result
-
-
 def smelt(ll):
    '''Return positive subsequences in the absolute cumulative sums of ll.
 
