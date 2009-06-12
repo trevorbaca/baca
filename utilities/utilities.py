@@ -1,15 +1,7 @@
-'''List tools used in Cary, Sekka and Lidercfeny.'''
+'''Tools (primarily list tools) used in Cary, Sekka and Lidercfeny.'''
 
-from abjad.leaf.leaf import _Leaf
-from abjad.note.note import Note
-from abjad.rational.rational import Rational
-from abjad.tools import clone
 from abjad.tools import listtools
 from abjad.tools import mathtools
-from abjad.tools import pitchtools
-import copy
-import math
-import sys
 import types
 
 
