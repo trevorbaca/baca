@@ -1,32 +1,7 @@
 '''Tools (primarily list tools) used in Cary, Sekka and Lidercfeny.'''
 
 from abjad.tools import listtools
-from abjad.tools import mathtools
-from baca.utilities.replace_nested_elements_with_unary_subruns import \
-   replace_nested_elements_with_unary_subruns as \
-   utilities_replace_nested_elements_with_unary_subruns
 import types
-
-
-def emboss(l, s, p, action = 'in place'):
-   '''   
-   Corrugate elements of l.
-   Strikethrough according to s.
-   Group according to p.
-   '''
-
-   result = []
-
-   result = listtools.repeat_to_weight(s, sum(l))
-   result = listtools.partition_by_weights(result, l, overhang = True)
-   result = utilities.replace_nested_elements_with_unary_subruns(result)
-   part_lengths = [len(part) for part in p]
-   result = listtools.partition_by_counts(result, part_lengths)
-
-   if action == 'in place':
-      l[:] = result
-   elif action == 'new':
-      return result
 
 
 ## TODO: Read partitioned insert cyclically? ##
