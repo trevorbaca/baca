@@ -31,6 +31,11 @@ Functions migrated from baca/utilities.py to Abjad:
    utilities.increase_sublist_end_elements(l, s) 
 
    
+   utilities.corrugate(l, signs = 'positives')
+   ==>
+   utilities.replace_nested_elements_with_unary_subruns(l)
+
+
    utilities.cycle(outer, inner, l, flattened = True)
    ==>
    utilities.helianthate(l, outer, inner, flattened = True)

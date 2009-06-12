@@ -2,78 +2,24 @@
 
 from abjad.tools import listtools
 from abjad.tools import mathtools
+from baca.utilities.replace_nested_elements_with_unary_subruns import \
+   replace_nested_elements_with_unary_subruns as \
+   utilities_replace_nested_elements_with_unary_subruns
 import types
-
-
-def corrugate(w, target = 'positives', action = 'in place'):
-   '''
-   Replace positive integers with 1-sequences;
-   flat or nested w.
-
-   >>> l = [1, 2, 2, -4]
-   >>> corrugate(l, action = 'new')
-   [1, 1, 1, 1, 1, -4]
-
-   >>> corrugate(l, target = 'negatives', action = 'new')
-   [1, 2, 2, -1, -1, -1, -1]
-
-   >>> corrugate(l, target = 'all', action = 'new')
-   [1, 1, 1, 1, 1, -1, -1, -1, -1]
-
-   >>> w = [[1, 3, -4], [1, 2, -2, -4]]
-   >>> corrugate(w)
-   >>> w
-   [[1, 1, 1, 1, -4], [1, 1, 1, -2, -4]]
-   '''
-
-   result = []
-
-   # two-dimensional w
-   if isinstance(w[0], list):
-      for sublist in w:
-         result.append(corrugate(sublist, target = target, action = 'new')) 
-   # one-dimensional w
-   else:
-      for element in reversed(w):
-         if target == 'positives':
-            if element < 0:
-               result.insert(0, element)
-            else:
-               result[0:0] = [1] * element 
-         elif target == 'negatives':
-            if element > 0:
-               result.insert(0, element)
-            else:
-               result[0:0] = [-1] * abs(element)
-         elif target == 'all':
-            if element == 0:
-               result.insert(0, element)
-            else:
-               result[0:0] = [mathtools.sign(element) * 1] * abs(element)
-         else:
-            print 'Unkown target %s.' % target
-            raise ValueError
-      
-   if action == 'in place':
-      w[:] = result
-   elif action == 'new':
-      return result
 
 
 def emboss(l, s, p, action = 'in place'):
    '''   
-   Corrugate elements of l;
-   strikethrough according to s;
-   group according to p.
-
-   Examples.
+   Corrugate elements of l.
+   Strikethrough according to s.
+   Group according to p.
    '''
 
    result = []
 
    result = listtools.repeat_to_weight(s, sum(l))
    result = listtools.partition_by_weights(result, l, overhang = True)
-   corrugate(result)
+   result = utilities.replace_nested_elements_with_unary_subruns(result)
    part_lengths = [len(part) for part in p]
    result = listtools.partition_by_counts(result, part_lengths)
 
