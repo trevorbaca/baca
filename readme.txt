@@ -6,6 +6,11 @@ Functions migrated from baca/utilities.py to Abjad:
    listtools.group_by_weights(l, s, fill = 'exact', cyclic = False, overhang = False)
 
 
+   utilities.caulk(l, directives)
+   ==>
+   cary.transforms.take_sublist_element_absolute_values(l, directives)
+
+
    utilities.chunk(ll, s)
    ==>
    listtools.partition_by_weights(l, s, overhang = overhang, cyclic = cyclic)

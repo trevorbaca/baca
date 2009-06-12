@@ -5,53 +5,6 @@ from abjad.tools import mathtools
 import types
 
 
-def caulk(l, s, action = 'in place'):
-   '''
-   Transforms sublists-with-negatives to sublists-with-positives;
-   'caulks' sublists in l according to elements in s.
-
-   >>> l = [[-1, 1, 1], [1, -1, 1], [1, 1, -1]]
-   >>> caulk(l, [-1, -1, -1])
-   >>> l
-   [[1, 1, 1], [1, 1, 1], [1, 1, 1]]
-
-   >>> l = [[-1, 1, 1], [1, -1, 1], [1, 1, -1]]
-   >>> caulk(l, [-1, 1, 1])
-   >>> l
-   [[1, 1, 1], [1, -1, 1], [1, 1, -1]]
-
-   >>> l = [[-1, 1, 1], [1, -1, 1], [1, 1, -1]]
-   >>> caulk(l, [1, 1, 1])
-   >>> l
-   [[-1, 1, 1], [1, -1, 1], [1, 1, -1]]
-   '''
-
-   result = []
-
-   i = 0
-
-   for sublist in l:
-
-      # if the sublist is all positive, like [1, 1, 1, 1, 1]
-      if len([x for x in sublist if x < 0]) == 0:
-         result.append(sublist)
-
-      # elif the sublist is like [1, 1, -3] and contains a negative sublist
-      elif len([x for x in sublist if x < 0]) > 0:
-
-         # check the directives list ...
-         # if the current directive == 1, keep the sublist
-         if s[i % len(s)] == 1:
-            result.append(sublist)
-
-         # but if the current directive == -1, remove all rests from the sublist
-         elif s[i % len(s)] == -1:
-            result.append([abs(x) for x in sublist])
-
-         # increment ONLY when we've just processed a sublist-with-negatives
-         i += 1
-
-
 def corrugate(w, target = 'positives', action = 'in place'):
    '''
    Replace positive integers with 1-sequences;
