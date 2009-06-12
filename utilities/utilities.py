@@ -57,11 +57,6 @@ def caulk(l, s, action = 'in place'):
 
          # increment ONLY when we've just processed a sublist-with-negatives
          i += 1
-   
-   if action == 'in place':
-      l[:] = result
-   else:
-      return result
 
 
 def within(i, indices):
