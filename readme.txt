@@ -51,6 +51,11 @@ Functions migrated from baca/utilities.py to Abjad:
    utilities.clump(l)
 
 
+   utilities.intize(l, action = 'in place')
+   ==>
+   l = [int(x) if int(x) == x else x for x in l]
+   
+
    utilities.lump(w, action = 'in place')
    ==>
    [list(listtools.sum_by_sign(x, sign = [1])) for x in w]

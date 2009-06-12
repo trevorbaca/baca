@@ -60,36 +60,6 @@ def caulk(l, s, action = 'in place'):
          i += 1
 
 
-def intize(w, action = 'in place'):
-   '''
-   Map 1.0, 2.0, 3.0, ... to 1, 2, 3, ....
-
-   Leave noninteger floats unchanged.
-
-   >>> w = [[1.0, 2, 4], [2, 4.0], [2, 4.0, 4.0, 4.5]]
-   >>> intize(w)
-   >>> w
-   [[1, 2, 4], [2, 4], [2, 4, 4, 4.5]]
-   '''
-
-   result = []
-
-   if isinstance(w[0], list):
-      for sublist in w:
-         result.append(intize(sublist, action = 'new'))
-   else:
-      for element in w:
-         if isinstance(element, float) and element - int(element) == 0:
-            result.append(int(element))
-         else:
-            result.append(element)
-
-   if action == 'in place':
-      w[:] = result
-   else:
-      return result
-
-
 def corrugate(w, target = 'positives', action = 'in place'):
    '''
    Replace positive integers with 1-sequences;
