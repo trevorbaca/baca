@@ -167,22 +167,6 @@ def recombine(target, s, insert, t, loci):
    return result
 
 
-def read(l, start, length):
-   '''
-   >>> l = [1, 1, 2, 3, 5, 5, 6]
-   >>> read(l, 4, 18)
-   [5, 5, 6, 1, 1, 2, 3, 5, 5, 6, 1, 1, 2, 3, 5, 5, 6, 1]
-   '''
-
-   result = []
-   m = len(l)
-
-   for i in range(start, start + length):
-      result.append(l[i % m])
-
-   return result
-
-
 def positivize(w):
    '''Turn all negative numbers positive.
       Leave nonpositive numbers unchanged.

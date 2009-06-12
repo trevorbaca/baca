@@ -127,6 +127,11 @@ Functions migrated from baca/utilities.py to Abjad:
    pitchtools.insert_transposed_pc_subruns(notes, subrun_indicators, history = False)
 
 
+   utilities.read(l, start, length)
+   ==>
+   listtools.repeat_to_length(l, length, start_index = start)
+
+
    utilities.replace(l, indices, material)
    ==>
    listtools.overwrite_elements_at(l, indices, material)
