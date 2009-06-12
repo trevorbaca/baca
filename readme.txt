@@ -87,6 +87,11 @@ Functions migrated from baca/utilities.py to Abjad:
    pitchtools.permute_by_row(pitches, row)
 
 
+   utilities.pick( )
+   ==>
+   use %
+
+
    utilities.picket(l, ins, overhang = (0, 0))
    ==>
    listtools.insert_slice_cyclic(l, s, overhang = (0, 0))
@@ -115,6 +120,11 @@ Functions migrated from baca/utilities.py to Abjad:
    utilities.project(l, spec, history = False)
    ==>
    pitchtools.insert_transposed_pc_subruns(notes, subrun_indicators, history = False)
+
+
+   utilities.replace(l, indices, material)
+   ==>
+   listtools.overwrite_elements_at(l, indices, material)
 
 
    utilities.ripple(l, [(anchor, (length, total_appearances)), ...])
@@ -155,3 +165,8 @@ Functions migrated from baca/utilities.py to Abjad:
    utilities.untie(expr, signs = 'all positive')
    ==>
    utilities.partition_nested_into_canonic_parts(expr, direction = 'big-endian')
+
+
+   utilities.within( )
+   ==>
+   use %

@@ -10,6 +10,7 @@ from abjad.tools import pitchtools
 import copy
 import math
 import sys
+import types
 
 
 def caulk(l, s, action = 'in place'):
@@ -57,105 +58,6 @@ def caulk(l, s, action = 'in place'):
 
          # increment ONLY when we've just processed a sublist-with-negatives
          i += 1
-
-
-def within(i, indices):
-   '''
-   Returns True if i in indices token, and False otherwise.
-
-   >>> within(7, [0, 1, 2, 3, 4])
-   False
-
-   >>> within(7, [0, 1, 2, 3, 4, 5, 6, 7, 8, 9])
-   True
-
-   >>> within(7, ([0, 1, 2, 3, 4], 5))
-   True
-
-   >>> within(7, ([0, 1, 2, 3, 4], 10))
-   False
-   '''
-
-   if isinstance(indices, tuple):
-      return i % indices[-1] in indices[0]
-   else:
-      return i in indices  
-
-
-def pick(i, token):
-   '''
-   Picks element i from material in token.
-
-   >>> material = [2, 3, 7, 5]
-   >>> pick(0, material)
-   2
-
-   >>> pick(10, material)
-
-   >>> pick(0, (material, 4))
-   2
-
-   >>> pick(10, (material, 4))
-   7
-   '''
-
-   if isinstance(token, tuple):
-      material = token[0]
-      period = token[-1]
-      try:
-         return material[i % period]
-      except:
-         return None
-   else:
-      material = token
-      try:
-         return material[i]
-      except:
-         return None
-
-
-def replace(l, indices, material, action = 'in place'):
-   '''
-   Replace elements at indices in l with material.
-
-   >>> l = range(20)
-   >>> replace(l, ([0], 2), (['A', 'B'], 3))
-   >>> l
-   ['A', 1, 'B', 3, 4, 5, 'A', 7, 'B', 9, 10, 11, 'A', 13, 'B', 15, 16, 17, 'A', 19]
-
-   >>> l = range(20)
-   >>> replace(l, ([0], 2), (['*'], 1))
-   >>> l
-   ['*', 1, '*', 3, '*', 5, '*', 7, '*', 9, '*', 11, '*', 13, '*', 15, '*', 17, '*', 19]
-
-   >>> l = range(20)
-   >>> replace(l, ([0], 2), ['A', 'B', 'C', 'D'])
-   >>> l
-   ['A', 1, 'B', 3, 'C', 5, 'D', 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19]
-
-   >>> l = range(20)
-   >>> replace(l, [0, 1, 8, 13], ['A', 'B', 'C', 'D'])
-   >>> l
-   ['A', 'B', 2, 3, 4, 5, 6, 7, 'C', 9, 10, 11, 12, 'D', 14, 15, 16, 17, 18, 19]
-   '''
-
-   result = []
-   j = 0
-
-   for i, element in enumerate(l):
-      if within(i, indices):
-         if pick(j, material):
-            result.append(pick(j, material))
-         else:
-            result.append(element)
-         j += 1
-      else:
-         result.append(element)
-
-   if action == 'in place':
-      l[:] = result
-   else:
-      return result  
 
 
 def intize(w, action = 'in place'):
@@ -266,6 +168,8 @@ def emboss(l, s, p, action = 'in place'):
       return result
 
 
+## TODO: Read partitioned insert cyclically? ##
+
 def recombine(target, s, insert, t, loci):
    '''
    Partition target list cyclically according to s;
@@ -273,22 +177,30 @@ def recombine(target, s, insert, t, loci):
    overwrite parts of target with parts of insert 
    at positions in loci.
 
-   >>> target = range(12)
-   >>> insert = [9] * 10
-   >>> loci = [0, 3, 5]
-   >>> recombine(target, 2, insert, [2, 2, 6], loci)
+   abjad> target = range(12)
+   abjad> insert = [9] * 10
+   abjad> loci = [0, 3, 5]
+   abjad> recombine(target, 2, insert, [2, 2, 6], loci)
    [9, 9, 2, 3, 4, 5, 9, 9, 8, 9, 9, 9, 9, 9, 9, 9]
    '''
+
+   ## TODO: assert isinstance(loci, pair) and len(loci) == 2 ##
+   ## TODO: loci_values, loci_period = loci
+   ## TODO: assert isinstance(loci_values, list)
+   ## TODO: assert isinstance(loci_period, (int, long, types.NoneType))
 
    a = listtools.partition_by_counts(
       target, [s], cyclic = True, overhang = True)
    b = listtools.partition_by_counts(
       insert, [t], cyclic = True, overhang = True)
-   replace(a, loci, b)
+   #a = replace(a, loci, b)
+   a = replace(a, (loci, None), (b, len(b)))
    
-   result = [ ]
-   for sublist in a:
-      result.extend(sublist)
+   #result = [ ]
+   #for sublist in a:
+   #   result.extend(sublist)
+
+   result = listtools.flatten(a)
 
    return result
 
