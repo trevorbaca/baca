@@ -64,33 +64,3 @@ def recombine(target, s, insert, t, loci):
    result = listtools.flatten(a)
 
    return result
-
-
-def smelt(ll):
-   '''Return positive subsequences in the absolute cumulative sums of ll.
-
-      >>> ll = [1, -1, -2, 1, -2, -1, -2, 2, 1, -3, -1, 2, -2, -1, -1]
-      >>> smelt(ll)
-      [[1], [5], [11, 12, 13], [18, 19]]'''
-
-   result = list(listtools.sum_by_sign(ll))
-   first  = result[0]
-
-   result = piles(result)
-   result = [0] + result
-   result = [1 + n for n in result]
-   result = listtools.pairwise(result)
-
-   new = [ ]
-   if mathtools.sign(first) == 1:
-      for i, pair in enumerate(result):
-         if i % 2 == 0:
-            new.append(pair)
-   else:
-      for i, pair in enumerate(result):
-         if i % 2 == 1:
-            new.append(pair)
-
-   result = [range(*pair) for pair in new]
-      
-   return result

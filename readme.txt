@@ -177,6 +177,11 @@ Functions migrated from baca/utilities.py to Abjad:
    listtools.overwrite_slices_at(l, pairs)
 
 
+   utilities.smelt(ll)
+   ==>
+   lidercfeny.transforms.lengths_to_joined_positive_counts(l)
+
+
    utilities.snip(l, weight, i) 
    ==> 
    listtools.remove_weighted_subrun_at(l, weight, i)
