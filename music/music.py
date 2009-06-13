@@ -1091,7 +1091,7 @@ def nest(measures, outer, inner):
    '''
    
    #inner = partition(inner, [len(x) for x in outer], action = 'new')
-   inner = listtools.partition_by_counts(inner, [len(x) for x in outer])
+   inner = listtools.partition_by_lengths(inner, [len(x) for x in outer])
 
    result = [ ]
    
@@ -1588,7 +1588,7 @@ def stellate(k, s, t, d, b, span ='from duration', rests = True):
       part_counts = [len(x) for x in signatures]
       signatures = listtools.flatten(signatures)
       signatures = [abs(x) for x in signatures]
-      signatures = listtools.partition_by_counts(signatures, part_counts)
+      signatures = listtools.partition_by_lengths(signatures, part_counts)
 
    denominators = copy.copy(k)
    pairs = zip(signatures, denominators)
@@ -1602,7 +1602,7 @@ def stellate(k, s, t, d, b, span ='from duration', rests = True):
 
    dummy_container = Container(tuplets)
    #partition(tuplets, b, cyclic = True, overhang = True)
-   tuplets = listtools.partition_by_counts(
+   tuplets = listtools.partition_by_lengths(
       tuplets, b, cyclic = True, overhang = True)
    for i, sublist in enumerate(tuplets):
       #if t == [[4, -5, 8], [4, -8], [-4, 6, -6, 8]] and i == 7:
@@ -1677,7 +1677,7 @@ def coruscate(n, s, t, z, d, rests = True):
       part_counts = [len(x) for x in signatures]
       signatures = listtools.flatten(signatures)
       signatures = [abs(x) for x in signatures]
-      signatures = listtools.partition_by_counts(signatures, part_counts)
+      signatures = listtools.partition_by_lengths(signatures, part_counts)
 
    if debug: print signatures
 

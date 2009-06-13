@@ -90,6 +90,8 @@ Functions migrated from baca/utilities.py to Abjad:
    ==>
    listtools.partition_by_counts(l, counts, overhang = False, cyclic = False)
    listtools.partition_by_weights(l, counts, overhang = False, cyclic = False)
+   ==>
+   listtools.partition_by_lengths(l, counts, overhang = False, cyclic = False)
 
    
    utilities.permIter(seq)
