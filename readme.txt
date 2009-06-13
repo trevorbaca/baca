@@ -147,9 +147,21 @@ Functions migrated from baca/utilities.py to Abjad:
    listtools.repeat_to_length(l, length, start_index = start)
 
 
+   utilities.recombine(target, s, insert, t, loci)
+   ==>
+   partitioned_target = listtools.partition_by_counts(target, s)
+   partitioned_insert = listtools.partition_by_counts(insert, t)
+   periodic_insert = (partitioned_insert, len(partitioned_insert)
+   result = listtools.replace_elements_cyclic(
+      partition_target, (loci, None), periodic_insert)
+   result = listtools.flatten(result)
+
+
    utilities.replace(l, indices, material)
    ==>
    listtools.overwrite_elements_at(l, indices, material)
+   ==>
+   listtools.replace_elements_cyclic(l, indices, material)
 
 
    utilities.ripple(l, [(anchor, (length, total_appearances)), ...])

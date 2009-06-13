@@ -1585,7 +1585,7 @@ def stellate(k, s, t, d, b, span ='from duration', rests = True):
    signatures = utilities.partition_nested_into_canonic_parts(signatures)
 
    if not rests:
-      part_counts = = [len(x) for x in signatures]
+      part_counts = [len(x) for x in signatures]
       signatures = listtools.flatten(signatures)
       signatures = [abs(x) for x in signatures]
       signatures = listtools.partition_by_counts(signatures, part_counts)
@@ -1674,7 +1674,7 @@ def coruscate(n, s, t, z, d, rests = True):
    signatures = utilities.partition_nested_into_canonic_parts(signatures)
 
    if not rests:
-      part_counts = = [len(x) for x in signatures]
+      part_counts = [len(x) for x in signatures]
       signatures = listtools.flatten(signatures)
       signatures = [abs(x) for x in signatures]
       signatures = listtools.partition_by_counts(signatures, part_counts)
