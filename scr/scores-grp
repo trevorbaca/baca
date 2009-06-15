@@ -3,12 +3,13 @@
 import os
 import sys
 
-base = 'grep -Irn "%s" /Users/trevorbaca/Documents/work/%s/* | grep -v svn | grep -v crito-1 | grep -v crito-2'
+base = 'grep -Irn "%s" /Users/trevorbaca/Documents/scores/%s/* | grep -v svn | grep -v crito-1 | grep -v crito-2'
 
 os.system('clear')
 
-os.system('grep -Irn "%s" /Users/trevorbaca/Documents/baca | grep -v svn' %
+os.system('grep -Irn "%s" /Users/trevorbaca/Documents/abjad/baca | grep -v svn' %
    sys.argv[1])
 
-for work in ('cary', 'sekka', 'lidercfeny', 'manifolds', ):
+for work in ('cary', 'sekka', 'lidercfeny', 
+   'manifolds', 'territoires', 'desir'):
    os.system(base % (sys.argv[1], work))

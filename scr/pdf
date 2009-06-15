@@ -1,0 +1,39 @@
+#! /usr/bin/env python
+
+import os
+import sys
+
+## parse input arguments
+if len(sys.argv) == 1:
+   directory = '.'
+elif len(sys.argv) == 2:
+   directory = sys.argv[1]
+else:
+   print 'usage: pdfs [directory]'
+   sys.exit(1)
+
+## clear terminal
+os.system('clear')
+
+## walk specified directory (defaulting to curdir) and collect pdfs
+pdfs = [ ]
+for dirpath, dirnames, filenames in os.walk(directory):
+   new_pdfs = [x for x in filenames if x.endswith('.pdf')]
+   new_pdfs = [os.path.join(dirpath, x) for x in new_pdfs]
+   pdfs.extend(new_pdfs)
+
+## open and print name of only last pdf collected
+pdfs.sort( )
+if pdfs:
+   last_pdf = pdfs[-1]
+   print last_pdf
+   os.system('open %s' % last_pdf)
+
+## print summary total
+if len(pdfs) == 0:
+   print 'No PDFs to open.'
+elif len(pdfs) == 1:
+   print '1 PDF opened.'
+
+## print blank line
+print ''
