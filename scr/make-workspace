@@ -56,3 +56,5 @@ if type == 'score':
 if type == 'data':
    test = os.path.join(path, 'test')
    os.mkdir(test)
+
+print ''
