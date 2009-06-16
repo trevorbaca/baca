@@ -20,8 +20,9 @@ os.mkdir(path)
 
 ## create main workspace driver script.
 ## both data and score workspaces implement such a driver.
-main = os.path.join(path, workspace + '.py')
-file(main, 'w').write('#! /usr/bin/env python\n')
+driver = os.path.join(path, 'run.py')
+file(driver, 'w').write('#! /usr/bin/env python\n')
+os.system('chmod 755 %s' % driver)
 
 ## data workspaces allow import of products created in workspace.
 ## score workspaces do not allow import of products created in workspace.
