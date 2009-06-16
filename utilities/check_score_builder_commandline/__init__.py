@@ -1,0 +1,1 @@
+from check_score_builder_commandline import check_score_builder_commandline
