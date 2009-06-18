@@ -18,11 +18,29 @@ path = os.path.join(os.path.abspath(directory), workspace)
 print 'Creating %s workspace %s ...' % (type, path)
 os.mkdir(path)
 
-## create main workspace driver script.
-## both data and score workspaces implement such a driver.
+## create data and score workspace driver script file.
 driver = os.path.join(path, 'run.py')
-file(driver, 'w').write('#! /usr/bin/env python\n')
 os.system('chmod 755 %s' % driver)
+
+## make template driver script as string
+template_driver_script = '''#! /usr/bin/env python
+
+from helpers import make_some_data
+import baca
+import os
+
+if __name__ == '__main__':
+
+   os.system('clear')
+
+   print 'Making data ...'
+   #output = make_some_data( )
+   #output = 'output = %s' % output 
+   #baca.utilities.cache_output(output, 'file_name', __file__)
+   print '' '''
+
+## write template driver script to driver script file
+file(driver, 'w').write(run_py)
 
 ## data workspaces allow import of products created in workspace.
 ## score workspaces do not allow import of products created in workspace.
