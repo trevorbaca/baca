@@ -1,24 +1,26 @@
 from abjad.tools import listtools
 
 
-def unfive(l, target = 'negative'):
+def partition_nested_into_inward_pointing_parts(l, target = 'negative'):
    '''Partition integers into canonic parts using a special
    inward-pointing orientation.
 
-   >>> l = [[1, 1, 5]]
-   >>> utilities.unfive(l)
+   abjad> l = [[1, 1, 5]]
+   abjad> utilities.partition_nested_into_inward_pointing_parts(l)
    [[1, 1, 5]]
 
-   >>> l = [[1, 1, -5]]
-   >>> utilities.unfive(l)
+   abjad> l = [[1, 1, -5]]
+   abjad> utilities.partition_nested_into_inward_pointing_parts(l)
    [[1, 1, 1, -4]]
 
-   >>> l = [[1], [5], [5, 1], [1, 5], [5, 5], [1, 5, 1]]
-   >>> utilities.unfive(l, target = 'positive')
+   abjad> l = [[1], [5], [5, 1], [1, 5], [5, 5], [1, 5, 1]]
+   abjad> utilities.partition_nested_into_inward_pointing_parts(
+      l, target = 'positive')
    [[1], [4, 1], [4, 1, 1], [1, 1, 4], [4, 1, 1, 4], [1, 4, 1, 1]]
 
-   >>> l = [[1, 1, -5]]
-   >>> utilities.unfive(l, target = 'positive')
+   abjad> l = [[1, 1, -5]]
+   abjad> utilities.partition_nested_into_inward_pointing_parts(
+      l, target = 'positive')
    [[1, 1, -5]]
    '''
 
