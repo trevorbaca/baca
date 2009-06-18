@@ -206,6 +206,11 @@ Functions migrated from baca/utilities.py to Abjad:
    listtools.increase_at_indices(l, addenda, indices)
 
 
+   utilities.unfive(l, target = 'negative')
+   ==>
+   utilities.partition_nested_into_inward_pointing_parts(l, target = 'negative')
+
+
    utilities.untie(expr, signs = 'all positive')
    ==>
    utilities.partition_nested_into_canonic_parts(expr, direction = 'big-endian')
