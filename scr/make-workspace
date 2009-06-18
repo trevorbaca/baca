@@ -18,10 +18,6 @@ path = os.path.join(os.path.abspath(directory), workspace)
 print 'Creating %s workspace %s ...' % (type, path)
 os.mkdir(path)
 
-## create data and score workspace driver script file.
-driver = os.path.join(path, 'run.py')
-os.system('chmod 755 %s' % driver)
-
 ## make template driver script as string
 template_driver_script = '''#! /usr/bin/env python
 
@@ -40,7 +36,9 @@ if __name__ == '__main__':
    print '' '''
 
 ## write template driver script to driver script file
-file(driver, 'w').write(run_py)
+driver = os.path.join(path, 'run.py')
+file(driver, 'w').write(template_driver_script)
+os.system('chmod 755 %s' % driver)
 
 ## data workspaces allow import of products created in workspace.
 ## score workspaces do not allow import of products created in workspace.
