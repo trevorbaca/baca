@@ -25,7 +25,7 @@ os.system('chmod 755 %s' % driver)
 ## make template driver script as string
 template_driver_script = '''#! /usr/bin/env python
 
-from helpers import make_some_data
+#from helpers import make_some_data
 import baca
 import os
 
