@@ -2,6 +2,8 @@ from abjad.note.note import Note
 from abjad.tools import clone
 
 
+## TODO: Rename to repeat_subruns_to_count( ) to match Abjad listtool. ##
+
 def repeat_subruns_cyclic(notes, pairs, history = False):
    '''Repeat components according to pairs.
 

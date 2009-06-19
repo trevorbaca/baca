@@ -171,6 +171,8 @@ Functions migrated from baca/utilities.py to Abjad:
    ==>
    listtools.repeat_subruns_cyclic(l, [(achor, length, new_appearances), ...])
    ie, listtools.repeat_subruns_cyclic(l, [(i, length, n - 1), ...])
+   ==>
+   listtools.repeat_subruns_to_count( )
 
 
    utilities.rout(l, s, cur = 0, recurse = False)
