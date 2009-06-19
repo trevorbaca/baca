@@ -18,8 +18,8 @@ path = os.path.join(os.path.abspath(directory), workspace)
 print 'Creating %s workspace %s ...' % (type, path)
 os.mkdir(path)
 
-## make template driver script as string
-template_driver_script = '''#! /usr/bin/env python
+## make template data driver script as string
+template_data_driver_script = '''#! /usr/bin/env python
 
 #from helpers import make_some_data
 import baca
@@ -35,9 +35,40 @@ if __name__ == '__main__':
    #baca.utilities.cache_output(output, 'file_name', __file__)
    print '' '''
 
+## make template score driver script as string
+template_score_driver_script = '''#! /usr/bin/env python
+
+from abjad.tools import io
+#from helpers import make_some_score
+import baca
+import os
+import sys
+
+if __name__ == '__main__':
+
+   os.system('clear')
+   usage = 'usage: some_script.py [--nowrite|--write]'
+   write = baca.utilities.check_score_builder_commandline(sys.argv, usage)
+   dirname = os.path.abspath(os.path.dirname(__file__))
+   template = os.path.join(dirname, 'templates', 'some_template.ly')
+
+   print 'Making some score ...'
+   score = make_some_score( )
+   name = os.path.join(dirname, 'output', 'some_file_name')
+   title = [ ]
+   title.append('Score Title')
+   io.write_and_show(score, name, template, title, write = write)
+   print '' '''
+
 ## write template driver script to driver script file
 driver = os.path.join(path, 'run.py')
-file(driver, 'w').write(template_driver_script)
+
+if type == 'data':
+   file(driver, 'w').write(template_data_driver_script)
+elif type == 'score':
+   file(driver, 'w').write(template_score_driver_script)
+
+## make driver script executable
 os.system('chmod 755 %s' % driver)
 
 ## data workspaces allow import of products created in workspace.
