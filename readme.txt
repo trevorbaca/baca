@@ -122,6 +122,8 @@ Functions migrated from baca/utilities.py to Abjad:
    utilities.pleat(l, n)
    ==>
    listtools.repeat_elements_to_length(l, n)
+   ==>
+   listtools.repeat_elements_to_count(l, count)
 
 
    utilities.plough(w, s, cur = 0, action = 'in place')
