@@ -10,8 +10,8 @@ print 'baca ...'
 os.system('svn st -u /Users/trevorbaca/Documents/baca')
 print ''
 
-for dir in ('recursif', 'hijinks', 
-   'cary', 'sekka', 'lidercfeny', 'manifolds', 'territoires',):
+for dir in ('territoires', 'manifolds', 'lidercfeny', 'sekka', 'cary',
+   'hijinks', 'recursif'):
    print '%s ...' % dir
    os.system('svn st -u %s' % os.path.join(WORKDIR, dir))
    print ''
