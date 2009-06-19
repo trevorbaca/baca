@@ -47,7 +47,7 @@ import sys
 if __name__ == '__main__':
 
    os.system('clear')
-   usage = 'usage: some_script.py [--nowrite|--write]'
+   usage = 'usage: run.py [--nowrite|--write]'
    write = baca.utilities.check_score_builder_commandline(sys.argv, usage)
    dirname = os.path.abspath(os.path.dirname(__file__))
    template = os.path.join(dirname, 'templates', 'some_template.ly')
