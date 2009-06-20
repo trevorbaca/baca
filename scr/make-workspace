@@ -50,7 +50,8 @@ if __name__ == '__main__':
    usage = 'usage: run.py [--nowrite|--write]'
    write = baca.utilities.check_score_builder_commandline(sys.argv, usage)
    dirname = os.path.abspath(os.path.dirname(__file__))
-   template = os.path.join(dirname, 'templates', 'some_template.ly')
+   template = 'some_template'
+   template = os.path.join(dirname, 'templates', template + '.ly')
 
    print 'Making some score ...'
    score = make_some_score( )
