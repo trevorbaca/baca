@@ -3,6 +3,7 @@
 from cache_output import cache_output
 from check_score_builder_commandline import check_score_builder_commandline
 from helianthate import helianthate
+from import_public_functions import import_public_functions
 from increase_sublist_end_elements import increase_sublist_end_elements
 from intaglio import intaglio
 from partition_nested_into_canonic_parts import \

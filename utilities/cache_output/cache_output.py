@@ -9,6 +9,8 @@ def cache_output(output, name, location):
    assert not ' ' in name
 
    dirname = os.path.abspath(location)
+   print dirname
+   raise Exception
    dirname = os.path.dirname(dirname)
    outfile = os.path.join(dirname, 'output', name + '.py')
    outfile = file(outfile, 'w')
