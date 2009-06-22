@@ -96,7 +96,17 @@ if type == 'data':
 helpers = os.path.join(path, 'helpers')
 os.mkdir(helpers)
 init = os.path.join(helpers, '__init__.py')
-file(init, 'w').write('\n')
+helpers_init = 'from %s import %s\n' % (function, function)
+file(init, 'w').write(helpers_init)
+
+## create primary helper file
+helper_file = os.path.join(path, 'helpers', function + '.py')
+helper_contents = '''
+
+def %s( ):
+
+   ''' % (function)
+file(helper_file, 'w').write(helper_contents)
 
 ## create output directory for both data and score workspaces.
 output = os.path.join(path, 'output')
@@ -106,7 +116,8 @@ os.mkdir(output)
 ## in data workspace only.
 if type == 'data':
    init = os.path.join(output, '__init__.py')
-   file(init, 'w').write('\n')
+   output_init = 'from %s import %s\n' % (output_product, output_product)
+   file(init, 'w').write(output_init)
 
 ## create templates directory for score workspaces only.
 if type == 'score':
