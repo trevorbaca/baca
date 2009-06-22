@@ -13,15 +13,27 @@ type = type[2:]
 directory = sys.argv[2]
 workspace = sys.argv[3]
 
+## clear terminal
+os.system('clear')
+
 ## create data or score workspace.
 path = os.path.join(os.path.abspath(directory), workspace)
 print 'Creating %s workspace %s ...' % (type, path)
 os.mkdir(path)
 
+## strip 'aa_' from workspace to create function name
+function = workspace[3:]
+
+## strip 'aa_make_' from workspace to create output product name
+output_product = workspace[8:]
+
+## replace underscores with spaces for status message
+status_message = output_product.replace('_', ' ')
+
 ## make template data driver script as string
 template_data_driver_script = '''#! /usr/bin/env python
 
-#from helpers import make_some_data
+from helpers import %s
 import baca
 import os
 
@@ -29,11 +41,12 @@ if __name__ == '__main__':
 
    os.system('clear')
 
-   print 'Making data ...'
-   #output = make_some_data( )
-   #output = 'output = %s' % output 
-   #baca.utilities.cache_output(output, 'file_name', __file__)
-   print '' '''
+   print 'Making %s ...'
+   output = %s( )
+   output = '%s = %%s' %% output 
+   baca.utilities.cache_output(output, '%s', __file__)
+   print '' ''' % (
+      function, status_message, function, output_product, output_product)
 
 ## make template score driver script as string
 template_score_driver_script = '''#! /usr/bin/env python
