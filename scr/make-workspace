@@ -27,6 +27,8 @@ elif type == 'scores':
 else:
    raise ValueError
 
+print ''
+
 ### create verb
 #verbs = {'data': 'make', 'function': 'def', 'score': 'score'}
 #verb = verbs[type]
