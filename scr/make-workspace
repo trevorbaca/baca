@@ -6,158 +6,23 @@ import workspaces
 
 ## check commandline arguments
 if not len(sys.argv) == 4:
-   print 'usage: make-workspace (--data|--helpers|--scores) directory workspace'
+   print 'usage: make-workspace (--data|--score) directory workspace'
 
 ## parse commandline arguments
 type = sys.argv[1][2:]
 parent_directory = sys.argv[2]
 workspace = sys.argv[3]
 
-assert type in ('data', 'helpers', 'score')
+assert type in ('data', 'score')
 
 ## clear terminal
 os.system('clear')
 
 if type == 'data':
    workspaces.make_data_workspace(parent_directory, workspace)
-elif type == 'helpers':
-   workspaces.make_helpers_workspace(parent_directory, workspace)
-elif type == 'scores':
-   workspaces.make_scores_workspace(parent_directory, workspace)
+elif type == 'score':
+   workspaces.make_score_workspace(parent_directory, workspace)
 else:
    raise ValueError
 
 print ''
-
-### create verb
-#verbs = {'data': 'make', 'function': 'def', 'score': 'score'}
-#verb = verbs[type]
-#
-### create workspace directory prefix
-#prefix = '%s_%s' % (letter_pair, verb)
-#
-### create data, function or score workspace.
-#workspace_directory = '%s_%s' % (prefix, workspace)
-#path = os.path.join(os.path.abspath(parent_directory), workspace_directory)
-#print 'Creating %s workspace %s ...' % (type, path)
-#os.mkdir(path)
-#
-### build status message
-#if type == 'data':
-#   status_message = workspace.replace('_', ' ')
-#elif type == 'function':
-#   status_message = '%s( )' % workspace
-#elif type == 'score':
-#   status_message = '%s score' % workspace.replace('_', ' ')
-#
-### make template data driver script as string
-#template_data_driver_script = '''#! /usr/bin/env python
-#
-#from helpers import %s
-#import baca
-#import os
-#
-#if __name__ == '__main__':
-#
-#   os.system('clear')
-#
-#   print 'Making %s ...'
-#   output = %s( )
-#   output = '%s = %%s' %% output 
-#   baca.utilities.cache_output(output, '%s', __file__)
-#   print '' ''' % (
-#      workspace, status_message, workspace, workspace, workspace)
-#
-### NOTE: no driver script for function workspaces.
-#
-### make template score driver script as string
-#template_score_driver_script = '''#! /usr/bin/env python
-#
-#from abjad.tools import io
-##from helpers import make_some_score
-#import baca
-#import os
-#import sys
-#
-#if __name__ == '__main__':
-#
-#   os.system('clear')
-#   usage = 'usage: run.py [--nowrite|--write]'
-#   write = baca.utilities.check_score_builder_commandline(sys.argv, usage)
-#   dirname = os.path.abspath(os.path.dirname(__file__))
-#   template = 'some_template'
-#   template = os.path.join(dirname, 'templates', template + '.ly')
-#
-#   print 'Making some score ...'
-#   score = make_some_score( )
-#   name = os.path.join(dirname, 'output', 'some_file_name')
-#   title = [ ]
-#   title.append('Score Title')
-#   io.write_and_show(score, name, template, title, write = write)
-#   print '' '''
-#
-### write template driver script to driver script file
-#driver = os.path.join(path, 'run.py')
-#
-#if type == 'data':
-#   file(driver, 'w').write(template_data_driver_script)
-#   os.system('chmod 755 %s' % driver)
-#elif type == 'score':
-#   file(driver, 'w').write(template_score_driver_script)
-#   os.system('chmod 755 %s' % driver)
-#
-### data workspaces allow import of products created in workspace.
-### score workspaces do not allow import of products created in workspace.
-### create initializer to allow import of data workspace products only.
-#if type == 'data':
-#   init = os.path.join(path, '__init__.py')
-#   file(init, 'w').write('\n')
-#
-### create externalized helpers package for both data and score workspaces.
-#helpers = os.path.join(path, 'helpers')
-#os.mkdir(helpers)
-#init = os.path.join(helpers, '__init__.py')
-#helpers_init = 'from %s import %s\n' % (workspace, workspace)
-#file(init, 'w').write(helpers_init)
-#
-### create primary helper file
-#helper_file = os.path.join(path, 'helpers', workspace + '.py')
-#helper_contents = '''
-#
-#def %s( ):
-#
-#   ''' % (workspace)
-#file(helper_file, 'w').write(helper_contents)
-#
-### create output directory for data workspaces
-#if type == 'data':
-#   output_directory = os.path.join(path, 'output')
-#   os.mkdir(output_directory)
-#   output_init = os.path.join(output_directory, '__init__.py')
-#   output_file, output_product = workspace, workspace
-#   contents = 'from %s import %s\n' % (output_file, output_product)
-#
-### create helpers directory for function workspaces
-#if type == 'function':
-#   helpers_directory = os.path.join(path, 'helpers')
-#   os.mkdir(helpers_directory)
-#   helpers_init = os.path.join(helpers_directory, '__init__.py')
-#   helper_file, helper_function = workspace, workspace
-#   contents = 'from %s import %s\n' % (helper_file, helper_function)
-#
-### create scores directory for score workspaces
-#if type == 'score':
-#   scores_directory = os.path.join(path, 'scores')
-#   os.mkdir(scores_directory)
-#
-### create templates directory for score workspaces only.
-#if type == 'score':
-#   templates = os.path.join(path, 'templates')
-#   os.mkdir(templates)
-#
-### create test directory for data workspaces only.
-#if type == 'data':
-#   test = os.path.join(path, 'test')
-#   os.mkdir(test)
-#
-#print ''
