@@ -42,10 +42,11 @@ def make_data_workspace(parent_directory, workspace_name):
    os.mkdir(helpers_directory)
 
    ## make helpers init contents
-   helpers_init_contents = '''import baca
-
-   baca.utilities.import_public_functions(__file__, globals( ))
-   del baca'''
+   helpers_init_contents = 'import baca\n'
+   helpers_init_contents += '\n'
+   helpers_init_contents += \
+      'baca.utilities.import_public_functions(__file__, globals( ))\n'
+   helpers_init_contents += 'del baca'
 
    ## write helpers init
    helpers_init = os.path.join(helpers_directory, '__init__.py')
@@ -54,12 +55,11 @@ def make_data_workspace(parent_directory, workspace_name):
    helpers_init.close( )
 
    ## make helper contents
-   helper_contents = '''
-
-   def %s( ):
-
-      pass
-      ''' % function_name
+   helper_contents = '\n'
+   helper_contents += '\n'
+   helper_contents += 'def %s( ):\n' % function_name
+   helper_contents += '\n'
+   helper_contents += '\tpass\n'
 
    ## make helper file
    helper_file = function_name + '.py'
