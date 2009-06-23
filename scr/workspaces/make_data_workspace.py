@@ -59,7 +59,7 @@ def make_data_workspace(parent_directory, workspace_name):
    helper_contents += '\n'
    helper_contents += 'def %s( ):\n' % function_name
    helper_contents += '\n'
-   helper_contents += '\tpass\n'
+   helper_contents += '   pass\n'
 
    ## make helper file
    helper_file = function_name + '.py'
