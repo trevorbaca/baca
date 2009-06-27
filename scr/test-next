@@ -50,7 +50,7 @@ else:
    next_lily_number = most_recent_lily_number + 1
    next_lily_filename = '%04d.ly' % next_lily_number
 
-next_lily_filename = LILYPONDTEST + os.sep + next_lily_filename
+next_lily_filename = os.path.join(LILYPONDTEST, next_lily_filename)
 
 start_directory = os.path.abspath('.')
 os.chdir(LILYPONDTEST)
