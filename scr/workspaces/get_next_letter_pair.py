@@ -8,6 +8,11 @@ def get_next_letter_pair(directory):
    files = [x for x in files if x[0] == x[1]]
    files = [x for x in files if 'a' <= x[0] <= 'z']
    files.sort( )
+   
+   if not files:
+      letter_pair = 'aa'
+      return letter_pair
+
    last_file = files[-1]
    last_file_starting_letter = last_file[0]
    if last_file_starting_letter == 'z':
