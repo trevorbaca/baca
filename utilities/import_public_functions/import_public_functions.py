@@ -19,7 +19,8 @@ def import_public_functions(directory, namespace, functions = True):
    for module_name in module_names:
       module = __import__(module_name, globals = namespace)
       for key, value in vars(module).items( ):
-         if _is_defined_in_module(value, module):
+         if _is_defined_in_module(value, module) or \
+            isinstance(value, (list, dict)):
             if not key.startswith('_'):
                namespace[key] = value
 
