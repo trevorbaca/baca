@@ -1,7 +1,7 @@
 import os
 
 
-def import_public_functions(directory, namespace, functions = True)
+def import_public_functions(directory, namespace, functions = True):
    '''Import into `namespace` every public name in every public 
    module resident in `directory.
 
