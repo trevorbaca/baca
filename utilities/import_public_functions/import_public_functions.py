@@ -24,12 +24,13 @@ def import_public_functions(directory, namespace, functions = True):
                namespace[key] = value
 
 
-def _is_abjad(value):
-   path = getattr(value, '__module__', None)
-   if path is None:
-      path = getattr(value, '__name__', '')
-   return path.startswith('abjad.')
-
-
 def _is_defined_in_module(value, module):
-   return getattr(value, '__module__', None) == module
+
+   ## get string name of module
+   module_name = module.__name__
+   
+   ## name string name of module in which value is defined
+   value_module_name = getattr(value, '__module__', None)
+
+   ## return True when value is defined in module
+   return module_name == value_module_name
