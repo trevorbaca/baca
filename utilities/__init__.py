@@ -1,7 +1,11 @@
 '''List tools used in Cary, Sekka and Lidercfeny.'''
 
+## TODO: Replace with dynamic import code. ##
+
 from cache_output import cache_output
+from cache_text import cache_text
 from check_score_builder_commandline import check_score_builder_commandline
+from get_parent_directory import get_parent_directory
 from helianthate import helianthate
 from import_public_functions import import_public_functions
 from increase_sublist_end_elements import increase_sublist_end_elements

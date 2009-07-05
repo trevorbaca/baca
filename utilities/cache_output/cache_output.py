@@ -1,21 +1,19 @@
+from baca.utilities.get_parent_directory import get_parent_directory
 import os
 
 
-def cache_output(output, name, location):
-   '''Cache string-based output to location/../_output directory.'''
+def cache_output(output, output_file_name, location):
+   '''Cache `output` string to output file with name equal to
+   `output_file_name` in ../_output directory.
+   '''
 
    assert isinstance(output, str)
-   assert isinstance(name, str)
-   assert not ' ' in name
+   assert isinstance(output_file_name, str)
+   assert not ' ' in output_file_name
 
-   filename = os.path.abspath(location)
-   dirname = os.path.dirname(filename)
-   dirpath = dirname.split(os.sep)
-   parpardir = dirpath[:-1]
-   parpardir.insert(0, '/')
-   parpardir.append('_output')
-   output_directory = os.path.join(*parpardir)
-   outfile = os.path.join(output_directory, name + '.py')
+   parent_directory = get_parent_directory(location)
+   output_directory = os.path.join(parent_directory, '_output')
+   outfile = os.path.join(output_directory, output_file_name + '.py')
    outfile = file(outfile, 'w')
    outfile.write(output)
    outfile.close( )
