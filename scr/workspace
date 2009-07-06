@@ -6,7 +6,7 @@ import workspaces
 
 ## check commandline arguments
 if not len(sys.argv) == 4:
-   print 'usage: make-workspace (--data|--score) directory workspace'
+   print 'usage: workspace (--data|--score) directory workspace_name'
 
 ## parse commandline arguments
 type = sys.argv[1][2:]
