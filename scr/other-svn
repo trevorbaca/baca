@@ -5,13 +5,13 @@ import os
 os.system('clear')
 
 dirs = (
-   '/Users/trevorbaca/Documents/articles',
-   '/Users/trevorbaca/Documents/harvard',
-   '/Users/trevorbaca/Documents/math',
-   '/Users/trevorbaca/Documents/reference',
-   '/Users/trevorbaca/Documents/travel',
-   '/Users/trevorbaca/Documents/vitae',
-   '/Users/trevorbaca/friends',)
+   '/Users/trevorbaca/Documents/other/articles',
+   '/Users/trevorbaca/Documents/other/math',
+   '/Users/trevorbaca/Documents/other/monographs',
+   '/Users/trevorbaca/Documents/other/reference',
+   '/Users/trevorbaca/Documents/other/travel',
+   '/Users/trevorbaca/Documents/other/vitae',
+   )
 
 for dir in dirs:
    name = dir.split('/')[-1]
