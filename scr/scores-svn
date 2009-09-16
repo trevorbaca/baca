@@ -2,11 +2,13 @@
 
 import os
 
-SCORESDIR = '/Users/trevorbaca/Documents/scores/'
+SCORES = '/Users/trevorbaca/Documents/scores/'
 os.system('clear')
 
 print 'baca ...'
-os.system('svn st -u /Users/trevorbaca/Documents/baca')
+#os.system('svn st -u /Users/trevorbaca/Documents/baca')
+BACA = os.environ.get('BACA')
+os.system('svn st -u %s' % BACA)
 print ''
 
 dirs = (
@@ -21,5 +23,5 @@ dirs = (
 
 for dir in dirs:
    print '%s ...' % dir
-   os.system('svn st -u %s' % os.path.join(SCORESDIR, dir))
+   os.system('svn st -u %s' % os.path.join(SCORES, dir))
    print ''
