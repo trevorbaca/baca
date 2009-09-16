@@ -5,7 +5,7 @@ import os
 os.system('clear')
 
 dirs = (
-   '/Users/trevorbaca/friends',
+   '/Users/trevorbaca/Documents/friends',
    )
 
 for dir in dirs:
