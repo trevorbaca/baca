@@ -1,0 +1,16 @@
+#! /usr/bin/env python
+
+import os
+
+os.system('clear')
+
+dirs = (
+   '/Users/trevorbaca/Documents/abjad',
+   '/Users/trevorbaca/Documents/abjad/baca',
+   )
+
+for dir in dirs:
+   name = dir.split('/')[-1]
+   print '%s ...' % name
+   os.system('svn st -u %s' % dir)
+   print ''
