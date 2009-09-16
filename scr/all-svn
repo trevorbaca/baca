@@ -5,6 +5,8 @@ import os
 os.system('clear')
 
 dirs = (
+   '/Users/trevorbaca/friends',
+
    '/Users/trevorbaca/Documents/abjad',
    '/Users/trevorbaca/Documents/abjad/baca',
 
