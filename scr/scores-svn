@@ -1,17 +1,25 @@
 #! /usr/bin/env python
 
 import os
-import sys
 
-WORKDIR = '/Users/trevorbaca/Documents/work/'
+SCORESDIR = '/Users/trevorbaca/Documents/scores/'
 os.system('clear')
 
 print 'baca ...'
 os.system('svn st -u /Users/trevorbaca/Documents/baca')
 print ''
 
-for dir in ('territoires', 'manifolds', 'lidercfeny', 'sekka', 'cary',
-   'hijinks', 'recursif'):
+dirs = (
+   'desir',
+   'territoires', 
+   'manifolds', 
+   'lidercfeny', 
+   'sekka', 
+   'cary',
+   'hijinks', 
+   'recursif')
+
+for dir in dirs:
    print '%s ...' % dir
-   os.system('svn st -u %s' % os.path.join(WORKDIR, dir))
+   os.system('svn st -u %s' % os.path.join(SCORESDIR, dir))
    print ''
