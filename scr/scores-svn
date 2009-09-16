@@ -6,6 +6,7 @@ SCORES = '/Users/trevorbaca/Documents/scores/'
 os.system('clear')
 
 dirs = (
+   'zeit',
    'recursif',
    'hijinks', 
    'cary',
