@@ -1,0 +1,5 @@
+New: formattools.report(t).
+
+Use the tool to show where format comes from.
+
+New tutorial chapter added to the doc site.
