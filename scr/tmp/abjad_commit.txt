@@ -25,4 +25,3 @@ on the different spacing sections that you create.
            f'8
            %%% spacing section ends here %%%
    }
-
