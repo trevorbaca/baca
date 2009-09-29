@@ -1,27 +1,24 @@
-New: read / write SpacingSpanner.proportional_notation_duration attribute.
+New: read / write SpacingInterface.proportional_notation_duration attribute.
 
-You can use the Abjad SpacingSpanner to create new spacing sections.
+You can now set the public proportional_notation_duration attribute
+on any Abjad score for scorewide proportional notation duration.
 
-And you can now set the public proportional_notation_duration attribute
-on the different spacing sections that you create.
+   t = Score([Staff(construct.scale(4))])
+   t.spacing.strict_grace_spacing = True
+   t.spacing.strict_note_spacing = True
+   t.spacing.uniform_stretching = True
+   t.spacing.proportional_notation_duration = Rational(1, 56)
 
-   t = Staff(construct.scale(4))
-   spacing_spanner_1 = SpacingSpanner(t[:2])
-   spacing_spanner_1.new_section = True
-   spacing_spanner_1.proportional_notation_duration = Rational(1, 15)
-   spacing_spanner_2 = SpacingSpanner(t[2:])
-   spacing_spanner_2.new_section = True
-   spacing_spanner_2.proportional_notation_duration = Rational(1, 30)
-
-   \new Staff {
-           \newSpacingSection
-           \set Score.proportionalNotationDuration = #(ly:make-moment 1 15)
-           c'8
-           d'8
-           %%% spacing section ends here %%%
-           \newSpacingSection
-           \set Score.proportionalNotationDuration = #(ly:make-moment 1 30)
-           e'8
-           f'8
-           %%% spacing section ends here %%%
-   }
+   \new Score \with {
+           \override SpacingSpanner #'strict-grace-spacing = ##t
+           \override SpacingSpanner #'strict-note-spacing = ##t
+           \override SpacingSpanner #'uniform-stretching = ##t
+           \set proportionalNotationDuration = #(ly:make-moment 1 56)
+   } <<
+           \new Staff {
+                   c'8
+                   d'8
+                   e'8
+                   f'8
+           }
+   >>
