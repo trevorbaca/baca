@@ -1,5 +1,27 @@
-New: formattools.report(t).
+New: read / write SpacingSpanner.proportional_notation_duration attribute.
 
-Use the tool to show where format comes from.
+You can use the Abjad SpacingSpanner to create new spacing sections.
 
-New tutorial chapter added to the doc site.
+And you can now set the public proportional_notation_duration attribute
+on the different spacing sections that you create.
+
+   t = Staff(construct.scale(4))
+   spacing_spanner_1 = SpacingSpanner(t[:2])
+   spacing_spanner_1.new_section = True
+   spacing_spanner_1.proportional_notation_duration = Rational(1, 15)
+   spacing_spanner_2 = SpacingSpanner(t[2:])
+   spacing_spanner_2.new_section = True
+   spacing_spanner_2.proportional_notation_duration = Rational(1, 30)
+
+   \new Staff {
+           \newSpacingSection
+           \set Score.proportionalNotationDuration = #(ly:make-moment 1 15)
+           c'8
+           d'8
+           %%% spacing section ends here %%%
+           \newSpacingSection
+           \set Score.proportionalNotationDuration = #(ly:make-moment 1 30)
+           e'8
+           f'8
+           %%% spacing section ends here %%%
+   }

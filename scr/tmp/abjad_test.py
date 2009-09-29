@@ -1,12 +1,10 @@
 from abjad import *
 
 
-t = Note(0, (1, 4))
-t.notehead.style = 'cross'
-t.notehead.color = 'red'
-t.stem.color = 'red'
-t.articulations.append('staccato')
-t.articulations.append('tenuto')
-t.markup.down.append(r'\italic { ben. marcato }')
-t.comments.before.append('textual information before')
-t.comments.after.append('textual information after')
+t = Staff(construct.scale(4))
+spacing_spanner_1 = SpacingSpanner(t[:2])
+spacing_spanner_1.new_section = True
+spacing_spanner_1.proportional_notation_duration = Rational(1, 15)
+spacing_spanner_2 = SpacingSpanner(t[2:])
+spacing_spanner_2.new_section = True
+spacing_spanner_2.proportional_notation_duration = Rational(1, 30)
