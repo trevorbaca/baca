@@ -7,6 +7,7 @@
    * Lidercfeny (2007-08) for flute, violin & piano.'''
 
 import music
-import pctheory
-import pitch
 import utilities
+
+## import pitch manually to avoid the 2- to 3-second load time
+#import pitch

@@ -1,0 +1,10 @@
+#! /usr/bin/env python
+
+import os
+
+p = os.popen('svn st -u')
+for line in p.readlines( ):
+   if line.startswith('?'):
+      new_module = line[1:]
+      new_module = new_module.strip( )
+      os.system('svn add %s' % new_module)
