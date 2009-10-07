@@ -1,2 +1,2 @@
-from C import starting_partitions
 from C import C
+from CC import CC
