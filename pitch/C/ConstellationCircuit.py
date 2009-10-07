@@ -1,4 +1,9 @@
+from abjad.markup import Markup
+from abjad.rational import Rational
 from abjad.tools import listtools
+from abjad.tools import lilytools
+from abjad.tools import scoretools
+from abjad.tools.io.show import show
 from Constellation import Constellation
 
 
@@ -26,39 +31,51 @@ class ConstellationCircuit(object):
    ## PRIVATE METHODS ##
 
    def _constellate_starting_partitions(self):
-      self._constellations = [
-         Constellation(x, self.total_range) for x in self.starting_partitions]
+      self._constellations = [ ]
+      for i, starting_partition in enumerate(self.starting_partitions):
+         constellation_number = i + 1
+         constellation = Constellation(
+            constellation_number, starting_partition, self.total_range)
+         constellation._circuit = self
+         self._constellations.append(constellation)
 
    ## PUBLIC ATTRIBUTES ##
 
    @property
-   def portal_chords(self):
+   def colored_generators(self):
+      result = [ ]
+      for i in range(1, len(self) + 1):
+         result.append(self[i].colored_generator)
+      return result
+         
+   @property
+   def generators(self):
       result = self.starting_partitions[:]
       result = [listtools.flatten(partition) for partition in result]
       result = [list(sorted(portal)) for portal in result]
       return result
 
    @property
-   def portal_chord_labels(self):
+   def generator_labels(self):
       result = [ ]
-      portal_chord_numbers = self.portal_chord_numbers
+      generator_numbers = self.generator_numbers
       for i in range(len(self)):
          constellation_number = i + 1
-         portal_chord_number = portal_chord_numbers[i]
-         label = '%s-%s' % (constellation_number, portal_chord_number)
+         generator_number = generator_numbers[i]
+         label = '%s-%s' % (constellation_number, generator_number)
          result.append(label)
       return result
       
    @property
-   def portal_chord_numbers(self):
+   def generator_numbers(self):
       result = [ ]
       constellations = self._constellations
-      portal_chords = self.portal_chords
+      generators = self.generators
       for i in range(len(constellations)):
          constellation = self[i + 1]
-         portal_chord = portal_chords[i]
-         portal_chord_number = constellation.number(portal_chord)
-         result.append(portal_chord_number)
+         generator = generators[i]
+         generator_number = constellation.get_chord_number(generator)
+         result.append(generator_number)
       return result
 
    @property
@@ -68,3 +85,16 @@ class ConstellationCircuit(object):
    @property
    def total_range(self):
       return self._total_range
+
+   ## PUBLIC METHODS ##
+
+   def show_generators(self):
+      score, treble, bass = \
+         scoretools.make_piano_sketch_score(self.colored_generators)
+      score.spacing.proportional_notation_duration = Rational(1, 20)
+      score.text.staff_padding = 10
+      lily_file = lilytools.make_basic_lily_file(score)
+      lily_file.default_paper_size = 'letter', 'landscape'
+      lily_file.global_staff_size = 18
+      lily_file.paper.tagline = Markup('')
+      show(lily_file)
