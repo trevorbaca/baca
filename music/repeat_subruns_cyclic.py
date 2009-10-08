@@ -24,7 +24,7 @@ def repeat_subruns_cyclic(notes, pairs, history = False):
       for i in range(pair[0], pair[0] + pair[1]):
          source = notes[i % len_notes]
          new_note = Note(source.pitch.number, source.duration.written)
-         if source.history.has_key('tag'):
+         if hasattr(source.history, 'tag'):
             new_note.history['tag'] = source.history['tag']
          if isinstance(history, str):
             new_note.history['tag'] += history
