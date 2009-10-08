@@ -39,6 +39,15 @@ class ConstellationCircuit(object):
          constellation._circuit = self
          self._constellations.append(constellation)
 
+   def _show_chords(self, chords):
+      score, treble, bass = \
+         scoretools.make_piano_sketch_score(chords)
+      score.spacing.proportional_notation_duration = Rational(1, 24)
+      score.lily_file.default_paper_size = 'letter', 'landscape'
+      score.lily_file.global_staff_size = 18
+      score.text.staff_padding = 10
+      show(score.lily_file)
+
    ## PUBLIC ATTRIBUTES ##
 
    @property
@@ -79,6 +88,13 @@ class ConstellationCircuit(object):
       return result
 
    @property
+   def pivots(self):
+      result = [ ]
+      for i in range(1, len(self) + 1):
+         result.append(self[i].pivot)
+      return result
+         
+   @property
    def starting_partitions(self):
       return self._starting_partitions
 
@@ -89,12 +105,12 @@ class ConstellationCircuit(object):
    ## PUBLIC METHODS ##
 
    def show_generators(self):
-      score, treble, bass = \
-         scoretools.make_piano_sketch_score(self.colored_generators)
-      score.spacing.proportional_notation_duration = Rational(1, 20)
-      score.text.staff_padding = 10
-      lily_file = lilytools.make_basic_lily_file(score)
-      lily_file.default_paper_size = 'letter', 'landscape'
-      lily_file.global_staff_size = 18
-      lily_file.paper.tagline = Markup('')
-      show(lily_file)
+      self._show_chords(self.colored_generators)
+
+   def show_generators_and_pivots(self):
+      chords = zip(self.colored_generators, self.pivots)
+      chords = listtools.flatten(chords, depth = 1)
+      self._show_chords(chords)
+
+   def show_pivots(self):
+      self._show_chords(self.pivots)

@@ -1,8 +1,12 @@
 from abjad.chord import Chord
+from abjad.markup import Markup
+from abjad.rational import Rational
 from abjad.tools import chordtools
-from abjad.tools import leaftools
 from abjad.tools import listtools
+from abjad.tools import lilytools
 from abjad.tools import pitchtools
+from abjad.tools import scoretools
+from abjad.tools.io.show import show
 from baca.pitch import constellate
 
 
@@ -56,6 +60,15 @@ class Constellation(object):
    def _constellate_starting_partition(self):
       self._chords = constellate(self.starting_partition, self.total_range)
 
+   def _show_chords(self, chords):
+      score, treble, bass = \
+         scoretools.make_piano_sketch_score(chords)
+      score.spacing.proportional_notation_duration = Rational(1, 20)
+      score.lily_file.default_paper_size = 'letter', 'landscape'
+      score.lily_file.global_staff_size = 18
+      score.text.staff_padding = 10
+      show(score.lily_file)
+
    ## PUBLIC ATTRIBUTES ##
 
    @property
@@ -87,6 +100,9 @@ class Constellation(object):
       next_generator = self._next.generator
       pivot_chord_number = self.get_chord_number(next_generator)
       pivot = self[pivot_chord_number]
+      label = '%s-%s' % (self.number, self.get_chord_number(pivot))
+      pivot = Chord(pivot, (1, 4))
+      pivot.markup.up.append(label)
       return pivot
 
    @property
@@ -103,4 +119,10 @@ class Constellation(object):
       return self._chords.index(chord) + 1
 
    def show_generator(self):
-      leaftools.show_leaves([self.colored_generator])
+      self._show_chords([self.colored_generator])
+
+   def show_generator_and_pivot(self):
+      self._show_chords([self.colored_generator, self.pivot])
+
+   def show_pivot(self):
+      self._show_chords([self.pivot])
