@@ -6,7 +6,7 @@ from baca.pitch.constellate import constellate
 '''Each constellation must be an (ordered) list rather than
    an (unordered) set because lists are not hashable.'''
 
-starting_partitions = [
+partitioned_generator_pnls = [
    [[-12, -10, 4], [-2, 8, 11, 17], [19, 27, 30, 33, 37]],
    [[-12, -10, -2], [4, 11, 27, 33, 37], [8, 17, 19, 30]],
    [[-8, 2, 15, 25], [-1, 20, 29, 31], [0, 10, 21, 42]],
@@ -17,9 +17,6 @@ starting_partitions = [
    [[-12, 17, 27, 37], [-1, 7, 18, 21], [2, 10, 16, 20]]
 ]
 
-starting_partitions = [[Chord(part, (1, 4)) for part in partition] 
-   for partition in starting_partitions]
-
 pitch_range = pitchtools.PitchRange(-39, 48)
 
-C = [constellate(partition, pitch_range) for partition in starting_partitions]
+C = [constellate(pgpnl, pitch_range) for pgpnl in partitioned_generator_pnls]

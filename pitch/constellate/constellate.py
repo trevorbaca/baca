@@ -4,26 +4,26 @@ from abjad.tools import listtools
 from abjad.tools import pitchtools
 
 
-def constellate(psets, pitch_range):
-   '''Return outer product of octave transpositions of `psets` in 
-    `pitch_range`.'''
-
-   if not all([
-      isinstance(x, (Note, Chord, pitchtools.PitchSet)) for x in psets]):
-      raise TypeError('must be note, chord or pitch set.')
+def constellate(pitch_number_lists, pitch_range, flatten = True):
+   '''Return outer product of octave transpositions of 
+   `pitch_number_lists` in `pitch_range`.'''
 
    if not isinstance(pitch_range, pitchtools.PitchRange):
       raise TypeError('must be pitch range.')
 
-   transpositions = [
-      pitchtools.octave_transpositions(pset, pitch_range) for pset in psets]
+   transposition_list = [ ]
+   for pnl in pitch_number_lists:
+      transpositions = pitchtools.octave_transpositions(pnl, pitch_range)
+      transposition_list.append(transpositions)
 
-   result = listtools.outer_product(transpositions)
+   result = listtools.outer_product(transposition_list)
 
-   #for i, part in enumerate(result):
-   #   result[i] = listtools.flatten(part)
-   result = [reduce(Chord.__or__, partition) for partition in result]
-
-   #[x.sort( ) for x in result]
+   for pnl in result:
+      if flatten:
+         for i, part in enumerate(result):
+            result[i] = listtools.flatten(part)
+   
+   for pnl in result:
+      pnl.sort( )
 
    return result

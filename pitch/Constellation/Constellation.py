@@ -13,18 +13,16 @@ from baca.pitch.constellate import constellate
 
 class Constellation(object):
 
-   def __init__(self, circuit, starting_partition):
+   def __init__(self, circuit, partitioned_generator_pnl):
       self._circuit = circuit
-      self._starting_partition = starting_partition
-      self._generator = Chord(self._generator_pitch_number_list, (1, 4))
-      self._constellate_starting_partition( )
+      self._partitioned_generator_pnl = partitioned_generator_pnl
+      self._constellate_partitioned_generator_pnl( )
 
    ## OVERLOADS ##
 
-   def __contains__(self, other_chord):
-      other_chord_signature = other_chord.signature
-      for chord in self._chords:
-         if chord.signature == other_chord_signature:
+   def __contains__(self, chord):
+      for pnl in self._chords:
+         if tuple(pnl) == chord.numbers:
             return True
       return False
 
@@ -41,7 +39,7 @@ class Constellation(object):
 
    @property
    def _color_map(self):
-      pitches = self.starting_partition
+      pitches = self._partitioned_generator_pnl
       colors = ['red', 'blue', 'green']
       return pitchtools.PitchClassColorMap(pitches, colors)
 
@@ -62,8 +60,8 @@ class Constellation(object):
       return self.get_chord_number(self.generator)
 
    @property
-   def _generator_pitch_number_list(self):
-      return list(sorted(listtools.flatten(self.starting_partition)))
+   def _generator_pnl(self):
+      return list(sorted(listtools.flatten(self._partitioned_generator_pnl)))
 
    @property
    def _next(self):
@@ -87,10 +85,9 @@ class Constellation(object):
       next_constellation = self._circuit._constellations[next_idx]
       return next_constellation
 
-   def _constellate_starting_partition(self):
-      starting_chord_parts = [
-         Chord(x, (1, 4)) for x in self.starting_partition] 
-      self._chords = constellate(starting_chord_parts, self.pitch_range)
+   def _constellate_partitioned_generator_pnl(self):
+      pitch_number_lists = self._partitioned_generator_pnl
+      self._chords = constellate(pitch_number_lists, self.pitch_range)
 
    def _label_chord(self, chord):
       chord_number = self.get_chord_number(chord)
@@ -112,7 +109,7 @@ class Constellation(object):
 
    @property
    def generator(self):
-      pitch_numbers = self._generator_pitch_number_list
+      pitch_numbers = self._generator_pnl
       generator = Chord(pitch_numbers, (1, 4))
       self._label_chord(generator)
       return generator
@@ -123,14 +120,10 @@ class Constellation(object):
 
    @property
    def pivot(self):
-      next_pitch_number_list = self._next._generator_pitch_number_list
+      next_pitch_number_list = self._next._generator_pnl
       pivot = Chord(next_pitch_number_list, (1, 4))
       self._label_chord(pivot)
       return pivot
-
-   @property
-   def starting_partition(self):
-      return self._starting_partition
 
    ## PUBLIC METHODS ##
 
@@ -142,12 +135,12 @@ class Constellation(object):
       return self._chords[chord_index]
 
    def get_chord_number(self, arg):
-      arg_signature = arg.signature
-      for chord_index, chord in enumerate(self):
-         if chord.signature == arg_signature:
-            chord_number = chord_index + 1
-            return chord_number
-      raise ValueError('%s not in %s' % (chord, self))
+      arg_numbers = arg.numbers
+      for pnl_index, pnl in enumerate(self):
+         if tuple(pnl) == arg_numbers:
+            pnl_number = pnl_index + 1
+            return pnl_number
+      raise ValueError('%s not in %s' % (arg, self))
 
    def show_generator(self):
       generator = self.generator

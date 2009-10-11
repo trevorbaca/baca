@@ -14,14 +14,11 @@ from baca.pitch.constellate import constellate
 #      ]
 #   ]
 
-starting_partitions = [
+partitioned_generator_pnls = [
          [[0, 2, 10], [16, 19, 20], [23, 30, 33], [27, 29, 37]],
          [[4, 8, 11], [7, 15, 17], [18, 21, 24], [25, 26, 34]],
          [[6, 9, 13], [12, 14, 22], [19, 27, 29], [28, 32, 35]]]
 
-starting_partitions = [[Chord(part, (1, 4)) for part in partition]
-   for partition in starting_partitions]
+pitch_range = pitchtools.PitchRange(0, 37)
 
-pitch_range = pitchtools.PitchRange(-39, 48)
-
-D = [constellate(partition, pitch_range) for partition in starting_partitions]
+D = [constellate(pgpnl, pitch_range) for pgpnl in partitioned_generator_pnls]

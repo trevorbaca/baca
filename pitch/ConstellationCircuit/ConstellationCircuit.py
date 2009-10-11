@@ -7,10 +7,10 @@ from baca.pitch.Constellation import Constellation
 
 class ConstellationCircuit(object):
 
-   def __init__(self, starting_partitions, pitch_range):
-      self._starting_partitions = starting_partitions
+   def __init__(self, partitioned_generator_pnls, pitch_range):
+      self._partitioned_generator_pnls = partitioned_generator_pnls
       self._pitch_range = pitch_range
-      self._constellate_starting_partitions( )
+      self._constellate_partitioned_generator_pnls( )
 
    ## OVERLOADS ##
 
@@ -48,11 +48,12 @@ class ConstellationCircuit(object):
 
    ## PRIVATE METHODS ##
 
-   def _constellate_starting_partitions(self):
+   def _constellate_partitioned_generator_pnls(self):
       self._constellations = [ ]
-      for i, starting_partition in enumerate(self.starting_partitions):
+      for i, partitioned_generator_pnl in enumerate(
+         self._partitioned_generator_pnls):
          constellation_number = i + 1
-         constellation = Constellation(self, starting_partition)
+         constellation = Constellation(self, partitioned_generator_pnl)
          self._constellations.append(constellation)
 
    def _show_chords(self, chords):
@@ -80,10 +81,6 @@ class ConstellationCircuit(object):
          result.append(constellation.pivot)
       return result
          
-   @property
-   def starting_partitions(self):
-      return self._starting_partitions
-
    @property
    def pitch_range(self):
       return self._pitch_range

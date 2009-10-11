@@ -1,6 +1,6 @@
-#from C import C
+from C import C
 from CC import CC
-#from D import D
+from D import D
 
 del Constellation
 del ConstellationCircuit
