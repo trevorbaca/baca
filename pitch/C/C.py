@@ -1,4 +1,5 @@
-from abjad.tools import listtools
+from abjad.chord import Chord
+from abjad.tools import pitchtools
 from baca.pitch.constellate import constellate
 
 
@@ -16,5 +17,9 @@ starting_partitions = [
    [[-12, 17, 27, 37], [-1, 7, 18, 21], [2, 10, 16, 20]]
 ]
 
+starting_partitions = [[Chord(part, (1, 4)) for part in partition] 
+   for partition in starting_partitions]
 
-C = [constellate(p, [-39, 48]) for p in starting_partitions]
+pitch_range = pitchtools.PitchRange(-39, 48)
+
+C = [constellate(partition, pitch_range) for partition in starting_partitions]

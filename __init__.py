@@ -7,6 +7,5 @@
    * Lidercfeny (2007-08) for flute, violin & piano.'''
 
 import music
-import pctheory
 import pitch
 import utilities
