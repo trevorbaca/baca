@@ -17,6 +17,8 @@ class Constellation(object):
       self._circuit = circuit
       self._partitioned_generator_pnl = partitioned_generator_pnl
       self._constellate_partitioned_generator_pnl( )
+      self._chord_duration = Rational(1, 4)
+      self._chords = [ ]
 
    ## OVERLOADS ##
 
@@ -86,15 +88,15 @@ class Constellation(object):
       return next_constellation
 
    def _constellate_partitioned_generator_pnl(self):
-      pitch_number_lists = self._partitioned_generator_pnl
-      self._pitch_number_lists = constellate(pitch_number_lists, self.pitch_range)
+      self._pitch_number_lists = \
+         constellate(self._partitioned_generator_pnl, self.pitch_range)
 
    def _label_chord(self, chord):
       chord_number = self.get_chord_number(chord)
       label = '%s-%s' % (self._constellation_number, chord_number)
-      if not getattr(chord, '_already_labelled', None):
+      if not getattr(chord, '_already_ed', None):
          chord.markup.up.append(label)
-         chord._already_labelled = True
+         chord._already_labeled = True
 
    def _show_chords(self, chords):
       score, treble, bass = \
@@ -113,6 +115,10 @@ class Constellation(object):
       generator = Chord(pitch_numbers, (1, 4))
       self._label_chord(generator)
       return generator
+
+   @property
+   def number(self):
+      return self._circuit._constellations.index(self) + 1
 
    @property
    def pitch_range(self):
@@ -141,6 +147,25 @@ class Constellation(object):
             pnl_number = pnl_index + 1
             return pnl_number
       raise ValueError('%s not in %s' % (arg, self))
+
+   def make_chords(self):
+      result = [ ]
+      for pitch_number_list in self._pitch_number_lists:
+         chord = Chord(pitch_number_list, self._chord_duration)
+         result.append(chord)
+      return result
+
+   def make_labeled_chords(self):
+      result = self.make_chords( )
+      for chord in result:
+         self._label_chord(chord)
+      return result
+
+   def make_labeled_colored_chords(self):
+      result = self.make_labeled_chords( )
+      for chord in result:
+         chordtools.color_noteheads_by_pc(chord, self._color_map)
+      return result
 
    def show_generator(self):
       generator = self.generator
