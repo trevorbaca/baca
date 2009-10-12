@@ -21,16 +21,16 @@ class Constellation(object):
    ## OVERLOADS ##
 
    def __contains__(self, chord):
-      for pnl in self._chords:
+      for pnl in self._pitch_number_lists:
          if tuple(pnl) == chord.numbers:
             return True
       return False
 
    def __getitem__(self, i):
-      return self._chords[i]
+      return self._pitch_number_lists[i]
 
    def __len__(self):
-      return len(self._chords)
+      return len(self._pitch_number_lists)
 
    def __repr__(self):
       return '%s(%s)' % (self.__class__.__name__, len(self))
@@ -87,7 +87,7 @@ class Constellation(object):
 
    def _constellate_partitioned_generator_pnl(self):
       pitch_number_lists = self._partitioned_generator_pnl
-      self._chords = constellate(pitch_number_lists, self.pitch_range)
+      self._pitch_number_lists = constellate(pitch_number_lists, self.pitch_range)
 
    def _label_chord(self, chord):
       chord_number = self.get_chord_number(chord)
@@ -132,7 +132,7 @@ class Constellation(object):
       '''1-indexed chord number.'''
       assert 1 <= chord_number
       chord_index = chord_number - 1
-      return self._chords[chord_index]
+      return self._pitch_number_lists[chord_index]
 
    def get_chord_number(self, arg):
       arg_numbers = arg.numbers
