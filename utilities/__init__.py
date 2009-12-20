@@ -5,6 +5,8 @@
 from cache_output import cache_output
 from cache_text import cache_text
 from check_score_builder_commandline import check_score_builder_commandline
+from conditionally_save_incremental_pdf import \
+   conditionally_save_incremental_pdf
 from get_next_file_number import get_next_file_number
 from get_parent_directory import get_parent_directory
 from helianthate import helianthate
