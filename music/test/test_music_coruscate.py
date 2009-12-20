@@ -11,70 +11,78 @@ def test_music_coruscate_01( ):
    t = Container(music.coruscate(signal, cut, [4, 8, 8], dilation, 32))
 
    r'''
-       \set stemLeftBeamCount = #0
-       \set stemRightBeamCount = #3
-       c'32 [
-       \set stemLeftBeamCount = #3
-       \set stemRightBeamCount = #3
-       c'32
-       \set stemLeftBeamCount = #3
-       \set stemRightBeamCount = #3
-       c'32
-       \set stemLeftBeamCount = #3
-       \set stemRightBeamCount = #0
-       c'32 ]
-       \set stemLeftBeamCount = #0
-       \set stemRightBeamCount = #3
-       c'32 [
-       \set stemLeftBeamCount = #3
-       \set stemRightBeamCount = #3
-       c'32
-       \set stemLeftBeamCount = #3
-       \set stemRightBeamCount = #3
-       c'32
-       \set stemLeftBeamCount = #3
-       \set stemRightBeamCount = #3
-       c'32
-       \set stemLeftBeamCount = #3
-       \set stemRightBeamCount = #3
-       c'32
-       \set stemLeftBeamCount = #3
-       \set stemRightBeamCount = #3
-       c'32
-       \set stemLeftBeamCount = #3
-       \set stemRightBeamCount = #3
-       c'32
-       \set stemLeftBeamCount = #3
-       \set stemRightBeamCount = #0
-       c'32 ]
-       \set stemLeftBeamCount = #0
-       \set stemRightBeamCount = #3
-       c'32 [
-       \set stemLeftBeamCount = #3
-       \set stemRightBeamCount = #3
-       c'32
-       \set stemLeftBeamCount = #3
-       \set stemRightBeamCount = #3
-       c'32
-       \set stemLeftBeamCount = #3
-       \set stemRightBeamCount = #3
-       c'32
-       \set stemLeftBeamCount = #3
-       \set stemRightBeamCount = #3
-       c'32
-       \set stemLeftBeamCount = #3
-       \set stemRightBeamCount = #3
-       c'32
-       \set stemLeftBeamCount = #3
-       \set stemRightBeamCount = #3
-       c'32
-       \set stemLeftBeamCount = #3
-       \set stemRightBeamCount = #0
-       c'32 ]
+   {
+           {
+                   \set stemLeftBeamCount = #0
+                   \set stemRightBeamCount = #3
+                   c'32 [
+                   \set stemLeftBeamCount = #3
+                   \set stemRightBeamCount = #3
+                   c'32
+                   \set stemLeftBeamCount = #3
+                   \set stemRightBeamCount = #3
+                   c'32
+                   \set stemLeftBeamCount = #3
+                   \set stemRightBeamCount = #0
+                   c'32 ]
+           }
+           {
+                   \set stemLeftBeamCount = #0
+                   \set stemRightBeamCount = #3
+                   c'32 [
+                   \set stemLeftBeamCount = #3
+                   \set stemRightBeamCount = #3
+                   c'32
+                   \set stemLeftBeamCount = #3
+                   \set stemRightBeamCount = #3
+                   c'32
+                   \set stemLeftBeamCount = #3
+                   \set stemRightBeamCount = #3
+                   c'32
+                   \set stemLeftBeamCount = #3
+                   \set stemRightBeamCount = #3
+                   c'32
+                   \set stemLeftBeamCount = #3
+                   \set stemRightBeamCount = #3
+                   c'32
+                   \set stemLeftBeamCount = #3
+                   \set stemRightBeamCount = #3
+                   c'32
+                   \set stemLeftBeamCount = #3
+                   \set stemRightBeamCount = #0
+                   c'32 ]
+           }
+           {
+                   \set stemLeftBeamCount = #0
+                   \set stemRightBeamCount = #3
+                   c'32 [
+                   \set stemLeftBeamCount = #3
+                   \set stemRightBeamCount = #3
+                   c'32
+                   \set stemLeftBeamCount = #3
+                   \set stemRightBeamCount = #3
+                   c'32
+                   \set stemLeftBeamCount = #3
+                   \set stemRightBeamCount = #3
+                   c'32
+                   \set stemLeftBeamCount = #3
+                   \set stemRightBeamCount = #3
+                   c'32
+                   \set stemLeftBeamCount = #3
+                   \set stemRightBeamCount = #3
+                   c'32
+                   \set stemLeftBeamCount = #3
+                   \set stemRightBeamCount = #3
+                   c'32
+                   \set stemLeftBeamCount = #3
+                   \set stemRightBeamCount = #0
+                   c'32 ]
+           }
+   }
    '''
 
    assert len(t) == 3
-   assert t.format == "{\n\t\t\\set stemLeftBeamCount = #0\n\t\t\\set stemRightBeamCount = #3\n\t\tc'32 [\n\t\t\\set stemLeftBeamCount = #3\n\t\t\\set stemRightBeamCount = #3\n\t\tc'32\n\t\t\\set stemLeftBeamCount = #3\n\t\t\\set stemRightBeamCount = #3\n\t\tc'32\n\t\t\\set stemLeftBeamCount = #3\n\t\t\\set stemRightBeamCount = #0\n\t\tc'32 ]\n\t\t\\set stemLeftBeamCount = #0\n\t\t\\set stemRightBeamCount = #3\n\t\tc'32 [\n\t\t\\set stemLeftBeamCount = #3\n\t\t\\set stemRightBeamCount = #3\n\t\tc'32\n\t\t\\set stemLeftBeamCount = #3\n\t\t\\set stemRightBeamCount = #3\n\t\tc'32\n\t\t\\set stemLeftBeamCount = #3\n\t\t\\set stemRightBeamCount = #3\n\t\tc'32\n\t\t\\set stemLeftBeamCount = #3\n\t\t\\set stemRightBeamCount = #3\n\t\tc'32\n\t\t\\set stemLeftBeamCount = #3\n\t\t\\set stemRightBeamCount = #3\n\t\tc'32\n\t\t\\set stemLeftBeamCount = #3\n\t\t\\set stemRightBeamCount = #3\n\t\tc'32\n\t\t\\set stemLeftBeamCount = #3\n\t\t\\set stemRightBeamCount = #0\n\t\tc'32 ]\n\t\t\\set stemLeftBeamCount = #0\n\t\t\\set stemRightBeamCount = #3\n\t\tc'32 [\n\t\t\\set stemLeftBeamCount = #3\n\t\t\\set stemRightBeamCount = #3\n\t\tc'32\n\t\t\\set stemLeftBeamCount = #3\n\t\t\\set stemRightBeamCount = #3\n\t\tc'32\n\t\t\\set stemLeftBeamCount = #3\n\t\t\\set stemRightBeamCount = #3\n\t\tc'32\n\t\t\\set stemLeftBeamCount = #3\n\t\t\\set stemRightBeamCount = #3\n\t\tc'32\n\t\t\\set stemLeftBeamCount = #3\n\t\t\\set stemRightBeamCount = #3\n\t\tc'32\n\t\t\\set stemLeftBeamCount = #3\n\t\t\\set stemRightBeamCount = #3\n\t\tc'32\n\t\t\\set stemLeftBeamCount = #3\n\t\t\\set stemRightBeamCount = #0\n\t\tc'32 ]\n}"
+   assert t.format == "{\n\t{\n\t\t\\set stemLeftBeamCount = #0\n\t\t\\set stemRightBeamCount = #3\n\t\tc'32 [\n\t\t\\set stemLeftBeamCount = #3\n\t\t\\set stemRightBeamCount = #3\n\t\tc'32\n\t\t\\set stemLeftBeamCount = #3\n\t\t\\set stemRightBeamCount = #3\n\t\tc'32\n\t\t\\set stemLeftBeamCount = #3\n\t\t\\set stemRightBeamCount = #0\n\t\tc'32 ]\n\t}\n\t{\n\t\t\\set stemLeftBeamCount = #0\n\t\t\\set stemRightBeamCount = #3\n\t\tc'32 [\n\t\t\\set stemLeftBeamCount = #3\n\t\t\\set stemRightBeamCount = #3\n\t\tc'32\n\t\t\\set stemLeftBeamCount = #3\n\t\t\\set stemRightBeamCount = #3\n\t\tc'32\n\t\t\\set stemLeftBeamCount = #3\n\t\t\\set stemRightBeamCount = #3\n\t\tc'32\n\t\t\\set stemLeftBeamCount = #3\n\t\t\\set stemRightBeamCount = #3\n\t\tc'32\n\t\t\\set stemLeftBeamCount = #3\n\t\t\\set stemRightBeamCount = #3\n\t\tc'32\n\t\t\\set stemLeftBeamCount = #3\n\t\t\\set stemRightBeamCount = #3\n\t\tc'32\n\t\t\\set stemLeftBeamCount = #3\n\t\t\\set stemRightBeamCount = #0\n\t\tc'32 ]\n\t}\n\t{\n\t\t\\set stemLeftBeamCount = #0\n\t\t\\set stemRightBeamCount = #3\n\t\tc'32 [\n\t\t\\set stemLeftBeamCount = #3\n\t\t\\set stemRightBeamCount = #3\n\t\tc'32\n\t\t\\set stemLeftBeamCount = #3\n\t\t\\set stemRightBeamCount = #3\n\t\tc'32\n\t\t\\set stemLeftBeamCount = #3\n\t\t\\set stemRightBeamCount = #3\n\t\tc'32\n\t\t\\set stemLeftBeamCount = #3\n\t\t\\set stemRightBeamCount = #3\n\t\tc'32\n\t\t\\set stemLeftBeamCount = #3\n\t\t\\set stemRightBeamCount = #3\n\t\tc'32\n\t\t\\set stemLeftBeamCount = #3\n\t\t\\set stemRightBeamCount = #3\n\t\tc'32\n\t\t\\set stemLeftBeamCount = #3\n\t\t\\set stemRightBeamCount = #0\n\t\tc'32 ]\n\t}\n}"
 
 
 def test_music_coruscate_02( ):
@@ -318,18 +326,22 @@ def test_music_coruscate_07( ):
 
    t = Container(music.coruscate([[-1]], [[0]], [4, 4, 5], [[0]], 32))
 
-   '''{
+   '''
+   {
            {
                    r8
            }
            {
                    r8
            }
+           {
                    r8
                    r32
-   }'''
+           }
+   }
+   '''
 
-   assert t.format == '{\n\t{\n\t\tr8\n\t}\n\t{\n\t\tr8\n\t}\n\t\tr8\n\t\tr32\n}'
+   assert t.format == '{\n\t{\n\t\tr8\n\t}\n\t{\n\t\tr8\n\t}\n\t{\n\t\tr8\n\t\tr32\n\t}\n}'
 
 
 def test_music_coruscate_10( ):

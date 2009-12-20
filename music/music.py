@@ -1037,7 +1037,7 @@ def effectiveDurations(m):
    [DURATION 1/24, DURATION 1/24, DURATION 1/24]
    '''
    #return [l.duration.prolated for l in instances(m, '_Leaf')]
-   return [l.duration.prolated for l in list(iterate.naive(m, _Leaf))]
+   return [l.duration.prolated for l in list(iterate.leaves_forward_in(m))]
 
 def effectiveDuration(m):
    '''
@@ -1104,7 +1104,7 @@ def nest(measures, outer, inner):
       tuplet = divide.pair(o, (measure_numerator, measure_denominator))
       #print tuplet
       #dd = writtenDurations([RigidMeasure([divide.pair(o, (m[0], m[1]))])])
-      tie_chains = list(iterate.tie_chains(tuplet.leaves))
+      tie_chains = list(iterate.tie_chains_forward_in(tuplet.leaves))
       dd = [tietools.get_duration_written(x) for x in tie_chains]
       body = [ ]
       for j, d in enumerate(dd):
@@ -1724,7 +1724,7 @@ def makeMeasures(m, meters):
    durations = [Rational(*meter) for meter in meters]
    #voices = instances(m, 'Voice')
    #for v in voices:
-   for v in iterate.naive(m, Voice):
+   for v in iterate.naive_forward_in(m, Voice):
       assert v.duration.prolated == sum(durations, Rational(0))
       d = 0
       #measure = Measure(meters[d], [ ])

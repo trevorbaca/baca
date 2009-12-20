@@ -66,7 +66,7 @@ def beamRunsByDuration(
    #pdb.set_trace( )
 
    runs = music.partitionLeavesByDurations(
-      list(iterate.naive(m, _Leaf)), 
+      list(iterate.leaves_forward_in(m)), 
       b)
 
    for run in runs:
