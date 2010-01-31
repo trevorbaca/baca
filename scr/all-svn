@@ -6,25 +6,25 @@ os.system('clear')
 
 dirs = (
    '/Users/trevorbaca/Documents/abjad',
-   '/Users/trevorbaca/Documents/abjad/baca',
 
    '/Users/trevorbaca/Documents/friends',
 
    '/Users/trevorbaca/Documents/harvard',
 
    '/Users/trevorbaca/Documents/other/articles',
+   '/Users/trevorbaca/Documents/other/baca',
+   '/Users/trevorbaca/Documents/other/jsb',
    '/Users/trevorbaca/Documents/other/math',
    '/Users/trevorbaca/Documents/other/monographs',
    '/Users/trevorbaca/Documents/other/reference',
    '/Users/trevorbaca/Documents/other/travel',
    '/Users/trevorbaca/Documents/other/vitae',
 
-   '/Users/trevorbaca/Documents/scores/_share',
    '/Users/trevorbaca/Documents/scores/chrysanthemums',
    '/Users/trevorbaca/Documents/scores/tack',
    '/Users/trevorbaca/Documents/scores/zeit',
-   '/Users/trevorbaca/Documents/scores/recursif',
-   '/Users/trevorbaca/Documents/scores/hijinks',
+   '/Users/trevorbaca/Documents/scores/poeme',
+   '/Users/trevorbaca/Documents/scores/red-shift',
    '/Users/trevorbaca/Documents/scores/cary',
    '/Users/trevorbaca/Documents/scores/sekka',
    '/Users/trevorbaca/Documents/scores/lidercfeny',
