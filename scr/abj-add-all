@@ -7,4 +7,6 @@ for line in p.readlines( ):
    if line.startswith('?'):
       new_module = line[1:]
       new_module = new_module.strip( )
-      os.system('svn add %s' % new_module)
+      new_module = new_module.replace(' ', r'\ ')
+      command = 'svn add %s' % new_module
+      os.system(command)
