@@ -6,13 +6,13 @@ os.system('clear')
 
 dirs = (
    '/Users/trevorbaca/Documents/abjad',
-   '/Users/trevorbaca/Documents/abjad/baca',
 
    '/Users/trevorbaca/Documents/friends',
 
    '/Users/trevorbaca/Documents/harvard',
 
    '/Users/trevorbaca/Documents/other/articles',
+   '/Users/trevorbaca/Documents/other/baca',
    '/Users/trevorbaca/Documents/other/jsb',
    '/Users/trevorbaca/Documents/other/math',
    '/Users/trevorbaca/Documents/other/monographs',
