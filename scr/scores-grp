@@ -7,7 +7,7 @@ base = 'grep -Irn "%s" /Users/trevorbaca/Documents/scores/%s/* | grep -v svn | g
 
 os.system('clear')
 
-os.system('grep -Irn "%s" /Users/trevorbaca/Documents/abjad/baca | grep -v svn' %
+os.system('grep -Irn "%s" /Users/trevorbaca/Documents/other/baca | grep -v svn' %
    sys.argv[1])
 
 for work in ('cary', 'sekka', 'lidercfeny', 
