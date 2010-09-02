@@ -4,3 +4,4 @@ import os
 
 os.system('rm *.log')
 os.system('rm *.aux')
+os.system('rm *.synctex.gz')
