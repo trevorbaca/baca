@@ -1,7 +1,9 @@
 #! /usr/bin/env python
 
+import glob
 import os
 
-os.system('rm *.log')
-os.system('rm *.aux')
-os.system('rm *.synctex.gz')
+
+for extension in ('.log', '.aux', '.synctex.gz'):
+   if glob.glob('*' + extension):
+      os.system('rm *' + extension)
