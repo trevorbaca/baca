@@ -2,8 +2,16 @@
 
 import glob
 import os
+import sys
 
 
-for extension in ('.log', '.aux', '.synctex.gz'):
-   if glob.glob('*' + extension):
-      os.system('rm *' + extension)
+if __name__ == '__main__':
+   if 1 < len(sys.argv):
+      target_directory = sys.argv[1]
+   else:
+      target_directory = ''
+
+   for extension in ('.log', '.aux', '.synctex.gz'):
+      path = os.path.join(target_directory, '*' + extension)
+      if glob.glob(path):
+         os.system('rm ' + path)
