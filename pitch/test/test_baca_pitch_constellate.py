@@ -1,5 +1,5 @@
 from abjad.tools import pitchtools
-from constellate import constellate
+from baca.pitch.constellate import constellate
 
 
 def test_pitch_constellate_01( ):

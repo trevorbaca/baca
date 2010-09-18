@@ -1638,8 +1638,7 @@ def stellate(k, s, t, d, b, span ='from duration', rests = True):
    return tuplets
 
 def coruscate(n, s, t, z, d, rests = True):
-   '''
-   Coruscate signal n;
+   '''Coruscate signal n;
    return list of fixed-duration tuplets.
 
    Input signal n (2d, passed to helianthate);

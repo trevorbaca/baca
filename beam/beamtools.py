@@ -1,11 +1,9 @@
 from abjad import *
-from abjad.leaf.leaf import _Leaf
+from abjad.components._Leaf import _Leaf
 
 
-def beamRunsByDuration(
-   m, b = None, rip = True, span = False, nib = False, lone = True):
-   '''
-   >>> decompose((2, 4), [(1, 16)])
+def beamRunsByDuration(m, b = None, rip = True, span = False, nib = False, lone = True):
+   '''>>> decompose((2, 4), [(1, 16)])
    [c'16, c'16, c'16, c'16, c'16, c'16, c'16, c'16]
    >>> m = _
    >>> beamRunsByDuration(m, [(1, 8)])
@@ -66,7 +64,7 @@ def beamRunsByDuration(
    #pdb.set_trace( )
 
    runs = music.partitionLeavesByDurations(
-      list(iterate.leaves_forward_in(m)), 
+      list(leaftools.iterate_leaves_forward_in_expr(m)), 
       b)
 
    for run in runs:
@@ -91,7 +89,9 @@ def partitionLeavesByBeamability(leaves):
 
    result = [[leaves[0]]]
    for l in leaves[1: ]:
-      if l.beam.beamable == result[-1][-1].beam.beamable:
+      #if l.beam.beamable == result[-1][-1].beam.beamable:
+      if componenttools.is_beamable_component(l) == \
+         componenttools.is_beamable_component(result[-1][-1]):
          result[-1].append(l)
       else:
          result.append([l])
@@ -119,12 +119,15 @@ def applyBeamSpanners(leaves, lone = True):
          Beam(leaves[ : ])
    else:
       for part in partitionLeavesByBeamability(leaves):
-         if part[0].beam.beamable:
+         #if part[0].beam.beamable:
+         if componenttools.is_beamable_component(part[0]):
             if lone:
-               Beam(part[ : ])
+               #Beam(part[ : ])
+               spannertools.BeamSpanner(part[:])
             else:
                if len(part) > 1:
-                  Beam(part[ : ])
+                  #Beam(part[ : ])
+                  spannertools.BeamSpanner(part[:])
 
 
 def setBeamCountsForRun(leaves, rip = True, lone = True):
@@ -139,7 +142,9 @@ def setBeamCountsForRun(leaves, rip = True, lone = True):
 
 
 def _setBeamCountsForFirstLeafInRun(l, rip = True):
-   if l.beam.spanned:
+   #if l.beam.spanned:
+   if 0 < len(spannertools.get_all_spanners_attached_to_component(l, 
+      klass = spannertools.BeamSpanner)):
       if l.beam.only:
          if rip:
             l.beam.counts = 0, l.duration._flags
