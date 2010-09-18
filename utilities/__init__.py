@@ -14,4 +14,3 @@ from render_tex import render_tex
 from replace_nested_elements_with_unary_subruns import replace_nested_elements_with_unary_subruns
 from rotate_nested import rotate_nested
 from sectionalize import sectionalize
-from segment import segment
