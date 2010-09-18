@@ -5,7 +5,8 @@ import py.test
 
 def test_music_coruscate_01( ):
    '''Uniform signal and no cut / no dilation;
-      result are unscaled beamed tuplets.'''
+   result are unscaled beamed tuplets.
+   '''
 
    signal, cut, dilation = [[1]], [[0]], [[0]]
    t = Container(music.coruscate(signal, cut, [4, 8, 8], dilation, 32))
@@ -335,13 +336,18 @@ def test_music_coruscate_07( ):
                    r8
            }
            {
-                   r8
-                   r32
+            \set stemLeftBeamCount = #0
+            \set stemRightBeamCount = #1
+            r8 [
+            \set stemLeftBeamCount = #3
+            \set stemRightBeamCount = #0
+            r32 ]
            }
    }
    '''
 
-   assert t.format == '{\n\t{\n\t\tr8\n\t}\n\t{\n\t\tr8\n\t}\n\t{\n\t\tr8\n\t\tr32\n\t}\n}'
+   #assert t.format == '{\n\t{\n\t\tr8\n\t}\n\t{\n\t\tr8\n\t}\n\t{\n\t\tr8\n\t\tr32\n\t}\n}'
+   assert t.format == '{\n\t{\n\t\tr8\n\t}\n\t{\n\t\tr8\n\t}\n\t{\n\t\t\\set stemLeftBeamCount = #0\n\t\t\\set stemRightBeamCount = #1\n\t\tr8 [\n\t\t\\set stemLeftBeamCount = #3\n\t\t\\set stemRightBeamCount = #0\n\t\tr32 ]\n\t}\n}'
 
 
 def test_music_coruscate_10( ):

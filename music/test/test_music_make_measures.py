@@ -12,7 +12,7 @@ def test_make_measures_01( ):
    assert leaves_before == leaves_after
    for x in t:
       #assert isinstance(x, Measure)
-      assert isinstance(x, RigidMeasure)
+      assert isinstance(x, Measure)
       assert x.duration.prolated == Rational(2, 8)
 
 
@@ -26,7 +26,7 @@ def test_make_measures_02( ):
    assert leaves_before == leaves_after
    for i, x in enumerate(t):
       #assert isinstance(x, Measure)
-      assert isinstance(x, RigidMeasure)
+      assert isinstance(x, Measure)
       if i == 0:
          assert x.duration.prolated == Rational(2, 8)
       else:
