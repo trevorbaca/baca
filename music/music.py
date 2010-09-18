@@ -7,7 +7,11 @@ from abjad.components import Note
 from abjad.components import Skip
 from abjad.components import Voice
 from abjad.components._Leaf import _Leaf
+from abjad.tools import componenttools
+from abjad.tools import leaftools
+from abjad.tools import listtools
 from abjad.tools import resttools
+from abjad.tools import spannertools
 from abjad.tools import tietools
 from abjad.tools import tuplettools
 from baca import utilities
@@ -1040,7 +1044,8 @@ def effectiveDurations(m):
    [DURATION 1/24, DURATION 1/24, DURATION 1/24]
    '''
    #return [l.duration.prolated for l in instances(m, '_Leaf')]
-   return [l.duration.prolated for l in list(iterate.leaves_forward_in(m))]
+   #return [l.duration.prolated for l in list(iterate.leaves_forward_in(m))]
+   return [l.duration.prolated for l in list(leaftools.iterate_leaves_forward_in_expr(m))]
 
 def effectiveDuration(m):
    '''
@@ -1085,7 +1090,7 @@ def blank(l, positions):
    for i, m in enumerate(l):
       if (i + 1) in positions:
          rests = resttools.make_rests(m.duration.contents)
-         new_measure = RigidMeasure(m.meter.effective, rests)
+         new_measure = Measure(m.meter.effective, rests)
          l[i] = new_measure
 
 def nest(measures, outer, inner):
@@ -1106,7 +1111,7 @@ def nest(measures, outer, inner):
       measure_numerator, measure_denominator = m
       tuplet = divide.pair(o, (measure_numerator, measure_denominator))
       #print tuplet
-      #dd = writtenDurations([RigidMeasure([divide.pair(o, (m[0], m[1]))])])
+      #dd = writtenDurations([Measure([divide.pair(o, (m[0], m[1]))])])
       tie_chains = list(iterate.tie_chains_forward_in(tuplet.leaves))
       dd = [tietools.get_duration_written(x) for x in tie_chains]
       body = [ ]
@@ -1121,7 +1126,7 @@ def nest(measures, outer, inner):
          
       #t = tuplet.SmartTuplet(m[0], m[1], body)
       t = FixedDurationTuplet(m, body)
-      result.append(RigidMeasure(m, [t]))
+      result.append(Measure(m, [t]))
       
    #into(result, [r'\time %s/%s' % (x[0], x[1]) for x in measures], 'before')
    #for i, element in enumerate(result):
@@ -1574,9 +1579,9 @@ def stellate(k, s, t, d, b, span ='from duration', rests = True):
 
    debug = False
 
-   prolation = helianthate(s, 1, 1)
+   prolation = utilities.helianthate(s, 1, 1)
    numerators = listtools.increase_cyclic(k, prolation)
-   mask = helianthate(t, 1, 1)
+   mask = utilities.helianthate(t, 1, 1)
    mask = listtools.repeat_to_weight(mask, listtools.weight(numerators))
    mask = utilities.replace_nested_elements_with_unary_subruns(mask)
    #signatures = partition(
@@ -1624,7 +1629,8 @@ def stellate(k, s, t, d, b, span ='from duration', rests = True):
       #beamRunsByDuration(tmp.leaves, durations, span = span)
       #ComplexBeam(sublist, durations, span = span)
       #BeamComplex(sublist, durations, span = span)
-      BeamComplexDurated(sublist, durations, span = span)
+      #BeamComplexDurated(sublist, durations, span = span)
+      spannertools.DuratedComplexBeamSpanner(sublist, durations, span = span)
       i += 1
    dummy_container[:] = [ ]
    tuplets = listtools.flatten(tuplets)
@@ -1654,12 +1660,12 @@ def coruscate(n, s, t, z, d, rests = True):
    #from beamtools import beamRunsByDuration
 
    # zero-valued signals not allowed
-   signal = helianthate(n, 1, 1)
+   signal = utilities.helianthate(n, 1, 1)
    assert all(signal)
 
-   cut = helianthate(s, 1, 1)
+   cut = utilities.helianthate(s, 1, 1)
 
-   dilation = helianthate(z, 1, 1)
+   dilation = utilities.helianthate(z, 1, 1)
    fit = listtools.increase_cyclic(t, dilation)
 
    j = 0
@@ -1699,7 +1705,8 @@ def coruscate(n, s, t, z, d, rests = True):
       #beamRunsByDuration(element, [element.duration.pair])
       #ComplexBeam(element, [element.duration.pair])
       #BeamComplex(element, [element.duration.pair])
-      BeamComplexDurated(element.leaves, [element.duration.prolated])
+      #BeamComplexDurated(element.leaves, [element.duration.prolated])
+      spannertools.DuratedComplexBeamSpanner(element.leaves, [element.duration.prolated])
 
    return result
 
@@ -1732,11 +1739,12 @@ def makeMeasures(m, meters):
    durations = [Fraction(*meter) for meter in meters]
    #voices = instances(m, 'Voice')
    #for v in voices:
-   for v in iterate.naive_forward_in(m, Voice):
+   #for v in iterate.naive_forward_in(m, Voice):
+   for v in componenttools.iterate_components_forward_in_expr(m, klass = Voice):
       assert v.duration.prolated == sum(durations, Fraction(0))
       d = 0
       #measure = Measure(meters[d], [ ])
-      measure = RigidMeasure(meters[d], [ ])
+      measure = Measure(meters[d], [ ])
       for x in v[ : ]:
          measure.append(x)
          if measure.duration.prolated >= durations[d]:
@@ -1746,7 +1754,7 @@ def makeMeasures(m, meters):
                break
             else:
                #measure = Measure(meters[d], [ ])
-               measure = RigidMeasure(meters[d], [ ])
+               measure = Measure(meters[d], [ ])
 
 def recombineVoices(target, s, insert, t, loci):
    '''

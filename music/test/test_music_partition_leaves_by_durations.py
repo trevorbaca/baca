@@ -3,9 +3,12 @@ from baca import music
 
 
 def test_partition_leaves_by_durations_01( ):
+   #v = Voice([
+   #   divide.pair([1, -4, 1], (1, 4)), 
+   #   divide.pair([1, -4, 1, 1], (1, 4))])
    v = Voice([
-      divide.pair([1, -4, 1], (1, 4)), 
-      divide.pair([1, -4, 1, 1], (1, 4))])
+      tuplettools.make_tuplet_from_proportions_and_pair([1, -4, 1], (1, 4)), 
+      tuplettools.make_tuplet_from_proportions_and_pair([1, -4, 1, 1], (1, 4))])
 
    assert len(v.leaves) == 7
    result = music.partitionLeavesByDurations(v.leaves, [(1, 4)])
@@ -14,9 +17,12 @@ def test_partition_leaves_by_durations_01( ):
 
 
 def test_partition_leaves_by_durations_02( ):
+   #v = Voice([
+   #   divide.pair([1, -4, 1], (1, 4)), 
+   #   divide.pair([1, -4, 1, 1], (1, 4))])
    v = Voice([
-      divide.pair([1, -4, 1], (1, 4)), 
-      divide.pair([1, -4, 1, 1], (1, 4))])
+      tuplettools.make_tuplet_from_proportions_and_pair([1, -4, 1], (1, 4)), 
+      tuplettools.make_tuplet_from_proportions_and_pair([1, -4, 1, 1], (1, 4))])
    assert len(v.leaves) == 7
    result = music.partitionLeavesByDurations(v.leaves, [(1, 2)])
    assert len(result) == 1
