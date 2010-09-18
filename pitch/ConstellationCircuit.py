@@ -1,6 +1,6 @@
-from abjad.tools import listtools
-from abjad.tools import scoretools
 from abjad.tools import iotools
+from abjad.tools import scoretools
+from abjad.tools import seqtools
 from baca.pitch.Constellation import Constellation
 from fractions import Fraction
 
@@ -103,7 +103,7 @@ class ConstellationCircuit(object):
 
    def show_generators_and_pivots(self):
       chords = zip(self.generators, self.pivots)
-      chords = listtools.flatten(chords, depth = 1)
+      chords = seqtools.flatten_sequence(chords, depth = 1)
       self._show_chords(chords)
 
    def show_generators_colored(self):

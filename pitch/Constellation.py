@@ -1,18 +1,14 @@
 from abjad.components import Chord
-#from abjad.markup import Markup
-from abjad.tools import markuptools
-#from abjad.rational import Rational
-from fractions import Fraction
 from abjad.tools import chordtools
-#from abjad.tools import clone
-from abjad.tools import componenttools
-from abjad.tools import listtools
-from abjad.tools import lilyfiletools
+#from abjad.tools import componenttools
+#from abjad.tools import iotools
+#from abjad.tools import lilyfiletools
+from abjad.tools import markuptools
 from abjad.tools import pitchtools
 from abjad.tools import scoretools
-#from abjad.tools.io.show import show
-from abjad.tools import iotools
+from abjad.tools import seqtools
 from baca.pitch.constellate import constellate
+from fractions import Fraction
 
 
 class Constellation(object):
@@ -67,7 +63,7 @@ class Constellation(object):
 
    @property
    def _generator_pnl(self):
-      return list(sorted(listtools.flatten(self._partitioned_generator_pnl)))
+      return list(sorted(seqtools.flatten_sequence(self._partitioned_generator_pnl)))
 
    @property
    def _next(self):
@@ -97,9 +93,10 @@ class Constellation(object):
    def _label_chord(self, chord):
       chord_number = self.get_chord_number(chord)
       label = '%s-%s' % (self._constellation_number, chord_number)
-      if not getattr(chord, '_already_ed', None):
-         chord.markup.up.append(label)
-         chord._already_labeled = True
+      #if not getattr(chord, '_already_ed', None):
+      #   chord.markup.up.append(label)
+      #   chord._already_labeled = True
+      markuptools.Markup(label)(chord)
 
    def _show_chords(self, chords):
       score, treble, bass = scoretools.make_piano_sketch_score_from_leaves(chords)
@@ -143,7 +140,8 @@ class Constellation(object):
       return self._pitch_number_lists[chord_index]
 
    def get_chord_number(self, arg):
-      arg_numbers = arg.numbers
+      #arg_numbers = arg.numbers
+      arg_numbers = tuple([abs(x) for x in arg.pitches])
       for pnl_index, pnl in enumerate(self):
          if tuple(pnl) == arg_numbers:
             pnl_number = pnl_index + 1

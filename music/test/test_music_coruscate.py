@@ -346,8 +346,8 @@ def test_music_coruscate_07( ):
    }
    '''
 
-   #assert t.format == '{\n\t{\n\t\tr8\n\t}\n\t{\n\t\tr8\n\t}\n\t{\n\t\tr8\n\t\tr32\n\t}\n}'
-   assert t.format == '{\n\t{\n\t\tr8\n\t}\n\t{\n\t\tr8\n\t}\n\t{\n\t\t\\set stemLeftBeamCount = #0\n\t\t\\set stemRightBeamCount = #1\n\t\tr8 [\n\t\t\\set stemLeftBeamCount = #3\n\t\t\\set stemRightBeamCount = #0\n\t\tr32 ]\n\t}\n}'
+   assert t.format == '{\n\t{\n\t\tr8\n\t}\n\t{\n\t\tr8\n\t}\n\t{\n\t\tr8\n\t\tr32\n\t}\n}'
+   #assert t.format == '{\n\t{\n\t\tr8\n\t}\n\t{\n\t\tr8\n\t}\n\t{\n\t\t\\set stemLeftBeamCount = #0\n\t\t\\set stemRightBeamCount = #1\n\t\tr8 [\n\t\t\\set stemLeftBeamCount = #3\n\t\t\\set stemRightBeamCount = #0\n\t\tr32 ]\n\t}\n}'
 
 
 def test_music_coruscate_10( ):

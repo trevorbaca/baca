@@ -1,0 +1,3 @@
+Functions removed from ancient baca/music/music.py module
+
+   * removeEffectiveDurations(expr)

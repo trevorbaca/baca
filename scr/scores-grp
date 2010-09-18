@@ -10,7 +10,7 @@ os.system('clear')
 os.system('grep -Irn "%s" /Users/trevorbaca/Documents/other/baca | grep -v svn' %
    sys.argv[1])
 
-scores = os.listdir(os.environ['SCORES'])
+scores = os.listdir(os.getenv('SCORES'))
 scores = [x for x in scores if not x.startswith('.')]
-for work in scores:
-   os.system(base % (sys.argv[1], work))
+for score in scores:
+   os.system(base % (sys.argv[1], score))

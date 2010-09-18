@@ -1,5 +1,4 @@
 #! /usr/bin/env python
-# revision 1
 
 import os
 import sys

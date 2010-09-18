@@ -1,10 +1,11 @@
 #! /usr/bin/env python
-# revision 1
+
+'''Equivalent to iotools.pdf( ) in Abjad.'''
 
 import glob
 import os
 
-
-LILYPONDOUTPUT = os.environ.get('LILYPONDOUTPUT')
-last = glob.glob(LILYPONDOUTPUT + '/*.pdf')[-1]
+os.system('clear')
+glob_string = os.path.join('/', 'Users', 'trevorbaca', '.abjad', 'output', '*.pdf')
+last = glob.glob(glob_string)[-1]
 os.system('open %s' % last)
