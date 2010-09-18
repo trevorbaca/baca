@@ -197,6 +197,22 @@ Functions migrated from baca/utilities.py to Abjad:
    next, prev, = leaf.next, leaf.prev 
 
 
+   utilities.segment(l, s, cycle = False)
+   ==>
+   listtools.partition_by_weights_not_less_than(l, s, cyclic = False, overhang = False)
+
+
+   utilities.segment(l, s, cycle = 'knife')
+   ==>
+   listtools.partition_by_weights_not_less_than(l, s, cyclic = True, overhang = False)
+
+
+   utilities.segment(l, s, cycle = 'knife')
+   ==>
+   l = listtools.repeat_list_to_weight(l, sum(s), remainder = 'more')
+   listtools.partition_by_weights_not_less_than(l, s, cyclic = True, overhang = False)
+
+
    utilities.smear(l, s)
    ==>
    listtools.overwrite_slices_at(l, pairs)
