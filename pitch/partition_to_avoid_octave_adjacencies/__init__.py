@@ -1,2 +1,0 @@
-from partition_to_avoid_octave_adjacencies import \
-   partition_to_avoid_octave_adjacencies
