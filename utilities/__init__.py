@@ -1,5 +1,3 @@
-## TODO: remove nested directories. ##
-
 ## TODO: uncomment Abjad-dependent functions ##
 
 from cache_output import cache_output
