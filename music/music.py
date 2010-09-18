@@ -1,15 +1,18 @@
-'''Music-generation functions used in Cary and Sekka.'''
+'''Music-generation functions used in Cary and Sekka.
+'''
 
-from abjad import *
-from abjad.leaf.leaf import _Leaf
-from abjad.measure.rigid.measure import RigidMeasure
-from abjad.skip.skip import Skip
-from abjad.tools import construct
-from abjad.tools import divide
+#from abjad import *
+from abjad.components import Measure
+from abjad.components import Note
+from abjad.components import Skip
+from abjad.components import Voice
+from abjad.components._Leaf import _Leaf
+from abjad.tools import resttools
 from abjad.tools import tietools
-from abjad.voice.voice import Voice
+from abjad.tools import tuplettools
 from baca import utilities
-from baca.utilities import *
+#from baca.utilities import *
+from fractions import Fraction
 import copy
 import math
 import re
@@ -134,7 +137,7 @@ def interpretMusic(arg):
                body.append(Note(0, n, denominator))
             elif n < 0:
                body.append(Rest(abs(n), denominator))
-         bodyDuration = sum([m.duration for m in body], Rational(0))
+         bodyDuration = sum([m.duration for m in body], Fraction(0))
          m = tuplet.SmartTuplet(
             bodyDuration.phi.effective.numerator, 
             bodyDuration.phi.effective.denominator, body)
@@ -147,7 +150,7 @@ def interpretMusic(arg):
       # [13, 'sixtyfourth', '13:10'] or [7, 5, 1, 'sixtyfourth', '13:10']
       elif len(arg) >= 3 and arg[-2] in duration.durationNames:
          body = interpretMusic(arg[:-1]).music
-         bodyDuration = sum([m.duration for m in body], Rational(0))
+         bodyDuration = sum([m.duration for m in body], Fraction(0))
          r = ratio(arg[-1]) * bodyDuration
          m = tuplet.SmartTuplet(
             r.effective.numerator, 
@@ -172,13 +175,13 @@ def interpretMusic(arg):
       #print prolationIndicator
       body = [interpretMusic(m) for m in body]
       #print body
-      bodyDuration = sum([m.duration for m in body], Rational(0))
+      bodyDuration = sum([m.duration for m in body], Fraction(0))
       #print bodyDuration
       if prolationIndicator == None:
-         prolationRatio = Rational(
+         prolationRatio = Fraction(
             duration.phi(bodyDuration.numerator), bodyDuration.numerator) 
       else:
-         prolationRatio = Rational(
+         prolationRatio = Fraction(
             int(prolationIndicator.split(':')[1]), 
             int(prolationIndicator.split(':')[0]))
       #print prolationRatio
@@ -253,9 +256,9 @@ def beam(m, b = None, rip = True, span = False, nib = False, lone = 'flat'):
    else:
       for part in b:
          if isinstance(part, Duration):
-            d.append(Rational(part.n, part.d))
+            d.append(Fraction(part.n, part.d))
          elif isinstance(part, tuple):
-            d.append(Rational(part[0], part[1]))
+            d.append(Fraction(part[0], part[1]))
          else:
             raise ValueError
 
@@ -265,8 +268,8 @@ def beam(m, b = None, rip = True, span = False, nib = False, lone = 'flat'):
    curBeam = 0
    nextBeam = d[curBeam]
 
-   curStartPoint = Rational(0)
-   curStopPoint = Rational(0, 1)
+   curStartPoint = Fraction(0)
+   curStopPoint = Fraction(0, 1)
    prevLeafEncounteredBeam = False
    curLeafEncountersBeam = False
 
@@ -1022,7 +1025,7 @@ def writtenDurations(m):
    return [l.duration for l in m.leaves]
 
 def writtenDuration(m):
-   return sum(writtenDurations(m), Rational(0))
+   return sum(writtenDurations(m), Fraction(0))
 
 def effectiveDurations(m):
    '''
@@ -1053,9 +1056,9 @@ def effectiveDuration(m):
    '''
 
    if m == [ ]:
-      return Rational(0)
+      return Fraction(0)
    else:
-      return sum(effectiveDurations(m), Rational(0))
+      return sum(effectiveDurations(m), Fraction(0))
 
 def fill(l, positions):
    '''
@@ -1081,7 +1084,7 @@ def blank(l, positions):
 
    for i, m in enumerate(l):
       if (i + 1) in positions:
-         rests = construct.rests(m.duration.contents)
+         rests = resttools.make_rests(m.duration.contents)
          new_measure = RigidMeasure(m.meter.effective, rests)
          l[i] = new_measure
 
@@ -1141,7 +1144,7 @@ def build(measures, outer):
 
    return result
 
-def trill(l, p = False, indices = 'all', d = Rational(0)):
+def trill(l, p = False, indices = 'all', d = Fraction(0)):
    '''
    Cyclically trills notes at indices with scaled duration >= d.
 
@@ -1149,7 +1152,7 @@ def trill(l, p = False, indices = 'all', d = Rational(0)):
 
    trill(l)
    trill(l, indices = [0, 2])
-   trill(l, d = Rational(1, 4)
+   trill(l, d = Fraction(1, 4)
    trill(l, p = [pitch.Pitch(2)])
    trill(l, indices = [0, 2], p = [pitch.Pitch(2)])
 
@@ -1184,7 +1187,7 @@ def grace(l,
    if indices == 'all':
       indices = range(len(instances(l, k)))
 
-   dm = Rational(*dm)
+   dm = Fraction(*dm)
 
    candidate = 0
    
@@ -1329,7 +1332,7 @@ class Subdivide(object):
          n = self.positions[self.position]
          if n > 0:
             denominator = int(2 ** (n + 2))
-            quotient = node.duration / Rational(1, denominator)
+            quotient = node.duration / Fraction(1, denominator)
             if quotient.d == 1 and quotient.n > 1:
                new = expression.Expression(
                   [Note(0, 1, denominator) for x in range(quotient.n)])
@@ -1410,15 +1413,15 @@ def decompose(d, parts, r = 'rest'):
    [c'8., c'4, c'8., c'4, r8]
    '''
 
-   d = Rational(d[0], d[1])
+   d = Fraction(d[0], d[1])
    p = []
    for part in parts:
-      p.append(Rational(part[0], part[1]))
+      p.append(Fraction(part[0], part[1]))
       
    m = []
    i = 0
 
-   while d > Rational(0, 1):
+   while d > Fraction(0, 1):
       curPart = p[i % len(p)]
       if curPart <= d:
          m.append(Note(0, curPart.n, curPart.d))
@@ -1430,7 +1433,7 @@ def decompose(d, parts, r = 'rest'):
             m.append(Rest(d.n, d.d))
          else:
             raise ValueError
-         d = Rational(0, 1)
+         d = Fraction(0, 1)
       i += 1
 
    return m
@@ -1540,7 +1543,8 @@ def specify(s, t, span = None):
       parts = [listtools.weight(subbeam) for subbeam in beamfig]
       parts = [(n, t) for n in parts]
       stream = listtools.flatten(beamfig, action = 'new')
-      new = divide.pair(stream, (listtools.weight(stream), t))
+      #new = divide.pair(stream, (listtools.weight(stream), t))
+      new = tuplettools.make_tuplet_from_proportions_and_pair(stream, (listtools.weight(stream), t))
       beam(new, parts, span = span)
       result.append(new)
 
@@ -1592,7 +1596,9 @@ def stellate(k, s, t, d, b, span ='from duration', rests = True):
 
    denominators = copy.copy(k)
    pairs = zip(signatures, denominators)
-   tuplets = [divide.pair(pair[0], (pair[1], d)) for pair in pairs]
+   #tuplets = [divide.pair(pair[0], (pair[1], d)) for pair in pairs]
+   tuplets = [tuplettools.make_tuplet_from_proportions_and_pair(
+      pair[0], (pair[1], d)) for pair in pairs]
 
    if span == 'from duration':
       span = int(math.log(d, 2)) - 3
@@ -1682,7 +1688,9 @@ def coruscate(n, s, t, z, d, rests = True):
    if debug: print signatures
 
    pairs = zip(signatures, t)
-   result = [divide.pair(pair[0], (pair[1], d)) for pair in pairs]
+   #result = [divide.pair(pair[0], (pair[1], d)) for pair in pairs]
+   result = [tuplettools.make_tuplet_from_proportions_and_pair(
+      pair[0], (pair[1], d)) for pair in pairs]
    
    for i, element in enumerate(result):
       if debug:
@@ -1721,11 +1729,11 @@ def makeMeasures(m, meters):
    according to meters. 
    '''
 
-   durations = [Rational(*meter) for meter in meters]
+   durations = [Fraction(*meter) for meter in meters]
    #voices = instances(m, 'Voice')
    #for v in voices:
    for v in iterate.naive_forward_in(m, Voice):
-      assert v.duration.prolated == sum(durations, Rational(0))
+      assert v.duration.prolated == sum(durations, Fraction(0))
       d = 0
       #measure = Measure(meters[d], [ ])
       measure = RigidMeasure(meters[d], [ ])
@@ -1844,12 +1852,12 @@ def copyMusicList(ll, i = None, j = None):
    result = result[ : ]
    return result
 
-def setLeafStartTimes(expr, offset = Rational(0)):
+def setLeafStartTimes(expr, offset = Fraction(0)):
    '''
    Doc.
    '''
   
-   cur = Rational(*offset.pair)
+   cur = Fraction(*offset.pair)
    for l in instances(expr, '_Leaf'):
       l.start = cur
       cur += l.duration.prolated
@@ -2170,7 +2178,7 @@ def setArticulationsByDuration(voice, start, stop, long, min, short):
    '''
    
    leaves = voice.leaves
-   min = Rational(*min)
+   min = Fraction(*min)
    for l in leaves[start : stop + 1]:
       if isinstance(l, (Note, Chord)):
          if l.duration.prolated >= min:
@@ -2250,8 +2258,8 @@ def applyArtificialHarmonic(voice, *args):
 
 def hpartition_notes_only(leaves, cut = (0,), gap = (0,)):
    '''Note runs only.'''
-   cut = Rational(*cut)
-   gap = Rational(*gap)
+   cut = Fraction(*cut)
+   gap = Fraction(*gap)
    result = [[]]
    for l in leaves:
       lastChunk = result[-1]
@@ -2271,8 +2279,8 @@ def hpartition_notes_only(leaves, cut = (0,), gap = (0,)):
 
 def hpartition_rest_terminated(leaves, cut = (0,), gap = (0,)):
    '''Rest-terminated note runs.'''
-   cut = Rational(*cut)
-   gap = Rational(*gap)
+   cut = Fraction(*cut)
+   gap = Fraction(*gap)
    result = [[]]
    for l in leaves:
       lastChunk = result[-1]
@@ -2340,8 +2348,8 @@ def partitionLeaves(leaves, type = 'notes and rests', cut = (0,), gap = (0,)):
    [([c'16, r16, c'16], [c'16]), ([c'16],)]
       '''
 
-   cut = Rational(*cut)
-   gap = Rational(*gap)
+   cut = Fraction(*cut)
+   gap = Fraction(*gap)
    result = [[]]
    
    if type == 'notes and rests':
@@ -2535,8 +2543,8 @@ def segmentLeaves(leaves, cut = (0,), gap = (0,)):
    >>> segmentLeaves(t.leaves, (1, 16), (3, 16))
    [([c'16, r16, c'16], [c'16, r16, c'16]), ([c'16, r16, c'16],)]
    '''
-   cut = Rational(*cut)
-   gap = Rational(*gap)
+   cut = Fraction(*cut)
+   gap = Fraction(*gap)
    parts = partitionLeaves(leaves)
    if not isinstance(parts[0][0], Note):
       parts.pop(0)
@@ -2838,7 +2846,7 @@ def partitionLeavesByDurations(leaves, durations = None):
    j = 0
    for l in leaves:
       total = effectiveDuration(result[-1])
-      next = Rational(*durations[j % len(durations)])
+      next = Fraction(*durations[j % len(durations)])
       #if total + l.effectiveDuration < next:
       if total + l.duration.prolated < next:
          result[-1].append(l)

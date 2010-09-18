@@ -1,8 +1,8 @@
-from abjad.note.note import Note
-from abjad.tools import clone
+from abjad.components import Note
+from abjad.tools import componenttools
 
 
-## TODO: Rename to repeat_subruns_to_count( ) to match Abjad listtool. ##
+## TODO: Rename to repeat_subruns_to_count( ) to match Abjad listtools. ##
 
 def repeat_subruns_cyclic(notes, pairs, history = False):
    '''Repeat components according to pairs.
@@ -34,4 +34,4 @@ def repeat_subruns_cyclic(notes, pairs, history = False):
       instructions.append(instruction)
 
    for index, new_notes, reps in reversed(sorted(instructions)):
-      notes[index:index] = clone.unspan(new_notes, reps)
+      notes[index:index] = componenttools.clone_components_and_remove_all_spanners(new_notes, reps)
