@@ -168,6 +168,13 @@ Functions migrated from baca/utilities.py to Abjad:
    listtools.replace_elements_cyclic(l, indices, material)
 
 
+   utilities.resegment(w, s, max = False, overhang = True)
+   ==>
+   listtools.partition_by_weights_not_less_than(listtools.flatten(w), s, cyclic = True, 
+      overhang = overhang)
+   The max keyword never worked correctly.
+
+
    utilities.ripple(l, [(anchor, (length, total_appearances)), ...])
    ie, utilities.ripple(l, [(i, (length, n), ...])
    ==>
