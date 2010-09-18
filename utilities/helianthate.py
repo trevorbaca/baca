@@ -1,10 +1,6 @@
-#from abjad.leaf.leaf import _Leaf
-#from abjad.note.note import Note
-from abjad.component.component import _Component
-from abjad.tools import clone
+from abjad.components._Component import _Component
 from abjad.tools import listtools
-from baca.utilities.rotate_nested import rotate_nested as \
-   utilities_rotate_nested
+from baca.utilities.rotate_nested import rotate_nested
 
 
 ## TODO: Clean up docstring with examples from test file instead. ##
@@ -21,7 +17,8 @@ def helianthate(l, outer, inner, flattened = True):
 
    abjad> l = [[1, 2, 3], [4, 5], [6, 7, 8]]
    abjad> utilities.helianthate(l, -1, 1)[:24]
-   [1, 2, 3, 4, 5, 6, 7, 8, 5, 4, 8, 6, 7, 3, 1, 2, 7, 8, 6, 2, 3, 1, 4, 5]'''
+   [1, 2, 3, 4, 5, 6, 7, 8, 5, 4, 8, 6, 7, 3, 1, 2, 7, 8, 6, 2, 3, 1, 4, 5]
+   '''
 
    assert all([not isinstance(x, _Component) for x in l])
 
@@ -48,7 +45,7 @@ def helianthate(l, outer, inner, flattened = True):
    while True:
       last = result[-len(start):]
       input = last
-      next = utilities_rotate_nested(input, outer, inner)
+      next = rotate_nested(input, outer, inner)
       if next == start:
          break
       result.extend(next) 

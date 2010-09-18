@@ -1,4 +1,4 @@
-from abjad.rational.rational import Rational
+from fractions import Fraction
 
 
 ## TODO: Break out 'sheet' case into separate function. ##
@@ -25,7 +25,7 @@ def segment(l, s, cycle = 'knife'):
 
    assert isinstance(l, list)
    assert isinstance(s, list)
-   assert all([isinstance(x, (int, float, long, Rational)) for x in s])
+   assert all([isinstance(x, (int, float, long, Fraction)) for x in s])
 
    result = [ ]
 
