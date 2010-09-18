@@ -1,9 +1,8 @@
 #! /usr/bin/env python
-# revision 1
 
-import glob
+'''Shell script equivalent of iotools.log( ) in Abjad.'''
+
 import os
 
-
-LILYPONDOUTPUT = os.environ.get('LILYPONDOUTPUT')
-os.system('vi %s%s%s' % (LILYPONDOUTPUT, os.sep, 'lily.log'))
+lily_log = os.path.join('~', '.abjad', 'output', 'lily.log')
+os.system('vi %s' % lily_log)

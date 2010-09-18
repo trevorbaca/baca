@@ -3,18 +3,10 @@
 import os
 
 os.system('clear')
-
-dirs = (
-   '/Users/trevorbaca/Documents/other/articles',
-   '/Users/trevorbaca/Documents/other/math',
-   '/Users/trevorbaca/Documents/other/monographs',
-   '/Users/trevorbaca/Documents/other/reference',
-   '/Users/trevorbaca/Documents/other/travel',
-   '/Users/trevorbaca/Documents/other/vitae',
-   )
-
-for dir in dirs:
-   name = dir.split('/')[-1]
-   print '%s ...' % name
-   os.system('svn st -u %s' % dir)
-   print ''
+other = os.path.join('/', 'Users', 'trevorbaca', 'Documents', 'other')
+for dir in os.listdir(other):
+   if not dir.startswith('.'):
+      print '%s ...' % dir
+      full_dir = os.path.join(other, dir)
+      os.system('svn st -u %s' % full_dir)
+      print ''
