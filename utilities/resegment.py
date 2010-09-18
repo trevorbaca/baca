@@ -1,3 +1,6 @@
+from abjad.tools import listtools
+
+
 def resegment(w, s, max = False, overhang = True):
    '''Resegment two-dimensional list w into sublists 
    of weights not less than s.
@@ -26,35 +29,36 @@ def resegment(w, s, max = False, overhang = True):
    ###        change this, but only after porting Lidercfeny.
    '''
 
-   result = [ ]
+#   result = [ ]
+#
+#   i = 0
+#   cur = s[i % len(s)]
+#   new = [ ]
+#   visitedSublists = 0
+#
+#   for sublist in w:
+#      for element in sublist:
+#         new.append(element)
+#         if sum(new) >= cur:
+#            result.append(new)
+#            i += 1
+#            cur = s[i % len(s)]
+#            new = [ ]
+#            visitedSublists = 0
+#      visitedSublists += 1
+#      if max and visitedSublists >= max:
+#         result.append(new)
+#         i += 1
+#         cur = s[i % len(s)]
+#         new = [ ]
+#         visitedSublists = 0
+#   if overhang and len(new) > 0:
+#      result.append(new)
+#
+#   if result[-1] == [ ]:
+#      result.pop( )
+#
+#   return result
 
-   i = 0
-   cur = s[i % len(s)]
-   new = [ ]
-   visitedSublists = 0
-
-   for sublist in w:
-      for element in sublist:
-         new.append(element)
-         if sum(new) >= cur:
-            result.append(new)
-            i += 1
-            cur = s[i % len(s)]
-            new = [ ]
-            visitedSublists = 0
-      visitedSublists += 1
-      if max and visitedSublists >= max:
-         result.append(new)
-         i += 1
-         cur = s[i % len(s)]
-         new = [ ]
-         visitedSublists = 0
-   if overhang and len(new) > 0:
-      result.append(new)
-
-   if result[-1] == [ ]:
-      result.pop( )
-
-   return result
-
-
+   return listtools.partition_by_weights_not_less_than(
+      listtools.flatten(w), s, cyclic = True, overhang = overhang)

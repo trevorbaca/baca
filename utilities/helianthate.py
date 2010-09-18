@@ -3,44 +3,31 @@ from abjad.tools import listtools
 from baca.utilities.rotate_nested import rotate_nested
 
 
-## TODO: Clean up docstring with examples from test file instead. ##
-
 def helianthate(l, outer, inner, flattened = True):
-   '''Rotate inner lists and outer list simultaneously and accumulate
-   results until identity.
+   '''Rotate inner lists and outer list simultaneously 
+   and accumulate results until identity.
 
    abjad> l = [[1, 2, 3], [4, 5], [6, 7, 8]]
    abjad> utilities.helianthate(l, -1, 1)
+   [1, 2, 3, 4, 5, 6, 7, 8, 5, 4, 8, 6, 7, 3, 1, 2, 7, 8,
+      6, 2, 3, 1, 4, 5, 1, 2, 3, 5, 4, 6, 7, 8, 4, 5, 8, 6, 7, 3, 1,
+      2, 7, 8, 6, 2, 3, 1, 5, 4]
 
    abjad> l = [[1, 2, 3], [4, 5], [6, 7, 8]]
    abjad> utilities.helianthate(l, -1, 1, flattened = False)
-
-   abjad> l = [[1, 2, 3], [4, 5], [6, 7, 8]]
-   abjad> utilities.helianthate(l, -1, 1)[:24]
-   [1, 2, 3, 4, 5, 6, 7, 8, 5, 4, 8, 6, 7, 3, 1, 2, 7, 8, 6, 2, 3, 1, 4, 5]
+   [[1, 2, 3], [4, 5], [6, 7, 8], [5, 4], [8, 6, 7], [3, 1, 2], [7, 8, 6], 
+      [2, 3, 1], [4, 5], [1, 2, 3], [5, 4], [6, 7, 8], [4, 5], [8, 6, 7], 
+      [3, 1, 2], [7, 8, 6], [2, 3, 1], [5, 4]]
    '''
 
-   assert all([not isinstance(x, _Component) for x in l])
+   if not all([not isinstance(x, _Component) for x in l]):
+      raise TypeError('function not defined from score components.')
 
    start = l[:]
    result = l[:]
 
-#   if inner == 'right':
-#      inner = 1
-#   elif inner == 'left':
-#      inner = -1
-#   else:
-#      raise ValueError
-#
-#   if outer == 'right':
-#      outer = 1
-#   elif outer == 'left':
-#      outer = -1
-#   else:
-#      raise ValueError
-
-   assert isinstance(inner, (int, long))
-   assert isinstance(outer, (int, long))
+   if not isinstance(inner, (int, long)) or not isinstance(outer, (int, long)):
+      raise TypeError('must be integer.')
 
    while True:
       last = result[-len(start):]
