@@ -1,7 +1,7 @@
 from baca import utilities
 
 
-def test_utilities_rotate_nested_01( ):
+def test_rotate_nested_01( ):
 
    l = [[1, 2, 3], [4, 5], [6, 7, 8]]
    
@@ -9,7 +9,7 @@ def test_utilities_rotate_nested_01( ):
    assert t == [[8, 6, 7], [3, 1, 2], [5, 4]]
 
 
-def test_utilities_rotate_nested_02( ):
+def test_rotate_nested_02( ):
 
    l = [[1, 2, 3], [4, 5], [6, 7, 8]]
    
@@ -17,7 +17,7 @@ def test_utilities_rotate_nested_02( ):
    assert t == [[7, 8, 6], [2, 3, 1], [5, 4]]
 
 
-def test_utilities_rotate_nested_03( ):
+def test_rotate_nested_03( ):
 
    l = [[1, 2, 3], [4, 5], [6, 7, 8]]
    
@@ -25,7 +25,7 @@ def test_utilities_rotate_nested_03( ):
    assert t == [[5, 4], [8, 6, 7], [3, 1, 2]]
 
 
-def test_utilities_rotate_nested_04( ):
+def test_rotate_nested_04( ):
 
    l = [[1, 2, 3], [4, 5], [6, 7, 8]]
    
