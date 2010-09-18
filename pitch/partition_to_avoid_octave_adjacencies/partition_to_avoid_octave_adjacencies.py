@@ -1,10 +1,11 @@
-from abjad.rational import Rational
 from abjad.tools import listtools
 from abjad.tools import mathtools
+from fractions import Fraction
 
 
 def partition_to_avoid_octave_adjacencies(l, direction):
-   '''Partition to avoid octave adjacencies.'''
+   '''Partition to avoid octave adjacencies.
+   '''
 
    assert direction in ('left', 'right')
    
@@ -12,8 +13,8 @@ def partition_to_avoid_octave_adjacencies(l, direction):
    part = result[-1]
    
    for x in l:
-      if not isinstance(x, (int, float, long, Rational)):
-         raise ValueError
+      if not isinstance(x, (int, float, long, Fraction)):
+         raise TypeError('integer or rational.')
       if x % 12 in [y % 12 for y in part]:
          first_value = [y for y in part if y % 12 == x % 12][0]
          first_index = part.index(first_value)

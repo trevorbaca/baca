@@ -1,10 +1,11 @@
-from abjad.chord import Chord
+from abjad.components import Chord
 from abjad.tools import pitchtools
 from baca.pitch.constellate import constellate
 
 
 '''Each constellation must be an (ordered) list rather than
-   an (unordered) set because lists are not hashable.'''
+an (unordered) set because lists are not hashable.
+'''
 
 partitioned_generator_pnls = [
    [[-12, -10, 4], [-2, 8, 11, 17], [19, 27, 30, 33, 37]],

@@ -1,8 +1,8 @@
-from abjad.rational import Rational
 from abjad.tools import listtools
 from abjad.tools import scoretools
-from abjad.tools.io.show import show
+from abjad.tools import iotools
 from baca.pitch.Constellation import Constellation
+from fractions import Fraction
 
 
 class ConstellationCircuit(object):
@@ -59,11 +59,11 @@ class ConstellationCircuit(object):
    def _show_chords(self, chords):
       score, treble, bass = \
          scoretools.make_piano_sketch_score(chords)
-      score.spacing.proportional_notation_duration = Rational(1, 24)
+      score.spacing.proportional_notation_duration = Fraction(1, 24)
       score.lily_file.default_paper_size = 'letter', 'landscape'
       score.lily_file.global_staff_size = 18
       score.text.staff_padding = 10
-      show(score.lily_file)
+      iotools.show(score.lily_file)
 
    ## PUBLIC ATTRIBUTES ##
 

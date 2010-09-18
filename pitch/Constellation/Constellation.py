@@ -1,13 +1,17 @@
-from abjad.chord import Chord
-from abjad.markup import Markup
-from abjad.rational import Rational
+from abjad.components import Chord
+#from abjad.markup import Markup
+from abjad.tools import markuptools
+#from abjad.rational import Rational
+from fractions import Fraction
 from abjad.tools import chordtools
-from abjad.tools import clone
+#from abjad.tools import clone
+from abjad.tools import componenttools
 from abjad.tools import listtools
-from abjad.tools import lilytools
+from abjad.tools import lilyfiletools
 from abjad.tools import pitchtools
 from abjad.tools import scoretools
-from abjad.tools.io.show import show
+#from abjad.tools.io.show import show
+from abjad.tools import iotools
 from baca.pitch.constellate import constellate
 
 
@@ -17,7 +21,7 @@ class Constellation(object):
       self._circuit = circuit
       self._partitioned_generator_pnl = partitioned_generator_pnl
       self._constellate_partitioned_generator_pnl( )
-      self._chord_duration = Rational(1, 4)
+      self._chord_duration = Fraction(1, 4)
       self._chords = [ ]
 
    ## OVERLOADS ##
@@ -43,12 +47,12 @@ class Constellation(object):
    def _color_map(self):
       pitches = self._partitioned_generator_pnl
       colors = ['red', 'blue', 'green']
-      return pitchtools.PitchClassColorMap(pitches, colors)
+      return pitchtools.NumericPitchClassColorMap(pitches, colors)
 
    @property
    def _colored_generator(self):
       generator = self.generator
-      chordtools.color_noteheads_by_pc(generator, self._color_map)
+      chordtools.color_chord_note_heads_by_numeric_pitch_class(generator, self._color_map)
       return generator
 
    @property
@@ -88,8 +92,7 @@ class Constellation(object):
       return next_constellation
 
    def _constellate_partitioned_generator_pnl(self):
-      self._pitch_number_lists = \
-         constellate(self._partitioned_generator_pnl, self.pitch_range)
+      self._pitch_number_lists = constellate(self._partitioned_generator_pnl, self.pitch_range)
 
    def _label_chord(self, chord):
       chord_number = self.get_chord_number(chord)
@@ -99,8 +102,7 @@ class Constellation(object):
          chord._already_labeled = True
 
    def _show_chords(self, chords):
-      score, treble, bass = \
-         scoretools.make_piano_sketch_score(chords)
+      score, treble, bass = scoretools.make_piano_sketch_score_from_leaves(chords)
       score.spacing.proportional_notation_duration = Rational(1, 20)
       score.lily_file.default_paper_size = 'letter', 'landscape'
       score.lily_file.global_staff_size = 18
@@ -164,7 +166,7 @@ class Constellation(object):
    def make_labeled_colored_chords(self):
       result = self.make_labeled_chords( )
       for chord in result:
-         chordtools.color_noteheads_by_pc(chord, self._color_map)
+         chordtools.color_chord_note_heads_by_numeric_pitch_class(chord, self._color_map)
       return result
 
    def show_generator(self):
