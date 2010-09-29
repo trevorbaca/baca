@@ -6,35 +6,27 @@ os.system('clear')
 
 dirs = (
    '/Users/trevorbaca/Documents/abjad',
-
    '/Users/trevorbaca/Documents/friends',
-
-   '/Users/trevorbaca/Documents/harvard',
-
-   '/Users/trevorbaca/Documents/other/articles',
-   '/Users/trevorbaca/Documents/other/baca',
-   '/Users/trevorbaca/Documents/other/jsb',
-   '/Users/trevorbaca/Documents/other/math',
-   '/Users/trevorbaca/Documents/other/monographs',
-   '/Users/trevorbaca/Documents/other/reference',
-   '/Users/trevorbaca/Documents/other/travel',
-   '/Users/trevorbaca/Documents/other/vitae',
-
-   '/Users/trevorbaca/Documents/scores/chrysanthemums',
-   '/Users/trevorbaca/Documents/scores/tack',
-   '/Users/trevorbaca/Documents/scores/zeit',
-   '/Users/trevorbaca/Documents/scores/poeme',
-   '/Users/trevorbaca/Documents/scores/red-shift',
-   '/Users/trevorbaca/Documents/scores/cary',
-   '/Users/trevorbaca/Documents/scores/sekka',
-   '/Users/trevorbaca/Documents/scores/lidercfeny',
-   '/Users/trevorbaca/Documents/scores/manifolds',
-   '/Users/trevorbaca/Documents/scores/territoires',
-   '/Users/trevorbaca/Documents/scores/desir',
-   )
+   '/Users/trevorbaca/Documents/harvard',)
 
 for dir in dirs:
    name = dir.split('/')[-1]
    print '%s ...' % name
    os.system('svn st -u %s' % dir)
+   print ''
+
+others = os.listdir(os.getenv('OTHER'))
+others = [x for x in others if not x.startswith('.')]
+for other in others:
+   print '%s ...' % other
+   repository = os.path.join(os.getenv('OTHER'), other)
+   os.system('svn st -u %s' % repository)
+   print ''
+
+scores = os.listdir(os.getenv('SCORES'))
+scores = [x for x in scores if not x.startswith('.')]
+for score in scores:
+   print '%s ...' % score
+   repository = os.path.join(os.getenv('SCORES'), score)
+   os.system('svn st -u %s' % repository)
    print ''
