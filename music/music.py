@@ -4,13 +4,13 @@
 #from abjad import *
 from abjad.components import Measure
 from abjad.components import Note
-from abjad.components import Skip
 from abjad.components import Voice
 from abjad.components._Leaf import _Leaf
 from abjad.tools import componenttools
 from abjad.tools import leaftools
-from abjad.tools import listtools
+from abjad.tools import seqtools
 from abjad.tools import resttools
+from abjad.tools import skiptools
 from abjad.tools import spannertools
 from abjad.tools import tietools
 from abjad.tools import tuplettools
@@ -567,7 +567,7 @@ def beamMany(m, partsList, rip = True, span = False, lone = 'flat'):
    for i, sublist in enumerate(m):
       beam(sublist, partsList[i], rip = rip, span = span, lone = lone)
 
-   listtools.flatten(m)
+   seqtools.flatten(m)
    
 def beams(music):
    '''
@@ -610,8 +610,8 @@ def splitPitches(pitches, split = -1):
 
       for register in ('treble', 'bass'):
          if len(components[register]) == 0:
-            #treble.append(skip.Skip((1, 4)))
-            components[register] = Skip((1, 4))
+            #treble.append(skiptools.Skip((1, 4)))
+            components[register] = skiptools.Skip((1, 4))
          elif len(components[register]) == 1:
             #treble.append(Note(components[register], (1, 4)))
             components[register] = Note(components[register], (1, 4))
@@ -631,7 +631,7 @@ def makeFixedLayoutVoice(d, systems, alignments, offsets):
 
    v = voice.Voice([], name = 'layout voice')
    for system in range(systems):
-      new = skip.Skip(*d)
+      new = skiptools.Skip(*d)
       offset = offsets[system % len(offsets)]
       offset = "(Y-offset . %s)" % offset
       text = r'\overrideProperty #"Score.NonMusicalPaperColumn"'
@@ -697,10 +697,10 @@ class Reconstructor(object):
    def unvisit(self, node):
       if isinstance(node, list):
          # FIXME: flatten now in-place
-         self.stack = listtools.flatten(self.stack[-1])
+         self.stack = seqtools.flatten(self.stack[-1])
       elif hasattr(node, 'music'):
          # FIXME: flatten now in-place
-         node.music = listtools.flatten(self.stack.pop())
+         node.music = seqtools.flatten(self.stack.pop())
          self.stack[-1].append(node)
 
 def reconstruct(music, reconstructor):
@@ -1099,7 +1099,7 @@ def nest(measures, outer, inner):
    '''
    
    #inner = partition(inner, [len(x) for x in outer], action = 'new')
-   inner = listtools.partition_by_lengths(inner, [len(x) for x in outer])
+   inner = seqtools.partition_by_lengths(inner, [len(x) for x in outer])
 
    result = [ ]
    
@@ -1274,7 +1274,7 @@ def breaks(signatures, durations, pages, verticals, staves = None):
       for l, line in enumerate(page):
          for measure in range(line):
             d = durations[total] 
-            s = Skip((1))
+            s = skiptools.Skip((1))
             s.duration.multiplier = d
             tabs = ''.join(['\t'] * int(math.ceil((10 - len(s.body)) / 3.0)))
             result.append(s)
@@ -1545,11 +1545,11 @@ def specify(s, t, span = None):
    result = []
 
    for beamfig in s:
-      parts = [listtools.weight(subbeam) for subbeam in beamfig]
+      parts = [seqtools.weight(subbeam) for subbeam in beamfig]
       parts = [(n, t) for n in parts]
-      stream = listtools.flatten(beamfig, action = 'new')
-      #new = divide.pair(stream, (listtools.weight(stream), t))
-      new = tuplettools.make_tuplet_from_proportions_and_pair(stream, (listtools.weight(stream), t))
+      stream = seqtools.flatten(beamfig, action = 'new')
+      #new = divide.pair(stream, (seqtools.weight(stream), t))
+      new = tuplettools.make_tuplet_from_proportions_and_pair(stream, (seqtools.weight(stream), t))
       beam(new, parts, span = span)
       result.append(new)
 
@@ -1580,13 +1580,13 @@ def stellate(k, s, t, d, b, span ='from duration', rests = True):
    debug = False
 
    prolation = utilities.helianthate(s, 1, 1)
-   numerators = listtools.increase_cyclic(k, prolation)
+   numerators = seqtools.increase_cyclic(k, prolation)
    mask = utilities.helianthate(t, 1, 1)
-   mask = listtools.repeat_to_weight(mask, listtools.weight(numerators))
+   mask = seqtools.repeat_to_weight(mask, seqtools.weight(numerators))
    mask = utilities.replace_nested_elements_with_unary_subruns(mask)
    #signatures = partition(
    #   mask, numerators, mode = 'weight', overhang = 'true', action = 'new')
-   signatures = listtools.partition_by_weights(
+   signatures = seqtools.partition_by_weights(
       mask, numerators, overhang = True)
    for i, signature in enumerate(signatures):
       if signature == [1]:
@@ -1595,9 +1595,9 @@ def stellate(k, s, t, d, b, span ='from duration', rests = True):
 
    if not rests:
       part_counts = [len(x) for x in signatures]
-      signatures = listtools.flatten(signatures)
+      signatures = seqtools.flatten(signatures)
       signatures = [abs(x) for x in signatures]
-      signatures = listtools.partition_by_lengths(signatures, part_counts)
+      signatures = seqtools.partition_by_lengths(signatures, part_counts)
 
    denominators = copy.copy(k)
    pairs = zip(signatures, denominators)
@@ -1613,7 +1613,7 @@ def stellate(k, s, t, d, b, span ='from duration', rests = True):
 
    dummy_container = Container(tuplets)
    #partition(tuplets, b, cyclic = True, overhang = True)
-   tuplets = listtools.partition_by_lengths(
+   tuplets = seqtools.partition_by_lengths(
       tuplets, b, cyclic = True, overhang = True)
    for i, sublist in enumerate(tuplets):
       #if t == [[4, -5, 8], [4, -8], [-4, 6, -6, 8]] and i == 7:
@@ -1633,7 +1633,7 @@ def stellate(k, s, t, d, b, span ='from duration', rests = True):
       spannertools.DuratedComplexBeamSpanner(sublist, durations, span = span)
       i += 1
    dummy_container[:] = [ ]
-   tuplets = listtools.flatten(tuplets)
+   tuplets = seqtools.flatten(tuplets)
 
    return tuplets
 
@@ -1665,13 +1665,13 @@ def coruscate(n, s, t, z, d, rests = True):
    cut = utilities.helianthate(s, 1, 1)
 
    dilation = utilities.helianthate(z, 1, 1)
-   fit = listtools.increase_cyclic(t, dilation)
+   fit = seqtools.increase_cyclic(t, dilation)
 
    j = 0
    signatures = []
    for i, element in enumerate(fit):
       new = []
-      while listtools.weight(new) < element:
+      while seqtools.weight(new) < element:
          if cut[j % len(cut)] == 0:
             new.append(signal[j % len(signal)])
          elif cut[j % len(cut)] == 1:
@@ -1680,15 +1680,15 @@ def coruscate(n, s, t, z, d, rests = True):
             raise ValueError
          j += 1
       signatures.append(new)
-   def helper(x): return list(listtools.sum_by_sign(x, sign = [-1]))
+   def helper(x): return list(seqtools.sum_by_sign(x, sign = [-1]))
    signatures = [helper(signature) for signature in signatures]
    signatures = utilities.partition_nested_into_canonic_parts(signatures)
 
    if not rests:
       part_counts = [len(x) for x in signatures]
-      signatures = listtools.flatten(signatures)
+      signatures = seqtools.flatten(signatures)
       signatures = [abs(x) for x in signatures]
-      signatures = listtools.partition_by_lengths(signatures, part_counts)
+      signatures = seqtools.partition_by_lengths(signatures, part_counts)
 
    if debug: print signatures
 
@@ -1784,15 +1784,15 @@ def recombineVoices(target, s, insert, t, loci):
 #      partition(insm, t, cyclic = True, overhang = True)
 #      print insm
 #      replace(tgtm, loci, insm)
-#      listtools.flatten(tgtm)
+#      seqtools.flatten(tgtm)
 
    def P(n, s):
       return partition(
          range(n), s, cyclic = True, overhang = True, action = 'new')
 
    def makeIndexPairs(n, s):
-      return listtools.pairwise(
-         listtools.cumulative_sums_zero([len(part) for part in P(n, s)]))
+      return seqtools.pairwise(
+         seqtools.cumulative_sums_zero([len(part) for part in P(n, s)]))
 
    targetIndexPairs = makeIndexPairs(len(targetVoices[0]), s)
    insertIndexPairs = makeIndexPairs(len(insertVoices[0]), t)
@@ -2660,9 +2660,9 @@ def makeBreaksVoice(durationPairs, yOffsets, alignmentOffsets, start = 0):
    breaks = [ ]
    for p in durationPairs:
       try:
-         skip = Skip(p)
+         skip = skiptools.Skip(p)
       except ValueError:
-         skip = Skip((1, 1))
+         skip = skiptools.Skip((1, 1))
          skip.duration.multiplier = p
       breaks.append(skip)
    for i, b in enumerate(breaks):
@@ -2700,7 +2700,7 @@ def makeMeasuresVoice(durationPairs):
 
    measures = [ ]
    for pair in durationPairs:
-      skip = Skip((1, 1))
+      skip = skiptools.Skip((1, 1))
       skip.duration.multiplier = pair
       measure = Measure(pair, [skip])
       measures.append(measure)
