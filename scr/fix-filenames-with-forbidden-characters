@@ -19,10 +19,12 @@ def fix_filename(old_full_filename):
    escaped_old_full_filename = escaped_old_full_filename.replace("'", "\\'")
    escaped_old_full_filename = escaped_old_full_filename.replace('(', '\\(')
    escaped_old_full_filename = escaped_old_full_filename.replace(')', '\\)')
+   escaped_old_full_filename = escaped_old_full_filename.replace('&', '\\&')
    new_full_filename = old_full_filename.replace(' ', '-')
    new_full_filename = new_full_filename.replace("'", '')
    new_full_filename = new_full_filename.replace('(', '')
    new_full_filename = new_full_filename.replace(')', '')
+   new_full_filename = new_full_filename.replace('&', 'and')
    command = 'svn mv %s %s' % (escaped_old_full_filename, new_full_filename)
    #print command
    os.system(command)
