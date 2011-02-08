@@ -11,9 +11,8 @@ def test_make_measures_01( ):
    leaves_after = t.leaves
    assert leaves_before == leaves_after
    for x in t:
-      #assert isinstance(x, Measure)
       assert isinstance(x, Measure)
-      assert x.duration.prolated == Rational(2, 8)
+      assert x.duration.prolated == Fraction(2, 8)
 
 
 def test_make_measures_02( ):
@@ -25,9 +24,8 @@ def test_make_measures_02( ):
    leaves_after = t.leaves
    assert leaves_before == leaves_after
    for i, x in enumerate(t):
-      #assert isinstance(x, Measure)
       assert isinstance(x, Measure)
       if i == 0:
-         assert x.duration.prolated == Rational(2, 8)
+         assert x.duration.prolated == Fraction(2, 8)
       else:
-         assert x.duration.prolated == Rational(3, 8)
+         assert x.duration.prolated == Fraction(3, 8)

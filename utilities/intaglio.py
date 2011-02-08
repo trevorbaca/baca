@@ -1,3 +1,4 @@
+from abjad.tools import mathtools
 from abjad.tools import seqtools
 
 
@@ -39,11 +40,12 @@ def intaglio(l, s, t = 1):
 
    result = [ ]
 
-   result = seqtools.repeat_list_to_weight(s, sum(l))
-   result = seqtools.partition_by_weights(result, l, overhang = True)
+   #result = seqtools.repeat_list_to_weight(s, sum(l))
+   result = seqtools.repeat_sequence_to_weight_exactly(s, sum(l))
+   result = seqtools.partition_sequence_by_weights(result, l, overhang = True)
 
    for i, sublist in enumerate(result):
-      if seqtools.weight(sublist) <= t:
+      if mathtools.weight(sublist) <= t:
          result[i] = [seqtools.weight(sublist)]
 
    return result

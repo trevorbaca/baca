@@ -1,7 +1,7 @@
 from abjad.components import Chord
 from abjad.components import Note
-from abjad.tools import listtools
 from abjad.tools import pitchtools
+from abjad.tools import seqtools
 
 
 def constellate(pitch_number_lists, pitch_range, flatten = True):
@@ -15,16 +15,18 @@ def constellate(pitch_number_lists, pitch_range, flatten = True):
    transposition_list = [ ]
    for pnl in pitch_number_lists:
       #transpositions = pitchtools.octave_transpositions(pnl, pitch_range)
-      transpositions = pitchtools.list_octave_transpositions_of_pitch_within_pitch_range(
+      #transpositions = pitchtools.list_octave_transpositions_of_pitch_within_pitch_range(
+      #   pnl, pitch_range)
+      transpositions = pitchtools.list_octave_transpositions_of_pitch_carrier_within_pitch_range(
          pnl, pitch_range)
       transposition_list.append(transpositions)
 
-   result = listtools.outer_product(transposition_list)
+   result = seqtools.outer_product(transposition_list)
 
    for pnl in result:
       if flatten:
          for i, part in enumerate(result):
-            result[i] = listtools.flatten(part)
+            result[i] = seqtools.flatten_sequence(part)
    
    for pnl in result:
       pnl.sort( )

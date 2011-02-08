@@ -9,7 +9,7 @@ def test_intaglio_01( ):
    result = utilities.intaglio(l, s)
    assert result == [[3], [1, 4], [4, 4, 2], [2, 4, 4]]
    assert len(l) == len(result)
-   assert [listtools.weight(x) for x in result] == l
+   assert [mathtools.weight(x) for x in result] == l
 
 
 def test_intaglio_02( ):
@@ -17,7 +17,7 @@ def test_intaglio_02( ):
    result = utilities.intaglio(l, s)
    assert result == [[3], [2, 3], [2, 5, 3], [2, 5, 3]]
    assert len(l) == len(result)
-   assert [listtools.weight(x) for x in result] == l
+   assert [mathtools.weight(x) for x in result] == l
 
 
 def test_intaglio_03( ):
@@ -26,7 +26,7 @@ def test_intaglio_03( ):
    result = utilities.intaglio(l, s)
    assert result == [[3], [1, 4], [1, 4, 5], [4, 5, 1]]
    assert len(l) == len(result)
-   assert [listtools.weight(x) for x in result] == l
+   assert [mathtools.weight(x) for x in result] == l
 
 
 def test_intaglio_04( ):
@@ -35,7 +35,7 @@ def test_intaglio_04( ):
    result = utilities.intaglio(l, s)
    assert result == [[3], [1, -4], [-1, 4, -5], [4, -5, 1]]
    assert len(l) == len(result)
-   assert [listtools.weight(x) for x in result] == l
+   assert [mathtools.weight(x) for x in result] == l
 
 
 def test_intaglio_04( ):
