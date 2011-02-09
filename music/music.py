@@ -1581,14 +1581,13 @@ def stellate(k, s, t, d, b, span ='from duration', rests = True):
    debug = False
 
    prolation = utilities.helianthate(s, 1, 1)
-   numerators = seqtools.increase_cyclic(k, prolation)
+   numerators = seqtools.increase_sequence_elements_cyclically_by_addenda(k, prolation)
    mask = utilities.helianthate(t, 1, 1)
    mask = seqtools.repeat_to_weight(mask, mathtools.weight(numerators))
    mask = utilities.replace_nested_elements_with_unary_subruns(mask)
    #signatures = partition(
    #   mask, numerators, mode = 'weight', overhang = 'true', action = 'new')
-   signatures = seqtools.partition_by_weights(
-      mask, numerators, overhang = True)
+   signatures = seqtools.split_sequence_once_by_weights_with_overhang(mask, numerators)
    for i, signature in enumerate(signatures):
       if signature == [1]:
          signatures[i] = [-1]
@@ -1614,8 +1613,7 @@ def stellate(k, s, t, d, b, span ='from duration', rests = True):
 
    dummy_container = Container(tuplets)
    #partition(tuplets, b, cyclic = True, overhang = True)
-   tuplets = seqtools.partition_by_lengths(
-      tuplets, b, cyclic = True, overhang = True)
+   tuplets = seqtools.partition_by_lengths(tuplets, b, cyclic = True, overhang = True)
    for i, sublist in enumerate(tuplets):
       #if t == [[4, -5, 8], [4, -8], [-4, 6, -6, 8]] and i == 7:
       #   import pdb
@@ -1666,7 +1664,7 @@ def coruscate(n, s, t, z, d, rests = True):
    cut = utilities.helianthate(s, 1, 1)
 
    dilation = utilities.helianthate(z, 1, 1)
-   fit = seqtools.increase_cyclic(t, dilation)
+   fit = seqtools.increase_sequence_elements_cyclically_by_addenda(t, dilation)
 
    j = 0
    signatures = [ ]
@@ -1681,7 +1679,7 @@ def coruscate(n, s, t, z, d, rests = True):
             raise ValueError
          j += 1
       signatures.append(new)
-   def helper(x): return list(seqtools.sum_by_sign(x, sign = [-1]))
+   def helper(x): return list(seqtools.sum_consecutive_sequence_elements_by_sign(x, sign = [-1]))
    signatures = [helper(signature) for signature in signatures]
    signatures = utilities.partition_nested_into_canonic_parts(signatures)
 

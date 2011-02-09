@@ -111,7 +111,7 @@ class ConstellationCircuit(object):
 
    def show_generators_colored_and_pivots(self):
       chords = zip(self._colored_generators, self.pivots)
-      chords = listtools.flatten(chords, depth = 1)
+      chords = seqtools.flatten_sequence(chords, depth = 1)
       self._show_chords(chords)
 
    def show_pivots(self):

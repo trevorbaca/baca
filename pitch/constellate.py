@@ -21,7 +21,7 @@ def constellate(pitch_number_lists, pitch_range, flatten = True):
          pnl, pitch_range)
       transposition_list.append(transpositions)
 
-   result = seqtools.outer_product(transposition_list)
+   result = list(seqtools.yield_outer_product_of_sequences(transposition_list))
 
    for pnl in result:
       if flatten:
