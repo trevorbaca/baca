@@ -1,8 +1,5 @@
 from abjad.components import Chord
 from abjad.tools import chordtools
-#from abjad.tools import componenttools
-#from abjad.tools import iotools
-#from abjad.tools import lilyfiletools
 from abjad.tools import markuptools
 from abjad.tools import pitchtools
 from abjad.tools import scoretools
@@ -100,7 +97,7 @@ class Constellation(object):
 
    def _show_chords(self, chords):
       score, treble, bass = scoretools.make_piano_sketch_score_from_leaves(chords)
-      score.spacing.proportional_notation_duration = Rational(1, 20)
+      score.spacing.proportional_notation_duration = Fraction(1, 20)
       score.lily_file.default_paper_size = 'letter', 'landscape'
       score.lily_file.global_staff_size = 18
       score.text.staff_padding = 10
