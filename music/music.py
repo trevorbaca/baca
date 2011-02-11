@@ -1587,8 +1587,7 @@ def stellate(k, s, t, d, b, span ='from duration', rests = True):
    mask = utilities.replace_nested_elements_with_unary_subruns(mask)
    #signatures = partition(
    #   mask, numerators, mode = 'weight', overhang = 'true', action = 'new')
-   signatures = seqtools.partition_by_weights(
-      mask, numerators, overhang = True)
+   signatures = seqtools.split_sequence_once_by_weights_with_overhang(mask, numerators)
    for i, signature in enumerate(signatures):
       if signature == [1]:
          signatures[i] = [-1]
@@ -1614,8 +1613,7 @@ def stellate(k, s, t, d, b, span ='from duration', rests = True):
 
    dummy_container = Container(tuplets)
    #partition(tuplets, b, cyclic = True, overhang = True)
-   tuplets = seqtools.partition_by_lengths(
-      tuplets, b, cyclic = True, overhang = True)
+   tuplets = seqtools.partition_by_lengths(tuplets, b, cyclic = True, overhang = True)
    for i, sublist in enumerate(tuplets):
       #if t == [[4, -5, 8], [4, -8], [-4, 6, -6, 8]] and i == 7:
       #   import pdb
