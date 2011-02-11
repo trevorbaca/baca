@@ -1,7 +1,6 @@
-'''Music-generation functions used in Cary and Sekka.
+'''Music-generation functions used in Cary, Sekka and Lidercfeny.
 '''
 
-#from abjad import *
 from abjad.components import Measure
 from abjad.components import Note
 from abjad.components import Voice
@@ -16,580 +15,10 @@ from abjad.tools import spannertools
 from abjad.tools import tietools
 from abjad.tools import tuplettools
 from baca import utilities
-#from baca.utilities import *
 from fractions import Fraction
 import copy
 import math
 import re
-
-
-# TODO clean this whole function up and remove or greatly simply beam spec
-def music(*args):
-   '''
-   music() takes many different types of argument list.
-   '''
-
-   if len(args) == 1:
-      return interpretMusic(args)
-   else:
-      return expression.Expression([interpretMusic(arg) for arg in args])
-
-def interpretMusic(arg):
-   '''
-   Helper function for music().
-   '''
-
-   # get beam spec if there is one
-   # '2 2 3' or '2 2=1=2' or '3=1=3 3=1=3 -2'
-   try:
-      B = arg[-1].split(' ')
-      for i, b in enumerate(B):
-         try:
-            B[i] = int(b)
-         except:
-            # '3=1=3'
-            try:
-               B[i] = tuple([int(x) for x in b.split('=')])
-            except:
-               # '0,2=1,1=1,1=1,4=2,0'
-               B[i] = tuple([tuple([int(y) for y in x.split(',')]) for \
-                  x in b.split('=')])
-      beamSpec = B
-      if isinstance(beamSpec, list):
-         beamSpec = [tuple(beamSpec)]
-      print 'found beam spec %s' % str(beamSpec)
-      arg = arg[:-1]
-   except:
-      try:
-         if arg[-1] == 'all':
-            #print 'found all beam spec.'
-            beamSpec = ('all',)
-            arg = arg[:-1]
-         if arg[-1] == 'none':
-            #print 'found none beam spec.'
-            beamSpec = ('none',)
-            arg = arg[:-1]
-      except:
-         beamSpec = None
-
-   # QUESTION: why is this here?
-   try:
-      arg = arg[0]
-   except:
-      pass
-
-   # music(2) or music(-2)
-   if isinstance(arg, int):
-      if arg >= 0:
-         return Note(0, 1, 2 ** (arg + 2))
-      else:
-         return Rest(1, 2 ** (abs(arg) + 2))
-
-   # music(-3.3)
-   if isinstance(arg, float):
-      flags = int(abs(arg))
-      d = 2 ** (flags + 2)
-      dots = int(abs(arg * 10)) % 10
-      r = duration.dotRatio(dots)
-      if arg > 0:
-         return Note(0, r.effective.numerator, d * r.effective.denominator)
-      elif arg < 0:
-         return Rest(r.effective.numerator, d * r.effective.denominator)
-
-   elif isinstance(arg, list):
-      # [2, 1, 1, 1, 'eighth', 'music list']
-      if arg[-1] == 'music list' and arg[-2] in duration.durationNames:
-         m = music(arg[:-1])
-         # clean() removes effectiveDurations
-         #return expression.Expression(clean(m.music))
-         removeEffectiveDurations(m)
-         return expression.Expression(m.music)
-      # [[7, 'thirtysecond'], [5, 'thirtysecond'], 'music list']
-      elif arg[-1] == 'music list':
-         m = [interpretMusic(x) for x in arg[:-1]]
-         m = expression.Expression(m)
-         #print 'now using %s' % str(beamSpec)
-         try:
-            m.beam(*beamSpec)
-         except:
-            pass
-         return m
-      # [7, 'thirtysecond']
-      if arg[-1] in duration.durationNames and len(arg) == 2:
-         body = [ ]
-         # [7, 'thirtysecond']
-         if arg[0] > 0:
-            for i in range(arg[0]):
-               body.append(
-                  Note(0, 1, 2 ** duration.durationNameToLog(arg[-1])))
-         # [-1, 'eighth']
-         elif arg[0] == -1:
-            body.append(Rest(1, 2 ** duration.durationNameToLog(arg[-1])))
-         m = tuplet.SmartTuplet(duration.phi(arg[0]), 
-            2 ** duration.durationNameToLog(arg[-1]), body)
-         try:
-            m.beam(*beamSpec)
-         except:
-            pass
-         return m
-
-      # [2, 1, 1, 1, 'eighth']
-      elif arg[-1] in duration.durationNames and len(arg) > 2:
-         denominator = 2 ** duration.durationNameToLog(arg[-1])
-         body = [ ]
-         for n in arg[:-1]:
-            if n > 0:
-               body.append(Note(0, n, denominator))
-            elif n < 0:
-               body.append(Rest(abs(n), denominator))
-         bodyDuration = sum([m.duration for m in body], Fraction(0))
-         m = tuplet.SmartTuplet(
-            bodyDuration.phi.effective.numerator, 
-            bodyDuration.phi.effective.denominator, body)
-         try:
-            m.beam(*beamSpec)
-         except:
-            pass
-         return m
-
-      # [13, 'sixtyfourth', '13:10'] or [7, 5, 1, 'sixtyfourth', '13:10']
-      elif len(arg) >= 3 and arg[-2] in duration.durationNames:
-         body = interpretMusic(arg[:-1]).music
-         bodyDuration = sum([m.duration for m in body], Fraction(0))
-         r = ratio(arg[-1]) * bodyDuration
-         m = tuplet.SmartTuplet(
-            r.effective.numerator, 
-            r.effective.denominator, 
-            body, 
-            rewritten = tuple([int(part) for part in arg[-1].split(':')]))
-         try:
-            m.beam(*beamSpec)
-         except:
-            pass
-         return m
-
-      # [1, 1, 2] or [2, (1, 4)]
-      elif not isinstance(arg[-1], str):
-         prolationIndicator = None
-         body = arg[:]
-      # [1, 1, 2, '5:6']
-      elif isinstance(arg[-1], str) and \
-         arg[-1] not in duration.durationNames:
-         prolationIndicator = arg[-1]
-         body = arg[:-1]
-      #print prolationIndicator
-      body = [interpretMusic(m) for m in body]
-      #print body
-      bodyDuration = sum([m.duration for m in body], Fraction(0))
-      #print bodyDuration
-      if prolationIndicator == None:
-         prolationRatio = Fraction(
-            duration.phi(bodyDuration.numerator), bodyDuration.numerator) 
-      else:
-         prolationRatio = Fraction(
-            int(prolationIndicator.split(':')[1]), 
-            int(prolationIndicator.split(':')[0]))
-      #print prolationRatio
-      tupletDuration = bodyDuration * prolationRatio 
-      #print tupletDuration
-      #print 'writtenFraction is %s' % prolationIndicator
-      m = tuplet.SmartTuplet(
-         tupletDuration.effective.numerator, 
-         tupletDuration.effective.denominator, 
-         body, writtenFraction = prolationIndicator)
-      try:
-         m.beam(*beamSpec)
-      except:
-         pass
-      return m
-            
-def removeEffectiveDurations(expr):
-   '''
-   Helper function for kludgy old interpretMusic() function.
-   '''
-
-   for l in expr.leaves:
-      if hasattr(l, 'scaledDuration'):
-         delattr(l, 'scaledDuration')
-
-def beam(m, b = None, rip = True, span = False, nib = False, lone = 'flat'):
-   '''
-   NOTE: this beam() procedure is 14 times faster than LilyObject.beam();
-   256 groups of 4 thirty-seconds take 7 seconds with LilyObject.beam();
-   256 groups of 4 thirty-seconds take only 0.5 seconds with beam().
-   TODO: deprecate LilyObject.beam().
-
-   TODO: incorporate beamMany().
-
-   TODO: large combinatorial beam regression battery. 
-
-   >>> decompose((2, 4), [(1, 16)])
-   [c'16, c'16, c'16, c'16, c'16, c'16, c'16, c'16]
-   >>> m = _
-   >>> beam(m, [(1, 8)])
-   >>> f(voice.Voice(m))
-   \\new Voice {
-           \\beam #0 #2 c'16 [
-           \\beam #2 #0 c'16 ]
-           \\beam #0 #2 c'16 [
-           \\beam #2 #0 c'16 ]
-           \\beam #0 #2 c'16 [
-           \\beam #2 #0 c'16 ]
-           \\beam #0 #2 c'16 [
-           \\beam #2 #0 c'16 ]
-   }
-
-   >>> beam(m, [(1, 8), (3, 16)])
-   >>> f(voice.Voice(m))
-   \\new Voice {
-           \\beam #0 #2 c'16 [
-           \\beam #2 #0 c'16 ]
-           \\beam #0 #2 c'16 [
-           \\beam #2 #2 c'16
-           \\beam #2 #0 c'16 ]
-           \\beam #0 #2 c'16 [
-           \\beam #2 #0 c'16 ]
-           \\beam #0 #2 c'16 [ ]
-   }
-   '''
-
-   debug = False
-
-   d = [ ]
-   if b == None:
-      d.append(effectiveDuration(m))
-   else:
-      for part in b:
-         if isinstance(part, Duration):
-            d.append(Fraction(part.n, part.d))
-         elif isinstance(part, tuple):
-            d.append(Fraction(part[0], part[1]))
-         else:
-            raise ValueError
-
-   leaves = instances(m, '_Leaf')
-   t = len(leaves)
-
-   curBeam = 0
-   nextBeam = d[curBeam]
-
-   curStartPoint = Fraction(0)
-   curStopPoint = Fraction(0, 1)
-   prevLeafEncounteredBeam = False
-   curLeafEncountersBeam = False
-
-   for i in range(t):
-
-      if i == 0:
-         prevLeaf = None
-         prevLeafEncounteredBeam = True
-         beamablePrevLeaf = False
-         prevFlags = 0
-      else:
-         prevLeaf = leaves[i - 1]
-         beamablePrevLeaf = prevLeaf.beam.beamable
-         if beamablePrevLeaf:
-            prevFlags = prevLeaf.duration._flags
-         else:
-            prevFlags = 0
-
-      curLeaf = leaves[i]
-
-      if i == t - 1:
-         nextLeaf = None
-         beamableNextLeaf = False
-         nextFlags = 0
-      else:
-         nextLeaf = leaves[i + 1]
-         beamableNextLeaf = nextLeaf.beam.beamable
-         if beamableNextLeaf:
-            nextFlags = nextLeaf.duration._flags
-         else:
-            nextFlags = 0
-
-      curLeaf.unbeam()
-
-      f = curLeaf.duration._flags
-      curStopPoint += curLeaf.effectiveDuration
-      if curStopPoint >= nextBeam:
-         curLeafEncountersBeam = True
-      else:
-         curLeafEncountersBeam = False
-
-      if debug:
-         print curStartPoint.written, '\t',
-         print curStopPoint.written, '\t',
-         print nextBeam.written, '\t',
-         print prevLeafEncounteredBeam, '\t',
-         print curLeafEncountersBeam, '\t',
-
-      if span:
-         candidateBackSpan = max(prevFlags - 1, 1)
-         candidateCurSpan = max(f - 1, 1)
-         candidateForeSpan = max(nextFlags - 1, 1)
-         backSpan = min(candidateCurSpan, candidateBackSpan, span)
-         foreSpan = min(candidateCurSpan, candidateForeSpan, span)
-
-      if curLeaf.beam.beamable:
-         # occupies full slot
-         if prevLeafEncounteredBeam and curLeafEncountersBeam:
-            if span:
-               # occupies both full slot and full span
-               if i == 0 == t - 1:
-                  if debug: print '1a'
-                  pass
-               # occupies full slot only at beginning of span
-               elif i == 0 and i < t - 1:
-                  if beamableNextLeaf:
-                     if debug: print '1b1'
-                     curLeaf.right.append('[')
-                     curLeaf.left.append(r'\beam #0 #%s' % f)
-                  else:
-                     if debug: print '1b2'
-                     curLeaf.right.append('[')
-                     curLeaf.right.append(']')
-                     curLeaf.left.append(r'\beam #0 #%s' % f)
-               # occupies full slot strictly in middle of span
-               elif i > 0 and i < t - 1:
-                  if beamablePrevLeaf and beamableNextLeaf:
-                     if debug: print '1c1'
-                     curLeaf.left.append(r'\beam #%s #%s' % (f, foreSpan))
-                  elif beamablePrevLeaf and not beamableNextLeaf:
-                     if debug: print '1c2'
-                     curLeaf.left.append(r'\beam #%s #0' % f)
-                     curLeaf.right.append(']')
-                  elif not beamablePrevLeaf and beamableNextLeaf:
-                     if debug: print '1c3'
-                     curLeaf.right.append('[')
-                     curLeaf.left.append(r'\beam #0 #%s' % f)
-                  elif not beamablePrevLeaf and not beamableNextLeaf:
-                     if debug: print '1c4'
-                     curLeaf.right.append('[')
-                     curLeaf.right.append(']')
-                     curLeaf.left.append(r'\beam #%s #%s' % (f, f))
-                  else:
-                     if debug: print '1c5'
-                     print 'Prev and next leaves should be beamable or not.'
-                     raise ValueError
-               # occupies full slot only at end of span
-               elif i > 0 and i == t - 1:
-                  if beamablePrevLeaf:
-                     if debug: print '1d1'
-                     curLeaf.right.append(']')
-                     curLeaf.left.append(r'\beam #%s #0' % f)
-                  else:
-                     if debug: print '1d2'
-                     curLeaf.right.append('[')
-                     curLeaf.right.append(']')
-                     curLeaf.left.append(r'\beam #%s #0' % f)
-               else:
-                  if debug: print '1e'
-                  print 'Slot should be at beginning, middle or end of span.'
-                  raise ValueError
-         # occupies first part of slot only
-         elif prevLeafEncounteredBeam and not curLeafEncountersBeam:
-            if beamableNextLeaf:
-               if debug: print '2'
-               if span and i > 0 and beamablePrevLeaf:
-                  curLeaf.left.append(r'\beam #%s #%s' % (backSpan, f))
-               elif span and i > 0 and isinstance(prevLeaf, Rest):
-                  curLeaf.right.append('[')
-                  if span == 1 and not nib:
-                     curLeaf.left.append(r'\beam #0 #%s' % f)
-                  else:
-                     curLeaf.left.append(r'\beam #%s #%s' % (backSpan, f))
-               else:
-                  curLeaf.right.append('[')
-                  curLeaf.left.append(r'\beam #0 #%s' % f)
-            else:
-               if rip:
-                  if debug: print '3'
-                  if span and i > 0 and beamablePrevLeaf:
-                     curLeaf.right.append(']')
-                     if f > 1:
-                        curLeaf.left.append(r'\beam #%s #%s' % (backSpan, f))
-                     else:
-                        # not sure if following one is right
-                        curLeaf.left.append(r'\beam #%s #0' % backSpan)
-                  else:
-                     curLeaf.right.append('[')
-                     curLeaf.right.append(']')
-                     curLeaf.left.append(r'\beam #0 #%s' % f)
-         # occupies last part of slot only
-         elif not prevLeafEncounteredBeam and curLeafEncountersBeam:
-            if beamablePrevLeaf:
-               if span and i < t - 1 and beamableNextLeaf:
-                  if debug: print '4a'
-                  curLeaf.left.append(r'\beam #%s #%s' % (f, foreSpan))
-               elif span and i < t - 1 and isinstance(nextLeaf, Rest):
-                  curLeaf.right.append(']')
-                  if span == 1 and not nib:
-                     if debug: print '4b1'
-                     curLeaf.left.append(r'\beam #%s #0' % f)
-                  else:
-                     if debug: print '4b2'
-                     curLeaf.left.append(r'\beam #%s #%s' % (f, foreSpan))
-               else:
-                  if debug: print '4c'
-                  curLeaf.right.append(']')
-                  curLeaf.left.append(r'\beam #%s #0' % f)
-            else:
-               if rip:
-                  if debug: print '5'
-                  if span and i < t - 1 and beamableNextLeaf:
-                     curLeaf.right.append('[')
-                     if f > 1:
-                        curLeaf.left.append(r'\beam #%s #%s' % (f, foreSpan))
-                     else:
-                        # not sure if following is right
-                        curLeaf.left.append(r'\beam #0 #%s' % foreSpan)
-                  else:
-                     curLeaf.right.append('[')
-                     curLeaf.right.append(']')
-                     curLeaf.left.append(r'\beam #%s #0' % f)
-         # occupies strictly middle part of slot
-         elif not prevLeafEncounteredBeam and not curLeafEncountersBeam:
-            if beamablePrevLeaf and beamableNextLeaf:
-               if debug: print '6'
-               if prevFlags  < f  < nextFlags:
-                  curLeaf.left.append(r'\beam #%s #%s' % (prevFlags, f))
-               if prevFlags  < f == nextFlags:
-                  curLeaf.left.append(r'\beam #%s #%s' % (prevFlags, f))
-               if prevFlags  < f  > nextFlags:
-                  curLeaf.left.append(r'\beam #%s #%s' % (f, nextFlags))
-               if prevFlags == f  < nextFlags:
-                  curLeaf.left.append(r'\beam #%s #%s' % (f, f))
-               if prevFlags == f == nextFlags:
-                  curLeaf.left.append(r'\beam #%s #%s' % (f, f))
-               if prevFlags == f  > nextFlags:
-                  curLeaf.left.append(r'\beam #%s #%s' % (f, nextFlags))
-               if prevFlags  > f  < nextFlags:
-                  curLeaf.left.append(r'\beam #%s #%s' % (f, f))
-               if prevFlags  > f == nextFlags:
-                  curLeaf.left.append(r'\beam #%s #%s' % (f, f))
-               if prevFlags  > f  > nextFlags:
-                  curLeaf.left.append(r'\beam #%s #%s' % (f, nextFlags))
-
-            if beamablePrevLeaf and not beamableNextLeaf:
-               curLeaf.right.append(']')
-               if rip:
-                  if debug: print '7'
-                  if f > 1:
-                     #curLeaf.left.append(r'\beam #%s #%s' % (f, f))
-                     if prevFlags <  f:
-                        curLeaf.left.append(r'\beam #%s #%s' % (prevFlags, f))
-                     if prevFlags == f:
-                        curLeaf.left.append(r'\beam #%s #%s' % (f, f))
-                     if prevFlags >  f:
-                        curLeaf.left.append(r'\beam #%s #%s' % (f, f))
-                  else:
-                     curLeaf.left.append(r'\beam #%s #0' % f)
-               else:
-                  if debug: print '8'
-                  curLeaf.left.append(r'\beam #%s #0' % f)
-            if not beamablePrevLeaf and beamableNextLeaf:
-               curLeaf.right.append('[')
-               if rip:
-                  if debug: print '9'
-                  if f > 1:
-                     #curLeaf.left.append(r'\beam #%s #%s' % (f, f))
-                     if f  < nextFlags:
-                        curLeaf.left.append(r'\beam #%s #%s' % (f, f))
-                     if f == nextFlags:
-                        curLeaf.left.append(r'\beam #%s #%s' % (f, f))
-                     if f  > nextFlags:
-                        curLeaf.left.append(r'\beam #%s #%s' % (f, nextFlags))
-                  else:
-                     curLeaf.left.append(r'\beam #0 #%s' % f)
-               else:
-                  if debug: print '10'
-                  curLeaf.left.append(r'\beam #0 #%s' % f)
-            if not beamablePrevLeaf and not beamableNextLeaf:
-               if rip:
-                  if debug: print '11'
-                  curLeaf.right.append('[')
-                  curLeaf.right.append(']')
-                  curLeaf.left.append(r'\beam #%s #%s' % (f, f))
-         else:
-            print 'Leaf should occupy all, first, middle or last of slot.'
-            raise ValueError
-      else:
-         if debug: print '0'
-         
-      curStartPoint = curStopPoint
-      while curStartPoint >= nextBeam:
-         curBeam += 1
-         nextBeam += d[curBeam % len(d)]
-      if curLeafEncountersBeam:
-         prevLeafEncounteredBeam = True
-      else:
-         prevLeafEncounteredBeam = False
-
-   if lone == 'flag' and len(leaves) == 1:
-      leaves[i].unbeam()
-
-def beamMany(m, partsList, rip = True, span = False, lone = 'flat'):
-   '''
-   Iterate over beam();
-   partsList shows separate span groups as separate lists;
-   subgroups as tuples within lists.
-
-   TODO: incorporate into beam();
-   TODO: create unified rhythmic specification.
-
-   >>> t = divide.pair([1, 1, 1], (2, 32))
-   >>> m = clone.unspan(t, 3)
-   >>> beamMany(m, [[(2, 32)], [(2, 32), (2, 32)]], span = 2)
-   >>> f(voice.Voice(m))
-   \\new Voice {
-           \\once \override TupletBracket #'bracket-visibility = ##t
-           \\times 2/3 {
-                   \\beam #0 #3 c'32 [
-                   \\beam #3 #3 c'32
-                   \\beam #3 #0 c'32 ]
-           }
-           \\once \override TupletBracket #'bracket-visibility = ##t
-           \\times 2/3 {
-                   \\beam #0 #3 c'32 [
-                   \\beam #3 #3 c'32
-                   \\beam #3 #2 c'32
-           }
-           \\once \override TupletBracket #'bracket-visibility = ##t
-           \\times 2/3 {
-                   \\beam #2 #3 c'32
-                   \\beam #3 #3 c'32
-                   \\beam #3 #0 c'32 ]
-           }
-   }
-   '''
-
-   partition(m, [len(part) for part in partsList])
-
-   for i, sublist in enumerate(m):
-      beam(sublist, partsList[i], rip = rip, span = span, lone = lone)
-
-   seqtools.flatten(m)
-   
-def beams(music):
-   '''
-   Beam a freshly made list of tuplets or expressions.
-   '''
-
-   for m in music:
-      try:
-         m.beam('all left')
-      except:
-         pass
-
-def trim_beam_nibs(expr):
-   leaves = instances(expr, '_Leaf')
-   for leaf in leaves:
-      if hasattr(leaf, 'beam'):
-         if not leaf.beam.only:
-            if leaf.beam.first:
-               leaf.beam.counts = 0, leaf.beam._flags
-            if leaf.beam.last:
-               leaf.beam.counts = leaf.beam._flags, 0
 
 
 def splitPitches(pitches, split = -1):
@@ -622,6 +51,7 @@ def splitPitches(pitches, split = -1):
       
    return components['treble'], components['bass']
 
+
 def makeFixedLayoutVoice(d, systems, alignments, offsets):
    '''
    Doc.
@@ -648,31 +78,7 @@ def makeFixedLayoutVoice(d, systems, alignments, offsets):
 
    return v
 
-def getDurations(arg):
-   if hasattr(arg, 'duration'):
-      return arg.duration
-   elif hasattr(arg, 'music'):
-      return [getDurations(element) for element in arg.music]
-   elif isinstance(arg, list):
-      return [getDurations(element) for element in arg]
-   else:
-      return None
 
-def getEffectiveDurations(music):
-   return [l.effectiveDuration for l in instances(music, '_Leaf')]
-
-# argument is a music list
-def getListDurations(arg):
-   def helper(arg):
-      # note, rest, skip:
-      if hasattr(arg, 'durations'):
-         return arg.durations
-      elif hasattr(arg, 'duration'):
-         return [arg.duration]
-      else:
-         raise ValueError
-   return [helper(element) for element in arg]
-   
 def traverse(expr, v):
    v.visit(expr)
    if isinstance(expr, (list, tuple)):
@@ -684,89 +90,6 @@ def traverse(expr, v):
    if hasattr(v, 'unvisit'):
       v.unvisit(expr)
          
-class Reconstructor(object):
-   def __init__(self, visitor):
-      self.visitor = visitor
-      self.stack = [[ ]]
-   def visit(self, node):
-      if isinstance(node, list):
-         pass
-      elif hasattr(node, 'music'):
-         self.stack.append([ ])
-      else:
-         self.stack[-1].append(self.visitor.visit(node))
-   def unvisit(self, node):
-      if isinstance(node, list):
-         # FIXME: flatten now in-place
-         self.stack = seqtools.flatten(self.stack[-1])
-      elif hasattr(node, 'music'):
-         # FIXME: flatten now in-place
-         node.music = seqtools.flatten(self.stack.pop())
-         self.stack[-1].append(node)
-
-def reconstruct(music, reconstructor):
-   # EXPENSIVE: deepcopy
-   result = copy.deepcopy(music)
-   traverse(result, reconstructor)
-   return reconstructor.stack
-
-class Painter(object):
-   def __init__(self, pitches):
-      self.pitches = pitches
-   def visit(self, node):
-      if 0 < len(self.pitches) and isinstance(node, (Note, Chord)):
-         p = self.pitches.pop(0)
-         result = copy.deepcopy(node)
-         if not isinstance(p, list):
-            if isinstance(node, Note):
-               result.pitch = p
-            elif isinstance(node, Chord):
-               result.pitches = [p]
-            else:
-               raise ValueError
-         elif isinstance(p, list):
-            if isintance(node, Note):
-               result = chord(p, node.duration, *node.directives)
-            elif isinstance(node, Chord):
-               result.pitches = p
-            else:
-               raise ValueError
-         return result
-      else:
-         return node
-   
-def paint(music, pitches):
-   if isinstance(pitches[0], Pitch):
-      processedPitches = pitches
-   elif isinstance(pitches[0], int):
-      processedPitches = [pitch(p) for p in pitches]
-   reconstructor = Reconstructor(Painter(copy.deepcopy(processedPitches)))
-   if isinstance(music, list):
-      return reconstruct(music, reconstructor)
-   else:
-      return reconstruct([music], reconstructor)[0]
-
-def skeleton(l):
-   '''
-   Return skeleton of LilyObject, list or tuple.
-   '''
-
-   print 'WARNING: skeleton() now deprecated;'
-   print 'Use pickle and unpickle instead.'
-   print 'Warning on %s.' % l
-   print ''
-
-   if hasattr(l, 'skeleton'):
-      return l.skeleton
-   elif isinstance(l, list):
-      return '[%s]' % ', '.join([skeleton(x) for x in l])
-   elif isinstance(l, tuple):
-      return '(%s)' % ', '.join([skeleton(x) for x in l])
-   else:
-      raise TypeError('object %s of unknown type.' % l)
-
-def clean(l):
-   return eval(skeleton(l))
 
 def change(expr, visitor):
    if isinstance(expr, list):
@@ -780,15 +103,6 @@ def change(expr, visitor):
    else:
       return visitor.visit(expr)
 
-class TestVisitor(object):
-   def __init__(self):
-      self.i = 0
-   def visit(self, node):
-      self.i += 1
-      if self.i % 2 == 0:
-         return Rest(1, 8)
-      else:
-         return node
 
 def changeslice(expr, visitor):
    if isinstance(expr, list):
@@ -805,232 +119,6 @@ def changeslice(expr, visitor):
    else:
       return visitor.visit(expr)
 
-class TestSlice(object):
-   def __init__(self):
-      self.i = -1
-   def visit(self, node):
-      if isinstance(node, _Leaf):
-         self.i += 1
-         if self.i % 2 == 0:
-            try:
-               return clone.unspan(node, 3)
-            except:
-               return [node] * 3
-         else:
-            return [node]
-      else:
-         return [node]
-
-class TestCompress4(object):
-   '''
-   >>> l = [1, 1, 2, 1, 2, 1, 2, 1, 1, 1]
-   >>> music.traverse(l, music.TestCompress4())
-   >>> l
-   ['replaced 3', 'replaced 2', 'replaced 2', 1, 1, 1]
-
-   >>> l = [1, [1, 1, 1], 1]
-   >>> music.traverse(l, music.TestCompress4())
-   >>> l
-   [1, [1, 1, 1], 1]
-
-   >>> l = [[1, 2], 1, 1, 1] 
-   >>> music.traverse(l, music.TestCompress4())
-   >>> l
-   [['replaced 2'], 1, 1, 1]
-
-   >>> l = [[1, 1, 2], 1, 2, 1, 1, 2]
-   >>> music.traverse(l, music.TestCompress4())
-   >>> l
-   ['replaced 3', 'replaced 3']
-
-   >>> l = [1, [1, 2], 2, [1, 2], 2, 2, 1, 1, 2]
-   >>> music.traverse(l, music.TestCompress4())
-   >>> l
-   ['replaced 3', 'replaced 2', 'replaced 1', 'replaced 3']
-   '''
-   def __init__(self):
-      self.pairs = [ ]
-   def visit(self, node):
-      #print 'visit entry', self.pairs
-      if isinstance(node, list):
-         self.pairs.append([['incomplete', 0]])
-      else:
-         self.pairs[-1][-1].append(self.pairs[-1][-1][-1] + 1)
-         if node == 2:
-            self.pairs[-1][-1][0] = 'complete'
-            self.pairs[-1].append(['incomplete', self.pairs[-1][-1][-1]])
-      #print 'visit exit', self.pairs
-      #print ''
-   def unvisit(self, node):
-      if isinstance(node, list):
-         #print 'unvisit entry', self.pairs
-         for pair in reversed(self.pairs.pop()):
-            #print pair
-            if pair[0] == 'complete':
-               node[pair[1] : pair[-1]] = ['replaced %s' % (pair[-1] - pair[1])]
-         try:
-            self.pairs[-1][-1].append(self.pairs[-1][-1][-1] + 1)
-         except:
-            pass
-         #print 'unvisit exit', self.pairs
-         #print ''
-         
-class TestCompress5(object):
-   def __init__(self):
-      self.pairs = [ ]
-      self.justExitedList = False
-   def visit(self, node):
-      if isinstance(node, list):
-         self.pairs.append([[ ]])
-      else:
-         #print 'visiting node'
-         #print self.pairs
-
-         if self.justExitedList:
-            #print 'making new segment'
-            self.pairs[-1].append([ ])
-            #print self.pairs
-
-         last = self.pairs[-1][-1]
-         if len(self.pairs[-1]) > 1:
-            penultimate = self.pairs[-1][-2]
-         else:
-            penultimate = None
-         
-         if last == [ ]:
-            if penultimate == None:
-               last.append(0)
-            else:
-               if self.justExitedList:
-                  last.append(penultimate[-1] + 2)
-               else:
-                  last.append(penultimate[-1] + 1)
-         elif isinstance(last[-1], int):
-            last.append(last[-1] + 1)
-         elif self.justExitedList:
-            last.pop()
-            if penultimate == None:
-               last.append(last[-1] + 2)
-            else:
-               last.append(penultimate[-1] + 2)
-         else:
-            print 'Unknown last %s and penultimate %s.' % (last, penultimate)
-            print self.pairs
-            raise ValueError
-
-         if node == 2:
-            last.insert(0, '.')
-            self.pairs[-1].append([ ])
-               
-   def unvisit(self, node):
-      if isinstance(node, list):
-         #print self.pairs
-         for pair in reversed(self.pairs[-1]):
-            #print pair
-            if len(pair) > 1 and pair[0] == '.':
-               node[pair[1] : (pair[-1] + 1)] = [
-                  'replaced %s' % (pair[-1] - pair[1] + 1)]
-         try:
-            self.pairs.pop()
-         except:
-            pass
-         self.justExitedList = True
-      else:
-         self.justExitedList = False
-
-def restsToNotes(expr):
-   '''
-   Cast rests to notes in expr.
-
-   >>> t = divide.pair([1, 1, 1, -2], (4, 16))
-   >>> t
-   (5:4, c'16, c'16, c'16, r8)
-
-   >>> restsToNotes(t)
-   >>> t
-   (5:4, c'16, c'16, c'16, c'8)
-   '''
-
-   class RestsToNotes(object):
-      def visit(self, node):
-         if isinstance(node, Rest):
-            return Note(0, *node.duration.pair)
-         else:
-            return node
-
-   change(expr, RestsToNotes())
-         
-def into(ll, ss, location):
-   if hasattr(ll, 'music'):
-      for i, l in enumerate(ll.music):
-         eval('l.%s.append(ss[i])' % location)
-   else:
-      for i, l in enumerate(ll):
-         eval('l.%s.append(ss[i])' % location)
-
-def build(t):
-   '''
-   >>> music.t1
-   [(3, 8), [1]]
-   >>> music.build(_)  
-   c'4.
-   >>> music.t2
-   [(3, 8), [1, 2, 4]]
-   >>> music.build(_)
-   (7:6, c'16, c'8, c'4)
-   >>> music.t3
-   [(3, 8), [(3, 4), [[1], [1]]]]
-   >>> music.build(_)
-   (7:6, c'8., c'4)
-   >>> music.t4
-   [(3, 8), [(3, 4), [[1, 1], [2, 2, 1]]]]
-   >>> music.build(_)
-   (7:6, (4:3, c'8, c'8), (5:4, c'8, c'8, c'16))
-   >>> music.t5
-   [(3, 8), [(2, 3), [[1, 1], [(2, 2, 1), [[1], [1], [1, 1]]]]]]
-   >>> music.build(_)
-   (5:3, (c'8, c'8), (5:3, c'4, c'4, (c'16, c'16)))
-   '''
-
-   # [(3, 8), [(3, 4), [[1, 1], [2, 2, 1]]]]
-   if isinstance(t[1][0], tuple):
-      s = sum(t[1][0])
-      exponent = int(math.log(s / t[0][0], 2)) if s >= t[0][0] else 0
-      denominator = t[0][1] * 2 ** exponent
-      #print 'denominator is %s.' % denominator
-      w = [[(x[0], x[1]), x[2]] 
-         for x in zip(t[1][0], [denominator] * len(t[1][0]), t[1][1])]
-      music = [build(token) for token in w]
-      l = math.log(max(t[0][0], s) * 1.0 / min(t[0][0], s), 2)
-      if l == int(l):
-         return expression.Expression(music)
-      else:
-         return tuplet.SmartTuplet(t[0][0], t[0][1], music)
-
-   # [(3, 8), [1]]
-   elif len(t[1]) == 1:
-      return Note(0, t[0][0], t[0][1]) if t[1][0] > 0 \
-         else Rest(abs(t[0][0]), t[0][1])
-   
-   # [(3, 8), [1, 2, 4]]
-   elif len(t[1]) > 1:
-      s = sum([abs(element) for element in t[1]])
-      exponent = int(math.log(s / t[0][0], 2)) if s >= t[0][0] else 0
-      denominator = t[0][1] * 2 ** exponent
-      #print 'denominator is %s.' % denominator
-      music = [Note(0, n, denominator) if n > 0 
-         else Rest(abs(n), denominator) for n in t[1]]
-      l = math.log(max(t[0][0], s) * 1.0 / min(t[0][0], s), 2)
-      if l == int(l):
-         return expression.Expression(music)
-      else:
-         return tuplet.SmartTuplet(t[0][0], t[0][1], music)
-       
-def writtenDurations(m):
-   return [l.duration for l in m.leaves]
-
-def writtenDuration(m):
-   return sum(writtenDurations(m), Fraction(0))
 
 def effectiveDurations(m):
    '''
@@ -1066,6 +154,7 @@ def effectiveDuration(m):
    else:
       return sum(effectiveDurations(m), Fraction(0))
 
+
 def fill(l, positions):
    '''
    Fills in 1-indexed measures with c'.
@@ -1081,6 +170,7 @@ def fill(l, positions):
             m.meter.pair,
             [Note(0, (x, d)) for x in parts])
 
+
 def blank(l, positions):
    '''
    Blanks out 1-indexed measures.
@@ -1093,6 +183,7 @@ def blank(l, positions):
          rests = resttools.make_rests(m.duration.contents)
          new_measure = Measure(m.meter.effective, rests)
          l[i] = new_measure
+
 
 def nest(measures, outer, inner):
    '''
@@ -1129,26 +220,8 @@ def nest(measures, outer, inner):
       t = FixedDurationTuplet(m, body)
       result.append(Measure(m, [t]))
       
-   #into(result, [r'\time %s/%s' % (x[0], x[1]) for x in measures], 'before')
-   #for i, element in enumerate(result):
-   #   result[i].time = measures[i]
-   
    return result
 
-def build(measures, outer):
-   '''
-   Structures time.
-   '''
-
-   result = [ ]
-   for o, m in zip(outer, measures):
-      print o
-      print m
-      print ''
-      result.append(measure.Measure([divide.pair(o, (m[0], m[1]))]))
-      result[-1].before.append(r'\time %s/%s' % (m[0], m[1]))
-
-   return result
 
 def trill(l, p = False, indices = 'all', d = Fraction(0)):
    '''
@@ -1182,6 +255,7 @@ def trill(l, p = False, indices = 'all', d = Fraction(0)):
          #else:
          #  element.after.append(r'\startTrillSpan')
          element.trill = True
+
 
 def grace(l, 
    k = '_Leaf', indices = 'all', 
@@ -1220,6 +294,7 @@ def grace(l,
 
          candidate += 1
 
+
 def color(l, p):
    '''
    TODO: change trills and graces to first-class note attributes.
@@ -1245,10 +320,12 @@ def color(l, p):
       except:
          pass
 
+
 def untrill(l):
    for element in instances(l, '_Leaf'):
       if hasattr(element, 'trill'):
          delattr(element, 'trill')
+
 
 def ungrace(l, keep = 'first', length = 1):
    '''
@@ -1260,6 +337,7 @@ def ungrace(l, keep = 'first', length = 1):
             element.grace = element.grace[:length]
          elif keep == 'last':
             element.grace = element.grace[-length:]
+
 
 def breaks(signatures, durations, pages, verticals, staves = None):
    '''
@@ -1310,23 +388,6 @@ def breaks(signatures, durations, pages, verticals, staves = None):
    result.name = 'breaks'
    return result
 
-def sectionalize(m, pairs, kind = '_Leaf'):
-   '''
-   Add horizontal brackets over elements in pairs.
-   Make sure context \consists Horizontal_bracket_engraver.
-
-   >>> sectionalize(snow, [(0, 12), (12, 24), (24, 35), (35, 59)])
-
-   '''
-
-   starts = [p[0] for p in pairs]
-   stops  = [p[1] - 1 for p in pairs]
-
-   for i, node in enumerate(m.instances(kind)):
-      if i in stops:
-         node.right.append (r'\stopGroup')
-      if i in starts:
-         node.right.append(r'\startGroup')
 
 class Subdivide(object):
    def __init__(self, positions):
@@ -1354,6 +415,7 @@ class Subdivide(object):
       else:
          return node
 
+
 def subdivide(m, positions):
    '''
    Subdivide leaves in m by according to positions.
@@ -1362,6 +424,7 @@ def subdivide(m, positions):
    '''
    
    change(m, Subdivide(positions))
+
 
 class FiveRemover(object):
    def visit(self, node):
@@ -1372,189 +435,10 @@ class FiveRemover(object):
       else:
          return node
 
+
 def unfive(music):
    change(music, FiveRemover())
 
-class BeamBalancer(object):
-   def __init__(self):
-      self.open = False
-      self.last = None
-   def visit(self, node):
-      if hasattr(node, 'right') and '[' in node.right:
-         if self.open:
-            self.last.right.remove('[')
-         self.open = True
-         self.last = node
-      if hasattr(node, 'right') and ']' in node.right:
-         self.open = False
-
-def equibeam(m):
-   '''
-   Remove accidentally nested beams in the same voice.
-   '''
-
-   traverse(m, BeamBalancer())
-
-def unbeam(m):
-   '''
-   Call self.unbeam() on leaves in m.
-   '''
-
-   for l in instances(m, '_Leaf'):
-      try:
-         l.unbeam()
-      except:
-         pass
-
-def decompose(d, parts, r = 'rest'):
-   '''
-   Decompose duration d into parts with rest or note remainder r.
-
-   Return a list of unbeamed notes.
-
-   >>> decompose((4, 4), [(3, 16)], r = 'rest')
-   [c'8., c'8., c'8., c'8., c'8., r16]
-
-   >>> decompose((4, 4), [(3, 16), (4, 16)], r = 'rest')
-   [c'8., c'4, c'8., c'4, r8]
-   '''
-
-   d = Fraction(d[0], d[1])
-   p = [ ]
-   for part in parts:
-      p.append(Fraction(part[0], part[1]))
-      
-   m = [ ]
-   i = 0
-
-   while d > Fraction(0, 1):
-      curPart = p[i % len(p)]
-      if curPart <= d:
-         m.append(Note(0, curPart.n, curPart.d))
-         d -= curPart
-      else:
-         if r == 'note':
-            m.append(Note(0, d.n, d.d))
-         elif r == 'rest':
-            m.append(Rest(d.n, d.d))
-         else:
-            raise ValueError
-         d = Fraction(0, 1)
-      i += 1
-
-   return m
-
-def sand(d, p, q):
-   '''
-   Decompose duration d into parts p according to beam spec q.
-
-   >>> sand((4, 4), [(1, 16), (3, 16)], [(1, 4)])
-   [c'16, c'8., c'16, c'8., c'16, c'8., c'16, c'8.]
-   >>> f(voice.Voice(_))
-   \\new Voice {
-           \\beam #0 #2 c'16 [
-           \\beam #1 #1 c'8.
-           \\beam #1 #2 c'16
-           \\beam #1 #1 c'8.
-           \\beam #1 #2 c'16
-           \\beam #1 #1 c'8.
-           \\beam #1 #2 c'16
-           \\beam #1 #0 c'8. ]
-   }
-   '''
-
-   m = decompose(d, p, r = 'rest')
-   
-   beam(m, q, rip = True, span = True, lone = 'flag') 
-
-   return m
-
-def makeMeasure(d, process, **kwargs):
-   '''
-   1. comprehension
-
-      >>> makeMeasure(5, 4, 'comprehension')
-      <5/4, c'1, c'4>
-
-      >>> makeMeasure(5, 4, 'comprehension', signs = 'change all')
-      <5/4, r1, r4>
-
-      >>> makeMeasure(5, 4, 'comprehension', signs = 'change tail')
-      <5/4, c'1, r4>
-
-   2. sand
-
-      >>> music.makeMeasure((5, 4), 'sand', p = [(3, 16)], q = [(3, 8)])
-      <5/4, c'8., c'8., c'8., c'8., c'8., c'8., r8>
-      >>> f(_)
-      \\beam #0 #1 c'8. [
-      \\beam #1 #1 c'8.
-      \\beam #1 #1 c'8.
-      \\beam #1 #1 c'8.
-      \\beam #1 #1 c'8.
-      \\beam #1 #0 c'8. ]
-      r8
-   '''
-
-   if process == 'comprehension':
-      numerators = \
-         mathtools.partition_integer_into_canonic_parts(d[0], **kwargs)
-      m = [ ]
-      for numerator in numerators:
-         if numerator > 0:
-            m.append(Note(0, numerator, d[1]))
-         else:
-            m.append(Rest(-numerator, d[1]))
-      return measure.Measure(m, d)
-
-   elif process == 'sand':
-      return measure.Measure(sand(d, **kwargs), d)
-
-   else:
-      print 'Unknown process %s.' % process
-      raise ValueError
-
-def specify(s, t, span = None):
-   '''
-   Make list of even divisions according to s;
-   three-dimensional specification s;
-   unit duration with denominator t.
-
-   Wrapper around divide.pair() and beam().
-
-   >>> s = [[[-3, 1, 1], [1, 1, -3]], [[1, 1, -2], [-2, 1, 1]]]
-   >>> specify(s, 32, span = 2)
-   [(r16., c'32, c'32, c'32, c'32, r16.), (c'32, c'32, r16, r16, c'32, c'32)]
-
-   >>> f(voice.Voice(_))
-   \\new Voice {
-           r16.
-           \\beam #3 #3 c'32 [
-           \\beam #3 #2 c'32
-           \\beam #2 #3 c'32
-           \\beam #3 #3 c'32 ]
-           r16.
-           \\beam #0 #3 c'32 [
-           \\beam #3 #3 c'32 ]
-           r16
-           r16
-           \\beam #3 #3 c'32 [
-           \\beam #3 #0 c'32 ]
-   }
-   '''
-
-   result = [ ]
-
-   for beamfig in s:
-      parts = [mathtools.weight(subbeam) for subbeam in beamfig]
-      parts = [(n, t) for n in parts]
-      stream = seqtools.flatten(beamfig, action = 'new')
-      #new = divide.pair(stream, (mathtools.weight(stream), t))
-      new = tuplettools.make_tuplet_from_proportions_and_pair(stream, (mathtools.weight(stream), t))
-      beam(new, parts, span = span)
-      result.append(new)
-
-   return result
 
 def stellate(k, s, t, d, b, span ='from duration', rests = True):
    '''
@@ -1636,6 +520,7 @@ def stellate(k, s, t, d, b, span ='from duration', rests = True):
 
    return tuplets
 
+
 def coruscate(n, s, t, z, d, rests = True):
    '''Coruscate signal n;
    return list of fixed-duration tuplets.
@@ -1708,24 +593,6 @@ def coruscate(n, s, t, z, d, rests = True):
 
    return result
 
-#def partitionMusicListByDurations(ml, durations):
-#   '''
-#   Partition music list ml into sublists equal to durations.
-#   '''
-#
-#   result = [ ]
-#
-#   cur = 0
-#   new = [ ]
-#
-#   for m in ml:
-#      new.append(m)
-#      if effectiveDuration(new) >= durations[cur]:
-#         result.append(new)
-#         cur += 1
-#         new = [ ]
-#
-#   ml[:] = result 
 
 def makeMeasures(m, meters):
    '''
@@ -1753,6 +620,7 @@ def makeMeasures(m, meters):
             else:
                #measure = Measure(meters[d], [ ])
                measure = Measure(meters[d], [ ])
+
 
 def recombineVoices(target, s, insert, t, loci):
    '''
@@ -1813,6 +681,7 @@ def recombineVoices(target, s, insert, t, loci):
          first, last = targetIndexPairs[locus]
          targetVoice[first : last] = insert
 
+
 def rippleVoices(m, s):
    '''
    Repeat voice elements in m 
@@ -1838,6 +707,7 @@ def rippleVoices(m, s):
                new.extend(copyMusicList(source))
             v[i : i + 1] = new
 
+
 def copyMusicList(ll, i = None, j = None):
    '''
    Truly smart copy from i up to and including j;
@@ -1858,6 +728,7 @@ def copyMusicList(ll, i = None, j = None):
    result = result[ : ]
    return result
 
+
 def setLeafStartTimes(expr, offset = Fraction(0)):
    '''
    Doc.
@@ -1867,6 +738,7 @@ def setLeafStartTimes(expr, offset = Fraction(0)):
    for l in instances(expr, '_Leaf'):
       l.start = cur
       cur += l.duration.prolated
+
 
 def rankLeavesTimewise(exprList, name = '_Leaf'):
    '''
@@ -1897,6 +769,7 @@ def rankLeavesTimewise(exprList, name = '_Leaf'):
    for i, l in enumerate(result):
       l.timewise = i
 
+
 def spget(arg):
    '''Get lowest pitch in either Note or Chord;
       else None.'''
@@ -1908,6 +781,7 @@ def spget(arg):
    else:
       #raise ValueError('arg %s must be note or chord.' % str(arg))
       return None
+
 
 def octavate(n, base = (-4, 30)):
    '''
@@ -1934,6 +808,7 @@ def octavate(n, base = (-4, 30)):
    elif p < lower - 12:
       Octavation(n, -2)
 
+
 def octavateIterator(voice, start, stop, base):
    '''
    Octavate leaves from start to stop according to base.
@@ -1942,45 +817,6 @@ def octavateIterator(voice, start, stop, base):
    for l in leaves[start : stop + 1]:
       octavate(l, base)
       
-def previous(leaves, cur, name):
-   '''
-   Doc.
-   '''
-
-   j = 1
-   while True:
-      if isinstance(leaves[cur - j], name):
-         return leaves[cur - j]
-      else:
-         j += 1
-
-def doubleNote(structure, index, before, right, write = None):
-   '''
-   Replace sourceNote at structure[index] with simultaneous music; 
-   simultaneous music comprises << up down >>;
-   both up and down are copies of sourceNote;
-   up is an exact deepcopy of sourceNote;
-   down reinstantiates sourceNote and extends with any before, right, write.
-   '''
-
-   sourceNote = structure[index]
-   up = expression.Expression(
-      [copy.deepcopy(sourceNote)], enclosure = 'sequential')
-   down = Note(sourceNote.pitch.number, *sourceNote.duration.pair)
-   down.before.extend(before)
-   down.right.extend(right)
-   if write:
-      down.duration.write(*write)
-   down = voice.Voice([down])
-   new = expression.Expression([up, down], enclosure = 'simultaneous')
-   structure[index : index + 1] = [new]
-
-### DEPRECATED in favor of Octavation( ... ) ###
-#def applyOctavation(leaves, start, stop, away, home):
-#   leaves[start].before.append(
-#      r'#(set-octavation %s)' % away)
-#   leaves[stop].after.append(
-#      r'#(set-octavation %s)' % home)
 
 def setPitch(l, spec = 0):
    '''
@@ -2039,10 +875,12 @@ def setPitch(l, spec = 0):
       l.caster.toChord( )
       l.pitches = [p + transposition for p in pp]
 
+
 def setPitchIterator(voice, start, stop, spec = 0):
    leaves = voice.leaves
    for l in leaves[start : stop + 1]:
       setPitch(l, spec)
+
 
 def clonePitches(voice, start, stop, offset):
    leaves = voice.leaves 
@@ -2050,12 +888,14 @@ def clonePitches(voice, start, stop, offset):
       if isinstance(l, Note):
          l.pitch = leaves[start + i + offset].pitch.pair
 
+
 def setPitchesByPitchCycle(voice, start, stop, pcyc):
    leaves = voice.leaves
    for j, l in enumerate(leaves[start : stop + 1]):
       i = j + start
       p = pcyc[j % len(pcyc)]
       l.pitch = p 
+
 
 def splitHands(l):
    '''
@@ -2134,6 +974,7 @@ def setPitchesBySplitHands(leaves, start, stop, crossLeaves):
             else:
                raise Exception('cast to chord here.')
 
+
 def setArticulations(voice, articulations, *args, **kwargs):
    '''
    Iterate leaves and set articulations.
@@ -2167,6 +1008,7 @@ def setArticulations(voice, articulations, *args, **kwargs):
          else:
             raise ValueError
 
+
 def setArticulationsByPitch(voice, start, stop, articulations, min):
    '''
    Set articulations on notes & chord where safe pitch number is at least min.
@@ -2176,6 +1018,7 @@ def setArticulationsByPitch(voice, start, stop, articulations, min):
    for l in leaves[start : stop + 1]:
       if isinstance(l, (Note, Chord)) and spget(l) >= min:
          l.articulations = articulations
+
 
 def setArticulationsByDuration(voice, start, stop, long, min, short):
    '''
@@ -2192,6 +1035,7 @@ def setArticulationsByDuration(voice, start, stop, long, min, short):
          else:
             l.articulations = short
 
+
 def clearAllArticulations(leaves, start = 0, stop = None):
    '''
    Clears articulations from leaves.
@@ -2202,6 +1046,7 @@ def clearAllArticulations(leaves, start = 0, stop = None):
 
    for l in instances(leaves[start : stop], '_Leaf'):
       l.articulations = [ ]
+
 
 def appendArticulations(voice, articulations, *args, **kwargs):
    '''
@@ -2236,16 +1081,13 @@ def appendArticulations(voice, articulations, *args, **kwargs):
          else:
             raise ValueError
 
-def clear_hairpins(expr):
-   '''Clear hairpins from leaves; leave dynamics in place.'''
-   for l in instances(expr, '_Leaf'):
-      l.dynamics.unspan( )
 
 def clear_dynamics(expr):
    '''Clear both dynamics and hairpins from leaves in expr.'''
    for l in instances(expr, '_Leaf'):
       l.dynamics = None
       l.dynamics.unspan( )
+
 
 def applyArtificialHarmonic(voice, *args):
    leaves = voice.leaves
@@ -2524,6 +1366,7 @@ def partitionLeaves(leaves, type = 'notes and rests', cut = (0,), gap = (0,)):
 
    return result
 
+
 def segmentLeaves(leaves, cut = (0,), gap = (0,)):
    '''
    Partition leaves into segments each of one or more stages;
@@ -2576,6 +1419,7 @@ def segmentLeaves(leaves, cut = (0,), gap = (0,)):
       segments[i] = tuple(sublist)
    return segments
 
+
 def trimRests(leaves):
    for l in reversed(leaves):
       if isinstance(l, rest):
@@ -2620,8 +1464,6 @@ def applyCoverSpanner(voice, *args):
       leaves[stop].formatter.right.append(r'\stopTextSpan')
    else:
       raise ValueError('can not apply cover spanner.')
-
-
 
 
 def makeBreaksVoice(durationPairs, yOffsets, alignmentOffsets, start = 0):
@@ -2681,6 +1523,7 @@ def makeBreaksVoice(durationPairs, yOffsets, alignmentOffsets, start = 0):
    voice.name = 'breaks voice'
    return voice
 
+
 def makeMeasuresVoice(durationPairs):
    '''
    Return measure and time signature skip voice.
@@ -2706,6 +1549,7 @@ def makeMeasuresVoice(durationPairs):
    voice = Voice(measures)
    voice.name = 'measures voice'
    return voice
+
 
 def reddenSections(measuresVoice, sectionTuples, startMeasure = 1):
    '''
@@ -2744,6 +1588,7 @@ def reddenSections(measuresVoice, sectionTuples, startMeasure = 1):
          except:
             pass
 
+
 def trimVoices(expr, nMeasures):
    '''
    Find each voice in expr and trim to n measures;
@@ -2758,6 +1603,7 @@ def trimVoices(expr, nMeasures):
    for v in voices:
       v.music = v.music[:nMeasures]
 
+
 def makeFluteGroup(*staves):
    '''
    Group staves together with 'Flute' id and 'flute group' name.
@@ -2766,6 +1612,7 @@ def makeFluteGroup(*staves):
    return container.Container(list(staves), 
       id = 'Flute', name = 'flute group')
 
+
 def makeViolinGroup(*staves):
    '''
    Group staves together with 'Violin' id and 'violin group' name.
@@ -2773,6 +1620,7 @@ def makeViolinGroup(*staves):
 
    return container.Container(list(staves), 
       id = 'Violin', name = 'violin group')
+
 
 def crossStavesDown(voice, start, stop, bp, target,
    includes = [ ], excludes = [ ], 
@@ -2793,6 +1641,7 @@ def crossStavesDown(voice, start, stop, bp, target,
          else:
             octavate(l, base = (-4, 30))
 
+
 def crossStavesUp(leaves, start, stop, bp, target):
    '''
    target is a reference to an actual Staff instance.
@@ -2806,69 +1655,3 @@ def crossStavesUp(leaves, start, stop, bp, target):
             l.staff = target
          else:
             octavate(l, base = (-28, 4))
-
-# TODO: merge cauterizeSpanners into cauterize
-def cauterizeSpanners(leaves, start, stop, name):
-   exec('leaves[start].%s.fractureAllLeft( )' % name)
-   exec('leaves[stop].next.%s.fractureAllLeft( )' % name)
-   
-def cauterize(leaves, start, stop):
-   for receptor in leaves[0].getReceptors( ):
-      exec('leaves[start].%s.fractureAllLeft( )' % 
-         receptor.grob)
-   if leaves[-1].next:
-      for receptor in leaves[-1].next.getReceptors( ):
-         exec('leaves[stop].next.%s.fractureAllLeft( )' % 
-            receptor.grob)
-
-def partitionLeavesByDurations(leaves, durations = None):
-   '''
-   >>> v = Voice([divide.pair([1, -4, 1], (1, 4)), divide.pair([1, -4, 1, 1], (1, 4))])
-   >>> v.leaves
-   [c'16, r4, c'16, c'16, r4, c'16, c'16]
-
-   >>> partitionLeavesByDurations(v.leaves, [(1, 4)])
-   [[c'16, r4, c'16], [c'16, r4, c'16, c'16]]
-
-   >>> partitionLeavesByDurations(v.leaves, [(1, 2)])
-   [[c'16, r4, c'16, c'16, r4, c'16, c'16]]
-
-   >>> v = Voice(Note(0, (1, 32)) * 8)
-   >>> v.leaves
-   [c'32, c'32, c'32, c'32, c'32, c'32, c'32, c'32]
-
-   >>> partitionLeavesByDurations(v.leaves, [(1, 32), (3, 32)])
-   [[c'32], [c'32, c'32, c'32], [c'32], [c'32, c'32, c'32]]
-
-   >>> partitionLeavesByDurations(v.leaves, [(3, 32)])
-   [[c'32, c'32, c'32], [c'32, c'32, c'32], [c'32, c'32]]
-   '''
-
-   if not durations:
-      return leaves
-
-   result = [[ ]]
-
-   j = 0
-   for l in leaves:
-      total = effectiveDuration(result[-1])
-      next = Fraction(*durations[j % len(durations)])
-      #if total + l.effectiveDuration < next:
-      if total + l.duration.prolated < next:
-         result[-1].append(l)
-      #elif total + l.effectiveDuration == next:
-      elif total + l.duration.prolated == next:
-         result[-1].append(l)
-         result.append([ ])
-         j += 1
-      #elif total + l.effectiveDuration > next:
-      elif total + l.duration.prolated > next:
-         print 'WARNING: part greater than duration.'
-         result[-1].append(l)
-         result.append([ ])
-         j += 1
-
-   if result[-1] == [ ]:
-      result.pop( )
-
-   return result
