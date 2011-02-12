@@ -154,6 +154,7 @@ def effectiveDuration(m):
    else:
       return sum(effectiveDurations(m), Fraction(0))
 
+
 def fill(l, positions):
    '''
    Fills in 1-indexed measures with c'.
@@ -169,6 +170,7 @@ def fill(l, positions):
             m.meter.pair,
             [Note(0, (x, d)) for x in parts])
 
+
 def blank(l, positions):
    '''
    Blanks out 1-indexed measures.
@@ -181,6 +183,7 @@ def blank(l, positions):
          rests = resttools.make_rests(m.duration.contents)
          new_measure = Measure(m.meter.effective, rests)
          l[i] = new_measure
+
 
 def nest(measures, outer, inner):
    '''
@@ -253,6 +256,7 @@ def trill(l, p = False, indices = 'all', d = Fraction(0)):
          #  element.after.append(r'\startTrillSpan')
          element.trill = True
 
+
 def grace(l, 
    k = '_Leaf', indices = 'all', 
    m = 'Note', dm = (0, 1), check = True,
@@ -290,6 +294,7 @@ def grace(l,
 
          candidate += 1
 
+
 def color(l, p):
    '''
    TODO: change trills and graces to first-class note attributes.
@@ -315,10 +320,12 @@ def color(l, p):
       except:
          pass
 
+
 def untrill(l):
    for element in instances(l, '_Leaf'):
       if hasattr(element, 'trill'):
          delattr(element, 'trill')
+
 
 def ungrace(l, keep = 'first', length = 1):
    '''
@@ -330,6 +337,7 @@ def ungrace(l, keep = 'first', length = 1):
             element.grace = element.grace[:length]
          elif keep == 'last':
             element.grace = element.grace[-length:]
+
 
 def breaks(signatures, durations, pages, verticals, staves = None):
    '''
@@ -380,23 +388,6 @@ def breaks(signatures, durations, pages, verticals, staves = None):
    result.name = 'breaks'
    return result
 
-def sectionalize(m, pairs, kind = '_Leaf'):
-   '''
-   Add horizontal brackets over elements in pairs.
-   Make sure context \consists Horizontal_bracket_engraver.
-
-   >>> sectionalize(snow, [(0, 12), (12, 24), (24, 35), (35, 59)])
-
-   '''
-
-   starts = [p[0] for p in pairs]
-   stops  = [p[1] - 1 for p in pairs]
-
-   for i, node in enumerate(m.instances(kind)):
-      if i in stops:
-         node.right.append (r'\stopGroup')
-      if i in starts:
-         node.right.append(r'\startGroup')
 
 class Subdivide(object):
    def __init__(self, positions):
@@ -424,6 +415,7 @@ class Subdivide(object):
       else:
          return node
 
+
 def subdivide(m, positions):
    '''
    Subdivide leaves in m by according to positions.
@@ -432,6 +424,7 @@ def subdivide(m, positions):
    '''
    
    change(m, Subdivide(positions))
+
 
 class FiveRemover(object):
    def visit(self, node):
