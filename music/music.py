@@ -520,6 +520,7 @@ def stellate(k, s, t, d, b, span ='from duration', rests = True):
 
    return tuplets
 
+
 def coruscate(n, s, t, z, d, rests = True):
    '''Coruscate signal n;
    return list of fixed-duration tuplets.
@@ -592,24 +593,6 @@ def coruscate(n, s, t, z, d, rests = True):
 
    return result
 
-#def partitionMusicListByDurations(ml, durations):
-#   '''
-#   Partition music list ml into sublists equal to durations.
-#   '''
-#
-#   result = [ ]
-#
-#   cur = 0
-#   new = [ ]
-#
-#   for m in ml:
-#      new.append(m)
-#      if effectiveDuration(new) >= durations[cur]:
-#         result.append(new)
-#         cur += 1
-#         new = [ ]
-#
-#   ml[:] = result 
 
 def makeMeasures(m, meters):
    '''
