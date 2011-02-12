@@ -1,4 +1,4 @@
-'''Music-generation functions used in Cary and Sekka.
+'''Music-generation functions used in Cary, Sekka and Lidercfeny.
 '''
 
 from abjad.components import Measure
@@ -1088,6 +1088,7 @@ def clear_dynamics(expr):
       l.dynamics = None
       l.dynamics.unspan( )
 
+
 def applyArtificialHarmonic(voice, *args):
    leaves = voice.leaves
    from abjad.tools.harmonics import add_artificial_harmonic
@@ -1365,6 +1366,7 @@ def partitionLeaves(leaves, type = 'notes and rests', cut = (0,), gap = (0,)):
 
    return result
 
+
 def segmentLeaves(leaves, cut = (0,), gap = (0,)):
    '''
    Partition leaves into segments each of one or more stages;
@@ -1417,6 +1419,7 @@ def segmentLeaves(leaves, cut = (0,), gap = (0,)):
       segments[i] = tuple(sublist)
    return segments
 
+
 def trimRests(leaves):
    for l in reversed(leaves):
       if isinstance(l, rest):
@@ -1461,8 +1464,6 @@ def applyCoverSpanner(voice, *args):
       leaves[stop].formatter.right.append(r'\stopTextSpan')
    else:
       raise ValueError('can not apply cover spanner.')
-
-
 
 
 def makeBreaksVoice(durationPairs, yOffsets, alignmentOffsets, start = 0):
@@ -1522,6 +1523,7 @@ def makeBreaksVoice(durationPairs, yOffsets, alignmentOffsets, start = 0):
    voice.name = 'breaks voice'
    return voice
 
+
 def makeMeasuresVoice(durationPairs):
    '''
    Return measure and time signature skip voice.
@@ -1547,6 +1549,7 @@ def makeMeasuresVoice(durationPairs):
    voice = Voice(measures)
    voice.name = 'measures voice'
    return voice
+
 
 def reddenSections(measuresVoice, sectionTuples, startMeasure = 1):
    '''
@@ -1585,6 +1588,7 @@ def reddenSections(measuresVoice, sectionTuples, startMeasure = 1):
          except:
             pass
 
+
 def trimVoices(expr, nMeasures):
    '''
    Find each voice in expr and trim to n measures;
@@ -1599,6 +1603,7 @@ def trimVoices(expr, nMeasures):
    for v in voices:
       v.music = v.music[:nMeasures]
 
+
 def makeFluteGroup(*staves):
    '''
    Group staves together with 'Flute' id and 'flute group' name.
@@ -1607,6 +1612,7 @@ def makeFluteGroup(*staves):
    return container.Container(list(staves), 
       id = 'Flute', name = 'flute group')
 
+
 def makeViolinGroup(*staves):
    '''
    Group staves together with 'Violin' id and 'violin group' name.
@@ -1614,6 +1620,7 @@ def makeViolinGroup(*staves):
 
    return container.Container(list(staves), 
       id = 'Violin', name = 'violin group')
+
 
 def crossStavesDown(voice, start, stop, bp, target,
    includes = [ ], excludes = [ ], 
@@ -1634,6 +1641,7 @@ def crossStavesDown(voice, start, stop, bp, target,
          else:
             octavate(l, base = (-4, 30))
 
+
 def crossStavesUp(leaves, start, stop, bp, target):
    '''
    target is a reference to an actual Staff instance.
@@ -1648,19 +1656,6 @@ def crossStavesUp(leaves, start, stop, bp, target):
          else:
             octavate(l, base = (-28, 4))
 
-# TODO: merge cauterizeSpanners into cauterize
-def cauterizeSpanners(leaves, start, stop, name):
-   exec('leaves[start].%s.fractureAllLeft( )' % name)
-   exec('leaves[stop].next.%s.fractureAllLeft( )' % name)
-   
-def cauterize(leaves, start, stop):
-   for receptor in leaves[0].getReceptors( ):
-      exec('leaves[start].%s.fractureAllLeft( )' % 
-         receptor.grob)
-   if leaves[-1].next:
-      for receptor in leaves[-1].next.getReceptors( ):
-         exec('leaves[stop].next.%s.fractureAllLeft( )' % 
-            receptor.grob)
 
 def partitionLeavesByDurations(leaves, durations = None):
    '''
