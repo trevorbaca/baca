@@ -91,28 +91,6 @@ def traverse(expr, v):
       v.unvisit(expr)
          
 
-def skeleton(l):
-   '''
-   Return skeleton of LilyObject, list or tuple.
-   '''
-
-   print 'WARNING: skeleton() now deprecated;'
-   print 'Use pickle and unpickle instead.'
-   print 'Warning on %s.' % l
-   print ''
-
-   if hasattr(l, 'skeleton'):
-      return l.skeleton
-   elif isinstance(l, list):
-      return '[%s]' % ', '.join([skeleton(x) for x in l])
-   elif isinstance(l, tuple):
-      return '(%s)' % ', '.join([skeleton(x) for x in l])
-   else:
-      raise TypeError('object %s of unknown type.' % l)
-
-def clean(l):
-   return eval(skeleton(l))
-
 def change(expr, visitor):
    if isinstance(expr, list):
       for x in expr[:]:
