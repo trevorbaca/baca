@@ -120,11 +120,11 @@ def changeslice(expr, visitor):
       return visitor.visit(expr)
 
 
-def writtenDurations(m):
-   return [l.duration for l in m.leaves]
-
-def writtenDuration(m):
-   return sum(writtenDurations(m), Fraction(0))
+#def writtenDurations(m):
+#   return [l.duration for l in m.leaves]
+#
+#def writtenDuration(m):
+#   return sum(writtenDurations(m), Fraction(0))
 
 def effectiveDurations(m):
    '''
