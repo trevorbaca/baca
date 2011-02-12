@@ -120,64 +120,6 @@ def changeslice(expr, visitor):
       return visitor.visit(expr)
 
 
-def build(t):
-   '''
-   >>> music.t1
-   [(3, 8), [1]]
-   >>> music.build(_)  
-   c'4.
-   >>> music.t2
-   [(3, 8), [1, 2, 4]]
-   >>> music.build(_)
-   (7:6, c'16, c'8, c'4)
-   >>> music.t3
-   [(3, 8), [(3, 4), [[1], [1]]]]
-   >>> music.build(_)
-   (7:6, c'8., c'4)
-   >>> music.t4
-   [(3, 8), [(3, 4), [[1, 1], [2, 2, 1]]]]
-   >>> music.build(_)
-   (7:6, (4:3, c'8, c'8), (5:4, c'8, c'8, c'16))
-   >>> music.t5
-   [(3, 8), [(2, 3), [[1, 1], [(2, 2, 1), [[1], [1], [1, 1]]]]]]
-   >>> music.build(_)
-   (5:3, (c'8, c'8), (5:3, c'4, c'4, (c'16, c'16)))
-   '''
-
-   # [(3, 8), [(3, 4), [[1, 1], [2, 2, 1]]]]
-   if isinstance(t[1][0], tuple):
-      s = sum(t[1][0])
-      exponent = int(math.log(s / t[0][0], 2)) if s >= t[0][0] else 0
-      denominator = t[0][1] * 2 ** exponent
-      #print 'denominator is %s.' % denominator
-      w = [[(x[0], x[1]), x[2]] 
-         for x in zip(t[1][0], [denominator] * len(t[1][0]), t[1][1])]
-      music = [build(token) for token in w]
-      l = math.log(max(t[0][0], s) * 1.0 / min(t[0][0], s), 2)
-      if l == int(l):
-         return expression.Expression(music)
-      else:
-         return tuplet.SmartTuplet(t[0][0], t[0][1], music)
-
-   # [(3, 8), [1]]
-   elif len(t[1]) == 1:
-      return Note(0, t[0][0], t[0][1]) if t[1][0] > 0 \
-         else Rest(abs(t[0][0]), t[0][1])
-   
-   # [(3, 8), [1, 2, 4]]
-   elif len(t[1]) > 1:
-      s = sum([abs(element) for element in t[1]])
-      exponent = int(math.log(s / t[0][0], 2)) if s >= t[0][0] else 0
-      denominator = t[0][1] * 2 ** exponent
-      #print 'denominator is %s.' % denominator
-      music = [Note(0, n, denominator) if n > 0 
-         else Rest(abs(n), denominator) for n in t[1]]
-      l = math.log(max(t[0][0], s) * 1.0 / min(t[0][0], s), 2)
-      if l == int(l):
-         return expression.Expression(music)
-      else:
-         return tuplet.SmartTuplet(t[0][0], t[0][1], music)
-       
 def writtenDurations(m):
    return [l.duration for l in m.leaves]
 
@@ -283,20 +225,6 @@ def nest(measures, outer, inner):
       
    return result
 
-def build(measures, outer):
-   '''
-   Structures time.
-   '''
-
-   result = [ ]
-   for o, m in zip(outer, measures):
-      print o
-      print m
-      print ''
-      result.append(measure.Measure([divide.pair(o, (m[0], m[1]))]))
-      result[-1].before.append(r'\time %s/%s' % (m[0], m[1]))
-
-   return result
 
 def trill(l, p = False, indices = 'all', d = Fraction(0)):
    '''
