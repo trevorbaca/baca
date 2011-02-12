@@ -51,6 +51,7 @@ def splitPitches(pitches, split = -1):
       
    return components['treble'], components['bass']
 
+
 def makeFixedLayoutVoice(d, systems, alignments, offsets):
    '''
    Doc.
@@ -77,6 +78,7 @@ def makeFixedLayoutVoice(d, systems, alignments, offsets):
 
    return v
 
+
 def traverse(expr, v):
    v.visit(expr)
    if isinstance(expr, (list, tuple)):
@@ -88,67 +90,6 @@ def traverse(expr, v):
    if hasattr(v, 'unvisit'):
       v.unvisit(expr)
          
-class Reconstructor(object):
-   def __init__(self, visitor):
-      self.visitor = visitor
-      self.stack = [[ ]]
-   def visit(self, node):
-      if isinstance(node, list):
-         pass
-      elif hasattr(node, 'music'):
-         self.stack.append([ ])
-      else:
-         self.stack[-1].append(self.visitor.visit(node))
-   def unvisit(self, node):
-      if isinstance(node, list):
-         # FIXME: flatten now in-place
-         self.stack = seqtools.flatten(self.stack[-1])
-      elif hasattr(node, 'music'):
-         # FIXME: flatten now in-place
-         node.music = seqtools.flatten(self.stack.pop())
-         self.stack[-1].append(node)
-
-def reconstruct(music, reconstructor):
-   # EXPENSIVE: deepcopy
-   result = copy.deepcopy(music)
-   traverse(result, reconstructor)
-   return reconstructor.stack
-
-class Painter(object):
-   def __init__(self, pitches):
-      self.pitches = pitches
-   def visit(self, node):
-      if 0 < len(self.pitches) and isinstance(node, (Note, Chord)):
-         p = self.pitches.pop(0)
-         result = copy.deepcopy(node)
-         if not isinstance(p, list):
-            if isinstance(node, Note):
-               result.pitch = p
-            elif isinstance(node, Chord):
-               result.pitches = [p]
-            else:
-               raise ValueError
-         elif isinstance(p, list):
-            if isintance(node, Note):
-               result = chord(p, node.duration, *node.directives)
-            elif isinstance(node, Chord):
-               result.pitches = p
-            else:
-               raise ValueError
-         return result
-      else:
-         return node
-   
-def paint(music, pitches):
-   if isinstance(pitches[0], Pitch):
-      processedPitches = pitches
-   elif isinstance(pitches[0], int):
-      processedPitches = [pitch(p) for p in pitches]
-   reconstructor = Reconstructor(Painter(copy.deepcopy(processedPitches)))
-   if isinstance(music, list):
-      return reconstruct(music, reconstructor)
-   else:
-      return reconstruct([music], reconstructor)[0]
 
 def skeleton(l):
    '''
