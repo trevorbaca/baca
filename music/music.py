@@ -440,28 +440,6 @@ def unfive(music):
    change(music, FiveRemover())
 
 
-#class BeamBalancer(object):
-#   def __init__(self):
-#      self.open = False
-#      self.last = None
-#   def visit(self, node):
-#      if hasattr(node, 'right') and '[' in node.right:
-#         if self.open:
-#            self.last.right.remove('[')
-#         self.open = True
-#         self.last = node
-#      if hasattr(node, 'right') and ']' in node.right:
-#         self.open = False
-#
-#
-#def equibeam(m):
-#   '''
-#   Remove accidentally nested beams in the same voice.
-#   '''
-#
-#   traverse(m, BeamBalancer())
-#
-#
 def unbeam(m):
    '''
    Call self.unbeam() on leaves in m.
