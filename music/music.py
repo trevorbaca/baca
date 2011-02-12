@@ -21,17 +21,6 @@ import math
 import re
 
 
-#def trim_beam_nibs(expr):
-#   leaves = instances(expr, '_Leaf')
-#   for leaf in leaves:
-#      if hasattr(leaf, 'beam'):
-#         if not leaf.beam.only:
-#            if leaf.beam.first:
-#               leaf.beam.counts = 0, leaf.beam._flags
-#            if leaf.beam.last:
-#               leaf.beam.counts = leaf.beam._flags, 0
-
-
 def splitPitches(pitches, split = -1):
    ''' 
    Split list of probably aggregates into treble and bass.
@@ -88,31 +77,6 @@ def makeFixedLayoutVoice(d, systems, alignments, offsets):
 
    return v
 
-#def getDurations(arg):
-#   if hasattr(arg, 'duration'):
-#      return arg.duration
-#   elif hasattr(arg, 'music'):
-#      return [getDurations(element) for element in arg.music]
-#   elif isinstance(arg, list):
-#      return [getDurations(element) for element in arg]
-#   else:
-#      return None
-
-#def getEffectiveDurations(music):
-#   return [l.effectiveDuration for l in instances(music, '_Leaf')]
-
-## argument is a music list
-#def getListDurations(arg):
-#   def helper(arg):
-#      # note, rest, skip:
-#      if hasattr(arg, 'durations'):
-#         return arg.durations
-#      elif hasattr(arg, 'duration'):
-#         return [arg.duration]
-#      else:
-#         raise ValueError
-#   return [helper(element) for element in arg]
-   
 def traverse(expr, v):
    v.visit(expr)
    if isinstance(expr, (list, tuple)):
