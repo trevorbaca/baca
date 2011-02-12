@@ -440,17 +440,6 @@ def unfive(music):
    change(music, FiveRemover())
 
 
-def unbeam(m):
-   '''
-   Call self.unbeam() on leaves in m.
-   '''
-
-   for l in instances(m, '_Leaf'):
-      try:
-         l.unbeam()
-      except:
-         pass
-
 def decompose(d, parts, r = 'rest'):
    '''
    Decompose duration d into parts with rest or note remainder r.
