@@ -818,90 +818,62 @@ def octavateIterator(voice, start, stop, base):
       octavate(l, base)
       
 
-#def doubleNote(structure, index, before, right, write = None):
-#   '''
-#   Replace sourceNote at structure[index] with simultaneous music; 
-#   simultaneous music comprises << up down >>;
-#   both up and down are copies of sourceNote;
-#   up is an exact deepcopy of sourceNote;
-#   down reinstantiates sourceNote and extends with any before, right, write.
-#   '''
-#
-#   sourceNote = structure[index]
-#   up = expression.Expression(
-#      [copy.deepcopy(sourceNote)], enclosure = 'sequential')
-#   down = Note(sourceNote.pitch.number, *sourceNote.duration.pair)
-#   down.before.extend(before)
-#   down.right.extend(right)
-#   if write:
-#      down.duration.write(*write)
-#   down = voice.Voice([down])
-#   new = expression.Expression([up, down], enclosure = 'simultaneous')
-#   structure[index : index + 1] = [new]
+def setPitch(l, spec = 0):
+   '''
+   Sets l.pitch based on l.core.
+   '''
 
-### DEPRECATED in favor of Octavation( ... ) ###
-#def applyOctavation(leaves, start, stop, away, home):
-#   leaves[start].before.append(
-#      r'#(set-octavation %s)' % away)
-#   leaves[stop].after.append(
-#      r'#(set-octavation %s)' % home)
+   if not isinstance(l, Note):
+      return
 
-#def setPitch(l, spec = 0):
-#   '''
-#   Sets l.pitch based on l.core.
-#   '''
-#
-#   if not isinstance(l, Note):
-#      return
-#
-#   # setPitch(l, 'core'):
-#   if spec == 'core':
-#      #p = l.core[0]
-#      pp = l.core
-#      transposition = 0
-#   # setPitch(l, 12)
-#   elif isinstance(spec, int):
-#      #p = l.core[0] % 12
-#      pp = [p % 12 for p in l.core]
-#      transposition = spec
-#   elif isinstance(spec, list):
-#      # setPitch(l, ['by pitch', (-39, 0, 24), (1, 48, 36)])
-#      if spec[0] == 'by pitch':
-#         new = [ ]
-#         for p in l.core:
-#            for start, stop, t in spec[1:]:
-#               if p in range(start, stop + 1):
-#                  new.append(p % 12 + t)
-#         if len(new) == 1:
-#            #l.pitch = pitch.Pitch(new[0])
-#            l.pitch = new[0]
-#         else:
-#            #l.pitch = [pitch.Pitch(p) for p in new]
-#            l.caster.toChord( )
-#            l.pitches = new
-#         return
-#      # setPitch(l, ['by pc', (0, 6, 36), (7, 11, 24)])
-#      elif spec[0] == 'by pc':
-#         #p = l.core[0] % 12
-#         pp = [p % 12 for p in l.core]
-#         for start, stop, t in spec[1:]:
-#            # TODO fix me
-#            if pp[0] in range(start, stop + 1):
-#               transposition = t
-#               break
-#      else:
-#         raise ValueError
-#
-#   else:
-#      raise ValueError
-#
-#   if len(pp) == 1:
-#      #l.pitch = pitch.Pitch(pp[0] + transposition)
-#      l.pitch = pp[0] + transposition
-#   else:
-#      #l.pitch = [pitch.Pitch(p + transposition) for p in pp]
-#      l.caster.toChord( )
-#      l.pitches = [p + transposition for p in pp]
+   # setPitch(l, 'core'):
+   if spec == 'core':
+      #p = l.core[0]
+      pp = l.core
+      transposition = 0
+   # setPitch(l, 12)
+   elif isinstance(spec, int):
+      #p = l.core[0] % 12
+      pp = [p % 12 for p in l.core]
+      transposition = spec
+   elif isinstance(spec, list):
+      # setPitch(l, ['by pitch', (-39, 0, 24), (1, 48, 36)])
+      if spec[0] == 'by pitch':
+         new = [ ]
+         for p in l.core:
+            for start, stop, t in spec[1:]:
+               if p in range(start, stop + 1):
+                  new.append(p % 12 + t)
+         if len(new) == 1:
+            #l.pitch = pitch.Pitch(new[0])
+            l.pitch = new[0]
+         else:
+            #l.pitch = [pitch.Pitch(p) for p in new]
+            l.caster.toChord( )
+            l.pitches = new
+         return
+      # setPitch(l, ['by pc', (0, 6, 36), (7, 11, 24)])
+      elif spec[0] == 'by pc':
+         #p = l.core[0] % 12
+         pp = [p % 12 for p in l.core]
+         for start, stop, t in spec[1:]:
+            # TODO fix me
+            if pp[0] in range(start, stop + 1):
+               transposition = t
+               break
+      else:
+         raise ValueError
+
+   else:
+      raise ValueError
+
+   if len(pp) == 1:
+      #l.pitch = pitch.Pitch(pp[0] + transposition)
+      l.pitch = pp[0] + transposition
+   else:
+      #l.pitch = [pitch.Pitch(p + transposition) for p in pp]
+      l.caster.toChord( )
+      l.pitches = [p + transposition for p in pp]
 
 def setPitchIterator(voice, start, stop, spec = 0):
    leaves = voice.leaves
