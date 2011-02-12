@@ -120,36 +120,6 @@ def changeslice(expr, visitor):
       return visitor.visit(expr)
 
 
-def restsToNotes(expr):
-   '''
-   Cast rests to notes in expr.
-
-   >>> t = divide.pair([1, 1, 1, -2], (4, 16))
-   >>> t
-   (5:4, c'16, c'16, c'16, r8)
-
-   >>> restsToNotes(t)
-   >>> t
-   (5:4, c'16, c'16, c'16, c'8)
-   '''
-
-   class RestsToNotes(object):
-      def visit(self, node):
-         if isinstance(node, Rest):
-            return Note(0, *node.duration.pair)
-         else:
-            return node
-
-   change(expr, RestsToNotes())
-         
-def into(ll, ss, location):
-   if hasattr(ll, 'music'):
-      for i, l in enumerate(ll.music):
-         eval('l.%s.append(ss[i])' % location)
-   else:
-      for i, l in enumerate(ll):
-         eval('l.%s.append(ss[i])' % location)
-
 def build(t):
    '''
    >>> music.t1
@@ -311,10 +281,6 @@ def nest(measures, outer, inner):
       t = FixedDurationTuplet(m, body)
       result.append(Measure(m, [t]))
       
-   #into(result, [r'\time %s/%s' % (x[0], x[1]) for x in measures], 'before')
-   #for i, element in enumerate(result):
-   #   result[i].time = measures[i]
-   
    return result
 
 def build(measures, outer):
