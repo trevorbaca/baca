@@ -875,10 +875,12 @@ def setPitch(l, spec = 0):
       l.caster.toChord( )
       l.pitches = [p + transposition for p in pp]
 
+
 def setPitchIterator(voice, start, stop, spec = 0):
    leaves = voice.leaves
    for l in leaves[start : stop + 1]:
       setPitch(l, spec)
+
 
 def clonePitches(voice, start, stop, offset):
    leaves = voice.leaves 
@@ -886,12 +888,14 @@ def clonePitches(voice, start, stop, offset):
       if isinstance(l, Note):
          l.pitch = leaves[start + i + offset].pitch.pair
 
+
 def setPitchesByPitchCycle(voice, start, stop, pcyc):
    leaves = voice.leaves
    for j, l in enumerate(leaves[start : stop + 1]):
       i = j + start
       p = pcyc[j % len(pcyc)]
       l.pitch = p 
+
 
 def splitHands(l):
    '''
@@ -970,6 +974,7 @@ def setPitchesBySplitHands(leaves, start, stop, crossLeaves):
             else:
                raise Exception('cast to chord here.')
 
+
 def setArticulations(voice, articulations, *args, **kwargs):
    '''
    Iterate leaves and set articulations.
@@ -1003,6 +1008,7 @@ def setArticulations(voice, articulations, *args, **kwargs):
          else:
             raise ValueError
 
+
 def setArticulationsByPitch(voice, start, stop, articulations, min):
    '''
    Set articulations on notes & chord where safe pitch number is at least min.
@@ -1012,6 +1018,7 @@ def setArticulationsByPitch(voice, start, stop, articulations, min):
    for l in leaves[start : stop + 1]:
       if isinstance(l, (Note, Chord)) and spget(l) >= min:
          l.articulations = articulations
+
 
 def setArticulationsByDuration(voice, start, stop, long, min, short):
    '''
@@ -1028,6 +1035,7 @@ def setArticulationsByDuration(voice, start, stop, long, min, short):
          else:
             l.articulations = short
 
+
 def clearAllArticulations(leaves, start = 0, stop = None):
    '''
    Clears articulations from leaves.
@@ -1038,6 +1046,7 @@ def clearAllArticulations(leaves, start = 0, stop = None):
 
    for l in instances(leaves[start : stop], '_Leaf'):
       l.articulations = [ ]
+
 
 def appendArticulations(voice, articulations, *args, **kwargs):
    '''
@@ -1072,10 +1081,6 @@ def appendArticulations(voice, articulations, *args, **kwargs):
          else:
             raise ValueError
 
-def clear_hairpins(expr):
-   '''Clear hairpins from leaves; leave dynamics in place.'''
-   for l in instances(expr, '_Leaf'):
-      l.dynamics.unspan( )
 
 def clear_dynamics(expr):
    '''Clear both dynamics and hairpins from leaves in expr.'''
