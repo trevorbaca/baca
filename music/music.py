@@ -621,6 +621,7 @@ def makeMeasures(m, meters):
                #measure = Measure(meters[d], [ ])
                measure = Measure(meters[d], [ ])
 
+
 def recombineVoices(target, s, insert, t, loci):
    '''
    Iterate simultaneously through the voices in target and insert;
@@ -680,6 +681,7 @@ def recombineVoices(target, s, insert, t, loci):
          first, last = targetIndexPairs[locus]
          targetVoice[first : last] = insert
 
+
 def rippleVoices(m, s):
    '''
    Repeat voice elements in m 
@@ -705,6 +707,7 @@ def rippleVoices(m, s):
                new.extend(copyMusicList(source))
             v[i : i + 1] = new
 
+
 def copyMusicList(ll, i = None, j = None):
    '''
    Truly smart copy from i up to and including j;
@@ -725,6 +728,7 @@ def copyMusicList(ll, i = None, j = None):
    result = result[ : ]
    return result
 
+
 def setLeafStartTimes(expr, offset = Fraction(0)):
    '''
    Doc.
@@ -734,6 +738,7 @@ def setLeafStartTimes(expr, offset = Fraction(0)):
    for l in instances(expr, '_Leaf'):
       l.start = cur
       cur += l.duration.prolated
+
 
 def rankLeavesTimewise(exprList, name = '_Leaf'):
    '''
@@ -764,6 +769,7 @@ def rankLeavesTimewise(exprList, name = '_Leaf'):
    for i, l in enumerate(result):
       l.timewise = i
 
+
 def spget(arg):
    '''Get lowest pitch in either Note or Chord;
       else None.'''
@@ -775,6 +781,7 @@ def spget(arg):
    else:
       #raise ValueError('arg %s must be note or chord.' % str(arg))
       return None
+
 
 def octavate(n, base = (-4, 30)):
    '''
@@ -801,6 +808,7 @@ def octavate(n, base = (-4, 30)):
    elif p < lower - 12:
       Octavation(n, -2)
 
+
 def octavateIterator(voice, start, stop, base):
    '''
    Octavate leaves from start to stop according to base.
@@ -809,17 +817,6 @@ def octavateIterator(voice, start, stop, base):
    for l in leaves[start : stop + 1]:
       octavate(l, base)
       
-def previous(leaves, cur, name):
-   '''
-   Doc.
-   '''
-
-   j = 1
-   while True:
-      if isinstance(leaves[cur - j], name):
-         return leaves[cur - j]
-      else:
-         j += 1
 
 def doubleNote(structure, index, before, right, write = None):
    '''
