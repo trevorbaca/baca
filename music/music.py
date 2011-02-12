@@ -440,48 +440,6 @@ def unfive(music):
    change(music, FiveRemover())
 
 
-def specify(s, t, span = None):
-   '''
-   Make list of even divisions according to s;
-   three-dimensional specification s;
-   unit duration with denominator t.
-
-   Wrapper around divide.pair() and beam().
-
-   >>> s = [[[-3, 1, 1], [1, 1, -3]], [[1, 1, -2], [-2, 1, 1]]]
-   >>> specify(s, 32, span = 2)
-   [(r16., c'32, c'32, c'32, c'32, r16.), (c'32, c'32, r16, r16, c'32, c'32)]
-
-   >>> f(voice.Voice(_))
-   \\new Voice {
-           r16.
-           \\beam #3 #3 c'32 [
-           \\beam #3 #2 c'32
-           \\beam #2 #3 c'32
-           \\beam #3 #3 c'32 ]
-           r16.
-           \\beam #0 #3 c'32 [
-           \\beam #3 #3 c'32 ]
-           r16
-           r16
-           \\beam #3 #3 c'32 [
-           \\beam #3 #0 c'32 ]
-   }
-   '''
-
-   result = [ ]
-
-   for beamfig in s:
-      parts = [mathtools.weight(subbeam) for subbeam in beamfig]
-      parts = [(n, t) for n in parts]
-      stream = seqtools.flatten(beamfig, action = 'new')
-      #new = divide.pair(stream, (mathtools.weight(stream), t))
-      new = tuplettools.make_tuplet_from_proportions_and_pair(stream, (mathtools.weight(stream), t))
-      beam(new, parts, span = span)
-      result.append(new)
-
-   return result
-
 def stellate(k, s, t, d, b, span ='from duration', rests = True):
    '''
    Make running tuplets.
