@@ -1,4 +1,6 @@
 from abjad.tools import iotools
+from abjad.tools import lilyfiletools
+from abjad.tools import schemetools
 from abjad.tools import scoretools
 from abjad.tools import seqtools
 from baca.pitch.Constellation import Constellation
@@ -25,6 +27,7 @@ class ConstellationCircuit(object):
 
    ## PRIVATE ATTRIBUTES ##
 
+   ## FIXME
    @property
    def _colored_generators(self):
       result = [ ]
@@ -56,14 +59,26 @@ class ConstellationCircuit(object):
          constellation = Constellation(self, partitioned_generator_pnl)
          self._constellations.append(constellation)
 
+   def _make_lily_file_and_score_from_chords(self, chords):
+      score, treble, bass = scoretools.make_piano_sketch_score_from_leaves(chords)
+      score.override.text_script.staff_padding = 10
+      score.set.proportional_notation_duration = schemetools.SchemeMoment(1, 30)
+      lily_file = lilyfiletools.make_basic_lily_file(score)
+      lily_file.default_paper_size = 'letter', 'landscape'
+      lily_file.global_staff_size = 18
+      lily_file.layout_block.indent = 0
+      lily_file.layout_block.ragged_right = True
+      lily_file.paper_block.system_system_spacing = schemetools.SchemeVector(
+         schemetools.SchemePair('basic_distance', 0),
+         schemetools.SchemePair('minimum_distance', 0),
+         schemetools.SchemePair('padding', 12),
+         schemetools.SchemePair('stretchability', 0))
+      lily_file.paper_block.top_margin = 24
+      return lily_file, score
+
    def _show_chords(self, chords):
-      score, treble, bass = \
-         scoretools.make_piano_sketch_score(chords)
-      score.spacing.proportional_notation_duration = Fraction(1, 24)
-      score.lily_file.default_paper_size = 'letter', 'landscape'
-      score.lily_file.global_staff_size = 18
-      score.text.staff_padding = 10
-      iotools.show(score.lily_file)
+      lily_file, score = self._make_lily_file_and_score_from_chords(chords)
+      iotools.show(lily_file)
 
    ## PUBLIC ATTRIBUTES ##
 
@@ -75,16 +90,16 @@ class ConstellationCircuit(object):
       return result
 
    @property
+   def pitch_range(self):
+      return self._pitch_range
+
+   @property
    def pivots(self):
       result = [ ]
       for constellation in self:
          result.append(constellation.pivot)
       return result
          
-   @property
-   def pitch_range(self):
-      return self._pitch_range
-
    ## PUBLIC METHODS ##
 
    def get(self, *args):
@@ -98,19 +113,19 @@ class ConstellationCircuit(object):
          constellation = self._constellations[constellation_index]
          return constellation.get(chord_number)
          
+   def show_colored_generators(self):
+      self._show_chords(self._colored_generators)
+
+   def show_colored_generators_and_pivots(self):
+      chords = zip(self._colored_generators, self.pivots)
+      chords = seqtools.flatten_sequence(chords, depth = 1)
+      self._show_chords(chords)
+
    def show_generators(self):
       self._show_chords(self.generators)
 
    def show_generators_and_pivots(self):
       chords = zip(self.generators, self.pivots)
-      chords = seqtools.flatten_sequence(chords, depth = 1)
-      self._show_chords(chords)
-
-   def show_generators_colored(self):
-      self._show_chords(self._colored_generators)
-
-   def show_generators_colored_and_pivots(self):
-      chords = zip(self._colored_generators, self.pivots)
       chords = seqtools.flatten_sequence(chords, depth = 1)
       self._show_chords(chords)
 
