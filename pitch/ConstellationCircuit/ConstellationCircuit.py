@@ -29,32 +29,31 @@ class ConstellationCircuit(object):
 
    ## FIXME
    @property
-   def _colored_generators(self):
+   def _colored_generator_chords(self):
       result = [ ]
       for constellation in self:
-         result.append(constellation._colored_generator)
+         result.append(constellation._colored_generator_chord)
       return result
 
    @property
-   def _generator_numbers(self):
+   def _generator_chord_numbers(self):
       result = [ ]
       for constellation in self:
-         result.append(constellation._generator_number)
+         result.append(constellation._generator_chord_number)
       return result
 
    @property
-   def _pivot_numbers(self):
+   def _pivot_chord_numbers(self):
       result = [ ]
       for constellation in self:
-         result.append(constellation._pivot_number)
+         result.append(constellation._pivot_chord_number)
       return result
 
    ## PRIVATE METHODS ##
 
    def _constellate_partitioned_generator_pnls(self):
       self._constellations = [ ]
-      for i, partitioned_generator_pnl in enumerate(
-         self._partitioned_generator_pnls):
+      for i, partitioned_generator_pnl in enumerate(self._partitioned_generator_pnls):
          constellation_number = i + 1
          constellation = Constellation(self, partitioned_generator_pnl)
          self._constellations.append(constellation)
@@ -83,10 +82,10 @@ class ConstellationCircuit(object):
    ## PUBLIC ATTRIBUTES ##
 
    @property
-   def generators(self):
+   def generator_chords(self):
       result = [ ]
       for constellation in self:
-         result.append(constellation.generator)
+         result.append(constellation.generator_chord)
       return result
 
    @property
@@ -94,10 +93,10 @@ class ConstellationCircuit(object):
       return self._pitch_range
 
    @property
-   def pivots(self):
+   def pivot_chords(self):
       result = [ ]
       for constellation in self:
-         result.append(constellation.pivot)
+         result.append(constellation.pivot_chord)
       return result
          
    ## PUBLIC METHODS ##
@@ -111,23 +110,23 @@ class ConstellationCircuit(object):
          constellation_number, chord_number = args
          constellation_index = constellation_number - 1
          constellation = self._constellations[constellation_index]
-         return constellation.get(chord_number)
+         return constellation.get_chord(chord_number)
          
-   def show_colored_generators(self):
-      self._show_chords(self._colored_generators)
+   def show_colored_generator_chords(self):
+      self._show_chords(self._colored_generator_chords)
 
-   def show_colored_generators_and_pivots(self):
-      chords = zip(self._colored_generators, self.pivots)
+   def show_colored_generator_chords_and_pivot_chords(self):
+      chords = zip(self._colored_generators, self.pivot_chords)
       chords = seqtools.flatten_sequence(chords, depth = 1)
       self._show_chords(chords)
 
-   def show_generators(self):
-      self._show_chords(self.generators)
+   def show_generator_chords(self):
+      self._show_chords(self.generator_chords)
 
-   def show_generators_and_pivots(self):
-      chords = zip(self.generators, self.pivots)
+   def show_generator_chords_and_pivot_chords(self):
+      chords = zip(self.generator_chords, self.pivot_chords)
       chords = seqtools.flatten_sequence(chords, depth = 1)
       self._show_chords(chords)
 
-   def show_pivots(self):
-      self._show_chords(self.pivots)
+   def show_pivot_chords(self):
+      self._show_chords(self.pivot_chords)

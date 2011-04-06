@@ -1,7 +1,10 @@
 from abjad.components import Chord
 from abjad.tools import chordtools
+from abjad.tools import iotools
+from abjad.tools import lilyfiletools
 from abjad.tools import markuptools
 from abjad.tools import pitchtools
+from abjad.tools import schemetools
 from abjad.tools import scoretools
 from abjad.tools import seqtools
 from baca.pitch.constellate import constellate
@@ -20,10 +23,11 @@ class Constellation(object):
    ## OVERLOADS ##
 
    def __contains__(self, chord):
-      for pnl in self._pitch_number_lists:
-         if tuple(pnl) == chord.numbers:
-            return True
-      return False
+#      for pnl in self._pitch_number_lists:
+#         if tuple(pnl) == chord.numbers:
+#            return True
+#      return False
+      return chord in self._pitch_number_lists
 
    def __getitem__(self, i):
       return self._pitch_number_lists[i]
@@ -40,13 +44,13 @@ class Constellation(object):
    def _color_map(self):
       pitches = self._partitioned_generator_pnl
       colors = ['red', 'blue', 'green']
-      return pitchtools.NumericPitchClassColorMap(pitches, colors)
+      return pitchtools.NumberedChromaticPitchClassColorMap(pitches, colors)
 
    @property
    def _colored_generator(self):
-      generator = self.generator
-      chordtools.color_chord_note_heads_by_numeric_pitch_class(generator, self._color_map)
-      return generator
+      generator_chord = self.generator_chord
+      chordtools.color_chord_note_heads_by_pitch_class_color_map(generator_chord, self._color_map)
+      return generator_chord
 
    @property
    def _constellation_number(self):
@@ -55,8 +59,8 @@ class Constellation(object):
       return constellation_number
 
    @property
-   def _generator_number(self):
-      return self.get_chord_number(self.generator)
+   def _generator_chord_number(self):
+      return self.get_number_of_chord(self.generator_chord)
 
    @property
    def _generator_pnl(self):
@@ -67,9 +71,9 @@ class Constellation(object):
       return self._advance(1)
 
    @property
-   def _pivot_number(self):
-      pivot = self.pivot
-      return self.get_chord_number(pivot)
+   def _pivot_chord_number(self):
+      pivot = self.pivot_chord
+      return self.get_number_of_chord(pivot)
 
    @property
    def _prev(self):
@@ -88,62 +92,82 @@ class Constellation(object):
       self._pitch_number_lists = constellate(self._partitioned_generator_pnl, self.pitch_range)
 
    def _label_chord(self, chord):
-      chord_number = self.get_chord_number(chord)
+      chord_number = self.get_number_of_chord(chord)
       label = '%s-%s' % (self._constellation_number, chord_number)
       #if not getattr(chord, '_already_ed', None):
       #   chord.markup.up.append(label)
       #   chord._already_labeled = True
       markuptools.Markup(label)(chord)
 
-   def _show_chords(self, chords):
+   def _make_lily_file_and_score_from_chords(self, chords):
       score, treble, bass = scoretools.make_piano_sketch_score_from_leaves(chords)
-      score.spacing.proportional_notation_duration = Fraction(1, 20)
-      score.lily_file.default_paper_size = 'letter', 'landscape'
-      score.lily_file.global_staff_size = 18
-      score.text.staff_padding = 10
-      show(score.lily_file)
+      score.override.text_script.staff_padding = 10
+      score.set.proportional_notation_duration = schemetools.SchemeMoment(1, 30)
+      lily_file = lilyfiletools.make_basic_lily_file(score)
+      lily_file.default_paper_size = 'letter', 'landscape'
+      lily_file.global_staff_size = 18
+      lily_file.layout_block.indent = 0
+      lily_file.layout_block.ragged_right = True
+      lily_file.paper_block.system_system_spacing = schemetools.SchemeVector(
+         schemetools.SchemePair('basic_distance', 0),
+         schemetools.SchemePair('minimum_distance', 0),
+         schemetools.SchemePair('padding', 12),
+         schemetools.SchemePair('stretchability', 0))
+      lily_file.paper_block.top_margin = 24
+      return lily_file, score
+
+#   def _show_chords(self, chords):
+#      score, treble, bass = scoretools.make_piano_sketch_score_from_leaves(chords)
+#      score.spacing.proportional_notation_duration = Fraction(1, 20)
+#      score.lily_file.default_paper_size = 'letter', 'landscape'
+#      score.lily_file.global_staff_size = 18
+#      score.text.staff_padding = 10
+#      show(score.lily_file)
+
+   def _show_chords(self, chords):
+      lily_file, score = self._make_lily_file_and_score_from_chords(chords)
+      iotools.show(lily_file)
 
    ## PUBLIC ATTRIBUTES ##
 
    @property
-   def generator(self):
-      pitch_numbers = self._generator_pnl
-      generator = Chord(pitch_numbers, (1, 4))
-      self._label_chord(generator)
-      return generator
+   def constellation_number(self):
+      return self._circuit._constellations.index(self) + 1
 
    @property
-   def number(self):
-      return self._circuit._constellations.index(self) + 1
+   def generator_chord(self):
+      pitch_numbers = self._generator_pnl
+      generator_chord = Chord(pitch_numbers, (1, 4))
+      self._label_chord(generator_chord)
+      return generator_chord
 
    @property
    def pitch_range(self):
       return self._circuit.pitch_range
 
    @property
-   def pivot(self):
+   def pivot_chord(self):
       next_pitch_number_list = self._next._generator_pnl
-      pivot = Chord(next_pitch_number_list, (1, 4))
-      self._label_chord(pivot)
-      return pivot
+      pivot_chord = Chord(next_pitch_number_list, (1, 4))
+      self._label_chord(pivot_chord)
+      return pivot_chord
 
    ## PUBLIC METHODS ##
 
-   ## Maybe should be named self.get_chord_number( ) ##
-   def get(self, chord_number):
+   def get_chord(self, chord_number):
       '''1-indexed chord number.'''
       assert 1 <= chord_number
       chord_index = chord_number - 1
       return self._pitch_number_lists[chord_index]
 
-   def get_chord_number(self, arg):
-      #arg_numbers = arg.numbers
-      arg_numbers = tuple([abs(x) for x in arg.pitches])
+   def get_number_of_chord(self, chord):
+      chord = Chord(chord, (1, 4))
+      chromatic_pitch_numbers = [x.chromatic_pitch_number for x in chord.pitches]
       for pnl_index, pnl in enumerate(self):
-         if tuple(pnl) == arg_numbers:
+         if pnl == chromatic_pitch_numbers:
             pnl_number = pnl_index + 1
             return pnl_number
-      raise ValueError('%s not in %s' % (arg, self))
+      raise ValueError('%s not in %s' % (chord, self))
 
    def make_chords(self):
       result = [ ]
@@ -161,34 +185,34 @@ class Constellation(object):
    def make_labeled_colored_chords(self):
       result = self.make_labeled_chords( )
       for chord in result:
-         chordtools.color_chord_note_heads_by_numeric_pitch_class(chord, self._color_map)
+         chordtools.color_chord_note_heads_by_pitch_class_color_map(chord, self._color_map)
       return result
 
-   def show_generator(self):
-      generator = self.generator
-      self._label_chord(generator)
-      self._show_chords([generator])
-
-   def show_generator_and_pivot(self):
-      generator = self.generator
-      self._label_chord(generator)
-      pivot = self.pivot
-      self._label_chord(pivot)
-      self._show_chords([generator, pivot])
-
-   def show_generator_colored(self):
+   def show_colored_generator_chord(self):
       colored_generator = self._colored_generator
       self._label_chord(colored_generator)
       self._show_chords([colored_generator])
 
-   def show_generator_colored_and_pivot(self):
+   def show_colored_generator_chord_and_pivot_chord(self):
       colored_generator = self._colored_generator
       self._label_chord(colored_generator)
-      pivot = self.pivot
+      pivot = self.pivot_chord
       self._label_chord(pivot)
       self._show_chords([colored_generator, pivot])
 
-   def show_pivot(self):
-      pivot = self.pivot
+   def show_generator_chord(self):
+      generator = self.generator_chord
+      self._label_chord(generator)
+      self._show_chords([generator])
+
+   def show_generator_chord_and_pivot_chord(self):
+      generator = self.generator_chord
+      self._label_chord(generator)
+      pivot = self.pivot_chord
+      self._label_chord(pivot)
+      self._show_chords([generator, pivot])
+
+   def show_pivot_chord(self):
+      pivot = self.pivot_chord
       self._label_chord(pivot)
       self._show_chords([pivot])

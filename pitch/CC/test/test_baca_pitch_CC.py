@@ -29,13 +29,13 @@ def test_baca_pitch_CC_02( ):
 def test_baca_pitch_CC_03( ):
    '''Test generator numbers.'''
 
-   assert baca.pitch.CC._generator_numbers == [80, 59, 56, 60, 83, 65, 79, 94]
+   assert baca.pitch.CC._generator_chord_numbers == [80, 59, 56, 60, 83, 65, 79, 94]
 
 
 def test_baca_pitch_CC_04( ):
    '''Test pivot numbers.'''
 
-   assert baca.pitch.CC._pivot_numbers == [80, 75, 60, 73, 117, 69, 108, 99]
+   assert baca.pitch.CC._pivot_chord_numbers == [80, 75, 60, 73, 117, 69, 108, 99]
 
 
 ## TEST PUBLIC METHODS ## 
@@ -53,7 +53,7 @@ def test_baca_pitch_CC_05( ):
    assert baca.pitch.CC.get(8) is baca.pitch.CC[7]
 
 
-def test_baca_pitch_baca_CC_04aab( ):
+def test_baca_pitch_CCaab( ):
    '''Test get signature two.'''
 
    assert baca.pitch.CC.get(1, 1) is baca.pitch.CC[0][0]
@@ -67,7 +67,7 @@ def test_baca_pitch_baca_CC_04aab( ):
 def test_baca_pitch_CC_06( ):
    '''Test generators.'''
    
-   assert baca.pitch.CC.generators == [
+   assert baca.pitch.CC.generator_chords == [
       Chord("<c d bf e' af' b' f'' g'' ef''' fs''' a''' cs''''>4"),
       Chord("<c d bf e' af' b' f'' g'' ef''' fs''' a''' cs''''>4"),
       Chord("<e b c' d' bf' ef'' af'' a'' cs''' f''' g''' fs''''>4"),
@@ -87,7 +87,7 @@ def test_baca_pitch_CC_07( ):
 def test_baca_pitch_CC_08( ):
    '''Test pivots.'''
 
-   assert baca.pitch.CC.pivots == [
+   assert baca.pitch.CC.pivot_chords == [
       Chord("<c d bf e' af' b' f'' g'' ef''' fs''' a''' cs''''>4"),
       Chord("<e b c' d' bf' ef'' af'' a'' cs''' f''' g''' fs''''>4"),
       Chord("<e c' d' bf' b' ef'' a'' cs''' af''' f'''' fs'''' g''''>4"),
