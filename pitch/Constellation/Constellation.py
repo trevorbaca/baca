@@ -116,14 +116,6 @@ class Constellation(object):
       lily_file.paper_block.top_margin = 24
       return lily_file, score
 
-#   def _show_chords(self, chords):
-#      score, treble, bass = scoretools.make_piano_sketch_score_from_leaves(chords)
-#      score.spacing.proportional_notation_duration = Fraction(1, 20)
-#      score.lily_file.default_paper_size = 'letter', 'landscape'
-#      score.lily_file.global_staff_size = 18
-#      score.text.staff_padding = 10
-#      show(score.lily_file)
-
    def _show_chords(self, chords):
       lily_file, score = self._make_lily_file_and_score_from_chords(chords)
       iotools.show(lily_file)
