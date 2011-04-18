@@ -54,7 +54,7 @@ def test_baca_pitch_CC_05( ):
    assert baca.pitch.CC.get(8) is baca.pitch.CC[7]
 
 
-def test_baca_pitch_CCaab( ):
+def test_baca_pitch_CCa06( ):
    '''Test get signature two.'''
 
    assert baca.pitch.CC.get(1, 1) is baca.pitch.CC[0][0]
@@ -65,7 +65,7 @@ def test_baca_pitch_CCaab( ):
 
 ## TEST PUBLIC ATTRIBUTES ##
 
-def test_baca_pitch_CC_06( ):
+def test_baca_pitch_CC_07( ):
    '''Test generators.'''
    
    staff = Staff(baca.pitch.CC.generator_chords)
@@ -86,13 +86,13 @@ def test_baca_pitch_CC_06( ):
    assert staff.format == "\\new Staff {\n\t<c d bf e' af' b' f'' g'' ef''' fs''' a''' cs''''>4 \\markup { 1-80 }\n\t<c d bf e' af' b' f'' g'' ef''' fs''' a''' cs''''>4 \\markup { 2-59 }\n\t<e b c' d' bf' ef'' af'' a'' cs''' f''' g''' fs''''>4 \\markup { 3-56 }\n\t<e c' d' bf' b' ef'' a'' cs''' af''' f'''' fs'''' g''''>4 \\markup { 4-60 }\n\t<c ef b cs' e' d'' fs'' g'' af'' bf'' f''' a'''>4 \\markup { 5-83 }\n\t<d g bf c' ef' f' b' cs'' e'' fs''' af''' a''''>4 \\markup { 6-65 }\n\t<d bf b c' f' g' ef'' fs'' af'' cs''' e''' a'''>4 \\markup { 7-79 }\n\t<c b d' g' bf' e'' f'' fs'' af'' a'' ef''' cs''''>4 \\markup { 8-94 }\n}"
 
 
-def test_baca_pitch_CC_07( ):
+def test_baca_pitch_CC_08( ):
    '''Test pitch range.'''
 
    assert baca.pitch.CC.pitch_range == pitchtools.PitchRange(-39, 48)
 
 
-def test_baca_pitch_CC_08( ):
+def test_baca_pitch_CC_09( ):
    '''Test pivots.'''
 
    staff = Staff(baca.pitch.CC.pivot_chords)
