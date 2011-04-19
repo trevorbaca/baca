@@ -2,7 +2,7 @@ from abjad.tools import mathtools
 from abjad.tools import seqtools
 
 
-class W(object):
+class W(seqtools.Matrix):
    '''W-rhythm::
 
       abjad> baca.rhythm.W((10, 8), (3, 3, 6, 10), 3)
@@ -10,16 +10,9 @@ class W(object):
    '''
 
    def __init__(self, measure_numerators, talea, n_voices):
-      self._measures = self._make_nested_measure_lists(measure_numerators, talea, n_voices)
-      self._voices = self._make_nested_voice_lists( )
-
-   ## OVERLOADS ##
-
-   def __repr__(self):
-      voices = self.voices
-      n_voices = len(voices)
-      n_measures = len(voices[0])
-      return '%s(%sx%s)' % (self.__class__.__name__, n_voices, n_measures)
+      measures = self._measures = self._make_nested_measure_lists(
+         measure_numerators, talea, n_voices)
+      seqtools.Matrix.__init__(self, columns = measures)
 
    ## PRIVATE METHODS ##
 
@@ -43,15 +36,6 @@ class W(object):
       all_measure_divisions = seqtools.partition_sequence_cyclically_by_counts_with_overhang(*args)
       return all_measure_divisions
 
-   def _make_nested_voice_lists(self):
-      voices = [ ]
-      measures = self.measures
-      n_voices = len(measures[0])
-      for voice_index in range(n_voices):
-         voice = [measure[voice_index] for measure in measures]
-         voices.append(voice)
-      return voices
-
    ## PUBLIC ATTRIBUTES ##
 
    @property
@@ -64,7 +48,7 @@ class W(object):
 
       Return list of lists.
       '''
-      return self._measures
+      return self._columns
 
    @property
    def voices(self):
@@ -76,4 +60,4 @@ class W(object):
 
       Return list of lists.
       '''
-      return self._voices
+      return self._rows
