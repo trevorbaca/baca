@@ -13,5 +13,5 @@ if __name__ == '__main__':
    output = %s( )
    output = pprint.pformat(output)
    output = '%s = %%s' %% output 
-   baca.utilities.cache_output(output, '%s', __file__)
+   baca.util.cache_output(output, '%s', __file__)
    print \'\''''
