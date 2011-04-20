@@ -1,7 +1,3 @@
-import os
+from abjad.tools.importtools._import_structured_package import _import_structured_package
 
-for name in os.listdir(__path__[0]):
-   if os.path.isdir(os.path.join(__path__[0], name)):
-      if name[0].isupper( ):
-         command = 'from %s import *' % name
-         exec(command)
+_import_structured_package(__path__[0], globals( ), 'baca')

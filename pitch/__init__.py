@@ -1,7 +1,8 @@
-from abjad.tools.importtools._import_public_names_from_path_into_namespace import _import_public_names_from_path_into_namespace
+from abjad.tools.importtools._import_structured_package import _import_structured_package
 
-_import_public_names_from_path_into_namespace(__path__[0], globals( ), 'baca')
+_import_structured_package(__path__[0], globals( ), 'baca')
 
+## must be done manually because C, CC, D are neither functions nor classes
 from C import C
 from CC import CC
 from D import D
