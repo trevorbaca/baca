@@ -1,3 +1,4 @@
+from abjad.tools import durtools
 from abjad.tools import seqtools
 from baca.rhythm.kaleids._RhythmicKaleid import _RhythmicKaleid
 import types
@@ -24,7 +25,10 @@ class MultitupletSignalInjection(_RhythmicKaleid):
 
    ## OVERLOADS ##
 
-   def __call__(self, duration_pairs):
+   def __call__(self, duration_tokens, seeds = None):
       '''Make rhythm from duration pairs.
       '''
-      pass
+      duration_pairs = [durtools.duration_token_to_duration_pair(token) for token in duration_tokens]
+      if seeds is None:
+         seeds = [ ]
+      return [ ]
