@@ -3,8 +3,7 @@ from baca.rhythm.kaleids._RhythmicKaleid import _RhythmicKaleid
 import types
 
 
-## TODO: rename to MultitupletSignalInjection
-class MultitupletCoruscation(_RhythmicKaleid):
+class MultitupletSignalInjection(_RhythmicKaleid):
    '''Multituplet coruscation maker.
    '''
 
