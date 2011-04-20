@@ -1,0 +1,3 @@
+class MultitupletCoruscation(object):
+
+   pass
