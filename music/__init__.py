@@ -1,16 +1,3 @@
-'''Music-generation functions used in Cary and Sekka.'''
+from abjad.tools.importtools._import_public_names_from_path_into_namespace import _import_public_names_from_path_into_namespace
 
-
-import music
-import types
-
-for key, value in music.__dict__.items( ):
-   if isinstance(value, types.FunctionType):
-      locals( )[key] = value
-
-del key
-del music
-del types
-del value
-
-from repeat_subruns_cyclic import repeat_subruns_cyclic
+_import_public_names_from_path_into_namespace(__path__[0], globals( ), 'baca')
