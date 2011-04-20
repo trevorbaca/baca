@@ -14,7 +14,7 @@ from abjad.tools import skiptools
 from abjad.tools import spannertools
 from abjad.tools import tietools
 from abjad.tools import tuplettools
-from baca import utilities
+from baca import util
 from fractions import Fraction
 import copy
 import math
@@ -464,18 +464,18 @@ def stellate(k, s, t, d, b, span ='from duration', rests = True):
 
    debug = False
 
-   prolation = utilities.helianthate(s, 1, 1)
+   prolation = util.helianthate(s, 1, 1)
    numerators = seqtools.increase_sequence_elements_cyclically_by_addenda(k, prolation)
-   mask = utilities.helianthate(t, 1, 1)
+   mask = util.helianthate(t, 1, 1)
    mask = seqtools.repeat_to_weight(mask, mathtools.weight(numerators))
-   mask = utilities.replace_nested_elements_with_unary_subruns(mask)
+   mask = util.replace_nested_elements_with_unary_subruns(mask)
    #signatures = partition(
    #   mask, numerators, mode = 'weight', overhang = 'true', action = 'new')
    signatures = seqtools.split_sequence_once_by_weights_with_overhang(mask, numerators)
    for i, signature in enumerate(signatures):
       if signature == [1]:
          signatures[i] = [-1]
-   signatures = utilities.partition_nested_into_canonic_parts(signatures)
+   signatures = util.partition_nested_into_canonic_parts(signatures)
 
    if not rests:
       part_counts = [len(x) for x in signatures]
@@ -543,12 +543,12 @@ def coruscate(n, s, t, z, d, rests = True):
    #from beamtools import beamRunsByDuration
 
    # zero-valued signals not allowed
-   signal = utilities.helianthate(n, 1, 1)
+   signal = util.helianthate(n, 1, 1)
    assert all(signal)
 
-   cut = utilities.helianthate(s, 1, 1)
+   cut = util.helianthate(s, 1, 1)
 
-   dilation = utilities.helianthate(z, 1, 1)
+   dilation = util.helianthate(z, 1, 1)
    fit = seqtools.increase_sequence_elements_cyclically_by_addenda(t, dilation)
 
    j = 0
@@ -566,7 +566,7 @@ def coruscate(n, s, t, z, d, rests = True):
       signatures.append(new)
    def helper(x): return list(seqtools.sum_consecutive_sequence_elements_by_sign(x, sign = [-1]))
    signatures = [helper(signature) for signature in signatures]
-   signatures = utilities.partition_nested_into_canonic_parts(signatures)
+   signatures = util.partition_nested_into_canonic_parts(signatures)
 
    if not rests:
       part_counts = [len(x) for x in signatures]

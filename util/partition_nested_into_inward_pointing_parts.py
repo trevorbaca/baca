@@ -6,20 +6,20 @@ def partition_nested_into_inward_pointing_parts(l, target = 'negative'):
    inward-pointing orientation.
 
    abjad> l = [[1, 1, 5]]
-   abjad> utilities.partition_nested_into_inward_pointing_parts(l)
+   abjad> util.partition_nested_into_inward_pointing_parts(l)
    [[1, 1, 5]]
 
    abjad> l = [[1, 1, -5]]
-   abjad> utilities.partition_nested_into_inward_pointing_parts(l)
+   abjad> util.partition_nested_into_inward_pointing_parts(l)
    [[1, 1, 1, -4]]
 
    abjad> l = [[1], [5], [5, 1], [1, 5], [5, 5], [1, 5, 1]]
-   abjad> utilities.partition_nested_into_inward_pointing_parts(
+   abjad> util.partition_nested_into_inward_pointing_parts(
       l, target = 'positive')
    [[1], [4, 1], [4, 1, 1], [1, 1, 4], [4, 1, 1, 4], [1, 4, 1, 1]]
 
    abjad> l = [[1, 1, -5]]
-   abjad> utilities.partition_nested_into_inward_pointing_parts(
+   abjad> util.partition_nested_into_inward_pointing_parts(
       l, target = 'positive')
    [[1, 1, -5]]
    '''

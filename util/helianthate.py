@@ -1,6 +1,6 @@
 from abjad.components._Component import _Component
 from abjad.tools import seqtools
-from baca.utilities.rotate_nested import rotate_nested
+from baca.util.rotate_nested import rotate_nested
 
 
 def helianthate(l, outer, inner, flattened = True):
@@ -8,13 +8,13 @@ def helianthate(l, outer, inner, flattened = True):
    and accumulate results until identity.
 
    abjad> l = [[1, 2, 3], [4, 5], [6, 7, 8]]
-   abjad> utilities.helianthate(l, -1, 1)
+   abjad> util.helianthate(l, -1, 1)
    [1, 2, 3, 4, 5, 6, 7, 8, 5, 4, 8, 6, 7, 3, 1, 2, 7, 8,
       6, 2, 3, 1, 4, 5, 1, 2, 3, 5, 4, 6, 7, 8, 4, 5, 8, 6, 7, 3, 1,
       2, 7, 8, 6, 2, 3, 1, 5, 4]
 
    abjad> l = [[1, 2, 3], [4, 5], [6, 7, 8]]
-   abjad> utilities.helianthate(l, -1, 1, flattened = False)
+   abjad> util.helianthate(l, -1, 1, flattened = False)
    [[1, 2, 3], [4, 5], [6, 7, 8], [5, 4], [8, 6, 7], [3, 1, 2], [7, 8, 6], 
       [2, 3, 1], [4, 5], [1, 2, 3], [5, 4], [6, 7, 8], [4, 5], [8, 6, 7], 
       [3, 1, 2], [7, 8, 6], [2, 3, 1], [5, 4]]

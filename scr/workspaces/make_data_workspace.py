@@ -45,7 +45,7 @@ def make_data_workspace(parent_directory, workspace_name):
    helpers_init_contents = 'import baca\n'
    helpers_init_contents += '\n'
    helpers_init_contents += \
-      'baca.utilities.import_public_functions(__file__, globals( ))\n'
+      'baca.util.import_public_functions(__file__, globals( ))\n'
    helpers_init_contents += 'del baca'
 
    ## write helpers init

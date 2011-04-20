@@ -3,19 +3,19 @@ from abjad.tools import mathtools
 
 def partition_nested_into_canonic_parts(expr):
    '''
-   abjad> utilities.partition_nested_into_canonic_parts(41)
+   abjad> util.partition_nested_into_canonic_parts(41)
    (32, 8, 1)
 
-   abjad> utilities.partition_nested_into_canonic_parts(-41)
+   abjad> util.partition_nested_into_canonic_parts(-41)
    (-32, -8, -1)
 
-   abjad> utilities.partition_nested_into_canonic_parts([2, 3, 9, 41])
+   abjad> util.partition_nested_into_canonic_parts([2, 3, 9, 41])
    [2, 3, 8, 1, 32, 8, 1]
 
-   abjad> utilities.partition_nested_into_canonic_parts([-2, -3, -9, -41])
+   abjad> util.partition_nested_into_canonic_parts([-2, -3, -9, -41])
    [-2, -3, -8, -1, -32, -8, -1]
 
-   abjad> utilities.partition_nested_into_canonic_parts([2, [3, 9], 41])
+   abjad> util.partition_nested_into_canonic_parts([2, [3, 9], 41])
    [2, [3, 8, 1], 32, 8, 1]
    '''
 

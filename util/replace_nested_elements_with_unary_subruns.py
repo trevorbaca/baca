@@ -4,17 +4,17 @@ def replace_nested_elements_with_unary_subruns(l):
    flat or nested w.
 
    >>> l = [1, 2, 2, -4]
-   >>> utilities.replace_nested_elements_with_unary_subruns(l)
+   >>> util.replace_nested_elements_with_unary_subruns(l)
    [1, 1, 1, 1, 1, -4]
 
-   >>> utilities.replace_nested_elements_with_unary_subruns(l, target = 'negatives')
+   >>> util.replace_nested_elements_with_unary_subruns(l, target = 'negatives')
    [1, 2, 2, -1, -1, -1, -1]
 
-   >>> utilities.replace_nested_elements_with_unary_subruns(l, target = 'all')
+   >>> util.replace_nested_elements_with_unary_subruns(l, target = 'all')
    [1, 1, 1, 1, 1, -1, -1, -1, -1]
 
    >>> w = [[1, 3, -4], [1, 2, -2, -4]]
-   >>> utilities.replace_nested_elements_with_unary_subruns(w)
+   >>> util.replace_nested_elements_with_unary_subruns(w)
    [[1, 1, 1, 1, -4], [1, 1, 1, -2, -4]]
    '''
 
@@ -23,7 +23,7 @@ def replace_nested_elements_with_unary_subruns(l):
 #   # two-dimensional w
 #   if isinstance(w[0], list):
 #      for sublist in w:
-#         result.append(utilities.replace_nested_elements_with_unary_subruns(sublist, target = target))
+#         result.append(util.replace_nested_elements_with_unary_subruns(sublist, target = target))
 #   # one-dimensional w
 #   else:
 #      for element in reversed(w):

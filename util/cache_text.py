@@ -1,4 +1,4 @@
-from baca.utilities.get_parent_directory import get_parent_directory
+from baca.util.get_parent_directory import get_parent_directory
 import os
 
 

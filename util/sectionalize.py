@@ -4,13 +4,13 @@ from abjad.tools import seqtools
 
 def sectionalize(n, ratio):
    '''
-   >>> utilities.sectionalize(20, (1, 1, 1))
+   >>> util.sectionalize(20, (1, 1, 1))
    [6, 1, 6, 1, 6]
 
-   >>> utilities.sectionalize(97, (1, 1, 1))
+   >>> util.sectionalize(97, (1, 1, 1))
    [32, 1, 31, 1, 32]
 
-   >>> utilities.sectionalize(97, (1, 1, 2))
+   >>> util.sectionalize(97, (1, 1, 2))
    [24, 1, 24, 1, 47]
    '''
 

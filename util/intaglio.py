@@ -5,31 +5,31 @@ from abjad.tools import seqtools
 def intaglio(l, s, t = 1):
    '''Repeat s and weight-partition according to l.
 
-   abjad> utilities.intaglio([3, 5, 10, 10], [4])
+   abjad> util.intaglio([3, 5, 10, 10], [4])
    [[3], [1, 4], [4, 4, 2], [2, 4, 4]]
 
-   abjad> utilities.intaglio([3, 5, 10, 10], [5])
+   abjad> util.intaglio([3, 5, 10, 10], [5])
    [[3], [2, 3], [2, 5, 3], [2, 5, 3]]
 
-   abjad> utilities.intaglio([3, 5, 5, 10, 10], [4, 5])
+   abjad> util.intaglio([3, 5, 5, 10, 10], [4, 5])
    [[3], [1, 4], [1, 4], [5, 4, 1], [4, 4, 2]]
 
    Negative values work fine in s.
 
-   abjad> utilities.intaglio([3, 5, 10, 10], [4, -5])
+   abjad> util.intaglio([3, 5, 10, 10], [4, -5])
    [[3], [1, -4], [-1, 4, -5], [4, -5, 1]]
 
    Optional t gloms light-weight sublists.
 
-   abjad> utilities.intaglio([3, 5, 6, 6], [1])
+   abjad> util.intaglio([3, 5, 6, 6], [1])
    [[1, 1, 1], [1, 1, 1, 1, 1], [1, 1, 1, 1, 1, 1], [1, 1, 1, 1, 1, 1]]
 
-   abjad> utilities.intaglio([3, 5, 6, 6], [1], t = 5)
+   abjad> util.intaglio([3, 5, 6, 6], [1], t = 5)
    [[3], [5], [1, 1, 1, 1, 1, 1], [1, 1, 1, 1, 1, 1]]
 
    Large values of t glom all sublists.
 
-   abjad> utilities.intaglio([3, 5, 6, 6], [1], t = 99)
+   abjad> util.intaglio([3, 5, 6, 6], [1], t = 99)
    [[3], [5], [6], [6]]
    '''
 

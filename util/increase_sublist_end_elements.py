@@ -14,7 +14,7 @@ def increase_sublist_end_elements(l, s):
    Any middle elements in the sublists of l are left untouched.
 
    abjad> l = [[2, 2, 2], [2, 2], [2, 2, 2]]     
-   abjad> utilities.increase_sublist_end_elements(l, [1, 5, 10])
+   abjad> util.increase_sublist_end_elements(l, [1, 5, 10])
    [[12, 2, 7], [3, 12], [7, 2, 3]]
 
    Note too that there is special handling of 1-element sublists in l:
