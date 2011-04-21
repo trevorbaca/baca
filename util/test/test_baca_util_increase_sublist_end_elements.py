@@ -1,7 +1,7 @@
 from baca import util
 
 
-def test_baca_increase_sublist_end_elements_01( ):
+def test_baca_util_increase_sublist_end_elements_01( ):
 
    l = [[2, 2, 2, 2], [2, 2], [2, 2, 2]]
    t = util.increase_sublist_end_elements(l, [1, 5, 10])
