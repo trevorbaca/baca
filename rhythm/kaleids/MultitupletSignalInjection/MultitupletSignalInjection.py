@@ -30,7 +30,7 @@ class MultitupletSignalInjection(_RhythmicKaleid):
    def __call__(self, duration_tokens, seeds):
       '''Make rhythm from duration pairs.
       '''
-      duration_pairs = self._duration_tokens_to_duration_pairs(duration_tokens)
+      duration_pairs = durtools.duration_tokens_to_duration_pairs(duration_tokens)
       tuplet_counts = self._tuplet_counts_inspector(duration_pairs, seeds)
       prolation_addenda = self._prolation_addenda_inspector(duration_pairs, seeds)
       note_values = self._note_values_inspector(duration_pairs, seeds)
