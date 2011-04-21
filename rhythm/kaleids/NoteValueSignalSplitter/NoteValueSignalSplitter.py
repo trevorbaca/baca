@@ -161,6 +161,7 @@ class NoteValueSignalSplitter(_RhythmicKaleid):
 
    def _split_scaled_note_value_signal_extended_to_duration_tokens(
       self, scaled_note_value_signal, denominator_of_scaled_signal, duration_tokens):
+      duration_tokens = duration_tokens[:]
       dummy_duration_token = Fraction(1, denominator_of_scaled_signal)
       duration_tokens.append(dummy_duration_token)
       duration_pairs = durtools.duration_tokens_to_duration_pairs_with_least_common_denominator(duration_tokens)
