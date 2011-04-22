@@ -118,13 +118,21 @@ class NoteValueSignalSplitter(_RhythmicKaleid):
       self._denominator_of_signal = denominator_of_signal
       self._note_value_signal = seqtools.CyclicTuple(note_value_signal)
       self._note_value_signal_preprocessor = note_value_signal_preprocessor
-      self._ellipsized_signal = self._sequence_to_ellipsized_string(self._note_value_signal)
+      self._ellipsized_note_valu_signal = self._sequence_to_ellipsized_string(self._note_value_signal)
 
    ## OVERLOADS ##
 
    def __call__(self, duration_tokens, seeds):
-      '''Make rhythm from duration pairs.
-      '''
+      leaf_lists = self._make_everything(duration_tokens, seeds)
+      return leaf_lists
+
+   def __repr__(self):
+      return '%s(%s)' % (self.__class__.__name__, self._ellipsized_note_value_signal)
+
+   ## PRIVATE METHODS ##
+
+   ## TODO: rename function to show that it is a wrapper around other high-level method calls
+   def _make_everything(self, duration_tokens, seeds):
       preprocessed_note_value_signal = self._note_value_signal_preprocessor(self._note_value_signal, seeds)
       scaled_note_value_signal, denominator_of_scaled_signal = self._scale_note_value_signal(
          preprocessed_note_value_signal, duration_tokens)
@@ -133,11 +141,6 @@ class NoteValueSignalSplitter(_RhythmicKaleid):
       leaf_lists = self._make_leaf_lists(split_and_scaled_note_value_signal, denominator_of_scaled_signal)
       tietools.remove_tie_spanners_from_components_in_expr(leaf_lists)
       return leaf_lists
-
-   def __repr__(self):
-      return '%s(%s)' % (self.__class__.__name__, self._ellipsized_signal)
-
-   ## PRIVATE METHODS ##
 
    def _make_leaf_lists(self, note_value_signal_lists, denominator_of_signal):
       result = [ ]
