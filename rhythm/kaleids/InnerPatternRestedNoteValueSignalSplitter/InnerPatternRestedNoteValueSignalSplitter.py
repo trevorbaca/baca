@@ -4,8 +4,8 @@ from baca.rhythm.kaleids._PatternRestedNoteValueSignalSplitter import _PatternRe
 import types
 
 
-class OuterPatternRestedNoteValueSignalSplitter(_PatternRestedNoteValueSignalSplitter):
-   '''Outer-rested note-value signal splitter.
+class InnerPatternRestedNoteValueSignalSplitter(_PatternRestedNoteValueSignalSplitter):
+   '''Inner-rested note-value signal splitter.
 
    See the test file for examples.
 
@@ -20,8 +20,8 @@ class OuterPatternRestedNoteValueSignalSplitter(_PatternRestedNoteValueSignalSpl
       rested_note_value_signal = [ ]
       for part in partitioned_note_value_signal:
          rested_part = list(part)
-         rested_part[0] = -abs(rested_part[0])
-         rested_part[-1] = -abs(rested_part[-1])
+         if 3 <= len(part):
+            rested_part[1:-1] = [-abs(x) for x in rested_part[1:-1]]
          rested_note_value_signal.append(rested_part)
       rested_note_value_signal = seqtools.flatten_sequence(rested_note_value_signal)
       return rested_note_value_signal
