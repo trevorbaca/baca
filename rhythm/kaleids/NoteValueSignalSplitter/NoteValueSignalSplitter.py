@@ -34,7 +34,8 @@ class NoteValueSignalSplitter(_RhythmicKaleid):
    ## OVERLOADS ##
 
    def __call__(self, duration_tokens, seeds):
-      leaf_lists = self._make_everything(duration_tokens, seeds)
+      note_value_signal = self._note_value_signal_preprocessor(self._note_value_signal, seeds)
+      leaf_lists = self._make_everything(note_value_signal, duration_tokens, seeds)
       return leaf_lists
 
    def __repr__(self):
@@ -43,11 +44,9 @@ class NoteValueSignalSplitter(_RhythmicKaleid):
    ## PRIVATE METHODS ##
 
    ## TODO: rename function to show that it is a wrapper around other high-level method calls
-   def _make_everything(self, duration_tokens, seeds):
-      preprocessed_note_value_signal = self._note_value_signal_preprocessor(
-         self._note_value_signal, seeds)
+   def _make_everything(self, note_value_signal, duration_tokens, seeds):
       scaled_note_value_signal, denominator_of_scaled_signal = self._scale_note_value_signal(
-         preprocessed_note_value_signal, duration_tokens)
+         note_value_signal, duration_tokens)
       split_and_scaled_note_value_signal = \
          self._split_scaled_note_value_signal_extended_to_duration_tokens(
          scaled_note_value_signal, denominator_of_scaled_signal, duration_tokens)

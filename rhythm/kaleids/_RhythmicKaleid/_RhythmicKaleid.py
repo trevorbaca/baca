@@ -16,6 +16,7 @@ class _RhythmicKaleid(object):
       result = ', '.join([str(x) for x in sequence[:4]])
       if 4 < len(sequence):
          result += ', ...'
+      result = '[%s]' % result
       return result
 
    def _trivial_signal_preprocessor(self, signal, seeds):

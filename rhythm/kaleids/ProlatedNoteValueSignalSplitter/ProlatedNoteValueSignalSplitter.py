@@ -35,7 +35,8 @@ class ProlatedNoteValueSignalSplitter(NoteValueSignalSplitter):
       prolation_addenda = self._calculate_prolation_addenda(duration_pairs, seeds)
       prolated_duration_pairs = self._make_prolated_duration_pairs(
          duration_pairs, prolation_addenda)
-      leaf_lists = self._make_everything(prolated_duration_pairs, seeds)
+      note_value_signal = self._note_value_signal_preprocessor(self._note_value_signal, seeds)
+      leaf_lists = self._make_everything(note_value_signal, prolated_duration_pairs, seeds)
       tuplets = self._make_tuplets(duration_pairs, leaf_lists)
       return tuplets
 
