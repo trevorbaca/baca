@@ -11,37 +11,6 @@ def signal_preprocessor(signal, seeds):
 
 
 def test_baca_rhythm_kaleids_NoteValueSignalSplitter_01( ):
-   '''Split coarse signal.
-   '''
-
-   signal, denominator_of_signal = [-1, 5], 4
-   splitter = NoteValueSignalSplitter(signal, denominator_of_signal, signal_preprocessor)
-
-   duration_pairs = [(2, 8), (5, 8)]
-   leaf_lists = splitter(duration_pairs, [0, 0])
-   leaves = seqtools.flatten_sequence(leaf_lists)
-
-   staff = Staff(measuretools.make_measures_with_full_measure_spacer_skips(duration_pairs))
-   measuretools.replace_contents_of_measures_in_expr(staff, leaves)
-
-   r'''
-   \new Staff {
-      {
-         \time 2/8
-         r4
-      }
-      {
-         \time 5/8
-         c'2
-         c'8
-      }
-   }
-   '''
-
-   assert staff.format == "\\new Staff {\n\t{\n\t\t\\time 2/8\n\t\tr4\n\t}\n\t{\n\t\t\\time 5/8\n\t\tc'2\n\t\tc'8\n\t}\n}"
-
-
-def test_baca_rhythm_kaleids_NoteValueSignalSplitter_02( ):
    '''Split fine signal.
    '''
 
@@ -75,3 +44,34 @@ def test_baca_rhythm_kaleids_NoteValueSignalSplitter_02( ):
    '''
 
    assert staff.format == "\\new Staff {\n\t{\n\t\t\\time 2/8\n\t\tr16\n\t\tc'8.\n\t}\n\t{\n\t\t\\time 5/8\n\t\tc'8\n\t\tr16\n\t\tc'4\n\t\tc'16\n\t\tr16\n\t\tc'16\n\t}\n}"
+
+
+def test_baca_rhythm_kaleids_NoteValueSignalSplitter_02( ):
+   '''Split coarse signal.
+   '''
+
+   signal, denominator_of_signal = [-1, 5], 4
+   splitter = NoteValueSignalSplitter(signal, denominator_of_signal, signal_preprocessor)
+
+   duration_pairs = [(2, 8), (5, 8)]
+   leaf_lists = splitter(duration_pairs, [0, 0])
+   leaves = seqtools.flatten_sequence(leaf_lists)
+
+   staff = Staff(measuretools.make_measures_with_full_measure_spacer_skips(duration_pairs))
+   measuretools.replace_contents_of_measures_in_expr(staff, leaves)
+
+   r'''
+   \new Staff {
+      {
+         \time 2/8
+         r4
+      }
+      {
+         \time 5/8
+         c'2
+         c'8
+      }
+   }
+   '''
+
+   assert staff.format == "\\new Staff {\n\t{\n\t\t\\time 2/8\n\t\tr4\n\t}\n\t{\n\t\t\\time 5/8\n\t\tc'2\n\t\tc'8\n\t}\n}"

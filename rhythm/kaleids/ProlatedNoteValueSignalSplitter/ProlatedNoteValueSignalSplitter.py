@@ -29,7 +29,9 @@ class ProlatedNoteValueSignalSplitter(NoteValueSignalSplitter):
       
    ## OVERLOADS ##
 
-   def __call__(self, duration_tokens, seeds):
+   def __call__(self, duration_tokens, seeds = None):
+      if seeds is None:
+         seeds = [ ]
       duration_pairs = durtools.duration_tokens_to_duration_pairs(duration_tokens)
       prolation_addenda = self._calculate_prolation_addenda(duration_pairs, seeds)
       prolated_duration_pairs = self._make_prolated_duration_pairs(

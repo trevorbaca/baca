@@ -33,7 +33,9 @@ class NoteValueSignalSplitter(_RhythmicKaleid):
 
    ## OVERLOADS ##
 
-   def __call__(self, duration_tokens, seeds):
+   def __call__(self, duration_tokens, seeds = None):
+      if seeds is None:
+         seeds = [ ]
       note_value_signal = self._note_value_signal_preprocessor(self._note_value_signal, seeds)
       leaf_lists = self._make_everything(note_value_signal, duration_tokens, seeds)
       return leaf_lists

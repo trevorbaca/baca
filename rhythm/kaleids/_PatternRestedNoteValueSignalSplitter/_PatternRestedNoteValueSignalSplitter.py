@@ -28,7 +28,9 @@ class _PatternRestedNoteValueSignalSplitter(NoteValueSignalSplitter):
 
    ## OVERLOADS ##
 
-   def __call__(self, duration_tokens, seeds):
+   def __call__(self, duration_tokens, seeds = None):
+      if seeds is None:
+         seeds = [ ]
       rested_note_value_signal = self._rest_note_value_signal(seeds)
       leaf_lists = self._make_everything(rested_note_value_signal, duration_tokens, seeds)
       return leaf_lists
