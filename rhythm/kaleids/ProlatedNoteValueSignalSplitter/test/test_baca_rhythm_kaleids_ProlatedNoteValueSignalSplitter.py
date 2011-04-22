@@ -10,7 +10,7 @@ def test_baca_rhythm_kaleids_ProlatedNoteValueSignalSplitter_01( ):
    prolated_splitter = ProlatedNoteValueSignalSplitter(nvs, denominator, prolation)
 
    duration_pairs = [(2, 8), (5, 8)]
-   tuplets = prolated_splitter(duration_pairs, [0, 0])
+   tuplets = prolated_splitter(duration_pairs)
 
    staff = Staff(measuretools.make_measures_with_full_measure_spacer_skips(duration_pairs))
    measuretools.replace_contents_of_measures_in_expr(staff, tuplets)
@@ -49,7 +49,7 @@ def test_baca_rhythm_kaleids_ProlatedNoteValueSignalSplitter_02( ):
    prolated_splitter = ProlatedNoteValueSignalSplitter(nvs, denominator, prolation)
 
    duration_pairs = [(2, 8), (5, 8)]
-   tuplets = prolated_splitter(duration_pairs, [ ])
+   tuplets = prolated_splitter(duration_pairs)
 
    staff = Staff(measuretools.make_measures_with_full_measure_spacer_skips(duration_pairs))
    measuretools.replace_contents_of_measures_in_expr(staff, tuplets)

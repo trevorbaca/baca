@@ -9,8 +9,8 @@ def test_baca_kaleids_LeftPatternRestedNoteValueSignalSplitter_01( ):
    nvs, denominator, rs = [1], 16, [4]
    rested_splitter = LeftPatternRestedNoteValueSignalSplitter(nvs, denominator, rs)
 
-   duration_tokens, seeds = [(3, 16), (3, 8)], [ ]
-   leaf_lists = rested_splitter(duration_tokens, seeds)
+   duration_tokens = [(3, 16), (3, 8)]
+   leaf_lists = rested_splitter(duration_tokens)
    leaves = seqtools.flatten_sequence(leaf_lists)
 
    staff = Staff(measuretools.make_measures_with_full_measure_spacer_skips(duration_tokens))
@@ -46,8 +46,8 @@ def test_baca_kaleids_LeftPatternRestedNoteValueSignalSplitter_02( ):
    nvs, denominator, rs = [1], 4, [4]
    rested_splitter = LeftPatternRestedNoteValueSignalSplitter(nvs, denominator, rs)
 
-   duration_tokens, seeds = [(3, 16), (3, 8)], [ ]
-   leaf_lists = rested_splitter(duration_tokens, seeds)
+   duration_tokens = [(3, 16), (3, 8)]
+   leaf_lists = rested_splitter(duration_tokens)
    leaves = seqtools.flatten_sequence(leaf_lists)
 
    staff = Staff(measuretools.make_measures_with_full_measure_spacer_skips(duration_tokens))
