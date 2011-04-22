@@ -4,7 +4,7 @@ from baca.rhythm.kaleids.NoteValueSignalSplitter import NoteValueSignalSplitter
 import types
 
 
-class LeftRestedNoteValueSignalSplitter(NoteValueSignalSplitter):
+class LeftPatternRestedNoteValueSignalSplitter(NoteValueSignalSplitter):
    '''Left-rested note-value signal splitter.
 
    See the test file for examples.

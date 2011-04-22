@@ -2,12 +2,12 @@ from abjad import *
 from baca.rhythm.kaleids import *
 
 
-def test_baca_kaleids_LeftRestedNoteValueSignalSplitter_01( ):
+def test_baca_kaleids_LeftPatternRestedNoteValueSignalSplitter_01( ):
    '''Corase note-value signal.
    '''
 
    nvs, denominator, rs = [1], 4, [4]
-   rested_splitter = LeftRestedNoteValueSignalSplitter(nvs, denominator, rs)
+   rested_splitter = LeftPatternRestedNoteValueSignalSplitter(nvs, denominator, rs)
 
    duration_tokens, seeds = [(3, 16), (3, 8)], [ ]
    leaf_lists = rested_splitter(duration_tokens, seeds)
@@ -34,12 +34,12 @@ def test_baca_kaleids_LeftRestedNoteValueSignalSplitter_01( ):
    assert staff.format == "\\new Staff {\n\t{\n\t\t\\time 3/16\n\t\tr8.\n\t}\n\t{\n\t\t\\time 3/8\n\t\tr16\n\t\tc'4\n\t\tc'16\n\t}\n}"
 
 
-def test_baca_kaleids_LeftRestedNoteValueSignalSplitter_02( ):
+def test_baca_kaleids_LeftPatternRestedNoteValueSignalSplitter_02( ):
    '''Fine note-value signal.
    '''
 
    nvs, denominator, rs = [1], 16, [4]
-   rested_splitter = LeftRestedNoteValueSignalSplitter(nvs, denominator, rs)
+   rested_splitter = LeftPatternRestedNoteValueSignalSplitter(nvs, denominator, rs)
 
    duration_tokens, seeds = [(3, 16), (3, 8)], [ ]
    leaf_lists = rested_splitter(duration_tokens, seeds)
