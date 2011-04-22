@@ -16,11 +16,11 @@ class RightPatternRestedNoteValueSignalSplitter(_PatternRestedNoteValueSignalSpl
 
    ## PRIVATE METHODS ##
 
-
    def _rest_parts_of_note_value_signal(self, partitioned_note_value_signal):
       rested_note_value_signal = [ ]
       for part in partitioned_note_value_signal:
-         rested_part = list(part[:-1]) + [-abs(part[-1])] 
+         rested_part = list(part)
+         rested_part[-1] = -abs(rested_part[-1])
          rested_note_value_signal.append(rested_part)
       rested_note_value_signal = seqtools.flatten_sequence(rested_note_value_signal)
       return rested_note_value_signal
