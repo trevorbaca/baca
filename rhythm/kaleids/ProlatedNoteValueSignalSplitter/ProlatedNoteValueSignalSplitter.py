@@ -1,6 +1,7 @@
 from abjad.tools import durtools
 from abjad.tools import mathtools
 from abjad.tools import seqtools
+from abjad.tools import tietools
 from abjad.tools import tuplettools
 from baca.rhythm.kaleids.NoteValueSignalSplitter import NoteValueSignalSplitter
 import types
@@ -37,7 +38,11 @@ class ProlatedNoteValueSignalSplitter(NoteValueSignalSplitter):
       prolated_duration_pairs = self._make_prolated_duration_pairs(
          duration_pairs, prolation_addenda)
       note_value_signal = self._note_value_signal_preprocessor(self._note_value_signal, seeds)
-      leaf_lists = self._make_everything(note_value_signal, prolated_duration_pairs, seeds)
+      split_and_scaled_note_value_signal, denominator_of_scaled_signal = \
+         self._scale_and_split_note_value_signal(note_value_signal, prolated_duration_pairs, seeds)
+      leaf_lists = self._make_leaf_lists(
+         split_and_scaled_note_value_signal, denominator_of_scaled_signal)
+      tietools.remove_tie_spanners_from_components_in_expr(leaf_lists)
       tuplets = self._make_tuplets(duration_pairs, leaf_lists)
       return tuplets
 

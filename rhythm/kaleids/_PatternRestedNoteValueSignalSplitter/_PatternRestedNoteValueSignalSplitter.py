@@ -1,5 +1,6 @@
 from abjad.tools import mathtools
 from abjad.tools import seqtools
+from abjad.tools import tietools
 from baca.rhythm.kaleids.NoteValueSignalSplitter import NoteValueSignalSplitter
 import types
 
@@ -32,7 +33,11 @@ class _PatternRestedNoteValueSignalSplitter(NoteValueSignalSplitter):
       if seeds is None:
          seeds = [ ]
       rested_note_value_signal = self._rest_note_value_signal(seeds)
-      leaf_lists = self._make_everything(rested_note_value_signal, duration_tokens, seeds)
+      split_and_scaled_note_value_signal, denominator_of_scaled_signal = \
+         self._scale_and_split_note_value_signal(rested_note_value_signal, duration_tokens, seeds)
+      leaf_lists = self._make_leaf_lists(
+         split_and_scaled_note_value_signal, denominator_of_scaled_signal)
+      tietools.remove_tie_spanners_from_components_in_expr(leaf_lists)
       return leaf_lists
 
    ## PRIVATE METHODS ##

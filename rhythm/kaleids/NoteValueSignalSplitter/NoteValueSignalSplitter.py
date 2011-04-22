@@ -37,22 +37,14 @@ class NoteValueSignalSplitter(_RhythmicKaleid):
       if seeds is None:
          seeds = [ ]
       note_value_signal = self._note_value_signal_preprocessor(self._note_value_signal, seeds)
-      leaf_lists = self._make_everything(note_value_signal, duration_tokens, seeds)
-      return leaf_lists
-
-   ## PRIVATE METHODS ##
-
-   ## TODO: rename function to show that it is a wrapper around other high-level method calls
-   def _make_everything(self, note_value_signal, duration_tokens, seeds):
-      scaled_note_value_signal, denominator_of_scaled_signal = self._scale_note_value_signal(
-         note_value_signal, duration_tokens)
-      split_and_scaled_note_value_signal = \
-         self._split_scaled_note_value_signal_extended_to_duration_tokens(
-         scaled_note_value_signal, denominator_of_scaled_signal, duration_tokens)
+      split_and_scaled_note_value_signal, denominator_of_scaled_signal = \
+         self._scale_and_split_note_value_signal(note_value_signal, duration_tokens, seeds)
       leaf_lists = self._make_leaf_lists(
          split_and_scaled_note_value_signal, denominator_of_scaled_signal)
       tietools.remove_tie_spanners_from_components_in_expr(leaf_lists)
       return leaf_lists
+
+   ## PRIVATE METHODS ##
 
    def _make_leaf_lists(self, note_value_signal_lists, denominator_of_signal):
       result = [ ]
@@ -61,6 +53,14 @@ class NoteValueSignalSplitter(_RhythmicKaleid):
             note_value_signal, denominator_of_signal)
          result.append(leaves)
       return result
+
+   def _scale_and_split_note_value_signal(self, note_value_signal, duration_tokens, seeds):
+      scaled_note_value_signal, denominator_of_scaled_signal = self._scale_note_value_signal(
+         note_value_signal, duration_tokens)
+      split_and_scaled_note_value_signal = \
+         self._split_scaled_note_value_signal_extended_to_duration_tokens(
+         scaled_note_value_signal, denominator_of_scaled_signal, duration_tokens)
+      return split_and_scaled_note_value_signal, denominator_of_scaled_signal
 
    def _scale_note_value_signal(self, note_value_signal, duration_tokens):
       lcd = durtools.duration_tokens_to_least_common_denominator(duration_tokens) 
