@@ -20,6 +20,7 @@ class NoteValueSignalSplitter(_RhythmicKaleid):
 
    def __init__(self, note_value_signal, denominator_of_signal, 
       note_value_signal_preprocessor = None):
+      _RhythmicKaleid.__init__(self)
       assert mathtools.is_positive_integer(denominator_of_signal)
       assert seqtools.all_are_integer_equivalent_numbers(note_value_signal)
       if note_value_signal_preprocessor is None:
@@ -28,8 +29,7 @@ class NoteValueSignalSplitter(_RhythmicKaleid):
       self._denominator_of_signal = denominator_of_signal
       self._note_value_signal = seqtools.CyclicTuple(note_value_signal)
       self._note_value_signal_preprocessor = note_value_signal_preprocessor
-      self._ellipsized_note_value_signal = self._sequence_to_ellipsized_string(
-         self._note_value_signal)
+      self._repr_signals.append(self._note_value_signal)
 
    ## OVERLOADS ##
 
@@ -37,9 +37,6 @@ class NoteValueSignalSplitter(_RhythmicKaleid):
       note_value_signal = self._note_value_signal_preprocessor(self._note_value_signal, seeds)
       leaf_lists = self._make_everything(note_value_signal, duration_tokens, seeds)
       return leaf_lists
-
-   def __repr__(self):
-      return '%s(%s)' % (self.__class__.__name__, self._ellipsized_note_value_signal)
 
    ## PRIVATE METHODS ##
 

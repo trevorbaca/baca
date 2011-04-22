@@ -25,8 +25,7 @@ class ProlatedNoteValueSignalSplitter(NoteValueSignalSplitter):
          prolation_addenda_signal_preprocessor, (types.FunctionType, types.MethodType))
       self._prolation_addenda_signal = prolation_addenda_signal
       self._prolation_addenda_signal_preprocessor = prolation_addenda_signal_preprocessor
-      self._ellipsized_prolation_addenda_signal = self._sequence_to_ellipsized_string(
-         self._prolation_addenda_signal)
+      self._repr_signals.append(self._prolation_addenda_signal)
       
    ## OVERLOADS ##
 
@@ -39,10 +38,6 @@ class ProlatedNoteValueSignalSplitter(NoteValueSignalSplitter):
       leaf_lists = self._make_everything(note_value_signal, prolated_duration_pairs, seeds)
       tuplets = self._make_tuplets(duration_pairs, leaf_lists)
       return tuplets
-
-   def __repr__(self):
-      return '%s(%s, %s)' % (self.__class__.__name__, self._ellipsized_note_value_signal, 
-         self._ellipsized_prolation_addenda_signal)
 
    ## PRIVATE METHODS ##
 
