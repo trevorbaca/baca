@@ -2,17 +2,12 @@ from abjad import *
 from baca.rhythm.kaleids import *
 
 
-## trivial global definition
-def preprocessor(signal, seeds):
-   return signal
-
-
 def test_baca_rhythm_kaleids_ProlatedNoteValueSignalSplitter_01( ):
    '''Prolate and split coarse signal.
    '''
 
    nvs, denominator, prolation = [-1, 5], 4, [6]
-   prolated_splitter = ProlatedNoteValueSignalSplitter(nvs, denominator, preprocessor, prolation, preprocessor)
+   prolated_splitter = ProlatedNoteValueSignalSplitter(nvs, denominator, prolation)
 
    duration_pairs = [(2, 8), (5, 8)]
    tuplets = prolated_splitter(duration_pairs, [ ])
@@ -45,7 +40,7 @@ def test_baca_rhythm_kaleids_ProlatedNoteValueSignalSplitter_02( ):
    '''
 
    nvs, denominator, prolation = [-1, 5], 16, [6]
-   prolated_splitter = ProlatedNoteValueSignalSplitter(nvs, denominator, preprocessor, prolation, preprocessor)
+   prolated_splitter = ProlatedNoteValueSignalSplitter(nvs, denominator, prolation)
 
    duration_pairs = [(2, 8), (5, 8)]
    tuplets = prolated_splitter(duration_pairs, [0, 0])

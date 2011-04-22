@@ -17,3 +17,6 @@ class _RhythmicKaleid(object):
       if 4 < len(sequence):
          result += ', ...'
       return result
+
+   def _trivial_signal_preprocessor(self, signal, seeds):
+      return signal[:]
