@@ -7,7 +7,7 @@ def test_baca_kaleids_NoteTerminatedRestFilledTokens_01( ):
    '''
 
    numerators, denominator = [2, 1], 16
-   kaleid = NoteInitiatedRestFilledTokens(numerators, denominator)
+   kaleid = NoteTerminatedRestFilledTokens(numerators, denominator)
 
    duration_tokens = [(5, 16), (3, 8)]
    leaf_lists = kaleid(duration_tokens)
@@ -21,19 +21,19 @@ def test_baca_kaleids_NoteTerminatedRestFilledTokens_01( ):
    \new Staff {
       {
          \time 5/16
-         c'8
          r8.
+         c'8
       }
       {
          \time 3/8
-         c'16
          r4
          r16
+         c'16
       }
    }
    '''
 
-   assert staff.format == "\\new Staff {\n\t{\n\t\t\\time 5/16\n\t\tc'8\n\t\tr8.\n\t}\n\t{\n\t\t\\time 3/8\n\t\tc'16\n\t\tr4\n\t\tr16\n\t}\n}"
+   assert staff.format == "\\new Staff {\n\t{\n\t\t\\time 5/16\n\t\tr8.\n\t\tc'8\n\t}\n\t{\n\t\t\\time 3/8\n\t\tr4\n\t\tr16\n\t\tc'16\n\t}\n}"
 
 
 def test_baca_kaleids_NoteTerminatedRestFilledTokens_02( ):
@@ -41,7 +41,7 @@ def test_baca_kaleids_NoteTerminatedRestFilledTokens_02( ):
    '''
 
    numerators, denominator = [2, 1], 4
-   kaleid = NoteInitiatedRestFilledTokens(numerators, denominator)
+   kaleid = NoteTerminatedRestFilledTokens(numerators, denominator)
 
    duration_tokens = [(5, 16), (3, 8)] 
    leaf_lists = kaleid(duration_tokens)
@@ -54,15 +54,15 @@ def test_baca_kaleids_NoteTerminatedRestFilledTokens_02( ):
    \new Staff {
       {
          \time 5/16
-         c'4
          c'16
+         c'4
       }
       {
          \time 3/8
-         c'4
          r8
+         c'4
       }
    }
    '''
 
-   assert staff.format == "\\new Staff {\n\t{\n\t\t\\time 5/16\n\t\tc'4\n\t\tc'16\n\t}\n\t{\n\t\t\\time 3/8\n\t\tc'4\n\t\tr8\n\t}\n}"
+   assert staff.format == "\\new Staff {\n\t{\n\t\t\\time 5/16\n\t\tc'16\n\t\tc'4\n\t}\n\t{\n\t\t\\time 3/8\n\t\tr8\n\t\tc'4\n\t}\n}"

@@ -1,13 +1,14 @@
-from abjad.tools import mathtools
+from abjad.tools import durtools
+from abjad.tools import leaftools
 from abjad.tools import seqtools
-from baca.rhythm.kaleids._RhythmicKaleid import _RhythmicKaleid
+from baca.rhythm.kaleids._InflectedRestFilledTokens import _InflectedRestFilledTokens
 
 
-class _NoteInflectedRestFilledTokens(_RhythmicKaleid):
+class _NoteInflectedRestFilledTokens(_InflectedRestFilledTokens):
    '''Note- or rest-inflected rest-filled tokens.
    '''
 
-   def _make_leaf_lists(duration_pairs, seeds):
+   def _make_leaf_lists(self, duration_pairs, seeds):
       scaled_duration_pairs, scaled_numerators, scaled_denominator = self._scale_input(
          duration_pairs, seeds)
       numeric_input = self._make_numeric_input(scaled_duration_pairs, scaled_numerators)
