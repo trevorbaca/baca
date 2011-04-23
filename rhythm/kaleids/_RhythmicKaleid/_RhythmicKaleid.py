@@ -1,6 +1,8 @@
 from abjad.components import Note
 from abjad.components import Rest
 from abjad.tools import durtools
+from abjad.tools import seqtools
+import copy
 
 
 class _RhythmicKaleid(object):
@@ -33,10 +35,11 @@ class _RhythmicKaleid(object):
       return seeds
          
    def _sequence_to_ellipsized_string(self, sequence):
+      sequence = seqtools.repeat_sequence_to_length(sequence, 4)
       result = ', '.join([str(x) for x in sequence[:4]])
       result += ', ...'
       result = '[%s]' % result
       return result
 
    def _trivial_signal_preprocessor(self, signal, seeds):
-      return signal[:]
+      return signal
