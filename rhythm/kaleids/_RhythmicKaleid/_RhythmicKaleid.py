@@ -17,6 +17,11 @@ class _RhythmicKaleid(object):
 
    ## PRIVATE METHODS ##
 
+   def _none_seeds_to_list(self, seeds):
+      if seeds is None:
+         return [ ]
+      return seeds
+         
    def _sequence_to_ellipsized_string(self, sequence):
       result = ', '.join([str(x) for x in sequence[:4]])
       result += ', ...'
