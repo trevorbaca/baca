@@ -1,7 +1,7 @@
 from baca.rhythm.kaleids._SignalAffixedChunksWithFilledTokens import _SignalAffixedChunksWithFilledTokens
 
 
-class SignalAffixedChunksWithRestFilledTokens(_SignalAffixedChunksWithFilledTokens):
+class SignalAffixedChunksWithNoteFilledTokens(_SignalAffixedChunksWithFilledTokens):
    '''Signal-affixed chunks with rest-filled tokens.
    '''
 
@@ -9,6 +9,6 @@ class SignalAffixedChunksWithRestFilledTokens(_SignalAffixedChunksWithFilledToke
 
    def _make_middle_of_numeric_map_part(self, middle):
       if 0 < middle:
-         return (-abs(middle), )
+         return (middle, )
       else:
          return ( )
