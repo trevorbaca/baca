@@ -3,8 +3,8 @@ from abjad.tools import tietools
 from baca.rhythm.kaleids._NoteMaker import _NoteMaker
 
 
-class BigEndianNoteMaker(_NoteMaker):
-   '''Big-endian note maker.
+class NoteFilledTokens(_NoteMaker):
+   '''Note-filled tokens.
 
    See the test file for examples.
    '''

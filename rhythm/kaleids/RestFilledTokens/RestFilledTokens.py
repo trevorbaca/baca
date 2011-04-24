@@ -2,8 +2,8 @@ from abjad.tools import resttools
 from baca.rhythm.kaleids._RestMaker import _RestMaker
 
 
-class BigEndianRestMaker(_RestMaker):
-   '''Big-endian rest maker.
+class RestFilledTokens(_RestMaker):
+   '''Rest-filled tokens.
 
    See the test file for examples.
    '''
