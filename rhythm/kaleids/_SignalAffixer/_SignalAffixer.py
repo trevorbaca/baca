@@ -51,17 +51,18 @@ class _SignalAffixer(_RhythmicKaleid):
 
    ## PRIVATE METHODS ##
 
-   def _make_numeric_map_part(self, numerator, prefix, suffix):
+   def _make_numeric_map_part(self, numerator, prefix, suffix, is_note_filled = True):
       prefix_weight = mathtools.weight(prefix)
       suffix_weight = mathtools.weight(suffix)
       middle = numerator - prefix_weight - suffix_weight
       if numerator <prefix_weight:
          weights = [numerator]
          prefix = seqtools.split_sequence_once_by_weights_without_overhang(prefix, weights)[0]
-      if 0 < middle:
-         middle = (-abs(middle), )
-      else:
-         middle = ( )
+#      if 0 < middle:
+#         middle = (-abs(middle), )
+#      else:
+#         middle = ( )
+      middle = self._make_middle_of_numeric_map_part(middle)
       suffix_space = numerator - prefix_weight
       if suffix_space <= 0:
          suffix = ( )
