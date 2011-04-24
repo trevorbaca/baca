@@ -2,11 +2,11 @@ from abjad import *
 from baca.rhythm.kaleids import *
 
 
-def test_baca_kaleids_BigEndianNoteMaker_01( ):
+def test_baca_kaleids_NoteFilledTokens_01( ):
    '''Fine note-value signal.
    '''
 
-   rest_maker = BigEndianNoteMaker( )
+   rest_maker = NoteFilledTokens( )
 
    duration_tokens = [(5, 16), (3, 8)]
    leaf_lists = rest_maker(duration_tokens)
