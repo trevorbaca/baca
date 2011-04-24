@@ -1,18 +1,11 @@
-from abjad.tools import resttools
-from baca.rhythm.kaleids._RestMaker import _RestMaker
+from baca.rhythm.kaleids.SignalAffixedRestFilledTokens import SignalAffixedRestFilledTokens
 
 
-class RestFilledTokens(_RestMaker):
+class RestFilledTokens(SignalAffixedRestFilledTokens):
    '''Rest-filled tokens.
 
    See the test file for examples.
    '''
 
-   ## PRIVATE METHODS ##
-
-   def _make_rest_lists(self, duration_tokens):
-      rest_lists = [ ]
-      for duration_token in duration_tokens:
-         rest_list = resttools.make_rests([duration_token], direction = 'big-endian')
-         rest_lists.append(rest_list)
-      return rest_lists
+   def __init__(self):
+      SignalAffixedRestFilledTokens.__init__(self, [ ], 1, [0], [ ], 1, [0])
