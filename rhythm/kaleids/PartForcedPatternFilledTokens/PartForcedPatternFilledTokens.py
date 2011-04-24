@@ -176,7 +176,6 @@ class PartForcedPatternFilledTokens(_RhythmicKaleid):
          else:
             prolation_addendum = prolation_addenda[i]
             prolation_addendum %= duration_pair[0]
-            print prolation_addendum
             prolated_duration_pair = (duration_pair[0] + prolation_addendum, duration_pair[1])
             prolated_duration_pairs.append(prolated_duration_pair)
       return prolated_duration_pairs
