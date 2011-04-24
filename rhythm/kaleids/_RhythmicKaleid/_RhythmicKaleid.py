@@ -33,8 +33,20 @@ class _RhythmicKaleid(object):
       if seeds is None:
          return [ ]
       return seeds
+
+   def _none_to_new_list(self, expr):
+      if expr is None:
+         return [ ]
+      return expr
+
+   def _none_to_trivial_helper(self, expr):
+      if expr is None:
+         return self._trivial_signal_preprocessor
+      return expr
          
    def _sequence_to_ellipsized_string(self, sequence):
+      if not sequence:
+         return '[ ]'
       sequence = seqtools.repeat_sequence_to_length(sequence, 4)
       result = ', '.join([str(x) for x in sequence[:4]])
       result += ', ...'
