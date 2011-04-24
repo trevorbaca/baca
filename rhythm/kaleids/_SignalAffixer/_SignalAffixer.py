@@ -38,9 +38,38 @@ class _SignalAffixer(_RhythmicKaleid):
    ## OVERLOADS ##
 
    def __call__(self, duration_tokens, seeds = None):
-      return _RhythmicKaleid.__call__(self, duration_tokens, seeds)
+      duration_pairs, seeds = _RhythmicKaleid.__call__(self, duration_tokens, seeds)
+      seeds = self._handle_none_seeds(seeds)
+      prefix_signal, suffix_signal, denominator, duration_pairs = \
+         self._scale_signal_denominator_and_duration_pairs(duration_pairs, seeds)
+      prefix_lengths = self._prefix_lengths_helper(self._prefix_lengths, seeds)
+      suffix_lengths = self._suffix_lengths_helper(self._suffix_lengths, seeds)
+      numeric_map = self._make_numeric_map(
+         duration_pairs, prefix_signal, prefix_lengths, suffix_signal, suffix_lengths)
+      leaf_lists = self._numeric_map_and_denominator_to_leaf_lists(numeric_map, denominator)
+      return leaf_lists
 
    ## PRIVATE METHODS ##
+
+   def _make_numeric_map_part(self, numerator, prefix, suffix):
+      prefix_weight = mathtools.weight(prefix)
+      suffix_weight = mathtools.weight(suffix)
+      middle = numerator - prefix_weight - suffix_weight
+      if numerator <prefix_weight:
+         weights = [numerator]
+         prefix = seqtools.split_sequence_once_by_weights_without_overhang(prefix, weights)[0]
+      if 0 < middle:
+         middle = (-abs(middle), )
+      else:
+         middle = ( )
+      suffix_space = numerator - prefix_weight
+      if suffix_space <= 0:
+         suffix = ( )
+      elif suffix_space < suffix_weight:
+         weights = [suffix_space]
+         suffix = seqtools.split_sequence_once_by_weights_without_overhang(suffix, weights)[0]
+      numeric_map_part = prefix + middle + suffix
+      return numeric_map_part
 
    def _numeric_map_and_denominator_to_leaf_lists(self, numeric_map, denominator):
       leaf_lists = [ ]
