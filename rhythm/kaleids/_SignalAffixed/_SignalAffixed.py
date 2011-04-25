@@ -5,7 +5,7 @@ from abjad.tools import seqtools
 from baca.rhythm.kaleids._RhythmicKaleid import _RhythmicKaleid
 
 
-class _SignalAffixer(_RhythmicKaleid):
+class _SignalAffixed(_RhythmicKaleid):
    '''Signal-affixer.
    '''
 
