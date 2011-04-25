@@ -465,8 +465,10 @@ def stellate(k, s, t, d, b, span ='from duration', rests = True):
    debug = False
 
    prolation = util.helianthate(s, 1, 1)
+   prolation = seqtools.flatten_sequence(prolation)
    numerators = seqtools.increase_sequence_elements_cyclically_by_addenda(k, prolation)
    mask = util.helianthate(t, 1, 1)
+   mask = seqtools.flatten_sequence(mask)
    mask = seqtools.repeat_to_weight(mask, mathtools.weight(numerators))
    mask = util.replace_nested_elements_with_unary_subruns(mask)
    #signatures = partition(
@@ -544,11 +546,14 @@ def coruscate(n, s, t, z, d, rests = True):
 
    # zero-valued signals not allowed
    signal = util.helianthate(n, 1, 1)
+   signal = seqtools.flatten_sequence(signal)
    assert all(signal)
 
    cut = util.helianthate(s, 1, 1)
+   cut = seqtools.flatten_sequence(cut)
 
    dilation = util.helianthate(z, 1, 1)
+   dilation = seqtools.flatten_sequence(dilation)
    fit = seqtools.increase_sequence_elements_cyclically_by_addenda(t, dilation)
 
    j = 0

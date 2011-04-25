@@ -3,7 +3,8 @@ from abjad.tools import seqtools
 from baca.util.rotate_nested import rotate_nested
 
 
-def helianthate(l, outer, inner, flattened = True):
+#def helianthate(l, outer, inner, flattened = True):
+def helianthate(l, outer, inner):
    '''Rotate inner lists and outer list simultaneously 
    and accumulate results until identity.
 
@@ -37,7 +38,7 @@ def helianthate(l, outer, inner, flattened = True):
          break
       result.extend(next) 
 
-   if flattened:
-      result = seqtools.flatten_sequence(result)
+#   if flattened:
+#      result = seqtools.flatten_sequence(result)
 
    return result
