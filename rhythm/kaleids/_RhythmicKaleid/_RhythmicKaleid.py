@@ -47,10 +47,12 @@ class _RhythmicKaleid(object):
    def _sequence_to_ellipsized_string(self, sequence):
       if not sequence:
          return '[ ]'
-      sequence = seqtools.repeat_sequence_to_length(sequence, 4)
-      result = ', '.join([str(x) for x in sequence[:4]])
-      result += ', ...'
-      result = '[%s]' % result
+      if len(sequence) <= 4:
+         result = ', '.join([str(x) for x in sequence])
+      else:
+         result = ', '.join([str(x) for x in sequence[:4]])
+         result += ', ...'
+      result = '[$ %s $]' % result
       return result
 
    def _trivial_signal_preprocessor(self, signal, seeds):
