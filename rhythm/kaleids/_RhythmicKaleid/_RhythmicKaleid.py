@@ -52,7 +52,7 @@ class _RhythmicKaleid(object):
       else:
          result = ', '.join([str(x) for x in sequence[:4]])
          result += ', ...'
-      result = '[$ %s $]' % result
+      result = '[$%s$]' % result
       return result
 
    def _trivial_signal_preprocessor(self, signal, seeds):
