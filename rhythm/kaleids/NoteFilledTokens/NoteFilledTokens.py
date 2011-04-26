@@ -8,7 +8,6 @@ class NoteFilledTokens(SignalAffixedNoteFilledTokens):
    '''
 
    def __init__(self):
-      #SignalAffixedNoteFilledTokens.__init__(self, [ ], 1, [0], [ ], 1, [0])
       SignalAffixedNoteFilledTokens.__init__(self, [ ], [0], [ ], [0], 1)
 
    ## OVERLOADS ##
