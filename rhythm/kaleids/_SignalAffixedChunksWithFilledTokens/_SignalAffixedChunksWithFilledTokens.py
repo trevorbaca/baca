@@ -14,16 +14,16 @@ class _SignalAffixedChunksWithFilledTokens(_SignalAffixedObjectWithFilledTokens)
    def _make_numeric_map(self, duration_pairs, 
       prefix_signal, prefix_lengths, suffix_signal, suffix_lengths, prolation_addenda):
       numeric_map, prefix_signal_index, suffix_signal_index = [ ], 0, 0
-      prefix_signal = seqtools.CyclicTuple(prefix_signal)
-      suffix_signal = seqtools.CyclicTuple(suffix_signal)
+#      prefix_signal = seqtools.CyclicTuple(prefix_signal)
+#      suffix_signal = seqtools.CyclicTuple(suffix_signal)
       prefix_length, suffix_length = prefix_lengths[0], suffix_lengths[0]
       prefix = prefix_signal[prefix_signal_index:prefix_signal_index+prefix_length]
       suffix = suffix_signal[suffix_signal_index:suffix_signal_index+suffix_length]
-      prolation_addenda = seqtools.CyclicTuple(prolation_addenda)
-      if prolation_addenda:
-         prolation_addenda = seqtools.CyclicTuple(prolation_addenda)
-      else:
-         prolation_addenda = seqtools.CyclicTuple([0])
+#      prolation_addenda = seqtools.CyclicTuple(prolation_addenda)
+#      if prolation_addenda:
+#         prolation_addenda = seqtools.CyclicTuple(prolation_addenda)
+#      else:
+#         prolation_addenda = seqtools.CyclicTuple([0])
       if len(duration_pairs) == 1:
          prolation_addendum = prolation_addenda[0]
          numerator = duration_pairs[0][0]
