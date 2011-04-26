@@ -2,6 +2,7 @@ from abjad.components import Note
 from abjad.components import Rest
 from abjad.tools import durtools
 from abjad.tools import seqtools
+from abjad.tools import tuplettools
 import copy
 
 
@@ -23,6 +24,14 @@ class _RhythmicKaleid(object):
       return '%s(%s)' % (self.__class__.__name__, repr_signals)
 
    ## PRIVATE METHODS ##
+
+   def _make_tuplets(self, duration_pairs, leaf_lists):
+      assert len(duration_pairs) == len(leaf_lists)
+      tuplets = [ ]
+      for duration_pair, leaf_list in zip(duration_pairs, leaf_lists):
+         tuplet = tuplettools.FixedDurationTuplet(duration_pair, leaf_list)
+         tuplets.append(tuplet)
+      return tuplets
 
    def _none_to_new_list(self, expr):
       if expr is None:

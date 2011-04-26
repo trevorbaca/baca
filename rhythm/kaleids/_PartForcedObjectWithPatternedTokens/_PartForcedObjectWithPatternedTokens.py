@@ -3,7 +3,7 @@ from abjad.tools import leaftools
 from abjad.tools import mathtools
 from abjad.tools import seqtools
 from abjad.tools import tietools
-from abjad.tools import tuplettools
+#from abjad.tools import tuplettools
 from baca.rhythm.kaleids._RhythmicKaleid import _RhythmicKaleid
 import types
 
@@ -135,13 +135,13 @@ class _PartForcedObjectWithPatternedTokens(_RhythmicKaleid):
             prolated_duration_pairs.append(prolated_duration_pair)
       return prolated_duration_pairs
 
-   def _make_tuplets(self, duration_pairs, leaf_lists):
-      assert len(duration_pairs) == len(leaf_lists)
-      tuplets = [ ]
-      for duration_pair, leaf_list in zip(duration_pairs, leaf_lists):
-         tuplet = tuplettools.FixedDurationTuplet(duration_pair, leaf_list)
-         tuplets.append(tuplet)
-      return tuplets
+#   def _make_tuplets(self, duration_pairs, leaf_lists):
+#      assert len(duration_pairs) == len(leaf_lists)
+#      tuplets = [ ]
+#      for duration_pair, leaf_list in zip(duration_pairs, leaf_lists):
+#         tuplet = tuplettools.FixedDurationTuplet(duration_pair, leaf_list)
+#         tuplets.append(tuplet)
+#      return tuplets
 
    def _prepare_input(self, seeds):
       pattern = seqtools.CyclicTuple(self._pattern_helper(self._pattern, seeds))
