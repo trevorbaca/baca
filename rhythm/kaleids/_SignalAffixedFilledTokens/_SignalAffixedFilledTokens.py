@@ -2,10 +2,10 @@ from abjad.tools import durtools
 from abjad.tools import leaftools
 from abjad.tools import mathtools
 from abjad.tools import seqtools
-from baca.rhythm.kaleids._SignalAffixed import _SignalAffixed
+from baca.rhythm.kaleids._SignalAffixedObjectWithFilledTokens import _SignalAffixedObjectWithFilledTokens
 
 
-class _SignalAffixedFilledTokens(_SignalAffixed):
+class _SignalAffixedFilledTokens(_SignalAffixedObjectWithFilledTokens):
    '''Signal-affixed rest-filled tokens.
    '''
 

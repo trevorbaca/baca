@@ -5,8 +5,8 @@ from abjad.tools import seqtools
 from baca.rhythm.kaleids._RhythmicKaleid import _RhythmicKaleid
 
 
-class _SignalAffixed(_RhythmicKaleid):
-   '''Signal-affixer.
+class _SignalAffixedObjectWithFilledTokens(_RhythmicKaleid):
+   '''Signal-affixed object with filled tokens.
    '''
 
    def __init__(self, prefix_signal, prefix_denominator, prefix_lengths,
