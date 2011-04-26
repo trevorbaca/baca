@@ -165,3 +165,56 @@ def test_baca_rhythm_kaleids_SignalAffixedChunksWithNoteFilledTokens_04( ):
    '''
 
    assert staff.format == "\\new Staff {\n\t{\n\t\t\\time 4/8\n\t\t\\times 4/5 {\n\t\t\tr8\n\t\t\tc'2\n\t\t}\n\t}\n\t{\n\t\t\\time 4/8\n\t\t{\n\t\t\tc'2\n\t\t}\n\t}\n\t{\n\t\t\\time 4/8\n\t\t\\times 4/7 {\n\t\t\tc'2.\n\t\t\tr8\n\t\t}\n\t}\n}"
+
+
+def test_baca_rhythm_kaleids_SignalAffixedChunksWithNoteFilledTokens_05( ):
+
+
+   prefix_signal, prefix_lengths = [-1], [1]
+   suffix_signal, suffix_lengths = [-1], [1]
+   denominator = 8
+   prolation_addenda =   [1, 0, 0, 0, 2]
+   secondary_divisions = [3, 1, 4, 1, 3]
+   kaleid = SignalAffixedChunksWithNoteFilledTokens(
+      prefix_signal, prefix_lengths, suffix_signal, suffix_lengths, denominator,
+      prolation_addenda = prolation_addenda, secondary_divisions = secondary_divisions)
+
+   duration_tokens = [(4, 8), (4, 8), (4, 8)]
+   leaf_lists = kaleid(duration_tokens)
+   leaves = seqtools.flatten_sequence(leaf_lists)
+
+   staff = Staff(measuretools.make_measures_with_full_measure_spacer_skips(duration_tokens))
+   measuretools.replace_contents_of_measures_in_expr(staff, leaves)
+
+   r'''
+   \new Staff {
+      {
+         \time 4/8
+         \fraction \times 3/4 {
+            r8
+            c'4.
+         }
+         {
+            c'8
+         }
+      }
+      {
+         \time 4/8
+         {
+            c'2
+         }
+      }
+      {
+         \time 4/8
+         {
+            c'8
+         }
+         \fraction \times 3/5 {
+            c'2
+            r8
+         }
+      }
+   }
+   '''
+
+   assert staff.format == "\\new Staff {\n\t{\n\t\t\\time 4/8\n\t\t\\fraction \\times 3/4 {\n\t\t\tr8\n\t\t\tc'4.\n\t\t}\n\t\t{\n\t\t\tc'8\n\t\t}\n\t}\n\t{\n\t\t\\time 4/8\n\t\t{\n\t\t\tc'2\n\t\t}\n\t}\n\t{\n\t\t\\time 4/8\n\t\t{\n\t\t\tc'8\n\t\t}\n\t\t\\fraction \\times 3/5 {\n\t\t\tc'2\n\t\t\tr8\n\t\t}\n\t}\n}"
