@@ -76,17 +76,23 @@ class _PartForcedObjectWithPatternedTokens(_RhythmicKaleid):
 
    def __call__(self, duration_tokens, seeds = None):
       duration_pairs, seeds = _RhythmicKaleid.__call__(self, duration_tokens, seeds)
-      septuplet = self._prepare_input(seeds)
-      pattern, prolation_addenda = septuplet[:2]
-      quartet = (duration_pairs, self._denominator, (pattern, prolation_addenda))
-      duration_pairs, lcd, pattern, prolation_addenda = self._scale_signals(*quartet)
-      septuplet = (pattern, prolation_addenda) + septuplet[2:]
-      numeric_map = self._make_numeric_map(duration_pairs, septuplet)
+      octuplet = self._prepare_input(seeds)
+      pattern, prolation_addenda = octuplet[:2]
+      secondary_divisions = octuplet[-1]
+      signals = (pattern, prolation_addenda, secondary_divisions)
+      result = self._scale_signals(duration_pairs, self._denominator, signals)
+      duration_pairs, lcd, pattern, prolation_addenda, secondary_divisions = result
+      secondary_duration_pairs = self._make_secondary_duration_pairs(
+         duration_pairs, secondary_divisions)
+      septuplet = (pattern, prolation_addenda) + octuplet[2:-1]
+      #numeric_map = self._make_numeric_map(duration_pairs, septuplet)
+      numeric_map = self._make_numeric_map(secondary_duration_pairs, septuplet)
       leaf_lists = self._make_leaf_lists(numeric_map, lcd)
       if not prolation_addenda:
          return leaf_lists
       else:
-         tuplets = self._make_tuplets(duration_pairs, leaf_lists)
+         #tuplets = self._make_tuplets(duration_pairs, leaf_lists)
+         tuplets = self._make_tuplets(secondary_duration_pairs, leaf_lists)
          return tuplets
 
    ## PRIVATE METHODS ##
@@ -137,6 +143,17 @@ class _PartForcedObjectWithPatternedTokens(_RhythmicKaleid):
             prolated_duration_pairs.append(prolated_duration_pair)
       return prolated_duration_pairs
 
+   def _make_secondary_duration_pairs(self, duration_pairs, secondary_divisions):
+      if not secondary_divisions:
+         return duration_pairs[:]
+      numerators = [duration_pair[0] for duration_pair in duration_pairs]
+      secondary_numerators = seqtools.split_sequence_cyclically_by_weights_with_overhang(
+         numerators, secondary_divisions)
+      secondary_numerators = seqtools.flatten_sequence(secondary_numerators)
+      denominator = duration_pairs[0][1]
+      secondary_duration_pairs = [(n, denominator) for n in secondary_numerators]
+      return secondary_duration_pairs
+
    def _prepare_input(self, seeds):
       pattern = seqtools.CyclicTuple(self._pattern_helper(self._pattern, seeds))
       prolation_addenda = self._prolation_addenda_helper(self._prolation_addenda, seeds)
@@ -146,4 +163,7 @@ class _PartForcedObjectWithPatternedTokens(_RhythmicKaleid):
       rights = seqtools.CyclicTuple(self._rights_helper(self._rights, seeds))
       left_lengths = seqtools.CyclicTuple(self._left_lengths_helper(self._left_lengths, seeds))
       right_lengths = seqtools.CyclicTuple(self._right_lengths_helper(self._right_lengths, seeds))
-      return pattern, prolation_addenda, lefts, middles, rights, left_lengths, right_lengths
+      secondary_divisions = self._secondary_divisions_helper(self._secondary_divisions, seeds)
+      secondary_divisions = seqtools.CyclicTuple(secondary_divisions)
+      return pattern, prolation_addenda, \
+         lefts, middles, rights, left_lengths, right_lengths, secondary_divisions
