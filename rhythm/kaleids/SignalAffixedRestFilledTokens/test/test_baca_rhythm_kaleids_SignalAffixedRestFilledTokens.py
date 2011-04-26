@@ -4,11 +4,17 @@ from baca.rhythm.kaleids import *
 
 def test_baca_rhythm_kaleids_SignalAffixedRestFilledTokens_01( ):
 
-   prefix_signal, prefix_denominator, prefix_lengths = [1], 4, [0, 1]
-   suffix_signal, suffix_denominator, suffix_lengths = [1], 32, [1]
+#   prefix_signal, prefix_denominator, prefix_lengths = [1], 4, [0, 1]
+#   suffix_signal, suffix_denominator, suffix_lengths = [1], 32, [1]
+#   kaleid = SignalAffixedRestFilledTokens(
+#      prefix_signal, prefix_denominator, prefix_lengths,
+#      suffix_signal, suffix_denominator, suffix_lengths)
+
+   prefix_signal, prefix_lengths = [8], [0, 1]
+   suffix_signal, suffix_lengths = [1], [1]
+   denominator = 32
    kaleid = SignalAffixedRestFilledTokens(
-      prefix_signal, prefix_denominator, prefix_lengths,
-      suffix_signal, suffix_denominator, suffix_lengths)
+      prefix_signal, prefix_lengths, suffix_signal, suffix_lengths, denominator)
 
    duration_tokens = [(5, 8), (5, 8), (5, 8), (5, 8)]
    leaf_lists = kaleid(duration_tokens)
@@ -53,11 +59,17 @@ def test_baca_rhythm_kaleids_SignalAffixedRestFilledTokens_01( ):
 
 def test_baca_rhythm_kaleids_SignalAffixedRestFilledTokens_02( ):
 
-   prefix_signal, prefix_denominator, prefix_lengths = [1], 4, [1, 2, 3, 4]
-   suffix_signal, suffix_denominator, suffix_lengths = [1], 32, [1]
+#   prefix_signal, prefix_denominator, prefix_lengths = [1], 4, [1, 2, 3, 4]
+#   suffix_signal, suffix_denominator, suffix_lengths = [1], 32, [1]
+#   kaleid = SignalAffixedRestFilledTokens(
+#      prefix_signal, prefix_denominator, prefix_lengths,
+#      suffix_signal, suffix_denominator, suffix_lengths)
+
+   prefix_signal, prefix_lengths = [8], [1, 2, 3, 4]
+   suffix_signal, suffix_lengths = [1], [1]
+   denominator = 32
    kaleid = SignalAffixedRestFilledTokens(
-      prefix_signal, prefix_denominator, prefix_lengths,
-      suffix_signal, suffix_denominator, suffix_lengths)
+      prefix_signal, prefix_lengths, suffix_signal, suffix_lengths, denominator)
 
    duration_tokens = [(5, 8), (5, 8), (5, 8), (5, 8)]
    leaf_lists = kaleid(duration_tokens)
@@ -102,11 +114,17 @@ def test_baca_rhythm_kaleids_SignalAffixedRestFilledTokens_02( ):
 
 def test_baca_rhythm_kaleids_SignalAffixedRestFilledTokens_03( ):
 
-   prefix_signal, prefix_denominator, prefix_lengths = [1], 32, [1]
-   suffix_signal, suffix_denominator, suffix_lengths = [1], 4, [1, 2, 3]
+#   prefix_signal, prefix_denominator, prefix_lengths = [1], 32, [1]
+#   suffix_signal, suffix_denominator, suffix_lengths = [1], 4, [1, 2, 3]
+#   kaleid = SignalAffixedRestFilledTokens(
+#      prefix_signal, prefix_denominator, prefix_lengths,
+#      suffix_signal, suffix_denominator, suffix_lengths)
+
+   prefix_signal, prefix_lengths = [1], [1]
+   suffix_signal, suffix_lengths = [8], [1, 2, 3]
+   denominator = 32
    kaleid = SignalAffixedRestFilledTokens(
-      prefix_signal, prefix_denominator, prefix_lengths,
-      suffix_signal, suffix_denominator, suffix_lengths)
+      prefix_signal, prefix_lengths, suffix_signal, suffix_lengths, denominator)
 
    duration_tokens = [(5, 8), (5, 8), (5, 8)]
    leaf_lists = kaleid(duration_tokens)
@@ -146,11 +164,17 @@ def test_baca_rhythm_kaleids_SignalAffixedRestFilledTokens_03( ):
 
 def test_baca_rhythm_kaleids_SignalAffixedRestFilledTokens_04( ):
 
-   prefix_signal, prefix_denominator, prefix_lengths = [ ], 8, [0]
-   suffix_signal, suffix_denominator, suffix_lengths = [ ], 8, [0]
+#   prefix_signal, prefix_denominator, prefix_lengths = [ ], 8, [0]
+#   suffix_signal, suffix_denominator, suffix_lengths = [ ], 8, [0]
+#   kaleid = SignalAffixedRestFilledTokens(
+#      prefix_signal, prefix_denominator, prefix_lengths,
+#      suffix_signal, suffix_denominator, suffix_lengths)
+
+   prefix_signal, prefix_lengths = [ ], [0]
+   suffix_signal, suffix_lengths = [ ], [0]
+   denominator = 8
    kaleid = SignalAffixedRestFilledTokens(
-      prefix_signal, prefix_denominator, prefix_lengths,
-      suffix_signal, suffix_denominator, suffix_lengths)
+      prefix_signal, prefix_lengths, suffix_signal, suffix_lengths, denominator)
 
    duration_tokens = [(5, 8), (5, 8), (5, 8)]
    leaf_lists = kaleid(duration_tokens)

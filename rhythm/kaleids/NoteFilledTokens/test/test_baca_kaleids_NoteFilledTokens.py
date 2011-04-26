@@ -3,13 +3,11 @@ from baca.rhythm.kaleids import *
 
 
 def test_baca_kaleids_NoteFilledTokens_01( ):
-   '''Fine note-value signal.
-   '''
 
-   rest_maker = NoteFilledTokens( )
+   kaleid = NoteFilledTokens( )
 
    duration_tokens = [(5, 16), (3, 8)]
-   leaf_lists = rest_maker(duration_tokens)
+   leaf_lists = kaleid(duration_tokens)
    leaves = seqtools.flatten_sequence(leaf_lists)
 
    staff = Staff(measuretools.make_measures_with_full_measure_spacer_skips(duration_tokens))

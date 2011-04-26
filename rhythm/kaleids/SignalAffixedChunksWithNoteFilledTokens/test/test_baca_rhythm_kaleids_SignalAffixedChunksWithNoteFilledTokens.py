@@ -4,11 +4,17 @@ from baca.rhythm.kaleids import *
 
 def test_baca_rhythm_kaleids_SignalAffixedChunksWithNoteFilledTokens_01( ):
 
-   prefix_signal, prefix_denominator, prefix_lengths = [-1], 4, [2]
-   suffix_signal, suffix_denominator, suffix_lengths = [-3], 32, [4]
+#   prefix_signal, prefix_denominator, prefix_lengths = [-1], 4, [2]
+#   suffix_signal, suffix_denominator, suffix_lengths = [-3], 32, [4]
+#   kaleid = SignalAffixedChunksWithNoteFilledTokens(
+#      prefix_signal, prefix_denominator, prefix_lengths,
+#      suffix_signal, suffix_denominator, suffix_lengths)
+
+   prefix_signal, prefix_lengths = [-8], [2]
+   suffix_signal, suffix_lengths = [-3], [4]
+   denominator = 32
    kaleid = SignalAffixedChunksWithNoteFilledTokens(
-      prefix_signal, prefix_denominator, prefix_lengths,
-      suffix_signal, suffix_denominator, suffix_lengths)
+      prefix_signal, prefix_lengths, suffix_signal, suffix_lengths, denominator)
 
    duration_tokens = [(5, 8), (5, 8), (5, 8)]
    leaf_lists = kaleid(duration_tokens)
@@ -46,11 +52,17 @@ def test_baca_rhythm_kaleids_SignalAffixedChunksWithNoteFilledTokens_01( ):
 
 def test_baca_rhythm_kaleids_SignalAffixedChunksWithNoteFilledTokens_02( ):
 
-   prefix_signal, prefix_denominator, prefix_lengths = [-1], 4, [20]
-   suffix_signal, suffix_denominator, suffix_lengths = [-1], 4, [2]
+#   prefix_signal, prefix_denominator, prefix_lengths = [-1], 4, [20]
+#   suffix_signal, suffix_denominator, suffix_lengths = [-1], 4, [2]
+#   kaleid = SignalAffixedChunksWithNoteFilledTokens(
+#      prefix_signal, prefix_denominator, prefix_lengths,
+#      suffix_signal, suffix_denominator, suffix_lengths)
+
+   prefix_signal, prefix_lengths = [-1], [20]
+   suffix_signal, suffix_lengths = [-1], [2]
+   denominator = 4
    kaleid = SignalAffixedChunksWithNoteFilledTokens(
-      prefix_signal, prefix_denominator, prefix_lengths,
-      suffix_signal, suffix_denominator, suffix_lengths)
+      prefix_signal, prefix_lengths, suffix_signal, suffix_lengths, denominator)
 
    duration_tokens = [(5, 8), (5, 8), (5, 8)]
    leaf_lists = kaleid(duration_tokens)
@@ -86,11 +98,17 @@ def test_baca_rhythm_kaleids_SignalAffixedChunksWithNoteFilledTokens_02( ):
 
 def test_baca_rhythm_kaleids_SignalAffixedChunksWithNoteFilledTokens_03( ):
 
-   prefix_signal, prefix_denominator, prefix_lengths = [ ], 4, [0]
-   suffix_signal, suffix_denominator, suffix_lengths = [ ], 4, [0]
+#   prefix_signal, prefix_denominator, prefix_lengths = [ ], 4, [0]
+#   suffix_signal, suffix_denominator, suffix_lengths = [ ], 4, [0]
+#   kaleid = SignalAffixedChunksWithNoteFilledTokens(
+#      prefix_signal, prefix_denominator, prefix_lengths,
+#      suffix_signal, suffix_denominator, suffix_lengths)
+
+   prefix_signal, prefix_lengths = [ ], [0]
+   suffix_signal, suffix_lengths = [ ], [0]
+   denominator = 4
    kaleid = SignalAffixedChunksWithNoteFilledTokens(
-      prefix_signal, prefix_denominator, prefix_lengths,
-      suffix_signal, suffix_denominator, suffix_lengths)
+      prefix_signal, prefix_lengths, suffix_signal, suffix_lengths, denominator)
 
    duration_tokens = [(5, 8), (5, 8), (5, 8)]
    leaf_lists = kaleid(duration_tokens)
