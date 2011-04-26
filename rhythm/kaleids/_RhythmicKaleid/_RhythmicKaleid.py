@@ -42,6 +42,22 @@ class _RhythmicKaleid(object):
       if expr is None:
          return self._trivial_helper
       return expr
+
+   def _scale_signals(self, duration_pairs, denominator, signals):
+      dummy_duration_pair = (1, denominator)
+      duration_pairs.append(dummy_duration_pair)
+      duration_pairs = durtools.duration_tokens_to_duration_pairs_with_least_common_denominator(
+         duration_pairs)
+      dummy_duration_pair = duration_pairs.pop( )
+      lcd = dummy_duration_pair[1]
+      multiplier = lcd / denominator
+      scaled_signals = [ ]
+      for signal in signals:
+         signal = seqtools.CyclicTuple([multiplier * x for x in signal])
+         scaled_signals.append(signal)
+      result = [duration_pairs, lcd]
+      result.extend(scaled_signals)
+      return tuple(result)
          
    def _sequence_to_ellipsized_string(self, sequence):
       if not sequence:

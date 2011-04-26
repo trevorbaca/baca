@@ -78,8 +78,8 @@ class _PartForcedObjectWithPatternedTokens(_RhythmicKaleid):
       duration_pairs, seeds = _RhythmicKaleid.__call__(self, duration_tokens, seeds)
       septuplet = self._prepare_input(seeds)
       pattern, prolation_addenda = septuplet[:2]
-      pattern, lcd, prolation_addenda, duration_pairs = self._scale_input(
-         pattern, prolation_addenda, duration_pairs)
+      quartet = (duration_pairs, self._denominator, (pattern, prolation_addenda))
+      duration_pairs, lcd, pattern, prolation_addenda = self._scale_signals(*quartet)
       septuplet = (pattern, prolation_addenda) + septuplet[2:]
       numeric_map = self._make_numeric_map(duration_pairs, septuplet)
       leaf_lists = self._make_leaf_lists(numeric_map, lcd)
@@ -147,16 +147,3 @@ class _PartForcedObjectWithPatternedTokens(_RhythmicKaleid):
       left_lengths = seqtools.CyclicTuple(self._left_lengths_helper(self._left_lengths, seeds))
       right_lengths = seqtools.CyclicTuple(self._right_lengths_helper(self._right_lengths, seeds))
       return pattern, prolation_addenda, lefts, middles, rights, left_lengths, right_lengths
-
-   def _scale_input(self, pattern, prolation_addenda, duration_pairs):
-      duration_pairs = duration_pairs[:]
-      dummy_duration_pair = (1, self._denominator)
-      duration_pairs.append(dummy_duration_pair)
-      duration_pairs = durtools.duration_tokens_to_duration_pairs_with_least_common_denominator(
-         duration_pairs)
-      dummy_duration_pair = duration_pairs.pop( )
-      lcd = dummy_duration_pair[1]
-      multiplier = lcd / self._denominator
-      pattern = seqtools.CyclicTuple([multiplier * x for x in pattern])
-      prolation_addenda = seqtools.CyclicTuple([multiplier * x for x in prolation_addenda])
-      return pattern, lcd, prolation_addenda, duration_pairs
