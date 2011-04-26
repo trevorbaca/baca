@@ -14,7 +14,7 @@ class _RhythmicKaleid(object):
 
    def __call__(self, duration_tokens, seeds = None):
       duration_pairs = durtools.duration_tokens_to_duration_pairs(duration_tokens)
-      seeds = self._handle_none_seeds(seeds)
+      seeds = self._none_to_new_list(seeds)
       return duration_pairs, seeds
 
    def __repr__(self):
@@ -24,16 +24,6 @@ class _RhythmicKaleid(object):
 
    ## PRIVATE METHODS ##
 
-   def _handle_none_preprocessor(self, preprocessor):
-      if preprocessor is None:
-         return self._trivial_signal_preprocessor
-      return preprocessor
-         
-   def _handle_none_seeds(self, seeds):
-      if seeds is None:
-         return [ ]
-      return seeds
-
    def _none_to_new_list(self, expr):
       if expr is None:
          return [ ]
@@ -41,7 +31,7 @@ class _RhythmicKaleid(object):
 
    def _none_to_trivial_helper(self, expr):
       if expr is None:
-         return self._trivial_signal_preprocessor
+         return self._trivial_helper
       return expr
          
    def _sequence_to_ellipsized_string(self, sequence):
@@ -55,5 +45,5 @@ class _RhythmicKaleid(object):
       result = '[$%s$]' % result
       return result
 
-   def _trivial_signal_preprocessor(self, signal, seeds):
+   def _trivial_helper(self, signal, seeds):
       return signal

@@ -10,25 +10,31 @@ class _SignalAffixedObjectWithFilledTokens(_RhythmicKaleid):
    '''
 
    def __init__(self, prefix_signal, prefix_lengths, suffix_signal, suffix_lengths, denominator,
+      prolation_addenda = None,
       prefix_signal_helper = None, prefix_lengths_helper = None,
-      suffix_signal_helper = None, suffix_lengths_helper = None):
+      suffix_signal_helper = None, suffix_lengths_helper = None,
+      prolation_addenda_helper = None):
       _RhythmicKaleid.__init__(self)
       assert seqtools.all_are_integer_equivalent_numbers(prefix_signal)
       assert seqtools.all_are_nonnegative_integer_equivalent_numbers(prefix_lengths)
       assert seqtools.all_are_integer_equivalent_numbers(suffix_signal)
       assert seqtools.all_are_nonnegative_integer_equivalent_numbers(suffix_lengths)
+      prolation_addenda = self._none_to_new_list(prolation_addenda)
+      assert seqtools.all_are_nonnegative_integer_equivalent_numbers(prolation_addenda)
       self._prefix_signal = prefix_signal
       self._prefix_lengths = prefix_lengths
       self._suffix_signal = suffix_signal
       self._suffix_lengths = suffix_lengths
+      self._prolation_addenda = prolation_addenda
       assert mathtools.is_positive_integer_equivalent_number(denominator)
       self._denominator = denominator
       self._repr_signals.append(prefix_signal)
       self._repr_signals.append(suffix_signal)
-      self._prefix_signal_helper = self._handle_none_preprocessor(prefix_signal_helper)
-      self._prefix_lengths_helper = self._handle_none_preprocessor(prefix_lengths_helper)
-      self._suffix_signal_helper = self._handle_none_preprocessor(suffix_signal_helper)
-      self._suffix_lengths_helper = self._handle_none_preprocessor(suffix_lengths_helper)
+      self._prefix_signal_helper = self._none_to_trivial_helper(prefix_signal_helper)
+      self._prefix_lengths_helper = self._none_to_trivial_helper(prefix_lengths_helper)
+      self._suffix_signal_helper = self._none_to_trivial_helper(suffix_signal_helper)
+      self._suffix_lengths_helper = self._none_to_trivial_helper(suffix_lengths_helper)
+      self._prolation_addenda_helper = self._none_to_trivial_helper(prolation_addenda_helper)
 
    ## OVERLOADS ##
 
