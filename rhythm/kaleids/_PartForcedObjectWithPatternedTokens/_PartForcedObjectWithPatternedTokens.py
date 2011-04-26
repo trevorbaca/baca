@@ -117,11 +117,9 @@ class _PartForcedObjectWithPatternedTokens(_RhythmicKaleid):
       pattern, prolation_addenda, lefts, middles, rights, left_lengths, right_lengths = septuplet
       prolated_duration_pairs = self._make_prolated_duration_pairs(
          duration_pairs, prolation_addenda)
-      #print duration_pairs, prolated_duration_pairs
       prolated_numerators = [pair[0] for pair in prolated_duration_pairs]
       map_tokens = seqtools.split_sequence_extended_to_weights_without_overhang(
          pattern, prolated_numerators)
-      #print map_tokens
       quintuplet = (lefts, middles, rights, left_lengths, right_lengths)
       forced_map_tokens = self._force_token_parts(map_tokens, quintuplet)
       numeric_map = forced_map_tokens
@@ -151,14 +149,14 @@ class _PartForcedObjectWithPatternedTokens(_RhythmicKaleid):
       return pattern, prolation_addenda, lefts, middles, rights, left_lengths, right_lengths
 
    def _scale_input(self, pattern, prolation_addenda, duration_pairs):
-      dummy_duration_pair = (1, self._denominator)
       duration_pairs = duration_pairs[:]
+      dummy_duration_pair = (1, self._denominator)
       duration_pairs.append(dummy_duration_pair)
       duration_pairs = durtools.duration_tokens_to_duration_pairs_with_least_common_denominator(
          duration_pairs)
       dummy_duration_pair = duration_pairs.pop( )
       lcd = dummy_duration_pair[1]
-      pattern_multiplier = lcd / self._denominator
-      pattern = seqtools.CyclicTuple([pattern_multiplier * n for n in pattern])
-      prolation_addenda = seqtools.CyclicTuple([pattern_multiplier * n for n in prolation_addenda])
+      multiplier = lcd / self._denominator
+      pattern = seqtools.CyclicTuple([multiplier * x for x in pattern])
+      prolation_addenda = seqtools.CyclicTuple([multiplier * x for x in prolation_addenda])
       return pattern, lcd, prolation_addenda, duration_pairs

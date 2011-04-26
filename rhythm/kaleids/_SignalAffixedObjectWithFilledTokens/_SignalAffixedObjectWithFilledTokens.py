@@ -58,15 +58,10 @@ class _SignalAffixedObjectWithFilledTokens(_RhythmicKaleid):
 
    def __call__(self, duration_tokens, seeds = None):
       duration_pairs, seeds = _RhythmicKaleid.__call__(self, duration_tokens, seeds)
-      print duration_pairs, seeds
       prefix_signal, prefix_lengths, suffix_signal, suffix_lengths, prolation_addenda = \
          self._prepare_input(seeds) 
-      print prefix_signal, prefix_lengths, suffix_signal, suffix_lengths, prolation_addenda
       prefix_signal, suffix_signal, lcd, prolation_addenda, duration_pairs = \
          self._scale_input(prefix_signal, suffix_signal, prolation_addenda, duration_pairs)
-      print prefix_signal, suffix_signal, lcd, prolation_addenda, duration_pairs
-      #prefix_lengths = self._prefix_lengths_helper(self._prefix_lengths, seeds)
-      #suffix_lengths = self._suffix_lengths_helper(self._suffix_lengths, seeds)
       numeric_map = self._make_numeric_map(duration_pairs, 
          prefix_signal, prefix_lengths, suffix_signal, suffix_lengths, prolation_addenda)
       leaf_lists = self._numeric_map_and_denominator_to_leaf_lists(numeric_map, lcd)
@@ -118,11 +113,7 @@ class _SignalAffixedObjectWithFilledTokens(_RhythmicKaleid):
          prolation_addenda = seqtools.CyclicTuple([0])
       return prefix_signal, prefix_lengths, suffix_signal, suffix_lengths, prolation_addenda
 
-   #def _scale_signal_denominator_and_duration_pairs(self, duration_pairs, seeds):
    def _scale_input(self, prefix_signal, suffix_signal, prolation_addenda, duration_pairs):
-      #prefix_signal = self._prefix_signal_helper(self._prefix_signal, seeds)
-      #suffix_signal = self._suffix_signal_helper(self._suffix_signal, seeds)
-      #prolation_addenda = self._prolation_addenda_helper(self._prolation_addenda, seeds)
       duration_pairs = duration_pairs[:]
       dummy_duration_pair = (1, self._denominator)
       duration_pairs.append(dummy_duration_pair)
