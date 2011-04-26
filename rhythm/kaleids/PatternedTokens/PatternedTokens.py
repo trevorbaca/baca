@@ -1,7 +1,7 @@
-from baca.rhythm.kaleids.PartForcedPatternFilledTokens import PartForcedPatternFilledTokens
+from baca.rhythm.kaleids.PartForcedPatternedTokens import PartForcedPatternedTokens
 
 
-class PatternFilledTokens(PartForcedPatternFilledTokens):
+class PatternedTokens(PartForcedPatternedTokens):
    '''Pattern-filled tokens.
    '''
 
@@ -9,6 +9,6 @@ class PatternFilledTokens(PartForcedPatternFilledTokens):
       pattern_helper = None, prolation_addenda_helper = None):
       lefts, middles, rights = [0], [0], [0]
       left_lengths, right_lengths = [0], [0]
-      PartForcedPatternFilledTokens.__init__(self, pattern, denominator, prolation_addenda,
+      PartForcedPatternedTokens.__init__(self, pattern, denominator, prolation_addenda,
          lefts, middles, rights, left_lengths, right_lengths, 
          pattern_helper, prolation_addenda_helper)

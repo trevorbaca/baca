@@ -2,10 +2,10 @@ from abjad import *
 from baca.rhythm.kaleids import *
 
 
-def test_baca_rhythm_kaleids_PatternFilledTokens_01( ):
+def test_baca_rhythm_kaleids_PatternedTokens_01( ):
 
    pattern, denominator, prolation_addenda = [-1, 4, -2, 3], 16, [3, 4]
-   kaleid = PatternFilledTokens(pattern, denominator, prolation_addenda)
+   kaleid = PatternedTokens(pattern, denominator, prolation_addenda)
 
    duration_tokens = [(2, 8), (5, 8)]
    music = kaleid(duration_tokens)

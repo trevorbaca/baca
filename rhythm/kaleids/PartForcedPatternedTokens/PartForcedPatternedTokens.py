@@ -1,9 +1,9 @@
 from abjad.tools import mathtools
 from abjad.tools import seqtools
-from baca.rhythm.kaleids._PartForcedObjectWithPatternFilledTokens import _PartForcedObjectWithPatternFilledTokens
+from baca.rhythm.kaleids._PartForcedObjectWithPatternedTokens import _PartForcedObjectWithPatternedTokens
 
 
-class PartForcedPatternFilledTokens(_PartForcedObjectWithPatternFilledTokens):
+class PartForcedPatternedTokens(_PartForcedObjectWithPatternedTokens):
    '''Part-forced pattern-filled tokens.
    '''
 

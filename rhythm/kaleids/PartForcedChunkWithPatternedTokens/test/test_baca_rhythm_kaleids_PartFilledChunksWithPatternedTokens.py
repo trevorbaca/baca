@@ -2,12 +2,12 @@ from abjad import *
 from baca.rhythm.kaleids import *
 
 
-def test_baca_rhythm_kaleids_PartFilledChunksWithPatternFilledTokens_01( ):
+def test_baca_rhythm_kaleids_PartFilledChunksWithPatternedTokens_01( ):
 
    pattern, denominator, prolation_addenda = [1], 16, [2]
    lefts, middles, rights = [0], [-1], [0]
    left_lengths, right_lengths = [1], [1]
-   kaleid = PartForcedChunkWithPatternFilledTokens(
+   kaleid = PartForcedChunkWithPatternedTokens(
       pattern, denominator, prolation_addenda,
       lefts, middles, rights, left_lengths, right_lengths)
 
@@ -49,12 +49,12 @@ def test_baca_rhythm_kaleids_PartFilledChunksWithPatternFilledTokens_01( ):
    assert staff.format == "\\new Staff {\n\t{\n\t\t\\time 3/16\n\t\t\\fraction \\times 3/5 {\n\t\t\tc'16\n\t\t\tr16\n\t\t\tr16\n\t\t\tr16\n\t\t\tr16\n\t\t}\n\t}\n\t{\n\t\t\\time 3/8\n\t\t\\fraction \\times 3/4 {\n\t\t\tr16\n\t\t\tr16\n\t\t\tr16\n\t\t\tr16\n\t\t\tr16\n\t\t\tr16\n\t\t\tr16\n\t\t\tc'16\n\t\t}\n\t}\n}"
 
 
-def test_baca_rhythm_kaleids_PartFilledChunksWithPatternFilledTokens_02( ):
+def test_baca_rhythm_kaleids_PartFilledChunksWithPatternedTokens_02( ):
 
    pattern, denominator, prolation_addenda = [1], 4, [2]
    lefts, middles, rights = [-1], [0], [-1]
    left_lengths, right_lengths = [1], [1]
-   kaleid = PartForcedChunkWithPatternFilledTokens(
+   kaleid = PartForcedChunkWithPatternedTokens(
       pattern, denominator, prolation_addenda,
       lefts, middles, rights, left_lengths, right_lengths)
 

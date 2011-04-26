@@ -1,1 +1,0 @@
-from _PartForcedObjectWithPatternFilledTokens import _PartForcedObjectWithPatternFilledTokens

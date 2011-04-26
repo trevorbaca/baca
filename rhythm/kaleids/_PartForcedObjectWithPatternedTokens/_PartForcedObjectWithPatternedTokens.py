@@ -8,8 +8,8 @@ from baca.rhythm.kaleids._RhythmicKaleid import _RhythmicKaleid
 import types
 
 
-class _PartForcedObjectWithPatternFilledTokens(_RhythmicKaleid):
-   '''Part-forced object with pattern-filled tokens.
+class _PartForcedObjectWithPatternedTokens(_RhythmicKaleid):
+   '''Part-forced object with patterned tokens.
    '''
 
    def __init__(self, pattern, denominator, prolation_addenda = None,
