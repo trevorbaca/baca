@@ -12,58 +12,65 @@ class _PartForcedObjectWithPatternedTokens(_RhythmicKaleid):
 
    def __init__(self, pattern, denominator, prolation_addenda = None,
       lefts = None, middles = None, rights = None, left_lengths = None, right_lengths = None,
+      secondary_divisions = None,
       pattern_helper = None, prolation_addenda_helper = None,
       lefts_helper = None, middles_helper = None, rights_helper = None,
-      left_lengths_helper = None, right_lengths_helper = None):
+      left_lengths_helper = None, right_lengths_helper = None, secondary_divisions_helper = None):
       _RhythmicKaleid.__init__(self)
-      assert seqtools.all_are_integer_equivalent_numbers(pattern)
-      assert mathtools.is_positive_integer_equivalent_number(denominator)
-      self._pattern = pattern
-      self._denominator = denominator
       prolation_addenda = self._none_to_new_list(prolation_addenda)
-      assert seqtools.all_are_nonnegative_integer_equivalent_numbers(prolation_addenda)
-      self._prolation_addenda = prolation_addenda
       lefts = self._none_to_new_list(lefts)
       middles = self._none_to_new_list(middles)
       rights = self._none_to_new_list(rights)
-      assert all([x in (-1, 0, 1) for x in lefts])
-      assert all([x in (-1, 0, 1) for x in middles])
-      assert all([x in (-1, 0, 1) for x in rights])
-      self._lefts = lefts
-      self._middles = middles
-      self._rights = rights
       left_lengths = self._none_to_new_list(left_lengths)
       right_lengths = self._none_to_new_list(right_lengths)
-      assert seqtools.all_are_nonnegative_integer_equivalent_numbers(left_lengths)
-      assert seqtools.all_are_nonnegative_integer_equivalent_numbers(right_lengths)
-      self._left_lengths = left_lengths
-      self._right_lengths = right_lengths
+      secondary_divisions = self._none_to_new_list(secondary_divisions)
       pattern_helper = self._none_to_trivial_helper(pattern_helper)
-      assert isinstance(pattern_helper, (types.FunctionType, types.MethodType))
-      self._pattern_helper = pattern_helper
       prolation_addenda_helper = self._none_to_trivial_helper(prolation_addenda_helper)
-      assert isinstance(prolation_addenda_helper, (types.FunctionType, types.MethodType))
-      self._prolation_addenda_helper = prolation_addenda_helper
       lefts_helper = self._none_to_trivial_helper(lefts_helper)
       middles_helper = self._none_to_trivial_helper(middles_helper)
       rights_helper = self._none_to_trivial_helper(rights_helper)
+      left_lengths_helper = self._none_to_trivial_helper(left_lengths_helper)
+      right_lengths_helper = self._none_to_trivial_helper(right_lengths_helper)
+      secondary_divisions_helper = self._none_to_trivial_helper(secondary_divisions_helper)
+      assert seqtools.all_are_integer_equivalent_numbers(pattern)
+      assert mathtools.is_positive_integer_equivalent_number(denominator)
+      assert seqtools.all_are_nonnegative_integer_equivalent_numbers(prolation_addenda)
+      assert all([x in (-1, 0, 1) for x in lefts])
+      assert all([x in (-1, 0, 1) for x in middles])
+      assert all([x in (-1, 0, 1) for x in rights])
+      assert seqtools.all_are_nonnegative_integer_equivalent_numbers(left_lengths)
+      assert seqtools.all_are_nonnegative_integer_equivalent_numbers(right_lengths)
+      assert seqtools.all_are_nonnegative_integer_equivalent_numbers(secondary_divisions)
+      assert isinstance(pattern_helper, (types.FunctionType, types.MethodType))
+      assert isinstance(prolation_addenda_helper, (types.FunctionType, types.MethodType))
       assert isinstance(lefts_helper, (types.FunctionType, types.MethodType))
       assert isinstance(middles_helper, (types.FunctionType, types.MethodType))
       assert isinstance(rights_helper, (types.FunctionType, types.MethodType))
+      assert isinstance(left_lengths_helper, (types.FunctionType, types.MethodType))
+      assert isinstance(right_lengths_helper, (types.FunctionType, types.MethodType))
+      self._pattern = pattern
+      self._denominator = denominator
+      self._prolation_addenda = prolation_addenda
+      self._lefts = lefts
+      self._middles = middles
+      self._rights = rights
+      self._left_lengths = left_lengths
+      self._right_lengths = right_lengths
+      self._secondary_divisions = secondary_divisions
+      self._pattern_helper = pattern_helper
+      self._prolation_addenda_helper = prolation_addenda_helper
       self._lefts_helper = lefts_helper
       self._middles_helper = middles_helper
       self._rights_helper = rights_helper
-      left_lengths_helper = self._none_to_trivial_helper(left_lengths_helper)
-      right_lengths_helper = self._none_to_trivial_helper(right_lengths_helper)
-      assert isinstance(left_lengths_helper, (types.FunctionType, types.MethodType))
-      assert isinstance(right_lengths_helper, (types.FunctionType, types.MethodType))
       self._left_lengths_helper = left_lengths_helper
       self._right_lengths_helper = right_lengths_helper
+      self._secondary_divisions_helper = secondary_divisions_helper
       self._repr_signals.append(self._pattern)
       self._repr_signals.append(self._prolation_addenda)
       self._repr_signals.append(self._lefts)
       self._repr_signals.append(self._middles)
       self._repr_signals.append(self._rights)
+      self._repr_signals.append(self._secondary_divisions)
 
    ## OVERLOADS ##
 

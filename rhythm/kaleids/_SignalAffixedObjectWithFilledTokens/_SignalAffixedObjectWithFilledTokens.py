@@ -3,6 +3,7 @@ from abjad.tools import leaftools
 from abjad.tools import mathtools
 from abjad.tools import seqtools
 from baca.rhythm.kaleids._RhythmicKaleid import _RhythmicKaleid
+import types
 
 
 class _SignalAffixedObjectWithFilledTokens(_RhythmicKaleid):
@@ -10,31 +11,48 @@ class _SignalAffixedObjectWithFilledTokens(_RhythmicKaleid):
    '''
 
    def __init__(self, prefix_signal, prefix_lengths, suffix_signal, suffix_lengths, denominator,
-      prolation_addenda = None,
+      prolation_addenda = None, secondary_divisions = None,
       prefix_signal_helper = None, prefix_lengths_helper = None,
       suffix_signal_helper = None, suffix_lengths_helper = None,
-      prolation_addenda_helper = None):
+      prolation_addenda_helper = None, secondary_divisions_helper = None):
       _RhythmicKaleid.__init__(self)
+      prolation_addenda = self._none_to_new_list(prolation_addenda)
+      secondary_divisions = self._none_to_new_list(secondary_divisions)
+      prefix_signal_helper = self._none_to_trivial_helper(prefix_signal_helper)
+      prefix_lengths_helper = self._none_to_trivial_helper(prefix_lengths_helper)
+      suffix_signal_helper = self._none_to_trivial_helper(suffix_signal_helper)
+      suffix_lengths_helper = self._none_to_trivial_helper(suffix_lengths_helper)
+      prolation_addenda_helper = self._none_to_trivial_helper(prolation_addenda_helper)
+      secondary_divisions_helper = self._none_to_trivial_helper(secondary_divisions_helper)
       assert seqtools.all_are_integer_equivalent_numbers(prefix_signal)
       assert seqtools.all_are_nonnegative_integer_equivalent_numbers(prefix_lengths)
       assert seqtools.all_are_integer_equivalent_numbers(suffix_signal)
       assert seqtools.all_are_nonnegative_integer_equivalent_numbers(suffix_lengths)
-      prolation_addenda = self._none_to_new_list(prolation_addenda)
+      assert mathtools.is_positive_integer_equivalent_number(denominator)
       assert seqtools.all_are_nonnegative_integer_equivalent_numbers(prolation_addenda)
+      assert seqtools.all_are_nonnegative_integer_equivalent_numbers(secondary_divisions)
+      assert isinstance(prefix_signal_helper, (types.FunctionType, types.MethodType))
+      assert isinstance(prefix_lengths_helper, (types.FunctionType, types.MethodType))
+      assert isinstance(suffix_signal_helper, (types.FunctionType, types.MethodType))
+      assert isinstance(suffix_lengths_helper, (types.FunctionType, types.MethodType))
+      assert isinstance(prolation_addenda_helper, (types.FunctionType, types.MethodType))
+      assert isinstance(secondary_divisions_helper, (types.FunctionType, types.MethodType))
       self._prefix_signal = prefix_signal
       self._prefix_lengths = prefix_lengths
       self._suffix_signal = suffix_signal
       self._suffix_lengths = suffix_lengths
       self._prolation_addenda = prolation_addenda
-      assert mathtools.is_positive_integer_equivalent_number(denominator)
       self._denominator = denominator
-      self._repr_signals.append(prefix_signal)
-      self._repr_signals.append(suffix_signal)
+      self._secondary_divisions = secondary_divisions
       self._prefix_signal_helper = self._none_to_trivial_helper(prefix_signal_helper)
       self._prefix_lengths_helper = self._none_to_trivial_helper(prefix_lengths_helper)
       self._suffix_signal_helper = self._none_to_trivial_helper(suffix_signal_helper)
       self._suffix_lengths_helper = self._none_to_trivial_helper(suffix_lengths_helper)
       self._prolation_addenda_helper = self._none_to_trivial_helper(prolation_addenda_helper)
+      self._secondary_divisions_helper = self._none_to_trivial_helper(secondary_divisions_helper)
+      self._repr_signals.append(self._prefix_signal)
+      self._repr_signals.append(self._suffix_signal)
+      self._repr_signals.append(self._secondary_divisions)
 
    ## OVERLOADS ##
 
