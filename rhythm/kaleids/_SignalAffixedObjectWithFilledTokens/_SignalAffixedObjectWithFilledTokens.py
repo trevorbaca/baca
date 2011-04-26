@@ -58,18 +58,22 @@ class _SignalAffixedObjectWithFilledTokens(_RhythmicKaleid):
 
    def __call__(self, duration_tokens, seeds = None):
       duration_pairs, seeds = _RhythmicKaleid.__call__(self, duration_tokens, seeds)
-      prefix_signal, prefix_lengths, suffix_signal, suffix_lengths, prolation_addenda = \
-         self._prepare_input(seeds) 
-      signals = (prefix_signal, suffix_signal, prolation_addenda)
-      quintet = self._scale_signals(duration_pairs, self._denominator, signals)
-      duration_pairs, lcd, prefix_signal, suffix_signal, prolation_addenda = quintet
-      numeric_map = self._make_numeric_map(duration_pairs, 
+      result = self._prepare_input(seeds)
+      prefix_signal, prefix_lengths, suffix_signal, suffix_lengths = result[:-2]
+      prolation_addenda, secondary_divisions = result[-2:]
+      signals = (prefix_signal, suffix_signal, prolation_addenda, secondary_divisions)
+      result = self._scale_signals(duration_pairs, self._denominator, signals)
+      duration_pairs, lcd, prefix_signal, suffix_signal = result[:-2]
+      prolation_addenda, secondary_divisions = result[-2:]
+      secondary_duration_pairs = self._make_secondary_duration_pairs(
+         duration_pairs, secondary_divisions)
+      numeric_map = self._make_numeric_map(secondary_duration_pairs, 
          prefix_signal, prefix_lengths, suffix_signal, suffix_lengths, prolation_addenda)
       leaf_lists = self._numeric_map_and_denominator_to_leaf_lists(numeric_map, lcd)
       if not self._prolation_addenda:
          return leaf_lists
       else:
-         tuplets = self._make_tuplets(duration_pairs, leaf_lists)
+         tuplets = self._make_tuplets(secondary_duration_pairs, leaf_lists)
          return tuplets
 
    ## PRIVATE METHODS ##
@@ -104,6 +108,7 @@ class _SignalAffixedObjectWithFilledTokens(_RhythmicKaleid):
       suffix_signal = self._suffix_signal_helper(self._suffix_signal, seeds)
       suffix_lengths = self._suffix_lengths_helper(self._suffix_lengths, seeds)
       prolation_addenda = self._prolation_addenda_helper(self._prolation_addenda, seeds)
+      secondary_divisions = self._secondary_divisions_helper(self._secondary_divisions, seeds)
       prefix_signal = seqtools.CyclicTuple(prefix_signal)
       suffix_signal = seqtools.CyclicTuple(suffix_signal)
       prefix_lengths = seqtools.CyclicTuple(prefix_lengths)
@@ -112,4 +117,6 @@ class _SignalAffixedObjectWithFilledTokens(_RhythmicKaleid):
          prolation_addenda = seqtools.CyclicTuple(prolation_addenda)
       else:
          prolation_addenda = seqtools.CyclicTuple([0])
-      return prefix_signal, prefix_lengths, suffix_signal, suffix_lengths, prolation_addenda
+      secondary_divisions = seqtools.CyclicTuple(secondary_divisions)
+      return prefix_signal, prefix_lengths, \
+         suffix_signal, suffix_lengths, prolation_addenda, secondary_divisions

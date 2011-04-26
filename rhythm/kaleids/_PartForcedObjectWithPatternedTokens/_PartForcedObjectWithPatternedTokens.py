@@ -143,17 +143,6 @@ class _PartForcedObjectWithPatternedTokens(_RhythmicKaleid):
             prolated_duration_pairs.append(prolated_duration_pair)
       return prolated_duration_pairs
 
-   def _make_secondary_duration_pairs(self, duration_pairs, secondary_divisions):
-      if not secondary_divisions:
-         return duration_pairs[:]
-      numerators = [duration_pair[0] for duration_pair in duration_pairs]
-      secondary_numerators = seqtools.split_sequence_cyclically_by_weights_with_overhang(
-         numerators, secondary_divisions)
-      secondary_numerators = seqtools.flatten_sequence(secondary_numerators)
-      denominator = duration_pairs[0][1]
-      secondary_duration_pairs = [(n, denominator) for n in secondary_numerators]
-      return secondary_duration_pairs
-
    def _prepare_input(self, seeds):
       pattern = seqtools.CyclicTuple(self._pattern_helper(self._pattern, seeds))
       prolation_addenda = self._prolation_addenda_helper(self._prolation_addenda, seeds)

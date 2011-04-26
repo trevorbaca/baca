@@ -25,6 +25,17 @@ class _RhythmicKaleid(object):
 
    ## PRIVATE METHODS ##
 
+   def _make_secondary_duration_pairs(self, duration_pairs, secondary_divisions):
+      if not secondary_divisions:
+         return duration_pairs[:]
+      numerators = [duration_pair[0] for duration_pair in duration_pairs]
+      secondary_numerators = seqtools.split_sequence_cyclically_by_weights_with_overhang(
+         numerators, secondary_divisions)
+      secondary_numerators = seqtools.flatten_sequence(secondary_numerators)
+      denominator = duration_pairs[0][1]
+      secondary_duration_pairs = [(n, denominator) for n in secondary_numerators]
+      return secondary_duration_pairs
+
    def _make_tuplets(self, duration_pairs, leaf_lists):
       assert len(duration_pairs) == len(leaf_lists)
       tuplets = [ ]

@@ -230,3 +230,58 @@ def test_baca_rhythm_kaleids_SignalAffixedNoteFilledTokens_05( ):
    '''
 
    assert staff.format == "\\new Staff {\n\t{\n\t\t\\time 4/8\n\t\t\\times 4/5 {\n\t\t\tr8\n\t\t\tc'4.\n\t\t\tr8\n\t\t}\n\t}\n\t{\n\t\t\\time 4/8\n\t\t{\n\t\t\tr8\n\t\t\tc'4\n\t\t\tr8\n\t\t}\n\t}\n\t{\n\t\t\\time 4/8\n\t\t\\times 4/7 {\n\t\t\tr8\n\t\t\tc'2 ~\n\t\t\tc'8\n\t\t\tr8\n\t\t}\n\t}\n}"
+
+
+def test_baca_rhythm_kaleids_SignalAffixedNoteFilledTokens_06( ):
+
+   prefix_signal, prefix_lengths = [-1], [1]
+   suffix_signal, suffix_lengths = [ ], [0]
+   denominator, prolation_addenda, secondary_divisions = 32, [2, 0], [20]
+   kaleid = SignalAffixedNoteFilledTokens(prefix_signal, prefix_lengths,
+      suffix_signal, suffix_lengths, denominator, prolation_addenda, secondary_divisions)
+
+   duration_tokens = [(4, 8), (4, 8), (4, 8)]
+   leaf_lists = kaleid(duration_tokens)
+   leaves = seqtools.flatten_sequence(leaf_lists)
+
+   staff = Staff(measuretools.make_measures_with_full_measure_spacer_skips(duration_tokens))
+   measuretools.replace_contents_of_measures_in_expr(staff, leaves)
+
+   r'''
+   \new Staff {
+      {
+         \time 4/8
+         \times 8/9 {
+            r32
+            c'2 ~
+            c'32
+         }
+      }
+      {
+         \time 4/8
+         {
+            r32
+            c'16.
+         }
+         \fraction \times 6/7 {
+            r32
+            c'4. ~
+            c'32
+         }
+      }
+      {
+         \time 4/8
+         {
+            r32
+            c'8..
+         }
+         \times 4/5 {
+            r32
+            c'4 ~
+            c'32
+         }
+      }
+   }
+   '''
+
+   assert staff.format == "\\new Staff {\n\t{\n\t\t\\time 4/8\n\t\t\\times 8/9 {\n\t\t\tr32\n\t\t\tc'2 ~\n\t\t\tc'32\n\t\t}\n\t}\n\t{\n\t\t\\time 4/8\n\t\t{\n\t\t\tr32\n\t\t\tc'16.\n\t\t}\n\t\t\\fraction \\times 6/7 {\n\t\t\tr32\n\t\t\tc'4. ~\n\t\t\tc'32\n\t\t}\n\t}\n\t{\n\t\t\\time 4/8\n\t\t{\n\t\t\tr32\n\t\t\tc'8..\n\t\t}\n\t\t\\times 4/5 {\n\t\t\tr32\n\t\t\tc'4 ~\n\t\t\tc'32\n\t\t}\n\t}\n}"
