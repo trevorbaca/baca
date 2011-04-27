@@ -133,3 +133,39 @@ def test_baca_rhythm_kaleids_PartFilledChunksWithPatternedTokens_03( ):
    '''
 
    assert staff.format == "\\new Staff {\n\t{\n\t\t\\time 3/8\n\t\t{\n\t\t\tr16\n\t\t\tc'8\n\t\t\tc'8.\n\t\t}\n\t}\n\t{\n\t\t\\time 4/8\n\t\t\\fraction \\times 3/5 {\n\t\t\tc'16\n\t\t\tc'8\n\t\t\tc'8\n\t\t}\n\t\t{\n\t\t\tc'16\n\t\t\tc'16\n\t\t\tc'8\n\t\t\tr16\n\t\t}\n\t}\n}"
+
+
+def test_baca_rhythm_kaleids_PartFilledChunksWithPatternedTokens_04( ):
+
+   pattern, denominator, prolation_addenda  = [1], 8, [ ]
+   lefts, middles, rights = [-1], [0], [-1]
+   left_lengths, right_lengths = [1], [2]
+   kaleid = PartForcedChunkWithPatternedTokens(
+      pattern, denominator, prolation_addenda,
+      lefts, middles, rights,
+      left_lengths, right_lengths)
+
+   duration_tokens = [(8, 8)]
+   music = kaleid(duration_tokens)
+
+   music = seqtools.flatten_sequence(music)
+   staff = Staff(measuretools.make_measures_with_full_measure_spacer_skips(duration_tokens))
+   measuretools.replace_contents_of_measures_in_expr(staff, music)
+
+   r'''
+   \new Staff {
+      {
+         \time 8/8
+         r8
+         c'8
+         c'8
+         c'8
+         c'8
+         c'8
+         r8
+         r8
+      }
+   }
+   '''
+
+   assert staff.format == "\\new Staff {\n\t{\n\t\t\\time 8/8\n\t\tr8\n\t\tc'8\n\t\tc'8\n\t\tc'8\n\t\tc'8\n\t\tc'8\n\t\tr8\n\t\tr8\n\t}\n}"
