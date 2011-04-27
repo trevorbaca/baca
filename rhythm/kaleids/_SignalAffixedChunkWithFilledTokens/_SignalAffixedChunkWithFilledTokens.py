@@ -31,7 +31,10 @@ class _SignalAffixedChunkWithFilledTokens(_SignalAffixedObjectWithFilledTokens):
             numerator += (prolation_addendum % numerator)
             numeric_map_part = self._make_numeric_map_part(numerator, ( ), ( ))
             numeric_map.append(numeric_map_part)
-         prolation_addendum = prolation_addenda[i+2]
+         try:
+            prolation_addendum = prolation_addenda[i+2]
+         except UnboundLocalError:
+            prolation_addendum = prolation_addenda[1+2]
          numerator = duration_pairs[-1][0]
          numerator += (prolation_addendum % numerator)
          numeric_map_part = self._make_numeric_map_part(numerator, ( ), suffix)
