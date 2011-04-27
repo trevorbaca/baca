@@ -1,7 +1,7 @@
 from baca.rhythm.kaleids._SignalAffixedObjectWithFilledTokens import _SignalAffixedObjectWithFilledTokens
 
 
-class _SignalAffixedChunksWithFilledTokens(_SignalAffixedObjectWithFilledTokens):
+class _SignalAffixedChunkWithFilledTokens(_SignalAffixedObjectWithFilledTokens):
    '''Signal-affixed chunks with rest-filled tokens.
    '''
 
