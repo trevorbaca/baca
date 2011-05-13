@@ -15,3 +15,11 @@ def test_baca_dynamic_DynamicsManager_is_hairpin_token_02( ):
    assert not baca.dynamics.DynamicsManager.is_hairpin_token(('p', 'f'))
    assert not baca.dynamics.DynamicsManager.is_hairpin_token(('p', '@', 'f'))
    assert not baca.dynamics.DynamicsManager.is_hairpin_token(('x', '<', 'y'))
+
+
+def test_baca_dynamic_DynamicsManager_is_hairpin_token_03( ):
+
+   assert not baca.dynamics.DynamicsManager.is_hairpin_token(('f', '<', 'p'))
+   assert not baca.dynamics.DynamicsManager.is_hairpin_token(('p', '>', 'f'))
+   assert not baca.dynamics.DynamicsManager.is_hairpin_token(('p', '<', 'p'))
+   assert not baca.dynamics.DynamicsManager.is_hairpin_token(('f', '>', 'f'))
