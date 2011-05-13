@@ -15,8 +15,10 @@ class NoteAndChordGroupHairpins(DynamicsManager):
    def __init__(self, hairpin_tokens = None):
       if hairpin_tokens is None:
          self.hairpin_tokens = [ ]
-      else:
-         self.hairpin_tokens = hairpin_tokens
+      for hairpin_token in hairpin_tokens:
+         if not self.is_hairpin_token(hairpin_token):
+            raise ValueError('not hairpin token: %s' % str(hairpin_token))
+      self.hairpin_tokens = hairpin_tokens
 
    ## OVERLOADS ##
 
