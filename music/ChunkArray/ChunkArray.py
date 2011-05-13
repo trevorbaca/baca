@@ -7,7 +7,6 @@ class ChunkArray(list):
 
    def __init__(self, args):
       from archipel.mus.py.make.ArchipelChunk import ArchipelChunk
-      print args
       assert all([isinstance(arg, ArchipelChunk) for arg in args])
       list.__init__(self, args)
       self._update_chunk_pointers( )
@@ -53,7 +52,7 @@ class ChunkArray(list):
 
    def extend(self, args):
       list.extend(self, args)
-      self._updae_chunk_pointers( )
+      self._update_chunk_pointers( )
 
    def get(self, name_string):
       for chunk in self:
