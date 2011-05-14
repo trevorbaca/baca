@@ -72,5 +72,5 @@ class PatternedArticulations(ArticulationsSpecifier):
                maximum_written_pitch = note_or_chord.pitches[-1]
             if self.maximum_written_pitch < maximum_written_pitch:
                continue
-         marktools.apply_articulations_to_notes_and_chords_in_expr(note_or_chord, articulation)
+         marktools.apply_articulations_to_notes_and_chords_in_expr(note_or_chord, [articulation])
       return expr
