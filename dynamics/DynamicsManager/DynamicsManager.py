@@ -1,11 +1,31 @@
+from abjad.tools import durtools
+from fractions import Fraction
+
+
 class DynamicsManager(object):
    '''Dynamics manager.
    '''
+
+   def __init__(self, minimum_prolated_duration = None):
+      self.minimum_prolated_duration = minimum_prolated_duration
 
    ## OVERLOADS ##
 
    def __repr__(self):
       return '%s( )' % (self.__class__.__name__)
+
+   ## PUBLIC ATTRIBUTES ##
+
+   @apply
+   def minimum_prolated_duration( ):
+      def fget(self):
+         return self._minimum_prolated_duration
+      def fset(self, minimum_prolated_duration):
+         if minimum_prolated_duration is None:
+            self._minimum_prolated_duration = minimum_prolated_duration
+         else:
+            duration = durtools.duration_token_to_duration_pair(minimum_prolated_duration)
+            self._minimum_prolated_duration = Fraction(*duration)
 
    ## PUBLIC METHODS ##
 
