@@ -8,8 +8,8 @@ from abjad.tools import spannertools
 from baca.dynamics.DynamicsManager import DynamicsManager
 
 
-class NoteAndChordGroupHairpins(DynamicsManager):
-   '''Note and chord run hairpins.
+class NoteAndChordHairpins(DynamicsManager):
+   '''Note and chord hairpins.
    '''
 
    def __init__(self, hairpin_tokens = None, minimum_prolated_duration = None):
