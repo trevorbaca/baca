@@ -1,3 +1,4 @@
+import articulations
 import dynamics
 import music
 import pitch
