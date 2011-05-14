@@ -21,9 +21,14 @@ class NoteAndChordHairpins(DynamicsManager):
             raise ValueError('not hairpin token: %s' % str(hairpin_token))
       self.hairpin_tokens = hairpin_tokens
 
-   ## OVERLOADS ##
+   ## OVERLOAD ##
 
-   def __call__(self, expr, offset = 0):
+   def __call__(self):
+      raise NotImplementedError
+
+   ## PUBLIC METHODS ##
+
+   def apply(self, expr, offset = 0):
       leaves = list(leaftools.iterate_leaves_forward_in_expr(expr))
       groups = list(componenttools.yield_groups_of_mixed_klasses_in_sequence(leaves, (Note, Chord)))
       hairpin_tokens = seqtools.CyclicList(self.hairpin_tokens)
