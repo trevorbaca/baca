@@ -3,7 +3,7 @@ from abjad.components import Note
 from abjad.tools import leaftools
 from abjad.tools import marktools
 from abjad.tools import seqtools
-from baca.articulations._ArticulationsSpecifler._ArticulationsSpecifier import _ArticulationsSpecifier
+from baca.articulations._ArticulationsSpecifier._ArticulationsSpecifier import _ArticulationsSpecifier
 
 
 class PatternedArticulations(_ArticulationsSpecifier):
