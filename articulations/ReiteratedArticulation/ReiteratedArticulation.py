@@ -44,6 +44,8 @@ class ReiteratedArticulation(_ArticulationsSpecifier):
          if isinstance(articulation_list, list):
             if all([isinstance(x, str) for x in articulation_list]):
                self._articulation_list = articulation_list
+         elif isinstance(articulation_list, str):
+            self._articulation_list = [articulation_list]
          else:
             raise TypeError(articulation_list)
       return property(**locals( ))
