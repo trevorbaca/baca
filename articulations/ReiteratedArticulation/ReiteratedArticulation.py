@@ -3,17 +3,17 @@ from abjad.components import Note
 from abjad.tools import leaftools
 from abjad.tools import marktools
 from abjad.tools import seqtools
-from baca.articulations.ArticulationsSpecifier import ArticulationsSpecifier
+from baca.articulations._ArticulationsSpecifier._Articulations import _ArticulationsSpecifier
 
 
-class ReiteratedArticulation(ArticulationsSpecifier):
+class ReiteratedArticulation(_ArticulationsSpecifier):
    '''Patterned articulations.
    '''
 
    def __init__(self, articulation_list = None, 
       minimum_prolated_duration = None, maximum_prolated_duration = None,
       minimum_written_pitch = None, maximum_written_pitch = None):
-      ArticulationsSpecifier.__init__(self, 
+      _ArticulationsSpecifier.__init__(self, 
          minimum_prolated_duration = minimum_prolated_duration, 
          maximum_prolated_duration = maximum_prolated_duration,
          minimum_written_pitch = minimum_written_pitch,
