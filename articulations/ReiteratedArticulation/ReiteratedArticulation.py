@@ -11,7 +11,7 @@ class ReiteratedArticulation(_ArticulationsSpecifier):
    '''
 
    def __init__(self, articulation_list = None, 
-      minimum_prolated_duration = None, maximum_prolated_duration = None,
+      minimum_prolated_duration = None, maximum_prolated_duration = None, 
       minimum_written_pitch = None, maximum_written_pitch = None):
       _ArticulationsSpecifier.__init__(self, 
          minimum_prolated_duration = minimum_prolated_duration, 
@@ -20,6 +20,8 @@ class ReiteratedArticulation(_ArticulationsSpecifier):
          maximum_written_pitch = maximum_written_pitch)
       if articulation_list is None:
          articulation_list = [ ]
+      if isinstance(articulation_list, str):
+         articulation_list = [articulation_list]
       self.articulation_list = articulation_list
 
    ## OVERLOADS ##
@@ -28,6 +30,9 @@ class ReiteratedArticulation(_ArticulationsSpecifier):
       new = type(self)( )
       new.articulation_list = articulation_list
       return new
+
+   def __repr__(self):
+      return '%s(%s)' % (self.__class__.__name__, self.articulation_list)
 
    ## PUBLIC ATTRIBUTES ##
 
