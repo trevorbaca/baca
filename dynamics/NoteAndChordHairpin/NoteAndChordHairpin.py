@@ -43,7 +43,6 @@ class NoteAndChordHairpin(_DynamicsSpecifier):
       leaves = list(leaftools.iterate_leaves_forward_in_expr(expr))
       leaves = leaftools.remove_outer_rests_from_sequence(leaves)
       group = leaves
-      print group
       is_short_group = False
       if len(group) == 1:
          is_short_group = True
