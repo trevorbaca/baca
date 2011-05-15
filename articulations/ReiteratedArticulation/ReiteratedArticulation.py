@@ -3,23 +3,25 @@ from abjad.components import Note
 from abjad.tools import leaftools
 from abjad.tools import marktools
 from abjad.tools import seqtools
-from baca.articulations.ArticulationsSpecifier import ArticulationsSpecifier
+from baca.articulations._ArticulationsSpecifier._ArticulationsSpecifier import _ArticulationsSpecifier
 
 
-class ReiteratedArticulation(ArticulationsSpecifier):
+class ReiteratedArticulation(_ArticulationsSpecifier):
    '''Patterned articulations.
    '''
 
    def __init__(self, articulation_list = None, 
-      minimum_prolated_duration = None, maximum_prolated_duration = None,
+      minimum_prolated_duration = None, maximum_prolated_duration = None, 
       minimum_written_pitch = None, maximum_written_pitch = None):
-      ArticulationsSpecifier.__init__(self, 
+      _ArticulationsSpecifier.__init__(self, 
          minimum_prolated_duration = minimum_prolated_duration, 
          maximum_prolated_duration = maximum_prolated_duration,
          minimum_written_pitch = minimum_written_pitch,
          maximum_written_pitch = maximum_written_pitch)
       if articulation_list is None:
          articulation_list = [ ]
+      if isinstance(articulation_list, str):
+         articulation_list = [articulation_list]
       self.articulation_list = articulation_list
 
    ## OVERLOADS ##
@@ -28,6 +30,9 @@ class ReiteratedArticulation(ArticulationsSpecifier):
       new = type(self)( )
       new.articulation_list = articulation_list
       return new
+
+   def __repr__(self):
+      return '%s(%s)' % (self.__class__.__name__, self.articulation_list)
 
    ## PUBLIC ATTRIBUTES ##
 
@@ -39,6 +44,8 @@ class ReiteratedArticulation(ArticulationsSpecifier):
          if isinstance(articulation_list, list):
             if all([isinstance(x, str) for x in articulation_list]):
                self._articulation_list = articulation_list
+         elif isinstance(articulation_list, str):
+            self._articulation_list = [articulation_list]
          else:
             raise TypeError(articulation_list)
       return property(**locals( ))
