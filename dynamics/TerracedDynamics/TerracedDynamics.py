@@ -2,15 +2,15 @@ from abjad.tools import contexttools
 from abjad.tools import leaftools
 from abjad.tools import marktools
 from abjad.tools import seqtools
-from baca.dynamics.DynamicsManager import DynamicsManager
+from baca.dynamics._DynamicsSpecifier import _DynamicsSpecifier
 
 
-class TerracedDynamics(DynamicsManager):
+class TerracedDynamics(_DynamicsSpecifier):
    '''Terraced dynamics.
    '''
 
    def __init__(self, dynamics = None, minimum_prolated_duration = None):
-      DynamicsManager.__init__(self, minimum_prolated_duration = minimum_prolated_duration)
+      _DynamicsSpecifier.__init__(self, minimum_prolated_duration = minimum_prolated_duration)
       if dynamics is None:
          dynamics = [ ]
       self.dynamics = dynamics

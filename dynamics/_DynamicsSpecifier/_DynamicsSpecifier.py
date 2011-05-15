@@ -2,8 +2,8 @@ from abjad.tools import durtools
 from fractions import Fraction
 
 
-class DynamicsManager(object):
-   '''Dynamics manager.
+class _DynamicsSpecifier(object):
+   '''Dynamics specifier.
    '''
 
    def __init__(self, minimum_prolated_duration = None):

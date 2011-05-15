@@ -5,15 +5,15 @@ from abjad.tools import leaftools
 from abjad.tools import marktools
 from abjad.tools import seqtools
 from abjad.tools import spannertools
-from baca.dynamics.DynamicsManager import DynamicsManager
+from baca.dynamics._DynamicsSpecifier import _DynamicsSpecifier
 
 
-class NoteAndChordHairpins(DynamicsManager):
+class NoteAndChordHairpins(_DynamicsSpecifier):
    '''Note and chord hairpins.
    '''
 
    def __init__(self, hairpin_tokens = None, minimum_prolated_duration = None):
-      DynamicsManager.__init__(self, minimum_prolated_duration = minimum_prolated_duration)
+      _DynamicsSpecifier.__init__(self, minimum_prolated_duration = minimum_prolated_duration)
       if hairpin_tokens is None:
          hairpin_tokens = [ ]
       for hairpin_token in hairpin_tokens:
