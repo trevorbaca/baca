@@ -21,14 +21,14 @@
 #         if quit_regex.match(input):
 #            break
 #         elif input == '1':
-#            print_not_implemented( )
-#            run_go_on_menu( )
+#            print_not_implemented()
+#            run_go_on_menu()
 #         elif input == '2':
 #            try:
 #               run_chordal_sequences_menu(score_package_name)
 #            except KeyboardInterrupt:
 #               os.system('clear')
-#         elif input.lower( ) == 'q':
+#         elif input.lower() == 'q':
 #            break
 #         else:
 #            pass

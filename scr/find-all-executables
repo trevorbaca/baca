@@ -2,7 +2,7 @@
 
 import os
 
-def find_all_executables( ):
+def find_all_executables():
    for dirpath, dirnames, filenames in os.walk('.'):
       for filename in filenames:
          full_filename = os.path.join(dirpath, filename)
@@ -12,5 +12,5 @@ def find_all_executables( ):
 
 if __name__ == '__main__':
    os.system('clear')
-   find_all_executables( )
+   find_all_executables()
    print ''

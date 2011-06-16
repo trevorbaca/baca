@@ -3,7 +3,7 @@
 import os
 import sys
 
-result = os.popen('lilypond --version').readlines( )
+result = os.popen('lilypond --version').readlines()
 first_line = result[0]
 first_line = first_line.strip('\n')
 version = first_line.split(' ')[-1]

@@ -2,13 +2,13 @@ from baca.rhythm.kaleids._SignalAffixedFilledTokens import _SignalAffixedFilledT
 
 
 class SignalAffixedNoteFilledTokens(_SignalAffixedFilledTokens):
-   '''Signal-affixed note-filled tokens.
-   '''
+    '''Signal-affixed note-filled tokens.
+    '''
 
-   ## PRIVATE METHODS ##
-   
-   def _make_middle_of_numeric_map_part(self, middle):
-      if 0 < middle:
-         return (middle, )
-      else:
-         return ( )
+    ## PRIVATE METHODS ##
+
+    def _make_middle_of_numeric_map_part(self, middle):
+        if 0 < middle:
+            return (middle, )
+        else:
+            return ()

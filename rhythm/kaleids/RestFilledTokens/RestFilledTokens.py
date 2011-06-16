@@ -2,15 +2,15 @@ from baca.rhythm.kaleids.SignalAffixedRestFilledTokens import SignalAffixedRestF
 
 
 class RestFilledTokens(SignalAffixedRestFilledTokens):
-   '''Rest-filled tokens.
+    '''Rest-filled tokens.
 
-   See the test file for examples.
-   '''
+    See the test file for examples.
+    '''
 
-   def __init__(self):
-      SignalAffixedRestFilledTokens.__init__(self, [ ], [0], [ ], [0], 1)
+    def __init__(self):
+        SignalAffixedRestFilledTokens.__init__(self, [], [0], [], [0], 1)
 
-   ## OVERLOADS ##
+    ## OVERLOADS ##
 
-   def __repr__(self):
-      return '%s( )' % self.__class__.__name__
+    def __repr__(self):
+        return '%s()' % type(self).__name__

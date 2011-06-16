@@ -3,7 +3,7 @@
 import os
 import subprocess
 
-def delete_svn_executable_property( ):
+def delete_svn_executable_property():
    forbidden_characters = (' ', )
    for dirpath, dirnames, filenames in os.walk('.'):
       for filename in filenames:
@@ -12,13 +12,13 @@ def delete_svn_executable_property( ):
             full_filename = os.path.join(dirpath, filename)
             command = 'svn proplist %s' % full_filename
             p = subprocess.Popen(command, shell = True, stdout = subprocess.PIPE, close_fds = True)
-            lines = p.stdout.readlines( )
+            lines = p.stdout.readlines()
             if '  svn:executable\n' in lines:
                command = 'svn propdel svn:executable %s' % full_filename
-               subprocess.call(command.split( ))
+               subprocess.call(command.split())
       
 
 if __name__ == '__main__':
    os.system('clear')
-   delete_svn_executable_property( )
+   delete_svn_executable_property()
    print ''

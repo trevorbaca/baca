@@ -16,7 +16,7 @@ else:
 os.system('clear')
 
 ## walk specified directory (defaulting to curdir) and collect pdfs
-pdfs = [ ]
+pdfs = []
 for dirpath, dirnames, filenames in os.walk(directory):
    new_pdfs = [x for x in filenames if x.endswith('.pdf')]
    new_pdfs = [os.path.join(dirpath, x) for x in new_pdfs]
