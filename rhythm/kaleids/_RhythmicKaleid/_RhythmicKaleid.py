@@ -1,5 +1,4 @@
 from abjad.components import Note
-from abjad.components import Rest
 from abjad.tools import durtools
 from abjad.tools import seqtools
 from abjad.tools import tuplettools
