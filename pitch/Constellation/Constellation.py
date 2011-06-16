@@ -1,4 +1,4 @@
-from abjad.components import Chord
+from abjad.tools.chordtools import Chord
 from abjad.tools import chordtools
 from abjad.tools import iotools
 from abjad.tools import lilyfiletools

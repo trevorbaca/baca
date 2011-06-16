@@ -1,4 +1,4 @@
-from abjad.components import Chord
+from abjad.tools.chordtools import Chord
 from abjad.tools import pitchtools
 from baca.pitch.constellate import constellate
 
