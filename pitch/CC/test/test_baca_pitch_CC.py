@@ -1,5 +1,5 @@
 from abjad.tools.chordtools import Chord
-from abjad.components import Staff
+from abjad.tools.stafftools import Staff
 from abjad.tools import pitchtools
 import baca
 
