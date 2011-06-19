@@ -1,4 +1,4 @@
-from abjad.components._Component import _Component
+from abjad.tools.componenttools._Component import _Component
 from abjad.tools import seqtools
 from baca.util.rotate_nested import rotate_nested
 
