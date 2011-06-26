@@ -35,4 +35,4 @@ def repeat_subruns_cyclic(notes, pairs, history = False):
       instructions.append(instruction)
 
    for index, new_notes, reps in reversed(sorted(instructions)):
-      notes[index:index] = componenttools.clone_components_and_remove_all_spanners(new_notes, reps)
+      notes[index:index] = componenttools.copy_components_and_remove_all_spanners(new_notes, reps)
