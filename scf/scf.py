@@ -1,9 +1,11 @@
 #! /usr/bin/env python
 
-import os
+import io
+import sys
 
-os.system('clear')
 
-print 'Welcome to the score-control front-end.'
+score_package_name = io.handle_startup(sys.argv)
 
-print ''
+io.profile_score_directory(score_package_name)
+
+io.run_score_menu(score_package_name)
