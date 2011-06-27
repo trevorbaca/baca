@@ -158,7 +158,7 @@ class Constellation(object):
 
    def get_number_of_chord(self, chord):
       chord = Chord(chord, (1, 4))
-      chromatic_pitch_numbers = [x.chromatic_pitch_number for x in chord.pitches]
+      chromatic_pitch_numbers = [x.chromatic_pitch_number for x in chord.written_pitches]
       for pnl_index, pnl in enumerate(self):
          if pnl == chromatic_pitch_numbers:
             pnl_number = pnl_index + 1

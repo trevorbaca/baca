@@ -12,7 +12,7 @@ def test_music_make_measures_01( ):
    assert leaves_before == leaves_after
    for x in t:
       assert isinstance(x, Measure)
-      assert x.duration.prolated == Fraction(2, 8)
+      assert x.prolated_duration == Fraction(2, 8)
 
 
 def test_music_make_measures_02( ):
@@ -26,6 +26,6 @@ def test_music_make_measures_02( ):
    for i, x in enumerate(t):
       assert isinstance(x, Measure)
       if i == 0:
-         assert x.duration.prolated == Fraction(2, 8)
+         assert x.prolated_duration == Fraction(2, 8)
       else:
-         assert x.duration.prolated == Fraction(3, 8)
+         assert x.prolated_duration == Fraction(3, 8)

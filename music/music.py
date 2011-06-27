@@ -134,7 +134,8 @@ def effectiveDurations(m):
    '''
    #return [l.duration.prolated for l in instances(m, '_Leaf')]
    #return [l.duration.prolated for l in list(iterate.leaves_forward_in(m))]
-   return [l.duration.prolated for l in list(leaftools.iterate_leaves_forward_in_expr(m))]
+   #return [l.duration.prolated for l in list(leaftools.iterate_leaves_forward_in_expr(m))]
+   return [l.prolated_duration for l in list(leaftools.iterate_leaves_forward_in_expr(m))]
 
 def effectiveDuration(m):
    '''
@@ -180,7 +181,7 @@ def blank(l, positions):
 
    for i, m in enumerate(l):
       if (i + 1) in positions:
-         rests = resttools.make_rests(m.duration.contents)
+         rests = resttools.make_rests(m.contents_duration)
          new_measure = Measure(m.meter.effective, rests)
          l[i] = new_measure
 
@@ -594,7 +595,7 @@ def coruscate(n, s, t, z, d, rests = True):
       #ComplexBeam(element, [element.duration.pair])
       #BeamComplex(element, [element.duration.pair])
       #BeamComplexDurated(element.leaves, [element.duration.prolated])
-      spannertools.DuratedComplexBeamSpanner(element.leaves, [element.duration.prolated])
+      spannertools.DuratedComplexBeamSpanner(element.leaves, [element.prolated_duration])
 
    return result
 
@@ -611,13 +612,14 @@ def makeMeasures(m, meters):
    #for v in voices:
    #for v in iterate.naive_forward_in(m, Voice):
    for v in componenttools.iterate_components_forward_in_expr(m, klass = Voice):
-      assert v.duration.prolated == sum(durations, Fraction(0))
+      #assert v.duration.prolated == sum(durations, Fraction(0))
+      assert v.prolated_duration == sum(durations, Fraction(0))
       d = 0
       #measure = Measure(meters[d], [ ])
       measure = Measure(meters[d], [ ])
       for x in v[ : ]:
          measure.append(x)
-         if measure.duration.prolated >= durations[d]:
+         if measure.prolated_duration >= durations[d]:
             v[d : 2 * d + len(measure) - 1] = [measure]
             d += 1
             if d == len(durations):
