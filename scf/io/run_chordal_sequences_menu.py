@@ -1,6 +1,11 @@
 from check_and_make_directory import check_and_make_directory
+from get_score_title import get_score_title
+from inspect_chordal_sequence import inspect_chordal_sequence
+from list_chordal_sequences import list_chordal_sequences
 from make_chordal_sequence import make_chordal_sequence
+from present_menu import present_menu
 import os
+
 
 def run_chordal_sequences_menu(score_package_name):
 
@@ -10,18 +15,35 @@ def run_chordal_sequences_menu(score_package_name):
    if not check_and_make_directory(chordal_sequences_directory):
       return
 
+   os.system('clear')
+   score_title = get_score_title(score_package_name)
+
    while True:
-      if os.listdir(chordal_sequences_directory):
-         print 'Score contains chordal sequences.'
-      else:
-         print 'Score contains no chordal sequences.'
+      print '%s - chordal sequences' % score_title
       print ''
-      print '  [m: make new chordal sequence ...]'
-      print '  r: return to previous menu'
-      print ''
-      input = raw_input('scf> ')
-      print ''
-      if input.lower( ) == 'm':
-         make_chordal_sequence(score_package_name)
-      elif input.lower( ) == 'r':
-         break
+      chordal_sequences = list_chordal_sequences(score_package_name)
+      if not chordal_sequences:
+         print '  No chordal sequences found.'
+      additional_pairs = [('m', 'make new chordal sequence')]
+      choice, value = present_menu(chordal_sequences, additional_pairs)
+      try:
+         chordal_sequence_number = int(choice)
+         try:
+            inspect_chordal_sequence(score_package_name, chordal_sequence_number)
+         except KeyboardInterrupt:
+            os.system('clear')
+      except ValueError:
+         if choice.lower( ) == 'm':
+            try:
+               make_chordal_sequence(score_package_name)
+            except KeyboardInterrupt:
+               os.system('clear')
+         elif choice.lower( ) == 'r':
+            os.system('clear')
+            break
+         elif choice.lower( ) == 'q':
+            raise SystemExit
+         else:
+            raise ValueError('unknown choice "%s".' % choice)
+
+   os.system('clear')
