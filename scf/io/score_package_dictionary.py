@@ -1,6 +1,8 @@
 # -*- encoding: utf-8 -*-
 
 
+## TODO: move score metadata to poeme/__init__.py, etc.
+
 score_package_dictionary = {
     1: ('poeme', 'Poème recursif'),
     2: ('red-shift', 'Red Shift Hijinks'),

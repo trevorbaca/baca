@@ -20,9 +20,8 @@ def inspect_chordal_sequence(score_package_name, chordal_sequence_number):
    print '%s - chordal sequences - %s' % (score_title, chordal_sequence_number)
    print ''
 
-   print '  d: data'
-   print '  p: pdf'
-   print '' 
+   print '  d: data      p: pdf       v: rename     x: delete'
+   print ''
 
    while True:
       choice = raw_input('scf> ')
@@ -33,9 +32,13 @@ def inspect_chordal_sequence(score_package_name, chordal_sequence_number):
       elif choice.lower( ) == 'p':
          open_chordal_sequence_pdf(score_package_name, chordal_sequence_number)
          print ''
-      elif choice.lower( ) == 'r':
-         break
       elif choice.lower( ) == 'q':
          raise SystemExit
+      elif choice.lower( ) == 'r':
+         break
+      elif choice.lower( ) == 'v':
+         rename_material_package(score_package_name, materials_package_name)
+      elif choice.lower( ) == 'x':
+         delete_material_package(score_package_name, materials_package_name)
 
    os.system('clear')
