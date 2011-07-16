@@ -1,9 +1,9 @@
 from check_and_make_directory import check_and_make_directory
-from get_score_title import get_score_title
+#from get_score_title import get_score_title
 from inspect_chordal_sequence import inspect_chordal_sequence
 from list_chordal_sequences import list_chordal_sequences
 from make_chordal_sequence import make_chordal_sequence
-from present_menu import present_menu
+#from present_menu import present_menu
 import os
 
 

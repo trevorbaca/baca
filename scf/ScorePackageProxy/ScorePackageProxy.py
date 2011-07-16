@@ -1,12 +1,14 @@
+from baca.scf.SCFProxyObject import SCFProxyObject
 import os
 
 
-class ScorePackageProxy(object):
+class ScorePackageProxy(SCFProxyObject):
 
    def __init__(self, score_package_name):
-      self.chunks_directory = os.path.join(score_package_name, 'mus', 'chunks')
-      self.materials_directory = os.path.join(score_package_name, 'mus', 'materials')
       self.score_package_directory = os.path.join(os.environ.get('SCORES'), score_package_name)
+      self.chunks_directory = os.path.join(self.score_package_directory, 'mus', 'chunks')
+      self.materials_directory = os.path.join(self.score_package_directory, 'mus', 'materials')
+      self.score_package_initializer = os.path.join(self.score_package_directory, '__init__.py')
       self.score_package_name = score_package_name
 
    ## OVERLOADS ##
@@ -21,6 +23,52 @@ class ScorePackageProxy(object):
          return True
       response = raw_input(prompt)
       return response.lower( ) == 'y'
+
+   def _read_initializer_metadata(self, name):
+      initializer = file(self.score_package_initializer, 'r')
+      for line in initializer.readlines( ):
+         if line.startswith(name):
+            initializer.close( )
+            executable_line = line.replace(name, 'result')
+            exec(executable_line)
+            return result
+
+   def _write_initializer_metadata(self, name, value):
+      new_lines = [ ]
+      initializer = file(self.score_package_initializer, 'r')
+      found_existing_line = False
+      for line in initializer.readlines( ):
+         if line.startswith(name):
+            found_existing_line = True
+            new_line = '%s = %s\n' % (name, repr(value))
+            new_lines.append(new_line)
+         else:
+            new_lines.append(line)
+      if not found_existing_line:
+         new_line = '%s = %s\n' % (name, repr(value))
+         new_lines.append(new_line)
+      initializer.close( )
+      initializer = file(self.score_package_initializer, 'w')
+      initializer.write(''.join(new_lines))
+      initializer.close( )
+
+   ## PUBLIC ATTRIBUTES ##
+   
+   @apply
+   def score_title( ):
+      def fget(self):
+         return self._read_initializer_metadata('score_title')
+      def fset(self, score_title):
+         return self._write_initializer_metadata('score_title', score_title)
+      return property(**locals( ))
+
+   @apply
+   def score_year( ):
+      def fget(self):
+         return self._read_initializer_metadata('score_year')
+      def fset(self, score_title):
+         return self._write_initializer_metadata('score_year', score_title)
+      return property(**locals( ))
       
    ## PUBLIC METHODS ##
 
@@ -28,13 +76,15 @@ class ScorePackageProxy(object):
       response = raw_input('material name: ')
       print ''
       response = response.lower( )
-      response = response.replace(' ', '-')
+      response = response.replace(' ', '_')
       material_package_name = '%s_%s' % (self.score_package_name, response)
       print 'package name will be %s.' % material_package_name
-      reponse = raw_input('ok? ')
-      if not response.lower == 'y':
+      print ''
+      response = raw_input('ok? ')
+      if not response.lower( ) == 'y':
+         print ''
          return 
-      target = os.path.join(self.score_package_name, 'materials', material_package_name)
+      target = os.path.join(self.materials_directory, material_package_name)
       if os.path.exists(target):
          raise OSError('directory %s already exists.' % repr(target))
       os.mkdir(target)
@@ -136,10 +186,24 @@ class ScorePackageProxy(object):
             initializer.write('')
             initializer.close( )
 
-   def list_materials_packages(self):
-      materials_packages = os.listdir(self.materials_directory)
-      materials_packages = [x for x in materials_packages if x[0].isalpha( )]
-      return materials_packages
+   def list_chunks(self):
+      chunks = os.listdir(self.chunks_directory)
+      chunks = [x for x in chunks if x[0].isalpha( )]
+      return chunks
+      
+   def list_materials(self):
+      materials = os.listdir(self.materials_directory)
+      materials = [x for x in materials if x[0].isalpha( )]
+      return materials
+
+   def manage_chunks(self):
+      pass
+
+   def manage_materials(self):
+      while True:
+         material_package_proxy = self.run_material_selection_interface( )
+         material_package_proxy.score_title = self.score_title
+         material_package_proxy.run_startup_interface( )
 
    def profile_score_package_directory_structure(self):
       if not os.path.exists(self.score_package_directory):
@@ -168,3 +232,57 @@ class ScorePackageProxy(object):
       print str(os.path.exists(os.path.join(self.score_package_directory, 'mus', 'materials')))
       print '%s/mus/materials/__init__.py' % self.score_package_name,
       print str(os.path.exists(os.path.join(self.score_package_directory, 'mus', 'materials', '__init__.py')))
+
+   def run_chunk_selection_interface(self):
+      raise NotImplementedError
+
+   def run_material_selection_interface(self):
+      import baca
+      self.clear_terminal( )
+      while True:
+         print '%s - materials\n' % self.score_title
+         materials = self.list_materials( )
+         key, material_name = self.present_menu(values_to_number = materials, indent_level = 1)
+         if key == 'b':
+            raise KeyboardInterrupt
+         elif key == 'q':
+            raise SystemExit
+         else:
+            material_package_proxy = baca.scf.MaterialPackageProxy(self.score_package_name, material_name)
+            return material_package_proxy
+
+   def run_score_package_proxy_startup_interface(self):
+      try:
+         while True:
+            self.clear_terminal( )
+            self.print_menu_title('%s - main menu\n' % self.score_title)
+            self.summarize_chunks( )
+            self.summarize_materials( )
+            pairs = [('h', 'chunks'), ('m', 'materials')]
+            key, value = self.present_menu(named_pairs = pairs, indent_level = 1, is_nearly = True)
+            if key == 'h':
+               #chunk_packge_proxy = self.run_chunk_selection_interface( )
+               self.manage_chunks( )
+            elif key == 'm':
+               self.manage_materials( )
+            elif key == 'q':
+               raise SystemExit
+      except EOFError:
+         print '\n'
+
+   def summarize_chunks(self):
+      chunks = self.list_chunks( )
+      print self.tab(1),
+      print 'Chunks (%s)' % len(chunks)
+      for chunk in chunks:
+         print self.tab(2),
+         print chunk
+      print ''
+
+   def summarize_materials(self):
+      materials = self.list_materials( )
+      print self.tab(1),
+      print 'Materials (%s)' % len(materials)
+      for material in materials:
+         print self.tab(2),
+         print material

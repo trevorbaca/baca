@@ -1,5 +1,5 @@
 import os
-from run_go_on_menu import run_go_on_menu
+#from run_go_on_menu import run_go_on_menu
 
 
 def check_and_make_directory(path):

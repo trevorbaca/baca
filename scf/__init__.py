@@ -1,3 +1,4 @@
 from CatalogProxy import CatalogProxy
+from MaterialPackageProxy import MaterialPackageProxy
 from ScorePackageProxy import ScorePackageProxy
 import io

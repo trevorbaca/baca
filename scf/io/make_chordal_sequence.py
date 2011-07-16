@@ -8,9 +8,9 @@ from abjad.tools import scoretools
 from get_chordal_sequences_directory import get_chordal_sequences_directory
 from get_next_chordal_sequence_package_name import get_next_chordal_sequence_package_name
 from get_next_chordal_sequence_subtitle import get_next_chordal_sequence_subtitle
-from get_score_title import get_score_title
+#from get_score_title import get_score_title
 from get_verified_user_input import get_verified_user_input
-from run_go_on_menu import run_go_on_menu
+#from run_go_on_menu import run_go_on_menu
 import baca
 import os
 import re

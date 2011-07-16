@@ -1,6 +1,6 @@
 from get_chordal_sequence_data import get_chordal_sequence_data
 from get_chordal_sequences_directory import get_chordal_sequences_directory
-from get_score_title import get_score_title
+#from get_score_title import get_score_title
 from list_chordal_sequences import list_chordal_sequences
 from open_chordal_sequence_pdf import open_chordal_sequence_pdf
 import os
