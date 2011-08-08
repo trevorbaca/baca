@@ -23,8 +23,8 @@ def repeat_subruns_cyclic(notes, pairs, history = False):
       new_notes = [ ]
       for i in range(pair[0], pair[0] + pair[1]):
          source = notes[i % len_notes]
-         #new_note = Note(source.pitch.number, source.duration.written)
-         new_note = Note(abs(source.pitch), source.duration.written)
+         #new_note = Note(source.written_pitch.number, source.written_duration)
+         new_note = Note(abs(source.written_pitch), source.written_duration)
          #if hasattr(source.history, 'tag'):
          #   new_note.history['tag'] = source.history['tag']
          #if isinstance(history, str):
