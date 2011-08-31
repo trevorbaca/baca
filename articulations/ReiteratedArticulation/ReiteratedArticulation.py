@@ -79,6 +79,6 @@ class ReiteratedArticulation(_ArticulationsSpecifier):
                maximum_written_pitch = note_or_chord.pitches[-1]
             if self.maximum_written_pitch < maximum_written_pitch:
                continue
-         marktools.apply_articulations_to_notes_and_chords_in_expr(
+         marktools.attach_articulations_to_notes_and_chords_in_expr(
             note_or_chord, self.articulation_list)
       return expr
