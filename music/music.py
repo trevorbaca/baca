@@ -9,7 +9,7 @@ from abjad.tools import componenttools
 from abjad.tools import leaftools
 from abjad.tools import mathtools
 from abjad.tools import resttools
-from abjad.tools import seqtools
+from abjad.tools import sequencetools
 from abjad.tools import skiptools
 from abjad.tools import spannertools
 from abjad.tools import tietools
@@ -192,7 +192,7 @@ def nest(measures, outer, inner):
    '''
    
    #inner = partition(inner, [len(x) for x in outer], action = 'new')
-   inner = seqtools.partition_by_lengths(inner, [len(x) for x in outer])
+   inner = sequencetools.partition_by_lengths(inner, [len(x) for x in outer])
 
    result = [ ]
    
@@ -466,15 +466,15 @@ def stellate(k, s, t, d, b, span ='from duration', rests = True):
    debug = False
 
    prolation = util.helianthate(s, 1, 1)
-   prolation = seqtools.flatten_sequence(prolation)
-   numerators = seqtools.increase_sequence_elements_cyclically_by_addenda(k, prolation)
+   prolation = sequencetools.flatten_sequence(prolation)
+   numerators = sequencetools.increase_sequence_elements_cyclically_by_addenda(k, prolation)
    mask = util.helianthate(t, 1, 1)
-   mask = seqtools.flatten_sequence(mask)
-   mask = seqtools.repeat_to_weight(mask, mathtools.weight(numerators))
+   mask = sequencetools.flatten_sequence(mask)
+   mask = sequencetools.repeat_to_weight(mask, mathtools.weight(numerators))
    mask = util.replace_nested_elements_with_unary_subruns(mask)
    #signatures = partition(
    #   mask, numerators, mode = 'weight', overhang = 'true', action = 'new')
-   signatures = seqtools.split_sequence_once_by_weights_with_overhang(mask, numerators)
+   signatures = sequencetools.split_sequence_once_by_weights_with_overhang(mask, numerators)
    for i, signature in enumerate(signatures):
       if signature == [1]:
          signatures[i] = [-1]
@@ -482,9 +482,9 @@ def stellate(k, s, t, d, b, span ='from duration', rests = True):
 
    if not rests:
       part_counts = [len(x) for x in signatures]
-      signatures = seqtools.flatten(signatures)
+      signatures = sequencetools.flatten(signatures)
       signatures = [abs(x) for x in signatures]
-      signatures = seqtools.partition_by_lengths(signatures, part_counts)
+      signatures = sequencetools.partition_by_lengths(signatures, part_counts)
 
    denominators = copy.copy(k)
    pairs = zip(signatures, denominators)
@@ -500,7 +500,7 @@ def stellate(k, s, t, d, b, span ='from duration', rests = True):
 
    dummy_container = Container(tuplets)
    #partition(tuplets, b, cyclic = True, overhang = True)
-   tuplets = seqtools.partition_by_lengths(tuplets, b, cyclic = True, overhang = True)
+   tuplets = sequencetools.partition_by_lengths(tuplets, b, cyclic = True, overhang = True)
    for i, sublist in enumerate(tuplets):
       #if t == [[4, -5, 8], [4, -8], [-4, 6, -6, 8]] and i == 7:
       #   import pdb
@@ -519,7 +519,7 @@ def stellate(k, s, t, d, b, span ='from duration', rests = True):
       spannertools.DuratedComplexBeamSpanner(sublist, durations, span = span)
       i += 1
    dummy_container[:] = [ ]
-   tuplets = seqtools.flatten(tuplets)
+   tuplets = sequencetools.flatten(tuplets)
 
    return tuplets
 
@@ -547,15 +547,15 @@ def coruscate(n, s, t, z, d, rests = True):
 
    # zero-valued signals not allowed
    signal = util.helianthate(n, 1, 1)
-   signal = seqtools.flatten_sequence(signal)
+   signal = sequencetools.flatten_sequence(signal)
    assert all(signal)
 
    cut = util.helianthate(s, 1, 1)
-   cut = seqtools.flatten_sequence(cut)
+   cut = sequencetools.flatten_sequence(cut)
 
    dilation = util.helianthate(z, 1, 1)
-   dilation = seqtools.flatten_sequence(dilation)
-   fit = seqtools.increase_sequence_elements_cyclically_by_addenda(t, dilation)
+   dilation = sequencetools.flatten_sequence(dilation)
+   fit = sequencetools.increase_sequence_elements_cyclically_by_addenda(t, dilation)
 
    j = 0
    signatures = [ ]
@@ -570,15 +570,15 @@ def coruscate(n, s, t, z, d, rests = True):
             raise ValueError
          j += 1
       signatures.append(new)
-   def helper(x): return list(seqtools.sum_consecutive_sequence_elements_by_sign(x, sign = [-1]))
+   def helper(x): return list(sequencetools.sum_consecutive_sequence_elements_by_sign(x, sign = [-1]))
    signatures = [helper(signature) for signature in signatures]
    signatures = util.partition_nested_into_canonic_parts(signatures)
 
    if not rests:
       part_counts = [len(x) for x in signatures]
-      signatures = seqtools.flatten(signatures)
+      signatures = sequencetools.flatten(signatures)
       signatures = [abs(x) for x in signatures]
-      signatures = seqtools.partition_by_lengths(signatures, part_counts)
+      signatures = sequencetools.partition_by_lengths(signatures, part_counts)
 
    if debug: print signatures
 
@@ -658,15 +658,15 @@ def recombineVoices(target, s, insert, t, loci):
 #      partition(insm, t, cyclic = True, overhang = True)
 #      print insm
 #      replace(tgtm, loci, insm)
-#      seqtools.flatten(tgtm)
+#      sequencetools.flatten(tgtm)
 
    def P(n, s):
       return partition(
          range(n), s, cyclic = True, overhang = True, action = 'new')
 
    def makeIndexPairs(n, s):
-      return seqtools.pairwise(
-         seqtools.cumulative_sums_zero([len(part) for part in P(n, s)]))
+      return sequencetools.pairwise(
+         sequencetools.cumulative_sums_zero([len(part) for part in P(n, s)]))
 
    targetIndexPairs = makeIndexPairs(len(targetVoices[0]), s)
    insertIndexPairs = makeIndexPairs(len(insertVoices[0]), t)

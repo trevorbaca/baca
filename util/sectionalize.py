@@ -1,5 +1,5 @@
 from abjad.tools import mathtools
-from abjad.tools import seqtools
+from abjad.tools import sequencetools
 
 
 def sectionalize(n, ratio):
@@ -15,5 +15,5 @@ def sectionalize(n, ratio):
    '''
 
    parts = mathtools.partition_integer_by_ratio(n - (len(ratio) - 1), ratio)
-   result = seqtools.splice_new_elements_between_sequence_elements(parts, [1])
+   result = sequencetools.splice_new_elements_between_sequence_elements(parts, [1])
    return result

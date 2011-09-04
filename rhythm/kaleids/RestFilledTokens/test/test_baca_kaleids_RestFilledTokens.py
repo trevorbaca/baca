@@ -1,5 +1,5 @@
 from abjad import *
-from abjad.tools import seqtools
+from abjad.tools import sequencetools
 from baca.rhythm.kaleids import *
 
 
@@ -9,7 +9,7 @@ def test_baca_kaleids_RestFilledTokens_01( ):
 
    duration_tokens = [(5, 16), (3, 8)]
    leaf_lists = kaleid(duration_tokens)
-   leaves = seqtools.flatten_sequence(leaf_lists)
+   leaves = sequencetools.flatten_sequence(leaf_lists)
 
    staff = Staff(measuretools.make_measures_with_full_measure_spacer_skips(duration_tokens))
    measuretools.replace_contents_of_measures_in_expr(staff, leaves)

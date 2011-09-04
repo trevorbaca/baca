@@ -1,7 +1,7 @@
 from abjad.tools import contexttools
 from abjad.tools import leaftools
 from abjad.tools import marktools
-from abjad.tools import seqtools
+from abjad.tools import sequencetools
 from baca.dynamics._DynamicsSpecifier._DynamicsSpecifier import _DynamicsSpecifier
 
 
@@ -41,7 +41,7 @@ class TerracedDynamics(_DynamicsSpecifier):
    ## PUBLIC METHODS ##
 
    def apply(self, expr, offset = 0):
-      dynamics = seqtools.CyclicList(self.dynamics)
+      dynamics = sequencetools.CyclicList(self.dynamics)
       for i, note_or_chord in enumerate(leaftools.iterate_notes_and_chords_forward_in_expr(expr)):
          dynamic_name = dynamics[offset+i]
          if self.minimum_prolated_duration <= note_or_chord.prolated_duration:

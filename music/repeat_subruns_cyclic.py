@@ -2,7 +2,7 @@ from abjad.tools.notetools.Note import Note
 from abjad.tools import componenttools
 
 
-## TODO: Rename to repeat_subruns_to_count( ) to match Abjad seqtools. ##
+## TODO: Rename to repeat_subruns_to_count( ) to match Abjad sequencetools. ##
 
 def repeat_subruns_cyclic(notes, pairs, history = False):
    '''Repeat components according to pairs.

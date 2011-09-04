@@ -1,5 +1,5 @@
 from abjad.tools import mathtools
-from abjad.tools import seqtools
+from abjad.tools import sequencetools
 from baca.rhythm.kaleids._PartForcedObjectWithPatternedTokens import _PartForcedObjectWithPatternedTokens
 
 
@@ -26,7 +26,7 @@ class PartForcedChunkWithPatternedTokens(_PartForcedObjectWithPatternedTokens):
          middle = middle_length * [middles[0]]
          right = right[:right_length]
          left_part, middle_part, right_part = \
-            seqtools.partition_sequence_once_by_counts_without_overhang(
+            sequencetools.partition_sequence_once_by_counts_without_overhang(
             tokens[0], [left_length, middle_length, right_length])
          left_part = self._force_token_part(left_part, left)
          middle_part = self._force_token_part(middle_part, middle)
@@ -41,7 +41,7 @@ class PartForcedChunkWithPatternedTokens(_PartForcedObjectWithPatternedTokens):
          left = left[:left_length]
          middle = middle_length * [middles[0]]
          left_part, middle_part = \
-            seqtools.partition_sequence_once_by_counts_without_overhang(
+            sequencetools.partition_sequence_once_by_counts_without_overhang(
             tokens[0], [left_length, middle_length])
          left_part = self._force_token_part(left_part, left)
          middle_part = self._force_token_part(middle_part, middle)
@@ -61,7 +61,7 @@ class PartForcedChunkWithPatternedTokens(_PartForcedObjectWithPatternedTokens):
          right = right[:right_length]
          middle = middle_length * [middles[0]]
          middle_part, right_part = \
-            seqtools.partition_sequence_once_by_counts_without_overhang(
+            sequencetools.partition_sequence_once_by_counts_without_overhang(
             tokens[-1], [middle_length, right_length])
          middle_part = self._force_token_part(middle_part, middle)
          right_part = self._force_token_part(right_part, right)

@@ -1,6 +1,6 @@
 from abjad.tools.notetools.Note import Note
 from abjad.tools import durtools
-from abjad.tools import seqtools
+from abjad.tools import sequencetools
 from abjad.tools import tuplettools
 import copy
 
@@ -28,9 +28,9 @@ class _RhythmicKaleid(object):
       if not secondary_divisions:
          return duration_pairs[:]
       numerators = [duration_pair[0] for duration_pair in duration_pairs]
-      secondary_numerators = seqtools.split_sequence_cyclically_by_weights_with_overhang(
+      secondary_numerators = sequencetools.split_sequence_cyclically_by_weights_with_overhang(
          numerators, secondary_divisions)
-      secondary_numerators = seqtools.flatten_sequence(secondary_numerators)
+      secondary_numerators = sequencetools.flatten_sequence(secondary_numerators)
       denominator = duration_pairs[0][1]
       secondary_duration_pairs = [(n, denominator) for n in secondary_numerators]
       return secondary_duration_pairs
@@ -63,7 +63,7 @@ class _RhythmicKaleid(object):
       multiplier = lcd / denominator
       scaled_signals = [ ]
       for signal in signals:
-         signal = seqtools.CyclicTuple([multiplier * x for x in signal])
+         signal = sequencetools.CyclicTuple([multiplier * x for x in signal])
          scaled_signals.append(signal)
       result = [duration_pairs, lcd]
       result.extend(scaled_signals)

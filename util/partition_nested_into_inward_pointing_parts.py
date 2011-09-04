@@ -1,4 +1,4 @@
-from abjad.tools import seqtools
+from abjad.tools import sequencetools
 
 
 def partition_nested_into_inward_pointing_parts(l, target = 'negative'):
@@ -69,7 +69,7 @@ def partition_nested_into_inward_pointing_parts(l, target = 'negative'):
          # 5 in middle
          if 5 in new:
             new = [(4, 1) if element == 5 else element for element in new]
-            new = seqtools.flatten_sequence(new)
+            new = sequencetools.flatten_sequence(new)
 
          result.append(new)
 

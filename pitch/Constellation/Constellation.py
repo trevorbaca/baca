@@ -6,7 +6,7 @@ from abjad.tools import markuptools
 from abjad.tools import pitchtools
 from abjad.tools import schemetools
 from abjad.tools import scoretools
-from abjad.tools import seqtools
+from abjad.tools import sequencetools
 from baca.pitch.constellate import constellate
 from fractions import Fraction
 
@@ -64,7 +64,7 @@ class Constellation(object):
 
    @property
    def _generator_chromatic_pitch_numbers(self):
-      return list(sorted(seqtools.flatten_sequence(self._partitioned_generator_chromatic_pitch_numbers)))
+      return list(sorted(sequencetools.flatten_sequence(self._partitioned_generator_chromatic_pitch_numbers)))
 
    @property
    def _next(self):

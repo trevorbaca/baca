@@ -1,5 +1,5 @@
 from abjad.tools.componenttools._Component import _Component
-from abjad.tools import seqtools
+from abjad.tools import sequencetools
 from baca.util.rotate_nested import rotate_nested
 
 
@@ -39,6 +39,6 @@ def helianthate(l, outer, inner):
       result.extend(next) 
 
 #   if flattened:
-#      result = seqtools.flatten_sequence(result)
+#      result = sequencetools.flatten_sequence(result)
 
    return result

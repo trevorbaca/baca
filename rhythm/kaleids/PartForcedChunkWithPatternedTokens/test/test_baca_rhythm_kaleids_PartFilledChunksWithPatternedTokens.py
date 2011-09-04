@@ -1,5 +1,5 @@
 from abjad import *
-from abjad.tools import seqtools
+from abjad.tools import sequencetools
 from baca.rhythm.kaleids import *
 
 
@@ -15,7 +15,7 @@ def test_baca_rhythm_kaleids_PartFilledChunksWithPatternedTokens_01( ):
    duration_tokens = [(3, 16), (3, 8)]
    music = kaleid(duration_tokens)
 
-   music = seqtools.flatten_sequence(music)
+   music = sequencetools.flatten_sequence(music)
    staff = Staff(measuretools.make_measures_with_full_measure_spacer_skips(duration_tokens))
    measuretools.replace_contents_of_measures_in_expr(staff, music)
 
@@ -62,7 +62,7 @@ def test_baca_rhythm_kaleids_PartFilledChunksWithPatternedTokens_02( ):
    duration_tokens = [(3, 16), (3, 8)]
    music = kaleid(duration_tokens)
 
-   music = seqtools.flatten_sequence(music)
+   music = sequencetools.flatten_sequence(music)
    staff = Staff(measuretools.make_measures_with_full_measure_spacer_skips(duration_tokens))
    measuretools.replace_contents_of_measures_in_expr(staff, music)
 
@@ -102,7 +102,7 @@ def test_baca_rhythm_kaleids_PartFilledChunksWithPatternedTokens_03( ):
    duration_tokens = [(3, 8), (4, 8)]
    music = kaleid(duration_tokens)
 
-   music = seqtools.flatten_sequence(music)
+   music = sequencetools.flatten_sequence(music)
    staff = Staff(measuretools.make_measures_with_full_measure_spacer_skips(duration_tokens))
    measuretools.replace_contents_of_measures_in_expr(staff, music)
 
@@ -149,7 +149,7 @@ def test_baca_rhythm_kaleids_PartFilledChunksWithPatternedTokens_04( ):
    duration_tokens = [(8, 8)]
    music = kaleid(duration_tokens)
 
-   music = seqtools.flatten_sequence(music)
+   music = sequencetools.flatten_sequence(music)
    staff = Staff(measuretools.make_measures_with_full_measure_spacer_skips(duration_tokens))
    measuretools.replace_contents_of_measures_in_expr(staff, music)
 

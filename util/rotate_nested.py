@@ -1,4 +1,4 @@
-from abjad.tools import seqtools
+from abjad.tools import sequencetools
 
 
 def rotate_nested(l, outer, inner):
@@ -24,4 +24,4 @@ def rotate_nested(l, outer, inner):
    assert isinstance(inner, (int, long))
    assert isinstance(outer, (int, long))
 
-   return seqtools.rotate_sequence([seqtools.rotate_sequence(x, inner) for x in l], outer)
+   return sequencetools.rotate_sequence([sequencetools.rotate_sequence(x, inner) for x in l], outer)

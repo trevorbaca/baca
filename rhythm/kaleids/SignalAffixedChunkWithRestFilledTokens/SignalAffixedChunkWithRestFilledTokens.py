@@ -1,7 +1,7 @@
 from abjad.tools import durtools
 from abjad.tools import leaftools
 from abjad.tools import mathtools
-from abjad.tools import seqtools
+from abjad.tools import sequencetools
 from baca.rhythm.kaleids._SignalAffixedChunkWithFilledTokens import _SignalAffixedChunkWithFilledTokens
 
 

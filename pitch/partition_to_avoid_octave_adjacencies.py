@@ -1,5 +1,5 @@
 from abjad.tools import mathtools
-from abjad.tools import seqtools
+from abjad.tools import sequencetools
 from fractions import Fraction
 
 
@@ -26,8 +26,8 @@ def partition_to_avoid_octave_adjacencies(l, direction):
          left, right = mathtools.partition_integer_into_halves(
             len(disputed_part), bigger = direction)
 
-         #disputed_parts = seqtools.partition_by_lengths(disputed_part, [left, right])
-         disputed_parts = seqtools.partition_sequence_once_by_counts_without_overhang(
+         #disputed_parts = sequencetools.partition_by_lengths(disputed_part, [left, right])
+         disputed_parts = sequencetools.partition_sequence_once_by_counts_without_overhang(
             disputed_part, [left, right])
          left_disputed_part, right_disputed_part = disputed_parts
 

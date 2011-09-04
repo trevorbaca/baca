@@ -1,7 +1,7 @@
 from abjad.tools import durtools
 from abjad.tools import leaftools
 from abjad.tools import mathtools
-from abjad.tools import seqtools
+from abjad.tools import sequencetools
 from baca.rhythm.kaleids._RhythmicKaleid import _RhythmicKaleid
 import types
 
@@ -32,15 +32,15 @@ class _PartForcedObjectWithPatternedTokens(_RhythmicKaleid):
       left_lengths_helper = self._none_to_trivial_helper(left_lengths_helper)
       right_lengths_helper = self._none_to_trivial_helper(right_lengths_helper)
       secondary_divisions_helper = self._none_to_trivial_helper(secondary_divisions_helper)
-      assert seqtools.all_are_integer_equivalent_numbers(pattern)
+      assert sequencetools.all_are_integer_equivalent_numbers(pattern)
       assert mathtools.is_positive_integer_equivalent_number(denominator)
-      assert seqtools.all_are_nonnegative_integer_equivalent_numbers(prolation_addenda)
+      assert sequencetools.all_are_nonnegative_integer_equivalent_numbers(prolation_addenda)
       assert all([x in (-1, 0, 1) for x in lefts])
       assert all([x in (-1, 0, 1) for x in middles])
       assert all([x in (-1, 0, 1) for x in rights])
-      assert seqtools.all_are_nonnegative_integer_equivalent_numbers(left_lengths)
-      assert seqtools.all_are_nonnegative_integer_equivalent_numbers(right_lengths)
-      assert seqtools.all_are_nonnegative_integer_equivalent_numbers(secondary_divisions)
+      assert sequencetools.all_are_nonnegative_integer_equivalent_numbers(left_lengths)
+      assert sequencetools.all_are_nonnegative_integer_equivalent_numbers(right_lengths)
+      assert sequencetools.all_are_nonnegative_integer_equivalent_numbers(secondary_divisions)
       assert isinstance(pattern_helper, (types.FunctionType, types.MethodType))
       assert isinstance(prolation_addenda_helper, (types.FunctionType, types.MethodType))
       assert isinstance(lefts_helper, (types.FunctionType, types.MethodType))
@@ -124,7 +124,7 @@ class _PartForcedObjectWithPatternedTokens(_RhythmicKaleid):
       prolated_duration_pairs = self._make_prolated_duration_pairs(
          duration_pairs, prolation_addenda)
       prolated_numerators = [pair[0] for pair in prolated_duration_pairs]
-      map_tokens = seqtools.split_sequence_extended_to_weights_without_overhang(
+      map_tokens = sequencetools.split_sequence_extended_to_weights_without_overhang(
          pattern, prolated_numerators)
       quintuplet = (lefts, middles, rights, left_lengths, right_lengths)
       forced_map_tokens = self._force_token_parts(map_tokens, quintuplet)
@@ -144,15 +144,15 @@ class _PartForcedObjectWithPatternedTokens(_RhythmicKaleid):
       return prolated_duration_pairs
 
    def _prepare_input(self, seeds):
-      pattern = seqtools.CyclicTuple(self._pattern_helper(self._pattern, seeds))
+      pattern = sequencetools.CyclicTuple(self._pattern_helper(self._pattern, seeds))
       prolation_addenda = self._prolation_addenda_helper(self._prolation_addenda, seeds)
-      prolation_addenda = seqtools.CyclicTuple(prolation_addenda)
-      lefts = seqtools.CyclicTuple(self._lefts_helper(self._lefts, seeds))
-      middles = seqtools.CyclicTuple(self._middles_helper(self._middles, seeds))
-      rights = seqtools.CyclicTuple(self._rights_helper(self._rights, seeds))
-      left_lengths = seqtools.CyclicTuple(self._left_lengths_helper(self._left_lengths, seeds))
-      right_lengths = seqtools.CyclicTuple(self._right_lengths_helper(self._right_lengths, seeds))
+      prolation_addenda = sequencetools.CyclicTuple(prolation_addenda)
+      lefts = sequencetools.CyclicTuple(self._lefts_helper(self._lefts, seeds))
+      middles = sequencetools.CyclicTuple(self._middles_helper(self._middles, seeds))
+      rights = sequencetools.CyclicTuple(self._rights_helper(self._rights, seeds))
+      left_lengths = sequencetools.CyclicTuple(self._left_lengths_helper(self._left_lengths, seeds))
+      right_lengths = sequencetools.CyclicTuple(self._right_lengths_helper(self._right_lengths, seeds))
       secondary_divisions = self._secondary_divisions_helper(self._secondary_divisions, seeds)
-      secondary_divisions = seqtools.CyclicTuple(secondary_divisions)
+      secondary_divisions = sequencetools.CyclicTuple(secondary_divisions)
       return pattern, prolation_addenda, \
          lefts, middles, rights, left_lengths, right_lengths, secondary_divisions

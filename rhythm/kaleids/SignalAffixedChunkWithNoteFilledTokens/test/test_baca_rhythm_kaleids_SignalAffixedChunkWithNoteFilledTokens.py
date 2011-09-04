@@ -1,5 +1,5 @@
 from abjad import *
-from abjad.tools import seqtools
+from abjad.tools import sequencetools
 from baca.rhythm.kaleids import *
 
 
@@ -13,7 +13,7 @@ def test_baca_rhythm_kaleids_SignalAffixedChunkWithNoteFilledTokens_01( ):
 
    duration_tokens = [(5, 8), (5, 8), (5, 8)]
    leaf_lists = kaleid(duration_tokens)
-   leaves = seqtools.flatten_sequence(leaf_lists)
+   leaves = sequencetools.flatten_sequence(leaf_lists)
 
    staff = Staff(measuretools.make_measures_with_full_measure_spacer_skips(duration_tokens))
    measuretools.replace_contents_of_measures_in_expr(staff, leaves)
@@ -55,7 +55,7 @@ def test_baca_rhythm_kaleids_SignalAffixedChunkWithNoteFilledTokens_02( ):
 
    duration_tokens = [(5, 8), (5, 8), (5, 8)]
    leaf_lists = kaleid(duration_tokens)
-   leaves = seqtools.flatten_sequence(leaf_lists)
+   leaves = sequencetools.flatten_sequence(leaf_lists)
 
    staff = Staff(measuretools.make_measures_with_full_measure_spacer_skips(duration_tokens))
    measuretools.replace_contents_of_measures_in_expr(staff, leaves)
@@ -95,7 +95,7 @@ def test_baca_rhythm_kaleids_SignalAffixedChunkWithNoteFilledTokens_03( ):
 
    duration_tokens = [(5, 8), (5, 8), (5, 8)]
    leaf_lists = kaleid(duration_tokens)
-   leaves = seqtools.flatten_sequence(leaf_lists)
+   leaves = sequencetools.flatten_sequence(leaf_lists)
 
    staff = Staff(measuretools.make_measures_with_full_measure_spacer_skips(duration_tokens))
    measuretools.replace_contents_of_measures_in_expr(staff, leaves)
@@ -135,7 +135,7 @@ def test_baca_rhythm_kaleids_SignalAffixedChunkWithNoteFilledTokens_04( ):
 
    duration_tokens = [(4, 8), (4, 8), (4, 8)]
    leaf_lists = kaleid(duration_tokens)
-   leaves = seqtools.flatten_sequence(leaf_lists)
+   leaves = sequencetools.flatten_sequence(leaf_lists)
 
    staff = Staff(measuretools.make_measures_with_full_measure_spacer_skips(duration_tokens))
    measuretools.replace_contents_of_measures_in_expr(staff, leaves)
@@ -182,7 +182,7 @@ def test_baca_rhythm_kaleids_SignalAffixedChunkWithNoteFilledTokens_05( ):
 
    duration_tokens = [(4, 8), (4, 8), (4, 8)]
    leaf_lists = kaleid(duration_tokens)
-   leaves = seqtools.flatten_sequence(leaf_lists)
+   leaves = sequencetools.flatten_sequence(leaf_lists)
 
    staff = Staff(measuretools.make_measures_with_full_measure_spacer_skips(duration_tokens))
    measuretools.replace_contents_of_measures_in_expr(staff, leaves)

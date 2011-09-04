@@ -1,5 +1,5 @@
 from abjad.tools import mathtools
-from abjad.tools import seqtools
+from abjad.tools import sequencetools
 from baca.rhythm.kaleids._PartForcedObjectWithPatternedTokens import _PartForcedObjectWithPatternedTokens
 
 
@@ -30,7 +30,7 @@ class PartForcedPatternedTokens(_PartForcedObjectWithPatternedTokens):
          middle = middle_length * [middles[token_index]]
          right = right[:right_length]
          left_part, middle_part, right_part = \
-            seqtools.partition_sequence_once_by_counts_without_overhang(
+            sequencetools.partition_sequence_once_by_counts_without_overhang(
             token, [left_length, middle_length, right_length])
          left_part = self._force_token_part(left_part, left)
          middle_part = self._force_token_part(middle_part, middle)

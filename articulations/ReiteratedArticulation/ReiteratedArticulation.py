@@ -2,7 +2,7 @@ from abjad.tools.chordtools import Chord
 from abjad.tools.notetools.Note import Note
 from abjad.tools import leaftools
 from abjad.tools import marktools
-from abjad.tools import seqtools
+from abjad.tools import sequencetools
 from baca.articulations._ArticulationsSpecifier._ArticulationsSpecifier import _ArticulationsSpecifier
 
 
@@ -53,7 +53,7 @@ class ReiteratedArticulation(_ArticulationsSpecifier):
    ## PUBLIC METHODS ##
 
    def apply(self, expr, offset = 0, skip_first = 0, skip_last = 0):
-      articulation_list = seqtools.CyclicList(self.articulation_list)
+      articulation_list = sequencetools.CyclicList(self.articulation_list)
       notes_and_chords = list(leaftools.iterate_notes_and_chords_forward_in_expr(expr))
       notes_and_chords = notes_and_chords[skip_first:]
       if skip_last:

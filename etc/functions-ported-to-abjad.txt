@@ -3,7 +3,7 @@ Functions migrated from baca/util.py to Abjad:
 
    util.bunch(l, s, cycle = True)
    ==>
-   seqtools.group_by_weights(l, s, fill = 'exact', cyclic = False, overhang = False)
+   sequencetools.group_by_weights(l, s, fill = 'exact', cyclic = False, overhang = False)
 
 
    util.caulk(l, directives)
@@ -13,7 +13,7 @@ Functions migrated from baca/util.py to Abjad:
 
    util.chunk(ll, s)
    ==>
-   seqtools.partition_by_weights(l, s, overhang = overhang, cyclic = cyclic)
+   sequencetools.partition_by_weights(l, s, overhang = overhang, cyclic = cyclic)
 
 
    util.circumrotate(l, inner, outer)
@@ -23,7 +23,7 @@ Functions migrated from baca/util.py to Abjad:
 
    util.clump(w, action = 'in place')
    ==>
-   [list(seqtools.sum_by_sign(x, sign = [-1])) for x in w]
+   [list(sequencetools.sum_by_sign(x, sign = [-1])) for x in w]
 
 
    util.convolve(l, s, action = 'in place')
@@ -48,7 +48,7 @@ Functions migrated from baca/util.py to Abjad:
 
    util.flamingo(l, s, period = None)
    ==>
-   seqtools.negate_elements_at_indices(l, indices, period = None)
+   sequencetools.negate_elements_at_indices(l, indices, period = None)
 
 
    util.flip(l, s, action = 'in place')
@@ -68,7 +68,7 @@ Functions migrated from baca/util.py to Abjad:
 
    util.lump(w, action = 'in place')
    ==>
-   [list(seqtools.sum_by_sign(x, sign = [1])) for x in w]
+   [list(sequencetools.sum_by_sign(x, sign = [1])) for x in w]
 
 
    util.mapInto(M, n)
@@ -88,15 +88,15 @@ Functions migrated from baca/util.py to Abjad:
    
    util.partition(l, s, mode = 'length', overhang = False, cyclic = False)
    ==>
-   seqtools.partition_by_counts(l, counts, overhang = False, cyclic = False)
-   seqtools.partition_by_weights(l, counts, overhang = False, cyclic = False)
+   sequencetools.partition_by_counts(l, counts, overhang = False, cyclic = False)
+   sequencetools.partition_by_weights(l, counts, overhang = False, cyclic = False)
    ==>
-   seqtools.partition_by_lengths(l, counts, overhang = False, cyclic = False)
+   sequencetools.partition_by_lengths(l, counts, overhang = False, cyclic = False)
 
    
    util.permIter(seq)
    ==>
-   seqtools.permtutations(l)
+   sequencetools.permtutations(l)
 
    
    util.permute(l, s, action = 'in place')
@@ -111,7 +111,7 @@ Functions migrated from baca/util.py to Abjad:
 
    util.picket(l, ins, overhang = (0, 0))
    ==>
-   seqtools.insert_slice_cyclic(l, s, overhang = (0, 0))
+   sequencetools.insert_slice_cyclic(l, s, overhang = (0, 0))
 
    
    util.piles(ll)
@@ -121,19 +121,19 @@ Functions migrated from baca/util.py to Abjad:
 
    util.pleat(l, n)
    ==>
-   seqtools.repeat_elements_to_length(l, n)
+   sequencetools.repeat_elements_to_length(l, n)
    ==>
-   seqtools.repeat_elements_to_count(l, count)
+   sequencetools.repeat_elements_to_count(l, count)
 
 
    util.plough(w, s, cur = 0, action = 'in place')
    ==>
    s = period_s
-   s = seqtools.true_indices(s)
+   s = sequencetools.true_indices(s)
    w_part_counts = [len(x) for x in w]
-   w = seqtools.flatten(w)
-   w = seqtools.negate_elements_at_indices(w, s, period = period_s)
-   w = seqtools.partition_by_counts(w, w_part_counts)
+   w = sequencetools.flatten(w)
+   w = sequencetools.negate_elements_at_indices(w, s, period = period_s)
+   w = sequencetools.partition_by_counts(w, w_part_counts)
 
 
    util.positivize(w)
@@ -148,29 +148,29 @@ Functions migrated from baca/util.py to Abjad:
 
    util.read(l, start, length)
    ==>
-   seqtools.repeat_to_length(l, length, start_index = start)
+   sequencetools.repeat_to_length(l, length, start_index = start)
 
 
    util.recombine(target, s, insert, t, loci)
    ==>
-   partitioned_target = seqtools.partition_by_counts(target, s)
-   partitioned_insert = seqtools.partition_by_counts(insert, t)
+   partitioned_target = sequencetools.partition_by_counts(target, s)
+   partitioned_insert = sequencetools.partition_by_counts(insert, t)
    periodic_insert = (partitioned_insert, len(partitioned_insert)
-   result = seqtools.replace_elements_cyclic(
+   result = sequencetools.replace_elements_cyclic(
       partition_target, (loci, None), periodic_insert)
-   result = seqtools.flatten(result)
+   result = sequencetools.flatten(result)
 
 
    util.replace(l, indices, material)
    ==>
-   seqtools.overwrite_elements_at(l, indices, material)
+   sequencetools.overwrite_elements_at(l, indices, material)
    ==>
-   seqtools.replace_elements_cyclic(l, indices, material)
+   sequencetools.replace_elements_cyclic(l, indices, material)
 
 
    util.resegment(w, s, max = False, overhang = True)
    ==>
-   seqtools.partition_by_weights_not_less_than(seqtools.flatten(w), s, cyclic = True, 
+   sequencetools.partition_by_weights_not_less_than(sequencetools.flatten(w), s, cyclic = True, 
       overhang = overhang)
    The max keyword never worked correctly.
 
@@ -178,17 +178,17 @@ Functions migrated from baca/util.py to Abjad:
    util.ripple(l, [(anchor, (length, total_appearances)), ...])
    ie, util.ripple(l, [(i, (length, n), ...])
    ==>
-   seqtools.repeat_subruns_cyclic(l, [(achor, length, new_appearances), ...])
-   ie, seqtools.repeat_subruns_cyclic(l, [(i, length, n - 1), ...])
+   sequencetools.repeat_subruns_cyclic(l, [(achor, length, new_appearances), ...])
+   ie, sequencetools.repeat_subruns_cyclic(l, [(i, length, n - 1), ...])
    ==>
-   seqtools.repeat_subruns_to_count( )
+   sequencetools.repeat_subruns_to_count( )
 
 
    util.rout(l, s, cur = 0, recurse = False)
    ==>
    period_s = len(s)
-   s_true_indices = seqtools.true_indices(s)
-   seqtools.negate_elements_at_indices_absolutely(l, s_true_indices, period_s)
+   s_true_indices = sequencetools.true_indices(s)
+   sequencetools.negate_elements_at_indices_absolutely(l, s_true_indices, period_s)
 
 
    util.scan(l)
@@ -199,23 +199,23 @@ Functions migrated from baca/util.py to Abjad:
 
    util.segment(l, s, cycle = False)
    ==>
-   seqtools.partition_by_weights_not_less_than(l, s, cyclic = False, overhang = False)
+   sequencetools.partition_by_weights_not_less_than(l, s, cyclic = False, overhang = False)
 
 
    util.segment(l, s, cycle = 'knife')
    ==>
-   seqtools.partition_by_weights_not_less_than(l, s, cyclic = True, overhang = False)
+   sequencetools.partition_by_weights_not_less_than(l, s, cyclic = True, overhang = False)
 
 
    util.segment(l, s, cycle = 'knife')
    ==>
-   l = seqtools.repeat_list_to_weight(l, sum(s), remainder = 'more')
-   seqtools.partition_by_weights_not_less_than(l, s, cyclic = True, overhang = False)
+   l = sequencetools.repeat_list_to_weight(l, sum(s), remainder = 'more')
+   sequencetools.partition_by_weights_not_less_than(l, s, cyclic = True, overhang = False)
 
 
    util.smear(l, s)
    ==>
-   seqtools.overwrite_slices_at(l, pairs)
+   sequencetools.overwrite_slices_at(l, pairs)
 
 
    util.smelt(ll)
@@ -225,12 +225,12 @@ Functions migrated from baca/util.py to Abjad:
 
    util.snip(l, weight, i) 
    ==> 
-   seqtools.remove_weighted_subrun_at(l, weight, i)
+   sequencetools.remove_weighted_subrun_at(l, weight, i)
 
 
    util.spot(l, s, positions, action = 'in place')
    ==>
-   seqtools.increase_at_indices(l, addenda, indices)
+   sequencetools.increase_at_indices(l, addenda, indices)
 
 
    util.unfive(l, target = 'negative')

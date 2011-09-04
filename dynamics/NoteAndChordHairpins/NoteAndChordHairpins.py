@@ -3,7 +3,7 @@ from abjad.tools.notetools.Note import Note
 from abjad.tools import componenttools
 from abjad.tools import leaftools
 from abjad.tools import marktools
-from abjad.tools import seqtools
+from abjad.tools import sequencetools
 from abjad.tools import spannertools
 from baca.dynamics._DynamicsSpecifier._DynamicsSpecifier import _DynamicsSpecifier
 
@@ -31,7 +31,7 @@ class NoteAndChordHairpins(_DynamicsSpecifier):
    def apply(self, expr, offset = 0):
       leaves = list(leaftools.iterate_leaves_forward_in_expr(expr))
       groups = list(componenttools.yield_groups_of_mixed_klasses_in_sequence(leaves, (Note, Chord)))
-      hairpin_tokens = seqtools.CyclicList(self.hairpin_tokens)
+      hairpin_tokens = sequencetools.CyclicList(self.hairpin_tokens)
       for i, group in enumerate(groups):
          is_short_group = False
          hairpin_token = hairpin_tokens[offset+i]

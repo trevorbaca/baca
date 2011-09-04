@@ -1,4 +1,4 @@
-from abjad.tools import seqtools
+from abjad.tools import sequencetools
 
 
 class ChunkArray(list):
@@ -38,7 +38,7 @@ class ChunkArray(list):
    ## PRIVATE METHODS ##
 
    def _update_chunk_pointers(self):
-      for left, right in seqtools.iterate_sequence_pairwise_strict(self):
+      for left, right in sequencetools.iterate_sequence_pairwise_strict(self):
          left.next_chunk = right
          right.prev_chunk = left
       if len(self):
