@@ -1,5 +1,5 @@
 from abjad.tools.notetools.Note import Note
-from abjad.tools import durtools
+from abjad.tools import durationtools
 from abjad.tools import sequencetools
 from abjad.tools import tuplettools
 import copy
@@ -13,7 +13,7 @@ class _RhythmicKaleid(object):
    ## OVERLOADS ##
 
    def __call__(self, duration_tokens, seeds = None):
-      duration_pairs = durtools.duration_tokens_to_duration_pairs(duration_tokens)
+      duration_pairs = durationtools.duration_tokens_to_duration_pairs(duration_tokens)
       seeds = self._none_to_new_list(seeds)
       return duration_pairs, seeds
 
@@ -56,7 +56,7 @@ class _RhythmicKaleid(object):
    def _scale_signals(self, duration_pairs, denominator, signals):
       dummy_duration_pair = (1, denominator)
       duration_pairs.append(dummy_duration_pair)
-      duration_pairs = durtools.duration_tokens_to_duration_pairs_with_least_common_denominator(
+      duration_pairs = durationtools.duration_tokens_to_duration_pairs_with_least_common_denominator(
          duration_pairs)
       dummy_duration_pair = duration_pairs.pop( )
       lcd = dummy_duration_pair[1]

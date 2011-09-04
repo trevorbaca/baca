@@ -1,4 +1,4 @@
-from abjad.tools import durtools
+from abjad.tools import durationtools
 from abjad.tools import iotools
 from abjad.tools import leaftools
 from abjad.tools import lilyfiletools
@@ -39,7 +39,7 @@ def make_chordal_sequence(score_package_name):
       aggregate = baca.pitch.CC[constellation_index][aggregate_index]
       aggregates.append(aggregate)
 
-   chords = leaftools.make_leaves(aggregates, [durtools.Duration(1, 4)])
+   chords = leaftools.make_leaves(aggregates, [durationtools.Duration(1, 4)])
    score, treble_staff, bass_staff = scoretools.make_piano_sketch_score_from_leaves(chords)
 
    score.set.proportional_notation_duration = schemetools.SchemeMoment(1, 16)
