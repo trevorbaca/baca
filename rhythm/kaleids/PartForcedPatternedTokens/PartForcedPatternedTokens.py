@@ -7,7 +7,7 @@ class PartForcedPatternedTokens(_PartForcedObjectWithPatternedTokens):
     '''Part-forced pattern-filled tokens.
     '''
 
-    ## PRIVATE METHODS ##
+    ### PRIVATE METHODS ###
 
     def _force_token_parts(self, tokens, quintuplet):
         lefts, middles, rights, left_lengths, right_lengths = quintuplet

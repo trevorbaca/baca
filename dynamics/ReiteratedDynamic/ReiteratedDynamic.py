@@ -12,7 +12,7 @@ class ReiteratedDynamic(_DynamicsSpecifier):
         _DynamicsSpecifier.__init__(self, minimum_prolated_duration = minimum_prolated_duration)
         self.dynamic_name = dynamic_name
 
-    ## OVERLOADS ##
+    ### OVERLOADS ###
 
     def __call__(self, dynamic_name):
         new = type(self)()
@@ -20,7 +20,7 @@ class ReiteratedDynamic(_DynamicsSpecifier):
         new.minimum_prolated_duration = self.minimum_prolated_duration
         return new
 
-    ## PUBLIC ATTRIBUTES ##
+    ### PUBLIC ATTRIBUTES ###
 
     @apply
     def dynamic_name():
@@ -35,7 +35,7 @@ class ReiteratedDynamic(_DynamicsSpecifier):
                 raise TypeError(dynamic_name)
         return property(**locals())
 
-    ## PUBLIC METHODS ##
+    ### PUBLIC METHODS ###
 
     def apply(self, expr):
         for note_or_chord in leaftools.iterate_notes_and_chords_forward_in_expr(expr):

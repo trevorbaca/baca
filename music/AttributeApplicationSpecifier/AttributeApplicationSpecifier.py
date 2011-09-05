@@ -16,9 +16,9 @@ class AttributeApplicationSpecifier(object):
         self.default = InstrumentAttributeApplicationSpecifier(self.proportions)
         self._init_instrument_attribute_application_specifiers()
 
-    ## OVERLOADS ##
+    ### OVERLOADS ###
 
-    ## PRIVATE METHODS ##
+    ### PRIVATE METHODS ###
 
     def _init_instrument_attribute_application_specifiers(self):
         for instrument_name in self.instrument_names:

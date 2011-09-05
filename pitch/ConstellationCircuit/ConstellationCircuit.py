@@ -1,5 +1,5 @@
 from abjad.tools import iotools
-from abjad.tools import lilyfiletools
+from abjad.tools import lilypondfiletools
 from abjad.tools import schemetools
 from abjad.tools import scoretools
 from abjad.tools import sequencetools
@@ -14,7 +14,7 @@ class ConstellationCircuit(object):
         self._pitch_range = pitch_range
         self._constellate_partitioned_generator_pnls()
 
-    ## OVERLOADS ##
+    ### OVERLOADS ###
 
     def __getitem__(self, i):
         return self._constellations[i]
@@ -25,7 +25,7 @@ class ConstellationCircuit(object):
     def __repr__(self):
         return '%s(%s)' % (type(self).__name__, len(self))
 
-    ## PRIVATE ATTRIBUTES ##
+    ### PRIVATE ATTRIBUTES ###
 
     ## FIXME
     @property
@@ -49,7 +49,7 @@ class ConstellationCircuit(object):
             result.append(constellation._pivot_chord_number)
         return result
 
-    ## PRIVATE METHODS ##
+    ### PRIVATE METHODS ###
 
     def _constellate_partitioned_generator_pnls(self):
         self._constellations = []
@@ -58,28 +58,28 @@ class ConstellationCircuit(object):
             constellation = Constellation(self, partitioned_generator_pnl)
             self._constellations.append(constellation)
 
-    def _make_lily_file_and_score_from_chords(self, chords):
+    def _make_lilypond_file_and_score_from_chords(self, chords):
         score, treble, bass = scoretools.make_piano_sketch_score_from_leaves(chords)
         score.override.text_script.staff_padding = 10
         score.set.proportional_notation_duration = schemetools.SchemeMoment(1, 30)
-        lily_file = lilyfiletools.make_basic_lily_file(score)
-        lily_file.default_paper_size = 'letter', 'landscape'
-        lily_file.global_staff_size = 18
-        lily_file.layout_block.indent = 0
-        lily_file.layout_block.ragged_right = True
-        lily_file.paper_block.system_system_spacing = schemetools.SchemeVector(
+        lilypond_file = lilypondfiletools.make_basic_lilypond_file(score)
+        lilypond_file.default_paper_size = 'letter', 'landscape'
+        lilypond_file.global_staff_size = 18
+        lilypond_file.layout_block.indent = 0
+        lilypond_file.layout_block.ragged_right = True
+        lilypond_file.paper_block.system_system_spacing = schemetools.SchemeVector(
             schemetools.SchemePair('basic_distance', 0),
             schemetools.SchemePair('minimum_distance', 0),
             schemetools.SchemePair('padding', 12),
             schemetools.SchemePair('stretchability', 0))
-        lily_file.paper_block.top_margin = 24
-        return lily_file, score
+        lilypond_file.paper_block.top_margin = 24
+        return lilypond_file, score
 
     def _show_chords(self, chords):
-        lily_file, score = self._make_lily_file_and_score_from_chords(chords)
-        iotools.show(lily_file)
+        lilypond_file, score = self._make_lilypond_file_and_score_from_chords(chords)
+        iotools.show(lilypond_file)
 
-    ## PUBLIC ATTRIBUTES ##
+    ### PUBLIC ATTRIBUTES ###
 
     @property
     def generator_chords(self):
@@ -99,7 +99,7 @@ class ConstellationCircuit(object):
             result.append(constellation.pivot_chord)
         return result
 
-    ## PUBLIC METHODS ##
+    ### PUBLIC METHODS ###
 
     def get(self, *args):
         if len(args) == 1:

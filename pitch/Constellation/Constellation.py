@@ -1,7 +1,7 @@
 from abjad.tools.chordtools import Chord
 from abjad.tools import chordtools
 from abjad.tools import iotools
-from abjad.tools import lilyfiletools
+from abjad.tools import lilypondfiletools
 from abjad.tools import markuptools
 from abjad.tools import pitchtools
 from abjad.tools import schemetools
@@ -20,7 +20,7 @@ class Constellation(object):
         self._chord_duration = Fraction(1, 4)
         self._chords = []
 
-    ## OVERLOADS ##
+    ### OVERLOADS ###
 
     def __contains__(self, chord):
 #      for pnl in self._pitch_number_lists:
@@ -38,7 +38,7 @@ class Constellation(object):
     def __repr__(self):
         return '%s(%s)' % (type(self).__name__, len(self))
 
-    ## PRIVATE ATTRIBUTES ##
+    ### PRIVATE ATTRIBUTES ###
 
     @property
     def _color_map(self):
@@ -79,7 +79,7 @@ class Constellation(object):
     def _prev(self):
         return self._advance(-1)
 
-    ## PRIVATE METHODS ##
+    ### PRIVATE METHODS ###
 
     def _advance(self, i):
         my_idx = self._circuit._constellations.index(self)
@@ -99,28 +99,28 @@ class Constellation(object):
         #   chord._already_labeled = True
         markuptools.Markup(label)(chord)
 
-    def _make_lily_file_and_score_from_chords(self, chords):
+    def _make_lilypond_file_and_score_from_chords(self, chords):
         score, treble, bass = scoretools.make_piano_sketch_score_from_leaves(chords)
         score.override.text_script.staff_padding = 10
         score.set.proportional_notation_duration = schemetools.SchemeMoment(1, 30)
-        lily_file = lilyfiletools.make_basic_lily_file(score)
-        lily_file.default_paper_size = 'letter', 'landscape'
-        lily_file.global_staff_size = 18
-        lily_file.layout_block.indent = 0
-        lily_file.layout_block.ragged_right = True
-        lily_file.paper_block.system_system_spacing = schemetools.SchemeVector(
+        lilypond_file = lilypondfiletools.make_basic_lilypond_file(score)
+        lilypond_file.default_paper_size = 'letter', 'landscape'
+        lilypond_file.global_staff_size = 18
+        lilypond_file.layout_block.indent = 0
+        lilypond_file.layout_block.ragged_right = True
+        lilypond_file.paper_block.system_system_spacing = schemetools.SchemeVector(
             schemetools.SchemePair('basic_distance', 0),
             schemetools.SchemePair('minimum_distance', 0),
             schemetools.SchemePair('padding', 12),
             schemetools.SchemePair('stretchability', 0))
-        lily_file.paper_block.top_margin = 24
-        return lily_file, score
+        lilypond_file.paper_block.top_margin = 24
+        return lilypond_file, score
 
     def _show_chords(self, chords):
-        lily_file, score = self._make_lily_file_and_score_from_chords(chords)
-        iotools.show(lily_file)
+        lilypond_file, score = self._make_lilypond_file_and_score_from_chords(chords)
+        iotools.show(lilypond_file)
 
-    ## PUBLIC ATTRIBUTES ##
+    ### PUBLIC ATTRIBUTES ###
 
     @property
     def constellation_number(self):
@@ -148,7 +148,7 @@ class Constellation(object):
         self._label_chord(pivot_chord)
         return pivot_chord
 
-    ## PUBLIC METHODS ##
+    ### PUBLIC METHODS ###
 
     def get_chord(self, chord_number):
         '''1-indexed chord number.'''

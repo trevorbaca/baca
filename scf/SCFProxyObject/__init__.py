@@ -1,1 +1,0 @@
-from SCFProxyObject import SCFProxyObject

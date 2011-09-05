@@ -1,58 +1,93 @@
-from baca.scf.SCFProxyObject import SCFProxyObject
+from baca.scf.InteractiveMaterialProxy import InteractiveMaterialProxy
+from baca.scf.MakerWrangler import MakerWrangler
+from baca.scf.MaterialWrangler import MaterialWrangler
+from baca.scf.menuing import Menu
+from baca.scf.menuing import MenuSection
+from baca.scf.PackageProxy import PackageProxy
+from baca.scf.StaticMaterialProxy import StaticMaterialProxy
 import os
 
 
-class ScorePackageProxy(SCFProxyObject):
+class ScorePackageProxy(PackageProxy):
 
-    def __init__(self, score_package_name):
-        self.score_package_directory = os.path.join(os.environ.get('SCORES'), score_package_name)
-        self.chunks_directory = os.path.join(self.score_package_directory, 'mus', 'chunks')
-        self.materials_directory = os.path.join(self.score_package_directory, 'mus', 'materials')
-        self.score_package_initializer = os.path.join(self.score_package_directory, '__init__.py')
-        self.score_package_name = score_package_name
+    def __init__(self, importable_module_name):
+        PackageProxy.__init__(self, importable_module_name)
+        self._material_wrangler = MaterialWrangler(purview=self)
+        self._maker_wrangler = MakerWrangler()
 
-    ## OVERLOADS ##
+    ### PUBLIC ATTRIBUTES ###
 
-    def __repr__(self):
-        return '%s(%r)' % (type(self).__name__, self.score_package_name)
+    @property
+    def chunks_directory_name(self):
+        return os.path.join(self.directory_name, 'mus', 'chunks')
 
-    ## PRIVATE METHODS ##
+    @property
+    def chunks_initializer(self):
+        return os.path.join(self.chunks_directory_name, '__init__.py')
 
-    def _get_conditional_user_input(self, is_interactive, prompt = None):
-        if not is_interactive:
-            return True
-        response = raw_input(prompt)
-        return response.lower() == 'y'
+    @property
+    def chunks_package_name(self):
+        return '.'.join([self.importable_module_name, 'mus', 'chunks'])
 
-    def _read_initializer_metadata(self, name):
-        initializer = file(self.score_package_initializer, 'r')
-        for line in initializer.readlines():
-            if line.startswith(name):
-                initializer.close()
-                executable_line = line.replace(name, 'result')
-                exec(executable_line)
-                return result
+    @property
+    def dist_directory_name(self):
+        return os.path.join(self.directory_name, 'dist')
 
-    def _write_initializer_metadata(self, name, value):
-        new_lines = []
-        initializer = file(self.score_package_initializer, 'r')
-        found_existing_line = False
-        for line in initializer.readlines():
-            if line.startswith(name):
-                found_existing_line = True
-                new_line = '%s = %r\n' % (name, value)
-                new_lines.append(new_line)
-            else:
-                new_lines.append(line)
-        if not found_existing_line:
-            new_line = '%s = %r\n' % (name, value)
-            new_lines.append(new_line)
-        initializer.close()
-        initializer = file(self.score_package_initializer, 'w')
-        initializer.write(''.join(new_lines))
-        initializer.close()
+    @property
+    def dist_pdf_directory_name(self):
+        return os.path.join(self.directory_name, 'dist', 'pdf')
 
-    ## PUBLIC ATTRIBUTES ##
+    @property
+    def exg_directory_name(self):
+        return os.path.join(self.directory_name, 'exg')
+
+    @property
+    def etc_directory_name(self):
+        return os.path.join(self.directory_name, 'etc')
+
+    @property
+    def has_correct_directory_structure(self):
+        return all([os.path.exists(name) for name in self.score_subdirectory_names])
+
+    @property
+    def has_correct_initializers(self):
+        return all([os.path.exists(initializer) for initializer in self.score_initializers])
+
+    @property
+    def has_correct_package_structure(self):
+        return self.has_correct_directory_structure and self.has_correct_initializers
+
+    @property
+    def maker_wrangler(self):
+        return self._maker_wrangler
+
+    @property
+    def material_wrangler(self):
+        return self._material_wrangler
+
+    @property
+    def materials_directory_name(self):
+        return os.path.join(self.directory_name, 'mus', 'materials')
+
+    @property
+    def materials_initializer(self):
+        return os.path.join(self.materials_directory_name, '__init__.py')
+
+    @property
+    def materials_package_name(self):
+        return '.'.join([self.importable_module_name, 'mus', 'materials'])
+
+    @property
+    def mus_directory_name(self):
+        return os.path.join(self.directory_name, 'mus')
+
+    @property
+    def mus_initializer(self):
+        return os.path.join(self.mus_directory_name, '__init__.py')
+
+    @property
+    def mus_package_name(self):
+        return '.'.join([self.importable_module_name, 'mus'])
 
     @apply
     def score_composer():
@@ -70,6 +105,23 @@ class ScorePackageProxy(SCFProxyObject):
             return self._write_initializer_metadata('score_forces', score_title)
         return property(**locals())
 
+    @property
+    def score_initializers(self):
+        return (self.initializer,
+            self.mus_initializer,
+            self.chunks_initializer,
+            self.materials_initializer,)
+
+    @property
+    def score_subdirectory_names(self):
+        return (self.dist_directory_name,
+            self.dist_pdf_directory_name,
+            self.etc_directory_name,
+            self.exg_directory_name,
+            self.mus_directory_name,
+            self.materials_directory_name,
+            self.chunks_directory_name,)
+
     @apply
     def score_title():
         def fget(self):
@@ -86,210 +138,198 @@ class ScorePackageProxy(SCFProxyObject):
             return self._write_initializer_metadata('score_year', score_title)
         return property(**locals())
 
-    ## PUBLIC METHODS ##
+    ### PUBLIC METHODS ###
 
-    def create_materials_package(self):
-        response = raw_input('material name: ')
-        print ''
-        response = response.lower()
-        response = response.replace(' ', '_')
-        material_package_name = '%s_%s' % (self.score_package_name, response)
-        print 'package name will be %s.' % material_package_name
-        print ''
-        response = raw_input('ok? ')
-        if not response.lower() == 'y':
-            print ''
+    def create_material_package_interactively(self):
+        return self.material_wrangler.create_material_package_interactively()
+
+    def create_package_structure(self):
+        self.fix_score_package_directory_structure(is_interactive=False)
+
+    def fix_package_structure(self, is_interactive=True):
+        if self.package_name == 'recursif':
             return
-        target = os.path.join(self.materials_directory, material_package_name)
-        if os.path.exists(target):
-            raise OSError('directory %r already exists.' % target)
-        os.mkdir(target)
-        initializer = file(os.path.join(target, '__init__.py'), 'w')
-        initializer.write('from %s_output_data import *\n' % material_package_name)
+        for directory_name in self.score_subdirectory_names:
+            if not os.path.exists(directory_name):
+                prompt = 'Create %s? ' % directory_name
+                if not is_interactive or self.query(prompt):
+                    os.mkdir(directory_name)
+        for initializer in self.score_initializers:
+            if not os.path.exists(initializer):
+                prompt = 'Create %s? ' % initializer
+                if not is_interactive or self.query(prompt):
+                    initializer = file(initializer, 'w')
+                    initializer.write('')
+                    initializer.close()
+        lines = []
+        initializer = file(self.mus_initializer, 'r')
+        found_materials_import = False
+        for line in initializer.readlines():
+            lines.append(line)
+            if line.startswith('import materials'):
+                found_materials_import = True
         initializer.close()
-        input_code = '%s_input_code.py' % material_package_name
-        input_code = file(os.path.join(target, input_code), 'w')
-        input_code.write('')
-        input_code.close()
-        output_data = '%s_output_data.py' % material_package_name
-        output_data = file(os.path.join(target, output_data), 'w')
-        output_data.write('')
-        output_data.close()
-        print '%s created.' % material_package_name
-        print ''
+        if not found_materials_import:
+            lines.insert(0, 'import materials\n')
+            initializer = file(self.mus_initializer, 'w')
+            initializer.write(''.join(lines))
+            initializer.close()
 
-    def create_score_package_directory_structure(self):
-        self.fix_score_package_directory_structure(is_interactive = False)
+    def iterate_interactive_materials(self):
+        for material_package_proxy in self.iterate_material_package_proxies():
+            if material_package_proxy.is_interactive:
+                yield material_package_proxy
 
-    def fix_score_package_directory_structure(self, is_interactive = True):
-        if not os.path.exists(self.score_package_directory):
-            raise OSError('directory %r does not exist.' % self.score_package_directory)
-
-        if self.score_package_name == 'poeme':
-            return
-
-        target = os.path.join(self.score_package_directory, '__init__.py')
-        if not os.path.exists(target):
-            prompt = 'Create %s/__init__.py? ' % self.score_package_name
-            if self._get_conditional_user_input(is_interactive, prompt = prompt):
-                initializer = file(target, 'w')
-                initializer.write('')
-                initializer.close()
-
-        target = os.path.join(self.score_package_directory, 'dist')
-        if not os.path.exists(target):
-            prompt = 'Create %s/dist/? ' % self.score_package_name
-            if self._get_conditional_user_input(is_interactive, prompt = prompt):
-                os.mkdir(target)
-
-        target = os.path.join(self.score_package_directory, 'dist', 'pdf')
-        if not os.path.exists(target):
-            prompt = 'Create %s/dist/pdf/? ' % self.score_package_name
-            if self._get_conditional_user_input(is_interactive, prompt = prompt):
-                os.mkdir(target)
-
-        target = os.path.join(self.score_package_directory, 'etc')
-        if not os.path.exists(target):
-            prompt = 'Create %s/etc/? ' % self.score_package_name
-            if self._get_conditional_user_input(is_interactive, prompt = prompt):
-                os.mkdir(target)
-
-        target = os.path.join(self.score_package_directory, 'exg')
-        if not os.path.exists(target):
-            prompt = 'Create %s/exg/? ' % self.score_package_name
-            if self._get_conditional_user_input(is_interactive, prompt = prompt):
-                os.mkdir(target)
-
-        target = os.path.join(self.score_package_directory, 'mus')
-        if not os.path.exists(target):
-            prompt = 'Create %s/mus/? ' % self.score_package_name
-            if self._get_conditional_user_input(is_interactive, prompt = prompt):
-                os.mkdir(target)
-
-        target = os.path.join(self.score_package_directory, 'mus', '__init__.py')
-        if not os.path.exists(target):
-            prompt = 'Create %s/mus/__init__.py? ' % self.score_package_name
-            if self._get_conditional_user_input(is_interactive, prompt = prompt):
-                initializer = file(target, 'w')
-                initializer.write('import materials\n')
-                initializer.close()
-
-        target = os.path.join(self.score_package_directory, 'mus', 'chunks')
-        if not os.path.exists(target):
-            prompt = 'Create %s/mus/chunks? ' % self.score_package_name
-            if self._get_conditional_user_input(is_interactive, prompt = prompt):
-                os.mkdir(target)
-
-        target = os.path.join(self.score_package_directory, 'mus', 'chunks', '__init__.py')
-        if not os.path.exists(target):
-            prompt = 'Create %s/mus/chunks/__init__.py? ' % self.score_package_name
-            if self._get_conditional_user_input(is_interactive, prompt = prompt):
-                initializer = file(target, 'w')
-                initializer.write('')
-                initializer.close()
-
-        target = os.path.join(self.score_package_directory, 'mus', 'materials')
-        if not os.path.exists(target):
-            prompt = 'Create %s/mus/materials? ' % self.score_package_name
-            if self._get_conditional_user_input(is_interactive, prompt = prompt):
-                os.mkdir(target)
-
-        target = os.path.join(self.score_package_directory, 'mus', 'materials', '__init__.py')
-        if not os.path.exists(target):
-            prompt = 'Create %s/mus/materials/__init__.py? ' % self.score_package_name
-            if self._get_conditional_user_input(is_interactive, prompt = prompt):
-                initializer = file(target, 'w')
-                initializer.write('')
-                initializer.close()
+    def iterate_material_package_proxies(self):
+        for material_package_name in self.list_material_package_names():
+            material_package_proxy = self.get_material_package_proxy(material_package_name)
+            yield material_package_proxy
 
     def list_chunks(self):
-        chunks = os.listdir(self.chunks_directory)
+        chunks = os.listdir(self.chunks_directory_name)
         chunks = [x for x in chunks if x[0].isalpha()]
         return chunks
 
     def list_materials(self):
-        materials = os.listdir(self.materials_directory)
+        try:
+            materials = os.listdir(self.materials_directory_name)
+        except OSError:
+            materials = []
         materials = [x for x in materials if x[0].isalpha()]
         return materials
 
+    def list_material_package_names(self):
+        material_package_names = []
+        for material in self.list_materials():
+            material_package_name = '%s.%s' % (self.materials_package_name, material)
+            material_package_names.append(material_package_name)
+        return material_package_names
+
+    def list_numbered_chunks(self):
+        numbered_chunks = []
+        for i, chunk in enumerate(self.list_chunks()):
+            numbered_chunk = (str(i + 1), chunk)
+            numbered_chunks.append(numbered_chunk)
+        return numbered_chunks
+
+    def list_numbered_materials(self):
+        numbered_materials = []
+        for i, material in enumerate(self.list_materials()):
+            material = material.replace('%s_' % self.package_name, '')
+            material = material.replace('_', ' ')
+            numbered_material = (str(i + 1), material)
+            numbered_materials.append(numbered_material)
+        return numbered_materials
+            
     def manage_chunks(self):
-        pass
+        self.print_not_implemented()
 
-    def manage_materials(self):
+    def manage_materials(self, material_number=None):
         while True:
-            material_package_proxy = self.run_material_selection_interface()
-            material_package_proxy.score_title = self.score_title
-            material_package_proxy.run_startup_interface()
+            result = self.select_material(material_number=material_number)
+            if result == 'b':
+                return result
+            else:
+                result.score_title = self.score_title
+                result.manage_material()
+            material_number = None
 
-    def profile_score_package_directory_structure(self):
-        if not os.path.exists(self.score_package_directory):
-            raise OSError('directory %r does not exist.' % self.score_package_directory)
-        if self.score_package_name == 'poeme':
+    def manage_score(self, menu_header=None, command_string=None):
+        while True:
+            menu_specifier = Menu(menu_header=menu_header)
+            menu_specifier.menu_body = self.score_title
+            menu_section = MenuSection()
+            menu_section.menu_section_title = 'Chunks'
+            menu_section.menu_section_entries = self.list_numbered_chunks()
+            menu_section.sentence_length_items.append(('ch', '[make new chunk by hand]'))
+            menu_section.sentence_length_items.append(('ci', '[make new chunk interactively]'))
+            menu_specifier.menu_sections.append(menu_section)
+            menu_section = MenuSection()
+            menu_section.menu_section_title = 'Materials'
+            menu_section.menu_section_entries = self.list_numbered_materials()
+            menu_section.sentence_length_items.append(('ms', 'make new static material'))
+            menu_section.sentence_length_items.append(('mi', 'make new interactive material'))
+            menu_specifier.menu_sections.append(menu_section)
+            menu_section = MenuSection()
+            menu_section.sentence_length_items.append(('st', 'svn status'))
+            menu_section.sentence_length_items.append(('cm', 'commit changes'))
+            menu_specifier.menu_sections.append(menu_section)
+            key, value = menu_specifier.display_menu()
+            if key == 'b':
+                return key, None
+            elif key == 'ch':
+                self.make_new_chunk_by_hand(menu_header=self.score_title)
+            elif key == 'ci':
+                self.make_new_chunk_interactively(menu_header=self.score_title)
+            elif key == 'cm':
+                self.svn_cm()
+            elif key == 'h':
+                self.manage_chunks(menu_header=self.score_title)
+            elif key == 'ms':
+                self.make_new_static_material(menu_header=self.score_title)
+            elif key == 'mi':
+                self.make_new_interactive_material(menu_header=self.score_title)
+            elif key == 'st':
+                self.svn_st()
+            else:
+                try:
+                    material_number = int(key)
+                    material_name = self.material_number_to_material_name(material_number)
+                    package_name = '%s.%s' % (self.materials_package_name, material_name)
+                    material_package_proxy = self.get_material_package_proxy(package_name)
+                    material_package_proxy.score_title = self.score_title
+                    material_package_proxy.manage_material(menu_header=menu_specifier.menu_title)
+                except (TypeError, ValueError):
+                    pass
+
+    def make_new_chunk_by_hand(self):
+        return self.print_not_implemented()
+
+    def make_new_chunk_interactively(self):
+        return self.print_not_implemented()
+
+    def make_new_static_material(self):
+        return self.material_wrangler.create_static_material_package_interactively(
+            menu_header=self.score_title)
+
+    def make_new_interactive_material(self, menu_header=None):
+        while True:
+            key, value = self.maker_wrangler.select_interactive_maker(menu_header=menu_header)
+            if value is None:
+                break
+            else:
+                maker = value
+            maker.score = self
+            result = maker.edit_interactively(menu_header=menu_header)
+            if result:
+                break
+        return True, None
+
+    def material_number_to_material_name(self, material_number):
+        material_index = material_number - 1
+        material_name = self.list_materials()[material_index]
+        return material_name
+
+    def profile_package_structure(self):
+        if not os.path.exists(self.directory_name):
+            raise OSError('directory %r does not exist.' % self.directory_name)
+        if self.package_name == 'recursif':
             return
-        print '%s/__init__.py                  ' % self.score_package_name,
-        print str(os.path.exists(os.path.join(self.score_package_directory, '__init__.py')))
-        print '%s/dist/                          ' % self.score_package_name,
-        print str(os.path.exists(os.path.join(self.score_package_directory, 'dist')))
-        print '%s/dist/pdf                     ' % self.score_package_name,
-        print str(os.path.exists(os.path.join(self.score_package_directory, 'dist', 'pdf')))
-        print '%s/etc/                           ' % self.score_package_name,
-        print str(os.path.exists(os.path.join(self.score_package_directory, 'etc')))
-        print '%s/exg/                           ' % self.score_package_name,
-        print str(os.path.exists(os.path.join(self.score_package_directory, 'exg')))
-        print '%s/mus/                           ' % self.score_package_name,
-        print str(os.path.exists(os.path.join(self.score_package_directory, 'mus')))
-        print '%s/mus/__init__.py            ' % self.score_package_name,
-        print str(os.path.exists(os.path.join(self.score_package_directory, 'mus', '__init__.py')))
-        print '%s/mus/chunks/                  ' % self.score_package_name,
-        print str(os.path.exists(os.path.join(self.score_package_directory, 'mus', 'chunks')))
-        print '%s/mus/chunks/__init__.py   ' % self.score_package_name,
-        print str(os.path.exists(os.path.join(self.score_package_directory, 'mus', 'chunks', '__init__.py')))
-        print '%s/mus/materials/             ' % self.score_package_name,
-        print str(os.path.exists(os.path.join(self.score_package_directory, 'mus', 'materials')))
-        print '%s/mus/materials/__init__.py' % self.score_package_name,
-        print str(os.path.exists(os.path.join(self.score_package_directory, 'mus', 'materials', '__init__.py')))
+        for subdirectory_name in self.score_subdirectory_names:
+            print '%s %s' % (subdirectory_name.ljust(80), os.path.exists(subdirectory_name))
+        for initializer in self.score_initializers:
+            print '%s %s' % (initializer.ljust(80), os.path.exists(initializer))
 
     def run_chunk_selection_interface(self):
-        raise NotImplementedError
-
-    def run_material_selection_interface(self):
-        import baca
-        self.clear_terminal()
-        while True:
-            print '%s - materials\n' % self.score_title
-            materials = self.list_materials()
-            key, material_name = self.present_menu(values_to_number = materials, indent_level = 1)
-            if key == 'b':
-                raise KeyboardInterrupt
-            elif key == 'q':
-                raise SystemExit
-            else:
-                material_package_proxy = baca.scf.MaterialPackageProxy(self.score_package_name, material_name)
-                return material_package_proxy
-
-    def run_score_package_proxy_startup_interface(self):
-        try:
-            while True:
-                self.clear_terminal()
-                self.print_menu_title('%s - main menu\n' % self.score_title)
-                self.summarize_chunks()
-                self.summarize_materials()
-                pairs = [('h', 'chunks'), ('m', 'materials')]
-                key, value = self.present_menu(named_pairs = pairs, indent_level = 1, is_nearly = True)
-                if key == 'h':
-                    #chunk_packge_proxy = self.run_chunk_selection_interface()
-                    self.manage_chunks()
-                elif key == 'm':
-                    self.manage_materials()
-                elif key == 'q':
-                    raise SystemExit
-        except EOFError:
-            print '\n'
+        self.print_not_implemented()
 
     def summarize_chunks(self):
         chunks = self.list_chunks()
         print self.tab(1),
-        print 'Chunks (%s)' % len(chunks)
+        if not chunks:
+            print 'Chunks (none yet)'
+        else:
+            print 'Chunks'
         for chunk in chunks:
             print self.tab(2),
             print chunk
@@ -298,7 +338,12 @@ class ScorePackageProxy(SCFProxyObject):
     def summarize_materials(self):
         materials = self.list_materials()
         print self.tab(1),
-        print 'Materials (%s)' % len(materials)
-        for material in materials:
-            print self.tab(2),
-            print material
+        if not materials:
+            print 'Materials (none yet)'
+        else:
+            print 'Materials'
+        if materials:
+            print ''
+        for i, material in enumerate(materials):
+            print self.tab(1),
+            print '(%s) %s' % (i + 1, material.replace('_', ' '))

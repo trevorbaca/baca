@@ -22,14 +22,14 @@ class PatternedArticulations(_ArticulationsSpecifier):
             articulation_lists = []
         self.articulation_lists = articulation_lists
 
-    ## OVERLOADS ##
+    ### OVERLOADS ###
 
     def __call__(self, articulation_lists):
         new = type(self)()
         new.articulation_lists = articulation_lists
         return new
 
-    ## PUBLIC ATTRIBUTES ##
+    ### PUBLIC ATTRIBUTES ###
 
     @apply
     def articulation_lists():
@@ -42,7 +42,7 @@ class PatternedArticulations(_ArticulationsSpecifier):
                 raise TypeError(articulation_lists)
         return property(**locals())
 
-    ## PUBLIC METHODS ##
+    ### PUBLIC METHODS ###
 
     def apply(self, expr, offset = 0, skip_first = 0, skip_last = 0):
         articulation_lists = sequencetools.CyclicList(self.articulation_lists)

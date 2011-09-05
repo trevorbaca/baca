@@ -54,7 +54,7 @@ class _SignalAffixedObjectWithFilledTokens(_RhythmicKaleid):
         self._repr_signals.append(self._suffix_signal)
         self._repr_signals.append(self._secondary_divisions)
 
-    ## OVERLOADS ##
+    ### OVERLOADS ###
 
     def __call__(self, duration_tokens, seeds = None):
         duration_pairs, seeds = _RhythmicKaleid.__call__(self, duration_tokens, seeds)
@@ -76,7 +76,7 @@ class _SignalAffixedObjectWithFilledTokens(_RhythmicKaleid):
             tuplets = self._make_tuplets(secondary_duration_pairs, leaf_lists)
             return tuplets
 
-    ## PRIVATE METHODS ##
+    ### PRIVATE METHODS ###
 
     def _make_numeric_map_part(self, numerator, prefix, suffix, is_note_filled = True):
         prefix_weight = mathtools.weight(prefix)

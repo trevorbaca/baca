@@ -1,4 +1,10 @@
-from CatalogProxy import CatalogProxy
-from MaterialPackageProxy import MaterialPackageProxy
+from DirectoryProxy import DirectoryProxy
+from InteractiveMaterialProxy import InteractiveMaterialProxy
+from MakerWrangler import MakerWrangler
+from MaterialWrangler import MaterialWrangler
+from PackageProxy import PackageProxy
 from ScorePackageProxy import ScorePackageProxy
-import io
+from ScoreWrangler import ScoreWrangler
+from StaticMaterialProxy import StaticMaterialProxy
+from StudioInterface import StudioInterface
+from UserInputWrapper import UserInputWrapper

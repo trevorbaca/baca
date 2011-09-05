@@ -1,1 +1,14 @@
-/Users/trevorbaca/Documents/other/baca/scf/scf.py $1
+#! /usr/bin/env python
+import baca
+
+
+studio = baca.scf.StudioInterface()
+
+while True:
+    try:
+        studio.work_in_studio()
+    except EOFError:
+        print '\n'
+        break
+    except baca.scf.exceptions.StudioException:
+        pass

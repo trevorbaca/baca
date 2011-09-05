@@ -24,7 +24,7 @@ class ReiteratedArticulation(_ArticulationsSpecifier):
             articulation_list = [articulation_list]
         self.articulation_list = articulation_list
 
-    ## OVERLOADS ##
+    ### OVERLOADS ###
 
     def __call__(self, articulation_list):
         new = type(self)()
@@ -34,7 +34,7 @@ class ReiteratedArticulation(_ArticulationsSpecifier):
     def __repr__(self):
         return '%s(%s)' % (type(self).__name__, self.articulation_list)
 
-    ## PUBLIC ATTRIBUTES ##
+    ### PUBLIC ATTRIBUTES ###
 
     @apply
     def articulation_list():
@@ -50,7 +50,7 @@ class ReiteratedArticulation(_ArticulationsSpecifier):
                 raise TypeError(articulation_list)
         return property(**locals())
 
-    ## PUBLIC METHODS ##
+    ### PUBLIC METHODS ###
 
     def apply(self, expr, offset = 0, skip_first = 0, skip_last = 0):
         articulation_list = sequencetools.CyclicList(self.articulation_list)

@@ -14,7 +14,7 @@ class W(sequencetools.Matrix):
             measure_numerators, talea, n_voices)
         sequencetools.Matrix.__init__(self, columns = measures)
 
-    ## PRIVATE METHODS ##
+    ### PRIVATE METHODS ###
 
     def _make_nested_measure_lists(self, measure_numerators, talea, n_voices):
         assert all([mathtools.is_positive_integer(x) for x in measure_numerators])
@@ -36,7 +36,7 @@ class W(sequencetools.Matrix):
         all_measure_divisions = sequencetools.partition_sequence_cyclically_by_counts_with_overhang(*args)
         return all_measure_divisions
 
-    ## PUBLIC ATTRIBUTES ##
+    ### PUBLIC ATTRIBUTES ###
 
     @property
     def measures(self):
