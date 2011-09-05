@@ -96,10 +96,11 @@ class ScorePackageProxy(SCFProxyObject):
         material_package_name = '%s_%s' % (self.score_package_name, response)
         print 'package name will be %s.' % material_package_name
         print ''
-        response = raw_input('ok? ')
-        if not response.lower() == 'y':
-            print ''
-            return
+#        response = raw_input('ok? ')
+#        if not response.lower() == 'y':
+#            print ''
+#            return
+        self.confirm()
         target = os.path.join(self.materials_directory, material_package_name)
         if os.path.exists(target):
             raise OSError('directory %r already exists.' % target)
@@ -243,11 +244,13 @@ class ScorePackageProxy(SCFProxyObject):
         print '%s/mus/chunks/                  ' % self.score_package_name,
         print str(os.path.exists(os.path.join(self.score_package_directory, 'mus', 'chunks')))
         print '%s/mus/chunks/__init__.py   ' % self.score_package_name,
-        print str(os.path.exists(os.path.join(self.score_package_directory, 'mus', 'chunks', '__init__.py')))
+        print str(os.path.exists(os.path.join(
+            self.score_package_directory, 'mus', 'chunks', '__init__.py')))
         print '%s/mus/materials/             ' % self.score_package_name,
         print str(os.path.exists(os.path.join(self.score_package_directory, 'mus', 'materials')))
         print '%s/mus/materials/__init__.py' % self.score_package_name,
-        print str(os.path.exists(os.path.join(self.score_package_directory, 'mus', 'materials', '__init__.py')))
+        print str(os.path.exists(os.path.join(
+            self.score_package_directory, 'mus', 'materials', '__init__.py')))
 
     def run_chunk_selection_interface(self):
         raise NotImplementedError
@@ -258,13 +261,20 @@ class ScorePackageProxy(SCFProxyObject):
         while True:
             print '%s - materials\n' % self.score_title
             materials = self.list_materials()
-            key, material_name = self.present_menu(values_to_number = materials, indent_level = 1)
+            named_pairs = [('n', 'new')]
+            key, material_name = self.present_menu(values_to_number = materials, 
+                named_pairs = named_pairs, indent_level = 1)
             if key == 'b':
                 raise KeyboardInterrupt
+            elif key == 'n':
+                self.create_materials_package()
             elif key == 'q':
                 raise SystemExit
+            elif key == 'r':
+                self.rename_materials_package()
             else:
-                material_package_proxy = baca.scf.MaterialPackageProxy(self.score_package_name, material_name)
+                material_package_proxy = baca.scf.MaterialPackageProxy(
+                    self.score_package_name, material_name)
                 return material_package_proxy
 
     def run_score_package_proxy_startup_interface(self):
@@ -275,7 +285,8 @@ class ScorePackageProxy(SCFProxyObject):
                 self.summarize_chunks()
                 self.summarize_materials()
                 pairs = [('h', 'chunks'), ('m', 'materials')]
-                key, value = self.present_menu(named_pairs = pairs, indent_level = 1, is_nearly = True)
+                key, value = self.present_menu(
+                    named_pairs = pairs, indent_level = 1, is_nearly = True)
                 if key == 'h':
                     #chunk_packge_proxy = self.run_chunk_selection_interface()
                     self.manage_chunks()

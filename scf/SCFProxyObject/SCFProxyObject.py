@@ -1,5 +1,6 @@
 import os
 import re
+import subprocess
 
 
 class SCFProxyObject(object):
@@ -9,10 +10,31 @@ class SCFProxyObject(object):
     def __repr__(self):
         return '%s()' % type(self).__name__
 
+    ## PUBLIC ATTRIBUTES ##
+
+    @property
+    def is_in_repository(self):
+        command = 'svn info %s' % self.top_level_directory    
+        proc = subprocess.Popen(command, shell=True, stdout=subprocess.PIPE)
+        first_line = proc.stdout.readline()
+        if first_line.startswith('Path: '):
+            return True
+        elif first_line.startswith('svn: '):
+            return False
+        else:
+            raise ValueError
+
     ## PUBLIC METHODS ##
 
     def clear_terminal(self):
         os.system('clear')
+
+    def confirm(self):
+        response = raw_input('ok? ')
+        if not response.lower() == 'y':
+            print ''
+            return False
+        return True
 
     def list_nearly_ubiquitous_menu_pairs(self):
         ubiquitous_menu_pairs = [
@@ -31,8 +53,8 @@ class SCFProxyObject(object):
         quit_regex = re.compile(r'quit\(\s*\)|[q]')
         return quit_regex.match(string)
 
-    def present_menu(self,
-        values_to_number = None, named_pairs = None, indent_level = 0, is_nearly = False, show_options = True):
+    def present_menu(self, values_to_number = None, named_pairs = None, 
+        indent_level = 0, is_nearly = False, show_options = True):
         if values_to_number is None:
             values_to_number = []
         if named_pairs is None:
