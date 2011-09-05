@@ -25,7 +25,7 @@ def increase_sublist_end_elements(l, s):
    assert all([isinstance(x, list) for x in l])
    assert isinstance(s, list)
 
-   result = [ ]
+   result = []
 
    len_s = len(s)
    for i, sublist in enumerate(l):

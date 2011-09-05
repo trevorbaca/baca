@@ -2,7 +2,7 @@ from abjad import *
 from baca import music
 
 
-def test_music_make_measures_01( ):
+def test_music_make_measures_01():
    t = Voice([Note(n, (1, 8)) for n in range(8)])
    assert len(t) == 8
    leaves_before = t.leaves
@@ -15,7 +15,7 @@ def test_music_make_measures_01( ):
       assert x.prolated_duration == Fraction(2, 8)
 
 
-def test_music_make_measures_02( ):
+def test_music_make_measures_02():
    t = Voice([Note(n, (1, 8)) for n in range(8)])
    assert len(t) == 8
    leaves_before = t.leaves

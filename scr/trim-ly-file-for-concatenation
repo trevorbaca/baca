@@ -5,9 +5,9 @@ import sys
 
 
 def trim_ly_file_for_concatenation(input_path_name):
-   output_lines = [ ]
+   output_lines = []
    found_new_score = False
-   for line in file(input_path_name, 'r').readlines( ):
+   for line in file(input_path_name, 'r').readlines():
       if found_new_score:
          output_lines.append(line)
       ## preserve indentation and replace \new Score << with open skeleton
@@ -18,7 +18,7 @@ def trim_ly_file_for_concatenation(input_path_name):
          output_line = line[:line.index(r'\new Score')] + '<<\n'
          output_lines.append(output_line)
    ## remove final close brace that matches \score{ }
-   output_lines.pop( )
+   output_lines.pop()
    input_path_name, input_file_name = os.path.split(input_path_name)
    output_file_name = 'trimmed-' + input_file_name
    output_path_name = os.path.join(input_path_name, output_file_name)

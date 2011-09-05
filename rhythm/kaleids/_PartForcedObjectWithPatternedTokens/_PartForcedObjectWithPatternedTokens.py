@@ -99,7 +99,7 @@ class _PartForcedObjectWithPatternedTokens(_RhythmicKaleid):
 
    def _force_token_part(self, token_part, indicator):
       assert len(token_part) == len(indicator)
-      new_token_part = [ ]
+      new_token_part = []
       for number, i in zip(token_part, indicator):
          if i == -1:
             new_token_part.append(-abs(number))
@@ -113,7 +113,7 @@ class _PartForcedObjectWithPatternedTokens(_RhythmicKaleid):
       return new_token_part
 
    def _make_leaf_lists(self, numeric_map, denominator):
-      leaf_lists = [ ]
+      leaf_lists = []
       for map_token in numeric_map:
          leaf_list = leaftools.make_leaves_from_note_value_signal(map_token, denominator)
          leaf_lists.append(leaf_list)
@@ -132,7 +132,7 @@ class _PartForcedObjectWithPatternedTokens(_RhythmicKaleid):
       return numeric_map
 
    def _make_prolated_duration_pairs(self, duration_pairs, prolation_addenda):
-      prolated_duration_pairs = [ ]
+      prolated_duration_pairs = []
       for i, duration_pair in enumerate(duration_pairs):
          if not prolation_addenda:
             prolated_duration_pairs.append(duration_pair)

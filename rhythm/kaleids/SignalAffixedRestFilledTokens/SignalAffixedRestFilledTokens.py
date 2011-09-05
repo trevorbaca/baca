@@ -11,4 +11,4 @@ class SignalAffixedRestFilledTokens(_SignalAffixedFilledTokens):
       if 0 < middle:
          return (-abs(middle), )
       else:
-         return ( )
+         return ()

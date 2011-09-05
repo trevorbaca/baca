@@ -19,20 +19,20 @@ class PatternedArticulations(_ArticulationsSpecifier):
          minimum_written_pitch = minimum_written_pitch,
          maximum_written_pitch = maximum_written_pitch)
       if articulation_lists is None:
-         articulation_lists = [ ]
+         articulation_lists = []
       self.articulation_lists = articulation_lists
 
    ## OVERLOADS ##
 
    def __call__(self, articulation_lists):
-      new = type(self)( )
+      new = type(self)()
       new.articulation_lists = articulation_lists
       return new
 
    ## PUBLIC ATTRIBUTES ##
 
    @apply
-   def articulation_lists( ):
+   def articulation_lists():
       def fget(self):
          return self._articulation_lists
       def fset(self, articulation_lists):
@@ -40,7 +40,7 @@ class PatternedArticulations(_ArticulationsSpecifier):
             self._articulation_lists = articulation_lists
          else:
             raise TypeError(articulation_lists)
-      return property(**locals( ))
+      return property(**locals())
 
    ## PUBLIC METHODS ##
 

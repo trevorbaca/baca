@@ -22,7 +22,7 @@ def partition_nested_into_canonic_parts(expr):
    if isinstance(expr, (int, long)):
       return mathtools.partition_integer_into_canonic_parts(expr)
    elif isinstance(expr, list):
-      result = [ ]
+      result = []
       for subexpr in expr:
          new = partition_nested_into_canonic_parts(subexpr)
          if isinstance(subexpr, int):

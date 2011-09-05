@@ -1,6 +1,6 @@
 #! /usr/bin/env python
 
-'''Equivalent to iotools.pdf( ) in Abjad.'''
+'''Equivalent to iotools.pdf() in Abjad.'''
 
 import glob
 import os

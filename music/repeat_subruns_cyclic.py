@@ -2,7 +2,7 @@ from abjad.tools.notetools.Note import Note
 from abjad.tools import componenttools
 
 
-## TODO: Rename to repeat_subruns_to_count( ) to match Abjad sequencetools. ##
+## TODO: Rename to repeat_subruns_to_count() to match Abjad sequencetools. ##
 
 def repeat_subruns_cyclic(notes, pairs, history = False):
    '''Repeat components according to pairs.
@@ -17,10 +17,10 @@ def repeat_subruns_cyclic(notes, pairs, history = False):
    assert isinstance(pairs, list)
    assert all([len(x) == 3 for x in pairs])
 
-   instructions = [ ]
+   instructions = []
    len_notes = len(notes)
    for pair in reversed(pairs):
-      new_notes = [ ]
+      new_notes = []
       for i in range(pair[0], pair[0] + pair[1]):
          source = notes[i % len_notes]
          #new_note = Note(source.written_pitch.number, source.written_duration)

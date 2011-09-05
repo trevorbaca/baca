@@ -25,7 +25,7 @@ class NoteAndChordHairpin(_DynamicsSpecifier):
    ## PUBLIC ATTRIBUTES ##
 
    @apply
-   def hairpin_token( ):
+   def hairpin_token():
       def fget(self):
          return self._hairpin_token
       def fset(self, hairpin_token):
@@ -35,7 +35,7 @@ class NoteAndChordHairpin(_DynamicsSpecifier):
             self._hairpin_token = hairpin_token
          else:
             raise TypeError(hairpin_token)
-      return property(**locals( ))
+      return property(**locals())
 
    ## PUBLIC METHODS ##
 

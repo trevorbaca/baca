@@ -16,9 +16,9 @@ class Constellation(object):
    def __init__(self, circuit, partitioned_generator_chromatic_pitch_numbers):
       self._circuit = circuit
       self._partitioned_generator_chromatic_pitch_numbers = partitioned_generator_chromatic_pitch_numbers
-      self._constellate_partitioned_generator_chromatic_pitch_numbers( )
+      self._constellate_partitioned_generator_chromatic_pitch_numbers()
       self._chord_duration = Fraction(1, 4)
-      self._chords = [ ]
+      self._chords = []
 
    ## OVERLOADS ##
 
@@ -166,20 +166,20 @@ class Constellation(object):
       raise ValueError('%s not in %s' % (chord, self))
 
    def make_chords(self):
-      result = [ ]
+      result = []
       for pitch_number_list in self._pitch_number_lists:
          chord = Chord(pitch_number_list, self._chord_duration)
          result.append(chord)
       return result
 
    def make_labeled_chords(self):
-      result = self.make_chords( )
+      result = self.make_chords()
       for chord in result:
          self._label_chord(chord)
       return result
 
    def make_labeled_colored_chords(self):
-      result = self.make_labeled_chords( )
+      result = self.make_labeled_chords()
       for chord in result:
          chordtools.color_chord_note_heads_by_pitch_class_color_map(chord, self._color_map)
       return result

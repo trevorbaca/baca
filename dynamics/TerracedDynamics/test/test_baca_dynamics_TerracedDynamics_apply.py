@@ -2,7 +2,7 @@ from abjad import *
 import baca
 
 
-def test_baca_dynamics_TerracedDynamics_apply_01( ):
+def test_baca_dynamics_TerracedDynamics_apply_01():
 
    terraces = baca.dynamics.TerracedDynamics(['f', 'mp', 'mf', 'mp', 'ff'])
    staff = Staff("c'8 d'8 r8 e'8 f'8 r8 g'8 r8 a'32 b'32 r8. c''8 d''8" )

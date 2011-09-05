@@ -23,10 +23,10 @@ def check_and_make_directory(path):
             os.mkdir(path)
             print 'Diretory %s created.' % path
             print ''
-            run_go_on_menu( )
+            run_go_on_menu()
             break
          elif input == '2':
             print 'Returning to previous menu.'
             print ''
-            run_go_on_menu( )
+            run_go_on_menu()
             break

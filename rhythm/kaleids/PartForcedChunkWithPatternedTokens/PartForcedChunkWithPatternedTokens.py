@@ -11,7 +11,7 @@ class PartForcedChunkWithPatternedTokens(_PartForcedObjectWithPatternedTokens):
 
    def _force_token_parts(self, tokens, quintuplet):
       lefts, middles, rights, left_lengths, right_lengths = quintuplet
-      forced_tokens = [ ]
+      forced_tokens = []
       left_length = left_lengths[0]
       left = lefts[:left_length]
       right_length = right_lengths[0]

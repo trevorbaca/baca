@@ -38,7 +38,7 @@ def intaglio(l, s, t = 1):
    assert len(l) > 0
    assert len(s) > 0
 
-   result = [ ]
+   result = []
 
    result = sequencetools.repeat_sequence_to_weight_exactly(s, sum(l))
    result = sequencetools.split_sequence_once_by_weights_with_overhang(result, l)

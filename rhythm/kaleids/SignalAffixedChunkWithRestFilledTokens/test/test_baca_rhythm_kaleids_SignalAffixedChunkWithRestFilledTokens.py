@@ -3,7 +3,7 @@ from abjad.tools import sequencetools
 from baca.rhythm.kaleids import *
 
 
-def test_baca_rhythm_kaleids_SignalAffixedChunkWithRestFilledTokens_01( ):
+def test_baca_rhythm_kaleids_SignalAffixedChunkWithRestFilledTokens_01():
 
    prefix_signal, prefix_lengths = [8], [2]
    suffix_signal, suffix_lengths = [3], [4]
@@ -45,7 +45,7 @@ def test_baca_rhythm_kaleids_SignalAffixedChunkWithRestFilledTokens_01( ):
    assert staff.format == "\\new Staff {\n\t{\n\t\t\\time 5/8\n\t\tc'4\n\t\tc'4\n\t\tr8\n\t}\n\t{\n\t\t\\time 5/8\n\t\tr2\n\t\tr8\n\t}\n\t{\n\t\t\\time 5/8\n\t\tr4\n\t\tc'16.\n\t\tc'16.\n\t\tc'16.\n\t\tc'16.\n\t}\n}"
 
 
-def test_baca_rhythm_kaleids_SignalAffixedChunkWithRestFilledTokens_02( ):
+def test_baca_rhythm_kaleids_SignalAffixedChunkWithRestFilledTokens_02():
 
    prefix_signal, prefix_lengths = [1], [20]
    suffix_signal, suffix_lengths = [1], [2]
@@ -85,10 +85,10 @@ def test_baca_rhythm_kaleids_SignalAffixedChunkWithRestFilledTokens_02( ):
    assert staff.format == "\\new Staff {\n\t{\n\t\t\\time 5/8\n\t\tc'4\n\t\tc'4\n\t\tc'8\n\t}\n\t{\n\t\t\\time 5/8\n\t\tr2\n\t\tr8\n\t}\n\t{\n\t\t\\time 5/8\n\t\tr8\n\t\tc'4\n\t\tc'4\n\t}\n}"
 
 
-def test_baca_rhythm_kaleids_SignalAffixedChunkWithRestFilledTokens_03( ):
+def test_baca_rhythm_kaleids_SignalAffixedChunkWithRestFilledTokens_03():
 
-   prefix_signal, prefix_lengths = [ ], [0]
-   suffix_signal, suffix_lengths = [ ], [0]
+   prefix_signal, prefix_lengths = [], [0]
+   suffix_signal, suffix_lengths = [], [0]
    denominator = 4
    kaleid = SignalAffixedChunkWithRestFilledTokens(
       prefix_signal, prefix_lengths, suffix_signal, suffix_lengths, denominator)
@@ -123,7 +123,7 @@ def test_baca_rhythm_kaleids_SignalAffixedChunkWithRestFilledTokens_03( ):
    assert staff.format == '\\new Staff {\n\t{\n\t\t\\time 5/8\n\t\tr2\n\t\tr8\n\t}\n\t{\n\t\t\\time 5/8\n\t\tr2\n\t\tr8\n\t}\n\t{\n\t\t\\time 5/8\n\t\tr2\n\t\tr8\n\t}\n}'
 
 
-def test_baca_rhythm_kaleids_SignalAffixedChunkWithRestFilledTokens_04( ):
+def test_baca_rhythm_kaleids_SignalAffixedChunkWithRestFilledTokens_04():
 
    prefix_signal, prefix_lengths = [1], [1]
    suffix_signal, suffix_lengths = [1], [1]
@@ -168,7 +168,7 @@ def test_baca_rhythm_kaleids_SignalAffixedChunkWithRestFilledTokens_04( ):
    assert staff.format == "\\new Staff {\n\t{\n\t\t\\time 4/8\n\t\t\\times 4/5 {\n\t\t\tc'8\n\t\t\tr2\n\t\t}\n\t}\n\t{\n\t\t\\time 4/8\n\t\t{\n\t\t\tr2\n\t\t}\n\t}\n\t{\n\t\t\\time 4/8\n\t\t\\times 4/7 {\n\t\t\tr2.\n\t\t\tc'8\n\t\t}\n\t}\n}"
 
 
-def test_baca_rhythm_kaleids_SignalAffixedChunkWithRestFilledTokens_05( ):
+def test_baca_rhythm_kaleids_SignalAffixedChunkWithRestFilledTokens_05():
 
    prefix_signal, prefix_lengths = [1], [1]
    suffix_signal, suffix_lengths = [1], [1]

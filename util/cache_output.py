@@ -16,4 +16,4 @@ def cache_output(output, output_file_name, location):
    outfile = os.path.join(output_directory, output_file_name + '.py')
    outfile = file(outfile, 'w')
    outfile.write(output)
-   outfile.close( )
+   outfile.close()

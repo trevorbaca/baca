@@ -7,7 +7,7 @@ def get_next_letter_pair(directory):
    files = os.listdir(directory)
    files = [x for x in files if x[0] == x[1]]
    files = [x for x in files if 'a' <= x[0] <= 'z']
-   files.sort( )
+   files.sort()
    
    if not files:
       letter_pair = 'aa'

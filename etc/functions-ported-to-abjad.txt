@@ -104,7 +104,7 @@ Functions migrated from baca/util.py to Abjad:
    pitchtools.permute_by_row(pitches, row)
 
 
-   util.pick( )
+   util.pick()
    ==>
    use %
 
@@ -181,7 +181,7 @@ Functions migrated from baca/util.py to Abjad:
    sequencetools.repeat_subruns_cyclic(l, [(achor, length, new_appearances), ...])
    ie, sequencetools.repeat_subruns_cyclic(l, [(i, length, n - 1), ...])
    ==>
-   sequencetools.repeat_subruns_to_count( )
+   sequencetools.repeat_subruns_to_count()
 
 
    util.rout(l, s, cur = 0, recurse = False)
@@ -243,6 +243,6 @@ Functions migrated from baca/util.py to Abjad:
    util.partition_nested_into_canonic_parts(expr, direction = 'big-endian')
 
 
-   util.within( )
+   util.within()
    ==>
    use %

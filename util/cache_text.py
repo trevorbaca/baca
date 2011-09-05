@@ -16,4 +16,4 @@ def cache_text(text, text_file_name, location):
    outfile = os.path.join(text_directory, text_file_name + '.txt')
    outfile = file(outfile, 'w')
    outfile.write(text)
-   outfile.close( )
+   outfile.close()

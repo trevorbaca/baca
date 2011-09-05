@@ -1,7 +1,7 @@
 import baca
 
 
-def test_baca_rhythm_W_voices_01( ):
+def test_baca_rhythm_W_voices_01():
 
    W = baca.rhythm.W((10, 8), (3, 3, 6, 10), 1)
 

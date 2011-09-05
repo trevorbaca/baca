@@ -2,7 +2,7 @@
 
 import os
 
-def find_filenames_with_forbidden_characters( ):
+def find_filenames_with_forbidden_characters():
    forbidden_characters = (' ', )
    for dirpath, dirnames, filenames in os.walk('.'):
       for filename in filenames:
@@ -15,5 +15,5 @@ def find_filenames_with_forbidden_characters( ):
 
 if __name__ == '__main__':
    os.system('clear')
-   find_filenames_with_forbidden_characters( )
+   find_filenames_with_forbidden_characters()
    print ''

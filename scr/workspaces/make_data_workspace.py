@@ -34,7 +34,7 @@ def make_data_workspace(parent_directory, workspace_name):
    driver_name = os.path.join(path, 'run.py')
    driver = file(driver_name, 'w')
    driver.write(data_driver_contents)
-   driver.close( )
+   driver.close()
    os.system('chmod 755 %s' % driver_name)
 
    ## make helpers directory
@@ -45,19 +45,19 @@ def make_data_workspace(parent_directory, workspace_name):
    helpers_init_contents = 'import baca\n'
    helpers_init_contents += '\n'
    helpers_init_contents += \
-      'baca.util.import_public_functions(__file__, globals( ))\n'
+      'baca.util.import_public_functions(__file__, globals())\n'
    helpers_init_contents += 'del baca'
 
    ## write helpers init
    helpers_init = os.path.join(helpers_directory, '__init__.py')
    helpers_init =  file(helpers_init, 'w')
    helpers_init.write(helpers_init_contents)
-   helpers_init.close( )
+   helpers_init.close()
 
    ## make helper contents
    helper_contents = '\n'
    helper_contents += '\n'
-   helper_contents += 'def %s( ):\n' % function_name
+   helper_contents += 'def %s():\n' % function_name
    helper_contents += '\n'
    helper_contents += '   pass\n'
 
@@ -66,4 +66,4 @@ def make_data_workspace(parent_directory, workspace_name):
    helper_file = os.path.join(helpers_directory, helper_file)
    helper_file = file(helper_file, 'w')
    helper_file.write(helper_contents)
-   helper_file.close( )
+   helper_file.close()

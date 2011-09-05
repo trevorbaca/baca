@@ -27,9 +27,9 @@ def make_chordal_sequence(score_package_name):
       if match is not None:
          break
    
-   aggregate_id_string = match.group( )
-   aggregate_ids = aggregate_id_string.split( )
-   aggregates = [ ]
+   aggregate_id_string = match.group()
+   aggregate_ids = aggregate_id_string.split()
+   aggregates = []
    for aggregate_id in aggregate_ids:
       constellation_number, aggregate_number = aggregate_id.split('-')
       constellation_number = int(constellation_number)
@@ -67,7 +67,7 @@ def make_chordal_sequence(score_package_name):
    data_file_name = os.path.join(chordal_sequence_path, chordal_sequence_name + '.py')
    data_file = file(data_file_name, 'w')
    data_file.write(str(aggregates))
-   data_file.close( )
+   data_file.close()
 
    ly_file_name = os.path.join(chordal_sequence_path, chordal_sequence_name + '.ly')
    iotools.write_expr_to_ly(lily_file, ly_file_name, print_status = False)
@@ -79,8 +79,8 @@ def make_chordal_sequence(score_package_name):
 
    input = raw_input('Show chordal sequence PDF? ')
    print ''
-   if input.lower( ) in ('1', 'y', 'yes'):
+   if input.lower() in ('1', 'y', 'yes'):
       command = 'open %s' % pdf_file_name
       os.system(command)
 
-   run_go_on_menu( ) 
+   run_go_on_menu() 

@@ -24,7 +24,7 @@ def partition_nested_into_inward_pointing_parts(l, target = 'negative'):
    [[1, 1, -5]]
    '''
 
-   result = [ ]
+   result = []
 
    if target == 'negative':
 

@@ -11,27 +11,27 @@ class InstrumentAttributeApplicationSpecifier(object):
    ## PUBLIC ATTRIBUTES ##
 
    @apply
-   def proportions( ):
+   def proportions():
       def fget(self):
          return self._proportions
       def fset(self, proportions):
          if isinstance(proportions, (list, tuple)):
             self._proportions = proportions
          elif proportions is None:
-            self._proportions = [ ]
+            self._proportions = []
          else:
             raise TypeError
-      return property(**locals( ))
+      return property(**locals())
 
    @apply
-   def tokens( ):
+   def tokens():
       def fget(self):
          return self._tokens
       def fset(self, tokens):
          if isinstance(tokens, (list, tuple)):
             self._tokens = tokens
          elif tokens is None:
-            self._tokens = [ ]
+            self._tokens = []
          else:
             raise TypeError
-      return property(**locals( ))
+      return property(**locals())

@@ -16,9 +16,9 @@ if __name__ == '__main__':
    template = os.path.join(dirname, 'templates', 'template.ly')
 
    print '%s'
-   score = %s( )
+   score = %s()
    name = os.path.join(dirname, 'scores', '%s')
-   title = [ ]
+   title = []
    io.write_and_show(score, name, template, title, write = write)
    print ''
 '''

@@ -14,7 +14,7 @@ class AttributeApplicationSpecifier(object):
       self.instrument_names = instrument_names
       self.proportions = proportions
       self.default = InstrumentAttributeApplicationSpecifier(self.proportions)
-      self._init_instrument_attribute_application_specifiers( )
+      self._init_instrument_attribute_application_specifiers()
 
    ## OVERLOADS ##
 

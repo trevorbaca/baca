@@ -18,7 +18,7 @@ def replace_nested_elements_with_unary_subruns(l):
    [[1, 1, 1, 1, -4], [1, 1, 1, -2, -4]]
    '''
 
-   result = [ ]
+   result = []
 
 #   # two-dimensional w
 #   if isinstance(w[0], list):
@@ -48,10 +48,10 @@ def replace_nested_elements_with_unary_subruns(l):
 #      
 #   return result
 
-   result = [ ]
+   result = []
 
    for sublist in l:
-      new_sublist = [ ]
+      new_sublist = []
       for element in sublist:
          print element
          if 0 < element:

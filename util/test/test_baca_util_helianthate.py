@@ -2,7 +2,7 @@ from abjad import *
 from baca import util
 
 
-def test_baca_util_helianthate_01( ):
+def test_baca_util_helianthate_01():
 
    l = [[1, 2, 3], [4, 5], [6, 7, 8]]
    t = util.helianthate(l, -1, 1)

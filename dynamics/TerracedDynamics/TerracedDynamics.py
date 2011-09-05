@@ -12,13 +12,13 @@ class TerracedDynamics(_DynamicsSpecifier):
    def __init__(self, dynamics = None, minimum_prolated_duration = None):
       _DynamicsSpecifier.__init__(self, minimum_prolated_duration = minimum_prolated_duration)
       if dynamics is None:
-         dynamics = [ ]
+         dynamics = []
       self.dynamics = dynamics
 
    ## OVERLOADS ##
 
    def __call__(self, dynamics):
-      new = type(self)( )
+      new = type(self)()
       new.dynamics = dynamics
       new.minimum_prolated_duration = self.minimum_prolated_duration
       return new
@@ -26,7 +26,7 @@ class TerracedDynamics(_DynamicsSpecifier):
    ## PUBLIC ATTRIBUTES ##
 
    @apply
-   def dynamics( ):
+   def dynamics():
       def fget(self):
          return self._dynamics
       def fset(self, dynamics):
@@ -36,7 +36,7 @@ class TerracedDynamics(_DynamicsSpecifier):
             self._dynamics = dynamics
          else:
             raise TypeError(dynamics)
-      return property(**locals( ))
+      return property(**locals())
 
    ## PUBLIC METHODS ##
 

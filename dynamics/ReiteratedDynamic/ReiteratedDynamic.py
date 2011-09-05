@@ -15,7 +15,7 @@ class ReiteratedDynamic(_DynamicsSpecifier):
    ## OVERLOADS ##
 
    def __call__(self, dynamic_name):
-      new = type(self)( )
+      new = type(self)()
       new.dynamic_name = dynamic_name
       new.minimum_prolated_duration = self.minimum_prolated_duration
       return new
@@ -23,7 +23,7 @@ class ReiteratedDynamic(_DynamicsSpecifier):
    ## PUBLIC ATTRIBUTES ##
 
    @apply
-   def dynamic_name( ):
+   def dynamic_name():
       def fget(self):
          return self._dynamic_name
       def fset(self, dynamic_name):
@@ -33,7 +33,7 @@ class ReiteratedDynamic(_DynamicsSpecifier):
             self._dynamic_name = dynamic_name
          else:
             raise TypeError(dynamic_name)
-      return property(**locals( ))
+      return property(**locals())
 
    ## PUBLIC METHODS ##
 

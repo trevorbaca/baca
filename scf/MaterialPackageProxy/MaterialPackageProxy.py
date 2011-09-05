@@ -44,16 +44,16 @@ class MaterialPackageProxy(SCFProxyObject):
          if letter == 'b':
             break
          if letter == 'd':
-            print self.get_material_output_data( )
+            print self.get_material_output_data()
             print ''
          elif letter == 'i':
-            self.edit_material_input_code( )
+            self.edit_material_input_code()
          elif letter == 'p':
-            self.open_material_pdf( )
+            self.open_material_pdf()
          elif letter == 'q':
             raise SystemExit
          elif letter == 'w':
-            self.write_material_to_disk( )
+            self.write_material_to_disk()
             print ''
          first_pass = False
 
@@ -65,5 +65,5 @@ class MaterialPackageProxy(SCFProxyObject):
       output_line = '%s = %s' % (self.material_name, repr(_material))
       output_file = file(self.material_output_data, 'w')
       output_file.write(output_line)
-      output_file.close( )
+      output_file.close()
       print 'Output written to %s_output_data.py.' % self.material_name

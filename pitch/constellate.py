@@ -11,7 +11,7 @@ def constellate(pitch_number_lists, pitch_range, flatten = True):
    if not isinstance(pitch_range, pitchtools.PitchRange):
       raise TypeError('must be pitch range.')
 
-   transposition_list = [ ]
+   transposition_list = []
    for pnl in pitch_number_lists:
       transpositions = pitchtools.list_octave_transpositions_of_pitch_carrier_within_pitch_range(pnl, pitch_range)
       transposition_list.append(transpositions)
@@ -23,6 +23,6 @@ def constellate(pitch_number_lists, pitch_range, flatten = True):
          result[i] = sequencetools.flatten_sequence(part)
       
    for pnl in result:
-      pnl.sort( )
+      pnl.sort()
 
    return result

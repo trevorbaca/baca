@@ -1,7 +1,7 @@
 import baca
 
 
-def test_baca_pitch_Constellation_partitioned_generator_chromatic_pitch_numbers_01( ):
+def test_baca_pitch_Constellation_partitioned_generator_chromatic_pitch_numbers_01():
 
    CC = baca.pitch.CC
 

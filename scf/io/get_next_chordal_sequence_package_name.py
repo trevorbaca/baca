@@ -18,7 +18,7 @@ def get_next_chordal_sequence_package_name(score_package_name):
    input = raw_input('Use default package name? ')
    print ''
 
-   if input.lower( ) in ('2', 'n', 'no'):
+   if input.lower() in ('2', 'n', 'no'):
       package_name = get_verified_user_input('Enter new package name> ')
 
    return package_name

@@ -2,7 +2,7 @@ from abjad import *
 import baca
 
 
-def test_baca_articulations_PatternedArticulations_apply_01( ):
+def test_baca_articulations_PatternedArticulations_apply_01():
 
    pattern = baca.articulations.PatternedArticulations([['>', '-'], ['.']])
    staff = Staff("c'8 d'8 r8 e'8 f'8 r8 g'8 r8")

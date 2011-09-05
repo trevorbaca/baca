@@ -2,7 +2,7 @@ from abjad import *
 import baca
 
 
-def test_baca_pitch_Constellation_constellation_number_01( ):
+def test_baca_pitch_Constellation_constellation_number_01():
 
    assert baca.pitch.CC[0].constellation_number == 1
    assert baca.pitch.CC[1].constellation_number == 2

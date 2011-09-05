@@ -19,7 +19,7 @@ class ReiteratedArticulation(_ArticulationsSpecifier):
          minimum_written_pitch = minimum_written_pitch,
          maximum_written_pitch = maximum_written_pitch)
       if articulation_list is None:
-         articulation_list = [ ]
+         articulation_list = []
       if isinstance(articulation_list, str):
          articulation_list = [articulation_list]
       self.articulation_list = articulation_list
@@ -27,7 +27,7 @@ class ReiteratedArticulation(_ArticulationsSpecifier):
    ## OVERLOADS ##
 
    def __call__(self, articulation_list):
-      new = type(self)( )
+      new = type(self)()
       new.articulation_list = articulation_list
       return new
 
@@ -37,7 +37,7 @@ class ReiteratedArticulation(_ArticulationsSpecifier):
    ## PUBLIC ATTRIBUTES ##
 
    @apply
-   def articulation_list( ):
+   def articulation_list():
       def fget(self):
          return self._articulation_list
       def fset(self, articulation_list):
@@ -48,7 +48,7 @@ class ReiteratedArticulation(_ArticulationsSpecifier):
             self._articulation_list = [articulation_list]
          else:
             raise TypeError(articulation_list)
-      return property(**locals( ))
+      return property(**locals())
 
    ## PUBLIC METHODS ##
 

@@ -12,7 +12,7 @@ class PartForcedPatternedTokens(_PartForcedObjectWithPatternedTokens):
    def _force_token_parts(self, tokens, quintuplet):
       lefts, middles, rights, left_lengths, right_lengths = quintuplet
       lefts_index, rights_index = 0, 0
-      forced_tokens = [ ]
+      forced_tokens = []
       for token_index, token in enumerate(tokens):
          left_length = left_lengths[token_index]
          left = lefts[lefts_index:lefts_index+left_length]

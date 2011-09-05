@@ -6,7 +6,7 @@ def handle_startup(argv):
 
    os.system('clear')
    if len(argv) == 1:
-      score_package_name = handle_empty_startup( )
+      score_package_name = handle_empty_startup()
    else:
       score_package_name = argv[1]
 

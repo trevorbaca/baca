@@ -88,7 +88,7 @@ class _SignalAffixedObjectWithFilledTokens(_RhythmicKaleid):
       middle = self._make_middle_of_numeric_map_part(middle)
       suffix_space = numerator - prefix_weight
       if suffix_space <= 0:
-         suffix = ( )
+         suffix = ()
       elif suffix_space < suffix_weight:
          weights = [suffix_space]
          suffix = sequencetools.split_sequence_once_by_weights_without_overhang(suffix, weights)[0]
@@ -96,7 +96,7 @@ class _SignalAffixedObjectWithFilledTokens(_RhythmicKaleid):
       return numeric_map_part
 
    def _numeric_map_and_denominator_to_leaf_lists(self, numeric_map, lcd):
-      leaf_lists = [ ]
+      leaf_lists = []
       for numeric_map_part in numeric_map:
          leaf_list = leaftools.make_leaves_from_note_value_signal(numeric_map_part, lcd)
          leaf_lists.append(leaf_list)

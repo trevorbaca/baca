@@ -8,9 +8,9 @@ class RestFilledTokens(SignalAffixedRestFilledTokens):
    '''
 
    def __init__(self):
-      SignalAffixedRestFilledTokens.__init__(self, [ ], [0], [ ], [0], 1)
+      SignalAffixedRestFilledTokens.__init__(self, [], [0], [], [0], 1)
 
    ## OVERLOADS ##
 
    def __repr__(self):
-      return '%s( )' % self.__class__.__name__
+      return '%s()' % self.__class__.__name__

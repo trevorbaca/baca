@@ -7,7 +7,7 @@ class SCFProxyObject(object):
    ## OVERLOADS ##
 
    def __repr__(self):
-      return '%s( )' % self.__class__.__name__
+      return '%s()' % self.__class__.__name__
 
    ## PUBLIC METHODS ##
 
@@ -34,14 +34,14 @@ class SCFProxyObject(object):
    def present_menu(self, 
       values_to_number = None, named_pairs = None, indent_level = 0, is_nearly = False, show_options = True):
       if values_to_number is None:
-         values_to_number = [ ]
+         values_to_number = []
       if named_pairs is None:
-         named_pairs = [ ]
+         named_pairs = []
       if is_nearly:
-         named_pairs += self.list_nearly_ubiquitous_menu_pairs( )
+         named_pairs += self.list_nearly_ubiquitous_menu_pairs()
       else:
-         named_pairs += self.list_ubiquitous_menu_pairs( )
-      named_pairs.sort( )
+         named_pairs += self.list_ubiquitous_menu_pairs()
+      named_pairs.sort()
       number_keys = range(1, len(values_to_number) + 1)
       number_keys = [str(x) for x in number_keys]
       numbered_pairs = zip(number_keys, values_to_number)
@@ -71,7 +71,7 @@ class SCFProxyObject(object):
       return choice, value
 
    def print_menu_title(self, menu_title):
-      self.clear_terminal( )
+      self.clear_terminal()
       print menu_title
 
    def print_not_implemented(self):

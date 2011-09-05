@@ -11,4 +11,4 @@ class SignalAffixedNoteFilledTokens(_SignalAffixedFilledTokens):
       if 0 < middle:
          return (middle, )
       else:
-         return ( )
+         return ()

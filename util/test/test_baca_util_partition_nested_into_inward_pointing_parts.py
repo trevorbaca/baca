@@ -1,7 +1,7 @@
 from baca import util
 
 
-def test_baca_util_partition_nested_into_inward_pointing_parts_01( ):
+def test_baca_util_partition_nested_into_inward_pointing_parts_01():
    '''Partition only negative values by default.'''
    
    l = [[1, 1, 5]]
@@ -13,7 +13,7 @@ def test_baca_util_partition_nested_into_inward_pointing_parts_01( ):
    assert t == [[1, 1, 1, -4]]
 
 
-def test_baca_util_partition_nested_into_inward_pointing_parts_02( ):
+def test_baca_util_partition_nested_into_inward_pointing_parts_02():
    '''Partition positive values according to target.'''
 
    l = [[1], [5], [5, 1], [1, 5], [5, 5], [1, 5, 1]]

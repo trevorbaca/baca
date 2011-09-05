@@ -31,4 +31,4 @@ class _ArticulationsSpecifier(object):
    ## OVERLOADS ##
 
    def __repr__(self):
-      return '%s( )' % self.__class__.__name__
+      return '%s()' % self.__class__.__name__

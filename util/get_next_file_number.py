@@ -2,7 +2,7 @@ import os
 
 
 def get_next_file_number(output_directory, extension):
-   file_numbers = [ ]
+   file_numbers = []
    for file_name in os.listdir(output_directory):
       if file_name.endswith(extension):
          try:

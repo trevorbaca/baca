@@ -9,7 +9,7 @@ def partition_to_avoid_octave_adjacencies(l, direction):
 
    assert direction in ('left', 'right')
    
-   result = [[ ]]
+   result = [[]]
    part = result[-1]
    
    for x in l:
@@ -21,7 +21,7 @@ def partition_to_avoid_octave_adjacencies(l, direction):
          ## partition current part into left and middle subparts
          old_part = part[:first_index+1]
          disputed_part = part[first_index+1:]
-         new_part = [ ]
+         new_part = []
          ## divvy up disputed part
          left, right = mathtools.partition_integer_into_halves(
             len(disputed_part), bigger = direction)

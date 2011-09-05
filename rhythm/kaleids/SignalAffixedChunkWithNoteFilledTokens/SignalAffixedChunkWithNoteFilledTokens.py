@@ -11,4 +11,4 @@ class SignalAffixedChunkWithNoteFilledTokens(_SignalAffixedChunkWithFilledTokens
       if 0 < middle:
          return (middle, )
       else:
-         return ( )
+         return ()

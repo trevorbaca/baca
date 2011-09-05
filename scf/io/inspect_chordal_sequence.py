@@ -25,20 +25,20 @@ def inspect_chordal_sequence(score_package_name, chordal_sequence_number):
 
    while True:
       choice = raw_input('scf> ')
-      if choice.lower( ) == 'd':
+      if choice.lower() == 'd':
          chordal_sequence_data = get_chordal_sequence_data(score_package_name, chordal_sequence_number)
          pprint.pprint(chordal_sequence_data)
          print ''
-      elif choice.lower( ) == 'p':
+      elif choice.lower() == 'p':
          open_chordal_sequence_pdf(score_package_name, chordal_sequence_number)
          print ''
-      elif choice.lower( ) == 'q':
+      elif choice.lower() == 'q':
          raise SystemExit
-      elif choice.lower( ) == 'r':
+      elif choice.lower() == 'r':
          break
-      elif choice.lower( ) == 'v':
+      elif choice.lower() == 'v':
          rename_material_package(score_package_name, materials_package_name)
-      elif choice.lower( ) == 'x':
+      elif choice.lower() == 'x':
          delete_material_package(score_package_name, materials_package_name)
 
    os.system('clear')

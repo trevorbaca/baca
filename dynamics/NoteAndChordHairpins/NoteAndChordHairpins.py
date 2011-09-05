@@ -15,7 +15,7 @@ class NoteAndChordHairpins(_DynamicsSpecifier):
    def __init__(self, hairpin_tokens = None, minimum_prolated_duration = None):
       _DynamicsSpecifier.__init__(self, minimum_prolated_duration = minimum_prolated_duration)
       if hairpin_tokens is None:
-         hairpin_tokens = [ ]
+         hairpin_tokens = []
       for hairpin_token in hairpin_tokens:
          if not self.is_hairpin_token(hairpin_token):
             raise ValueError('not hairpin token: %s' % str(hairpin_token))

@@ -12,7 +12,7 @@ class ConstellationCircuit(object):
    def __init__(self, partitioned_generator_pnls, pitch_range):
       self._partitioned_generator_pnls = partitioned_generator_pnls
       self._pitch_range = pitch_range
-      self._constellate_partitioned_generator_pnls( )
+      self._constellate_partitioned_generator_pnls()
 
    ## OVERLOADS ##
 
@@ -30,21 +30,21 @@ class ConstellationCircuit(object):
    ## FIXME
    @property
    def _colored_generator_chords(self):
-      result = [ ]
+      result = []
       for constellation in self:
          result.append(constellation._colored_generator_chord)
       return result
 
    @property
    def _generator_chord_numbers(self):
-      result = [ ]
+      result = []
       for constellation in self:
          result.append(constellation._generator_chord_number)
       return result
 
    @property
    def _pivot_chord_numbers(self):
-      result = [ ]
+      result = []
       for constellation in self:
          result.append(constellation._pivot_chord_number)
       return result
@@ -52,7 +52,7 @@ class ConstellationCircuit(object):
    ## PRIVATE METHODS ##
 
    def _constellate_partitioned_generator_pnls(self):
-      self._constellations = [ ]
+      self._constellations = []
       for i, partitioned_generator_pnl in enumerate(self._partitioned_generator_pnls):
          constellation_number = i + 1
          constellation = Constellation(self, partitioned_generator_pnl)
@@ -83,7 +83,7 @@ class ConstellationCircuit(object):
 
    @property
    def generator_chords(self):
-      result = [ ]
+      result = []
       for constellation in self:
          result.append(constellation.generator_chord)
       return result
@@ -94,7 +94,7 @@ class ConstellationCircuit(object):
 
    @property
    def pivot_chords(self):
-      result = [ ]
+      result = []
       for constellation in self:
          result.append(constellation.pivot_chord)
       return result

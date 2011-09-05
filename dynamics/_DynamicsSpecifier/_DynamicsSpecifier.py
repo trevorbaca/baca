@@ -12,12 +12,12 @@ class _DynamicsSpecifier(object):
    ## OVERLOADS ##
 
    def __repr__(self):
-      return '%s( )' % (self.__class__.__name__)
+      return '%s()' % (self.__class__.__name__)
 
    ## PUBLIC ATTRIBUTES ##
 
    @apply
-   def minimum_prolated_duration( ):
+   def minimum_prolated_duration():
       def fget(self):
          return self._minimum_prolated_duration
       def fset(self, minimum_prolated_duration):

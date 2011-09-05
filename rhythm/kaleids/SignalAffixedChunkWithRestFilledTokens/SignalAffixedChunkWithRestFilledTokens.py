@@ -15,4 +15,4 @@ class SignalAffixedChunkWithRestFilledTokens(_SignalAffixedChunkWithFilledTokens
       if 0 < middle:
          return (-abs(middle), )
       else:
-         return ( )
+         return ()

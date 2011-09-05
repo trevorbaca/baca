@@ -9,7 +9,7 @@ class _SignalAffixedFilledTokens(_SignalAffixedObjectWithFilledTokens):
 
    def _make_numeric_map(self, duration_pairs, 
       prefix_signal, prefix_lengths, suffix_signal, suffix_lengths, prolation_addenda):
-      numeric_map, prefix_signal_index, suffix_signal_index = [ ], 0, 0
+      numeric_map, prefix_signal_index, suffix_signal_index = [], 0, 0
       for pair_index, duration_pair in enumerate(duration_pairs):
          prefix_length, suffix_length = prefix_lengths[pair_index], suffix_lengths[pair_index]
          prefix = prefix_signal[prefix_signal_index:prefix_signal_index+prefix_length]

@@ -8,7 +8,7 @@ import copy
 class _RhythmicKaleid(object):
 
    def __init__(self):
-      self._repr_signals = [ ]
+      self._repr_signals = []
 
    ## OVERLOADS ##
 
@@ -37,7 +37,7 @@ class _RhythmicKaleid(object):
 
    def _make_tuplets(self, duration_pairs, leaf_lists):
       assert len(duration_pairs) == len(leaf_lists)
-      tuplets = [ ]
+      tuplets = []
       for duration_pair, leaf_list in zip(duration_pairs, leaf_lists):
          tuplet = tuplettools.FixedDurationTuplet(duration_pair, leaf_list)
          tuplets.append(tuplet)
@@ -45,7 +45,7 @@ class _RhythmicKaleid(object):
 
    def _none_to_new_list(self, expr):
       if expr is None:
-         return [ ]
+         return []
       return expr
 
    def _none_to_trivial_helper(self, expr):
@@ -58,10 +58,10 @@ class _RhythmicKaleid(object):
       duration_pairs.append(dummy_duration_pair)
       duration_pairs = durationtools.duration_tokens_to_duration_pairs_with_least_common_denominator(
          duration_pairs)
-      dummy_duration_pair = duration_pairs.pop( )
+      dummy_duration_pair = duration_pairs.pop()
       lcd = dummy_duration_pair[1]
       multiplier = lcd / denominator
-      scaled_signals = [ ]
+      scaled_signals = []
       for signal in signals:
          signal = sequencetools.CyclicTuple([multiplier * x for x in signal])
          scaled_signals.append(signal)
@@ -71,7 +71,7 @@ class _RhythmicKaleid(object):
          
    def _sequence_to_ellipsized_string(self, sequence):
       if not sequence:
-         return '[ ]'
+         return '[]'
       if len(sequence) <= 4:
          result = ', '.join([str(x) for x in sequence])
       else:

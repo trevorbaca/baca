@@ -2,7 +2,7 @@ from abjad import *
 from baca import music
 
 
-def test_music_repeat_subruns_cyclic_01( ):
+def test_music_repeat_subruns_cyclic_01():
 
    notes = [Note(p, (1, 4)) for p in [0, 2, 4, 5, 7, 9, 11]]
    music.repeat_subruns_cyclic(notes, [(0, 4, 1), (2, 4, 1)])
