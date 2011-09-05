@@ -2,15 +2,15 @@ from baca.rhythm.kaleids.SignalAffixedNoteFilledTokens import SignalAffixedNoteF
 
 
 class NoteFilledTokens(SignalAffixedNoteFilledTokens):
-   '''Note-filled tokens.
+    '''Note-filled tokens.
 
-   See the test file for examples.
-   '''
+    See the test file for examples.
+    '''
 
-   def __init__(self):
-      SignalAffixedNoteFilledTokens.__init__(self, [], [0], [], [0], 1)
+    def __init__(self):
+        SignalAffixedNoteFilledTokens.__init__(self, [], [0], [], [0], 1)
 
-   ## OVERLOADS ##
+    ## OVERLOADS ##
 
-   def __repr__(self):
-      return '%s()' % type(self).__name__
+    def __repr__(self):
+        return '%s()' % type(self).__name__

@@ -3,7 +3,7 @@
 #   number_keys = range(1, len(values_to_number) + 1)
 #   number_keys = [str(x) for x in number_keys]
 #   numbered_pairs = zip(number_keys, values_to_number)
-#   
+#
 #   for number_key, value_to_number in numbered_pairs:
 #      print '%3s: %s' % (number_key, value_to_number)
 #   print ''
@@ -23,7 +23,7 @@
 #      print ''
 #      if choice in all_keys:
 #         break
-#    
+#
 #   pair_dictionary = dict(zip(number_keys, values_to_number) + additional_pairs)
 #   value = pair_dictionary[choice]
 #

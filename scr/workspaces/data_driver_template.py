@@ -7,11 +7,11 @@ import pprint
 
 if __name__ == '__main__':
 
-   os.system('clear')
+    os.system('clear')
 
-   print '%s'
-   output = %s()
-   output = pprint.pformat(output)
-   output = '%s = %%s' %% output 
-   baca.util.cache_output(output, '%s', __file__)
-   print \'\''''
+    print '%s'
+    output = %s()
+    output = pprint.pformat(output)
+    output = '%s = %%s' %% output
+    baca.util.cache_output(output, '%s', __file__)
+    print \'\''''

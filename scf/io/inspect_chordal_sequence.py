@@ -9,36 +9,36 @@ import pprint
 
 def inspect_chordal_sequence(score_package_name, chordal_sequence_number):
 
-   score_title = get_score_title(score_package_name)
-   path = get_chordal_sequences_directory(score_package_name)
-   chordal_sequences = list_chordal_sequences(score_package_name)
-   
-   if len(chordal_sequences) < chordal_sequence_number:
-      raise ValueError('score contains only %s chordal sequences.' % len(chordal_sequences))
+    score_title = get_score_title(score_package_name)
+    path = get_chordal_sequences_directory(score_package_name)
+    chordal_sequences = list_chordal_sequences(score_package_name)
 
-   os.system('clear')
-   print '%s - chordal sequences - %s' % (score_title, chordal_sequence_number)
-   print ''
+    if len(chordal_sequences) < chordal_sequence_number:
+        raise ValueError('score contains only %s chordal sequences.' % len(chordal_sequences))
 
-   print '  d: data      p: pdf       v: rename     x: delete'
-   print ''
+    os.system('clear')
+    print '%s - chordal sequences - %s' % (score_title, chordal_sequence_number)
+    print ''
 
-   while True:
-      choice = raw_input('scf> ')
-      if choice.lower() == 'd':
-         chordal_sequence_data = get_chordal_sequence_data(score_package_name, chordal_sequence_number)
-         pprint.pprint(chordal_sequence_data)
-         print ''
-      elif choice.lower() == 'p':
-         open_chordal_sequence_pdf(score_package_name, chordal_sequence_number)
-         print ''
-      elif choice.lower() == 'q':
-         raise SystemExit
-      elif choice.lower() == 'r':
-         break
-      elif choice.lower() == 'v':
-         rename_material_package(score_package_name, materials_package_name)
-      elif choice.lower() == 'x':
-         delete_material_package(score_package_name, materials_package_name)
+    print '  d: data        p: pdf         v: rename      x: delete'
+    print ''
 
-   os.system('clear')
+    while True:
+        choice = raw_input('scf> ')
+        if choice.lower() == 'd':
+            chordal_sequence_data = get_chordal_sequence_data(score_package_name, chordal_sequence_number)
+            pprint.pprint(chordal_sequence_data)
+            print ''
+        elif choice.lower() == 'p':
+            open_chordal_sequence_pdf(score_package_name, chordal_sequence_number)
+            print ''
+        elif choice.lower() == 'q':
+            raise SystemExit
+        elif choice.lower() == 'r':
+            break
+        elif choice.lower() == 'v':
+            rename_material_package(score_package_name, materials_package_name)
+        elif choice.lower() == 'x':
+            delete_material_package(score_package_name, materials_package_name)
+
+    os.system('clear')

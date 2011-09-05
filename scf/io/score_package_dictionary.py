@@ -13,4 +13,4 @@ score_package_dictionary = {
     7: ('imaginaire', "L'imaginaire"),
     8: ('archipel', "L'archipel du corps"),
     9: ('manos', 'Las manos mágicas'),
-   }
+    }
