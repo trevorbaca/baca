@@ -13,8 +13,12 @@ class SCFProxyObject(object):
     ## PUBLIC ATTRIBUTES ##
 
     @property
+    def initializer(self):
+        return os.path.join(self.top_level_directory, '__init__.py')
+
+    @property
     def is_in_repository(self):
-        command = 'svn info %s' % self.top_level_directory    
+        command = 'svn info %s' % self.current_directory    
         proc = subprocess.Popen(command, shell=True, stdout=subprocess.PIPE)
         first_line = proc.stdout.readline()
         if first_line.startswith('Path: '):
@@ -35,6 +39,17 @@ class SCFProxyObject(object):
             print ''
             return False
         return True
+
+    def globally_replace_in_file(self, file_name, old, new):
+        file_pointer = file(file_name, 'r')
+        new_file_lines = []
+        for line in file_pointer.readlines():
+            line = line.replace(old, new)
+            new_file_lines.append(line)
+        file_pointer.close()
+        file_pointer = file(file_name, 'w')
+        file_pointer.write('\n'.join(new_file_lines))
+        file_pointer.close()
 
     def list_nearly_ubiquitous_menu_pairs(self):
         ubiquitous_menu_pairs = [

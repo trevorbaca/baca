@@ -15,7 +15,8 @@ class MaterialPackageProxy(SCFProxyObject):
             self.material_directory, '%s_output_data.py' % material_name)
         self.material_pdf = os.path.join(self.material_directory, '%s.pdf' % material_name)
         self.material_ly = os.path.join(self.material_directory, '%s.ly' % material_name)
-        self.top_level_directory = self.material_directory
+        self.current_directory = self.material_directory
+        self.parent_directory = os.path.dirname(self.current_directory)
 
     ## OVERLOADS ##
 
@@ -59,9 +60,38 @@ class MaterialPackageProxy(SCFProxyObject):
             return
         print ''
         if self.is_in_repository:
-            command = 'svn mv %s %s' % (self.material_name, new_material_name)
-            print command
-            #os.system(command)
+            # update parent initializer
+            parent_initializer = os.path.join(self.parent_directory, '__init__.py')
+            self.globally_replace_in_file(parent_initializer, self.material_name, new_material_name)
+            # rename package directory
+            new_current_directory = self.current_directory.replace(
+                self.material_name, new_material_name)
+            command = 'svn mv %s %s' % (self.current_directory, new_current_directory)
+            os.system(command)
+            # update package initializer
+            new_package_directory = os.path.join(self.parent_directory, new_material_name)
+            new_initializer = os.path.join(new_package_directory, '__init__.py')
+            self.globally_replace_in_file(new_initializer, self.material_name, new_material_name)
+            # rename files in package
+            for old_file_name in os.listdir(new_package_directory):
+                if not old_file_name.startswith(('.', '_')):
+                    old_path_name = os.path.join(new_package_directory, old_file_name)
+                    new_path_name = old_path_name.replace(self.material_name, new_material_name)
+                    command = 'svn mv %s %s' % (old_path_name, new_path_name)
+                    os.system(command)
+            # rename output data
+            new_output_data = '%s_output_data.py' % new_material_name
+            new_output_data = os.path.join(new_package_directory, new_output_data)
+            self.globally_replace_in_file(new_output_data, self.material_name, new_material_name)
+            print ''
+            # commit
+            commit_message = 'Renamed %s to %s.' % (self.material_name, new_material_name)
+            commit_message = commit_message.replace('_', ' ')
+            command = 'svn commit -m "%s" %s' % (commit_message, self.parent_directory)
+            os.system(command)
+            print ''
+        else:
+            raise NotImplementedError('commit to repository and then rename.')
 
     def run_startup_interface(self):
         self.print_menu_title('%s - %s' % (self.score_title, self.material_name))
