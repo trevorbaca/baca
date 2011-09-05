@@ -20,7 +20,7 @@ class _RhythmicKaleid(object):
    def __repr__(self):
       repr_signals = [self._sequence_to_ellipsized_string(x) for x in self._repr_signals]
       repr_signals = ', '.join(repr_signals)
-      return '%s(%s)' % (type(self).__name__, repr_signals)
+      return '%s(%r)' % (type(self).__name__, repr_signals)
 
    ## PRIVATE METHODS ##
 

@@ -14,7 +14,7 @@ class ScorePackageProxy(SCFProxyObject):
    ## OVERLOADS ##
 
    def __repr__(self):
-      return '%s(%s)' % (type(self).__name__, repr(self.score_package_name))
+      return '%s(%r)' % (type(self).__name__, self.score_package_name)
 
    ## PRIVATE METHODS ##
 
@@ -40,12 +40,12 @@ class ScorePackageProxy(SCFProxyObject):
       for line in initializer.readlines():
          if line.startswith(name):
             found_existing_line = True
-            new_line = '%s = %s\n' % (name, repr(value))
+            new_line = '%s = %r\n' % (name, value)
             new_lines.append(new_line)
          else:
             new_lines.append(line)
       if not found_existing_line:
-         new_line = '%s = %s\n' % (name, repr(value))
+         new_line = '%s = %r\n' % (name, value)
          new_lines.append(new_line)
       initializer.close()
       initializer = file(self.score_package_initializer, 'w')
@@ -86,7 +86,7 @@ class ScorePackageProxy(SCFProxyObject):
          return 
       target = os.path.join(self.materials_directory, material_package_name)
       if os.path.exists(target):
-         raise OSError('directory %s already exists.' % repr(target))
+         raise OSError('directory %r already exists.' % target)
       os.mkdir(target)
       initializer = file(os.path.join(target, '__init__.py'), 'w')
       initializer.write('from %s_output_data import *\n' % material_package_name)
@@ -107,7 +107,7 @@ class ScorePackageProxy(SCFProxyObject):
 
    def fix_score_package_directory_structure(self, is_interactive = True):
       if not os.path.exists(self.score_package_directory):
-         raise OSError('directory %s does not exist.' % repr(self.score_package_directory))
+         raise OSError('directory %r does not exist.' % self.score_package_directory)
 
       if self.score_package_name == 'poeme':
          return
@@ -207,7 +207,7 @@ class ScorePackageProxy(SCFProxyObject):
 
    def profile_score_package_directory_structure(self):
       if not os.path.exists(self.score_package_directory):
-         raise OSError('directory %s does not exist.' % repr(self.score_package_directory))
+         raise OSError('directory %r does not exist.' % self.score_package_directory)
       if self.score_package_name == 'poeme':
          return
       print '%s/__init__.py              ' % self.score_package_name,

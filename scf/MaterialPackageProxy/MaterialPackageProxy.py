@@ -17,7 +17,7 @@ class MaterialPackageProxy(SCFProxyObject):
    ## OVERLOADS ##
 
    def __repr__(self):
-      return '%s(%s)' % (type(self).__name__, repr(self.material_name))
+      return '%s(%r)' % (type(self).__name__, self.material_name)
 
    ## PUBLIC METHODS ##
 
@@ -62,7 +62,7 @@ class MaterialPackageProxy(SCFProxyObject):
          self.score_package_name, self.material_name, self.material_name, self.material_name)
       exec(command)
       exec('_material = %s' % self.material_name)
-      output_line = '%s = %s' % (self.material_name, repr(_material))
+      output_line = '%s = %r' % (self.material_name, _material)
       output_file = file(self.material_output_data, 'w')
       output_file.write(output_line)
       output_file.close()
