@@ -23,7 +23,7 @@ class ConstellationCircuit(object):
       return len(self._constellations)
 
    def __repr__(self):
-      return '%s(%s)' % (self.__class__.__name__, len(self))
+      return '%s(%s)' % (type(self).__name__, len(self))
 
    ## PRIVATE ATTRIBUTES ##
 

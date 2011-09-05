@@ -14,7 +14,7 @@ class ScorePackageProxy(SCFProxyObject):
    ## OVERLOADS ##
 
    def __repr__(self):
-      return '%s(%s)' % (self.__class__.__name__, repr(self.score_package_name))
+      return '%s(%s)' % (type(self).__name__, repr(self.score_package_name))
 
    ## PRIVATE METHODS ##
 

@@ -32,7 +32,7 @@ class ReiteratedArticulation(_ArticulationsSpecifier):
       return new
 
    def __repr__(self):
-      return '%s(%s)' % (self.__class__.__name__, self.articulation_list)
+      return '%s(%s)' % (type(self).__name__, self.articulation_list)
 
    ## PUBLIC ATTRIBUTES ##
 
