@@ -50,15 +50,11 @@ class SCFProxyObject(object):
         return True
 
     def display_menu(self, values_to_number = None, named_pairs = None, 
-        indent_level = 0, is_nearly = False, show_options = True):
+        indent_level = 0, is_nearly = True, show_options = True):
         if values_to_number is None:
             values_to_number = []
         if named_pairs is None:
             named_pairs = []
-#        if is_nearly:
-#            named_pairs += self.list_nearly_ubiquitous_menu_pairs()
-#        else:
-#            named_pairs += self.list_ubiquitous_menu_pairs()
         named_pairs.sort()
         number_keys = range(1, len(values_to_number) + 1)
         number_keys = [str(x) for x in number_keys]
@@ -71,24 +67,26 @@ class SCFProxyObject(object):
         all_keys = number_keys[:]
         all_values = values_to_number[:]
         if named_pairs:
-            self.print_tab(indent_level)
+            if show_options:
+                self.print_tab(indent_level)
             for additional_key, additional_value in named_pairs:
                 if show_options:
-                    print '%s: %s ' % (additional_key, additional_value),
+                    print '%s: %s ' % (additional_key, additional_value.ljust(8)),
                 all_keys.append(additional_key)
                 all_values.append(additional_value)
             if show_options:
                 print ''
         if is_nearly:
-            self.print_tab(indent_level)
-            for key, value in self.list_nearly_ubiquitous_menu_pairs():
-                if show_options:
-                    print '%s: %s ' % (key, value),
+            ubiquitous_pairs = self.list_nearly_ubiquitous_menu_pairs()
         else:
+            ubiquitous_pairs = self.list_ubiquitous_menu_pairs()
+        if show_options:
             self.print_tab(indent_level)
-            for key, value in self.list_ubiquitous_menu_pairs():
-                if show_options:
-                    print '%s: %s ' % (key, value),
+        for key, value in ubiquitous_pairs:
+            if show_options:
+                print '%s: %s ' % (key, value.ljust(8)),
+            all_keys.append(key)
+            all_values.append(value)
         if show_options:
             print '\n'
         while True:
@@ -96,7 +94,7 @@ class SCFProxyObject(object):
             print ''
             if choice in all_keys:
                 break
-        pair_dictionary = dict(zip(number_keys, values_to_number) + named_pairs)
+        pair_dictionary = dict(zip(number_keys, values_to_number) + named_pairs + ubiquitous_pairs)
         value = pair_dictionary[choice]
         return choice, value
 
@@ -115,21 +113,24 @@ class SCFProxyObject(object):
         statement = raw_input('xcf> ')
         exec('from abjad import *')
         exec('result = %s' % statement)
-        return result
+        print repr(result) + '\n'
 
     def list_nearly_ubiquitous_menu_pairs(self):
-        ubiquitous_menu_pairs = [
-            ('q', 'quit'),
-            ]
-        return ubiquitous_menu_pairs
+        pairs = self.list_ubiquitous_menu_pairs()
+        pairs.extend([
+            ('b', 'back'),
+            ])
+        pairs.sort()
+        return pairs
 
     def list_ubiquitous_menu_pairs(self):
-        ubiquitous_menu_pairs = [
-            ('b', 'back'),
+        pairs = [
+            ('d', 'redraw'),
             ('q', 'quit'),
             ('x', 'exec'),
             ]
-        return ubiquitous_menu_pairs
+        pairs.sort()
+        return pairs
 
     def matches_quit_regex(self, string):
         quit_regex = re.compile(r'quit\(\s*\)|[q]')

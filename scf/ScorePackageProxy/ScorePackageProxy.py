@@ -1,3 +1,4 @@
+from baca.scf.MaterialPackageProxy import MaterialPackageProxy
 from baca.scf.SCFProxyObject import SCFProxyObject
 import os
 
@@ -208,13 +209,44 @@ class ScorePackageProxy(SCFProxyObject):
         return materials
 
     def manage_chunks(self):
-        pass
+        self.print_not_implemented()
 
     def manage_materials(self):
         while True:
-            material_package_proxy = self.run_material_selection_interface()
-            material_package_proxy.score_title = self.score_title
-            material_package_proxy.run_startup_interface()
+            result = self.select_material()
+            if isinstance(result, MaterialPackageProxy):
+                result.score_title = self.score_title
+                result.manage_material()
+            elif result == 'b':
+                return result
+
+    def manage_score(self):
+        is_first_pass = True
+        while True:
+            is_redraw = False
+            if is_first_pass:
+                self.print_menu_title('%s - main menu\n' % self.score_title)
+                self.summarize_chunks()
+                self.summarize_materials()
+            named_pairs = [('h', 'chunks'), ('m', 'materials')]
+            kwargs = {'named_pairs': named_pairs, 'indent_level': 1}
+            kwargs.update({'is_nearly': False, 'show_options': is_first_pass})
+            key, value = self.display_menu(**kwargs)
+            result = None
+            if key == 'd':
+                is_redraw = True
+            elif key == 'h':
+                self.manage_chunks()
+            elif key == 'm':
+                result = self.manage_materials()
+            elif key == 'q':
+                raise SystemExit
+            elif key == 'x':
+                self.exec_statement()
+            if is_redraw or result == 'b':
+                is_first_pass = True
+            else:
+                is_first_pass = False
 
     def profile_score_package_directory_structure(self):
         if not os.path.exists(self.score_package_directory):
@@ -249,17 +281,21 @@ class ScorePackageProxy(SCFProxyObject):
     def run_chunk_selection_interface(self):
         raise NotImplementedError
 
-    def run_material_selection_interface(self):
-        import baca
-        self.clear_terminal()
+    def select_material(self):
+        is_first_pass = True
         while True:
-            print '%s - materials\n' % self.score_title
+            is_redraw = False
+            if is_first_pass:
+                self.print_menu_title('%s - materials\n' % self.score_title)
             materials = self.list_materials()
             named_pairs = [('n', 'new')]
-            key, material_name = self.display_menu(values_to_number = materials, 
-                named_pairs = named_pairs, indent_level = 1)
+            kwargs = {'values_to_number': materials, 'named_pairs': named_pairs}
+            kwargs.update({'indent_level': 1, 'show_options': is_first_pass})
+            key, material_name = self.display_menu(**kwargs)
             if key == 'b':
-                raise KeyboardInterrupt
+                return key
+            elif key == 'd':
+                is_redraw = True
             elif key == 'n':
                 self.create_materials_package()
             elif key == 'q':
@@ -267,31 +303,14 @@ class ScorePackageProxy(SCFProxyObject):
             elif key == 'r':
                 self.rename_materials_package()
             elif key == 'x':
-                print repr(self.exec_statement())
+                self.exec_statement()
             else:
-                material_package_proxy = baca.scf.MaterialPackageProxy(
-                    self.score_package_name, material_name)
+                material_package_proxy = MaterialPackageProxy(self.score_package_name, material_name)
                 return material_package_proxy
-
-    def run_score_package_proxy_startup_interface(self):
-        try:
-            while True:
-                self.clear_terminal()
-                self.print_menu_title('%s - main menu\n' % self.score_title)
-                self.summarize_chunks()
-                self.summarize_materials()
-                pairs = [('h', 'chunks'), ('m', 'materials')]
-                key, value = self.display_menu(
-                    named_pairs = pairs, indent_level = 1, is_nearly = True)
-                if key == 'h':
-                    #chunk_packge_proxy = self.run_chunk_selection_interface()
-                    self.manage_chunks()
-                elif key == 'm':
-                    self.manage_materials()
-                elif key == 'q':
-                    raise SystemExit
-        except EOFError:
-            print '\n'
+            if is_redraw:
+                is_first_pass = True
+            else:
+                is_first_pass = False
 
     def summarize_chunks(self):
         chunks = self.list_chunks()
@@ -306,6 +325,8 @@ class ScorePackageProxy(SCFProxyObject):
         materials = self.list_materials()
         print self.tab(1),
         print 'Materials (%s)' % len(materials)
+        if materials:
+            print ''
         for material in materials:
-            print self.tab(2),
+            print self.tab(1),
             print material
