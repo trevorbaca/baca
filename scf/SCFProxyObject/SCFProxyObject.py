@@ -49,44 +49,16 @@ class SCFProxyObject(object):
             return False
         return True
 
-    def globally_replace_in_file(self, file_name, old, new):
-        file_pointer = file(file_name, 'r')
-        new_file_lines = []
-        for line in file_pointer.readlines():
-            line = line.replace(old, new)
-            new_file_lines.append(line)
-        file_pointer.close()
-        file_pointer = file(file_name, 'w')
-        file_pointer.write('\n'.join(new_file_lines))
-        file_pointer.close()
-
-    def list_nearly_ubiquitous_menu_pairs(self):
-        ubiquitous_menu_pairs = [
-            ('q', 'quit'),
-            ]
-        return ubiquitous_menu_pairs
-
-    def list_ubiquitous_menu_pairs(self):
-        ubiquitous_menu_pairs = [
-            ('b', 'back'),
-            ('q', 'quit'),
-            ]
-        return ubiquitous_menu_pairs
-
-    def matches_quit_regex(self, string):
-        quit_regex = re.compile(r'quit\(\s*\)|[q]')
-        return quit_regex.match(string)
-
-    def present_menu(self, values_to_number = None, named_pairs = None, 
+    def display_menu(self, values_to_number = None, named_pairs = None, 
         indent_level = 0, is_nearly = False, show_options = True):
         if values_to_number is None:
             values_to_number = []
         if named_pairs is None:
             named_pairs = []
-        if is_nearly:
-            named_pairs += self.list_nearly_ubiquitous_menu_pairs()
-        else:
-            named_pairs += self.list_ubiquitous_menu_pairs()
+#        if is_nearly:
+#            named_pairs += self.list_nearly_ubiquitous_menu_pairs()
+#        else:
+#            named_pairs += self.list_ubiquitous_menu_pairs()
         named_pairs.sort()
         number_keys = range(1, len(values_to_number) + 1)
         number_keys = [str(x) for x in number_keys]
@@ -106,7 +78,19 @@ class SCFProxyObject(object):
                 all_keys.append(additional_key)
                 all_values.append(additional_value)
             if show_options:
-                print '\n'
+                print ''
+        if is_nearly:
+            self.print_tab(indent_level)
+            for key, value in self.list_nearly_ubiquitous_menu_pairs():
+                if show_options:
+                    print '%s: %s ' % (key, value),
+        else:
+            self.print_tab(indent_level)
+            for key, value in self.list_ubiquitous_menu_pairs():
+                if show_options:
+                    print '%s: %s ' % (key, value),
+        if show_options:
+            print '\n'
         while True:
             choice = raw_input('scf> ')
             print ''
@@ -115,6 +99,41 @@ class SCFProxyObject(object):
         pair_dictionary = dict(zip(number_keys, values_to_number) + named_pairs)
         value = pair_dictionary[choice]
         return choice, value
+
+    def globally_replace_in_file(self, file_name, old, new):
+        file_pointer = file(file_name, 'r')
+        new_file_lines = []
+        for line in file_pointer.readlines():
+            line = line.replace(old, new)
+            new_file_lines.append(line)
+        file_pointer.close()
+        file_pointer = file(file_name, 'w')
+        file_pointer.write('\n'.join(new_file_lines))
+        file_pointer.close()
+
+    def exec_statement(self):
+        statement = raw_input('xcf> ')
+        exec('from abjad import *')
+        exec('result = %s' % statement)
+        return result
+
+    def list_nearly_ubiquitous_menu_pairs(self):
+        ubiquitous_menu_pairs = [
+            ('q', 'quit'),
+            ]
+        return ubiquitous_menu_pairs
+
+    def list_ubiquitous_menu_pairs(self):
+        ubiquitous_menu_pairs = [
+            ('b', 'back'),
+            ('q', 'quit'),
+            ('x', 'exec'),
+            ]
+        return ubiquitous_menu_pairs
+
+    def matches_quit_regex(self, string):
+        quit_regex = re.compile(r'quit\(\s*\)|[q]')
+        return quit_regex.match(string)
 
     def print_menu_title(self, menu_title):
         self.clear_terminal()

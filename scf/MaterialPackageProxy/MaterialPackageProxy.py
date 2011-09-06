@@ -61,15 +61,12 @@ class MaterialPackageProxy(SCFProxyObject):
         self.print_not_implemented()
 
     def edit_input_file(self):
-        material = os.path.join(self.directory)
         command = 'vi %s' % self.input_file
         os.system(command)
 
-    def exec_statement(self):
-        statement = raw_input('xcf: ')
-        exec('from abjad import *')
-        exec('result = %s' % statement)
-        return result
+    def edit_output_file(self):
+        command = 'vi %s' % self.output_file
+        os.system(command)
 
     def get_output_data(self):
         if self.has_output_data:
@@ -138,19 +135,22 @@ class MaterialPackageProxy(SCFProxyObject):
         first_pass = True
         while True:
             named_pairs = [
-                ('d', 'data'), ('i', 'input'), ('p', 'pdf'), ('r', 'rename'), 
-                ('w', 'write'), ('x', 'exec'), ('y', 'ly')]
-            letter, action = self.present_menu(
+                ('i', 'input'), ('o', 'output'), ('p', 'pdf'), ('r', 'rename'), 
+                ('v', 'visualizer'), ('w', 'write'), ('y', 'ly')]
+            letter, action = self.display_menu(
                 named_pairs = named_pairs, show_options = first_pass)
             if letter == 'b':
                 break
-            if letter == 'd':
-                result = self.get_output_data()
-                if result:
-                    print result
-                print ''
-            elif letter == 'i':
+            if letter == 'i':
                 self.edit_input_file()
+            elif letter == 'o':
+                print 'e: edit  w: write\n'
+                response = raw_input('scf> ')
+                if response.lower() == 'e':
+                    self.edit_output_file()
+                elif response.lower() == 'w':
+                    self.write_material_to_disk()    
+                print ''
             elif letter == 'p':
                 if self.has_pdf:
                     self.open_pdf()

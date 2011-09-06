@@ -94,12 +94,7 @@ class ScorePackageProxy(SCFProxyObject):
         response = response.lower()
         response = response.replace(' ', '_')
         material_package_name = '%s_%s' % (self.score_package_name, response)
-        print 'package name will be %s.' % material_package_name
-        print ''
-#        response = raw_input('ok? ')
-#        if not response.lower() == 'y':
-#            print ''
-#            return
+        print 'package name will be %s.\n' % material_package_name
         self.confirm()
         target = os.path.join(self.materials_directory, material_package_name)
         if os.path.exists(target):
@@ -116,8 +111,7 @@ class ScorePackageProxy(SCFProxyObject):
         output_data = file(os.path.join(target, output_data), 'w')
         output_data.write('')
         output_data.close()
-        print '%s created.' % material_package_name
-        print ''
+        print '%s created.\n' % material_package_name
 
     def create_score_package_directory_structure(self):
         self.fix_score_package_directory_structure(is_interactive = False)
@@ -262,7 +256,7 @@ class ScorePackageProxy(SCFProxyObject):
             print '%s - materials\n' % self.score_title
             materials = self.list_materials()
             named_pairs = [('n', 'new')]
-            key, material_name = self.present_menu(values_to_number = materials, 
+            key, material_name = self.display_menu(values_to_number = materials, 
                 named_pairs = named_pairs, indent_level = 1)
             if key == 'b':
                 raise KeyboardInterrupt
@@ -272,6 +266,8 @@ class ScorePackageProxy(SCFProxyObject):
                 raise SystemExit
             elif key == 'r':
                 self.rename_materials_package()
+            elif key == 'x':
+                print repr(self.exec_statement())
             else:
                 material_package_proxy = baca.scf.MaterialPackageProxy(
                     self.score_package_name, material_name)
@@ -285,7 +281,7 @@ class ScorePackageProxy(SCFProxyObject):
                 self.summarize_chunks()
                 self.summarize_materials()
                 pairs = [('h', 'chunks'), ('m', 'materials')]
-                key, value = self.present_menu(
+                key, value = self.display_menu(
                     named_pairs = pairs, indent_level = 1, is_nearly = True)
                 if key == 'h':
                     #chunk_packge_proxy = self.run_chunk_selection_interface()
