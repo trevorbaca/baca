@@ -11,17 +11,31 @@ class MaterialPackageProxy(SCFProxyObject):
             os.environ.get('SCORES'), score_package_name, 'mus', 'materials', material_name)
         self.material_input_code = os.path.join(
             self.material_directory, '%s_input_code.py' % material_name)
-        self.material_output_data = os.path.join(
+        self.material_output_data_file = os.path.join(
             self.material_directory, '%s_output_data.py' % material_name)
         self.material_pdf = os.path.join(self.material_directory, '%s.pdf' % material_name)
         self.material_ly = os.path.join(self.material_directory, '%s.ly' % material_name)
         self.current_directory = self.material_directory
         self.parent_directory = os.path.dirname(self.current_directory)
+        self.parent_initializer = os.path.join(self.parent_directory, '__init__.py')
 
     ## OVERLOADS ##
 
     def __repr__(self):
         return '%s(%r)' % (type(self).__name__, self.material_name)
+
+    ## PUBLIC ATTRIBUTES ##
+
+    @property
+    def has_output_data(self):
+        if os.stat(self.material_output_data_file):
+            file_pointer = file(self.material_output_data_file, 'r')
+            return bool(file_pointer.readlines())
+        return False
+
+    @property
+    def output_data(self):
+        return self.get_material_output_data()
 
     ## PUBLIC METHODS ##
 
@@ -31,13 +45,18 @@ class MaterialPackageProxy(SCFProxyObject):
         os.system(command)
 
     def exec_statement(self):
-        statement = raw_input('statement to exec: ')
-        print eval(statement)
+        statement = raw_input('xcf: ')
+        exec('from abjad import *')
+        exec('result = %s' % statement)
+        return result
 
     def get_material_output_data(self):
-        exec('from %s.mus.materials import %s' % (self.score_package_name, self.material_name))
-        exec('result = %s' % self.material_name)
-        return result
+        if self.has_output_data:
+            exec('from %s.mus.materials import %s' % (self.score_package_name, self.material_name))
+            exec('result = %s' % self.material_name)
+            return result
+        else:
+            print 'No data available.'
 
     def open_material_pdf(self):
         command = 'open %s' % self.material_pdf
@@ -61,8 +80,8 @@ class MaterialPackageProxy(SCFProxyObject):
         print ''
         if self.is_in_repository:
             # update parent initializer
-            parent_initializer = os.path.join(self.parent_directory, '__init__.py')
-            self.globally_replace_in_file(parent_initializer, self.material_name, new_material_name)
+            self.globally_replace_in_file(
+                self.parent_initializer, self.material_name, new_material_name)
             # rename package directory
             new_current_directory = self.current_directory.replace(
                 self.material_name, new_material_name)
@@ -104,7 +123,9 @@ class MaterialPackageProxy(SCFProxyObject):
             if letter == 'b':
                 break
             if letter == 'd':
-                print self.get_material_output_data()
+                result = self.get_material_output_data()
+                if result:
+                    print result
                 print ''
             elif letter == 'i':
                 self.edit_material_input_code()
@@ -118,7 +139,7 @@ class MaterialPackageProxy(SCFProxyObject):
                 self.write_material_to_disk()
                 print ''
             elif letter == 'x':
-                self.exec_statement()
+                print self.exec_statement()
                 print ''
             first_pass = False
 
@@ -128,7 +149,18 @@ class MaterialPackageProxy(SCFProxyObject):
         exec(command)
         exec('_material = %s' % self.material_name)
         output_line = '%s = %r' % (self.material_name, _material)
-        output_file = file(self.material_output_data, 'w')
+        output_file = file(self.material_output_data_file, 'w')
         output_file.write(output_line)
         output_file.close()
         print 'Output written to %s_output_data.py.' % self.material_name
+        import_statement = 'from %s import %s\n' % (self.material_name, self.material_name)
+        file_pointer = file(self.parent_initializer, 'r')
+        parent_initializer_lines = set(file_pointer.readlines())
+        file_pointer.close()
+        parent_initializer_lines.add(import_statement)
+        parent_initializer_lines = list(parent_initializer_lines)
+        parent_initializer_lines.sort()
+        file_pointer = file(self.parent_initializer, 'w')
+        file_pointer.write(''.join(parent_initializer_lines))
+        file_pointer.close()
+        print 'Import statement added to materials initializer.'

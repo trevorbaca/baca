@@ -14,7 +14,7 @@ class SCFProxyObject(object):
 
     @property
     def initializer(self):
-        return os.path.join(self.top_level_directory, '__init__.py')
+        return os.path.join(self.current_directory, '__init__.py')
 
     @property
     def is_in_repository(self):
