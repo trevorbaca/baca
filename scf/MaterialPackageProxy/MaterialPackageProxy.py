@@ -58,14 +58,26 @@ class MaterialPackageProxy(SCFProxyObject):
         self.print_not_implemented() 
 
     def create_visualizer(self):
-        self.print_not_implemented()
+        if not self.has_output_data:
+            self.write_output_data_to_disk()
+        file_pointer = file(self.visualizer, 'w')
+        file_pointer.write('from abjad import *\n')
+        line = 'from %s_output_data import %s\n' % (self.material_name, self.material_name)
+        file_pointer.write(line)
+        file_pointer.write('\n\n\n')
+        file_pointer.close()
+        self.edit_visualizer()
 
     def edit_input_file(self):
-        command = 'vi %s' % self.input_file
+        command = 'vi + %s' % self.input_file
         os.system(command)
 
     def edit_output_file(self):
-        command = 'vi %s' % self.output_file
+        command = 'vi + %s' % self.output_file
+        os.system(command)
+
+    def edit_visualizer(self):
+        command = 'vi + %s' % self.visualizer
         os.system(command)
 
     def get_output_data(self):
@@ -96,7 +108,7 @@ class MaterialPackageProxy(SCFProxyObject):
                 break
             elif letter == 'd':
                 is_redraw = True
-            elif letter == 'i': ## tmp
+            elif letter == 'i':
                 self.edit_input_file()
             elif letter == 'o':
                 print 'e: edit  w: write\n'
@@ -120,12 +132,26 @@ class MaterialPackageProxy(SCFProxyObject):
                     if self.query('Write material to disk? '):
                         self.write_material_to_disk()
                 else:
-                    if self.query('Creat input file? '):
+                    if self.query('Create input file? '):
                         self.edit_input_file()
+                print ''
             elif letter == 'q':
                 raise SystemExit
             elif letter == 'r':
                 self.rename_material()
+            elif letter == 'v':
+                if self.has_visualizer:
+                    self.edit_visualizer()
+                elif self.has_output_data:
+                    print "Data exists but visualizer doesn't.\n"
+                    if self.query('Create visualizer? '):
+                        self.create_visualizer()
+                elif self.has_input_file:
+                    if self.query('Write material to disk? '):
+                        self.write_material_to_disk()
+                else:
+                    if self.query('Create input file? '):
+                        self.edit_input_file()
             elif letter == 'w':
                 self.write_material_to_disk()
                 print ''
