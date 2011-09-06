@@ -77,9 +77,11 @@ class MaterialPackageProxy(SCFProxyObject):
             print 'No data available.'
 
     def manage_material(self):
-        self.print_menu_title('%s - %s' % (self.score_title, self.material_name))
-        first_pass = True
+        is_first_pass = True
         while True:
+            is_redraw = False
+            if is_first_pass:
+                self.print_menu_title('%s - %s' % (self.score_title, self.material_name))
             named_pairs = [
                 ('i', 'input'), 
                 ('o', 'output'), 
@@ -88,11 +90,13 @@ class MaterialPackageProxy(SCFProxyObject):
                 ('v', 'visualizer'), 
                 ('w', 'write'), 
                 ('y', 'ly')]
-            kwargs = {'named_pairs': named_pairs, 'show_options': first_pass}
+            kwargs = {'named_pairs': named_pairs, 'show_options': is_first_pass}
             letter, action = self.display_menu(**kwargs)
             if letter == 'b':
                 break
-            if letter == 'i':
+            elif letter == 'd':
+                is_redraw = True
+            elif letter == 'i': ## tmp
                 self.edit_input_file()
             elif letter == 'o':
                 print 'e: edit  w: write\n'
@@ -143,7 +147,10 @@ class MaterialPackageProxy(SCFProxyObject):
                 else:
                     if self.query('Creat input file? '):
                         self.edit_input_file()
-            first_pass = False
+            if is_redraw:
+                is_first_pass = True
+            else:
+                is_first_pass = False
 
     def open_pdf(self):
         command = 'open %s' % self.pdf
