@@ -1,3 +1,4 @@
+from abjad.tools import iotools
 import os
 import re
 import subprocess
@@ -39,7 +40,7 @@ class SCFProxyObject(object):
     ## PUBLIC METHODS ##
 
     def clear_terminal(self):
-        os.system('clear')
+        iotools.clear_terminal()
 
     def confirm(self):
         response = raw_input('ok? ')
@@ -133,7 +134,7 @@ class SCFProxyObject(object):
     def run_go_on_menu(self):
         response = raw_input('Press any key to continue. ')
         print ''
-        os.system('clear')
+        self.clear_terminal()
 
     def tab(self, n):
         return 3 * n * ' '

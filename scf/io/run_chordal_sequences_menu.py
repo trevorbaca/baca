@@ -1,3 +1,4 @@
+from abjad.tools import iotools
 from check_and_make_directory import check_and_make_directory
 #from get_score_title import get_score_title
 from inspect_chordal_sequence import inspect_chordal_sequence
@@ -15,7 +16,7 @@ def run_chordal_sequences_menu(score_package_name):
     if not check_and_make_directory(chordal_sequences_directory):
         return
 
-    os.system('clear')
+    iotools.clear_terminal()
     score_title = get_score_title(score_package_name)
 
     while True:
@@ -31,19 +32,19 @@ def run_chordal_sequences_menu(score_package_name):
             try:
                 inspect_chordal_sequence(score_package_name, chordal_sequence_number)
             except KeyboardInterrupt:
-                os.system('clear')
+                iotools.clear_terminal()
         except ValueError:
             if choice.lower() == 'm':
                 try:
                     make_chordal_sequence(score_package_name)
                 except KeyboardInterrupt:
-                    os.system('clear')
+                    iotools.clear_terminal()
             elif choice.lower() == 'r':
-                os.system('clear')
+                iotools.clear_terminal()
                 break
             elif choice.lower() == 'q':
                 raise SystemExit
             else:
                 raise ValueError('unknown choice "%s".' % choice)
 
-    os.system('clear')
+    iotools.clear_terminal()

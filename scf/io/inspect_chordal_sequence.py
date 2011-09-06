@@ -1,9 +1,9 @@
+from abjad.tools import iotools
 from get_chordal_sequence_data import get_chordal_sequence_data
 from get_chordal_sequences_directory import get_chordal_sequences_directory
 #from get_score_title import get_score_title
 from list_chordal_sequences import list_chordal_sequences
 from open_chordal_sequence_pdf import open_chordal_sequence_pdf
-import os
 import pprint
 
 
@@ -16,7 +16,7 @@ def inspect_chordal_sequence(score_package_name, chordal_sequence_number):
     if len(chordal_sequences) < chordal_sequence_number:
         raise ValueError('score contains only %s chordal sequences.' % len(chordal_sequences))
 
-    os.system('clear')
+    iotools.clear_terminal()
     print '%s - chordal sequences - %s' % (score_title, chordal_sequence_number)
     print ''
 
@@ -26,7 +26,8 @@ def inspect_chordal_sequence(score_package_name, chordal_sequence_number):
     while True:
         choice = raw_input('scf> ')
         if choice.lower() == 'd':
-            chordal_sequence_data = get_chordal_sequence_data(score_package_name, chordal_sequence_number)
+            chordal_sequence_data = get_chordal_sequence_data(
+                score_package_name, chordal_sequence_number)
             pprint.pprint(chordal_sequence_data)
             print ''
         elif choice.lower() == 'p':
@@ -41,4 +42,4 @@ def inspect_chordal_sequence(score_package_name, chordal_sequence_number):
         elif choice.lower() == 'x':
             delete_material_package(score_package_name, materials_package_name)
 
-    os.system('clear')
+    iotools.clear_terminal()
