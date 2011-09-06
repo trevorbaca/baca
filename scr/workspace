@@ -1,5 +1,6 @@
 #! /usr/bin/env python
 
+from abjad.tools import iotools
 import os
 import sys
 import workspaces
@@ -16,7 +17,7 @@ workspace = sys.argv[3]
 assert type in ('data', 'score')
 
 ## clear terminal
-os.system('clear')
+iotools.clear_terminal()
 
 if type == 'data':
    workspaces.make_data_workspace(parent_directory, workspace)

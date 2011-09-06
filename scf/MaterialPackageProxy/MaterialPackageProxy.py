@@ -7,15 +7,13 @@ class MaterialPackageProxy(SCFProxyObject):
     def __init__(self, score_package_name, material_name):
         self.score_package_name = score_package_name
         self.material_name = material_name
-        self.directory = os.path.join(
-            os.environ.get('SCORES'), score_package_name, 'mus', 'materials', material_name)
+        self.directory = os.path.join(os.environ.get('SCORES'), score_package_name)
+        self.directory = os.path.join(self.directory, 'mus', 'materials', material_name)
         self.input_file = os.path.join(self.directory, '%s_input_code.py' % material_name)
         self.output_file = os.path.join(self.directory, '%s_output_data.py' % material_name)
+        self.visualizer = os.path.join(self.directory, '%s_visualizer.py' % material_name)
         self.pdf = os.path.join(self.directory, '%s.pdf' % material_name)
         self.ly = os.path.join(self.directory, '%s.ly' % material_name)
-        self.current_directory = self.directory
-        self.parent_directory = os.path.dirname(self.current_directory)
-        self.parent_initializer = os.path.join(self.parent_directory, '__init__.py')
 
     ## OVERLOADS ##
 
@@ -25,21 +23,42 @@ class MaterialPackageProxy(SCFProxyObject):
     ## PUBLIC ATTRIBUTES ##
 
     @property
+    def has_input_file(self):
+        return os.path.exists(self.input_file)
+
+    @property
+    def has_ly(self):
+        return os.path.exists(self.ly)
+
+    @property
     def has_output_data(self):
-        if os.stat(self.output_file):
+        if os.path.exists(self.output_file):
             file_pointer = file(self.output_file, 'r')
             return bool(file_pointer.readlines())
         return False
 
     @property
     def has_pdf(self):
-        if os.stat(self.pdf)
+        return os.path.exists(self.pdf)
+    
+    @property
+    def has_visualizer(self):
+        return os.path.exists(self.visualizer)
 
     @property
     def output_data(self):
-        return self.get_material_output_data()
+        return self.get_output_data()
 
     ## PUBLIC METHODS ##
+
+    def create_ly(self):
+        self.print_not_implemented()
+
+    def create_pdf(self):
+        self.print_not_implemented() 
+
+    def create_visualizer(self):
+        self.print_not_implemented()
 
     def edit_input_file(self):
         material = os.path.join(self.directory)
@@ -52,7 +71,7 @@ class MaterialPackageProxy(SCFProxyObject):
         exec('result = %s' % statement)
         return result
 
-    def get_material_output_data(self):
+    def get_output_data(self):
         if self.has_output_data:
             exec('from %s.mus.materials import %s' % (self.score_package_name, self.material_name))
             exec('result = %s' % self.material_name)
@@ -118,14 +137,15 @@ class MaterialPackageProxy(SCFProxyObject):
         self.print_menu_title('%s - %s' % (self.score_title, self.material_name))
         first_pass = True
         while True:
-            named_pairs = [('d', 'data'), ('i', 'input'), ('p', 'pdf'), 
-                ('r', 'rename'), ('w', 'write'), ('x', 'exec')]
+            named_pairs = [
+                ('d', 'data'), ('i', 'input'), ('p', 'pdf'), ('r', 'rename'), 
+                ('w', 'write'), ('x', 'exec'), ('y', 'ly')]
             letter, action = self.present_menu(
                 named_pairs = named_pairs, show_options = first_pass)
             if letter == 'b':
                 break
             if letter == 'd':
-                result = self.get_material_output_data()
+                result = self.get_output_data()
                 if result:
                     print result
                 print ''
@@ -134,6 +154,19 @@ class MaterialPackageProxy(SCFProxyObject):
             elif letter == 'p':
                 if self.has_pdf:
                     self.open_pdf()
+                elif self.has_visualizer:
+                    if self.query('Create PDF from visualizer? '):
+                        self.create_pdf()
+                elif self.has_output_data:
+                    print "Data exists but visualizer doesn't.\n"
+                    if self.query('Create visualizer? '):
+                        self.create_visualizer()
+                elif self.has_input_file:
+                    if self.query('Write material to disk? '):
+                        self.write_material_to_disk()
+                else:
+                    if self.query('Creat input file? '):
+                        self.edit_input_file()
             elif letter == 'q':
                 raise SystemExit
             elif letter == 'r':
@@ -144,6 +177,22 @@ class MaterialPackageProxy(SCFProxyObject):
             elif letter == 'x':
                 print self.exec_statement()
                 print ''
+            elif letter == 'y':
+                if self.has_ly:
+                    self.open_ly()
+                elif self.has_visualizer:
+                    if self.query('Create LilyPond file from visualizer? '):
+                        self.create_ly()    
+                elif self.has_output_data:
+                    print "Data exists but visualizer doesn't.\n"
+                    if self.query('Create visualizer? '):
+                        self.create_visualizer()
+                elif self.has_input_file:
+                    if self.query('Write material to disk? '):
+                        self.write_material_to_disk()
+                else:
+                    if self.query('Creat input file? '):
+                        self.edit_input_file()
             first_pass = False
 
     def update_initializer_with_line(self, initializer, line):
@@ -170,4 +219,3 @@ class MaterialPackageProxy(SCFProxyObject):
         import_statement = 'from %s import %s\n' % (self.material_name, self.material_name)
         self.update_initializer_with_line(self.parent_initializer, import_statement)
         print 'Import statement added to materials initializer.'
-

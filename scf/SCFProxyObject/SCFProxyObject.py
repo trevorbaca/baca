@@ -14,11 +14,11 @@ class SCFProxyObject(object):
 
     @property
     def initializer(self):
-        return os.path.join(self.current_directory, '__init__.py')
+        return os.path.join(self.directory, '__init__.py')
 
     @property
     def is_in_repository(self):
-        command = 'svn info %s' % self.current_directory    
+        command = 'svn info %s' % self.directory    
         proc = subprocess.Popen(command, shell=True, stdout=subprocess.PIPE)
         first_line = proc.stdout.readline()
         if first_line.startswith('Path: '):
@@ -27,6 +27,14 @@ class SCFProxyObject(object):
             return False
         else:
             raise ValueError
+    
+    @property
+    def parent_directory(self):
+        return os.path.dirname(self.directory)
+
+    @property
+    def parent_initializer(self):
+        return os.path.join(self.parent_directory, '__init__.py')
 
     ## PUBLIC METHODS ##
 
@@ -117,6 +125,10 @@ class SCFProxyObject(object):
     def print_tab(self, n):
         if 0 < n:
             print self.tab(n),
+
+    def query(self, prompt):
+        response = raw_input(prompt)
+        return response.lower().startswith('y')
 
     def run_go_on_menu(self):
         response = raw_input('Press any key to continue. ')

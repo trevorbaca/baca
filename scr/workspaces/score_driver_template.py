@@ -1,6 +1,6 @@
 score_driver_template = '''#! /usr/bin/env python
 
-from abjad.tools import io
+from abjad.tools import iotools
 from helpers import %s
 import baca
 import os
@@ -9,7 +9,7 @@ import sys
 
 if __name__ == '__main__':
 
-    os.system('clear')
+    iotools.clear_terminal()
     usage = 'usage: run.py [--nowrite|--write]'
     write = baca.util.check_score_builder_commandline(sys.argv, usage)
     dirname = os.path.abspath(os.path.dirname(__file__))
@@ -19,6 +19,6 @@ if __name__ == '__main__':
     score = %s()
     name = os.path.join(dirname, 'scores', '%s')
     title = []
-    io.write_and_show(score, name, template, title, write = write)
+    iotools.write_and_show(score, name, template, title, write = write)
     print ''
 '''
