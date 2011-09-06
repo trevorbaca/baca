@@ -17,15 +17,15 @@ def check_and_make_directory(path):
             print '  1: yes'
             print '  2: no'
             print ''
-            input = raw_input('scf> ')
+            response = raw_input('scf> ')
             print ''
-            if input == '1':
+            if response == '1':
                 os.mkdir(path)
                 print 'Diretory %s created.' % path
                 print ''
                 run_go_on_menu()
                 break
-            elif input == '2':
+            elif response == '2':
                 print 'Returning to previous menu.'
                 print ''
                 run_go_on_menu()

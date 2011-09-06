@@ -77,9 +77,9 @@ def make_chordal_sequence(score_package_name):
 
     print '%s %s written to disk.\n' % (score_title, subtitle)
 
-    input = raw_input('Show chordal sequence PDF? ')
+    response = raw_input('Show chordal sequence PDF? ')
     print ''
-    if input.lower() in ('1', 'y', 'yes'):
+    if response.lower() in ('1', 'y', 'yes'):
         command = 'open %s' % pdf_file_name
         os.system(command)
 

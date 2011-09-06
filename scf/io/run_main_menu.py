@@ -16,19 +16,19 @@
 #         print '  1: score overview'
 #         print '  2: chordal sequences'
 #         print ''
-#         input = raw_input('scf> ')
+#         response = raw_input('scf> ')
 #         print ''
-#         if quit_regex.match(input):
+#         if quit_regex.match(response):
 #            break
-#         elif input == '1':
+#         elif response == '1':
 #            print_not_implemented()
 #            run_go_on_menu()
-#         elif input == '2':
+#         elif response == '2':
 #            try:
 #               run_chordal_sequences_menu(score_package_name)
 #            except KeyboardInterrupt:
 #               os.system('clear')
-#         elif input.lower() == 'q':
+#         elif response.lower() == 'q':
 #            break
 #         else:
 #            pass

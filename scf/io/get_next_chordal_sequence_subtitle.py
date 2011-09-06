@@ -11,10 +11,10 @@ def get_next_chordal_sequence_subtitle(score_package_name):
 
 #   print "Default subtitle is '%s'." % subtitle
 #   print ''
-#   input = raw_input('Use default subtitle? ')
+#   response = raw_input('Use default subtitle? ')
 #   print ''
 #
-#   if input.lower() in ('2', 'n', 'no'):
+#   if response.lower() in ('2', 'n', 'no'):
 #      subtitle = get_verified_user_input('Enter new subtitle> ')
 
     return subtitle
