@@ -69,16 +69,16 @@ class MaterialPackageProxy(SCFProxyObject):
         self.edit_visualizer()
 
     def edit_input_file(self):
-        command = 'vi + %s' % self.input_file
-        os.system(command)
+        os.system('vi + %s' % self.input_file)
+        os.system('abj %s' % self.input_file)
 
     def edit_output_file(self):
-        command = 'vi + %s' % self.output_file
-        os.system(command)
+        os.system('vi + %s' % self.output_file)
+        os.system('abj %s' % self.output_file)
 
     def edit_visualizer(self):
-        command = 'vi + %s' % self.visualizer
-        os.system(command)
+        os.system('vi + %s' % self.visualizer)
+        os.system('abj %s' % self.visualizer)
 
     def get_output_data(self):
         if self.has_output_data:
