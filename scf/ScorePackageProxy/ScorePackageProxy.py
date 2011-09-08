@@ -211,14 +211,15 @@ class ScorePackageProxy(SCFProxyObject):
     def manage_chunks(self):
         self.print_not_implemented()
 
-    def manage_materials(self):
+    def manage_materials(self, material_number = None):
         while True:
-            result = self.select_material()
+            result = self.select_material(material_number = material_number)
             if isinstance(result, MaterialPackageProxy):
                 result.score_title = self.score_title
                 result.manage_material()
             elif result == 'b':
                 return result
+            material_number = None
 
     def manage_score(self):
         is_first_pass = True
@@ -231,14 +232,19 @@ class ScorePackageProxy(SCFProxyObject):
             named_pairs = [('h', 'chunks'), ('m', 'materials')]
             kwargs = {'named_pairs': named_pairs, 'indent_level': 1}
             kwargs.update({'is_nearly': False, 'show_options': is_first_pass})
-            key, value = self.display_menu(**kwargs)
+            user_commands, menu_value = self.display_menu(**kwargs)
+            key = user_commands[0]
             result = None
             if key == 'd':
                 is_redraw = True
             elif key == 'h':
                 self.manage_chunks()
             elif key == 'm':
-                result = self.manage_materials()
+                if user_commands[1:]:
+                    material_number = int(user_commands[1:])
+                else:
+                    material_number = None
+                result = self.manage_materials(material_number = material_number)
             elif key == 'q':
                 raise SystemExit
             elif key == 'x':
@@ -247,6 +253,11 @@ class ScorePackageProxy(SCFProxyObject):
                 is_first_pass = True
             else:
                 is_first_pass = False
+
+    def material_number_to_material_name(self, material_number):
+        material_index = material_number - 1
+        material_name = self.list_materials()[material_index]
+        return material_name
 
     def profile_score_package_directory_structure(self):
         if not os.path.exists(self.score_package_directory):
@@ -281,13 +292,18 @@ class ScorePackageProxy(SCFProxyObject):
     def run_chunk_selection_interface(self):
         raise NotImplementedError
 
-    def select_material(self):
+    def select_material(self, material_number = None):
+        if material_number is not None:
+            material_name = self.material_number_to_material_name(material_number)
+            material_package_proxy = MaterialPackageProxy(self.score_package_name, material_name)
+            return material_package_proxy
         is_first_pass = True
         while True:
             is_redraw = False
             if is_first_pass:
                 self.print_menu_title('%s - materials\n' % self.score_title)
             materials = self.list_materials()
+            materials = [x.replace('_', ' ') for x in materials]
             named_pairs = [('n', 'new')]
             kwargs = {'values_to_number': materials, 'named_pairs': named_pairs}
             kwargs.update({'indent_level': 1, 'show_options': is_first_pass})
@@ -315,7 +331,10 @@ class ScorePackageProxy(SCFProxyObject):
     def summarize_chunks(self):
         chunks = self.list_chunks()
         print self.tab(1),
-        print 'Chunks (%s)' % len(chunks)
+        if not chunks:
+            print 'Chunks (none yet)'
+        else:
+            print 'Chunks'
         for chunk in chunks:
             print self.tab(2),
             print chunk
@@ -324,9 +343,12 @@ class ScorePackageProxy(SCFProxyObject):
     def summarize_materials(self):
         materials = self.list_materials()
         print self.tab(1),
-        print 'Materials (%s)' % len(materials)
+        if not materials:
+            print 'Materials (none yet)'
+        else:
+            print 'Materials'
         if materials:
             print ''
-        for material in materials:
+        for i, material in enumerate(materials):
             print self.tab(1),
-            print material
+            print '(%s) %s' % (i + 1, material.replace('_', ' '))

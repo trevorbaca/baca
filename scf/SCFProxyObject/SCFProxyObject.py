@@ -92,10 +92,10 @@ class SCFProxyObject(object):
         while True:
             choice = raw_input('scf> ')
             print ''
-            if choice in all_keys:
+            if choice[0] in all_keys:
                 break
         pair_dictionary = dict(zip(number_keys, values_to_number) + named_pairs + ubiquitous_pairs)
-        value = pair_dictionary[choice]
+        value = pair_dictionary[choice[0]]
         return choice, value
 
     def globally_replace_in_file(self, file_name, old, new):

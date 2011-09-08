@@ -51,6 +51,22 @@ class MaterialPackageProxy(SCFProxyObject):
 
     ### PUBLIC METHODS ###
 
+    def add_line_to_initializer(self, initializer, line):
+        file_pointer = file(initializer, 'r')
+        initializer_lines = set(file_pointer.readlines())
+        file_pointer.close()
+        initializer_lines.add(line)
+        initializer_lines = list(initializer_lines)
+        initializer_lines = [x for x in initializer_lines if not x == '\n']
+        initializer_lines.sort()
+        file_pointer = file(initializer, 'w')
+        file_pointer.write(''.join(initializer_lines))
+        file_pointer.close()
+
+    def add_material_to_materials_initializer(self):
+        import_statement = 'from %s import %s\n' % (self.material_name, self.material_name)
+        self.add_line_to_initializer(self.parent_initializer, import_statement)
+
     def create_ly(self):
         self.print_not_implemented()
 
@@ -68,10 +84,10 @@ class MaterialPackageProxy(SCFProxyObject):
         file_pointer.close()
         self.edit_visualizer()
 
-    def edit_input_file(self):
+    def edit_input_file(self, is_with_abjad = False):
         os.system('vi + %s' % self.input_file)
-        os.system('abj %s' % self.input_file)
-        print ''
+        if is_with_abjad:
+            os.system('abj %s' % self.input_file)
 
     def edit_output_file(self):
         os.system('vi + %s' % self.output_file)
@@ -85,7 +101,6 @@ class MaterialPackageProxy(SCFProxyObject):
         command = 'from %s.mus.materials.%s.%s_input_code import %s' %(
             self.score_package_name, self.material_name, self.material_name, self.material_name)
         exec(command)
-        #exec('_material = %s' % self.material_name)
         exec('result = %s' % self.material_name)
         return result
         
@@ -112,7 +127,7 @@ class MaterialPackageProxy(SCFProxyObject):
         while True:
             is_redraw = False
             if is_first_pass:
-                self.print_menu_title('%s - %s' % (self.score_title, self.material_name))
+                self.print_menu_title('%s - %s' % (self.score_title, self.material_name.replace('_', ' ')))
             named_pairs = [
                 ('i', 'input'), 
                 ('o', 'output'), 
@@ -122,22 +137,25 @@ class MaterialPackageProxy(SCFProxyObject):
                 ('w', 'write'), 
                 ('y', 'ly')]
             kwargs = {'named_pairs': named_pairs, 'show_options': is_first_pass}
-            letter, action = self.display_menu(**kwargs)
-            if letter == 'b':
+            user_response, menu_value = self.display_menu(**kwargs)
+            key = user_response[0]
+            if key == 'b':
                 break
-            elif letter == 'd':
+            elif key == 'd':
                 is_redraw = True
-            elif letter == 'i':
-                self.edit_input_file()
-            elif letter == 'o':
-                print 'e: edit  w: write\n'
-                response = raw_input('scf> ')
-                if response.lower() == 'e':
+            elif key == 'i':
+                if 1 < len(user_response) and user_response[1] == 'j':
+                    self.edit_input_file(is_with_abjad = True)
+                    print ''
+                else:
+                    self.edit_input_file()
+            elif key == 'o':
+                if 1 < len(user_response) and user_response[1] == 'w':
+                    self.write_material_to_output_file()
+                    print ''
+                else:
                     self.edit_output_file()
-                elif response.lower() == 'w':
-                    self.write_material_to_output_file()    
-                print ''
-            elif letter == 'p':
+            elif key == 'p':
                 if self.has_pdf:
                     self.open_pdf()
                 elif self.has_visualizer:
@@ -154,11 +172,11 @@ class MaterialPackageProxy(SCFProxyObject):
                     if self.query('Create input file? '):
                         self.edit_input_file()
                 print ''
-            elif letter == 'q':
+            elif key == 'q':
                 raise SystemExit
-            elif letter == 'r':
+            elif key == 'r':
                 self.rename_material()
-            elif letter == 'v':
+            elif key == 'v':
                 if self.has_visualizer:
                     self.edit_visualizer()
                 elif self.has_output_data:
@@ -171,12 +189,12 @@ class MaterialPackageProxy(SCFProxyObject):
                 else:
                     if self.query('Create input file? '):
                         self.edit_input_file()
-            elif letter == 'w':
+            elif key == 'w':
                 self.write_material_to_output_file()
                 print ''
-            elif letter == 'x':
+            elif key == 'x':
                 self.exec_statement()
-            elif letter == 'y':
+            elif key == 'y':
                 if self.has_ly:
                     self.open_ly()
                 elif self.has_visualizer:
@@ -255,29 +273,6 @@ class MaterialPackageProxy(SCFProxyObject):
         else:
             raise NotImplementedError('commit to repository and then rename.')
 
-    # rename to add_line_to_initializer()
-    def update_initializer_with_line(self, initializer, line):
-        file_pointer = file(initializer, 'r')
-        initializer_lines = set(file_pointer.readlines())
-        file_pointer.close()
-        initializer_lines.add(line)
-        initializer_lines = list(initializer_lines)
-        initializer_lines = [x for x in initializer_lines if not x == '\n']
-        initializer_lines.sort()
-        file_pointer = file(initializer, 'w')
-        file_pointer.write(''.join(initializer_lines))
-        file_pointer.close()
-
-    def add_material_to_materials_initializer(self):
-        import_statement = 'from %s import %s\n' % (self.material_name, self.material_name)
-        self.update_initializer_with_line(self.parent_initializer, import_statement)
-        print 'Import statement added to materials initializer.'
-
-    def remove_material_from_materials_initializer(self):
-        print 'removing material from materials initializer ...'
-        import_statement = 'from %s import %s\n' % (self.material_name, self.material_name)
-        self.remove_line_from_initializer(self.parent_initializer, import_statement)
-
     def remove_line_from_initializer(self, initializer, line):
         file_pointer = file(initializer, 'r')
         initializer_lines = set(file_pointer.readlines())
@@ -289,6 +284,10 @@ class MaterialPackageProxy(SCFProxyObject):
         file_pointer.write(''.join(initializer_lines))
         file_pointer.close()
 
+    def remove_material_from_materials_initializer(self):
+        import_statement = 'from %s import %s\n' % (self.material_name, self.material_name)
+        self.remove_line_from_initializer(self.parent_initializer, import_statement)
+
     def write_material_to_output_file(self):
         self.remove_material_from_materials_initializer()
         self.overwrite_output_file()
@@ -299,5 +298,5 @@ class MaterialPackageProxy(SCFProxyObject):
         output_line = '%s = %r' % (self.material_name, input_data)
         output_file.write(output_line)
         output_file.close()
-        print 'Output written to %s_output_data.py.' % self.material_name
         self.add_material_to_materials_initializer()
+        print 'Output written to %s_output_data.py.' % self.material_name
