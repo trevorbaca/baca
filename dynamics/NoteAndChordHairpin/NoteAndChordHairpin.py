@@ -22,7 +22,7 @@ class NoteAndChordHairpin(_DynamicsSpecifier):
         new = type(self)(hairpin_token = hairpin_token)
         return new
 
-    ## PUBLIC ATTRIBUTES ##
+    ### PUBLIC ATTRIBUTES ###
 
     @apply
     def hairpin_token():
@@ -37,7 +37,7 @@ class NoteAndChordHairpin(_DynamicsSpecifier):
                 raise TypeError(hairpin_token)
         return property(**locals())
 
-    ## PUBLIC METHODS ##
+    ### PUBLIC METHODS ###
 
     def apply(self, expr, offset = 0):
         leaves = list(leaftools.iterate_leaves_forward_in_expr(expr))

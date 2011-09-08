@@ -11,7 +11,7 @@ class ChunkArray(list):
         list.__init__(self, args)
         self._update_chunk_pointers()
 
-    ## OVERLOADS ##
+    ### OVERLOADS ###
 
     def __delitem__(self, i):
         self[i].prev_chunk, self[i].next_chunk = None, None
@@ -35,7 +35,7 @@ class ChunkArray(list):
         list.__setslice__(self, start, stop, arg)
         self._update_chunk_pointers()
 
-    ## PRIVATE METHODS ##
+    ### PRIVATE METHODS ###
 
     def _update_chunk_pointers(self):
         for left, right in sequencetools.iterate_sequence_pairwise_strict(self):
@@ -44,7 +44,7 @@ class ChunkArray(list):
         if len(self):
             self[0].prev_chunk, self[-1].next_chunk = None, None
 
-    ## PUBLIC METHODS ##
+    ### PUBLIC METHODS ###
 
     def append(self, arg):
         list.append(self, arg)

@@ -15,12 +15,12 @@ class MaterialPackageProxy(SCFProxyObject):
         self.pdf = os.path.join(self.directory, '%s.pdf' % material_name)
         self.ly = os.path.join(self.directory, '%s.ly' % material_name)
 
-    ## OVERLOADS ##
+    ### OVERLOADS ###
 
     def __repr__(self):
         return '%s(%r)' % (type(self).__name__, self.material_name)
 
-    ## PUBLIC ATTRIBUTES ##
+    ### PUBLIC ATTRIBUTES ###
 
     @property
     def has_input_file(self):
@@ -49,7 +49,7 @@ class MaterialPackageProxy(SCFProxyObject):
     def output_data(self):
         return self.get_output_data()
 
-    ## PUBLIC METHODS ##
+    ### PUBLIC METHODS ###
 
     def create_ly(self):
         self.print_not_implemented()

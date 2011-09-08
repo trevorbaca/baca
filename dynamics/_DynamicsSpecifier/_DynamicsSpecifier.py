@@ -9,12 +9,12 @@ class _DynamicsSpecifier(object):
     def __init__(self, minimum_prolated_duration = None):
         self.minimum_prolated_duration = minimum_prolated_duration
 
-    ## OVERLOADS ##
+    ### OVERLOADS ###
 
     def __repr__(self):
         return '%s()' % (type(self).__name__)
 
-    ## PUBLIC ATTRIBUTES ##
+    ### PUBLIC ATTRIBUTES ###
 
     @apply
     def minimum_prolated_duration():
@@ -27,7 +27,7 @@ class _DynamicsSpecifier(object):
                 duration = durationtools.duration_token_to_duration_pair(minimum_prolated_duration)
                 self._minimum_prolated_duration = Fraction(*duration)
 
-    ## PUBLIC METHODS ##
+    ### PUBLIC METHODS ###
 
     @staticmethod
     def is_hairpin_token(arg):

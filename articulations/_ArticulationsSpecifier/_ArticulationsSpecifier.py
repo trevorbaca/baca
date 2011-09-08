@@ -28,7 +28,7 @@ class _ArticulationsSpecifier(object):
         else:
             self.maximum_written_pitch = pitchtools.NamedChromaticPitch(maximum_written_pitch)
 
-    ## OVERLOADS ##
+    ### OVERLOADS ###
 
     def __repr__(self):
         return '%s()' % type(self).__name__

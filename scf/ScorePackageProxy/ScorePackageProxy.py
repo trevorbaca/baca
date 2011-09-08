@@ -12,12 +12,12 @@ class ScorePackageProxy(SCFProxyObject):
         self.score_package_initializer = os.path.join(self.score_package_directory, '__init__.py')
         self.score_package_name = score_package_name
 
-    ## OVERLOADS ##
+    ### OVERLOADS ###
 
     def __repr__(self):
         return '%s(%r)' % (type(self).__name__, self.score_package_name)
 
-    ## PRIVATE METHODS ##
+    ### PRIVATE METHODS ###
 
     def _get_conditional_user_input(self, is_interactive, prompt = None):
         if not is_interactive:
@@ -53,7 +53,7 @@ class ScorePackageProxy(SCFProxyObject):
         initializer.write(''.join(new_lines))
         initializer.close()
 
-    ## PUBLIC ATTRIBUTES ##
+    ### PUBLIC ATTRIBUTES ###
 
     @apply
     def score_composer():
@@ -87,7 +87,7 @@ class ScorePackageProxy(SCFProxyObject):
             return self._write_initializer_metadata('score_year', score_title)
         return property(**locals())
 
-    ## PUBLIC METHODS ##
+    ### PUBLIC METHODS ###
 
     def create_materials_package(self):
         response = raw_input('material name: ')

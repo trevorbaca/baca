@@ -14,7 +14,7 @@ class ConstellationCircuit(object):
         self._pitch_range = pitch_range
         self._constellate_partitioned_generator_pnls()
 
-    ## OVERLOADS ##
+    ### OVERLOADS ###
 
     def __getitem__(self, i):
         return self._constellations[i]
@@ -25,7 +25,7 @@ class ConstellationCircuit(object):
     def __repr__(self):
         return '%s(%s)' % (type(self).__name__, len(self))
 
-    ## PRIVATE ATTRIBUTES ##
+    ### PRIVATE ATTRIBUTES ###
 
     ## FIXME
     @property
@@ -49,7 +49,7 @@ class ConstellationCircuit(object):
             result.append(constellation._pivot_chord_number)
         return result
 
-    ## PRIVATE METHODS ##
+    ### PRIVATE METHODS ###
 
     def _constellate_partitioned_generator_pnls(self):
         self._constellations = []
@@ -79,7 +79,7 @@ class ConstellationCircuit(object):
         lily_file, score = self._make_lily_file_and_score_from_chords(chords)
         iotools.show(lily_file)
 
-    ## PUBLIC ATTRIBUTES ##
+    ### PUBLIC ATTRIBUTES ###
 
     @property
     def generator_chords(self):
@@ -99,7 +99,7 @@ class ConstellationCircuit(object):
             result.append(constellation.pivot_chord)
         return result
 
-    ## PUBLIC METHODS ##
+    ### PUBLIC METHODS ###
 
     def get(self, *args):
         if len(args) == 1:

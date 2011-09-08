@@ -15,7 +15,7 @@ class TerracedDynamics(_DynamicsSpecifier):
             dynamics = []
         self.dynamics = dynamics
 
-    ## OVERLOADS ##
+    ### OVERLOADS ###
 
     def __call__(self, dynamics):
         new = type(self)()
@@ -23,7 +23,7 @@ class TerracedDynamics(_DynamicsSpecifier):
         new.minimum_prolated_duration = self.minimum_prolated_duration
         return new
 
-    ## PUBLIC ATTRIBUTES ##
+    ### PUBLIC ATTRIBUTES ###
 
     @apply
     def dynamics():
@@ -38,7 +38,7 @@ class TerracedDynamics(_DynamicsSpecifier):
                 raise TypeError(dynamics)
         return property(**locals())
 
-    ## PUBLIC METHODS ##
+    ### PUBLIC METHODS ###
 
     def apply(self, expr, offset = 0):
         dynamics = sequencetools.CyclicList(self.dynamics)

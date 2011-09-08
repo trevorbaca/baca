@@ -26,7 +26,7 @@ class NoteAndChordHairpins(_DynamicsSpecifier):
     def __call__(self):
         raise NotImplementedError
 
-    ## PUBLIC METHODS ##
+    ### PUBLIC METHODS ###
 
     def apply(self, expr, offset = 0):
         leaves = list(leaftools.iterate_leaves_forward_in_expr(expr))

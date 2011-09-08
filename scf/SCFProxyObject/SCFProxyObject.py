@@ -6,12 +6,12 @@ import subprocess
 
 class SCFProxyObject(object):
 
-    ## OVERLOADS ##
+    ### OVERLOADS ###
 
     def __repr__(self):
         return '%s()' % type(self).__name__
 
-    ## PUBLIC ATTRIBUTES ##
+    ### PUBLIC ATTRIBUTES ###
 
     @property
     def initializer(self):
@@ -37,7 +37,7 @@ class SCFProxyObject(object):
     def parent_initializer(self):
         return os.path.join(self.parent_directory, '__init__.py')
 
-    ## PUBLIC METHODS ##
+    ### PUBLIC METHODS ###
 
     def clear_terminal(self):
         iotools.clear_terminal()

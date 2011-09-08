@@ -20,7 +20,7 @@ class Constellation(object):
         self._chord_duration = Fraction(1, 4)
         self._chords = []
 
-    ## OVERLOADS ##
+    ### OVERLOADS ###
 
     def __contains__(self, chord):
 #      for pnl in self._pitch_number_lists:
@@ -38,7 +38,7 @@ class Constellation(object):
     def __repr__(self):
         return '%s(%s)' % (type(self).__name__, len(self))
 
-    ## PRIVATE ATTRIBUTES ##
+    ### PRIVATE ATTRIBUTES ###
 
     @property
     def _color_map(self):
@@ -79,7 +79,7 @@ class Constellation(object):
     def _prev(self):
         return self._advance(-1)
 
-    ## PRIVATE METHODS ##
+    ### PRIVATE METHODS ###
 
     def _advance(self, i):
         my_idx = self._circuit._constellations.index(self)
@@ -120,7 +120,7 @@ class Constellation(object):
         lily_file, score = self._make_lily_file_and_score_from_chords(chords)
         iotools.show(lily_file)
 
-    ## PUBLIC ATTRIBUTES ##
+    ### PUBLIC ATTRIBUTES ###
 
     @property
     def constellation_number(self):
@@ -148,7 +148,7 @@ class Constellation(object):
         self._label_chord(pivot_chord)
         return pivot_chord
 
-    ## PUBLIC METHODS ##
+    ### PUBLIC METHODS ###
 
     def get_chord(self, chord_number):
         '''1-indexed chord number.'''

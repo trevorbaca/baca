@@ -9,7 +9,7 @@ class SignalAffixedChunkWithRestFilledTokens(_SignalAffixedChunkWithFilledTokens
     '''Signal-affixed chunks with rest-filled tokens.
     '''
 
-    ## PRIVATE METHODS ##
+    ### PRIVATE METHODS ###
 
     def _make_middle_of_numeric_map_part(self, middle):
         if 0 < middle:

@@ -8,7 +8,7 @@ class CatalogProxy(SCFProxyObject):
     def __init__(self):
         self.scores_directory = os.environ.get('SCORES')
 
-    ## PUBLIC METHODS ##
+    ### PUBLIC METHODS ###
 
     def create_score_package(self, score_package_name):
         raise NotImplementedError

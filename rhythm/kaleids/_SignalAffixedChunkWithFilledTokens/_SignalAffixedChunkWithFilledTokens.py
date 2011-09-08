@@ -5,7 +5,7 @@ class _SignalAffixedChunkWithFilledTokens(_SignalAffixedObjectWithFilledTokens):
     '''Signal-affixed chunks with rest-filled tokens.
     '''
 
-    ## PRIVATE METHODS ##
+    ### PRIVATE METHODS ###
 
     def _make_numeric_map(self, duration_pairs,
         prefix_signal, prefix_lengths, suffix_signal, suffix_lengths, prolation_addenda):
