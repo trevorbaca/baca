@@ -84,18 +84,14 @@ class MaterialPackageProxy(SCFProxyObject):
         file_pointer.close()
         self.edit_visualizer()
 
-    def edit_input_file(self, is_with_abjad = False):
+    def edit_input_file(self):
         os.system('vi + %s' % self.input_file)
-        if is_with_abjad:
-            os.system('abj %s' % self.input_file)
 
     def edit_output_file(self):
         os.system('vi + %s' % self.output_file)
 
     def edit_visualizer(self):
         os.system('vi + %s' % self.visualizer)
-        os.system('abj %s' % self.visualizer)
-        print ''
 
     def get_input_data(self):
         command = 'from %s.mus.materials.%s.%s_input_code import %s' %(
@@ -137,20 +133,22 @@ class MaterialPackageProxy(SCFProxyObject):
                 ('w', 'write'), 
                 ('y', 'ly')]
             kwargs = {'named_pairs': named_pairs, 'show_options': is_first_pass}
-            user_response, menu_value = self.display_menu(**kwargs)
-            key = user_response[0]
+            command_string, menu_value = self.display_menu(**kwargs)
+            key = command_string[0]
             if key == 'b':
                 break
             elif key == 'd':
                 is_redraw = True
             elif key == 'i':
-                if 1 < len(user_response) and user_response[1] == 'j':
-                    self.edit_input_file(is_with_abjad = True)
-                    print ''
-                else:
+                if command_string == 'i':
                     self.edit_input_file()
+                elif command_string == 'ij':
+                    self.edit_input_file()
+                    self.run_abjad_on_input_file()
+                elif command_string == 'ijj':
+                    self.run_abjad_on_input_file()                    
             elif key == 'o':
-                if 1 < len(user_response) and user_response[1] == 'w':
+                if 1 < len(command_string) and command_string[1] == 'w':
                     self.write_material_to_output_file()
                     print ''
                 else:
@@ -178,7 +176,13 @@ class MaterialPackageProxy(SCFProxyObject):
                 self.rename_material()
             elif key == 'v':
                 if self.has_visualizer:
-                    self.edit_visualizer()
+                    if command_string == 'v':
+                        self.edit_visualizer()
+                    elif command_string == 'vj':
+                        self.edit_visualizer()
+                        self.run_abjad_on_visualizer()
+                    elif command_string == 'vjj':
+                        self.run_abjad_on_visualizer()
                 elif self.has_output_data:
                     print "Data exists but visualizer doesn't.\n"
                     if self.query('Create visualizer? '):
@@ -287,6 +291,12 @@ class MaterialPackageProxy(SCFProxyObject):
     def remove_material_from_materials_initializer(self):
         import_statement = 'from %s import %s\n' % (self.material_name, self.material_name)
         self.remove_line_from_initializer(self.parent_initializer, import_statement)
+
+    def run_abjad_on_input_file(self):
+        os.system('abjad %s' % self.input_file)
+
+    def run_abjad_on_visualizer(self):
+        os.system('abjad %s' % self.visualizer)
 
     def write_material_to_output_file(self):
         self.remove_material_from_materials_initializer()
