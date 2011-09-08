@@ -5,9 +5,9 @@ import io
 import sys
 
 
-score_package_name = io.handle_startup(sys.argv)
+score_package_name, command_string = io.handle_startup(sys.argv)
 score_package_proxy = baca.scf.ScorePackageProxy(score_package_name)
 try:
-    score_package_proxy.manage_score()
+    score_package_proxy.manage_score(command_string = command_string)
 except EOFError:
     print '\n'

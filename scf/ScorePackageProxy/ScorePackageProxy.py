@@ -221,27 +221,28 @@ class ScorePackageProxy(SCFProxyObject):
                 return result
             material_number = None
 
-    def manage_score(self):
+    def manage_score(self, command_string = None):
         is_first_pass = True
         while True:
             is_redraw = False
-            if is_first_pass:
-                self.print_menu_title('%s - main menu\n' % self.score_title)
-                self.summarize_chunks()
-                self.summarize_materials()
-            named_pairs = [('h', 'chunks'), ('m', 'materials')]
-            kwargs = {'named_pairs': named_pairs, 'indent_level': 1}
-            kwargs.update({'is_nearly': False, 'show_options': is_first_pass})
-            user_commands, menu_value = self.display_menu(**kwargs)
-            key = user_commands[0]
+            if command_string is None:
+                if is_first_pass:
+                    self.print_menu_title('%s - main menu\n' % self.score_title)
+                    self.summarize_chunks()
+                    self.summarize_materials()
+                named_pairs = [('h', 'chunks'), ('m', 'materials')]
+                kwargs = {'named_pairs': named_pairs, 'indent_level': 1}
+                kwargs.update({'is_nearly': False, 'show_options': is_first_pass})
+                command_string, menu_value = self.display_menu(**kwargs)
+            key = command_string[0]
             result = None
             if key == 'd':
                 is_redraw = True
             elif key == 'h':
                 self.manage_chunks()
             elif key == 'm':
-                if user_commands[1:]:
-                    material_number = int(user_commands[1:])
+                if command_string[1:]:
+                    material_number = int(command_string[1:])
                 else:
                     material_number = None
                 result = self.manage_materials(material_number = material_number)
@@ -253,6 +254,7 @@ class ScorePackageProxy(SCFProxyObject):
                 is_first_pass = True
             else:
                 is_first_pass = False
+            command_string = None
 
     def material_number_to_material_name(self, material_number):
         material_index = material_number - 1
