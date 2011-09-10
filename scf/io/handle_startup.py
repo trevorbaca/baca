@@ -6,7 +6,6 @@ def handle_startup(argv):
 
     iotools.clear_terminal()
 
-    print 'argv %r' % argv
     if len(argv) == 1:
         score_package_name = handle_empty_startup()
         command_string = None

@@ -7,13 +7,14 @@ class MaterialPackageProxy(SCFProxyObject):
     def __init__(self, score_package_name, material_name):
         self.score_package_name = score_package_name
         self.material_name = material_name
+        self.underscored_material_name = self.material_name.replace(' ', '_')
         self.directory = os.path.join(os.environ.get('SCORES'), score_package_name)
-        self.directory = os.path.join(self.directory, 'mus', 'materials', material_name)
-        self.input_file = os.path.join(self.directory, '%s_input_code.py' % material_name)
-        self.output_file = os.path.join(self.directory, '%s_output_data.py' % material_name)
-        self.visualizer = os.path.join(self.directory, '%s_visualizer.py' % material_name)
-        self.pdf = os.path.join(self.directory, '%s.pdf' % material_name)
-        self.ly = os.path.join(self.directory, '%s.ly' % material_name)
+        self.directory = os.path.join(self.directory, 'mus', 'materials', self.underscored_material_name)
+        self.input_file = os.path.join(self.directory, '%s_input_code.py' % self.underscored_material_name)
+        self.output_file = os.path.join(self.directory, '%s_output_data.py' % self.underscored_material_name)
+        self.visualizer = os.path.join(self.directory, '%s_visualizer.py' % self.underscored_material_name)
+        self.pdf = os.path.join(self.directory, '%s.pdf' % self.underscored_material_name)
+        self.ly = os.path.join(self.directory, '%s.ly' % self.underscored_material_name)
 
     ### OVERLOADS ###
 
@@ -85,6 +86,8 @@ class MaterialPackageProxy(SCFProxyObject):
         self.edit_visualizer()
 
     def edit_input_file(self):
+        command = 'vi + %s' % self.input_file
+        print command
         os.system('vi + %s' % self.input_file)
 
     def edit_output_file(self):
