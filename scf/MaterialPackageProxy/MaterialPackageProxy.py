@@ -6,6 +6,8 @@ class MaterialPackageProxy(SCFProxyObject):
 
     def __init__(self, score_package_name, material_name):
         self.score_package_name = score_package_name
+        self.material_name_with_spaces = material_name
+        material_name = material_name.replace(' ', '_')
         self.material_name = material_name
         self.underscored_material_name = self.material_name.replace(' ', '_')
         self.directory = os.path.join(os.environ.get('SCORES'), score_package_name)
@@ -172,7 +174,6 @@ class MaterialPackageProxy(SCFProxyObject):
                 else:
                     if self.query('Create input file? '):
                         self.edit_input_file()
-                print ''
             elif key == 'q':
                 raise SystemExit
             elif key == 'r':
