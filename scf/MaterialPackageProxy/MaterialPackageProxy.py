@@ -24,6 +24,7 @@ class MaterialPackageProxy(SCFProxyObject):
         self.materials_module_name = '%s.mus.materials' % self.score_package_name
         self.output_module_name = '%s.mus.materials.%s.%s_output'
         self.output_module_name %= self.score_package_name, self.material_name, self.material_name
+        self.visualizer_module_name = '%s.%s_visualizer' % (self.material_module_name, self.material_name)
 
     ### OVERLOADS ###
 
@@ -58,14 +59,14 @@ class MaterialPackageProxy(SCFProxyObject):
     @property
     def input_file_has_complete_material_definition(self):
         try:
-            input_data = self.get_input_data()
+            input_data = self.import_material_from_input_file()
             return True
         except ImportError:
             return False
 
     @property
     def output_data(self):
-        return self.get_output_data()
+        return self.import_material_from_output_file()
 
     ### PUBLIC METHODS ###
 
@@ -113,7 +114,7 @@ class MaterialPackageProxy(SCFProxyObject):
     def edit_visualizer(self):
         os.system('vi + %s' % self.visualizer)
 
-    def get_input_data(self):
+    def import_material_from_input_file(self):
         self.unimport_input_module()
         try:
             command = 'from %s import %s' % (self.input_module_name, self.material_name)
@@ -122,8 +123,15 @@ class MaterialPackageProxy(SCFProxyObject):
             return result
         except ImportError:
             raise Exception('eponymous data must be kept in all I/O modules at all times.')
+    
+    def import_lily_pond_file_object_from_visualizer(self):
+        #print 'Importing LilyPond file object from visualizer ...'
+        self.unimport_visualizer_module()
+        command = 'from %s import lily_file' % self.visualizer_module_name 
+        exec(command)
+        return lily_file
         
-    def get_output_data(self):
+    def import_material_from_output_file(self):
         self.unimport_output_module_hierarchy()
         try:
             exec('from %s.mus.materials import %s' % (self.score_package_name, self.material_name))
@@ -172,7 +180,7 @@ class MaterialPackageProxy(SCFProxyObject):
                 if command_string == 'i':
                     self.edit_input_file()
                 elif command_string == 'id':
-                    print repr(self.get_input_data())
+                    print repr(self.import_material_from_input_file())
                     print ''
                 elif command_string == 'ih':
                     print '%s: edit input file' % 'i'.rjust(4)
@@ -189,7 +197,7 @@ class MaterialPackageProxy(SCFProxyObject):
                 if command_string == 'o':
                     self.edit_output_file()
                 elif command_string == 'od':
-                    print repr(self.get_output_data())
+                    print repr(self.import_material_from_output_file())
                     print ''
                 elif command_string == 'oh':
                     print '%s: edit output file' % 'o'.rjust(4)
@@ -200,21 +208,28 @@ class MaterialPackageProxy(SCFProxyObject):
                     self.write_input_data_to_output_file()
                     print ''
             elif key == 'p':
-                if self.has_pdf:
-                    self.open_pdf()
-                elif self.has_visualizer:
-                    if self.query('Create PDF from visualizer? '):
-                        self.create_pdf()
-                elif self.has_output_data:
-                    print "Data exists but visualizer doesn't.\n"
-                    if self.query('Create visualizer? '):
-                        self.create_visualizer()
-                elif self.has_input_file:
-                    if self.query('Write material to disk? '):
-                        self.write_input_data_to_output_file()
-                else:
-                    if self.query('Create input file? '):
-                        self.edit_input_file()
+                if command_string == 'p':
+                    if self.has_pdf:
+                        self.open_pdf()
+                    elif self.has_visualizer:
+                        if self.query('Create PDF from visualizer? '):
+                            self.create_pdf()
+                    elif self.has_output_data:
+                        print "Data exists but visualizer doesn't.\n"
+                        if self.query('Create visualizer? '):
+                            self.create_visualizer()
+                    elif self.has_input_file:
+                        if self.query('Write material to disk? '):
+                            self.write_input_data_to_output_file()
+                    else:
+                        if self.query('Create input file? '):
+                            self.edit_input_file()
+                elif command_string == 'pc':
+                    self.create_pdf()
+                elif command_string == 'ph':
+                    print '%s: open pdf' % 'p'.rjust(4)
+                    print '%s: create pdf from visualizer' % 'pc'.rjust(4)
+                    print ''
             elif key == 'q':
                 raise SystemExit
             elif key == 'r':
@@ -223,11 +238,20 @@ class MaterialPackageProxy(SCFProxyObject):
                 if self.has_visualizer:
                     if command_string == 'v':
                         self.edit_visualizer()
+                    elif command_string == 'vh':
+                        print '%s: edit visualizer' % 'v'.rjust(4)
+                        print '%s: edit visualizer; run abjad on visualizer' % 'vj'.rjust(4)
+                        print '%s: run abjad on visualizer' % 'vjj'.rjust(4)
+                        print '%s: print visualizer lilypond file object repr' % 'vlf'.rjust(4)
+                        print ''
                     elif command_string == 'vj':
                         self.edit_visualizer()
                         self.run_abjad_on_visualizer()
                     elif command_string == 'vjj':
                         self.run_abjad_on_visualizer()
+                    elif command_string == 'vlf':
+                        print repr(self.import_lily_pond_file_object_from_visualizer())
+                        print ''
                 elif self.has_output_data:
                     print "Data exists but visualizer doesn't.\n"
                     if self.query('Create visualizer? '):
@@ -371,13 +395,16 @@ class MaterialPackageProxy(SCFProxyObject):
     def unimport_score_package(self):
         self.remove_module_name_from_sys_modules(self.score_package_name)
 
+    def unimport_visualizer_module(self):
+        self.remove_module_name_from_sys_modules(self.visualizer_module_name)
+
     def write_input_data_to_output_file(self):
         self.remove_material_from_materials_initializer()
         self.overwrite_output_file()
         output_file = file(self.output_file, 'w')
         output_preamble_lines = self.get_output_preamble_lines()
         output_file.write('\n'.join(output_preamble_lines))
-        input_data = self.get_input_data()
+        input_data = self.import_material_from_input_file()
         output_line = '%s = %r' % (self.material_name, input_data)
         output_file.write(output_line)
         output_file.close()
@@ -385,7 +412,7 @@ class MaterialPackageProxy(SCFProxyObject):
         print 'Output written to %s_output.py.' % self.material_name
 
     def write_input_data_to_output_file_if_necessary(self):
-        if self.get_input_data() == self.get_output_data():
+        if self.import_material_from_input_file() == self.import_material_from_output_file():
             print 'Input data equals output data; no material written to disk.'
         else:
             self.write_input_data_to_output_file()
