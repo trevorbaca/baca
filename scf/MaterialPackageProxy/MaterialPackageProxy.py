@@ -79,7 +79,9 @@ class MaterialPackageProxy(SCFProxyObject):
 
     def create_visualizer(self):
         if not self.has_output_data:
-            self.write_output_data_to_disk()
+            # this needs to be replaced with something that exists
+            #self.write_output_data_to_disk()
+            pass
         file_pointer = file(self.visualizer, 'w')
         file_pointer.write('from abjad import *\n')
         line = 'from %s_output_data import %s\n' % (self.material_name, self.material_name)
@@ -148,7 +150,9 @@ class MaterialPackageProxy(SCFProxyObject):
                 ('p', 'pdf'), 
                 ('r', 'rename'), 
                 ('v', 'visualizer'), 
-                ('y', 'ly')]
+                ('y', 'ly'),
+                ('z', 'regenerate'),
+                ]
             kwargs = {'named_pairs': named_pairs, 'show_options': is_first_pass}
             command_string, menu_value = self.display_menu(**kwargs)
             key = command_string[0]
@@ -239,6 +243,8 @@ class MaterialPackageProxy(SCFProxyObject):
                 else:
                     if self.query('Creat input file? '):
                         self.edit_input_file()
+            elif key == 'z':
+                self.write_material_to_output_file_if_required()
             if is_redraw:
                 is_first_pass = True
             else:
@@ -335,3 +341,17 @@ class MaterialPackageProxy(SCFProxyObject):
         output_file.close()
         self.add_material_to_materials_initializer()
         print 'Output written to %s_output_data.py.' % self.material_name
+
+    def write_material_to_output_file_if_required(self):
+        if self.has_input_file:
+            if self.input_file_has_complete_material_definition:
+                material_defined_in_input_file = self.get_material_defined_in_input_file()
+                material_defined_in_output_file = self.get_material_defined_in_output_file()
+                if material_defined_in_input_file == material_defined_in_output_file:
+                    print 'Material defined in input file equals material defined in output file.'
+                else:
+                    self.write_material_to_output_file()
+            else:
+                print 'Input file contains incomplete material definition.'
+        else:
+            print 'Input file does not exist.'
