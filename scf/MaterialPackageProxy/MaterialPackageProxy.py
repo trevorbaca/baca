@@ -4,6 +4,10 @@ import os
 import sys
 
 
+## TODO: implement 
+##       create_ly_and_pdf_from_visualizer
+##       create_ly_and_pdf_from_visualizer_if_necessary
+
 class MaterialPackageProxy(SCFProxyObject):
 
     def __init__(self, score_package_name, material_name):
@@ -88,6 +92,14 @@ class MaterialPackageProxy(SCFProxyObject):
     def create_ly_from_visualizer(self):
         lilypond_file = self.import_lilypond_file_object_from_visualizer()
         iotools.write_expr_to_ly(lilypond_file, self.ly)
+        print ''
+
+    def create_ly_from_visualizer_if_necessary(self):
+        lilypond_file = self.import_lilypond_file_object_from_visualizer()
+        if not self.lilypond_file_format_is_equal_to_visualizer_ly(lilypond_file):
+            iotools.write_expr_to_ly(lilypond_file, self.ly)
+        else:
+            print 'LilyPond file content is the same. New LilyPond file not necessary.'
         print ''
 
     def create_pdf_from_visualizer(self):
@@ -325,9 +337,12 @@ class MaterialPackageProxy(SCFProxyObject):
                             self.edit_input_file()
                 elif command_string == 'yc':
                     self.create_ly_from_visualizer()
+                elif command_string == 'ycn':
+                    self.create_ly_from_visualizer_if_necessary()
                 elif command_string == 'yh':
                     print '%s: edit lilypond file' % 'y'.rjust(4)
                     print '%s: create lilypond file from visualizer' % 'yc'.rjust(4)
+                    print '%s: create lilypond file from visualizer if necessary' % 'ycn'.rjust(4)
                     print ''
             elif key == 'z':
                 self.write_input_data_to_output_file_if_necessary()
