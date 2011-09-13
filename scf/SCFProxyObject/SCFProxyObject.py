@@ -2,6 +2,7 @@ from abjad.tools import iotools
 import os
 import re
 import subprocess
+import sys
 
 
 class SCFProxyObject(object):
@@ -151,6 +152,14 @@ class SCFProxyObject(object):
         response = raw_input(prompt)
         return response.lower().startswith('y')
 
+    def remove_module_name_from_sys_modules(self, module_name):
+        '''Total hack. But works.
+        '''
+        #exec("print ('%s', '%s' in sys.modules)" % (module_name, module_name))
+        command = "if '%s' in sys.modules: del(sys.modules['%s'])" % (module_name, module_name)
+        exec(command)
+        
+        
     def run_go_on_menu(self):
         response = raw_input('Press any key to continue. ')
         print ''

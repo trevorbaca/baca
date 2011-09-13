@@ -18,6 +18,12 @@ class MaterialPackageProxy(SCFProxyObject):
         self.visualizer = os.path.join(self.directory, '%s_visualizer.py' % self.underscored_material_name)
         self.pdf = os.path.join(self.directory, '%s.pdf' % self.underscored_material_name)
         self.ly = os.path.join(self.directory, '%s.ly' % self.underscored_material_name)
+        self.input_module_name = '%s.mus.materials.%s.%s_input_code'
+        self.input_module_name %= self.score_package_name, self.material_name, self.material_name
+        self.material_module_name = '%s.mus.materials.%s' % (self.score_package_name, self.material_name)
+        self.materials_module_name = '%s.mus.materials' % self.score_package_name
+        self.output_module_name = '%s.mus.materials.%s.%s_output_data'
+        self.output_module_name %= self.score_package_name, self.material_name, self.material_name
 
     ### OVERLOADS ###
 
@@ -48,6 +54,14 @@ class MaterialPackageProxy(SCFProxyObject):
     @property
     def has_visualizer(self):
         return os.path.exists(self.visualizer)
+
+    @property
+    def input_file_has_complete_material_definition(self):
+        try:
+            input_data = self.get_input_data()
+            return True
+        except ImportError:
+            return False
 
     @property
     def output_data(self):
@@ -101,31 +115,26 @@ class MaterialPackageProxy(SCFProxyObject):
         os.system('vi + %s' % self.visualizer)
 
     def get_input_data(self):
-        command = 'from %s.mus.materials.%s.%s_input_code import %s' %(
-            self.score_package_name, self.material_name, self.material_name, self.material_name)
-        exec(command)
-        exec('result = %s' % self.material_name)
-        return result
+        self.unimport_input_module()
+        try:
+            command = 'from %s import %s' % (self.input_module_name, self.material_name)
+            exec(command)
+            exec('result = %s' % self.material_name)
+            return result
+        except ImportError:
+            raise Exception('eponymous data must be kept in all I/O modules at all times.')
         
     def get_output_data(self):
-        if self.has_output_data:
+        self.unimport_output_module_hierarchy()
+        try:
             exec('from %s.mus.materials import %s' % (self.score_package_name, self.material_name))
             exec('result = %s' % self.material_name)
             return result
-        else:
-            print 'No data available.'
-
-    def unimport_input_code_module(self):
-        '''Seems like this should be a totaly hack.
-        But seems to work.
-        '''
-        module = '%s.mus.materials.%s.%s_input_code'
-        module %= self.score_package_name, self.material_name, self.material_name
-        command = "if '%s' in sys.modules: del(sys.modules['%s'])" % (module, module)
-        exec(command)
+        except ImportError as e:
+            raise Exception('eponymous data must be kept in all I/O modules at all times.')
 
     def get_output_preamble_lines(self):
-        self.unimport_input_code_module()
+        self.unimport_input_module()
         command = 'from %s.mus.materials.%s.%s_input_code import output_preamble_lines'
         command %= self.score_package_name, self.material_name, self.material_name
         try:
@@ -163,10 +172,14 @@ class MaterialPackageProxy(SCFProxyObject):
             elif key == 'i':
                 if command_string == 'i':
                     self.edit_input_file()
+                elif command_string == 'id':
+                    print repr(self.get_input_data())
+                    print ''
                 elif command_string == 'ih':
-                    print '  i: edit input file'
-                    print ' ij: edit input file; run abjad on input file'
-                    print 'ijj: run abjad on input file'
+                    print '%s: edit input file' % 'i'.rjust(4)
+                    print '%s: print input data repr' % 'id'.rjust(4)
+                    print '%s: edit input file; run abjad on input file' % 'ij'.rjust(4)
+                    print '%s: run abjad on input file' % 'ijj'.rjust(4)
                     print ''
                 elif command_string == 'ij':
                     self.edit_input_file()
@@ -176,12 +189,16 @@ class MaterialPackageProxy(SCFProxyObject):
             elif key == 'o':
                 if command_string == 'o':
                     self.edit_output_file()
+                elif command_string == 'od':
+                    print repr(self.get_output_data())
+                    print ''
                 elif command_string == 'oh':
                     print '%s: edit output file' % 'o'.rjust(4)
+                    print '%s: print output data repr' % 'od'.rjust(4)
                     print '%s: write material to output file' % 'ow'.rjust(4)
                     print ''
                 elif command_string == 'ow':
-                    self.write_material_to_output_file()
+                    self.write_input_data_to_output_file()
                     print ''
             elif key == 'p':
                 if self.has_pdf:
@@ -195,7 +212,7 @@ class MaterialPackageProxy(SCFProxyObject):
                         self.create_visualizer()
                 elif self.has_input_file:
                     if self.query('Write material to disk? '):
-                        self.write_material_to_output_file()
+                        self.write_input_data_to_output_file()
                 else:
                     if self.query('Create input file? '):
                         self.edit_input_file()
@@ -218,12 +235,12 @@ class MaterialPackageProxy(SCFProxyObject):
                         self.create_visualizer()
                 elif self.has_input_file:
                     if self.query('Write material to disk? '):
-                        self.write_material_to_output_file()
+                        self.write_input_data_to_output_file()
                 else:
                     if self.query('Create input file? '):
                         self.edit_input_file()
             elif key == 'w':
-                self.write_material_to_output_file()
+                self.write_input_data_to_output_file()
                 print ''
             elif key == 'x':
                 self.exec_statement()
@@ -239,12 +256,12 @@ class MaterialPackageProxy(SCFProxyObject):
                         self.create_visualizer()
                 elif self.has_input_file:
                     if self.query('Write material to disk? '):
-                        self.write_material_to_output_file()
+                        self.write_input_data_to_output_file()
                 else:
                     if self.query('Creat input file? '):
                         self.edit_input_file()
             elif key == 'z':
-                self.write_material_to_output_file_if_required()
+                self.write_input_data_to_output_file_if_necessary()
             if is_redraw:
                 is_first_pass = True
             else:
@@ -323,13 +340,39 @@ class MaterialPackageProxy(SCFProxyObject):
         import_statement = 'from %s import %s\n' % (self.material_name, self.material_name)
         self.remove_line_from_initializer(self.parent_initializer, import_statement)
 
+    def reveal_modules(self):
+        exec('module_names = sys.modules.keys()')
+        module_names = [x for x in module_names if x.startswith(self.score_package_name)]
+        module_names.sort()
+        return module_names
+
     def run_abjad_on_input_file(self):
         os.system('abjad %s' % self.input_file)
 
     def run_abjad_on_visualizer(self):
         os.system('abjad %s' % self.visualizer)
 
-    def write_material_to_output_file(self):
+    def unimport_input_module(self):
+        self.remove_module_name_from_sys_modules(self.input_module_name)
+
+    def unimport_material_module(self):
+        self.remove_module_name_from_sys_modules(self.material_module_name)
+
+    def unimport_materials_module(self):
+        self.remove_module_name_from_sys_modules(self.materials_module_name)
+
+    def unimport_output_module(self):
+        self.remove_module_name_from_sys_modules(self.output_module_name)
+
+    def unimport_output_module_hierarchy(self):
+        self.unimport_materials_module()
+        self.unimport_material_module()
+        self.unimport_output_module()
+
+    def unimport_score_package(self):
+        self.remove_module_name_from_sys_modules(self.score_package_name)
+
+    def write_input_data_to_output_file(self):
         self.remove_material_from_materials_initializer()
         self.overwrite_output_file()
         output_file = file(self.output_file, 'w')
@@ -342,16 +385,9 @@ class MaterialPackageProxy(SCFProxyObject):
         self.add_material_to_materials_initializer()
         print 'Output written to %s_output_data.py.' % self.material_name
 
-    def write_material_to_output_file_if_required(self):
-        if self.has_input_file:
-            if self.input_file_has_complete_material_definition:
-                material_defined_in_input_file = self.get_material_defined_in_input_file()
-                material_defined_in_output_file = self.get_material_defined_in_output_file()
-                if material_defined_in_input_file == material_defined_in_output_file:
-                    print 'Material defined in input file equals material defined in output file.'
-                else:
-                    self.write_material_to_output_file()
-            else:
-                print 'Input file contains incomplete material definition.'
+    def write_input_data_to_output_file_if_necessary(self):
+        if self.get_input_data() == self.get_output_data():
+            print 'Input data equals output data; no material written to disk.'
         else:
-            print 'Input file does not exist.'
+            self.write_input_data_to_output_file()
+        print ''
