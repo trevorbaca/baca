@@ -13,16 +13,16 @@ class MaterialPackageProxy(SCFProxyObject):
         self.underscored_material_name = self.material_name.replace(' ', '_')
         self.directory = os.path.join(os.environ.get('SCORES'), score_package_name)
         self.directory = os.path.join(self.directory, 'mus', 'materials', self.underscored_material_name)
-        self.input_file = os.path.join(self.directory, '%s_input_code.py' % self.underscored_material_name)
-        self.output_file = os.path.join(self.directory, '%s_output_data.py' % self.underscored_material_name)
+        self.input_file = os.path.join(self.directory, '%s_input.py' % self.underscored_material_name)
+        self.output_file = os.path.join(self.directory, '%s_output.py' % self.underscored_material_name)
         self.visualizer = os.path.join(self.directory, '%s_visualizer.py' % self.underscored_material_name)
         self.pdf = os.path.join(self.directory, '%s.pdf' % self.underscored_material_name)
         self.ly = os.path.join(self.directory, '%s.ly' % self.underscored_material_name)
-        self.input_module_name = '%s.mus.materials.%s.%s_input_code'
+        self.input_module_name = '%s.mus.materials.%s.%s_input'
         self.input_module_name %= self.score_package_name, self.material_name, self.material_name
         self.material_module_name = '%s.mus.materials.%s' % (self.score_package_name, self.material_name)
         self.materials_module_name = '%s.mus.materials' % self.score_package_name
-        self.output_module_name = '%s.mus.materials.%s.%s_output_data'
+        self.output_module_name = '%s.mus.materials.%s.%s_output'
         self.output_module_name %= self.score_package_name, self.material_name, self.material_name
 
     ### OVERLOADS ###
@@ -93,12 +93,11 @@ class MaterialPackageProxy(SCFProxyObject):
 
     def create_visualizer(self):
         if not self.has_output_data:
-            # this needs to be replaced with something that exists
-            #self.write_output_data_to_disk()
+            # this needs to be filled in with something that exists
             pass
         file_pointer = file(self.visualizer, 'w')
         file_pointer.write('from abjad import *\n')
-        line = 'from %s_output_data import %s\n' % (self.material_name, self.material_name)
+        line = 'from %s_output import %s\n' % (self.material_name, self.material_name)
         file_pointer.write(line)
         file_pointer.write('\n\n\n')
         file_pointer.close()
@@ -135,7 +134,7 @@ class MaterialPackageProxy(SCFProxyObject):
 
     def get_output_preamble_lines(self):
         self.unimport_input_module()
-        command = 'from %s.mus.materials.%s.%s_input_code import output_preamble_lines'
+        command = 'from %s.mus.materials.%s.%s_input import output_preamble_lines'
         command %= self.score_package_name, self.material_name, self.material_name
         try:
             exec(command)
@@ -312,7 +311,7 @@ class MaterialPackageProxy(SCFProxyObject):
                     command = 'svn mv %s %s' % (old_path_name, new_path_name)
                     os.system(command)
             # rename output data
-            new_output_data = '%s_output_data.py' % new_material_name
+            new_output_data = '%s_output.py' % new_material_name
             new_output_data = os.path.join(new_package_directory, new_output_data)
             self.globally_replace_in_file(new_output_data, self.material_name, new_material_name)
             print ''
@@ -383,7 +382,7 @@ class MaterialPackageProxy(SCFProxyObject):
         output_file.write(output_line)
         output_file.close()
         self.add_material_to_materials_initializer()
-        print 'Output written to %s_output_data.py.' % self.material_name
+        print 'Output written to %s_output.py.' % self.material_name
 
     def write_input_data_to_output_file_if_necessary(self):
         if self.get_input_data() == self.get_output_data():
