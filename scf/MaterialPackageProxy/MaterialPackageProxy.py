@@ -1,3 +1,4 @@
+from abjad.tools import iotools
 from baca.scf.SCFProxyObject import SCFProxyObject
 import os
 import sys
@@ -90,7 +91,9 @@ class MaterialPackageProxy(SCFProxyObject):
         self.print_not_implemented()
 
     def create_pdf(self):
-        self.print_not_implemented() 
+        #self.print_not_implemented() 
+        lily_pond_file = self.import_lily_pond_file_object_from_visualizer()
+        iotools.write_expr_to_pdf(lily_pond_file, self.pdf)
 
     def create_visualizer(self):
         if not self.has_output_data:
@@ -226,6 +229,7 @@ class MaterialPackageProxy(SCFProxyObject):
                             self.edit_input_file()
                 elif command_string == 'pc':
                     self.create_pdf()
+                    print ''
                 elif command_string == 'ph':
                     print '%s: open pdf' % 'p'.rjust(4)
                     print '%s: create pdf from visualizer' % 'pc'.rjust(4)
