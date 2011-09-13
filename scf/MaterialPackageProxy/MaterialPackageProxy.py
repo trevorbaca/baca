@@ -88,13 +88,16 @@ class MaterialPackageProxy(SCFProxyObject):
         self.add_line_to_initializer(self.parent_initializer, import_statement)
 
     def create_ly(self):
-        self.print_not_implemented()
+        #self.print_not_implemented()
+        lily_pond_file = self.import_lily_pond_file_object_from_visualizer()
+        iotools.write_expr_to_ly(lily_pond_file, self.ly)
+        print ''
 
     def create_pdf(self):
-        #self.print_not_implemented() 
         lily_pond_file = self.import_lily_pond_file_object_from_visualizer()
         iotools.write_expr_to_pdf(lily_pond_file, self.pdf)
-
+        print ''
+    
     def create_visualizer(self):
         if not self.has_output_data:
             # this needs to be filled in with something that exists
@@ -108,8 +111,10 @@ class MaterialPackageProxy(SCFProxyObject):
         self.edit_visualizer()
 
     def edit_input_file(self):
-        command = 'vi + %s' % self.input_file
         os.system('vi + %s' % self.input_file)
+
+    def edit_ly(self):
+        os.system('vi %s' % self.ly)
 
     def edit_output_file(self):
         os.system('vi + %s' % self.output_file)
@@ -229,7 +234,6 @@ class MaterialPackageProxy(SCFProxyObject):
                             self.edit_input_file()
                 elif command_string == 'pc':
                     self.create_pdf()
-                    print ''
                 elif command_string == 'ph':
                     print '%s: open pdf' % 'p'.rjust(4)
                     print '%s: create pdf from visualizer' % 'pc'.rjust(4)
@@ -246,7 +250,7 @@ class MaterialPackageProxy(SCFProxyObject):
                         print '%s: edit visualizer' % 'v'.rjust(4)
                         print '%s: edit visualizer; run abjad on visualizer' % 'vj'.rjust(4)
                         print '%s: run abjad on visualizer' % 'vjj'.rjust(4)
-                        print '%s: print visualizer lilypond file object repr' % 'vlf'.rjust(4)
+                        print '%s: print visualizer lily pond file object repr' % 'vlf'.rjust(4)
                         print ''
                     elif command_string == 'vj':
                         self.edit_visualizer()
@@ -272,21 +276,27 @@ class MaterialPackageProxy(SCFProxyObject):
             elif key == 'x':
                 self.exec_statement()
             elif key == 'y':
-                if self.has_ly:
-                    self.open_ly()
-                elif self.has_visualizer:
-                    if self.query('Create LilyPond file from visualizer? '):
-                        self.create_ly()    
-                elif self.has_output_data:
-                    print "Data exists but visualizer doesn't.\n"
-                    if self.query('Create visualizer? '):
-                        self.create_visualizer()
-                elif self.has_input_file:
-                    if self.query('Write material to disk? '):
-                        self.write_input_data_to_output_file()
-                else:
-                    if self.query('Creat input file? '):
-                        self.edit_input_file()
+                if command_string == 'y':
+                    if self.has_ly:
+                        self.edit_ly()
+                    elif self.has_visualizer:
+                        print "LilyPond file doesn't exist."
+                        if self.query('Create it? '):
+                            self.create_ly()    
+                    elif self.has_output_data:
+                        print "Data exists but visualizer doesn't.\n"
+                        if self.query('Create visualizer? '):
+                            self.create_visualizer()
+                    elif self.has_input_file:
+                        if self.query('Write material to disk? '):
+                            self.write_input_data_to_output_file()
+                    else:
+                        if self.query('Creat input file? '):
+                            self.edit_input_file()
+                elif command_string == 'yh':
+                    print '%s: edit lily pond file' % 'y'.rjust(4)
+                    print '%s: create lily pond file from visualizer' % 'yc'.rjust(4)
+                    print ''
             elif key == 'z':
                 self.write_input_data_to_output_file_if_necessary()
             if is_redraw:
