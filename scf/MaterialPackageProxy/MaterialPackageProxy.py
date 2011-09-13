@@ -1,5 +1,6 @@
 from baca.scf.SCFProxyObject import SCFProxyObject
 import os
+import sys
 
 
 class MaterialPackageProxy(SCFProxyObject):
@@ -89,7 +90,6 @@ class MaterialPackageProxy(SCFProxyObject):
 
     def edit_input_file(self):
         command = 'vi + %s' % self.input_file
-        print command
         os.system('vi + %s' % self.input_file)
 
     def edit_output_file(self):
@@ -113,11 +113,23 @@ class MaterialPackageProxy(SCFProxyObject):
         else:
             print 'No data available.'
 
+    def unimport_input_code_module(self):
+        '''Seems like this should be a totaly hack.
+        But seems to work.
+        '''
+        module = '%s.mus.materials.%s.%s_input_code'
+        module %= self.score_package_name, self.material_name, self.material_name
+        command = "if '%s' in sys.modules: del(sys.modules['%s'])" % (module, module)
+        exec(command)
+
     def get_output_preamble_lines(self):
+        self.unimport_input_code_module()
         command = 'from %s.mus.materials.%s.%s_input_code import output_preamble_lines'
         command %= self.score_package_name, self.material_name, self.material_name
         try:
             exec(command)
+            # to keep list from persisting between multiple calls to this method
+            output_preamble_lines = list(output_preamble_lines)
             output_preamble_lines.append('\n')
         except ImportError:
             output_preamble_lines = []
@@ -128,14 +140,14 @@ class MaterialPackageProxy(SCFProxyObject):
         while True:
             is_redraw = False
             if is_first_pass:
-                self.print_menu_title('%s - %s' % (self.score_title, self.material_name.replace('_', ' ')))
+                self.print_menu_title('%s - %s' % (
+                    self.score_title, self.material_name.replace('_', ' ')))
             named_pairs = [
                 ('i', 'input'), 
                 ('o', 'output'), 
                 ('p', 'pdf'), 
                 ('r', 'rename'), 
                 ('v', 'visualizer'), 
-                ('w', 'write'), 
                 ('y', 'ly')]
             kwargs = {'named_pairs': named_pairs, 'show_options': is_first_pass}
             command_string, menu_value = self.display_menu(**kwargs)
@@ -147,17 +159,26 @@ class MaterialPackageProxy(SCFProxyObject):
             elif key == 'i':
                 if command_string == 'i':
                     self.edit_input_file()
+                elif command_string == 'ih':
+                    print '  i: edit input file'
+                    print ' ij: edit input file; run abjad on input file'
+                    print 'ijj: run abjad on input file'
+                    print ''
                 elif command_string == 'ij':
                     self.edit_input_file()
                     self.run_abjad_on_input_file()
                 elif command_string == 'ijj':
                     self.run_abjad_on_input_file()                    
             elif key == 'o':
-                if 1 < len(command_string) and command_string[1] == 'w':
+                if command_string == 'o':
+                    self.edit_output_file()
+                elif command_string == 'oh':
+                    print '%s: edit output file' % 'o'.rjust(4)
+                    print '%s: write material to output file' % 'ow'.rjust(4)
+                    print ''
+                elif command_string == 'ow':
                     self.write_material_to_output_file()
                     print ''
-                else:
-                    self.edit_output_file()
             elif key == 'p':
                 if self.has_pdf:
                     self.open_pdf()
