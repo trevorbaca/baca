@@ -4,10 +4,6 @@ import os
 import sys
 
 
-## TODO: implement 
-##       create_ly_and_pdf_from_visualizer
-##       create_ly_and_pdf_from_visualizer_if_necessary
-
 class MaterialPackageProxy(SCFProxyObject):
 
     def __init__(self, score_package_name, material_name):
@@ -89,30 +85,29 @@ class MaterialPackageProxy(SCFProxyObject):
         import_statement = 'from %s import %s\n' % (self.material_name, self.material_name)
         self.add_line_to_initializer(self.parent_initializer, import_statement)
 
-    def create_ly_from_visualizer(self):
+    def create_ly_and_pdf_from_visualizer(self, is_forced = False):
         lilypond_file = self.import_lilypond_file_object_from_visualizer()
-        iotools.write_expr_to_ly(lilypond_file, self.ly)
-        print ''
-
-    def create_ly_from_visualizer_if_necessary(self):
-        lilypond_file = self.import_lilypond_file_object_from_visualizer()
-        if not self.lilypond_file_format_is_equal_to_visualizer_ly(lilypond_file):
+        if is_forced or not self.lilypond_file_format_is_equal_to_visualizer_ly(lilypond_file):
             iotools.write_expr_to_ly(lilypond_file, self.ly)
-        else:
-            print 'LilyPond file content is the same. New LilyPond file not necessary.'
-        print ''
-
-    def create_pdf_from_visualizer(self):
-        lilypond_file = self.import_lilypond_file_object_from_visualizer()
-        iotools.write_expr_to_pdf(lilypond_file, self.pdf)
-        print ''
-
-    def create_pdf_from_visualizer_if_necessary(self):
-        lilypond_file = self.import_lilypond_file_object_from_visualizer()
-        if not self.lilypond_file_format_is_equal_to_visualizer_ly(lilypond_file):
             iotools.write_expr_to_pdf(lilypond_file, self.pdf)
         else:
-            print 'LilyPond file content is the same. New PDF not necessary.'
+            print 'LilyPond file is the same. (LilyPond file and PDF preserved.)'
+        print ''
+        
+    def create_ly_from_visualizer(self, is_forced = False):
+        lilypond_file = self.import_lilypond_file_object_from_visualizer()
+        if is_forced or not self.lilypond_file_format_is_equal_to_visualizer_ly(lilypond_file):
+            iotools.write_expr_to_ly(lilypond_file, self.ly)
+        else:
+            print 'LilyPond file is the same. (LilyPond file preserved.)'
+        print ''
+
+    def create_pdf_from_visualizer(self, is_forced = False):
+        lilypond_file = self.import_lilypond_file_object_from_visualizer()
+        if is_forced or not self.lilypond_file_format_is_equal_to_visualizer_ly(lilypond_file):
+            iotools.write_expr_to_pdf(lilypond_file, self.pdf)
+        else:
+            print 'LilyPond file is the same. (PDF preserved.)'
         print ''
 
     def create_visualizer(self):
@@ -150,16 +145,16 @@ class MaterialPackageProxy(SCFProxyObject):
             raise Exception('eponymous data must be kept in all I/O modules at all times.')
     
     def import_lilypond_file_object_from_visualizer(self):
-        #print 'Importing LilyPond file object from visualizer ...'
         self.unimport_visualization_module()
-        command = 'from %s import lily_file' % self.visualization_module_name 
+        self.unimport_output_module()
+        command = 'from %s import lilypond_file' % self.visualization_module_name 
         exec(command)
-        return lily_file
+        return lilypond_file
         
     def import_material_from_output_file(self):
         self.unimport_output_module_hierarchy()
         try:
-            exec('from %s.mus.materials import %s' % (self.score_package_name, self.material_name))
+            exec('from %s import %s' % (self.materials_module_name, self.material_name))
             exec('result = %s' % self.material_name)
             return result
         except ImportError as e:
@@ -167,14 +162,14 @@ class MaterialPackageProxy(SCFProxyObject):
 
     def get_output_preamble_lines(self):
         self.unimport_input_module()
-        command = 'from %s.mus.materials.%s.%s_input import output_preamble_lines'
-        command %= self.score_package_name, self.material_name, self.material_name
+        command = 'from %s import output_preamble_lines' % self.input_module_name
         try:
             exec(command)
             # to keep list from persisting between multiple calls to this method
             output_preamble_lines = list(output_preamble_lines)
             output_preamble_lines.append('\n')
-        except ImportError:
+        except ImportError as e:
+            print e
             output_preamble_lines = []
         return output_preamble_lines
 
@@ -199,7 +194,51 @@ class MaterialPackageProxy(SCFProxyObject):
         os.remove(temp_ly_file)
         trimmed_visualizer_ly_lines = self.trim_ly_lines(self.ly)
         return trimmed_temp_ly_file_lines == trimmed_visualizer_ly_lines
-    
+
+    def manage_input(self, command_string):
+        if command_string == 'i':
+            self.edit_input_file()
+        elif command_string == 'id':
+            print repr(self.import_material_from_input_file())
+            print ''
+        elif command_string == 'ih':
+            print '%s: edit input file' % 'i'.rjust(4)
+            print '%s: display input data' % 'id'.rjust(4)
+            print '%s: edit input file and run abjad on input file' % 'ij'.rjust(4)
+            print ''
+        elif command_string == 'ij':
+            self.edit_input_file()
+            self.run_abjad_on_input_file()
+
+    def manage_ly(self, command_string):
+        if command_string == 'l':
+            if self.has_ly:
+                self.edit_ly()
+            elif self.has_visualizer:
+                print "LilyPond file doesn't exist."
+                if self.query('Create it? '):
+                    self.create_ly_from_visualizer()    
+            elif self.has_output_data:
+                print "Data exists but visualizer doesn't.\n"
+                if self.query('Create visualizer? '):
+                    self.create_visualizer()
+            elif self.has_input_file:
+                if self.query('Write material to disk? '):
+                    self.write_input_data_to_output_file(is_forced = True)
+            else:
+                if self.query('Creat input file? '):
+                    self.edit_input_file()
+        elif command_string == 'lw':
+            self.create_ly_from_visualizer(is_forced = True)
+        elif command_string == 'lwo':
+            self.create_ly_from_visualizer(is_forced = True)
+            self.edit_ly()
+        elif command_string == 'lh':
+            print '%s: open ly' % 'l'.rjust(4)
+            print '%s: write ly' % 'lw'.rjust(4)
+            print '%s: write ly and open' % 'lwo'.rjust(4)
+            print ''
+
     def manage_material(self):
         is_first_pass = True
         while True:
@@ -209,14 +248,17 @@ class MaterialPackageProxy(SCFProxyObject):
                     self.score_title, self.material_name.replace('_', ' ')))
             named_pairs = [
                 ('i', 'input'), 
+                ('l', 'ly'),
                 ('o', 'output'), 
                 ('p', 'pdf'), 
-                ('r', 'rename'), 
                 ('v', 'visualizer'), 
-                ('y', 'ly'),
-                ('z', 'regenerate'),
                 ]
-            kwargs = {'named_pairs': named_pairs, 'show_options': is_first_pass}
+            secondary_named_pairs = [
+                ('r', 'rename'), 
+                ('z', 'regenerate'),
+            ]
+            kwargs = {'named_pairs': named_pairs, 'secondary_named_pairs': secondary_named_pairs}
+            kwargs.update({'show_options': is_first_pass})
             command_string, menu_value = self.display_menu(**kwargs)
             key = command_string[0]
             if key == 'b':
@@ -224,132 +266,106 @@ class MaterialPackageProxy(SCFProxyObject):
             elif key == 'd':
                 is_redraw = True
             elif key == 'i':
-                if command_string == 'i':
-                    self.edit_input_file()
-                elif command_string == 'id':
-                    print repr(self.import_material_from_input_file())
-                    print ''
-                elif command_string == 'ih':
-                    print '%s: edit input file' % 'i'.rjust(4)
-                    print '%s: print input data repr' % 'id'.rjust(4)
-                    print '%s: edit input file; run abjad on input file' % 'ij'.rjust(4)
-                    print '%s: run abjad on input file' % 'ijj'.rjust(4)
-                    print ''
-                elif command_string == 'ij':
-                    self.edit_input_file()
-                    self.run_abjad_on_input_file()
-                elif command_string == 'ijj':
-                    self.run_abjad_on_input_file()                    
+                self.manage_input(command_string)
             elif key == 'o':
-                if command_string == 'o':
-                    self.edit_output_file()
-                elif command_string == 'od':
-                    print repr(self.import_material_from_output_file())
-                    print ''
-                elif command_string == 'oh':
-                    print '%s: edit output file' % 'o'.rjust(4)
-                    print '%s: print output data repr' % 'od'.rjust(4)
-                    print '%s: write material to output file' % 'ow'.rjust(4)
-                    print ''
-                elif command_string == 'ow':
-                    self.write_input_data_to_output_file()
-                    print ''
+                self.manage_output(command_string)
             elif key == 'p':
-                if command_string == 'p':
-                    if self.has_pdf:
-                        self.open_pdf()
-                    elif self.has_visualizer:
-                        if self.query('Create PDF from visualizer? '):
-                            self.create_pdf_from_visualizer()
-                    elif self.has_output_data:
-                        print "Data exists but visualizer doesn't.\n"
-                        if self.query('Create visualizer? '):
-                            self.create_visualizer()
-                    elif self.has_input_file:
-                        if self.query('Write material to disk? '):
-                            self.write_input_data_to_output_file()
-                    else:
-                        if self.query('Create input file? '):
-                            self.edit_input_file()
-                elif command_string == 'pc':
-                    self.create_pdf_from_visualizer()
-                elif command_string == 'pcn':
-                    self.create_pdf_from_visualizer_if_necessary()
-                elif command_string == 'ph':
-                    print '%s: open pdf' % 'p'.rjust(4)
-                    print '%s: create pdf from visualizer' % 'pc'.rjust(4)
-                    print '%s: create pdf from visualizer if necessary' % 'pcn'.rjust(4)
-                    print ''
+                self.manage_pdf(command_string)
             elif key == 'q':
                 raise SystemExit
             elif key == 'r':
                 self.rename_material()
             elif key == 'v':
-                if self.has_visualizer:
-                    if command_string == 'v':
-                        self.edit_visualizer()
-                    elif command_string == 'vh':
-                        print '%s: edit visualizer' % 'v'.rjust(4)
-                        print '%s: edit visualizer; run abjad on visualizer' % 'vj'.rjust(4)
-                        print '%s: run abjad on visualizer' % 'vjj'.rjust(4)
-                        print '%s: print visualizer lilypond file object repr' % 'vlf'.rjust(4)
-                        print ''
-                    elif command_string == 'vj':
-                        self.edit_visualizer()
-                        self.run_abjad_on_visualizer()
-                    elif command_string == 'vjj':
-                        self.run_abjad_on_visualizer()
-                    elif command_string == 'vlf':
-                        print repr(self.import_lilypond_file_object_from_visualizer())
-                        print ''
-                elif self.has_output_data:
-                    print "Data exists but visualizer doesn't.\n"
-                    if self.query('Create visualizer? '):
-                        self.create_visualizer()
-                elif self.has_input_file:
-                    if self.query('Write material to disk? '):
-                        self.write_input_data_to_output_file()
-                else:
-                    if self.query('Create input file? '):
-                        self.edit_input_file()
-            elif key == 'w':
-                self.write_input_data_to_output_file()
-                print ''
+                self.manage_visualizer(command_string)
             elif key == 'x':
                 self.exec_statement()
-            elif key == 'y':
-                if command_string == 'y':
-                    if self.has_ly:
-                        self.edit_ly()
-                    elif self.has_visualizer:
-                        print "LilyPond file doesn't exist."
-                        if self.query('Create it? '):
-                            self.create_ly_from_visualizer()    
-                    elif self.has_output_data:
-                        print "Data exists but visualizer doesn't.\n"
-                        if self.query('Create visualizer? '):
-                            self.create_visualizer()
-                    elif self.has_input_file:
-                        if self.query('Write material to disk? '):
-                            self.write_input_data_to_output_file()
-                    else:
-                        if self.query('Creat input file? '):
-                            self.edit_input_file()
-                elif command_string == 'yc':
-                    self.create_ly_from_visualizer()
-                elif command_string == 'ycn':
-                    self.create_ly_from_visualizer_if_necessary()
-                elif command_string == 'yh':
-                    print '%s: edit lilypond file' % 'y'.rjust(4)
-                    print '%s: create lilypond file from visualizer' % 'yc'.rjust(4)
-                    print '%s: create lilypond file from visualizer if necessary' % 'ycn'.rjust(4)
-                    print ''
+            elif key == 'l':
+                self.manage_ly(command_string)
             elif key == 'z':
-                self.write_input_data_to_output_file_if_necessary()
+                self.manage_regeneration(command_string)
             if is_redraw:
                 is_first_pass = True
             else:
                 is_first_pass = False
+
+    def manage_output(self, command_string):
+        if command_string == 'o':
+            self.edit_output_file()
+        elif command_string == 'od':
+            print repr(self.import_material_from_output_file())
+            print ''
+        elif command_string == 'oh':
+            print '%s: open output file' % 'o'.rjust(4)
+            print '%s: display output data' % 'od'.rjust(4)
+            print '%s: write output data' % 'ow'.rjust(4)
+            print ''
+        elif command_string == 'ow':
+            self.write_input_data_to_output_file(is_forced = True)
+            print ''
+
+    def manage_pdf(self, command_string):
+        if command_string == 'p':
+            if self.has_pdf:
+                self.open_pdf()
+            elif self.has_visualizer:
+                if self.query('Create PDF from visualizer? '):
+                    self.create_pdf_from_visualizer()
+            elif self.has_output_data:
+                print "Data exists but visualizer doesn't.\n"
+                if self.query('Create visualizer? '):
+                    self.create_visualizer()
+            elif self.has_input_file:
+                if self.query('Write material to disk? '):
+                    self.write_input_data_to_output_file(is_forced = True)
+            else:
+                if self.query('Create input file? '):
+                    self.edit_input_file()
+        elif command_string == 'pw':
+            self.create_pdf_from_visualizer(is_forced = True)
+        elif command_string == 'pwo':
+            self.create_pdf_from_visualizer(is_forced = True)
+            self.open_pdf()
+        elif command_string == 'ph':
+            print '%s: open pdf' % 'p'.rjust(4)
+            print '%s: write pdf ' % 'pw'.rjust(4)
+            print '%s: write pdf and open' % 'pwo'.rjust(4)
+            print ''
+
+    def manage_regeneration(self, command_string):
+        if command_string == 'z':
+            self.regenerate_everything(is_forced = True)
+        elif command_string == 'zh':
+            print '%s: regenerate everything' % 'z'.rjust(4)
+            print '%s: regenerate everything and open pdf' % 'zo'.rjust(4)
+            print ''
+        elif command_string == 'zo':
+            self.regenerate_everything(is_forced = True)
+            self.open_pdf()
+
+    def manage_visualizer(self, command_string):
+        if self.has_visualizer:
+            if command_string == 'v':
+                self.edit_visualizer()
+            elif command_string == 'vh':
+                print '%s: edit visualizer' % 'v'.rjust(4)
+                print '%s: edit visualizer and run abjad on visualizer' % 'vj'.rjust(4)
+                print '%s: run abjad on visualizer' % 'vjj'.rjust(4)
+                print ''
+            elif command_string == 'vj':
+                self.edit_visualizer()
+                self.run_abjad_on_visualizer()
+            elif command_string == 'vjj':
+                self.run_abjad_on_visualizer()
+        elif self.has_output_data:
+            print "Data exists but visualizer doesn't.\n"
+            if self.query('Create visualizer? '):
+                self.create_visualizer()
+        elif self.has_input_file:
+            if self.query('Write material to disk? '):
+                self.write_input_data_to_output_file(is_forced = True)
+        else:
+            if self.query('Create input file? '):
+                self.edit_input_file()
 
     def open_pdf(self):
         command = 'open %s' % self.pdf
@@ -365,6 +381,11 @@ class MaterialPackageProxy(SCFProxyObject):
         if not material_name.startswith(self.score_package_name + '_'):
             material_name = '%s_%s' % (self.score_package_name, material_name)
         return material_name
+
+    def regenerate_everything(self, is_forced = False):
+        is_changed = self.write_input_data_to_output_file(is_forced = is_forced)
+        is_changed = self.create_ly_and_pdf_from_visualizer(is_forced = (is_changed or is_forced))
+        return is_changed
 
     def rename_material(self):
         print 'current material name: %s' % self.material_name
@@ -396,8 +417,7 @@ class MaterialPackageProxy(SCFProxyObject):
                     command = 'svn mv %s %s' % (old_path_name, new_path_name)
                     os.system(command)
             # rename output data
-            new_output_data = '%s_output.py' % new_material_name
-            new_output_data = os.path.join(new_package_directory, new_output_data)
+            new_output_data = os.path.join(new_package_directory, 'output.py')
             self.globally_replace_in_file(new_output_data, self.material_name, new_material_name)
             print ''
             # commit
@@ -432,9 +452,11 @@ class MaterialPackageProxy(SCFProxyObject):
 
     def run_abjad_on_input_file(self):
         os.system('abjad %s' % self.input_file)
+        print ''
 
     def run_abjad_on_visualizer(self):
         os.system('abjad %s' % self.visualizer)
+        print ''
 
     def unimport_input_module(self):
         self.remove_module_name_from_sys_modules(self.input_module_name)
@@ -459,7 +481,7 @@ class MaterialPackageProxy(SCFProxyObject):
     def unimport_visualization_module(self):
         self.remove_module_name_from_sys_modules(self.visualization_module_name)
 
-    def write_input_data_to_output_file(self):
+    def _write_input_data_to_output_file(self):
         self.remove_material_from_materials_initializer()
         self.overwrite_output_file()
         output_file = file(self.output_file, 'w')
@@ -470,11 +492,12 @@ class MaterialPackageProxy(SCFProxyObject):
         output_file.write(output_line)
         output_file.close()
         self.add_material_to_materials_initializer()
-        print 'Output written to %s_output.py.' % self.material_name
+        print "Material 'input.py' written to 'output.py' ..."
 
-    def write_input_data_to_output_file_if_necessary(self):
-        if self.import_material_from_input_file() == self.import_material_from_output_file():
-            print 'Input data equals output data; no material written to disk.'
+    def write_input_data_to_output_file(self, is_forced = False):
+        is_changed = self.import_material_from_input_file() != self.import_material_from_output_file()
+        if is_changed or is_forced:
+            self._write_input_data_to_output_file()
         else:
-            self.write_input_data_to_output_file()
-        print ''
+            print 'Input data equals output data. (Output data preserved.)'
+        return is_changed

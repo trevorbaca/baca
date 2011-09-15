@@ -51,12 +51,15 @@ class SCFProxyObject(object):
         return True
 
     def display_menu(self, values_to_number = None, named_pairs = None, 
-        indent_level = 0, is_nearly = True, show_options = True):
+        secondary_named_pairs = None, indent_level = 0, is_nearly = True, show_options = True):
         if values_to_number is None:
             values_to_number = []
         if named_pairs is None:
             named_pairs = []
         named_pairs.sort()
+        if secondary_named_pairs is None:
+            secondary_named_pairs = []
+        secondary_named_pairs.sort()
         number_keys = range(1, len(values_to_number) + 1)
         number_keys = [str(x) for x in number_keys]
         numbered_pairs = zip(number_keys, values_to_number)
@@ -81,6 +84,8 @@ class SCFProxyObject(object):
             ubiquitous_pairs = self.list_nearly_ubiquitous_menu_pairs()
         else:
             ubiquitous_pairs = self.list_ubiquitous_menu_pairs()
+        ubiquitous_pairs.extend(secondary_named_pairs)
+        ubiquitous_pairs.sort()
         if show_options:
             self.print_tab(indent_level)
         for key, value in ubiquitous_pairs:
