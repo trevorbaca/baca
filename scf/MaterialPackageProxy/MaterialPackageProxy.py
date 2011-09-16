@@ -54,6 +54,10 @@ class MaterialPackageProxy(SCFProxyObject):
     @property
     def has_pdf(self):
         return os.path.exists(self.pdf)
+
+    @property
+    def has_score_definition(self):
+        return bool(self.import_score_definition_from_visualizer())
     
     @property
     def has_visualizer(self):
@@ -90,7 +94,7 @@ class MaterialPackageProxy(SCFProxyObject):
         self.add_line_to_initializer(self.parent_initializer, import_statement)
 
     def create_ly_and_pdf_from_visualizer(self, is_forced = False):
-        lilypond_file = self.import_lilypond_file_object_from_visualizer()
+        lilypond_file = self.import_score_definition_from_visualizer()
         if is_forced or not self.lilypond_file_format_is_equal_to_visualizer_ly(lilypond_file):
             iotools.write_expr_to_ly(lilypond_file, self.ly)
             iotools.write_expr_to_pdf(lilypond_file, self.pdf)
@@ -99,7 +103,7 @@ class MaterialPackageProxy(SCFProxyObject):
         print ''
         
     def create_ly_from_visualizer(self, is_forced = False):
-        lilypond_file = self.import_lilypond_file_object_from_visualizer()
+        lilypond_file = self.import_score_definition_from_visualizer()
         if is_forced or not self.lilypond_file_format_is_equal_to_visualizer_ly(lilypond_file):
             iotools.write_expr_to_ly(lilypond_file, self.ly)
         else:
@@ -107,7 +111,7 @@ class MaterialPackageProxy(SCFProxyObject):
         print ''
 
     def create_pdf_from_visualizer(self, is_forced = False):
-        lilypond_file = self.import_lilypond_file_object_from_visualizer()
+        lilypond_file = self.import_score_definition_from_visualizer()
         if is_forced or not self.lilypond_file_format_is_equal_to_visualizer_ly(lilypond_file):
             iotools.write_expr_to_pdf(lilypond_file, self.pdf)
         else:
@@ -147,7 +151,9 @@ class MaterialPackageProxy(SCFProxyObject):
             print e
             raise Exception('eponymous data must be kept in all I/O modules at all times.')
     
-    def import_lilypond_file_object_from_visualizer(self):
+    def import_score_definition_from_visualizer(self):
+        if not self.has_visualizer:
+            return None
         self.unimport_visualization_module()
         self.unimport_output_module()
         command = 'from %s import lilypond_file' % self.visualization_module_name 
@@ -488,7 +494,26 @@ class MaterialPackageProxy(SCFProxyObject):
             found.append(artifact_name)
         else:
             missing.append(artifact_name)
-        artifact_name = 'ouput file'
+        artifact_name = 'visualizer'
+        if self.has_visualizer:
+            found.append(artifact_name)
+        else:
+            missing.append(artifact_name)
+        artifact_name = 'score definition'
+        if self.has_score_definition:
+            found.append(artifact_name)
+        else:
+            missing.append(artifact_name)
+        artifact_name = 'ly'
+        if self.has_ly:
+            found.append(artifact_name)
+        else:
+            missing.append(artifact_name)
+        artifact_name = 'pdf'
+        if self.has_pdf:
+            found.append(artifact_name)
+        else:
+            missing.append(artifact_name)
         if found:
             print 'Found %s.' % ', '.join(found)
         if missing:
