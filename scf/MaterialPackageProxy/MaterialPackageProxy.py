@@ -48,6 +48,10 @@ class MaterialPackageProxy(SCFProxyObject):
         return False
 
     @property
+    def has_output_file(self):
+        return os.path.exists(self.output_file)
+
+    @property
     def has_pdf(self):
         return os.path.exists(self.pdf)
     
@@ -111,12 +115,10 @@ class MaterialPackageProxy(SCFProxyObject):
         print ''
 
     def create_visualizer(self):
-        if not self.has_output_data:
-            # this needs to be filled in with something that exists
-            pass
         file_pointer = file(self.visualizer, 'w')
         file_pointer.write('from abjad import *\n')
-        line = 'from %s_output import %s\n' % (self.material_name, self.material_name)
+        file_pointer.write('from abjad.tools import layouttools\n')
+        line = 'from output import %s\n' % self.material_name
         file_pointer.write(line)
         file_pointer.write('\n\n\n')
         file_pointer.close()
@@ -141,7 +143,8 @@ class MaterialPackageProxy(SCFProxyObject):
             exec(command)
             exec('result = %s' % self.material_name)
             return result
-        except ImportError:
+        except ImportError as e:
+            print e
             raise Exception('eponymous data must be kept in all I/O modules at all times.')
     
     def import_lilypond_file_object_from_visualizer(self):
@@ -165,11 +168,10 @@ class MaterialPackageProxy(SCFProxyObject):
         command = 'from %s import output_preamble_lines' % self.input_module_name
         try:
             exec(command)
-            # to keep list from persisting between multiple calls to this method
+            # keep list from persisting between multiple calls to this method
             output_preamble_lines = list(output_preamble_lines)
             output_preamble_lines.append('\n')
-        except ImportError as e:
-            print e
+        except ImportError:
             output_preamble_lines = []
         return output_preamble_lines
 
@@ -255,6 +257,7 @@ class MaterialPackageProxy(SCFProxyObject):
                 ]
             secondary_named_pairs = [
                 ('r', 'rename'), 
+                ('s', 'summarize'),
                 ('z', 'regenerate'),
             ]
             kwargs = {'named_pairs': named_pairs, 'secondary_named_pairs': secondary_named_pairs}
@@ -263,8 +266,6 @@ class MaterialPackageProxy(SCFProxyObject):
             key = command_string[0]
             if key == 'b':
                 break
-            elif key == 'd':
-                is_redraw = True
             elif key == 'i':
                 self.manage_input(command_string)
             elif key == 'o':
@@ -277,10 +278,14 @@ class MaterialPackageProxy(SCFProxyObject):
                 self.rename_material()
             elif key == 'v':
                 self.manage_visualizer(command_string)
+            elif key == 'w':
+                is_redraw = True
             elif key == 'x':
                 self.exec_statement()
             elif key == 'l':
                 self.manage_ly(command_string)
+            elif key == 's':
+                self.summarize_material()
             elif key == 'z':
                 self.manage_regeneration(command_string)
             if is_redraw:
@@ -458,6 +463,38 @@ class MaterialPackageProxy(SCFProxyObject):
         os.system('abjad %s' % self.visualizer)
         print ''
 
+    def summarize_material(self):
+        found = []
+        missing = []
+        artifact_name = 'input file'
+        if self.has_input_file:
+            found.append(artifact_name)
+        else:
+            missing.append(artifact_name)
+        material = self.import_material_from_input_file()
+        artifact_name = 'input data'
+        if material is not None:
+            found.append(artifact_name)
+        else:
+            missing.append(artifact_name)
+        artifact_name = 'ouput file'
+        if self.has_output_file:
+            found.append(artifact_name)
+        else:
+            missing.append(artifact_name)
+        material = self.import_material_from_output_file()
+        artifact_name = 'output data'
+        if material is not None:
+            found.append(artifact_name)
+        else:
+            missing.append(artifact_name)
+        artifact_name = 'ouput file'
+        if found:
+            print 'Found %s.' % ', '.join(found)
+        if missing:
+            print 'Missing %s.' % ', '.join(missing)
+        print ''
+        
     def unimport_input_module(self):
         self.remove_module_name_from_sys_modules(self.input_module_name)
 

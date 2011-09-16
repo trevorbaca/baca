@@ -96,13 +96,13 @@ class SCFProxyObject(object):
         if show_options:
             print '\n'
         while True:
-            choice = raw_input('scf> ')
+            response = raw_input('scf> ')
             print ''
-            if choice[0] in all_keys:
+            if response[0] in all_keys:
                 break
         pair_dictionary = dict(zip(number_keys, values_to_number) + named_pairs + ubiquitous_pairs)
-        value = pair_dictionary[choice[0]]
-        return choice, value
+        value = pair_dictionary[response[0]]
+        return response, value
 
     def globally_replace_in_file(self, file_name, old, new):
         file_pointer = file(file_name, 'r')
@@ -131,8 +131,8 @@ class SCFProxyObject(object):
 
     def list_ubiquitous_menu_pairs(self):
         pairs = [
-            ('d', 'redraw'),
             ('q', 'quit'),
+            ('w', 'redraw'),
             ('x', 'exec'),
             ]
         pairs.sort()

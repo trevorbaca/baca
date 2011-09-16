@@ -97,22 +97,24 @@ class ScorePackageProxy(SCFProxyObject):
         material_package_name = '%s_%s' % (self.score_package_name, response)
         print 'package name will be %s.\n' % material_package_name
         self.confirm()
+        print ''
         target = os.path.join(self.materials_directory, material_package_name)
         if os.path.exists(target):
             raise OSError('directory %r already exists.' % target)
         os.mkdir(target)
         initializer = file(os.path.join(target, '__init__.py'), 'w')
-        initializer.write('from %s_output_data import *\n' % material_package_name)
+        initializer.write('from output import *\n')
         initializer.close()
-        input_code = '%s_input_code.py' % material_package_name
-        input_code = file(os.path.join(target, input_code), 'w')
-        input_code.write('')
-        input_code.close()
-        output_data = '%s_output_data.py' % material_package_name
-        output_data = file(os.path.join(target, output_data), 'w')
-        output_data.write('')
-        output_data.close()
-        print '%s created.\n' % material_package_name
+        input_file = file(os.path.join(target, 'input.py'), 'w')
+        input_file.write('%s = None\n' % self.material_name)
+        input_file.write('')
+        input_file.close()
+        output_file = file(os.path.join(target, 'output.py'), 'w')
+        output_file.write('%s = None\n' % self.material_name)
+        output_file.write('')
+        output_file.close()
+        print 'Created %s ...\n' % material_package_name
+        response = raw_input('Press any key to continue.')
 
     def create_score_package_directory_structure(self):
         self.fix_score_package_directory_structure(is_interactive = False)
@@ -236,9 +238,7 @@ class ScorePackageProxy(SCFProxyObject):
                 command_string, menu_value = self.display_menu(**kwargs)
             key = command_string[0]
             result = None
-            if key == 'd':
-                is_redraw = True
-            elif key == 'h':
+            if key == 'h':
                 self.manage_chunks()
             elif key == 'm':
                 if command_string[1:]:
@@ -248,6 +248,8 @@ class ScorePackageProxy(SCFProxyObject):
                 result = self.manage_materials(material_number = material_number)
             elif key == 'q':
                 raise SystemExit
+            elif key == 'w':
+                is_redraw = True
             elif key == 'x':
                 self.exec_statement()
             if is_redraw or result == 'b':
@@ -312,14 +314,15 @@ class ScorePackageProxy(SCFProxyObject):
             key, material_name = self.display_menu(**kwargs)
             if key == 'b':
                 return key
-            elif key == 'd':
-                is_redraw = True
             elif key == 'n':
                 self.create_materials_package()
+                is_redraw = True
             elif key == 'q':
                 raise SystemExit
             elif key == 'r':
                 self.rename_materials_package()
+            elif key == 'w':
+                is_redraw = True
             elif key == 'x':
                 self.exec_statement()
             else:
