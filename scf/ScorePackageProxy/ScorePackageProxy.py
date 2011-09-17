@@ -106,11 +106,11 @@ class ScorePackageProxy(SCFProxyObject):
         initializer.write('from output import *\n')
         initializer.close()
         input_file = file(os.path.join(target, 'input.py'), 'w')
-        input_file.write('%s = None\n' % self.material_name)
+        input_file.write('%s = None\n' % material_package_name)
         input_file.write('')
         input_file.close()
         output_file = file(os.path.join(target, 'output.py'), 'w')
-        output_file.write('%s = None\n' % self.material_name)
+        output_file.write('%s = None\n' % material_package_name)
         output_file.write('')
         output_file.close()
         print 'Created %s ...\n' % material_package_name

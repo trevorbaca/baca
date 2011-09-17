@@ -42,14 +42,8 @@ class SCFProxyObject(object):
             return False
         return True
 
-    def delete(self):
-        if self.is_in_repository
-            self.remove_from_repository()
-        else:
-            self.remove_directory()    
-
-    def display_menu(self, values_to_number = None, named_pairs = None, 
-        secondary_named_pairs = None, indent_level = 0, is_nearly = True, show_options = True,
+    def display_menu(self, values_to_number=None, named_pairs=None, 
+        secondary_named_pairs=None, indent_level=0, is_nearly=True, show_options=True,
         item_width = 9):
         if values_to_number is None:
             values_to_number = []
@@ -175,21 +169,35 @@ class SCFProxyObject(object):
         return response.lower().startswith('y')
 
     def remove_directory(self):
-        print '%s will be removed.' % self.directory_name
-        response = raw_input('ok? ')
-        if self.confirm():
-            command = 'rm -rf %s' % self.directory_name
+        if self.is_in_repository:
+            result = self.remove_versioned_directory()
+        else:
+            result = self.remove_nonversioned_directory()    
+        return result
+
+    def remove_nonversioned_directory(self):
+        print '%s will be removed.\n' % self.directory
+        response = raw_input("Type 'remove' to proceed: ")
+        print ''
+        if response == 'remove':
+            command = 'rm -rf %s' % self.directory
             proc = subprocess.Popen(command, shell=True, stdout=subprocess.PIPE)
             first_line = proc.stdout.readline()
+            print 'Removed %s ...\n' % self.directory
+            return True
+        return False
 
-    def remove_from_repository(self):
-        print '%s will be completely removed from the repository!' % self.directory_name
+    def remove_versioned_directory(self):
+        print '%s will be completely removed from the repository!\n' % self.directory
         response = raw_input("Type 'remove' to proceed: ")
-        if not response == 'remove':
-            return
-        command = 'svn rm %s' % self.directory_name
-        proc = subprocess.Popen(command, shell=True, stdout=subprocess.PIPE)
-        first_line = proc.stdout.readline()
+        print ''
+        if response == 'remove':
+            command = 'svn rm %s' % self.directory
+            proc = subprocess.Popen(command, shell=True, stdout=subprocess.PIPE)
+            first_line = proc.stdout.readline()
+            print 'Removed %s ...\n' % self.directory
+            return True
+        return False
 
     def remove_module_name_from_sys_modules(self, module_name):
         '''Total hack. But works.

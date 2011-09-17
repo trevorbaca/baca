@@ -138,14 +138,23 @@ class MaterialPackageProxy(SCFProxyObject):
     def import_material_from_input_file(self):
         self.unimport_input_module()
         try:
-            command = 'from %s import %s' % (self.input_module_name, self.material_name)
-            exec(command)
+            exec('from %s import %s' % (self.input_module_name, self.material_name))
             exec('result = %s' % self.material_name)
             return result
         except ImportError as e:
-            print e
             raise Exception('eponymous data must be kept in all I/O modules at all times.')
     
+    def import_material_from_output_file(self):
+        self.unimport_output_module_hierarchy()
+        try:
+            # following line has been working
+            #exec('from %s import %s' % (self.materials_module_name, self.material_name))
+            exec('from %s import %s' % (self.output_module_name, self.material_name))
+            exec('result = %s' % self.material_name)
+            return result
+        except ImportError as e:
+            raise Exception('eponymous data must be kept in all I/O modules at all times.')
+
     def import_score_definition_from_visualizer(self):
         if not self.has_visualizer:
             return None
@@ -155,15 +164,6 @@ class MaterialPackageProxy(SCFProxyObject):
         exec(command)
         return lilypond_file
         
-    def import_material_from_output_file(self):
-        self.unimport_output_module_hierarchy()
-        try:
-            exec('from %s import %s' % (self.materials_module_name, self.material_name))
-            exec('result = %s' % self.material_name)
-            return result
-        except ImportError as e:
-            raise Exception('eponymous data must be kept in all I/O modules at all times.')
-
     def get_output_preamble_lines(self):
         self.unimport_input_module()
         command = 'from %s import output_preamble_lines' % self.input_module_name
@@ -269,7 +269,10 @@ class MaterialPackageProxy(SCFProxyObject):
             if key == 'b':
                 break
             elif key == 'd':
-                self.delete_material(command_string)
+                result = self.remove_directory()
+                if result:
+                    response = raw_input('Press any key to continue.')
+                    break
             elif key == 'i':
                 self.manage_input(command_string)
             elif key == 'o':
