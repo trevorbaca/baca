@@ -113,6 +113,13 @@ class ScorePackageProxy(SCFProxyObject):
         output_file.write('%s = None\n' % material_package_name)
         output_file.write('')
         output_file.close()
+        visualizer = file(os.path.join(target, 'visualization.py'), 'w')
+        visualizer.write('from abjad import *\n')
+        visualizer.write('from abjad.tools import layouttools\n')
+        visualizer.write('from output import *\n')
+        visualizer.write('\n\n')
+        visualizer.write('lilypond_file = None\n')
+        visualizer.close()
         print 'Created %s ...\n' % material_package_name
         response = raw_input('Press any key to continue.')
 
