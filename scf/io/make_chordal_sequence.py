@@ -1,7 +1,7 @@
 from abjad.tools import durationtools
 from abjad.tools import iotools
 from abjad.tools import leaftools
-from abjad.tools import lilyfiletools
+from abjad.tools import lilypondfiletools
 from abjad.tools import markuptools
 from abjad.tools import schemetools
 from abjad.tools import scoretools
@@ -48,7 +48,7 @@ def make_chordal_sequence(score_package_name):
     score.override.stem.transparent = True
     scoretools.add_double_bar_to_end_of_score(score)
 
-    lily_file = lilyfiletools.make_basic_lily_file(score)
+    lily_file = lilypondfiletools.make_basic_lily_file(score)
     lily_file.layout_block.ragged_right = True
     lily_file.layout_block.indent = 0
 
