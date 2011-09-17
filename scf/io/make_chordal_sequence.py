@@ -48,14 +48,14 @@ def make_chordal_sequence(score_package_name):
     score.override.stem.transparent = True
     scoretools.add_double_bar_to_end_of_score(score)
 
-    lily_file = lilypondfiletools.make_basic_lily_file(score)
-    lily_file.layout_block.ragged_right = True
-    lily_file.layout_block.indent = 0
+    lilypond_file = lilypondfiletools.make_basic_lilypond_file(score)
+    lilypond_file.layout_block.ragged_right = True
+    lilypond_file.layout_block.indent = 0
 
     score_title = get_score_title(score_package_name)
-    lily_file.header_block.title = markuptools.Markup(score_title)
+    lilypond_file.header_block.title = markuptools.Markup(score_title)
     subtitle = get_next_chordal_sequence_subtitle(score_package_name)
-    lily_file.header_block.subtitle = markuptools.Markup(subtitle)
+    lilypond_file.header_block.subtitle = markuptools.Markup(subtitle)
 
     chordal_sequences_directory = get_chordal_sequences_directory(score_package_name)
     chordal_sequence_name = get_next_chordal_sequence_package_name(score_package_name)
@@ -70,10 +70,10 @@ def make_chordal_sequence(score_package_name):
     data_file.close()
 
     ly_file_name = os.path.join(chordal_sequence_path, chordal_sequence_name + '.ly')
-    iotools.write_expr_to_ly(lily_file, ly_file_name, print_status = False)
+    iotools.write_expr_to_ly(lilypond_file, ly_file_name, print_status = False)
 
     pdf_file_name = os.path.join(chordal_sequence_path, chordal_sequence_name + '.pdf')
-    iotools.write_expr_to_pdf(lily_file, pdf_file_name, print_status = False)
+    iotools.write_expr_to_pdf(lilypond_file, pdf_file_name, print_status = False)
 
     print '%s %s written to disk.\n' % (score_title, subtitle)
 
