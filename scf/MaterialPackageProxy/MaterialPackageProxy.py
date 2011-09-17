@@ -1,6 +1,7 @@
 from abjad.tools import iotools
 from baca.scf.SCFProxyObject import SCFProxyObject
 import os
+import subprocess
 import sys
 
 
@@ -33,6 +34,10 @@ class MaterialPackageProxy(SCFProxyObject):
     ### PUBLIC ATTRIBUTES ###
 
     @property
+    def has_input_data(self):
+        return bool(self.import_material_from_input_file())
+
+    @property
     def has_input_file(self):
         return os.path.exists(self.input_file)
 
@@ -42,10 +47,7 @@ class MaterialPackageProxy(SCFProxyObject):
 
     @property
     def has_output_data(self):
-        if os.path.exists(self.output_file):
-            file_pointer = file(self.output_file, 'r')
-            return bool(file_pointer.readlines())
-        return False
+        return bool(self.import_material_from_output_file())
 
     @property
     def has_output_file(self):
@@ -64,16 +66,9 @@ class MaterialPackageProxy(SCFProxyObject):
         return os.path.exists(self.visualizer)
 
     @property
-    def input_file_has_complete_material_definition(self):
-        try:
-            input_data = self.import_material_from_input_file()
-            return True
-        except ImportError:
-            return False
-
-    @property
-    def output_data(self):
-        return self.import_material_from_output_file()
+    def material_is_in_repository(self):
+        proce
+    
 
     ### PUBLIC METHODS ###
 
@@ -262,6 +257,7 @@ class MaterialPackageProxy(SCFProxyObject):
                 ('v', 'visualizer'), 
                 ]
             secondary_named_pairs = [
+                ('d', 'delete'),
                 ('r', 'rename'), 
                 ('s', 'summarize'),
                 ('z', 'regenerate'),
@@ -272,6 +268,8 @@ class MaterialPackageProxy(SCFProxyObject):
             key = command_string[0]
             if key == 'b':
                 break
+            elif key == 'd':
+                self.delete_material(command_string)
             elif key == 'i':
                 self.manage_input(command_string)
             elif key == 'o':
@@ -477,9 +475,8 @@ class MaterialPackageProxy(SCFProxyObject):
             found.append(artifact_name)
         else:
             missing.append(artifact_name)
-        material = self.import_material_from_input_file()
         artifact_name = 'input data'
-        if material is not None:
+        if self.has_input_data:
             found.append(artifact_name)
         else:
             missing.append(artifact_name)
@@ -488,9 +485,8 @@ class MaterialPackageProxy(SCFProxyObject):
             found.append(artifact_name)
         else:
             missing.append(artifact_name)
-        material = self.import_material_from_output_file()
         artifact_name = 'output data'
-        if material is not None:
+        if self.has_output_data:
             found.append(artifact_name)
         else:
             missing.append(artifact_name)

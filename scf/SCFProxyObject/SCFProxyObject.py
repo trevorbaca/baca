@@ -20,15 +20,7 @@ class SCFProxyObject(object):
 
     @property
     def is_in_repository(self):
-        command = 'svn info %s' % self.directory    
-        proc = subprocess.Popen(command, shell=True, stdout=subprocess.PIPE)
-        first_line = proc.stdout.readline()
-        if first_line.startswith('Path: '):
-            return True
-        elif first_line.startswith('svn: '):
-            return False
-        else:
-            raise ValueError
+        return self.path_is_in_repository(self.directory)
     
     @property
     def parent_directory(self):
@@ -50,8 +42,15 @@ class SCFProxyObject(object):
             return False
         return True
 
+    def delete(self):
+        if self.is_in_repository
+            self.remove_from_repository()
+        else:
+            self.remove_directory()    
+
     def display_menu(self, values_to_number = None, named_pairs = None, 
-        secondary_named_pairs = None, indent_level = 0, is_nearly = True, show_options = True):
+        secondary_named_pairs = None, indent_level = 0, is_nearly = True, show_options = True,
+        item_width = 9):
         if values_to_number is None:
             values_to_number = []
         if named_pairs is None:
@@ -75,22 +74,30 @@ class SCFProxyObject(object):
                 self.print_tab(indent_level)
             for additional_key, additional_value in named_pairs:
                 if show_options:
-                    print '%s: %s ' % (additional_key, additional_value.ljust(8)),
+                    print '%s: %s ' % (additional_key, additional_value.ljust(item_width)),
                 all_keys.append(additional_key)
                 all_values.append(additional_value)
+            if show_options:
+                print ''
+        if secondary_named_pairs:
+            if show_options:
+                self.print_tab(indent_level)
+            for key, value in secondary_named_pairs:
+                if show_options:
+                    print '%s: %s ' % (key, value.ljust(item_width)),
+                all_keys.append(key)
+                all_values.append(value)
             if show_options:
                 print ''
         if is_nearly:
             ubiquitous_pairs = self.list_nearly_ubiquitous_menu_pairs()
         else:
             ubiquitous_pairs = self.list_ubiquitous_menu_pairs()
-        ubiquitous_pairs.extend(secondary_named_pairs)
-        ubiquitous_pairs.sort()
         if show_options:
             self.print_tab(indent_level)
         for key, value in ubiquitous_pairs:
             if show_options:
-                print '%s: %s ' % (key, value.ljust(8)),
+                print '%s: %s ' % (key, value.ljust(item_width)),
             all_keys.append(key)
             all_values.append(value)
         if show_options:
@@ -100,7 +107,8 @@ class SCFProxyObject(object):
             print ''
             if response[0] in all_keys:
                 break
-        pair_dictionary = dict(zip(number_keys, values_to_number) + named_pairs + ubiquitous_pairs)
+        pair_dictionary = dict(zip(number_keys, values_to_number) + 
+            named_pairs + secondary_named_pairs + ubiquitous_pairs)
         value = pair_dictionary[response[0]]
         return response, value
 
@@ -142,6 +150,15 @@ class SCFProxyObject(object):
         quit_regex = re.compile(r'quit\(\s*\)|[q]')
         return quit_regex.match(string)
 
+    def path_is_in_repository(self, path_name):
+        command = 'svn st %s' % path_name
+        proc = subprocess.Popen(command, shell=True, stdout=subprocess.PIPE)
+        first_line = proc.stdout.readline()
+        if not first_line.startswith('?'):
+            return True
+        else:
+            return False
+
     def print_menu_title(self, menu_title):
         self.clear_terminal()
         print menu_title
@@ -156,6 +173,23 @@ class SCFProxyObject(object):
     def query(self, prompt):
         response = raw_input(prompt)
         return response.lower().startswith('y')
+
+    def remove_directory(self):
+        print '%s will be removed.' % self.directory_name
+        response = raw_input('ok? ')
+        if self.confirm():
+            command = 'rm -rf %s' % self.directory_name
+            proc = subprocess.Popen(command, shell=True, stdout=subprocess.PIPE)
+            first_line = proc.stdout.readline()
+
+    def remove_from_repository(self):
+        print '%s will be completely removed from the repository!' % self.directory_name
+        response = raw_input("Type 'remove' to proceed: ")
+        if not response == 'remove':
+            return
+        command = 'svn rm %s' % self.directory_name
+        proc = subprocess.Popen(command, shell=True, stdout=subprocess.PIPE)
+        first_line = proc.stdout.readline()
 
     def remove_module_name_from_sys_modules(self, module_name):
         '''Total hack. But works.
