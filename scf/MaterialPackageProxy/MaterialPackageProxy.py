@@ -198,6 +198,9 @@ class MaterialPackageProxy(SCFProxyObject):
         trimmed_visualizer_ly_lines = self.trim_ly_lines(self.ly)
         return trimmed_temp_ly_file_lines == trimmed_visualizer_ly_lines
 
+    def make_material_interactively(self, command_string):
+        self.display_menu()
+
     def manage_input(self, command_string):
         if command_string == 'i':
             self.edit_input_file()
@@ -258,6 +261,7 @@ class MaterialPackageProxy(SCFProxyObject):
                 ('v', 'visualizer'), 
                 ]
             secondary_named_pairs = [
+                ('a', 'make'),
                 ('d', 'delete'),
                 ('r', 'rename'), 
                 ('s', 'summarize'),
@@ -267,7 +271,10 @@ class MaterialPackageProxy(SCFProxyObject):
             kwargs.update({'show_options': is_first_pass})
             command_string, menu_value = self.display_menu(**kwargs)
             key = command_string[0]
-            if key == 'b':
+            if key == 'a':
+                self.make_material_interactively(self, command_string)
+                #break
+            elif key == 'b':
                 break
             elif key == 'd':
                 result = self.remove_directory()
