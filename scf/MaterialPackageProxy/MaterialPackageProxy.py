@@ -247,8 +247,9 @@ class MaterialPackageProxy(SCFProxyObject):
         while True:
             is_redraw = False
             if is_first_pass:
-                self.print_menu_title('%s - %s' % (
-                    self.score_title, self.material_name.replace('_', ' ')))
+                material_name = self.material_name.replace('_', ' ')
+                material_name = material_name[len(self.score_package_name)+1:]
+                self.print_menu_title('%s - %s' % (self.score_title, material_name))
             named_pairs = [
                 ('i', 'input'), 
                 ('l', 'ly'),
