@@ -1,6 +1,7 @@
 from baca.scf.CatalogProxy import CatalogProxy
-from baca.scf.ScorePackageProxy import ScorePackageProxy
 from baca.scf.SCFProxyObject import SCFProxyObject
+from baca.scf.ScorePackageProxy import ScorePackageProxy
+from baca.scf.SharedMaterialsProxy import SharedMaterialsProxy
 import os
 
 
@@ -42,7 +43,9 @@ class StudioProxy(SCFProxyObject):
                 break
             if key == 'm':
                 shared_materials_proxy = SharedMaterialsProxy()
-                shared_materials_proxy.manage_shared_materials(value)
+                result = shared_materials_proxy.manage_shared_materials()
+                if result == 'b':
+                    is_redraw = True
             elif key == 'q':
                 raise SystemExit
             elif key == 'w':
