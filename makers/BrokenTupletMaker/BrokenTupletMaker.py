@@ -1,4 +1,4 @@
-from baca.materials._InteractiveMaterialMaker import _InteractiveMaterialMaker
+from baca.makers._InteractiveMaterialMaker import _InteractiveMaterialMaker
 
 
 class BrokenTupletMaker(_InteractiveMaterialMaker):
