@@ -55,6 +55,13 @@ class CatalogProxy(SCFProxyObject):
             score_titles.append(score_title)
         return score_titles
 
+    def list_score_titles_with_years(self):
+        score_titles_with_years = []
+        for score_package_name, score_title, score_year in self.list_score_info_triples():
+            score_title_with_year = '%s (%s)' % (score_title, score_year)
+            score_titles_with_years.append(score_title_with_year)
+        return score_titles_with_years
+
     def list_materials_packages(self):
         materials_packages = []
         for score_package_name in self.list_well_formed_score_package_names():
@@ -97,3 +104,8 @@ class CatalogProxy(SCFProxyObject):
             return score_year
         except ImportError:
             return None
+
+    def score_title_to_score_package_name(self, score_title):
+        for package_name, title, year in self.list_score_info_triples():
+            if score_title.startswith(title):
+                return package_name

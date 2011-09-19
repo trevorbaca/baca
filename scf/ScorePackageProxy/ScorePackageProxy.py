@@ -241,11 +241,15 @@ class ScorePackageProxy(SCFProxyObject):
                     self.summarize_materials()
                 named_pairs = [('h', 'chunks'), ('m', 'materials')]
                 kwargs = {'named_pairs': named_pairs, 'indent_level': 1}
-                kwargs.update({'is_nearly': False, 'show_options': is_first_pass})
+                #kwargs.update({'is_nearly': False, 'show_options': is_first_pass})
+                kwargs.update({'is_nearly': True, 'show_options': is_first_pass})
                 command_string, menu_value = self.display_menu(**kwargs)
             key = command_string[0]
             result = None
-            if key == 'h':
+            if key == 'b':
+                #break 
+                return 'b'
+            elif key == 'h':
                 self.manage_chunks()
             elif key == 'm':
                 if command_string[1:]:
