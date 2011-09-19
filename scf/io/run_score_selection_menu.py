@@ -1,4 +1,5 @@
 # -*- encoding: utf-8 -*-
+from baca.scf import CatalogProxy
 from score_package_dictionary import score_package_dictionary
 from score_package_number_to_score_package_name import score_package_number_to_score_package_name
 
