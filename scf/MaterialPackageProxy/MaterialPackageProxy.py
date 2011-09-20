@@ -7,20 +7,24 @@ import sys
 
 class MaterialPackageProxy(SCFProxyObject):
 
-    def __init__(self, score_package_name, material_name):
+    def __init__(self, score_package_name, material_name, is_shared_material = False):
         self.score_package_name = score_package_name
         self.material_name_with_spaces = material_name
         material_name = material_name.replace(' ', '_')
         self.material_name = material_name
         self.underscored_material_name = self.material_name.replace(' ', '_')
-        self.directory = os.path.join(os.environ.get('SCORES'), score_package_name)
-        self.directory = os.path.join(self.directory, 'mus', 'materials', self.underscored_material_name)
+        if is_shared_material:
+            self.directory = os.path.join(os.environ.get('BACA'), 'materials', self.underscored_material_name)
+            self.materials_module_name = 'baca.materials'
+        else:
+            self.directory = os.path.join(os.environ.get('SCORES'), score_package_name)
+            self.directory = os.path.join(self.directory, 'mus', 'materials', self.underscored_material_name)
+            self.materials_module_name = '%s.mus.materials' % self.score_package_name
         self.input_file = os.path.join(self.directory, 'input.py')
         self.output_file = os.path.join(self.directory, 'output.py')
         self.visualizer = os.path.join(self.directory, 'visualization.py')
         self.pdf = os.path.join(self.directory, 'visualization.pdf')
         self.ly = os.path.join(self.directory, 'visualization.ly')
-        self.materials_module_name = '%s.mus.materials' % self.score_package_name
         self.material_module_name = '%s.%s' % (self.materials_module_name, self.material_name)
         self.input_module_name = '%s.input' % self.material_module_name
         self.output_module_name = '%s.output' % self.material_module_name
@@ -221,19 +225,22 @@ class MaterialPackageProxy(SCFProxyObject):
             if self.has_ly:
                 self.edit_ly()
             elif self.has_visualizer:
-                print "LilyPond file doesn't exist."
-                if self.query('Create it? '):
+                if self.query('Create LilyPond file from visualizer? '):
                     self.create_ly_from_visualizer()    
+                print ''
             elif self.has_output_data:
                 print "Data exists but visualizer doesn't.\n"
                 if self.query('Create visualizer? '):
                     self.create_visualizer()
+                print ''
             elif self.has_input_file:
                 if self.query('Write material to disk? '):
                     self.write_input_data_to_output_file(is_forced = True)
+                print ''
             else:
                 if self.query('Creat input file? '):
                     self.edit_input_file()
+                print ''
         elif command_string == 'lw':
             self.create_ly_from_visualizer(is_forced = True)
         elif command_string == 'lwo':
@@ -251,7 +258,8 @@ class MaterialPackageProxy(SCFProxyObject):
             is_redraw = False
             if is_first_pass:
                 material_name = self.material_name.replace('_', ' ')
-                material_name = material_name[len(self.score_package_name)+1:]
+                if self.score_package_name:
+                    material_name = material_name[len(self.score_package_name)+1:]
                 self.print_menu_title('%s - %s' % (self.score_title, material_name))
             named_pairs = [
                 ('i', 'input'), 
@@ -330,16 +338,20 @@ class MaterialPackageProxy(SCFProxyObject):
             elif self.has_visualizer:
                 if self.query('Create PDF from visualizer? '):
                     self.create_pdf_from_visualizer()
+                print ''
             elif self.has_output_data:
                 print "Data exists but visualizer doesn't.\n"
                 if self.query('Create visualizer? '):
                     self.create_visualizer()
+                print ''
             elif self.has_input_file:
                 if self.query('Write material to disk? '):
                     self.write_input_data_to_output_file(is_forced = True)
+                print ''
             else:
                 if self.query('Create input file? '):
                     self.edit_input_file()
+                print '' 
         elif command_string == 'pw':
             self.create_pdf_from_visualizer(is_forced = True)
         elif command_string == 'pwo':
