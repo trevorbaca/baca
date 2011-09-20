@@ -60,6 +60,7 @@ class SharedMaterialsProxy(SCFProxyObject,_MaterialPackageMaker):
                 return 'b'
             elif key == 'n':
                 self.create_shared_material_package()
+                is_redraw = True
             elif key == 'q':
                 raise SystemExit
             elif key == 'w':
@@ -73,6 +74,7 @@ class SharedMaterialsProxy(SCFProxyObject,_MaterialPackageMaker):
                     score_package_name, material_name, is_shared_material = True)
                 material_package_proxy.score_title = 'Shared materials'
                 material_package_proxy.manage_material()
+                is_redraw = True
             if is_redraw or result == 'b':
                 is_first_pass = True
             else:

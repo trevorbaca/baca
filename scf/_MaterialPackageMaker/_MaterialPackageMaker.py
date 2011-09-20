@@ -21,23 +21,31 @@ class _MaterialPackageMaker(object):
         if os.path.exists(target):
             raise OSError('directory %r already exists.' % target)
         os.mkdir(target)
+        response = raw_input('Include visualizer? ')
+        print ''
+        if response == 'y':
+            is_visualized_material = True
+        else:
+            is_visualized_material = False
         initializer = file(os.path.join(target, '__init__.py'), 'w')
         initializer.write('from output import *\n')
         initializer.close()
         input_file = file(os.path.join(target, 'input.py'), 'w')
         input_file.write('%s = None\n' % material_package_name)
+        input_file.write('output_preamble_lines = []\n')
         input_file.write('')
         input_file.close()
         output_file = file(os.path.join(target, 'output.py'), 'w')
         output_file.write('%s = None\n' % material_package_name)
         output_file.write('')
         output_file.close()
-        visualizer = file(os.path.join(target, 'visualization.py'), 'w')
-        visualizer.write('from abjad import *\n')
-        visualizer.write('from abjad.tools import layouttools\n')
-        visualizer.write('from output import *\n')
-        visualizer.write('\n\n')
-        visualizer.write('lilypond_file = None\n')
-        visualizer.close()
+        if is_visualized_material:
+            visualizer = file(os.path.join(target, 'visualization.py'), 'w')
+            visualizer.write('from abjad import *\n')
+            visualizer.write('from abjad.tools import layouttools\n')
+            visualizer.write('from output import *\n')
+            visualizer.write('\n\n')
+            visualizer.write('lilypond_file = None\n')
+            visualizer.close()
         print 'Created %s ...\n' % material_package_name
         response = raw_input('Press any key to continue.')

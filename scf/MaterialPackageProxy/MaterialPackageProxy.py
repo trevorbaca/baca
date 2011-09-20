@@ -8,6 +8,7 @@ import sys
 class MaterialPackageProxy(SCFProxyObject):
 
     def __init__(self, score_package_name, material_name, is_shared_material = False):
+        self.help_item_width = 5
         self.score_package_name = score_package_name
         self.material_name_with_spaces = material_name
         material_name = material_name.replace(' ', '_')
@@ -68,11 +69,6 @@ class MaterialPackageProxy(SCFProxyObject):
     @property
     def has_visualizer(self):
         return os.path.exists(self.visualizer)
-
-    @property
-    def material_is_in_repository(self):
-        proce
-    
 
     ### PUBLIC METHODS ###
 
@@ -212,13 +208,17 @@ class MaterialPackageProxy(SCFProxyObject):
             print repr(self.import_material_from_input_file())
             print ''
         elif command_string == 'ih':
-            print '%s: edit input file' % 'i'.rjust(4)
-            print '%s: display input data' % 'id'.rjust(4)
-            print '%s: edit input file and run abjad on input file' % 'ij'.rjust(4)
+            print '%s: edit input file' % 'i'.rjust(self.help_item_width)
+            print '%s: display input data' % 'id'.rjust(self.help_item_width)
+            print '%s: edit input file and run abjad on input file' % 'ij'.rjust(self.help_item_width)
+            print '%s: write input data to output file.' % 'iw'.rjust(self.help_item_width)
             print ''
         elif command_string == 'ij':
             self.edit_input_file()
             self.run_abjad_on_input_file()
+        elif command_string == 'iw':
+            self.write_input_data_to_output_file(is_forced = True)
+            print ''
 
     def manage_ly(self, command_string):
         if command_string == 'l':
@@ -247,9 +247,9 @@ class MaterialPackageProxy(SCFProxyObject):
             self.create_ly_from_visualizer(is_forced = True)
             self.edit_ly()
         elif command_string == 'lh':
-            print '%s: open ly' % 'l'.rjust(4)
-            print '%s: write ly' % 'lw'.rjust(4)
-            print '%s: write ly and open' % 'lwo'.rjust(4)
+            print '%s: open ly' % 'l'.rjust(self.help_item_width)
+            print '%s: write ly' % 'lw'.rjust(self.help_item_width)
+            print '%s: write ly and open' % 'lwo'.rjust(self.help_item_width)
             print ''
 
     def manage_material(self):
@@ -263,11 +263,14 @@ class MaterialPackageProxy(SCFProxyObject):
                 self.print_menu_title('%s - %s' % (self.score_title, material_name))
             named_pairs = [
                 ('i', 'input'), 
-                ('l', 'ly'),
                 ('o', 'output'), 
-                ('p', 'pdf'), 
-                ('v', 'visualizer'), 
                 ]
+            if self.has_visualizer:
+                named_pairs.extend([
+                    ('l', 'ly'),
+                    ('p', 'pdf'), 
+                    ('v', 'visualizer'), 
+                    ])
             secondary_named_pairs = [
                 ('a', 'make'),
                 ('d', 'delete'),
@@ -323,12 +326,8 @@ class MaterialPackageProxy(SCFProxyObject):
             print repr(self.import_material_from_output_file())
             print ''
         elif command_string == 'oh':
-            print '%s: open output file' % 'o'.rjust(4)
-            print '%s: display output data' % 'od'.rjust(4)
-            print '%s: write output data' % 'ow'.rjust(4)
-            print ''
-        elif command_string == 'ow':
-            self.write_input_data_to_output_file(is_forced = True)
+            print '%s: open output file' % 'o'.rjust(self.help_item_width)
+            print '%s: display output data' % 'od'.rjust(self.help_item_width)
             print ''
 
     def manage_pdf(self, command_string):
@@ -358,17 +357,17 @@ class MaterialPackageProxy(SCFProxyObject):
             self.create_pdf_from_visualizer(is_forced = True)
             self.open_pdf()
         elif command_string == 'ph':
-            print '%s: open pdf' % 'p'.rjust(4)
-            print '%s: write pdf ' % 'pw'.rjust(4)
-            print '%s: write pdf and open' % 'pwo'.rjust(4)
+            print '%s: open pdf' % 'p'.rjust(self.help_item_width)
+            print '%s: write pdf ' % 'pw'.rjust(self.help_item_width)
+            print '%s: write pdf and open' % 'pwo'.rjust(self.help_item_width)
             print ''
 
     def manage_regeneration(self, command_string):
         if command_string == 'z':
             self.regenerate_everything(is_forced = True)
         elif command_string == 'zh':
-            print '%s: regenerate everything' % 'z'.rjust(4)
-            print '%s: regenerate everything and open pdf' % 'zo'.rjust(4)
+            print '%s: regenerate everything' % 'z'.rjust(self.help_item_width)
+            print '%s: regenerate everything and open pdf' % 'zo'.rjust(self.help_item_width)
             print ''
         elif command_string == 'zo':
             self.regenerate_everything(is_forced = True)
@@ -379,9 +378,9 @@ class MaterialPackageProxy(SCFProxyObject):
             if command_string == 'v':
                 self.edit_visualizer()
             elif command_string == 'vh':
-                print '%s: edit visualizer' % 'v'.rjust(4)
-                print '%s: edit visualizer and run abjad on visualizer' % 'vj'.rjust(4)
-                print '%s: run abjad on visualizer' % 'vjj'.rjust(4)
+                print '%s: edit visualizer' % 'v'.rjust(self.help_item_width)
+                print '%s: edit visualizer and run abjad on visualizer' % 'vj'.rjust(self.help_item_width)
+                print '%s: run abjad on visualizer' % 'vjj'.rjust(self.help_item_width)
                 print ''
             elif command_string == 'vj':
                 self.edit_visualizer()
@@ -567,13 +566,14 @@ class MaterialPackageProxy(SCFProxyObject):
         self.overwrite_output_file()
         output_file = file(self.output_file, 'w')
         output_preamble_lines = self.get_output_preamble_lines()
-        output_file.write('\n'.join(output_preamble_lines))
+        if output_preamble_lines:
+            output_file.write('\n'.join(output_preamble_lines))
         input_data = self.import_material_from_input_file()
         output_line = '%s = %r' % (self.material_name, input_data)
         output_file.write(output_line)
         output_file.close()
         self.add_material_to_materials_initializer()
-        print "Material 'input.py' written to 'output.py' ..."
+        print "Material in 'input.py' written to 'output.py' ..."
 
     def write_input_data_to_output_file(self, is_forced = False):
         is_changed = self.import_material_from_input_file() != self.import_material_from_output_file()
