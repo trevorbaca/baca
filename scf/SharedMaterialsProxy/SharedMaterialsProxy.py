@@ -1,5 +1,5 @@
-from baca.makers.SargassoMeasureMaker import SargassoMeasureMaker
 from baca.scf._MaterialPackageMaker import _MaterialPackageMaker
+from baca.scf.MakersProxy import MakersProxy
 from baca.scf.MaterialPackageProxy import MaterialPackageProxy
 from baca.scf.SCFProxyObject import SCFProxyObject
 import os
@@ -16,8 +16,9 @@ class SharedMaterialsProxy(SCFProxyObject, _MaterialPackageMaker):
     def create_shared_material_package(self):
         response = raw_input('Make material interactively? ')
         if response == 'y':
-            m = SargassoMeasureMaker()
-            m.main()
+            makers_proxy = MakersProxy()
+            makers_proxy.manage_makers()
+            is_redraw = True
         else:
             return self._create_materials_package(self.shared_materials_directory)
 
