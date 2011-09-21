@@ -44,7 +44,7 @@ class SCFProxyObject(object):
 
     def display_menu(self, values_to_number=None, named_pairs=None, 
         secondary_named_pairs=None, indent_level=0, is_nearly=True, show_options=True,
-        item_width = 9):
+        item_width = 11):
         if values_to_number is None:
             values_to_number = []
         if named_pairs is None:
