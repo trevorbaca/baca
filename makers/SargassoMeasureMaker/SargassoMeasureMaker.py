@@ -15,9 +15,15 @@ class SargassoMeasureMaker(_InteractiveMaterialMaker):
     ### PUBLIC METHODS ###
 
     def conclude(self):
-        print 'Making ended.'
         response = raw_input('Press return to continue.')
 
+    def format_user_input(self, user_input_pairs):
+        formatted_user_input_lines = []
+        for name, value in user_input_pairs:
+            line = '%s = %r' % (name, value)
+            formatted_user_input_lines.append(line)
+        return formatted_user_input_lines
+            
     def get_possible_meter_multipliers(self, multiplied_measure_numerator):
         possible_meter_multipliers = []
         for denominator in range(multiplied_measure_numerator, 2 * multiplied_measure_numerator):
@@ -25,7 +31,7 @@ class SargassoMeasureMaker(_InteractiveMaterialMaker):
             possible_meter_multipliers.append(possible_meter_multiplier)
         return possible_meter_multipliers
 
-    def get_user_input(self):
+    def get_user_input_pairs(self):
 
 #        return (4, [2, 2, 2, 2, 1, 1, 4, 4], 
 #                16, [2, 2, 2, 2, 1, 1, 4, 4, 3, 3, 1, 1, 1, 1],
@@ -33,11 +39,18 @@ class SargassoMeasureMaker(_InteractiveMaterialMaker):
 #                True, True, True,
 #                )
 
-        return (4, [2, 2, 2, 2, 1, 1, 4, 4], 
-                16, [2, 2, 2, 2, 1, 1, 4, 4, 3, 3, 1, 1, 1, 1],
-                durationtools.Duration(66, 8),
-                True, True, True,
-                )
+        result = [
+                ('measure_denominator', 4) ,
+                ('measure_numerator_talea', [2, 2, 2, 2, 1, 1, 4, 4]),
+                ('measure_division_denominator', 16),
+                ('measure_division_talea', [1, 1, 2, 3, 1, 2, 3, 4, 1, 1, 1, 1, 4]),
+                ('total_duration', durationtools.Duration(44, 8)),
+                ('measures_are_scaled', True),
+                ('measures_are_split', True),
+                ('measures_are_shuffled', True),
+                ]
+
+        return result
 
         print 'Welcome to sargasso measure maker.\n'
 
@@ -143,9 +156,12 @@ class SargassoMeasureMaker(_InteractiveMaterialMaker):
 
     def make_material_interactively(self):
         from abjad.tools import iotools
-        measures = self.make_sargasso_measures(*self.get_user_input()) 
+        user_input_pairs = self.get_user_input_pairs()
+        user_input_values = [pair[1] for pair in user_input_pairs]
+        measures = self.make_sargasso_measures(*user_input_values)
         lilypond_file = self.make_lilypond_file(measures) 
         iotools.show(lilypond_file)
+        self.save_material(user_input_pairs, lilypond_file)
         self.conclude()
 
     def make_sargasso_measures(self, measure_denominator, measure_numerator_talea, 
@@ -259,8 +275,12 @@ class SargassoMeasureMaker(_InteractiveMaterialMaker):
         divided_measure_tokens = sequencetools.permute_sequence(divided_measure_tokens, permutation)
         return divided_measure_tokens
 
+    def save_material(self, user_input_pairs, lilypond_score):
+        user_input_lines = self.format_user_input(user_input_pairs)
+        for line in user_input_lines:
+            print line
+        
     def select_meter_multiplier(self, possible_meter_multipliers, measure_index):
         possible_meter_multipliers = sequencetools.CyclicTuple(possible_meter_multipliers)
         meter_multiplier = possible_meter_multipliers[5 * measure_index]
         return meter_multiplier
-
