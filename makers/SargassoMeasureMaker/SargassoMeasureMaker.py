@@ -27,9 +27,17 @@ class SargassoMeasureMaker(_InteractiveMaterialMaker):
 
     def get_user_input(self):
 
+#        return (4, [2, 2, 2, 2, 1, 1, 4, 4], 
+#                16, [2, 2, 2, 2, 1, 1, 4, 4, 3, 3, 1, 1, 1, 1],
+#                durationtools.Duration(66, 8),
+#                True, True, True,
+#                )
+
         return (4, [2, 2, 2, 2, 1, 1, 4, 4], 
                 16, [2, 2, 2, 2, 1, 1, 4, 4, 3, 3, 1, 1, 1, 1],
-                durationtools.Duration(66, 8))
+                durationtools.Duration(66, 8),
+                True, True, True,
+                )
 
         print 'Welcome to sargasso measure maker.\n'
 
@@ -42,54 +50,68 @@ class SargassoMeasureMaker(_InteractiveMaterialMaker):
 
         output_body_lines = []
 
-        response = raw_input('Measure unit duration: ')
-        line = 'measure_unit_duration = Duration(%s)' % response
+        response = raw_input('Measure denominator: ')
+        line = 'measure_denominator = %s' % response
         exec(line)
         output_body_lines.append(line)
         print ''
 
-        response = raw_input('Measure talea: ')
-        line = 'measure_talea = %s' % response
+        response = raw_input('Measure numerator talea: ')
+        line = 'measure_numerator_talea = %s' % response
         exec(line)
         output_body_lines.append(line)
         print ''
 
-        response = raw_input('Repeat talea to weight exactly: ')
-        line = 'weight_of_talea = %s' % response
+        response = raw_input('Measure division denominator: ')
+        line = 'measure_division_denominator = %s' % response
         exec(line)
         output_body_lines.append(line)
         print ''
 
-        line = 'measure_talea = sequencetools.repeat_sequence_to_weight_exactly(measure_talea, weight_of_talea)'
-        exec(line)
-        output_body_lines.append(line)
-
-        print 'Measure talea is now %s.' % measure_talea
-        print ''
-
-        response = raw_input('Division unit duration: ')
-        line = 'division_unit_duration = %s' % response
+        response = raw_input('Measure division talea: ')
+        line = 'measure_division_talea = %s' % response
         exec(line)
         output_body_lines.append(line)
         print ''
 
-        response = raw_input('Division talea: ')
-        line = 'division_talea = %s' % response
+        response = raw_input('Total duration: ')
+        exec('duration = Duration(%s)' % response)
+        line = 'total_duration = %s' % duration
         exec(line)
         output_body_lines.append(line)
         print ''
 
-        line = 'division_talea = sequencetools.repeat_sequence_to_weight_exactly(division_talea, weight_of_talea)'
+        response = raw_input('Scale measures? ')
+        response = response == 'y'
+        line = 'measures_are_scaled = %s' % response
         exec(line)
         output_body_lines.append(line)
         print ''
 
-        for line in output_header_lines:
-            print line
+        response = raw_input('Split measures? ')
+        response = response == 'y'
+        line = 'measures_are_split = %s' % response
+        exec(line)
+        output_body_lines.append(line)
         print ''
+
+        response = raw_input('Shuffle measures? ')
+        response = response == 'y'
+        line = 'measures_are_shuffled = %s' % response
+        exec(line)
+        output_body_lines.append(line)
+        print ''
+
+        #for line in output_header_lines:
+        #    print line
+        #print ''
         for line in output_body_lines:
             print line
         print ''
+
+        return (measure_denominator, measure_numerator_talea, 
+            measure_division_denominator, measure_division_talea, total_duration, 
+            measures_are_scaled, measures_are_split, measures_are_shuffled)
 
     def make_lilypond_file(self, measures):
         from abjad.tools import leaftools
@@ -105,6 +127,7 @@ class SargassoMeasureMaker(_InteractiveMaterialMaker):
         leaf = leaftools.get_leaf_in_expr_with_minimum_prolated_duration(score)
         scheme_moment = schemetools.SchemeMoment(fractions.Fraction(2, 3) * leaf.prolated_duration)
         score.override.bar_number.transparent = True
+        score.override.time_signature.break_visibility = schemetools.SchemeVariable('end-of-line-invisible')
         score.set.proportional_notation_duration = scheme_moment
         measuretools.apply_beam_spanners_to_measures_in_expr(score)
         scoretools.add_double_bar_to_end_of_score(score)
@@ -126,7 +149,8 @@ class SargassoMeasureMaker(_InteractiveMaterialMaker):
         self.conclude()
 
     def make_sargasso_measures(self, measure_denominator, measure_numerator_talea, 
-        measure_division_denominator, measure_division_talea, total_duration):
+        measure_division_denominator, measure_division_talea, total_duration,
+        measures_are_scaled, measures_are_split, measures_are_shuffled):
 
         assert mathtools.is_nonnegative_integer_power_of_two(measure_denominator)
         assert mathtools.is_nonnegative_integer_power_of_two(measure_division_denominator)
@@ -154,42 +178,52 @@ class SargassoMeasureMaker(_InteractiveMaterialMaker):
             measure_divisions, multiplied_measure_numerators)
         #print measure_divisions_by_measure
 
-        meter_multipliers = []
-        for measure_index, multiplied_measure_numerator in enumerate(multiplied_measure_numerators):
-            possible_multipliers = self.get_possible_meter_multipliers(multiplied_measure_numerator)
-            meter_multiplier = self.select_meter_multiplier(possible_multipliers, measure_index)
-            meter_multipliers.append(meter_multiplier)
-        #print meter_multipliers
+        meter_multipliers = [fractions.Fraction(1) for x in measure_divisions_by_measure]
 
-        prolated_measure_numerators = []
-        for meter_multiplier, multiplied_measure_numerator in zip(
-            meter_multipliers, multiplied_measure_numerators):
-            prolated_measure_numerator = multiplied_measure_numerator / meter_multiplier
-            assert mathtools.is_integer_equivalent_number(prolated_measure_numerator)
-            prolated_measure_numerator = int(prolated_measure_numerator)
-            prolated_measure_numerators.append(prolated_measure_numerator)
-        #print prolated_measure_numerators
+        if measures_are_scaled:
 
-        measure_divisions = sequencetools.repeat_sequence_to_weight_exactly(
-            measure_division_talea, sum(prolated_measure_numerators))
-        #print measure_divisions
+            meter_multipliers = []
+            for measure_index, multiplied_measure_numerator in enumerate(multiplied_measure_numerators):
+                possible_multipliers = self.get_possible_meter_multipliers(multiplied_measure_numerator)
+                meter_multiplier = self.select_meter_multiplier(possible_multipliers, measure_index)
+                meter_multipliers.append(meter_multiplier)
+            #print meter_multipliers
 
-        measure_divisions_by_measure = sequencetools.split_sequence_cyclically_by_weights_with_overhang(
-            measure_divisions, prolated_measure_numerators) 
-        #print measure_divisions_by_measure
+            prolated_measure_numerators = []
+            for meter_multiplier, multiplied_measure_numerator in zip(
+                meter_multipliers, multiplied_measure_numerators):
+                prolated_measure_numerator = multiplied_measure_numerator / meter_multiplier
+                assert mathtools.is_integer_equivalent_number(prolated_measure_numerator)
+                prolated_measure_numerator = int(prolated_measure_numerator)
+                prolated_measure_numerators.append(prolated_measure_numerator)
+            #print prolated_measure_numerators
+
+            measure_divisions = sequencetools.repeat_sequence_to_weight_exactly(
+                measure_division_talea, sum(prolated_measure_numerators))
+            #print measure_divisions
+
+            measure_divisions_by_measure = sequencetools.split_sequence_cyclically_by_weights_with_overhang(
+                measure_divisions, prolated_measure_numerators) 
+            #print measure_divisions_by_measure
         
         measure_tokens = zip(meter_multipliers, measure_divisions_by_measure)
         #for x in measure_tokens: print x
 
+        if measures_are_split:
+            ratio = [1, 1]
+        else:
+            ratio = [1]
+
         divided_measure_tokens = []
         for meter_multiplier, measure_divisions in measure_tokens:
-            division_lists = sequencetools.partition_sequence_by_ratio_of_lengths(measure_divisions, [1, 1])
+            division_lists = sequencetools.partition_sequence_by_ratio_of_lengths(measure_divisions, ratio)
             for division_list in division_lists:
                 if division_list:
                     divided_measure_tokens.append((meter_multiplier, division_list))
         #for x in divided_measure_tokens: print x
 
-        divided_measure_tokens = self.permute_divided_measure_tokens(divided_measure_tokens)
+        if measures_are_shuffled:
+            divided_measure_tokens = self.permute_divided_measure_tokens(divided_measure_tokens)
 
         meter_tokens = []
         for meter_multiplier, measure_divisions in divided_measure_tokens:
