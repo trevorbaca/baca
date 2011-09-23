@@ -7,9 +7,6 @@ import os
 
 class StudioProxy(SCFProxyObject):
 
-    def __init__(self):
-        self.baca_directory = os.environ.get('BACA')
-
     ### OVERLOADS ###
 
     def __repr__(self):

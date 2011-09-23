@@ -7,10 +7,6 @@ import os
 
 class SharedMaterialsProxy(SCFProxyObject, _MaterialPackageMaker):
 
-    def __init__(self):
-        self.baca_directory = os.environ.get('BACA')
-        self.shared_materials_directory = os.path.join(self.baca_directory, 'materials')
-
     ### PUBLIC METHODS ###
 
     def create_shared_material_package(self, is_interactive = False):

@@ -7,6 +7,10 @@ import sys
 
 class SCFProxyObject(object):
 
+    def __init__(self):
+        self.baca_directory = os.environ.get('BACA')
+        self.shared_materials_directory = os.path.join(self.baca_directory, 'materials')
+
     ### OVERLOADS ###
 
     def __repr__(self):

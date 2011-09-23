@@ -90,40 +90,6 @@ class ScorePackageProxy(SCFProxyObject, _MaterialPackageMaker):
 
     ### PUBLIC METHODS ###
 
-#    def create_materials_package(self):
-#        response = raw_input('material name: ')
-#        print ''
-#        response = response.lower()
-#        response = response.replace(' ', '_')
-#        material_package_name = '%s_%s' % (self.score_package_name, response)
-#        print 'package name will be %s.\n' % material_package_name
-#        self.confirm()
-#        print ''
-#        target = os.path.join(self.materials_directory, material_package_name)
-#        if os.path.exists(target):
-#            raise OSError('directory %r already exists.' % target)
-#        os.mkdir(target)
-#        initializer = file(os.path.join(target, '__init__.py'), 'w')
-#        initializer.write('from output import *\n')
-#        initializer.close()
-#        input_file = file(os.path.join(target, 'input.py'), 'w')
-#        input_file.write('%s = None\n' % material_package_name)
-#        input_file.write('')
-#        input_file.close()
-#        output_file = file(os.path.join(target, 'output.py'), 'w')
-#        output_file.write('%s = None\n' % material_package_name)
-#        output_file.write('')
-#        output_file.close()
-#        visualizer = file(os.path.join(target, 'visualization.py'), 'w')
-#        visualizer.write('from abjad import *\n')
-#        visualizer.write('from abjad.tools import layouttools\n')
-#        visualizer.write('from output import *\n')
-#        visualizer.write('\n\n')
-#        visualizer.write('lilypond_file = None\n')
-#        visualizer.close()
-#        print 'Created %s ...\n' % material_package_name
-#        response = raw_input('Press any key to continue.')
-
     def create_materials_package(self):
         return self._create_materials_package(self.materials_directory,
             package_prefix = self.score_package_name)

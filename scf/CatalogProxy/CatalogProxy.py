@@ -19,6 +19,16 @@ class CatalogProxy(SCFProxyObject):
             score_package_proxy.fix_score_package_directory_structure()
             score_package_proxy.profile_score_package_directory_structure()
 
+    def get_score_package_name_from_user(self):
+        self.print_menu_title('Select score by number.\n')
+        score_titles_with_years = self.list_score_titles_with_years()
+        kwargs = {}
+        kwargs = {'values_to_number': score_titles_with_years, 'indent_level': 1}
+        kwargs.update({'is_nearly': False})
+        number, score_title = self.display_menu(**kwargs)
+        score_package_name = self.score_title_to_score_package_name(score_title)
+        return score_package_name
+
     def list_score_directories(self):
         score_directories = []
         for score_package_name in self.list_score_package_names():

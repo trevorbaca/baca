@@ -3,6 +3,11 @@ import os
 
 class _MaterialPackageMaker(object):
 
+    def __init__(self):
+        self.baca_directory = os.environ.get('BACA')
+        self.scores_directory = os.environ.get('SCORES')
+        self.shared_materials_directory = os.path.join(self.baca_directory, 'materials')
+
     ### PRIVATE METHODS ###
 
     def _create_materials_package(self, materials_directory, package_prefix = ''):

@@ -5,12 +5,10 @@ from abjad.tools import mathtools
 from abjad.tools import measuretools
 from abjad.tools import sequencetools
 import fractions
+import os
 
 
 class SargassoMeasureMaker(_InteractiveMaterialMaker):
-
-    def __init__(self):
-        pass
 
     ### PUBLIC METHODS ###
 
@@ -30,6 +28,50 @@ class SargassoMeasureMaker(_InteractiveMaterialMaker):
             possible_meter_multiplier = fractions.Fraction(multiplied_measure_numerator, denominator)
             possible_meter_multipliers.append(possible_meter_multiplier)
         return possible_meter_multipliers
+
+    def get_primary_input_lines(self, user_input_pairs):
+        lines = []
+        lines.append('from baca.makers import SargassoMeasureMaker')
+        lines.append('maker = SargassoMeasureMaker()')
+        user_input_names = [pair[0] for pair in user_input_pairs]
+        user_input_string = ', '.join([str(x) for x in user_input_names])
+        line = 'maker.make_sargasso_measures(%s)' % user_input_string
+        lines.append(line)
+        return lines
+            
+    def get_new_material_package_directory_from_user(self):
+        from baca.scf.CatalogProxy import CatalogProxy
+        from baca.scf.SharedMaterialsProxy import SharedMaterialsProxy
+        while True:
+            response = raw_input('Save to shared materials (m)? Or to existing score (s)? ')
+            print ''
+            if response == 'm':
+                score_package_name = None
+                base_directory = self.shared_materials_directory
+                break
+            elif response == 's':
+                catalog_proxy = CatalogProxy()
+                score_package_name = catalog_proxy.get_score_package_name_from_user()
+                base_directory = os.path.join(
+                    self.scores_directory, score_package_name, 'mus', 'materials')
+                break
+        response = raw_input('material name: ')
+        print ''
+        response = response.lower()
+        response = response.replace(' ', '_')
+        if score_package_name is not None:
+            material_package_name = '%s_%s' % (score_package_name, response)
+        else:
+            material_package_name = response
+        print 'package name will be %s\n' % material_package_name
+        response = raw_input('ok? ')
+        if not response == 'y':
+            return
+        print ''
+        target = os.path.join(base_directory, material_package_name)
+        if os.path.exists(target):
+            raise OSError('directory %r already exists.' % target)
+        return target
 
     def get_user_input_pairs(self):
 
@@ -161,7 +203,7 @@ class SargassoMeasureMaker(_InteractiveMaterialMaker):
         measures = self.make_sargasso_measures(*user_input_values)
         lilypond_file = self.make_lilypond_file(measures) 
         iotools.show(lilypond_file)
-        self.save_material(user_input_pairs, lilypond_file)
+        self.write_material_to_disk(user_input_pairs, lilypond_file)
         self.conclude()
 
     def make_sargasso_measures(self, measure_denominator, measure_numerator_talea, 
@@ -275,10 +317,21 @@ class SargassoMeasureMaker(_InteractiveMaterialMaker):
         divided_measure_tokens = sequencetools.permute_sequence(divided_measure_tokens, permutation)
         return divided_measure_tokens
 
-    def save_material(self, user_input_pairs, lilypond_score):
-        user_input_lines = self.format_user_input(user_input_pairs)
-        for line in user_input_lines:
-            print line
+#    def write_material_to_disk(self, user_input_pairs, lilypond_score):
+#        material_package_directory = self.get_new_material_package_directory_from_user()
+#        print material_package_directory
+#        os.mkdir(material_package_directory)
+#        initializer = file(os.path.join(material_package_directory, '__init__.py'), 'w')
+#        initializer.write('from output import *\n')
+#        initializer.close()
+#        user_input_lines = self.format_user_input(user_input_pairs)
+#        input_file = file(os.path.join(material_package_directory, 'input.py'), 'w')
+#        for line in user_input_lines:
+#            input_file.write(line + '\n')
+#        input_file.write('\n')
+#        for line in self.get_primary_input_lines(user_input_pairs):
+#            input_file.write(line + '\n')
+#        input_file.close()
         
     def select_meter_multiplier(self, possible_meter_multipliers, measure_index):
         possible_meter_multipliers = sequencetools.CyclicTuple(possible_meter_multipliers)
