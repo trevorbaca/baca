@@ -144,9 +144,9 @@ class SCFProxyObject(object):
         pairs.sort()
         return pairs
 
-    def matches_quit_regex(self, string):
-        quit_regex = re.compile(r'quit\(\s*\)|[q]')
-        return quit_regex.match(string)
+#    def matches_quit_regex(self, string):
+#        quit_regex = re.compile(r'quit\(\s*\)|[q]')
+#        return quit_regex.match(string)
 
     def path_is_in_repository(self, path_name):
         command = 'svn st %s' % path_name
@@ -217,4 +217,4 @@ class SCFProxyObject(object):
         self.clear_terminal()
 
     def tab(self, n):
-        return 3 * n * ' '
+        return 4 * n * ' '

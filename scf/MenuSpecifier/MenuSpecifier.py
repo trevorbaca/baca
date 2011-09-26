@@ -1,0 +1,191 @@
+class MenuSpecifier(object):
+
+    def __init__(self, menu_title='', items_to_number=None, 
+        sentence_length_items=None, named_pairs=None, secondary_named_pairs=None,
+        include_back=True, indent_level=0, item_width = 11):
+        self.menu_title = menu_title
+        self.items_to_number = items_to_number
+        self.sentence_length_items = sentence_length_items
+        self.named_pairs = named_pairs
+        self.secondary_named_pairs = secondary_named_pairs
+        self.include_back = include_back
+        self.indent_level = indent_level
+        self.item_width = item_width
+
+    ### OVERLOADS ###
+
+    def __repr__(self):
+        return '%s()' % type(self).__name__
+
+    ### PRIVATE METHODS ###
+
+    def _display_footer_items(self, all_keys, all_values):
+        #if self.show_options:
+        if True:
+            self._print_tab(self.indent_level)
+            for key, value in self._get_footer_pairs():
+                print '%s: %s ' % (key, value.ljust(self.item_width)),
+                all_keys.append(key)
+                all_values.append(value)
+            print ''
+        
+    def _display_items_to_number(self, all_keys, all_values):
+        keys = range(1, len(self.items_to_number) + 1)
+        keys = [str(x) for x in keys]
+        pairs = zip(keys, self.items_to_number)
+        #if self.show_options:
+        if True:
+            for key, value in pairs:
+                self._print_tab(self.indent_level),
+                print '%s: %s' % (key, value)
+                all_keys.extend(key)
+                all_values.extend(value)
+            print ''
+
+    def _display_menu_title(self):
+        if self.menu_title:
+            print self.menu_title
+            print ''
+
+    def _display_named_pairs(self, named_pairs, all_keys, all_values):
+        #if self.show_options
+        if True:
+            if named_pairs:
+                self._print_tab(self.indent_level)
+                for key, value in named_pairs:
+                    print '%s: %s ' % (key, value.ljust(self.item_width)),
+                    all_keys.append(key)
+                    all_values.append(value)
+                print ''
+
+    def _display_sentence_length_items(self, all_keys, all_values):
+        #if self.show_options
+        if True:
+            for key, value in self.sentence_length_items:
+                self._print_tab(self.indent_level)
+                print '%s: %s ' % (key, value)
+                all_keys.append(key)
+                all_values.append(value)
+            print ''
+
+    def _get_footer_pairs(self):
+        footer_pairs = [
+            ('q', 'quit'),
+            ('w', 'redraw'),
+            ('x', 'exec'),
+            ]
+        if self.include_back:
+            footer_pairs.append(('b', 'back'))
+        footer_pairs.sort()
+        return footer_pairs
+
+    def _print_tab(self, n):
+        if 0 < n:
+            print self._tab(n),
+
+    def _tab(self, n):
+        return 4 * n * ' '
+
+    ### PUBLIC ATTRIBUTES ###
+    
+    @apply
+    def include_back():
+        def fget(self):
+            return self._include_back
+        def fset(self, include_back):
+            assert isinstance(include_back, type(True))
+            self._include_back = include_back
+        return property(**locals())
+
+    @apply
+    def indent_level():
+        def fget(self):
+            return self._indent_level
+        def fset(self, indent_level):
+            assert isinstance(indent_level, int)
+            self._indent_level = indent_level
+        return property(**locals())
+
+    @apply
+    def item_width():
+        def fget(self):
+            return self._item_width
+        def fset(self, item_width):
+            assert isinstance(item_width, int)
+            self._item_width = item_width
+        return property(**locals())
+
+    @apply
+    def items_to_number():
+        def fget(self):
+            return self._items_to_number
+        def fset(self, items_to_number):
+            if items_to_number is None:
+                self._items_to_number = []
+            else:
+                self._items_to_number = items_to_number
+        return property(**locals())
+
+    @apply
+    def menu_title():
+        def fget(self):
+            return self._menu_title
+        def fset(self, menu_title):
+            assert isinstance(menu_title, str)
+            self._menu_title = menu_title
+        return property(**locals())
+
+    @apply
+    def named_pairs():
+        def fget(self):
+            return self._named_pairs
+        def fset(self, named_pairs):
+            if named_pairs is None:
+                self._named_pairs = []
+            else:
+                self._named_pairs = named_pairs
+        return property(**locals())
+
+    @apply
+    def secondary_named_pairs():
+        def fget(self):
+            return self._secondary_named_pairs
+        def fset(self, secondary_named_pairs):
+            if secondary_named_pairs is None:
+                self._secondary_named_pairs = []
+            else:
+                self._secondary_named_pairs = secondary_named_pairs
+        return property(**locals())
+
+    @apply
+    def sentence_length_items():
+        def fget(self):
+            return self._sentence_length_items
+        def fset(self, sentence_length_items):
+            if sentence_length_items is None:
+                self._sentence_length_items = []
+            else:
+                self._sentence_length_items = sentence_length_items
+        return property(**locals())
+
+    ### PUBLIC METHODS ###
+
+    def display_menu(self):
+        all_keys, all_values = [], []
+        self._display_menu_title()
+        self._display_items_to_number(all_keys, all_values)
+        self._display_sentence_length_items(all_keys, all_values)
+        self._display_named_pairs(self.named_pairs, all_keys, all_values)
+        self._display_named_pairs(self.secondary_named_pairs, all_keys, all_values)
+        self._display_footer_items(all_keys, all_values)
+        print ''
+        while True:
+            response = raw_input('scf> ')
+            print ''
+            if response[0] in all_keys:
+                break
+        # TODO: port following two lines
+        pair_dictionary = dict(zip(number_keys, values_to_number) +
+            named_pairs + secondary_named_pairs + ubiquitous_pairs)
+        value = pair_dictionary[response[0]]
+        return response, value

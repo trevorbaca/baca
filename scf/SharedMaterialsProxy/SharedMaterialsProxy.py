@@ -1,6 +1,7 @@
 from baca.scf._MaterialPackageMaker import _MaterialPackageMaker
 from baca.scf.MakersProxy import MakersProxy
 from baca.scf.MaterialPackageProxy import MaterialPackageProxy
+from baca.scf.MenuSpecifier import MenuSpecifier
 from baca.scf.SCFProxyObject import SCFProxyObject
 import os
 
@@ -55,14 +56,26 @@ class SharedMaterialsProxy(SCFProxyObject, _MaterialPackageMaker):
                 if is_first_pass:
                     self.print_menu_title('Shared materials - main menu\n')
                 material_names = self.list_shared_material_names()
-                named_pairs = [
-                    ('i', 'interactive'),
-                    ('n', 'new'),
+                menu_specifier = MenuSpecifier()
+                menu_specifier.menu_title = 'Shared manterials - main menu'
+                menu_specifier.items_to_number = self.list_shared_material_names
+                menu_specifier.sentence_length_items = [
+                    ('i', 'make new material interactively'),
+                    ('h', 'make new material by hand'),
                     ]
-                kwargs = {'values_to_number': material_names}
-                kwargs.update({'named_pairs': named_pairs, 'indent_level': 1})
-                kwargs.update({'is_nearly': True, 'show_options': is_first_pass})
-                key, value = self.display_menu(**kwargs)
+                menu_specifier.include_back = True
+                menu_specifier.indent_level = 1
+                key, value = menu_specifier.display_menu()
+
+#                named_pairs = [
+#                    ('i', 'make new material interactively'),
+#                    ('h', 'make new material by hand'),
+#                    ]
+#                kwargs = {'values_to_number': material_names}
+#                kwargs.update({'named_pairs': named_pairs, 'indent_level': 1})
+#                kwargs.update({'is_nearly': True, 'show_options': is_first_pass})
+#                key, value = self.display_menu(**kwargs)
+
             result = None
             if key == 'b':
                 return 'b'
