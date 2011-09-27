@@ -1,3 +1,6 @@
+import os
+
+
 class MenuSpecifier(object):
 
     def __init__(self, menu_title='', items_to_number=None, 
@@ -38,8 +41,8 @@ class MenuSpecifier(object):
             for key, value in pairs:
                 self._print_tab(self.indent_level),
                 print '%s: %s' % (key, value)
-                all_keys.extend(key)
-                all_values.extend(value)
+                all_keys.append(key)
+                all_values.append(value)
             print ''
 
     def _display_menu_title(self):
@@ -171,6 +174,7 @@ class MenuSpecifier(object):
     ### PUBLIC METHODS ###
 
     def display_menu(self):
+        os.system('clear')
         all_keys, all_values = [], []
         self._display_menu_title()
         self._display_items_to_number(all_keys, all_values)
@@ -184,8 +188,6 @@ class MenuSpecifier(object):
             print ''
             if response[0] in all_keys:
                 break
-        # TODO: port following two lines
-        pair_dictionary = dict(zip(number_keys, values_to_number) +
-            named_pairs + secondary_named_pairs + ubiquitous_pairs)
+        pair_dictionary = dict(zip(all_keys, all_values))
         value = pair_dictionary[response[0]]
         return response, value

@@ -75,14 +75,8 @@ class SargassoMeasureMaker(_InteractiveMaterialMaker):
 
     def get_user_input_pairs(self):
 
-#        return (4, [2, 2, 2, 2, 1, 1, 4, 4], 
-#                16, [2, 2, 2, 2, 1, 1, 4, 4, 3, 3, 1, 1, 1, 1],
-#                durationtools.Duration(66, 8),
-#                True, True, True,
-#                )
-
         result = [
-                ('measure_denominator', 4) ,
+                ('measure_denominator', 4),
                 ('measure_numerator_talea', [2, 2, 2, 2, 1, 1, 4, 4]),
                 ('measure_division_denominator', 16),
                 ('measure_division_talea', [1, 1, 2, 3, 1, 2, 3, 4, 1, 1, 1, 1, 4]),
@@ -203,7 +197,7 @@ class SargassoMeasureMaker(_InteractiveMaterialMaker):
         measures = self.make_sargasso_measures(*user_input_values)
         lilypond_file = self.make_lilypond_file(measures) 
         iotools.show(lilypond_file)
-        self.write_material_to_disk(user_input_pairs, lilypond_file)
+        #self.write_material_to_disk(user_input_pairs, lilypond_file)
         self.conclude()
 
     def make_sargasso_measures(self, measure_denominator, measure_numerator_talea, 
