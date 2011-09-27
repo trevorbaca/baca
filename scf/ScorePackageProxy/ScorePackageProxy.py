@@ -311,15 +311,14 @@ class ScorePackageProxy(SCFProxyObject, _MaterialPackageMaker):
         is_first_pass = True
         while True:
             is_redraw = False
-            if is_first_pass:
-                self.print_menu_title('%s - materials\n' % self.score_title)
+            menu_specifier = MenuSpecifier()
+            menu_specifier.menu_title = '%s - materials' % self.score_title
             materials = self.list_materials()
             materials = [x.replace('_', ' ') for x in materials]
             materials = [x[len(self.score_package_name)+1:] for x in materials]
-            named_pairs = [('n', 'new')]
-            kwargs = {'values_to_number': materials, 'named_pairs': named_pairs}
-            kwargs.update({'indent_level': 1, 'show_options': is_first_pass})
-            key, material_name = self.display_menu(**kwargs)
+            menu_specifier.items_to_number = materials
+            menu_specifier.sentence_length_items = [('n', 'make new material by hand')]
+            key, material_name = menu_specifier.display_menu()
             material_name = '%s_%s' % (self.score_package_name, material_name)
             if key == 'b':
                 return key

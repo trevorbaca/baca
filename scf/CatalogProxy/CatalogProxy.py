@@ -1,3 +1,4 @@
+from baca.scf.MenuSpecifier import MenuSpecifier
 from baca.scf.SCFProxyObject import SCFProxyObject
 from baca.scf.ScorePackageProxy import ScorePackageProxy
 import os
@@ -20,12 +21,10 @@ class CatalogProxy(SCFProxyObject):
             score_package_proxy.profile_score_package_directory_structure()
 
     def get_score_package_name_from_user(self):
-        self.print_menu_title('Select score by number.\n')
-        score_titles_with_years = self.list_score_titles_with_years()
-        kwargs = {}
-        kwargs = {'values_to_number': score_titles_with_years, 'indent_level': 1}
-        kwargs.update({'is_nearly': False})
-        number, score_title = self.display_menu(**kwargs)
+        menu_specifier = MenuSpecifier()
+        menu_specifier.menu_title = 'Select score by number.'
+        menu_specifier.items_to_number = self.list_score_titles_with_years()
+        number, score_title = menu_specifier.display_menu()
         score_package_name = self.score_title_to_score_package_name(score_title)
         return score_package_name
 

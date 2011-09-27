@@ -199,8 +199,8 @@ class MaterialPackageProxy(SCFProxyObject):
         trimmed_visualizer_ly_lines = self.trim_ly_lines(self.ly)
         return trimmed_temp_ly_file_lines == trimmed_visualizer_ly_lines
 
-    def make_material_interactively(self, command_string):
-        self.display_menu()
+#    def make_material_interactively(self, command_string):
+#        self.display_menu()
 
     def manage_input(self, command_string):
         if command_string == 'i':

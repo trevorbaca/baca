@@ -1,3 +1,4 @@
+from baca.scf.MenuSpecifier import MenuSpecifier
 from baca.scf.SCFProxyObject import SCFProxyObject
 import os
 
@@ -29,13 +30,10 @@ class MakersProxy(SCFProxyObject):
         is_first_pass = True
         while True:
             is_redraw = False
-            if is_first_pass:
-                self.print_menu_title('Interactive material makers - main menu\n')
-            maker_names = self.list_makers()
-            kwargs = {'values_to_number': maker_names}
-            kwargs.update({'is_nearly': True, 'show_options': is_first_pass})
-            kwargs.update({'indent_level': 1})
-            key, value = self.display_menu(**kwargs)
+            menu_specifier = MenuSpecifier()
+            menu_specifier.menu_title = 'Interactive material makers'
+            menu_specifier.items_to_number = self.list_makers()
+            key, value = menu_specifier.display_menu()
             result = None
             if key == 'b':
                 return 'b'
