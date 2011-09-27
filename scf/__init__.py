@@ -1,5 +1,6 @@
 from CatalogProxy import CatalogProxy
 from MaterialPackageProxy import MaterialPackageProxy
+from MenuSectionSpecifier import MenuSectionSpecifier
 from MenuSpecifier import MenuSpecifier
 from ScorePackageProxy import ScorePackageProxy
 from StudioProxy import StudioProxy

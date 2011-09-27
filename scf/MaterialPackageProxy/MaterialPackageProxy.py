@@ -1,4 +1,5 @@
 from abjad.tools import iotools
+from baca.scf.MenuSpecifier import MenuSpecifier
 from baca.scf.SCFProxyObject import SCFProxyObject
 import os
 import subprocess
@@ -252,27 +253,26 @@ class MaterialPackageProxy(SCFProxyObject):
             print '%s: write ly and open' % 'lwo'.rjust(self.help_item_width)
             print ''
 
-    # TODO: reimplement with MenuSpecifier
-    # TODO: extend with ly and pdf even when visualizer absent
     def manage_material(self):
         is_first_pass = True
         while True:
             is_redraw = False
-            if is_first_pass:
-                material_name = self.material_name.replace('_', ' ')
-                if self.score_package_name:
-                    material_name = material_name[len(self.score_package_name)+1:]
-                self.print_menu_title('%s - %s' % (self.score_title, material_name))
+            menu_specifier = MenuSpecifier()
+            material_name = self.material_name.replace('_', ' ')
+            if self.score_package_name:
+                material_name = material_name[len(self.score_package_name)+1:]
+            menu_specifier.menu_title = '%s - %s' % (self.score_title, material_name)
             named_pairs = [
                 ('i', 'input'), 
                 ('o', 'output'), 
                 ]
             if self.has_visualizer:
-                named_pairs.extend([
-                    ('l', 'ly'),
-                    ('p', 'pdf'), 
-                    ('v', 'visualizer'), 
-                    ])
+                named_pairs.append(('v', 'visualizer'))
+            if self.has_ly:
+                named_pairs.append(('l', 'ly'))
+            if self.has_pdf:
+                named_pairs.append(('p', 'pdf'))
+            menu_specifier.named_pairs = named_pairs
             secondary_named_pairs = [
                 ('a', 'make'),
                 ('d', 'delete'),
@@ -280,9 +280,8 @@ class MaterialPackageProxy(SCFProxyObject):
                 ('s', 'summarize'),
                 ('z', 'regenerate'),
             ]
-            kwargs = {'named_pairs': named_pairs, 'secondary_named_pairs': secondary_named_pairs}
-            kwargs.update({'show_options': is_first_pass})
-            command_string, menu_value = self.display_menu(**kwargs)
+            menu_specifier.secondary_named_pairs = secondary_named_pairs
+            command_string, menu_value = menu_specifier.display_menu()
             key = command_string[0]
             if key == 'a':
                 self.make_material_interactively(self, command_string)

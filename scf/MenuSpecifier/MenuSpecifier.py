@@ -3,10 +3,11 @@ import os
 
 class MenuSpecifier(object):
 
-    def __init__(self, menu_title='', items_to_number=None, 
+    def __init__(self, menu_title='', menu_sections=None, items_to_number=None, 
         sentence_length_items=None, named_pairs=None, secondary_named_pairs=None,
-        include_back=True, indent_level=0, item_width = 11):
+        include_back=True, indent_level=1, item_width = 11):
         self.menu_title = menu_title
+        self.menu_sections = menu_sections
         self.items_to_number = items_to_number
         self.sentence_length_items = sentence_length_items
         self.named_pairs = named_pairs
@@ -23,52 +24,52 @@ class MenuSpecifier(object):
     ### PRIVATE METHODS ###
 
     def _display_footer_items(self, all_keys, all_values):
-        #if self.show_options:
-        if True:
-            self._print_tab(self.indent_level)
-            for key, value in self._get_footer_pairs():
-                print '%s: %s ' % (key, value.ljust(self.item_width)),
-                all_keys.append(key)
-                all_values.append(value)
+        self._print_tab(self.indent_level)
+        footer_pairs = self._get_footer_pairs()
+        for key, value in footer_pairs:
+            print '%s: %s ' % (key, value.ljust(self.item_width)),
+            all_keys.append(key)
+            all_values.append(value)
+        if footer_pairs:
             print ''
         
     def _display_items_to_number(self, all_keys, all_values):
         keys = range(1, len(self.items_to_number) + 1)
         keys = [str(x) for x in keys]
         pairs = zip(keys, self.items_to_number)
-        #if self.show_options:
-        if True:
-            for key, value in pairs:
-                self._print_tab(self.indent_level),
-                print '%s: %s' % (key, value)
-                all_keys.append(key)
-                all_values.append(value)
+        for key, value in pairs:
+            self._print_tab(self.indent_level),
+            print '%s: %s' % (key, value)
+            all_keys.append(key)
+            all_values.append(value)
+        if pairs:
             print ''
 
+    def _display_menu_sections(self, all_keys, all_values):
+        for menu_section in self.menu_sections:
+            menu_section.display(all_keys, all_values)
+        
     def _display_menu_title(self):
         if self.menu_title:
             print self.menu_title
             print ''
 
     def _display_named_pairs(self, named_pairs, all_keys, all_values):
-        #if self.show_options
-        if True:
-            if named_pairs:
-                self._print_tab(self.indent_level)
-                for key, value in named_pairs:
-                    print '%s: %s ' % (key, value.ljust(self.item_width)),
-                    all_keys.append(key)
-                    all_values.append(value)
-                print ''
-
-    def _display_sentence_length_items(self, all_keys, all_values):
-        #if self.show_options
-        if True:
-            for key, value in self.sentence_length_items:
-                self._print_tab(self.indent_level)
-                print '%s: %s ' % (key, value)
+        if named_pairs:
+            self._print_tab(self.indent_level)
+            for key, value in named_pairs:
+                print '%s: %s ' % (key, value.ljust(self.item_width)),
                 all_keys.append(key)
                 all_values.append(value)
+            print ''
+
+    def _display_sentence_length_items(self, all_keys, all_values):
+        for key, value in self.sentence_length_items:
+            self._print_tab(self.indent_level)
+            print '%s: %s ' % (key, value)
+            all_keys.append(key)
+            all_values.append(value)
+        if self.sentence_length_items:
             print ''
 
     def _get_footer_pairs(self):
@@ -130,6 +131,17 @@ class MenuSpecifier(object):
         return property(**locals())
 
     @apply
+    def menu_sections():
+        def fget(self):
+            return self._menu_sections
+        def fset(self, menu_sections):
+            if menu_sections is None:
+                self._menu_sections = []
+            else:
+                self._menu_sections = menu_sections
+        return property(**locals())
+
+    @apply
     def menu_title():
         def fget(self):
             return self._menu_title
@@ -177,6 +189,7 @@ class MenuSpecifier(object):
         os.system('clear')
         all_keys, all_values = [], []
         self._display_menu_title()
+        self._display_menu_sections(all_keys, all_values)
         self._display_items_to_number(all_keys, all_values)
         self._display_sentence_length_items(all_keys, all_values)
         self._display_named_pairs(self.named_pairs, all_keys, all_values)

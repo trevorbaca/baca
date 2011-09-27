@@ -1,5 +1,7 @@
 from baca.scf._MaterialPackageMaker import _MaterialPackageMaker
 from baca.scf.MaterialPackageProxy import MaterialPackageProxy
+from baca.scf.MenuSectionSpecifier import MenuSectionSpecifier
+from baca.scf.MenuSpecifier import MenuSpecifier
 from baca.scf.SCFProxyObject import SCFProxyObject
 import os
 
@@ -188,6 +190,22 @@ class ScorePackageProxy(SCFProxyObject, _MaterialPackageMaker):
         materials = [x for x in materials if x[0].isalpha()]
         return materials
 
+    def list_numbered_chunks(self):
+        numbered_chunks = []
+        for i, chunk in enumerate(self.list_chunks()):
+            numbered_chunk = (str(i + 1), chunk)
+            numbered_chunks.append(numbered_chunk)
+        return numbered_chunks
+
+    def list_numbered_materials(self):
+        numbered_materials = []
+        for i, material in enumerate(self.list_materials()):
+            material = material.replace('%s_' % self.score_package_name, '')
+            material = material.replace('_', ' ')
+            numbered_material = (str(i + 1), material)
+            numbered_materials.append(numbered_material)
+        return numbered_materials
+            
     def manage_chunks(self):
         self.print_not_implemented()
 
@@ -201,23 +219,27 @@ class ScorePackageProxy(SCFProxyObject, _MaterialPackageMaker):
                 return result
             material_number = None
 
-    def manage_score(self, command_string = None):
+    def manage_score(self, command_string=None):
         is_first_pass = True
         while True:
             is_redraw = False
             if command_string is None:
-                if is_first_pass:
-                    self.print_menu_title('%s - main menu\n' % self.score_title)
-                    self.summarize_chunks()
-                    self.summarize_materials()
-                named_pairs = [
+                menu_specifier = MenuSpecifier()
+                menu_specifier.menu_title = '%s - main menu' % self.score_title
+                menu_section = MenuSectionSpecifier()
+                menu_section.menu_section_title = 'Chunks'
+                menu_section.menu_section_entries = self.list_numbered_chunks()
+                menu_specifier.menu_sections.append(menu_section)
+                menu_section = MenuSectionSpecifier()
+                menu_section.menu_section_title = 'Materials'
+                menu_section.menu_section_entries = self.list_numbered_materials()
+                menu_specifier.menu_sections.append(menu_section)
+                sentence_length_items = [
                     ('h', 'chunks'), 
                     ('m', 'materials'),
                     ]
-                kwargs = {'named_pairs': named_pairs, 'indent_level': 1}
-                #kwargs.update({'is_nearly': False, 'show_options': is_first_pass})
-                kwargs.update({'is_nearly': True, 'show_options': is_first_pass})
-                command_string, menu_value = self.display_menu(**kwargs)
+                menu_specifier.sentence_length_items = sentence_length_items
+                command_string, menu_value = menu_specifier.display_menu()
             key = command_string[0]
             result = None
             if key == 'b':
