@@ -342,6 +342,9 @@ class SargassoMeasureMaker(_InteractiveMaterialMaker):
         divided_measure_tokens = sequencetools.permute_sequence(divided_measure_tokens, permutation)
         return divided_measure_tokens
 
+    def read_user_input_from_disk(self):
+        pass
+
     def select_meter_multiplier(self, possible_meter_multipliers, measure_index):
         possible_meter_multipliers = sequencetools.CyclicTuple(possible_meter_multipliers)
         meter_multiplier = possible_meter_multipliers[5 * measure_index]

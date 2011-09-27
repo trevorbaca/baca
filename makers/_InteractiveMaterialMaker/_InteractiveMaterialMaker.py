@@ -53,6 +53,9 @@ class _InteractiveMaterialMaker(_MaterialPackageMaker):
 
     ### PUBLIC METHODS ###
 
+    def read_user_input_from_disk(self):
+        raise Exception('Call on derived concrete classes.')
+
     def write_material_to_disk(self, 
         user_input_import_statements, user_input_pairs, material, lilypond_score):
         self.material_package_directory = self.get_new_material_package_directory_from_user()
