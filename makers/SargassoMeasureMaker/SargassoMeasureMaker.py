@@ -13,6 +13,7 @@ class SargassoMeasureMaker(_InteractiveMaterialMaker):
     ### PUBLIC METHODS ###
 
     def conclude(self):
+        print 'Sargasso measures successfully made.\n'
         response = raw_input('Press return to continue.')
 
     def format_user_input(self, user_input_pairs):
@@ -21,23 +22,6 @@ class SargassoMeasureMaker(_InteractiveMaterialMaker):
             line = '%s = %r' % (name, value)
             formatted_user_input_lines.append(line)
         return formatted_user_input_lines
-            
-    def get_possible_meter_multipliers(self, multiplied_measure_numerator):
-        possible_meter_multipliers = []
-        for denominator in range(multiplied_measure_numerator, 2 * multiplied_measure_numerator):
-            possible_meter_multiplier = fractions.Fraction(multiplied_measure_numerator, denominator)
-            possible_meter_multipliers.append(possible_meter_multiplier)
-        return possible_meter_multipliers
-
-    def get_primary_input_lines(self, user_input_pairs):
-        lines = []
-        lines.append('from baca.makers import SargassoMeasureMaker')
-        lines.append('maker = SargassoMeasureMaker()')
-        user_input_names = [pair[0] for pair in user_input_pairs]
-        user_input_string = ', '.join([str(x) for x in user_input_names])
-        line = 'maker.make_sargasso_measures(%s)' % user_input_string
-        lines.append(line)
-        return lines
             
     def get_new_material_package_directory_from_user(self):
         from baca.scf.CatalogProxy import CatalogProxy
@@ -55,23 +39,67 @@ class SargassoMeasureMaker(_InteractiveMaterialMaker):
                 base_directory = os.path.join(
                     self.scores_directory, score_package_name, 'mus', 'materials')
                 break
-        response = raw_input('material name: ')
-        print ''
-        response = response.lower()
-        response = response.replace(' ', '_')
-        if score_package_name is not None:
-            material_package_name = '%s_%s' % (score_package_name, response)
-        else:
-            material_package_name = response
-        print 'package name will be %s\n' % material_package_name
-        response = raw_input('ok? ')
-        if not response == 'y':
-            return
-        print ''
-        target = os.path.join(base_directory, material_package_name)
-        if os.path.exists(target):
-            raise OSError('directory %r already exists.' % target)
-        return target
+        while True:
+            response = raw_input('Material name: ')
+            print ''
+            response = response.lower()
+            response = response.replace(' ', '_')
+            if score_package_name is not None:
+                material_package_name = '%s_%s' % (score_package_name, response)
+            else:
+                material_package_name = response
+            print 'Package name will be %s\n' % material_package_name
+            response = raw_input('ok? ')
+            print ''
+            if not response == 'y':
+                continue
+            target = os.path.join(base_directory, material_package_name)
+            if os.path.exists(target):
+                print 'Directory %r already exists.' % target
+                print ''
+                response = raw_input('Press return to try again.')
+                print ''
+                os.system('clear')
+            else:
+                return target
+
+    def get_output_file_import_statements(self):
+        return [
+            'from abjad.tools.measuretools.Measure import Measure',
+            ]
+            
+    def get_output_file_lines(self, measures, material_name):
+        output_file_lines = []
+        output_file_lines.append('%s = [' % material_name)
+        for measure in measures[:-1]:
+            line = measuretools.measure_to_one_line_input_string(measure)
+            output_file_lines.append('\t%s,' % line)
+        line = measuretools.measure_to_one_line_input_string(measures[-1])
+        output_file_lines.append('\t%s]' % line)
+        return output_file_lines
+
+    def get_possible_meter_multipliers(self, multiplied_measure_numerator):
+        possible_meter_multipliers = []
+        for denominator in range(multiplied_measure_numerator, 2 * multiplied_measure_numerator):
+            possible_meter_multiplier = fractions.Fraction(multiplied_measure_numerator, denominator)
+            possible_meter_multipliers.append(possible_meter_multiplier)
+        return possible_meter_multipliers
+
+    def get_primary_input_lines(self, user_input_pairs, material_name):
+        lines = []
+        lines.append('maker = SargassoMeasureMaker()\n')
+        lines.append('%s = maker.make(' % material_name)
+        user_input_names = [pair[0] for pair in user_input_pairs]
+        for user_input_name in user_input_names[:-1]:
+            lines.append('\t%s,' % user_input_name)
+        lines.append('\t%s)' % user_input_names[-1])
+        return lines
+            
+    def get_user_input_import_statements(self):
+        return [
+            'from abjad.tools.durationtools import Duration',
+            'from baca.makers import SargassoMeasureMaker',
+        ]
 
     def get_user_input_pairs(self):
 
@@ -162,45 +190,7 @@ class SargassoMeasureMaker(_InteractiveMaterialMaker):
             measure_division_denominator, measure_division_talea, total_duration, 
             measures_are_scaled, measures_are_split, measures_are_shuffled)
 
-    def make_lilypond_file(self, measures):
-        from abjad.tools import leaftools
-        from abjad.tools import lilypondfiletools
-        from abjad.tools import layouttools
-        from abjad.tools import markuptools
-        from abjad.tools import measuretools
-        from abjad.tools import schemetools
-        from abjad.tools import scoretools
-        from abjad.tools import stafftools
-        staff = stafftools.RhythmicStaff(measures)
-        score = scoretools.Score([staff])
-        leaf = leaftools.get_leaf_in_expr_with_minimum_prolated_duration(score)
-        scheme_moment = schemetools.SchemeMoment(fractions.Fraction(2, 3) * leaf.prolated_duration)
-        score.override.bar_number.transparent = True
-        score.override.time_signature.break_visibility = schemetools.SchemeVariable('end-of-line-invisible')
-        score.set.proportional_notation_duration = scheme_moment
-        measuretools.apply_beam_spanners_to_measures_in_expr(score)
-        scoretools.add_double_bar_to_end_of_score(score)
-        lilypond_file = lilypondfiletools.make_basic_lilypond_file(score) 
-        lilypond_file.default_paper_size = 'letter', 'portrait'
-        lilypond_file.global_staff_size = 14
-        lilypond_file.header_block.title = markuptools.Markup('Sargasso measures')
-        lilypond_file.layout_block.indent = 0
-        lilypond_file.layout_block.ragged_right = True
-        lilypond_file.paper_block.markup_system_spacing = layouttools.make_spacing_vector(0, 0, 12, 0)
-        lilypond_file.paper_block.system_system_spacing = layouttools.make_spacing_vector(0, 0, 10, 0)
-        return lilypond_file
-
-    def make_material_interactively(self):
-        from abjad.tools import iotools
-        user_input_pairs = self.get_user_input_pairs()
-        user_input_values = [pair[1] for pair in user_input_pairs]
-        measures = self.make_sargasso_measures(*user_input_values)
-        lilypond_file = self.make_lilypond_file(measures) 
-        iotools.show(lilypond_file)
-        #self.write_material_to_disk(user_input_pairs, lilypond_file)
-        self.conclude()
-
-    def make_sargasso_measures(self, measure_denominator, measure_numerator_talea, 
+    def make(self, measure_denominator, measure_numerator_talea, 
         measure_division_denominator, measure_division_talea, total_duration,
         measures_are_scaled, measures_are_split, measures_are_shuffled):
 
@@ -302,6 +292,47 @@ class SargassoMeasureMaker(_InteractiveMaterialMaker):
 
         return measures
 
+    def make_lilypond_file(self, measures):
+        from abjad.tools import leaftools
+        from abjad.tools import lilypondfiletools
+        from abjad.tools import layouttools
+        from abjad.tools import markuptools
+        from abjad.tools import measuretools
+        from abjad.tools import schemetools
+        from abjad.tools import scoretools
+        from abjad.tools import stafftools
+        staff = stafftools.RhythmicStaff(measures)
+        score = scoretools.Score([staff])
+        leaf = leaftools.get_leaf_in_expr_with_minimum_prolated_duration(score)
+        scheme_moment = schemetools.SchemeMoment(fractions.Fraction(2, 3) * leaf.prolated_duration)
+        score.override.bar_number.transparent = True
+        score.override.time_signature.break_visibility = schemetools.SchemeVariable('end-of-line-invisible')
+        score.set.proportional_notation_duration = scheme_moment
+        measuretools.apply_beam_spanners_to_measures_in_expr(score)
+        scoretools.add_double_bar_to_end_of_score(score)
+        lilypond_file = lilypondfiletools.make_basic_lilypond_file(score) 
+        lilypond_file.default_paper_size = 'letter', 'portrait'
+        lilypond_file.global_staff_size = 14
+        lilypond_file.header_block.title = markuptools.Markup('Sargasso measures')
+        lilypond_file.layout_block.indent = 0
+        lilypond_file.layout_block.ragged_right = True
+        lilypond_file.paper_block.markup_system_spacing = layouttools.make_spacing_vector(0, 0, 12, 0)
+        lilypond_file.paper_block.system_system_spacing = layouttools.make_spacing_vector(0, 0, 10, 0)
+        return lilypond_file
+
+    def make_interactively(self):
+        from abjad.tools import iotools
+        user_input_pairs = self.get_user_input_pairs()
+        user_input_values = [pair[1] for pair in user_input_pairs]
+        measures = self.make(*user_input_values)
+        lilypond_file = self.make_lilypond_file(measures) 
+        #iotools.show(lilypond_file)
+        user_input_import_statements = self.get_user_input_import_statements()
+        self.write_material_to_disk(
+            user_input_import_statements, user_input_pairs, measures, lilypond_file)
+        self.conclude()
+
+
     def permute_divided_measure_tokens(self, divided_measure_tokens):
         '''This can be extended later.'''
         modulus_of_permutation = 5
@@ -311,22 +342,6 @@ class SargassoMeasureMaker(_InteractiveMaterialMaker):
         divided_measure_tokens = sequencetools.permute_sequence(divided_measure_tokens, permutation)
         return divided_measure_tokens
 
-#    def write_material_to_disk(self, user_input_pairs, lilypond_score):
-#        material_package_directory = self.get_new_material_package_directory_from_user()
-#        print material_package_directory
-#        os.mkdir(material_package_directory)
-#        initializer = file(os.path.join(material_package_directory, '__init__.py'), 'w')
-#        initializer.write('from output import *\n')
-#        initializer.close()
-#        user_input_lines = self.format_user_input(user_input_pairs)
-#        input_file = file(os.path.join(material_package_directory, 'input.py'), 'w')
-#        for line in user_input_lines:
-#            input_file.write(line + '\n')
-#        input_file.write('\n')
-#        for line in self.get_primary_input_lines(user_input_pairs):
-#            input_file.write(line + '\n')
-#        input_file.close()
-        
     def select_meter_multiplier(self, possible_meter_multipliers, measure_index):
         possible_meter_multipliers = sequencetools.CyclicTuple(possible_meter_multipliers)
         meter_multiplier = possible_meter_multipliers[5 * measure_index]

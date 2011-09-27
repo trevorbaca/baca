@@ -48,7 +48,7 @@ class MakersProxy(SCFProxyObject):
             else:
                 maker_name = value
                 maker = self.get_maker(maker_name)
-                maker.make_material_interactively()
+                maker.make_interactively()
                 is_redraw = True
             if is_redraw or result == 'b':
                 is_first_pass = True

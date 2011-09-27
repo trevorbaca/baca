@@ -1,4 +1,5 @@
 from baca.scf.CatalogProxy import CatalogProxy
+from baca.scf.MenuSpecifier import MenuSpecifier
 from baca.scf.SCFProxyObject import SCFProxyObject
 from baca.scf.ScorePackageProxy import ScorePackageProxy
 from baca.scf.SharedMaterialsProxy import SharedMaterialsProxy
@@ -24,17 +25,15 @@ class StudioProxy(SCFProxyObject):
         is_first_pass = True
         while True:
             is_redraw = False
-            if is_first_pass:
-                self.print_menu_title('Welcome to the studio.\n')
-            score_titles_with_years = self.catalog.list_score_titles_with_years()
-            kwargs = {}
-            kwargs = {'values_to_number': score_titles_with_years, 'indent_level': 1}
-            kwargs.update({'is_nearly': False, 'show_options': is_first_pass})
-            named_pairs = [
-                ('m', 'materials'),
+            menu_specifier = MenuSpecifier()
+            menu_specifier.menu_title = 'Welcome to the studio'
+            menu_specifier.items_to_number = self.catalog.list_score_titles_with_years()
+            menu_specifier.sentence_length_items = [
+                ('m', 'manage materials shared across multiple scores'),
                 ]
-            kwargs.update({'named_pairs': named_pairs})
-            key, value = self.display_menu(**kwargs)
+            menu_specifier.include_back = False
+            menu_specifier.indent_level = 1
+            key, value = menu_specifier.display_menu()
             result = None
             if key == 'b':
                 break

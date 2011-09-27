@@ -252,6 +252,8 @@ class MaterialPackageProxy(SCFProxyObject):
             print '%s: write ly and open' % 'lwo'.rjust(self.help_item_width)
             print ''
 
+    # TODO: reimplement with MenuSpecifier
+    # TODO: extend with ly and pdf even when visualizer absent
     def manage_material(self):
         is_first_pass = True
         while True:

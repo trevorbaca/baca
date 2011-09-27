@@ -53,8 +53,6 @@ class SharedMaterialsProxy(SCFProxyObject, _MaterialPackageMaker):
         while True:
             is_redraw = False
             if command_string is None:
-                #if is_first_pass:
-                #    self.print_menu_title('Shared materials - main menu\n')
                 material_names = self.list_shared_material_names()
                 menu_specifier = MenuSpecifier()
                 menu_specifier.menu_title = 'Shared manterials - main menu'
