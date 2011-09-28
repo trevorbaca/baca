@@ -1,8 +1,9 @@
 from abjad.tools import iotools
 from abjad.tools import lilypondfiletools
 from abjad.tools import markuptools
-from baca.scf.CatalogProxy import CatalogProxy
 from baca.scf._MaterialPackageMaker import _MaterialPackageMaker
+from baca.scf.CatalogProxy import CatalogProxy
+from baca.scf.UserInputWrapper import UserInputWrapper
 import os
 import shutil
 
@@ -170,8 +171,19 @@ class _InteractiveMaterialMaker(_MaterialPackageMaker):
 
     ### PUBLIC METHODS ###
 
+#    def edit_interactively(self, user_input_wrapper=None):
+#        pass
+
     def read_user_input_from_disk(self):
         raise Exception('Call on derived concrete classes.')
+
+    def show_demo_input_values(self):
+        for i, (key, value) in enumerate(self.user_input_template.iteritems()):
+            number = i + 1
+            key = key.replace('_', ' ')
+            print '    ' + '%2s. %s: %r' % (number, key, value)
+        print ''
+        response = raw_input('Press return to continue.')
 
     def write_material_to_disk(self, 
         user_input_import_statements, user_input_pairs, material, lilypond_file):

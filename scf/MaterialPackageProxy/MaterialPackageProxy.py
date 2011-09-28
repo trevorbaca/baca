@@ -76,6 +76,10 @@ class MaterialPackageProxy(SCFProxyObject):
     def has_visualizer(self):
         return os.path.exists(self.visualizer)
 
+    @property
+    def is_interactive(self):
+        return bool(self.import_attribute_from_initializer('is_interactive'))
+
     ### PUBLIC METHODS ###
 
     def add_line_to_initializer(self, initializer, line):
@@ -149,6 +153,22 @@ class MaterialPackageProxy(SCFProxyObject):
 
     def edit_visualizer(self):
         os.system('vi + %s' % self.visualizer)
+
+    def import_attribute_from_initializer(self, attribute_name):
+        try:
+            exec('from %s import %s' % (self.material_module_name, attribute_name))
+            exec('result = %s' % attribute_name)
+            return result
+        except ImportError:
+            return None
+
+    def import_attribute_from_input_file(self, attribute_name):
+        try:
+            exec('from %s import %s' % (self.input_module_name, attribute_name))
+            exec('result = %s' % attribute_name)
+            return result
+        except ImportError:
+            return None
 
     def import_material_from_input_file(self):
         self.unimport_input_module()
@@ -262,6 +282,8 @@ class MaterialPackageProxy(SCFProxyObject):
             if self.score_package_name:
                 material_name = material_name[len(self.score_package_name)+1:]
             menu_specifier.menu_title = '%s - %s' % (self.score_title, material_name)
+            if self.is_interactive:
+                menu_specifier.sentence_length_items = [('k', 'reload user input')]
             named_pairs = [
                 ('i', 'input'), 
                 ('o', 'output'), 
@@ -291,6 +313,8 @@ class MaterialPackageProxy(SCFProxyObject):
                 break
             elif key == 'i':
                 self.manage_input(command_string)
+            elif key == 'k':
+                self.reload_user_input()
             elif key == 'l':
                 self.manage_ly(command_string)
             elif key == 'o':
@@ -416,6 +440,12 @@ class MaterialPackageProxy(SCFProxyObject):
         is_changed = self.write_input_data_to_output_file(is_forced=is_forced)
         is_changed = self.create_ly_and_pdf_from_visualizer(is_forced=(is_changed or is_forced))
         return is_changed
+
+    def reload_user_input(self):
+        maker = self.import_attribute_from_input_file('maker')
+        maker.materials_directory = self.directory
+        user_input_wrapper = self.import_attribute_from_input_file('user_input')
+        maker.edit_interactively(user_input_wrapper)
 
     def rename_material(self):
         print 'Current material name: %s' % self.material_name

@@ -1,9 +1,12 @@
 from baca.scf._InteractiveMaterialMaker import _InteractiveMaterialMaker
+from baca.scf.MenuSpecifier import MenuSpecifier
+from baca.scf.UserInputWrapper import UserInputWrapper
 from abjad.tools import durationtools
 from abjad.tools import leaftools
 from abjad.tools import mathtools
 from abjad.tools import measuretools
 from abjad.tools import sequencetools
+import copy
 import fractions
 import os
 
@@ -13,6 +16,18 @@ class SargassoMeasureMaker(_InteractiveMaterialMaker):
     def __init__(self, **kwargs):
         _InteractiveMaterialMaker.__init__(self, **kwargs)
         self.stylesheet = os.path.join(os.path.dirname(__file__), 'stylesheet.ly')
+
+    ### PUBLIC ATTRIBUTES ###
+
+    user_input_template = UserInputWrapper([
+        ('measure_denominator', 4),
+        ('measure_numerator_talea', [2, 2, 2, 2, 1, 1, 4, 4]),
+        ('measure_division_denominator', 16),
+        ('measure_division_talea', [1, 1, 2, 3, 1, 2, 3, 4, 1, 1, 1, 1, 4]),
+        ('total_duration', durationtools.Duration(44, 8)),
+        ('measures_are_scaled', True),
+        ('measures_are_split', True),
+        ('measures_are_shuffled', True)])
 
     ### PUBLIC METHODS ###
 
@@ -64,91 +79,31 @@ class SargassoMeasureMaker(_InteractiveMaterialMaker):
             'from baca.scf import UserInputWrapper',
         ]
 
-    def get_user_input_pairs(self):
+    # TODO
+    #def get_user_input_pairs(self):
+    def edit_interactively(self, user_input_wrapper=None):
+        if user_input_wrapper is None:
+            user_input_wrapper = self.initialize_user_input_wrapper()
+        while True:
+            menu_specifier = MenuSpecifier()
+            menu_specifier.menu_title = type(self).__name__
+            pairs = list(user_input_wrapper.iteritems())
+            pairs = ['%s: %s' % (pair[0].replace('_', ' '), pair[1]) for pair in pairs]
+            menu_specifier.items_to_number = pairs
+            if user_input_wrapper.is_complete:
+                menu_specifier.sentence_length_items.append(('p', 'render pdf of given input'))
+            menu_specifier.sentence_length_items.append(('d', 'show demo input values'))
+            key, value = menu_specifier.display_menu()
+            if key == 'd':
+                self.show_demo_input_values()
+            elif key == 'p':
+                self.render_pdf_from_input(user_input_wrapper)
 
-        result = [
-                ('measure_denominator', 4),
-                ('measure_numerator_talea', [2, 2, 2, 2, 1, 1, 4, 4]),
-                ('measure_division_denominator', 16),
-                ('measure_division_talea', [1, 1, 2, 3, 1, 2, 3, 4, 1, 1, 1, 1, 4]),
-                ('total_duration', durationtools.Duration(44, 8)),
-                ('measures_are_scaled', True),
-                ('measures_are_split', True),
-                ('measures_are_shuffled', True),
-                ]
-
-        return result
-
-        print 'Welcome to sargasso measure maker.\n'
-
-        output_header_lines = [
-            'from abjad import *',
-            'from abjad.tools import sequencetools',]
-
-        for header_line in output_header_lines:
-            exec(header_line)
-
-        output_body_lines = []
-
-        response = raw_input('Measure denominator: ')
-        line = 'measure_denominator = %s' % response
-        exec(line)
-        output_body_lines.append(line)
-        print ''
-
-        response = raw_input('Measure numerator talea: ')
-        line = 'measure_numerator_talea = %s' % response
-        exec(line)
-        output_body_lines.append(line)
-        print ''
-
-        response = raw_input('Measure division denominator: ')
-        line = 'measure_division_denominator = %s' % response
-        exec(line)
-        output_body_lines.append(line)
-        print ''
-
-        response = raw_input('Measure division talea: ')
-        line = 'measure_division_talea = %s' % response
-        exec(line)
-        output_body_lines.append(line)
-        print ''
-
-        response = raw_input('Total duration: ')
-        exec('duration = Duration(%s)' % response)
-        line = 'total_duration = %s' % duration
-        exec(line)
-        output_body_lines.append(line)
-        print ''
-
-        response = raw_input('Scale measures? ')
-        response = response == 'y'
-        line = 'measures_are_scaled = %s' % response
-        exec(line)
-        output_body_lines.append(line)
-        print ''
-
-        response = raw_input('Split measures? ')
-        response = response == 'y'
-        line = 'measures_are_split = %s' % response
-        exec(line)
-        output_body_lines.append(line)
-        print ''
-
-        response = raw_input('Shuffle measures? ')
-        response = response == 'y'
-        line = 'measures_are_shuffled = %s' % response
-        exec(line)
-        output_body_lines.append(line)
-        print ''
-
-        for line in output_body_lines:
-            print line
-        print ''
-
-        return (measure_denominator, measure_numerator_talea, 
-            measure_division_denominator, measure_division_talea, total_duration, 
-            measures_are_scaled, measures_are_split, measures_are_shuffled)
+    def initialize_user_input_wrapper(self):
+        user_input_wrapper = copy.deepcopy(self.user_input_template)
+        for key in user_input_wrapper:
+            user_input_wrapper[key] = None
+        return user_input_wrapper
 
     def make(self, measure_denominator, measure_numerator_talea, 
         measure_division_denominator, measure_division_talea, total_duration,
@@ -266,10 +221,18 @@ class SargassoMeasureMaker(_InteractiveMaterialMaker):
         scoretools.add_double_bar_to_end_of_score(score)
         return lilypond_file
 
-    def make_interactively(self):
+    def make_interactively(self, user_input_pairs=None):
         from abjad.tools import iotools
-        user_input_pairs = self.get_user_input_pairs()
-        user_input_values = [pair[1] for pair in user_input_pairs]
+
+#        if user_input_pairs is None:
+#            user_input_pairs = self.get_user_input_pairs()
+#            user_input_values = [pair[1] for pair in user_input_pairs]
+#        else:
+#            user_input_values = list(user_input_pairs.itervalues())
+
+        user_input_wrapper = self.edit_interactively()
+        user_input_values = list(user_input_wrapper.itervalues())
+        print user_input_values
         measures = self.make(*user_input_values)
         lilypond_file = self.make_lilypond_file(measures) 
         #iotools.show(lilypond_file)
