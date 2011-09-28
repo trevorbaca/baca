@@ -48,6 +48,10 @@ class SharedMaterialsProxy(SCFProxyObject, _MaterialPackageMaker):
                         shared_material_package_names.append(x)
         return shared_material_package_names
 
+    def make_new_material_by_hand(self):
+        self.print_not_implemented()
+        self.run_go_on_menu()
+
     def manage_shared_materials(self, command_string=None):
         is_first_pass = True
         while True:
@@ -58,8 +62,8 @@ class SharedMaterialsProxy(SCFProxyObject, _MaterialPackageMaker):
                 menu_specifier.menu_title = 'Shared manterials'
                 menu_specifier.items_to_number = self.list_shared_material_names()
                 menu_specifier.sentence_length_items = [
+                    ('[h', 'make new material by hand]'),
                     ('i', 'make new material interactively'),
-                    ('h', 'make new material by hand'),
                     ]
                 menu_specifier.include_back = True
                 menu_specifier.indent_level = 1
@@ -67,6 +71,8 @@ class SharedMaterialsProxy(SCFProxyObject, _MaterialPackageMaker):
             result = None
             if key == 'b':
                 return 'b'
+            elif key == 'h':
+                self.make_new_material_by_hand()
             elif key == 'i':
                 self.create_shared_material_package(is_interactive=True)
             elif key == 'n':

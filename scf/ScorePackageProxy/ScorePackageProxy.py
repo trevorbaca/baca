@@ -229,29 +229,35 @@ class ScorePackageProxy(SCFProxyObject, _MaterialPackageMaker):
                 menu_section = MenuSectionSpecifier()
                 menu_section.menu_section_title = 'Chunks'
                 menu_section.menu_section_entries = self.list_numbered_chunks()
+                menu_section.sentence_length_items = [
+                    ('ch', 'make new chunk by hand'),
+                    ('ci', 'make new chunk interactively'),
+                ]
                 menu_specifier.menu_sections.append(menu_section)
                 menu_section = MenuSectionSpecifier()
                 menu_section.menu_section_title = 'Materials'
                 menu_section.menu_section_entries = self.list_numbered_materials()
+                menu_section.sentence_length_items = [
+                    ('mh', 'make new material by hand'),
+                    ('mi', 'make new material interactively'), 
+                    ]
                 menu_specifier.menu_sections.append(menu_section)
-#                sentence_length_items = [
-#                    ('h', 'chunks'), 
-#                    ('m', 'materials'),
-#                    ]
-#                menu_specifier.sentence_length_items = sentence_length_items
                 command_string, menu_value = menu_specifier.display_menu()
-            key = command_string[0]
+            #key = command_string[0]
+            key = command_string
             result = None
             if key == 'b':
                 return 'b'
+            elif key == 'ch':
+                self.make_new_chunk_by_hand()
+            elif key == 'ci':
+                self.make_new_chunk_interactively()
             elif key == 'h':
                 self.manage_chunks()
-            elif key == 'm':
-                if command_string[1:]:
-                    material_number = int(command_string[1:])
-                else:
-                    material_number = None
-                result = self.manage_materials(material_number=material_number)
+            elif key == 'mh':
+                self.make_new_material_by_hand()
+            elif key == 'mi':
+                self.make_new_material_interactively()
             elif key == 'q':
                 raise SystemExit
             elif key == 'w':

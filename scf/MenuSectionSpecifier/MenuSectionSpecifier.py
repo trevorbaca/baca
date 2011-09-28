@@ -3,9 +3,11 @@
 
 class MenuSectionSpecifier(object):
 
-    def __init__(self, menu_section_title='', menu_section_entries=None, indent_level=1):
+    def __init__(self, menu_section_title='', menu_section_entries=None, 
+        sentence_length_items=None, indent_level=1):
         self.menu_section_title = menu_section_title
         self.menu_section_entries = menu_section_entries
+        self.sentence_length_items = sentence_length_items
         self.indent_level = indent_level
 
     ### OVERLOADS ###
@@ -59,6 +61,17 @@ class MenuSectionSpecifier(object):
             self._menu_section_title = menu_section_title
         return property(**locals())
 
+    @apply
+    def sentence_length_items():
+        def fget(self):
+            return self._sentence_length_items
+        def fset(self, sentence_length_items):
+            if sentence_length_items is None:
+                self._sentence_length_items = []
+            else:
+                self._sentence_length_items = sentence_length_items[:]
+        return property(**locals())
+
     ### PUBLIC METHODS ###
 
     def display(self, all_keys, all_values):
@@ -69,4 +82,11 @@ class MenuSectionSpecifier(object):
             all_keys.append(key)
             all_values.append(value)
         if self.menu_section_entries:
+            print ''
+        for key, value in self.sentence_length_items:
+            self._print_tab(self.indent_level),
+            print '%s: %s' % (key, value)
+            all_keys.append(key)
+            all_values.append(value)
+        if self.sentence_length_items:
             print ''

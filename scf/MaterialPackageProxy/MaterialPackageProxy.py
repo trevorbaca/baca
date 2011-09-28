@@ -300,7 +300,7 @@ class MaterialPackageProxy(SCFProxyObject):
             elif key == 'd':
                 result = self.remove_directory()
                 if result:
-                    response = raw_input('Press any key to continue.')
+                    self.print_go_on_menu()
                     break
             elif key == 'i':
                 self.manage_input(command_string)

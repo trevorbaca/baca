@@ -53,4 +53,3 @@ class _MaterialPackageMaker(object):
             visualizer.write('lilypond_file = None\n')
             visualizer.close()
         print 'Created %s ...\n' % material_package_name
-        response = raw_input('Press any key to continue.')
