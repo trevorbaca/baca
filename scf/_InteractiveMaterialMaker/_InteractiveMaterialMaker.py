@@ -11,6 +11,9 @@ class _InteractiveMaterialMaker(_MaterialPackageMaker):
     '''Interactive material-maker base class.
     '''
 
+    def __init__(self, directory=None):
+        self.directory = directory
+
     ### OVERLOADS ###
 
     def __repr__(self):
@@ -66,6 +69,60 @@ class _InteractiveMaterialMaker(_MaterialPackageMaker):
         subtitle = markuptools.Markup(subtitle)
         return subtitle
 
+    def _get_new_material_package_directory_from_user(self, base_directory=None):
+        from baca.scf.CatalogProxy import CatalogProxy
+        from baca.scf.SharedMaterialsProxy import SharedMaterialsProxy
+        if base_directory is None:
+            while True:
+                response = raw_input('Save to shared materials (m)? Or to existing score (s)? ')
+                print ''
+                if response == 'm':
+                    score_package_name = None
+                    base_directory = self.shared_materials_directory
+                    break
+                elif response == 's':
+                    catalog_proxy = CatalogProxy()
+                    score_package_name = catalog_proxy.get_score_package_name_from_user()
+                    base_directory = os.path.join(
+                        self.scores_directory, score_package_name, 'mus', 'materials')
+                    break
+        else:
+            if 'scores' in base_directory:
+                parts = base_directory.split(os.path.sep)
+                for i, part in enumerate(parts):
+                    if part == 'scores':
+                        score_package_name = parts[i+1]
+                        break
+                else:
+                    raise Exception('Can not determine score package name.')
+            else:
+                score_package_name = None
+        while True:
+            response = raw_input('Material name: ')
+            print ''
+            response = response.lower()
+            response = response.replace(' ', '_')
+            if score_package_name is not None:
+                material_package_name = '%s_%s' % (score_package_name, response)
+            else:
+                material_package_name = response
+            print 'Package name will be %s\n' % material_package_name
+            response = raw_input('ok? ')
+            print ''
+            if not response == 'y':
+                continue
+            target = os.path.join(base_directory, material_package_name)
+            if os.path.exists(target):
+                print 'Directory %r already exists.' % target
+                print ''
+                response = raw_input('Press return to try again.')
+                print ''
+                os.system('clear')
+            else:
+                #return target
+                self.material_package_directory = target
+                return
+
     def _write_initializer_to_disk(self):
         initializer = file(os.path.join(self.material_package_directory, '__init__.py'), 'w')
         initializer.write('from output import *\n')
@@ -118,7 +175,7 @@ class _InteractiveMaterialMaker(_MaterialPackageMaker):
 
     def write_material_to_disk(self, 
         user_input_import_statements, user_input_pairs, material, lilypond_file):
-        self.material_package_directory = self.get_new_material_package_directory_from_user()
+        self._get_new_material_package_directory_from_user(base_directory=self.materials_directory)
         os.mkdir(self.material_package_directory)
         self._write_initializer_to_disk()
         self._write_input_file_to_disk(user_input_import_statements, user_input_pairs)

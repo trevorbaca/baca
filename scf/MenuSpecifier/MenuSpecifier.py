@@ -185,8 +185,9 @@ class MenuSpecifier(object):
 
     ### PUBLIC METHODS ###
 
-    def display_menu(self):
-        os.system('clear')
+    def display_menu(self, clear_terminal=True):
+        if clear_terminal:
+            os.system('clear')
         all_keys, all_values = [], []
         self._display_menu_title()
         self._display_menu_sections(all_keys, all_values)
@@ -199,8 +200,8 @@ class MenuSpecifier(object):
         while True:
             response = raw_input('scf> ')
             print ''
-            if response[0] in all_keys:
+            if response in all_keys:
                 break
         pair_dictionary = dict(zip(all_keys, all_values))
-        value = pair_dictionary[response[0]]
+        value = pair_dictionary[response]
         return response, value

@@ -63,6 +63,11 @@ class SCFProxyObject(object):
         file_pointer.write('\n'.join(new_file_lines))
         file_pointer.close()
 
+    def go_on(self):
+        response = raw_input('Press return to continue.')
+        print ''
+        self.clear_terminal()
+
     def path_is_in_repository(self, path_name):
         command = 'svn st %s' % path_name
         proc = subprocess.Popen(command, shell=True, stdout=subprocess.PIPE)
@@ -122,10 +127,5 @@ class SCFProxyObject(object):
         command = "if '%s' in sys.modules: del(sys.modules['%s'])" % (module_name, module_name)
         exec(command)
         
-    def run_go_on_menu(self):
-        response = raw_input('Press return to continue.')
-        print ''
-        self.clear_terminal()
-
     def tab(self, n):
         return 4 * n * ' '

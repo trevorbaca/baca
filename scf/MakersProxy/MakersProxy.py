@@ -52,3 +52,31 @@ class MakersProxy(SCFProxyObject):
                 is_first_pass = True
             else:
                 is_first_pass = False
+
+    def select_interactive_maker(self, show_menu_title=True):
+        is_first_pass = True
+        while True:
+            is_redraw = False
+            menu_specifier = MenuSpecifier()
+            if show_menu_title:
+                menu_specifier.menu_title = 'Select interactive material maker'
+            menu_specifier.items_to_number = self.list_makers()
+            key, value = menu_specifier.display_menu(clear_terminal=False)
+            result = None
+            if key == 'b':
+                return 'b'
+            elif key == 'q':
+                raise SystemExit
+            elif key == 'w':
+                is_redraw = True
+            elif key == 'x':
+                self.exec_statement()
+            else:
+                maker_name = value
+                maker = self.get_maker(maker_name)
+                return maker
+                #is_redraw = True
+            if is_redraw or result == 'b':
+                is_first_pass = True
+            else:
+                is_first_pass = False

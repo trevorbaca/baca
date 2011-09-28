@@ -10,8 +10,8 @@ import os
 
 class SargassoMeasureMaker(_InteractiveMaterialMaker):
 
-    def __init__(self):
-        _InteractiveMaterialMaker.__init__(self)
+    def __init__(self, **kwargs):
+        _InteractiveMaterialMaker.__init__(self, **kwargs)
         self.stylesheet = os.path.join(os.path.dirname(__file__), 'stylesheet.ly')
 
     ### PUBLIC METHODS ###
@@ -29,46 +29,6 @@ class SargassoMeasureMaker(_InteractiveMaterialMaker):
         formatted_user_input_lines.append('\t(%r, %r)])' % user_input_pairs[-1])
         return formatted_user_input_lines
             
-    def get_new_material_package_directory_from_user(self):
-        from baca.scf.CatalogProxy import CatalogProxy
-        from baca.scf.SharedMaterialsProxy import SharedMaterialsProxy
-        while True:
-            response = raw_input('Save to shared materials (m)? Or to existing score (s)? ')
-            print ''
-            if response == 'm':
-                score_package_name = None
-                base_directory = self.shared_materials_directory
-                break
-            elif response == 's':
-                catalog_proxy = CatalogProxy()
-                score_package_name = catalog_proxy.get_score_package_name_from_user()
-                base_directory = os.path.join(
-                    self.scores_directory, score_package_name, 'mus', 'materials')
-                break
-        while True:
-            response = raw_input('Material name: ')
-            print ''
-            response = response.lower()
-            response = response.replace(' ', '_')
-            if score_package_name is not None:
-                material_package_name = '%s_%s' % (score_package_name, response)
-            else:
-                material_package_name = response
-            print 'Package name will be %s\n' % material_package_name
-            response = raw_input('ok? ')
-            print ''
-            if not response == 'y':
-                continue
-            target = os.path.join(base_directory, material_package_name)
-            if os.path.exists(target):
-                print 'Directory %r already exists.' % target
-                print ''
-                response = raw_input('Press return to try again.')
-                print ''
-                os.system('clear')
-            else:
-                return target
-
     def get_output_file_import_statements(self):
         return [
             'from abjad.tools.measuretools.Measure import Measure',
@@ -293,12 +253,8 @@ class SargassoMeasureMaker(_InteractiveMaterialMaker):
         return measures
 
     def make_lilypond_file(self, measures):
-        #from abjad.tools import leaftools
         from abjad.tools import lilypondfiletools
-        #from abjad.tools import layouttools
-        #from abjad.tools import markuptools
         from abjad.tools import measuretools
-        #from abjad.tools import schemetools
         from abjad.tools import scoretools
         from abjad.tools import stafftools
         staff = stafftools.RhythmicStaff(measures)
@@ -306,21 +262,8 @@ class SargassoMeasureMaker(_InteractiveMaterialMaker):
         lilypond_file = lilypondfiletools.make_basic_lilypond_file(score)
         lilypond_file.file_initial_system_comments = []
         lilypond_file.file_initial_system_includes = []
-#        leaf = leaftools.get_leaf_in_expr_with_minimum_prolated_duration(score)
-#        scheme_moment = schemetools.SchemeMoment(fractions.Fraction(2, 3) * leaf.prolated_duration)
-#        score.override.bar_number.transparent = True
-#        score.override.time_signature.break_visibility = schemetools.SchemeVariable('end-of-line-invisible')
-#        score.set.proportional_notation_duration = scheme_moment
         measuretools.apply_beam_spanners_to_measures_in_expr(score)
         scoretools.add_double_bar_to_end_of_score(score)
-#        lilypond_file = lilypondfiletools.make_basic_lilypond_file(score) 
-#        lilypond_file.default_paper_size = 'letter', 'portrait'
-#        lilypond_file.global_staff_size = 14
-#        lilypond_file.header_block.title = markuptools.Markup('Sargasso measures')
-#        lilypond_file.layout_block.indent = 0
-#        lilypond_file.layout_block.ragged_right = True
-#        lilypond_file.paper_block.markup_system_spacing = layouttools.make_spacing_vector(0, 0, 12, 0)
-#        lilypond_file.paper_block.system_system_spacing = layouttools.make_spacing_vector(0, 0, 10, 0)
         return lilypond_file
 
     def make_interactively(self):

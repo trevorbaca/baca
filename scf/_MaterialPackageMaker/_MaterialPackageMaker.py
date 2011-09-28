@@ -20,18 +20,19 @@ class _MaterialPackageMaker(object):
         else:
             material_package_name = response
         print 'Package name will be %s.\n' % material_package_name
-        self.confirm()
-        print ''
+        #self.confirm()
+        #print ''
         target = os.path.join(materials_directory, material_package_name)
         if os.path.exists(target):
             raise OSError('Directory %r already exists.' % target)
-        os.mkdir(target)
+        #os.mkdir(target)
         response = raw_input('Include visualizer? ')
         print ''
         if response == 'y':
             is_visualized_material = True
         else:
             is_visualized_material = False
+        os.mkdir(target)
         initializer = file(os.path.join(target, '__init__.py'), 'w')
         initializer.write('from output import *\n')
         initializer.close()
@@ -52,4 +53,4 @@ class _MaterialPackageMaker(object):
             visualizer.write('\n\n')
             visualizer.write('lilypond_file = None\n')
             visualizer.close()
-        print 'Created %s ...\n' % material_package_name
+        print 'Material package %s created.\n' % material_package_name

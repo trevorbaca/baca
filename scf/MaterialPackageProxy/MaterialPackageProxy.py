@@ -129,6 +129,12 @@ class MaterialPackageProxy(SCFProxyObject):
         file_pointer.close()
         self.edit_visualizer()
 
+    def delete_material(self):
+        self.remove_material_from_materials_initializer()
+        result = self.remove_directory()
+        if result:
+            self.go_on()
+
     def edit_input_file(self):
         os.system('vi + %s' % self.input_file)
 
@@ -184,20 +190,6 @@ class MaterialPackageProxy(SCFProxyObject):
         except ImportError:
             output_preamble_lines = []
         return output_preamble_lines
-
-    def trim_ly_lines(self, ly_file_name):
-        '''Remove "Abjad revision 4776" and "2011-09-13 18:33" lines.
-        '''
-        trimmed_ly_lines = []
-        file_pointer = file(ly_file_name, 'r')
-        found_version_command = False
-        for line in file_pointer.readlines():
-            if found_version_command:
-                trimmed_ly_lines.append(line)
-            if line.startswith(r'\version'):
-                found_version_command = True
-        trimmed_ly_content = ''.join(trimmed_ly_lines)
-        return trimmed_ly_content
 
     def lilypond_file_format_is_equal_to_visualizer_ly(self, lilypond_file):
         temp_ly_file = os.path.join(os.environ.get('HOME'), 'tmp.ly')
@@ -284,7 +276,6 @@ class MaterialPackageProxy(SCFProxyObject):
                 named_pairs.append(('p', 'pdf'))
             menu_specifier.named_pairs = named_pairs
             secondary_named_pairs = [
-                #('a', 'make'),
                 ('d', 'delete'),
                 ('r', 'rename'), 
                 ('s', 'summarize'),
@@ -292,16 +283,12 @@ class MaterialPackageProxy(SCFProxyObject):
             ]
             menu_specifier.secondary_named_pairs = secondary_named_pairs
             command_string, menu_value = menu_specifier.display_menu()
-            key = command_string[0]
-            if key == 'a':
-                self.make_material_interactively(self, command_string)
-            elif key == 'b':
+            key = command_string
+            if key == 'b':
                 break
             elif key == 'd':
-                result = self.remove_directory()
-                if result:
-                    self.print_go_on_menu()
-                    break
+                self.delete_material()
+                break
             elif key == 'i':
                 self.manage_input(command_string)
             elif key == 'l':
@@ -550,6 +537,20 @@ class MaterialPackageProxy(SCFProxyObject):
             print 'Missing %s.' % ', '.join(missing)
         print ''
         
+    def trim_ly_lines(self, ly_file_name):
+        '''Remove "Abjad revision 4776" and "2011-09-13 18:33" lines.
+        '''
+        trimmed_ly_lines = []
+        file_pointer = file(ly_file_name, 'r')
+        found_version_command = False
+        for line in file_pointer.readlines():
+            if found_version_command:
+                trimmed_ly_lines.append(line)
+            if line.startswith(r'\version'):
+                found_version_command = True
+        trimmed_ly_content = ''.join(trimmed_ly_lines)
+        return trimmed_ly_content
+
     def unimport_input_module(self):
         self.remove_module_name_from_sys_modules(self.input_module_name)
 
