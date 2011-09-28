@@ -10,6 +10,10 @@ import os
 
 class SargassoMeasureMaker(_InteractiveMaterialMaker):
 
+    def __init__(self):
+        _InteractiveMaterialMaker.__init__(self)
+        self.stylesheet = os.path.join(os.path.dirname(__file__), 'stylesheet.ly')
+
     ### PUBLIC METHODS ###
 
     def conclude(self):
@@ -18,9 +22,11 @@ class SargassoMeasureMaker(_InteractiveMaterialMaker):
 
     def format_user_input(self, user_input_pairs):
         formatted_user_input_lines = []
-        for name, value in user_input_pairs:
-            line = '%s = %r' % (name, value)
+        formatted_user_input_lines.append('user_input = UserInputWrapper([')
+        for name, value in user_input_pairs[:-1]:
+            line = '\t(%r, %r),' % (name, value)
             formatted_user_input_lines.append(line)
+        formatted_user_input_lines.append('\t(%r, %r)])' % user_input_pairs[-1])
         return formatted_user_input_lines
             
     def get_new_material_package_directory_from_user(self):
@@ -87,18 +93,15 @@ class SargassoMeasureMaker(_InteractiveMaterialMaker):
 
     def get_primary_input_lines(self, user_input_pairs, material_name):
         lines = []
-        lines.append('maker = SargassoMeasureMaker()\n')
-        lines.append('%s = maker.make(' % material_name)
-        user_input_names = [pair[0] for pair in user_input_pairs]
-        for user_input_name in user_input_names[:-1]:
-            lines.append('\t%s,' % user_input_name)
-        lines.append('\t%s)' % user_input_names[-1])
+        lines.append('maker = SargassoMeasureMaker()')
+        lines.append('%s = maker.make(**user_input)' % material_name)
         return lines
             
     def get_user_input_import_statements(self):
         return [
             'from abjad.tools.durationtools import Duration',
             'from baca.makers import SargassoMeasureMaker',
+            'from baca.scf import UserInputWrapper',
         ]
 
     def get_user_input_pairs(self):
@@ -179,9 +182,6 @@ class SargassoMeasureMaker(_InteractiveMaterialMaker):
         output_body_lines.append(line)
         print ''
 
-        #for line in output_header_lines:
-        #    print line
-        #print ''
         for line in output_body_lines:
             print line
         print ''
@@ -293,31 +293,34 @@ class SargassoMeasureMaker(_InteractiveMaterialMaker):
         return measures
 
     def make_lilypond_file(self, measures):
-        from abjad.tools import leaftools
+        #from abjad.tools import leaftools
         from abjad.tools import lilypondfiletools
-        from abjad.tools import layouttools
-        from abjad.tools import markuptools
+        #from abjad.tools import layouttools
+        #from abjad.tools import markuptools
         from abjad.tools import measuretools
-        from abjad.tools import schemetools
+        #from abjad.tools import schemetools
         from abjad.tools import scoretools
         from abjad.tools import stafftools
         staff = stafftools.RhythmicStaff(measures)
         score = scoretools.Score([staff])
-        leaf = leaftools.get_leaf_in_expr_with_minimum_prolated_duration(score)
-        scheme_moment = schemetools.SchemeMoment(fractions.Fraction(2, 3) * leaf.prolated_duration)
-        score.override.bar_number.transparent = True
-        score.override.time_signature.break_visibility = schemetools.SchemeVariable('end-of-line-invisible')
-        score.set.proportional_notation_duration = scheme_moment
+        lilypond_file = lilypondfiletools.make_basic_lilypond_file(score)
+        lilypond_file.file_initial_system_comments = []
+        lilypond_file.file_initial_system_includes = []
+#        leaf = leaftools.get_leaf_in_expr_with_minimum_prolated_duration(score)
+#        scheme_moment = schemetools.SchemeMoment(fractions.Fraction(2, 3) * leaf.prolated_duration)
+#        score.override.bar_number.transparent = True
+#        score.override.time_signature.break_visibility = schemetools.SchemeVariable('end-of-line-invisible')
+#        score.set.proportional_notation_duration = scheme_moment
         measuretools.apply_beam_spanners_to_measures_in_expr(score)
         scoretools.add_double_bar_to_end_of_score(score)
-        lilypond_file = lilypondfiletools.make_basic_lilypond_file(score) 
-        lilypond_file.default_paper_size = 'letter', 'portrait'
-        lilypond_file.global_staff_size = 14
-        lilypond_file.header_block.title = markuptools.Markup('Sargasso measures')
-        lilypond_file.layout_block.indent = 0
-        lilypond_file.layout_block.ragged_right = True
-        lilypond_file.paper_block.markup_system_spacing = layouttools.make_spacing_vector(0, 0, 12, 0)
-        lilypond_file.paper_block.system_system_spacing = layouttools.make_spacing_vector(0, 0, 10, 0)
+#        lilypond_file = lilypondfiletools.make_basic_lilypond_file(score) 
+#        lilypond_file.default_paper_size = 'letter', 'portrait'
+#        lilypond_file.global_staff_size = 14
+#        lilypond_file.header_block.title = markuptools.Markup('Sargasso measures')
+#        lilypond_file.layout_block.indent = 0
+#        lilypond_file.layout_block.ragged_right = True
+#        lilypond_file.paper_block.markup_system_spacing = layouttools.make_spacing_vector(0, 0, 12, 0)
+#        lilypond_file.paper_block.system_system_spacing = layouttools.make_spacing_vector(0, 0, 10, 0)
         return lilypond_file
 
     def make_interactively(self):
@@ -331,7 +334,6 @@ class SargassoMeasureMaker(_InteractiveMaterialMaker):
         self.write_material_to_disk(
             user_input_import_statements, user_input_pairs, measures, lilypond_file)
         self.conclude()
-
 
     def permute_divided_measure_tokens(self, divided_measure_tokens):
         '''This can be extended later.'''

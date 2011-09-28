@@ -4,4 +4,5 @@ from MenuSectionSpecifier import MenuSectionSpecifier
 from MenuSpecifier import MenuSpecifier
 from ScorePackageProxy import ScorePackageProxy
 from StudioProxy import StudioProxy
+from UserInputWrapper import UserInputWrapper
 import io
