@@ -27,6 +27,7 @@ class MaterialPackageProxy(SCFProxyObject):
         self.visualizer = os.path.join(self.directory, 'visualization.py')
         self.pdf = os.path.join(self.directory, 'visualization.pdf')
         self.ly = os.path.join(self.directory, 'visualization.ly')
+        self.stylesheet = os.path.join(self.directory, 'stylesheet.ly')
         self.material_module_name = '%s.%s' % (self.materials_module_name, self.material_name)
         self.input_module_name = '%s.input' % self.material_module_name
         self.output_module_name = '%s.output' % self.material_module_name
@@ -66,6 +67,10 @@ class MaterialPackageProxy(SCFProxyObject):
     @property
     def has_score_definition(self):
         return bool(self.import_score_definition_from_visualizer())
+
+    @property
+    def has_stylesheet(self):
+        return os.path.exists(self.stylesheet)
     
     @property
     def has_visualizer(self):
@@ -132,6 +137,9 @@ class MaterialPackageProxy(SCFProxyObject):
 
     def edit_output_file(self):
         os.system('vi + %s' % self.output_file)
+
+    def edit_stylesheet(self):
+        os.system('vi %s' % self.stylesheet)
 
     def edit_visualizer(self):
         os.system('vi + %s' % self.visualizer)
@@ -270,11 +278,13 @@ class MaterialPackageProxy(SCFProxyObject):
                 named_pairs.append(('v', 'visualizer'))
             if self.has_ly:
                 named_pairs.append(('l', 'ly'))
+            if self.has_stylesheet:
+                named_pairs.append(('y', 'stylesheet'))
             if self.has_pdf:
                 named_pairs.append(('p', 'pdf'))
             menu_specifier.named_pairs = named_pairs
             secondary_named_pairs = [
-                ('a', 'make'),
+                #('a', 'make'),
                 ('d', 'delete'),
                 ('r', 'rename'), 
                 ('s', 'summarize'),
@@ -295,6 +305,8 @@ class MaterialPackageProxy(SCFProxyObject):
                     break
             elif key == 'i':
                 self.manage_input(command_string)
+            elif key == 'l':
+                self.manage_ly(command_string)
             elif key == 'o':
                 self.manage_output(command_string)
             elif key == 'p':
@@ -303,16 +315,16 @@ class MaterialPackageProxy(SCFProxyObject):
                 raise SystemExit
             elif key == 'r':
                 self.rename_material()
+            elif key == 's':
+                self.summarize_material()
             elif key == 'v':
                 self.manage_visualizer(command_string)
             elif key == 'w':
                 is_redraw = True
             elif key == 'x':
                 self.exec_statement()
-            elif key == 'l':
-                self.manage_ly(command_string)
-            elif key == 's':
-                self.summarize_material()
+            elif key == 'y':
+                self.edit_stylesheet()
             elif key == 'z':
                 self.manage_regeneration(command_string)
             if is_redraw:
