@@ -10,8 +10,8 @@ class _MaterialPackageMaker(object):
 
     ### PRIVATE METHODS ###
 
-    def _create_materials_package(self, materials_directory, package_prefix = ''):
-        response = raw_input('material name: ')
+    def _create_materials_package(self, materials_directory, package_prefix=''):
+        response = raw_input('Material name: ')
         print ''
         response = response.lower()
         response = response.replace(' ', '_')
@@ -19,12 +19,12 @@ class _MaterialPackageMaker(object):
             material_package_name = '%s_%s' % (package_prefix, response)
         else:
             material_package_name = response
-        print 'package name will be %s.\n' % material_package_name
+        print 'Package name will be %s.\n' % material_package_name
         self.confirm()
         print ''
         target = os.path.join(materials_directory, material_package_name)
         if os.path.exists(target):
-            raise OSError('directory %r already exists.' % target)
+            raise OSError('Directory %r already exists.' % target)
         os.mkdir(target)
         response = raw_input('Include visualizer? ')
         print ''

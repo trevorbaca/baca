@@ -111,6 +111,7 @@ class SCFProxyObject(object):
             proc = subprocess.Popen(command, shell=True, stdout=subprocess.PIPE)
             first_line = proc.stdout.readline()
             print 'Removed %s ...\n' % self.directory
+            print '(Subversion will cause empty package to remain visible until next commit.)\n'
             return True
         return False
 

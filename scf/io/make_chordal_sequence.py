@@ -70,10 +70,10 @@ def make_chordal_sequence(score_package_name):
     data_file.close()
 
     ly_file_name = os.path.join(chordal_sequence_path, chordal_sequence_name + '.ly')
-    iotools.write_expr_to_ly(lilypond_file, ly_file_name, print_status = False)
+    iotools.write_expr_to_ly(lilypond_file, ly_file_name, print_status=False)
 
     pdf_file_name = os.path.join(chordal_sequence_path, chordal_sequence_name + '.pdf')
-    iotools.write_expr_to_pdf(lilypond_file, pdf_file_name, print_status = False)
+    iotools.write_expr_to_pdf(lilypond_file, pdf_file_name, print_status=False)
 
     print '%s %s written to disk.\n' % (score_title, subtitle)
 

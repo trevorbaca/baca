@@ -10,7 +10,7 @@ class SharedMaterialsProxy(SCFProxyObject, _MaterialPackageMaker):
 
     ### PUBLIC METHODS ###
 
-    def create_shared_material_package(self, is_interactive = False):
+    def create_shared_material_package(self, is_interactive=False):
         if is_interactive:
             makers_proxy = MakersProxy()
             makers_proxy.manage_makers()
@@ -48,14 +48,14 @@ class SharedMaterialsProxy(SCFProxyObject, _MaterialPackageMaker):
                         shared_material_package_names.append(x)
         return shared_material_package_names
 
-    def manage_shared_materials(self, command_string = None):
+    def manage_shared_materials(self, command_string=None):
         is_first_pass = True
         while True:
             is_redraw = False
             if command_string is None:
                 material_names = self.list_shared_material_names()
                 menu_specifier = MenuSpecifier()
-                menu_specifier.menu_title = 'Shared manterials - main menu'
+                menu_specifier.menu_title = 'Shared manterials'
                 menu_specifier.items_to_number = self.list_shared_material_names()
                 menu_specifier.sentence_length_items = [
                     ('i', 'make new material interactively'),
@@ -68,7 +68,7 @@ class SharedMaterialsProxy(SCFProxyObject, _MaterialPackageMaker):
             if key == 'b':
                 return 'b'
             elif key == 'i':
-                self.create_shared_material_package(is_interactive = True)
+                self.create_shared_material_package(is_interactive=True)
             elif key == 'n':
                 self.create_shared_material_package()
                 is_redraw = True

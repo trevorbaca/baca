@@ -8,7 +8,7 @@ import sys
 
 class MaterialPackageProxy(SCFProxyObject):
 
-    def __init__(self, score_package_name, material_name, is_shared_material = False):
+    def __init__(self, score_package_name, material_name, is_shared_material=False):
         self.help_item_width = 5
         self.score_package_name = score_package_name
         self.material_name_with_spaces = material_name
@@ -94,7 +94,7 @@ class MaterialPackageProxy(SCFProxyObject):
         import_statement = 'from %s import %s\n' % (self.material_name, self.material_name)
         self.add_line_to_initializer(self.parent_initializer, import_statement)
 
-    def create_ly_and_pdf_from_visualizer(self, is_forced = False):
+    def create_ly_and_pdf_from_visualizer(self, is_forced=False):
         lilypond_file = self.import_score_definition_from_visualizer()
         if is_forced or not self.lilypond_file_format_is_equal_to_visualizer_ly(lilypond_file):
             iotools.write_expr_to_ly(lilypond_file, self.ly)
@@ -103,7 +103,7 @@ class MaterialPackageProxy(SCFProxyObject):
             print 'LilyPond file is the same. (LilyPond file and PDF preserved.)'
         print ''
         
-    def create_ly_from_visualizer(self, is_forced = False):
+    def create_ly_from_visualizer(self, is_forced=False):
         lilypond_file = self.import_score_definition_from_visualizer()
         if is_forced or not self.lilypond_file_format_is_equal_to_visualizer_ly(lilypond_file):
             iotools.write_expr_to_ly(lilypond_file, self.ly)
@@ -111,7 +111,7 @@ class MaterialPackageProxy(SCFProxyObject):
             print 'LilyPond file is the same. (LilyPond file preserved.)'
         print ''
 
-    def create_pdf_from_visualizer(self, is_forced = False):
+    def create_pdf_from_visualizer(self, is_forced=False):
         lilypond_file = self.import_score_definition_from_visualizer()
         if is_forced or not self.lilypond_file_format_is_equal_to_visualizer_ly(lilypond_file):
             iotools.write_expr_to_pdf(lilypond_file, self.pdf)
@@ -201,7 +201,7 @@ class MaterialPackageProxy(SCFProxyObject):
 
     def lilypond_file_format_is_equal_to_visualizer_ly(self, lilypond_file):
         temp_ly_file = os.path.join(os.environ.get('HOME'), 'tmp.ly')
-        iotools.write_expr_to_ly(lilypond_file, temp_ly_file, print_status = False)
+        iotools.write_expr_to_ly(lilypond_file, temp_ly_file, print_status=False)
         trimmed_temp_ly_file_lines = self.trim_ly_lines(temp_ly_file)
         os.remove(temp_ly_file)
         trimmed_visualizer_ly_lines = self.trim_ly_lines(self.ly)
@@ -226,7 +226,7 @@ class MaterialPackageProxy(SCFProxyObject):
             self.edit_input_file()
             self.run_abjad_on_input_file()
         elif command_string == 'iw':
-            self.write_input_data_to_output_file(is_forced = True)
+            self.write_input_data_to_output_file(is_forced=True)
             print ''
 
     def manage_ly(self, command_string):
@@ -244,16 +244,16 @@ class MaterialPackageProxy(SCFProxyObject):
                 print ''
             elif self.has_input_file:
                 if self.query('Write material to disk? '):
-                    self.write_input_data_to_output_file(is_forced = True)
+                    self.write_input_data_to_output_file(is_forced=True)
                 print ''
             else:
-                if self.query('Creat input file? '):
+                if self.query('Create input file? '):
                     self.edit_input_file()
                 print ''
         elif command_string == 'lw':
-            self.create_ly_from_visualizer(is_forced = True)
+            self.create_ly_from_visualizer(is_forced=True)
         elif command_string == 'lwo':
-            self.create_ly_from_visualizer(is_forced = True)
+            self.create_ly_from_visualizer(is_forced=True)
             self.edit_ly()
         elif command_string == 'lh':
             print '%s: open ly' % 'l'.rjust(self.help_item_width)
@@ -295,7 +295,6 @@ class MaterialPackageProxy(SCFProxyObject):
             key = command_string[0]
             if key == 'a':
                 self.make_material_interactively(self, command_string)
-                #break
             elif key == 'b':
                 break
             elif key == 'd':
@@ -358,16 +357,16 @@ class MaterialPackageProxy(SCFProxyObject):
                 print ''
             elif self.has_input_file:
                 if self.query('Write material to disk? '):
-                    self.write_input_data_to_output_file(is_forced = True)
+                    self.write_input_data_to_output_file(is_forced=True)
                 print ''
             else:
                 if self.query('Create input file? '):
                     self.edit_input_file()
                 print '' 
         elif command_string == 'pw':
-            self.create_pdf_from_visualizer(is_forced = True)
+            self.create_pdf_from_visualizer(is_forced=True)
         elif command_string == 'pwo':
-            self.create_pdf_from_visualizer(is_forced = True)
+            self.create_pdf_from_visualizer(is_forced=True)
             self.open_pdf()
         elif command_string == 'ph':
             print '%s: open pdf' % 'p'.rjust(self.help_item_width)
@@ -377,13 +376,13 @@ class MaterialPackageProxy(SCFProxyObject):
 
     def manage_regeneration(self, command_string):
         if command_string == 'z':
-            self.regenerate_everything(is_forced = True)
+            self.regenerate_everything(is_forced=True)
         elif command_string == 'zh':
             print '%s: regenerate everything' % 'z'.rjust(self.help_item_width)
             print '%s: regenerate everything and open pdf' % 'zo'.rjust(self.help_item_width)
             print ''
         elif command_string == 'zo':
-            self.regenerate_everything(is_forced = True)
+            self.regenerate_everything(is_forced=True)
             self.open_pdf()
 
     def manage_visualizer(self, command_string):
@@ -406,7 +405,7 @@ class MaterialPackageProxy(SCFProxyObject):
                 self.create_visualizer()
         elif self.has_input_file:
             if self.query('Write material to disk? '):
-                self.write_input_data_to_output_file(is_forced = True)
+                self.write_input_data_to_output_file(is_forced=True)
         else:
             if self.query('Create input file? '):
                 self.edit_input_file()
@@ -426,18 +425,18 @@ class MaterialPackageProxy(SCFProxyObject):
             material_name = '%s_%s' % (self.score_package_name, material_name)
         return material_name
 
-    def regenerate_everything(self, is_forced = False):
-        is_changed = self.write_input_data_to_output_file(is_forced = is_forced)
-        is_changed = self.create_ly_and_pdf_from_visualizer(is_forced = (is_changed or is_forced))
+    def regenerate_everything(self, is_forced=False):
+        is_changed = self.write_input_data_to_output_file(is_forced=is_forced)
+        is_changed = self.create_ly_and_pdf_from_visualizer(is_forced=(is_changed or is_forced))
         return is_changed
 
     def rename_material(self):
-        print 'current material name: %s' % self.material_name
-        new_material_name = raw_input('new material name:     ')
+        print 'Current material name: %s' % self.material_name
+        new_material_name = raw_input('New material name:     ')
         print ''
         new_material_name = self.prepend_score_package_name(new_material_name)
-        print 'current material name: %s' % self.material_name
-        print 'new material name:     %s' % new_material_name
+        print 'Current material name: %s' % self.material_name
+        print 'New material name:     %s' % new_material_name
         print ''
         if not self.confirm():
             return
@@ -588,7 +587,7 @@ class MaterialPackageProxy(SCFProxyObject):
         self.add_material_to_materials_initializer()
         print "Material in 'input.py' written to 'output.py' ..."
 
-    def write_input_data_to_output_file(self, is_forced = False):
+    def write_input_data_to_output_file(self, is_forced=False):
         is_changed = self.import_material_from_input_file() != self.import_material_from_output_file()
         if is_changed or is_forced:
             self._write_input_data_to_output_file()

@@ -29,7 +29,7 @@ class StudioProxy(SCFProxyObject):
             menu_specifier.menu_title = 'Welcome to the studio'
             menu_specifier.items_to_number = self.catalog.list_score_titles_with_years()
             menu_specifier.sentence_length_items = [
-                ('m', 'manage materials shared across multiple scores'),
+                ('m', 'manage shared materials'),
                 ]
             menu_specifier.include_back = False
             menu_specifier.indent_level = 1
