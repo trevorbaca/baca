@@ -36,15 +36,15 @@ class SCFProxyObject(object):
 
     ### PUBLIC METHODS ###
 
-    def clear_terminal(self):
-        iotools.clear_terminal()
-
-    def confirm(self):
-        response = raw_input('Ok? ')
-        if not response.lower() == 'y':
-            print ''
-            return False
-        return True
+#    def clear_terminal(self):
+#        iotools.clear_terminal()
+#
+#    def confirm(self):
+#        response = raw_input('Ok? ')
+#        if not response.lower() == 'y':
+#            print ''
+#            return False
+#        return True
 
     def exec_statement(self):
         statement = raw_input('xcf> ')
@@ -63,10 +63,10 @@ class SCFProxyObject(object):
         file_pointer.write('\n'.join(new_file_lines))
         file_pointer.close()
 
-    def go_on(self):
-        response = raw_input('Press return to continue.')
-        print ''
-        self.clear_terminal()
+#    def go_on(self):
+#        response = raw_input('Press return to continue.')
+#        print ''
+#        self.clear_terminal()
 
     def path_is_in_repository(self, path_name):
         command = 'svn st %s' % path_name
@@ -80,13 +80,13 @@ class SCFProxyObject(object):
     def print_not_implemented(self):
         print 'Not yet implemented.\n'
 
-    def print_tab(self, n):
-        if 0 < n:
-            print self.tab(n),
-
-    def query(self, prompt):
-        response = raw_input(prompt)
-        return response.lower().startswith('y')
+#    def print_tab(self, n):
+#        if 0 < n:
+#            print self.tab(n),
+#
+#    def query(self, prompt):
+#        response = raw_input(prompt)
+#        return response.lower().startswith('y')
 
     def remove_directory(self):
         if self.is_in_repository:
@@ -127,5 +127,5 @@ class SCFProxyObject(object):
         command = "if '%s' in sys.modules: del(sys.modules['%s'])" % (module_name, module_name)
         exec(command)
         
-    def tab(self, n):
-        return 4 * n * ' '
+#    def tab(self, n):
+#        return 4 * n * ' '

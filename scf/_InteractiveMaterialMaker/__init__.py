@@ -1,1 +1,0 @@
-from _InteractiveMaterialMaker import _InteractiveMaterialMaker

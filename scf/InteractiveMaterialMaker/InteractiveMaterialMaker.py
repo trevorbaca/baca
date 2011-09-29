@@ -8,7 +8,7 @@ import os
 import shutil
 
 
-class _InteractiveMaterialMaker(_MaterialPackageMaker):
+class InteractiveMaterialMaker(_MaterialPackageMaker):
     '''Interactive material-maker base class.
     '''
 

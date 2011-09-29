@@ -281,31 +281,31 @@ class ScorePackageProxy(SCFProxyObject, _MaterialPackageMaker):
             command_string = None
 
     def make_new_chunk_by_hand(self):
-        self.clear_terminal()
+        #self.clear_terminal()
         print '%s - make new chunk by hand\n' % self.score_title
         self.print_not_implemented()
-        self.go_on()
+        #self.go_on()
 
     def make_new_chunk_interactively(self):
-        self.clear_terminal()
+        #self.clear_terminal()
         print '%s - make new chunk interactively\n' % self.score_title
         self.print_not_implemented()
-        self.go_on()
+        #self.go_on()
 
     def make_new_material_by_hand(self):
-        self.clear_terminal()
+        #self.clear_terminal()
         print '%s - make new material by hand\n' % self.score_title
         self.create_materials_package()
-        self.go_on()
+        #self.go_on()
 
     def make_new_material_interactively(self):
-        self.clear_terminal()
-        print '%s - make new material interactively\n' % self.score_title
+        #self.clear_terminal()
+        #print '%s - make new material interactively\n' % self.score_title
         makers_proxy = MakersProxy()
-        maker = makers_proxy.select_interactive_maker(show_menu_title=False)
+        maker = makers_proxy.select_interactive_maker(score_title=self.score_title, show_menu_title=True)
         maker.materials_directory = self.materials_directory
         maker.make_interactively()
-        self.go_on()
+        #self.go_on()
 
     def material_number_to_material_name(self, material_number):
         material_index = material_number - 1

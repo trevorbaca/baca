@@ -53,15 +53,19 @@ class MakersProxy(SCFProxyObject):
             else:
                 is_first_pass = False
 
-    def select_interactive_maker(self, show_menu_title=True):
+    def select_interactive_maker(self, score_title=None, show_menu_title=True):
         is_first_pass = True
         while True:
             is_redraw = False
             menu_specifier = MenuSpecifier()
             if show_menu_title:
-                menu_specifier.menu_title = 'Select interactive material maker'
+                menu_title = 'Select interactive material maker'
+                if score_title is not None:
+                    menu_title = '%s - %s' % (score_title, menu_title.lower())
+                menu_specifier.menu_title = menu_title
             menu_specifier.items_to_number = self.list_makers()
-            key, value = menu_specifier.display_menu(clear_terminal=False)
+            #key, value = menu_specifier.display_menu(clear_terminal=False)
+            key, value = menu_specifier.display_menu()
             result = None
             if key == 'b':
                 return 'b'

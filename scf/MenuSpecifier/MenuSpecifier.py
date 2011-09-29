@@ -185,6 +185,16 @@ class MenuSpecifier(object):
 
     ### PUBLIC METHODS ###
 
+    def clear_terminal(self):
+        iotools.clear_terminal()
+
+    def confirm(self):
+        response = raw_input('Ok? ')
+        if not response.lower() == 'y':
+            print ''
+            return False
+        return True
+
     def display_menu(self, clear_terminal=True):
         if clear_terminal:
             os.system('clear')
@@ -205,3 +215,19 @@ class MenuSpecifier(object):
         pair_dictionary = dict(zip(all_keys, all_values))
         value = pair_dictionary[response]
         return response, value
+
+    def go_on(self):
+        response = raw_input('Press return to continue.')
+        print ''
+        self.clear_terminal()
+
+    def print_tab(self, n):
+        if 0 < n:
+            print self.tab(n),
+
+    def query(self, prompt):
+        response = raw_input(prompt)
+        return response.lower().startswith('y')
+
+    def tab(self, n):
+        return 4 * n * ' '
