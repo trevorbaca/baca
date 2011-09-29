@@ -185,27 +185,20 @@ class InteractiveMaterialMaker(_MaterialPackageMaker):
             user_input_wrapper = self._initialize_user_input_wrapper()
         while True:
             menu_specifier = MenuSpecifier()
-            menu_title = '%s - edit interactively' % type(self).__name__
-            if self.score_title is not None:
-                menu_title = '%s - %s' % (self.score_title, menu_title)
-            menu_specifier.menu_title = menu_title
+            menu_specifier.menu_title = 'edit interactively'
             pairs = list(user_input_wrapper.iteritems())
             pairs = ['%s: %s' % (pair[0].replace('_', ' '), pair[1]) for pair in pairs]
             menu_specifier.items_to_number = pairs
             if user_input_wrapper.is_complete:
                 menu_specifier.sentence_length_items.append(('p', 'render pdf of given input'))
             menu_specifier.sentence_length_items.append(('d', 'show demo input values'))
-            key, value = menu_specifier.display_menu()
+            key, value = menu_specifier.display_menu(score_title=self.score_title)
             if key == 'b':
                 return None
             elif key == 'd':
                 self.show_demo_input_values()
             elif key == 'p':
                 self.render_pdf_from_input(user_input_wrapper)
-            elif key == 'q':
-                raise SystemExit
-            elif key == 'x':
-                self.exec_statement()
 
     def read_user_input_from_disk(self):
         raise Exception('Call on derived concrete classes.')

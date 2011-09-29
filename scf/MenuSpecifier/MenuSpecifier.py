@@ -57,10 +57,13 @@ class MenuSpecifier(object):
         for menu_section in self.menu_sections:
             menu_section.display(all_keys, all_values)
         
-    def _display_menu_title(self):
+    def _display_menu_title(self, score_title=None):
         if self.menu_title:
             if not self.hide_menu:
-                print self.menu_title
+                if score_title is not None:
+                    print '%s - %s' % (score_title, self.menu_title.lower())
+                else:
+                    print self.menu_title
                 print ''
 
     def _display_named_pairs(self, named_pairs, all_keys, all_values):
@@ -226,11 +229,11 @@ class MenuSpecifier(object):
             return False
         return True
 
-    def display_menu(self):
+    def display_menu_core(self, score_title=None):
         if self.clear_terminal:
             os.system('clear')
         all_keys, all_values = [], []
-        self._display_menu_title()
+        self._display_menu_title(score_title=score_title)
         self._display_menu_sections(all_keys, all_values)
         self._display_items_to_number(all_keys, all_values)
         self._display_sentence_length_items(all_keys, all_values)
@@ -247,6 +250,29 @@ class MenuSpecifier(object):
         pair_dictionary = dict(zip(all_keys, all_values))
         value = pair_dictionary[response]
         return response, value
+
+    def display_menu(self, score_title=None):
+        clear_terminal, hide_menu = True, False
+        while True:
+            self.clear_terminal, self.hide_menu = clear_terminal, hide_menu
+            key, value = self.display_menu_core(score_title=score_title)
+            clear_terminal, hide_menu = False, True
+            if key == 'b':
+                return 'b', None
+            elif key == 'q':
+                raise SystemExit
+            elif key == 'w':
+                clear_terminal, hide_menu = True, False
+            elif key == 'x':
+                self.exec_statement()
+            else:
+                return key, value
+
+    def exec_statement(self):
+        statement = raw_input('xcf> ')
+        exec('from abjad import *')
+        exec('result = %s' % statement)
+        print repr(result) + '\n'
 
     def print_tab(self, n):
         if 0 < n:
