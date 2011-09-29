@@ -1,8 +1,13 @@
 from CatalogProxy import CatalogProxy
+from DirectoryProxy import DirectoryProxy
+from InteractiveMaterialMaker import InteractiveMaterialMaker
+from MakersProxy import MakersProxy
 from MaterialPackageProxy import MaterialPackageProxy
 from MenuSectionSpecifier import MenuSectionSpecifier
 from MenuSpecifier import MenuSpecifier
+from PackageProxy import PackageProxy
+from SCFObject import SCFObject
 from ScorePackageProxy import ScorePackageProxy
+from SharedMaterialsProxy import SharedMaterialsProxy
 from StudioProxy import StudioProxy
 from UserInputWrapper import UserInputWrapper
-import io
