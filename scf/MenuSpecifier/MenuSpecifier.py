@@ -216,6 +216,12 @@ class MenuSpecifier(object):
         value = pair_dictionary[response]
         return response, value
 
+    def exec_statement(self):
+        statement = raw_input('xcf> ')
+        exec('from abjad import *')
+        exec('result = %s' % statement)
+        print repr(result) + '\n'
+
     def go_on(self):
         response = raw_input('Press return to continue.')
         print ''
