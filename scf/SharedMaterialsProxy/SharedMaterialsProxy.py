@@ -2,11 +2,11 @@ from baca.scf._MaterialPackageMaker import _MaterialPackageMaker
 from baca.scf.MakersProxy import MakersProxy
 from baca.scf.MaterialPackageProxy import MaterialPackageProxy
 from baca.scf.MenuSpecifier import MenuSpecifier
-from baca.scf.SCFProxyObject import SCFProxyObject
+from baca.scf.DirectoryProxy import DirectoryProxy
 import os
 
 
-class SharedMaterialsProxy(SCFProxyObject, _MaterialPackageMaker):
+class SharedMaterialsProxy(DirectoryProxy, _MaterialPackageMaker):
 
     ### PUBLIC METHODS ###
 

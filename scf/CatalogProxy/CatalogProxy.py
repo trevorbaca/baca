@@ -1,10 +1,10 @@
 from baca.scf.MenuSpecifier import MenuSpecifier
-from baca.scf.SCFProxyObject import SCFProxyObject
+from baca.scf.DirectoryProxy import DirectoryProxy
 from baca.scf.ScorePackageProxy import ScorePackageProxy
 import os
 
 
-class CatalogProxy(SCFProxyObject):
+class CatalogProxy(DirectoryProxy):
 
     def __init__(self):
         self.scores_directory = os.environ.get('SCORES')

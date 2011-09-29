@@ -1,12 +1,12 @@
 from baca.scf.CatalogProxy import CatalogProxy
 from baca.scf.MenuSpecifier import MenuSpecifier
-from baca.scf.SCFProxyObject import SCFProxyObject
+from baca.scf.DirectoryProxy import DirectoryProxy
 from baca.scf.ScorePackageProxy import ScorePackageProxy
 from baca.scf.SharedMaterialsProxy import SharedMaterialsProxy
 import os
 
 
-class StudioProxy(SCFProxyObject):
+class StudioProxy(DirectoryProxy):
 
     ### OVERLOADS ###
 

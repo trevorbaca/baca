@@ -1,9 +1,9 @@
 from baca.scf.MenuSpecifier import MenuSpecifier
-from baca.scf.SCFProxyObject import SCFProxyObject
+from baca.scf.DirectoryProxy import DirectoryProxy
 import os
 
 
-class MakersProxy(SCFProxyObject):
+class MakersProxy(DirectoryProxy):
 
     def __init__(self):
         self.makers_directory = os.path.join(os.environ.get('BACA'), 'makers')

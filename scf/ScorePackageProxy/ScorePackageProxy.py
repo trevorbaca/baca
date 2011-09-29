@@ -3,11 +3,11 @@ from baca.scf.MakersProxy import MakersProxy
 from baca.scf.MaterialPackageProxy import MaterialPackageProxy
 from baca.scf.MenuSectionSpecifier import MenuSectionSpecifier
 from baca.scf.MenuSpecifier import MenuSpecifier
-from baca.scf.SCFProxyObject import SCFProxyObject
+from baca.scf.DirectoryProxy import DirectoryProxy
 import os
 
 
-class ScorePackageProxy(SCFProxyObject, _MaterialPackageMaker):
+class ScorePackageProxy(DirectoryProxy, _MaterialPackageMaker):
 
     def __init__(self, score_package_name):
         self.score_package_directory = os.path.join(os.environ.get('SCORES'), score_package_name)

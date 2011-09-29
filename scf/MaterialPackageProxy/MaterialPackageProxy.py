@@ -1,12 +1,12 @@
 from abjad.tools import iotools
 from baca.scf.MenuSpecifier import MenuSpecifier
-from baca.scf.SCFProxyObject import SCFProxyObject
+from baca.scf.DirectoryProxy import DirectoryProxy
 import os
 import subprocess
 import sys
 
 
-class MaterialPackageProxy(SCFProxyObject):
+class MaterialPackageProxy(DirectoryProxy):
 
     def __init__(self, score_package_name, material_name, is_shared_material=False):
         self.help_item_width = 5

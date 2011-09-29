@@ -6,9 +6,8 @@ import subprocess
 import sys
 
 
-# TODO: rename to DirectoryProxy
 # TODO: implement new PackageProxy to inherit from this DirectoryProxy
-class SCFProxyObject(SCFObject):
+class DirectoryProxy(SCFObject):
 
     ### PUBLIC ATTRIBUTES ###
 
