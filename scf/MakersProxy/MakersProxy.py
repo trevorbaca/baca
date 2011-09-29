@@ -54,9 +54,8 @@ class MakersProxy(DirectoryProxy):
                 is_first_pass = False
 
     def select_interactive_maker(self, score_title=None, show_menu_title=True):
-        is_first_pass = True
+        clear_terminal, hide_menu = True, False
         while True:
-            is_redraw = False
             menu_specifier = MenuSpecifier()
             if show_menu_title:
                 menu_title = 'Select interactive material maker'
@@ -64,21 +63,18 @@ class MakersProxy(DirectoryProxy):
                     menu_title = '%s - %s' % (score_title, menu_title.lower())
                 menu_specifier.menu_title = menu_title
             menu_specifier.items_to_number = self.list_makers()
+            menu_specifier.clear_terminal, menu_specifier.hide_menu = clear_terminal, hide_menu
             key, value = menu_specifier.display_menu()
-            result = None
+            clear_terminal, hide_menu = False, True
             if key == 'b':
                 return None
             elif key == 'q':
                 raise SystemExit
             elif key == 'w':
-                is_redraw = True
+                clear_terminal, hide_menu = True, False
             elif key == 'x':
                 self.exec_statement()
             else:
                 maker_name = value
                 maker = self.get_maker(maker_name)
                 return maker
-            if is_redraw or result == 'b':
-                is_first_pass = True
-            else:
-                is_first_pass = False

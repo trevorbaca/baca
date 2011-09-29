@@ -50,7 +50,7 @@ class SharedMaterialsProxy(DirectoryProxy, _MaterialPackageMaker):
 
     def make_new_material_by_hand(self):
         self.print_not_implemented()
-        self.run_go_on_menu()
+        self.run_continue_menu()
 
     def manage_shared_materials(self, command_string=None):
         is_first_pass = True

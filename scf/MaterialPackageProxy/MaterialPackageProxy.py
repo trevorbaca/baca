@@ -137,7 +137,7 @@ class MaterialPackageProxy(PackageProxy):
         self.remove_material_from_materials_initializer()
         result = self.remove_directory()
         if result:
-            self.go_on()
+            self.proceed()
 
     def edit_input_file(self):
         os.system('vi + %s' % self.input_file)

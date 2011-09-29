@@ -5,7 +5,8 @@ class MenuSpecifier(object):
 
     def __init__(self, menu_title='', menu_sections=None, items_to_number=None, 
         sentence_length_items=None, named_pairs=None, secondary_named_pairs=None,
-        include_back=True, indent_level=1, item_width = 11):
+        include_back=True, indent_level=1, item_width = 11, clear_terminal=True,
+        hide_menu=False):
         self.menu_title = menu_title
         self.menu_sections = menu_sections
         self.items_to_number = items_to_number
@@ -15,6 +16,8 @@ class MenuSpecifier(object):
         self.include_back = include_back
         self.indent_level = indent_level
         self.item_width = item_width
+        self.clear_terminal = clear_terminal
+        self.hide_menu = hide_menu
 
     ### OVERLOADS ###
 
@@ -24,26 +27,31 @@ class MenuSpecifier(object):
     ### PRIVATE METHODS ###
 
     def _display_footer_items(self, all_keys, all_values):
-        self._print_tab(self.indent_level)
+        if not self.hide_menu:
+            self._print_tab(self.indent_level)
         footer_pairs = self._get_footer_pairs()
         for key, value in footer_pairs:
-            print '%s: %s ' % (key, value.ljust(self.item_width)),
+            if not self.hide_menu:
+                print '%s: %s ' % (key, value.ljust(self.item_width)),
             all_keys.append(key)
             all_values.append(value)
         if footer_pairs:
-            print ''
+            if not self.hide_menu:
+                print ''
         
     def _display_items_to_number(self, all_keys, all_values):
         keys = range(1, len(self.items_to_number) + 1)
         keys = [str(x) for x in keys]
         pairs = zip(keys, self.items_to_number)
         for key, value in pairs:
-            self._print_tab(self.indent_level),
-            print '%s: %s' % (key, value)
+            if not self.hide_menu:
+                self._print_tab(self.indent_level),
+                print '%s: %s' % (key, value)
             all_keys.append(key)
             all_values.append(value)
         if pairs:
-            print ''
+            if not self.hide_menu:
+                print ''
 
     def _display_menu_sections(self, all_keys, all_values):
         for menu_section in self.menu_sections:
@@ -51,26 +59,31 @@ class MenuSpecifier(object):
         
     def _display_menu_title(self):
         if self.menu_title:
-            print self.menu_title
-            print ''
+            if not self.hide_menu:
+                print self.menu_title
+                print ''
 
     def _display_named_pairs(self, named_pairs, all_keys, all_values):
         if named_pairs:
             self._print_tab(self.indent_level)
             for key, value in named_pairs:
-                print '%s: %s ' % (key, value.ljust(self.item_width)),
+                if not self.hide_menu:
+                    print '%s: %s ' % (key, value.ljust(self.item_width)),
                 all_keys.append(key)
                 all_values.append(value)
-            print ''
+            if not self.hide_menu:
+                print ''
 
     def _display_sentence_length_items(self, all_keys, all_values):
         for key, value in self.sentence_length_items:
-            self._print_tab(self.indent_level)
-            print '%s: %s ' % (key, value)
+            if not self.hide_menu:
+                self._print_tab(self.indent_level)
+                print '%s: %s ' % (key, value)
             all_keys.append(key)
             all_values.append(value)
         if self.sentence_length_items:
-            print ''
+            if not self.hide_menu:
+                print ''
 
     def _get_footer_pairs(self):
         footer_pairs = [
@@ -92,6 +105,24 @@ class MenuSpecifier(object):
 
     ### PUBLIC ATTRIBUTES ###
     
+    @apply
+    def clear_terminal():
+        def fget(self):
+            return self._clear_terminal
+        def fset(self, clear_terminal):
+            assert isinstance(clear_terminal, type(True))
+            self._clear_terminal = clear_terminal
+        return property(**locals())
+
+    @apply
+    def hide_menu():
+        def fget(self):
+            return self._hide_menu
+        def fset(self, hide_menu):
+            assert isinstance(hide_menu, type(True))
+            self._hide_menu = hide_menu
+        return property(**locals())
+
     @apply
     def include_back():
         def fget(self):
@@ -195,8 +226,8 @@ class MenuSpecifier(object):
             return False
         return True
 
-    def display_menu(self, clear_terminal=True):
-        if clear_terminal:
+    def display_menu(self):
+        if self.clear_terminal:
             os.system('clear')
         all_keys, all_values = [], []
         self._display_menu_title()
@@ -206,7 +237,8 @@ class MenuSpecifier(object):
         self._display_named_pairs(self.named_pairs, all_keys, all_values)
         self._display_named_pairs(self.secondary_named_pairs, all_keys, all_values)
         self._display_footer_items(all_keys, all_values)
-        print ''
+        if not self.hide_menu:
+            print ''
         while True:
             response = raw_input('scf> ')
             print ''
@@ -216,20 +248,13 @@ class MenuSpecifier(object):
         value = pair_dictionary[response]
         return response, value
 
-    def exec_statement(self):
-        statement = raw_input('xcf> ')
-        exec('from abjad import *')
-        exec('result = %s' % statement)
-        print repr(result) + '\n'
-
-    def go_on(self):
-        response = raw_input('Press return to continue.')
-        print ''
-        self.clear_terminal()
-
     def print_tab(self, n):
         if 0 < n:
             print self.tab(n),
+
+    def proceed(self):
+        response = raw_input('Press return to continue.\n')
+        self.clear_terminal()
 
     def query(self, prompt):
         response = raw_input(prompt)

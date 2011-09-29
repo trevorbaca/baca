@@ -15,6 +15,12 @@ class SCFObject(object):
 
     ### PUBLIC METHODS ###
 
+    def exec_statement(self):
+        statement = raw_input('xcf> ')
+        exec('from abjad import *')
+        exec('result = %s' % statement)
+        print repr(result) + '\n'
+
     def globally_replace_in_file(self, file_name, old, new):
         file_pointer = file(file_name, 'r')
         new_file_lines = []
