@@ -1,19 +1,12 @@
-from abjad.tools import iotools
 from baca.scf.SCFObject import SCFObject
 import os
-import re
 import subprocess
 import sys
 
 
-# TODO: implement new PackageProxy to inherit from this DirectoryProxy
 class DirectoryProxy(SCFObject):
 
     ### PUBLIC ATTRIBUTES ###
-
-    @property
-    def initializer(self):
-        return os.path.join(self.directory, '__init__.py')
 
     @property
     def is_in_repository(self):
@@ -22,10 +15,6 @@ class DirectoryProxy(SCFObject):
     @property
     def parent_directory(self):
         return os.path.dirname(self.directory)
-
-    @property
-    def parent_initializer(self):
-        return os.path.join(self.parent_directory, '__init__.py')
 
     ### PUBLIC METHODS ###
 
