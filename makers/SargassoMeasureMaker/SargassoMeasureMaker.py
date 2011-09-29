@@ -1,12 +1,10 @@
 from baca.scf.InteractiveMaterialMaker import InteractiveMaterialMaker
-from baca.scf.MenuSpecifier import MenuSpecifier
 from baca.scf.UserInputWrapper import UserInputWrapper
 from abjad.tools import durationtools
 from abjad.tools import leaftools
 from abjad.tools import mathtools
 from abjad.tools import measuretools
 from abjad.tools import sequencetools
-import copy
 import fractions
 import os
 
@@ -31,19 +29,6 @@ class SargassoMeasureMaker(InteractiveMaterialMaker):
 
     ### PUBLIC METHODS ###
 
-    def conclude(self):
-        print 'Sargasso measures successfully made.\n'
-        response = raw_input('Press return to continue.')
-
-    def format_user_input(self, user_input_pairs):
-        formatted_user_input_lines = []
-        formatted_user_input_lines.append('user_input = UserInputWrapper([')
-        for name, value in user_input_pairs[:-1]:
-            line = '\t(%r, %r),' % (name, value)
-            formatted_user_input_lines.append(line)
-        formatted_user_input_lines.append('\t(%r, %r)])' % user_input_pairs[-1])
-        return formatted_user_input_lines
-            
     def get_output_file_import_statements(self):
         return [
             'from abjad.tools.measuretools.Measure import Measure',
@@ -78,32 +63,6 @@ class SargassoMeasureMaker(InteractiveMaterialMaker):
             'from baca.makers import SargassoMeasureMaker',
             'from baca.scf import UserInputWrapper',
         ]
-
-    # TODO
-    #def get_user_input_pairs(self):
-    def edit_interactively(self, user_input_wrapper=None):
-        if user_input_wrapper is None:
-            user_input_wrapper = self.initialize_user_input_wrapper()
-        while True:
-            menu_specifier = MenuSpecifier()
-            menu_specifier.menu_title = type(self).__name__
-            pairs = list(user_input_wrapper.iteritems())
-            pairs = ['%s: %s' % (pair[0].replace('_', ' '), pair[1]) for pair in pairs]
-            menu_specifier.items_to_number = pairs
-            if user_input_wrapper.is_complete:
-                menu_specifier.sentence_length_items.append(('p', 'render pdf of given input'))
-            menu_specifier.sentence_length_items.append(('d', 'show demo input values'))
-            key, value = menu_specifier.display_menu()
-            if key == 'd':
-                self.show_demo_input_values()
-            elif key == 'p':
-                self.render_pdf_from_input(user_input_wrapper)
-
-    def initialize_user_input_wrapper(self):
-        user_input_wrapper = copy.deepcopy(self.user_input_template)
-        for key in user_input_wrapper:
-            user_input_wrapper[key] = None
-        return user_input_wrapper
 
     def make(self, measure_denominator, measure_numerator_talea, 
         measure_division_denominator, measure_division_talea, total_duration,
@@ -222,24 +181,15 @@ class SargassoMeasureMaker(InteractiveMaterialMaker):
         return lilypond_file
 
     def make_interactively(self, user_input_pairs=None):
-        from abjad.tools import iotools
-
-#        if user_input_pairs is None:
-#            user_input_pairs = self.get_user_input_pairs()
-#            user_input_values = [pair[1] for pair in user_input_pairs]
-#        else:
-#            user_input_values = list(user_input_pairs.itervalues())
-
         user_input_wrapper = self.edit_interactively()
-        user_input_values = list(user_input_wrapper.itervalues())
-        print user_input_values
-        measures = self.make(*user_input_values)
+        if user_input_wrapper is None:
+            return False
+        measures = self.make(*user_input_wrapper.user_input_values)
         lilypond_file = self.make_lilypond_file(measures) 
-        #iotools.show(lilypond_file)
         user_input_import_statements = self.get_user_input_import_statements()
         self.write_material_to_disk(
             user_input_import_statements, user_input_pairs, measures, lilypond_file)
-        self.conclude()
+        return True
 
     def permute_divided_measure_tokens(self, divided_measure_tokens):
         '''This can be extended later.'''

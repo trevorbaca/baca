@@ -64,11 +64,10 @@ class MakersProxy(SCFProxyObject):
                     menu_title = '%s - %s' % (score_title, menu_title.lower())
                 menu_specifier.menu_title = menu_title
             menu_specifier.items_to_number = self.list_makers()
-            #key, value = menu_specifier.display_menu(clear_terminal=False)
             key, value = menu_specifier.display_menu()
             result = None
             if key == 'b':
-                return 'b'
+                return None
             elif key == 'q':
                 raise SystemExit
             elif key == 'w':
@@ -79,7 +78,6 @@ class MakersProxy(SCFProxyObject):
                 maker_name = value
                 maker = self.get_maker(maker_name)
                 return maker
-                #is_redraw = True
             if is_redraw or result == 'b':
                 is_first_pass = True
             else:
