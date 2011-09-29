@@ -197,7 +197,7 @@ class InteractiveMaterialMaker(SCFObject, _MaterialPackageMaker):
             menu_specifier = MenuSpecifier()
             menu_specifier.menu_title = '%s - edit interactively' % self.spaced_name
             pairs = list(user_input_wrapper.iteritems())
-            pairs = ['%s: %s' % (pair[0].replace('_', ' '), pair[1]) for pair in pairs]
+            pairs = ['%s: %r' % (pair[0].replace('_', ' '), pair[1]) for pair in pairs]
             menu_specifier.items_to_number = pairs
             if user_input_wrapper.is_complete:
                 menu_specifier.sentence_length_items.append(('p', 'show pdf of given input'))
@@ -216,6 +216,22 @@ class InteractiveMaterialMaker(SCFObject, _MaterialPackageMaker):
                 lilypond_file.header_block.title = markuptools.Markup(self.generic_output_name.capitalize())
                 lilypond_file.header_block.subtitle = markuptools.Markup('(unsaved)')
                 iotools.show(lilypond_file)
+            else:
+                try:
+                    number = int(key)
+                except:
+                    continue
+                index = number - 1
+                key, value = user_input_wrapper.items[index]
+                new_value = self.edit_item(key, value)
+                user_input_wrapper[key] = new_value
+
+    def edit_item(self, key, value):
+        prompt = key.replace('_', ' ')
+        default = repr(value)
+        response = self.raw_input_with_default('%s> ' % prompt, default=default)
+        new_value = eval(response)
+        return new_value
 
     def overwrite_with_demo_input_values(self, user_input_wrapper):
         for key in self.user_input_template:

@@ -1,4 +1,5 @@
 import os
+import readline
 
 
 class SCFObject(object):
@@ -28,3 +29,10 @@ class SCFObject(object):
 
     def print_not_implemented(self):
         print 'Not yet implemented.\n'
+
+    def raw_input_with_default(self, prompt, default=''):
+        readline.set_startup_hook(lambda: readline.insert_text(default))
+        try:
+           return raw_input(prompt)
+        finally:
+           readline.set_startup_hook()

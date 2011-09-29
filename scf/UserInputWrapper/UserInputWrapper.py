@@ -20,5 +20,9 @@ class UserInputWrapper(collections.OrderedDict):
         return bool(None not in self.itervalues())
 
     @property
-    def user_input_values(self):
+    def items(self):
+        return list(self.iteritems())
+
+    @property
+    def values(self):
         return list(self.itervalues())
