@@ -2,9 +2,12 @@ from baca.scf.InteractiveMaterialMaker import InteractiveMaterialMaker
 from baca.scf.UserInputWrapper import UserInputWrapper
 from abjad.tools import durationtools
 from abjad.tools import leaftools
+from abjad.tools import lilypondfiletools
 from abjad.tools import mathtools
 from abjad.tools import measuretools
+from abjad.tools import scoretools
 from abjad.tools import sequencetools
+from abjad.tools import stafftools
 import fractions
 import os
 
@@ -14,6 +17,7 @@ class SargassoMeasureMaker(InteractiveMaterialMaker):
     def __init__(self, **kwargs):
         InteractiveMaterialMaker.__init__(self, **kwargs)
         self.stylesheet = os.path.join(os.path.dirname(__file__), 'stylesheet.ly')
+        self.generic_output_name = 'sargasso measures'
 
     ### PUBLIC ATTRIBUTES ###
 
@@ -51,7 +55,7 @@ class SargassoMeasureMaker(InteractiveMaterialMaker):
             possible_meter_multipliers.append(possible_meter_multiplier)
         return possible_meter_multipliers
 
-    def get_primary_input_lines(self, user_input_pairs, material_name):
+    def get_primary_input_lines(self, material_name):
         lines = []
         lines.append('maker = SargassoMeasureMaker()')
         lines.append('%s = maker.make(**user_input)' % material_name)
@@ -166,11 +170,16 @@ class SargassoMeasureMaker(InteractiveMaterialMaker):
 
         return measures
 
-    def make_lilypond_file(self, measures):
-        from abjad.tools import lilypondfiletools
-        from abjad.tools import measuretools
-        from abjad.tools import scoretools
-        from abjad.tools import stafftools
+    def make_interactively(self, user_input_wrapper=None):
+        user_input_wrapper = self.edit_interactively()
+        if user_input_wrapper is None:
+            return False
+        measures = self.make(*user_input_wrapper.user_input_values)
+        lilypond_file = self.make_lilypond_file_from_output_material(measures) 
+        self.write_material_to_disk(user_input_wrapper, measures, lilypond_file)
+        return True
+
+    def make_lilypond_file_from_output_material(self, measures):
         staff = stafftools.RhythmicStaff(measures)
         score = scoretools.Score([staff])
         lilypond_file = lilypondfiletools.make_basic_lilypond_file(score)
@@ -180,17 +189,11 @@ class SargassoMeasureMaker(InteractiveMaterialMaker):
         scoretools.add_double_bar_to_end_of_score(score)
         return lilypond_file
 
-    def make_interactively(self, user_input_pairs=None):
-        user_input_wrapper = self.edit_interactively()
-        if user_input_wrapper is None:
-            return False
+    def make_lilypond_file_from_user_input_wrapper(self, user_input_wrapper):
         measures = self.make(*user_input_wrapper.user_input_values)
-        lilypond_file = self.make_lilypond_file(measures) 
-        user_input_import_statements = self.get_user_input_import_statements()
-        self.write_material_to_disk(
-            user_input_import_statements, user_input_pairs, measures, lilypond_file)
-        return True
-
+        lilypond_file = self.make_lilypond_file_from_output_material(measures) 
+        return lilypond_file
+        
     def permute_divided_measure_tokens(self, divided_measure_tokens):
         '''This can be extended later.'''
         modulus_of_permutation = 5

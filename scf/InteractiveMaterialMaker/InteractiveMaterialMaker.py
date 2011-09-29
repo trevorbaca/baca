@@ -4,13 +4,14 @@ from abjad.tools import markuptools
 from baca.scf._MaterialPackageMaker import _MaterialPackageMaker
 from baca.scf.CatalogProxy import CatalogProxy
 from baca.scf.MenuSpecifier import MenuSpecifier
+from baca.scf.SCFObject import SCFObject
 from baca.scf.UserInputWrapper import UserInputWrapper
 import copy
 import os
 import shutil
 
 
-class InteractiveMaterialMaker(_MaterialPackageMaker):
+class InteractiveMaterialMaker(SCFObject, _MaterialPackageMaker):
     '''Interactive material-maker base class.
     '''
 
@@ -149,7 +150,7 @@ class InteractiveMaterialMaker(_MaterialPackageMaker):
             input_file.write(line + '\n')
         input_file.write('\n')
         material_name = os.path.basename(self.material_package_directory)
-        for line in self.get_primary_input_lines(user_input_wrapper, material_name):
+        for line in self.get_primary_input_lines(material_name):
             input_file.write(line + '\n')
         input_file.close()
 
@@ -178,61 +179,66 @@ class InteractiveMaterialMaker(_MaterialPackageMaker):
         fp.write(header_block.format)
         fp.close()
 
-    ### PUBLIC METHODS ###
+    ### PUBLIC ATTRIBUTES ###
 
+    @property
+    def spaced_name(self):
+        from abjad.tools import iotools
+        spaced_name = iotools.uppercamelcase_to_underscore_delimited_lowercase(type(self).__name__)
+        spaced_name = spaced_name.replace('_', ' ')
+        return spaced_name
+
+    ### PUBLIC METHODS ###
+    
     def edit_interactively(self, user_input_wrapper=None):
         if user_input_wrapper is None:
             user_input_wrapper = self._initialize_user_input_wrapper()
         while True:
             menu_specifier = MenuSpecifier()
-            menu_specifier.menu_title = 'edit interactively'
+            menu_specifier.menu_title = '%s - edit interactively' % self.spaced_name
             pairs = list(user_input_wrapper.iteritems())
             pairs = ['%s: %s' % (pair[0].replace('_', ' '), pair[1]) for pair in pairs]
             menu_specifier.items_to_number = pairs
             if user_input_wrapper.is_complete:
-                menu_specifier.sentence_length_items.append(('p', 'render pdf of given input'))
+                menu_specifier.sentence_length_items.append(('p', 'show pdf of given input'))
             menu_specifier.sentence_length_items.append(('d', 'show demo input values'))
+            menu_specifier.sentence_length_items.append(('o', 'overwrite with demo input values'))
             key, value = menu_specifier.display_menu(score_title=self.score_title)
             if key == 'b':
                 return None
             elif key == 'd':
                 self.show_demo_input_values()
+            elif key == 'o':
+                self.overwrite_with_demo_input_values(user_input_wrapper)
             elif key == 'p':
-                self.render_pdf_from_input(user_input_wrapper)
+                lilypond_file = self.make_lilypond_file_from_user_input_wrapper(user_input_wrapper)
+                lilypond_file.file_initial_user_includes.append(self.stylesheet)
+                lilypond_file.header_block.title = markuptools.Markup(self.generic_output_name.capitalize())
+                lilypond_file.header_block.subtitle = markuptools.Markup('(unsaved)')
+                iotools.show(lilypond_file)
+
+    def overwrite_with_demo_input_values(self, user_input_wrapper):
+        for key in self.user_input_template:
+            user_input_wrapper[key] = self.user_input_template[key]    
 
     def read_user_input_from_disk(self):
         raise Exception('Call on derived concrete classes.')
 
     def show_demo_input_values(self):
-        clear_terminal, hide_menu = True, False
-        while True:
-            menu_specifier = MenuSpecifier()
-            menu_title = '%s - demo values' % type(self).__name__
-            if self.score_title is not None:
-                menu_title = '%s - %s' % (self.score_title, menu_title)
-            menu_specifier.menu_title = menu_title
-            items = []
-            for i, (key, value) in enumerate(self.user_input_template.iteritems()):
-                item = '%s: %r' % (key.replace('_', ' '), value)
-                items.append(item)
-            menu_specifier.items_to_number = items
-            menu_specifier.clear_terminal, menu_specifier.hide_menu = clear_terminal, hide_menu
-            key, value = menu_specifier.display_menu()
-            clear_terminal, hide_menu = False, True
-            if key == 'b':
-                return
-            elif key == 'q':
-                raise SystemExit
-            elif key == 'w':
-                clear_terminal = True
-            elif key == 'x':
-                self.exec_statement()
+        menu_specifier = MenuSpecifier()
+        menu_specifier.menu_title = '%s - demo values' % self.spaced_name
+        items = []
+        for i, (key, value) in enumerate(self.user_input_template.iteritems()):
+            item = '%s: %r' % (key.replace('_', ' '), value)
+            items.append(item)
+        menu_specifier.items_to_number = items
+        menu_specifier.display_menu(score_title=self.score_title)
 
-    def write_material_to_disk(self, 
-        user_input_import_statements, user_input_wrapper, material, lilypond_file):
+    def write_material_to_disk(self, user_input_wrapper, material, lilypond_file):
         self._get_new_material_package_directory_from_user(base_directory=self.materials_directory)
         os.mkdir(self.material_package_directory)
         self._write_initializer_to_disk()
+        user_input_import_statements = self.get_user_input_import_statements()
         self._write_input_file_to_disk(user_input_import_statements, user_input_wrapper)
         self._write_output_file_to_disk(material)
         self._write_stylesheet_to_disk()

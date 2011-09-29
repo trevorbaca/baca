@@ -62,6 +62,8 @@ class MenuSpecifier(object):
             if not self.hide_menu:
                 if score_title is not None:
                     print '%s - %s' % (score_title, self.menu_title.lower())
+                elif getattr(self, 'score_title', None) is not None:
+                    print '%s - %s' % (self.score_title, self.menu_title.lower())
                 else:
                     print self.menu_title
                 print ''
