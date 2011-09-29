@@ -292,7 +292,7 @@ class ScorePackageProxy(DirectoryProxy, _MaterialPackageMaker):
     def make_new_material_interactively(self):
         while True:
             makers_proxy = MakersProxy()
-            maker = makers_proxy.select_interactive_maker(score_title=self.score_title, show_menu_title=True)
+            maker = makers_proxy.select_interactive_maker(score_title=self.score_title)
             if maker is None:
                 return
             maker.score_title = self.score_title

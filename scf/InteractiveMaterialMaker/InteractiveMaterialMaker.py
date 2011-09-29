@@ -211,7 +211,7 @@ class InteractiveMaterialMaker(_MaterialPackageMaker):
         raise Exception('Call on derived concrete classes.')
 
     def show_demo_input_values(self):
-        clear_terminal = True
+        clear_terminal, hide_menu = True, False
         while True:
             menu_specifier = MenuSpecifier()
             menu_title = '%s - demo values' % type(self).__name__
@@ -223,8 +223,9 @@ class InteractiveMaterialMaker(_MaterialPackageMaker):
                 item = '%s: %r' % (key.replace('_', ' '), value)
                 items.append(item)
             menu_specifier.items_to_number = items
-            key, value = menu_specifier.display_menu(clear_terminal=clear_terminal)
-            clear_terminal = False
+            menu_specifier.clear_terminal, menu_specifier.hide_menu = clear_terminal, hide_menu
+            key, value = menu_specifier.display_menu()
+            clear_terminal, hide_menu = False, True
             if key == 'b':
                 return
             elif key == 'q':
