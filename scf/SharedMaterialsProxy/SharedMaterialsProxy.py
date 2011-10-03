@@ -13,7 +13,7 @@ class SharedMaterialsProxy(DirectoryProxy, _MaterialPackageMaker):
     def create_shared_material_package(self, is_interactive=False):
         if is_interactive:
             makers_proxy = MakersProxy()
-            makers_proxy.manage_makers()
+            return makers_proxy.manage_makers()
         else:
             response = raw_input('Make material interactively? ')
             if response == 'y':
@@ -61,15 +61,20 @@ class SharedMaterialsProxy(DirectoryProxy, _MaterialPackageMaker):
             menu_specifier.sentence_length_items.append(('i', 'make new material interactively'))
             key, value = menu_specifier.display_menu()
             if key == 'b':
-                return None
+                #return None
+                return key, None
             elif key == 'h':
                 self.make_new_material_by_hand()
             elif key == 'i':
-                self.create_shared_material_package(is_interactive=True)
+                result = self.create_shared_material_package(is_interactive=True)
+                if result == 'studio':
+                    return 'S', None
+            elif key == 'S':
+                return key, None
             else:
                 material_name = value
                 score_package_name = ''
                 material_package_proxy = MaterialPackageProxy(
-                    score_package_name, material_name, is_shared_material = True)
+                    score_package_name, material_name, is_shared_material=True)
                 material_package_proxy.score_title = 'Shared materials'
                 material_package_proxy.manage_material()

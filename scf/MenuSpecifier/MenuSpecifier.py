@@ -53,6 +53,28 @@ class MenuSpecifier(object):
             if not self.hide_menu:
                 print ''
 
+    def _display_menu(self, score_title=None):
+        if self.clear_terminal:
+            os.system('clear')
+        all_keys, all_values = [], []
+        self._display_menu_title(score_title=score_title)
+        self._display_menu_sections(all_keys, all_values)
+        self._display_items_to_number(all_keys, all_values)
+        self._display_sentence_length_items(all_keys, all_values)
+        self._display_named_pairs(self.named_pairs, all_keys, all_values)
+        self._display_named_pairs(self.secondary_named_pairs, all_keys, all_values)
+        self._display_footer_items(all_keys, all_values)
+        if not self.hide_menu:
+            print ''
+        while True:
+            response = raw_input('scf> ')
+            print ''
+            if response in all_keys:
+                break
+        pair_dictionary = dict(zip(all_keys, all_values))
+        value = pair_dictionary[response]
+        return response, value
+
     def _display_menu_sections(self, all_keys, all_values):
         for menu_section in self.menu_sections:
             menu_section.display(all_keys, all_values)
@@ -93,6 +115,7 @@ class MenuSpecifier(object):
     def _get_footer_pairs(self):
         footer_pairs = [
             ('q', 'quit'),
+            ('S', 'studio'),
             ('w', 'redraw'),
             ('x', 'exec'),
             ]
@@ -228,42 +251,22 @@ class MenuSpecifier(object):
             return False
         return True
 
-    def display_menu_core(self, score_title=None):
-        if self.clear_terminal:
-            os.system('clear')
-        all_keys, all_values = [], []
-        self._display_menu_title(score_title=score_title)
-        self._display_menu_sections(all_keys, all_values)
-        self._display_items_to_number(all_keys, all_values)
-        self._display_sentence_length_items(all_keys, all_values)
-        self._display_named_pairs(self.named_pairs, all_keys, all_values)
-        self._display_named_pairs(self.secondary_named_pairs, all_keys, all_values)
-        self._display_footer_items(all_keys, all_values)
-        if not self.hide_menu:
-            print ''
-        while True:
-            response = raw_input('scf> ')
-            print ''
-            if response in all_keys:
-                break
-        pair_dictionary = dict(zip(all_keys, all_values))
-        value = pair_dictionary[response]
-        return response, value
-
     def display_menu(self, score_title=None):
         clear_terminal, hide_menu = True, False
         while True:
             self.clear_terminal, self.hide_menu = clear_terminal, hide_menu
-            key, value = self.display_menu_core(score_title=score_title)
+            key, value = self._display_menu(score_title=score_title)
             clear_terminal, hide_menu = False, True
             if key == 'b':
-                return 'b', None
+                return key, None
             elif key == 'q':
                 raise SystemExit
             elif key == 'w':
                 clear_terminal, hide_menu = True, False
             elif key == 'x':
                 self.exec_statement()
+            elif key == 'S':
+                return key, None
             else:
                 return key, value
 

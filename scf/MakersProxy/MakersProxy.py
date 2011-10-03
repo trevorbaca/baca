@@ -27,31 +27,19 @@ class MakersProxy(DirectoryProxy):
         return maker_directories
 
     def manage_makers(self):
-        is_first_pass = True
         while True:
-            is_redraw = False
             menu_specifier = MenuSpecifier()
-            menu_specifier.menu_title = 'Interactive material makers'
+            menu_specifier.menu_title = 'Interactive Material Makers'
             menu_specifier.items_to_number = self.list_makers()
             key, value = menu_specifier.display_menu()
-            result = None
             if key == 'b':
-                return 'b'
-            elif key == 'q':
-                raise SystemExit
-            elif key == 'w':
-                is_redraw = True
-            elif key == 'x':
-                self.exec_statement()
+                return key, value
+            elif key == 'S':
+                return 'studio'
             else:
                 maker_name = value
                 maker = self.get_maker(maker_name)
                 maker.make_interactively()
-                is_redraw = True
-            if is_redraw or result == 'b':
-                is_first_pass = True
-            else:
-                is_first_pass = False
 
     def select_interactive_maker(self, score_title=None):
         menu_specifier = MenuSpecifier()
