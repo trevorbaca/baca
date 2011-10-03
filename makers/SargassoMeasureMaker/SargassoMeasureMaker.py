@@ -171,7 +171,11 @@ class SargassoMeasureMaker(InteractiveMaterialMaker):
         return measures
 
     def make_interactively(self, user_input_wrapper=None):
-        user_input_wrapper = self.edit_interactively()
+        key, value = self.edit_interactively()
+        if key == 'S':
+            return key, None
+        else:
+            user_input_wrapper = value
         if user_input_wrapper is None:
             return False
         measures = self.make(*user_input_wrapper.user_input_values)

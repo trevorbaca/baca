@@ -54,3 +54,4 @@ class _MaterialPackageMaker(object):
             visualizer.write('lilypond_file = None\n')
             visualizer.close()
         print 'Material package %s created.\n' % material_package_name
+        return True, None

@@ -221,50 +221,36 @@ class ScorePackageProxy(DirectoryProxy, _MaterialPackageMaker):
             material_number = None
 
     def manage_score(self, command_string=None):
-        is_first_pass = True
         while True:
-            is_redraw = False
-            if command_string is None:
-                menu_specifier = MenuSpecifier()
-                menu_specifier.menu_title = self.score_title
-                menu_section = MenuSectionSpecifier()
-                menu_section.menu_section_title = 'Chunks'
-                menu_section.menu_section_entries = self.list_numbered_chunks()
-                menu_section.sentence_length_items = [
-                    ('ch', '[make new chunk by hand]'),
-                    ('ci', '[make new chunk interactively]'),
-                ]
-                menu_specifier.menu_sections.append(menu_section)
-                menu_section = MenuSectionSpecifier()
-                menu_section.menu_section_title = 'Materials'
-                menu_section.menu_section_entries = self.list_numbered_materials()
-                menu_section.sentence_length_items = [
-                    ('mh', 'make new material by hand'),
-                    ('mi', 'make new material interactively'), 
-                    ]
-                menu_specifier.menu_sections.append(menu_section)
-                command_string, menu_value = menu_specifier.display_menu()
-            #key = command_string[0]
-            key = command_string
-            result = None
+            menu_specifier = MenuSpecifier()
+            menu_specifier.menu_title = self.score_title
+            menu_section = MenuSectionSpecifier()
+            menu_section.menu_section_title = 'Chunks'
+            menu_section.menu_section_entries = self.list_numbered_chunks()
+            menu_section.sentence_length_items.append(('ch', '[make new chunk by hand]'))
+            menu_section.sentence_length_items.append(('ci', '[make new chunk interactively]'))
+            menu_specifier.menu_sections.append(menu_section)
+            menu_section = MenuSectionSpecifier()
+            menu_section.menu_section_title = 'Materials'
+            menu_section.menu_section_entries = self.list_numbered_materials()
+            menu_section.sentence_length_items.append(('mh', 'make new material by hand'))
+            menu_section.sentence_length_items.append(('mi', 'make new material interactively'))
+            menu_specifier.menu_sections.append(menu_section)
+            key, value = menu_specifier.display_menu()
             if key == 'b':
-                return 'b'
+                return key, None
             elif key == 'ch':
-                self.make_new_chunk_by_hand()
+                key, value = self.make_new_chunk_by_hand()
             elif key == 'ci':
-                self.make_new_chunk_interactively()
+                key, value = self.make_new_chunk_interactively()
             elif key == 'h':
-                self.manage_chunks()
+                key, value = self.manage_chunks()
             elif key == 'mh':
-                self.make_new_material_by_hand()
+                key, value = self.make_new_material_by_hand()
             elif key == 'mi':
-                self.make_new_material_interactively()
-            elif key == 'q':
-                raise SystemExit
-            elif key == 'w':
-                is_redraw = True
-            elif key == 'x':
-                self.exec_statement()
+                key, value = self.make_new_material_interactively()
+            elif key == 'S':
+                return key, None
             else:
                 try:
                     material_number = int(key)
@@ -272,34 +258,38 @@ class ScorePackageProxy(DirectoryProxy, _MaterialPackageMaker):
                     material_package_proxy = MaterialPackageProxy(self.score_package_name, material_name)
                     material_package_proxy.score_title = self.score_title
                     material_package_proxy.manage_material()
-                except TypeError:
+                except (TypeError, ValueError):
                     pass
-            if is_redraw or result == 'b':
-                is_first_pass = True
-            else:
-                is_first_pass = False
-            command_string = None
+            if key == 'S':
+                return key, None
 
     def make_new_chunk_by_hand(self):
-        self.print_not_implemented()
+        return self.print_not_implemented()
 
     def make_new_chunk_interactively(self):
-        self.print_not_implemented()
+        return self.print_not_implemented()
 
     def make_new_material_by_hand(self):
-        self.create_materials_package()
+        return self.create_materials_package()
 
     def make_new_material_interactively(self):
         while True:
             makers_proxy = MakersProxy()
-            maker = makers_proxy.select_interactive_maker(score_title=self.score_title)
-            if maker is None:
-                return
+            key, value = makers_proxy.select_interactive_maker(score_title=self.score_title)
+            if key == 'S':
+                return key, None
+            elif value is None:
+                break
+            else:
+                maker = value
             maker.score_title = self.score_title
             maker.materials_directory = self.materials_directory
-            result = maker.make_interactively()
-            if result:
+            key, value = maker.make_interactively()
+            if key == 'S':
+                return key, None
+            elif value:
                 break
+        return True, None
 
     def material_number_to_material_name(self, material_number):
         material_index = material_number - 1
@@ -337,45 +327,45 @@ class ScorePackageProxy(DirectoryProxy, _MaterialPackageMaker):
             self.score_package_directory, 'mus', 'materials', '__init__.py')))
 
     def run_chunk_selection_interface(self):
-        raise NotImplementedError
+        self.print_not_implemented()
 
-    def select_material(self, material_number=None):
-        if material_number is not None:
-            material_name = self.material_number_to_material_name(material_number)
-            material_package_proxy = MaterialPackageProxy(self.score_package_name, material_name)
-            return material_package_proxy
-        is_first_pass = True
-        while True:
-            is_redraw = False
-            menu_specifier = MenuSpecifier()
-            menu_specifier.menu_title = '%s - materials' % self.score_title
-            materials = self.list_materials()
-            materials = [x.replace('_', ' ') for x in materials]
-            materials = [x[len(self.score_package_name)+1:] for x in materials]
-            menu_specifier.items_to_number = materials
-            menu_specifier.sentence_length_items = [('n', 'make new material by hand')]
-            key, material_name = menu_specifier.display_menu()
-            material_name = '%s_%s' % (self.score_package_name, material_name)
-            if key == 'b':
-                return key
-            elif key == 'n':
-                self.create_materials_package()
-                is_redraw = True
-            elif key == 'q':
-                raise SystemExit
-            elif key == 'r':
-                self.rename_materials_package()
-            elif key == 'w':
-                is_redraw = True
-            elif key == 'x':
-                self.exec_statement()
-            else:
-                material_package_proxy = MaterialPackageProxy(self.score_package_name, material_name)
-                return material_package_proxy
-            if is_redraw:
-                is_first_pass = True
-            else:
-                is_first_pass = False
+#    def select_material(self, material_number=None):
+#        if material_number is not None:
+#            material_name = self.material_number_to_material_name(material_number)
+#            material_package_proxy = MaterialPackageProxy(self.score_package_name, material_name)
+#            return material_package_proxy
+#        is_first_pass = True
+#        while True:
+#            is_redraw = False
+#            menu_specifier = MenuSpecifier()
+#            menu_specifier.menu_title = '%s - materials' % self.score_title
+#            materials = self.list_materials()
+#            materials = [x.replace('_', ' ') for x in materials]
+#            materials = [x[len(self.score_package_name)+1:] for x in materials]
+#            menu_specifier.items_to_number = materials
+#            menu_specifier.sentence_length_items = [('n', 'make new material by hand')]
+#            key, material_name = menu_specifier.display_menu()
+#            material_name = '%s_%s' % (self.score_package_name, material_name)
+#            if key == 'b':
+#                return key
+#            elif key == 'n':
+#                self.create_materials_package()
+#                is_redraw = True
+#            elif key == 'q':
+#                raise SystemExit
+#            elif key == 'r':
+#                self.rename_materials_package()
+#            elif key == 'w':
+#                is_redraw = True
+#            elif key == 'x':
+#                self.exec_statement()
+#            else:
+#                material_package_proxy = MaterialPackageProxy(self.score_package_name, material_name)
+#                return material_package_proxy
+#            if is_redraw:
+#                is_first_pass = True
+#            else:
+#                is_first_pass = False
 
     def summarize_chunks(self):
         chunks = self.list_chunks()

@@ -4,11 +4,12 @@
 class MenuSectionSpecifier(object):
 
     def __init__(self, menu_section_title='', menu_section_entries=None, 
-        sentence_length_items=None, indent_level=1):
+        sentence_length_items=None, indent_level=1, hide_menu=False):
         self.menu_section_title = menu_section_title
         self.menu_section_entries = menu_section_entries
         self.sentence_length_items = sentence_length_items
         self.indent_level = indent_level
+        self.hide_menu = hide_menu
 
     ### OVERLOADS ###
 
@@ -18,10 +19,11 @@ class MenuSectionSpecifier(object):
     ### PRIVATE METHODS ###
 
     def _display_menu_section_title(self):
-        if self.menu_section_title:
-            self._print_tab(self.indent_level)
-            print self.menu_section_title
-            print ''
+        if not self.hide_menu:
+            if self.menu_section_title:
+                self._print_tab(self.indent_level)
+                print self.menu_section_title
+                print ''
 
     def _print_tab(self, n):
         if 0 < n:
@@ -31,6 +33,15 @@ class MenuSectionSpecifier(object):
         return 4 * n * ' '
     
     ### PUBLIC ATTRIBUTES ###
+
+    @apply
+    def hide_menu():
+        def fget(self):
+            return self._hide_menu
+        def fset(self, hide_menu):
+            assert isinstance(hide_menu, type(True))
+            self._hide_menu = hide_menu
+        return property(**locals())
 
     @apply
     def indent_level():
@@ -77,16 +88,20 @@ class MenuSectionSpecifier(object):
     def display(self, all_keys, all_values):
         self._display_menu_section_title()
         for key, value in self.menu_section_entries:
-            self._print_tab(self.indent_level),
-            print '%s: %s' % (key, value)
+            if not self.hide_menu:
+                self._print_tab(self.indent_level),
+                print '%s: %s' % (key, value)
             all_keys.append(key)
             all_values.append(value)
         if self.menu_section_entries:
-            print ''
+            if not self.hide_menu:
+                print ''
         for key, value in self.sentence_length_items:
-            self._print_tab(self.indent_level),
-            print '%s: %s' % (key, value)
+            if not self.hide_menu:
+                self._print_tab(self.indent_level),
+                print '%s: %s' % (key, value)
             all_keys.append(key)
             all_values.append(value)
         if self.sentence_length_items:
-            print ''
+            if not self.hide_menu:
+                print ''

@@ -33,6 +33,8 @@ class SCFObject(object):
 
     def print_not_implemented(self):
         print 'Not yet implemented.\n'
+        self.proceed()
+        return True, None
 
     def proceed(self):
         response = raw_input('Press return to continue. ')

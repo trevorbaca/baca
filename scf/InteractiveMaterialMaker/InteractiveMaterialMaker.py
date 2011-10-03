@@ -205,7 +205,7 @@ class InteractiveMaterialMaker(SCFObject, _MaterialPackageMaker):
             menu_specifier.sentence_length_items.append(('o', 'overwrite with demo input values'))
             key, value = menu_specifier.display_menu(score_title=self.score_title)
             if key == 'b':
-                return None
+                return key, None
             elif key == 'd':
                 self.show_demo_input_values()
             elif key == 'o':
@@ -216,6 +216,8 @@ class InteractiveMaterialMaker(SCFObject, _MaterialPackageMaker):
                 lilypond_file.header_block.title = markuptools.Markup(self.generic_output_name.capitalize())
                 lilypond_file.header_block.subtitle = markuptools.Markup('(unsaved)')
                 iotools.show(lilypond_file)
+            elif key == 'S':
+                return key, None
             else:
                 try:
                     number = int(key)

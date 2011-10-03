@@ -49,6 +49,8 @@ class MakersProxy(DirectoryProxy):
         if value is not None:
             maker_name = value
             maker = self.get_maker(maker_name)
-            return maker
+            return True, maker
+        elif key == 'S':
+            return key, value
         else:
-            return None
+            return True, None

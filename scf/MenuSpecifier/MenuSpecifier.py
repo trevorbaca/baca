@@ -1,12 +1,13 @@
+from baca.scf.SCFObject import SCFObject
 import os
 
 
-class MenuSpecifier(object):
+class MenuSpecifier(SCFObject):
 
     def __init__(self, menu_title='', menu_sections=None, items_to_number=None, 
         sentence_length_items=None, named_pairs=None, secondary_named_pairs=None,
-        include_back=True, indent_level=1, item_width = 11, clear_terminal=True,
-        hide_menu=False):
+        include_back=True, include_studio=True, indent_level=1, item_width = 11, 
+        should_clear_terminal=True, hide_menu=False):
         self.menu_title = menu_title
         self.menu_sections = menu_sections
         self.items_to_number = items_to_number
@@ -14,9 +15,10 @@ class MenuSpecifier(object):
         self.named_pairs = named_pairs
         self.secondary_named_pairs = secondary_named_pairs
         self.include_back = include_back
+        self.include_studio = include_studio
         self.indent_level = indent_level
         self.item_width = item_width
-        self.clear_terminal = clear_terminal
+        self.should_clear_terminal = should_clear_terminal
         self.hide_menu = hide_menu
 
     ### OVERLOADS ###
@@ -54,8 +56,8 @@ class MenuSpecifier(object):
                 print ''
 
     def _display_menu(self, score_title=None):
-        if self.clear_terminal:
-            os.system('clear')
+        if self.should_clear_terminal:
+            self.clear_terminal()
         all_keys, all_values = [], []
         self._display_menu_title(score_title=score_title)
         self._display_menu_sections(all_keys, all_values)
@@ -77,6 +79,7 @@ class MenuSpecifier(object):
 
     def _display_menu_sections(self, all_keys, all_values):
         for menu_section in self.menu_sections:
+            menu_section.hide_menu = self.hide_menu
             menu_section.display(all_keys, all_values)
         
     def _display_menu_title(self, score_title=None):
@@ -115,12 +118,13 @@ class MenuSpecifier(object):
     def _get_footer_pairs(self):
         footer_pairs = [
             ('q', 'quit'),
-            ('S', 'studio'),
             ('w', 'redraw'),
             ('x', 'exec'),
             ]
         if self.include_back:
             footer_pairs.append(('b', 'back'))
+        if self.include_studio:
+            footer_pairs.append(('S', 'studio'))
         footer_pairs.sort()
         return footer_pairs
 
@@ -133,15 +137,6 @@ class MenuSpecifier(object):
 
     ### PUBLIC ATTRIBUTES ###
     
-    @apply
-    def clear_terminal():
-        def fget(self):
-            return self._clear_terminal
-        def fset(self, clear_terminal):
-            assert isinstance(clear_terminal, type(True))
-            self._clear_terminal = clear_terminal
-        return property(**locals())
-
     @apply
     def hide_menu():
         def fget(self):
@@ -158,6 +153,15 @@ class MenuSpecifier(object):
         def fset(self, include_back):
             assert isinstance(include_back, type(True))
             self._include_back = include_back
+        return property(**locals())
+
+    @apply
+    def include_studio():
+        def fget(self):
+            return self._include_studio
+        def fset(self, include_studio):
+            assert isinstance(include_studio, type(True))
+            self._include_studio = include_studio
         return property(**locals())
 
     @apply
@@ -242,6 +246,15 @@ class MenuSpecifier(object):
                 self._sentence_length_items = sentence_length_items
         return property(**locals())
 
+    @apply
+    def should_clear_terminal():
+        def fget(self):
+            return self._should_clear_terminal
+        def fset(self, should_clear_terminal):
+            assert isinstance(should_clear_terminal, type(True))
+            self._should_clear_terminal = should_clear_terminal
+        return property(**locals())
+
     ### PUBLIC METHODS ###
 
     def confirm(self):
@@ -252,17 +265,17 @@ class MenuSpecifier(object):
         return True
 
     def display_menu(self, score_title=None):
-        clear_terminal, hide_menu = True, False
+        should_clear_terminal, hide_menu = True, False
         while True:
-            self.clear_terminal, self.hide_menu = clear_terminal, hide_menu
+            self.should_clear_terminal, self.hide_menu = should_clear_terminal, hide_menu
             key, value = self._display_menu(score_title=score_title)
-            clear_terminal, hide_menu = False, True
+            should_clear_terminal, hide_menu = False, True
             if key == 'b':
                 return key, None
             elif key == 'q':
                 raise SystemExit
             elif key == 'w':
-                clear_terminal, hide_menu = True, False
+                should_clear_terminal, hide_menu = True, False
             elif key == 'x':
                 self.exec_statement()
             elif key == 'S':

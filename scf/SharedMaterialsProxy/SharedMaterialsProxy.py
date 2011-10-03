@@ -19,7 +19,6 @@ class SharedMaterialsProxy(DirectoryProxy, _MaterialPackageMaker):
             if response == 'y':
                 makers_proxy = MakersProxy()
                 makers_proxy.manage_makers()
-                is_redraw = True
             else:
                 return self._create_materials_package(self.shared_materials_directory)
 
@@ -61,7 +60,6 @@ class SharedMaterialsProxy(DirectoryProxy, _MaterialPackageMaker):
             menu_specifier.sentence_length_items.append(('i', 'make new material interactively'))
             key, value = menu_specifier.display_menu()
             if key == 'b':
-                #return None
                 return key, None
             elif key == 'h':
                 self.make_new_material_by_hand()
