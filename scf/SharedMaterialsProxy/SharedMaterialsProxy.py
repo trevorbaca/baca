@@ -50,40 +50,22 @@ class SharedMaterialsProxy(DirectoryProxy, _MaterialPackageMaker):
 
     def make_new_material_by_hand(self):
         self.print_not_implemented()
-        self.run_continue_menu()
+        self.proceed()
 
     def manage_shared_materials(self, command_string=None):
-        is_first_pass = True
         while True:
-            is_redraw = False
-            if command_string is None:
-                material_names = self.list_shared_material_names()
-                menu_specifier = MenuSpecifier()
-                menu_specifier.menu_title = 'Shared manterials'
-                menu_specifier.items_to_number = self.list_shared_material_names()
-                menu_specifier.sentence_length_items = [
-                    ('[h', 'make new material by hand]'),
-                    ('i', 'make new material interactively'),
-                    ]
-                menu_specifier.include_back = True
-                menu_specifier.indent_level = 1
-                key, value = menu_specifier.display_menu()
-            result = None
+            menu_specifier = MenuSpecifier()
+            menu_specifier.menu_title = 'Shared manterials'
+            menu_specifier.items_to_number = self.list_shared_material_names()
+            menu_specifier.sentence_length_items.append(('h', '[make new material by hand]'))
+            menu_specifier.sentence_length_items.append(('i', 'make new material interactively'))
+            key, value = menu_specifier.display_menu()
             if key == 'b':
-                return 'b'
+                return None
             elif key == 'h':
                 self.make_new_material_by_hand()
             elif key == 'i':
                 self.create_shared_material_package(is_interactive=True)
-            elif key == 'n':
-                self.create_shared_material_package()
-                is_redraw = True
-            elif key == 'q':
-                raise SystemExit
-            elif key == 'w':
-                is_redraw = True
-            elif key == 'x':
-                self.exec_statement()
             else:
                 material_name = value
                 score_package_name = ''
@@ -91,9 +73,3 @@ class SharedMaterialsProxy(DirectoryProxy, _MaterialPackageMaker):
                     score_package_name, material_name, is_shared_material = True)
                 material_package_proxy.score_title = 'Shared materials'
                 material_package_proxy.manage_material()
-                is_redraw = True
-            if is_redraw or result == 'b':
-                is_first_pass = True
-            else:
-                is_first_pass = False
-            command_string = None

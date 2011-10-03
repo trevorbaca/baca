@@ -221,9 +221,6 @@ class MenuSpecifier(object):
 
     ### PUBLIC METHODS ###
 
-    def clear_terminal(self):
-        iotools.clear_terminal()
-
     def confirm(self):
         response = raw_input('Ok? ')
         if not response.lower() == 'y':
@@ -279,10 +276,6 @@ class MenuSpecifier(object):
     def print_tab(self, n):
         if 0 < n:
             print self.tab(n),
-
-    def proceed(self):
-        response = raw_input('Press return to continue.\n')
-        self.clear_terminal()
 
     def query(self, prompt):
         response = raw_input(prompt)

@@ -26,7 +26,7 @@ class StudioProxy(DirectoryProxy):
         while True:
             is_redraw = False
             menu_specifier = MenuSpecifier()
-            menu_specifier.menu_title = 'Welcome to the studio'
+            menu_specifier.menu_title = 'Welcome to the studio.'
             menu_specifier.items_to_number = self.catalog.list_score_titles_with_years()
             menu_specifier.sentence_length_items = [
                 ('m', 'manage shared materials'),

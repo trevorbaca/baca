@@ -1,3 +1,4 @@
+from abjad.tools import iotools
 import os
 import readline
 
@@ -16,6 +17,9 @@ class SCFObject(object):
 
     ### PUBLIC METHODS ###
 
+    def clear_terminal(self):
+        iotools.clear_terminal()
+
     def globally_replace_in_file(self, file_name, old, new):
         file_pointer = file(file_name, 'r')
         new_file_lines = []
@@ -29,6 +33,10 @@ class SCFObject(object):
 
     def print_not_implemented(self):
         print 'Not yet implemented.\n'
+
+    def proceed(self):
+        response = raw_input('Press return to continue. ')
+        self.clear_terminal()
 
     def raw_input_with_default(self, prompt, default=''):
         readline.set_startup_hook(lambda: readline.insert_text(default))
