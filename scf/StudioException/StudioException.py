@@ -1,0 +1,3 @@
+class StudioException(Exception):
+    
+    pass

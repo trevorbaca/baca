@@ -4,9 +4,13 @@ import baca
 
 studio = baca.scf.StudioProxy()
 
-try:
-    studio.work_in_studio()
-except EOFError:
-    print '\n'
+while True:
+    try:
+        studio.work_in_studio()
+    except EOFError:
+        print '\n'
+        break
+    except baca.scf.StudioException:
+        pass
 
 #/Users/trevorbaca/Documents/other/baca/scf/scf.py $@

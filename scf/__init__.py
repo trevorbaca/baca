@@ -9,5 +9,6 @@ from PackageProxy import PackageProxy
 from SCFObject import SCFObject
 from ScorePackageProxy import ScorePackageProxy
 from SharedMaterialsProxy import SharedMaterialsProxy
+from StudioException import StudioException
 from StudioProxy import StudioProxy
 from UserInputWrapper import UserInputWrapper

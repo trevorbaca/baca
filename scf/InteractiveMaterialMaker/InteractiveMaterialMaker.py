@@ -216,8 +216,6 @@ class InteractiveMaterialMaker(SCFObject, _MaterialPackageMaker):
                 lilypond_file.header_block.title = markuptools.Markup(self.generic_output_name.capitalize())
                 lilypond_file.header_block.subtitle = markuptools.Markup('(unsaved)')
                 iotools.show(lilypond_file)
-            elif key == 'S':
-                return key, None
             else:
                 try:
                     number = int(key)

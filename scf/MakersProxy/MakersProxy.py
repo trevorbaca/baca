@@ -34,8 +34,6 @@ class MakersProxy(DirectoryProxy):
             key, value = menu_specifier.display_menu()
             if key == 'b':
                 return key, value
-            elif key == 'S':
-                return 'studio'
             else:
                 maker_name = value
                 maker = self.get_maker(maker_name)
@@ -50,7 +48,5 @@ class MakersProxy(DirectoryProxy):
             maker_name = value
             maker = self.get_maker(maker_name)
             return True, maker
-        elif key == 'S':
-            return key, value
         else:
             return True, None

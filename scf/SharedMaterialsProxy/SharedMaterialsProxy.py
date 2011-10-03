@@ -65,10 +65,6 @@ class SharedMaterialsProxy(DirectoryProxy, _MaterialPackageMaker):
                 self.make_new_material_by_hand()
             elif key == 'i':
                 result = self.create_shared_material_package(is_interactive=True)
-                if result == 'studio':
-                    return 'S', None
-            elif key == 'S':
-                return key, None
             else:
                 material_name = value
                 score_package_name = ''

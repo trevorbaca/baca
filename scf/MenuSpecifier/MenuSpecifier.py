@@ -1,3 +1,4 @@
+from baca.scf.StudioException import StudioException
 from baca.scf.SCFObject import SCFObject
 import os
 
@@ -279,7 +280,8 @@ class MenuSpecifier(SCFObject):
             elif key == 'x':
                 self.exec_statement()
             elif key == 'S':
-                return key, None
+                #return key, None
+                raise StudioException
             else:
                 return key, value
 
