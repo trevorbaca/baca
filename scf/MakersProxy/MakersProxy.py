@@ -1,3 +1,4 @@
+from abjad.tools import iotools
 from baca.scf.MenuSpecifier import MenuSpecifier
 from baca.scf.DirectoryProxy import DirectoryProxy
 import os
@@ -5,7 +6,8 @@ import os
 
 class MakersProxy(DirectoryProxy):
 
-    def __init__(self):
+    def __init__(self, score_title=None):
+        self.score_title = score_title
         self.makers_directory = os.path.join(os.environ.get('BACA'), 'makers')
 
     ### PUBLIC METHODS ###
@@ -26,18 +28,31 @@ class MakersProxy(DirectoryProxy):
                         maker_directories.append(name)
         return maker_directories
 
+    def list_maker_spaced_names(self):
+        spaced_names = []
+        for maker in self.list_makers():
+            spaced_name = iotools.uppercamelcase_to_underscore_delimited_lowercase(maker)
+            spaced_name = spaced_name.replace('_', ' ')
+            spaced_names.append(spaced_name)
+        return spaced_names
+
     def manage_makers(self):
         while True:
-            menu_specifier = MenuSpecifier()
-            menu_specifier.menu_title = 'Interactive Material Makers'
-            menu_specifier.items_to_number = self.list_makers()
+            menu_specifier = MenuSpecifier(score_title=self.score_title)
+            menu_specifier.menu_title = 'Interactive material makers'
+            menu_specifier.items_to_number = self.list_maker_spaced_names()
             key, value = menu_specifier.display_menu()
             if key == 'b':
                 return key, value
             else:
                 maker_name = value
+                maker_name = maker_name.replace(' ', '_')
+                maker_name = iotools.underscore_delimited_lowercase_to_uppercamelcase(maker_name)
                 maker = self.get_maker(maker_name)
-                maker.make_interactively()
+                maker.score_title = self.score_title
+                result = maker.edit_interactively()
+                if result:
+                    break
 
     def select_interactive_maker(self, score_title=None):
         menu_specifier = MenuSpecifier()

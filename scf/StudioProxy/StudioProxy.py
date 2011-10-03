@@ -31,7 +31,7 @@ class StudioProxy(DirectoryProxy):
             menu_specifier.include_studio = False
             key, value = menu_specifier.display_menu()
             if key == 'm':
-                shared_materials_proxy = SharedMaterialsProxy()
+                shared_materials_proxy = SharedMaterialsProxy(score_title='Shared materials')
                 result = shared_materials_proxy.manage_shared_materials()
             else:
                 score_package_name = self.catalog.score_title_to_score_package_name(value)

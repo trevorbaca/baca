@@ -5,11 +5,13 @@ import os
 
 class MenuSpecifier(SCFObject):
 
-    def __init__(self, menu_title='', menu_sections=None, items_to_number=None, 
-        sentence_length_items=None, named_pairs=None, secondary_named_pairs=None,
-        include_back=True, include_studio=True, indent_level=1, item_width = 11, 
-        should_clear_terminal=True, hide_menu=False):
+    def __init__(self, menu_title='', score_title=None, menu_sections=None, 
+        items_to_number=None, sentence_length_items=None, named_pairs=None, 
+        secondary_named_pairs=None, include_back=True, include_studio=True, 
+        indent_level=1, item_width = 11, should_clear_terminal=True, 
+        hide_menu=False):
         self.menu_title = menu_title
+        self.score_title = score_title
         self.menu_sections = menu_sections
         self.items_to_number = items_to_number
         self.sentence_length_items = sentence_length_items
@@ -258,13 +260,6 @@ class MenuSpecifier(SCFObject):
 
     ### PUBLIC METHODS ###
 
-    def confirm(self):
-        response = raw_input('Ok? ')
-        if not response.lower() == 'y':
-            print ''
-            return False
-        return True
-
     def display_menu(self, score_title=None):
         should_clear_terminal, hide_menu = True, False
         while True:
@@ -294,10 +289,6 @@ class MenuSpecifier(SCFObject):
     def print_tab(self, n):
         if 0 < n:
             print self.tab(n),
-
-    def query(self, prompt):
-        response = raw_input(prompt)
-        return response.lower().startswith('y')
 
     def tab(self, n):
         return 4 * n * ' '

@@ -9,15 +9,20 @@ class UserInputWrapper(collections.OrderedDict):
     def formatted_lines(self):
         formatted_lines = []
         formatted_lines.append('user_input = %s([' % type(self).__name__)
-        for name, value in user_input_pairs[:-1]:
+        items = self.items
+        for name, value in items[:-1]:
             line = '\t(%r, %r),' % (name, value)
             formatted_lines.append(line)
-        formatted_lines.append('\t(%r, %r)])' % user_input_pairs[-1])
+        formatted_lines.append('\t(%r, %r)])' % items[-1])
         return formatted_lines
 
     @property
     def is_complete(self):
         return bool(None not in self.itervalues())
+
+    @property
+    def is_empty(self):
+        return all([x is None for x in self.itervalues()])
 
     @property
     def items(self):

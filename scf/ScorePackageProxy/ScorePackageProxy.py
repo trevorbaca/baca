@@ -278,8 +278,8 @@ class ScorePackageProxy(DirectoryProxy, _MaterialPackageMaker):
                 maker = value
             maker.score_title = self.score_title
             maker.materials_directory = self.materials_directory
-            key, value = maker.make_interactively()
-            if value:
+            result = maker.edit_interactively()
+            if result:
                 break
         return True, None
 

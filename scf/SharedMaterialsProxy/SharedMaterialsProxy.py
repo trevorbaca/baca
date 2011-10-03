@@ -8,11 +8,15 @@ import os
 
 class SharedMaterialsProxy(DirectoryProxy, _MaterialPackageMaker):
 
+    def __init__(self, score_title=None):
+        DirectoryProxy.__init__(self)
+        self.score_title = score_title
+
     ### PUBLIC METHODS ###
 
     def create_shared_material_package(self, is_interactive=False):
         if is_interactive:
-            makers_proxy = MakersProxy()
+            makers_proxy = MakersProxy(score_title=self.score_title)
             return makers_proxy.manage_makers()
         else:
             response = raw_input('Make material interactively? ')
@@ -49,7 +53,6 @@ class SharedMaterialsProxy(DirectoryProxy, _MaterialPackageMaker):
 
     def make_new_material_by_hand(self):
         self.print_not_implemented()
-        self.proceed()
 
     def manage_shared_materials(self, command_string=None):
         while True:

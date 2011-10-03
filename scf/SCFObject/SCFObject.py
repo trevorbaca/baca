@@ -20,6 +20,13 @@ class SCFObject(object):
     def clear_terminal(self):
         iotools.clear_terminal()
 
+    def confirm(self):
+        response = raw_input('Ok? ')
+        if not response.lower() == 'y':
+            print ''
+            return False
+        return True
+
     def globally_replace_in_file(self, file_name, old, new):
         file_pointer = file(file_name, 'r')
         new_file_lines = []
@@ -40,7 +47,13 @@ class SCFObject(object):
         response = raw_input('Press return to continue. ')
         self.clear_terminal()
 
+    def query(self, prompt):
+        response = raw_input(prompt)
+        return response.lower().startswith('y')
+
     def raw_input_with_default(self, prompt, default=''):
+        if default == 'None':
+            default = ''
         readline.set_startup_hook(lambda: readline.insert_text(default))
         try:
            return raw_input(prompt)

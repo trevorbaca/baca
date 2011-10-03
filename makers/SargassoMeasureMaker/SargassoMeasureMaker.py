@@ -21,6 +21,12 @@ class SargassoMeasureMaker(InteractiveMaterialMaker):
 
     ### PUBLIC ATTRIBUTES ###
 
+    output_file_import_statements = ['from abjad.tools.measuretools.Measure import Measure']
+            
+    user_input_import_statements = ['from abjad.tools.durationtools import Duration',
+        'from baca.makers import SargassoMeasureMaker',
+        'from baca.scf import UserInputWrapper']
+
     user_input_template = UserInputWrapper([
         ('measure_denominator', 4),
         ('measure_numerator_talea', [2, 2, 2, 2, 1, 1, 4, 4]),
@@ -33,11 +39,6 @@ class SargassoMeasureMaker(InteractiveMaterialMaker):
 
     ### PUBLIC METHODS ###
 
-    def get_output_file_import_statements(self):
-        return [
-            'from abjad.tools.measuretools.Measure import Measure',
-            ]
-            
     def get_output_file_lines(self, measures, material_name):
         output_file_lines = []
         output_file_lines.append('%s = [' % material_name)
@@ -54,19 +55,6 @@ class SargassoMeasureMaker(InteractiveMaterialMaker):
             possible_meter_multiplier = fractions.Fraction(multiplied_measure_numerator, denominator)
             possible_meter_multipliers.append(possible_meter_multiplier)
         return possible_meter_multipliers
-
-    def get_primary_input_lines(self, material_name):
-        lines = []
-        lines.append('maker = SargassoMeasureMaker()')
-        lines.append('%s = maker.make(**user_input)' % material_name)
-        return lines
-            
-    def get_user_input_import_statements(self):
-        return [
-            'from abjad.tools.durationtools import Duration',
-            'from baca.makers import SargassoMeasureMaker',
-            'from baca.scf import UserInputWrapper',
-        ]
 
     def make(self, measure_denominator, measure_numerator_talea, 
         measure_division_denominator, measure_division_talea, total_duration,
@@ -170,19 +158,6 @@ class SargassoMeasureMaker(InteractiveMaterialMaker):
 
         return measures
 
-    def make_interactively(self, user_input_wrapper=None):
-        key, value = self.edit_interactively()
-        if key == 'S':
-            return key, None
-        else:
-            user_input_wrapper = value
-        if user_input_wrapper is None:
-            return False
-        measures = self.make(*user_input_wrapper.user_input_values)
-        lilypond_file = self.make_lilypond_file_from_output_material(measures) 
-        self.write_material_to_disk(user_input_wrapper, measures, lilypond_file)
-        return True
-
     def make_lilypond_file_from_output_material(self, measures):
         staff = stafftools.RhythmicStaff(measures)
         score = scoretools.Score([staff])
@@ -193,11 +168,6 @@ class SargassoMeasureMaker(InteractiveMaterialMaker):
         scoretools.add_double_bar_to_end_of_score(score)
         return lilypond_file
 
-    def make_lilypond_file_from_user_input_wrapper(self, user_input_wrapper):
-        measures = self.make(*user_input_wrapper.user_input_values)
-        lilypond_file = self.make_lilypond_file_from_output_material(measures) 
-        return lilypond_file
-        
     def permute_divided_measure_tokens(self, divided_measure_tokens):
         '''This can be extended later.'''
         modulus_of_permutation = 5
@@ -206,9 +176,6 @@ class SargassoMeasureMaker(InteractiveMaterialMaker):
         permutation = [(5 * x) % len_divided_measure_tokens for x in range(len_divided_measure_tokens)]
         divided_measure_tokens = sequencetools.permute_sequence(divided_measure_tokens, permutation)
         return divided_measure_tokens
-
-    def read_user_input_from_disk(self):
-        pass
 
     def select_meter_multiplier(self, possible_meter_multipliers, measure_index):
         possible_meter_multipliers = sequencetools.CyclicTuple(possible_meter_multipliers)
