@@ -6,8 +6,15 @@ import sys
 
 class DirectoryProxy(SCFObject):
 
+    def __init__(self, directory):
+        self.directory = directory
+
     ### PUBLIC ATTRIBUTES ###
 
+    @property
+    def basename(self):
+        return os.path.basename(self.directory)
+   
     @property
     def is_in_repository(self):
         return self.path_is_in_repository(self.directory)
@@ -65,8 +72,24 @@ class DirectoryProxy(SCFObject):
         command = "if '%s' in sys.modules: del(sys.modules['%s'])" % (module_name, module_name)
         exec(command)
 
-    def svn_st(self):
+    def svn_cm(self, commit_message=None, prompt_proceed=True):
+        if commit_message is None:
+            commit_message = raw_input('Commit message> ')
+            print ''
+            print 'Commit message will be: "%s"\n' % commit_message
+            if not self.confirm():
+                return
+        print self.directory
+        command = 'svn commit -m "%s" %s' % (commit_message, self.directory)
+        proc = subprocess.Popen(command, shell=True, stdout=subprocess.PIPE)
+        print ''.join(proc.stdout.readlines())
+        if prompt_proceed:
+            self.proceed()
+
+    def svn_st(self, prompt_proceed=True):
+        print self.directory
         command = 'svn st -u %s' % self.directory
         proc = subprocess.Popen(command, shell=True, stdout=subprocess.PIPE)
-        for line in proc.stdout.readlines():
-            print line
+        print ''.join(proc.stdout.readlines())
+        if prompt_proceed:
+            self.proceed()

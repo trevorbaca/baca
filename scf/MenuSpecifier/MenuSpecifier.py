@@ -106,7 +106,8 @@ class MenuSpecifier(SCFObject):
 
     def _display_named_pairs(self, named_pairs, all_keys, all_values):
         if named_pairs:
-            self._print_tab(self.indent_level)
+            if not self.hide_menu:
+                self._print_tab(self.indent_level)
             for key, value in named_pairs:
                 if not self.hide_menu:
                     print '%s: %s ' % (key, value.ljust(self.item_width)),

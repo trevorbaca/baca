@@ -28,6 +28,18 @@ class CatalogProxy(DirectoryProxy):
         score_package_name = self.score_title_to_score_package_name(score_title)
         return score_package_name
 
+    def iterate_score_package_proxies(self):
+        for score_package_name in self.list_score_package_names():
+            score_package_proxy = ScorePackageProxy(score_package_name)
+            yield score_package_proxy
+
+    def list_numbered_score_titles_with_years(self):
+        numbered_score_titles_with_years = []
+        for i, score_title_with_year in enumerate(self.list_score_titles_with_years()):
+            number = i + 1
+            numbered_score_titles_with_years.append((number, score_title_with_year))
+        return numbered_score_titles_with_years
+
     def list_score_directories(self):
         score_directories = []
         for score_package_name in self.list_score_package_names():
@@ -118,3 +130,18 @@ class CatalogProxy(DirectoryProxy):
         for package_name, title, year in self.list_score_info_triples():
             if score_title.startswith(title):
                 return package_name
+
+    def svn_cm_scores(self):
+        commit_message = raw_input('Commit message> ')
+        print ''
+        print 'Commit message will be: "%s"\n' % commit_message
+        if not self.confirm():
+            return
+        for score_package_proxy in self.iterate_score_package_proxies():
+            score_package_proxy.svn_cm(commit_message=commit_message, prompt_proceed=False)
+        self.proceed()
+
+    def svn_st_scores(self):
+        for score_package_proxy in self.iterate_score_package_proxies():
+            score_package_proxy.svn_st(prompt_proceed=False)
+        self.proceed()

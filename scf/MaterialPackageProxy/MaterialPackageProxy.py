@@ -16,22 +16,24 @@ class MaterialPackageProxy(PackageProxy):
         self.material_name = material_name
         self.underscored_material_name = self.material_name.replace(' ', '_')
         if is_shared_material:
-            self.directory = os.path.join(os.environ.get('BACA'), 'materials', self.underscored_material_name)
+            directory = os.path.join(os.environ.get('BACA'), 'materials', self.underscored_material_name)
             self.materials_module_name = 'baca.materials'
         else:
-            self.directory = os.path.join(os.environ.get('SCORES'), score_package_name)
-            self.directory = os.path.join(self.directory, 'mus', 'materials', self.underscored_material_name)
+            directory = os.path.join(os.environ.get('SCORES'), score_package_name)
+            directory = os.path.join(directory, 'mus', 'materials', self.underscored_material_name)
             self.materials_module_name = '%s.mus.materials' % self.score_package_name
+        #self.material_module_name = '%s.%s' % (self.materials_module_name, self.material_name)
+        importable_module_name = '%s.%s' % (self.materials_module_name, self.material_name)
+        PackageProxy.__init__(self, directory, importable_module_name)
         self.input_file = os.path.join(self.directory, 'input.py')
         self.output_file = os.path.join(self.directory, 'output.py')
         self.visualizer = os.path.join(self.directory, 'visualization.py')
         self.pdf = os.path.join(self.directory, 'visualization.pdf')
         self.ly = os.path.join(self.directory, 'visualization.ly')
         self.stylesheet = os.path.join(self.directory, 'stylesheet.ly')
-        self.material_module_name = '%s.%s' % (self.materials_module_name, self.material_name)
-        self.input_module_name = '%s.input' % self.material_module_name
-        self.output_module_name = '%s.output' % self.material_module_name
-        self.visualization_module_name = '%s.visualization' % self.material_module_name
+        self.input_module_name = '%s.input' % self.importable_module_name
+        self.output_module_name = '%s.output' % self.importable_module_name
+        self.visualization_module_name = '%s.visualization' % self.importable_module_name
 
     ### OVERLOADS ###
 
@@ -82,21 +84,10 @@ class MaterialPackageProxy(PackageProxy):
 
     ### PUBLIC METHODS ###
 
-    def add_line_to_initializer(self, initializer, line):
-        file_pointer = file(initializer, 'r')
-        initializer_lines = set(file_pointer.readlines())
-        file_pointer.close()
-        initializer_lines.add(line)
-        initializer_lines = list(initializer_lines)
-        initializer_lines = [x for x in initializer_lines if not x == '\n']
-        initializer_lines.sort()
-        file_pointer = file(initializer, 'w')
-        file_pointer.write(''.join(initializer_lines))
-        file_pointer.close()
-
     def add_material_to_materials_initializer(self):
         import_statement = 'from %s import %s\n' % (self.material_name, self.material_name)
-        self.add_line_to_initializer(self.parent_initializer, import_statement)
+        parent_package = PackageProxy(self.parent_directory)
+        parent_package.add_line_to_initializer(import_statement)
 
     def create_ly_and_pdf_from_visualizer(self, is_forced=False):
         lilypond_file = self.import_score_definition_from_visualizer()
@@ -154,13 +145,13 @@ class MaterialPackageProxy(PackageProxy):
     def edit_visualizer(self):
         os.system('vi + %s' % self.visualizer)
 
-    def import_attribute_from_initializer(self, attribute_name):
-        try:
-            exec('from %s import %s' % (self.material_module_name, attribute_name))
-            exec('result = %s' % attribute_name)
-            return result
-        except ImportError:
-            return None
+#    def import_attribute_from_initializer(self, attribute_name):
+#        try:
+#            exec('from %s import %s' % (self.material_module_name, attribute_name))
+#            exec('result = %s' % attribute_name)
+#            return result
+#        except ImportError:
+#            return None
 
     def import_attribute_from_input_file(self, attribute_name):
         try:
@@ -219,9 +210,6 @@ class MaterialPackageProxy(PackageProxy):
         trimmed_visualizer_ly_lines = self.trim_ly_lines(self.ly)
         return trimmed_temp_ly_file_lines == trimmed_visualizer_ly_lines
 
-#    def make_material_interactively(self, command_string):
-#        self.display_menu()
-
     def manage_input(self, command_string):
         if command_string == 'i':
             self.edit_input_file()
@@ -274,73 +262,54 @@ class MaterialPackageProxy(PackageProxy):
             print ''
 
     def manage_material(self):
-        is_first_pass = True
         while True:
-            is_redraw = False
             menu_specifier = MenuSpecifier()
             material_name = self.material_name.replace('_', ' ')
             if self.score_package_name:
                 material_name = material_name[len(self.score_package_name)+1:]
             menu_specifier.menu_title = '%s - %s' % (self.score_title, material_name)
             if self.is_interactive:
-                menu_specifier.sentence_length_items = [('k', 'reload user input')]
-            named_pairs = [
-                ('i', 'input'), 
-                ('o', 'output'), 
-                ]
+                menu_specifier.sentence_length_items.append(('k', 'reload user input'))
+            menu_specifier.named_pairs.append(('i', 'input'))
+            menu_specifier.named_pairs.append(('o', 'output'))
             if self.has_visualizer:
-                named_pairs.append(('v', 'visualizer'))
+                menu_specifier.named_pairs.append(('v', 'visualizer'))
             if self.has_ly:
-                named_pairs.append(('l', 'ly'))
+                menu_specifier.named_pairs.append(('l', 'ly'))
             if self.has_stylesheet:
-                named_pairs.append(('y', 'stylesheet'))
+                menu_specifier.named_pairs.append(('y', 'stylesheet'))
             if self.has_pdf:
-                named_pairs.append(('p', 'pdf'))
-            menu_specifier.named_pairs = named_pairs
-            secondary_named_pairs = [
-                ('d', 'delete'),
-                ('r', 'rename'), 
-                ('s', 'summarize'),
-                ('z', 'regenerate'),
-            ]
-            menu_specifier.secondary_named_pairs = secondary_named_pairs
-            command_string, menu_value = menu_specifier.display_menu()
-            key = command_string
+                menu_specifier.named_pairs.append(('p', 'pdf'))
+            menu_specifier.secondary_named_pairs.append(('d', 'delete'))
+            menu_specifier.secondary_named_pairs.append(('r', 'rename'))
+            menu_specifier.secondary_named_pairs.append(('s', 'summarize'))
+            menu_specifier.secondary_named_pairs.append(('z', 'regenerate'))
+            key, value = menu_specifier.display_menu()
             if key == 'b':
-                break
+                return key, None
             elif key == 'd':
                 self.delete_material()
                 break
             elif key == 'i':
-                self.manage_input(command_string)
+                self.manage_input(key)
             elif key == 'k':
                 self.reload_user_input()
             elif key == 'l':
-                self.manage_ly(command_string)
+                self.manage_ly(key)
             elif key == 'o':
-                self.manage_output(command_string)
+                self.manage_output(key)
             elif key == 'p':
-                self.manage_pdf(command_string)
-            elif key == 'q':
-                raise SystemExit
+                self.manage_pdf(key)
             elif key == 'r':
                 self.rename_material()
             elif key == 's':
                 self.summarize_material()
             elif key == 'v':
-                self.manage_visualizer(command_string)
-            elif key == 'w':
-                is_redraw = True
-            elif key == 'x':
-                self.exec_statement()
+                self.manage_visualizer(key)
             elif key == 'y':
                 self.edit_stylesheet()
             elif key == 'z':
-                self.manage_regeneration(command_string)
-            if is_redraw:
-                is_first_pass = True
-            else:
-                is_first_pass = False
+                self.manage_regeneration(key)
 
     def manage_output(self, command_string):
         if command_string == 'o':
@@ -585,7 +554,7 @@ class MaterialPackageProxy(PackageProxy):
         self.remove_module_name_from_sys_modules(self.input_module_name)
 
     def unimport_material_module(self):
-        self.remove_module_name_from_sys_modules(self.material_module_name)
+        self.remove_module_name_from_sys_modules(self.importable_module_name)
 
     def unimport_materials_module(self):
         self.remove_module_name_from_sys_modules(self.materials_module_name)
