@@ -186,7 +186,7 @@ class InteractiveMaterialMaker(SCFObject, _MaterialPackageMaker):
         return spaced_name
 
     ### PUBLIC METHODS ###
-    
+
     def clear_values(self, user_input_wrapper):
         for key in user_input_wrapper:
             user_input_wrapper[key] = None
@@ -214,6 +214,7 @@ class InteractiveMaterialMaker(SCFObject, _MaterialPackageMaker):
             menu_specifier.sentence_length_items.append(('d', 'show demo input values'))
             menu_specifier.sentence_length_items.append(('o', 'overwrite with demo input values'))
             menu_specifier.sentence_length_items.append(('c', 'clear values'))
+            menu_specifier.sentence_length_items.append(('ed', 'edit source'))
             key, value = menu_specifier.display_menu(score_title=self.score_title)
             if key == 'b':
                 self.interactively_check_and_save_material(user_input_wrapper)
@@ -222,6 +223,8 @@ class InteractiveMaterialMaker(SCFObject, _MaterialPackageMaker):
                 self.clear_values(user_input_wrapper)
             elif key == 'd':
                 self.show_demo_input_values()
+            elif key == 'ed':
+                self.edit_source_file()
             elif key == 'm':
                 self.save_material(user_input_wrapper)
                 return key, None

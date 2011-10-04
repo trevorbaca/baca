@@ -13,6 +13,8 @@ import os
 
 
 class SargassoMeasureMaker(InteractiveMaterialMaker):
+    r'''Docstring for sargasso measure maker.
+    '''
 
     def __init__(self, **kwargs):
         InteractiveMaterialMaker.__init__(self, **kwargs)

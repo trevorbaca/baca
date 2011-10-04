@@ -32,7 +32,7 @@ class StudioProxy(DirectoryProxy):
             menu_specifier.menu_title = 'Welcome to the studio.'
             menu_section = MenuSectionSpecifier()
             menu_section.menu_section_entries = self.catalog.list_numbered_score_titles_with_years()
-            menu_section.sentence_length_items.append(('m', 'manage shared materials'))
+            menu_section.sentence_length_items.append(('m', 'materials'))
             menu_specifier.menu_sections.append(menu_section)
             menu_section = MenuSectionSpecifier()
             menu_section.sentence_length_items.append(('st', 'svn st studio'))
@@ -52,7 +52,7 @@ class StudioProxy(DirectoryProxy):
             elif key == 'cm':
                 self.svn_cm()
             elif key == 'm':
-                shared_materials_proxy = SharedMaterialsProxy(score_title='Shared materials')
+                shared_materials_proxy = SharedMaterialsProxy(score_title='Materials')
                 result = shared_materials_proxy.manage_shared_materials()
             elif key == 'st':
                 self.svn_st()

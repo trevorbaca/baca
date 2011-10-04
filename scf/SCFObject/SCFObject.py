@@ -1,6 +1,7 @@
 from abjad.tools import iotools
 import os
 import readline
+import subprocess
 
 
 class SCFObject(object):
@@ -15,7 +16,23 @@ class SCFObject(object):
     def __repr__(self):
         return '%s()' % type(self).__name__
 
+    ### PUBLIC ATTRIBUTES ###
+
+    @property
+    def source_file(self):
+        parent_directory = os.path.dirname(os.path.abspath(self.__module__))
+        module_path = self.__module__
+        module_path = module_path.split('.')[1:]
+        path = os.path.join(parent_directory, *module_path)
+        source_file = path + '.py'
+        return source_file
+
     ### PUBLIC METHODS ###
+
+    def annotate_docstring(self):
+        print self.source_file
+        print ''
+        self.proceed()
 
     def clear_terminal(self):
         iotools.clear_terminal()
@@ -26,6 +43,10 @@ class SCFObject(object):
             print ''
             return False
         return True
+
+    def edit_source_file(self):
+        command = 'vi %s' % self.source_file
+        os.system(command)
 
     def globally_replace_in_file(self, file_name, old, new):
         file_pointer = file(file_name, 'r')
