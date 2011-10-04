@@ -31,6 +31,13 @@ class MenuSpecifier(SCFObject):
 
     ### PRIVATE METHODS ###
 
+    def _add_hidden_menu_items(self, all_keys, all_values):
+        if self.include_studio:
+            all_keys.append('S')
+            all_values.append('studio')
+        all_keys.append('x')
+        all_values.append('exec')
+        
     def _display_footer_items(self, all_keys, all_values):
         if not self.hide_menu:
             self._print_tab(self.indent_level)
@@ -43,7 +50,7 @@ class MenuSpecifier(SCFObject):
         if footer_pairs:
             if not self.hide_menu:
                 print ''
-        
+
     def _display_items_to_number(self, all_keys, all_values):
         keys = range(1, len(self.items_to_number) + 1)
         keys = [str(x) for x in keys]
@@ -69,6 +76,7 @@ class MenuSpecifier(SCFObject):
         self._display_named_pairs(self.named_pairs, all_keys, all_values)
         self._display_named_pairs(self.secondary_named_pairs, all_keys, all_values)
         self._display_footer_items(all_keys, all_values)
+        self._add_hidden_menu_items(all_keys, all_values)
         if not self.hide_menu:
             print ''
         while True:
@@ -122,12 +130,10 @@ class MenuSpecifier(SCFObject):
         footer_pairs = [
             ('q', 'quit'),
             ('w', 'redraw'),
-            ('x', 'exec'),
+            #('x', 'exec'),
             ]
         if self.include_back:
             footer_pairs.append(('b', 'back'))
-        if self.include_studio:
-            footer_pairs.append(('S', 'studio'))
         footer_pairs.sort()
         return footer_pairs
 
@@ -275,7 +281,6 @@ class MenuSpecifier(SCFObject):
             elif key == 'x':
                 self.exec_statement()
             elif key == 'S':
-                #return key, None
                 raise StudioException
             else:
                 return key, value

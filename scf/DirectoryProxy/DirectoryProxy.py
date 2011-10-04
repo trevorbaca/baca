@@ -64,3 +64,9 @@ class DirectoryProxy(SCFObject):
         '''
         command = "if '%s' in sys.modules: del(sys.modules['%s'])" % (module_name, module_name)
         exec(command)
+
+    def svn_st(self):
+        command = 'svn st -u %s' % self.directory
+        proc = subprocess.Popen(command, shell=True, stdout=subprocess.PIPE)
+        for line in proc.stdout.readlines():
+            print line
