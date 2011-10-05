@@ -72,7 +72,12 @@ class DirectoryProxy(SCFObject):
         command = "if '%s' in sys.modules: del(sys.modules['%s'])" % (module_name, module_name)
         exec(command)
 
-    def svn_cm(self, commit_message=None, prompt_proceed=True):
+    def svn_add(self):
+        proc = subprocess.Popen('svn-add-all', shell=True, stdout=subprocess.PIPE)
+        print ''.join(proc.stdout.readlines())
+        self.proceed()
+ 
+    def svn_ci(self, commit_message=None, prompt_proceed=True):
         if commit_message is None:
             commit_message = raw_input('Commit message> ')
             print ''

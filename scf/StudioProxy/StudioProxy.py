@@ -26,6 +26,38 @@ class StudioProxy(DirectoryProxy):
 
     ### PUBLIC METHODS ###
 
+    def manage_svn(self):
+        while True:
+            menu_specifier = MenuSpecifier()
+            menu_specifier.menu_title = 'Repository commands'
+            menu_section = MenuSectionSpecifier()
+            menu_section.sentence_length_items.append(('st', 'svn status'))
+            menu_section.sentence_length_items.append(('add', 'svn add'))
+            menu_section.sentence_length_items.append(('ci', 'svn commit'))
+            menu_section.layout = 'line'
+            menu_specifier.menu_sections.append(menu_section)
+            menu_section = MenuSectionSpecifier()
+            menu_section.sentence_length_items.append(('st scores', 'svn status (scores)'))
+            menu_section.sentence_length_items.append(('add scores', 'svn add (scores)'))
+            menu_section.sentence_length_items.append(('ci scores', 'svn commit (scores)'))
+            menu_section.layout = 'line'
+            menu_specifier.menu_sections.append(menu_section)
+            key, value = menu_specifier.display_menu()
+            if key == 'b':
+                return key, None
+            elif key == 'add':
+                self.svn_add()
+            elif key == 'add scores':
+                self.catalog.svn_add_scores()
+            elif key == 'ci':
+                self.svn_ci()
+            elif key == 'ci scores':
+                self.catalog.svn_ci_scores()
+            elif key == 'st':
+                self.svn_st()
+            elif key == 'st scores':
+                self.catalog.svn_st_scores()
+
     def work_in_studio(self):
         while True:
             menu_specifier = MenuSpecifier()
@@ -33,29 +65,16 @@ class StudioProxy(DirectoryProxy):
             menu_section = MenuSectionSpecifier()
             menu_section.menu_section_entries = self.catalog.list_numbered_score_titles_with_years()
             menu_section.sentence_length_items.append(('m', 'materials'))
-            menu_specifier.menu_sections.append(menu_section)
-            menu_section = MenuSectionSpecifier()
-            menu_section.sentence_length_items.append(('st', 'svn st studio'))
-            menu_section.sentence_length_items.append(('cm', 'svn commit studio'))
-            menu_specifier.menu_sections.append(menu_section)
-            menu_section = MenuSectionSpecifier()
-            menu_section.sentence_length_items.append(('all-st', 'svn st scores'))
-            menu_section.sentence_length_items.append(('all-cm', 'svn commit scores'))
+            menu_section.sentence_length_items.append(('svn', 'repository'))
             menu_specifier.menu_sections.append(menu_section)
             menu_specifier.include_back = False
             menu_specifier.include_studio = False
             key, value = menu_specifier.display_menu()
-            if key == 'all-cm':
-                self.catalog.svn_cm_scores()
-            elif key == 'all-st':
-                self.catalog.svn_st_scores()
-            elif key == 'cm':
-                self.svn_cm()
-            elif key == 'm':
+            if key == 'm':
                 shared_materials_proxy = SharedMaterialsProxy(score_title='Materials')
                 result = shared_materials_proxy.manage_shared_materials()
-            elif key == 'st':
-                self.svn_st()
+            elif key == 'svn':
+                self.manage_svn()
             else:
                 score_package_name = self.catalog.score_title_to_score_package_name(value)
                 if score_package_name is not None:

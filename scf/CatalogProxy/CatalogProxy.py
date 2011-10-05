@@ -131,7 +131,7 @@ class CatalogProxy(DirectoryProxy):
             if score_title.startswith(title):
                 return package_name
 
-    def svn_cm_scores(self):
+    def svn_ci_scores(self):
         commit_message = raw_input('Commit message> ')
         print ''
         print 'Commit message will be: "%s"\n' % commit_message

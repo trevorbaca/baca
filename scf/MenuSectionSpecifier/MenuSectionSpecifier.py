@@ -1,15 +1,14 @@
-
-
-
 class MenuSectionSpecifier(object):
 
     def __init__(self, menu_section_title='', menu_section_entries=None, 
-        sentence_length_items=None, indent_level=1, hide_menu=False):
+        sentence_length_items=None, indent_level=1, hide_menu=False,
+        layout='list'):
         self.menu_section_title = menu_section_title
         self.menu_section_entries = menu_section_entries
         self.sentence_length_items = sentence_length_items
         self.indent_level = indent_level
         self.hide_menu = hide_menu
+        self.layout = layout
 
     ### OVERLOADS ###
 
@@ -53,6 +52,15 @@ class MenuSectionSpecifier(object):
         return property(**locals())
 
     @apply
+    def layout():
+        def fget(self):
+            return self._layout
+        def fset(self, layout):
+            assert layout in ('list', 'line')
+            self._layout = layout
+        return property(**locals())
+
+    @apply
     def menu_section_entries():
         def fget(self):
             return self._menu_section_entries
@@ -90,12 +98,18 @@ class MenuSectionSpecifier(object):
         for key, value in self.menu_section_entries:
             if not self.hide_menu:
                 self._print_tab(self.indent_level),
-                print '%s: %s' % (key, value)
+                if self.layout == 'list':
+                    print '%s: %s' % (key, value)
+                elif self.layout == 'line':
+                    print '%s: %s' % (key, value),
             all_keys.append(key)
             all_values.append(value)
         if self.menu_section_entries:
             if not self.hide_menu:
-                print ''
+                if self.layout == 'list':
+                    print ''
+                elif self.layout == 'line':
+                    print '\n'
         for key, value in self.sentence_length_items:
             if not self.hide_menu:
                 self._print_tab(self.indent_level),
