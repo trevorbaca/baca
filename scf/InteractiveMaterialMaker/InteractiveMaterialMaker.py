@@ -13,11 +13,13 @@ import shutil
 
 class InteractiveMaterialMaker(SCFObject, _MaterialPackageMaker):
 
-    def __init__(self, directory=None, materials_directory=None, score_title=None):
+    def __init__(self, directory=None, materials_directory=None, score_title=None,
+        material_name=None):
         SCFObject.__init__(self)
         self.directory = directory
         self.materials_directory = materials_directory
         self.score_title = score_title
+        self.material_name = material_name
 
     ### OVERLOADS ###
 
@@ -179,6 +181,19 @@ class InteractiveMaterialMaker(SCFObject, _MaterialPackageMaker):
     ### PUBLIC ATTRIBUTES ###
 
     @property
+    def has_material_name(self):
+        return bool(self.material_name is not None)
+
+    @apply
+    def material_name():
+        def fget(self):
+            return self._material_name
+        def fset(self, material_name):
+            assert isinstance(material_name, (str, type(None)))
+            self._material_name = material_name
+        return property(**locals())
+
+    @property
     def spaced_name(self):
         from abjad.tools import iotools
         spaced_name = iotools.uppercamelcase_to_underscore_delimited_lowercase(type(self).__name__)
@@ -196,7 +211,11 @@ class InteractiveMaterialMaker(SCFObject, _MaterialPackageMaker):
             user_input_wrapper = self._initialize_user_input_wrapper()
         while True:
             menu_specifier = MenuSpecifier()
-            menu_specifier.menu_title = '%s - edit interactively' % self.spaced_name
+            if self.has_material_name:
+                menu_specifier.menu_title = '%s - %s - edit interactively' % (
+                    self.spaced_name, self.material_name)
+            else:
+                menu_specifier.menu_title = '%s - (unnamed) - edit interactively' % self.spaced_name
             pairs = list(user_input_wrapper.iteritems())
             lines = []
             for pair in pairs:
@@ -211,6 +230,10 @@ class InteractiveMaterialMaker(SCFObject, _MaterialPackageMaker):
             if user_input_wrapper.is_complete:
                 menu_specifier.sentence_length_items.append(('p', 'show pdf of given input'))
                 menu_specifier.sentence_length_items.append(('m', 'write material to disk'))
+            if self.has_material_name:
+                menu_specifier.sentence_length_items.append(('r', 'rename material'))
+            else:
+                menu_specifier.sentence_length_items.append(('n', 'name material'))
             menu_specifier.sentence_length_items.append(('d', 'show demo input values'))
             menu_specifier.sentence_length_items.append(('o', 'overwrite with demo input values'))
             menu_specifier.sentence_length_items.append(('c', 'clear values'))
@@ -228,6 +251,8 @@ class InteractiveMaterialMaker(SCFObject, _MaterialPackageMaker):
             elif key == 'm':
                 self.save_material(user_input_wrapper)
                 return key, None
+            elif key == 'n':
+                self.name_material()
             elif key == 'o':
                 self.overwrite_with_demo_input_values(user_input_wrapper)
             elif key == 'p':
@@ -264,9 +289,21 @@ class InteractiveMaterialMaker(SCFObject, _MaterialPackageMaker):
         lilypond_file = self.make_lilypond_file_from_output_material(material)
         return lilypond_file
 
+    def name_material(self):
+        while True:
+            response = raw_input('Material name> ')
+            print ''
+            if self.confirm():
+                self.material_name = response
+                break
+
     def overwrite_with_demo_input_values(self, user_input_wrapper):
         for key in self.user_input_template:
             user_input_wrapper[key] = self.user_input_template[key]    
+
+    # TODO:
+    def rename_material(self):
+        pass
 
     def save_material(self, user_input_wrapper):
         material = self.make(*user_input_wrapper.values)
