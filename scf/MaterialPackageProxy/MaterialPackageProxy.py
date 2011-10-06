@@ -89,6 +89,19 @@ class MaterialPackageProxy(PackageProxy):
         parent_package = PackageProxy(self.parent_directory)
         parent_package.add_line_to_initializer(import_statement)
 
+    def add_tag_interactively(self):
+        while True:
+            tag_name = raw_input('Tag name> ')
+            if self.confirm():
+                break
+        while True:
+            tag_value = raw_input('Tag value> ')
+            if self.confirm():
+                break
+        print ''
+        self.add_tag(tag_name, tag_value)
+        self.proceed()
+
     def create_ly_and_pdf_from_visualizer(self, is_forced=False):
         lilypond_file = self.import_score_definition_from_visualizer()
         if is_forced or not self.lilypond_file_format_is_equal_to_visualizer_ly(lilypond_file):
@@ -281,8 +294,10 @@ class MaterialPackageProxy(PackageProxy):
             if self.has_pdf:
                 menu_specifier.named_pairs.append(('p', 'pdf'))
             menu_specifier.secondary_named_pairs.append(('d', 'delete'))
+            menu_specifier.secondary_named_pairs.append(('e', 'add tag'))
             menu_specifier.secondary_named_pairs.append(('r', 'rename'))
             menu_specifier.secondary_named_pairs.append(('s', 'summarize'))
+            menu_specifier.secondary_named_pairs.append(('t', 'tags'))
             menu_specifier.secondary_named_pairs.append(('z', 'regenerate'))
             key, value = menu_specifier.display_menu()
             if key == 'b':
@@ -290,6 +305,9 @@ class MaterialPackageProxy(PackageProxy):
             elif key == 'd':
                 self.delete_material()
                 break
+            # TODO: create tags submenu
+            elif key == 'e':
+                self.add_tag_interactively()
             elif key == 'i':
                 self.manage_input(key)
             elif key == 'k':
@@ -304,6 +322,8 @@ class MaterialPackageProxy(PackageProxy):
                 self.rename_material()
             elif key == 's':
                 self.summarize_material()
+            elif key == 't':
+                self.show_tags()
             elif key == 'v':
                 self.manage_visualizer(key)
             elif key == 'y':

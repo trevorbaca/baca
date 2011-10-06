@@ -36,6 +36,15 @@ class PackageProxy(DirectoryProxy):
         file_pointer.write(''.join(initializer_lines))
         file_pointer.close()
 
+    def add_tag(self, tag_name, tag_value):
+        print 'adding tag'
+        tags = self.get_tags()
+        tags[tag_name] = tag_value
+        self.write_tags_to_initializer(tags)
+
+    def delete_tag(self, tag_name):
+        pass
+
     def import_attribute_from_initializer(self, attribute_name):
         try:
             exec('from %s import %s' % (self.importable_module_name, attribute_name))
@@ -43,3 +52,43 @@ class PackageProxy(DirectoryProxy):
             return result
         except ImportError:
             return None
+
+    def get_tag(self, tag_name):
+        pass
+
+    def get_tags(self):
+        try:
+            exec('from %s import tags' % self.importable_module_name)
+            return tags
+        except ImportError:    
+            return {}
+
+    def show_tags(self):
+        tags = self.get_tags()
+        if tags:
+            for key in sorted(tags):
+                print '\t%s: %s' % (key, tags[key])
+        else:
+            print 'No tags found.'
+        print ''
+        self.proceed()
+
+    def write_tags_to_initializer(self, tags):
+        print 'writing tags to initializer'
+        lines = []
+        fp = file(self.initializer, 'r')
+        found_tags = False
+        for line in fp.readlines():
+            print line
+            if line.startswith('tags ='):
+                found_tags = True
+                lines.append('tags = %s\n' % tags)
+            else:
+                lines.append(line)
+        if not found_tags:
+            lines.append('tags = %s\n' % tags)
+        print lines
+        fp.close()
+        fp = file(self.initializer, 'w')
+        fp.write(''.join(lines))
+        fp.close()
