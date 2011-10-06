@@ -1,4 +1,5 @@
 from baca.scf.DirectoryProxy import DirectoryProxy
+from baca.scf.MenuSpecifier import MenuSpecifier
 from baca.scf.ScorePackageProxy import ScorePackageProxy
 import os
 
@@ -132,6 +133,19 @@ class CatalogProxy(DirectoryProxy):
             if score_title.startswith(title):
                 return package_name
 
+    def select_score_interactively(self, menu_header=None):
+        menu = MenuSpecifier()
+        menu.menu_header = menu_header
+        menu.menu_body = 'select score'
+        menu.items_to_number = self.list_score_titles_with_years()
+        menu.sentence_length_items.append(('s', 'studio'))
+        key, value = menu.display_menu()
+        if key == 's':
+            return None
+        score_package_name = self.score_title_to_score_package_name(value)
+        score_package_proxy = ScorePackageProxy(score_package_name)
+        return score_package_proxy
+    
     def svn_ci_scores(self):
         commit_message = raw_input('Commit message> ')
         print ''
