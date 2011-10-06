@@ -3,6 +3,7 @@ from abjad.tools import lilypondfiletools
 from abjad.tools import markuptools
 from baca.scf._MaterialPackageMaker import _MaterialPackageMaker
 from baca.scf.CatalogProxy import CatalogProxy
+from baca.scf.MenuSpecifier import MenuSpecifier
 from baca.scf.SCFObject import SCFObject
 from baca.scf.UserInputWrapper import UserInputWrapper
 import copy
@@ -12,12 +13,10 @@ import shutil
 
 class InteractiveMaterialMaker(SCFObject, _MaterialPackageMaker):
 
-    def __init__(self, directory=None, materials_directory=None, score_title=None,
-        material_name=None):
+    def __init__(self, directory=None, materials_directory=None, material_name=None):
         SCFObject.__init__(self)
         self.directory = directory
         self.materials_directory = materials_directory
-        self.score_title = score_title
         self.material_name = material_name
 
     ### OVERLOADS ###
@@ -205,18 +204,12 @@ class InteractiveMaterialMaker(SCFObject, _MaterialPackageMaker):
         for key in user_input_wrapper:
             user_input_wrapper[key] = None
         
-    def edit_interactively(self, user_input_wrapper=None, menu_header=None):
-        from baca.scf.MenuSpecifier import MenuSpecifier
+    def edit_interactively(self, menu_header=None, user_input_wrapper=None):
         if user_input_wrapper is None:
             user_input_wrapper = self._initialize_user_input_wrapper()
         while True:
             menu_specifier = MenuSpecifier(menu_header=menu_header)
-#            if self.has_material_name:
-#                menu_specifier.menu_title = '%s - %s - edit interactively' % (
-#                    self.spaced_name, self.material_name)
-#            else:
-#                menu_specifier.menu_title = '%s - (unnamed) - edit interactively' % self.spaced_name
-            menu_specifier.menu_body = 'edit interactively'
+            menu_specifier.menu_body = '%s - edit interactively' % self.spaced_name
             pairs = list(user_input_wrapper.iteritems())
             lines = []
             for pair in pairs:
@@ -239,7 +232,8 @@ class InteractiveMaterialMaker(SCFObject, _MaterialPackageMaker):
             menu_specifier.sentence_length_items.append(('o', 'overwrite with demo input values'))
             menu_specifier.sentence_length_items.append(('c', 'clear values'))
             menu_specifier.sentence_length_items.append(('ed', 'edit source'))
-            key, value = menu_specifier.display_menu(score_title=self.score_title)
+            #key, value = menu_specifier.display_menu(score_title=self.score_title)
+            key, value = menu_specifier.display_menu()
             if key == 'b':
                 self.interactively_check_and_save_material(user_input_wrapper)
                 return key, None
@@ -316,7 +310,6 @@ class InteractiveMaterialMaker(SCFObject, _MaterialPackageMaker):
         return True
 
     def show_demo_input_values(self, menu_header=None):
-        from baca.scf.MenuSpecifier import MenuSpecifier
         menu_specifier = MenuSpecifier(menu_header=menu_header)
         menu_specifier.menu_body = 'demo values'
         items = []

@@ -1,5 +1,6 @@
 from abjad.tools import iotools
 from baca.scf.DirectoryProxy import DirectoryProxy
+from baca.scf.MenuSpecifier import MenuSpecifier
 import os
 
 
@@ -36,9 +37,7 @@ class MakersProxy(DirectoryProxy):
         return spaced_names
 
     def manage_makers(self, menu_header=None):
-        from baca.scf.MenuSpecifier import MenuSpecifier
         while True:
-            #menu_specifier = MenuSpecifier(score_title=self.score_title)
             menu_specifier = MenuSpecifier(menu_header=menu_header)
             menu_specifier.menu_body = 'interactive material makers'
             menu_specifier.items_to_number = self.list_maker_spaced_names()
@@ -50,18 +49,14 @@ class MakersProxy(DirectoryProxy):
                 maker_name = maker_name.replace(' ', '_')
                 maker_name = iotools.underscore_delimited_lowercase_to_uppercamelcase(maker_name)
                 maker = self.get_maker(maker_name)
-                maker.score_title = self.score_title
-                result = maker.edit_interactively()
+                result = maker.edit_interactively(menu_header=menu_specifier.menu_title)
                 if result:
                     break
 
-    #def select_interactive_maker(self, score_title=None):
     def select_interactive_maker(self, menu_header=None):
-        from baca.scf.MenuSpecifier import MenuSpecifier
         menu_specifier = MenuSpecifier(menu_header=menu_header)
         menu_specifier.menu_body = 'select interactive material maker'
         menu_specifier.items_to_number = self.list_makers()
-        #key, value = menu_specifier.display_menu(score_title=score_title)
         key, value = menu_specifier.display_menu()
         if value is not None:
             maker_name = value

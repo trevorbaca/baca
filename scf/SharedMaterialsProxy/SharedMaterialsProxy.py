@@ -15,15 +15,15 @@ class SharedMaterialsProxy(DirectoryProxy, _MaterialPackageMaker):
 
     ### PUBLIC METHODS ###
 
-    def create_shared_material_package(self, is_interactive=False):
+    def create_shared_material_package(self, menu_header=None, is_interactive=False):
         if is_interactive:
             makers_proxy = MakersProxy(score_title=self.score_title)
-            return makers_proxy.manage_makers()
+            return makers_proxy.manage_makers(menu_header=menu_header)
         else:
             response = raw_input('Make material interactively? ')
             if response == 'y':
                 makers_proxy = MakersProxy()
-                makers_proxy.manage_makers()
+                makers_proxy.manage_makers(menu_header=menu_header)
             else:
                 return self._create_materials_package(self.directory)
 
@@ -55,9 +55,9 @@ class SharedMaterialsProxy(DirectoryProxy, _MaterialPackageMaker):
     def make_new_material_by_hand(self):
         self.print_not_implemented()
 
-    def manage_shared_materials(self, command_string=None):
+    def manage_shared_materials(self, menu_header=None, command_string=None):
         while True:
-            menu_specifier = MenuSpecifier()
+            menu_specifier = MenuSpecifier(menu_header=menu_header)
             menu_specifier.menu_body = 'materials'
             menu_specifier.items_to_number = self.list_shared_material_names()
             menu_specifier.sentence_length_items.append(('h', '[make new material by hand]'))
@@ -68,7 +68,8 @@ class SharedMaterialsProxy(DirectoryProxy, _MaterialPackageMaker):
             elif key == 'h':
                 self.make_new_material_by_hand()
             elif key == 'i':
-                result = self.create_shared_material_package(is_interactive=True)
+                result = self.create_shared_material_package(
+                    menu_header=menu_specifier.menu_title, is_interactive=True)
             else:
                 material_name = value
                 score_package_name = ''

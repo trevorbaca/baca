@@ -73,7 +73,7 @@ class StudioProxy(DirectoryProxy):
             key, value = menu_specifier.display_menu()
             if key == 'm':
                 shared_materials_proxy = SharedMaterialsProxy()
-                result = shared_materials_proxy.manage_shared_materials()
+                result = shared_materials_proxy.manage_shared_materials(menu_header='studio')
             elif key == 'svn':
                 self.manage_svn()
             else:

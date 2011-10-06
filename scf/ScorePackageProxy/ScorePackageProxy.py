@@ -276,17 +276,18 @@ class ScorePackageProxy(PackageProxy, _MaterialPackageMaker):
     def make_new_material_by_hand(self):
         return self.create_materials_package()
 
-    def make_new_material_interactively(self):
+    def make_new_material_interactively(self, menu_header=None):
         while True:
             makers_proxy = MakersProxy()
-            key, value = makers_proxy.select_interactive_maker(score_title=self.score_title)
+            #key, value = makers_proxy.select_interactive_maker(score_title=self.score_title)
+            key, value = makers_proxy.select_interactive_maker(menu_header=menu_header)
             if value is None:
                 break
             else:
                 maker = value
-            maker.score_title = self.score_title
+            #maker.score_title = self.score_title
             maker.materials_directory = self.materials_directory
-            result = maker.edit_interactively()
+            result = maker.edit_interactively(menu_header=menu_header)
             if result:
                 break
         return True, None
