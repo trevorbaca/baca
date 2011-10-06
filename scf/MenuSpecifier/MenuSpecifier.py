@@ -97,11 +97,13 @@ class MenuSpecifier(SCFObject):
         if self.menu_title:
             if not self.hide_menu:
                 if score_title is not None:
-                    print '%s - %s' % (score_title, self.menu_title.lower())
+                    menu_title = '%s - %s' % (score_title, self.menu_title.lower())
                 elif getattr(self, 'score_title', None) is not None:
-                    print '%s - %s' % (self.score_title, self.menu_title.lower())
+                    menu_titlte = '%s - %s' % (self.score_title, self.menu_title.lower())
                 else:
-                    print self.menu_title
+                    menu_title = self.menu_title
+                menu_title = menu_title.capitalize()
+                print menu_title
                 print ''
 
     def _display_named_pairs(self, named_pairs, all_keys, all_values):

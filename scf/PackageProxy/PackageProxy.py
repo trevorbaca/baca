@@ -11,6 +11,10 @@ class PackageProxy(DirectoryProxy):
     ### PUBLIC ATTRIBUTES ###
 
     @property
+    def creation_date(self):
+        pass
+        
+    @property
     def initializer(self):
         return os.path.join(self.directory, '__init__.py')
 
@@ -37,7 +41,6 @@ class PackageProxy(DirectoryProxy):
         file_pointer.close()
 
     def add_tag(self, tag_name, tag_value):
-        print 'adding tag'
         tags = self.get_tags()
         tags[tag_name] = tag_value
         self.write_tags_to_initializer(tags)
@@ -64,22 +67,22 @@ class PackageProxy(DirectoryProxy):
             return {}
 
     def show_tags(self):
+        self.clear_terminal()
         tags = self.get_tags()
         if tags:
+            print 'Tags:\n'
             for key in sorted(tags):
-                print '\t%s: %s' % (key, tags[key])
+                print '%s: %s' % (key, tags[key])
         else:
             print 'No tags found.'
         print ''
         self.proceed()
 
     def write_tags_to_initializer(self, tags):
-        print 'writing tags to initializer'
         lines = []
         fp = file(self.initializer, 'r')
         found_tags = False
         for line in fp.readlines():
-            print line
             if line.startswith('tags ='):
                 found_tags = True
                 lines.append('tags = %s\n' % tags)
@@ -87,7 +90,6 @@ class PackageProxy(DirectoryProxy):
                 lines.append(line)
         if not found_tags:
             lines.append('tags = %s\n' % tags)
-        print lines
         fp.close()
         fp = file(self.initializer, 'w')
         fp.write(''.join(lines))

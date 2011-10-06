@@ -11,4 +11,5 @@ from ScorePackageProxy import ScorePackageProxy
 from SharedMaterialsProxy import SharedMaterialsProxy
 from StudioException import StudioException
 from StudioProxy import StudioProxy
+from UserInputGetter import UserInputGetter
 from UserInputWrapper import UserInputWrapper

@@ -1,6 +1,8 @@
 from abjad.tools import iotools
+from baca.scf.MenuSectionSpecifier import MenuSectionSpecifier
 from baca.scf.MenuSpecifier import MenuSpecifier
 from baca.scf.PackageProxy import PackageProxy
+from baca.scf.UserInputGetter import UserInputGetter
 import os
 import subprocess
 import sys
@@ -90,16 +92,15 @@ class MaterialPackageProxy(PackageProxy):
         parent_package.add_line_to_initializer(import_statement)
 
     def add_tag_interactively(self):
-        while True:
-            tag_name = raw_input('Tag name> ')
-            if self.confirm():
-                break
-        while True:
-            tag_value = raw_input('Tag value> ')
-            if self.confirm():
-                break
-        print ''
-        self.add_tag(tag_name, tag_value)
+        user_input_getter = UserInputGetter()
+        user_input_getter.title = 'add tag'
+        user_input_getter.prompts.append('Tag name> ')
+        user_input_getter.prompts.append('Tag value> ')
+        user_input = user_input_getter.get_user_input()
+        if user_input:
+            tag_name, tag_value = user_input
+            self.add_tag(tag_name, tag_value)
+            print 'Tag added.\n'
         self.proceed()
 
     def create_ly_and_pdf_from_visualizer(self, is_forced=False):
@@ -294,7 +295,7 @@ class MaterialPackageProxy(PackageProxy):
             if self.has_pdf:
                 menu_specifier.named_pairs.append(('p', 'pdf'))
             menu_specifier.secondary_named_pairs.append(('d', 'delete'))
-            menu_specifier.secondary_named_pairs.append(('e', 'add tag'))
+            menu_specifier.secondary_named_pairs.append(('g', 'get tag'))
             menu_specifier.secondary_named_pairs.append(('r', 'rename'))
             menu_specifier.secondary_named_pairs.append(('s', 'summarize'))
             menu_specifier.secondary_named_pairs.append(('t', 'tags'))
@@ -305,9 +306,6 @@ class MaterialPackageProxy(PackageProxy):
             elif key == 'd':
                 self.delete_material()
                 break
-            # TODO: create tags submenu
-            elif key == 'e':
-                self.add_tag_interactively()
             elif key == 'i':
                 self.manage_input(key)
             elif key == 'k':
@@ -323,7 +321,7 @@ class MaterialPackageProxy(PackageProxy):
             elif key == 's':
                 self.summarize_material()
             elif key == 't':
-                self.show_tags()
+                self.manage_tags()
             elif key == 'v':
                 self.manage_visualizer(key)
             elif key == 'y':
@@ -384,6 +382,28 @@ class MaterialPackageProxy(PackageProxy):
         elif command_string == 'zo':
             self.regenerate_everything(is_forced=True)
             self.open_pdf()
+
+    def manage_tags(self):
+        while True:
+            menu = MenuSpecifier()
+            menu.menu_title = 'tags'
+            menu_section = MenuSectionSpecifier()
+            menu_section.sentence_length_items.append(('add', 'add tag'))
+            menu_section.sentence_length_items.append(('delete', 'delete tag'))
+            menu_section.sentence_length_items.append(('get', 'get tag'))
+            menu_section.sentence_length_items.append(('show', 'show tags'))
+            menu.menu_sections.append(menu_section)
+            key, value = menu.display_menu()
+            if key == 'b':
+                return key, None
+            elif key == 'add':
+                self.add_tag_interactively()
+            elif key == 'delete':
+                self.delete_tag_interactively()
+            elif key == 'get':
+                self.get_tag_interactively()
+            elif key == 'show':
+                self.show_tags()
 
     def manage_visualizer(self, command_string):
         if self.has_visualizer:
