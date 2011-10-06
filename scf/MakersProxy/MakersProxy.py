@@ -1,5 +1,4 @@
 from abjad.tools import iotools
-from baca.scf.MenuSpecifier import MenuSpecifier
 from baca.scf.DirectoryProxy import DirectoryProxy
 import os
 
@@ -36,10 +35,12 @@ class MakersProxy(DirectoryProxy):
             spaced_names.append(spaced_name)
         return spaced_names
 
-    def manage_makers(self):
+    def manage_makers(self, menu_header=None):
+        from baca.scf.MenuSpecifier import MenuSpecifier
         while True:
-            menu_specifier = MenuSpecifier(score_title=self.score_title)
-            menu_specifier.menu_title = 'Interactive material makers'
+            #menu_specifier = MenuSpecifier(score_title=self.score_title)
+            menu_specifier = MenuSpecifier(menu_header=menu_header)
+            menu_specifier.menu_body = 'interactive material makers'
             menu_specifier.items_to_number = self.list_maker_spaced_names()
             key, value = menu_specifier.display_menu()
             if key == 'b':
@@ -54,11 +55,14 @@ class MakersProxy(DirectoryProxy):
                 if result:
                     break
 
-    def select_interactive_maker(self, score_title=None):
-        menu_specifier = MenuSpecifier()
-        menu_specifier.menu_title = 'Select interactive material maker'
+    #def select_interactive_maker(self, score_title=None):
+    def select_interactive_maker(self, menu_header=None):
+        from baca.scf.MenuSpecifier import MenuSpecifier
+        menu_specifier = MenuSpecifier(menu_header=menu_header)
+        menu_specifier.menu_body = 'select interactive material maker'
         menu_specifier.items_to_number = self.list_makers()
-        key, value = menu_specifier.display_menu(score_title=score_title)
+        #key, value = menu_specifier.display_menu(score_title=score_title)
+        key, value = menu_specifier.display_menu()
         if value is not None:
             maker_name = value
             maker = self.get_maker(maker_name)

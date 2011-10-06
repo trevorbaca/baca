@@ -26,10 +26,11 @@ class StudioProxy(DirectoryProxy):
 
     ### PUBLIC METHODS ###
 
-    def manage_svn(self):
+    def manage_svn(self, menu_header=None):
         while True:
             menu_specifier = MenuSpecifier()
-            menu_specifier.menu_title = 'Repository commands'
+            menu_specifier.menu_header = menu_header
+            menu_specifier.menu_body = 'repository commands'
             menu_section = MenuSectionSpecifier()
             menu_section.sentence_length_items.append(('st', 'svn status'))
             menu_section.sentence_length_items.append(('add', 'svn add'))
@@ -61,7 +62,7 @@ class StudioProxy(DirectoryProxy):
     def work_in_studio(self):
         while True:
             menu_specifier = MenuSpecifier()
-            menu_specifier.menu_title = 'Welcome to the studio.'
+            menu_specifier.menu_body = 'welcome to the studio.'
             menu_section = MenuSectionSpecifier()
             menu_section.menu_section_entries = self.catalog.list_numbered_score_titles_with_years()
             menu_section.sentence_length_items.append(('m', 'materials'))

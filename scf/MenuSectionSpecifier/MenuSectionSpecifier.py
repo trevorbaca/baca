@@ -1,9 +1,10 @@
 class MenuSectionSpecifier(object):
 
-    def __init__(self, menu_section_title='', menu_section_entries=None, 
-        sentence_length_items=None, indent_level=1, hide_menu=False,
-        layout='list'):
+    def __init__(self, menu_section_title='', lines_to_list=None,
+        menu_section_entries=None, sentence_length_items=None, indent_level=1, 
+        hide_menu=False, layout='list'):
         self.menu_section_title = menu_section_title
+        self.lines_to_list = lines_to_list
         self.menu_section_entries = menu_section_entries
         self.sentence_length_items = sentence_length_items
         self.indent_level = indent_level
@@ -61,6 +62,17 @@ class MenuSectionSpecifier(object):
         return property(**locals())
 
     @apply
+    def lines_to_list():
+        def fget(self):
+            return self._lines_to_list
+        def fset(self, lines_to_list):
+            if lines_to_list is None:
+                self._lines_to_list = []
+            else:
+                self._lines_to_list = lines_to_list[:]
+        return property(**locals())
+
+    @apply
     def menu_section_entries():
         def fget(self):
             return self._menu_section_entries
@@ -95,6 +107,13 @@ class MenuSectionSpecifier(object):
 
     def display(self, all_keys, all_values):
         self._display_menu_section_title()
+        for line in self.lines_to_list:
+            if not self.hide_menu:
+                self._print_tab(self.indent_level),
+                print line
+        if self.lines_to_list:
+            if not self.hide_menu:
+                print ''
         for key, value in self.menu_section_entries:
             if not self.hide_menu:
                 self._print_tab(self.indent_level),

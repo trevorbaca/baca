@@ -58,7 +58,7 @@ class SharedMaterialsProxy(DirectoryProxy, _MaterialPackageMaker):
     def manage_shared_materials(self, command_string=None):
         while True:
             menu_specifier = MenuSpecifier()
-            menu_specifier.menu_title = 'Materials'
+            menu_specifier.menu_body = 'materials'
             menu_specifier.items_to_number = self.list_shared_material_names()
             menu_specifier.sentence_length_items.append(('h', '[make new material by hand]'))
             menu_specifier.sentence_length_items.append(('i', 'make new material interactively'))
@@ -75,4 +75,4 @@ class SharedMaterialsProxy(DirectoryProxy, _MaterialPackageMaker):
                 material_package_proxy = MaterialPackageProxy(
                     score_package_name, material_name, is_shared_material=True)
                 material_package_proxy.score_title = 'Materials'
-                material_package_proxy.manage_material()
+                material_package_proxy.manage_material(menu_header=menu_specifier.menu_title)

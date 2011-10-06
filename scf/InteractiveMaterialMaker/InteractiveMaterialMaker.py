@@ -3,7 +3,6 @@ from abjad.tools import lilypondfiletools
 from abjad.tools import markuptools
 from baca.scf._MaterialPackageMaker import _MaterialPackageMaker
 from baca.scf.CatalogProxy import CatalogProxy
-from baca.scf.MenuSpecifier import MenuSpecifier
 from baca.scf.SCFObject import SCFObject
 from baca.scf.UserInputWrapper import UserInputWrapper
 import copy
@@ -206,16 +205,18 @@ class InteractiveMaterialMaker(SCFObject, _MaterialPackageMaker):
         for key in user_input_wrapper:
             user_input_wrapper[key] = None
         
-    def edit_interactively(self, user_input_wrapper=None):
+    def edit_interactively(self, user_input_wrapper=None, menu_header=None):
+        from baca.scf.MenuSpecifier import MenuSpecifier
         if user_input_wrapper is None:
             user_input_wrapper = self._initialize_user_input_wrapper()
         while True:
-            menu_specifier = MenuSpecifier()
-            if self.has_material_name:
-                menu_specifier.menu_title = '%s - %s - edit interactively' % (
-                    self.spaced_name, self.material_name)
-            else:
-                menu_specifier.menu_title = '%s - (unnamed) - edit interactively' % self.spaced_name
+            menu_specifier = MenuSpecifier(menu_header=menu_header)
+#            if self.has_material_name:
+#                menu_specifier.menu_title = '%s - %s - edit interactively' % (
+#                    self.spaced_name, self.material_name)
+#            else:
+#                menu_specifier.menu_title = '%s - (unnamed) - edit interactively' % self.spaced_name
+            menu_specifier.menu_body = 'edit interactively'
             pairs = list(user_input_wrapper.iteritems())
             lines = []
             for pair in pairs:
@@ -314,9 +315,10 @@ class InteractiveMaterialMaker(SCFObject, _MaterialPackageMaker):
         self.proceed()
         return True
 
-    def show_demo_input_values(self):
-        menu_specifier = MenuSpecifier()
-        menu_specifier.menu_title = '%s - demo values' % self.spaced_name
+    def show_demo_input_values(self, menu_header=None):
+        from baca.scf.MenuSpecifier import MenuSpecifier
+        menu_specifier = MenuSpecifier(menu_header=menu_header)
+        menu_specifier.menu_body = 'demo values'
         items = []
         for i, (key, value) in enumerate(self.user_input_template.iteritems()):
             item = '%s: %r' % (key.replace('_', ' '), value)

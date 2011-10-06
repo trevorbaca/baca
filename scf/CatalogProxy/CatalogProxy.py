@@ -1,4 +1,3 @@
-from baca.scf.MenuSpecifier import MenuSpecifier
 from baca.scf.DirectoryProxy import DirectoryProxy
 from baca.scf.ScorePackageProxy import ScorePackageProxy
 import os
@@ -20,9 +19,11 @@ class CatalogProxy(DirectoryProxy):
             score_package_proxy.fix_score_package_directory_structure()
             score_package_proxy.profile_score_package_directory_structure()
 
-    def get_score_package_name_from_user(self):
+    def get_score_package_name_from_user(self, menu_header=None):
+        from baca.scf.MenuSpecifier import MenuSpecifier
         menu_specifier = MenuSpecifier()
-        menu_specifier.menu_title = 'Select score by number.'
+        menu_specifier.menu_header = menu_header
+        menu_specifier.menu_body = 'select score by number.'
         menu_specifier.items_to_number = self.list_score_titles_with_years()
         number, score_title = menu_specifier.display_menu()
         score_package_name = self.score_title_to_score_package_name(score_title)

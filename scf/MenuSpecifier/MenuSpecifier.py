@@ -1,16 +1,17 @@
 from baca.scf.StudioException import StudioException
+from baca.scf.MenuObject import MenuObject
 from baca.scf.SCFObject import SCFObject
 import os
 
 
-class MenuSpecifier(SCFObject):
+class MenuSpecifier(MenuObject, SCFObject):
 
-    def __init__(self, menu_title='', score_title=None, menu_sections=None, 
-        items_to_number=None, sentence_length_items=None, named_pairs=None, 
-        secondary_named_pairs=None, include_back=True, include_studio=True, 
-        indent_level=1, item_width = 11, should_clear_terminal=True, 
-        hide_menu=False):
-        self.menu_title = menu_title
+    def __init__(self, menu_header=None, menu_body=None, score_title=None, 
+        menu_sections=None, items_to_number=None, sentence_length_items=None, 
+        named_pairs=None, secondary_named_pairs=None, include_back=True, 
+        include_studio=True, indent_level=1, item_width = 11, 
+        should_clear_terminal=True, hide_menu=False):
+        MenuObject.__init__(self, menu_header=menu_header, menu_body=menu_body)
         self.score_title = score_title
         self.menu_sections = menu_sections
         self.items_to_number = items_to_number
@@ -214,15 +215,6 @@ class MenuSpecifier(SCFObject):
                 self._menu_sections = []
             else:
                 self._menu_sections = menu_sections
-        return property(**locals())
-
-    @apply
-    def menu_title():
-        def fget(self):
-            return self._menu_title
-        def fset(self, menu_title):
-            assert isinstance(menu_title, str)
-            self._menu_title = menu_title
         return property(**locals())
 
     @apply

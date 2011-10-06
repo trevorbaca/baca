@@ -1,8 +1,5 @@
 from abjad.tools import iotools
-from baca.scf.MenuSectionSpecifier import MenuSectionSpecifier
-from baca.scf.MenuSpecifier import MenuSpecifier
 from baca.scf.PackageProxy import PackageProxy
-from baca.scf.UserInputGetter import UserInputGetter
 import os
 import subprocess
 import sys
@@ -91,18 +88,6 @@ class MaterialPackageProxy(PackageProxy):
         parent_package = PackageProxy(self.parent_directory)
         parent_package.add_line_to_initializer(import_statement)
 
-    def add_tag_interactively(self):
-        user_input_getter = UserInputGetter()
-        user_input_getter.title = 'add tag'
-        user_input_getter.prompts.append('Tag name> ')
-        user_input_getter.prompts.append('Tag value> ')
-        user_input = user_input_getter.get_user_input()
-        if user_input:
-            tag_name, tag_value = user_input
-            self.add_tag(tag_name, tag_value)
-            print 'Tag added.\n'
-        self.proceed()
-
     def create_ly_and_pdf_from_visualizer(self, is_forced=False):
         lilypond_file = self.import_score_definition_from_visualizer()
         if is_forced or not self.lilypond_file_format_is_equal_to_visualizer_ly(lilypond_file):
@@ -159,14 +144,6 @@ class MaterialPackageProxy(PackageProxy):
     def edit_visualizer(self):
         os.system('vi + %s' % self.visualizer)
 
-#    def import_attribute_from_initializer(self, attribute_name):
-#        try:
-#            exec('from %s import %s' % (self.material_module_name, attribute_name))
-#            exec('result = %s' % attribute_name)
-#            return result
-#        except ImportError:
-#            return None
-
     def import_attribute_from_input_file(self, attribute_name):
         try:
             exec('from %s import %s' % (self.input_module_name, attribute_name))
@@ -187,8 +164,6 @@ class MaterialPackageProxy(PackageProxy):
     def import_material_from_output_file(self):
         self.unimport_output_module_hierarchy()
         try:
-            # following line has been working
-            #exec('from %s import %s' % (self.materials_module_name, self.material_name))
             exec('from %s import %s' % (self.output_module_name, self.material_name))
             exec('result = %s' % self.material_name)
             return result
@@ -275,13 +250,13 @@ class MaterialPackageProxy(PackageProxy):
             print '%s: write ly and open' % 'lwo'.rjust(self.help_item_width)
             print ''
 
-    def manage_material(self):
+    def manage_material(self, menu_header=None):
+        from baca.scf.MenuSpecifier import MenuSpecifier
         while True:
             menu_specifier = MenuSpecifier()
+            menu_specifier.menu_header = menu_header
             material_name = self.material_name.replace('_', ' ')
-            if self.score_package_name:
-                material_name = material_name[len(self.score_package_name)+1:]
-            menu_specifier.menu_title = '%s - %s' % (self.score_title, material_name)
+            menu_specifier.menu_body = material_name
             if self.is_interactive:
                 menu_specifier.sentence_length_items.append(('k', 'reload user input'))
             menu_specifier.named_pairs.append(('i', 'input'))
@@ -321,7 +296,7 @@ class MaterialPackageProxy(PackageProxy):
             elif key == 's':
                 self.summarize_material()
             elif key == 't':
-                self.manage_tags()
+                self.manage_tags(menu_header=menu_specifier.menu_title)
             elif key == 'v':
                 self.manage_visualizer(key)
             elif key == 'y':
@@ -382,28 +357,6 @@ class MaterialPackageProxy(PackageProxy):
         elif command_string == 'zo':
             self.regenerate_everything(is_forced=True)
             self.open_pdf()
-
-    def manage_tags(self):
-        while True:
-            menu = MenuSpecifier()
-            menu.menu_title = 'tags'
-            menu_section = MenuSectionSpecifier()
-            menu_section.sentence_length_items.append(('add', 'add tag'))
-            menu_section.sentence_length_items.append(('delete', 'delete tag'))
-            menu_section.sentence_length_items.append(('get', 'get tag'))
-            menu_section.sentence_length_items.append(('show', 'show tags'))
-            menu.menu_sections.append(menu_section)
-            key, value = menu.display_menu()
-            if key == 'b':
-                return key, None
-            elif key == 'add':
-                self.add_tag_interactively()
-            elif key == 'delete':
-                self.delete_tag_interactively()
-            elif key == 'get':
-                self.get_tag_interactively()
-            elif key == 'show':
-                self.show_tags()
 
     def manage_visualizer(self, command_string):
         if self.has_visualizer:

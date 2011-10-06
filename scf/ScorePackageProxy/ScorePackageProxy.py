@@ -1,8 +1,6 @@
 from baca.scf._MaterialPackageMaker import _MaterialPackageMaker
 from baca.scf.MakersProxy import MakersProxy
 from baca.scf.MaterialPackageProxy import MaterialPackageProxy
-from baca.scf.MenuSectionSpecifier import MenuSectionSpecifier
-from baca.scf.MenuSpecifier import MenuSpecifier
 from baca.scf.PackageProxy import PackageProxy
 import os
 
@@ -220,10 +218,11 @@ class ScorePackageProxy(PackageProxy, _MaterialPackageMaker):
                 return result
             material_number = None
 
-    def manage_score(self, command_string=None):
+    def manage_score(self, menu_header=None, command_string=None):
+        from baca.scf.MenuSectionSpecifier import MenuSectionSpecifier
+        from baca.scf.MenuSpecifier import MenuSpecifier
         while True:
-            menu_specifier = MenuSpecifier()
-            menu_specifier.menu_title = self.score_title
+            menu_specifier = MenuSpecifier(menu_header=menu_header)
             menu_section = MenuSectionSpecifier()
             menu_section.menu_section_title = 'Chunks'
             menu_section.menu_section_entries = self.list_numbered_chunks()
@@ -326,44 +325,6 @@ class ScorePackageProxy(PackageProxy, _MaterialPackageMaker):
 
     def run_chunk_selection_interface(self):
         self.print_not_implemented()
-
-#    def select_material(self, material_number=None):
-#        if material_number is not None:
-#            material_name = self.material_number_to_material_name(material_number)
-#            material_package_proxy = MaterialPackageProxy(self.package_name, material_name)
-#            return material_package_proxy
-#        is_first_pass = True
-#        while True:
-#            is_redraw = False
-#            menu_specifier = MenuSpecifier()
-#            menu_specifier.menu_title = '%s - materials' % self.score_title
-#            materials = self.list_materials()
-#            materials = [x.replace('_', ' ') for x in materials]
-#            materials = [x[len(self.package_name)+1:] for x in materials]
-#            menu_specifier.items_to_number = materials
-#            menu_specifier.sentence_length_items = [('n', 'make new material by hand')]
-#            key, material_name = menu_specifier.display_menu()
-#            material_name = '%s_%s' % (self.package_name, material_name)
-#            if key == 'b':
-#                return key
-#            elif key == 'n':
-#                self.create_materials_package()
-#                is_redraw = True
-#            elif key == 'q':
-#                raise SystemExit
-#            elif key == 'r':
-#                self.rename_materials_package()
-#            elif key == 'w':
-#                is_redraw = True
-#            elif key == 'x':
-#                self.exec_statement()
-#            else:
-#                material_package_proxy = MaterialPackageProxy(self.package_name, material_name)
-#                return material_package_proxy
-#            if is_redraw:
-#                is_first_pass = True
-#            else:
-#                is_first_pass = False
 
     def summarize_chunks(self):
         chunks = self.list_chunks()

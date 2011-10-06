@@ -3,6 +3,7 @@ from DirectoryProxy import DirectoryProxy
 from InteractiveMaterialMaker import InteractiveMaterialMaker
 from MakersProxy import MakersProxy
 from MaterialPackageProxy import MaterialPackageProxy
+from MenuObject import MenuObject
 from MenuSectionSpecifier import MenuSectionSpecifier
 from MenuSpecifier import MenuSpecifier
 from PackageProxy import PackageProxy
