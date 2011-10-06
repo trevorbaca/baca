@@ -37,7 +37,7 @@ class CatalogProxy(DirectoryProxy):
     def list_numbered_score_titles_with_years(self):
         numbered_score_titles_with_years = []
         for i, score_title_with_year in enumerate(self.list_score_titles_with_years()):
-            number = i + 1
+            number = str(i + 1)
             numbered_score_titles_with_years.append((number, score_title_with_year))
         return numbered_score_titles_with_years
 

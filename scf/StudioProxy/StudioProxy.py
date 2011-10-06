@@ -59,9 +59,9 @@ class StudioProxy(DirectoryProxy):
             elif key == 'st scores':
                 self.catalog.svn_st_scores()
 
-    def work_in_studio(self):
+    def work_in_studio(self, menu_header=None):
         while True:
-            menu_specifier = MenuSpecifier()
+            menu_specifier = MenuSpecifier(menu_header=menu_header)
             menu_specifier.menu_body = 'welcome to the studio.'
             menu_section = MenuSectionSpecifier()
             menu_section.menu_section_entries = self.catalog.list_numbered_score_titles_with_years()
@@ -72,7 +72,7 @@ class StudioProxy(DirectoryProxy):
             menu_specifier.include_studio = False
             key, value = menu_specifier.display_menu()
             if key == 'm':
-                shared_materials_proxy = SharedMaterialsProxy(score_title='Materials')
+                shared_materials_proxy = SharedMaterialsProxy()
                 result = shared_materials_proxy.manage_shared_materials()
             elif key == 'svn':
                 self.manage_svn()

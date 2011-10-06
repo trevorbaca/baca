@@ -74,7 +74,9 @@ class DirectoryProxy(SCFObject):
 
     def svn_add(self):
         proc = subprocess.Popen('svn-add-all', shell=True, stdout=subprocess.PIPE)
-        print ''.join(proc.stdout.readlines())
+        lines = proc.stdout.readlines()
+        if lines:
+            print ''.join(lines)
         self.proceed()
  
     def svn_ci(self, commit_message=None, prompt_proceed=True):
@@ -84,6 +86,7 @@ class DirectoryProxy(SCFObject):
             print 'Commit message will be: "%s"\n' % commit_message
             if not self.confirm():
                 return
+        print ''
         print self.directory
         command = 'svn commit -m "%s" %s' % (commit_message, self.directory)
         proc = subprocess.Popen(command, shell=True, stdout=subprocess.PIPE)

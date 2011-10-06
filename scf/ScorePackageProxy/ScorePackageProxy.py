@@ -223,6 +223,7 @@ class ScorePackageProxy(PackageProxy, _MaterialPackageMaker):
         from baca.scf.MenuSpecifier import MenuSpecifier
         while True:
             menu_specifier = MenuSpecifier(menu_header=menu_header)
+            menu_specifier.menu_body = self.score_title
             menu_section = MenuSectionSpecifier()
             menu_section.menu_section_title = 'Chunks'
             menu_section.menu_section_entries = self.list_numbered_chunks()
@@ -262,7 +263,7 @@ class ScorePackageProxy(PackageProxy, _MaterialPackageMaker):
                     material_name = self.material_number_to_material_name(material_number)
                     material_package_proxy = MaterialPackageProxy(self.package_name, material_name)
                     material_package_proxy.score_title = self.score_title
-                    material_package_proxy.manage_material()
+                    material_package_proxy.manage_material(menu_header=menu_specifier.menu_title)
                 except (TypeError, ValueError):
                     pass
 

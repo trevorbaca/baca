@@ -66,11 +66,13 @@ class MenuSpecifier(MenuObject, SCFObject):
             if not self.hide_menu:
                 print ''
 
-    def _display_menu(self, score_title=None):
+    #def _display_menu(self, score_title=None):
+    def _display_menu(self):
         if self.should_clear_terminal:
             self.clear_terminal()
         all_keys, all_values = [], []
-        self._display_menu_title(score_title=score_title)
+        #self._display_menu_title(score_title=score_title)
+        self._display_menu_title()
         self._display_menu_sections(all_keys, all_values)
         self._display_items_to_number(all_keys, all_values)
         self._display_sentence_length_items(all_keys, all_values)
@@ -94,16 +96,17 @@ class MenuSpecifier(MenuObject, SCFObject):
             menu_section.hide_menu = self.hide_menu
             menu_section.display(all_keys, all_values)
         
-    def _display_menu_title(self, score_title=None):
+    #def _display_menu_title(self, score_title=None):
+    def _display_menu_title(self):
         if self.menu_title:
             if not self.hide_menu:
-                if score_title is not None:
-                    menu_title = '%s - %s' % (score_title, self.menu_title.lower())
-                elif getattr(self, 'score_title', None) is not None:
-                    menu_titlte = '%s - %s' % (self.score_title, self.menu_title.lower())
-                else:
-                    menu_title = self.menu_title
-                menu_title = menu_title.capitalize()
+#                if score_title is not None:
+#                    menu_title = '%s - %s' % (score_title, self.menu_title.lower())
+#                elif getattr(self, 'score_title', None) is not None:
+#                    menu_titlte = '%s - %s' % (self.score_title, self.menu_title.lower())
+#                else:
+#                    menu_title = self.menu_title
+                menu_title = self.menu_title.capitalize()
                 print menu_title
                 print ''
 
@@ -261,11 +264,13 @@ class MenuSpecifier(MenuObject, SCFObject):
 
     ### PUBLIC METHODS ###
 
-    def display_menu(self, score_title=None):
+    #def display_menu(self, score_title=None):
+    def display_menu(self):
         should_clear_terminal, hide_menu = True, False
         while True:
             self.should_clear_terminal, self.hide_menu = should_clear_terminal, hide_menu
-            key, value = self._display_menu(score_title=score_title)
+            #key, value = self._display_menu(score_title=score_title)
+            key, value = self._display_menu()
             should_clear_terminal, hide_menu = False, True
             if key == 'b':
                 return key, None
