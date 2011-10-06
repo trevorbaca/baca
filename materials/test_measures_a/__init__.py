@@ -1,2 +1,2 @@
 from output import *
-tags = {'creation_date': '2011-10-06'}
+tags = {'maker': 'SargassoMeasureMaker', 'creation_date': '2011-10-06'}
