@@ -1,4 +1,5 @@
 from baca.scf.DirectoryProxy import DirectoryProxy
+from baca.scf.UserInputGetter import UserInputGetter
 import os
 
 
@@ -46,7 +47,6 @@ class PackageProxy(DirectoryProxy):
         self.write_tags_to_initializer(tags)
 
     def add_tag_interactively(self, menu_header=None):
-        from baca.scf.UserInputGetter import UserInputGetter
         user_input_getter = UserInputGetter()
         user_input_getter.menu_header = menu_header
         user_input_getter.menu_body = 'add tag'
@@ -60,10 +60,21 @@ class PackageProxy(DirectoryProxy):
         self.proceed()
 
     def delete_tag(self, tag_name):
-        pass
+        tags = self.get_tags()
+        del(tags[tag_name])
+        self.write_tags_to_initializer(tags)
 
-    def delete_tag_interactively(self):
-        pass
+    def delete_tag_interactively(self, menu_header=None):
+        user_input_getter = UserInputGetter()
+        user_input_getter.menu_header = menu_header
+        user_input_getter.menu_body = 'delete tag'
+        user_input_getter.prompts.append('Tag name> ')
+        user_input = user_input_getter.get_user_input(clear_terminal=False)
+        if user_input:
+            tag_name = user_input[0]
+            self.delete_tag(tag_name)
+            print 'Tag deleted.\n'
+        self.proceed()
 
     def import_attribute_from_initializer(self, attribute_name):
         try:
@@ -74,10 +85,9 @@ class PackageProxy(DirectoryProxy):
             return None
 
     def get_tag(self, tag_name):
-        pass
-
-    def get_tag_interactively(self):
-        pass
+        tags = self.get_tags()
+        tag = tags[tag_name]
+        return tag
 
     def get_tags(self):
         try:
@@ -98,8 +108,7 @@ class PackageProxy(DirectoryProxy):
         from baca.scf.MenuSectionSpecifier import MenuSectionSpecifier
         from baca.scf.MenuSpecifier import MenuSpecifier
         while True:
-            menu = MenuSpecifier()
-            menu.menu_header = menu_header
+            menu = MenuSpecifier(menu_header=menu_header)
             menu.menu_body = 'tags'
             section = MenuSectionSpecifier()
             section.lines_to_list = self.list_formatted_tags()
@@ -107,31 +116,14 @@ class PackageProxy(DirectoryProxy):
             section = MenuSectionSpecifier()
             section.sentence_length_items.append(('add', 'add tag'))
             section.sentence_length_items.append(('del', 'delete tag'))
-            section.sentence_length_items.append(('get', 'get tag'))
             menu.menu_sections.append(section)
             key, value = menu.display_menu()
             if key == 'b':
                 return key, None
             elif key == 'add':
-                self.add_tag_interactively()
+                self.add_tag_interactively(menu_header=menu.menu_title)
             elif key == 'del':
-                self.delete_tag_interactively()
-            elif key == 'get':
-                self.get_tag_interactively()
-            elif key == 'show':
-                self.show_tags()
-
-    def show_tags(self):
-        self.clear_terminal()
-        tags = self.get_tags()
-        if tags:
-            print 'Tags:\n'
-            for key in sorted(tags):
-                print '%s: %s' % (key, tags[key])
-        else:
-            print 'No tags found.'
-        print ''
-        self.proceed()
+                self.delete_tag_interactively(menu_header=menu.menu_title)
 
     def write_tags_to_initializer(self, tags):
         lines = []

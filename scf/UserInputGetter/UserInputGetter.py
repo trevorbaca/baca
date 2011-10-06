@@ -22,11 +22,12 @@ class UserInputGetter(MenuObject):
 
     ### PUBLIC METHODS ###
 
-    def get_user_input(self):
+    def get_user_input(self, clear_terminal=True):
         try:
             while True:
-                self.clear_terminal()
-                print self.title.capitalize() + '\n'
+                if clear_terminal:
+                    self.clear_terminal()
+                    print self.menu_title.capitalize() + '\n'
                 responses = []
                 for prompt in self.prompts:
                     response = raw_input(prompt)

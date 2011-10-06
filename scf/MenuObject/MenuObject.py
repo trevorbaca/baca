@@ -1,3 +1,6 @@
+from abjad.tools import iotools
+
+
 class MenuObject(object):
 
     def __init__(self, menu_header=None, menu_body=None):
@@ -36,3 +39,15 @@ class MenuObject(object):
             return self.menu_body
         else:
             return ''
+
+    ### PUBLIC METHODS ###
+
+    def clear_terminal(self):
+        iotools.clear_terminal()
+
+    def confirm(self):
+        response = raw_input('Ok? ')
+        if not response.lower() == 'y':
+            print ''
+            return False
+        return True
