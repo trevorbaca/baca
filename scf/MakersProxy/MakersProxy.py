@@ -28,19 +28,19 @@ class MakersProxy(DirectoryProxy):
                         maker_directories.append(name)
         return maker_directories
 
-    def list_maker_spaced_names(self):
-        spaced_names = []
+    def list_maker_class_spaced_names(self):
+        class_spaced_names = []
         for maker in self.list_makers():
-            spaced_name = iotools.uppercamelcase_to_underscore_delimited_lowercase(maker)
-            spaced_name = spaced_name.replace('_', ' ')
-            spaced_names.append(spaced_name)
-        return spaced_names
+            class_spaced_name = iotools.uppercamelcase_to_underscore_delimited_lowercase(maker)
+            class_spaced_name = class_spaced_name.replace('_', ' ')
+            class_spaced_names.append(class_spaced_name)
+        return class_spaced_names
 
     def manage_makers(self, menu_header=None):
         while True:
             menu_specifier = MenuSpecifier(menu_header=menu_header)
             menu_specifier.menu_body = 'interactive material makers'
-            menu_specifier.items_to_number = self.list_maker_spaced_names()
+            menu_specifier.items_to_number = self.list_maker_class_spaced_names()
             key, value = menu_specifier.display_menu()
             if key == 'b':
                 return key, value
@@ -49,7 +49,8 @@ class MakersProxy(DirectoryProxy):
                 maker_name = maker_name.replace(' ', '_')
                 maker_name = iotools.underscore_delimited_lowercase_to_uppercamelcase(maker_name)
                 maker = self.get_maker(maker_name)
-                result = maker.edit_interactively(menu_header=menu_specifier.menu_title)
+                menu_header = ' - '.join(menu_specifier.menu_title_parts[:-2])
+                result = maker.edit_interactively(menu_header=menu_header)
                 if result:
                     break
 

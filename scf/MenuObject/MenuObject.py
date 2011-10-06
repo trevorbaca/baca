@@ -40,6 +40,13 @@ class MenuObject(object):
         else:
             return ''
 
+    @property
+    def menu_title_parts(self):
+        if self.menu_title:
+            return self.menu_title.split(' - ')
+        else:
+            return
+
     ### PUBLIC METHODS ###
 
     def clear_terminal(self):

@@ -13,11 +13,12 @@ import shutil
 
 class InteractiveMaterialMaker(SCFObject, _MaterialPackageMaker):
 
-    def __init__(self, directory=None, materials_directory=None, material_name=None):
+    def __init__(self, directory=None, materials_directory=None, material_name=None, score=None):
         SCFObject.__init__(self)
         self.directory = directory
         self.materials_directory = materials_directory
         self.material_name = material_name
+        self.score = score
 
     ### OVERLOADS ###
 
@@ -179,8 +180,22 @@ class InteractiveMaterialMaker(SCFObject, _MaterialPackageMaker):
     ### PUBLIC ATTRIBUTES ###
 
     @property
+    def class_spaced_name(self):
+        from abjad.tools import iotools
+        class_spaced_name = iotools.uppercamelcase_to_underscore_delimited_lowercase(type(self).__name__)
+        class_spaced_name = class_spaced_name.replace('_', ' ')
+        return class_spaced_name
+
+    @property
     def has_material_name(self):
         return bool(self.material_name is not None)
+
+    @property
+    def location_name(self):
+        if self.score is not None:
+            return self.score.score_title
+        else:
+            return 'Studio'
 
     @apply
     def material_name():
@@ -192,11 +207,22 @@ class InteractiveMaterialMaker(SCFObject, _MaterialPackageMaker):
         return property(**locals())
 
     @property
-    def spaced_name(self):
+    def material_spaced_name(self):
         from abjad.tools import iotools
-        spaced_name = iotools.uppercamelcase_to_underscore_delimited_lowercase(type(self).__name__)
-        spaced_name = spaced_name.replace('_', ' ')
-        return spaced_name
+        if self.has_material_name:
+            return self.material_name.replace('_', ' ')
+        else:
+            return '(unnamed material)'
+
+    @apply
+    def score():
+        def fget(self):
+            return self._score
+        def fset(self, score):
+            from baca.scf.ScorePackageProxy import ScorePackageProxy
+            assert isinstance(score, (ScorePackageProxy, type(None)))
+            self._score = score
+        return property(**locals())
 
     ### PUBLIC METHODS ###
 
@@ -208,8 +234,11 @@ class InteractiveMaterialMaker(SCFObject, _MaterialPackageMaker):
         if user_input_wrapper is None:
             user_input_wrapper = self._initialize_user_input_wrapper()
         while True:
-            menu_specifier = MenuSpecifier(menu_header=menu_header)
-            menu_specifier.menu_body = '%s - edit interactively' % self.spaced_name
+            #menu_specifier = MenuSpecifier(menu_header=menu_header)
+            menu_specifier = MenuSpecifier()
+            menu_body = '%s - %s - %s - edit interactively'
+            menu_body %= (self.location_name, self.class_spaced_name, self.material_spaced_name)
+            menu_specifier.menu_body = menu_body
             pairs = list(user_input_wrapper.iteritems())
             lines = []
             for pair in pairs:
@@ -232,7 +261,7 @@ class InteractiveMaterialMaker(SCFObject, _MaterialPackageMaker):
             menu_specifier.sentence_length_items.append(('o', 'overwrite with demo input values'))
             menu_specifier.sentence_length_items.append(('c', 'clear values'))
             menu_specifier.sentence_length_items.append(('ed', 'edit source'))
-            #key, value = menu_specifier.display_menu(score_title=self.score_title)
+            menu_specifier.sentence_length_items.append(('l', 'set location'))
             key, value = menu_specifier.display_menu()
             if key == 'b':
                 self.interactively_check_and_save_material(user_input_wrapper)
@@ -243,6 +272,8 @@ class InteractiveMaterialMaker(SCFObject, _MaterialPackageMaker):
                 self.show_demo_input_values()
             elif key == 'ed':
                 self.edit_source_file()
+            elif key == 'l':
+                self.set_location()
             elif key == 'm':
                 self.save_material(user_input_wrapper)
                 return key, None
@@ -256,6 +287,8 @@ class InteractiveMaterialMaker(SCFObject, _MaterialPackageMaker):
                 lilypond_file.header_block.title = markuptools.Markup(self.generic_output_name.capitalize())
                 lilypond_file.header_block.subtitle = markuptools.Markup('(unsaved)')
                 iotools.show(lilypond_file)
+            elif key == 'r':
+                self.rename_material()
             else:
                 try:
                     number = int(key)
@@ -285,20 +318,14 @@ class InteractiveMaterialMaker(SCFObject, _MaterialPackageMaker):
         return lilypond_file
 
     def name_material(self):
-        while True:
-            response = raw_input('Material name> ')
-            print ''
-            if self.confirm():
-                self.material_name = response
-                break
+        self.material_name = raw_input('Material name> ')
 
     def overwrite_with_demo_input_values(self, user_input_wrapper):
         for key in self.user_input_template:
             user_input_wrapper[key] = self.user_input_template[key]    
 
-    # TODO:
     def rename_material(self):
-        pass
+        self.name_material()
 
     def save_material(self, user_input_wrapper):
         material = self.make(*user_input_wrapper.values)
@@ -308,6 +335,10 @@ class InteractiveMaterialMaker(SCFObject, _MaterialPackageMaker):
         print 'Material saved to %s.\n' % material_directory
         self.proceed()
         return True
+
+    # TODO
+    def set_location(self):
+        menu_specifier = MenuSpecifier()        
 
     def show_demo_input_values(self, menu_header=None):
         menu_specifier = MenuSpecifier(menu_header=menu_header)
