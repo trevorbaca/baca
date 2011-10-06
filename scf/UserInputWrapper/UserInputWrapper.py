@@ -25,7 +25,7 @@ class UserInputWrapper(collections.OrderedDict):
         return all([x is None for x in self.itervalues()])
 
     @property
-    def items(self):
+    def list_items(self):
         return list(self.iteritems())
 
     @property

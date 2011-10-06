@@ -79,7 +79,12 @@ class MaterialPackageProxy(PackageProxy):
 
     @property
     def is_interactive(self):
-        return bool(self.import_attribute_from_initializer('is_interactive'))
+        return bool(self.has_tag('maker'))
+
+    @property
+    def user_input_wrapper(self):
+        exec('from %s import user_input' % self.input_module_name)
+        return user_input
 
     ### PUBLIC METHODS ###
 

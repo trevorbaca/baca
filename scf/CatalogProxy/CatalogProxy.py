@@ -7,7 +7,7 @@ import os
 class CatalogProxy(DirectoryProxy):
 
     def __init__(self):
-        self.scores_directory = os.environ.get('SCORES')
+        DirectoryProxy.__init__(self, os.environ.get('SCORES'))
 
     ### PUBLIC METHODS ###
 
@@ -30,6 +30,21 @@ class CatalogProxy(DirectoryProxy):
         score_package_name = self.score_title_to_score_package_name(score_title)
         return score_package_name
 
+    def iterate_interactive_material_package_proxies(self):
+        for material_package_proxy in self.iterate_material_package_proxies():
+            if material_package_proxy.is_interactive:
+                yield material_package_proxy
+
+    def iterate_material_package_proxies(self):
+        from baca.scf.MaterialPackageProxy import MaterialPackageProxy
+        for score_package_proxy in self.iterate_score_package_proxies():
+            for material_package_proxy in score_package_proxy.iterate_material_package_proxies():
+                yield material_package_proxy
+        for material_name in os.listdir(self.shared_materials_directory):
+            if material_name[0].isalpha():
+                material_package_proxy = MaterialPackageProxy('', material_name, is_shared_material=True)
+                yield material_package_proxy
+
     def iterate_score_package_proxies(self):
         for score_package_name in self.list_score_package_names():
             score_package_proxy = ScorePackageProxy(score_package_name)
@@ -45,7 +60,7 @@ class CatalogProxy(DirectoryProxy):
     def list_score_directories(self):
         score_directories = []
         for score_package_name in self.list_score_package_names():
-            score_directory = os.path.join(self.scores_directory, score_package_name)
+            score_directory = os.path.join(self.directory, score_package_name)
             score_directories.append(score_directory)
         return score_directories
 
@@ -62,8 +77,8 @@ class CatalogProxy(DirectoryProxy):
         '''This method is primary.
         '''
         score_package_names = []
-        for score_package_name in os.listdir(self.scores_directory):
-            directory = os.path.join(self.scores_directory, score_package_name)
+        for score_package_name in os.listdir(self.directory):
+            directory = os.path.join(self.directory, score_package_name)
             if os.path.isdir(directory):
                 initializer = os.path.join(directory, '__init__.py')
                 if os.path.isfile(initializer):
@@ -93,7 +108,7 @@ class CatalogProxy(DirectoryProxy):
         return materials_packages
 
     def list_well_formed_score_package_names(self):
-        score_package_names = os.listdir(self.scores_directory)
+        score_package_names = os.listdir(self.directory)
         score_package_names = [x for x in score_package_names if x[0].isalpha()]
         score_package_names.remove('poeme')
         return score_package_names
@@ -132,6 +147,13 @@ class CatalogProxy(DirectoryProxy):
         for package_name, title, year in self.list_score_info_triples():
             if score_title.startswith(title):
                 return package_name
+
+    def select_interactive_material_package_proxy(self, menu_header=None, klasses=None):
+        material_package_proxies = list(self.iterate_interactive_material_package_proxies())
+        menu = MenuSpecifier()
+        menu.items_to_number = material_package_proxies
+        key, value = menu.display_menu()
+        return value
 
     def select_score_interactively(self, menu_header=None):
         menu = MenuSpecifier()

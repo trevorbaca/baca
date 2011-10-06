@@ -284,8 +284,9 @@ class InteractiveMaterialMaker(SCFObject, _MaterialPackageMaker):
             menu_specifier.sentence_length_items.append(('nc', 'clear name'))
             menu_specifier.sentence_length_items.append(('d', 'show demo input values'))
             menu_specifier.sentence_length_items.append(('o', 'overwrite with demo input values'))
+            menu_specifier.sentence_length_items.append(('i', 'import values'))
             menu_specifier.sentence_length_items.append(('c', 'clear values'))
-            menu_specifier.sentence_length_items.append(('ed', 'edit source'))
+            #menu_specifier.sentence_length_items.append(('ed', 'edit source'))
             if self.has_location:
                 menu_specifier.sentence_length_items.append(('l', 'change location'))
             else:
@@ -300,6 +301,10 @@ class InteractiveMaterialMaker(SCFObject, _MaterialPackageMaker):
                 self.show_demo_input_values()
             elif key == 'ed':
                 self.edit_source_file()
+            # TODO
+            elif key == 'i':
+                self.import_values()
+                user_input_wrapper = self.user_input_wrapper
             elif key == 'l':
                 menu_header = ' - '.join(menu_specifier.menu_title_parts[:-1])
                 self.set_location(menu_header=menu_header)
@@ -335,6 +340,13 @@ class InteractiveMaterialMaker(SCFObject, _MaterialPackageMaker):
         exec('from abjad import *')
         new_value = eval(response)
         return new_value
+
+    def import_values(self):
+        from baca.scf.CatalogProxy import CatalogProxy
+        catalog_proxy = CatalogProxy()
+        material_package_proxy = catalog_proxy.select_interactive_material_package_proxy(
+            klasses=(type(self),))
+        self.user_input_wrapper = copy.deepcopy(material_package_proxy.user_input_wrapper)
     
     def interactively_check_and_save_material(self, user_input_wrapper):
         if user_input_wrapper.is_complete:

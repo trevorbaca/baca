@@ -179,13 +179,27 @@ class ScorePackageProxy(PackageProxy, _MaterialPackageMaker):
                 initializer.write('')
                 initializer.close()
 
+    def iterate_interactive_materials(self):
+        for material_package_proxy in self.iterate_material_package_proxies():
+            print material_package_proxy
+            if material_package_proxy.is_interactive:
+                yield material_package_proxy
+
+    def iterate_material_package_proxies(self):
+        for material_name in self.list_materials():
+            material_package_proxy = MaterialPackageProxy(self.package_name, material_name)
+            yield material_package_proxy
+
     def list_chunks(self):
         chunks = os.listdir(self.chunks_directory)
         chunks = [x for x in chunks if x[0].isalpha()]
         return chunks
 
     def list_materials(self):
-        materials = os.listdir(self.materials_directory)
+        try:
+            materials = os.listdir(self.materials_directory)
+        except OSError:
+            materials = []
         materials = [x for x in materials if x[0].isalpha()]
         return materials
 

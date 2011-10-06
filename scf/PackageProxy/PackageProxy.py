@@ -96,6 +96,10 @@ class PackageProxy(DirectoryProxy):
         except ImportError:    
             return {}
 
+    def has_tag(self, tag_name):
+        tags = self.get_tags()
+        return bool(tag_name in tags)
+
     def list_formatted_tags(self):
         formatted_tags = []
         tags = self.get_tags()

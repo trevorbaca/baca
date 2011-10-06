@@ -7,6 +7,7 @@ import sys
 class DirectoryProxy(SCFObject):
 
     def __init__(self, directory):
+        SCFObject.__init__(self)
         self.directory = directory
 
     ### PUBLIC ATTRIBUTES ###
