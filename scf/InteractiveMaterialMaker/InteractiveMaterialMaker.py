@@ -4,6 +4,7 @@ from abjad.tools import markuptools
 from baca.scf._MaterialPackageMaker import _MaterialPackageMaker
 from baca.scf.CatalogProxy import CatalogProxy
 from baca.scf.MenuSpecifier import MenuSpecifier
+from baca.scf.SharedMaterialsProxy import SharedMaterialsProxy
 from baca.scf.SCFObject import SCFObject
 from baca.scf.UserInputWrapper import UserInputWrapper
 import copy
@@ -13,11 +14,13 @@ import shutil
 
 class InteractiveMaterialMaker(SCFObject, _MaterialPackageMaker):
 
-    def __init__(self, directory=None, materials_directory=None, material_name=None, score=None):
+    def __init__(self, directory=None, materials_directory=None, material_name=None, 
+        material_package_directory=None, score=None):
         SCFObject.__init__(self)
         self.directory = directory
         self.materials_directory = materials_directory
         self.material_name = material_name
+        self.material_package_directory = material_package_directory
         self.score = score
 
     ### OVERLOADS ###
@@ -76,8 +79,6 @@ class InteractiveMaterialMaker(SCFObject, _MaterialPackageMaker):
         return subtitle
 
     def _get_new_material_package_directory_from_user(self, base_directory=None):
-        from baca.scf.CatalogProxy import CatalogProxy
-        from baca.scf.SharedMaterialsProxy import SharedMaterialsProxy
         if base_directory is None:
             while True:
                 response = raw_input('Save to shared materials (m)? Or to existing score (s)? ')
@@ -104,14 +105,12 @@ class InteractiveMaterialMaker(SCFObject, _MaterialPackageMaker):
             else:
                 score_package_name = None
         while True:
-            response = raw_input('Material name: ')
-            print ''
-            response = response.lower()
-            response = response.replace(' ', '_')
+            if self.material_name is None:
+                self.name_material()
             if score_package_name is not None:
-                material_package_name = '%s_%s' % (score_package_name, response)
+                material_package_name = '%s_%s' % (score_package_name, self.material_underscored_name)
             else:
-                material_package_name = response
+                material_package_name = self.material_underscored_name
             print 'Package name will be %s.\n' % material_package_name
             if not self.confirm():
                 continue
@@ -222,12 +221,16 @@ class InteractiveMaterialMaker(SCFObject, _MaterialPackageMaker):
         return property(**locals())
 
     @property
-    def material_spaced_name(self):
-        from abjad.tools import iotools
+    def material_menu_name(self):
         if self.has_material_name:
-            return self.material_name.replace('_', ' ')
+            return self.material_name
         else:
             return '(unnamed material)'
+
+    @property
+    def material_underscored_name(self):
+        if self.has_material_name:
+            return self.material_name.replace(' ', '_')
 
     @apply
     def score():
@@ -239,11 +242,16 @@ class InteractiveMaterialMaker(SCFObject, _MaterialPackageMaker):
             self._score = score
         return property(**locals())
 
+    @property
+    def score_package_name(self):
+        if self.score is not None:
+            return self.score.directory
+
     ### PUBLIC METHODS ###
 
     def append_status_indicator(self, menu_body):
         if self.has_changes:
-            menu_body = '%s - (*)' % menu_body
+            menu_body = '%s (*)' % menu_body
         return menu_body
 
     def clear_values(self, user_input_wrapper):
@@ -260,21 +268,11 @@ class InteractiveMaterialMaker(SCFObject, _MaterialPackageMaker):
         while True:
             menu_specifier = MenuSpecifier()
             menu_body = '%s - %s - %s - edit interactively'
-            menu_body %= (self.location_name, self.class_spaced_name, self.material_spaced_name)
+            menu_body %= (self.location_name, self.class_spaced_name, self.material_menu_name)
             menu_body = self.append_status_indicator(menu_body)
             menu_specifier.menu_body = menu_body
-            pairs = list(user_input_wrapper.iteritems())
-            lines = []
-            for pair in pairs:
-                key, value = pair
-                key = key.replace('_', ' ')
-                if value is None:
-                    line = '%s: ' % key
-                else:
-                    line = '%s: %r' % (key, value)
-                lines.append(line)
-            menu_specifier.items_to_number = lines
-            if user_input_wrapper.is_complete:
+            menu_specifier.items_to_number = self.user_input_wrapper.editable_lines
+            if self.user_input_wrapper.is_complete:
                 menu_specifier.sentence_length_items.append(('p', 'show pdf of given input'))
                 menu_specifier.sentence_length_items.append(('m', 'write material to disk'))
             if self.has_material_name:
@@ -293,32 +291,30 @@ class InteractiveMaterialMaker(SCFObject, _MaterialPackageMaker):
                 menu_specifier.sentence_length_items.append(('l', 'set location'))
             key, value = menu_specifier.display_menu()
             if key == 'b':
-                self.interactively_check_and_save_material(user_input_wrapper)
+                self.interactively_check_and_save_material(self.user_input_wrapper)
                 return key, None
             elif key == 'c':
-                self.clear_values(user_input_wrapper)
+                self.clear_values(self.user_input_wrapper)
             elif key == 'd':
                 self.show_demo_input_values()
             elif key == 'ed':
                 self.edit_source_file()
-            # TODO
             elif key == 'i':
                 self.import_values()
-                user_input_wrapper = self.user_input_wrapper
             elif key == 'l':
                 menu_header = ' - '.join(menu_specifier.menu_title_parts[:-1])
                 self.set_location(menu_header=menu_header)
             elif key == 'm':
-                self.save_material(user_input_wrapper)
+                self.save_material(self.user_input_wrapper)
                 return key, None
             elif key == 'n':
                 self.name_material()
             elif key == 'nc':
                 self.unname_material()
             elif key == 'o':
-                self.overwrite_with_demo_input_values(user_input_wrapper)
+                self.overwrite_with_demo_input_values(self.user_input_wrapper)
             elif key == 'p':
-                lilypond_file = self.make_lilypond_file_from_user_input_wrapper(user_input_wrapper)
+                lilypond_file = self.make_lilypond_file_from_user_input_wrapper(self.user_input_wrapper)
                 lilypond_file.file_initial_user_includes.append(self.stylesheet)
                 lilypond_file.header_block.title = markuptools.Markup(self.generic_output_name.capitalize())
                 lilypond_file.header_block.subtitle = markuptools.Markup('(unsaved)')
@@ -329,9 +325,9 @@ class InteractiveMaterialMaker(SCFObject, _MaterialPackageMaker):
                 except:
                     continue
                 index = number - 1
-                key, value = user_input_wrapper.items[index]
+                key, value = self.user_input_wrapper.list_items[index]
                 new_value = self.edit_item(key, value)
-                user_input_wrapper[key] = new_value
+                self.user_input_wrapper[key] = new_value
 
     def edit_item(self, key, value):
         prompt = key.replace('_', ' ')
@@ -344,8 +340,9 @@ class InteractiveMaterialMaker(SCFObject, _MaterialPackageMaker):
     def import_values(self):
         from baca.scf.CatalogProxy import CatalogProxy
         catalog_proxy = CatalogProxy()
+        menu_header = 'import %s' % self.class_spaced_name
         material_package_proxy = catalog_proxy.select_interactive_material_package_proxy(
-            klasses=(type(self),))
+            menu_header=menu_header, klasses=(type(self),))
         self.user_input_wrapper = copy.deepcopy(material_package_proxy.user_input_wrapper)
     
     def interactively_check_and_save_material(self, user_input_wrapper):
@@ -394,7 +391,9 @@ class InteractiveMaterialMaker(SCFObject, _MaterialPackageMaker):
         self.material_name = None
 
     def write_material_to_disk(self, user_input_wrapper, material, lilypond_file):
+        print self.material_name, self.directory, self.material_package_directory
         self._get_new_material_package_directory_from_user(base_directory=self.materials_directory)
+        print self.material_name, self.directory, self.material_package_directory
         os.mkdir(self.material_package_directory)
         self._write_initializer_to_disk()
         self._write_input_file_to_disk(self.user_input_import_statements, user_input_wrapper)

@@ -6,6 +6,20 @@ class UserInputWrapper(collections.OrderedDict):
     ### PUBLIC ATTRIBUTES ###
 
     @property
+    def editable_lines(self):
+        pairs = list(self.iteritems())
+        lines = []
+        for pair in pairs:
+            key, value = pair
+            key = key.replace('_', ' ')
+            if value is None:
+                line = '%s: ' % key
+            else:
+                line = '%s: %r' % (key, value)
+            lines.append(line)
+        return lines
+
+    @property
     def formatted_lines(self):
         formatted_lines = []
         formatted_lines.append('user_input = %s([' % type(self).__name__)

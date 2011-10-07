@@ -151,6 +151,7 @@ class CatalogProxy(DirectoryProxy):
     def select_interactive_material_package_proxy(self, menu_header=None, klasses=None):
         material_package_proxies = list(self.iterate_interactive_material_package_proxies())
         menu = MenuSpecifier()
+        menu.menu_header = menu_header
         menu.items_to_number = material_package_proxies
         key, value = menu.display_menu()
         return value
