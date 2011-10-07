@@ -23,7 +23,7 @@ class UserInputWrapper(collections.OrderedDict):
     def formatted_lines(self):
         formatted_lines = []
         formatted_lines.append('user_input = %s([' % type(self).__name__)
-        items = self.items
+        items = self.list_items
         for name, value in items[:-1]:
             line = '\t(%r, %r),' % (name, value)
             formatted_lines.append(line)

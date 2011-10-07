@@ -14,13 +14,10 @@ import shutil
 
 class InteractiveMaterialMaker(SCFObject, _MaterialPackageMaker):
 
-    def __init__(self, directory=None, materials_directory=None, material_name=None, 
-        material_package_directory=None, score=None):
+    def __init__(self, directory=None, material_name=None, score=None):
         SCFObject.__init__(self)
         self.directory = directory
-        self.materials_directory = materials_directory
         self.material_name = material_name
-        self.material_package_directory = material_package_directory
         self.score = score
 
     ### OVERLOADS ###
@@ -58,7 +55,10 @@ class InteractiveMaterialMaker(SCFObject, _MaterialPackageMaker):
 
     def _get_lilypond_score_title(self):
         material_name = os.path.basename(self.material_package_directory)
-        material_parts = material_name.split('_')[1:]
+        if self.is_shared:
+            material_parts = material_name.split('_')
+        else:
+            material_parts = material_name.split('_')[1:]
         material_name = ' '.join(material_parts)
         title = material_name.capitalize()
         title = markuptools.Markup(title)
@@ -78,52 +78,14 @@ class InteractiveMaterialMaker(SCFObject, _MaterialPackageMaker):
         subtitle = markuptools.Markup(subtitle)
         return subtitle
 
-    def _get_new_material_package_directory_from_user(self, base_directory=None):
-        if base_directory is None:
-            while True:
-                response = raw_input('Save to shared materials (m)? Or to existing score (s)? ')
-                print ''
-                if response == 'm':
-                    score_package_name = None
-                    base_directory = self.shared_materials_directory
-                    break
-                elif response == 's':
-                    catalog_proxy = CatalogProxy()
-                    score_package_name = catalog_proxy.get_score_package_name_from_user()
-                    base_directory = os.path.join(
-                        self.scores_directory, score_package_name, 'mus', 'materials')
-                    break
-        else:
-            if 'scores' in base_directory:
-                parts = base_directory.split(os.path.sep)
-                for i, part in enumerate(parts):
-                    if part == 'scores':
-                        score_package_name = parts[i+1]
-                        break
-                else:
-                    raise Exception('Can not determine score package name.')
-            else:
-                score_package_name = None
+    def set_material_package_directory(self):
         while True:
             if self.material_name is None:
                 self.name_material()
-            if score_package_name is not None:
-                material_package_name = '%s_%s' % (score_package_name, self.material_underscored_name)
-            else:
-                material_package_name = self.material_underscored_name
-            print 'Package name will be %s.\n' % material_package_name
-            if not self.confirm():
-                continue
-            target = os.path.join(base_directory, material_package_name)
-            if os.path.exists(target):
-                print 'Directory %r already exists.' % target
                 print ''
-                response = raw_input('Press return to try again.')
-                print ''
-                self.clear_terminal()
-            else:
-                self.material_package_directory = target
-                return
+            print 'Package name will be %s.\n' % self.material_package_name
+            if self.confirm():
+                break
 
     def _initialize_user_input_wrapper(self):
         user_input_wrapper = copy.deepcopy(self.user_input_template)
@@ -205,6 +167,10 @@ class InteractiveMaterialMaker(SCFObject, _MaterialPackageMaker):
         return bool(self.material_name is not None)
 
     @property
+    def is_shared(self):
+        return bool(self.score is None)
+
+    @property
     def location_name(self):
         if self.score is not None:
             return self.score.score_title
@@ -228,9 +194,29 @@ class InteractiveMaterialMaker(SCFObject, _MaterialPackageMaker):
             return '(unnamed material)'
 
     @property
+    def material_package_directory(self):
+        if self.materials_directory:
+            if self.material_underscored_name:
+                return os.path.join(self.materials_directory, self.material_underscored_name)
+
+    @property
+    def material_package_name(self):
+        if self.score is None:  
+            return self.material_underscored_name
+        else:
+            return '%s_%s' % (self.score.directory, self.material_underscored_name)
+
+    @property
     def material_underscored_name(self):
         if self.has_material_name:
             return self.material_name.replace(' ', '_')
+
+    @property
+    def materials_directory(self):
+        if self.score is None:
+            return self.shared_materials_directory
+        else:
+            return self.score.materials_directory
 
     @apply
     def score():
@@ -355,6 +341,12 @@ class InteractiveMaterialMaker(SCFObject, _MaterialPackageMaker):
         lilypond_file = self.make_lilypond_file_from_output_material(material)
         return lilypond_file
 
+    def make_material_package_directory(self):
+        try:
+            os.mkdir(self.material_package_directory)
+        except OSError:
+            pass
+
     def name_material(self):
         self.material_name = raw_input('Material name> ')
 
@@ -391,10 +383,8 @@ class InteractiveMaterialMaker(SCFObject, _MaterialPackageMaker):
         self.material_name = None
 
     def write_material_to_disk(self, user_input_wrapper, material, lilypond_file):
-        print self.material_name, self.directory, self.material_package_directory
-        self._get_new_material_package_directory_from_user(base_directory=self.materials_directory)
-        print self.material_name, self.directory, self.material_package_directory
-        os.mkdir(self.material_package_directory)
+        self.set_material_package_directory()
+        self.make_material_package_directory()
         self._write_initializer_to_disk()
         self._write_input_file_to_disk(self.user_input_import_statements, user_input_wrapper)
         self._write_output_file_to_disk(material)
