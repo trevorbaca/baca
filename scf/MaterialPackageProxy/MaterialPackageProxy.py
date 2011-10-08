@@ -134,6 +134,9 @@ class MaterialPackageProxy(PackageProxy):
         if result:
             self.proceed()
 
+    def edit_initializer(self):
+        os.system('vi %s' % self.initializer)
+
     def edit_input_file(self):
         os.system('vi + %s' % self.input_file)
 
@@ -274,6 +277,7 @@ class MaterialPackageProxy(PackageProxy):
                 menu_specifier.named_pairs.append(('y', 'stylesheet'))
             if self.has_pdf:
                 menu_specifier.named_pairs.append(('p', 'pdf'))
+            menu_specifier.named_pairs.append(('n', 'initializer'))
             menu_specifier.secondary_named_pairs.append(('d', 'delete'))
             menu_specifier.secondary_named_pairs.append(('g', 'get tag'))
             menu_specifier.secondary_named_pairs.append(('r', 'rename'))
@@ -292,6 +296,8 @@ class MaterialPackageProxy(PackageProxy):
                 self.reload_user_input()
             elif key == 'l':
                 self.manage_ly(key)
+            elif key == 'n':
+                self.edit_initializer()
             elif key == 'o':
                 self.manage_output(key)
             elif key == 'p':

@@ -1,2 +1,5 @@
 from output import *
-tags = {'maker': 'SargassoMeasureMaker', 'creation_date': '2011-10-06'}
+import datetime
+
+
+tags = {'maker': 'SargassoMeasureMaker', 'creation_date': datetime.date(2011, 10, 06)}

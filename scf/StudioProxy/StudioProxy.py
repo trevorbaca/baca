@@ -1,4 +1,5 @@
 from baca.scf.CatalogProxy import CatalogProxy
+from baca.scf.MakersProxy import MakersProxy
 from baca.scf.MenuSectionSpecifier import MenuSectionSpecifier
 from baca.scf.MenuSpecifier import MenuSpecifier
 from baca.scf.DirectoryProxy import DirectoryProxy
@@ -65,19 +66,23 @@ class StudioProxy(DirectoryProxy):
             menu_specifier.menu_body = 'welcome to the studio.'
             menu_section = MenuSectionSpecifier()
             menu_section.menu_section_entries = self.catalog.list_numbered_score_titles_with_years()
+            menu_section.sentence_length_items.append(('k', 'material makers'))
             menu_section.sentence_length_items.append(('m', 'materials'))
             menu_section.sentence_length_items.append(('svn', 'repository'))
             menu_specifier.menu_sections.append(menu_section)
             menu_specifier.include_back = False
             menu_specifier.include_studio = False
             key, value = menu_specifier.display_menu()
-            if key == 'm':
+            if key == 'k':
+                makers_proxy = MakersProxy()
+                makers_proxy.manage_makers(menu_header='studio')
+            elif key == 'm':
                 shared_materials_proxy = SharedMaterialsProxy()
-                result = shared_materials_proxy.manage_shared_materials(menu_header='studio')
+                shared_materials_proxy.manage_shared_materials(menu_header='studio')
             elif key == 'svn':
-                self.manage_svn()
+                self.manage_svn(menu_header='studio')
             else:
-                score_package_name = self.catalog.score_title_to_score_package_name(value)
-                if score_package_name is not None:
-                    score_package_proxy = ScorePackageProxy(score_package_name)
-                    result = score_package_proxy.manage_score()
+                value = score_title
+                score_package_name = self.catalog.score_title_to_score_package_name(score_title)
+                score_package_proxy = ScorePackageProxy(score_package_name)
+                score_package_proxy.manage_score()

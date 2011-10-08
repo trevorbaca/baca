@@ -1,7 +1,9 @@
 from abjad.tools import iotools
+import datetime
 import os
 import readline
 import subprocess
+import time
 
 
 class SCFObject(object):
@@ -14,9 +16,19 @@ class SCFObject(object):
     ### OVERLOADS ###
 
     def __repr__(self):
-        return '%s()' % type(self).__name__
+        return '%s()' % self.class_name
 
     ### PUBLIC ATTRIBUTES ###
+
+    @property
+    def class_name(self):
+        return type(self).__name__
+
+    @property
+    def spaced_class_name(self):
+        spaced_class_name = iotools.uppercamelcase_to_underscore_delimited_lowercase(self.class_name)
+        spaced_class_name = spaced_class_name.replace('_', ' ')
+        return spaced_class_name
 
     @property
     def source_file(self):
@@ -47,6 +59,9 @@ class SCFObject(object):
     def edit_source_file(self):
         command = 'vi %s' % self.source_file
         os.system(command)
+
+    def get_date(self):
+        return datetime.date(*time.localtime()[:3])
 
     def globally_replace_in_file(self, file_name, old, new):
         file_pointer = file(file_name, 'r')

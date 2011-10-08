@@ -17,6 +17,13 @@ class MakersProxy(DirectoryProxy):
         maker = maker_class()
         return maker
 
+    def iterate_makers(self):
+        exec('from baca import makers')
+        for name in dir(makers):
+            if name[0].isalpha():
+                exec('result = makers.%s()' % name)
+                yield result
+
     def list_makers(self):
         maker_directories = []
         for name in os.listdir(self.makers_directory):
@@ -28,19 +35,14 @@ class MakersProxy(DirectoryProxy):
                         maker_directories.append(name)
         return maker_directories
 
-    def list_maker_class_spaced_names(self):
-        class_spaced_names = []
-        for maker in self.list_makers():
-            class_spaced_name = iotools.uppercamelcase_to_underscore_delimited_lowercase(maker)
-            class_spaced_name = class_spaced_name.replace('_', ' ')
-            class_spaced_names.append(class_spaced_name)
-        return class_spaced_names
+    def list_maker_spaced_class_names(self):
+        return [maker.spaced_class_name for maker in self.iterate_makers()]
 
     def manage_makers(self, menu_header=None):
         while True:
             menu_specifier = MenuSpecifier(menu_header=menu_header)
             menu_specifier.menu_body = 'interactive material makers'
-            menu_specifier.items_to_number = self.list_maker_class_spaced_names()
+            menu_specifier.items_to_number = self.list_maker_spaced_class_names()
             key, value = menu_specifier.display_menu()
             if key == 'b':
                 return key, value

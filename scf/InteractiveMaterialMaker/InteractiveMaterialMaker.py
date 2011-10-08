@@ -96,6 +96,10 @@ class InteractiveMaterialMaker(SCFObject, _MaterialPackageMaker):
     def _write_initializer_to_disk(self):
         initializer = file(os.path.join(self.material_package_directory, '__init__.py'), 'w')
         initializer.write('from output import *\n')
+        initializer.write('import datetime\n')
+        initializer.write('\n\n')
+        tags_dictionary = self.make_tags_dictionary()
+        initializer.write('tags = %r\n' % tags_dictionary)
         initializer.close()
 
     def _write_input_file_to_disk(self, user_input_import_statements, user_input_wrapper):
@@ -139,13 +143,6 @@ class InteractiveMaterialMaker(SCFObject, _MaterialPackageMaker):
         fp.close()
 
     ### PUBLIC ATTRIBUTES ###
-
-    @property
-    def class_spaced_name(self):
-        from abjad.tools import iotools
-        class_spaced_name = iotools.uppercamelcase_to_underscore_delimited_lowercase(type(self).__name__)
-        class_spaced_name = class_spaced_name.replace('_', ' ')
-        return class_spaced_name
 
     @property
     def has_changes(self):
@@ -196,18 +193,18 @@ class InteractiveMaterialMaker(SCFObject, _MaterialPackageMaker):
     @property
     def material_package_directory(self):
         if self.materials_directory:
-            if self.material_underscored_name:
-                return os.path.join(self.materials_directory, self.material_underscored_name)
+            if self.underscored_material_name:
+                return os.path.join(self.materials_directory, self.underscored_material_name)
 
     @property
     def material_package_name(self):
         if self.score is None:  
-            return self.material_underscored_name
+            return self.underscored_material_name
         else:
-            return '%s_%s' % (self.score.directory, self.material_underscored_name)
+            return '%s_%s' % (self.score.directory, self.underscored_material_name)
 
     @property
-    def material_underscored_name(self):
+    def underscored_material_name(self):
         if self.has_material_name:
             return self.material_name.replace(' ', '_')
 
@@ -254,7 +251,7 @@ class InteractiveMaterialMaker(SCFObject, _MaterialPackageMaker):
         while True:
             menu_specifier = MenuSpecifier()
             menu_body = '%s - %s - %s - edit interactively'
-            menu_body %= (self.location_name, self.class_spaced_name, self.material_menu_name)
+            menu_body %= (self.location_name, self.spaced_class_name, self.material_menu_name)
             menu_body = self.append_status_indicator(menu_body)
             menu_specifier.menu_body = menu_body
             menu_specifier.items_to_number = self.user_input_wrapper.editable_lines
@@ -326,7 +323,7 @@ class InteractiveMaterialMaker(SCFObject, _MaterialPackageMaker):
     def import_values(self):
         from baca.scf.CatalogProxy import CatalogProxy
         catalog_proxy = CatalogProxy()
-        menu_header = 'import %s' % self.class_spaced_name
+        menu_header = 'import %s' % self.spaced_class_name
         material_package_proxy = catalog_proxy.select_interactive_material_package_proxy(
             menu_header=menu_header, klasses=(type(self),))
         self.user_input_wrapper = copy.deepcopy(material_package_proxy.user_input_wrapper)
@@ -346,6 +343,12 @@ class InteractiveMaterialMaker(SCFObject, _MaterialPackageMaker):
             os.mkdir(self.material_package_directory)
         except OSError:
             pass
+
+    def make_tags_dictionary(self):
+        tags = {}
+        tags['creation_date'] = self.get_date()
+        tags['maker'] = self.class_name
+        return tags
 
     def name_material(self):
         self.material_name = raw_input('Material name> ')
