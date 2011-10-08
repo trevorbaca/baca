@@ -333,6 +333,12 @@ class InteractiveMaterialMaker(SCFObject, _MaterialPackageMaker):
             if self.query('Save material? '):
                 self.save_material(user_input_wrapper)
 
+    def iterate_materials_based_on_maker(self):
+        from baca.scf.CatalogProxy import CatalogProxy
+        catalog_proxy = CatalogProxy()
+        for material_proxy in catalog_proxy.iterate_material_package_proxies(class_names=(self.class_name,)):
+            yield material_proxy
+
     def make_lilypond_file_from_user_input_wrapper(self, user_input_wrapper):
         material = self.make(*user_input_wrapper.values)
         lilypond_file = self.make_lilypond_file_from_output_material(material)
@@ -349,6 +355,23 @@ class InteractiveMaterialMaker(SCFObject, _MaterialPackageMaker):
         tags['creation_date'] = self.get_date()
         tags['maker'] = self.class_name
         return tags
+
+    def manage_maker(self, menu_header=None):
+        while True:
+            menu = MenuSpecifier()
+            menu.menu_header = menu_header
+            menu.menu_body = self.spaced_class_name
+            menu.items_to_number = list(self.iterate_materials_based_on_maker())
+            menu.sentence_length_items.append(('n', 'make new'))
+            key, value = menu.display_menu()
+            if key == 'b':
+                return key, None
+            elif key == 'n':
+                self.edit_interactively(menu_header=menu.menu_title)
+            else:
+                material_package_proxy = value
+                print material_package_proxy
+                material_package_proxy.manage_material(menu_header=menu.menu_title)
 
     def name_material(self):
         self.material_name = raw_input('Material name> ')

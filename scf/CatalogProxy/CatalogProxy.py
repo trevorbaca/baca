@@ -35,15 +35,19 @@ class CatalogProxy(DirectoryProxy):
             if material_package_proxy.is_interactive:
                 yield material_package_proxy
 
-    def iterate_material_package_proxies(self):
+    def iterate_material_package_proxies(self, class_names=None):
         from baca.scf.MaterialPackageProxy import MaterialPackageProxy
+        if class_names is None:
+            class_names = ('MaterialPackageProxy',)
         for score_package_proxy in self.iterate_score_package_proxies():
             for material_package_proxy in score_package_proxy.iterate_material_package_proxies():
-                yield material_package_proxy
+                if material_package_proxy.get_tag('maker') in class_names:
+                    yield material_package_proxy
         for material_name in os.listdir(self.shared_materials_directory):
             if material_name[0].isalpha():
                 material_package_proxy = MaterialPackageProxy('', material_name, is_shared_material=True)
-                yield material_package_proxy
+                if material_package_proxy.get_tag('maker') in class_names:
+                    yield material_package_proxy
 
     def iterate_score_package_proxies(self):
         for score_package_name in self.list_score_package_names():

@@ -86,7 +86,7 @@ class PackageProxy(DirectoryProxy):
 
     def get_tag(self, tag_name):
         tags = self.get_tags()
-        tag = tags[tag_name]
+        tag = tags.get(tag_name, None)
         return tag
 
     def get_tags(self):

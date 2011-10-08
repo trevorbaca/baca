@@ -51,10 +51,7 @@ class MakersProxy(DirectoryProxy):
                 maker_name = maker_name.replace(' ', '_')
                 maker_name = iotools.underscore_delimited_lowercase_to_uppercamelcase(maker_name)
                 maker = self.get_maker(maker_name)
-                menu_header = ' - '.join(menu_specifier.menu_title_parts[:-2])
-                result = maker.edit_interactively(menu_header=menu_header)
-                if result:
-                    break
+                maker.manage_maker(menu_header=menu_header)
 
     def select_interactive_maker(self, menu_header=None):
         menu_specifier = MenuSpecifier(menu_header=menu_header)
