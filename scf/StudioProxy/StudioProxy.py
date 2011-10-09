@@ -66,17 +66,17 @@ class StudioProxy(DirectoryProxy):
             menu_specifier.menu_body = 'welcome to the studio.'
             menu_section = MenuSectionSpecifier()
             menu_section.menu_section_entries = self.catalog.list_numbered_score_titles_with_years()
-            menu_section.sentence_length_items.append(('k', 'material makers'))
-            menu_section.sentence_length_items.append(('m', 'materials'))
-            menu_section.sentence_length_items.append(('svn', 'repository'))
+            menu_section.sentence_length_items.append(('min', 'work with interactive materials'))
+            menu_section.sentence_length_items.append(('mst', 'work with static materials'))
+            menu_section.sentence_length_items.append(('svn', 'work with repository'))
             menu_specifier.menu_sections.append(menu_section)
             menu_specifier.include_back = False
             menu_specifier.include_studio = False
             key, value = menu_specifier.display_menu()
-            if key == 'k':
+            if key == 'min':
                 makers_proxy = MakersProxy()
                 makers_proxy.manage_makers(menu_header='studio')
-            elif key == 'm':
+            elif key == 'mst':
                 shared_materials_proxy = MaterialPackagesWrangler()
                 shared_materials_proxy.manage_shared_materials(menu_header='studio')
             elif key == 'svn':

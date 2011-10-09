@@ -1,6 +1,6 @@
-from baca.scf.StudioException import StudioException
 from baca.scf.MenuObject import MenuObject
 from baca.scf.SCFObject import SCFObject
+from baca.scf.exceptions import StudioException
 import os
 
 

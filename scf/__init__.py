@@ -10,7 +10,6 @@ from PackageProxy import PackageProxy
 from SCFObject import SCFObject
 from ScorePackageProxy import ScorePackageProxy
 from MaterialPackagesWrangler import MaterialPackagesWrangler
-from StudioException import StudioException
 from StudioProxy import StudioProxy
 from UserInputGetter import UserInputGetter
 from UserInputWrapper import UserInputWrapper
