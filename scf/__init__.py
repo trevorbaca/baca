@@ -1,6 +1,6 @@
 from ScorePackageWrangler import ScorePackageWrangler
 from DirectoryProxy import DirectoryProxy
-from InteractiveMaterialMaker import InteractiveMaterialMaker
+from InteractiveMaker import InteractiveMaker
 from MakersWrangler import MakersWrangler
 from MaterialPackageProxy import MaterialPackageProxy
 from MenuObject import MenuObject

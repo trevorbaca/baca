@@ -12,7 +12,7 @@ import os
 import shutil
 
 
-class InteractiveMaterialMaker(SCFObject, _MaterialPackageMaker):
+class InteractiveMaker(SCFObject, _MaterialPackageMaker):
 
     def __init__(self, directory=None, material_name=None, score=None):
         SCFObject.__init__(self)
