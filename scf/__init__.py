@@ -1,6 +1,5 @@
 from ScorePackageWrangler import ScorePackageWrangler
 from DirectoryProxy import DirectoryProxy
-from Maker import Maker
 from MakerWrangler import MakerWrangler
 from MaterialPackageProxy import MaterialPackageProxy
 from MenuObject import MenuObject
