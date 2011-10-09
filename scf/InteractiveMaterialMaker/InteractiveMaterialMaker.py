@@ -2,7 +2,7 @@ from abjad.tools import iotools
 from abjad.tools import lilypondfiletools
 from abjad.tools import markuptools
 from baca.scf._MaterialPackageMaker import _MaterialPackageMaker
-from baca.scf.CatalogProxy import CatalogProxy
+from baca.scf.ScorePackageWrangler import ScorePackageWrangler
 from baca.scf.MenuSpecifier import MenuSpecifier
 from baca.scf.MaterialPackagesWrangler import MaterialPackagesWrangler
 from baca.scf.SCFObject import SCFObject
@@ -70,7 +70,7 @@ class InteractiveMaterialMaker(SCFObject, _MaterialPackageMaker):
             mus_directory = os.path.dirname(materials_directory)
             score_package_directory = os.path.dirname(mus_directory)
             score_package_name = os.path.basename(score_package_directory)
-            catalog_proxy = CatalogProxy()
+            catalog_proxy = ScorePackageWrangler()
             score_title = catalog_proxy.score_package_name_to_score_title(score_package_name)
             subtitle = '(%s)' % score_title
         else:
@@ -321,8 +321,8 @@ class InteractiveMaterialMaker(SCFObject, _MaterialPackageMaker):
         return new_value
 
     def import_values(self):
-        from baca.scf.CatalogProxy import CatalogProxy
-        catalog_proxy = CatalogProxy()
+        from baca.scf.ScorePackageWrangler import ScorePackageWrangler
+        catalog_proxy = ScorePackageWrangler()
         menu_header = 'import %s' % self.spaced_class_name
         material_package_proxy = catalog_proxy.select_interactive_material_package_proxy(
             menu_header=menu_header, klasses=(type(self),))
@@ -334,8 +334,8 @@ class InteractiveMaterialMaker(SCFObject, _MaterialPackageMaker):
                 self.save_material(user_input_wrapper)
 
     def iterate_materials_based_on_maker(self):
-        from baca.scf.CatalogProxy import CatalogProxy
-        catalog_proxy = CatalogProxy()
+        from baca.scf.ScorePackageWrangler import ScorePackageWrangler
+        catalog_proxy = ScorePackageWrangler()
         for material_proxy in catalog_proxy.iterate_material_package_proxies(class_names=(self.class_name,)):
             yield material_proxy
 
@@ -390,8 +390,8 @@ class InteractiveMaterialMaker(SCFObject, _MaterialPackageMaker):
         return True
 
     def set_location(self, menu_header=None):
-        from baca.scf.CatalogProxy import CatalogProxy
-        catalog = CatalogProxy()
+        from baca.scf.ScorePackageWrangler import ScorePackageWrangler
+        catalog = ScorePackageWrangler()
         result = catalog.select_score_interactively(menu_header=menu_header)
         self.score = result
 

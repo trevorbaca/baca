@@ -1,4 +1,4 @@
-from baca.scf.CatalogProxy import CatalogProxy
+from baca.scf.ScorePackageWrangler import ScorePackageWrangler
 from baca.scf.MakersWrangler import MakersWrangler
 from baca.scf.MenuSectionSpecifier import MenuSectionSpecifier
 from baca.scf.MenuSpecifier import MenuSpecifier
@@ -23,7 +23,7 @@ class StudioInterface(DirectoryProxy):
 
     @property
     def catalog(self):
-        return CatalogProxy()
+        return ScorePackageWrangler()
 
     ### PUBLIC METHODS ###
 
@@ -82,7 +82,7 @@ class StudioInterface(DirectoryProxy):
             elif key == 'svn':
                 self.manage_svn(menu_header='studio')
             else:
-                value = score_title
+                score_title = value
                 score_package_name = self.catalog.score_title_to_score_package_name(score_title)
                 score_package_proxy = ScorePackageProxy(score_package_name)
                 score_package_proxy.manage_score()

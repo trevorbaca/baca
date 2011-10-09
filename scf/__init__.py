@@ -1,4 +1,4 @@
-from CatalogProxy import CatalogProxy
+from ScorePackageWrangler import ScorePackageWrangler
 from DirectoryProxy import DirectoryProxy
 from InteractiveMaterialMaker import InteractiveMaterialMaker
 from MakersWrangler import MakersWrangler

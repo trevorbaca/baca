@@ -1,1 +1,0 @@
-from CatalogProxy import CatalogProxy

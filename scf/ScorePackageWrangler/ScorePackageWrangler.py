@@ -4,7 +4,7 @@ from baca.scf.ScorePackageProxy import ScorePackageProxy
 import os
 
 
-class CatalogProxy(DirectoryProxy):
+class ScorePackageWrangler(DirectoryProxy):
 
     def __init__(self):
         DirectoryProxy.__init__(self, os.environ.get('SCORES'))
