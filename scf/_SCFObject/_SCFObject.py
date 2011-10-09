@@ -6,7 +6,7 @@ import subprocess
 import time
 
 
-class SCFObject(object):
+class _SCFObject(object):
     
     def __init__(self):
         self.baca_directory = os.environ.get('BACA')

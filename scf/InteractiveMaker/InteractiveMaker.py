@@ -5,17 +5,17 @@ from baca.scf._MaterialPackageMaker import _MaterialPackageMaker
 from baca.scf.ScorePackageWrangler import ScorePackageWrangler
 from baca.scf.MenuSpecifier import MenuSpecifier
 from baca.scf.MaterialPackageWrangler import MaterialPackageWrangler
-from baca.scf.SCFObject import SCFObject
+from baca.scf._SCFObject import _SCFObject
 from baca.scf.UserInputWrapper import UserInputWrapper
 import copy
 import os
 import shutil
 
 
-class InteractiveMaker(SCFObject, _MaterialPackageMaker):
+class InteractiveMaker(_SCFObject, _MaterialPackageMaker):
 
     def __init__(self, directory=None, material_name=None, score=None):
-        SCFObject.__init__(self)
+        _SCFObject.__init__(self)
         self.directory = directory
         self.material_name = material_name
         self.score = score

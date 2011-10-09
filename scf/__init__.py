@@ -7,7 +7,6 @@ from MenuObject import MenuObject
 from MenuSection import MenuSection
 from MenuSpecifier import MenuSpecifier
 from PackageProxy import PackageProxy
-from SCFObject import SCFObject
 from ScorePackageProxy import ScorePackageProxy
 from MaterialPackageWrangler import MaterialPackageWrangler
 from StudioInterface import StudioInterface

@@ -1,10 +1,10 @@
 from baca.scf.MenuObject import MenuObject
-from baca.scf.SCFObject import SCFObject
+from baca.scf._SCFObject import _SCFObject
 from baca.scf.exceptions import StudioException
 import os
 
 
-class MenuSpecifier(MenuObject, SCFObject):
+class MenuSpecifier(MenuObject, _SCFObject):
 
     def __init__(self, menu_header=None, menu_body=None, score_title=None, 
         menu_sections=None, items_to_number=None, sentence_length_items=None, 

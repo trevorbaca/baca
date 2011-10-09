@@ -1,13 +1,13 @@
-from baca.scf.SCFObject import SCFObject
+from baca.scf._SCFObject import _SCFObject
 import os
 import subprocess
 import sys
 
 
-class DirectoryProxy(SCFObject):
+class DirectoryProxy(_SCFObject):
 
     def __init__(self, directory):
-        SCFObject.__init__(self)
+        _SCFObject.__init__(self)
         self.directory = directory
 
     ### PUBLIC ATTRIBUTES ###
