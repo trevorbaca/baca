@@ -4,7 +4,7 @@ from abjad.tools import markuptools
 from baca.scf._MaterialPackageMaker import _MaterialPackageMaker
 from baca.scf.CatalogProxy import CatalogProxy
 from baca.scf.MenuSpecifier import MenuSpecifier
-from baca.scf.SharedMaterialsProxy import SharedMaterialsProxy
+from baca.scf.MaterialPackagesWrangler import MaterialPackagesWrangler
 from baca.scf.SCFObject import SCFObject
 from baca.scf.UserInputWrapper import UserInputWrapper
 import copy

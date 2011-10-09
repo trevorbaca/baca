@@ -4,7 +4,7 @@ from baca.scf.MenuSectionSpecifier import MenuSectionSpecifier
 from baca.scf.MenuSpecifier import MenuSpecifier
 from baca.scf.DirectoryProxy import DirectoryProxy
 from baca.scf.ScorePackageProxy import ScorePackageProxy
-from baca.scf.SharedMaterialsProxy import SharedMaterialsProxy
+from baca.scf.MaterialPackagesWrangler import MaterialPackagesWrangler
 import os
 
 
@@ -77,7 +77,7 @@ class StudioProxy(DirectoryProxy):
                 makers_proxy = MakersProxy()
                 makers_proxy.manage_makers(menu_header='studio')
             elif key == 'm':
-                shared_materials_proxy = SharedMaterialsProxy()
+                shared_materials_proxy = MaterialPackagesWrangler()
                 shared_materials_proxy.manage_shared_materials(menu_header='studio')
             elif key == 'svn':
                 self.manage_svn(menu_header='studio')

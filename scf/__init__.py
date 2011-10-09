@@ -9,7 +9,7 @@ from MenuSpecifier import MenuSpecifier
 from PackageProxy import PackageProxy
 from SCFObject import SCFObject
 from ScorePackageProxy import ScorePackageProxy
-from SharedMaterialsProxy import SharedMaterialsProxy
+from MaterialPackagesWrangler import MaterialPackagesWrangler
 from StudioException import StudioException
 from StudioProxy import StudioProxy
 from UserInputGetter import UserInputGetter
