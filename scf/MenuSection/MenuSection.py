@@ -1,4 +1,4 @@
-class MenuSectionSpecifier(object):
+class MenuSection(object):
 
     def __init__(self, menu_section_title='', lines_to_list=None,
         menu_section_entries=None, sentence_length_items=None, indent_level=1, 

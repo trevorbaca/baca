@@ -109,15 +109,15 @@ class PackageProxy(DirectoryProxy):
         return formatted_tags
 
     def manage_tags(self, menu_header=None):
-        from baca.scf.MenuSectionSpecifier import MenuSectionSpecifier
+        from baca.scf.MenuSection import MenuSection
         from baca.scf.MenuSpecifier import MenuSpecifier
         while True:
             menu = MenuSpecifier(menu_header=menu_header)
             menu.menu_body = 'tags'
-            section = MenuSectionSpecifier()
+            section = MenuSection()
             section.lines_to_list = self.list_formatted_tags()
             menu.menu_sections.append(section)
-            section = MenuSectionSpecifier()
+            section = MenuSection()
             section.sentence_length_items.append(('add', 'add tag'))
             section.sentence_length_items.append(('del', 'delete tag'))
             menu.menu_sections.append(section)

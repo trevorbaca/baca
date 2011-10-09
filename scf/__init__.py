@@ -4,7 +4,7 @@ from InteractiveMaker import InteractiveMaker
 from InteractiveMakerWrangler import InteractiveMakerWrangler
 from MaterialPackageProxy import MaterialPackageProxy
 from MenuObject import MenuObject
-from MenuSectionSpecifier import MenuSectionSpecifier
+from MenuSection import MenuSection
 from MenuSpecifier import MenuSpecifier
 from PackageProxy import PackageProxy
 from SCFObject import SCFObject

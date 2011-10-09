@@ -233,24 +233,24 @@ class ScorePackageProxy(PackageProxy, _MaterialPackageMaker):
             material_number = None
 
     def manage_score(self, menu_header=None, command_string=None):
-        from baca.scf.MenuSectionSpecifier import MenuSectionSpecifier
+        from baca.scf.MenuSection import MenuSection
         from baca.scf.MenuSpecifier import MenuSpecifier
         while True:
             menu_specifier = MenuSpecifier(menu_header=menu_header)
             menu_specifier.menu_body = self.score_title
-            menu_section = MenuSectionSpecifier()
+            menu_section = MenuSection()
             menu_section.menu_section_title = 'Chunks'
             menu_section.menu_section_entries = self.list_numbered_chunks()
             menu_section.sentence_length_items.append(('ch', '[make new chunk by hand]'))
             menu_section.sentence_length_items.append(('ci', '[make new chunk interactively]'))
             menu_specifier.menu_sections.append(menu_section)
-            menu_section = MenuSectionSpecifier()
+            menu_section = MenuSection()
             menu_section.menu_section_title = 'Materials'
             menu_section.menu_section_entries = self.list_numbered_materials()
             menu_section.sentence_length_items.append(('mh', 'make new material by hand'))
             menu_section.sentence_length_items.append(('mi', 'make new material interactively'))
             menu_specifier.menu_sections.append(menu_section)
-            menu_section = MenuSectionSpecifier()
+            menu_section = MenuSection()
             menu_section.sentence_length_items.append(('st', 'svn status'))
             menu_section.sentence_length_items.append(('cm', 'commit changes'))
             menu_specifier.menu_sections.append(menu_section)
