@@ -1,7 +1,7 @@
 from baca.scf._MaterialPackageMaker import _MaterialPackageMaker
 from baca.scf.DirectoryProxy import DirectoryProxy
 from baca.scf.PackageProxy import PackageProxy
-from baca.scf.MakersWrangler import MakersWrangler
+from baca.scf.InteractiveMakerWrangler import InteractiveMakerWrangler
 from baca.scf.MaterialPackageProxy import MaterialPackageProxy
 from baca.scf.MenuSpecifier import MenuSpecifier
 import os
@@ -18,12 +18,12 @@ class MaterialPackageWrangler(DirectoryProxy, _MaterialPackageMaker):
 
     def create_shared_material_package(self, menu_header=None, is_interactive=False):
         if is_interactive:
-            makers_proxy = MakersWrangler(score_title=self.score_title)
+            makers_proxy = InteractiveMakerWrangler(score_title=self.score_title)
             return makers_proxy.manage_makers(menu_header=menu_header)
         else:
             response = raw_input('Make material interactively? ')
             if response == 'y':
-                makers_proxy = MakersWrangler()
+                makers_proxy = InteractiveMakerWrangler()
                 makers_proxy.manage_makers(menu_header=menu_header)
             else:
                 return self._create_materials_package(self.directory)

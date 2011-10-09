@@ -4,7 +4,7 @@ from baca.scf.MenuSpecifier import MenuSpecifier
 import os
 
 
-class MakersWrangler(DirectoryProxy):
+class InteractiveMakerWrangler(DirectoryProxy):
 
     def __init__(self, score_title=None):
         self.score_title = score_title
