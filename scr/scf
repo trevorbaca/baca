@@ -2,7 +2,7 @@
 import baca
 
 
-studio = baca.scf.StudioProxy()
+studio = baca.scf.StudioInterface()
 
 while True:
     try:

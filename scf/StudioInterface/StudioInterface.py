@@ -8,7 +8,7 @@ from baca.scf.MaterialPackagesWrangler import MaterialPackagesWrangler
 import os
 
 
-class StudioProxy(DirectoryProxy):
+class StudioInterface(DirectoryProxy):
 
     def __init__(self):
         directory = os.environ.get('BACA', 'works')
