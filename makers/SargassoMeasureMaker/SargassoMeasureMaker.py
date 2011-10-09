@@ -13,8 +13,6 @@ import os
 
 
 class SargassoMeasureMaker(InteractiveMaterialMaker):
-    r'''Docstring for sargasso measure maker.
-    '''
 
     def __init__(self, **kwargs):
         InteractiveMaterialMaker.__init__(self, **kwargs)
@@ -171,7 +169,6 @@ class SargassoMeasureMaker(InteractiveMaterialMaker):
         return lilypond_file
 
     def permute_divided_measure_tokens(self, divided_measure_tokens):
-        '''This can be extended later.'''
         modulus_of_permutation = 5
         len_divided_measure_tokens = len(divided_measure_tokens)
         assert mathtools.are_relatively_prime([modulus_of_permutation, len_divided_measure_tokens])

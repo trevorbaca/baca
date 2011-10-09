@@ -1,5 +1,5 @@
 from baca.scf.CatalogProxy import CatalogProxy
-from baca.scf.MakersProxy import MakersProxy
+from baca.scf.MakersWrangler import MakersWrangler
 from baca.scf.MenuSectionSpecifier import MenuSectionSpecifier
 from baca.scf.MenuSpecifier import MenuSpecifier
 from baca.scf.DirectoryProxy import DirectoryProxy
@@ -74,7 +74,7 @@ class StudioProxy(DirectoryProxy):
             menu_specifier.include_studio = False
             key, value = menu_specifier.display_menu()
             if key == 'min':
-                makers_proxy = MakersProxy()
+                makers_proxy = MakersWrangler()
                 makers_proxy.manage_makers(menu_header='studio')
             elif key == 'mst':
                 shared_materials_proxy = MaterialPackagesWrangler()

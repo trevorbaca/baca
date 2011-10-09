@@ -10,7 +10,5 @@ while True:
     except EOFError:
         print '\n'
         break
-    except baca.scf.StudioException:
+    except baca.scf.exceptions.StudioException:
         pass
-
-#/Users/trevorbaca/Documents/other/baca/scf/scf.py $@

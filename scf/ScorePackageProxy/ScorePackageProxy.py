@@ -1,5 +1,5 @@
 from baca.scf._MaterialPackageMaker import _MaterialPackageMaker
-from baca.scf.MakersProxy import MakersProxy
+from baca.scf.MakersWrangler import MakersWrangler
 from baca.scf.MaterialPackageProxy import MaterialPackageProxy
 from baca.scf.PackageProxy import PackageProxy
 import os
@@ -292,7 +292,7 @@ class ScorePackageProxy(PackageProxy, _MaterialPackageMaker):
 
     def make_new_material_interactively(self, menu_header=None):
         while True:
-            makers_proxy = MakersProxy()
+            makers_proxy = MakersWrangler()
             #key, value = makers_proxy.select_interactive_maker(score_title=self.score_title)
             key, value = makers_proxy.select_interactive_maker(menu_header=menu_header)
             if value is None:
