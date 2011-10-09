@@ -7,7 +7,7 @@ from baca.scf.MenuSpecifier import MenuSpecifier
 import os
 
 
-class MaterialPackagesWrangler(DirectoryProxy, _MaterialPackageMaker):
+class MaterialPackageWrangler(DirectoryProxy, _MaterialPackageMaker):
 
     def __init__(self, score_title=None):
         directory = os.path.join(os.environ.get('BACA'), 'materials')
