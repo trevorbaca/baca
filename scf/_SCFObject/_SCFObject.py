@@ -63,6 +63,12 @@ class _SCFObject(object):
     def get_date(self):
         return datetime.date(*time.localtime()[:3])
 
+    def get_material_package_proxy(package_name):
+        if self.is_interactive_material_package(package_name):
+            InteractiveMaterialPackageProxy(package_name)
+        else:
+            StaticMaterialPackageProxy(package_name)
+
     def globally_replace_in_file(self, file_name, old, new):
         file_pointer = file(file_name, 'r')
         new_file_lines = []

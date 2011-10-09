@@ -1,7 +1,8 @@
 from baca.scf._MaterialPackageMaker import _MaterialPackageMaker
+from baca.scf.InteractiveMaterialPackageProxy import InteractiveMaterialPackageProxy
 from baca.scf.MakerWrangler import MakerWrangler
-from baca.scf.MaterialPackageProxy import MaterialPackageProxy
 from baca.scf.PackageProxy import PackageProxy
+from baca.scf.StaticMaterialPackageProxy import StaticMaterialPackageProxy
 import os
 
 
@@ -187,7 +188,10 @@ class ScorePackageProxy(PackageProxy, _MaterialPackageMaker):
 
     def iterate_material_package_proxies(self):
         for material_name in self.list_materials():
-            material_package_proxy = MaterialPackageProxy(self.package_name, material_name)
+            if self.directory_is_interactive_material_package(material_name)
+                material_package_proxy = InteractiveMaterialPackageProxy(self.package_name, material_name)
+            else:
+                material_package_proxy = StaticMaterialPackageProxy(self.package_name, material_name)
             yield material_package_proxy
 
     def list_chunks(self):
@@ -225,11 +229,11 @@ class ScorePackageProxy(PackageProxy, _MaterialPackageMaker):
     def manage_materials(self, material_number=None):
         while True:
             result = self.select_material(material_number=material_number)
-            if isinstance(result, MaterialPackageProxy):
+            if result == 'b':
+                return result
+            else:
                 result.score_title = self.score_title
                 result.manage_material()
-            elif result == 'b':
-                return result
             material_number = None
 
     def manage_score(self, menu_header=None, command_string=None):
@@ -275,7 +279,8 @@ class ScorePackageProxy(PackageProxy, _MaterialPackageMaker):
                 try:
                     material_number = int(key)
                     material_name = self.material_number_to_material_name(material_number)
-                    material_package_proxy = MaterialPackageProxy(self.package_name, material_name)
+                    package_name = '%s.%s' % (self.package_name, material_name)
+                    material_package_proxy = self.get_material_package_proxy(package_name)
                     material_package_proxy.score_title = self.score_title
                     material_package_proxy.manage_material(menu_header=menu_specifier.menu_title)
                 except (TypeError, ValueError):

@@ -1,7 +1,6 @@
 from DirectoryProxy import DirectoryProxy
 from InteractiveMaterialPackageProxy import InteractiveMaterialPackageProxy
 from MakerWrangler import MakerWrangler
-from MaterialPackageProxy import MaterialPackageProxy
 from MaterialPackageWrangler import MaterialPackageWrangler
 from MenuObject import MenuObject
 from MenuSection import MenuSection

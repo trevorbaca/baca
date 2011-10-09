@@ -5,7 +5,7 @@ import subprocess
 import sys
 
 
-class MaterialPackageProxy(PackageProxy):
+class _MaterialPackageProxy(PackageProxy):
 
     def __init__(self, score_package_name, material_name, is_shared_material=False):
         self.help_item_width = 5

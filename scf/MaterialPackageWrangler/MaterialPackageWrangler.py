@@ -1,9 +1,10 @@
 from baca.scf._MaterialPackageMaker import _MaterialPackageMaker
 from baca.scf.DirectoryProxy import DirectoryProxy
-from baca.scf.PackageProxy import PackageProxy
+from baca.scf.InteractiveMaterialPackageProxy import InteractiveMaterialPackageProxy
 from baca.scf.MakerWrangler import MakerWrangler
-from baca.scf.MaterialPackageProxy import MaterialPackageProxy
 from baca.scf.MenuSpecifier import MenuSpecifier
+from baca.scf.PackageProxy import PackageProxy
+from baca.scf.StaticMaterialPackageProxy import StaticMaterialPackageProxy
 import os
 
 
@@ -88,9 +89,13 @@ class MaterialPackageWrangler(DirectoryProxy, _MaterialPackageMaker):
                 result = self.create_shared_material_package(
                     menu_header=menu_specifier.menu_title, is_interactive=True)
             else:
-                material_name = value.strip(' (@)')
                 score_package_name = ''
-                material_package_proxy = MaterialPackageProxy(
-                    score_package_name, material_name, is_shared_material=True)
+                material_name = value.strip(' (@)')
+                if material_name.endswith('(@)'):
+                    material_package_proxy = StaticMaterialPackageProxy(
+                        score_package_name, material_name.strip(' (@)'), is_shared_material=True)
+                else:
+                    material_package_proxy = InteractiveMaterialPackageProxy(
+                        score_package_name, material_name, is_shared_material=True)
                 material_package_proxy.score_title = 'Materials'
                 material_package_proxy.manage_material(menu_header=menu_specifier.menu_title)

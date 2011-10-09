@@ -1,6 +1,6 @@
-from baca.scf.MaterialPackageProxy import MaterialPackageProxy
+from baca.scf._MaterialPackageProxy import _MaterialPackageProxy
 
 
-class StaticMaterialPackageProxy(MaterialPackageProxy):
+class StaticMaterialPackageProxy(_MaterialPackageProxy):
 
     pass
