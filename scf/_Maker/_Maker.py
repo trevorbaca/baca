@@ -370,7 +370,6 @@ class _Maker(_SCFObject, _MaterialPackageMaker):
                 self.edit_interactively(menu_header=menu.menu_title)
             else:
                 material_package_proxy = value
-                print material_package_proxy
                 material_package_proxy.manage_material(menu_header=menu.menu_title)
 
     def name_material(self):

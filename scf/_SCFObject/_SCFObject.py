@@ -63,11 +63,13 @@ class _SCFObject(object):
     def get_date(self):
         return datetime.date(*time.localtime()[:3])
 
-    def get_material_package_proxy(package_name):
-        if self.is_interactive_material_package(package_name):
-            InteractiveMaterialPackageProxy(package_name)
+    def get_material_package_proxy(self, importable_module_name):
+        from baca.scf.InteractiveMaterialPackageProxy import InteractiveMaterialPackageProxy
+        from baca.scf.StaticMaterialPackageProxy import StaticMaterialPackageProxy
+        if self.is_interactive_material_package(importable_module_name):
+            return InteractiveMaterialPackageProxy(importable_module_name)
         else:
-            StaticMaterialPackageProxy(package_name)
+            return StaticMaterialPackageProxy(importable_module_name)
 
     def globally_replace_in_file(self, file_name, old, new):
         file_pointer = file(file_name, 'r')
@@ -79,6 +81,25 @@ class _SCFObject(object):
         file_pointer = file(file_name, 'w')
         file_pointer.write('\n'.join(new_file_lines))
         file_pointer.close()
+
+    def importable_module_name_to_directory(self, importable_module_name):
+        module_parts = importable_module_name.split('.')
+        if module_parts[0] == 'baca':
+            directory_parts = [os.environ.get('BACA')] + module_parts[1:]
+        elif module_parts[0] in os.listdir(os.environ.get('SCORES')):
+            directory_parts = [os.environ.get('SCORES')] + module_parts[:]
+        else:
+            raise ValueError('Unknown importable module name %r.' % importable_module_name)
+        directory = os.path.join(*directory_parts)
+        return directory
+
+    def directory_to_importable_module_name(self, directory):
+        pass
+
+    def is_interactive_material_package(self, importable_module_name):
+        from baca.scf.PackageProxy import PackageProxy
+        package_proxy = PackageProxy(importable_module_name)
+        return package_proxy.has_tag('maker')
 
     def print_not_implemented(self):
         print 'Not yet implemented.\n'

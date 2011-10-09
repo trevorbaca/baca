@@ -15,6 +15,15 @@ class DirectoryProxy(_SCFObject):
     @property
     def basename(self):
         return os.path.basename(self.directory)
+
+    @apply
+    def directory():
+        def fget(self):
+            return self._directory
+        def fset(self, directory):
+            assert isinstance(directory, str)
+            self._directory = directory
+        return property(**locals())
    
     @property
     def is_in_repository(self):

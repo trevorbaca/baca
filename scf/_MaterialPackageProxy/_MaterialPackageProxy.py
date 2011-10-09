@@ -7,23 +7,8 @@ import sys
 
 class _MaterialPackageProxy(PackageProxy):
 
-    def __init__(self, score_package_name, material_name, is_shared_material=False):
-        self.help_item_width = 5
-        self.score_package_name = score_package_name
-        self.material_name_with_spaces = material_name
-        material_name = material_name.replace(' ', '_')
-        self.material_name = material_name
-        self.underscored_material_name = self.material_name.replace(' ', '_')
-        if is_shared_material:
-            directory = os.path.join(os.environ.get('BACA'), 'materials', self.underscored_material_name)
-            self.materials_module_name = 'baca.materials'
-        else:
-            directory = os.path.join(os.environ.get('SCORES'), score_package_name)
-            directory = os.path.join(directory, 'mus', 'materials', self.underscored_material_name)
-            self.materials_module_name = '%s.mus.materials' % self.score_package_name
-        #self.material_module_name = '%s.%s' % (self.materials_module_name, self.material_name)
-        importable_module_name = '%s.%s' % (self.materials_module_name, self.material_name)
-        PackageProxy.__init__(self, directory, importable_module_name)
+    def __init__(self, importable_module_name):
+        PackageProxy.__init__(self, importable_module_name)
         self.input_file = os.path.join(self.directory, 'input.py')
         self.output_file = os.path.join(self.directory, 'output.py')
         self.visualizer = os.path.join(self.directory, 'visualization.py')
@@ -33,11 +18,6 @@ class _MaterialPackageProxy(PackageProxy):
         self.input_module_name = '%s.input' % self.importable_module_name
         self.output_module_name = '%s.output' % self.importable_module_name
         self.visualization_module_name = '%s.visualization' % self.importable_module_name
-
-    ### OVERLOADS ###
-
-    def __repr__(self):
-        return '%s(%r)' % (type(self).__name__, self.material_name)
 
     ### PUBLIC ATTRIBUTES ###
 
@@ -78,8 +58,50 @@ class _MaterialPackageProxy(PackageProxy):
         return os.path.exists(self.visualizer)
 
     @property
+    def help_item_width(self):
+        return 5
+
+    @property
+    def is_in_score(self):
+        return not self.is_shared        
+
+    @property
     def is_interactive(self):
         return bool(self.has_tag('maker'))
+
+    @property
+    def is_shared(self):
+        return bool(self.importable_module_name.startswith('baca'))
+
+    @property
+    def is_static(self):
+        return not self.is_interactive
+
+    @property
+    def materials_module_name(self):
+        if self.score_package_name is None:
+            return 'baca.materials'
+        else:
+            return '%s.mus.materials' % self.score_package_name
+
+    @property
+    def module_name(self):
+        return self.importable_module_name.split('.')[-1]
+
+    @property
+    def score_package_name(self):
+        if self.importable_module_name.startswith('baca'):
+            return None
+        else:
+            return self.importable_module_name.split('.')[0]
+
+    @property
+    def spaced_material_name(self):
+        return self.module_name.replace('_', ' ')
+
+    @property
+    def underscored_material_name(self):
+        return self.module_name
 
     @property
     def user_input_wrapper(self):
@@ -263,8 +285,7 @@ class _MaterialPackageProxy(PackageProxy):
         while True:
             menu_specifier = MenuSpecifier()
             menu_specifier.menu_header = menu_header
-            material_name = self.material_name.replace('_', ' ')
-            menu_specifier.menu_body = material_name
+            menu_specifier.menu_body = self.spaced_material_name
             if self.is_interactive:
                 menu_specifier.sentence_length_items.append(('k', 'reload user input'))
             menu_specifier.named_pairs.append(('i', 'input'))

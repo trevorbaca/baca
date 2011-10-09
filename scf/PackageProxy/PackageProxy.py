@@ -5,9 +5,15 @@ import os
 
 class PackageProxy(DirectoryProxy):
 
-    def __init__(self, directory, importable_module_name):
+    def __init__(self, importable_module_name):
+        directory = self.importable_module_name_to_directory(importable_module_name)
         DirectoryProxy.__init__(self, directory)
-        self.importable_module_name = importable_module_name
+        self._importable_module_name = importable_module_name
+
+    ### OVERLOADS ###
+
+    def __repr__(self):
+        return '%s(%r)' % (self.class_name, self.importable_module_name)
 
     ### PUBLIC ATTRIBUTES ###
 
@@ -15,6 +21,10 @@ class PackageProxy(DirectoryProxy):
     def creation_date(self):
         pass
         
+    @property
+    def importable_module_name(self):
+        return self._importable_module_name
+
     @property
     def initializer(self):
         return os.path.join(self.directory, '__init__.py')

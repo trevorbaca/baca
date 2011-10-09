@@ -8,17 +8,8 @@ import os
 
 class ScorePackageProxy(PackageProxy, _MaterialPackageMaker):
 
-    def __init__(self, package_name):
-        directory = os.path.join(os.environ.get('SCORES'), package_name)
-        importable_module_name = package_name
-        PackageProxy.__init__(self, directory, importable_module_name)
-        self.chunks_directory = os.path.join(self.directory, 'mus', 'chunks')
-        self.materials_directory = os.path.join(self.directory, 'mus', 'materials')
-
-    ### OVERLOADS ###
-
-    def __repr__(self):
-        return '%s(%r)' % (type(self).__name__, self.package_name)
+    def __init__(self, importable_module_name):
+        PackageProxy.__init__(self, importable_module_name)
 
     ### PRIVATE METHODS ###
 
@@ -57,6 +48,22 @@ class ScorePackageProxy(PackageProxy, _MaterialPackageMaker):
         initializer.close()
 
     ### PUBLIC ATTRIBUTES ###
+
+    @property
+    def chunks_directory(self):
+        return os.path.join(self.directory, 'mus', 'chunks')
+
+    @property
+    def chunks_package_name(self):
+        return '.'.join([self.importable_module_name, 'mus', 'chunks'])
+
+    @property
+    def materials_directory(self):
+        return os.path.join(self.directory, 'mus', 'materials')
+
+    @property
+    def materials_package_name(self):
+        return '.'.join([self.importable_module_name, 'mus', 'materials'])
 
     @apply
     def score_composer():
@@ -182,16 +189,12 @@ class ScorePackageProxy(PackageProxy, _MaterialPackageMaker):
 
     def iterate_interactive_materials(self):
         for material_package_proxy in self.iterate_material_package_proxies():
-            print material_package_proxy
             if material_package_proxy.is_interactive:
                 yield material_package_proxy
 
     def iterate_material_package_proxies(self):
-        for material_name in self.list_materials():
-            if self.directory_is_interactive_material_package(material_name)
-                material_package_proxy = InteractiveMaterialPackageProxy(self.package_name, material_name)
-            else:
-                material_package_proxy = StaticMaterialPackageProxy(self.package_name, material_name)
+        for material_package_name in self.list_material_package_names():
+            material_package_proxy = self.get_material_package_proxy(material_package_name)
             yield material_package_proxy
 
     def list_chunks(self):
@@ -206,6 +209,13 @@ class ScorePackageProxy(PackageProxy, _MaterialPackageMaker):
             materials = []
         materials = [x for x in materials if x[0].isalpha()]
         return materials
+
+    def list_material_package_names(self):
+        material_package_names = []
+        for material in self.list_materials():
+            material_package_name = '%s.%s' % (self.materials_package_name, material)
+            material_package_names.append(material_package_name)
+        return material_package_names
 
     def list_numbered_chunks(self):
         numbered_chunks = []
@@ -279,7 +289,7 @@ class ScorePackageProxy(PackageProxy, _MaterialPackageMaker):
                 try:
                     material_number = int(key)
                     material_name = self.material_number_to_material_name(material_number)
-                    package_name = '%s.%s' % (self.package_name, material_name)
+                    package_name = '%s.%s' % (self.materials_package_name, material_name)
                     material_package_proxy = self.get_material_package_proxy(package_name)
                     material_package_proxy.score_title = self.score_title
                     material_package_proxy.manage_material(menu_header=menu_specifier.menu_title)

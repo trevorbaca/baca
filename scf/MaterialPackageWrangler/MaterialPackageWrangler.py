@@ -33,7 +33,7 @@ class MaterialPackageWrangler(DirectoryProxy, _MaterialPackageMaker):
         for shared_material_directory in self.list_shared_material_directories():
             module_name = os.path.basename(shared_material_directory)
             importable_module_name = 'baca.materials.%s' % module_name
-            proxy = PackageProxy(shared_material_directory, importable_module_name)
+            proxy = PackageProxy(importable_module_name)
             yield proxy
 
     def list_shared_material_directories(self):
@@ -89,13 +89,13 @@ class MaterialPackageWrangler(DirectoryProxy, _MaterialPackageMaker):
                 result = self.create_shared_material_package(
                     menu_header=menu_specifier.menu_title, is_interactive=True)
             else:
-                score_package_name = ''
-                material_name = value.strip(' (@)')
+                score_package_name = 'baca.materials'
+                material_name = value
                 if material_name.endswith('(@)'):
-                    material_package_proxy = StaticMaterialPackageProxy(
-                        score_package_name, material_name.strip(' (@)'), is_shared_material=True)
+                    importable_module_name = '%s.%s' % (score_package_name, material_name.strip(' (@)'))
+                    material_package_proxy = StaticMaterialPackageProxy(importable_module_name)
                 else:
-                    material_package_proxy = InteractiveMaterialPackageProxy(
-                        score_package_name, material_name, is_shared_material=True)
+                    importable_module_name = '%s.%s' % (score_package_name, material_name)
+                    material_package_proxy = InteractiveMaterialPackageProxy(importable_module_name)
                 material_package_proxy.score_title = 'Materials'
                 material_package_proxy.manage_material(menu_header=menu_specifier.menu_title)
