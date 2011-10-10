@@ -12,7 +12,8 @@ class ScorePackageProxy(PackageProxy):
 
     def __init__(self, importable_module_name):
         PackageProxy.__init__(self, importable_module_name)
-        self._material_package_wrangler = MaterialWrangler(purview=self)
+        self._material_wrangler = MaterialWrangler(purview=self)
+        self._maker_wrangler = MakerWrangler()
 
     ### PUBLIC ATTRIBUTES ###
 
@@ -57,8 +58,12 @@ class ScorePackageProxy(PackageProxy):
         return self.has_correct_directory_structure and self.has_correct_initializers
 
     @property
-    def material_package_wrangler(self):
-        return self._material_package_wrangler
+    def maker_wrangler(self):
+        return self._maker_wrangler
+
+    @property
+    def material_wrangler(self):
+        return self._material_wrangler
 
     @property
     def materials_directory_name(self):
@@ -136,7 +141,7 @@ class ScorePackageProxy(PackageProxy):
     ### PUBLIC METHODS ###
 
     def create_material_package_interactively(self):
-        return self.material_package_wrangler.create_material_package_interactively()
+        return self.material_wrangler.create_material_package_interactively()
 
     def create_package_structure(self):
         self.fix_score_package_directory_structure(is_interactive=False)
@@ -253,17 +258,17 @@ class ScorePackageProxy(PackageProxy):
             if key == 'b':
                 return key, None
             elif key == 'ch':
-                key, value = self.make_new_chunk_by_hand()
+                self.make_new_chunk_by_hand(menu_header=self.score_title)
             elif key == 'ci':
-                key, value = self.make_new_chunk_interactively()
+                self.make_new_chunk_interactively(menu_header=self.score_title)
             elif key == 'cm':
                 self.svn_cm()
             elif key == 'h':
-                key, value = self.manage_chunks()
+                self.manage_chunks(menu_header=self.score_title)
             elif key == 'ms':
-                key, value = self.make_new_static_material()
+                self.make_new_static_material(menu_header=self.score_title)
             elif key == 'mi':
-                key, value = self.make_new_interactive_material()
+                self.make_new_interactive_material(menu_header=self.score_title)
             elif key == 'st':
                 self.svn_st()
             else:
@@ -284,17 +289,17 @@ class ScorePackageProxy(PackageProxy):
         return self.print_not_implemented()
 
     def make_new_static_material(self):
-        return self.material_package_wrangler.create_static_material_package_interactively()
+        return self.material_wrangler.create_static_material_package_interactively(
+            menu_header=self.score_title)
 
     def make_new_interactive_material(self, menu_header=None):
         while True:
-            makers_proxy = MakerWrangler()
-            key, value = makers_proxy.select_interactive_maker(menu_header=menu_header)
+            key, value = self.maker_wrangler.select_interactive_maker(menu_header=menu_header)
             if value is None:
                 break
             else:
                 maker = value
-            maker.materials_directory = self.materials_directory_name
+            maker.score = self
             result = maker.edit_interactively(menu_header=menu_header)
             if result:
                 break

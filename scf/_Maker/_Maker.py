@@ -69,8 +69,8 @@ class _Maker(_SCFObject):
             mus_directory = os.path.dirname(materials_directory)
             score_package_directory = os.path.dirname(mus_directory)
             score_package_name = os.path.basename(score_package_directory)
-            catalog_proxy = ScoreWrangler()
-            score_title = catalog_proxy.score_package_name_to_score_title(score_package_name)
+            score_wrangler = ScoreWrangler()
+            score_title = score_wrangler.score_package_name_to_score_title(score_package_name)
             subtitle = '(%s)' % score_title
         else:
             subtitle = '(shared material)'
@@ -191,16 +191,16 @@ class _Maker(_SCFObject):
 
     @property
     def material_package_directory(self):
-        if self.materials_directory:
-            if self.underscored_material_name:
-                return os.path.join(self.materials_directory, self.underscored_material_name)
+        if self.materials_directory_name:
+            if self.material_package_name:
+                return os.path.join(self.materials_directory_name, self.material_package_name)
 
     @property
     def material_package_name(self):
         if self.score is None:  
             return self.underscored_material_name
         else:
-            return '%s_%s' % (self.score.directory, self.underscored_material_name)
+            return '%s_%s' % (self.score.package_name, self.underscored_material_name)
 
     @property
     def underscored_material_name(self):
@@ -208,11 +208,11 @@ class _Maker(_SCFObject):
             return self.material_name.replace(' ', '_')
 
     @property
-    def materials_directory(self):
+    def materials_directory_name(self):
         if self.score is None:
-            return self.shared_materials_directory
+            return self.baca_materials_directory
         else:
-            return self.score.materials_directory
+            return self.score.materials_directory_name
 
     @apply
     def score():
@@ -321,9 +321,9 @@ class _Maker(_SCFObject):
 
     def import_values(self):
         from baca.scf.ScoreWrangler import ScoreWrangler
-        catalog_proxy = ScoreWrangler()
+        score_wrangler = ScoreWrangler()
         menu_header = 'import %s' % self.spaced_class_name
-        material_package_proxy = catalog_proxy.select_interactive_material_package_proxy(
+        material_package_proxy = score_wrangler.select_interactive_material_package_proxy(
             menu_header=menu_header, klasses=(type(self),))
         self.user_input_wrapper = copy.deepcopy(material_package_proxy.user_input_wrapper)
     
@@ -334,8 +334,8 @@ class _Maker(_SCFObject):
 
     def iterate_materials_based_on_maker(self):
         from baca.scf.ScoreWrangler import ScoreWrangler
-        catalog_proxy = ScoreWrangler()
-        for material_proxy in catalog_proxy.iterate_material_package_proxies(class_names=(self.class_name,)):
+        score_wrangler = ScoreWrangler()
+        for material_proxy in score_wrangler.iterate_material_package_proxies(class_names=(self.class_name,)):
             yield material_proxy
 
     def make_lilypond_file_from_user_input_wrapper(self, user_input_wrapper):
@@ -344,6 +344,7 @@ class _Maker(_SCFObject):
         return lilypond_file
 
     def make_material_package_directory(self):
+        print self.material_package_directory, 'foo'
         try:
             os.mkdir(self.material_package_directory)
         except OSError:

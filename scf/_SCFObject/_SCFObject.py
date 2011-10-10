@@ -94,13 +94,18 @@ class _SCFObject(object):
         directory = os.path.join(*directory_parts)
         return directory
 
-    def directory_to_importable_module_name(self, directory):
-        pass
-
     def is_interactive_material_package(self, importable_module_name):
         from baca.scf.PackageProxy import PackageProxy
         package_proxy = PackageProxy(importable_module_name)
         return package_proxy.has_tag('maker')
+
+    def make_menu_title(self, menu_header, menu_body):
+        if menu_header is None:
+            menu_title = menu_body
+        else:
+            menu_title = '%s - %s' % (menu_header, menu_body)
+        menu_title = menu_title + '\n'
+        return  menu_title.capitalize()
 
     def print_not_implemented(self):
         print 'Not yet implemented.\n'

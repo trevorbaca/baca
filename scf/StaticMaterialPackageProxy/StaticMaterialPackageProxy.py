@@ -1,4 +1,5 @@
 from baca.scf._MaterialPackageProxy import _MaterialPackageProxy
+import os
 
 
 class StaticMaterialPackageProxy(_MaterialPackageProxy):
@@ -9,7 +10,7 @@ class StaticMaterialPackageProxy(_MaterialPackageProxy):
         if os.path.exists(self.directory_name):
             print 'Directory %r already exists.' % self.directory_name
             return False
-        os.mkdir(material_directory)
+        os.mkdir(self.directory_name)
         initializer = file(self.initializer, 'w')
         initializer.write('from output import *\n')
         initializer.close()

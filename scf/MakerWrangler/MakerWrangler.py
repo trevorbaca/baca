@@ -55,11 +55,12 @@ class MakerWrangler(DirectoryProxy):
 
     def select_interactive_maker(self, menu_header=None):
         menu_specifier = Menu(menu_header=menu_header)
-        menu_specifier.menu_body = 'select interactive material maker'
-        menu_specifier.items_to_number = self.list_makers()
+        menu_specifier.menu_body = 'select maker'
+        menu_specifier.items_to_number = self.list_maker_spaced_class_names()
         key, value = menu_specifier.display_menu()
         if value is not None:
-            maker_name = value
+            maker_name = value.replace(' ', '_')
+            maker_name = iotools.underscore_delimited_lowercase_to_uppercamelcase(maker_name)           
             maker = self.get_maker(maker_name)
             return True, maker
         else:

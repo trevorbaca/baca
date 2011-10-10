@@ -62,7 +62,7 @@ class DirectoryProxy(_SCFObject):
             command = 'rm -rf %s' % self.directory
             proc = subprocess.Popen(command, shell=True, stdout=subprocess.PIPE)
             first_line = proc.stdout.readline()
-            print 'Removed %s ...\n' % self.directory
+            print 'Removed %s.\n' % self.directory
             return True
         return False
 
@@ -74,7 +74,7 @@ class DirectoryProxy(_SCFObject):
             command = 'svn rm %s' % self.directory
             proc = subprocess.Popen(command, shell=True, stdout=subprocess.PIPE)
             first_line = proc.stdout.readline()
-            print 'Removed %s ...\n' % self.directory
+            print 'Removed %s.\n' % self.directory
             print '(Subversion will cause empty package to remain visible until next commit.)\n'
             return True
         return False

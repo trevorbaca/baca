@@ -19,6 +19,7 @@ class MaterialWrangler(DirectoryProxy):
             self._purview = StudioInterface()
         else:
             self._purview = purview
+        self._maker_wrangler = MakerWrangler()
 
     ### PUBLIC ATTRIBUTES ###
 
@@ -33,6 +34,10 @@ class MaterialWrangler(DirectoryProxy):
         return isinstance(self.purview, StudioInterface)    
 
     @property
+    def maker_wrangler(self):
+        return self._maker_wrangler
+
+    @property
     def purview(self):
         return self._purview
 
@@ -40,40 +45,44 @@ class MaterialWrangler(DirectoryProxy):
 
     def create_shared_material_package(self, menu_header=None, is_interactive=False):
         if is_interactive:
-            makers_proxy = MakerWrangler(score_title=self.score_title)
-            return makers_proxy.manage_makers(menu_header=menu_header)
+            return self.maker_wrangler.manage_makers(menu_header=menu_header)
         else:
             response = raw_input('Make material interactively? ')
             if response == 'y':
-                makers_proxy = MakerWrangler()
-                makers_proxy.manage_makers(menu_header=menu_header)
+                self.maker_wrangler.manage_makers(menu_header=menu_header)
             else:
                 return self._create_materials_package(self.directory)
 
     def create_interactive_material_package(self, importable_module_name):
         self.print_not_implemented()
-        print 'Interactive material package %s created.\n' % package_name
+        print 'Interactive material package %s created.\n' % importable_module_name
 
     def create_interactive_material_package_interactively(self):
         self.print_not_implemented()
         self.create_interactive_material_package(importable_module_name)
+        self.proceed()
 
     def create_static_material_package(self, importable_module_name, has_visualizer=True):
-        static_material_proxy = StaticMaterialProxy(importable_module_name)
-        static_material_proxy.create(has_visualizer=has_visualizer)
-        print 'Static material package %s created.\n' % package_name
+        static_material_package_proxy = StaticMaterialPackageProxy(importable_module_name)
+        static_material_package_proxy.create(has_visualizer=has_visualizer)
+        print 'Static material package %s created.\n' % importable_module_name
 
-    def create_static_material_package_interactively(self):
-        materials_directory = self.get_materials_directory_of_new_material()
+    def create_static_material_package_interactively(self, menu_header=None):
+        self.clear_terminal()
+        menu_body = 'create static material package'
+        print self.make_menu_title(menu_header, menu_body)
+        materials_package_name = self.get_materials_package_name_of_new_material()
         material_package_name = self.get_package_name_of_new_material_interactively()
         has_visualizer = self.get_visualizer_status_of_new_material_package_interactively()
-        importable_module_name = '%s.%s' % (materials_directory, material_package_name)
+        importable_module_name = '%s.%s' % (materials_package_name, material_package_name)
         self.create_static_material_package(importable_module_name, has_visualizer)
+        self.proceed()
 
-    def get_materials_directory_of_new_material(self):
+    def get_materials_package_name_of_new_material(self):
         if self.has_studio_global_purview:
-            return self.purview.get_materials_directory_interactively()
-        else: return self.purview.materials_directory
+            return self.purview.get_materials_package_name_interactively()
+        else:
+            return self.purview.materials_package_name
 
     def get_package_name_of_new_material_interactively(self):
         response = raw_input('Material name: ')
