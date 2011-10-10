@@ -20,14 +20,12 @@ class ScorePackageWrangler(DirectoryProxy):
         raise NotImplementedError
 
     def fix_score_package_structures(self):
-        for score_package_name in self.list_score_package_names():
-            score_package_proxy = ScorePackageProxy(score_package_name)
+        for score_package_proxy in self.iterate_score_package_proxies():
             score_package_proxy.fix_package_structure()
             score_package_proxy.profile_package_structure()
             print ''
 
     def get_score_package_name_from_user(self, menu_header=None):
-        from baca.scf.MenuSpecifier import MenuSpecifier
         menu_specifier = MenuSpecifier()
         menu_specifier.menu_header = menu_header
         menu_specifier.menu_body = 'select score by number.'
@@ -124,13 +122,9 @@ class ScorePackageWrangler(DirectoryProxy):
         return score_package_names
 
     def profile_score_package_structures(self):
-        for score_package_name in self.list_score_package_names():
-            score_package_proxy = ScorePackageProxy(score_package_name)
+        for score_package_proxy in self.iterate_score_package_proxies():
             score_package_proxy.profile_package_structure()
             print ''
-
-    def remove_score_package(self, score_package_name):
-        raise NotImplementedError
 
     def score_package_name_to_hide_in_front_end(self, score_package_name):
         try:
@@ -179,7 +173,7 @@ class ScorePackageWrangler(DirectoryProxy):
         score_package_proxy = ScorePackageProxy(score_package_name)
         return score_package_proxy
     
-    def svn_ci_scores(self):
+    def svn_ci_scores(self, prompt_proceed=True):
         commit_message = raw_input('Commit message> ')
         print ''
         print 'Commit message will be: "%s"\n' % commit_message
@@ -187,9 +181,11 @@ class ScorePackageWrangler(DirectoryProxy):
             return
         for score_package_proxy in self.iterate_score_package_proxies():
             score_package_proxy.svn_cm(commit_message=commit_message, prompt_proceed=False)
-        self.proceed()
+        if prompt_proceed:
+            self.proceed()
 
-    def svn_st_scores(self):
+    def svn_st_scores(self, prompt_proced=True):
         for score_package_proxy in self.iterate_score_package_proxies():
             score_package_proxy.svn_st(prompt_proceed=False)
-        self.proceed()
+        if prompt_proceed:
+            self.proceed()

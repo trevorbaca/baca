@@ -22,7 +22,7 @@ class StudioInterface(DirectoryProxy):
     ### PUBLIC ATTRIBUTES ###
 
     @property
-    def catalog(self):
+    def score_package_wrangler(self):
         return ScorePackageWrangler()
 
     ### PUBLIC METHODS ###
@@ -50,22 +50,24 @@ class StudioInterface(DirectoryProxy):
             elif key == 'add':
                 self.svn_add()
             elif key == 'add scores':
-                self.catalog.svn_add_scores()
+                self.score_package_wrangler.svn_add_scores()
             elif key == 'ci':
                 self.svn_ci()
             elif key == 'ci scores':
-                self.catalog.svn_ci_scores()
+                self.score_package_wrangler.svn_ci_scores()
             elif key == 'st':
                 self.svn_st()
             elif key == 'st scores':
-                self.catalog.svn_st_scores()
+                self.score_package_wrangler.svn_st_scores()
 
     def work_in_studio(self, menu_header=None):
         while True:
             menu_specifier = MenuSpecifier(menu_header=menu_header)
             menu_specifier.menu_body = 'welcome to the studio.'
             menu_section = MenuSection()
-            menu_section.menu_section_entries = self.catalog.list_numbered_score_titles_with_years()
+            score_titles = self.score_package_wrangler.list_numbered_score_titles_with_years()
+            print score_titles
+            menu_section.menu_section_entries = score_titles
             menu_section.sentence_length_items.append(('min', 'work with interactive materials'))
             menu_section.sentence_length_items.append(('mst', 'work with static materials'))
             menu_section.sentence_length_items.append(('svn', 'work with repository'))
@@ -83,6 +85,7 @@ class StudioInterface(DirectoryProxy):
                 self.manage_svn(menu_header='studio')
             else:
                 score_title = value
-                score_package_name = self.catalog.score_title_to_score_package_name(score_title)
+                print score_title
+                score_package_name = self.score_package_wrangler.score_title_to_score_package_name(score_title)
                 score_package_proxy = ScorePackageProxy(score_package_name)
                 score_package_proxy.manage_score()
