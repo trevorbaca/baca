@@ -45,6 +45,36 @@ class PackageProxy(DirectoryProxy):
     def parent_module_name(self):
         return '.'.join(self.importable_module_name.split('.')[:-1])
         
+    ### PRIVATE METHODS ###
+
+    def _read_initializer_metadata(self, name):
+        initializer = file(self.initializer, 'r')
+        for line in initializer.readlines():
+            if line.startswith(name):
+                initializer.close()
+                executable_line = line.replace(name, 'result')
+                exec(executable_line)
+                return result
+
+    def _write_initializer_metadata(self, name, value):
+        new_lines = []
+        initializer = file(self.initializer, 'r')
+        found_existing_line = False
+        for line in initializer.readlines():
+            if line.startswith(name):
+                found_existing_line = True
+                new_line = '%s = %r\n' % (name, value)
+                new_lines.append(new_line)
+            else:
+                new_lines.append(line)
+        if not found_existing_line:
+            new_line = '%s = %r\n' % (name, value)
+            new_lines.append(new_line)
+        initializer.close()
+        initializer = file(self.initializer, 'w')
+        initializer.write(''.join(new_lines))
+        initializer.close()
+
     ### PUBLIC METHODS ###
 
     def add_line_to_initializer(self, line):

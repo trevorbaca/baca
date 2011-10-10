@@ -11,53 +11,71 @@ class ScorePackageProxy(PackageProxy, _MaterialPackageMaker):
     def __init__(self, importable_module_name):
         PackageProxy.__init__(self, importable_module_name)
 
-    ### PRIVATE METHODS ###
-
-    def _read_initializer_metadata(self, name):
-        initializer = file(self.initializer, 'r')
-        for line in initializer.readlines():
-            if line.startswith(name):
-                initializer.close()
-                executable_line = line.replace(name, 'result')
-                exec(executable_line)
-                return result
-
-    def _write_initializer_metadata(self, name, value):
-        new_lines = []
-        initializer = file(self.initializer, 'r')
-        found_existing_line = False
-        for line in initializer.readlines():
-            if line.startswith(name):
-                found_existing_line = True
-                new_line = '%s = %r\n' % (name, value)
-                new_lines.append(new_line)
-            else:
-                new_lines.append(line)
-        if not found_existing_line:
-            new_line = '%s = %r\n' % (name, value)
-            new_lines.append(new_line)
-        initializer.close()
-        initializer = file(self.initializer, 'w')
-        initializer.write(''.join(new_lines))
-        initializer.close()
-
     ### PUBLIC ATTRIBUTES ###
 
     @property
-    def chunks_directory(self):
-        return os.path.join(self.directory, 'mus', 'chunks')
+    def chunks_directory_name(self):
+        return os.path.join(self.directory_name, 'mus', 'chunks')
+
+    @property
+    def chunks_initializer(self):
+        return os.path.join(self.chunks_directory_name, '__init__.py')
 
     @property
     def chunks_package_name(self):
         return '.'.join([self.importable_module_name, 'mus', 'chunks'])
 
     @property
-    def materials_directory(self):
-        return os.path.join(self.directory, 'mus', 'materials')
+    def dist_directory_name(self):
+        return os.path.join(self.directory_name, 'dist')
+
+    @property
+    def dist_pdf_directory_name(self):
+        return os.path.join(self.directory_name, 'dist', 'pdf')
+
+    @property
+    def exg_directory_name(self):
+        return os.path.join(self.directory_name, 'exg')
+
+    @property
+    def etc_directory_name(self):
+        return os.path.join(self.directory_name, 'etc')
+
+    @property
+    def has_correct_directory_structure(self):
+        return all([os.path.exists(name) for name in self.score_subdirectory_names])
+
+    @property
+    def has_correct_initializers(self):
+        return all([os.path.exists(initializer) for initializer in self.score_initializers])
+
+    @property
+    def has_correct_package_structure(self):
+        return self.has_correct_directory_structure and self.has_correct_initializers
+
+    @property
+    def materials_directory_name(self):
+        return os.path.join(self.directory_name, 'mus', 'materials')
+
+    @property
+    def materials_initializer(self):
+        return os.path.join(self.materials_directory_name, '__init__.py')
 
     @property
     def materials_package_name(self):
         return '.'.join([self.importable_module_name, 'mus', 'materials'])
+
+    @property
+    def mus_directory_name(self):
+        return os.path.join(self.directory_name, 'mus')
+
+    @property
+    def mus_initializer(self):
+        return os.path.join(self.mus_directory_name, '__init__.py')
+
+    @property
+    def mus_package_name(self):
+        return '.'.join([self.importable_module_name, 'mus'])
 
     @apply
     def score_composer():
@@ -74,6 +92,23 @@ class ScorePackageProxy(PackageProxy, _MaterialPackageMaker):
         def fset(self, score_title):
             return self._write_initializer_metadata('score_forces', score_title)
         return property(**locals())
+
+    @property
+    def score_initializers(self):
+        return (self.initializer,
+            self.mus_initializer,
+            self.chunks_initializer,
+            self.materials_initializer,)
+
+    @property
+    def score_subdirectory_names(self):
+        return (self.dist_directory_name,
+            self.dist_pdf_directory_name,
+            self.etc_directory_name,
+            self.exg_directory_name,
+            self.mus_directory_name,
+            self.materials_directory_name,
+            self.chunks_directory_name,)
 
     @apply
     def score_title():
@@ -94,91 +129,40 @@ class ScorePackageProxy(PackageProxy, _MaterialPackageMaker):
     ### PUBLIC METHODS ###
 
     def create_materials_package(self):
-        return self._create_materials_package(self.materials_directory,
+        return self._create_materials_package(self.materials_directory_name,
             package_prefix = self.package_name)
 
-    def create_score_package_directory_structure(self):
+    def create_package_structure(self):
         self.fix_score_package_directory_structure(is_interactive=False)
 
-    def fix_score_package_directory_structure(self, is_interactive=True):
-        if not os.path.exists(self.directory):
-            raise OSError('directory %r does not exist.' % self.directory)
-
-        if self.package_name == 'poeme':
+    def fix_package_structure(self, is_interactive=True):
+        if self.package_name == 'recursif':
             return
-
-        if not os.path.exists(self.initializer):
-            prompt = 'Create %s/__init__.py? ' % self.package_name
-            if not is_interactive or self.query(prompt):
-                initializer = file(target, 'w')
-                initializer.write('')
-                initializer.close()
-
-        target = os.path.join(self.directory, 'dist')
-        if not os.path.exists(target):
-            prompt = 'Create %s/dist/? ' % self.package_name
-            if not is_interactive or self.query(prompt):
-                os.mkdir(target)
-
-        target = os.path.join(self.directory, 'dist', 'pdf')
-        if not os.path.exists(target):
-            prompt = 'Create %s/dist/pdf/? ' % self.package_name
-            if not is_interactive or self.query(prompt):
-                os.mkdir(target)
-
-        target = os.path.join(self.directory, 'etc')
-        if not os.path.exists(target):
-            prompt = 'Create %s/etc/? ' % self.package_name
-            if not is_interactive or self.query(prompt):
-                os.mkdir(target)
-
-        target = os.path.join(self.directory, 'exg')
-        if not os.path.exists(target):
-            prompt = 'Create %s/exg/? ' % self.package_name
-            if not is_interactive or self.query(prompt):
-                os.mkdir(target)
-
-        target = os.path.join(self.directory, 'mus')
-        if not os.path.exists(target):
-            prompt = 'Create %s/mus/? ' % self.package_name
-            if not is_interactive or self.query(prompt):
-                os.mkdir(target)
-
-        target = os.path.join(self.directory, 'mus', '__init__.py')
-        if not os.path.exists(target):
-            prompt = 'Create %s/mus/__init__.py? ' % self.package_name
-            if not is_interactive or self.query(prompt):
-                initializer = file(target, 'w')
-                initializer.write('import materials\n')
-                initializer.close()
-
-        target = os.path.join(self.directory, 'mus', 'chunks')
-        if not os.path.exists(target):
-            prompt = 'Create %s/mus/chunks? ' % self.package_name
-            if not is_interactive or self.query(prompt):
-                os.mkdir(target)
-
-        target = os.path.join(self.directory, 'mus', 'chunks', '__init__.py')
-        if not os.path.exists(target):
-            prompt = 'Create %s/mus/chunks/__init__.py? ' % self.package_name
-            if not is_interactive or self.query(prompt):
-                initializer = file(target, 'w')
-                initializer.write('')
-                initializer.close()
-
-        target = os.path.join(self.directory, 'mus', 'materials')
-        if not os.path.exists(target):
-            prompt = 'Create %s/mus/materials? ' % self.package_name
-            if not is_interactive or self.query(prompt):
-                os.mkdir(target)
-
-        target = os.path.join(self.directory, 'mus', 'materials', '__init__.py')
-        if not os.path.exists(target):
-            prompt = 'Create %s/mus/materials/__init__.py? ' % self.package_name
-            if not is_interactive or self.query(prompt):
-                initializer = file(target, 'w')
-                initializer.write('')
-                initializer.close()
+        for directory_name in self.score_subdirectory_names:
+            if not os.path.exists(directory_name):
+                prompt = 'Create %s? ' % directory_name
+                if not is_interactive or self.query(prompt):
+                    os.mkdir(directory_name)
+        for initializer in self.score_initializers:
+            if not os.path.exists(initializer):
+                prompt = 'Create %s? ' % initializer
+                if not is_interactive or self.query(prompt):
+                    initializer = file(initializer, 'w')
+                    initializer.write('')
+                    initializer.close()
+        lines = []
+        initializer = file(self.mus_initializer, 'r')
+        found_materials_import = False
+        for line in initializer.readlines():
+            lines.append(line)
+            if line.startswith('import materials'):
+                found_materials_import = True
+        initializer.close()
+        if not found_materials_import:
+            lines.insert(0, 'import materials\n')
+            initializer = file(self.mus_initializer, 'w')
+            initializer.write(''.join(lines))
+            initializer.close()
 
     def iterate_interactive_materials(self):
         for material_package_proxy in self.iterate_material_package_proxies():
@@ -191,13 +175,13 @@ class ScorePackageProxy(PackageProxy, _MaterialPackageMaker):
             yield material_package_proxy
 
     def list_chunks(self):
-        chunks = os.listdir(self.chunks_directory)
+        chunks = os.listdir(self.chunks_directory_name)
         chunks = [x for x in chunks if x[0].isalpha()]
         return chunks
 
     def list_materials(self):
         try:
-            materials = os.listdir(self.materials_directory)
+            materials = os.listdir(self.materials_directory_name)
         except OSError:
             materials = []
         materials = [x for x in materials if x[0].isalpha()]
@@ -301,14 +285,12 @@ class ScorePackageProxy(PackageProxy, _MaterialPackageMaker):
     def make_new_material_interactively(self, menu_header=None):
         while True:
             makers_proxy = MakerWrangler()
-            #key, value = makers_proxy.select_interactive_maker(score_title=self.score_title)
             key, value = makers_proxy.select_interactive_maker(menu_header=menu_header)
             if value is None:
                 break
             else:
                 maker = value
-            #maker.score_title = self.score_title
-            maker.materials_directory = self.materials_directory
+            maker.materials_directory = self.materials_directory_name
             result = maker.edit_interactively(menu_header=menu_header)
             if result:
                 break
@@ -319,33 +301,15 @@ class ScorePackageProxy(PackageProxy, _MaterialPackageMaker):
         material_name = self.list_materials()[material_index]
         return material_name
 
-    def profile_score_package_directory_structure(self):
-        if not os.path.exists(self.directory):
-            raise OSError('directory %r does not exist.' % self.directory)
-        if self.package_name == 'poeme':
+    def profile_package_structure(self):
+        if not os.path.exists(self.directory_name):
+            raise OSError('directory %r does not exist.' % self.directory_name)
+        if self.package_name == 'recursif':
             return
-        print '%s/__init__.py                  ' % self.package_name,
-        print str(os.path.exists(os.path.join(self.directory, '__init__.py')))
-        print '%s/dist/                          ' % self.package_name,
-        print str(os.path.exists(os.path.join(self.directory, 'dist')))
-        print '%s/dist/pdf                     ' % self.package_name,
-        print str(os.path.exists(os.path.join(self.directory, 'dist', 'pdf')))
-        print '%s/etc/                           ' % self.package_name,
-        print str(os.path.exists(os.path.join(self.directory, 'etc')))
-        print '%s/exg/                           ' % self.package_name,
-        print str(os.path.exists(os.path.join(self.directory, 'exg')))
-        print '%s/mus/                           ' % self.package_name,
-        print str(os.path.exists(os.path.join(self.directory, 'mus')))
-        print '%s/mus/__init__.py            ' % self.package_name,
-        print str(os.path.exists(os.path.join(self.directory, 'mus', '__init__.py')))
-        print '%s/mus/chunks/                  ' % self.package_name,
-        print str(os.path.exists(os.path.join(self.directory, 'mus', 'chunks')))
-        print '%s/mus/chunks/__init__.py   ' % self.package_name,
-        print str(os.path.exists(os.path.join(self.directory, 'mus', 'chunks', '__init__.py')))
-        print '%s/mus/materials/             ' % self.package_name,
-        print str(os.path.exists(os.path.join(self.directory, 'mus', 'materials')))
-        print '%s/mus/materials/__init__.py' % self.package_name,
-        print str(os.path.exists(os.path.join(self.directory, 'mus', 'materials', '__init__.py')))
+        for subdirectory_name in self.score_subdirectory_names:
+            print '%s %s' % (subdirectory_name.ljust(80), os.path.exists(subdirectory_name))
+        for initializer in self.score_initializers:
+            print '%s %s' % (initializer.ljust(80), os.path.exists(initializer))
 
     def run_chunk_selection_interface(self):
         self.print_not_implemented()

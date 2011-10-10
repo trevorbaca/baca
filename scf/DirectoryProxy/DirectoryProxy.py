@@ -6,9 +6,9 @@ import sys
 
 class DirectoryProxy(_SCFObject):
 
-    def __init__(self, directory):
+    def __init__(self, directory_name):
         _SCFObject.__init__(self)
-        self.directory = directory
+        self.directory = directory_name
 
     ### OVERLOADS ###
 
@@ -29,6 +29,10 @@ class DirectoryProxy(_SCFObject):
             assert isinstance(directory, str)
             self._directory = directory
         return property(**locals())
+
+    @property
+    def directory_name(self):
+        return self._directory
    
     @property
     def is_in_repository(self):

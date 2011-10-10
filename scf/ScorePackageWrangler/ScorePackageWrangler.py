@@ -19,11 +19,12 @@ class ScorePackageWrangler(DirectoryProxy):
     def create_score_package(self, score_package_name):
         raise NotImplementedError
 
-    def fix_score_package_directory_structures(self):
+    def fix_score_package_structures(self):
         for score_package_name in self.list_score_package_names():
             score_package_proxy = ScorePackageProxy(score_package_name)
-            score_package_proxy.fix_score_package_directory_structure()
-            score_package_proxy.profile_score_package_directory_structure()
+            score_package_proxy.fix_package_structure()
+            score_package_proxy.profile_package_structure()
+            print ''
 
     def get_score_package_name_from_user(self, menu_header=None):
         from baca.scf.MenuSpecifier import MenuSpecifier
@@ -122,10 +123,10 @@ class ScorePackageWrangler(DirectoryProxy):
         score_package_names.remove('poeme')
         return score_package_names
 
-    def profile_score_package_directory_structures(self):
+    def profile_score_package_structures(self):
         for score_package_name in self.list_score_package_names():
             score_package_proxy = ScorePackageProxy(score_package_name)
-            score_package_proxy.profile_score_package_directory_structure()
+            score_package_proxy.profile_package_structure()
             print ''
 
     def remove_score_package(self, score_package_name):
