@@ -2,7 +2,7 @@ from abjad.tools import iotools
 from abjad.tools import lilypondfiletools
 from abjad.tools import markuptools
 from baca.scf._SCFObject import _SCFObject
-from baca.scf.MaterialPackageWrangler import MaterialPackageWrangler
+from baca.scf.MaterialWrangler import MaterialWrangler
 from baca.scf.MenuSpecifier import MenuSpecifier
 from baca.scf.ScorePackageWrangler import ScorePackageWrangler
 from baca.scf.UserInputWrapper import UserInputWrapper

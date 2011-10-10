@@ -1,6 +1,6 @@
 from baca.scf.InteractiveMaterialPackageProxy import InteractiveMaterialPackageProxy
 from baca.scf.MakerWrangler import MakerWrangler
-from baca.scf.MaterialPackageWrangler import MaterialPackageWrangler
+from baca.scf.MaterialWrangler import MaterialWrangler
 from baca.scf.MenuSpecifier import MenuSpecifier
 from baca.scf.MenuSection import MenuSection
 from baca.scf.PackageProxy import PackageProxy
@@ -12,7 +12,7 @@ class ScorePackageProxy(PackageProxy):
 
     def __init__(self, importable_module_name):
         PackageProxy.__init__(self, importable_module_name)
-        self._material_package_wrangler = MaterialPackageWrangler(purview=self)
+        self._material_package_wrangler = MaterialWrangler(purview=self)
 
     ### PUBLIC ATTRIBUTES ###
 
@@ -242,8 +242,8 @@ class ScorePackageProxy(PackageProxy):
             menu_section = MenuSection()
             menu_section.menu_section_title = 'Materials'
             menu_section.menu_section_entries = self.list_numbered_materials()
-            menu_section.sentence_length_items.append(('mh', 'make new material by hand'))
-            menu_section.sentence_length_items.append(('mi', 'make new material interactively'))
+            menu_section.sentence_length_items.append(('ms', 'make new static material'))
+            menu_section.sentence_length_items.append(('mi', 'make new interactive material'))
             menu_specifier.menu_sections.append(menu_section)
             menu_section = MenuSection()
             menu_section.sentence_length_items.append(('st', 'svn status'))
@@ -260,10 +260,10 @@ class ScorePackageProxy(PackageProxy):
                 self.svn_cm()
             elif key == 'h':
                 key, value = self.manage_chunks()
-            elif key == 'mh':
-                key, value = self.make_new_material_by_hand()
+            elif key == 'ms':
+                key, value = self.make_new_static_material()
             elif key == 'mi':
-                key, value = self.make_new_material_interactively()
+                key, value = self.make_new_interactive_material()
             elif key == 'st':
                 self.svn_st()
             else:
@@ -283,10 +283,10 @@ class ScorePackageProxy(PackageProxy):
     def make_new_chunk_interactively(self):
         return self.print_not_implemented()
 
-    def make_new_material_by_hand(self):
-        return self.create_materials_package()
+    def make_new_static_material(self):
+        return self.material_package_wrangler.create_static_material_package_interactively()
 
-    def make_new_material_interactively(self, menu_header=None):
+    def make_new_interactive_material(self, menu_header=None):
         while True:
             makers_proxy = MakerWrangler()
             key, value = makers_proxy.select_interactive_maker(menu_header=menu_header)

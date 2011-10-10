@@ -7,7 +7,7 @@ from baca.scf.StaticMaterialPackageProxy import StaticMaterialPackageProxy
 import os
 
 
-class MaterialPackageWrangler(DirectoryProxy):
+class MaterialWrangler(DirectoryProxy):
 
     #def __init__(self, score_title=None):
     def __init__(self, purview=None):
