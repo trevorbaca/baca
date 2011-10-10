@@ -1,7 +1,7 @@
 from abjad.tools import iotools
 
 
-class MenuObject(object):
+class _MenuObject(object):
 
     def __init__(self, menu_header=None, menu_body=None):
         self.menu_header = menu_header

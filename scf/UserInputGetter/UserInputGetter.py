@@ -1,10 +1,10 @@
-from baca.scf.MenuObject import MenuObject
+from baca.scf._MenuObject import _MenuObject
 
 
-class UserInputGetter(MenuObject):
+class UserInputGetter(_MenuObject):
 
     def __init__(self, prompts=None, menu_header=None, menu_body=None):
-        MenuObject.__init__(self, menu_header=menu_header, menu_body=menu_body)
+        _MenuObject.__init__(self, menu_header=menu_header, menu_body=menu_body)
         self.prompts = prompts
 
     ### PUBLIC ATTRIBUTES ###

@@ -2,7 +2,6 @@ from DirectoryProxy import DirectoryProxy
 from InteractiveMaterialPackageProxy import InteractiveMaterialPackageProxy
 from MakerWrangler import MakerWrangler
 from MaterialPackageWrangler import MaterialPackageWrangler
-from MenuObject import MenuObject
 from MenuSection import MenuSection
 from MenuSpecifier import MenuSpecifier
 from PackageProxy import PackageProxy
