@@ -9,12 +9,12 @@ class _MaterialPackageProxy(PackageProxy):
 
     def __init__(self, importable_module_name):
         PackageProxy.__init__(self, importable_module_name)
-        self.input_file = os.path.join(self.directory, 'input.py')
-        self.output_file = os.path.join(self.directory, 'output.py')
-        self.visualizer = os.path.join(self.directory, 'visualization.py')
-        self.pdf = os.path.join(self.directory, 'visualization.pdf')
-        self.ly = os.path.join(self.directory, 'visualization.ly')
-        self.stylesheet = os.path.join(self.directory, 'stylesheet.ly')
+        self.input_file_name = os.path.join(self.directory, 'input.py')
+        self.output_file_name = os.path.join(self.directory, 'output.py')
+        self.visualizer_file_name = os.path.join(self.directory, 'visualization.py')
+        self.pdf_file_name = os.path.join(self.directory, 'visualization.pdf')
+        self.ly_file_name = os.path.join(self.directory, 'visualization.ly')
+        self.stylesheet_file_name = os.path.join(self.directory, 'stylesheet.ly')
         self.input_module_name = '%s.input' % self.importable_module_name
         self.output_module_name = '%s.output' % self.importable_module_name
         self.visualization_module_name = '%s.visualization' % self.importable_module_name
@@ -27,11 +27,11 @@ class _MaterialPackageProxy(PackageProxy):
 
     @property
     def has_input_file(self):
-        return os.path.exists(self.input_file)
+        return os.path.exists(self.input_file_name)
 
     @property
     def has_ly(self):
-        return os.path.exists(self.ly)
+        return os.path.exists(self.ly_file_name)
 
     @property
     def has_output_data(self):
@@ -39,11 +39,11 @@ class _MaterialPackageProxy(PackageProxy):
 
     @property
     def has_output_file(self):
-        return os.path.exists(self.output_file)
+        return os.path.exists(self.output_file_name)
 
     @property
     def has_pdf(self):
-        return os.path.exists(self.pdf)
+        return os.path.exists(self.pdf_file_name)
 
     @property
     def has_score_definition(self):
@@ -51,11 +51,11 @@ class _MaterialPackageProxy(PackageProxy):
 
     @property
     def has_stylesheet(self):
-        return os.path.exists(self.stylesheet)
+        return os.path.exists(self.stylesheet_file_name)
     
     @property
     def has_visualizer(self):
-        return os.path.exists(self.visualizer)
+        return os.path.exists(self.visualizer_file_name)
 
     @property
     def help_item_width(self):
@@ -118,8 +118,8 @@ class _MaterialPackageProxy(PackageProxy):
     def create_ly_and_pdf_from_visualizer(self, is_forced=False):
         lilypond_file = self.import_score_definition_from_visualizer()
         if is_forced or not self.lilypond_file_format_is_equal_to_visualizer_ly(lilypond_file):
-            iotools.write_expr_to_ly(lilypond_file, self.ly)
-            iotools.write_expr_to_pdf(lilypond_file, self.pdf)
+            iotools.write_expr_to_ly(lilypond_file, self.ly_file_name)
+            iotools.write_expr_to_pdf(lilypond_file, self.pdf_file_name)
         else:
             print 'LilyPond file is the same. (LilyPond file and PDF preserved.)'
         print ''
@@ -127,7 +127,7 @@ class _MaterialPackageProxy(PackageProxy):
     def create_ly_from_visualizer(self, is_forced=False):
         lilypond_file = self.import_score_definition_from_visualizer()
         if is_forced or not self.lilypond_file_format_is_equal_to_visualizer_ly(lilypond_file):
-            iotools.write_expr_to_ly(lilypond_file, self.ly)
+            iotools.write_expr_to_ly(lilypond_file, self.ly_file_name)
         else:
             print 'LilyPond file is the same. (LilyPond file preserved.)'
         print ''
@@ -135,13 +135,13 @@ class _MaterialPackageProxy(PackageProxy):
     def create_pdf_from_visualizer(self, is_forced=False):
         lilypond_file = self.import_score_definition_from_visualizer()
         if is_forced or not self.lilypond_file_format_is_equal_to_visualizer_ly(lilypond_file):
-            iotools.write_expr_to_pdf(lilypond_file, self.pdf)
+            iotools.write_expr_to_pdf(lilypond_file, self.pdf_file_name)
         else:
             print 'LilyPond file is the same. (PDF preserved.)'
         print ''
 
     def create_visualizer(self):
-        file_pointer = file(self.visualizer, 'w')
+        file_pointer = file(self.visualizer_file_name, 'w')
         file_pointer.write('from abjad import *\n')
         file_pointer.write('from abjad.tools import layouttools\n')
         line = 'from output import %s\n' % self.material_name
@@ -160,19 +160,19 @@ class _MaterialPackageProxy(PackageProxy):
         os.system('vi %s' % self.initializer)
 
     def edit_input_file(self):
-        os.system('vi + %s' % self.input_file)
+        os.system('vi + %s' % self.input_file_name)
 
     def edit_ly(self):
-        os.system('vi %s' % self.ly)
+        os.system('vi %s' % self.ly_file_name)
 
     def edit_output_file(self):
-        os.system('vi + %s' % self.output_file)
+        os.system('vi + %s' % self.output_file_name)
 
     def edit_stylesheet(self):
-        os.system('vi %s' % self.stylesheet)
+        os.system('vi %s' % self.stylesheet_file_name)
 
     def edit_visualizer(self):
-        os.system('vi + %s' % self.visualizer)
+        os.system('vi + %s' % self.visualizer_file_name)
 
     def import_attribute_from_input_file(self, attribute_name):
         try:
@@ -226,7 +226,7 @@ class _MaterialPackageProxy(PackageProxy):
         iotools.write_expr_to_ly(lilypond_file, temp_ly_file, print_status=False)
         trimmed_temp_ly_file_lines = self.trim_ly_lines(temp_ly_file)
         os.remove(temp_ly_file)
-        trimmed_visualizer_ly_lines = self.trim_ly_lines(self.ly)
+        trimmed_visualizer_ly_lines = self.trim_ly_lines(self.ly_file_name)
         return trimmed_temp_ly_file_lines == trimmed_visualizer_ly_lines
 
     def manage_input(self, command_string):
@@ -416,11 +416,11 @@ class _MaterialPackageProxy(PackageProxy):
                 self.edit_input_file()
 
     def open_pdf(self):
-        command = 'open %s' % self.pdf
+        command = 'open %s' % self.pdf_file_name
         os.system(command)
 
     def overwrite_output_file(self):
-        output_file = file(self.output_file, 'w')
+        output_file = file(self.output_file_name, 'w')
         output_line = '%s = None\n' % self.material_name
         output_file.write(output_line)
         output_file.close()
@@ -505,11 +505,11 @@ class _MaterialPackageProxy(PackageProxy):
         return module_names
 
     def run_abjad_on_input_file(self):
-        os.system('abjad %s' % self.input_file)
+        os.system('abjad %s' % self.input_file_name)
         print ''
 
     def run_abjad_on_visualizer(self):
-        os.system('abjad %s' % self.visualizer)
+        os.system('abjad %s' % self.visualizer_file_name)
         print ''
 
     def summarize_material(self):
@@ -601,7 +601,7 @@ class _MaterialPackageProxy(PackageProxy):
     def _write_input_data_to_output_file(self):
         self.remove_material_from_materials_initializer()
         self.overwrite_output_file()
-        output_file = file(self.output_file, 'w')
+        output_file = file(self.output_file_name, 'w')
         output_preamble_lines = self.get_output_preamble_lines()
         if output_preamble_lines:
             output_file.write('\n'.join(output_preamble_lines))

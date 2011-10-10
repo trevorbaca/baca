@@ -27,6 +27,24 @@ class StudioInterface(DirectoryProxy):
 
     ### PUBLIC METHODS ###
 
+    def get_materials_directory_interactively(self, menu_header=None):
+        while True:
+            menu_specifier = MenuSpecifier(menu_header=menu_header)
+            menu_specifier.menu_body = 'select materials directory'
+            menu_section = MenuSection()
+            score_titles = self.score_package_wrangler.list_numbered_score_titles_with_years()
+            menu_section.menu_section_entries = score_titles
+            menu_section.sentence_length_items.append(('s', 'baca materials directory'))
+            menu_specifier.menu_sections.append(menu_section)
+            key, value = menu_specifier.display_menu()
+            if key == 's':
+                return self.baca_materials_directory
+            else:
+                score_title = value
+                score_package_name = self.score_package_wrangler.score_title_to_score_package_name(score_title)
+                score_package_proxy = ScorePackageProxy(score_package_name)
+                return score_package_proxy.materials_directory
+
     def manage_svn(self, menu_header=None):
         while True:
             menu_specifier = MenuSpecifier()
@@ -66,7 +84,6 @@ class StudioInterface(DirectoryProxy):
             menu_specifier.menu_body = 'welcome to the studio.'
             menu_section = MenuSection()
             score_titles = self.score_package_wrangler.list_numbered_score_titles_with_years()
-            print score_titles
             menu_section.menu_section_entries = score_titles
             menu_section.sentence_length_items.append(('min', 'work with interactive materials'))
             menu_section.sentence_length_items.append(('mst', 'work with static materials'))
@@ -85,7 +102,6 @@ class StudioInterface(DirectoryProxy):
                 self.manage_svn(menu_header='studio')
             else:
                 score_title = value
-                print score_title
                 score_package_name = self.score_package_wrangler.score_title_to_score_package_name(score_title)
                 score_package_proxy = ScorePackageProxy(score_package_name)
                 score_package_proxy.manage_score()

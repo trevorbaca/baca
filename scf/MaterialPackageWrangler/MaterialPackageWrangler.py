@@ -10,10 +10,32 @@ import os
 
 class MaterialPackageWrangler(DirectoryProxy, _MaterialPackageMaker):
 
-    def __init__(self, score_title=None):
+    #def __init__(self, score_title=None):
+    def __init__(self, purview=None):
+        from baca.scf.StudioInterface import StudioInterface
         directory = os.path.join(os.environ.get('BACA'), 'materials')
         DirectoryProxy.__init__(self, directory)
-        self.score_title = score_title
+        #self.score_title = score_title
+        if purview is None:
+            self._purview = StudioInterface()
+        else:
+            self._purview = purview
+
+    ### PUBLIC ATTRIBUTES ###
+
+    @property
+    def has_score_local_purview(self):
+        from baca.scf.ScorePackageProxy import ScorePackageProxy
+        return isinstance(self.purview, ScorePackageProxy)
+
+    @property
+    def has_studio_global_purview(self):
+        from baca.scf.StudioInterface import StudioInterface
+        return isinstance(self.purview, StudioInterface)    
+
+    @property
+    def purview(self):
+        return self._purview
 
     ### PUBLIC METHODS ###
 
@@ -28,6 +50,51 @@ class MaterialPackageWrangler(DirectoryProxy, _MaterialPackageMaker):
                 makers_proxy.manage_makers(menu_header=menu_header)
             else:
                 return self._create_materials_package(self.directory)
+
+    def create_interactive_material_package(self, importable_module_name):
+        self.print_not_implemented()
+        print 'Interactive material package %s created.\n' % package_name
+
+    def create_interactive_material_package_interactively(self):
+        self.print_not_implemented()
+        self.create_interactive_material_package(importable_module_name)
+
+    def create_static_material_package(self, importable_module_name, has_visualizer=True):
+        static_material_proxy = StaticMaterialProxy(importable_module_name)
+        static_material_proxy.create(has_visualizer=has_visualizer)
+        print 'Static material package %s created.\n' % package_name
+
+    def create_static_material_package_interactively(self):
+        materials_directory = self.get_materials_directory_of_new_material()
+        material_package_name = self.get_package_name_of_new_material_interactively()
+        has_visualizer = self.get_visualizer_status_of_new_material_package_interactively()
+        importable_module_name = '%s.%s' % (materials_directory, material_package_name)
+        self.create_static_material_package(importable_module_name, has_visualizer)
+
+    def get_materials_directory_of_new_material(self):
+        if self.has_studio_global_purview:
+            return self.purview.get_materials_directory_interactively()
+        else: return self.purview.materials_directory
+
+    def get_package_name_of_new_material_interactively(self):
+        response = raw_input('Material name: ')
+        print ''
+        response = response.lower()
+        response = response.replace(' ', '_')
+        if self.has_score_local_purview:
+            material_package_name = '%s_%s' % (self.purview.package_name, response)
+        else:
+            material_package_name = response
+        print 'Package name will be %s.\n' % material_package_name
+        return material_package_name
+
+    def get_visualizer_status_of_new_material_package_interactively(self):
+        response = raw_input('Include visualizer? ')
+        print ''
+        if response == 'y':
+            return True
+        else:
+            return False
 
     def iterate_shared_material_proxies(self):
         for shared_material_directory in self.list_shared_material_directories():

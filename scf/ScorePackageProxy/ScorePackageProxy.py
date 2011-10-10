@@ -1,15 +1,19 @@
 from baca.scf._MaterialPackageMaker import _MaterialPackageMaker
 from baca.scf.InteractiveMaterialPackageProxy import InteractiveMaterialPackageProxy
 from baca.scf.MakerWrangler import MakerWrangler
+from baca.scf.MaterialPackageWrangler import MaterialPackageWrangler
+from baca.scf.MenuSpecifier import MenuSpecifier
+from baca.scf.MenuSection import MenuSection
 from baca.scf.PackageProxy import PackageProxy
 from baca.scf.StaticMaterialPackageProxy import StaticMaterialPackageProxy
 import os
 
 
-class ScorePackageProxy(PackageProxy, _MaterialPackageMaker):
+class ScorePackageProxy(PackageProxy):
 
     def __init__(self, importable_module_name):
         PackageProxy.__init__(self, importable_module_name)
+        self._material_package_wrangler = MaterialPackageWrangler(purview=self)
 
     ### PUBLIC ATTRIBUTES ###
 
@@ -52,6 +56,10 @@ class ScorePackageProxy(PackageProxy, _MaterialPackageMaker):
     @property
     def has_correct_package_structure(self):
         return self.has_correct_directory_structure and self.has_correct_initializers
+
+    @property
+    def material_package_wrangler(self):
+        return self._material_package_wrangler
 
     @property
     def materials_directory_name(self):
@@ -128,9 +136,8 @@ class ScorePackageProxy(PackageProxy, _MaterialPackageMaker):
 
     ### PUBLIC METHODS ###
 
-    def create_materials_package(self):
-        return self._create_materials_package(self.materials_directory_name,
-            package_prefix = self.package_name)
+    def create_material_package_interactively(self):
+        return self.material_package_wrangler.create_material_package_interactively()
 
     def create_package_structure(self):
         self.fix_score_package_directory_structure(is_interactive=False)
@@ -224,8 +231,6 @@ class ScorePackageProxy(PackageProxy, _MaterialPackageMaker):
             material_number = None
 
     def manage_score(self, menu_header=None, command_string=None):
-        from baca.scf.MenuSection import MenuSection
-        from baca.scf.MenuSpecifier import MenuSpecifier
         while True:
             menu_specifier = MenuSpecifier(menu_header=menu_header)
             menu_specifier.menu_body = self.score_title

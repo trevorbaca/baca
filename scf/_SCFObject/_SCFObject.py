@@ -10,8 +10,9 @@ class _SCFObject(object):
     
     def __init__(self):
         self.baca_directory = os.environ.get('BACA')
+        self.baca_materials_directory = os.path.join(self.baca_directory, 'materials')
         self.scores_directory = os.environ.get('SCORES')
-        self.shared_materials_directory = os.path.join(self.baca_directory, 'materials')
+        self.shared_materials_directory = self.baca_materials_directory
 
     ### OVERLOADS ###
 
@@ -70,7 +71,7 @@ class _SCFObject(object):
             return InteractiveMaterialPackageProxy(importable_module_name)
         else:
             return StaticMaterialPackageProxy(importable_module_name)
-
+   
     def globally_replace_in_file(self, file_name, old, new):
         file_pointer = file(file_name, 'r')
         new_file_lines = []
