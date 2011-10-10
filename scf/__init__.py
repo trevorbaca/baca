@@ -6,7 +6,7 @@ from MenuSection import MenuSection
 from MenuSpecifier import MenuSpecifier
 from PackageProxy import PackageProxy
 from ScorePackageProxy import ScorePackageProxy
-from ScorePackageWrangler import ScorePackageWrangler
+from ScoreWrangler import ScoreWrangler
 from StaticMaterialPackageProxy import StaticMaterialPackageProxy
 from StudioInterface import StudioInterface
 from UserInputGetter import UserInputGetter

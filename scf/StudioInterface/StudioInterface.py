@@ -1,4 +1,4 @@
-from baca.scf.ScorePackageWrangler import ScorePackageWrangler
+from baca.scf.ScoreWrangler import ScoreWrangler
 from baca.scf.MakerWrangler import MakerWrangler
 from baca.scf.MenuSection import MenuSection
 from baca.scf.MenuSpecifier import MenuSpecifier
@@ -23,7 +23,7 @@ class StudioInterface(DirectoryProxy):
 
     @property
     def score_package_wrangler(self):
-        return ScorePackageWrangler()
+        return ScoreWrangler()
 
     ### PUBLIC METHODS ###
 
