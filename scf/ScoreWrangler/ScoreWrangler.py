@@ -1,5 +1,5 @@
 from baca.scf.DirectoryProxy import DirectoryProxy
-from baca.scf.MenuSpecifier import MenuSpecifier
+from baca.scf.Menu import Menu
 from baca.scf.ScorePackageProxy import ScorePackageProxy
 import os
 
@@ -26,7 +26,7 @@ class ScoreWrangler(DirectoryProxy):
             print ''
 
     def get_score_package_name_from_user(self, menu_header=None):
-        menu_specifier = MenuSpecifier()
+        menu_specifier = Menu()
         menu_specifier.menu_header = menu_header
         menu_specifier.menu_body = 'select score by number.'
         menu_specifier.items_to_number = self.list_score_titles_with_years()
@@ -154,14 +154,14 @@ class ScoreWrangler(DirectoryProxy):
 
     def select_interactive_material_package_proxy(self, menu_header=None, klasses=None):
         material_package_proxies = list(self.iterate_interactive_material_package_proxies())
-        menu = MenuSpecifier()
+        menu = Menu()
         menu.menu_header = menu_header
         menu.items_to_number = material_package_proxies
         key, value = menu.display_menu()
         return value
 
     def select_score_interactively(self, menu_header=None):
-        menu = MenuSpecifier()
+        menu = Menu()
         menu.menu_header = menu_header
         menu.menu_body = 'select score'
         menu.items_to_number = self.list_score_titles_with_years()

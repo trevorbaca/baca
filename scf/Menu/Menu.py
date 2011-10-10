@@ -4,7 +4,7 @@ from baca.scf.exceptions import StudioException
 import os
 
 
-class MenuSpecifier(_MenuObject, _SCFObject):
+class Menu(_MenuObject, _SCFObject):
 
     def __init__(self, menu_header=None, menu_body=None, score_title=None, 
         menu_sections=None, items_to_number=None, sentence_length_items=None, 

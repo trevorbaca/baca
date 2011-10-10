@@ -1,7 +1,7 @@
 from baca.scf.InteractiveMaterialPackageProxy import InteractiveMaterialPackageProxy
 from baca.scf.MakerWrangler import MakerWrangler
 from baca.scf.MaterialWrangler import MaterialWrangler
-from baca.scf.MenuSpecifier import MenuSpecifier
+from baca.scf.Menu import Menu
 from baca.scf.MenuSection import MenuSection
 from baca.scf.PackageProxy import PackageProxy
 from baca.scf.StaticMaterialPackageProxy import StaticMaterialPackageProxy
@@ -231,7 +231,7 @@ class ScorePackageProxy(PackageProxy):
 
     def manage_score(self, menu_header=None, command_string=None):
         while True:
-            menu_specifier = MenuSpecifier(menu_header=menu_header)
+            menu_specifier = Menu(menu_header=menu_header)
             menu_specifier.menu_body = self.score_title
             menu_section = MenuSection()
             menu_section.menu_section_title = 'Chunks'

@@ -1,7 +1,7 @@
 from baca.scf.ScoreWrangler import ScoreWrangler
 from baca.scf.MakerWrangler import MakerWrangler
 from baca.scf.MenuSection import MenuSection
-from baca.scf.MenuSpecifier import MenuSpecifier
+from baca.scf.Menu import Menu
 from baca.scf.DirectoryProxy import DirectoryProxy
 from baca.scf.ScorePackageProxy import ScorePackageProxy
 from baca.scf.MaterialWrangler import MaterialWrangler
@@ -29,7 +29,7 @@ class StudioInterface(DirectoryProxy):
 
     def get_materials_directory_interactively(self, menu_header=None):
         while True:
-            menu_specifier = MenuSpecifier(menu_header=menu_header)
+            menu_specifier = Menu(menu_header=menu_header)
             menu_specifier.menu_body = 'select materials directory'
             menu_section = MenuSection()
             score_titles = self.score_package_wrangler.list_numbered_score_titles_with_years()
@@ -47,7 +47,7 @@ class StudioInterface(DirectoryProxy):
 
     def manage_svn(self, menu_header=None):
         while True:
-            menu_specifier = MenuSpecifier()
+            menu_specifier = Menu()
             menu_specifier.menu_header = menu_header
             menu_specifier.menu_body = 'repository commands'
             menu_section = MenuSection()
@@ -80,7 +80,7 @@ class StudioInterface(DirectoryProxy):
 
     def work_in_studio(self, menu_header=None):
         while True:
-            menu_specifier = MenuSpecifier(menu_header=menu_header)
+            menu_specifier = Menu(menu_header=menu_header)
             menu_specifier.menu_body = 'welcome to the studio.'
             menu_section = MenuSection()
             score_titles = self.score_package_wrangler.list_numbered_score_titles_with_years()

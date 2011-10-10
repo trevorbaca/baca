@@ -3,7 +3,7 @@ from InteractiveMaterialPackageProxy import InteractiveMaterialPackageProxy
 from MakerWrangler import MakerWrangler
 from MaterialWrangler import MaterialWrangler
 from MenuSection import MenuSection
-from MenuSpecifier import MenuSpecifier
+from Menu import Menu
 from PackageProxy import PackageProxy
 from ScorePackageProxy import ScorePackageProxy
 from ScoreWrangler import ScoreWrangler

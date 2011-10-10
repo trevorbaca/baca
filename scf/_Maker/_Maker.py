@@ -3,7 +3,7 @@ from abjad.tools import lilypondfiletools
 from abjad.tools import markuptools
 from baca.scf._SCFObject import _SCFObject
 from baca.scf.MaterialWrangler import MaterialWrangler
-from baca.scf.MenuSpecifier import MenuSpecifier
+from baca.scf.Menu import Menu
 from baca.scf.ScoreWrangler import ScoreWrangler
 from baca.scf.UserInputWrapper import UserInputWrapper
 import copy
@@ -248,7 +248,7 @@ class _Maker(_SCFObject):
         self._original_material_name = self.material_name
         self._original_user_input_wrapper = copy.deepcopy(user_input_wrapper)
         while True:
-            menu_specifier = MenuSpecifier()
+            menu_specifier = Menu()
             menu_body = '%s - %s - %s - edit interactively'
             menu_body %= (self.location_name, self.spaced_class_name, self.material_menu_name)
             menu_body = self.append_status_indicator(menu_body)
@@ -357,7 +357,7 @@ class _Maker(_SCFObject):
 
     def manage_maker(self, menu_header=None):
         while True:
-            menu = MenuSpecifier()
+            menu = Menu()
             menu.menu_header = menu_header
             menu.menu_body = self.spaced_class_name
             menu.items_to_number = list(self.iterate_materials_based_on_maker())
@@ -394,7 +394,7 @@ class _Maker(_SCFObject):
         self.score = result
 
     def show_demo_input_values(self, menu_header=None):
-        menu_specifier = MenuSpecifier(menu_header=menu_header)
+        menu_specifier = Menu(menu_header=menu_header)
         menu_specifier.menu_body = 'demo values'
         items = []
         for i, (key, value) in enumerate(self.user_input_template.iteritems()):
