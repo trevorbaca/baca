@@ -19,7 +19,7 @@ class PackageProxy(DirectoryProxy):
 
     @property
     def creation_date(self):
-        pass
+        return self.get_tag('creation_date')
         
     @property
     def importable_module_name(self):
@@ -30,13 +30,21 @@ class PackageProxy(DirectoryProxy):
         return os.path.join(self.directory, '__init__.py')
 
     @property
+    def module_name(self):
+        return self.importable_module_name.split('.')[-1]
+
+    @property
     def package_name(self):
-        return self.basename
+        return self.base_name
         
     @property
     def parent_initializer(self):
         return os.path.join(self.parent_directory, '__init__.py')
 
+    @property
+    def parent_module_name(self):
+        return '.'.join(self.importable_module_name.split('.')[:-1])
+        
     ### PUBLIC METHODS ###
 
     def add_line_to_initializer(self, line):
@@ -85,6 +93,12 @@ class PackageProxy(DirectoryProxy):
             self.delete_tag(tag_name)
             print 'Tag deleted.\n'
         self.proceed()
+
+    def edit_initializer(self):
+        os.system('vi %s' % self.initializer)
+
+    def edit_parent_initializer(self):
+        os.system('vi %s' % self.parent_initializer)
 
     def import_attribute_from_initializer(self, attribute_name):
         try:
@@ -138,6 +152,13 @@ class PackageProxy(DirectoryProxy):
                 self.add_tag_interactively(menu_header=menu.menu_title)
             elif key == 'del':
                 self.delete_tag_interactively(menu_header=menu.menu_title)
+
+    @staticmethod
+    def remove_module_name_from_sys_modules(self, module_name):
+        '''Total hack. But works.
+        '''
+        command = "if '%s' in sys.modules: del(sys.modules['%s'])" % (module_name, module_name)
+        exec(command)
 
     def write_tags_to_initializer(self, tags):
         lines = []

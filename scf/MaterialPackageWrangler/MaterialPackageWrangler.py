@@ -64,7 +64,7 @@ class MaterialPackageWrangler(DirectoryProxy, _MaterialPackageMaker):
     def list_shared_material_summaries(self):
         summaries = []
         for shared_material_proxy in self.iterate_shared_material_proxies():
-            summary = shared_material_proxy.basename
+            summary = shared_material_proxy.base_name
             if not shared_material_proxy.has_tag('maker'):
                 summary = summary + ' (@)'
             summaries.append(summary)
