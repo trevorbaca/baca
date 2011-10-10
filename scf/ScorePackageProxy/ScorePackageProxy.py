@@ -1,4 +1,3 @@
-from baca.scf._MaterialPackageMaker import _MaterialPackageMaker
 from baca.scf.InteractiveMaterialPackageProxy import InteractiveMaterialPackageProxy
 from baca.scf.MakerWrangler import MakerWrangler
 from baca.scf.MaterialPackageWrangler import MaterialPackageWrangler

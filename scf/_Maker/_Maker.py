@@ -1,7 +1,6 @@
 from abjad.tools import iotools
 from abjad.tools import lilypondfiletools
 from abjad.tools import markuptools
-from baca.scf._MaterialPackageMaker import _MaterialPackageMaker
 from baca.scf._SCFObject import _SCFObject
 from baca.scf.MaterialPackageWrangler import MaterialPackageWrangler
 from baca.scf.MenuSpecifier import MenuSpecifier
@@ -12,7 +11,7 @@ import os
 import shutil
 
 
-class _Maker(_SCFObject, _MaterialPackageMaker):
+class _Maker(_SCFObject):
 
     def __init__(self, directory=None, material_name=None, score=None):
         _SCFObject.__init__(self)
