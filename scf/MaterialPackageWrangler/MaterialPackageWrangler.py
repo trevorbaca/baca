@@ -1,4 +1,3 @@
-from baca.scf._MaterialPackageMaker import _MaterialPackageMaker
 from baca.scf.DirectoryProxy import DirectoryProxy
 from baca.scf.InteractiveMaterialPackageProxy import InteractiveMaterialPackageProxy
 from baca.scf.MakerWrangler import MakerWrangler
@@ -8,7 +7,7 @@ from baca.scf.StaticMaterialPackageProxy import StaticMaterialPackageProxy
 import os
 
 
-class MaterialPackageWrangler(DirectoryProxy, _MaterialPackageMaker):
+class MaterialPackageWrangler(DirectoryProxy):
 
     #def __init__(self, score_title=None):
     def __init__(self, purview=None):
