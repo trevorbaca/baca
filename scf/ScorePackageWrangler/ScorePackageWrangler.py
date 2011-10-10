@@ -9,6 +9,11 @@ class ScorePackageWrangler(DirectoryProxy):
     def __init__(self):
         DirectoryProxy.__init__(self, os.environ.get('SCORES'))
 
+    ### OVERLOADS ###
+
+    def __repr__(self):
+        return '%s()' % self.class_name
+
     ### PUBLIC METHODS ###
 
     def create_score_package(self, score_package_name):

@@ -44,6 +44,10 @@ class DirectoryProxy(_SCFObject):
     def parent_directory(self):
         return os.path.dirname(self.directory)
 
+    @property
+    def path_name(self):
+        return self.directory
+
     ### PRIVATE METHODS ###
 
     def _remove_nonversioned_directory(self):

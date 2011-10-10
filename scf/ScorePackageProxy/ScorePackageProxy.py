@@ -13,12 +13,6 @@ class ScorePackageProxy(PackageProxy, _MaterialPackageMaker):
 
     ### PRIVATE METHODS ###
 
-    def _get_conditional_user_input(self, is_interactive, prompt=None):
-        if not is_interactive:
-            return True
-        response = raw_input(prompt)
-        return response.lower() == 'y'
-
     def _read_initializer_metadata(self, name):
         initializer = file(self.initializer, 'r')
         for line in initializer.readlines():
@@ -113,10 +107,9 @@ class ScorePackageProxy(PackageProxy, _MaterialPackageMaker):
         if self.package_name == 'poeme':
             return
 
-        target = os.path.join(self.directory, '__init__.py')
-        if not os.path.exists(target):
+        if not os.path.exists(self.initializer):
             prompt = 'Create %s/__init__.py? ' % self.package_name
-            if self._get_conditional_user_input(is_interactive, prompt=prompt):
+            if not is_interactive or self.query(prompt):
                 initializer = file(target, 'w')
                 initializer.write('')
                 initializer.close()
@@ -124,37 +117,37 @@ class ScorePackageProxy(PackageProxy, _MaterialPackageMaker):
         target = os.path.join(self.directory, 'dist')
         if not os.path.exists(target):
             prompt = 'Create %s/dist/? ' % self.package_name
-            if self._get_conditional_user_input(is_interactive, prompt=prompt):
+            if not is_interactive or self.query(prompt):
                 os.mkdir(target)
 
         target = os.path.join(self.directory, 'dist', 'pdf')
         if not os.path.exists(target):
             prompt = 'Create %s/dist/pdf/? ' % self.package_name
-            if self._get_conditional_user_input(is_interactive, prompt=prompt):
+            if not is_interactive or self.query(prompt):
                 os.mkdir(target)
 
         target = os.path.join(self.directory, 'etc')
         if not os.path.exists(target):
             prompt = 'Create %s/etc/? ' % self.package_name
-            if self._get_conditional_user_input(is_interactive, prompt=prompt):
+            if not is_interactive or self.query(prompt):
                 os.mkdir(target)
 
         target = os.path.join(self.directory, 'exg')
         if not os.path.exists(target):
             prompt = 'Create %s/exg/? ' % self.package_name
-            if self._get_conditional_user_input(is_interactive, prompt=prompt):
+            if not is_interactive or self.query(prompt):
                 os.mkdir(target)
 
         target = os.path.join(self.directory, 'mus')
         if not os.path.exists(target):
             prompt = 'Create %s/mus/? ' % self.package_name
-            if self._get_conditional_user_input(is_interactive, prompt=prompt):
+            if not is_interactive or self.query(prompt):
                 os.mkdir(target)
 
         target = os.path.join(self.directory, 'mus', '__init__.py')
         if not os.path.exists(target):
             prompt = 'Create %s/mus/__init__.py? ' % self.package_name
-            if self._get_conditional_user_input(is_interactive, prompt=prompt):
+            if not is_interactive or self.query(prompt):
                 initializer = file(target, 'w')
                 initializer.write('import materials\n')
                 initializer.close()
@@ -162,13 +155,13 @@ class ScorePackageProxy(PackageProxy, _MaterialPackageMaker):
         target = os.path.join(self.directory, 'mus', 'chunks')
         if not os.path.exists(target):
             prompt = 'Create %s/mus/chunks? ' % self.package_name
-            if self._get_conditional_user_input(is_interactive, prompt=prompt):
+            if not is_interactive or self.query(prompt):
                 os.mkdir(target)
 
         target = os.path.join(self.directory, 'mus', 'chunks', '__init__.py')
         if not os.path.exists(target):
             prompt = 'Create %s/mus/chunks/__init__.py? ' % self.package_name
-            if self._get_conditional_user_input(is_interactive, prompt=prompt):
+            if not is_interactive or self.query(prompt):
                 initializer = file(target, 'w')
                 initializer.write('')
                 initializer.close()
@@ -176,13 +169,13 @@ class ScorePackageProxy(PackageProxy, _MaterialPackageMaker):
         target = os.path.join(self.directory, 'mus', 'materials')
         if not os.path.exists(target):
             prompt = 'Create %s/mus/materials? ' % self.package_name
-            if self._get_conditional_user_input(is_interactive, prompt=prompt):
+            if not is_interactive or self.query(prompt):
                 os.mkdir(target)
 
         target = os.path.join(self.directory, 'mus', 'materials', '__init__.py')
         if not os.path.exists(target):
             prompt = 'Create %s/mus/materials/__init__.py? ' % self.package_name
-            if self._get_conditional_user_input(is_interactive, prompt=prompt):
+            if not is_interactive or self.query(prompt):
                 initializer = file(target, 'w')
                 initializer.write('')
                 initializer.close()
