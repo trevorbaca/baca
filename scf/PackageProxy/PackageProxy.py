@@ -26,10 +26,6 @@ class PackageProxy(DirectoryProxy):
         return os.path.join(self.directory, '__init__.py')
 
     @property
-    def module_name(self):
-        return self.package_importable_name.split('.')[-1]
-
-    @property
     def package_importable_name(self):
         return self._package_importable_name
 
@@ -184,10 +180,11 @@ class PackageProxy(DirectoryProxy):
                 self.delete_tag_interactively(menu_header=menu.menu_title)
 
     @staticmethod
-    def remove_module_name_from_sys_modules(self, module_name):
+    def remove_package_importable_name_from_sys_modules(self, package_importable_name):
         '''Total hack. But works.
         '''
-        command = "if '%s' in sys.modules: del(sys.modules['%s'])" % (module_name, module_name)
+        command = "if '%s' in sys.modules: del(sys.modules['%s'])" % (
+            package_importable_name, package_importable_name)
         exec(command)
 
     def write_tags_to_initializer(self, tags):

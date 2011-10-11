@@ -112,8 +112,8 @@ class MaterialWrangler(DirectoryProxy):
 
     def iterate_shared_material_proxies(self):
         for shared_material_directory in self.list_shared_material_directories():
-            module_name = os.path.basename(shared_material_directory)
-            package_importable_name = 'baca.materials.%s' % module_name
+            package_short_name = os.path.basename(shared_material_directory)
+            package_importable_name = 'baca.materials.%s' % package_short_name
             proxy = PackageProxy(package_importable_name)
             yield proxy
 

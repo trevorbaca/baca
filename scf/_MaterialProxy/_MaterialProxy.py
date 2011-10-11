@@ -16,9 +16,9 @@ class _MaterialProxy(PackageProxy):
         self.pdf_file_name = os.path.join(self.directory, 'visualization.pdf')
         self.ly_file_name = os.path.join(self.directory, 'visualization.ly')
         self.stylesheet_file_name = os.path.join(self.directory, 'stylesheet.ly')
-        self.input_module_name = '%s.input' % self.package_importable_name
-        self.output_module_name = '%s.output' % self.package_importable_name
-        self.visualization_module_name = '%s.visualization' % self.package_importable_name
+        self.input_package_importable_name = '%s.input' % self.package_importable_name
+        self.output_package_importable_name = '%s.output' % self.package_importable_name
+        self.visualization_package_importable_name = '%s.visualization' % self.package_importable_name
 
     ### PUBLIC ATTRIBUTES ###
 
@@ -79,15 +79,11 @@ class _MaterialProxy(PackageProxy):
         return not self.is_interactive
 
     @property
-    def materials_module_name(self):
+    def materials_package_importable_name(self):
         if self.score_package_short_name is None:
             return 'baca.materials'
         else:
             return '%s.mus.materials' % self.score_package_short_name
-
-    @property
-    def module_name(self):
-        return self.package_importable_name.split('.')[-1]
 
     @property
     def score_package_short_name(self):
@@ -98,15 +94,15 @@ class _MaterialProxy(PackageProxy):
 
     @property
     def spaced_material_name(self):
-        return self.module_name.replace('_', ' ')
+        return self.package_short_name.replace('_', ' ')
 
     @property
     def underscored_material_name(self):
-        return self.module_name
+        return self.package_short_name
 
     @property
     def user_input_wrapper(self):
-        exec('from %s import user_input' % self.input_module_name)
+        exec('from %s import user_input' % self.input_package_importable_name)
         return user_input
 
     ### PUBLIC METHODS ###
@@ -177,7 +173,7 @@ class _MaterialProxy(PackageProxy):
 
     def import_attribute_from_input_file(self, attribute_name):
         try:
-            exec('from %s import %s' % (self.input_module_name, attribute_name))
+            exec('from %s import %s' % (self.input_package_importable_name, attribute_name))
             exec('result = %s' % attribute_name)
             return result
         except ImportError:
@@ -186,7 +182,7 @@ class _MaterialProxy(PackageProxy):
     def import_material_from_input_file(self):
         self.unimport_input_module()
         try:
-            exec('from %s import %s' % (self.input_module_name, self.underscored_material_name))
+            exec('from %s import %s' % (self.input_package_importable_name, self.underscored_material_name))
             exec('result = %s' % self.underscored_material_name)
             return result
         except ImportError as e:
@@ -195,7 +191,7 @@ class _MaterialProxy(PackageProxy):
     def import_material_from_output_file(self):
         self.unimport_output_module_hierarchy()
         try:
-            exec('from %s import %s' % (self.output_module_name, self.underscored_material_name))
+            exec('from %s import %s' % (self.output_package_importable_name, self.underscored_material_name))
             exec('result = %s' % self.underscored_material_name)
             return result
         except ImportError as e:
@@ -206,13 +202,13 @@ class _MaterialProxy(PackageProxy):
             return None
         self.unimport_visualization_module()
         self.unimport_output_module()
-        command = 'from %s import lilypond_file' % self.visualization_module_name 
+        command = 'from %s import lilypond_file' % self.visualization_package_importable_name 
         exec(command)
         return lilypond_file
         
     def get_output_preamble_lines(self):
         self.unimport_input_module()
-        command = 'from %s import output_preamble_lines' % self.input_module_name
+        command = 'from %s import output_preamble_lines' % self.input_package_importable_name
         try:
             exec(command)
             # keep list from persisting between multiple calls to this method
@@ -576,16 +572,16 @@ class _MaterialProxy(PackageProxy):
         return trimmed_ly_content
 
     def unimport_input_module(self):
-        self.remove_module_name_from_sys_modules(self.input_module_name)
+        self.remove_package_importable_name_from_sys_modules(self.input_package_importable_name)
 
     def unimport_material_module(self):
-        self.remove_module_name_from_sys_modules(self.package_importable_name)
+        self.remove_package_importable_name_from_sys_modules(self.package_importable_name)
 
     def unimport_materials_module(self):
-        self.remove_module_name_from_sys_modules(self.materials_module_name)
+        self.remove_package_importable_name_from_sys_modules(self.materials_package_importable_name)
 
     def unimport_output_module(self):
-        self.remove_module_name_from_sys_modules(self.output_module_name)
+        self.remove_package_importable_name_from_sys_modules(self.output_package_importable_name)
 
     def unimport_output_module_hierarchy(self):
         self.unimport_materials_module()
@@ -593,10 +589,10 @@ class _MaterialProxy(PackageProxy):
         self.unimport_output_module()
 
     def unimport_score_package(self):
-        self.remove_module_name_from_sys_modules(self.score_package_short_name)
+        self.remove_package_importable_name_from_sys_modules(self.score_package_short_name)
 
     def unimport_visualization_module(self):
-        self.remove_module_name_from_sys_modules(self.visualization_module_name)
+        self.remove_package_importable_name_from_sys_modules(self.visualization_package_importable_name)
 
     def _write_input_data_to_output_file(self):
         self.remove_material_from_materials_initializer()
