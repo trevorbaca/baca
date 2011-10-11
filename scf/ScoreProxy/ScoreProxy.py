@@ -8,7 +8,7 @@ from baca.scf.StaticMaterialProxy import StaticMaterialProxy
 import os
 
 
-class ScorePackageProxy(PackageProxy):
+class ScoreProxy(PackageProxy):
 
     def __init__(self, importable_module_name):
         PackageProxy.__init__(self, importable_module_name)

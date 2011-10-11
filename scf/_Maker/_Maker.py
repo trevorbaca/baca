@@ -219,8 +219,8 @@ class _Maker(_SCFObject):
         def fget(self):
             return self._score
         def fset(self, score):
-            from baca.scf.ScorePackageProxy import ScorePackageProxy
-            assert isinstance(score, (ScorePackageProxy, type(None)))
+            from baca.scf.ScoreProxy import ScoreProxy
+            assert isinstance(score, (ScoreProxy, type(None)))
             self._score = score
         return property(**locals())
 

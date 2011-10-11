@@ -3,7 +3,7 @@ from baca.scf.MakerWrangler import MakerWrangler
 from baca.scf.menuing import MenuSection
 from baca.scf.menuing import Menu
 from baca.scf.DirectoryProxy import DirectoryProxy
-from baca.scf.ScorePackageProxy import ScorePackageProxy
+from baca.scf.ScoreProxy import ScoreProxy
 from baca.scf.MaterialWrangler import MaterialWrangler
 import os
 
@@ -47,7 +47,7 @@ class StudioInterface(DirectoryProxy):
             else:
                 score_title = value
                 score_package_name = self.score_wrangler.score_title_to_score_package_name(score_title)
-                score_package_proxy = ScorePackageProxy(score_package_name)
+                score_package_proxy = ScoreProxy(score_package_name)
                 return score_package_proxy.materials_package_name
 
     def manage_svn(self, menu_header=None):
@@ -107,5 +107,5 @@ class StudioInterface(DirectoryProxy):
             else:
                 score_title = value
                 score_package_name = self.score_wrangler.score_title_to_score_package_name(score_title)
-                score_package_proxy = ScorePackageProxy(score_package_name)
+                score_package_proxy = ScoreProxy(score_package_name)
                 score_package_proxy.manage_score()

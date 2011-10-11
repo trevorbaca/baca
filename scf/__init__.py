@@ -3,7 +3,7 @@ from InteractiveMaterialProxy import InteractiveMaterialProxy
 from MakerWrangler import MakerWrangler
 from MaterialWrangler import MaterialWrangler
 from PackageProxy import PackageProxy
-from ScorePackageProxy import ScorePackageProxy
+from ScoreProxy import ScoreProxy
 from ScoreWrangler import ScoreWrangler
 from StaticMaterialProxy import StaticMaterialProxy
 from StudioInterface import StudioInterface

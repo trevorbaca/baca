@@ -1,6 +1,6 @@
 from baca.scf.DirectoryProxy import DirectoryProxy
 from baca.scf.menuing import Menu
-from baca.scf.ScorePackageProxy import ScorePackageProxy
+from baca.scf.ScoreProxy import ScoreProxy
 import os
 
 
@@ -53,7 +53,7 @@ class ScoreWrangler(DirectoryProxy):
 
     def iterate_score_package_proxies(self):
         for score_package_name in self.list_score_package_names():
-            score_package_proxy = ScorePackageProxy(score_package_name)
+            score_package_proxy = ScoreProxy(score_package_name)
             yield score_package_proxy
 
     def list_numbered_score_titles_with_years(self):
@@ -109,7 +109,7 @@ class ScoreWrangler(DirectoryProxy):
     def list_materials_packages(self):
         materials_packages = []
         for score_package_name in self.list_well_formed_score_package_names():
-            score_package_proxy = ScorePackageProxy(score_package_name)
+            score_package_proxy = ScoreProxy(score_package_name)
             materials_packages.extend(score_package_proxy.list_materials_packages())
         return materials_packages
 
@@ -168,7 +168,7 @@ class ScoreWrangler(DirectoryProxy):
         if key == 's':
             return None
         score_package_name = self.score_title_to_score_package_name(value)
-        score_package_proxy = ScorePackageProxy(score_package_name)
+        score_package_proxy = ScoreProxy(score_package_name)
         return score_package_proxy
     
     def svn_ci_scores(self, prompt_proceed=True):

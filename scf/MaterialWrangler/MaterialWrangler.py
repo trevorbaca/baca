@@ -25,8 +25,8 @@ class MaterialWrangler(DirectoryProxy):
 
     @property
     def has_score_local_purview(self):
-        from baca.scf.ScorePackageProxy import ScorePackageProxy
-        return isinstance(self.purview, ScorePackageProxy)
+        from baca.scf.ScoreProxy import ScoreProxy
+        return isinstance(self.purview, ScoreProxy)
 
     @property
     def has_studio_global_purview(self):
