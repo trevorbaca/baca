@@ -54,10 +54,10 @@ class _SCFObject(object):
 
     @property
     def source_file(self):
-        parent_directory = os.path.dirname(os.path.abspath(self.__module__))
+        parent_directory_name = os.path.dirname(os.path.abspath(self.__module__))
         module_path = self.__module__
         module_path = module_path.split('.')[1:]
-        path = os.path.join(parent_directory, *module_path)
+        path = os.path.join(parent_directory_name, *module_path)
         source_file = path + '.py'
         return source_file
 

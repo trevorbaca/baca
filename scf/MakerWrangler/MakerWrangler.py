@@ -10,7 +10,6 @@ class MakerWrangler(DirectoryProxy):
         directory = os.path.join(os.environ.get('BACA'), 'makers')
         DirectoryProxy.__init__(self, directory)
         self.score_title = score_title
-        self.makers_directory = self.directory
 
     ### OVERLOADS ###
 
@@ -33,9 +32,9 @@ class MakerWrangler(DirectoryProxy):
 
     def list_makers(self):
         maker_directories = []
-        for name in os.listdir(self.makers_directory):
+        for name in os.listdir(self.directory_name):
             if name[0].isalpha():
-                directory = os.path.join(self.makers_directory, name)
+                directory = os.path.join(self.director_name, name)
                 if os.path.isdir(directory):
                     initializer = os.path.join(directory, '__init__.py')
                     if os.path.isfile(initializer):

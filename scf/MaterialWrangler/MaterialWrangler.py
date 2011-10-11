@@ -120,7 +120,7 @@ class MaterialWrangler(DirectoryProxy):
     def list_shared_material_directories(self):
         shared_material_directories = []
         for x in self.list_shared_material_package_short_names():
-            directory = os.path.join(self.directory, x)
+            directory = os.path.join(self.directory_name, x)
             shared_material_directories.append(directory)
         return shared_material_directories
 
@@ -133,9 +133,9 @@ class MaterialWrangler(DirectoryProxy):
         
     def list_shared_material_package_short_names(self):
         shared_material_package_short_names = []
-        for x in os.listdir(self.directory):
+        for x in os.listdir(self.directory_name):
             if x[0].isalpha():
-                directory = os.path.join(self.directory, x)
+                directory = os.path.join(self.directory_name, x)
                 if os.path.isdir(directory):
                     initializer = os.path.join(directory, '__init__.py')
                     if os.path.isfile(initializer):

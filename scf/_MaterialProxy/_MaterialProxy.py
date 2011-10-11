@@ -10,12 +10,12 @@ class _MaterialProxy(PackageProxy):
 
     def __init__(self, package_importable_name):
         PackageProxy.__init__(self, package_importable_name)
-        self.input_file_name = os.path.join(self.directory, 'input.py')
-        self.output_file_name = os.path.join(self.directory, 'output.py')
-        self.visualizer_file_name = os.path.join(self.directory, 'visualization.py')
-        self.pdf_file_name = os.path.join(self.directory, 'visualization.pdf')
-        self.ly_file_name = os.path.join(self.directory, 'visualization.ly')
-        self.stylesheet_file_name = os.path.join(self.directory, 'stylesheet.ly')
+        self.input_file_name = os.path.join(self.directory_name, 'input.py')
+        self.output_file_name = os.path.join(self.directory_name, 'output.py')
+        self.visualizer_file_name = os.path.join(self.directory_name, 'visualization.py')
+        self.pdf_file_name = os.path.join(self.directory_name, 'visualization.pdf')
+        self.ly_file_name = os.path.join(self.directory_name, 'visualization.ly')
+        self.stylesheet_file_name = os.path.join(self.directory_name, 'stylesheet.ly')
         self.input_package_importable_name = '%s.input' % self.package_importable_name
         self.output_package_importable_name = '%s.output' % self.package_importable_name
         self.visualization_package_importable_name = '%s.visualization' % self.package_importable_name
@@ -109,7 +109,7 @@ class _MaterialProxy(PackageProxy):
 
     def add_material_to_materials_initializer(self):
         import_statement = 'from %s import %s\n' % (self.underscored_material_name, self.underscored_material_name)
-        parent_package = PackageProxy(self.parent_directory)
+        parent_package = PackageProxy(self.parent_directory_name)
         parent_package.add_line_to_initializer(import_statement)
 
     def create_ly_and_pdf_from_visualizer(self, is_forced=False):
@@ -149,7 +149,7 @@ class _MaterialProxy(PackageProxy):
 
     def delete_material(self):
         self.remove_material_from_materials_initializer()
-        result = self.remove_directory()
+        result = self.remove()
         if result:
             self.proceed()
 
@@ -321,7 +321,7 @@ class _MaterialProxy(PackageProxy):
             elif key == 'r':
                 self.rename_material()
             elif key == 's':
-                self.summarize_material()
+                self.summarize_material_package()
             elif key == 't':
                 self.manage_tags(menu_header=menu.menu_title)
             elif key == 'v':
@@ -452,19 +452,19 @@ class _MaterialProxy(PackageProxy):
             # update parent initializer
             self.globally_replace_in_file(self.parent_initializer, self.underscored_material_name, new_underscored_material_name)
             # rename package directory
-            new_directory = self.directory.replace(self.underscored_material_name, new_underscored_material_name)
-            command = 'svn mv %s %s' % (self.directory, new_directory)
+            new_directory_name = self.directory.replace(self.underscored_material_name, new_underscored_material_name)
+            command = 'svn mv %s %s' % (self.directory_name, new_directory_name)
             os.system(command)
             # update package initializer
-            new_package_directory = os.path.join(self.parent_directory, new_underscored_material_name)
+            new_package_directory = os.path.join(self.parent_directory_name, new_underscored_material_name)
             new_initializer = os.path.join(new_package_directory, '__init__.py')
             self.globally_replace_in_file(new_initializer, self.underscored_material_name, new_underscored_material_name)
             # rename files in package
             for old_file_name in os.listdir(new_package_directory):
                 if not old_file_name.startswith(('.', '_')):
-                    old_path_name = os.path.join(new_package_directory, old_file_name)
-                    new_path_name = old_path_name.replace(self.underscored_material_name, new_underscored_material_name)
-                    command = 'svn mv %s %s' % (old_path_name, new_path_name)
+                    old_directory_name = os.path.join(new_package_directory, old_file_name)
+                    new_directory_name = old_directory_name.replace(self.underscored_material_name, new_underscored_material_name)
+                    command = 'svn mv %s %s' % (old_directory_name, new_directory_name)
                     os.system(command)
             # rename output data
             new_output_data = os.path.join(new_package_directory, 'output.py')
@@ -473,7 +473,7 @@ class _MaterialProxy(PackageProxy):
             # commit
             commit_message = 'Renamed %s to %s.' % (self.underscored_material_name, new_underscored_material_name)
             commit_message = commit_message.replace('_', ' ')
-            command = 'svn commit -m "%s" %s' % (commit_message, self.parent_directory)
+            command = 'svn commit -m "%s" %s' % (commit_message, self.parent_directory_name)
             os.system(command)
             print ''
         else:
@@ -508,7 +508,7 @@ class _MaterialProxy(PackageProxy):
         os.system('abjad %s' % self.visualizer_file_name)
         print ''
 
-    def summarize_material(self):
+    def summarize_material_package(self):
         found = []
         missing = []
         artifact_name = 'input file'

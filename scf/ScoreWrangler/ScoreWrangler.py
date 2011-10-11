@@ -66,7 +66,7 @@ class ScoreWrangler(DirectoryProxy):
     def list_score_directories(self):
         score_directories = []
         for score_package_importable_name in self.list_score_package_importable_names():
-            score_directory = os.path.join(self.directory, score_package_importable_name)
+            score_directory = os.path.join(self.directory_name, score_package_importable_name)
             score_directories.append(score_directory)
         return score_directories
 
@@ -83,8 +83,8 @@ class ScoreWrangler(DirectoryProxy):
         '''This method is primary.
         '''
         score_package_importable_names = []
-        for score_package_importable_name in os.listdir(self.directory):
-            directory = os.path.join(self.directory, score_package_importable_name)
+        for score_package_importable_name in os.listdir(self.directory_name):
+            directory = os.path.join(self.directory_name, score_package_importable_name)
             if os.path.isdir(directory):
                 initializer = os.path.join(directory, '__init__.py')
                 if os.path.isfile(initializer):
@@ -117,7 +117,7 @@ class ScoreWrangler(DirectoryProxy):
         return materials_packages
 
     def list_well_formed_score_package_importable_names(self):
-        score_package_importable_names = os.listdir(self.directory)
+        score_package_importable_names = os.listdir(self.directory_name)
         score_package_importable_names = [x for x in score_package_importable_names if x[0].isalpha()]
         score_package_importable_names.remove('poeme')
         return score_package_importable_names
