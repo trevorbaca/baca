@@ -1,4 +1,4 @@
-from baca.scf.PackgeProxy import PackageProxy
+from baca.scf.PackageProxy import PackageProxy
 
 
 class ChunkProxy(PackageProxy):

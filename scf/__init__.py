@@ -1,3 +1,5 @@
+from ChunkProxy import ChunkProxy
+from ChunkWrangler import ChunkWrangler
 from DirectoryProxy import DirectoryProxy
 from InteractiveMaterialProxy import InteractiveMaterialProxy
 from MakerWrangler import MakerWrangler
