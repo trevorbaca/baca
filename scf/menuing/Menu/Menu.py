@@ -34,19 +34,18 @@ class Menu(_MenuObject, _SCFObject):
     ### PRIVATE METHODS ###
 
     def _add_hidden_menu_items(self, all_keys, all_values):
+        for key, value in self.default_hidden_items:
+            all_keys.append(key)
+            all_values.append(value)
         for key, value in self.hidden_items:
             all_keys.append(key)
             all_values.append(value)
-        if self.include_studio:
-            all_keys.append('S')
-            all_values.append('studio')
-        all_keys.append('x')
-        all_values.append('exec')
         
     def _display_footer_items(self, all_keys, all_values):
-        if not self.hide_menu:
-            self._print_tab(self.indent_level)
         footer_pairs = self._get_footer_pairs()
+        if footer_pairs:
+            if not self.hide_menu:
+                self._print_tab(self.indent_level)
         for key, value in footer_pairs:
             if not self.hide_menu:
                 print '%s: %s ' % (key, value.ljust(self.item_width)),
@@ -70,12 +69,10 @@ class Menu(_MenuObject, _SCFObject):
             if not self.hide_menu:
                 print ''
 
-    #def _display_menu(self, score_title=None):
     def _display_menu(self):
         if self.should_clear_terminal:
             self.clear_terminal()
         all_keys, all_values = [], []
-        #self._display_menu_title(score_title=score_title)
         self._display_menu_title()
         self._display_menu_sections(all_keys, all_values)
         self._display_items_to_number(all_keys, all_values)
@@ -84,8 +81,6 @@ class Menu(_MenuObject, _SCFObject):
         self._display_named_pairs(self.secondary_named_pairs, all_keys, all_values)
         self._display_footer_items(all_keys, all_values)
         self._add_hidden_menu_items(all_keys, all_values)
-        if not self.hide_menu:
-            print ''
         while True:
             response = raw_input('scf> ')
             print ''
@@ -131,13 +126,13 @@ class Menu(_MenuObject, _SCFObject):
                 print ''
 
     def _get_footer_pairs(self):
-        footer_pairs = [
-            ('q', 'quit'),
-            ('w', 'redraw'),
-            #('x', 'exec'),
-            ]
-        if self.include_back:
-            footer_pairs.append(('b', 'back'))
+#        footer_pairs = [
+#            ('q', 'quit'),
+#            ('w', 'redraw'),
+#            ]
+#        if self.include_back:
+#            footer_pairs.append(('b', 'back'))
+        footer_pairs = []
         footer_pairs.sort()
         return footer_pairs
 
@@ -150,6 +145,18 @@ class Menu(_MenuObject, _SCFObject):
 
     ### PUBLIC ATTRIBUTES ###
     
+    @property
+    def default_hidden_items(self):
+        default_hidden_items = []
+        if self.include_back:
+            default_hidden_items.append(('b', 'back'))
+        default_hidden_items.append(('hidden', 'show hidden items'))
+        default_hidden_items.append(('q', 'quit'))
+        default_hidden_items.append(('redraw', 'redraw'))
+        default_hidden_items.append(('exec', 'exec statement'))
+        default_hidden_items.append(('studio', 'return to studio'))
+        return default_hidden_items
+
     @apply
     def hidden_items():
         def fget(self):
@@ -280,13 +287,15 @@ class Menu(_MenuObject, _SCFObject):
             should_clear_terminal, hide_menu = False, True
             if key == 'b':
                 return key, None
+            elif key == 'exec':
+                self.exec_statement()
+            elif key == 'hidden':
+                self.show_hidden_items()
             elif key == 'q':
                 raise SystemExit
-            elif key == 'w':
+            elif key == 'redraw':
                 should_clear_terminal, hide_menu = True, False
-            elif key == 'x':
-                self.exec_statement()
-            elif key == 'S':
+            elif key == 'studio':
                 raise StudioException
             else:
                 return key, value
@@ -300,6 +309,19 @@ class Menu(_MenuObject, _SCFObject):
     def print_tab(self, n):
         if 0 < n:
             print self.tab(n),
+
+    def show_hidden_items(self):
+        hidden_items = []
+        hidden_items.extend(self.default_hidden_items)
+        hidden_items.extend(self.hidden_items)
+        for section in self.menu_sections:
+            #section.show_hidden_items()
+            hidden_items.extend(section.hidden_items)
+        hidden_items.sort()
+        for key, value in hidden_items:
+            self._print_tab(self.indent_level),
+            print '%s: %s' % (key, value)
+        print ''
 
     def tab(self, n):
         return 4 * n * ' '

@@ -154,3 +154,8 @@ class MenuSection(object):
         for key, value in self.hidden_items:
             all_keys.append(key)
             all_values.append(value)
+
+    def show_hidden_items(self):
+        for key, value in self.hidden_items:
+            self._print_tab(self.indent_level),
+            print '%s: %s' % (key, value)
