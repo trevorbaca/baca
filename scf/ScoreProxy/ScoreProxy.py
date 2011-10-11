@@ -140,12 +140,41 @@ class ScoreProxy(PackageProxy):
 
     ### PUBLIC METHODS ###
 
+    def create_chunk(self):
+        return self.print_not_implemented()
+
+    def create_chunk_interactively(self, menu_header=None):
+        return self.print_not_implemented()
+
+    def create_interactive_material(self):
+        self.print_not_implemented()
+
+    def create_interactive_material_interactively(self, menu_header=None):
+        while True:
+            key, value = self.maker_wrangler.select_interactive_maker(menu_header=menu_header)
+            if value is None:
+                break
+            else:
+                maker = value
+            maker.score = self
+            result = maker.edit_interactively(menu_header=menu_header)
+            if result:
+                break
+        return True, None
+
     def create_material_package_interactively(self):
         return self.material_wrangler.create_material_package_interactively()
 
     def create_package_structure(self):
         self.fix_score_package_directory_structure(is_interactive=False)
 
+    def create_static_material(self):
+        return self.material_wrangler.create_static_material_package()
+
+    def create_static_material_interactively(self, menu_header=None):
+        return self.material_wrangler.create_static_material_package_interactively(
+            menu_header=self.score_title)
+        
     def fix_package_structure(self, is_interactive=True):
         if self.package_name == 'recursif':
             return
@@ -241,36 +270,28 @@ class ScoreProxy(PackageProxy):
             menu_section = MenuSection()
             menu_section.menu_section_title = 'Chunks'
             menu_section.menu_section_entries = self.list_numbered_chunks()
-            menu_section.sentence_length_items.append(('ch', '[make new chunk by hand]'))
-            menu_section.sentence_length_items.append(('ci', '[make new chunk interactively]'))
+            menu_section.sentence_length_items.append(('ch', '[create chunk]'))
             menu_specifier.menu_sections.append(menu_section)
             menu_section = MenuSection()
             menu_section.menu_section_title = 'Materials'
             menu_section.menu_section_entries = self.list_numbered_materials()
-            menu_section.sentence_length_items.append(('ms', 'make new static material'))
-            menu_section.sentence_length_items.append(('mi', 'make new interactive material'))
+            menu_section.sentence_length_items.append(('ms', 'create material by hand'))
+            menu_section.sentence_length_items.append(('mi', 'create material interactively'))
             menu_specifier.menu_sections.append(menu_section)
-            menu_section = MenuSection()
-            menu_section.sentence_length_items.append(('st', 'svn status'))
-            menu_section.sentence_length_items.append(('cm', 'commit changes'))
-            menu_specifier.menu_sections.append(menu_section)
+            menu_specifier.hidden_items.append(('svn', 'work with repository'))
             key, value = menu_specifier.display_menu()
             if key == 'b':
                 return key, None
             elif key == 'ch':
-                self.make_new_chunk_by_hand(menu_header=self.score_title)
-            elif key == 'ci':
-                self.make_new_chunk_interactively(menu_header=self.score_title)
-            elif key == 'cm':
-                self.svn_cm()
-            elif key == 'h':
-                self.manage_chunks(menu_header=self.score_title)
+                self.create_chunk_interactively(menu_header=self.score_title)
+            #elif key == 'h':
+            #    self.manage_chunks(menu_header=self.score_title)
             elif key == 'ms':
-                self.make_new_static_material(menu_header=self.score_title)
+                self.create_static_material_interactively(menu_header=self.score_title)
             elif key == 'mi':
-                self.make_new_interactive_material(menu_header=self.score_title)
-            elif key == 'st':
-                self.svn_st()
+                self.create_interactive_material_interactively(menu_header=self.score_title)
+            elif key == 'svn':
+                self.manage_svn(menu_header=self.score_title)
             else:
                 try:
                     material_number = int(key)
@@ -282,28 +303,27 @@ class ScoreProxy(PackageProxy):
                 except (TypeError, ValueError):
                     pass
 
-    def make_new_chunk_by_hand(self):
-        return self.print_not_implemented()
-
-    def make_new_chunk_interactively(self):
-        return self.print_not_implemented()
-
-    def make_new_static_material(self):
-        return self.material_wrangler.create_static_material_package_interactively(
-            menu_header=self.score_title)
-
-    def make_new_interactive_material(self, menu_header=None):
+    def manage_svn(self, menu_header=None):
         while True:
-            key, value = self.maker_wrangler.select_interactive_maker(menu_header=menu_header)
-            if value is None:
+            menu_specifier = Menu()
+            menu_specifier.menu_header = menu_header
+            menu_specifier.menu_body = 'repository commands'
+            menu_section = MenuSection()
+            menu_section.sentence_length_items.append(('st', 'svn status'))
+            menu_section.sentence_length_items.append(('add', 'svn add'))
+            menu_section.sentence_length_items.append(('ci', 'svn commit'))
+            menu_section.layout = 'line'
+            menu_specifier.menu_sections.append(menu_section)
+            key, value = menu_specifier.display_menu()
+            if key == 'b':
+                return key, None
+            elif key == 'add':
+                self.svn_add()
+            elif key == 'ci':
+                self.svn_ci()
                 break
-            else:
-                maker = value
-            maker.score = self
-            result = maker.edit_interactively(menu_header=menu_header)
-            if result:
-                break
-        return True, None
+            elif key == 'st':
+                self.svn_st()
 
     def material_number_to_material_name(self, material_number):
         material_index = material_number - 1
