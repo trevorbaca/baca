@@ -76,11 +76,10 @@ class MaterialWrangler(DirectoryProxy):
         self.clear_terminal()
         menu_body = 'create static material package'
         menu_title = self.make_menu_title(menu_header, menu_body)
-        print menu_title
         materials_package_name = self.get_materials_package_name_of_new_material(menu_header=menu_title)
-        material_package_name = self.get_package_name_of_new_material_interactively(menu_header)
+        short_package_name = self.get_short_package_name_of_new_material_interactively(menu_header)
         has_visualizer = self.get_visualizer_status_of_new_material_package_interactively()
-        importable_package_name = '%s.%s' % (materials_package_name, material_package_name)
+        importable_package_name = '%s.%s' % (materials_package_name, short_package_name)
         self.create_static_material_package(importable_package_name, has_visualizer)
         self.proceed()
 
@@ -90,17 +89,17 @@ class MaterialWrangler(DirectoryProxy):
         else:
             return self.purview.materials_package_name
 
-    def get_package_name_of_new_material_interactively(self):
+    def get_short_package_name_of_new_material_interactively(self):
         response = raw_input('Material name: ')
         print ''
         response = response.lower()
         response = response.replace(' ', '_')
         if self.has_score_local_purview:
-            material_package_name = '%s_%s' % (self.purview.package_name, response)
+            short_package_name = '%s_%s' % (self.purview.short_package_name, response)
         else:
-            material_package_name = response
-        print 'Package name will be %s.\n' % material_package_name
-        return material_package_name
+            short_package_name = response
+        print 'Short package name will be %s.\n' % short_package_name
+        return short_package_name
 
     def get_visualizer_status_of_new_material_package_interactively(self):
         response = raw_input('Include visualizer? ')
@@ -119,28 +118,28 @@ class MaterialWrangler(DirectoryProxy):
 
     def list_shared_material_directories(self):
         shared_material_directories = []
-        for x in self.list_shared_material_package_names():
+        for x in self.list_shared_material_package_short_names():
             directory = os.path.join(self.directory, x)
             shared_material_directories.append(directory)
         return shared_material_directories
 
     def list_shared_material_names(self):
         shared_material_names = []
-        for x in self.list_shared_material_package_names():
+        for x in self.list_shared_material_package_short_names():
             shared_material_name = x.replace('_', ' ')
             shared_material_names.append(shared_material_name)
         return shared_material_names
         
-    def list_shared_material_package_names(self):
-        shared_material_package_names = []
+    def list_shared_material_package_short_names(self):
+        shared_material_package_short_names = []
         for x in os.listdir(self.directory):
             if x[0].isalpha():
                 directory = os.path.join(self.directory, x)
                 if os.path.isdir(directory):
                     initializer = os.path.join(directory, '__init__.py')
                     if os.path.isfile(initializer):
-                        shared_material_package_names.append(x)
-        return shared_material_package_names
+                        shared_material_package_short_names.append(x)
+        return shared_material_package_short_names
 
     def list_shared_material_summaries(self):
         summaries = []

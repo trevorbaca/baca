@@ -26,6 +26,10 @@ class PackageProxy(DirectoryProxy):
         return self._importable_package_name
 
     @property
+    def importable_parent_package_name(self):
+        return '.'.join(self.importable_package_name.split('.')[:-1])
+
+    @property
     def initializer(self):
         return os.path.join(self.directory, '__init__.py')
 
@@ -34,16 +38,12 @@ class PackageProxy(DirectoryProxy):
         return self.importable_package_name.split('.')[-1]
 
     @property
-    def package_name(self):
-        return self.base_name
-        
-    @property
     def parent_initializer(self):
         return os.path.join(self.parent_directory, '__init__.py')
 
     @property
-    def parent_module_name(self):
-        return '.'.join(self.importable_package_name.split('.')[:-1])
+    def short_package_name(self):
+        return self.base_name
         
     ### PRIVATE METHODS ###
 

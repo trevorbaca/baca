@@ -14,9 +14,9 @@ import shutil
 
 class _Maker(_SCFObject):
 
-    def __init__(self, material_name=None, score=None):
+    def __init__(self, underscore_material_name=None, score=None):
         _SCFObject.__init__(self)
-        self.material_name = material_name
+        self.underscore_material_name = underscore_material_name
         self.score = score
 
     ### OVERLOADS ###
@@ -79,10 +79,10 @@ class _Maker(_SCFObject):
 
     def set_material_package_directory(self):
         while True:
-            if self.material_name is None:
+            if self.underscored_material_name is None:
                 self.name_material()
                 print ''
-            print 'Package name will be %s.\n' % self.material_package_name
+            print 'Package short name will be %s.\n' % self.material_package_short_name
             if self.confirm():
                 break
 
@@ -155,7 +155,7 @@ class _Maker(_SCFObject):
     def has_changes(self):
         if not self.score == self._original_score:
             return True
-        elif not self.material_name == self._original_material_name:
+        elif not self.underscored_material_name == self._original_underscored_material_name:
             return True
         elif not self.user_input_wrapper == self._original_user_input_wrapper:
             return True
@@ -168,7 +168,7 @@ class _Maker(_SCFObject):
 
     @property
     def has_material_name(self):
-        return bool(self.material_name is not None)
+        return bool(self.underscored_material_name is not None)
 
     @property
     def is_shared(self):
@@ -181,39 +181,25 @@ class _Maker(_SCFObject):
         else:
             return 'Studio'
 
-    @apply
-    def material_name():
-        def fget(self):
-            return self._material_name
-        def fset(self, material_name):
-            assert isinstance(material_name, (str, type(None)))
-            self._material_name = material_name
-        return property(**locals())
-
     @property
     def material_menu_name(self):
         if self.has_material_name:
-            return self.material_name
+            return self.underscored_material_name
         else:
             return '(unnamed material)'
 
     @property
     def material_package_directory(self):
         if self.materials_directory_name:
-            if self.material_package_name:
-                return os.path.join(self.materials_directory_name, self.material_package_name)
+            if self.material_package_short_name:
+                return os.path.join(self.materials_directory_name, self.material_package_short_name)
 
     @property
-    def material_package_name(self):
+    def material_package_short_name(self):
         if self.score is None:  
             return self.underscored_material_name
         else:
-            return '%s_%s' % (self.score.package_name, self.underscored_material_name)
-
-    @property
-    def underscored_material_name(self):
-        if self.has_material_name:
-            return self.material_name.replace(' ', '_')
+            return '%s_%s' % (self.score.short_package_name, self.underscored_material_name)
 
     @property
     def materials_directory_name(self):
@@ -237,6 +223,15 @@ class _Maker(_SCFObject):
         if self.score is not None:
             return self.score.directory
 
+    @apply
+    def underscored_material_name():
+        def fget(self):
+            return self._underscored_material_name
+        def fset(self, underscored_material_name):
+            assert isinstance(underscored_material_name, (str, type(None)))
+            self._underscored_material_name = underscored_material_name
+        return property(**locals())
+
     ### PUBLIC METHODS ###
 
     def append_status_indicator(self, menu_body):
@@ -253,7 +248,7 @@ class _Maker(_SCFObject):
             user_input_wrapper = self._initialize_user_input_wrapper()
         self.user_input_wrapper = user_input_wrapper
         self._original_score = self.score
-        self._original_material_name = self.material_name
+        self._original_underscored_material_name = self.underscored_material_name
         self._original_user_input_wrapper = copy.deepcopy(user_input_wrapper)
         while True:
             menu_specifier = Menu(client=self)
@@ -384,7 +379,7 @@ class _Maker(_SCFObject):
                 material_package_proxy.manage_material(menu_header=menu.menu_title)
 
     def name_material(self):
-        self.material_name = raw_input('Material name> ')
+        self.underscored_material_name = raw_input('Material name> ')
 
     def overwrite_with_demo_input_values(self, user_input_wrapper):
         for key in self.user_input_template:
@@ -416,7 +411,7 @@ class _Maker(_SCFObject):
         menu_specifier.display_menu(score_title=self.score_title)
 
     def unname_material(self):
-        self.material_name = None
+        self.underscored_material_name = None
 
     def write_material_to_disk(self, user_input_wrapper, material, lilypond_file):
         self.set_material_package_directory()
