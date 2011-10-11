@@ -5,15 +5,15 @@ import os
 
 class PackageProxy(DirectoryProxy):
 
-    def __init__(self, importable_package_name):
-        directory = self.importable_package_name_to_directory(importable_package_name)
+    def __init__(self, package_importable_name):
+        directory = self.package_importable_name_to_directory(package_importable_name)
         DirectoryProxy.__init__(self, directory)
-        self._importable_package_name = importable_package_name
+        self._package_importable_name = package_importable_name
 
     ### OVERLOADS ###
 
     def __repr__(self):
-        return '%s(%r)' % (self.class_name, self.importable_package_name)
+        return '%s(%r)' % (self.class_name, self.package_importable_name)
 
     ### PUBLIC ATTRIBUTES ###
 
@@ -22,29 +22,29 @@ class PackageProxy(DirectoryProxy):
         return self.get_tag('creation_date')
         
     @property
-    def importable_package_name(self):
-        return self._importable_package_name
-
-    @property
-    def importable_parent_package_name(self):
-        return '.'.join(self.importable_package_name.split('.')[:-1])
-
-    @property
     def initializer(self):
         return os.path.join(self.directory, '__init__.py')
 
     @property
     def module_name(self):
-        return self.importable_package_name.split('.')[-1]
+        return self.package_importable_name.split('.')[-1]
 
+    @property
+    def package_importable_name(self):
+        return self._package_importable_name
+
+    @property
+    def package_short_name(self):
+        return self.base_name
+        
     @property
     def parent_initializer(self):
         return os.path.join(self.parent_directory, '__init__.py')
 
     @property
-    def short_package_name(self):
-        return self.base_name
-        
+    def parent_package_importable_name(self):
+        return '.'.join(self.package_importable_name.split('.')[:-1])
+
     ### PRIVATE METHODS ###
 
     def _read_initializer_metadata(self, name):
@@ -132,7 +132,7 @@ class PackageProxy(DirectoryProxy):
 
     def import_attribute_from_initializer(self, attribute_name):
         try:
-            exec('from %s import %s' % (self.importable_package_name, attribute_name))
+            exec('from %s import %s' % (self.package_importable_name, attribute_name))
             exec('result = %s' % attribute_name)
             return result
         except ImportError:
@@ -145,7 +145,7 @@ class PackageProxy(DirectoryProxy):
 
     def get_tags(self):
         try:
-            exec('from %s import tags' % self.importable_package_name)
+            exec('from %s import tags' % self.package_importable_name)
             return tags
         except ImportError:    
             return {}

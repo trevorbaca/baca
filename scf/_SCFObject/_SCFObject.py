@@ -11,8 +11,8 @@ class _SCFObject(object):
     def __init__(self):
         self._baca_directory_name = os.environ.get('BACA')
         self._baca_materials_directory_name = os.path.join(self.baca_directory_name, 'materials')
-        self._baca_materials_importable_package_name = 'baca.materials'
-        self._baca_materials_short_package_name = 'materials'
+        self._baca_materials_package_importable_name = 'baca.materials'
+        self._baca_materials_package_short_name = 'materials'
         self._scores_directory_name = os.environ.get('SCORES')
 
     ### OVERLOADS ###
@@ -31,12 +31,12 @@ class _SCFObject(object):
         return self._baca_materials_directory_name
 
     @property
-    def baca_materials_importable_package_name(self):
-        return self._baca_materials_importable_package_name
+    def baca_materials_package_importable_name(self):
+        return self._baca_materials_package_importable_name
 
     @property
     def baca_materials_short_pacakge_name(self):
-        return self._baca_materials_short_package_name
+        return self._baca_materials_package_short_name
 
     @property
     def class_name(self):
@@ -85,13 +85,13 @@ class _SCFObject(object):
     def get_date(self):
         return datetime.date(*time.localtime()[:3])
 
-    def get_material_package_proxy(self, importable_package_name):
+    def get_material_package_proxy(self, package_importable_name):
         from baca.scf.InteractiveMaterialProxy import InteractiveMaterialProxy
         from baca.scf.StaticMaterialProxy import StaticMaterialProxy
-        if self.is_interactive_material_package(importable_package_name):
-            return InteractiveMaterialProxy(importable_package_name)
+        if self.is_interactive_material_package(package_importable_name):
+            return InteractiveMaterialProxy(package_importable_name)
         else:
-            return StaticMaterialProxy(importable_package_name)
+            return StaticMaterialProxy(package_importable_name)
    
     def globally_replace_in_file(self, file_name, old, new):
         file_pointer = file(file_name, 'r')
@@ -104,20 +104,9 @@ class _SCFObject(object):
         file_pointer.write('\n'.join(new_file_lines))
         file_pointer.close()
 
-    def importable_package_name_to_directory(self, importable_package_name):
-        module_parts = importable_package_name.split('.')
-        if module_parts[0] == 'baca':
-            directory_parts = [os.environ.get('BACA')] + module_parts[1:]
-        elif module_parts[0] in os.listdir(os.environ.get('SCORES')):
-            directory_parts = [os.environ.get('SCORES')] + module_parts[:]
-        else:
-            raise ValueError('Unknown importable module name %r.' % importable_package_name)
-        directory = os.path.join(*directory_parts)
-        return directory
-
-    def is_interactive_material_package(self, importable_package_name):
+    def is_interactive_material_package(self, package_importable_name):
         from baca.scf.PackageProxy import PackageProxy
-        package_proxy = PackageProxy(importable_package_name)
+        package_proxy = PackageProxy(package_importable_name)
         return package_proxy.has_tag('maker')
 
     def make_menu_title(self, menu_header, menu_body):
@@ -127,6 +116,17 @@ class _SCFObject(object):
             menu_title = '%s - %s' % (menu_header, menu_body)
         menu_title = menu_title + '\n'
         return  menu_title.capitalize()
+
+    def package_importable_name_to_directory(self, package_importable_name):
+        package_name_parts = package_importable_name.split('.')
+        if package_name_parts[0] == 'baca':
+            directory_parts = [os.environ.get('BACA')] + package_name_parts[1:]
+        elif package_name_parts[0] in os.listdir(os.environ.get('SCORES')):
+            directory_parts = [os.environ.get('SCORES')] + package_name_parts[:]
+        else:
+            raise ValueError('Unknown importable module name %r.' % package_importable_name)
+        directory = os.path.join(*directory_parts)
+        return directory
 
     def print_not_implemented(self):
         print 'Not yet implemented.\n'

@@ -199,7 +199,7 @@ class _Maker(_SCFObject):
         if self.score is None:  
             return self.underscored_material_name
         else:
-            return '%s_%s' % (self.score.short_package_name, self.underscored_material_name)
+            return '%s_%s' % (self.score.package_short_name, self.underscored_material_name)
 
     @property
     def materials_directory_name(self):

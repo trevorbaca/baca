@@ -8,17 +8,17 @@ import sys
 
 class _MaterialProxy(PackageProxy):
 
-    def __init__(self, importable_package_name):
-        PackageProxy.__init__(self, importable_package_name)
+    def __init__(self, package_importable_name):
+        PackageProxy.__init__(self, package_importable_name)
         self.input_file_name = os.path.join(self.directory, 'input.py')
         self.output_file_name = os.path.join(self.directory, 'output.py')
         self.visualizer_file_name = os.path.join(self.directory, 'visualization.py')
         self.pdf_file_name = os.path.join(self.directory, 'visualization.pdf')
         self.ly_file_name = os.path.join(self.directory, 'visualization.ly')
         self.stylesheet_file_name = os.path.join(self.directory, 'stylesheet.ly')
-        self.input_module_name = '%s.input' % self.importable_package_name
-        self.output_module_name = '%s.output' % self.importable_package_name
-        self.visualization_module_name = '%s.visualization' % self.importable_package_name
+        self.input_module_name = '%s.input' % self.package_importable_name
+        self.output_module_name = '%s.output' % self.package_importable_name
+        self.visualization_module_name = '%s.visualization' % self.package_importable_name
 
     ### PUBLIC ATTRIBUTES ###
 
@@ -72,7 +72,7 @@ class _MaterialProxy(PackageProxy):
 
     @property
     def is_shared(self):
-        return bool(self.importable_package_name.startswith('baca'))
+        return bool(self.package_importable_name.startswith('baca'))
 
     @property
     def is_static(self):
@@ -87,14 +87,14 @@ class _MaterialProxy(PackageProxy):
 
     @property
     def module_name(self):
-        return self.importable_package_name.split('.')[-1]
+        return self.package_importable_name.split('.')[-1]
 
     @property
     def score_package_name(self):
-        if self.importable_package_name.startswith('baca'):
+        if self.package_importable_name.startswith('baca'):
             return None
         else:
-            return self.importable_package_name.split('.')[0]
+            return self.package_importable_name.split('.')[0]
 
     @property
     def spaced_material_name(self):
@@ -579,7 +579,7 @@ class _MaterialProxy(PackageProxy):
         self.remove_module_name_from_sys_modules(self.input_module_name)
 
     def unimport_material_module(self):
-        self.remove_module_name_from_sys_modules(self.importable_package_name)
+        self.remove_module_name_from_sys_modules(self.package_importable_name)
 
     def unimport_materials_module(self):
         self.remove_module_name_from_sys_modules(self.materials_module_name)

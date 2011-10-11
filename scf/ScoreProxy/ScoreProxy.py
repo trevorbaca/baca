@@ -10,8 +10,8 @@ import os
 
 class ScoreProxy(PackageProxy):
 
-    def __init__(self, importable_package_name):
-        PackageProxy.__init__(self, importable_package_name)
+    def __init__(self, package_importable_name):
+        PackageProxy.__init__(self, package_importable_name)
         self._material_wrangler = MaterialWrangler(purview=self)
         self._maker_wrangler = MakerWrangler()
 
@@ -27,7 +27,7 @@ class ScoreProxy(PackageProxy):
 
     @property
     def chunks_package_name(self):
-        return '.'.join([self.importable_package_name, 'mus', 'chunks'])
+        return '.'.join([self.package_importable_name, 'mus', 'chunks'])
 
     @property
     def dist_directory_name(self):
@@ -75,7 +75,7 @@ class ScoreProxy(PackageProxy):
 
     @property
     def materials_package_name(self):
-        return '.'.join([self.importable_package_name, 'mus', 'materials'])
+        return '.'.join([self.package_importable_name, 'mus', 'materials'])
 
     @property
     def mus_directory_name(self):
@@ -87,7 +87,7 @@ class ScoreProxy(PackageProxy):
 
     @property
     def mus_package_name(self):
-        return '.'.join([self.importable_package_name, 'mus'])
+        return '.'.join([self.package_importable_name, 'mus'])
 
     @apply
     def score_composer():
@@ -144,7 +144,7 @@ class ScoreProxy(PackageProxy):
         self.fix_score_package_directory_structure(is_interactive=False)
 
     def fix_package_structure(self, is_interactive=True):
-        if self.short_package_name == 'recursif':
+        if self.package_short_name == 'recursif':
             return
         for directory_name in self.score_subdirectory_names:
             if not os.path.exists(directory_name):
@@ -212,7 +212,7 @@ class ScoreProxy(PackageProxy):
     def list_numbered_materials(self):
         numbered_materials = []
         for i, material in enumerate(self.list_materials()):
-            material = material.replace('%s_' % self.short_package_name, '')
+            material = material.replace('%s_' % self.package_short_name, '')
             material = material.replace('_', ' ')
             numbered_material = (str(i + 1), material)
             numbered_materials.append(numbered_material)
@@ -299,7 +299,7 @@ class ScoreProxy(PackageProxy):
     def profile_package_structure(self):
         if not os.path.exists(self.directory_name):
             raise OSError('directory %r does not exist.' % self.directory_name)
-        if self.short_package_name == 'recursif':
+        if self.package_short_name == 'recursif':
             return
         for subdirectory_name in self.score_subdirectory_names:
             print '%s %s' % (subdirectory_name.ljust(80), os.path.exists(subdirectory_name))

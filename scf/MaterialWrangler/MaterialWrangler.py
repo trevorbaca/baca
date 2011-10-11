@@ -46,9 +46,9 @@ class MaterialWrangler(DirectoryProxy):
 
     ### PUBLIC METHODS ###
 
-    def create_interactive_material_package(self, importable_package_name):
+    def create_interactive_material_package(self, package_importable_name):
         self.print_not_implemented()
-        print 'Interactive material package %s created.\n' % importable_package_name
+        print 'Interactive material package %s created.\n' % package_importable_name
 
     def create_interactive_material_package_interactively(self, menu_header=None):
         while True:
@@ -67,20 +67,20 @@ class MaterialWrangler(DirectoryProxy):
     def create_material_by_hand(self):
         self.print_not_implemented()
 
-    def create_static_material_package(self, importable_package_name, has_visualizer=True):
-        static_material_proxy = StaticMaterialProxy(importable_package_name)
+    def create_static_material_package(self, package_importable_name, has_visualizer=True):
+        static_material_proxy = StaticMaterialProxy(package_importable_name)
         static_material_proxy.create(has_visualizer=has_visualizer)
-        print 'Static material package %s created.\n' % importable_package_name
+        print 'Static material package %s created.\n' % package_importable_name
 
     def create_static_material_package_interactively(self, menu_header=None):
         self.clear_terminal()
         menu_body = 'create static material package'
         menu_title = self.make_menu_title(menu_header, menu_body)
         materials_package_name = self.get_materials_package_name_of_new_material(menu_header=menu_title)
-        short_package_name = self.get_short_package_name_of_new_material_interactively(menu_header)
+        package_short_name = self.get_package_short_name_of_new_material_interactively(menu_header)
         has_visualizer = self.get_visualizer_status_of_new_material_package_interactively()
-        importable_package_name = '%s.%s' % (materials_package_name, short_package_name)
-        self.create_static_material_package(importable_package_name, has_visualizer)
+        package_importable_name = '%s.%s' % (materials_package_name, package_short_name)
+        self.create_static_material_package(package_importable_name, has_visualizer)
         self.proceed()
 
     def get_materials_package_name_of_new_material(self):
@@ -89,17 +89,17 @@ class MaterialWrangler(DirectoryProxy):
         else:
             return self.purview.materials_package_name
 
-    def get_short_package_name_of_new_material_interactively(self):
+    def get_package_short_name_of_new_material_interactively(self):
         response = raw_input('Material name: ')
         print ''
         response = response.lower()
         response = response.replace(' ', '_')
         if self.has_score_local_purview:
-            short_package_name = '%s_%s' % (self.purview.short_package_name, response)
+            package_short_name = '%s_%s' % (self.purview.package_short_name, response)
         else:
-            short_package_name = response
-        print 'Short package name will be %s.\n' % short_package_name
-        return short_package_name
+            package_short_name = response
+        print 'Short package name will be %s.\n' % package_short_name
+        return package_short_name
 
     def get_visualizer_status_of_new_material_package_interactively(self):
         response = raw_input('Include visualizer? ')
@@ -112,8 +112,8 @@ class MaterialWrangler(DirectoryProxy):
     def iterate_shared_material_proxies(self):
         for shared_material_directory in self.list_shared_material_directories():
             module_name = os.path.basename(shared_material_directory)
-            importable_package_name = 'baca.materials.%s' % module_name
-            proxy = PackageProxy(importable_package_name)
+            package_importable_name = 'baca.materials.%s' % module_name
+            proxy = PackageProxy(package_importable_name)
             yield proxy
 
     def list_shared_material_directories(self):
@@ -169,10 +169,10 @@ class MaterialWrangler(DirectoryProxy):
                 score_package_name = 'baca.materials'
                 material_name = value
                 if material_name.endswith('(@)'):
-                    importable_package_name = '%s.%s' % (score_package_name, material_name.strip(' (@)'))
-                    material_package_proxy = StaticMaterialProxy(importable_package_name)
+                    package_importable_name = '%s.%s' % (score_package_name, material_name.strip(' (@)'))
+                    material_package_proxy = StaticMaterialProxy(package_importable_name)
                 else:
-                    importable_package_name = '%s.%s' % (score_package_name, material_name)
-                    material_package_proxy = InteractiveMaterialProxy(importable_package_name)
+                    package_importable_name = '%s.%s' % (score_package_name, material_name)
+                    material_package_proxy = InteractiveMaterialProxy(package_importable_name)
                 material_package_proxy.score_title = 'Materials'
                 material_package_proxy.manage_material(menu_header=menu.menu_title)

@@ -49,7 +49,7 @@ class StudioInterface(DirectoryProxy):
             menu_specifier.menu_sections.append(menu_section)
             key, value = menu_specifier.display_menu()
             if key == 'baca':
-                return self.baca_materials_importable_package_name
+                return self.baca_materials_package_importable_name
             else:
                 score_title = value
                 score_package_name = self.score_wrangler.score_title_to_score_package_name(score_title)
