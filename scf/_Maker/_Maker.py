@@ -68,9 +68,9 @@ class _Maker(_SCFObject):
             materials_directory = os.path.dirname(self.material_package_directory)
             mus_directory = os.path.dirname(materials_directory)
             score_package_directory = os.path.dirname(mus_directory)
-            score_package_name = os.path.basename(score_package_directory)
+            score_package_short_name = os.path.basename(score_package_directory)
             score_wrangler = ScoreWrangler()
-            score_title = score_wrangler.score_package_name_to_score_title(score_package_name)
+            score_title = score_wrangler.score_package_short_name_to_score_title(score_package_short_name)
             subtitle = '(%s)' % score_title
         else:
             subtitle = '(shared material)'
@@ -219,9 +219,9 @@ class _Maker(_SCFObject):
         return property(**locals())
 
     @property
-    def score_package_name(self):
+    def score_package_short_name(self):
         if self.score is not None:
-            return self.score.directory
+            return self.score.package_short_name
 
     @apply
     def underscored_material_name():

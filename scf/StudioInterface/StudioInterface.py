@@ -38,7 +38,7 @@ class StudioInterface(DirectoryProxy):
 
     ### PUBLIC METHODS ###
 
-    def get_materials_package_name_interactively(self, menu_header=None):
+    def get_materials_package_importable_name_interactively(self, menu_header=None):
         while True:
             menu_specifier = Menu(client=self, menu_header=menu_header)
             menu_specifier.menu_body = 'select materials directory'
@@ -52,9 +52,10 @@ class StudioInterface(DirectoryProxy):
                 return self.baca_materials_package_importable_name
             else:
                 score_title = value
-                score_package_name = self.score_wrangler.score_title_to_score_package_name(score_title)
-                score_proxy = ScoreProxy(score_package_name)
-                return score_proxy.materials_package_name
+                score_package_importable_name = self.score_wrangler.score_title_to_score_package_importable_name(
+                    score_title)
+                score_proxy = ScoreProxy(score_package_importable_name)
+                return score_proxy.materials_package_importable_name
 
     def manage_svn(self, menu_header=None):
         while True:
@@ -112,6 +113,7 @@ class StudioInterface(DirectoryProxy):
                 self.manage_svn(menu_header='studio')
             else:
                 score_title = value
-                score_package_name = self.score_wrangler.score_title_to_score_package_name(score_title)
-                score_proxy = ScoreProxy(score_package_name)
+                score_package_importable_name = self.score_wrangler.score_title_to_score_package_short_name(
+                    score_title)
+                score_proxy = ScoreProxy(score_package_importable_name)
                 score_proxy.manage_score()

@@ -76,18 +76,19 @@ class MaterialWrangler(DirectoryProxy):
         self.clear_terminal()
         menu_body = 'create static material package'
         menu_title = self.make_menu_title(menu_header, menu_body)
-        materials_package_name = self.get_materials_package_name_of_new_material(menu_header=menu_title)
+        materials_package_importable_name = self.get_materials_package_importable_name_of_new_material(
+            menu_header=menu_title)
         package_short_name = self.get_package_short_name_of_new_material_interactively(menu_header)
         has_visualizer = self.get_visualizer_status_of_new_material_package_interactively()
-        package_importable_name = '%s.%s' % (materials_package_name, package_short_name)
+        package_importable_name = '%s.%s' % (materials_package_importable_name, package_short_name)
         self.create_static_material_package(package_importable_name, has_visualizer)
         self.proceed()
 
-    def get_materials_package_name_of_new_material(self):
+    def get_materials_package_importable_name_of_new_material(self):
         if self.has_studio_global_purview:
-            return self.purview.get_materials_package_name_interactively()
+            return self.purview.get_materials_package_importable_name_interactively()
         else:
-            return self.purview.materials_package_name
+            return self.purview.materials_package_importable_name
 
     def get_package_short_name_of_new_material_interactively(self):
         response = raw_input('Material name: ')
@@ -166,13 +167,13 @@ class MaterialWrangler(DirectoryProxy):
                 menu_title = menu.menu_title
                 self.material_wrangler.create_interactie_material_package_interactively(menu_header=menu_title)
             else:
-                score_package_name = 'baca.materials'
+                score_package_importable_name = 'baca.materials'
                 material_name = value
                 if material_name.endswith('(@)'):
-                    package_importable_name = '%s.%s' % (score_package_name, material_name.strip(' (@)'))
+                    package_importable_name = '%s.%s' % (score_package_importable_name, material_name.strip(' (@)'))
                     material_package_proxy = StaticMaterialProxy(package_importable_name)
                 else:
-                    package_importable_name = '%s.%s' % (score_package_name, material_name)
+                    package_importable_name = '%s.%s' % (score_package_importable_name, material_name)
                     material_package_proxy = InteractiveMaterialProxy(package_importable_name)
                 material_package_proxy.score_title = 'Materials'
                 material_package_proxy.manage_material(menu_header=menu.menu_title)

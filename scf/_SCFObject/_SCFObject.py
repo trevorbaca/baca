@@ -118,11 +118,11 @@ class _SCFObject(object):
         return  menu_title.capitalize()
 
     def package_importable_name_to_directory(self, package_importable_name):
-        package_name_parts = package_importable_name.split('.')
-        if package_name_parts[0] == 'baca':
-            directory_parts = [os.environ.get('BACA')] + package_name_parts[1:]
-        elif package_name_parts[0] in os.listdir(os.environ.get('SCORES')):
-            directory_parts = [os.environ.get('SCORES')] + package_name_parts[:]
+        package_importable_name_parts = package_importable_name.split('.')
+        if package_importable_name_parts[0] == 'baca':
+            directory_parts = [os.environ.get('BACA')] + package_importable_name_parts[1:]
+        elif package_importable_name_parts[0] in os.listdir(os.environ.get('SCORES')):
+            directory_parts = [os.environ.get('SCORES')] + package_importable_name_parts[:]
         else:
             raise ValueError('Unknown importable module name %r.' % package_importable_name)
         directory = os.path.join(*directory_parts)

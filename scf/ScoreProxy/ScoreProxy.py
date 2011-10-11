@@ -26,7 +26,7 @@ class ScoreProxy(PackageProxy):
         return os.path.join(self.chunks_directory_name, '__init__.py')
 
     @property
-    def chunks_package_name(self):
+    def chunks_package_importable_name(self):
         return '.'.join([self.package_importable_name, 'mus', 'chunks'])
 
     @property
@@ -74,7 +74,7 @@ class ScoreProxy(PackageProxy):
         return os.path.join(self.materials_directory_name, '__init__.py')
 
     @property
-    def materials_package_name(self):
+    def materials_package_importable_name(self):
         return '.'.join([self.package_importable_name, 'mus', 'materials'])
 
     @property
@@ -86,7 +86,7 @@ class ScoreProxy(PackageProxy):
         return os.path.join(self.mus_directory_name, '__init__.py')
 
     @property
-    def mus_package_name(self):
+    def mus_package_importable_name(self):
         return '.'.join([self.package_importable_name, 'mus'])
 
     @apply
@@ -198,7 +198,7 @@ class ScoreProxy(PackageProxy):
     def list_material_package_importable_names(self):
         material_package_importable_names = []
         for material in self.list_materials():
-            material_package_importable_name = '%s.%s' % (self.materials_package_name, material)
+            material_package_importable_name = '%s.%s' % (self.materials_package_importable_name, material)
             material_package_importable_names.append(material_package_importable_name)
         return material_package_importable_names
 
@@ -262,8 +262,8 @@ class ScoreProxy(PackageProxy):
                 try:
                     material_number = int(key)
                     material_name = self.material_number_to_material_name(material_number)
-                    package_name = '%s.%s' % (self.materials_package_name, material_name)
-                    material_package_proxy = self.get_material_package_proxy(package_name)
+                    package_importable_name = '%s.%s' % (self.materials_package_importable_name, material_name)
+                    material_package_proxy = self.get_material_package_proxy(package_importable_name)
                     material_package_proxy.score_title = self.score_title
                     material_package_proxy.manage_material(menu_header=menu_specifier.menu_title)
                 except (TypeError, ValueError):

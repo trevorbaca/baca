@@ -80,17 +80,17 @@ class _MaterialProxy(PackageProxy):
 
     @property
     def materials_module_name(self):
-        if self.score_package_name is None:
+        if self.score_package_short_name is None:
             return 'baca.materials'
         else:
-            return '%s.mus.materials' % self.score_package_name
+            return '%s.mus.materials' % self.score_package_short_name
 
     @property
     def module_name(self):
         return self.package_importable_name.split('.')[-1]
 
     @property
-    def score_package_name(self):
+    def score_package_short_name(self):
         if self.package_importable_name.startswith('baca'):
             return None
         else:
@@ -424,9 +424,9 @@ class _MaterialProxy(PackageProxy):
         output_file.write(output_line)
         output_file.close()
 
-    def prepend_score_package_name(self, material_name):
-        if not material_name.startswith(self.score_package_name + '_'):
-            material_name = '%s_%s' % (self.score_package_name, material_name)
+    def prepend_score_package_short_name(self, material_name):
+        if not material_name.startswith(self.score_package_short_name + '_'):
+            material_name = '%s_%s' % (self.score_package_short_name, material_name)
         return material_name
 
     def regenerate_everything(self, is_forced=False):
@@ -444,7 +444,7 @@ class _MaterialProxy(PackageProxy):
         print 'Current material name: %s' % self.underscored_material_name
         new_material_name = raw_input('New material name:     ')
         print ''
-        new_material_name = self.prepend_score_package_name(new_material_name)
+        new_material_name = self.prepend_score_package_short_name(new_material_name)
         print 'Current material name: %s' % self.underscored_material_name
         print 'New material name:     %s' % new_material_name
         print ''
@@ -499,7 +499,7 @@ class _MaterialProxy(PackageProxy):
 
     def reveal_modules(self):
         exec('module_names = sys.modules.keys()')
-        module_names = [x for x in module_names if x.startswith(self.score_package_name)]
+        module_names = [x for x in module_names if x.startswith(self.score_package_short_name)]
         module_names.sort()
         return module_names
 
@@ -593,7 +593,7 @@ class _MaterialProxy(PackageProxy):
         self.unimport_output_module()
 
     def unimport_score_package(self):
-        self.remove_module_name_from_sys_modules(self.score_package_name)
+        self.remove_module_name_from_sys_modules(self.score_package_short_name)
 
     def unimport_visualization_module(self):
         self.remove_module_name_from_sys_modules(self.visualization_module_name)
