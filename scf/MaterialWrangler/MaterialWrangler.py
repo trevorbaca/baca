@@ -52,7 +52,7 @@ class MaterialWrangler(DirectoryProxy):
 
     def create_interactive_material_package_interactively(self, menu_header=None):
         while True:
-            key, value = self.maker_wrangler.select_interactive_maker(menu_header=menu_header)
+            key, value = self.maker_wrangler.select_maker(menu_header=menu_header)
             if value is None:
                 break
             else:
@@ -124,7 +124,7 @@ class MaterialWrangler(DirectoryProxy):
             shared_material_directories.append(directory)
         return shared_material_directories
 
-    def list_shared_spaced_material_names(self):
+    def list_shared_material_spaced_names(self):
         spaced_material_names = []
         for package_short_name in self.list_shared_material_package_short_names():
             spaced_material_name = package_short_name.replace('_', ' ')
@@ -150,6 +150,9 @@ class MaterialWrangler(DirectoryProxy):
                 summary = summary + ' (@)'
             summaries.append(summary)
         return summaries
+
+    def list_shared_material_underscored_names(self):
+        return self.list_shared_material_package_short_names()
 
     def manage_shared_materials(self, menu_header=None, command_string=None):
         while True:

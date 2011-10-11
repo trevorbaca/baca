@@ -109,13 +109,6 @@ class ScoreWrangler(DirectoryProxy):
             score_titles_with_years.append(score_title_with_year)
         return score_titles_with_years
 
-    def list_materials_packages(self):
-        materials_packages = []
-        for score_package_importable_name in self.list_well_formed_score_package_importable_names():
-            score_proxy = ScoreProxy(score_package_importable_name)
-            materials_packages.extend(score_proxy.list_materials_packages())
-        return materials_packages
-
     def list_well_formed_score_package_importable_names(self):
         score_package_importable_names = os.listdir(self.directory_name)
         score_package_importable_names = [x for x in score_package_importable_names if x[0].isalpha()]

@@ -30,11 +30,11 @@ class MakerWrangler(DirectoryProxy):
                 exec('result = makers.%s()' % name)
                 yield result
 
-    def list_makers(self):
+    def list_maker_class_names(self):
         maker_directories = []
         for name in os.listdir(self.directory_name):
             if name[0].isalpha():
-                directory = os.path.join(self.director_name, name)
+                directory = os.path.join(self.directory_name, name)
                 if os.path.isdir(directory):
                     initializer = os.path.join(directory, '__init__.py')
                     if os.path.isfile(initializer):
@@ -59,7 +59,7 @@ class MakerWrangler(DirectoryProxy):
                 maker = self.get_maker(maker_name)
                 maker.manage_maker(menu_header=menu_header)
 
-    def select_interactive_maker(self, menu_header=None):
+    def select_maker(self, menu_header=None):
         menu_specifier = Menu(client=self, menu_header=menu_header)
         menu_specifier.menu_body = 'select maker'
         menu_specifier.items_to_number = self.list_maker_spaced_class_names()
