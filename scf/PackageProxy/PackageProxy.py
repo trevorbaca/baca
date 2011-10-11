@@ -1,19 +1,20 @@
 from baca.scf.DirectoryProxy import DirectoryProxy
 from baca.scf.menuing import UserInputGetter
 import os
+import sys
 
 
 class PackageProxy(DirectoryProxy):
 
-    def __init__(self, importable_module_name):
-        directory = self.importable_module_name_to_directory(importable_module_name)
-        DirectoryProxy.__init__(self, directory)
-        self._importable_module_name = importable_module_name
+    def __init__(self, package_importable_name):
+        directory_name = self.package_importable_name_to_directory(package_importable_name)
+        DirectoryProxy.__init__(self, directory_name)
+        self._package_importable_name = package_importable_name
 
     ### OVERLOADS ###
 
     def __repr__(self):
-        return '%s(%r)' % (self.class_name, self.importable_module_name)
+        return '%s(%r)' % (self.class_name, self.package_importable_name)
 
     ### PUBLIC ATTRIBUTES ###
 
@@ -22,29 +23,25 @@ class PackageProxy(DirectoryProxy):
         return self.get_tag('creation_date')
         
     @property
-    def importable_module_name(self):
-        return self._importable_module_name
-
-    @property
     def initializer(self):
-        return os.path.join(self.directory, '__init__.py')
+        return os.path.join(self.directory_name, '__init__.py')
 
     @property
-    def module_name(self):
-        return self.importable_module_name.split('.')[-1]
+    def package_importable_name(self):
+        return self._package_importable_name
 
     @property
-    def package_name(self):
+    def package_short_name(self):
         return self.base_name
         
     @property
     def parent_initializer(self):
-        return os.path.join(self.parent_directory, '__init__.py')
+        return os.path.join(self.parent_directory_name, '__init__.py')
 
     @property
-    def parent_module_name(self):
-        return '.'.join(self.importable_module_name.split('.')[:-1])
-        
+    def parent_package_importable_name(self):
+        return '.'.join(self.package_importable_name.split('.')[:-1])
+
     ### PRIVATE METHODS ###
 
     def _read_initializer_metadata(self, name):
@@ -132,7 +129,7 @@ class PackageProxy(DirectoryProxy):
 
     def import_attribute_from_initializer(self, attribute_name):
         try:
-            exec('from %s import %s' % (self.importable_module_name, attribute_name))
+            exec('from %s import %s' % (self.package_importable_name, attribute_name))
             exec('result = %s' % attribute_name)
             return result
         except ImportError:
@@ -145,7 +142,7 @@ class PackageProxy(DirectoryProxy):
 
     def get_tags(self):
         try:
-            exec('from %s import tags' % self.importable_module_name)
+            exec('from %s import tags' % self.package_importable_name)
             return tags
         except ImportError:    
             return {}
@@ -166,7 +163,7 @@ class PackageProxy(DirectoryProxy):
         from baca.scf.menuing import MenuSection
         from baca.scf.menuing import Menu
         while True:
-            menu = Menu(menu_header=menu_header)
+            menu = Menu(client=self, menu_header=menu_header)
             menu.menu_body = 'tags'
             section = MenuSection()
             section.lines_to_list = self.list_formatted_tags()
@@ -183,12 +180,16 @@ class PackageProxy(DirectoryProxy):
             elif key == 'del':
                 self.delete_tag_interactively(menu_header=menu.menu_title)
 
-    @staticmethod
-    def remove_module_name_from_sys_modules(self, module_name):
+    #@staticmethod
+    def remove_package_importable_name_from_sys_modules(self, package_importable_name):
         '''Total hack. But works.
         '''
-        command = "if '%s' in sys.modules: del(sys.modules['%s'])" % (module_name, module_name)
+        command = "if '%s' in sys.modules: del(sys.modules['%s'])" % (
+            package_importable_name, package_importable_name)
         exec(command)
+
+    def unimport_baca_package(self):
+        self.remove_package_importable_name_from_sys_modules('baca')
 
     def write_tags_to_initializer(self, tags):
         lines = []

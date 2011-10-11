@@ -1,3 +1,4 @@
+from baca.scf.ChunkWrangler import ChunkWrangler
 from baca.scf.InteractiveMaterialProxy import InteractiveMaterialProxy
 from baca.scf.MakerWrangler import MakerWrangler
 from baca.scf.MaterialWrangler import MaterialWrangler
@@ -8,26 +9,31 @@ from baca.scf.StaticMaterialProxy import StaticMaterialProxy
 import os
 
 
-class ScorePackageProxy(PackageProxy):
+class ScoreProxy(PackageProxy):
 
-    def __init__(self, importable_module_name):
-        PackageProxy.__init__(self, importable_module_name)
+    def __init__(self, package_importable_name):
+        PackageProxy.__init__(self, package_importable_name)
+        self._chunk_wrangler = ChunkWrangler('.'.join([package_importable_name, 'mus', 'chunks']))
         self._material_wrangler = MaterialWrangler(purview=self)
         self._maker_wrangler = MakerWrangler()
 
     ### PUBLIC ATTRIBUTES ###
 
     @property
+    def chunk_wrangler(self):
+        return self._chunk_wrangler
+
+    @property
     def chunks_directory_name(self):
-        return os.path.join(self.directory_name, 'mus', 'chunks')
+        return self.chunk_wrangler.directory_name
 
     @property
     def chunks_initializer(self):
-        return os.path.join(self.chunks_directory_name, '__init__.py')
+        return self.chunk_wrangler.initializer_file_name
 
     @property
-    def chunks_package_name(self):
-        return '.'.join([self.importable_module_name, 'mus', 'chunks'])
+    def chunks_package_importable_name(self):
+        return self.chunk_wrangler.package_importable_name
 
     @property
     def dist_directory_name(self):
@@ -74,8 +80,8 @@ class ScorePackageProxy(PackageProxy):
         return os.path.join(self.materials_directory_name, '__init__.py')
 
     @property
-    def materials_package_name(self):
-        return '.'.join([self.importable_module_name, 'mus', 'materials'])
+    def materials_package_importable_name(self):
+        return '.'.join([self.package_importable_name, 'mus', 'materials'])
 
     @property
     def mus_directory_name(self):
@@ -86,8 +92,8 @@ class ScorePackageProxy(PackageProxy):
         return os.path.join(self.mus_directory_name, '__init__.py')
 
     @property
-    def mus_package_name(self):
-        return '.'.join([self.importable_module_name, 'mus'])
+    def mus_package_importable_name(self):
+        return '.'.join([self.package_importable_name, 'mus'])
 
     @apply
     def score_composer():
@@ -140,14 +146,11 @@ class ScorePackageProxy(PackageProxy):
 
     ### PUBLIC METHODS ###
 
-    def create_material_package_interactively(self):
-        return self.material_wrangler.create_material_package_interactively()
-
     def create_package_structure(self):
         self.fix_score_package_directory_structure(is_interactive=False)
 
     def fix_package_structure(self, is_interactive=True):
-        if self.package_name == 'recursif':
+        if self.package_short_name == 'recursif':
             return
         for directory_name in self.score_subdirectory_names:
             if not os.path.exists(directory_name):
@@ -175,22 +178,41 @@ class ScorePackageProxy(PackageProxy):
             initializer.write(''.join(lines))
             initializer.close()
 
-    def iterate_interactive_materials(self):
-        for material_package_proxy in self.iterate_material_package_proxies():
-            if material_package_proxy.is_interactive:
-                yield material_package_proxy
+    def iterate_interactive_material_proxies(self):
+        for material_proxy in self.iterate_material_proxies():
+            if material_proxy.is_interactive:
+                yield material_proxy
 
-    def iterate_material_package_proxies(self):
-        for material_package_name in self.list_material_package_names():
-            material_package_proxy = self.get_material_package_proxy(material_package_name)
-            yield material_package_proxy
+    def iterate_material_proxies(self):
+        for material_package_importable_name in self.list_material_package_importable_names():
+            material_proxy = self.get_material_proxy(material_package_importable_name)
+            yield material_proxy
 
-    def list_chunks(self):
+    def iterate_static_material_proxies(self):
+        for material_proxy in self.iterate_material_proxies():
+            if not material_proxy.is_interactive:
+                yield material_proxy
+
+    def list_material_package_importable_names(self):
+        material_package_importable_names = []
+        for material in self.list_material_underscored_names():
+            material_package_importable_name = '%s.%s' % (self.materials_package_importable_name, material)
+            material_package_importable_names.append(material_package_importable_name)
+        return material_package_importable_names
+
+    def list_underscored_chunk_names(self):
         chunks = os.listdir(self.chunks_directory_name)
         chunks = [x for x in chunks if x[0].isalpha()]
         return chunks
 
-    def list_materials(self):
+    def list_underscored_chunk_names_with_numbers(self):
+        numbered_chunks = []
+        for i, chunk in enumerate(self.list_underscored_chunk_names()):
+            numbered_chunk = (str(i + 1), chunk)
+            numbered_chunks.append(numbered_chunk)
+        return numbered_chunks
+
+    def list_material_underscored_names(self):
         try:
             materials = os.listdir(self.materials_directory_name)
         except OSError:
@@ -198,24 +220,10 @@ class ScorePackageProxy(PackageProxy):
         materials = [x for x in materials if x[0].isalpha()]
         return materials
 
-    def list_material_package_names(self):
-        material_package_names = []
-        for material in self.list_materials():
-            material_package_name = '%s.%s' % (self.materials_package_name, material)
-            material_package_names.append(material_package_name)
-        return material_package_names
-
-    def list_numbered_chunks(self):
-        numbered_chunks = []
-        for i, chunk in enumerate(self.list_chunks()):
-            numbered_chunk = (str(i + 1), chunk)
-            numbered_chunks.append(numbered_chunk)
-        return numbered_chunks
-
-    def list_numbered_materials(self):
+    def list_material_underscored_names_with_numbers(self):
         numbered_materials = []
-        for i, material in enumerate(self.list_materials()):
-            material = material.replace('%s_' % self.package_name, '')
+        for i, material in enumerate(self.list_material_underscored_names()):
+            material = material.replace('%s_' % self.package_short_name, '')
             material = material.replace('_', ' ')
             numbered_material = (str(i + 1), material)
             numbered_materials.append(numbered_material)
@@ -236,95 +244,81 @@ class ScorePackageProxy(PackageProxy):
 
     def manage_score(self, menu_header=None, command_string=None):
         while True:
-            menu_specifier = Menu(menu_header=menu_header)
+            menu_specifier = Menu(client=self, menu_header=menu_header)
             menu_specifier.menu_body = self.score_title
             menu_section = MenuSection()
             menu_section.menu_section_title = 'Chunks'
-            menu_section.menu_section_entries = self.list_numbered_chunks()
-            menu_section.sentence_length_items.append(('ch', '[make new chunk by hand]'))
-            menu_section.sentence_length_items.append(('ci', '[make new chunk interactively]'))
+            menu_section.menu_section_entries = self.list_underscored_chunk_names_with_numbers()
+            menu_section.sentence_length_items.append(('ch', '[create chunk]'))
             menu_specifier.menu_sections.append(menu_section)
             menu_section = MenuSection()
             menu_section.menu_section_title = 'Materials'
-            menu_section.menu_section_entries = self.list_numbered_materials()
-            menu_section.sentence_length_items.append(('ms', 'make new static material'))
-            menu_section.sentence_length_items.append(('mi', 'make new interactive material'))
+            menu_section.menu_section_entries = self.list_material_underscored_names_with_numbers()
+            menu_section.sentence_length_items.append(('ms', 'create material by hand'))
+            menu_section.sentence_length_items.append(('mi', 'create material interactively'))
             menu_specifier.menu_sections.append(menu_section)
-            menu_section = MenuSection()
-            menu_section.sentence_length_items.append(('st', 'svn status'))
-            menu_section.sentence_length_items.append(('cm', 'commit changes'))
-            menu_specifier.menu_sections.append(menu_section)
+            menu_specifier.hidden_items.append(('svn', 'work with repository'))
             key, value = menu_specifier.display_menu()
             if key == 'b':
                 return key, None
             elif key == 'ch':
-                self.make_new_chunk_by_hand(menu_header=self.score_title)
-            elif key == 'ci':
-                self.make_new_chunk_interactively(menu_header=self.score_title)
-            elif key == 'cm':
-                self.svn_cm()
-            elif key == 'h':
-                self.manage_chunks(menu_header=self.score_title)
+                self.chunk_wrangler.create_chunk_interactively(menu_header=self.score_title)
             elif key == 'ms':
-                self.make_new_static_material(menu_header=self.score_title)
+                self.material_wrangler.create_static_material_package_interactively(menu_header=self.score_title)
             elif key == 'mi':
-                self.make_new_interactive_material(menu_header=self.score_title)
-            elif key == 'st':
-                self.svn_st()
+                self.material_wrangler.create_interactive_material_interactively(menu_header=self.score_title)
+            elif key == 'svn':
+                self.manage_svn(menu_header=self.score_title)
             else:
                 try:
                     material_number = int(key)
-                    material_name = self.material_number_to_material_name(material_number)
-                    package_name = '%s.%s' % (self.materials_package_name, material_name)
-                    material_package_proxy = self.get_material_package_proxy(package_name)
-                    material_package_proxy.score_title = self.score_title
-                    material_package_proxy.manage_material(menu_header=menu_specifier.menu_title)
+                    material_underscored_name = self.material_number_to_material_underscored_name(material_number)
+                    package_importable_name = '%s.%s' % (self.materials_package_importable_name, material_underscored_name)
+                    material_proxy = self.get_material_proxy(package_importable_name)
+                    material_proxy.score_title = self.score_title
+                    material_proxy.manage_material(menu_header=menu_specifier.menu_title)
                 except (TypeError, ValueError):
                     pass
 
-    def make_new_chunk_by_hand(self):
-        return self.print_not_implemented()
-
-    def make_new_chunk_interactively(self):
-        return self.print_not_implemented()
-
-    def make_new_static_material(self):
-        return self.material_wrangler.create_static_material_package_interactively(
-            menu_header=self.score_title)
-
-    def make_new_interactive_material(self, menu_header=None):
+    def manage_svn(self, menu_header=None):
         while True:
-            key, value = self.maker_wrangler.select_interactive_maker(menu_header=menu_header)
-            if value is None:
+            menu_specifier = Menu(client=self)
+            menu_specifier.menu_header = menu_header
+            menu_specifier.menu_body = 'repository commands'
+            menu_section = MenuSection()
+            menu_section.sentence_length_items.append(('st', 'svn status'))
+            menu_section.sentence_length_items.append(('add', 'svn add'))
+            menu_section.sentence_length_items.append(('ci', 'svn commit'))
+            menu_section.layout = 'line'
+            menu_specifier.menu_sections.append(menu_section)
+            key, value = menu_specifier.display_menu()
+            if key == 'b':
+                return key, None
+            elif key == 'add':
+                self.svn_add()
+            elif key == 'ci':
+                self.svn_ci()
                 break
-            else:
-                maker = value
-            maker.score = self
-            result = maker.edit_interactively(menu_header=menu_header)
-            if result:
-                break
-        return True, None
+            elif key == 'st':
+                self.svn_st()
 
-    def material_number_to_material_name(self, material_number):
+    def material_number_to_material_underscored_name(self, material_number):
         material_index = material_number - 1
-        material_name = self.list_materials()[material_index]
-        return material_name
+        material_underscored_name = self.list_material_underscored_names()[material_index]
+        return material_underscored_name
 
     def profile_package_structure(self):
         if not os.path.exists(self.directory_name):
             raise OSError('directory %r does not exist.' % self.directory_name)
-        if self.package_name == 'recursif':
+        if self.package_short_name == 'recursif':
             return
         for subdirectory_name in self.score_subdirectory_names:
             print '%s %s' % (subdirectory_name.ljust(80), os.path.exists(subdirectory_name))
         for initializer in self.score_initializers:
             print '%s %s' % (initializer.ljust(80), os.path.exists(initializer))
 
-    def run_chunk_selection_interface(self):
-        self.print_not_implemented()
-
     def summarize_chunks(self):
-        chunks = self.list_chunks()
+        chunks = self.list_underscored_chunk_names()
         print self.tab(1),
         if not chunks:
             print 'Chunks (none yet)'
@@ -336,7 +330,7 @@ class ScorePackageProxy(PackageProxy):
         print ''
 
     def summarize_materials(self):
-        materials = self.list_materials()
+        materials = self.list_material_underscored_names()
         print self.tab(1),
         if not materials:
             print 'Materials (none yet)'

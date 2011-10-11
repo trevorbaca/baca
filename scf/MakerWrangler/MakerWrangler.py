@@ -1,14 +1,21 @@
 from abjad.tools import iotools
-from baca.scf.DirectoryProxy import DirectoryProxy
+from abjad.tools import layouttools
+from abjad.tools import lilypondfiletools
+from baca.scf.PackageProxy import PackageProxy
 from baca.scf.menuing import Menu
 import os
 
 
-class MakerWrangler(DirectoryProxy):
+class MakerWrangler(PackageProxy):
 
-    def __init__(self, score_title=None):
-        self.score_title = score_title
-        self.makers_directory = os.path.join(os.environ.get('BACA'), 'makers')
+    def __init__(self):
+        package_importable_name = 'baca.makers'
+        PackageProxy.__init__(self, package_importable_name)
+
+    ### OVERLOADS ###
+
+    def __repr__(self):
+        return '%s()' % self.class_name
 
     ### PUBLIC METHODS ###
 
@@ -18,17 +25,18 @@ class MakerWrangler(DirectoryProxy):
         return maker
 
     def iterate_makers(self):
-        exec('from baca import makers')
-        for name in dir(makers):
-            if name[0].isalpha():
-                exec('result = makers.%s()' % name)
-                yield result
+        self.unimport_baca_package()
+        self.unimport_makers_package()
+        exec('import baca')
+        for maker_class_name in self.list_maker_class_names():
+            exec('result = baca.makers.%s()' % maker_class_name)
+            yield result
 
-    def list_makers(self):
+    def list_maker_class_names(self):
         maker_directories = []
-        for name in os.listdir(self.makers_directory):
+        for name in os.listdir(self.directory_name):
             if name[0].isalpha():
-                directory = os.path.join(self.makers_directory, name)
+                directory = os.path.join(self.directory_name, name)
                 if os.path.isdir(directory):
                     initializer = os.path.join(directory, '__init__.py')
                     if os.path.isfile(initializer):
@@ -36,16 +44,109 @@ class MakerWrangler(DirectoryProxy):
         return maker_directories
 
     def list_maker_spaced_class_names(self):
-        return [maker.spaced_class_name for maker in self.iterate_makers()]
+        maker_spaced_class_names = []
+        for maker in self.iterate_makers():
+            maker_spaced_class_names.append(maker.spaced_class_name)
+        return maker_spaced_class_names
 
+    def make_maker(self, menu_header=None):
+        while True:
+            maker_name = raw_input('Maker name> ')
+            print ''
+            if iotools.is_uppercamelcase_string(maker_name):
+                if maker_name.endswith('Maker'):
+                    break
+        while True:
+            generic_output_product = raw_input('Generic output product> ')
+            print ''
+            break
+        maker_directory = os.path.join(self.directory_name, maker_name)
+        os.mkdir(maker_directory)
+        self.make_maker_initializer(maker_name)
+        self.make_maker_class_file(maker_name, generic_output_product)
+        self.make_maker_stylesheet(maker_name)
+
+    # TODO: change to boilerplate file stored in maker package
+    def make_maker_initializer(self, maker_name):
+        initializer_file_name = os.path.join(self.directory_name, maker_name, '__init__.py')
+        initializer = file(initializer_file_name, 'w')
+        line = 'from abjad.tools.importtools._import_structured_package import _import_structured_package\n'
+        initializer.write(line)
+        initializer.write('\n')
+        initializer.write("_import_structured_package(__path__[0], globals(), 'baca')\n")
+        initializer.close() 
+
+    # TODO: change to boilerplate file stored in maker package
+    def make_maker_class_file(self, maker_name, generic_output_name):
+        class_file_name = os.path.join(self.directory_name, maker_name, maker_name + '.py')
+        class_file = file(class_file_name, 'w')
+        lines = []
+        lines.append('from abjad.tools import lilypondfiletools')
+        lines.append('from baca.scf._Maker import _Maker')
+        lines.append('from baca.scf.UserInputWrapper import UserInputWrapper')
+        lines.append('import os')
+        lines.append('')
+        lines.append('')
+        lines.append('class %s(_Maker):' % maker_name)
+        lines.append('')
+        lines.append('    def __init__(self, **kwargs):')
+        lines.append('        _Maker.__init__(self, **kwargs)')
+        lines.append("        self.stylesheet = os.path.join(os.path.dirname(__file__), 'stylesheet.ly')")
+        lines.append("        self._generic_output_name = %r" % generic_output_name)
+        lines.append('')
+        lines.append('    ### PUBLIC ATTRIBUTES ###')
+        lines.append('')
+        lines.append('    output_file_import_statements = [')
+        lines.append('        ]')
+        lines.append('')
+        lines.append('    user_input_import_statements = [')
+        lines.append('        ]')
+        lines.append('')
+        lines.append('    user_input_template = UserInputWrapper([')
+        lines.append('        ])')
+        lines.append('')
+        lines.append('    ### PUBLIC METHODS ###')
+        lines.append('')
+        lines.append('    def get_output_file_lines(self, material, material_underscored_name):')
+        lines.append('        output_file_lines = []')
+        lines.append('        return output_file_lines')
+        lines.append('')
+        lines.append('    def make(self, foo, bar):')
+        lines.append('        return material')
+        lines.append('')
+        lines.append('    def make_lilypond_file_from_output_material(self, material):')
+        lines.append('        lilypond_file = lilypondfiletools.make_basic_lilypond_file()')
+        lines.append('        return lilypond_file')
+        class_file.write('\n'.join(lines))
+        class_file.close()
+
+    # TODO: change to boilerplate file stored in maker package
+    def make_maker_stylesheet(self, maker_name):
+        stylesheet = lilypondfiletools.make_basic_lilypond_file()
+        stylesheet.pop()
+        stylesheet.file_initial_system_comments = []
+        stylesheet.default_paper_size = 'letter', 'portrait'
+        stylesheet.global_staff_size = 14
+        stylesheet.layout_block.indent = 0
+        stylesheet.layout_block.ragged_right = True
+        stylesheet.paper_block.makup_system_spacing = layouttools.make_spacing_vector(0, 0, 12, 0)
+        stylesheet.paper_block.system_system_spacing = layouttools.make_spacing_vector(0, 0, 10, 0)
+        stylesheet_file_name = os.path.join(self.directory_name, maker_name, 'stylesheet.ly')
+        stylesheet_file_pointer = file(stylesheet_file_name, 'w')
+        stylesheet_file_pointer.write(stylesheet.format)
+        stylesheet_file_pointer.close()
+        
     def manage_makers(self, menu_header=None):
         while True:
-            menu_specifier = Menu(menu_header=menu_header)
-            menu_specifier.menu_body = 'interactive material makers'
-            menu_specifier.items_to_number = self.list_maker_spaced_class_names()
-            key, value = menu_specifier.display_menu()
+            menu = Menu(client=self, menu_header=menu_header)
+            menu.menu_body = 'select maker'
+            menu.items_to_number = self.list_maker_spaced_class_names()
+            menu.named_pairs.append(('new', 'make maker'))
+            key, value = menu.display_menu()
             if key == 'b':
                 return key, value
+            elif key == 'new':
+                self.make_maker(menu_header=menu_header)
             else:
                 maker_name = value
                 maker_name = maker_name.replace(' ', '_')
@@ -53,11 +154,11 @@ class MakerWrangler(DirectoryProxy):
                 maker = self.get_maker(maker_name)
                 maker.manage_maker(menu_header=menu_header)
 
-    def select_interactive_maker(self, menu_header=None):
-        menu_specifier = Menu(menu_header=menu_header)
-        menu_specifier.menu_body = 'select maker'
-        menu_specifier.items_to_number = self.list_maker_spaced_class_names()
-        key, value = menu_specifier.display_menu()
+    def select_maker(self, menu_header=None):
+        menu = Menu(client=self, menu_header=menu_header)
+        menu.menu_body = 'select maker'
+        menu.items_to_number = self.list_maker_spaced_class_names()
+        key, value = menu.display_menu()
         if value is not None:
             maker_name = value.replace(' ', '_')
             maker_name = iotools.underscore_delimited_lowercase_to_uppercamelcase(maker_name)           
@@ -65,3 +166,6 @@ class MakerWrangler(DirectoryProxy):
             return True, maker
         else:
             return True, None
+
+    def unimport_makers_package(self):
+        self.remove_package_importable_name_from_sys_modules(self.package_importable_name)

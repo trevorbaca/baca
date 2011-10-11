@@ -1,12 +1,15 @@
 class MenuSection(object):
 
-    def __init__(self, menu_section_title='', lines_to_list=None,
-        menu_section_entries=None, sentence_length_items=None, indent_level=1, 
+    def __init__(self, menu_section_title=None, lines_to_list=None,
+        menu_section_entries=None, sentence_length_items=None, 
+        items_to_number=None, hidden_items=None, indent_level=1, 
         hide_menu=False, layout='list'):
         self.menu_section_title = menu_section_title
         self.lines_to_list = lines_to_list
         self.menu_section_entries = menu_section_entries
         self.sentence_length_items = sentence_length_items
+        self.items_to_number = items_to_number
+        self.hidden_items = hidden_items
         self.indent_level = indent_level
         self.hide_menu = hide_menu
         self.layout = layout
@@ -22,7 +25,7 @@ class MenuSection(object):
         if not self.hide_menu:
             if self.menu_section_title:
                 self._print_tab(self.indent_level)
-                print self.menu_section_title
+                print self.menu_section_title.capitalize()
                 print ''
 
     def _print_tab(self, n):
@@ -33,6 +36,17 @@ class MenuSection(object):
         return 4 * n * ' '
     
     ### PUBLIC ATTRIBUTES ###
+
+    @apply
+    def hidden_items():
+        def fget(self):
+            return self._hidden_items
+        def fset(self, hidden_items):
+            if hidden_items is None:
+                self._hidden_items = []
+            else:
+                self._hidden_items = hidden_items[:]
+        return property(**locals())
 
     @apply
     def hide_menu():
@@ -50,6 +64,17 @@ class MenuSection(object):
         def fset(self, indent_level):
             assert isinstance(indent_level, int)
             self._indent_level = indent_level
+        return property(**locals())
+
+    @apply
+    def items_to_number():
+        def fget(self):
+            return self._items_to_number
+        def fset(self, items_to_number):
+            if items_to_number is None:
+                self._items_to_number = []
+            else:
+                self._items_to_number = items_to_number[:]
         return property(**locals())
 
     @apply
@@ -88,7 +113,7 @@ class MenuSection(object):
         def fget(self):
             return self._menu_section_title
         def fset(self, menu_section_title):
-            assert isinstance(menu_section_title, str)
+            assert isinstance(menu_section_title, (str, type(None)))
             self._menu_section_title = menu_section_title
         return property(**locals())
 
@@ -107,6 +132,16 @@ class MenuSection(object):
 
     def display(self, all_keys, all_values):
         self._display_menu_section_title()
+        for i, value in enumerate(self.items_to_number):
+            if not self.hide_menu:
+                self._print_tab(self.indent_level),
+                key = str(i + 1)
+                print '%s: %s' % (key, value)
+            all_keys.append(key)
+            all_values.append(value)
+        if self.items_to_number:
+            if not self.hide_menu:
+                print ''
         for line in self.lines_to_list:
             if not self.hide_menu:
                 self._print_tab(self.indent_level),
@@ -138,3 +173,11 @@ class MenuSection(object):
         if self.sentence_length_items:
             if not self.hide_menu:
                 print ''
+        for key, value in self.hidden_items:
+            all_keys.append(key)
+            all_values.append(value)
+
+    def show_hidden_items(self):
+        for key, value in self.hidden_items:
+            self._print_tab(self.indent_level),
+            print '%s: %s' % (key, value)

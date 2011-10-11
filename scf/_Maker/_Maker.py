@@ -2,8 +2,10 @@ from abjad.tools import iotools
 from abjad.tools import lilypondfiletools
 from abjad.tools import markuptools
 from baca.scf._SCFObject import _SCFObject
+from baca.scf.DirectoryProxy import DirectoryProxy
 from baca.scf.MaterialWrangler import MaterialWrangler
 from baca.scf.menuing import Menu
+from baca.scf.menuing import MenuSection
 from baca.scf.ScoreWrangler import ScoreWrangler
 from baca.scf.UserInputWrapper import UserInputWrapper
 import copy
@@ -13,10 +15,9 @@ import shutil
 
 class _Maker(_SCFObject):
 
-    def __init__(self, directory=None, material_name=None, score=None):
+    def __init__(self, material_underscored_name=None, score=None):
         _SCFObject.__init__(self)
-        self.directory = directory
-        self.material_name = material_name
+        self.material_underscored_name = material_underscored_name
         self.score = score
 
     ### OVERLOADS ###
@@ -39,8 +40,8 @@ class _Maker(_SCFObject):
         file_pointer.close()
 
     def _add_line_to_materials_initializer(self):
-        material_name = os.path.basename(self.material_package_directory)
-        import_statement = 'from %s import %s\n' % (material_name, material_name)
+        material_underscored_name = os.path.basename(self.material_package_directory)
+        import_statement = 'from %s import %s\n' % (material_underscored_name, material_underscored_name)
         initializer = self._get_initializer()
         self._add_line_to_initializer(initializer, import_statement)
 
@@ -53,13 +54,13 @@ class _Maker(_SCFObject):
         return initializer
 
     def _get_lilypond_score_title(self):
-        material_name = os.path.basename(self.material_package_directory)
+        material_underscored_name = os.path.basename(self.material_package_directory)
         if self.is_shared:
-            material_parts = material_name.split('_')
+            material_parts = material_underscored_name.split('_')
         else:
-            material_parts = material_name.split('_')[1:]
-        material_name = ' '.join(material_parts)
-        title = material_name.capitalize()
+            material_parts = material_underscored_name.split('_')[1:]
+        material_spaced_name = ' '.join(material_parts)
+        title = material_spaced_name.capitalize()
         title = markuptools.Markup(title)
         return title
 
@@ -68,9 +69,9 @@ class _Maker(_SCFObject):
             materials_directory = os.path.dirname(self.material_package_directory)
             mus_directory = os.path.dirname(materials_directory)
             score_package_directory = os.path.dirname(mus_directory)
-            score_package_name = os.path.basename(score_package_directory)
+            score_package_short_name = os.path.basename(score_package_directory)
             score_wrangler = ScoreWrangler()
-            score_title = score_wrangler.score_package_name_to_score_title(score_package_name)
+            score_title = score_wrangler.score_package_short_name_to_score_title(score_package_short_name)
             subtitle = '(%s)' % score_title
         else:
             subtitle = '(shared material)'
@@ -79,10 +80,10 @@ class _Maker(_SCFObject):
 
     def set_material_package_directory(self):
         while True:
-            if self.material_name is None:
+            if self.material_underscored_name is None:
                 self.name_material()
                 print ''
-            print 'Package name will be %s.\n' % self.material_package_name
+            print 'Package short name will be %s.\n' % self.material_package_short_name
             if self.confirm():
                 break
 
@@ -111,9 +112,9 @@ class _Maker(_SCFObject):
         for line in user_input_lines:
             input_file.write(line + '\n')
         input_file.write('\n')
-        material_name = os.path.basename(self.material_package_directory)
+        material_underscored_name = os.path.basename(self.material_package_directory)
         input_file.write('maker = %s()\n' % type(self).__name__)
-        input_file.write('%s = maker.make(**user_input)\n' % material_name)
+        input_file.write('%s = maker.make(**user_input)\n' % material_underscored_name)
         input_file.close()
 
     def _write_output_file_to_disk(self, material):
@@ -123,8 +124,8 @@ class _Maker(_SCFObject):
             output_file.write(line + '\n')
         if output_file_import_statements:
             output_file.write('\n\n')
-        material_name = os.path.basename(self.material_package_directory)
-        output_file_lines = self.get_output_file_lines(material, material_name)
+        material_underscored_name = os.path.basename(self.material_package_directory)
+        output_file_lines = self.get_output_file_lines(material, material_underscored_name)
         for line in output_file_lines:
             output_file.write(line + '\n')
         output_file.close()
@@ -144,10 +145,18 @@ class _Maker(_SCFObject):
     ### PUBLIC ATTRIBUTES ###
 
     @property
+    def directory(self):
+        raise Exception('needs to be derived from material name')
+
+    @property
+    def generic_output_name(self):
+        return self._generic_output_name
+
+    @property
     def has_changes(self):
         if not self.score == self._original_score:
             return True
-        elif not self.material_name == self._original_material_name:
+        elif not self.material_underscored_name == self._original_material_underscored_name:
             return True
         elif not self.user_input_wrapper == self._original_user_input_wrapper:
             return True
@@ -159,8 +168,8 @@ class _Maker(_SCFObject):
         return bool(self.score is not None)
 
     @property
-    def has_material_name(self):
-        return bool(self.material_name is not None)
+    def has_material_underscored_name(self):
+        return bool(self.material_underscored_name is not None)
 
     @property
     def is_shared(self):
@@ -173,39 +182,41 @@ class _Maker(_SCFObject):
         else:
             return 'Studio'
 
-    @apply
-    def material_name():
-        def fget(self):
-            return self._material_name
-        def fset(self, material_name):
-            assert isinstance(material_name, (str, type(None)))
-            self._material_name = material_name
-        return property(**locals())
-
     @property
     def material_menu_name(self):
-        if self.has_material_name:
-            return self.material_name
+        if self.has_material_underscored_name:
+            return self.material_spaced_name
         else:
             return '(unnamed material)'
 
     @property
     def material_package_directory(self):
         if self.materials_directory_name:
-            if self.material_package_name:
-                return os.path.join(self.materials_directory_name, self.material_package_name)
+            if self.material_package_short_name:
+                return os.path.join(self.materials_directory_name, self.material_package_short_name)
 
     @property
-    def material_package_name(self):
+    def material_package_short_name(self):
         if self.score is None:  
-            return self.underscored_material_name
+            return self.material_underscored_name
         else:
-            return '%s_%s' % (self.score.package_name, self.underscored_material_name)
+            return '%s_%s' % (self.score.package_short_name, self.material_underscored_name)
 
     @property
-    def underscored_material_name(self):
-        if self.has_material_name:
-            return self.material_name.replace(' ', '_')
+    def material_spaced_name(self):
+        if self.has_material_underscored_name:
+            return self.material_underscored_name.replace('_', ' ')
+
+    @apply
+    def material_underscored_name():
+        def fget(self):
+            return self._material_underscored_name
+        def fset(self, material_underscored_name):
+            assert isinstance(material_underscored_name, (str, type(None)))
+            if isinstance(material_underscored_name, str):
+                assert iotools.is_underscore_delimited_lowercase_string(material_underscored_name)
+            self._material_underscored_name = material_underscored_name
+        return property(**locals())
 
     @property
     def materials_directory_name(self):
@@ -219,15 +230,15 @@ class _Maker(_SCFObject):
         def fget(self):
             return self._score
         def fset(self, score):
-            from baca.scf.ScorePackageProxy import ScorePackageProxy
-            assert isinstance(score, (ScorePackageProxy, type(None)))
+            from baca.scf.ScoreProxy import ScoreProxy
+            assert isinstance(score, (ScoreProxy, type(None)))
             self._score = score
         return property(**locals())
 
     @property
-    def score_package_name(self):
+    def score_package_short_name(self):
         if self.score is not None:
-            return self.score.directory
+            return self.score.package_short_name
 
     ### PUBLIC METHODS ###
 
@@ -245,10 +256,10 @@ class _Maker(_SCFObject):
             user_input_wrapper = self._initialize_user_input_wrapper()
         self.user_input_wrapper = user_input_wrapper
         self._original_score = self.score
-        self._original_material_name = self.material_name
+        self._original_material_underscored_name = self.material_underscored_name
         self._original_user_input_wrapper = copy.deepcopy(user_input_wrapper)
         while True:
-            menu_specifier = Menu()
+            menu_specifier = Menu(client=self)
             menu_body = '%s - %s - %s - edit interactively'
             menu_body %= (self.location_name, self.spaced_class_name, self.material_menu_name)
             menu_body = self.append_status_indicator(menu_body)
@@ -257,7 +268,7 @@ class _Maker(_SCFObject):
             if self.user_input_wrapper.is_complete:
                 menu_specifier.sentence_length_items.append(('p', 'show pdf of given input'))
                 menu_specifier.sentence_length_items.append(('m', 'write material to disk'))
-            if self.has_material_name:
+            if self.has_material_underscored_name:
                 menu_specifier.sentence_length_items.append(('n', 'rename material'))
             else:
                 menu_specifier.sentence_length_items.append(('n', 'name material'))
@@ -266,7 +277,7 @@ class _Maker(_SCFObject):
             menu_specifier.sentence_length_items.append(('o', 'overwrite with demo input values'))
             menu_specifier.sentence_length_items.append(('i', 'import values'))
             menu_specifier.sentence_length_items.append(('c', 'clear values'))
-            #menu_specifier.sentence_length_items.append(('ed', 'edit source'))
+            #menu_specifier.sentence_length_items.append(('src', 'edit source'))
             if self.has_location:
                 menu_specifier.sentence_length_items.append(('l', 'change location'))
             else:
@@ -279,8 +290,6 @@ class _Maker(_SCFObject):
                 self.clear_values(self.user_input_wrapper)
             elif key == 'd':
                 self.show_demo_input_values()
-            elif key == 'ed':
-                self.edit_source_file()
             elif key == 'i':
                 self.import_values()
             elif key == 'l':
@@ -301,6 +310,8 @@ class _Maker(_SCFObject):
                 lilypond_file.header_block.title = markuptools.Markup(self.generic_output_name.capitalize())
                 lilypond_file.header_block.subtitle = markuptools.Markup('(unsaved)')
                 iotools.show(lilypond_file)
+            elif key == 'src':
+                self.edit_source_file()
             else:
                 try:
                     number = int(key)
@@ -323,9 +334,9 @@ class _Maker(_SCFObject):
         from baca.scf.ScoreWrangler import ScoreWrangler
         score_wrangler = ScoreWrangler()
         menu_header = 'import %s' % self.spaced_class_name
-        material_package_proxy = score_wrangler.select_interactive_material_package_proxy(
+        material_proxy = score_wrangler.select_interactive_material_proxy(
             menu_header=menu_header, klasses=(type(self),))
-        self.user_input_wrapper = copy.deepcopy(material_package_proxy.user_input_wrapper)
+        self.user_input_wrapper = copy.deepcopy(material_proxy.user_input_wrapper)
     
     def interactively_check_and_save_material(self, user_input_wrapper):
         if user_input_wrapper.is_complete:
@@ -335,7 +346,7 @@ class _Maker(_SCFObject):
     def iterate_materials_based_on_maker(self):
         from baca.scf.ScoreWrangler import ScoreWrangler
         score_wrangler = ScoreWrangler()
-        for material_proxy in score_wrangler.iterate_material_package_proxies(class_names=(self.class_name,)):
+        for material_proxy in score_wrangler.iterate_material_proxies(class_names=(self.class_name,)):
             yield material_proxy
 
     def make_lilypond_file_from_user_input_wrapper(self, user_input_wrapper):
@@ -344,7 +355,6 @@ class _Maker(_SCFObject):
         return lilypond_file
 
     def make_material_package_directory(self):
-        print self.material_package_directory, 'foo'
         try:
             os.mkdir(self.material_package_directory)
         except OSError:
@@ -358,22 +368,38 @@ class _Maker(_SCFObject):
 
     def manage_maker(self, menu_header=None):
         while True:
-            menu = Menu()
+            menu = Menu(client=self)
             menu.menu_header = menu_header
             menu.menu_body = self.spaced_class_name
-            menu.items_to_number = list(self.iterate_materials_based_on_maker())
-            menu.sentence_length_items.append(('n', 'make new'))
+            menu_section = MenuSection()
+            menu_section.menu_section_title = 'existing %s' % self.generic_output_name
+            menu_section.items_to_number = list(self.iterate_materials_based_on_maker())
+            menu.menu_sections.append(menu_section)
+            menu.sentence_length_items.append(('del', 'delete %s' % self.spaced_class_name))
+            menu.sentence_length_items.append(('new', 'create %s' % self.generic_output_name))
+            menu.sentence_length_items.append(('ren', 'rename %s' % self.spaced_class_name))
+            menu.sentence_length_items.append(('src', 'edit %s source' % self.spaced_class_name))
             key, value = menu.display_menu()
             if key == 'b':
                 return key, None
-            elif key == 'n':
+            elif key == 'del':
+                directory_name = os.path.join(self.makers_directory_name, self.class_name)
+                directory_proxy = DirectoryProxy(directory_name)
+                directory_proxy.remove()
+                break
+            elif key == 'new':
                 self.edit_interactively(menu_header=menu.menu_title)
+            elif key == 'ren':
+                self.print_not_implemented()
+            elif key == 'src':
+                self.edit_source_file()
             else:
-                material_package_proxy = value
-                material_package_proxy.manage_material(menu_header=menu.menu_title)
+                material_proxy = value
+                material_proxy.manage_material(menu_header=menu.menu_title)
 
     def name_material(self):
-        self.material_name = raw_input('Material name> ')
+        material_spaced_name = raw_input('Material name> ')
+        self.material_underscored_name = material_spaced_name.replace(' ', '_')
 
     def overwrite_with_demo_input_values(self, user_input_wrapper):
         for key in self.user_input_template:
@@ -395,7 +421,7 @@ class _Maker(_SCFObject):
         self.score = result
 
     def show_demo_input_values(self, menu_header=None):
-        menu_specifier = Menu(menu_header=menu_header)
+        menu_specifier = Menu(client=self, menu_header=menu_header)
         menu_specifier.menu_body = 'demo values'
         items = []
         for i, (key, value) in enumerate(self.user_input_template.iteritems()):
@@ -405,7 +431,7 @@ class _Maker(_SCFObject):
         menu_specifier.display_menu(score_title=self.score_title)
 
     def unname_material(self):
-        self.material_name = None
+        self.material_underscored_name = None
 
     def write_material_to_disk(self, user_input_wrapper, material, lilypond_file):
         self.set_material_package_directory()

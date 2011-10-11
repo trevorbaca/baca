@@ -9,24 +9,27 @@ import os
 
 class MaterialWrangler(DirectoryProxy):
 
-    #def __init__(self, score_title=None):
     def __init__(self, purview=None):
         from baca.scf.StudioInterface import StudioInterface
         directory = os.path.join(os.environ.get('BACA'), 'materials')
         DirectoryProxy.__init__(self, directory)
-        #self.score_title = score_title
         if purview is None:
             self._purview = StudioInterface()
         else:
             self._purview = purview
         self._maker_wrangler = MakerWrangler()
 
+    ### OVERLOADS ###
+
+    def __repr__(self):
+        return '%s()' % self.class_name
+
     ### PUBLIC ATTRIBUTES ###
 
     @property
     def has_score_local_purview(self):
-        from baca.scf.ScorePackageProxy import ScorePackageProxy
-        return isinstance(self.purview, ScorePackageProxy)
+        from baca.scf.ScoreProxy import ScoreProxy
+        return isinstance(self.purview, ScoreProxy)
 
     @property
     def has_studio_global_purview(self):
@@ -43,58 +46,61 @@ class MaterialWrangler(DirectoryProxy):
 
     ### PUBLIC METHODS ###
 
-    def create_shared_material_package(self, menu_header=None, is_interactive=False):
-        if is_interactive:
-            return self.maker_wrangler.manage_makers(menu_header=menu_header)
-        else:
-            response = raw_input('Make material interactively? ')
-            if response == 'y':
-                self.maker_wrangler.manage_makers(menu_header=menu_header)
+    def create_interactive_material_package(self, package_importable_name):
+        self.print_not_implemented()
+        print 'Interactive material package %s created.\n' % package_importable_name
+
+    def create_interactive_material_package_interactively(self, menu_header=None):
+        while True:
+            key, value = self.maker_wrangler.select_maker(menu_header=menu_header)
+            if value is None:
+                break
             else:
-                return self._create_materials_package(self.directory)
-
-    def create_interactive_material_package(self, importable_module_name):
-        self.print_not_implemented()
-        print 'Interactive material package %s created.\n' % importable_module_name
-
-    def create_interactive_material_package_interactively(self):
-        self.print_not_implemented()
-        self.create_interactive_material_package(importable_module_name)
+                maker = value
+            maker.score = self
+            result = maker.edit_interactively(menu_header=menu_header)
+            if result:
+                break
         self.proceed()
+        return True, None
 
-    def create_static_material_package(self, importable_module_name, has_visualizer=True):
-        static_material_proxy = StaticMaterialProxy(importable_module_name)
+    def create_material_by_hand(self):
+        self.print_not_implemented()
+
+    def create_static_material_package(self, package_importable_name, has_visualizer=True):
+        static_material_proxy = StaticMaterialProxy(package_importable_name)
         static_material_proxy.create(has_visualizer=has_visualizer)
-        print 'Static material package %s created.\n' % importable_module_name
+        print 'Static material package %s created.\n' % package_importable_name
 
     def create_static_material_package_interactively(self, menu_header=None):
         self.clear_terminal()
         menu_body = 'create static material package'
-        print self.make_menu_title(menu_header, menu_body)
-        materials_package_name = self.get_materials_package_name_of_new_material()
-        material_package_name = self.get_package_name_of_new_material_interactively()
+        menu_title = self.make_menu_title(menu_header, menu_body)
+        materials_package_importable_name = self.get_materials_package_importable_name_of_new_material(
+            menu_header=menu_title)
+        package_short_name = self.get_package_short_name_of_new_material_interactively(menu_header)
         has_visualizer = self.get_visualizer_status_of_new_material_package_interactively()
-        importable_module_name = '%s.%s' % (materials_package_name, material_package_name)
-        self.create_static_material_package(importable_module_name, has_visualizer)
+        package_importable_name = '%s.%s' % (materials_package_importable_name, package_short_name)
+        self.create_static_material_package(package_importable_name, has_visualizer)
         self.proceed()
 
-    def get_materials_package_name_of_new_material(self):
+    def get_materials_package_importable_name_of_new_material(self):
         if self.has_studio_global_purview:
-            return self.purview.get_materials_package_name_interactively()
+            return self.purview.get_materials_package_importable_name_interactively()
         else:
-            return self.purview.materials_package_name
+            return self.purview.materials_package_importable_name
 
-    def get_package_name_of_new_material_interactively(self):
+    def get_package_short_name_of_new_material_interactively(self):
         response = raw_input('Material name: ')
         print ''
         response = response.lower()
         response = response.replace(' ', '_')
         if self.has_score_local_purview:
-            material_package_name = '%s_%s' % (self.purview.package_name, response)
+            package_short_name = '%s_%s' % (self.purview.package_short_name, response)
         else:
-            material_package_name = response
-        print 'Package name will be %s.\n' % material_package_name
-        return material_package_name
+            package_short_name = response
+        print 'Short package name will be %s.\n' % package_short_name
+        return package_short_name
 
     def get_visualizer_status_of_new_material_package_interactively(self):
         response = raw_input('Include visualizer? ')
@@ -106,35 +112,35 @@ class MaterialWrangler(DirectoryProxy):
 
     def iterate_shared_material_proxies(self):
         for shared_material_directory in self.list_shared_material_directories():
-            module_name = os.path.basename(shared_material_directory)
-            importable_module_name = 'baca.materials.%s' % module_name
-            proxy = PackageProxy(importable_module_name)
+            package_short_name = os.path.basename(shared_material_directory)
+            package_importable_name = 'baca.materials.%s' % package_short_name
+            proxy = PackageProxy(package_importable_name)
             yield proxy
 
     def list_shared_material_directories(self):
         shared_material_directories = []
-        for x in self.list_shared_material_package_names():
-            directory = os.path.join(self.directory, x)
+        for x in self.list_shared_material_package_short_names():
+            directory = os.path.join(self.directory_name, x)
             shared_material_directories.append(directory)
         return shared_material_directories
 
-    def list_shared_material_names(self):
-        shared_material_names = []
-        for x in self.list_shared_material_package_names():
-            shared_material_name = x.replace('_', ' ')
-            shared_material_names.append(shared_material_name)
-        return shared_material_names
+    def list_shared_material_spaced_names(self):
+        material_spaced_names = []
+        for package_short_name in self.list_shared_material_package_short_names():
+            material_spaced_name = package_short_name.replace('_', ' ')
+            material_spaced_names.append(material_spaced_name)
+        return material_spaced_names
         
-    def list_shared_material_package_names(self):
-        shared_material_package_names = []
-        for x in os.listdir(self.directory):
+    def list_shared_material_package_short_names(self):
+        shared_material_package_short_names = []
+        for x in os.listdir(self.directory_name):
             if x[0].isalpha():
-                directory = os.path.join(self.directory, x)
+                directory = os.path.join(self.directory_name, x)
                 if os.path.isdir(directory):
                     initializer = os.path.join(directory, '__init__.py')
                     if os.path.isfile(initializer):
-                        shared_material_package_names.append(x)
-        return shared_material_package_names
+                        shared_material_package_short_names.append(x)
+        return shared_material_package_short_names
 
     def list_shared_material_summaries(self):
         summaries = []
@@ -145,32 +151,32 @@ class MaterialWrangler(DirectoryProxy):
             summaries.append(summary)
         return summaries
 
-    def make_new_material_by_hand(self):
-        self.print_not_implemented()
+    def list_shared_material_underscored_names(self):
+        return self.list_shared_material_package_short_names()
 
     def manage_shared_materials(self, menu_header=None, command_string=None):
         while True:
-            menu_specifier = Menu(menu_header=menu_header)
-            menu_specifier.menu_body = 'materials'
-            menu_specifier.items_to_number = self.list_shared_material_summaries()
-            menu_specifier.sentence_length_items.append(('h', '[make new material by hand]'))
-            menu_specifier.sentence_length_items.append(('i', 'make new material interactively'))
-            key, value = menu_specifier.display_menu()
+            menu = Menu(client=self, menu_header=menu_header)
+            menu.menu_body = 'shared materials'
+            menu.items_to_number = self.list_shared_material_summaries()
+            menu.sentence_length_items.append(('h', '[create material by hand]'))
+            menu.sentence_length_items.append(('i', 'create material interactively'))
+            key, value = menu.display_menu()
             if key == 'b':
                 return key, None
             elif key == 'h':
-                self.make_new_material_by_hand()
+                self.create_material_by_hand()
             elif key == 'i':
-                result = self.create_shared_material_package(
-                    menu_header=menu_specifier.menu_title, is_interactive=True)
+                menu_title = menu.menu_title
+                self.material_wrangler.create_interactie_material_package_interactively(menu_header=menu_title)
             else:
-                score_package_name = 'baca.materials'
-                material_name = value
-                if material_name.endswith('(@)'):
-                    importable_module_name = '%s.%s' % (score_package_name, material_name.strip(' (@)'))
-                    material_package_proxy = StaticMaterialProxy(importable_module_name)
+                score_package_importable_name = 'baca.materials'
+                material_underscored_name = value
+                if material_underscored_name.endswith('(@)'):
+                    package_importable_name = '%s.%s' % (score_package_importable_name, material_underscored_name.strip(' (@)'))
+                    material_proxy = StaticMaterialProxy(package_importable_name)
                 else:
-                    importable_module_name = '%s.%s' % (score_package_name, material_name)
-                    material_package_proxy = InteractiveMaterialProxy(importable_module_name)
-                material_package_proxy.score_title = 'Materials'
-                material_package_proxy.manage_material(menu_header=menu_specifier.menu_title)
+                    package_importable_name = '%s.%s' % (score_package_importable_name, material_underscored_name)
+                    material_proxy = InteractiveMaterialProxy(package_importable_name)
+                material_proxy.score_title = 'Materials'
+                material_proxy.manage_material(menu_header=menu.menu_title)
