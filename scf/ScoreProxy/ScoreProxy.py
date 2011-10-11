@@ -172,20 +172,20 @@ class ScoreProxy(PackageProxy):
             initializer.write(''.join(lines))
             initializer.close()
 
-    def iterate_interactive_materials(self):
-        for material_package_proxy in self.iterate_material_package_proxies():
-            if material_package_proxy.is_interactive:
-                yield material_package_proxy
+    def iterate_interactive_material_proxies(self):
+        for material_proxy in self.iterate_material_proxies():
+            if material_proxy.is_interactive:
+                yield material_proxy
 
-    def iterate_material_package_proxies(self):
+    def iterate_material_proxies(self):
         for material_package_importable_name in self.list_material_package_importable_names():
-            material_package_proxy = self.get_material_package_proxy(material_package_importable_name)
-            yield material_package_proxy
+            material_proxy = self.get_material_proxy(material_package_importable_name)
+            yield material_proxy
 
-    def list_chunks(self):
-        chunks = os.listdir(self.chunks_directory_name)
-        chunks = [x for x in chunks if x[0].isalpha()]
-        return chunks
+    def iterate_static_material_proxies(self):
+        for material_proxy in self.iterate_material_proxies():
+            if not material_proxy.is_interactive:
+                yield material_proxy
 
     def list_material_package_importable_names(self):
         material_package_importable_names = []
@@ -194,22 +194,18 @@ class ScoreProxy(PackageProxy):
             material_package_importable_names.append(material_package_importable_name)
         return material_package_importable_names
 
-    def list_numbered_chunks(self):
+    def list_underscored_chunk_names(self):
+        chunks = os.listdir(self.chunks_directory_name)
+        chunks = [x for x in chunks if x[0].isalpha()]
+        return chunks
+
+    def list_underscored_chunk_names_with_numbers(self):
         numbered_chunks = []
-        for i, chunk in enumerate(self.list_chunks()):
+        for i, chunk in enumerate(self.list_underscored_chunk_names()):
             numbered_chunk = (str(i + 1), chunk)
             numbered_chunks.append(numbered_chunk)
         return numbered_chunks
 
-    def list_numbered_materials(self):
-        numbered_materials = []
-        for i, material in enumerate(self.list_underscored_material_names()):
-            material = material.replace('%s_' % self.package_short_name, '')
-            material = material.replace('_', ' ')
-            numbered_material = (str(i + 1), material)
-            numbered_materials.append(numbered_material)
-        return numbered_materials
-            
     def list_underscored_material_names(self):
         try:
             materials = os.listdir(self.materials_directory_name)
@@ -218,6 +214,15 @@ class ScoreProxy(PackageProxy):
         materials = [x for x in materials if x[0].isalpha()]
         return materials
 
+    def list_underscored_material_names_with_numbers(self):
+        numbered_materials = []
+        for i, material in enumerate(self.list_underscored_material_names()):
+            material = material.replace('%s_' % self.package_short_name, '')
+            material = material.replace('_', ' ')
+            numbered_material = (str(i + 1), material)
+            numbered_materials.append(numbered_material)
+        return numbered_materials
+            
     def manage_chunks(self):
         self.print_not_implemented()
 
@@ -237,12 +242,12 @@ class ScoreProxy(PackageProxy):
             menu_specifier.menu_body = self.score_title
             menu_section = MenuSection()
             menu_section.menu_section_title = 'Chunks'
-            menu_section.menu_section_entries = self.list_numbered_chunks()
+            menu_section.menu_section_entries = self.list_underscored_chunk_names_with_numbers()
             menu_section.sentence_length_items.append(('ch', '[create chunk]'))
             menu_specifier.menu_sections.append(menu_section)
             menu_section = MenuSection()
             menu_section.menu_section_title = 'Materials'
-            menu_section.menu_section_entries = self.list_numbered_materials()
+            menu_section.menu_section_entries = self.list_underscored_material_names_with_numbers()
             menu_section.sentence_length_items.append(('ms', 'create material by hand'))
             menu_section.sentence_length_items.append(('mi', 'create material interactively'))
             menu_specifier.menu_sections.append(menu_section)
@@ -263,9 +268,9 @@ class ScoreProxy(PackageProxy):
                     material_number = int(key)
                     underscored_material_name = self.material_number_to_underscored_material_name(material_number)
                     package_importable_name = '%s.%s' % (self.materials_package_importable_name, underscored_material_name)
-                    material_package_proxy = self.get_material_package_proxy(package_importable_name)
-                    material_package_proxy.score_title = self.score_title
-                    material_package_proxy.manage_material(menu_header=menu_specifier.menu_title)
+                    material_proxy = self.get_material_proxy(package_importable_name)
+                    material_proxy.score_title = self.score_title
+                    material_proxy.manage_material(menu_header=menu_specifier.menu_title)
                 except (TypeError, ValueError):
                     pass
 
@@ -306,11 +311,8 @@ class ScoreProxy(PackageProxy):
         for initializer in self.score_initializers:
             print '%s %s' % (initializer.ljust(80), os.path.exists(initializer))
 
-    def run_chunk_selection_interface(self):
-        self.print_not_implemented()
-
     def summarize_chunks(self):
-        chunks = self.list_chunks()
+        chunks = self.list_underscored_chunk_names()
         print self.tab(1),
         if not chunks:
             print 'Chunks (none yet)'

@@ -171,9 +171,9 @@ class MaterialWrangler(DirectoryProxy):
                 underscored_material_name = value
                 if underscored_material_name.endswith('(@)'):
                     package_importable_name = '%s.%s' % (score_package_importable_name, underscored_material_name.strip(' (@)'))
-                    material_package_proxy = StaticMaterialProxy(package_importable_name)
+                    material_proxy = StaticMaterialProxy(package_importable_name)
                 else:
                     package_importable_name = '%s.%s' % (score_package_importable_name, underscored_material_name)
-                    material_package_proxy = InteractiveMaterialProxy(package_importable_name)
-                material_package_proxy.score_title = 'Materials'
-                material_package_proxy.manage_material(menu_header=menu.menu_title)
+                    material_proxy = InteractiveMaterialProxy(package_importable_name)
+                material_proxy.score_title = 'Materials'
+                material_proxy.manage_material(menu_header=menu.menu_title)

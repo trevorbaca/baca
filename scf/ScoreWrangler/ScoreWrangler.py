@@ -34,22 +34,22 @@ class ScoreWrangler(DirectoryProxy):
         score_package_short_name = self.score_title_to_score_package_short_name(score_title)
         return score_package_short_name
 
-    def iterate_interactive_material_package_proxies(self):
-        for material_package_proxy in self.iterate_material_package_proxies():
-            if material_package_proxy.is_interactive:
-                yield material_package_proxy
+    def iterate_interactive_material_proxies(self):
+        for material_proxy in self.iterate_material_proxies():
+            if material_proxy.is_interactive:
+                yield material_proxy
 
-    def iterate_material_package_proxies(self, class_names=None):
+    def iterate_material_proxies(self, class_names=None):
         for score_proxy in self.iterate_score_proxies():
-            for material_package_proxy in score_proxy.iterate_material_package_proxies():
-                if class_names is None or material_package_proxy.get_tag('maker') in class_names:
-                    yield material_package_proxy
+            for material_proxy in score_proxy.iterate_material_proxies():
+                if class_names is None or material_proxy.get_tag('maker') in class_names:
+                    yield material_proxy
         for underscored_material_name in os.listdir(self.baca_materials_directory_name):
             if underscored_material_name[0].isalpha():
                 package_importable_name = 'baca.materials.%s' % underscored_material_name
-                material_package_proxy = self.get_material_package_proxy(package_importable_name)
-                if class_names is None or material_package_proxy.get_tag('maker') in class_names:
-                    yield material_package_proxy
+                material_proxy = self.get_material_proxy(package_importable_name)
+                if class_names is None or material_proxy.get_tag('maker') in class_names:
+                    yield material_proxy
 
     def iterate_score_proxies(self):
         for score_package_importable_name in self.list_score_package_importable_names():
@@ -153,11 +153,11 @@ class ScoreWrangler(DirectoryProxy):
             if score_title.startswith(title):
                 return package_short_name
 
-    def select_interactive_material_package_proxy(self, menu_header=None, klasses=None):
-        material_package_proxies = list(self.iterate_interactive_material_package_proxies())
+    def select_interactive_material_proxy(self, menu_header=None, klasses=None):
+        material_proxies = list(self.iterate_interactive_material_proxies())
         menu = Menu(client=self)
         menu.menu_header = menu_header
-        menu.items_to_number = material_package_proxies
+        menu.items_to_number = material_proxies
         key, value = menu.display_menu()
         return value
 

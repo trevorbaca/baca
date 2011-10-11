@@ -326,9 +326,9 @@ class _Maker(_SCFObject):
         from baca.scf.ScoreWrangler import ScoreWrangler
         score_wrangler = ScoreWrangler()
         menu_header = 'import %s' % self.spaced_class_name
-        material_package_proxy = score_wrangler.select_interactive_material_package_proxy(
+        material_proxy = score_wrangler.select_interactive_material_proxy(
             menu_header=menu_header, klasses=(type(self),))
-        self.user_input_wrapper = copy.deepcopy(material_package_proxy.user_input_wrapper)
+        self.user_input_wrapper = copy.deepcopy(material_proxy.user_input_wrapper)
     
     def interactively_check_and_save_material(self, user_input_wrapper):
         if user_input_wrapper.is_complete:
@@ -338,7 +338,7 @@ class _Maker(_SCFObject):
     def iterate_materials_based_on_maker(self):
         from baca.scf.ScoreWrangler import ScoreWrangler
         score_wrangler = ScoreWrangler()
-        for material_proxy in score_wrangler.iterate_material_package_proxies(class_names=(self.class_name,)):
+        for material_proxy in score_wrangler.iterate_material_proxies(class_names=(self.class_name,)):
             yield material_proxy
 
     def make_lilypond_file_from_user_input_wrapper(self, user_input_wrapper):
@@ -375,8 +375,8 @@ class _Maker(_SCFObject):
             elif key == 'n':
                 self.edit_interactively(menu_header=menu.menu_title)
             else:
-                material_package_proxy = value
-                material_package_proxy.manage_material(menu_header=menu.menu_title)
+                material_proxy = value
+                material_proxy.manage_material(menu_header=menu.menu_title)
 
     def name_material(self):
         self.underscored_material_name = raw_input('Material name> ')
