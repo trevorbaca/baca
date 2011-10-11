@@ -178,7 +178,7 @@ class ScoreWrangler(DirectoryProxy):
         if not self.confirm():
             return
         for score_proxy in self.iterate_score_proxies():
-            score_proxy.svn_cm(commit_message=commit_message, prompt_proceed=False)
+            score_proxy.svn_ci(commit_message=commit_message, prompt_proceed=False)
         if prompt_proceed:
             self.proceed()
 
