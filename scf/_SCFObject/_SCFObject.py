@@ -65,10 +65,10 @@ class _SCFObject(object):
         return datetime.date(*time.localtime()[:3])
 
     def get_material_package_proxy(self, importable_module_name):
-        from baca.scf.InteractiveMaterialPackageProxy import InteractiveMaterialPackageProxy
+        from baca.scf.InteractiveMaterialProxy import InteractiveMaterialProxy
         from baca.scf.StaticMaterialPackageProxy import StaticMaterialPackageProxy
         if self.is_interactive_material_package(importable_module_name):
-            return InteractiveMaterialPackageProxy(importable_module_name)
+            return InteractiveMaterialProxy(importable_module_name)
         else:
             return StaticMaterialPackageProxy(importable_module_name)
    

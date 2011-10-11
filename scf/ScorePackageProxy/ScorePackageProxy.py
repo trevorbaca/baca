@@ -1,4 +1,4 @@
-from baca.scf.InteractiveMaterialPackageProxy import InteractiveMaterialPackageProxy
+from baca.scf.InteractiveMaterialProxy import InteractiveMaterialProxy
 from baca.scf.MakerWrangler import MakerWrangler
 from baca.scf.MaterialWrangler import MaterialWrangler
 from baca.scf.menuing import Menu

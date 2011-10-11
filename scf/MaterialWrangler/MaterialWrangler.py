@@ -1,5 +1,5 @@
 from baca.scf.DirectoryProxy import DirectoryProxy
-from baca.scf.InteractiveMaterialPackageProxy import InteractiveMaterialPackageProxy
+from baca.scf.InteractiveMaterialProxy import InteractiveMaterialProxy
 from baca.scf.MakerWrangler import MakerWrangler
 from baca.scf.menuing import Menu
 from baca.scf.PackageProxy import PackageProxy
@@ -171,6 +171,6 @@ class MaterialWrangler(DirectoryProxy):
                     material_package_proxy = StaticMaterialPackageProxy(importable_module_name)
                 else:
                     importable_module_name = '%s.%s' % (score_package_name, material_name)
-                    material_package_proxy = InteractiveMaterialPackageProxy(importable_module_name)
+                    material_package_proxy = InteractiveMaterialProxy(importable_module_name)
                 material_package_proxy.score_title = 'Materials'
                 material_package_proxy.manage_material(menu_header=menu_specifier.menu_title)

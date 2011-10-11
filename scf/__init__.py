@@ -1,5 +1,5 @@
 from DirectoryProxy import DirectoryProxy
-from InteractiveMaterialPackageProxy import InteractiveMaterialPackageProxy
+from InteractiveMaterialProxy import InteractiveMaterialProxy
 from MakerWrangler import MakerWrangler
 from MaterialWrangler import MaterialWrangler
 from PackageProxy import PackageProxy
