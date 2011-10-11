@@ -1,7 +1,7 @@
 from baca.scf.DirectoryProxy import DirectoryProxy
 from baca.scf.InteractiveMaterialPackageProxy import InteractiveMaterialPackageProxy
 from baca.scf.MakerWrangler import MakerWrangler
-from baca.scf.Menu import Menu
+from baca.scf.menuing import Menu
 from baca.scf.PackageProxy import PackageProxy
 from baca.scf.StaticMaterialPackageProxy import StaticMaterialPackageProxy
 import os

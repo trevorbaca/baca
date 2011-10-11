@@ -1,6 +1,6 @@
 from abjad.tools import iotools
 from baca.scf.DirectoryProxy import DirectoryProxy
-from baca.scf.Menu import Menu
+from baca.scf.menuing import Menu
 import os
 
 

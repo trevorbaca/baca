@@ -3,7 +3,7 @@ from abjad.tools import lilypondfiletools
 from abjad.tools import markuptools
 from baca.scf._SCFObject import _SCFObject
 from baca.scf.MaterialWrangler import MaterialWrangler
-from baca.scf.Menu import Menu
+from baca.scf.menuing import Menu
 from baca.scf.ScoreWrangler import ScoreWrangler
 from baca.scf.UserInputWrapper import UserInputWrapper
 import copy

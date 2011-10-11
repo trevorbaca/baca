@@ -281,7 +281,7 @@ class _MaterialPackageProxy(PackageProxy):
             print ''
 
     def manage_material(self, menu_header=None):
-        from baca.scf.Menu import Menu
+        from baca.scf.menuing import Menu
         while True:
             menu_specifier = Menu()
             menu_specifier.menu_header = menu_header

@@ -163,8 +163,8 @@ class PackageProxy(DirectoryProxy):
         return formatted_tags
 
     def manage_tags(self, menu_header=None):
-        from baca.scf.MenuSection import MenuSection
-        from baca.scf.Menu import Menu
+        from baca.scf.menuing import MenuSection
+        from baca.scf.menuing import Menu
         while True:
             menu = Menu(menu_header=menu_header)
             menu.menu_body = 'tags'

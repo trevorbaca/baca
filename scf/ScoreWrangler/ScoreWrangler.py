@@ -1,5 +1,5 @@
 from baca.scf.DirectoryProxy import DirectoryProxy
-from baca.scf.Menu import Menu
+from baca.scf.menuing import Menu
 from baca.scf.ScorePackageProxy import ScorePackageProxy
 import os
 

@@ -2,8 +2,6 @@ from DirectoryProxy import DirectoryProxy
 from InteractiveMaterialPackageProxy import InteractiveMaterialPackageProxy
 from MakerWrangler import MakerWrangler
 from MaterialWrangler import MaterialWrangler
-from MenuSection import MenuSection
-from Menu import Menu
 from PackageProxy import PackageProxy
 from ScorePackageProxy import ScorePackageProxy
 from ScoreWrangler import ScoreWrangler
