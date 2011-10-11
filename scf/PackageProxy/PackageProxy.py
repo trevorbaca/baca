@@ -5,15 +5,15 @@ import os
 
 class PackageProxy(DirectoryProxy):
 
-    def __init__(self, importable_module_name):
-        directory = self.importable_module_name_to_directory(importable_module_name)
+    def __init__(self, importable_package_name):
+        directory = self.importable_package_name_to_directory(importable_package_name)
         DirectoryProxy.__init__(self, directory)
-        self._importable_module_name = importable_module_name
+        self._importable_package_name = importable_package_name
 
     ### OVERLOADS ###
 
     def __repr__(self):
-        return '%s(%r)' % (self.class_name, self.importable_module_name)
+        return '%s(%r)' % (self.class_name, self.importable_package_name)
 
     ### PUBLIC ATTRIBUTES ###
 
@@ -22,8 +22,8 @@ class PackageProxy(DirectoryProxy):
         return self.get_tag('creation_date')
         
     @property
-    def importable_module_name(self):
-        return self._importable_module_name
+    def importable_package_name(self):
+        return self._importable_package_name
 
     @property
     def initializer(self):
@@ -31,7 +31,7 @@ class PackageProxy(DirectoryProxy):
 
     @property
     def module_name(self):
-        return self.importable_module_name.split('.')[-1]
+        return self.importable_package_name.split('.')[-1]
 
     @property
     def package_name(self):
@@ -43,7 +43,7 @@ class PackageProxy(DirectoryProxy):
 
     @property
     def parent_module_name(self):
-        return '.'.join(self.importable_module_name.split('.')[:-1])
+        return '.'.join(self.importable_package_name.split('.')[:-1])
         
     ### PRIVATE METHODS ###
 
@@ -132,7 +132,7 @@ class PackageProxy(DirectoryProxy):
 
     def import_attribute_from_initializer(self, attribute_name):
         try:
-            exec('from %s import %s' % (self.importable_module_name, attribute_name))
+            exec('from %s import %s' % (self.importable_package_name, attribute_name))
             exec('result = %s' % attribute_name)
             return result
         except ImportError:
@@ -145,7 +145,7 @@ class PackageProxy(DirectoryProxy):
 
     def get_tags(self):
         try:
-            exec('from %s import tags' % self.importable_module_name)
+            exec('from %s import tags' % self.importable_package_name)
             return tags
         except ImportError:    
             return {}

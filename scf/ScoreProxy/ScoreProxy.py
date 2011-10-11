@@ -10,8 +10,8 @@ import os
 
 class ScoreProxy(PackageProxy):
 
-    def __init__(self, importable_module_name):
-        PackageProxy.__init__(self, importable_module_name)
+    def __init__(self, importable_package_name):
+        PackageProxy.__init__(self, importable_package_name)
         self._material_wrangler = MaterialWrangler(purview=self)
         self._maker_wrangler = MakerWrangler()
 
@@ -27,7 +27,7 @@ class ScoreProxy(PackageProxy):
 
     @property
     def chunks_package_name(self):
-        return '.'.join([self.importable_module_name, 'mus', 'chunks'])
+        return '.'.join([self.importable_package_name, 'mus', 'chunks'])
 
     @property
     def dist_directory_name(self):
@@ -75,7 +75,7 @@ class ScoreProxy(PackageProxy):
 
     @property
     def materials_package_name(self):
-        return '.'.join([self.importable_module_name, 'mus', 'materials'])
+        return '.'.join([self.importable_package_name, 'mus', 'materials'])
 
     @property
     def mus_directory_name(self):
@@ -87,7 +87,7 @@ class ScoreProxy(PackageProxy):
 
     @property
     def mus_package_name(self):
-        return '.'.join([self.importable_module_name, 'mus'])
+        return '.'.join([self.importable_package_name, 'mus'])
 
     @apply
     def score_composer():

@@ -1,5 +1,6 @@
 from abjad.tools import iotools
 from baca.scf.PackageProxy import PackageProxy
+from baca.scf.menuing import Menu
 import os
 import subprocess
 import sys
@@ -7,17 +8,17 @@ import sys
 
 class _MaterialProxy(PackageProxy):
 
-    def __init__(self, importable_module_name):
-        PackageProxy.__init__(self, importable_module_name)
+    def __init__(self, importable_package_name):
+        PackageProxy.__init__(self, importable_package_name)
         self.input_file_name = os.path.join(self.directory, 'input.py')
         self.output_file_name = os.path.join(self.directory, 'output.py')
         self.visualizer_file_name = os.path.join(self.directory, 'visualization.py')
         self.pdf_file_name = os.path.join(self.directory, 'visualization.pdf')
         self.ly_file_name = os.path.join(self.directory, 'visualization.ly')
         self.stylesheet_file_name = os.path.join(self.directory, 'stylesheet.ly')
-        self.input_module_name = '%s.input' % self.importable_module_name
-        self.output_module_name = '%s.output' % self.importable_module_name
-        self.visualization_module_name = '%s.visualization' % self.importable_module_name
+        self.input_module_name = '%s.input' % self.importable_package_name
+        self.output_module_name = '%s.output' % self.importable_package_name
+        self.visualization_module_name = '%s.visualization' % self.importable_package_name
 
     ### PUBLIC ATTRIBUTES ###
 
@@ -71,7 +72,7 @@ class _MaterialProxy(PackageProxy):
 
     @property
     def is_shared(self):
-        return bool(self.importable_module_name.startswith('baca'))
+        return bool(self.importable_package_name.startswith('baca'))
 
     @property
     def is_static(self):
@@ -86,14 +87,14 @@ class _MaterialProxy(PackageProxy):
 
     @property
     def module_name(self):
-        return self.importable_module_name.split('.')[-1]
+        return self.importable_package_name.split('.')[-1]
 
     @property
     def score_package_name(self):
-        if self.importable_module_name.startswith('baca'):
+        if self.importable_package_name.startswith('baca'):
             return None
         else:
-            return self.importable_module_name.split('.')[0]
+            return self.importable_package_name.split('.')[0]
 
     @property
     def spaced_material_name(self):
@@ -281,31 +282,30 @@ class _MaterialProxy(PackageProxy):
             print ''
 
     def manage_material(self, menu_header=None):
-        from baca.scf.menuing import Menu
         while True:
-            menu_specifier = Menu(client=self)
-            menu_specifier.menu_header = menu_header
-            menu_specifier.menu_body = self.spaced_material_name
+            menu = Menu(client=self)
+            menu.menu_header = menu_header
+            menu.menu_body = self.spaced_material_name
             if self.is_interactive:
-                menu_specifier.sentence_length_items.append(('k', 'reload user input'))
-            menu_specifier.named_pairs.append(('i', 'input'))
-            menu_specifier.named_pairs.append(('o', 'output'))
+                menu.sentence_length_items.append(('k', 'reload user input'))
+            menu.named_pairs.append(('i', 'input'))
+            menu.named_pairs.append(('o', 'output'))
             if self.has_visualizer:
-                menu_specifier.named_pairs.append(('v', 'visualizer'))
+                menu.named_pairs.append(('v', 'visualizer'))
             if self.has_ly:
-                menu_specifier.named_pairs.append(('l', 'ly'))
+                menu.named_pairs.append(('l', 'ly'))
             if self.has_stylesheet:
-                menu_specifier.named_pairs.append(('y', 'stylesheet'))
+                menu.named_pairs.append(('y', 'stylesheet'))
             if self.has_pdf:
-                menu_specifier.named_pairs.append(('p', 'pdf'))
-            menu_specifier.named_pairs.append(('n', 'initializer'))
-            menu_specifier.secondary_named_pairs.append(('d', 'delete'))
-            menu_specifier.secondary_named_pairs.append(('g', 'get tag'))
-            menu_specifier.secondary_named_pairs.append(('r', 'rename'))
-            menu_specifier.secondary_named_pairs.append(('s', 'summarize'))
-            menu_specifier.secondary_named_pairs.append(('t', 'tags'))
-            menu_specifier.secondary_named_pairs.append(('z', 'regenerate'))
-            key, value = menu_specifier.display_menu()
+                menu.named_pairs.append(('p', 'pdf'))
+            menu.named_pairs.append(('n', 'initializer'))
+            menu.secondary_named_pairs.append(('d', 'delete'))
+            menu.secondary_named_pairs.append(('g', 'get tag'))
+            menu.secondary_named_pairs.append(('r', 'rename'))
+            menu.secondary_named_pairs.append(('s', 'summarize'))
+            menu.secondary_named_pairs.append(('t', 'tags'))
+            menu.secondary_named_pairs.append(('z', 'regenerate'))
+            key, value = menu.display_menu()
             if key == 'b':
                 return key, None
             elif key == 'd':
@@ -328,7 +328,7 @@ class _MaterialProxy(PackageProxy):
             elif key == 's':
                 self.summarize_material()
             elif key == 't':
-                self.manage_tags(menu_header=menu_specifier.menu_title)
+                self.manage_tags(menu_header=menu.menu_title)
             elif key == 'v':
                 self.manage_visualizer(key)
             elif key == 'y':
@@ -579,7 +579,7 @@ class _MaterialProxy(PackageProxy):
         self.remove_module_name_from_sys_modules(self.input_module_name)
 
     def unimport_material_module(self):
-        self.remove_module_name_from_sys_modules(self.importable_module_name)
+        self.remove_module_name_from_sys_modules(self.importable_package_name)
 
     def unimport_materials_module(self):
         self.remove_module_name_from_sys_modules(self.materials_module_name)

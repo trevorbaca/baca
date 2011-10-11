@@ -85,13 +85,13 @@ class _SCFObject(object):
     def get_date(self):
         return datetime.date(*time.localtime()[:3])
 
-    def get_material_package_proxy(self, importable_module_name):
+    def get_material_package_proxy(self, importable_package_name):
         from baca.scf.InteractiveMaterialProxy import InteractiveMaterialProxy
         from baca.scf.StaticMaterialProxy import StaticMaterialProxy
-        if self.is_interactive_material_package(importable_module_name):
-            return InteractiveMaterialProxy(importable_module_name)
+        if self.is_interactive_material_package(importable_package_name):
+            return InteractiveMaterialProxy(importable_package_name)
         else:
-            return StaticMaterialProxy(importable_module_name)
+            return StaticMaterialProxy(importable_package_name)
    
     def globally_replace_in_file(self, file_name, old, new):
         file_pointer = file(file_name, 'r')
@@ -104,20 +104,20 @@ class _SCFObject(object):
         file_pointer.write('\n'.join(new_file_lines))
         file_pointer.close()
 
-    def importable_module_name_to_directory(self, importable_module_name):
-        module_parts = importable_module_name.split('.')
+    def importable_package_name_to_directory(self, importable_package_name):
+        module_parts = importable_package_name.split('.')
         if module_parts[0] == 'baca':
             directory_parts = [os.environ.get('BACA')] + module_parts[1:]
         elif module_parts[0] in os.listdir(os.environ.get('SCORES')):
             directory_parts = [os.environ.get('SCORES')] + module_parts[:]
         else:
-            raise ValueError('Unknown importable module name %r.' % importable_module_name)
+            raise ValueError('Unknown importable module name %r.' % importable_package_name)
         directory = os.path.join(*directory_parts)
         return directory
 
-    def is_interactive_material_package(self, importable_module_name):
+    def is_interactive_material_package(self, importable_package_name):
         from baca.scf.PackageProxy import PackageProxy
-        package_proxy = PackageProxy(importable_module_name)
+        package_proxy = PackageProxy(importable_package_name)
         return package_proxy.has_tag('maker')
 
     def make_menu_title(self, menu_header, menu_body):
