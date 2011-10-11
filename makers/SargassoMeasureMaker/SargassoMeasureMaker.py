@@ -39,9 +39,9 @@ class SargassoMeasureMaker(_Maker):
 
     ### PUBLIC METHODS ###
 
-    def get_output_file_lines(self, measures, material_name):
+    def get_output_file_lines(self, measures, underscored_material_name):
         output_file_lines = []
-        output_file_lines.append('%s = [' % material_name)
+        output_file_lines.append('%s = [' % underscored_material_name)
         for measure in measures[:-1]:
             line = measuretools.measure_to_one_line_input_string(measure)
             output_file_lines.append('\t%s,' % line)

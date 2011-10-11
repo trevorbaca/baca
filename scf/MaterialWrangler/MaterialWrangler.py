@@ -124,12 +124,12 @@ class MaterialWrangler(DirectoryProxy):
             shared_material_directories.append(directory)
         return shared_material_directories
 
-    def list_shared_material_names(self):
-        shared_material_names = []
-        for x in self.list_shared_material_package_short_names():
-            shared_material_name = x.replace('_', ' ')
-            shared_material_names.append(shared_material_name)
-        return shared_material_names
+    def list_shared_spaced_material_names(self):
+        spaced_material_names = []
+        for package_short_name in self.list_shared_material_package_short_names():
+            spaced_material_name = package_short_name.replace('_', ' ')
+            spaced_material_names.append(spaced_material_name)
+        return spaced_material_names
         
     def list_shared_material_package_short_names(self):
         shared_material_package_short_names = []
@@ -168,12 +168,12 @@ class MaterialWrangler(DirectoryProxy):
                 self.material_wrangler.create_interactie_material_package_interactively(menu_header=menu_title)
             else:
                 score_package_importable_name = 'baca.materials'
-                material_name = value
-                if material_name.endswith('(@)'):
-                    package_importable_name = '%s.%s' % (score_package_importable_name, material_name.strip(' (@)'))
+                underscored_material_name = value
+                if underscored_material_name.endswith('(@)'):
+                    package_importable_name = '%s.%s' % (score_package_importable_name, underscored_material_name.strip(' (@)'))
                     material_package_proxy = StaticMaterialProxy(package_importable_name)
                 else:
-                    package_importable_name = '%s.%s' % (score_package_importable_name, material_name)
+                    package_importable_name = '%s.%s' % (score_package_importable_name, underscored_material_name)
                     material_package_proxy = InteractiveMaterialProxy(package_importable_name)
                 material_package_proxy.score_title = 'Materials'
                 material_package_proxy.manage_material(menu_header=menu.menu_title)

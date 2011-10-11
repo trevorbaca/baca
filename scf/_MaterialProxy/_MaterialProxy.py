@@ -420,10 +420,10 @@ class _MaterialProxy(PackageProxy):
         output_file.write(output_line)
         output_file.close()
 
-    def prepend_score_package_short_name(self, material_name):
-        if not material_name.startswith(self.score_package_short_name + '_'):
-            material_name = '%s_%s' % (self.score_package_short_name, material_name)
-        return material_name
+    def prepend_score_package_short_name(self, underscored_material_name):
+        if not underscored_material_name.startswith(self.score_package_short_name + '_'):
+            underscored_material_name = '%s_%s' % (self.score_package_short_name, underscored_material_name)
+        return underscored_material_name
 
     def regenerate_everything(self, is_forced=False):
         is_changed = self.write_input_data_to_output_file(is_forced=is_forced)
@@ -438,39 +438,40 @@ class _MaterialProxy(PackageProxy):
 
     def rename_material(self):
         print 'Current material name: %s' % self.underscored_material_name
-        new_material_name = raw_input('New material name:     ')
+        new_spaced_material_name = raw_input('New material name:     ')
         print ''
-        new_material_name = self.prepend_score_package_short_name(new_material_name)
+        new_underscored_material_name = new_spaced_material_name.replace(' ', '_')
+        new_underscored_material_name = self.prepend_score_package_short_name(new_underscored_material_name)
         print 'Current material name: %s' % self.underscored_material_name
-        print 'New material name:     %s' % new_material_name
+        print 'New material name:     %s' % new_underscored_material_name
         print ''
         if not self.confirm():
             return
         print ''
         if self.is_in_repository:
             # update parent initializer
-            self.globally_replace_in_file(self.parent_initializer, self.underscored_material_name, new_material_name)
+            self.globally_replace_in_file(self.parent_initializer, self.underscored_material_name, new_underscored_material_name)
             # rename package directory
-            new_directory = self.directory.replace(self.underscored_material_name, new_material_name)
+            new_directory = self.directory.replace(self.underscored_material_name, new_underscored_material_name)
             command = 'svn mv %s %s' % (self.directory, new_directory)
             os.system(command)
             # update package initializer
-            new_package_directory = os.path.join(self.parent_directory, new_material_name)
+            new_package_directory = os.path.join(self.parent_directory, new_underscored_material_name)
             new_initializer = os.path.join(new_package_directory, '__init__.py')
-            self.globally_replace_in_file(new_initializer, self.underscored_material_name, new_material_name)
+            self.globally_replace_in_file(new_initializer, self.underscored_material_name, new_underscored_material_name)
             # rename files in package
             for old_file_name in os.listdir(new_package_directory):
                 if not old_file_name.startswith(('.', '_')):
                     old_path_name = os.path.join(new_package_directory, old_file_name)
-                    new_path_name = old_path_name.replace(self.underscored_material_name, new_material_name)
+                    new_path_name = old_path_name.replace(self.underscored_material_name, new_underscored_material_name)
                     command = 'svn mv %s %s' % (old_path_name, new_path_name)
                     os.system(command)
             # rename output data
             new_output_data = os.path.join(new_package_directory, 'output.py')
-            self.globally_replace_in_file(new_output_data, self.underscored_material_name, new_material_name)
+            self.globally_replace_in_file(new_output_data, self.underscored_material_name, new_underscored_material_name)
             print ''
             # commit
-            commit_message = 'Renamed %s to %s.' % (self.underscored_material_name, new_material_name)
+            commit_message = 'Renamed %s to %s.' % (self.underscored_material_name, new_underscored_material_name)
             commit_message = commit_message.replace('_', ' ')
             command = 'svn commit -m "%s" %s' % (commit_message, self.parent_directory)
             os.system(command)

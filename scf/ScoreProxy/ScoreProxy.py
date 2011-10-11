@@ -187,17 +187,9 @@ class ScoreProxy(PackageProxy):
         chunks = [x for x in chunks if x[0].isalpha()]
         return chunks
 
-    def list_materials(self):
-        try:
-            materials = os.listdir(self.materials_directory_name)
-        except OSError:
-            materials = []
-        materials = [x for x in materials if x[0].isalpha()]
-        return materials
-
     def list_material_package_importable_names(self):
         material_package_importable_names = []
-        for material in self.list_materials():
+        for material in self.list_underscored_material_names():
             material_package_importable_name = '%s.%s' % (self.materials_package_importable_name, material)
             material_package_importable_names.append(material_package_importable_name)
         return material_package_importable_names
@@ -211,13 +203,21 @@ class ScoreProxy(PackageProxy):
 
     def list_numbered_materials(self):
         numbered_materials = []
-        for i, material in enumerate(self.list_materials()):
+        for i, material in enumerate(self.list_underscored_material_names()):
             material = material.replace('%s_' % self.package_short_name, '')
             material = material.replace('_', ' ')
             numbered_material = (str(i + 1), material)
             numbered_materials.append(numbered_material)
         return numbered_materials
             
+    def list_underscored_material_names(self):
+        try:
+            materials = os.listdir(self.materials_directory_name)
+        except OSError:
+            materials = []
+        materials = [x for x in materials if x[0].isalpha()]
+        return materials
+
     def manage_chunks(self):
         self.print_not_implemented()
 
@@ -261,8 +261,8 @@ class ScoreProxy(PackageProxy):
             else:
                 try:
                     material_number = int(key)
-                    material_name = self.material_number_to_material_name(material_number)
-                    package_importable_name = '%s.%s' % (self.materials_package_importable_name, material_name)
+                    underscored_material_name = self.material_number_to_underscored_material_name(material_number)
+                    package_importable_name = '%s.%s' % (self.materials_package_importable_name, underscored_material_name)
                     material_package_proxy = self.get_material_package_proxy(package_importable_name)
                     material_package_proxy.score_title = self.score_title
                     material_package_proxy.manage_material(menu_header=menu_specifier.menu_title)
@@ -291,10 +291,10 @@ class ScoreProxy(PackageProxy):
             elif key == 'st':
                 self.svn_st()
 
-    def material_number_to_material_name(self, material_number):
+    def material_number_to_underscored_material_name(self, material_number):
         material_index = material_number - 1
-        material_name = self.list_materials()[material_index]
-        return material_name
+        underscored_material_name = self.list_underscored_material_names()[material_index]
+        return underscored_material_name
 
     def profile_package_structure(self):
         if not os.path.exists(self.directory_name):
@@ -322,7 +322,7 @@ class ScoreProxy(PackageProxy):
         print ''
 
     def summarize_materials(self):
-        materials = self.list_materials()
+        materials = self.list_underscored_material_names()
         print self.tab(1),
         if not materials:
             print 'Materials (none yet)'

@@ -14,9 +14,9 @@ import shutil
 
 class _Maker(_SCFObject):
 
-    def __init__(self, underscore_material_name=None, score=None):
+    def __init__(self, underscored_material_name=None, score=None):
         _SCFObject.__init__(self)
-        self.underscore_material_name = underscore_material_name
+        self.underscored_material_name = underscored_material_name
         self.score = score
 
     ### OVERLOADS ###
@@ -39,8 +39,8 @@ class _Maker(_SCFObject):
         file_pointer.close()
 
     def _add_line_to_materials_initializer(self):
-        material_name = os.path.basename(self.material_package_directory)
-        import_statement = 'from %s import %s\n' % (material_name, material_name)
+        underscored_material_name = os.path.basename(self.material_package_directory)
+        import_statement = 'from %s import %s\n' % (underscored_material_name, underscored_material_name)
         initializer = self._get_initializer()
         self._add_line_to_initializer(initializer, import_statement)
 
@@ -53,13 +53,13 @@ class _Maker(_SCFObject):
         return initializer
 
     def _get_lilypond_score_title(self):
-        material_name = os.path.basename(self.material_package_directory)
+        underscored_material_name = os.path.basename(self.material_package_directory)
         if self.is_shared:
-            material_parts = material_name.split('_')
+            material_parts = underscored_material_name.split('_')
         else:
-            material_parts = material_name.split('_')[1:]
-        material_name = ' '.join(material_parts)
-        title = material_name.capitalize()
+            material_parts = underscored_material_name.split('_')[1:]
+        spaced_material_name = ' '.join(material_parts)
+        title = spaced_material_name.capitalize()
         title = markuptools.Markup(title)
         return title
 
@@ -111,9 +111,9 @@ class _Maker(_SCFObject):
         for line in user_input_lines:
             input_file.write(line + '\n')
         input_file.write('\n')
-        material_name = os.path.basename(self.material_package_directory)
+        underscored_material_name = os.path.basename(self.material_package_directory)
         input_file.write('maker = %s()\n' % type(self).__name__)
-        input_file.write('%s = maker.make(**user_input)\n' % material_name)
+        input_file.write('%s = maker.make(**user_input)\n' % underscored_material_name)
         input_file.close()
 
     def _write_output_file_to_disk(self, material):
@@ -123,8 +123,8 @@ class _Maker(_SCFObject):
             output_file.write(line + '\n')
         if output_file_import_statements:
             output_file.write('\n\n')
-        material_name = os.path.basename(self.material_package_directory)
-        output_file_lines = self.get_output_file_lines(material, material_name)
+        underscored_material_name = os.path.basename(self.material_package_directory)
+        output_file_lines = self.get_output_file_lines(material, underscored_material_name)
         for line in output_file_lines:
             output_file.write(line + '\n')
         output_file.close()
@@ -167,7 +167,7 @@ class _Maker(_SCFObject):
         return bool(self.score is not None)
 
     @property
-    def has_material_name(self):
+    def has_underscored_material_name(self):
         return bool(self.underscored_material_name is not None)
 
     @property
@@ -183,7 +183,7 @@ class _Maker(_SCFObject):
 
     @property
     def material_menu_name(self):
-        if self.has_material_name:
+        if self.has_underscored_material_name:
             return self.underscored_material_name
         else:
             return '(unnamed material)'
@@ -260,7 +260,7 @@ class _Maker(_SCFObject):
             if self.user_input_wrapper.is_complete:
                 menu_specifier.sentence_length_items.append(('p', 'show pdf of given input'))
                 menu_specifier.sentence_length_items.append(('m', 'write material to disk'))
-            if self.has_material_name:
+            if self.has_underscored_material_name:
                 menu_specifier.sentence_length_items.append(('n', 'rename material'))
             else:
                 menu_specifier.sentence_length_items.append(('n', 'name material'))
