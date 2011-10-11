@@ -4,7 +4,7 @@ from baca.scf.MaterialWrangler import MaterialWrangler
 from baca.scf.menuing import Menu
 from baca.scf.menuing import MenuSection
 from baca.scf.PackageProxy import PackageProxy
-from baca.scf.StaticMaterialPackageProxy import StaticMaterialPackageProxy
+from baca.scf.StaticMaterialProxy import StaticMaterialProxy
 import os
 
 

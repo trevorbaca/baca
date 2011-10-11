@@ -5,6 +5,6 @@ from MaterialWrangler import MaterialWrangler
 from PackageProxy import PackageProxy
 from ScorePackageProxy import ScorePackageProxy
 from ScoreWrangler import ScoreWrangler
-from StaticMaterialPackageProxy import StaticMaterialPackageProxy
+from StaticMaterialProxy import StaticMaterialProxy
 from StudioInterface import StudioInterface
 from UserInputWrapper import UserInputWrapper

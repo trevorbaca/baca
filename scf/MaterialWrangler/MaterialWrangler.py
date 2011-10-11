@@ -3,7 +3,7 @@ from baca.scf.InteractiveMaterialProxy import InteractiveMaterialProxy
 from baca.scf.MakerWrangler import MakerWrangler
 from baca.scf.menuing import Menu
 from baca.scf.PackageProxy import PackageProxy
-from baca.scf.StaticMaterialPackageProxy import StaticMaterialPackageProxy
+from baca.scf.StaticMaterialProxy import StaticMaterialProxy
 import os
 
 
@@ -63,8 +63,8 @@ class MaterialWrangler(DirectoryProxy):
         self.proceed()
 
     def create_static_material_package(self, importable_module_name, has_visualizer=True):
-        static_material_package_proxy = StaticMaterialPackageProxy(importable_module_name)
-        static_material_package_proxy.create(has_visualizer=has_visualizer)
+        static_material_proxy = StaticMaterialProxy(importable_module_name)
+        static_material_proxy.create(has_visualizer=has_visualizer)
         print 'Static material package %s created.\n' % importable_module_name
 
     def create_static_material_package_interactively(self, menu_header=None):
@@ -168,7 +168,7 @@ class MaterialWrangler(DirectoryProxy):
                 material_name = value
                 if material_name.endswith('(@)'):
                     importable_module_name = '%s.%s' % (score_package_name, material_name.strip(' (@)'))
-                    material_package_proxy = StaticMaterialPackageProxy(importable_module_name)
+                    material_package_proxy = StaticMaterialProxy(importable_module_name)
                 else:
                     importable_module_name = '%s.%s' % (score_package_name, material_name)
                     material_package_proxy = InteractiveMaterialProxy(importable_module_name)

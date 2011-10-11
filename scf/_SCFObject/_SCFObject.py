@@ -66,11 +66,11 @@ class _SCFObject(object):
 
     def get_material_package_proxy(self, importable_module_name):
         from baca.scf.InteractiveMaterialProxy import InteractiveMaterialProxy
-        from baca.scf.StaticMaterialPackageProxy import StaticMaterialPackageProxy
+        from baca.scf.StaticMaterialProxy import StaticMaterialProxy
         if self.is_interactive_material_package(importable_module_name):
             return InteractiveMaterialProxy(importable_module_name)
         else:
-            return StaticMaterialPackageProxy(importable_module_name)
+            return StaticMaterialProxy(importable_module_name)
    
     def globally_replace_in_file(self, file_name, old, new):
         file_pointer = file(file_name, 'r')

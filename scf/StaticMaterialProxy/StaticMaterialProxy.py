@@ -2,7 +2,7 @@ from baca.scf._MaterialPackageProxy import _MaterialPackageProxy
 import os
 
 
-class StaticMaterialPackageProxy(_MaterialPackageProxy):
+class StaticMaterialProxy(_MaterialPackageProxy):
 
     ### PUBLIC METHODS ###
 
