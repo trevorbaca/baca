@@ -1,1 +1,0 @@
-from _MaterialPackageProxy import _MaterialPackageProxy

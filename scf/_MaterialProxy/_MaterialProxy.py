@@ -5,7 +5,7 @@ import subprocess
 import sys
 
 
-class _MaterialPackageProxy(PackageProxy):
+class _MaterialProxy(PackageProxy):
 
     def __init__(self, importable_module_name):
         PackageProxy.__init__(self, importable_module_name)
