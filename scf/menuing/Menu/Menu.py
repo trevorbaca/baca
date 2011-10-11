@@ -6,13 +6,13 @@ import os
 
 class Menu(_MenuObject, _SCFObject):
 
-    def __init__(self, menu_header=None, menu_body=None, score_title=None, 
+    def __init__(self, client=None, menu_header=None, menu_body=None, 
         menu_sections=None, items_to_number=None, sentence_length_items=None, 
         named_pairs=None, secondary_named_pairs=None, hidden_items=None,
         include_back=True, include_studio=True, indent_level=1, item_width = 11, 
         should_clear_terminal=True, hide_menu=False):
         _MenuObject.__init__(self, menu_header=menu_header, menu_body=menu_body)
-        self.score_title = score_title
+        self.client = client
         self.menu_sections = menu_sections
         self.items_to_number = items_to_number
         self.sentence_length_items = sentence_length_items
@@ -145,11 +145,22 @@ class Menu(_MenuObject, _SCFObject):
 
     ### PUBLIC ATTRIBUTES ###
     
+    @apply
+    def client():
+        def fget(self):
+            return self._client
+        def fset(self, client):
+            from baca.scf._SCFObject import _SCFObject
+            assert isinstance(client, (_SCFObject, type(None)))
+            self._client = client
+        return property(**locals())
+
     @property
     def default_hidden_items(self):
         default_hidden_items = []
         if self.include_back:
             default_hidden_items.append(('b', 'back'))
+        default_hidden_items.append(('client', 'show menu client'))
         default_hidden_items.append(('hidden', 'show hidden items'))
         default_hidden_items.append(('q', 'quit'))
         default_hidden_items.append(('redraw', 'redraw'))
@@ -287,6 +298,8 @@ class Menu(_MenuObject, _SCFObject):
             should_clear_terminal, hide_menu = False, True
             if key == 'b':
                 return key, None
+            elif key == 'client':
+                self.show_menu_client()
             elif key == 'exec':
                 self.exec_statement()
             elif key == 'hidden':
@@ -315,12 +328,16 @@ class Menu(_MenuObject, _SCFObject):
         hidden_items.extend(self.default_hidden_items)
         hidden_items.extend(self.hidden_items)
         for section in self.menu_sections:
-            #section.show_hidden_items()
             hidden_items.extend(section.hidden_items)
         hidden_items.sort()
         for key, value in hidden_items:
             self._print_tab(self.indent_level),
             print '%s: %s' % (key, value)
+        print ''
+
+    def show_menu_client(self):
+        print self._tab(1),
+        print 'client: %s' % self.client
         print ''
 
     def tab(self, n):

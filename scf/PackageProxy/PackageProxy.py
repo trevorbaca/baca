@@ -166,7 +166,7 @@ class PackageProxy(DirectoryProxy):
         from baca.scf.menuing import MenuSection
         from baca.scf.menuing import Menu
         while True:
-            menu = Menu(menu_header=menu_header)
+            menu = Menu(client=self, menu_header=menu_header)
             menu.menu_body = 'tags'
             section = MenuSection()
             section.lines_to_list = self.list_formatted_tags()

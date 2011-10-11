@@ -153,7 +153,7 @@ class MaterialWrangler(DirectoryProxy):
 
     def manage_shared_materials(self, menu_header=None, command_string=None):
         while True:
-            menu_specifier = Menu(menu_header=menu_header)
+            menu_specifier = Menu(client=self, menu_header=menu_header)
             menu_specifier.menu_body = 'shared materials'
             menu_specifier.items_to_number = self.list_shared_material_summaries()
             menu_specifier.sentence_length_items.append(('h', '[make new material by hand]'))

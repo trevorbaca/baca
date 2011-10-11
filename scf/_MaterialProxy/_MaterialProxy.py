@@ -283,7 +283,7 @@ class _MaterialProxy(PackageProxy):
     def manage_material(self, menu_header=None):
         from baca.scf.menuing import Menu
         while True:
-            menu_specifier = Menu()
+            menu_specifier = Menu(client=self)
             menu_specifier.menu_header = menu_header
             menu_specifier.menu_body = self.spaced_material_name
             if self.is_interactive:
