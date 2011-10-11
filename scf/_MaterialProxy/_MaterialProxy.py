@@ -300,7 +300,6 @@ class _MaterialProxy(PackageProxy):
                 menu.named_pairs.append(('p', 'pdf'))
             menu.named_pairs.append(('n', 'initializer'))
             menu.secondary_named_pairs.append(('d', 'delete'))
-            menu.secondary_named_pairs.append(('g', 'get tag'))
             menu.secondary_named_pairs.append(('r', 'rename'))
             menu.secondary_named_pairs.append(('s', 'summarize'))
             menu.secondary_named_pairs.append(('t', 'tags'))
@@ -520,31 +519,31 @@ class _MaterialProxy(PackageProxy):
             found.append(artifact_name)
         else:
             missing.append(artifact_name)
-        artifact_name = 'input data'
-        if self.has_input_data:
-            found.append(artifact_name)
-        else:
-            missing.append(artifact_name)
-        artifact_name = 'ouput file'
-        if self.has_output_file:
-            found.append(artifact_name)
-        else:
-            missing.append(artifact_name)
-        artifact_name = 'output data'
-        if self.has_output_data:
-            found.append(artifact_name)
-        else:
-            missing.append(artifact_name)
-        artifact_name = 'visualizer'
-        if self.has_visualizer:
-            found.append(artifact_name)
-        else:
-            missing.append(artifact_name)
-        artifact_name = 'score definition'
-        if self.has_score_definition:
-            found.append(artifact_name)
-        else:
-            missing.append(artifact_name)
+#        artifact_name = 'input data'
+#        if self.has_input_data:
+#            found.append(artifact_name)
+#        else:
+#            missing.append(artifact_name)
+#        artifact_name = 'ouput file'
+#        if self.has_output_file:
+#            found.append(artifact_name)
+#        else:
+#            missing.append(artifact_name)
+#        artifact_name = 'output data'
+#        if self.has_output_data:
+#            found.append(artifact_name)
+#        else:
+#            missing.append(artifact_name)
+#        artifact_name = 'visualizer'
+#        if self.has_visualizer:
+#            found.append(artifact_name)
+#        else:
+#            missing.append(artifact_name)
+#        artifact_name = 'score definition'
+#        if self.has_score_definition:
+#            found.append(artifact_name)
+#        else:
+#            missing.append(artifact_name)
         artifact_name = 'ly'
         if self.has_ly:
             found.append(artifact_name)
@@ -560,6 +559,7 @@ class _MaterialProxy(PackageProxy):
         if missing:
             print 'Missing %s.' % ', '.join(missing)
         print ''
+        self.proceed()
         
     def trim_ly_lines(self, ly_file_name):
         '''Remove "Abjad revision 4776" and "2011-09-13 18:33" lines.
