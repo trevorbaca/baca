@@ -1,4 +1,4 @@
-from baca.scf._MenuObject import _MenuObject
+from baca.scf.menuing._MenuObject import _MenuObject
 from baca.scf._SCFObject import _SCFObject
 from baca.scf.exceptions import StudioException
 import os

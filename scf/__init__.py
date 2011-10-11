@@ -7,5 +7,4 @@ from ScorePackageProxy import ScorePackageProxy
 from ScoreWrangler import ScoreWrangler
 from StaticMaterialPackageProxy import StaticMaterialPackageProxy
 from StudioInterface import StudioInterface
-from UserInputGetter import UserInputGetter
 from UserInputWrapper import UserInputWrapper

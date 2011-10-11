@@ -1,5 +1,5 @@
 from baca.scf.DirectoryProxy import DirectoryProxy
-from baca.scf.UserInputGetter import UserInputGetter
+from baca.scf.menuing import UserInputGetter
 import os
 
 
