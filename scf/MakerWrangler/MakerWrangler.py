@@ -7,8 +7,15 @@ import os
 class MakerWrangler(DirectoryProxy):
 
     def __init__(self, score_title=None):
+        directory = os.path.join(os.environ.get('BACA'), 'makers')
+        DirectoryProxy.__init__(self, directory)
         self.score_title = score_title
-        self.makers_directory = os.path.join(os.environ.get('BACA'), 'makers')
+        self.makers_directory = self.directory
+
+    ### OVERLOADS ###
+
+    def __repr__(self):
+        return '%s()' % self.class_name
 
     ### PUBLIC METHODS ###
 

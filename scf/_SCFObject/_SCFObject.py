@@ -9,10 +9,11 @@ import time
 class _SCFObject(object):
     
     def __init__(self):
-        self.baca_directory = os.environ.get('BACA')
-        self.baca_materials_directory = os.path.join(self.baca_directory, 'materials')
-        self.scores_directory = os.environ.get('SCORES')
-        self.shared_materials_directory = self.baca_materials_directory
+        self._baca_directory_name = os.environ.get('BACA')
+        self._baca_materials_directory_name = os.path.join(self.baca_directory_name, 'materials')
+        self._baca_materials_importable_package_name = 'baca.materials'
+        self._baca_materials_short_package_name = 'materials'
+        self._scores_directory_name = os.environ.get('SCORES')
 
     ### OVERLOADS ###
 
@@ -22,8 +23,28 @@ class _SCFObject(object):
     ### PUBLIC ATTRIBUTES ###
 
     @property
+    def baca_directory_name(self):
+        return self._baca_directory_name
+
+    @property
+    def baca_materials_directory_name(self):
+        return self._baca_materials_directory_name
+
+    @property
+    def baca_materials_importable_package_name(self):
+        return self._baca_materials_importable_package_name
+
+    @property
+    def baca_materials_short_pacakge_name(self):
+        return self._baca_materials_short_package_name
+
+    @property
     def class_name(self):
         return type(self).__name__
+
+    @property
+    def scores_directory_name(self):
+        return self._scores_directory_name
 
     @property
     def spaced_class_name(self):

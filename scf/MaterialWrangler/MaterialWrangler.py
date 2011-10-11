@@ -9,17 +9,20 @@ import os
 
 class MaterialWrangler(DirectoryProxy):
 
-    #def __init__(self, score_title=None):
     def __init__(self, purview=None):
         from baca.scf.StudioInterface import StudioInterface
         directory = os.path.join(os.environ.get('BACA'), 'materials')
         DirectoryProxy.__init__(self, directory)
-        #self.score_title = score_title
         if purview is None:
             self._purview = StudioInterface()
         else:
             self._purview = purview
         self._maker_wrangler = MakerWrangler()
+
+    ### OVERLOADS ###
+
+    def __repr__(self):
+        return '%s()' % self.class_name
 
     ### PUBLIC ATTRIBUTES ###
 
@@ -151,7 +154,7 @@ class MaterialWrangler(DirectoryProxy):
     def manage_shared_materials(self, menu_header=None, command_string=None):
         while True:
             menu_specifier = Menu(menu_header=menu_header)
-            menu_specifier.menu_body = 'materials'
+            menu_specifier.menu_body = 'shared materials'
             menu_specifier.items_to_number = self.list_shared_material_summaries()
             menu_specifier.sentence_length_items.append(('h', '[make new material by hand]'))
             menu_specifier.sentence_length_items.append(('i', 'make new material interactively'))

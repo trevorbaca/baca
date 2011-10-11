@@ -20,9 +20,9 @@ class ScoreWrangler(DirectoryProxy):
         raise NotImplementedError
 
     def fix_score_package_structures(self):
-        for score_package_proxy in self.iterate_score_package_proxies():
-            score_package_proxy.fix_package_structure()
-            score_package_proxy.profile_package_structure()
+        for score_proxy in self.iterate_score_proxies():
+            score_proxy.fix_package_structure()
+            score_proxy.profile_package_structure()
             print ''
 
     def get_score_package_name_from_user(self, menu_header=None):
@@ -40,21 +40,21 @@ class ScoreWrangler(DirectoryProxy):
                 yield material_package_proxy
 
     def iterate_material_package_proxies(self, class_names=None):
-        for score_package_proxy in self.iterate_score_package_proxies():
-            for material_package_proxy in score_package_proxy.iterate_material_package_proxies():
+        for score_proxy in self.iterate_score_proxies():
+            for material_package_proxy in score_proxy.iterate_material_package_proxies():
                 if class_names is None or material_package_proxy.get_tag('maker') in class_names:
                     yield material_package_proxy
-        for material_name in os.listdir(self.shared_materials_directory):
+        for material_name in os.listdir(self.baca_materials_directory_name):
             if material_name[0].isalpha():
                 package_name = 'baca.materials.%s' % material_name
                 material_package_proxy = self.get_material_package_proxy(package_name)
                 if class_names is None or material_package_proxy.get_tag('maker') in class_names:
                     yield material_package_proxy
 
-    def iterate_score_package_proxies(self):
+    def iterate_score_proxies(self):
         for score_package_name in self.list_score_package_names():
-            score_package_proxy = ScoreProxy(score_package_name)
-            yield score_package_proxy
+            score_proxy = ScoreProxy(score_package_name)
+            yield score_proxy
 
     def list_numbered_score_titles_with_years(self):
         numbered_score_titles_with_years = []
@@ -109,8 +109,8 @@ class ScoreWrangler(DirectoryProxy):
     def list_materials_packages(self):
         materials_packages = []
         for score_package_name in self.list_well_formed_score_package_names():
-            score_package_proxy = ScoreProxy(score_package_name)
-            materials_packages.extend(score_package_proxy.list_materials_packages())
+            score_proxy = ScoreProxy(score_package_name)
+            materials_packages.extend(score_proxy.list_materials_packages())
         return materials_packages
 
     def list_well_formed_score_package_names(self):
@@ -120,8 +120,8 @@ class ScoreWrangler(DirectoryProxy):
         return score_package_names
 
     def profile_score_package_structures(self):
-        for score_package_proxy in self.iterate_score_package_proxies():
-            score_package_proxy.profile_package_structure()
+        for score_proxy in self.iterate_score_proxies():
+            score_proxy.profile_package_structure()
             print ''
 
     def score_package_name_to_hide_in_front_end(self, score_package_name):
@@ -168,8 +168,8 @@ class ScoreWrangler(DirectoryProxy):
         if key == 's':
             return None
         score_package_name = self.score_title_to_score_package_name(value)
-        score_package_proxy = ScoreProxy(score_package_name)
-        return score_package_proxy
+        score_proxy = ScoreProxy(score_package_name)
+        return score_proxy
     
     def svn_ci_scores(self, prompt_proceed=True):
         commit_message = raw_input('Commit message> ')
@@ -177,13 +177,13 @@ class ScoreWrangler(DirectoryProxy):
         print 'Commit message will be: "%s"\n' % commit_message
         if not self.confirm():
             return
-        for score_package_proxy in self.iterate_score_package_proxies():
-            score_package_proxy.svn_cm(commit_message=commit_message, prompt_proceed=False)
+        for score_proxy in self.iterate_score_proxies():
+            score_proxy.svn_cm(commit_message=commit_message, prompt_proceed=False)
         if prompt_proceed:
             self.proceed()
 
     def svn_st_scores(self, prompt_proced=True):
-        for score_package_proxy in self.iterate_score_package_proxies():
-            score_package_proxy.svn_st(prompt_proceed=False)
+        for score_proxy in self.iterate_score_proxies():
+            score_proxy.svn_st(prompt_proceed=False)
         if prompt_proceed:
             self.proceed()
