@@ -1,12 +1,14 @@
 class MenuSection(object):
 
     def __init__(self, menu_section_title='', lines_to_list=None,
-        menu_section_entries=None, sentence_length_items=None, indent_level=1, 
-        hide_menu=False, layout='list'):
+        menu_section_entries=None, sentence_length_items=None, 
+        hidden_items=None, indent_level=1, hide_menu=False, 
+        layout='list'):
         self.menu_section_title = menu_section_title
         self.lines_to_list = lines_to_list
         self.menu_section_entries = menu_section_entries
         self.sentence_length_items = sentence_length_items
+        self.hidden_items = hidden_items
         self.indent_level = indent_level
         self.hide_menu = hide_menu
         self.layout = layout
@@ -33,6 +35,17 @@ class MenuSection(object):
         return 4 * n * ' '
     
     ### PUBLIC ATTRIBUTES ###
+
+    @apply
+    def hidden_items():
+        def fget(self):
+            return self._hidden_items
+        def fset(self, hidden_items):
+            if hidden_items is None:
+                self._hidden_items = []
+            else:
+                self._hidden_items = hidden_items[:]
+        return property(**locals())
 
     @apply
     def hide_menu():
@@ -138,3 +151,6 @@ class MenuSection(object):
         if self.sentence_length_items:
             if not self.hide_menu:
                 print ''
+        for key, value in self.hidden_items:
+            all_keys.append(key)
+            all_values.append(value)

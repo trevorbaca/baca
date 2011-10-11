@@ -76,6 +76,7 @@ class StudioInterface(DirectoryProxy):
                 self.score_wrangler.svn_add_scores()
             elif key == 'ci':
                 self.svn_ci()
+                break
             elif key == 'ci scores':
                 self.score_wrangler.svn_ci_scores()
             elif key == 'st':
@@ -92,7 +93,7 @@ class StudioInterface(DirectoryProxy):
             menu_section.menu_section_entries = score_titles
             menu_section.sentence_length_items.append(('min', 'work with interactive materials'))
             menu_section.sentence_length_items.append(('mst', 'work with static materials'))
-            menu_section.sentence_length_items.append(('svn', 'work with repository'))
+            menu_section.hidden_items.append(('svn', 'work with repository'))
             menu_specifier.menu_sections.append(menu_section)
             menu_specifier.include_back = False
             menu_specifier.include_studio = False
