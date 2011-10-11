@@ -46,24 +46,26 @@ class MaterialWrangler(DirectoryProxy):
 
     ### PUBLIC METHODS ###
 
-    def create_shared_material_package(self, menu_header=None, is_interactive=False):
-        if is_interactive:
-            return self.maker_wrangler.manage_makers(menu_header=menu_header)
-        else:
-            response = raw_input('Make material interactively? ')
-            if response == 'y':
-                self.maker_wrangler.manage_makers(menu_header=menu_header)
-            else:
-                return self._create_materials_package(self.directory)
-
     def create_interactive_material_package(self, importable_module_name):
         self.print_not_implemented()
         print 'Interactive material package %s created.\n' % importable_module_name
 
-    def create_interactive_material_package_interactively(self):
-        self.print_not_implemented()
-        self.create_interactive_material_package(importable_module_name)
+    def create_interactive_material_package_interactively(self, menu_header=None):
+        while True:
+            key, value = self.maker_wrangler.select_interactive_maker(menu_header=menu_header)
+            if value is None:
+                break
+            else:
+                maker = value
+            maker.score = self
+            result = maker.edit_interactively(menu_header=menu_header)
+            if result:
+                break
         self.proceed()
+        return True, None
+
+    def create_material_by_hand(self):
+        self.print_not_implemented()
 
     def create_static_material_package(self, importable_module_name, has_visualizer=True):
         static_material_proxy = StaticMaterialProxy(importable_module_name)
@@ -73,9 +75,10 @@ class MaterialWrangler(DirectoryProxy):
     def create_static_material_package_interactively(self, menu_header=None):
         self.clear_terminal()
         menu_body = 'create static material package'
-        print self.make_menu_title(menu_header, menu_body)
-        materials_package_name = self.get_materials_package_name_of_new_material()
-        material_package_name = self.get_package_name_of_new_material_interactively()
+        menu_title = self.make_menu_title(menu_header, menu_body)
+        print menu_title
+        materials_package_name = self.get_materials_package_name_of_new_material(menu_header=menu_title)
+        material_package_name = self.get_package_name_of_new_material_interactively(menu_header)
         has_visualizer = self.get_visualizer_status_of_new_material_package_interactively()
         importable_module_name = '%s.%s' % (materials_package_name, material_package_name)
         self.create_static_material_package(importable_module_name, has_visualizer)
@@ -148,24 +151,21 @@ class MaterialWrangler(DirectoryProxy):
             summaries.append(summary)
         return summaries
 
-    def make_new_material_by_hand(self):
-        self.print_not_implemented()
-
     def manage_shared_materials(self, menu_header=None, command_string=None):
         while True:
-            menu_specifier = Menu(client=self, menu_header=menu_header)
-            menu_specifier.menu_body = 'shared materials'
-            menu_specifier.items_to_number = self.list_shared_material_summaries()
-            menu_specifier.sentence_length_items.append(('h', '[make new material by hand]'))
-            menu_specifier.sentence_length_items.append(('i', 'make new material interactively'))
-            key, value = menu_specifier.display_menu()
+            menu = Menu(client=self, menu_header=menu_header)
+            menu.menu_body = 'shared materials'
+            menu.items_to_number = self.list_shared_material_summaries()
+            menu.sentence_length_items.append(('h', '[create material by hand]'))
+            menu.sentence_length_items.append(('i', 'create material interactively'))
+            key, value = menu.display_menu()
             if key == 'b':
                 return key, None
             elif key == 'h':
-                self.make_new_material_by_hand()
+                self.create_material_by_hand()
             elif key == 'i':
-                result = self.create_shared_material_package(
-                    menu_header=menu_specifier.menu_title, is_interactive=True)
+                menu_title = menu.menu_title
+                self.material_wrangler.create_interactie_material_package_interactively(menu_header=menu_title)
             else:
                 score_package_name = 'baca.materials'
                 material_name = value
@@ -176,4 +176,4 @@ class MaterialWrangler(DirectoryProxy):
                     importable_module_name = '%s.%s' % (score_package_name, material_name)
                     material_package_proxy = InteractiveMaterialProxy(importable_module_name)
                 material_package_proxy.score_title = 'Materials'
-                material_package_proxy.manage_material(menu_header=menu_specifier.menu_title)
+                material_package_proxy.manage_material(menu_header=menu.menu_title)

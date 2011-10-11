@@ -140,41 +140,9 @@ class ScoreProxy(PackageProxy):
 
     ### PUBLIC METHODS ###
 
-    def create_chunk(self):
-        return self.print_not_implemented()
-
-    def create_chunk_interactively(self, menu_header=None):
-        return self.print_not_implemented()
-
-    def create_interactive_material(self):
-        self.print_not_implemented()
-
-    def create_interactive_material_interactively(self, menu_header=None):
-        while True:
-            key, value = self.maker_wrangler.select_interactive_maker(menu_header=menu_header)
-            if value is None:
-                break
-            else:
-                maker = value
-            maker.score = self
-            result = maker.edit_interactively(menu_header=menu_header)
-            if result:
-                break
-        return True, None
-
-    def create_material_package_interactively(self):
-        return self.material_wrangler.create_material_package_interactively()
-
     def create_package_structure(self):
         self.fix_score_package_directory_structure(is_interactive=False)
 
-    def create_static_material(self):
-        return self.material_wrangler.create_static_material_package()
-
-    def create_static_material_interactively(self, menu_header=None):
-        return self.material_wrangler.create_static_material_package_interactively(
-            menu_header=self.score_title)
-        
     def fix_package_structure(self, is_interactive=True):
         if self.package_name == 'recursif':
             return
@@ -283,13 +251,11 @@ class ScoreProxy(PackageProxy):
             if key == 'b':
                 return key, None
             elif key == 'ch':
-                self.create_chunk_interactively(menu_header=self.score_title)
-            #elif key == 'h':
-            #    self.manage_chunks(menu_header=self.score_title)
+                self.chunk_wrangler.create_chunk_interactively(menu_header=self.score_title)
             elif key == 'ms':
-                self.create_static_material_interactively(menu_header=self.score_title)
+                self.material_wrangler.create_static_material_package_interactively(menu_header=self.score_title)
             elif key == 'mi':
-                self.create_interactive_material_interactively(menu_header=self.score_title)
+                self.material_wrangler.create_interactive_material_interactively(menu_header=self.score_title)
             elif key == 'svn':
                 self.manage_svn(menu_header=self.score_title)
             else:

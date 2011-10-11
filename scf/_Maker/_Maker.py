@@ -362,7 +362,7 @@ class _Maker(_SCFObject):
             menu.menu_header = menu_header
             menu.menu_body = self.spaced_class_name
             menu.items_to_number = list(self.iterate_materials_based_on_maker())
-            menu.sentence_length_items.append(('n', 'make new'))
+            menu.sentence_length_items.append(('new', 'create'))
             key, value = menu.display_menu()
             if key == 'b':
                 return key, None
