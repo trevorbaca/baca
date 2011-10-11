@@ -4,6 +4,7 @@ from abjad.tools import markuptools
 from baca.scf._SCFObject import _SCFObject
 from baca.scf.MaterialWrangler import MaterialWrangler
 from baca.scf.menuing import Menu
+from baca.scf.menuing import MenuSection
 from baca.scf.ScoreWrangler import ScoreWrangler
 from baca.scf.UserInputWrapper import UserInputWrapper
 import copy
@@ -13,9 +14,8 @@ import shutil
 
 class _Maker(_SCFObject):
 
-    def __init__(self, directory=None, material_name=None, score=None):
+    def __init__(self, material_name=None, score=None):
         _SCFObject.__init__(self)
-        self.directory = directory
         self.material_name = material_name
         self.score = score
 
@@ -142,6 +142,14 @@ class _Maker(_SCFObject):
         fp.close()
 
     ### PUBLIC ATTRIBUTES ###
+
+    @property
+    def directory(self):
+        raise Exception('needs to be derived from material name')
+
+    @property
+    def generic_output_name(self):
+        return self._generic_output_name
 
     @property
     def has_changes(self):
@@ -361,8 +369,11 @@ class _Maker(_SCFObject):
             menu = Menu(client=self)
             menu.menu_header = menu_header
             menu.menu_body = self.spaced_class_name
-            menu.items_to_number = list(self.iterate_materials_based_on_maker())
-            menu.sentence_length_items.append(('new', 'create'))
+            menu_section = MenuSection()
+            menu_section.menu_section_title = 'existing %s' % self.generic_output_name
+            menu_section.items_to_number = list(self.iterate_materials_based_on_maker())
+            menu.menu_sections.append(menu_section)
+            menu.sentence_length_items.append(('new', 'create %s' % self.generic_output_name))
             key, value = menu.display_menu()
             if key == 'b':
                 return key, None

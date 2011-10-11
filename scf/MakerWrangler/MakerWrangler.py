@@ -48,7 +48,7 @@ class MakerWrangler(DirectoryProxy):
     def manage_makers(self, menu_header=None):
         while True:
             menu_specifier = Menu(client=self, menu_header=menu_header)
-            menu_specifier.menu_body = 'interactive material makers'
+            menu_specifier.menu_body = 'select maker'
             menu_specifier.items_to_number = self.list_maker_spaced_class_names()
             key, value = menu_specifier.display_menu()
             if key == 'b':

@@ -17,7 +17,7 @@ class SargassoMeasureMaker(_Maker):
     def __init__(self, **kwargs):
         _Maker.__init__(self, **kwargs)
         self.stylesheet = os.path.join(os.path.dirname(__file__), 'stylesheet.ly')
-        self.generic_output_name = 'sargasso measures'
+        self._generic_output_name = 'sargasso measures'
 
     ### PUBLIC ATTRIBUTES ###
 
