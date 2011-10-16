@@ -1,4 +1,6 @@
 from abjad.tools import iotools
+from abjad.tools import layouttools
+from abjad.tools import lilypondfiletools
 from baca.scf.DirectoryProxy import DirectoryProxy
 from baca.scf.menuing import Menu
 import os
@@ -7,8 +9,8 @@ import os
 class MakerWrangler(DirectoryProxy):
 
     def __init__(self, score_title=None):
-        directory = os.path.join(os.environ.get('BACA'), 'makers')
-        DirectoryProxy.__init__(self, directory)
+        directory_name = os.path.join(os.environ.get('BACA'), 'makers')
+        DirectoryProxy.__init__(self, directory_name)
         self.score_title = score_title
 
     ### OVERLOADS ###
@@ -50,30 +52,85 @@ class MakerWrangler(DirectoryProxy):
             print ''
             if iotools.is_uppercamelcase_string(maker_name):
                 break
-        print maker_name
-        maker_directory = os.path.join(self.makers_directory, maker_name)
-        print maker_directory
-        self.proceed()
+        while True:
+            generic_output_product = raw_input('Generic output product> ')
+            print ''
+            if iotools.is_underscore_delimited_lowercase_string(generic_output_product):
+                break
+        maker_directory = os.path.join(self.directory_name, maker_name)
         os.mkdir(maker_directory)
+        self.proceed()
         self.make_maker_initializer(maker_name)
-        self.make_maker_class_file(maker_name)
+        self.make_maker_class_file(maker_name, generic_output_product)
         self.make_maker_stylesheet(maker_name)
         self.proceed()
 
     def make_maker_initializer(self, maker_name):
-        initializer_file_name = os.path.join(self.directory, maker_name, '__init__.py')
+        initializer_file_name = os.path.join(self.directory_name, maker_name, '__init__.py')
         initializer = file(initializer_file_name, 'w')
         line = 'from abjad.tools.importtools._import_structured_package import _import_structured_package\n'
         initializer.write(line)
         initializer.write('\n')
-        initializer.write("_import_structured_package(__path__[0], globals(), 'baca'\n")
+        initializer.write("_import_structured_package(__path__[0], globals(), 'baca')\n")
         initializer.close() 
 
-    def make_maker_class_file(self, maker_name):
-        pass
+    def make_maker_class_file(self, maker_name, generic_output_name):
+        class_file_name = os.path.join(self.directory_name, maker_name, maker_name + '.py')
+        class_file = file(class_file_name, 'w')
+        lines = []
+        lines.append('from abjad.tools import lilypondfiletools')
+        lines.append('from baca.scf._Maker import _Maker')
+        lines.append('from baca.scf.UserInputWrapper import UserInputWrapper')
+        lines.append('import os')
+        lines.append('')
+        lines.append('')
+        lines.append('class %s(_Maker):' % maker_name)
+        lines.append('')
+        lines.append('\tdef __init__(self, **kwargs):')
+        lines.append('\t\t_Maker.__init__(self, **kwargs)')
+        lines.append("\t\tself.stylesheet = os.path.join(os.path.dirname(__file__), 'stylesheet.ly')")
+        lines.append("\t\tself._generic_output_name = %r" % generic_output_name)
+        lines.append('')
+        lines.append('\t### PUBLIC ATTRIBUTES ###')
+        lines.append('')
+        lines.append('\toutput_file_import_statements = [')
+        lines.append('\t\t]')
+        lines.append('')
+        lines.append('\tuser_input_import_statements = [')
+        lines.append('\t\t]')
+        lines.append('')
+        lines.append('\tuser_input_template = UserInputWrapper([')
+        lines.append('\t\t])')
+        lines.append('')
+        lines.append('\t### PUBLIC METHODS ###')
+        lines.append('')
+        lines.append('\tdef get_output_file_lines(self, material, underscored_material_name):')
+        lines.append('\t\toutput_file_lines = []')
+        lines.append('\t\treturn output_file_lines')
+        lines.append('')
+        lines.append('\tdef make(self, foo, bar):')
+        lines.append('\t\treturn material')
+        lines.append('')
+        lines.append('\tdef make_lilypond_file_from_output_material(self, material):')
+        lines.append('\t\tlilypond_file = lilypondfiletools.make_basic_lilypond_file()')
+        lines.append('\t\treturn lilypond_file')
+        class_file.write('\n'.join(lines))
+        class_file.close()
 
     def make_maker_stylesheet(self, maker_name):
-        pass
+        stylesheet = lilypondfiletools.make_basic_lilypond_file()
+        stylesheet.pop()
+        stylesheet.file_initial_system_comments = []
+        stylesheet.default_paper_size = 'letter', 'portrait'
+        stylesheet.global_staff_size = 14
+        stylesheet.layout_block.indent = 0
+        stylesheet.layout_block.ragged_right = True
+        stylesheet.paper_block.makup_system_spacing = layouttools.make_spacing_vector(0, 0, 12, 0)
+        stylesheet.paper_block.system_system_spacing = layouttools.make_spacing_vector(0, 0, 10, 0)
+        stylesheet_file_name = os.path.join(self.directory_name, maker_name, 'stylesheet.ly')
+        stylesheet_file_pointer = file(stylesheet_file_name, 'w')
+        stylesheet_file_pointer.write(stylesheet.format)
+        stylesheet_file_pointer.close()
         
     def manage_makers(self, menu_header=None):
         while True:
