@@ -79,6 +79,14 @@ class _MaterialProxy(PackageProxy):
         return not self.is_interactive
 
     @property
+    def material_spaced_name(self):
+        return self.package_short_name.replace('_', ' ')
+
+    @property
+    def material_underscored_name(self):
+        return self.package_short_name
+
+    @property
     def materials_package_importable_name(self):
         if self.score_package_short_name is None:
             return 'baca.materials'
@@ -91,14 +99,6 @@ class _MaterialProxy(PackageProxy):
             return None
         else:
             return self.package_importable_name.split('.')[0]
-
-    @property
-    def material_spaced_name(self):
-        return self.package_short_name.replace('_', ' ')
-
-    @property
-    def material_underscored_name(self):
-        return self.package_short_name
 
     @property
     def user_input_wrapper(self):

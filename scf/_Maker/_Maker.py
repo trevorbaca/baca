@@ -203,16 +203,27 @@ class _Maker(_SCFObject):
             return '%s_%s' % (self.score.package_short_name, self.material_underscored_name)
 
     @property
+    def material_spaced_name(self):
+        if self.has_material_underscored_name:
+            return self.material_underscored_name.replace('_', ' ')
+
+    @apply
+    def material_underscored_name():
+        def fget(self):
+            return self._material_underscored_name
+        def fset(self, material_underscored_name):
+            assert isinstance(material_underscored_name, (str, type(None)))
+            if isinstance(material_underscored_name, str):
+                assert iotools.is_underscore_delimited_lowercase_string(material_underscored_name)
+            self._material_underscored_name = material_underscored_name
+        return property(**locals())
+
+    @property
     def materials_directory_name(self):
         if self.score is None:
             return self.baca_materials_directory
         else:
             return self.score.materials_directory_name
-
-    @property
-    def material_spaced_name(self):
-        if self.has_material_underscored_name:
-            return self.material_underscored_name.replace('_', ' ')
 
     @apply
     def score():
@@ -228,17 +239,6 @@ class _Maker(_SCFObject):
     def score_package_short_name(self):
         if self.score is not None:
             return self.score.package_short_name
-
-    @apply
-    def material_underscored_name():
-        def fget(self):
-            return self._material_underscored_name
-        def fset(self, material_underscored_name):
-            assert isinstance(material_underscored_name, (str, type(None)))
-            if isinstance(material_underscored_name, str):
-                assert iotools.is_underscore_delimited_lowercase_string(material_underscored_name)
-            self._material_underscored_name = material_underscored_name
-        return property(**locals())
 
     ### PUBLIC METHODS ###
 
