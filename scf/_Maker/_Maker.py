@@ -270,7 +270,7 @@ class _Maker(_SCFObject):
             menu_specifier.sentence_length_items.append(('o', 'overwrite with demo input values'))
             menu_specifier.sentence_length_items.append(('i', 'import values'))
             menu_specifier.sentence_length_items.append(('c', 'clear values'))
-            #menu_specifier.sentence_length_items.append(('ed', 'edit source'))
+            #menu_specifier.sentence_length_items.append(('src', 'edit source'))
             if self.has_location:
                 menu_specifier.sentence_length_items.append(('l', 'change location'))
             else:
@@ -283,8 +283,6 @@ class _Maker(_SCFObject):
                 self.clear_values(self.user_input_wrapper)
             elif key == 'd':
                 self.show_demo_input_values()
-            elif key == 'ed':
-                self.edit_source_file()
             elif key == 'i':
                 self.import_values()
             elif key == 'l':
@@ -305,6 +303,8 @@ class _Maker(_SCFObject):
                 lilypond_file.header_block.title = markuptools.Markup(self.generic_output_name.capitalize())
                 lilypond_file.header_block.subtitle = markuptools.Markup('(unsaved)')
                 iotools.show(lilypond_file)
+            elif key == 'src':
+                self.edit_source_file()
             else:
                 try:
                     number = int(key)
@@ -371,6 +371,8 @@ class _Maker(_SCFObject):
             menu.menu_sections.append(menu_section)
             menu.sentence_length_items.append(('del', 'delete %s' % self.spaced_class_name))
             menu.sentence_length_items.append(('new', 'create %s' % self.generic_output_name))
+            menu.sentence_length_items.append(('ren', 'rename %s' % self.spaced_class_name))
+            menu.sentence_length_items.append(('src', 'edit %s source' % self.spaced_class_name))
             key, value = menu.display_menu()
             if key == 'b':
                 return key, None
@@ -381,6 +383,10 @@ class _Maker(_SCFObject):
                 break
             elif key == 'new':
                 self.edit_interactively(menu_header=menu.menu_title)
+            elif key == 'ren':
+                self.print_not_implemented()
+            elif key == 'src':
+                self.edit_source_file()
             else:
                 material_proxy = value
                 material_proxy.manage_material(menu_header=menu.menu_title)

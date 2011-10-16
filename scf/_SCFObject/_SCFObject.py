@@ -58,18 +58,15 @@ class _SCFObject(object):
         return spaced_class_name
 
     @property
-    def source_file(self):
-        parent_directory_name = os.path.dirname(os.path.abspath(self.__module__))
-        module_path = self.__module__
-        module_path = module_path.split('.')[1:]
-        path = os.path.join(parent_directory_name, *module_path)
-        source_file = path + '.py'
-        return source_file
+    def source_file_name(self):
+        directory_name = self.package_importable_name_to_directory(self.__module__)
+        source_file_name = directory_name + '.py'
+        return source_file_name
 
     ### PUBLIC METHODS ###
 
     def annotate_docstring(self):
-        print self.source_file
+        print self.source_file_name
         print ''
         self.proceed()
 
@@ -84,7 +81,7 @@ class _SCFObject(object):
         return True
 
     def edit_source_file(self):
-        command = 'vi %s' % self.source_file
+        command = 'vi %s' % self.source_file_name
         os.system(command)
 
     def get_date(self):
