@@ -125,11 +125,11 @@ class MaterialWrangler(DirectoryProxy):
         return shared_material_directories
 
     def list_shared_material_spaced_names(self):
-        spaced_material_names = []
+        material_spaced_names = []
         for package_short_name in self.list_shared_material_package_short_names():
-            spaced_material_name = package_short_name.replace('_', ' ')
-            spaced_material_names.append(spaced_material_name)
-        return spaced_material_names
+            material_spaced_name = package_short_name.replace('_', ' ')
+            material_spaced_names.append(material_spaced_name)
+        return material_spaced_names
         
     def list_shared_material_package_short_names(self):
         shared_material_package_short_names = []
@@ -171,12 +171,12 @@ class MaterialWrangler(DirectoryProxy):
                 self.material_wrangler.create_interactie_material_package_interactively(menu_header=menu_title)
             else:
                 score_package_importable_name = 'baca.materials'
-                underscored_material_name = value
-                if underscored_material_name.endswith('(@)'):
-                    package_importable_name = '%s.%s' % (score_package_importable_name, underscored_material_name.strip(' (@)'))
+                material_underscored_name = value
+                if material_underscored_name.endswith('(@)'):
+                    package_importable_name = '%s.%s' % (score_package_importable_name, material_underscored_name.strip(' (@)'))
                     material_proxy = StaticMaterialProxy(package_importable_name)
                 else:
-                    package_importable_name = '%s.%s' % (score_package_importable_name, underscored_material_name)
+                    package_importable_name = '%s.%s' % (score_package_importable_name, material_underscored_name)
                     material_proxy = InteractiveMaterialProxy(package_importable_name)
                 material_proxy.score_title = 'Materials'
                 material_proxy.manage_material(menu_header=menu.menu_title)

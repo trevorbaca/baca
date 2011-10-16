@@ -44,9 +44,9 @@ class ScoreWrangler(DirectoryProxy):
             for material_proxy in score_proxy.iterate_material_proxies():
                 if class_names is None or material_proxy.get_tag('maker') in class_names:
                     yield material_proxy
-        for underscored_material_name in os.listdir(self.baca_materials_directory_name):
-            if underscored_material_name[0].isalpha():
-                package_importable_name = 'baca.materials.%s' % underscored_material_name
+        for material_underscored_name in os.listdir(self.baca_materials_directory_name):
+            if material_underscored_name[0].isalpha():
+                package_importable_name = 'baca.materials.%s' % material_underscored_name
                 material_proxy = self.get_material_proxy(package_importable_name)
                 if class_names is None or material_proxy.get_tag('maker') in class_names:
                     yield material_proxy

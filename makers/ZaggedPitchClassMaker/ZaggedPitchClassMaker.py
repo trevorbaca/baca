@@ -34,9 +34,9 @@ class ZaggedPitchClassMaker(_Maker):
 
     ### PUBLIC METHODS ###
 
-    def get_output_file_lines(self, material, underscored_material_name):
+    def get_output_file_lines(self, material, material_underscored_name):
         output_file_lines = []
-        output_file_lines.append('%s = %s' % (underscored_material_name, material))
+        output_file_lines.append('%s = %s' % (material_underscored_name, material))
         return output_file_lines
 
     def make(self, pc_cells, division_cells, grouping_counts):

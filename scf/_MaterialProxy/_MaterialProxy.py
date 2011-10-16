@@ -93,11 +93,11 @@ class _MaterialProxy(PackageProxy):
             return self.package_importable_name.split('.')[0]
 
     @property
-    def spaced_material_name(self):
+    def material_spaced_name(self):
         return self.package_short_name.replace('_', ' ')
 
     @property
-    def underscored_material_name(self):
+    def material_underscored_name(self):
         return self.package_short_name
 
     @property
@@ -108,7 +108,7 @@ class _MaterialProxy(PackageProxy):
     ### PUBLIC METHODS ###
 
     def add_material_to_materials_initializer(self):
-        import_statement = 'from %s import %s\n' % (self.underscored_material_name, self.underscored_material_name)
+        import_statement = 'from %s import %s\n' % (self.material_underscored_name, self.material_underscored_name)
         parent_package = PackageProxy(self.parent_directory_name)
         parent_package.add_line_to_initializer(import_statement)
 
@@ -141,7 +141,7 @@ class _MaterialProxy(PackageProxy):
         file_pointer = file(self.visualizer_file_name, 'w')
         file_pointer.write('from abjad import *\n')
         file_pointer.write('from abjad.tools import layouttools\n')
-        line = 'from output import %s\n' % self.underscored_material_name
+        line = 'from output import %s\n' % self.material_underscored_name
         file_pointer.write(line)
         file_pointer.write('\n\n\n')
         file_pointer.close()
@@ -182,8 +182,8 @@ class _MaterialProxy(PackageProxy):
     def import_material_from_input_file(self):
         self.unimport_input_module()
         try:
-            exec('from %s import %s' % (self.input_package_importable_name, self.underscored_material_name))
-            exec('result = %s' % self.underscored_material_name)
+            exec('from %s import %s' % (self.input_package_importable_name, self.material_underscored_name))
+            exec('result = %s' % self.material_underscored_name)
             return result
         except ImportError as e:
             raise Exception('eponymous data must be kept in all I/O modules at all times.')
@@ -191,8 +191,8 @@ class _MaterialProxy(PackageProxy):
     def import_material_from_output_file(self):
         self.unimport_output_module_hierarchy()
         try:
-            exec('from %s import %s' % (self.output_package_importable_name, self.underscored_material_name))
-            exec('result = %s' % self.underscored_material_name)
+            exec('from %s import %s' % (self.output_package_importable_name, self.material_underscored_name))
+            exec('result = %s' % self.material_underscored_name)
             return result
         except ImportError as e:
             raise Exception('eponymous data must be kept in all I/O modules at all times.')
@@ -281,7 +281,7 @@ class _MaterialProxy(PackageProxy):
         while True:
             menu = Menu(client=self)
             menu.menu_header = menu_header
-            menu.menu_body = self.spaced_material_name
+            menu.menu_body = self.material_spaced_name
             if self.is_interactive:
                 menu.sentence_length_items.append(('k', 'reload user input'))
             menu.named_pairs.append(('i', 'input'))
@@ -416,14 +416,14 @@ class _MaterialProxy(PackageProxy):
 
     def overwrite_output_file(self):
         output_file = file(self.output_file_name, 'w')
-        output_line = '%s = None\n' % self.underscored_material_name
+        output_line = '%s = None\n' % self.material_underscored_name
         output_file.write(output_line)
         output_file.close()
 
-    def prepend_score_package_short_name(self, underscored_material_name):
-        if not underscored_material_name.startswith(self.score_package_short_name + '_'):
-            underscored_material_name = '%s_%s' % (self.score_package_short_name, underscored_material_name)
-        return underscored_material_name
+    def prepend_score_package_short_name(self, material_underscored_name):
+        if not material_underscored_name.startswith(self.score_package_short_name + '_'):
+            material_underscored_name = '%s_%s' % (self.score_package_short_name, material_underscored_name)
+        return material_underscored_name
 
     def regenerate_everything(self, is_forced=False):
         is_changed = self.write_input_data_to_output_file(is_forced=is_forced)
@@ -437,41 +437,41 @@ class _MaterialProxy(PackageProxy):
         maker.edit_interactively(user_input_wrapper, score_title=self.score_title)
 
     def rename_material(self):
-        print 'Current material name: %s' % self.underscored_material_name
-        new_spaced_material_name = raw_input('New material name:     ')
+        print 'Current material name: %s' % self.material_underscored_name
+        new_material_spaced_name = raw_input('New material name:     ')
         print ''
-        new_underscored_material_name = new_spaced_material_name.replace(' ', '_')
-        new_underscored_material_name = self.prepend_score_package_short_name(new_underscored_material_name)
-        print 'Current material name: %s' % self.underscored_material_name
-        print 'New material name:     %s' % new_underscored_material_name
+        new_material_underscored_name = new_material_spaced_name.replace(' ', '_')
+        new_material_underscored_name = self.prepend_score_package_short_name(new_material_underscored_name)
+        print 'Current material name: %s' % self.material_underscored_name
+        print 'New material name:     %s' % new_material_underscored_name
         print ''
         if not self.confirm():
             return
         print ''
         if self.is_in_repository:
             # update parent initializer
-            self.globally_replace_in_file(self.parent_initializer, self.underscored_material_name, new_underscored_material_name)
+            self.globally_replace_in_file(self.parent_initializer, self.material_underscored_name, new_material_underscored_name)
             # rename package directory
-            new_directory_name = self.directory.replace(self.underscored_material_name, new_underscored_material_name)
+            new_directory_name = self.directory.replace(self.material_underscored_name, new_material_underscored_name)
             command = 'svn mv %s %s' % (self.directory_name, new_directory_name)
             os.system(command)
             # update package initializer
-            new_package_directory = os.path.join(self.parent_directory_name, new_underscored_material_name)
+            new_package_directory = os.path.join(self.parent_directory_name, new_material_underscored_name)
             new_initializer = os.path.join(new_package_directory, '__init__.py')
-            self.globally_replace_in_file(new_initializer, self.underscored_material_name, new_underscored_material_name)
+            self.globally_replace_in_file(new_initializer, self.material_underscored_name, new_material_underscored_name)
             # rename files in package
             for old_file_name in os.listdir(new_package_directory):
                 if not old_file_name.startswith(('.', '_')):
                     old_directory_name = os.path.join(new_package_directory, old_file_name)
-                    new_directory_name = old_directory_name.replace(self.underscored_material_name, new_underscored_material_name)
+                    new_directory_name = old_directory_name.replace(self.material_underscored_name, new_material_underscored_name)
                     command = 'svn mv %s %s' % (old_directory_name, new_directory_name)
                     os.system(command)
             # rename output data
             new_output_data = os.path.join(new_package_directory, 'output.py')
-            self.globally_replace_in_file(new_output_data, self.underscored_material_name, new_underscored_material_name)
+            self.globally_replace_in_file(new_output_data, self.material_underscored_name, new_material_underscored_name)
             print ''
             # commit
-            commit_message = 'Renamed %s to %s.' % (self.underscored_material_name, new_underscored_material_name)
+            commit_message = 'Renamed %s to %s.' % (self.material_underscored_name, new_material_underscored_name)
             commit_message = commit_message.replace('_', ' ')
             command = 'svn commit -m "%s" %s' % (commit_message, self.parent_directory_name)
             os.system(command)
@@ -491,7 +491,7 @@ class _MaterialProxy(PackageProxy):
         file_pointer.close()
 
     def remove_material_from_materials_initializer(self):
-        import_statement = 'from %s import %s\n' % (self.underscored_material_name, self.underscored_material_name)
+        import_statement = 'from %s import %s\n' % (self.material_underscored_name, self.material_underscored_name)
         self.remove_line_from_initializer(self.parent_initializer, import_statement)
 
     def reveal_modules(self):
@@ -603,7 +603,7 @@ class _MaterialProxy(PackageProxy):
         if output_preamble_lines:
             output_file.write('\n'.join(output_preamble_lines))
         input_data = self.import_material_from_input_file()
-        output_line = '%s = %r' % (self.underscored_material_name, input_data)
+        output_line = '%s = %r' % (self.material_underscored_name, input_data)
         output_file.write(output_line)
         output_file.close()
         self.add_material_to_materials_initializer()

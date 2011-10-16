@@ -189,7 +189,7 @@ class ScoreProxy(PackageProxy):
 
     def list_material_package_importable_names(self):
         material_package_importable_names = []
-        for material in self.list_underscored_material_names():
+        for material in self.list_material_underscored_names():
             material_package_importable_name = '%s.%s' % (self.materials_package_importable_name, material)
             material_package_importable_names.append(material_package_importable_name)
         return material_package_importable_names
@@ -206,7 +206,7 @@ class ScoreProxy(PackageProxy):
             numbered_chunks.append(numbered_chunk)
         return numbered_chunks
 
-    def list_underscored_material_names(self):
+    def list_material_underscored_names(self):
         try:
             materials = os.listdir(self.materials_directory_name)
         except OSError:
@@ -214,9 +214,9 @@ class ScoreProxy(PackageProxy):
         materials = [x for x in materials if x[0].isalpha()]
         return materials
 
-    def list_underscored_material_names_with_numbers(self):
+    def list_material_underscored_names_with_numbers(self):
         numbered_materials = []
-        for i, material in enumerate(self.list_underscored_material_names()):
+        for i, material in enumerate(self.list_material_underscored_names()):
             material = material.replace('%s_' % self.package_short_name, '')
             material = material.replace('_', ' ')
             numbered_material = (str(i + 1), material)
@@ -247,7 +247,7 @@ class ScoreProxy(PackageProxy):
             menu_specifier.menu_sections.append(menu_section)
             menu_section = MenuSection()
             menu_section.menu_section_title = 'Materials'
-            menu_section.menu_section_entries = self.list_underscored_material_names_with_numbers()
+            menu_section.menu_section_entries = self.list_material_underscored_names_with_numbers()
             menu_section.sentence_length_items.append(('ms', 'create material by hand'))
             menu_section.sentence_length_items.append(('mi', 'create material interactively'))
             menu_specifier.menu_sections.append(menu_section)
@@ -266,8 +266,8 @@ class ScoreProxy(PackageProxy):
             else:
                 try:
                     material_number = int(key)
-                    underscored_material_name = self.material_number_to_underscored_material_name(material_number)
-                    package_importable_name = '%s.%s' % (self.materials_package_importable_name, underscored_material_name)
+                    material_underscored_name = self.material_number_to_material_underscored_name(material_number)
+                    package_importable_name = '%s.%s' % (self.materials_package_importable_name, material_underscored_name)
                     material_proxy = self.get_material_proxy(package_importable_name)
                     material_proxy.score_title = self.score_title
                     material_proxy.manage_material(menu_header=menu_specifier.menu_title)
@@ -296,10 +296,10 @@ class ScoreProxy(PackageProxy):
             elif key == 'st':
                 self.svn_st()
 
-    def material_number_to_underscored_material_name(self, material_number):
+    def material_number_to_material_underscored_name(self, material_number):
         material_index = material_number - 1
-        underscored_material_name = self.list_underscored_material_names()[material_index]
-        return underscored_material_name
+        material_underscored_name = self.list_material_underscored_names()[material_index]
+        return material_underscored_name
 
     def profile_package_structure(self):
         if not os.path.exists(self.directory_name):
@@ -324,7 +324,7 @@ class ScoreProxy(PackageProxy):
         print ''
 
     def summarize_materials(self):
-        materials = self.list_underscored_material_names()
+        materials = self.list_material_underscored_names()
         print self.tab(1),
         if not materials:
             print 'Materials (none yet)'

@@ -15,9 +15,9 @@ import shutil
 
 class _Maker(_SCFObject):
 
-    def __init__(self, underscored_material_name=None, score=None):
+    def __init__(self, material_underscored_name=None, score=None):
         _SCFObject.__init__(self)
-        self.underscored_material_name = underscored_material_name
+        self.material_underscored_name = material_underscored_name
         self.score = score
 
     ### OVERLOADS ###
@@ -40,8 +40,8 @@ class _Maker(_SCFObject):
         file_pointer.close()
 
     def _add_line_to_materials_initializer(self):
-        underscored_material_name = os.path.basename(self.material_package_directory)
-        import_statement = 'from %s import %s\n' % (underscored_material_name, underscored_material_name)
+        material_underscored_name = os.path.basename(self.material_package_directory)
+        import_statement = 'from %s import %s\n' % (material_underscored_name, material_underscored_name)
         initializer = self._get_initializer()
         self._add_line_to_initializer(initializer, import_statement)
 
@@ -54,11 +54,11 @@ class _Maker(_SCFObject):
         return initializer
 
     def _get_lilypond_score_title(self):
-        underscored_material_name = os.path.basename(self.material_package_directory)
+        material_underscored_name = os.path.basename(self.material_package_directory)
         if self.is_shared:
-            material_parts = underscored_material_name.split('_')
+            material_parts = material_underscored_name.split('_')
         else:
-            material_parts = underscored_material_name.split('_')[1:]
+            material_parts = material_underscored_name.split('_')[1:]
         material_spaced_name = ' '.join(material_parts)
         title = material_spaced_name.capitalize()
         title = markuptools.Markup(title)
@@ -80,7 +80,7 @@ class _Maker(_SCFObject):
 
     def set_material_package_directory(self):
         while True:
-            if self.underscored_material_name is None:
+            if self.material_underscored_name is None:
                 self.name_material()
                 print ''
             print 'Package short name will be %s.\n' % self.material_package_short_name
@@ -112,9 +112,9 @@ class _Maker(_SCFObject):
         for line in user_input_lines:
             input_file.write(line + '\n')
         input_file.write('\n')
-        underscored_material_name = os.path.basename(self.material_package_directory)
+        material_underscored_name = os.path.basename(self.material_package_directory)
         input_file.write('maker = %s()\n' % type(self).__name__)
-        input_file.write('%s = maker.make(**user_input)\n' % underscored_material_name)
+        input_file.write('%s = maker.make(**user_input)\n' % material_underscored_name)
         input_file.close()
 
     def _write_output_file_to_disk(self, material):
@@ -124,8 +124,8 @@ class _Maker(_SCFObject):
             output_file.write(line + '\n')
         if output_file_import_statements:
             output_file.write('\n\n')
-        underscored_material_name = os.path.basename(self.material_package_directory)
-        output_file_lines = self.get_output_file_lines(material, underscored_material_name)
+        material_underscored_name = os.path.basename(self.material_package_directory)
+        output_file_lines = self.get_output_file_lines(material, material_underscored_name)
         for line in output_file_lines:
             output_file.write(line + '\n')
         output_file.close()
@@ -156,7 +156,7 @@ class _Maker(_SCFObject):
     def has_changes(self):
         if not self.score == self._original_score:
             return True
-        elif not self.underscored_material_name == self._original_underscored_material_name:
+        elif not self.material_underscored_name == self._original_material_underscored_name:
             return True
         elif not self.user_input_wrapper == self._original_user_input_wrapper:
             return True
@@ -168,8 +168,8 @@ class _Maker(_SCFObject):
         return bool(self.score is not None)
 
     @property
-    def has_underscored_material_name(self):
-        return bool(self.underscored_material_name is not None)
+    def has_material_underscored_name(self):
+        return bool(self.material_underscored_name is not None)
 
     @property
     def is_shared(self):
@@ -184,7 +184,7 @@ class _Maker(_SCFObject):
 
     @property
     def material_menu_name(self):
-        if self.has_underscored_material_name:
+        if self.has_material_underscored_name:
             return self.material_spaced_name
         else:
             return '(unnamed material)'
@@ -198,9 +198,9 @@ class _Maker(_SCFObject):
     @property
     def material_package_short_name(self):
         if self.score is None:  
-            return self.underscored_material_name
+            return self.material_underscored_name
         else:
-            return '%s_%s' % (self.score.package_short_name, self.underscored_material_name)
+            return '%s_%s' % (self.score.package_short_name, self.material_underscored_name)
 
     @property
     def materials_directory_name(self):
@@ -211,8 +211,8 @@ class _Maker(_SCFObject):
 
     @property
     def material_spaced_name(self):
-        if self.has_underscored_material_name:
-            return self.underscored_material_name.replace('_', ' ')
+        if self.has_material_underscored_name:
+            return self.material_underscored_name.replace('_', ' ')
 
     @apply
     def score():
@@ -230,14 +230,14 @@ class _Maker(_SCFObject):
             return self.score.package_short_name
 
     @apply
-    def underscored_material_name():
+    def material_underscored_name():
         def fget(self):
-            return self._underscored_material_name
-        def fset(self, underscored_material_name):
-            assert isinstance(underscored_material_name, (str, type(None)))
-            if isinstance(underscored_material_name, str):
-                assert iotools.is_underscore_delimited_lowercase_string(underscored_material_name)
-            self._underscored_material_name = underscored_material_name
+            return self._material_underscored_name
+        def fset(self, material_underscored_name):
+            assert isinstance(material_underscored_name, (str, type(None)))
+            if isinstance(material_underscored_name, str):
+                assert iotools.is_underscore_delimited_lowercase_string(material_underscored_name)
+            self._material_underscored_name = material_underscored_name
         return property(**locals())
 
     ### PUBLIC METHODS ###
@@ -256,7 +256,7 @@ class _Maker(_SCFObject):
             user_input_wrapper = self._initialize_user_input_wrapper()
         self.user_input_wrapper = user_input_wrapper
         self._original_score = self.score
-        self._original_underscored_material_name = self.underscored_material_name
+        self._original_material_underscored_name = self.material_underscored_name
         self._original_user_input_wrapper = copy.deepcopy(user_input_wrapper)
         while True:
             menu_specifier = Menu(client=self)
@@ -268,7 +268,7 @@ class _Maker(_SCFObject):
             if self.user_input_wrapper.is_complete:
                 menu_specifier.sentence_length_items.append(('p', 'show pdf of given input'))
                 menu_specifier.sentence_length_items.append(('m', 'write material to disk'))
-            if self.has_underscored_material_name:
+            if self.has_material_underscored_name:
                 menu_specifier.sentence_length_items.append(('n', 'rename material'))
             else:
                 menu_specifier.sentence_length_items.append(('n', 'name material'))
@@ -355,7 +355,6 @@ class _Maker(_SCFObject):
         return lilypond_file
 
     def make_material_package_directory(self):
-        print self.material_package_directory, 'foo'
         try:
             os.mkdir(self.material_package_directory)
         except OSError:
@@ -400,7 +399,7 @@ class _Maker(_SCFObject):
 
     def name_material(self):
         material_spaced_name = raw_input('Material name> ')
-        self.underscored_material_name = material_spaced_name.replace(' ', '_')
+        self.material_underscored_name = material_spaced_name.replace(' ', '_')
 
     def overwrite_with_demo_input_values(self, user_input_wrapper):
         for key in self.user_input_template:
@@ -432,7 +431,7 @@ class _Maker(_SCFObject):
         menu_specifier.display_menu(score_title=self.score_title)
 
     def unname_material(self):
-        self.underscored_material_name = None
+        self.material_underscored_name = None
 
     def write_material_to_disk(self, user_input_wrapper, material, lilypond_file):
         self.set_material_package_directory()
