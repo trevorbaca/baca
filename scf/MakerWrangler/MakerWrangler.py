@@ -44,14 +44,48 @@ class MakerWrangler(DirectoryProxy):
     def list_maker_spaced_class_names(self):
         return [maker.spaced_class_name for maker in self.iterate_makers()]
 
+    def make_maker(self, menu_header=None):
+        while True:
+            maker_name = raw_input('Maker name> ')
+            print ''
+            if iotools.is_uppercamelcase_string(maker_name):
+                break
+        print maker_name
+        maker_directory = os.path.join(self.makers_directory, maker_name)
+        print maker_directory
+        self.proceed()
+        os.mkdir(maker_directory)
+        self.make_maker_initializer(maker_name)
+        self.make_maker_class_file(maker_name)
+        self.make_maker_stylesheet(maker_name)
+        self.proceed()
+
+    def make_maker_initializer(self, maker_name):
+        initializer_file_name = os.path.join(self.directory, maker_name, '__init__.py')
+        initializer = file(initializer_file_name, 'w')
+        line = 'from abjad.tools.importtools._import_structured_package import _import_structured_package\n'
+        initializer.write(line)
+        initializer.write('\n')
+        initializer.write("_import_structured_package(__path__[0], globals(), 'baca'\n")
+        initializer.close() 
+
+    def make_maker_class_file(self, maker_name):
+        pass
+
+    def make_maker_stylesheet(self, maker_name):
+        pass
+        
     def manage_makers(self, menu_header=None):
         while True:
-            menu_specifier = Menu(client=self, menu_header=menu_header)
-            menu_specifier.menu_body = 'select maker'
-            menu_specifier.items_to_number = self.list_maker_spaced_class_names()
-            key, value = menu_specifier.display_menu()
+            menu = Menu(client=self, menu_header=menu_header)
+            menu.menu_body = 'select maker'
+            menu.items_to_number = self.list_maker_spaced_class_names()
+            menu.named_pairs.append(('new', 'make maker'))
+            key, value = menu.display_menu()
             if key == 'b':
                 return key, value
+            elif key == 'new':
+                self.make_maker(menu_header=menu_header)
             else:
                 maker_name = value
                 maker_name = maker_name.replace(' ', '_')
@@ -60,10 +94,10 @@ class MakerWrangler(DirectoryProxy):
                 maker.manage_maker(menu_header=menu_header)
 
     def select_maker(self, menu_header=None):
-        menu_specifier = Menu(client=self, menu_header=menu_header)
-        menu_specifier.menu_body = 'select maker'
-        menu_specifier.items_to_number = self.list_maker_spaced_class_names()
-        key, value = menu_specifier.display_menu()
+        menu = Menu(client=self, menu_header=menu_header)
+        menu.menu_body = 'select maker'
+        menu.items_to_number = self.list_maker_spaced_class_names()
+        key, value = menu.display_menu()
         if value is not None:
             maker_name = value.replace(' ', '_')
             maker_name = iotools.underscore_delimited_lowercase_to_uppercamelcase(maker_name)           

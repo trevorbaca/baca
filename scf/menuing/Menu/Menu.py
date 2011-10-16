@@ -79,7 +79,7 @@ class Menu(_MenuObject, _SCFObject):
         self._display_sentence_length_items(all_keys, all_values)
         self._display_named_pairs(self.named_pairs, all_keys, all_values)
         self._display_named_pairs(self.secondary_named_pairs, all_keys, all_values)
-        if self.secondary_named_pairs:
+        if self.named_pairs or self.secondary_named_pairs:
             print ''
         self._display_footer_items(all_keys, all_values)
         self._add_hidden_menu_items(all_keys, all_values)

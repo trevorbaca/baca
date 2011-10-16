@@ -372,7 +372,7 @@ class _Maker(_SCFObject):
             key, value = menu.display_menu()
             if key == 'b':
                 return key, None
-            elif key == 'n':
+            elif key == 'new':
                 self.edit_interactively(menu_header=menu.menu_title)
             else:
                 material_proxy = value
