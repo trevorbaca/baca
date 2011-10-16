@@ -2,6 +2,7 @@ from abjad.tools import iotools
 from abjad.tools import lilypondfiletools
 from abjad.tools import markuptools
 from baca.scf._SCFObject import _SCFObject
+from baca.scf.DirectoryProxy import DirectoryProxy
 from baca.scf.MaterialWrangler import MaterialWrangler
 from baca.scf.menuing import Menu
 from baca.scf.menuing import MenuSection
@@ -368,10 +369,16 @@ class _Maker(_SCFObject):
             menu_section.menu_section_title = 'existing %s' % self.generic_output_name
             menu_section.items_to_number = list(self.iterate_materials_based_on_maker())
             menu.menu_sections.append(menu_section)
+            menu.sentence_length_items.append(('del', 'delete %s' % self.spaced_class_name))
             menu.sentence_length_items.append(('new', 'create %s' % self.generic_output_name))
             key, value = menu.display_menu()
             if key == 'b':
                 return key, None
+            elif key == 'del':
+                directory_name = os.path.join(self.makers_directory_name, self.class_name)
+                directory_proxy = DirectoryProxy(directory_name)
+                directory_proxy.remove()
+                break
             elif key == 'new':
                 self.edit_interactively(menu_header=menu.menu_title)
             else:

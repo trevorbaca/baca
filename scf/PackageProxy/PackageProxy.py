@@ -1,13 +1,14 @@
 from baca.scf.DirectoryProxy import DirectoryProxy
 from baca.scf.menuing import UserInputGetter
 import os
+import sys
 
 
 class PackageProxy(DirectoryProxy):
 
     def __init__(self, package_importable_name):
-        directory = self.package_importable_name_to_directory(package_importable_name)
-        DirectoryProxy.__init__(self, directory)
+        directory_name = self.package_importable_name_to_directory(package_importable_name)
+        DirectoryProxy.__init__(self, directory_name)
         self._package_importable_name = package_importable_name
 
     ### OVERLOADS ###
@@ -179,13 +180,16 @@ class PackageProxy(DirectoryProxy):
             elif key == 'del':
                 self.delete_tag_interactively(menu_header=menu.menu_title)
 
-    @staticmethod
+    #@staticmethod
     def remove_package_importable_name_from_sys_modules(self, package_importable_name):
         '''Total hack. But works.
         '''
         command = "if '%s' in sys.modules: del(sys.modules['%s'])" % (
             package_importable_name, package_importable_name)
         exec(command)
+
+    def unimport_baca_package(self):
+        self.remove_package_importable_name_from_sys_modules('baca')
 
     def write_tags_to_initializer(self, tags):
         lines = []

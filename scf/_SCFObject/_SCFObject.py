@@ -13,6 +13,7 @@ class _SCFObject(object):
         self._baca_materials_directory_name = os.path.join(self.baca_directory_name, 'materials')
         self._baca_materials_package_importable_name = 'baca.materials'
         self._baca_materials_package_short_name = 'materials'
+        self._makers_directory_name = os.path.join(self.baca_directory_name, 'makers')
         self._scores_directory_name = os.environ.get('SCORES')
 
     ### OVERLOADS ###
@@ -41,6 +42,10 @@ class _SCFObject(object):
     @property
     def class_name(self):
         return type(self).__name__
+
+    @property
+    def makers_directory_name(self):
+        return self._makers_directory_name
 
     @property
     def scores_directory_name(self):

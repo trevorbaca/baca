@@ -1,17 +1,16 @@
 from abjad.tools import iotools
 from abjad.tools import layouttools
 from abjad.tools import lilypondfiletools
-from baca.scf.DirectoryProxy import DirectoryProxy
+from baca.scf.PackageProxy import PackageProxy
 from baca.scf.menuing import Menu
 import os
 
 
-class MakerWrangler(DirectoryProxy):
+class MakerWrangler(PackageProxy):
 
-    def __init__(self, score_title=None):
-        directory_name = os.path.join(os.environ.get('BACA'), 'makers')
-        DirectoryProxy.__init__(self, directory_name)
-        self.score_title = score_title
+    def __init__(self):
+        package_importable_name = 'baca.makers'
+        PackageProxy.__init__(self, package_importable_name)
 
     ### OVERLOADS ###
 
@@ -26,11 +25,12 @@ class MakerWrangler(DirectoryProxy):
         return maker
 
     def iterate_makers(self):
-        exec('from baca import makers')
-        for name in dir(makers):
-            if name[0].isalpha():
-                exec('result = makers.%s()' % name)
-                yield result
+        self.unimport_baca_package()
+        self.unimport_makers_package()
+        exec('import baca')
+        for maker_class_name in self.list_maker_class_names():
+            exec('result = baca.makers.%s()' % maker_class_name)
+            yield result
 
     def list_maker_class_names(self):
         maker_directories = []
@@ -44,26 +44,27 @@ class MakerWrangler(DirectoryProxy):
         return maker_directories
 
     def list_maker_spaced_class_names(self):
-        return [maker.spaced_class_name for maker in self.iterate_makers()]
+        maker_spaced_class_names = []
+        for maker in self.iterate_makers():
+            maker_spaced_class_names.append(maker.spaced_class_name)
+        return maker_spaced_class_names
 
     def make_maker(self, menu_header=None):
         while True:
             maker_name = raw_input('Maker name> ')
             print ''
             if iotools.is_uppercamelcase_string(maker_name):
-                break
+                if maker_name.endswith('Maker'):
+                    break
         while True:
             generic_output_product = raw_input('Generic output product> ')
             print ''
-            if iotools.is_underscore_delimited_lowercase_string(generic_output_product):
-                break
+            break
         maker_directory = os.path.join(self.directory_name, maker_name)
         os.mkdir(maker_directory)
-        self.proceed()
         self.make_maker_initializer(maker_name)
         self.make_maker_class_file(maker_name, generic_output_product)
         self.make_maker_stylesheet(maker_name)
-        self.proceed()
 
     def make_maker_initializer(self, maker_name):
         initializer_file_name = os.path.join(self.directory_name, maker_name, '__init__.py')
@@ -162,3 +163,6 @@ class MakerWrangler(DirectoryProxy):
             return True, maker
         else:
             return True, None
+
+    def unimport_makers_package(self):
+        self.remove_package_importable_name_from_sys_modules(self.package_importable_name)
