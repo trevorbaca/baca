@@ -21,11 +21,13 @@ class SargassoMeasureMaker(_Maker):
 
     ### PUBLIC ATTRIBUTES ###
 
-    output_file_import_statements = ['from abjad.tools.measuretools.Measure import Measure']
+    output_file_import_statements = [
+        'from abjad.tools.measuretools.Measure import Measure',]
             
-    user_input_import_statements = ['from abjad.tools.durationtools import Duration',
+    user_input_import_statements = [
+        'from abjad.tools.durationtools import Duration',
         'from baca.makers import SargassoMeasureMaker',
-        'from baca.scf import UserInputWrapper']
+        'from baca.scf import UserInputWrapper',]
 
     user_input_template = UserInputWrapper([
         ('measure_denominator', 4),
@@ -35,7 +37,7 @@ class SargassoMeasureMaker(_Maker):
         ('total_duration', durationtools.Duration(44, 8)),
         ('measures_are_scaled', True),
         ('measures_are_split', True),
-        ('measures_are_shuffled', True)])
+        ('measures_are_shuffled', True),])
 
     ### PUBLIC METHODS ###
 

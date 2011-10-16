@@ -59,8 +59,8 @@ class _Maker(_SCFObject):
             material_parts = underscored_material_name.split('_')
         else:
             material_parts = underscored_material_name.split('_')[1:]
-        spaced_material_name = ' '.join(material_parts)
-        title = spaced_material_name.capitalize()
+        material_spaced_name = ' '.join(material_parts)
+        title = material_spaced_name.capitalize()
         title = markuptools.Markup(title)
         return title
 
@@ -185,7 +185,7 @@ class _Maker(_SCFObject):
     @property
     def material_menu_name(self):
         if self.has_underscored_material_name:
-            return self.underscored_material_name
+            return self.material_spaced_name
         else:
             return '(unnamed material)'
 
@@ -209,6 +209,11 @@ class _Maker(_SCFObject):
         else:
             return self.score.materials_directory_name
 
+    @property
+    def material_spaced_name(self):
+        if self.has_underscored_material_name:
+            return self.underscored_material_name.replace('_', ' ')
+
     @apply
     def score():
         def fget(self):
@@ -230,6 +235,8 @@ class _Maker(_SCFObject):
             return self._underscored_material_name
         def fset(self, underscored_material_name):
             assert isinstance(underscored_material_name, (str, type(None)))
+            if isinstance(underscored_material_name, str):
+                assert iotools.is_underscore_delimited_lowercase_string(underscored_material_name)
             self._underscored_material_name = underscored_material_name
         return property(**locals())
 
@@ -392,7 +399,8 @@ class _Maker(_SCFObject):
                 material_proxy.manage_material(menu_header=menu.menu_title)
 
     def name_material(self):
-        self.underscored_material_name = raw_input('Material name> ')
+        material_spaced_name = raw_input('Material name> ')
+        self.underscored_material_name = material_spaced_name.replace(' ', '_')
 
     def overwrite_with_demo_input_values(self, user_input_wrapper):
         for key in self.user_input_template:
