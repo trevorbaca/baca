@@ -1,0 +1,9 @@
+#! /usr/bin/env python
+import os
+import sys
+
+for package_name in sys.argv[1:]:
+    package_name = package_name.strip(os.sep)
+    print package_name
+    file_name = os.path.join(package_name, package_name + '.py')
+    os.system('vi %s' % file_name)
