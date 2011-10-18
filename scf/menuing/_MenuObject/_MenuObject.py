@@ -3,11 +3,20 @@ from abjad.tools import iotools
 
 class _MenuObject(object):
 
-    def __init__(self, menu_header=None, menu_body=None):
+    def __init__(self, client=None, menu_header=None, menu_body=None):
+        self.client = client
         self.menu_header = menu_header
         self.menu_body = menu_body
 
     ### PUBLIC ATTRIBUTES ###
+
+    @apply
+    def client():
+        def fget(self):
+            return self._client
+        def fset(self, client):
+            self._client = client
+        return property(**locals())
 
     @apply
     def menu_body():
@@ -58,3 +67,19 @@ class _MenuObject(object):
             print ''
             return False
         return True
+
+    def print_tab(self, n):
+        if 0 < n:
+            print self.tab(n),
+
+    def show_menu_client(self):
+        print self._tab(1),
+        print 'file: %s' % self.client[1]
+        print self._tab(1),
+        print 'line: %s' % self.client[2]
+        print self._tab(1),
+        print 'meth: %s()' % self.client[3]
+        print ''
+
+    def tab(self, n):
+        return 4 * n * ' '

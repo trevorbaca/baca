@@ -21,9 +21,13 @@ class PackageProxy(DirectoryProxy):
     @property
     def creation_date(self):
         return self.get_tag('creation_date')
-        
+
     @property
-    def initializer(self):
+    def has_initializer(self):
+        return os.path.isfile(self.initializer_file_name)
+
+    @property
+    def initializer_file_name(self):
         return os.path.join(self.directory_name, '__init__.py')
 
     @property
@@ -45,7 +49,7 @@ class PackageProxy(DirectoryProxy):
     ### PRIVATE METHODS ###
 
     def _read_initializer_metadata(self, name):
-        initializer = file(self.initializer, 'r')
+        initializer = file(self.initializer_file_name, 'r')
         for line in initializer.readlines():
             if line.startswith(name):
                 initializer.close()
@@ -55,7 +59,7 @@ class PackageProxy(DirectoryProxy):
 
     def _write_initializer_metadata(self, name, value):
         new_lines = []
-        initializer = file(self.initializer, 'r')
+        initializer = file(self.initializer_file_name, 'r')
         found_existing_line = False
         for line in initializer.readlines():
             if line.startswith(name):
@@ -68,21 +72,21 @@ class PackageProxy(DirectoryProxy):
             new_line = '%s = %r\n' % (name, value)
             new_lines.append(new_line)
         initializer.close()
-        initializer = file(self.initializer, 'w')
+        initializer = file(self.initializer_file_name, 'w')
         initializer.write(''.join(new_lines))
         initializer.close()
 
     ### PUBLIC METHODS ###
 
     def add_line_to_initializer(self, line):
-        file_pointer = file(self.initializer, 'r')
+        file_pointer = file(self.initializer_file_name, 'r')
         initializer_lines = set(file_pointer.readlines())
         file_pointer.close()
         initializer_lines.add(line)
         initializer_lines = list(initializer_lines)
         initializer_lines = [x for x in initializer_lines if not x == '\n']
         initializer_lines.sort()
-        file_pointer = file(self.initializer, 'w')
+        file_pointer = file(self.initializer_file_name, 'w')
         file_pointer.write(''.join(initializer_lines))
         file_pointer.close()
 
@@ -104,6 +108,13 @@ class PackageProxy(DirectoryProxy):
             print 'Tag added.\n'
         self.proceed()
 
+    def create_initializer(self):
+        if self.has_initializer:
+            raise OSError('package %r already has initializer.' % self)
+        initializer = file(self.initializer_file_name, 'a')        
+        initializer.write('')
+        initializer.close()
+
     def delete_tag(self, tag_name):
         tags = self.get_tags()
         del(tags[tag_name])
@@ -122,7 +133,7 @@ class PackageProxy(DirectoryProxy):
         self.proceed()
 
     def edit_initializer(self):
-        os.system('vi %s' % self.initializer)
+        os.system('vi %s' % self.initializer_file_name)
 
     def edit_parent_initializer(self):
         os.system('vi %s' % self.parent_initializer)
@@ -193,7 +204,7 @@ class PackageProxy(DirectoryProxy):
 
     def write_tags_to_initializer(self, tags):
         lines = []
-        fp = file(self.initializer, 'r')
+        fp = file(self.initializer_file_name, 'r')
         found_tags = False
         for line in fp.readlines():
             if line.startswith('tags ='):
@@ -204,6 +215,6 @@ class PackageProxy(DirectoryProxy):
         if not found_tags:
             lines.append('tags = %s\n' % tags)
         fp.close()
-        fp = file(self.initializer, 'w')
+        fp = file(self.initializer_file_name, 'w')
         fp.write(''.join(lines))
         fp.close()

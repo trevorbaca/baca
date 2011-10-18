@@ -147,14 +147,6 @@ class Menu(_MenuObject, _SCFObject):
 
     ### PUBLIC ATTRIBUTES ###
     
-    @apply
-    def client():
-        def fget(self):
-            return self._client
-        def fset(self, client):
-            self._client = client
-        return property(**locals())
-
     @property
     def default_hidden_items(self):
         default_hidden_items = []
@@ -319,10 +311,6 @@ class Menu(_MenuObject, _SCFObject):
         exec('result = %s' % statement)
         print repr(result) + '\n'
 
-    def print_tab(self, n):
-        if 0 < n:
-            print self.tab(n),
-
     def show_hidden_items(self):
         hidden_items = []
         hidden_items.extend(self.default_hidden_items)
@@ -334,15 +322,3 @@ class Menu(_MenuObject, _SCFObject):
             self._print_tab(self.indent_level),
             print '%s: %s' % (key, value)
         print ''
-
-    def show_menu_client(self):
-        print self._tab(1),
-        print 'file: %s' % self.client[1]
-        print self._tab(1),
-        print 'line: %s' % self.client[2]
-        print self._tab(1),
-        print 'meth: %s()' % self.client[3]
-        print ''
-
-    def tab(self, n):
-        return 4 * n * ' '

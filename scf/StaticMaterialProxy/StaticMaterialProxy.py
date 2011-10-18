@@ -11,7 +11,7 @@ class StaticMaterialProxy(_MaterialProxy):
             print 'Directory %r already exists.' % self.directory_name
             return False
         os.mkdir(self.directory_name)
-        initializer = file(self.initializer, 'w')
+        initializer = file(self.initializer_file_name, 'w')
         initializer.write('from output import *\n')
         initializer.close()
         input_file = file(self.input_file_name, 'w')

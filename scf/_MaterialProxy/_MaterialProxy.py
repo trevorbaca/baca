@@ -154,7 +154,7 @@ class _MaterialProxy(PackageProxy):
             self.proceed()
 
     def edit_initializer(self):
-        os.system('vi %s' % self.initializer)
+        os.system('vi %s' % self.initializer_file_name)
 
     def edit_input_file(self):
         os.system('vi + %s' % self.input_file_name)

@@ -13,7 +13,8 @@ class ScoreProxy(PackageProxy):
 
     def __init__(self, package_importable_name):
         PackageProxy.__init__(self, package_importable_name)
-        self._chunk_wrangler = ChunkWrangler('.'.join([package_importable_name, 'mus', 'chunks']))
+        chunks_package_importable_name = '.'.join([package_importable_name, 'mus', 'chunks'])
+        self._chunk_wrangler = ChunkWrangler(chunks_package_importable_name, purview=self)
         self._material_wrangler = MaterialWrangler(purview=self)
         self._maker_wrangler = MakerWrangler()
 
@@ -113,7 +114,7 @@ class ScoreProxy(PackageProxy):
 
     @property
     def score_initializers(self):
-        return (self.initializer,
+        return (self.initializer_file_name,
             self.mus_initializer,
             self.chunks_initializer,
             self.materials_initializer,)
