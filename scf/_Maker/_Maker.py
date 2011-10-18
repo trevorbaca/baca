@@ -259,7 +259,7 @@ class _Maker(_SCFObject):
         self._original_material_underscored_name = self.material_underscored_name
         self._original_user_input_wrapper = copy.deepcopy(user_input_wrapper)
         while True:
-            menu_specifier = Menu(client=self)
+            menu_specifier = Menu(client=self.where())
             menu_body = '%s - %s - %s - edit interactively'
             menu_body %= (self.location_name, self.spaced_class_name, self.material_menu_name)
             menu_body = self.append_status_indicator(menu_body)
@@ -368,7 +368,7 @@ class _Maker(_SCFObject):
 
     def manage_maker(self, menu_header=None):
         while True:
-            menu = Menu(client=self)
+            menu = Menu(client=self.where())
             menu.menu_header = menu_header
             menu.menu_body = self.spaced_class_name
             menu_section = MenuSection()
@@ -421,7 +421,7 @@ class _Maker(_SCFObject):
         self.score = result
 
     def show_demo_input_values(self, menu_header=None):
-        menu_specifier = Menu(client=self, menu_header=menu_header)
+        menu_specifier = Menu(client=self.where(), menu_header=menu_header)
         menu_specifier.menu_body = 'demo values'
         items = []
         for i, (key, value) in enumerate(self.user_input_template.iteritems()):

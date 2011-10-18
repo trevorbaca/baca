@@ -26,7 +26,7 @@ class ScoreWrangler(DirectoryProxy):
             print ''
 
     def get_score_package_short_name_from_user(self, menu_header=None):
-        menu_specifier = Menu(client=self)
+        menu_specifier = Menu(client=self.where())
         menu_specifier.menu_header = menu_header
         menu_specifier.menu_body = 'select score by number.'
         menu_specifier.items_to_number = self.list_score_titles_with_years()
@@ -148,14 +148,14 @@ class ScoreWrangler(DirectoryProxy):
 
     def select_interactive_material_proxy(self, menu_header=None, klasses=None):
         material_proxies = list(self.iterate_interactive_material_proxies())
-        menu = Menu(client=self)
+        menu = Menu(client=self.where())
         menu.menu_header = menu_header
         menu.items_to_number = material_proxies
         key, value = menu.display_menu()
         return value
 
     def select_score_interactively(self, menu_header=None):
-        menu = Menu(client=self)
+        menu = Menu(client=self.where())
         menu.menu_header = menu_header
         menu.menu_body = 'select score'
         menu.items_to_number = self.list_score_titles_with_years()

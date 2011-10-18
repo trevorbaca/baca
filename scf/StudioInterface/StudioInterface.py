@@ -41,7 +41,7 @@ class StudioInterface(DirectoryProxy):
 
     def get_materials_package_importable_name_interactively(self, menu_header=None):
         while True:
-            menu_specifier = Menu(client=self, menu_header=menu_header)
+            menu_specifier = Menu(client=self.where(), menu_header=menu_header)
             menu_specifier.menu_body = 'select materials directory'
             menu_section = MenuSection()
             score_titles = self.score_wrangler.list_numbered_score_titles_with_years()
@@ -60,7 +60,7 @@ class StudioInterface(DirectoryProxy):
 
     def manage_svn(self, menu_header=None):
         while True:
-            menu_specifier = Menu(client=self)
+            menu_specifier = Menu(client=self.where())
             menu_specifier.menu_header = menu_header
             menu_specifier.menu_body = 'repository commands'
             menu_section = MenuSection()
@@ -124,7 +124,7 @@ class StudioInterface(DirectoryProxy):
     
     def work_in_studio(self, menu_header=None):
         while True:
-            menu_specifier = Menu(client=self, menu_header=menu_header)
+            menu_specifier = Menu(client=self.where(), menu_header=menu_header)
             menu_specifier.menu_body = 'welcome to the studio.'
             menu_section = MenuSection()
             score_titles = self.score_wrangler.list_numbered_score_titles_with_years()

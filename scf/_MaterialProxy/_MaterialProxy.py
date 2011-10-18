@@ -279,7 +279,7 @@ class _MaterialProxy(PackageProxy):
 
     def manage_material(self, menu_header=None):
         while True:
-            menu = Menu(client=self)
+            menu = Menu(client=self.where())
             menu.menu_header = menu_header
             menu.menu_body = self.material_spaced_name
             if self.is_interactive:
