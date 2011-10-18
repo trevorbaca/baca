@@ -6,6 +6,7 @@ from baca.scf.ScoreWrangler import ScoreWrangler
 from baca.scf.menuing import MenuSection
 from baca.scf.menuing import Menu
 import os
+import subprocess
 
 
 class StudioInterface(DirectoryProxy):
@@ -76,6 +77,12 @@ class StudioInterface(DirectoryProxy):
             menu_section.sentence_length_items.append(('up scores', 'svn update (scores)'))
             menu_section.layout = 'line'
             menu_specifier.menu_sections.append(menu_section)
+            menu_section = MenuSection()
+            menu_section.sentence_length_items.append(('pytest', 'run regression tests'))
+            menu_section.sentence_length_items.append(('pytest scores', 'run regression tests (scores)'))
+            menu_section.sentence_length_items.append(('pytest all', 'run regression tests (all)'))
+            menu_section.layout = 'line'
+            menu_specifier.menu_sections.append(menu_section)
             key, value = menu_specifier.display_menu()
             if key == 'b':
                 return key, None
@@ -88,6 +95,12 @@ class StudioInterface(DirectoryProxy):
                 break
             elif key == 'ci scores':
                 self.score_wrangler.svn_ci_scores()
+            elif key == 'pytest':
+                self.run_py_test()
+            elif key == 'pytest scores':
+                self.score_wrangler.run_py_test()
+            elif key == 'pytest all':
+                self.run_py_test_all()
             elif key == 'st':
                 self.svn_st()
             elif key == 'st scores':
@@ -97,6 +110,16 @@ class StudioInterface(DirectoryProxy):
             elif key == 'up scores':
                 self.score_wrangler.svn_up_scores()
 
+    def run_py_test_all(self, prompt_proceed=True):
+        proc = subprocess.Popen('py.test %s %s' % 
+            (self.directory_name, self.score_wrangler.directory_name), 
+            shell=True, stdout=subprocess.PIPE)
+        lines = proc.stdout.readlines()
+        if lines:
+            print ''.join(lines)
+        if prompt_proceed:
+            self.proceed()
+    
     def work_in_studio(self, menu_header=None):
         while True:
             menu_specifier = Menu(client=self, menu_header=menu_header)

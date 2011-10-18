@@ -80,6 +80,14 @@ class DirectoryProxy(_SCFObject):
             result = self._remove_nonversioned_directory()    
         return result
 
+    def run_py_test(self, prompt_proceed=True):
+        proc = subprocess.Popen('py.test %s' % self.directory_name, shell=True, stdout=subprocess.PIPE)
+        lines = proc.stdout.readlines()
+        if lines:
+            print ''.join(lines)
+        if prompt_proceed:
+            self.proceed()
+
     def svn_add(self, prompt_proceed=True):
         proc = subprocess.Popen('svn-add-all', shell=True, stdout=subprocess.PIPE)
         lines = proc.stdout.readlines()
