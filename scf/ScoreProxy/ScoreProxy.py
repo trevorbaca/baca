@@ -1,3 +1,4 @@
+from baca.scf.ChunkWrangler import ChunkWrangler
 from baca.scf.InteractiveMaterialProxy import InteractiveMaterialProxy
 from baca.scf.MakerWrangler import MakerWrangler
 from baca.scf.MaterialWrangler import MaterialWrangler
@@ -12,22 +13,27 @@ class ScoreProxy(PackageProxy):
 
     def __init__(self, package_importable_name):
         PackageProxy.__init__(self, package_importable_name)
+        self._chunk_wrangler = ChunkWrangler('.'.join([package_importable_name, 'mus', 'chunks']))
         self._material_wrangler = MaterialWrangler(purview=self)
         self._maker_wrangler = MakerWrangler()
 
     ### PUBLIC ATTRIBUTES ###
 
     @property
+    def chunk_wrangler(self):
+        return self._chunk_wrangler
+
+    @property
     def chunks_directory_name(self):
-        return os.path.join(self.directory_name, 'mus', 'chunks')
+        return self.chunk_wrangler.directory_name
 
     @property
     def chunks_initializer(self):
-        return os.path.join(self.chunks_directory_name, '__init__.py')
+        return self.chunk_wrangler.initializer_file_name
 
     @property
     def chunks_package_importable_name(self):
-        return '.'.join([self.package_importable_name, 'mus', 'chunks'])
+        return self.chunk_wrangler.package_importable_name
 
     @property
     def dist_directory_name(self):

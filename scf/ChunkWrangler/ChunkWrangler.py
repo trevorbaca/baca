@@ -1,9 +1,9 @@
-from baca.scf.DirectoryProxy import DirectoryProxy
+from baca.scf.PackageProxy import PackageProxy
 
 
-class ChunkWrangler(DirectoryProxy):
+class ChunkWrangler(PackageProxy):
 
-    ## PUBLIC METHODS ###
+    ### PUBLIC METHODS ###
 
     def create_chunk(self):
         return self.print_not_implemented()
