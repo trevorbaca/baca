@@ -107,8 +107,10 @@ class StudioInterface(DirectoryProxy):
                 self.score_wrangler.svn_st_scores()
             elif key == 'up':
                 self.svn_up()
+                break
             elif key == 'up scores':
                 self.score_wrangler.svn_up_scores()
+                break
 
     def run_py_test_all(self, prompt_proceed=True):
         proc = subprocess.Popen('py.test %s %s' % 
