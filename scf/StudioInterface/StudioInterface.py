@@ -63,15 +63,17 @@ class StudioInterface(DirectoryProxy):
             menu_specifier.menu_header = menu_header
             menu_specifier.menu_body = 'repository commands'
             menu_section = MenuSection()
-            menu_section.sentence_length_items.append(('st', 'svn status'))
             menu_section.sentence_length_items.append(('add', 'svn add'))
             menu_section.sentence_length_items.append(('ci', 'svn commit'))
+            menu_section.sentence_length_items.append(('st', 'svn status'))
+            menu_section.sentence_length_items.append(('up', 'svn update'))
             menu_section.layout = 'line'
             menu_specifier.menu_sections.append(menu_section)
             menu_section = MenuSection()
-            menu_section.sentence_length_items.append(('st scores', 'svn status (scores)'))
             menu_section.sentence_length_items.append(('add scores', 'svn add (scores)'))
             menu_section.sentence_length_items.append(('ci scores', 'svn commit (scores)'))
+            menu_section.sentence_length_items.append(('st scores', 'svn status (scores)'))
+            menu_section.sentence_length_items.append(('up scores', 'svn update (scores)'))
             menu_section.layout = 'line'
             menu_specifier.menu_sections.append(menu_section)
             key, value = menu_specifier.display_menu()
@@ -90,6 +92,10 @@ class StudioInterface(DirectoryProxy):
                 self.svn_st()
             elif key == 'st scores':
                 self.score_wrangler.svn_st_scores()
+            elif key == 'up':
+                self.svn_up()
+            elif key == 'up scores':
+                self.score_wrangler.svn_up_scores()
 
     def work_in_studio(self, menu_header=None):
         while True:

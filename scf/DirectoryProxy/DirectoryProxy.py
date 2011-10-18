@@ -110,3 +110,11 @@ class DirectoryProxy(_SCFObject):
         print ''.join(proc.stdout.readlines())
         if prompt_proceed:
             self.proceed()
+
+    def svn_up(self, prompt_proceed=True):
+        print self.directory_name
+        command = 'svn up %s' % self.directory_name
+        proc = subprocess.Popen(command, shell=True, stdout=subprocess.PIPE)
+        print ''.join(proc.stdout.readlines())
+        if prompt_proceed:
+            self.proceed()

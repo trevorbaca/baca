@@ -178,8 +178,14 @@ class ScoreWrangler(DirectoryProxy):
         if prompt_proceed:
             self.proceed()
 
-    def svn_st_scores(self, prompt_proced=True):
+    def svn_st_scores(self, prompt_proceed=True):
         for score_proxy in self.iterate_score_proxies():
             score_proxy.svn_st(prompt_proceed=False)
+        if prompt_proceed:
+            self.proceed()
+
+    def svn_up_scores(self, prompt_proceed=True):
+        for score_proxy in self.iterate_score_proxies():
+            score_proxy.svn_up(prompt_proceed=False)
         if prompt_proceed:
             self.proceed()
