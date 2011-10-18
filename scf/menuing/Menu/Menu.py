@@ -152,8 +152,6 @@ class Menu(_MenuObject, _SCFObject):
         def fget(self):
             return self._client
         def fset(self, client):
-            from baca.scf._SCFObject import _SCFObject
-            assert isinstance(client, (_SCFObject, type(None)))
             self._client = client
         return property(**locals())
 
@@ -162,12 +160,12 @@ class Menu(_MenuObject, _SCFObject):
         default_hidden_items = []
         if self.include_back:
             default_hidden_items.append(('b', 'back'))
-        default_hidden_items.append(('client', 'show menu client'))
         default_hidden_items.append(('hidden', 'show hidden items'))
         default_hidden_items.append(('q', 'quit'))
         default_hidden_items.append(('redraw', 'redraw'))
         default_hidden_items.append(('exec', 'exec statement'))
         default_hidden_items.append(('studio', 'return to studio'))
+        default_hidden_items.append(('where', 'show menu client'))
         return default_hidden_items
 
     @apply
@@ -300,8 +298,6 @@ class Menu(_MenuObject, _SCFObject):
             should_clear_terminal, hide_menu = False, True
             if key == 'b':
                 return key, None
-            elif key == 'client':
-                self.show_menu_client()
             elif key == 'exec':
                 self.exec_statement()
             elif key == 'hidden':
@@ -312,6 +308,8 @@ class Menu(_MenuObject, _SCFObject):
                 should_clear_terminal, hide_menu = True, False
             elif key == 'studio':
                 raise StudioException
+            elif key == 'where':
+                self.show_menu_client()
             else:
                 return key, value
 
@@ -339,7 +337,11 @@ class Menu(_MenuObject, _SCFObject):
 
     def show_menu_client(self):
         print self._tab(1),
-        print 'client: %s' % self.client
+        print 'file: %s' % self.client[1]
+        print self._tab(1),
+        print 'line: %s' % self.client[2]
+        print self._tab(1),
+        print 'meth: %s()' % self.client[3]
         print ''
 
     def tab(self, n):

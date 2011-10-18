@@ -1,5 +1,6 @@
 from abjad.tools import iotools
 import datetime
+import inspect
 import os
 import readline
 import subprocess
@@ -151,3 +152,6 @@ class _SCFObject(object):
            return raw_input(prompt)
         finally:
            readline.set_startup_hook()
+
+    def where(self):
+        return inspect.stack()[1]
