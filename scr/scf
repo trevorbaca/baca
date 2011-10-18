@@ -2,13 +2,6 @@
 import baca
 
 
-studio = baca.scf.StudioInterface()
-
-while True:
-    try:
-        studio.work_in_studio()
-    except EOFError:
-        print '\n'
-        break
-    except baca.scf.exceptions.StudioException:
-        pass
+studio = baca.scf.Studio()
+studio.session.dump_transcript = True
+studio.run()

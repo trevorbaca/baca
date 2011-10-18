@@ -1,4 +1,4 @@
-from baca.scf._Maker import _Maker
+from baca.scf.InteractiveMaterialProxy import InteractiveMaterialProxy
 from baca.scf.UserInputWrapper import UserInputWrapper
 from abjad.tools import durationtools
 from abjad.tools import leaftools
@@ -12,10 +12,10 @@ import fractions
 import os
 
 
-class SargassoMeasureMaker(_Maker):
+class SargassoMeasureMaker(InteractiveMaterialProxy):
 
     def __init__(self, **kwargs):
-        _Maker.__init__(self, **kwargs)
+        InteractiveMaterialProxy.__init__(self, **kwargs)
         self.stylesheet = os.path.join(os.path.dirname(__file__), 'stylesheet.ly')
         self._generic_output_name = 'sargasso measures'
 

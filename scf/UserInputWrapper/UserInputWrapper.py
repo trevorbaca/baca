@@ -13,21 +13,21 @@ class UserInputWrapper(collections.OrderedDict):
             key, value = pair
             key = key.replace('_', ' ')
             if value is None:
-                line = '%s: ' % key
+                line = '{}: '.format(key)
             else:
-                line = '%s: %r' % (key, value)
+                line = '{}: {!r}'.format(key, value)
             lines.append(line)
         return lines
 
     @property
     def formatted_lines(self):
         formatted_lines = []
-        formatted_lines.append('user_input = %s([' % type(self).__name__)
+        formatted_lines.append('user_input = {}(['.format(type(self).__name__))
         items = self.list_items
         for name, value in items[:-1]:
-            line = '\t(%r, %r),' % (name, value)
+            line = '\t({!r}, {!r}),'.format(name, value)
             formatted_lines.append(line)
-        formatted_lines.append('\t(%r, %r)])' % items[-1])
+        formatted_lines.append('\t({!r}, {!r})])'.format(items[-1], items[-1]))
         return formatted_lines
 
     @property

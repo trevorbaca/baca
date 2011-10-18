@@ -1,0 +1,1 @@
+from ScoreTemplateWizard import ScoreTemplateWizard

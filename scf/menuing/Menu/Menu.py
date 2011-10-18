@@ -1,174 +1,31 @@
-from baca.scf.menuing._MenuObject import _MenuObject
-from baca.scf._SCFObject import _SCFObject
-from baca.scf.exceptions import StudioException
+from abjad.tools import iotools
+from baca.scf.SCFObject import SCFObject
+from baca.scf.menuing.MenuObject import MenuObject
 import os
 
 
-class Menu(_MenuObject, _SCFObject):
+class Menu(MenuObject, SCFObject):
 
-    def __init__(self, client=None, menu_header=None, menu_body=None, 
-        menu_sections=None, items_to_number=None, sentence_length_items=None, 
-        named_pairs=None, secondary_named_pairs=None, hidden_items=None,
-        include_back=True, include_studio=True, indent_level=1, item_width = 11, 
-        should_clear_terminal=True, hide_menu=False):
-        _MenuObject.__init__(self, menu_header=menu_header, menu_body=menu_body)
-        self.client = client
-        self.menu_sections = menu_sections
-        self.items_to_number = items_to_number
-        self.sentence_length_items = sentence_length_items
-        self.named_pairs = named_pairs
-        self.secondary_named_pairs = secondary_named_pairs
-        self.hidden_items = hidden_items
+    def __init__(self, hidden_items=None, hide_menu=False, include_back=True, 
+        include_studio=True, indent_level=1, item_width=11, sections=None, 
+        session=None, should_clear_terminal=True, where=None):
+        MenuObject.__init__(self, hidden_items=hidden_items, indent_level=indent_level, 
+            session=session, should_clear_terminal=should_clear_terminal)
+        self.hide_menu = hide_menu
         self.include_back = include_back
         self.include_studio = include_studio
-        self.indent_level = indent_level
         self.item_width = item_width
-        self.should_clear_terminal = should_clear_terminal
-        self.hide_menu = hide_menu
-
-    ### OVERLOADS ###
-
-    def __repr__(self):
-        return '%s()' % type(self).__name__
-
-    ### PRIVATE METHODS ###
-
-    def _add_hidden_menu_items(self, all_keys, all_values):
-        for key, value in self.default_hidden_items:
-            all_keys.append(key)
-            all_values.append(value)
-        for key, value in self.hidden_items:
-            all_keys.append(key)
-            all_values.append(value)
-        
-    def _display_footer_items(self, all_keys, all_values):
-        footer_pairs = self._get_footer_pairs()
-        if footer_pairs:
-            if not self.hide_menu:
-                self._print_tab(self.indent_level)
-        for key, value in footer_pairs:
-            if not self.hide_menu:
-                print '%s: %s ' % (key, value.ljust(self.item_width)),
-            all_keys.append(key)
-            all_values.append(value)
-        if footer_pairs:
-            if not self.hide_menu:
-                print ''
-
-    def _display_items_to_number(self, all_keys, all_values):
-        keys = range(1, len(self.items_to_number) + 1)
-        keys = [str(x) for x in keys]
-        pairs = zip(keys, self.items_to_number)
-        for key, value in pairs:
-            if not self.hide_menu:
-                self._print_tab(self.indent_level),
-                print '%s: %s' % (key, value)
-            all_keys.append(key)
-            all_values.append(value)
-        if pairs:
-            if not self.hide_menu:
-                print ''
-
-    def _display_menu(self):
-        if self.should_clear_terminal:
-            self.clear_terminal()
-        all_keys, all_values = [], []
-        self._display_menu_title()
-        self._display_menu_sections(all_keys, all_values)
-        self._display_items_to_number(all_keys, all_values)
-        self._display_sentence_length_items(all_keys, all_values)
-        self._display_named_pairs(self.named_pairs, all_keys, all_values)
-        self._display_named_pairs(self.secondary_named_pairs, all_keys, all_values)
-        if self.named_pairs or self.secondary_named_pairs:
-            print ''
-        self._display_footer_items(all_keys, all_values)
-        self._add_hidden_menu_items(all_keys, all_values)
-        while True:
-            response = raw_input('scf> ')
-            print ''
-            if response in all_keys:
-                break
-        pair_dictionary = dict(zip(all_keys, all_values))
-        value = pair_dictionary[response]
-        return response, value
-
-    def _display_menu_sections(self, all_keys, all_values):
-        for menu_section in self.menu_sections:
-            menu_section.hide_menu = self.hide_menu
-            menu_section.display(all_keys, all_values)
-        
-    def _display_menu_title(self):
-        if self.menu_title:
-            if not self.hide_menu:
-                menu_title = self.menu_title.capitalize()
-                print menu_title
-                print ''
-
-    def _display_named_pairs(self, named_pairs, all_keys, all_values):
-        if named_pairs:
-            if not self.hide_menu:
-                self._print_tab(self.indent_level)
-            for key, value in named_pairs:
-                if not self.hide_menu:
-                    print '%s: %s ' % (key, value.ljust(self.item_width)),
-                all_keys.append(key)
-                all_values.append(value)
-            if not self.hide_menu:
-                print ''
-
-    def _display_sentence_length_items(self, all_keys, all_values):
-        for key, value in self.sentence_length_items:
-            if not self.hide_menu:
-                self._print_tab(self.indent_level)
-                print '%s: %s ' % (key, value)
-            all_keys.append(key)
-            all_values.append(value)
-        if self.sentence_length_items:
-            if not self.hide_menu:
-                print ''
-
-    def _get_footer_pairs(self):
-#        footer_pairs = [
-#            ('q', 'quit'),
-#            ('w', 'redraw'),
-#            ]
-#        if self.include_back:
-#            footer_pairs.append(('b', 'back'))
-        footer_pairs = []
-        footer_pairs.sort()
-        return footer_pairs
-
-    def _print_tab(self, n):
-        if 0 < n:
-            print self._tab(n),
-
-    def _tab(self, n):
-        return 4 * n * ' '
+        self.sections = sections
+        self.where = where
 
     ### PUBLIC ATTRIBUTES ###
     
-    @apply
-    def client():
-        def fget(self):
-            return self._client
-        def fset(self, client):
-            from baca.scf._SCFObject import _SCFObject
-            assert isinstance(client, (_SCFObject, type(None)))
-            self._client = client
-        return property(**locals())
-
     @property
-    def default_hidden_items(self):
-        default_hidden_items = []
-        if self.include_back:
-            default_hidden_items.append(('b', 'back'))
-        default_hidden_items.append(('client', 'show menu client'))
-        default_hidden_items.append(('hidden', 'show hidden items'))
-        default_hidden_items.append(('q', 'quit'))
-        default_hidden_items.append(('redraw', 'redraw'))
-        default_hidden_items.append(('exec', 'exec statement'))
-        default_hidden_items.append(('studio', 'return to studio'))
-        return default_hidden_items
+    def has_default(self):
+        for section in self.sections:
+            if section.has_default:
+                return True
+        return False
 
     @apply
     def hidden_items():
@@ -209,15 +66,6 @@ class Menu(_MenuObject, _SCFObject):
         return property(**locals())
 
     @apply
-    def indent_level():
-        def fget(self):
-            return self._indent_level
-        def fset(self, indent_level):
-            assert isinstance(indent_level, int)
-            self._indent_level = indent_level
-        return property(**locals())
-
-    @apply
     def item_width():
         def fget(self):
             return self._item_width
@@ -227,120 +75,127 @@ class Menu(_MenuObject, _SCFObject):
         return property(**locals())
 
     @apply
-    def items_to_number():
+    def sections():
         def fget(self):
-            return self._items_to_number
-        def fset(self, items_to_number):
-            if items_to_number is None:
-                self._items_to_number = []
+            return self._sections
+        def fset(self, sections):
+            if sections is None:
+                self._sections = []
             else:
-                self._items_to_number = items_to_number[:]
-        return property(**locals())
-
-    @apply
-    def menu_sections():
-        def fget(self):
-            return self._menu_sections
-        def fset(self, menu_sections):
-            if menu_sections is None:
-                self._menu_sections = []
-            else:
-                self._menu_sections = menu_sections[:]
-        return property(**locals())
-
-    @apply
-    def named_pairs():
-        def fget(self):
-            return self._named_pairs
-        def fset(self, named_pairs):
-            if named_pairs is None:
-                self._named_pairs = []
-            else:
-                self._named_pairs = named_pairs[:]
-        return property(**locals())
-
-    @apply
-    def secondary_named_pairs():
-        def fget(self):
-            return self._secondary_named_pairs
-        def fset(self, secondary_named_pairs):
-            if secondary_named_pairs is None:
-                self._secondary_named_pairs = []
-            else:
-                self._secondary_named_pairs = secondary_named_pairs[:]
-        return property(**locals())
-
-    @apply
-    def sentence_length_items():
-        def fget(self):
-            return self._sentence_length_items
-        def fset(self, sentence_length_items):
-            if sentence_length_items is None:
-                self._sentence_length_items = []
-            else:
-                self._sentence_length_items = sentence_length_items[:]
-        return property(**locals())
-
-    @apply
-    def should_clear_terminal():
-        def fget(self):
-            return self._should_clear_terminal
-        def fset(self, should_clear_terminal):
-            assert isinstance(should_clear_terminal, type(True))
-            self._should_clear_terminal = should_clear_terminal
+                self._sections = sections[:]
         return property(**locals())
 
     ### PUBLIC METHODS ###
 
-    def display_menu(self):
+    def add_hidden_menu_items(self):
+        for key, value in self.default_hidden_items:
+            self.all_keys.append(key)
+            self.all_values.append(value)
+        for key, value in self.hidden_items:
+            self.all_keys.append(key)
+            self.all_values.append(value)
+
+    def change_key_to_value(self, key):
+        if key:
+            pair_dictionary = dict(zip(self.all_keys, self.all_values))
+            return pair_dictionary.get(key)
+
+    def change_value_to_key(self, value):
+        if value:
+            pair_dictionary = dict(zip(self.all_values, self.all_keys))
+            return pair_dictionary.get(value)
+
+    def check_if_key_exists(self, key):
+        if self.key_is_default(key):
+            value = self.get_default_value()
+            return self.change_value_to_key(value)
+        elif key in self.all_keys:
+            return key
+        else:
+            return self.check_for_matching_value_string(key)
+
+    def check_for_matching_value_string(self, key):
+        for value in self.all_values:
+            if value.startswith(key):
+                key = self.change_value_to_key(value)
+                return key 
+
+    def clean_value(self, value):
+        if value is not None:
+            if value.endswith(' (default)'):
+                value = value.replace(' (default)', '')
+            return value
+
+    def conditionally_display_menu(self):
+        if not self.session.hide_next_redraw:
+            self.conditionally_clear_terminal()
+        self.make_menu_lines_keys_and_values()
+        self.add_hidden_menu_items()
+        if not self.session.hide_next_redraw:
+            self.display_lines(self.menu_lines)
+        key = self.handle_raw_input_with_default('SCF', default=self.prompt_default)
+        key = self.check_if_key_exists(key)
+        value = self.change_key_to_value(key)
+        value = self.clean_value(value)
+        self.session.hide_next_redraw = False
+        return key, value
+
+    def get_default_value(self):
+        for section in self.sections:
+            if section.has_default:
+                return section.get_default_value() 
+
+    def key_is_default(self, key):
+        if 3 <= len(key):
+            if 'default'.startswith(key):
+                return True
+        return False
+
+    def make_menu_lines_keys_and_values(self):
+        self.menu_lines, self.all_keys, self.all_values = [], [], []
+        self.menu_lines.extend(self.make_menu_title_lines())
+        self.menu_lines.extend(self.make_section_lines(self.all_keys, self.all_values))
+
+    def make_menu_lines(self):
+        menu_lines, keys, values = self.make_menu_lines_keys_and_values()
+        return menu_lines
+
+    def make_section_lines(self, all_keys, all_values):
+        menu_lines = []
+        for section in self.sections:
+            section.hide_menu = self.hide_menu
+            menu_lines.extend(section.make_menu_lines(all_keys, all_values))
+        return menu_lines
+        
+    def make_menu_title_lines(self):
+        menu_lines = []
+        if not self.hide_menu:
+            menu_lines.append(iotools.capitalize_string_start(self.session.menu_header))
+            menu_lines.append('')
+        return menu_lines
+
+    @apply
+    def prompt_default():
+        def fget(self): 
+            if self.has_default:
+                return 'def'
+            return self._prompt_default
+        def fset(self, prompt_default):
+            assert isinstance(prompt_default, (str, type(None)))
+            self._prompt_default = prompt_default
+        return property(**locals())
+
+    def run(self):
         should_clear_terminal, hide_menu = True, False
         while True:
             self.should_clear_terminal, self.hide_menu = should_clear_terminal, hide_menu
-            key, value = self._display_menu()
+            key, value = self.conditionally_display_menu()
             should_clear_terminal, hide_menu = False, True
-            if key == 'b':
-                return key, None
-            elif key == 'client':
-                self.show_menu_client()
-            elif key == 'exec':
-                self.exec_statement()
-            elif key == 'hidden':
-                self.show_hidden_items()
-            elif key == 'q':
-                raise SystemExit
+            key = self.handle_hidden_key(key)
+            if self.session.is_complete:
+                break
             elif key == 'redraw':
                 should_clear_terminal, hide_menu = True, False
-            elif key == 'studio':
-                raise StudioException
             else:
-                return key, value
-
-    def exec_statement(self):
-        statement = raw_input('xcf> ')
-        exec('from abjad import *')
-        exec('result = %s' % statement)
-        print repr(result) + '\n'
-
-    def print_tab(self, n):
-        if 0 < n:
-            print self.tab(n),
-
-    def show_hidden_items(self):
-        hidden_items = []
-        hidden_items.extend(self.default_hidden_items)
-        hidden_items.extend(self.hidden_items)
-        for section in self.menu_sections:
-            hidden_items.extend(section.hidden_items)
-        hidden_items.sort()
-        for key, value in hidden_items:
-            self._print_tab(self.indent_level),
-            print '%s: %s' % (key, value)
-        print ''
-
-    def show_menu_client(self):
-        print self._tab(1),
-        print 'client: %s' % self.client
-        print ''
-
-    def tab(self, n):
-        return 4 * n * ' '
+                break
+        return key, value

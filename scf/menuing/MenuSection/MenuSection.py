@@ -1,41 +1,38 @@
-class MenuSection(object):
+from abjad.tools import iotools
+from baca.scf.menuing.MenuObject import MenuObject
 
-    def __init__(self, menu_section_title=None, lines_to_list=None,
-        menu_section_entries=None, sentence_length_items=None, 
-        items_to_number=None, hidden_items=None, indent_level=1, 
-        hide_menu=False, layout='list'):
-        self.menu_section_title = menu_section_title
-        self.lines_to_list = lines_to_list
-        self.menu_section_entries = menu_section_entries
-        self.sentence_length_items = sentence_length_items
-        self.items_to_number = items_to_number
+
+class MenuSection(MenuObject):
+
+    def __init__(self, default_index=None, entry_prefix=None, hidden_items=None, 
+        hide_menu=False, indent_level=1, items_to_number=None, 
+        lines_to_list=None, section_title=None, named_pairs=None, 
+        sentence_length_items=None):
+        self.default_index = default_index
+        self.entry_prefix = entry_prefix
         self.hidden_items = hidden_items
-        self.indent_level = indent_level
         self.hide_menu = hide_menu
-        self.layout = layout
+        self.indent_level = indent_level
+        self.items_to_number = items_to_number
+        self.lines_to_list = lines_to_list
+        self.section_title = section_title
+        self.named_pairs = named_pairs
+        self.sentence_length_items = sentence_length_items
 
-    ### OVERLOADS ###
-
-    def __repr__(self):
-        return '%s()' % type(self).__name__
-
-    ### PRIVATE METHODS ###
-
-    def _display_menu_section_title(self):
-        if not self.hide_menu:
-            if self.menu_section_title:
-                self._print_tab(self.indent_level)
-                print self.menu_section_title.capitalize()
-                print ''
-
-    def _print_tab(self, n):
-        if 0 < n:
-            print self._tab(n),
-
-    def _tab(self, n):
-        return 4 * n * ' '
-    
     ### PUBLIC ATTRIBUTES ###
+
+    @apply
+    def default_index():
+        def fget(self):
+            return self._default_index
+        def fset(self, default_index):
+            assert isinstance(default_index, (int, type(None)))
+            self._default_index = default_index
+        return property(**locals())
+
+    @property
+    def has_default(self):
+        return self.default_index is not None
 
     @apply
     def hidden_items():
@@ -74,16 +71,7 @@ class MenuSection(object):
             if items_to_number is None:
                 self._items_to_number = []
             else:
-                self._items_to_number = items_to_number[:]
-        return property(**locals())
-
-    @apply
-    def layout():
-        def fget(self):
-            return self._layout
-        def fset(self, layout):
-            assert layout in ('list', 'line')
-            self._layout = layout
+                self._items_to_number = list(items_to_number)
         return property(**locals())
 
     @apply
@@ -98,23 +86,32 @@ class MenuSection(object):
         return property(**locals())
 
     @apply
-    def menu_section_entries():
+    def named_pairs():
         def fget(self):
-            return self._menu_section_entries
-        def fset(self, menu_section_entries):
-            if menu_section_entries is None:
-                self._menu_section_entries = []
+            return self._named_pairs
+        def fset(self, named_pairs):
+            if named_pairs is None:
+                self._named_pairs = []
             else:
-                self._menu_section_entries = menu_section_entries[:]
+                self._named_pairs = named_pairs[:]
         return property(**locals())
 
     @apply
-    def menu_section_title():
+    def entry_prefix():
         def fget(self):
-            return self._menu_section_title
-        def fset(self, menu_section_title):
-            assert isinstance(menu_section_title, (str, type(None)))
-            self._menu_section_title = menu_section_title
+            return self._entry_prefix
+        def fset(self, entry_prefix):
+            assert isinstance(entry_prefix, (str, type(None)))
+            self._entry_prefix = entry_prefix
+        return property(**locals())
+
+    @apply
+    def section_title():
+        def fget(self):
+            return self._section_title
+        def fset(self, section_title):
+            assert isinstance(section_title, (str, type(None)))
+            self._section_title = section_title
         return property(**locals())
 
     @apply
@@ -130,54 +127,79 @@ class MenuSection(object):
 
     ### PUBLIC METHODS ###
 
-    def display(self, all_keys, all_values):
-        self._display_menu_section_title()
+    def get_default_value(self):
+        assert self.has_default
+        return self.items_to_number[self.default_index]
+
+    def make_menu_lines(self, all_keys, all_values):
+        menu_lines = []
+        menu_lines.extend(self.make_section_title_lines())
         for i, value in enumerate(self.items_to_number):
+            if isinstance(value, tuple):
+                assert len(value) == 2
+                display_string, return_value = value
+            else:
+                display_string = return_value = value
+            key = str(i + 1)
             if not self.hide_menu:
-                self._print_tab(self.indent_level),
-                key = str(i + 1)
-                print '%s: %s' % (key, value)
+                menu_line = self.make_tab(self.indent_level) + ' '
+                prefix = self.entry_prefix
+                if prefix is not None:
+                    key = prefix + key
+                menu_line += '{}: {}'.format(key, display_string)
+                menu_lines.append(menu_line)
             all_keys.append(key)
-            all_values.append(value)
+            all_values.append(return_value)
         if self.items_to_number:
             if not self.hide_menu:
-                print ''
+                menu_lines.append('')
         for line in self.lines_to_list:
             if not self.hide_menu:
-                self._print_tab(self.indent_level),
-                print line
+                menu_line = self.make_tab(self.indent_level) + ' ' + line
+                menu_lines.append(menu_line)
         if self.lines_to_list:
             if not self.hide_menu:
-                print ''
-        for key, value in self.menu_section_entries:
+                menu_lines.append('')
+        for key, value in self.named_pairs:
+            if self.entry_prefix is not None:
+                key = self.entry_prefix + key
             if not self.hide_menu:
-                self._print_tab(self.indent_level),
-                if self.layout == 'list':
-                    print '%s: %s' % (key, value)
-                elif self.layout == 'line':
-                    print '%s: %s' % (key, value),
+                menu_line = self.make_tab(self.indent_level) + ' '
+                menu_line += '{}: {}'.format(key, value)
             all_keys.append(key)
             all_values.append(value)
-        if self.menu_section_entries:
+        if self.named_pairs:
             if not self.hide_menu:
-                if self.layout == 'list':
-                    print ''
-                elif self.layout == 'line':
-                    print '\n'
+                menu_lines.append('')
         for key, value in self.sentence_length_items:
             if not self.hide_menu:
-                self._print_tab(self.indent_level),
-                print '%s: %s' % (key, value)
+                menu_line = self.make_tab(self.indent_level) + ' '
+                menu_line += '{}: {}'.format(key, value)
+                menu_lines.append(menu_line)
             all_keys.append(key)
             all_values.append(value)
         if self.sentence_length_items:
             if not self.hide_menu:
-                print ''
+                menu_lines.append('')
         for key, value in self.hidden_items:
             all_keys.append(key)
             all_values.append(value)
+        return menu_lines
 
-    def show_hidden_items(self):
+    def make_section_title_lines(self):
+        menu_lines = []
+        if not self.hide_menu:
+            if self.section_title:
+                menu_line = '{} {}'.format(
+                    self.make_tab(self.indent_level), iotools.capitalize_string_start(self.section_title))
+                menu_lines.append(menu_line)
+                menu_lines.append('')
+        return menu_lines
+
+    def show_hidden_menu_items(self):
+        menu_lines = []
         for key, value in self.hidden_items:
-            self._print_tab(self.indent_level),
-            print '%s: %s' % (key, value)
+            menu_line = self.make_tab(self.indent_level) + ' '
+            menu_line += '{}: {}'.format(key, value)
+            menu_lines.append(menu_line)
+        self.display_lines(menu_lines)
