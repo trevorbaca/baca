@@ -63,6 +63,7 @@ class UserInputGetter(_MenuObject):
             i = 0
             while i < len(self.prompts):
                 prompt = self.prompts[i]
+                prompt = prompt.capitalize()
                 prompt = prompt + '> '
                 while True:
                     response = raw_input(prompt)
