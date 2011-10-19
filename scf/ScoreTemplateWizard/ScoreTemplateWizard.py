@@ -6,6 +6,10 @@ class ScoreTemplateWizard(Wizard):
 
     ### PUBLIC METHODS ###
 
+    def assign_instruments_to_player(self, player):
+        #for 
+        pass
+        
     def get_players(self):
         print 'Part 1: the players.\n'
         getter = self.UserInputGetter()
@@ -19,7 +23,9 @@ class ScoreTemplateWizard(Wizard):
                 getter.prompts.append("name of player %s" % (i + 1))
                 getter.input_tests.append(lambda x: isinstance(x, str))
                 player_name = getter.run(clear_terminal=False)
-                players.append(instrumenttools.HumanMusician(player_name))
+                player = instrumenttools.HumanMusician(player_name)
+                players.append(player)
+                self.assign_instruments_to_player(player)
         return players
 
     def run(self):
@@ -27,4 +33,3 @@ class ScoreTemplateWizard(Wizard):
         print 'Score template wizard.\n'
         print 'This wizard works in four largescale steps.\n'
         players = self.get_players()
-        print players
