@@ -10,6 +10,8 @@ class ScoreTemplateWizard(Wizard):
         print 'Score template wizard.\n'
         print 'This wizard works in four largescale steps.\n'
         print 'Part 1: number of players.\n'
-        response = raw_input("Enter the number of players. Or type 'skip'> ")
-        number_players = eval(response)
-        print number_players
+        getter = self.UserInputGetter()
+        getter.prompts.append("Enter the number of players or type 'skip'")
+        getter.input_tests.append(lambda x: isinstance(x, int) or x == 'skip')
+        player_count = getter.run()
+        print player_count

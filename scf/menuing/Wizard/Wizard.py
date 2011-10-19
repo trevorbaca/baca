@@ -1,7 +1,7 @@
-#from baca.scf._SCFObject import _SCFObject
 from baca.scf.menuing.UserInputGetter import UserInputGetter
+from baca.scf._SCFObject import _SCFObject
 
 
-class Wizard(UserInputGetter):
+class Wizard(_SCFObject):
 
-    pass
+    UserInputGetter = UserInputGetter
