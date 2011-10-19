@@ -61,37 +61,53 @@ class UserInputGetter(_MenuObject):
                     if self.menu_title is not None:
                         print self.menu_title.capitalize() + '\n'
                 values = []
-                for i, prompt in enumerate(self.prompts):
+                i = 0
+                while i < len(self.prompts):
+                    prompt = self.prompts[i]
                     while True:
                         response = raw_input(prompt)
                         if response == 'b':
-                            print 'back will be implemented soon!'
+                             return
                         elif response == 'help':
                             if i < len(self.input_help_strings):
                                 print self.input_help_strings[i] + '\n'
                             else:
                                 print 'Help string not available.\n'
-                        elif response == 'next':
-                            print 'next will be implemented soon!'
                         elif response == 'prev':
-                            print 'prev will be implemented soon!'
+                            values.pop()
+                            i = i - 1
+                            print ''
+                            break
                         elif response == 'q':
-                            print 'quit will be implemented soon!'
+                            raise SystemExit
                         else:
-                            value = eval(response)
+                            try:
+                                value = eval(response)
+                            except NameError:
+                                print 'evaluation not understood.\n'
+                                continue
                             if i < len(self.input_tests):
                                 input_test = self.input_tests[i]
-                                is_good = apply(input_test, value)
-                                if is_good:
+                                if input_test(value):
                                     values.append(value)
+                                    i = i + 1
+                                    print ''
                                     break
+                                else:
+                                    if i < len(self.input_help_strings):
+                                        print self.input_help_strings[i] + '\n'
                             else:
                                 values.append(value)
+                                i = i + 1
+                                print ''
                                 break
-                print ''
                 if self.confirm():
                     print ''
                     break
         except KeyboardInterrupt:
-            return []
+            print ''
+            return
+        except SystemExit:
+            print ''
+            raise SystemExit
         return values
