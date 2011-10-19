@@ -8,6 +8,11 @@ class _MenuObject(object):
         self.menu_header = menu_header
         self.menu_body = menu_body
 
+    ### OVERLOADS ###
+
+    def __repr__(self):
+        return '%s()' % type(self).__name__
+
     ### PUBLIC ATTRIBUTES ###
 
     @apply
@@ -47,7 +52,7 @@ class _MenuObject(object):
         elif self.menu_body:
             return self.menu_body
         else:
-            return ''
+            return None
 
     @property
     def menu_title_parts(self):
