@@ -37,6 +37,10 @@ class PackageProxy(DirectoryProxy):
     @property
     def package_short_name(self):
         return self.base_name
+
+    @property
+    def package_spaced_name(self):
+        return self.package_short_name.replace('_', ' ')
         
     @property
     def parent_initializer(self):

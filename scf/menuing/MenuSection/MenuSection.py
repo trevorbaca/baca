@@ -1,12 +1,14 @@
 class MenuSection(object):
 
     def __init__(self, menu_section_title=None, lines_to_list=None,
-        menu_section_entries=None, sentence_length_items=None, 
-        items_to_number=None, hidden_items=None, indent_level=1, 
+        menu_section_entries=None, menu_section_entry_prefix=None,
+        sentence_length_items=None, items_to_number=None, 
+        hidden_items=None, indent_level=1, 
         hide_menu=False, layout='list'):
         self.menu_section_title = menu_section_title
         self.lines_to_list = lines_to_list
         self.menu_section_entries = menu_section_entries
+        self.menu_section_entry_prefix = menu_section_entry_prefix
         self.sentence_length_items = sentence_length_items
         self.items_to_number = items_to_number
         self.hidden_items = hidden_items
@@ -109,6 +111,15 @@ class MenuSection(object):
         return property(**locals())
 
     @apply
+    def menu_section_entry_prefix():
+        def fget(self):
+            return self._menu_section_entry_prefix
+        def fset(self, menu_section_entry_prefix):
+            assert isinstance(menu_section_entry_prefix, (str, type(None)))
+            self._menu_section_entry_prefix = menu_section_entry_prefix
+        return property(**locals())
+
+    @apply
     def menu_section_title():
         def fget(self):
             return self._menu_section_title
@@ -150,6 +161,8 @@ class MenuSection(object):
             if not self.hide_menu:
                 print ''
         for key, value in self.menu_section_entries:
+            if self.menu_section_entry_prefix is not None:
+                key = self.menu_section_entry_prefix + key
             if not self.hide_menu:
                 self._print_tab(self.indent_level),
                 if self.layout == 'list':

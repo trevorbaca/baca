@@ -124,13 +124,6 @@ class MaterialWrangler(DirectoryProxy):
             shared_material_directories.append(directory)
         return shared_material_directories
 
-    def list_shared_material_spaced_names(self):
-        material_spaced_names = []
-        for package_short_name in self.list_shared_material_package_short_names():
-            material_spaced_name = package_short_name.replace('_', ' ')
-            material_spaced_names.append(material_spaced_name)
-        return material_spaced_names
-        
     def list_shared_material_package_short_names(self):
         shared_material_package_short_names = []
         for x in os.listdir(self.directory_name):
@@ -142,6 +135,13 @@ class MaterialWrangler(DirectoryProxy):
                         shared_material_package_short_names.append(x)
         return shared_material_package_short_names
 
+    def list_shared_material_spaced_names(self):
+        material_spaced_names = []
+        for package_short_name in self.list_shared_material_package_short_names():
+            material_spaced_name = package_short_name.replace('_', ' ')
+            material_spaced_names.append(material_spaced_name)
+        return material_spaced_names
+        
     def list_shared_material_summaries(self):
         summaries = []
         for shared_material_proxy in self.iterate_shared_material_proxies():

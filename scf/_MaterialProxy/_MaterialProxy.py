@@ -80,7 +80,7 @@ class _MaterialProxy(PackageProxy):
 
     @property
     def material_spaced_name(self):
-        return self.package_short_name.replace('_', ' ')
+        return self.package_spaced_name
 
     @property
     def material_underscored_name(self):
@@ -147,14 +147,15 @@ class _MaterialProxy(PackageProxy):
         file_pointer.close()
         self.edit_visualizer()
 
+    # TODO: move to package proxy
     def delete_material(self):
         self.remove_material_from_materials_initializer()
         result = self.remove()
         if result:
             self.proceed()
 
-    def edit_initializer(self):
-        os.system('vi %s' % self.initializer_file_name)
+    #def edit_initializer(self):
+    #    os.system('vi %s' % self.initializer_file_name)
 
     def edit_input_file(self):
         os.system('vi + %s' % self.input_file_name)

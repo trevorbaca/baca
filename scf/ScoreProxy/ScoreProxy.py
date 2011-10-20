@@ -194,24 +194,19 @@ class ScoreProxy(PackageProxy):
             if not material_proxy.is_interactive:
                 yield material_proxy
 
+    def list_chunk_spaced_names_with_numbers(self):
+        numbered_chunks = []
+        for i, chunk in enumerate(self.chunk_wrangler.list_chunk_spaced_names()):
+            numbered_chunk = (str(i + 1), chunk)
+            numbered_chunks.append(numbered_chunk)
+        return numbered_chunks
+
     def list_material_package_importable_names(self):
         material_package_importable_names = []
         for material in self.list_material_underscored_names():
             material_package_importable_name = '%s.%s' % (self.materials_package_importable_name, material)
             material_package_importable_names.append(material_package_importable_name)
         return material_package_importable_names
-
-    def list_underscored_chunk_names(self):
-        chunks = os.listdir(self.chunks_directory_name)
-        chunks = [x for x in chunks if x[0].isalpha()]
-        return chunks
-
-    def list_underscored_chunk_names_with_numbers(self):
-        numbered_chunks = []
-        for i, chunk in enumerate(self.list_underscored_chunk_names()):
-            numbered_chunk = (str(i + 1), chunk)
-            numbered_chunks.append(numbered_chunk)
-        return numbered_chunks
 
     def list_material_underscored_names(self):
         try:
@@ -230,31 +225,20 @@ class ScoreProxy(PackageProxy):
             numbered_materials.append(numbered_material)
         return numbered_materials
             
-    def manage_chunks(self):
-        self.print_not_implemented()
-
-    def manage_materials(self, material_number=None):
-        while True:
-            result = self.select_material(material_number=material_number)
-            if result == 'b':
-                return result
-            else:
-                result.score_title = self.score_title
-                result.manage_material()
-            material_number = None
-
     def manage_score(self, menu_header=None, command_string=None):
         while True:
             menu = Menu(client=self.where(), menu_header=menu_header)
             menu.menu_body = self.score_title
             menu_section = MenuSection()
             menu_section.menu_section_title = 'Chunks'
-            menu_section.menu_section_entries = self.list_underscored_chunk_names_with_numbers()
+            menu_section.menu_section_entries = self.list_chunk_spaced_names_with_numbers()
+            menu_section.menu_section_entry_prefix = 'h'
             menu_section.sentence_length_items.append(('ch', '[create chunk]'))
             menu.menu_sections.append(menu_section)
             menu_section = MenuSection()
             menu_section.menu_section_title = 'Materials'
             menu_section.menu_section_entries = self.list_material_underscored_names_with_numbers()
+            menu_section.menu_section_entry_prefix = 'm'
             menu_section.sentence_length_items.append(('ms', 'create material by hand'))
             menu_section.sentence_length_items.append(('mi', 'create material interactively'))
             menu.menu_sections.append(menu_section)
@@ -270,16 +254,21 @@ class ScoreProxy(PackageProxy):
                 self.material_wrangler.create_interactive_material_interactively(menu_header=self.score_title)
             elif key == 'svn':
                 self.manage_svn(menu_header=self.score_title)
-            else:
-                try:
-                    material_number = int(key)
-                    material_underscored_name = self.material_number_to_material_underscored_name(material_number)
-                    package_importable_name = '%s.%s' % (self.materials_package_importable_name, material_underscored_name)
-                    material_proxy = self.get_material_proxy(package_importable_name)
-                    material_proxy.score_title = self.score_title
-                    material_proxy.manage_material(menu_header=menu.menu_title)
-                except (TypeError, ValueError):
-                    pass
+            elif key.startswith('h'):
+                chunk_spaced_name = value
+                chunk_underscored_name = chunk_spaced_name.replace(' ', '_')
+                package_importable_name = '%s.%s' % (self.chunks_package_importable_name, chunk_underscored_name)
+                chunk_proxy = self.get_chunk_proxy(package_importable_name)
+                chunk_proxy.score_title = self.score_title
+                chunk_proxy.manage_chunk(menu_header=menu.menu_title)
+            elif key.startswith('m'):
+                material_number = key[1:]
+                material_number = int(material_number)
+                material_underscored_name = self.material_number_to_material_underscored_name(material_number)
+                package_importable_name = '%s.%s' % (self.materials_package_importable_name, material_underscored_name)
+                material_proxy = self.get_material_proxy(package_importable_name)
+                material_proxy.score_title = self.score_title
+                material_proxy.manage_material(menu_header=menu.menu_title)
 
     def manage_svn(self, menu_header=None):
         while True:
@@ -319,7 +308,7 @@ class ScoreProxy(PackageProxy):
             print '%s %s' % (initializer.ljust(80), os.path.exists(initializer))
 
     def summarize_chunks(self):
-        chunks = self.list_underscored_chunk_names()
+        chunks = self.list_chunk_underscored_names()
         print self.tab(1),
         if not chunks:
             print 'Chunks (none yet)'
