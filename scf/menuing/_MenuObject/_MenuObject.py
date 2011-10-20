@@ -1,4 +1,5 @@
 from abjad.tools import iotools
+import os
 import subprocess
 
 
@@ -73,6 +74,12 @@ class _MenuObject(object):
             print ''
             return False
         return True
+
+    def edit_client_source(self):
+        file_name = self.client[1]
+        line_number = self.client[2]
+        command = 'vi +%s %s' % (line_number, file_name)
+        os.system(command)
 
     def grep_baca(self):
         response = raw_input('regex> ')
