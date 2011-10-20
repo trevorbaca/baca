@@ -26,11 +26,11 @@ class ScoreWrangler(DirectoryProxy):
             print ''
 
     def get_score_package_short_name_from_user(self, menu_header=None):
-        menu_specifier = Menu(client=self.where())
-        menu_specifier.menu_header = menu_header
-        menu_specifier.menu_body = 'select score by number.'
-        menu_specifier.items_to_number = self.list_score_titles_with_years()
-        number, score_title = menu_specifier.display_menu()
+        menu = Menu(client=self.where())
+        menu.menu_header = menu_header
+        menu.menu_body = 'select score by number.'
+        menu.items_to_number = self.list_score_titles_with_years()
+        number, score_title = menu.display_menu()
         score_package_short_name = self.score_title_to_score_package_short_name(score_title)
         return score_package_short_name
 

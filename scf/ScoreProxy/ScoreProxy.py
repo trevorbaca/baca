@@ -245,21 +245,21 @@ class ScoreProxy(PackageProxy):
 
     def manage_score(self, menu_header=None, command_string=None):
         while True:
-            menu_specifier = Menu(client=self.where(), menu_header=menu_header)
-            menu_specifier.menu_body = self.score_title
+            menu = Menu(client=self.where(), menu_header=menu_header)
+            menu.menu_body = self.score_title
             menu_section = MenuSection()
             menu_section.menu_section_title = 'Chunks'
             menu_section.menu_section_entries = self.list_underscored_chunk_names_with_numbers()
             menu_section.sentence_length_items.append(('ch', '[create chunk]'))
-            menu_specifier.menu_sections.append(menu_section)
+            menu.menu_sections.append(menu_section)
             menu_section = MenuSection()
             menu_section.menu_section_title = 'Materials'
             menu_section.menu_section_entries = self.list_material_underscored_names_with_numbers()
             menu_section.sentence_length_items.append(('ms', 'create material by hand'))
             menu_section.sentence_length_items.append(('mi', 'create material interactively'))
-            menu_specifier.menu_sections.append(menu_section)
-            menu_specifier.hidden_items.append(('svn', 'work with repository'))
-            key, value = menu_specifier.display_menu()
+            menu.menu_sections.append(menu_section)
+            menu.hidden_items.append(('svn', 'work with repository'))
+            key, value = menu.display_menu()
             if key == 'b':
                 return key, None
             elif key == 'ch':
@@ -277,22 +277,22 @@ class ScoreProxy(PackageProxy):
                     package_importable_name = '%s.%s' % (self.materials_package_importable_name, material_underscored_name)
                     material_proxy = self.get_material_proxy(package_importable_name)
                     material_proxy.score_title = self.score_title
-                    material_proxy.manage_material(menu_header=menu_specifier.menu_title)
+                    material_proxy.manage_material(menu_header=menu.menu_title)
                 except (TypeError, ValueError):
                     pass
 
     def manage_svn(self, menu_header=None):
         while True:
-            menu_specifier = Menu(client=self.where())
-            menu_specifier.menu_header = menu_header
-            menu_specifier.menu_body = 'repository commands'
+            menu = Menu(client=self.where())
+            menu.menu_header = menu_header
+            menu.menu_body = 'repository commands'
             menu_section = MenuSection()
             menu_section.sentence_length_items.append(('st', 'svn status'))
             menu_section.sentence_length_items.append(('add', 'svn add'))
             menu_section.sentence_length_items.append(('ci', 'svn commit'))
             menu_section.layout = 'line'
-            menu_specifier.menu_sections.append(menu_section)
-            key, value = menu_specifier.display_menu()
+            menu.menu_sections.append(menu_section)
+            key, value = menu.display_menu()
             if key == 'b':
                 return key, None
             elif key == 'add':

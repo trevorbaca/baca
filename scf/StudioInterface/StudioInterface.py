@@ -41,14 +41,14 @@ class StudioInterface(DirectoryProxy):
 
     def get_materials_package_importable_name_interactively(self, menu_header=None):
         while True:
-            menu_specifier = Menu(client=self.where(), menu_header=menu_header)
-            menu_specifier.menu_body = 'select materials directory'
+            menu = Menu(client=self.where(), menu_header=menu_header)
+            menu.menu_body = 'select materials directory'
             menu_section = MenuSection()
             score_titles = self.score_wrangler.list_numbered_score_titles_with_years()
             menu_section.menu_section_entries = score_titles
             menu_section.sentence_length_items.append(('baca', 'baca materials directory'))
-            menu_specifier.menu_sections.append(menu_section)
-            key, value = menu_specifier.display_menu()
+            menu.menu_sections.append(menu_section)
+            key, value = menu.display_menu()
             if key == 'baca':
                 return self.baca_materials_package_importable_name
             else:
@@ -60,30 +60,30 @@ class StudioInterface(DirectoryProxy):
 
     def manage_svn(self, menu_header=None):
         while True:
-            menu_specifier = Menu(client=self.where())
-            menu_specifier.menu_header = menu_header
-            menu_specifier.menu_body = 'repository commands'
+            menu = Menu(client=self.where())
+            menu.menu_header = menu_header
+            menu.menu_body = 'repository commands'
             menu_section = MenuSection()
             menu_section.sentence_length_items.append(('add', 'svn add'))
             menu_section.sentence_length_items.append(('ci', 'svn commit'))
             menu_section.sentence_length_items.append(('st', 'svn status'))
             menu_section.sentence_length_items.append(('up', 'svn update'))
             menu_section.layout = 'line'
-            menu_specifier.menu_sections.append(menu_section)
+            menu.menu_sections.append(menu_section)
             menu_section = MenuSection()
             menu_section.sentence_length_items.append(('add scores', 'svn add (scores)'))
             menu_section.sentence_length_items.append(('ci scores', 'svn commit (scores)'))
             menu_section.sentence_length_items.append(('st scores', 'svn status (scores)'))
             menu_section.sentence_length_items.append(('up scores', 'svn update (scores)'))
             menu_section.layout = 'line'
-            menu_specifier.menu_sections.append(menu_section)
+            menu.menu_sections.append(menu_section)
             menu_section = MenuSection()
             menu_section.sentence_length_items.append(('pytest', 'run regression tests'))
             menu_section.sentence_length_items.append(('pytest scores', 'run regression tests (scores)'))
             menu_section.sentence_length_items.append(('pytest all', 'run regression tests (all)'))
             menu_section.layout = 'line'
-            menu_specifier.menu_sections.append(menu_section)
-            key, value = menu_specifier.display_menu()
+            menu.menu_sections.append(menu_section)
+            key, value = menu.display_menu()
             if key == 'b':
                 return key, None
             elif key == 'add':
@@ -124,18 +124,18 @@ class StudioInterface(DirectoryProxy):
     
     def work_in_studio(self, menu_header=None):
         while True:
-            menu_specifier = Menu(client=self.where(), menu_header=menu_header)
-            menu_specifier.menu_body = 'welcome to the studio.'
+            menu = Menu(client=self.where(), menu_header=menu_header)
+            menu.menu_body = 'welcome to the studio.'
             menu_section = MenuSection()
             score_titles = self.score_wrangler.list_numbered_score_titles_with_years()
             menu_section.menu_section_entries = score_titles
             menu_section.sentence_length_items.append(('makers', 'work with material makers'))
             menu_section.sentence_length_items.append(('shared', 'work with shared materials'))
             menu_section.hidden_items.append(('svn', 'work with repository'))
-            menu_specifier.menu_sections.append(menu_section)
-            menu_specifier.include_back = False
-            menu_specifier.include_studio = False
-            key, value = menu_specifier.display_menu()
+            menu.menu_sections.append(menu_section)
+            menu.include_back = False
+            menu.include_studio = False
+            key, value = menu.display_menu()
             if key == 'makers':
                 self.maker_wrangler.manage_makers(menu_header='studio')
             elif key == 'shared':

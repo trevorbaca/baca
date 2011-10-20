@@ -259,30 +259,30 @@ class _Maker(_SCFObject):
         self._original_material_underscored_name = self.material_underscored_name
         self._original_user_input_wrapper = copy.deepcopy(user_input_wrapper)
         while True:
-            menu_specifier = Menu(client=self.where())
+            menu = Menu(client=self.where())
             menu_body = '%s - %s - %s - edit interactively'
             menu_body %= (self.location_name, self.spaced_class_name, self.material_menu_name)
             menu_body = self.append_status_indicator(menu_body)
-            menu_specifier.menu_body = menu_body
-            menu_specifier.items_to_number = self.user_input_wrapper.editable_lines
+            menu.menu_body = menu_body
+            menu.items_to_number = self.user_input_wrapper.editable_lines
             if self.user_input_wrapper.is_complete:
-                menu_specifier.sentence_length_items.append(('p', 'show pdf of given input'))
-                menu_specifier.sentence_length_items.append(('m', 'write material to disk'))
+                menu.sentence_length_items.append(('p', 'show pdf of given input'))
+                menu.sentence_length_items.append(('m', 'write material to disk'))
             if self.has_material_underscored_name:
-                menu_specifier.sentence_length_items.append(('n', 'rename material'))
+                menu.sentence_length_items.append(('n', 'rename material'))
             else:
-                menu_specifier.sentence_length_items.append(('n', 'name material'))
-            menu_specifier.sentence_length_items.append(('nc', 'clear name'))
-            menu_specifier.sentence_length_items.append(('d', 'show demo input values'))
-            menu_specifier.sentence_length_items.append(('o', 'overwrite with demo input values'))
-            menu_specifier.sentence_length_items.append(('i', 'import values'))
-            menu_specifier.sentence_length_items.append(('c', 'clear values'))
-            #menu_specifier.sentence_length_items.append(('src', 'edit source'))
+                menu.sentence_length_items.append(('n', 'name material'))
+            menu.sentence_length_items.append(('nc', 'clear name'))
+            menu.sentence_length_items.append(('d', 'show demo input values'))
+            menu.sentence_length_items.append(('o', 'overwrite with demo input values'))
+            menu.sentence_length_items.append(('i', 'import values'))
+            menu.sentence_length_items.append(('c', 'clear values'))
+            #menu.sentence_length_items.append(('src', 'edit source'))
             if self.has_location:
-                menu_specifier.sentence_length_items.append(('l', 'change location'))
+                menu.sentence_length_items.append(('l', 'change location'))
             else:
-                menu_specifier.sentence_length_items.append(('l', 'set location'))
-            key, value = menu_specifier.display_menu()
+                menu.sentence_length_items.append(('l', 'set location'))
+            key, value = menu.display_menu()
             if key == 'b':
                 self.interactively_check_and_save_material(self.user_input_wrapper)
                 return key, None
@@ -293,7 +293,7 @@ class _Maker(_SCFObject):
             elif key == 'i':
                 self.import_values()
             elif key == 'l':
-                menu_header = ' - '.join(menu_specifier.menu_title_parts[:-1])
+                menu_header = ' - '.join(menu.menu_title_parts[:-1])
                 self.set_location(menu_header=menu_header)
             elif key == 'm':
                 self.save_material(self.user_input_wrapper)
@@ -421,14 +421,14 @@ class _Maker(_SCFObject):
         self.score = result
 
     def show_demo_input_values(self, menu_header=None):
-        menu_specifier = Menu(client=self.where(), menu_header=menu_header)
-        menu_specifier.menu_body = 'demo values'
+        menu = Menu(client=self.where(), menu_header=menu_header)
+        menu.menu_body = 'demo values'
         items = []
         for i, (key, value) in enumerate(self.user_input_template.iteritems()):
             item = '%s: %r' % (key.replace('_', ' '), value)
             items.append(item)
-        menu_specifier.items_to_number = items
-        menu_specifier.display_menu(score_title=self.score_title)
+        menu.items_to_number = items
+        menu.display_menu(score_title=self.score_title)
 
     def unname_material(self):
         self.material_underscored_name = None
