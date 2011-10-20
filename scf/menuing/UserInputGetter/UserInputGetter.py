@@ -74,7 +74,7 @@ class UserInputGetter(_MenuObject):
                          return
                     elif response == 'help':
                         if i < len(self.helps):
-                            print self.helps[i] + '\n'
+                            print self.helps[i].capitalize() + '\n'
                         else:
                             print 'Help string not available.\n'
                     elif response == 'prev':

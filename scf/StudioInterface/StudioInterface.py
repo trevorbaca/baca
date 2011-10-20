@@ -15,7 +15,7 @@ class StudioInterface(DirectoryProxy):
         directory = os.environ.get('BACA', 'works')
         DirectoryProxy.__init__(self, directory)
         self._maker_wrangler = MakerWrangler()
-        self._material_wrangler = MaterialWrangler(purview=self)
+        self._material_wrangler = MaterialWrangler('baca.materials')
         self._score_wrangler = ScoreWrangler()
 
     ### OVERLOADS ###

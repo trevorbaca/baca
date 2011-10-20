@@ -6,14 +6,17 @@ import sys
 
 class DirectoryProxy(_SCFObject):
 
-    def __init__(self, directory_name):
+    def __init__(self, directory_name=None):
         _SCFObject.__init__(self)
         self.directory_name = directory_name
 
     ### OVERLOADS ###
 
     def __repr__(self):
-        return '%s(%r)' % (self.class_name, self.directory_name)
+        if self.directory_name is not None:
+            return '%s(%r)' % (self.class_name, self.directory_name)
+        else:
+            return '%s()' % self.class_name
 
     ### PUBLIC ATTRIBUTES ###
 
@@ -26,7 +29,7 @@ class DirectoryProxy(_SCFObject):
         def fget(self):
             return self._directory_name
         def fset(self, directory_name):
-            assert isinstance(directory_name, str)
+            assert isinstance(directory_name, (str, type(None)))
             self._directory_name = directory_name
         return property(**locals())
 
@@ -79,6 +82,11 @@ class DirectoryProxy(_SCFObject):
 
     def create_directory(self):
         os.mkdir(self.directory_name)
+
+    def get_directory_name_interactively(self):
+        getter = self.UserInputGetter()
+        getter.prompts.append('directory name')
+        self.directory_name = getter.run()
 
     def remove(self):
         if self.is_in_repository:

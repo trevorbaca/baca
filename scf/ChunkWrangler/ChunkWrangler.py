@@ -7,34 +7,15 @@ import os
 
 class ChunkWrangler(PackageProxy):
 
-    def __init__(self, package_importable_name, purview=None):
-        from baca.scf.StudioInterface import StudioInterface
+    def __init__(self, package_importable_name):
         PackageProxy.__init__(self, package_importable_name)
-        self._purview = purview
-        if purview is None:
-            self._purview = StudioInterface()
-        else:
-            self._purview = purview
-
-    ### PUBLIC ATTRIBUTES ###
-
-    def purview(self):
-        return self._purview
 
     ### PUBLIC METHODS ###
 
     def create_chunk_interactively(self, menu_header=None):
-        getter = self.UserInputGetter(client=self.where(), menu_header=menu_header)
-        getter.menu_body = 'create chunk'
-        getter.prompts.append('chunk name')
-        getter.tests.append(iotools.is_space_delimited_lowercase_string)
-        getter.helps.append('must be space-delimited lowercase string.')
-        chunk_spaced_name = getter.run()
-        package_short_name = chunk_spaced_name.replace(' ', '_')
-        package_importable_name = '.'.join([self.package_importable_name, package_short_name])
-        chunk_proxy = ChunkProxy(package_importable_name)
-        chunk_proxy.create_chunk()
-        self.proceed()
+        chunk_proxy = self.ChunkProxy()
+        chunk.purview = self.purview
+        chunk_proxy.create_chunk_interactively()
 
     def list_chunk_directories(self):
         chunk_directories = []

@@ -1,4 +1,3 @@
-from baca.scf.DirectoryProxy import DirectoryProxy
 from baca.scf.InteractiveMaterialProxy import InteractiveMaterialProxy
 from baca.scf.MakerWrangler import MakerWrangler
 from baca.scf.menuing import Menu
@@ -7,16 +6,10 @@ from baca.scf.StaticMaterialProxy import StaticMaterialProxy
 import os
 
 
-class MaterialWrangler(DirectoryProxy):
+class MaterialWrangler(PackageProxy):
 
-    def __init__(self, purview=None):
-        from baca.scf.StudioInterface import StudioInterface
-        directory = os.path.join(os.environ.get('BACA'), 'materials')
-        DirectoryProxy.__init__(self, directory)
-        if purview is None:
-            self._purview = StudioInterface()
-        else:
-            self._purview = purview
+    def __init__(self, package_importable_name):
+        PackageProxy.__init__(self, package_importable_name)
         self._maker_wrangler = MakerWrangler()
 
     ### OVERLOADS ###
@@ -39,10 +32,6 @@ class MaterialWrangler(DirectoryProxy):
     @property
     def maker_wrangler(self):
         return self._maker_wrangler
-
-    @property
-    def purview(self):
-        return self._purview
 
     ### PUBLIC METHODS ###
 

@@ -1,3 +1,4 @@
+from abjad.tools import iotools
 from baca.scf.DirectoryProxy import DirectoryProxy
 from baca.scf.menuing import UserInputGetter
 import os
@@ -6,7 +7,7 @@ import sys
 
 class PackageProxy(DirectoryProxy):
 
-    def __init__(self, package_importable_name):
+    def __init__(self, package_importable_name=None):
         directory_name = self.package_importable_name_to_directory(package_importable_name)
         DirectoryProxy.__init__(self, directory_name)
         self._package_importable_name = package_importable_name
@@ -14,7 +15,10 @@ class PackageProxy(DirectoryProxy):
     ### OVERLOADS ###
 
     def __repr__(self):
-        return '%s(%r)' % (self.class_name, self.package_importable_name)
+        if self.package_importable_name is not None:
+            return '%s(%r)' % (self.class_name, self.package_importable_name)
+        else:
+            return '%s()' % self.class_name
 
     ### PUBLIC ATTRIBUTES ###
 
@@ -30,9 +34,18 @@ class PackageProxy(DirectoryProxy):
     def initializer_file_name(self):
         return os.path.join(self.directory_name, '__init__.py')
 
-    @property
-    def package_importable_name(self):
-        return self._package_importable_name
+    @apply
+    def package_importable_name():
+        def fget(self):
+            return self._package_importable_name
+        def fset(self, package_importable_name):
+            assert isinstance(package_importable_name, (str, type(None)))
+            if isinstance(package_importable_name, str):
+                assert iotools.is_underscore_delimited_lowercase_package_name(package_importable_name)
+            self._package_importable_name = package_importable_name
+            directory_name = self.package_importable_name_to_directory(package_importable_name)
+            self.directory_name = directory_name
+        return property(**locals())
 
     @property
     def package_short_name(self):
@@ -49,6 +62,10 @@ class PackageProxy(DirectoryProxy):
     @property
     def parent_package_importable_name(self):
         return '.'.join(self.package_importable_name.split('.')[:-1])
+
+    @property
+    def purview(self):
+        return self.package_importable_name_to_purview(self.package_importable_name)
 
     ### PRIVATE METHODS ###
 
@@ -195,13 +212,22 @@ class PackageProxy(DirectoryProxy):
             elif key == 'del':
                 self.delete_tag_interactively(menu_header=menu.menu_title)
 
-    #@staticmethod
     def remove_package_importable_name_from_sys_modules(self, package_importable_name):
         '''Total hack. But works.
         '''
         command = "if '%s' in sys.modules: del(sys.modules['%s'])" % (
             package_importable_name, package_importable_name)
         exec(command)
+
+    def set_package_importable_name_interactively(self):
+        getter = self.UserInputGetter()
+        getter.prompts.append('package importable name')
+        getter.tests.append(iotools.is_underscore_delimited_lowercase_package_name)
+        getter.helps.append('must be underscore-delimited lowercase package name.')
+        self.package_importable_name = getter.run()
+
+    def set_packge_spaced_name_interactively(self):
+        self.print_not_implemented()
 
     def unimport_baca_package(self):
         self.remove_package_importable_name_from_sys_modules('baca')
