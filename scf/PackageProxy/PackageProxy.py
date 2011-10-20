@@ -101,7 +101,7 @@ class PackageProxy(DirectoryProxy):
         user_input_getter.menu_body = 'add tag'
         user_input_getter.prompts.append('Tag name> ')
         user_input_getter.prompts.append('Tag value> ')
-        user_input = user_input_getter.get_user_input()
+        user_input = user_input_getter.run()
         if user_input:
             tag_name, tag_value = user_input
             self.add_tag(tag_name, tag_value)
@@ -125,7 +125,7 @@ class PackageProxy(DirectoryProxy):
         user_input_getter.menu_header = menu_header
         user_input_getter.menu_body = 'delete tag'
         user_input_getter.prompts.append('Tag name> ')
-        user_input = user_input_getter.get_user_input(clear_terminal=False)
+        user_input = user_input_getter.run(clear_terminal=False)
         if user_input:
             tag_name = user_input[0]
             self.delete_tag(tag_name)

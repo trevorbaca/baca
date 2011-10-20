@@ -152,6 +152,7 @@ class Menu(_MenuObject, _SCFObject):
         default_hidden_items = []
         if self.include_back:
             default_hidden_items.append(('b', 'back'))
+        default_hidden_items.append(('grep', 'grep baca directories'))
         default_hidden_items.append(('hidden', 'show hidden items'))
         default_hidden_items.append(('q', 'quit'))
         default_hidden_items.append(('redraw', 'redraw'))
@@ -292,6 +293,8 @@ class Menu(_MenuObject, _SCFObject):
                 return key, None
             elif key == 'exec':
                 self.exec_statement()
+            elif key == 'grep':
+                self.grep_baca()
             elif key == 'hidden':
                 self.show_hidden_items()
             elif key == 'q':

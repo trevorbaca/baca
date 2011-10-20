@@ -25,6 +25,16 @@ class _SCFObject(object):
     ### PUBLIC ATTRIBUTES ###
 
     @property
+    def Menu(self):
+        from baca.scf.menuing import Menu
+        return Menu
+
+    @property
+    def UserInputGetter(self):
+        from baca.scf.menuing import UserInputGetter
+        return UserInputGetter
+
+    @property
     def baca_directory_name(self):
         return self._baca_directory_name
 

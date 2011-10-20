@@ -87,9 +87,8 @@ class UserInputGetter(_MenuObject):
                     else:
                         try:
                             value = eval(response)
-                        except NameError:
-                            print 'evaluation not understood.\n'
-                            continue
+                        except (NameError, SyntaxError):
+                            value = response
                         if i < len(self.input_tests):
                             input_test = self.input_tests[i]
                             if input_test(value):

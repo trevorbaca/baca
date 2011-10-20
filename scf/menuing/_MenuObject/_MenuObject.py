@@ -1,4 +1,5 @@
 from abjad.tools import iotools
+import subprocess
 
 
 class _MenuObject(object):
@@ -72,6 +73,12 @@ class _MenuObject(object):
             print ''
             return False
         return True
+
+    def grep_baca(self):
+        response = raw_input('regex> ')
+        command = 'grep -Irn "%s" * | grep -v svn' % response
+        proc = subprocess.Popen(command, shell=True, stdout=subprocess.PIPE)
+        print ''.join(proc.stdout.readlines())
 
     def print_tab(self, n):
         if 0 < n:
