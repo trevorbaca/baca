@@ -27,8 +27,8 @@ class ChunkWrangler(PackageProxy):
         getter = self.UserInputGetter(client=self.where(), menu_header=menu_header)
         getter.menu_body = 'create chunk'
         getter.prompts.append('chunk name')
-        getter.input_tests.append(iotools.is_space_delimited_lowercase_string)
-        getter.input_help_strings.append('must be space-delimited lowercase string.')
+        getter.tests.append(iotools.is_space_delimited_lowercase_string)
+        getter.helps.append('must be space-delimited lowercase string.')
         chunk_spaced_name = getter.run()
         package_short_name = chunk_spaced_name.replace(' ', '_')
         package_importable_name = '.'.join([self.package_importable_name, package_short_name])

@@ -11,17 +11,17 @@ class Menu(_MenuObject, _SCFObject):
         named_pairs=None, secondary_named_pairs=None, hidden_items=None,
         include_back=True, include_studio=True, indent_level=1, item_width = 11, 
         should_clear_terminal=True, hide_menu=False):
-        _MenuObject.__init__(self, menu_header=menu_header, menu_body=menu_body)
+        _MenuObject.__init__(
+            self, menu_header=menu_header, menu_body=menu_body, hidden_items=hidden_items,
+            indent_level=indent_level)
         self.client = client
         self.menu_sections = menu_sections
         self.items_to_number = items_to_number
         self.sentence_length_items = sentence_length_items
         self.named_pairs = named_pairs
         self.secondary_named_pairs = secondary_named_pairs
-        self.hidden_items = hidden_items
         self.include_back = include_back
         self.include_studio = include_studio
-        self.indent_level = indent_level
         self.item_width = item_width
         self.should_clear_terminal = should_clear_terminal
         self.hide_menu = hide_menu
@@ -128,50 +128,29 @@ class Menu(_MenuObject, _SCFObject):
                 print ''
 
     def _get_footer_pairs(self):
-#        footer_pairs = [
-#            ('q', 'quit'),
-#            ('w', 'redraw'),
-#            ]
-#        if self.include_back:
-#            footer_pairs.append(('b', 'back'))
         footer_pairs = []
         footer_pairs.sort()
         return footer_pairs
 
-    def _print_tab(self, n):
-        if 0 < n:
-            print self._tab(n),
-
-    def _tab(self, n):
-        return 4 * n * ' '
+#    def _print_tab(self, n):
+#        if 0 < n:
+#            print self._tab(n),
+#
+#    def _tab(self, n):
+#        return 4 * n * ' '
 
     ### PUBLIC ATTRIBUTES ###
     
-    @property
-    def default_hidden_items(self):
-        default_hidden_items = []
-        if self.include_back:
-            default_hidden_items.append(('b', 'back'))
-        default_hidden_items.append(('grep', 'grep baca directories'))
-        default_hidden_items.append(('here', 'edit client source'))
-        default_hidden_items.append(('hidden', 'show hidden items'))
-        default_hidden_items.append(('q', 'quit'))
-        default_hidden_items.append(('redraw', 'redraw'))
-        default_hidden_items.append(('exec', 'exec statement'))
-        default_hidden_items.append(('studio', 'return to studio'))
-        default_hidden_items.append(('where', 'show menu client'))
-        return default_hidden_items
-
-    @apply
-    def hidden_items():
-        def fget(self):
-            return self._hidden_items
-        def fset(self, hidden_items):
-            if hidden_items is None:
-                self._hidden_items = []
-            else:
-                self._hidden_items = hidden_items[:]
-        return property(**locals())
+#    @apply
+#    def hidden_items():
+#        def fget(self):
+#            return self._hidden_items
+#        def fset(self, hidden_items):
+#            if hidden_items is None:
+#                self._hidden_items = []
+#            else:
+#                self._hidden_items = hidden_items[:]
+#        return property(**locals())
 
     @apply
     def hide_menu():
@@ -198,15 +177,6 @@ class Menu(_MenuObject, _SCFObject):
         def fset(self, include_studio):
             assert isinstance(include_studio, type(True))
             self._include_studio = include_studio
-        return property(**locals())
-
-    @apply
-    def indent_level():
-        def fget(self):
-            return self._indent_level
-        def fset(self, indent_level):
-            assert isinstance(indent_level, int)
-            self._indent_level = indent_level
         return property(**locals())
 
     @apply
@@ -290,41 +260,11 @@ class Menu(_MenuObject, _SCFObject):
             self.should_clear_terminal, self.hide_menu = should_clear_terminal, hide_menu
             key, value = self._display_menu()
             should_clear_terminal, hide_menu = False, True
-            if key == 'b':
+            if self.handle_hidden_key(key):
+                pass
+            elif key == 'b':
                 return key, None
-            elif key == 'exec':
-                self.exec_statement()
-            elif key == 'grep':
-                self.grep_baca()
-            elif key == 'here':
-                self.edit_client_source()
-            elif key == 'hidden':
-                self.show_hidden_items()
-            elif key == 'q':
-                raise SystemExit
             elif key == 'redraw':
                 should_clear_terminal, hide_menu = True, False
-            elif key == 'studio':
-                raise StudioException
-            elif key == 'where':
-                self.show_menu_client()
             else:
                 return key, value
-
-    def exec_statement(self):
-        statement = raw_input('xcf> ')
-        exec('from abjad import *')
-        exec('result = %s' % statement)
-        print repr(result) + '\n'
-
-    def show_hidden_items(self):
-        hidden_items = []
-        hidden_items.extend(self.default_hidden_items)
-        hidden_items.extend(self.hidden_items)
-        for section in self.menu_sections:
-            hidden_items.extend(section.hidden_items)
-        hidden_items.sort()
-        for key, value in hidden_items:
-            self._print_tab(self.indent_level),
-            print '%s: %s' % (key, value)
-        print ''

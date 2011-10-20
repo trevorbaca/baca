@@ -3,12 +3,12 @@ from baca.scf.menuing._MenuObject import _MenuObject
 
 class UserInputGetter(_MenuObject):
 
-    def __init__(self, client=None, prompts=None, input_tests=None, input_help_strings=None,
+    def __init__(self, client=None, prompts=None, tests=None, helps=None,
         menu_header=None, menu_body=None):
         _MenuObject.__init__(self, client=client, menu_header=menu_header, menu_body=menu_body)
         self.prompts = prompts
-        self.input_tests = input_tests
-        self.input_help_strings = input_help_strings
+        self.tests = tests
+        self.helps = helps
 
     ### OVERLOADS ###
 
@@ -18,26 +18,26 @@ class UserInputGetter(_MenuObject):
     ### PUBLIC ATTRIBUTES ###
 
     @apply
-    def input_help_strings():
+    def helps():
         def fget(self):
-            return self._input_help_strings
-        def fset(self, input_help_strings):
-            if input_help_strings is None:
-                self._input_help_strings = []
+            return self._helps
+        def fset(self, helps):
+            if helps is None:
+                self._helps = []
             else:
-                assert all([isinstance(x, str) for x in input_help_strings])
-                self._input_help_strings = input_help_strings
+                assert all([isinstance(x, str) for x in helps])
+                self._helps = helps
         return property(**locals())
 
     @apply
-    def input_tests():
+    def tests():
         def fget(self):
-            return self._input_tests
-        def fset(self, input_tests):
-            if input_tests is None:
-                self._input_tests = []
+            return self._tests
+        def fset(self, tests):
+            if tests is None:
+                self._tests = []
             else:
-                self._input_tests = input_tests
+                self._tests = tests
         return property(**locals())
 
     @apply
@@ -67,48 +67,43 @@ class UserInputGetter(_MenuObject):
                 prompt = prompt + '> '
                 while True:
                     response = raw_input(prompt)
-                    if response == 'b':
+                    print ''
+                    if self.handle_hidden_key(response):
+                        continue
+                    elif response == 'b':
                          return
                     elif response == 'help':
-                        if i < len(self.input_help_strings):
-                            print self.input_help_strings[i] + '\n'
+                        if i < len(self.helps):
+                            print self.helps[i] + '\n'
                         else:
                             print 'Help string not available.\n'
                     elif response == 'prev':
                         values.pop()
                         i = i - 1
-                        print ''
                         break
-                    elif response == 'q':
-                        raise SystemExit
                     elif response == 'skip':
-                        print ''
-                        return None
+                        return
                     else:
                         try:
                             value = eval(response)
                         except (NameError, SyntaxError):
                             value = response
-                        if i < len(self.input_tests):
-                            input_test = self.input_tests[i]
+                        if i < len(self.tests):
+                            input_test = self.tests[i]
                             if input_test(value):
                                 values.append(value)
                                 i = i + 1
-                                print ''
                                 break
                             else:
-                                if i < len(self.input_help_strings):
-                                    print self.input_help_strings[i] + '\n'
+                                if i < len(self.helps):
+                                    print self.helps[i] + '\n'
                         else:
                             values.append(value)
                             i = i + 1
-                            print ''
                             break
         except KeyboardInterrupt:
-            print ''
             return
         except SystemExit:
-            print ''
             raise SystemExit
         if len(values) == 1:
             return values[0]
