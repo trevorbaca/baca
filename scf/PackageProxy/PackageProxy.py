@@ -11,6 +11,7 @@ class PackageProxy(DirectoryProxy):
         directory_name = self.package_importable_name_to_directory(package_importable_name)
         DirectoryProxy.__init__(self, directory_name)
         self._package_importable_name = package_importable_name
+        self._purview = None
 
     ### OVERLOADS ###
 
@@ -53,7 +54,8 @@ class PackageProxy(DirectoryProxy):
 
     @property
     def package_spaced_name(self):
-        return self.package_short_name.replace('_', ' ')
+        if self.package_short_name is not None:
+            return self.package_short_name.replace('_', ' ')
         
     @property
     def parent_initializer(self):
@@ -63,9 +65,19 @@ class PackageProxy(DirectoryProxy):
     def parent_package_importable_name(self):
         return '.'.join(self.package_importable_name.split('.')[:-1])
 
-    @property
-    def purview(self):
-        return self.package_importable_name_to_purview(self.package_importable_name)
+    @apply
+    def purview():
+        def fget(self):
+            if self._purview is not None:
+                return self._purview
+            else:
+                return self.package_importable_name_to_purview(self.package_importable_name)
+        def fset(self, purview):
+            if self.package_importable_name is None:
+                self._purview = purview
+            else:
+                raise ValueError('package importable name already assigned.')
+        return property(**locals())
 
     ### PRIVATE METHODS ###
 
@@ -136,6 +148,11 @@ class PackageProxy(DirectoryProxy):
         initializer.write('')
         initializer.close()
 
+    def delete_package(self):
+        result = self.remove()
+        if result:
+            self.proceed()
+        
     def delete_tag(self, tag_name):
         tags = self.get_tags()
         del(tags[tag_name])
@@ -226,11 +243,18 @@ class PackageProxy(DirectoryProxy):
         getter.helps.append('must be underscore-delimited lowercase package name.')
         self.package_importable_name = getter.run()
 
-    def set_packge_spaced_name_interactively(self):
+    def set_package_spaced_name_interactively(self):
+        self.print_not_implemented()
+
+    def set_purview_interactively(self):
         self.print_not_implemented()
 
     def unimport_baca_package(self):
         self.remove_package_importable_name_from_sys_modules('baca')
+
+
+    def write_package_to_disk(self):
+        self.print_not_implemented()
 
     def write_tags_to_initializer(self, tags):
         lines = []

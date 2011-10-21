@@ -20,7 +20,7 @@ class ChunkWrangler(PackageProxy):
 
     def create_chunk_interactively(self, menu_header=None):
         chunk_proxy = self.ChunkProxy()
-        chunk_proxy.package_importable_name = self.package_importable_name
+        chunk_proxy.purview = self.purview
         chunk_proxy.create_chunk_interactively()
 
     def list_chunk_directories(self):

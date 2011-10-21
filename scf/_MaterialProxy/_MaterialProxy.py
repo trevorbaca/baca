@@ -147,15 +147,9 @@ class _MaterialProxy(PackageProxy):
         file_pointer.close()
         self.edit_visualizer()
 
-    # TODO: move to package proxy
     def delete_material(self):
         self.remove_material_from_materials_initializer()
-        result = self.remove()
-        if result:
-            self.proceed()
-
-    #def edit_initializer(self):
-    #    os.system('vi %s' % self.initializer_file_name)
+        PackageProxy.delete_package(self)
 
     def edit_input_file(self):
         os.system('vi + %s' % self.input_file_name)

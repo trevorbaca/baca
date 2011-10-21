@@ -22,7 +22,8 @@ class DirectoryProxy(_SCFObject):
 
     @property
     def base_name(self):
-        return os.path.basename(self.directory_name)
+        if self.directory_name is not None:
+            return os.path.basename(self.directory_name)
 
     @apply
     def directory_name():

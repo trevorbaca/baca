@@ -3,6 +3,10 @@ from baca.scf.PackageProxy import PackageProxy
 
 class ChunkProxy(PackageProxy):
 
+    def __init__(self, package_importable_name=None, score_template=None):
+        PackageProxy.__init__(self, package_importable_name=package_importable_name)
+        self.score_template = score_template
+
     ### PUBLIC ATTRIBUTES ###
 
     @property
@@ -12,6 +16,17 @@ class ChunkProxy(PackageProxy):
     @property
     def chunk_underscored_name(self):
         return self.package_short_name
+
+    @apply
+    def score_template():
+        def fget(self):
+            return self._score_template
+        def fset(self, score_template):
+            from abjad.tools import scoretools
+            assert isinstance(score_template, (scoretools.Score, type(None)))
+            self._score_template = score_template
+
+        return property(**locals())
 
     ### PUBLIC METHODS ###
 
@@ -27,14 +42,8 @@ class ChunkProxy(PackageProxy):
             self.set_package_spaced_name_interactively()
         if self.score_template is None:
             self.set_score_template_interactively()
-        self.write_to_disk()
+        self.write_package_to_disk()
         self.proceed()
-
-    # TODO: move to package proxy
-    def delete_chunk(self):
-        result = self.remove()
-        if result:
-            self.proceed()
 
     def set_chunk_spaced_name_interactively(self):
         getter = self.UserInputGetter(client=self.where(), menu_header=menu_header)
@@ -60,7 +69,10 @@ class ChunkProxy(PackageProxy):
             if key == 'b':
                 return key, None
             elif key == 'd':
-                self.delete_chunk()
+                self.delete_package()
                 break
             elif key == 'n':
                 self.edit_initializer()
+
+    def set_score_template_interactively(self):
+        self.print_not_implemented()
