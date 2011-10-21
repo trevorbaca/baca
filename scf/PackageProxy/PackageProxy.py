@@ -1,6 +1,5 @@
 from abjad.tools import iotools
 from baca.scf.DirectoryProxy import DirectoryProxy
-from baca.scf.menuing import UserInputGetter
 import os
 import sys
 
@@ -209,15 +208,13 @@ class PackageProxy(DirectoryProxy):
         return formatted_tags
 
     def manage_tags(self, menu_header=None):
-        from baca.scf.menuing import MenuSection
-        from baca.scf.menuing import Menu
         while True:
-            menu = Menu(client=self.where(), menu_header=menu_header)
+            menu = self.Menu(client=self.where(), menu_header=menu_header)
             menu.menu_body = 'tags'
-            section = MenuSection()
+            section = self.MenuSection()
             section.lines_to_list = self.list_formatted_tags()
             menu.menu_sections.append(section)
-            section = MenuSection()
+            section = self.MenuSection()
             section.sentence_length_items.append(('add', 'add tag'))
             section.sentence_length_items.append(('del', 'delete tag'))
             menu.menu_sections.append(section)

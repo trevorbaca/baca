@@ -30,6 +30,11 @@ class _SCFObject(object):
         return Menu
 
     @property
+    def MenuSection(self):
+        from baca.scf.menuing import MenuSection
+        return MenuSection
+
+    @property
     def UserInputGetter(self):
         from baca.scf.menuing import UserInputGetter
         return UserInputGetter

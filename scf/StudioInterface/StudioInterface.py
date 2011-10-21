@@ -3,8 +3,6 @@ from baca.scf.MakerWrangler import MakerWrangler
 from baca.scf.MaterialWrangler import MaterialWrangler
 from baca.scf.ScoreProxy import ScoreProxy
 from baca.scf.ScoreWrangler import ScoreWrangler
-from baca.scf.menuing import MenuSection
-from baca.scf.menuing import Menu
 import os
 import subprocess
 
@@ -41,9 +39,9 @@ class StudioInterface(DirectoryProxy):
 
     def get_materials_package_importable_name_interactively(self, menu_header=None):
         while True:
-            menu = Menu(client=self.where(), menu_header=menu_header)
+            menu = self.Menu(client=self.where(), menu_header=menu_header)
             menu.menu_body = 'select materials directory'
-            menu_section = MenuSection()
+            menu_section = self.MenuSection()
             score_titles = self.score_wrangler.list_numbered_score_titles_with_years()
             menu_section.menu_section_entries = score_titles
             menu_section.sentence_length_items.append(('baca', 'baca materials directory'))
@@ -60,24 +58,24 @@ class StudioInterface(DirectoryProxy):
 
     def manage_svn(self, menu_header=None):
         while True:
-            menu = Menu(client=self.where())
+            menu = self.Menu(client=self.where())
             menu.menu_header = menu_header
             menu.menu_body = 'repository commands'
-            menu_section = MenuSection()
+            menu_section = self.MenuSection()
             menu_section.sentence_length_items.append(('add', 'svn add'))
             menu_section.sentence_length_items.append(('ci', 'svn commit'))
             menu_section.sentence_length_items.append(('st', 'svn status'))
             menu_section.sentence_length_items.append(('up', 'svn update'))
             menu_section.layout = 'line'
             menu.menu_sections.append(menu_section)
-            menu_section = MenuSection()
+            menu_section = self.MenuSection()
             menu_section.sentence_length_items.append(('add scores', 'svn add (scores)'))
             menu_section.sentence_length_items.append(('ci scores', 'svn commit (scores)'))
             menu_section.sentence_length_items.append(('st scores', 'svn status (scores)'))
             menu_section.sentence_length_items.append(('up scores', 'svn update (scores)'))
             menu_section.layout = 'line'
             menu.menu_sections.append(menu_section)
-            menu_section = MenuSection()
+            menu_section = self.MenuSection()
             menu_section.sentence_length_items.append(('pytest', 'run regression tests'))
             menu_section.sentence_length_items.append(('pytest scores', 'run regression tests (scores)'))
             menu_section.sentence_length_items.append(('pytest all', 'run regression tests (all)'))
@@ -124,9 +122,9 @@ class StudioInterface(DirectoryProxy):
     
     def work_in_studio(self, menu_header=None):
         while True:
-            menu = Menu(client=self.where(), menu_header=menu_header)
+            menu = self.Menu(client=self.where(), menu_header=menu_header)
             menu.menu_body = 'welcome to the studio.'
-            menu_section = MenuSection()
+            menu_section = self.MenuSection()
             score_titles = self.score_wrangler.list_numbered_score_titles_with_years()
             menu_section.menu_section_entries = score_titles
             menu_section.sentence_length_items.append(('makers', 'work with material makers'))

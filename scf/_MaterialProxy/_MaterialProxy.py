@@ -1,6 +1,5 @@
 from abjad.tools import iotools
 from baca.scf.PackageProxy import PackageProxy
-from baca.scf.menuing import Menu
 import os
 import subprocess
 import sys
@@ -274,7 +273,7 @@ class _MaterialProxy(PackageProxy):
 
     def manage_material(self, menu_header=None):
         while True:
-            menu = Menu(client=self.where())
+            menu = self.Menu(client=self.where())
             menu.menu_header = menu_header
             menu.menu_body = self.material_spaced_name
             if self.is_interactive:

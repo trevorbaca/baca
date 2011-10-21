@@ -2,7 +2,6 @@ from abjad.tools import iotools
 from abjad.tools import layouttools
 from abjad.tools import lilypondfiletools
 from baca.scf.PackageProxy import PackageProxy
-from baca.scf.menuing import Menu
 import os
 
 
@@ -138,7 +137,7 @@ class MakerWrangler(PackageProxy):
         
     def manage_makers(self, menu_header=None):
         while True:
-            menu = Menu(client=self.where(), menu_header=menu_header)
+            menu = self.Menu(client=self.where(), menu_header=menu_header)
             menu.menu_body = 'select maker'
             menu.items_to_number = self.list_maker_spaced_class_names()
             menu.named_pairs.append(('new', 'make maker'))
@@ -155,7 +154,7 @@ class MakerWrangler(PackageProxy):
                 maker.manage_maker(menu_header=menu_header)
 
     def select_maker(self, menu_header=None):
-        menu = Menu(client=self.where(), menu_header=menu_header)
+        menu = self.Menu(client=self.where(), menu_header=menu_header)
         menu.menu_body = 'select maker'
         menu.items_to_number = self.list_maker_spaced_class_names()
         key, value = menu.display_menu()

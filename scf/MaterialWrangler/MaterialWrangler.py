@@ -1,6 +1,5 @@
 from baca.scf.InteractiveMaterialProxy import InteractiveMaterialProxy
 from baca.scf.MakerWrangler import MakerWrangler
-from baca.scf.menuing import Menu
 from baca.scf.PackageProxy import PackageProxy
 from baca.scf.StaticMaterialProxy import StaticMaterialProxy
 import os
@@ -145,7 +144,7 @@ class MaterialWrangler(PackageProxy):
 
     def manage_shared_materials(self, menu_header=None, command_string=None):
         while True:
-            menu = Menu(client=self.where(), menu_header=menu_header)
+            menu = self.Menu(client=self.where(), menu_header=menu_header)
             menu.menu_body = 'shared materials'
             menu.items_to_number = self.list_shared_material_summaries()
             menu.sentence_length_items.append(('h', '[create material by hand]'))

@@ -2,8 +2,6 @@ from baca.scf.ChunkWrangler import ChunkWrangler
 from baca.scf.InteractiveMaterialProxy import InteractiveMaterialProxy
 from baca.scf.MakerWrangler import MakerWrangler
 from baca.scf.MaterialWrangler import MaterialWrangler
-from baca.scf.menuing import Menu
-from baca.scf.menuing import MenuSection
 from baca.scf.PackageProxy import PackageProxy
 from baca.scf.StaticMaterialProxy import StaticMaterialProxy
 import os
@@ -228,15 +226,15 @@ class ScoreProxy(PackageProxy):
             
     def manage_score(self, menu_header=None, command_string=None):
         while True:
-            menu = Menu(client=self.where(), menu_header=menu_header)
+            menu = self.Menu(client=self.where(), menu_header=menu_header)
             menu.menu_body = self.score_title
-            menu_section = MenuSection()
+            menu_section = self.MenuSection()
             menu_section.menu_section_title = 'Chunks'
             menu_section.menu_section_entries = self.list_chunk_spaced_names_with_numbers()
             menu_section.menu_section_entry_prefix = 'h'
             menu_section.sentence_length_items.append(('ch', '[create chunk]'))
             menu.menu_sections.append(menu_section)
-            menu_section = MenuSection()
+            menu_section = self.MenuSection()
             menu_section.menu_section_title = 'Materials'
             menu_section.menu_section_entries = self.list_material_underscored_names_with_numbers()
             menu_section.menu_section_entry_prefix = 'm'
@@ -273,10 +271,10 @@ class ScoreProxy(PackageProxy):
 
     def manage_svn(self, menu_header=None):
         while True:
-            menu = Menu(client=self.where())
+            menu = self.Menu(client=self.where())
             menu.menu_header = menu_header
             menu.menu_body = 'repository commands'
-            menu_section = MenuSection()
+            menu_section = self.MenuSection()
             menu_section.sentence_length_items.append(('st', 'svn status'))
             menu_section.sentence_length_items.append(('add', 'svn add'))
             menu_section.sentence_length_items.append(('ci', 'svn commit'))
