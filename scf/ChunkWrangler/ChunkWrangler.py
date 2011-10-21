@@ -1,5 +1,4 @@
 from abjad.tools import iotools
-from baca.scf.ChunkProxy import ChunkProxy
 from baca.scf.PackageProxy import PackageProxy
 import inspect
 import os
@@ -10,11 +9,18 @@ class ChunkWrangler(PackageProxy):
     def __init__(self, package_importable_name):
         PackageProxy.__init__(self, package_importable_name)
 
+    ### PUBLIC ATTRIBUTES ###
+
+    @property
+    def ChunkProxy(self):
+        from baca.scf.ChunkProxy import ChunkProxy
+        return ChunkProxy
+    
     ### PUBLIC METHODS ###
 
     def create_chunk_interactively(self, menu_header=None):
         chunk_proxy = self.ChunkProxy()
-        chunk.purview = self.purview
+        chunk_proxy.package_importable_name = self.package_importable_name
         chunk_proxy.create_chunk_interactively()
 
     def list_chunk_directories(self):
