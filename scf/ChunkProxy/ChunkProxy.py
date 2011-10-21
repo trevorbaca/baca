@@ -35,13 +35,18 @@ class ChunkProxy(PackageProxy):
         self.create_initializer()
         self.proceed()
 
-    def create_chunk_interactively(self):
+    def create_chunk_interactively(self, menu_header=None):
+        if menu_header is not None:
+            menu_header = '%s - create chunk interactively' % menu_header
+        else:
+            menu_header = 'create chunk interactively'
         if self.purview is None:
-            self.set_purview_interactively()
+            self.set_purview_interactively(menu_header=menu_header)
         if self.package_spaced_name is None:
-            self.set_package_spaced_name_interactively()
+            print 'here!'
+            self.set_package_spaced_name_interactively(menu_header=menu_header)
         if self.score_template is None:
-            self.set_score_template_interactively()
+            self.set_score_template_interactively(menu_header=menu_header)
         self.write_package_to_disk()
         self.proceed()
 

@@ -21,7 +21,11 @@ class ChunkWrangler(PackageProxy):
     def create_chunk_interactively(self, menu_header=None):
         chunk_proxy = self.ChunkProxy()
         chunk_proxy.purview = self.purview
-        chunk_proxy.create_chunk_interactively()
+        if self.score is not None:
+            menu_header = self.score.score_title
+        else:
+            menu_header = None
+        chunk_proxy.create_chunk_interactively(menu_header=menu_header)
 
     def list_chunk_directories(self):
         chunk_directories = []

@@ -47,6 +47,7 @@ class PackageProxy(DirectoryProxy):
             self.directory_name = directory_name
         return property(**locals())
 
+    # change something; package short name needs to be (re)settable
     @property
     def package_short_name(self):
         return self.base_name
@@ -77,6 +78,12 @@ class PackageProxy(DirectoryProxy):
             else:
                 raise ValueError('package importable name already assigned.')
         return property(**locals())
+
+    @property
+    def score(self):
+        from baca.scf.ScoreProxy import ScoreProxy
+        if isinstance(self.purview, ScoreProxy):
+            return self.purview
 
     ### PRIVATE METHODS ###
 
@@ -128,12 +135,12 @@ class PackageProxy(DirectoryProxy):
         self.write_tags_to_initializer(tags)
 
     def add_tag_interactively(self, menu_header=None):
-        user_input_getter = UserInputGetter()
-        user_input_getter.menu_header = menu_header
-        user_input_getter.menu_body = 'add tag'
-        user_input_getter.prompts.append('Tag name> ')
-        user_input_getter.prompts.append('Tag value> ')
-        user_input = user_input_getter.run()
+        getter = self.UserInputGetter()
+        getter.menu_header = menu_header
+        getter.menu_body = 'add tag'
+        getter.prompts.append('Tag name> ')
+        getter.prompts.append('Tag value> ')
+        user_input = getter.run()
         if user_input:
             tag_name, tag_value = user_input
             self.add_tag(tag_name, tag_value)
@@ -158,11 +165,11 @@ class PackageProxy(DirectoryProxy):
         self.write_tags_to_initializer(tags)
 
     def delete_tag_interactively(self, menu_header=None):
-        user_input_getter = UserInputGetter()
-        user_input_getter.menu_header = menu_header
-        user_input_getter.menu_body = 'delete tag'
-        user_input_getter.prompts.append('Tag name> ')
-        user_input = user_input_getter.run(clear_terminal=False)
+        getter = self.UserInputGetter()
+        getter.menu_header = menu_header
+        getter.menu_body = 'delete tag'
+        getter.prompts.append('Tag name> ')
+        user_input = getter.run(clear_terminal=False)
         if user_input:
             tag_name = user_input[0]
             self.delete_tag(tag_name)
@@ -240,11 +247,23 @@ class PackageProxy(DirectoryProxy):
         getter.helps.append('must be underscore-delimited lowercase package name.')
         self.package_importable_name = getter.run()
 
-    def set_package_spaced_name_interactively(self):
-        self.print_not_implemented()
+    def set_package_spaced_name_interactively(self, menu_header=None):
+        getter = self.UserInputGetter(menu_header=menu_header)
+        getter.menu_body = 'set package spaced name'
+        getter.prompts.append('package spaced name')
+        getter.tests.append(iotools.is_space_delimited_lowercase_string)
+        getter.helps.append('must be space-delimited lowercase string.')
+        self.package_spaced_name = getter.run()
 
-    def set_purview_interactively(self):
-        self.print_not_implemented()
+    def set_purview_interactively(self, menu_header=None):
+        from baca.scf.ScoreWrangler import ScoreWrangler
+        menu = self.Menu(client=self.where(), menu_header=menu_header)
+        menu.menu_body = 'select purview'
+        score_wrangler = ScoreWrangler()
+        menu.items_to_number = score_wrangler.list_score_titles_with_years()
+        menu.named_pairs.append(('s', 'global to studio'))
+        key, value = menu.display_menu()
+        print key, value
 
     def unimport_baca_package(self):
         self.remove_package_importable_name_from_sys_modules('baca')
