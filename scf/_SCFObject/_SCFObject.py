@@ -1,10 +1,8 @@
 from abjad.tools import iotools
-import datetime
 import inspect
 import os
 import readline
 import subprocess
-import time
 
 
 class _SCFObject(object):
@@ -102,10 +100,6 @@ class _SCFObject(object):
     def edit_source_file(self):
         command = 'vi %s' % self.source_file_name
         os.system(command)
-
-    # TODO: move to helpers package
-    def get_date(self):
-        return datetime.date(*time.localtime()[:3])
 
     # this is weird and should be elimiated
     def get_chunk_proxy(self, package_importable_name):

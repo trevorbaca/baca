@@ -6,6 +6,7 @@ from baca.scf.DirectoryProxy import DirectoryProxy
 from baca.scf.MaterialWrangler import MaterialWrangler
 from baca.scf.ScoreWrangler import ScoreWrangler
 from baca.scf.UserInputWrapper import UserInputWrapper
+from baca.scf import helpers
 import copy
 import os
 import shutil
@@ -360,7 +361,7 @@ class _Maker(_SCFObject):
 
     def make_tags_dictionary(self):
         tags = {}
-        tags['creation_date'] = self.get_date()
+        tags['creation_date'] = helpers.get_current_date()
         tags['maker'] = self.class_name
         return tags
 
