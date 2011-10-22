@@ -7,9 +7,9 @@ import sys
 class PackageProxy(DirectoryProxy):
 
     def __init__(self, package_importable_name=None):
-        directory_name = self.package_importable_name_to_directory_name(package_importable_name)
-        DirectoryProxy.__init__(self, directory_name)
-        self._package_importable_name = package_importable_name
+        DirectoryProxy.__init__(self)
+        self._package_short_name = None
+        self.package_importable_name = package_importable_name
         self._purview = None
 
     ### OVERLOADS ###
@@ -33,11 +33,13 @@ class PackageProxy(DirectoryProxy):
 
     @property
     def has_initializer(self):
-        return os.path.isfile(self.initializer_file_name)
+        if self.initializer_file_name is not None:
+            return os.path.isfile(self.initializer_file_name)
 
     @property
     def initializer_file_name(self):
-        return os.path.join(self.directory_name, '__init__.py')
+        if self.directory_name is not None:
+            return os.path.join(self.directory_name, '__init__.py')
 
     @apply
     def package_importable_name():
@@ -47,16 +49,18 @@ class PackageProxy(DirectoryProxy):
             assert isinstance(package_importable_name, (str, type(None)))
             if isinstance(package_importable_name, str):
                 assert iotools.is_underscore_delimited_lowercase_package_name(package_importable_name)
+                package_short_name = package_importable_name.split('.')[-1]
+                self.package_short_name = package_short_name
             self._package_importable_name = package_importable_name
-            directory_name = self.package_importable_name_to_directory_name(package_importable_name)
-            self.directory_name = directory_name
+            #directory_name = self.package_importable_name_to_directory_name(package_importable_name)
+            #self.directory_name = directory_name
         return property(**locals())
 
     @apply
     def package_short_name():
         def fget(self):
-            return self._base_name
-        def fset(sefl, package_short_name):
+            return self._package_short_name
+        def fset(self, package_short_name):
             assert isinstance(package_short_name, (str, type(None)))
             self._package_short_name = package_short_name
         return property(**locals())
@@ -67,12 +71,14 @@ class PackageProxy(DirectoryProxy):
             return self.package_short_name.replace('_', ' ')
         
     @property
-    def parent_initializer(self):
-        return os.path.join(self.parent_directory_name, '__init__.py')
+    def parent_initializer_file_name(self):
+        if self.parent_directory_name is not None:
+            return os.path.join(self.parent_directory_name, '__init__.py')
 
     @property
     def parent_package_importable_name(self):
-        return '.'.join(self.package_importable_name.split('.')[:-1])
+        if self.package_importable_name is not None:
+            return '.'.join(self.package_importable_name.split('.')[:-1])
 
     @apply
     def purview():
@@ -189,7 +195,7 @@ class PackageProxy(DirectoryProxy):
         os.system('vi %s' % self.initializer_file_name)
 
     def edit_parent_initializer(self):
-        os.system('vi %s' % self.parent_initializer)
+        os.system('vi %s' % self.parent_initializer_file_name)
 
     def import_attribute_from_initializer(self, attribute_name):
         try:

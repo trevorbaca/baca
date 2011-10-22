@@ -104,10 +104,12 @@ class _SCFObject(object):
     def get_date(self):
         return datetime.date(*time.localtime()[:3])
 
+    # this is weird and should be elimiated
     def get_chunk_proxy(self, package_importable_name):
         from baca.scf.ChunkProxy import ChunkProxy
         return ChunkProxy(package_importable_name)
         
+    # this is weird and should be eliminated
     def get_material_proxy(self, package_importable_name):
         from baca.scf.InteractiveMaterialProxy import InteractiveMaterialProxy
         from baca.scf.StaticMaterialProxy import StaticMaterialProxy

@@ -444,7 +444,7 @@ class _MaterialProxy(PackageProxy):
         print ''
         if self.is_in_repository:
             # update parent initializer
-            self.globally_replace_in_file(self.parent_initializer, self.material_underscored_name, new_material_underscored_name)
+            self.globally_replace_in_file(self.parent_initializer_file_name, self.material_underscored_name, new_material_underscored_name)
             # rename package directory
             new_directory_name = self.directory.replace(self.material_underscored_name, new_material_underscored_name)
             command = 'svn mv %s %s' % (self.directory_name, new_directory_name)
@@ -486,7 +486,7 @@ class _MaterialProxy(PackageProxy):
 
     def remove_material_from_materials_initializer(self):
         import_statement = 'from %s import %s\n' % (self.material_underscored_name, self.material_underscored_name)
-        self.remove_line_from_initializer(self.parent_initializer, import_statement)
+        self.remove_line_from_initializer(self.parent_initializer_file_name, import_statement)
 
     def reveal_modules(self):
         exec('module_names = sys.modules.keys()')

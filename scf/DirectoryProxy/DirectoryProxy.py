@@ -8,7 +8,10 @@ class DirectoryProxy(_SCFObject):
 
     def __init__(self, directory_name=None):
         _SCFObject.__init__(self)
-        self.directory_name = directory_name
+        if directory_name is not None:
+            self.directory_name = directory_name
+        else:
+            self._directory_name = None
 
     ### OVERLOADS ###
 
