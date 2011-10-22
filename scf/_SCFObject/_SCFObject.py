@@ -52,7 +52,7 @@ class _SCFObject(object):
         return self._baca_materials_package_importable_name
 
     @property
-    def baca_materials_short_pacakge_name(self):
+    def baca_materials_package_short_name(self):
         return self._baca_materials_package_short_name
 
     @property
@@ -75,7 +75,7 @@ class _SCFObject(object):
 
     @property
     def source_file_name(self):
-        directory_name = self.package_importable_name_to_directory(self.__module__)
+        directory_name = self.package_importable_name_to_directory_name(self.__module__)
         source_file_name = directory_name + '.py'
         return source_file_name
 
@@ -139,7 +139,7 @@ class _SCFObject(object):
         menu_title = menu_title + '\n'
         return  menu_title.capitalize()
 
-    def package_importable_name_to_directory(self, package_importable_name):
+    def package_importable_name_to_directory_name(self, package_importable_name):
         if package_importable_name is None:
             return
         package_importable_name_parts = package_importable_name.split('.')

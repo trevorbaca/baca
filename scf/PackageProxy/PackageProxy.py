@@ -7,7 +7,7 @@ import sys
 class PackageProxy(DirectoryProxy):
 
     def __init__(self, package_importable_name=None):
-        directory_name = self.package_importable_name_to_directory(package_importable_name)
+        directory_name = self.package_importable_name_to_directory_name(package_importable_name)
         DirectoryProxy.__init__(self, directory_name)
         self._package_importable_name = package_importable_name
         self._purview = None
@@ -27,6 +27,11 @@ class PackageProxy(DirectoryProxy):
         return self.get_tag('creation_date')
 
     @property
+    def directory_name(self):
+        if self.package_importable_name is not None:
+            return self.package_importable_name_to_directory_name(self.package_importable_name)
+
+    @property
     def has_initializer(self):
         return os.path.isfile(self.initializer_file_name)
 
@@ -43,14 +48,18 @@ class PackageProxy(DirectoryProxy):
             if isinstance(package_importable_name, str):
                 assert iotools.is_underscore_delimited_lowercase_package_name(package_importable_name)
             self._package_importable_name = package_importable_name
-            directory_name = self.package_importable_name_to_directory(package_importable_name)
+            directory_name = self.package_importable_name_to_directory_name(package_importable_name)
             self.directory_name = directory_name
         return property(**locals())
 
-    # change something; package short name needs to be (re)settable
-    @property
-    def package_short_name(self):
-        return self.base_name
+    @apply
+    def package_short_name():
+        def fget(self):
+            return self._base_name
+        def fset(sefl, package_short_name):
+            assert isinstance(package_short_name, (str, type(None)))
+            self._package_short_name = package_short_name
+        return property(**locals())
 
     @property
     def package_spaced_name(self):

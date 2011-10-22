@@ -20,11 +20,6 @@ class DirectoryProxy(_SCFObject):
 
     ### PUBLIC ATTRIBUTES ###
 
-    @property
-    def base_name(self):
-        if self.directory_name is not None:
-            return os.path.basename(self.directory_name)
-
     @apply
     def directory_name():
         def fget(self):
