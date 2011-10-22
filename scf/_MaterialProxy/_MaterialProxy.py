@@ -444,7 +444,8 @@ class _MaterialProxy(PackageProxy):
         print ''
         if self.is_in_repository:
             # update parent initializer
-            self.globally_replace_in_file(self.parent_initializer_file_name, self.material_underscored_name, new_material_underscored_name)
+            self.helpers.globally_replace_in_file(
+                self.parent_initializer_file_name, self.material_underscored_name, new_material_underscored_name)
             # rename package directory
             new_directory_name = self.directory.replace(self.material_underscored_name, new_material_underscored_name)
             command = 'svn mv %s %s' % (self.directory_name, new_directory_name)
@@ -452,7 +453,8 @@ class _MaterialProxy(PackageProxy):
             # update package initializer
             new_package_directory = os.path.join(self.parent_directory_name, new_material_underscored_name)
             new_initializer = os.path.join(new_package_directory, '__init__.py')
-            self.globally_replace_in_file(new_initializer, self.material_underscored_name, new_material_underscored_name)
+            self.helpers.globally_replace_in_file(
+                new_initializer, self.material_underscored_name, new_material_underscored_name)
             # rename files in package
             for old_file_name in os.listdir(new_package_directory):
                 if not old_file_name.startswith(('.', '_')):
@@ -462,7 +464,8 @@ class _MaterialProxy(PackageProxy):
                     os.system(command)
             # rename output data
             new_output_data = os.path.join(new_package_directory, 'output.py')
-            self.globally_replace_in_file(new_output_data, self.material_underscored_name, new_material_underscored_name)
+            self.helpers.globally_replace_in_file(
+                new_output_data, self.material_underscored_name, new_material_underscored_name)
             print ''
             # commit
             commit_message = 'Renamed %s to %s.' % (self.material_underscored_name, new_material_underscored_name)

@@ -58,6 +58,11 @@ class _SCFObject(object):
         return type(self).__name__
 
     @property
+    def helpers(self):
+        from baca.scf import helpers
+        return helpers
+
+    @property
     def makers_directory_name(self):
         return self._makers_directory_name
 
@@ -73,9 +78,6 @@ class _SCFObject(object):
 
     @property
     def source_file_name(self):
-        #directory_name = self.package_importable_name_to_directory_name(self.__module__)
-        #source_file_name = directory_name + '.py'
-        #return source_file_name
         source_file_name = inspect.getfile(type(self))
         source_file_name = source_file_name.strip('c')
         return source_file_name
@@ -101,7 +103,7 @@ class _SCFObject(object):
         command = 'vi %s' % self.source_file_name
         os.system(command)
 
-    # this is weird and should be elimiated
+    # this is weird and should be eliminated
     def get_chunk_proxy(self, package_importable_name):
         from baca.scf.ChunkProxy import ChunkProxy
         return ChunkProxy(package_importable_name)
@@ -115,17 +117,6 @@ class _SCFObject(object):
         else:
             return StaticMaterialProxy(package_importable_name)
    
-    def globally_replace_in_file(self, file_name, old, new):
-        file_pointer = file(file_name, 'r')
-        new_file_lines = []
-        for line in file_pointer.readlines():
-            line = line.replace(old, new)
-            new_file_lines.append(line)
-        file_pointer.close()
-        file_pointer = file(file_name, 'w')
-        file_pointer.write('\n'.join(new_file_lines))
-        file_pointer.close()
-
     # TODO: move to material proxy or eliminate
     def is_interactive_material_package(self, package_importable_name):
         from baca.scf.PackageProxy import PackageProxy
