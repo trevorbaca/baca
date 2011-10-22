@@ -52,8 +52,6 @@ class PackageProxy(DirectoryProxy):
                 package_short_name = package_importable_name.split('.')[-1]
                 self.package_short_name = package_short_name
             self._package_importable_name = package_importable_name
-            #directory_name = self.package_importable_name_to_directory_name(package_importable_name)
-            #self.directory_name = directory_name
         return property(**locals())
 
     @apply
@@ -247,6 +245,31 @@ class PackageProxy(DirectoryProxy):
                 self.add_tag_interactively(menu_header=menu.menu_title)
             elif key == 'del':
                 self.delete_tag_interactively(menu_header=menu.menu_title)
+
+    def package_importable_name_to_directory_name(self, package_importable_name):
+        if package_importable_name is None:
+            return
+        package_importable_name_parts = package_importable_name.split('.')
+        if package_importable_name_parts[0] == 'baca':
+            directory_parts = [os.environ.get('BACA')] + package_importable_name_parts[1:]
+        elif package_importable_name_parts[0] in os.listdir(os.environ.get('SCORES')):
+            directory_parts = [os.environ.get('SCORES')] + package_importable_name_parts[:]
+        else:
+            raise ValueError('Unknown package importable name %r.' % package_importable_name)
+        directory = os.path.join(*directory_parts)
+        return directory
+
+    def package_importable_name_to_purview(self, package_importable_name):
+        from baca.scf.StudioInterface import StudioInterface
+        from baca.scf.ScoreProxy import ScoreProxy
+        if package_importable_name is None:
+            return
+        elif package_importable_name.split('.')[0] == 'baca':
+            return StudioInterface()
+        elif package_importable_name.split('.')[0] in os.listdir(os.environ.get('SCORES')):
+            return ScoreProxy(package_importable_name.split('.')[0])
+        else:
+            raise ValueError('Unknown package importable name %r.' % package_importable_name)
 
     def remove_package_importable_name_from_sys_modules(self, package_importable_name):
         '''Total hack. But works.
