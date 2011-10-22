@@ -100,6 +100,7 @@ class _SCFObject(object):
         command = 'vi %s' % self.source_file_name
         os.system(command)
 
+    # TODO: move to helpers package
     def get_date(self):
         return datetime.date(*time.localtime()[:3])
 
@@ -126,6 +127,7 @@ class _SCFObject(object):
         file_pointer.write('\n'.join(new_file_lines))
         file_pointer.close()
 
+    # TODO: move to material proxy or eliminate
     def is_interactive_material_package(self, package_importable_name):
         from baca.scf.PackageProxy import PackageProxy
         package_proxy = PackageProxy(package_importable_name)
@@ -139,6 +141,7 @@ class _SCFObject(object):
         menu_title = menu_title + '\n'
         return  menu_title.capitalize()
 
+    # TODO: move to package proxy
     def package_importable_name_to_directory_name(self, package_importable_name):
         if package_importable_name is None:
             return
@@ -152,6 +155,7 @@ class _SCFObject(object):
         directory = os.path.join(*directory_parts)
         return directory
 
+    # TODO: move to package proxy
     def package_importable_name_to_purview(self, package_importable_name):
         from baca.scf.StudioInterface import StudioInterface
         from baca.scf.ScoreProxy import ScoreProxy

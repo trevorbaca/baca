@@ -31,21 +31,29 @@ class DirectoryProxy(_SCFObject):
 
     @property
     def has_directory(self):
-        return os.path.exists(self.directory_name)
+        if self.directory_name is not None:
+            return os.path.exists(self.directory_name)
+        else:
+            return False
 
     @property
     def is_in_repository(self):
+        if self.directory_name is None:
+            return False
         command = 'svn st %s' % self.directory_name
         proc = subprocess.Popen(command, shell=True, stdout=subprocess.PIPE)
         first_line = proc.stdout.readline()
-        if first_line.startswith('?'):
+        if first_line == '':
+            return False
+        elif first_line.startswith('?'):
             return False
         else:
             return True
     
     @property
     def parent_directory_name(self):
-        return os.path.dirname(self.directory_name)
+        if self.directory_name is not None:
+            return os.path.dirname(self.directory_name)
 
     ### PRIVATE METHODS ###
 
