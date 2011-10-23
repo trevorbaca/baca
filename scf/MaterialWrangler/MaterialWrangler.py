@@ -15,13 +15,13 @@ class MaterialWrangler(PackageProxy):
 
     @property
     def has_score_local_purview(self):
-        from baca.scf.ScoreProxy import ScoreProxy
-        return isinstance(self.purview, ScoreProxy)
+        import baca
+        return isinstance(self.purview, baca.scf.ScoreProxy)
 
     @property
     def has_studio_global_purview(self):
-        from baca.scf.StudioInterface import StudioInterface
-        return isinstance(self.purview, StudioInterface)    
+        import baca
+        return isinstance(self.purview, baca.scf.BacaProxy)    
 
     @property
     def maker_wrangler(self):

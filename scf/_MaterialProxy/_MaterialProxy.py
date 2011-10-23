@@ -98,11 +98,11 @@ class _MaterialProxy(PackageProxy):
 
     @property
     def is_shared(self):
-        from baca.scf.StudioInterface import StudioInterface
+        import baca
         if self.purview is None:
             return False
         else:
-            return isinstance(self.purview, StudioInterface)
+            return isinstance(self.purview, baca.scf.BacaProxy)
 
     @property
     def is_static(self):
@@ -118,11 +118,8 @@ class _MaterialProxy(PackageProxy):
 
     @property
     def materials_package_importable_name(self):
-        import baca
-        if isinstance(self.purview, baca.scf.StudioInterface):
-            return 'baca.materials'
-        elif isinstance(self.purview, baca.scf.ScoreProxy):
-            return '%s.mus.materials' % self.score_package_short_name
+        if self.purview is not None:
+            return self.purview.materials_package_importable_name
 
     @property
     def output_file_name(self): 
@@ -176,7 +173,7 @@ class _MaterialProxy(PackageProxy):
 
     def add_material_to_materials_initializer(self):
         import_statement = 'from %s import %s\n' % (self.material_underscored_name, self.material_underscored_name)
-        parent_package = PackageProxy(self.parent_directory_name)
+        parent_package = PackageProxy(self.parent_package_importable_name)
         parent_package.add_line_to_initializer(import_statement)
 
     def create_ly_and_pdf_from_visualizer(self, is_forced=False):
@@ -519,7 +516,8 @@ class _MaterialProxy(PackageProxy):
             command = 'svn mv %s %s' % (self.directory_name, new_directory_name)
             os.system(command)
             # update package initializer
-            new_package_directory = os.path.join(self.parent_directory_name, new_material_underscored_name)
+            parent_directory_name = os.path.directory(self.directory_name)
+            new_package_directory = os.path.join(parent_directory_name, new_material_underscored_name)
             new_initializer = os.path.join(new_package_directory, '__init__.py')
             self.helpers.globally_replace_in_file(
                 new_initializer, self.material_underscored_name, new_material_underscored_name)

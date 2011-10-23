@@ -9,7 +9,6 @@ def test_DirectoryProxy_01():
     assert directory_proxy.directory_name is None
     assert not directory_proxy.has_directory 
     assert not directory_proxy.is_in_repository
-    assert directory_proxy.parent_directory_name is None
 
 
 
@@ -21,7 +20,6 @@ def test_DirectoryProxy_02():
     assert directory_proxy.directory_name == '/Users/trevorbaca/Documents/other/baca/foo'
     assert not directory_proxy.has_directory 
     assert not directory_proxy.is_in_repository
-    assert directory_proxy.parent_directory_name == '/Users/trevorbaca/Documents/other/baca'
 
 
 def test_DirectoryProxy_03():
@@ -32,4 +30,3 @@ def test_DirectoryProxy_03():
     assert directory_proxy.directory_name == '/Users/trevorbaca/Documents/other/baca/scm'
     assert directory_proxy.has_directory 
     assert directory_proxy.is_in_repository
-    assert directory_proxy.parent_directory_name == '/Users/trevorbaca/Documents/other/baca'

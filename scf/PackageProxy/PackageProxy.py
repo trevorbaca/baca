@@ -70,13 +70,17 @@ class PackageProxy(DirectoryProxy):
         
     @property
     def parent_initializer_file_name(self):
-        if self.parent_directory_name is not None:
-            return os.path.join(self.parent_directory_name, '__init__.py')
+        if self.parent_package_importable_name:
+            parent_directory_name = self.package_importable_name_to_directory_name(
+                self.parent_package_importable_name)
+            return os.path.join(parent_directory_name, '__init__.py')
 
     @property
     def parent_package_importable_name(self):
         if self.package_importable_name is not None:
-            return '.'.join(self.package_importable_name.split('.')[:-1])
+            result = '.'.join(self.package_importable_name.split('.')[:-1])
+            if result:
+                return result
 
     @apply
     def purview():
@@ -260,14 +264,14 @@ class PackageProxy(DirectoryProxy):
         return directory
 
     def package_importable_name_to_purview(self, package_importable_name):
-        from baca.scf.StudioInterface import StudioInterface
-        from baca.scf.ScoreProxy import ScoreProxy
+        import baca
         if package_importable_name is None:
             return
         elif package_importable_name.split('.')[0] == 'baca':
-            return StudioInterface()
+            #return StudioInterface()
+            return baca.scf.BacaProxy()
         elif package_importable_name.split('.')[0] in os.listdir(os.environ.get('SCORES')):
-            return ScoreProxy(package_importable_name.split('.')[0])
+            return baca.scf.ScoreProxy(package_importable_name.split('.')[0])
         else:
             raise ValueError('Unknown package importable name %r.' % package_importable_name)
 
