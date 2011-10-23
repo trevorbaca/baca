@@ -43,12 +43,12 @@ class DirectoryProxy(_SCFObject):
     def is_in_repository(self):
         if self.directory_name is None:
             return False
+        if not self.has_directory:
+            return False
         command = 'svn st %s' % self.directory_name
         proc = subprocess.Popen(command, shell=True, stdout=subprocess.PIPE)
         first_line = proc.stdout.readline()
-        if first_line == '':
-            return False
-        elif first_line.startswith('?'):
+        if first_line.startswith('?'):
             return False
         else:
             return True
