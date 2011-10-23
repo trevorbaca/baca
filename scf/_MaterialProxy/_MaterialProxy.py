@@ -102,7 +102,7 @@ class _MaterialProxy(PackageProxy):
         if self.purview is None:
             return False
         else:
-            isinstance(self.purview, Studiointerface)
+            return isinstance(self.purview, StudioInterface)
 
     @property
     def is_static(self):
@@ -147,9 +147,10 @@ class _MaterialProxy(PackageProxy):
 
     @property
     def user_input_wrapper(self):
-        if self.input_package_importable_name is not None:
-            exec('from %s import user_input' % self.input_package_importable_name)
-            return user_input
+        if self.is_interactive:
+            if self.input_package_importable_name is not None:
+                exec('from %s import user_input' % self.input_package_importable_name)
+                return user_input
 
     @property
     def visualizer_file_name(self):
