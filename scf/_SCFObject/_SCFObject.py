@@ -2,19 +2,10 @@ from abjad.tools import iotools
 import inspect
 import os
 import readline
-import subprocess
 
 
 class _SCFObject(object):
     
-    def __init__(self):
-        self._baca_directory_name = os.environ.get('BACA')
-        self._baca_materials_directory_name = os.path.join(self.baca_directory_name, 'materials')
-        self._baca_materials_package_importable_name = 'baca.materials'
-        self._baca_materials_package_short_name = 'materials'
-        self._makers_directory_name = os.path.join(self.baca_directory_name, 'makers')
-        self._scores_directory_name = os.environ.get('SCORES')
-
     ### OVERLOADS ###
 
     def __repr__(self):
@@ -36,22 +27,6 @@ class _SCFObject(object):
     def UserInputGetter(self):
         from baca.scf.menuing import UserInputGetter
         return UserInputGetter
-
-    @property
-    def baca_directory_name(self):
-        return self._baca_directory_name
-
-    @property
-    def baca_materials_directory_name(self):
-        return self._baca_materials_directory_name
-
-    @property
-    def baca_materials_package_importable_name(self):
-        return self._baca_materials_package_importable_name
-
-    @property
-    def baca_materials_package_short_name(self):
-        return self._baca_materials_package_short_name
 
     @property
     def class_name(self):
@@ -106,26 +81,6 @@ class _SCFObject(object):
     def edit_source_file(self):
         command = 'vi %s' % self.source_file_name
         os.system(command)
-
-    # this is weird and should be eliminated
-    def get_chunk_proxy(self, package_importable_name):
-        from baca.scf.ChunkProxy import ChunkProxy
-        return ChunkProxy(package_importable_name)
-        
-    # this is weird and should be eliminated
-    def get_material_proxy(self, package_importable_name):
-        from baca.scf.InteractiveMaterialProxy import InteractiveMaterialProxy
-        from baca.scf.StaticMaterialProxy import StaticMaterialProxy
-        if self.is_interactive_material_package(package_importable_name):
-            return InteractiveMaterialProxy(package_importable_name)
-        else:
-            return StaticMaterialProxy(package_importable_name)
-   
-    # TODO: move to material proxy or eliminate
-    def is_interactive_material_package(self, package_importable_name):
-        from baca.scf.PackageProxy import PackageProxy
-        package_proxy = PackageProxy(package_importable_name)
-        return package_proxy.has_tag('maker')
 
     def make_menu_title(self, menu_header, menu_body):
         if menu_header is None:

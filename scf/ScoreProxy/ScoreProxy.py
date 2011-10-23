@@ -193,7 +193,7 @@ class ScoreProxy(PackageProxy):
 
     def iterate_material_proxies(self):
         for material_package_importable_name in self.list_material_package_importable_names():
-            material_proxy = self.get_material_proxy(material_package_importable_name)
+            material_proxy = self.material_wrangler.get_material_proxy(material_package_importable_name)
             yield material_proxy
 
     def iterate_static_material_proxies(self):
@@ -265,7 +265,7 @@ class ScoreProxy(PackageProxy):
                 chunk_spaced_name = value
                 chunk_underscored_name = chunk_spaced_name.replace(' ', '_')
                 package_importable_name = '%s.%s' % (self.chunks_package_importable_name, chunk_underscored_name)
-                chunk_proxy = self.get_chunk_proxy(package_importable_name)
+                chunk_proxy = self.chunk_wrangler.ChunkProxy(package_importable_name)
                 chunk_proxy.score_title = self.score_title
                 chunk_proxy.manage_chunk(menu_header=menu.menu_title)
             elif key.startswith('m'):
@@ -273,7 +273,7 @@ class ScoreProxy(PackageProxy):
                 material_number = int(material_number)
                 material_underscored_name = self.material_number_to_material_underscored_name(material_number)
                 package_importable_name = '%s.%s' % (self.materials_package_importable_name, material_underscored_name)
-                material_proxy = self.get_material_proxy(package_importable_name)
+                material_proxy = self.material_wrangler.get_material_proxy(package_importable_name)
                 material_proxy.score_title = self.score_title
                 material_proxy.manage_material(menu_header=menu.menu_title)
 

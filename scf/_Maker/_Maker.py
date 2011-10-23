@@ -1,20 +1,18 @@
 from abjad.tools import iotools
 from abjad.tools import lilypondfiletools
 from abjad.tools import markuptools
-from baca.scf._SCFObject import _SCFObject
-from baca.scf.DirectoryProxy import DirectoryProxy
-from baca.scf.MaterialWrangler import MaterialWrangler
-from baca.scf.ScoreWrangler import ScoreWrangler
+from baca.scf.PackageProxy import PackageProxy
 from baca.scf.UserInputWrapper import UserInputWrapper
 import copy
 import os
 import shutil
 
 
-class _Maker(_SCFObject):
+class _Maker(PackageProxy):
 
     def __init__(self, material_underscored_name=None, score=None):
-        _SCFObject.__init__(self)
+        package_importable_name = 'makers.%s' % self.class_name
+        PackageProxy.__init__(self, package_importable_name=package_importable_name)
         self.material_underscored_name = material_underscored_name
         self.score = score
 
@@ -63,12 +61,13 @@ class _Maker(_SCFObject):
         return title
 
     def _get_lilypond_score_subtitle(self):
+        import baca
         if 'scores' in self.material_package_directory:
             materials_directory = os.path.dirname(self.material_package_directory)
             mus_directory = os.path.dirname(materials_directory)
             score_package_directory = os.path.dirname(mus_directory)
             score_package_short_name = os.path.basename(score_package_directory)
-            score_wrangler = ScoreWrangler()
+            score_wrangler = baca.scf.ScoreWrangler()
             score_title = score_wrangler.score_package_short_name_to_score_title(score_package_short_name)
             subtitle = '(%s)' % score_title
         else:
@@ -329,8 +328,8 @@ class _Maker(_SCFObject):
         return new_value
 
     def import_values(self):
-        from baca.scf.ScoreWrangler import ScoreWrangler
-        score_wrangler = ScoreWrangler()
+        import baca
+        score_wrangler = baca.scf.ScoreWrangler()
         menu_header = 'import %s' % self.spaced_class_name
         material_proxy = score_wrangler.select_interactive_material_proxy(
             menu_header=menu_header, klasses=(type(self),))
@@ -342,8 +341,8 @@ class _Maker(_SCFObject):
                 self.save_material(user_input_wrapper)
 
     def iterate_materials_based_on_maker(self):
-        from baca.scf.ScoreWrangler import ScoreWrangler
-        score_wrangler = ScoreWrangler()
+        import baca
+        score_wrangler = baca.scf.ScoreWrangler()
         for material_proxy in score_wrangler.iterate_material_proxies(class_names=(self.class_name,)):
             yield material_proxy
 
@@ -381,9 +380,7 @@ class _Maker(_SCFObject):
             if key == 'b':
                 return key, None
             elif key == 'del':
-                directory_name = os.path.join(self.makers_directory_name, self.class_name)
-                directory_proxy = DirectoryProxy(directory_name)
-                directory_proxy.remove()
+                self.delete_package()
                 break
             elif key == 'new':
                 self.edit_interactively(menu_header=menu.menu_title)
@@ -413,8 +410,8 @@ class _Maker(_SCFObject):
         return True
 
     def set_location(self, menu_header=None):
-        from baca.scf.ScoreWrangler import ScoreWrangler
-        catalog = ScoreWrangler()
+        import baca
+        catalog = baca.scf.ScoreWrangler()
         result = catalog.select_score_interactively(menu_header=menu_header)
         self.score = result
 

@@ -57,6 +57,14 @@ class MaterialWrangler(PackageProxy):
         self.create_static_material_package(package_importable_name, has_visualizer)
         self.proceed()
 
+    def get_material_proxy(self, package_importable_name):
+        import baca
+        package_proxy = baca.scf.PackageProxy(package_importable_name)
+        if package_proxy.has_tag('maker'):
+            return baca.scf.InteractiveMaterialProxy(package_importable_name)
+        else:
+            return baca.scf.StaticMaterialProxy(package_importable_name)
+
     def get_materials_package_importable_name_of_new_material(self):
         if self.purview.is_studio_global_purview:
             return self.purview.get_materials_package_importable_name_interactively()
@@ -85,55 +93,106 @@ class MaterialWrangler(PackageProxy):
         else:
             return False
 
-    def iterate_shared_material_proxies(self):
-        for shared_material_directory in self.list_shared_material_directories():
-            package_short_name = os.path.basename(shared_material_directory)
-            package_importable_name = 'baca.materials.%s' % package_short_name
-            proxy = PackageProxy(package_importable_name)
-            yield proxy
+#    def iterate_shared_material_proxies(self):
+#        for shared_material_directory in self.list_shared_material_directories():
+#            package_short_name = os.path.basename(shared_material_directory)
+#            package_importable_name = 'baca.materials.%s' % package_short_name
+#            proxy = PackageProxy(package_importable_name)
+#            yield proxy
+    
+    def iterate_material_proxies(self):
+        for material_package_importable_name in self.list_material_package_importable_names():
+            material_proxy = self.get_material_proxy(material_package_importable_name)
+            yield material_proxy
 
-    def list_shared_material_directories(self):
-        shared_material_directories = []
-        for x in self.list_shared_material_package_short_names():
+    def list_material_directories(self):
+        material_directories = []
+        for x in self.list_material_package_short_names():
             directory = os.path.join(self.directory_name, x)
-            shared_material_directories.append(directory)
-        return shared_material_directories
+            material_directories.append(directory)
+        return material_directories
 
-    def list_shared_material_package_short_names(self):
-        shared_material_package_short_names = []
+    def list_material_package_importable_names(self):
+        material_package_importable_names = []
+        for material_package_short_name in self.list_material_package_short_names():
+            material_package_importable_name = '%s.%s' % (
+                self.purview.materials_package_importable_name, material_package_short_name)
+            material_package_importable_names.append(material_package_importable_name)
+        return material_package_importable_names
+
+    def list_material_package_short_names(self):
+        material_package_short_names = []
         for x in os.listdir(self.directory_name):
             if x[0].isalpha():
                 directory = os.path.join(self.directory_name, x)
                 if os.path.isdir(directory):
                     initializer = os.path.join(directory, '__init__.py')
                     if os.path.isfile(initializer):
-                        shared_material_package_short_names.append(x)
-        return shared_material_package_short_names
+                        material_package_short_names.append(x)
+        return material_package_short_names
 
-    def list_shared_material_spaced_names(self):
+    def list_material_spaced_names(self):
         material_spaced_names = []
-        for package_short_name in self.list_shared_material_package_short_names():
+        for package_short_name in self.list_material_package_short_names():
             material_spaced_name = package_short_name.replace('_', ' ')
             material_spaced_names.append(material_spaced_name)
         return material_spaced_names
         
-    def list_shared_material_summaries(self):
+    def list_material_summaries(self):
         summaries = []
-        for shared_material_proxy in self.iterate_shared_material_proxies():
-            summary = shared_material_proxy.package_short_name
-            if not shared_material_proxy.has_tag('maker'):
+        for material_proxy in self.iterate_material_proxies():
+            summary = material_proxy.package_short_name
+            if not material_proxy.has_tag('maker'):
                 summary = summary + ' (@)'
             summaries.append(summary)
         return summaries
 
-    def list_shared_material_underscored_names(self):
-        return self.list_shared_material_package_short_names()
+    def list_material_underscored_names(self):
+        return self.list_material_package_short_names()
+
+#    def list_shared_material_directories(self):
+#        shared_material_directories = []
+#        for x in self.list_shared_material_package_short_names():
+#            directory = os.path.join(self.directory_name, x)
+#            shared_material_directories.append(directory)
+#        return shared_material_directories
+#
+#    def list_shared_material_package_short_names(self):
+#        shared_material_package_short_names = []
+#        for x in os.listdir(self.directory_name):
+#            if x[0].isalpha():
+#                directory = os.path.join(self.directory_name, x)
+#                if os.path.isdir(directory):
+#                    initializer = os.path.join(directory, '__init__.py')
+#                    if os.path.isfile(initializer):
+#                        shared_material_package_short_names.append(x)
+#        return shared_material_package_short_names
+#
+#    def list_shared_material_spaced_names(self):
+#        material_spaced_names = []
+#        for package_short_name in self.list_shared_material_package_short_names():
+#            material_spaced_name = package_short_name.replace('_', ' ')
+#            material_spaced_names.append(material_spaced_name)
+#        return material_spaced_names
+#        
+#    def list_shared_material_summaries(self):
+#        summaries = []
+#        for shared_material_proxy in self.iterate_shared_material_proxies():
+#            summary = shared_material_proxy.package_short_name
+#            if not shared_material_proxy.has_tag('maker'):
+#                summary = summary + ' (@)'
+#            summaries.append(summary)
+#        return summaries
+#
+#    def list_shared_material_underscored_names(self):
+#        return self.list_shared_material_package_short_names()
 
     def manage_shared_materials(self, menu_header=None, command_string=None):
         while True:
             menu = self.Menu(client=self.where(), menu_header=menu_header)
             menu.menu_body = 'shared materials'
-            menu.items_to_number = self.list_shared_material_summaries()
+            #menu.items_to_number = self.list_shared_material_summaries()
+            menu.items_to_number = self.list_material_summaries()
             menu.sentence_length_items.append(('h', '[create material by hand]'))
             menu.sentence_length_items.append(('i', 'create material interactively'))
             key, value = menu.display_menu()

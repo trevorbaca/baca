@@ -48,7 +48,6 @@ class PackageProxy(DirectoryProxy):
         def fset(self, package_importable_name):
             assert isinstance(package_importable_name, (str, type(None)))
             if isinstance(package_importable_name, str):
-                assert iotools.is_underscore_delimited_lowercase_package_name(package_importable_name)
                 package_short_name = package_importable_name.split('.')[-1]
                 self.package_short_name = package_short_name
             self._package_importable_name = package_importable_name

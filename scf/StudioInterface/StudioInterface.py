@@ -1,7 +1,5 @@
+from baca.scf.BacaProxy import BacaProxy
 from baca.scf.DirectoryProxy import DirectoryProxy
-from baca.scf.MakerWrangler import MakerWrangler
-from baca.scf.MaterialWrangler import MaterialWrangler
-from baca.scf.ScoreProxy import ScoreProxy
 from baca.scf.ScoreWrangler import ScoreWrangler
 import os
 import subprocess
@@ -12,8 +10,7 @@ class StudioInterface(DirectoryProxy):
     def __init__(self):
         directory = os.environ.get('BACA', 'works')
         DirectoryProxy.__init__(self, directory)
-        self._maker_wrangler = MakerWrangler()
-        self._material_wrangler = MaterialWrangler('baca.materials')
+        self._baca_proxy = BacaProxy()
         self._score_wrangler = ScoreWrangler()
 
     ### OVERLOADS ###
@@ -24,12 +21,16 @@ class StudioInterface(DirectoryProxy):
     ### PUBLIC ATTRIBUTES ###
 
     @property
-    def maker_wrangler(self):
-        return self._maker_wrangler
+    def baca_proxy(self):
+        return self._baca_proxy
 
-    @property
-    def material_wrangler(self):
-        return self._material_wrangler
+#    @property
+#    def maker_wrangler(self):
+#        return self._maker_wrangler
+#
+#    @property
+#    def material_wrangler(self):
+#        return self._material_wrangler
 
     @property
     def score_wrangler(self):
@@ -38,6 +39,7 @@ class StudioInterface(DirectoryProxy):
     ### PUBLIC METHODS ###
 
     def get_materials_package_importable_name_interactively(self, menu_header=None):
+        import baca
         while True:
             menu = self.Menu(client=self.where(), menu_header=menu_header)
             menu.menu_body = 'select materials directory'
@@ -48,12 +50,12 @@ class StudioInterface(DirectoryProxy):
             menu.menu_sections.append(menu_section)
             key, value = menu.display_menu()
             if key == 'baca':
-                return self.baca_materials_package_importable_name
+                return self.baca_proxy.materials_package_importable_name
             else:
                 score_title = value
                 score_package_importable_name = self.score_wrangler.score_title_to_score_package_short_name(
                     score_title)
-                score_proxy = ScoreProxy(score_package_importable_name)
+                score_proxy = baca.scf.ScoreProxy(score_package_importable_name)
                 return score_proxy.materials_package_importable_name
 
     def manage_svn(self, menu_header=None):
@@ -121,6 +123,7 @@ class StudioInterface(DirectoryProxy):
             self.proceed()
     
     def work_in_studio(self, menu_header=None):
+        import baca
         while True:
             menu = self.Menu(client=self.where(), menu_header=menu_header)
             menu.menu_body = 'welcome to the studio.'
@@ -135,14 +138,14 @@ class StudioInterface(DirectoryProxy):
             menu.include_studio = False
             key, value = menu.display_menu()
             if key == 'makers':
-                self.maker_wrangler.manage_makers(menu_header='studio')
+                self.baca_proxy.maker_wrangler.manage_makers(menu_header='studio')
             elif key == 'shared':
-                self.material_wrangler.manage_shared_materials(menu_header='studio')
+                self.baca_proxy.material_wrangler.manage_shared_materials(menu_header='studio')
             elif key == 'svn':
                 self.manage_svn(menu_header='studio')
             else:
                 score_title = value
                 score_package_importable_name = self.score_wrangler.score_title_to_score_package_short_name(
                     score_title)
-                score_proxy = ScoreProxy(score_package_importable_name)
+                score_proxy = baca.scf.ScoreProxy(score_package_importable_name)
                 score_proxy.manage_score()
