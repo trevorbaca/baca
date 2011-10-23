@@ -7,17 +7,8 @@ import sys
 
 class _MaterialProxy(PackageProxy):
 
-    def __init__(self, package_importable_name):
+    def __init__(self, package_importable_name=None):
         PackageProxy.__init__(self, package_importable_name)
-        self.input_file_name = os.path.join(self.directory_name, 'input.py')
-        self.output_file_name = os.path.join(self.directory_name, 'output.py')
-        self.visualizer_file_name = os.path.join(self.directory_name, 'visualization.py')
-        self.pdf_file_name = os.path.join(self.directory_name, 'visualization.pdf')
-        self.ly_file_name = os.path.join(self.directory_name, 'visualization.ly')
-        self.stylesheet_file_name = os.path.join(self.directory_name, 'stylesheet.ly')
-        self.input_package_importable_name = '%s.input' % self.package_importable_name
-        self.output_package_importable_name = '%s.output' % self.package_importable_name
-        self.visualization_package_importable_name = '%s.visualization' % self.package_importable_name
 
     ### PUBLIC ATTRIBUTES ###
 
@@ -62,6 +53,16 @@ class _MaterialProxy(PackageProxy):
         return 5
 
     @property
+    def input_file_name(self):
+        if self.directory_name is not None:
+            return os.path.join(self.directory_name, 'input.py')
+
+    @property
+    def input_package_importable_name(self):
+        if self.package_importable_name is not None:
+            return '%s.input' % self.package_importable_name
+
+    @property
     def is_in_score(self):
         return not self.is_shared        
 
@@ -76,6 +77,11 @@ class _MaterialProxy(PackageProxy):
     @property
     def is_static(self):
         return not self.is_interactive
+
+    @property
+    def ly_file_name(self):
+        if self.directory_name is not None:
+            return os.path.join(self.directory_name, 'visualization.ly')
 
     @property
     def material_spaced_name(self):
@@ -93,6 +99,21 @@ class _MaterialProxy(PackageProxy):
             return '%s.mus.materials' % self.score_package_short_name
 
     @property
+    def output_file_name(self): 
+        if self.directory_name is not None:
+            return os.path.join(self.directory_name, 'output.py')
+
+    @property
+    def output_package_importable_name(self):
+        if self.package_importable_name is not None:
+            return '%s.output' % self.package_importable_name
+
+    @property
+    def pdf_file_name(self):
+        if self.directory_name is not None:
+            return os.path.join(self.directory_name, 'visualization.pdf')
+
+    @property
     def score_package_short_name(self):
         if self.package_importable_name.startswith('baca'):
             return None
@@ -100,9 +121,24 @@ class _MaterialProxy(PackageProxy):
             return self.package_importable_name.split('.')[0]
 
     @property
+    def stylesheet_file_name(self):
+        if self.directory_name is not None:
+            return os.path.join(self.directory_name, 'stylesheet.ly')
+
+    @property
     def user_input_wrapper(self):
         exec('from %s import user_input' % self.input_package_importable_name)
         return user_input
+
+    @property
+    def visualizer_file_name(self):
+        if self.directory_name is not None:
+            return os.path.join(self.directory_name, 'visualization.py')
+
+    @property
+    def visualization_package_importable_name(self):
+        if self.package_importable_name is not None:
+            return '%s.visualization' % self.package_importable_name
 
     ### PUBLIC METHODS ###
 
