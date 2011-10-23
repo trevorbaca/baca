@@ -58,6 +58,10 @@ class _SCFObject(object):
         return type(self).__name__
 
     @property
+    def help_item_width(self):
+        return 5
+
+    @property
     def helpers(self):
         from baca.scf import helpers
         return helpers

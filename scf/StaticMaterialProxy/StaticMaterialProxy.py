@@ -4,6 +4,9 @@ import os
 
 class StaticMaterialProxy(_MaterialProxy):
 
+    ### PUBLIC ATTRIBUTES ###
+
+
     ### PUBLIC METHODS ###
 
     def create(self, has_visualizer=True):

@@ -14,43 +14,66 @@ class _MaterialProxy(PackageProxy):
 
     @property
     def has_input_data(self):
-        return bool(self.import_material_from_input_file())
+        if not self.has_input_file:
+            return False
+        else:
+            return bool(self.import_material_from_input_file())
 
     @property
     def has_input_file(self):
-        return os.path.exists(self.input_file_name)
-
-    @property
-    def has_ly(self):
-        return os.path.exists(self.ly_file_name)
+        if self.input_file_name is None:
+            return False
+        else:
+            return os.path.exists(self.input_file_name)
 
     @property
     def has_output_data(self):
-        return bool(self.import_material_from_output_file())
+        if not self.has_output_file:
+            return False
+        else:
+            return bool(self.import_material_from_output_file())
 
     @property
     def has_output_file(self):
-        return os.path.exists(self.output_file_name)
-
-    @property
-    def has_pdf(self):
-        return os.path.exists(self.pdf_file_name)
+        if self.output_file_name is None:
+            return False
+        else:
+            return os.path.exists(self.output_file_name)
 
     @property
     def has_score_definition(self):
-        return bool(self.import_score_definition_from_visualizer())
+        if not self.has_visualizer:
+            return False
+        else:
+            return bool(self.import_score_definition_from_visualizer())
 
     @property
     def has_stylesheet(self):
-        return os.path.exists(self.stylesheet_file_name)
+        if self.stylesheet_file_name is None:
+            return False
+        else:
+            return os.path.exists(self.stylesheet_file_name)
     
     @property
-    def has_visualizer(self):
-        return os.path.exists(self.visualizer_file_name)
+    def has_visualization_ly(self):
+        if self.visualization_ly_file_name is None:
+            return False
+        else:
+            return os.path.exists(self.visualization_ly_file_name)
 
     @property
-    def help_item_width(self):
-        return 5
+    def has_visualization_pdf(self):
+        if self.visualization_pdf_file_name is None:
+            return False
+        else:
+            return os.path.exists(self.visualization_pdf_file_name)
+
+    @property
+    def has_visualizer(self):
+        if self.visualizer_file_name is None:
+            return False
+        else:
+            return os.path.exists(self.visualizer_file_name)
 
     @property
     def input_file_name(self):
@@ -64,7 +87,10 @@ class _MaterialProxy(PackageProxy):
 
     @property
     def is_in_score(self):
-        return not self.is_shared        
+        if self.purview is None:
+            return False
+        else:
+            return not self.is_shared        
 
     @property
     def is_interactive(self):
@@ -72,16 +98,15 @@ class _MaterialProxy(PackageProxy):
 
     @property
     def is_shared(self):
-        return bool(self.package_importable_name.startswith('baca'))
+        from baca.scf.StudioInterface import StudioInterface
+        if self.purview is None:
+            return False
+        else:
+            isinstance(self.purview, Studiointerface)
 
     @property
     def is_static(self):
         return not self.is_interactive
-
-    @property
-    def ly_file_name(self):
-        if self.directory_name is not None:
-            return os.path.join(self.directory_name, 'visualization.ly')
 
     @property
     def material_spaced_name(self):
@@ -93,9 +118,10 @@ class _MaterialProxy(PackageProxy):
 
     @property
     def materials_package_importable_name(self):
-        if self.score_package_short_name is None:
+        import baca
+        if isinstance(self.purview, baca.scf.StudioInterface):
             return 'baca.materials'
-        else:
+        elif isinstance(self.purview, baca.scf.ScoreProxy):
             return '%s.mus.materials' % self.score_package_short_name
 
     @property
@@ -109,16 +135,10 @@ class _MaterialProxy(PackageProxy):
             return '%s.output' % self.package_importable_name
 
     @property
-    def pdf_file_name(self):
-        if self.directory_name is not None:
-            return os.path.join(self.directory_name, 'visualization.pdf')
-
-    @property
     def score_package_short_name(self):
-        if self.package_importable_name.startswith('baca'):
-            return None
-        else:
-            return self.package_importable_name.split('.')[0]
+        if self.package_importable_name is not None:
+            if self.package_importable_name.startswith('baca'):
+                return self.package_importable_name.split('.')[0]
 
     @property
     def stylesheet_file_name(self):
@@ -127,8 +147,9 @@ class _MaterialProxy(PackageProxy):
 
     @property
     def user_input_wrapper(self):
-        exec('from %s import user_input' % self.input_package_importable_name)
-        return user_input
+        if self.input_package_importable_name is not None:
+            exec('from %s import user_input' % self.input_package_importable_name)
+            return user_input
 
     @property
     def visualizer_file_name(self):
@@ -136,9 +157,19 @@ class _MaterialProxy(PackageProxy):
             return os.path.join(self.directory_name, 'visualization.py')
 
     @property
+    def visualization_ly_file_name(self):
+        if self.directory_name is not None:
+            return os.path.join(self.directory_name, 'visualization.ly')
+
+    @property
     def visualization_package_importable_name(self):
         if self.package_importable_name is not None:
             return '%s.visualization' % self.package_importable_name
+
+    @property
+    def visualization_pdf_file_name(self):
+        if self.directory_name is not None:
+            return os.path.join(self.directory_name, 'visualization.pdf')
 
     ### PUBLIC METHODS ###
 
@@ -150,8 +181,8 @@ class _MaterialProxy(PackageProxy):
     def create_ly_and_pdf_from_visualizer(self, is_forced=False):
         lilypond_file = self.import_score_definition_from_visualizer()
         if is_forced or not self.lilypond_file_format_is_equal_to_visualizer_ly(lilypond_file):
-            iotools.write_expr_to_ly(lilypond_file, self.ly_file_name)
-            iotools.write_expr_to_pdf(lilypond_file, self.pdf_file_name)
+            iotools.write_expr_to_visualization_ly(lilypond_file, self.visualization_ly_file_name)
+            iotools.write_expr_to_visualization_pdf(lilypond_file, self.visualization_pdf_file_name)
         else:
             print 'LilyPond file is the same. (LilyPond file and PDF preserved.)'
         print ''
@@ -159,7 +190,7 @@ class _MaterialProxy(PackageProxy):
     def create_ly_from_visualizer(self, is_forced=False):
         lilypond_file = self.import_score_definition_from_visualizer()
         if is_forced or not self.lilypond_file_format_is_equal_to_visualizer_ly(lilypond_file):
-            iotools.write_expr_to_ly(lilypond_file, self.ly_file_name)
+            iotools.write_expr_to_ly(lilypond_file, self.visualization_ly_file_name)
         else:
             print 'LilyPond file is the same. (LilyPond file preserved.)'
         print ''
@@ -167,7 +198,7 @@ class _MaterialProxy(PackageProxy):
     def create_pdf_from_visualizer(self, is_forced=False):
         lilypond_file = self.import_score_definition_from_visualizer()
         if is_forced or not self.lilypond_file_format_is_equal_to_visualizer_ly(lilypond_file):
-            iotools.write_expr_to_pdf(lilypond_file, self.pdf_file_name)
+            iotools.write_expr_to_visualzation_pdf(lilypond_file, self.visualization_pdf_file_name)
         else:
             print 'LilyPond file is the same. (PDF preserved.)'
         print ''
@@ -189,8 +220,8 @@ class _MaterialProxy(PackageProxy):
     def edit_input_file(self):
         os.system('vi + %s' % self.input_file_name)
 
-    def edit_ly(self):
-        os.system('vi %s' % self.ly_file_name)
+    def edit_visualization_ly(self):
+        os.system('vi %s' % self.visualization_ly_file_name)
 
     def edit_output_file(self):
         os.system('vi + %s' % self.output_file_name)
@@ -253,7 +284,7 @@ class _MaterialProxy(PackageProxy):
         iotools.write_expr_to_ly(lilypond_file, temp_ly_file, print_status=False)
         trimmed_temp_ly_file_lines = self.trim_ly_lines(temp_ly_file)
         os.remove(temp_ly_file)
-        trimmed_visualizer_ly_lines = self.trim_ly_lines(self.ly_file_name)
+        trimmed_visualizer_ly_lines = self.trim_ly_lines(self.visualization_ly_file_name)
         return trimmed_temp_ly_file_lines == trimmed_visualizer_ly_lines
 
     def manage_input(self, command_string):
@@ -277,8 +308,8 @@ class _MaterialProxy(PackageProxy):
 
     def manage_ly(self, command_string):
         if command_string == 'l':
-            if self.has_ly:
-                self.edit_ly()
+            if self.has_visualization_ly:
+                self.edit_visualization_ly()
             elif self.has_visualizer:
                 if self.query('Create LilyPond file from visualizer? '):
                     self.create_ly_from_visualizer()    
@@ -300,7 +331,7 @@ class _MaterialProxy(PackageProxy):
             self.create_ly_from_visualizer(is_forced=True)
         elif command_string == 'lwo':
             self.create_ly_from_visualizer(is_forced=True)
-            self.edit_ly()
+            self.edit_visualzation_ly()
         elif command_string == 'lh':
             print '%s: open ly' % 'l'.rjust(self.help_item_width)
             print '%s: write ly' % 'lw'.rjust(self.help_item_width)
@@ -318,11 +349,11 @@ class _MaterialProxy(PackageProxy):
             menu.named_pairs.append(('o', 'output'))
             if self.has_visualizer:
                 menu.named_pairs.append(('v', 'visualizer'))
-            if self.has_ly:
+            if self.has_visualization_ly:
                 menu.named_pairs.append(('l', 'ly'))
             if self.has_stylesheet:
                 menu.named_pairs.append(('y', 'stylesheet'))
-            if self.has_pdf:
+            if self.has_visualization_pdf:
                 menu.named_pairs.append(('p', 'pdf'))
             menu.named_pairs.append(('n', 'initializer'))
             menu.secondary_named_pairs.append(('d', 'delete'))
@@ -374,8 +405,8 @@ class _MaterialProxy(PackageProxy):
 
     def manage_pdf(self, command_string):
         if command_string == 'p':
-            if self.has_pdf:
-                self.open_pdf()
+            if self.has_visualization_pdf:
+                self.open_visualization_pdf()
             elif self.has_visualizer:
                 if self.query('Create PDF from visualizer? '):
                     self.create_pdf_from_visualizer()
@@ -397,7 +428,7 @@ class _MaterialProxy(PackageProxy):
             self.create_pdf_from_visualizer(is_forced=True)
         elif command_string == 'pwo':
             self.create_pdf_from_visualizer(is_forced=True)
-            self.open_pdf()
+            self.open_visualization_pdf()
         elif command_string == 'ph':
             print '%s: open pdf' % 'p'.rjust(self.help_item_width)
             print '%s: write pdf ' % 'pw'.rjust(self.help_item_width)
@@ -413,7 +444,7 @@ class _MaterialProxy(PackageProxy):
             print ''
         elif command_string == 'zo':
             self.regenerate_everything(is_forced=True)
-            self.open_pdf()
+            self.open_visualzation_pdf()
 
     def manage_visualizer(self, command_string):
         if self.has_visualizer:
@@ -440,8 +471,8 @@ class _MaterialProxy(PackageProxy):
             if self.query('Create input file? '):
                 self.edit_input_file()
 
-    def open_pdf(self):
-        command = 'open %s' % self.pdf_file_name
+    def open_visualization_pdf(self):
+        command = 'open %s' % self.visualization_pdf_file_name
         os.system(command)
 
     def overwrite_output_file(self):
@@ -575,12 +606,12 @@ class _MaterialProxy(PackageProxy):
 #        else:
 #            missing.append(artifact_name)
         artifact_name = 'ly'
-        if self.has_ly:
+        if self.has_visualization_ly:
             found.append(artifact_name)
         else:
             missing.append(artifact_name)
         artifact_name = 'pdf'
-        if self.has_pdf:
+        if self.has_visualization_pdf:
             found.append(artifact_name)
         else:
             missing.append(artifact_name)
