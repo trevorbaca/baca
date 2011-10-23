@@ -246,8 +246,8 @@ class ScoreProxy(PackageProxy):
             menu_section.menu_section_title = 'Materials'
             menu_section.menu_section_entries = self.list_material_underscored_names_with_numbers()
             menu_section.menu_section_entry_prefix = 'm'
-            menu_section.sentence_length_items.append(('ms', 'create material by hand'))
-            menu_section.sentence_length_items.append(('mi', 'create material interactively'))
+            menu_section.sentence_length_items.append(('mi', 'create interactive material'))
+            menu_section.sentence_length_items.append(('ms', 'create static material'))
             menu.menu_sections.append(menu_section)
             menu.hidden_items.append(('svn', 'work with repository'))
             key, value = menu.display_menu()
@@ -255,10 +255,10 @@ class ScoreProxy(PackageProxy):
                 return key, None
             elif key == 'ch':
                 self.chunk_wrangler.create_chunk_interactively(menu_header=self.score_title)
-            elif key == 'ms':
-                self.material_wrangler.create_static_material_package_interactively(menu_header=self.score_title)
             elif key == 'mi':
                 self.material_wrangler.create_interactive_material_interactively(menu_header=self.score_title)
+            elif key == 'ms':
+                self.material_wrangler.create_static_material_package_interactively(menu_header=self.score_title)
             elif key == 'svn':
                 self.manage_svn(menu_header=self.score_title)
             elif key.startswith('h'):

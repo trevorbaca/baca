@@ -1,3 +1,4 @@
+# -*- encoding: utf-8 -*-
 from baca.scf.BacaProxy import BacaProxy
 from baca.scf.DirectoryProxy import DirectoryProxy
 from baca.scf.ScoreWrangler import ScoreWrangler
@@ -130,17 +131,17 @@ class StudioInterface(DirectoryProxy):
             menu_section = self.MenuSection()
             score_titles = self.score_wrangler.list_numbered_score_titles_with_years()
             menu_section.menu_section_entries = score_titles
-            menu_section.sentence_length_items.append(('makers', 'work with material makers'))
-            menu_section.sentence_length_items.append(('shared', 'work with shared materials'))
+            menu_section.sentence_length_items.append(('k', 'work with material makers'))
+            menu_section.sentence_length_items.append(('m', 'work with Bača materials'))
             menu_section.hidden_items.append(('svn', 'work with repository'))
             menu.menu_sections.append(menu_section)
             menu.include_back = False
             menu.include_studio = False
             key, value = menu.display_menu()
-            if key == 'makers':
+            if key == 'k':
                 self.baca_proxy.maker_wrangler.manage_makers(menu_header='studio')
-            elif key == 'shared':
-                self.baca_proxy.material_wrangler.manage_shared_materials(menu_header='studio')
+            elif key == 'm':
+                self.baca_proxy.material_wrangler.manage_materials(menu_header='studio')
             elif key == 'svn':
                 self.manage_svn(menu_header='studio')
             else:

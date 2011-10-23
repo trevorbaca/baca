@@ -31,3 +31,5 @@ class BacaProxy(PackageProxy):
     @property
     def materials_package_importable_name(self):
         return 'baca.materials' 
+
+    ### PUBLIC METHODS ###

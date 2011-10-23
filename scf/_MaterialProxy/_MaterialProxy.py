@@ -229,6 +229,34 @@ class _MaterialProxy(PackageProxy):
     def edit_visualizer(self):
         os.system('vi + %s' % self.visualizer_file_name)
 
+    def get_materials_package_importable_name(self):
+        if self.purview.is_score_local_purview:
+            return self.purview.materials_package_importable_name
+        elif self.purview.is_studio_global_purview:
+            return self.purview.get_materials_package_importable_name_interactively()
+        else:
+            raise ValueError
+
+    def get_package_short_name_of_new_material_interactively(self):
+        response = raw_input('Material name: ')
+        print ''
+        response = response.lower()
+        response = response.replace(' ', '_')
+        if self.has_score_local_purview:
+            package_short_name = '%s_%s' % (self.purview.package_short_name, response)
+        else:
+            package_short_name = response
+        print 'Short package name will be %s.\n' % package_short_name
+        return package_short_name
+
+    def get_visualizer_status_of_new_material_package_interactively(self):
+        response = raw_input('Include visualizer? ')
+        print ''
+        if response == 'y':
+            return True
+        else:
+            return False
+
     def import_attribute_from_input_file(self, attribute_name):
         try:
             exec('from %s import %s' % (self.input_package_importable_name, attribute_name))
