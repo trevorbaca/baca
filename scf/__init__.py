@@ -1,3 +1,4 @@
+from BacaProxy import BacaProxy
 from ChunkProxy import ChunkProxy
 from ChunkWrangler import ChunkWrangler
 from DirectoryProxy import DirectoryProxy

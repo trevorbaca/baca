@@ -11,11 +11,6 @@ class MaterialWrangler(PackageProxy):
         PackageProxy.__init__(self, package_importable_name)
         self._maker_wrangler = MakerWrangler()
 
-    ### OVERLOADS ###
-
-    def __repr__(self):
-        return '%s()' % self.class_name
-
     ### PUBLIC ATTRIBUTES ###
 
     @property
