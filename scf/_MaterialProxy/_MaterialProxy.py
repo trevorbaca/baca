@@ -98,11 +98,10 @@ class _MaterialProxy(PackageProxy):
 
     @property
     def is_shared(self):
-        import baca
         if self.purview is None:
             return False
         else:
-            return isinstance(self.purview, baca.scf.BacaProxy)
+            return self.purview.is_studio_global_purview
 
     @property
     def is_static(self):

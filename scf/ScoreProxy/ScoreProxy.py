@@ -64,6 +64,14 @@ class ScoreProxy(PackageProxy):
         return self.has_correct_directory_structure and self.has_correct_initializers
 
     @property
+    def is_score_local_purview(self):
+        return True
+
+    @property
+    def is_studio_global_purview(self):
+        return False
+
+    @property
     def maker_wrangler(self):
         return self._maker_wrangler
 

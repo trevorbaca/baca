@@ -14,16 +14,6 @@ class MaterialWrangler(PackageProxy):
     ### PUBLIC ATTRIBUTES ###
 
     @property
-    def has_score_local_purview(self):
-        import baca
-        return isinstance(self.purview, baca.scf.ScoreProxy)
-
-    @property
-    def has_studio_global_purview(self):
-        import baca
-        return isinstance(self.purview, baca.scf.BacaProxy)    
-
-    @property
     def maker_wrangler(self):
         return self._maker_wrangler
 
@@ -68,10 +58,12 @@ class MaterialWrangler(PackageProxy):
         self.proceed()
 
     def get_materials_package_importable_name_of_new_material(self):
-        if self.has_studio_global_purview:
+        if self.purview.is_studio_global_purview:
             return self.purview.get_materials_package_importable_name_interactively()
-        else:
+        elif self.purview.is_score_local_purview:
             return self.purview.materials_package_importable_name
+        else:
+            raise ValueError
 
     def get_package_short_name_of_new_material_interactively(self):
         response = raw_input('Material name: ')

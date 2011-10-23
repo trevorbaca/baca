@@ -41,7 +41,7 @@ def test_PackageProxy_02():
     assert package_proxy.package_spaced_name == 'foo'
     assert package_proxy.parent_initializer_file_name == '/Users/trevorbaca/Documents/other/baca/__init__.py'
     assert package_proxy.parent_package_importable_name == 'baca'
-    assert isinstance(package_proxy.purview, baca.scf.BacaProxy)
+    assert package_proxy.purview.is_studio_global_purview
     assert package_proxy.score is None
 
 
