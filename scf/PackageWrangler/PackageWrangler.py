@@ -4,6 +4,11 @@ import os
 
 class PackageWrangler(PackageProxy):
 
+    ### OVERLOADS ###
+
+    def __repr__(self):
+        return '%s(%r)' % (self.class_name, self.purview.package_short_name)
+
     ### PUBLIC METHODS ###
 
     def get_package_proxy(self, package_importable_name):

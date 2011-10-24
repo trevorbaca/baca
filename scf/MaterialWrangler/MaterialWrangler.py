@@ -10,11 +10,6 @@ class MaterialWrangler(PackageWrangler):
         else:   
             PackageWrangler.__init__(self, '%s.mus.materials' % purview_package_short_name)
 
-    ### OVERLOADS ###
-
-    def __repr__(self):
-        return '%s(%r)' % (self.class_name, self.purview.package_short_name)
-
     ### PUBLIC ATTRIBUTES ###
 
     @property

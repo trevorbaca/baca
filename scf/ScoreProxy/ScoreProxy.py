@@ -218,7 +218,7 @@ class ScoreProxy(PackageProxy):
 
     def list_chunk_spaced_names_with_numbers(self):
         numbered_chunks = []
-        for i, chunk in enumerate(self.chunk_wrangler.list_chunk_spaced_names()):
+        for i, chunk in enumerate(self.chunk_wrangler.list_package_spaced_names()):
             numbered_chunk = (str(i + 1), chunk)
             numbered_chunks.append(numbered_chunk)
         return numbered_chunks
@@ -333,9 +333,8 @@ class ScoreProxy(PackageProxy):
         for initializer in self.score_initializers:
             print '%s %s' % (initializer.ljust(80), os.path.exists(initializer))
 
-    # TODO: use chunk wrangler instead
     def summarize_chunks(self):
-        chunks = self.list_chunk_underscored_names()
+        chunks = self.chunk_wrangler.list_package_underscored_names()
         print self.tab(1),
         if not chunks:
             print 'Chunks (none yet)'
