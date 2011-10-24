@@ -10,7 +10,8 @@ def test_BacaProxy_01():
     assert baca_proxy.get_tags() == {}
     assert baca_proxy.has_directory
     assert baca_proxy.initializer_file_name == '/Users/trevorbaca/Documents/other/baca/__init__.py'
-    assert baca_proxy.is_in_repository
+    # TODO: find robust way to check repository check-in status
+    #assert baca_proxy.is_in_repository
     assert not baca_proxy.is_score_local_purview
     assert baca_proxy.is_studio_global_purview
     assert baca_proxy.list_formatted_tags() == []

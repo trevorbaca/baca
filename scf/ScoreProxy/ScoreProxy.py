@@ -21,21 +21,6 @@ class ScoreProxy(PackageProxy):
     def chunk_wrangler(self):
         return self._chunk_wrangler
 
-    # TODO: use chunk wrangler instead
-    @property
-    def chunks_directory_name(self):
-        return self.chunk_wrangler.directory_name
-
-    # TODO: use chunk wrangler instead
-    @property
-    def chunks_initializer(self):
-        return self.chunk_wrangler.initializer_file_name
-
-    # TODO: use chunk wrangler instead
-    @property
-    def chunks_package_importable_name(self):
-        return self.chunk_wrangler.package_importable_name
-
     @property
     def dist_directory_name(self):
         return os.path.join(self.directory_name, 'dist')
@@ -80,21 +65,6 @@ class ScoreProxy(PackageProxy):
     def material_wrangler(self):
         return self._material_wrangler
 
-    # TODO: use material wrangler instead
-    @property
-    def materials_directory_name(self):
-        return os.path.join(self.directory_name, 'mus', 'materials')
-
-    # TODO: use material wrangler instead
-    @property
-    def materials_initializer(self):
-        return os.path.join(self.materials_directory_name, '__init__.py')
-
-    # TODO: use material wrangler instead
-    @property
-    def materials_package_importable_name(self):
-        return '.'.join([self.package_importable_name, 'mus', 'materials'])
-
     # TODO: create mus proxy and use mus proxy instead
     @property
     def mus_directory_name(self):
@@ -133,8 +103,8 @@ class ScoreProxy(PackageProxy):
     def score_initializers(self):
         return (self.initializer_file_name,
             self.mus_initializer,
-            self.chunks_initializer,
-            self.materials_initializer,)
+            self.chunk_wrangler.initializer_file_name,
+            self.material_wrangler.initializer_file_name,)
 
     @property
     def score_subdirectory_names(self):
@@ -143,8 +113,8 @@ class ScoreProxy(PackageProxy):
             self.etc_directory_name,
             self.exg_directory_name,
             self.mus_directory_name,
-            self.materials_directory_name,
-            self.chunks_directory_name,)
+            self.material_wrangler.directory_name,
+            self.chunk_wrangler.directory_name,)
 
     # TODO: use tags instead
     @apply
@@ -227,7 +197,7 @@ class ScoreProxy(PackageProxy):
     def list_material_package_importable_names(self):
         material_package_importable_names = []
         for material in self.list_material_underscored_names():
-            material_package_importable_name = '%s.%s' % (self.materials_package_importable_name, material)
+            material_package_importable_name = '%s.%s' % (self.material_wrangler.package_importable_name, material)
             material_package_importable_names.append(material_package_importable_name)
         return material_package_importable_names
 
@@ -282,7 +252,7 @@ class ScoreProxy(PackageProxy):
             elif key.startswith('h'):
                 chunk_spaced_name = value
                 chunk_underscored_name = chunk_spaced_name.replace(' ', '_')
-                package_importable_name = '%s.%s' % (self.chunks_package_importable_name, chunk_underscored_name)
+                package_importable_name = '%s.%s' % (self.chunk_wrangler.package_importable_name, chunk_underscored_name)
                 chunk_proxy = self.chunk_wrangler.ChunkProxy(package_importable_name)
                 chunk_proxy.score_title = self.score_title
                 chunk_proxy.manage_chunk(menu_header=menu.menu_title)
@@ -290,7 +260,7 @@ class ScoreProxy(PackageProxy):
                 material_number = key[1:]
                 material_number = int(material_number)
                 material_underscored_name = self.material_number_to_material_underscored_name(material_number)
-                package_importable_name = '%s.%s' % (self.materials_package_importable_name, material_underscored_name)
+                package_importable_name = '%s.%s' % (self.material_wrangler.package_importable_name, material_underscored_name)
                 material_proxy = self.material_wrangler.get_material_proxy(package_importable_name)
                 material_proxy.score_title = self.score_title
                 material_proxy.manage_material(menu_header=menu.menu_title)
