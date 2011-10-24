@@ -1,19 +1,19 @@
-from baca.scf.ChunkWrangler import ChunkWrangler
-from baca.scf.InteractiveMaterialProxy import InteractiveMaterialProxy
-from baca.scf.MakerWrangler import MakerWrangler
-from baca.scf.MaterialWrangler import MaterialWrangler
 from baca.scf.PackageProxy import PackageProxy
-from baca.scf.StaticMaterialProxy import StaticMaterialProxy
 import os
 
 
 class ScoreProxy(PackageProxy):
 
-    def __init__(self, score_package_importable_name):
-        PackageProxy.__init__(self, score_package_importable_name)
-        self._chunk_wrangler = ChunkWrangler(score_package_importable_name)
-        self._material_wrangler = MaterialWrangler(score_package_importable_name)
-        self._maker_wrangler = MakerWrangler()
+    def __init__(self, score_package_short_name):
+        import baca
+        PackageProxy.__init__(self, score_package_short_name)
+        self._dist_proxy = baca.scf.DistProxy(score_package_short_name)
+        self._etc_proxy = baca.scf.EtcProxy(score_package_short_name)
+        self._exg_proxy = baca.scf.ExgProxy(score_package_short_name)
+        self._mus_proxy = baca.scf.MusProxy(score_package_short_name)
+        self._chunk_wrangler = baca.scf.ChunkWrangler(score_package_short_name)
+        self._material_wrangler = baca.scf.MaterialWrangler(score_package_short_name)
+        self._maker_wrangler = baca.scf.MakerWrangler()
 
     ### PUBLIC ATTRIBUTES ###
 
@@ -22,20 +22,20 @@ class ScoreProxy(PackageProxy):
         return self._chunk_wrangler
 
     @property
-    def dist_directory_name(self):
-        return os.path.join(self.directory_name, 'dist')
+    def dist_proxy(self):
+        return self._dist_proxy
 
     @property
     def dist_pdf_directory_name(self):
-        return os.path.join(self.directory_name, 'dist', 'pdf')
+        return os.path.join(self.dist_proxy.directory_name, 'pdf')
 
     @property
-    def exg_directory_name(self):
-        return os.path.join(self.directory_name, 'exg')
+    def etc_proxy(self):
+        return self._etc_proxy
 
     @property
-    def etc_directory_name(self):
-        return os.path.join(self.directory_name, 'etc')
+    def exg_proxy(self):
+        return self._exg_proxy
 
     @property
     def has_correct_directory_structure(self):
@@ -65,20 +65,9 @@ class ScoreProxy(PackageProxy):
     def material_wrangler(self):
         return self._material_wrangler
 
-    # TODO: create mus proxy and use mus proxy instead
     @property
-    def mus_directory_name(self):
-        return os.path.join(self.directory_name, 'mus')
-
-    # TODO: use mus proxy instead
-    @property
-    def mus_initializer(self):
-        return os.path.join(self.mus_directory_name, '__init__.py')
-
-    # TODO: use mus proxy instead
-    @property
-    def mus_package_importable_name(self):
-        return '.'.join([self.package_importable_name, 'mus'])
+    def mus_proxy(self):
+        return self._mus_proxy
 
     # TODO: use tags instead
     @apply
@@ -102,17 +91,17 @@ class ScoreProxy(PackageProxy):
     @property
     def score_initializers(self):
         return (self.initializer_file_name,
-            self.mus_initializer,
+            self.mus_proxy.initializer_file_name,
             self.chunk_wrangler.initializer_file_name,
             self.material_wrangler.initializer_file_name,)
 
     @property
     def score_subdirectory_names(self):
-        return (self.dist_directory_name,
+        return (self.dist_proxy.directory_name,
             self.dist_pdf_directory_name,
-            self.etc_directory_name,
-            self.exg_directory_name,
-            self.mus_directory_name,
+            self.etc_proxy.directory_name,
+            self.exg_proxy.directory_name,
+            self.mus_proxy.directory_name,
             self.material_wrangler.directory_name,
             self.chunk_wrangler.directory_name,)
 
@@ -155,7 +144,7 @@ class ScoreProxy(PackageProxy):
                     initializer.write('')
                     initializer.close()
         lines = []
-        initializer = file(self.mus_initializer, 'r')
+        initializer = file(self.mus_proxy.initializer_file_name, 'r')
         found_materials_import = False
         for line in initializer.readlines():
             lines.append(line)
@@ -164,7 +153,7 @@ class ScoreProxy(PackageProxy):
         initializer.close()
         if not found_materials_import:
             lines.insert(0, 'import materials\n')
-            initializer = file(self.mus_initializer, 'w')
+            initializer = file(self.mus_proxy.initializer_file_name, 'w')
             initializer.write(''.join(lines))
             initializer.close()
 
