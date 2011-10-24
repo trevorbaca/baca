@@ -69,31 +69,26 @@ class ScoreProxy(PackageProxy):
     def mus_proxy(self):
         return self._mus_proxy
 
-    # TODO: use tags instead
-    @apply
-    def score_composer():
-        def fget(self):
-            return self._read_initializer_metadata('score_composer')
-        def fset(self, score_title):
-            return self._write_initializer_metadata('score_composer', score_title)
-        return property(**locals())
+    @property
+    def score_composer(self):
+        return self.get_tag('score_composer')
 
-    # TODO: use tags instead
-    @apply
-    def score_forces():
-        def fget(self):
-            return self._read_initializer_metadata('score_forces')
-        def fset(self, score_title):
-            return self._write_initializer_metadata('score_forces', score_title)
-        return property(**locals())
+    @property
+    def score_forces(self):
+        return self.get_tag('score_forces')
 
-    # TODO: use tags instead
     @property
     def score_initializers(self):
         return (self.initializer_file_name,
             self.mus_proxy.initializer_file_name,
             self.chunk_wrangler.initializer_file_name,
             self.material_wrangler.initializer_file_name,)
+
+    @property
+    def score_package_wranglers(self):
+        return (self.mus,
+            self.chunk_wrangler,
+            self.material_wrangler,)
 
     @property
     def score_subdirectory_names(self):
@@ -105,23 +100,20 @@ class ScoreProxy(PackageProxy):
             self.material_wrangler.directory_name,
             self.chunk_wrangler.directory_name,)
 
-    # TODO: use tags instead
-    @apply
-    def score_title():
-        def fget(self):
-            return self._read_initializer_metadata('score_title')
-        def fset(self, score_title):
-            return self._write_initializer_metadata('score_title', score_title)
-        return property(**locals())
+    @property
+    def score_title(self):
+        return self.get_tag('score_title')
 
-    # TODO: use tags instead
-    @apply
-    def score_year():
-        def fget(self):
-            return self._read_initializer_metadata('score_year')
-        def fset(self, score_title):
-            return self._write_initializer_metadata('score_year', score_title)
-        return property(**locals())
+    @property
+    def score_top_level_subdirectories(self):
+        return (self.dist_proxy,
+            self.etc_proxy,
+            self.exg_proxy,
+            self.mus_proxy,)
+        
+    @property
+    def score_year(self):
+        return self.get_tag('score_year')
 
     ### PUBLIC METHODS ###
 

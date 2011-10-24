@@ -212,11 +212,12 @@ class PackageProxy(DirectoryProxy):
         return tag
 
     def get_tags(self):
+        import collections
         try:
             exec('from %s import tags' % self.package_importable_name)
             return tags
         except ImportError:    
-            return {}
+            return collections.OrderedDict
 
     def has_tag(self, tag_name):
         tags = self.get_tags()
@@ -313,18 +314,30 @@ class PackageProxy(DirectoryProxy):
     def write_package_to_disk(self):
         self.print_not_implemented()
 
+    def pprint_tags(self, tags):
+        if tags:
+            items = list(sorted(tags.iteritems()))
+            items = ',\n    '.join([repr(x) for x in items])    
+            result = 'tags = OrderedDict([%s])' % items
+        else:
+            result = 'tags = OrderedDict([])'
+        return result
+
     def write_tags_to_initializer(self, tags):
+        tags = self.pprint_tags(tags)
         lines = []
         fp = file(self.initializer_file_name, 'r')
         found_tags = False
         for line in fp.readlines():
-            if line.startswith('tags ='):
+            if found_tags:
+                pass
+            elif line.startswith('tags ='):
                 found_tags = True
-                lines.append('tags = %s\n' % tags)
+                lines.append(tags)
             else:
                 lines.append(line)
         if not found_tags:
-            lines.append('tags = %s\n' % tags)
+            lines.append(tags)
         fp.close()
         fp = file(self.initializer_file_name, 'w')
         fp.write(''.join(lines))
