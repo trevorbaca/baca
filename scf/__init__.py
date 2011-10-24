@@ -6,6 +6,7 @@ from InteractiveMaterialProxy import InteractiveMaterialProxy
 from MakerWrangler import MakerWrangler
 from MaterialWrangler import MaterialWrangler
 from PackageProxy import PackageProxy
+from PackageWrangler import PackageWrangler
 from ScoreProxy import ScoreProxy
 from ScoreTemplate import ScoreTemplate
 from ScoreTemplateWizard import ScoreTemplateWizard

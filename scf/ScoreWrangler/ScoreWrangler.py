@@ -45,7 +45,7 @@ class ScoreWrangler(DirectoryProxy):
                 if class_names is None or material_proxy.get_tag('maker') in class_names:
                     yield material_proxy
         baca_material_wrangler = baca.scf.MaterialWrangler('baca')
-        for material_proxy in baca_material_wrangler.iterate_material_proxies():
+        for material_proxy in baca_material_wrangler.iterate_package_proxies():
             yield material_proxy
 
     def iterate_score_proxies(self):

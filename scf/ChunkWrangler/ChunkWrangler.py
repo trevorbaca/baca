@@ -1,6 +1,4 @@
-from abjad.tools import iotools
 from baca.scf.PackageProxy import PackageProxy
-import inspect
 import os
 
 
@@ -8,6 +6,11 @@ class ChunkWrangler(PackageProxy):
 
     def __init__(self, purview_package_short_name):
         PackageProxy.__init__(self, '%s.mus.chunks' % purview_package_short_name)
+
+    ### OVERLOADS ###
+
+    def __repr__(self):
+        return '%s(%r)' % (self.class_name, self.purview.package_short_name)
 
     ### PUBLIC ATTRIBUTES ###
 
@@ -48,3 +51,7 @@ class ChunkWrangler(PackageProxy):
 
     def list_chunk_underscored_names(self):
         return self.list_chunk_package_short_names()
+
+    # TODO: implement me
+    def manage_chunks(self):
+        self.print_not_implemented()
