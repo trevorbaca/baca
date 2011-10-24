@@ -21,16 +21,16 @@ def test_MaterialWrangler_01():
     material_proxies = material_wrangler.iterate_material_proxies()
     assert all([isinstance(x, baca.scf._MaterialProxy._MaterialProxy) for x in material_proxies])
 
-    names = material_wrangler.list_material_package_importable_names()
+    names = material_wrangler.iterate_material_package_importable_names()
     assert all([iotools.is_underscore_delimited_lowercase_package_name(x) for x in names])
 
-    names = material_wrangler.list_material_package_short_names()
+    names = material_wrangler.iterate_material_package_short_names()
     assert all([iotools.is_underscore_delimited_lowercase_string(x) for x in names])
 
-    names = material_wrangler.list_material_spaced_names()
+    names = material_wrangler.iterate_material_spaced_names()
     assert all([iotools.is_space_delimited_lowercase_string(x) for x in names])
 
-    names = material_wrangler.list_material_underscored_names()
+    names = material_wrangler.iterate_material_underscored_names()
     assert all([iotools.is_underscore_delimited_lowercase_string(x) for x in names])
 
 
@@ -53,14 +53,14 @@ def test_MaterialWrangler_02():
     material_proxies = material_wrangler.iterate_material_proxies()
     assert all([isinstance(x, baca.scf._MaterialProxy._MaterialProxy) for x in material_proxies])
 
-    names = material_wrangler.list_material_package_importable_names()
+    names = material_wrangler.iterate_material_package_importable_names()
     assert all([iotools.is_underscore_delimited_lowercase_package_name(x) for x in names])
 
-    names = material_wrangler.list_material_package_short_names()
+    names = material_wrangler.iterate_material_package_short_names()
     assert all([iotools.is_underscore_delimited_lowercase_string(x) for x in names])
 
-    names = material_wrangler.list_material_spaced_names()
+    names = material_wrangler.iterate_material_spaced_names()
     assert all([iotools.is_space_delimited_lowercase_string(x) for x in names])
 
-    names = material_wrangler.list_material_underscored_names()
+    names = material_wrangler.iterate_material_underscored_names()
     assert all([iotools.is_underscore_delimited_lowercase_string(x) for x in names])

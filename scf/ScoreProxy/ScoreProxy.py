@@ -23,14 +23,17 @@ class ScoreProxy(PackageProxy):
     def chunk_wrangler(self):
         return self._chunk_wrangler
 
+    # TODO: use chunk wrangler instead
     @property
     def chunks_directory_name(self):
         return self.chunk_wrangler.directory_name
 
+    # TODO: use chunk wrangler instead
     @property
     def chunks_initializer(self):
         return self.chunk_wrangler.initializer_file_name
 
+    # TODO: use chunk wrangler instead
     @property
     def chunks_package_importable_name(self):
         return self.chunk_wrangler.package_importable_name
@@ -79,30 +82,37 @@ class ScoreProxy(PackageProxy):
     def material_wrangler(self):
         return self._material_wrangler
 
+    # TODO: use material wrangler instead
     @property
     def materials_directory_name(self):
         return os.path.join(self.directory_name, 'mus', 'materials')
 
+    # TODO: use material wrangler instead
     @property
     def materials_initializer(self):
         return os.path.join(self.materials_directory_name, '__init__.py')
 
+    # TODO: use material wrangler instead
     @property
     def materials_package_importable_name(self):
         return '.'.join([self.package_importable_name, 'mus', 'materials'])
 
+    # TODO: create mus proxy and use mus proxy instead
     @property
     def mus_directory_name(self):
         return os.path.join(self.directory_name, 'mus')
 
+    # TODO: use mus proxy instead
     @property
     def mus_initializer(self):
         return os.path.join(self.mus_directory_name, '__init__.py')
 
+    # TODO: use mus proxy instead
     @property
     def mus_package_importable_name(self):
         return '.'.join([self.package_importable_name, 'mus'])
 
+    # TODO: use tags instead
     @apply
     def score_composer():
         def fget(self):
@@ -111,6 +121,7 @@ class ScoreProxy(PackageProxy):
             return self._write_initializer_metadata('score_composer', score_title)
         return property(**locals())
 
+    # TODO: use tags instead
     @apply
     def score_forces():
         def fget(self):
@@ -119,6 +130,7 @@ class ScoreProxy(PackageProxy):
             return self._write_initializer_metadata('score_forces', score_title)
         return property(**locals())
 
+    # TODO: use tags instead
     @property
     def score_initializers(self):
         return (self.initializer_file_name,
@@ -136,6 +148,7 @@ class ScoreProxy(PackageProxy):
             self.materials_directory_name,
             self.chunks_directory_name,)
 
+    # TODO: use tags instead
     @apply
     def score_title():
         def fget(self):
@@ -144,6 +157,7 @@ class ScoreProxy(PackageProxy):
             return self._write_initializer_metadata('score_title', score_title)
         return property(**locals())
 
+    # TODO: use tags instead
     @apply
     def score_year():
         def fget(self):
@@ -186,16 +200,19 @@ class ScoreProxy(PackageProxy):
             initializer.write(''.join(lines))
             initializer.close()
 
+    # TODO: use material wrangler instead
     def iterate_interactive_material_proxies(self):
         for material_proxy in self.iterate_material_proxies():
             if material_proxy.is_interactive:
                 yield material_proxy
 
+    # TODO: use material proxy instead
     def iterate_material_proxies(self):
         for material_package_importable_name in self.list_material_package_importable_names():
             material_proxy = self.material_wrangler.get_material_proxy(material_package_importable_name)
             yield material_proxy
 
+    # TODO: use material proxy instead
     def iterate_static_material_proxies(self):
         for material_proxy in self.iterate_material_proxies():
             if not material_proxy.is_interactive:
@@ -208,6 +225,7 @@ class ScoreProxy(PackageProxy):
             numbered_chunks.append(numbered_chunk)
         return numbered_chunks
 
+    # TODO: use material wrangler instead
     def list_material_package_importable_names(self):
         material_package_importable_names = []
         for material in self.list_material_underscored_names():
@@ -215,6 +233,7 @@ class ScoreProxy(PackageProxy):
             material_package_importable_names.append(material_package_importable_name)
         return material_package_importable_names
 
+    # TODO: use material wrangler instead
     def list_material_underscored_names(self):
         try:
             materials = os.listdir(self.materials_directory_name)
@@ -223,6 +242,7 @@ class ScoreProxy(PackageProxy):
         materials = [x for x in materials if x[0].isalpha()]
         return materials
 
+    # TODO: use material wrangler instead
     def list_material_underscored_names_with_numbers(self):
         numbered_materials = []
         for i, material in enumerate(self.list_material_underscored_names()):
@@ -299,6 +319,7 @@ class ScoreProxy(PackageProxy):
             elif key == 'st':
                 self.svn_st()
 
+    # TODO: use material wrangler instead
     def material_number_to_material_underscored_name(self, material_number):
         material_index = material_number - 1
         material_underscored_name = self.list_material_underscored_names()[material_index]
@@ -314,6 +335,7 @@ class ScoreProxy(PackageProxy):
         for initializer in self.score_initializers:
             print '%s %s' % (initializer.ljust(80), os.path.exists(initializer))
 
+    # TODO: use chunk wrangler instead
     def summarize_chunks(self):
         chunks = self.list_chunk_underscored_names()
         print self.tab(1),
@@ -326,6 +348,7 @@ class ScoreProxy(PackageProxy):
             print chunk
         print ''
 
+    # TODO: use material wrangler instead
     def summarize_materials(self):
         materials = self.list_material_underscored_names()
         print self.tab(1),
