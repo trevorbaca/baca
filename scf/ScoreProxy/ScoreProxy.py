@@ -9,12 +9,10 @@ import os
 
 class ScoreProxy(PackageProxy):
 
-    def __init__(self, package_importable_name):
-        PackageProxy.__init__(self, package_importable_name)
-        chunks_package_importable_name = '.'.join([package_importable_name, 'mus', 'chunks'])
-        self._chunk_wrangler = ChunkWrangler(chunks_package_importable_name)
-        materials_package_importable_name = '.'.join([package_importable_name, 'mus', 'materials'])
-        self._material_wrangler = MaterialWrangler(materials_package_importable_name)
+    def __init__(self, score_package_importable_name):
+        PackageProxy.__init__(self, score_package_importable_name)
+        self._chunk_wrangler = ChunkWrangler(score_package_importable_name)
+        self._material_wrangler = MaterialWrangler(score_package_importable_name)
         self._maker_wrangler = MakerWrangler()
 
     ### PUBLIC ATTRIBUTES ###

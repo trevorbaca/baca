@@ -8,7 +8,7 @@ class BacaProxy(PackageProxy):
     def __init__(self):
         PackageProxy.__init__(self, 'baca')
         self._maker_wrangler = MakerWrangler()
-        self._material_wrangler = MaterialWrangler('baca.materials')
+        self._material_wrangler = MaterialWrangler('baca')
 
     ### PUBLIC ATTRIBUTES ###
 

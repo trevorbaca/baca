@@ -6,8 +6,8 @@ import os
 
 class ChunkWrangler(PackageProxy):
 
-    def __init__(self, package_importable_name):
-        PackageProxy.__init__(self, package_importable_name)
+    def __init__(self, purview_package_short_name):
+        PackageProxy.__init__(self, '%s.mus.chunks' % purview_package_short_name)
 
     ### PUBLIC ATTRIBUTES ###
 

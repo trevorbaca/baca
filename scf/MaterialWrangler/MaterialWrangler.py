@@ -4,8 +4,16 @@ import os
 
 class MaterialWrangler(PackageProxy):
 
-    def __init__(self, package_importable_name):
-        PackageProxy.__init__(self, package_importable_name)
+    def __init__(self, purview_package_short_name):
+        if purview_package_short_name == 'baca':
+            PackageProxy.__init__(self, '%s.materials' % purview_package_short_name)
+        else:   
+            PackageProxy.__init__(self, '%s.mus.materials' % purview_package_short_name)
+
+    ### OVERLOADS ###
+
+    def __repr__(self):
+        return '%s(%r)' % (self.class_name, self.purview.package_short_name)
 
     ### PUBLIC ATTRIBUTES ###
 

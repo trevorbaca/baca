@@ -6,7 +6,7 @@ def test_MaterialWrangler_01():
     '''Baca material wrangler.
     '''
 
-    material_wrangler = baca.scf.MaterialWrangler('baca.materials')
+    material_wrangler = baca.scf.MaterialWrangler('baca')
 
     assert material_wrangler.purview.is_studio_global_purview
     assert issubclass(material_wrangler.InteractiveMaterialProxy, baca.scf.InteractiveMaterialProxy)
@@ -38,7 +38,7 @@ def test_MaterialWrangler_02():
     '''Score material wrangler.
     '''
 
-    material_wrangler = baca.scf.MaterialWrangler('manos.mus.materials')
+    material_wrangler = baca.scf.MaterialWrangler('manos')
 
     assert material_wrangler.purview.is_score_local_purview
     assert issubclass(material_wrangler.InteractiveMaterialProxy, baca.scf.InteractiveMaterialProxy)
