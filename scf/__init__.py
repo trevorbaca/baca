@@ -5,6 +5,7 @@ from DirectoryProxy import DirectoryProxy
 from InteractiveMaterialProxy import InteractiveMaterialProxy
 from MakerWrangler import MakerWrangler
 from MaterialWrangler import MaterialWrangler
+from MusProxy import MusProxy
 from PackageProxy import PackageProxy
 from PackageWrangler import PackageWrangler
 from ScoreProxy import ScoreProxy
