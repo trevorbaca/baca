@@ -1,6 +1,7 @@
 from BacaProxy import BacaProxy
 from ChunkProxy import ChunkProxy
 from ChunkWrangler import ChunkWrangler
+from Composer import Composer
 from DirectoryProxy import DirectoryProxy
 from DistProxy import DistProxy
 from EtcProxy import EtcProxy
@@ -18,3 +19,6 @@ from ScoreWrangler import ScoreWrangler
 from StaticMaterialProxy import StaticMaterialProxy
 from StudioInterface import StudioInterface
 from UserInputWrapper import UserInputWrapper
+import exceptions
+import helpers
+import menuing
