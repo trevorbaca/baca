@@ -14,7 +14,7 @@ class Composer(object):
     ### OVERLOADS ###
 
     def __repr__(self):
-        return '%s(%r, %r)' % (type(self).__name__, self.last_name, self.first_name)
+        return '%s(%r, %r, %r)' % (type(self).__name__, self.last_name, self.first_name, self.birthdate)
 
     ### PUBLIC ATTRIBUTES ###
 
