@@ -268,12 +268,29 @@ class PackageProxy(DirectoryProxy):
         if package_importable_name is None:
             return
         elif package_importable_name.split('.')[0] == 'baca':
-            #return StudioInterface()
             return baca.scf.GlobalProxy()
         elif package_importable_name.split('.')[0] in os.listdir(os.environ.get('SCORES')):
             return baca.scf.ScoreProxy(package_importable_name.split('.')[0])
         else:
             raise ValueError('Unknown package importable name %r.' % package_importable_name)
+
+    def pprint_tags(self, tags):
+        if tags:
+            lines = []
+            for key, value in sorted(tags.iteritems()):
+                key = repr(key)
+                if hasattr(value, '_get_multiline_repr'):
+                    repr_lines = value._get_multiline_repr(include_tools_package=True)
+                    value = '\n    '.join(repr_lines)
+                    lines.append('({}, {})'.format(key, value))
+                else:
+                    value = getattr(value, '_repr_with_tools_package', repr(value))
+                    lines.append('({}, {})'.format(key, value))
+            lines = ',\n    '.join(lines)
+            result = 'tags = OrderedDict([\n    {}])'.format(lines)
+        else:
+            result = 'tags = OrderedDict([])'
+        return result
 
     def remove_package_importable_name_from_sys_modules(self, package_importable_name):
         '''Total hack. But works.
@@ -310,18 +327,8 @@ class PackageProxy(DirectoryProxy):
     def unimport_baca_package(self):
         self.remove_package_importable_name_from_sys_modules('baca')
 
-
     def write_package_to_disk(self):
         self.print_not_implemented()
-
-    def pprint_tags(self, tags):
-        if tags:
-            items = list(sorted(tags.iteritems()))
-            items = ',\n    '.join([repr(x) for x in items])    
-            result = 'tags = OrderedDict([%s])' % items
-        else:
-            result = 'tags = OrderedDict([])'
-        return result
 
     def write_tags_to_initializer(self, tags):
         tags = self.pprint_tags(tags)

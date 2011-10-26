@@ -22,6 +22,10 @@ class ScoreProxy(PackageProxy):
         return self._chunk_wrangler
 
     @property
+    def composer(self):
+        return self.get_tag('composer')
+
+    @property
     def dist_proxy(self):
         return self._dist_proxy
 
@@ -50,6 +54,10 @@ class ScoreProxy(PackageProxy):
         return self.has_correct_directory_structure and self.has_correct_initializers
 
     @property
+    def instrumentation(self):
+        return self.get_tag('instrumentation')
+
+    @property
     def is_score_local_purview(self):
         return True
 
@@ -68,14 +76,6 @@ class ScoreProxy(PackageProxy):
     @property
     def mus_proxy(self):
         return self._mus_proxy
-
-    @property
-    def score_composer(self):
-        return self.get_tag('score_composer')
-
-    @property
-    def score_forces(self):
-        return self.get_tag('score_forces')
 
     @property
     def score_initializers(self):
@@ -101,10 +101,6 @@ class ScoreProxy(PackageProxy):
             self.chunk_wrangler.directory_name,)
 
     @property
-    def score_title(self):
-        return self.get_tag('score_title')
-
-    @property
     def score_top_level_subdirectories(self):
         return (self.dist_proxy,
             self.etc_proxy,
@@ -112,8 +108,12 @@ class ScoreProxy(PackageProxy):
             self.mus_proxy,)
         
     @property
-    def score_year(self):
-        return self.get_tag('score_year')
+    def title(self):
+        return self.get_tag('title')
+
+    @property
+    def year_of_completion(self):
+        return self.get_tag('year_of_completion')
 
     ### PUBLIC METHODS ###
 
