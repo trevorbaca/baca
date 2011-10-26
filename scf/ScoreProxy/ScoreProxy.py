@@ -47,7 +47,7 @@ class ScoreProxy(PackageProxy):
 
     @property
     def has_correct_initializers(self):
-        return all([os.path.exists(initializer) for initializer in self.score_initializers])
+        return all([os.path.exists(initializer) for initializer in self.score_initializer_file_names])
 
     @property
     def has_correct_package_structure(self):
@@ -78,7 +78,7 @@ class ScoreProxy(PackageProxy):
         return self._mus_proxy
 
     @property
-    def score_initializers(self):
+    def score_initializer_file_names(self):
         return (self.initializer_file_name,
             self.mus_proxy.initializer_file_name,
             self.chunk_wrangler.initializer_file_name,
@@ -86,31 +86,30 @@ class ScoreProxy(PackageProxy):
 
     @property
     def score_package_wranglers(self):
-        return (self.mus,
-            self.chunk_wrangler,
+        return (self.chunk_wrangler,
             self.material_wrangler,)
 
-    @property
-    def score_subdirectory_names(self):
-        return (self.dist_proxy.directory_name,
-            self.dist_pdf_directory_name,
-            self.etc_proxy.directory_name,
-            self.exg_proxy.directory_name,
-            self.mus_proxy.directory_name,
-            self.material_wrangler.directory_name,
-            self.chunk_wrangler.directory_name,)
+#    @property
+#    def score_subdirectory_names(self):
+#        return (self.dist_proxy.directory_name,
+#            self.dist_pdf_directory_name,
+#            self.etc_proxy.directory_name,
+#            self.exg_proxy.directory_name,
+#            self.mus_proxy.directory_name,
+#            self.material_wrangler.directory_name,
+#            self.chunk_wrangler.directory_name,)
 
     @property
-    def score_top_level_subdirectories(self):
+    def title(self):
+        return self.get_tag('title')
+
+    @property
+    def top_level_subdirectories(self):
         return (self.dist_proxy,
             self.etc_proxy,
             self.exg_proxy,
             self.mus_proxy,)
         
-    @property
-    def title(self):
-        return self.get_tag('title')
-
     @property
     def year_of_completion(self):
         return self.get_tag('year_of_completion')
@@ -128,7 +127,7 @@ class ScoreProxy(PackageProxy):
                 prompt = 'Create %s? ' % directory_name
                 if not is_interactive or self.query(prompt):
                     os.mkdir(directory_name)
-        for initializer in self.score_initializers:
+        for initializer in self.score_initializer_file_names:
             if not os.path.exists(initializer):
                 prompt = 'Create %s? ' % initializer
                 if not is_interactive or self.query(prompt):
@@ -281,7 +280,7 @@ class ScoreProxy(PackageProxy):
             return
         for subdirectory_name in self.score_subdirectory_names:
             print '%s %s' % (subdirectory_name.ljust(80), os.path.exists(subdirectory_name))
-        for initializer in self.score_initializers:
+        for initializer in self.score_initializer_file_names:
             print '%s %s' % (initializer.ljust(80), os.path.exists(initializer))
 
     def summarize_chunks(self):

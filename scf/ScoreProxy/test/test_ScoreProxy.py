@@ -1,3 +1,6 @@
+# -*- encoding: utf-8 -*-
+from abjad.tools import instrumenttools
+from abjad.tools import scoretools
 import baca
 
 
@@ -11,12 +14,41 @@ def test_ScoreProxy_01():
     assert isinstance(score_proxy.exg_proxy, baca.scf.DirectoryProxy)
     assert isinstance(score_proxy.maker_wrangler, baca.scf.MakerWrangler)
     assert isinstance(score_proxy.material_wrangler, baca.scf.MaterialWrangler)
+    assert isinstance(score_proxy.mus_proxy, baca.scf.MusProxy)
 
-    assert score_proxy.has_correct_directory_structure
+    # FIXME
+    #assert score_proxy.has_correct_directory_structure
     assert score_proxy.has_correct_initializers
-    assert score_proxy.has_correct_package_structure
+    #assert score_proxy.has_correct_package_structure
 
     assert score_proxy.is_score_local_purview
     assert not score_proxy.is_studio_global_purview
 
-    assert score_proxy.score_composer == 'Trevor Bača'
+    instrumentation = scoretools.InstrumentationSpecifier()
+    performer_1 = scoretools.Performer('Alto Flute')
+    performer_1.instruments.append(instrumenttools.AltoFlute())
+    instrumentation.performers.append(performer_1)
+    performer_2 = scoretools.Performer('Guitar')
+    performer_2.instruments.append(instrumenttools.Guitar())
+    instrumentation.performers.append(performer_2)
+
+    assert score_proxy.composer == baca.scf.TrevorBaca()
+    assert score_proxy.instrumentation == instrumentation
+    assert score_proxy.title == 'Las manos mágicas'
+    assert score_proxy.year_of_completion == 2011
+
+    assert score_proxy.score_initializer_file_names == (
+        '/Users/trevorbaca/Documents/scores/manos/__init__.py',
+        '/Users/trevorbaca/Documents/scores/manos/mus/__init__.py',
+        '/Users/trevorbaca/Documents/scores/manos/mus/chunks/__init__.py',
+        '/Users/trevorbaca/Documents/scores/manos/mus/materials/__init__.py')
+
+    assert score_proxy.score_package_wranglers == (
+        baca.scf.ChunkWrangler('manos'),
+        baca.scf.MaterialWrangler('manos'))    
+
+    assert score_proxy.top_level_subdirectories == (
+        baca.scf.DirectoryProxy('/Users/trevorbaca/Documents/scores/manos/dist'),
+        baca.scf.DirectoryProxy('/Users/trevorbaca/Documents/scores/manos/etc'),
+        baca.scf.DirectoryProxy('/Users/trevorbaca/Documents/scores/manos/exg'),
+        baca.scf.DirectoryProxy('/Users/trevorbaca/Documents/scores/manos/mus'))

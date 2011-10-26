@@ -15,6 +15,15 @@ class DirectoryProxy(_SCFObject):
 
     ### OVERLOADS ###
 
+    def __eq__(self, other):
+        if isinstance(other, type(self)):
+            if self.directory_name == other.directory_name:
+                return True
+        return False
+
+    def __ne__(self, other):
+        return not self == other
+
     def __repr__(self):
         if self.directory_name is not None:
             return '%s(%r)' % (self.class_name, self.directory_name)

@@ -13,6 +13,17 @@ class Composer(object):
 
     ### OVERLOADS ###
 
+    def __eq__(self, other):
+        if isinstance(other, type(self)):
+            if self.last_name == other.last_name:
+                if self.first_name == other.first_name:
+                    if self.birthdate == other.birthdate:
+                        return True
+        return False
+
+    def __ne__(self, other):
+        return not self == other
+
     def __repr__(self):
         return '%s(%r, %r, %r)' % (type(self).__name__, self.last_name, self.first_name, self.birthdate)
 
