@@ -3,7 +3,7 @@ from baca.scf.MaterialWrangler import MaterialWrangler
 from baca.scf.PackageProxy import PackageProxy
 
 
-class BacaProxy(PackageProxy):
+class GlobalProxy(PackageProxy):
     
     def __init__(self):
         PackageProxy.__init__(self, 'baca')

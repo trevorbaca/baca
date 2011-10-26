@@ -1,4 +1,3 @@
-from BacaProxy import BacaProxy
 from ChunkProxy import ChunkProxy
 from ChunkWrangler import ChunkWrangler
 from Composer import Composer
@@ -6,6 +5,7 @@ from DirectoryProxy import DirectoryProxy
 from DistProxy import DistProxy
 from EtcProxy import EtcProxy
 from ExgProxy import ExgProxy
+from GlobalProxy import GlobalProxy
 from InteractiveMaterialProxy import InteractiveMaterialProxy
 from MakerWrangler import MakerWrangler
 from MaterialWrangler import MaterialWrangler

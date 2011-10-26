@@ -1,5 +1,5 @@
 # -*- encoding: utf-8 -*-
-from baca.scf.BacaProxy import BacaProxy
+from baca.scf.GlobalProxy import GlobalProxy
 from baca.scf.DirectoryProxy import DirectoryProxy
 from baca.scf.ScoreWrangler import ScoreWrangler
 import os
@@ -11,7 +11,7 @@ class StudioInterface(DirectoryProxy):
     def __init__(self):
         directory = os.environ.get('BACA', 'works')
         DirectoryProxy.__init__(self, directory)
-        self._baca_proxy = BacaProxy()
+        self._baca_proxy = GlobalProxy()
         self._score_wrangler = ScoreWrangler()
 
     ### OVERLOADS ###

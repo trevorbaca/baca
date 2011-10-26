@@ -269,7 +269,7 @@ class PackageProxy(DirectoryProxy):
             return
         elif package_importable_name.split('.')[0] == 'baca':
             #return StudioInterface()
-            return baca.scf.BacaProxy()
+            return baca.scf.GlobalProxy()
         elif package_importable_name.split('.')[0] in os.listdir(os.environ.get('SCORES')):
             return baca.scf.ScoreProxy(package_importable_name.split('.')[0])
         else:
