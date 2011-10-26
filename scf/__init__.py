@@ -18,6 +18,7 @@ from ScoreTemplateWizard import ScoreTemplateWizard
 from ScoreWrangler import ScoreWrangler
 from StaticMaterialProxy import StaticMaterialProxy
 from StudioInterface import StudioInterface
+from TrevorBaca import TrevorBaca
 from UserInputWrapper import UserInputWrapper
 import exceptions
 import helpers
