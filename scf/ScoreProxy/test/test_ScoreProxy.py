@@ -48,7 +48,7 @@ def test_ScoreProxy_01():
         baca.scf.MaterialWrangler('manos'))    
 
     assert score_proxy.top_level_subdirectories == (
-        baca.scf.DirectoryProxy('/Users/trevorbaca/Documents/scores/manos/dist'),
-        baca.scf.DirectoryProxy('/Users/trevorbaca/Documents/scores/manos/etc'),
-        baca.scf.DirectoryProxy('/Users/trevorbaca/Documents/scores/manos/exg'),
-        baca.scf.DirectoryProxy('/Users/trevorbaca/Documents/scores/manos/mus'))
+        baca.scf.DistProxy('manos'),
+        baca.scf.EtcProxy('manos'),
+        baca.scf.ExgProxy('manos'),
+        baca.scf.MusProxy('manos'))
