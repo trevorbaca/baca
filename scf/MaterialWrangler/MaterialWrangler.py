@@ -6,9 +6,12 @@ class MaterialWrangler(PackageWrangler):
 
     def __init__(self, purview_package_short_name):
         if purview_package_short_name == 'baca':
-            PackageWrangler.__init__(self, '%s.materials' % purview_package_short_name)
+            package_importable_name = '%s.materials' % purview_package_short_name
         else:   
-            PackageWrangler.__init__(self, '%s.mus.materials' % purview_package_short_name)
+            package_importable_name = '%s.mus.materials' % purview_package_short_name
+        self.package_importable_name = package_importable_name
+        directory_name = self.package_importable_name_to_directory_name(self.package_importable_name)
+        PackageWrangler.__init__(self, directory_name=directory_name)
 
     ### PUBLIC ATTRIBUTES ###
 

@@ -99,6 +99,30 @@ class DirectoryProxy(_SCFObject):
         getter.prompts.append('directory name')
         self.directory_name = getter.run()
 
+    def package_importable_name_to_directory_name(self, package_importable_name):
+        if package_importable_name is None:
+            return
+        package_importable_name_parts = package_importable_name.split('.')
+        if package_importable_name_parts[0] == 'baca':
+            directory_parts = [os.environ.get('BACA')] + package_importable_name_parts[1:]
+        elif package_importable_name_parts[0] in os.listdir(os.environ.get('SCORES')):
+            directory_parts = [os.environ.get('SCORES')] + package_importable_name_parts[:]
+        else:
+            raise ValueError('Unknown package importable name %r.' % package_importable_name)
+        directory = os.path.join(*directory_parts)
+        return directory
+
+    def package_importable_name_to_purview(self, package_importable_name):
+        import baca
+        if package_importable_name is None:
+            return
+        elif package_importable_name.split('.')[0] == 'baca':
+            return baca.scf.GlobalProxy()
+        elif package_importable_name.split('.')[0] in os.listdir(os.environ.get('SCORES')):
+            return baca.scf.ScoreProxy(package_importable_name.split('.')[0])
+        else:
+            raise ValueError('Unknown package importable name %r.' % package_importable_name)
+
     def remove(self):
         if self.is_in_repository:
             result = self._remove_versioned_directory()

@@ -148,24 +148,6 @@ class ScoreProxy(PackageProxy):
             initializer.write(''.join(lines))
             initializer.close()
 
-    # TODO: use material wrangler instead
-    def iterate_interactive_material_proxies(self):
-        for material_proxy in self.iterate_material_proxies():
-            if material_proxy.is_interactive:
-                yield material_proxy
-
-    # TODO: use material proxy instead
-    def iterate_material_proxies(self):
-        for material_package_importable_name in self.list_material_package_importable_names():
-            material_proxy = self.material_wrangler.get_material_proxy(material_package_importable_name)
-            yield material_proxy
-
-    # TODO: use material proxy instead
-    def iterate_static_material_proxies(self):
-        for material_proxy in self.iterate_material_proxies():
-            if not material_proxy.is_interactive:
-                yield material_proxy
-
     def list_chunk_spaced_names_with_numbers(self):
         numbered_chunks = []
         for i, chunk in enumerate(self.chunk_wrangler.list_package_spaced_names()):

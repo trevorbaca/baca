@@ -1,12 +1,15 @@
-from baca.scf.DirectoryProxy import DirectoryProxy
+#from baca.scf.DirectoryProxy import DirectoryProxy
+from baca.scf.PackageWrangler import PackageWrangler
 from baca.scf.ScoreProxy import ScoreProxy
 import os
 
 
-class ScoreWrangler(DirectoryProxy):
+#class ScoreWrangler(DirectoryProxy):
+class ScoreWrangler(PackageWrangler):
 
     def __init__(self):
-        DirectoryProxy.__init__(self, os.environ.get('SCORES'))
+        PackageWrangler.__init__(self, directory_name=os.environ.get('SCORES'))
+        self.package_importable_name = ''
 
     ### OVERLOADS ###
 
@@ -53,12 +56,12 @@ class ScoreWrangler(DirectoryProxy):
             score_proxy = ScoreProxy(score_package_importable_name)
             yield score_proxy
 
-    def list_numbered_score_titles_with_years(self):
-        numbered_score_titles_with_years = []
-        for i, score_title_with_year in enumerate(self.list_score_titles_with_years()):
-            number = str(i + 1)
-            numbered_score_titles_with_years.append((number, score_title_with_year))
-        return numbered_score_titles_with_years
+#    def list_numbered_score_titles_with_years(self):
+#        numbered_score_titles_with_years = []
+#        for i, score_title_with_year in enumerate(self.list_score_titles_with_years()):
+#            number = str(i + 1)
+#            numbered_score_titles_with_years.append((number, score_title_with_year))
+#        return numbered_score_titles_with_years
 
     def list_score_directories(self):
         score_directories = []

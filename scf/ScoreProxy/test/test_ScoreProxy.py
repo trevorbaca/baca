@@ -52,3 +52,9 @@ def test_ScoreProxy_01():
         baca.scf.EtcProxy('manos'),
         baca.scf.ExgProxy('manos'),
         baca.scf.MusProxy('manos'))
+
+
+def test_foo_02():
+
+    score_proxy = baca.scf.ScoreProxy('manos')    
+    
