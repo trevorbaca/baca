@@ -76,7 +76,7 @@ class MenuSection(object):
             if items_to_number is None:
                 self._items_to_number = []
             else:
-                self._items_to_number = items_to_number[:]
+                self._items_to_number = list(items_to_number)
         return property(**locals())
 
     @apply

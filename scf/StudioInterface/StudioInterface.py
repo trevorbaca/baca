@@ -25,14 +25,6 @@ class StudioInterface(DirectoryProxy):
     def baca_proxy(self):
         return self._baca_proxy
 
-#    @property
-#    def maker_wrangler(self):
-#        return self._maker_wrangler
-#
-#    @property
-#    def material_wrangler(self):
-#        return self._material_wrangler
-
     @property
     def score_wrangler(self):
         return self._score_wrangler
@@ -58,6 +50,21 @@ class StudioInterface(DirectoryProxy):
                     score_title)
                 score_proxy = baca.scf.ScoreProxy(score_package_importable_name)
                 return score_proxy.materials_package_importable_name
+
+    def iterate_interactive_material_proxies(self):
+        for material_proxy in self.iterate_material_proxies():
+            if material_proxy.is_interactive:
+                yield material_proxy
+
+    def iterate_material_proxies(self, class_names=None):
+        import baca
+        for score_proxy in self.iterate_score_proxies():
+            for material_proxy in score_proxy.iterate_material_proxies():
+                if class_names is None or material_proxy.get_tag('maker') in class_names:
+                    yield material_proxy
+        baca_material_wrangler = baca.scf.MaterialWrangler('baca')
+        for material_proxy in baca_material_wrangler.iterate_package_proxies():
+            yield material_proxy
 
     def manage_svn(self, menu_header=None):
         while True:
@@ -90,12 +97,12 @@ class StudioInterface(DirectoryProxy):
             elif key == 'add':
                 self.svn_add()
             elif key == 'add scores':
-                self.score_wrangler.svn_add_scores()
+                self.score_wrangler.svn_add()
             elif key == 'ci':
                 self.svn_ci()
                 break
             elif key == 'ci scores':
-                self.score_wrangler.svn_ci_scores()
+                self.score_wrangler.svn_ci()
             elif key == 'pytest':
                 self.run_py_test()
             elif key == 'pytest scores':
@@ -105,7 +112,7 @@ class StudioInterface(DirectoryProxy):
             elif key == 'st':
                 self.svn_st()
             elif key == 'st scores':
-                self.score_wrangler.svn_st_scores()
+                self.score_wrangler.svn_st()
             elif key == 'up':
                 self.svn_up()
                 break
@@ -122,6 +129,14 @@ class StudioInterface(DirectoryProxy):
             print ''.join(lines)
         if prompt_proceed:
             self.proceed()
+
+    def select_interactive_material_proxy(self, menu_header=None, klasses=None):
+        material_proxies = list(self.iterate_interactive_material_proxies())
+        menu = self.Menu(client=self.where())
+        menu.menu_header = menu_header
+        menu.items_to_number = material_proxies
+        key, value = menu.display_menu()
+        return value
     
     def work_in_studio(self, menu_header=None):
         import baca
@@ -129,8 +144,9 @@ class StudioInterface(DirectoryProxy):
             menu = self.Menu(client=self.where(), menu_header=menu_header)
             menu.menu_body = 'welcome to the studio.'
             menu_section = self.MenuSection()
-            score_titles = self.score_wrangler.list_numbered_score_titles_with_years()
-            menu_section.menu_section_entries = score_titles
+            menu_section.items_to_number = self.score_wrangler.iterate_score_titles_with_years()
+            # TODO
+            # menu_section.values_to_return = self.score_wrangler.iterate_score_package_short_names()
             menu_section.sentence_length_items.append(('k', 'work with material makers'))
             menu_section.sentence_length_items.append(('m', 'work with Bača materials'))
             menu_section.hidden_items.append(('svn', 'work with repository'))

@@ -411,9 +411,9 @@ class _Maker(PackageProxy):
 
     def set_location(self, menu_header=None):
         import baca
-        catalog = baca.scf.ScoreWrangler()
-        result = catalog.select_score_interactively(menu_header=menu_header)
-        self.score = result
+        score_wrangler = baca.scf.ScoreWrangler()
+        score_proxy = score_wrangler.select_score_proxy(menu_header=menu_header)
+        self.score = score_proxy
 
     def show_demo_input_values(self, menu_header=None):
         menu = self.Menu(client=self.where(), menu_header=menu_header)

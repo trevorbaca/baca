@@ -265,6 +265,9 @@ class ScoreProxy(PackageProxy):
         for initializer in self.score_initializer_file_names:
             print '%s %s' % (initializer.ljust(80), os.path.exists(initializer))
 
+    def run_score_package_creation_wizard(self):
+        self.print_not_implemented()
+
     def summarize_chunks(self):
         chunks = self.chunk_wrangler.list_package_underscored_names()
         print self.tab(1),
