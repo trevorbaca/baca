@@ -261,24 +261,26 @@ class _Maker(PackageProxy):
             menu_body %= (self.location_name, self.spaced_class_name, self.material_menu_name)
             menu_body = self.append_status_indicator(menu_body)
             menu.menu_body = menu_body
-            menu.items_to_number = self.user_input_wrapper.editable_lines
+            menu_section = self.MenuSection()
+            menu_section.items_to_number = self.user_input_wrapper.editable_lines
             if self.user_input_wrapper.is_complete:
-                menu.sentence_length_items.append(('p', 'show pdf of given input'))
-                menu.sentence_length_items.append(('m', 'write material to disk'))
+                menu_section.sentence_length_items.append(('p', 'show pdf of given input'))
+                menu_section.sentence_length_items.append(('m', 'write material to disk'))
             if self.has_material_underscored_name:
-                menu.sentence_length_items.append(('n', 'rename material'))
+                menu_section.sentence_length_items.append(('n', 'rename material'))
             else:
-                menu.sentence_length_items.append(('n', 'name material'))
-            menu.sentence_length_items.append(('nc', 'clear name'))
-            menu.sentence_length_items.append(('d', 'show demo input values'))
-            menu.sentence_length_items.append(('o', 'overwrite with demo input values'))
-            menu.sentence_length_items.append(('i', 'import values'))
-            menu.sentence_length_items.append(('c', 'clear values'))
-            #menu.sentence_length_items.append(('src', 'edit source'))
+                menu_section.sentence_length_items.append(('n', 'name material'))
+            menu_section.sentence_length_items.append(('nc', 'clear name'))
+            menu_section.sentence_length_items.append(('d', 'show demo input values'))
+            menu_section.sentence_length_items.append(('o', 'overwrite with demo input values'))
+            menu_section.sentence_length_items.append(('i', 'import values'))
+            menu_section.sentence_length_items.append(('c', 'clear values'))
+            #menu_section.sentence_length_items.append(('src', 'edit source'))
             if self.has_location:
-                menu.sentence_length_items.append(('l', 'change location'))
+                menu_section.sentence_length_items.append(('l', 'change location'))
             else:
-                menu.sentence_length_items.append(('l', 'set location'))
+                menu_section.sentence_length_items.append(('l', 'set location'))
+            menu.menu_sections.append(menu_section)
             key, value = menu.display_menu()
             if key == 'b':
                 self.interactively_check_and_save_material(self.user_input_wrapper)
@@ -372,10 +374,11 @@ class _Maker(PackageProxy):
             menu_section.menu_section_title = 'existing %s' % self.generic_output_name
             menu_section.items_to_number = list(self.iterate_materials_based_on_maker())
             menu.menu_sections.append(menu_section)
-            menu.sentence_length_items.append(('del', 'delete %s' % self.spaced_class_name))
-            menu.sentence_length_items.append(('new', 'create %s' % self.generic_output_name))
-            menu.sentence_length_items.append(('ren', 'rename %s' % self.spaced_class_name))
-            menu.sentence_length_items.append(('src', 'edit %s source' % self.spaced_class_name))
+            menu_section = self.MenuSection()
+            menu_section.sentence_length_items.append(('del', 'delete %s' % self.spaced_class_name))
+            menu_section.sentence_length_items.append(('new', 'create %s' % self.generic_output_name))
+            menu_section.sentence_length_items.append(('ren', 'rename %s' % self.spaced_class_name))
+            menu_section.sentence_length_items.append(('src', 'edit %s source' % self.spaced_class_name))
             key, value = menu.display_menu()
             if key == 'b':
                 return key, None

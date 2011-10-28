@@ -148,54 +148,20 @@ class ScoreProxy(PackageProxy):
             initializer.write(''.join(lines))
             initializer.close()
 
-    def list_chunk_spaced_names_with_numbers(self):
-        numbered_chunks = []
-        for i, chunk in enumerate(self.chunk_wrangler.list_package_spaced_names()):
-            numbered_chunk = (str(i + 1), chunk)
-            numbered_chunks.append(numbered_chunk)
-        return numbered_chunks
-
-    # TODO: use material wrangler instead
-    def list_material_package_importable_names(self):
-        material_package_importable_names = []
-        for material in self.list_material_underscored_names():
-            material_package_importable_name = '%s.%s' % (self.material_wrangler.package_importable_name, material)
-            material_package_importable_names.append(material_package_importable_name)
-        return material_package_importable_names
-
-    # TODO: use material wrangler instead
-    def list_material_underscored_names(self):
-        try:
-            materials = os.listdir(self.materials_directory_name)
-        except OSError:
-            materials = []
-        materials = [x for x in materials if x[0].isalpha()]
-        return materials
-
-    # TODO: use material wrangler instead
-    def list_material_underscored_names_with_numbers(self):
-        numbered_materials = []
-        for i, material in enumerate(self.list_material_underscored_names()):
-            material = material.replace('%s_' % self.package_short_name, '')
-            material = material.replace('_', ' ')
-            numbered_material = (str(i + 1), material)
-            numbered_materials.append(numbered_material)
-        return numbered_materials
-            
     def manage_score(self, menu_header=None, command_string=None):
         while True:
             menu = self.Menu(client=self.where(), menu_header=menu_header)
-            menu.menu_body = self.score_title
+            menu.menu_body = self.get_tag('title')
             menu_section = self.MenuSection()
             menu_section.menu_section_title = 'Chunks'
-            menu_section.menu_section_entries = self.list_chunk_spaced_names_with_numbers()
-            menu_section.menu_section_entry_prefix = 'h'
+            menu_section.items_to_number = self.chunk_wrangler.iterate_package_spaced_names()
+            menu_section.entry_prefix = 'h'
             menu_section.sentence_length_items.append(('ch', '[create chunk]'))
             menu.menu_sections.append(menu_section)
             menu_section = self.MenuSection()
             menu_section.menu_section_title = 'Materials'
-            menu_section.menu_section_entries = self.list_material_underscored_names_with_numbers()
-            menu_section.menu_section_entry_prefix = 'm'
+            menu_section.items_to_number = self.material_wrangler.iterate_package_underscored_names()
+            menu_section.entry_prefix = 'm'
             menu_section.sentence_length_items.append(('mi', 'create interactive material'))
             menu_section.sentence_length_items.append(('ms', 'create static material'))
             menu.menu_sections.append(menu_section)
@@ -214,17 +180,16 @@ class ScoreProxy(PackageProxy):
             elif key.startswith('h'):
                 chunk_spaced_name = value
                 chunk_underscored_name = chunk_spaced_name.replace(' ', '_')
-                package_importable_name = '%s.%s' % (self.chunk_wrangler.package_importable_name, chunk_underscored_name)
+                package_importable_name = '%s.%s' % (
+                    self.chunk_wrangler.package_importable_name, chunk_underscored_name)
                 chunk_proxy = self.chunk_wrangler.ChunkProxy(package_importable_name)
                 chunk_proxy.score_title = self.score_title
                 chunk_proxy.manage_chunk(menu_header=menu.menu_title)
             elif key.startswith('m'):
-                material_number = key[1:]
-                material_number = int(material_number)
-                material_underscored_name = self.material_number_to_material_underscored_name(material_number)
-                package_importable_name = '%s.%s' % (self.material_wrangler.package_importable_name, material_underscored_name)
-                material_proxy = self.material_wrangler.get_material_proxy(package_importable_name)
-                material_proxy.score_title = self.score_title
+                material_underscored_name = value
+                package_importable_name = '%s.%s' % (
+                    self.material_wrangler.package_importable_name, material_underscored_name)
+                material_proxy = self.material_wrangler.get_package_proxy(package_importable_name)
                 material_proxy.manage_material(menu_header=menu.menu_title)
 
     def manage_svn(self, menu_header=None):
@@ -249,12 +214,6 @@ class ScoreProxy(PackageProxy):
             elif key == 'st':
                 self.svn_st()
 
-    # TODO: use material wrangler instead
-    def material_number_to_material_underscored_name(self, material_number):
-        material_index = material_number - 1
-        material_underscored_name = self.list_material_underscored_names()[material_index]
-        return material_underscored_name
-
     def profile_package_structure(self):
         if not os.path.exists(self.directory_name):
             raise OSError('directory %r does not exist.' % self.directory_name)
@@ -269,7 +228,7 @@ class ScoreProxy(PackageProxy):
         self.print_not_implemented()
 
     def summarize_chunks(self):
-        chunks = self.chunk_wrangler.list_package_underscored_names()
+        chunks = list(self.chunk_wrangler.iterate_package_underscored_names())
         print self.tab(1),
         if not chunks:
             print 'Chunks (none yet)'
@@ -280,9 +239,8 @@ class ScoreProxy(PackageProxy):
             print chunk
         print ''
 
-    # TODO: use material wrangler instead
     def summarize_materials(self):
-        materials = self.list_material_underscored_names()
+        materials = list(self.material_wrangler.iterate_package_underscored_names())
         print self.tab(1),
         if not materials:
             print 'Materials (none yet)'

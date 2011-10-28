@@ -1,15 +1,16 @@
 from abjad.tools import iotools
 from abjad.tools import layouttools
 from abjad.tools import lilypondfiletools
-from baca.scf.PackageProxy import PackageProxy
+from baca.scf.PackageWrangler import PackageWrangler
 import os
 
 
-class MakerWrangler(PackageProxy):
+class MakerWrangler(PackageWrangler):
 
     def __init__(self):
-        package_importable_name = 'baca.makers'
-        PackageProxy.__init__(self, package_importable_name)
+        self.package_importable_name = 'baca.makers'
+        directory_name = self.package_importable_name_to_directory_name(self.package_importable_name)
+        PackageWrangler.__init__(self, directory_name=directory_name)
 
     ### OVERLOADS ###
 
@@ -23,6 +24,7 @@ class MakerWrangler(PackageProxy):
         maker = maker_class()
         return maker
 
+    # replace with wrapped call to PackageWrangler.iterate_package_proxies()
     def iterate_makers(self):
         self.unimport_baca_package()
         self.unimport_makers_package()
@@ -31,6 +33,7 @@ class MakerWrangler(PackageProxy):
             exec('result = baca.makers.%s()' % maker_class_name)
             yield result
 
+    # add PackageWrangler.iterate_package_class_names and replace this with it
     def list_maker_class_names(self):
         maker_directories = []
         for name in os.listdir(self.directory_name):
@@ -48,6 +51,7 @@ class MakerWrangler(PackageProxy):
             maker_spaced_class_names.append(maker.spaced_class_name)
         return maker_spaced_class_names
 
+    # replace with maker wizard
     def make_maker(self, menu_header=None):
         while True:
             maker_name = raw_input('Maker name> ')

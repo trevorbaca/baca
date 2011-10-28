@@ -37,8 +37,7 @@ class StudioInterface(DirectoryProxy):
             menu = self.Menu(client=self.where(), menu_header=menu_header)
             menu.menu_body = 'select materials directory'
             menu_section = self.MenuSection()
-            score_titles = self.score_wrangler.list_numbered_score_titles_with_years()
-            menu_section.menu_section_entries = score_titles
+            menu_section.items_to_number = self.score_wrangler.iterate_score_titles_with_years()
             menu_section.sentence_length_items.append(('baca', 'baca materials directory'))
             menu.menu_sections.append(menu_section)
             key, value = menu.display_menu()
@@ -144,9 +143,9 @@ class StudioInterface(DirectoryProxy):
             menu = self.Menu(client=self.where(), menu_header=menu_header)
             menu.menu_body = 'welcome to the studio.'
             menu_section = self.MenuSection()
-            menu_section.items_to_number = self.score_wrangler.iterate_score_titles_with_years()
-            # TODO
-            # menu_section.values_to_return = self.score_wrangler.iterate_score_package_short_names()
+            score_titles = list(self.score_wrangler.iterate_score_titles_with_years())
+            score_package_short_names = list(self.score_wrangler.iterate_score_package_short_names())
+            menu_section.items_to_number = zip(score_titles, score_package_short_names)
             menu_section.sentence_length_items.append(('k', 'work with material makers'))
             menu_section.sentence_length_items.append(('m', 'work with Bača materials'))
             menu_section.hidden_items.append(('svn', 'work with repository'))
@@ -161,8 +160,5 @@ class StudioInterface(DirectoryProxy):
             elif key == 'svn':
                 self.manage_svn(menu_header='studio')
             else:
-                score_title = value
-                score_package_importable_name = self.score_wrangler.score_title_to_score_package_short_name(
-                    score_title)
-                score_proxy = baca.scf.ScoreProxy(score_package_importable_name)
+                score_proxy = baca.scf.ScoreProxy(value)
                 score_proxy.manage_score()

@@ -1,14 +1,14 @@
 class MenuSection(object):
 
     def __init__(self, menu_section_title=None, lines_to_list=None,
-        menu_section_entries=None, menu_section_entry_prefix=None,
+        named_pairs=None, entry_prefix=None,
         sentence_length_items=None, items_to_number=None, 
         hidden_items=None, indent_level=1, 
         hide_menu=False, layout='list'):
         self.menu_section_title = menu_section_title
         self.lines_to_list = lines_to_list
-        self.menu_section_entries = menu_section_entries
-        self.menu_section_entry_prefix = menu_section_entry_prefix
+        self.named_pairs = named_pairs
+        self.entry_prefix = entry_prefix
         self.sentence_length_items = sentence_length_items
         self.items_to_number = items_to_number
         self.hidden_items = hidden_items
@@ -100,23 +100,23 @@ class MenuSection(object):
         return property(**locals())
 
     @apply
-    def menu_section_entries():
+    def named_pairs():
         def fget(self):
-            return self._menu_section_entries
-        def fset(self, menu_section_entries):
-            if menu_section_entries is None:
-                self._menu_section_entries = []
+            return self._named_pairs
+        def fset(self, named_pairs):
+            if named_pairs is None:
+                self._named_pairs = []
             else:
-                self._menu_section_entries = menu_section_entries[:]
+                self._named_pairs = named_pairs[:]
         return property(**locals())
 
     @apply
-    def menu_section_entry_prefix():
+    def entry_prefix():
         def fget(self):
-            return self._menu_section_entry_prefix
-        def fset(self, menu_section_entry_prefix):
-            assert isinstance(menu_section_entry_prefix, (str, type(None)))
-            self._menu_section_entry_prefix = menu_section_entry_prefix
+            return self._entry_prefix
+        def fset(self, entry_prefix):
+            assert isinstance(entry_prefix, (str, type(None)))
+            self._entry_prefix = entry_prefix
         return property(**locals())
 
     @apply
@@ -144,12 +144,20 @@ class MenuSection(object):
     def display(self, all_keys, all_values):
         self._display_menu_section_title()
         for i, value in enumerate(self.items_to_number):
+            if isinstance(value, tuple):
+                assert len(value) == 2
+                display_string, return_value = value
+            else:
+                display_string = return_value = value
             if not self.hide_menu:
                 self._print_tab(self.indent_level),
                 key = str(i + 1)
-                print '%s: %s' % (key, value)
+                prefix = self.entry_prefix
+                if prefix is not None:
+                    key = prefix + key
+                print '%s: %s' % (key, display_string)
             all_keys.append(key)
-            all_values.append(value)
+            all_values.append(return_value)
         if self.items_to_number:
             if not self.hide_menu:
                 print ''
@@ -160,9 +168,9 @@ class MenuSection(object):
         if self.lines_to_list:
             if not self.hide_menu:
                 print ''
-        for key, value in self.menu_section_entries:
-            if self.menu_section_entry_prefix is not None:
-                key = self.menu_section_entry_prefix + key
+        for key, value in self.named_pairs:
+            if self.entry_prefix is not None:
+                key = self.entry_prefix + key
             if not self.hide_menu:
                 self._print_tab(self.indent_level),
                 if self.layout == 'list':
@@ -171,7 +179,7 @@ class MenuSection(object):
                     print '%s: %s' % (key, value),
             all_keys.append(key)
             all_values.append(value)
-        if self.menu_section_entries:
+        if self.named_pairs:
             if not self.hide_menu:
                 if self.layout == 'list':
                     print ''

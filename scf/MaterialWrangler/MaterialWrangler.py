@@ -54,9 +54,11 @@ class MaterialWrangler(PackageWrangler):
         while True:
             menu = self.Menu(client=self.where(), menu_header=menu_header)
             menu.menu_body = 'shared materials'
-            menu.items_to_number = list(self.iterate_material_summaries())
-            menu.sentence_length_items.append(('i', 'create interactive material'))
-            menu.sentence_length_items.append(('s', 'create static material'))
+            menu_section = self.MenuSection()
+            menu_section.items_to_number = list(self.iterate_material_summaries())
+            menu_section.sentence_length_items.append(('i', 'create interactive material'))
+            menu_section.sentence_length_items.append(('s', 'create static material'))
+            menu.menu_sections.append(menu_section)
             key, value = menu.display_menu()
             if key == 'b':
                 return key, None

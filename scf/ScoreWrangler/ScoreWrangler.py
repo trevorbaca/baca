@@ -36,6 +36,11 @@ class ScoreWrangler(PackageWrangler):
     def get_package_proxy(self, package_importable_name):
         return self.ScoreProxy(package_importable_name)
 
+    def iterate_score_package_short_names(self, hide_mothballed_scores=True):
+        for score_proxy in self.iterate_package_proxies():
+            if not score_proxy.get_tag('is_mothballed') or not hide_mothballed_scores:
+                yield score_proxy.package_short_name
+
     def iterate_score_proxies(self, hide_mothballed_scores=True):
         for score_proxy in self.iterate_package_proxies():
             if not score_proxy.get_tag('is_mothballed') or not hide_mothballed_scores:
@@ -55,8 +60,10 @@ class ScoreWrangler(PackageWrangler):
         menu = self.Menu(client=self.where())
         menu.menu_header = menu_header
         menu.menu_body = 'select score'
-        menu.items_to_number = self.list_score_titles_with_years()
-        menu.sentence_length_items.append(('s', 'studio'))
+        menu_section = self.MenuSection()
+        menu_section.items_to_number = self.iterate_score_titles_with_years()
+        menu_section.sentence_length_items.append(('s', 'studio'))
+        menu.menu_sections.append(menu_section)
         key, value = menu.display_menu()
         if key == 's':
             return None

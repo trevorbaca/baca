@@ -368,24 +368,28 @@ class _MaterialProxy(PackageProxy):
             menu = self.Menu(client=self.where())
             menu.menu_header = menu_header
             menu.menu_body = self.material_spaced_name
+            menu_section = self.MenuSection()
             if self.is_interactive:
-                menu.sentence_length_items.append(('k', 'reload user input'))
-            menu.named_pairs.append(('i', 'input'))
-            menu.named_pairs.append(('o', 'output'))
+                menu_section.sentence_length_items.append(('k', 'reload user input'))
+            menu_section.named_pairs.append(('i', 'input'))
+            menu_section.named_pairs.append(('o', 'output'))
             if self.has_visualizer:
-                menu.named_pairs.append(('v', 'visualizer'))
+                menu_section.named_pairs.append(('v', 'visualizer'))
             if self.has_visualization_ly:
-                menu.named_pairs.append(('l', 'ly'))
+                menu_section.named_pairs.append(('l', 'ly'))
             if self.has_stylesheet:
-                menu.named_pairs.append(('y', 'stylesheet'))
+                menu_section.named_pairs.append(('y', 'stylesheet'))
             if self.has_visualization_pdf:
-                menu.named_pairs.append(('p', 'pdf'))
-            menu.named_pairs.append(('n', 'initializer'))
-            menu.secondary_named_pairs.append(('d', 'delete'))
-            menu.secondary_named_pairs.append(('r', 'rename'))
-            menu.secondary_named_pairs.append(('s', 'summarize'))
-            menu.secondary_named_pairs.append(('t', 'tags'))
-            menu.secondary_named_pairs.append(('z', 'regenerate'))
+                menu_section.named_pairs.append(('p', 'pdf'))
+            menu_section.named_pairs.append(('n', 'initializer'))
+            menu.menu_sections.append(menu_section)
+            menu_section = self.MenuSection()
+            menu_section.named_pairs.append(('d', 'delete'))
+            menu_section.named_pairs.append(('r', 'rename'))
+            menu_section.named_pairs.append(('s', 'summarize'))
+            menu_section.named_pairs.append(('t', 'tags'))
+            menu_section.named_pairs.append(('z', 'regenerate'))
+            menu.menu_sections.append(menu_section)
             key, value = menu.display_menu()
             if key == 'b':
                 return key, None

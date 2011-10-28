@@ -68,8 +68,12 @@ class ChunkProxy(PackageProxy):
             menu = self.Menu(client=self.where())
             menu.menu_header = menu_header
             menu.menu_body = self.chunk_spaced_name
-            menu.named_pairs.append(('n', 'initializer'))
-            menu.secondary_named_pairs.append(('d', 'delete'))
+            menu_section = self.MenuSection()
+            menu_section.named_pairs.append(('n', 'initializer'))
+            menu.menu_sections.append(menu_section)
+            menu_section = self.MenuSection()
+            menu_section.named_pairs.append(('d', 'delete'))
+            menu.menu_sections.append(menu_section)
             key, value = menu.display_menu()
             if key == 'b':
                 return key, None

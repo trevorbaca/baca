@@ -306,7 +306,7 @@ class PackageProxy(DirectoryProxy):
         menu = self.Menu(client=self.where(), menu_header=menu_header)
         menu.menu_body = 'select purview'
         score_wrangler = ScoreWrangler()
-        menu.items_to_number = score_wrangler.list_score_titles_with_years()
+        menu.items_to_number = score_wrangler.iterate_score_titles_with_years()
         menu.named_pairs.append(('s', 'global to studio'))
         key, value = menu.display_menu()
         print key, value
