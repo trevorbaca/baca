@@ -1,9 +1,9 @@
+from baca.scf.DirectoryProxy import DirectoryProxy
 from baca.scf.PackageWrangler import PackageWrangler
 import os
 
 
-# TODO: make inherit from both PackageWrangler and DirectoryProxy
-class ScoreWrangler(PackageWrangler):
+class ScoreWrangler(PackageWrangler, DirectoryProxy):
 
     def __init__(self):
         PackageWrangler.__init__(self, directory_name=os.environ.get('SCORES'))

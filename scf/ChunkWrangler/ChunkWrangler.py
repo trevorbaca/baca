@@ -1,9 +1,9 @@
+from baca.scf.PackageProxy import PackageProxy
 from baca.scf.PackageWrangler import PackageWrangler
 import os
 
 
-# TODO: make also inherit from package proxy 
-class ChunkWrangler(PackageWrangler):
+class ChunkWrangler(PackageWrangler, PackageProxy):
 
     def __init__(self, purview_package_short_name):
         self.package_importable_name = '.'.join([purview_package_short_name, 'mus', 'chunks'])
@@ -17,12 +17,15 @@ class ChunkWrangler(PackageWrangler):
         from baca.scf.ChunkProxy import ChunkProxy
         return ChunkProxy
 
-    # TODO: remove once class inherits from package proxy
-    @property
-    def initializer_file_name(self):
-        if self.directory_name is not None:
-            return os.path.join(self.directory_name, '__init__.py')
-    
+    @apply
+    def directory_name():
+        def fget(self):
+            return self._directory_name
+        def fset(self, directory_name):
+            assert isinstance(directory_name, (str, type(None)))
+            self._directory_name = directory_name
+        return property(**locals())
+
     ### PUBLIC METHODS ###
 
     def create_chunk_interactively(self, menu_header=None):

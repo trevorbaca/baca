@@ -1,11 +1,12 @@
 from abjad.tools import iotools
 from abjad.tools import layouttools
 from abjad.tools import lilypondfiletools
+from baca.scf.PackageProxy import PackageProxy
 from baca.scf.PackageWrangler import PackageWrangler
 import os
 
 
-class MakerWrangler(PackageWrangler):
+class MakerWrangler(PackageWrangler, PackageProxy):
 
     def __init__(self):
         self.package_importable_name = 'baca.makers'
@@ -18,6 +19,15 @@ class MakerWrangler(PackageWrangler):
         return '%s()' % self.class_name
 
     ### PUBLIC METHODS ###
+
+    @apply
+    def directory_name():
+        def fget(self):
+            return self._directory_name
+        def fset(self, directory_name):
+            assert isinstance(directory_name, (str, type(None)))
+            self._directory_name = directory_name
+        return property(**locals())
 
     def get_maker(self, maker_name):
         exec('from baca.makers import %s as maker_class' % maker_name)
