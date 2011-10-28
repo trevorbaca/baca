@@ -2,6 +2,7 @@ from baca.scf.PackageWrangler import PackageWrangler
 import os
 
 
+# TODO: make also inherit from package proxy 
 class ChunkWrangler(PackageWrangler):
 
     def __init__(self, purview_package_short_name):
@@ -15,6 +16,12 @@ class ChunkWrangler(PackageWrangler):
     def ChunkProxy(self):
         from baca.scf.ChunkProxy import ChunkProxy
         return ChunkProxy
+
+    # TODO: remove once class inherits from package proxy
+    @property
+    def initializer_file_name(self):
+        if self.directory_name is not None:
+            return os.path.join(self.directory_name, '__init__.py')
     
     ### PUBLIC METHODS ###
 
