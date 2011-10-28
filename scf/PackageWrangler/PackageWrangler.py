@@ -4,10 +4,10 @@ import os
 
 class PackageWrangler(DirectoryProxy):
 
-    ### OVERLOADS ###
-
-    def __repr__(self):
-        return '%s(%r)' % (self.class_name, self.purview.package_short_name)
+#    ### OVERLOADS ###
+#
+#    def __repr__(self):
+#        return '%s(%r)' % (self.class_name, self.purview.package_short_name)
 
     ### PUBLIC ATTRIBUTES ###
 
@@ -16,9 +16,9 @@ class PackageWrangler(DirectoryProxy):
         import baca
         return baca.scf.PackageProxy
 
-    @property
-    def purview(self):
-        return self.package_importable_name_to_purview(self.package_importable_name)
+#    @property
+#    def purview(self):
+#        return self.package_importable_name_to_purview(self.package_importable_name)
 
     @property
     def score(self):
@@ -46,7 +46,7 @@ class PackageWrangler(DirectoryProxy):
                 if os.path.isdir(directory):
                     initializer = os.path.join(directory, '__init__.py')
                     if os.path.isfile(initializer):
-                        if self.package_importable_name:
+                        if hasattr(self, 'package_importable_name'):
                             package_importable_name = '%s.%s' % (self.package_importable_name, x)
                         else:
                             package_importable_name = x
