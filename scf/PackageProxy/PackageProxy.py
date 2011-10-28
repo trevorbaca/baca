@@ -23,10 +23,6 @@ class PackageProxy(DirectoryProxy):
     ### PUBLIC ATTRIBUTES ###
 
     @property
-    def creation_date(self):
-        return self.get_tag('creation_date')
-
-    @property
     def directory_name(self):
         if self.package_importable_name is not None:
             return self.package_importable_name_to_directory_name(self.package_importable_name)

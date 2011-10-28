@@ -6,7 +6,6 @@ def test_PackageProxy_01():
     '''
 
     package_proxy = baca.scf.PackageProxy()
-    assert package_proxy.creation_date is None
     assert package_proxy.directory_name is None
     assert package_proxy.get_tag('foo') is None
     assert package_proxy.get_tags() == {}
@@ -28,7 +27,6 @@ def test_PackageProxy_02():
     '''
 
     package_proxy = baca.scf.PackageProxy('baca.foo')
-    assert package_proxy.creation_date is None
     assert package_proxy.directory_name == '/Users/trevorbaca/Documents/other/baca/foo'
     assert package_proxy.get_tag('foo') is None
     assert package_proxy.get_tags() == {}

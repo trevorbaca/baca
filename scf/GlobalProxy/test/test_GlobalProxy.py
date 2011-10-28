@@ -4,7 +4,6 @@ import baca
 def test_GlobalProxy_01():
 
     baca_proxy = baca.scf.GlobalProxy()
-    assert baca_proxy.creation_date is None
     assert baca_proxy.directory_name == '/Users/trevorbaca/Documents/other/baca'
     assert baca_proxy.get_tag('foo') is None
     assert baca_proxy.get_tags() == {}
