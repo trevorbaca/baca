@@ -175,7 +175,7 @@ class _Maker(PackageProxy):
     @property
     def location_name(self):
         if self.score is not None:
-            return self.score.score_title
+            return self.score.title
         else:
             return 'Studio'
 
@@ -426,7 +426,7 @@ class _Maker(PackageProxy):
             item = '%s: %r' % (key.replace('_', ' '), value)
             items.append(item)
         menu.items_to_number = items
-        menu.display_menu(score_title=self.score_title)
+        menu.display_menu(score_title=self.title)
 
     def unname_material(self):
         self.material_underscored_name = None

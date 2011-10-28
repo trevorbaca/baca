@@ -97,8 +97,8 @@ class PackageProxy(DirectoryProxy):
 
     @property
     def score(self):
-        from baca.scf.ScoreProxy import ScoreProxy
-        if isinstance(self.purview, ScoreProxy):
+        import baca
+        if isinstance(self.purview, baca.scf.ScoreProxy):
             return self.purview
 
     ### PRIVATE METHODS ###

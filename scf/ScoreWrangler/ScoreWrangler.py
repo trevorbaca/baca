@@ -67,7 +67,7 @@ class ScoreWrangler(PackageWrangler):
         key, value = menu.display_menu()
         if key == 's':
             return None
-        score_package_short_name = self.score_title_to_score_package_short_name(value)
+        score_package_short_name = self.title_to_score_package_short_name(value)
         score_proxy = self.ScoreProxy(score_package_short_name)
         return score_proxy
     

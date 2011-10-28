@@ -1,9 +1,7 @@
 from baca.scf.DirectoryProxy import DirectoryProxy
-#from baca.scf.PackageProxy import PackageProxy
 import os
 
 
-#class PackageWrangler(PackageProxy):
 class PackageWrangler(DirectoryProxy):
 
     ### OVERLOADS ###
@@ -21,6 +19,12 @@ class PackageWrangler(DirectoryProxy):
     @property
     def purview(self):
         return self.package_importable_name_to_purview(self.package_importable_name)
+
+    @property
+    def score(self):
+        import baca
+        if isinstance(self.purview, baca.scf.ScoreProxy):
+            return self.purview
 
     ### PUBLIC METHODS ###
 

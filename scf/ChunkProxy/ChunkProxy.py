@@ -9,14 +9,6 @@ class ChunkProxy(PackageProxy):
 
     ### PUBLIC ATTRIBUTES ###
 
-    @property
-    def chunk_spaced_name(self):
-        return self.package_spaced_name
-
-    @property
-    def chunk_underscored_name(self):
-        return self.package_short_name
-
     @apply
     def score_template():
         def fget(self):
@@ -67,7 +59,7 @@ class ChunkProxy(PackageProxy):
         while True:
             menu = self.Menu(client=self.where())
             menu.menu_header = menu_header
-            menu.menu_body = self.chunk_spaced_name
+            menu.menu_body = self.package_spaced_name
             menu_section = self.MenuSection()
             menu_section.named_pairs.append(('n', 'initializer'))
             menu.menu_sections.append(menu_section)

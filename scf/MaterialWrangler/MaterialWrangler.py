@@ -79,5 +79,5 @@ class MaterialWrangler(PackageWrangler):
                 else:
                     package_importable_name = '%s.%s' % (score_package_importable_name, material_underscored_name)
                     material_proxy = self.InteractiveMaterialProxy(package_importable_name)
-                material_proxy.score_title = 'Materials'
+                material_proxy.title = 'Materials'
                 material_proxy.manage_material(menu_header=menu.menu_title)

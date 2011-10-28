@@ -89,16 +89,6 @@ class ScoreProxy(PackageProxy):
         return (self.chunk_wrangler,
             self.material_wrangler,)
 
-#    @property
-#    def score_subdirectory_names(self):
-#        return (self.dist_proxy.directory_name,
-#            self.dist_pdf_directory_name,
-#            self.etc_proxy.directory_name,
-#            self.exg_proxy.directory_name,
-#            self.mus_proxy.directory_name,
-#            self.material_wrangler.directory_name,
-#            self.chunk_wrangler.directory_name,)
-
     @property
     def title(self):
         return self.get_tag('title')
@@ -170,20 +160,20 @@ class ScoreProxy(PackageProxy):
             if key == 'b':
                 return key, None
             elif key == 'ch':
-                self.chunk_wrangler.create_chunk_interactively(menu_header=self.score_title)
+                self.chunk_wrangler.create_chunk_interactively(menu_header=self.title)
             elif key == 'mi':
-                self.material_wrangler.create_interactive_material_interactively(menu_header=self.score_title)
+                self.material_wrangler.create_interactive_material_interactively(menu_header=self.title)
             elif key == 'ms':
-                self.material_wrangler.create_static_material_package_interactively(menu_header=self.score_title)
+                self.material_wrangler.create_static_material_package_interactively(menu_header=self.title)
             elif key == 'svn':
-                self.manage_svn(menu_header=self.score_title)
+                self.manage_svn(menu_header=self.title)
             elif key.startswith('h'):
                 chunk_spaced_name = value
                 chunk_underscored_name = chunk_spaced_name.replace(' ', '_')
                 package_importable_name = '%s.%s' % (
                     self.chunk_wrangler.package_importable_name, chunk_underscored_name)
                 chunk_proxy = self.chunk_wrangler.ChunkProxy(package_importable_name)
-                chunk_proxy.score_title = self.score_title
+                chunk_proxy.title = self.title
                 chunk_proxy.manage_chunk(menu_header=menu.menu_title)
             elif key.startswith('m'):
                 material_underscored_name = value

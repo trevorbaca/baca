@@ -42,14 +42,6 @@ class _SCFObject(object):
         return helpers
 
     @property
-    def makers_directory_name(self):
-        return self._makers_directory_name
-
-    @property
-    def scores_directory_name(self):
-        return self._scores_directory_name
-
-    @property
     def spaced_class_name(self):
         spaced_class_name = iotools.uppercamelcase_to_underscore_delimited_lowercase(self.class_name)
         spaced_class_name = spaced_class_name.replace('_', ' ')
@@ -62,11 +54,6 @@ class _SCFObject(object):
         return source_file_name
 
     ### PUBLIC METHODS ###
-
-    def annotate_docstring(self):
-        print self.source_file_name
-        print ''
-        self.proceed()
 
     def clear_terminal(self):
         iotools.clear_terminal()

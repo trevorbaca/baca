@@ -1,7 +1,7 @@
 import baca
 
 
-def test_GlobalProxy_01():
+def test_BacaProxy_01():
 
     baca_proxy = baca.scf.GlobalProxy()
     assert baca_proxy.creation_date is None

@@ -54,7 +54,7 @@ def test_ScoreProxy_01():
         baca.scf.MusProxy('manos'))
 
 
-def test_foo_02():
+def test_ScoreProxy_02():
 
     score_proxy = baca.scf.ScoreProxy('manos')    
     

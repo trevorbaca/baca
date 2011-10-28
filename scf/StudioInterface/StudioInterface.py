@@ -45,7 +45,7 @@ class StudioInterface(DirectoryProxy):
                 return self.baca_proxy.materials_package_importable_name
             else:
                 score_title = value
-                score_package_importable_name = self.score_wrangler.score_title_to_score_package_short_name(
+                score_package_importable_name = self.score_wrangler.title_to_score_package_short_name(
                     score_title)
                 score_proxy = baca.scf.ScoreProxy(score_package_importable_name)
                 return score_proxy.materials_package_importable_name
