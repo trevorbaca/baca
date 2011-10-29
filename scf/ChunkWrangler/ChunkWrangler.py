@@ -6,9 +6,9 @@ import os
 class ChunkWrangler(PackageWrangler, PackageProxy):
 
     def __init__(self, purview_package_short_name):
-        self.package_importable_name = '.'.join([purview_package_short_name, 'mus', 'chunks'])
-        directory_name = self.package_importable_name_to_directory_name(self.package_importable_name)
-        PackageWrangler.__init__(self, directory_name=directory_name)
+        package_importable_name = '.'.join([purview_package_short_name, 'mus', 'chunks'])
+        PackageProxy.__init__(self, package_importable_name=package_importable_name)
+        PackageWrangler.__init__(self, directory_name=self.directory_name)
 
     ### PUBLIC ATTRIBUTES ###
 

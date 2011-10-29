@@ -1,22 +1,40 @@
 import baca
+import types
 
 
 def test_GlobalProxy_01():
+    '''Attributes.
+    '''
 
-    baca_proxy = baca.scf.GlobalProxy()
-    assert baca_proxy.directory_name == '/Users/trevorbaca/Documents/other/baca'
-    assert baca_proxy.get_tag('foo') is None
-    assert baca_proxy.get_tags() == {}
-    assert baca_proxy.has_directory
-    assert baca_proxy.initializer_file_name == '/Users/trevorbaca/Documents/other/baca/__init__.py'
-    # TODO: find robust way to check repository check-in status
-    #assert baca_proxy.is_in_repository
-    assert not baca_proxy.is_score_local_purview
-    assert baca_proxy.is_studio_global_purview
-    assert baca_proxy.list_formatted_tags() == []
-    assert baca_proxy.package_importable_name == 'baca'
-    assert baca_proxy.package_short_name == 'baca'
-    assert baca_proxy.package_spaced_name == 'baca'
-    assert baca_proxy.parent_initializer_file_name is None
-    assert baca_proxy.parent_package_importable_name is None
-    assert baca_proxy.score is None
+    global_proxy = baca.scf.GlobalProxy()
+    assert global_proxy.class_name == 'GlobalProxy'
+    assert global_proxy.directory_name == '/Users/trevorbaca/Documents/other/baca'
+    assert global_proxy.get_tag('foo') is None
+    assert global_proxy.get_tags() == {}
+    assert global_proxy.has_directory
+    assert global_proxy.initializer_file_name == '/Users/trevorbaca/Documents/other/baca/__init__.py'
+    assert not global_proxy.is_score_local_purview
+    assert global_proxy.is_studio_global_purview
+    assert global_proxy.list_formatted_tags() == []
+    assert global_proxy.maker_wrangler == baca.scf.MakerWrangler()
+    assert global_proxy.material_wrangler == baca.scf.MaterialWrangler('baca')
+    assert global_proxy.materials_package_importable_name == 'baca.materials'
+    assert global_proxy.package_importable_name == 'baca'
+    assert global_proxy.package_short_name == 'baca'
+    assert global_proxy.package_spaced_name == 'baca'
+    assert global_proxy.parent_initializer_file_name is None
+    assert global_proxy.parent_package_importable_name is None
+    assert global_proxy.purview == global_proxy
+    assert global_proxy.score is None
+    assert global_proxy.source_file_name == \
+        '/Users/trevorbaca/Documents/other/baca/scf/GlobalProxy/GlobalProxy.py'
+    assert global_proxy.spaced_class_name == 'global proxy'
+
+
+def test_GlobalProxy_02():
+    '''Straightforward methods.
+    '''
+
+    global_proxy = baca.scf.GlobalProxy()
+    
+    assert isinstance(global_proxy.import_attribute_from_initializer('scf'), types.ModuleType)

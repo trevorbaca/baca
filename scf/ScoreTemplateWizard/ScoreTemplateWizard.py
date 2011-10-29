@@ -2,6 +2,7 @@ from abjad.tools import instrumenttools
 from baca.scf.menuing.Wizard import Wizard
 
 
+# TODO: change name to NewScoreWizard
 class ScoreTemplateWizard(Wizard):
 
     ### PUBLIC METHODS ###

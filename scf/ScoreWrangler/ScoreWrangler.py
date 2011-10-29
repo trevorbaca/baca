@@ -1,13 +1,11 @@
-from baca.scf.DirectoryProxy import DirectoryProxy
 from baca.scf.PackageWrangler import PackageWrangler
 import os
 
 
-class ScoreWrangler(PackageWrangler, DirectoryProxy):
+class ScoreWrangler(PackageWrangler):
 
     def __init__(self):
         PackageWrangler.__init__(self, directory_name=os.environ.get('SCORES'))
-        self.package_importable_name = ''
 
     ### OVERLOADS ###
 

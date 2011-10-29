@@ -7,7 +7,8 @@ import sys
 class PackageProxy(DirectoryProxy):
 
     def __init__(self, package_importable_name=None):
-        DirectoryProxy.__init__(self)
+        directory_name = self._package_importable_name_to_directory_name(package_importable_name)
+        DirectoryProxy.__init__(self, directory_name=directory_name)
         self._package_short_name = None
         self.package_importable_name = package_importable_name
         self._purview = None
@@ -25,7 +26,7 @@ class PackageProxy(DirectoryProxy):
     @property
     def directory_name(self):
         if self.package_importable_name is not None:
-            return self.package_importable_name_to_directory_name(self.package_importable_name)
+            return self._package_importable_name_to_directory_name(self.package_importable_name)
 
     @property
     def has_initializer(self):
@@ -66,7 +67,7 @@ class PackageProxy(DirectoryProxy):
     @property
     def parent_initializer_file_name(self):
         if self.parent_package_importable_name:
-            parent_directory_name = self.package_importable_name_to_directory_name(
+            parent_directory_name = self._package_importable_name_to_directory_name(
                 self.parent_package_importable_name)
             return os.path.join(parent_directory_name, '__init__.py')
 
@@ -83,7 +84,7 @@ class PackageProxy(DirectoryProxy):
             if self._purview is not None:
                 return self._purview
             else:
-                return self.package_importable_name_to_purview(self.package_importable_name)
+                return self._package_importable_name_to_purview(self.package_importable_name)
         def fset(self, purview):
             if self.package_importable_name is None:
                 self._purview = purview
@@ -98,6 +99,30 @@ class PackageProxy(DirectoryProxy):
             return self.purview
 
     ### PRIVATE METHODS ###
+
+    def _package_importable_name_to_directory_name(self, package_importable_name):
+        if package_importable_name is None:
+            return
+        package_importable_name_parts = package_importable_name.split('.')
+        if package_importable_name_parts[0] == 'baca':
+            directory_parts = [os.environ.get('BACA')] + package_importable_name_parts[1:]
+        elif package_importable_name_parts[0] in os.listdir(os.environ.get('SCORES')):
+            directory_parts = [os.environ.get('SCORES')] + package_importable_name_parts[:]
+        else:
+            raise ValueError('Unknown package importable name %r.' % package_importable_name)
+        directory = os.path.join(*directory_parts)
+        return directory
+
+    def _package_importable_name_to_purview(self, package_importable_name):
+        import baca
+        if package_importable_name is None:
+            return
+        elif package_importable_name.split('.')[0] == 'baca':
+            return baca.scf.GlobalProxy()
+        elif package_importable_name.split('.')[0] in os.listdir(os.environ.get('SCORES')):
+            return baca.scf.ScoreProxy(package_importable_name.split('.')[0])
+        else:
+            raise ValueError('Unknown package importable name %r.' % package_importable_name)
 
     def _read_initializer_metadata(self, name):
         initializer = file(self.initializer_file_name, 'r')
@@ -245,17 +270,6 @@ class PackageProxy(DirectoryProxy):
                 self.add_tag_interactively(menu_header=menu.menu_title)
             elif key == 'del':
                 self.delete_tag_interactively(menu_header=menu.menu_title)
-
-#    def package_importable_name_to_purview(self, package_importable_name):
-#        import baca
-#        if package_importable_name is None:
-#            return
-#        elif package_importable_name.split('.')[0] == 'baca':
-#            return baca.scf.GlobalProxy()
-#        elif package_importable_name.split('.')[0] in os.listdir(os.environ.get('SCORES')):
-#            return baca.scf.ScoreProxy(package_importable_name.split('.')[0])
-#        else:
-#            raise ValueError('Unknown package importable name %r.' % package_importable_name)
 
     def pprint_tags(self, tags):
         if tags:

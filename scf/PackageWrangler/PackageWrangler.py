@@ -4,27 +4,12 @@ import os
 
 class PackageWrangler(DirectoryProxy):
 
-#    ### OVERLOADS ###
-#
-#    def __repr__(self):
-#        return '%s(%r)' % (self.class_name, self.purview.package_short_name)
-
     ### PUBLIC ATTRIBUTES ###
 
     @property
     def PackageProxy(self):
         import baca
         return baca.scf.PackageProxy
-
-#    @property
-#    def purview(self):
-#        return self.package_importable_name_to_purview(self.package_importable_name)
-
-    @property
-    def score(self):
-        import baca
-        if isinstance(self.purview, baca.scf.ScoreProxy):
-            return self.purview
 
     ### PUBLIC METHODS ###
 

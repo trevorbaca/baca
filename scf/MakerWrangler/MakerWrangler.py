@@ -6,17 +6,24 @@ from baca.scf.PackageWrangler import PackageWrangler
 import os
 
 
+# TODO: implement MakerProxy and implement MakerWrangler in terms of MakerProxy
 class MakerWrangler(PackageWrangler, PackageProxy):
 
     def __init__(self):
-        self.package_importable_name = 'baca.makers'
-        directory_name = self.package_importable_name_to_directory_name(self.package_importable_name)
-        PackageWrangler.__init__(self, directory_name=directory_name)
+        package_importable_name = 'baca.makers'
+        PackageProxy.__init__(self, package_importable_name=package_importable_name)
+        PackageWrangler.__init__(self, directory_name=self.directory_name)
 
     ### OVERLOADS ###
 
     def __repr__(self):
         return '%s()' % self.class_name
+
+    ### PUBIC ATTRIBUTES ###
+
+    def Maker(self):
+        import baca
+        return baca.scf.Maker
 
     ### PUBLIC METHODS ###
 
@@ -33,6 +40,9 @@ class MakerWrangler(PackageWrangler, PackageProxy):
         exec('from baca.makers import %s as maker_class' % maker_name)
         maker = maker_class()
         return maker
+
+    def get_package_proxy(self, package_importable_name):
+        return self.Maker(package_importable_name)
 
     # replace with wrapped call to PackageWrangler.iterate_package_proxies()
     def iterate_makers(self):

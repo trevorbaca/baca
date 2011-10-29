@@ -10,9 +10,8 @@ class MaterialWrangler(PackageWrangler, PackageProxy):
             package_importable_name = '%s.materials' % purview_package_short_name
         else:   
             package_importable_name = '%s.mus.materials' % purview_package_short_name
-        self.package_importable_name = package_importable_name
-        directory_name = self.package_importable_name_to_directory_name(self.package_importable_name)
-        PackageWrangler.__init__(self, directory_name=directory_name)
+        PackageProxy.__init__(self, package_importable_name=package_importable_name)
+        PackageWrangler.__init__(self, directory_name=self.directory_name)
 
     ### PUBLIC ATTRIBUTES ###
 

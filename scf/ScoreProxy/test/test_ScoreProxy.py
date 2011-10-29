@@ -5,6 +5,8 @@ import baca
 
 
 def test_ScoreProxy_01():
+    '''Attributes.
+    '''
 
     score_proxy = baca.scf.ScoreProxy('manos')
 
@@ -54,7 +56,9 @@ def test_ScoreProxy_01():
         baca.scf.MusProxy('manos'))
 
 
+# TODO: write score method tests
 def test_ScoreProxy_02():
+    '''Methods.
+    '''
 
     score_proxy = baca.scf.ScoreProxy('manos')    
-    

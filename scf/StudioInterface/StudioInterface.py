@@ -1,29 +1,21 @@
 # -*- encoding: utf-8 -*-
+from baca.scf._SCFObject import _SCFObject
 from baca.scf.GlobalProxy import GlobalProxy
-from baca.scf.DirectoryProxy import DirectoryProxy
 from baca.scf.ScoreWrangler import ScoreWrangler
-import os
 import subprocess
 
 
-class StudioInterface(DirectoryProxy):
+class StudioInterface(_SCFObject):
 
     def __init__(self):
-        directory = os.environ.get('BACA', 'works')
-        DirectoryProxy.__init__(self, directory)
-        self._baca_proxy = GlobalProxy()
+        self._global_proxy = GlobalProxy()
         self._score_wrangler = ScoreWrangler()
-
-    ### OVERLOADS ###
-
-    def __repr__(self):
-        return '%s()' % self.class_name
 
     ### PUBLIC ATTRIBUTES ###
 
     @property
-    def baca_proxy(self):
-        return self._baca_proxy
+    def global_proxy(self):
+        return self._global_proxy
 
     @property
     def score_wrangler(self):
@@ -42,7 +34,7 @@ class StudioInterface(DirectoryProxy):
             menu.menu_sections.append(menu_section)
             key, value = menu.display_menu()
             if key == 'baca':
-                return self.baca_proxy.materials_package_importable_name
+                return self.global_proxy.materials_package_importable_name
             else:
                 score_title = value
                 score_package_importable_name = self.score_wrangler.title_to_score_package_short_name(
@@ -154,9 +146,9 @@ class StudioInterface(DirectoryProxy):
             menu.include_studio = False
             key, value = menu.display_menu()
             if key == 'k':
-                self.baca_proxy.maker_wrangler.manage_makers(menu_header='studio')
+                self.global_proxy.maker_wrangler.manage_makers(menu_header='studio')
             elif key == 'm':
-                self.baca_proxy.material_wrangler.manage_materials(menu_header='studio')
+                self.global_proxy.material_wrangler.manage_materials(menu_header='studio')
             elif key == 'svn':
                 self.manage_svn(menu_header='studio')
             else:

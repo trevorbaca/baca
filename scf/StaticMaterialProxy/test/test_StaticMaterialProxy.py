@@ -2,7 +2,7 @@ import baca
 
 
 def test_StaticMaterialProxy_01():
-    '''Static material without visualization.
+    '''Attributes.
     '''
 
     smp = baca.scf.StaticMaterialProxy('baca.materials.sargasso_multipliers')
@@ -28,7 +28,6 @@ def test_StaticMaterialProxy_01():
     assert smp.output_package_importable_name == 'baca.materials.sargasso_multipliers.output'
     assert smp.score_package_short_name == 'baca'
     assert smp.stylesheet_file_name == '/Users/trevorbaca/Documents/other/baca/materials/sargasso_multipliers/stylesheet.ly'
-    assert smp.user_input_wrapper is None
     assert smp.visualizer_file_name == '/Users/trevorbaca/Documents/other/baca/materials/sargasso_multipliers/visualization.py'
     assert smp.visualization_ly_file_name == '/Users/trevorbaca/Documents/other/baca/materials/sargasso_multipliers/visualization.ly'
     assert smp.visualization_package_importable_name == 'baca.materials.sargasso_multipliers.visualization'

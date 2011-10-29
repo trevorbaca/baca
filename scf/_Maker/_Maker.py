@@ -2,16 +2,16 @@ from abjad.tools import iotools
 from abjad.tools import lilypondfiletools
 from abjad.tools import markuptools
 from baca.scf.PackageProxy import PackageProxy
-from baca.scf.UserInputWrapper import UserInputWrapper
 import copy
 import os
 import shutil
 
 
+# TODO: break out new MakerProxy class from _Maker
 class _Maker(PackageProxy):
 
     def __init__(self, material_underscored_name=None, score=None):
-        package_importable_name = 'makers.%s' % self.class_name
+        package_importable_name = 'baca.makers.%s' % self.class_name
         PackageProxy.__init__(self, package_importable_name=package_importable_name)
         self.material_underscored_name = material_underscored_name
         self.score = score
@@ -23,6 +23,7 @@ class _Maker(PackageProxy):
 
     ### PRIVATE METHODS ###
 
+    # TODO: MakerProxy
     def _add_line_to_initializer(self, initializer, line):
         file_pointer = file(initializer, 'r')
         initializer_lines = set(file_pointer.readlines())
@@ -35,12 +36,14 @@ class _Maker(PackageProxy):
         file_pointer.write(''.join(initializer_lines))
         file_pointer.close()
 
+    # TODO: MakerProxy
     def _add_line_to_materials_initializer(self):
         material_underscored_name = os.path.basename(self.material_package_directory)
         import_statement = 'from %s import %s\n' % (material_underscored_name, material_underscored_name)
         initializer = self._get_initializer()
         self._add_line_to_initializer(initializer, import_statement)
 
+    # TODO: MakerProxy
     def _get_initializer(self):
         if 'scores' in self.material_package_directory:
             materials_directory = os.path.dirname(self.material_package_directory)
@@ -49,6 +52,7 @@ class _Maker(PackageProxy):
             initializer = os.path.join(os.environ.get('BACA'), 'materials', '__init__.py')        
         return initializer
 
+    # TODO: keep
     def _get_lilypond_score_title(self):
         material_underscored_name = os.path.basename(self.material_package_directory)
         if self.is_shared:
@@ -60,6 +64,7 @@ class _Maker(PackageProxy):
         title = markuptools.Markup(title)
         return title
 
+    # TODO: keep
     def _get_lilypond_score_subtitle(self):
         import baca
         if 'scores' in self.material_package_directory:
@@ -75,6 +80,7 @@ class _Maker(PackageProxy):
         subtitle = markuptools.Markup(subtitle)
         return subtitle
 
+    # TODO: MakerProxy
     def set_material_package_directory(self):
         while True:
             if self.material_underscored_name is None:
@@ -83,13 +89,14 @@ class _Maker(PackageProxy):
             print 'Package short name will be %s.\n' % self.material_package_short_name
             if self.confirm():
                 break
-
+    # TODO: keep
     def _initialize_user_input_wrapper(self):
         user_input_wrapper = copy.deepcopy(self.user_input_template)
         for key in user_input_wrapper:
             user_input_wrapper[key] = None
         return user_input_wrapper
         
+    # TODO: MakerProxy
     def _write_initializer_to_disk(self):
         initializer = file(os.path.join(self.material_package_directory, '__init__.py'), 'w')
         initializer.write('from output import *\n')
@@ -99,6 +106,7 @@ class _Maker(PackageProxy):
         initializer.write('tags = %r\n' % tags_dictionary)
         initializer.close()
 
+    # TODO: keep
     def _write_input_file_to_disk(self, user_input_import_statements, user_input_wrapper):
         user_input_lines = user_input_wrapper.formatted_lines
         input_file = file(os.path.join(self.material_package_directory, 'input.py'), 'w')
@@ -114,6 +122,7 @@ class _Maker(PackageProxy):
         input_file.write('%s = maker.make(**user_input)\n' % material_underscored_name)
         input_file.close()
 
+    # TODO: keep
     def _write_output_file_to_disk(self, material):
         output_file = file(os.path.join(self.material_package_directory, 'output.py'), 'w')
         output_file_import_statements = self.output_file_import_statements[:]
@@ -127,6 +136,7 @@ class _Maker(PackageProxy):
             output_file.write(line + '\n')
         output_file.close()
 
+    # TODO: keep
     def _write_stylesheet_to_disk(self):
         stylesheet = os.path.join(self.material_package_directory, 'stylesheet.ly')
         shutil.copy(self.stylesheet, stylesheet)
@@ -141,14 +151,17 @@ class _Maker(PackageProxy):
 
     ### PUBLIC ATTRIBUTES ###
 
+    # TODO: MakerProxy
     @property
     def directory(self):
         raise Exception('needs to be derived from material name')
 
+    # TODO: MakerProxy
     @property
     def generic_output_name(self):
         return self._generic_output_name
 
+    # TODO: MaterialProxy!
     @property
     def has_changes(self):
         if not self.score == self._original_score:
@@ -160,6 +173,7 @@ class _Maker(PackageProxy):
         else:
             return False
 
+    # TODO: MaterialProxy!
     @property
     def has_location(self):
         return bool(self.score is not None)

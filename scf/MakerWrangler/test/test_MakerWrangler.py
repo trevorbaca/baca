@@ -19,3 +19,10 @@ def test_MakerWrangler_01():
     assert maker_wrangler.source_file_name == \
         '/Users/trevorbaca/Documents/other/baca/scf/MakerWrangler/MakerWrangler.py'
     assert maker_wrangler.spaced_class_name == 'maker wrangler'
+
+
+def test_MakerWrangler_02():
+    '''Iteration.
+    '''
+
+    maker_wrangler = baca.scf.MakerWrangler()
