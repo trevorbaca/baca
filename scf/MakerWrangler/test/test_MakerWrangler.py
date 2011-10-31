@@ -1,7 +1,7 @@
 import baca
 
 
-def test_MakerWrangler_01():
+def testMakerWrangler_01():
     '''Attributes.
     '''
 
@@ -21,7 +21,7 @@ def test_MakerWrangler_01():
     assert maker_wrangler.spaced_class_name == 'maker wrangler'
 
 
-def test_MakerWrangler_02():
+def testMakerWrangler_02():
     '''Iteration.
     '''
 

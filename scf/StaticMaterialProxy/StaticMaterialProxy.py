@@ -1,8 +1,8 @@
-from baca.scf._MaterialProxy import _MaterialProxy
+from baca.scf.MaterialProxy import MaterialProxy
 import os
 
 
-class StaticMaterialProxy(_MaterialProxy):
+class StaticMaterialProxy(MaterialProxy):
 
     ### PUBLIC ATTRIBUTES ###
 

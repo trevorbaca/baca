@@ -7,8 +7,8 @@ import os
 import shutil
 
 
-# TODO: break out new MakerProxy class from _Maker
-class _Maker(PackageProxy):
+# TODO: break out new MakerProxy class from Maker
+class Maker(PackageProxy):
 
     def __init__(self, material_underscored_name=None, score=None):
         package_importable_name = 'baca.makers.%s' % self.class_name

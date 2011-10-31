@@ -4,16 +4,16 @@
 #from abjad.tools import scoretools
 #from abjad.tools import sequencetools
 #from abjad.tools import spannertools
-from baca.scf._Maker import _Maker
+from baca.scf.Maker import Maker
 from baca.scf.UserInputWrapper import UserInputWrapper
 import baca
 import os
 
 
-class ZaggedPitchClassMaker(_Maker):
+class ZaggedPitchClassMaker(Maker):
 
     def __init__(self, **kwargs):
-        _Maker.__init__(self, **kwargs)
+        Maker.__init__(self, **kwargs)
         self.stylesheet = os.path.join(os.path.dirname(__file__), 'stylesheet.ly')
         self._generic_output_name = 'zagged pitch-classes'
 

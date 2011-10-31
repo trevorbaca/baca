@@ -1,7 +1,7 @@
-from baca.scf._MaterialProxy import _MaterialProxy
+from baca.scf.MaterialProxy import MaterialProxy
 
 
-class InteractiveMaterialProxy(_MaterialProxy):
+class InteractiveMaterialProxy(MaterialProxy):
 
     ### PUBLIC METHODS ###
 

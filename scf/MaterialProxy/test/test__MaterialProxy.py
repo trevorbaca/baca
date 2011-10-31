@@ -1,11 +1,11 @@
 import baca
 
 
-def test__MaterialProxy_01():
+def test_MaterialProxy_01():
     '''Unnamed material.
     '''
 
-    material_proxy = baca.scf._MaterialProxy._MaterialProxy()
+    material_proxy = baca.scf.MaterialProxy.MaterialProxy()
     assert not material_proxy.has_input_data
     assert not material_proxy.has_input_file
     assert not material_proxy.has_output_data
