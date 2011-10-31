@@ -4,13 +4,13 @@
 #from abjad.tools import scoretools
 #from abjad.tools import sequencetools
 #from abjad.tools import spannertools
-from baca.scf.Maker import Maker
+from baca.scf.InteractiveMaterialProxy import InteractiveMaterialProxy
 from baca.scf.UserInputWrapper import UserInputWrapper
 import baca
 import os
 
 
-class ZaggedPitchClassMaker(Maker):
+class ZaggedPitchClassMaker(InteractiveMaterialProxy):
 
     def __init__(self, **kwargs):
         Maker.__init__(self, **kwargs)
