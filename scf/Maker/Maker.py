@@ -7,10 +7,7 @@ import os
 import shutil
 
 
-# TODO: break out new MakerProxy class from Maker
-'''purpose of MakerProxy is filesystem interface;
-    pupose of Maker is material-dedicated calculation.
-'''
+# TODO: maybe Maker class doesn't exist at all? Maybe replaced by (Interactive)MaterialProxy?
 class Maker(PackageProxy):
 
     def __init__(self, material_underscored_name=None, score=None):
@@ -26,36 +23,7 @@ class Maker(PackageProxy):
 
     ### PRIVATE METHODS ###
 
-    # TODO: MakerProxy
-    def _add_line_to_initializer(self, initializer, line):
-        file_pointer = file(initializer, 'r')
-        initializer_lines = set(file_pointer.readlines())
-        file_pointer.close()
-        initializer_lines.add(line)
-        initializer_lines = list(initializer_lines)
-        initializer_lines = [x for x in initializer_lines if not x == '\n']
-        initializer_lines.sort()
-        file_pointer = file(initializer, 'w')
-        file_pointer.write(''.join(initializer_lines))
-        file_pointer.close()
-
-    # TODO: MakerProxy ... or MakerWrangler
-    def _add_line_to_materials_initializer(self):
-        material_underscored_name = os.path.basename(self.material_package_directory)
-        import_statement = 'from %s import %s\n' % (material_underscored_name, material_underscored_name)
-        initializer = self._get_initializer()
-        self._add_line_to_initializer(initializer, import_statement)
-
-    # TODO: MakerProxy
-    def _get_initializer(self):
-        if 'scores' in self.material_package_directory:
-            materials_directory = os.path.dirname(self.material_package_directory)
-            initializer = os.path.join(materials_directory, '__init__.py')
-        else:
-            initializer = os.path.join(os.environ.get('BACA'), 'materials', '__init__.py')        
-        return initializer
-
-    # TODO: Maker
+    # TODO: MaterialProxy ... and reimplement as read-only property
     def _get_lilypond_score_title(self):
         material_underscored_name = os.path.basename(self.material_package_directory)
         if self.is_shared:
@@ -67,7 +35,7 @@ class Maker(PackageProxy):
         title = markuptools.Markup(title)
         return title
 
-    # TODO: Maker
+    # TODO: MaterialProxy and reimplement as read-only property
     def _get_lilypond_score_subtitle(self):
         import baca
         if 'scores' in self.material_package_directory:
@@ -83,7 +51,7 @@ class Maker(PackageProxy):
         subtitle = markuptools.Markup(subtitle)
         return subtitle
 
-    # TODO: MakerProxy
+    # TODO: InteractiveMaterialProxy ... and rename to show interactivity
     def set_material_package_directory(self):
         while True:
             if self.material_underscored_name is None:
@@ -92,24 +60,15 @@ class Maker(PackageProxy):
             print 'Package short name will be %s.\n' % self.material_package_short_name
             if self.confirm():
                 break
-    # TODO: Maker
+
+    # TODO: InteractiveMaterialProxy
     def _initialize_user_input_wrapper(self):
         user_input_wrapper = copy.deepcopy(self.user_input_template)
         for key in user_input_wrapper:
             user_input_wrapper[key] = None
         return user_input_wrapper
         
-    # TODO: MakerProxy
-    def _write_initializer_to_disk(self):
-        initializer = file(os.path.join(self.material_package_directory, '__init__.py'), 'w')
-        initializer.write('from output import *\n')
-        initializer.write('import datetime\n')
-        initializer.write('\n\n')
-        tags_dictionary = self.make_tags_dictionary()
-        initializer.write('tags = %r\n' % tags_dictionary)
-        initializer.close()
-
-    # TODO: Maker
+    # TODO: InteractiveMaterialMaker
     def _write_input_file_to_disk(self, user_input_import_statements, user_input_wrapper):
         user_input_lines = user_input_wrapper.formatted_lines
         input_file = file(os.path.join(self.material_package_directory, 'input.py'), 'w')
@@ -125,7 +84,7 @@ class Maker(PackageProxy):
         input_file.write('%s = maker.make(**user_input)\n' % material_underscored_name)
         input_file.close()
 
-    # TODO: Maker
+    # TODO: MaterialProxy
     def _write_output_file_to_disk(self, material):
         output_file = file(os.path.join(self.material_package_directory, 'output.py'), 'w')
         output_file_import_statements = self.output_file_import_statements[:]
@@ -139,7 +98,7 @@ class Maker(PackageProxy):
             output_file.write(line + '\n')
         output_file.close()
 
-    # TODO: Maker
+    # TODO: MaterialProxy
     def _write_stylesheet_to_disk(self):
         stylesheet = os.path.join(self.material_package_directory, 'stylesheet.ly')
         shutil.copy(self.stylesheet, stylesheet)
@@ -154,16 +113,6 @@ class Maker(PackageProxy):
 
     ### PUBLIC ATTRIBUTES ###
 
-    # TODO: MakerProxy
-    @property
-    def directory(self):
-        raise Exception('needs to be derived from material name')
-
-    # TODO: MakerProxy
-    @property
-    def generic_output_name(self):
-        return self._generic_output_name
-
     # TODO: MaterialProxy
     @property
     def has_changes(self):
@@ -176,7 +125,7 @@ class Maker(PackageProxy):
         else:
             return False
 
-    # TODO: MaterialProxy
+    # TODO: remove and use purview instead
     @property
     def has_location(self):
         return bool(self.score is not None)
@@ -186,7 +135,7 @@ class Maker(PackageProxy):
     def has_material_underscored_name(self):
         return bool(self.material_underscored_name is not None)
 
-    # TODO: Material
+    # TODO: MaterialProxy
     @property
     def is_shared(self):
         return bool(self.score is None)
@@ -199,7 +148,7 @@ class Maker(PackageProxy):
         else:
             return 'Studio'
 
-    # TODO: Maker
+    # TODO: MaterialProxy
     @property
     def material_menu_name(self):
         if self.has_material_underscored_name:
@@ -248,7 +197,7 @@ class Maker(PackageProxy):
         else:
             return self.score.materials_directory_name
 
-    # TODO: MaterialProxy and use purview instead
+    # TODO: remove
     @apply
     def score():
         def fget(self):
@@ -259,7 +208,7 @@ class Maker(PackageProxy):
             self._score = score
         return property(**locals())
 
-    # TODO: MaterialProxy and use purview instead
+    # TODO: remove
     @property
     def score_package_short_name(self):
         if self.score is not None:
@@ -267,7 +216,7 @@ class Maker(PackageProxy):
 
     ### PUBLIC METHODS ###
 
-    # TODO: MaterialProxy
+    # TODO: InteractiveMaterialProxy
     def append_status_indicator(self, menu_body):
         if self.has_changes:
             menu_body = '%s (*)' % menu_body
@@ -402,37 +351,6 @@ class Maker(PackageProxy):
         tags['creation_date'] = self.helpers.get_current_date()
         tags['maker'] = self.class_name
         return tags
-
-    # TODO: MakerProxy
-    def manage_maker(self, menu_header=None):
-        while True:
-            menu = self.Menu(client=self.where())
-            menu.menu_header = menu_header
-            menu.menu_body = self.spaced_class_name
-            menu_section = self.MenuSection()
-            menu_section.menu_section_title = 'existing %s' % self.generic_output_name
-            menu_section.items_to_number = list(self.iterate_materials_based_on_maker())
-            menu.menu_sections.append(menu_section)
-            menu_section = self.MenuSection()
-            menu_section.sentence_length_items.append(('del', 'delete %s' % self.spaced_class_name))
-            menu_section.sentence_length_items.append(('new', 'create %s' % self.generic_output_name))
-            menu_section.sentence_length_items.append(('ren', 'rename %s' % self.spaced_class_name))
-            menu_section.sentence_length_items.append(('src', 'edit %s source' % self.spaced_class_name))
-            key, value = menu.display_menu()
-            if key == 'b':
-                return key, None
-            elif key == 'del':
-                self.delete_package()
-                break
-            elif key == 'new':
-                self.edit_interactively(menu_header=menu.menu_title)
-            elif key == 'ren':
-                self.print_not_implemented()
-            elif key == 'src':
-                self.edit_source_file()
-            else:
-                material_proxy = value
-                material_proxy.manage_material(menu_header=menu.menu_title)
 
     # TODO: InteractiveMaterialProxy
     def name_material(self):
