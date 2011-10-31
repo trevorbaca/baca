@@ -93,6 +93,13 @@ class PackageProxy(DirectoryProxy):
         return property(**locals())
 
     @property
+    def purview_name(self):
+        if self.score is not None:
+            return self.score.title
+        else:
+            return 'studio'
+
+    @property
     def score(self):
         import baca
         if isinstance(self.purview, baca.scf.ScoreProxy):

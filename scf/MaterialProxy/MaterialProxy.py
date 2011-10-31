@@ -1,4 +1,5 @@
 from abjad.tools import iotools
+from abjad.tools import markuptools
 from baca.scf.PackageProxy import PackageProxy
 import os
 import subprocess
@@ -25,6 +26,10 @@ class MaterialProxy(PackageProxy):
             return False
         else:
             return os.path.exists(self.input_file_name)
+
+    @property
+    def has_material_underscored_name(self):
+        return bool(self.material_underscored_name is not None)
 
     @property
     def has_output_data(self):
@@ -108,12 +113,69 @@ class MaterialProxy(PackageProxy):
         return not self.is_interactive
 
     @property
-    def material_spaced_name(self):
-        return self.package_spaced_name
+    def lilypond_score_subtitle(self):
+        import baca
+        if 'scores' in self.material_package_directory:
+            materials_directory = os.path.dirname(self.material_package_directory)
+            mus_directory = os.path.dirname(materials_directory)
+            score_package_directory = os.path.dirname(mus_directory)
+            score_package_short_name = os.path.basename(score_package_directory)
+            score_wrangler = baca.scf.ScoreWrangler()
+            score_title = score_wrangler.score_package_short_name_to_score_title(score_package_short_name)
+            subtitle = '(%s)' % score_title
+        else:
+            subtitle = '(shared material)'
+        subtitle = markuptools.Markup(subtitle)
+        return subtitle
 
     @property
-    def material_underscored_name(self):
-        return self.package_short_name
+    def lilypond_score_title(self):
+        material_underscored_name = os.path.basename(self.material_package_directory)
+        if self.is_shared:
+            material_parts = material_underscored_name.split('_')
+        else:
+            material_parts = material_underscored_name.split('_')[1:]
+        material_spaced_name = ' '.join(material_parts)
+        title = material_spaced_name.capitalize()
+        title = markuptools.Markup(title)
+        return title
+
+    @property
+    def material_package_directory(self):
+        if self.materials_directory_name:
+            if self.material_package_short_name:
+                return os.path.join(self.materials_directory_name, self.material_package_short_name)
+
+    @property
+    def material_package_short_name(self):
+        if self.score is None:  
+            return self.material_underscored_name
+        # TODO: remove score namespacing of score materials
+        else:
+            return '%s_%s' % (self.score.package_short_name, self.material_underscored_name)
+
+    @property
+    def material_spaced_name(self):
+        if self.has_material_underscored_name:
+            return self.material_underscored_name.replace('_', ' ')
+
+    @apply
+    def material_underscored_name():
+        def fget(self):
+            return self._material_underscored_name
+        def fset(self, material_underscored_name):
+            assert isinstance(material_underscored_name, (str, type(None)))
+            if isinstance(material_underscored_name, str):
+                assert iotools.is_underscore_delimited_lowercase_string(material_underscored_name)
+            self._material_underscored_name = material_underscored_name
+        return property(**locals())
+
+    @property
+    def materials_directory_name(self):
+        if self.score is None:
+            return self.baca_materials_directory
+        else:
+            return self.score.materials_directory_name
 
     @property
     def materials_package_importable_name(self):
@@ -169,6 +231,20 @@ class MaterialProxy(PackageProxy):
             return os.path.join(self.directory_name, 'visualization.pdf')
 
     ### PUBLIC METHODS ###
+
+    # TODO: MaterialProxy
+    def make_material_package_directory(self):
+        try:
+            os.mkdir(self.material_package_directory)
+        except OSError:
+            pass
+
+    # TODO: MaterialProxy ... and extend PackageProxy
+    def make_tags_dictionary(self):
+        tags = {}
+        tags['creation_date'] = self.helpers.get_current_date()
+        tags['maker'] = self.class_name
+        return tags
 
     def add_material_to_materials_initializer(self):
         import_statement = 'from %s import %s\n' % (self.material_underscored_name, self.material_underscored_name)
@@ -710,3 +786,28 @@ class MaterialProxy(PackageProxy):
         else:
             print 'Input data equals output data. (Output data preserved.)'
         return is_changed
+
+    def write_output_file_to_disk(self, material):
+        output_file = file(os.path.join(self.material_package_directory, 'output.py'), 'w')
+        output_file_import_statements = self.output_file_import_statements[:]
+        for line in output_file_import_statements:
+            output_file.write(line + '\n')
+        if output_file_import_statements:
+            output_file.write('\n\n')
+        material_underscored_name = os.path.basename(self.material_package_directory)
+        output_file_lines = self.get_output_file_lines(material, material_underscored_name)
+        for line in output_file_lines:
+            output_file.write(line + '\n')
+        output_file.close()
+
+    def write_stylesheet_to_disk(self):
+        stylesheet = os.path.join(self.material_package_directory, 'stylesheet.ly')
+        shutil.copy(self.stylesheet, stylesheet)
+        header_block = lilypondfiletools.HeaderBlock()
+        header_block.title = self.lilypond_score_title
+        header_block.subtitle = self.lilypond_score_subtitle
+        header_block.tagline = markuptools.Markup('""')
+        fp = file(stylesheet, 'a')
+        fp.write('\n')
+        fp.write(header_block.format)
+        fp.close()

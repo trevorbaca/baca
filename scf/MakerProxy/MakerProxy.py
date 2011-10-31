@@ -21,44 +21,6 @@ class MakerProxy(PackageProxy):
         else:
             return '{}({!r})'.format(self.class_name, self.maker_class_name)
 
-    ### PRIVATE METHODS ###
-
-    def _add_line_to_initializer(self, initializer, line):
-        file_pointer = file(initializer, 'r')
-        initializer_lines = set(file_pointer.readlines())
-        file_pointer.close()
-        initializer_lines.add(line)
-        initializer_lines = list(initializer_lines)
-        initializer_lines = [x for x in initializer_lines if not x == '\n']
-        initializer_lines.sort()
-        file_pointer = file(initializer, 'w')
-        file_pointer.write(''.join(initializer_lines))
-        file_pointer.close()
-
-    # TODO: Possibly MakerWrangler?
-    def _add_line_to_materials_initializer(self):
-        material_underscored_name = os.path.basename(self.material_package_directory)
-        import_statement = 'from %s import %s\n' % (material_underscored_name, material_underscored_name)
-        initializer = self._get_initializer()
-        self._add_line_to_initializer(initializer, import_statement)
-
-    def _get_initializer(self):
-        if 'scores' in self.material_package_directory:
-            materials_directory = os.path.dirname(self.material_package_directory)
-            initializer = os.path.join(materials_directory, '__init__.py')
-        else:
-            initializer = os.path.join(os.environ.get('BACA'), 'materials', '__init__.py')        
-        return initializer
-
-    def _write_initializer_to_disk(self):
-        initializer = file(os.path.join(self.material_package_directory, '__init__.py'), 'w')
-        initializer.write('from output import *\n')
-        initializer.write('import datetime\n')
-        initializer.write('\n\n')
-        tags_dictionary = self.make_tags_dictionary()
-        initializer.write('tags = %r\n' % tags_dictionary)
-        initializer.close()
-
     ### PUBLIC ATTRIBUTES ###
 
     # TODO: Maybe this can't be set here? Must be derived from hardcode maker classfile?
@@ -85,6 +47,33 @@ class MakerProxy(PackageProxy):
         return property(**locals())
 
     ### PUBLIC METHODS ###
+
+    def add_line_to_initializer(self, initializer, line):
+        file_pointer = file(initializer, 'r')
+        initializer_lines = set(file_pointer.readlines())
+        file_pointer.close()
+        initializer_lines.add(line)
+        initializer_lines = list(initializer_lines)
+        initializer_lines = [x for x in initializer_lines if not x == '\n']
+        initializer_lines.sort()
+        file_pointer = file(initializer, 'w')
+        file_pointer.write(''.join(initializer_lines))
+        file_pointer.close()
+
+    # TODO: Possibly MakerWrangler?
+    def add_line_to_materials_initializer(self):
+        material_underscored_name = os.path.basename(self.material_package_directory)
+        import_statement = 'from %s import %s\n' % (material_underscored_name, material_underscored_name)
+        initializer = self._get_initializer()
+        self._add_line_to_initializer(initializer, import_statement)
+
+    def get_initializer(self):
+        if 'scores' in self.material_package_directory:
+            materials_directory = os.path.dirname(self.material_package_directory)
+            initializer = os.path.join(materials_directory, '__init__.py')
+        else:
+            initializer = os.path.join(os.environ.get('BACA'), 'materials', '__init__.py')        
+        return initializer
 
     def manage_maker(self, menu_header=None):
         while True:
@@ -115,3 +104,12 @@ class MakerProxy(PackageProxy):
             else:
                 material_proxy = value
                 material_proxy.manage_material(menu_header=menu.menu_title)
+
+    def write_initializer_to_disk(self):
+        initializer = file(os.path.join(self.material_package_directory, '__init__.py'), 'w')
+        initializer.write('from output import *\n')
+        initializer.write('import datetime\n')
+        initializer.write('\n\n')
+        tags_dictionary = self.make_tags_dictionary()
+        initializer.write('tags = %r\n' % tags_dictionary)
+        initializer.close()
