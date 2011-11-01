@@ -5,7 +5,7 @@ import os
 import subprocess
 
 
-class _MenuObject(_SCFObject):
+class MenuObject(_SCFObject):
 
     def __init__(self, client=None, menu_header=None, menu_body=None, hidden_items=None,
         indent_level=1):

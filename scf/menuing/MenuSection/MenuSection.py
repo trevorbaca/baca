@@ -1,7 +1,7 @@
-from baca.scf.menuing._MenuObject import _MenuObject
+from baca.scf.menuing.MenuObject import MenuObject
 
 
-class MenuSection(_MenuObject):
+class MenuSection(MenuObject):
 
     def __init__(self, menu_section_title=None, lines_to_list=None,
         named_pairs=None, entry_prefix=None,

@@ -1,14 +1,14 @@
-from baca.scf.menuing._MenuObject import _MenuObject
+from baca.scf.menuing.MenuObject import MenuObject
 from baca.scf._SCFObject import _SCFObject
 import os
 
 
-class Menu(_MenuObject, _SCFObject):
+class Menu(MenuObject, _SCFObject):
 
     def __init__(self, client=None, menu_header=None, menu_body=None, 
         menu_sections=None, hidden_items=None, include_back=True, include_studio=True, 
         indent_level=1, item_width = 11, should_clear_terminal=True, hide_menu=False):
-        _MenuObject.__init__(
+        MenuObject.__init__(
             self, menu_header=menu_header, menu_body=menu_body, hidden_items=hidden_items,
             indent_level=indent_level)
         self.client = client
