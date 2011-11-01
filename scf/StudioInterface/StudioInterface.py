@@ -1,11 +1,11 @@
 # -*- encoding: utf-8 -*-
-from baca.scf._SCFObject import _SCFObject
+from baca.scf.SCFObject import SCFObject
 from baca.scf.GlobalProxy import GlobalProxy
 from baca.scf.ScoreWrangler import ScoreWrangler
 import subprocess
 
 
-class StudioInterface(_SCFObject):
+class StudioInterface(SCFObject):
 
     def __init__(self):
         self._global_proxy = GlobalProxy()

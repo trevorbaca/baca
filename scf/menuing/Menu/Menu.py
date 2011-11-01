@@ -1,9 +1,9 @@
 from baca.scf.menuing.MenuObject import MenuObject
-from baca.scf._SCFObject import _SCFObject
+from baca.scf.SCFObject import SCFObject
 import os
 
 
-class Menu(MenuObject, _SCFObject):
+class Menu(MenuObject, SCFObject):
 
     def __init__(self, client=None, menu_header=None, menu_body=None, 
         menu_sections=None, hidden_items=None, include_back=True, include_studio=True, 

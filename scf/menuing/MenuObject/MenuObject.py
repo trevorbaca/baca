@@ -1,11 +1,11 @@
-from baca.scf._SCFObject._SCFObject import _SCFObject
+from baca.scf.SCFObject.SCFObject import SCFObject
 from baca.scf.exceptions import StudioException
 from abjad.tools import iotools
 import os
 import subprocess
 
 
-class MenuObject(_SCFObject):
+class MenuObject(SCFObject):
 
     def __init__(self, client=None, menu_header=None, menu_body=None, hidden_items=None,
         indent_level=1):

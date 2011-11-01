@@ -4,7 +4,7 @@ import os
 import readline
 
 
-class _SCFObject(object):
+class SCFObject(object):
     
     ### OVERLOADS ###
 
