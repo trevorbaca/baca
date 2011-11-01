@@ -31,7 +31,7 @@ class StudioInterface(SCFObject):
             menu_section.items_to_number = self.score_wrangler.iterate_score_titles_with_years()
             menu_section.sentence_length_items.append(('baca', 'baca materials directory'))
             menu.menu_sections.append(menu_section)
-            key, value = menu.display_menu()
+            key, value = menu.run()
             if key == 'baca':
                 return self.global_proxy.materials_package_importable_name
             else:
@@ -79,7 +79,7 @@ class StudioInterface(SCFObject):
             menu_section.sentence_length_items.append(('pytest all', 'run regression tests (all)'))
             menu_section.layout = 'line'
             menu.menu_sections.append(menu_section)
-            key, value = menu.display_menu()
+            key, value = menu.run()
             if key == 'b':
                 return key, None
             elif key == 'add':
@@ -123,7 +123,7 @@ class StudioInterface(SCFObject):
         menu = self.Menu(client=self.where())
         menu.menu_header = menu_header
         menu.items_to_number = material_proxies
-        key, value = menu.display_menu()
+        key, value = menu.run()
         return value
     
     def work_in_studio(self, menu_header=None, user_input=None, test=None):
@@ -134,7 +134,7 @@ class StudioInterface(SCFObject):
             score_titles = list(self.score_wrangler.iterate_score_titles_with_years())
             score_package_short_names = list(self.score_wrangler.iterate_score_package_short_names())
             menu_section.items_to_number = zip(score_titles, score_package_short_names)
-            menu_section.sentence_length_items.append(('k', 'work with material makers'))
+            menu_section.sentence_length_items.append(('k', 'work with interactive material proxies'))
             menu_section.sentence_length_items.append(('m', 'work with Bača materials'))
             menu_section.hidden_items.append(('svn', 'work with repository'))
             menu.menu_sections.append(menu_section)
@@ -142,8 +142,10 @@ class StudioInterface(SCFObject):
             menu.include_studio = False
             if test == 'menu_lines':
                 return menu.make_menu_lines()
+            elif test == 'foo':
+                pass
             else:
-                key, value = menu.display_menu()
+                key, value = menu.run(user_input=user_input)
             if key == 'k':
                 self.global_proxy.maker_wrangler.manage_makers(menu_header='studio')
             elif key == 'm':

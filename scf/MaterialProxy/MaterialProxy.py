@@ -466,7 +466,7 @@ class MaterialProxy(PackageProxy):
             menu_section.named_pairs.append(('t', 'tags'))
             menu_section.named_pairs.append(('z', 'regenerate'))
             menu.menu_sections.append(menu_section)
-            key, value = menu.display_menu()
+            key, value = menu.run()
             if key == 'b':
                 return key, None
             elif key == 'd':

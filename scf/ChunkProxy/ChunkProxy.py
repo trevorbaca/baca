@@ -66,7 +66,7 @@ class ChunkProxy(PackageProxy):
             menu_section = self.MenuSection()
             menu_section.named_pairs.append(('d', 'delete'))
             menu.menu_sections.append(menu_section)
-            key, value = menu.display_menu()
+            key, value = menu.run()
             if key == 'b':
                 return key, None
             elif key == 'd':

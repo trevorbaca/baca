@@ -1,5 +1,5 @@
-from baca.scf.menuing.MenuObject import MenuObject
 from baca.scf.SCFObject import SCFObject
+from baca.scf.menuing.MenuObject import MenuObject
 import os
 
 
@@ -18,35 +18,6 @@ class Menu(MenuObject, SCFObject):
         self.item_width = item_width
         self.should_clear_terminal = should_clear_terminal
         self.hide_menu = hide_menu
-
-    ### PRIVATE METHODS ###
-
-    def _add_hidden_menu_items(self, all_keys, all_values):
-        for key, value in self.default_hidden_items:
-            all_keys.append(key)
-            all_values.append(value)
-        for key, value in self.hidden_items:
-            all_keys.append(key)
-            all_values.append(value)
-        
-    def _display_menu(self, return_menu_lines=False):
-        if self.should_clear_terminal:
-            self.clear_terminal()
-        menu_lines, all_keys, all_values = self.make_menu_lines_keys_and_values()
-        self._add_hidden_menu_items(all_keys, all_values)
-        if return_menu_lines:
-            return menu_lines
-        else:
-            for menu_line in menu_lines:
-                print menu_line
-        while True:
-            response = raw_input('scf> ')
-            print ''
-            if response in all_keys:
-                break
-        pair_dictionary = dict(zip(all_keys, all_values))
-        value = pair_dictionary[response]
-        return response, value
 
     ### PUBLIC ATTRIBUTES ###
     
@@ -119,11 +90,35 @@ class Menu(MenuObject, SCFObject):
 
     ### PUBLIC METHODS ###
 
-    def display_menu(self):
+    def add_hidden_menu_items(self, all_keys, all_values):
+        for key, value in self.default_hidden_items:
+            all_keys.append(key)
+            all_values.append(value)
+        for key, value in self.hidden_items:
+            all_keys.append(key)
+            all_values.append(value)
+        
+    def display(self):
+        if self.should_clear_terminal:
+            self.clear_terminal()
+        menu_lines, all_keys, all_values = self.make_menu_lines_keys_and_values()
+        self.add_hidden_menu_items(all_keys, all_values)
+        for menu_line in menu_lines:
+            print menu_line
+        while True:
+            response = raw_input('scf> ')
+            print ''
+            if response in all_keys:
+                break
+        pair_dictionary = dict(zip(all_keys, all_values))
+        value = pair_dictionary[response]
+        return response, value
+
+    def run(self, user_input=None):
         should_clear_terminal, hide_menu = True, False
         while True:
             self.should_clear_terminal, self.hide_menu = should_clear_terminal, hide_menu
-            key, value = self._display_menu()
+            key, value = self.display()
             should_clear_terminal, hide_menu = False, True
             if self.handle_hidden_key(key):
                 pass

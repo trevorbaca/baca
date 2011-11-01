@@ -156,7 +156,7 @@ class ScoreProxy(PackageProxy):
             menu_section.sentence_length_items.append(('ms', 'create static material'))
             menu.menu_sections.append(menu_section)
             menu.hidden_items.append(('svn', 'work with repository'))
-            key, value = menu.display_menu()
+            key, value = menu.run()
             if key == 'b':
                 return key, None
             elif key == 'ch':
@@ -193,7 +193,7 @@ class ScoreProxy(PackageProxy):
             menu_section.sentence_length_items.append(('ci', 'svn commit'))
             menu_section.layout = 'line'
             menu.menu_sections.append(menu_section)
-            key, value = menu.display_menu()
+            key, value = menu.run()
             if key == 'b':
                 return key, None
             elif key == 'add':

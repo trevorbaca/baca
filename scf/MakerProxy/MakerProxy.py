@@ -89,7 +89,7 @@ class MakerProxy(PackageProxy):
             menu_section.sentence_length_items.append(('new', 'create %s' % self.generic_output_name))
             menu_section.sentence_length_items.append(('ren', 'rename %s' % self.spaced_class_name))
             menu_section.sentence_length_items.append(('src', 'edit %s source' % self.spaced_class_name))
-            key, value = menu.display_menu()
+            key, value = menu.run()
             if key == 'b':
                 return key, None
             elif key == 'del':

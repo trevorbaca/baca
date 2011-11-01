@@ -68,7 +68,7 @@ class MaterialWrangler(PackageWrangler, PackageProxy):
             menu_section.sentence_length_items.append(('i', 'create interactive material'))
             menu_section.sentence_length_items.append(('s', 'create static material'))
             menu.menu_sections.append(menu_section)
-            key, value = menu.display_menu()
+            key, value = menu.run()
             if key == 'b':
                 return key, None
             elif key == 'i':

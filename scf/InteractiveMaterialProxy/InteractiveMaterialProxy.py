@@ -85,7 +85,7 @@ class InteractiveMaterialProxy(MaterialProxy):
             else:
                 menu_section.sentence_length_items.append(('l', 'set location'))
             menu.menu_sections.append(menu_section)
-            key, value = menu.display_menu()
+            key, value = menu.run()
             if key == 'b':
                 self.interactively_check_and_save_material(self.user_input_wrapper)
                 return key, None
@@ -182,7 +182,7 @@ class InteractiveMaterialProxy(MaterialProxy):
             item = '%s: %r' % (key.replace('_', ' '), value)
             items.append(item)
         menu.items_to_number = items
-        menu.display_menu(score_title=self.title)
+        menu.run(score_title=self.title)
 
     def unname_material(self):
         self.material_underscored_name = None

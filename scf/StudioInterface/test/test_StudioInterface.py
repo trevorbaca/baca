@@ -16,7 +16,7 @@ def test_StudioInterface_01():
 
 
 def test_StudioInterface_02():
-    '''Menuing: work in studio.
+    '''Main menu.
     '''
 
     studio_interface = baca.scf.StudioInterface()
@@ -35,6 +35,16 @@ def test_StudioInterface_02():
      '     8: Red Shift Hijinks (2005)',
      '     9: Sekka (2007)',
      '',
-     '     k: work with material makers',
+     '     k: work with interactive material proxies',
      '     m: work with Bača materials',
      '']
+
+
+def test_StudioInterface_03():
+    '''Hidden menu.
+    '''
+
+    studio_interface = baca.scf.StudioInterface()
+    menu_lines = studio_interface.work_in_studio(user_input='hidden', test='menu_lines')
+
+    #assert menu_lines == []

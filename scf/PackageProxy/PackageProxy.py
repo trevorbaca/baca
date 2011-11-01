@@ -270,7 +270,7 @@ class PackageProxy(DirectoryProxy):
             section.sentence_length_items.append(('add', 'add tag'))
             section.sentence_length_items.append(('del', 'delete tag'))
             menu.menu_sections.append(section)
-            key, value = menu.display_menu()
+            key, value = menu.run()
             if key == 'b':
                 return key, None
             elif key == 'add':
@@ -325,7 +325,7 @@ class PackageProxy(DirectoryProxy):
         score_wrangler = ScoreWrangler()
         menu.items_to_number = score_wrangler.iterate_score_titles_with_years()
         menu.named_pairs.append(('s', 'global to studio'))
-        key, value = menu.display_menu()
+        key, value = menu.run()
         print key, value
 
     def unimport_baca_package(self):

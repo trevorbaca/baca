@@ -165,7 +165,7 @@ class MakerWrangler(PackageWrangler, PackageProxy):
             menu.menu_body = 'select maker'
             menu.items_to_number = self.list_maker_spaced_class_names()
             menu.named_pairs.append(('new', 'make maker'))
-            key, value = menu.display_menu()
+            key, value = menu.run()
             if key == 'b':
                 return key, value
             elif key == 'new':
@@ -181,7 +181,7 @@ class MakerWrangler(PackageWrangler, PackageProxy):
         menu = self.Menu(client=self.where(), menu_header=menu_header)
         menu.menu_body = 'select maker'
         menu.items_to_number = self.list_maker_spaced_class_names()
-        key, value = menu.display_menu()
+        key, value = menu.run()
         if value is not None:
             maker_name = value.replace(' ', '_')
             maker_name = iotools.underscore_delimited_lowercase_to_uppercamelcase(maker_name)           
