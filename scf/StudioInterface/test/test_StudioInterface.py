@@ -13,3 +13,28 @@ def test_StudioInterface_01():
     assert studio_interface.source_file_name == \
         '/Users/trevorbaca/Documents/other/baca/scf/StudioInterface/StudioInterface.py'
     assert studio_interface.spaced_class_name == 'studio interface'
+
+
+def test_StudioInterface_02():
+    '''Menuing: work in studio.
+    '''
+
+    studio_interface = baca.scf.StudioInterface()
+    menu_lines = studio_interface.work_in_studio(test = 'menu_lines')
+    
+    assert menu_lines == [  
+     'Welcome to the studio.',
+     '',
+     "     1: L'archipel du corps (2011)",
+     '     2: Čáry (2006)',
+     '     3: Mon seul désir (2009)',
+     "     4: L'imaginare (2010)",
+     '     5: Lidércfény (2008)',
+     '     6: Las manos mágicas (2011)',
+     '     7: Poème récursif (2005)',
+     '     8: Red Shift Hijinks (2005)',
+     '     9: Sekka (2007)',
+     '',
+     '     k: work with material makers',
+     '     m: work with Bača materials',
+     '']

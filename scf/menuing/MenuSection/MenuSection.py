@@ -1,4 +1,7 @@
-class MenuSection(object):
+from baca.scf.menuing._MenuObject import _MenuObject
+
+
+class MenuSection(_MenuObject):
 
     def __init__(self, menu_section_title=None, lines_to_list=None,
         named_pairs=None, entry_prefix=None,
@@ -16,27 +19,6 @@ class MenuSection(object):
         self.hide_menu = hide_menu
         self.layout = layout
 
-    ### OVERLOADS ###
-
-    def __repr__(self):
-        return '%s()' % type(self).__name__
-
-    ### PRIVATE METHODS ###
-
-    def _display_menu_section_title(self):
-        if not self.hide_menu:
-            if self.menu_section_title:
-                self._print_tab(self.indent_level)
-                print self.menu_section_title.capitalize()
-                print ''
-
-    def _print_tab(self, n):
-        if 0 < n:
-            print self._tab(n),
-
-    def _tab(self, n):
-        return 4 * n * ' '
-    
     ### PUBLIC ATTRIBUTES ###
 
     @apply
@@ -141,8 +123,9 @@ class MenuSection(object):
 
     ### PUBLIC METHODS ###
 
-    def display(self, all_keys, all_values):
-        self._display_menu_section_title()
+    def make_menu_lines(self, all_keys, all_values):
+        menu_lines = []
+        menu_lines.extend(self.make_menu_section_title_lines())
         for i, value in enumerate(self.items_to_number):
             if isinstance(value, tuple):
                 assert len(value) == 2
@@ -151,53 +134,62 @@ class MenuSection(object):
                 display_string = return_value = value
             key = str(i + 1)
             if not self.hide_menu:
-                self._print_tab(self.indent_level),
+                menu_line = self._tab(self.indent_level) + ' '
                 prefix = self.entry_prefix
                 if prefix is not None:
                     key = prefix + key
-                print '%s: %s' % (key, display_string)
+                menu_line += '%s: %s' % (key, display_string)
+                menu_lines.append(menu_line)
             all_keys.append(key)
             all_values.append(return_value)
         if self.items_to_number:
             if not self.hide_menu:
-                print ''
+                menu_lines.append('')
         for line in self.lines_to_list:
             if not self.hide_menu:
-                self._print_tab(self.indent_level),
-                print line
+                menu_line = self._tab(self.indent_level) + ' ' + line
+                menu_lines.append(menu_line)
         if self.lines_to_list:
             if not self.hide_menu:
-                print ''
+                menu_lines.append('')
         for key, value in self.named_pairs:
             if self.entry_prefix is not None:
                 key = self.entry_prefix + key
             if not self.hide_menu:
-                self._print_tab(self.indent_level),
+                menu_line = self._tab(self.indent_level) + ' '
                 if self.layout == 'list':
-                    print '%s: %s' % (key, value)
-                elif self.layout == 'line':
-                    print '%s: %s' % (key, value),
+                    menu_line += '%s: %s' % (key, value)
             all_keys.append(key)
             all_values.append(value)
         if self.named_pairs:
             if not self.hide_menu:
                 if self.layout == 'list':
-                    print ''
-                elif self.layout == 'line':
-                    print '\n'
+                    menu_lines.append('')
         for key, value in self.sentence_length_items:
             if not self.hide_menu:
-                self._print_tab(self.indent_level),
-                print '%s: %s' % (key, value)
+                menu_line = self._tab(self.indent_level) + ' '
+                menu_line += '%s: %s' % (key, value)
+                menu_lines.append(menu_line)
             all_keys.append(key)
             all_values.append(value)
         if self.sentence_length_items:
             if not self.hide_menu:
-                print ''
+                menu_lines.append('')
         for key, value in self.hidden_items:
             all_keys.append(key)
             all_values.append(value)
+        return menu_lines
 
+    def make_menu_section_title_lines(self):
+        menu_lines = []
+        if not self.hide_menu:
+            if self.menu_section_title:
+                menu_line = '{} {}'.format(
+                    self._tab(self.indent_level), self.menu_section_title.capitalize())
+                menu_lines.append(menu_line)
+                menu_lines.append('')
+        return menu_lines
+        
     def show_hidden_items(self):
         for key, value in self.hidden_items:
             self._print_tab(self.indent_level),

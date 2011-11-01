@@ -24,7 +24,6 @@ class StudioInterface(_SCFObject):
     ### PUBLIC METHODS ###
 
     def get_materials_package_importable_name_interactively(self, menu_header=None):
-        import baca
         while True:
             menu = self.Menu(client=self.where(), menu_header=menu_header)
             menu.menu_body = 'select materials directory'
@@ -39,7 +38,7 @@ class StudioInterface(_SCFObject):
                 score_title = value
                 score_package_importable_name = self.score_wrangler.title_to_score_package_short_name(
                     score_title)
-                score_proxy = baca.scf.ScoreProxy(score_package_importable_name)
+                score_proxy = self.score_wrangler.ScoreProxy(score_package_importable_name)
                 return score_proxy.materials_package_importable_name
 
     def iterate_interactive_material_proxies(self):
@@ -48,13 +47,11 @@ class StudioInterface(_SCFObject):
                 yield material_proxy
 
     def iterate_material_proxies(self, class_names=None):
-        import baca
         for score_proxy in self.iterate_score_proxies():
             for material_proxy in score_proxy.iterate_material_proxies():
                 if class_names is None or material_proxy.get_tag('maker') in class_names:
                     yield material_proxy
-        baca_material_wrangler = baca.scf.MaterialWrangler('baca')
-        for material_proxy in baca_material_wrangler.iterate_package_proxies():
+        for material_proxy in self.global_proxy.material_wrangler.iterate_package_proxies():
             yield material_proxy
 
     def manage_svn(self, menu_header=None):
@@ -129,8 +126,7 @@ class StudioInterface(_SCFObject):
         key, value = menu.display_menu()
         return value
     
-    def work_in_studio(self, menu_header=None):
-        import baca
+    def work_in_studio(self, menu_header=None, user_input=None, test=None):
         while True:
             menu = self.Menu(client=self.where(), menu_header=menu_header)
             menu.menu_body = 'welcome to the studio.'
@@ -144,7 +140,10 @@ class StudioInterface(_SCFObject):
             menu.menu_sections.append(menu_section)
             menu.include_back = False
             menu.include_studio = False
-            key, value = menu.display_menu()
+            if test == 'menu_lines':
+                return menu.make_menu_lines()
+            else:
+                key, value = menu.display_menu()
             if key == 'k':
                 self.global_proxy.maker_wrangler.manage_makers(menu_header='studio')
             elif key == 'm':
@@ -152,5 +151,6 @@ class StudioInterface(_SCFObject):
             elif key == 'svn':
                 self.manage_svn(menu_header='studio')
             else:
-                score_proxy = baca.scf.ScoreProxy(value)
+                score_package_importable_name = value
+                score_proxy = self.score_wrangler.ScoreProxy(score_package_importable_name)
                 score_proxy.manage_score()

@@ -18,7 +18,7 @@ class _MenuObject(_SCFObject):
     ### OVERLOADS ###
 
     def __repr__(self):
-        return '%s()' % type(self).__name__
+        return '{}()'.format(self.class_name)
     
     ### PRIVATE METHODS ###
 
@@ -30,6 +30,10 @@ class _MenuObject(_SCFObject):
         return 4 * n * ' '
 
     ### PUBLIC ATTRIBUTES ###
+
+    @property
+    def class_name(self):
+        return type(self).__name__
 
     @apply
     def client():

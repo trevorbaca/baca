@@ -29,13 +29,16 @@ class Menu(_MenuObject, _SCFObject):
             all_keys.append(key)
             all_values.append(value)
         
-    def _display_menu(self):
+    def _display_menu(self, return_menu_lines=False):
         if self.should_clear_terminal:
             self.clear_terminal()
-        all_keys, all_values = [], []
-        self._display_menu_title()
-        self._display_menu_sections(all_keys, all_values)
+        menu_lines, all_keys, all_values = self.make_menu_lines_keys_and_values()
         self._add_hidden_menu_items(all_keys, all_values)
+        if return_menu_lines:
+            return menu_lines
+        else:
+            for menu_line in menu_lines:
+                print menu_line
         while True:
             response = raw_input('scf> ')
             print ''
@@ -44,18 +47,6 @@ class Menu(_MenuObject, _SCFObject):
         pair_dictionary = dict(zip(all_keys, all_values))
         value = pair_dictionary[response]
         return response, value
-
-    def _display_menu_sections(self, all_keys, all_values):
-        for menu_section in self.menu_sections:
-            menu_section.hide_menu = self.hide_menu
-            menu_section.display(all_keys, all_values)
-        
-    def _display_menu_title(self):
-        if self.menu_title:
-            if not self.hide_menu:
-                menu_title = self.menu_title.capitalize()
-                print menu_title
-                print ''
 
     ### PUBLIC ATTRIBUTES ###
     
@@ -142,3 +133,29 @@ class Menu(_MenuObject, _SCFObject):
                 should_clear_terminal, hide_menu = True, False
             else:
                 return key, value
+
+    def make_menu_lines_keys_and_values(self):
+        menu_lines, all_keys, all_values = [], [], []
+        menu_lines.extend(self.make_menu_title_lines())
+        menu_lines.extend(self.make_menu_section_lines(all_keys, all_values))
+        return menu_lines, all_keys, all_values
+
+    def make_menu_lines(self):
+        menu_lines, keys, values = self.make_menu_lines_keys_and_values()
+        return menu_lines
+
+    def make_menu_section_lines(self, all_keys, all_values):
+        menu_lines = []
+        for menu_section in self.menu_sections:
+            menu_section.hide_menu = self.hide_menu
+            menu_lines.extend(menu_section.make_menu_lines(all_keys, all_values))
+        return menu_lines
+        
+    def make_menu_title_lines(self):
+        menu_lines = []
+        if self.menu_title:
+            if not self.hide_menu:
+                menu_title = self.menu_title.capitalize()
+                menu_lines.append(menu_title)
+                menu_lines.append('')
+        return menu_lines
