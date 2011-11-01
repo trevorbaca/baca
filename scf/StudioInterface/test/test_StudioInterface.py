@@ -47,4 +47,14 @@ def test_StudioInterface_03():
     studio_interface = baca.scf.StudioInterface()
     menu_lines = studio_interface.work_in_studio(user_input='hidden', test='menu_lines')
 
-    #assert menu_lines == []
+    assert menu_lines == [
+     '     exec: exec statement',
+     '     grep: grep baca directories',
+     '     here: edit client source',
+     '     hidden: show hidden items',
+     '     q: quit',
+     '     redraw: redraw',
+     '     studio: return to studio',
+     '     svn: work with repository',
+     '     where: show menu client',
+     '']

@@ -9,7 +9,7 @@ class SCFObject(object):
     ### OVERLOADS ###
 
     def __repr__(self):
-        return '%s()' % self.class_name
+        return '{}()'.format(self.class_name)
 
     ### PUBLIC ATTRIBUTES ###
 

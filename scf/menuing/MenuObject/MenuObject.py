@@ -15,25 +15,7 @@ class MenuObject(SCFObject):
         self.hidden_items = hidden_items
         self.indent_level = indent_level
 
-    ### OVERLOADS ###
-
-    def __repr__(self):
-        return '{}()'.format(self.class_name)
-    
-    ### PRIVATE METHODS ###
-
-    def _print_tab(self, n):
-        if 0 < n:
-            print self._tab(n),
-
-    def _tab(self, n):
-        return 4 * n * ' '
-
     ### PUBLIC ATTRIBUTES ###
-
-    @property
-    def class_name(self):
-        return type(self).__name__
 
     @apply
     def client():
@@ -146,15 +128,16 @@ class MenuObject(SCFObject):
         proc = subprocess.Popen(command, shell=True, stdout=subprocess.PIPE)
         print ''.join(proc.stdout.readlines())
 
-    def handle_hidden_key(self, key):
+    def handle_hidden_key(self, key, user_input=None, test=None):
         if key == 'exec':
             self.exec_statement()
         elif key == 'grep':
             self.grep_baca()
         elif key == 'here':
             self.edit_client_source()
+        # TODO: make other options mirror hidden
         elif key == 'hidden':
-            self.show_hidden_items()
+            return self.show_hidden_items(test=test)
         elif key == 'q':
             raise SystemExit
         elif key == 'studio':
@@ -165,30 +148,36 @@ class MenuObject(SCFObject):
             return False
         return True
 
-    def print_tab(self, n):
-        if 0 < n:
-            print self.tab(n),
-
     def show_menu_client(self):
-        print self._tab(1),
+        print self.tab(1),
         print 'file: %s' % self.client[1]
-        print self._tab(1),
+        print self.tab(1),
         print 'line: %s' % self.client[2]
-        print self._tab(1),
+        print self.tab(1),
         print 'meth: %s()' % self.client[3]
         print ''
 
-    def show_hidden_items(self):
+    def show_hidden_items(self, test=None):
         hidden_items = []
         hidden_items.extend(self.default_hidden_items)
         hidden_items.extend(self.hidden_items)
         for section in getattr(self, 'menu_sections', []):
             hidden_items.extend(section.hidden_items)
         hidden_items.sort()
+        menu_lines = []
         for key, value in hidden_items:
-            self._print_tab(self.indent_level),
-            print '%s: %s' % (key, value)
-        print ''
+            menu_line = self.tab(self.indent_level) + ' '
+            menu_line += '%s: %s' % (key, value)
+            menu_lines.append(menu_line)
+        menu_lines.append('')
+        if test is None:
+            for menu_line in menu_lines:
+                print menu_line
+            return True
+        elif test == 'menu_lines':
+            return menu_lines
+        else:
+            raise ValueError
 
     def tab(self, n):
         return 4 * n * ' '

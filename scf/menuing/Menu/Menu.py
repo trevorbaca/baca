@@ -98,36 +98,56 @@ class Menu(MenuObject, SCFObject):
             all_keys.append(key)
             all_values.append(value)
         
-    def display(self):
+    def display(self, response=None, test=None):
         if self.should_clear_terminal:
             self.clear_terminal()
         menu_lines, all_keys, all_values = self.make_menu_lines_keys_and_values()
+        if test == 'menu_lines':
+            return menu_lines
         self.add_hidden_menu_items(all_keys, all_values)
-        for menu_line in menu_lines:
-            print menu_line
-        while True:
-            response = raw_input('scf> ')
-            print ''
-            if response in all_keys:
-                break
+        if response is None:
+            for menu_line in menu_lines:
+                print menu_line
+            while True:
+                response = raw_input('scf> ')
+                print ''
+                if response in all_keys:
+                    break
         pair_dictionary = dict(zip(all_keys, all_values))
         value = pair_dictionary[response]
         return response, value
 
-    def run(self, user_input=None):
+    def run(self, user_input=None, test=None):
         should_clear_terminal, hide_menu = True, False
         while True:
+            if user_input:
+                user_input = user_input.split('\n')
+                response = user_input[0]
+                user_input = '\n'.join(user_input[1:])
+            else:
+                response = None
             self.should_clear_terminal, self.hide_menu = should_clear_terminal, hide_menu
-            key, value = self.display()
+            print response, user_input, test
+            if response:
+                key, value = self.display(response=response)
+            elif test is None:
+                key, value = self.display(response=response)
+            elif test == 'menu_lines':
+                return self.display(response=response, test=test)
+            else:
+                raise ValueError
             should_clear_terminal, hide_menu = False, True
-            if self.handle_hidden_key(key):
+            result = self.handle_hidden_key(key, test=test)
+            if result is True:
                 pass
+            elif bool(result):
+                return result
             elif key == 'b':
                 return key, None
             elif key == 'redraw':
                 should_clear_terminal, hide_menu = True, False
             else:
-                return key, value
+                return key, value, user_input
 
     def make_menu_lines_keys_and_values(self):
         menu_lines, all_keys, all_values = [], [], []

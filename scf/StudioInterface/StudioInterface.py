@@ -79,7 +79,7 @@ class StudioInterface(SCFObject):
             menu_section.sentence_length_items.append(('pytest all', 'run regression tests (all)'))
             menu_section.layout = 'line'
             menu.menu_sections.append(menu_section)
-            key, value = menu.run()
+            key, value, user_input = menu.run()
             if key == 'b':
                 return key, None
             elif key == 'add':
@@ -140,12 +140,12 @@ class StudioInterface(SCFObject):
             menu.menu_sections.append(menu_section)
             menu.include_back = False
             menu.include_studio = False
-            if test == 'menu_lines':
-                return menu.make_menu_lines()
-            elif test == 'foo':
-                pass
+            if test is None:
+                key, value, user_input = menu.run(user_input=user_input, test=test)
+            elif test == 'menu_lines':
+                return menu.run(user_input=user_input, test=test)
             else:
-                key, value = menu.run(user_input=user_input)
+                raise ValueError
             if key == 'k':
                 self.global_proxy.maker_wrangler.manage_makers(menu_header='studio')
             elif key == 'm':
