@@ -86,29 +86,29 @@ class StudioInterface(_SCFObject):
             if key == 'b':
                 return key, None
             elif key == 'add':
-                self.svn_add()
+                self.global_proxy.svn_add()
             elif key == 'add scores':
                 self.score_wrangler.svn_add()
             elif key == 'ci':
-                self.svn_ci()
+                self.global_proxy.svn_ci()
                 break
             elif key == 'ci scores':
                 self.score_wrangler.svn_ci()
             elif key == 'pytest':
-                self.run_py_test()
+                self.global_proxy.run_py_test()
             elif key == 'pytest scores':
                 self.score_wrangler.run_py_test()
             elif key == 'pytest all':
                 self.run_py_test_all()
             elif key == 'st':
-                self.svn_st()
+                self.global_proxy.svn_st()
             elif key == 'st scores':
                 self.score_wrangler.svn_st()
             elif key == 'up':
-                self.svn_up()
+                self.global_proxy.svn_up()
                 break
             elif key == 'up scores':
-                self.score_wrangler.svn_up_scores()
+                self.score_wrangler.svn_up()
                 break
 
     def run_py_test_all(self, prompt_proceed=True):

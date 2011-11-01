@@ -149,9 +149,9 @@ class MenuSection(object):
                 display_string, return_value = value
             else:
                 display_string = return_value = value
+            key = str(i + 1)
             if not self.hide_menu:
                 self._print_tab(self.indent_level),
-                key = str(i + 1)
                 prefix = self.entry_prefix
                 if prefix is not None:
                     key = prefix + key
