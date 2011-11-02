@@ -160,11 +160,12 @@ class ScoreProxy(PackageProxy):
     def manage_score(self, menu_header=None, user_input=None, test=None):
         while True:
             menu = self.make_main_menu(menu_header=menu_header)
-            if test is None:
-                key, value, user_input = menu.run(user_input=user_input, test=test)
-            else:
-                return menu.run(user_input=user_input, test=test)
-            if key == 'b':
+            key, value, user_input, test_result = menu.run(user_input=user_input, test=test)
+            #print 'manage_score', key, value, user_input, test_result, 'debug'
+            # TODO: maybe 'if test_result:' instead for next line
+            if key is None:
+                pass
+            elif key == 'b':
                 return key, None
             elif key == 'ch':
                 self.chunk_wrangler.create_chunk_interactively(menu_header=self.title)
@@ -188,6 +189,8 @@ class ScoreProxy(PackageProxy):
                     self.material_wrangler.package_importable_name, material_underscored_name)
                 material_proxy = self.material_wrangler.get_package_proxy(package_importable_name)
                 material_proxy.manage_material(menu_header=menu.menu_title)
+            if test and not user_input:
+                return user_input, test_result
 
     def manage_svn(self, menu_header=None):
         while True:

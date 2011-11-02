@@ -99,14 +99,20 @@ class Menu(MenuObject, SCFObject):
             all_values.append(value)
         
     def display(self, response=None, test=None):
+        #print response, test, 'bar'
         if self.should_clear_terminal:
-            if test is None:
+            if not response and test is None:
                 self.clear_terminal()
         menu_lines, all_keys, all_values = self.make_menu_lines_keys_and_values()
-        if test == 'menu_lines' and not response:
-            return menu_lines
+        #if test == 'menu_lines' and not response:
+        #    return menu_lines
+        if not response and test == 'menu_lines':
+            test_result = menu_lines
+        else:
+            test_result = None
+        #print test_result, 'blah'
         self.add_hidden_menu_items(all_keys, all_values)
-        if response is None:
+        if not response and not test:
             for menu_line in menu_lines:
                 print menu_line
             while True:
@@ -114,9 +120,13 @@ class Menu(MenuObject, SCFObject):
                 print ''
                 if response in all_keys:
                     break
-        pair_dictionary = dict(zip(all_keys, all_values))
-        value = pair_dictionary[response]
-        return response, value
+        if response:
+            pair_dictionary = dict(zip(all_keys, all_values))
+            value = pair_dictionary[response]
+        else:
+            value = None
+        #return response, value
+        return response, value, test_result
 
     def make_menu_lines_keys_and_values(self):
         menu_lines, all_keys, all_values = [], [], []
@@ -147,31 +157,29 @@ class Menu(MenuObject, SCFObject):
     def run(self, user_input=None, test=None):
         should_clear_terminal, hide_menu = True, False
         while True:
-            if user_input:
-                user_input = user_input.split('\n')
-                response = user_input[0]
-                user_input = '\n'.join(user_input[1:])
-            else:
-                response = None
+            response, user_input = self.split_user_input(user_input)
             self.should_clear_terminal, self.hide_menu = should_clear_terminal, hide_menu
-            #print response, user_input, test
-            if response or test is None:
-                key, value = self.display(response=response, test=test)
-            #elif test is None:
-            #    key, value = self.display(response=response, test=test)
-            elif test == 'menu_lines':
-                return self.display(response=response, test=test)
-            else:
-                raise ValueError
+            #print response, user_input, test, 'debug'
+            key, value, test_result = self.display(response=response, test=test)
+            #print 'menu.run', key, value, test_result, 'debug'
             should_clear_terminal, hide_menu = False, True
             result = self.handle_hidden_key(key, test=test)
             if result is True:
                 pass
             elif bool(result):
-                return result
+                return None, None, user_input, result
             elif key == 'b':
                 return key, None
             elif key == 'redraw':
                 should_clear_terminal, hide_menu = True, False
             else:
-                return key, value, user_input
+                return key, value, user_input, test_result
+
+    def split_user_input(self, user_input):
+        if user_input:
+            user_input = user_input.split('\n')
+            response = user_input[0]
+            user_input = '\n'.join(user_input[1:])
+        else:
+            response = None
+        return response, user_input

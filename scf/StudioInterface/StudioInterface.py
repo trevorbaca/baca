@@ -144,20 +144,22 @@ class StudioInterface(SCFObject):
     def work_in_studio(self, menu_header=None, user_input=None, test=None):
         while True:
             menu = self.make_main_menu(menu_header=menu_header)
-            if test is None:
-                key, value, user_input = menu.run(user_input=user_input)
-            else:
-                return menu.run(user_input=user_input, test=test)
-            if key == 'k':
-                self.global_proxy.maker_wrangler.manage_makers(menu_header='studio')
+            key, value, user_input, test_result = menu.run(user_input=user_input, test=test)
+            #print 'studio_interface', key, value, user_input, test_result, 'debug'
+            if key is None:
+                pass
+            elif key == 'k':
+                user_input, test_result = self.global_proxy.maker_wrangler.manage_makers(
+                    menu_header='studio', user_input=user_input, test=test)
             elif key == 'm':
-                self.global_proxy.material_wrangler.manage_materials(menu_header='studio')
+                user_input, test_result = self.global_proxy.material_wrangler.manage_materials(
+                    menu_header='studio', user_input=user_input)
             elif key == 'svn':
-                self.manage_svn(menu_header='studio')
+                user_input, test_result = self.manage_svn(
+                    menu_header='studio', user_input=user_input, test=test)
             else:
                 score_package_importable_name = value
                 score_proxy = self.score_wrangler.ScoreProxy(score_package_importable_name)
-                if test is None:
-                    score_proxy.manage_score(user_input=user_input, test=test)
-                else:
-                    return score_proxy.manage_score(test=test)
+                user_input, test_result = score_proxy.manage_score(user_input=user_input, test=test)
+            if test and not user_input:
+                return user_input, test_result
