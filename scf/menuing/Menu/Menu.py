@@ -100,9 +100,10 @@ class Menu(MenuObject, SCFObject):
         
     def display(self, response=None, test=None):
         if self.should_clear_terminal:
-            self.clear_terminal()
+            if test is None:
+                self.clear_terminal()
         menu_lines, all_keys, all_values = self.make_menu_lines_keys_and_values()
-        if test == 'menu_lines':
+        if test == 'menu_lines' and not response:
             return menu_lines
         self.add_hidden_menu_items(all_keys, all_values)
         if response is None:
@@ -116,38 +117,6 @@ class Menu(MenuObject, SCFObject):
         pair_dictionary = dict(zip(all_keys, all_values))
         value = pair_dictionary[response]
         return response, value
-
-    def run(self, user_input=None, test=None):
-        should_clear_terminal, hide_menu = True, False
-        while True:
-            if user_input:
-                user_input = user_input.split('\n')
-                response = user_input[0]
-                user_input = '\n'.join(user_input[1:])
-            else:
-                response = None
-            self.should_clear_terminal, self.hide_menu = should_clear_terminal, hide_menu
-            print response, user_input, test
-            if response:
-                key, value = self.display(response=response)
-            elif test is None:
-                key, value = self.display(response=response)
-            elif test == 'menu_lines':
-                return self.display(response=response, test=test)
-            else:
-                raise ValueError
-            should_clear_terminal, hide_menu = False, True
-            result = self.handle_hidden_key(key, test=test)
-            if result is True:
-                pass
-            elif bool(result):
-                return result
-            elif key == 'b':
-                return key, None
-            elif key == 'redraw':
-                should_clear_terminal, hide_menu = True, False
-            else:
-                return key, value, user_input
 
     def make_menu_lines_keys_and_values(self):
         menu_lines, all_keys, all_values = [], [], []
@@ -174,3 +143,35 @@ class Menu(MenuObject, SCFObject):
                 menu_lines.append(menu_title)
                 menu_lines.append('')
         return menu_lines
+
+    def run(self, user_input=None, test=None):
+        should_clear_terminal, hide_menu = True, False
+        while True:
+            if user_input:
+                user_input = user_input.split('\n')
+                response = user_input[0]
+                user_input = '\n'.join(user_input[1:])
+            else:
+                response = None
+            self.should_clear_terminal, self.hide_menu = should_clear_terminal, hide_menu
+            #print response, user_input, test
+            if response or test is None:
+                key, value = self.display(response=response, test=test)
+            #elif test is None:
+            #    key, value = self.display(response=response, test=test)
+            elif test == 'menu_lines':
+                return self.display(response=response, test=test)
+            else:
+                raise ValueError
+            should_clear_terminal, hide_menu = False, True
+            result = self.handle_hidden_key(key, test=test)
+            if result is True:
+                pass
+            elif bool(result):
+                return result
+            elif key == 'b':
+                return key, None
+            elif key == 'redraw':
+                should_clear_terminal, hide_menu = True, False
+            else:
+                return key, value, user_input

@@ -54,6 +54,21 @@ class StudioInterface(SCFObject):
         for material_proxy in self.global_proxy.material_wrangler.iterate_package_proxies():
             yield material_proxy
 
+    def make_main_menu(self, menu_header=None):
+        menu = self.Menu(client=self.where(), menu_header=menu_header)
+        menu.menu_body = 'welcome to the studio.'
+        menu_section = self.MenuSection()
+        score_titles = list(self.score_wrangler.iterate_score_titles_with_years())
+        score_package_short_names = list(self.score_wrangler.iterate_score_package_short_names())
+        menu_section.items_to_number = zip(score_titles, score_package_short_names)
+        menu_section.sentence_length_items.append(('k', 'work with interactive material proxies'))
+        menu_section.sentence_length_items.append(('m', 'work with Bača materials'))
+        menu_section.hidden_items.append(('svn', 'work with repository'))
+        menu.menu_sections.append(menu_section)
+        menu.include_back = False
+        menu.include_studio = False
+        return menu
+
     def manage_svn(self, menu_header=None):
         while True:
             menu = self.Menu(client=self.where())
@@ -128,24 +143,11 @@ class StudioInterface(SCFObject):
     
     def work_in_studio(self, menu_header=None, user_input=None, test=None):
         while True:
-            menu = self.Menu(client=self.where(), menu_header=menu_header)
-            menu.menu_body = 'welcome to the studio.'
-            menu_section = self.MenuSection()
-            score_titles = list(self.score_wrangler.iterate_score_titles_with_years())
-            score_package_short_names = list(self.score_wrangler.iterate_score_package_short_names())
-            menu_section.items_to_number = zip(score_titles, score_package_short_names)
-            menu_section.sentence_length_items.append(('k', 'work with interactive material proxies'))
-            menu_section.sentence_length_items.append(('m', 'work with Bača materials'))
-            menu_section.hidden_items.append(('svn', 'work with repository'))
-            menu.menu_sections.append(menu_section)
-            menu.include_back = False
-            menu.include_studio = False
+            menu = self.make_main_menu(menu_header=menu_header)
             if test is None:
-                key, value, user_input = menu.run(user_input=user_input, test=test)
-            elif test == 'menu_lines':
-                return menu.run(user_input=user_input, test=test)
+                key, value, user_input = menu.run(user_input=user_input)
             else:
-                raise ValueError
+                return menu.run(user_input=user_input, test=test)
             if key == 'k':
                 self.global_proxy.maker_wrangler.manage_makers(menu_header='studio')
             elif key == 'm':
@@ -155,4 +157,7 @@ class StudioInterface(SCFObject):
             else:
                 score_package_importable_name = value
                 score_proxy = self.score_wrangler.ScoreProxy(score_package_importable_name)
-                score_proxy.manage_score()
+                if test is None:
+                    score_proxy.manage_score(user_input=user_input, test=test)
+                else:
+                    return score_proxy.manage_score(test=test)

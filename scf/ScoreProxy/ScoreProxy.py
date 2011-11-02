@@ -138,25 +138,32 @@ class ScoreProxy(PackageProxy):
             initializer.write(''.join(lines))
             initializer.close()
 
-    def manage_score(self, menu_header=None, command_string=None):
+    def make_main_menu(self, menu_header=None):
+        menu = self.Menu(client=self.where(), menu_header=menu_header)
+        menu.menu_body = self.get_tag('title')
+        menu_section = self.MenuSection()
+        menu_section.menu_section_title = 'Chunks'
+        menu_section.items_to_number = self.chunk_wrangler.iterate_package_spaced_names()
+        menu_section.entry_prefix = 'h'
+        menu_section.sentence_length_items.append(('ch', '[create chunk]'))
+        menu.menu_sections.append(menu_section)
+        menu_section = self.MenuSection()
+        menu_section.menu_section_title = 'Materials'
+        menu_section.items_to_number = self.material_wrangler.iterate_package_underscored_names()
+        menu_section.entry_prefix = 'm'
+        menu_section.sentence_length_items.append(('mi', 'create interactive material'))
+        menu_section.sentence_length_items.append(('ms', 'create static material'))
+        menu.menu_sections.append(menu_section)
+        menu.hidden_items.append(('svn', 'work with repository'))
+        return menu
+
+    def manage_score(self, menu_header=None, user_input=None, test=None):
         while True:
-            menu = self.Menu(client=self.where(), menu_header=menu_header)
-            menu.menu_body = self.get_tag('title')
-            menu_section = self.MenuSection()
-            menu_section.menu_section_title = 'Chunks'
-            menu_section.items_to_number = self.chunk_wrangler.iterate_package_spaced_names()
-            menu_section.entry_prefix = 'h'
-            menu_section.sentence_length_items.append(('ch', '[create chunk]'))
-            menu.menu_sections.append(menu_section)
-            menu_section = self.MenuSection()
-            menu_section.menu_section_title = 'Materials'
-            menu_section.items_to_number = self.material_wrangler.iterate_package_underscored_names()
-            menu_section.entry_prefix = 'm'
-            menu_section.sentence_length_items.append(('mi', 'create interactive material'))
-            menu_section.sentence_length_items.append(('ms', 'create static material'))
-            menu.menu_sections.append(menu_section)
-            menu.hidden_items.append(('svn', 'work with repository'))
-            key, value = menu.run()
+            menu = self.make_main_menu(menu_header=menu_header)
+            if test is None:
+                key, value, user_input = menu.run(user_input=user_input, test=test)
+            else:
+                return menu.run(user_input=user_input, test=test)
             if key == 'b':
                 return key, None
             elif key == 'ch':

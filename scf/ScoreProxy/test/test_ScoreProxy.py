@@ -62,3 +62,46 @@ def test_ScoreProxy_02():
     '''
 
     score_proxy = baca.scf.ScoreProxy('manos')    
+
+
+
+def test_ScoreProxy_03():
+    '''Main menu.
+    '''
+
+    archipel = baca.scf.ScoreProxy('archipel')
+    menu_lines = archipel.manage_score(test='menu_lines')
+
+    assert menu_lines == [
+     "L'archipel du corps",
+     '',
+     '     Chunks',
+     '',
+     '     ch: [create chunk]',
+     '',
+     '     Materials',
+     '',
+     '     mi: create interactive material',
+     '     ms: create static material',
+     '']
+
+
+def test_ScoreProxy_04():
+    '''Main menu to hidden menu.
+    '''
+
+    archipel = baca.scf.ScoreProxy('archipel')
+    menu_lines = archipel.manage_score(user_input='hidden', test='menu_lines')
+
+    assert menu_lines == [
+     '     b: back',
+     '     exec: exec statement',
+     '     grep: grep baca directories',
+     '     here: edit client source',
+     '     hidden: show hidden items',
+     '     q: quit',
+     '     redraw: redraw',
+     '     studio: return to studio',
+     '     svn: work with repository',
+     '     where: show menu client',
+     '']

@@ -41,7 +41,7 @@ def test_StudioInterface_02():
 
 
 def test_StudioInterface_03():
-    '''Hidden menu.
+    '''Main menu to hidden menu.
     '''
 
     studio_interface = baca.scf.StudioInterface()
