@@ -15,7 +15,7 @@ import os
 class SargassoMeasureMaker(InteractiveMaterialProxy):
 
     def __init__(self, **kwargs):
-        Maker.__init__(self, **kwargs)
+        InteractiveMaterialProxy.__init__(self, **kwargs)
         self.stylesheet = os.path.join(os.path.dirname(__file__), 'stylesheet.ly')
         self._generic_output_name = 'sargasso measures'
 

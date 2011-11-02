@@ -162,12 +162,14 @@ class MaterialProxy(PackageProxy):
     @apply
     def material_underscored_name():
         def fget(self):
-            return self._material_underscored_name
+            #return self._material_underscored_name
+            return self.package_short_name
         def fset(self, material_underscored_name):
             assert isinstance(material_underscored_name, (str, type(None)))
             if isinstance(material_underscored_name, str):
                 assert iotools.is_underscore_delimited_lowercase_string(material_underscored_name)
-            self._material_underscored_name = material_underscored_name
+            #self._material_underscored_name = material_underscored_name
+            self.package_short_name = material_underscored_name
         return property(**locals())
 
     @property
