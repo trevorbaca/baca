@@ -70,7 +70,6 @@ class StudioInterface(SCFObject):
         menu_section.hidden_items.append(('active', 'show active scores only'))
         menu_section.hidden_items.append(('all', 'show all scores'))
         menu_section.hidden_items.append(('mb', 'show mothballed scores only'))
-        menu_section.hidden_items.append(('some', 'hide mothballed scores'))
         menu.menu_sections.append(menu_section)
         menu.include_back = False
         menu.include_studio = False

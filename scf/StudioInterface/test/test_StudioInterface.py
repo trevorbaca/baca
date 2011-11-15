@@ -50,14 +50,15 @@ def test_StudioInterface_03():
     studio_interface.work_in_studio(session=session)
 
     assert session.test_result == [
-     '     all: show mothballed scores',
+     '     active: show active scores only',   
+     '     all: show all scores',
      '     exec: exec statement',
      '     grep: grep baca directories',
      '     here: edit client source',
      '     hidden: show hidden items',
+     '     mb: show mothballed scores only',
      '     q: quit',
      '     redraw: redraw',
-     '     some: hide mothballed scores',
      '     studio: return to studio',
      '     svn: work with repository',
      '     where: show menu client',

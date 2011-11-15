@@ -18,6 +18,9 @@ class Session(object):
     def __repr__(self):
         return '{}()'.format(type(self).__name__)
 
+    def __str__(self):
+        return '\n'.join(self.formatted_attributes)
+
     ### PUBLIC ATTRIBUTES ###
 
     @property
