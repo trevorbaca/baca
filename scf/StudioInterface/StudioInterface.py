@@ -151,12 +151,8 @@ class StudioInterface(SCFObject):
         session = session or self.Session()
         session.menu_pieces.append('studio')
         while True:
-            session.print_attributes()
             menu = self.make_main_menu(session=session)
             key, value = menu.run(session=session)
-            print ''
-            print key, value
-            session.print_attributes()
             if key is None:
                 pass
             elif key == 'active':
@@ -177,7 +173,5 @@ class StudioInterface(SCFObject):
                 score_package_importable_name = value
                 score_proxy = self.score_wrangler.ScoreProxy(score_package_importable_name)
                 score_proxy.manage_score(session=session)
-            #if test and not user_input:
-            #    return user_input, test_result
-            if session.test and not session.user_input:
+            if session.test_is_complete:
                 return

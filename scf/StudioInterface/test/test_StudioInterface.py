@@ -87,19 +87,26 @@ def test_StudioInterface_04():
      '']
 
 
-#def test_StudioInterface_05():
-#    '''Main menu. Mothballed scores only.
-#    '''
-#
-#    studio_interface = baca.scf.StudioInterface()
-#    session = baca.scf.menuing.Session(user_input='mb', test='menu_lines')
-#    studio_interface.work_in_studio(session=session)
-#    
-#    assert session.test_result == [  
-#     'Welcome to the studio.',
-#     '',
-#     '     8: Zeit (1998)',
-#     '',
-#     '     k: work with interactive material proxies',
-#     '     m: work with Bača materials',
-#     '']
+def test_StudioInterface_05():
+    '''Main menu. Mothballed scores only.
+    '''
+
+    studio_interface = baca.scf.StudioInterface()
+    session = baca.scf.menuing.Session(user_input='mb', test='menu_lines')
+    studio_interface.work_in_studio(session=session)
+    
+    assert session.test_result == [  
+     'Welcome to the studio.',
+     '',
+     '     1: Arac\xc4\xb1l\xc4\xb1k (2012)',
+     '     2: Betörung',
+     '     3: Chrysanthemums (1995)',
+     '     4: Jivan Mukti',
+     '     5: Manifolds',
+     '     6: Tack (1996)',
+     '     7: Territoires',
+     '     8: Zeit (1998)',
+     '',
+     '     k: work with interactive material proxies',
+     '     m: work with Bača materials',
+     '']

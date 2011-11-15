@@ -37,6 +37,13 @@ class Session(object):
         result.append('test_result: {!r}'.format(self.test_result))
         result.append('user_input: {!r}'.format(self.user_input))
         return result
+
+    @property
+    def test_is_complete(self):
+        if self.test is not None:
+            if self.test_result is not None:
+                return True
+        return False
     
     ### PUBLIC METHODS ###
 
