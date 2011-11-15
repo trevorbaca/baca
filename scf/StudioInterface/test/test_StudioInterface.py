@@ -84,3 +84,21 @@ def test_StudioInterface_04():
      '     mi: create interactive material',
      '     ms: create static material',
      '']
+
+
+#def test_StudioInterface_05():
+#    '''Main menu. Mothballed scores only.
+#    '''
+#
+#    studio_interface = baca.scf.StudioInterface()
+#    session = baca.scf.menuing.Session(user_input='mb', test='menu_lines')
+#    studio_interface.work_in_studio(session=session)
+#    
+#    assert session.test_result == [  
+#     'Welcome to the studio.',
+#     '',
+#     '     8: Zeit (1998)',
+#     '',
+#     '     k: work with interactive material proxies',
+#     '     m: work with Bača materials',
+#     '']

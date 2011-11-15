@@ -94,6 +94,13 @@ class ScoreProxy(PackageProxy):
         return self.get_tag('title')
 
     @property
+    def title_with_year(self):
+        if self.year_of_completion:
+            return '{} ({})'.format(self.title, self.year_of_completion)
+        else:
+            return self.title
+
+    @property
     def top_level_subdirectories(self):
         return (self.dist_proxy,
             self.etc_proxy,

@@ -58,14 +58,18 @@ class StudioInterface(SCFObject):
         menu = self.Menu(client=self.where(), session=session)
         menu.menu_body = 'welcome to the studio.'
         menu_section = self.MenuSection()
-        tmp = session.hide_mothballed_scores 
-        score_titles = list(self.score_wrangler.iterate_score_titles_with_years(hide_mothballed_scores=tmp))
-        score_package_short_names = list(self.score_wrangler.iterate_score_package_short_names())
+        tmp = session.scores_to_show 
+        score_titles = list(self.score_wrangler.iterate_score_titles_with_years(
+            scores_to_show=session.scores_to_show))
+        score_package_short_names = list(self.score_wrangler.iterate_score_package_short_names(
+            scores_to_show=session.scores_to_show))
         menu_section.items_to_number = zip(score_titles, score_package_short_names)
         menu_section.sentence_length_items.append(('k', 'work with interactive material proxies'))
         menu_section.sentence_length_items.append(('m', 'work with Bača materials'))
         menu_section.hidden_items.append(('svn', 'work with repository'))
-        menu_section.hidden_items.append(('all', 'show mothballed scores'))
+        menu_section.hidden_items.append(('active', 'show active scores only'))
+        menu_section.hidden_items.append(('all', 'show all scores'))
+        menu_section.hidden_items.append(('mb', 'show mothballed scores only'))
         menu_section.hidden_items.append(('some', 'hide mothballed scores'))
         menu.menu_sections.append(menu_section)
         menu.include_back = False
@@ -144,37 +148,35 @@ class StudioInterface(SCFObject):
         key, value = menu.run()
         return value
     
-    #def work_in_studio(self, session=None, user_input=None, test=None):
     def work_in_studio(self, session=None):
         session = session or self.Session()
         session.menu_pieces.append('studio')
         while True:
+            session.print_attributes()
             menu = self.make_main_menu(session=session)
-            #key, value, user_input, test_result = menu.run(user_input=user_input, test=test)
             key, value = menu.run(session=session)
-            #print 'studio_interface', key, value, user_input, test_result, 'debug'
+            print ''
+            print key, value
+            session.print_attributes()
             if key is None:
                 pass
+            elif key == 'active':
+                session.scores_to_show = 'active'
             elif key == 'all':
-                session.hide_mothballed_scores = False
+                session.scores_to_show = 'all'
             elif key == 'k':
-                #user_input, test_result = self.global_proxy.maker_wrangler.manage_makers(
-                #    menu_header='studio', user_input=user_input, test=test)
                 self.global_proxy.maker_wrangler.manage_makers(session=session)
             elif key == 'm':
-                #user_input, test_result = self.global_proxy.material_wrangler.manage_materials(
-                #    menu_header='studio', user_input=user_input)
                 self.global_proxy.material_wrangler.manage_materials(session=session)
+            elif key == 'mb':
+                session.scores_to_show = 'mothballed'
             elif key == 'some':
                 session.hide_mothballed_scores = True
             elif key == 'svn':
-                #user_input, test_result = self.manage_svn(
-                #    menu_header='studio', user_input=user_input, test=test)
                 self.manage_svn(session=session)
             else:
                 score_package_importable_name = value
                 score_proxy = self.score_wrangler.ScoreProxy(score_package_importable_name)
-                #user_input, test_result = score_proxy.manage_score(user_input=user_input, test=test)
                 score_proxy.manage_score(session=session)
             #if test and not user_input:
             #    return user_input, test_result

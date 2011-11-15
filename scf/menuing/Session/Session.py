@@ -1,12 +1,13 @@
 class Session(object):
     
-    def __init__(self, menu_pieces=None, hide_mothballed_scores=True, test=None, user_input=None):
+    def __init__(self, menu_pieces=None, scores_to_show='active', test=None, user_input=None):
         if menu_pieces is None:
             self.menu_pieces = []
         else:
             self.menu_pieces = menu_pieces 
-        self.hide_mothballed_scores = hide_mothballed_scores
+        self.scores_to_show = scores_to_show
         self.test = test
+        self.test_result = None
         self.user_input = user_input
 
     ### OVERLOADS ###
@@ -23,3 +24,19 @@ class Session(object):
     def menu_header(self):
         if self.menu_pieces:
             return self.menu_pieces[-1]
+
+    @property
+    def formatted_attributes(self):
+        result = []
+        result.append('menu_pieces: {!r}'.format(self.menu_pieces))
+        result.append('scores_to_show: {!r}'.format(self.scores_to_show))
+        result.append('test: {!r}'.format(self.test))
+        result.append('test_result: {!r}'.format(self.test_result))
+        result.append('user_input: {!r}'.format(self.user_input))
+        return result
+    
+    ### PUBLIC METHODS ###
+
+    def print_attributes(self):
+        for attribute in self.formatted_attributes:
+            print attribute

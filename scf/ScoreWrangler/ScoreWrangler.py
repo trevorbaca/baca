@@ -34,20 +34,23 @@ class ScoreWrangler(PackageWrangler):
     def get_package_proxy(self, package_importable_name):
         return self.ScoreProxy(package_importable_name)
 
-    def iterate_score_package_short_names(self, hide_mothballed_scores=True):
-        for score_proxy in self.iterate_package_proxies():
-            if not score_proxy.get_tag('is_mothballed') or not hide_mothballed_scores:
-                yield score_proxy.package_short_name
+    def iterate_score_package_short_names(self, scores_to_show='active'):
+        for score_proxy in self.iterate_score_proxies(scores_to_show=scores_to_show):
+            yield score_proxy.package_short_name
 
-    def iterate_score_proxies(self, hide_mothballed_scores=True):
+    def iterate_score_proxies(self, scores_to_show='active'):
         for score_proxy in self.iterate_package_proxies():
-            if not score_proxy.get_tag('is_mothballed') or not hide_mothballed_scores:
+            is_mothballed = score_proxy.get_tag('is_mothballed')
+            if scores_to_show == 'all':
+                yield score_proxy
+            elif scores_to_show == 'active' and not is_mothballed:
+                yield score_proxy
+            elif scores_to_show == 'mothballed' and is_mothballed:
                 yield score_proxy
 
-    def iterate_score_titles_with_years(self, hide_mothballed_scores=True):
-        for score_proxy in self.iterate_package_proxies():
-            if not score_proxy.get_tag('is_mothballed') or not hide_mothballed_scores:
-                yield '{0.title} ({0.year_of_completion})'.format(score_proxy)
+    def iterate_score_titles_with_years(self, scores_to_show='active'):
+        for score_proxy in self.iterate_score_proxies(scores_to_show=scores_to_show):
+            yield score_proxy.title_with_year
 
     def profile_score_package_structures(self):
         for score_proxy in self.iterate_score_proxies():
