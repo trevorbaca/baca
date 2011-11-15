@@ -138,8 +138,11 @@ class ScoreProxy(PackageProxy):
             initializer.write(''.join(lines))
             initializer.close()
 
-    def make_main_menu(self, menu_header=None):
-        menu = self.Menu(client=self.where(), menu_header=menu_header)
+    #def make_main_menu(self, menu_header=None):
+    def make_main_menu(self, session=None):
+        session = session or self.Session()
+        #menu = self.Menu(client=self.where(), menu_header=menu_header)
+        menu = self.Menu(client=self.where(), session=session)
         menu.menu_body = self.get_tag('title')
         menu_section = self.MenuSection()
         menu_section.menu_section_title = 'Chunks'
@@ -157,10 +160,14 @@ class ScoreProxy(PackageProxy):
         menu.hidden_items.append(('svn', 'work with repository'))
         return menu
 
-    def manage_score(self, menu_header=None, user_input=None, test=None):
+    #def manage_score(self, menu_header=None, user_input=None, test=None):
+    def manage_score(self, session=None):
+        session = session or self.Session()
         while True:
-            menu = self.make_main_menu(menu_header=menu_header)
-            key, value, user_input, test_result = menu.run(user_input=user_input, test=test)
+            #menu = self.make_main_menu(menu_header=menu_header)
+            menu = self.make_main_menu(session=session)
+            #key, value, user_input, test_result = menu.run(user_input=user_input, test=test)
+            key, value = menu.run(session=session)
             #print 'manage_score', key, value, user_input, test_result, 'debug'
             # TODO: maybe 'if test_result:' instead for next line
             if key is None:
@@ -189,8 +196,10 @@ class ScoreProxy(PackageProxy):
                     self.material_wrangler.package_importable_name, material_underscored_name)
                 material_proxy = self.material_wrangler.get_package_proxy(package_importable_name)
                 material_proxy.manage_material(menu_header=menu.menu_title)
-            if test and not user_input:
-                return user_input, test_result
+            #if test and not user_input:
+            #    return user_input, test_result
+            if session.test and not session.user_input:
+                return
 
     def manage_svn(self, menu_header=None):
         while True:

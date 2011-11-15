@@ -54,16 +54,19 @@ class StudioInterface(SCFObject):
         for material_proxy in self.global_proxy.material_wrangler.iterate_package_proxies():
             yield material_proxy
 
-    def make_main_menu(self, menu_header=None):
-        menu = self.Menu(client=self.where(), menu_header=menu_header)
+    def make_main_menu(self, session=None, menu_header=None):
+        menu = self.Menu(client=self.where(), session=session)
         menu.menu_body = 'welcome to the studio.'
         menu_section = self.MenuSection()
-        score_titles = list(self.score_wrangler.iterate_score_titles_with_years())
+        tmp = session.hide_mothballed_scores 
+        score_titles = list(self.score_wrangler.iterate_score_titles_with_years(hide_mothballed_scores=tmp))
         score_package_short_names = list(self.score_wrangler.iterate_score_package_short_names())
         menu_section.items_to_number = zip(score_titles, score_package_short_names)
         menu_section.sentence_length_items.append(('k', 'work with interactive material proxies'))
         menu_section.sentence_length_items.append(('m', 'work with Bača materials'))
         menu_section.hidden_items.append(('svn', 'work with repository'))
+        menu_section.hidden_items.append(('all', 'show mothballed scores'))
+        menu_section.hidden_items.append(('some', 'hide mothballed scores'))
         menu.menu_sections.append(menu_section)
         menu.include_back = False
         menu.include_studio = False
@@ -141,25 +144,39 @@ class StudioInterface(SCFObject):
         key, value = menu.run()
         return value
     
-    def work_in_studio(self, menu_header=None, user_input=None, test=None):
+    #def work_in_studio(self, session=None, user_input=None, test=None):
+    def work_in_studio(self, session=None):
+        session = session or self.Session()
+        session.menu_pieces.append('studio')
         while True:
-            menu = self.make_main_menu(menu_header=menu_header)
-            key, value, user_input, test_result = menu.run(user_input=user_input, test=test)
+            menu = self.make_main_menu(session=session)
+            #key, value, user_input, test_result = menu.run(user_input=user_input, test=test)
+            key, value = menu.run(session=session)
             #print 'studio_interface', key, value, user_input, test_result, 'debug'
             if key is None:
                 pass
+            elif key == 'all':
+                session.hide_mothballed_scores = False
             elif key == 'k':
-                user_input, test_result = self.global_proxy.maker_wrangler.manage_makers(
-                    menu_header='studio', user_input=user_input, test=test)
+                #user_input, test_result = self.global_proxy.maker_wrangler.manage_makers(
+                #    menu_header='studio', user_input=user_input, test=test)
+                self.global_proxy.maker_wrangler.manage_makers(session=session)
             elif key == 'm':
-                user_input, test_result = self.global_proxy.material_wrangler.manage_materials(
-                    menu_header='studio', user_input=user_input)
+                #user_input, test_result = self.global_proxy.material_wrangler.manage_materials(
+                #    menu_header='studio', user_input=user_input)
+                self.global_proxy.material_wrangler.manage_materials(session=session)
+            elif key == 'some':
+                session.hide_mothballed_scores = True
             elif key == 'svn':
-                user_input, test_result = self.manage_svn(
-                    menu_header='studio', user_input=user_input, test=test)
+                #user_input, test_result = self.manage_svn(
+                #    menu_header='studio', user_input=user_input, test=test)
+                self.manage_svn(session=session)
             else:
                 score_package_importable_name = value
                 score_proxy = self.score_wrangler.ScoreProxy(score_package_importable_name)
-                user_input, test_result = score_proxy.manage_score(user_input=user_input, test=test)
-            if test and not user_input:
-                return user_input, test_result
+                #user_input, test_result = score_proxy.manage_score(user_input=user_input, test=test)
+                score_proxy.manage_score(session=session)
+            #if test and not user_input:
+            #    return user_input, test_result
+            if session.test and not session.user_input:
+                return

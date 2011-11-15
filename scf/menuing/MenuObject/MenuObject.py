@@ -128,7 +128,9 @@ class MenuObject(SCFObject):
         proc = subprocess.Popen(command, shell=True, stdout=subprocess.PIPE)
         print ''.join(proc.stdout.readlines())
 
-    def handle_hidden_key(self, key, user_input=None, test=None):
+    #def handle_hidden_key(self, key, user_input=None, test=None):
+    def handle_hidden_key(self, key, session=None):
+        session = session or self.Session()
         if key == 'exec':
             self.exec_statement()
         elif key == 'grep':
@@ -137,7 +139,8 @@ class MenuObject(SCFObject):
             self.edit_client_source()
         # TODO: make other options mirror hidden
         elif key == 'hidden':
-            return self.show_hidden_items(test=test)
+            #return self.show_hidden_items(test=test)
+            return self.show_hidden_items(session=session)
         elif key == 'q':
             raise SystemExit
         elif key == 'studio':
@@ -157,7 +160,9 @@ class MenuObject(SCFObject):
         print 'meth: %s()' % self.client[3]
         print ''
 
-    def show_hidden_items(self, test=None):
+    #def show_hidden_items(self, test=None):
+    def show_hidden_items(self, session=None):
+        session = session or self.Session()
         hidden_items = []
         hidden_items.extend(self.default_hidden_items)
         hidden_items.extend(self.hidden_items)
@@ -170,11 +175,13 @@ class MenuObject(SCFObject):
             menu_line += '%s: %s' % (key, value)
             menu_lines.append(menu_line)
         menu_lines.append('')
-        if test is None:
+        #if test is None:
+        if session.test is None:
             for menu_line in menu_lines:
                 print menu_line
             return True
-        elif test == 'menu_lines':
+        #elif test == 'menu_lines':
+        elif session.test == 'menu_lines':
             return menu_lines
         else:
             raise ValueError

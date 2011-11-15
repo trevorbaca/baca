@@ -70,9 +70,11 @@ def test_ScoreProxy_03():
     '''
 
     archipel = baca.scf.ScoreProxy('archipel')
-    user_input, test_result = archipel.manage_score(test='menu_lines')
+    #user_input, test_result = archipel.manage_score(test='menu_lines')
+    session = baca.scf.menuing.Session(test='menu_lines')
+    archipel.manage_score(session=session)
 
-    assert test_result == [
+    assert session.test_result == [
      "L'archipel du corps",
      '',
      '     Chunks',
@@ -91,9 +93,11 @@ def test_ScoreProxy_04():
     '''
 
     archipel = baca.scf.ScoreProxy('archipel')
-    user_input, test_result = archipel.manage_score(user_input='hidden', test='menu_lines')
+    #user_input, test_result = archipel.manage_score(user_input='hidden', test='menu_lines')
+    session = baca.scf.menuing.Session(user_input='hidden', test='menu_lines')
+    archipel.manage_score(session=session)
 
-    assert test_result == [
+    assert session.test_result == [
      '     b: back',
      '     exec: exec statement',
      '     grep: grep baca directories',

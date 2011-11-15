@@ -20,9 +20,10 @@ def test_StudioInterface_02():
     '''
 
     studio_interface = baca.scf.StudioInterface()
-    user_input, test_result = studio_interface.work_in_studio(test='menu_lines')
+    session = baca.scf.menuing.Session(test='menu_lines')
+    studio_interface.work_in_studio(session=session)
     
-    assert test_result == [  
+    assert session.test_result == [  
      'Welcome to the studio.',
      '',
      "     1: L'archipel du corps (2011)",
@@ -45,15 +46,18 @@ def test_StudioInterface_03():
     '''
 
     studio_interface = baca.scf.StudioInterface()
-    user_input, test_result = studio_interface.work_in_studio(user_input='hidden', test='menu_lines')
+    session = baca.scf.menuing.Session(user_input='hidden', test='menu_lines')
+    studio_interface.work_in_studio(session=session)
 
-    assert test_result == [
+    assert session.test_result == [
+     '     all: show mothballed scores',
      '     exec: exec statement',
      '     grep: grep baca directories',
      '     here: edit client source',
      '     hidden: show hidden items',
      '     q: quit',
      '     redraw: redraw',
+     '     some: hide mothballed scores',
      '     studio: return to studio',
      '     svn: work with repository',
      '     where: show menu client',
@@ -65,9 +69,10 @@ def test_StudioInterface_04():
     '''
 
     studio_interface = baca.scf.StudioInterface()
-    user_input, test_result = studio_interface.work_in_studio(user_input='1', test='menu_lines')
+    session = baca.scf.menuing.Session(user_input='1', test='menu_lines')
+    studio_interface.work_in_studio(session=session)
 
-    assert test_result == [
+    assert session.test_result == [
      "L'archipel du corps",
      '',
      '     Chunks',

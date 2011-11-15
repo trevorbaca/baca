@@ -5,17 +5,22 @@ import os
 
 class Menu(MenuObject, SCFObject):
 
+    # TODO: replace menu_header with session variable
     def __init__(self, client=None, menu_header=None, menu_body=None, 
         menu_sections=None, hidden_items=None, include_back=True, include_studio=True, 
-        indent_level=1, item_width = 11, should_clear_terminal=True, hide_menu=False):
+        indent_level=1, item_width = 11, session=None, should_clear_terminal=True, hide_menu=False):
+        #MenuObject.__init__(
+        #    self, menu_header=menu_header, menu_body=menu_body, hidden_items=hidden_items,
+        #    indent_level=indent_level)
         MenuObject.__init__(
-            self, menu_header=menu_header, menu_body=menu_body, hidden_items=hidden_items,
+            self, menu_body=menu_body, hidden_items=hidden_items,
             indent_level=indent_level)
         self.client = client
         self.menu_sections = menu_sections
         self.include_back = include_back
         self.include_studio = include_studio
         self.item_width = item_width
+        self.session = session
         self.should_clear_terminal = should_clear_terminal
         self.hide_menu = hide_menu
 
@@ -80,6 +85,17 @@ class Menu(MenuObject, SCFObject):
         return property(**locals())
 
     @apply
+    def session():
+        def fget(self):
+            return self._session
+        def fset(self, session):
+            if session is None:
+                self._session = self.Session()
+            else:
+                self._session = session
+        return property(**locals())
+
+    @apply
     def should_clear_terminal():
         def fget(self):
             return self._should_clear_terminal
@@ -98,21 +114,26 @@ class Menu(MenuObject, SCFObject):
             all_keys.append(key)
             all_values.append(value)
         
-    def display(self, response=None, test=None):
+    #def display(self, response=None, test=None):
+    def display(self, session=None, response=None):
+        session = session or self.Session()
         #print response, test, 'bar'
         if self.should_clear_terminal:
-            if not response and test is None:
+            #if not response and test is None:
+            if not response and session.test is None:
                 self.clear_terminal()
         menu_lines, all_keys, all_values = self.make_menu_lines_keys_and_values()
         #if test == 'menu_lines' and not response:
         #    return menu_lines
-        if not response and test == 'menu_lines':
+        #if not response and test == 'menu_lines':
+        if not response and session.test == 'menu_lines':
             test_result = menu_lines
         else:
             test_result = None
         #print test_result, 'blah'
         self.add_hidden_menu_items(all_keys, all_values)
-        if not response and not test:
+        #if not response and not test:
+        if not response and not session.test:
             for menu_line in menu_lines:
                 print menu_line
             while True:
@@ -126,7 +147,9 @@ class Menu(MenuObject, SCFObject):
         else:
             value = None
         #return response, value
-        return response, value, test_result
+        #return response, value, test_result
+        session.test_result = test_result
+        return response, value
 
     def make_menu_lines_keys_and_values(self):
         menu_lines, all_keys, all_values = [], [], []
@@ -154,32 +177,46 @@ class Menu(MenuObject, SCFObject):
                 menu_lines.append('')
         return menu_lines
 
-    def run(self, user_input=None, test=None):
+    #def split_user_input(self, user_input):
+    def pop_next_response_from_user_input(self, session=None):
+        session = session or self.Session()
+        if session.user_input:
+            user_input = session.user_input.split('\n')
+            response = user_input[0]
+            user_input = '\n'.join(user_input[1:])
+        else:
+            #response = None
+            response, user_input = None, None
+        session.user_input = user_input
+        #return response, user_input
+        return response
+
+    #def run(self, user_input=None, test=None):
+    def run(self, session=None):
+        session = session or self.Session()
         should_clear_terminal, hide_menu = True, False
         while True:
-            response, user_input = self.split_user_input(user_input)
+            #response, user_input = self.split_user_input(user_input)
+            response = self.pop_next_response_from_user_input(session=session)
             self.should_clear_terminal, self.hide_menu = should_clear_terminal, hide_menu
             #print response, user_input, test, 'debug'
-            key, value, test_result = self.display(response=response, test=test)
+            #key, value, test_result = self.display(response=response, test=test)
+            #key, value, test_result = self.display(response=response, test=test)
+            key, value = self.display(session=session, response=response)
             #print 'menu.run', key, value, test_result, 'debug'
             should_clear_terminal, hide_menu = False, True
-            result = self.handle_hidden_key(key, test=test)
+            #result = self.handle_hidden_key(key, test=test)
+            result = self.handle_hidden_key(key, session=session)
             if result is True:
                 pass
             elif bool(result):
-                return None, None, user_input, result
+                #return None, None, user_input, result
+                session.test_result = result
+                return None, None
             elif key == 'b':
                 return key, None
             elif key == 'redraw':
                 should_clear_terminal, hide_menu = True, False
             else:
-                return key, value, user_input, test_result
-
-    def split_user_input(self, user_input):
-        if user_input:
-            user_input = user_input.split('\n')
-            response = user_input[0]
-            user_input = '\n'.join(user_input[1:])
-        else:
-            response = None
-        return response, user_input
+                #return key, value, user_input, test_result
+                return key, value

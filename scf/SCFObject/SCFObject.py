@@ -15,18 +15,23 @@ class SCFObject(object):
 
     @property
     def Menu(self):
-        from baca.scf.menuing import Menu
-        return Menu
+        import baca
+        return baca.scf.menuing.Menu
 
     @property
     def MenuSection(self):
-        from baca.scf.menuing import MenuSection
-        return MenuSection
+        import baca
+        return baca.scf.menuing.MenuSection
+
+    @property
+    def Session(self):
+        import baca
+        return baca.scf.menuing.Session
 
     @property
     def UserInputGetter(self):
-        from baca.scf.menuing import UserInputGetter
-        return UserInputGetter
+        import baca
+        return baca.scf.menuing.UserInputGetter
 
     @property
     def class_name(self):
