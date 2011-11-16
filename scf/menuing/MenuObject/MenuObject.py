@@ -7,22 +7,19 @@ import subprocess
 
 class MenuObject(SCFObject):
 
-    def __init__(self, client=None, session=None, menu_header=None, menu_body=None, hidden_items=None,
-        indent_level=1):
-        self.client = client
-        self.menu_header = menu_header
-        self.menu_body = menu_body
+    def __init__(self, where=None, session=None, hidden_items=None, indent_level=1):
         self.hidden_items = hidden_items
         self.indent_level = indent_level
+        self.where = where
 
     ### PUBLIC ATTRIBUTES ###
 
     @apply
-    def client():
+    def where():
         def fget(self):
-            return self._client
-        def fset(self, client):
-            self._client = client
+            return self._where
+        def fset(self, where):
+            self._where = where
         return property(**locals())
 
     @property
@@ -60,43 +57,43 @@ class MenuObject(SCFObject):
             self._indent_level = indent_level
         return property(**locals())
 
-    @apply
-    def menu_body():
-        def fget(self):
-            return self._menu_body
-        def fset(self, menu_body):
-            assert isinstance(menu_body, (str, type(None)))
-            self._menu_body = menu_body
-        return property(**locals())
-
-    @apply
-    def menu_header():
-        def fget(self):
-            return self._menu_header
-        def fset(self, menu_header):
-            assert isinstance(menu_header, (str, type(None)))
-            self._menu_header = menu_header
-        return property(**locals())
-
-
-    @property
-    def menu_title(self):
-        if self.menu_header:
-            if self.menu_body:
-                return '%s - %s' % (self.menu_header, self.menu_body)
-            else:
-                return self.menu_header
-        elif self.menu_body:
-            return self.menu_body
-        else:
-            return None
-
-    @property
-    def menu_title_parts(self):
-        if self.menu_title:
-            return self.menu_title.split(' - ')
-        else:
-            return
+#    @apply
+#    def menu_body():
+#        def fget(self):
+#            return self._menu_body
+#        def fset(self, menu_body):
+#            assert isinstance(menu_body, (str, type(None)))
+#            self._menu_body = menu_body
+#        return property(**locals())
+#
+#    @apply
+#    def menu_header():
+#        def fget(self):
+#            return self._menu_header
+#        def fset(self, menu_header):
+#            assert isinstance(menu_header, (str, type(None)))
+#            self._menu_header = menu_header
+#        return property(**locals())
+#
+#
+#    @property
+#    def menu_title(self):
+#        if self.menu_header:
+#            if self.menu_body:
+#                return '%s - %s' % (self.menu_header, self.menu_body)
+#            else:
+#                return self.menu_header
+#        elif self.menu_body:
+#            return self.menu_body
+#        else:
+#            return None
+#
+#    @property
+#    def menu_title_parts(self):
+#        if self.menu_title:
+#            return self.menu_title.split(' - ')
+#        else:
+#            return
 
     @apply
     def session():
@@ -139,7 +136,6 @@ class MenuObject(SCFObject):
         proc = subprocess.Popen(command, shell=True, stdout=subprocess.PIPE)
         print ''.join(proc.stdout.readlines())
 
-    #def handle_hidden_key(self, key, user_input=None, test=None):
     def handle_hidden_key(self, key, session=None):
         session = session or self.Session()
         if key == 'exec':
@@ -148,9 +144,7 @@ class MenuObject(SCFObject):
             self.grep_baca()
         elif key == 'here':
             self.edit_client_source()
-        # TODO: make other options mirror hidden
         elif key == 'hidden':
-            #return self.show_hidden_items(test=test)
             return self.show_hidden_items(session=session)
         elif key == 'q':
             raise SystemExit
@@ -162,6 +156,17 @@ class MenuObject(SCFObject):
             return False
         return True
 
+    def pop_next_response_from_user_input(self, session=None):
+        session = session or self.Session()
+        if session.user_input:
+            user_input = session.user_input.split('\n')
+            response = user_input[0]
+            user_input = '\n'.join(user_input[1:])
+        else:
+            response, user_input = None, None
+        session.user_input = user_input
+        return response
+
     def show_menu_client(self):
         print self.tab(1),
         print 'file: %s' % self.client[1]
@@ -171,7 +176,6 @@ class MenuObject(SCFObject):
         print 'meth: %s()' % self.client[3]
         print ''
 
-    #def show_hidden_items(self, test=None):
     def show_hidden_items(self, session=None):
         session = session or self.Session()
         hidden_items = []
@@ -186,12 +190,10 @@ class MenuObject(SCFObject):
             menu_line += '%s: %s' % (key, value)
             menu_lines.append(menu_line)
         menu_lines.append('')
-        #if test is None:
         if session.test is None:
             for menu_line in menu_lines:
                 print menu_line
             return True
-        #elif test == 'menu_lines':
         elif session.test == 'menu_lines':
             return menu_lines
         else:

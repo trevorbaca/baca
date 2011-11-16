@@ -51,6 +51,10 @@ class Session(object):
             if self.test_result is not None:
                 return True
         return False
+
+    @property
+    def user_input_is_consumed(self):
+        return bool(self.user_input == '')
     
     ### PUBLIC METHODS ###
 

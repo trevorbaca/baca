@@ -5,19 +5,16 @@ import os
 
 class Menu(MenuObject, SCFObject):
 
-    def __init__(self, where=None, menu_body=None, 
-        menu_sections=None, hidden_items=None, include_back=True, include_studio=True, 
+    def __init__(self, where=None, menu_sections=None, hidden_items=None, include_back=True, include_studio=True, 
         indent_level=1, item_width = 11, session=None, should_clear_terminal=True, hide_menu=False):
-        MenuObject.__init__(
-            self, session=session, menu_body=menu_body, hidden_items=hidden_items,
-            indent_level=indent_level)
-        self.where = where
-        self.menu_sections = menu_sections
+        MenuObject.__init__(self, session=session, hidden_items=hidden_items, indent_level=indent_level)
+        self.hide_menu = hide_menu
         self.include_back = include_back
         self.include_studio = include_studio
         self.item_width = item_width
+        self.menu_sections = menu_sections
         self.should_clear_terminal = should_clear_terminal
-        self.hide_menu = hide_menu
+        self.where = where
 
     ### PUBLIC ATTRIBUTES ###
     
@@ -144,31 +141,27 @@ class Menu(MenuObject, SCFObject):
         
     def make_menu_title_lines(self, session=None):
         menu_lines = []
-        if self.menu_title or session.menu_header:
+        if session.menu_header:
             if not self.hide_menu:
                 pieces = []
                 if session.menu_header:
                     pieces.append(session.menu_header)
-                if self.menu_title:
-                    pieces.append(self.menu_title)
                 menu_title = ' - '.join(pieces)
                 menu_title = menu_title.capitalize()
                 menu_lines.append(menu_title)
                 menu_lines.append('')
         return menu_lines
 
-    def pop_next_response_from_user_input(self, session=None):
-        session = session or self.Session()
-        if session.user_input:
-            user_input = session.user_input.split('\n')
-            response = user_input[0]
-            user_input = '\n'.join(user_input[1:])
-        else:
-            #response = None
-            response, user_input = None, None
-        session.user_input = user_input
-        #return response, user_input
-        return response
+#    def pop_next_response_from_user_input(self, session=None):
+#        session = session or self.Session()
+#        if session.user_input:
+#            user_input = session.user_input.split('\n')
+#            response = user_input[0]
+#            user_input = '\n'.join(user_input[1:])
+#        else:
+#            response, user_input = None, None
+#        session.user_input = user_input
+#        return response
 
     def run(self, session=None):
         session = session or self.Session()

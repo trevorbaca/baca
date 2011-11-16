@@ -180,16 +180,19 @@ class PackageProxy(DirectoryProxy):
 
     def add_tag_interactively(self, session=None):
         getter = self.UserInputGetter(session=session)
-        getter.menu_header = session.menu_header
-        getter.menu_body = 'add tag'
         getter.prompts.append('Tag name')
         getter.prompts.append('Tag value')
-        user_input = getter.run(clear_terminal=False)
+        user_input = getter.run(session=session, clear_terminal=False)
         if user_input:
             tag_name, tag_value = user_input
             self.add_tag(tag_name, tag_value)
-            print 'Tag added.\n'
-        self.proceed()
+            confirm_line = 'Tag added.\n'
+            if session.user_input is None:
+                print confirm_line
+            elif session.test == 'menu_lines':
+                session.test_result.append(confirm_line)
+        if session.user_input is None:
+            self.proceed()
 
     def create_initializer(self):
         if self.has_initializer:
@@ -210,15 +213,18 @@ class PackageProxy(DirectoryProxy):
 
     def delete_tag_interactively(self, session=None):
         getter = self.UserInputGetter(session=session)
-        getter.menu_header = session.menu_header
-        getter.menu_body = 'delete tag'
         getter.prompts.append('Tag name')
-        user_input = getter.run(clear_terminal=False)
+        user_input = getter.run(session=session, clear_terminal=False)
         if user_input:
             tag_name = user_input
             self.delete_tag(tag_name)
-            print 'Tag deleted.\n'
-        self.proceed()
+            confirm_line = 'tag deleted.\n'
+            if session.user_input is None:
+                print confirm_line
+            elif session.test == 'menu_lines':
+                session.test_result.append(confirm_line)
+        if session.user_input is None:
+            self.proceed()
 
     def edit_initializer(self):
         os.system('vi %s' % self.initializer_file_name)
@@ -278,7 +284,7 @@ class PackageProxy(DirectoryProxy):
                 self.add_tag_interactively(session=session)
             elif key == 'del':
                 self.delete_tag_interactively(session=session)
-            if session.test_is_complete:
+            if session.test_is_complete or session.user_input_is_consumed:
                 return
 
     def pprint_tags(self, tags):

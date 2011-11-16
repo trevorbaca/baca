@@ -3,9 +3,8 @@ from baca.scf.menuing.MenuObject import MenuObject
 
 class UserInputGetter(MenuObject):
 
-    def __init__(self, client=None, session=None, prompts=None, tests=None, helps=None,
-        menu_header=None, menu_body=None):
-        MenuObject.__init__(self, client=client, session=session, menu_header=menu_header, menu_body=menu_body)
+    def __init__(self, where=None, session=None, prompts=None, tests=None, helps=None):
+        MenuObject.__init__(self, where=where, session=session)
         self.prompts = prompts
         self.tests = tests
         self.helps = helps
@@ -53,26 +52,32 @@ class UserInputGetter(MenuObject):
 
     ### PUBLIC METHODS ###
 
-    # TODO: make this user input-testable; borrow from Menu.display()
-    def run(self, clear_terminal=True):
+    def run(self, session=None, clear_terminal=True):
+        session = session or self.Session()
+        menu_lines = []
         try:
             if clear_terminal:
-                self.clear_terminal()
-                if self.menu_title is not None:
-                    print self.menu_title.capitalize() + '\n'
+                if not response and not session.test:
+                    self.clear_terminal()
+                    #if self.menu_title is not None:
+                    #    print self.menu_title.capitalize() + '\n'
             values = []
             i = 0
             while i < len(self.prompts):
                 prompt = self.prompts[i]
                 prompt = prompt.capitalize()
                 prompt = prompt + '> '
+                menu_lines.append(prompt)
                 while True:
-                    response = raw_input(prompt)
-                    print ''
+                    response = self.pop_next_response_from_user_input(session=session)
+                    if not response and not session.test:
+                        response = raw_input(prompt)
+                        print ''
                     if self.handle_hidden_key(response):
                         continue
                     elif response == 'b':
-                         return
+                        #return
+                        break
                     elif response == 'help':
                         if i < len(self.helps):
                             print self.helps[i].capitalize() + '\n'
@@ -83,7 +88,8 @@ class UserInputGetter(MenuObject):
                         i = i - 1
                         break
                     elif response == 'skip':
-                        return
+                        #return
+                        break
                     else:
                         try:
                             value = eval(response)
