@@ -24,7 +24,7 @@ def test_StudioInterface_02():
     studio_interface.work_in_studio(session=session)
     
     assert session.test_result == [  
-     'Welcome to the studio.',
+     'Studio - active scores',
      '',
      "     1: L'archipel du corps (2011)",
      '     2: Betörung (in progress)',
@@ -96,7 +96,7 @@ def test_StudioInterface_05():
     studio_interface.work_in_studio(session=session)
     
     assert session.test_result == [  
-     'Welcome to the studio.',
+     'Studio - mothballed scores',
      '',
      '     1: Arac\xc4\xb1l\xc4\xb1k',
      '     2: Chrysanthemums (1995)',
@@ -140,7 +140,7 @@ def test_StudioInterface_07():
     session = baca.scf.menuing.Session(user_input='svn', test='menu_lines')
     studio_interface.work_in_studio(session=session)
 
-    assert session.test_result == ['Studio - repository commands',
+    assert session.test_result == ['Studio - active scores - repository commands',
      '',
      '     add: svn add',
      '     ci: svn commit',
@@ -167,14 +167,14 @@ def test_StudioInterface_08():
     session = baca.scf.menuing.Session(user_input='', test='menu_lines')
     studio_interface.work_in_studio(session=session)
     menu_header = session.test_result[0]
-    assert menu_header == 'Welcome to the studio.'
+    assert menu_header == 'Studio - active scores'
 
     session = baca.scf.menuing.Session(user_input='svn', test='menu_lines')
     studio_interface.work_in_studio(session=session)
     menu_header = session.test_result[0]
-    assert menu_header == 'Studio - repository commands'
+    assert menu_header == 'Studio - active scores - repository commands'
 
     session = baca.scf.menuing.Session(user_input='svn\nb', test='menu_lines')
     studio_interface.work_in_studio(session=session)
     menu_header = session.test_result[0]
-    assert menu_header == 'Welcome to the studio.'
+    assert menu_header == 'Studio - active scores'

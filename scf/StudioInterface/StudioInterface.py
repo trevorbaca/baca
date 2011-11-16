@@ -56,9 +56,8 @@ class StudioInterface(SCFObject):
 
     def make_main_menu(self, session=None):
         menu = self.Menu(where=self.where(), session=session)
-        menu.menu_body = 'welcome to the studio.'
+        #menu.menu_body = 'welcome to the studio.'
         menu_section = self.MenuSection()
-        tmp = session.scores_to_show 
         score_titles = list(self.score_wrangler.iterate_score_titles_with_years(
             scores_to_show=session.scores_to_show))
         score_package_short_names = list(self.score_wrangler.iterate_score_package_short_names(
@@ -155,7 +154,9 @@ class StudioInterface(SCFObject):
     
     def work_in_studio(self, session=None):
         session = session or self.Session()
+        session.menu_pieces.append('studio')
         while True:
+            session.menu_pieces.append('{} scores'.format(session.scores_to_show))
             menu = self.make_main_menu(session=session)
             key, value = menu.run(session=session)
             if key is None:
@@ -173,12 +174,15 @@ class StudioInterface(SCFObject):
             elif key == 'some':
                 session.hide_mothballed_scores = True
             elif key == 'svn':
-                session.menu_pieces.append('studio')
                 self.manage_svn(session=session)
-                session.menu_pieces.pop()
             else:
                 score_package_importable_name = value
                 score_proxy = self.score_wrangler.ScoreProxy(score_package_importable_name)
+                menu_pieces = session.menu_pieces[:]
+                session.menu_pieces = []
                 score_proxy.manage_score(session=session)
+                session.menu_pieces = menu_pieces
             if session.test_is_complete:
-                return
+                break
+            session.menu_pieces.pop()
+        session.menu_pieces.pop()
