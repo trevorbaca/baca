@@ -5,18 +5,17 @@ import os
 
 class Menu(MenuObject, SCFObject):
 
-    def __init__(self, client=None, menu_body=None, 
+    def __init__(self, where=None, menu_body=None, 
         menu_sections=None, hidden_items=None, include_back=True, include_studio=True, 
         indent_level=1, item_width = 11, session=None, should_clear_terminal=True, hide_menu=False):
         MenuObject.__init__(
             self, session=session, menu_body=menu_body, hidden_items=hidden_items,
             indent_level=indent_level)
-        self.client = client
+        self.where = where
         self.menu_sections = menu_sections
         self.include_back = include_back
         self.include_studio = include_studio
         self.item_width = item_width
-        #self.session = session
         self.should_clear_terminal = should_clear_terminal
         self.hide_menu = hide_menu
 

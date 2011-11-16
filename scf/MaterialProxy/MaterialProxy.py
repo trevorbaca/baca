@@ -443,7 +443,7 @@ class MaterialProxy(PackageProxy):
 
     def manage_material(self, menu_header=None):
         while True:
-            menu = self.Menu(client=self.where())
+            menu = self.Menu(where=self.where())
             menu.menu_header = menu_header
             menu.menu_body = self.material_spaced_name
             menu_section = self.MenuSection()

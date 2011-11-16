@@ -151,7 +151,7 @@ class ScoreProxy(PackageProxy):
 
     def make_main_menu(self, session=None):
         session = session or self.Session()
-        menu = self.Menu(client=self.where(), session=session)
+        menu = self.Menu(where=self.where(), session=session)
         menu.menu_body = self.get_tag('title')
         menu_section = self.MenuSection()
         menu_section.menu_section_title = 'Chunks'
@@ -215,7 +215,7 @@ class ScoreProxy(PackageProxy):
 
     def manage_svn(self, menu_header=None):
         while True:
-            menu = self.Menu(client=self.where())
+            menu = self.Menu(where=self.where())
             menu.menu_header = menu_header
             menu.menu_body = 'repository commands'
             menu_section = self.MenuSection()

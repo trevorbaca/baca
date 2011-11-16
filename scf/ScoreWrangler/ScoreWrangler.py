@@ -58,7 +58,7 @@ class ScoreWrangler(PackageWrangler):
             print ''
 
     def select_score_proxy(self, menu_header=None):
-        menu = self.Menu(client=self.where())
+        menu = self.Menu(where=self.where())
         menu.menu_header = menu_header
         menu.menu_body = 'select score'
         menu_section = self.MenuSection()

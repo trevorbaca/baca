@@ -25,7 +25,7 @@ class StudioInterface(SCFObject):
 
     def get_materials_package_importable_name_interactively(self, menu_header=None):
         while True:
-            menu = self.Menu(client=self.where(), menu_header=menu_header)
+            menu = self.Menu(where=self.where(), menu_header=menu_header)
             menu.menu_body = 'select materials directory'
             menu_section = self.MenuSection()
             menu_section.items_to_number = self.score_wrangler.iterate_score_titles_with_years()
@@ -54,8 +54,8 @@ class StudioInterface(SCFObject):
         for material_proxy in self.global_proxy.material_wrangler.iterate_package_proxies():
             yield material_proxy
 
-    def make_main_menu(self, session=None, menu_header=None):
-        menu = self.Menu(client=self.where(), session=session)
+    def make_main_menu(self, session=None):
+        menu = self.Menu(where=self.where(), session=session)
         menu.menu_body = 'welcome to the studio.'
         menu_section = self.MenuSection()
         tmp = session.scores_to_show 
@@ -77,7 +77,7 @@ class StudioInterface(SCFObject):
 
     def manage_svn(self, menu_header=None):
         while True:
-            menu = self.Menu(client=self.where())
+            menu = self.Menu(where=self.where())
             menu.menu_header = menu_header
             menu.menu_body = 'repository commands'
             menu_section = self.MenuSection()
@@ -141,7 +141,7 @@ class StudioInterface(SCFObject):
 
     def select_interactive_material_proxy(self, menu_header=None, klasses=None):
         material_proxies = list(self.iterate_interactive_material_proxies())
-        menu = self.Menu(client=self.where())
+        menu = self.Menu(where=self.where())
         menu.menu_header = menu_header
         menu.items_to_number = material_proxies
         key, value = menu.run()
