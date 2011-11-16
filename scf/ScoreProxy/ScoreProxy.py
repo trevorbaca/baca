@@ -120,6 +120,12 @@ class ScoreProxy(PackageProxy):
     def create_package_structure(self):
         self.fix_score_package_directory_structure(is_interactive=False)
 
+    def edit_instrumentation_interactively(self, session=None):
+        import baca
+        instrumentation = self.get_tag('instrumentation')
+        editor = baca.scf.menuing.InstrumentationEditor(instrumentation)
+        editor.edit(session=session)
+
     def fix_package_structure(self, is_interactive=True):
         if self.package_short_name == 'recursif':
             return
@@ -182,33 +188,36 @@ class ScoreProxy(PackageProxy):
             if key is None:
                 pass
             elif key == 'b':
-                return key, None
+                break
             elif key == 'ch':
-                self.chunk_wrangler.create_chunk_interactively(menu_header=self.title)
+                self.chunk_wrangler.create_chunk_interactively(session=session)
+            elif key == 'inst':
+                self.edit_instrumentation_interactively(session=session)
             elif key == 'mi':
-                self.material_wrangler.create_interactive_material_interactively(menu_header=self.title)
+                self.material_wrangler.create_interactive_material_interactively(session=session)
             elif key == 'ms':
-                self.material_wrangler.create_static_material_package_interactively(menu_header=self.title)
+                self.material_wrangler.create_static_material_package_interactively(session=session)
             elif key == 'svn':
-                self.manage_svn(menu_header=self.title)
+                self.manage_svn(session=session)
             elif key == 'tags':
                 self.manage_tags(session=session)
             elif key.startswith('h'):
                 chunk_spaced_name = value
                 chunk_underscored_name = chunk_spaced_name.replace(' ', '_')
-                package_importable_name = '%s.%s' % (
+                package_importable_name = '{}.{}'.format(
                     self.chunk_wrangler.package_importable_name, chunk_underscored_name)
                 chunk_proxy = self.chunk_wrangler.ChunkProxy(package_importable_name)
                 chunk_proxy.title = self.title
-                chunk_proxy.manage_chunk(menu_header=menu.menu_title)
+                chunk_proxy.manage_chunk(session=session)
             elif key.startswith('m'):
                 material_underscored_name = value
-                package_importable_name = '%s.%s' % (
+                package_importable_name = '{}.{}'.format(
                     self.material_wrangler.package_importable_name, material_underscored_name)
                 material_proxy = self.material_wrangler.get_package_proxy(package_importable_name)
-                material_proxy.manage_material(menu_header=menu.menu_title)
+                material_proxy.manage_material(session=session)
             if session.test_is_complete:
-                return
+                break
+        session.menu_pieces.pop()
 
     def manage_svn(self, session=None):
         while True:
