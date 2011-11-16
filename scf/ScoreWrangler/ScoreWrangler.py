@@ -25,8 +25,8 @@ class ScoreWrangler(PackageWrangler):
         score_proxy = self.ScoreProxy()
         score_proxy.create_score_package_creation_wizard()
 
-    def fix_score_package_structures(self):
-        for score_proxy in self.iterate_score_proxies():
+    def fix_score_package_structures(self, session=None):
+        for score_proxy in self.iterate_score_proxies(scores_to_show=session.scores_to_show):
             score_proxy.fix_package_structure()
             score_proxy.profile_package_structure()
             print ''
@@ -52,8 +52,8 @@ class ScoreWrangler(PackageWrangler):
         for score_proxy in self.iterate_score_proxies(scores_to_show=scores_to_show):
             yield score_proxy.title_with_year
 
-    def profile_score_package_structures(self):
-        for score_proxy in self.iterate_score_proxies():
+    def profile_score_package_structures(self, session=None):
+        for score_proxy in self.iterate_score_proxies(scores_to_show=session.scores_to_show):
             score_proxy.profile_package_structure()
             print ''
 
@@ -72,25 +72,25 @@ class ScoreWrangler(PackageWrangler):
         score_proxy = self.ScoreProxy(score_package_short_name)
         return score_proxy
     
-    def svn_ci(self, prompt_proceed=True):
+    def svn_ci(self, session=None, prompt_proceed=True):
         commit_message = raw_input('Commit message> ')
         print ''
         print 'Commit message will be: "%s"\n' % commit_message
         if not self.confirm():
             return
-        for score_proxy in self.iterate_score_proxies():
+        for score_proxy in self.iterate_score_proxies(scores_to_show=session.scores_to_show):
             score_proxy.svn_ci(commit_message=commit_message, prompt_proceed=False)
         if prompt_proceed:
             self.proceed()
 
-    def svn_st(self, prompt_proceed=True):
-        for score_proxy in self.iterate_score_proxies():
+    def svn_st(self, session=None, prompt_proceed=True):
+        for score_proxy in self.iterate_score_proxies(scores_to_show=session.scores_to_show):
             score_proxy.svn_st(prompt_proceed=False)
         if prompt_proceed:
             self.proceed()
 
-    def svn_up(self, prompt_proceed=True):
-        for score_proxy in self.iterate_score_proxies():
+    def svn_up(self, session=None, prompt_proceed=True):
+        for score_proxy in self.iterate_score_proxies(scores_to_show=session.scores_to_show):
             score_proxy.svn_up(prompt_proceed=False)
         if prompt_proceed:
             self.proceed()

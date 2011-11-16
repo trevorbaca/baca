@@ -104,7 +104,7 @@ class DirectoryProxy(SCFObject):
             result = self._remove_nonversioned_directory()    
         return result
 
-    def run_py_test(self, prompt_proceed=True):
+    def run_py_test(self, session=None, prompt_proceed=True):
         proc = subprocess.Popen('py.test %s' % self.directory_name, shell=True, stdout=subprocess.PIPE)
         lines = proc.stdout.readlines()
         if lines:
@@ -112,7 +112,7 @@ class DirectoryProxy(SCFObject):
         if prompt_proceed:
             self.proceed()
 
-    def svn_add(self, prompt_proceed=True):
+    def svn_add(self, session=None, prompt_proceed=True):
         proc = subprocess.Popen('svn-add-all', shell=True, stdout=subprocess.PIPE)
         lines = proc.stdout.readlines()
         if lines:
@@ -120,7 +120,7 @@ class DirectoryProxy(SCFObject):
         if prompt_proceed:
             self.proceed()
  
-    def svn_ci(self, commit_message=None, prompt_proceed=True):
+    def svn_ci(self, session=None, commit_message=None, prompt_proceed=True):
         if commit_message is None:
             commit_message = raw_input('Commit message> ')
             print ''
@@ -135,7 +135,7 @@ class DirectoryProxy(SCFObject):
         if prompt_proceed:
             self.proceed()
 
-    def svn_st(self, prompt_proceed=True):
+    def svn_st(self, session=None, prompt_proceed=True):
         print self.directory_name
         command = 'svn st -u %s' % self.directory_name
         proc = subprocess.Popen(command, shell=True, stdout=subprocess.PIPE)
@@ -143,7 +143,7 @@ class DirectoryProxy(SCFObject):
         if prompt_proceed:
             self.proceed()
 
-    def svn_up(self, prompt_proceed=True):
+    def svn_up(self, session=None, prompt_proceed=True):
         print self.directory_name
         command = 'svn up %s' % self.directory_name
         proc = subprocess.Popen(command, shell=True, stdout=subprocess.PIPE)
