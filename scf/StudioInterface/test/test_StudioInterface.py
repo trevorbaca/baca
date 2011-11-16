@@ -110,3 +110,23 @@ def test_StudioInterface_05():
      '     k: work with interactive material proxies',
      '     m: work with Bača materials',
      '']
+
+
+def test_StudioInterface_06():
+    '''Main menu to score menu to tags menu.
+    '''
+
+    studio_interface = baca.scf.StudioInterface()
+    session = baca.scf.menuing.Session(user_input='1\ntags', test='menu_lines')
+    studio_interface.work_in_studio(session=session)
+
+    assert session.test_result == [
+     "L'archipel du corps - tags",
+     '',
+     "     'composer': TrevorBaca()",
+     '     \'title\': "L\'archipel du corps"',
+     "     'year_of_completion': 2011",
+     '',
+     '     add: add tag',
+     '     del: delete tag',
+     '']

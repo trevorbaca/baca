@@ -152,7 +152,6 @@ class ScoreProxy(PackageProxy):
     def make_main_menu(self, session=None):
         session = session or self.Session()
         menu = self.Menu(where=self.where(), session=session)
-        menu.menu_body = self.get_tag('title')
         menu_section = self.MenuSection()
         menu_section.menu_section_title = 'Chunks'
         menu_section.items_to_number = self.chunk_wrangler.iterate_package_spaced_names()
@@ -170,16 +169,12 @@ class ScoreProxy(PackageProxy):
         menu.hidden_items.append(('tags', 'work with tags'))
         return menu
 
-    #def manage_score(self, menu_header=None, user_input=None, test=None):
     def manage_score(self, session=None):
         session = session or self.Session()
+        session.menu_pieces.append(self.title)
         while True:
-            #menu = self.make_main_menu(menu_header=menu_header)
             menu = self.make_main_menu(session=session)
-            #key, value, user_input, test_result = menu.run(user_input=user_input, test=test)
             key, value = menu.run(session=session)
-            #print 'manage_score', key, value, user_input, test_result, 'debug'
-            # TODO: maybe 'if test_result:' instead for next line
             if key is None:
                 pass
             elif key == 'b':
@@ -208,12 +203,10 @@ class ScoreProxy(PackageProxy):
                     self.material_wrangler.package_importable_name, material_underscored_name)
                 material_proxy = self.material_wrangler.get_package_proxy(package_importable_name)
                 material_proxy.manage_material(menu_header=menu.menu_title)
-            #if session.test and not session.user_input:
-            #    return
             if session.test_is_complete:
                 return
 
-    def manage_svn(self, menu_header=None):
+    def manage_svn(self, session=None):
         while True:
             menu = self.Menu(where=self.where())
             menu.menu_header = menu_header

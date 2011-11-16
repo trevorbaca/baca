@@ -261,10 +261,9 @@ class PackageProxy(DirectoryProxy):
 
     def manage_tags(self, session=None):
         session = session or self.Session()
-        session.menu_pieces.append('manage tags')
+        session.menu_pieces.append('tags')
         while True:
             menu = self.Menu(where=self.where(), session=session)
-            menu.menu_body = 'tags'
             section = self.MenuSection()
             section.lines_to_list = self.list_formatted_tags()
             menu.menu_sections.append(section)

@@ -149,7 +149,6 @@ class StudioInterface(SCFObject):
     
     def work_in_studio(self, session=None):
         session = session or self.Session()
-        session.menu_pieces.append('studio')
         while True:
             menu = self.make_main_menu(session=session)
             key, value = menu.run(session=session)

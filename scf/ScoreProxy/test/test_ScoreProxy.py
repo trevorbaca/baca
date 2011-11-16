@@ -92,7 +92,6 @@ def test_ScoreProxy_04():
     '''
 
     archipel = baca.scf.ScoreProxy('archipel')
-    #user_input, test_result = archipel.manage_score(user_input='hidden', test='menu_lines')
     session = baca.scf.menuing.Session(user_input='hidden', test='menu_lines')
     archipel.manage_score(session=session)
 

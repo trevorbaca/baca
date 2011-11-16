@@ -103,7 +103,7 @@ class Menu(MenuObject, SCFObject):
         if self.should_clear_terminal:
             if not response and session.test is None:
                 self.clear_terminal()
-        menu_lines, all_keys, all_values = self.make_menu_lines_keys_and_values()
+        menu_lines, all_keys, all_values = self.make_menu_lines_keys_and_values(session=session)
         if not response and session.test == 'menu_lines':
             test_result = menu_lines
         else:
@@ -125,9 +125,9 @@ class Menu(MenuObject, SCFObject):
         session.test_result = test_result
         return response, value
 
-    def make_menu_lines_keys_and_values(self):
+    def make_menu_lines_keys_and_values(self, session=None):
         menu_lines, all_keys, all_values = [], [], []
-        menu_lines.extend(self.make_menu_title_lines())
+        menu_lines.extend(self.make_menu_title_lines(session=session))
         menu_lines.extend(self.make_menu_section_lines(all_keys, all_values))
         return menu_lines, all_keys, all_values
 
@@ -142,16 +142,21 @@ class Menu(MenuObject, SCFObject):
             menu_lines.extend(menu_section.make_menu_lines(all_keys, all_values))
         return menu_lines
         
-    def make_menu_title_lines(self):
+    def make_menu_title_lines(self, session=None):
         menu_lines = []
-        if self.menu_title:
+        if self.menu_title or session.menu_header:
             if not self.hide_menu:
-                menu_title = self.menu_title.capitalize()
+                pieces = []
+                if session.menu_header:
+                    pieces.append(session.menu_header)
+                if self.menu_title:
+                    pieces.append(self.menu_title)
+                menu_title = ' - '.join(pieces)
+                menu_title = menu_title.capitalize()
                 menu_lines.append(menu_title)
                 menu_lines.append('')
         return menu_lines
 
-    #def split_user_input(self, user_input):
     def pop_next_response_from_user_input(self, session=None):
         session = session or self.Session()
         if session.user_input:
@@ -165,26 +170,18 @@ class Menu(MenuObject, SCFObject):
         #return response, user_input
         return response
 
-    #def run(self, user_input=None, test=None):
     def run(self, session=None):
         session = session or self.Session()
         should_clear_terminal, hide_menu = True, False
         while True:
-            #response, user_input = self.split_user_input(user_input)
             response = self.pop_next_response_from_user_input(session=session)
             self.should_clear_terminal, self.hide_menu = should_clear_terminal, hide_menu
-            #print response, user_input, test, 'debug'
-            #key, value, test_result = self.display(response=response, test=test)
-            #key, value, test_result = self.display(response=response, test=test)
             key, value = self.display(session=session, response=response)
-            #print 'menu.run', key, value, test_result, 'debug'
             should_clear_terminal, hide_menu = False, True
-            #result = self.handle_hidden_key(key, test=test)
             result = self.handle_hidden_key(key, session=session)
             if result is True:
                 pass
             elif bool(result):
-                #return None, None, user_input, result
                 session.test_result = result
                 return None, None
             elif key == 'b':
@@ -192,5 +189,4 @@ class Menu(MenuObject, SCFObject):
             elif key == 'redraw':
                 should_clear_terminal, hide_menu = True, False
             else:
-                #return key, value, user_input, test_result
                 return key, value
