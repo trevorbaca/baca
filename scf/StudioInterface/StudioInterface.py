@@ -75,32 +75,29 @@ class StudioInterface(SCFObject):
         menu.include_studio = False
         return menu
 
-    def manage_svn(self, menu_header=None):
+    def manage_svn(self, session=None):
+        session = session or self.Session()
+        session.menu_pieces.append('repository commands')
         while True:
-            menu = self.Menu(where=self.where())
-            menu.menu_header = menu_header
-            menu.menu_body = 'repository commands'
+            menu = self.Menu(where=self.where(), session=session)
             menu_section = self.MenuSection()
             menu_section.sentence_length_items.append(('add', 'svn add'))
             menu_section.sentence_length_items.append(('ci', 'svn commit'))
             menu_section.sentence_length_items.append(('st', 'svn status'))
             menu_section.sentence_length_items.append(('up', 'svn update'))
-            menu_section.layout = 'line'
             menu.menu_sections.append(menu_section)
             menu_section = self.MenuSection()
             menu_section.sentence_length_items.append(('add scores', 'svn add (scores)'))
             menu_section.sentence_length_items.append(('ci scores', 'svn commit (scores)'))
             menu_section.sentence_length_items.append(('st scores', 'svn status (scores)'))
             menu_section.sentence_length_items.append(('up scores', 'svn update (scores)'))
-            menu_section.layout = 'line'
             menu.menu_sections.append(menu_section)
             menu_section = self.MenuSection()
             menu_section.sentence_length_items.append(('pytest', 'run regression tests'))
             menu_section.sentence_length_items.append(('pytest scores', 'run regression tests (scores)'))
             menu_section.sentence_length_items.append(('pytest all', 'run regression tests (all)'))
-            menu_section.layout = 'line'
             menu.menu_sections.append(menu_section)
-            key, value, user_input = menu.run()
+            key, value = menu.run(session=session)
             if key == 'b':
                 return key, None
             elif key == 'add':
@@ -128,6 +125,8 @@ class StudioInterface(SCFObject):
             elif key == 'up scores':
                 self.score_wrangler.svn_up()
                 break
+            if session.test_is_complete:
+                return
 
     def run_py_test_all(self, prompt_proceed=True):
         proc = subprocess.Popen('py.test %s %s' % 

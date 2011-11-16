@@ -130,3 +130,29 @@ def test_StudioInterface_06():
      '     add: add tag',
      '     del: delete tag',
      '']
+
+
+def test_StudioInterface_07():
+    '''Main menu to svn menu.
+    '''
+
+    studio_interface = baca.scf.StudioInterface()
+    session = baca.scf.menuing.Session(user_input='svn', test='menu_lines')
+    studio_interface.work_in_studio(session=session)
+
+    assert session.test_result == ['Repository commands',
+     '',
+     '     add: svn add',
+     '     ci: svn commit',
+     '     st: svn status',
+     '     up: svn update',
+     '',
+     '     add scores: svn add (scores)',
+     '     ci scores: svn commit (scores)',
+     '     st scores: svn status (scores)',
+     '     up scores: svn update (scores)',
+     '',
+     '     pytest: run regression tests',
+     '     pytest scores: run regression tests (scores)',
+     '     pytest all: run regression tests (all)',
+     '']
