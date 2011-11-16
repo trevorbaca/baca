@@ -272,7 +272,7 @@ class PackageProxy(DirectoryProxy):
             section.sentence_length_items.append(('add', 'add tag'))
             section.sentence_length_items.append(('del', 'delete tag'))
             menu.menu_sections.append(section)
-            key, value = menu.run()
+            key, value = menu.run(session=session)
             if key == 'b':
                 return key, None
             elif key == 'add':

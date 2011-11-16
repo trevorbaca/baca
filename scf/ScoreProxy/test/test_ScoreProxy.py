@@ -70,7 +70,6 @@ def test_ScoreProxy_03():
     '''
 
     archipel = baca.scf.ScoreProxy('archipel')
-    #user_input, test_result = archipel.manage_score(test='menu_lines')
     session = baca.scf.menuing.Session(test='menu_lines')
     archipel.manage_score(session=session)
 
@@ -109,4 +108,24 @@ def test_ScoreProxy_04():
      '     svn: work with repository',
      '     tags: work with tags',
      '     where: show menu client',
+     '']
+
+
+def test_ScoreProxy_05():
+    '''Manage tags menu.
+    '''
+
+    archipel = baca.scf.ScoreProxy('archipel')
+    session = baca.scf.menuing.Session(test='menu_lines')
+    archipel.manage_tags(session=session)
+
+    assert session.test_result == [
+     'Tags',
+     '',
+     "     'composer': TrevorBaca()",
+     '     \'title\': "L\'archipel du corps"',
+     "     'year_of_completion': 2011",
+     '',
+     '     add: add tag',
+     '     del: delete tag',
      '']
