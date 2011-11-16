@@ -140,7 +140,7 @@ def test_StudioInterface_07():
     session = baca.scf.menuing.Session(user_input='svn', test='menu_lines')
     studio_interface.work_in_studio(session=session)
 
-    assert session.test_result == ['Repository commands',
+    assert session.test_result == ['Studio - repository commands',
      '',
      '     add: svn add',
      '     ci: svn commit',
@@ -156,3 +156,25 @@ def test_StudioInterface_07():
      '     pytest scores: run regression tests (scores)',
      '     pytest all: run regression tests (all)',
      '']
+
+
+def test_StudioInterface_08():
+    '''Main menu header is the same even after state change to secondary menu.
+    '''
+
+    studio_interface = baca.scf.StudioInterface()
+
+    session = baca.scf.menuing.Session(user_input='', test='menu_lines')
+    studio_interface.work_in_studio(session=session)
+    menu_header = session.test_result[0]
+    assert menu_header == 'Welcome to the studio.'
+
+    session = baca.scf.menuing.Session(user_input='svn', test='menu_lines')
+    studio_interface.work_in_studio(session=session)
+    menu_header = session.test_result[0]
+    assert menu_header == 'Studio - repository commands'
+
+    session = baca.scf.menuing.Session(user_input='svn\nb', test='menu_lines')
+    studio_interface.work_in_studio(session=session)
+    menu_header = session.test_result[0]
+    assert menu_header == 'Welcome to the studio.'

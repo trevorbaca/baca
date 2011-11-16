@@ -75,31 +75,37 @@ class StudioInterface(SCFObject):
         menu.include_studio = False
         return menu
 
+    def make_svn_menu(self, session=None):
+        menu = self.Menu(where=self.where(), session=session)
+        menu_section = self.MenuSection()
+        menu_section.sentence_length_items.append(('add', 'svn add'))
+        menu_section.sentence_length_items.append(('ci', 'svn commit'))
+        menu_section.sentence_length_items.append(('st', 'svn status'))
+        menu_section.sentence_length_items.append(('up', 'svn update'))
+        menu.menu_sections.append(menu_section)
+        menu_section = self.MenuSection()
+        menu_section.sentence_length_items.append(('add scores', 'svn add (scores)'))
+        menu_section.sentence_length_items.append(('ci scores', 'svn commit (scores)'))
+        menu_section.sentence_length_items.append(('st scores', 'svn status (scores)'))
+        menu_section.sentence_length_items.append(('up scores', 'svn update (scores)'))
+        menu.menu_sections.append(menu_section)
+        menu_section = self.MenuSection()
+        menu_section.sentence_length_items.append(('pytest', 'run regression tests'))
+        menu_section.sentence_length_items.append(('pytest scores', 'run regression tests (scores)'))
+        menu_section.sentence_length_items.append(('pytest all', 'run regression tests (all)'))
+        menu.menu_sections.append(menu_section)
+        return menu
+
     def manage_svn(self, session=None):
         session = session or self.Session()
         session.menu_pieces.append('repository commands')
         while True:
-            menu = self.Menu(where=self.where(), session=session)
-            menu_section = self.MenuSection()
-            menu_section.sentence_length_items.append(('add', 'svn add'))
-            menu_section.sentence_length_items.append(('ci', 'svn commit'))
-            menu_section.sentence_length_items.append(('st', 'svn status'))
-            menu_section.sentence_length_items.append(('up', 'svn update'))
-            menu.menu_sections.append(menu_section)
-            menu_section = self.MenuSection()
-            menu_section.sentence_length_items.append(('add scores', 'svn add (scores)'))
-            menu_section.sentence_length_items.append(('ci scores', 'svn commit (scores)'))
-            menu_section.sentence_length_items.append(('st scores', 'svn status (scores)'))
-            menu_section.sentence_length_items.append(('up scores', 'svn update (scores)'))
-            menu.menu_sections.append(menu_section)
-            menu_section = self.MenuSection()
-            menu_section.sentence_length_items.append(('pytest', 'run regression tests'))
-            menu_section.sentence_length_items.append(('pytest scores', 'run regression tests (scores)'))
-            menu_section.sentence_length_items.append(('pytest all', 'run regression tests (all)'))
-            menu.menu_sections.append(menu_section)
+            menu = self.make_svn_menu(session=session)
             key, value = menu.run(session=session)
             if key == 'b':
-                return key, None
+                #return key, None
+                value = None
+                break
             elif key == 'add':
                 self.global_proxy.svn_add()
             elif key == 'add scores':
@@ -126,7 +132,8 @@ class StudioInterface(SCFObject):
                 self.score_wrangler.svn_up()
                 break
             if session.test_is_complete:
-                return
+                break
+        session.menu_pieces.pop()
 
     def run_py_test_all(self, prompt_proceed=True):
         proc = subprocess.Popen('py.test %s %s' % 
@@ -166,7 +173,9 @@ class StudioInterface(SCFObject):
             elif key == 'some':
                 session.hide_mothballed_scores = True
             elif key == 'svn':
+                session.menu_pieces.append('studio')
                 self.manage_svn(session=session)
+                session.menu_pieces.pop()
             else:
                 score_package_importable_name = value
                 score_proxy = self.score_wrangler.ScoreProxy(score_package_importable_name)
