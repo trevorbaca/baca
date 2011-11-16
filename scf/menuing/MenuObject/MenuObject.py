@@ -169,11 +169,11 @@ class MenuObject(SCFObject):
 
     def show_menu_client(self):
         print self.tab(1),
-        print 'file: %s' % self.client[1]
+        print 'file: %s' % self.where[1]
         print self.tab(1),
-        print 'line: %s' % self.client[2]
+        print 'line: %s' % self.where[2]
         print self.tab(1),
-        print 'meth: %s()' % self.client[3]
+        print 'meth: %s()' % self.where[3]
         print ''
 
     def show_hidden_items(self, session=None):

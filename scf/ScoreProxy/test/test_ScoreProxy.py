@@ -84,6 +84,10 @@ def test_ScoreProxy_03():
      '',
      '     mi: create interactive material',
      '     ms: create static material',
+     '',
+     '     Admin',
+     '',
+     '     inst: edit instrumentation',
      '']
 
 

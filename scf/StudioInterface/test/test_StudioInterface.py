@@ -84,6 +84,10 @@ def test_StudioInterface_04():
      '',
      '     mi: create interactive material',
      '     ms: create static material',
+     '',
+     '     Admin',
+     '',
+     '     inst: edit instrumentation',
      '']
 
 

@@ -165,6 +165,10 @@ class ScoreProxy(PackageProxy):
         menu_section.sentence_length_items.append(('mi', 'create interactive material'))
         menu_section.sentence_length_items.append(('ms', 'create static material'))
         menu.menu_sections.append(menu_section)
+        menu_section = self.MenuSection()
+        menu_section.menu_section_title = 'Admin'
+        menu_section.sentence_length_items.append(('inst', 'edit instrumentation'))
+        menu.menu_sections.append(menu_section)
         menu.hidden_items.append(('svn', 'work with repository'))
         menu.hidden_items.append(('tags', 'work with tags'))
         return menu

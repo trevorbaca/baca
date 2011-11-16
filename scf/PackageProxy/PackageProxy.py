@@ -279,13 +279,14 @@ class PackageProxy(DirectoryProxy):
             menu.menu_sections.append(section)
             key, value = menu.run(session=session)
             if key == 'b':
-                return key, None
+                break
             elif key == 'add':
                 self.add_tag_interactively(session=session)
             elif key == 'del':
                 self.delete_tag_interactively(session=session)
             if session.test_is_complete or session.user_input_is_consumed:
-                return
+                break
+        session.menu_pieces.pop()
 
     def pprint_tags(self, tags):
         if tags:
