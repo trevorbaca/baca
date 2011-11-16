@@ -128,3 +128,13 @@ def test_ScoreProxy_05():
      '     add: add tag',
      '     del: delete tag',
      '']
+
+
+# TODO (2011-11-16): make this test work
+#def test_ScoreProxy_06():
+#    '''Add and delete tag interactively.
+#    '''
+#
+#    archipel = baca.scf.ScoreProxy('archipel')
+#    session = baca.scf.menuing.Session(user_input="add\n'foo'\n'bar'")
+#    archipel.manage_tags(session=session)

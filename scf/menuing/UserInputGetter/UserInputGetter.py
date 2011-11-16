@@ -53,6 +53,7 @@ class UserInputGetter(MenuObject):
 
     ### PUBLIC METHODS ###
 
+    # TODO: make this user input-testable; borrow from Menu.display()
     def run(self, clear_terminal=True):
         try:
             if clear_terminal:
