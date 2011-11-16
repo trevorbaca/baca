@@ -7,7 +7,7 @@ import subprocess
 
 class MenuObject(SCFObject):
 
-    def __init__(self, client=None, menu_header=None, menu_body=None, hidden_items=None,
+    def __init__(self, client=None, session=None, menu_header=None, menu_body=None, hidden_items=None,
         indent_level=1):
         self.client = client
         self.menu_header = menu_header
@@ -97,6 +97,17 @@ class MenuObject(SCFObject):
             return self.menu_title.split(' - ')
         else:
             return
+
+    @apply
+    def session():
+        def fget(self):
+            return self._session
+        def fset(self, session):
+            if session is None:
+                self._session = self.Session()
+            else:
+                self._session = session
+        return property(**locals())
 
     ### PUBLIC METHODS ###
 

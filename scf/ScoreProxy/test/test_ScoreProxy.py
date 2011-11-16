@@ -37,7 +37,7 @@ def test_ScoreProxy_01():
     assert score_proxy.composer == baca.scf.TrevorBaca()
     assert score_proxy.instrumentation == instrumentation
     assert score_proxy.title == 'Las manos mágicas'
-    assert score_proxy.year_of_completion == 2011
+    assert score_proxy.year_of_completion is None
 
     assert score_proxy.score_initializer_file_names == (
         '/Users/trevorbaca/Documents/scores/manos/__init__.py',
@@ -107,5 +107,6 @@ def test_ScoreProxy_04():
      '     redraw: redraw',
      '     studio: return to studio',
      '     svn: work with repository',
+     '     tags: work with tags',
      '     where: show menu client',
      '']

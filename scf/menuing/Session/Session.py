@@ -39,6 +39,13 @@ class Session(object):
         return result
 
     @property
+    def menu_header(self):
+        if self.menu_pieces:
+            return ' - '.join(self.menu_pieces)
+        else:
+            return ''
+
+    @property
     def test_is_complete(self):
         if self.test is not None:
             if self.test_result is not None:

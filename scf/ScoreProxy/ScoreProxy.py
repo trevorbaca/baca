@@ -107,9 +107,13 @@ class ScoreProxy(PackageProxy):
             self.exg_proxy,
             self.mus_proxy,)
         
-    @property
-    def year_of_completion(self):
-        return self.get_tag('year_of_completion')
+    @apply
+    def year_of_completion():
+        def fget(self):
+            return self.get_tag('year_of_completion')
+        def fset(self, year_of_completion):
+            return self.add_tag('year_of_completion', year_of_completion)
+        return property(**locals())
 
     ### PUBLIC METHODS ###
 
@@ -145,10 +149,8 @@ class ScoreProxy(PackageProxy):
             initializer.write(''.join(lines))
             initializer.close()
 
-    #def make_main_menu(self, menu_header=None):
     def make_main_menu(self, session=None):
         session = session or self.Session()
-        #menu = self.Menu(client=self.where(), menu_header=menu_header)
         menu = self.Menu(client=self.where(), session=session)
         menu.menu_body = self.get_tag('title')
         menu_section = self.MenuSection()
@@ -165,6 +167,7 @@ class ScoreProxy(PackageProxy):
         menu_section.sentence_length_items.append(('ms', 'create static material'))
         menu.menu_sections.append(menu_section)
         menu.hidden_items.append(('svn', 'work with repository'))
+        menu.hidden_items.append(('tags', 'work with tags'))
         return menu
 
     #def manage_score(self, menu_header=None, user_input=None, test=None):
@@ -189,6 +192,8 @@ class ScoreProxy(PackageProxy):
                 self.material_wrangler.create_static_material_package_interactively(menu_header=self.title)
             elif key == 'svn':
                 self.manage_svn(menu_header=self.title)
+            elif key == 'tags':
+                self.manage_tags(session=session)
             elif key.startswith('h'):
                 chunk_spaced_name = value
                 chunk_underscored_name = chunk_spaced_name.replace(' ', '_')
@@ -203,9 +208,9 @@ class ScoreProxy(PackageProxy):
                     self.material_wrangler.package_importable_name, material_underscored_name)
                 material_proxy = self.material_wrangler.get_package_proxy(package_importable_name)
                 material_proxy.manage_material(menu_header=menu.menu_title)
-            #if test and not user_input:
-            #    return user_input, test_result
-            if session.test and not session.user_input:
+            #if session.test and not session.user_input:
+            #    return
+            if session.test_is_complete:
                 return
 
     def manage_svn(self, menu_header=None):

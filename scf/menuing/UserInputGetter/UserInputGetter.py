@@ -3,9 +3,9 @@ from baca.scf.menuing.MenuObject import MenuObject
 
 class UserInputGetter(MenuObject):
 
-    def __init__(self, client=None, prompts=None, tests=None, helps=None,
+    def __init__(self, client=None, session=None, prompts=None, tests=None, helps=None,
         menu_header=None, menu_body=None):
-        MenuObject.__init__(self, client=client, menu_header=menu_header, menu_body=menu_body)
+        MenuObject.__init__(self, client=client, session=session, menu_header=menu_header, menu_body=menu_body)
         self.prompts = prompts
         self.tests = tests
         self.helps = helps
@@ -13,7 +13,7 @@ class UserInputGetter(MenuObject):
     ### OVERLOADS ###
 
     def __repr__(self):
-        return '%s(%s)' % (type(self).__name__, len(self.prompts))
+        return '{}({})'.format(type(self).__name__, len(self.prompts))
 
     ### PUBLIC ATTRIBUTES ###
 
