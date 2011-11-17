@@ -58,6 +58,10 @@ class Session(object):
         return False
 
     @property
+    def session_is_complete(self):
+        return self.test_is_complete or self.user_input_is_consumed
+
+    @property
     def session_once_had_user_input(self):
         return self._session_once_had_user_input
 

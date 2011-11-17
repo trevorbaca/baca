@@ -28,9 +28,13 @@ class InstrumentationEditor(InteractiveEditor):
                 break
             elif key == 'add':
                 self.add_performer_to_instrumentation_interactively()
-            elif mathtools.is_integer_equivalent_expr(key):
-                pass
-            if self.session.test_is_complete or session.user_input_is_consumed:
+            else:
+                try:
+                    if mathtools.is_integer_equivalent_number(int(key)):
+                        pass
+                except ValueError:
+                    pass
+            if self.session.session_is_complete:
                 break 
         self.session.menu_pieces.pop()
 

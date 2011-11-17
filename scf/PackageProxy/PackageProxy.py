@@ -283,7 +283,7 @@ class PackageProxy(DirectoryProxy):
                 self.add_tag_interactively()
             elif key == 'del':
                 self.delete_tag_interactively()
-            if self.session.test_is_complete or self.session.user_input_is_consumed:
+            if self.session.session_is_complete:
                 break
         self.session.menu_pieces.pop()
 
