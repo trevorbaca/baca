@@ -124,30 +124,17 @@ class Menu(MenuObject, SCFObject):
             return user_response
 
     def display(self):
-        print 'in display'
-        print 'self.session.test {!r}'.format(self.session.test)
-        print 'self.session.test_result {!r}'.format(self.session.test_result)
-        print 'self.session.user_input {!r}'.format(self.session.user_input)
-        print 'self.session.user_input_is_consumed {!r}'.format(self.session.user_input_is_consumed)
         self.conditionally_clear_terminal()
         self.make_menu_lines_keys_and_values()
         self.add_hidden_menu_items()
         user_response = self.conditionally_display_menu_lines_and_get_user_response()
         value = self.change_user_response_to_value(user_response)
-        print '\nleaving display'
-        print 'self.session.test {!r}'.format(self.session.test)
-        print 'self.session.test_result {!r}'.format(self.session.test_result)
-        print 'self.session.user_input {!r}'.format(self.session.user_input)
-        print 'self.session.user_input_is_consumed {!r}'.format(self.session.user_input_is_consumed)
-        print 'user_response {!r}'.format(user_response)
-        print 'value {!r}'.format(value)
         return user_response, value
 
     def make_menu_lines_keys_and_values(self):
         self.menu_lines, self.all_keys, self.all_values = [], [], []
         self.menu_lines.extend(self.make_menu_title_lines())
         self.menu_lines.extend(self.make_menu_section_lines(self.all_keys, self.all_values))
-        #return menu_lines, all_keys, all_values
 
     def make_menu_lines(self):
         menu_lines, keys, values = self.make_menu_lines_keys_and_values()
@@ -172,12 +159,8 @@ class Menu(MenuObject, SCFObject):
         while True:
             self.should_clear_terminal, self.hide_menu = should_clear_terminal, hide_menu
             key, value = self.display()
-            print '\nin run'
-            print 'key {!r}'.format(key)
-            print 'value {!r}'.format(value)
             should_clear_terminal, hide_menu = False, True
             result = self.handle_hidden_key(key)
-            print 'result {!r}'.format(result)
             if result is True:
                 pass
             elif bool(result):
@@ -191,5 +174,4 @@ class Menu(MenuObject, SCFObject):
                 should_clear_terminal, hide_menu = True, False
             else:
                 break
-        print 'leaving run ...'
         return key, value

@@ -166,7 +166,6 @@ def test_StudioInterface_08():
     '''Main menu header is the same even after state change to secondary menu.
     '''
 
-
     session = baca.scf.menuing.Session(user_input='', test='menu_lines')
     studio_interface = baca.scf.StudioInterface(session=session)
     studio_interface.work_in_studio()
@@ -184,3 +183,12 @@ def test_StudioInterface_08():
     studio_interface.work_in_studio()
     menu_header = session.test_result[0]
     assert menu_header == 'Studio - active scores'
+
+
+def test_StudioInterface_09():
+    '''Changing from main menu to svn menu raises no exceptions and stops execution when finished.
+    '''
+
+    session = baca.scf.menuing.Session(user_input='svn')
+    studio_interface = baca.scf.StudioInterface(session=session)
+    studio_interface.work_in_studio()

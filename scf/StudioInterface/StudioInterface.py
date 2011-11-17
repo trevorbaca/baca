@@ -100,14 +100,8 @@ class StudioInterface(SCFObject):
     def manage_svn(self):
         self.session.menu_pieces.append('repository commands')
         while True:
-            print 'FOO', self.session
-            print ''
             menu = self.make_svn_menu()
             key, value = menu.run()
-            print 'key: {!r}, value: {!r}'.format(key, value)
-            print ''
-            print 'BAR', self.session
-            print ''
             if key == 'b':
                 value = None
                 break
@@ -138,7 +132,6 @@ class StudioInterface(SCFObject):
                 break
             if self.session.test_is_complete or self.session.user_input_is_consumed:
                 break
-        print 'leaving manage_svn ...'
         self.session.menu_pieces.pop()
 
     def run_py_test_all(self, prompt_proceed=True):
@@ -159,15 +152,11 @@ class StudioInterface(SCFObject):
         return value
     
     def work_in_studio(self):
-        print 'in work_in_studio'
         self.session.menu_pieces.append('studio')
         while True:
             self.session.menu_pieces.append('{} scores'.format(self.session.scores_to_show))
             menu = self.make_main_menu()
             key, value = menu.run()
-            print '\nin work_in_studio loop'
-            print 'key {!r}'.format(key)
-            print 'value {!r}'.format(value)
             if key is None:
                 pass
             elif key == 'active':
@@ -195,5 +184,4 @@ class StudioInterface(SCFObject):
             if self.session.user_input_is_consumed or self.session.test_is_complete:
                 break
             self.session.menu_pieces.pop()
-        print '\nexiting work_in_studio ...'
         self.session.menu_pieces.pop()
