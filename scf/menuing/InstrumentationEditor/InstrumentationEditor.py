@@ -13,7 +13,7 @@ class InstrumentationEditor(InteractiveEditor):
         from abjad.tools import mathtools
         from abjad.tools import scoretools
         self.session.menu_pieces.append('edit instrumentation')
-        self.instrumentation = self.instrumentation or scoretools.Instrumentation()
+        self.instrumentation = self.instrumentation or scoretools.InstrumentationSpecifier()
         while True:
             menu = self.Menu(where=self.where(), session=self.session)
             menu_section = self.MenuSection()
@@ -21,7 +21,7 @@ class InstrumentationEditor(InteractiveEditor):
             menu_section.items_to_number = self.instrumentation_to_lines(self.instrumentation)
             menu_section.sentence_length_items.append(('add', 'add performer'))
             menu.menu_sections.append(menu_section)
-            key, value = menu.run() # make it so no need to pass in session
+            key, value = menu.run()
             if key is None:
                 pass
             elif key == 'b':
@@ -30,9 +30,9 @@ class InstrumentationEditor(InteractiveEditor):
                 self.add_performer_to_instrumentation_interactively()
             elif mathtools.is_integer_equivalent_expr(key):
                 pass
-            if session.test_is_complete or session.user_input_is_consumed:
+            if self.session.test_is_complete or session.user_input_is_consumed:
                 break 
-        session.menu_pieces.pop()
+        self.session.menu_pieces.pop()
 
     def instrumentation_to_lines(self, instrumentation):
         result = []

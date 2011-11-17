@@ -5,8 +5,9 @@ import os
 
 class Menu(MenuObject, SCFObject):
 
-    def __init__(self, where=None, menu_sections=None, hidden_items=None, include_back=True, include_studio=True, 
-        indent_level=1, item_width = 11, session=None, should_clear_terminal=True, hide_menu=False):
+    def __init__(self, where=None, menu_sections=None, hidden_items=None, include_back=True, 
+        include_studio=True, indent_level=1, item_width = 11, session=None, should_clear_terminal=True, 
+        hide_menu=False):
         MenuObject.__init__(self, session=session, hidden_items=hidden_items, indent_level=indent_level)
         self.hide_menu = hide_menu
         self.include_back = include_back
@@ -95,18 +96,17 @@ class Menu(MenuObject, SCFObject):
             all_keys.append(key)
             all_values.append(value)
         
-    def display(self, session=None, response=None):
-        session = session or self.Session()
+    def display(self, response=None):
         if self.should_clear_terminal:
-            if not response and session.test is None:
+            if not response and self.session.test is None:
                 self.clear_terminal()
-        menu_lines, all_keys, all_values = self.make_menu_lines_keys_and_values(session=session)
-        if not response and session.test == 'menu_lines':
+        menu_lines, all_keys, all_values = self.make_menu_lines_keys_and_values()
+        if not response and self.session.test == 'menu_lines':
             test_result = menu_lines
         else:
             test_result = None
         self.add_hidden_menu_items(all_keys, all_values)
-        if not response and not session.test:
+        if not response and not self.session.test:
             for menu_line in menu_lines:
                 print menu_line
             while True:
@@ -119,12 +119,12 @@ class Menu(MenuObject, SCFObject):
             value = pair_dictionary[response]
         else:
             value = None
-        session.test_result = test_result
+        self.session.test_result = test_result
         return response, value
 
-    def make_menu_lines_keys_and_values(self, session=None):
+    def make_menu_lines_keys_and_values(self):
         menu_lines, all_keys, all_values = [], [], []
-        menu_lines.extend(self.make_menu_title_lines(session=session))
+        menu_lines.extend(self.make_menu_title_lines())
         menu_lines.extend(self.make_menu_section_lines(all_keys, all_values))
         return menu_lines, all_keys, all_values
 
@@ -139,43 +139,27 @@ class Menu(MenuObject, SCFObject):
             menu_lines.extend(menu_section.make_menu_lines(all_keys, all_values))
         return menu_lines
         
-    def make_menu_title_lines(self, session=None):
+    def make_menu_title_lines(self):
+        #print self.session
         menu_lines = []
-        if session.menu_header:
-            if not self.hide_menu:
-                pieces = []
-                if session.menu_header:
-                    pieces.append(session.menu_header)
-                menu_title = ' - '.join(pieces)
-                menu_title = menu_title.capitalize()
-                menu_lines.append(menu_title)
-                menu_lines.append('')
+        if not self.hide_menu:
+            menu_lines.append(self.session.menu_header.capitalize())
+            menu_lines.append('')
+        #print 'FOO', menu_lines
         return menu_lines
 
-#    def pop_next_response_from_user_input(self, session=None):
-#        session = session or self.Session()
-#        if session.user_input:
-#            user_input = session.user_input.split('\n')
-#            response = user_input[0]
-#            user_input = '\n'.join(user_input[1:])
-#        else:
-#            response, user_input = None, None
-#        session.user_input = user_input
-#        return response
-
-    def run(self, session=None):
-        session = session or self.Session()
+    def run(self):
         should_clear_terminal, hide_menu = True, False
         while True:
-            response = self.pop_next_response_from_user_input(session=session)
+            response = self.pop_next_response_from_user_input()
             self.should_clear_terminal, self.hide_menu = should_clear_terminal, hide_menu
-            key, value = self.display(session=session, response=response)
+            key, value = self.display(response=response)
             should_clear_terminal, hide_menu = False, True
-            result = self.handle_hidden_key(key, session=session)
+            result = self.handle_hidden_key(key)
             if result is True:
                 pass
             elif bool(result):
-                session.test_result = result
+                self.session.test_result = result
                 return None, None
             elif key == 'b':
                 return key, None

@@ -134,7 +134,7 @@ class MenuSection(MenuObject):
                 display_string = return_value = value
             key = str(i + 1)
             if not self.hide_menu:
-                menu_line = self.tab(self.indent_level) + ' '
+                menu_line = self.make_tab(self.indent_level) + ' '
                 prefix = self.entry_prefix
                 if prefix is not None:
                     key = prefix + key
@@ -147,7 +147,7 @@ class MenuSection(MenuObject):
                 menu_lines.append('')
         for line in self.lines_to_list:
             if not self.hide_menu:
-                menu_line = self.tab(self.indent_level) + ' ' + line
+                menu_line = self.make_tab(self.indent_level) + ' ' + line
                 menu_lines.append(menu_line)
         if self.lines_to_list:
             if not self.hide_menu:
@@ -156,7 +156,7 @@ class MenuSection(MenuObject):
             if self.entry_prefix is not None:
                 key = self.entry_prefix + key
             if not self.hide_menu:
-                menu_line = self.tab(self.indent_level) + ' '
+                menu_line = self.make_tab(self.indent_level) + ' '
                 if self.layout == 'list':
                     menu_line += '%s: %s' % (key, value)
             all_keys.append(key)
@@ -167,7 +167,7 @@ class MenuSection(MenuObject):
                     menu_lines.append('')
         for key, value in self.sentence_length_items:
             if not self.hide_menu:
-                menu_line = self.tab(self.indent_level) + ' '
+                menu_line = self.make_tab(self.indent_level) + ' '
                 menu_line += '%s: %s' % (key, value)
                 menu_lines.append(menu_line)
             all_keys.append(key)
@@ -185,7 +185,7 @@ class MenuSection(MenuObject):
         if not self.hide_menu:
             if self.menu_section_title:
                 menu_line = '{} {}'.format(
-                    self.tab(self.indent_level), self.menu_section_title.capitalize())
+                    self.make_tab(self.indent_level), self.menu_section_title.capitalize())
                 menu_lines.append(menu_line)
                 menu_lines.append('')
         return menu_lines
@@ -193,7 +193,7 @@ class MenuSection(MenuObject):
     def show_hidden_items(self):
         menu_lines = []
         for key, value in self.hidden_items:
-            menu_line = self.tab(self.indent_level) + ' '
+            menu_line = self.make_tab(self.indent_level) + ' '
             menu_line += '{}: {}'.format(key, value)
             menu_lines.append(menu_line)
         for menu_line in menu_lines:

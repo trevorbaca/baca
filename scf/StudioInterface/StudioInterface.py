@@ -100,9 +100,8 @@ class StudioInterface(SCFObject):
         session.menu_pieces.append('repository commands')
         while True:
             menu = self.make_svn_menu(session=session)
-            key, value = menu.run(session=session)
+            key, value = menu.run()
             if key == 'b':
-                #return key, None
                 value = None
                 break
             elif key == 'add':
@@ -158,7 +157,7 @@ class StudioInterface(SCFObject):
         while True:
             session.menu_pieces.append('{} scores'.format(session.scores_to_show))
             menu = self.make_main_menu(session=session)
-            key, value = menu.run(session=session)
+            key, value = menu.run()
             if key is None:
                 pass
             elif key == 'active':

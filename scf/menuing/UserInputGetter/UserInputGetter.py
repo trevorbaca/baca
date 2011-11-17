@@ -52,12 +52,11 @@ class UserInputGetter(MenuObject):
 
     ### PUBLIC METHODS ###
 
-    def run(self, session=None, clear_terminal=True):
-        session = session or self.Session()
+    def run(self, clear_terminal=True):
         menu_lines = []
         try:
             if clear_terminal:
-                if not response and not session.test:
+                if not response and not self.session.test:
                     self.clear_terminal()
                     #if self.menu_title is not None:
                     #    print self.menu_title.capitalize() + '\n'
@@ -69,8 +68,8 @@ class UserInputGetter(MenuObject):
                 prompt = prompt + '> '
                 menu_lines.append(prompt)
                 while True:
-                    response = self.pop_next_response_from_user_input(session=session)
-                    if not response and not session.test:
+                    response = self.pop_next_response_from_user_input()
+                    if not response and not self.session.test:
                         response = raw_input(prompt)
                         print ''
                     if self.handle_hidden_key(response):

@@ -184,7 +184,7 @@ class ScoreProxy(PackageProxy):
         session.menu_pieces.append(self.title)
         while True:
             menu = self.make_main_menu(session=session)
-            key, value = menu.run(session=session)
+            key, value = menu.run()
             if key is None:
                 pass
             elif key == 'b':
@@ -256,19 +256,19 @@ class ScoreProxy(PackageProxy):
 
     def summarize_chunks(self):
         chunks = list(self.chunk_wrangler.iterate_package_underscored_names())
-        print self.tab(1),
+        print self.make_tab(1),
         if not chunks:
             print 'Chunks (none yet)'
         else:
             print 'Chunks'
         for chunk in chunks:
-            print self.tab(2),
+            print self.make_tab(2),
             print chunk
         print ''
 
     def summarize_materials(self):
         materials = list(self.material_wrangler.iterate_package_underscored_names())
-        print self.tab(1),
+        print self.make_tab(1),
         if not materials:
             print 'Materials (none yet)'
         else:
@@ -276,5 +276,5 @@ class ScoreProxy(PackageProxy):
         if materials:
             print ''
         for i, material in enumerate(materials):
-            print self.tab(1),
+            print self.make_tab(1),
             print '(%s) %s' % (i + 1, material.replace('_', ' '))

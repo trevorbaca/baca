@@ -182,7 +182,7 @@ class PackageProxy(DirectoryProxy):
         getter = self.UserInputGetter(session=session)
         getter.prompts.append('Tag name')
         getter.prompts.append('Tag value')
-        user_input = getter.run(session=session, clear_terminal=False)
+        user_input = getter.run(clear_terminal=False)
         if user_input:
             tag_name, tag_value = user_input
             self.add_tag(tag_name, tag_value)
@@ -214,7 +214,7 @@ class PackageProxy(DirectoryProxy):
     def delete_tag_interactively(self, session=None):
         getter = self.UserInputGetter(session=session)
         getter.prompts.append('Tag name')
-        user_input = getter.run(session=session, clear_terminal=False)
+        user_input = getter.run(clear_terminal=False)
         if user_input:
             tag_name = user_input
             self.delete_tag(tag_name)
@@ -277,7 +277,7 @@ class PackageProxy(DirectoryProxy):
             section.sentence_length_items.append(('add', 'add tag'))
             section.sentence_length_items.append(('del', 'delete tag'))
             menu.menu_sections.append(section)
-            key, value = menu.run(session=session)
+            key, value = menu.run()
             if key == 'b':
                 break
             elif key == 'add':

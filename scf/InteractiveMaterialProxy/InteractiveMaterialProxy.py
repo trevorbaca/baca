@@ -182,7 +182,7 @@ class InteractiveMaterialProxy(MaterialProxy):
             item = '%s: %r' % (key.replace('_', ' '), value)
             items.append(item)
         menu.items_to_number = items
-        menu.run(score_title=self.title)
+        menu.run()
 
     def unname_material(self):
         self.material_underscored_name = None
