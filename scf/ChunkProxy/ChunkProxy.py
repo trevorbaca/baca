@@ -3,8 +3,8 @@ from baca.scf.PackageProxy import PackageProxy
 
 class ChunkProxy(PackageProxy):
 
-    def __init__(self, package_importable_name=None, score_template=None):
-        PackageProxy.__init__(self, package_importable_name=package_importable_name)
+    def __init__(self, package_importable_name=None, score_template=None, session=None):
+        PackageProxy.__init__(self, package_importable_name=package_importable_name, session=session)
         self.score_template = score_template
 
     ### PUBLIC ATTRIBUTES ###
@@ -57,7 +57,7 @@ class ChunkProxy(PackageProxy):
 
     def manage_chunk(self, menu_header=None):
         while True:
-            menu = self.Menu(where=self.where())
+            menu = self.Menu(where=self.where(), session=self.session)
             menu.menu_header = menu_header
             menu.menu_body = self.package_spaced_name
             menu_section = self.MenuSection()

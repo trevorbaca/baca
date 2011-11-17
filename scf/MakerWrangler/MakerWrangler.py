@@ -9,15 +9,15 @@ import os
 # TODO: implement MakerProxy and implement MakerWrangler in terms of MakerProxy
 class MakerWrangler(PackageWrangler, PackageProxy):
 
-    def __init__(self):
+    def __init__(self, session=None):
         package_importable_name = 'baca.makers'
-        PackageProxy.__init__(self, package_importable_name=package_importable_name)
-        PackageWrangler.__init__(self, directory_name=self.directory_name)
+        PackageProxy.__init__(self, package_importable_name=package_importable_name, session=session)
+        PackageWrangler.__init__(self, directory_name=self.directory_name, session=session)
 
     ### OVERLOADS ###
 
     def __repr__(self):
-        return '%s()' % self.class_name
+        return '{}()'.format(self.class_name)
 
     ### PUBIC ATTRIBUTES ###
 
@@ -159,9 +159,9 @@ class MakerWrangler(PackageWrangler, PackageProxy):
         stylesheet_file_pointer.write(stylesheet.format)
         stylesheet_file_pointer.close()
         
-    def manage_makers(self, menu_header=None):
+    def manage_makers(self):
         while True:
-            menu = self.Menu(where=self.where(), menu_header=menu_header)
+            menu = self.Menu(where=self.where(), session=self.session)
             menu.menu_body = 'select maker'
             menu.items_to_number = self.list_maker_spaced_class_names()
             menu.named_pairs.append(('new', 'make maker'))
@@ -177,8 +177,8 @@ class MakerWrangler(PackageWrangler, PackageProxy):
                 maker = self.get_maker(maker_name)
                 maker.manage_maker(menu_header=menu_header)
 
-    def select_maker(self, menu_header=None):
-        menu = self.Menu(where=self.where(), menu_header=menu_header)
+    def select_maker(self):
+        menu = self.Menu(where=self.where(), session=self.session)
         menu.menu_body = 'select maker'
         menu.items_to_number = self.list_maker_spaced_class_names()
         key, value = menu.run()

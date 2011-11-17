@@ -69,9 +69,9 @@ def test_ScoreProxy_03():
     '''Main menu.
     '''
 
-    archipel = baca.scf.ScoreProxy('archipel')
     session = baca.scf.menuing.Session(test='menu_lines')
-    archipel.manage_score(session=session)
+    archipel = baca.scf.ScoreProxy('archipel', session=session)
+    archipel.manage_score()
 
     assert session.test_result == [
      "L'archipel du corps",
@@ -95,9 +95,9 @@ def test_ScoreProxy_04():
     '''Main menu to hidden menu.
     '''
 
-    archipel = baca.scf.ScoreProxy('archipel')
     session = baca.scf.menuing.Session(user_input='hidden', test='menu_lines')
-    archipel.manage_score(session=session)
+    archipel = baca.scf.ScoreProxy('archipel', session=session)
+    archipel.manage_score()
 
     assert session.test_result == [
      '     b: back',
@@ -118,9 +118,9 @@ def test_ScoreProxy_05():
     '''Manage tags menu.
     '''
 
-    archipel = baca.scf.ScoreProxy('archipel')
     session = baca.scf.menuing.Session(test='menu_lines')
-    archipel.manage_tags(session=session)
+    archipel = baca.scf.ScoreProxy('archipel', session=session)
+    archipel.manage_tags()
 
     assert session.test_result == [
      'Tags',
@@ -138,11 +138,12 @@ def test_ScoreProxy_06():
     '''Add and delete tag interactively.
     '''
 
-    archipel = baca.scf.ScoreProxy('archipel')
     session = baca.scf.menuing.Session(user_input="add\nfoo\nbar")
-    archipel.manage_tags(session=session)
+    archipel = baca.scf.ScoreProxy('archipel', session=session)
+    archipel.manage_tags()
     assert archipel.get_tag('foo') == 'bar'
 
     session = baca.scf.menuing.Session(user_input="del\nfoo")
-    archipel.manage_tags(session=session)
+    archipel = baca.scf.ScoreProxy('archipel', session=session)
+    archipel.manage_tags()
     assert archipel.get_tag('foo') is None

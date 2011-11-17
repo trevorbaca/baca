@@ -4,13 +4,13 @@ import os
 
 class ScoreWrangler(PackageWrangler):
 
-    def __init__(self):
-        PackageWrangler.__init__(self, directory_name=os.environ.get('SCORES'))
+    def __init__(self, session=None):
+        PackageWrangler.__init__(self, directory_name=os.environ.get('SCORES'), session=session)
 
     ### OVERLOADS ###
 
     def __repr__(self):
-        return '%s()' % self.class_name
+        return '{}()'.format(self.class_name)
 
     ### PUBLIC ATTRIBUTES ###
 
@@ -57,9 +57,8 @@ class ScoreWrangler(PackageWrangler):
             score_proxy.profile_package_structure()
             print ''
 
-    def select_score_proxy(self, menu_header=None):
-        menu = self.Menu(where=self.where())
-        menu.menu_header = menu_header
+    def select_score_proxy(self):
+        menu = self.Menu(where=self.where(), session=self.session)
         menu.menu_body = 'select score'
         menu_section = self.MenuSection()
         menu_section.items_to_number = self.iterate_score_titles_with_years()

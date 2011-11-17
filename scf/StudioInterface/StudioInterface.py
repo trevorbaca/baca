@@ -7,9 +7,10 @@ import subprocess
 
 class StudioInterface(SCFObject):
 
-    def __init__(self):
-        self._global_proxy = GlobalProxy()
-        self._score_wrangler = ScoreWrangler()
+    def __init__(self, session=None):
+        SCFObject.__init__(self, session=session)
+        self._global_proxy = GlobalProxy(session=session)
+        self._score_wrangler = ScoreWrangler(session=session)
 
     ### PUBLIC ATTRIBUTES ###
 
@@ -23,10 +24,10 @@ class StudioInterface(SCFObject):
 
     ### PUBLIC METHODS ###
 
-    def get_materials_package_importable_name_interactively(self, menu_header=None):
+    def get_materials_package_importable_name_interactively(self):
+        self.session.menu_pieces.append('select materials directory')
         while True:
-            menu = self.Menu(where=self.where(), menu_header=menu_header)
-            menu.menu_body = 'select materials directory'
+            menu = self.Menu(where=self.where(), session=self.session)
             menu_section = self.MenuSection()
             menu_section.items_to_number = self.score_wrangler.iterate_score_titles_with_years()
             menu_section.sentence_length_items.append(('baca', 'baca materials directory'))
@@ -38,8 +39,10 @@ class StudioInterface(SCFObject):
                 score_title = value
                 score_package_importable_name = self.score_wrangler.title_to_score_package_short_name(
                     score_title)
-                score_proxy = self.score_wrangler.ScoreProxy(score_package_importable_name)
+                score_proxy = self.score_wrangler.ScoreProxy(
+                    score_package_importable_name, session=self.session)
                 return score_proxy.materials_package_importable_name
+        self.session.menu_pieces.pop()
 
     def iterate_interactive_material_proxies(self):
         for material_proxy in self.iterate_material_proxies():
@@ -54,14 +57,13 @@ class StudioInterface(SCFObject):
         for material_proxy in self.global_proxy.material_wrangler.iterate_package_proxies():
             yield material_proxy
 
-    def make_main_menu(self, session=None):
-        menu = self.Menu(where=self.where(), session=session)
-        #menu.menu_body = 'welcome to the studio.'
+    def make_main_menu(self):
+        menu = self.Menu(where=self.where(), session=self.session)
         menu_section = self.MenuSection()
         score_titles = list(self.score_wrangler.iterate_score_titles_with_years(
-            scores_to_show=session.scores_to_show))
+            scores_to_show=self.session.scores_to_show))
         score_package_short_names = list(self.score_wrangler.iterate_score_package_short_names(
-            scores_to_show=session.scores_to_show))
+            scores_to_show=self.session.scores_to_show))
         menu_section.items_to_number = zip(score_titles, score_package_short_names)
         menu_section.sentence_length_items.append(('k', 'work with interactive material proxies'))
         menu_section.sentence_length_items.append(('m', 'work with Bača materials'))
@@ -74,8 +76,8 @@ class StudioInterface(SCFObject):
         menu.include_studio = False
         return menu
 
-    def make_svn_menu(self, session=None):
-        menu = self.Menu(where=self.where(), session=session)
+    def make_svn_menu(self):
+        menu = self.Menu(where=self.where(), session=self.session)
         menu_section = self.MenuSection()
         menu_section.sentence_length_items.append(('add', 'svn add'))
         menu_section.sentence_length_items.append(('ci', 'svn commit'))
@@ -95,43 +97,42 @@ class StudioInterface(SCFObject):
         menu.menu_sections.append(menu_section)
         return menu
 
-    def manage_svn(self, session=None):
-        session = session or self.Session()
-        session.menu_pieces.append('repository commands')
+    def manage_svn(self):
+        self.session.menu_pieces.append('repository commands')
         while True:
-            menu = self.make_svn_menu(session=session)
+            menu = self.make_svn_menu()
             key, value = menu.run()
             if key == 'b':
                 value = None
                 break
             elif key == 'add':
-                self.global_proxy.svn_add(session=session)
+                self.global_proxy.svn_add()
             elif key == 'add scores':
-                self.score_wrangler.svn_add(session=session)
+                self.score_wrangler.svn_add()
             elif key == 'ci':
-                self.global_proxy.svn_ci(session=session)
+                self.global_proxy.svn_ci()
                 break
             elif key == 'ci scores':
-                self.score_wrangler.svn_ci(session=session)
+                self.score_wrangler.svn_ci()
             elif key == 'pytest':
-                self.global_proxy.run_py_test(session=session)
+                self.global_proxy.run_py_test()
             elif key == 'pytest scores':
-                self.score_wrangler.run_py_test(session=session)
+                self.score_wrangler.run_py_test()
             elif key == 'pytest all':
-                self.run_py_test_all(session=session)
+                self.run_py_test_all()
             elif key == 'st':
-                self.global_proxy.svn_st(session=session)
+                self.global_proxy.svn_st()
             elif key == 'st scores':
-                self.score_wrangler.svn_st(session=session)
+                self.score_wrangler.svn_st()
             elif key == 'up':
-                self.global_proxy.svn_up(session=session)
+                self.global_proxy.svn_up()
                 break
             elif key == 'up scores':
-                self.score_wrangler.svn_up(session=session)
+                self.score_wrangler.svn_up()
                 break
-            if session.test_is_complete:
+            if self.session.test_is_complete:
                 break
-        session.menu_pieces.pop()
+        self.session.menu_pieces.pop()
 
     def run_py_test_all(self, prompt_proceed=True):
         proc = subprocess.Popen('py.test %s %s' % 
@@ -143,45 +144,44 @@ class StudioInterface(SCFObject):
         if prompt_proceed:
             self.proceed()
 
-    def select_interactive_material_proxy(self, menu_header=None, klasses=None):
+    def select_interactive_material_proxy(self, klasses=None):
         material_proxies = list(self.iterate_interactive_material_proxies())
-        menu = self.Menu(where=self.where())
-        menu.menu_header = menu_header
+        menu = self.Menu(where=self.where(), session=self.session)
         menu.items_to_number = material_proxies
         key, value = menu.run()
         return value
     
-    def work_in_studio(self, session=None):
-        session = session or self.Session()
-        session.menu_pieces.append('studio')
+    def work_in_studio(self):
+        self.session.menu_pieces.append('studio')
         while True:
-            session.menu_pieces.append('{} scores'.format(session.scores_to_show))
-            menu = self.make_main_menu(session=session)
+            self.session.menu_pieces.append('{} scores'.format(self.session.scores_to_show))
+            menu = self.make_main_menu()
             key, value = menu.run()
             if key is None:
                 pass
             elif key == 'active':
-                session.scores_to_show = 'active'
+                self.session.scores_to_show = 'active'
             elif key == 'all':
-                session.scores_to_show = 'all'
+                self.session.scores_to_show = 'all'
             elif key == 'k':
-                self.global_proxy.maker_wrangler.manage_makers(session=session)
+                self.global_proxy.maker_wrangler.manage_makers()
             elif key == 'm':
-                self.global_proxy.material_wrangler.manage_materials(session=session)
+                self.global_proxy.material_wrangler.manage_materials()
             elif key == 'mb':
-                session.scores_to_show = 'mothballed'
+                self.session.scores_to_show = 'mothballed'
             elif key == 'some':
-                session.hide_mothballed_scores = True
+                self.session.hide_mothballed_scores = True
             elif key == 'svn':
-                self.manage_svn(session=session)
+                self.manage_svn()
             else:
                 score_package_importable_name = value
-                score_proxy = self.score_wrangler.ScoreProxy(score_package_importable_name)
-                menu_pieces = session.menu_pieces[:]
-                session.menu_pieces = []
-                score_proxy.manage_score(session=session)
-                session.menu_pieces = menu_pieces
-            if session.test_is_complete:
+                score_proxy = self.score_wrangler.ScoreProxy(
+                    score_package_importable_name, session=self.session)
+                menu_pieces = self.session.menu_pieces[:]
+                self.session.menu_pieces = []
+                score_proxy.manage_score()
+                self.session.menu_pieces = menu_pieces
+            if self.session.test_is_complete:
                 break
-            session.menu_pieces.pop()
-        session.menu_pieces.pop()
+            self.session.menu_pieces.pop()
+        self.session.menu_pieces.pop()

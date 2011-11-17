@@ -8,8 +8,8 @@ import sys
 
 class MaterialProxy(PackageProxy):
 
-    def __init__(self, package_importable_name=None):
-        PackageProxy.__init__(self, package_importable_name)
+    def __init__(self, package_importable_name=None, session=None):
+        PackageProxy.__init__(self, package_importable_name, session=session)
 
     ### PUBLIC ATTRIBUTES ###
 
@@ -441,10 +441,9 @@ class MaterialProxy(PackageProxy):
             print '%s: write ly and open' % 'lwo'.rjust(self.help_item_width)
             print ''
 
-    def manage_material(self, menu_header=None):
+    def manage_material(self):
         while True:
-            menu = self.Menu(where=self.where())
-            menu.menu_header = menu_header
+            menu = self.Menu(where=self.where(), session=self.session)
             menu.menu_body = self.material_spaced_name
             menu_section = self.MenuSection()
             if self.is_interactive:

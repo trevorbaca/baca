@@ -6,6 +6,9 @@ import readline
 
 class SCFObject(object):
     
+    def __init__(self, session=None):
+        self.session = session
+
     ### OVERLOADS ###
 
     def __repr__(self):
@@ -51,6 +54,18 @@ class SCFObject(object):
         spaced_class_name = iotools.uppercamelcase_to_underscore_delimited_lowercase(self.class_name)
         spaced_class_name = spaced_class_name.replace('_', ' ')
         return spaced_class_name
+
+    @apply
+    def session():
+        def fget(self):
+            return self._session
+        def fset(self, session):
+            if session is None:
+                self._session = self.Session()
+            else:
+                assert isinstance(session, type(self.Session()))
+                self._session = session
+        return property(**locals())
 
     @property
     def source_file_name(self):

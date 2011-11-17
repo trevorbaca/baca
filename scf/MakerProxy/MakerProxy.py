@@ -5,13 +5,13 @@ import os
 
 class MakerProxy(PackageProxy):
 
-    def __init__(self, maker_class_name=None):
+    def __init__(self, maker_class_name=None, session=None):
         self.maker_class_name = maker_class_name
         if maker_class_name is not None:
             package_importable_name = 'baca.makers.%s' % maker_class_name
         else:
             package_importable_name = None
-        PackageProxy.__init__(self, package_importable_name=package_importable_name)
+        PackageProxy.__init__(self, package_importable_name=package_importable_name, session=session)
 
     ### OVERLOADS ###
 
@@ -77,7 +77,7 @@ class MakerProxy(PackageProxy):
 
     def manage_maker(self, menu_header=None):
         while True:
-            menu = self.Menu(where=self.where())
+            menu = self.Menu(where=self.where(), session=self.session)
             menu.menu_header = menu_header
             menu.menu_body = self.spaced_class_name
             menu_section = self.MenuSection()

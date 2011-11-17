@@ -60,7 +60,7 @@ class InteractiveMaterialProxy(MaterialProxy):
         self._original_material_underscored_name = self.material_underscored_name
         self._original_user_input_wrapper = copy.deepcopy(user_input_wrapper)
         while True:
-            menu = self.Menu(where=self.where())
+            menu = self.Menu(where=self.where(), session=self.session)
             menu_body = '%s - %s - %s - edit interactively'
             menu_body %= (self.purview_name, self.spaced_class_name, self.material_menu_name)
             menu_body = self.append_status_indicator(menu_body)
@@ -174,8 +174,8 @@ class InteractiveMaterialProxy(MaterialProxy):
         self.proceed()
         return True
 
-    def show_demo_input_values(self, menu_header=None):
-        menu = self.Menu(where=self.where(), menu_header=menu_header)
+    def show_demo_input_values(self):
+        menu = self.Menu(where=self.where(), session=self.session)
         menu.menu_body = 'demo values'
         items = []
         for i, (key, value) in enumerate(self.user_input_template.iteritems()):

@@ -5,13 +5,13 @@ import os
 
 class MaterialWrangler(PackageWrangler, PackageProxy):
 
-    def __init__(self, purview_package_short_name):
+    def __init__(self, purview_package_short_name, session=None):
         if purview_package_short_name == 'baca':
             package_importable_name = '%s.materials' % purview_package_short_name
         else:   
             package_importable_name = '%s.mus.materials' % purview_package_short_name
-        PackageProxy.__init__(self, package_importable_name=package_importable_name)
-        PackageWrangler.__init__(self, directory_name=self.directory_name)
+        PackageProxy.__init__(self, package_importable_name=package_importable_name, session=session)
+        PackageWrangler.__init__(self, directory_name=self.directory_name, session=session)
 
     ### PUBLIC ATTRIBUTES ###
 
@@ -59,9 +59,9 @@ class MaterialWrangler(PackageWrangler, PackageProxy):
                 summary = summary + ' (@)'
             yield summary
 
-    def manage_materials(self, menu_header=None, command_string=None):
+    def manage_materials(self, command_string=None):
         while True:
-            menu = self.Menu(where=self.where(), menu_header=menu_header)
+            menu = self.Menu(where=self.where(), session=self.session)
             menu.menu_body = 'shared materials'
             menu_section = self.MenuSection()
             menu_section.items_to_number = list(self.iterate_material_summaries())

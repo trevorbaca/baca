@@ -5,10 +5,10 @@ from baca.scf.PackageProxy import PackageProxy
 
 class GlobalProxy(PackageProxy):
     
-    def __init__(self):
-        PackageProxy.__init__(self, 'baca')
-        self._maker_wrangler = MakerWrangler()
-        self._material_wrangler = MaterialWrangler('baca')
+    def __init__(self, session=None):
+        PackageProxy.__init__(self, 'baca', session=session)
+        self._maker_wrangler = MakerWrangler(session=session)
+        self._material_wrangler = MaterialWrangler('baca', session=session)
 
     ### PUBLIC ATTRIBUTES ###
 

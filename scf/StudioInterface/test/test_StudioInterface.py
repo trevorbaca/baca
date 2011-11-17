@@ -19,9 +19,9 @@ def test_StudioInterface_02():
     '''Main menu.
     '''
 
-    studio_interface = baca.scf.StudioInterface()
     session = baca.scf.menuing.Session(test='menu_lines')
-    studio_interface.work_in_studio(session=session)
+    studio_interface = baca.scf.StudioInterface(session=session)
+    studio_interface.work_in_studio()
     
     assert session.test_result == [  
      'Studio - active scores',
@@ -45,9 +45,9 @@ def test_StudioInterface_03():
     '''Main menu to hidden menu.
     '''
 
-    studio_interface = baca.scf.StudioInterface()
     session = baca.scf.menuing.Session(user_input='hidden', test='menu_lines')
-    studio_interface.work_in_studio(session=session)
+    studio_interface = baca.scf.StudioInterface(session=session)
+    studio_interface.work_in_studio()
 
     assert session.test_result == [
      '     active: show active scores only',   
@@ -69,9 +69,9 @@ def test_StudioInterface_04():
     '''Main menu to score menu.
     '''
 
-    studio_interface = baca.scf.StudioInterface()
     session = baca.scf.menuing.Session(user_input='1', test='menu_lines')
-    studio_interface.work_in_studio(session=session)
+    studio_interface = baca.scf.StudioInterface(session=session)
+    studio_interface.work_in_studio()
 
     assert session.test_result == [
      "L'archipel du corps",
@@ -95,9 +95,9 @@ def test_StudioInterface_05():
     '''Main menu. Mothballed scores only.
     '''
 
-    studio_interface = baca.scf.StudioInterface()
     session = baca.scf.menuing.Session(user_input='mb', test='menu_lines')
-    studio_interface.work_in_studio(session=session)
+    studio_interface = baca.scf.StudioInterface(session=session)
+    studio_interface.work_in_studio()
     
     assert session.test_result == [  
      'Studio - mothballed scores',
@@ -120,9 +120,9 @@ def test_StudioInterface_06():
     '''Main menu to score menu to tags menu.
     '''
 
-    studio_interface = baca.scf.StudioInterface()
     session = baca.scf.menuing.Session(user_input='1\ntags', test='menu_lines')
-    studio_interface.work_in_studio(session=session)
+    studio_interface = baca.scf.StudioInterface(session=session)
+    studio_interface.work_in_studio()
 
     assert session.test_result == [
      "L'archipel du corps - tags",
@@ -140,9 +140,9 @@ def test_StudioInterface_07():
     '''Main menu to svn menu.
     '''
 
-    studio_interface = baca.scf.StudioInterface()
     session = baca.scf.menuing.Session(user_input='svn', test='menu_lines')
-    studio_interface.work_in_studio(session=session)
+    studio_interface = baca.scf.StudioInterface(session=session)
+    studio_interface.work_in_studio()
 
     assert session.test_result == ['Studio - active scores - repository commands',
      '',
@@ -166,19 +166,21 @@ def test_StudioInterface_08():
     '''Main menu header is the same even after state change to secondary menu.
     '''
 
-    studio_interface = baca.scf.StudioInterface()
 
     session = baca.scf.menuing.Session(user_input='', test='menu_lines')
-    studio_interface.work_in_studio(session=session)
+    studio_interface = baca.scf.StudioInterface(session=session)
+    studio_interface.work_in_studio()
     menu_header = session.test_result[0]
     assert menu_header == 'Studio - active scores'
 
     session = baca.scf.menuing.Session(user_input='svn', test='menu_lines')
-    studio_interface.work_in_studio(session=session)
+    studio_interface = baca.scf.StudioInterface(session=session)
+    studio_interface.work_in_studio()
     menu_header = session.test_result[0]
     assert menu_header == 'Studio - active scores - repository commands'
 
     session = baca.scf.menuing.Session(user_input='svn\nb', test='menu_lines')
-    studio_interface.work_in_studio(session=session)
+    studio_interface = baca.scf.StudioInterface(session=session)
+    studio_interface.work_in_studio()
     menu_header = session.test_result[0]
     assert menu_header == 'Studio - active scores'

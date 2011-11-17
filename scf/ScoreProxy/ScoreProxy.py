@@ -4,16 +4,16 @@ import os
 
 class ScoreProxy(PackageProxy):
 
-    def __init__(self, score_package_short_name):
+    def __init__(self, score_package_short_name, session=None):
         import baca
-        PackageProxy.__init__(self, score_package_short_name)
+        PackageProxy.__init__(self, score_package_short_name, session=session)
         self._dist_proxy = baca.scf.DistProxy(score_package_short_name)
         self._etc_proxy = baca.scf.EtcProxy(score_package_short_name)
         self._exg_proxy = baca.scf.ExgProxy(score_package_short_name)
         self._mus_proxy = baca.scf.MusProxy(score_package_short_name)
-        self._chunk_wrangler = baca.scf.ChunkWrangler(score_package_short_name)
-        self._material_wrangler = baca.scf.MaterialWrangler(score_package_short_name)
-        self._maker_wrangler = baca.scf.MakerWrangler()
+        self._chunk_wrangler = baca.scf.ChunkWrangler(score_package_short_name, session=session)
+        self._material_wrangler = baca.scf.MaterialWrangler(score_package_short_name, session=session)
+        self._maker_wrangler = baca.scf.MakerWrangler(session=session)
 
     ### PUBLIC ATTRIBUTES ###
 
@@ -120,10 +120,10 @@ class ScoreProxy(PackageProxy):
     def create_package_structure(self):
         self.fix_score_package_directory_structure(is_interactive=False)
 
-    def edit_instrumentation_interactively(self, session=None):
+    def edit_instrumentation_interactively(self):
         import baca
         instrumentation = self.get_tag('instrumentation')
-        editor = baca.scf.menuing.InstrumentationEditor(session=session, instrumentation=instrumentation)
+        editor = baca.scf.menuing.InstrumentationEditor(session=self.session, instrumentation=instrumentation)
         editor.edit()
 
     def fix_package_structure(self, is_interactive=True):
@@ -155,9 +155,8 @@ class ScoreProxy(PackageProxy):
             initializer.write(''.join(lines))
             initializer.close()
 
-    def make_main_menu(self, session=None):
-        session = session or self.Session()
-        menu = self.Menu(where=self.where(), session=session)
+    def make_main_menu(self):
+        menu = self.Menu(where=self.where(), session=self.session)
         menu_section = self.MenuSection()
         menu_section.menu_section_title = 'Chunks'
         menu_section.items_to_number = self.chunk_wrangler.iterate_package_spaced_names()
@@ -179,28 +178,27 @@ class ScoreProxy(PackageProxy):
         menu.hidden_items.append(('tags', 'work with tags'))
         return menu
 
-    def manage_score(self, session=None):
-        session = session or self.Session()
-        session.menu_pieces.append(self.title)
+    def manage_score(self):
+        self.session.menu_pieces.append(self.title)
         while True:
-            menu = self.make_main_menu(session=session)
+            menu = self.make_main_menu()
             key, value = menu.run()
             if key is None:
                 pass
             elif key == 'b':
                 break
             elif key == 'ch':
-                self.chunk_wrangler.create_chunk_interactively(session=session)
+                self.chunk_wrangler.create_chunk_interactively()
             elif key == 'inst':
-                self.edit_instrumentation_interactively(session=session)
+                self.edit_instrumentation_interactively()
             elif key == 'mi':
-                self.material_wrangler.create_interactive_material_interactively(session=session)
+                self.material_wrangler.create_interactive_material_interactively()
             elif key == 'ms':
-                self.material_wrangler.create_static_material_package_interactively(session=session)
+                self.material_wrangler.create_static_material_package_interactively()
             elif key == 'svn':
-                self.manage_svn(session=session)
+                self.manage_svn()
             elif key == 'tags':
-                self.manage_tags(session=session)
+                self.manage_tags()
             elif key.startswith('h'):
                 chunk_spaced_name = value
                 chunk_underscored_name = chunk_spaced_name.replace(' ', '_')
@@ -208,20 +206,20 @@ class ScoreProxy(PackageProxy):
                     self.chunk_wrangler.package_importable_name, chunk_underscored_name)
                 chunk_proxy = self.chunk_wrangler.ChunkProxy(package_importable_name)
                 chunk_proxy.title = self.title
-                chunk_proxy.manage_chunk(session=session)
+                chunk_proxy.manage_chunk()
             elif key.startswith('m'):
                 material_underscored_name = value
                 package_importable_name = '{}.{}'.format(
                     self.material_wrangler.package_importable_name, material_underscored_name)
                 material_proxy = self.material_wrangler.get_package_proxy(package_importable_name)
-                material_proxy.manage_material(session=session)
-            if session.test_is_complete:
+                material_proxy.manage_material()
+            if self.session.test_is_complete:
                 break
-        session.menu_pieces.pop()
+        self.session.menu_pieces.pop()
 
-    def manage_svn(self, session=None):
+    def manage_svn(self):
         while True:
-            menu = self.Menu(where=self.where())
+            menu = self.Menu(where=self.where(), session=self.session)
             menu.menu_header = menu_header
             menu.menu_body = 'repository commands'
             menu_section = self.MenuSection()
