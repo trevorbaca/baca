@@ -56,10 +56,8 @@ class UserInputGetter(MenuObject):
         menu_lines = []
         try:
             if clear_terminal:
-                if not response and not self.session.test:
+                if not user_response and not self.session.test:
                     self.clear_terminal()
-                    #if self.menu_title is not None:
-                    #    print self.menu_title.capitalize() + '\n'
             values = []
             i = 0
             while i < len(self.prompts):
@@ -68,32 +66,32 @@ class UserInputGetter(MenuObject):
                 prompt = prompt + '> '
                 menu_lines.append(prompt)
                 while True:
-                    response = self.pop_next_response_from_user_input()
-                    if not response and not self.session.test:
-                        response = raw_input(prompt)
+                    user_response = self.pop_next_user_response_from_user_input()
+                    if not user_response and not self.session.test:
+                        user_response = raw_input(prompt)
                         print ''
-                    if self.handle_hidden_key(response):
+                    if self.handle_hidden_key(user_response):
                         continue
-                    elif response == 'b':
+                    elif user_response == 'b':
                         #return
                         break
-                    elif response == 'help':
+                    elif user_response == 'help':
                         if i < len(self.helps):
                             print self.helps[i].capitalize() + '\n'
                         else:
                             print 'Help string not available.\n'
-                    elif response == 'prev':
+                    elif user_response == 'prev':
                         values.pop()
                         i = i - 1
                         break
-                    elif response == 'skip':
+                    elif user_response == 'skip':
                         #return
                         break
                     else:
                         try:
-                            value = eval(response)
+                            value = eval(user_response)
                         except (NameError, SyntaxError):
-                            value = response
+                            value = user_response
                         if i < len(self.tests):
                             input_test = self.tests[i]
                             if input_test(value):

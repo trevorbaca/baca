@@ -110,15 +110,18 @@ class MenuObject(SCFObject):
     def make_tab(self, n):
         return 4 * n * ' '
 
-    def pop_next_response_from_user_input(self):
-        if self.session.user_input:
-            user_input = self.session.user_input.split('\n')
-            response = user_input[0]
-            user_input = '\n'.join(user_input[1:])
+    def pop_next_user_response_from_user_input(self):
+        if self.session.user_input is None:
+            return None
+        elif self.session.user_input == '':
+            self.session.user_input = None
+            return ''
         else:
-            response, user_input = None, None
-        self.session.user_input = user_input
-        return response
+            user_input = self.session.user_input.split('\n')
+            user_response = user_input[0]
+            user_input = '\n'.join(user_input[1:])
+            self.session.user_input = user_input
+            return user_response
 
     def show_menu_client(self):
         print self.make_tab(1),

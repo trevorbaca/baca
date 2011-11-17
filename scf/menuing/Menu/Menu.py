@@ -88,45 +88,66 @@ class Menu(MenuObject, SCFObject):
 
     ### PUBLIC METHODS ###
 
-    def add_hidden_menu_items(self, all_keys, all_values):
+    def add_hidden_menu_items(self):
         for key, value in self.default_hidden_items:
-            all_keys.append(key)
-            all_values.append(value)
+            self.all_keys.append(key)
+            self.all_values.append(value)
         for key, value in self.hidden_items:
-            all_keys.append(key)
-            all_values.append(value)
-        
-    def display(self, response=None):
-        if self.should_clear_terminal:
-            if not response and self.session.test is None:
-                self.clear_terminal()
-        menu_lines, all_keys, all_values = self.make_menu_lines_keys_and_values()
-        if not response and self.session.test == 'menu_lines':
-            test_result = menu_lines
-        else:
-            test_result = None
-        self.add_hidden_menu_items(all_keys, all_values)
-        if not response and not self.session.test:
-            for menu_line in menu_lines:
+            self.all_keys.append(key)
+            self.all_values.append(value)
+
+    def change_user_response_to_value(self, user_response):
+        if user_response:
+            pair_dictionary = dict(zip(self.all_keys, self.all_values))
+            return pair_dictionary[user_response]
+
+    def conditionally_clear_terminal(self):
+        if self.session.is_displayable and self.should_clear_terminal:
+            self.clear_terminal()
+
+    def conditionally_display_menu_lines_and_get_user_response(self):
+        if self.session.is_displayable:
+            for menu_line in self.menu_lines:
                 print menu_line
             while True:
-                response = raw_input('scf> ')
+                user_response = raw_input('scf> ')
                 print ''
-                if response in all_keys:
-                    break
-        if response:
-            pair_dictionary = dict(zip(all_keys, all_values))
-            value = pair_dictionary[response]
+                if user_response in self.all_keys:
+                    return user_response
         else:
-            value = None
-        self.session.test_result = test_result
-        return response, value
+            user_response = self.pop_next_user_response_from_user_input()
+            if user_response == '':
+                user_response = None
+            if user_response is None:
+                if self.session.test == 'menu_lines':
+                    self.session.test_result = self.menu_lines
+            return user_response
+
+    def display(self):
+        print 'in display'
+        print 'self.session.test {!r}'.format(self.session.test)
+        print 'self.session.test_result {!r}'.format(self.session.test_result)
+        print 'self.session.user_input {!r}'.format(self.session.user_input)
+        print 'self.session.user_input_is_consumed {!r}'.format(self.session.user_input_is_consumed)
+        self.conditionally_clear_terminal()
+        self.make_menu_lines_keys_and_values()
+        self.add_hidden_menu_items()
+        user_response = self.conditionally_display_menu_lines_and_get_user_response()
+        value = self.change_user_response_to_value(user_response)
+        print '\nleaving display'
+        print 'self.session.test {!r}'.format(self.session.test)
+        print 'self.session.test_result {!r}'.format(self.session.test_result)
+        print 'self.session.user_input {!r}'.format(self.session.user_input)
+        print 'self.session.user_input_is_consumed {!r}'.format(self.session.user_input_is_consumed)
+        print 'user_response {!r}'.format(user_response)
+        print 'value {!r}'.format(value)
+        return user_response, value
 
     def make_menu_lines_keys_and_values(self):
-        menu_lines, all_keys, all_values = [], [], []
-        menu_lines.extend(self.make_menu_title_lines())
-        menu_lines.extend(self.make_menu_section_lines(all_keys, all_values))
-        return menu_lines, all_keys, all_values
+        self.menu_lines, self.all_keys, self.all_values = [], [], []
+        self.menu_lines.extend(self.make_menu_title_lines())
+        self.menu_lines.extend(self.make_menu_section_lines(self.all_keys, self.all_values))
+        #return menu_lines, all_keys, all_values
 
     def make_menu_lines(self):
         menu_lines, keys, values = self.make_menu_lines_keys_and_values()
@@ -140,30 +161,35 @@ class Menu(MenuObject, SCFObject):
         return menu_lines
         
     def make_menu_title_lines(self):
-        #print self.session
         menu_lines = []
         if not self.hide_menu:
             menu_lines.append(self.session.menu_header.capitalize())
             menu_lines.append('')
-        #print 'FOO', menu_lines
         return menu_lines
 
     def run(self):
         should_clear_terminal, hide_menu = True, False
         while True:
-            response = self.pop_next_response_from_user_input()
             self.should_clear_terminal, self.hide_menu = should_clear_terminal, hide_menu
-            key, value = self.display(response=response)
+            key, value = self.display()
+            print '\nin run'
+            print 'key {!r}'.format(key)
+            print 'value {!r}'.format(value)
             should_clear_terminal, hide_menu = False, True
             result = self.handle_hidden_key(key)
+            print 'result {!r}'.format(result)
             if result is True:
                 pass
             elif bool(result):
                 self.session.test_result = result
-                return None, None
+                key, value = None, None
+                break
             elif key == 'b':
-                return key, None
+                value = None
+                break
             elif key == 'redraw':
                 should_clear_terminal, hide_menu = True, False
             else:
-                return key, value
+                break
+        print 'leaving run ...'
+        return key, value

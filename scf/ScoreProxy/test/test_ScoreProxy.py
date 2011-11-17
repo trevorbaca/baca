@@ -56,16 +56,7 @@ def test_ScoreProxy_01():
         baca.scf.MusProxy('manos'))
 
 
-# TODO: write score method tests
 def test_ScoreProxy_02():
-    '''Methods.
-    '''
-
-    score_proxy = baca.scf.ScoreProxy('manos')    
-
-
-
-def test_ScoreProxy_03():
     '''Main menu.
     '''
 
@@ -91,7 +82,7 @@ def test_ScoreProxy_03():
      '']
 
 
-def test_ScoreProxy_04():
+def test_ScoreProxy_03():
     '''Main menu to hidden menu.
     '''
 
@@ -114,7 +105,7 @@ def test_ScoreProxy_04():
      '']
 
 
-def test_ScoreProxy_05():
+def test_ScoreProxy_04():
     '''Manage tags menu.
     '''
 
@@ -134,7 +125,7 @@ def test_ScoreProxy_05():
      '']
 
 
-def test_ScoreProxy_06():
+def test_ScoreProxy_05():
     '''Add and delete tag interactively.
     '''
 

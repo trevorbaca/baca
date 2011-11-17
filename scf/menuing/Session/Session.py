@@ -1,6 +1,7 @@
 class Session(object):
     
     def __init__(self, menu_pieces=None, scores_to_show='active', test=None, user_input=None):
+        self._session_once_had_user_input = False
         if menu_pieces is None:
             self.menu_pieces = []
         else:
@@ -22,6 +23,10 @@ class Session(object):
         return '\n'.join(self.formatted_attributes)
 
     ### PUBLIC ATTRIBUTES ###
+
+    @property
+    def is_displayable(self):
+        return self.user_input is None and self.test is None
 
     @property
     def menu_header(self):
@@ -53,8 +58,25 @@ class Session(object):
         return False
 
     @property
+    def session_once_had_user_input(self):
+        return self._session_once_had_user_input
+
+    @apply
+    def user_input():
+        def fget(self):
+            return self._user_input
+        def fset(self, user_input):
+            assert isinstance(user_input, (str, type(None)))
+            self._user_input = user_input
+            if isinstance(user_input, str):
+                self._session_once_had_user_input = True
+        return property(**locals())
+
+    @property
     def user_input_is_consumed(self):
-        return bool(self.user_input == '')
+        #return bool(self.user_input == '')
+        #return self.user_input in (None, '')
+        return self.user_input is None
     
     ### PUBLIC METHODS ###
 

@@ -7,10 +7,10 @@ class ScoreProxy(PackageProxy):
     def __init__(self, score_package_short_name, session=None):
         import baca
         PackageProxy.__init__(self, score_package_short_name, session=session)
-        self._dist_proxy = baca.scf.DistProxy(score_package_short_name)
-        self._etc_proxy = baca.scf.EtcProxy(score_package_short_name)
-        self._exg_proxy = baca.scf.ExgProxy(score_package_short_name)
-        self._mus_proxy = baca.scf.MusProxy(score_package_short_name)
+        self._dist_proxy = baca.scf.DistProxy(score_package_short_name, session=session)
+        self._etc_proxy = baca.scf.EtcProxy(score_package_short_name, session=session)
+        self._exg_proxy = baca.scf.ExgProxy(score_package_short_name, session=session)
+        self._mus_proxy = baca.scf.MusProxy(score_package_short_name, session=session)
         self._chunk_wrangler = baca.scf.ChunkWrangler(score_package_short_name, session=session)
         self._material_wrangler = baca.scf.MaterialWrangler(score_package_short_name, session=session)
         self._maker_wrangler = baca.scf.MakerWrangler(session=session)
