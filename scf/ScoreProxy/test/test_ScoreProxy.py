@@ -26,7 +26,7 @@ def test_ScoreProxy_01():
     assert score_proxy.is_score_local_purview
     assert not score_proxy.is_studio_global_purview
 
-    instrumentation = scoretools.InstrumentationSpecifier()
+    instrumentation = scoretools.InstrumentationSpecifierEditor()
     performer_1 = scoretools.Performer('Alto Flute')
     performer_1.instruments.append(instrumenttools.AltoFlute())
     instrumentation.performers.append(performer_1)

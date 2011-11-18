@@ -1,7 +1,7 @@
 from baca.scf.menuing.InteractiveEditor import InteractiveEditor
 
 
-class InstrumentationEditor(InteractiveEditor):
+class InstrumentationSpecifierEditor(InteractiveEditor):
 
     def __init__(self, session=None, instrumentation=None):
         self.session = session
@@ -25,7 +25,7 @@ class InstrumentationEditor(InteractiveEditor):
         from abjad.tools import mathtools
         from abjad.tools import scoretools
         self.session.menu_pieces.append('edit instrumentation')
-        self.instrumentation = self.instrumentation or scoretools.InstrumentationSpecifier()
+        self.instrumentation = self.instrumentation or scoretools.InstrumentationSpecifierEditor()
         while True:
             menu = self.make_main_menu()
             key, value = menu.run()
