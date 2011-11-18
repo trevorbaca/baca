@@ -173,7 +173,7 @@ class ScoreProxy(PackageProxy):
         menu.menu_sections.append(menu_section)
         menu_section = self.MenuSection()
         menu_section.menu_section_title = 'Admin'
-        menu_section.sentence_length_items.append(('inst', 'edit instrumentation'))
+        menu_section.sentence_length_items.append(('instr', 'edit instrumentation'))
         menu.menu_sections.append(menu_section)
         menu.hidden_items.append(('svn', 'work with repository'))
         menu.hidden_items.append(('tags', 'work with tags'))
@@ -190,7 +190,7 @@ class ScoreProxy(PackageProxy):
                 break
             elif key == 'ch':
                 self.chunk_wrangler.create_chunk_interactively()
-            elif key == 'inst':
+            elif key == 'instr':
                 self.edit_instrumentation_interactively()
             elif key == 'mi':
                 self.material_wrangler.create_interactive_material_interactively()
