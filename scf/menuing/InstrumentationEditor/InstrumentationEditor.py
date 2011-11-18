@@ -9,12 +9,16 @@ class InstrumentationEditor(InteractiveEditor):
 
     ### PUBLIC METHODS ###
 
+    def add_instrument_to_performer_interactively(self, performer):
+        instrument = self.select_instrument_from_instrumenttools_interactively()
+        performer.instruments.append(instrument)
+        return instrument
+        
     def add_performer_to_instrumentation_interactively(self):
         from abjad.tools import scoretools
         performer = scoretools.Performer()
         self.instrumentation.performers.append(performer)
-        instrument = self.select_instrument_from_instrumenttools_interactively()
-        performer.instruments.append(instrument)
+        instrument = self.add_instrument_to_performer_interactively(performer)
         performer.name = instrument.instrument_name.contents_string
 
     def edit(self):
@@ -40,15 +44,33 @@ class InstrumentationEditor(InteractiveEditor):
             if performer_number is not None:
                 performer = self.get_performer_from_performer_number(performer_number)
                 self.edit_performer_interactively(performer)
-            #if self.session.session_is_complete:
-            #    break 
         self.session.menu_pieces.pop()
         instrumentation = self.instrumentation
         self.instrumentation = None
         return instrumentation
 
-    def edit_performer_instruments_interactively(self, performer):
+    def edit_performer_instrument_interactively(self, performer, instrument):
         self.print_not_implemented()
+
+    def edit_performer_instruments_interactively(self, performer):
+        self.session.menu_pieces.append('instruments')
+        while True:
+            menu = self.make_edit_performer_instruments_menu(performer)
+            key, value = menu.run()
+            if key == 'b':
+                break
+            elif key == 'add':
+                self.add_instrument_to_performer_interactively(performer)
+            else:
+                try:
+                    instrument_number = int(key)
+                    instrument_index = instrument_number - 1
+                    instrument = performer.instruments[instrument_index]
+                except:
+                    instrument = None
+                if instrument is not None:
+                    self.edit_performer_instrument_interactively(performer, instrument)
+        self.session.menu_pieces.pop()
 
     def edit_performer_interactively(self, performer):
         self.session.menu_pieces.append('performers')
@@ -68,8 +90,6 @@ class InstrumentationEditor(InteractiveEditor):
                 self.name_performer_interactively(performer)
             else:
                 pass
-            #if self.session.session_is_complete:
-            #    break
         self.session.menu_pieces.pop()
         
     def get_performer_from_performer_number(self, performer_number):
@@ -91,10 +111,19 @@ class InstrumentationEditor(InteractiveEditor):
     def make_main_menu(self):
         menu = self.Menu(where=self.where(), session=self.session)
         menu_section = self.MenuSection()
-        menu_section.menu_section_title = 'performers'
         menu_section.items_to_number = self.instrumentation_to_lines(self.instrumentation)
         menu_section.sentence_length_items.append(('add', 'add performer'))
         menu.menu_sections.append(menu_section)
+        return menu
+
+    def make_edit_performer_instruments_menu(self, performer):
+        menu = self.Menu(where=self.where(), session=self.session) 
+        menu_section = self.MenuSection()
+        menu.menu_sections.append(menu_section)
+        menu_section.menu_section_title = 'instruments'
+        instrument_names = [x.instrument_name.contents_string for x in performer.instruments]
+        menu_section.items_to_number = instrument_names
+        menu_section.sentence_length_items.append(('add', 'add instrument'))
         return menu
 
     def make_edit_performer_menu(self, performer):
@@ -103,13 +132,24 @@ class InstrumentationEditor(InteractiveEditor):
         menu.menu_sections.append(menu_section)
         menu_section.menu_section_title = self.performer_to_one_line_summary(performer)
         menu_section.sentence_length_items.append(('del', 'delete performer'))
-        menu_section.sentence_length_items.append(('instr', "edit performer instruments"))
+        menu_section.sentence_length_items.append(('instr', "add or remove instruments"))
         menu_section.sentence_length_items.append(('mv', 'move performer up or down'))
-        menu_section.sentence_length_items.append(('name', '(re)name performer'))
+        menu_section.sentence_length_items.append(('ren', 'rename performer'))
         return menu
 
     def move_performer_interactively(self, performer):
-        self.print_not_implemented()
+        performer_index = self.instrumentation.performers.index(performer)
+        performer_number = performer_index + 1
+        print '{} is currently {} of {}.\n'.format(
+            performer.name, performer_number, self.instrumentation.performer_count)
+        new_performer_number = raw_input('New performer number> ')
+        try:
+            new_performer_number = int(new_performer_number)
+        except:
+            return
+        new_performer_index = new_performer_number - 1
+        self.instrumentation.performers.remove(performer)
+        self.instrumentation.performers.insert(new_performer_index, performer)
 
     def name_performer_interactively(self, performer):
         performer_name = raw_input('Performer name> ')
