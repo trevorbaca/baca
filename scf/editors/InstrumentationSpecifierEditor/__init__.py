@@ -1,1 +1,1 @@
-from InstrumentationEditor import InstrumentationEditor
+from InstrumentationSpecifierEditor import InstrumentationSpecifierEditor
