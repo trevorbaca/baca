@@ -21,6 +21,7 @@ from StaticMaterialProxy import StaticMaterialProxy
 from StudioInterface import StudioInterface
 from TrevorBaca import TrevorBaca
 from UserInputWrapper import UserInputWrapper
+import editors
 import exceptions
 import helpers
 import menuing
