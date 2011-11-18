@@ -124,7 +124,8 @@ class ScoreProxy(PackageProxy):
         import baca
         instrumentation = self.get_tag('instrumentation')
         editor = baca.scf.menuing.InstrumentationEditor(session=self.session, instrumentation=instrumentation)
-        editor.edit()
+        instrumentation = editor.edit()
+        self.add_tag('instrumentation', instrumentation)
 
     def fix_package_structure(self, is_interactive=True):
         if self.package_short_name == 'recursif':
