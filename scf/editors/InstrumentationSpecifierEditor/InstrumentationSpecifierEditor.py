@@ -19,7 +19,7 @@ class InstrumentationSpecifierEditor(InteractiveEditor):
         performer = scoretools.Performer()
         self.instrumentation.performers.append(performer)
         instrument = self.add_instrument_to_performer_interactively(performer)
-        performer.name = instrument.instrument_name.contents_string
+        performer.name = instrument.instrument_name
 
     def edit(self):
         from abjad.tools import mathtools
@@ -116,12 +116,23 @@ class InstrumentationSpecifierEditor(InteractiveEditor):
         menu.menu_sections.append(menu_section)
         return menu
 
+    def make_edit_performer_instrument_menu(self, performer, instrument):
+        menu = self.Menu(where=self.where(), session=self.session) 
+        menu_section = self.MenuSection()
+        menu.menu_sections.append(menu_section)
+        menu_section.menu_section_title = '{}: {}'.format(performer.name, instrument.name)
+        menu_section.sentence_length_items.append(('del', 'delete performer'))
+        menu_section.sentence_length_items.append(('instr', "add or remove instruments"))
+        menu_section.sentence_length_items.append(('mv', 'move performer up or down'))
+        menu_section.sentence_length_items.append(('ren', 'rename performer'))
+        pass
+
     def make_edit_performer_instruments_menu(self, performer):
         menu = self.Menu(where=self.where(), session=self.session) 
         menu_section = self.MenuSection()
         menu.menu_sections.append(menu_section)
         menu_section.menu_section_title = 'instruments'
-        instrument_names = [x.instrument_name.contents_string for x in performer.instruments]
+        instrument_names = [x.instrument_name for x in performer.instruments]
         menu_section.items_to_number = instrument_names
         menu_section.sentence_length_items.append(('add', 'add instrument'))
         return menu
@@ -160,10 +171,10 @@ class InstrumentationSpecifierEditor(InteractiveEditor):
         if not performer.instruments:
             result = '{}: (no instruments assigned)'.format(performer.name)
         elif len(performer.instruments) == 1 and performer.name == \
-            performer.instruments[0].instrument_name.contents_string:
+            performer.instruments[0].instrument_name:
             result = '{}'.format(performer.name)
         else:
-            instruments = ', '.join([x.instrument_name.contents_string for x in performer.instruments])
+            instruments = ', '.join([x.instrument_name for x in performer.instruments])
             result = '{} ({})'.format(performer.name, instruments)
         return result
 
