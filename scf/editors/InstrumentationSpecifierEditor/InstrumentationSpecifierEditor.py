@@ -3,9 +3,10 @@ from baca.scf.menuing.InteractiveEditor import InteractiveEditor
 
 class InstrumentationSpecifierEditor(InteractiveEditor):
 
-    def __init__(self, session=None, instrumentation_specifier=None):
+    def __init__(self, session=None, target=None):
         InteractiveEditor.__init__(self, session=session)
-        self.instrumentation_specifier = instrumentation_specifier
+        assert isinstance(target, (type(self.target_class()), type(None)))
+        self.target = target
 
     ### PUBLIC ATTRIBUTES ###
 
@@ -15,68 +16,72 @@ class InstrumentationSpecifierEditor(InteractiveEditor):
         return baca.scf.editors.PerformerEditor
 
     @property
+    def menu_piece(self):
+        return 'instrumentation'
+
+    @property
     def summary_lines(self):
         result = []
-        for performer in self.instrumentation_specifier.performers:
-            performer_editor = self.PerformerEditor(session=self.session, performer=performer)
+        for performer in self.target.performers:
+            performer_editor = self.PerformerEditor(session=self.session, target=performer)
             result.extend(performer_editor.summary_lines)
         return result
+
+    @property
+    def target_class(self):
+        from abjad.tools import scoretools
+        return scoretools.InstrumentationSpecifier
 
     ### PUBLIC METHODS ###
 
     def add_performer_interactively(self):
         from abjad.tools import scoretools
         performer = scoretools.Performer()
-        self.instrumentation_specifier.performers.append(performer)
-        performer_editor = self.PerformerEditor(session=self.session, performer=performer)
+        self.target.performers.append(performer)
+        performer_editor = self.PerformerEditor(session=self.session, target=performer)
         instrument = performer_editor.add_instrument_interactively()
         performer.name = instrument.instrument_name
         return performer_editor
 
     def delete_performer_interactively(self):
-        self.print_not_implemented()
-
-    def edit_interactively(self):
-        from abjad.tools import mathtools
-        from abjad.tools import scoretools
-        self.session.menu_pieces.append('instrumentation_specifier')
-        self.instrumentation_specifier = self.instrumentation_specifier or scoretools.InstrumentationSpecifier()
-        while True:
-            menu = self.make_main_menu()
-            key, value = menu.run()
-            performer_number = None
-            if key is None:
-                pass
-            elif key == 'add':
-                self.add_performer_interactively()
-            elif key == 'b':
-                break
-            elif key == 'del':
-                self.delete_performer_interactively()
-            elif key == 'mv':
-                self.move_performer_interactively()
-            else:
-                try:
-                    performer_number = int(key)
-                except ValueError:
-                    pass
-            if performer_number is not None:
-                performer = self.get_performer_from_performer_number(performer_number)
-                #self.edit_performer_interactively(performer)
-                performer_editor = self.PerformerEditor(session=self.session, performer=performer)
-        self.session.menu_pieces.pop()
-        instrumentation_specifier = self.instrumentation_specifier
-        self.instrumentation_specifier = None
-        return instrumentation_specifier
+        number = raw_input('number> ')
+        try:
+            number = int(number)
+        except:
+            pass
+        index = number - 1
+        del(self.target.performers[index])
 
     def get_performer_from_performer_number(self, performer_number):
         assert isinstance(performer_number, int)
         performer_index = performer_number - 1
         try:
-            performer = self.instrumentation_specifier.performers[performer_index]
+            performer = self.target.performers[performer_index]
         except:
             performer = None
         return performer
+
+    def handle_main_menu_response(self, key, value):
+        if key is None:
+            return True
+        elif key == 'add':
+            self.add_performer_interactively()
+        elif key == 'b':
+            return True
+        elif key == 'del':
+            self.delete_performer_interactively()
+        elif key == 'mv':
+            self.move_performer_interactively()
+        else:
+            try:
+                performer_number = int(key)
+            except:
+                performer_number = None
+            print performer_number, 'FOO'
+            if performer_number is not None:
+                performer = self.get_performer_from_performer_number(performer_number)
+                performer_editor = self.PerformerEditor(session=self.session, target=performer)
+                performer_editor.edit_interactively()
 
     def make_main_menu(self):
         menu = self.Menu(where=self.where(), session=self.session)
@@ -89,18 +94,18 @@ class InstrumentationSpecifierEditor(InteractiveEditor):
         return menu
 
     def move_performer_interactively(self):
-        old_performer_number = raw_input('old number> ')
+        old_number = raw_input('old number> ')
         try:
-            old_performer_number = int(old_performer_number)
+            old_number = int(old_number)
         except:
             return
-        old_performer_index = old_performer_number - 1
-        performer = self.instrumentation_specifier.performers[old_performer_index]
-        new_performer_number = raw_input('new number> ')
+        old_index = old_number - 1
+        performer = self.target.performers[old_index]
+        new_number = raw_input('new number> ')
         try:
-            new_performer_number = int(new_performer_number)
+            new_number = int(new_number)
         except:
             return
-        new_performer_index = new_performer_number - 1
-        self.instrumentation_specifier.performers.remove(performer)
-        self.instrumentation_specifier.performers.insert(new_performer_index, performer)
+        new_index = new_number - 1
+        self.target.performers.remove(performer)
+        self.target.performers.insert(new_index, performer)

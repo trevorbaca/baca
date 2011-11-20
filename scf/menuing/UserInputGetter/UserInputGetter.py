@@ -63,7 +63,7 @@ class UserInputGetter(MenuObject):
             i = 0
             while i < len(self.prompts):
                 prompt = self.prompts[i]
-                prompt = iotools.capitalize_string(prompt)
+                prompt = iotools.capitalize_string_start(prompt)
                 prompt = prompt + '> '
                 menu_lines.append(prompt)
                 while True:
@@ -78,7 +78,7 @@ class UserInputGetter(MenuObject):
                         break
                     elif user_response == 'help':
                         if i < len(self.helps):
-                            print iotools.capitalize_string(self.helps[i] + '\n')
+                            print iotools.capitalize_string_start(self.helps[i] + '\n')
                         else:
                             print 'Help string not available.\n'
                     elif user_response == 'prev':

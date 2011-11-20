@@ -1,1 +1,3 @@
+from InstrumentEditor import InstrumentEditor
 from InstrumentationSpecifierEditor import InstrumentationSpecifierEditor
+from PerformerEditor import PerformerEditor

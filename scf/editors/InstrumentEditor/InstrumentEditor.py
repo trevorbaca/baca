@@ -3,23 +3,49 @@ from baca.scf.menuing.InteractiveEditor import InteractiveEditor
 
 class InstrumentEditor(InteractiveEditor):
 
-    def __init__(self, session=None, instrument=None):
+    def __init__(self, session=None, target=None):
         InteractiveEditor.__init__(self, session=session)
-        self.instrument = instrument
+        assert isinstance(target, (type(self.target_class()), type(None)))
+        self.target = target
+
+    ### PUBLIC ATTRIBUTES ###
+
+    @property
+    def menu_piece(self):
+        if self.target is not None:
+            return self.target.instrument_name
+        else:
+            return 'instrument'
+
+    @property
+    def target_class(self):
+        from abjad.tools.instrumenttools._Instrument import _Instrument
+        return _Instrument
 
     ### PUBLIC METHODS ###
 
-    def edit_interactively(self):
-        self.session.menu_pieces.append(self.instrument.instrument_name)
-        while True:
-            menu = self.make_main_menu()
-            key, value = menu.run()
-            if self.handle_main_menu_response(key, value):
-                break
-        self.session.menu_pieces.pop()
+    def edit_instrument_name_interactively(self):
+        instrument_name = raw_input('instrument name> ')
+        assert isinstance(instrument_name, (str))
+        self.target.instrument_name = instrument_name
 
+    def edit_instrument_name_markup_interactively(self):
+        instrument_name_markup = raw_input('instrument name markup> ')
+        exec('instrument_name_markup = Markup(instrument_name_markup)')
+        self.target.instrument_name_markup = instrument_name_markup
+        
+    def edit_short_instrument_name_interactively(self):
+        short_instrument_name = raw_input('short instrument name> ')
+        assert isinstance(short_instrument_name, (str))
+        self.target.short_instrument_name = short_instrument_name
+
+    def edit_short_instrument_name_markup_interactively(self):
+        short_instrument_name_markup = raw_input('short instrument name markup> ')
+        exec('short_instrument_name_markup = Markup(short_instrument_name_markup)')
+        self.target.short_instrument_name_markup = short_instrument_name_markup
+        
     def handle_main_menu_response(self, key, value):
-        '''Return true when calling function should break.
+        '''True when calling function should break.
         '''
         if key == 'b':
             return True

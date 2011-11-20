@@ -151,7 +151,7 @@ class Menu(MenuObject, SCFObject):
     def make_menu_title_lines(self):
         menu_lines = []
         if not self.hide_menu:
-            menu_lines.append(iotools.capitalize_string(self.session.menu_header))
+            menu_lines.append(iotools.capitalize_string_start(self.session.menu_header))
             menu_lines.append('')
         return menu_lines
 

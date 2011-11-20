@@ -120,13 +120,12 @@ class ScoreProxy(PackageProxy):
     def create_package_structure(self):
         self.fix_score_package_directory_structure(is_interactive=False)
 
-    def edit_instrumentation_interactively(self):
+    def edit_instrumentation_specifier_interactively(self):
         import baca
-        instrumentation = self.get_tag('instrumentation')
-        editor = baca.scf.editors.InstrumentationSpecifierEditor(
-            session=self.session, instrumentation=instrumentation)
-        instrumentation = editor.edit()
-        self.add_tag('instrumentation', instrumentation)
+        target = self.get_tag('instrumentation')
+        editor = baca.scf.editors.InstrumentationSpecifierEditor(session=self.session, target=target)
+        target = editor.edit_interactively()
+        self.add_tag('instrumentation', target)
 
     def fix_package_structure(self, is_interactive=True):
         if self.package_short_name == 'recursif':
@@ -192,7 +191,7 @@ class ScoreProxy(PackageProxy):
             elif key == 'ch':
                 self.chunk_wrangler.create_chunk_interactively()
             elif key == 'instr':
-                self.edit_instrumentation_interactively()
+                self.edit_instrumentation_specifier_interactively()
             elif key == 'mi':
                 self.material_wrangler.create_interactive_material_interactively()
             elif key == 'ms':

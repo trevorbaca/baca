@@ -3,9 +3,10 @@ from baca.scf.menuing.InteractiveEditor import InteractiveEditor
 
 class PerformerEditor(InteractiveEditor):
 
-    def __init__(self, session=None, performer=None):
+    def __init__(self, session=None, target=None):
         InteractiveEditor.__init__(self, session=session)
-        self.performer = performer
+        assert isinstance(target, (type(self.target_class()), type(None)))
+        self.target = target
 
     ### PUBLIC ATTRIBUTES ###
 
@@ -15,92 +16,113 @@ class PerformerEditor(InteractiveEditor):
         return baca.scf.editors.InstrumentEditor
 
     @property
-    def summary_lines(self):
-        if not self.performer.instruments:
-            result = '{}: (no instruments assigned)'.format(self.performer.name)
-        elif len(self.performer.instruments) == 1 and self.performer.name == \
-            self.performer.instruments[0].instrument_name:
-            result = '{}'.format(self.performer.name)
+    def menu_piece(self):
+        if self.target is not None:
+            return self.target.name
         else:
-            instruments = ', '.join([x.instrument_name for x in self.performer.instruments])
-            result = '{} ({})'.format(self.performer.name, instruments)
+            return 'performer'
+
+    @property
+    def summary_lines(self):
+        if not self.target.instruments:
+            result = '{}: (no instruments assigned)'.format(self.target.name)
+        elif len(self.target.instruments) == 1 and self.target.name == \
+            self.target.instruments[0].instrument_name:
+            result = '{}'.format(self.target.name)
+        else:
+            instruments = ', '.join([x.instrument_name for x in self.target.instruments])
+            result = '{} ({})'.format(self.target.name, instruments)
         result = [result]
         return result
+
+    @property
+    def target_class(self):
+        from abjad.tools import scoretools
+        return scoretools.Performer
 
     ### PUBLIC METHODS ###
 
     def add_instrument_interactively(self):
         instrument = self.select_instrument_from_instrumenttools_interactively()
-        self.performer.instruments.append(instrument)
+        self.target.instruments.append(instrument)
         return instrument
 
     def delete_instrument_interactively(self):
-        self.print_not_implemented()
+        number = raw_input('number> ')
+        try:
+            number = int(number)
+        except:
+            pass
+        index = number - 1
+        del(self.target.instruments[index])
     
-    def edit_instruments_interactively(self, performer):
-        self.session.menu_pieces.append('instruments')
-        while True:
-            menu = self.make_instruments_menu(performer)
-            key, value = menu.run()
-            if key == 'b':
-                break
-            elif key == 'add':
-                self.add_instrument_to_performer_interactively(performer)
-            else:
-                try:
-                    instrument_number = int(key)
-                    instrument_index = instrument_number - 1
-                    instrument = performer.instruments[instrument_index]
-                except:
-                    instrument = None
-                if instrument is not None:
-                    self.edit_instrument_interactively(performer, instrument)
-        self.session.menu_pieces.pop()
+    def edit_name_interactively(self):
+        name = raw_input('name> ')
+        print ''
+        self.target.name = name
 
-    def edit_interactively(self):
-        self.session.menu_pieces.append(performer.name)
-        while True:
-            menu = self.make_main_menu(performer)
-            key, value = menu.run()
-            if key == 'b':
-                break
-            elif key == 'db':
-                self.edit_instruments_interactively(performer)
-            elif key == 'mv':
-                self.move_performer_interactively(performer)
-            elif key == 'ren':
-                self.name_performer_interactively(performer)
-                break
-            else:
-                pass
-        self.session.menu_pieces.pop()
+    def handle_main_menu_response(self, key, value):
+        if key == 'b':
+            return True
+        elif key == 'db':
+            self.add_instrument_interactively()
+        elif key == 'del':
+            self.delete_instrument_interactively()
+        elif key == 'mv':
+            self.move_instrument_interactively()
+        elif key in ('name', 'ren'):
+            self.edit_name_interactively()
+            return True
+        elif key == 'un':
+            self.unname()
+        else:
+            try:
+                instrument_number = int(key)
+                instrument_index = instrument_number - 1
+                instrument = self.target.instruments[instrument_index]
+            except:
+                instrument = None
+            if instrument is not None:
+                instrument_editor = self.InstrumentEditor(session=self.session, target=instrument)
+                instrument_editor.edit_interactively()
 
-    def make_instruments_menu(self, performer):
+    def make_main_menu(self):
         menu = self.Menu(where=self.where(), session=self.session)
         menu_section = self.MenuSection()
         menu.menu_sections.append(menu_section)
-        instrument_names = [x.instrument_name for x in performer.instruments]
+        instrument_names = [x.instrument_name for x in self.target.instruments]
         menu_section.items_to_number = instrument_names
-        menu_section.sentence_length_items.append(('add', 'add instrument'))
-        return menu
-    
-    def make_main_menu(self, performer):
-        menu = self.Menu(where=self.where(), session=self.session)
-        menu_section = self.MenuSection()
-        menu.menu_sections.append(menu_section)
         menu_section.sentence_length_items.append(('del', 'delete'))
-        if performer.is_doubling:
+        if self.target.is_doubling:
             value = 'add or remove doubling'
         else:
             value = 'add doubling'
         menu_section.sentence_length_items.append(('db', value))
-        menu_section.sentence_length_items.append(('ren', 'rename'))
+        if 1 < self.target.instrument_count:
+            menu_section.sentence_length_items.append(('mv', 'move instrument up or down in list'))
+        if self.target.name is None:
+            menu_section.sentence_length_items.append(('name', 'name'))
+        else:
+            menu_section.sentence_length_items.append(('ren', 'rename'))
+            menu_section.sentence_length_items.append(('un', 'unname'))
         return menu
 
-    def name_performer_interactively(self, performer):
-        performer_name = raw_input('performer name> ')
-        print ''
-        performer.name = performer_name
+    def move_instrument_interactively(self):
+        old_number = raw_input('old number> ')
+        try:
+            old_number = int(old_number)
+        except:
+            return
+        old_index = old_number - 1
+        instrument = self.target.instruments[old_index]
+        new_number = raw_input('new number> ')
+        try:
+            new_number = int(new_number)
+        except:
+            return
+        new_index = new_number - 1
+        self.target.instruments.remove(instrument)
+        self.target.instruments.insert(new_index, instrument)
 
     def select_instrument_from_instrumenttools_interactively(self):
         from abjad.tools import instrumenttools
@@ -114,3 +136,6 @@ class PerformerEditor(InteractiveEditor):
         instrument_name = instrument_name.replace(' ', '')
         exec('result = instrumenttools.{}()'.format(instrument_name.capitalize()))
         return result
+
+    def unname(self):
+        self.target.name = None

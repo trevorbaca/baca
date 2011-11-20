@@ -96,7 +96,7 @@ class SCFObject(object):
         else:
             menu_title = '%s - %s' % (menu_header, menu_body)
         menu_title = menu_title + '\n'
-        return  iotools.capitalize_string(menu_title)
+        return  iotools.capitalize_string_start(menu_title)
 
     def print_not_implemented(self):
         print 'Not yet implemented.\n'

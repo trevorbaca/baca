@@ -186,7 +186,7 @@ class MenuSection(MenuObject):
         if not self.hide_menu:
             if self.menu_section_title:
                 menu_line = '{} {}'.format(
-                    self.make_tab(self.indent_level), iotools.capitalize_string(self.menu_section_title))
+                    self.make_tab(self.indent_level), iotools.capitalize_string_start(self.menu_section_title))
                 menu_lines.append(menu_line)
                 menu_lines.append('')
         return menu_lines

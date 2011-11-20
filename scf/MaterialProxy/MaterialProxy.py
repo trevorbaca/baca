@@ -136,7 +136,7 @@ class MaterialProxy(PackageProxy):
         else:
             material_parts = material_underscored_name.split('_')[1:]
         material_spaced_name = ' '.join(material_parts)
-        title = iotools.capitalize_string(material_spaced_name)
+        title = iotools.capitalize_string_start(material_spaced_name)
         title = markuptools.Markup(title)
         return title
 
