@@ -95,7 +95,7 @@ class InstrumentationSpecifierEditor(InteractiveEditor):
             elif key == 'del':
                 self.instrumentation.performers.remove(performer)
                 break
-            elif key == 'instr':
+            elif key == 'db':
                 self.edit_instruments_interactively(performer)
             elif key == 'mv':
                 self.move_performer_interactively(performer)
@@ -135,15 +135,13 @@ class InstrumentationSpecifierEditor(InteractiveEditor):
         menu = self.Menu(where=self.where(), session=self.session) 
         menu_section = self.MenuSection()
         menu.menu_sections.append(menu_section)
-        menu_section.menu_section_title = '{}: {}'.format(performer.name, instrument.instrument_name)
-        menu_section.sentence_length_items.append(('del', 'delete performer instrument'))
+        menu_section.sentence_length_items.append(('del', 'delete instrument'))
         return menu
 
     def make_instruments_menu(self, performer):
         menu = self.Menu(where=self.where(), session=self.session) 
         menu_section = self.MenuSection()
         menu.menu_sections.append(menu_section)
-        menu_section.menu_section_title = 'instruments'
         instrument_names = [x.instrument_name for x in performer.instruments]
         menu_section.items_to_number = instrument_names
         menu_section.sentence_length_items.append(('add', 'add instrument'))
@@ -163,14 +161,14 @@ class InstrumentationSpecifierEditor(InteractiveEditor):
         return menu
 
     def move_performer_interactively(self):
-        old_performer_number = raw_input('Old number> ')
+        old_performer_number = raw_input('old number> ')
         try:
             old_performer_number = int(old_performer_number)
         except:
             return
         old_performer_index = old_performer_number - 1
         performer = self.instrumentation.performers[old_performer_index]
-        new_performer_number = raw_input('New number> ')
+        new_performer_number = raw_input('new number> ')
         try:
             new_performer_number = int(new_performer_number)
         except:
@@ -180,7 +178,7 @@ class InstrumentationSpecifierEditor(InteractiveEditor):
         self.instrumentation.performers.insert(new_performer_index, performer)
 
     def name_performer_interactively(self, performer):
-        performer_name = raw_input('Performer name> ')
+        performer_name = raw_input('player name> ')
         print ''
         performer.name = performer_name
             
@@ -205,5 +203,5 @@ class InstrumentationSpecifierEditor(InteractiveEditor):
         menu.menu_sections.append(menu_section)
         key, instrument_name = menu.run()
         instrument_name = instrument_name.replace(' ', '')
-        exec('result = instrumenttools.{}()'.format(instrument_name))
+        exec('result = instrumenttools.{}()'.format(instrument_name.capitalize()))
         return result

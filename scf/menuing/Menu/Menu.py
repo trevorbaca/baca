@@ -1,3 +1,4 @@
+from abjad.tools import iotools
 from baca.scf.SCFObject import SCFObject
 from baca.scf.menuing.MenuObject import MenuObject
 import os
@@ -150,7 +151,7 @@ class Menu(MenuObject, SCFObject):
     def make_menu_title_lines(self):
         menu_lines = []
         if not self.hide_menu:
-            menu_lines.append(self.session.menu_header.capitalize())
+            menu_lines.append(iotools.capitalize_string(self.session.menu_header))
             menu_lines.append('')
         return menu_lines
 

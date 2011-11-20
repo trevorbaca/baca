@@ -90,12 +90,13 @@ class SCFObject(object):
         os.system(command)
 
     def make_menu_title(self, menu_header, menu_body):
+        from abjad.tools import iotools
         if menu_header is None:
             menu_title = menu_body
         else:
             menu_title = '%s - %s' % (menu_header, menu_body)
         menu_title = menu_title + '\n'
-        return  menu_title.capitalize()
+        return  iotools.capitalize_string(menu_title)
 
     def print_not_implemented(self):
         print 'Not yet implemented.\n'
