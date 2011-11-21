@@ -44,6 +44,62 @@ class StudioInterface(SCFObject):
                 return score_proxy.materials_package_importable_name
         self.session.menu_pieces.pop()
 
+    def handle_main_menu_response(self, key, value):
+        if key is None:
+            pass
+        elif key == 'active':
+            self.session.scores_to_show = 'active'
+        elif key == 'all':
+            self.session.scores_to_show = 'all'
+        elif key == 'k':
+            self.global_proxy.maker_wrangler.manage_makers()
+        elif key == 'm':
+            self.global_proxy.material_wrangler.manage_materials()
+        elif key == 'mb':
+            self.session.scores_to_show = 'mothballed'
+        elif key == 'some':
+            self.session.hide_mothballed_scores = True
+        elif key == 'svn':
+            self.manage_svn()
+        else:
+            score_package_importable_name = value
+            score_proxy = self.score_wrangler.ScoreProxy(
+                score_package_importable_name, session=self.session)
+            menu_pieces = self.session.menu_pieces[:]
+            self.session.menu_pieces = []
+            score_proxy.manage_score()
+            self.session.menu_pieces = menu_pieces
+    
+    def handle_svn_response(self, key, value):
+        if key == 'b':
+            value = None
+            return True
+        elif key == 'add':
+            self.global_proxy.svn_add()
+        elif key == 'add scores':
+            self.score_wrangler.svn_add()
+        elif key == 'ci':
+            self.global_proxy.svn_ci()
+            return True
+        elif key == 'ci scores':
+            self.score_wrangler.svn_ci()
+        elif key == 'pytest':
+            self.global_proxy.run_py_test()
+        elif key == 'pytest scores':
+            self.score_wrangler.run_py_test()
+        elif key == 'pytest all':
+            self.run_py_test_all()
+        elif key == 'st':
+            self.global_proxy.svn_st()
+        elif key == 'st scores':
+            self.score_wrangler.svn_st()
+        elif key == 'up':
+            self.global_proxy.svn_up()
+            return True
+        elif key == 'up scores':
+            self.score_wrangler.svn_up()
+            return True
+
     def iterate_interactive_material_proxies(self):
         for material_proxy in self.iterate_material_proxies():
             if material_proxy.is_interactive:
@@ -60,6 +116,7 @@ class StudioInterface(SCFObject):
     def make_main_menu(self):
         menu = self.Menu(where=self.where(), session=self.session)
         menu_section = self.MenuSection()
+        menu.menu_sections.append(menu_section)
         score_titles = list(self.score_wrangler.iterate_score_titles_with_years(
             scores_to_show=self.session.scores_to_show))
         score_package_short_names = list(self.score_wrangler.iterate_score_package_short_names(
@@ -71,7 +128,6 @@ class StudioInterface(SCFObject):
         menu_section.hidden_items.append(('active', 'show active scores only'))
         menu_section.hidden_items.append(('all', 'show all scores'))
         menu_section.hidden_items.append(('mb', 'show mothballed scores only'))
-        menu.menu_sections.append(menu_section)
         menu.include_back = False
         menu.include_studio = False
         return menu
@@ -102,33 +158,7 @@ class StudioInterface(SCFObject):
         while True:
             menu = self.make_svn_menu()
             key, value = menu.run()
-            if key == 'b':
-                value = None
-                break
-            elif key == 'add':
-                self.global_proxy.svn_add()
-            elif key == 'add scores':
-                self.score_wrangler.svn_add()
-            elif key == 'ci':
-                self.global_proxy.svn_ci()
-                break
-            elif key == 'ci scores':
-                self.score_wrangler.svn_ci()
-            elif key == 'pytest':
-                self.global_proxy.run_py_test()
-            elif key == 'pytest scores':
-                self.score_wrangler.run_py_test()
-            elif key == 'pytest all':
-                self.run_py_test_all()
-            elif key == 'st':
-                self.global_proxy.svn_st()
-            elif key == 'st scores':
-                self.score_wrangler.svn_st()
-            elif key == 'up':
-                self.global_proxy.svn_up()
-                break
-            elif key == 'up scores':
-                self.score_wrangler.svn_up()
+            if self.handle_svn_response(key, value):
                 break
             if self.session.session_is_complete:
                 break
@@ -150,38 +180,16 @@ class StudioInterface(SCFObject):
         menu.items_to_number = material_proxies
         key, value = menu.run()
         return value
-    
+
     def work_in_studio(self):
         self.session.menu_pieces.append('studio')
         while True:
             self.session.menu_pieces.append('{} scores'.format(self.session.scores_to_show))
             menu = self.make_main_menu()
             key, value = menu.run()
-            if key is None:
-                pass
-            elif key == 'active':
-                self.session.scores_to_show = 'active'
-            elif key == 'all':
-                self.session.scores_to_show = 'all'
-            elif key == 'k':
-                self.global_proxy.maker_wrangler.manage_makers()
-            elif key == 'm':
-                self.global_proxy.material_wrangler.manage_materials()
-            elif key == 'mb':
-                self.session.scores_to_show = 'mothballed'
-            elif key == 'some':
-                self.session.hide_mothballed_scores = True
-            elif key == 'svn':
-                self.manage_svn()
-            else:
-                score_package_importable_name = value
-                score_proxy = self.score_wrangler.ScoreProxy(
-                    score_package_importable_name, session=self.session)
-                menu_pieces = self.session.menu_pieces[:]
-                self.session.menu_pieces = []
-                score_proxy.manage_score()
-                self.session.menu_pieces = menu_pieces
-            if self.session.user_input_is_consumed or self.session.test_is_complete:
+            if self.handle_main_menu_response(key, value):
+                break
+            if self.session.session_is_complete:
                 break
             self.session.menu_pieces.pop()
         self.session.menu_pieces.pop()

@@ -20,6 +20,8 @@ class Session(object):
         summary = []
         if self.test is not None:
             summary.append('test={!r}'.format(self.test))
+        if self.user_input is not None:
+            summary.append('user_input={!r}'.format(self.user_input))
         summary = ', '.join(summary)
         return '{}({})'.format(type(self).__name__, summary)
 

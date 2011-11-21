@@ -44,3 +44,15 @@ def test_InstrumentEditor_03():
      '     sin: short instrument name',
      '     sinm: short instrument name markup',
      '']
+
+
+def test_InstrumentEditor_03():
+    '''Attribute management.
+    '''
+
+    session = baca.scf.menuing.Session(user_input='in\nfoo')
+    accordion = instrumenttools.Accordion()
+    accordion.instrument_name = 'accordion I'
+    accordion.short_instrument_name = 'acc. I'
+    instrument_editor = baca.scf.editors.InstrumentEditor(session=session, target=accordion)
+    #instrument_editor.edit_interactively()

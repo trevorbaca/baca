@@ -28,10 +28,13 @@ class InstrumentEditor(InteractiveEditor):
 
     ### PUBLIC METHODS ###
 
+    # TODO: remove need to pass session manually to menus and getters
     def edit_instrument_name_interactively(self):
         instrument_name = raw_input('instrument name> ')
         assert isinstance(instrument_name, (str))
         self.target.instrument_name = instrument_name
+        #getter = self.UserInputGetter(where=self.where()
+        
 
     def edit_instrument_name_markup_interactively(self):
         instrument_name_markup = raw_input('instrument name markup> ')
