@@ -3,11 +3,6 @@ from baca.scf.menuing.InteractiveEditor import InteractiveEditor
 
 class InstrumentationSpecifierEditor(InteractiveEditor):
 
-    def __init__(self, session=None, target=None):
-        InteractiveEditor.__init__(self, session=session)
-        assert isinstance(target, (type(self.target_class()), type(None)))
-        self.target = target
-
     ### PUBLIC ATTRIBUTES ###
 
     @property

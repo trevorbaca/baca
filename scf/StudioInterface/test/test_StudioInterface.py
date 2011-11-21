@@ -144,7 +144,8 @@ def test_StudioInterface_07():
     studio_interface = baca.scf.StudioInterface(session=session)
     studio_interface.work_in_studio()
 
-    assert session.test_result == ['Studio - active scores - repository commands',
+    assert session.test_result == [
+     'Studio - active scores - repository commands',
      '',
      '     add: svn add',
      '     ci: svn commit',

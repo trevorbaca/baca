@@ -3,10 +3,14 @@ from baca.scf.menuing.InteractiveEditor import InteractiveEditor
 
 class InstrumentEditor(InteractiveEditor):
 
-    def __init__(self, session=None, target=None):
-        InteractiveEditor.__init__(self, session=session)
-        assert isinstance(target, (type(self.target_class()), type(None)))
-        self.target = target
+    ### OVERLOADS ###
+
+    def __repr__(self):
+        if self.target is None:
+            summary = ''
+        else:
+            summary = 'target={!r}'.format(self.target)
+        return '{}({})'.format(type(self).__name__, summary)
 
     ### PUBLIC ATTRIBUTES ###
 

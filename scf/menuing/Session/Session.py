@@ -17,7 +17,11 @@ class Session(object):
         return True
 
     def __repr__(self):
-        return '{}()'.format(type(self).__name__)
+        summary = []
+        if self.test is not None:
+            summary.append('test={!r}'.format(self.test))
+        summary = ', '.join(summary)
+        return '{}({})'.format(type(self).__name__, summary)
 
     def __str__(self):
         return '\n'.join(self.formatted_attributes)
