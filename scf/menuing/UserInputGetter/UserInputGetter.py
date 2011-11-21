@@ -55,6 +55,8 @@ class UserInputGetter(MenuObject):
 
     def run(self, clear_terminal=True):
         menu_lines = []
+        # the following line is untested:
+        user_response = self.pop_next_user_response_from_user_input()
         try:
             if clear_terminal:
                 if not user_response and not self.session.test:

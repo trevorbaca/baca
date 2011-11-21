@@ -30,11 +30,18 @@ class InstrumentEditor(InteractiveEditor):
 
     # TODO: remove need to pass session manually to menus and getters
     def edit_instrument_name_interactively(self):
-        instrument_name = raw_input('instrument name> ')
-        assert isinstance(instrument_name, (str))
+        #instrument_name = raw_input('instrument name> ')
+        #assert isinstance(instrument_name, (str))
+        #self.target.instrument_name = instrument_name
+        # TODO: remove need to pass session manually to menus and getters
+        getter = self.UserInputGetter(where=self.where(), session=self.session)
+        # TODO: deprecate menu body
+        getter.menu_body = 'do some stuff'
+        getter.prompts.append('instrument name')
+        getter.tests.append(lambda x: isinstance(x, str))
+        getter.helps.append('must be string.')
+        instrument_name = getter.run()
         self.target.instrument_name = instrument_name
-        #getter = self.UserInputGetter(where=self.where()
-        
 
     def edit_instrument_name_markup_interactively(self):
         instrument_name_markup = raw_input('instrument name markup> ')
