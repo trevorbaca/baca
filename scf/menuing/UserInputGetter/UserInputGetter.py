@@ -54,12 +54,21 @@ class UserInputGetter(MenuObject):
 
     ### PUBLIC METHODS ###
 
-    def display(self):
-        user_response = self.pop_next_user_response_from_user_input()
-        if not user_response and not self.session.test:
+    def conditionally_display_prompt_and_get_user_response(self):
+        if self.session.is_displayable:
+            prompt = self.menu_lines[-1]
             user_response = raw_input(prompt)
             print ''
-        return user_response
+            return user_response
+        else:
+            user_response = self.pop_next_user_response_from_user_input()
+            # TODO: encapsulate remaining lines of this function in pop_...
+            if user_response == '':
+                user_response = None
+            if user_response is None:
+                if self.session.test == 'menu_lines':
+                    self.session.test_result = self.menu_lines
+            return user_response
 
     def load_prompt(self):
         prompt = self.prompts[self.prompt_index]
@@ -67,14 +76,14 @@ class UserInputGetter(MenuObject):
         prompt = prompt + '> '
         self.menu_lines.append(prompt)
 
-    def move_to_prev_prmopt(self):
+    def move_to_prev_prompt(self):
         self.values.pop()
         self.prompt_index = self.prompt_index - 1
 
     def present_prompt_and_store_value(self):
         self.load_prompt()
         while True:
-            user_response = self.display()
+            user_response = self.conditionally_display_prompt_and_get_user_response()
             if self.handle_hidden_key(user_response):
                 continue
             elif user_response == 'b':
