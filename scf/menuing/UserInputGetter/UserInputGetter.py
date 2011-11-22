@@ -84,7 +84,11 @@ class UserInputGetter(MenuObject):
         self.load_prompt()
         while True:
             user_response = self.conditionally_display_prompt_and_get_user_response()
-            if self.handle_hidden_key(user_response):
+            print 'BAR', user_response
+            if user_response is None:
+                self.prompt_index = self.prompt_index + 1
+                break
+            elif self.handle_hidden_key(user_response):
                 continue
             elif user_response == 'b':
                 break
@@ -126,6 +130,7 @@ class UserInputGetter(MenuObject):
             print 'Help string not available.\n'
 
     def store_value(self, user_response):
+        print 'FOO', user_response
         try:
             value = eval(user_response)
         except (NameError, SyntaxError):

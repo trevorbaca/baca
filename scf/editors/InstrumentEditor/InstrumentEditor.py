@@ -35,8 +35,6 @@ class InstrumentEditor(InteractiveEditor):
         #self.target.instrument_name = instrument_name
         # TODO: remove need to pass session manually to menus and getters
         getter = self.UserInputGetter(where=self.where(), session=self.session)
-        # TODO: deprecate menu body
-        getter.menu_body = 'do some stuff'
         getter.prompts.append('instrument name')
         getter.tests.append(lambda x: isinstance(x, str))
         getter.helps.append('must be string.')
