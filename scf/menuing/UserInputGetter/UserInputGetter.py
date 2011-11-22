@@ -54,65 +54,83 @@ class UserInputGetter(MenuObject):
 
     ### PUBLIC METHODS ###
 
-    def load_prompt(self, prompt_index):
-        prompt = self.prompts[prompt_index]
+    def display(self):
+        user_response = self.pop_next_user_response_from_user_input()
+        if not user_response and not self.session.test:
+            user_response = raw_input(prompt)
+            print ''
+        return user_response
+
+    def load_prompt(self):
+        prompt = self.prompts[self.prompt_index]
         prompt = iotools.capitalize_string_start(prompt)
         prompt = prompt + '> '
         self.menu_lines.append(prompt)
 
-    def run(self):
+    def move_to_prev_prmopt(self):
+        self.values.pop()
+        self.prompt_index = self.prompt_index - 1
+
+    def present_prompt_and_store_value(self):
+        self.load_prompt()
+        while True:
+            user_response = self.display()
+            if self.handle_hidden_key(user_response):
+                continue
+            elif user_response == 'b':
+                break
+            elif user_response == 'help':
+                self.show_help()
+            elif user_response == 'prev':
+                self.move_to_prev_prompt()
+                break
+            elif user_response == 'skip':
+                break
+            else:
+                if self.store_value(user_response):
+                    break
+
+    def present_prompts_and_store_values(self):
+        self.conditionally_clear_terminal()
         self.menu_lines = []
+        self.values = []
+        self.prompt_index = 0
+        while self.prompt_index < len(self.prompts):
+            self.present_prompt_and_store_value()
+
+    def run(self):
         try:
-            self.conditionally_clear_terminal()
-            values = []
-            prompt_index = 0
-            while prompt_index < len(self.prompts):
-                self.load_prompt(prompt_index)
-                while True:
-                    user_response = self.pop_next_user_response_from_user_input()
-                    if not user_response and not self.session.test:
-                        user_response = raw_input(prompt)
-                        print ''
-                    if self.handle_hidden_key(user_response):
-                        continue
-                    elif user_response == 'b':
-                        #return
-                        break
-                    elif user_response == 'help':
-                        if prompt_index < len(self.helps):
-                            print iotools.capitalize_string_start(self.helps[prompt_index] + '\n')
-                        else:
-                            print 'Help string not available.\n'
-                    elif user_response == 'prev':
-                        values.pop()
-                        prompt_index = prompt_index - 1
-                        break
-                    elif user_response == 'skip':
-                        #return
-                        break
-                    else:
-                        try:
-                            value = eval(user_response)
-                        except (NameError, SyntaxError):
-                            value = user_response
-                        if prompt_index < len(self.tests):
-                            input_test = self.tests[prompt_index]
-                            if input_test(value):
-                                values.append(value)
-                                prompt_index = prompt_index + 1
-                                break
-                            else:
-                                if prompt_index < len(self.helps):
-                                    print self.helps[prompt_index] + '\n'
-                        else:
-                            values.append(value)
-                            prompt_index = prompt_index + 1
-                            break
+            self.present_prompts_and_store_values()
         except KeyboardInterrupt:
             return
         except SystemExit:
             raise SystemExit
-        if len(values) == 1:
-            return values[0]
+        if len(self.values) == 1:
+            return self.values[0]
         else:
-            return values
+            return self.values
+
+    def show_help(self):
+        if self.prompt_index < len(self.helps):
+            print iotools.capitalize_string_start(self.helps[self.prompt_index] + '\n')
+        else:
+            print 'Help string not available.\n'
+
+    def store_value(self, user_response):
+        try:
+            value = eval(user_response)
+        except (NameError, SyntaxError):
+            value = user_response
+        if self.prompt_index < len(self.tests):
+            input_test = self.tests[self.prompt_index]
+            if input_test(value):
+                self.values.append(value)
+                self.prompt_index = self.prompt_index + 1
+                return True
+            else:
+                if self.prompt_index < len(self.helps):
+                    print self.helps[self.prompt_index] + '\n'
+        else:
+            self.values.append(value)
+            self.prompt_index = self.prompt_index + 1
+            return True
