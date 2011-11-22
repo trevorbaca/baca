@@ -93,10 +93,6 @@ class Menu(MenuObject, SCFObject):
             pair_dictionary = dict(zip(self.all_keys, self.all_values))
             return pair_dictionary[user_response]
 
-    def conditionally_clear_terminal(self):
-        if self.session.is_displayable and self.should_clear_terminal:
-            self.clear_terminal()
-
     def conditionally_display_menu_lines_and_get_user_response(self):
         if self.session.is_displayable:
             for menu_line in self.menu_lines:

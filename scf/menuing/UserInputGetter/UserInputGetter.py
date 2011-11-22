@@ -59,9 +59,7 @@ class UserInputGetter(MenuObject):
         # the following line is untested:
         user_response = self.pop_next_user_response_from_user_input()
         try:
-            if self.should_clear_terminal:
-                if not user_response and not self.session.test:
-                    self.clear_terminal()
+            self.conditionally_clear_terminal()
             values = []
             i = 0
             while i < len(self.prompts):

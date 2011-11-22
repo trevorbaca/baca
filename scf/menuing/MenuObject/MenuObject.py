@@ -71,8 +71,9 @@ class MenuObject(SCFObject):
 
     ### PUBLIC METHODS ###
 
-    def clear_terminal(self):
-        iotools.clear_terminal()
+    def conditionally_clear_terminal(self):
+        if self.session.is_displayable and self.should_clear_terminal:
+            self.clear_terminal()
 
     def confirm(self):
         response = raw_input('Ok? ')
