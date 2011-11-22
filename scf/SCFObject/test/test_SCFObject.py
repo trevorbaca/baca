@@ -17,13 +17,3 @@ def test_SCFObject_01():
     assert isinstance(scf.helpers, types.ModuleType)
     assert scf.spaced_class_name == 's c f object'
     assert scf.source_file_name == '/Users/trevorbaca/Documents/other/baca/scf/SCFObject/SCFObject.py'
-
-
-def test_SCFObject_02():
-    '''SCF object methods.
-    '''
-
-    scf = baca.scf.SCFObject.SCFObject()
-
-    assert scf.make_menu_title(None, 'bar') == 'Bar\n'
-    assert scf.make_menu_title('foo', 'bar') == 'Foo - bar\n'

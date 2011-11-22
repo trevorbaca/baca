@@ -2,6 +2,7 @@
 from abjad.tools import instrumenttools
 from abjad.tools import scoretools
 import baca
+import py.test
 
 
 def test_ScoreProxy_01():
@@ -128,6 +129,7 @@ def test_ScoreProxy_04():
 def test_ScoreProxy_05():
     '''Add and delete tag interactively.
     '''
+    py.test.skip('unskip after making user input getter testable')
 
     session = baca.scf.menuing.Session(user_input="add\nfoo\nbar")
     archipel = baca.scf.ScoreProxy('archipel', session=session)
