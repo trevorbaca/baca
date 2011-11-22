@@ -129,7 +129,6 @@ def test_ScoreProxy_04():
 def test_ScoreProxy_05():
     '''Add and delete tag interactively.
     '''
-    py.test.skip('unskip after making user input getter testable')
 
     session = baca.scf.menuing.Session(user_input="add\nfoo\nbar")
     archipel = baca.scf.ScoreProxy('archipel', session=session)

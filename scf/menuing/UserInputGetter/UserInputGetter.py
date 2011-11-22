@@ -56,8 +56,6 @@ class UserInputGetter(MenuObject):
 
     def run(self):
         menu_lines = []
-        # the following line is untested:
-        user_response = self.pop_next_user_response_from_user_input()
         try:
             self.conditionally_clear_terminal()
             values = []
