@@ -54,17 +54,20 @@ class UserInputGetter(MenuObject):
 
     ### PUBLIC METHODS ###
 
+    def load_prompt(self, prompt_index):
+        prompt = self.prompts[prompt_index]
+        prompt = iotools.capitalize_string_start(prompt)
+        prompt = prompt + '> '
+        self.menu_lines.append(prompt)
+
     def run(self):
-        menu_lines = []
+        self.menu_lines = []
         try:
             self.conditionally_clear_terminal()
             values = []
-            i = 0
-            while i < len(self.prompts):
-                prompt = self.prompts[i]
-                prompt = iotools.capitalize_string_start(prompt)
-                prompt = prompt + '> '
-                menu_lines.append(prompt)
+            prompt_index = 0
+            while prompt_index < len(self.prompts):
+                self.load_prompt(prompt_index)
                 while True:
                     user_response = self.pop_next_user_response_from_user_input()
                     if not user_response and not self.session.test:
@@ -76,13 +79,13 @@ class UserInputGetter(MenuObject):
                         #return
                         break
                     elif user_response == 'help':
-                        if i < len(self.helps):
-                            print iotools.capitalize_string_start(self.helps[i] + '\n')
+                        if prompt_index < len(self.helps):
+                            print iotools.capitalize_string_start(self.helps[prompt_index] + '\n')
                         else:
                             print 'Help string not available.\n'
                     elif user_response == 'prev':
                         values.pop()
-                        i = i - 1
+                        prompt_index = prompt_index - 1
                         break
                     elif user_response == 'skip':
                         #return
@@ -92,18 +95,18 @@ class UserInputGetter(MenuObject):
                             value = eval(user_response)
                         except (NameError, SyntaxError):
                             value = user_response
-                        if i < len(self.tests):
-                            input_test = self.tests[i]
+                        if prompt_index < len(self.tests):
+                            input_test = self.tests[prompt_index]
                             if input_test(value):
                                 values.append(value)
-                                i = i + 1
+                                prompt_index = prompt_index + 1
                                 break
                             else:
-                                if i < len(self.helps):
-                                    print self.helps[i] + '\n'
+                                if prompt_index < len(self.helps):
+                                    print self.helps[prompt_index] + '\n'
                         else:
                             values.append(value)
-                            i = i + 1
+                            prompt_index = prompt_index + 1
                             break
         except KeyboardInterrupt:
             return
