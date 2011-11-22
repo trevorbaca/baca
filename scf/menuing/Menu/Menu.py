@@ -6,9 +6,9 @@ import os
 
 class Menu(MenuObject, SCFObject):
 
-    def __init__(self, where=None, menu_sections=None, hidden_items=None, include_back=True, 
-        include_studio=True, indent_level=1, item_width = 11, session=None, should_clear_terminal=True, 
-        hide_menu=False):
+    def __init__(self, hide_menu=False, menu_sections=None, hidden_items=None, include_back=True, 
+        include_studio=True, indent_level=1, item_width=11, session=None, should_clear_terminal=True, 
+        where=None):
         MenuObject.__init__(self, session=session, hidden_items=hidden_items, indent_level=indent_level)
         self.hide_menu = hide_menu
         self.include_back = include_back

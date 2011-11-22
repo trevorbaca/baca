@@ -4,11 +4,11 @@ from baca.scf.menuing.MenuObject import MenuObject
 
 class UserInputGetter(MenuObject):
 
-    def __init__(self, where=None, session=None, prompts=None, tests=None, helps=None):
-        MenuObject.__init__(self, where=where, session=session)
+    def __init__(self, helps=None, prompts=None, tests=None, session=None, where=None):
+        MenuObject.__init__(self, session=session, where=where)
+        self.helps = helps
         self.prompts = prompts
         self.tests = tests
-        self.helps = helps
 
     ### OVERLOADS ###
 
@@ -30,17 +30,6 @@ class UserInputGetter(MenuObject):
         return property(**locals())
 
     @apply
-    def tests():
-        def fget(self):
-            return self._tests
-        def fset(self, tests):
-            if tests is None:
-                self._tests = []
-            else:
-                self._tests = tests
-        return property(**locals())
-
-    @apply
     def prompts():
         def fget(self):
             return self._prompts
@@ -49,6 +38,17 @@ class UserInputGetter(MenuObject):
                 self._prompts = []
             else:
                 self._prompts = prompts
+        return property(**locals())
+
+    @apply
+    def tests():
+        def fget(self):
+            return self._tests
+        def fset(self, tests):
+            if tests is None:
+                self._tests = []
+            else:
+                self._tests = tests
         return property(**locals())
 
     ### PUBLIC METHODS ###
