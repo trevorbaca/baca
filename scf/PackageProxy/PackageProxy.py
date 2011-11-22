@@ -268,7 +268,7 @@ class PackageProxy(DirectoryProxy):
     def manage_tags(self):
         self.session.menu_pieces.append('tags')
         while True:
-            menu = self.Menu(where=self.where(), session=self.session)
+            menu = self.make_new_menu(where=self.where())
             section = self.MenuSection()
             section.lines_to_list = self.list_formatted_tags()
             menu.menu_sections.append(section)
@@ -329,7 +329,7 @@ class PackageProxy(DirectoryProxy):
 
     def set_purview_interactively(self, menu_header=None):
         from baca.scf.ScoreWrangler import ScoreWrangler
-        menu = self.Menu(where=self.where(), menu_header=menu_header)
+        menu = self.make_new_menu(where=self.where())
         menu.menu_body = 'select purview'
         score_wrangler = ScoreWrangler()
         menu.items_to_number = score_wrangler.iterate_score_titles_with_years()

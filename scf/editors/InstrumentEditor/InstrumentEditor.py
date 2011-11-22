@@ -73,7 +73,7 @@ class InstrumentEditor(InteractiveEditor):
             self.edit_short_instrument_name_markup_interactively()
 
     def make_main_menu(self):
-        menu = self.Menu(where=self.where(), session=self.session)
+        menu = self.make_new_menu(where=self.where())
         menu_section = self.MenuSection()
         menu.menu_sections.append(menu_section)
         menu_section.sentence_length_items.append(('in', 'instrument name'))

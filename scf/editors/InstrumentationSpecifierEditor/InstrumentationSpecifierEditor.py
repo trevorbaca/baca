@@ -79,7 +79,7 @@ class InstrumentationSpecifierEditor(InteractiveEditor):
                 performer_editor.edit_interactively()
 
     def make_main_menu(self):
-        menu = self.Menu(where=self.where(), session=self.session)
+        menu = self.make_new_menu(where=self.where())
         menu_section = self.MenuSection()
         menu_section.items_to_number = self.summary_lines
         menu_section.sentence_length_items.append(('add', 'add performer'))

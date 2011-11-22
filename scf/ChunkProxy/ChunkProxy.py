@@ -58,7 +58,7 @@ class ChunkProxy(PackageProxy):
 
     def manage_chunk(self, menu_header=None):
         while True:
-            menu = self.Menu(where=self.where(), session=self.session)
+            menu = self.make_new_menu(where=self.where())
             menu.menu_header = menu_header
             menu.menu_body = self.package_spaced_name
             menu_section = self.MenuSection()

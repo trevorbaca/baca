@@ -77,7 +77,7 @@ class MakerProxy(PackageProxy):
 
     def manage_maker(self, menu_header=None):
         while True:
-            menu = self.Menu(where=self.where(), session=self.session)
+            menu = self.make_new_menu(where=self.where())
             menu.menu_header = menu_header
             menu.menu_body = self.spaced_class_name
             menu_section = self.MenuSection()

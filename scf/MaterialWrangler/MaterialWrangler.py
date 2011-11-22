@@ -61,7 +61,7 @@ class MaterialWrangler(PackageWrangler, PackageProxy):
 
     def manage_materials(self, command_string=None):
         while True:
-            menu = self.Menu(where=self.where(), session=self.session)
+            menu = self.make_new_menu(where=self.where())
             menu.menu_body = 'shared materials'
             menu_section = self.MenuSection()
             menu_section.items_to_number = list(self.iterate_material_summaries())
