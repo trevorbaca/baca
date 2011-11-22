@@ -7,10 +7,12 @@ import subprocess
 
 class MenuObject(SCFObject):
 
-    def __init__(self, where=None, session=None, hidden_items=None, indent_level=1):
+    def __init__(self, hidden_items=None, indent_level=1, session=None, 
+        should_clear_terminal=False, where=None):
         SCFObject.__init__(self, session=session)
         self.hidden_items = hidden_items
         self.indent_level = indent_level
+        self.should_clear_terminal = should_clear_terminal
         self.where = where
 
     ### PUBLIC ATTRIBUTES ###
@@ -48,6 +50,15 @@ class MenuObject(SCFObject):
         def fset(self, indent_level):
             assert isinstance(indent_level, int)
             self._indent_level = indent_level
+        return property(**locals())
+
+    @apply
+    def should_clear_terminal():
+        def fget(self):
+            return self._should_clear_terminal
+        def fset(self, should_clear_terminal):
+            assert isinstance(should_clear_terminal, type(True))
+            self._should_clear_terminal = should_clear_terminal
         return property(**locals())
 
     @apply

@@ -4,8 +4,9 @@ from baca.scf.menuing.MenuObject import MenuObject
 
 class UserInputGetter(MenuObject):
 
-    def __init__(self, helps=None, prompts=None, tests=None, session=None, where=None):
-        MenuObject.__init__(self, session=session, where=where)
+    def __init__(self, helps=None, prompts=None, tests=None, session=None, 
+        should_clear_terminal=True, where=None):
+        MenuObject.__init__(self, session=session, should_clear_terminal=should_clear_terminal, where=where)
         self.helps = helps
         self.prompts = prompts
         self.tests = tests
@@ -53,12 +54,12 @@ class UserInputGetter(MenuObject):
 
     ### PUBLIC METHODS ###
 
-    def run(self, clear_terminal=True):
+    def run(self):
         menu_lines = []
         # the following line is untested:
         user_response = self.pop_next_user_response_from_user_input()
         try:
-            if clear_terminal:
+            if self.should_clear_terminal:
                 if not user_response and not self.session.test:
                     self.clear_terminal()
             values = []

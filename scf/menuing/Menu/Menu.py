@@ -9,13 +9,13 @@ class Menu(MenuObject, SCFObject):
     def __init__(self, hide_menu=False, menu_sections=None, hidden_items=None, include_back=True, 
         include_studio=True, indent_level=1, item_width=11, session=None, should_clear_terminal=True, 
         where=None):
-        MenuObject.__init__(self, session=session, hidden_items=hidden_items, indent_level=indent_level)
+        MenuObject.__init__(self, hidden_items=hidden_items, indent_level=indent_level, 
+            session=session, should_clear_terminal=should_clear_terminal)
         self.hide_menu = hide_menu
         self.include_back = include_back
         self.include_studio = include_studio
         self.item_width = item_width
         self.menu_sections = menu_sections
-        self.should_clear_terminal = should_clear_terminal
         self.where = where
 
     ### PUBLIC ATTRIBUTES ###
@@ -76,15 +76,6 @@ class Menu(MenuObject, SCFObject):
                 self._menu_sections = []
             else:
                 self._menu_sections = menu_sections[:]
-        return property(**locals())
-
-    @apply
-    def should_clear_terminal():
-        def fget(self):
-            return self._should_clear_terminal
-        def fset(self, should_clear_terminal):
-            assert isinstance(should_clear_terminal, type(True))
-            self._should_clear_terminal = should_clear_terminal
         return property(**locals())
 
     ### PUBLIC METHODS ###

@@ -182,7 +182,8 @@ class PackageProxy(DirectoryProxy):
         getter = self.UserInputGetter(session=self.session)
         getter.prompts.append('Tag name')
         getter.prompts.append('Tag value')
-        user_input = getter.run(clear_terminal=False)
+        getter.should_clear_terminal = False
+        user_input = getter.run()
         if user_input:
             tag_name, tag_value = user_input
             self.add_tag(tag_name, tag_value)
@@ -214,7 +215,8 @@ class PackageProxy(DirectoryProxy):
     def delete_tag_interactively(self):
         getter = self.UserInputGetter(session=self.session)
         getter.prompts.append('Tag name')
-        user_input = getter.run(clear_terminal=False)
+        getter.should_clear_terminal = False
+        user_input = getter.run()
         if user_input:
             tag_name = user_input
             self.delete_tag(tag_name)

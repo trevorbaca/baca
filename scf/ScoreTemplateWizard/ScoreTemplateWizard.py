@@ -23,7 +23,8 @@ class ScoreTemplateWizard(Wizard):
                 getter = self.UserInputGetter()
                 getter.prompts.append("name of player %s" % (i + 1))
                 getter.tests.append(lambda x: isinstance(x, str))
-                player_name = getter.run(clear_terminal=False)
+                getter.should_clear_terminal = False
+                player_name = getter.run()
                 player = instrumenttools.HumanMusician(player_name)
                 players.append(player)
                 self.assign_instruments_to_player(player)
