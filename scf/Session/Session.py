@@ -2,6 +2,7 @@ class Session(object):
     
     def __init__(self, menu_pieces=None, scores_to_show='active', test=None, user_input=None):
         self._session_once_had_user_input = False
+        self.initial_user_input = user_input
         if menu_pieces is None:
             self.menu_pieces = []
         else:
@@ -20,6 +21,8 @@ class Session(object):
         summary = []
         if self.test is not None:
             summary.append('test={!r}'.format(self.test))
+        if self.initial_user_input is not None:
+            summary.append('initial_user_input={!r}'.format(self.initial_user_input))
         if self.user_input is not None:
             summary.append('user_input={!r}'.format(self.user_input))
         summary = ', '.join(summary)
@@ -42,6 +45,7 @@ class Session(object):
     @property
     def formatted_attributes(self):
         result = []
+        result.append('initial_user_input: {!r}'.format(self.initial_user_input))
         result.append('menu_pieces: {!r}'.format(self.menu_pieces))
         result.append('scores_to_show: {!r}'.format(self.scores_to_show))
         result.append('test: {!r}'.format(self.test))
