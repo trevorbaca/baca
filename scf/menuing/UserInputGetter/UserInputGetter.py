@@ -84,7 +84,6 @@ class UserInputGetter(MenuObject):
         self.load_prompt()
         while True:
             user_response = self.conditionally_display_prompt_and_get_user_response()
-            print 'BAR', user_response
             if user_response is None:
                 self.prompt_index = self.prompt_index + 1
                 break

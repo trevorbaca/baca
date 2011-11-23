@@ -1,5 +1,6 @@
 from abjad import *
 import baca
+import py.test
 
 
 def test_InstrumentEditor_01():
@@ -46,13 +47,28 @@ def test_InstrumentEditor_03():
      '']
 
 
-def test_InstrumentEditor_03():
+def test_InstrumentEditor_04():
+    '''Main menu to instrument name dialogue.
+    '''
+
+    session = baca.scf.Session(test='menu_lines', user_input='in')
+    accordion = instrumenttools.Accordion()
+    accordion.instrument_name = 'accordion I'
+    accordion.short_instrument_name = 'acc. I'
+    instrument_editor = baca.scf.editors.InstrumentEditor(session=session, target=accordion)
+    instrument_editor.edit_interactively()
+
+    assert session.test_result == ['Instrument name> ']
+
+
+def test_InstrumentEditor_05():
     '''Attribute management.
     '''
+    py.test.skip()
 
     session = baca.scf.Session(user_input='in\nfoo')
     accordion = instrumenttools.Accordion()
     accordion.instrument_name = 'accordion I'
     accordion.short_instrument_name = 'acc. I'
     instrument_editor = baca.scf.editors.InstrumentEditor(session=session, target=accordion)
-    #instrument_editor.edit_interactively()
+    instrument_editor.edit_interactively()

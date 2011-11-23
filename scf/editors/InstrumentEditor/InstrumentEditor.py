@@ -34,7 +34,7 @@ class InstrumentEditor(InteractiveEditor):
         getter.tests.append(lambda x: isinstance(x, str))
         getter.helps.append('must be string.')
         instrument_name = getter.run()
-        self.target.instrument_name = instrument_name
+        self.conditionally_set_target_attr('instrument_name', instrument_name)
 
     def edit_instrument_name_markup_interactively(self):
         instrument_name_markup = raw_input('instrument name markup> ')
