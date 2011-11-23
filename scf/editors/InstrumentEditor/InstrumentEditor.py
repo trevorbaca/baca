@@ -28,13 +28,8 @@ class InstrumentEditor(InteractiveEditor):
 
     ### PUBLIC METHODS ###
 
-    # TODO: remove need to pass session manually to menus and getters
     def edit_instrument_name_interactively(self):
-        #instrument_name = raw_input('instrument name> ')
-        #assert isinstance(instrument_name, (str))
-        #self.target.instrument_name = instrument_name
-        # TODO: remove need to pass session manually to menus and getters
-        getter = self.UserInputGetter(where=self.where(), session=self.session)
+        getter = self.make_new_getter(where=self.where())
         getter.prompts.append('instrument name')
         getter.tests.append(lambda x: isinstance(x, str))
         getter.helps.append('must be string.')

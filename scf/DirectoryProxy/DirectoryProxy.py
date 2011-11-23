@@ -93,7 +93,7 @@ class DirectoryProxy(SCFObject):
         os.mkdir(self.directory_name)
 
     def get_directory_name_interactively(self):
-        getter = self.UserInputGetter()
+        getter = self.make_new_getter(where=self.where())
         getter.prompts.append('directory name')
         self.directory_name = getter.run()
 

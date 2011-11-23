@@ -179,7 +179,7 @@ class PackageProxy(DirectoryProxy):
         self.write_tags_to_initializer(tags)
 
     def add_tag_interactively(self):
-        getter = self.UserInputGetter(session=self.session)
+        getter = self.make_new_getter(where=self.where())
         getter.prompts.append('Tag name')
         getter.prompts.append('Tag value')
         getter.should_clear_terminal = False
@@ -213,7 +213,7 @@ class PackageProxy(DirectoryProxy):
         self.write_tags_to_initializer(tags)
 
     def delete_tag_interactively(self):
-        getter = self.UserInputGetter(session=self.session)
+        getter = self.make_new_getter(where=self.where())
         getter.prompts.append('Tag name')
         getter.should_clear_terminal = False
         user_input = getter.run()
@@ -315,14 +315,14 @@ class PackageProxy(DirectoryProxy):
         exec(command)
 
     def set_package_importable_name_interactively(self):
-        getter = self.UserInputGetter()
+        getter = self.make_new_getter(where=self.where())
         getter.prompts.append('package importable name')
         getter.tests.append(iotools.is_underscore_delimited_lowercase_package_name)
         getter.helps.append('must be underscore-delimited lowercase package name.')
         self.package_importable_name = getter.run()
 
     def set_package_spaced_name_interactively(self, menu_header=None):
-        getter = self.UserInputGetter(menu_header=menu_header)
+        getter = self.make_new_getter(where=self.where())
         getter.menu_body = 'set package spaced name'
         getter.prompts.append('package spaced name')
         getter.tests.append(iotools.is_space_delimited_lowercase_string)

@@ -89,6 +89,9 @@ class SCFObject(object):
         command = 'vi %s' % self.source_file_name
         os.system(command)
 
+    def make_new_getter(self, where=None):
+        return self.UserInputGetter(where=where, session=self.session)
+
     def make_new_menu(self, where=None):
         return self.Menu(where=where, session=self.session)
 
