@@ -8,7 +8,7 @@ def test_InstrumentEditor_01():
 
     instrument_editor = baca.scf.editors.InstrumentEditor()
     
-    assert isinstance(instrument_editor.session, baca.scf.menuing.Session)
+    assert isinstance(instrument_editor.session, baca.scf.Session)
     assert instrument_editor.target is None
 
 
@@ -21,7 +21,7 @@ def test_InstrumentEditor_02():
     accordion.short_instrument_name = 'acc. I'
     instrument_editor = baca.scf.editors.InstrumentEditor(target=accordion)
     
-    assert isinstance(instrument_editor.session, baca.scf.menuing.Session)
+    assert isinstance(instrument_editor.session, baca.scf.Session)
     assert instrument_editor.target is accordion
 
 
@@ -29,7 +29,7 @@ def test_InstrumentEditor_03():
     '''Main menu.
     '''
 
-    session = baca.scf.menuing.Session(test='menu_lines')
+    session = baca.scf.Session(test='menu_lines')
     accordion = instrumenttools.Accordion()
     accordion.instrument_name = 'accordion I'
     accordion.short_instrument_name = 'acc. I'
@@ -50,7 +50,7 @@ def test_InstrumentEditor_03():
     '''Attribute management.
     '''
 
-    session = baca.scf.menuing.Session(user_input='in\nfoo')
+    session = baca.scf.Session(user_input='in\nfoo')
     accordion = instrumenttools.Accordion()
     accordion.instrument_name = 'accordion I'
     accordion.short_instrument_name = 'acc. I'

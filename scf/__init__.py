@@ -17,6 +17,7 @@ from ScoreProxy import ScoreProxy
 from ScoreTemplate import ScoreTemplate
 from ScoreTemplateWizard import ScoreTemplateWizard
 from ScoreWrangler import ScoreWrangler
+from Session import Session
 from StaticMaterialProxy import StaticMaterialProxy
 from StudioInterface import StudioInterface
 from TrevorBaca import TrevorBaca

@@ -29,7 +29,7 @@ class SCFObject(object):
     @property
     def Session(self):
         import baca
-        return baca.scf.menuing.Session
+        return baca.scf.Session
 
     @property
     def UserInputGetter(self):
