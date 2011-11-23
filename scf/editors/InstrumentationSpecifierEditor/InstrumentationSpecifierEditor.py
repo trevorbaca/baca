@@ -1,4 +1,4 @@
-from baca.scf.menuing.InteractiveEditor import InteractiveEditor
+from baca.scf.editors.InteractiveEditor import InteractiveEditor
 
 
 class InstrumentationSpecifierEditor(InteractiveEditor):
