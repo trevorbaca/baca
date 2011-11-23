@@ -28,3 +28,6 @@ class InteractiveEditor(SCFObject):
         target = self.target
         self.target = None
         return target
+
+    def is_string(self, x):
+        return isinstance(x, str)

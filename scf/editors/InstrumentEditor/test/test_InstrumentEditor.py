@@ -62,13 +62,38 @@ def test_InstrumentEditor_04():
 
 
 def test_InstrumentEditor_05():
-    '''Attribute management.
+    '''(String) attribute management.
     '''
-    py.test.skip()
 
-    session = baca.scf.Session(user_input='in\nfoo')
     accordion = instrumenttools.Accordion()
     accordion.instrument_name = 'accordion I'
     accordion.short_instrument_name = 'acc. I'
+
+    session = baca.scf.Session(user_input='in\nfoo')
     instrument_editor = baca.scf.editors.InstrumentEditor(session=session, target=accordion)
     instrument_editor.edit_interactively()
+    assert accordion.instrument_name == 'foo'
+
+    session = baca.scf.Session(user_input='sin\nf. I')
+    instrument_editor = baca.scf.editors.InstrumentEditor(session=session, target=accordion)
+    instrument_editor.edit_interactively()
+    assert accordion.short_instrument_name == 'f. I'
+
+
+def test_InstrumentEditor_06():
+    '''(Markup) attribute management.
+    '''
+
+    accordion = instrumenttools.Accordion()
+    accordion.instrument_name = 'accordion I'
+    accordion.short_instrument_name = 'acc. I'
+
+    session = baca.scf.Session(user_input='inm\nfoo I')
+    instrument_editor = baca.scf.editors.InstrumentEditor(session=session, target=accordion)
+    instrument_editor.edit_interactively()
+    assert accordion.instrument_name_markup == markuptools.Markup('foo I')
+
+    session = baca.scf.Session(user_input='sinm\nf. I')
+    instrument_editor = baca.scf.editors.InstrumentEditor(session=session, target=accordion)
+    instrument_editor.edit_interactively()
+    assert accordion.short_instrument_name_markup == markuptools.Markup('f. I')

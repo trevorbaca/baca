@@ -129,7 +129,6 @@ class UserInputGetter(MenuObject):
             print 'Help string not available.\n'
 
     def store_value(self, user_response):
-        print 'FOO', user_response
         try:
             value = eval(user_response)
         except (NameError, SyntaxError):

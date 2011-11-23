@@ -31,25 +31,40 @@ class InstrumentEditor(InteractiveEditor):
     def edit_instrument_name_interactively(self):
         getter = self.make_new_getter(where=self.where())
         getter.prompts.append('instrument name')
-        getter.tests.append(lambda x: isinstance(x, str))
+        getter.tests.append(self.is_string)
         getter.helps.append('must be string.')
-        instrument_name = getter.run()
-        self.conditionally_set_target_attr('instrument_name', instrument_name)
+        result = getter.run()
+        self.conditionally_set_target_attr('instrument_name', result)
 
     def edit_instrument_name_markup_interactively(self):
-        instrument_name_markup = raw_input('instrument name markup> ')
-        exec('instrument_name_markup = Markup(instrument_name_markup)')
-        self.target.instrument_name_markup = instrument_name_markup
+        getter = self.make_new_getter(where=self.where())
+        getter.prompts.append('instrument name markup')
+        getter.tests.append(self.is_string)
+        getter.helps.append('must be string.')
+        result = getter.run()
+        exec('from abjad import *')
+        exec('result = markuptools.Markup(result)')
+        #self.conditionally_set_target_attr('instrument_name_markup', result)
+        self.target.instrument_name_markup = result
         
     def edit_short_instrument_name_interactively(self):
-        short_instrument_name = raw_input('short instrument name> ')
-        assert isinstance(short_instrument_name, (str))
-        self.target.short_instrument_name = short_instrument_name
+        getter = self.make_new_getter(where=self.where())
+        getter.prompts.append('short instrument name')
+        getter.tests.append(self.is_string)
+        getter.helps.append('must be string.')
+        result = getter.run()
+        self.conditionally_set_target_attr('short_instrument_name', result)
 
     def edit_short_instrument_name_markup_interactively(self):
-        short_instrument_name_markup = raw_input('short instrument name markup> ')
-        exec('short_instrument_name_markup = Markup(short_instrument_name_markup)')
-        self.target.short_instrument_name_markup = short_instrument_name_markup
+        getter = self.make_new_getter(where=self.where())
+        getter.prompts.append('short instrument name markup')
+        getter.tests.append(self.is_string)
+        getter.helps.append('must be string.')
+        result = getter.run()
+        exec('from abjad import *')
+        exec('result = markuptools.Markup(result)')
+        #self.conditionally_set_target_attr('short_instrument_name_markup', result)
+        self.target.short_instrument_name_markup = result
         
     def handle_main_menu_response(self, key, value):
         '''True when calling function should break.
