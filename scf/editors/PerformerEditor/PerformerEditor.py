@@ -119,6 +119,7 @@ class PerformerEditor(InteractiveEditor):
         self.target.instruments.remove(instrument)
         self.target.instruments.insert(new_index, instrument)
 
+    # TODO: remove altogether and delegate to InstrumentEditor
     def select_instrument_from_instrumenttools_interactively(self):
         from abjad.tools import instrumenttools
         menu = self.make_new_menu(where=self.where())

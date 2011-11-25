@@ -10,13 +10,16 @@ class InteractiveEditor(SCFObject):
 
     ### PUBLIC METHODS ###
 
+    def conditionally_initialize_target(self):
+        self.target = self.target or self.target_class()
+
     def conditionally_set_target_attr(self, attr_name, attr_value):
         if not self.session.session_is_complete:
             setattr(self.target, attr_name, attr_value)
 
     def edit_interactively(self):
         self.session.menu_pieces.append(self.menu_piece)
-        self.target = self.target or self.target_class()
+        self.conditionally_initialize_target()
         while True:
             menu = self.make_main_menu()
             key, value = menu.run()

@@ -28,6 +28,9 @@ class InstrumentEditor(InteractiveEditor):
 
     ### PUBLIC METHODS ###
 
+    def conditionally_initialize_target(self):
+        self.target = self.target or self.select_instrument_from_instrumenttools_interactively()
+    
     def edit_instrument_name_interactively(self):
         getter = self.make_new_getter(where=self.where())
         getter.prompts.append('instrument name')
@@ -89,3 +92,17 @@ class InstrumentEditor(InteractiveEditor):
         menu_section.sentence_length_items.append(('sin', 'short instrument name'))
         menu_section.sentence_length_items.append(('sinm', 'short instrument name markup'))
         return menu
+
+    def select_instrument_from_instrumenttools_interactively(self):
+        from abjad.tools import instrumenttools
+        self.session.menu_pieces.append('select instrument')
+        menu = self.make_new_menu(where=self.where())
+        menu.should_clear_terminal = False
+        menu_section = self.MenuSection()
+        menu_section.items_to_number = instrumenttools.list_instrument_names()
+        menu.menu_sections.append(menu_section)
+        key, instrument_name = menu.run()
+        instrument_name = instrument_name.replace(' ', '')
+        exec('result = instrumenttools.{}()'.format(instrument_name.capitalize()))
+        self.session.menu_pieces.pop()
+        return result
