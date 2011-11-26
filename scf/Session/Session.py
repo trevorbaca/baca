@@ -81,7 +81,10 @@ class Session(object):
 
     @property
     def user_input_is_consumed(self):
-        return self.user_input is None
+        if self.session_once_had_user_input:
+            if self.user_input is None:
+                return True
+        return False
 
     @apply
     def user_specified_quit():
