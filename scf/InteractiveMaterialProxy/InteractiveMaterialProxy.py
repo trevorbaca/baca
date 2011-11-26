@@ -23,12 +23,14 @@ class InteractiveMaterialProxy(MaterialProxy):
         else:
             return '(unnamed material)'
 
-    ### PUBLIC METHODS ###
-
-    def append_status_indicator(self, menu_body):
+    @property
+    def status_indicator_string(self):
         if self.has_changes:
-            menu_body = '%s (*)' % menu_body
-        return menu_body
+            return ' (*)'
+        else:
+            return ''
+
+    ### PUBLIC METHODS ###
 
     def clear_values(self, user_input_wrapper):
         for key in user_input_wrapper:
@@ -61,10 +63,6 @@ class InteractiveMaterialProxy(MaterialProxy):
         self._original_user_input_wrapper = copy.deepcopy(user_input_wrapper)
         while True:
             menu = self.make_new_menu(where=self.where())
-            menu_body = '%s - %s - %s - edit interactively'
-            menu_body %= (self.purview_name, self.spaced_class_name, self.material_menu_name)
-            menu_body = self.append_status_indicator(menu_body)
-            menu.menu_body = menu_body
             menu_section = self.MenuSection()
             menu_section.items_to_number = self.user_input_wrapper.editable_lines
             if self.user_input_wrapper.is_complete:
@@ -173,7 +171,6 @@ class InteractiveMaterialProxy(MaterialProxy):
 
     def show_demo_input_values(self):
         menu = self.make_new_menu(where=self.where())
-        menu.menu_body = 'demo values'
         items = []
         for i, (key, value) in enumerate(self.user_input_template.iteritems()):
             item = '%s: %r' % (key.replace('_', ' '), value)

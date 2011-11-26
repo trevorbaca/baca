@@ -62,7 +62,6 @@ class MaterialWrangler(PackageWrangler, PackageProxy):
     def manage_materials(self, command_string=None):
         while True:
             menu = self.make_new_menu(where=self.where())
-            menu.menu_body = 'shared materials'
             menu_section = self.MenuSection()
             menu_section.items_to_number = list(self.iterate_material_summaries())
             menu_section.sentence_length_items.append(('i', 'create interactive material'))

@@ -323,7 +323,6 @@ class PackageProxy(DirectoryProxy):
 
     def set_package_spaced_name_interactively(self):
         getter = self.make_new_getter(where=self.where())
-        getter.menu_body = 'set package spaced name'
         getter.prompts.append('package spaced name')
         getter.tests.append(iotools.is_space_delimited_lowercase_string)
         getter.helps.append('must be space-delimited lowercase string.')
@@ -332,7 +331,6 @@ class PackageProxy(DirectoryProxy):
     def set_purview_interactively(self):
         from baca.scf.ScoreWrangler import ScoreWrangler
         menu = self.make_new_menu(where=self.where())
-        menu.menu_body = 'select purview'
         score_wrangler = ScoreWrangler()
         menu.items_to_number = score_wrangler.iterate_score_titles_with_years()
         menu.named_pairs.append(('s', 'global to studio'))

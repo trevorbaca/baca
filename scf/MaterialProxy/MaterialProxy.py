@@ -444,7 +444,6 @@ class MaterialProxy(PackageProxy):
     def manage_material(self):
         while True:
             menu = self.make_new_menu(where=self.where())
-            menu.menu_body = self.material_spaced_name
             menu_section = self.MenuSection()
             if self.is_interactive:
                 menu_section.sentence_length_items.append(('k', 'reload user input'))

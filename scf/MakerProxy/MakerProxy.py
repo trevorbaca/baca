@@ -78,7 +78,6 @@ class MakerProxy(PackageProxy):
     def manage_maker(self):
         while True:
             menu = self.make_new_menu(where=self.where())
-            menu.menu_body = self.spaced_class_name
             menu_section = self.MenuSection()
             menu_section.menu_section_title = 'existing %s' % self.generic_output_name
             menu_section.items_to_number = list(self.iterate_materials_based_on_maker())

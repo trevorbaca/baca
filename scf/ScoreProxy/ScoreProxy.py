@@ -219,9 +219,9 @@ class ScoreProxy(PackageProxy):
         self.session.menu_pieces.pop()
 
     def manage_svn(self):
+        self.session.menu_pieces.append('repository commands')
         while True:
             menu = self.make_new_menu(where=self.where())
-            menu.menu_body = 'repository commands'
             menu_section = self.MenuSection()
             menu_section.sentence_length_items.append(('st', 'svn status'))
             menu_section.sentence_length_items.append(('add', 'svn add'))
@@ -230,7 +230,8 @@ class ScoreProxy(PackageProxy):
             menu.menu_sections.append(menu_section)
             key, value = menu.run()
             if key == 'b':
-                return key, None
+                value = None
+                break
             elif key == 'add':
                 self.svn_add()
             elif key == 'ci':
@@ -238,6 +239,8 @@ class ScoreProxy(PackageProxy):
                 break
             elif key == 'st':
                 self.svn_st()
+        self.session.menu_pieces.pop()
+        return key, value
 
     def profile_package_structure(self):
         if not os.path.exists(self.directory_name):

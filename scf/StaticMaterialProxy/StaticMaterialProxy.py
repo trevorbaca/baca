@@ -37,7 +37,6 @@ class StaticMaterialProxy(MaterialProxy):
 
     def create_interactively(self):
         self.clear_terminal()
-        menu_body = 'create static material package'
         materials_package_importable_name = self.get_materials_package_importable_name()
         package_short_name = self.get_package_short_name_of_new_material_interactively()
         has_visualizer = self.get_visualizer_status_of_new_material_package_interactively()
