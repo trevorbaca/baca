@@ -27,18 +27,14 @@ class ChunkProxy(PackageProxy):
         self.create_initializer()
         self.proceed()
 
-    def create_chunk_interactively(self, menu_header=None):
-        if menu_header is not None:
-            menu_header = '%s - create chunk interactively' % menu_header
-        else:
-            menu_header = 'create chunk interactively'
+    def create_chunk_interactively(self):
         if self.purview is None:
-            self.set_purview_interactively(menu_header=menu_header)
+            self.set_purview_interactively()
         if self.package_spaced_name is None:
             print 'here!'
-            self.set_package_spaced_name_interactively(menu_header=menu_header)
+            self.set_package_spaced_name_interactively()
         if self.score_template is None:
-            self.set_score_template_interactively(menu_header=menu_header)
+            self.set_score_template_interactively()
         self.write_package_to_disk()
         self.proceed()
 
@@ -54,10 +50,9 @@ class ChunkProxy(PackageProxy):
         chunk_proxy.create_chunk()
         self.proceed()
 
-    def manage_chunk(self, menu_header=None):
+    def manage_chunk(self):
         while True:
             menu = self.make_new_menu(where=self.where())
-            menu.menu_header = menu_header
             menu.menu_body = self.package_spaced_name
             menu_section = self.MenuSection()
             menu_section.named_pairs.append(('n', 'initializer'))

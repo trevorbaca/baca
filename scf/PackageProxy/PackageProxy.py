@@ -321,7 +321,7 @@ class PackageProxy(DirectoryProxy):
         getter.helps.append('must be underscore-delimited lowercase package name.')
         self.package_importable_name = getter.run()
 
-    def set_package_spaced_name_interactively(self, menu_header=None):
+    def set_package_spaced_name_interactively(self):
         getter = self.make_new_getter(where=self.where())
         getter.menu_body = 'set package spaced name'
         getter.prompts.append('package spaced name')
@@ -329,7 +329,7 @@ class PackageProxy(DirectoryProxy):
         getter.helps.append('must be space-delimited lowercase string.')
         self.package_spaced_name = getter.run()
 
-    def set_purview_interactively(self, menu_header=None):
+    def set_purview_interactively(self):
         from baca.scf.ScoreWrangler import ScoreWrangler
         menu = self.make_new_menu(where=self.where())
         menu.menu_body = 'select purview'

@@ -38,21 +38,21 @@ class InteractiveMaterialProxy(MaterialProxy):
         self.print_not_implemented()
         print 'Interactive material package %s created.\n' % package_importable_name
 
-    def create_interactively(self, menu_header=None):
+    def create_interactively(self):
         while True:
-            key, value = self.maker_wrangler.select_maker(menu_header=menu_header)
+            key, value = self.maker_wrangler.select_maker()
             if value is None:
                 break
             else:
                 maker = value
             maker.score = self
-            result = maker.edit_interactively(menu_header=menu_header)
+            result = maker.edit_interactively()
             if result:
                 break
         self.proceed()
         return True, None
 
-    def edit_interactively(self, menu_header=None, user_input_wrapper=None):
+    def edit_interactively(self, user_input_wrapper=None):
         if user_input_wrapper is None:
             user_input_wrapper = self.initialize_user_input_wrapper()
         self.user_input_wrapper = user_input_wrapper
@@ -96,8 +96,7 @@ class InteractiveMaterialProxy(MaterialProxy):
             elif key == 'i':
                 self.read_user_input_values_from_disk()
             elif key == 'l':
-                menu_header = ' - '.join(menu.menu_title_parts[:-1])
-                self.set_purview_interactively(menu_header=menu_header)
+                self.set_purview_interactively()
             elif key == 'm':
                 self.save_material(self.user_input_wrapper)
                 return key, None
@@ -160,9 +159,7 @@ class InteractiveMaterialProxy(MaterialProxy):
     def read_user_input_values_from_disk(self):
         import baca
         score_wrangler = baca.scf.ScoreWrangler()
-        menu_header = 'import %s' % self.spaced_class_name
-        material_proxy = score_wrangler.select_interactive_material_proxy(
-            menu_header=menu_header, klasses=(type(self),))
+        material_proxy = score_wrangler.select_interactive_material_proxy(klasses=(type(self),))
         self.user_input_wrapper = copy.deepcopy(material_proxy.user_input_wrapper)
     
     def save_material(self, user_input_wrapper):

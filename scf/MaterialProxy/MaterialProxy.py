@@ -490,7 +490,7 @@ class MaterialProxy(PackageProxy):
             elif key == 's':
                 self.summarize_material_package()
             elif key == 't':
-                self.manage_tags(menu_header=menu.menu_title)
+                self.manage_tags()
             elif key == 'v':
                 self.manage_visualizer(key)
             elif key == 'y':

@@ -36,11 +36,11 @@ class MaterialWrangler(PackageWrangler, PackageProxy):
 
     ### PUBLIC METHODS ###
 
-    def create_interactive_material_package_interactively(self, menu_header=None):
+    def create_interactive_material_package_interactively(self):
         interactive_material_proxy = self.InteractiveMaterialPackage(package_importable_name)
         interactive_material_proxy.create_interactively()
 
-    def create_static_material_package_interactively(self, menu_header=None):
+    def create_static_material_package_interactively(self):
         static_material_package_proxy = self.StaticMaterialProxy()
         static_material_package_proxy.create_interactively()
 
@@ -73,8 +73,7 @@ class MaterialWrangler(PackageWrangler, PackageProxy):
                 return key, None
             elif key == 'i':
                 menu_title = menu.menu_title
-                self.material_wrangler.create_interactive_material_package_interactively(
-                    menu_header=menu_title)
+                self.material_wrangler.create_interactive_material_package_interactively()
             elif key == 's':
                 menu_title = menu.menu_title
                 self.material_wrangler.create_static_material_interactively(menu_title=menu_title)
@@ -89,4 +88,4 @@ class MaterialWrangler(PackageWrangler, PackageProxy):
                     package_importable_name = '%s.%s' % (score_package_importable_name, material_underscored_name)
                     material_proxy = self.InteractiveMaterialProxy(package_importable_name)
                 material_proxy.title = 'Materials'
-                material_proxy.manage_material(menu_header=menu.menu_title)
+                material_proxy.manage_material()

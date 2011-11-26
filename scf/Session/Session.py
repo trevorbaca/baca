@@ -39,11 +39,6 @@ class Session(object):
         return self.user_input is None and self.test is None
 
     @property
-    def menu_header(self):
-        if self.menu_pieces:
-            return self.menu_pieces[-1]
-
-    @property
     def formatted_attributes(self):
         result = []
         result.append('initial_user_input: {!r}'.format(self.initial_user_input))

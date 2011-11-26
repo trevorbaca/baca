@@ -72,7 +72,7 @@ class MakerWrangler(PackageWrangler, PackageProxy):
         return maker_spaced_class_names
 
     # replace with maker wizard
-    def make_maker(self, menu_header=None):
+    def make_maker(self):
         while True:
             maker_name = raw_input('Maker name> ')
             print ''
@@ -169,13 +169,13 @@ class MakerWrangler(PackageWrangler, PackageProxy):
             if key == 'b':
                 return key, value
             elif key == 'new':
-                self.make_maker(menu_header=menu_header)
+                self.make_maker()
             else:
                 maker_name = value
                 maker_name = maker_name.replace(' ', '_')
                 maker_name = iotools.underscore_delimited_lowercase_to_uppercamelcase(maker_name)
                 maker = self.get_maker(maker_name)
-                maker.manage_maker(menu_header=menu_header)
+                maker.manage_maker()
 
     def select_maker(self):
         menu = self.make_new_menu(where=self.where())

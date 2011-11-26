@@ -221,7 +221,6 @@ class ScoreProxy(PackageProxy):
     def manage_svn(self):
         while True:
             menu = self.make_new_menu(where=self.where())
-            menu.menu_header = menu_header
             menu.menu_body = 'repository commands'
             menu_section = self.MenuSection()
             menu_section.sentence_length_items.append(('st', 'svn status'))

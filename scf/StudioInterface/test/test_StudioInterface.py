@@ -170,20 +170,17 @@ def test_StudioInterface_08():
     session = baca.scf.Session(user_input='', test='menu_lines')
     studio_interface = baca.scf.StudioInterface(session=session)
     studio_interface.work_in_studio()
-    menu_header = session.test_result[0]
-    assert menu_header == 'Studio - active scores'
+    assert session.test_result[0] == 'Studio - active scores'
 
     session = baca.scf.Session(user_input='svn', test='menu_lines')
     studio_interface = baca.scf.StudioInterface(session=session)
     studio_interface.work_in_studio()
-    menu_header = session.test_result[0]
-    assert menu_header == 'Studio - active scores - repository commands'
+    assert session.test_result[0] == 'Studio - active scores - repository commands'
 
     session = baca.scf.Session(user_input='svn\nb', test='menu_lines')
     studio_interface = baca.scf.StudioInterface(session=session)
     studio_interface.work_in_studio()
-    menu_header = session.test_result[0]
-    assert menu_header == 'Studio - active scores'
+    assert session.test_result[0] == 'Studio - active scores'
 
 
 def test_StudioInterface_09():

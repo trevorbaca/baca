@@ -28,14 +28,10 @@ class ChunkWrangler(PackageWrangler, PackageProxy):
 
     ### PUBLIC METHODS ###
 
-    def create_chunk_interactively(self, menu_header=None):
+    def create_chunk_interactively(self):
         chunk_proxy = self.ChunkProxy()
         chunk_proxy.purview = self.purview
-        if self.score is not None:
-            menu_header = self.score.title
-        else:
-            menu_header = None
-        chunk_proxy.create_chunk_interactively(menu_header=menu_header)
+        chunk_proxy.create_chunk_interactively()
 
     def get_package_proxy(self, package_importable_name):
         return self.ChunkProxy(package_importable_name)

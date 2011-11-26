@@ -75,10 +75,9 @@ class MakerProxy(PackageProxy):
             initializer = os.path.join(os.environ.get('BACA'), 'materials', '__init__.py')        
         return initializer
 
-    def manage_maker(self, menu_header=None):
+    def manage_maker(self):
         while True:
             menu = self.make_new_menu(where=self.where())
-            menu.menu_header = menu_header
             menu.menu_body = self.spaced_class_name
             menu_section = self.MenuSection()
             menu_section.menu_section_title = 'existing %s' % self.generic_output_name
@@ -96,14 +95,14 @@ class MakerProxy(PackageProxy):
                 self.delete_package()
                 break
             elif key == 'new':
-                self.edit_interactively(menu_header=menu.menu_title)
+                self.edit_interactively()
             elif key == 'ren':
                 self.print_not_implemented()
             elif key == 'src':
                 self.edit_source_file()
             else:
                 material_proxy = value
-                material_proxy.manage_material(menu_header=menu.menu_title)
+                material_proxy.manage_material()
 
     def write_initializer_to_disk(self):
         initializer = file(os.path.join(self.material_package_directory, '__init__.py'), 'w')
