@@ -110,7 +110,7 @@ class MenuObject(SCFObject):
         elif key == 'hidden':
             return self.show_hidden_items()
         elif key == 'q':
-            raise SystemExit
+            self.session.user_specified_quit = True
         elif key == 'studio':
             raise StudioException
         elif key == 'where':

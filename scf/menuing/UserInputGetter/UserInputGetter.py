@@ -115,8 +115,6 @@ class UserInputGetter(MenuObject):
             self.present_prompts_and_store_values()
         except KeyboardInterrupt:
             return
-        except SystemExit:
-            raise SystemExit
         if len(self.values) == 1:
             return self.values[0]
         else:

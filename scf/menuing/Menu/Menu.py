@@ -149,7 +149,9 @@ class Menu(MenuObject, SCFObject):
             key, value = self.display()
             should_clear_terminal, hide_menu = False, True
             result = self.handle_hidden_key(key)
-            if result is True:
+            if self.session.session_is_complete:
+                break
+            elif result is True:
                 pass
             elif bool(result):
                 self.session.test_result = result
