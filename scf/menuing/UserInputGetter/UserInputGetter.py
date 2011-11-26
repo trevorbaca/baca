@@ -54,6 +54,12 @@ class UserInputGetter(MenuObject):
 
     ### PUBLIC METHODS ###
 
+    def append_string(self, spaced_attribute_name):
+        assert isinstance(spaced_attribute_name, str)
+        self.prompts.append(spaced_attribute_name)
+        self.tests.append(self.is_string)
+        self.helps.append('must be string.')
+
     def conditionally_display_prompt_and_get_user_response(self):
         if self.session.is_displayable:
             prompt = self.menu_lines[-1]

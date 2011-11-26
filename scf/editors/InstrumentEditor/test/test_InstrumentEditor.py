@@ -38,12 +38,12 @@ def test_InstrumentEditor_03():
     instrument_editor.edit_interactively()
 
     assert session.test_result == [
-     'Accordion I',
+     'Accordion',
      '',
-     '     in: instrument name',
-     '     inm: instrument name markup',
-     '     sin: short instrument name',
-     '     sinm: short instrument name markup',
+     "     in: instrument name ('accordion I')",
+     "     inm: instrument name markup (Markup('Accordion I'))",
+     "     sin: short instrument name ('acc. I')",
+     "     sinm: short instrument name markup (Markup('Acc. I'))",
      '']
 
 

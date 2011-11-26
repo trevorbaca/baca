@@ -119,6 +119,9 @@ class MenuObject(SCFObject):
             return False
         return True
 
+    def is_string(self, expr):
+        return isinstance(expr, str)
+
     def make_tab(self, n):
         return 4 * n * ' '
 

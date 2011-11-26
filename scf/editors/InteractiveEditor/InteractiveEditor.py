@@ -10,6 +10,17 @@ class InteractiveEditor(SCFObject):
 
     ### PUBLIC METHODS ###
 
+    def attribute_name_to_menu_key(self, attribute_name, menu_keys):
+        found_menu_key = False        
+        attr_parts = attribute_name.split('_')
+        i = 1
+        while True:
+            menu_key = ''.join([part[:i] for part in attr_parts])
+            if menu_key not in menu_keys:
+                break
+            i = i + 1
+        return menu_key
+
     def conditionally_initialize_target(self):
         self.target = self.target or self.target_class()
 
@@ -19,7 +30,9 @@ class InteractiveEditor(SCFObject):
 
     def edit_interactively(self):
         self.session.menu_pieces.append(self.menu_piece)
-        self.conditionally_initialize_target()
+        if self.conditionally_initialize_target():
+            self.session.menu_pieces.pop()
+            self.session.menu_pieces.append(self.menu_piece)
         while True:
             menu = self.make_main_menu()
             key, value = menu.run()
@@ -31,6 +44,3 @@ class InteractiveEditor(SCFObject):
         target = self.target
         self.target = None
         return target
-
-    def is_string(self, x):
-        return isinstance(x, str)

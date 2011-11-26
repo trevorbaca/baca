@@ -17,10 +17,26 @@ class InstrumentEditor(InteractiveEditor):
     @property
     def menu_piece(self):
         if self.target is not None:
-            return self.target.instrument_name
+            return type(self.target).__name__
         else:
-            return 'instrument'
+            return 'instrument editor'
 
+    @property
+    def target_attribute_menu_entries(self):
+        result = []
+        menu_keys = []
+        target_attrs = ('instrument_name', 'instrument_name_markup', 
+            'short_instrument_name', 'short_instrument_name_markup')
+        for target_attr in target_attrs:
+            menu_key = self.attribute_name_to_menu_key(target_attr, menu_keys)
+            assert menu_key not in menu_keys
+            menu_keys.append(menu_key)
+            value = target_attr.replace('_', ' ')
+            value = '{} ({!r})'.format(value, getattr(self.target, target_attr))
+            pair = (menu_key, value)
+            result.append(pair)
+        return result
+            
     @property
     def target_class(self):
         from abjad.tools.instrumenttools._Instrument import _Instrument
@@ -29,21 +45,19 @@ class InstrumentEditor(InteractiveEditor):
     ### PUBLIC METHODS ###
 
     def conditionally_initialize_target(self):
-        self.target = self.target or self.select_instrument_from_instrumenttools_interactively()
+        if self.target is None:
+            self.target = self.select_instrument_from_instrumenttools_interactively()
+            return True
     
     def edit_instrument_name_interactively(self):
         getter = self.make_new_getter(where=self.where())
-        getter.prompts.append('instrument name')
-        getter.tests.append(self.is_string)
-        getter.helps.append('must be string.')
+        getter.append_string('instrument name')
         result = getter.run()
         self.conditionally_set_target_attr('instrument_name', result)
 
     def edit_instrument_name_markup_interactively(self):
         getter = self.make_new_getter(where=self.where())
-        getter.prompts.append('instrument name markup')
-        getter.tests.append(self.is_string)
-        getter.helps.append('must be string.')
+        getter.append_string('instrument name markup')
         result = getter.run()
         exec('from abjad import *')
         exec('result = markuptools.Markup(result)')
@@ -52,17 +66,13 @@ class InstrumentEditor(InteractiveEditor):
         
     def edit_short_instrument_name_interactively(self):
         getter = self.make_new_getter(where=self.where())
-        getter.prompts.append('short instrument name')
-        getter.tests.append(self.is_string)
-        getter.helps.append('must be string.')
+        getter.append_string('short instrument name')
         result = getter.run()
         self.conditionally_set_target_attr('short_instrument_name', result)
 
     def edit_short_instrument_name_markup_interactively(self):
         getter = self.make_new_getter(where=self.where())
-        getter.prompts.append('short instrument name markup')
-        getter.tests.append(self.is_string)
-        getter.helps.append('must be string.')
+        getter.append_string('short instrument name markup')
         result = getter.run()
         exec('from abjad import *')
         exec('result = markuptools.Markup(result)')
@@ -87,10 +97,11 @@ class InstrumentEditor(InteractiveEditor):
         menu = self.make_new_menu(where=self.where())
         menu_section = self.MenuSection()
         menu.menu_sections.append(menu_section)
-        menu_section.sentence_length_items.append(('in', 'instrument name'))
-        menu_section.sentence_length_items.append(('inm', 'instrument name markup'))
-        menu_section.sentence_length_items.append(('sin', 'short instrument name'))
-        menu_section.sentence_length_items.append(('sinm', 'short instrument name markup'))
+#        menu_section.sentence_length_items.append(('in', 'instrument name ({!r})'.format(self.target.instrument_name)))
+#        menu_section.sentence_length_items.append(('inm', 'instrument name markup'))
+#        menu_section.sentence_length_items.append(('sin', 'short instrument name'))
+#        menu_section.sentence_length_items.append(('sinm', 'short instrument name markup'))
+        menu_section.sentence_length_items = self.target_attribute_menu_entries
         return menu
 
     def select_instrument_from_instrumenttools_interactively(self):
