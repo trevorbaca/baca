@@ -61,11 +61,11 @@ def test_ScoreProxy_02():
     '''Main menu.
     '''
 
-    session = baca.scf.Session(test='menu_lines')
-    archipel = baca.scf.ScoreProxy('archipel', session=session)
+    archipel = baca.scf.ScoreProxy('archipel')
+    archipel.session.test = 'menu_lines'
     archipel.manage_score()
 
-    assert session.test_result == [
+    assert archipel.session.test_result == [
      "L'archipel du corps",
      '',
      '     Chunks',
@@ -87,11 +87,12 @@ def test_ScoreProxy_03():
     '''Main menu to hidden menu.
     '''
 
-    session = baca.scf.Session(user_input='hidden', test='menu_lines')
-    archipel = baca.scf.ScoreProxy('archipel', session=session)
+    archipel = baca.scf.ScoreProxy('archipel')
+    archipel.session.test = 'menu_lines'
+    archipel.session.user_input = 'hidden'
     archipel.manage_score()
 
-    assert session.test_result == [
+    assert archipel.session.test_result == [
      '     b: back',
      '     exec: exec statement',
      '     grep: grep baca directories',
@@ -110,11 +111,11 @@ def test_ScoreProxy_04():
     '''Manage tags menu.
     '''
 
-    session = baca.scf.Session(test='menu_lines')
-    archipel = baca.scf.ScoreProxy('archipel', session=session)
+    archipel = baca.scf.ScoreProxy('archipel')
+    archipel.session.test = 'menu_lines'
     archipel.manage_tags()
 
-    assert session.test_result == [
+    assert archipel.session.test_result == [
      'Tags',
      '',
      "     'composer': TrevorBaca()",
@@ -130,12 +131,12 @@ def test_ScoreProxy_05():
     '''Add and delete tag interactively.
     '''
 
-    session = baca.scf.Session(user_input="add\nfoo\nbar")
-    archipel = baca.scf.ScoreProxy('archipel', session=session)
+    archipel = baca.scf.ScoreProxy('archipel')
+    archipel.session.user_input = 'add\nfoo\nbar'
     archipel.manage_tags()
     assert archipel.get_tag('foo') == 'bar'
 
-    session = baca.scf.Session(user_input="del\nfoo")
-    archipel = baca.scf.ScoreProxy('archipel', session=session)
+    archipel = baca.scf.ScoreProxy('archipel')
+    archipel.session.user_input = 'del\nfoo'
     archipel.manage_tags()
     assert archipel.get_tag('foo') is None
