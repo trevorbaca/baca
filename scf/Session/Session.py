@@ -11,6 +11,7 @@ class Session(object):
         self.test = test
         self.test_result = None
         self.user_input = user_input
+        self.user_specified_quit = False
 
     ### OVERLOADS ###
 
@@ -69,7 +70,8 @@ class Session(object):
 
     @property
     def session_is_complete(self):
-        return self.test_is_complete or self.user_input_is_consumed
+        #return self.test_is_complete or self.user_input_is_consumed
+        return self.test_is_complete or self.user_input_is_consumed or self.user_specified_quit
 
     @property
     def session_once_had_user_input(self):
