@@ -1,13 +1,10 @@
 class Session(object):
     
-    def __init__(self, menu_pieces=None, scores_to_show='active', test=None, user_input=None):
+    def __init__(self, test=None, user_input=None):
         self._session_once_had_user_input = False
         self.initial_user_input = user_input
-        if menu_pieces is None:
-            self.menu_pieces = []
-        else:
-            self.menu_pieces = menu_pieces 
-        self.scores_to_show = scores_to_show
+        self.menu_pieces = []
+        self.scores_to_show = 'active'
         self.test = test
         self.test_result = None
         self.user_input = user_input
@@ -57,20 +54,19 @@ class Session(object):
             return ''
 
     @property
-    def test_is_complete(self):
-        if self.test is not None:
-            if self.test_result is not None:
-                return True
-        return False
-
-    @property
     def session_is_complete(self):
-        #return self.test_is_complete or self.user_input_is_consumed
         return self.test_is_complete or self.user_input_is_consumed or self.user_specified_quit
 
     @property
     def session_once_had_user_input(self):
         return self._session_once_had_user_input
+
+    @property
+    def test_is_complete(self):
+        if self.test is not None:
+            if self.test_result is not None:
+                return True
+        return False
 
     @apply
     def user_input():
@@ -85,9 +81,16 @@ class Session(object):
 
     @property
     def user_input_is_consumed(self):
-        #return bool(self.user_input == '')
-        #return self.user_input in (None, '')
         return self.user_input is None
+
+    @apply
+    def user_specified_quit():
+        def fget(self):
+            return self._user_specified_quit
+        def fset(self, user_specified_quit):
+            assert isinstance(user_specified_quit, bool)
+            self._user_specified_quit = user_specified_quit
+        return property(**locals())
     
     ### PUBLIC METHODS ###
 
