@@ -20,10 +20,10 @@ def test_StudioInterface_02():
     '''
 
     studio_interface = baca.scf.StudioInterface()
-    studio_interface.session.test = 'menu_lines'
+    studio_interface.session.user_input = 'q'
     studio_interface.work_in_studio()
     
-    assert studio_interface.session.test_result == [  
+    assert studio_interface.session.menu_chunks[-1] == [  
      'Studio - active scores',
      '',
      "     1: L'archipel du corps (2011)",
@@ -46,11 +46,10 @@ def test_StudioInterface_03():
     '''
 
     studio_interface = baca.scf.StudioInterface()
-    studio_interface.session.test = 'menu_lines'
-    studio_interface.session.user_input = 'hidden'
+    studio_interface.session.user_input = 'hidden\nq'
     studio_interface.work_in_studio()
 
-    assert studio_interface.session.test_result == [
+    assert studio_interface.session.menu_chunks[-2] == [
      '     active: show active scores only',   
      '     all: show all scores',
      '     exec: exec statement',
@@ -71,11 +70,10 @@ def test_StudioInterface_04():
     '''
 
     studio_interface = baca.scf.StudioInterface()
-    studio_interface.session.test = 'menu_lines'
-    studio_interface.session.user_input = '1'
+    studio_interface.session.user_input = '1\nq'
     studio_interface.work_in_studio()
 
-    assert studio_interface.session.test_result == [
+    assert studio_interface.session.menu_chunks[-1] == [
      "L'archipel du corps",
      '',
      '     Chunks',
@@ -98,11 +96,10 @@ def test_StudioInterface_05():
     '''
 
     studio_interface = baca.scf.StudioInterface()
-    studio_interface.session.test = 'menu_lines'
-    studio_interface.session.user_input = 'mb'
+    studio_interface.session.user_input = 'mb\nq'
     studio_interface.work_in_studio()
     
-    assert studio_interface.session.test_result == [  
+    assert studio_interface.session.menu_chunks[-1] == [  
      'Studio - mothballed scores',
      '',
      '     1: Arac\xc4\xb1l\xc4\xb1k',
@@ -124,11 +121,10 @@ def test_StudioInterface_06():
     '''
 
     studio_interface = baca.scf.StudioInterface()
-    studio_interface.session.test = 'menu_lines'
-    studio_interface.session.user_input = '1\ntags'
+    studio_interface.session.user_input = '1\ntags\nq'
     studio_interface.work_in_studio()
 
-    assert studio_interface.session.test_result == [
+    assert studio_interface.session.menu_chunks[-2] == [
      "L'archipel du corps - tags",
      '',
      "     'composer': TrevorBaca()",
@@ -145,11 +141,10 @@ def test_StudioInterface_07():
     '''
 
     studio_interface = baca.scf.StudioInterface()
-    studio_interface.session.test = 'menu_lines'
-    studio_interface.session.user_input = 'svn'
+    studio_interface.session.user_input = 'svn\nq'
     studio_interface.work_in_studio()
 
-    assert studio_interface.session.test_result == [
+    assert studio_interface.session.menu_chunks[-1] == [
      'Studio - active scores - repository commands',
      '',
      '     add: svn add',
@@ -173,28 +168,16 @@ def test_StudioInterface_08():
     '''
 
     studio_interface = baca.scf.StudioInterface()
-    studio_interface.session.test = 'menu_lines'
-    studio_interface.session.user_input = ''
+    studio_interface.session.user_input = 'q'
     studio_interface.work_in_studio()
-    assert studio_interface.session.test_result[0] == 'Studio - active scores'
+    assert studio_interface.session.menu_chunks[-1][0] == 'Studio - active scores'
 
     studio_interface = baca.scf.StudioInterface()
-    studio_interface.session.test = 'menu_lines'
-    studio_interface.session.user_input = 'svn'
+    studio_interface.session.user_input = 'svn\nq'
     studio_interface.work_in_studio()
-    assert studio_interface.session.test_result[0] == 'Studio - active scores - repository commands'
+    assert studio_interface.session.menu_chunks[-1][0] == 'Studio - active scores - repository commands'
 
     studio_interface = baca.scf.StudioInterface()
-    studio_interface.session.test = 'menu_lines'
-    studio_interface.session.user_input = 'svn\nb'
+    studio_interface.session.user_input = 'svn\nb\nq'
     studio_interface.work_in_studio()
-    assert studio_interface.session.test_result[0] == 'Studio - active scores'
-
-
-def test_StudioInterface_09():
-    '''Changing from main menu to svn menu raises no exceptions and stops execution when finished.
-    '''
-
-    session = baca.scf.Session(user_input='svn')
-    studio_interface = baca.scf.StudioInterface(session=session)
-    studio_interface.work_in_studio()
+    assert studio_interface.session.menu_chunks[-1][0] == 'Studio - active scores'

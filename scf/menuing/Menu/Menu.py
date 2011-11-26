@@ -106,14 +106,15 @@ class Menu(MenuObject, SCFObject):
             user_response = self.pop_next_user_response_from_user_input()
             if user_response == '':
                 user_response = None
-            if user_response is None:
-                if self.session.test == 'menu_lines':
-                    self.session.test_result = self.menu_lines
+            #if user_response is None:
+            #    if self.session.test == 'menu_lines':
+            #        self.session.test_result = self.menu_lines
             return user_response
 
     def display(self):
         self.conditionally_clear_terminal()
         self.make_menu_lines_keys_and_values()
+        self.session.menu_chunks.append(self.menu_lines[:])
         self.add_hidden_menu_items()
         user_response = self.conditionally_display_menu_lines_and_get_user_response()
         value = self.change_user_response_to_value(user_response)

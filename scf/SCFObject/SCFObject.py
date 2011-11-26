@@ -1,6 +1,7 @@
 from abjad.tools import iotools
 import inspect
 import os
+import pprint
 import readline
 
 
@@ -94,6 +95,9 @@ class SCFObject(object):
 
     def make_new_menu(self, where=None):
         return self.Menu(where=where, session=self.session)
+
+    def pmc(self):
+        pprint.pprint(self.session.menu_chunks)
 
     def print_not_implemented(self):
         print 'Not yet implemented.\n'

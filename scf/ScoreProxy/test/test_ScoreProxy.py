@@ -19,11 +19,7 @@ def test_ScoreProxy_01():
     assert isinstance(score_proxy.material_wrangler, baca.scf.MaterialWrangler)
     assert isinstance(score_proxy.mus_proxy, baca.scf.MusProxy)
 
-    # FIXME
-    #assert score_proxy.has_correct_directory_structure
     assert score_proxy.has_correct_initializers
-    #assert score_proxy.has_correct_package_structure
-
     assert score_proxy.is_score_local_purview
     assert not score_proxy.is_studio_global_purview
 
@@ -62,10 +58,10 @@ def test_ScoreProxy_02():
     '''
 
     archipel = baca.scf.ScoreProxy('archipel')
-    archipel.session.test = 'menu_lines'
+    archipel.session.user_input = 'q'
     archipel.manage_score()
 
-    assert archipel.session.test_result == [
+    assert archipel.session.menu_chunks[-1] == [
      "L'archipel du corps",
      '',
      '     Chunks',
@@ -88,11 +84,10 @@ def test_ScoreProxy_03():
     '''
 
     archipel = baca.scf.ScoreProxy('archipel')
-    archipel.session.test = 'menu_lines'
-    archipel.session.user_input = 'hidden'
+    archipel.session.user_input = 'hidden\nq'
     archipel.manage_score()
 
-    assert archipel.session.test_result == [
+    assert archipel.session.menu_chunks[-2] == [
      '     b: back',
      '     exec: exec statement',
      '     grep: grep baca directories',
@@ -112,10 +107,10 @@ def test_ScoreProxy_04():
     '''
 
     archipel = baca.scf.ScoreProxy('archipel')
-    archipel.session.test = 'menu_lines'
+    archipel.session.user_input = 'q'
     archipel.manage_tags()
 
-    assert archipel.session.test_result == [
+    assert archipel.session.menu_chunks[-1] == [
      'Tags',
      '',
      "     'composer': TrevorBaca()",
@@ -132,11 +127,11 @@ def test_ScoreProxy_05():
     '''
 
     archipel = baca.scf.ScoreProxy('archipel')
-    archipel.session.user_input = 'add\nfoo\nbar'
+    archipel.session.user_input = 'add\nfoo\nbar\nq'
     archipel.manage_tags()
     assert archipel.get_tag('foo') == 'bar'
 
     archipel = baca.scf.ScoreProxy('archipel')
-    archipel.session.user_input = 'del\nfoo'
+    archipel.session.user_input = 'del\nfoo\nq'
     archipel.manage_tags()
     assert archipel.get_tag('foo') is None

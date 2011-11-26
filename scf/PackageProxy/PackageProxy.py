@@ -188,10 +188,8 @@ class PackageProxy(DirectoryProxy):
             tag_name, tag_value = user_input
             self.add_tag(tag_name, tag_value)
             confirm_line = 'Tag added.\n'
-            if self.session.user_input is None:
+            if self.session.is_displayable:
                 print confirm_line
-            elif self.session.test == 'menu_lines':
-                self.session.test_result.append(confirm_line)
         if self.session.user_input is None:
             self.proceed()
 
@@ -221,10 +219,8 @@ class PackageProxy(DirectoryProxy):
             tag_name = user_input
             self.delete_tag(tag_name)
             confirm_line = 'tag deleted.\n'
-            if self.session.user_input is None:
+            if self.session.is_displayable:
                 print confirm_line
-            elif self.session.test == 'menu_lines':
-                self.session.test_result.append(confirm_line)
         if self.session.user_input is None:
             self.proceed()
 
@@ -279,14 +275,14 @@ class PackageProxy(DirectoryProxy):
             section.sentence_length_items.append(('del', 'delete tag'))
             menu.menu_sections.append(section)
             key, value = menu.run()
+            if self.session.session_is_complete:
+                return True
             if key == 'b':
                 break
             elif key == 'add':
                 self.add_tag_interactively()
             elif key == 'del':
                 self.delete_tag_interactively()
-            if self.session.session_is_complete:
-                break
         self.session.menu_pieces.pop()
 
     def pprint_tags(self, tags):

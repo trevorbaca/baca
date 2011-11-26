@@ -45,6 +45,7 @@ class StudioInterface(SCFObject):
         self.session.menu_pieces.pop()
 
     def handle_main_menu_response(self, key, value):
+        result = False
         if key is None:
             pass
         elif key == 'active':
@@ -60,15 +61,18 @@ class StudioInterface(SCFObject):
         elif key == 'some':
             self.session.hide_mothballed_scores = True
         elif key == 'svn':
-            self.manage_svn()
+            result = self.manage_svn()
         else:
             score_package_importable_name = value
-            score_proxy = self.score_wrangler.ScoreProxy(
-                score_package_importable_name, session=self.session)
+            score_proxy = self.score_wrangler.ScoreProxy(score_package_importable_name, session=self.session)
             menu_pieces = self.session.menu_pieces[:]
             self.session.menu_pieces = []
-            score_proxy.manage_score()
+            result = score_proxy.manage_score()
             self.session.menu_pieces = menu_pieces
+        if result:
+            return True
+        else:
+            return False
     
     def handle_svn_response(self, key, value):
         if key == 'b':
@@ -158,9 +162,9 @@ class StudioInterface(SCFObject):
         while True:
             menu = self.make_svn_menu()
             key, value = menu.run()
-            if self.handle_svn_response(key, value):
-                break
             if self.session.session_is_complete:
+                return True
+            if self.handle_svn_response(key, value):
                 break
         self.session.menu_pieces.pop()
 
@@ -187,9 +191,9 @@ class StudioInterface(SCFObject):
             self.session.menu_pieces.append('{} scores'.format(self.session.scores_to_show))
             menu = self.make_main_menu()
             key, value = menu.run()
-            if self.handle_main_menu_response(key, value):
-                break
             if self.session.session_is_complete:
+                return True
+            if self.handle_main_menu_response(key, value):
                 break
             self.session.menu_pieces.pop()
         self.session.menu_pieces.pop()

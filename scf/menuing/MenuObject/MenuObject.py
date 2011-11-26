@@ -108,7 +108,7 @@ class MenuObject(SCFObject):
         elif key == 'here':
             self.edit_client_source()
         elif key == 'hidden':
-            return self.show_hidden_items()
+            self.show_hidden_items()
         elif key == 'q':
             self.session.user_specified_quit = True
         elif key == 'studio':
@@ -160,11 +160,15 @@ class MenuObject(SCFObject):
             menu_line += '%s: %s' % (key, value)
             menu_lines.append(menu_line)
         menu_lines.append('')
-        if self.session.test is None:
+#        if self.session.test is None:
+#            for menu_line in menu_lines:
+#                print menu_line
+#            return True
+#        elif self.session.test == 'menu_lines':
+#            return menu_lines
+#        else:
+#            raise ValueError
+        self.session.menu_chunks.append(menu_lines[:])
+        if self.session.is_displayable:
             for menu_line in menu_lines:
                 print menu_line
-            return True
-        elif self.session.test == 'menu_lines':
-            return menu_lines
-        else:
-            raise ValueError

@@ -184,6 +184,8 @@ class ScoreProxy(PackageProxy):
         while True:
             menu = self.make_main_menu()
             key, value = menu.run()
+            if self.session.session_is_complete:
+                return True
             if key is None:
                 pass
             elif key == 'b':
@@ -214,8 +216,8 @@ class ScoreProxy(PackageProxy):
                     self.material_wrangler.package_importable_name, material_underscored_name)
                 material_proxy = self.material_wrangler.get_package_proxy(package_importable_name)
                 material_proxy.manage_material()
-            if self.session.test_is_complete:
-                break
+            #if self.session.test_is_complete:
+            #    break
         self.session.menu_pieces.pop()
 
     def manage_svn(self):

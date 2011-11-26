@@ -35,10 +35,10 @@ def test_InstrumentEditor_03():
     accordion.short_instrument_name = 'acc. I'
 
     instrument_editor = baca.scf.editors.InstrumentEditor(target=accordion)
-    instrument_editor.session.test = 'menu_lines'
+    instrument_editor.session.user_input = 'q'
     instrument_editor.edit_interactively()
 
-    assert instrument_editor.session.test_result == [
+    assert instrument_editor.session.menu_chunks[-1] == [
      'Accordion',
      '',
      "     in: instrument name ('accordion I')",
@@ -49,22 +49,6 @@ def test_InstrumentEditor_03():
 
 
 def test_InstrumentEditor_04():
-    '''Main menu to instrument name dialogue.
-    '''
-
-    accordion = instrumenttools.Accordion()
-    accordion.instrument_name = 'accordion I'
-    accordion.short_instrument_name = 'acc. I'
-
-    instrument_editor = baca.scf.editors.InstrumentEditor(target=accordion)
-    instrument_editor.session.test = 'menu_lines'
-    instrument_editor.session.user_input = 'in'
-    instrument_editor.edit_interactively()
-
-    assert instrument_editor.session.test_result == ['Instrument name> ']
-
-
-def test_InstrumentEditor_05():
     '''(String) attribute management.
     '''
 
@@ -73,17 +57,17 @@ def test_InstrumentEditor_05():
     accordion.short_instrument_name = 'acc. I'
 
     instrument_editor = baca.scf.editors.InstrumentEditor(target=accordion)
-    instrument_editor.session.user_input = 'in\nfoo'
+    instrument_editor.session.user_input = 'in\nfoo\nq'
     instrument_editor.edit_interactively()
     assert accordion.instrument_name == 'foo'
 
     instrument_editor = baca.scf.editors.InstrumentEditor(target=accordion)
-    instrument_editor.session.user_input = 'sin\nf. I'
+    instrument_editor.session.user_input = 'sin\nf. I\nq'
     instrument_editor.edit_interactively()
     assert accordion.short_instrument_name == 'f. I'
 
 
-def test_InstrumentEditor_06():
+def test_InstrumentEditor_05():
     '''(Markup) attribute management.
     '''
 
@@ -92,11 +76,11 @@ def test_InstrumentEditor_06():
     accordion.short_instrument_name = 'acc. I'
 
     instrument_editor = baca.scf.editors.InstrumentEditor(target=accordion)
-    instrument_editor.session.user_input = 'inm\nfoo I'
+    instrument_editor.session.user_input = 'inm\nfoo I\nq'
     instrument_editor.edit_interactively()
     assert accordion.instrument_name_markup == markuptools.Markup('foo I')
 
     instrument_editor = baca.scf.editors.InstrumentEditor(target=accordion)
-    instrument_editor.session.user_input = 'sinm\nf. I'
+    instrument_editor.session.user_input = 'sinm\nf. I\nq'
     instrument_editor.edit_interactively()
     assert accordion.short_instrument_name_markup == markuptools.Markup('f. I')
