@@ -93,21 +93,12 @@ class Menu(MenuObject, SCFObject):
             pair_dictionary = dict(zip(self.all_keys, self.all_values))
             return pair_dictionary[user_response]
 
-    def conditionally_display_menu_lines_and_get_user_response(self):
-        self.display_lines(self.menu_lines)
-        if self.session.is_displayable:
-            while True:
-                user_response = self.handle_raw_input('scf')
-                if user_response in self.all_keys:
-                    return user_response
-        else:
-            return self.pop_next_user_response_from_user_input()
-
     def display(self):
         self.conditionally_clear_terminal()
         self.make_menu_lines_keys_and_values()
         self.add_hidden_menu_items()
-        user_response = self.conditionally_display_menu_lines_and_get_user_response()
+        self.display_lines(self.menu_lines)
+        user_response = self.handle_raw_input('scf')
         value = self.change_user_response_to_value(user_response)
         return user_response, value
 

@@ -38,7 +38,7 @@ def test_InstrumentEditor_03():
     instrument_editor.session.user_input = 'q'
     instrument_editor.edit_interactively()
 
-    assert instrument_editor.session.menu_chunks[-1] == [
+    assert instrument_editor.session.menu_chunks[-2] == [
      'Accordion',
      '',
      "     in: instrument name ('accordion I')",

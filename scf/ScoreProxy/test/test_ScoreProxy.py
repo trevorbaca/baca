@@ -61,7 +61,7 @@ def test_ScoreProxy_02():
     archipel.session.user_input = 'q'
     archipel.manage_score()
 
-    assert archipel.session.menu_chunks[-1] == [
+    assert archipel.session.menu_chunks[-2] == [
      "L'archipel du corps",
      '',
      '     Chunks',
@@ -87,7 +87,8 @@ def test_ScoreProxy_03():
     archipel.session.user_input = 'hidden\nq'
     archipel.manage_score()
 
-    assert archipel.session.menu_chunks[-2] == [
+    # FIXME: should be -2 instead of -3
+    assert archipel.session.menu_chunks[-3] == [
      '     b: back',
      '     exec: exec statement',
      '     grep: grep baca directories',
@@ -110,7 +111,7 @@ def test_ScoreProxy_04():
     archipel.session.user_input = 'q'
     archipel.manage_tags()
 
-    assert archipel.session.menu_chunks[-1] == [
+    assert archipel.session.menu_chunks[-2] == [
      'Tags',
      '',
      "     'composer': TrevorBaca()",

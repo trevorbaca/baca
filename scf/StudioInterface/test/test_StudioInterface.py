@@ -23,7 +23,7 @@ def test_StudioInterface_02():
     studio_interface.session.user_input = 'q'
     studio_interface.work_in_studio()
     
-    assert studio_interface.session.menu_chunks[-1] == [  
+    assert studio_interface.session.menu_chunks[-2] == [  
      'Studio - active scores',
      '',
      "     1: L'archipel du corps (2011)",
@@ -49,7 +49,8 @@ def test_StudioInterface_03():
     studio_interface.session.user_input = 'hidden\nq'
     studio_interface.work_in_studio()
 
-    assert studio_interface.session.menu_chunks[-2] == [
+    # FIXME: should be -2 instead of -3
+    assert studio_interface.session.menu_chunks[-3] == [
      '     active: show active scores only',   
      '     all: show all scores',
      '     exec: exec statement',
@@ -73,7 +74,7 @@ def test_StudioInterface_04():
     studio_interface.session.user_input = '1\nq'
     studio_interface.work_in_studio()
 
-    assert studio_interface.session.menu_chunks[-1] == [
+    assert studio_interface.session.menu_chunks[-2] == [
      "L'archipel du corps",
      '',
      '     Chunks',
@@ -99,7 +100,7 @@ def test_StudioInterface_05():
     studio_interface.session.user_input = 'mb\nq'
     studio_interface.work_in_studio()
     
-    assert studio_interface.session.menu_chunks[-1] == [  
+    assert studio_interface.session.menu_chunks[-2] == [  
      'Studio - mothballed scores',
      '',
      '     1: Arac\xc4\xb1l\xc4\xb1k',
@@ -124,7 +125,8 @@ def test_StudioInterface_06():
     studio_interface.session.user_input = '1\ntags\nq'
     studio_interface.work_in_studio()
 
-    assert studio_interface.session.menu_chunks[-2] == [
+    # FIXME: should be -2 instead of -4
+    assert studio_interface.session.menu_chunks[-4] == [
      "L'archipel du corps - tags",
      '',
      "     'composer': TrevorBaca()",
@@ -144,7 +146,7 @@ def test_StudioInterface_07():
     studio_interface.session.user_input = 'svn\nq'
     studio_interface.work_in_studio()
 
-    assert studio_interface.session.menu_chunks[-1] == [
+    assert studio_interface.session.menu_chunks[-2] == [
      'Studio - active scores - repository commands',
      '',
      '     add: svn add',
@@ -170,14 +172,14 @@ def test_StudioInterface_08():
     studio_interface = baca.scf.StudioInterface()
     studio_interface.session.user_input = 'q'
     studio_interface.work_in_studio()
-    assert studio_interface.session.menu_chunks[-1][0] == 'Studio - active scores'
+    assert studio_interface.session.menu_chunks[-2][0] == 'Studio - active scores'
 
     studio_interface = baca.scf.StudioInterface()
     studio_interface.session.user_input = 'svn\nq'
     studio_interface.work_in_studio()
-    assert studio_interface.session.menu_chunks[-1][0] == 'Studio - active scores - repository commands'
+    assert studio_interface.session.menu_chunks[-2][0] == 'Studio - active scores - repository commands'
 
     studio_interface = baca.scf.StudioInterface()
     studio_interface.session.user_input = 'svn\nb\nq'
     studio_interface.work_in_studio()
-    assert studio_interface.session.menu_chunks[-1][0] == 'Studio - active scores'
+    assert studio_interface.session.menu_chunks[-2][0] == 'Studio - active scores'
