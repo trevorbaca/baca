@@ -87,8 +87,7 @@ def test_ScoreProxy_03():
     archipel.session.user_input = 'hidden\nq'
     archipel.manage_score()
 
-    # FIXME: should be -2 instead of -3
-    assert archipel.session.menu_chunks[-3] == [
+    assert archipel.session.menu_chunks[-2] == [
      '     b: back',
      '     exec: exec statement',
      '     grep: grep baca directories',

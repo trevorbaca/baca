@@ -49,8 +49,7 @@ def test_StudioInterface_03():
     studio_interface.session.user_input = 'hidden\nq'
     studio_interface.work_in_studio()
 
-    # FIXME: should be -2 instead of -3
-    assert studio_interface.session.menu_chunks[-3] == [
+    assert studio_interface.session.menu_chunks[-2] == [
      '     active: show active scores only',   
      '     all: show all scores',
      '     exec: exec statement',

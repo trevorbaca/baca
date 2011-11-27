@@ -93,7 +93,7 @@ class Menu(MenuObject, SCFObject):
             pair_dictionary = dict(zip(self.all_keys, self.all_values))
             return pair_dictionary[user_response]
 
-    def display(self):
+    def display_menu(self):
         self.conditionally_clear_terminal()
         self.make_menu_lines_keys_and_values()
         self.add_hidden_menu_items()
@@ -129,7 +129,7 @@ class Menu(MenuObject, SCFObject):
         should_clear_terminal, hide_menu = True, False
         while True:
             self.should_clear_terminal, self.hide_menu = should_clear_terminal, hide_menu
-            key, value = self.display()
+            key, value = self.display_menu()
             should_clear_terminal, hide_menu = False, True
             result = self.handle_hidden_key(key)
             if self.session.session_is_complete:

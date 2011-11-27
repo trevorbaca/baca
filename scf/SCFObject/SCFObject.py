@@ -89,7 +89,8 @@ class SCFObject(object):
 
     def display_lines(self, lines):
         assert isinstance(lines, list)
-        self.session.menu_chunks.append(lines[:])
+        if lines:
+            self.session.menu_chunks.append(lines[:])
         if self.session.is_displayable:
             for line in lines:
                 print line
