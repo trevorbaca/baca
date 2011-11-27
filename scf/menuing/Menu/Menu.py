@@ -103,13 +103,7 @@ class Menu(MenuObject, SCFObject):
                 if user_response in self.all_keys:
                     return user_response
         else:
-            user_response = self.pop_next_user_response_from_user_input()
-            if user_response == '':
-                user_response = None
-            #if user_response is None:
-            #    if self.session.test == 'menu_lines':
-            #        self.session.test_result = self.menu_lines
-            return user_response
+            return self.pop_next_user_response_from_user_input()
 
     def display(self):
         self.conditionally_clear_terminal()

@@ -130,7 +130,7 @@ class MenuObject(SCFObject):
             return None
         elif self.session.user_input == '':
             self.session.user_input = None
-            return ''
+            return None
         else:
             user_input = self.session.user_input.split('\n')
             user_response = user_input[0]

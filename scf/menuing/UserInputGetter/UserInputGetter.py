@@ -68,14 +68,7 @@ class UserInputGetter(MenuObject):
             print ''
             return user_response
         else:
-            user_response = self.pop_next_user_response_from_user_input()
-            # TODO: encapsulate remaining lines of this function in pop_...
-            if user_response == '':
-                user_response = None
-            #if user_response is None:
-            #    if self.session.test == 'menu_lines':
-            #        self.session.test_result = self.menu_lines
-            return user_response
+            return self.pop_next_user_response_from_user_input()
 
     def load_prompt(self):
         prompt = self.prompts[self.prompt_index]
