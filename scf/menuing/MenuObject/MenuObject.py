@@ -74,20 +74,23 @@ class MenuObject(SCFObject):
     def edit_client_source_file(self):
         file_name = self.client[1]
         line_number = self.client[2]
-        command = 'vi +%s %s' % (line_number, file_name)
+        command = 'vi +{} {}'.format(line_number, file_name)
         os.system(command)
 
     def exec_statement(self):
-        statement = raw_input('xcf> ')
+        statement = self.handle_raw_input('xcf')
         exec('from abjad import *')
-        exec('result = %s' % statement)
-        print repr(result) + '\n'
+        exec('result = {}'.format(statement))
+        line = '{!r}\n'.format(result)
+        self.display_lines([line])
 
     def grep_baca(self):
-        response = raw_input('regex> ')
-        command = 'grep -Irn "%s" * | grep -v svn' % response
+        regex = self.handle_raw_input('regex')
+        command = 'grep -Irn "{}" * | grep -v svn'.format(regex)
         proc = subprocess.Popen(command, shell=True, stdout=subprocess.PIPE)
-        print ''.join(proc.stdout.readlines())
+        lines = [line.strip() for line in proc.stdout.readlines()]
+        lines.append('')
+        self.display_lines(lines)
 
     def handle_hidden_key(self, key):
         if key == 'exec':
@@ -97,7 +100,7 @@ class MenuObject(SCFObject):
         elif key == 'here':
             self.edit_client_source_file()
         elif key == 'hidden':
-            self.show_hidden_items()
+            self.show_hidden_menu_items()
         elif key == 'q':
             self.session.user_specified_quit = True
         elif key == 'studio':
@@ -114,29 +117,15 @@ class MenuObject(SCFObject):
     def make_tab(self, n):
         return 4 * n * ' '
 
-    def pop_next_user_response_from_user_input(self):
-        if self.session.user_input is None:
-            return None
-        elif self.session.user_input == '':
-            self.session.user_input = None
-            return None
-        else:
-            user_input = self.session.user_input.split('\n')
-            user_response = user_input[0]
-            user_input = '\n'.join(user_input[1:])
-            self.session.user_input = user_input
-            return user_response
-
     def show_menu_client(self):
-        print self.make_tab(1),
-        print 'file: %s' % self.where[1]
-        print self.make_tab(1),
-        print 'line: %s' % self.where[2]
-        print self.make_tab(1),
-        print 'meth: %s()' % self.where[3]
-        print ''
+        lines = []
+        lines.append('{} file: {}'.format(self.make_tab(1), self.where[1]))
+        lines.append('{} line: {}'.format(self.make_tab(1), self.where[2]))
+        lines.append('{} meth: {}'.format(self.make_tab(1), self.where[3]))
+        lines.append('')
+        self.display_lines(lines)
 
-    def show_hidden_items(self):
+    def show_hidden_menu_items(self):
         hidden_items = []
         hidden_items.extend(self.default_hidden_items)
         hidden_items.extend(self.hidden_items)
@@ -146,10 +135,7 @@ class MenuObject(SCFObject):
         menu_lines = []
         for key, value in hidden_items:
             menu_line = self.make_tab(self.indent_level) + ' '
-            menu_line += '%s: %s' % (key, value)
+            menu_line += '{}: {}'.format(key, value)
             menu_lines.append(menu_line)
         menu_lines.append('')
-        self.session.menu_chunks.append(menu_lines[:])
-        if self.session.is_displayable:
-            for menu_line in menu_lines:
-                print menu_line
+        self.display_lines(menu_lines)

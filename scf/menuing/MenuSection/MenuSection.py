@@ -191,7 +191,7 @@ class MenuSection(MenuObject):
                 menu_lines.append('')
         return menu_lines
         
-    def show_hidden_items(self):
+    def show_hidden_menu_items(self):
         menu_lines = []
         for key, value in self.hidden_items:
             menu_line = self.make_tab(self.indent_level) + ' '

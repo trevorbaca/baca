@@ -98,6 +98,19 @@ class SCFObject(object):
         command = 'vi %s' % self.source_file_name
         os.system(command)
 
+    def handle_raw_input(self, prompt):
+        prompt = prompt + '> '
+        if self.session.is_displayable:
+            user_response = raw_input(prompt)
+            print ''
+        else:
+            user_response = self.pop_next_user_response_from_user_input()
+        menu_chunk = []
+        menu_chunk.append('{}{}'.format(prompt, user_response))
+        menu_chunk.append('')
+        self.session.menu_chunks.append(menu_chunk)
+        return user_response
+
     def make_new_getter(self, where=None):
         return self.UserInputGetter(where=where, session=self.session)
 
@@ -106,6 +119,19 @@ class SCFObject(object):
 
     def pmc(self):
         pprint.pprint(self.session.menu_chunks)
+
+    def pop_next_user_response_from_user_input(self):
+        if self.session.user_input is None:
+            return None
+        elif self.session.user_input == '':
+            self.session.user_input = None
+            return None
+        else:
+            user_input = self.session.user_input.split('\n')
+            user_response = user_input[0]
+            user_input = '\n'.join(user_input[1:])
+            self.session.user_input = user_input
+            return user_response
 
     def print_not_implemented(self):
         print 'Not yet implemented.\n'
