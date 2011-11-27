@@ -74,14 +74,12 @@ class MakerWrangler(PackageWrangler, PackageProxy):
     # replace with maker wizard
     def make_maker(self):
         while True:
-            maker_name = raw_input('Maker name> ')
-            print ''
+            maker_name = self.handle_raw_input('Maker name')
             if iotools.is_uppercamelcase_string(maker_name):
                 if maker_name.endswith('Maker'):
                     break
         while True:
-            generic_output_product = raw_input('Generic output product> ')
-            print ''
+            generic_output_product = self.handle_raw_input('Generic output product')
             break
         maker_directory = os.path.join(self.directory_name, maker_name)
         os.mkdir(maker_directory)

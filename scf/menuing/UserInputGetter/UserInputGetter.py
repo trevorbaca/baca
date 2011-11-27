@@ -64,8 +64,7 @@ class UserInputGetter(MenuObject):
     def conditionally_display_prompt_and_get_user_response(self):
         if self.session.is_displayable:
             prompt = self.menu_lines[-1]
-            user_response = raw_input(prompt)
-            print ''
+            user_response = self.handle_raw_input(prompt)
             return user_response
         else:
             return self.pop_next_user_response_from_user_input()

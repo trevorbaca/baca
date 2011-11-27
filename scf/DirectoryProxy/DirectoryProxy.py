@@ -63,27 +63,31 @@ class DirectoryProxy(SCFObject):
     ### PRIVATE METHODS ###
 
     def _remove_nonversioned_directory(self):
-        print '{} will be removed.\n'.format(self.directory_name)
-        response = raw_input("Type 'remove' to proceed: ")
-        print ''
+        line = '{} will be removed.\n'.format(self.directory_name)
+        self.display_lines([line])
+        response = self.handle_raw_input("Type 'remove' to proceed")
         if response == 'remove':
             command = 'rm -rf {}'.format(self.directory_name)
             proc = subprocess.Popen(command, shell=True, stdout=subprocess.PIPE)
             first_line = proc.stdout.readline()
-            print 'Removed {}.\n'.format(self.directory_name)
+            line = 'Removed {}.\n'.format(self.directory_name)
+            self.display_lines([line])
             return True
         return False
 
     def _remove_versioned_directory(self):
-        print '{} will be completely removed from the repository!\n'.format(self.directory_name)
-        response = raw_input("Type 'remove' to proceed: ")
-        print ''
+        line = '{} will be completely removed from the repository!\n'.format(self.directory_name)
+        self.display_lines([line])
+        response = self.handle_raw_input("Type 'remove' to proceed")
         if response == 'remove':
             command = 'svn rm {}'.format(self.directory_name)
             proc = subprocess.Popen(command, shell=True, stdout=subprocess.PIPE)
             first_line = proc.stdout.readline()
-            print 'Removed {}.\n'.format(self.directory_name)
-            print '(Subversion will cause empty package to remain visible until next commit.)\n'
+            lines = []
+            lines.append('Removed {}.\n'.format(self.directory_name))
+            lines.append('(Subversion will cause empty package to remain visible until next commit.)')
+            lines.append('')
+            self.display_lines(lines)
             return True
         return False
 
@@ -106,47 +110,53 @@ class DirectoryProxy(SCFObject):
 
     def run_py_test(self, session=None, prompt_proceed=True):
         proc = subprocess.Popen('py.test {}'.format(self.directory_name), shell=True, stdout=subprocess.PIPE)
-        lines = proc.stdout.readlines()
+        lines = [line.strip() for line in proc.stdout.readlines()]
         if lines:
-            print ''.join(lines)
+            self.display_lines(lines)
         if prompt_proceed:
             self.proceed()
 
     def svn_add(self, session=None, prompt_proceed=True):
         proc = subprocess.Popen('svn-add-all', shell=True, stdout=subprocess.PIPE)
-        lines = proc.stdout.readlines()
+        lines = [line.strip() for line in proc.stdout.readlines()]
         if lines:
-            print ''.join(lines)
+            self.display_lines(lines)
         if prompt_proceed:
             self.proceed()
  
     def svn_ci(self, session=None, commit_message=None, prompt_proceed=True):
         if commit_message is None:
-            commit_message = raw_input('Commit message> ')
-            print ''
-            print 'Commit message will be: "{}"\n'.format(commit_message)
+            commit_message = self.handle_raw_input('Commit message')
+            line = 'Commit message will be: "{}"\n'.format(commit_message)
+            self.display_lines([line])
             if not self.confirm():
                 return
-        print ''
-        print self.directory_name
+        lines = []
+        lines.append('')
+        lines.append(self.directory_name)
         command = 'svn commit -m "{}" {}'.format(commit_message, self.directory_name)
         proc = subprocess.Popen(command, shell=True, stdout=subprocess.PIPE)
-        print ''.join(proc.stdout.readlines())
+        lines.extend([line.strip() for line in proc.stdout.readlines()])
+        self.display_lines(lines)
         if prompt_proceed:
             self.proceed()
 
     def svn_st(self, session=None, prompt_proceed=True):
-        print self.directory_name
+        line = self.directory_name
+        self.display_lines([line])
         command = 'svn st -u {}'.format(self.directory_name)
         proc = subprocess.Popen(command, shell=True, stdout=subprocess.PIPE)
-        print ''.join(proc.stdout.readlines())
+        lines = [line.strip() for line in proc.stdout.readlines()]
+        self.display_lines(lines)
         if prompt_proceed:
             self.proceed()
 
     def svn_up(self, session=None, prompt_proceed=True):
-        print self.directory_name
+        line = self.directory_name
+        self.display_lines([line])
         command = 'svn up {}'.format(self.directory_name)
         proc = subprocess.Popen(command, shell=True, stdout=subprocess.PIPE)
-        print ''.join(proc.stdout.readlines())
+        lines = [line.strip() for line in proc.stdout.readlines()]
+        self.display_lines(lines)
         if prompt_proceed:
             self.proceed()

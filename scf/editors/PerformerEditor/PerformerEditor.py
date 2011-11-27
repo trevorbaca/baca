@@ -43,7 +43,7 @@ class PerformerEditor(InteractiveEditor):
         return instrument
 
     def delete_instrument_interactively(self):
-        number = raw_input('number> ')
+        number = self.handle_raw_input('number')
         try:
             number = int(number)
         except:
@@ -52,8 +52,7 @@ class PerformerEditor(InteractiveEditor):
         del(self.target.instruments[index])
     
     def edit_name_interactively(self):
-        name = raw_input('name> ')
-        print ''
+        name = self.handle_raw_input('name')
         self.target.name = name
 
     def handle_main_menu_response(self, key, value):
@@ -103,14 +102,14 @@ class PerformerEditor(InteractiveEditor):
         return menu
 
     def move_instrument_interactively(self):
-        old_number = raw_input('old number> ')
+        old_number = self.handle_raw_input('old number')
         try:
             old_number = int(old_number)
         except:
             return
         old_index = old_number - 1
         instrument = self.target.instruments[old_index]
-        new_number = raw_input('new number> ')
+        new_number = self.handle_raw_input('new number')
         try:
             new_number = int(new_number)
         except:

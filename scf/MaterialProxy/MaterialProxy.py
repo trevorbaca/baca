@@ -316,8 +316,7 @@ class MaterialProxy(PackageProxy):
             raise ValueError
 
     def get_package_short_name_of_new_material_interactively(self):
-        response = raw_input('Material name: ')
-        print ''
+        response = self.handle_raw_input('Material name')
         response = response.lower()
         response = response.replace(' ', '_')
         if self.has_score_local_purview:
@@ -328,8 +327,7 @@ class MaterialProxy(PackageProxy):
         return package_short_name
 
     def get_visualizer_status_of_new_material_package_interactively(self):
-        response = raw_input('Include visualizer? ')
-        print ''
+        response = self.handle_raw_input('Include visualizer?')
         if response == 'y':
             return True
         else:
@@ -604,8 +602,7 @@ class MaterialProxy(PackageProxy):
 
     def rename_material(self):
         print 'Current material name: {}'.format(self.material_underscored_name)
-        new_material_spaced_name = raw_input('New material name:     ')
-        print ''
+        new_material_spaced_name = self.handle_raw_input('New material name:     ')
         new_material_underscored_name = new_material_spaced_name.replace(' ', '_')
         new_material_underscored_name = self.prepend_score_package_short_name(new_material_underscored_name)
         print 'Current material name: {}'.format(self.material_underscored_name)

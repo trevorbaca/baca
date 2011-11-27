@@ -147,7 +147,7 @@ class InteractiveMaterialProxy(MaterialProxy):
         return lilypond_file
 
     def name_material_interactively(self):
-        material_spaced_name = raw_input('Material name> ')
+        material_spaced_name = self.handle_raw_input('Material name')
         self.material_underscored_name = material_spaced_name.replace(' ', '_')
 
     def overwrite_with_demo_input_values(self, user_input_wrapper):

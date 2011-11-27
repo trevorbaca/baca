@@ -39,7 +39,7 @@ class InstrumentationSpecifierEditor(InteractiveEditor):
         return performer_editor
 
     def delete_performer_interactively(self):
-        number = raw_input('number> ')
+        number = self.handle_raw_input('number')
         try:
             number = int(number)
         except:
@@ -89,14 +89,14 @@ class InstrumentationSpecifierEditor(InteractiveEditor):
         return menu
 
     def move_performer_interactively(self):
-        old_number = raw_input('old number> ')
+        old_number = self.handle_raw_input('old number')
         try:
             old_number = int(old_number)
         except:
             return
         old_index = old_number - 1
         performer = self.target.performers[old_index]
-        new_number = raw_input('new number> ')
+        new_number = self.handle_raw_input('new number')
         try:
             new_number = int(new_number)
         except:

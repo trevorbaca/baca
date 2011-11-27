@@ -98,8 +98,7 @@ class Menu(MenuObject, SCFObject):
             for menu_line in self.menu_lines:
                 print menu_line
             while True:
-                user_response = raw_input('scf> ')
-                print ''
+                user_response = self.handle_raw_input('scf')
                 if user_response in self.all_keys:
                     return user_response
         else:
