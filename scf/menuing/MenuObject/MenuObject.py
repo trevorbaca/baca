@@ -71,18 +71,7 @@ class MenuObject(SCFObject):
 
     ### PUBLIC METHODS ###
 
-    def conditionally_clear_terminal(self):
-        if self.session.is_displayable and self.should_clear_terminal:
-            self.clear_terminal()
-
-    def confirm(self):
-        response = raw_input('Ok? ')
-        if not response.lower() == 'y':
-            print ''
-            return False
-        return True
-
-    def edit_client_source(self):
+    def edit_client_source_file(self):
         file_name = self.client[1]
         line_number = self.client[2]
         command = 'vi +%s %s' % (line_number, file_name)
@@ -106,7 +95,7 @@ class MenuObject(SCFObject):
         elif key == 'grep':
             self.grep_baca()
         elif key == 'here':
-            self.edit_client_source()
+            self.edit_client_source_file()
         elif key == 'hidden':
             self.show_hidden_items()
         elif key == 'q':
@@ -160,14 +149,6 @@ class MenuObject(SCFObject):
             menu_line += '%s: %s' % (key, value)
             menu_lines.append(menu_line)
         menu_lines.append('')
-#        if self.session.test is None:
-#            for menu_line in menu_lines:
-#                print menu_line
-#            return True
-#        elif self.session.test == 'menu_lines':
-#            return menu_lines
-#        else:
-#            raise ValueError
         self.session.menu_chunks.append(menu_lines[:])
         if self.session.is_displayable:
             for menu_line in menu_lines:

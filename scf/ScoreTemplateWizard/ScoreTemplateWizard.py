@@ -31,7 +31,7 @@ class ScoreTemplateWizard(Wizard):
         return players
 
     def run(self):
-        self.clear_terminal()
+        self.conditionally_clear_terminal()
         print 'Score template wizard.\n'
         print 'This wizard works in four largescale steps.\n'
         players = self.get_players()
