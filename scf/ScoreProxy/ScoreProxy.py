@@ -161,7 +161,7 @@ class ScoreProxy(PackageProxy):
         if key is None:
             pass
         elif key == 'b':
-            result = true
+            result = True
         elif key == 'ch':
             self.chunk_wrangler.create_chunk_interactively()
         elif key == 'instr':
@@ -171,7 +171,7 @@ class ScoreProxy(PackageProxy):
         elif key == 'ms':
             self.material_wrangler.create_static_material_package_interactively()
         elif key == 'svn':
-            self.manage_svn()
+            return self.manage_svn()
         elif key == 'tags':
             self.manage_tags()
         elif key.startswith('h'):
@@ -192,6 +192,18 @@ class ScoreProxy(PackageProxy):
             return True
         else:
             return False
+
+    def handle_svn_response(self, key, value):
+        if key == 'b':
+            #value = None
+            return True
+        elif key == 'add':
+            self.svn_add()
+        elif key == 'ci':
+            self.svn_ci()
+            return True
+        elif key == 'st':
+            self.svn_st()
 
     def make_main_menu(self):
         menu = self.make_new_menu(where=self.where())
@@ -216,11 +228,21 @@ class ScoreProxy(PackageProxy):
         menu.hidden_items.append(('tags', 'work with tags'))
         return menu
 
+    def make_svn_menu(self):
+        menu = self.make_new_menu(where=self.where())
+        menu_section = self.MenuSection()
+        menu_section.sentence_length_items.append(('st', 'svn status'))
+        menu_section.sentence_length_items.append(('add', 'svn add'))
+        menu_section.sentence_length_items.append(('ci', 'svn commit'))
+        menu.menu_sections.append(menu_section)
+        return menu
+
     def manage_score(self):
         self.session.menu_pieces.append(self.title)
         while True:
             menu = self.make_main_menu()
             key, value = menu.run()
+            print 'foo', key, value
             if self.session.session_is_complete:
                 return True
             if self.handle_main_menu_response(key, value):
@@ -230,26 +252,14 @@ class ScoreProxy(PackageProxy):
     def manage_svn(self):
         self.session.menu_pieces.append('repository commands')
         while True:
-            menu = self.make_new_menu(where=self.where())
-            menu_section = self.MenuSection()
-            menu_section.sentence_length_items.append(('st', 'svn status'))
-            menu_section.sentence_length_items.append(('add', 'svn add'))
-            menu_section.sentence_length_items.append(('ci', 'svn commit'))
-            menu_section.layout = 'line'
-            menu.menu_sections.append(menu_section)
+            menu = self.make_svn_menu()
             key, value = menu.run()
-            if key == 'b':
-                value = None
+            if self.session.session_is_complete:
+                return True
+            if self.handle_svn_response(key, value):
                 break
-            elif key == 'add':
-                self.svn_add()
-            elif key == 'ci':
-                self.svn_ci()
-                break
-            elif key == 'st':
-                self.svn_st()
         self.session.menu_pieces.pop()
-        return key, value
+        #return key, value
 
     def profile_package_structure(self):
         if not os.path.exists(self.directory_name):

@@ -76,7 +76,7 @@ class StudioInterface(SCFObject):
     
     def handle_svn_response(self, key, value):
         if key == 'b':
-            value = None
+            #value = None
             return True
         elif key == 'add':
             self.global_proxy.svn_add()
