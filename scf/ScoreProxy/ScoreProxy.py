@@ -156,6 +156,43 @@ class ScoreProxy(PackageProxy):
             initializer.write(''.join(lines))
             initializer.close()
 
+    def handle_main_menu_response(self, key, value):
+        result = False
+        if key is None:
+            pass
+        elif key == 'b':
+            result = true
+        elif key == 'ch':
+            self.chunk_wrangler.create_chunk_interactively()
+        elif key == 'instr':
+            self.edit_instrumentation_specifier_interactively()
+        elif key == 'mi':
+            self.material_wrangler.create_interactive_material_interactively()
+        elif key == 'ms':
+            self.material_wrangler.create_static_material_package_interactively()
+        elif key == 'svn':
+            self.manage_svn()
+        elif key == 'tags':
+            self.manage_tags()
+        elif key.startswith('h'):
+            chunk_spaced_name = value
+            chunk_underscored_name = chunk_spaced_name.replace(' ', '_')
+            package_importable_name = '{}.{}'.format(
+                self.chunk_wrangler.package_importable_name, chunk_underscored_name)
+            chunk_proxy = self.chunk_wrangler.ChunkProxy(package_importable_name)
+            chunk_proxy.title = self.title
+            result = chunk_proxy.manage_chunk()
+        elif key.startswith('m'):
+            material_underscored_name = value
+            package_importable_name = '{}.{}'.format(
+                self.material_wrangler.package_importable_name, material_underscored_name)
+            material_proxy = self.material_wrangler.get_package_proxy(package_importable_name)
+            result = material_proxy.manage_material()
+        if result:
+            return True
+        else:
+            return False
+
     def make_main_menu(self):
         menu = self.make_new_menu(where=self.where())
         menu_section = self.MenuSection()
@@ -186,38 +223,8 @@ class ScoreProxy(PackageProxy):
             key, value = menu.run()
             if self.session.session_is_complete:
                 return True
-            if key is None:
-                pass
-            elif key == 'b':
+            if self.handle_main_menu_response(key, value):
                 break
-            elif key == 'ch':
-                self.chunk_wrangler.create_chunk_interactively()
-            elif key == 'instr':
-                self.edit_instrumentation_specifier_interactively()
-            elif key == 'mi':
-                self.material_wrangler.create_interactive_material_interactively()
-            elif key == 'ms':
-                self.material_wrangler.create_static_material_package_interactively()
-            elif key == 'svn':
-                self.manage_svn()
-            elif key == 'tags':
-                self.manage_tags()
-            elif key.startswith('h'):
-                chunk_spaced_name = value
-                chunk_underscored_name = chunk_spaced_name.replace(' ', '_')
-                package_importable_name = '{}.{}'.format(
-                    self.chunk_wrangler.package_importable_name, chunk_underscored_name)
-                chunk_proxy = self.chunk_wrangler.ChunkProxy(package_importable_name)
-                chunk_proxy.title = self.title
-                chunk_proxy.manage_chunk()
-            elif key.startswith('m'):
-                material_underscored_name = value
-                package_importable_name = '{}.{}'.format(
-                    self.material_wrangler.package_importable_name, material_underscored_name)
-                material_proxy = self.material_wrangler.get_package_proxy(package_importable_name)
-                material_proxy.manage_material()
-            #if self.session.test_is_complete:
-            #    break
         self.session.menu_pieces.pop()
 
     def manage_svn(self):
