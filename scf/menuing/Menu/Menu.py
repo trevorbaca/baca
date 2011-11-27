@@ -95,8 +95,7 @@ class Menu(MenuObject, SCFObject):
 
     def conditionally_display_menu_lines_and_get_user_response(self):
         if self.session.is_displayable:
-            for menu_line in self.menu_lines:
-                print menu_line
+            self.display_lines(menu_lines)
             while True:
                 user_response = self.handle_raw_input('scf')
                 if user_response in self.all_keys:

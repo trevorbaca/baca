@@ -72,7 +72,6 @@ class InstrumentationSpecifierEditor(InteractiveEditor):
                 performer_number = int(key)
             except:
                 performer_number = None
-            print performer_number, 'FOO'
             if performer_number is not None:
                 performer = self.get_performer_from_performer_number(performer_number)
                 performer_editor = self.PerformerEditor(session=self.session, target=performer)

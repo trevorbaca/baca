@@ -11,7 +11,8 @@ class StaticMaterialProxy(MaterialProxy):
 
     def create(self, has_visualizer=True):
         if os.path.exists(self.directory_name):
-            print 'Directory {!r} already exists.'.format(self.directory_name)
+            line = 'Directory {!r} already exists.'.format(self.directory_name)
+            self.display_lines([line])
             return False
         os.mkdir(self.directory_name)
         initializer = file(self.initializer_file_name, 'w')

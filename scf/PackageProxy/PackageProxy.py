@@ -329,7 +329,6 @@ class PackageProxy(DirectoryProxy):
         menu.items_to_number = score_wrangler.iterate_score_titles_with_years()
         menu.named_pairs.append(('s', 'global to studio'))
         key, value = menu.run()
-        print key, value
 
     def unimport_baca_package(self):
         self.remove_package_importable_name_from_sys_modules('baca')

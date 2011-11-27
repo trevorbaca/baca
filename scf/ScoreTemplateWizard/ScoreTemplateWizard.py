@@ -12,7 +12,10 @@ class ScoreTemplateWizard(Wizard):
         pass
         
     def get_players(self):
-        print 'Part 1: the players.\n'
+        lines = []
+        lines.append('Part 1: the players.')
+        lines.append('')
+        self.display_lines(lines)
         getter = self.make_new_getter(where=self.where())
         getter.prompts.append("enter the number of players or type 'skip'")
         getter.tests.append(lambda x: isinstance(x, int))
@@ -32,6 +35,8 @@ class ScoreTemplateWizard(Wizard):
 
     def run(self):
         self.conditionally_clear_terminal()
-        print 'Score template wizard.\n'
-        print 'This wizard works in four largescale steps.\n'
+        lines = []
+        lines.append('Score template wizard.')
+        lines.append('This wizard works in four largescale steps.')
+        self.display_lines(lines)
         players = self.get_players()

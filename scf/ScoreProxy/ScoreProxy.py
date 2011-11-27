@@ -249,35 +249,37 @@ class ScoreProxy(PackageProxy):
             raise OSError('directory {!r} does not exist.'.format(self.directory_name))
         if self.package_short_name == 'recursif':
             return
+        lines = []
         for subdirectory_name in self.score_subdirectory_names:
-            print '{} {}'.format(subdirectory_name.ljust(80), os.path.exists(subdirectory_name))
+            lines.append('{} {}'.format(subdirectory_name.ljust(80), os.path.exists(subdirectory_name)))
         for initializer in self.score_initializer_file_names:
-            print '{} {}'.format(initializer.ljust(80), os.path.exists(initializer))
+            lines.append('{} {}'.format(initializer.ljust(80), os.path.exists(initializer)))
+        self.display_lines(lines)
 
     def run_score_package_creation_wizard(self):
         self.print_not_implemented()
 
     def summarize_chunks(self):
         chunks = list(self.chunk_wrangler.iterate_package_underscored_names())
-        print self.make_tab(1),
+        lines = []
         if not chunks:
-            print 'Chunks (none yet)'
+            lines.append('{}Chunks (none yet)'.format(self.make_tab(1)))
         else:
-            print 'Chunks'
+            lines.append('{}Chunks'.format(self.make_tab(1)))
         for chunk in chunks:
-            print self.make_tab(2),
-            print chunk
-        print ''
+            lines.append('{}{}'.format(self.make_tab(2), chunk))
+        lines.append('')
+        self.display_lines(lines)
 
     def summarize_materials(self):
         materials = list(self.material_wrangler.iterate_package_underscored_names())
-        print self.make_tab(1),
+        lines = []
         if not materials:
-            print 'Materials (none yet)'
+            lines.append('{}Materials (none yet)'.format(self.make_tab(1)))
         else:
-            print 'Materials'
+            lines.append('{}Materials'.format(self.make_tab(1)))
         if materials:
-            print ''
+            lines.append('')
         for i, material in enumerate(materials):
-            print self.make_tab(1),
-            print '({}) {}'.format(i + 1, material.replace('_', ' '))
+            lines.append('{}({}) {}'.format(self.make_tab(1), i + 1, material.replace('_', ' ')))
+        self.display_lines(lines)

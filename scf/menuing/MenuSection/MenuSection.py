@@ -197,5 +197,4 @@ class MenuSection(MenuObject):
             menu_line = self.make_tab(self.indent_level) + ' '
             menu_line += '{}: {}'.format(key, value)
             menu_lines.append(menu_line)
-        for menu_line in menu_lines:
-            print menu_line
+        self.display_lines(menu_lines)

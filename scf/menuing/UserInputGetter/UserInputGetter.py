@@ -120,10 +120,13 @@ class UserInputGetter(MenuObject):
             return self.values
 
     def show_help(self):
+        lines = []
         if self.prompt_index < len(self.helps):
-            print iotools.capitalize_string_start(self.helps[self.prompt_index] + '\n')
+            lines.append(iotools.capitalize_string_start(self.helps[self.prompt_index]))
         else:
-            print 'Help string not available.\n'
+            lines.append('Help string not available.')
+        lines.append('')
+        self.display_lines(lines)
 
     def store_value(self, user_response):
         try:
@@ -138,7 +141,10 @@ class UserInputGetter(MenuObject):
                 return True
             else:
                 if self.prompt_index < len(self.helps):
-                    print self.helps[self.prompt_index] + '\n'
+                    lines = []
+                    lines.append(self.helps[self.prompt_index])
+                    lines.append('')
+                    self.display_lines(lines)
         else:
             self.values.append(value)
             self.prompt_index = self.prompt_index + 1

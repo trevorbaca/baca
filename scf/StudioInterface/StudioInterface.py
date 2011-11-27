@@ -172,9 +172,9 @@ class StudioInterface(SCFObject):
         proc = subprocess.Popen(
             'py.test {} {}'.format(self.directory_name, self.score_wrangler.directory_name), 
             shell=True, stdout=subprocess.PIPE)
-        lines = proc.stdout.readlines()
+        lines = [line.strip() for line in proc.stdout.readlines()]
         if lines:
-            print ''.join(lines)
+            self.display_lines(lines)
         if prompt_proceed:
             self.proceed()
 

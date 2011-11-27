@@ -38,7 +38,8 @@ class InteractiveMaterialProxy(MaterialProxy):
         
     def create(self, package_importable_name):
         self.print_not_implemented()
-        print 'Interactive material package {} created.\n'.format(package_importable_name)
+        line = 'Interactive material package {} created.\n'.format(package_importable_name)
+        self.display_lines([line])
 
     def create_interactively(self):
         while True:
@@ -161,11 +162,13 @@ class InteractiveMaterialProxy(MaterialProxy):
         self.user_input_wrapper = copy.deepcopy(material_proxy.user_input_wrapper)
     
     def save_material(self, user_input_wrapper):
+        lines = []
         material = self.make(*user_input_wrapper.values)
         lilypond_file = self.make_lilypond_file_from_output_material(material)
         material_directory = self.write_material_to_disk(user_input_wrapper, material, lilypond_file)
-        print ''
-        print 'Material saved to {}.\n'.format(material_directory)
+        lines.append('')
+        lines.append('Material saved to {}.\n'.format(material_directory))
+        self.display_lines(lines)
         self.proceed()
         return True
 
@@ -185,10 +188,12 @@ class InteractiveMaterialProxy(MaterialProxy):
         '''This should also cause material package underscored name and directory name to be set.
         '''
         while True:
+            lines = []
             if self.material_underscored_name is None:
                 self.name_material()
-                print ''
-            print 'Package short name will be {}.\n'.format(self.material_package_short_name)
+                lines.append('')
+            lines.append('Package short name will be {}.\n'.format(self.material_package_short_name))
+            self.display_lines(lines)
             if self.confirm():
                 break
 

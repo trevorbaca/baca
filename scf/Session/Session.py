@@ -94,9 +94,3 @@ class Session(object):
             assert isinstance(user_specified_quit, bool)
             self._user_specified_quit = user_specified_quit
         return property(**locals())
-    
-    ### PUBLIC METHODS ###
-
-    def print_attributes(self):
-        for attribute in self.formatted_attributes:
-            print attribute

@@ -29,7 +29,6 @@ class ScoreWrangler(PackageWrangler):
         for score_proxy in self.iterate_score_proxies(scores_to_show=self.session.scores_to_show):
             score_proxy.fix_package_structure()
             score_proxy.profile_package_structure()
-            print ''
 
     def get_package_proxy(self, package_importable_name):
         return self.ScoreProxy(package_importable_name)
@@ -55,7 +54,6 @@ class ScoreWrangler(PackageWrangler):
     def profile_score_package_structures(self):
         for score_proxy in self.iterate_score_proxies(scores_to_show=self.session.scores_to_show):
             score_proxy.profile_package_structure()
-            print ''
 
     def select_score_proxy(self):
         menu = self.make_new_menu(where=self.where())
