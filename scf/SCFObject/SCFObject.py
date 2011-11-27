@@ -81,9 +81,9 @@ class SCFObject(object):
             iotools.clear_terminal()
 
     def confirm(self):
-        response = raw_input('Ok? ')
+        response = self.handle_raw_input('Ok?')
         if not response.lower() == 'y':
-            print ''
+            self.display_lines([''])
             return False
         return True
 
@@ -95,7 +95,7 @@ class SCFObject(object):
                 print line
 
     def edit_source_file(self):
-        command = 'vi %s' % self.source_file_name
+        command = 'vi {}'.format(self.source_file_name)
         os.system(command)
 
     def handle_raw_input(self, prompt):
@@ -110,6 +110,15 @@ class SCFObject(object):
         menu_chunk.append('')
         self.session.menu_chunks.append(menu_chunk)
         return user_response
+
+    def handle_raw_input_with_default(self, prompt, default=''):
+        if default == 'None':
+            default = ''
+        readline.set_startup_hook(lambda: readline.insert_text(default))
+        try:
+            return handle_raw_input(prompt)
+        finally:
+            readline.set_startup_hook()
 
     def make_new_getter(self, where=None):
         return self.UserInputGetter(where=where, session=self.session)
@@ -134,26 +143,20 @@ class SCFObject(object):
             return user_response
 
     def print_not_implemented(self):
-        print 'Not yet implemented.\n'
+        lines = []
+        lines.append('Not yet implemented.')
+        lines.append('')
+        self.display_lines(lines)
         self.proceed()
         return True, None
 
     def proceed(self):
-        response = raw_input('Press return to continue. ')
+        response = handle_raw_input('Press return to continue')
         self.conditionally_clear_terminal()
 
     def query(self, prompt):
-        response = raw_input(prompt)
+        response = handle_raw_input(prompt)
         return response.lower().startswith('y')
-
-    def raw_input_with_default(self, prompt, default=''):
-        if default == 'None':
-            default = ''
-        readline.set_startup_hook(lambda: readline.insert_text(default))
-        try:
-           return raw_input(prompt)
-        finally:
-           readline.set_startup_hook()
 
     def where(self):
         return inspect.stack()[1]

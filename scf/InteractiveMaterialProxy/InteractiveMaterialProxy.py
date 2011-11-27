@@ -125,7 +125,7 @@ class InteractiveMaterialProxy(MaterialProxy):
     def edit_item(self, key, value):
         prompt = key.replace('_', ' ')
         default = repr(value)
-        response = self.raw_input_with_default('%s> ' % prompt, default=default)
+        response = self.handle_raw_input_with_default('%s> ' % prompt, default=default)
         exec('from abjad import *')
         new_value = eval(response)
         return new_value
