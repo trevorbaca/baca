@@ -76,7 +76,8 @@ class StudioInterface(SCFObject):
     
     def handle_svn_response(self, key, value):
         if key == 'b':
-            return True
+            #return True
+            return 'back'
         elif key == 'add':
             self.global_proxy.svn_add()
         elif key == 'add scores':
@@ -157,15 +158,26 @@ class StudioInterface(SCFObject):
         return menu
 
     def manage_svn(self):
+        result = False
         self.session.menu_pieces.append('repository commands')
         while True:
             menu = self.make_svn_menu()
             key, value = menu.run()
             if self.session.session_is_complete:
-                return True
-            if self.handle_svn_response(key, value):
+                result = True
                 break
+            tmp = self.handle_svn_response(key, value)
+            if tmp == 'back':
+                break
+            elif tmp == True:
+                result = True
+                break
+            elif tmp == False:
+                pass
+            else:
+                raise ValueError
         self.session.menu_pieces.pop()
+        return result
 
     def run_py_test_all(self, prompt_proceed=True):
         proc = subprocess.Popen(
@@ -185,14 +197,25 @@ class StudioInterface(SCFObject):
         return value
 
     def work_in_studio(self):
+        result = False
         self.session.menu_pieces.append('studio')
         while True:
             self.session.menu_pieces.append('{} scores'.format(self.session.scores_to_show))
             menu = self.make_main_menu()
             key, value = menu.run()
             if self.session.session_is_complete:
-                return True
-            if self.handle_main_menu_response(key, value):
+                result = True
                 break
+            tmp = self.handle_main_menu_response(key, value)
+            if tmp == 'back':
+                break
+            elif tmp == True:
+                result = True
+                break
+            elif tmp == False:
+                pass
+            else:
+                raise ValueError
             self.session.menu_pieces.pop()
         self.session.menu_pieces.pop()
+        return result

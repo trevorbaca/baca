@@ -124,8 +124,7 @@ def test_StudioInterface_06():
     studio_interface.session.user_input = '1\ntags\nq'
     studio_interface.work_in_studio()
 
-    # FIXME: should be -2 instead of -4
-    assert studio_interface.session.menu_chunks[-4] == [
+    assert studio_interface.session.menu_chunks[-2] == [
      "L'archipel du corps - tags",
      '',
      "     'composer': TrevorBaca()",

@@ -237,27 +237,48 @@ class ScoreProxy(PackageProxy):
         return menu
 
     def manage_score(self):
+        result = False
         self.session.menu_pieces.append(self.title)
         while True:
             menu = self.make_main_menu()
             key, value = menu.run()
-            print 'foo', key, value
             if self.session.session_is_complete:
-                return True
-            if self.handle_main_menu_response(key, value):
+                result = True
                 break
+            tmp = self.handle_main_menu_response(key, value)
+            if tmp == 'back':
+                break
+            elif tmp == True:
+                result = True
+                break
+            elif tmp == False:
+                pass
+            else:
+                raise ValueError
         self.session.menu_pieces.pop()
+        return result
 
     def manage_svn(self):
+        result = False
         self.session.menu_pieces.append('repository commands')
         while True:
             menu = self.make_svn_menu()
             key, value = menu.run()
             if self.session.session_is_complete:
-                return True
-            if self.handle_svn_response(key, value):
+                result = True
                 break
+            tmp = self.handle_svn_response(key, value)
+            if tmp == 'back':
+                break
+            elif tmp == True:
+                result = True
+                break
+            elif tmp == False:
+                pass
+            else:
+                raise ValueError
         self.session.menu_pieces.pop()
+        return result
 
     def profile_package_structure(self):
         if not os.path.exists(self.directory_name):
