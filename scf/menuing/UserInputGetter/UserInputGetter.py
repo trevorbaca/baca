@@ -60,7 +60,6 @@ class UserInputGetter(MenuObject):
         self.tests.append(self.is_string)
         self.helps.append('must be string.')
 
-    # TODO: copy stuff to self.session.menu_chunks
     def conditionally_display_prompt_and_get_user_response(self):
         if self.session.is_displayable:
             prompt = self.menu_lines[-1]

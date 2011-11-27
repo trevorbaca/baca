@@ -94,8 +94,8 @@ class Menu(MenuObject, SCFObject):
             return pair_dictionary[user_response]
 
     def conditionally_display_menu_lines_and_get_user_response(self):
+        self.display_lines(self.menu_lines)
         if self.session.is_displayable:
-            self.display_lines(menu_lines)
             while True:
                 user_response = self.handle_raw_input('scf')
                 if user_response in self.all_keys:
@@ -106,7 +106,6 @@ class Menu(MenuObject, SCFObject):
     def display(self):
         self.conditionally_clear_terminal()
         self.make_menu_lines_keys_and_values()
-        self.session.menu_chunks.append(self.menu_lines[:])
         self.add_hidden_menu_items()
         user_response = self.conditionally_display_menu_lines_and_get_user_response()
         value = self.change_user_response_to_value(user_response)
