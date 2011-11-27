@@ -249,6 +249,15 @@ class PackageProxy(DirectoryProxy):
         except ImportError:    
             return collections.OrderedDict([])
 
+    def handle_tags_response(self, key, value):
+        if key == 'b':
+            return True
+        elif key == 'add':
+            self.add_tag_interactively()
+        elif key == 'del':
+            self.delete_tag_interactively()
+        return False
+
     def has_tag(self, tag_name):
         tags = self.get_tags()
         return bool(tag_name in tags)
@@ -261,26 +270,26 @@ class PackageProxy(DirectoryProxy):
             formatted_tags.append(formatted_tag)
         return formatted_tags
 
+    def make_tags_menu(self):
+        menu = self.make_new_menu(where=self.where())
+        section = self.MenuSection()
+        section.lines_to_list = self.list_formatted_tags()
+        menu.menu_sections.append(section)
+        section = self.MenuSection()
+        section.sentence_length_items.append(('add', 'add tag'))
+        section.sentence_length_items.append(('del', 'delete tag'))
+        menu.menu_sections.append(section)
+        return menu
+
     def manage_tags(self):
         self.session.menu_pieces.append('tags')
         while True:
-            menu = self.make_new_menu(where=self.where())
-            section = self.MenuSection()
-            section.lines_to_list = self.list_formatted_tags()
-            menu.menu_sections.append(section)
-            section = self.MenuSection()
-            section.sentence_length_items.append(('add', 'add tag'))
-            section.sentence_length_items.append(('del', 'delete tag'))
-            menu.menu_sections.append(section)
+            menu = self.make_tags_menu()
             key, value = menu.run()
             if self.session.session_is_complete:
                 return True
-            if key == 'b':
+            if self.handle_tags_response(key, value):
                 break
-            elif key == 'add':
-                self.add_tag_interactively()
-            elif key == 'del':
-                self.delete_tag_interactively()
         self.session.menu_pieces.pop()
 
     def pprint_tags(self, tags):

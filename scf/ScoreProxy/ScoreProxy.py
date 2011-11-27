@@ -173,7 +173,7 @@ class ScoreProxy(PackageProxy):
         elif key == 'svn':
             return self.manage_svn()
         elif key == 'tags':
-            self.manage_tags()
+            return self.manage_tags()
         elif key.startswith('h'):
             chunk_spaced_name = value
             chunk_underscored_name = chunk_spaced_name.replace(' ', '_')
@@ -195,7 +195,6 @@ class ScoreProxy(PackageProxy):
 
     def handle_svn_response(self, key, value):
         if key == 'b':
-            #value = None
             return True
         elif key == 'add':
             self.svn_add()
@@ -259,7 +258,6 @@ class ScoreProxy(PackageProxy):
             if self.handle_svn_response(key, value):
                 break
         self.session.menu_pieces.pop()
-        #return key, value
 
     def profile_package_structure(self):
         if not os.path.exists(self.directory_name):
