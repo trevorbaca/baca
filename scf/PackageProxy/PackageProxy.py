@@ -116,7 +116,7 @@ class PackageProxy(DirectoryProxy):
         elif package_importable_name_parts[0] in os.listdir(os.environ.get('SCORES')):
             directory_parts = [os.environ.get('SCORES')] + package_importable_name_parts[:]
         else:
-            raise ValueError('Unknown package importable name %r.' % package_importable_name)
+            raise ValueError('Unknown package importable name {!r}.'.format(package_importable_name))
         directory = os.path.join(*directory_parts)
         return directory
 
@@ -129,7 +129,7 @@ class PackageProxy(DirectoryProxy):
         elif package_importable_name.split('.')[0] in os.listdir(os.environ.get('SCORES')):
             return baca.scf.ScoreProxy(package_importable_name.split('.')[0])
         else:
-            raise ValueError('Unknown package importable name %r.' % package_importable_name)
+            raise ValueError('Unknown package importable name {!r}.'.format(package_importable_name))
 
     def _read_initializer_metadata(self, name):
         initializer = file(self.initializer_file_name, 'r')
@@ -147,12 +147,12 @@ class PackageProxy(DirectoryProxy):
         for line in initializer.readlines():
             if line.startswith(name):
                 found_existing_line = True
-                new_line = '%s = %r\n' % (name, value)
+                new_line = '{} = {!r}\n'.format(name, value)
                 new_lines.append(new_line)
             else:
                 new_lines.append(line)
         if not found_existing_line:
-            new_line = '%s = %r\n' % (name, value)
+            new_line = '{} = {!r}\n'.format(name, value)
             new_lines.append(new_line)
         initializer.close()
         initializer = file(self.initializer_file_name, 'w')
@@ -194,7 +194,7 @@ class PackageProxy(DirectoryProxy):
 
     def create_initializer(self):
         if self.has_initializer:
-            raise OSError('package %r already has initializer.' % self)
+            raise OSError('package {!r} already has initializer.'.format(self))
         initializer = file(self.initializer_file_name, 'a')        
         initializer.write('')
         initializer.close()
@@ -223,15 +223,15 @@ class PackageProxy(DirectoryProxy):
             self.proceed()
 
     def edit_initializer(self):
-        os.system('vi %s' % self.initializer_file_name)
+        os.system('vi {}'.format(self.initializer_file_name))
 
     def edit_parent_initializer(self):
-        os.system('vi %s' % self.parent_initializer_file_name)
+        os.system('vi {}'.format(self.parent_initializer_file_name))
 
     def import_attribute_from_initializer(self, attribute_name):
         try:
-            exec('from %s import %s' % (self.package_importable_name, attribute_name))
-            exec('result = %s' % attribute_name)
+            exec('from {} import {}'.format(self.package_importable_name, attribute_name))
+            exec('result = {}'.format(attribute_name))
             return result
         except ImportError:
             return None
@@ -244,7 +244,7 @@ class PackageProxy(DirectoryProxy):
     def get_tags(self):
         import collections
         try:
-            exec('from %s import tags' % self.package_importable_name)
+            exec('from {} import tags'.format(self.package_importable_name))
             return tags
         except ImportError:    
             return collections.OrderedDict([])
@@ -257,7 +257,7 @@ class PackageProxy(DirectoryProxy):
         formatted_tags = []
         tags = self.get_tags()
         for key in sorted(tags):
-            formatted_tag = '%r: %r' % (key, tags[key])
+            formatted_tag = '{!r}: {!r}'.format(key, tags[key])
             formatted_tags.append(formatted_tag)
         return formatted_tags
 
@@ -304,7 +304,7 @@ class PackageProxy(DirectoryProxy):
     def remove_package_importable_name_from_sys_modules(self, package_importable_name):
         '''Total hack. But works.
         '''
-        command = "if '%s' in sys.modules: del(sys.modules['%s'])" % (
+        command = "if '{}' in sys.modules: del(sys.modules['{}'])".format(
             package_importable_name, package_importable_name)
         exec(command)
 

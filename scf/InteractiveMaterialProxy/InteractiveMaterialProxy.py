@@ -38,7 +38,7 @@ class InteractiveMaterialProxy(MaterialProxy):
         
     def create(self, package_importable_name):
         self.print_not_implemented()
-        print 'Interactive material package %s created.\n' % package_importable_name
+        print 'Interactive material package {} created.\n'.format(package_importable_name)
 
     def create_interactively(self):
         while True:
@@ -125,7 +125,7 @@ class InteractiveMaterialProxy(MaterialProxy):
     def edit_item(self, key, value):
         prompt = key.replace('_', ' ')
         default = repr(value)
-        response = self.handle_raw_input_with_default('%s> ' % prompt, default=default)
+        response = self.handle_raw_input_with_default('{}> '.format(prompt), default=default)
         exec('from abjad import *')
         new_value = eval(response)
         return new_value
@@ -165,7 +165,7 @@ class InteractiveMaterialProxy(MaterialProxy):
         lilypond_file = self.make_lilypond_file_from_output_material(material)
         material_directory = self.write_material_to_disk(user_input_wrapper, material, lilypond_file)
         print ''
-        print 'Material saved to %s.\n' % material_directory
+        print 'Material saved to {}.\n'.format(material_directory)
         self.proceed()
         return True
 
@@ -173,7 +173,7 @@ class InteractiveMaterialProxy(MaterialProxy):
         menu = self.make_new_menu(where=self.where())
         items = []
         for i, (key, value) in enumerate(self.user_input_template.iteritems()):
-            item = '%s: %r' % (key.replace('_', ' '), value)
+            item = '{}: {!r}'.format(key.replace('_', ' '), value)
             items.append(item)
         menu.items_to_number = items
         menu.run()
@@ -188,7 +188,7 @@ class InteractiveMaterialProxy(MaterialProxy):
             if self.material_underscored_name is None:
                 self.name_material()
                 print ''
-            print 'Package short name will be %s.\n' % self.material_package_short_name
+            print 'Package short name will be {}.\n'.format(self.material_package_short_name)
             if self.confirm():
                 break
 
@@ -203,8 +203,8 @@ class InteractiveMaterialProxy(MaterialProxy):
             input_file.write(line + '\n')
         input_file.write('\n')
         material_underscored_name = os.path.basename(self.material_package_directory)
-        input_file.write('maker = %s()\n' % type(self).__name__)
-        input_file.write('%s = maker.make(**user_input)\n' % material_underscored_name)
+        input_file.write('maker = {}()\n'.format(type(self).__name__))
+        input_file.write('{} = maker.make(**user_input)\n'.format(material_underscored_name))
         input_file.close()
 
     def write_material_to_disk(self, user_input_wrapper, material, lilypond_file):

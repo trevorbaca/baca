@@ -7,9 +7,9 @@ class MaterialWrangler(PackageWrangler, PackageProxy):
 
     def __init__(self, purview_package_short_name, session=None):
         if purview_package_short_name == 'baca':
-            package_importable_name = '%s.materials' % purview_package_short_name
+            package_importable_name = '{}.materials'.format(purview_package_short_name)
         else:   
-            package_importable_name = '%s.mus.materials' % purview_package_short_name
+            package_importable_name = '{}.mus.materials'.format(purview_package_short_name)
         PackageProxy.__init__(self, package_importable_name=package_importable_name, session=session)
         PackageWrangler.__init__(self, directory_name=self.directory_name, session=session)
 
@@ -80,11 +80,12 @@ class MaterialWrangler(PackageWrangler, PackageProxy):
                 score_package_importable_name = 'baca.materials'
                 material_underscored_name = value
                 if material_underscored_name.endswith('(@)'):
-                    package_importable_name = '%s.%s' % (
+                    package_importable_name = '{}.{}'.format(
                         score_package_importable_name, material_underscored_name.strip(' (@)'))
                     material_proxy = self.StaticMaterialProxy(package_importable_name)
                 else:
-                    package_importable_name = '%s.%s' % (score_package_importable_name, material_underscored_name)
+                    package_importable_name = '{}.{}'.format(
+                        score_package_importable_name, material_underscored_name)
                     material_proxy = self.InteractiveMaterialProxy(package_importable_name)
                 material_proxy.title = 'Materials'
                 material_proxy.manage_material()

@@ -139,7 +139,7 @@ class MenuSection(MenuObject):
                 prefix = self.entry_prefix
                 if prefix is not None:
                     key = prefix + key
-                menu_line += '%s: %s' % (key, display_string)
+                menu_line += '{}: {}'.format(key, display_string)
                 menu_lines.append(menu_line)
             all_keys.append(key)
             all_values.append(return_value)
@@ -159,7 +159,7 @@ class MenuSection(MenuObject):
             if not self.hide_menu:
                 menu_line = self.make_tab(self.indent_level) + ' '
                 if self.layout == 'list':
-                    menu_line += '%s: %s' % (key, value)
+                    menu_line += '{}: {}'.format(key, value)
             all_keys.append(key)
             all_values.append(value)
         if self.named_pairs:
@@ -169,7 +169,7 @@ class MenuSection(MenuObject):
         for key, value in self.sentence_length_items:
             if not self.hide_menu:
                 menu_line = self.make_tab(self.indent_level) + ' '
-                menu_line += '%s: %s' % (key, value)
+                menu_line += '{}: {}'.format(key, value)
                 menu_lines.append(menu_line)
             all_keys.append(key)
             all_values.append(value)

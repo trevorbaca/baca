@@ -32,7 +32,7 @@ class PackageWrangler(DirectoryProxy):
                     initializer = os.path.join(directory, '__init__.py')
                     if os.path.isfile(initializer):
                         if hasattr(self, 'package_importable_name'):
-                            package_importable_name = '%s.%s' % (self.package_importable_name, x)
+                            package_importable_name = '{}.{}'.format(self.package_importable_name, x)
                         else:
                             package_importable_name = x
                         package_proxy = self.get_package_proxy(package_importable_name)

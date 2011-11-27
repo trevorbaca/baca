@@ -37,7 +37,7 @@ class MakerWrangler(PackageWrangler, PackageProxy):
         return property(**locals())
 
     def get_maker(self, maker_name):
-        exec('from baca.makers import %s as maker_class' % maker_name)
+        exec('from baca.makers import {} as maker_class'.format(maker_name))
         maker = maker_class()
         return maker
 
@@ -50,7 +50,7 @@ class MakerWrangler(PackageWrangler, PackageProxy):
         self.unimport_makers_package()
         exec('import baca')
         for maker_class_name in self.list_maker_class_names():
-            exec('result = baca.makers.%s()' % maker_class_name)
+            exec('result = baca.makers.{}()'.format(maker_class_name))
             yield result
 
     # add PackageWrangler.iterate_package_class_names and replace this with it
@@ -110,12 +110,12 @@ class MakerWrangler(PackageWrangler, PackageProxy):
         lines.append('import os')
         lines.append('')
         lines.append('')
-        lines.append('class %s(InteractiveMaterialProxy):' % maker_name)
+        lines.append('class {}(InteractiveMaterialProxy):'.format(maker_name))
         lines.append('')
         lines.append('    def __init__(self, **kwargs):')
         lines.append('        Maker.__init__(self, **kwargs)')
         lines.append("        self.stylesheet = os.path.join(os.path.dirname(__file__), 'stylesheet.ly')")
-        lines.append("        self._generic_output_name = %r" % generic_output_name)
+        lines.append("        self._generic_output_name = {!r}".format(generic_output_name))
         lines.append('')
         lines.append('    ### PUBLIC ATTRIBUTES ###')
         lines.append('')

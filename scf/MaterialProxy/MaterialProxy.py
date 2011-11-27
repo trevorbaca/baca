@@ -88,7 +88,7 @@ class MaterialProxy(PackageProxy):
     @property
     def input_package_importable_name(self):
         if self.package_importable_name is not None:
-            return '%s.input' % self.package_importable_name
+            return '{}.input'.format(self.package_importable_name)
 
     @property
     def is_in_score(self):
@@ -122,7 +122,7 @@ class MaterialProxy(PackageProxy):
             score_package_short_name = os.path.basename(score_package_directory)
             score_wrangler = baca.scf.ScoreWrangler()
             score_title = score_wrangler.score_package_short_name_to_score_title(score_package_short_name)
-            subtitle = '(%s)' % score_title
+            subtitle = '({})'.format(score_title)
         else:
             subtitle = '(shared material)'
         subtitle = markuptools.Markup(subtitle)
@@ -152,7 +152,7 @@ class MaterialProxy(PackageProxy):
             return self.material_underscored_name
         # TODO: remove score namespacing of score materials
         else:
-            return '%s_%s' % (self.score.package_short_name, self.material_underscored_name)
+            return '{}_{}'.format(self.score.package_short_name, self.material_underscored_name)
 
     @property
     def material_spaced_name(self):
@@ -192,7 +192,7 @@ class MaterialProxy(PackageProxy):
     @property
     def output_package_importable_name(self):
         if self.package_importable_name is not None:
-            return '%s.output' % self.package_importable_name
+            return '{}.output'.format(self.package_importable_name)
 
     @property
     def score_package_short_name(self):
@@ -209,7 +209,7 @@ class MaterialProxy(PackageProxy):
     def user_input_wrapper(self):
         if self.is_interactive:
             if self.input_package_importable_name is not None:
-                exec('from %s import user_input' % self.input_package_importable_name)
+                exec('from {} import user_input'.format(self.input_package_importable_name))
                 return user_input
 
     @property
@@ -225,7 +225,7 @@ class MaterialProxy(PackageProxy):
     @property
     def visualization_package_importable_name(self):
         if self.package_importable_name is not None:
-            return '%s.visualization' % self.package_importable_name
+            return '{}.visualization'.format(self.package_importable_name)
 
     @property
     def visualization_pdf_file_name(self):
@@ -249,7 +249,7 @@ class MaterialProxy(PackageProxy):
         return tags
 
     def add_material_to_materials_initializer(self):
-        import_statement = 'from %s import %s\n' % (self.material_underscored_name, self.material_underscored_name)
+        import_statement = 'from {} import {}\n'.format(self.material_underscored_name, self.material_underscored_name)
         parent_package = PackageProxy(self.parent_package_importable_name)
         parent_package.add_line_to_initializer(import_statement)
 
@@ -282,7 +282,7 @@ class MaterialProxy(PackageProxy):
         file_pointer = file(self.visualizer_file_name, 'w')
         file_pointer.write('from abjad import *\n')
         file_pointer.write('from abjad.tools import layouttools\n')
-        line = 'from output import %s\n' % self.material_underscored_name
+        line = 'from output import {}\n'.format(self.material_underscored_name)
         file_pointer.write(line)
         file_pointer.write('\n\n\n')
         file_pointer.close()
@@ -293,19 +293,19 @@ class MaterialProxy(PackageProxy):
         PackageProxy.delete_package(self)
 
     def edit_input_file(self):
-        os.system('vi + %s' % self.input_file_name)
+        os.system('vi + {}'.format(self.input_file_name))
 
     def edit_visualization_ly(self):
-        os.system('vi %s' % self.visualization_ly_file_name)
+        os.system('vi {}'.format(self.visualization_ly_file_name))
 
     def edit_output_file(self):
-        os.system('vi + %s' % self.output_file_name)
+        os.system('vi + {}'.format(self.output_file_name))
 
     def edit_stylesheet(self):
-        os.system('vi %s' % self.stylesheet_file_name)
+        os.system('vi {}'.format(self.stylesheet_file_name))
 
     def edit_visualizer(self):
-        os.system('vi + %s' % self.visualizer_file_name)
+        os.system('vi + {}'.format(self.visualizer_file_name))
 
     def get_materials_package_importable_name(self):
         if self.purview.is_score_local_purview:
@@ -321,10 +321,10 @@ class MaterialProxy(PackageProxy):
         response = response.lower()
         response = response.replace(' ', '_')
         if self.has_score_local_purview:
-            package_short_name = '%s_%s' % (self.purview.package_short_name, response)
+            package_short_name = '{}_{}'.format(self.purview.package_short_name, response)
         else:
             package_short_name = response
-        print 'Short package name will be %s.\n' % package_short_name
+        print 'Short package name will be {}.\n'.format(package_short_name)
         return package_short_name
 
     def get_visualizer_status_of_new_material_package_interactively(self):
@@ -337,8 +337,8 @@ class MaterialProxy(PackageProxy):
 
     def import_attribute_from_input_file(self, attribute_name):
         try:
-            exec('from %s import %s' % (self.input_package_importable_name, attribute_name))
-            exec('result = %s' % attribute_name)
+            exec('from {} import {}'.format(self.input_package_importable_name, attribute_name))
+            exec('result = {}'.format(attribute_name))
             return result
         except ImportError:
             return None
@@ -346,8 +346,8 @@ class MaterialProxy(PackageProxy):
     def import_material_from_input_file(self):
         self.unimport_input_module()
         try:
-            exec('from %s import %s' % (self.input_package_importable_name, self.material_underscored_name))
-            exec('result = %s' % self.material_underscored_name)
+            exec('from {} import {}'.format(self.input_package_importable_name, self.material_underscored_name))
+            exec('result = {}'.format(self.material_underscored_name))
             return result
         except ImportError as e:
             raise Exception('eponymous data must be kept in all I/O modules at all times.')
@@ -355,8 +355,8 @@ class MaterialProxy(PackageProxy):
     def import_material_from_output_file(self):
         self.unimport_output_module_hierarchy()
         try:
-            exec('from %s import %s' % (self.output_package_importable_name, self.material_underscored_name))
-            exec('result = %s' % self.material_underscored_name)
+            exec('from {} import {}'.format(self.output_package_importable_name, self.material_underscored_name))
+            exec('result = {}'.format(self.material_underscored_name))
             return result
         except ImportError as e:
             raise Exception('eponymous data must be kept in all I/O modules at all times.')
@@ -366,13 +366,13 @@ class MaterialProxy(PackageProxy):
             return None
         self.unimport_visualization_module()
         self.unimport_output_module()
-        command = 'from %s import lilypond_file' % self.visualization_package_importable_name 
+        command = 'from {} import lilypond_file'.format(self.visualization_package_importable_name) 
         exec(command)
         return lilypond_file
         
     def get_output_preamble_lines(self):
         self.unimport_input_module()
-        command = 'from %s import output_preamble_lines' % self.input_package_importable_name
+        command = 'from {} import output_preamble_lines'.format(self.input_package_importable_name)
         try:
             exec(command)
             # keep list from persisting between multiple calls to this method
@@ -397,10 +397,10 @@ class MaterialProxy(PackageProxy):
             print repr(self.import_material_from_input_file())
             print ''
         elif command_string == 'ih':
-            print '%s: edit input file' % 'i'.rjust(self.help_item_width)
-            print '%s: display input data' % 'id'.rjust(self.help_item_width)
-            print '%s: edit input file and run abjad on input file' % 'ij'.rjust(self.help_item_width)
-            print '%s: write input data to output file.' % 'iw'.rjust(self.help_item_width)
+            print '{}: edit input file'.format('i'.rjust(self.help_item_width))
+            print '{}: display input data'.format('id'.rjust(self.help_item_width))
+            print '{}: edit input file and run abjad on input file'.format('ij'.rjust(self.help_item_width))
+            print '{}: write input data to output file.'.format('iw'.rjust(self.help_item_width))
             print ''
         elif command_string == 'ij':
             self.edit_input_file()
@@ -436,9 +436,9 @@ class MaterialProxy(PackageProxy):
             self.create_ly_from_visualizer(is_forced=True)
             self.edit_visualzation_ly()
         elif command_string == 'lh':
-            print '%s: open ly' % 'l'.rjust(self.help_item_width)
-            print '%s: write ly' % 'lw'.rjust(self.help_item_width)
-            print '%s: write ly and open' % 'lwo'.rjust(self.help_item_width)
+            print '{}: open ly'.format('l'.rjust(self.help_item_width))
+            print '{}: write ly'.format('lw'.rjust(self.help_item_width))
+            print '{}: write ly and open'.format('lwo'.rjust(self.help_item_width))
             print ''
 
     def manage_material(self):
@@ -504,8 +504,8 @@ class MaterialProxy(PackageProxy):
             print repr(self.import_material_from_output_file())
             print ''
         elif command_string == 'oh':
-            print '%s: open output file' % 'o'.rjust(self.help_item_width)
-            print '%s: display output data' % 'od'.rjust(self.help_item_width)
+            print '{}: open output file'.format('o'.rjust(self.help_item_width))
+            print '{}: display output data'.format('od'.rjust(self.help_item_width))
             print ''
 
     def manage_pdf(self, command_string):
@@ -535,17 +535,17 @@ class MaterialProxy(PackageProxy):
             self.create_pdf_from_visualizer(is_forced=True)
             self.open_visualization_pdf()
         elif command_string == 'ph':
-            print '%s: open pdf' % 'p'.rjust(self.help_item_width)
-            print '%s: write pdf ' % 'pw'.rjust(self.help_item_width)
-            print '%s: write pdf and open' % 'pwo'.rjust(self.help_item_width)
+            print '{}: open pdf'.format('p'.rjust(self.help_item_width))
+            print '{}: write pdf '.format('pw'.rjust(self.help_item_width))
+            print '{}: write pdf and open'.format('pwo'.rjust(self.help_item_width))
             print ''
 
     def manage_regeneration(self, command_string):
         if command_string == 'z':
             self.regenerate_everything(is_forced=True)
         elif command_string == 'zh':
-            print '%s: regenerate everything' % 'z'.rjust(self.help_item_width)
-            print '%s: regenerate everything and open pdf' % 'zo'.rjust(self.help_item_width)
+            print '{}: regenerate everything'.format('z'.rjust(self.help_item_width))
+            print '{}: regenerate everything and open pdf'.format('zo'.rjust(self.help_item_width))
             print ''
         elif command_string == 'zo':
             self.regenerate_everything(is_forced=True)
@@ -556,9 +556,9 @@ class MaterialProxy(PackageProxy):
             if command_string == 'v':
                 self.edit_visualizer()
             elif command_string == 'vh':
-                print '%s: edit visualizer' % 'v'.rjust(self.help_item_width)
-                print '%s: edit visualizer and run abjad on visualizer' % 'vj'.rjust(self.help_item_width)
-                print '%s: run abjad on visualizer' % 'vjj'.rjust(self.help_item_width)
+                print '{}: edit visualizer'.format('v'.rjust(self.help_item_width))
+                print '{}: edit visualizer and run abjad on visualizer'.format('vj'.rjust(self.help_item_width))
+                print '{}: run abjad on visualizer'.format('vjj'.rjust(self.help_item_width))
                 print ''
             elif command_string == 'vj':
                 self.edit_visualizer()
@@ -577,18 +577,18 @@ class MaterialProxy(PackageProxy):
                 self.edit_input_file()
 
     def open_visualization_pdf(self):
-        command = 'open %s' % self.visualization_pdf_file_name
+        command = 'open {}'.format(self.visualization_pdf_file_name)
         os.system(command)
 
     def overwrite_output_file(self):
         output_file = file(self.output_file_name, 'w')
-        output_line = '%s = None\n' % self.material_underscored_name
+        output_line = '{} = None\n'.format(self.material_underscored_name)
         output_file.write(output_line)
         output_file.close()
 
     def prepend_score_package_short_name(self, material_underscored_name):
         if not material_underscored_name.startswith(self.score_package_short_name + '_'):
-            material_underscored_name = '%s_%s' % (self.score_package_short_name, material_underscored_name)
+            material_underscored_name = '{}_{}'.format(self.score_package_short_name, material_underscored_name)
         return material_underscored_name
 
     def regenerate_everything(self, is_forced=False):
@@ -603,13 +603,13 @@ class MaterialProxy(PackageProxy):
         maker.edit_interactively(user_input_wrapper, score_title=self.title)
 
     def rename_material(self):
-        print 'Current material name: %s' % self.material_underscored_name
+        print 'Current material name: {}'.format(self.material_underscored_name)
         new_material_spaced_name = raw_input('New material name:     ')
         print ''
         new_material_underscored_name = new_material_spaced_name.replace(' ', '_')
         new_material_underscored_name = self.prepend_score_package_short_name(new_material_underscored_name)
-        print 'Current material name: %s' % self.material_underscored_name
-        print 'New material name:     %s' % new_material_underscored_name
+        print 'Current material name: {}'.format(self.material_underscored_name)
+        print 'New material name:     {}'.format(new_material_underscored_name)
         print ''
         if not self.confirm():
             return
@@ -620,7 +620,7 @@ class MaterialProxy(PackageProxy):
                 self.parent_initializer_file_name, self.material_underscored_name, new_material_underscored_name)
             # rename package directory
             new_directory_name = self.directory.replace(self.material_underscored_name, new_material_underscored_name)
-            command = 'svn mv %s %s' % (self.directory_name, new_directory_name)
+            command = 'svn mv {} {}'.format(self.directory_name, new_directory_name)
             os.system(command)
             # update package initializer
             parent_directory_name = os.path.directory(self.directory_name)
@@ -633,7 +633,7 @@ class MaterialProxy(PackageProxy):
                 if not old_file_name.startswith(('.', '_')):
                     old_directory_name = os.path.join(new_package_directory, old_file_name)
                     new_directory_name = old_directory_name.replace(self.material_underscored_name, new_material_underscored_name)
-                    command = 'svn mv %s %s' % (old_directory_name, new_directory_name)
+                    command = 'svn mv {} {}'.format(old_directory_name, new_directory_name)
                     os.system(command)
             # rename output data
             new_output_data = os.path.join(new_package_directory, 'output.py')
@@ -641,9 +641,9 @@ class MaterialProxy(PackageProxy):
                 new_output_data, self.material_underscored_name, new_material_underscored_name)
             print ''
             # commit
-            commit_message = 'Renamed %s to %s.' % (self.material_underscored_name, new_material_underscored_name)
+            commit_message = 'Renamed {} to {}.'.format(self.material_underscored_name, new_material_underscored_name)
             commit_message = commit_message.replace('_', ' ')
-            command = 'svn commit -m "%s" %s' % (commit_message, self.parent_directory_name)
+            command = 'svn commit -m "{}" {}'.format(commit_message, self.parent_directory_name)
             os.system(command)
             print ''
         else:
@@ -661,7 +661,7 @@ class MaterialProxy(PackageProxy):
         file_pointer.close()
 
     def remove_material_from_materials_initializer(self):
-        import_statement = 'from %s import %s\n' % (self.material_underscored_name, self.material_underscored_name)
+        import_statement = 'from {} import {}\n'.format(self.material_underscored_name, self.material_underscored_name)
         self.remove_line_from_initializer(self.parent_initializer_file_name, import_statement)
 
     def reveal_modules(self):
@@ -671,11 +671,11 @@ class MaterialProxy(PackageProxy):
         return module_names
 
     def run_abjad_on_input_file(self):
-        os.system('abjad %s' % self.input_file_name)
+        os.system('abjad {}'.format(self.input_file_name))
         print ''
 
     def run_abjad_on_visualizer(self):
-        os.system('abjad %s' % self.visualizer_file_name)
+        os.system('abjad {}'.format(self.visualizer_file_name))
         print ''
 
     def summarize_material_package(self):
@@ -722,9 +722,9 @@ class MaterialProxy(PackageProxy):
         else:
             missing.append(artifact_name)
         if found:
-            print 'Found %s.' % ', '.join(found)
+            print 'Found {}.'.format(', '.join(found))
         if missing:
-            print 'Missing %s.' % ', '.join(missing)
+            print 'Missing {}.'.format(', '.join(missing))
         print ''
         self.proceed()
         
@@ -773,7 +773,7 @@ class MaterialProxy(PackageProxy):
         if output_preamble_lines:
             output_file.write('\n'.join(output_preamble_lines))
         input_data = self.import_material_from_input_file()
-        output_line = '%s = %r' % (self.material_underscored_name, input_data)
+        output_line = '{} = {!r}'.format(self.material_underscored_name, input_data)
         output_file.write(output_line)
         output_file.close()
         self.add_material_to_materials_initializer()

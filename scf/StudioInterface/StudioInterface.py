@@ -169,8 +169,8 @@ class StudioInterface(SCFObject):
         self.session.menu_pieces.pop()
 
     def run_py_test_all(self, prompt_proceed=True):
-        proc = subprocess.Popen('py.test %s %s' % 
-            (self.directory_name, self.score_wrangler.directory_name), 
+        proc = subprocess.Popen(
+            'py.test {} {}'.format(self.directory_name, self.score_wrangler.directory_name), 
             shell=True, stdout=subprocess.PIPE)
         lines = proc.stdout.readlines()
         if lines:

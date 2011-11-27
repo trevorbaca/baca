@@ -21,7 +21,7 @@ class ScoreTemplateWizard(Wizard):
         if player_count is not None:
             for i in xrange(player_count):
                 getter = self.make_new_getter(where=self.where())
-                getter.prompts.append("name of player %s" % (i + 1))
+                getter.prompts.append("name of player {}".format(i + 1))
                 getter.tests.append(lambda x: isinstance(x, str))
                 getter.should_clear_terminal = False
                 player_name = getter.run()

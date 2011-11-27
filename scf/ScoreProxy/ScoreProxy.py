@@ -132,12 +132,12 @@ class ScoreProxy(PackageProxy):
             return
         for directory_name in self.score_subdirectory_names:
             if not os.path.exists(directory_name):
-                prompt = 'Create %s? ' % directory_name
+                prompt = 'Create {}? '.format(directory_name)
                 if not is_interactive or self.query(prompt):
                     os.mkdir(directory_name)
         for initializer in self.score_initializer_file_names:
             if not os.path.exists(initializer):
-                prompt = 'Create %s? ' % initializer
+                prompt = 'Create {}? '.format(initializer)
                 if not is_interactive or self.query(prompt):
                     initializer = file(initializer, 'w')
                     initializer.write('')
@@ -246,13 +246,13 @@ class ScoreProxy(PackageProxy):
 
     def profile_package_structure(self):
         if not os.path.exists(self.directory_name):
-            raise OSError('directory %r does not exist.' % self.directory_name)
+            raise OSError('directory {!r} does not exist.'.format(self.directory_name))
         if self.package_short_name == 'recursif':
             return
         for subdirectory_name in self.score_subdirectory_names:
-            print '%s %s' % (subdirectory_name.ljust(80), os.path.exists(subdirectory_name))
+            print '{} {}'.format(subdirectory_name.ljust(80), os.path.exists(subdirectory_name))
         for initializer in self.score_initializer_file_names:
-            print '%s %s' % (initializer.ljust(80), os.path.exists(initializer))
+            print '{} {}'.format(initializer.ljust(80), os.path.exists(initializer))
 
     def run_score_package_creation_wizard(self):
         self.print_not_implemented()
@@ -280,4 +280,4 @@ class ScoreProxy(PackageProxy):
             print ''
         for i, material in enumerate(materials):
             print self.make_tab(1),
-            print '(%s) %s' % (i + 1, material.replace('_', ' '))
+            print '({}) {}'.format(i + 1, material.replace('_', ' '))

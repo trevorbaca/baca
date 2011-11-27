@@ -25,7 +25,7 @@ class Composer(object):
         return not self == other
 
     def __repr__(self):
-        return '%s(%r, %r, %r)' % (type(self).__name__, self.last_name, self.first_name, self.birthdate)
+        return '{}({!r}, {!r}, {!r})'.format(type(self).__name__, self.last_name, self.first_name, self.birthdate)
 
     ### PUBLIC ATTRIBUTES ###
 

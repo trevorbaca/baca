@@ -8,7 +8,7 @@ class MakerProxy(PackageProxy):
     def __init__(self, maker_class_name=None, session=None):
         self.maker_class_name = maker_class_name
         if maker_class_name is not None:
-            package_importable_name = 'baca.makers.%s' % maker_class_name
+            package_importable_name = 'baca.makers.{}'.format(maker_class_name)
         else:
             package_importable_name = None
         PackageProxy.__init__(self, package_importable_name=package_importable_name, session=session)
@@ -63,7 +63,7 @@ class MakerProxy(PackageProxy):
     # TODO: Possibly MakerWrangler?
     def add_line_to_materials_initializer(self):
         material_underscored_name = os.path.basename(self.material_package_directory)
-        import_statement = 'from %s import %s\n' % (material_underscored_name, material_underscored_name)
+        import_statement = 'from {} import {}\n'.format(material_underscored_name, material_underscored_name)
         initializer = self._get_initializer()
         self._add_line_to_initializer(initializer, import_statement)
 
@@ -79,14 +79,14 @@ class MakerProxy(PackageProxy):
         while True:
             menu = self.make_new_menu(where=self.where())
             menu_section = self.MenuSection()
-            menu_section.menu_section_title = 'existing %s' % self.generic_output_name
+            menu_section.menu_section_title = 'existing {}'.format(self.generic_output_name)
             menu_section.items_to_number = list(self.iterate_materials_based_on_maker())
             menu.menu_sections.append(menu_section)
             menu_section = self.MenuSection()
-            menu_section.sentence_length_items.append(('del', 'delete %s' % self.spaced_class_name))
-            menu_section.sentence_length_items.append(('new', 'create %s' % self.generic_output_name))
-            menu_section.sentence_length_items.append(('ren', 'rename %s' % self.spaced_class_name))
-            menu_section.sentence_length_items.append(('src', 'edit %s source' % self.spaced_class_name))
+            menu_section.sentence_length_items.append(('del', 'delete {}'.format(self.spaced_class_name)))
+            menu_section.sentence_length_items.append(('new', 'create {}'.format(self.generic_output_name)))
+            menu_section.sentence_length_items.append(('ren', 'rename {}'.format(self.spaced_class_name)))
+            menu_section.sentence_length_items.append(('src', 'edit {} source'.format(self.spaced_class_name)))
             key, value = menu.run()
             if key == 'b':
                 return key, None
@@ -109,5 +109,5 @@ class MakerProxy(PackageProxy):
         initializer.write('import datetime\n')
         initializer.write('\n\n')
         tags_dictionary = self.make_tags_dictionary()
-        initializer.write('tags = %r\n' % tags_dictionary)
+        initializer.write('tags = {!r}\n'.format(tags_dictionary))
         initializer.close()

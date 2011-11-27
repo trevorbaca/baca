@@ -14,4 +14,4 @@ class TrevorBaca(Composer):
     ### OVERLOADS ###
     
     def __repr__(self):
-        return '%s()' % type(self).__name__
+        return '{}()'.format(type(self).__name__)
