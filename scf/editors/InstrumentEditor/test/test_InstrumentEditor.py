@@ -84,3 +84,13 @@ def test_InstrumentEditor_05():
     instrument_editor.session.user_input = 'sinm\nf. I\nq'
     instrument_editor.edit_interactively()
     assert accordion.short_instrument_name_markup == markuptools.Markup('f. I')
+
+
+def test_InstrumentEditor_06():
+    '''Make instrument.
+    '''
+
+    instrument_editor = baca.scf.editors.InstrumentEditor()
+    instrument_editor.session.user_input = '28\nq'
+    instrument = instrument_editor.edit_interactively()
+    assert instrument == instrumenttools.Violin()

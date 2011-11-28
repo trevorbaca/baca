@@ -38,7 +38,9 @@ class PerformerEditor(InteractiveEditor):
     ### PUBLIC METHODS ###
 
     def add_instrument_interactively(self):
-        instrument = self.select_instrument_from_instrumenttools_interactively()
+        instrument_editor = self.InstrumentEditor()
+        instrument_editor.conditionally_initialize_target()
+        instrument = instrument_editor.target
         self.target.instruments.append(instrument)
         return instrument
 
@@ -117,20 +119,6 @@ class PerformerEditor(InteractiveEditor):
         new_index = new_number - 1
         self.target.instruments.remove(instrument)
         self.target.instruments.insert(new_index, instrument)
-
-    # TODO: remove altogether and delegate to InstrumentEditor
-    def select_instrument_from_instrumenttools_interactively(self):
-        from abjad.tools import instrumenttools
-        menu = self.make_new_menu(where=self.where())
-        menu.should_clear_terminal = False
-        menu_section = self.MenuSection()
-        menu_section.menu_section_title = 'instruments'
-        menu_section.items_to_number = instrumenttools.list_instrument_names()
-        menu.menu_sections.append(menu_section)
-        key, instrument_name = menu.run()
-        instrument_name = instrument_name.replace(' ', '')
-        exec('result = instrumenttools.{}()'.format(instrument_name.capitalize()))
-        return result
 
     def unname(self):
         self.target.name = None
