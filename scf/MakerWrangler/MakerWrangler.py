@@ -181,7 +181,7 @@ class MakerWrangler(PackageWrangler, PackageProxy):
         while True:
             menu = self.make_main_menu()
             key, value = menu.run()
-            if self.session.session_is_complete:
+            if self.session.is_complete:
                 result = True
                 break
             tmp = self.handle_main_menu_response(key, value)

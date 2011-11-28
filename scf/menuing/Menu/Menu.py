@@ -139,7 +139,7 @@ class Menu(MenuObject, SCFObject):
             key, value = self.conditionally_display_menu()
             should_clear_terminal, hide_menu = False, True
             result = self.handle_hidden_key(key)
-            if self.session.session_is_complete:
+            if self.session.is_complete:
                 break
             elif result is True:
                 pass

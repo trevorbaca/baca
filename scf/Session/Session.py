@@ -1,12 +1,15 @@
+import datetime
+import os
 import time
 
 
 class Session(object):
     
     def __init__(self, user_input=None):
+        self._complete_transcript = []
         self._session_once_had_user_input = False
-        self._start_time = time.time()
-        self._transcript = []
+        self._start_time = self.cur_time
+        self.dump_transcript = False
         self.initial_user_input = user_input
         self.menu_pieces = []
         self.scores_to_show = 'active'
@@ -33,6 +36,23 @@ class Session(object):
     ### PUBLIC ATTRIBUTES ###
 
     @property
+    def complete_transcript(self):
+        return self._complete_transcript
+
+    @property
+    def cur_time(self):
+        return datetime.datetime.fromtimestamp(time.time())
+
+    @apply
+    def dump_transcript():
+        def fget(self):
+            return self._dump_transcript
+        def fset(self, dump_transcript):
+            assert isinstance(dump_transcript, bool)
+            self._dump_transcript = dump_transcript
+        return property(**locals())
+
+    @property
     def formatted_attributes(self):
         result = []
         result.append('initial_user_input: {!r}'.format(self.initial_user_input))
@@ -42,8 +62,11 @@ class Session(object):
         return result
 
     @property
+    def is_complete(self):
+        return self.user_specified_quit
+
+    @property
     def is_displayable(self):
-        #return self.user_input is None
         return not self.user_input
 
     @property
@@ -54,8 +77,8 @@ class Session(object):
             return ''
 
     @property
-    def session_is_complete(self):
-        return self.user_specified_quit
+    def output_directory(self):
+        return '/Users/trevorbaca/.scf/output'
 
     @property
     def session_once_had_user_input(self):
@@ -67,7 +90,7 @@ class Session(object):
 
     @property
     def transcript(self):
-        return self._transcript
+        return [entry[1] for entry in self.complete_transcript]
 
     @apply
     def user_input():
@@ -95,3 +118,38 @@ class Session(object):
             assert isinstance(user_specified_quit, bool)
             self._user_specified_quit = user_specified_quit
         return property(**locals())
+
+    ### PUBLIC METHODS ###
+
+    def append_lines_to_transcript(self, lines, clear_terminal=None):
+        assert isinstance(lines, list)
+        assert isinstance(clear_terminal, (type(True), type(None)))
+        entry = []
+        entry.append(self.cur_time)
+        entry.append(lines[:])
+        entry.append(clear_terminal)
+        self.complete_transcript.append(entry)
+
+    def clean_up(self):
+        if self.dump_transcript:
+            self.write_complete_transcript_to_disk()
+
+    def format_transcript_entry(self, entry):
+        assert len(entry) == 3
+        result = []
+        result.append(str(entry[0]))
+        if entry[2]:
+            result.append('clear_terminal=True')
+        for line in entry[1]:
+            result.append(line)
+        return '\n'.join(result)
+            
+    def write_complete_transcript_to_disk(self):
+        start_time = self.start_time.strftime('%Y-%m-%d-%H-%M-%S')
+        file_name = 'session-{}.txt'.format(start_time)
+        file_path = os.path.join(self.output_directory, file_name)
+        output = file(file_path, 'w')
+        for entry in self.complete_transcript:
+            output.write(self.format_transcript_entry(entry))
+            output.write('\n\n')
+        output.close()

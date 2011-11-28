@@ -287,7 +287,7 @@ class PackageProxy(DirectoryProxy):
         while True:
             menu = self.make_tags_menu()
             key, value = menu.run()
-            if self.session.session_is_complete:
+            if self.session.is_complete:
                 result = True
                 break
             tmp = self.handle_tags_response(key, value)

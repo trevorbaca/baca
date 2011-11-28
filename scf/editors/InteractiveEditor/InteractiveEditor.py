@@ -25,7 +25,7 @@ class InteractiveEditor(SCFObject):
         self.target = self.target or self.target_class()
 
     def conditionally_set_target_attr(self, attr_name, attr_value):
-        if not self.session.session_is_complete:
+        if not self.session.is_complete:
             setattr(self.target, attr_name, attr_value)
 
     def edit_interactively(self):
@@ -38,7 +38,7 @@ class InteractiveEditor(SCFObject):
             key, value = menu.run()
             if self.handle_main_menu_response(key, value):
                 break
-            if self.session.session_is_complete:
+            if self.session.is_complete:
                 break
         self.session.menu_pieces.pop()
         target = self.target

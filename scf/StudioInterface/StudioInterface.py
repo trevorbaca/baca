@@ -162,7 +162,7 @@ class StudioInterface(SCFObject):
             self.session.menu_pieces.append('{} scores'.format(self.session.scores_to_show))
             menu = self.make_main_menu()
             key, value = menu.run()
-            if self.session.session_is_complete:
+            if self.session.is_complete:
                 result = True
                 break
             if key == 'studio':
@@ -180,6 +180,7 @@ class StudioInterface(SCFObject):
                 raise ValueError
             self.session.menu_pieces.pop()
         self.session.menu_pieces.pop()
+        self.session.clean_up()
         return result
 
     def manage_svn(self):
@@ -188,7 +189,7 @@ class StudioInterface(SCFObject):
         while True:
             menu = self.make_svn_menu()
             key, value = menu.run()
-            if self.session.session_is_complete:
+            if self.session.is_complete:
                 result = True
                 break
             tmp = self.handle_svn_response(key, value)

@@ -242,7 +242,7 @@ class ScoreProxy(PackageProxy):
         while True:
             menu = self.make_main_menu()
             key, value = menu.run()
-            if self.session.session_is_complete:
+            if self.session.is_complete:
                 result = True
                 break
             if key == 'studio':
@@ -266,7 +266,7 @@ class ScoreProxy(PackageProxy):
         while True:
             menu = self.make_svn_menu()
             key, value = menu.run()
-            if self.session.session_is_complete:
+            if self.session.is_complete:
                 result = True
                 break
             tmp = self.handle_svn_response(key, value)
