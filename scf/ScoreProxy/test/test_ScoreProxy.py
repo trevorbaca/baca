@@ -105,6 +105,7 @@ def test_ScoreProxy_03():
 def test_ScoreProxy_04():
     '''Manage tags menu.
     '''
+    py.test.skip('while building up archipel instrumentation.')
 
     archipel = baca.scf.ScoreProxy('archipel')
     archipel.session.user_input = 'q'

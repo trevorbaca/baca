@@ -73,8 +73,10 @@ class StudioInterface(SCFObject):
             return False
     
     def handle_svn_response(self, key, value):
+        '''Return true to exit the svn menu.
+        '''
+        result = False
         if key == 'b':
-            #return True
             return 'back'
         elif key == 'add':
             self.global_proxy.svn_add()
@@ -101,6 +103,7 @@ class StudioInterface(SCFObject):
         elif key == 'up scores':
             self.score_wrangler.svn_up()
             return True
+        return result
 
     def iterate_interactive_material_proxies(self):
         for material_proxy in self.iterate_material_proxies():

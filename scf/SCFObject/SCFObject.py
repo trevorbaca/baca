@@ -77,7 +77,7 @@ class SCFObject(object):
     ### PUBLIC METHODS ###
 
     def conditionally_clear_terminal(self):
-        if self.session.is_displayable and self.should_clear_terminal:
+        if self.session.is_displayable:
             iotools.clear_terminal()
 
     def confirm(self):
@@ -152,7 +152,7 @@ class SCFObject(object):
         return True, None
 
     def proceed(self):
-        response = handle_raw_input('Press return to continue')
+        response = self.handle_raw_input('Press return to continue')
         self.conditionally_clear_terminal()
 
     def query(self, prompt):
