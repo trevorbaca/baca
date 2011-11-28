@@ -43,7 +43,8 @@ class Session(object):
 
     @property
     def is_displayable(self):
-        return self.user_input is None
+        #return self.user_input is None
+        return not self.user_input
 
     @property
     def menu_header(self):
