@@ -181,3 +181,14 @@ def test_StudioInterface_08():
     studio_interface.session.user_input = 'svn\nb\nq'
     studio_interface.work_in_studio()
     assert studio_interface.session.menu_chunks[-2][0] == 'Studio - active scores'
+
+
+def test_StudioInterface_09():
+    '''Junk user input is handled silently.
+    '''
+
+    studio_interface = baca.scf.StudioInterface()
+    studio_interface.session.user_input = 'foo\nq'
+    studio_interface.work_in_studio()
+
+    assert len(studio_interface.session.menu_chunks) == 4

@@ -93,12 +93,19 @@ class Menu(MenuObject, SCFObject):
             pair_dictionary = dict(zip(self.all_keys, self.all_values))
             return pair_dictionary.get(key)
 
+    def check_if_key_exists(self, key):
+        if key in self.all_keys:
+            return key
+        else:
+            return None
+
     def display_menu(self):
         self.conditionally_clear_terminal()
         self.make_menu_lines_keys_and_values()
         self.add_hidden_menu_items()
         self.display_lines(self.menu_lines)
         key = self.handle_raw_input('scf')
+        key = self.check_if_key_exists(key)
         value = self.change_key_to_value(key)
         return key, value
 
