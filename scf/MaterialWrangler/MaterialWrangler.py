@@ -11,7 +11,7 @@ class MaterialWrangler(PackageWrangler, PackageProxy):
         else:   
             package_importable_name = '{}.mus.materials'.format(purview_package_short_name)
         PackageProxy.__init__(self, package_importable_name=package_importable_name, session=session)
-        PackageWrangler.__init__(self, directory_name=self.directory_name, session=session)
+        PackageWrangler.__init__(self, directory_name=self.directory_name, session=self.session)
 
     ### PUBLIC ATTRIBUTES ###
 

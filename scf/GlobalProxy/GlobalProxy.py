@@ -7,8 +7,8 @@ class GlobalProxy(PackageProxy):
     
     def __init__(self, session=None):
         PackageProxy.__init__(self, 'baca', session=session)
-        self._maker_wrangler = MakerWrangler(session=session)
-        self._material_wrangler = MaterialWrangler('baca', session=session)
+        self._maker_wrangler = MakerWrangler(session=self.session)
+        self._material_wrangler = MaterialWrangler('baca', session=self.session)
 
     ### PUBLIC ATTRIBUTES ###
 
