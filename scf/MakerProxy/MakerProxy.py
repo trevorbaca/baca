@@ -75,33 +75,56 @@ class MakerProxy(PackageProxy):
             initializer = os.path.join(os.environ.get('BACA'), 'materials', '__init__.py')        
         return initializer
 
+    def handle_main_menu_response(self, key, value):
+        if key == 'b':
+            return 'back'
+        elif key == 'del':
+            self.delete_package()
+            return False
+        elif key == 'new':
+            self.edit_interactively()
+        elif key == 'ren':
+            self.print_not_implemented()
+        elif key == 'src':
+            self.edit_source_file()
+        else:
+            material_proxy = value
+            material_proxy.manage_material()
+    
+    def make_main_menu(self):
+        menu = self.make_new_menu(where=self.where())
+        menu_section = self.MenuSection()
+        menu_section.menu_section_title = 'existing {}'.format(self.generic_output_name)
+        menu_section.items_to_number = list(self.iterate_materials_based_on_maker())
+        menu.menu_sections.append(menu_section)
+        menu_section = self.MenuSection()
+        menu_section.sentence_length_items.append(('del', 'delete {}'.format(self.spaced_class_name)))
+        menu_section.sentence_length_items.append(('new', 'create {}'.format(self.generic_output_name)))
+        menu_section.sentence_length_items.append(('ren', 'rename {}'.format(self.spaced_class_name)))
+        menu_section.sentence_length_items.append(('src', 'edit {} source'.format(self.spaced_class_name)))
+        return menu
+
     def manage_maker(self):
+        result = False
+        self.session.menu_pieces.append(self.maker_name)
         while True:
-            menu = self.make_new_menu(where=self.where())
-            menu_section = self.MenuSection()
-            menu_section.menu_section_title = 'existing {}'.format(self.generic_output_name)
-            menu_section.items_to_number = list(self.iterate_materials_based_on_maker())
-            menu.menu_sections.append(menu_section)
-            menu_section = self.MenuSection()
-            menu_section.sentence_length_items.append(('del', 'delete {}'.format(self.spaced_class_name)))
-            menu_section.sentence_length_items.append(('new', 'create {}'.format(self.generic_output_name)))
-            menu_section.sentence_length_items.append(('ren', 'rename {}'.format(self.spaced_class_name)))
-            menu_section.sentence_length_items.append(('src', 'edit {} source'.format(self.spaced_class_name)))
+            menu = self.make_main_menu()
             key, value = menu.run()
-            if key == 'b':
-                return key, None
-            elif key == 'del':
-                self.delete_package()
+            if self.session.session_is_complete:
+                result = True
                 break
-            elif key == 'new':
-                self.edit_interactively()
-            elif key == 'ren':
-                self.print_not_implemented()
-            elif key == 'src':
-                self.edit_source_file()
+            tmp = self.handle_main_menu_response(key, value)
+            if tmp == 'back':
+                break
+            elif tmp == True:
+                result = True
+                break
+            elif tmp == False:
+                pass
             else:
-                material_proxy = value
-                material_proxy.manage_material()
+                raise ValueError
+        self.session.menu_pieces.pop()
+        return result
 
     def write_initializer_to_disk(self):
         initializer = file(os.path.join(self.material_package_directory, '__init__.py'), 'w')

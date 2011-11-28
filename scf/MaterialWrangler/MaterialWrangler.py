@@ -52,6 +52,29 @@ class MaterialWrangler(PackageWrangler, PackageProxy):
         else:
             return self.StaticMaterialProxy(package_importable_name)
 
+    def handle_main_menu_response(self, key, value):
+        if key == 'b':
+            return 'back'
+        elif key == 'i':
+            menu_title = menu.menu_title
+            self.material_wrangler.create_interactive_material_package_interactively()
+        elif key == 's':
+            menu_title = menu.menu_title
+            self.material_wrangler.create_static_material_interactively(menu_title=menu_title)
+        else:
+            score_package_importable_name = 'baca.materials'
+            material_underscored_name = value
+            if material_underscored_name.endswith('(@)'):
+                package_importable_name = '{}.{}'.format(
+                    score_package_importable_name, material_underscored_name.strip(' (@)'))
+                material_proxy = self.StaticMaterialProxy(package_importable_name)
+            else:
+                package_importable_name = '{}.{}'.format(
+                    score_package_importable_name, material_underscored_name)
+                material_proxy = self.InteractiveMaterialProxy(package_importable_name)
+            material_proxy.title = 'Materials'
+            material_proxy.manage_material()
+
     def iterate_material_summaries(self):
         for material_proxy in self.iterate_package_proxies():
             summary = material_proxy.package_short_name
@@ -59,33 +82,33 @@ class MaterialWrangler(PackageWrangler, PackageProxy):
                 summary = summary + ' (@)'
             yield summary
 
-    def manage_materials(self, command_string=None):
+    def make_main_menu(self):
+        menu = self.make_new_menu(where=self.where())
+        menu_section = self.MenuSection()
+        menu_section.items_to_number = list(self.iterate_material_summaries())
+        menu_section.sentence_length_items.append(('i', 'create interactive material'))
+        menu_section.sentence_length_items.append(('s', 'create static material'))
+        menu.menu_sections.append(menu_section)
+        return menu
+
+    def manage_materials(self):
+        result = False
+        self.session.menu_pieces.append('materials')
         while True:
-            menu = self.make_new_menu(where=self.where())
-            menu_section = self.MenuSection()
-            menu_section.items_to_number = list(self.iterate_material_summaries())
-            menu_section.sentence_length_items.append(('i', 'create interactive material'))
-            menu_section.sentence_length_items.append(('s', 'create static material'))
-            menu.menu_sections.append(menu_section)
+            menu = self.make_main_menu()
             key, value = menu.run()
-            if key == 'b':
-                return key, None
-            elif key == 'i':
-                menu_title = menu.menu_title
-                self.material_wrangler.create_interactive_material_package_interactively()
-            elif key == 's':
-                menu_title = menu.menu_title
-                self.material_wrangler.create_static_material_interactively(menu_title=menu_title)
+            if self.session.session_is_complete:
+                result = True
+                break
+            tmp = self.handle_main_menu_response(key, value)
+            if tmp == 'back':
+                break
+            elif tmp == True:
+                result = True
+                break
+            elif tmp == False:
+                pass
             else:
-                score_package_importable_name = 'baca.materials'
-                material_underscored_name = value
-                if material_underscored_name.endswith('(@)'):
-                    package_importable_name = '{}.{}'.format(
-                        score_package_importable_name, material_underscored_name.strip(' (@)'))
-                    material_proxy = self.StaticMaterialProxy(package_importable_name)
-                else:
-                    package_importable_name = '{}.{}'.format(
-                        score_package_importable_name, material_underscored_name)
-                    material_proxy = self.InteractiveMaterialProxy(package_importable_name)
-                material_proxy.title = 'Materials'
-                material_proxy.manage_material()
+                raise ValueError
+        self.session.menu_pieces.pop()
+        return result

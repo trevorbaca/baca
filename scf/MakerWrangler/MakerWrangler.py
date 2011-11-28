@@ -157,22 +157,45 @@ class MakerWrangler(PackageWrangler, PackageProxy):
         stylesheet_file_pointer.write(stylesheet.format)
         stylesheet_file_pointer.close()
         
+    def handle_main_menu_response(self, key, value):
+        if key == 'b':
+            return 'back'
+        elif key == 'new':
+            self.make_maker()
+        else:
+            maker_name = value
+            maker_name = maker_name.replace(' ', '_')
+            maker_name = iotools.underscore_delimited_lowercase_to_uppercamelcase(maker_name)
+            maker = self.get_maker(maker_name)
+            maker.manage_maker()
+
+    def make_main_menu(self):
+        menu = self.make_new_menu(where=self.where())
+        menu.items_to_number = self.list_maker_spaced_class_names()
+        menu.named_pairs.append(('new', 'make maker'))
+        return menu
+
     def manage_makers(self):
+        result = True
+        self.session.menu_pieces.append('makers')
         while True:
-            menu = self.make_new_menu(where=self.where())
-            menu.items_to_number = self.list_maker_spaced_class_names()
-            menu.named_pairs.append(('new', 'make maker'))
+            menu = self.make_main_menu()
             key, value = menu.run()
-            if key == 'b':
-                return key, value
-            elif key == 'new':
-                self.make_maker()
+            if self.session.session_is_complete:
+                result = True
+                break
+            tmp = self.handle_main_menu_response(key, value)
+            if tmp == 'back':
+                break
+            elif tmp == True:
+                result = True
+                break
+            elif tmp == False:
+                pass
             else:
-                maker_name = value
-                maker_name = maker_name.replace(' ', '_')
-                maker_name = iotools.underscore_delimited_lowercase_to_uppercamelcase(maker_name)
-                maker = self.get_maker(maker_name)
-                maker.manage_maker()
+                raise ValueError
+        self.session.menu_pieces.pop()
+        return result
 
     def select_maker(self):
         menu = self.make_new_menu(where=self.where())

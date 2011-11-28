@@ -282,15 +282,26 @@ class PackageProxy(DirectoryProxy):
         return menu
 
     def manage_tags(self):
+        result = False
         self.session.menu_pieces.append('tags')
         while True:
             menu = self.make_tags_menu()
             key, value = menu.run()
             if self.session.session_is_complete:
-                return True
-            if self.handle_tags_response(key, value):
+                result = True
                 break
+            tmp = self.handle_tags_response(key, value)
+            if tmp == 'back':
+                break
+            elif tmp == True:
+                result = True
+                break
+            elif tmp == False:
+                pass
+            else:
+                raise ValueError
         self.session.menu_pieces.pop()
+        return result
 
     def pprint_tags(self, tags):
         if tags:
