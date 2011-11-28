@@ -256,3 +256,13 @@ def test_StudioInterface_13():
     assert studio_interface.session.transcript[2] == ['xcf> foo', '']
     assert studio_interface.session.transcript[3] == ['Expression not executable.', '']
     assert studio_interface.session.transcript[4] == ['scf> q', '']
+
+
+def test_StudioInterface_14():
+    '''Shared session.
+    '''
+
+    studio_interface = baca.scf.StudioInterface()
+
+    assert studio_interface.session is studio_interface.global_proxy.session
+    assert studio_interface.session is studio_interface.score_wrangler.session

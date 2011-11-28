@@ -38,3 +38,13 @@ def test_GlobalProxy_02():
     global_proxy = baca.scf.GlobalProxy()
     
     assert isinstance(global_proxy.import_attribute_from_initializer('scf'), types.ModuleType)
+
+
+def test_GlobalProxy_03():
+    '''Shared session.
+    '''
+
+    global_proxy = baca.scf.GlobalProxy()
+
+    assert global_proxy.session is global_proxy.maker_wrangler.session
+    assert global_proxy.session is global_proxy.material_wrangler.session
