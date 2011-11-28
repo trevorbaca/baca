@@ -58,8 +58,6 @@ class StudioInterface(SCFObject):
             self.global_proxy.material_wrangler.manage_materials()
         elif key == 'mb':
             self.session.scores_to_show = 'mothballed'
-        elif key == 'some':
-            self.session.hide_mothballed_scores = True
         elif key == 'svn':
             result = self.manage_svn()
         else:

@@ -88,19 +88,19 @@ class Menu(MenuObject, SCFObject):
             self.all_keys.append(key)
             self.all_values.append(value)
 
-    def change_user_response_to_value(self, user_response):
-        if user_response:
+    def change_key_to_value(self, key):
+        if key:
             pair_dictionary = dict(zip(self.all_keys, self.all_values))
-            return pair_dictionary[user_response]
+            return pair_dictionary.get(key)
 
     def display_menu(self):
         self.conditionally_clear_terminal()
         self.make_menu_lines_keys_and_values()
         self.add_hidden_menu_items()
         self.display_lines(self.menu_lines)
-        user_response = self.handle_raw_input('scf')
-        value = self.change_user_response_to_value(user_response)
-        return user_response, value
+        key = self.handle_raw_input('scf')
+        value = self.change_key_to_value(key)
+        return key, value
 
     def make_menu_lines_keys_and_values(self):
         self.menu_lines, self.all_keys, self.all_values = [], [], []
