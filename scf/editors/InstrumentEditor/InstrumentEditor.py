@@ -97,10 +97,6 @@ class InstrumentEditor(InteractiveEditor):
         menu = self.make_new_menu(where=self.where())
         menu_section = self.MenuSection()
         menu.menu_sections.append(menu_section)
-#        menu_section.sentence_length_items.append(('in', 'instrument name ({!r})'.format(self.target.instrument_name)))
-#        menu_section.sentence_length_items.append(('inm', 'instrument name markup'))
-#        menu_section.sentence_length_items.append(('sin', 'short instrument name'))
-#        menu_section.sentence_length_items.append(('sinm', 'short instrument name markup'))
         menu_section.sentence_length_items = self.target_attribute_menu_entries
         return menu
 
@@ -113,7 +109,8 @@ class InstrumentEditor(InteractiveEditor):
         menu_section.items_to_number = instrumenttools.list_instrument_names()
         menu.menu_sections.append(menu_section)
         key, instrument_name = menu.run()
+        instrument_name = instrument_name.title()
         instrument_name = instrument_name.replace(' ', '')
-        exec('result = instrumenttools.{}()'.format(instrument_name.capitalize()))
+        exec('result = instrumenttools.{}()'.format(instrument_name))
         self.session.menu_pieces.pop()
         return result
