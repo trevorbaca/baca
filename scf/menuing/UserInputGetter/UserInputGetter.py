@@ -71,7 +71,6 @@ class UserInputGetter(MenuObject):
     def load_prompt(self):
         prompt = self.prompts[self.prompt_index]
         prompt = iotools.capitalize_string_start(prompt)
-        prompt = prompt + '> '
         self.menu_lines.append(prompt)
 
     def move_to_prev_prompt(self):
