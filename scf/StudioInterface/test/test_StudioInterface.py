@@ -224,3 +224,33 @@ def test_StudioInterface_11():
     menu_0 = studio_interface.session.transcript[0]
     menu_2 = studio_interface.session.transcript[2]
     assert menu_0 == menu_2
+
+
+def test_StudioInterface_12():
+    '''Exec works.
+    '''
+
+    studio_interface = baca.scf.StudioInterface()
+    studio_interface.session.user_input = 'exec\n2**38\nq'
+    studio_interface.manage_studio()
+
+    assert len(studio_interface.session.transcript) == 5
+    assert studio_interface.session.transcript[1] == ['scf> exec', '']
+    assert studio_interface.session.transcript[2] == ['xcf> 2**38', '']
+    assert studio_interface.session.transcript[3] == ['274877906944', '']
+    assert studio_interface.session.transcript[4] == ['scf> q', '']
+
+
+def test_StudioInterface_13():
+    '''Exec protects against senseless input.
+    '''
+
+    studio_interface = baca.scf.StudioInterface()
+    studio_interface.session.user_input = 'exec\nfoo\nq'
+    studio_interface.manage_studio()
+
+    assert len(studio_interface.session.transcript) == 5
+    assert studio_interface.session.transcript[1] == ['scf> exec', '']
+    assert studio_interface.session.transcript[2] == ['xcf> foo', '']
+    assert studio_interface.session.transcript[3] == ['Expression not executable.', '']
+    assert studio_interface.session.transcript[4] == ['scf> q', '']

@@ -78,11 +78,16 @@ class MenuObject(SCFObject):
         os.system(command)
 
     def exec_statement(self):
+        lines = []
         statement = self.handle_raw_input('xcf')
         exec('from abjad import *')
-        exec('result = {}'.format(statement))
-        line = '{!r}\n'.format(result)
-        self.display_lines([line])
+        try:
+            exec('result = {}'.format(statement))
+            lines.append('{!r}'.format(result))
+        except:
+            lines.append('Expression not executable.')
+        lines.append('')
+        self.display_lines(lines)
 
     def grep_baca(self):
         regex = self.handle_raw_input('regex')
