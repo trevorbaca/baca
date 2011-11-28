@@ -23,7 +23,7 @@ def test_StudioInterface_02():
     studio_interface.session.user_input = 'q'
     studio_interface.manage_studio()
     
-    assert studio_interface.session.menu_chunks[-2] == [  
+    assert studio_interface.session.transcript[-2] == [  
      'Studio - active scores',
      '',
      "     1: L'archipel du corps (2011)",
@@ -49,7 +49,7 @@ def test_StudioInterface_03():
     studio_interface.session.user_input = 'hidden\nq'
     studio_interface.manage_studio()
 
-    assert studio_interface.session.menu_chunks[-2] == [
+    assert studio_interface.session.transcript[-2] == [
      '     active: show active scores only',   
      '     all: show all scores',
      '     exec: exec statement',
@@ -73,7 +73,7 @@ def test_StudioInterface_04():
     studio_interface.session.user_input = '1\nq'
     studio_interface.manage_studio()
 
-    assert studio_interface.session.menu_chunks[-2] == [
+    assert studio_interface.session.transcript[-2] == [
      "L'archipel du corps",
      '',
      '     Chunks',
@@ -99,7 +99,7 @@ def test_StudioInterface_05():
     studio_interface.session.user_input = 'mb\nq'
     studio_interface.manage_studio()
     
-    assert studio_interface.session.menu_chunks[-2] == [  
+    assert studio_interface.session.transcript[-2] == [  
      'Studio - mothballed scores',
      '',
      '     1: Arac\xc4\xb1l\xc4\xb1k',
@@ -124,7 +124,7 @@ def test_StudioInterface_06():
     studio_interface.session.user_input = '1\ntags\nq'
     studio_interface.manage_studio()
 
-    assert studio_interface.session.menu_chunks[-2] == [
+    assert studio_interface.session.transcript[-2] == [
      "L'archipel du corps - tags",
      '',
      "     'composer': TrevorBaca()",
@@ -144,7 +144,7 @@ def test_StudioInterface_07():
     studio_interface.session.user_input = 'svn\nq'
     studio_interface.manage_studio()
 
-    assert studio_interface.session.menu_chunks[-2] == [
+    assert studio_interface.session.transcript[-2] == [
      'Studio - active scores - repository commands',
      '',
      '     add: svn add',
@@ -170,17 +170,17 @@ def test_StudioInterface_08():
     studio_interface = baca.scf.StudioInterface()
     studio_interface.session.user_input = 'q'
     studio_interface.manage_studio()
-    assert studio_interface.session.menu_chunks[-2][0] == 'Studio - active scores'
+    assert studio_interface.session.transcript[-2][0] == 'Studio - active scores'
 
     studio_interface = baca.scf.StudioInterface()
     studio_interface.session.user_input = 'svn\nq'
     studio_interface.manage_studio()
-    assert studio_interface.session.menu_chunks[-2][0] == 'Studio - active scores - repository commands'
+    assert studio_interface.session.transcript[-2][0] == 'Studio - active scores - repository commands'
 
     studio_interface = baca.scf.StudioInterface()
     studio_interface.session.user_input = 'svn\nb\nq'
     studio_interface.manage_studio()
-    assert studio_interface.session.menu_chunks[-2][0] == 'Studio - active scores'
+    assert studio_interface.session.transcript[-2][0] == 'Studio - active scores'
 
 
 def test_StudioInterface_09():
@@ -190,12 +190,12 @@ def test_StudioInterface_09():
     studio_interface = baca.scf.StudioInterface()
     studio_interface.session.user_input = 'foo\nq'
     studio_interface.manage_studio()
-    assert len(studio_interface.session.menu_chunks) == 4
+    assert len(studio_interface.session.transcript) == 4
 
     studio_interface = baca.scf.StudioInterface()
     studio_interface.session.user_input = 'foo\nbar\nq'
     studio_interface.manage_studio()
-    assert len(studio_interface.session.menu_chunks) == 6
+    assert len(studio_interface.session.transcript) == 6
 
 
 def test_StudioInterface_10():
@@ -205,10 +205,10 @@ def test_StudioInterface_10():
     studio_interface = baca.scf.StudioInterface()
     studio_interface.session.user_input = 'foo\nq'
     studio_interface.manage_studio()
-    assert len(studio_interface.session.menu_chunks) == 4
+    assert len(studio_interface.session.transcript) == 4
 
-    menu_0 = studio_interface.session.menu_chunks[0]
-    menu_2 = studio_interface.session.menu_chunks[2]
+    menu_0 = studio_interface.session.transcript[0]
+    menu_2 = studio_interface.session.transcript[2]
     assert menu_0 == menu_2
 
 
@@ -219,8 +219,8 @@ def test_StudioInterface_11():
     studio_interface = baca.scf.StudioInterface()
     studio_interface.session.user_input = 'foo\nq'
     studio_interface.manage_studio()
-    assert len(studio_interface.session.menu_chunks) == 4
+    assert len(studio_interface.session.transcript) == 4
 
-    menu_0 = studio_interface.session.menu_chunks[0]
-    menu_2 = studio_interface.session.menu_chunks[2]
+    menu_0 = studio_interface.session.transcript[0]
+    menu_2 = studio_interface.session.transcript[2]
     assert menu_0 == menu_2

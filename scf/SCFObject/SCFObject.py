@@ -90,7 +90,7 @@ class SCFObject(object):
     def display_lines(self, lines):
         assert isinstance(lines, list)
         if lines:
-            self.session.menu_chunks.append(lines[:])
+            self.session.transcript.append(lines[:])
         if self.session.is_displayable:
             for line in lines:
                 print line
@@ -109,7 +109,7 @@ class SCFObject(object):
         menu_chunk = []
         menu_chunk.append('{}{}'.format(prompt, user_response))
         menu_chunk.append('')
-        self.session.menu_chunks.append(menu_chunk)
+        self.session.transcript.append(menu_chunk)
         return user_response
 
     def handle_raw_input_with_default(self, prompt, default=''):
@@ -128,7 +128,7 @@ class SCFObject(object):
         return self.Menu(where=where, session=self.session)
 
     def pmc(self):
-        pprint.pprint(self.session.menu_chunks)
+        pprint.pprint(self.session.transcript)
 
     def pop_next_user_response_from_user_input(self):
         if self.session.user_input is None:

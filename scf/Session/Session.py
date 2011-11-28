@@ -4,9 +4,9 @@ import time
 class Session(object):
     
     def __init__(self, user_input=None):
-        self._menu_chunks = []
         self._session_once_had_user_input = False
         self._start_time = time.time()
+        self._transcript = []
         self.initial_user_input = user_input
         self.menu_pieces = []
         self.scores_to_show = 'active'
@@ -53,10 +53,6 @@ class Session(object):
             return ''
 
     @property
-    def menu_chunks(self):
-        return self._menu_chunks
-
-    @property
     def session_is_complete(self):
         return self.user_specified_quit
 
@@ -67,6 +63,10 @@ class Session(object):
     @property
     def start_time(self):
         return self._start_time
+
+    @property
+    def transcript(self):
+        return self._transcript
 
     @apply
     def user_input():

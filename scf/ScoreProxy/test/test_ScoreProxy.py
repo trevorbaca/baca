@@ -61,7 +61,7 @@ def test_ScoreProxy_02():
     archipel.session.user_input = 'q'
     archipel.manage_score()
 
-    assert archipel.session.menu_chunks[-2] == [
+    assert archipel.session.transcript[-2] == [
      "L'archipel du corps",
      '',
      '     Chunks',
@@ -87,7 +87,7 @@ def test_ScoreProxy_03():
     archipel.session.user_input = 'hidden\nq'
     archipel.manage_score()
 
-    assert archipel.session.menu_chunks[-2] == [
+    assert archipel.session.transcript[-2] == [
      '     b: back',
      '     exec: exec statement',
      '     grep: grep baca directories',
@@ -110,7 +110,7 @@ def test_ScoreProxy_04():
     archipel.session.user_input = 'q'
     archipel.manage_tags()
 
-    assert archipel.session.menu_chunks[-2] == [
+    assert archipel.session.transcript[-2] == [
      'Tags',
      '',
      "     'composer': TrevorBaca()",
@@ -145,10 +145,10 @@ def test_ScoreProxy_05():
     studio_interface.session.user_input = '1\nstudio\nq'
     studio_interface.manage_studio()
 
-    assert len(studio_interface.session.menu_chunks) == 6
-    assert studio_interface.session.menu_chunks[0][0] == 'Studio - active scores'
-    assert studio_interface.session.menu_chunks[2][0] == "L'archipel du corps"
-    assert studio_interface.session.menu_chunks[4][0] == 'Studio - active scores'
+    assert len(studio_interface.session.transcript) == 6
+    assert studio_interface.session.transcript[0][0] == 'Studio - active scores'
+    assert studio_interface.session.transcript[2][0] == "L'archipel du corps"
+    assert studio_interface.session.transcript[4][0] == 'Studio - active scores'
 
 
 def test_ScoreProxy_06():
@@ -159,9 +159,9 @@ def test_ScoreProxy_06():
     archipel.session.user_input = 'studio'
     archipel.manage_score()
 
-    assert len(archipel.session.menu_chunks) == 2
-    assert archipel.session.menu_chunks[0][0] == "L'archipel du corps"
-    assert archipel.session.menu_chunks[1][0] == 'scf> studio'
+    assert len(archipel.session.transcript) == 2
+    assert archipel.session.transcript[0][0] == "L'archipel du corps"
+    assert archipel.session.transcript[1][0] == 'scf> studio'
 
 
 def test_ScoreProxy_07():
@@ -172,7 +172,7 @@ def test_ScoreProxy_07():
     studio_interface.session.user_input = '1\nb\nq'
     studio_interface.manage_studio()
 
-    assert len(studio_interface.session.menu_chunks) == 6
-    assert studio_interface.session.menu_chunks[0][0] == 'Studio - active scores'
-    assert studio_interface.session.menu_chunks[2][0] == "L'archipel du corps"
-    assert studio_interface.session.menu_chunks[4][0] == 'Studio - active scores'
+    assert len(studio_interface.session.transcript) == 6
+    assert studio_interface.session.transcript[0][0] == 'Studio - active scores'
+    assert studio_interface.session.transcript[2][0] == "L'archipel du corps"
+    assert studio_interface.session.transcript[4][0] == 'Studio - active scores'
