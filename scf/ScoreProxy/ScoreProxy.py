@@ -161,7 +161,7 @@ class ScoreProxy(PackageProxy):
         if key is None:
             pass
         elif key == 'b':
-            result = True
+            return 'back'
         elif key == 'ch':
             self.chunk_wrangler.create_chunk_interactively()
         elif key == 'instr':

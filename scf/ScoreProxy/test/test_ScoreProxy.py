@@ -138,7 +138,7 @@ def test_ScoreProxy_05():
 
 
 def test_ScoreProxy_05():
-    '''User 'studio' input results in return to studio main menu (when possible).
+    '''User 'studio' input results in return to studio main menu.
     '''
     
     studio_interface = baca.scf.StudioInterface()
@@ -162,3 +162,17 @@ def test_ScoreProxy_06():
     assert len(archipel.session.menu_chunks) == 2
     assert archipel.session.menu_chunks[0][0] == "L'archipel du corps"
     assert archipel.session.menu_chunks[1][0] == 'scf> studio'
+
+
+def test_ScoreProxy_07():
+    '''User 'b' input returns to studio main menu.
+    '''
+
+    studio_interface = baca.scf.StudioInterface()
+    studio_interface.session.user_input = '1\nb\nq'
+    studio_interface.manage_studio()
+
+    assert len(studio_interface.session.menu_chunks) == 6
+    assert studio_interface.session.menu_chunks[0][0] == 'Studio - active scores'
+    assert studio_interface.session.menu_chunks[2][0] == "L'archipel du corps"
+    assert studio_interface.session.menu_chunks[4][0] == 'Studio - active scores'

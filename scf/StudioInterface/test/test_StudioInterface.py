@@ -210,3 +210,17 @@ def test_StudioInterface_10():
     menu_0 = studio_interface.session.menu_chunks[0]
     menu_2 = studio_interface.session.menu_chunks[2]
     assert menu_0 == menu_2
+
+
+def test_StudioInterface_11():
+    '''User 'b' input results in (dummy) redraw of studio main menu.
+    '''
+
+    studio_interface = baca.scf.StudioInterface()
+    studio_interface.session.user_input = 'foo\nq'
+    studio_interface.manage_studio()
+    assert len(studio_interface.session.menu_chunks) == 4
+
+    menu_0 = studio_interface.session.menu_chunks[0]
+    menu_2 = studio_interface.session.menu_chunks[2]
+    assert menu_0 == menu_2
