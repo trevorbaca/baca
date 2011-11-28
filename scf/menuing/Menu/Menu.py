@@ -152,6 +152,9 @@ class Menu(MenuObject, SCFObject):
                 break
             elif key == 'redraw':
                 should_clear_terminal, hide_menu = True, False
+            elif key == 'studio':
+                value = None
+                break
             else:
                 break
         return key, value

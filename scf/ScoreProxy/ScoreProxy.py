@@ -245,6 +245,8 @@ class ScoreProxy(PackageProxy):
             if self.session.session_is_complete:
                 result = True
                 break
+            if key == 'studio':
+                break
             tmp = self.handle_main_menu_response(key, value)
             if tmp == 'back':
                 break

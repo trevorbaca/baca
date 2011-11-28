@@ -21,7 +21,7 @@ def test_StudioInterface_02():
 
     studio_interface = baca.scf.StudioInterface()
     studio_interface.session.user_input = 'q'
-    studio_interface.work_in_studio()
+    studio_interface.manage_studio()
     
     assert studio_interface.session.menu_chunks[-2] == [  
      'Studio - active scores',
@@ -47,7 +47,7 @@ def test_StudioInterface_03():
 
     studio_interface = baca.scf.StudioInterface()
     studio_interface.session.user_input = 'hidden\nq'
-    studio_interface.work_in_studio()
+    studio_interface.manage_studio()
 
     assert studio_interface.session.menu_chunks[-2] == [
      '     active: show active scores only',   
@@ -71,7 +71,7 @@ def test_StudioInterface_04():
 
     studio_interface = baca.scf.StudioInterface()
     studio_interface.session.user_input = '1\nq'
-    studio_interface.work_in_studio()
+    studio_interface.manage_studio()
 
     assert studio_interface.session.menu_chunks[-2] == [
      "L'archipel du corps",
@@ -97,7 +97,7 @@ def test_StudioInterface_05():
 
     studio_interface = baca.scf.StudioInterface()
     studio_interface.session.user_input = 'mb\nq'
-    studio_interface.work_in_studio()
+    studio_interface.manage_studio()
     
     assert studio_interface.session.menu_chunks[-2] == [  
      'Studio - mothballed scores',
@@ -122,7 +122,7 @@ def test_StudioInterface_06():
 
     studio_interface = baca.scf.StudioInterface()
     studio_interface.session.user_input = '1\ntags\nq'
-    studio_interface.work_in_studio()
+    studio_interface.manage_studio()
 
     assert studio_interface.session.menu_chunks[-2] == [
      "L'archipel du corps - tags",
@@ -142,7 +142,7 @@ def test_StudioInterface_07():
 
     studio_interface = baca.scf.StudioInterface()
     studio_interface.session.user_input = 'svn\nq'
-    studio_interface.work_in_studio()
+    studio_interface.manage_studio()
 
     assert studio_interface.session.menu_chunks[-2] == [
      'Studio - active scores - repository commands',
@@ -169,17 +169,17 @@ def test_StudioInterface_08():
 
     studio_interface = baca.scf.StudioInterface()
     studio_interface.session.user_input = 'q'
-    studio_interface.work_in_studio()
+    studio_interface.manage_studio()
     assert studio_interface.session.menu_chunks[-2][0] == 'Studio - active scores'
 
     studio_interface = baca.scf.StudioInterface()
     studio_interface.session.user_input = 'svn\nq'
-    studio_interface.work_in_studio()
+    studio_interface.manage_studio()
     assert studio_interface.session.menu_chunks[-2][0] == 'Studio - active scores - repository commands'
 
     studio_interface = baca.scf.StudioInterface()
     studio_interface.session.user_input = 'svn\nb\nq'
-    studio_interface.work_in_studio()
+    studio_interface.manage_studio()
     assert studio_interface.session.menu_chunks[-2][0] == 'Studio - active scores'
 
 
@@ -189,10 +189,10 @@ def test_StudioInterface_09():
 
     studio_interface = baca.scf.StudioInterface()
     studio_interface.session.user_input = 'foo\nq'
-    studio_interface.work_in_studio()
+    studio_interface.manage_studio()
     assert len(studio_interface.session.menu_chunks) == 4
 
     studio_interface = baca.scf.StudioInterface()
     studio_interface.session.user_input = 'foo\nbar\nq'
-    studio_interface.work_in_studio()
+    studio_interface.manage_studio()
     assert len(studio_interface.session.menu_chunks) == 6

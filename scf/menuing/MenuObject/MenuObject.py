@@ -103,8 +103,6 @@ class MenuObject(SCFObject):
             self.show_hidden_menu_items()
         elif key == 'q':
             self.session.user_specified_quit = True
-        elif key == 'studio':
-            raise StudioException
         elif key == 'where':
             self.show_menu_client()
         else:
