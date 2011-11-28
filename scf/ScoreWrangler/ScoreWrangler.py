@@ -22,7 +22,7 @@ class ScoreWrangler(PackageWrangler):
     ### PUBLIC METHODS ###
 
     def create_score_package_interactively(self, score_package_importable_name):
-        score_proxy = self.ScoreProxy()
+        score_proxy = self.ScoreProxy(session=self.session)
         score_proxy.create_score_package_creation_wizard()
 
     def fix_score_package_structures(self):
@@ -31,7 +31,7 @@ class ScoreWrangler(PackageWrangler):
             score_proxy.profile_package_structure()
 
     def get_package_proxy(self, package_importable_name):
-        return self.ScoreProxy(package_importable_name)
+        return self.ScoreProxy(package_importable_name, session=self.session)
 
     def iterate_score_package_short_names(self, scores_to_show='active'):
         for score_proxy in self.iterate_score_proxies(scores_to_show=scores_to_show):
@@ -65,7 +65,7 @@ class ScoreWrangler(PackageWrangler):
         if key == 's':
             return None
         score_package_short_name = self.title_to_score_package_short_name(value)
-        score_proxy = self.ScoreProxy(score_package_short_name)
+        score_proxy = self.ScoreProxy(score_package_short_name, session=self.session)
         return score_proxy
     
     def svn_ci(self, prompt_proceed=True):

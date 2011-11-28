@@ -108,7 +108,7 @@ class DirectoryProxy(SCFObject):
             result = self._remove_nonversioned_directory()    
         return result
 
-    def run_py_test(self, session=None, prompt_proceed=True):
+    def run_py_test(self, prompt_proceed=True):
         proc = subprocess.Popen('py.test {}'.format(self.directory_name), shell=True, stdout=subprocess.PIPE)
         lines = [line.strip() for line in proc.stdout.readlines()]
         if lines:
@@ -116,7 +116,7 @@ class DirectoryProxy(SCFObject):
         if prompt_proceed:
             self.proceed()
 
-    def svn_add(self, session=None, prompt_proceed=True):
+    def svn_add(self, prompt_proceed=True):
         proc = subprocess.Popen('svn-add-all', shell=True, stdout=subprocess.PIPE)
         lines = [line.strip() for line in proc.stdout.readlines()]
         if lines:
@@ -124,7 +124,7 @@ class DirectoryProxy(SCFObject):
         if prompt_proceed:
             self.proceed()
  
-    def svn_ci(self, session=None, commit_message=None, prompt_proceed=True):
+    def svn_ci(self, commit_message=None, prompt_proceed=True):
         if commit_message is None:
             commit_message = self.handle_raw_input('Commit message')
             line = 'Commit message will be: "{}"\n'.format(commit_message)
@@ -141,7 +141,7 @@ class DirectoryProxy(SCFObject):
         if prompt_proceed:
             self.proceed()
 
-    def svn_st(self, session=None, prompt_proceed=True):
+    def svn_st(self, prompt_proceed=True):
         line = self.directory_name
         self.display_lines([line])
         command = 'svn st -u {}'.format(self.directory_name)
@@ -151,7 +151,7 @@ class DirectoryProxy(SCFObject):
         if prompt_proceed:
             self.proceed()
 
-    def svn_up(self, session=None, prompt_proceed=True):
+    def svn_up(self, prompt_proceed=True):
         line = self.directory_name
         self.display_lines([line])
         command = 'svn up {}'.format(self.directory_name)

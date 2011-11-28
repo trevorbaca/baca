@@ -9,8 +9,8 @@ class StudioInterface(SCFObject):
 
     def __init__(self, session=None):
         SCFObject.__init__(self, session=session)
-        self._global_proxy = GlobalProxy(session=session)
-        self._score_wrangler = ScoreWrangler(session=session)
+        self._global_proxy = GlobalProxy(session=self.session)
+        self._score_wrangler = ScoreWrangler(session=self.session)
 
     ### PUBLIC ATTRIBUTES ###
 
