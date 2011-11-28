@@ -135,3 +135,30 @@ def test_ScoreProxy_05():
     archipel.session.user_input = 'del\nfoo\nq'
     archipel.manage_tags()
     assert archipel.get_tag('foo') is None
+
+
+def test_ScoreProxy_05():
+    '''User 'studio' input results in return to studio main menu (when possible).
+    '''
+    
+    studio_interface = baca.scf.StudioInterface()
+    studio_interface.session.user_input = '1\nstudio\nq'
+    studio_interface.manage_studio()
+
+    assert len(studio_interface.session.menu_chunks) == 6
+    assert studio_interface.session.menu_chunks[0][0] == 'Studio - active scores'
+    assert studio_interface.session.menu_chunks[2][0] == "L'archipel du corps"
+    assert studio_interface.session.menu_chunks[4][0] == 'Studio - active scores'
+
+
+def test_ScoreProxy_06():
+    '''User 'studio' input terminates execution (when score not managed from studio).
+    '''
+
+    archipel = baca.scf.ScoreProxy('archipel')
+    archipel.session.user_input = 'studio'
+    archipel.manage_score()
+
+    assert len(archipel.session.menu_chunks) == 2
+    assert archipel.session.menu_chunks[0][0] == "L'archipel du corps"
+    assert archipel.session.menu_chunks[1][0] == 'scf> studio'
