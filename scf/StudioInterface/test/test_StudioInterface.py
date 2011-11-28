@@ -190,5 +190,9 @@ def test_StudioInterface_09():
     studio_interface = baca.scf.StudioInterface()
     studio_interface.session.user_input = 'foo\nq'
     studio_interface.work_in_studio()
-
     assert len(studio_interface.session.menu_chunks) == 4
+
+    studio_interface = baca.scf.StudioInterface()
+    studio_interface.session.user_input = 'foo\nbar\nq'
+    studio_interface.work_in_studio()
+    assert len(studio_interface.session.menu_chunks) == 6
