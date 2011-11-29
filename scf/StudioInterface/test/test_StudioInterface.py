@@ -233,13 +233,13 @@ def test_StudioInterface_12():
     '''
 
     studio_interface = baca.scf.StudioInterface()
-    studio_interface.session.user_input = 'exec\n2**38\nq'
+    studio_interface.session.user_input = 'exec\n2**30\nq'
     studio_interface.manage_studio()
 
     assert len(studio_interface.session.transcript) == 5
     assert studio_interface.session.transcript[1] == ['scf> exec', '']
-    assert studio_interface.session.transcript[2] == ['xcf> 2**38', '']
-    assert studio_interface.session.transcript[3] == ['274877906944', '']
+    assert studio_interface.session.transcript[2] == ['xcf> 2**30', '']
+    assert studio_interface.session.transcript[3] == ['1073741824', '']
     assert studio_interface.session.transcript[4] == ['scf> q', '']
 
 
