@@ -4,4 +4,4 @@ import baca
 
 studio_interface = baca.scf.StudioInterface()
 studio_interface.session.dump_transcript = True
-studio_interface.manage_studio()
+studio_interface.manage()
