@@ -59,7 +59,7 @@ def test_ScoreProxy_02():
 
     archipel = baca.scf.ScoreProxy('archipel')
     archipel.session.user_input = 'q'
-    archipel.manage_score()
+    archipel.manage()
 
     assert archipel.session.transcript[-2] == [
      "L'archipel du corps",
@@ -85,7 +85,7 @@ def test_ScoreProxy_03():
 
     archipel = baca.scf.ScoreProxy('archipel')
     archipel.session.user_input = 'hidden\nq'
-    archipel.manage_score()
+    archipel.manage()
 
     assert archipel.session.transcript[-2] == [
      '     b: back',
@@ -144,7 +144,7 @@ def test_ScoreProxy_06():
     
     studio_interface = baca.scf.StudioInterface()
     studio_interface.session.user_input = '1\nstudio\nq'
-    studio_interface.manage_studio()
+    studio_interface.manage()
 
     assert len(studio_interface.session.transcript) == 6
     assert studio_interface.session.transcript[0][0] == 'Studio - active scores'
@@ -158,7 +158,7 @@ def test_ScoreProxy_07():
 
     archipel = baca.scf.ScoreProxy('archipel')
     archipel.session.user_input = 'studio'
-    archipel.manage_score()
+    archipel.manage()
 
     assert len(archipel.session.transcript) == 2
     assert archipel.session.transcript[0][0] == "L'archipel du corps"
@@ -171,7 +171,7 @@ def test_ScoreProxy_08():
 
     studio_interface = baca.scf.StudioInterface()
     studio_interface.session.user_input = '1\nb\nq'
-    studio_interface.manage_studio()
+    studio_interface.manage()
 
     assert len(studio_interface.session.transcript) == 6
     assert studio_interface.session.transcript[0][0] == 'Studio - active scores'

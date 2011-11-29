@@ -73,7 +73,7 @@ class MaterialWrangler(PackageWrangler, PackageProxy):
                     score_package_importable_name, material_underscored_name)
                 material_proxy = self.InteractiveMaterialProxy(package_importable_name)
             material_proxy.title = 'Materials'
-            material_proxy.manage_material()
+            material_proxy.manage()
 
     def iterate_material_summaries(self):
         for material_proxy in self.iterate_package_proxies():
@@ -91,7 +91,7 @@ class MaterialWrangler(PackageWrangler, PackageProxy):
         menu.menu_sections.append(menu_section)
         return menu
 
-    def manage_materials(self):
+    def manage(self):
         result = False
         self.session.menu_pieces.append('materials')
         while True:

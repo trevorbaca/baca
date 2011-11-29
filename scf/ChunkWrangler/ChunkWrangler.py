@@ -36,5 +36,5 @@ class ChunkWrangler(PackageWrangler, PackageProxy):
     def get_package_proxy(self, package_importable_name):
         return self.ChunkProxy(package_importable_name)
 
-    def manage_chunks(self):
+    def manage(self):
         self.print_not_implemented()

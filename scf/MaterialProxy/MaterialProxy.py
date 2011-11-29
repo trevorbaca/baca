@@ -394,60 +394,7 @@ class MaterialProxy(PackageProxy):
         trimmed_visualizer_ly_lines = self.trim_ly_lines(self.visualization_ly_file_name)
         return trimmed_temp_ly_file_lines == trimmed_visualizer_ly_lines
 
-    def manage_input(self, command_string):
-        lines = []
-        if command_string == 'i':
-            self.edit_input_file()
-        elif command_string == 'id':
-            lines.append(repr(self.import_material_from_input_file()))
-            lines.append('')
-        elif command_string == 'ih':
-            lines.append('{}: edit input file'.format('i'.rjust(self.help_item_width)))
-            lines.append('{}: display input data'.format('id'.rjust(self.help_item_width)))
-            lines.append('{}: edit input file and run abjad on input file'.format(
-                'ij'.rjust(self.help_item_width)))
-            lines.append('{}: write input data to output file.'.format('iw'.rjust(self.help_item_width)))
-            lines.append('')
-        elif command_string == 'ij':
-            self.edit_input_file()
-            self.run_abjad_on_input_file()
-        elif command_string == 'iw':
-            self.write_input_data_to_output_file(is_forced=True)
-            lines.append('')
-        self.display_lines(lines)
-
-    def manage_ly(self, command_string):
-        if command_string == 'l':
-            if self.has_visualization_ly:
-                self.edit_visualization_ly()
-            elif self.has_visualizer:
-                if self.query('Create LilyPond file from visualizer? '):
-                    self.create_ly_from_visualizer()    
-            elif self.has_output_data:
-                line = "Data exists but visualizer doesn't.\n"
-                self.display_lines([line])
-                if self.query('Create visualizer? '):
-                    self.create_visualizer()
-            elif self.has_input_file:
-                if self.query('Write material to disk? '):
-                    self.write_input_data_to_output_file(is_forced=True)
-            else:
-                if self.query('Create input file? '):
-                    self.edit_input_file()
-        elif command_string == 'lw':
-            self.create_ly_from_visualizer(is_forced=True)
-        elif command_string == 'lwo':
-            self.create_ly_from_visualizer(is_forced=True)
-            self.edit_visualzation_ly()
-        elif command_string == 'lh':
-            lines = []
-            lines.append('{}: open ly'.format('l'.rjust(self.help_item_width)))
-            lines.append('{}: write ly'.format('lw'.rjust(self.help_item_width)))
-            lines.append('{}: write ly and open'.format('lwo'.rjust(self.help_item_width)))
-            lines.append('')
-            self.display_lines(lines)
-
-    def manage_material(self):
+    def manage(self):
         while True:
             menu = self.make_new_menu(where=self.where())
             menu_section = self.MenuSection()
@@ -502,6 +449,59 @@ class MaterialProxy(PackageProxy):
                 self.edit_stylesheet()
             elif key == 'z':
                 self.manage_regeneration(key)
+
+    def manage_input(self, command_string):
+        lines = []
+        if command_string == 'i':
+            self.edit_input_file()
+        elif command_string == 'id':
+            lines.append(repr(self.import_material_from_input_file()))
+            lines.append('')
+        elif command_string == 'ih':
+            lines.append('{}: edit input file'.format('i'.rjust(self.help_item_width)))
+            lines.append('{}: display input data'.format('id'.rjust(self.help_item_width)))
+            lines.append('{}: edit input file and run abjad on input file'.format(
+                'ij'.rjust(self.help_item_width)))
+            lines.append('{}: write input data to output file.'.format('iw'.rjust(self.help_item_width)))
+            lines.append('')
+        elif command_string == 'ij':
+            self.edit_input_file()
+            self.run_abjad_on_input_file()
+        elif command_string == 'iw':
+            self.write_input_data_to_output_file(is_forced=True)
+            lines.append('')
+        self.display_lines(lines)
+
+    def manage_ly(self, command_string):
+        if command_string == 'l':
+            if self.has_visualization_ly:
+                self.edit_visualization_ly()
+            elif self.has_visualizer:
+                if self.query('Create LilyPond file from visualizer? '):
+                    self.create_ly_from_visualizer()    
+            elif self.has_output_data:
+                line = "Data exists but visualizer doesn't.\n"
+                self.display_lines([line])
+                if self.query('Create visualizer? '):
+                    self.create_visualizer()
+            elif self.has_input_file:
+                if self.query('Write material to disk? '):
+                    self.write_input_data_to_output_file(is_forced=True)
+            else:
+                if self.query('Create input file? '):
+                    self.edit_input_file()
+        elif command_string == 'lw':
+            self.create_ly_from_visualizer(is_forced=True)
+        elif command_string == 'lwo':
+            self.create_ly_from_visualizer(is_forced=True)
+            self.edit_visualzation_ly()
+        elif command_string == 'lh':
+            lines = []
+            lines.append('{}: open ly'.format('l'.rjust(self.help_item_width)))
+            lines.append('{}: write ly'.format('lw'.rjust(self.help_item_width)))
+            lines.append('{}: write ly and open'.format('lwo'.rjust(self.help_item_width)))
+            lines.append('')
+            self.display_lines(lines)
 
     def manage_output(self, command_string):
         lines = []

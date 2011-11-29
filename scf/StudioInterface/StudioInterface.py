@@ -53,9 +53,9 @@ class StudioInterface(SCFObject):
         elif key == 'all':
             self.session.scores_to_show = 'all'
         elif key == 'k':
-            self.global_proxy.maker_wrangler.manage_makers()
+            self.global_proxy.maker_wrangler.manage()
         elif key == 'm':
-            self.global_proxy.material_wrangler.manage_materials()
+            self.global_proxy.material_wrangler.manage()
         elif key == 'mb':
             self.session.scores_to_show = 'mothballed'
         elif key == 'svn':
@@ -65,7 +65,7 @@ class StudioInterface(SCFObject):
             score_proxy = self.score_wrangler.ScoreProxy(score_package_importable_name, session=self.session)
             menu_pieces = self.session.menu_pieces[:]
             self.session.menu_pieces = []
-            result = score_proxy.manage_score()
+            result = score_proxy.manage()
             self.session.menu_pieces = menu_pieces
         if result:
             return True
@@ -158,7 +158,7 @@ class StudioInterface(SCFObject):
         menu.menu_sections.append(menu_section)
         return menu
 
-    def manage_studio(self):
+    def manage(self):
         result = False
         self.session.menu_pieces.append('studio')
         while True:
