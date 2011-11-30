@@ -245,7 +245,10 @@ class ScoreProxy(PackageProxy):
 
     def manage(self):
         result = False
-        self.session.menu_pieces.append(self.title)
+        if isinstance(self.year_of_completion, int):
+            self.session.menu_pieces.append(self.title_with_year)
+        else:
+            self.session.menu_pieces.append(self.title)
         while True:
             menu = self.make_main_menu()
             key, value = menu.run()

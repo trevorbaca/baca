@@ -75,7 +75,7 @@ def test_StudioInterface_04():
     studio_interface.manage()
 
     assert studio_interface.session.transcript[-2] == [
-     "L'archipel du corps",
+     "L'archipel du corps (2011)",
      '',
      '     Chunks',
      '',

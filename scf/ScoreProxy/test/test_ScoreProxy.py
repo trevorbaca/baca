@@ -62,7 +62,7 @@ def test_ScoreProxy_02():
     archipel.manage()
 
     assert archipel.session.transcript[-2] == [
-     "L'archipel du corps",
+     "L'archipel du corps (2011)",
      '',
      '     Chunks',
      '',
@@ -148,7 +148,7 @@ def test_ScoreProxy_06():
 
     assert len(studio_interface.session.transcript) == 6
     assert studio_interface.session.transcript[0][0] == 'Studio - active scores'
-    assert studio_interface.session.transcript[2][0] == "L'archipel du corps"
+    assert studio_interface.session.transcript[2][0] == "L'archipel du corps (2011)"
     assert studio_interface.session.transcript[4][0] == 'Studio - active scores'
 
 
@@ -161,7 +161,7 @@ def test_ScoreProxy_07():
     archipel.manage()
 
     assert len(archipel.session.transcript) == 2
-    assert archipel.session.transcript[0][0] == "L'archipel du corps"
+    assert archipel.session.transcript[0][0] == "L'archipel du corps (2011)"
     assert archipel.session.transcript[1][0] == 'scf> studio'
 
 
@@ -175,7 +175,7 @@ def test_ScoreProxy_08():
 
     assert len(studio_interface.session.transcript) == 6
     assert studio_interface.session.transcript[0][0] == 'Studio - active scores'
-    assert studio_interface.session.transcript[2][0] == "L'archipel du corps"
+    assert studio_interface.session.transcript[2][0] == "L'archipel du corps (2011)"
     assert studio_interface.session.transcript[4][0] == 'Studio - active scores'
 
 

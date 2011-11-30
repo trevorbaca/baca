@@ -87,8 +87,13 @@ class SCFObject(object):
             return False
         return True
 
-    def display_lines(self, lines):
+    def display_cap_lines(self, lines):
+        self.display_lines(lines, capitalize_first_character=True)
+        
+    def display_lines(self, lines, capitalize_first_character=False):
         assert isinstance(lines, list)
+        if capitalize_first_character:
+            lines = [iotools.capitalize_string_start(line) for line in lines]
         if lines:
             self.session.append_lines_to_transcript(lines)
         if self.session.is_displayable:

@@ -45,24 +45,32 @@ class PerformerEditor(InteractiveEditor):
         return instrument
 
     def delete_instrument_interactively(self):
-        number = self.handle_raw_input('number')
+        instrument_number = self.handle_raw_input('instrument number')
         try:
-            number = int(number)
+            instrument_number = int(instrument_number)
         except:
             pass
-        index = number - 1
-        del(self.target.instruments[index])
+        if self.target.instrument_count < instrument_number:
+            message = 'there is no instrument number {}.'.format(instrument_number)
+            self.display_cap_lines([message])
+            self.proceed()
+            return 
+        instrument_index = instrument_number - 1
+        del(self.target.instruments[instrument_index])
     
     def edit_name_interactively(self):
-        name = self.handle_raw_input('name')
+        if self.target.name is None:
+            prompt = 'name'
+        else:
+            prompt = 'new name'
+        name = self.handle_raw_input(prompt)
         self.target.name = name
 
     def handle_main_menu_response(self, key, value):
-        if key == 'b':
-            #return True
-            return 'back'
-        elif key == 'db':
+        if key == 'add':
             return self.add_instrument_interactively()
+        elif key == 'b':
+            return 'back'
         elif key == 'del':
             return self.delete_instrument_interactively()
         elif key == 'mv':
@@ -89,37 +97,42 @@ class PerformerEditor(InteractiveEditor):
         menu.menu_sections.append(menu_section)
         instrument_names = [x.instrument_name for x in self.target.instruments]
         menu_section.items_to_number = instrument_names
+        menu_section.sentence_length_items.append(('add', 'add instrument'))
         menu_section.sentence_length_items.append(('del', 'delete instrument'))
-        if self.target.is_doubling:
-            value = 'add or remove instrument'
-        else:
-            value = 'add instrument'
-        menu_section.sentence_length_items.append(('inst', value))
         if 1 < self.target.instrument_count:
-            menu_section.sentence_length_items.append(('mv', 'move instrument up or down in list'))
+            menu_section.sentence_length_items.append(('mv', 'move instrument'))
         if self.target.name is None:
-            menu_section.sentence_length_items.append(('name', 'name'))
+            menu_section.sentence_length_items.append(('name', 'name performer'))
         else:
             menu_section.sentence_length_items.append(('ren', 'rename performer'))
             menu_section.sentence_length_items.append(('un', 'unname performer'))
         return menu
 
     def move_instrument_interactively(self):
-        old_number = self.handle_raw_input('old number')
+        old_instrument_number = self.handle_raw_input('old instrument number')
         try:
-            old_number = int(old_number)
+            old_instrument_number = int(old_instrument_number)
         except:
             return
-        old_index = old_number - 1
-        instrument = self.target.instruments[old_index]
-        new_number = self.handle_raw_input('new number')
+        if self.target.instrument_count < old_instrument_number:
+            self.display_lines(['there is no instrument number {}.'.format(old_instrument_number)])
+            self.proceed()
+            return 
+        old_instrument_index = old_instrument_number - 1
+        instrument = self.target.instruments[old_instrument_index]
+        new_instrument_number = self.handle_raw_input('new instrument number')
         try:
-            new_number = int(new_number)
+            new_instrument_number = int(new_instrument_number)
         except:
             return
-        new_index = new_number - 1
+        if self.target.instrument_count < new_instrument_number:
+            message = 'there is no instrument number {}.'.format(new_instrument_number)
+            self.display_cap_lines([message])
+            self.proceed()
+            return 
+        new_instrument_index = new_instrument_number - 1
         self.target.instruments.remove(instrument)
-        self.target.instruments.insert(new_index, instrument)
+        self.target.instruments.insert(new_instrument_index, instrument)
 
     def unname(self):
         self.target.name = None

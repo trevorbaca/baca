@@ -50,14 +50,13 @@ class InstrumentationSpecifierEditor(InteractiveEditor):
             self.display_lines(['only {} performers.'.format(self.target.performer_count)])
             self.proceed()
 
-    def edit_performer_interactively(performer_number):
+    def edit_performer_interactively(self, performer_number):
         try:
-            performer_number = int(key)
+            performer_number = int(performer_number)
         except:
             return
         performer = self.get_performer_from_performer_number(performer_number)
         performer_editor = self.PerformerEditor(session=self.session, target=performer)
-        # TODO: should this function return something?
         performer_editor.edit_interactively()
 
     def get_performer_from_performer_number(self, performer_number):
@@ -83,7 +82,6 @@ class InstrumentationSpecifierEditor(InteractiveEditor):
         So this function should have a bunch of single-line branches.
         Include a return-true statement only in branches that should break the calling loop. 
         '''
-        print 'foo {!r} {!r}'.format(key, value)
         if not isinstance(key, str):
             raise TypeError('nonstring key!')
         if key == 'add':
@@ -103,7 +101,7 @@ class InstrumentationSpecifierEditor(InteractiveEditor):
         menu_section.items_to_number = self.summary_lines
         menu_section.sentence_length_items.append(('add', 'add performer'))
         menu_section.sentence_length_items.append(('del', 'delete performer'))
-        menu_section.sentence_length_items.append(('mv', 'move performer up or down in list'))
+        menu_section.sentence_length_items.append(('mv', 'move performer'))
         menu.menu_sections.append(menu_section)
         return menu
 
