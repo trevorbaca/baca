@@ -75,7 +75,7 @@ def test_ScoreProxy_02():
      '',
      '     Setup',
      '',
-     '     instr: edit instrumentation',
+     '     perf: performers & instrumentation',
      '']
 
 

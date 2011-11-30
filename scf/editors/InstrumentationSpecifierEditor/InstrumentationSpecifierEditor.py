@@ -36,7 +36,6 @@ class InstrumentationSpecifierEditor(InteractiveEditor):
         performer_editor = self.PerformerEditor(session=self.session, target=performer)
         instrument = performer_editor.add_instrument_interactively()
         performer.name = instrument.instrument_name
-        return performer_editor
 
     def delete_performer_interactively(self):
         number = self.handle_raw_input('number')
@@ -45,7 +44,21 @@ class InstrumentationSpecifierEditor(InteractiveEditor):
         except:
             pass
         index = number - 1
-        del(self.target.performers[index])
+        if index < self.target.performer_count:
+            del(self.target.performers[index])
+        else:
+            self.display_lines(['only {} performers.'.format(self.target.performer_count)])
+            self.proceed()
+
+    def edit_performer_interactively(performer_number):
+        try:
+            performer_number = int(key)
+        except:
+            return
+        performer = self.get_performer_from_performer_number(performer_number)
+        performer_editor = self.PerformerEditor(session=self.session, target=performer)
+        # TODO: should this function return something?
+        performer_editor.edit_interactively()
 
     def get_performer_from_performer_number(self, performer_number):
         assert isinstance(performer_number, int)
@@ -57,25 +70,32 @@ class InstrumentationSpecifierEditor(InteractiveEditor):
         return performer
 
     def handle_main_menu_response(self, key, value):
-        if key is None:
-            return True
-        elif key == 'add':
+        '''Protocol: return value of this method must be one of these four values:
+        true, 'back', false (or none).
+        (Returning false is equivalent to returning none; false is deprecated;
+        methods like this one should eventually return only none and never return false.)
+        The meaning of these three return values is as follows.
+        Return none (or false) to avoid breaking out of the loop calling this function.
+        Return true to break out of the loop calling this function.
+        (Return 'back' to break out of the loop calling this function.)
+        (Note that 'back' seems to be redundant and should be replaced with true.)
+        So this function should eventually return only two values: none, true.
+        So this function should have a bunch of single-line branches.
+        Include a return-true statement only in branches that should break the calling loop. 
+        '''
+        print 'foo {!r} {!r}'.format(key, value)
+        if not isinstance(key, str):
+            raise TypeError('nonstring key!')
+        if key == 'add':
             self.add_performer_interactively()
         elif key == 'b':
-            return True
+            return 'back'
         elif key == 'del':
             self.delete_performer_interactively()
         elif key == 'mv':
             self.move_performer_interactively()
         else:
-            try:
-                performer_number = int(key)
-            except:
-                performer_number = None
-            if performer_number is not None:
-                performer = self.get_performer_from_performer_number(performer_number)
-                performer_editor = self.PerformerEditor(session=self.session, target=performer)
-                performer_editor.edit_interactively()
+            self.edit_performer_interactively(key)
 
     def make_main_menu(self):
         menu = self.make_new_menu(where=self.where())
@@ -94,6 +114,10 @@ class InstrumentationSpecifierEditor(InteractiveEditor):
         except:
             return
         old_index = old_number - 1
+        if self.target.performer_count <= old_index:
+            self.display_lines(['there is no performer number {}.'.format(old_number)])
+            self.proceed()
+            return
         performer = self.target.performers[old_index]
         new_number = self.handle_raw_input('new number')
         try:
@@ -101,5 +125,9 @@ class InstrumentationSpecifierEditor(InteractiveEditor):
         except:
             return
         new_index = new_number - 1
+        if self.target.performer_count <= new_index:
+            self.display_lines(['there is no performer number {}.'.format(new_number)])
+            self.proceed()
+            return
         self.target.performers.remove(performer)
         self.target.performers.insert(new_index, performer)

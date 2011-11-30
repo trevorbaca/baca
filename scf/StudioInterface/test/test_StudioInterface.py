@@ -88,7 +88,7 @@ def test_StudioInterface_04():
      '',
      '     Setup',
      '',
-     '     instr: edit instrumentation',
+     '     perf: performers & instrumentation',
      '']
 
 

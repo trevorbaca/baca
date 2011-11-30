@@ -59,18 +59,19 @@ class PerformerEditor(InteractiveEditor):
 
     def handle_main_menu_response(self, key, value):
         if key == 'b':
-            return True
+            #return True
+            return 'back'
         elif key == 'db':
-            self.add_instrument_interactively()
+            return self.add_instrument_interactively()
         elif key == 'del':
-            self.delete_instrument_interactively()
+            return self.delete_instrument_interactively()
         elif key == 'mv':
-            self.move_instrument_interactively()
+            return self.move_instrument_interactively()
         elif key in ('name', 'ren'):
             self.edit_name_interactively()
-            return True
+            return True # maybe eliminate this line?
         elif key == 'un':
-            self.unname()
+            return self.unname()
         else:
             try:
                 instrument_number = int(key)
@@ -80,7 +81,7 @@ class PerformerEditor(InteractiveEditor):
                 instrument = None
             if instrument is not None:
                 instrument_editor = self.InstrumentEditor(session=self.session, target=instrument)
-                instrument_editor.edit_interactively()
+                return instrument_editor.edit_interactively()
 
     def make_main_menu(self):
         menu = self.make_new_menu(where=self.where())
@@ -88,19 +89,19 @@ class PerformerEditor(InteractiveEditor):
         menu.menu_sections.append(menu_section)
         instrument_names = [x.instrument_name for x in self.target.instruments]
         menu_section.items_to_number = instrument_names
-        menu_section.sentence_length_items.append(('del', 'delete'))
+        menu_section.sentence_length_items.append(('del', 'delete instrument'))
         if self.target.is_doubling:
-            value = 'add or remove doubling'
+            value = 'add or remove instrument'
         else:
-            value = 'add doubling'
-        menu_section.sentence_length_items.append(('db', value))
+            value = 'add instrument'
+        menu_section.sentence_length_items.append(('inst', value))
         if 1 < self.target.instrument_count:
             menu_section.sentence_length_items.append(('mv', 'move instrument up or down in list'))
         if self.target.name is None:
             menu_section.sentence_length_items.append(('name', 'name'))
         else:
-            menu_section.sentence_length_items.append(('ren', 'rename'))
-            menu_section.sentence_length_items.append(('un', 'unname'))
+            menu_section.sentence_length_items.append(('ren', 'rename performer'))
+            menu_section.sentence_length_items.append(('un', 'unname performer'))
         return menu
 
     def move_instrument_interactively(self):

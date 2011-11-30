@@ -92,5 +92,5 @@ def test_InstrumentEditor_06():
 
     instrument_editor = baca.scf.editors.InstrumentEditor()
     instrument_editor.session.user_input = '9\nq'
-    instrument = instrument_editor.edit_interactively()
-    assert instrument == instrumenttools.ContrabassFlute()
+    instrument_editor.edit_interactively()
+    assert instrument_editor.target == instrumenttools.ContrabassFlute()

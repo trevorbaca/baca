@@ -124,8 +124,10 @@ class ScoreProxy(PackageProxy):
         import baca
         target = self.get_tag('instrumentation')
         editor = baca.scf.editors.InstrumentationSpecifierEditor(session=self.session, target=target)
-        target = editor.edit_interactively()
-        self.add_tag('instrumentation', target)
+        #target = editor.edit_interactively()
+        result = editor.edit_interactively()
+        self.add_tag('instrumentation', editor.target)
+        return result
 
     def fix_package_structure(self, is_interactive=True):
         if self.package_short_name == 'recursif':
@@ -157,19 +159,20 @@ class ScoreProxy(PackageProxy):
             initializer.close()
 
     def handle_main_menu_response(self, key, value):
-        result = False
+        #result = False
         if key is None:
-            pass
+            #pass
+            return False
         elif key == 'b':
             return 'back'
         elif key == 'ch':
-            self.chunk_wrangler.create_chunk_interactively()
-        elif key == 'instr':
-            self.edit_instrumentation_specifier_interactively()
+            return self.chunk_wrangler.create_chunk_interactively()
         elif key == 'mi':
-            self.material_wrangler.create_interactive_material_interactively()
+            return self.material_wrangler.create_interactive_material_interactively()
         elif key == 'ms':
-            self.material_wrangler.create_static_material_package_interactively()
+            return self.material_wrangler.create_static_material_package_interactively()
+        elif key == 'perf':
+            return self.edit_instrumentation_specifier_interactively()
         elif key == 'svn':
             return self.manage_svn()
         elif key == 'tags':
@@ -181,17 +184,21 @@ class ScoreProxy(PackageProxy):
                 self.chunk_wrangler.package_importable_name, chunk_underscored_name)
             chunk_proxy = self.chunk_wrangler.ChunkProxy(package_importable_name)
             chunk_proxy.title = self.title
-            result = chunk_proxy.manage()
+            #result = chunk_proxy.manage()
+            return chunk_proxy.manage()
         elif key.startswith('m'):
             material_underscored_name = value
             package_importable_name = '{}.{}'.format(
                 self.material_wrangler.package_importable_name, material_underscored_name)
             material_proxy = self.material_wrangler.get_package_proxy(package_importable_name)
-            result = material_proxy.manage()
-        if result:
-            return True
+            #result = material_proxy.manage()
+            return material_proxy.manage()
         else:
-            return False
+            raise ValueError
+#        if result:
+#            return True
+#        else:
+#            return False
 
     def handle_svn_response(self, key, value):
         if key == 'b':
@@ -221,7 +228,7 @@ class ScoreProxy(PackageProxy):
         menu.menu_sections.append(menu_section)
         menu_section = self.MenuSection()
         menu_section.menu_section_title = 'Setup'
-        menu_section.sentence_length_items.append(('instr', 'edit instrumentation'))
+        menu_section.sentence_length_items.append(('perf', 'performers & instrumentation'))
         menu.menu_sections.append(menu_section)
         menu.hidden_items.append(('svn', 'work with repository'))
         menu.hidden_items.append(('tags', 'work with tags'))
@@ -256,7 +263,7 @@ class ScoreProxy(PackageProxy):
             elif tmp == False:
                 pass
             else:
-                raise ValueError
+                raise ValueError(repr(tmp))
         self.session.menu_pieces.pop()
         return result
 
