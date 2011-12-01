@@ -94,3 +94,13 @@ def test_InstrumentEditor_06():
     instrument_editor.session.user_input = '9\nq'
     instrument_editor.edit_interactively()
     assert instrument_editor.target == instrumenttools.ContrabassFlute()
+
+
+def test_InstrumentEditor_07():
+    '''Backtracking works from instrument editor to performer editor.
+    '''
+    py.test.skip(
+    'on hold while figuring out why user input not being read correctly on naked editor instantiation.')
+
+    performer_editor = baca.scf.editors.PerformerEditor()
+    performer_editor.session.user_input = ''
