@@ -321,19 +321,19 @@ class MaterialProxy(PackageProxy):
             raise ValueError
 
     def get_package_short_name_of_new_material_interactively(self):
-        response = self.handle_raw_input('Material name')
+        response = self.handle_raw_input('material name')
         response = response.lower()
         response = response.replace(' ', '_')
         if self.has_score_local_purview:
             package_short_name = '{}_{}'.format(self.purview.package_short_name, response)
         else:
             package_short_name = response
-        line = 'Short package name will be {}.\n'.format(package_short_name)
+        line = 'short package name will be {}.\n'.format(package_short_name)
         self.display_lines([line])
         return package_short_name
 
     def get_visualizer_status_of_new_material_package_interactively(self):
-        response = self.handle_raw_input('Include visualizer?')
+        response = self.handle_raw_input('include visualizer?')
         if response == 'y':
             return True
         else:
@@ -477,18 +477,18 @@ class MaterialProxy(PackageProxy):
             if self.has_visualization_ly:
                 self.edit_visualization_ly()
             elif self.has_visualizer:
-                if self.query('Create LilyPond file from visualizer? '):
+                if self.query('create LilyPond file from visualizer? '):
                     self.create_ly_from_visualizer()    
             elif self.has_output_data:
-                line = "Data exists but visualizer doesn't.\n"
+                line = "data exists but visualizer doesn't.\n"
                 self.display_lines([line])
-                if self.query('Create visualizer? '):
+                if self.query('create visualizer? '):
                     self.create_visualizer()
             elif self.has_input_file:
-                if self.query('Write material to disk? '):
+                if self.query('write material to disk? '):
                     self.write_input_data_to_output_file(is_forced=True)
             else:
-                if self.query('Create input file? '):
+                if self.query('create input file? '):
                     self.edit_input_file()
         elif command_string == 'lw':
             self.create_ly_from_visualizer(is_forced=True)
@@ -521,18 +521,18 @@ class MaterialProxy(PackageProxy):
             if self.has_visualization_pdf:
                 self.open_visualization_pdf()
             elif self.has_visualizer:
-                if self.query('Create PDF from visualizer? '):
+                if self.query('create PDF from visualizer? '):
                     self.create_pdf_from_visualizer()
             elif self.has_output_data:
-                line =  "Data exists but visualizer doesn't.\n"
+                line =  "data exists but visualizer doesn't.\n"
                 self.display_lines([line])
-                if self.query('Create visualizer? '):
+                if self.query('create visualizer? '):
                     self.create_visualizer()
             elif self.has_input_file:
-                if self.query('Write material to disk? '):
+                if self.query('write material to disk? '):
                     self.write_input_data_to_output_file(is_forced=True)
             else:
-                if self.query('Create input file? '):
+                if self.query('create input file? '):
                     self.edit_input_file()
         elif command_string == 'pw':
             self.create_pdf_from_visualizer(is_forced=True)
@@ -578,15 +578,15 @@ class MaterialProxy(PackageProxy):
             elif command_string == 'vjj':
                 self.run_abjad_on_visualizer()
         elif self.has_output_data:
-            line = "Data exists but visualizer doesn't.\n"
+            line = "data exists but visualizer doesn't.\n"
             self.display_lines([line])
-            if self.query('Create visualizer? '):
+            if self.query('create visualizer? '):
                 self.create_visualizer()
         elif self.has_input_file:
-            if self.query('Write material to disk? '):
+            if self.query('write material to disk? '):
                 self.write_input_data_to_output_file(is_forced=True)
         else:
-            if self.query('Create input file? '):
+            if self.query('create input file? '):
                 self.edit_input_file()
 
     def open_visualization_pdf(self):
@@ -616,14 +616,14 @@ class MaterialProxy(PackageProxy):
         maker.edit_interactively(user_input_wrapper, score_title=self.title)
 
     def rename_material(self):
-        line = 'Current material name: {}'.format(self.material_underscored_name)
+        line = 'current material name: {}'.format(self.material_underscored_name)
         self.display_lines([line])
-        new_material_spaced_name = self.handle_raw_input('New material name:     ')
+        new_material_spaced_name = self.handle_raw_input('new material name:     ')
         new_material_underscored_name = new_material_spaced_name.replace(' ', '_')
         new_material_underscored_name = self.prepend_score_package_short_name(new_material_underscored_name)
         lines = []
-        lines.append('Current material name: {}'.format(self.material_underscored_name))
-        lines.append('New material name:     {}'.format(new_material_underscored_name))
+        lines.append('current material name: {}'.format(self.material_underscored_name))
+        lines.append('new material name:     {}'.format(new_material_underscored_name))
         lines.append('')
         self.display_lines(lines)
         if not self.confirm():
@@ -654,7 +654,7 @@ class MaterialProxy(PackageProxy):
             self.helpers.globally_replace_in_file(
                 new_output_data, self.material_underscored_name, new_material_underscored_name)
             # commit
-            commit_message = 'Renamed {} to {}.'.format(self.material_underscored_name, new_material_underscored_name)
+            commit_message = 'renamed {} to {}.'.format(self.material_underscored_name, new_material_underscored_name)
             commit_message = commit_message.replace('_', ' ')
             command = 'svn commit -m "{}" {}'.format(commit_message, self.parent_directory_name)
             os.system(command)
@@ -711,9 +711,9 @@ class MaterialProxy(PackageProxy):
         else:
             missing.append(artifact_name)
         if found:
-            lines.append('Found {}.'.format(', '.join(found)))
+            lines.append('found {}.'.format(', '.join(found)))
         if missing:
-            lines.append('Missing {}.'.format(', '.join(missing)))
+            lines.append('missing {}.'.format(', '.join(missing)))
         lines.append('')
         self.display_lines(lines)
         self.proceed()
@@ -767,7 +767,7 @@ class MaterialProxy(PackageProxy):
         output_file.write(output_line)
         output_file.close()
         self.add_material_to_materials_initializer()
-        line = "Material in 'input.py' written to 'output.py'."
+        line = "material in 'input.py' written to 'output.py'."
         self.display_lines([line])
 
     def write_input_data_to_output_file(self, is_forced=False):
@@ -775,7 +775,7 @@ class MaterialProxy(PackageProxy):
         if is_changed or is_forced:
             self._write_input_data_to_output_file()
         else:
-            line = 'Input data equals output data. (Output data preserved.)'
+            line = 'input data equals output data. (Output data preserved.)'
             self.display_lines([line])
         return is_changed
 

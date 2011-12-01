@@ -81,7 +81,7 @@ class SCFObject(object):
             iotools.clear_terminal()
 
     def confirm(self):
-        response = self.handle_raw_input('Ok?')
+        response = self.handle_raw_input('ok?')
         if not response.lower() == 'y':
             self.display_lines([''])
             return False
@@ -105,6 +105,7 @@ class SCFObject(object):
         os.system(command)
 
     def handle_raw_input(self, prompt):
+        prompt = iotools.capitalize_string_start(prompt)
         prompt = prompt + '> '
         if self.session.is_displayable:
             user_response = raw_input(prompt)
@@ -150,14 +151,14 @@ class SCFObject(object):
 
     def print_not_implemented(self):
         lines = []
-        lines.append('Not yet implemented.')
+        lines.append('not yet implemented.')
         lines.append('')
         self.display_lines(lines)
         self.proceed()
         return True, None
 
     def proceed(self):
-        response = self.handle_raw_input('Press return to continue')
+        response = self.handle_raw_input('press return to continue')
         self.conditionally_clear_terminal()
 
     def query(self, prompt):

@@ -69,8 +69,8 @@ class ScoreWrangler(PackageWrangler):
         return score_proxy
     
     def svn_ci(self, prompt_proceed=True):
-        commit_message = self.handle_raw_input('Commit message')
-        line = 'Commit message will be: "{}"\n'.format(commit_message)
+        commit_message = self.handle_raw_input('commit message')
+        line = 'commit message will be: "{}"\n'.format(commit_message)
         self.display_lines([line])
         if not self.confirm():
             return

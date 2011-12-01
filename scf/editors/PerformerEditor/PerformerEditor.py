@@ -67,29 +67,38 @@ class PerformerEditor(InteractiveEditor):
         self.target.name = name
 
     def handle_main_menu_response(self, key, value):
+        if not isinstance(key, str):
+            raise TypeError('key must be string.')
         if key == 'add':
-            return self.add_instrument_interactively()
+            self.add_instrument_interactively()
         elif key == 'b':
             return 'back'
         elif key == 'del':
-            return self.delete_instrument_interactively()
+            self.delete_instrument_interactively()
         elif key == 'mv':
-            return self.move_instrument_interactively()
+            self.move_instrument_interactively()
         elif key in ('name', 'ren'):
             self.edit_name_interactively()
-            return True # maybe eliminate this line?
+            #return True # maybe eliminate this line?
         elif key == 'un':
             return self.unname()
         else:
-            try:
-                instrument_number = int(key)
-                instrument_index = instrument_number - 1
-                instrument = self.target.instruments[instrument_index]
-            except:
-                instrument = None
-            if instrument is not None:
-                instrument_editor = self.InstrumentEditor(session=self.session, target=instrument)
-                return instrument_editor.edit_interactively()
+            self.edit_instrument_interactively(key)
+
+    def edit_instrument_interactively(self, instrument_number):
+        try:
+            instrument_number = int(instrument_number)
+        except:
+            return
+        if self.target.instrument_count < instrument_number:
+            message = 'there is no instrument number {}'.format(instrument_number)
+            self.display_cap_lines([message, ''])
+            self.proceed()
+            return
+        instrument_index = instrument_number - 1
+        instrument = self.target.instruments[instrument_index]
+        instrument_editor = self.InstrumentEditor(session=self.session, target=instrument)
+        instrument_editor.edit_interactively()
 
     def make_main_menu(self):
         menu = self.make_new_menu(where=self.where())
@@ -115,7 +124,8 @@ class PerformerEditor(InteractiveEditor):
         except:
             return
         if self.target.instrument_count < old_instrument_number:
-            self.display_lines(['there is no instrument number {}.'.format(old_instrument_number)])
+            message = 'there is no instrument number {}.'.format(old_instrument_number)
+            self.display_cap_lines([message, ''])
             self.proceed()
             return 
         old_instrument_index = old_instrument_number - 1
@@ -126,8 +136,8 @@ class PerformerEditor(InteractiveEditor):
         except:
             return
         if self.target.instrument_count < new_instrument_number:
-            message = 'there is no instrument number {}.'.format(new_instrument_number)
-            self.display_cap_lines([message])
+            message = 'there is no instrument number {}.'.format(old_instrument_number)
+            self.display_cap_lines([message, ''])
             self.proceed()
             return 
         new_instrument_index = new_instrument_number - 1

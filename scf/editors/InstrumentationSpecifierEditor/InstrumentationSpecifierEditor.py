@@ -38,17 +38,18 @@ class InstrumentationSpecifierEditor(InteractiveEditor):
         performer.name = instrument.instrument_name
 
     def delete_performer_interactively(self):
-        number = self.handle_raw_input('number')
+        number = self.handle_raw_input('performer number')
         try:
             number = int(number)
         except:
             pass
-        index = number - 1
-        if index < self.target.performer_count:
-            del(self.target.performers[index])
-        else:
-            self.display_lines(['only {} performers.'.format(self.target.performer_count)])
+        if self.target.performer_count < number:
+            message = 'there is no performer number {}.'.format(number)
+            self.display_cap_lines([message, ''])
             self.proceed()
+            return
+        index = number - 1
+        del(self.target.performers[index])
 
     def edit_performer_interactively(self, performer_number):
         try:
@@ -83,7 +84,7 @@ class InstrumentationSpecifierEditor(InteractiveEditor):
         Include a return-true statement only in branches that should break the calling loop. 
         '''
         if not isinstance(key, str):
-            raise TypeError('nonstring key!')
+            raise TypeError('key must be string.')
         if key == 'add':
             self.add_performer_interactively()
         elif key == 'b':
@@ -98,11 +99,11 @@ class InstrumentationSpecifierEditor(InteractiveEditor):
     def make_main_menu(self):
         menu = self.make_new_menu(where=self.where())
         menu_section = self.MenuSection()
+        menu.menu_sections.append(menu_section)
         menu_section.items_to_number = self.summary_lines
         menu_section.sentence_length_items.append(('add', 'add performer'))
         menu_section.sentence_length_items.append(('del', 'delete performer'))
         menu_section.sentence_length_items.append(('mv', 'move performer'))
-        menu.menu_sections.append(menu_section)
         return menu
 
     def move_performer_interactively(self):
@@ -113,7 +114,8 @@ class InstrumentationSpecifierEditor(InteractiveEditor):
             return
         old_index = old_number - 1
         if self.target.performer_count <= old_index:
-            self.display_lines(['there is no performer number {}.'.format(old_number)])
+            message = 'there is no performer number {}.'.format(old_number)
+            self.display_cap_lines([message, ''])
             self.proceed()
             return
         performer = self.target.performers[old_index]
@@ -124,7 +126,8 @@ class InstrumentationSpecifierEditor(InteractiveEditor):
             return
         new_index = new_number - 1
         if self.target.performer_count <= new_index:
-            self.display_lines(['there is no performer number {}.'.format(new_number)])
+            message = 'there is no performer number {}.'.format(old_number)
+            self.display_cap_lines([message, ''])
             self.proceed()
             return
         self.target.performers.remove(performer)

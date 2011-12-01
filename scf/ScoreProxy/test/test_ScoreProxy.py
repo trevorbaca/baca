@@ -162,7 +162,7 @@ def test_ScoreProxy_07():
 
     assert len(archipel.session.transcript) == 2
     assert archipel.session.transcript[0][0] == "L'archipel du corps (2011)"
-    assert archipel.session.transcript[1][0] == 'scf> studio'
+    assert archipel.session.transcript[1][0] == 'SCF> studio'
 
 
 def test_ScoreProxy_08():

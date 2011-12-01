@@ -237,10 +237,10 @@ def test_StudioInterface_12():
     studio_interface.manage()
 
     assert len(studio_interface.session.transcript) == 5
-    assert studio_interface.session.transcript[1] == ['scf> exec', '']
-    assert studio_interface.session.transcript[2] == ['xcf> 2**30', '']
+    assert studio_interface.session.transcript[1] == ['SCF> exec', '']
+    assert studio_interface.session.transcript[2] == ['XCF> 2**30', '']
     assert studio_interface.session.transcript[3] == ['1073741824', '']
-    assert studio_interface.session.transcript[4] == ['scf> q', '']
+    assert studio_interface.session.transcript[4] == ['SCF> q', '']
 
 
 def test_StudioInterface_13():
@@ -252,10 +252,10 @@ def test_StudioInterface_13():
     studio_interface.manage()
 
     assert len(studio_interface.session.transcript) == 5
-    assert studio_interface.session.transcript[1] == ['scf> exec', '']
-    assert studio_interface.session.transcript[2] == ['xcf> foo', '']
+    assert studio_interface.session.transcript[1] == ['SCF> exec', '']
+    assert studio_interface.session.transcript[2] == ['XCF> foo', '']
     assert studio_interface.session.transcript[3] == ['Expression not executable.', '']
-    assert studio_interface.session.transcript[4] == ['scf> q', '']
+    assert studio_interface.session.transcript[4] == ['SCF> q', '']
 
 
 def test_StudioInterface_14():

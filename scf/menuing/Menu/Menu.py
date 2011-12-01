@@ -104,7 +104,7 @@ class Menu(MenuObject, SCFObject):
         self.make_menu_lines_keys_and_values()
         self.add_hidden_menu_items()
         self.display_lines(self.menu_lines)
-        key = self.handle_raw_input('scf')
+        key = self.handle_raw_input('SCF')
         key = self.check_if_key_exists(key)
         value = self.change_key_to_value(key)
         return key, value
