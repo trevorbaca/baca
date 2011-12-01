@@ -41,6 +41,9 @@ class InteractiveEditor(SCFObject):
                 result = True
                 break
             tmp = self.handle_main_menu_response(key, value)
+            if self.session.is_complete:
+                result = True
+                break
             if tmp == 'back':
                 break
             elif tmp == True:

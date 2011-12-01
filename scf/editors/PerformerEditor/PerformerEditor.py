@@ -79,7 +79,6 @@ class PerformerEditor(InteractiveEditor):
             self.move_instrument_interactively()
         elif key in ('name', 'ren'):
             self.edit_name_interactively()
-            #return True # maybe eliminate this line?
         elif key == 'un':
             return self.unname()
         else:
