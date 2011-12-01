@@ -266,3 +266,16 @@ def test_StudioInterface_14():
 
     assert studio_interface.session is studio_interface.global_proxy.session
     assert studio_interface.session is studio_interface.score_wrangler.session
+
+
+def test_StudioInterface_15():
+    '''Back is handled correctly (by doing nothing).
+    '''
+
+    studio_interface = baca.scf.StudioInterface()
+    studio_interface.session.user_input = 'b\nq\n'
+    studio_interface.manage()
+    transcript = studio_interface.session.transcript
+
+    assert len(transcript) == 4
+    assert transcript[-2] == transcript[-4]

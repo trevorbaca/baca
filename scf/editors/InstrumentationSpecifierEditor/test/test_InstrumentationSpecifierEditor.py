@@ -56,3 +56,17 @@ def test_InstrumentationSpecifierEditor_03():
       "     sin: short instrument name ('fl.')",
       "     sinm: short instrument name markup (Markup('Fl.'))",
       '']
+
+
+def test_InstrumentationSpecifierEditor_04():
+    '''Backtracking from instrumentation specifier editor 
+     to score proxy works correctly.
+    '''
+
+    studio_interface = baca.scf.StudioInterface()
+    studio_interface.session.user_input = '1\nperf\nb\nq'
+    studio_interface.manage()
+    transcript = studio_interface.session.transcript
+
+    assert len(transcript) == 8
+    assert transcript[2] == transcript[6]

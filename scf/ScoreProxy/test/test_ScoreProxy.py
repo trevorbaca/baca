@@ -192,3 +192,16 @@ def test_ScoreProxy_09():
     assert score_proxy.session is score_proxy.chunk_wrangler.session
     assert score_proxy.session is score_proxy.material_wrangler.session
     assert score_proxy.session is score_proxy.maker_wrangler.session
+
+
+def test_ScoreProxy_10():
+    '''Back is handled correctly.
+    '''
+
+    studio_interface = baca.scf.StudioInterface()
+    studio_interface.session.user_input = '1\nb\nq'
+    studio_interface.manage()
+    transcript = studio_interface.session.transcript
+    
+    assert len(transcript) == 6
+    assert transcript[0] == transcript[4]
