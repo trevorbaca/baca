@@ -17,7 +17,7 @@ class InstrumentEditor(InteractiveEditor):
     @property
     def menu_piece(self):
         if self.target is not None:
-            return type(self.target).__name__
+            return self.target.instrument_name
         else:
             return 'instrument editor'
 

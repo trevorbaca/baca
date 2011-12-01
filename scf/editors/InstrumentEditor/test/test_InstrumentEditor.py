@@ -39,7 +39,7 @@ def test_InstrumentEditor_03():
     instrument_editor.edit_interactively()
 
     assert instrument_editor.session.transcript[-2] == [
-     'Accordion',
+     'Accordion I',
      '',
      "     in: instrument name ('accordion I')",
      "     inm: instrument name markup (Markup('Accordion I'))",
