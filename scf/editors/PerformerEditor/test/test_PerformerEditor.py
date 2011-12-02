@@ -30,3 +30,20 @@ def test_PerformerEditor_02():
     performer_editor.session.user_input = 'q'
     performer_editor.edit_interactively()
     assert isinstance(performer_editor.target, type(scoretools.Performer()))
+
+
+def test_PerformerEditor_03():
+    '''Quit while adding instrument.
+    '''
+
+    performer_editor = baca.scf.editors.PerformerEditor()
+    performer_editor.session.user_input = 'add\nq'
+    performer_editor.edit_interactively()
+    transcript = performer_editor.session.transcript
+    
+    assert len(transcript) == 4 
+    assert transcript[2][:4] == [
+      'Performer - select instrument',
+      '',
+      '     1: accordion',
+      '     2: alto flute']

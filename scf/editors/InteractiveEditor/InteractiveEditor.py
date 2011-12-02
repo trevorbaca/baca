@@ -34,6 +34,9 @@ class InteractiveEditor(SCFObject):
         if self.conditionally_initialize_target():
             self.session.menu_pieces.pop()
             self.session.menu_pieces.append(self.menu_piece)
+        if self.session.is_complete:
+            self.session.menu_pieces.pop()
+            return True
         while True:
             menu = self.make_main_menu()
             key, value = menu.run()

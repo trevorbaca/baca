@@ -45,9 +45,13 @@ class InstrumentEditor(InteractiveEditor):
     ### PUBLIC METHODS ###
 
     def conditionally_initialize_target(self):
+        '''True if target initialized. Otherwise none.
+        '''
         if self.target is None:
-            self.target = self.select_instrument_from_instrumenttools_interactively()
-            return True
+            result = self.select_instrument_from_instrumenttools_interactively()
+            if result:
+                self.target = result
+                return True
     
     def edit_instrument_name_interactively(self):
         getter = self.make_new_getter(where=self.where())
@@ -101,14 +105,20 @@ class InstrumentEditor(InteractiveEditor):
         return menu
 
     def select_instrument_from_instrumenttools_interactively(self):
+        '''Return instrument or else none.
+        '''
         from abjad.tools import instrumenttools
         self.session.menu_pieces.append('select instrument')
         menu = self.make_new_menu(where=self.where())
         menu.should_clear_terminal = False
         menu_section = self.MenuSection()
-        menu_section.items_to_number = instrumenttools.list_instrument_names()
         menu.menu_sections.append(menu_section)
-        key, instrument_name = menu.run()
+        menu_section.items_to_number = instrumenttools.list_instrument_names()
+        key, value = menu.run()
+        if self.session.is_complete:
+            self.session.menu_pieces.pop()
+            return    
+        instrument_name = value
         instrument_name = instrument_name.title()
         instrument_name = instrument_name.replace(' ', '')
         exec('result = instrumenttools.{}()'.format(instrument_name))

@@ -38,11 +38,13 @@ class PerformerEditor(InteractiveEditor):
     ### PUBLIC METHODS ###
 
     def add_instrument_interactively(self):
-        instrument_editor = self.InstrumentEditor()
-        instrument_editor.conditionally_initialize_target()
-        instrument = instrument_editor.target
-        self.target.instruments.append(instrument)
-        return instrument
+        '''Instrument if successfully added. Otherwise none.
+        '''
+        instrument_editor = self.InstrumentEditor(session=self.session)
+        if instrument_editor.conditionally_initialize_target():
+            instrument = instrument_editor.target
+            self.target.instruments.append(instrument)
+            return instrument
 
     def delete_instrument_interactively(self):
         instrument_number = self.handle_raw_input('instrument number')

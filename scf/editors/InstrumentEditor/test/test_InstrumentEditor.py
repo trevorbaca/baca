@@ -97,10 +97,17 @@ def test_InstrumentEditor_06():
 
 
 def test_InstrumentEditor_07():
-    '''Backtracking works from instrument editor to performer editor.
+    '''Quit while initializing target.
     '''
-    py.test.skip(
-    'on hold while figuring out why user input not being read correctly on naked editor instantiation.')
 
-    performer_editor = baca.scf.editors.PerformerEditor()
-    performer_editor.session.user_input = ''
+    instrument_editor = baca.scf.editors.InstrumentEditor()
+    instrument_editor.session.user_input = 'q'
+    instrument_editor.edit_interactively()
+    transcript = instrument_editor.session.transcript
+
+    assert len(transcript) == 2
+    assert transcript[0][:4] == [
+      'Instrument editor - select instrument',
+      '',
+      '     1: accordion',
+      '     2: alto flute']
