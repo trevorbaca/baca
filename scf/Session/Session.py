@@ -9,8 +9,11 @@ class Session(object):
         self._complete_transcript = []
         self._session_once_had_user_input = False
         self._start_time = self.cur_time
+        self.backtrack_count = 0
         self.dump_transcript = False
+        self.hide_next_redraw = False
         self.initial_user_input = user_input
+        self.is_backtracking_to_studio = False
         self.menu_pieces = []
         self.scores_to_show = 'active'
         self.user_input = user_input
@@ -35,6 +38,16 @@ class Session(object):
 
     ### PUBLIC ATTRIBUTES ###
 
+    @apply
+    def backtrack_count():
+        def fget(self):
+            return self._backtrack_count
+        def fset(self, backtrack_count):
+            assert isinstance(backtrack_count, int)
+            assert 0 <= backtrack_count
+            self._backtrack_count = backtrack_count
+        return property(**locals())
+        
     @property
     def complete_transcript(self):
         return self._complete_transcript
@@ -60,6 +73,24 @@ class Session(object):
         result.append('scores_to_show: {!r}'.format(self.scores_to_show))
         result.append('user_input: {!r}'.format(self.user_input))
         return result
+
+    @apply
+    def hide_next_redraw():
+        def fget(self):
+            return self._hide_next_redraw
+        def fset(self, hide_next_redraw):
+            assert isinstance(hide_next_redraw, bool)
+            self._hide_next_redraw = hide_next_redraw
+        return property(**locals())
+
+    @apply
+    def is_backtracking_to_studio():
+        def fget(self):
+            return self._is_backtracking_to_studio
+        def fset(self, is_backtracking_to_studio):
+            assert isinstance(is_backtracking_to_studio, bool)
+            self._is_backtracking_to_studio = is_backtracking_to_studio
+        return property(**locals())
 
     @property
     def is_complete(self):
@@ -130,6 +161,15 @@ class Session(object):
         entry.append(clear_terminal)
         self.complete_transcript.append(entry)
 
+    def backtrack(self):
+        if self.is_complete:
+            return True
+        if self.is_backtracking_to_studio:
+            return True
+        if 0 < self.backtrack_count:
+            self.backtrack_count = self.backtrack_count - 1
+            return True
+
     def clean_up(self):
         if self.dump_transcript:
             self.write_complete_transcript_to_disk()
@@ -143,7 +183,7 @@ class Session(object):
         for line in entry[1]:
             result.append(line)
         return '\n'.join(result)
-            
+
     def write_complete_transcript_to_disk(self):
         start_time = self.start_time.strftime('%Y-%m-%d-%H-%M-%S')
         file_name = 'session-{}.txt'.format(start_time)

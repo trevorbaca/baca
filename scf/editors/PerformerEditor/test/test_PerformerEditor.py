@@ -47,3 +47,16 @@ def test_PerformerEditor_03():
       '',
       '     1: accordion',
       '     2: alto flute']
+
+
+def test_PerformerEditor_04():
+    '''Back while adding instrument.
+    '''
+
+    performer_editor = baca.scf.editors.PerformerEditor()
+    performer_editor.session.user_input = 'add\nb\nq'
+    performer_editor.edit_interactively()
+    transcript = performer_editor.session.transcript
+
+    assert len(transcript) == 6 
+    assert transcript[0] == transcript[4]

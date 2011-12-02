@@ -115,7 +115,7 @@ class InstrumentEditor(InteractiveEditor):
         menu.menu_sections.append(menu_section)
         menu_section.items_to_number = instrumenttools.list_instrument_names()
         key, value = menu.run()
-        if self.session.is_complete:
+        if self.session.backtrack():
             self.session.menu_pieces.pop()
             return    
         instrument_name = value

@@ -84,9 +84,8 @@ class UserInputGetter(MenuObject):
             if user_response is None:
                 self.prompt_index = self.prompt_index + 1
                 break
-            elif self.handle_hidden_key(user_response):
-                continue
-            elif user_response == 'b':
+            user_response = self.handle_hidden_key(user_response)
+            if user_response == 'b':
                 break
             elif user_response == 'help':
                 self.show_help()

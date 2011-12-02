@@ -100,13 +100,16 @@ class Menu(MenuObject, SCFObject):
             return None
 
     def conditionally_display_menu(self):
-        self.conditionally_clear_terminal()
+        if not self.session.hide_next_redraw:
+            self.conditionally_clear_terminal()
         self.make_menu_lines_keys_and_values()
         self.add_hidden_menu_items()
-        self.display_lines(self.menu_lines)
+        if not self.session.hide_next_redraw:
+            self.display_lines(self.menu_lines)
         key = self.handle_raw_input('SCF')
         key = self.check_if_key_exists(key)
         value = self.change_key_to_value(key)
+        self.session.hide_next_redraw = False
         return key, value
 
     def make_menu_lines_keys_and_values(self):
@@ -138,23 +141,11 @@ class Menu(MenuObject, SCFObject):
             self.should_clear_terminal, self.hide_menu = should_clear_terminal, hide_menu
             key, value = self.conditionally_display_menu()
             should_clear_terminal, hide_menu = False, True
-            result = self.handle_hidden_key(key)
+            key = self.handle_hidden_key(key)
             if self.session.is_complete:
                 break
-            elif result is True:
-                pass
-            elif bool(result):
-                self.session.test_result = result
-                key, value = None, None
-                break
-            elif key == 'b':
-                value = None
-                break
-            elif key == 'redraw':
+            if key == 'redraw':
                 should_clear_terminal, hide_menu = True, False
-            elif key == 'studio':
-                value = None
-                break
             else:
                 break
         return key, value

@@ -88,6 +88,7 @@ class MenuObject(SCFObject):
             lines.append('expression not executable.')
         lines.append('')
         self.display_cap_lines(lines)
+        self.session.hide_next_redraw = True
 
     def grep_baca(self):
         regex = self.handle_raw_input('regex')
@@ -98,7 +99,11 @@ class MenuObject(SCFObject):
         self.display_lines(lines)
 
     def handle_hidden_key(self, key):
-        if key == 'exec':
+        '''Method consumes key (when possible).
+        '''
+        if key == 'b':
+            self.session.backtrack_count = self.session.backtrack_count + 1   
+        elif key == 'exec':
             self.exec_statement()
         elif key == 'grep':
             self.grep_baca()
@@ -108,11 +113,12 @@ class MenuObject(SCFObject):
             self.show_hidden_menu_items()
         elif key == 'q':
             self.session.user_specified_quit = True
+        elif key == 'studio':
+            self.session.is_backtracking_to_studio = True
         elif key == 'where':
             self.show_menu_client()
         else:
-            return False
-        return True
+            return key
 
     def is_string(self, expr):
         return isinstance(expr, str)
@@ -142,3 +148,4 @@ class MenuObject(SCFObject):
             menu_lines.append(menu_line)
         menu_lines.append('')
         self.display_lines(menu_lines)
+        self.session.hide_next_redraw = True

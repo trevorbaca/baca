@@ -29,32 +29,19 @@ class InteractiveEditor(SCFObject):
             setattr(self.target, attr_name, attr_value)
 
     def edit_interactively(self):
-        result = False
         self.session.menu_pieces.append(self.menu_piece)
         if self.conditionally_initialize_target():
             self.session.menu_pieces.pop()
             self.session.menu_pieces.append(self.menu_piece)
-        if self.session.is_complete:
+        if self.session.backtrack():
             self.session.menu_pieces.pop()
             return True
         while True:
             menu = self.make_main_menu()
             key, value = menu.run()
-            if self.session.is_complete:
-                result = True
+            if self.session.backtrack():
                 break
-            tmp = self.handle_main_menu_response(key, value)
-            if self.session.is_complete:
-                result = True
+            self.handle_main_menu_response(key, value)
+            if self.session.backtrack():
                 break
-            if tmp == 'back':
-                break
-            elif tmp == True:
-                result = True
-                break
-            elif tmp in (False, None):
-                pass
-            else:
-                raise ValueError(repr(tmp))
         self.session.menu_pieces.pop()
-        return result

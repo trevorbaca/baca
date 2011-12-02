@@ -159,13 +159,10 @@ class ScoreProxy(PackageProxy):
             initializer.close()
 
     def handle_main_menu_response(self, key, value):
-        #result = False
-        if key is None:
-            #pass
-            return False
-        elif key == 'b':
-            return 'back'
-        elif key == 'ch':
+        #if key == 'b':
+        #    return 'back'
+        #elif key == 'ch':
+        if key == 'ch':
             return self.chunk_wrangler.create_chunk_interactively()
         elif key == 'mi':
             return self.material_wrangler.create_interactive_material_interactively()
@@ -184,21 +181,15 @@ class ScoreProxy(PackageProxy):
                 self.chunk_wrangler.package_importable_name, chunk_underscored_name)
             chunk_proxy = self.chunk_wrangler.ChunkProxy(package_importable_name)
             chunk_proxy.title = self.title
-            #result = chunk_proxy.manage()
             return chunk_proxy.manage()
         elif key.startswith('m'):
             material_underscored_name = value
             package_importable_name = '{}.{}'.format(
                 self.material_wrangler.package_importable_name, material_underscored_name)
             material_proxy = self.material_wrangler.get_package_proxy(package_importable_name)
-            #result = material_proxy.manage()
             return material_proxy.manage()
         else:
             raise ValueError
-#        if result:
-#            return True
-#        else:
-#            return False
 
     def handle_svn_response(self, key, value):
         if key == 'b':
@@ -244,7 +235,6 @@ class ScoreProxy(PackageProxy):
         return menu
 
     def manage(self):
-        result = False
         if isinstance(self.year_of_completion, int):
             self.session.menu_pieces.append(self.title_with_year)
         else:
@@ -252,23 +242,14 @@ class ScoreProxy(PackageProxy):
         while True:
             menu = self.make_main_menu()
             key, value = menu.run()
-            if self.session.is_complete:
-                result = True
+            if self.session.backtrack():
                 break
-            if key == 'studio':
+            if key is None:
+                continue
+            self.handle_main_menu_response(key, value)
+            if self.session.backtrack():
                 break
-            tmp = self.handle_main_menu_response(key, value)
-            if tmp == 'back':
-                break
-            elif tmp == True:
-                result = True
-                break
-            elif tmp == False:
-                pass
-            else:
-                raise ValueError(repr(tmp))
         self.session.menu_pieces.pop()
-        return result
 
     def manage_svn(self):
         result = False

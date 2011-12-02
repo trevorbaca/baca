@@ -24,6 +24,13 @@ class StudioInterface(SCFObject):
 
     ### PUBLIC METHODS ###
 
+    def edit_score_interactively(self, score_package_importable_name):
+        score_proxy = self.score_wrangler.ScoreProxy(score_package_importable_name, session=self.session)
+        menu_pieces = self.session.menu_pieces[:]
+        self.session.menu_pieces = []
+        score_proxy.manage()
+        self.session.menu_pieces = menu_pieces
+
     def get_materials_package_importable_name_interactively(self):
         self.session.menu_pieces.append('select materials directory')
         while True:
@@ -45,10 +52,9 @@ class StudioInterface(SCFObject):
         self.session.menu_pieces.pop()
 
     def handle_main_menu_response(self, key, value):
-        result = False
-        if key is None:
-            pass
-        elif key == 'active':
+        if not isinstance(key, str):
+            raise TypeError('key must be string.')
+        if key == 'active':
             self.session.scores_to_show = 'active'
         elif key == 'all':
             self.session.scores_to_show = 'all'
@@ -59,18 +65,9 @@ class StudioInterface(SCFObject):
         elif key == 'mb':
             self.session.scores_to_show = 'mothballed'
         elif key == 'svn':
-            result = self.manage_svn()
+            self.manage_svn()
         else:
-            score_package_importable_name = value
-            score_proxy = self.score_wrangler.ScoreProxy(score_package_importable_name, session=self.session)
-            menu_pieces = self.session.menu_pieces[:]
-            self.session.menu_pieces = []
-            result = score_proxy.manage()
-            self.session.menu_pieces = menu_pieces
-        if result:
-            return True
-        else:
-            return False
+            self.edit_score_interactively(value)
     
     def handle_svn_response(self, key, value):
         '''Return true to exit the svn menu.
@@ -159,54 +156,44 @@ class StudioInterface(SCFObject):
         return menu
 
     def manage(self):
-        result = False
         self.session.menu_pieces.append('studio')
         while True:
             self.session.menu_pieces.append('{} scores'.format(self.session.scores_to_show))
             menu = self.make_main_menu()
             key, value = menu.run()
             if self.session.is_complete:
-                result = True
+                self.session.menu_pieces.pop()
+                self.session.clean_up()
                 break
-            if key == 'studio':
+            if self.session.is_backtracking_to_studio:
+                self.session.is_backtracking_to_studio = False
                 self.session.menu_pieces.pop()
                 continue
-            tmp = self.handle_main_menu_response(key, value)
-            if tmp == 'back':
+            if key is None:
+                self.session.menu_pieces.pop()
+                continue
+            self.handle_main_menu_response(key, value)
+            if self.session.is_complete:
+                self.session.menu_pieces.pop()
+                self.session.clean_up()
                 break
-            elif tmp == True:
-                result = True
-                break
-            elif tmp == False:
-                pass
-            else:
-                raise ValueError
+            if self.session.is_backtracking_to_studio:
+                self.session.is_backtracking_to_studio = False
+                self.session.menu_pieces.pop()
+                continue
             self.session.menu_pieces.pop()
-        self.session.menu_pieces.pop()
-        self.session.clean_up()
-        return result
 
     def manage_svn(self):
-        result = False
         self.session.menu_pieces.append('repository commands')
         while True:
             menu = self.make_svn_menu()
             key, value = menu.run()
-            if self.session.is_complete:
-                result = True
+            if self.session.backtrack():
                 break
-            tmp = self.handle_svn_response(key, value)
-            if tmp == 'back':
+            self.handle_svn_response(key, value)
+            if self.session.backtrack():
                 break
-            elif tmp == True:
-                result = True
-                break
-            elif tmp == False:
-                pass
-            else:
-                raise ValueError
         self.session.menu_pieces.pop()
-        return result
 
     def run_py_test_all(self, prompt_proceed=True):
         proc = subprocess.Popen(

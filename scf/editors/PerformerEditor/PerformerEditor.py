@@ -73,8 +73,6 @@ class PerformerEditor(InteractiveEditor):
             raise TypeError('key must be string.')
         if key == 'add':
             self.add_instrument_interactively()
-        elif key == 'b':
-            return 'back'
         elif key == 'del':
             self.delete_instrument_interactively()
         elif key == 'mv':
