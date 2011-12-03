@@ -70,3 +70,16 @@ def test_InstrumentationSpecifierEditor_04():
 
     assert len(transcript) == 8
     assert transcript[2] == transcript[6]
+
+
+def test_InstrumentationSpecifierEditor_05():
+    '''Junk is handled correctly.
+    '''
+
+    studio_interface = baca.scf.StudioInterface()
+    studio_interface.session.user_input = '1\nperf\nfoo\nq'
+    studio_interface.manage()
+    transcript = studio_interface.session.transcript
+
+    assert len(transcript) == 8
+    assert transcript[-2] == transcript[-4]

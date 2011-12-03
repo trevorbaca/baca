@@ -205,20 +205,20 @@ class ScoreProxy(PackageProxy):
     def make_main_menu(self):
         menu = self.make_new_menu(where=self.where())
         menu_section = self.MenuSection()
-        menu_section.menu_section_title = 'Chunks'
+        menu_section.menu_section_title = 'chunks'
         menu_section.items_to_number = self.chunk_wrangler.iterate_package_spaced_names()
         menu_section.entry_prefix = 'h'
         menu_section.sentence_length_items.append(('ch', '[create chunk]'))
         menu.menu_sections.append(menu_section)
         menu_section = self.MenuSection()
-        menu_section.menu_section_title = 'Materials'
+        menu_section.menu_section_title = 'materials'
         menu_section.items_to_number = self.material_wrangler.iterate_package_underscored_names()
         menu_section.entry_prefix = 'm'
         menu_section.sentence_length_items.append(('mi', 'create interactive material'))
         menu_section.sentence_length_items.append(('ms', 'create static material'))
         menu.menu_sections.append(menu_section)
         menu_section = self.MenuSection()
-        menu_section.menu_section_title = 'Setup'
+        menu_section.menu_section_title = 'setup'
         menu_section.sentence_length_items.append(('perf', 'performers & instrumentation'))
         menu.menu_sections.append(menu_section)
         menu.hidden_items.append(('svn', 'work with repository'))

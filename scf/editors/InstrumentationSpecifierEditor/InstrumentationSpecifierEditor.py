@@ -29,13 +29,23 @@ class InstrumentationSpecifierEditor(InteractiveEditor):
 
     ### PUBLIC METHODS ###
 
+#    def add_performer_interactively(self):
+#        from abjad.tools import scoretools
+#        performer = scoretools.Performer()
+#        self.target.performers.append(performer)
+#        performer_editor = self.PerformerEditor(session=self.session, target=performer)
+#        instrument = performer_editor.add_instrument_interactively()
+#        performer.name = instrument.instrument_name
+
     def add_performer_interactively(self):
         from abjad.tools import scoretools
-        performer = scoretools.Performer()
-        self.target.performers.append(performer)
-        performer_editor = self.PerformerEditor(session=self.session, target=performer)
-        instrument = performer_editor.add_instrument_interactively()
-        performer.name = instrument.instrument_name
+        performer_name = self.select_performer_name_interactively()
+        if self.session.backtrack():
+            return
+        elif performer_name:
+            performer = scoretools.Performer(performer_name)
+            self.target.performers.append(performer)
+            return performer
 
     def delete_performer_interactively(self):
         number = self.handle_raw_input('performer number')
@@ -70,25 +80,10 @@ class InstrumentationSpecifierEditor(InteractiveEditor):
         return performer
 
     def handle_main_menu_response(self, key, value):
-        '''Protocol: return value of this method must be one of these four values:
-        true, 'back', false (or none).
-        (Returning false is equivalent to returning none; false is deprecated;
-        methods like this one should eventually return only none and never return false.)
-        The meaning of these three return values is as follows.
-        Return none (or false) to avoid breaking out of the loop calling this function.
-        Return true to break out of the loop calling this function.
-        (Return 'back' to break out of the loop calling this function.)
-        (Note that 'back' seems to be redundant and should be replaced with true.)
-        So this function should eventually return only two values: none, true.
-        So this function should have a bunch of single-line branches.
-        Include a return-true statement only in branches that should break the calling loop. 
-        '''
         if not isinstance(key, str):
             raise TypeError('key must be string.')
         if key == 'add':
             self.add_performer_interactively()
-        elif key == 'b':
-            return 'back'
         elif key == 'del':
             self.delete_performer_interactively()
         elif key == 'mv':
@@ -132,3 +127,21 @@ class InstrumentationSpecifierEditor(InteractiveEditor):
             return
         self.target.performers.remove(performer)
         self.target.performers.insert(new_index, performer)
+
+    def select_performer_name_interactively(self):
+        from abjad.tools import scoretools
+        self.session.menu_pieces.append('add performer')
+        menu = self.make_new_menu(where=self.where())
+        menu_section = self.MenuSection()
+        menu.menu_sections.append(menu_section)
+        menu_section.items_to_number = scoretools.list_performer_names()
+        while True:
+            key, value = menu.run()
+            if self.session.backtrack():
+                self.session.menu_pieces.pop()
+                return
+            if key is None:
+                continue
+            else:
+                self.session.menu_pieces.pop()
+                return value

@@ -41,6 +41,8 @@ class InteractiveEditor(SCFObject):
             key, value = menu.run()
             if self.session.backtrack():
                 break
+            elif key is None:
+                continue
             self.handle_main_menu_response(key, value)
             if self.session.backtrack():
                 break
