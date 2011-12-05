@@ -101,20 +101,15 @@ class InstrumentationSpecifierEditor(InteractiveEditor):
         menu_section.sentence_length_items.append(('mv', 'move performer'))
         return menu
 
+    # TODO: 2011-12-05
+    #       impelement InteractiveEditor.get_element_at_number_interactively()
+    #       to wrap InteractiveEditor.get_positive_integer_interactively().
     def move_performer_interactively(self):
-        spaced_variable_name = 'old number'
-        old_number = self.handle_raw_input(spaced_variable_name)
-        message = '{} must be positive integer.'.format(spaced_variable_name)
-        try:
-            old_number = int(old_number)
-        except ValueError:
-            self.display_cap_lines([message, ''])
-            self.proceed()
+        result = self.get_positive_integer_interactively('old number')
+        if result is None:
             return
-        if old_number <= 0:
-            self.display_cap_lines([message, ''])
-            self.proceed()
-            return
+        else:
+            old_number = result
         old_index = old_number - 1
         if self.target.performer_count <= old_index:
             message = 'there is no performer number {}.'.format(old_number)
@@ -122,19 +117,11 @@ class InstrumentationSpecifierEditor(InteractiveEditor):
             self.proceed()
             return
         performer = self.target.performers[old_index]
-        spaced_variable_name = 'new number'
-        new_number = self.handle_raw_input('new number')
-        message = '{} must be positive integer.'.format(spaced_variable_name)
-        try:
-            new_number = int(new_number)
-        except ValueError:
-            self.display_cap_lines([message, ''])
-            self.proceed()
+        result = self.get_positive_integer_interactively('new number')
+        if result is None:
             return
-        if new_number <= 0:
-            self.display_cap_lines([message, ''])
-            self.proceed()
-            return
+        else:
+            new_number = result
         new_index = new_number - 1
         if self.target.performer_count <= new_index:
             message = 'there is no performer number {}.'.format(new_number)

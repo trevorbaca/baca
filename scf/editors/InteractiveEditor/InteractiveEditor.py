@@ -47,3 +47,18 @@ class InteractiveEditor(SCFObject):
             if self.session.backtrack():
                 break
         self.session.menu_pieces.pop()
+
+    def get_positive_integer_interactively(self, spaced_variable_name):
+        user_response = self.handle_raw_input(spaced_variable_name)
+        message = '{} must be positive integer.'.format(spaced_variable_name)
+        try:
+            integer = int(user_response)
+        except ValueError:
+            self.display_cap_lines([message, ''])
+            self.proceed()
+            return
+        if integer <= 0:
+            self.display_cap_lines([message, ''])
+            self.proceed()
+            return
+        return integer
