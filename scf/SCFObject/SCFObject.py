@@ -104,9 +104,12 @@ class SCFObject(object):
         command = 'vi {}'.format(self.source_file_name)
         os.system(command)
 
-    def handle_raw_input(self, prompt):
+    def handle_raw_input(self, prompt, include_chevron=True):
         prompt = iotools.capitalize_string_start(prompt)
-        prompt = prompt + '> '
+        if include_chevron:
+            prompt = prompt + '> '
+        else:
+            prompt = prompt + ' '
         if self.session.is_displayable:
             user_response = raw_input(prompt)
             print ''
@@ -158,7 +161,7 @@ class SCFObject(object):
         return True, None
 
     def proceed(self):
-        response = self.handle_raw_input('press return to continue')
+        response = self.handle_raw_input('press return to continue.', include_chevron=False)
         self.conditionally_clear_terminal()
 
     def query(self, prompt):
