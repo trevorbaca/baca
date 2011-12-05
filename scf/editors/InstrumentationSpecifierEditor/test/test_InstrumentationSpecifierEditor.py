@@ -10,7 +10,7 @@ def test_InstrumentationSpecifierEditor_01():
     studio_interface.manage()
 
     assert studio_interface.session.transcript[-2] == [
-      'Sekka (2007) - performers',
+      'Sekka (2007) - performers & instrumentation',
       '',
       '     1: flutist (flute)',
       '',
@@ -29,7 +29,7 @@ def test_InstrumentationSpecifierEditor_02():
     studio_interface.manage()
 
     assert studio_interface.session.transcript[-2] == [
-      'Sekka (2007) - performers - flutist',
+      'Sekka (2007) - performers & instrumentation - flutist',
       '',
       '     1: flute',
       '',
@@ -49,7 +49,7 @@ def test_InstrumentationSpecifierEditor_03():
     studio_interface.manage()
 
     assert studio_interface.session.transcript[-2] == [
-      'Sekka (2007) - performers - flutist - flute',
+      'Sekka (2007) - performers & instrumentation - flutist - flute',
       '',
       "     in: instrument name ('flute')",
       "     inm: instrument name markup (Markup('Flute'))",

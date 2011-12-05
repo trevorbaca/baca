@@ -12,7 +12,7 @@ class InstrumentationSpecifierEditor(InteractiveEditor):
 
     @property
     def menu_piece(self):
-        return 'performers'
+        return 'performers & instrumentation'
 
     @property
     def summary_lines(self):
