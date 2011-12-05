@@ -102,10 +102,18 @@ class InstrumentationSpecifierEditor(InteractiveEditor):
         return menu
 
     def move_performer_interactively(self):
-        old_number = self.handle_raw_input('old number')
+        spaced_variable_name = 'old number'
+        old_number = self.handle_raw_input(spaced_variable_name)
+        message = '{} must be positive integer.'.format(spaced_variable_name)
         try:
             old_number = int(old_number)
-        except:
+        except ValueError:
+            self.display_cap_lines([message, ''])
+            self.proceed()
+            return
+        if old_number <= 0:
+            self.display_cap_lines([message, ''])
+            self.proceed()
             return
         old_index = old_number - 1
         if self.target.performer_count <= old_index:
@@ -114,14 +122,22 @@ class InstrumentationSpecifierEditor(InteractiveEditor):
             self.proceed()
             return
         performer = self.target.performers[old_index]
+        spaced_variable_name = 'new number'
         new_number = self.handle_raw_input('new number')
+        message = '{} must be positive integer.'.format(spaced_variable_name)
         try:
             new_number = int(new_number)
-        except:
+        except ValueError:
+            self.display_cap_lines([message, ''])
+            self.proceed()
+            return
+        if new_number <= 0:
+            self.display_cap_lines([message, ''])
+            self.proceed()
             return
         new_index = new_number - 1
         if self.target.performer_count <= new_index:
-            message = 'there is no performer number {}.'.format(old_number)
+            message = 'there is no performer number {}.'.format(new_number)
             self.display_cap_lines([message, ''])
             self.proceed()
             return
