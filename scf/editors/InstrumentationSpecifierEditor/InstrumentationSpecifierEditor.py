@@ -98,7 +98,8 @@ class InstrumentationSpecifierEditor(InteractiveEditor):
         menu_section.items_to_number = self.summary_lines
         menu_section.sentence_length_items.append(('add', 'add performer'))
         menu_section.sentence_length_items.append(('del', 'delete performer'))
-        menu_section.sentence_length_items.append(('mv', 'move performer'))
+        if 1 < self.target.performer_count:
+            menu_section.sentence_length_items.append(('mv', 'move performer'))
         return menu
 
     def move_performer_interactively(self):

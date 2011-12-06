@@ -16,7 +16,6 @@ def test_InstrumentationSpecifierEditor_01():
       '',
       '     add: add performer',
       '     del: delete performer',
-      '     mv: move performer',
       '']
 
 
