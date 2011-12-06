@@ -71,6 +71,10 @@ class MenuObject(SCFObject):
 
     ### PUBLIC METHODS ###
 
+    def conditionally_clear_terminal(self):
+        if self.should_clear_terminal:
+            SCFObject.conditionally_clear_terminal(self)
+
     def edit_client_source_file(self):
         file_name = self.client[1]
         line_number = self.client[2]
