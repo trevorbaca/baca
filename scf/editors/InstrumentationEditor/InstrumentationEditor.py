@@ -97,7 +97,8 @@ class InstrumentationEditor(InteractiveEditor):
         menu.menu_sections.append(menu_section)
         menu_section.items_to_number = self.summary_lines
         menu_section.sentence_length_items.append(('add', 'add performer'))
-        menu_section.sentence_length_items.append(('del', 'delete performer'))
+        if 0 < self.target.performer_count:
+            menu_section.sentence_length_items.append(('del', 'delete performer'))
         if 1 < self.target.performer_count:
             menu_section.sentence_length_items.append(('mv', 'move performer'))
         return menu

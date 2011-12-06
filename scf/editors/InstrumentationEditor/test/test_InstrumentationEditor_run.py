@@ -6,28 +6,24 @@ def test_InstrumentationEditor_run_01():
     '''
 
     studio = baca.scf.Studio()
-    studio.session.user_input = '1 perf q'
-    studio.run()
+    studio.run(user_input='1 perf q')
     transcript = studio.session.transcript
     assert len(transcript) == 6
 
     studio = baca.scf.Studio()
-    studio.session.user_input = '1 perf b q'
-    studio.run()
+    studio.run(user_input='1 perf b q')
     transcript = studio.session.transcript
     assert len(transcript) == 8
     assert transcript[2] == transcript[6]
 
     studio = baca.scf.Studio()
-    studio.session.user_input = '1 perf studio q'
-    studio.run()
+    studio.run(user_input='1 perf studio q')
     transcript = studio.session.transcript
     assert len(transcript) == 8
     assert transcript[0] == transcript[6]
 
     studio = baca.scf.Studio()
-    studio.session.user_input = '1 perf foo q'
-    studio.run()
+    studio.run(user_input='1 perf foo q')
     transcript = studio.session.transcript
     assert len(transcript) == 8
     assert transcript[-2] == transcript[-4]

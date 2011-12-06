@@ -157,7 +157,9 @@ class Studio(SCFObject):
         menu.menu_sections.append(menu_section)
         return menu
 
-    def run(self):
+    def run(self, user_input=None):
+        if user_input is not None:
+            self.session.user_input = user_input
         self.session.menu_title_contributions.append('studio')
         while True:
             self.session.menu_title_contributions.append('{} scores'.format(self.session.scores_to_show))

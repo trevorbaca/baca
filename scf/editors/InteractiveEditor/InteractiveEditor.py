@@ -28,7 +28,9 @@ class InteractiveEditor(SCFObject):
         if not self.session.is_complete:
             setattr(self.target, attr_name, attr_value)
 
-    def run(self):
+    def run(self, user_input=None):
+        if user_input is not None:
+            self.session.user_input = user_input
         self.session.menu_title_contributions.append(self.menu_title_contribution)
         if self.conditionally_initialize_target():
             self.session.menu_title_contributions.pop()
