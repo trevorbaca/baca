@@ -68,18 +68,6 @@ class UserInputGetter(MenuObject):
         self.tests.append(self.is_string)
         self.helps.append('must be string.')
 
-    def conditionally_display_prompt_and_get_user_response(self):
-        '''Return string when user enters something.
-        Return string when session yields an element of canned user input.
-        Return none only when session has just run out of canned user input.
-        '''
-        if self.session.is_displayable:
-            prompt = self.menu_lines[-1]
-            user_response = self.handle_raw_input(prompt)
-            return user_response
-        else:
-            return self.pop_next_user_response_from_user_input()
-
     def load_prompt(self):
         prompt = self.prompts[self.prompt_index]
         prompt = iotools.capitalize_string_start(prompt)
@@ -95,7 +83,8 @@ class UserInputGetter(MenuObject):
         '''
         self.load_prompt()
         while True:
-            user_response = self.conditionally_display_prompt_and_get_user_response()
+            prompt = self.menu_lines[-1]
+            user_response = self.handle_raw_input(prompt)
             if user_response is None:
                 self.prompt_index = self.prompt_index + 1
                 break
