@@ -1,4 +1,5 @@
 import baca
+from abjad.tools.scoretools import InstrumentationSpecifier, Performer
 
 
 def test_InstrumentationEditor_add_performer_01():
@@ -27,3 +28,13 @@ def test_InstrumentationEditor_add_performer_01():
     transcript = studio.session.transcript
     assert len(transcript) == 10
     assert transcript[6] == transcript[8]
+
+
+def test_InstrumentationEditor_add_performer_02():
+    '''Add three performers.
+    '''
+
+    editor = baca.scf.editors.InstrumentationEditor()
+    editor.run(user_input='add 1 add 2 add 3 q')
+    assert editor.target == InstrumentationSpecifier(
+        [Performer('accordionist'), Performer('bassist'), Performer('bassoonist')])

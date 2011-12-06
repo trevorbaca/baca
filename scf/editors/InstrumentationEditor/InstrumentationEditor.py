@@ -48,18 +48,14 @@ class InstrumentationEditor(InteractiveEditor):
             return performer
 
     def delete_performer_interactively(self):
-        number = self.handle_raw_input('performer number')
-        try:
-            number = int(number)
-        except:
-            pass
-        if self.target.performer_count < number:
-            message = 'there is no performer number {}.'.format(number)
-            self.display_cap_lines([message, ''])
-            self.proceed()
+        getter = self.make_new_getter(where=self.where())
+        getter.should_clear_terminal = False
+        getter.append_integer_in_closed_range('performer number', 1, self.target.performer_count)
+        performer_number = getter.run()
+        if self.session.backtrack():
             return
-        index = number - 1
-        del(self.target.performers[index])
+        performer_index = performer_number - 1
+        del(self.target.performers[performer_index])
 
     def edit_performer_interactively(self, performer_number):
         try:
