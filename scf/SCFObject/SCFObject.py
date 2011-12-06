@@ -74,6 +74,10 @@ class SCFObject(object):
         source_file_name = source_file_name.strip('c')
         return source_file_name
 
+    @property
+    def transcript(self):
+        return self.session.transcript
+
     ### PUBLIC METHODS ###
 
     def conditionally_clear_terminal(self):

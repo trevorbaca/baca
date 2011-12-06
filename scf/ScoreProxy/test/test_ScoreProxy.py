@@ -2,7 +2,6 @@
 from abjad.tools import instrumenttools
 from abjad.tools import scoretools
 import baca
-import py.test
 
 
 def test_ScoreProxy_01():
@@ -105,22 +104,22 @@ def test_ScoreProxy_03():
 def test_ScoreProxy_04():
     '''Manage tags menu.
     '''
-    py.test.skip('while building up archipel instrumentation.')
 
     archipel = baca.scf.ScoreProxy('archipel')
     archipel.session.user_input = 'q'
     archipel.manage_tags()
 
-    assert archipel.session.transcript[-2] == [
-     'Tags',
-     '',
-     "     'composer': TrevorBaca()",
-     '     \'title\': "L\'archipel du corps"',
-     "     'year_of_completion': 2011",
-     '',
-     '     add: add tag',
-     '     del: delete tag',
-     '']
+    assert archipel.session.transcript[-2] == \
+     ['Tags',
+      '',
+      "     'composer': TrevorBaca()",
+      "     'instrumentation': InstrumentationSpecifier([Performer('flutist', [Piccolo(), AltoFlute(), ContrabassFlute(), UntunedPercussion('caxixi', 'cx.')]), Performer('guitarist', [Guitar(), UntunedPercussion('caxixi', 'cx.')]), Performer('accordionist', [Accordion()]), Performer('percussionist', [Marimba(), Glockenspiel(), UntunedPercussion('bass drum', 'b. drum'), UntunedPercussion('claves', 'clv.'), UntunedPercussion('caxixi', 'cx.')])])",
+      '     \'title\': "L\'archipel du corps"',
+      "     'year_of_completion': 2011",
+      '',
+      '     add: add tag',
+      '     del: delete tag',
+      '']
 
 
 def test_ScoreProxy_05():

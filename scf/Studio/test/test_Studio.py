@@ -1,5 +1,4 @@
 import baca
-import py.test
 
 
 def test_Studio_01():
@@ -120,22 +119,22 @@ def test_Studio_05():
 def test_Studio_06():
     '''Main menu to score menu to tags menu.
     '''
-    py.test.skip('while building up archipel instrumentation.')
 
     studio = baca.scf.Studio()
     studio.session.user_input = '1 tags q'
     studio.run()
 
-    assert studio.session.transcript[-2] == [
-     "L'archipel du corps - tags",
-     '',
-     "     'composer': TrevorBaca()",
-     '     \'title\': "L\'archipel du corps"',
-     "     'year_of_completion': 2011",
-     '',
-     '     add: add tag',
-     '     del: delete tag',
-     '']
+    assert studio.session.transcript[-2] == \
+     ["L'archipel du corps (2011) - tags",
+      '',
+      "     'composer': TrevorBaca()",
+      "     'instrumentation': InstrumentationSpecifier([Performer('flutist', [Piccolo(), AltoFlute(), ContrabassFlute(), UntunedPercussion('caxixi', 'cx.')]), Performer('guitarist', [Guitar(), UntunedPercussion('caxixi', 'cx.')]), Performer('accordionist', [Accordion()]), Performer('percussionist', [Marimba(), Glockenspiel(), UntunedPercussion('bass drum', 'b. drum'), UntunedPercussion('claves', 'clv.'), UntunedPercussion('caxixi', 'cx.')])])",
+      '     \'title\': "L\'archipel du corps"',
+      "     'year_of_completion': 2011",
+      '',
+      '     add: add tag',
+      '     del: delete tag',
+      '']
 
 
 def test_Studio_07():
