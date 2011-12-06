@@ -19,7 +19,7 @@ from ScoreTemplateWizard import ScoreTemplateWizard
 from ScoreWrangler import ScoreWrangler
 from Session import Session
 from StaticMaterialProxy import StaticMaterialProxy
-from StudioInterface import StudioInterface
+from Studio import Studio
 from TrevorBaca import TrevorBaca
 from UserInputWrapper import UserInputWrapper
 import editors

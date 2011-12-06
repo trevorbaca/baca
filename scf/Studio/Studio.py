@@ -5,7 +5,7 @@ from baca.scf.ScoreWrangler import ScoreWrangler
 import subprocess
 
 
-class StudioInterface(SCFObject):
+class Studio(SCFObject):
 
     def __init__(self, session=None):
         SCFObject.__init__(self, session=session)

@@ -5,7 +5,7 @@ def test_InstrumentationSpecifierEditor_run_01():
     '''Quit works.
     '''
 
-    studio_interface = baca.scf.StudioInterface()
+    studio_interface = baca.scf.Studio()
     studio_interface.session.user_input = '9 perf q'
     studio_interface.run()
 
@@ -23,7 +23,7 @@ def test_InstrumentationSpecifierEditor_run_02():
     '''Back works.
     '''
 
-    studio_interface = baca.scf.StudioInterface()
+    studio_interface = baca.scf.Studio()
     studio_interface.session.user_input = '1 perf b q'
     studio_interface.run()
     transcript = studio_interface.session.transcript
@@ -36,7 +36,7 @@ def test_InstrumentationSpecifierEditor_run_03():
     '''Studio works.
     '''
 
-    studio_interface = baca.scf.StudioInterface()
+    studio_interface = baca.scf.Studio()
     studio_interface.session.user_input = '1 perf studio q'
     studio_interface.run()
     transcript = studio_interface.session.transcript
@@ -49,7 +49,7 @@ def test_InstrumentationSpecifierEditor_run_04():
     '''Junk works.
     '''
 
-    studio_interface = baca.scf.StudioInterface()
+    studio_interface = baca.scf.Studio()
     studio_interface.session.user_input = '1 perf foo q'
     studio_interface.run()
     transcript = studio_interface.session.transcript

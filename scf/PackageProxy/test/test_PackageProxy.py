@@ -48,13 +48,13 @@ def test_PackageProxy_03():
     '''
 
     package_proxy = baca.scf.PackageProxy()
-    package_proxy.purview = baca.scf.StudioInterface()
+    package_proxy.purview = baca.scf.Studio()
 
     assert package_proxy.directory_name is None
     assert package_proxy.package_importable_name is None
     assert package_proxy.package_short_name is None
     assert package_proxy.package_spaced_name is None 
-    assert isinstance(package_proxy.purview, baca.scf.StudioInterface)
+    assert isinstance(package_proxy.purview, baca.scf.Studio)
     assert package_proxy.score is None
 
 

@@ -5,7 +5,7 @@ def test_InstrumentationSpecifierEditor_traversal_01():
     '''Instrumentation editor to performer editor.
     '''
 
-    studio_interface = baca.scf.StudioInterface()
+    studio_interface = baca.scf.Studio()
     studio_interface.session.user_input = '9 perf 1 q'
     studio_interface.run()
 
@@ -25,7 +25,7 @@ def test_InstrumentationSpecifierEditor_traversal_02():
     '''Instrumentation editor to performer editor to instrument editor.
     '''
 
-    studio_interface = baca.scf.StudioInterface()
+    studio_interface = baca.scf.Studio()
     studio_interface.session.user_input = '9 perf 1 1 q'
     studio_interface.run()
 

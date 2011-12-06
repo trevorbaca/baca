@@ -142,7 +142,7 @@ def test_ScoreProxy_06():
     '''User 'studio' input results in return to studio main menu.
     '''
     
-    studio_interface = baca.scf.StudioInterface()
+    studio_interface = baca.scf.Studio()
     studio_interface.session.user_input = '1 studio q'
     studio_interface.run()
 
@@ -169,7 +169,7 @@ def test_ScoreProxy_08():
     '''User 'b' input returns to studio main menu.
     '''
 
-    studio_interface = baca.scf.StudioInterface()
+    studio_interface = baca.scf.Studio()
     studio_interface.session.user_input = '1 b q'
     studio_interface.run()
 
@@ -198,7 +198,7 @@ def test_ScoreProxy_10():
     '''Back is handled correctly.
     '''
 
-    studio_interface = baca.scf.StudioInterface()
+    studio_interface = baca.scf.Studio()
     studio_interface.session.user_input = '1 b q'
     studio_interface.run()
     transcript = studio_interface.session.transcript
