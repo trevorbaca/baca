@@ -30,7 +30,7 @@ def test_InstrumentationEditor_delete_performer_01():
     assert len(transcript) == 9
 
 
-def test_InstrumentationEditor_add_performer_02():
+def test_InstrumentationEditor_delete_performer_02():
     '''Add three performers. Delete two.
     '''
 
