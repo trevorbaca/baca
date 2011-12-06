@@ -186,7 +186,7 @@ def test_StudioInterface_08():
 
 
 def test_StudioInterface_09():
-    '''Junk user input is handled silently.
+    '''Junk works.
     '''
 
     studio_interface = baca.scf.StudioInterface()

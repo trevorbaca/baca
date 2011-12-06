@@ -155,6 +155,7 @@ class MenuObject(SCFObject):
         lines.append('{} meth: {}'.format(self.make_tab(1), self.where[3]))
         lines.append('')
         self.display_lines(lines)
+        self.session.hide_next_redraw = True
 
     def show_hidden_menu_items(self):
         hidden_items = []
