@@ -236,9 +236,9 @@ class ScoreProxy(PackageProxy):
 
     def manage(self):
         if isinstance(self.year_of_completion, int):
-            self.session.menu_pieces.append(self.title_with_year)
+            self.session.menu_title_contributions.append(self.title_with_year)
         else:
-            self.session.menu_pieces.append(self.title)
+            self.session.menu_title_contributions.append(self.title)
         while True:
             menu = self.make_main_menu()
             key, value = menu.run()
@@ -249,11 +249,11 @@ class ScoreProxy(PackageProxy):
             self.handle_main_menu_response(key, value)
             if self.session.backtrack():
                 break
-        self.session.menu_pieces.pop()
+        self.session.menu_title_contributions.pop()
 
     def manage_svn(self):
         result = False
-        self.session.menu_pieces.append('repository commands')
+        self.session.menu_title_contributions.append('repository commands')
         while True:
             menu = self.make_svn_menu()
             key, value = menu.run()
@@ -270,7 +270,7 @@ class ScoreProxy(PackageProxy):
                 pass
             else:
                 raise ValueError
-        self.session.menu_pieces.pop()
+        self.session.menu_title_contributions.pop()
         return result
 
     def profile_package_structure(self):

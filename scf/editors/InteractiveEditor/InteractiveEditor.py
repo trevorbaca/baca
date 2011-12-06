@@ -29,12 +29,12 @@ class InteractiveEditor(SCFObject):
             setattr(self.target, attr_name, attr_value)
 
     def edit_interactively(self):
-        self.session.menu_pieces.append(self.menu_piece)
+        self.session.menu_title_contributions.append(self.menu_title_contribution)
         if self.conditionally_initialize_target():
-            self.session.menu_pieces.pop()
-            self.session.menu_pieces.append(self.menu_piece)
+            self.session.menu_title_contributions.pop()
+            self.session.menu_title_contributions.append(self.menu_title_contribution)
         if self.session.backtrack():
-            self.session.menu_pieces.pop()
+            self.session.menu_title_contributions.pop()
             return True
         while True:
             menu = self.make_main_menu()
@@ -46,7 +46,7 @@ class InteractiveEditor(SCFObject):
             self.handle_main_menu_response(key, value)
             if self.session.backtrack():
                 break
-        self.session.menu_pieces.pop()
+        self.session.menu_title_contributions.pop()
 
     def get_positive_integer_interactively(self, spaced_variable_name):
         user_response = self.handle_raw_input(spaced_variable_name)

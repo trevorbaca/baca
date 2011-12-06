@@ -177,7 +177,7 @@ class MakerWrangler(PackageWrangler, PackageProxy):
 
     def manage(self):
         result = True
-        self.session.menu_pieces.append('makers')
+        self.session.menu_title_contributions.append('makers')
         while True:
             menu = self.make_main_menu()
             key, value = menu.run()
@@ -194,7 +194,7 @@ class MakerWrangler(PackageWrangler, PackageProxy):
                 pass
             else:
                 raise ValueError
-        self.session.menu_pieces.pop()
+        self.session.menu_title_contributions.pop()
         return result
 
     def select_maker(self):

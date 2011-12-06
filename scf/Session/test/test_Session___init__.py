@@ -8,6 +8,6 @@ def test_Session___init___01():
     session = baca.scf.Session()
 
     assert session.initial_user_input is None
-    assert session.menu_pieces == []
+    assert session.menu_title_contributions == []
     assert session.scores_to_show == 'active'
     assert session.user_input is None

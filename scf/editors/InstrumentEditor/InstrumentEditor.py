@@ -15,7 +15,7 @@ class InstrumentEditor(InteractiveEditor):
     ### PUBLIC ATTRIBUTES ###
 
     @property
-    def menu_piece(self):
+    def menu_title_contribution(self):
         if self.target is not None:
             return self.target.instrument_name
         else:
@@ -108,7 +108,7 @@ class InstrumentEditor(InteractiveEditor):
         '''Return instrument or else none.
         '''
         from abjad.tools import instrumenttools
-        self.session.menu_pieces.append('select instrument')
+        self.session.menu_title_contributions.append('select instrument')
         menu = self.make_new_menu(where=self.where())
         menu.should_clear_terminal = False
         menu_section = self.MenuSection()
@@ -116,11 +116,11 @@ class InstrumentEditor(InteractiveEditor):
         menu_section.items_to_number = instrumenttools.list_instrument_names()
         key, value = menu.run()
         if self.session.backtrack():
-            self.session.menu_pieces.pop()
+            self.session.menu_title_contributions.pop()
             return    
         instrument_name = value
         instrument_name = instrument_name.title()
         instrument_name = instrument_name.replace(' ', '')
         exec('result = instrumenttools.{}()'.format(instrument_name))
-        self.session.menu_pieces.pop()
+        self.session.menu_title_contributions.pop()
         return result

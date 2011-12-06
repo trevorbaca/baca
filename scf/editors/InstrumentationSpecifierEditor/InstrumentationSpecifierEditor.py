@@ -11,7 +11,7 @@ class InstrumentationSpecifierEditor(InteractiveEditor):
         return baca.scf.editors.PerformerEditor
 
     @property
-    def menu_piece(self):
+    def menu_title_contribution(self):
         return 'performers & instrumentation'
 
     @property
@@ -133,7 +133,7 @@ class InstrumentationSpecifierEditor(InteractiveEditor):
 
     def select_performer_name_interactively(self):
         from abjad.tools import scoretools
-        self.session.menu_pieces.append('add performer')
+        self.session.menu_title_contributions.append('add performer')
         menu = self.make_new_menu(where=self.where())
         menu_section = self.MenuSection()
         menu.menu_sections.append(menu_section)
@@ -141,10 +141,10 @@ class InstrumentationSpecifierEditor(InteractiveEditor):
         while True:
             key, value = menu.run()
             if self.session.backtrack():
-                self.session.menu_pieces.pop()
+                self.session.menu_title_contributions.pop()
                 return
             if key is None:
                 continue
             else:
-                self.session.menu_pieces.pop()
+                self.session.menu_title_contributions.pop()
                 return value

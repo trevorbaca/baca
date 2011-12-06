@@ -11,7 +11,7 @@ class PerformerEditor(InteractiveEditor):
         return baca.scf.editors.InstrumentEditor
 
     @property
-    def menu_piece(self):
+    def menu_title_contribution(self):
         if self.target is not None:
             return self.target.name
         else:

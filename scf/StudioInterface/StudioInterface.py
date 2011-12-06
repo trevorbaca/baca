@@ -26,13 +26,13 @@ class StudioInterface(SCFObject):
 
     def edit_score_interactively(self, score_package_importable_name):
         score_proxy = self.score_wrangler.ScoreProxy(score_package_importable_name, session=self.session)
-        menu_pieces = self.session.menu_pieces[:]
-        self.session.menu_pieces = []
+        menu_title_contributions = self.session.menu_title_contributions[:]
+        self.session.menu_title_contributions = []
         score_proxy.manage()
-        self.session.menu_pieces = menu_pieces
+        self.session.menu_title_contributions = menu_title_contributions
 
     def get_materials_package_importable_name_interactively(self):
-        self.session.menu_pieces.append('select materials directory')
+        self.session.menu_title_contributions.append('select materials directory')
         while True:
             menu = self.make_new_menu(where=self.where())
             menu_section = self.MenuSection()
@@ -49,7 +49,7 @@ class StudioInterface(SCFObject):
                 score_proxy = self.score_wrangler.ScoreProxy(
                     score_package_importable_name, session=self.session)
                 return score_proxy.materials_package_importable_name
-        self.session.menu_pieces.pop()
+        self.session.menu_title_contributions.pop()
 
     def handle_main_menu_response(self, key, value):
         if not isinstance(key, str):
@@ -156,35 +156,35 @@ class StudioInterface(SCFObject):
         return menu
 
     def manage(self):
-        self.session.menu_pieces.append('studio')
+        self.session.menu_title_contributions.append('studio')
         while True:
-            self.session.menu_pieces.append('{} scores'.format(self.session.scores_to_show))
+            self.session.menu_title_contributions.append('{} scores'.format(self.session.scores_to_show))
             menu = self.make_main_menu()
             key, value = menu.run()
             if self.session.is_complete:
-                self.session.menu_pieces.pop()
+                self.session.menu_title_contributions.pop()
                 self.session.clean_up()
                 break
             if self.session.is_backtracking_to_studio:
                 self.session.is_backtracking_to_studio = False
-                self.session.menu_pieces.pop()
+                self.session.menu_title_contributions.pop()
                 continue
             if key is None:
-                self.session.menu_pieces.pop()
+                self.session.menu_title_contributions.pop()
                 continue
             self.handle_main_menu_response(key, value)
             if self.session.is_complete:
-                self.session.menu_pieces.pop()
+                self.session.menu_title_contributions.pop()
                 self.session.clean_up()
                 break
             if self.session.is_backtracking_to_studio:
                 self.session.is_backtracking_to_studio = False
-                self.session.menu_pieces.pop()
+                self.session.menu_title_contributions.pop()
                 continue
-            self.session.menu_pieces.pop()
+            self.session.menu_title_contributions.pop()
 
     def manage_svn(self):
-        self.session.menu_pieces.append('repository commands')
+        self.session.menu_title_contributions.append('repository commands')
         while True:
             menu = self.make_svn_menu()
             key, value = menu.run()
@@ -193,7 +193,7 @@ class StudioInterface(SCFObject):
             self.handle_svn_response(key, value)
             if self.session.backtrack():
                 break
-        self.session.menu_pieces.pop()
+        self.session.menu_title_contributions.pop()
 
     def run_py_test_all(self, prompt_proceed=True):
         proc = subprocess.Popen(
