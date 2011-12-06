@@ -89,12 +89,10 @@ class UserInputGetter(MenuObject):
         self.load_prompt()
         while True:
             user_response = self.conditionally_display_prompt_and_get_user_response()
-            #print 'zowie {!r}'.format(user_response)
             if user_response is None:
                 self.prompt_index = self.prompt_index + 1
                 break
             user_response = self.handle_hidden_key(user_response)
-            #print 'wowie {!r}'.format(user_response)
             if self.session.is_complete:
                 break
             elif user_response == 'help':
@@ -104,10 +102,11 @@ class UserInputGetter(MenuObject):
                 break
             elif user_response == 'skip':
                 break
-            else:
-                #print 'kplowie {!r}'.format(user_response)
+            elif isinstance(user_response, str):
                 if self.store_value(user_response):
                     break
+            else:
+                self.print_not_implemented()
 
     def present_prompts_and_store_values(self):
         self.conditionally_clear_terminal()
@@ -139,6 +138,7 @@ class UserInputGetter(MenuObject):
         self.display_lines(lines)
 
     def store_value(self, user_response):
+        assert isinstance(user_response, str)
         try:
             value = eval(user_response)
         except (NameError, SyntaxError):

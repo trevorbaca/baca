@@ -83,7 +83,7 @@ class SCFObject(object):
     def confirm(self):
         response = self.handle_raw_input('ok?')
         if not response.lower() == 'y':
-            self.display_lines([''])
+            self.display_cap_lines([''])
             return False
         return True
 
@@ -162,7 +162,7 @@ class SCFObject(object):
         lines = []
         lines.append('not yet implemented.')
         lines.append('')
-        self.display_lines(lines)
+        self.display_cap_lines(lines)
         self.proceed()
         return True, None
 
