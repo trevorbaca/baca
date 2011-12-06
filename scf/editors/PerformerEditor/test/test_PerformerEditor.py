@@ -37,7 +37,7 @@ def test_PerformerEditor_03():
     '''
 
     performer_editor = baca.scf.editors.PerformerEditor()
-    performer_editor.session.user_input = 'add\nq'
+    performer_editor.session.user_input = 'add q'
     performer_editor.edit_interactively()
     transcript = performer_editor.session.transcript
     
@@ -54,7 +54,7 @@ def test_PerformerEditor_04():
     '''
 
     performer_editor = baca.scf.editors.PerformerEditor()
-    performer_editor.session.user_input = 'add\nb\nq'
+    performer_editor.session.user_input = 'add b q'
     performer_editor.edit_interactively()
     transcript = performer_editor.session.transcript
 

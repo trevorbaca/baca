@@ -146,9 +146,15 @@ class SCFObject(object):
             self.session.user_input = None
             return None
         else:
-            user_input = self.session.user_input.split('\n')
-            user_response = user_input[0]
-            user_input = '\n'.join(user_input[1:])
+            if '\n' in self.session.user_input:
+                user_input = self.session.user_input.split('\n')
+                user_response = user_input[0]
+                user_input = '\n'.join(user_input[1:])
+            else:
+                user_input = self.session.user_input.split(' ')
+                user_response = user_input[0]
+                user_input = ' '.join(user_input[1:])
+            user_response = user_response.replace('_', ' ')
             self.session.user_input = user_input
             return user_response
 

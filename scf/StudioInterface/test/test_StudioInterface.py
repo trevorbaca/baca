@@ -47,7 +47,7 @@ def test_StudioInterface_03():
     '''
 
     studio_interface = baca.scf.StudioInterface()
-    studio_interface.session.user_input = 'hidden\nq'
+    studio_interface.session.user_input = 'hidden q'
     studio_interface.manage()
 
     assert studio_interface.session.transcript[-2] == [
@@ -71,7 +71,7 @@ def test_StudioInterface_04():
     '''
 
     studio_interface = baca.scf.StudioInterface()
-    studio_interface.session.user_input = '1\nq'
+    studio_interface.session.user_input = '1 q'
     studio_interface.manage()
 
     assert studio_interface.session.transcript[-2] == [
@@ -97,7 +97,7 @@ def test_StudioInterface_05():
     '''
 
     studio_interface = baca.scf.StudioInterface()
-    studio_interface.session.user_input = 'mb\nq'
+    studio_interface.session.user_input = 'mb q'
     studio_interface.manage()
     
     assert studio_interface.session.transcript[-2] == [  
@@ -123,7 +123,7 @@ def test_StudioInterface_06():
     py.test.skip('while building up archipel instrumentation.')
 
     studio_interface = baca.scf.StudioInterface()
-    studio_interface.session.user_input = '1\ntags\nq'
+    studio_interface.session.user_input = '1 tags q'
     studio_interface.manage()
 
     assert studio_interface.session.transcript[-2] == [
@@ -143,7 +143,7 @@ def test_StudioInterface_07():
     '''
 
     studio_interface = baca.scf.StudioInterface()
-    studio_interface.session.user_input = 'svn\nq'
+    studio_interface.session.user_input = 'svn q'
     studio_interface.manage()
 
     assert studio_interface.session.transcript[-2] == [
@@ -175,12 +175,12 @@ def test_StudioInterface_08():
     assert studio_interface.session.transcript[-2][0] == 'Studio - active scores'
 
     studio_interface = baca.scf.StudioInterface()
-    studio_interface.session.user_input = 'svn\nq'
+    studio_interface.session.user_input = 'svn q'
     studio_interface.manage()
     assert studio_interface.session.transcript[-2][0] == 'Studio - active scores - repository commands'
 
     studio_interface = baca.scf.StudioInterface()
-    studio_interface.session.user_input = 'svn\nb\nq'
+    studio_interface.session.user_input = 'svn b q'
     studio_interface.manage()
     assert studio_interface.session.transcript[-2][0] == 'Studio - active scores'
 
@@ -190,12 +190,12 @@ def test_StudioInterface_09():
     '''
 
     studio_interface = baca.scf.StudioInterface()
-    studio_interface.session.user_input = 'foo\nq'
+    studio_interface.session.user_input = 'foo q'
     studio_interface.manage()
     assert len(studio_interface.session.transcript) == 4
 
     studio_interface = baca.scf.StudioInterface()
-    studio_interface.session.user_input = 'foo\nbar\nq'
+    studio_interface.session.user_input = 'foo bar q'
     studio_interface.manage()
     assert len(studio_interface.session.transcript) == 6
 
@@ -205,7 +205,7 @@ def test_StudioInterface_10():
     '''
     
     studio_interface = baca.scf.StudioInterface()
-    studio_interface.session.user_input = 'foo\nq'
+    studio_interface.session.user_input = 'foo q'
     studio_interface.manage()
     assert len(studio_interface.session.transcript) == 4
 
@@ -219,7 +219,7 @@ def test_StudioInterface_11():
     '''
 
     studio_interface = baca.scf.StudioInterface()
-    studio_interface.session.user_input = 'foo\nq'
+    studio_interface.session.user_input = 'foo q'
     studio_interface.manage()
     assert len(studio_interface.session.transcript) == 4
 
@@ -233,7 +233,7 @@ def test_StudioInterface_12():
     '''
 
     studio_interface = baca.scf.StudioInterface()
-    studio_interface.session.user_input = 'exec\n2**30\nq'
+    studio_interface.session.user_input = 'exec 2**30 q'
     studio_interface.manage()
 
     assert len(studio_interface.session.transcript) == 5
@@ -248,7 +248,7 @@ def test_StudioInterface_13():
     '''
 
     studio_interface = baca.scf.StudioInterface()
-    studio_interface.session.user_input = 'exec\nfoo\nq'
+    studio_interface.session.user_input = 'exec foo q'
     studio_interface.manage()
 
     assert len(studio_interface.session.transcript) == 5

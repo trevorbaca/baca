@@ -6,7 +6,7 @@ def test_InstrumentationSpecifierEditor_01():
     '''
 
     studio_interface = baca.scf.StudioInterface()
-    studio_interface.session.user_input = '9\nperf\nq'
+    studio_interface.session.user_input = '9 perf q'
     studio_interface.manage()
 
     assert studio_interface.session.transcript[-2] == [
@@ -25,7 +25,7 @@ def test_InstrumentationSpecifierEditor_02():
     '''
 
     studio_interface = baca.scf.StudioInterface()
-    studio_interface.session.user_input = '9\nperf\n1\nq'
+    studio_interface.session.user_input = '9 perf 1 q'
     studio_interface.manage()
 
     assert studio_interface.session.transcript[-2] == [
@@ -45,7 +45,7 @@ def test_InstrumentationSpecifierEditor_03():
     '''
 
     studio_interface = baca.scf.StudioInterface()
-    studio_interface.session.user_input = '9\nperf\n1\n1\nq'
+    studio_interface.session.user_input = '9 perf 1 1 q'
     studio_interface.manage()
 
     assert studio_interface.session.transcript[-2] == [
@@ -64,7 +64,7 @@ def test_InstrumentationSpecifierEditor_04():
     '''
 
     studio_interface = baca.scf.StudioInterface()
-    studio_interface.session.user_input = '1\nperf\nb\nq'
+    studio_interface.session.user_input = '1 perf b q'
     studio_interface.manage()
     transcript = studio_interface.session.transcript
 
@@ -77,7 +77,7 @@ def test_InstrumentationSpecifierEditor_05():
     '''
 
     studio_interface = baca.scf.StudioInterface()
-    studio_interface.session.user_input = '1\nperf\nfoo\nq'
+    studio_interface.session.user_input = '1 perf foo q'
     studio_interface.manage()
     transcript = studio_interface.session.transcript
 

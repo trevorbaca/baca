@@ -57,12 +57,12 @@ def test_InstrumentEditor_04():
     accordion.short_instrument_name = 'acc. I'
 
     instrument_editor = baca.scf.editors.InstrumentEditor(target=accordion)
-    instrument_editor.session.user_input = 'in\nfoo\nq'
+    instrument_editor.session.user_input = 'in foo q'
     instrument_editor.edit_interactively()
     assert accordion.instrument_name == 'foo'
 
     instrument_editor = baca.scf.editors.InstrumentEditor(target=accordion)
-    instrument_editor.session.user_input = 'sin\nf. I\nq'
+    instrument_editor.session.user_input = 'sin f._I q'
     instrument_editor.edit_interactively()
     assert accordion.short_instrument_name == 'f. I'
 
@@ -76,12 +76,12 @@ def test_InstrumentEditor_05():
     accordion.short_instrument_name = 'acc. I'
 
     instrument_editor = baca.scf.editors.InstrumentEditor(target=accordion)
-    instrument_editor.session.user_input = 'inm\nfoo I\nq'
+    instrument_editor.session.user_input = 'inm foo_I q'
     instrument_editor.edit_interactively()
     assert accordion.instrument_name_markup == markuptools.Markup('foo I')
 
     instrument_editor = baca.scf.editors.InstrumentEditor(target=accordion)
-    instrument_editor.session.user_input = 'sinm\nf. I\nq'
+    instrument_editor.session.user_input = 'sinm f._I q'
     instrument_editor.edit_interactively()
     assert accordion.short_instrument_name_markup == markuptools.Markup('f. I')
 
@@ -91,7 +91,7 @@ def test_InstrumentEditor_06():
     '''
 
     instrument_editor = baca.scf.editors.InstrumentEditor()
-    instrument_editor.session.user_input = '9\nq'
+    instrument_editor.session.user_input = '9 q'
     instrument_editor.edit_interactively()
     assert instrument_editor.target == instrumenttools.ContrabassFlute()
 

@@ -84,7 +84,7 @@ def test_ScoreProxy_03():
     '''
 
     archipel = baca.scf.ScoreProxy('archipel')
-    archipel.session.user_input = 'hidden\nq'
+    archipel.session.user_input = 'hidden q'
     archipel.manage()
 
     assert archipel.session.transcript[-2] == [
@@ -128,12 +128,12 @@ def test_ScoreProxy_05():
     '''
 
     archipel = baca.scf.ScoreProxy('archipel')
-    archipel.session.user_input = 'add\nfoo\nbar\nq'
+    archipel.session.user_input = 'add foo bar q'
     archipel.manage_tags()
     assert archipel.get_tag('foo') == 'bar'
 
     archipel = baca.scf.ScoreProxy('archipel')
-    archipel.session.user_input = 'del\nfoo\nq'
+    archipel.session.user_input = 'del foo q'
     archipel.manage_tags()
     assert archipel.get_tag('foo') is None
 
@@ -143,7 +143,7 @@ def test_ScoreProxy_06():
     '''
     
     studio_interface = baca.scf.StudioInterface()
-    studio_interface.session.user_input = '1\nstudio\nq'
+    studio_interface.session.user_input = '1 studio q'
     studio_interface.manage()
 
     assert len(studio_interface.session.transcript) == 6
@@ -170,7 +170,7 @@ def test_ScoreProxy_08():
     '''
 
     studio_interface = baca.scf.StudioInterface()
-    studio_interface.session.user_input = '1\nb\nq'
+    studio_interface.session.user_input = '1 b q'
     studio_interface.manage()
 
     assert len(studio_interface.session.transcript) == 6
@@ -199,7 +199,7 @@ def test_ScoreProxy_10():
     '''
 
     studio_interface = baca.scf.StudioInterface()
-    studio_interface.session.user_input = '1\nb\nq'
+    studio_interface.session.user_input = '1 b q'
     studio_interface.manage()
     transcript = studio_interface.session.transcript
     
