@@ -58,7 +58,8 @@ class UserInputGetter(MenuObject):
         assert isinstance(spaced_attribute_name, str)
         self.prompts.append(spaced_attribute_name)
         self.tests.append(self.make_is_integer_in_closed_range(start, stop))
-        message = 'must be integer between {} and {}, inclusive.'.format(start, stop)
+        message = "value for '{}' must be integer between {} and {}, inclusive."
+        message = message.format(spaced_attribute_name, start, stop)
         self.helps.append(message)
 
     def append_string(self, spaced_attribute_name):
@@ -96,8 +97,6 @@ class UserInputGetter(MenuObject):
             #print 'wowie {!r}'.format(user_response)
             if self.session.is_complete:
                 break
-            #if user_response == 'b':
-            #    break
             elif user_response == 'help':
                 self.show_help()
             elif user_response == 'prev':
@@ -155,7 +154,7 @@ class UserInputGetter(MenuObject):
                     lines = []
                     lines.append(self.helps[self.prompt_index])
                     lines.append('')
-                    self.display_lines(lines)
+                    self.display_cap_lines(lines)
         else:
             self.values.append(value)
             self.prompt_index = self.prompt_index + 1
