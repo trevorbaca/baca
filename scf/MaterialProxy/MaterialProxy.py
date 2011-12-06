@@ -613,7 +613,7 @@ class MaterialProxy(PackageProxy):
         maker = self.import_attribute_from_input_file('maker')
         maker.materials_directory_name = self.directory_name
         user_input_wrapper = self.import_attribute_from_input_file('user_input')
-        maker.edit_interactively(user_input_wrapper, score_title=self.title)
+        maker.run(user_input_wrapper, score_title=self.title)
 
     def rename_material(self):
         line = 'current material name: {}'.format(self.material_underscored_name)

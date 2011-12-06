@@ -36,7 +36,7 @@ def test_InstrumentEditor_03():
 
     instrument_editor = baca.scf.editors.InstrumentEditor(target=accordion)
     instrument_editor.session.user_input = 'q'
-    instrument_editor.edit_interactively()
+    instrument_editor.run()
 
     assert instrument_editor.session.transcript[-2] == [
      'Accordion I',
@@ -58,12 +58,12 @@ def test_InstrumentEditor_04():
 
     instrument_editor = baca.scf.editors.InstrumentEditor(target=accordion)
     instrument_editor.session.user_input = 'in foo q'
-    instrument_editor.edit_interactively()
+    instrument_editor.run()
     assert accordion.instrument_name == 'foo'
 
     instrument_editor = baca.scf.editors.InstrumentEditor(target=accordion)
     instrument_editor.session.user_input = 'sin f._I q'
-    instrument_editor.edit_interactively()
+    instrument_editor.run()
     assert accordion.short_instrument_name == 'f. I'
 
 
@@ -77,12 +77,12 @@ def test_InstrumentEditor_05():
 
     instrument_editor = baca.scf.editors.InstrumentEditor(target=accordion)
     instrument_editor.session.user_input = 'inm foo_I q'
-    instrument_editor.edit_interactively()
+    instrument_editor.run()
     assert accordion.instrument_name_markup == markuptools.Markup('foo I')
 
     instrument_editor = baca.scf.editors.InstrumentEditor(target=accordion)
     instrument_editor.session.user_input = 'sinm f._I q'
-    instrument_editor.edit_interactively()
+    instrument_editor.run()
     assert accordion.short_instrument_name_markup == markuptools.Markup('f. I')
 
 
@@ -92,7 +92,7 @@ def test_InstrumentEditor_06():
 
     instrument_editor = baca.scf.editors.InstrumentEditor()
     instrument_editor.session.user_input = '9 q'
-    instrument_editor.edit_interactively()
+    instrument_editor.run()
     assert instrument_editor.target == instrumenttools.ContrabassFlute()
 
 
@@ -102,7 +102,7 @@ def test_InstrumentEditor_07():
 
     instrument_editor = baca.scf.editors.InstrumentEditor()
     instrument_editor.session.user_input = 'q'
-    instrument_editor.edit_interactively()
+    instrument_editor.run()
     transcript = instrument_editor.session.transcript
 
     assert len(transcript) == 2

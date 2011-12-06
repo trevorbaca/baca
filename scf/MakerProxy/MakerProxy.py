@@ -82,7 +82,7 @@ class MakerProxy(PackageProxy):
             self.delete_package()
             return False
         elif key == 'new':
-            self.edit_interactively()
+            self.run()
         elif key == 'ren':
             self.print_not_implemented()
         elif key == 'src':

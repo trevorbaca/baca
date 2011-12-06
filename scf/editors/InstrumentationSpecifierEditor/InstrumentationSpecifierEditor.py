@@ -68,7 +68,7 @@ class InstrumentationSpecifierEditor(InteractiveEditor):
             return
         performer = self.get_performer_from_performer_number(performer_number)
         performer_editor = self.PerformerEditor(session=self.session, target=performer)
-        performer_editor.edit_interactively()
+        performer_editor.run()
 
     def get_performer_from_performer_number(self, performer_number):
         assert isinstance(performer_number, int)

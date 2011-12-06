@@ -49,13 +49,13 @@ class InteractiveMaterialProxy(MaterialProxy):
             else:
                 maker = value
             maker.score = self
-            result = maker.edit_interactively()
+            result = maker.run()
             if result:
                 break
         self.proceed()
         return True, None
 
-    def edit_interactively(self, user_input_wrapper=None):
+    def run(self, user_input_wrapper=None):
         if user_input_wrapper is None:
             user_input_wrapper = self.initialize_user_input_wrapper()
         self.user_input_wrapper = user_input_wrapper

@@ -97,7 +97,7 @@ class PerformerEditor(InteractiveEditor):
         instrument_index = instrument_number - 1
         instrument = self.target.instruments[instrument_index]
         instrument_editor = self.InstrumentEditor(session=self.session, target=instrument)
-        instrument_editor.edit_interactively()
+        instrument_editor.run()
 
     def make_main_menu(self):
         menu = self.make_new_menu(where=self.where())

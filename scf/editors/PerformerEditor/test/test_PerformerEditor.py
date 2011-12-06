@@ -9,7 +9,7 @@ def test_PerformerEditor_01():
 
     performer_editor = baca.scf.editors.PerformerEditor()
     performer_editor.session.user_input = 'q'
-    performer_editor.edit_interactively()
+    performer_editor.run()
 
     assert len(performer_editor.session.transcript) == 2
     assert performer_editor.session.transcript[0] == [
@@ -28,7 +28,7 @@ def test_PerformerEditor_02():
 
     performer_editor = baca.scf.editors.PerformerEditor()
     performer_editor.session.user_input = 'q'
-    performer_editor.edit_interactively()
+    performer_editor.run()
     assert isinstance(performer_editor.target, type(scoretools.Performer()))
 
 
@@ -38,7 +38,7 @@ def test_PerformerEditor_03():
 
     performer_editor = baca.scf.editors.PerformerEditor()
     performer_editor.session.user_input = 'add q'
-    performer_editor.edit_interactively()
+    performer_editor.run()
     transcript = performer_editor.session.transcript
     
     assert len(transcript) == 4 
@@ -55,7 +55,7 @@ def test_PerformerEditor_04():
 
     performer_editor = baca.scf.editors.PerformerEditor()
     performer_editor.session.user_input = 'add b q'
-    performer_editor.edit_interactively()
+    performer_editor.run()
     transcript = performer_editor.session.transcript
 
     assert len(transcript) == 6 
