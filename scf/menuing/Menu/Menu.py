@@ -144,7 +144,7 @@ class Menu(MenuObject, SCFObject):
             key = self.handle_hidden_key(key)
             if self.session.is_complete:
                 break
-            if key == 'redraw':
+            elif key == 'redraw':
                 should_clear_terminal, hide_menu = True, False
             else:
                 break
