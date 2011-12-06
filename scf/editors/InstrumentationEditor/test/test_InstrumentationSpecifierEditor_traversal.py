@@ -1,7 +1,7 @@
 import baca
 
 
-def test_InstrumentationSpecifierEditor_traversal_01():
+def test_InstrumentationEditor_traversal_01():
     '''Instrumentation editor to performer editor.
     '''
 
@@ -21,7 +21,7 @@ def test_InstrumentationSpecifierEditor_traversal_01():
       '']
 
 
-def test_InstrumentationSpecifierEditor_traversal_02():
+def test_InstrumentationEditor_traversal_02():
     '''Instrumentation editor to performer editor to instrument editor.
     '''
 

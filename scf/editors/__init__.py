@@ -1,4 +1,4 @@
 from InstrumentEditor import InstrumentEditor
-from InstrumentationSpecifierEditor import InstrumentationSpecifierEditor
+from InstrumentationEditor import InstrumentationEditor
 from InteractiveEditor import InteractiveEditor
 from PerformerEditor import PerformerEditor

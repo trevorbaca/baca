@@ -1,7 +1,7 @@
 from baca.scf.editors.InteractiveEditor import InteractiveEditor
 
 
-class InstrumentationSpecifierEditor(InteractiveEditor):
+class InstrumentationEditor(InteractiveEditor):
 
     ### PUBLIC ATTRIBUTES ###
 

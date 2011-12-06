@@ -123,7 +123,7 @@ class ScoreProxy(PackageProxy):
     def edit_instrumentation_specifier_interactively(self):
         import baca
         target = self.get_tag('instrumentation')
-        editor = baca.scf.editors.InstrumentationSpecifierEditor(session=self.session, target=target)
+        editor = baca.scf.editors.InstrumentationEditor(session=self.session, target=target)
         #target = editor.run()
         result = editor.run()
         self.add_tag('instrumentation', editor.target)

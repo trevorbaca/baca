@@ -1,7 +1,7 @@
 import baca
 
 
-def test_InstrumentationSpecifierEditor_run_01():
+def test_InstrumentationEditor_run_01():
     '''Quit works.
     '''
 
@@ -19,7 +19,7 @@ def test_InstrumentationSpecifierEditor_run_01():
       '']
 
 
-def test_InstrumentationSpecifierEditor_run_02():
+def test_InstrumentationEditor_run_02():
     '''Back works.
     '''
 
@@ -32,7 +32,7 @@ def test_InstrumentationSpecifierEditor_run_02():
     assert transcript[2] == transcript[6]
 
 
-def test_InstrumentationSpecifierEditor_run_03():
+def test_InstrumentationEditor_run_03():
     '''Studio works.
     '''
 
@@ -45,7 +45,7 @@ def test_InstrumentationSpecifierEditor_run_03():
     assert transcript[0] == transcript[6]
 
 
-def test_InstrumentationSpecifierEditor_run_04():
+def test_InstrumentationEditor_run_04():
     '''Junk works.
     '''
 

@@ -1,7 +1,7 @@
 import baca
 
 
-def test_InstrumentationSpecifierEditor_add_performer_01():
+def test_InstrumentationEditor_add_performer_01():
     '''Quit, back, studio & junk all work.
     '''
 
