@@ -128,5 +128,4 @@ class InstrumentEditor(InteractiveEditor):
         instrument_name = instrument_name.title()
         instrument_name = instrument_name.replace(' ', '')
         exec('result = instrumenttools.{}()'.format(instrument_name))
-        self.session.menu_title_contributions.pop()
         return result

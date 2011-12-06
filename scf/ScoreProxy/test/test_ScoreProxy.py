@@ -113,7 +113,7 @@ def test_ScoreProxy_04():
      ['Tags',
       '',
       "     'composer': TrevorBaca()",
-      "     'instrumentation': InstrumentationSpecifier([Performer('flutist', [Piccolo(), AltoFlute(), ContrabassFlute(), UntunedPercussion('caxixi', 'cx.')]), Performer('guitarist', [Guitar(), UntunedPercussion('caxixi', 'cx.')]), Performer('accordionist', [Accordion()]), Performer('percussionist', [Marimba(), Glockenspiel(), UntunedPercussion('bass drum', 'b. drum'), UntunedPercussion('claves', 'clv.'), UntunedPercussion('caxixi', 'cx.')])])",
+      "     'instrumentation': InstrumentationSpecifier([Performer(name='flutist', instruments=[Piccolo(), AltoFlute(), ContrabassFlute(), UntunedPercussion('caxixi', 'cx.')]), Performer(name='guitarist', instruments=[Guitar(), UntunedPercussion('caxixi', 'cx.')]), Performer(name='accordionist', instruments=[Accordion()]), Performer(name='percussionist', instruments=[Marimba(), Glockenspiel(), UntunedPercussion('bass drum', 'b. drum'), UntunedPercussion('claves', 'clv.'), UntunedPercussion('caxixi', 'cx.')])])",
       '     \'title\': "L\'archipel du corps"',
       "     'year_of_completion': 2011",
       '',
