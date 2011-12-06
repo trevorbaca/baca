@@ -394,7 +394,7 @@ class MaterialProxy(PackageProxy):
         trimmed_visualizer_ly_lines = self.trim_ly_lines(self.visualization_ly_file_name)
         return trimmed_temp_ly_file_lines == trimmed_visualizer_ly_lines
 
-    def manage(self):
+    def run(self):
         while True:
             menu = self.make_new_menu(where=self.where())
             menu_section = self.MenuSection()

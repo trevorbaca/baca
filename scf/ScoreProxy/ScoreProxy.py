@@ -181,13 +181,13 @@ class ScoreProxy(PackageProxy):
                 self.chunk_wrangler.package_importable_name, chunk_underscored_name)
             chunk_proxy = self.chunk_wrangler.ChunkProxy(package_importable_name)
             chunk_proxy.title = self.title
-            return chunk_proxy.manage()
+            return chunk_proxy.run()
         elif key.startswith('m'):
             material_underscored_name = value
             package_importable_name = '{}.{}'.format(
                 self.material_wrangler.package_importable_name, material_underscored_name)
             material_proxy = self.material_wrangler.get_package_proxy(package_importable_name)
-            return material_proxy.manage()
+            return material_proxy.run()
         else:
             raise ValueError
 
@@ -234,7 +234,7 @@ class ScoreProxy(PackageProxy):
         menu.menu_sections.append(menu_section)
         return menu
 
-    def manage(self):
+    def run(self):
         if isinstance(self.year_of_completion, int):
             self.session.menu_title_contributions.append(self.title_with_year)
         else:

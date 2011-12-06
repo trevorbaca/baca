@@ -167,7 +167,7 @@ class MakerWrangler(PackageWrangler, PackageProxy):
             maker_name = maker_name.replace(' ', '_')
             maker_name = iotools.underscore_delimited_lowercase_to_uppercamelcase(maker_name)
             maker = self.get_maker(maker_name)
-            maker.manage()
+            maker.run()
 
     def make_main_menu(self):
         menu = self.make_new_menu(where=self.where())
@@ -175,7 +175,7 @@ class MakerWrangler(PackageWrangler, PackageProxy):
         menu.named_pairs.append(('new', 'make maker'))
         return menu
 
-    def manage(self):
+    def run(self):
         result = True
         self.session.menu_title_contributions.append('makers')
         while True:

@@ -7,7 +7,7 @@ def test_InstrumentationSpecifierEditor_01():
 
     studio_interface = baca.scf.StudioInterface()
     studio_interface.session.user_input = '9 perf q'
-    studio_interface.manage()
+    studio_interface.run()
 
     assert studio_interface.session.transcript[-2] == [
       'Sekka (2007) - performers & instrumentation',
@@ -25,7 +25,7 @@ def test_InstrumentationSpecifierEditor_02():
 
     studio_interface = baca.scf.StudioInterface()
     studio_interface.session.user_input = '9 perf 1 q'
-    studio_interface.manage()
+    studio_interface.run()
 
     assert studio_interface.session.transcript[-2] == [
       'Sekka (2007) - performers & instrumentation - flutist',
@@ -45,7 +45,7 @@ def test_InstrumentationSpecifierEditor_03():
 
     studio_interface = baca.scf.StudioInterface()
     studio_interface.session.user_input = '9 perf 1 1 q'
-    studio_interface.manage()
+    studio_interface.run()
 
     assert studio_interface.session.transcript[-2] == [
       'Sekka (2007) - performers & instrumentation - flutist - flute',
@@ -64,7 +64,7 @@ def test_InstrumentationSpecifierEditor_04():
 
     studio_interface = baca.scf.StudioInterface()
     studio_interface.session.user_input = '1 perf b q'
-    studio_interface.manage()
+    studio_interface.run()
     transcript = studio_interface.session.transcript
 
     assert len(transcript) == 8
@@ -77,7 +77,7 @@ def test_InstrumentationSpecifierEditor_05():
 
     studio_interface = baca.scf.StudioInterface()
     studio_interface.session.user_input = '1 perf foo q'
-    studio_interface.manage()
+    studio_interface.run()
     transcript = studio_interface.session.transcript
 
     assert len(transcript) == 8

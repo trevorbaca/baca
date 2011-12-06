@@ -28,7 +28,7 @@ class StudioInterface(SCFObject):
         score_proxy = self.score_wrangler.ScoreProxy(score_package_importable_name, session=self.session)
         menu_title_contributions = self.session.menu_title_contributions[:]
         self.session.menu_title_contributions = []
-        score_proxy.manage()
+        score_proxy.run()
         self.session.menu_title_contributions = menu_title_contributions
 
     def get_materials_package_importable_name_interactively(self):
@@ -59,9 +59,9 @@ class StudioInterface(SCFObject):
         elif key == 'all':
             self.session.scores_to_show = 'all'
         elif key == 'k':
-            self.global_proxy.maker_wrangler.manage()
+            self.global_proxy.maker_wrangler.run()
         elif key == 'm':
-            self.global_proxy.material_wrangler.manage()
+            self.global_proxy.material_wrangler.run()
         elif key == 'mb':
             self.session.scores_to_show = 'mothballed'
         elif key == 'svn':
@@ -155,7 +155,7 @@ class StudioInterface(SCFObject):
         menu.menu_sections.append(menu_section)
         return menu
 
-    def manage(self):
+    def run(self):
         self.session.menu_title_contributions.append('studio')
         while True:
             self.session.menu_title_contributions.append('{} scores'.format(self.session.scores_to_show))

@@ -56,7 +56,7 @@ class ChunkProxy(PackageProxy):
         menu.menu_sections.append(menu_section)
         return menu
 
-    def manage(self):
+    def run(self):
         result = False
         self.session.menu_title_contributions.append(self.chunk_name)
         while True:

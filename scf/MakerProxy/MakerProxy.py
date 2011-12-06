@@ -89,7 +89,7 @@ class MakerProxy(PackageProxy):
             self.edit_source_file()
         else:
             material_proxy = value
-            material_proxy.manage()
+            material_proxy.run()
     
     def make_main_menu(self):
         menu = self.make_new_menu(where=self.where())
@@ -104,7 +104,7 @@ class MakerProxy(PackageProxy):
         menu_section.sentence_length_items.append(('src', 'edit {} source'.format(self.spaced_class_name)))
         return menu
 
-    def manage(self):
+    def run(self):
         result = False
         self.session.menu_title_contributions.append(self.maker_name)
         while True:
