@@ -180,14 +180,14 @@ class PackageProxy(DirectoryProxy):
 
     def add_tag_interactively(self):
         getter = self.make_new_getter(where=self.where())
-        getter.prompts.append('Tag name')
-        getter.prompts.append('Tag value')
+        getter.prompts.append('tag name')
+        getter.prompts.append('tag value')
         getter.should_clear_terminal = False
         user_input = getter.run()
         if user_input:
             tag_name, tag_value = user_input
             self.add_tag(tag_name, tag_value)
-            confirm_line = 'Tag added.\n'
+            confirm_line = 'tag added.\n'
             self.display_lines([confirm_line])
         if self.session.user_input is None:
             self.proceed()
@@ -211,7 +211,7 @@ class PackageProxy(DirectoryProxy):
 
     def delete_tag_interactively(self):
         getter = self.make_new_getter(where=self.where())
-        getter.prompts.append('Tag name')
+        getter.prompts.append('tag name')
         getter.should_clear_terminal = False
         user_input = getter.run()
         if user_input:

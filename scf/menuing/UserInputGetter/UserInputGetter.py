@@ -69,6 +69,10 @@ class UserInputGetter(MenuObject):
         self.helps.append('must be string.')
 
     def conditionally_display_prompt_and_get_user_response(self):
+        '''Return string when user enters something.
+        Return string when session yields an element of canned user input.
+        Return none only when session has just run out of canned user input.
+        '''
         if self.session.is_displayable:
             prompt = self.menu_lines[-1]
             user_response = self.handle_raw_input(prompt)
@@ -86,6 +90,9 @@ class UserInputGetter(MenuObject):
         self.prompt_index = self.prompt_index - 1
 
     def present_prompt_and_store_value(self):
+        '''True when user response obtained. Or when user skips prompt.
+        False when user quits system or aborts getter.
+        '''
         self.load_prompt()
         while True:
             user_response = self.conditionally_display_prompt_and_get_user_response()
@@ -93,8 +100,8 @@ class UserInputGetter(MenuObject):
                 self.prompt_index = self.prompt_index + 1
                 break
             user_response = self.handle_hidden_key(user_response)
-            if self.session.is_complete:
-                break
+            if user_response is None:
+                return False
             elif user_response == 'help':
                 self.show_help()
             elif user_response == 'prev':
@@ -107,6 +114,7 @@ class UserInputGetter(MenuObject):
                     break
             else:
                 self.print_not_implemented()
+        return True
 
     def present_prompts_and_store_values(self):
         self.conditionally_clear_terminal()
@@ -114,15 +122,11 @@ class UserInputGetter(MenuObject):
         self.values = []
         self.prompt_index = 0
         while self.prompt_index < len(self.prompts):
-            self.present_prompt_and_store_value()
-            if self.session.is_complete:
+            if not self.present_prompt_and_store_value():
                 break
 
     def run(self):
-        try:
-            self.present_prompts_and_store_values()
-        except KeyboardInterrupt:
-            return
+        self.present_prompts_and_store_values()
         if len(self.values) == 1:
             return self.values[0]
         else:
@@ -131,11 +135,11 @@ class UserInputGetter(MenuObject):
     def show_help(self):
         lines = []
         if self.prompt_index < len(self.helps):
-            lines.append(iotools.capitalize_string_start(self.helps[self.prompt_index]))
+            lines.append(self.helps[self.prompt_index])
         else:
-            lines.append('Help string not available.')
+            lines.append('help string not available.')
         lines.append('')
-        self.display_lines(lines)
+        self.display_cap_lines(lines)
 
     def store_value(self, user_response):
         assert isinstance(user_response, str)
