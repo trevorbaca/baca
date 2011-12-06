@@ -120,8 +120,26 @@ class MenuObject(SCFObject):
         else:
             return key
 
+    def is_integer(self, expr):
+        return isinstance(expr, int)
+
+    def is_negative_integer(self, expr):
+        return self.is_integer(expr) and expr < 0
+
+    def is_nonnegative_integer(self, expr):
+        return self.is_integer(expr) and expr <= 0
+
+    def is_nonpositive_integer(self, expr):
+        return self.is_integer(expr) and 0 <= expr
+
+    def is_positive_integer(self, expr):
+        return self.is_integer(expr) and 0 < expr
+
     def is_string(self, expr):
         return isinstance(expr, str)
+
+    def make_is_integer_in_closed_range(self, start, stop):
+        return lambda expr: self.is_integer(expr) and start <= expr <= stop
 
     def make_tab(self, n):
         return 4 * n * ' '

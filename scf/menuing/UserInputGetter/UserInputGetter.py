@@ -54,6 +54,13 @@ class UserInputGetter(MenuObject):
 
     ### PUBLIC METHODS ###
 
+    def append_integer_in_closed_range(self, spaced_attribute_name, start, stop):
+        assert isinstance(spaced_attribute_name, str)
+        self.prompts.append(spaced_attribute_name)
+        self.tests.append(self.make_is_integer_in_closed_range(start, stop))
+        message = 'must be integer between {} and {}, inclusive.'.format(start, stop)
+        self.helps.append(message)
+
     def append_string(self, spaced_attribute_name):
         assert isinstance(spaced_attribute_name, str)
         self.prompts.append(spaced_attribute_name)

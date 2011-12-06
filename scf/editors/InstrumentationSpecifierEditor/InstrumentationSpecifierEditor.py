@@ -101,33 +101,16 @@ class InstrumentationSpecifierEditor(InteractiveEditor):
         menu_section.sentence_length_items.append(('mv', 'move performer'))
         return menu
 
-    # TODO: 2011-12-05
-    #       impelement InteractiveEditor.get_element_at_number_interactively()
-    #       to wrap InteractiveEditor.get_positive_integer_interactively().
     def move_performer_interactively(self):
-        result = self.get_positive_integer_interactively('old number')
-        if result is None:
+        getter = self.make_new_getter(where=self.where())
+        getter.append_integer_in_closed_range('old number', 1, self.target.performer_count)
+        getter.append_integer_in_closed_range('new number', 1, self.target.performer_count)
+        result = getter.run()
+        if self.session.backtrack():
             return
-        else:
-            old_number = result
-        old_index = old_number - 1
-        if self.target.performer_count <= old_index:
-            message = 'there is no performer number {}.'.format(old_number)
-            self.display_cap_lines([message, ''])
-            self.proceed()
-            return
+        old_number, new_number = result
+        old_index, new_index = old_number - 1, new_number - 1
         performer = self.target.performers[old_index]
-        result = self.get_positive_integer_interactively('new number')
-        if result is None:
-            return
-        else:
-            new_number = result
-        new_index = new_number - 1
-        if self.target.performer_count <= new_index:
-            message = 'there is no performer number {}.'.format(new_number)
-            self.display_cap_lines([message, ''])
-            self.proceed()
-            return
         self.target.performers.remove(performer)
         self.target.performers.insert(new_index, performer)
 
