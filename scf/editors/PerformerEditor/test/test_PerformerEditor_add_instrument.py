@@ -2,35 +2,27 @@ import baca
 
 
 def test_PerformerEditor_add_instrument_01():
-
-    pass
-
-
-def test_PerformerEditor_add_instrument_02():
-    '''Quit while adding instrument.
+    '''Quit, back, studio & junk all work.
     '''
 
-    performer_editor = baca.scf.editors.PerformerEditor()
-    performer_editor.session.user_input = 'add q'
-    performer_editor.run()
-    transcript = performer_editor.session.transcript
+    studio = baca.scf.Studio()
+    studio.run('1 perf 1 add q')
+    assert len(studio.transcript) == 10
 
-    assert len(transcript) == 4
-    assert transcript[2][:4] == [
-      'Performer - select instrument',
-      '',
-      '     1: accordion',
-      '     2: alto flute']
+    studio = baca.scf.Studio()
+    studio.run('1 perf 1 add b q')
+    transcript = studio.session.transcript
+    assert len(transcript) == 12
+    assert transcript[-2] == transcript[-6]
 
+    studio = baca.scf.Studio()
+    studio.run('1 perf 1 add studio q')
+    transcript = studio.session.transcript
+    assert len(transcript) == 12
+    assert transcript[-2] == transcript[-12]
 
-def test_PerformerEditor_add_instrument_03():
-    '''Back while adding instrument.
-    '''
-
-    performer_editor = baca.scf.editors.PerformerEditor()
-    performer_editor.session.user_input = 'add b q'
-    performer_editor.run()
-    transcript = performer_editor.session.transcript
-
-    assert len(transcript) == 6
-    assert transcript[0] == transcript[4]
+    studio = baca.scf.Studio()
+    studio.run('1 perf 1 add foo q')
+    transcript = studio.session.transcript
+    assert len(transcript) == 12
+    assert transcript[-2] == transcript[-4]

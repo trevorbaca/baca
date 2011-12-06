@@ -33,7 +33,7 @@ class InteractiveEditor(SCFObject):
             self.session.user_input = user_input
         self.session.menu_title_contributions.append(self.menu_title_contribution)
         if self.conditionally_initialize_target():
-            self.session.menu_title_contributions.pop()
+            # can the following line be removed?
             self.session.menu_title_contributions.append(self.menu_title_contribution)
         if self.session.backtrack():
             self.session.menu_title_contributions.pop()
