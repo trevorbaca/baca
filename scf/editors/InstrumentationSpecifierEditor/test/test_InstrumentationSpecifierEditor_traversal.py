@@ -5,11 +5,11 @@ def test_InstrumentationSpecifierEditor_traversal_01():
     '''Instrumentation editor to performer editor.
     '''
 
-    studio_interface = baca.scf.Studio()
-    studio_interface.session.user_input = '9 perf 1 q'
-    studio_interface.run()
+    studio = baca.scf.Studio()
+    studio.session.user_input = '9 perf 1 q'
+    studio.run()
 
-    assert studio_interface.session.transcript[-2] == [
+    assert studio.session.transcript[-2] == [
       'Sekka (2007) - performers & instrumentation - flutist',
       '',
       '     1: flute',
@@ -25,11 +25,11 @@ def test_InstrumentationSpecifierEditor_traversal_02():
     '''Instrumentation editor to performer editor to instrument editor.
     '''
 
-    studio_interface = baca.scf.Studio()
-    studio_interface.session.user_input = '9 perf 1 1 q'
-    studio_interface.run()
+    studio = baca.scf.Studio()
+    studio.session.user_input = '9 perf 1 1 q'
+    studio.run()
 
-    assert studio_interface.session.transcript[-2] == [
+    assert studio.session.transcript[-2] == [
       'Sekka (2007) - performers & instrumentation - flutist - flute',
       '',
       "     in: instrument name ('flute')",

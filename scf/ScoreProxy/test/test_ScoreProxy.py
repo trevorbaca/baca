@@ -142,14 +142,14 @@ def test_ScoreProxy_06():
     '''User 'studio' input results in return to studio main menu.
     '''
     
-    studio_interface = baca.scf.Studio()
-    studio_interface.session.user_input = '1 studio q'
-    studio_interface.run()
+    studio = baca.scf.Studio()
+    studio.session.user_input = '1 studio q'
+    studio.run()
 
-    assert len(studio_interface.session.transcript) == 6
-    assert studio_interface.session.transcript[0][0] == 'Studio - active scores'
-    assert studio_interface.session.transcript[2][0] == "L'archipel du corps (2011)"
-    assert studio_interface.session.transcript[4][0] == 'Studio - active scores'
+    assert len(studio.session.transcript) == 6
+    assert studio.session.transcript[0][0] == 'Studio - active scores'
+    assert studio.session.transcript[2][0] == "L'archipel du corps (2011)"
+    assert studio.session.transcript[4][0] == 'Studio - active scores'
 
 
 def test_ScoreProxy_07():
@@ -169,14 +169,14 @@ def test_ScoreProxy_08():
     '''User 'b' input returns to studio main menu.
     '''
 
-    studio_interface = baca.scf.Studio()
-    studio_interface.session.user_input = '1 b q'
-    studio_interface.run()
+    studio = baca.scf.Studio()
+    studio.session.user_input = '1 b q'
+    studio.run()
 
-    assert len(studio_interface.session.transcript) == 6
-    assert studio_interface.session.transcript[0][0] == 'Studio - active scores'
-    assert studio_interface.session.transcript[2][0] == "L'archipel du corps (2011)"
-    assert studio_interface.session.transcript[4][0] == 'Studio - active scores'
+    assert len(studio.session.transcript) == 6
+    assert studio.session.transcript[0][0] == 'Studio - active scores'
+    assert studio.session.transcript[2][0] == "L'archipel du corps (2011)"
+    assert studio.session.transcript[4][0] == 'Studio - active scores'
 
 
 def test_ScoreProxy_09():
@@ -198,10 +198,10 @@ def test_ScoreProxy_10():
     '''Back is handled correctly.
     '''
 
-    studio_interface = baca.scf.Studio()
-    studio_interface.session.user_input = '1 b q'
-    studio_interface.run()
-    transcript = studio_interface.session.transcript
+    studio = baca.scf.Studio()
+    studio.session.user_input = '1 b q'
+    studio.run()
+    transcript = studio.session.transcript
     
     assert len(transcript) == 6
     assert transcript[0] == transcript[4]

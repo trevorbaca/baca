@@ -2,6 +2,6 @@
 import baca
 
 
-studio_interface = baca.scf.StudioInterface()
-studio_interface.session.dump_transcript = True
-studio_interface.run()
+studio = baca.scf.StudioInterface()
+studio.session.dump_transcript = True
+studio.run()

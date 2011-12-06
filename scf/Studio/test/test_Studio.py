@@ -6,25 +6,25 @@ def test_Studio_01():
     '''Attributes.
     '''
 
-    studio_interface = baca.scf.Studio()
+    studio = baca.scf.Studio()
 
-    assert studio_interface.class_name == 'Studio'
-    assert isinstance(studio_interface.global_proxy, baca.scf.GlobalProxy)
-    assert isinstance(studio_interface.score_wrangler, baca.scf.ScoreWrangler)
-    assert studio_interface.source_file_name == \
+    assert studio.class_name == 'Studio'
+    assert isinstance(studio.global_proxy, baca.scf.GlobalProxy)
+    assert isinstance(studio.score_wrangler, baca.scf.ScoreWrangler)
+    assert studio.source_file_name == \
         '/Users/trevorbaca/Documents/other/baca/scf/Studio/Studio.py'
-    assert studio_interface.spaced_class_name == 'studio'
+    assert studio.spaced_class_name == 'studio'
 
 
 def test_Studio_02():
     '''Main menu.
     '''
 
-    studio_interface = baca.scf.Studio()
-    studio_interface.session.user_input = 'q'
-    studio_interface.run()
+    studio = baca.scf.Studio()
+    studio.session.user_input = 'q'
+    studio.run()
     
-    assert studio_interface.session.transcript[-2] == [  
+    assert studio.session.transcript[-2] == [  
      'Studio - active scores',
      '',
      "     1: L'archipel du corps (2011)",
@@ -46,11 +46,11 @@ def test_Studio_03():
     '''Main menu to hidden menu.
     '''
 
-    studio_interface = baca.scf.Studio()
-    studio_interface.session.user_input = 'hidden q'
-    studio_interface.run()
+    studio = baca.scf.Studio()
+    studio.session.user_input = 'hidden q'
+    studio.run()
 
-    assert studio_interface.session.transcript[-2] == [
+    assert studio.session.transcript[-2] == [
      '     active: show active scores only',   
      '     all: show all scores',
      '     exec: exec statement',
@@ -70,11 +70,11 @@ def test_Studio_04():
     '''Main menu to score menu.
     '''
 
-    studio_interface = baca.scf.Studio()
-    studio_interface.session.user_input = '1 q'
-    studio_interface.run()
+    studio = baca.scf.Studio()
+    studio.session.user_input = '1 q'
+    studio.run()
 
-    assert studio_interface.session.transcript[-2] == [
+    assert studio.session.transcript[-2] == [
      "L'archipel du corps (2011)",
      '',
      '     Chunks',
@@ -96,11 +96,11 @@ def test_Studio_05():
     '''Main menu. Mothballed scores only.
     '''
 
-    studio_interface = baca.scf.Studio()
-    studio_interface.session.user_input = 'mb q'
-    studio_interface.run()
+    studio = baca.scf.Studio()
+    studio.session.user_input = 'mb q'
+    studio.run()
     
-    assert studio_interface.session.transcript[-2] == [  
+    assert studio.session.transcript[-2] == [  
      'Studio - mothballed scores',
      '',
      '     1: Arac\xc4\xb1l\xc4\xb1k',
@@ -122,11 +122,11 @@ def test_Studio_06():
     '''
     py.test.skip('while building up archipel instrumentation.')
 
-    studio_interface = baca.scf.Studio()
-    studio_interface.session.user_input = '1 tags q'
-    studio_interface.run()
+    studio = baca.scf.Studio()
+    studio.session.user_input = '1 tags q'
+    studio.run()
 
-    assert studio_interface.session.transcript[-2] == [
+    assert studio.session.transcript[-2] == [
      "L'archipel du corps - tags",
      '',
      "     'composer': TrevorBaca()",
@@ -142,11 +142,11 @@ def test_Studio_07():
     '''Main menu to svn menu.
     '''
 
-    studio_interface = baca.scf.Studio()
-    studio_interface.session.user_input = 'svn q'
-    studio_interface.run()
+    studio = baca.scf.Studio()
+    studio.session.user_input = 'svn q'
+    studio.run()
 
-    assert studio_interface.session.transcript[-2] == [
+    assert studio.session.transcript[-2] == [
      'Studio - active scores - repository commands',
      '',
      '     add: svn add',
@@ -169,48 +169,48 @@ def test_Studio_08():
     '''Main menu header is the same even after state change to secondary menu.
     '''
 
-    studio_interface = baca.scf.Studio()
-    studio_interface.session.user_input = 'q'
-    studio_interface.run()
-    assert studio_interface.session.transcript[-2][0] == 'Studio - active scores'
+    studio = baca.scf.Studio()
+    studio.session.user_input = 'q'
+    studio.run()
+    assert studio.session.transcript[-2][0] == 'Studio - active scores'
 
-    studio_interface = baca.scf.Studio()
-    studio_interface.session.user_input = 'svn q'
-    studio_interface.run()
-    assert studio_interface.session.transcript[-2][0] == 'Studio - active scores - repository commands'
+    studio = baca.scf.Studio()
+    studio.session.user_input = 'svn q'
+    studio.run()
+    assert studio.session.transcript[-2][0] == 'Studio - active scores - repository commands'
 
-    studio_interface = baca.scf.Studio()
-    studio_interface.session.user_input = 'svn b q'
-    studio_interface.run()
-    assert studio_interface.session.transcript[-2][0] == 'Studio - active scores'
+    studio = baca.scf.Studio()
+    studio.session.user_input = 'svn b q'
+    studio.run()
+    assert studio.session.transcript[-2][0] == 'Studio - active scores'
 
 
 def test_Studio_09():
     '''Junk works.
     '''
 
-    studio_interface = baca.scf.Studio()
-    studio_interface.session.user_input = 'foo q'
-    studio_interface.run()
-    assert len(studio_interface.session.transcript) == 4
+    studio = baca.scf.Studio()
+    studio.session.user_input = 'foo q'
+    studio.run()
+    assert len(studio.session.transcript) == 4
 
-    studio_interface = baca.scf.Studio()
-    studio_interface.session.user_input = 'foo bar q'
-    studio_interface.run()
-    assert len(studio_interface.session.transcript) == 6
+    studio = baca.scf.Studio()
+    studio.session.user_input = 'foo bar q'
+    studio.run()
+    assert len(studio.session.transcript) == 6
 
 
 def test_Studio_10():
     '''User 'studio' input results in (dummy) redraw of studio main menu.
     '''
     
-    studio_interface = baca.scf.Studio()
-    studio_interface.session.user_input = 'foo q'
-    studio_interface.run()
-    assert len(studio_interface.session.transcript) == 4
+    studio = baca.scf.Studio()
+    studio.session.user_input = 'foo q'
+    studio.run()
+    assert len(studio.session.transcript) == 4
 
-    menu_0 = studio_interface.session.transcript[0]
-    menu_2 = studio_interface.session.transcript[2]
+    menu_0 = studio.session.transcript[0]
+    menu_2 = studio.session.transcript[2]
     assert menu_0 == menu_2
 
 
@@ -218,13 +218,13 @@ def test_Studio_11():
     '''Back is handled correctly.
     '''
 
-    studio_interface = baca.scf.Studio()
-    studio_interface.session.user_input = 'foo q'
-    studio_interface.run()
-    assert len(studio_interface.session.transcript) == 4
+    studio = baca.scf.Studio()
+    studio.session.user_input = 'foo q'
+    studio.run()
+    assert len(studio.session.transcript) == 4
 
-    menu_0 = studio_interface.session.transcript[0]
-    menu_2 = studio_interface.session.transcript[2]
+    menu_0 = studio.session.transcript[0]
+    menu_2 = studio.session.transcript[2]
     assert menu_0 == menu_2
 
 
@@ -232,37 +232,37 @@ def test_Studio_12():
     '''Exec works.
     '''
 
-    studio_interface = baca.scf.Studio()
-    studio_interface.session.user_input = 'exec 2**30 q'
-    studio_interface.run()
+    studio = baca.scf.Studio()
+    studio.session.user_input = 'exec 2**30 q'
+    studio.run()
 
-    assert len(studio_interface.session.transcript) == 5
-    assert studio_interface.session.transcript[1] == ['SCF> exec', '']
-    assert studio_interface.session.transcript[2] == ['XCF> 2**30', '']
-    assert studio_interface.session.transcript[3] == ['1073741824', '']
-    assert studio_interface.session.transcript[4] == ['SCF> q', '']
+    assert len(studio.session.transcript) == 5
+    assert studio.session.transcript[1] == ['SCF> exec', '']
+    assert studio.session.transcript[2] == ['XCF> 2**30', '']
+    assert studio.session.transcript[3] == ['1073741824', '']
+    assert studio.session.transcript[4] == ['SCF> q', '']
 
 
 def test_Studio_13():
     '''Exec protects against senseless input.
     '''
 
-    studio_interface = baca.scf.Studio()
-    studio_interface.session.user_input = 'exec foo q'
-    studio_interface.run()
+    studio = baca.scf.Studio()
+    studio.session.user_input = 'exec foo q'
+    studio.run()
 
-    assert len(studio_interface.session.transcript) == 5
-    assert studio_interface.session.transcript[1] == ['SCF> exec', '']
-    assert studio_interface.session.transcript[2] == ['XCF> foo', '']
-    assert studio_interface.session.transcript[3] == ['Expression not executable.', '']
-    assert studio_interface.session.transcript[4] == ['SCF> q', '']
+    assert len(studio.session.transcript) == 5
+    assert studio.session.transcript[1] == ['SCF> exec', '']
+    assert studio.session.transcript[2] == ['XCF> foo', '']
+    assert studio.session.transcript[3] == ['Expression not executable.', '']
+    assert studio.session.transcript[4] == ['SCF> q', '']
 
 
 def test_Studio_14():
     '''Shared session.
     '''
 
-    studio_interface = baca.scf.Studio()
+    studio = baca.scf.Studio()
 
-    assert studio_interface.session is studio_interface.global_proxy.session
-    assert studio_interface.session is studio_interface.score_wrangler.session
+    assert studio.session is studio.global_proxy.session
+    assert studio.session is studio.score_wrangler.session
