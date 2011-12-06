@@ -29,14 +29,6 @@ class InstrumentationEditor(InteractiveEditor):
 
     ### PUBLIC METHODS ###
 
-#    def add_performer_interactively(self):
-#        from abjad.tools import scoretools
-#        performer = scoretools.Performer()
-#        self.target.performers.append(performer)
-#        performer_editor = self.PerformerEditor(session=self.session, target=performer)
-#        instrument = performer_editor.add_instrument_interactively()
-#        performer.name = instrument.instrument_name
-
     def add_performer_interactively(self):
         from abjad.tools import scoretools
         performer_name = self.select_performer_name_interactively()
