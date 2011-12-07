@@ -58,10 +58,15 @@ class PerformerEditor(InteractiveEditor):
     
     def edit_name_interactively(self):
         if self.target.name is None:
-            prompt = 'name'
+            spaced_variable_name = 'performer name'
         else:
-            prompt = 'new name'
-        name = self.handle_raw_input(prompt)
+            spaced_variable_name = 'new performer name'
+        getter = self.make_new_getter(where=self.where())
+        getter.should_clear_terminal = False
+        getter.append_string(spaced_variable_name)
+        name = getter.run()
+        if self.session.backtrack():
+            return
         self.target.name = name
 
     def handle_main_menu_response(self, key, value):
