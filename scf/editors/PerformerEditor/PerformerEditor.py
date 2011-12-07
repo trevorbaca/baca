@@ -47,16 +47,12 @@ class PerformerEditor(InteractiveEditor):
             return instrument
 
     def delete_instrument_interactively(self):
-        instrument_number = self.handle_raw_input('instrument number')
-        try:
-            instrument_number = int(instrument_number)
-        except:
-            pass
-        if self.target.instrument_count < instrument_number:
-            message = 'there is no instrument number {}.'.format(instrument_number)
-            self.display_cap_lines([message])
-            self.proceed()
-            return 
+        getter = self.make_new_getter(where=self.where())
+        getter.should_clear_terminal = False
+        getter.append_integer_in_closed_range('instrument number', 1, self.target.instrument_count)
+        instrument_number = getter.run()
+        if self.session.backtrack():
+            return
         instrument_index = instrument_number - 1
         del(self.target.instruments[instrument_index])
     
