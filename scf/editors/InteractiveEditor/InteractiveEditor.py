@@ -29,36 +29,27 @@ class InteractiveEditor(SCFObject):
             setattr(self.target, attr_name, attr_value)
 
     def run(self, user_input=None):
-        print '{} A {}'.format(type(self.target).__name__, self.session.menu_title_contributions)
         if user_input is not None:
             self.session.user_input = user_input
         self.session.menu_title_contributions.append(self.menu_title_contribution)
-        print 'B1 {}'.format(self.session.menu_title_contributions)
         self.conditionally_initialize_target()
         self.session.menu_title_contributions.pop()
-        print 'B2 {}'.format(self.session.menu_title_contributions)
         if self.session.backtrack():
-            #self.session.menu_title_contributions.pop()
             return True
-        #self.session.menu_title_contributions.pop()
         while True:
             self.session.menu_title_contributions.append(self.menu_title_contribution)
-            print '{} C {}'.format(type(self.target).__name__, self.session.menu_title_contributions)
             menu = self.make_main_menu()
             key, value = menu.run()
             if self.session.backtrack():
                 break
             elif key is None:
                 self.session.menu_title_contributions.pop()
-                print '{} D {}'.format(type(self.target).__name__, self.session.menu_title_contributions)
                 continue
             self.handle_main_menu_response(key, value)
             if self.session.backtrack():
                 break
             self.session.menu_title_contributions.pop()
-            print '{} D2 {}'.format(type(self.target).__name__, self.session.menu_title_contributions)
         self.session.menu_title_contributions.pop()
-        print '{} E {}'.format(type(self.target).__name__, self.session.menu_title_contributions)
 
     def get_positive_integer_interactively(self, spaced_variable_name):
         user_response = self.handle_raw_input(spaced_variable_name)
