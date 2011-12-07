@@ -107,7 +107,8 @@ class PerformerEditor(InteractiveEditor):
         instrument_names = [x.instrument_name for x in self.target.instruments]
         menu_section.items_to_number = instrument_names
         menu_section.sentence_length_items.append(('add', 'add instrument'))
-        menu_section.sentence_length_items.append(('del', 'delete instrument'))
+        if 0 < self.target.instrument_count:
+            menu_section.sentence_length_items.append(('del', 'delete instrument'))
         if 1 < self.target.instrument_count:
             menu_section.sentence_length_items.append(('mv', 'move instrument'))
         if self.target.name is None:
