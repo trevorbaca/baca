@@ -159,9 +159,6 @@ class ScoreProxy(PackageProxy):
             initializer.close()
 
     def handle_main_menu_response(self, key, value):
-        #if key == 'b':
-        #    return 'back'
-        #elif key == 'ch':
         if key == 'ch':
             return self.chunk_wrangler.create_chunk_interactively()
         elif key == 'mi':

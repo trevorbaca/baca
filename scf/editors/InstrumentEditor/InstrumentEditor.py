@@ -16,7 +16,7 @@ class InstrumentEditor(InteractiveEditor):
 
     @property
     def menu_title_contribution(self):
-        if self.target is not None:
+        if self.target is not None and self.target.instrument_name is not None:
             return self.target.instrument_name
         else:
             return 'instrument editor'
@@ -49,6 +49,8 @@ class InstrumentEditor(InteractiveEditor):
         '''
         if self.target is None:
             result = self.select_instrument_from_instrumenttools_interactively()
+            if self.session.backtrack():
+                return
             if result:
                 self.target = result
                 return True
