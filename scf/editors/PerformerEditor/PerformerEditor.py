@@ -12,7 +12,7 @@ class PerformerEditor(InteractiveEditor):
 
     @property
     def menu_title_contribution(self):
-        if self.target is not None:
+        if self.target is not None and self.target.name is not None:
             return self.target.name
         else:
             return 'performer'

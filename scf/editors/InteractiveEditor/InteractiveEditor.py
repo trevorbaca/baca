@@ -29,18 +29,26 @@ class InteractiveEditor(SCFObject):
             setattr(self.target, attr_name, attr_value)
 
     def run(self, user_input=None):
+        print 'A {}'.format(self.session.menu_title_contributions)
         if user_input is not None:
             self.session.user_input = user_input
         self.session.menu_title_contributions.append(self.menu_title_contribution)
+        print 'B {}'.format(self.session.menu_title_contributions)
         if self.conditionally_initialize_target():
             # can the following line be removed?
             self.session.menu_title_contributions.append(self.menu_title_contribution)
+            print 'B2 {}'.format(self.session.menu_title_contributions)
         if self.session.backtrack():
             self.session.menu_title_contributions.pop()
             return True
+        #self.session.menu_title_contributions.pop()
         while True:
+            #self.session.menu_title_contributions.append(self.menu_title_contribution)
+            #print 'C {}'.format(self.session.menu_title_contributions)
             menu = self.make_main_menu()
             key, value = menu.run()
+            #self.session.menu_title_contributions.pop()
+            #print 'D {}'.format(self.session.menu_title_contributions)
             if self.session.backtrack():
                 break
             elif key is None:
@@ -49,6 +57,7 @@ class InteractiveEditor(SCFObject):
             if self.session.backtrack():
                 break
         self.session.menu_title_contributions.pop()
+        print 'E {}'.format(self.session.menu_title_contributions)
 
     def get_positive_integer_interactively(self, spaced_variable_name):
         user_response = self.handle_raw_input(spaced_variable_name)
