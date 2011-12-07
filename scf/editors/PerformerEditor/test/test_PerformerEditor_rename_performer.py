@@ -1,4 +1,5 @@
 import baca
+from abjad import *
 
 
 def test_PerformerEditor_rename_performer_01():
@@ -36,4 +37,6 @@ def test_PerformerEditor_rename_performer_03():
     '''Create, name and rename performer.
     '''
 
-    pass
+    editor = baca.scf.editors.PerformerEditor()
+    editor.run(user_input='name foo ren bar q')
+    assert editor.target == scoretools.Performer(name='bar')
