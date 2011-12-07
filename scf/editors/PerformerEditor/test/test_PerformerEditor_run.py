@@ -27,13 +27,3 @@ def test_PerformerEditor_run_01():
     transcript = studio.transcript
     assert len(transcript) == 10
     assert transcript[-2] == transcript[-4] 
-
-
-def test_PerformerEditor_run_02():
-    '''Target creation.
-    '''
-
-    performer_editor = baca.scf.editors.PerformerEditor()
-    performer_editor.session.user_input = 'q'
-    performer_editor.run()
-    assert isinstance(performer_editor.target, type(scoretools.Performer()))

@@ -80,8 +80,8 @@ class PerformerEditor(InteractiveEditor):
             self.move_instrument_interactively()
         elif key in ('name', 'ren'):
             self.edit_name_interactively()
-        elif key == 'un':
-            return self.unname()
+        elif key == 'rpn':
+            return self.remove_name()
         else:
             self.edit_instrument_interactively(key)
 
@@ -114,7 +114,7 @@ class PerformerEditor(InteractiveEditor):
             menu_section.sentence_length_items.append(('name', 'name performer'))
         else:
             menu_section.sentence_length_items.append(('ren', 'rename performer'))
-            menu_section.sentence_length_items.append(('un', 'unname performer'))
+            menu_section.sentence_length_items.append(('rpn', 'remove performer name'))
         return menu
 
     def move_instrument_interactively(self):
@@ -131,5 +131,5 @@ class PerformerEditor(InteractiveEditor):
         self.target.instruments.remove(instrument)
         self.target.instruments.insert(new_instrument_index, instrument)
 
-    def unname(self):
+    def remove_name(self):
         self.target.name = None
