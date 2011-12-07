@@ -113,29 +113,16 @@ class PerformerEditor(InteractiveEditor):
         return menu
 
     def move_instrument_interactively(self):
-        old_instrument_number = self.handle_raw_input('old instrument number')
-        try:
-            old_instrument_number = int(old_instrument_number)
-        except:
+        getter = self.make_new_getter(where=self.where())
+        getter.should_clear_terminal = False
+        getter.append_integer_in_closed_range('old instrument number', 1, self.target.instrument_count)
+        getter.append_integer_in_closed_range('new instrument number', 1, self.target.instrument_count)
+        result = getter.run()
+        if self.session.backtrack():
             return
-        if self.target.instrument_count < old_instrument_number:
-            message = 'there is no instrument number {}.'.format(old_instrument_number)
-            self.display_cap_lines([message, ''])
-            self.proceed()
-            return 
-        old_instrument_index = old_instrument_number - 1
+        old_instrument_number, new_instrument_number = result
+        old_instrument_index, new_instrument_index = old_instrument_number - 1, new_instrument_number - 1
         instrument = self.target.instruments[old_instrument_index]
-        new_instrument_number = self.handle_raw_input('new instrument number')
-        try:
-            new_instrument_number = int(new_instrument_number)
-        except:
-            return
-        if self.target.instrument_count < new_instrument_number:
-            message = 'there is no instrument number {}.'.format(old_instrument_number)
-            self.display_cap_lines([message, ''])
-            self.proceed()
-            return 
-        new_instrument_index = new_instrument_number - 1
         self.target.instruments.remove(instrument)
         self.target.instruments.insert(new_instrument_index, instrument)
 
