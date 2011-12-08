@@ -35,7 +35,7 @@ class InteractiveEditor(SCFObject):
         self.conditionally_initialize_target()
         self.session.menu_title_contributions.pop()
         if self.session.backtrack():
-            return True
+            return
         while True:
             self.session.menu_title_contributions.append(self.menu_title_contribution)
             menu = self.make_main_menu()
