@@ -5,7 +5,8 @@ class InteractiveEditor(SCFObject):
     
     def __init__(self, session=None, target=None):
         SCFObject.__init__(self, session=session)
-        assert isinstance(target, (type(self.target_class()), type(None)))
+        if target is not None:
+            assert isinstance(target, type(self.target_class()))
         self.target = target
 
     ### PUBLIC METHODS ###
@@ -52,18 +53,3 @@ class InteractiveEditor(SCFObject):
                 break
             self.session.menu_title_contributions.pop()
         self.session.menu_title_contributions.pop()
-
-    def get_positive_integer_interactively(self, spaced_variable_name):
-        user_response = self.handle_raw_input(spaced_variable_name)
-        message = '{} must be positive integer.'.format(spaced_variable_name)
-        try:
-            integer = int(user_response)
-        except ValueError:
-            self.display_cap_lines([message, ''])
-            self.proceed()
-            return
-        if integer <= 0:
-            self.display_cap_lines([message, ''])
-            self.proceed()
-            return
-        return integer
