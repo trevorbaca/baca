@@ -40,9 +40,10 @@ class PerformerEditor(InteractiveEditor):
     def add_instrument_interactively(self):
         '''Instrument if successfully added. Otherwise none.
         '''
-        instrument_editor = self.InstrumentEditor(session=self.session)
-        if instrument_editor.conditionally_initialize_target():
-            instrument = instrument_editor.target
+        editor = self.InstrumentEditor(session=self.session)
+        editor.conditionally_initialize_target()
+        instrument = editor.target
+        if instrument is not None:
             self.target.instruments.append(instrument)
             return instrument
 

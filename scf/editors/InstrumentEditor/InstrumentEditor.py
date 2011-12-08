@@ -45,15 +45,14 @@ class InstrumentEditor(InteractiveEditor):
     ### PUBLIC METHODS ###
 
     def conditionally_initialize_target(self):
-        '''True if target initialized. Otherwise none.
-        '''
         if self.target is None:
             result = self.select_instrument_from_instrumenttools_interactively()
+            #print 'red {}'.format(self.session.backtrack_count)
             if self.session.backtrack():
+                #print 'yellow {}'.format(self.session.backtrack_count)
                 return
             if result:
                 self.target = result
-                return True
     
     def edit_instrument_name_interactively(self):
         getter = self.make_new_getter(where=self.where())
@@ -129,7 +128,9 @@ class InstrumentEditor(InteractiveEditor):
         menu_section.items_to_number = instrumenttools.list_instrument_names()
         while True:
             key, value = menu.run()
+            #print 'foo {}'.format(self.session.backtrack_count)
             if self.session.backtrack():
+                #print 'bar {}'.format(self.session.backtrack_count)
                 self.session.menu_title_contributions.pop()
                 return    
             elif key is None:
