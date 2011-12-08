@@ -35,19 +35,18 @@ def test_InstrumentEditor_instrument_name_02():
 
 
 def test_InstrumentEditor_instrument_name_03():
-    '''(String) attribute management and interaction with other attributes.
+    '''Instrument name changes instrument name markup.
+    Unless instrument name markup is set explicitly.
     '''
 
-    accordion = instrumenttools.Accordion()
-    accordion.instrument_name = 'accordion I'
-    accordion.short_instrument_name = 'acc. I'
+    editor = baca.scf.editors.InstrumentEditor()
+    editor.run(user_input='1 in foo q')
+    instrument = editor.target
+    assert instrument.instrument_name == 'foo'
+    assert instrument.instrument_name_markup == markuptools.Markup('Foo')
 
-    instrument_editor = baca.scf.editors.InstrumentEditor(target=accordion)
-    instrument_editor.session.user_input = 'in foo q'
-    instrument_editor.run()
-    assert accordion.instrument_name == 'foo'
-
-    instrument_editor = baca.scf.editors.InstrumentEditor(target=accordion)
-    instrument_editor.session.user_input = 'sin f._I q'
-    instrument_editor.run()
-    assert accordion.short_instrument_name == 'f. I'
+#    editor = baca.scf.editors.InstrumentEditor()
+#    editor.run(user_input='1 inm bar in foo q')
+#    instrument = editor.target
+#    assert instrument.instrument_name == 'foo'
+#    assert instrument.instrument_name_markup == markuptools.Markup('Bar')

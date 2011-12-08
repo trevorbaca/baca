@@ -66,8 +66,7 @@ class InstrumentEditor(InteractiveEditor):
             return
         exec('from abjad import *')
         exec('result = markuptools.Markup(result)')
-        #self.conditionally_set_target_attr('instrument_name_markup', result)
-        self.target.instrument_name_markup = result
+        self.conditionally_set_target_attr('instrument_name_markup', result)
         
     def edit_short_instrument_name_interactively(self):
         getter = self.make_new_getter(where=self.where())
@@ -87,13 +86,9 @@ class InstrumentEditor(InteractiveEditor):
             return
         exec('from abjad import *')
         exec('result = markuptools.Markup(result)')
-        #self.conditionally_set_target_attr('short_instrument_name_markup', result)
-        self.target.short_instrument_name_markup = result
+        self.conditionally_set_target_attr('short_instrument_name_markup', result)
         
     def handle_main_menu_response(self, key, value):
-        #if key == 'b':
-        #    return True
-        #elif key == 'in':
         if key == 'in':
             self.edit_instrument_name_interactively()
         elif key == 'inm':
