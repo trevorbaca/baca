@@ -57,14 +57,20 @@ class InstrumentEditor(InteractiveEditor):
     
     def edit_instrument_name_interactively(self):
         getter = self.make_new_getter(where=self.where())
+        getter.should_clear_terminal = False
         getter.append_string('instrument name')
         result = getter.run()
+        if self.session.backtrack():
+            return
         self.conditionally_set_target_attr('instrument_name', result)
 
     def edit_instrument_name_markup_interactively(self):
         getter = self.make_new_getter(where=self.where())
+        getter.should_clear_terminal = False
         getter.append_string('instrument name markup')
         result = getter.run()
+        if self.session.backtrack():
+            return
         exec('from abjad import *')
         exec('result = markuptools.Markup(result)')
         #self.conditionally_set_target_attr('instrument_name_markup', result)
@@ -72,25 +78,30 @@ class InstrumentEditor(InteractiveEditor):
         
     def edit_short_instrument_name_interactively(self):
         getter = self.make_new_getter(where=self.where())
+        getter.should_clear_terminal = False
         getter.append_string('short instrument name')
         result = getter.run()
+        if self.session.backtrack():
+            return
         self.conditionally_set_target_attr('short_instrument_name', result)
 
     def edit_short_instrument_name_markup_interactively(self):
         getter = self.make_new_getter(where=self.where())
+        getter.should_clear_terminal = False
         getter.append_string('short instrument name markup')
         result = getter.run()
+        if self.session.backtrack():
+            return
         exec('from abjad import *')
         exec('result = markuptools.Markup(result)')
         #self.conditionally_set_target_attr('short_instrument_name_markup', result)
         self.target.short_instrument_name_markup = result
         
     def handle_main_menu_response(self, key, value):
-        '''True when calling function should break.
-        '''
-        if key == 'b':
-            return True
-        elif key == 'in':
+        #if key == 'b':
+        #    return True
+        #elif key == 'in':
+        if key == 'in':
             self.edit_instrument_name_interactively()
         elif key == 'inm':
             self.edit_instrument_name_markup_interactively()
