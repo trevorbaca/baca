@@ -37,7 +37,6 @@ class InstrumentationEditor(InteractiveEditor):
         elif performer_name:
             performer = scoretools.Performer(performer_name)
             self.target.performers.append(performer)
-            return performer
 
     def delete_performer_interactively(self):
         getter = self.make_new_getter(where=self.where())
