@@ -1,7 +1,7 @@
 import baca
 
 
-def test_PerformerEditor_basic_state_screens_01():
+def test_PerformerEditor_base_states_01():
     '''Start-up, name, remove name.
     '''
 
