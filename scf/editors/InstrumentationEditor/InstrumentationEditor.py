@@ -37,6 +37,14 @@ class InstrumentationEditor(InteractiveEditor):
         elif performer_name:
             performer = scoretools.Performer(performer_name)
             self.target.performers.append(performer)
+            # TODO: build UI sequence as follows.
+            #       If only one default instrument tied to performer, 
+            #       prompt user to accept default instrument.
+            #       If more than one default instrument tied to performer,
+            #       prompt user to select instrument from list of default instruments.
+            #       In either case, if user rejects choice(s),
+            #       prompt user to select instrument list of all instruments.
+            #       If user rejects all choices, assign no instrument to performer.
 
     def delete_performer_interactively(self):
         getter = self.make_new_getter(where=self.where())
