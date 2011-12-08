@@ -14,9 +14,9 @@ def test_InstrumentEditor_base_states_01():
      ['Accordion',
       '',
       "     in: instrument name ('accordion')",
-      "     inm: instrument name markup (Markup('Accordion'))",
+      "     inm: instrument name markup (Markup('accordion'))",
       "     sin: short instrument name ('acc.')",
-      "     sinm: short instrument name markup (Markup('Acc.'))",
+      "     sinm: short instrument name markup (Markup('acc.'))",
       '']
 
 

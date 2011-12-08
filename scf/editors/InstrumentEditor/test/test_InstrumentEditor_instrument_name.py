@@ -43,10 +43,10 @@ def test_InstrumentEditor_instrument_name_03():
     editor.run(user_input='1 in foo q')
     instrument = editor.target
     assert instrument.instrument_name == 'foo'
-    assert instrument.instrument_name_markup == markuptools.Markup('Foo')
+    assert instrument.instrument_name_markup == markuptools.Markup('foo')
 
-#    editor = baca.scf.editors.InstrumentEditor()
-#    editor.run(user_input='1 inm bar in foo q')
-#    instrument = editor.target
-#    assert instrument.instrument_name == 'foo'
-#    assert instrument.instrument_name_markup == markuptools.Markup('Bar')
+    editor = baca.scf.editors.InstrumentEditor()
+    editor.run(user_input='1 inm bar in foo q')
+    instrument = editor.target
+    assert instrument.instrument_name == 'foo'
+    assert instrument.instrument_name_markup == markuptools.Markup('bar')
