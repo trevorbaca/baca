@@ -106,7 +106,7 @@ class MenuObject(SCFObject):
         '''Method consumes key (when possible).
         '''
         if key == 'b':
-            self.session.backtrack_count = self.session.backtrack_count + 1   
+            self.session.is_backtracking_locally = True
         elif key == 'exec':
             self.exec_statement()
         elif key == 'grep':

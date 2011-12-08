@@ -32,7 +32,9 @@ class InteractiveEditor(SCFObject):
         if user_input is not None:
             self.session.user_input = user_input
         self.session.menu_title_contributions.append(self.menu_title_contribution)
+        self.session.backtrack_preservation_is_active = True
         self.conditionally_initialize_target()
+        self.session.backtrack_preservation_is_active = False
         self.session.menu_title_contributions.pop()
         if self.session.backtrack():
             return

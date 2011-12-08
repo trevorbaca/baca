@@ -9,10 +9,9 @@ def test_InstrumentEditor_select_instrument_01():
     editor.run(user_input='q')
     assert len(editor.transcript) == 2
 
-    # TODO: make work
-    #editor = baca.scf.editors.InstrumentEditor()
-    #editor.run(user_input='b q')
-    #assert len(editor.transcript) == 2
+    editor = baca.scf.editors.InstrumentEditor()
+    editor.run(user_input='b q')
+    assert len(editor.transcript) == 2
 
     editor = baca.scf.editors.InstrumentEditor()
     editor.run(user_input='studio q')

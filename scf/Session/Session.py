@@ -9,10 +9,11 @@ class Session(object):
         self._complete_transcript = []
         self._session_once_had_user_input = False
         self._start_time = self.cur_time
-        self.backtrack_count = 0
+        self.backtrack_preservation_is_active = False
         self.dump_transcript = False
         self.hide_next_redraw = False
         self.initial_user_input = user_input
+        self.is_backtracking_locally = False
         self.is_backtracking_to_studio = False
         self.menu_title_contributions = []
         self.scores_to_show = 'active'
@@ -39,15 +40,14 @@ class Session(object):
     ### PUBLIC ATTRIBUTES ###
 
     @apply
-    def backtrack_count():
+    def backtrack_preservation_is_active():
         def fget(self):
-            return self._backtrack_count
-        def fset(self, backtrack_count):
-            assert isinstance(backtrack_count, int)
-            assert 0 <= backtrack_count
-            self._backtrack_count = backtrack_count
+            return self._backtrack_preservation_is_active
+        def fset(self, backtrack_preservation_is_active):
+            assert isinstance(backtrack_preservation_is_active, bool)
+            self._backtrack_preservation_is_active = backtrack_preservation_is_active
         return property(**locals())
-        
+
     @property
     def complete_transcript(self):
         return self._complete_transcript
@@ -81,6 +81,15 @@ class Session(object):
         def fset(self, hide_next_redraw):
             assert isinstance(hide_next_redraw, bool)
             self._hide_next_redraw = hide_next_redraw
+        return property(**locals())
+
+    @apply
+    def is_backtracking_locally():
+        def fget(self):
+            return self._is_backtracking_locally
+        def fset(self, is_backtracking_locally):
+            assert isinstance(is_backtracking_locally, bool)
+            self._is_backtracking_locally = is_backtracking_locally
         return property(**locals())
 
     @apply
@@ -164,12 +173,14 @@ class Session(object):
     def backtrack(self):
         if self.is_complete:
             return True
-        if self.is_backtracking_to_studio:
+        elif self.is_backtracking_to_studio:
             return True
-        if 0 < self.backtrack_count:
-            self.backtrack_count = self.backtrack_count - 1
+        elif self.is_backtracking_locally and self.backtrack_preservation_is_active:
             return True
-
+        elif self.is_backtracking_locally and not self.backtrack_preservation_is_active:
+            self.is_backtracking_locally = False
+            return True
+            
     def clean_up(self):
         if self.dump_transcript:
             self.write_complete_transcript_to_disk()
