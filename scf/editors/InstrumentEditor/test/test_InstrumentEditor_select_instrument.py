@@ -1,19 +1,25 @@
 import baca
 
 
-# TODO: flesh out
 def test_InstrumentEditor_select_instrument_01():
     '''Quit, back, studio & junk all work.
     '''
 
-    instrument_editor = baca.scf.editors.InstrumentEditor()
-    instrument_editor.session.user_input = 'q'
-    instrument_editor.run()
-    transcript = instrument_editor.session.transcript
+    editor = baca.scf.editors.InstrumentEditor()
+    editor.run(user_input='q')
+    assert len(editor.transcript) == 2
 
-    assert len(transcript) == 2
-    assert transcript[0][:4] == [
-      'Instrument editor - select instrument',
-      '',
-      '     1: accordion',
-      '     2: alto flute']
+    # TODO: make work
+    #editor = baca.scf.editors.InstrumentEditor()
+    #editor.run(user_input='b q')
+    #assert len(editor.transcript) == 2
+
+    editor = baca.scf.editors.InstrumentEditor()
+    editor.run(user_input='studio q')
+    assert len(editor.transcript) == 2
+
+    editor = baca.scf.editors.InstrumentEditor()
+    editor.run(user_input='foo q')
+    transcript = editor.transcript
+    assert len(transcript) == 4
+    assert transcript[-2] == transcript[-4]
