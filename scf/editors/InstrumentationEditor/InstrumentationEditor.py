@@ -32,18 +32,26 @@ class InstrumentationEditor(InteractiveEditor):
     # performer creation and config can probably be combined in performer editor
     def add_performer_interactively(self):
         from abjad.tools import scoretools
-        performer_name = self.select_performer_name_interactively()
-        if self.session.backtrack():
-            return
-        elif performer_name:
-            performer = scoretools.Performer(performer_name)
-            performer_editor = self.PerformerEditor(session=self.session, target=performer)
-            self.session.menu_title_contributions.append('add performer')
-            performer_editor.set_initial_configuration_interactively()
-            self.session.menu_title_contributions.pop()
+        while True:
             if self.session.backtrack():
                 return
-            self.target.performers.append(performer)
+            self.session.backtrack_preservation_is_active = True
+            performer_name = self.select_performer_name_interactively()
+            self.session.backtrack_preservation_is_active = False
+            if self.session.backtrack():
+                return
+            elif performer_name:
+                performer = scoretools.Performer(performer_name)
+                performer_editor = self.PerformerEditor(session=self.session, target=performer)
+                self.session.menu_title_contributions.append('add performer')
+                self.session.backtrack_preservation_is_active = True
+                performer_editor.set_initial_configuration_interactively()
+                self.session.backtrack_preservation_is_active = False
+                self.session.menu_title_contributions.pop()
+                if self.session.backtrack():
+                    continue
+                self.target.performers.append(performer)
+                break
 
     def delete_performer_interactively(self):
         getter = self.make_new_getter(where=self.where())
