@@ -20,7 +20,7 @@ class PerformerEditor(InteractiveEditor):
     @property
     def summary_lines(self):
         if not self.target.instruments:
-            result = '{}: (no instruments assigned)'.format(self.target.name)
+            result = '{} (instruments not assigned)'.format(self.target.name)
         elif len(self.target.instruments) == 1 and self.target.name == \
             self.target.instruments[0].instrument_name:
             result = '{}'.format(self.target.name)
@@ -100,6 +100,7 @@ class PerformerEditor(InteractiveEditor):
     def make_main_menu(self):
         menu = self.make_new_menu(where=self.where())
         menu_section = self.MenuSection()
+        menu_section.menu_section_title = 'instruments'
         menu.menu_sections.append(menu_section)
         instrument_names = [x.instrument_name for x in self.target.instruments]
         menu_section.items_to_number = instrument_names
@@ -132,7 +133,52 @@ class PerformerEditor(InteractiveEditor):
     def remove_name(self):
         self.target.name = None
 
-    def set_initial_configuration_interactively(self):
-        assert self.target is not None
+    def set_initial_configuration_menu(self):
+        from abjad.tools import instrumenttools
         likely_instruments = self.target.likely_instruments_based_on_performer_name
+        likely_instrument_names = [x().instrument_name for x in likely_instruments]
         most_likely_instrument = self.target.most_likely_instrument_based_on_performer_name
+        if most_likely_instrument is not None:
+            most_likely_instrument_name = most_likely_instrument().instrument_name
+            assert most_likely_instrument_name in likely_instrument_names
+        menu = self.make_new_menu(where=self.where()) 
+        menu_section = self.MenuSection()
+        menu.menu_sections.append(menu_section)
+        menu_section.menu_section_title = 'select instrument'
+        if likely_instruments:
+            menu_section.items_to_number = likely_instrument_names
+            menu_section.sentence_length_items.append(('other', 'other instruments'))
+        else:
+            menu_section.items_to_number = instrumenttools.list_instrument_names()
+        menu_section.sentence_length_items.append(('none', 'no instruments'))
+        return menu
+
+    def set_initial_configuration_interactively(self):
+        from abjad.tools import mathtools
+        self.conditionally_initialize_target()
+        self.session.menu_title_contributions.append(self.target.name)
+        menu = self.set_initial_configuration_menu()
+        while True:
+            key, value = menu.run()
+            if self.session.backtrack():
+                self.session.menu_title_contributions.pop()
+                return
+            elif key is None:
+                continue
+            elif mathtools.is_integer_equivalent_expr(key):
+                instrument_name = value
+                break
+            elif key == 'none':
+                instrument_name = None
+                break
+            elif key == 'other':
+                self.print_not_implemented()
+            else:
+                break
+        self.session.menu_title_contributions.pop()
+        if instrument_name is not None:
+            instrument_name = instrument_name.title()
+            instrument_name = instrument_name.replace(' ', '')
+            exec('from abjad import *')
+            exec('instrument = instrumenttools.{}()'.format(instrument_name))
+            self.target.instruments.append(instrument)

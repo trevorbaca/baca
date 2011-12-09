@@ -38,16 +38,8 @@ class InstrumentationEditor(InteractiveEditor):
         elif performer_name:
             performer = scoretools.Performer(performer_name)
             self.target.performers.append(performer)
-            # TODO: build UI sequence as follows.
-            #       If only one default instrument tied to performer, 
-            #       prompt user to accept default instrument.
-            #       If more than one default instrument tied to performer,
-            #       prompt user to select instrument from list of default instruments.
-            #       In either case, if user rejects choice(s),
-            #       prompt user to select instrument list of all instruments.
-            #       If user rejects all choices, assign no instrument to performer.
             performer_editor = self.PerformerEditor(session=self.session, target=performer)
-            #performer_editor.set_initial_configuration_interactively()
+            performer_editor.set_initial_configuration_interactively()
             # dunno if backtrack check needs to happen here or not, probably not
 
     def delete_performer_interactively(self):
@@ -93,6 +85,8 @@ class InstrumentationEditor(InteractiveEditor):
     def make_main_menu(self):
         menu = self.make_new_menu(where=self.where())
         menu_section = self.MenuSection()
+        if self.target.performer_count:
+            menu_section.menu_section_title = 'performers'
         menu.menu_sections.append(menu_section)
         menu_section.items_to_number = self.summary_lines
         menu_section.sentence_length_items.append(('add', 'add performer'))

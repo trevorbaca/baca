@@ -1,6 +1,7 @@
-import baca
+from abjad.tools.instrumenttools import *
 from abjad.tools.scoretools import InstrumentationSpecifier
 from abjad.tools.scoretools import Performer
+import baca
 
 
 def test_InstrumentationEditor_move_performer_01():
@@ -35,6 +36,8 @@ def test_InstrumentationEditor_move_performer_02():
     '''
 
     editor = baca.scf.editors.InstrumentationEditor()
-    editor.run(user_input='add 1 add 2 add 3 mv 1 2 mv 2 3 q')
+    editor.run(user_input='add 1 1 add 2 1 add 3 1 mv 1 2 mv 2 3 q')
     assert editor.target == InstrumentationSpecifier([
-        Performer('bassist'), Performer('bassoonist'), Performer('accordionist')])
+        Performer(name='bassist', instruments=[Contrabass()]), 
+        Performer(name='bassoonist', instruments=[Bassoon()]), 
+        Performer(name='accordionist', instruments=[Accordion()])])
