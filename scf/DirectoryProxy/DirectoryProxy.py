@@ -128,7 +128,7 @@ class DirectoryProxy(SCFObject):
         if commit_message is None:
             commit_message = self.handle_raw_input('commit message')
             line = 'commit message will be: "{}"\n'.format(commit_message)
-            self.display_lines([line])
+            self.display_cap_lines([line])
             if not self.confirm():
                 return
         lines = []
