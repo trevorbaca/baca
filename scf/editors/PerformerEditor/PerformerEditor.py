@@ -170,18 +170,20 @@ class PerformerEditor(InteractiveEditor):
                 continue
             elif mathtools.is_integer_equivalent_expr(key):
                 instrument_name = value
+                instrument_name = instrument_name.title()
+                instrument_name = instrument_name.replace(' ', '')
+                exec('from abjad import *')
+                exec('instrument = instrumenttools.{}()'.format(instrument_name))
+                self.target.instruments.append(instrument)
                 break
             elif key == 'none':
-                instrument_name = None
                 break
             elif key == 'other':
-                self.print_not_implemented()
+                editor = self.InstrumentEditor(session=self.session)
+                instrument = editor.select_instrument_from_instrumenttools_interactively()
+                if instrument is not None:
+                    self.target.instruments.append(instrument)
+                break
             else:
                 break
         self.session.menu_title_contributions.pop()
-        if instrument_name is not None:
-            instrument_name = instrument_name.title()
-            instrument_name = instrument_name.replace(' ', '')
-            exec('from abjad import *')
-            exec('instrument = instrumenttools.{}()'.format(instrument_name))
-            self.target.instruments.append(instrument)
