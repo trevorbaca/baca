@@ -106,7 +106,7 @@ class Menu(MenuObject, SCFObject):
         self.add_hidden_menu_items()
         if not self.session.hide_next_redraw:
             self.display_lines(self.menu_lines)
-        key = self.handle_raw_input('SCF')
+        key = self.handle_raw_input_with_default('SCF', default=self.prompt_default)
         key = self.check_if_key_exists(key)
         value = self.change_key_to_value(key)
         self.session.hide_next_redraw = False

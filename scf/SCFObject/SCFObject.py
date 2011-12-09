@@ -125,12 +125,12 @@ class SCFObject(object):
         self.session.append_lines_to_transcript(menu_chunk)
         return user_response
 
-    def handle_raw_input_with_default(self, prompt, default=''):
-        if default == 'None':
+    def handle_raw_input_with_default(self, prompt, default=None):
+        if default in (None, 'None'):
             default = ''
         readline.set_startup_hook(lambda: readline.insert_text(default))
         try:
-            return handle_raw_input(prompt)
+            return self.handle_raw_input(prompt)
         finally:
             readline.set_startup_hook()
 
