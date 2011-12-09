@@ -131,3 +131,8 @@ class PerformerEditor(InteractiveEditor):
 
     def remove_name(self):
         self.target.name = None
+
+    def set_initial_configuration_interactively(self):
+        assert self.target is not None
+        likely_instruments = self.target.likely_instruments_based_on_performer_name
+        most_likely_instrument = self.target.most_likely_instrument_based_on_performer_name

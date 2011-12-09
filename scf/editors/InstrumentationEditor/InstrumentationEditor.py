@@ -31,6 +31,7 @@ class InstrumentationEditor(InteractiveEditor):
 
     def add_performer_interactively(self):
         from abjad.tools import scoretools
+        # creation and initial config can probably be combined in the performer editor
         performer_name = self.select_performer_name_interactively()
         if self.session.backtrack():
             return
@@ -45,6 +46,9 @@ class InstrumentationEditor(InteractiveEditor):
             #       In either case, if user rejects choice(s),
             #       prompt user to select instrument list of all instruments.
             #       If user rejects all choices, assign no instrument to performer.
+            peformer_editor = self.PerformerEditor(session=self.session, target=performer)
+            performer_editor.set_initial_configuration_interactively()
+            # dunno if backtrack check needs to happen here or not, probably not
 
     def delete_performer_interactively(self):
         getter = self.make_new_getter(where=self.where())
