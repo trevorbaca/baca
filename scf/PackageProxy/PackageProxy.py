@@ -283,7 +283,7 @@ class PackageProxy(DirectoryProxy):
 
     def manage_tags(self):
         result = False
-        self.session.menu_title_contributions.append('tags')
+        self.session.breadcrumbs.append('tags')
         while True:
             menu = self.make_tags_menu()
             key, value = menu.run()
@@ -300,7 +300,7 @@ class PackageProxy(DirectoryProxy):
                 pass
             else:
                 raise ValueError
-        self.session.menu_title_contributions.pop()
+        self.session.breadcrumbs.pop()
         return result
 
     def pprint_tags(self, tags):

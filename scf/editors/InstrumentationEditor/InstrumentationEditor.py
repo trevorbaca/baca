@@ -11,7 +11,7 @@ class InstrumentationEditor(InteractiveEditor):
         return baca.scf.editors.PerformerEditor
 
     @property
-    def menu_title_contribution(self):
+    def breadcrumb(self):
         return 'performers & instrumentation'
 
     @property
@@ -43,11 +43,11 @@ class InstrumentationEditor(InteractiveEditor):
             elif performer_name:
                 performer = scoretools.Performer(performer_name)
                 performer_editor = self.PerformerEditor(session=self.session, target=performer)
-                self.session.menu_title_contributions.append('add performer')
+                self.session.breadcrumbs.append('add performer')
                 self.session.backtrack_preservation_is_active = True
                 performer_editor.set_initial_configuration_interactively()
                 self.session.backtrack_preservation_is_active = False
-                self.session.menu_title_contributions.pop()
+                self.session.breadcrumbs.pop()
                 if self.session.backtrack():
                     continue
                 self.target.performers.append(performer)
@@ -123,7 +123,7 @@ class InstrumentationEditor(InteractiveEditor):
 
     def select_performer_name_interactively(self):
         from abjad.tools import scoretools
-        self.session.menu_title_contributions.append('add performer')
+        self.session.breadcrumbs.append('add performer')
         menu = self.make_new_menu(where=self.where())
         menu_section = self.MenuSection()
         menu.menu_sections.append(menu_section)
@@ -131,10 +131,10 @@ class InstrumentationEditor(InteractiveEditor):
         while True:
             key, value = menu.run()
             if self.session.backtrack():
-                self.session.menu_title_contributions.pop()
+                self.session.breadcrumbs.pop()
                 return
             if key is None:
                 continue
             else:
-                self.session.menu_title_contributions.pop()
+                self.session.breadcrumbs.pop()
                 return value

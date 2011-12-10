@@ -15,7 +15,7 @@ class Session(object):
         self.initial_user_input = user_input
         self.is_backtracking_locally = False
         self.is_backtracking_to_studio = False
-        self.menu_title_contributions = []
+        self.breadcrumbs = []
         self.scores_to_show = 'active'
         self.user_input = user_input
         self.user_specified_quit = False
@@ -69,7 +69,7 @@ class Session(object):
     def formatted_attributes(self):
         result = []
         result.append('initial_user_input: {!r}'.format(self.initial_user_input))
-        result.append('menu_title_contributions: {!r}'.format(self.menu_title_contributions))
+        result.append('breadcrumbs: {!r}'.format(self.breadcrumbs))
         result.append('scores_to_show: {!r}'.format(self.scores_to_show))
         result.append('user_input: {!r}'.format(self.user_input))
         return result
@@ -111,8 +111,8 @@ class Session(object):
 
     @property
     def menu_header(self):
-        if self.menu_title_contributions:
-            return ' - '.join(self.menu_title_contributions)
+        if self.breadcrumbs:
+            return ' - '.join(self.breadcrumbs)
         else:
             return ''
 

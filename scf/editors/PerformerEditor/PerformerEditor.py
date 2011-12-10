@@ -11,7 +11,7 @@ class PerformerEditor(InteractiveEditor):
         return baca.scf.editors.InstrumentEditor
 
     @property
-    def menu_title_contribution(self):
+    def breadcrumb(self):
         if self.target is not None and self.target.name is not None:
             return self.target.name
         else:
@@ -159,12 +159,12 @@ class PerformerEditor(InteractiveEditor):
     def set_initial_configuration_interactively(self):
         from abjad.tools import mathtools
         self.conditionally_initialize_target()
-        self.session.menu_title_contributions.append(self.target.name)
+        self.session.breadcrumbs.append(self.target.name)
         menu = self.set_initial_configuration_menu()
         while True:
             key, value = menu.run()
             if self.session.backtrack():
-                self.session.menu_title_contributions.pop()
+                self.session.breadcrumbs.pop()
                 return
             elif key is None:
                 continue
@@ -186,4 +186,4 @@ class PerformerEditor(InteractiveEditor):
                 break
             else:
                 break
-        self.session.menu_title_contributions.pop()
+        self.session.breadcrumbs.pop()

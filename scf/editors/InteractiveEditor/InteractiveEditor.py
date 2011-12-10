@@ -32,24 +32,24 @@ class InteractiveEditor(SCFObject):
     def run(self, user_input=None):
         if user_input is not None:
             self.session.user_input = user_input
-        self.session.menu_title_contributions.append(self.menu_title_contribution)
+        self.session.breadcrumbs.append(self.breadcrumb)
         self.session.backtrack_preservation_is_active = True
         self.conditionally_initialize_target()
         self.session.backtrack_preservation_is_active = False
-        self.session.menu_title_contributions.pop()
+        self.session.breadcrumbs.pop()
         if self.session.backtrack():
             return
         while True:
-            self.session.menu_title_contributions.append(self.menu_title_contribution)
+            self.session.breadcrumbs.append(self.breadcrumb)
             menu = self.make_main_menu()
             key, value = menu.run()
             if self.session.backtrack():
                 break
             elif key is None:
-                self.session.menu_title_contributions.pop()
+                self.session.breadcrumbs.pop()
                 continue
             self.handle_main_menu_response(key, value)
             if self.session.backtrack():
                 break
-            self.session.menu_title_contributions.pop()
-        self.session.menu_title_contributions.pop()
+            self.session.breadcrumbs.pop()
+        self.session.breadcrumbs.pop()
