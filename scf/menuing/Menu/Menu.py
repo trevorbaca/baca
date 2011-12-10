@@ -93,11 +93,23 @@ class Menu(MenuObject, SCFObject):
             pair_dictionary = dict(zip(self.all_keys, self.all_values))
             return pair_dictionary.get(key)
 
+    def change_value_to_key(self, value):
+        if value:
+            pair_dictionary = dict(zip(self.all_values, self.all_keys))
+            return pair_dictionary.get(value)
+
     def check_if_key_exists(self, key):
         if key in self.all_keys:
             return key
         else:
-            return None
+            #return None
+            return self.check_for_matching_value_string(key)
+
+    def check_for_matching_value_string(self, key):
+        for value in self.all_values:
+            if value.startswith(key):
+                key = self.change_value_to_key(value)
+                return key 
 
     def conditionally_display_menu(self):
         if not self.session.hide_next_redraw:
