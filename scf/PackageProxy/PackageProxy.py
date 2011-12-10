@@ -271,10 +271,8 @@ class PackageProxy(DirectoryProxy):
         return formatted_tags
 
     def make_tags_menu(self):
-        menu = self.make_new_menu(where=self.where())
-        section = self.MenuSection()
+        menu, section = self.make_new_menu(where=self.where())
         section.lines_to_list = self.list_formatted_tags()
-        menu.sections.append(section)
         section = self.MenuSection()
         section.sentence_length_items.append(('add', 'add tag'))
         section.sentence_length_items.append(('del', 'delete tag'))
@@ -344,7 +342,7 @@ class PackageProxy(DirectoryProxy):
 
     def set_purview_interactively(self):
         from baca.scf.ScoreWrangler import ScoreWrangler
-        menu = self.make_new_menu(where=self.where())
+        menu, section = self.make_new_menu(where=self.where())
         score_wrangler = ScoreWrangler()
         menu.items_to_number = score_wrangler.iterate_score_titles_with_years()
         menu.named_pairs.append(('s', 'global to studio'))

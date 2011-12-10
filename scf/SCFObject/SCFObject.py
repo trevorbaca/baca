@@ -142,7 +142,10 @@ class SCFObject(object):
         return self.UserInputGetter(where=where, session=self.session)
 
     def make_new_menu(self, where=None):
-        return self.Menu(where=where, session=self.session)
+        menu = self.Menu(where=where, session=self.session)
+        section = self.MenuSection()
+        menu.sections.append(section)
+        return menu, section
 
     def pmc(self):
         pprint.pprint(self.transcript)

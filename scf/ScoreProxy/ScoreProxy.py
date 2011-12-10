@@ -200,13 +200,11 @@ class ScoreProxy(PackageProxy):
             self.svn_st()
 
     def make_main_menu(self):
-        menu = self.make_new_menu(where=self.where())
-        section = self.MenuSection()
+        menu, section = self.make_new_menu(where=self.where())
         section.section_title = 'chunks'
         section.items_to_number = self.chunk_wrangler.iterate_package_spaced_names()
         section.entry_prefix = 'h'
         section.sentence_length_items.append(('ch', '[create chunk]'))
-        menu.sections.append(section)
         section = self.MenuSection()
         section.section_title = 'materials'
         section.items_to_number = self.material_wrangler.iterate_package_underscored_names()
@@ -223,12 +221,10 @@ class ScoreProxy(PackageProxy):
         return menu
 
     def make_svn_menu(self):
-        menu = self.make_new_menu(where=self.where())
-        section = self.MenuSection()
+        menu, section = self.make_new_menu(where=self.where())
         section.sentence_length_items.append(('st', 'svn status'))
         section.sentence_length_items.append(('add', 'svn add'))
         section.sentence_length_items.append(('ci', 'svn commit'))
-        menu.sections.append(section)
         return menu
 
     def run(self):

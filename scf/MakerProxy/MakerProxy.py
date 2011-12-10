@@ -92,11 +92,9 @@ class MakerProxy(PackageProxy):
             material_proxy.run()
     
     def make_main_menu(self):
-        menu = self.make_new_menu(where=self.where())
-        section = self.MenuSection()
+        menu, section = self.make_new_menu(where=self.where())
         section.section_title = 'existing {}'.format(self.generic_output_name)
         section.items_to_number = list(self.iterate_materials_based_on_maker())
-        menu.sections.append(section)
         section = self.MenuSection()
         section.sentence_length_items.append(('del', 'delete {}'.format(self.spaced_class_name)))
         section.sentence_length_items.append(('new', 'create {}'.format(self.generic_output_name)))

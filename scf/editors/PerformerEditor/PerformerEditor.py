@@ -98,10 +98,8 @@ class PerformerEditor(InteractiveEditor):
         instrument_editor.run()
 
     def make_main_menu(self):
-        menu = self.make_new_menu(where=self.where())
-        section = self.MenuSection()
+        menu, section = self.make_new_menu(where=self.where())
         section.section_title = 'instruments'
-        menu.sections.append(section)
         instrument_names = [x.instrument_name for x in self.target.instruments]
         section.items_to_number = instrument_names
         section.sentence_length_items.append(('add', 'add instrument'))
@@ -135,9 +133,7 @@ class PerformerEditor(InteractiveEditor):
 
     def set_initial_configuration_menu(self):
         from abjad.tools import instrumenttools
-        menu = self.make_new_menu(where=self.where()) 
-        section = self.MenuSection()
-        menu.sections.append(section)
+        menu, section = self.make_new_menu(where=self.where()) 
         section.section_title = 'select instrument'
         likely_instruments = self.target.likely_instruments_based_on_performer_name
         likely_instrument_names = [x().instrument_name for x in likely_instruments]

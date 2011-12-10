@@ -94,11 +94,9 @@ class InstrumentationEditor(InteractiveEditor):
             self.edit_performer_interactively(key)
 
     def make_main_menu(self):
-        menu = self.make_new_menu(where=self.where())
-        section = self.MenuSection()
+        menu, section = self.make_new_menu(where=self.where())
         if self.target.performer_count:
             section.section_title = 'performers'
-        menu.sections.append(section)
         section.items_to_number = self.summary_lines
         section.sentence_length_items.append(('add', 'add performer'))
         if 0 < self.target.performer_count:
@@ -124,9 +122,7 @@ class InstrumentationEditor(InteractiveEditor):
     def select_performer_name_interactively(self):
         from abjad.tools import scoretools
         self.breadcrumbs.append('add performer')
-        menu = self.make_new_menu(where=self.where())
-        section = self.MenuSection()
-        menu.sections.append(section)
+        menu, section = self.make_new_menu(where=self.where())
         section.items_to_number = scoretools.list_performer_names()
         while True:
             key, value = menu.run()

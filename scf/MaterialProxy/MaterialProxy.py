@@ -396,8 +396,7 @@ class MaterialProxy(PackageProxy):
 
     def run(self):
         while True:
-            menu = self.make_new_menu(where=self.where())
-            section = self.MenuSection()
+            menu, section = self.make_new_menu(where=self.where())
             if self.is_interactive:
                 section.sentence_length_items.append(('k', 'reload user input'))
             section.named_pairs.append(('i', 'input'))
@@ -411,7 +410,6 @@ class MaterialProxy(PackageProxy):
             if self.has_visualization_pdf:
                 section.named_pairs.append(('p', 'pdf'))
             section.named_pairs.append(('n', 'initializer'))
-            menu.sections.append(section)
             section = self.MenuSection()
             section.named_pairs.append(('d', 'delete'))
             section.named_pairs.append(('r', 'rename'))

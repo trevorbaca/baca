@@ -63,8 +63,7 @@ class InteractiveMaterialProxy(MaterialProxy):
         self._original_material_underscored_name = self.material_underscored_name
         self._original_user_input_wrapper = copy.deepcopy(user_input_wrapper)
         while True:
-            menu = self.make_new_menu(where=self.where())
-            section = self.MenuSection()
+            menu, section = self.make_new_menu(where=self.where())
             section.items_to_number = self.user_input_wrapper.editable_lines
             if self.user_input_wrapper.is_complete:
                 section.sentence_length_items.append(('p', 'show pdf of given input'))
@@ -83,7 +82,6 @@ class InteractiveMaterialProxy(MaterialProxy):
                 section.sentence_length_items.append(('l', 'change location'))
             else:
                 section.sentence_length_items.append(('l', 'set location'))
-            menu.sections.append(section)
             key, value = menu.run()
             if key == 'b':
                 self.interactively_check_and_save_material(self.user_input_wrapper)
@@ -173,7 +171,7 @@ class InteractiveMaterialProxy(MaterialProxy):
         return True
 
     def show_demo_input_values(self):
-        menu = self.make_new_menu(where=self.where())
+        menu, section = self.make_new_menu(where=self.where())
         items = []
         for i, (key, value) in enumerate(self.user_input_template.iteritems()):
             item = '{}: {!r}'.format(key.replace('_', ' '), value)

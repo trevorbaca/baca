@@ -99,9 +99,7 @@ class InstrumentEditor(InteractiveEditor):
             self.edit_short_instrument_name_markup_interactively()
 
     def make_main_menu(self):
-        menu = self.make_new_menu(where=self.where())
-        section = self.MenuSection()
-        menu.sections.append(section)
+        menu, section = self.make_new_menu(where=self.where())
         section.sentence_length_items = self.target_attribute_menu_entries
         return menu
 
@@ -110,10 +108,8 @@ class InstrumentEditor(InteractiveEditor):
         '''
         from abjad.tools import instrumenttools
         self.breadcrumbs.append('select instrument')
-        menu = self.make_new_menu(where=self.where())
+        menu, section = self.make_new_menu(where=self.where())
         menu.should_clear_terminal = False
-        section = self.MenuSection()
-        menu.sections.append(section)
         section.items_to_number = instrumenttools.list_instrument_names()
         while True:
             key, value = menu.run()
