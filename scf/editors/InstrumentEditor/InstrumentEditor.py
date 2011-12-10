@@ -100,9 +100,9 @@ class InstrumentEditor(InteractiveEditor):
 
     def make_main_menu(self):
         menu = self.make_new_menu(where=self.where())
-        menu_section = self.MenuSection()
-        menu.menu_sections.append(menu_section)
-        menu_section.sentence_length_items = self.target_attribute_menu_entries
+        section = self.MenuSection()
+        menu.sections.append(section)
+        section.sentence_length_items = self.target_attribute_menu_entries
         return menu
 
     def select_instrument_from_instrumenttools_interactively(self):
@@ -112,9 +112,9 @@ class InstrumentEditor(InteractiveEditor):
         self.breadcrumbs.append('select instrument')
         menu = self.make_new_menu(where=self.where())
         menu.should_clear_terminal = False
-        menu_section = self.MenuSection()
-        menu.menu_sections.append(menu_section)
-        menu_section.items_to_number = instrumenttools.list_instrument_names()
+        section = self.MenuSection()
+        menu.sections.append(section)
+        section.items_to_number = instrumenttools.list_instrument_names()
         while True:
             key, value = menu.run()
             if self.session.backtrack():

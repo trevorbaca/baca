@@ -57,10 +57,10 @@ class ScoreWrangler(PackageWrangler):
 
     def select_score_proxy(self):
         menu = self.make_new_menu(where=self.where())
-        menu_section = self.MenuSection()
-        menu_section.items_to_number = self.iterate_score_titles_with_years()
-        menu_section.sentence_length_items.append(('s', 'studio'))
-        menu.menu_sections.append(menu_section)
+        section = self.MenuSection()
+        section.items_to_number = self.iterate_score_titles_with_years()
+        section.sentence_length_items.append(('s', 'studio'))
+        menu.sections.append(section)
         key, value = menu.run()
         if key == 's':
             return None

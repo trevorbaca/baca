@@ -64,26 +64,26 @@ class InteractiveMaterialProxy(MaterialProxy):
         self._original_user_input_wrapper = copy.deepcopy(user_input_wrapper)
         while True:
             menu = self.make_new_menu(where=self.where())
-            menu_section = self.MenuSection()
-            menu_section.items_to_number = self.user_input_wrapper.editable_lines
+            section = self.MenuSection()
+            section.items_to_number = self.user_input_wrapper.editable_lines
             if self.user_input_wrapper.is_complete:
-                menu_section.sentence_length_items.append(('p', 'show pdf of given input'))
-                menu_section.sentence_length_items.append(('m', 'write material to disk'))
+                section.sentence_length_items.append(('p', 'show pdf of given input'))
+                section.sentence_length_items.append(('m', 'write material to disk'))
             if self.has_material_underscored_name:
-                menu_section.sentence_length_items.append(('n', 'rename material'))
+                section.sentence_length_items.append(('n', 'rename material'))
             else:
-                menu_section.sentence_length_items.append(('n', 'name material'))
-            menu_section.sentence_length_items.append(('nc', 'clear name'))
-            menu_section.sentence_length_items.append(('d', 'show demo input values'))
-            menu_section.sentence_length_items.append(('o', 'overwrite with demo input values'))
-            menu_section.sentence_length_items.append(('i', 'read values from disk'))
-            menu_section.sentence_length_items.append(('c', 'clear values'))
-            #menu_section.sentence_length_items.append(('src', 'edit source'))
+                section.sentence_length_items.append(('n', 'name material'))
+            section.sentence_length_items.append(('nc', 'clear name'))
+            section.sentence_length_items.append(('d', 'show demo input values'))
+            section.sentence_length_items.append(('o', 'overwrite with demo input values'))
+            section.sentence_length_items.append(('i', 'read values from disk'))
+            section.sentence_length_items.append(('c', 'clear values'))
+            #section.sentence_length_items.append(('src', 'edit source'))
             if self.purview is not None:
-                menu_section.sentence_length_items.append(('l', 'change location'))
+                section.sentence_length_items.append(('l', 'change location'))
             else:
-                menu_section.sentence_length_items.append(('l', 'set location'))
-            menu.menu_sections.append(menu_section)
+                section.sentence_length_items.append(('l', 'set location'))
+            menu.sections.append(section)
             key, value = menu.run()
             if key == 'b':
                 self.interactively_check_and_save_material(self.user_input_wrapper)

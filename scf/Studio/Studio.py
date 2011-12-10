@@ -37,10 +37,10 @@ class Studio(SCFObject):
         self.breadcrumbs.append('select materials directory')
         while True:
             menu = self.make_new_menu(where=self.where())
-            menu_section = self.MenuSection()
-            menu_section.items_to_number = self.score_wrangler.iterate_score_titles_with_years()
-            menu_section.sentence_length_items.append(('baca', 'baca materials directory'))
-            menu.menu_sections.append(menu_section)
+            section = self.MenuSection()
+            section.items_to_number = self.score_wrangler.iterate_score_titles_with_years()
+            section.sentence_length_items.append(('baca', 'baca materials directory'))
+            menu.sections.append(section)
             key, value = menu.run()
             if key == 'baca':
                 return self.global_proxy.materials_package_importable_name
@@ -119,42 +119,42 @@ class Studio(SCFObject):
 
     def make_main_menu(self):
         menu = self.make_new_menu(where=self.where())
-        menu_section = self.MenuSection()
-        menu.menu_sections.append(menu_section)
+        section = self.MenuSection()
+        menu.sections.append(section)
         score_titles = list(self.score_wrangler.iterate_score_titles_with_years(
             scores_to_show=self.session.scores_to_show))
         score_package_short_names = list(self.score_wrangler.iterate_score_package_short_names(
             scores_to_show=self.session.scores_to_show))
-        menu_section.items_to_number = zip(score_titles, score_package_short_names)
-        menu_section.sentence_length_items.append(('k', 'work with interactive material proxies'))
-        menu_section.sentence_length_items.append(('m', 'work with Bača materials'))
-        menu_section.hidden_items.append(('svn', 'work with repository'))
-        menu_section.hidden_items.append(('active', 'show active scores only'))
-        menu_section.hidden_items.append(('all', 'show all scores'))
-        menu_section.hidden_items.append(('mb', 'show mothballed scores only'))
+        section.items_to_number = zip(score_titles, score_package_short_names)
+        section.sentence_length_items.append(('k', 'work with interactive material proxies'))
+        section.sentence_length_items.append(('m', 'work with Bača materials'))
+        section.hidden_items.append(('svn', 'work with repository'))
+        section.hidden_items.append(('active', 'show active scores only'))
+        section.hidden_items.append(('all', 'show all scores'))
+        section.hidden_items.append(('mb', 'show mothballed scores only'))
         menu.include_back = False
         menu.include_studio = False
         return menu
 
     def make_svn_menu(self):
         menu = self.make_new_menu(where=self.where())
-        menu_section = self.MenuSection()
-        menu_section.sentence_length_items.append(('add', 'svn add'))
-        menu_section.sentence_length_items.append(('ci', 'svn commit'))
-        menu_section.sentence_length_items.append(('st', 'svn status'))
-        menu_section.sentence_length_items.append(('up', 'svn update'))
-        menu.menu_sections.append(menu_section)
-        menu_section = self.MenuSection()
-        menu_section.sentence_length_items.append(('add scores', 'svn add (scores)'))
-        menu_section.sentence_length_items.append(('ci scores', 'svn commit (scores)'))
-        menu_section.sentence_length_items.append(('st scores', 'svn status (scores)'))
-        menu_section.sentence_length_items.append(('up scores', 'svn update (scores)'))
-        menu.menu_sections.append(menu_section)
-        menu_section = self.MenuSection()
-        menu_section.sentence_length_items.append(('pytest', 'run regression tests'))
-        menu_section.sentence_length_items.append(('pytest scores', 'run regression tests (scores)'))
-        menu_section.sentence_length_items.append(('pytest all', 'run regression tests (all)'))
-        menu.menu_sections.append(menu_section)
+        section = self.MenuSection()
+        section.sentence_length_items.append(('add', 'svn add'))
+        section.sentence_length_items.append(('ci', 'svn commit'))
+        section.sentence_length_items.append(('st', 'svn status'))
+        section.sentence_length_items.append(('up', 'svn update'))
+        menu.sections.append(section)
+        section = self.MenuSection()
+        section.sentence_length_items.append(('add scores', 'svn add (scores)'))
+        section.sentence_length_items.append(('ci scores', 'svn commit (scores)'))
+        section.sentence_length_items.append(('st scores', 'svn status (scores)'))
+        section.sentence_length_items.append(('up scores', 'svn update (scores)'))
+        menu.sections.append(section)
+        section = self.MenuSection()
+        section.sentence_length_items.append(('pytest', 'run regression tests'))
+        section.sentence_length_items.append(('pytest scores', 'run regression tests (scores)'))
+        section.sentence_length_items.append(('pytest all', 'run regression tests (all)'))
+        menu.sections.append(section)
         return menu
 
     def run(self, user_input=None):

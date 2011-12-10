@@ -6,7 +6,7 @@ class MenuSection(MenuObject):
 
     def __init__(self, default_index=None, entry_prefix=None, hidden_items=None, 
         hide_menu=False, indent_level=1, items_to_number=None, 
-        lines_to_list=None, menu_section_title=None, named_pairs=None, 
+        lines_to_list=None, section_title=None, named_pairs=None, 
         sentence_length_items=None):
         self.default_index = default_index
         self.entry_prefix = entry_prefix
@@ -15,7 +15,7 @@ class MenuSection(MenuObject):
         self.indent_level = indent_level
         self.items_to_number = items_to_number
         self.lines_to_list = lines_to_list
-        self.menu_section_title = menu_section_title
+        self.section_title = section_title
         self.named_pairs = named_pairs
         self.sentence_length_items = sentence_length_items
 
@@ -93,12 +93,12 @@ class MenuSection(MenuObject):
         return property(**locals())
 
     @apply
-    def menu_section_title():
+    def section_title():
         def fget(self):
-            return self._menu_section_title
-        def fset(self, menu_section_title):
-            assert isinstance(menu_section_title, (str, type(None)))
-            self._menu_section_title = menu_section_title
+            return self._section_title
+        def fset(self, section_title):
+            assert isinstance(section_title, (str, type(None)))
+            self._section_title = section_title
         return property(**locals())
 
     @apply
@@ -116,7 +116,7 @@ class MenuSection(MenuObject):
 
     def make_menu_lines(self, all_keys, all_values):
         menu_lines = []
-        menu_lines.extend(self.make_menu_section_title_lines())
+        menu_lines.extend(self.make_section_title_lines())
         for i, value in enumerate(self.items_to_number):
             if isinstance(value, tuple):
                 assert len(value) == 2
@@ -169,12 +169,12 @@ class MenuSection(MenuObject):
             all_values.append(value)
         return menu_lines
 
-    def make_menu_section_title_lines(self):
+    def make_section_title_lines(self):
         menu_lines = []
         if not self.hide_menu:
-            if self.menu_section_title:
+            if self.section_title:
                 menu_line = '{} {}'.format(
-                    self.make_tab(self.indent_level), iotools.capitalize_string_start(self.menu_section_title))
+                    self.make_tab(self.indent_level), iotools.capitalize_string_start(self.section_title))
                 menu_lines.append(menu_line)
                 menu_lines.append('')
         return menu_lines

@@ -7,7 +7,7 @@ import os
 class Menu(MenuObject, SCFObject):
 
     def __init__(self, has_default=False, hidden_items=None, hide_menu=False, include_back=True, 
-        include_studio=True, indent_level=1, item_width=11, menu_sections=None, 
+        include_studio=True, indent_level=1, item_width=11, sections=None, 
         session=None, should_clear_terminal=True, where=None):
         MenuObject.__init__(self, hidden_items=hidden_items, indent_level=indent_level, 
             session=session, should_clear_terminal=should_clear_terminal)
@@ -16,7 +16,7 @@ class Menu(MenuObject, SCFObject):
         self.include_back = include_back
         self.include_studio = include_studio
         self.item_width = item_width
-        self.menu_sections = menu_sections
+        self.sections = sections
         self.where = where
 
     ### PUBLIC ATTRIBUTES ###
@@ -78,14 +78,14 @@ class Menu(MenuObject, SCFObject):
         return property(**locals())
 
     @apply
-    def menu_sections():
+    def sections():
         def fget(self):
-            return self._menu_sections
-        def fset(self, menu_sections):
-            if menu_sections is None:
-                self._menu_sections = []
+            return self._sections
+        def fset(self, sections):
+            if sections is None:
+                self._sections = []
             else:
-                self._menu_sections = menu_sections[:]
+                self._sections = sections[:]
         return property(**locals())
 
     ### PUBLIC METHODS ###
@@ -144,17 +144,17 @@ class Menu(MenuObject, SCFObject):
     def make_menu_lines_keys_and_values(self):
         self.menu_lines, self.all_keys, self.all_values = [], [], []
         self.menu_lines.extend(self.make_menu_title_lines())
-        self.menu_lines.extend(self.make_menu_section_lines(self.all_keys, self.all_values))
+        self.menu_lines.extend(self.make_section_lines(self.all_keys, self.all_values))
 
     def make_menu_lines(self):
         menu_lines, keys, values = self.make_menu_lines_keys_and_values()
         return menu_lines
 
-    def make_menu_section_lines(self, all_keys, all_values):
+    def make_section_lines(self, all_keys, all_values):
         menu_lines = []
-        for menu_section in self.menu_sections:
-            menu_section.hide_menu = self.hide_menu
-            menu_lines.extend(menu_section.make_menu_lines(all_keys, all_values))
+        for section in self.sections:
+            section.hide_menu = self.hide_menu
+            menu_lines.extend(section.make_menu_lines(all_keys, all_values))
         return menu_lines
         
     def make_menu_title_lines(self):

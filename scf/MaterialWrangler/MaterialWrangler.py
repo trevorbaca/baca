@@ -84,11 +84,11 @@ class MaterialWrangler(PackageWrangler, PackageProxy):
 
     def make_main_menu(self):
         menu = self.make_new_menu(where=self.where())
-        menu_section = self.MenuSection()
-        menu_section.items_to_number = list(self.iterate_material_summaries())
-        menu_section.sentence_length_items.append(('i', 'create interactive material'))
-        menu_section.sentence_length_items.append(('s', 'create static material'))
-        menu.menu_sections.append(menu_section)
+        section = self.MenuSection()
+        section.items_to_number = list(self.iterate_material_summaries())
+        section.sentence_length_items.append(('i', 'create interactive material'))
+        section.sentence_length_items.append(('s', 'create static material'))
+        menu.sections.append(section)
         return menu
 
     def run(self):

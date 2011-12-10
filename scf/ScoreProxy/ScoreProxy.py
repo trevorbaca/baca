@@ -201,34 +201,34 @@ class ScoreProxy(PackageProxy):
 
     def make_main_menu(self):
         menu = self.make_new_menu(where=self.where())
-        menu_section = self.MenuSection()
-        menu_section.menu_section_title = 'chunks'
-        menu_section.items_to_number = self.chunk_wrangler.iterate_package_spaced_names()
-        menu_section.entry_prefix = 'h'
-        menu_section.sentence_length_items.append(('ch', '[create chunk]'))
-        menu.menu_sections.append(menu_section)
-        menu_section = self.MenuSection()
-        menu_section.menu_section_title = 'materials'
-        menu_section.items_to_number = self.material_wrangler.iterate_package_underscored_names()
-        menu_section.entry_prefix = 'm'
-        menu_section.sentence_length_items.append(('mi', 'create interactive material'))
-        menu_section.sentence_length_items.append(('ms', 'create static material'))
-        menu.menu_sections.append(menu_section)
-        menu_section = self.MenuSection()
-        menu_section.menu_section_title = 'setup'
-        menu_section.sentence_length_items.append(('perf', 'performers & instrumentation'))
-        menu.menu_sections.append(menu_section)
+        section = self.MenuSection()
+        section.section_title = 'chunks'
+        section.items_to_number = self.chunk_wrangler.iterate_package_spaced_names()
+        section.entry_prefix = 'h'
+        section.sentence_length_items.append(('ch', '[create chunk]'))
+        menu.sections.append(section)
+        section = self.MenuSection()
+        section.section_title = 'materials'
+        section.items_to_number = self.material_wrangler.iterate_package_underscored_names()
+        section.entry_prefix = 'm'
+        section.sentence_length_items.append(('mi', 'create interactive material'))
+        section.sentence_length_items.append(('ms', 'create static material'))
+        menu.sections.append(section)
+        section = self.MenuSection()
+        section.section_title = 'setup'
+        section.sentence_length_items.append(('perf', 'performers & instrumentation'))
+        menu.sections.append(section)
         menu.hidden_items.append(('svn', 'work with repository'))
         menu.hidden_items.append(('tags', 'work with tags'))
         return menu
 
     def make_svn_menu(self):
         menu = self.make_new_menu(where=self.where())
-        menu_section = self.MenuSection()
-        menu_section.sentence_length_items.append(('st', 'svn status'))
-        menu_section.sentence_length_items.append(('add', 'svn add'))
-        menu_section.sentence_length_items.append(('ci', 'svn commit'))
-        menu.menu_sections.append(menu_section)
+        section = self.MenuSection()
+        section.sentence_length_items.append(('st', 'svn status'))
+        section.sentence_length_items.append(('add', 'svn add'))
+        section.sentence_length_items.append(('ci', 'svn commit'))
+        menu.sections.append(section)
         return menu
 
     def run(self):

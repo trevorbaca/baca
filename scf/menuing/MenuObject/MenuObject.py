@@ -171,7 +171,7 @@ class MenuObject(SCFObject):
         hidden_items = []
         hidden_items.extend(self.default_hidden_items)
         hidden_items.extend(self.hidden_items)
-        for section in getattr(self, 'menu_sections', []):
+        for section in getattr(self, 'sections', []):
             hidden_items.extend(section.hidden_items)
         hidden_items.sort()
         menu_lines = []

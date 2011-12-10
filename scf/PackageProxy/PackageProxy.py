@@ -274,11 +274,11 @@ class PackageProxy(DirectoryProxy):
         menu = self.make_new_menu(where=self.where())
         section = self.MenuSection()
         section.lines_to_list = self.list_formatted_tags()
-        menu.menu_sections.append(section)
+        menu.sections.append(section)
         section = self.MenuSection()
         section.sentence_length_items.append(('add', 'add tag'))
         section.sentence_length_items.append(('del', 'delete tag'))
-        menu.menu_sections.append(section)
+        menu.sections.append(section)
         return menu
 
     def manage_tags(self):

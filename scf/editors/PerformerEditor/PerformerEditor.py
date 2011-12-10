@@ -99,21 +99,21 @@ class PerformerEditor(InteractiveEditor):
 
     def make_main_menu(self):
         menu = self.make_new_menu(where=self.where())
-        menu_section = self.MenuSection()
-        menu_section.menu_section_title = 'instruments'
-        menu.menu_sections.append(menu_section)
+        section = self.MenuSection()
+        section.section_title = 'instruments'
+        menu.sections.append(section)
         instrument_names = [x.instrument_name for x in self.target.instruments]
-        menu_section.items_to_number = instrument_names
-        menu_section.sentence_length_items.append(('add', 'add instrument'))
+        section.items_to_number = instrument_names
+        section.sentence_length_items.append(('add', 'add instrument'))
         if 0 < self.target.instrument_count:
-            menu_section.sentence_length_items.append(('del', 'delete instrument'))
+            section.sentence_length_items.append(('del', 'delete instrument'))
         if 1 < self.target.instrument_count:
-            menu_section.sentence_length_items.append(('mv', 'move instrument'))
+            section.sentence_length_items.append(('mv', 'move instrument'))
         if self.target.name is None:
-            menu_section.sentence_length_items.append(('name', 'name performer'))
+            section.sentence_length_items.append(('name', 'name performer'))
         else:
-            menu_section.sentence_length_items.append(('ren', 'rename performer'))
-            menu_section.sentence_length_items.append(('rpn', 'remove performer name'))
+            section.sentence_length_items.append(('ren', 'rename performer'))
+            section.sentence_length_items.append(('rpn', 'remove performer name'))
         return menu
 
     def move_instrument_interactively(self):
@@ -136,9 +136,9 @@ class PerformerEditor(InteractiveEditor):
     def set_initial_configuration_menu(self):
         from abjad.tools import instrumenttools
         menu = self.make_new_menu(where=self.where()) 
-        menu_section = self.MenuSection()
-        menu.menu_sections.append(menu_section)
-        menu_section.menu_section_title = 'select instrument'
+        section = self.MenuSection()
+        menu.sections.append(section)
+        section.section_title = 'select instrument'
         likely_instruments = self.target.likely_instruments_based_on_performer_name
         likely_instrument_names = [x().instrument_name for x in likely_instruments]
         most_likely_instrument = self.target.most_likely_instrument_based_on_performer_name
@@ -149,15 +149,15 @@ class PerformerEditor(InteractiveEditor):
             likely_instrument_names[most_likely_index] = '{} (default)'.format(most_likely_instrument_name)
             most_likely_number = most_likely_index + 1
             menu.prompt_default = str(most_likely_number)
-            menu_section.default_index = most_likely_index
+            section.default_index = most_likely_index
             #menu.prompt_default = 'def'
             #menu.has_default = True
         if likely_instruments:
-            menu_section.items_to_number = likely_instrument_names
-            menu_section.sentence_length_items.append(('other', 'other instruments'))
+            section.items_to_number = likely_instrument_names
+            section.sentence_length_items.append(('other', 'other instruments'))
         else:
-            menu_section.items_to_number = instrumenttools.list_instrument_names()
-        menu_section.sentence_length_items.append(('none', 'no instruments'))
+            section.items_to_number = instrumenttools.list_instrument_names()
+        section.sentence_length_items.append(('none', 'no instruments'))
         return menu
 
     def set_initial_configuration_interactively(self):

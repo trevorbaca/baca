@@ -93,15 +93,15 @@ class MakerProxy(PackageProxy):
     
     def make_main_menu(self):
         menu = self.make_new_menu(where=self.where())
-        menu_section = self.MenuSection()
-        menu_section.menu_section_title = 'existing {}'.format(self.generic_output_name)
-        menu_section.items_to_number = list(self.iterate_materials_based_on_maker())
-        menu.menu_sections.append(menu_section)
-        menu_section = self.MenuSection()
-        menu_section.sentence_length_items.append(('del', 'delete {}'.format(self.spaced_class_name)))
-        menu_section.sentence_length_items.append(('new', 'create {}'.format(self.generic_output_name)))
-        menu_section.sentence_length_items.append(('ren', 'rename {}'.format(self.spaced_class_name)))
-        menu_section.sentence_length_items.append(('src', 'edit {} source'.format(self.spaced_class_name)))
+        section = self.MenuSection()
+        section.section_title = 'existing {}'.format(self.generic_output_name)
+        section.items_to_number = list(self.iterate_materials_based_on_maker())
+        menu.sections.append(section)
+        section = self.MenuSection()
+        section.sentence_length_items.append(('del', 'delete {}'.format(self.spaced_class_name)))
+        section.sentence_length_items.append(('new', 'create {}'.format(self.generic_output_name)))
+        section.sentence_length_items.append(('ren', 'rename {}'.format(self.spaced_class_name)))
+        section.sentence_length_items.append(('src', 'edit {} source'.format(self.spaced_class_name)))
         return menu
 
     def run(self):

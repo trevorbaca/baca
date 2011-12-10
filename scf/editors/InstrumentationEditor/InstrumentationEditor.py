@@ -95,16 +95,16 @@ class InstrumentationEditor(InteractiveEditor):
 
     def make_main_menu(self):
         menu = self.make_new_menu(where=self.where())
-        menu_section = self.MenuSection()
+        section = self.MenuSection()
         if self.target.performer_count:
-            menu_section.menu_section_title = 'performers'
-        menu.menu_sections.append(menu_section)
-        menu_section.items_to_number = self.summary_lines
-        menu_section.sentence_length_items.append(('add', 'add performer'))
+            section.section_title = 'performers'
+        menu.sections.append(section)
+        section.items_to_number = self.summary_lines
+        section.sentence_length_items.append(('add', 'add performer'))
         if 0 < self.target.performer_count:
-            menu_section.sentence_length_items.append(('del', 'delete performer'))
+            section.sentence_length_items.append(('del', 'delete performer'))
         if 1 < self.target.performer_count:
-            menu_section.sentence_length_items.append(('mv', 'move performer'))
+            section.sentence_length_items.append(('mv', 'move performer'))
         return menu
 
     def move_performer_interactively(self):
@@ -125,9 +125,9 @@ class InstrumentationEditor(InteractiveEditor):
         from abjad.tools import scoretools
         self.breadcrumbs.append('add performer')
         menu = self.make_new_menu(where=self.where())
-        menu_section = self.MenuSection()
-        menu.menu_sections.append(menu_section)
-        menu_section.items_to_number = scoretools.list_performer_names()
+        section = self.MenuSection()
+        menu.sections.append(section)
+        section.items_to_number = scoretools.list_performer_names()
         while True:
             key, value = menu.run()
             if self.session.backtrack():
