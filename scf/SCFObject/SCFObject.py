@@ -38,6 +38,10 @@ class SCFObject(object):
         return baca.scf.menuing.UserInputGetter
 
     @property
+    def breadcrumbs(self):
+        return self.session.breadcrumbs
+
+    @property
     def class_name(self):
         return type(self).__name__
 

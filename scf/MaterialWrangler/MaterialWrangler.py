@@ -93,7 +93,7 @@ class MaterialWrangler(PackageWrangler, PackageProxy):
 
     def run(self):
         result = False
-        self.session.breadcrumbs.append('materials')
+        self.breadcrumbs.append('materials')
         while True:
             menu = self.make_main_menu()
             key, value = menu.run()
@@ -110,5 +110,5 @@ class MaterialWrangler(PackageWrangler, PackageProxy):
                 pass
             else:
                 raise ValueError
-        self.session.breadcrumbs.pop()
+        self.breadcrumbs.pop()
         return result

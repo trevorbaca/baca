@@ -28,13 +28,13 @@ class Studio(SCFObject):
 
     def edit_score_interactively(self, score_package_importable_name):
         score_proxy = self.score_wrangler.ScoreProxy(score_package_importable_name, session=self.session)
-        breadcrumbs = self.session.breadcrumbs[:]
+        breadcrumbs = self.breadcrumbs[:]
         self.session.breadcrumbs = []
         score_proxy.run()
         self.session.breadcrumbs = breadcrumbs
 
     def get_materials_package_importable_name_interactively(self):
-        self.session.breadcrumbs.append('select materials directory')
+        self.breadcrumbs.append('select materials directory')
         while True:
             menu = self.make_new_menu(where=self.where())
             menu_section = self.MenuSection()
@@ -51,7 +51,7 @@ class Studio(SCFObject):
                 score_proxy = self.score_wrangler.ScoreProxy(
                     score_package_importable_name, session=self.session)
                 return score_proxy.materials_package_importable_name
-        self.session.breadcrumbs.pop()
+        self.breadcrumbs.pop()
 
     def handle_main_menu_response(self, key, value):
         if not isinstance(key, str):
@@ -160,35 +160,35 @@ class Studio(SCFObject):
     def run(self, user_input=None):
         if user_input is not None:
             self.session.user_input = user_input
-        self.session.breadcrumbs.append('studio')
+        self.breadcrumbs.append('studio')
         while True:
-            self.session.breadcrumbs.append('{} scores'.format(self.session.scores_to_show))
+            self.breadcrumbs.append('{} scores'.format(self.session.scores_to_show))
             menu = self.make_main_menu()
             key, value = menu.run()
             if self.session.is_complete:
-                self.session.breadcrumbs.pop()
+                self.breadcrumbs.pop()
                 self.session.clean_up()
                 break
             if self.session.is_backtracking_to_studio:
                 self.session.is_backtracking_to_studio = False
-                self.session.breadcrumbs.pop()
+                self.breadcrumbs.pop()
                 continue
             if key is None:
-                self.session.breadcrumbs.pop()
+                self.breadcrumbs.pop()
                 continue
             self.handle_main_menu_response(key, value)
             if self.session.is_complete:
-                self.session.breadcrumbs.pop()
+                self.breadcrumbs.pop()
                 self.session.clean_up()
                 break
             if self.session.is_backtracking_to_studio:
                 self.session.is_backtracking_to_studio = False
-                self.session.breadcrumbs.pop()
+                self.breadcrumbs.pop()
                 continue
-            self.session.breadcrumbs.pop()
+            self.breadcrumbs.pop()
 
     def manage_svn(self):
-        self.session.breadcrumbs.append('repository commands')
+        self.breadcrumbs.append('repository commands')
         while True:
             menu = self.make_svn_menu()
             key, value = menu.run()
@@ -197,7 +197,7 @@ class Studio(SCFObject):
             self.handle_svn_response(key, value)
             if self.session.backtrack():
                 break
-        self.session.breadcrumbs.pop()
+        self.breadcrumbs.pop()
 
     def run_py_test_all(self, prompt_proceed=True):
         proc = subprocess.Popen(

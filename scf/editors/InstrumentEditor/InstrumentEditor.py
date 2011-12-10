@@ -109,7 +109,7 @@ class InstrumentEditor(InteractiveEditor):
         '''Return instrument or else none.
         '''
         from abjad.tools import instrumenttools
-        self.session.breadcrumbs.append('select instrument')
+        self.breadcrumbs.append('select instrument')
         menu = self.make_new_menu(where=self.where())
         menu.should_clear_terminal = False
         menu_section = self.MenuSection()
@@ -118,12 +118,12 @@ class InstrumentEditor(InteractiveEditor):
         while True:
             key, value = menu.run()
             if self.session.backtrack():
-                self.session.breadcrumbs.pop()
+                self.breadcrumbs.pop()
                 return    
             elif key is None:
                 continue
             else:
-                self.session.breadcrumbs.pop()
+                self.breadcrumbs.pop()
                 break
         instrument_name = value
         instrument_name = instrument_name.title()

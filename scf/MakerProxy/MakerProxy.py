@@ -106,7 +106,7 @@ class MakerProxy(PackageProxy):
 
     def run(self):
         result = False
-        self.session.breadcrumbs.append(self.maker_name)
+        self.breadcrumbs.append(self.maker_name)
         while True:
             menu = self.make_main_menu()
             key, value = menu.run()
@@ -123,7 +123,7 @@ class MakerProxy(PackageProxy):
                 pass
             else:
                 raise ValueError
-        self.session.breadcrumbs.pop()
+        self.breadcrumbs.pop()
         return result
 
     def write_initializer_to_disk(self):

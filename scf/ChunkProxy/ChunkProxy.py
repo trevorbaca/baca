@@ -58,7 +58,7 @@ class ChunkProxy(PackageProxy):
 
     def run(self):
         result = False
-        self.session.breadcrumbs.append(self.chunk_name)
+        self.breadcrumbs.append(self.chunk_name)
         while True:
             menu = self.make_main_menu()
             key, value = menu.run()
@@ -75,7 +75,7 @@ class ChunkProxy(PackageProxy):
                 pass
             else:
                 raise ValueError
-        self.session.breadcrumbs.pop()
+        self.breadcrumbs.pop()
 
     def set_chunk_spaced_name_interactively(self):
         getter = self.make_new_getter(where=self.where())

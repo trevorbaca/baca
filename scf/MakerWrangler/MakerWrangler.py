@@ -177,7 +177,7 @@ class MakerWrangler(PackageWrangler, PackageProxy):
 
     def run(self):
         result = True
-        self.session.breadcrumbs.append('makers')
+        self.breadcrumbs.append('makers')
         while True:
             menu = self.make_main_menu()
             key, value = menu.run()
@@ -194,7 +194,7 @@ class MakerWrangler(PackageWrangler, PackageProxy):
                 pass
             else:
                 raise ValueError
-        self.session.breadcrumbs.pop()
+        self.breadcrumbs.pop()
         return result
 
     def select_maker(self):
