@@ -111,6 +111,12 @@ class Menu(MenuObject, SCFObject):
                 key = self.change_value_to_key(value)
                 return key 
 
+    def clean_value(self, value):
+        if value is not None:
+            if value.endswith(' (default)'):
+                value = value.replace(' (default)', '')
+            return value
+
     def conditionally_display_menu(self):
         if not self.session.hide_next_redraw:
             self.conditionally_clear_terminal()
@@ -121,6 +127,7 @@ class Menu(MenuObject, SCFObject):
         key = self.handle_raw_input_with_default('SCF', default=self.prompt_default)
         key = self.check_if_key_exists(key)
         value = self.change_key_to_value(key)
+        value = self.clean_value(value)
         self.session.hide_next_redraw = False
         return key, value
 

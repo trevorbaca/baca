@@ -4,11 +4,12 @@ from baca.scf.menuing.MenuObject import MenuObject
 
 class MenuSection(MenuObject):
 
+    # TODO: alphabetzie input values
     def __init__(self, menu_section_title=None, lines_to_list=None,
         named_pairs=None, entry_prefix=None,
         sentence_length_items=None, items_to_number=None, 
         hidden_items=None, indent_level=1, 
-        hide_menu=False, layout='list'):
+        hide_menu=False, layout='list', default_index=None):
         self.menu_section_title = menu_section_title
         self.lines_to_list = lines_to_list
         self.named_pairs = named_pairs
@@ -19,6 +20,7 @@ class MenuSection(MenuObject):
         self.indent_level = indent_level
         self.hide_menu = hide_menu
         self.layout = layout
+        self.default_index = default_index
 
     ### PUBLIC ATTRIBUTES ###
 

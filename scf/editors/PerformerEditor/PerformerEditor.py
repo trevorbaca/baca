@@ -136,6 +136,9 @@ class PerformerEditor(InteractiveEditor):
     def set_initial_configuration_menu(self):
         from abjad.tools import instrumenttools
         menu = self.make_new_menu(where=self.where()) 
+        menu_section = self.MenuSection()
+        menu.menu_sections.append(menu_section)
+        menu_section.menu_section_title = 'select instrument'
         likely_instruments = self.target.likely_instruments_based_on_performer_name
         likely_instrument_names = [x().instrument_name for x in likely_instruments]
         most_likely_instrument = self.target.most_likely_instrument_based_on_performer_name
@@ -143,11 +146,11 @@ class PerformerEditor(InteractiveEditor):
             most_likely_instrument_name = most_likely_instrument().instrument_name
             assert most_likely_instrument_name in likely_instrument_names
             most_likely_index = likely_instrument_names.index(most_likely_instrument_name)
+            likely_instrument_names[most_likely_index] = '{} (default)'.format(most_likely_instrument_name)
             most_likely_number = most_likely_index + 1
             menu.prompt_default = str(most_likely_number)
-        menu_section = self.MenuSection()
-        menu.menu_sections.append(menu_section)
-        menu_section.menu_section_title = 'select instrument'
+            menu_section.default_index = most_likely_index
+            #menu.prompt_default = 'def'
         if likely_instruments:
             menu_section.items_to_number = likely_instrument_names
             menu_section.sentence_length_items.append(('other', 'other instruments'))
