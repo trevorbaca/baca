@@ -151,6 +151,7 @@ class PerformerEditor(InteractiveEditor):
             menu.prompt_default = str(most_likely_number)
             menu_section.default_index = most_likely_index
             #menu.prompt_default = 'def'
+            #menu.has_default = True
         if likely_instruments:
             menu_section.items_to_number = likely_instrument_names
             menu_section.sentence_length_items.append(('other', 'other instruments'))

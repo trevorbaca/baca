@@ -6,11 +6,12 @@ import os
 
 class Menu(MenuObject, SCFObject):
 
-    def __init__(self, hide_menu=False, menu_sections=None, hidden_items=None, include_back=True, 
-        include_studio=True, indent_level=1, item_width=11, session=None, should_clear_terminal=True, 
-        where=None):
+    def __init__(self, has_default=False, hidden_items=None, hide_menu=False, include_back=True, 
+        include_studio=True, indent_level=1, item_width=11, menu_sections=None, 
+        session=None, should_clear_terminal=True, where=None):
         MenuObject.__init__(self, hidden_items=hidden_items, indent_level=indent_level, 
             session=session, should_clear_terminal=should_clear_terminal)
+        self.has_default = has_default
         self.hide_menu = hide_menu
         self.include_back = include_back
         self.include_studio = include_studio
@@ -20,6 +21,15 @@ class Menu(MenuObject, SCFObject):
 
     ### PUBLIC ATTRIBUTES ###
     
+    @apply
+    def has_default():
+        def fget(self):
+            return self._has_default
+        def fset(self, has_default):
+            assert isinstance(has_default, type(True))
+            self._has_default = has_default
+        return property(**locals())
+
     @apply
     def hidden_items():
         def fget(self):
