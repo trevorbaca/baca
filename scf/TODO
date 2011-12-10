@@ -1,6 +1,6 @@
 TODO
 
-0. Debug choice of clarinet in E-flat.
+0. Debug choice of clarinet in E-flat. Remove chevron from 'Ok?>' prompt at svn commit.
 
 1. Implement score next, prev & backtracking.
 
