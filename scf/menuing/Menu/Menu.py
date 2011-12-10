@@ -107,8 +107,8 @@ class Menu(MenuObject, SCFObject):
 
     def check_if_key_exists(self, key):
         if self.key_is_default(key):
-            print 'foo {!r}'.format(self.get_default_value())
-            return self.get_default_value()
+            value = self.get_default_value()
+            return self.change_value_to_key(value)
         elif key in self.all_keys:
             return key
         else:
