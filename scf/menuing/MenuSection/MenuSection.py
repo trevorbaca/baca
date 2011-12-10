@@ -4,23 +4,20 @@ from baca.scf.menuing.MenuObject import MenuObject
 
 class MenuSection(MenuObject):
 
-    # TODO: alphabetzie input values
-    def __init__(self, menu_section_title=None, lines_to_list=None,
-        named_pairs=None, entry_prefix=None,
-        sentence_length_items=None, items_to_number=None, 
-        hidden_items=None, indent_level=1, 
-        hide_menu=False, layout='list', default_index=None):
-        self.menu_section_title = menu_section_title
-        self.lines_to_list = lines_to_list
-        self.named_pairs = named_pairs
-        self.entry_prefix = entry_prefix
-        self.sentence_length_items = sentence_length_items
-        self.items_to_number = items_to_number
-        self.hidden_items = hidden_items
-        self.indent_level = indent_level
-        self.hide_menu = hide_menu
-        self.layout = layout
+    def __init__(self, default_index=None, entry_prefix=None, hidden_items=None, 
+        hide_menu=False, indent_level=1, items_to_number=None, 
+        lines_to_list=None, menu_section_title=None, named_pairs=None, 
+        sentence_length_items=None):
         self.default_index = default_index
+        self.entry_prefix = entry_prefix
+        self.hidden_items = hidden_items
+        self.hide_menu = hide_menu
+        self.indent_level = indent_level
+        self.items_to_number = items_to_number
+        self.lines_to_list = lines_to_list
+        self.menu_section_title = menu_section_title
+        self.named_pairs = named_pairs
+        self.sentence_length_items = sentence_length_items
 
     ### PUBLIC ATTRIBUTES ###
 
@@ -62,15 +59,6 @@ class MenuSection(MenuObject):
                 self._items_to_number = []
             else:
                 self._items_to_number = list(items_to_number)
-        return property(**locals())
-
-    @apply
-    def layout():
-        def fget(self):
-            return self._layout
-        def fset(self, layout):
-            assert layout in ('list', 'line')
-            self._layout = layout
         return property(**locals())
 
     @apply
@@ -160,14 +148,12 @@ class MenuSection(MenuObject):
                 key = self.entry_prefix + key
             if not self.hide_menu:
                 menu_line = self.make_tab(self.indent_level) + ' '
-                if self.layout == 'list':
-                    menu_line += '{}: {}'.format(key, value)
+                menu_line += '{}: {}'.format(key, value)
             all_keys.append(key)
             all_values.append(value)
         if self.named_pairs:
             if not self.hide_menu:
-                if self.layout == 'list':
-                    menu_lines.append('')
+                menu_lines.append('')
         for key, value in self.sentence_length_items:
             if not self.hide_menu:
                 menu_line = self.make_tab(self.indent_level) + ' '
