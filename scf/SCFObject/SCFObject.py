@@ -145,7 +145,8 @@ class SCFObject(object):
         return self.Menu(where=where, session=self.session)
 
     def pmc(self):
-        pprint.pprint(self.session.transcript)
+        pprint.pprint(self.transcript)
+        print len(self.transcript)
 
     def pop_next_user_response_from_user_input(self):
         if self.session.user_input is None:
