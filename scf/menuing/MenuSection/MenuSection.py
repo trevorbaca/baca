@@ -22,6 +22,19 @@ class MenuSection(MenuObject):
     ### PUBLIC ATTRIBUTES ###
 
     @apply
+    def default_index():
+        def fget(self):
+            return self._default_index
+        def fset(self, default_index):
+            assert isinstance(default_index, (int, type(None)))
+            self._default_index = default_index
+        return property(**locals())
+
+    @property
+    def has_default(self):
+        return self.default_index is not None
+
+    @apply
     def hidden_items():
         def fget(self):
             return self._hidden_items
@@ -114,6 +127,10 @@ class MenuSection(MenuObject):
 
     ### PUBLIC METHODS ###
 
+    def get_default_value(self):
+        assert self.has_default
+        return self.items_to_number[self.default_index]
+
     def make_menu_lines(self, all_keys, all_values):
         menu_lines = []
         menu_lines.extend(self.make_section_title_lines())
@@ -178,7 +195,7 @@ class MenuSection(MenuObject):
                 menu_lines.append(menu_line)
                 menu_lines.append('')
         return menu_lines
-        
+
     def show_hidden_menu_items(self):
         menu_lines = []
         for key, value in self.hidden_items:

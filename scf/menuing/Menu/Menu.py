@@ -6,12 +6,11 @@ import os
 
 class Menu(MenuObject, SCFObject):
 
-    def __init__(self, has_default=False, hidden_items=None, hide_menu=False, include_back=True, 
+    def __init__(self, hidden_items=None, hide_menu=False, include_back=True, 
         include_studio=True, indent_level=1, item_width=11, sections=None, 
         session=None, should_clear_terminal=True, where=None):
         MenuObject.__init__(self, hidden_items=hidden_items, indent_level=indent_level, 
             session=session, should_clear_terminal=should_clear_terminal)
-        self.has_default = has_default
         self.hide_menu = hide_menu
         self.include_back = include_back
         self.include_studio = include_studio
@@ -21,14 +20,12 @@ class Menu(MenuObject, SCFObject):
 
     ### PUBLIC ATTRIBUTES ###
     
-    @apply
-    def has_default():
-        def fget(self):
-            return self._has_default
-        def fset(self, has_default):
-            assert isinstance(has_default, type(True))
-            self._has_default = has_default
-        return property(**locals())
+    @property
+    def has_default(self):
+        for section in self.sections:
+            if section.has_default:
+                return True
+        return False
 
     @apply
     def hidden_items():
@@ -109,10 +106,12 @@ class Menu(MenuObject, SCFObject):
             return pair_dictionary.get(value)
 
     def check_if_key_exists(self, key):
-        if key in self.all_keys:
+        if self.key_is_default(key):
+            print 'foo {!r}'.format(self.get_default_value())
+            return self.get_default_value()
+        elif key in self.all_keys:
             return key
         else:
-            #return None
             return self.check_for_matching_value_string(key)
 
     def check_for_matching_value_string(self, key):
@@ -141,6 +140,17 @@ class Menu(MenuObject, SCFObject):
         self.session.hide_next_redraw = False
         return key, value
 
+    def get_default_value(self):
+        for section in self.sections:
+            if section.has_default:
+                return section.get_default_value() 
+
+    def key_is_default(self, key):
+        if 3 <= len(key):
+            if 'default'.startswith(key):
+                return True
+        return False
+
     def make_menu_lines_keys_and_values(self):
         self.menu_lines, self.all_keys, self.all_values = [], [], []
         self.menu_lines.extend(self.make_menu_title_lines())
@@ -163,6 +173,17 @@ class Menu(MenuObject, SCFObject):
             menu_lines.append(iotools.capitalize_string_start(self.session.menu_header))
             menu_lines.append('')
         return menu_lines
+
+    @apply
+    def prompt_default():
+        def fget(self): 
+            if self.has_default:
+                return 'def'
+            return self._prompt_default
+        def fset(self, prompt_default):
+            assert isinstance(prompt_default, (str, type(None)))
+            self._prompt_default = prompt_default
+        return property(**locals())
 
     def run(self):
         should_clear_terminal, hide_menu = True, False
