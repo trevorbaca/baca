@@ -89,7 +89,7 @@ class SCFObject(object):
             iotools.clear_terminal()
 
     def confirm(self):
-        response = self.handle_raw_input('ok?')
+        response = self.handle_raw_input('ok?', include_chevron=False)
         if not response.lower() == 'y':
             self.display_cap_lines([''])
             return False
