@@ -4,7 +4,7 @@ from abjad.tools.instrumenttools import *
 
 
 def test_PerformerEditor_delete_instrument_01():
-    '''Quit, back, studio & junk all work.
+    '''Quit, back, studio, score & junk all work.
     '''
 
     studio = baca.scf.Studio()
@@ -18,6 +18,10 @@ def test_PerformerEditor_delete_instrument_01():
     studio = baca.scf.Studio()
     studio.run('1 perf 1 del studio q')
     assert studio.ts == (11, (0, 9), (1, 5))
+
+    studio = baca.scf.Studio()
+    studio.run('1 perf 1 del score q')
+    assert studio.ts == (11, (1, 5), (2, 9))
 
     studio = baca.scf.Studio()
     studio.run('1 perf 1 del foo q')

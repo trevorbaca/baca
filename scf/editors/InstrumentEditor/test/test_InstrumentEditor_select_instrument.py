@@ -2,7 +2,7 @@ import baca
 
 
 def test_InstrumentEditor_select_instrument_01():
-    '''Quit, back, studio & junk all work.
+    '''Quit, back, studio, score & junk all work.
     '''
 
     editor = baca.scf.editors.InstrumentEditor()
@@ -15,6 +15,10 @@ def test_InstrumentEditor_select_instrument_01():
 
     editor = baca.scf.editors.InstrumentEditor()
     editor.run(user_input='studio q')
+    assert len(editor.transcript) == 2
+
+    editor = baca.scf.editors.InstrumentEditor()
+    editor.run(user_input='score q')
     assert len(editor.transcript) == 2
 
     editor = baca.scf.editors.InstrumentEditor()

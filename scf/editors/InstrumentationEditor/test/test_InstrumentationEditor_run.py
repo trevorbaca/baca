@@ -2,7 +2,7 @@ import baca
 
 
 def test_InstrumentationEditor_run_01():
-    '''Quit, back, studio & junk all work.
+    '''Quit, back, studio, score & junk all work.
     '''
 
     studio = baca.scf.Studio()
@@ -16,6 +16,10 @@ def test_InstrumentationEditor_run_01():
     studio = baca.scf.Studio()
     studio.run(user_input='1 perf studio q')
     assert studio.ts == (8, (0, 6))
+
+    studio = baca.scf.Studio()
+    studio.run(user_input='1 perf score q')
+    assert studio.ts == (8, (2, 6))
 
     studio = baca.scf.Studio()
     studio.run(user_input='1 perf foo q')
