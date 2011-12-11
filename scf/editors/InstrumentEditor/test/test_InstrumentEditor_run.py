@@ -8,22 +8,16 @@ def test_InstrumentEditor_run_01():
 
     studio = baca.scf.Studio()
     studio.run(user_input='1 perf 1 1 q')
-    assert len(studio.transcript) == 10
+    assert studio.ts == (10, (1, 5, 7))
 
     studio = baca.scf.Studio()
     studio.run(user_input='1 perf 1 1 b q')
-    transcript = studio.transcript
-    assert len(transcript) == 12
-    assert transcript[-2] == transcript[-6]
+    assert studio.ts == (12, (1, 5, 7), (6, 10))
 
     studio = baca.scf.Studio()
     studio.run(user_input='1 perf 1 1 studio q')
-    transcript = studio.transcript
-    assert len(transcript) == 12
-    assert transcript[-2] == transcript[-12]
+    assert studio.ts == (12, (0, 10), (1, 5, 7))
 
     studio = baca.scf.Studio()
     studio.run(user_input='1 perf 1 1 foo q')
-    transcript = studio.transcript
-    assert len(transcript) == 12 
-    assert transcript[-2] == transcript[-4]
+    assert studio.ts == (12, (1, 5, 7), (8, 10))

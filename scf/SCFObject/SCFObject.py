@@ -83,7 +83,7 @@ class SCFObject(object):
         return self.session.transcript
 
     @property
-    def transript_signature(self):
+    def transcript_signature(self):
         return self.session.transcript_signature
 
     @property
