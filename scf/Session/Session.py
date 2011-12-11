@@ -8,8 +8,9 @@ class Session(object):
     def __init__(self, user_input=None):
         self._complete_transcript = []
         self._session_once_had_user_input = False
-        self._start_time = self.cur_time
+        self._start_time = self.current_time
         self.backtrack_preservation_is_active = False
+        self.current_score = None
         self.dump_transcript = False
         self.hide_next_redraw = False
         self.initial_user_input = user_input
@@ -55,8 +56,17 @@ class Session(object):
     def complete_transcript(self):
         return self._complete_transcript
 
+    @apply
+    def current_score():
+        def fget(self):
+            return self._current_score
+        def fset(self, current_score):
+            assert isinstance(current_score, (str, type(None)))
+            self._current_score = current_score
+        return property(**locals())
+
     @property
-    def cur_time(self):
+    def current_time(self):
         return datetime.datetime.fromtimestamp(time.time())
 
     @apply
@@ -195,7 +205,7 @@ class Session(object):
         assert isinstance(lines, list)
         assert isinstance(clear_terminal, (type(True), type(None)))
         entry = []
-        entry.append(self.cur_time)
+        entry.append(self.current_time)
         entry.append(lines[:])
         entry.append(clear_terminal)
         self.complete_transcript.append(entry)

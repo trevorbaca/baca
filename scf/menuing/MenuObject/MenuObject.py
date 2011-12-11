@@ -130,8 +130,10 @@ class MenuObject(SCFObject):
             self.show_hidden_menu_items()
         elif key == 'next':
             self.session.is_navigating_to_next_score = True
+            self.session.is_backtracking_to_studio = True
         elif key == 'prev':
             self.session.is_navigating_to_prev_score = True
+            self.session.is_backtracking_to_studio = True
         elif key == 'q':
             self.session.user_specified_quit = True
         elif key == 'score':

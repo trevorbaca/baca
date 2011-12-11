@@ -1,4 +1,5 @@
 # -*- encoding: utf-8 -*-
+from abjad.tools import mathtools
 from baca.scf.SCFObject import SCFObject
 from baca.scf.GlobalProxy import GlobalProxy
 from baca.scf.ScoreWrangler import ScoreWrangler
@@ -28,6 +29,7 @@ class Studio(SCFObject):
 
     def edit_score_interactively(self, score_package_importable_name):
         score_proxy = self.score_wrangler.ScoreProxy(score_package_importable_name, session=self.session)
+        score_proxy.session.current_score = score_package_importable_name
         breadcrumbs = self.breadcrumbs[:]
         self.session.breadcrumbs = []
         score_proxy.run()
@@ -66,7 +68,7 @@ class Studio(SCFObject):
             self.session.scores_to_show = 'mothballed'
         elif key == 'svn':
             self.manage_svn()
-        else:
+        elif mathtools.is_integer_equivalent_expr(key):
             self.edit_score_interactively(value)
     
     def handle_svn_response(self, key, value):
@@ -181,6 +183,10 @@ class Studio(SCFObject):
                 break
             elif self.session.is_backtracking_to_studio:
                 self.session.is_backtracking_to_studio = False
+                self.breadcrumbs.pop()
+                continue
+            elif self.session.is_backtracking_to_score:
+                self.session.is_backtracking_to_score = False
                 self.breadcrumbs.pop()
                 continue
             self.breadcrumbs.pop()
