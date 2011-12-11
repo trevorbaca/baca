@@ -10,24 +10,24 @@ def test_InstrumentationEditor_move_performer_01():
 
     studio = baca.scf.Studio(user_input='1 perf mv q')
     studio.run()
-    transcript = studio.session.transcript
+    transcript = studio.transcript
     assert len(transcript) == 7
 
     studio = baca.scf.Studio(user_input='1 perf mv b q')
     studio.run()
-    transcript = studio.session.transcript
+    transcript = studio.transcript
     assert len(transcript) == 9
     assert transcript[-2] == transcript[-5]
 
     studio = baca.scf.Studio(user_input='1 perf mv studio q')
     studio.run()
-    transcript = studio.session.transcript
+    transcript = studio.transcript
     assert len(transcript) == 9
     assert transcript[-2] == transcript[0]
 
     studio = baca.scf.Studio(user_input='1 perf mv foo q')
     studio.run()
-    transcript = studio.session.transcript
+    transcript = studio.transcript
     assert len(transcript) == 9
 
 

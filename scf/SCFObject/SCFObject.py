@@ -147,7 +147,7 @@ class SCFObject(object):
         menu.sections.append(section)
         return menu, section
 
-    def pmc(self):
+    def pt(self):
         pprint.pprint(self.transcript)
         print len(self.transcript)
 

@@ -13,19 +13,19 @@ def test_PerformerEditor_add_instrument_01():
 
     studio = baca.scf.Studio()
     studio.run('1 perf 1 add b q')
-    transcript = studio.session.transcript
+    transcript = studio.transcript
     assert len(transcript) == 12
     assert transcript[-2] == transcript[-6]
 
     studio = baca.scf.Studio()
     studio.run('1 perf 1 add studio q')
-    transcript = studio.session.transcript
+    transcript = studio.transcript
     assert len(transcript) == 12
     assert transcript[-2] == transcript[-12]
 
     studio = baca.scf.Studio()
     studio.run('1 perf 1 add foo q')
-    transcript = studio.session.transcript
+    transcript = studio.transcript
     assert len(transcript) == 12
     assert transcript[-2] == transcript[-4]
 
