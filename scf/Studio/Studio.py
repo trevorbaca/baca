@@ -173,22 +173,27 @@ class Studio(SCFObject):
         if user_input is not None:
             self.session.user_input = user_input
         self.breadcrumbs.append('studio')
+        run_main_menu = True
         while True:
-#            if self.session.is_navigating_to_next_score:
-#                self.session.is_navigating_to_next_score = False
-#                score_package_short_name = self.get_next_score_package_short_name()
-#                self.edit_score_interactively(score_package_short_name)
-#            elif self.session.is_navigating_to_prev_score:
-#                self.session.is_navigating_to_prev_score = False
-#                score_package_short_name = self.get_prev_score_package_short_name()
-#                self.edit_score_interactively(score_package_short_name)
             self.breadcrumbs.append('{} scores'.format(self.session.scores_to_show))
-            menu = self.make_main_menu()
-            key, value = menu.run()
+            if run_main_menu:
+                menu = self.make_main_menu()
+                key, value = menu.run()
+            else:
+                run_main_menu = True
+            #print 'key, value: {!r} {!r}'.format(key, value)
             if self.session.is_complete:
                 self.breadcrumbs.pop()
                 self.session.clean_up()
                 break
+            elif self.session.is_navigating_to_next_score:
+                self.session.is_navigating_to_next_score = False
+                self.session.is_backtracking_to_studio = False
+                key, value = '99', self.get_next_score_package_short_name()
+            elif self.session.is_navigating_to_prev_score:
+                self.session.is_navigating_to_prev_score = False
+                self.session.is_backtracking_to_studio = False
+                key, value = '99', self.get_prev_score_package_short_name()
             elif self.session.is_backtracking_to_studio:
                 self.session.is_backtracking_to_studio = False
                 self.breadcrumbs.pop()
@@ -205,6 +210,8 @@ class Studio(SCFObject):
                 self.breadcrumbs.pop()
                 self.session.clean_up()
                 break
+            elif self.session.is_navigating_to_sibling_score:
+                run_main_menu = False
             elif self.session.is_backtracking_to_studio:
                 self.session.is_backtracking_to_studio = False
                 self.breadcrumbs.pop()

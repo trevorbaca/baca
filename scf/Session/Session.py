@@ -132,6 +132,14 @@ class Session(object):
         return not self.user_input
 
     @property
+    def is_navigating_to_sibling_score(self):
+        if self.is_navigating_to_next_score:
+            return True
+        if self.is_navigating_to_prev_score:
+            return True
+        return False
+
+    @property
     def menu_header(self):
         if self.breadcrumbs:
             return ' - '.join(self.breadcrumbs)
