@@ -82,6 +82,14 @@ class SCFObject(object):
     def transcript(self):
         return self.session.transcript
 
+    @property
+    def transript_signature(self):
+        return self.session.transcript_signature
+
+    @property
+    def ts(self):
+        return self.transcript_signature
+
     ### PUBLIC METHODS ###
 
     def conditionally_clear_terminal(self):

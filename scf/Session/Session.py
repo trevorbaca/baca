@@ -142,6 +142,24 @@ class Session(object):
     def transcript(self):
         return [entry[1] for entry in self.complete_transcript]
 
+    @property
+    def transcript_signature(self):
+        result = []
+        result.append(len(self.transcript))
+        indices_already_encountered = set([])
+        for i in range(len(self.transcript)):
+            if i not in indices_already_encountered:
+                shared_indices = [i]
+                reference_element = self.transcript[i]
+                for j, current_element in enumerate(self.transcript):
+                    if current_element == reference_element:
+                        if i != j:
+                            shared_indices.append(j)
+                if 1 < len(shared_indices):
+                    result.append(tuple(shared_indices))
+                indices_already_encountered.update(shared_indices)
+        return tuple(result)
+
     @apply
     def user_input():
         def fget(self):
