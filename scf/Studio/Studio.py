@@ -29,7 +29,7 @@ class Studio(SCFObject):
 
     def edit_score_interactively(self, score_package_importable_name):
         score_proxy = self.score_wrangler.ScoreProxy(score_package_importable_name, session=self.session)
-        score_proxy.session.current_score = score_package_importable_name
+        score_proxy.session.current_score_package_short_name = score_package_importable_name
         breadcrumbs = self.breadcrumbs[:]
         self.session.breadcrumbs = []
         score_proxy.run()
@@ -52,6 +52,22 @@ class Studio(SCFObject):
                     score_package_importable_name, session=self.session)
                 return score_proxy.materials_package_importable_name
         self.breadcrumbs.pop()
+
+    def get_next_score_package_short_name(self):
+        score_package_short_names = list(self.score_wrangler.iterate_score_package_short_names(
+            scores_to_show=self.session.scores_to_show))
+        if self.session.current_score_package_short_name is None:
+            return score_package_short_names[0]
+        index = score_package_short_names.index(self.session.current_score_package_short_name)
+        return score_package_short_names[index+1]
+
+    def get_prev_score_package_short_name(self):
+        score_package_short_names = list(self.score_wrangler.iterate_score_package_short_names(
+            scores_to_show=self.session.scores_to_show))
+        if self.session.current_score_package_short_name is None:
+            return score_package_short_names[-1]
+        index = score_package_short_names.index(self.session.current_score_package_short_name)
+        return score_package_short_names[index-1]
 
     def handle_main_menu_response(self, key, value):
         if not isinstance(key, str):
@@ -158,6 +174,14 @@ class Studio(SCFObject):
             self.session.user_input = user_input
         self.breadcrumbs.append('studio')
         while True:
+#            if self.session.is_navigating_to_next_score:
+#                self.session.is_navigating_to_next_score = False
+#                score_package_short_name = self.get_next_score_package_short_name()
+#                self.edit_score_interactively(score_package_short_name)
+#            elif self.session.is_navigating_to_prev_score:
+#                self.session.is_navigating_to_prev_score = False
+#                score_package_short_name = self.get_prev_score_package_short_name()
+#                self.edit_score_interactively(score_package_short_name)
             self.breadcrumbs.append('{} scores'.format(self.session.scores_to_show))
             menu = self.make_main_menu()
             key, value = menu.run()

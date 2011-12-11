@@ -10,7 +10,7 @@ class Session(object):
         self._session_once_had_user_input = False
         self._start_time = self.current_time
         self.backtrack_preservation_is_active = False
-        self.current_score = None
+        self.current_score_package_short_name = None
         self.dump_transcript = False
         self.hide_next_redraw = False
         self.initial_user_input = user_input
@@ -57,12 +57,12 @@ class Session(object):
         return self._complete_transcript
 
     @apply
-    def current_score():
+    def current_score_package_short_name():
         def fget(self):
-            return self._current_score
-        def fset(self, current_score):
-            assert isinstance(current_score, (str, type(None)))
-            self._current_score = current_score
+            return self._current_score_package_short_name
+        def fset(self, current_score_package_short_name):
+            assert isinstance(current_score_package_short_name, (str, type(None)))
+            self._current_score_package_short_name = current_score_package_short_name
         return property(**locals())
 
     @property
