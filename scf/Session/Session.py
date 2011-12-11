@@ -8,13 +8,17 @@ class Session(object):
     def __init__(self, user_input=None):
         self._complete_transcript = []
         self._session_once_had_user_input = False
-        self._start_time = self.cur_time
+        self._start_time = self.current_time
         self.backtrack_preservation_is_active = False
+        self.current_score_package_short_name = None
         self.dump_transcript = False
         self.hide_next_redraw = False
         self.initial_user_input = user_input
         self.is_backtracking_locally = False
+        self.is_backtracking_to_score = False
         self.is_backtracking_to_studio = False
+        self.is_navigating_to_next_score = False
+        self.is_navigating_to_prev_score = False
         self.breadcrumbs = []
         self.scores_to_show = 'active'
         self.user_input = user_input
@@ -52,8 +56,17 @@ class Session(object):
     def complete_transcript(self):
         return self._complete_transcript
 
+    @apply
+    def current_score_package_short_name():
+        def fget(self):
+            return self._current_score_package_short_name
+        def fset(self, current_score_package_short_name):
+            assert isinstance(current_score_package_short_name, (str, type(None)))
+            self._current_score_package_short_name = current_score_package_short_name
+        return property(**locals())
+
     @property
-    def cur_time(self):
+    def current_time(self):
         return datetime.datetime.fromtimestamp(time.time())
 
     @apply
@@ -93,6 +106,15 @@ class Session(object):
         return property(**locals())
 
     @apply
+    def is_backtracking_to_score():
+        def fget(self):
+            return self._is_backtracking_to_score
+        def fset(self, is_backtracking_to_score):
+            assert isinstance(is_backtracking_to_score, bool)
+            self._is_backtracking_to_score = is_backtracking_to_score
+        return property(**locals())
+
+    @apply
     def is_backtracking_to_studio():
         def fget(self):
             return self._is_backtracking_to_studio
@@ -108,6 +130,14 @@ class Session(object):
     @property
     def is_displayable(self):
         return not self.user_input
+
+    @property
+    def is_navigating_to_sibling_score(self):
+        if self.is_navigating_to_next_score:
+            return True
+        if self.is_navigating_to_prev_score:
+            return True
+        return False
 
     @property
     def menu_header(self):
@@ -131,6 +161,24 @@ class Session(object):
     @property
     def transcript(self):
         return [entry[1] for entry in self.complete_transcript]
+
+    @property
+    def transcript_signature(self):
+        result = []
+        result.append(len(self.transcript))
+        indices_already_encountered = set([])
+        for i in range(len(self.transcript)):
+            if i not in indices_already_encountered:
+                shared_indices = [i]
+                reference_element = self.transcript[i]
+                for j, current_element in enumerate(self.transcript):
+                    if current_element == reference_element:
+                        if i != j:
+                            shared_indices.append(j)
+                if 1 < len(shared_indices):
+                    result.append(tuple(shared_indices))
+                indices_already_encountered.update(shared_indices)
+        return tuple(result)
 
     @apply
     def user_input():
@@ -165,7 +213,7 @@ class Session(object):
         assert isinstance(lines, list)
         assert isinstance(clear_terminal, (type(True), type(None)))
         entry = []
-        entry.append(self.cur_time)
+        entry.append(self.current_time)
         entry.append(lines[:])
         entry.append(clear_terminal)
         self.complete_transcript.append(entry)
@@ -174,6 +222,8 @@ class Session(object):
         if self.is_complete:
             return True
         elif self.is_backtracking_to_studio:
+            return True
+        elif self.is_backtracking_to_score:
             return True
         elif self.is_backtracking_locally and self.backtrack_preservation_is_active:
             return True

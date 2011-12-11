@@ -82,6 +82,14 @@ class SCFObject(object):
     def transcript(self):
         return self.session.transcript
 
+    @property
+    def transcript_signature(self):
+        return self.session.transcript_signature
+
+    @property
+    def ts(self):
+        return self.transcript_signature
+
     ### PUBLIC METHODS ###
 
     def conditionally_clear_terminal(self):
@@ -147,7 +155,7 @@ class SCFObject(object):
         menu.sections.append(section)
         return menu, section
 
-    def pmc(self):
+    def pt(self):
         pprint.pprint(self.transcript)
         print len(self.transcript)
 

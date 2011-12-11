@@ -1,21 +1,19 @@
 TODO
 
-1. Implement score next, prev & backtracking.
+3. Implement 'all' object of deletion.
 
-2. Implement 'all' object of deletion.
+4. Change named pair handling from 'add: add performer' to just 'add performer'.
 
-3. Change named pair handling from 'add: add performer' to just 'add performer'.
+5. Remove default prompt when default handling. Detect empty return and accept as default indicator.
 
-4. Remove default prompt when default handling. Detect empty return and accept as default indicator.
+6. Implement 'del 5'.
 
-5. Implement 'del 5'.
+(7. Implement menu range-handling selection. So 1-2 for both items 1 and 2. Also 1,3-4 and so on.)
 
-(6. Implement menu range-handling selection. So 1-2 for both items 1 and 2. Also 1,3-4 and so on.)
+8. List percussionist instruments correctly.
 
-7. List percussionist instruments correctly.
+9. Dialog with user when user selects untuned percussion. Request instrument name.
 
-8. Dialog with user when user selects untuned percussion. Request instrument name.
+10. Take another stab at (short) instrument name markup handling. Automatically capitalize intelligently.
 
-9. Take another stab at (short) instrument name markup handling. Automatically capitalize intelligently.
-
-10. Extend studio to accpet 'Sekka' in addition to 'sekka'
+11. Extend studio to accpet 'Sekka' in addition to 'sekka'

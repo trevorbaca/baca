@@ -60,7 +60,7 @@ def test_ScoreProxy_02():
     archipel.session.user_input = 'q'
     archipel.run()
 
-    assert archipel.session.transcript[-2] == [
+    assert archipel.transcript[-2] == [
      "L'archipel du corps (2011)",
      '',
      '     Chunks',
@@ -86,14 +86,17 @@ def test_ScoreProxy_03():
     archipel.session.user_input = 'hidden q'
     archipel.run()
 
-    assert archipel.session.transcript[-2] == [
+    assert archipel.transcript[-2] == [
      '     b: back',
      '     exec: exec statement',
      '     grep: grep baca directories',
      '     here: edit client source',
      '     hidden: show hidden items',
+     '     next: next score',
+     '     prev: prev score',
      '     q: quit',
      '     redraw: redraw',
+     '     score: return to score',
      '     studio: return to studio',
      '     svn: work with repository',
      '     tags: work with tags',
@@ -109,7 +112,7 @@ def test_ScoreProxy_04():
     archipel.session.user_input = 'q'
     archipel.manage_tags()
 
-    assert archipel.session.transcript[-2] == \
+    assert archipel.transcript[-2] == \
      ['Tags',
       '',
       "     'composer': TrevorBaca()",
@@ -145,10 +148,10 @@ def test_ScoreProxy_06():
     studio.session.user_input = '1 studio q'
     studio.run()
 
-    assert len(studio.session.transcript) == 6
-    assert studio.session.transcript[0][0] == 'Studio - active scores'
-    assert studio.session.transcript[2][0] == "L'archipel du corps (2011)"
-    assert studio.session.transcript[4][0] == 'Studio - active scores'
+    assert len(studio.transcript) == 6
+    assert studio.transcript[0][0] == 'Studio - active scores'
+    assert studio.transcript[2][0] == "L'archipel du corps (2011)"
+    assert studio.transcript[4][0] == 'Studio - active scores'
 
 
 def test_ScoreProxy_07():
@@ -159,9 +162,9 @@ def test_ScoreProxy_07():
     archipel.session.user_input = 'studio'
     archipel.run()
 
-    assert len(archipel.session.transcript) == 2
-    assert archipel.session.transcript[0][0] == "L'archipel du corps (2011)"
-    assert archipel.session.transcript[1][0] == 'SCF> studio'
+    assert len(archipel.transcript) == 2
+    assert archipel.transcript[0][0] == "L'archipel du corps (2011)"
+    assert archipel.transcript[1][0] == 'SCF> studio'
 
 
 def test_ScoreProxy_08():
@@ -172,10 +175,10 @@ def test_ScoreProxy_08():
     studio.session.user_input = '1 b q'
     studio.run()
 
-    assert len(studio.session.transcript) == 6
-    assert studio.session.transcript[0][0] == 'Studio - active scores'
-    assert studio.session.transcript[2][0] == "L'archipel du corps (2011)"
-    assert studio.session.transcript[4][0] == 'Studio - active scores'
+    assert len(studio.transcript) == 6
+    assert studio.transcript[0][0] == 'Studio - active scores'
+    assert studio.transcript[2][0] == "L'archipel du corps (2011)"
+    assert studio.transcript[4][0] == 'Studio - active scores'
 
 
 def test_ScoreProxy_09():
@@ -200,7 +203,7 @@ def test_ScoreProxy_10():
     studio = baca.scf.Studio()
     studio.session.user_input = '1 b q'
     studio.run()
-    transcript = studio.session.transcript
+    transcript = studio.transcript
     
     assert len(transcript) == 6
     assert transcript[0] == transcript[4]

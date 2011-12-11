@@ -23,7 +23,7 @@ def test_Studio_02():
     studio.session.user_input = 'q'
     studio.run()
     
-    assert studio.session.transcript[-2] == [  
+    assert studio.transcript[-2] == [  
      'Studio - active scores',
      '',
      "     1: L'archipel du corps (2011)",
@@ -49,7 +49,7 @@ def test_Studio_03():
     studio.session.user_input = 'hidden q'
     studio.run()
 
-    assert studio.session.transcript[-2] == [
+    assert studio.transcript[-2] == [
      '     active: show active scores only',   
      '     all: show all scores',
      '     exec: exec statement',
@@ -57,8 +57,11 @@ def test_Studio_03():
      '     here: edit client source',
      '     hidden: show hidden items',
      '     mb: show mothballed scores only',
+     '     next: next score',
+     '     prev: prev score',
      '     q: quit',
      '     redraw: redraw',
+     '     score: return to score',
      '     studio: return to studio',
      '     svn: work with repository',
      '     where: show menu client',
@@ -73,7 +76,7 @@ def test_Studio_04():
     studio.session.user_input = '1 q'
     studio.run()
 
-    assert studio.session.transcript[-2] == [
+    assert studio.transcript[-2] == [
      "L'archipel du corps (2011)",
      '',
      '     Chunks',
@@ -99,7 +102,7 @@ def test_Studio_05():
     studio.session.user_input = 'mb q'
     studio.run()
     
-    assert studio.session.transcript[-2] == [  
+    assert studio.transcript[-2] == [  
      'Studio - mothballed scores',
      '',
      '     1: Arac\xc4\xb1l\xc4\xb1k',
@@ -124,7 +127,7 @@ def test_Studio_06():
     studio.session.user_input = '1 tags q'
     studio.run()
 
-    assert studio.session.transcript[-2] == \
+    assert studio.transcript[-2] == \
      ["L'archipel du corps (2011) - tags",
       '',
       "     'composer': TrevorBaca()",
@@ -145,7 +148,7 @@ def test_Studio_07():
     studio.session.user_input = 'svn q'
     studio.run()
 
-    assert studio.session.transcript[-2] == [
+    assert studio.transcript[-2] == [
      'Studio - active scores - repository commands',
      '',
      '     add: svn add',
@@ -171,17 +174,17 @@ def test_Studio_08():
     studio = baca.scf.Studio()
     studio.session.user_input = 'q'
     studio.run()
-    assert studio.session.transcript[-2][0] == 'Studio - active scores'
+    assert studio.transcript[-2][0] == 'Studio - active scores'
 
     studio = baca.scf.Studio()
     studio.session.user_input = 'svn q'
     studio.run()
-    assert studio.session.transcript[-2][0] == 'Studio - active scores - repository commands'
+    assert studio.transcript[-2][0] == 'Studio - active scores - repository commands'
 
     studio = baca.scf.Studio()
     studio.session.user_input = 'svn b q'
     studio.run()
-    assert studio.session.transcript[-2][0] == 'Studio - active scores'
+    assert studio.transcript[-2][0] == 'Studio - active scores'
 
 
 def test_Studio_09():
@@ -191,12 +194,12 @@ def test_Studio_09():
     studio = baca.scf.Studio()
     studio.session.user_input = 'foo q'
     studio.run()
-    assert len(studio.session.transcript) == 4
+    assert len(studio.transcript) == 4
 
     studio = baca.scf.Studio()
     studio.session.user_input = 'foo bar q'
     studio.run()
-    assert len(studio.session.transcript) == 6
+    assert len(studio.transcript) == 6
 
 
 def test_Studio_10():
@@ -206,10 +209,10 @@ def test_Studio_10():
     studio = baca.scf.Studio()
     studio.session.user_input = 'foo q'
     studio.run()
-    assert len(studio.session.transcript) == 4
+    assert len(studio.transcript) == 4
 
-    menu_0 = studio.session.transcript[0]
-    menu_2 = studio.session.transcript[2]
+    menu_0 = studio.transcript[0]
+    menu_2 = studio.transcript[2]
     assert menu_0 == menu_2
 
 
@@ -220,10 +223,10 @@ def test_Studio_11():
     studio = baca.scf.Studio()
     studio.session.user_input = 'foo q'
     studio.run()
-    assert len(studio.session.transcript) == 4
+    assert len(studio.transcript) == 4
 
-    menu_0 = studio.session.transcript[0]
-    menu_2 = studio.session.transcript[2]
+    menu_0 = studio.transcript[0]
+    menu_2 = studio.transcript[2]
     assert menu_0 == menu_2
 
 
@@ -235,11 +238,11 @@ def test_Studio_12():
     studio.session.user_input = 'exec 2**30 q'
     studio.run()
 
-    assert len(studio.session.transcript) == 5
-    assert studio.session.transcript[1] == ['SCF> exec', '']
-    assert studio.session.transcript[2] == ['XCF> 2**30', '']
-    assert studio.session.transcript[3] == ['1073741824', '']
-    assert studio.session.transcript[4] == ['SCF> q', '']
+    assert len(studio.transcript) == 5
+    assert studio.transcript[1] == ['SCF> exec', '']
+    assert studio.transcript[2] == ['XCF> 2**30', '']
+    assert studio.transcript[3] == ['1073741824', '']
+    assert studio.transcript[4] == ['SCF> q', '']
 
 
 def test_Studio_13():
@@ -250,11 +253,11 @@ def test_Studio_13():
     studio.session.user_input = 'exec foo q'
     studio.run()
 
-    assert len(studio.session.transcript) == 5
-    assert studio.session.transcript[1] == ['SCF> exec', '']
-    assert studio.session.transcript[2] == ['XCF> foo', '']
-    assert studio.session.transcript[3] == ['Expression not executable.', '']
-    assert studio.session.transcript[4] == ['SCF> q', '']
+    assert len(studio.transcript) == 5
+    assert studio.transcript[1] == ['SCF> exec', '']
+    assert studio.transcript[2] == ['XCF> foo', '']
+    assert studio.transcript[3] == ['Expression not executable.', '']
+    assert studio.transcript[4] == ['SCF> q', '']
 
 
 def test_Studio_14():

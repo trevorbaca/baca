@@ -5,31 +5,28 @@ import baca
 
 
 def test_InstrumentationEditor_add_performer_01():
-    '''Quit, back, studio & junk all work.
+    '''Quit, back, studio, score & junk all work.
     '''
 
     studio = baca.scf.Studio(user_input='1 perf add q')
     studio.run()
-    transcript = studio.session.transcript
-    assert len(transcript) == 8
+    assert studio.ts == (8,)
 
     studio = baca.scf.Studio(user_input='1 perf add b q')
     studio.run()
-    transcript = studio.session.transcript
-    assert len(transcript) == 10
-    assert transcript[4] == transcript[8]
+    assert studio.ts == (10, (4, 8))
 
     studio = baca.scf.Studio(user_input='1 perf add studio q')
     studio.run()
-    transcript = studio.session.transcript
-    assert len(transcript) == 10
-    assert transcript[0] == transcript[8]
+    assert studio.ts == (10, (0, 8))
+
+    studio = baca.scf.Studio(user_input='1 perf add score q')
+    studio.run()
+    assert studio.ts == (10, (2, 8))
 
     studio = baca.scf.Studio(user_input='1 perf add foo q')
     studio.run()
-    transcript = studio.session.transcript
-    assert len(transcript) == 10
-    assert transcript[6] == transcript[8]
+    assert studio.ts == (10, (6, 8))
 
 
 def test_InstrumentationEditor_add_performer_02():

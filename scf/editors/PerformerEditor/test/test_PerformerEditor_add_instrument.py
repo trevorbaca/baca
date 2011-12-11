@@ -4,30 +4,28 @@ from abjad.tools.instrumenttools import *
 
 
 def test_PerformerEditor_add_instrument_01():
-    '''Quit, back, studio & junk all work.
+    '''Quit, back, studio, score & junk all work.
     '''
 
     studio = baca.scf.Studio()
     studio.run('1 perf 1 add q')
-    assert len(studio.transcript) == 10
+    assert studio.ts == (10, (1, 5))
 
     studio = baca.scf.Studio()
     studio.run('1 perf 1 add b q')
-    transcript = studio.session.transcript
-    assert len(transcript) == 12
-    assert transcript[-2] == transcript[-6]
+    assert studio.ts == (12, (1, 5), (6, 10))
 
     studio = baca.scf.Studio()
     studio.run('1 perf 1 add studio q')
-    transcript = studio.session.transcript
-    assert len(transcript) == 12
-    assert transcript[-2] == transcript[-12]
+    assert studio.ts == (12, (0, 10), (1, 5))
+
+    studio = baca.scf.Studio()
+    studio.run('1 perf 1 add score q')
+    assert studio.ts == (12, (1, 5), (2, 10))
 
     studio = baca.scf.Studio()
     studio.run('1 perf 1 add foo q')
-    transcript = studio.session.transcript
-    assert len(transcript) == 12
-    assert transcript[-2] == transcript[-4]
+    assert studio.ts == (12, (1, 5), (8, 10))
 
 
 def test_PerformerEditor_add_instrument_02():
