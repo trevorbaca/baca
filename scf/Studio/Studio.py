@@ -167,6 +167,10 @@ class Studio(SCFObject):
                 self.session.is_backtracking_to_studio = False
                 self.breadcrumbs.pop()
                 continue
+            elif self.session.is_backtracking_to_score:
+                self.session.is_backtracking_to_score = False
+                self.breadcrumbs.pop()
+                continue
             elif key is None:
                 self.breadcrumbs.pop()
                 continue

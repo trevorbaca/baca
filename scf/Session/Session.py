@@ -14,6 +14,7 @@ class Session(object):
         self.hide_next_redraw = False
         self.initial_user_input = user_input
         self.is_backtracking_locally = False
+        self.is_backtracking_to_score = False
         self.is_backtracking_to_studio = False
         self.breadcrumbs = []
         self.scores_to_show = 'active'
@@ -183,6 +184,8 @@ class Session(object):
         if self.is_complete:
             return True
         elif self.is_backtracking_to_studio:
+            return True
+        elif self.is_backtracking_to_score:
             return True
         elif self.is_backtracking_locally and self.backtrack_preservation_is_active:
             return True
