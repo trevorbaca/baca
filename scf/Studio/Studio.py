@@ -163,11 +163,11 @@ class Studio(SCFObject):
                 self.breadcrumbs.pop()
                 self.session.clean_up()
                 break
-            if self.session.is_backtracking_to_studio:
+            elif self.session.is_backtracking_to_studio:
                 self.session.is_backtracking_to_studio = False
                 self.breadcrumbs.pop()
                 continue
-            if key is None:
+            elif key is None:
                 self.breadcrumbs.pop()
                 continue
             self.handle_main_menu_response(key, value)
@@ -175,7 +175,7 @@ class Studio(SCFObject):
                 self.breadcrumbs.pop()
                 self.session.clean_up()
                 break
-            if self.session.is_backtracking_to_studio:
+            elif self.session.is_backtracking_to_studio:
                 self.session.is_backtracking_to_studio = False
                 self.breadcrumbs.pop()
                 continue

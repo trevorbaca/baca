@@ -94,6 +94,7 @@ def test_ScoreProxy_03():
      '     hidden: show hidden items',
      '     q: quit',
      '     redraw: redraw',
+     '     score: return to score',
      '     studio: return to studio',
      '     svn: work with repository',
      '     tags: work with tags',

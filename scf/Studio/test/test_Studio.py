@@ -59,6 +59,7 @@ def test_Studio_03():
      '     mb: show mothballed scores only',
      '     q: quit',
      '     redraw: redraw',
+     '     score: return to score',
      '     studio: return to studio',
      '     svn: work with repository',
      '     where: show menu client',

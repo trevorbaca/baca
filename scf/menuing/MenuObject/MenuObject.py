@@ -29,6 +29,7 @@ class MenuObject(SCFObject):
         default_hidden_items.append(('q', 'quit'))
         default_hidden_items.append(('redraw', 'redraw'))
         default_hidden_items.append(('exec', 'exec statement'))
+        default_hidden_items.append(('score', 'return to score'))
         default_hidden_items.append(('studio', 'return to studio'))
         default_hidden_items.append(('where', 'show menu client'))
         return default_hidden_items
@@ -127,6 +128,8 @@ class MenuObject(SCFObject):
             self.show_hidden_menu_items()
         elif key == 'q':
             self.session.user_specified_quit = True
+        elif key == 'score':
+            self.session.is_backtracking_to_score = True
         elif key == 'studio':
             self.session.is_backtracking_to_studio = True
         elif key == 'where':

@@ -93,6 +93,15 @@ class Session(object):
         return property(**locals())
 
     @apply
+    def is_backtracking_to_score():
+        def fget(self):
+            return self._is_backtracking_to_score
+        def fset(self, is_backtracking_to_score):
+            assert isinstance(is_backtracking_to_score, bool)
+            self._is_backtracking_to_score = is_backtracking_to_score
+        return property(**locals())
+
+    @apply
     def is_backtracking_to_studio():
         def fget(self):
             return self._is_backtracking_to_studio
