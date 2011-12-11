@@ -57,6 +57,8 @@ def test_Studio_03():
      '     here: edit client source',
      '     hidden: show hidden items',
      '     mb: show mothballed scores only',
+     '     next: next score',
+     '     prev: prev score',
      '     q: quit',
      '     redraw: redraw',
      '     score: return to score',

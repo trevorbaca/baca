@@ -16,6 +16,8 @@ class Session(object):
         self.is_backtracking_locally = False
         self.is_backtracking_to_score = False
         self.is_backtracking_to_studio = False
+        self.is_navigating_to_next_score = False
+        self.is_navigating_to_prev_score = False
         self.breadcrumbs = []
         self.scores_to_show = 'active'
         self.user_input = user_input

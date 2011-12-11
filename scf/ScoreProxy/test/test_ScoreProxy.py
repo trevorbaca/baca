@@ -92,6 +92,8 @@ def test_ScoreProxy_03():
      '     grep: grep baca directories',
      '     here: edit client source',
      '     hidden: show hidden items',
+     '     next: next score',
+     '     prev: prev score',
      '     q: quit',
      '     redraw: redraw',
      '     score: return to score',
