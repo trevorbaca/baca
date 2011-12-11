@@ -154,6 +154,7 @@ class PerformerEditor(InteractiveEditor):
         return menu
 
     def set_initial_configuration_interactively(self):
+        from abjad.tools import instrumenttools
         from abjad.tools import mathtools
         self.conditionally_initialize_target()
         self.breadcrumbs.append(self.target.name)
@@ -167,10 +168,8 @@ class PerformerEditor(InteractiveEditor):
                 continue
             elif mathtools.is_integer_equivalent_expr(key):
                 instrument_name = value
-                instrument_name = instrument_name.title()
-                instrument_name = instrument_name.replace(' ', '')
-                exec('from abjad import *')
-                exec('instrument = instrumenttools.{}()'.format(instrument_name))
+                instrument_class = instrumenttools.default_instrument_name_to_instrument_class(instrument_name)
+                instrument = instrument_class()
                 self.target.instruments.append(instrument)
                 break
             elif key == 'none':
