@@ -6,11 +6,12 @@ import os
 
 class Menu(MenuObject, SCFObject):
 
-    def __init__(self, hidden_items=None, hide_menu=False, include_back=True, 
-        include_studio=True, indent_level=1, item_width=11, sections=None, 
+    def __init__(self, allow_integer_range=False, hidden_items=None, hide_menu=False, 
+        include_back=True, include_studio=True, indent_level=1, item_width=11, sections=None, 
         session=None, should_clear_terminal=True, where=None):
         MenuObject.__init__(self, hidden_items=hidden_items, indent_level=indent_level, 
             session=session, should_clear_terminal=should_clear_terminal)
+        self.allow_integer_range = allow_integer_range
         self.hide_menu = hide_menu
         self.include_back = include_back
         self.include_studio = include_studio
@@ -19,6 +20,15 @@ class Menu(MenuObject, SCFObject):
         self.where = where
 
     ### PUBLIC ATTRIBUTES ###
+
+    @apply
+    def allow_integer_range():
+        def fget(self):
+            return self._allow_integer_range
+        def fset(self, allow_integer_range):
+            assert isinstance(allow_integer_range, type(True))
+            self._allow_integer_range = allow_integer_range
+        return property(**locals())
     
     @property
     def has_default(self):
@@ -96,9 +106,21 @@ class Menu(MenuObject, SCFObject):
             self.all_values.append(value)
 
     def change_key_to_value(self, key):
+        from abjad.tools import sequencetools
         if key:
-            pair_dictionary = dict(zip(self.all_keys, self.all_values))
-            return pair_dictionary.get(key)
+            if self.allow_integer_range and self.is_integer_range(key):
+                item_numbers = self.range_string_to_numbers(key)
+                item_indices = [item_number - 1 for item_number in item_numbers]
+                for section in self.sections:
+                    if section.items_to_number:
+                        result = []
+                        for i in item_indices:
+                            item = section.items_to_number[i]
+                            result.append(item)
+                        return result
+            else:
+                pair_dictionary = dict(zip(self.all_keys, self.all_values))
+                return pair_dictionary.get(key)
 
     def change_value_to_key(self, value):
         if value:
@@ -111,6 +133,8 @@ class Menu(MenuObject, SCFObject):
             return self.change_value_to_key(value)
         elif key in self.all_keys:
             return key
+        elif self.allow_integer_range and self.is_integer_range(key):
+            return key    
         else:
             return self.check_for_matching_value_string(key)
 
@@ -121,7 +145,14 @@ class Menu(MenuObject, SCFObject):
                 return key 
 
     def clean_value(self, value):
-        if value is not None:
+        if isinstance(value, list):
+            cleaned_list = []
+            for element in value:
+                if element.endswith(' (default)'):
+                    element = element.replace(' (default)', '')
+                cleaned_list.append(element)
+            return cleaned_list
+        elif value is not None:
             if value.endswith(' (default)'):
                 value = value.replace(' (default)', '')
             return value

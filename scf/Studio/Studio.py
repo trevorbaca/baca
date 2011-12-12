@@ -28,6 +28,7 @@ class Studio(SCFObject):
     ### PUBLIC METHODS ###
 
     def edit_score_interactively(self, score_package_importable_name):
+        print 'FOO {!r}'.format(score_package_importable_name)
         score_proxy = self.score_wrangler.ScoreProxy(score_package_importable_name, session=self.session)
         score_proxy.session.current_score_package_short_name = score_package_importable_name
         breadcrumbs = self.breadcrumbs[:]
@@ -183,7 +184,6 @@ class Studio(SCFObject):
                 key, value = menu.run()
             else:
                 run_main_menu = True
-            #print 'key, value: {!r} {!r}'.format(key, value)
             if self.session.is_complete:
                 self.breadcrumbs.pop()
                 self.session.clean_up()

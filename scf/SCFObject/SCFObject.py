@@ -2,6 +2,7 @@ from abjad.tools import iotools
 import inspect
 import os
 import pprint
+import re
 import readline
 
 
@@ -146,6 +147,11 @@ class SCFObject(object):
         finally:
             readline.set_startup_hook()
 
+    # TODO: change name to self.is_integer_range_string()
+    def is_integer_range(self, expr):
+        pattern = re.compile('^(\d+(-\d+)?)(,\d+(-\d+)?)*$')
+        return expr == 'all' or pattern.match(expr) is not None
+
     def make_new_getter(self, where=None):
         return self.UserInputGetter(where=where, session=self.session)
 
@@ -193,6 +199,27 @@ class SCFObject(object):
     def query(self, prompt):
         response = handle_raw_input(prompt)
         return response.lower().startswith('y')
+
+    # TODO: change name to self.integer_range_string_to_numbers
+    def range_string_to_numbers(self, range_string, range_start=None, range_stop=None):
+        numbers = []
+        range_parts = range_string.split(',')
+        for range_part in range_parts:
+            if range_part == 'all':
+                numbers.extend(range(range_start, range_stop + 1))
+            elif '-' in range_part:
+                start, stop = range_part.split('-')
+                start, stop = int(start), int(stop)
+                if start <= stop:
+                    new_numbers = range(start, stop + 1)
+                    numbers.extend(new_numbers)
+                else:
+                    new_numbers = range(start, stop - 1, -1)
+                    numbers.extend(new_numbers)
+            else:
+                number = int(range_part)
+                numbers.append(number)
+        return numbers
 
     def where(self):
         return inspect.stack()[1]

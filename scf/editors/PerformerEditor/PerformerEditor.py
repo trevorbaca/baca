@@ -134,7 +134,8 @@ class PerformerEditor(InteractiveEditor):
     def set_initial_configuration_menu(self):
         from abjad.tools import instrumenttools
         menu, section = self.make_new_menu(where=self.where()) 
-        section.section_title = 'select instrument'
+        menu.allow_integer_range = True
+        section.section_title = 'select instruments'
         likely_instruments = self.target.likely_instruments_based_on_performer_name
         likely_instrument_names = [x().instrument_name for x in likely_instruments]
         most_likely_instrument = self.target.most_likely_instrument_based_on_performer_name
@@ -166,11 +167,12 @@ class PerformerEditor(InteractiveEditor):
                 return
             elif key is None:
                 continue
-            elif mathtools.is_integer_equivalent_expr(key):
-                instrument_name = value
-                instrument_class = instrumenttools.default_instrument_name_to_instrument_class(instrument_name)
-                instrument = instrument_class()
-                self.target.instruments.append(instrument)
+            elif self.is_integer_range(key):
+                assert isinstance(value, list)
+                for instrument_name in value:
+                    instrument_class = instrumenttools.default_instrument_name_to_instrument_class(instrument_name)
+                    instrument = instrument_class()
+                    self.target.instruments.append(instrument)
                 break
             elif key == 'none':
                 break
