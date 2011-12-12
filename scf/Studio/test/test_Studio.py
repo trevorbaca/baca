@@ -90,7 +90,7 @@ def test_Studio_04():
      '',
      '     Setup',
      '',
-     '     perf: performers & instrumentation',
+     '     perf: performers',
      '']
 
 

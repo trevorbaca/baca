@@ -89,8 +89,8 @@ class MenuObject(SCFObject):
             SCFObject.conditionally_clear_terminal(self)
 
     def edit_client_source_file(self):
-        file_name = self.client[1]
-        line_number = self.client[2]
+        file_name = self.where[1]
+        line_number = self.where[2]
         command = 'vi +{} {}'.format(line_number, file_name)
         os.system(command)
 

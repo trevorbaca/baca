@@ -214,7 +214,7 @@ class ScoreProxy(PackageProxy):
         menu.sections.append(section)
         section = self.MenuSection()
         section.section_title = 'setup'
-        section.sentence_length_items.append(('perf', 'performers & instrumentation'))
+        section.sentence_length_items.append(('perf', 'performers'))
         menu.sections.append(section)
         menu.hidden_items.append(('svn', 'work with repository'))
         menu.hidden_items.append(('tags', 'work with tags'))

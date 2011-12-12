@@ -12,7 +12,7 @@ class InstrumentationEditor(InteractiveEditor):
 
     @property
     def breadcrumb(self):
-        return 'performers & instrumentation'
+        return 'performers'
 
     @property
     def summary_lines(self):
