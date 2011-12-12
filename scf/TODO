@@ -1,17 +1,22 @@
 TODO
 
-1. Write range handling tests.
+1. Implement range handling:
+    * InstrumentationEditor.add_performer(s)_interactively()
+    * PerformerEditor.add_instrument(s)_interactively()
+    * PerformerEditor.delete_instrument(s)_interactively()
 
-2. Change named pair handling from 'add: add performer' to just 'add performer'.
+2. Write range handling tests.
 
-3. Remove default prompt when default handling. Detect empty return and accept as default indicator.
+3. Change named pair handling from 'add: add performer' to just 'add performer'.
 
-4. Implement 'del 5'.
+4. Remove default prompt when default handling. Detect empty return and accept as default indicator.
 
-5. List percussionist instruments correctly.
+5. Implement 'del 5'.
 
-6. Dialog with user when user selects untuned percussion. Request instrument name.
+6. List percussionist instruments correctly.
 
-7. Take another stab at (short) instrument name markup handling. Automatically capitalize intelligently.
+7. Dialog with user when user selects untuned percussion. Request instrument name.
 
-8. Extend studio to accpet 'Sekka' in addition to 'sekka'
+8. Take another stab at (short) instrument name markup handling. Automatically capitalize intelligently.
+
+9. Extend studio to accpet 'Sekka' in addition to 'sekka'
