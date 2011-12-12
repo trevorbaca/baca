@@ -8,7 +8,6 @@ class ScoreTemplateWizard(Wizard):
     ### PUBLIC METHODS ###
 
     def assign_instruments_to_player(self, player):
-        #for 
         pass
         
     def get_players(self):
@@ -17,15 +16,13 @@ class ScoreTemplateWizard(Wizard):
         lines.append('')
         self.display_lines(lines)
         getter = self.make_new_getter(where=self.where())
-        getter.prompts.append("enter the number of players or type 'skip'")
-        getter.tests.append(lambda x: isinstance(x, int))
+        getter.append_integer("enter the number of players or type 'skip'")
         player_count = getter.run()
         players = []
         if player_count is not None:
             for i in xrange(player_count):
                 getter = self.make_new_getter(where=self.where())
-                getter.prompts.append("name of player {}".format(i + 1))
-                getter.tests.append(lambda x: isinstance(x, str))
+                getter.append_string("name of player {}".format(i + 1))
                 getter.should_clear_terminal = False
                 player_name = getter.run()
                 player = instrumenttools.HumanMusician(player_name)

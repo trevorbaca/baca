@@ -180,8 +180,8 @@ class PackageProxy(DirectoryProxy):
 
     def add_tag_interactively(self):
         getter = self.make_new_getter(where=self.where())
-        getter.prompts.append('tag name')
-        getter.prompts.append('tag value')
+        getter.append_string('tag name')
+        getter.append_string('tag value')
         getter.should_clear_terminal = False
         user_input = getter.run()
         if user_input:
@@ -211,7 +211,7 @@ class PackageProxy(DirectoryProxy):
 
     def delete_tag_interactively(self):
         getter = self.make_new_getter(where=self.where())
-        getter.prompts.append('tag name')
+        getter.append_string('tag name')
         getter.should_clear_terminal = False
         user_input = getter.run()
         if user_input:
@@ -328,6 +328,7 @@ class PackageProxy(DirectoryProxy):
 
     def set_package_importable_name_interactively(self):
         getter = self.make_new_getter(where=self.where())
+        # TODO: implement getter.append_package_name
         getter.prompts.append('package importable name')
         getter.tests.append(iotools.is_underscore_delimited_lowercase_package_name)
         getter.helps.append('must be underscore-delimited lowercase package name.')
@@ -335,6 +336,7 @@ class PackageProxy(DirectoryProxy):
 
     def set_package_spaced_name_interactively(self):
         getter = self.make_new_getter(where=self.where())
+        # TODO: implement package spaced name
         getter.prompts.append('package spaced name')
         getter.tests.append(iotools.is_space_delimited_lowercase_string)
         getter.helps.append('must be space-delimited lowercase string.')

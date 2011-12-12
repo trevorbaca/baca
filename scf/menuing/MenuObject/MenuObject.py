@@ -1,7 +1,8 @@
+from abjad.tools import iotools
 from baca.scf.SCFObject.SCFObject import SCFObject
 from baca.scf.exceptions import StudioException
-from abjad.tools import iotools
 import os
+import re
 import subprocess
 
 
@@ -148,6 +149,10 @@ class MenuObject(SCFObject):
     def is_integer(self, expr):
         return isinstance(expr, int)
 
+    def is_integer_range(self, expr):
+        pattern = re.compile('^(\d+(-\d+)?)(,\d+(-\d+)?)*$')
+        return expr == 'all' or pattern.match(expr) is not None
+
     def is_negative_integer(self, expr):
         return self.is_integer(expr) and expr < 0
 
@@ -165,6 +170,11 @@ class MenuObject(SCFObject):
 
     def make_is_integer_in_closed_range(self, start, stop):
         return lambda expr: self.is_integer(expr) and start <= expr <= stop
+
+    # TODO: finish implementation
+    #def make_is_integer_range_in_closed_range(self, start, stop):
+    #    pattern = re.compile('^(\d+(-\d+)?)(,\d+(-\d+)?)*$')
+    #    return lambda expr: expr == 'all' or pattern.match(expr) is not None
 
     def make_tab(self, n):
         return 4 * n * ' '

@@ -77,6 +77,7 @@ class ChunkProxy(PackageProxy):
 
     def set_chunk_spaced_name_interactively(self):
         getter = self.make_new_getter(where=self.where())
+        # TODO: implement getter.append_space_delimited_lowercase_string
         getter.prompts.append('chunk name')
         getter.tests.append(iotools.is_space_delimited_lowercase_string)
         getter.helps.append('must be space-delimited lowercase string.')

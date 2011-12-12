@@ -54,11 +54,28 @@ class UserInputGetter(MenuObject):
 
     ### PUBLIC METHODS ###
 
+    def append_integer(self, spaced_attribute_name):
+        assert isinstance(spaced_attribute_name, str)
+        self.prompts.append(spaced_attribute_name)
+        self.tests.append(self.is_integer)
+        message = "value for '{}' must be integer."
+        message = message.format(spaced_attribute_name, start, stop)
+        self.helps.append(message)
+
     def append_integer_in_closed_range(self, spaced_attribute_name, start, stop):
         assert isinstance(spaced_attribute_name, str)
         self.prompts.append(spaced_attribute_name)
         self.tests.append(self.make_is_integer_in_closed_range(start, stop))
         message = "value for '{}' must be integer between {} and {}, inclusive."
+        message = message.format(spaced_attribute_name, start, stop)
+        self.helps.append(message)
+
+    def append_integer_range_in_closed_range(self, spaced_attribute_name, start, stop):
+        assert isinstance(spaced_attribute_name, str)
+        self.prompts.append(spaced_attribute_name)
+        #self.tests.append(self.make_is_integer_range_in_closed_range(start, stop))
+        self.tests.append(self.is_integer_range)
+        message = "value for '{}' must be integer range within {} and {}, inclusive."
         message = message.format(spaced_attribute_name, start, stop)
         self.helps.append(message)
 
@@ -132,10 +149,14 @@ class UserInputGetter(MenuObject):
 
     def store_value(self, user_response):
         assert isinstance(user_response, str)
-        try:
-            value = eval(user_response)
-        except (NameError, SyntaxError):
+        input_test = self.tests[self.prompt_index]
+        if input_test == self.is_integer_range:
             value = user_response
+        else:
+            try:
+                value = eval(user_response)
+            except (NameError, SyntaxError):
+                value = user_response
         if self.prompt_index < len(self.tests):
             input_test = self.tests[self.prompt_index]
             if input_test(value):

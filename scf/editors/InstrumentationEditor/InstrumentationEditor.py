@@ -54,14 +54,19 @@ class InstrumentationEditor(InteractiveEditor):
                 break
 
     def delete_performer_interactively(self):
+        from abjad.tools import sequencetools
         getter = self.make_new_getter(where=self.where())
         getter.should_clear_terminal = False
-        getter.append_integer_in_closed_range('performer number', 1, self.target.performer_count)
-        performer_number = getter.run()
+        getter.append_integer_range_in_closed_range('performer number', 1, self.target.performer_count)
+        range_string = getter.run()
         if self.session.backtrack():
             return
-        performer_index = performer_number - 1
-        del(self.target.performers[performer_index])
+        performer_numbers = self.range_string_to_numbers(range_string, 1, self.target.performer_count)
+        performer_indices = [performer_number - 1 for performer_number in performer_numbers]
+        performer_indices = list(reversed(sorted(set(performer_indices))))
+        performers = self.target.performers
+        performers = sequencetools.remove_sequence_elements_at_indices(performers, performer_indices)
+        self.target.performers[:] = performers
 
     def edit_performer_interactively(self, performer_number):
         try:

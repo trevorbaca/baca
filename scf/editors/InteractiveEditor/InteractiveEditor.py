@@ -29,6 +29,26 @@ class InteractiveEditor(SCFObject):
         if not self.session.is_complete:
             setattr(self.target, attr_name, attr_value)
 
+    def range_string_to_numbers(self, range_string, range_start=None, range_stop=None):
+        numbers = []
+        range_parts = range_string.split(',')
+        for range_part in range_parts:
+            if range_part == 'all':
+                numbers.extend(range(range_start, range_stop + 1))    
+            elif '-' in range_part:
+                start, stop = range_part.split('-') 
+                start, stop = int(start), int(stop)
+                if start <= stop:
+                    new_numbers = range(start, stop + 1)
+                    numbers.extend(new_numbers)
+                else:
+                    new_numbers = range(start, stop - 1, -1)
+                    numbers.extend(new_numbers)
+            else:
+                number = int(range_part)
+                numbers.append(number)
+        return numbers
+
     def run(self, user_input=None):
         if user_input is not None:
             self.session.user_input = user_input
