@@ -36,3 +36,12 @@ def test_PerformerEditor_delete_instruments_02():
     editor = baca.scf.editors.PerformerEditor()
     editor.run(user_input='add 1 add 2 del 1 q')
     assert editor.target == Performer(instruments=[AltoFlute()])
+
+
+def test_PerformerEditor_delete_instruments_03():
+    '''Range handling.
+    '''
+
+    editor = baca.scf.editors.PerformerEditor()
+    editor.run(user_input='add 1-3 del 1,3 q')
+    assert editor.target == Performer(instruments=[AltoFlute()])

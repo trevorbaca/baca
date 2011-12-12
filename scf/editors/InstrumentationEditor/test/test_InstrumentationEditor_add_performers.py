@@ -39,3 +39,15 @@ def test_InstrumentationEditor_add_performers_02():
         Performer(name='accordionist', instruments=[Accordion()]), 
         Performer(name='bassist', instruments=[Contrabass()]), 
         Performer(name='bassoonist', instruments=[Bassoon()])])
+
+
+def test_InstrumentationEditor_add_performers_03():
+    '''Range handling.
+    '''
+
+    editor = baca.scf.editors.InstrumentationEditor()
+    editor.run(user_input='add 1-3 default default default q')
+    assert editor.target == InstrumentationSpecifier([
+        Performer(name='accordionist', instruments=[Accordion()]), 
+        Performer(name='bassist', instruments=[Contrabass()]), 
+        Performer(name='bassoonist', instruments=[Bassoon()])])

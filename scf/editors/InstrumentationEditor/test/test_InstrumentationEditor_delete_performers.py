@@ -36,3 +36,12 @@ def test_InstrumentationEditor_delete_performers_02():
     editor = baca.scf.editors.InstrumentationEditor()
     editor.run(user_input='add acc default add bass default add bassoon default del 3 del 2 q')
     assert editor.target == InstrumentationSpecifier([Performer('accordionist', instruments=[Accordion()])])
+
+
+def test_InstrumentationEditor_delete_performers_03():
+    '''Range handling.
+    '''
+
+    editor = baca.scf.editors.InstrumentationEditor()
+    editor.run(user_input='add 1-3 default default default del 3-2 q')
+    assert editor.target == InstrumentationSpecifier([Performer('accordionist', instruments=[Accordion()])])
