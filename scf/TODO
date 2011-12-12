@@ -1,9 +1,5 @@
 TODO
 
-1. Write score navigation tests.
-
-2. Regularize Poeme 2003, 2005 directories.
-
 3. Implement 'all' object of deletion.
 
 4. Change named pair handling from 'add: add performer' to just 'add performer'.

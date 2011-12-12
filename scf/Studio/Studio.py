@@ -59,7 +59,8 @@ class Studio(SCFObject):
         if self.session.current_score_package_short_name is None:
             return score_package_short_names[0]
         index = score_package_short_names.index(self.session.current_score_package_short_name)
-        return score_package_short_names[index+1]
+        next_index = (index + 1) % len(score_package_short_names)
+        return score_package_short_names[next_index]
 
     def get_prev_score_package_short_name(self):
         score_package_short_names = list(self.score_wrangler.iterate_score_package_short_names(
@@ -67,7 +68,8 @@ class Studio(SCFObject):
         if self.session.current_score_package_short_name is None:
             return score_package_short_names[-1]
         index = score_package_short_names.index(self.session.current_score_package_short_name)
-        return score_package_short_names[index-1]
+        prev_index = (index - 1) % len(score_package_short_names)
+        return score_package_short_names[prev_index]
 
     def handle_main_menu_response(self, key, value):
         if not isinstance(key, str):
