@@ -2,14 +2,12 @@ TODO
 
 1. Change named pair handling from 'add: add performer' to just 'add performer'.
 
-2. Remove default prompt when default handling. Detect empty return and accept as default indicator.
+2. Implement 'del 5'.
 
-3. Implement 'del 5'.
+3. List percussionist instruments correctly.
 
-4. List percussionist instruments correctly.
+4. Dialog with user when user selects untuned percussion. Request instrument name.
 
-5. Dialog with user when user selects untuned percussion. Request instrument name.
+5. Take another stab at (short) instrument name markup handling. Automatically capitalize intelligently.
 
-6. Take another stab at (short) instrument name markup handling. Automatically capitalize intelligently.
-
-7. Extend studio to accpet 'Sekka' in addition to 'sekka'
+6. Extend studio to accpet 'Sekka' in addition to 'sekka'

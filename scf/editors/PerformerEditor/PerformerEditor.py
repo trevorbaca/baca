@@ -174,7 +174,8 @@ class PerformerEditor(InteractiveEditor):
             elif self.is_integer_range_string(key):
                 assert isinstance(value, list)
                 for instrument_name in value:
-                    instrument_class = instrumenttools.default_instrument_name_to_instrument_class(instrument_name)
+                    instrument_class = instrumenttools.default_instrument_name_to_instrument_class(
+                        instrument_name)
                     instrument = instrument_class()
                     self.target.instruments.append(instrument)
                 break
@@ -182,9 +183,6 @@ class PerformerEditor(InteractiveEditor):
                 break
             elif key == 'other':
                 editor = self.InstrumentEditor(session=self.session)
-#                instrument = editor.select_instrument_from_instrumenttools_interactively()
-#                if instrument is not None:
-#                    self.target.instruments.append(instrument)
                 instruments = editor.select_instruments_from_instrumenttools_interactively()
                 if instruments is not None:
                     for instrument in instruments:

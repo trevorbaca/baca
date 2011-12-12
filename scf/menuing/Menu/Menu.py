@@ -131,6 +131,9 @@ class Menu(MenuObject, SCFObject):
         if self.key_is_default(key):
             value = self.get_default_value()
             return self.change_value_to_key(value)
+        elif key == '' and self.has_default:
+            value = self.get_default_value()
+            return self.change_value_to_key(value)
         elif key in self.all_keys:
             return key
         elif self.allow_integer_range and self.is_integer_range_string(key):
@@ -139,10 +142,11 @@ class Menu(MenuObject, SCFObject):
             return self.check_for_matching_value_string(key)
 
     def check_for_matching_value_string(self, key):
-        for value in self.all_values:
-            if value.startswith(key):
-                key = self.change_value_to_key(value)
-                return key 
+        if key:
+            for value in self.all_values:
+                if value.startswith(key):
+                    key = self.change_value_to_key(value)
+                    return key 
 
     def clean_value(self, value):
         if isinstance(value, list):
@@ -208,8 +212,8 @@ class Menu(MenuObject, SCFObject):
     @apply
     def prompt_default():
         def fget(self): 
-            if self.has_default:
-                return 'def'
+            #if self.has_default:
+            #    return 'def'
             return self._prompt_default
         def fset(self, prompt_default):
             assert isinstance(prompt_default, (str, type(None)))
