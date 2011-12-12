@@ -167,7 +167,7 @@ class MenuObject(SCFObject):
         return lambda expr: self.is_integer(expr) and start <= expr <= stop
 
     # TODO: finish implementation
-    #def make_is_integer_range_in_closed_range(self, start, stop):
+    #def make_is_integer_range_string_in_closed_range(self, start, stop):
     #    pattern = re.compile('^(\d+(-\d+)?)(,\d+(-\d+)?)*$')
     #    return lambda expr: expr == 'all' or pattern.match(expr) is not None
 

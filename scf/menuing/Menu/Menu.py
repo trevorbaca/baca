@@ -108,8 +108,8 @@ class Menu(MenuObject, SCFObject):
     def change_key_to_value(self, key):
         from abjad.tools import sequencetools
         if key:
-            if self.allow_integer_range and self.is_integer_range(key):
-                item_numbers = self.range_string_to_numbers(key)
+            if self.allow_integer_range and self.is_integer_range_string(key):
+                item_numbers = self.integer_range_string_to_numbers(key)
                 item_indices = [item_number - 1 for item_number in item_numbers]
                 for section in self.sections:
                     if section.items_to_number:
@@ -133,7 +133,7 @@ class Menu(MenuObject, SCFObject):
             return self.change_value_to_key(value)
         elif key in self.all_keys:
             return key
-        elif self.allow_integer_range and self.is_integer_range(key):
+        elif self.allow_integer_range and self.is_integer_range_string(key):
             return key    
         else:
             return self.check_for_matching_value_string(key)

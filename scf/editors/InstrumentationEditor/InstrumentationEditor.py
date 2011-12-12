@@ -61,7 +61,7 @@ class InstrumentationEditor(InteractiveEditor):
         range_string = getter.run()
         if self.session.backtrack():
             return
-        performer_numbers = self.range_string_to_numbers(range_string, 1, self.target.performer_count)
+        performer_numbers = self.integer_range_string_to_numbers(range_string, 1, self.target.performer_count)
         performer_indices = [performer_number - 1 for performer_number in performer_numbers]
         performer_indices = list(reversed(sorted(set(performer_indices))))
         performers = self.target.performers

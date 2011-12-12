@@ -73,8 +73,8 @@ class UserInputGetter(MenuObject):
     def append_integer_range_in_closed_range(self, spaced_attribute_name, start, stop):
         assert isinstance(spaced_attribute_name, str)
         self.prompts.append(spaced_attribute_name)
-        #self.tests.append(self.make_is_integer_range_in_closed_range(start, stop))
-        self.tests.append(self.is_integer_range)
+        #self.tests.append(self.make_is_integer_range_string_in_closed_range(start, stop))
+        self.tests.append(self.is_integer_range_string)
         message = "value for '{}' must be integer range within {} and {}, inclusive."
         message = message.format(spaced_attribute_name, start, stop)
         self.helps.append(message)
@@ -150,7 +150,7 @@ class UserInputGetter(MenuObject):
     def store_value(self, user_response):
         assert isinstance(user_response, str)
         input_test = self.tests[self.prompt_index]
-        if input_test == self.is_integer_range:
+        if input_test == self.is_integer_range_string:
             value = user_response
         else:
             try:

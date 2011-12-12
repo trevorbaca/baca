@@ -51,7 +51,7 @@ class PerformerEditor(InteractiveEditor):
         range_string = getter.run()
         if self.session.backtrack():
             return
-        instrument_numbers = self.range_string_to_numbers(range_string, 1, self.target.instrument_count)
+        instrument_numbers = self.integer_range_string_to_numbers(range_string, 1, self.target.instrument_count)
         instrument_indices = [x - 1 for x in instrument_numbers]
         instruments = self.target.instruments
         instruments = sequencetools.remove_sequence_elements_at_indices(instruments, instrument_indices)
@@ -171,7 +171,7 @@ class PerformerEditor(InteractiveEditor):
                 return
             elif key is None:
                 continue
-            elif self.is_integer_range(key):
+            elif self.is_integer_range_string(key):
                 assert isinstance(value, list)
                 for instrument_name in value:
                     instrument_class = instrumenttools.default_instrument_name_to_instrument_class(instrument_name)
