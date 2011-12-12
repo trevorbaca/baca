@@ -4,7 +4,7 @@ from abjad.tools.scoretools import Performer
 import baca
 
 
-def test_InstrumentationEditor_add_performer_01():
+def test_InstrumentationEditor_add_performers_01():
     '''Quit, back, studio, score & junk all work.
     '''
 
@@ -29,7 +29,7 @@ def test_InstrumentationEditor_add_performer_01():
     assert studio.ts == (10, (6, 8))
 
 
-def test_InstrumentationEditor_add_performer_02():
+def test_InstrumentationEditor_add_performers_02():
     '''Add three performers.
     '''
 

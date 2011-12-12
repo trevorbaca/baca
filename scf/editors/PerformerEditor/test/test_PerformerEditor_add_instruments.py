@@ -3,7 +3,7 @@ from abjad.tools.scoretools import Performer
 from abjad.tools.instrumenttools import *
 
 
-def test_PerformerEditor_add_instrument_01():
+def test_PerformerEditor_add_instruments_01():
     '''Quit, back, studio, score & junk all work.
     '''
 
@@ -28,7 +28,7 @@ def test_PerformerEditor_add_instrument_01():
     assert studio.ts == (12, (1, 5), (8, 10))
 
 
-def test_PerformerEditor_add_instrument_02():
+def test_PerformerEditor_add_instruments_02():
     '''Add two instruments.
     '''
 

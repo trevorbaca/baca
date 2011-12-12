@@ -40,11 +40,12 @@ class PerformerEditor(InteractiveEditor):
 
     ### PUBLIC METHODS ###
 
-    def add_instrument_interactively(self):
+    def add_instruments_interactively(self):
         editor = self.InstrumentEditor(session=self.session)
-        instrument = editor.select_instrument_from_instrumenttools_interactively()
-        if instrument is not None:
-            self.target.instruments.append(instrument)
+        instruments = editor.select_instruments_from_instrumenttools_interactively()
+        if instruments is not None:
+            for instrument in instruments:
+                self.target.instruments.append(instrument)
 
     def delete_instruments_interactively(self):
         getter = self.make_new_getter(where=self.where())
@@ -76,7 +77,7 @@ class PerformerEditor(InteractiveEditor):
         if not isinstance(key, str):
             raise TypeError('key must be string.')
         if key == 'add':
-            self.add_instrument_interactively()
+            self.add_instruments_interactively()
         elif key == 'del':
             self.delete_instruments_interactively()
         elif key == 'mv':
@@ -108,7 +109,7 @@ class PerformerEditor(InteractiveEditor):
         section.section_title = 'instruments'
         instrument_names = [x.instrument_name for x in self.target.instruments]
         section.items_to_number = instrument_names
-        section.sentence_length_items.append(('add', 'add instrument'))
+        section.sentence_length_items.append(('add', 'add instruments'))
         if 0 < self.target.instrument_count:
             section.sentence_length_items.append(('del', 'delete instruments'))
         if 1 < self.target.instrument_count:
@@ -181,9 +182,13 @@ class PerformerEditor(InteractiveEditor):
                 break
             elif key == 'other':
                 editor = self.InstrumentEditor(session=self.session)
-                instrument = editor.select_instrument_from_instrumenttools_interactively()
-                if instrument is not None:
-                    self.target.instruments.append(instrument)
+#                instrument = editor.select_instrument_from_instrumenttools_interactively()
+#                if instrument is not None:
+#                    self.target.instruments.append(instrument)
+                instruments = editor.select_instruments_from_instrumenttools_interactively()
+                if instruments is not None:
+                    for instrument in instruments:
+                        self.target.instruments.append(instrument)
                 break
             else:
                 break

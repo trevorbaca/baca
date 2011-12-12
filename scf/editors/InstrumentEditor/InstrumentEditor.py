@@ -46,7 +46,11 @@ class InstrumentEditor(InteractiveEditor):
 
     def conditionally_initialize_target(self):
         if self.target is None:
-            self.target = self.select_instrument_from_instrumenttools_interactively()
+            instruments = self.select_instruments_from_instrumenttools_interactively()
+            if instruments is None:
+                self.target = None
+            else:
+                self.target = instruments[0]
     
     def edit_instrument_name_interactively(self):
         getter = self.make_new_getter(where=self.where())
@@ -103,12 +107,13 @@ class InstrumentEditor(InteractiveEditor):
         section.sentence_length_items = self.target_attribute_menu_entries
         return menu
 
-    def select_instrument_from_instrumenttools_interactively(self):
+    def select_instruments_from_instrumenttools_interactively(self):
         '''Return instrument or else none.
         '''
         from abjad.tools import instrumenttools
         self.breadcrumbs.append('select instrument')
         menu, section = self.make_new_menu(where=self.where())
+        menu.allow_integer_range = True
         menu.should_clear_terminal = False
         section.items_to_number = instrumenttools.list_instrument_names()
         while True:
@@ -121,8 +126,11 @@ class InstrumentEditor(InteractiveEditor):
             else:
                 self.breadcrumbs.pop()
                 break
-        instrument_name = value
-        instrument_name = instrument_name.title()
-        instrument_name = instrument_name.replace(' ', '')
-        exec('result = instrumenttools.{}()'.format(instrument_name))
+        instrument_names = value
+        result = []
+        for instrument_name in instrument_names:
+            instrument_name = instrument_name.title()
+            instrument_name = instrument_name.replace(' ', '')
+            exec('instrument = instrumenttools.{}()'.format(instrument_name))
+            result.append(instrument)
         return result

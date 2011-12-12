@@ -2,7 +2,6 @@ TODO
 
 1. Implement range handling:
     * InstrumentationEditor.add_performer(s)_interactively()
-    * PerformerEditor.add_instrument(s)_interactively()
 
 2. Write range handling tests.
 
