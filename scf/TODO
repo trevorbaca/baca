@@ -1,13 +1,11 @@
 TODO
 
-1. Write 'del 5' tests.
+1. Extend studio to accpet 'Sekka' in addition to 'sekka'
 
 2. Change named pair handling from 'add: add performer' to just 'add performer'.
 
-3. List percussionist instruments correctly.
+3. Take another stab at (short) instrument name markup handling. Automatically capitalize intelligently.
 
-4. Dialog with user when user selects untuned percussion. Request instrument name.
+4. List percussionist instruments correctly.
 
-5. Take another stab at (short) instrument name markup handling. Automatically capitalize intelligently.
-
-6. Extend studio to accpet 'Sekka' in addition to 'sekka'
+5. Dialog with user when user selects untuned percussion. Request instrument name.
