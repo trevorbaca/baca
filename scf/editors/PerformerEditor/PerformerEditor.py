@@ -1,3 +1,6 @@
+from abjad.tools import instrumenttools
+from abjad.tools import mathtools
+from abjad.tools import scoretools
 from abjad.tools import sequencetools
 from baca.scf.editors.InteractiveEditor import InteractiveEditor
 
@@ -21,7 +24,7 @@ class PerformerEditor(InteractiveEditor):
     @property
     def summary_lines(self):
         if not self.target.instruments:
-            result = '{} (instruments not assigned)'.format(self.target.name)
+            result = '{} (no instruments)'.format(self.target.name)
         elif len(self.target.instruments) == 1 and self.target.name == \
             self.target.instruments[0].instrument_name:
             result = '{}'.format(self.target.name)
@@ -33,7 +36,6 @@ class PerformerEditor(InteractiveEditor):
 
     @property
     def target_class(self):
-        from abjad.tools import scoretools
         return scoretools.Performer
 
     ### PUBLIC METHODS ###
@@ -44,10 +46,10 @@ class PerformerEditor(InteractiveEditor):
         if instrument is not None:
             self.target.instruments.append(instrument)
 
-    def delete_instrument_interactively(self):
+    def delete_instruments_interactively(self):
         getter = self.make_new_getter(where=self.where())
         getter.should_clear_terminal = False
-        getter.append_integer_range_in_closed_range('instrument number', 1, self.target.instrument_count)
+        getter.append_integer_range_in_closed_range('instrument numbers', 1, self.target.instrument_count)
         range_string = getter.run()
         if self.session.backtrack():
             return
@@ -76,7 +78,7 @@ class PerformerEditor(InteractiveEditor):
         if key == 'add':
             self.add_instrument_interactively()
         elif key == 'del':
-            self.delete_instrument_interactively()
+            self.delete_instruments_interactively()
         elif key == 'mv':
             self.move_instrument_interactively()
         elif key in ('name', 'ren'):
@@ -108,7 +110,7 @@ class PerformerEditor(InteractiveEditor):
         section.items_to_number = instrument_names
         section.sentence_length_items.append(('add', 'add instrument'))
         if 0 < self.target.instrument_count:
-            section.sentence_length_items.append(('del', 'delete instrument'))
+            section.sentence_length_items.append(('del', 'delete instruments'))
         if 1 < self.target.instrument_count:
             section.sentence_length_items.append(('mv', 'move instrument'))
         if self.target.name is None:
@@ -136,7 +138,6 @@ class PerformerEditor(InteractiveEditor):
         self.target.name = None
 
     def set_initial_configuration_menu(self):
-        from abjad.tools import instrumenttools
         menu, section = self.make_new_menu(where=self.where()) 
         menu.allow_integer_range = True
         section.section_title = 'select instruments'
@@ -159,8 +160,6 @@ class PerformerEditor(InteractiveEditor):
         return menu
 
     def set_initial_configuration_interactively(self):
-        from abjad.tools import instrumenttools
-        from abjad.tools import mathtools
         self.conditionally_initialize_target()
         self.breadcrumbs.append(self.target.name)
         menu = self.set_initial_configuration_menu()

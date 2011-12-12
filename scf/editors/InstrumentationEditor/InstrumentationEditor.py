@@ -54,10 +54,10 @@ class InstrumentationEditor(InteractiveEditor):
                 self.target.performers.append(performer)
                 break
 
-    def delete_performer_interactively(self):
+    def delete_performers_interactively(self):
         getter = self.make_new_getter(where=self.where())
         getter.should_clear_terminal = False
-        getter.append_integer_range_in_closed_range('performer number', 1, self.target.performer_count)
+        getter.append_integer_range_in_closed_range('performer numbers', 1, self.target.performer_count)
         range_string = getter.run()
         if self.session.backtrack():
             return
@@ -92,7 +92,7 @@ class InstrumentationEditor(InteractiveEditor):
         if key == 'add':
             self.add_performer_interactively()
         elif key == 'del':
-            self.delete_performer_interactively()
+            self.delete_performers_interactively()
         elif key == 'mv':
             self.move_performer_interactively()
         else:
@@ -105,7 +105,7 @@ class InstrumentationEditor(InteractiveEditor):
         section.items_to_number = self.summary_lines
         section.sentence_length_items.append(('add', 'add performer'))
         if 0 < self.target.performer_count:
-            section.sentence_length_items.append(('del', 'delete performer'))
+            section.sentence_length_items.append(('del', 'delete performers'))
         if 1 < self.target.performer_count:
             section.sentence_length_items.append(('mv', 'move performer'))
         return menu
