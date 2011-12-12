@@ -180,15 +180,16 @@ class PackageProxy(DirectoryProxy):
 
     def add_tag_interactively(self):
         getter = self.make_new_getter(where=self.where())
-        getter.prompts.append('tag name')
-        getter.prompts.append('tag value')
-        getter.should_clear_terminal = False
-        user_input = getter.run()
-        if user_input:
-            tag_name, tag_value = user_input
+        getter.append_string('tag name')
+        getter.append_string('tag value')
+        result = getter.run()
+        if self.backtrack():
+            return
+        if result:
+            tag_name, tag_value = result
             self.add_tag(tag_name, tag_value)
             confirm_line = 'tag added.\n'
-            self.display_lines([confirm_line])
+            self.conditionally_display_lines([confirm_line])
         if self.session.user_input is None:
             self.proceed()
 
@@ -211,14 +212,15 @@ class PackageProxy(DirectoryProxy):
 
     def delete_tag_interactively(self):
         getter = self.make_new_getter(where=self.where())
-        getter.prompts.append('tag name')
-        getter.should_clear_terminal = False
-        user_input = getter.run()
-        if user_input:
-            tag_name = user_input
+        getter.append_string('tag name')
+        result = getter.run()
+        if self.backtrack():
+            return
+        if result:
+            tag_name = result
             self.delete_tag(tag_name)
             confirm_line = 'tag deleted.\n'
-            self.display_lines([confirm_line])
+            self.conditionally_display_lines([confirm_line])
         if self.session.user_input is None:
             self.proceed()
 
@@ -249,12 +251,12 @@ class PackageProxy(DirectoryProxy):
         except ImportError:    
             return collections.OrderedDict([])
 
-    def handle_tags_response(self, key, value):
-        if key == 'b':
+    def handle_tags_menu_result(self, result):
+        if result == 'b':
             return True
-        elif key == 'add':
+        elif result == 'add':
             self.add_tag_interactively()
-        elif key == 'del':
+        elif result == 'del':
             self.delete_tag_interactively()
         return False
 
@@ -271,36 +273,26 @@ class PackageProxy(DirectoryProxy):
         return formatted_tags
 
     def make_tags_menu(self):
-        menu, section = self.make_new_menu(where=self.where())
-        section.lines_to_list = self.list_formatted_tags()
-        section = self.MenuSection()
-        section.sentence_length_items.append(('add', 'add tag'))
-        section.sentence_length_items.append(('del', 'delete tag'))
-        menu.sections.append(section)
+        menu, section = self.make_new_menu(where=self.where(), is_keyed=False)
+        section.menu_entry_tokens = self.list_formatted_tags()
+        section = menu.make_new_section()
+        section.append(('add', 'add tag'))
+        section.append(('del', 'delete tag'))
         return menu
 
     def manage_tags(self):
-        result = False
-        self.breadcrumbs.append('tags')
         while True:
+            self.append_breadcrumb('tags')
             menu = self.make_tags_menu()
-            key, value = menu.run()
-            if self.session.is_complete:
-                result = True
+            result = menu.run()
+            if self.backtrack():
                 break
-            tmp = self.handle_tags_response(key, value)
-            if tmp == 'back':
+            self.handle_tags_menu_result(result)
+            if self.backtrack():
                 break
-            elif tmp == True:
-                result = True
-                break
-            elif tmp == False:
-                pass
-            else:
-                raise ValueError
-        self.breadcrumbs.pop()
-        return result
-
+            self.pop_breadcrumb()
+        self.pop_breadcrumb()
+        
     def pprint_tags(self, tags):
         if tags:
             lines = []
@@ -328,25 +320,34 @@ class PackageProxy(DirectoryProxy):
 
     def set_package_importable_name_interactively(self):
         getter = self.make_new_getter(where=self.where())
+        # TODO: implement getter.append_package_name
         getter.prompts.append('package importable name')
         getter.tests.append(iotools.is_underscore_delimited_lowercase_package_name)
         getter.helps.append('must be underscore-delimited lowercase package name.')
-        self.package_importable_name = getter.run()
+        result = getter.run()
+        if self.backtrack():
+            return
+        self.package_importable_name = result
 
     def set_package_spaced_name_interactively(self):
         getter = self.make_new_getter(where=self.where())
+        # TODO: implement package spaced name
         getter.prompts.append('package spaced name')
         getter.tests.append(iotools.is_space_delimited_lowercase_string)
         getter.helps.append('must be space-delimited lowercase string.')
-        self.package_spaced_name = getter.run()
+        result = getter.run()
+        if self.backtrack():
+            return
+        self.package_spaced_name = result
 
     def set_purview_interactively(self):
         from baca.scf.ScoreWrangler import ScoreWrangler
-        menu, section = self.make_new_menu(where=self.where())
+        menu, section = self.make_new_menu(where=self.where(), is_numbered=True)
         score_wrangler = ScoreWrangler()
-        menu.items_to_number = score_wrangler.iterate_score_titles_with_years()
-        menu.named_pairs.append(('s', 'global to studio'))
-        key, value = menu.run()
+        section.menu_entry_tokens = score_wrangler.iterate_score_titles_with_years()
+        section = menu.make_new_section()
+        section.append(('s', 'global to studio'))
+        result = menu.run()
 
     def unimport_baca_package(self):
         self.remove_package_importable_name_from_sys_modules('baca')

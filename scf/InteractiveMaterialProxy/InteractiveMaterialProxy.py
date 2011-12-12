@@ -1,4 +1,5 @@
 from baca.scf.MaterialProxy import MaterialProxy
+import copy
 
 
 class InteractiveMaterialProxy(MaterialProxy):
@@ -39,7 +40,7 @@ class InteractiveMaterialProxy(MaterialProxy):
     def create(self, package_importable_name):
         self.print_not_implemented()
         line = 'Interactive material package {} created.\n'.format(package_importable_name)
-        self.display_lines([line])
+        self.conditionally_display_lines([line])
 
     def create_interactively(self):
         while True:
@@ -63,63 +64,66 @@ class InteractiveMaterialProxy(MaterialProxy):
         self._original_material_underscored_name = self.material_underscored_name
         self._original_user_input_wrapper = copy.deepcopy(user_input_wrapper)
         while True:
-            menu, section = self.make_new_menu(where=self.where())
-            section.items_to_number = self.user_input_wrapper.editable_lines
+            menu, section = self.make_new_menu(where=self.where(), is_numbered=True)
+            section.menu_entry_tokens = self.user_input_wrapper.editable_lines
             if self.user_input_wrapper.is_complete:
-                section.sentence_length_items.append(('p', 'show pdf of given input'))
-                section.sentence_length_items.append(('m', 'write material to disk'))
+                section.append(('p', 'show pdf of given input'))
+                section.append(('m', 'write material to disk'))
             if self.has_material_underscored_name:
-                section.sentence_length_items.append(('n', 'rename material'))
+                section.append(('n', 'rename material'))
             else:
-                section.sentence_length_items.append(('n', 'name material'))
-            section.sentence_length_items.append(('nc', 'clear name'))
-            section.sentence_length_items.append(('d', 'show demo input values'))
-            section.sentence_length_items.append(('o', 'overwrite with demo input values'))
-            section.sentence_length_items.append(('i', 'read values from disk'))
-            section.sentence_length_items.append(('c', 'clear values'))
-            #section.sentence_length_items.append(('src', 'edit source'))
+                section.append(('n', 'name material'))
+            section.append(('nc', 'clear name'))
+            section.append(('d', 'show demo input values'))
+            section.append(('o', 'overwrite with demo input values'))
+            section.append(('i', 'read values from disk'))
+            section.append(('c', 'clear values'))
+            #section.append(('src', 'edit source'))
             if self.purview is not None:
-                section.sentence_length_items.append(('l', 'change location'))
+                section.append(('l', 'change location'))
             else:
-                section.sentence_length_items.append(('l', 'set location'))
-            key, value = menu.run()
-            if key == 'b':
+                section.append(('l', 'set location'))
+            result = menu.run()
+            if result == 'b':
                 self.interactively_check_and_save_material(self.user_input_wrapper)
-                return key, None
-            elif key == 'c':
+                #return result, None
+                # TODO: return none
+            elif result == 'c':
                 self.clear_values(self.user_input_wrapper)
-            elif key == 'd':
+            elif result == 'd':
                 self.show_demo_input_values()
-            elif key == 'i':
+            elif result == 'i':
                 self.read_user_input_values_from_disk()
-            elif key == 'l':
+            elif result == 'l':
                 self.set_purview_interactively()
-            elif key == 'm':
+            elif result == 'm':
                 self.save_material(self.user_input_wrapper)
-                return key, None
-            elif key == 'n':
+                #return result, None
+                # TODO: return none if possible
+            elif result == 'n':
                 self.name_material()
-            elif key == 'nc':
+            elif result == 'nc':
                 self.unname_material()
-            elif key == 'o':
+            elif result == 'o':
                 self.overwrite_with_demo_input_values(self.user_input_wrapper)
-            elif key == 'p':
+            elif result == 'p':
                 lilypond_file = self.make_lilypond_file_from_user_input_wrapper(self.user_input_wrapper)
                 lilypond_file.file_initial_user_includes.append(self.stylesheet)
                 lilypond_file.header_block.title = markuptools.Markup(self.generic_output_name.capitalize())
                 lilypond_file.header_block.subtitle = markuptools.Markup('(unsaved)')
                 iotools.show(lilypond_file)
-            elif key == 'src':
+            elif result == 'src':
                 self.edit_source_file()
             else:
                 try:
-                    number = int(key)
+                    number = int(result)
                 except:
                     continue
                 index = number - 1
-                key, value = self.user_input_wrapper.list_items[index]
-                new_value = self.edit_item(key, value)
-                self.user_input_wrapper[key] = new_value
+                result, value = self.user_input_wrapper.list_items[index]
+                #new_value = self.edit_item(result, value)
+                new_value = self.edit_item(result)
+                self.user_input_wrapper[result] = new_value
 
     def edit_item(self, key, value):
         prompt = key.replace('_', ' ')
@@ -166,17 +170,17 @@ class InteractiveMaterialProxy(MaterialProxy):
         material_directory = self.write_material_to_disk(user_input_wrapper, material, lilypond_file)
         lines.append('')
         lines.append('material saved to {}.\n'.format(material_directory))
-        self.display_lines(lines)
+        self.conditionally_display_lines(lines)
         self.proceed()
         return True
 
     def show_demo_input_values(self):
-        menu, section = self.make_new_menu(where=self.where())
+        menu, section = self.make_new_menu(where=self.where(), is_numbered=True)
         items = []
         for i, (key, value) in enumerate(self.user_input_template.iteritems()):
             item = '{}: {!r}'.format(key.replace('_', ' '), value)
             items.append(item)
-        menu.items_to_number = items
+        section.menu_entry_tokens = items
         menu.run()
 
     def unname_material(self):
@@ -191,7 +195,7 @@ class InteractiveMaterialProxy(MaterialProxy):
                 self.name_material()
                 lines.append('')
             lines.append('Package short name will be {}.\n'.format(self.material_package_short_name))
-            self.display_lines(lines)
+            self.conditionally_display_lines(lines)
             if self.confirm():
                 break
 

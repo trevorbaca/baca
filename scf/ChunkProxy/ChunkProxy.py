@@ -8,6 +8,10 @@ class ChunkProxy(PackageProxy):
         self.score_template = score_template
 
     ### PUBLIC ATTRIBUTES ###
+    
+    @property
+    def breadcrumb(self):
+        return self.chunk_name
 
     @apply
     def score_template():
@@ -37,51 +41,49 @@ class ChunkProxy(PackageProxy):
         self.write_package_to_disk()
         self.proceed()
 
-    def handle_main_menu_response(self, key, value):
-        if key == 'b':
+    def handle_main_menu_result(self, result):
+        if result == 'b':
             return 'back'
-        elif key == 'd':
+        elif result == 'd':
             self.delete_package()
             return False
-        elif key == 'n':
+        elif result == 'n':
             self.edit_initializer()
 
     def make_main_menu(self):
         menu, section = self.make_new_menu(where=self.where())
-        section.named_pairs.append(('n', 'initializer'))
-        section = self.MenuSection()
-        section.named_pairs.append(('d', 'delete'))
-        menu.sections.append(section)
+        section.append(('n', 'initializer'))
+        section = menu.make_new_section()
+        section.append(('d', 'delete'))
         return menu
 
-    def run(self):
-        result = False
-        self.breadcrumbs.append(self.chunk_name)
+    def run(self, user_input=None):
+        self.assign_user_input(user_input=user_input)
         while True:
+            self.append_breadcrumb()
             menu = self.make_main_menu()
-            key, value = menu.run()
-            if self.session.is_complete:
-                result = True
+            result = menu.run()
+            if self.backtrack():
                 break
-            tmp = self.handle_main_menu_response(key, value)
-            if tmp == 'back':
+            elif not result:
+                self.pop_breadcrumb()
+                continue
+            self.handle_main_menu_result(result)
+            if self.backtrack():
                 break
-            elif tmp == True:
-                result = True
-                break
-            elif tmp == False:
-                pass
-            else:
-                raise ValueError
-        self.breadcrumbs.pop()
+            self.pop_breadcrumb()
+        self.pop_breadcrumb()
 
     def set_chunk_spaced_name_interactively(self):
         getter = self.make_new_getter(where=self.where())
+        # TODO: implement getter.append_space_delimited_lowercase_string
         getter.prompts.append('chunk name')
         getter.tests.append(iotools.is_space_delimited_lowercase_string)
         getter.helps.append('must be space-delimited lowercase string.')
-        chunk_spaced_name = getter.run()
-        package_short_name = chunk_spaced_name.replace(' ', '_')
+        result = getter.run()
+        if self.backtrack():
+            return
+        package_short_name = result.replace(' ', '_')
         package_importable_name = '.'.join([self.package_importable_name, package_short_name])
         chunk_proxy = ChunkProxy(package_importable_name)
         chunk_proxy.create_chunk()

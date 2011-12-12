@@ -8,18 +8,24 @@ import subprocess
 
 class Studio(SCFObject):
 
-    def __init__(self, session=None, user_input=None):
+    def __init__(self, session=None):
         SCFObject.__init__(self, session=session)
         self._global_proxy = GlobalProxy(session=self.session)
         self._score_wrangler = ScoreWrangler(session=self.session)
-        if user_input is not None:
-            self.session.user_input = user_input
 
     ### PUBLIC ATTRIBUTES ###
 
     @property
+    def breadcrumb(self):
+        return 'studio'
+
+    @property
     def global_proxy(self):
         return self._global_proxy
+
+    @property
+    def score_status_string(self):
+        return '{} scores'.format(self.session.scores_to_show)
 
     @property
     def score_wrangler(self):
@@ -36,13 +42,14 @@ class Studio(SCFObject):
         self.session.breadcrumbs = breadcrumbs
 
     def get_materials_package_importable_name_interactively(self):
-        self.breadcrumbs.append('select materials directory')
         while True:
-            menu, section = self.make_new_menu(where=self.where())
-            section.items_to_number = self.score_wrangler.iterate_score_titles_with_years()
-            section.sentence_length_items.append(('baca', 'baca materials directory'))
-            key, value = menu.run()
-            if key == 'baca':
+            self.append_breadcrumb('select materials directory')
+            menu, section = self.make_new_menu(where=self.where(), is_numbered=True)
+            section.menu_entry_tokens = self.score_wrangler.iterate_score_titles_with_years()
+            section = menu.make_new_section() 
+            section.append(('baca', 'baca materials directory'))
+            result = menu.run()
+            if result == 'baca':
                 return self.global_proxy.materials_package_importable_name
             else:
                 score_title = value
@@ -51,7 +58,8 @@ class Studio(SCFObject):
                 score_proxy = self.score_wrangler.ScoreProxy(
                     score_package_importable_name, session=self.session)
                 return score_proxy.materials_package_importable_name
-        self.breadcrumbs.pop()
+            self.pop_breadcrumb()
+        self.pop_breadcrumb()
 
     def get_next_score_package_short_name(self):
         score_package_short_names = list(self.score_wrangler.iterate_score_package_short_names(
@@ -71,56 +79,58 @@ class Studio(SCFObject):
         prev_index = (index - 1) % len(score_package_short_names)
         return score_package_short_names[prev_index]
 
-    def handle_main_menu_response(self, key, value):
-        if not isinstance(key, str):
-            raise TypeError('key must be string.')
-        if key == 'active':
+    def handle_main_menu_result(self, result):
+        if not isinstance(result, str):
+            raise TypeError('result must be string.')
+        if result == 'active':
             self.session.scores_to_show = 'active'
-        elif key == 'all':
+        elif result == 'all':
             self.session.scores_to_show = 'all'
-        elif key == 'k':
+        elif result == 'k':
             self.global_proxy.maker_wrangler.run()
-        elif key == 'm':
+        elif result == 'm':
+            breadcrumb = self.pop_breadcrumb()
             self.global_proxy.material_wrangler.run()
-        elif key == 'mb':
+            self.append_breadcrumb(breadcrumb)
+        elif result == 'mb':
             self.session.scores_to_show = 'mothballed'
-        elif key == 'svn':
+        elif result == 'svn':
             self.manage_svn()
-        elif mathtools.is_integer_equivalent_expr(key):
-            self.edit_score_interactively(value)
+        elif result in self.score_wrangler.iterate_score_package_short_names():
+            self.edit_score_interactively(result)
     
-    def handle_svn_response(self, key, value):
+    def handle_svn_menu_result(self, result):
         '''Return true to exit the svn menu.
         '''
-        result = False
-        if key == 'b':
+        this_result = False
+        if result == 'b':
             return 'back'
-        elif key == 'add':
+        elif result == 'add':
             self.global_proxy.svn_add()
-        elif key == 'add scores':
+        elif result == 'add_scores':
             self.score_wrangler.svn_add()
-        elif key == 'ci':
+        elif result == 'ci':
             self.global_proxy.svn_ci()
             return True
-        elif key == 'ci scores':
+        elif result == 'ci_scores':
             self.score_wrangler.svn_ci()
-        elif key == 'pytest':
+        elif result == 'pytest':
             self.global_proxy.run_py_test()
-        elif key == 'pytest scores':
+        elif result == 'pytest_scores':
             self.score_wrangler.run_py_test()
-        elif key == 'pytest all':
+        elif result == 'pytest_all':
             self.run_py_test_all()
-        elif key == 'st':
+        elif result == 'st':
             self.global_proxy.svn_st()
-        elif key == 'st scores':
+        elif result == 'st_scores':
             self.score_wrangler.svn_st()
-        elif key == 'up':
+        elif result == 'up':
             self.global_proxy.svn_up()
             return True
-        elif key == 'up scores':
+        elif result == 'up_scores':
             self.score_wrangler.svn_up()
             return True
-        return result
+        return this_result
 
     def iterate_interactive_material_proxies(self):
         for material_proxy in self.iterate_material_proxies():
@@ -136,105 +146,108 @@ class Studio(SCFObject):
             yield material_proxy
 
     def make_main_menu(self):
-        menu, section = self.make_new_menu(where=self.where())
+        menu, section = self.make_new_menu(where=self.where(), is_numbered=True, is_keyed=False)
         score_titles = list(self.score_wrangler.iterate_score_titles_with_years(
             scores_to_show=self.session.scores_to_show))
         score_package_short_names = list(self.score_wrangler.iterate_score_package_short_names(
             scores_to_show=self.session.scores_to_show))
-        section.items_to_number = zip(score_titles, score_package_short_names)
-        section.sentence_length_items.append(('k', 'work with interactive material proxies'))
-        section.sentence_length_items.append(('m', 'work with Bača materials'))
-        section.hidden_items.append(('svn', 'work with repository'))
-        section.hidden_items.append(('active', 'show active scores only'))
-        section.hidden_items.append(('all', 'show all scores'))
-        section.hidden_items.append(('mb', 'show mothballed scores only'))
-        menu.include_back = False
-        menu.include_studio = False
+        section.menu_entry_tokens = zip(score_package_short_names, score_titles)
+        section = menu.make_new_section()
+        section.append(('k', 'work with interactive material proxies'))
+        section.append(('m', 'work with Bača materials'))
+        section = menu.make_new_section(is_hidden=True)
+        section.append(('svn', 'work with repository'))
+        section.append(('active', 'show active scores only'))
+        section.append(('all', 'show all scores'))
+        section.append(('mb', 'show mothballed scores only'))
         return menu
 
     def make_svn_menu(self):
-        menu, section = self.make_new_menu(where=self.where())
-        section.sentence_length_items.append(('add', 'svn add'))
-        section.sentence_length_items.append(('ci', 'svn commit'))
-        section.sentence_length_items.append(('st', 'svn status'))
-        section.sentence_length_items.append(('up', 'svn update'))
-        section = self.MenuSection()
-        section.sentence_length_items.append(('add scores', 'svn add (scores)'))
-        section.sentence_length_items.append(('ci scores', 'svn commit (scores)'))
-        section.sentence_length_items.append(('st scores', 'svn status (scores)'))
-        section.sentence_length_items.append(('up scores', 'svn update (scores)'))
-        menu.sections.append(section)
-        section = self.MenuSection()
-        section.sentence_length_items.append(('pytest', 'run regression tests'))
-        section.sentence_length_items.append(('pytest scores', 'run regression tests (scores)'))
-        section.sentence_length_items.append(('pytest all', 'run regression tests (all)'))
-        menu.sections.append(section)
+        menu, section = self.make_new_menu(where=self.where(), is_keyed=False)
+        section.append(('add', 'add'))
+        section.append(('ci', 'ci'))
+        section.append(('st', 'st'))
+        section.append(('up', 'up'))
+        section = menu.make_new_section(is_keyed=False)
+        section.append(('add_scores', 'add_scores'))
+        section.append(('ci_scores', 'ci_scores'))
+        section.append(('st_scores', 'st_scores'))
+        section.append(('up_scores', 'up_scores'))
+        section = menu.make_new_section(is_keyed=False)
+        section.append(('pytest', 'pytest'))
+        section.append(('pytest_scores', 'pytest_scores'))
+        section.append(('pytest_all', 'pytest_all'))
         return menu
 
     def run(self, user_input=None):
-        if user_input is not None:
-            self.session.user_input = user_input
-        self.breadcrumbs.append('studio')
+        type(self).__init__(self)
+        self.assign_user_input(user_input=user_input)
+        self.append_breadcrumb()
         run_main_menu = True
         while True:
-            self.breadcrumbs.append('{} scores'.format(self.session.scores_to_show))
+            self.append_breadcrumb(self.score_status_string)
             if run_main_menu:
                 menu = self.make_main_menu()
-                key, value = menu.run()
+                result = menu.run()
             else:
                 run_main_menu = True
-            #print 'key, value: {!r} {!r}'.format(key, value)
             if self.session.is_complete:
-                self.breadcrumbs.pop()
+                self.pop_breadcrumb()
                 self.session.clean_up()
                 break
             elif self.session.is_navigating_to_next_score:
                 self.session.is_navigating_to_next_score = False
                 self.session.is_backtracking_to_studio = False
-                key, value = '99', self.get_next_score_package_short_name()
+                result = self.get_next_score_package_short_name()
             elif self.session.is_navigating_to_prev_score:
                 self.session.is_navigating_to_prev_score = False
                 self.session.is_backtracking_to_studio = False
-                key, value = '99', self.get_prev_score_package_short_name()
+                result = self.get_prev_score_package_short_name()
             elif self.session.is_backtracking_to_studio:
                 self.session.is_backtracking_to_studio = False
-                self.breadcrumbs.pop()
+                self.pop_breadcrumb()
                 continue
             elif self.session.is_backtracking_to_score:
                 self.session.is_backtracking_to_score = False
-                self.breadcrumbs.pop()
+                self.pop_breadcrumb()
                 continue
-            elif key is None:
-                self.breadcrumbs.pop()
+            elif not result:
+                self.pop_breadcrumb()
                 continue
-            self.handle_main_menu_response(key, value)
+            self.handle_main_menu_result(result)
             if self.session.is_complete:
-                self.breadcrumbs.pop()
+                self.pop_breadcrumb()
                 self.session.clean_up()
                 break
             elif self.session.is_navigating_to_sibling_score:
                 run_main_menu = False
             elif self.session.is_backtracking_to_studio:
                 self.session.is_backtracking_to_studio = False
-                self.breadcrumbs.pop()
+                self.pop_breadcrumb()
                 continue
             elif self.session.is_backtracking_to_score:
                 self.session.is_backtracking_to_score = False
-                self.breadcrumbs.pop()
+                self.pop_breadcrumb()
                 continue
-            self.breadcrumbs.pop()
+            self.pop_breadcrumb()
+        self.pop_breadcrumb()
 
     def manage_svn(self):
-        self.breadcrumbs.append('repository commands')
         while True:
+            self.append_breadcrumb('repository commands')
             menu = self.make_svn_menu()
-            key, value = menu.run()
-            if self.session.backtrack():
+            result = menu.run()
+            if self.session.is_backtracking_to_score:
+                self.session.is_backtracking_to_score = False
+                self.pop_breadcrumb()
+                continue
+            elif self.backtrack():
                 break
-            self.handle_svn_response(key, value)
-            if self.session.backtrack():
+            self.handle_svn_menu_result(result)
+            if self.backtrack():
                 break
-        self.breadcrumbs.pop()
+            self.pop_breadcrumb()
+        self.pop_breadcrumb()
 
     def run_py_test_all(self, prompt_proceed=True):
         proc = subprocess.Popen(
@@ -242,13 +255,14 @@ class Studio(SCFObject):
             shell=True, stdout=subprocess.PIPE)
         lines = [line.strip() for line in proc.stdout.readlines()]
         if lines:
-            self.display_lines(lines)
+            self.conditionally_display_lines(lines)
         if prompt_proceed:
             self.proceed()
 
     def select_interactive_material_proxy(self, klasses=None):
         material_proxies = list(self.iterate_interactive_material_proxies())
-        menu, section = self.make_new_menu(where=self.where())
-        menu.items_to_number = material_proxies
-        key, value = menu.run()
-        return value
+        menu, section = self.make_new_menu(where=self.where(), is_numbered=True)
+        section.menu_entry_tokens = material_proxies
+        result = menu.run()
+        # TODO: probably backtrack here
+        return result

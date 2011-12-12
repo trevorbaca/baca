@@ -6,120 +6,174 @@ def test_InstrumentationEditor_round_trips_01():
     '''
     
     editor = baca.scf.editors.InstrumentationEditor()
-    editor.run(user_input='add 1 1 add 2 1 mv 1 2 del 2 q')
-    assert editor.transcript == \
-    [['Performers & instrumentation', '', '     add: add performer', ''],
-     ['SCF> add', ''],
-     ['Performers & instrumentation - add performer',
-      '',
-      '     1: accordionist',
-      '     2: bassist',
-      '     3: bassoonist',
-      '     4: cellist',
-      '     5: clarinetist',
-      '     6: flutist',
-      '     7: guitarist',
-      '     8: harpist',
-      '     9: hornist',
-      '     10: oboist',
-      '     11: percussionist',
-      '     12: pianist',
-      '     13: trombonist',
-      '     14: trumpeter',
-      '     15: tuba player',
-      '     16: vibraphonist',
-      '     17: violinist',
-      '     18: violist',
-      '     19: xylophonist',
-      ''],
-     ['SCF> 1', ''],
-     ['Performers & instrumentation - add performer - accordionist',
-      '',
-      '     Select instrument',
-      '',
-      '     1: accordion (default)',
-      '',
-      '     other: other instruments',
-      '     none: no instruments',
-      ''],
-     ['SCF> 1', ''],
-     ['Performers & instrumentation',
-      '',
-      '     Performers',
-      '',
-      '     1: accordionist (accordion)',
-      '',
-      '     add: add performer',
-      '     del: delete performer',
-      ''],
-     ['SCF> add', ''],
-     ['Performers & instrumentation - add performer',
-      '',
-      '     1: accordionist',
-      '     2: bassist',
-      '     3: bassoonist',
-      '     4: cellist',
-      '     5: clarinetist',
-      '     6: flutist',
-      '     7: guitarist',
-      '     8: harpist',
-      '     9: hornist',
-      '     10: oboist',
-      '     11: percussionist',
-      '     12: pianist',
-      '     13: trombonist',
-      '     14: trumpeter',
-      '     15: tuba player',
-      '     16: vibraphonist',
-      '     17: violinist',
-      '     18: violist',
-      '     19: xylophonist',
-      ''],
-     ['SCF> 2', ''],
-     ['Performers & instrumentation - add performer - bassist',
-      '',
-      '     Select instrument',
-      '',
-      '     1: contrabass (default)',
-      '',
-      '     other: other instruments',
-      '     none: no instruments',
-      ''],
-     ['SCF> 1', ''],
-     ['Performers & instrumentation',
-      '',
-      '     Performers',
-      '',
-      '     1: accordionist (accordion)',
-      '     2: bassist (contrabass)',
-      '',
-      '     add: add performer',
-      '     del: delete performer',
-      '     mv: move performer',
-      ''],
-     ['SCF> mv', ''],
-     ['Old number> 1', ''],
-     ['New number> 2', ''],
-     ['Performers & instrumentation',
-      '',
-      '     Performers',
-      '',
-      '     1: bassist (contrabass)',
-      '     2: accordionist (accordion)',
-      '',
-      '     add: add performer',
-      '     del: delete performer',
-      '     mv: move performer',
-      ''],
-     ['SCF> del', ''],
-     ['Performer number> 2', ''],
-     ['Performers & instrumentation',
-      '',
-      '     Performers',
-      '',
-      '     1: bassist (contrabass)',
-      '',
-      '     add: add performer',
-      '     del: delete performer',
-      ''],
-     ['SCF> q', '']]
+    editor.run(user_input='add 1 1 add 2 1 move 1 2 del 2 q')
+    transcript = editor.transcript
+    entry_index = -1
+
+    entry_index = entry_index + 1
+    assert transcript[entry_index] == \
+    ['Performers', '', '     add performers', '']
+
+    entry_index = entry_index + 1
+    assert transcript[entry_index] == \
+    ['SCF> add', '']
+
+    entry_index = entry_index + 1
+    assert transcript[entry_index] == \
+    ['Performers - add performers',
+     '',
+     '     1: accordionist (acc)',
+     '     2: bassist (vb)',
+     '     3: bassoonist (bsn)',
+     '     4: cellist (vc)',
+     '     5: clarinetist (B-flat)',
+     '     6: flutist (fl)',
+     '     7: guitarist (gt)',
+     '     8: harpist (hp)',
+     '     9: harpsichordist (hpschd)',
+     '     10: hornist (hn)',
+     '     11: oboist (ob)',
+     '     12: percussionist (perc)',
+     '     13: pianist (pf)',
+     '     14: trombonist (trb)',
+     '     15: trumpeter (tp)',
+     '     16: tubist (tb)',
+     '     17: violinist (vn)',
+     '     18: violist (va)',
+     '']
+
+    entry_index = entry_index + 1
+    assert transcript[entry_index] == \
+    ['SCF> 1', '']
+
+    entry_index = entry_index + 1
+    assert transcript[entry_index] == \
+    ['Performers - add performers - accordionist',
+     '',
+     '     Select instruments',
+     '',
+     '     1: accordion (default)',
+     '',
+     '     other instruments',
+     '     no instruments',
+     '']
+
+    entry_index = entry_index + 1
+    assert transcript[entry_index] == \
+    ['SCF> 1', '']
+
+    entry_index = entry_index + 1
+    assert transcript[entry_index] == \
+    ['Performers',
+     '',
+     '     1: accordionist (accordion)',
+     '',
+     '     add performers',
+     '     delete performers',
+     '']
+
+    entry_index = entry_index + 1
+    assert transcript[entry_index] == \
+    ['SCF> add', '']
+
+    entry_index = entry_index + 1
+    assert transcript[entry_index] == \
+    ['Performers - add performers',
+     '',
+     '     1: accordionist (acc)',
+     '     2: bassist (vb)',
+     '     3: bassoonist (bsn)',
+     '     4: cellist (vc)',
+     '     5: clarinetist (B-flat)',
+     '     6: flutist (fl)',
+     '     7: guitarist (gt)',
+     '     8: harpist (hp)',
+     '     9: harpsichordist (hpschd)',
+     '     10: hornist (hn)',
+     '     11: oboist (ob)',
+     '     12: percussionist (perc)',
+     '     13: pianist (pf)',
+     '     14: trombonist (trb)',
+     '     15: trumpeter (tp)',
+     '     16: tubist (tb)',
+     '     17: violinist (vn)',
+     '     18: violist (va)',
+     '']
+
+    entry_index = entry_index + 1
+    assert transcript[entry_index] == \
+    ['SCF> 2', '']
+
+    entry_index = entry_index + 1
+    assert transcript[entry_index] == \
+    ['Performers - add performers - bassist',
+     '',
+     '     Select instruments',
+     '',
+     '     1: contrabass (default)',
+     '',
+     '     other instruments',
+     '     no instruments',
+     '']
+
+    entry_index = entry_index + 1
+    assert transcript[entry_index] == \
+    ['SCF> 1', '']
+
+    entry_index = entry_index + 1
+    assert transcript[entry_index] == \
+    ['Performers',
+     '',
+     '     1: accordionist (accordion)',
+     '     2: bassist (contrabass)',
+     '',
+     '     add performers',
+     '     delete performers',
+     '     move performers',
+     '']
+
+    entry_index = entry_index + 1
+    assert transcript[entry_index] == \
+    ['SCF> move', '']
+
+    entry_index = entry_index + 1
+    assert transcript[entry_index] == \
+    ['Old number> 1', '']
+
+    entry_index = entry_index + 1
+    assert transcript[entry_index] == \
+    ['New number> 2', '']
+
+    entry_index = entry_index + 1
+    assert transcript[entry_index] == \
+    ['Performers',
+     '',
+     '     1: bassist (contrabass)',
+     '     2: accordionist (accordion)',
+     '',
+     '     add performers',
+     '     delete performers',
+     '     move performers',
+     '']
+
+    entry_index = entry_index + 1
+    assert transcript[entry_index] == \
+    ['SCF> del', '']
+
+    entry_index = entry_index + 1
+    assert transcript[entry_index] == \
+    ['Performers> 2', '']
+
+    entry_index = entry_index + 1
+    assert transcript[entry_index] == \
+    ['Performers',
+     '',
+     '     1: bassist (contrabass)',
+     '',
+     '     add performers',
+     '     delete performers',
+     '']
+
+    entry_index = entry_index + 1
+    assert transcript[entry_index] == \
+    ['SCF> q', '']

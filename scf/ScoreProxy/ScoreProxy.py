@@ -18,6 +18,17 @@ class ScoreProxy(PackageProxy):
     ### PUBLIC ATTRIBUTES ###
 
     @property
+    def annotated_title(self):
+        if isinstance(self.year_of_completion, int):
+            return self.title_with_year
+        else:
+            return self.title
+
+    @property
+    def breadcrumb(self):
+        return self.annotated_title
+
+    @property
     def chunk_wrangler(self):
         return self._chunk_wrangler
 
@@ -40,6 +51,14 @@ class ScoreProxy(PackageProxy):
     @property
     def exg_proxy(self):
         return self._exg_proxy
+
+    @apply
+    def forces_tagline():
+        def fget(self):
+            return self.get_tag('forces_tagline')
+        def fset(self, forces_tagline):
+            return self.add_tag('forces_tagline', forces_tagline)
+        return property(**locals())
 
     @property
     def has_correct_directory_structure(self):
@@ -120,14 +139,36 @@ class ScoreProxy(PackageProxy):
     def create_package_structure(self):
         self.fix_score_package_directory_structure(is_interactive=False)
 
+    def edit_forces_tagline_interactively(self):
+        getter = self.make_new_getter(where=self.where())
+        getter.append_string('Forces tagline')
+        result = getter.run()
+        if self.backtrack():
+            return
+        self.add_tag('forces_tagline', result)
+
     def edit_instrumentation_specifier_interactively(self):
         import baca
         target = self.get_tag('instrumentation')
         editor = baca.scf.editors.InstrumentationEditor(session=self.session, target=target)
-        #target = editor.run()
-        result = editor.run()
+        editor.run() # maybe check for backtracking after this?
         self.add_tag('instrumentation', editor.target)
-        return result
+
+    def edit_title_interactively(self):
+        getter = self.make_new_getter(where=self.where())
+        getter.append_string('new title')
+        result = getter.run()
+        if self.backtrack():
+            return
+        self.add_tag('title', result)
+
+    def edit_year_of_completion_interactively(self):
+        getter = self.make_new_getter(where=self.where())
+        getter.append_integer_or_none('year of completion')
+        result = getter.run()
+        if self.backtrack():
+            return
+        self.add_tag('year_of_completion', result)
 
     def fix_package_structure(self, is_interactive=True):
         if self.package_short_name == 'recursif':
@@ -158,119 +199,95 @@ class ScoreProxy(PackageProxy):
             initializer.write(''.join(lines))
             initializer.close()
 
-    def handle_main_menu_response(self, key, value):
-        if key == 'ch':
-            return self.chunk_wrangler.create_chunk_interactively()
-        elif key == 'mi':
-            return self.material_wrangler.create_interactive_material_interactively()
-        elif key == 'ms':
-            return self.material_wrangler.create_static_material_package_interactively()
-        elif key == 'perf':
-            return self.edit_instrumentation_specifier_interactively()
-        elif key == 'svn':
-            return self.manage_svn()
-        elif key == 'tags':
-            return self.manage_tags()
-        elif key.startswith('h'):
+    def handle_main_menu_result(self, result):
+        if result == 'ch':
+            self.chunk_wrangler.create_chunk_interactively()
+        elif result == 'ft':
+            self.edit_forces_tagline_interactively()
+        elif result == 'mi':
+            self.material_wrangler.create_interactive_material_interactively()
+        elif result == 'ms':
+            self.material_wrangler.create_static_material_package_interactively()
+        elif result == 'pf':
+            self.edit_instrumentation_specifier_interactively()
+        elif result == 'svn':
+            self.manage_svn()
+        elif result == 'tags':
+            self.manage_tags()
+        elif result == 'tl':
+            self.edit_title_interactively()
+        elif result == 'yr':
+            self.edit_year_of_completion_interactively()
+        elif result.startswith('h'):
             chunk_spaced_name = value
             chunk_underscored_name = chunk_spaced_name.replace(' ', '_')
             package_importable_name = '{}.{}'.format(
                 self.chunk_wrangler.package_importable_name, chunk_underscored_name)
             chunk_proxy = self.chunk_wrangler.ChunkProxy(package_importable_name)
             chunk_proxy.title = self.title
-            return chunk_proxy.run()
-        elif key.startswith('m'):
+            chunk_proxy.run()
+        elif result.startswith('m'):
             material_underscored_name = value
             package_importable_name = '{}.{}'.format(
                 self.material_wrangler.package_importable_name, material_underscored_name)
             material_proxy = self.material_wrangler.get_package_proxy(package_importable_name)
-            return material_proxy.run()
+            material_proxy.run()
         else:
             raise ValueError
 
-    def handle_svn_response(self, key, value):
-        if key == 'b':
+    def handle_svn_menu_result(self, result):
+        if result == 'b':
             return True
-        elif key == 'add':
+        elif result == 'add':
             self.svn_add()
-        elif key == 'ci':
+        elif result == 'ci':
             self.svn_ci()
             return True
-        elif key == 'st':
+        elif result == 'st':
             self.svn_st()
 
     def make_main_menu(self):
-        menu, section = self.make_new_menu(where=self.where())
+        menu, section = self.make_new_menu(where=self.where(), is_numbered=True)
         section.section_title = 'chunks'
-        section.items_to_number = self.chunk_wrangler.iterate_package_spaced_names()
-        section.entry_prefix = 'h'
-        section.sentence_length_items.append(('ch', '[create chunk]'))
-        section = self.MenuSection()
+        section.menu_entry_tokens = list(self.chunk_wrangler.iterate_package_spaced_names())
+        section = menu.make_new_section()
+        section.append(('ch', '[create chunk]'))
+        section = menu.make_new_section()
         section.section_title = 'materials'
-        section.items_to_number = self.material_wrangler.iterate_package_underscored_names()
-        section.entry_prefix = 'm'
-        section.sentence_length_items.append(('mi', 'create interactive material'))
-        section.sentence_length_items.append(('ms', 'create static material'))
-        menu.sections.append(section)
-        section = self.MenuSection()
+        section.menu_entry_tokens = list(self.material_wrangler.iterate_package_underscored_names())
+        section = menu.make_new_section()
+        section.append(('mi', 'create interactive material'))
+        section.append(('ms', 'create static material'))
+        section = menu.make_new_section()
         section.section_title = 'setup'
-        section.sentence_length_items.append(('perf', 'performers & instrumentation'))
-        menu.sections.append(section)
-        menu.hidden_items.append(('svn', 'work with repository'))
-        menu.hidden_items.append(('tags', 'work with tags'))
+        section.append(('ft', 'forces tagline'))
+        section.append(('pf', 'performers'))
+        section.append(('tl', 'title'))
+        section.append(('yr', 'year of completion'))
+        section = menu.make_new_section(is_hidden=True)
+        section.append(('svn', 'work with repository'))
+        section.append(('tags', 'work with tags'))
         return menu
 
     def make_svn_menu(self):
-        menu, section = self.make_new_menu(where=self.where())
-        section.sentence_length_items.append(('st', 'svn status'))
-        section.sentence_length_items.append(('add', 'svn add'))
-        section.sentence_length_items.append(('ci', 'svn commit'))
+        menu, section = self.make_new_menu(where=self.where(), is_keyed=False)
+        section.append(('st', 'st'))
+        section.append(('add', 'add'))
+        section.append(('ci', 'ci'))
         return menu
 
-    def run(self):
-        if isinstance(self.year_of_completion, int):
-            self.breadcrumbs.append(self.title_with_year)
-        else:
-            self.breadcrumbs.append(self.title)
-        while True:
-            menu = self.make_main_menu()
-            key, value = menu.run()
-            if self.session.is_backtracking_to_score:
-                self.session.is_backtracking_to_score = False
-                continue
-            elif self.session.backtrack():
-                break
-            elif key is None:
-                continue
-            self.handle_main_menu_response(key, value)
-            if self.session.is_backtracking_to_score:
-                self.session.is_backtracking_to_score = False
-                continue
-            elif self.session.backtrack():
-                break
-        self.breadcrumbs.pop()
-
     def manage_svn(self):
-        result = False
-        self.breadcrumbs.append('repository commands')
         while True:
+            self.append_breadcrumb('repository commands')
             menu = self.make_svn_menu()
-            key, value = menu.run()
-            if self.session.is_complete:
-                result = True
+            result = menu.run()
+            if self.backtrack():
                 break
-            tmp = self.handle_svn_response(key, value)
-            if tmp == 'back':
+            self.handle_svn_menu_result(result)
+            if self.backtrack():
                 break
-            elif tmp == True:
-                result = True
-                break
-            elif tmp == False:
-                pass
-            else:
-                raise ValueError
-        self.breadcrumbs.pop()
-        return result
+            self.pop_breadcrumb()
+        self.pop_breadcrumb()
 
     def profile_package_structure(self):
         if not os.path.exists(self.directory_name):
@@ -282,7 +299,32 @@ class ScoreProxy(PackageProxy):
             lines.append('{} {}'.format(subdirectory_name.ljust(80), os.path.exists(subdirectory_name)))
         for initializer in self.score_initializer_file_names:
             lines.append('{} {}'.format(initializer.ljust(80), os.path.exists(initializer)))
-        self.display_lines(lines)
+        self.conditionally_display_lines(lines)
+
+    def run(self, user_input=None):
+        self.assign_user_input(user_input=user_input)
+        while True:
+            self.append_breadcrumb()
+            menu = self.make_main_menu()
+            result = menu.run()
+            if self.session.is_backtracking_to_score:
+                self.session.is_backtracking_to_score = False
+                self.pop_breadcrumb() 
+                continue
+            elif self.backtrack():
+                break
+            elif not result:
+                self.pop_breadcrumb()
+                continue
+            self.handle_main_menu_result(result)
+            if self.session.is_backtracking_to_score:
+                self.session.is_backtracking_to_score = False
+                self.pop_breadcrumb()
+                continue
+            elif self.backtrack():
+                break
+            self.pop_breadcrumb()
+        self.pop_breadcrumb()
 
     def run_score_package_creation_wizard(self):
         self.print_not_implemented()
@@ -297,7 +339,7 @@ class ScoreProxy(PackageProxy):
         for chunk in chunks:
             lines.append('{}{}'.format(self.make_tab(2), chunk))
         lines.append('')
-        self.display_lines(lines)
+        self.conditionally_display_lines(lines)
 
     def summarize_materials(self):
         materials = list(self.material_wrangler.iterate_package_underscored_names())
@@ -310,4 +352,4 @@ class ScoreProxy(PackageProxy):
             lines.append('')
         for i, material in enumerate(materials):
             lines.append('{}({}) {}'.format(self.make_tab(1), i + 1, material.replace('_', ' ')))
-        self.display_lines(lines)
+        self.conditionally_display_lines(lines)

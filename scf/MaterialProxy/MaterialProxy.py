@@ -262,7 +262,7 @@ class MaterialProxy(PackageProxy):
         else:
             lines.append('LilyPond file is the same. (LilyPond file and PDF preserved.)')
         lines.append('')
-        self.display_lines(lines)
+        self.conditionally_display_lines(lines)
         
     def create_ly_from_visualizer(self, is_forced=False):
         lines = []
@@ -272,7 +272,7 @@ class MaterialProxy(PackageProxy):
         else:
             lines.append('LilyPond file is the same. (LilyPond file preserved.)')
         lines.append('')
-        self.display_lines(lines)
+        self.conditionally_display_lines(lines)
 
     def create_pdf_from_visualizer(self, is_forced=False):
         lines = []
@@ -329,7 +329,7 @@ class MaterialProxy(PackageProxy):
         else:
             package_short_name = response
         line = 'short package name will be {}.\n'.format(package_short_name)
-        self.display_lines([line])
+        self.conditionally_display_lines([line])
         return package_short_name
 
     def get_visualizer_status_of_new_material_package_interactively(self):
@@ -394,59 +394,60 @@ class MaterialProxy(PackageProxy):
         trimmed_visualizer_ly_lines = self.trim_ly_lines(self.visualization_ly_file_name)
         return trimmed_temp_ly_file_lines == trimmed_visualizer_ly_lines
 
-    def run(self):
+    def run(self, user_input=None):
+        self.assign_user_input(user_input=user_input)
         while True:
             menu, section = self.make_new_menu(where=self.where())
             if self.is_interactive:
-                section.sentence_length_items.append(('k', 'reload user input'))
-            section.named_pairs.append(('i', 'input'))
-            section.named_pairs.append(('o', 'output'))
+                section.append(('k', 'reload user input'))
+            section.append(('i', 'input'))
+            section.append(('o', 'output'))
             if self.has_visualizer:
-                section.named_pairs.append(('v', 'visualizer'))
+                section.append(('v', 'visualizer'))
             if self.has_visualization_ly:
-                section.named_pairs.append(('l', 'ly'))
+                section.append(('l', 'ly'))
             if self.has_stylesheet:
-                section.named_pairs.append(('y', 'stylesheet'))
+                section.append(('y', 'stylesheet'))
             if self.has_visualization_pdf:
-                section.named_pairs.append(('p', 'pdf'))
-            section.named_pairs.append(('n', 'initializer'))
-            section = self.MenuSection()
-            section.named_pairs.append(('d', 'delete'))
-            section.named_pairs.append(('r', 'rename'))
-            section.named_pairs.append(('s', 'summarize'))
-            section.named_pairs.append(('t', 'tags'))
-            section.named_pairs.append(('z', 'regenerate'))
-            menu.sections.append(section)
-            key, value = menu.run()
-            if key == 'b':
-                return key, None
-            elif key == 'd':
+                section.append(('p', 'pdf'))
+            section.append(('n', 'initializer'))
+            section = menu.make_new_section()
+            section.append(('d', 'delete'))
+            section.append(('r', 'rename'))
+            section.append(('s', 'summarize'))
+            section.append(('t', 'tags'))
+            section.append(('z', 'regenerate'))
+            result = menu.run()
+            if result == 'b':
+                #return result, None
+                return
+            elif result == 'd':
                 self.delete_material()
                 break
-            elif key == 'i':
-                self.manage_input(key)
-            elif key == 'k':
+            elif result == 'i':
+                self.manage_input(result)
+            elif result == 'k':
                 self.reload_user_input()
-            elif key == 'l':
-                self.manage_ly(key)
-            elif key == 'n':
+            elif result == 'l':
+                self.manage_ly(result)
+            elif result == 'n':
                 self.edit_initializer()
-            elif key == 'o':
-                self.manage_output(key)
-            elif key == 'p':
-                self.manage_pdf(key)
-            elif key == 'r':
+            elif result == 'o':
+                self.manage_output(result)
+            elif result == 'p':
+                self.manage_pdf(result)
+            elif result == 'r':
                 self.rename_material()
-            elif key == 's':
+            elif result == 's':
                 self.summarize_material_package()
-            elif key == 't':
+            elif result == 't':
                 self.manage_tags()
-            elif key == 'v':
-                self.manage_visualizer(key)
-            elif key == 'y':
+            elif result == 'v':
+                self.manage_visualizer(result)
+            elif result == 'y':
                 self.edit_stylesheet()
-            elif key == 'z':
-                self.manage_regeneration(key)
+            elif result == 'z':
+                self.manage_regeneration(result)
 
     def manage_input(self, command_string):
         lines = []
@@ -468,7 +469,7 @@ class MaterialProxy(PackageProxy):
         elif command_string == 'iw':
             self.write_input_data_to_output_file(is_forced=True)
             lines.append('')
-        self.display_lines(lines)
+        self.conditionally_display_lines(lines)
 
     def manage_ly(self, command_string):
         if command_string == 'l':
@@ -479,7 +480,7 @@ class MaterialProxy(PackageProxy):
                     self.create_ly_from_visualizer()    
             elif self.has_output_data:
                 line = "data exists but visualizer doesn't.\n"
-                self.display_lines([line])
+                self.conditionally_display_lines([line])
                 if self.query('create visualizer? '):
                     self.create_visualizer()
             elif self.has_input_file:
@@ -499,7 +500,7 @@ class MaterialProxy(PackageProxy):
             lines.append('{}: write ly'.format('lw'.rjust(self.help_item_width)))
             lines.append('{}: write ly and open'.format('lwo'.rjust(self.help_item_width)))
             lines.append('')
-            self.display_lines(lines)
+            self.conditionally_display_lines(lines)
 
     def manage_output(self, command_string):
         lines = []
@@ -512,7 +513,7 @@ class MaterialProxy(PackageProxy):
             lines.append('{}: open output file'.format('o'.rjust(self.help_item_width)))
             lines.append('{}: display output data'.format('od'.rjust(self.help_item_width)))
             lines.append('')
-        self.display_lines(lines)
+        self.conditionally_display_lines(lines)
 
     def manage_pdf(self, command_string):
         if command_string == 'p':
@@ -523,7 +524,7 @@ class MaterialProxy(PackageProxy):
                     self.create_pdf_from_visualizer()
             elif self.has_output_data:
                 line =  "data exists but visualizer doesn't.\n"
-                self.display_lines([line])
+                self.conditionally_display_lines([line])
                 if self.query('create visualizer? '):
                     self.create_visualizer()
             elif self.has_input_file:
@@ -543,7 +544,7 @@ class MaterialProxy(PackageProxy):
             lines.append('{}: write pdf '.format('pw'.rjust(self.help_item_width)))
             lines.append('{}: write pdf and open'.format('pwo'.rjust(self.help_item_width)))
             lines.append('')
-            self.display_lines(lines)
+            self.conditionally_display_lines(lines)
 
     def manage_regeneration(self, command_string):
         if command_string == 'z':
@@ -553,7 +554,7 @@ class MaterialProxy(PackageProxy):
             lines.append('{}: regenerate everything'.format('z'.rjust(self.help_item_width)))
             lines.append('{}: regenerate everything and open pdf'.format('zo'.rjust(self.help_item_width)))
             lines.append('')
-            self.display_lines(lines)
+            self.conditionally_display_lines(lines)
         elif command_string == 'zo':
             self.regenerate_everything(is_forced=True)
             self.open_visualzation_pdf()
@@ -569,7 +570,7 @@ class MaterialProxy(PackageProxy):
                     'vj'.rjust(self.help_item_width)))
                 lines.append('{}: run abjad on visualizer'.format('vjj'.rjust(self.help_item_width)))
                 lines.append('')
-                self.display_lines(lines)
+                self.conditionally_display_lines(lines)
             elif command_string == 'vj':
                 self.edit_visualizer()
                 self.run_abjad_on_visualizer()
@@ -577,7 +578,7 @@ class MaterialProxy(PackageProxy):
                 self.run_abjad_on_visualizer()
         elif self.has_output_data:
             line = "data exists but visualizer doesn't.\n"
-            self.display_lines([line])
+            self.conditionally_display_lines([line])
             if self.query('create visualizer? '):
                 self.create_visualizer()
         elif self.has_input_file:
@@ -615,7 +616,7 @@ class MaterialProxy(PackageProxy):
 
     def rename_material(self):
         line = 'current material name: {}'.format(self.material_underscored_name)
-        self.display_lines([line])
+        self.conditionally_display_lines([line])
         new_material_spaced_name = self.handle_raw_input('new material name:     ')
         new_material_underscored_name = new_material_spaced_name.replace(' ', '_')
         new_material_underscored_name = self.prepend_score_package_short_name(new_material_underscored_name)
@@ -623,7 +624,7 @@ class MaterialProxy(PackageProxy):
         lines.append('current material name: {}'.format(self.material_underscored_name))
         lines.append('new material name:     {}'.format(new_material_underscored_name))
         lines.append('')
-        self.display_lines(lines)
+        self.conditionally_display_lines(lines)
         if not self.confirm():
             return
         if self.is_in_repository:
@@ -683,11 +684,11 @@ class MaterialProxy(PackageProxy):
 
     def run_abjad_on_input_file(self):
         os.system('abjad {}'.format(self.input_file_name))
-        self.display_lines([''])
+        self.conditionally_display_lines([''])
 
     def run_abjad_on_visualizer(self):
         os.system('abjad {}'.format(self.visualizer_file_name))
-        self.display_lines([''])
+        self.conditionally_display_lines([''])
 
     def summarize_material_package(self):
         lines = []
@@ -713,7 +714,7 @@ class MaterialProxy(PackageProxy):
         if missing:
             lines.append('missing {}.'.format(', '.join(missing)))
         lines.append('')
-        self.display_lines(lines)
+        self.conditionally_display_lines(lines)
         self.proceed()
         
     def trim_ly_lines(self, ly_file_name):
@@ -766,7 +767,7 @@ class MaterialProxy(PackageProxy):
         output_file.close()
         self.add_material_to_materials_initializer()
         line = "material in 'input.py' written to 'output.py'."
-        self.display_lines([line])
+        self.conditionally_display_lines([line])
 
     def write_input_data_to_output_file(self, is_forced=False):
         is_changed = self.import_material_from_input_file() != self.import_material_from_output_file()
@@ -774,7 +775,7 @@ class MaterialProxy(PackageProxy):
             self._write_input_data_to_output_file()
         else:
             line = 'input data equals output data. (Output data preserved.)'
-            self.display_lines([line])
+            self.conditionally_display_lines([line])
         return is_changed
 
     def write_output_file_to_disk(self, material):

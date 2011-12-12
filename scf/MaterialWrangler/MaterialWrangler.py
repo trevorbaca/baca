@@ -25,6 +25,10 @@ class MaterialWrangler(PackageWrangler, PackageProxy):
         import baca
         return baca.scf.StaticMaterialProxy
 
+    @property
+    def breadcrumb(self):
+        return 'materials'
+
     @apply
     def directory_name():
         def fget(self):
@@ -52,29 +56,18 @@ class MaterialWrangler(PackageWrangler, PackageProxy):
         else:
             return self.StaticMaterialProxy(package_importable_name)
 
-    def handle_main_menu_response(self, key, value):
-        if key == 'b':
-            return 'back'
-        elif key == 'i':
+    def handle_main_menu_result(self, result):
+        print 'result: {!r}'.format(result)
+        if result == 'i':
             menu_title = menu.menu_title
             self.material_wrangler.create_interactive_material_package_interactively()
-        elif key == 's':
+        elif result == 's':
             menu_title = menu.menu_title
             self.material_wrangler.create_static_material_interactively(menu_title=menu_title)
         else:
-            score_package_importable_name = 'baca.materials'
-            material_underscored_name = value
-            if material_underscored_name.endswith('(@)'):
-                package_importable_name = '{}.{}'.format(
-                    score_package_importable_name, material_underscored_name.strip(' (@)'))
-                material_proxy = self.StaticMaterialProxy(package_importable_name)
-            else:
-                package_importable_name = '{}.{}'.format(
-                    score_package_importable_name, material_underscored_name)
-                material_proxy = self.InteractiveMaterialProxy(package_importable_name)
-            material_proxy.title = 'Materials'
+            material_proxy = self.make_material_proxy(result)
             material_proxy.run()
-
+        
     def iterate_material_summaries(self):
         for material_proxy in self.iterate_package_proxies():
             summary = material_proxy.package_short_name
@@ -83,30 +76,41 @@ class MaterialWrangler(PackageWrangler, PackageProxy):
             yield summary
 
     def make_main_menu(self):
-        menu, section = self.make_new_menu(where=self.where())
-        section.items_to_number = list(self.iterate_material_summaries())
-        section.sentence_length_items.append(('i', 'create interactive material'))
-        section.sentence_length_items.append(('s', 'create static material'))
+        menu, section = self.make_new_menu(where=self.where(), is_numbered=True, is_ranged=True)
+        #menu, section = self.make_new_menu(where=self.where(), is_numbered=False)
+        section.menu_entry_tokens = list(self.iterate_material_summaries())
+        print 'ZEE: {!r}'.format(section.menu_entry_tokens)
+        section.return_value_attr = 'body'
+        section = menu.make_new_section()
+        section.append(('i', 'create interactive material'))
+        section.append(('s', 'create static material'))
         return menu
 
-    def run(self):
-        result = False
-        self.breadcrumbs.append('materials')
+    def make_material_proxy(self, material_underscored_name):
+        score_package_importable_name = 'baca.materials'
+        package_importable_name = []
+        package_importable_name.append(score_package_importable_name)
+        package_importable_name.append(material_underscored_name.strip(' (@)'))
+        package_importable_name = '.'.join(package_importable_name)
+        if material_underscored_name.endswith('(@)'):
+            material_proxy = self.StaticMaterialProxy(package_importable_name)
+        else:
+            material_proxy = self.InteractiveMaterialProxy(package_importable_name)
+        return material_proxy
+
+    def run(self, user_input=None):
+        self.assign_user_input(user_input=user_input)
         while True:
+            self.append_breadcrumb()
             menu = self.make_main_menu()
-            key, value = menu.run()
-            if self.session.is_complete:
-                result = True
+            result = menu.run()
+            if self.backtrack():
                 break
-            tmp = self.handle_main_menu_response(key, value)
-            if tmp == 'back':
+            elif not result:
+                self.pop_breadcrumb()
+                continue
+            self.handle_main_menu_result(result)
+            if self.backtrack():
                 break
-            elif tmp == True:
-                result = True
-                break
-            elif tmp == False:
-                pass
-            else:
-                raise ValueError
-        self.breadcrumbs.pop()
-        return result
+            self.pop_breadcrumb()
+        self.pop_breadcrumb()

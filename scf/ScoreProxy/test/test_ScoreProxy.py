@@ -23,10 +23,10 @@ def test_ScoreProxy_01():
     assert not score_proxy.is_studio_global_purview
 
     instrumentation = scoretools.InstrumentationSpecifier()
-    performer_1 = scoretools.Performer('Alto Flute')
+    performer_1 = scoretools.Performer('flutist')
     performer_1.instruments.append(instrumenttools.AltoFlute())
     instrumentation.performers.append(performer_1)
-    performer_2 = scoretools.Performer('Guitar')
+    performer_2 = scoretools.Performer('guitarist')
     performer_2.instruments.append(instrumenttools.Guitar())
     instrumentation.performers.append(performer_2)
 
@@ -57,75 +57,40 @@ def test_ScoreProxy_02():
     '''
 
     archipel = baca.scf.ScoreProxy('archipel')
-    archipel.session.user_input = 'q'
-    archipel.run()
+    archipel.run(user_input='q')
 
-    assert archipel.transcript[-2] == [
-     "L'archipel du corps (2011)",
-     '',
-     '     Chunks',
-     '',
-     '     ch: [create chunk]',
-     '',
-     '     Materials',
-     '',
-     '     mi: create interactive material',
-     '     ms: create static material',
-     '',
-     '     Setup',
-     '',
-     '     perf: performers & instrumentation',
-     '']
+    assert archipel.transcript[-2] == \
+    ["L'archipel du corps (2011)",
+      '',
+      '     Chunks',
+      '',
+      '     [create chunk] (ch)',
+      '',
+      '     Materials',
+      '',
+      '     create interactive material (mi)',
+      '     create static material (ms)',
+      '',
+      '     Setup',
+      '',
+      '     forces tagline (ft)',
+      '     performers (pf)',
+      '     title (tl)',
+      '     year of completion (yr)',
+      '']
 
 
 def test_ScoreProxy_03():
-    '''Main menu to hidden menu.
-    '''
-
-    archipel = baca.scf.ScoreProxy('archipel')
-    archipel.session.user_input = 'hidden q'
-    archipel.run()
-
-    assert archipel.transcript[-2] == [
-     '     b: back',
-     '     exec: exec statement',
-     '     grep: grep baca directories',
-     '     here: edit client source',
-     '     hidden: show hidden items',
-     '     next: next score',
-     '     prev: prev score',
-     '     q: quit',
-     '     redraw: redraw',
-     '     score: return to score',
-     '     studio: return to studio',
-     '     svn: work with repository',
-     '     tags: work with tags',
-     '     where: show menu client',
-     '']
-
-
-def test_ScoreProxy_04():
     '''Manage tags menu.
     '''
 
     archipel = baca.scf.ScoreProxy('archipel')
     archipel.session.user_input = 'q'
     archipel.manage_tags()
-
-    assert archipel.transcript[-2] == \
-     ['Tags',
-      '',
-      "     'composer': TrevorBaca()",
-      "     'instrumentation': InstrumentationSpecifier([Performer(name='flutist', instruments=[Piccolo(), AltoFlute(), ContrabassFlute(), UntunedPercussion('caxixi', 'cx.')]), Performer(name='guitarist', instruments=[Guitar(), UntunedPercussion('caxixi', 'cx.')]), Performer(name='accordionist', instruments=[Accordion()]), Performer(name='percussionist', instruments=[Marimba(), Glockenspiel(), UntunedPercussion('bass drum', 'b. drum'), UntunedPercussion('claves', 'clv.'), UntunedPercussion('caxixi', 'cx.')])])",
-      '     \'title\': "L\'archipel du corps"',
-      "     'year_of_completion': 2011",
-      '',
-      '     add: add tag',
-      '     del: delete tag',
-      '']
+    assert archipel.ts == (2,)
 
 
-def test_ScoreProxy_05():
+def test_ScoreProxy_04():
     '''Add and delete tag interactively.
     '''
 
@@ -140,13 +105,12 @@ def test_ScoreProxy_05():
     assert archipel.get_tag('foo') is None
 
 
-def test_ScoreProxy_06():
+def test_ScoreProxy_05():
     '''User 'studio' input results in return to studio main menu.
     '''
     
     studio = baca.scf.Studio()
-    studio.session.user_input = '1 studio q'
-    studio.run()
+    studio.run(user_input='1 studio q')
 
     assert len(studio.transcript) == 6
     assert studio.transcript[0][0] == 'Studio - active scores'
@@ -154,26 +118,24 @@ def test_ScoreProxy_06():
     assert studio.transcript[4][0] == 'Studio - active scores'
 
 
-def test_ScoreProxy_07():
+def test_ScoreProxy_06():
     '''User 'studio' input terminates execution (when score not managed from studio).
     '''
 
     archipel = baca.scf.ScoreProxy('archipel')
-    archipel.session.user_input = 'studio'
-    archipel.run()
+    archipel.run(user_input='studio')
 
     assert len(archipel.transcript) == 2
     assert archipel.transcript[0][0] == "L'archipel du corps (2011)"
     assert archipel.transcript[1][0] == 'SCF> studio'
 
 
-def test_ScoreProxy_08():
+def test_ScoreProxy_07():
     '''User 'b' input returns to studio main menu.
     '''
 
     studio = baca.scf.Studio()
-    studio.session.user_input = '1 b q'
-    studio.run()
+    studio.run(user_input='1 b q')
 
     assert len(studio.transcript) == 6
     assert studio.transcript[0][0] == 'Studio - active scores'
@@ -181,7 +143,7 @@ def test_ScoreProxy_08():
     assert studio.transcript[4][0] == 'Studio - active scores'
 
 
-def test_ScoreProxy_09():
+def test_ScoreProxy_08():
     '''Shared session.
     '''
 
@@ -196,13 +158,12 @@ def test_ScoreProxy_09():
     assert score_proxy.session is score_proxy.maker_wrangler.session
 
 
-def test_ScoreProxy_10():
+def test_ScoreProxy_09():
     '''Back is handled correctly.
     '''
 
     studio = baca.scf.Studio()
-    studio.session.user_input = '1 b q'
-    studio.run()
+    studio.run(user_input='1 b q')
     transcript = studio.transcript
     
     assert len(transcript) == 6

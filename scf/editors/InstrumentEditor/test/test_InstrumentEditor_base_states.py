@@ -8,15 +8,17 @@ def test_InstrumentEditor_base_states_01():
 
     editor = baca.scf.editors.InstrumentEditor()
     editor.run(user_input='1 q')
-    transcript = editor.transcript
-    assert len(transcript) == 4
-    assert transcript[-2] == \
-     ['Accordion',
+    assert editor.ts == (4,)
+    assert editor.transcript[-2] == \
+    ['Accordion',
       '',
-      "     in: instrument name ('accordion')",
-      "     inm: instrument name markup (Markup('accordion'))",
-      "     sin: short instrument name ('acc.')",
-      "     sinm: short instrument name markup (Markup('acc.'))",
+      "     instrument name (in):                'accordion' (in)",
+      "     instrument name markup (inm):        Markup('Accordion') (inm)",
+      "     short instrument name (sin):         'acc.' (sin)",
+      "     short instrument name markup (sinm): Markup('Acc.') (sinm)",
+      '',
+      '     range: [E1, C8]',
+      '     clefs: treble, bass',
       '']
 
 

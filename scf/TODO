@@ -1,19 +1,39 @@
 TODO
 
-3. Implement 'all' object of deletion.
+1. Add aggregate Menu.menu_entry_tokens, Menu.menu_entry_bodies, etc.
 
-4. Change named pair handling from 'add: add performer' to just 'add performer'.
+2. Allow only one section per menu to be numbered.
 
-5. Remove default prompt when default handling. Detect empty return and accept as default indicator.
+3. Implement Menu.has_numbered_section attribute.
 
-6. Implement 'del 5'.
+4. Create test_Menu_run.py to document menu build configurations.
 
-(7. Implement menu range-handling selection. So 1-2 for both items 1 and 2. Also 1,3-4 and so on.)
+5. Implement remaining clarinets.
 
-8. List percussionist instruments correctly.
+6. Implement saxophones.
 
-9. Dialog with user when user selects untuned percussion. Request instrument name.
+7. Audit and implement remaining instruments.
 
-10. Take another stab at (short) instrument name markup handling. Automatically capitalize intelligently.
+8. Clean up PitchRangeEditor main menu.
 
-11. Extend studio to accpet 'Sekka' in addition to 'sekka'
+9. Edit instrument transposition.
+
+10. Edit instrument clefs.
+
+11. Remove blank line between help request and help response.
+
+12. Remove blank line between exec request and exec response.
+
+13. Remove extra appearance of B-flat clarinet from clarinetist config menu.
+
+14. Research 'with' for breadcrumb management.
+
+15. Wrap tests around existing material and chunk menus.
+
+16. Implement 'make new range' functionality available to studio in global purview.
+
+17. Implement 'make new range' functionality available to each score.
+
+18. Change Instrument._default_performer_names to house (full, abbreviation) pairs.
+
+19. Use performer abbreviations to populate performer selection menu.

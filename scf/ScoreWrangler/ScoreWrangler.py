@@ -56,12 +56,8 @@ class ScoreWrangler(PackageWrangler):
             score_proxy.profile_package_structure()
 
     def select_score_proxy(self):
-        menu, section = self.make_new_menu(where=self.where())
-        section.items_to_number = self.iterate_score_titles_with_years()
-        section.sentence_length_items.append(('s', 'studio'))
-        key, value = menu.run()
-        if key == 's':
-            return None
+        menu, section = self.make_new_menu(where=self.where(), is_numbered=True)
+        section.menu_entry_tokens = self.iterate_score_titles_with_years()
         score_package_short_name = self.title_to_score_package_short_name(value)
         score_proxy = self.ScoreProxy(score_package_short_name, session=self.session)
         return score_proxy
@@ -69,7 +65,7 @@ class ScoreWrangler(PackageWrangler):
     def svn_ci(self, prompt_proceed=True):
         commit_message = self.handle_raw_input('commit message')
         line = 'commit message will be: "{}"\n'.format(commit_message)
-        self.display_cap_lines([line])
+        self.conditionally_display_cap_lines([line])
         if not self.confirm():
             return
         for score_proxy in self.iterate_score_proxies(scores_to_show=self.session.scores_to_show):

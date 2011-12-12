@@ -1,16 +1,16 @@
-import datetime
-import os
-import time
+from baca.scf.Transcript import Transcript
 
 
 class Session(object):
     
     def __init__(self, user_input=None):
-        self._complete_transcript = []
+        self._command_history = []
+        self._complete_transcript = Transcript()
         self._session_once_had_user_input = False
-        self._start_time = self.current_time
         self.backtrack_preservation_is_active = False
+        self.breadcrumbs = []
         self.current_score_package_short_name = None
+        self.display_pitch_ranges_with_numbered_pitches = False
         self.dump_transcript = False
         self.hide_next_redraw = False
         self.initial_user_input = user_input
@@ -19,8 +19,9 @@ class Session(object):
         self.is_backtracking_to_studio = False
         self.is_navigating_to_next_score = False
         self.is_navigating_to_prev_score = False
-        self.breadcrumbs = []
+        self.last_command_was_composite = False
         self.scores_to_show = 'active'
+        self.transcribe_next_command = True
         self.user_input = user_input
         self.user_specified_quit = False
 
@@ -53,6 +54,14 @@ class Session(object):
         return property(**locals())
 
     @property
+    def command_history(self):
+        return self._command_history
+
+    @property
+    def command_history_string(self):
+        return ' '.join(self.command_history)
+
+    @property
     def complete_transcript(self):
         return self._complete_transcript
 
@@ -64,10 +73,6 @@ class Session(object):
             assert isinstance(current_score_package_short_name, (str, type(None)))
             self._current_score_package_short_name = current_score_package_short_name
         return property(**locals())
-
-    @property
-    def current_time(self):
-        return datetime.datetime.fromtimestamp(time.time())
 
     @apply
     def dump_transcript():
@@ -140,6 +145,12 @@ class Session(object):
         return False
 
     @property
+    def last_semantic_command(self):
+        for command in reversed(self.command_history):
+            if not command.startswith('.'):
+                return command
+
+    @property
     def menu_header(self):
         if self.breadcrumbs:
             return ' - '.join(self.breadcrumbs)
@@ -155,30 +166,8 @@ class Session(object):
         return self._session_once_had_user_input
 
     @property
-    def start_time(self):
-        return self._start_time
-
-    @property
     def transcript(self):
-        return [entry[1] for entry in self.complete_transcript]
-
-    @property
-    def transcript_signature(self):
-        result = []
-        result.append(len(self.transcript))
-        indices_already_encountered = set([])
-        for i in range(len(self.transcript)):
-            if i not in indices_already_encountered:
-                shared_indices = [i]
-                reference_element = self.transcript[i]
-                for j, current_element in enumerate(self.transcript):
-                    if current_element == reference_element:
-                        if i != j:
-                            shared_indices.append(j)
-                if 1 < len(shared_indices):
-                    result.append(tuple(shared_indices))
-                indices_already_encountered.update(shared_indices)
-        return tuple(result)
+        return self.complete_transcript.short_transcript
 
     @apply
     def user_input():
@@ -199,6 +188,15 @@ class Session(object):
         return False
 
     @apply
+    def transcribe_next_command():
+        def fget(self):
+            return self._transcribe_next_command
+        def fset(self, transcribe_next_command):
+            assert isinstance(transcribe_next_command, bool)
+            self._transcribe_next_command = transcribe_next_command
+        return property(**locals())
+
+    @apply
     def user_specified_quit():
         def fget(self):
             return self._user_specified_quit
@@ -208,15 +206,6 @@ class Session(object):
         return property(**locals())
 
     ### PUBLIC METHODS ###
-
-    def append_lines_to_transcript(self, lines, clear_terminal=None):
-        assert isinstance(lines, list)
-        assert isinstance(clear_terminal, (type(True), type(None)))
-        entry = []
-        entry.append(self.current_time)
-        entry.append(lines[:])
-        entry.append(clear_terminal)
-        self.complete_transcript.append(entry)
 
     def backtrack(self):
         if self.is_complete:
@@ -233,24 +222,7 @@ class Session(object):
             
     def clean_up(self):
         if self.dump_transcript:
-            self.write_complete_transcript_to_disk()
+            self.complete_transcript.write_to_disk(self.output_directory)
 
-    def format_transcript_entry(self, entry):
-        assert len(entry) == 3
-        result = []
-        result.append(str(entry[0]))
-        if entry[2]:
-            result.append('clear_terminal=True')
-        for line in entry[1]:
-            result.append(line)
-        return '\n'.join(result)
-
-    def write_complete_transcript_to_disk(self):
-        start_time = self.start_time.strftime('%Y-%m-%d-%H-%M-%S')
-        file_name = 'session-{}.txt'.format(start_time)
-        file_path = os.path.join(self.output_directory, file_name)
-        output = file(file_path, 'w')
-        for entry in self.complete_transcript:
-            output.write(self.format_transcript_entry(entry))
-            output.write('\n\n')
-        output.close()
+    def reinitialize(self):
+        type(self).__init__(self)

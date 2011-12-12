@@ -1,7 +1,8 @@
 #! /usr/bin/env python
 import baca
+import sys
 
 
 studio = baca.scf.Studio()
 studio.session.dump_transcript = True
-studio.run()
+studio.run(user_input=' '.join(sys.argv[1:]))

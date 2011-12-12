@@ -8,23 +8,19 @@ def test_PerformerEditor_move_instrument_01():
     '''
 
     studio = baca.scf.Studio()
-    studio.run('1 perf 1 mv q')
+    studio.run(user_input='1 perf 1 move q')
     assert studio.ts == (9, (1, 5))
 
-    studio = baca.scf.Studio()
-    studio.run('1 perf 1 mv b q')
+    studio.run(user_input='1 perf 1 move b q')
     assert studio.ts == (11, (1, 5), (6, 9))
 
-    studio = baca.scf.Studio()
-    studio.run('1 perf 1 mv studio q')
+    studio.run(user_input='1 perf 1 move studio q')
     assert studio.ts == (11, (0, 9), (1, 5))
 
-    studio = baca.scf.Studio()
-    studio.run('1 perf 1 mv score q')
+    studio.run(user_input='1 perf 1 move score q')
     assert studio.ts == (11, (1, 5), (2, 9))
 
-    studio = baca.scf.Studio()
-    studio.run('1 perf 1 mv foo q')
+    studio.run(user_input='1 perf 1 move foo q')
     assert studio.ts == (11, (1, 5))
 
 
@@ -33,5 +29,5 @@ def test_PerformerEditor_move_instrument_02():
     '''
 
     editor = baca.scf.editors.PerformerEditor()
-    editor.run(user_input='add 1 add 2 mv 1 2 q')
+    editor.run(user_input='add 1 add 2 move 1 2 q')
     assert editor.target == Performer(instruments=[AltoFlute(), Accordion()])

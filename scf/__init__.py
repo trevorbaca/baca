@@ -15,11 +15,11 @@ from PackageProxy import PackageProxy
 from PackageWrangler import PackageWrangler
 from ScoreProxy import ScoreProxy
 from ScoreTemplate import ScoreTemplate
-from ScoreTemplateWizard import ScoreTemplateWizard
 from ScoreWrangler import ScoreWrangler
 from Session import Session
 from StaticMaterialProxy import StaticMaterialProxy
 from Studio import Studio
+from Transcript import Transcript
 from TrevorBaca import TrevorBaca
 from UserInputWrapper import UserInputWrapper
 import editors

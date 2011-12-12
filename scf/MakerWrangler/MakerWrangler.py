@@ -25,6 +25,10 @@ class MakerWrangler(PackageWrangler, PackageProxy):
         import baca
         return baca.scf.Maker
 
+    @property
+    def breadcrumb(self):
+        return 'makers'
+
     ### PUBLIC METHODS ###
 
     @apply
@@ -157,10 +161,10 @@ class MakerWrangler(PackageWrangler, PackageProxy):
         stylesheet_file_pointer.write(stylesheet.format)
         stylesheet_file_pointer.close()
         
-    def handle_main_menu_response(self, key, value):
-        if key == 'b':
+    def handle_main_menu_result(self, result):
+        if result == 'b':
             return 'back'
-        elif key == 'new':
+        elif result == 'new':
             self.make_maker()
         else:
             maker_name = value
@@ -170,39 +174,35 @@ class MakerWrangler(PackageWrangler, PackageProxy):
             maker.run()
 
     def make_main_menu(self):
-        menu, section = self.make_new_menu(where=self.where())
-        menu.items_to_number = self.list_maker_spaced_class_names()
-        menu.named_pairs.append(('new', 'make maker'))
+        menu, section = self.make_new_menu(where=self.where(), is_numbered=True)
+        section.menu_entry_tokens = self.list_maker_spaced_class_names()
+        section = menu.make_new_section()
+        section.append(('new', 'make maker'))
         return menu
 
-    def run(self):
-        result = True
-        self.breadcrumbs.append('makers')
+    def run(self, user_input=None):
+        self.assign_user_input(user_input=user_input)
         while True:
+            self.append_breadcrumb()
             menu = self.make_main_menu()
-            key, value = menu.run()
-            if self.session.is_complete:
-                result = True
+            result = menu.run()
+            if self.backtrack():
                 break
-            tmp = self.handle_main_menu_response(key, value)
-            if tmp == 'back':
+            elif not result:
+                self.pop_breadcrumb()
+                continue
+            self.handle_main_menu_result(result)
+            if self.backtrack():
                 break
-            elif tmp == True:
-                result = True
-                break
-            elif tmp == False:
-                pass
-            else:
-                raise ValueError
-        self.breadcrumbs.pop()
-        return result
+            self.pop_breadcrumb()
+        self.pop_breadcrumb()
 
     def select_maker(self):
-        menu, section = self.make_new_menu(where=self.where())
-        menu.items_to_number = self.list_maker_spaced_class_names()
-        key, value = menu.run()
-        if value is not None:
-            maker_name = value.replace(' ', '_')
+        menu, section = self.make_new_menu(where=self.where(), is_numbered=True)
+        section.menu_entry_tokens = self.list_maker_spaced_class_names()
+        result = menu.run()
+        if result is not None:
+            maker_name = result.replace(' ', '_')
             maker_name = iotools.underscore_delimited_lowercase_to_uppercamelcase(maker_name)           
             maker = self.get_maker(maker_name)
             return True, maker

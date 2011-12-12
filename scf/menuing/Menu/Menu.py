@@ -1,201 +1,230 @@
 from abjad.tools import iotools
-from baca.scf.SCFObject import SCFObject
+from abjad.tools import mathtools
 from baca.scf.menuing.MenuObject import MenuObject
-import os
+from baca.scf.menuing.MenuSection import MenuSection
 
 
-class Menu(MenuObject, SCFObject):
+class Menu(MenuObject):
 
-    def __init__(self, hidden_items=None, hide_menu=False, include_back=True, 
-        include_studio=True, indent_level=1, item_width=11, sections=None, 
-        session=None, should_clear_terminal=True, where=None):
-        MenuObject.__init__(self, hidden_items=hidden_items, indent_level=indent_level, 
-            session=session, should_clear_terminal=should_clear_terminal)
-        self.hide_menu = hide_menu
-        self.include_back = include_back
-        self.include_studio = include_studio
-        self.item_width = item_width
-        self.sections = sections
-        self.where = where
+    def __init__(self, session=None, where=None):
+        MenuObject.__init__(self, session=session, where=where)
+        self._sections = []
+        self.sections.append(self.make_default_hidden_section(session=session, where=where))
 
-    ### PUBLIC ATTRIBUTES ###
-    
+    ### READ-ONLY PUBLIC ATTRIBUTES ###
+
     @property
-    def has_default(self):
+    def default_value(self):
         for section in self.sections:
-            if section.has_default:
-                return True
-        return False
+            if section.has_default_value:
+                return section.default_value
 
-    @apply
-    def hidden_items():
-        def fget(self):
-            return self._hidden_items
-        def fset(self, hidden_items):
-            if hidden_items is None:
-                self._hidden_items = []
-            else:
-                self._hidden_items = hidden_items[:]
-        return property(**locals())
+    @property
+    def has_default_valued_section(self):
+        return any([section.has_default_value for section in self.sections])
 
-    @apply
-    def hide_menu():
-        def fget(self):
-            return self._hide_menu
-        def fset(self, hide_menu):
-            assert isinstance(hide_menu, type(True))
-            self._hide_menu = hide_menu
-        return property(**locals())
+    @property
+    def has_hidden_section(self):
+        return any([section.is_hidden for section in self.sections])
 
-    @apply
-    def include_back():
-        def fget(self):
-            return self._include_back
-        def fset(self, include_back):
-            assert isinstance(include_back, type(True))
-            self._include_back = include_back
-        return property(**locals())
+    @property
+    def has_keyed_section(self):
+        return any([section.is_keyed for section in self.sections])
 
-    @apply
-    def include_studio():
-        def fget(self):
-            return self._include_studio
-        def fset(self, include_studio):
-            assert isinstance(include_studio, type(True))
-            self._include_studio = include_studio
-        return property(**locals())
+    @property
+    def has_numbered_section(self):
+        return any([section.is_numbered for section in self.sections])
 
-    @apply
-    def item_width():
-        def fget(self):
-            return self._item_width
-        def fset(self, item_width):
-            assert isinstance(item_width, int)
-            self._item_width = item_width
-        return property(**locals())
+    @property
+    def has_ranged_section(self):
+        return any([section.is_ranged for section in self.sections])
 
-    @apply
-    def sections():
-        def fget(self):
-            return self._sections
-        def fset(self, sections):
-            if sections is None:
-                self._sections = []
-            else:
-                self._sections = sections[:]
-        return property(**locals())
+    @property
+    def menu_entry_bodies(self):
+        result = []
+        for section in self.sections:
+            result.extend(section.menu_entry_bodies)
+        return result
+
+    @property
+    def menu_entry_keys(self):
+        result = []
+        for section in self.sections:
+            result.extend(section.menu_entry_keys)
+        return result
+
+    @property
+    def menu_entry_return_values(self):
+        result = []
+        for section in self.sections:
+            result.extend(section.menu_entry_return_values)
+        return result
+
+    @property
+    def menu_entry_tokens(self):
+        result = []
+        for section in self.sections:
+            result.extend(section.menu_entry_tokens)
+        return result
+
+    @property
+    def numbered_section(self):
+        for section in self.sections:
+            if section.is_numbered:
+                return section
+
+    @property
+    def ranged_section(self):
+        for section in self.sections:
+            if section.is_ranged:
+                return section
+
+    @property
+    def sections(self):
+        return self._sections
+
+    @property
+    def unpacked_menu_entries(self):
+        result = []
+        for section in self.sections:
+            result.extend(section.unpacked_menu_entries_optimized)
+        return result
 
     ### PUBLIC METHODS ###
 
-    def add_hidden_menu_items(self):
-        for key, value in self.default_hidden_items:
-            self.all_keys.append(key)
-            self.all_values.append(value)
-        for key, value in self.hidden_items:
-            self.all_keys.append(key)
-            self.all_values.append(value)
-
-    def change_key_to_value(self, key):
-        if key:
-            pair_dictionary = dict(zip(self.all_keys, self.all_values))
-            return pair_dictionary.get(key)
-
-    def change_value_to_key(self, value):
-        if value:
-            pair_dictionary = dict(zip(self.all_values, self.all_keys))
-            return pair_dictionary.get(value)
-
-    def check_if_key_exists(self, key):
-        if self.key_is_default(key):
-            value = self.get_default_value()
-            return self.change_value_to_key(value)
-        elif key in self.all_keys:
-            return key
+    def change_user_input_to_directive(self, user_input):
+        user_input = iotools.strip_diacritics_from_binary_string(user_input)
+        user_input = user_input.lower()
+        if self.user_enters_nothing(user_input) and self.default_value:
+            return self.conditionally_enclose_in_list(self.default_value)
+        elif self.user_enters_argument_range(user_input):
+            return self.handle_argument_range_user_input(user_input)
         else:
-            return self.check_for_matching_value_string(key)
-
-    def check_for_matching_value_string(self, key):
-        for value in self.all_values:
-            if value.startswith(key):
-                key = self.change_value_to_key(value)
-                return key 
-
-    def clean_value(self, value):
-        if value is not None:
-            if value.endswith(' (default)'):
-                value = value.replace(' (default)', '')
-            return value
+            for number, key, body, return_value, section in self.unpacked_menu_entries:
+                body = iotools.strip_diacritics_from_binary_string(body).lower()
+                if  (mathtools.is_integer_equivalent_expr(user_input) and int(user_input) == number) or \
+                    (user_input == key) or \
+                    (3 <= len(user_input) and body.startswith(user_input)):
+                    return self.conditionally_enclose_in_list(return_value)
 
     def conditionally_display_menu(self):
-        if not self.session.hide_next_redraw:
-            self.conditionally_clear_terminal()
-        self.make_menu_lines_keys_and_values()
-        self.add_hidden_menu_items()
-        if not self.session.hide_next_redraw:
-            self.display_lines(self.menu_lines)
-        key = self.handle_raw_input_with_default('SCF', default=self.prompt_default)
-        key = self.check_if_key_exists(key)
-        value = self.change_key_to_value(key)
-        value = self.clean_value(value)
+        self.conditionally_clear_terminal()
+        self.make_menu_lines()
+        self.conditionally_display_lines(self.menu_lines)
+        user_response = self.handle_raw_input_with_default('SCF', default=self.prompt_default)
+        user_input = self.split_multipart_user_response(user_response)
+        directive = self.change_user_input_to_directive(user_input)
+        directive = self.strip_default_indicators_from_strings(directive)
         self.session.hide_next_redraw = False
-        return key, value
+        directive = self.handle_hidden_key(directive)
+        return directive
 
-    def get_default_value(self):
-        for section in self.sections:
-            if section.has_default:
-                return section.get_default_value() 
+    def conditionally_enclose_in_list(self, expr):
+        if self.has_ranged_section:
+            return [expr]
+        else:
+            return expr
 
-    def key_is_default(self, key):
-        if 3 <= len(key):
-            if 'default'.startswith(key):
-                return True
-        return False
-
-    def make_menu_lines_keys_and_values(self):
-        self.menu_lines, self.all_keys, self.all_values = [], [], []
-        self.menu_lines.extend(self.make_menu_title_lines())
-        self.menu_lines.extend(self.make_section_lines(self.all_keys, self.all_values))
+    def handle_argument_range_user_input(self, user_input):
+        if not self.has_ranged_section:
+            return
+        entry_numbers = self.ranged_section.argument_range_string_to_numbers_optimized(user_input)
+        if entry_numbers is None:
+            return None
+        entry_indices = [entry_number - 1 for entry_number in entry_numbers]
+        result = []
+        for i in entry_indices:
+            entry = self.ranged_section.menu_entry_return_values[i]
+            result.append(entry)
+        return result
 
     def make_menu_lines(self):
-        menu_lines, keys, values = self.make_menu_lines_keys_and_values()
-        return menu_lines
+        self.menu_lines = []
+        self.menu_lines.extend(self.make_menu_title_lines())
+        self.menu_lines.extend(self.make_section_lines())
 
-    def make_section_lines(self, all_keys, all_values):
-        menu_lines = []
-        for section in self.sections:
-            section.hide_menu = self.hide_menu
-            menu_lines.extend(section.make_menu_lines(all_keys, all_values))
-        return menu_lines
-        
     def make_menu_title_lines(self):
         menu_lines = []
-        if not self.hide_menu:
+        if not self.hide_current_run:
             menu_lines.append(iotools.capitalize_string_start(self.session.menu_header))
             menu_lines.append('')
         return menu_lines
 
-    @apply
-    def prompt_default():
-        def fget(self): 
-            if self.has_default:
-                return 'def'
-            return self._prompt_default
-        def fset(self, prompt_default):
-            assert isinstance(prompt_default, (str, type(None)))
-            self._prompt_default = prompt_default
-        return property(**locals())
+    def make_new_section(self, is_hidden=False, is_keyed=True, is_numbered=False, is_ranged=False):
+        assert not (is_numbered and self.has_numbered_section)
+        assert not (is_ranged and self.has_ranged_section)
+        section = MenuSection(is_hidden=is_hidden, is_keyed=is_keyed, is_numbered=is_numbered,
+            is_ranged=is_ranged, session=self.session, where=self.where)
+        self.sections.append(section)
+        return section
 
-    def run(self):
-        should_clear_terminal, hide_menu = True, False
+    def make_section_lines(self):
+        menu_lines = []
+        for section in self.sections:
+            section_menu_lines = section.make_menu_lines()
+            if not section.is_hidden:
+                menu_lines.extend(section_menu_lines)
+        if self.hide_current_run:
+            menu_lines = []
+        return menu_lines
+        
+    def run(self, user_input=None):
+        self.assign_user_input(user_input=user_input)
+        should_clear_terminal, hide_current_run = True, False
         while True:
-            self.should_clear_terminal, self.hide_menu = should_clear_terminal, hide_menu
-            key, value = self.conditionally_display_menu()
-            should_clear_terminal, hide_menu = False, True
-            key = self.handle_hidden_key(key)
+            self.should_clear_terminal, self.hide_current_run = should_clear_terminal, hide_current_run
+            should_clear_terminal, hide_current_run = False, True
+            result = self.conditionally_display_menu()
             if self.session.is_complete:
                 break
-            elif key == 'redraw':
-                should_clear_terminal, hide_menu = True, False
+            elif result == 'redraw':
+                should_clear_terminal, hide_current_run = True, False
             else:
                 break
-        return key, value
+        return result
+
+    def split_multipart_user_response(self, user_response):
+        self.session.transcribe_next_command = True
+        if ' ' in user_response:
+            parts = user_response.split(' ')
+            key_parts, rest_parts = [], []
+            for i, part in enumerate(parts):
+                if not part.endswith((',', '-')):
+                    break
+            key_parts = parts[:i+1]
+            rest_parts = parts[i+1:]
+            key = ' '.join(key_parts)
+            rest = ' '.join(rest_parts)
+            if rest:
+                self.session.transcribe_next_command = False
+            if isinstance(self.session.user_input, str) and rest:
+                self.session.user_input = rest + ' ' + self.session.user_input
+            else:
+                self.session.user_input = rest
+        else:
+            key = user_response
+        return key
+
+    # TODO: apply default indicators at display time so this can be completely removed
+    def strip_default_indicators_from_strings(self, expr):
+        if isinstance(expr, list):
+            cleaned_list = []
+            for element in expr:
+                if element.endswith(' (default)'):
+                    element = element.replace(' (default)', '')
+                cleaned_list.append(element)
+            return cleaned_list
+        elif expr is not None:
+            if expr.endswith(' (default)'):
+                expr = expr.replace(' (default)', '')
+            return expr
+
+    def user_enters_argument_range(self, user_input):
+        if ',' in user_input:
+            return True
+        if '-' in user_input:
+            return True
+        return False
+
+    def user_enters_nothing(self, user_input):
+        return not user_input or (3 <= len(user_input) and 'default'.startswith(user_input))

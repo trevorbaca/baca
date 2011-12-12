@@ -1,3 +1,4 @@
+from abjad.tools import sequencetools
 from baca.scf.editors.InteractiveEditor import InteractiveEditor
 
 
@@ -12,7 +13,7 @@ class InstrumentationEditor(InteractiveEditor):
 
     @property
     def breadcrumb(self):
-        return 'performers & instrumentation'
+        return 'performers'
 
     @property
     def summary_lines(self):
@@ -30,38 +31,51 @@ class InstrumentationEditor(InteractiveEditor):
     ### PUBLIC METHODS ###
 
     # performer creation and config can probably be combined in performer editor
-    def add_performer_interactively(self):
+    def add_performers_interactively(self):
         from abjad.tools import scoretools
+        try_again = False
         while True:
-            if self.session.backtrack():
+            if self.backtrack():
                 return
             self.session.backtrack_preservation_is_active = True
-            performer_name = self.select_performer_name_interactively()
+            #print 'going to select performer names ...'
+            performer_names = self.select_performer_names_interactively()
+            #print 'performer names: {!r}'.format(performer_names)
             self.session.backtrack_preservation_is_active = False
-            if self.session.backtrack():
+            if self.backtrack():
                 return
-            elif performer_name:
-                performer = scoretools.Performer(performer_name)
-                performer_editor = self.PerformerEditor(session=self.session, target=performer)
-                self.breadcrumbs.append('add performer')
-                self.session.backtrack_preservation_is_active = True
-                performer_editor.set_initial_configuration_interactively()
-                self.session.backtrack_preservation_is_active = False
-                self.breadcrumbs.pop()
-                if self.session.backtrack():
+            elif performer_names:
+                performers = []
+                for performer_name in performer_names:
+                    performer = scoretools.Performer(performer_name)
+                    performer_editor = self.PerformerEditor(session=self.session, target=performer)
+                    self.append_breadcrumb('add performers')
+                    self.session.backtrack_preservation_is_active = True
+                    performer_editor.set_initial_configuration_interactively()
+                    self.session.backtrack_preservation_is_active = False
+                    self.pop_breadcrumb()
+                    if self.backtrack():
+                        performers = []
+                        try_again = True
+                        break
+                    performers.append(performer)
+                for performer in performers:
+                    self.target.performers.append(performer)
+                if try_again:
                     continue
-                self.target.performers.append(performer)
                 break
 
-    def delete_performer_interactively(self):
+    def delete_performers_interactively(self):
         getter = self.make_new_getter(where=self.where())
-        getter.should_clear_terminal = False
-        getter.append_integer_in_closed_range('performer number', 1, self.target.performer_count)
-        performer_number = getter.run()
-        if self.session.backtrack():
+        getter.append_argument_range('performers', self.summary_lines)
+        result = getter.run()
+        if self.backtrack():
             return
-        performer_index = performer_number - 1
-        del(self.target.performers[performer_index])
+        performer_indices = [performer_number - 1 for performer_number in result]
+        performer_indices = list(reversed(sorted(set(performer_indices))))
+        performers = self.target.performers
+        performers = sequencetools.remove_sequence_elements_at_indices(performers, performer_indices)
+        self.target.performers[:] = performers
 
     def edit_performer_interactively(self, performer_number):
         try:
@@ -81,37 +95,36 @@ class InstrumentationEditor(InteractiveEditor):
             performer = None
         return performer
 
-    def handle_main_menu_response(self, key, value):
-        if not isinstance(key, str):
-            raise TypeError('key must be string.')
-        if key == 'add':
-            self.add_performer_interactively()
-        elif key == 'del':
-            self.delete_performer_interactively()
-        elif key == 'mv':
+    def handle_main_menu_result(self, result):
+        if not isinstance(result, str):
+            raise TypeError('result must be string.')
+        if result == 'add':
+            self.add_performers_interactively()
+        elif result == 'del':
+            self.delete_performers_interactively()
+        elif result == 'mv':
             self.move_performer_interactively()
         else:
-            self.edit_performer_interactively(key)
+            self.edit_performer_interactively(result)
 
     def make_main_menu(self):
-        menu, section = self.make_new_menu(where=self.where())
-        if self.target.performer_count:
-            section.section_title = 'performers'
-        section.items_to_number = self.summary_lines
-        section.sentence_length_items.append(('add', 'add performer'))
+        menu, section = self.make_new_menu(where=self.where(), is_numbered=True)
+        section.menu_entry_tokens = self.summary_lines
+        section.return_value_attr = 'number' # this is new
+        section = menu.make_new_section(is_keyed=False)
+        section.append(('add', 'add performers'))
         if 0 < self.target.performer_count:
-            section.sentence_length_items.append(('del', 'delete performer'))
+            section.append(('del', 'delete performers'))
         if 1 < self.target.performer_count:
-            section.sentence_length_items.append(('mv', 'move performer'))
+            section.append(('mv', 'move performers'))
         return menu
 
     def move_performer_interactively(self):
         getter = self.make_new_getter(where=self.where())
-        getter.should_clear_terminal = False
         getter.append_integer_in_closed_range('old number', 1, self.target.performer_count)
         getter.append_integer_in_closed_range('new number', 1, self.target.performer_count)
         result = getter.run()
-        if self.session.backtrack():
+        if self.backtrack():
             return
         old_number, new_number = result
         old_index, new_index = old_number - 1, new_number - 1
@@ -119,18 +132,26 @@ class InstrumentationEditor(InteractiveEditor):
         self.target.performers.remove(performer)
         self.target.performers.insert(new_index, performer)
 
-    def select_performer_name_interactively(self):
+    def select_performer_names_interactively(self):
         from abjad.tools import scoretools
-        self.breadcrumbs.append('add performer')
-        menu, section = self.make_new_menu(where=self.where())
-        section.items_to_number = scoretools.list_performer_names()
+        menu, section = self.make_new_menu(where=self.where(), is_numbered=True, is_ranged=True)
+        performer_names, performer_abbreviations = [], []
+        performer_pairs = scoretools.list_primary_performer_names()
+        performer_pairs = [(x[1].split()[-1].strip('.'), x[0]) for x in performer_pairs]
+        performer_pairs.append(('perc', 'percussionist'))
+        performer_pairs.sort(lambda x, y: cmp(x[1], y[1]))
+        section.menu_entry_tokens = performer_pairs
+        section.return_value_attr = 'body'
         while True:
-            key, value = menu.run()
-            if self.session.backtrack():
-                self.breadcrumbs.pop()
+            self.append_breadcrumb('add performers')
+            result = menu.run()
+            #print 'result: {!r}'.format(result)
+            if self.backtrack():
+                self.pop_breadcrumb()
                 return
-            if key is None:
+            elif not result:
+                self.pop_breadcrumb()
                 continue
             else:
-                self.breadcrumbs.pop()
-                return value
+                self.pop_breadcrumb()
+                return result

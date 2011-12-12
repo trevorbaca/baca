@@ -8,10 +8,6 @@ def test_SCFObject_01():
 
     scf = baca.scf.SCFObject.SCFObject()
 
-    assert issubclass(scf.Menu, baca.scf.menuing.Menu)
-    assert issubclass(scf.MenuSection, baca.scf.menuing.MenuSection)
-    assert issubclass(scf.UserInputGetter, baca.scf.menuing.UserInputGetter)
-
     assert scf.class_name == 'SCFObject'
     assert scf.help_item_width == 5
     assert isinstance(scf.helpers, types.ModuleType)
