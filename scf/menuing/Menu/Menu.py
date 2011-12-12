@@ -169,6 +169,14 @@ class Menu(MenuObject, SCFObject):
         if not self.session.hide_next_redraw:
             self.display_lines(self.menu_lines)
         key = self.handle_raw_input_with_default('SCF', default=self.prompt_default)
+        if ' ' in key:
+            parts = key.split(' ')
+            key = parts[0]
+            rest = ' '.join(parts[1:])
+            if isinstance(self.session.user_input, str):
+                self.session.user_input = self.session.user_input + rest
+            else:
+                self.session.user_input = rest
         key = self.check_if_key_exists(key)
         value = self.change_key_to_value(key)
         value = self.clean_value(value)
