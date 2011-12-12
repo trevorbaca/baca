@@ -1,3 +1,4 @@
+from abjad.tools import sequencetools
 from baca.scf.editors.InteractiveEditor import InteractiveEditor
 
 
@@ -46,12 +47,15 @@ class PerformerEditor(InteractiveEditor):
     def delete_instrument_interactively(self):
         getter = self.make_new_getter(where=self.where())
         getter.should_clear_terminal = False
-        getter.append_integer_in_closed_range('instrument number', 1, self.target.instrument_count)
-        instrument_number = getter.run()
+        getter.append_integer_range_in_closed_range('instrument number', 1, self.target.instrument_count)
+        range_string = getter.run()
         if self.session.backtrack():
             return
-        instrument_index = instrument_number - 1
-        del(self.target.instruments[instrument_index])
+        instrument_numbers = self.range_string_to_numbers(range_string, 1, self.target.instrument_count)
+        instrument_indices = [x - 1 for x in instrument_numbers]
+        instruments = self.target.instruments
+        instruments = sequencetools.remove_sequence_elements_at_indices(instruments, instrument_indices)
+        self.target.instruments[:] = instruments
     
     def edit_name_interactively(self):
         if self.target.name is None:

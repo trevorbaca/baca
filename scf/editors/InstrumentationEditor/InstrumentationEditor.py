@@ -1,3 +1,4 @@
+from abjad.tools import sequencetools
 from baca.scf.editors.InteractiveEditor import InteractiveEditor
 
 
@@ -54,7 +55,6 @@ class InstrumentationEditor(InteractiveEditor):
                 break
 
     def delete_performer_interactively(self):
-        from abjad.tools import sequencetools
         getter = self.make_new_getter(where=self.where())
         getter.should_clear_terminal = False
         getter.append_integer_range_in_closed_range('performer number', 1, self.target.performer_count)
