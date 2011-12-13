@@ -43,7 +43,7 @@ def test_InstrumentEditor_short_instrument_name_03():
     editor.run(user_input='1 sin foo q')
     instrument = editor.target
     assert instrument.short_instrument_name == 'foo'
-    assert instrument.short_instrument_name_markup == markuptools.Markup('foo')
+    assert instrument.short_instrument_name_markup == markuptools.Markup('Foo')
 
     editor = baca.scf.editors.InstrumentEditor()
     editor.run(user_input='1 sinm bar sin foo q')
