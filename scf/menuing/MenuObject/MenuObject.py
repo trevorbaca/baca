@@ -163,6 +163,9 @@ class MenuObject(SCFObject):
     def is_string(self, expr):
         return isinstance(expr, str)
 
+    def is_string_or_none(self, expr):
+        return isinstance(expr, (str, type(None)))
+
     def make_is_integer_in_closed_range(self, start, stop):
         return lambda expr: self.is_integer(expr) and start <= expr <= stop
 

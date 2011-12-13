@@ -73,7 +73,6 @@ class UserInputGetter(MenuObject):
     def append_integer_range_in_closed_range(self, spaced_attribute_name, start, stop):
         assert isinstance(spaced_attribute_name, str)
         self.prompts.append(spaced_attribute_name)
-        #self.tests.append(self.make_is_integer_range_string_in_closed_range(start, stop))
         self.tests.append(self.is_integer_range_string)
         message = "value for '{}' must be integer range within {} and {}, inclusive."
         message = message.format(spaced_attribute_name, start, stop)
@@ -84,6 +83,12 @@ class UserInputGetter(MenuObject):
         self.prompts.append(spaced_attribute_name)
         self.tests.append(self.is_string)
         self.helps.append('must be string.')
+
+    def append_string_or_none(self, spaced_attribute_name):
+        assert isinstance(spaced_attribute_name, str)
+        self.prompts.append(spaced_attribute_name)
+        self.tests.append(self.is_string_or_none)
+        self.helps.append('must be string or None.')
 
     def load_prompt(self):
         prompt = self.prompts[self.prompt_index]

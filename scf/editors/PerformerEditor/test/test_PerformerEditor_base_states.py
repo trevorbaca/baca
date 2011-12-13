@@ -2,11 +2,11 @@ import baca
 
 
 def test_PerformerEditor_base_states_01():
-    '''Start-up, name, remove name.
+    '''Start-up, name, set name to none.
     '''
 
     editor = baca.scf.editors.PerformerEditor()
-    editor.run(user_input='name foo ren bar rpn q')
+    editor.run(user_input='name foo ren bar ren None q')
     assert editor.transcript == \
     [['Performer',
       '',
@@ -23,7 +23,6 @@ def test_PerformerEditor_base_states_01():
       '',
       '     add instruments',
       '     rename performer',
-      '     remove performer name',
       ''],
      ['SCF> ren', ''],
      ['New performer name> bar', ''],
@@ -33,9 +32,9 @@ def test_PerformerEditor_base_states_01():
       '',
       '     add instruments',
       '     rename performer',
-      '     remove performer name',
       ''],
-     ['SCF> rpn', ''],
+     ['SCF> ren', ''],
+     ['New performer name> None', ''],
      ['Performer',
       '',
       '     Instruments',

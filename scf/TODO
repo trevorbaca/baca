@@ -2,12 +2,12 @@ TODO
 
 1. Dialog with user when user selects untuned percussion. Request instrument name.
 
-2. Reimplement 'remove performer name' in 'rename performer'.
+2. Edit instrument transposition.
 
-3. Edit instrument transposition.
+3. Edit instrument clefs.
 
-4. Edit instrument clefs.
+4. Edit instrument range.
 
-5. Edit instrument range.
+5. Implement round trip output chunking.
 
-6. Implement round trip output chunking.
+6. Fix user input getter 'where' and 'here'.

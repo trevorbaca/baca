@@ -67,7 +67,7 @@ class PerformerEditor(InteractiveEditor):
             spaced_variable_name = 'new performer name'
         getter = self.make_new_getter(where=self.where())
         getter.should_clear_terminal = False
-        getter.append_string(spaced_variable_name)
+        getter.append_string_or_none(spaced_variable_name)
         name = getter.run()
         if self.session.backtrack():
             return
@@ -84,8 +84,6 @@ class PerformerEditor(InteractiveEditor):
             self.move_instrument_interactively()
         elif key in ('name', 'ren'):
             self.edit_name_interactively()
-        elif key == 'rpn':
-            return self.remove_name()
         else:
             self.edit_instrument_interactively(key)
 
@@ -118,7 +116,6 @@ class PerformerEditor(InteractiveEditor):
             section.sentence_length_items.append(('name', 'name performer'))
         else:
             section.sentence_length_items.append(('ren', 'rename performer'))
-            section.sentence_length_items.append(('rpn', 'remove performer name'))
         return menu
 
     def move_instrument_interactively(self):
@@ -134,9 +131,6 @@ class PerformerEditor(InteractiveEditor):
         instrument = self.target.instruments[old_instrument_index]
         self.target.instruments.remove(instrument)
         self.target.instruments.insert(new_instrument_index, instrument)
-
-    def remove_name(self):
-        self.target.name = None
 
     def set_initial_configuration_menu(self):
         menu, section = self.make_new_menu(where=self.where()) 
