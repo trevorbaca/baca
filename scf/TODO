@@ -13,5 +13,3 @@ TODO
 6. Implement round trip output chunking.
 
 7. Null out 'b' for studio backtracking.
-
-8. Allow 'stu*' and 'sco*' backtracking shortcuts.

@@ -202,6 +202,7 @@ def test_Studio_09():
     assert len(studio.transcript) == 6
 
 
+# TODO: combine studio, junk, back, score tests into a single case
 def test_Studio_10():
     '''User 'studio' input results in (dummy) redraw of studio main menu.
     '''
@@ -277,3 +278,33 @@ def test_Studio_15():
     studio = baca.scf.Studio()
     studio.run(user_input='Mon b desir b q')
     assert studio.ts == (10, (0, 4, 8), (2, 6), (3, 7))
+
+
+def test_Studio_16():
+    '''Backtracking stu* shortcut.
+    '''
+
+    studio = baca.scf.Studio()
+    studio.run(user_input='desir perf studio q')
+    ts_1 = studio.ts
+
+    studio = baca.scf.Studio()
+    studio.run(user_input='desir perf stu q')
+    ts_2 = studio.ts
+    
+    assert ts_1 == ts_2
+
+
+def test_Studio_17():
+    '''Backtracking sco* shortcut.
+    '''
+
+    studio = baca.scf.Studio()
+    studio.run(user_input='desir perf score q')
+    ts_1 = studio.ts
+
+    studio = baca.scf.Studio()
+    studio.run(user_input='desir perf sco q')
+    ts_2 = studio.ts
+    
+    assert ts_1 == ts_2

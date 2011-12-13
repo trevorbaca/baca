@@ -136,9 +136,9 @@ class MenuObject(SCFObject):
             self.session.is_backtracking_to_studio = True
         elif key == 'q':
             self.session.user_specified_quit = True
-        elif key == 'score':
+        elif isinstance(key, str) and 3 <= len(key) and 'score'.startswith(key):
             self.session.is_backtracking_to_score = True
-        elif key == 'studio':
+        elif isinstance(key, str) and 3 <= len(key) and 'studio'.startswith(key):
             self.session.is_backtracking_to_studio = True
         elif key == 'where':
             self.show_menu_client()

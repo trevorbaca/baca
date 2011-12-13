@@ -152,6 +152,10 @@ class Menu(MenuObject, SCFObject):
             return self.change_value_to_key(value)
         elif key in self.all_keys:
             return key
+        elif isinstance(key, str) and 3 <= len(key) and 'score'.startswith(key):
+            return key
+        elif isinstance(key, str) and 3 <= len(key) and 'studio'.startswith(key):
+            return key
         elif self.allow_integer_range and self.is_integer_range_string(key):
             return key    
         else:
