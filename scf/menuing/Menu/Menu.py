@@ -85,6 +85,15 @@ class Menu(MenuObject, SCFObject):
         return property(**locals())
 
     @apply
+    def prompt_default():
+        def fget(self): 
+            return self._prompt_default
+        def fset(self, prompt_default):
+            assert isinstance(prompt_default, (str, type(None)))
+            self._prompt_default = prompt_default
+        return property(**locals())
+
+    @apply
     def sections():
         def fget(self):
             return self._sections
@@ -169,14 +178,7 @@ class Menu(MenuObject, SCFObject):
         if not self.session.hide_next_redraw:
             self.display_lines(self.menu_lines)
         key = self.handle_raw_input_with_default('SCF', default=self.prompt_default)
-        if ' ' in key:
-            parts = key.split(' ')
-            key = parts[0]
-            rest = ' '.join(parts[1:])
-            if isinstance(self.session.user_input, str):
-                self.session.user_input = self.session.user_input + rest
-            else:
-                self.session.user_input = rest
+        key = self.split_multipart_key(key)
         key = self.check_if_key_exists(key)
         value = self.change_key_to_value(key)
         value = self.clean_value(value)
@@ -217,17 +219,6 @@ class Menu(MenuObject, SCFObject):
             menu_lines.append('')
         return menu_lines
 
-    @apply
-    def prompt_default():
-        def fget(self): 
-            #if self.has_default:
-            #    return 'def'
-            return self._prompt_default
-        def fset(self, prompt_default):
-            assert isinstance(prompt_default, (str, type(None)))
-            self._prompt_default = prompt_default
-        return property(**locals())
-
     def run(self):
         should_clear_terminal, hide_menu = True, False
         while True:
@@ -242,3 +233,14 @@ class Menu(MenuObject, SCFObject):
             else:
                 break
         return key, value
+
+    def split_multipart_key(self, key):
+        if ' ' in key:
+            parts = key.split(' ')
+            key = parts[0]
+            rest = ' '.join(parts[1:])
+            if isinstance(self.session.user_input, str):
+                self.session.user_input = self.session.user_input + rest
+            else:
+                self.session.user_input = rest
+        return key
