@@ -146,26 +146,25 @@ def test_Studio_07():
     '''
 
     studio = baca.scf.Studio()
-    studio.session.user_input = 'svn q'
-    studio.run()
+    studio.run(user_input='svn q')
 
     assert studio.transcript[-2] == [
-     'Studio - active scores - repository commands',
-     '',
-     '     svn add',
-     '     svn commit',
-     '     svn status',
-     '     svn update',
-     '',
-     '     svn add (scores)',
-     '     svn commit (scores)',
-     '     svn status (scores)',
-     '     svn update (scores)',
-     '',
-     '     run regression tests',
-     '     run regression tests (scores)',
-     '     run regression tests (all)',
-     '']
+      'Studio - active scores - repository commands',
+      '',
+      '     add',
+      '     ci',
+      '     st',
+      '     up',
+      '',
+      '     add_scores',
+      '     ci_scores',
+      '     st_scores',
+      '     up_scores',
+      '',
+      '     pytest',
+      '     pytest_scores',
+      '     pytest_all',
+      '']
 
 
 def test_Studio_08():

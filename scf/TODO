@@ -15,3 +15,13 @@ TODO
 7. Make 'del caxixi' work.
 
 8. Implement horn,tromb,violin,cello,piano,perc.
+
+9. Add harpsichord.
+
+10. Implement '.' for last command string executed like 'next perf'.
+
+11. Implement 'for 64 pieces of untuned percussion' tag.
+
+12. Edit year of completion tag.
+
+13. Edit title tag.

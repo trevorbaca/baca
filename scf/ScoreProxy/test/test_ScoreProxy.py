@@ -23,10 +23,10 @@ def test_ScoreProxy_01():
     assert not score_proxy.is_studio_global_purview
 
     instrumentation = scoretools.InstrumentationSpecifier()
-    performer_1 = scoretools.Performer('Alto Flute')
+    performer_1 = scoretools.Performer('flutist')
     performer_1.instruments.append(instrumenttools.AltoFlute())
     instrumentation.performers.append(performer_1)
-    performer_2 = scoretools.Performer('Guitar')
+    performer_2 = scoretools.Performer('guitarist')
     performer_2.instruments.append(instrumenttools.Guitar())
     instrumentation.performers.append(performer_2)
 
