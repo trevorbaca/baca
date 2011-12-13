@@ -131,7 +131,7 @@ class MenuSection(MenuObject):
         assert self.has_default
         return self.items_to_number[self.default_index]
 
-    def make_menu_lines(self, all_keys, all_values):
+    def make_menu_lines(self, all_keys, all_values, all_display_strings):
         menu_lines = []
         menu_lines.extend(self.make_section_title_lines())
         for i, value in enumerate(self.items_to_number):
@@ -150,6 +150,7 @@ class MenuSection(MenuObject):
                 menu_lines.append(menu_line)
             all_keys.append(key)
             all_values.append(return_value)
+            all_display_strings.append(display_string)
         if self.items_to_number:
             if not self.hide_menu:
                 menu_lines.append('')
@@ -168,6 +169,7 @@ class MenuSection(MenuObject):
                 menu_line += '{}: {}'.format(key, value)
             all_keys.append(key)
             all_values.append(value)
+            all_display_strings.append(None)
         if self.named_pairs:
             if not self.hide_menu:
                 menu_lines.append('')
@@ -178,12 +180,14 @@ class MenuSection(MenuObject):
                 menu_lines.append(menu_line)
             all_keys.append(key)
             all_values.append(value)
+            all_display_strings.append(None)
         if self.sentence_length_items:
             if not self.hide_menu:
                 menu_lines.append('')
         for key, value in self.hidden_items:
             all_keys.append(key)
             all_values.append(value)
+            all_display_strings.append(None)
         return menu_lines
 
     def make_section_title_lines(self):

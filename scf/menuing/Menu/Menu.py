@@ -110,9 +110,11 @@ class Menu(MenuObject, SCFObject):
         for key, value in self.default_hidden_items:
             self.all_keys.append(key)
             self.all_values.append(value)
+            self.all_display_strings.append(None)
         for key, value in self.hidden_items:
             self.all_keys.append(key)
             self.all_values.append(value)
+            self.all_display_strings.append(None)
 
     def change_key_to_value(self, key):
         from abjad.tools import sequencetools
@@ -152,6 +154,10 @@ class Menu(MenuObject, SCFObject):
 
     def check_for_matching_value_string(self, key):
         if key:
+            #print 'zoo', self.all_values
+            #print 'zee', self.all_keys
+            #print 'zha', self.all_display_strings
+            #print len(self.all_values), len(self.all_keys), len(self.all_display_strings)
             for value in self.all_values:
                 if value.startswith(key):
                     key = self.change_value_to_key(value)
@@ -197,19 +203,20 @@ class Menu(MenuObject, SCFObject):
         return False
 
     def make_menu_lines_keys_and_values(self):
-        self.menu_lines, self.all_keys, self.all_values = [], [], []
+        self.menu_lines, self.all_keys, self.all_values, self.all_display_strings = [], [], [], []
         self.menu_lines.extend(self.make_menu_title_lines())
-        self.menu_lines.extend(self.make_section_lines(self.all_keys, self.all_values))
+        self.menu_lines.extend(self.make_section_lines(
+            self.all_keys, self.all_values, self.all_display_strings))
 
     def make_menu_lines(self):
         menu_lines, keys, values = self.make_menu_lines_keys_and_values()
         return menu_lines
 
-    def make_section_lines(self, all_keys, all_values):
+    def make_section_lines(self, all_keys, all_values, all_display_strings):
         menu_lines = []
         for section in self.sections:
             section.hide_menu = self.hide_menu
-            menu_lines.extend(section.make_menu_lines(all_keys, all_values))
+            menu_lines.extend(section.make_menu_lines(all_keys, all_values, all_display_strings))
         return menu_lines
         
     def make_menu_title_lines(self):
