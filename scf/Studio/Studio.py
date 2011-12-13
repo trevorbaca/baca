@@ -97,27 +97,27 @@ class Studio(SCFObject):
             return 'back'
         elif key == 'add':
             self.global_proxy.svn_add()
-        elif key == 'add scores':
+        elif key == 'add_scores':
             self.score_wrangler.svn_add()
         elif key == 'ci':
             self.global_proxy.svn_ci()
             return True
-        elif key == 'ci scores':
+        elif key == 'ci_scores':
             self.score_wrangler.svn_ci()
         elif key == 'pytest':
             self.global_proxy.run_py_test()
-        elif key == 'pytest scores':
+        elif key == 'pytest_scores':
             self.score_wrangler.run_py_test()
-        elif key == 'pytest all':
+        elif key == 'pytest_all':
             self.run_py_test_all()
         elif key == 'st':
             self.global_proxy.svn_st()
-        elif key == 'st scores':
+        elif key == 'st_scores':
             self.score_wrangler.svn_st()
         elif key == 'up':
             self.global_proxy.svn_up()
             return True
-        elif key == 'up scores':
+        elif key == 'up_scores':
             self.score_wrangler.svn_up()
             return True
         return result
@@ -152,20 +152,20 @@ class Studio(SCFObject):
 
     def make_svn_menu(self):
         menu, section = self.make_new_menu(where=self.where())
-        section.sentence_length_items.append(('add', 'svn add'))
-        section.sentence_length_items.append(('ci', 'svn commit'))
-        section.sentence_length_items.append(('st', 'svn status'))
-        section.sentence_length_items.append(('up', 'svn update'))
+        section.sentence_length_items.append(('add', 'add'))
+        section.sentence_length_items.append(('ci', 'ci'))
+        section.sentence_length_items.append(('st', 'st'))
+        section.sentence_length_items.append(('up', 'up'))
         section = self.MenuSection()
-        section.sentence_length_items.append(('add scores', 'svn add (scores)'))
-        section.sentence_length_items.append(('ci scores', 'svn commit (scores)'))
-        section.sentence_length_items.append(('st scores', 'svn status (scores)'))
-        section.sentence_length_items.append(('up scores', 'svn update (scores)'))
+        section.sentence_length_items.append(('add_scores', 'add_scores'))
+        section.sentence_length_items.append(('ci_scores', 'ci_scores'))
+        section.sentence_length_items.append(('st_scores', 'st_scores'))
+        section.sentence_length_items.append(('up_scores', 'up_scores'))
         menu.sections.append(section)
         section = self.MenuSection()
-        section.sentence_length_items.append(('pytest', 'run regression tests'))
-        section.sentence_length_items.append(('pytest scores', 'run regression tests (scores)'))
-        section.sentence_length_items.append(('pytest all', 'run regression tests (all)'))
+        section.sentence_length_items.append(('pytest', 'pytest'))
+        section.sentence_length_items.append(('pytest_scores', 'pytest_scores'))
+        section.sentence_length_items.append(('pytest_all', 'pytest_all'))
         menu.sections.append(section)
         return menu
 
