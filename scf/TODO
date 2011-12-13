@@ -1,6 +1,6 @@
 TODO
 
-1. List percussionist instruments correctly.
+1. List performers correctly.
 
 2. Dialog with user when user selects untuned percussion. Request instrument name.
 
@@ -15,3 +15,5 @@ TODO
 7. Edit instrument clefs.
 
 8. Edit instrument range.
+
+9. Implement round trip output chunking.
