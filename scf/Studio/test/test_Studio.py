@@ -268,3 +268,12 @@ def test_Studio_14():
 
     assert studio.session is studio.global_proxy.session
     assert studio.session is studio.score_wrangler.session
+
+
+def test_Studio_15():
+    '''Display string navigation.
+    '''
+
+    studio = baca.scf.Studio()
+    studio.run(user_input='Mon b desir b q')
+    assert studio.ts == (10, (0, 4, 8), (2, 6), (3, 7))

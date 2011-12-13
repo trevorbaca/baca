@@ -116,6 +116,11 @@ class Menu(MenuObject, SCFObject):
             self.all_values.append(value)
             self.all_display_strings.append(None)
 
+    def change_display_string_to_key(self, display_string):
+        if display_string:
+            pair_dictionary = dict(zip(self.all_display_strings, self.all_keys))
+            return pair_dictionary.get(display_string)
+
     def change_key_to_value(self, key):
         from abjad.tools import sequencetools
         if key:
@@ -154,13 +159,13 @@ class Menu(MenuObject, SCFObject):
 
     def check_for_matching_value_string(self, key):
         if key:
-            #print 'zoo', self.all_values
-            #print 'zee', self.all_keys
-            #print 'zha', self.all_display_strings
-            #print len(self.all_values), len(self.all_keys), len(self.all_display_strings)
-            for value in self.all_values:
+            assert len(self.all_values) == len(self.all_display_strings)
+            for value, display_string in zip(self.all_values, self.all_display_strings):
                 if value.startswith(key):
                     key = self.change_value_to_key(value)
+                    return key
+                elif display_string is not None and display_string.startswith(key):
+                    key = self.change_display_string_to_key(display_string)
                     return key 
 
     def clean_value(self, value):
