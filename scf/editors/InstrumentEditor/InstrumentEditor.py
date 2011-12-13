@@ -1,3 +1,4 @@
+from abjad.tools import instrumenttools
 from baca.scf.editors.InteractiveEditor import InteractiveEditor
 
 
@@ -47,10 +48,10 @@ class InstrumentEditor(InteractiveEditor):
     def conditionally_initialize_target(self):
         if self.target is None:
             instruments = self.select_instruments_from_instrumenttools_interactively()
-            if instruments is None:
-                self.target = None
-            else:
+            if instruments:
                 self.target = instruments[0]
+            else:
+                self.target = None
     
     def edit_instrument_name_interactively(self):
         getter = self.make_new_getter(where=self.where())
@@ -92,6 +93,22 @@ class InstrumentEditor(InteractiveEditor):
         exec('result = markuptools.Markup(result)')
         self.conditionally_set_target_attr('short_instrument_name_markup', result)
         
+    def get_untuned_percussion_name_interactively(self):
+        self.breadcrumbs.append('untuned percussion')
+        while True:
+            menu, section = self.make_new_menu(where=self.where())
+            menu.should_clear_terminal = False
+            section.items_to_number = instrumenttools.UntunedPercussion.known_untuned_percussion
+            key, value = menu.run()
+            if self.session.backtrack():
+                self.breadcrumbs.pop()
+                return
+            elif key is None:
+                continue
+            else:
+                self.breadcrumbs.pop()
+                return value
+        
     def handle_main_menu_response(self, key, value):
         if key == 'in':
             self.edit_instrument_name_interactively()
@@ -108,7 +125,7 @@ class InstrumentEditor(InteractiveEditor):
         return menu
 
     def select_instruments_from_instrumenttools_interactively(self):
-        '''Return instrument or else none.
+        '''Return list of instruments or none.
         '''
         from abjad.tools import instrumenttools
         self.breadcrumbs.append('select instrument')
@@ -132,5 +149,12 @@ class InstrumentEditor(InteractiveEditor):
             instrument_name = instrument_name.title()
             instrument_name = instrument_name.replace(' ', '')
             exec('instrument = instrumenttools.{}()'.format(instrument_name))
+            if isinstance(instrument, instrumenttools.UntunedPercussion):
+                self.session.backtrack_preservation_is_active = True
+                instrument_name = self.get_untuned_percussion_name_interactively()
+                self.session.backtrack_preservation_is_active = False
+                if self.session.backtrack():
+                    continue
+                instrument.instrument_name = instrument_name
             result.append(instrument)
         return result

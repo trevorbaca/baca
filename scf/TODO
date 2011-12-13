@@ -1,13 +1,15 @@
 TODO
 
-1. Dialog with user when user selects untuned percussion. Request instrument name.
+1. Edit instrument transposition.
 
-2. Edit instrument transposition.
+2. Edit instrument clefs.
 
-3. Edit instrument clefs.
+3. Edit instrument range.
 
-4. Edit instrument range.
+4. Implement round trip output chunking.
 
-5. Implement round trip output chunking.
+5. Fix user input getter 'where' and 'here'.
 
-6. Fix user input getter 'where' and 'here'.
+6. Limit text-based menuing matches to 3 characters or more.
+
+7. Make 'del caxixi' work.
