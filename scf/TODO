@@ -2,16 +2,16 @@ TODO
 
 1. Dialog with user when user selects untuned percussion. Request instrument name.
 
-2. Remove redundant 'performers' section title.
+2. Reimplement 'remove performer name' in 'rename performer'.
 
-3. Reimplement 'remove performer name' in 'rename performer'.
+3. Edit instrument transposition.
 
-4. Rename 'move performer' to 'move performers'.
+4. Edit instrument clefs.
 
-5. Edit instrument transposition.
+5. Edit instrument range.
 
-6. Edit instrument clefs.
+6. Implement round trip output chunking.
 
-7. Edit instrument range.
+7. Null out 'b' for studio backtracking.
 
-8. Implement round trip output chunking.
+8. Allow 'stu*' and 'sco*' backtracking shortcuts.
