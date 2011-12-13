@@ -4,4 +4,18 @@ TODO
 
 2. List percussionist instruments correctly.
 
-3. Dialog with user when user selects untuned percussion. Request instrument name.
+3. Input untuned percussion instrument names.
+
+4. Dialog with user when user selects untuned percussion. Request instrument name.
+
+5. Remove redundant 'performers' section title.
+
+6. Reimplement 'remove performer name' in 'rename performer'.
+
+7. Rename 'move performer' to 'move performers'.
+
+8. Edit instrument transposition.
+
+9. Edit instrument clefs.
+
+10. Edit instrument range.
