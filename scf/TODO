@@ -11,5 +11,3 @@ TODO
 5. Edit instrument range.
 
 6. Implement round trip output chunking.
-
-7. Null out 'b' for studio backtracking.

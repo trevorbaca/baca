@@ -148,8 +148,6 @@ class Studio(SCFObject):
         section.hidden_items.append(('active', 'show active scores only'))
         section.hidden_items.append(('all', 'show all scores'))
         section.hidden_items.append(('mb', 'show mothballed scores only'))
-        menu.include_back = False
-        menu.include_studio = False
         return menu
 
     def make_svn_menu(self):

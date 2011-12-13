@@ -52,6 +52,7 @@ def test_Studio_03():
     assert studio.transcript[-2] == [
      '     show active scores only',   
      '     show all scores',
+     '     back',
      '     exec statement',
      '     grep baca directories',
      '     edit client source',
