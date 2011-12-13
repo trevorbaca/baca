@@ -1,19 +1,17 @@
 TODO
 
-1. List performers correctly.
+1. Dialog with user when user selects untuned percussion. Request instrument name.
 
-2. Dialog with user when user selects untuned percussion. Request instrument name.
+2. Remove redundant 'performers' section title.
 
-3. Remove redundant 'performers' section title.
+3. Reimplement 'remove performer name' in 'rename performer'.
 
-4. Reimplement 'remove performer name' in 'rename performer'.
+4. Rename 'move performer' to 'move performers'.
 
-5. Rename 'move performer' to 'move performers'.
+5. Edit instrument transposition.
 
-6. Edit instrument transposition.
+6. Edit instrument clefs.
 
-7. Edit instrument clefs.
+7. Edit instrument range.
 
-8. Edit instrument range.
-
-9. Implement round trip output chunking.
+8. Implement round trip output chunking.

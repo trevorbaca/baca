@@ -138,7 +138,10 @@ class InstrumentationEditor(InteractiveEditor):
         self.breadcrumbs.append('add performers')
         menu, section = self.make_new_menu(where=self.where())
         menu.allow_integer_range = True
-        section.items_to_number = scoretools.list_performer_names()
+        performer_names = scoretools.list_primary_performer_names()
+        performer_names.append('percussionist')
+        performer_names.sort()
+        section.items_to_number = performer_names
         while True:
             key, value = menu.run()
             if self.session.backtrack():
