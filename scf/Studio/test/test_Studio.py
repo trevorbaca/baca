@@ -36,8 +36,8 @@ def test_Studio_02():
      '     8: Red Shift Hijinks (2005)',
      '     9: Sekka (2007)',
      '',
-     '     k: work with interactive material proxies',
-     '     m: work with Bača materials',
+     '     work with interactive material proxies',
+     '     work with Bača materials',
      '']
 
 
@@ -50,21 +50,21 @@ def test_Studio_03():
     studio.run()
 
     assert studio.transcript[-2] == [
-     '     active: show active scores only',   
-     '     all: show all scores',
-     '     exec: exec statement',
-     '     grep: grep baca directories',
-     '     here: edit client source',
-     '     hidden: show hidden items',
-     '     mb: show mothballed scores only',
-     '     next: next score',
-     '     prev: prev score',
-     '     q: quit',
-     '     redraw: redraw',
-     '     score: return to score',
-     '     studio: return to studio',
-     '     svn: work with repository',
-     '     where: show menu client',
+     '     show active scores only',   
+     '     show all scores',
+     '     exec statement',
+     '     grep baca directories',
+     '     edit client source',
+     '     show hidden items',
+     '     show mothballed scores only',
+     '     next score',
+     '     prev score',
+     '     quit',
+     '     redraw',
+     '     return to score',
+     '     return to studio',
+     '     work with repository',
+     '     show menu client',
      '']
 
 
@@ -81,16 +81,16 @@ def test_Studio_04():
      '',
      '     Chunks',
      '',
-     '     ch: [create chunk]',
+     '     [create chunk]',
      '',
      '     Materials',
      '',
-     '     mi: create interactive material',
-     '     ms: create static material',
+     '     create interactive material',
+     '     create static material',
      '',
      '     Setup',
      '',
-     '     perf: performers',
+     '     performers',
      '']
 
 
@@ -114,8 +114,8 @@ def test_Studio_05():
      '     7: Territoires',
      '     8: Zeit (1998)',
      '',
-     '     k: work with interactive material proxies',
-     '     m: work with Bača materials',
+     '     work with interactive material proxies',
+     '     work with Bača materials',
      '']
 
 
@@ -135,8 +135,8 @@ def test_Studio_06():
       '     \'title\': "L\'archipel du corps"',
       "     'year_of_completion': 2011",
       '',
-      '     add: add tag',
-      '     del: delete tag',
+      '     add tag',
+      '     delete tag',
       '']
 
 
@@ -151,19 +151,19 @@ def test_Studio_07():
     assert studio.transcript[-2] == [
      'Studio - active scores - repository commands',
      '',
-     '     add: svn add',
-     '     ci: svn commit',
-     '     st: svn status',
-     '     up: svn update',
+     '     svn add',
+     '     svn commit',
+     '     svn status',
+     '     svn update',
      '',
-     '     add scores: svn add (scores)',
-     '     ci scores: svn commit (scores)',
-     '     st scores: svn status (scores)',
-     '     up scores: svn update (scores)',
+     '     svn add (scores)',
+     '     svn commit (scores)',
+     '     svn status (scores)',
+     '     svn update (scores)',
      '',
-     '     pytest: run regression tests',
-     '     pytest scores: run regression tests (scores)',
-     '     pytest all: run regression tests (all)',
+     '     run regression tests',
+     '     run regression tests (scores)',
+     '     run regression tests (all)',
      '']
 
 

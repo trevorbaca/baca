@@ -193,7 +193,8 @@ class MenuObject(SCFObject):
         menu_lines = []
         for key, value in hidden_items:
             menu_line = self.make_tab(self.indent_level) + ' '
-            menu_line += '{}: {}'.format(key, value)
+            #menu_line += '{}: {}'.format(key, value)
+            menu_line += '{}'.format(value)
             menu_lines.append(menu_line)
         menu_lines.append('')
         self.display_lines(menu_lines)

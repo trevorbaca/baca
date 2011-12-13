@@ -65,16 +65,16 @@ def test_ScoreProxy_02():
      '',
      '     Chunks',
      '',
-     '     ch: [create chunk]',
+     '     [create chunk]',
      '',
      '     Materials',
      '',
-     '     mi: create interactive material',
-     '     ms: create static material',
+     '     create interactive material',
+     '     create static material',
      '',
      '     Setup',
      '',
-     '     perf: performers',
+     '     performers',
      '']
 
 
@@ -87,20 +87,20 @@ def test_ScoreProxy_03():
     archipel.run()
 
     assert archipel.transcript[-2] == [
-     '     b: back',
-     '     exec: exec statement',
-     '     grep: grep baca directories',
-     '     here: edit client source',
-     '     hidden: show hidden items',
-     '     next: next score',
-     '     prev: prev score',
-     '     q: quit',
-     '     redraw: redraw',
-     '     score: return to score',
-     '     studio: return to studio',
-     '     svn: work with repository',
-     '     tags: work with tags',
-     '     where: show menu client',
+     '     back',
+     '     exec statement',
+     '     grep baca directories',
+     '     edit client source',
+     '     show hidden items',
+     '     next score',
+     '     prev score',
+     '     quit',
+     '     redraw',
+     '     return to score',
+     '     return to studio',
+     '     work with repository',
+     '     work with tags',
+     '     show menu client',
      '']
 
 
@@ -120,8 +120,8 @@ def test_ScoreProxy_04():
       '     \'title\': "L\'archipel du corps"',
       "     'year_of_completion': 2011",
       '',
-      '     add: add tag',
-      '     del: delete tag',
+      '     add tag',
+      '     delete tag',
       '']
 
 

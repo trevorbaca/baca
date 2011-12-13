@@ -1,11 +1,7 @@
 TODO
 
-1. Extend studio to accpet 'Sekka' in addition to 'sekka'
+1. Take another stab at (short) instrument name markup handling. Automatically capitalize intelligently.
 
-2. Change named pair handling from 'add: add performer' to just 'add performer'.
+2. List percussionist instruments correctly.
 
-3. Take another stab at (short) instrument name markup handling. Automatically capitalize intelligently.
-
-4. List percussionist instruments correctly.
-
-5. Dialog with user when user selects untuned percussion. Request instrument name.
+3. Dialog with user when user selects untuned percussion. Request instrument name.

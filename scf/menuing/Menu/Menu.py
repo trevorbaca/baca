@@ -86,7 +86,7 @@ class Menu(MenuObject, SCFObject):
 
     @apply
     def prompt_default():
-        def fget(self): 
+        def fget(self):
             return self._prompt_default
         def fset(self, prompt_default):
             assert isinstance(prompt_default, (str, type(None)))

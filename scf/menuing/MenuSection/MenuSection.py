@@ -166,7 +166,8 @@ class MenuSection(MenuObject):
                 key = self.entry_prefix + key
             if not self.hide_menu:
                 menu_line = self.make_tab(self.indent_level) + ' '
-                menu_line += '{}: {}'.format(key, value)
+                #menu_line += '{}: {}'.format(key, value)
+                menu_line += '{}'.format(value)
             all_keys.append(key)
             all_values.append(value)
             all_display_strings.append(None)
@@ -176,7 +177,8 @@ class MenuSection(MenuObject):
         for key, value in self.sentence_length_items:
             if not self.hide_menu:
                 menu_line = self.make_tab(self.indent_level) + ' '
-                menu_line += '{}: {}'.format(key, value)
+                #menu_line += '{}: {}'.format(key, value)
+                menu_line += '{}'.format(value)
                 menu_lines.append(menu_line)
             all_keys.append(key)
             all_values.append(value)
@@ -204,6 +206,7 @@ class MenuSection(MenuObject):
         menu_lines = []
         for key, value in self.hidden_items:
             menu_line = self.make_tab(self.indent_level) + ' '
-            menu_line += '{}: {}'.format(key, value)
+            #menu_line += '{}: {}'.format(key, value)
+            menu_line += '{}'.format(value)
             menu_lines.append(menu_line)
         self.display_lines(menu_lines)
