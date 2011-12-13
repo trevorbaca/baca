@@ -177,8 +177,8 @@ class Menu(MenuObject, SCFObject):
         self.add_hidden_menu_items()
         if not self.session.hide_next_redraw:
             self.display_lines(self.menu_lines)
-        key = self.handle_raw_input_with_default('SCF', default=self.prompt_default)
-        key = self.split_multipart_key(key)
+        user_response = self.handle_raw_input_with_default('SCF', default=self.prompt_default)
+        key = self.split_multipart_user_response(user_response)
         key = self.check_if_key_exists(key)
         value = self.change_key_to_value(key)
         value = self.clean_value(value)
@@ -234,13 +234,15 @@ class Menu(MenuObject, SCFObject):
                 break
         return key, value
 
-    def split_multipart_key(self, key):
-        if ' ' in key:
-            parts = key.split(' ')
+    def split_multipart_user_response(self, user_response):
+        if ' ' in user_response:
+            parts = user_response.split(' ')
             key = parts[0]
             rest = ' '.join(parts[1:])
             if isinstance(self.session.user_input, str):
                 self.session.user_input = self.session.user_input + rest
             else:
                 self.session.user_input = rest
+        else:
+            key = user_response
         return key
