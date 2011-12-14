@@ -97,6 +97,10 @@ class InstrumentEditor(InteractiveEditor):
     def make_main_menu(self):
         menu, section = self.make_new_menu(where=self.where())
         section.sentence_length_items = self.target_attribute_menu_entries
+        section = self.MenuSection()
+        line = 'traditional range: {}'.format(self.target.traditional_range)
+        section.sentence_length_items.append(('tr', line))
+        #menu.sections.append(section)
         return menu
 
     def select_instruments_from_instrumenttools_interactively(self):
