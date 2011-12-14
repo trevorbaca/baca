@@ -58,8 +58,7 @@ class UserInputGetter(MenuObject):
         assert isinstance(spaced_attribute_name, str)
         self.prompts.append(spaced_attribute_name)
         self.tests.append(self.is_integer)
-        message = "value for '{}' must be integer."
-        message = message.format(spaced_attribute_name, start, stop)
+        message = "value for '{}' must be integer.".format(spaced_attribute_name)
         self.helps.append(message)
 
     def append_integer_in_closed_range(self, spaced_attribute_name, start, stop):
@@ -136,7 +135,9 @@ class UserInputGetter(MenuObject):
             if not self.present_prompt_and_store_value():
                 break
 
-    def run(self):
+    def run(self, user_input=None):
+        if user_input is not None:
+            self.session.user_input = user_input
         self.present_prompts_and_store_values()
         if len(self.values) == 1:
             return self.values[0]
