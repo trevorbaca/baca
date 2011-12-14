@@ -24,12 +24,12 @@ class InteractiveEditor(SCFObject):
     def target_attribute_menu_entries(self):
         result = []
         menu_keys = []
-        for target_attr in self.target_attributes:
-            menu_key = self.attribute_name_to_menu_key(target_attr, menu_keys)
+        for target_attribute_name, predicate, is_read_write in self.target_attribute_tuples:
+            menu_key = self.attribute_name_to_menu_key(target_attribute_name, menu_keys)
             assert menu_key not in menu_keys
             menu_keys.append(menu_key)
-            value = target_attr.replace('_', ' ')
-            value = '{} ({!r})'.format(value, getattr(self.target, target_attr))
+            value = target_attribute_name.replace('_', ' ')
+            value = '{} ({!r})'.format(value, getattr(self.target, target_attribute_name))
             pair = (menu_key, value)
             result.append(pair)
         return result
@@ -38,10 +38,10 @@ class InteractiveEditor(SCFObject):
 
     def attribute_name_to_menu_key(self, attribute_name, menu_keys):
         found_menu_key = False        
-        attr_parts = attribute_name.split('_')
+        attribute_parts = attribute_name.split('_')
         i = 1
         while True:
-            menu_key = ''.join([part[:i] for part in attr_parts])
+            menu_key = ''.join([part[:i] for part in attribute_parts])
             if menu_key not in menu_keys:
                 break
             i = i + 1
@@ -50,9 +50,9 @@ class InteractiveEditor(SCFObject):
     def conditionally_initialize_target(self):
         self.target = self.target or self.target_class()
 
-    def conditionally_set_target_attr(self, attr_name, attr_value):
+    def conditionally_set_target_attribute(self, attribute_name, attribute_value):
         if not self.session.is_complete:
-            setattr(self.target, attr_name, attr_value)
+            setattr(self.target, attribute_name, attribute_value)
 
     def run(self, user_input=None):
         if user_input is not None:

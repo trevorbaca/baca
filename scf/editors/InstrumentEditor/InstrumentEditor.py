@@ -14,12 +14,12 @@ class InstrumentEditor(InteractiveEditor):
             return 'instrument editor'
 
     @property
-    def target_attributes(self):
+    def target_attribute_tuples(self):
         return (
-            'instrument_name', 
-            'instrument_name_markup', 
-            'short_instrument_name', 
-            'short_instrument_name_markup',)
+            ('instrument_name', self.is_string, True),
+            ('instrument_name_markup', self.is_markup, True), 
+            ('short_instrument_name',  self.is_string, True),
+            ('short_instrument_name_markup', self.is_markup, True),)
             
     @property
     def target_class(self):
@@ -42,7 +42,7 @@ class InstrumentEditor(InteractiveEditor):
         result = getter.run()
         if self.session.backtrack():
             return
-        self.conditionally_set_target_attr('instrument_name', result)
+        self.conditionally_set_target_attribute('instrument_name', result)
 
     def edit_instrument_name_markup_interactively(self):
         getter = self.make_new_getter(where=self.where())
@@ -50,7 +50,7 @@ class InstrumentEditor(InteractiveEditor):
         result = getter.run()
         if self.session.backtrack():
             return
-        self.conditionally_set_target_attr('instrument_name_markup', result)
+        self.conditionally_set_target_attribute('instrument_name_markup', result)
         
     def edit_short_instrument_name_interactively(self):
         getter = self.make_new_getter(where=self.where())
@@ -58,7 +58,7 @@ class InstrumentEditor(InteractiveEditor):
         result = getter.run()
         if self.session.backtrack():
             return
-        self.conditionally_set_target_attr('short_instrument_name', result)
+        self.conditionally_set_target_attribute('short_instrument_name', result)
 
     def edit_short_instrument_name_markup_interactively(self):
         getter = self.make_new_getter(where=self.where())
@@ -66,7 +66,7 @@ class InstrumentEditor(InteractiveEditor):
         result = getter.run()
         if self.session.backtrack():
             return
-        self.conditionally_set_target_attr('short_instrument_name_markup', result)
+        self.conditionally_set_target_attribute('short_instrument_name_markup', result)
         
     def get_untuned_percussion_name_interactively(self):
         self.breadcrumbs.append('untuned percussion')

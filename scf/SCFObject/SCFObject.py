@@ -1,4 +1,6 @@
 from abjad.tools import iotools
+from abjad.tools import markuptools
+from abjad.tools import pitchtools
 import inspect
 import os
 import pprint
@@ -167,9 +169,36 @@ class SCFObject(object):
                 numbers.append(number)
         return numbers
 
+    def is_integer(self, expr):
+        return isinstance(expr, int)
+
     def is_integer_range_string(self, expr):
         pattern = re.compile('^(\d+(-\d+)?)(,\d+(-\d+)?)*$')
         return expr == 'all' or pattern.match(expr) is not None
+
+    def is_markup(self, expr):
+        return isinstance(expr, markuptools.Markup)
+
+    def is_named_chromatic_pitch(self, expr):
+        return isinstance(expr, pitchtools.NamedChromaticPitch)
+
+    def is_negative_integer(self, expr):
+        return self.is_integer(expr) and expr < 0
+
+    def is_nonnegative_integer(self, expr):
+        return self.is_integer(expr) and expr <= 0
+
+    def is_nonpositive_integer(self, expr):
+        return self.is_integer(expr) and 0 <= expr
+
+    def is_positive_integer(self, expr):
+        return self.is_integer(expr) and 0 < expr
+
+    def is_string(self, expr):
+        return isinstance(expr, str)
+
+    def is_string_or_none(self, expr):
+        return isinstance(expr, (str, type(None)))
 
     def make_new_getter(self, where=None):
         return self.UserInputGetter(where=where, session=self.session)

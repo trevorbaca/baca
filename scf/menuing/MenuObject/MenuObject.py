@@ -1,6 +1,4 @@
 from abjad.tools import iotools
-from abjad.tools import markuptools
-from abjad.tools import pitchtools
 from baca.scf.SCFObject.SCFObject import SCFObject
 from baca.scf.exceptions import StudioException
 import os
@@ -146,33 +144,6 @@ class MenuObject(SCFObject):
             self.show_menu_client()
         else:
             return key
-
-    def is_integer(self, expr):
-        return isinstance(expr, int)
-
-    def is_markup(self, expr):
-        return isinstance(expr, markuptools.Markup)
-
-    def is_named_chromatic_pitch(self, expr):
-        return isinstance(expr, pitchtools.NamedChromaticPitch)
-
-    def is_negative_integer(self, expr):
-        return self.is_integer(expr) and expr < 0
-
-    def is_nonnegative_integer(self, expr):
-        return self.is_integer(expr) and expr <= 0
-
-    def is_nonpositive_integer(self, expr):
-        return self.is_integer(expr) and 0 <= expr
-
-    def is_positive_integer(self, expr):
-        return self.is_integer(expr) and 0 < expr
-
-    def is_string(self, expr):
-        return isinstance(expr, str)
-
-    def is_string_or_none(self, expr):
-        return isinstance(expr, (str, type(None)))
 
     def make_is_integer_in_closed_range(self, start, stop):
         return lambda expr: self.is_integer(expr) and start <= expr <= stop
