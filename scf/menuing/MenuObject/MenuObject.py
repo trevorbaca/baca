@@ -1,5 +1,6 @@
 from abjad.tools import iotools
 from abjad.tools import markuptools
+from abjad.tools import pitchtools
 from baca.scf.SCFObject.SCFObject import SCFObject
 from baca.scf.exceptions import StudioException
 import os
@@ -151,6 +152,9 @@ class MenuObject(SCFObject):
 
     def is_markup(self, expr):
         return isinstance(expr, markuptools.Markup)
+
+    def is_named_chromatic_pitch(self, expr):
+        return isinstance(expr, pitchtools.NamedChromaticPitch)
 
     def is_negative_integer(self, expr):
         return self.is_integer(expr) and expr < 0

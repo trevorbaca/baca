@@ -21,6 +21,10 @@ def test_UserInputGetter_append_values_01():
     assert getter.run(user_input='foo') == markuptools.Markup('foo')
 
     getter = baca.scf.menuing.UserInputGetter()
+    getter.append_named_chromatic_pitch('attribute')
+    assert getter.run(user_input="cs'") == pitchtools.NamedChromaticPitch("cs'")
+
+    getter = baca.scf.menuing.UserInputGetter()
     getter.append_string('attribute')
     assert getter.run(user_input='None -99 99 1-4 foo') == 'foo'
 

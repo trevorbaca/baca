@@ -104,6 +104,17 @@ class UserInputGetter(MenuObject):
         message = "value for '{}' must be markup.".format(spaced_attribute_name)
         self.helps.append(message)
 
+    def append_named_chromatic_pitch(self, spaced_attribute_name):
+        assert isinstance(spaced_attribute_name, str)
+        self.prompts.append(spaced_attribute_name)
+        execs = []
+        execs.append('from abjad import *')
+        execs.append('value = pitchtools.NamedChromaticPitch(user_response)')
+        self.execs.append(execs)
+        self.tests.append(self.is_named_chromatic_pitch)
+        message = "value for '{}' must be named chromaic pitch.".format(spaced_attribute_name)
+        self.helps.append(message)
+
     def append_string(self, spaced_attribute_name):
         assert isinstance(spaced_attribute_name, str)
         self.prompts.append(spaced_attribute_name)
@@ -191,9 +202,16 @@ class UserInputGetter(MenuObject):
             execs = self.execs[self.prompt_index]
             assert isinstance(execs, list)
             if execs:
-                # these lines must transform 'user_response' into 'value'
                 for exec_string in execs:
-                    exec(exec_string)
+                    try:
+                        exec(exec_string)
+                    except:
+                        if self.prompt_index < len(self.helps):
+                            lines = []
+                            lines.append(self.helps[self.prompt_index])
+                            lines.append('')
+                            self.display_cap_lines(lines)
+                        return
             else:
                 try:
                     value = eval(user_response)
