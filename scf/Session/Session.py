@@ -11,6 +11,7 @@ class Session(object):
         self._start_time = self.current_time
         self.backtrack_preservation_is_active = False
         self.current_score_package_short_name = None
+        self.display_pitch_ranges_with_numbered_pitches = False
         self.dump_transcript = False
         self.hide_next_redraw = False
         self.initial_user_input = user_input

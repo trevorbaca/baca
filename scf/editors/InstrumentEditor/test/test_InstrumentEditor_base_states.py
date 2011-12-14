@@ -17,6 +17,8 @@ def test_InstrumentEditor_base_states_01():
       "     instrument name markup (Markup('Accordion'))",
       "     short instrument name ('acc.')",
       "     short instrument name markup (Markup('Acc.'))",
+      '',
+      '     pitch range: [E1, C8]',
       '']
 
 

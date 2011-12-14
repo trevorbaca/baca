@@ -93,14 +93,24 @@ class InstrumentEditor(InteractiveEditor):
             self.edit_short_instrument_name_interactively()
         elif key == 'sinm':
             self.edit_short_instrument_name_markup_interactively()
+        elif key == 'tprd':
+            if self.session.display_pitch_ranges_with_numbered_pitches:
+                self.session.display_pitch_ranges_with_numbered_pitches = False
+            else:
+                self.session.display_pitch_ranges_with_numbered_pitches = True
 
     def make_main_menu(self):
         menu, section = self.make_new_menu(where=self.where())
         section.sentence_length_items = self.target_attribute_menu_entries
         section = self.MenuSection()
-        line = 'traditional range: {}'.format(self.target.traditional_range)
+        if self.session.display_pitch_ranges_with_numbered_pitches:
+            pitch_range_repr = self.target.traditional_range.one_line_numbered_chromatic_pitch_repr
+        else:
+            pitch_range_repr = self.target.traditional_range.one_line_named_chromatic_pitch_repr
+        line = 'pitch range: {}'.format(pitch_range_repr)
         section.sentence_length_items.append(('tr', line))
-        #menu.sections.append(section)
+        menu.sections.append(section)
+        menu.hidden_items.append(('tprd', 'toggle pitch range display'))
         return menu
 
     def select_instruments_from_instrumenttools_interactively(self):

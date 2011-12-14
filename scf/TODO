@@ -1,10 +1,16 @@
 TODO
 
-1. Edit instrument transposition.
+1. Make private and nonmodifiale _Instrument._traditional_pitch_range.
 
-2. Edit instrument clefs.
+2. Rename public read / write _Instrument.traditional_range to _Instrument.pitch_range.
 
 3. Edit instrument range.
+
+4. Write pitch range toggle test.
+
+5. Edit instrument clefs.
+
+5. Edit instrument transposition.
 
 4. Implement round trip output chunking.
 
@@ -33,3 +39,5 @@ TODO
 16. Extend user input getter with defaults.
 
 17. Change user input getter to space attribute and value pairs intelligently in main menu.
+
+18. Impelemnt Menu.make_new_section().
