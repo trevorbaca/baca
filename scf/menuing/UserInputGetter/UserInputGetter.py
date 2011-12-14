@@ -67,6 +67,14 @@ class UserInputGetter(MenuObject):
 
     ### PUBLIC METHODS ###
 
+    def append_boolean(self, spaced_attribute_name):
+        assert isinstance(spaced_attribute_name, str)
+        self.prompts.append(spaced_attribute_name)
+        self.execs.append([])
+        self.tests.append(self.is_boolean)
+        message = "value for '{}' must be boolean.".format(spaced_attribute_name)
+        self.helps.append(message)
+
     def append_integer(self, spaced_attribute_name):
         assert isinstance(spaced_attribute_name, str)
         self.prompts.append(spaced_attribute_name)

@@ -54,6 +54,9 @@ class InteractiveEditor(SCFObject):
         if not self.session.is_complete:
             setattr(self.target, attribute_name, attribute_value)
 
+    def handle_main_menu_response(self, key, value):
+        pass
+
     def run(self, user_input=None):
         if user_input is not None:
             self.session.user_input = user_input

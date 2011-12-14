@@ -25,3 +25,11 @@ TODO
 12. Edit year of completion tag.
 
 13. Edit title tag.
+
+14. Implement transcript class.
+
+15. Implement transcript class read-only command string.
+
+16. Extend user input getter with defaults.
+
+17. Change user input getter to space attribute and value pairs intelligently in main menu.

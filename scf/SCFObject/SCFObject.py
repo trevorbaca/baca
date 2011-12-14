@@ -169,6 +169,9 @@ class SCFObject(object):
                 numbers.append(number)
         return numbers
 
+    def is_boolean(self, expr):
+        return isinstance(expr, type(True))
+
     def is_integer(self, expr):
         return isinstance(expr, int)
 
