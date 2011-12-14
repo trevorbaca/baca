@@ -9,6 +9,15 @@ class InteractiveEditor(SCFObject):
             assert isinstance(target, type(self.target_class()))
         self.target = target
 
+    ### OVERLOADS ###
+
+    def __repr__(self):
+        if self.target is None:
+            summary = ''
+        else:
+            summary = 'target={!r}'.format(self.target)
+        return '{}({})'.format(type(self).__name__, summary)
+
     ### PUBLIC METHODS ###
 
     def attribute_name_to_menu_key(self, attribute_name, menu_keys):

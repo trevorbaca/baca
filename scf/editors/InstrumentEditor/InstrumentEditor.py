@@ -4,15 +4,6 @@ from baca.scf.editors.InteractiveEditor import InteractiveEditor
 
 class InstrumentEditor(InteractiveEditor):
 
-    ### OVERLOADS ###
-
-    def __repr__(self):
-        if self.target is None:
-            summary = ''
-        else:
-            summary = 'target={!r}'.format(self.target)
-        return '{}({})'.format(type(self).__name__, summary)
-
     ### PUBLIC ATTRIBUTES ###
 
     @property
