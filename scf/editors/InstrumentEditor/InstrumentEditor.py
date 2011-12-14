@@ -46,12 +46,10 @@ class InstrumentEditor(InteractiveEditor):
 
     def edit_instrument_name_markup_interactively(self):
         getter = self.make_new_getter(where=self.where())
-        getter.append_string('instrument name markup')
+        getter.append_markup('instrument name markup')
         result = getter.run()
         if self.session.backtrack():
             return
-        exec('from abjad import *')
-        exec('result = markuptools.Markup(result)')
         self.conditionally_set_target_attr('instrument_name_markup', result)
         
     def edit_short_instrument_name_interactively(self):
@@ -64,12 +62,10 @@ class InstrumentEditor(InteractiveEditor):
 
     def edit_short_instrument_name_markup_interactively(self):
         getter = self.make_new_getter(where=self.where())
-        getter.append_string('short instrument name markup')
+        getter.append_markup('short instrument name markup')
         result = getter.run()
         if self.session.backtrack():
             return
-        exec('from abjad import *')
-        exec('result = markuptools.Markup(result)')
         self.conditionally_set_target_attr('short_instrument_name_markup', result)
         
     def get_untuned_percussion_name_interactively(self):

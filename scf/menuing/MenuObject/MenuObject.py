@@ -1,4 +1,5 @@
 from abjad.tools import iotools
+from abjad.tools import markuptools
 from baca.scf.SCFObject.SCFObject import SCFObject
 from baca.scf.exceptions import StudioException
 import os
@@ -147,6 +148,9 @@ class MenuObject(SCFObject):
 
     def is_integer(self, expr):
         return isinstance(expr, int)
+
+    def is_markup(self, expr):
+        return isinstance(expr, markuptools.Markup)
 
     def is_negative_integer(self, expr):
         return self.is_integer(expr) and expr < 0

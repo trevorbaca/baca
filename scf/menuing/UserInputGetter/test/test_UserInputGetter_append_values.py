@@ -1,3 +1,4 @@
+from abjad import *
 import baca
 
 
@@ -14,6 +15,10 @@ def test_UserInputGetter_append_values_01():
     getter = baca.scf.menuing.UserInputGetter()
     getter.append_integer_range_in_closed_range('attribute', 1, 10)
     assert getter.run(user_input='foo 1-4') == '1-4'
+
+    getter = baca.scf.menuing.UserInputGetter()
+    getter.append_markup('attribute')
+    assert getter.run(user_input='foo') == markuptools.Markup('foo')
 
     getter = baca.scf.menuing.UserInputGetter()
     getter.append_string('attribute')

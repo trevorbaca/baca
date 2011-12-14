@@ -4,9 +4,10 @@ from baca.scf.menuing.MenuObject import MenuObject
 
 class UserInputGetter(MenuObject):
 
-    def __init__(self, helps=None, prompts=None, tests=None, session=None, 
-        should_clear_terminal=False, where=None):
+    def __init__(self, execs=None, helps=None, prompts=None, session=None, 
+        should_clear_terminal=False, tests=None, where=None):
         MenuObject.__init__(self, session=session, should_clear_terminal=should_clear_terminal, where=where)
+        self.execs = execs
         self.helps = helps
         self.prompts = prompts
         self.tests = tests
@@ -17,6 +18,18 @@ class UserInputGetter(MenuObject):
         return '{}({})'.format(type(self).__name__, len(self.prompts))
 
     ### PUBLIC ATTRIBUTES ###
+
+    @apply
+    def execs():
+        def fget(self):
+            return self._execs
+        def fset(self, execs):
+            if execs is None:
+                self._execs = []
+            else:
+                assert all([isinstance(x, list) for x in execs])
+                self._execs = execs
+        return property(**locals())
 
     @apply
     def helps():
@@ -57,6 +70,7 @@ class UserInputGetter(MenuObject):
     def append_integer(self, spaced_attribute_name):
         assert isinstance(spaced_attribute_name, str)
         self.prompts.append(spaced_attribute_name)
+        self.execs.append([])
         self.tests.append(self.is_integer)
         message = "value for '{}' must be integer.".format(spaced_attribute_name)
         self.helps.append(message)
@@ -64,6 +78,7 @@ class UserInputGetter(MenuObject):
     def append_integer_in_closed_range(self, spaced_attribute_name, start, stop):
         assert isinstance(spaced_attribute_name, str)
         self.prompts.append(spaced_attribute_name)
+        self.execs.append([])
         self.tests.append(self.make_is_integer_in_closed_range(start, stop))
         message = "value for '{}' must be integer between {} and {}, inclusive."
         message = message.format(spaced_attribute_name, start, stop)
@@ -72,20 +87,34 @@ class UserInputGetter(MenuObject):
     def append_integer_range_in_closed_range(self, spaced_attribute_name, start, stop):
         assert isinstance(spaced_attribute_name, str)
         self.prompts.append(spaced_attribute_name)
+        self.execs.append([])
         self.tests.append(self.is_integer_range_string)
         message = "value for '{}' must be integer range within {} and {}, inclusive."
         message = message.format(spaced_attribute_name, start, stop)
         self.helps.append(message)
 
+    def append_markup(self, spaced_attribute_name):
+        assert isinstance(spaced_attribute_name, str)
+        self.prompts.append(spaced_attribute_name)
+        execs = []
+        execs.append('from abjad import *')
+        execs.append('value = markuptools.Markup(user_response)')
+        self.execs.append(execs)
+        self.tests.append(self.is_markup)
+        message = "value for '{}' must be markup.".format(spaced_attribute_name)
+        self.helps.append(message)
+
     def append_string(self, spaced_attribute_name):
         assert isinstance(spaced_attribute_name, str)
         self.prompts.append(spaced_attribute_name)
+        self.execs.append([])
         self.tests.append(self.is_string)
         self.helps.append('must be string.')
 
     def append_string_or_none(self, spaced_attribute_name):
         assert isinstance(spaced_attribute_name, str)
         self.prompts.append(spaced_attribute_name)
+        self.execs.append([])
         self.tests.append(self.is_string_or_none)
         self.helps.append('must be string or None.')
 
@@ -159,10 +188,17 @@ class UserInputGetter(MenuObject):
         if input_test == self.is_integer_range_string:
             value = user_response
         else:
-            try:
-                value = eval(user_response)
-            except (NameError, SyntaxError):
-                value = user_response
+            execs = self.execs[self.prompt_index]
+            assert isinstance(execs, list)
+            if execs:
+                # these lines must transform 'user_response' into 'value'
+                for exec_string in execs:
+                    exec(exec_string)
+            else:
+                try:
+                    value = eval(user_response)
+                except (NameError, SyntaxError):
+                    value = user_response
         if self.prompt_index < len(self.tests):
             input_test = self.tests[self.prompt_index]
             if input_test(value):
