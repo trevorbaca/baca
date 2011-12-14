@@ -49,7 +49,6 @@ class PerformerEditor(InteractiveEditor):
 
     def delete_instruments_interactively(self):
         getter = self.make_new_getter(where=self.where())
-        getter.should_clear_terminal = False
         getter.append_integer_range_in_closed_range('instrument numbers', 1, self.target.instrument_count)
         range_string = getter.run()
         if self.session.backtrack():
@@ -66,7 +65,6 @@ class PerformerEditor(InteractiveEditor):
         else:
             spaced_variable_name = 'new performer name'
         getter = self.make_new_getter(where=self.where())
-        getter.should_clear_terminal = False
         getter.append_string_or_none(spaced_variable_name)
         name = getter.run()
         if self.session.backtrack():
@@ -120,7 +118,6 @@ class PerformerEditor(InteractiveEditor):
 
     def move_instrument_interactively(self):
         getter = self.make_new_getter(where=self.where())
-        getter.should_clear_terminal = False
         getter.append_integer_in_closed_range('old instrument number', 1, self.target.instrument_count)
         getter.append_integer_in_closed_range('new instrument number', 1, self.target.instrument_count)
         result = getter.run()

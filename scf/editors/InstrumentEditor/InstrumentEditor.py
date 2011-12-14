@@ -14,20 +14,12 @@ class InstrumentEditor(InteractiveEditor):
             return 'instrument editor'
 
     @property
-    def target_attribute_menu_entries(self):
-        result = []
-        menu_keys = []
-        target_attrs = ('instrument_name', 'instrument_name_markup', 
-            'short_instrument_name', 'short_instrument_name_markup')
-        for target_attr in target_attrs:
-            menu_key = self.attribute_name_to_menu_key(target_attr, menu_keys)
-            assert menu_key not in menu_keys
-            menu_keys.append(menu_key)
-            value = target_attr.replace('_', ' ')
-            value = '{} ({!r})'.format(value, getattr(self.target, target_attr))
-            pair = (menu_key, value)
-            result.append(pair)
-        return result
+    def target_attributes(self):
+        return (
+            'instrument_name', 
+            'instrument_name_markup', 
+            'short_instrument_name', 
+            'short_instrument_name_markup',)
             
     @property
     def target_class(self):
@@ -46,7 +38,6 @@ class InstrumentEditor(InteractiveEditor):
     
     def edit_instrument_name_interactively(self):
         getter = self.make_new_getter(where=self.where())
-        getter.should_clear_terminal = False
         getter.append_string('instrument name')
         result = getter.run()
         if self.session.backtrack():
@@ -55,7 +46,6 @@ class InstrumentEditor(InteractiveEditor):
 
     def edit_instrument_name_markup_interactively(self):
         getter = self.make_new_getter(where=self.where())
-        getter.should_clear_terminal = False
         getter.append_string('instrument name markup')
         result = getter.run()
         if self.session.backtrack():
@@ -66,7 +56,6 @@ class InstrumentEditor(InteractiveEditor):
         
     def edit_short_instrument_name_interactively(self):
         getter = self.make_new_getter(where=self.where())
-        getter.should_clear_terminal = False
         getter.append_string('short instrument name')
         result = getter.run()
         if self.session.backtrack():
@@ -75,7 +64,6 @@ class InstrumentEditor(InteractiveEditor):
 
     def edit_short_instrument_name_markup_interactively(self):
         getter = self.make_new_getter(where=self.where())
-        getter.should_clear_terminal = False
         getter.append_string('short instrument name markup')
         result = getter.run()
         if self.session.backtrack():

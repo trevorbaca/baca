@@ -18,6 +18,22 @@ class InteractiveEditor(SCFObject):
             summary = 'target={!r}'.format(self.target)
         return '{}({})'.format(type(self).__name__, summary)
 
+    ### PUBLIC ATTRIBUTES ###
+    
+    @property
+    def target_attribute_menu_entries(self):
+        result = []
+        menu_keys = []
+        for target_attr in self.target_attributes:
+            menu_key = self.attribute_name_to_menu_key(target_attr, menu_keys)
+            assert menu_key not in menu_keys
+            menu_keys.append(menu_key)
+            value = target_attr.replace('_', ' ')
+            value = '{} ({!r})'.format(value, getattr(self.target, target_attr))
+            pair = (menu_key, value)
+            result.append(pair)
+        return result
+
     ### PUBLIC METHODS ###
 
     def attribute_name_to_menu_key(self, attribute_name, menu_keys):

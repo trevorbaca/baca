@@ -5,7 +5,7 @@ from baca.scf.menuing.MenuObject import MenuObject
 class UserInputGetter(MenuObject):
 
     def __init__(self, helps=None, prompts=None, tests=None, session=None, 
-        should_clear_terminal=True, where=None):
+        should_clear_terminal=False, where=None):
         MenuObject.__init__(self, session=session, should_clear_terminal=should_clear_terminal, where=where)
         self.helps = helps
         self.prompts = prompts

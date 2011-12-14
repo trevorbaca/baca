@@ -23,7 +23,6 @@ class ScoreTemplateWizard(Wizard):
             for i in xrange(player_count):
                 getter = self.make_new_getter(where=self.where())
                 getter.append_string("name of player {}".format(i + 1))
-                getter.should_clear_terminal = False
                 player_name = getter.run()
                 player = instrumenttools.HumanMusician(player_name)
                 players.append(player)
