@@ -66,10 +66,9 @@ class InstrumentationEditor(InteractiveEditor):
     def delete_performers_interactively(self):
         getter = self.make_new_getter(where=self.where())
         getter.append_integer_range_in_closed_range('performer numbers', 1, self.target.performer_count)
-        range_string = getter.run()
+        performer_numbers = getter.run()
         if self.session.backtrack():
             return
-        performer_numbers = self.integer_range_string_to_numbers(range_string, 1, self.target.performer_count)
         performer_indices = [performer_number - 1 for performer_number in performer_numbers]
         performer_indices = list(reversed(sorted(set(performer_indices))))
         performers = self.target.performers

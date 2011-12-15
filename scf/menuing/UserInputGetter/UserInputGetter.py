@@ -100,6 +100,8 @@ class UserInputGetter(MenuObject):
         message = "value for '{}' must be integer range within {} and {}, inclusive."
         message = message.format(spaced_attribute_name, start, stop)
         self.helps.append(message)
+        self.integer_range_start = start
+        self.integer_range_stop = stop
 
     def append_markup(self, spaced_attribute_name):
         assert isinstance(spaced_attribute_name, str)
@@ -172,7 +174,6 @@ class UserInputGetter(MenuObject):
             if self.session.backtrack():
                 return False
             elif user_response is None:
-                #return False
                 continue
             elif user_response == 'help':
                 self.show_help()
@@ -222,6 +223,19 @@ class UserInputGetter(MenuObject):
         input_test = self.tests[self.prompt_index]
         if input_test == self.is_integer_range_string:
             value = user_response
+            if input_test(value):
+                value = self.integer_range_string_to_numbers(
+                    value, self.integer_range_start, self.integer_range_stop)
+                self.values.append(value)
+                self.prompt_index = self.prompt_index + 1
+                return True
+            else:
+                if self.prompt_index < len(self.helps):
+                    lines = []
+                    lines.append(self.helps[self.prompt_index])
+                    lines.append('')
+                    self.display_cap_lines(lines)
+                return
         else:
             execs = self.execs[self.prompt_index]
             assert isinstance(execs, list)
