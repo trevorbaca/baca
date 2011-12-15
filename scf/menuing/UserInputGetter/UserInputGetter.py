@@ -169,8 +169,11 @@ class UserInputGetter(MenuObject):
                 self.prompt_index = self.prompt_index + 1
                 break
             user_response = self.handle_hidden_key(user_response)
-            if user_response is None:
+            if self.session.backtrack():
                 return False
+            elif user_response is None:
+                #return False
+                continue
             elif user_response == 'help':
                 self.show_help()
             elif user_response == 'prev':
@@ -197,7 +200,9 @@ class UserInputGetter(MenuObject):
     def run(self, user_input=None):
         if user_input is not None:
             self.session.user_input = user_input
+        self.session.backtrack_preservation_is_active = True
         self.present_prompts_and_store_values()
+        self.session.backtrack_preservation_is_active = False
         if len(self.values) == 1:
             return self.values[0]
         else:
