@@ -1,6 +1,7 @@
 from abjad.tools import iotools
 from abjad.tools import markuptools
 from abjad.tools import pitchtools
+from baca.scf.Session import Session
 import inspect
 import os
 import pprint
@@ -19,26 +20,6 @@ class SCFObject(object):
         return '{}()'.format(self.class_name)
 
     ### PUBLIC ATTRIBUTES ###
-
-    @property
-    def Menu(self):
-        import baca
-        return baca.scf.menuing.Menu
-
-    @property
-    def MenuSection(self):
-        import baca
-        return baca.scf.menuing.MenuSection
-
-    @property
-    def Session(self):
-        import baca
-        return baca.scf.Session
-
-    @property
-    def UserInputGetter(self):
-        import baca
-        return baca.scf.menuing.UserInputGetter
 
     @property
     def breadcrumbs(self):
@@ -69,9 +50,9 @@ class SCFObject(object):
             return self._session
         def fset(self, session):
             if session is None:
-                self._session = self.Session()
+                self._session = Session()
             else:
-                assert isinstance(session, type(self.Session()))
+                assert isinstance(session, type(Session()))
                 self._session = session
         return property(**locals())
 
@@ -204,12 +185,13 @@ class SCFObject(object):
         return isinstance(expr, (str, type(None)))
 
     def make_new_getter(self, where=None):
-        return self.UserInputGetter(where=where, session=self.session)
+        import baca
+        return baca.scf.menuing.UserInputGetter(where=where, session=self.session)
 
     def make_new_menu(self, where=None):
-        menu = self.Menu(where=where, session=self.session)
-        section = self.MenuSection()
-        menu.sections.append(section)
+        import baca
+        menu = baca.scf.menuing.Menu(where=where, session=self.session)
+        section = menu.make_new_section()
         return menu, section
 
     def pt(self):

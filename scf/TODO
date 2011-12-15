@@ -20,7 +20,7 @@ TODO
 
 7. Make 'del caxixi' work.
 
-8. Implement horn,tromb,violin,cello,piano,perc.
+8. Implement hn, trb, vn, vc, pf, perc.
 
 9. Add harpsichord.
 
@@ -39,5 +39,3 @@ TODO
 16. Extend user input getter with defaults.
 
 17. Change user input getter to space attribute and value pairs intelligently in main menu.
-
-18. Impelemnt Menu.make_new_section().

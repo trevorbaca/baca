@@ -205,17 +205,15 @@ class ScoreProxy(PackageProxy):
         section.items_to_number = self.chunk_wrangler.iterate_package_spaced_names()
         section.entry_prefix = 'h'
         section.sentence_length_items.append(('ch', '[create chunk]'))
-        section = self.MenuSection()
+        section = menu.make_new_section()
         section.section_title = 'materials'
         section.items_to_number = self.material_wrangler.iterate_package_underscored_names()
         section.entry_prefix = 'm'
         section.sentence_length_items.append(('mi', 'create interactive material'))
         section.sentence_length_items.append(('ms', 'create static material'))
-        menu.sections.append(section)
-        section = self.MenuSection()
+        section = menu.make_new_section()
         section.section_title = 'setup'
         section.sentence_length_items.append(('perf', 'performers'))
-        menu.sections.append(section)
         menu.hidden_items.append(('svn', 'work with repository'))
         menu.hidden_items.append(('tags', 'work with tags'))
         return menu

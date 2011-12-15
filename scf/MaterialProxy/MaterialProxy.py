@@ -410,13 +410,12 @@ class MaterialProxy(PackageProxy):
             if self.has_visualization_pdf:
                 section.named_pairs.append(('p', 'pdf'))
             section.named_pairs.append(('n', 'initializer'))
-            section = self.MenuSection()
+            section = menu.make_new_section()
             section.named_pairs.append(('d', 'delete'))
             section.named_pairs.append(('r', 'rename'))
             section.named_pairs.append(('s', 'summarize'))
             section.named_pairs.append(('t', 'tags'))
             section.named_pairs.append(('z', 'regenerate'))
-            menu.sections.append(section)
             key, value = menu.run()
             if key == 'b':
                 return key, None

@@ -156,17 +156,15 @@ class Studio(SCFObject):
         section.sentence_length_items.append(('ci', 'ci'))
         section.sentence_length_items.append(('st', 'st'))
         section.sentence_length_items.append(('up', 'up'))
-        section = self.MenuSection()
+        section = menu.make_new_section()
         section.sentence_length_items.append(('add_scores', 'add_scores'))
         section.sentence_length_items.append(('ci_scores', 'ci_scores'))
         section.sentence_length_items.append(('st_scores', 'st_scores'))
         section.sentence_length_items.append(('up_scores', 'up_scores'))
-        menu.sections.append(section)
-        section = self.MenuSection()
+        section = menu.make_new_section()
         section.sentence_length_items.append(('pytest', 'pytest'))
         section.sentence_length_items.append(('pytest_scores', 'pytest_scores'))
         section.sentence_length_items.append(('pytest_all', 'pytest_all'))
-        menu.sections.append(section)
         return menu
 
     def run(self, user_input=None):

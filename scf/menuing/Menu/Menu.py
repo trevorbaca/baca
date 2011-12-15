@@ -1,6 +1,7 @@
 from abjad.tools import iotools
 from baca.scf.SCFObject import SCFObject
 from baca.scf.menuing.MenuObject import MenuObject
+from baca.scf.menuing.MenuSection import MenuSection
 import os
 
 
@@ -220,6 +221,11 @@ class Menu(MenuObject, SCFObject):
     def make_menu_lines(self):
         menu_lines, keys, values = self.make_menu_lines_keys_and_values()
         return menu_lines
+
+    def make_new_section(self):
+        section = MenuSection()
+        self.sections.append(section)
+        return section
 
     def make_section_lines(self, all_keys, all_values, all_display_strings):
         menu_lines = []

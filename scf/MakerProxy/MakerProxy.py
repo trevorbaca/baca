@@ -95,7 +95,7 @@ class MakerProxy(PackageProxy):
         menu, section = self.make_new_menu(where=self.where())
         section.section_title = 'existing {}'.format(self.generic_output_name)
         section.items_to_number = list(self.iterate_materials_based_on_maker())
-        section = self.MenuSection()
+        section = menu.make_new_section()
         section.sentence_length_items.append(('del', 'delete {}'.format(self.spaced_class_name)))
         section.sentence_length_items.append(('new', 'create {}'.format(self.generic_output_name)))
         section.sentence_length_items.append(('ren', 'rename {}'.format(self.spaced_class_name)))
