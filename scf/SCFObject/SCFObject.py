@@ -202,6 +202,9 @@ class SCFObject(object):
         pprint.pprint(self.transcript)
         print len(self.transcript)
 
+    def ptc(self):
+        self.session.complete_transcript.ptc()
+
     def pop_next_user_response_from_user_input(self):
         if self.session.user_input is None:
             return None

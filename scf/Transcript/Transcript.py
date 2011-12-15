@@ -1,5 +1,6 @@
 import datetime
 import os
+import pprint
 import time
 
 
@@ -65,6 +66,16 @@ class Transcript(object):
         for line in entry[1]:
             result.append(line)
         return '\n'.join(result)
+
+    def ptc(self):
+        tab = '    '
+        print tab + 'entry_index = -1'
+        for entry in self.short_transcript:
+            print ''
+            print tab + 'entry_index = entry_index + 1'
+            print tab + 'transcript[entry_index] == \\'
+            for line in pprint.pformat(entry).split('\n'):
+                print tab + line
 
     def write_to_disk(self, output_directory):
         start_time = self.start_time.strftime('%Y-%m-%d-%H-%M-%S')
