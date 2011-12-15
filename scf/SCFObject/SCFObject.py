@@ -68,7 +68,7 @@ class SCFObject(object):
 
     @property
     def transcript_signature(self):
-        return self.session.transcript_signature
+        return self.session.complete_transcript.signature
 
     @property
     def ts(self):
@@ -95,7 +95,8 @@ class SCFObject(object):
         if capitalize_first_character:
             lines = [iotools.capitalize_string_start(line) for line in lines]
         if lines:
-            self.session.append_lines_to_transcript(lines)
+            #self.session.append_lines_to_transcript(lines)
+            self.session.complete_transcript.append_lines(lines)
         if self.session.is_displayable:
             for line in lines:
                 print line
@@ -118,7 +119,7 @@ class SCFObject(object):
         menu_chunk = []
         menu_chunk.append('{}{}'.format(prompt, user_response))
         menu_chunk.append('')
-        self.session.append_lines_to_transcript(menu_chunk)
+        self.session.complete_transcript.append_lines(menu_chunk)
         return user_response
 
     def handle_raw_input_with_default(self, prompt, default=None):

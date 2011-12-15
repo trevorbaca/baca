@@ -20,6 +20,7 @@ from ScoreWrangler import ScoreWrangler
 from Session import Session
 from StaticMaterialProxy import StaticMaterialProxy
 from Studio import Studio
+from Transcript import Transcript
 from TrevorBaca import TrevorBaca
 from UserInputWrapper import UserInputWrapper
 import editors

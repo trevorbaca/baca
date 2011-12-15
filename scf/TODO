@@ -16,14 +16,12 @@ TODO
 
 8. Edit title tag.
 
-9. Implement transcript class.
+9. Implement transcript class read-only command string.
 
-10. Implement transcript class read-only command string.
+10. Extend user input getter with defaults.
 
-11. Extend user input getter with defaults.
+11. Change user input getter to space attribute and value pairs intelligently in main menu.
 
-12. Change user input getter to space attribute and value pairs intelligently in main menu.
+12. Allow editor.run() to work multiple times without reinitialization.
 
-13. Allow editor.run() to work multiple times without reinitialization.
-
-14. Implement user_input='marimba pr (-24, 36) q'.
+13. Implement user_input='marimba pr (-24, 36) q'.

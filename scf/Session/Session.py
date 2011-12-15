@@ -1,14 +1,11 @@
-import datetime
-import os
-import time
+from baca.scf.Transcript import Transcript
 
 
 class Session(object):
     
     def __init__(self, user_input=None):
-        self._complete_transcript = []
+        self._complete_transcript = Transcript()
         self._session_once_had_user_input = False
-        self._start_time = self.current_time
         self.backtrack_preservation_is_active = False
         self.current_score_package_short_name = None
         self.display_pitch_ranges_with_numbered_pitches = False
@@ -65,10 +62,6 @@ class Session(object):
             assert isinstance(current_score_package_short_name, (str, type(None)))
             self._current_score_package_short_name = current_score_package_short_name
         return property(**locals())
-
-    @property
-    def current_time(self):
-        return datetime.datetime.fromtimestamp(time.time())
 
     @apply
     def dump_transcript():
@@ -156,30 +149,8 @@ class Session(object):
         return self._session_once_had_user_input
 
     @property
-    def start_time(self):
-        return self._start_time
-
-    @property
     def transcript(self):
-        return [entry[1] for entry in self.complete_transcript]
-
-    @property
-    def transcript_signature(self):
-        result = []
-        result.append(len(self.transcript))
-        indices_already_encountered = set([])
-        for i in range(len(self.transcript)):
-            if i not in indices_already_encountered:
-                shared_indices = [i]
-                reference_element = self.transcript[i]
-                for j, current_element in enumerate(self.transcript):
-                    if current_element == reference_element:
-                        if i != j:
-                            shared_indices.append(j)
-                if 1 < len(shared_indices):
-                    result.append(tuple(shared_indices))
-                indices_already_encountered.update(shared_indices)
-        return tuple(result)
+        return self.complete_transcript.short_transcript
 
     @apply
     def user_input():
@@ -210,15 +181,6 @@ class Session(object):
 
     ### PUBLIC METHODS ###
 
-    def append_lines_to_transcript(self, lines, clear_terminal=None):
-        assert isinstance(lines, list)
-        assert isinstance(clear_terminal, (type(True), type(None)))
-        entry = []
-        entry.append(self.current_time)
-        entry.append(lines[:])
-        entry.append(clear_terminal)
-        self.complete_transcript.append(entry)
-
     def backtrack(self):
         if self.is_complete:
             return True
@@ -234,24 +196,4 @@ class Session(object):
             
     def clean_up(self):
         if self.dump_transcript:
-            self.write_complete_transcript_to_disk()
-
-    def format_transcript_entry(self, entry):
-        assert len(entry) == 3
-        result = []
-        result.append(str(entry[0]))
-        if entry[2]:
-            result.append('clear_terminal=True')
-        for line in entry[1]:
-            result.append(line)
-        return '\n'.join(result)
-
-    def write_complete_transcript_to_disk(self):
-        start_time = self.start_time.strftime('%Y-%m-%d-%H-%M-%S')
-        file_name = 'session-{}.txt'.format(start_time)
-        file_path = os.path.join(self.output_directory, file_name)
-        output = file(file_path, 'w')
-        for entry in self.complete_transcript:
-            output.write(self.format_transcript_entry(entry))
-            output.write('\n\n')
-        output.close()
+            self.complete_transcript.write_to_disk(self.output_directory)
