@@ -8,24 +8,24 @@ def test_InstrumentationEditor_add_performers_01():
     '''Quit, back, studio, score & junk all work.
     '''
 
-    studio = baca.scf.Studio(user_input='1 perf add q')
-    studio.run()
+    studio = baca.scf.Studio()
+    studio.run(user_input='1 perf add q')
     assert studio.ts == (8,)
 
-    studio = baca.scf.Studio(user_input='1 perf add b q')
-    studio.run()
+    studio = baca.scf.Studio()
+    studio.run(user_input='1 perf add b q')
     assert studio.ts == (10, (4, 8))
 
-    studio = baca.scf.Studio(user_input='1 perf add studio q')
-    studio.run()
+    studio = baca.scf.Studio()
+    studio.run(user_input='1 perf add studio q')
     assert studio.ts == (10, (0, 8))
 
-    studio = baca.scf.Studio(user_input='1 perf add score q')
-    studio.run()
+    studio = baca.scf.Studio()
+    studio.run(user_input='1 perf add score q')
     assert studio.ts == (10, (2, 8))
 
-    studio = baca.scf.Studio(user_input='1 perf add foo q')
-    studio.run()
+    studio = baca.scf.Studio()
+    studio.run(user_input='1 perf add foo q')
     assert studio.ts == (10, (6, 8))
 
 

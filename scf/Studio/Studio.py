@@ -8,12 +8,10 @@ import subprocess
 
 class Studio(SCFObject):
 
-    def __init__(self, session=None, user_input=None):
+    def __init__(self, session=None):
         SCFObject.__init__(self, session=session)
         self._global_proxy = GlobalProxy(session=self.session)
         self._score_wrangler = ScoreWrangler(session=self.session)
-        if user_input is not None:
-            self.session.user_input = user_input
 
     ### PUBLIC ATTRIBUTES ###
 
