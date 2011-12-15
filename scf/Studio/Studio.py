@@ -216,6 +216,7 @@ class Studio(SCFObject):
                 self.breadcrumbs.pop()
                 continue
             self.breadcrumbs.pop()
+        self.breadcrumbs.pop()
 
     def manage_svn(self):
         self.breadcrumbs.append('repository commands')
