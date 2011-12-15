@@ -10,24 +10,22 @@ TODO
 
 5. Implement hn, trb, vn, vc, pf, perc.
 
-6. Add harpsichord.
+6. Implement '.' for last command string executed like 'next perf'.
 
-7. Implement '.' for last command string executed like 'next perf'.
+7. Implement 'for 64 pieces of untuned percussion' tag.
 
-8. Implement 'for 64 pieces of untuned percussion' tag.
+8. Edit year of completion tag.
 
-9. Edit year of completion tag.
+9. Edit title tag.
 
-10. Edit title tag.
+10. Implement transcript class.
 
-11. Implement transcript class.
+11. Implement transcript class read-only command string.
 
-12. Implement transcript class read-only command string.
+12. Extend user input getter with defaults.
 
-13. Extend user input getter with defaults.
+13. Change user input getter to space attribute and value pairs intelligently in main menu.
 
-14. Change user input getter to space attribute and value pairs intelligently in main menu.
+14. Allow editor.run() to work multiple times without reinitialization.
 
-15. Allow editor.run() to work multiple times without reinitialization.
-
-16. Implement user_input='marimba pr (-24, 36) q'.
+15. Implement user_input='marimba pr (-24, 36) q'.
