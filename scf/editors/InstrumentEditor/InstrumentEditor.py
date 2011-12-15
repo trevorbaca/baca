@@ -53,6 +53,14 @@ class InstrumentEditor(InteractiveEditor):
         if self.session.backtrack():
             return
         self.conditionally_set_target_attribute('instrument_name_markup', result)
+
+    def edit_pitch_range_interactively(self):
+        getter = self.make_new_getter(where=self.where())
+        getter.append_pitch_range('pitch range')
+        result = getter.run()
+        if self.session.backtrack():
+            return
+        self.conditionally_set_target_attribute('pitch_range', result)
         
     def edit_short_instrument_name_interactively(self):
         getter = self.make_new_getter(where=self.where())
@@ -94,6 +102,8 @@ class InstrumentEditor(InteractiveEditor):
             self.edit_instrument_name_interactively()
         elif key == 'inm':
             self.edit_instrument_name_markup_interactively()
+        elif key == 'pr':
+            self.edit_pitch_range_interactively()
         elif key == 'sin':
             self.edit_short_instrument_name_interactively()
         elif key == 'sinm':
@@ -116,7 +126,7 @@ class InstrumentEditor(InteractiveEditor):
         else:
             pitch_range_repr = self.target.pitch_range.one_line_named_chromatic_pitch_repr
         line = 'range: {}'.format(pitch_range_repr)
-        section.sentence_length_items.append(('tr', line))
+        section.sentence_length_items.append(('pr', line))
         menu.hidden_items.append(('tprd', 'toggle pitch range display'))
         clefs = [clef.clef_name for clef in self.target.all_clefs]
         clefs = ', '.join(clefs)

@@ -1,33 +1,35 @@
 TODO
 
-1. Edit instrument range.
+1. Write pitch range toggle test.
 
-2. Write pitch range toggle test.
+2. Implement round trip output chunking.
 
-3. Implement round trip output chunking.
+3. Fix user input getter 'where' and 'here'.
 
-4. Fix user input getter 'where' and 'here'.
+4. Limit text-based menuing matches to 3 characters or more.
 
-5. Limit text-based menuing matches to 3 characters or more.
+5. Make 'del caxixi' work.
 
-6. Make 'del caxixi' work.
+6. Implement hn, trb, vn, vc, pf, perc.
 
-7. Implement hn, trb, vn, vc, pf, perc.
+7. Add harpsichord.
 
-8. Add harpsichord.
+8. Implement '.' for last command string executed like 'next perf'.
 
-9. Implement '.' for last command string executed like 'next perf'.
+9. Implement 'for 64 pieces of untuned percussion' tag.
 
-10. Implement 'for 64 pieces of untuned percussion' tag.
+10. Edit year of completion tag.
 
-11. Edit year of completion tag.
+11. Edit title tag.
 
-12. Edit title tag.
+12. Implement transcript class.
 
-13. Implement transcript class.
+13. Implement transcript class read-only command string.
 
-14. Implement transcript class read-only command string.
+14. Extend user input getter with defaults.
 
-15. Extend user input getter with defaults.
+15. Change user input getter to space attribute and value pairs intelligently in main menu.
 
-16. Change user input getter to space attribute and value pairs intelligently in main menu.
+16. Allow editor.run() to work multiple times without reinitialization.
+
+17. Implement user_input='marimba pr (-24, 36) q'.

@@ -175,6 +175,9 @@ class SCFObject(object):
     def is_nonpositive_integer(self, expr):
         return self.is_integer(expr) and 0 <= expr
 
+    def is_pitch_range_or_none(self, expr):
+        return isinstance(expr, (pitchtools.PitchRange, type(None)))
+
     def is_positive_integer(self, expr):
         return self.is_integer(expr) and 0 < expr
 

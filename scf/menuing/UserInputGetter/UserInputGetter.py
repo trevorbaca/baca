@@ -106,7 +106,7 @@ class UserInputGetter(MenuObject):
         self.prompts.append(spaced_attribute_name)
         execs = []
         execs.append('from abjad import *')
-        execs.append('value = markuptools.Markup(user_response)')
+        execs.append('value = markuptools.Markup({})')
         self.execs.append(execs)
         self.tests.append(self.is_markup)
         message = "value for '{}' must be markup.".format(spaced_attribute_name)
@@ -117,10 +117,21 @@ class UserInputGetter(MenuObject):
         self.prompts.append(spaced_attribute_name)
         execs = []
         execs.append('from abjad import *')
-        execs.append('value = pitchtools.NamedChromaticPitch(user_response)')
+        execs.append('value = pitchtools.NamedChromaticPitch({})')
         self.execs.append(execs)
         self.tests.append(self.is_named_chromatic_pitch)
-        message = "value for '{}' must be named chromaic pitch.".format(spaced_attribute_name)
+        message = "value for '{}' must be named chromatic pitch.".format(spaced_attribute_name)
+        self.helps.append(message)
+
+    def append_pitch_range(self, spaced_attribute_name):
+        assert isinstance(spaced_attribute_name, str)
+        self.prompts.append(spaced_attribute_name)
+        execs = []
+        execs.append('from abjad import *')
+        execs.append('value = pitchtools.PitchRange({})')
+        self.execs.append(execs)
+        self.tests.append(self.is_pitch_range_or_none)
+        message = "value for '{}' must be pitch range.".format(spaced_attribute_name)
         self.helps.append(message)
 
     def append_string(self, spaced_attribute_name):
@@ -212,14 +223,19 @@ class UserInputGetter(MenuObject):
             if execs:
                 for exec_string in execs:
                     try:
-                        exec(exec_string)
+                        formatted_exec_string = exec_string.format(user_response)
+                        exec(formatted_exec_string)
                     except:
-                        if self.prompt_index < len(self.helps):
-                            lines = []
-                            lines.append(self.helps[self.prompt_index])
-                            lines.append('')
-                            self.display_cap_lines(lines)
-                        return
+                        try:
+                            formatted_exec_string = exec_string.format(repr(user_response))
+                            exec(formatted_exec_string)
+                        except:
+                            if self.prompt_index < len(self.helps):
+                                lines = []
+                                lines.append(self.helps[self.prompt_index])
+                                lines.append('')
+                                self.display_cap_lines(lines)
+                            return
             else:
                 try:
                     value = eval(user_response)
