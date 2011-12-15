@@ -4,28 +4,26 @@ TODO
 
 2. Fix user input getter 'where' and 'here'.
 
-3. Limit text-based menuing matches to 3 characters or more.
+3. Make 'del caxixi' work.
 
-4. Make 'del caxixi' work.
+4. Implement hn, trb, vn, vc, pf, perc.
 
-5. Implement hn, trb, vn, vc, pf, perc.
+5. Implement '.' for last command string executed like 'next perf'.
 
-6. Implement '.' for last command string executed like 'next perf'.
+6. Implement 'for 64 pieces of untuned percussion' tag.
 
-7. Implement 'for 64 pieces of untuned percussion' tag.
+7. Edit year of completion tag.
 
-8. Edit year of completion tag.
+8. Edit title tag.
 
-9. Edit title tag.
+9. Implement transcript class.
 
-10. Implement transcript class.
+10. Implement transcript class read-only command string.
 
-11. Implement transcript class read-only command string.
+11. Extend user input getter with defaults.
 
-12. Extend user input getter with defaults.
+12. Change user input getter to space attribute and value pairs intelligently in main menu.
 
-13. Change user input getter to space attribute and value pairs intelligently in main menu.
+13. Allow editor.run() to work multiple times without reinitialization.
 
-14. Allow editor.run() to work multiple times without reinitialization.
-
-15. Implement user_input='marimba pr (-24, 36) q'.
+14. Implement user_input='marimba pr (-24, 36) q'.

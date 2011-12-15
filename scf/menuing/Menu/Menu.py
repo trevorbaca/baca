@@ -166,7 +166,7 @@ class Menu(MenuObject, SCFObject):
         if key:
             assert len(self.all_values) == len(self.all_display_strings)
             for value, display_string in zip(self.all_values, self.all_display_strings):
-                if value.startswith(key):
+                if 3 <= len(key) and value.startswith(key):
                     key = self.change_value_to_key(value)
                     return key
                 elif display_string is not None and display_string.startswith(key):
