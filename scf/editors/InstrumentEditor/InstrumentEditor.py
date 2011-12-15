@@ -112,9 +112,9 @@ class InstrumentEditor(InteractiveEditor):
         section.sentence_length_items = self.target_attribute_menu_entries
         section = menu.make_new_section()
         if self.session.display_pitch_ranges_with_numbered_pitches:
-            pitch_range_repr = self.target.traditional_range.one_line_numbered_chromatic_pitch_repr
+            pitch_range_repr = self.target.pitch_range.one_line_numbered_chromatic_pitch_repr
         else:
-            pitch_range_repr = self.target.traditional_range.one_line_named_chromatic_pitch_repr
+            pitch_range_repr = self.target.pitch_range.one_line_named_chromatic_pitch_repr
         line = 'range: {}'.format(pitch_range_repr)
         section.sentence_length_items.append(('tr', line))
         menu.hidden_items.append(('tprd', 'toggle pitch range display'))

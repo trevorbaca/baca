@@ -1,37 +1,33 @@
 TODO
 
-1. Make private and nonmodifiale _Instrument._traditional_pitch_range.
+1. Edit instrument range.
 
-2. Rename public read / write _Instrument.traditional_range to _Instrument.pitch_range.
+2. Write pitch range toggle test.
 
-3. Edit instrument range.
+3. Implement round trip output chunking.
 
-4. Write pitch range toggle test.
+4. Fix user input getter 'where' and 'here'.
 
-5. Implement round trip output chunking.
+5. Limit text-based menuing matches to 3 characters or more.
 
-6. Fix user input getter 'where' and 'here'.
+6. Make 'del caxixi' work.
 
-7. Limit text-based menuing matches to 3 characters or more.
+7. Implement hn, trb, vn, vc, pf, perc.
 
-8. Make 'del caxixi' work.
+8. Add harpsichord.
 
-9. Implement hn, trb, vn, vc, pf, perc.
+9. Implement '.' for last command string executed like 'next perf'.
 
-10. Add harpsichord.
+10. Implement 'for 64 pieces of untuned percussion' tag.
 
-11. Implement '.' for last command string executed like 'next perf'.
+11. Edit year of completion tag.
 
-12. Implement 'for 64 pieces of untuned percussion' tag.
+12. Edit title tag.
 
-13. Edit year of completion tag.
+13. Implement transcript class.
 
-14. Edit title tag.
+14. Implement transcript class read-only command string.
 
-15. Implement transcript class.
+15. Extend user input getter with defaults.
 
-16. Implement transcript class read-only command string.
-
-17. Extend user input getter with defaults.
-
-18. Change user input getter to space attribute and value pairs intelligently in main menu.
+16. Change user input getter to space attribute and value pairs intelligently in main menu.
