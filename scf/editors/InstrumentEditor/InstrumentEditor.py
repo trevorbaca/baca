@@ -2,6 +2,8 @@ from abjad.tools import instrumenttools
 from baca.scf.editors.InteractiveEditor import InteractiveEditor
 
 
+# TODO: eventually make transposition information editable
+# TODO: eventually make clef information editable
 class InstrumentEditor(InteractiveEditor):
 
     ### PUBLIC ATTRIBUTES ###
@@ -85,7 +87,10 @@ class InstrumentEditor(InteractiveEditor):
                 return value
         
     def handle_main_menu_response(self, key, value):
-        if key == 'in':
+        if key == 'cl':
+            self.print_not_implemented()
+            #self.edit_clefs_interactively()
+        elif key == 'in':
             self.edit_instrument_name_interactively()
         elif key == 'inm':
             self.edit_instrument_name_markup_interactively()
@@ -98,6 +103,9 @@ class InstrumentEditor(InteractiveEditor):
                 self.session.display_pitch_ranges_with_numbered_pitches = False
             else:
                 self.session.display_pitch_ranges_with_numbered_pitches = True
+        elif key == 'trans':
+            self.print_not_implemented()
+            #self.edit_transposition_interactively()
 
     def make_main_menu(self):
         menu, section = self.make_new_menu(where=self.where())
@@ -110,6 +118,17 @@ class InstrumentEditor(InteractiveEditor):
         line = 'range: {}'.format(pitch_range_repr)
         section.sentence_length_items.append(('tr', line))
         menu.hidden_items.append(('tprd', 'toggle pitch range display'))
+        clefs = [clef.clef_name for clef in self.target.all_clefs]
+        clefs = ', '.join(clefs)
+        line = 'clefs: {}'.format(clefs)
+        section.sentence_length_items.append(('cl', line))
+        if self.target.is_transposing:
+            line = 'sounding pitch of fingered middle C: {}'
+            line = line.format(self.target.sounding_pitch_of_fingered_middle_c.pitch_class_octave_label)
+            section.sentence_length_items.append(('sp', line))
+            line = 'interval of transposition: {}'
+            line = line.format(self.target.interval_of_transposition)
+            section.sentence_length_items.append(('int', line))
         return menu
 
     def select_instruments_from_instrumenttools_interactively(self):

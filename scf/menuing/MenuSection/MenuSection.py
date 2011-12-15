@@ -174,6 +174,7 @@ class MenuSection(MenuObject):
         if self.named_pairs:
             if not self.hide_menu:
                 menu_lines.append('')
+        assert all([isinstance(x, tuple) for x in self.sentence_length_items])
         for key, value in self.sentence_length_items:
             if not self.hide_menu:
                 menu_line = self.make_tab(self.indent_level) + ' '

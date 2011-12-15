@@ -8,34 +8,30 @@ TODO
 
 4. Write pitch range toggle test.
 
-5. Edit instrument clefs.
+5. Implement round trip output chunking.
 
-5. Edit instrument transposition.
+6. Fix user input getter 'where' and 'here'.
 
-4. Implement round trip output chunking.
+7. Limit text-based menuing matches to 3 characters or more.
 
-5. Fix user input getter 'where' and 'here'.
+8. Make 'del caxixi' work.
 
-6. Limit text-based menuing matches to 3 characters or more.
+9. Implement hn, trb, vn, vc, pf, perc.
 
-7. Make 'del caxixi' work.
+10. Add harpsichord.
 
-8. Implement hn, trb, vn, vc, pf, perc.
+11. Implement '.' for last command string executed like 'next perf'.
 
-9. Add harpsichord.
+12. Implement 'for 64 pieces of untuned percussion' tag.
 
-10. Implement '.' for last command string executed like 'next perf'.
+13. Edit year of completion tag.
 
-11. Implement 'for 64 pieces of untuned percussion' tag.
+14. Edit title tag.
 
-12. Edit year of completion tag.
+15. Implement transcript class.
 
-13. Edit title tag.
+16. Implement transcript class read-only command string.
 
-14. Implement transcript class.
+17. Extend user input getter with defaults.
 
-15. Implement transcript class read-only command string.
-
-16. Extend user input getter with defaults.
-
-17. Change user input getter to space attribute and value pairs intelligently in main menu.
+18. Change user input getter to space attribute and value pairs intelligently in main menu.
