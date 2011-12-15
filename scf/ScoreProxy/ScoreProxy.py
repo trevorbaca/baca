@@ -225,7 +225,9 @@ class ScoreProxy(PackageProxy):
         section.sentence_length_items.append(('ci', 'svn commit'))
         return menu
 
-    def run(self):
+    def run(self, user_input=None):
+        if user_input is not None:
+            self.session.user_input = user_input
         if isinstance(self.year_of_completion, int):
             self.breadcrumbs.append(self.title_with_year)
         else:

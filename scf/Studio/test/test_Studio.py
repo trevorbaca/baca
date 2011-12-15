@@ -20,8 +20,7 @@ def test_Studio_02():
     '''
 
     studio = baca.scf.Studio()
-    studio.session.user_input = 'q'
-    studio.run()
+    studio.run(user_input='q')
     
     assert studio.transcript[-2] == [  
      'Studio - active scores',
@@ -46,8 +45,7 @@ def test_Studio_03():
     '''
 
     studio = baca.scf.Studio()
-    studio.session.user_input = 'hidden q'
-    studio.run()
+    studio.run(user_input='hidden q')
 
     assert studio.transcript[-2] == [
      '     show active scores only',   
@@ -74,8 +72,7 @@ def test_Studio_04():
     '''
 
     studio = baca.scf.Studio()
-    studio.session.user_input = '1 q'
-    studio.run()
+    studio.run(user_input='1 q')
 
     assert studio.transcript[-2] == [
      "L'archipel du corps (2011)",
@@ -100,8 +97,7 @@ def test_Studio_05():
     '''
 
     studio = baca.scf.Studio()
-    studio.session.user_input = 'mb q'
-    studio.run()
+    studio.run(user_input='mb q')
     
     assert studio.transcript[-2] == [  
      'Studio - mothballed scores',
@@ -125,8 +121,7 @@ def test_Studio_06():
     '''
 
     studio = baca.scf.Studio()
-    studio.session.user_input = '1 tags q'
-    studio.run()
+    studio.run(user_input='1 tags q')
 
     assert studio.transcript[-2] == \
      ["L'archipel du corps (2011) - tags",
@@ -172,18 +167,15 @@ def test_Studio_08():
     '''
 
     studio = baca.scf.Studio()
-    studio.session.user_input = 'q'
-    studio.run()
+    studio.run(user_input='q')
     assert studio.transcript[-2][0] == 'Studio - active scores'
 
     studio = baca.scf.Studio()
-    studio.session.user_input = 'svn q'
-    studio.run()
+    studio.run(user_input='svn q')
     assert studio.transcript[-2][0] == 'Studio - active scores - repository commands'
 
     studio = baca.scf.Studio()
-    studio.session.user_input = 'svn b q'
-    studio.run()
+    studio.run(user_input='svn b q')
     assert studio.transcript[-2][0] == 'Studio - active scores'
 
 
@@ -192,13 +184,11 @@ def test_Studio_09():
     '''
 
     studio = baca.scf.Studio()
-    studio.session.user_input = 'foo q'
-    studio.run()
+    studio.run(user_input='foo q')
     assert len(studio.transcript) == 4
 
     studio = baca.scf.Studio()
-    studio.session.user_input = 'foo bar q'
-    studio.run()
+    studio.run(user_input='foo bar q')
     assert len(studio.transcript) == 6
 
 
@@ -208,8 +198,7 @@ def test_Studio_10():
     '''
     
     studio = baca.scf.Studio()
-    studio.session.user_input = 'foo q'
-    studio.run()
+    studio.run(user_input='foo q')
     assert len(studio.transcript) == 4
 
     menu_0 = studio.transcript[0]
@@ -222,8 +211,7 @@ def test_Studio_11():
     '''
 
     studio = baca.scf.Studio()
-    studio.session.user_input = 'foo q'
-    studio.run()
+    studio.run(user_input='foo q')
     assert len(studio.transcript) == 4
 
     menu_0 = studio.transcript[0]
@@ -236,8 +224,7 @@ def test_Studio_12():
     '''
 
     studio = baca.scf.Studio()
-    studio.session.user_input = 'exec 2**30 q'
-    studio.run()
+    studio.run(user_input='exec 2**30 q')
 
     assert len(studio.transcript) == 5
     assert studio.transcript[1] == ['SCF> exec', '']
@@ -251,8 +238,7 @@ def test_Studio_13():
     '''
 
     studio = baca.scf.Studio()
-    studio.session.user_input = 'exec foo q'
-    studio.run()
+    studio.run(user_input='exec foo q')
 
     assert len(studio.transcript) == 5
     assert studio.transcript[1] == ['SCF> exec', '']
