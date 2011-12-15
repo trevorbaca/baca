@@ -18,6 +18,4 @@ TODO
 
 9. Change user input getter to space attribute and value pairs intelligently in main menu.
 
-10. Allow editor.run() to work multiple times without reinitialization.
-
-11. Implement user_input='marimba pr (-24, 36) q'.
+10. Implement user_input='marimba pr (-24, 36) q'.

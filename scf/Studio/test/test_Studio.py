@@ -170,11 +170,9 @@ def test_Studio_08():
     studio.run(user_input='q')
     assert studio.transcript[-2][0] == 'Studio - active scores'
 
-    studio = baca.scf.Studio()
     studio.run(user_input='svn q')
     assert studio.transcript[-2][0] == 'Studio - active scores - repository commands'
 
-    studio = baca.scf.Studio()
     studio.run(user_input='svn b q')
     assert studio.transcript[-2][0] == 'Studio - active scores'
 
@@ -187,7 +185,6 @@ def test_Studio_09():
     studio.run(user_input='foo q')
     assert len(studio.transcript) == 4
 
-    studio = baca.scf.Studio()
     studio.run(user_input='foo bar q')
     assert len(studio.transcript) == 6
 

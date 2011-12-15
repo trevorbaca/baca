@@ -10,11 +10,9 @@ def test_PerformerEditor_rename_performer_01():
     studio.run(user_input='1 perf 1 ren q')
     assert studio.ts == (9, (1, 5))
 
-    studio = baca.scf.Studio()
     studio.run(user_input='1 perf 1 ren b q')
     assert studio.ts == (11, (1, 5), (6, 9))
 
-    studio = baca.scf.Studio()
     studio.run(user_input='1 perf 1 ren studio q')
     assert studio.ts == (11, (0, 9), (1, 5))
 

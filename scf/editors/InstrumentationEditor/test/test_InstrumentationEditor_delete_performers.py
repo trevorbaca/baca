@@ -12,19 +12,15 @@ def test_InstrumentationEditor_delete_performers_01():
     studio.run(user_input='1 perf del q')
     assert studio.ts == (7,)
 
-    studio = baca.scf.Studio()
     studio.run(user_input='1 perf del b q')
     assert studio.ts == (9, (4, 7))
 
-    studio = baca.scf.Studio()
     studio.run(user_input='1 perf del studio q')
     assert studio.ts == (9, (0, 7))
 
-    studio = baca.scf.Studio()
     studio.run(user_input='1 perf del score q')
     assert studio.ts == (9, (2, 7))
 
-    studio = baca.scf.Studio()
     studio.run(user_input='1 perf del foo q')
     assert studio.ts == (9,)
 

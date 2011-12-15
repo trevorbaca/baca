@@ -10,13 +10,11 @@ def test_InstrumentEditor_short_instrument_name_01():
     studio.run(user_input='1 perf 1 1 sin q')
     assert len(studio.transcript) == 11
 
-    studio = baca.scf.Studio()
     studio.run(user_input='1 perf 1 1 sin b q')
     transcript = studio.transcript
     assert len(transcript) == 13
     assert transcript[-2] == transcript[-5]
 
-    studio = baca.scf.Studio()
     studio.run(user_input='1 perf 1 1 sin studio q')
     transcript = studio.transcript
     assert len(transcript) == 13

@@ -12,19 +12,15 @@ def test_InstrumentationEditor_move_performer_01():
     studio.run(user_input='1 perf mv q')
     assert studio.ts == (7,)
 
-    studio = baca.scf.Studio()
     studio.run(user_input='1 perf mv b q')
     assert studio.ts == (9, (4, 7))
 
-    studio = baca.scf.Studio()
     studio.run(user_input='1 perf mv studio q')
     assert studio.ts == (9, (0, 7))
 
-    studio = baca.scf.Studio()
     studio.run(user_input='1 perf mv score q')
     assert studio.ts == (9, (2, 7))
 
-    studio = baca.scf.Studio()
     studio.run(user_input='1 perf mv foo q')
     assert studio.ts == (9,)
 

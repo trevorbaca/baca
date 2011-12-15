@@ -19,7 +19,6 @@ def test_Studio_score_navigation_02():
     studio.ts == (4,)
     assert studio.session.current_score_package_short_name == 'archipel'
      
-    studio = baca.scf.Studio()
     studio.run(user_input='prev q')
     studio.ts == (4,)
     assert studio.session.current_score_package_short_name == 'sekka'
