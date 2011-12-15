@@ -8,23 +8,23 @@ def test_PerformerEditor_delete_instruments_01():
     '''
 
     studio = baca.scf.Studio()
-    studio.run('1 perf 1 del q')
+    studio.run(user_input='1 perf 1 del q')
     assert studio.ts == (9, (1, 5))
 
     studio = baca.scf.Studio()
-    studio.run('1 perf 1 del b q')
+    studio.run(user_input='1 perf 1 del b q')
     assert studio.ts == (11, (1, 5), (6, 9))
 
     studio = baca.scf.Studio()
-    studio.run('1 perf 1 del studio q')
+    studio.run(user_input='1 perf 1 del studio q')
     assert studio.ts == (11, (0, 9), (1, 5))
 
     studio = baca.scf.Studio()
-    studio.run('1 perf 1 del score q')
+    studio.run(user_input='1 perf 1 del score q')
     assert studio.ts == (11, (1, 5), (2, 9))
 
     studio = baca.scf.Studio()
-    studio.run('1 perf 1 del foo q')
+    studio.run(user_input='1 perf 1 del foo q')
     transcript = studio.transcript
     assert studio.ts == (11, (1, 5))
 
