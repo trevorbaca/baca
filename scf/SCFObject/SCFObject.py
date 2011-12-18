@@ -151,6 +151,10 @@ class SCFObject(object):
                 numbers.append(number)
         return numbers
 
+    def is_argument_range_string(self, expr):
+        pattern = re.compile('^(\w+( *- *\w+)?)(, *\w+( *- *\w+)?)*$')
+        return pattern.match(expr) is not None
+
     def is_boolean(self, expr):
         return isinstance(expr, type(True))
 
@@ -158,7 +162,7 @@ class SCFObject(object):
         return isinstance(expr, int)
 
     def is_integer_range_string(self, expr):
-        pattern = re.compile('^(\d+(-\d+)?)(,\d+(-\d+)?)*$')
+        pattern = re.compile('^(\d+( *- *\d+)?)(, *\d+( *- *\d+)?)*$')
         return expr == 'all' or pattern.match(expr) is not None
 
     def is_markup(self, expr):
