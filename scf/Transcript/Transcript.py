@@ -73,7 +73,7 @@ class Transcript(object):
         for entry in self.short_transcript:
             print ''
             print tab + 'entry_index = entry_index + 1'
-            print tab + 'transcript[entry_index] == \\'
+            print tab + 'assert transcript[entry_index] == \\'
             for line in pprint.pformat(entry).split('\n'):
                 print tab + line
 

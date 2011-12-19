@@ -13,8 +13,9 @@ def test_UserInputGetter_append_values_01():
     assert getter.run(user_input='foo -99 99 7') == 7
 
     getter = baca.scf.menuing.UserInputGetter()
-    getter.append_integer_range_in_closed_range('attribute', 1, 10)
-    assert getter.run(user_input='foo 1-4') == [1, 2, 3, 4]
+    argument_list = ['apple', 'banana', 'cherry', 'durian', 'endive', 'fennel']
+    getter.append_argument_range('attribute', argument_list)
+    assert getter.run(user_input='fen-dur, app, che') == [6, 5, 4, 1, 3]
 
     getter = baca.scf.menuing.UserInputGetter()
     getter.append_markup('attribute')

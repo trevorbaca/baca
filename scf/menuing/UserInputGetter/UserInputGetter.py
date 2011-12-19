@@ -4,9 +4,10 @@ from baca.scf.menuing.MenuObject import MenuObject
 
 class UserInputGetter(MenuObject):
 
-    def __init__(self, execs=None, helps=None, prompts=None, session=None, 
+    def __init__(self, argument_lists=None, execs=None, helps=None, prompts=None, session=None, 
         should_clear_terminal=False, tests=None, where=None):
         MenuObject.__init__(self, session=session, should_clear_terminal=should_clear_terminal, where=where)
+        self.argument_lists = argument_lists
         self.execs = execs
         self.helps = helps
         self.prompts = prompts
@@ -18,6 +19,18 @@ class UserInputGetter(MenuObject):
         return '{}({})'.format(type(self).__name__, len(self.prompts))
 
     ### PUBLIC ATTRIBUTES ###
+
+    @apply
+    def argument_lists():
+        def fget(self):
+            return self._argument_lists
+        def fset(self, argument_lists):
+            if argument_lists is None:
+                self._argument_lists = []
+            else:
+                assert all([isinstance(x, list) for x in argument_lists])
+                self._argument_lists = argument_lists
+        return property(**locals())
 
     @apply
     def execs():
@@ -67,88 +80,73 @@ class UserInputGetter(MenuObject):
 
     ### PUBLIC METHODS ###
 
-    def append_boolean(self, spaced_attribute_name):
+    def append_something(self, spaced_attribute_name, message, additional_message_arguments=None):
         assert isinstance(spaced_attribute_name, str)
         self.prompts.append(spaced_attribute_name)
+        self.argument_lists.append([])
         self.execs.append([])
+        if additional_message_arguments is None:
+            additional_message_arguments = []
+        self.helps.append(message.format(spaced_attribute_name, *additional_message_arguments))
+
+    def append_argument_range(self, spaced_attribute_name, argument_list):
+        message = "value for '{}' must be argument range."
+        self.append_something(spaced_attribute_name, message)
+        self.argument_lists[-1] = argument_list
+        test = lambda expr: self.is_valid_argument_range_string_for_argument_list(expr, argument_list)
+        self.tests.append(test)
+
+    def append_boolean(self, spaced_attribute_name):
+        message = "value for '{}' must be boolean."
+        self.append_something(spaced_attribute_name, message)
         self.tests.append(self.is_boolean)
-        message = "value for '{}' must be boolean.".format(spaced_attribute_name)
-        self.helps.append(message)
 
     def append_integer(self, spaced_attribute_name):
-        assert isinstance(spaced_attribute_name, str)
-        self.prompts.append(spaced_attribute_name)
-        self.execs.append([])
+        message = "value for '{}' must be integer."
+        self.append_something(spaced_attribute_name, message)
         self.tests.append(self.is_integer)
-        message = "value for '{}' must be integer.".format(spaced_attribute_name)
-        self.helps.append(message)
 
     def append_integer_in_closed_range(self, spaced_attribute_name, start, stop):
-        assert isinstance(spaced_attribute_name, str)
-        self.prompts.append(spaced_attribute_name)
-        self.execs.append([])
-        self.tests.append(self.make_is_integer_in_closed_range(start, stop))
         message = "value for '{}' must be integer between {} and {}, inclusive."
-        message = message.format(spaced_attribute_name, start, stop)
-        self.helps.append(message)
-
-    def append_integer_range_in_closed_range(self, spaced_attribute_name, start, stop):
-        assert isinstance(spaced_attribute_name, str)
-        self.prompts.append(spaced_attribute_name)
-        self.execs.append([])
-        self.tests.append(self.is_integer_range_string)
-        message = "value for '{}' must be integer range within {} and {}, inclusive."
-        message = message.format(spaced_attribute_name, start, stop)
-        self.helps.append(message)
-        self.integer_range_start = start
-        self.integer_range_stop = stop
+        self.append_something(spaced_attribute_name, message, (start, stop))
+        self.tests.append(self.make_is_integer_in_closed_range(start, stop))
 
     def append_markup(self, spaced_attribute_name):
-        assert isinstance(spaced_attribute_name, str)
-        self.prompts.append(spaced_attribute_name)
+        message = "value for '{}' must be markup."
+        self.append_something(spaced_attribute_name, message)
         execs = []
         execs.append('from abjad import *')
         execs.append('value = markuptools.Markup({})')
-        self.execs.append(execs)
+        self.execs[-1] = execs
         self.tests.append(self.is_markup)
-        message = "value for '{}' must be markup.".format(spaced_attribute_name)
-        self.helps.append(message)
 
     def append_named_chromatic_pitch(self, spaced_attribute_name):
-        assert isinstance(spaced_attribute_name, str)
-        self.prompts.append(spaced_attribute_name)
+        message = "value for '{}' must be named chromatic pitch."
+        self.append_something(spaced_attribute_name, message)
         execs = []
         execs.append('from abjad import *')
         execs.append('value = pitchtools.NamedChromaticPitch({})')
-        self.execs.append(execs)
+        self.execs[-1] = execs
         self.tests.append(self.is_named_chromatic_pitch)
-        message = "value for '{}' must be named chromatic pitch.".format(spaced_attribute_name)
-        self.helps.append(message)
 
     def append_pitch_range(self, spaced_attribute_name):
-        assert isinstance(spaced_attribute_name, str)
-        self.prompts.append(spaced_attribute_name)
+        message = "value for '{}' must be pitch range."
+        self.append_something(spaced_attribute_name, message)
         execs = []
         execs.append('from abjad import *')
         execs.append('value = pitchtools.PitchRange({})')
-        self.execs.append(execs)
+        self.execs[-1] = execs
         self.tests.append(self.is_pitch_range_or_none)
-        message = "value for '{}' must be pitch range.".format(spaced_attribute_name)
-        self.helps.append(message)
 
     def append_string(self, spaced_attribute_name):
-        assert isinstance(spaced_attribute_name, str)
-        self.prompts.append(spaced_attribute_name)
-        self.execs.append([])
+        message = "value for '{}' must be string."
+        self.append_something(spaced_attribute_name, message)
         self.tests.append(self.is_string)
-        self.helps.append('must be string.')
 
     def append_string_or_none(self, spaced_attribute_name):
-        assert isinstance(spaced_attribute_name, str)
-        self.prompts.append(spaced_attribute_name)
-        self.execs.append([])
+        message = "value for '{}' must be string or none."
+        self.append_something(spaced_attribute_name, message)
         self.tests.append(self.is_string_or_none)
-        self.helps.append('must be string or None.')
 
     def load_prompt(self):
         prompt = self.prompts[self.prompt_index]
@@ -221,21 +219,12 @@ class UserInputGetter(MenuObject):
     def store_value(self, user_response):
         assert isinstance(user_response, str)
         input_test = self.tests[self.prompt_index]
-        if input_test == self.is_integer_range_string:
-            value = user_response
-            if input_test(value):
-                value = self.integer_range_string_to_numbers(
-                    value, self.integer_range_start, self.integer_range_stop)
-                self.values.append(value)
-                self.prompt_index = self.prompt_index + 1
-                return True
-            else:
-                if self.prompt_index < len(self.helps):
-                    lines = []
-                    lines.append(self.helps[self.prompt_index])
-                    lines.append('')
-                    self.display_cap_lines(lines)
-                return
+        argument_list = self.argument_lists[self.prompt_index]
+        if argument_list and input_test(user_response):
+            value = self.argument_range_string_to_numbers(user_response, argument_list)
+            self.values.append(value)
+            self.prompt_index = self.prompt_index + 1
+            return True
         else:
             execs = self.execs[self.prompt_index]
             assert isinstance(execs, list)

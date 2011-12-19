@@ -147,7 +147,7 @@ class InstrumentEditor(InteractiveEditor):
         from abjad.tools import instrumenttools
         self.breadcrumbs.append('select instrument')
         menu, section = self.make_new_menu(where=self.where())
-        menu.allow_integer_range = True
+        menu.allow_argument_range = True
         menu.should_clear_terminal = False
         section.items_to_number = instrumenttools.list_instrument_names()
         while True:

@@ -1,5 +1,6 @@
 from abjad.tools import iotools
 from abjad.tools import markuptools
+from abjad.tools import mathtools
 from abjad.tools import pitchtools
 from baca.scf.Session import Session
 import inspect
@@ -131,15 +132,28 @@ class SCFObject(object):
         finally:
             readline.set_startup_hook()
 
-    def integer_range_string_to_numbers(self, integer_range_string, range_start=None, range_stop=None):
+    def is_valid_argument_range_string_for_argument_list(self, argument_range_string, argument_list):
+        if isinstance(argument_range_string, str):
+            if self.argument_range_string_to_numbers(argument_range_string, argument_list) is not None:
+                return True
+        return False
+
+    def argument_range_string_to_numbers(self, argument_range_string, menu_items):
+        '''Return list of positive integers on success. Otherwise none.
+        '''
+        assert len(menu_items)
         numbers = []
-        range_parts = integer_range_string.split(',')
+        argument_range_string = argument_range_string.replace(' ', '')
+        range_parts = argument_range_string.split(',')
         for range_part in range_parts:
             if range_part == 'all':
-                numbers.extend(range(range_start, range_stop + 1))
+                numbers.extend(range(1, len(menu_items) + 1))
             elif '-' in range_part:
                 start, stop = range_part.split('-')
-                start, stop = int(start), int(stop)
+                start = self.argument_string_to_number(start, menu_items)
+                stop = self.argument_string_to_number(stop, menu_items)
+                if start is None or stop is None:
+                    return
                 if start <= stop:
                     new_numbers = range(start, stop + 1)
                     numbers.extend(new_numbers)
@@ -147,9 +161,24 @@ class SCFObject(object):
                     new_numbers = range(start, stop - 1, -1)
                     numbers.extend(new_numbers)
             else:
-                number = int(range_part)
+                number = self.argument_string_to_number(range_part, menu_items)
+                if number is None:
+                    return
                 numbers.append(number)
         return numbers
+
+    def argument_string_to_number(self, argument_string, menu_items):
+        '''Return number when successful. Otherwise none.
+        '''
+        if mathtools.is_integer_equivalent_expr(argument_string):
+            menu_number = int(argument_string)
+            if menu_number <= len(menu_items):
+                return menu_number
+        for menu_index, menu_item in enumerate(menu_items):
+            if argument_string == menu_item:
+                return menu_index + 1
+            elif 3 <= len(argument_string) and menu_item.startswith(argument_string):
+                return menu_index + 1
 
     def is_argument_range_string(self, expr):
         pattern = re.compile('^(\w+( *- *\w+)?)(, *\w+( *- *\w+)?)*$')
@@ -160,10 +189,6 @@ class SCFObject(object):
 
     def is_integer(self, expr):
         return isinstance(expr, int)
-
-    def is_integer_range_string(self, expr):
-        pattern = re.compile('^(\d+( *- *\d+)?)(, *\d+( *- *\d+)?)*$')
-        return expr == 'all' or pattern.match(expr) is not None
 
     def is_markup(self, expr):
         return isinstance(expr, markuptools.Markup)
@@ -217,13 +242,22 @@ class SCFObject(object):
             return None
         else:
             if '\n' in self.session.user_input:
-                user_input = self.session.user_input.split('\n')
-                user_response = user_input[0]
-                user_input = '\n'.join(user_input[1:])
+                raise ValueError('no longer implemented.')
+                #user_input = self.session.user_input.split('\n')
+                #user_response = user_input[0]
+                #user_input = '\n'.join(user_input[1:])
             else:
                 user_input = self.session.user_input.split(' ')
-                user_response = user_input[0]
-                user_input = ' '.join(user_input[1:])
+                #user_response = user_input[0]
+                #user_input = ' '.join(user_input[1:])
+                first_parts, rest_parts = [], []
+                for i, part in enumerate(user_input):
+                    if not part.endswith((',', '-')):
+                        break
+                first_parts = user_input[:i+1]
+                rest_parts = user_input[i+1:]
+                user_response = ' '.join(first_parts)
+                user_input = ' '.join(rest_parts)
             user_response = user_response.replace('_', ' ')
             self.session.user_input = user_input
             return user_response

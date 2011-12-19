@@ -148,11 +148,6 @@ class MenuObject(SCFObject):
     def make_is_integer_in_closed_range(self, start, stop):
         return lambda expr: self.is_integer(expr) and start <= expr <= stop
 
-    # TODO: finish implementation
-    #def make_is_integer_range_string_in_closed_range(self, start, stop):
-    #    pattern = re.compile('^(\d+(-\d+)?)(,\d+(-\d+)?)*$')
-    #    return lambda expr: expr == 'all' or pattern.match(expr) is not None
-
     def make_tab(self, n):
         return 4 * n * ' '
 

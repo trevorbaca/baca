@@ -22,6 +22,10 @@ class PerformerEditor(InteractiveEditor):
             return 'performer'
 
     @property
+    def instrument_names(self):
+        return [instrument.instrument_name for instrument in self.target.instruments]
+
+    @property
     def summary_lines(self):
         if not self.target.instruments:
             result = '{} (no instruments)'.format(self.target.name)
@@ -29,7 +33,8 @@ class PerformerEditor(InteractiveEditor):
             self.target.instruments[0].instrument_name:
             result = '{}'.format(self.target.name)
         else:
-            instruments = ', '.join([x.instrument_name for x in self.target.instruments])
+            #instruments = ', '.join([x.instrument_name for x in self.target.instruments])
+            instruments = ', '.join(self.instrument_names)
             result = '{} ({})'.format(self.target.name, instruments)
         result = [result]
         return result
@@ -49,7 +54,7 @@ class PerformerEditor(InteractiveEditor):
 
     def delete_instruments_interactively(self):
         getter = self.make_new_getter(where=self.where())
-        getter.append_integer_range_in_closed_range('instrument numbers', 1, self.target.instrument_count)
+        getter.append_argument_range('instruments', self.instrument_names)
         instrument_numbers = getter.run()
         if self.session.backtrack():
             return
@@ -130,7 +135,7 @@ class PerformerEditor(InteractiveEditor):
 
     def set_initial_configuration_menu(self):
         menu, section = self.make_new_menu(where=self.where()) 
-        menu.allow_integer_range = True
+        menu.allow_argument_range = True
         section.section_title = 'select instruments'
         likely_instruments = self.target.likely_instruments_based_on_performer_name
         likely_instrument_names = [x().instrument_name for x in likely_instruments]
@@ -161,7 +166,7 @@ class PerformerEditor(InteractiveEditor):
                 return
             elif key is None:
                 continue
-            elif self.is_integer_range_string(key):
+            elif self.is_argument_range_string(key):
                 assert isinstance(value, list)
                 for instrument_name in value:
                     instrument_class = instrumenttools.default_instrument_name_to_instrument_class(

@@ -65,7 +65,7 @@ class InstrumentationEditor(InteractiveEditor):
 
     def delete_performers_interactively(self):
         getter = self.make_new_getter(where=self.where())
-        getter.append_integer_range_in_closed_range('performer numbers', 1, self.target.performer_count)
+        getter.append_argument_range('performers', self.summary_lines)
         performer_numbers = getter.run()
         if self.session.backtrack():
             return
@@ -132,7 +132,7 @@ class InstrumentationEditor(InteractiveEditor):
         from abjad.tools import scoretools
         self.breadcrumbs.append('add performers')
         menu, section = self.make_new_menu(where=self.where())
-        menu.allow_integer_range = True
+        menu.allow_argument_range = True
         performer_names = scoretools.list_primary_performer_names()
         performer_names.append('percussionist')
         performer_names.sort()

@@ -7,12 +7,12 @@ import os
 
 class Menu(MenuObject, SCFObject):
 
-    def __init__(self, allow_integer_range=False, hidden_items=None, hide_menu=False, 
-        include_back=True, include_studio=True, indent_level=1, item_width=11, sections=None, 
-        session=None, should_clear_terminal=True, where=None):
+    def __init__(self, allow_argument_range=False, hidden_items=None, 
+        hide_menu=False, include_back=True, include_studio=True, indent_level=1, item_width=11, 
+        sections=None, session=None, should_clear_terminal=True, where=None):
         MenuObject.__init__(self, hidden_items=hidden_items, indent_level=indent_level, 
             session=session, should_clear_terminal=should_clear_terminal)
-        self.allow_integer_range = allow_integer_range
+        self.allow_argument_range = allow_argument_range
         self.hide_menu = hide_menu
         self.include_back = include_back
         self.include_studio = include_studio
@@ -23,12 +23,12 @@ class Menu(MenuObject, SCFObject):
     ### PUBLIC ATTRIBUTES ###
 
     @apply
-    def allow_integer_range():
+    def allow_argument_range():
         def fget(self):
-            return self._allow_integer_range
-        def fset(self, allow_integer_range):
-            assert isinstance(allow_integer_range, type(True))
-            self._allow_integer_range = allow_integer_range
+            return self._allow_argument_range
+        def fset(self, allow_argument_range):
+            assert isinstance(allow_argument_range, type(True))
+            self._allow_argument_range = allow_argument_range
         return property(**locals())
     
     @property
@@ -125,8 +125,23 @@ class Menu(MenuObject, SCFObject):
     def change_key_to_value(self, key):
         from abjad.tools import sequencetools
         if key:
-            if self.allow_integer_range and self.is_integer_range_string(key):
-                item_numbers = self.integer_range_string_to_numbers(key)
+            pair_dictionary = dict(zip(self.all_keys, self.all_values))
+            if key in pair_dictionary:
+                value = pair_dictionary.get(key)
+                if self.allow_argument_range:
+                    return [value]
+                else:
+                    return value
+            #if self.allow_argument_range and self.is_argument_range_string(key):
+            elif self.allow_argument_range and self.is_argument_range_string(key):
+                for section in self.sections:
+                    if section.items_to_number:
+                        break
+                else:
+                    raise ValueError('no section contains items to number.')
+                item_numbers = self.argument_range_string_to_numbers(key, section.items_to_number)
+                if item_numbers is None:
+                    return []
                 item_indices = [item_number - 1 for item_number in item_numbers]
                 for section in self.sections:
                     if section.items_to_number:
@@ -135,9 +150,9 @@ class Menu(MenuObject, SCFObject):
                             item = section.items_to_number[i]
                             result.append(item)
                         return result
-            else:
-                pair_dictionary = dict(zip(self.all_keys, self.all_values))
-                return pair_dictionary.get(key)
+            #else:
+            #    pair_dictionary = dict(zip(self.all_keys, self.all_values))
+            #    return pair_dictionary.get(key)
 
     def change_value_to_key(self, value):
         if value:
@@ -157,8 +172,16 @@ class Menu(MenuObject, SCFObject):
             return key
         elif isinstance(key, str) and 3 <= len(key) and 'studio'.startswith(key):
             return key
-        elif self.allow_integer_range and self.is_integer_range_string(key):
-            return key    
+        elif self.allow_argument_range and self.is_argument_range_string(key):
+            for section in self.sections:
+                if section.items_to_number:
+                    break
+            else:
+                raise ValueError('no section contains items to number.')
+            if self.is_valid_argument_range_string_for_argument_list(key, section.items_to_number):
+                return key
+            else:
+                return None
         else:
             return self.check_for_matching_value_string(key)
 
@@ -194,9 +217,13 @@ class Menu(MenuObject, SCFObject):
         if not self.session.hide_next_redraw:
             self.display_lines(self.menu_lines)
         user_response = self.handle_raw_input_with_default('SCF', default=self.prompt_default)
+        #print repr(user_response)
         key = self.split_multipart_user_response(user_response)
+        #print repr(key)
         key = self.check_if_key_exists(key)
+        #print 'exists?', repr(key) # this should be none
         value = self.change_key_to_value(key)
+        #print repr(value)
         value = self.clean_value(value)
         self.session.hide_next_redraw = False
         return key, value
@@ -259,8 +286,16 @@ class Menu(MenuObject, SCFObject):
     def split_multipart_user_response(self, user_response):
         if ' ' in user_response:
             parts = user_response.split(' ')
-            key = parts[0]
-            rest = ' '.join(parts[1:])
+            #key = parts[0]
+            #rest = ' '.join(parts[1:])
+            key_parts, rest_parts = [], []
+            for i, part in enumerate(parts):
+                if not part.endswith((',', '-')):
+                    break
+            key_parts = parts[:i+1]
+            rest_parts = parts[i+1:]
+            key = ' '.join(key_parts)
+            rest = ' '.join(rest_parts)
             if isinstance(self.session.user_input, str):
                 self.session.user_input = self.session.user_input + rest
             else:

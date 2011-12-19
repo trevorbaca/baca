@@ -11,7 +11,7 @@ def test_PerformerEditor_base_states_01():
     entry_index = -1
 
     entry_index = entry_index + 1
-    transcript[entry_index] == \
+    assert transcript[entry_index] == \
     ['Performer',
      '',
      '     Instruments',
@@ -21,15 +21,15 @@ def test_PerformerEditor_base_states_01():
      '']
 
     entry_index = entry_index + 1
-    transcript[entry_index] == \
+    assert transcript[entry_index] == \
     ['SCF> name', '']
 
     entry_index = entry_index + 1
-    transcript[entry_index] == \
+    assert transcript[entry_index] == \
     ['Performer name> foo', '']
 
     entry_index = entry_index + 1
-    transcript[entry_index] == \
+    assert transcript[entry_index] == \
     ['Foo',
      '',
      '     Instruments',
@@ -39,15 +39,15 @@ def test_PerformerEditor_base_states_01():
      '']
 
     entry_index = entry_index + 1
-    transcript[entry_index] == \
+    assert transcript[entry_index] == \
     ['SCF> ren', '']
 
     entry_index = entry_index + 1
-    transcript[entry_index] == \
+    assert transcript[entry_index] == \
     ['New performer name> bar', '']
 
     entry_index = entry_index + 1
-    transcript[entry_index] == \
+    assert transcript[entry_index] == \
     ['Bar',
      '',
      '     Instruments',
@@ -57,15 +57,15 @@ def test_PerformerEditor_base_states_01():
      '']
 
     entry_index = entry_index + 1
-    transcript[entry_index] == \
+    assert transcript[entry_index] == \
     ['SCF> ren', '']
 
     entry_index = entry_index + 1
-    transcript[entry_index] == \
+    assert transcript[entry_index] == \
     ['New performer name> None', '']
 
     entry_index = entry_index + 1
-    transcript[entry_index] == \
+    assert transcript[entry_index] == \
     ['Performer',
      '',
      '     Instruments',
@@ -75,5 +75,5 @@ def test_PerformerEditor_base_states_01():
      '']
 
     entry_index = entry_index + 1
-    transcript[entry_index] == \
+    assert transcript[entry_index] == \
     ['SCF> q', '']
