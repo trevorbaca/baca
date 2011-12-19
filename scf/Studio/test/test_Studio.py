@@ -122,18 +122,7 @@ def test_Studio_06():
 
     studio = baca.scf.Studio()
     studio.run(user_input='1 tags q')
-
-    assert studio.transcript[-2] == \
-     ["L'archipel du corps (2011) - tags",
-      '',
-      "     'composer': TrevorBaca()",
-      "     'instrumentation': InstrumentationSpecifier([Performer(name='flutist', instruments=[Piccolo(), AltoFlute(), ContrabassFlute(), UntunedPercussion('caxixi', 'cx.')]), Performer(name='guitarist', instruments=[Guitar(), UntunedPercussion('caxixi', 'cx.')]), Performer(name='accordionist', instruments=[Accordion()]), Performer(name='percussionist', instruments=[Marimba(), Glockenspiel(), UntunedPercussion('bass drum', 'b. drum'), UntunedPercussion('claves', 'clv.'), UntunedPercussion('caxixi', 'cx.')])])",
-      '     \'title\': "L\'archipel du corps"',
-      "     'year_of_completion': 2011",
-      '',
-      '     add tag',
-      '     delete tag',
-      '']
+    assert studio.ts == (6,)
 
 
 def test_Studio_07():

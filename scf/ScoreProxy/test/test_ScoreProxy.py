@@ -109,18 +109,7 @@ def test_ScoreProxy_04():
     archipel = baca.scf.ScoreProxy('archipel')
     archipel.session.user_input = 'q'
     archipel.manage_tags()
-
-    assert archipel.transcript[-2] == \
-     ['Tags',
-      '',
-      "     'composer': TrevorBaca()",
-      "     'instrumentation': InstrumentationSpecifier([Performer(name='flutist', instruments=[Piccolo(), AltoFlute(), ContrabassFlute(), UntunedPercussion('caxixi', 'cx.')]), Performer(name='guitarist', instruments=[Guitar(), UntunedPercussion('caxixi', 'cx.')]), Performer(name='accordionist', instruments=[Accordion()]), Performer(name='percussionist', instruments=[Marimba(), Glockenspiel(), UntunedPercussion('bass drum', 'b. drum'), UntunedPercussion('claves', 'clv.'), UntunedPercussion('caxixi', 'cx.')])])",
-      '     \'title\': "L\'archipel du corps"',
-      "     'year_of_completion': 2011",
-      '',
-      '     add tag',
-      '     delete tag',
-      '']
+    assert archipel.ts == (2,)
 
 
 def test_ScoreProxy_05():

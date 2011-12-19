@@ -30,12 +30,12 @@ def test_PerformerEditor_delete_instruments_02():
     '''
 
     editor = baca.scf.editors.PerformerEditor()
-    editor.run(user_input='add 1 add 2 del 1 q')
-    assert editor.target == Performer(instruments=[AltoFlute()])
+    editor.run(user_input='add flute add acc del flute q')
+    assert editor.target == Performer(instruments=[Accordion()])
 
 
 def test_PerformerEditor_delete_instruments_03():
-    '''Range handling.
+    '''Numeric range handling.
     '''
 
     editor = baca.scf.editors.PerformerEditor()

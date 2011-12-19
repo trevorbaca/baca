@@ -1,21 +1,27 @@
 TODO
 
-1. Make 'del caxixi' work.
+1. Implement transcript class read-only command string.
 
-2. Implement hn, trb, vn, vc, pf, perc.
+2. Implement '.' for last command string executed like 'next perf'.
 
-3. Implement '.' for last command string executed like 'next perf'.
+3. Extend user input getter with defaults.
 
-4. Implement 'for 64 pieces of untuned percussion' tag.
+4. Change user input getter to space attribute and value pairs intelligently in main menu.
 
-5. Edit year of completion tag.
+5. Edit title tag.
 
-6. Edit title tag.
+6. Edit year of completion tag.
 
-7. Implement transcript class read-only command string.
+7. Implement 'for 64 pieces of untuned percussion' tag.
 
-8. Extend user input getter with defaults.
+8. Implement unique instrument abbreviations.
 
-9. Change user input getter to space attribute and value pairs intelligently in main menu.
+9. Implement user_input='marimba pr (-24, 36) q'.
 
-10. Implement user_input='marimba pr (-24, 36) q'.
+10. Parse f,, somehow.
+
+11. Match on Unicode.
+
+12. Edit instrument transposition.
+
+13. Edit instrument clefs.
