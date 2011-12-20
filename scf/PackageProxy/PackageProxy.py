@@ -182,9 +182,11 @@ class PackageProxy(DirectoryProxy):
         getter = self.make_new_getter(where=self.where())
         getter.append_string('tag name')
         getter.append_string('tag value')
-        user_input = getter.run()
-        if user_input:
-            tag_name, tag_value = user_input
+        result = getter.run()
+        if self.backtrack():
+            return
+        if result:
+            tag_name, tag_value = result
             self.add_tag(tag_name, tag_value)
             confirm_line = 'tag added.\n'
             self.display_lines([confirm_line])
@@ -211,9 +213,11 @@ class PackageProxy(DirectoryProxy):
     def delete_tag_interactively(self):
         getter = self.make_new_getter(where=self.where())
         getter.append_string('tag name')
-        user_input = getter.run()
-        if user_input:
-            tag_name = user_input
+        result = getter.run()
+        if self.backtrack():
+            return
+        if result:
+            tag_name = result
             self.delete_tag(tag_name)
             confirm_line = 'tag deleted.\n'
             self.display_lines([confirm_line])
@@ -319,7 +323,10 @@ class PackageProxy(DirectoryProxy):
         getter.prompts.append('package importable name')
         getter.tests.append(iotools.is_underscore_delimited_lowercase_package_name)
         getter.helps.append('must be underscore-delimited lowercase package name.')
-        self.package_importable_name = getter.run()
+        result = getter.run()
+        if self.backtrack():
+            return
+        self.package_importable_name = result
 
     def set_package_spaced_name_interactively(self):
         getter = self.make_new_getter(where=self.where())
@@ -327,7 +334,10 @@ class PackageProxy(DirectoryProxy):
         getter.prompts.append('package spaced name')
         getter.tests.append(iotools.is_space_delimited_lowercase_string)
         getter.helps.append('must be space-delimited lowercase string.')
-        self.package_spaced_name = getter.run()
+        result = getter.run()
+        if self.backtrack():
+            return
+        self.package_spaced_name = result
 
     def set_purview_interactively(self):
         from baca.scf.ScoreWrangler import ScoreWrangler

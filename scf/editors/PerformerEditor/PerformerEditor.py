@@ -55,10 +55,10 @@ class PerformerEditor(InteractiveEditor):
     def delete_instruments_interactively(self):
         getter = self.make_new_getter(where=self.where())
         getter.append_argument_range('instruments', self.instrument_names)
-        instrument_numbers = getter.run()
+        result = getter.run()
         if self.backtrack():
             return
-        instrument_indices = [x - 1 for x in instrument_numbers]
+        instrument_indices = [x - 1 for x in result]
         instruments = self.target.instruments
         instruments = sequencetools.remove_sequence_elements_at_indices(instruments, instrument_indices)
         self.target.instruments[:] = instruments
@@ -70,10 +70,10 @@ class PerformerEditor(InteractiveEditor):
             spaced_variable_name = 'new performer name'
         getter = self.make_new_getter(where=self.where())
         getter.append_string_or_none(spaced_variable_name)
-        name = getter.run()
+        result = getter.run()
         if self.backtrack():
             return
-        self.target.name = name
+        self.target.name = result
 
     def handle_main_menu_response(self, key, value):
         if not isinstance(key, str):

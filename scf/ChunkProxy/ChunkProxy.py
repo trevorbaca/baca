@@ -80,10 +80,10 @@ class ChunkProxy(PackageProxy):
         getter.prompts.append('chunk name')
         getter.tests.append(iotools.is_space_delimited_lowercase_string)
         getter.helps.append('must be space-delimited lowercase string.')
-        chunk_spaced_name = getter.run()
+        result = getter.run()
         if self.backtrack():
             return
-        package_short_name = chunk_spaced_name.replace(' ', '_')
+        package_short_name = result.replace(' ', '_')
         package_importable_name = '.'.join([self.package_importable_name, package_short_name])
         chunk_proxy = ChunkProxy(package_importable_name)
         chunk_proxy.create_chunk()

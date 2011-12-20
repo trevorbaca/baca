@@ -66,10 +66,10 @@ class InstrumentationEditor(InteractiveEditor):
     def delete_performers_interactively(self):
         getter = self.make_new_getter(where=self.where())
         getter.append_argument_range('performers', self.summary_lines)
-        performer_numbers = getter.run()
+        result = getter.run()
         if self.backtrack():
             return
-        performer_indices = [performer_number - 1 for performer_number in performer_numbers]
+        performer_indices = [performer_number - 1 for performer_number in result]
         performer_indices = list(reversed(sorted(set(performer_indices))))
         performers = self.target.performers
         performers = sequencetools.remove_sequence_elements_at_indices(performers, performer_indices)

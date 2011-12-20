@@ -17,14 +17,18 @@ class ScoreTemplateWizard(Wizard):
         self.display_lines(lines)
         getter = self.make_new_getter(where=self.where())
         getter.append_integer("enter the number of players or type 'skip'")
-        player_count = getter.run()
+        result = getter.run()
+        if self.backtrack():
+            return
         players = []
-        if player_count is not None:
-            for i in xrange(player_count):
+        if result is not None:
+            for i in xrange(result):
                 getter = self.make_new_getter(where=self.where())
                 getter.append_string("name of player {}".format(i + 1))
-                player_name = getter.run()
-                player = instrumenttools.HumanMusician(player_name)
+                result = getter.run()
+                if self.backtrack():
+                    return
+                player = instrumenttools.HumanMusician(result)
                 players.append(player)
                 self.assign_instruments_to_player(player)
         return players
