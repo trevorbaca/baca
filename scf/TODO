@@ -2,16 +2,14 @@ TODO
 
 1. Allow 'q' from pitch range editor 'start pitch is included in range' prompt.
 
-2. Allow 'b' from 'forces tagline' prompt.
+2. Parse f,, somehow.
 
-3. Parse f,, somehow.
+3. Match on Unicode.
 
-4. Match on Unicode.
+4. Display menu key in parentheses to right of menu value.
 
-5. Display menu key in parentheses to right of menu value.
+5. Implement unique instrument abbreviations.
 
-6. Implement unique instrument abbreviations.
+6. Edit instrument transposition.
 
-7. Edit instrument transposition.
-
-8. Edit instrument clefs.
+7. Edit instrument clefs.

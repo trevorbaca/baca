@@ -132,6 +132,8 @@ class ScoreProxy(PackageProxy):
         getter = self.make_new_getter(where=self.where())
         getter.append_string('Forces tagline')
         result = getter.run()
+        if self.session.backtrack():
+            return
         self.add_tag('forces_tagline', result)
         return True
 
@@ -147,6 +149,8 @@ class ScoreProxy(PackageProxy):
         getter = self.make_new_getter(where=self.where())
         getter.append_string('new title')
         result = getter.run()
+        if self.session.backtrack():
+            return
         self.add_tag('title', result)
         return True
 
@@ -154,6 +158,8 @@ class ScoreProxy(PackageProxy):
         getter = self.make_new_getter(where=self.where())
         getter.append_integer_or_none('year of completion')
         result = getter.run()
+        if self.session.backtrack():
+            return
         self.add_tag('year_of_completion', result)
         return True
 
