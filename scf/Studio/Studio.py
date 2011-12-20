@@ -227,10 +227,10 @@ class Studio(SCFObject):
             if self.session.is_backtracking_to_score:
                 self.session.is_backtracking_to_score = False
                 continue
-            elif self.session.backtrack():
+            elif self.backtrack():
                 break
             self.handle_svn_response(key, value)
-            if self.session.backtrack():
+            if self.backtrack():
                 break
         self.breadcrumbs.pop()
 

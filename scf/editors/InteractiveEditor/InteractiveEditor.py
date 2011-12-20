@@ -65,19 +65,19 @@ class InteractiveEditor(SCFObject):
         self.conditionally_initialize_target()
         self.session.backtrack_preservation_is_active = False
         self.breadcrumbs.pop()
-        if self.session.backtrack():
+        if self.backtrack():
             return
         while True:
             self.breadcrumbs.append(self.breadcrumb)
             menu = self.make_main_menu()
             key, value = menu.run()
-            if self.session.backtrack():
+            if self.backtrack():
                 break
             elif key is None:
                 self.breadcrumbs.pop()
                 continue
             self.handle_main_menu_response(key, value)
-            if self.session.backtrack():
+            if self.backtrack():
                 break
             self.breadcrumbs.pop()
         self.breadcrumbs.pop()

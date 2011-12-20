@@ -42,7 +42,7 @@ class InstrumentEditor(InteractiveEditor):
         getter = self.make_new_getter(where=self.where())
         getter.append_string('instrument name')
         result = getter.run()
-        if self.session.backtrack():
+        if self.backtrack():
             return
         self.conditionally_set_target_attribute('instrument_name', result)
 
@@ -50,7 +50,7 @@ class InstrumentEditor(InteractiveEditor):
         getter = self.make_new_getter(where=self.where())
         getter.append_markup('instrument name markup')
         result = getter.run()
-        if self.session.backtrack():
+        if self.backtrack():
             return
         self.conditionally_set_target_attribute('instrument_name_markup', result)
 
@@ -58,7 +58,7 @@ class InstrumentEditor(InteractiveEditor):
         getter = self.make_new_getter(where=self.where())
         getter.append_pitch_range('pitch range')
         result = getter.run()
-        if self.session.backtrack():
+        if self.backtrack():
             return
         self.conditionally_set_target_attribute('pitch_range', result)
         
@@ -66,7 +66,7 @@ class InstrumentEditor(InteractiveEditor):
         getter = self.make_new_getter(where=self.where())
         getter.append_string('short instrument name')
         result = getter.run()
-        if self.session.backtrack():
+        if self.backtrack():
             return
         self.conditionally_set_target_attribute('short_instrument_name', result)
 
@@ -74,7 +74,7 @@ class InstrumentEditor(InteractiveEditor):
         getter = self.make_new_getter(where=self.where())
         getter.append_markup('short instrument name markup')
         result = getter.run()
-        if self.session.backtrack():
+        if self.backtrack():
             return
         self.conditionally_set_target_attribute('short_instrument_name_markup', result)
         
@@ -85,7 +85,7 @@ class InstrumentEditor(InteractiveEditor):
             menu.should_clear_terminal = False
             section.items_to_number = instrumenttools.UntunedPercussion.known_untuned_percussion
             key, value = menu.run()
-            if self.session.backtrack():
+            if self.backtrack():
                 self.breadcrumbs.pop()
                 return
             elif key is None:
@@ -152,7 +152,7 @@ class InstrumentEditor(InteractiveEditor):
         section.items_to_number = instrumenttools.list_instrument_names()
         while True:
             key, value = menu.run()
-            if self.session.backtrack():
+            if self.backtrack():
                 self.breadcrumbs.pop()
                 return    
             elif key is None:
@@ -170,7 +170,7 @@ class InstrumentEditor(InteractiveEditor):
                 self.session.backtrack_preservation_is_active = True
                 instrument_name = self.get_untuned_percussion_name_interactively()
                 self.session.backtrack_preservation_is_active = False
-                if self.session.backtrack():
+                if self.backtrack():
                     continue
                 instrument.instrument_name = instrument_name
             result.append(instrument)

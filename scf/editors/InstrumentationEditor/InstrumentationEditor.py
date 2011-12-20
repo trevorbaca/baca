@@ -35,12 +35,12 @@ class InstrumentationEditor(InteractiveEditor):
         from abjad.tools import scoretools
         try_again = False
         while True:
-            if self.session.backtrack():
+            if self.backtrack():
                 return
             self.session.backtrack_preservation_is_active = True
             performer_names = self.select_performer_names_interactively()
             self.session.backtrack_preservation_is_active = False
-            if self.session.backtrack():
+            if self.backtrack():
                 return
             elif performer_names:
                 performers = []
@@ -52,7 +52,7 @@ class InstrumentationEditor(InteractiveEditor):
                     performer_editor.set_initial_configuration_interactively()
                     self.session.backtrack_preservation_is_active = False
                     self.breadcrumbs.pop()
-                    if self.session.backtrack():
+                    if self.backtrack():
                         performers = []
                         try_again = True
                         break
@@ -67,7 +67,7 @@ class InstrumentationEditor(InteractiveEditor):
         getter = self.make_new_getter(where=self.where())
         getter.append_argument_range('performers', self.summary_lines)
         performer_numbers = getter.run()
-        if self.session.backtrack():
+        if self.backtrack():
             return
         performer_indices = [performer_number - 1 for performer_number in performer_numbers]
         performer_indices = list(reversed(sorted(set(performer_indices))))
@@ -120,7 +120,7 @@ class InstrumentationEditor(InteractiveEditor):
         getter.append_integer_in_closed_range('old number', 1, self.target.performer_count)
         getter.append_integer_in_closed_range('new number', 1, self.target.performer_count)
         result = getter.run()
-        if self.session.backtrack():
+        if self.backtrack():
             return
         old_number, new_number = result
         old_index, new_index = old_number - 1, new_number - 1
@@ -139,7 +139,7 @@ class InstrumentationEditor(InteractiveEditor):
         section.items_to_number = performer_names
         while True:
             key, value = menu.run()
-            if self.session.backtrack():
+            if self.backtrack():
                 self.breadcrumbs.pop()
                 return
             if key is None:

@@ -281,10 +281,10 @@ class PackageProxy(DirectoryProxy):
         while True:
             menu = self.make_tags_menu()
             key, value = menu.run()
-            if self.session.backtrack():
+            if self.backtrack():
                 break
             self.handle_tags_response(key, value)
-            if self.session.backtrack():
+            if self.backtrack():
                 break
         self.breadcrumbs.pop()
         

@@ -132,7 +132,7 @@ class ScoreProxy(PackageProxy):
         getter = self.make_new_getter(where=self.where())
         getter.append_string('Forces tagline')
         result = getter.run()
-        if self.session.backtrack():
+        if self.backtrack():
             return
         self.add_tag('forces_tagline', result)
         return True
@@ -149,7 +149,7 @@ class ScoreProxy(PackageProxy):
         getter = self.make_new_getter(where=self.where())
         getter.append_string('new title')
         result = getter.run()
-        if self.session.backtrack():
+        if self.backtrack():
             return
         self.add_tag('title', result)
         return True
@@ -158,7 +158,7 @@ class ScoreProxy(PackageProxy):
         getter = self.make_new_getter(where=self.where())
         getter.append_integer_or_none('year of completion')
         result = getter.run()
-        if self.session.backtrack():
+        if self.backtrack():
             return
         self.add_tag('year_of_completion', result)
         return True
@@ -287,7 +287,7 @@ class ScoreProxy(PackageProxy):
                 self.session.is_backtracking_to_score = False
                 self.breadcrumbs.pop() 
                 continue
-            elif self.session.backtrack():
+            elif self.backtrack():
                 break
             elif key is None:
                 self.breadcrumbs.pop()
@@ -297,7 +297,7 @@ class ScoreProxy(PackageProxy):
                 self.session.is_backtracking_to_score = False
                 self.breadcrumbs.pop()
                 continue
-            elif self.session.backtrack():
+            elif self.backtrack():
                 break
             self.breadcrumbs.pop()
         self.breadcrumbs.pop()
@@ -307,10 +307,10 @@ class ScoreProxy(PackageProxy):
         while True:
             menu = self.make_svn_menu()
             key, value = menu.run()
-            if self.session.backtrack():
+            if self.backtrack():
                 break
             self.handle_svn_response(key, value)
-            if self.session.backtrack():
+            if self.backtrack():
                 break
         self.breadcrumbs.pop()
 

@@ -56,7 +56,7 @@ class PerformerEditor(InteractiveEditor):
         getter = self.make_new_getter(where=self.where())
         getter.append_argument_range('instruments', self.instrument_names)
         instrument_numbers = getter.run()
-        if self.session.backtrack():
+        if self.backtrack():
             return
         instrument_indices = [x - 1 for x in instrument_numbers]
         instruments = self.target.instruments
@@ -71,7 +71,7 @@ class PerformerEditor(InteractiveEditor):
         getter = self.make_new_getter(where=self.where())
         getter.append_string_or_none(spaced_variable_name)
         name = getter.run()
-        if self.session.backtrack():
+        if self.backtrack():
             return
         self.target.name = name
 
@@ -125,7 +125,7 @@ class PerformerEditor(InteractiveEditor):
         getter.append_integer_in_closed_range('old instrument number', 1, self.target.instrument_count)
         getter.append_integer_in_closed_range('new instrument number', 1, self.target.instrument_count)
         result = getter.run()
-        if self.session.backtrack():
+        if self.backtrack():
             return
         old_instrument_number, new_instrument_number = result
         old_instrument_index, new_instrument_index = old_instrument_number - 1, new_instrument_number - 1
@@ -161,7 +161,7 @@ class PerformerEditor(InteractiveEditor):
         menu = self.set_initial_configuration_menu()
         while True:
             key, value = menu.run()
-            if self.session.backtrack():
+            if self.backtrack():
                 self.breadcrumbs.pop()
                 return
             elif key is None:

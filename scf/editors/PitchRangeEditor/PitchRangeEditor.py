@@ -32,7 +32,7 @@ class PitchRangeEditor(InteractiveEditor):
             getter.append_named_chromatic_pitch('stop pitch')
             getter.append_boolean('stop pitch is included in range', default=True)
             result = getter.run()
-            if self.session.backtrack():
+            if self.backtrack():
                 return
             start, is_start, stop, is_stop = result
             if is_start:
@@ -50,7 +50,7 @@ class PitchRangeEditor(InteractiveEditor):
         getter = self.make_new_getter(where=self.where())
         getter.append_named_chromatic_pitch('start pitch')
         result = getter.run()
-        if self.session.backtrack():
+        if self.backtrack():
             return
         self.conditionally_set_target_attribute('start_pitch', result)
 
@@ -58,7 +58,7 @@ class PitchRangeEditor(InteractiveEditor):
         getter = self.make_new_getter(where=self.where())
         getter.append_boolean('start pitch is included in range')
         result = getter.run()
-        if self.session.backtrack():
+        if self.backtrack():
             return
         self.conditionally_set_target_attribute('start_pitch_is_included_in_range', result)
 
@@ -66,7 +66,7 @@ class PitchRangeEditor(InteractiveEditor):
         getter = self.make_new_getter(where=self.where())
         getter.append_named_chromatic_pitch('stop pitch')
         result = getter.run()
-        if self.session.backtrack():
+        if self.backtrack():
             return
         self.conditionally_set_target_attribute('stop_pitch', result)
 
@@ -74,7 +74,7 @@ class PitchRangeEditor(InteractiveEditor):
         getter = self.make_new_getter(where=self.where())
         getter.append_boolean('stop pitch is included in range')
         result = getter.run()
-        if self.session.backtrack():
+        if self.backtrack():
             return
         self.conditionally_set_target_attribute('stop_pitch_is_included_in_range', result)
 

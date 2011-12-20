@@ -77,6 +77,9 @@ class SCFObject(object):
 
     ### PUBLIC METHODS ###
 
+    def backtrack(self):
+        return self.session.backtrack()
+
     def conditionally_clear_terminal(self):
         if self.session.is_displayable:
             iotools.clear_terminal()
