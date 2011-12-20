@@ -100,6 +100,8 @@ class DirectoryProxy(SCFObject):
         getter = self.make_new_getter(where=self.where())
         getter.append_string('directory name')
         self.directory_name = getter.run()
+        if self.backtrack():
+            return
 
     def remove(self):
         if self.is_in_repository:

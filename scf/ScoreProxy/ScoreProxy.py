@@ -135,15 +135,13 @@ class ScoreProxy(PackageProxy):
         if self.backtrack():
             return
         self.add_tag('forces_tagline', result)
-        return True
 
     def edit_instrumentation_specifier_interactively(self):
         import baca
         target = self.get_tag('instrumentation')
         editor = baca.scf.editors.InstrumentationEditor(session=self.session, target=target)
-        result = editor.run()
+        editor.run() # maybe check for backtracking after this?
         self.add_tag('instrumentation', editor.target)
-        return result
 
     def edit_title_interactively(self):
         getter = self.make_new_getter(where=self.where())
@@ -152,7 +150,6 @@ class ScoreProxy(PackageProxy):
         if self.backtrack():
             return
         self.add_tag('title', result)
-        return True
 
     def edit_year_of_completion_interactively(self):
         getter = self.make_new_getter(where=self.where())
@@ -161,7 +158,6 @@ class ScoreProxy(PackageProxy):
         if self.backtrack():
             return
         self.add_tag('year_of_completion', result)
-        return True
 
     def fix_package_structure(self, is_interactive=True):
         if self.package_short_name == 'recursif':
@@ -271,10 +267,6 @@ class ScoreProxy(PackageProxy):
     def run(self, user_input=None):
         if user_input is not None:
             self.session.user_input = user_input
-#        if isinstance(self.year_of_completion, int):
-#            self.breadcrumbs.append(self.title_with_year)
-#        else:
-#            self.breadcrumbs.append(self.title)
         while True:
             # TODO: encapsulate these four lines into public property
             if isinstance(self.year_of_completion, int):
