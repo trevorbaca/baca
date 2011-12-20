@@ -188,23 +188,23 @@ class ScoreProxy(PackageProxy):
 
     def handle_main_menu_response(self, key, value):
         if key == 'ch':
-            return self.chunk_wrangler.create_chunk_interactively()
+            self.chunk_wrangler.create_chunk_interactively()
         elif key == 'ft':
-            return self.edit_forces_tagline_interactively()
+            self.edit_forces_tagline_interactively()
         elif key == 'mi':
-            return self.material_wrangler.create_interactive_material_interactively()
+            self.material_wrangler.create_interactive_material_interactively()
         elif key == 'ms':
-            return self.material_wrangler.create_static_material_package_interactively()
+            self.material_wrangler.create_static_material_package_interactively()
         elif key == 'perf':
-            return self.edit_instrumentation_specifier_interactively()
+            self.edit_instrumentation_specifier_interactively()
         elif key == 'svn':
-            return self.manage_svn()
+            self.manage_svn()
         elif key == 'tags':
-            return self.manage_tags()
+            self.manage_tags()
         elif key == 'tl':
-            return self.edit_title_interactively()
+            self.edit_title_interactively()
         elif key == 'yr':
-            return self.edit_year_of_completion_interactively()
+            self.edit_year_of_completion_interactively()
         elif key.startswith('h'):
             chunk_spaced_name = value
             chunk_underscored_name = chunk_spaced_name.replace(' ', '_')
@@ -212,13 +212,13 @@ class ScoreProxy(PackageProxy):
                 self.chunk_wrangler.package_importable_name, chunk_underscored_name)
             chunk_proxy = self.chunk_wrangler.ChunkProxy(package_importable_name)
             chunk_proxy.title = self.title
-            return chunk_proxy.run()
+            chunk_proxy.run()
         elif key.startswith('m'):
             material_underscored_name = value
             package_importable_name = '{}.{}'.format(
                 self.material_wrangler.package_importable_name, material_underscored_name)
             material_proxy = self.material_wrangler.get_package_proxy(package_importable_name)
-            return material_proxy.run()
+            material_proxy.run()
         else:
             raise ValueError
 
