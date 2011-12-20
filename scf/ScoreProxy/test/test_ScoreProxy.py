@@ -73,7 +73,10 @@ def test_ScoreProxy_02():
      '',
      '     Setup',
      '',
+     '     forces tagline',
      '     performers',
+     '     title',
+     '     year of completion',
      '']
 
 

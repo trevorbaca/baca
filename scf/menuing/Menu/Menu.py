@@ -217,9 +217,8 @@ class Menu(MenuObject, SCFObject):
         if not self.session.hide_next_redraw:
             self.display_lines(self.menu_lines)
         user_response = self.handle_raw_input_with_default('SCF', default=self.prompt_default)
-        #print repr(user_response)
         key = self.split_multipart_user_response(user_response)
-        #print repr(key)
+        #print 'BAR', repr(user_response), repr(key), '||', repr(self.session.user_input)
         key = self.check_if_key_exists(key)
         #print 'exists?', repr(key) # this should be none
         value = self.change_key_to_value(key)
@@ -284,10 +283,9 @@ class Menu(MenuObject, SCFObject):
         return key, value
 
     def split_multipart_user_response(self, user_response):
+        self.session.transcribe_next_command = True
         if ' ' in user_response:
             parts = user_response.split(' ')
-            #key = parts[0]
-            #rest = ' '.join(parts[1:])
             key_parts, rest_parts = [], []
             for i, part in enumerate(parts):
                 if not part.endswith((',', '-')):
@@ -296,8 +294,11 @@ class Menu(MenuObject, SCFObject):
             rest_parts = parts[i+1:]
             key = ' '.join(key_parts)
             rest = ' '.join(rest_parts)
+            if rest:
+                self.session.transcribe_next_command = False
             if isinstance(self.session.user_input, str):
-                self.session.user_input = self.session.user_input + rest
+                #self.session.user_input = self.session.user_input + ' ' + rest
+                self.session.user_input = rest + ' ' + self.session.user_input
             else:
                 self.session.user_input = rest
         else:

@@ -41,6 +41,14 @@ class ScoreProxy(PackageProxy):
     def exg_proxy(self):
         return self._exg_proxy
 
+    @apply
+    def forces_tagline():
+        def fget(self):
+            return self.get_tag('forces_tagline')
+        def fset(self, forces_tagline):
+            return self.add_tag('forces_tagline', forces_tagline)
+        return property(**locals())
+
     @property
     def has_correct_directory_structure(self):
         return all([os.path.exists(name) for name in self.score_subdirectory_names])
@@ -120,14 +128,34 @@ class ScoreProxy(PackageProxy):
     def create_package_structure(self):
         self.fix_score_package_directory_structure(is_interactive=False)
 
+    def edit_forces_tagline_interactively(self):
+        getter = self.make_new_getter(where=self.where())
+        getter.append_string('Forces tagline')
+        result = getter.run()
+        self.add_tag('forces_tagline', result)
+        return True
+
     def edit_instrumentation_specifier_interactively(self):
         import baca
         target = self.get_tag('instrumentation')
         editor = baca.scf.editors.InstrumentationEditor(session=self.session, target=target)
-        #target = editor.run()
         result = editor.run()
         self.add_tag('instrumentation', editor.target)
         return result
+
+    def edit_title_interactively(self):
+        getter = self.make_new_getter(where=self.where())
+        getter.append_string('new title')
+        result = getter.run()
+        self.add_tag('title', result)
+        return True
+
+    def edit_year_of_completion_interactively(self):
+        getter = self.make_new_getter(where=self.where())
+        getter.append_integer_or_none('year of completion')
+        result = getter.run()
+        self.add_tag('year_of_completion', result)
+        return True
 
     def fix_package_structure(self, is_interactive=True):
         if self.package_short_name == 'recursif':
@@ -161,6 +189,8 @@ class ScoreProxy(PackageProxy):
     def handle_main_menu_response(self, key, value):
         if key == 'ch':
             return self.chunk_wrangler.create_chunk_interactively()
+        elif key == 'ft':
+            return self.edit_forces_tagline_interactively()
         elif key == 'mi':
             return self.material_wrangler.create_interactive_material_interactively()
         elif key == 'ms':
@@ -171,6 +201,10 @@ class ScoreProxy(PackageProxy):
             return self.manage_svn()
         elif key == 'tags':
             return self.manage_tags()
+        elif key == 'tl':
+            return self.edit_title_interactively()
+        elif key == 'yr':
+            return self.edit_year_of_completion_interactively()
         elif key.startswith('h'):
             chunk_spaced_name = value
             chunk_underscored_name = chunk_spaced_name.replace(' ', '_')
@@ -213,7 +247,10 @@ class ScoreProxy(PackageProxy):
         section.sentence_length_items.append(('ms', 'create static material'))
         section = menu.make_new_section()
         section.section_title = 'setup'
+        section.sentence_length_items.append(('ft', 'forces tagline'))
         section.sentence_length_items.append(('perf', 'performers'))
+        section.sentence_length_items.append(('tl', 'title'))
+        section.sentence_length_items.append(('yr', 'year of completion'))
         menu.hidden_items.append(('svn', 'work with repository'))
         menu.hidden_items.append(('tags', 'work with tags'))
         return menu
@@ -228,49 +265,48 @@ class ScoreProxy(PackageProxy):
     def run(self, user_input=None):
         if user_input is not None:
             self.session.user_input = user_input
-        if isinstance(self.year_of_completion, int):
-            self.breadcrumbs.append(self.title_with_year)
-        else:
-            self.breadcrumbs.append(self.title)
+#        if isinstance(self.year_of_completion, int):
+#            self.breadcrumbs.append(self.title_with_year)
+#        else:
+#            self.breadcrumbs.append(self.title)
         while True:
+            # TODO: encapsulate these four lines into public property
+            if isinstance(self.year_of_completion, int):
+                self.breadcrumbs.append(self.title_with_year)
+            else:
+                self.breadcrumbs.append(self.title)
             menu = self.make_main_menu()
             key, value = menu.run()
             if self.session.is_backtracking_to_score:
                 self.session.is_backtracking_to_score = False
+                self.breadcrumbs.pop() 
                 continue
             elif self.session.backtrack():
                 break
             elif key is None:
+                self.breadcrumbs.pop()
                 continue
             self.handle_main_menu_response(key, value)
             if self.session.is_backtracking_to_score:
                 self.session.is_backtracking_to_score = False
+                self.breadcrumbs.pop()
                 continue
             elif self.session.backtrack():
                 break
+            self.breadcrumbs.pop()
         self.breadcrumbs.pop()
 
     def manage_svn(self):
-        result = False
         self.breadcrumbs.append('repository commands')
         while True:
             menu = self.make_svn_menu()
             key, value = menu.run()
-            if self.session.is_complete:
-                result = True
+            if self.session.backtrack():
                 break
-            tmp = self.handle_svn_response(key, value)
-            if tmp == 'back':
+            self.handle_svn_response(key, value)
+            if self.session.backtrack():
                 break
-            elif tmp == True:
-                result = True
-                break
-            elif tmp == False:
-                pass
-            else:
-                raise ValueError
         self.breadcrumbs.pop()
-        return result
 
     def profile_package_structure(self):
         if not os.path.exists(self.directory_name):

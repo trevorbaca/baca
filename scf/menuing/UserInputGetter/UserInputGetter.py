@@ -4,10 +4,11 @@ from baca.scf.menuing.MenuObject import MenuObject
 
 class UserInputGetter(MenuObject):
 
-    def __init__(self, argument_lists=None, execs=None, helps=None, prompts=None, session=None, 
+    def __init__(self, argument_lists=None, defaults=None, execs=None, helps=None, prompts=None, session=None, 
         should_clear_terminal=False, tests=None, where=None):
         MenuObject.__init__(self, session=session, should_clear_terminal=should_clear_terminal, where=where)
         self.argument_lists = argument_lists
+        self.defaults = defaults
         self.execs = execs
         self.helps = helps
         self.prompts = prompts
@@ -30,6 +31,18 @@ class UserInputGetter(MenuObject):
             else:
                 assert all([isinstance(x, list) for x in argument_lists])
                 self._argument_lists = argument_lists
+        return property(**locals())
+
+    @apply
+    def defaults():
+        def fget(self):
+            return self._defaults
+        def fset(self, defaults):
+            if defaults is None:
+                self._defaults = []
+            else:
+                assert all([isinstance(x, list) for x in defaults])
+                self._defaults = defaults
         return property(**locals())
 
     @apply
@@ -80,7 +93,8 @@ class UserInputGetter(MenuObject):
 
     ### PUBLIC METHODS ###
 
-    def append_something(self, spaced_attribute_name, message, additional_message_arguments=None):
+    def append_something(self, spaced_attribute_name, message, 
+        additional_message_arguments=None, default=None):
         assert isinstance(spaced_attribute_name, str)
         self.prompts.append(spaced_attribute_name)
         self.argument_lists.append([])
@@ -88,64 +102,70 @@ class UserInputGetter(MenuObject):
         if additional_message_arguments is None:
             additional_message_arguments = []
         self.helps.append(message.format(spaced_attribute_name, *additional_message_arguments))
+        self.defaults.append(default)
 
-    def append_argument_range(self, spaced_attribute_name, argument_list):
+    def append_argument_range(self, spaced_attribute_name, argument_list, default=None):
         message = "value for '{}' must be argument range."
-        self.append_something(spaced_attribute_name, message)
+        self.append_something(spaced_attribute_name, message, default=default)
         self.argument_lists[-1] = argument_list
         test = lambda expr: self.is_valid_argument_range_string_for_argument_list(expr, argument_list)
         self.tests.append(test)
 
-    def append_boolean(self, spaced_attribute_name):
+    def append_boolean(self, spaced_attribute_name, default=None):
         message = "value for '{}' must be boolean."
-        self.append_something(spaced_attribute_name, message)
+        self.append_something(spaced_attribute_name, message, default=default)
         self.tests.append(self.is_boolean)
 
-    def append_integer(self, spaced_attribute_name):
+    def append_integer(self, spaced_attribute_name, default=None):
         message = "value for '{}' must be integer."
-        self.append_something(spaced_attribute_name, message)
+        self.append_something(spaced_attribute_name, message, default=default)
         self.tests.append(self.is_integer)
 
-    def append_integer_in_closed_range(self, spaced_attribute_name, start, stop):
+    def append_integer_in_closed_range(self, spaced_attribute_name, start, stop, default=None):
         message = "value for '{}' must be integer between {} and {}, inclusive."
-        self.append_something(spaced_attribute_name, message, (start, stop))
+        self.append_something(spaced_attribute_name, message, (start, stop), default=default)
         self.tests.append(self.make_is_integer_in_closed_range(start, stop))
 
-    def append_markup(self, spaced_attribute_name):
+    def append_integer_or_none(self, spaced_attribute_name, default=None):
+        message = "value for '{}' must be integer or none."
+        self.append_something(spaced_attribute_name, message, default=default)
+        self.tests.append(self.is_integer_or_none)
+
+    def append_markup(self, spaced_attribute_name, default=None):
         message = "value for '{}' must be markup."
-        self.append_something(spaced_attribute_name, message)
+        self.append_something(spaced_attribute_name, message, default=default)
         execs = []
         execs.append('from abjad import *')
         execs.append('value = markuptools.Markup({})')
         self.execs[-1] = execs
         self.tests.append(self.is_markup)
 
-    def append_named_chromatic_pitch(self, spaced_attribute_name):
+    def append_named_chromatic_pitch(self, spaced_attribute_name, default=None):
         message = "value for '{}' must be named chromatic pitch."
-        self.append_something(spaced_attribute_name, message)
+        self.append_something(spaced_attribute_name, message, default=default)
         execs = []
         execs.append('from abjad import *')
         execs.append('value = pitchtools.NamedChromaticPitch({})')
         self.execs[-1] = execs
         self.tests.append(self.is_named_chromatic_pitch)
 
-    def append_pitch_range(self, spaced_attribute_name):
+    def append_pitch_range(self, spaced_attribute_name, default=None):
         message = "value for '{}' must be pitch range."
-        self.append_something(spaced_attribute_name, message)
+        self.append_something(spaced_attribute_name, message, default=default)
         execs = []
         execs.append('from abjad import *')
         execs.append('value = pitchtools.PitchRange({})')
         self.execs[-1] = execs
         self.tests.append(self.is_pitch_range_or_none)
 
-    def append_string(self, spaced_attribute_name):
+    def append_string(self, spaced_attribute_name, default=None):
         message = "value for '{}' must be string."
-        self.append_something(spaced_attribute_name, message)
+        self.append_something(spaced_attribute_name, message, default=default)
         self.tests.append(self.is_string)
 
-    def append_string_or_none(self, spaced_attribute_name):
+    def append_string_or_none(self, spaced_attribute_name, default=None):
         message = "value for '{}' must be string or none."
-        self.append_something(spaced_attribute_name, message)
+        self.append_something(spaced_attribute_name, message, default=default)
         self.tests.append(self.is_string_or_none)
 
     def load_prompt(self):
@@ -164,7 +184,9 @@ class UserInputGetter(MenuObject):
         self.load_prompt()
         while True:
             prompt = self.menu_lines[-1]
-            user_response = self.handle_raw_input(prompt)
+            default = self.defaults[self.prompt_index]
+            default = str(default)
+            user_response = self.handle_raw_input_with_default(prompt, default=default)
             if user_response is None:
                 self.prompt_index = self.prompt_index + 1
                 break

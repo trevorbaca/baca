@@ -18,10 +18,10 @@ class InstrumentEditor(InteractiveEditor):
     @property
     def target_attribute_tuples(self):
         return (
-            ('instrument_name', self.is_string, True),
-            ('instrument_name_markup', self.is_markup, True), 
-            ('short_instrument_name',  self.is_string, True),
-            ('short_instrument_name_markup', self.is_markup, True),)
+            ('instrument_name', self.is_string, True, None),
+            ('instrument_name_markup', self.is_markup, True, None), 
+            ('short_instrument_name',  self.is_string, True, None),
+            ('short_instrument_name_markup', self.is_markup, True, None),)
             
     @property
     def target_class(self):

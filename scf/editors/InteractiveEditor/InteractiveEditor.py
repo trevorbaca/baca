@@ -24,12 +24,12 @@ class InteractiveEditor(SCFObject):
     def target_attribute_menu_entries(self):
         result = []
         menu_keys = []
-        for target_attribute_name, predicate, is_read_write in self.target_attribute_tuples:
+        for target_attribute_name, predicate, is_read_write, default in self.target_attribute_tuples:
             menu_key = self.attribute_name_to_menu_key(target_attribute_name, menu_keys)
             assert menu_key not in menu_keys
             menu_keys.append(menu_key)
             value = target_attribute_name.replace('_', ' ')
-            value = '{} ({!r})'.format(value, getattr(self.target, target_attribute_name))
+            value = '{}: {!r}'.format(value, getattr(self.target, target_attribute_name))
             pair = (menu_key, value)
             result.append(pair)
         return result

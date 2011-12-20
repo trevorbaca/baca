@@ -26,7 +26,7 @@ def test_Studio_02():
      'Studio - active scores',
      '',
      "     1: L'archipel du corps (2011)",
-     '     2: Betörung (in progress)',
+     '     2: Betörung',
      '     3: Čáry (2006)',
      '     4: Mon seul désir (2009)',
      "     5: L'imaginare (2010)",
@@ -88,7 +88,10 @@ def test_Studio_04():
      '',
      '     Setup',
      '',
+     '     forces tagline',
      '     performers',
+     '     title',
+     '     year of completion',
      '']
 
 

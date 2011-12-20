@@ -4,9 +4,11 @@ from baca.scf.Transcript import Transcript
 class Session(object):
     
     def __init__(self, user_input=None):
+        self._command_history = []
         self._complete_transcript = Transcript()
         self._session_once_had_user_input = False
         self.backtrack_preservation_is_active = False
+        self.breadcrumbs = []
         self.current_score_package_short_name = None
         self.display_pitch_ranges_with_numbered_pitches = False
         self.dump_transcript = False
@@ -17,8 +19,9 @@ class Session(object):
         self.is_backtracking_to_studio = False
         self.is_navigating_to_next_score = False
         self.is_navigating_to_prev_score = False
-        self.breadcrumbs = []
+        self.last_command_was_composite = False
         self.scores_to_show = 'active'
+        self.transcribe_next_command = True
         self.user_input = user_input
         self.user_specified_quit = False
 
@@ -49,6 +52,14 @@ class Session(object):
             assert isinstance(backtrack_preservation_is_active, bool)
             self._backtrack_preservation_is_active = backtrack_preservation_is_active
         return property(**locals())
+
+    @property
+    def command_history(self):
+        return self._command_history
+
+    @property
+    def command_history_string(self):
+        return ' '.join(self.command_history)
 
     @property
     def complete_transcript(self):
@@ -134,6 +145,12 @@ class Session(object):
         return False
 
     @property
+    def last_semantic_command(self):
+        for command in reversed(self.command_history):
+            if not command.startswith('.'):
+                return command
+
+    @property
     def menu_header(self):
         if self.breadcrumbs:
             return ' - '.join(self.breadcrumbs)
@@ -169,6 +186,15 @@ class Session(object):
             if self.user_input is None:
                 return True
         return False
+
+    @apply
+    def transcribe_next_command():
+        def fget(self):
+            return self._transcribe_next_command
+        def fset(self, transcribe_next_command):
+            assert isinstance(transcribe_next_command, bool)
+            self._transcribe_next_command = transcribe_next_command
+        return property(**locals())
 
     @apply
     def user_specified_quit():

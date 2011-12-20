@@ -277,27 +277,17 @@ class PackageProxy(DirectoryProxy):
         return menu
 
     def manage_tags(self):
-        result = False
         self.breadcrumbs.append('tags')
         while True:
             menu = self.make_tags_menu()
             key, value = menu.run()
-            if self.session.is_complete:
-                result = True
+            if self.session.backtrack():
                 break
-            tmp = self.handle_tags_response(key, value)
-            if tmp == 'back':
+            self.handle_tags_response(key, value)
+            if self.session.backtrack():
                 break
-            elif tmp == True:
-                result = True
-                break
-            elif tmp == False:
-                pass
-            else:
-                raise ValueError
         self.breadcrumbs.pop()
-        return result
-
+        
     def pprint_tags(self, tags):
         if tags:
             lines = []

@@ -1,27 +1,19 @@
 TODO
 
-1. Implement transcript class read-only command string.
+1. Make studio svn menu ignore 'sco' backtracking.
 
-2. Implement '.' for last command string executed like 'next perf'.
+2. Allow 'q' from pitch range editor 'start pitch is included in range' prompt.
 
-3. Extend user input getter with defaults.
+3. Allow 'b' from 'forces tagline' prompt.
 
-4. Change user input getter to space attribute and value pairs intelligently in main menu.
+4. Parse f,, somehow.
 
-5. Edit title tag.
+5. Match on Unicode.
 
-6. Edit year of completion tag.
+6. Display menu key in parentheses to right of menu value.
 
-7. Implement 'for 64 pieces of untuned percussion' tag.
+7. Implement unique instrument abbreviations.
 
-8. Implement unique instrument abbreviations.
+8. Edit instrument transposition.
 
-9. Implement user_input='marimba pr (-24, 36) q'.
-
-10. Parse f,, somehow.
-
-11. Match on Unicode.
-
-12. Edit instrument transposition.
-
-13. Edit instrument clefs.
+9. Edit instrument clefs.

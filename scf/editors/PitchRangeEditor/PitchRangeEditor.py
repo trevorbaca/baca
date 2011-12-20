@@ -13,10 +13,10 @@ class PitchRangeEditor(InteractiveEditor):
     @property
     def target_attribute_tuples(self):
         return (
-            ('start_pitch', self.is_named_chromatic_pitch, False),
-            ('start_pitch_is_included_in_range', self.is_boolean, False),
-            ('stop_pitch', self.is_named_chromatic_pitch, False),
-            ('stop_pitch_is_included_in_range', self.is_boolean, False),)
+            ('start_pitch', self.is_named_chromatic_pitch, False, None),
+            ('start_pitch_is_included_in_range', self.is_boolean, False, True),
+            ('stop_pitch', self.is_named_chromatic_pitch, False, None),
+            ('stop_pitch_is_included_in_range', self.is_boolean, False, True),)
 
     @property
     def target_class(self):
@@ -28,9 +28,9 @@ class PitchRangeEditor(InteractiveEditor):
         if self.target is None:
             getter = self.make_new_getter(where=self.where())
             getter.append_named_chromatic_pitch('start pitch')
-            getter.append_boolean('start pitch is included in range')
+            getter.append_boolean('start pitch is included in range', default=True)
             getter.append_named_chromatic_pitch('stop pitch')
-            getter.append_boolean('stop pitch is included in range')
+            getter.append_boolean('stop pitch is included in range', default=True)
             (start, is_start, stop, is_stop) = getter.run()
             if is_start:
                 is_start = 'inclusive'
