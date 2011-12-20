@@ -1,6 +1,6 @@
 TODO
 
-1. Allow 'q' from pitch range editor 'start pitch is included in range' prompt.
+1. Check all getter.run() calls for subsequent backtracking check.
 
 2. Parse f,, somehow.
 
@@ -13,3 +13,5 @@ TODO
 6. Edit instrument transposition.
 
 7. Edit instrument clefs.
+
+8. Add C4-style named chromatic pitch initialization.

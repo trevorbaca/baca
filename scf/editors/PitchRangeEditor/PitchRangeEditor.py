@@ -31,7 +31,10 @@ class PitchRangeEditor(InteractiveEditor):
             getter.append_boolean('start pitch is included in range', default=True)
             getter.append_named_chromatic_pitch('stop pitch')
             getter.append_boolean('stop pitch is included in range', default=True)
-            (start, is_start, stop, is_stop) = getter.run()
+            result = getter.run()
+            if self.session.backtrack():
+                return
+            start, is_start, stop, is_stop = result
             if is_start:
                 is_start = 'inclusive'
             else:
@@ -41,8 +44,6 @@ class PitchRangeEditor(InteractiveEditor):
             else:
                 is_stop = 'exclusive'
             pitch_range = self.target_class((start, is_start), (stop, is_stop))
-            if self.session.backtrack():
-                return
             self.target = pitch_range
 
     def edit_start_pitch_interactively(self):
