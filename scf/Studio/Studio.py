@@ -224,7 +224,10 @@ class Studio(SCFObject):
         while True:
             menu = self.make_svn_menu()
             key, value = menu.run()
-            if self.session.backtrack():
+            if self.session.is_backtracking_to_score:
+                self.session.is_backtracking_to_score = False
+                continue
+            elif self.session.backtrack():
                 break
             self.handle_svn_response(key, value)
             if self.session.backtrack():
