@@ -10,12 +10,12 @@ def test_InstrumentEditor_base_states_01():
     editor.run(user_input='1 q')
     assert editor.ts == (4,)
     assert editor.transcript[-2] == \
-     ['Accordion',
+    ['Accordion',
       '',
-      "     instrument name: 'accordion'",
-      "     instrument name markup: Markup('Accordion')",
-      "     short instrument name: 'acc.'",
-      "     short instrument name markup: Markup('Acc.')",
+      "     instrument name (in):                'accordion'",
+      "     instrument name markup (inm):        Markup('Accordion')",
+      "     short instrument name (sin):         'acc.'",
+      "     short instrument name markup (sinm): Markup('Acc.')",
       '',
       '     range: [E1, C8]',
       '     clefs: treble, bass',

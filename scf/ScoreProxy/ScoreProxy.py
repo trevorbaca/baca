@@ -197,7 +197,7 @@ class ScoreProxy(PackageProxy):
             self.material_wrangler.create_interactive_material_interactively()
         elif key == 'ms':
             self.material_wrangler.create_static_material_package_interactively()
-        elif key == 'perf':
+        elif key == 'pf':
             self.edit_instrumentation_specifier_interactively()
         elif key == 'svn':
             self.manage_svn()
@@ -250,7 +250,7 @@ class ScoreProxy(PackageProxy):
         section = menu.make_new_section()
         section.section_title = 'setup'
         section.sentence_length_items.append(('ft', 'forces tagline'))
-        section.sentence_length_items.append(('perf', 'performers'))
+        section.sentence_length_items.append(('pf', 'performers'))
         section.sentence_length_items.append(('tl', 'title'))
         section.sentence_length_items.append(('yr', 'year of completion'))
         menu.hidden_items.append(('svn', 'work with repository'))
@@ -259,40 +259,10 @@ class ScoreProxy(PackageProxy):
 
     def make_svn_menu(self):
         menu, section = self.make_new_menu(where=self.where())
-        section.sentence_length_items.append(('st', 'svn status'))
-        section.sentence_length_items.append(('add', 'svn add'))
-        section.sentence_length_items.append(('ci', 'svn commit'))
+        section.sentence_length_items.append(('st', 'st', False))
+        section.sentence_length_items.append(('add', 'add', False))
+        section.sentence_length_items.append(('ci', 'ci', False))
         return menu
-
-    def run(self, user_input=None):
-        if user_input is not None:
-            self.session.user_input = user_input
-        while True:
-            # TODO: encapsulate these four lines into public property
-            if isinstance(self.year_of_completion, int):
-                self.breadcrumbs.append(self.title_with_year)
-            else:
-                self.breadcrumbs.append(self.title)
-            menu = self.make_main_menu()
-            key, value = menu.run()
-            if self.session.is_backtracking_to_score:
-                self.session.is_backtracking_to_score = False
-                self.breadcrumbs.pop() 
-                continue
-            elif self.backtrack():
-                break
-            elif key is None:
-                self.breadcrumbs.pop()
-                continue
-            self.handle_main_menu_response(key, value)
-            if self.session.is_backtracking_to_score:
-                self.session.is_backtracking_to_score = False
-                self.breadcrumbs.pop()
-                continue
-            elif self.backtrack():
-                break
-            self.breadcrumbs.pop()
-        self.breadcrumbs.pop()
 
     def manage_svn(self):
         self.breadcrumbs.append('repository commands')
@@ -317,6 +287,37 @@ class ScoreProxy(PackageProxy):
         for initializer in self.score_initializer_file_names:
             lines.append('{} {}'.format(initializer.ljust(80), os.path.exists(initializer)))
         self.display_lines(lines)
+
+    def run(self, user_input=None):
+        if user_input is not None:
+            self.session.user_input = user_input
+        while True:
+            # TODO: encapsulate these four lines into public property
+            if isinstance(self.year_of_completion, int):
+                self.breadcrumbs.append(self.title_with_year)
+            else:
+                self.breadcrumbs.append(self.title)
+            menu = self.make_main_menu()
+            key, value = menu.run()
+            #print 'ZEE', repr(key), repr(value)
+            if self.session.is_backtracking_to_score:
+                self.session.is_backtracking_to_score = False
+                self.breadcrumbs.pop() 
+                continue
+            elif self.backtrack():
+                break
+            elif key is None:
+                self.breadcrumbs.pop()
+                continue
+            self.handle_main_menu_response(key, value)
+            if self.session.is_backtracking_to_score:
+                self.session.is_backtracking_to_score = False
+                self.breadcrumbs.pop()
+                continue
+            elif self.backtrack():
+                break
+            self.breadcrumbs.pop()
+        self.breadcrumbs.pop()
 
     def run_score_package_creation_wizard(self):
         self.print_not_implemented()

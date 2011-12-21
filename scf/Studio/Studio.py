@@ -150,19 +150,19 @@ class Studio(SCFObject):
 
     def make_svn_menu(self):
         menu, section = self.make_new_menu(where=self.where())
-        section.sentence_length_items.append(('add', 'add'))
-        section.sentence_length_items.append(('ci', 'ci'))
-        section.sentence_length_items.append(('st', 'st'))
-        section.sentence_length_items.append(('up', 'up'))
+        section.sentence_length_items.append(('add', 'add', False))
+        section.sentence_length_items.append(('ci', 'ci', False))
+        section.sentence_length_items.append(('st', 'st', False))
+        section.sentence_length_items.append(('up', 'up', False))
         section = menu.make_new_section()
-        section.sentence_length_items.append(('add_scores', 'add_scores'))
-        section.sentence_length_items.append(('ci_scores', 'ci_scores'))
-        section.sentence_length_items.append(('st_scores', 'st_scores'))
-        section.sentence_length_items.append(('up_scores', 'up_scores'))
+        section.sentence_length_items.append(('add_scores', 'add_scores', False))
+        section.sentence_length_items.append(('ci_scores', 'ci_scores', False))
+        section.sentence_length_items.append(('st_scores', 'st_scores', False))
+        section.sentence_length_items.append(('up_scores', 'up_scores', False))
         section = menu.make_new_section()
-        section.sentence_length_items.append(('pytest', 'pytest'))
-        section.sentence_length_items.append(('pytest_scores', 'pytest_scores'))
-        section.sentence_length_items.append(('pytest_all', 'pytest_all'))
+        section.sentence_length_items.append(('pytest', 'pytest', False))
+        section.sentence_length_items.append(('pytest_scores', 'pytest_scores', False))
+        section.sentence_length_items.append(('pytest_all', 'pytest_all', False))
         return menu
 
     def run(self, user_input=None):

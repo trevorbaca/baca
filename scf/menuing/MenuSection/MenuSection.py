@@ -175,11 +175,20 @@ class MenuSection(MenuObject):
             if not self.hide_menu:
                 menu_lines.append('')
         assert all([isinstance(x, tuple) for x in self.sentence_length_items])
-        for key, value in self.sentence_length_items:
+        for sentence_length_item in self.sentence_length_items:
+            if len(sentence_length_item) == 2:
+                key, value = sentence_length_item
+                display_key = True
+            elif len(sentence_length_item) == 3:
+                key, value, display_key = sentence_length_item
+            else:
+                raise ValueError('sentence length item must have length 2 or 3.')
             if not self.hide_menu:
                 menu_line = self.make_tab(self.indent_level) + ' '
-                #menu_line += '{}: {}'.format(key, value)
-                menu_line += '{}'.format(value)
+                if key and display_key:
+                    menu_line += '{} ({})'.format(value, key)
+                else:
+                    menu_line += '{}'.format(value)
                 menu_lines.append(menu_line)
             all_keys.append(key)
             all_values.append(value)

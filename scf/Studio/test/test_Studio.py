@@ -22,8 +22,8 @@ def test_Studio_02():
     studio = baca.scf.Studio()
     studio.run(user_input='q')
     
-    assert studio.transcript[-2] == [  
-     'Studio - active scores',
+    assert studio.transcript[-2] == \
+    ['Studio - active scores',
      '',
      "     1: L'archipel du corps (2011)",
      '     2: Betörung',
@@ -35,8 +35,8 @@ def test_Studio_02():
      '     8: Red Shift Hijinks (2005)',
      '     9: Sekka (2007)',
      '',
-     '     work with interactive material proxies',
-     '     work with Bača materials',
+     '     work with interactive material proxies (k)',
+     '     work with Bača materials (m)',
      '']
 
 
@@ -79,19 +79,19 @@ def test_Studio_04():
      '',
      '     Chunks',
      '',
-     '     [create chunk]',
+     '     [create chunk] (ch)',
      '',
      '     Materials',
      '',
-     '     create interactive material',
-     '     create static material',
+     '     create interactive material (mi)',
+     '     create static material (ms)',
      '',
      '     Setup',
      '',
-     '     forces tagline',
-     '     performers',
-     '     title',
-     '     year of completion',
+     '     forces tagline (ft)',
+     '     performers (pf)',
+     '     title (tl)',
+     '     year of completion (yr)',
      '']
 
 
@@ -102,8 +102,8 @@ def test_Studio_05():
     studio = baca.scf.Studio()
     studio.run(user_input='mb q')
     
-    assert studio.transcript[-2] == [  
-     'Studio - mothballed scores',
+    assert studio.transcript[-2] == \
+    ['Studio - mothballed scores',
      '',
      '     1: Arac\xc4\xb1l\xc4\xb1k',
      '     2: Chrysanthemums (1995)',
@@ -114,8 +114,8 @@ def test_Studio_05():
      '     7: Territoires',
      '     8: Zeit (1998)',
      '',
-     '     work with interactive material proxies',
-     '     work with Bača materials',
+     '     work with interactive material proxies (k)',
+     '     work with Bača materials (m)',
      '']
 
 

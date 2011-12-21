@@ -126,12 +126,12 @@ class InstrumentEditor(InteractiveEditor):
         else:
             pitch_range_repr = self.target.pitch_range.one_line_named_chromatic_pitch_repr
         line = 'range: {}'.format(pitch_range_repr)
-        section.sentence_length_items.append(('pr', line))
+        section.sentence_length_items.append(('pr', line, False))
         menu.hidden_items.append(('tprd', 'toggle pitch range display'))
         clefs = [clef.clef_name for clef in self.target.all_clefs]
         clefs = ', '.join(clefs)
         line = 'clefs: {}'.format(clefs)
-        section.sentence_length_items.append(('cl', line))
+        section.sentence_length_items.append(('cl', line, False))
         if self.target.is_transposing:
             line = 'sounding pitch of fingered middle C: {}'
             line = line.format(self.target.sounding_pitch_of_fingered_middle_c.pitch_class_octave_label)

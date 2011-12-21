@@ -20,18 +20,27 @@ class InteractiveEditor(SCFObject):
 
     ### PUBLIC ATTRIBUTES ###
     
+    # TODO: rename to target_attribute_keyed_menu_tuples
     @property
     def target_attribute_menu_entries(self):
         result = []
-        menu_keys = []
+        target_attribute_names, menu_keys, left_hand_labels = [], [], []
         for target_attribute_name, predicate, is_read_write, default in self.target_attribute_tuples:
+            target_attribute_names.append(target_attribute_name)
             menu_key = self.attribute_name_to_menu_key(target_attribute_name, menu_keys)
             assert menu_key not in menu_keys
             menu_keys.append(menu_key)
-            value = target_attribute_name.replace('_', ' ')
-            value = '{}: {!r}'.format(value, getattr(self.target, target_attribute_name))
-            pair = (menu_key, value)
-            result.append(pair)
+            spaced_attribute_name = target_attribute_name.replace('_', ' ')
+            left_hand_label = '{} ({}):'.format(spaced_attribute_name, menu_key)
+            left_hand_labels.append(left_hand_label)
+        left_hand_label_width = max([len(x) for x in left_hand_labels])
+        for left_hand_label, target_attribute_name, menu_key in zip(
+            left_hand_labels, target_attribute_names, menu_keys):
+            menu_value = '{:<{width}} {!r}'.format(
+                left_hand_label, getattr(self.target, target_attribute_name), width=left_hand_label_width) 
+            display_key = False
+            keyed_menu_tuple = (menu_key, menu_value, display_key)
+            result.append(keyed_menu_tuple)
         return result
 
     ### PUBLIC METHODS ###
