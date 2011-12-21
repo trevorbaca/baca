@@ -176,6 +176,7 @@ class Studio(SCFObject):
             if run_main_menu:
                 menu = self.make_main_menu()
                 key, value = menu.run()
+                #print 'FEE', repr(key), repr(value)
             else:
                 run_main_menu = True
             if self.session.is_complete:

@@ -117,6 +117,9 @@ class Menu(MenuObject, SCFObject):
             self.all_values.append(value)
             self.all_display_strings.append(None)
 
+    def change_all_keys_to_lowercase(self):
+        self.all_keys = [key.lower() for key in self.all_keys]
+
     def change_display_string_to_key(self, display_string):
         if display_string:
             pair_dictionary = dict(zip(self.all_display_strings, self.all_keys))
@@ -132,7 +135,6 @@ class Menu(MenuObject, SCFObject):
                     return [value]
                 else:
                     return value
-            #if self.allow_argument_range and self.is_argument_range_string(key):
             elif self.allow_argument_range and self.is_argument_range_string(key):
                 for section in self.sections:
                     if section.items_to_number:
@@ -150,9 +152,6 @@ class Menu(MenuObject, SCFObject):
                             item = section.items_to_number[i]
                             result.append(item)
                         return result
-            #else:
-            #    pair_dictionary = dict(zip(self.all_keys, self.all_values))
-            #    return pair_dictionary.get(key)
 
     def change_value_to_key(self, value):
         if value:
@@ -189,10 +188,12 @@ class Menu(MenuObject, SCFObject):
         if key:
             assert len(self.all_values) == len(self.all_display_strings)
             for value, display_string in zip(self.all_values, self.all_display_strings):
-                if 3 <= len(key) and value.startswith(key):
+                #if 3 <= len(key) and value.startswith(key):
+                if 3 <= len(key) and value.lower().startswith(key):
                     key = self.change_value_to_key(value)
                     return key
-                elif display_string is not None and display_string.startswith(key):
+                #elif display_string is not None and display_string.startswith(key):
+                elif display_string is not None and display_string.lower().startswith(key):
                     key = self.change_display_string_to_key(display_string)
                     return key 
 
@@ -213,14 +214,16 @@ class Menu(MenuObject, SCFObject):
         if not self.session.hide_next_redraw:
             self.conditionally_clear_terminal()
         self.make_menu_lines_keys_and_values()
+        self.change_all_keys_to_lowercase()
         self.add_hidden_menu_items()
         if not self.session.hide_next_redraw:
             self.display_lines(self.menu_lines)
         user_response = self.handle_raw_input_with_default('SCF', default=self.prompt_default)
         key = self.split_multipart_user_response(user_response)
+        key = key.lower()
         #print 'BAR', repr(user_response), repr(key), '||', repr(self.session.user_input)
         key = self.check_if_key_exists(key)
-        #print 'exists?', repr(key) # this should be none
+        #print 'exists?', repr(key)
         value = self.change_key_to_value(key)
         #print repr(value)
         value = self.clean_value(value)
