@@ -1,13 +1,11 @@
 TODO
 
-1. Match on Unicode.
+1. Display menu key in parentheses to right of menu value.
 
-2. Display menu key in parentheses to right of menu value.
+2. Implement unique instrument abbreviations.
 
-3. Implement unique instrument abbreviations.
+3. Edit instrument transposition.
 
-4. Edit instrument transposition.
+4. Edit instrument clefs.
 
-5. Edit instrument clefs.
-
-6. Add C4-style named chromatic pitch initialization.
+5. Add C4-style named chromatic pitch initialization.

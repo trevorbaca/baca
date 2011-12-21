@@ -188,12 +188,11 @@ class Menu(MenuObject, SCFObject):
         if key:
             assert len(self.all_values) == len(self.all_display_strings)
             for value, display_string in zip(self.all_values, self.all_display_strings):
-                #if 3 <= len(key) and value.startswith(key):
-                if 3 <= len(key) and value.lower().startswith(key):
+                if 3 <= len(key) and iotools.strip_diacritics_from_binary_string(value).lower().startswith(key):
                     key = self.change_value_to_key(value)
                     return key
-                #elif display_string is not None and display_string.startswith(key):
-                elif display_string is not None and display_string.lower().startswith(key):
+                elif display_string is not None and iotools.strip_diacritics_from_binary_string(
+                    display_string).lower().startswith(key):
                     key = self.change_display_string_to_key(display_string)
                     return key 
 
@@ -220,6 +219,7 @@ class Menu(MenuObject, SCFObject):
             self.display_lines(self.menu_lines)
         user_response = self.handle_raw_input_with_default('SCF', default=self.prompt_default)
         key = self.split_multipart_user_response(user_response)
+        key = iotools.strip_diacritics_from_binary_string(key)
         key = key.lower()
         #print 'BAR', repr(user_response), repr(key), '||', repr(self.session.user_input)
         key = self.check_if_key_exists(key)
