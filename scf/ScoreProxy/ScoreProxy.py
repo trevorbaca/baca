@@ -240,28 +240,28 @@ class ScoreProxy(PackageProxy):
         section.section_title = 'chunks'
         section.items_to_number = self.chunk_wrangler.iterate_package_spaced_names()
         section.entry_prefix = 'h'
-        section.sentence_length_items.append(('ch', '[create chunk]'))
+        section.keyed_menu_entry_tuples.append(('ch', '[create chunk]'))
         section = menu.make_new_section()
         section.section_title = 'materials'
         section.items_to_number = self.material_wrangler.iterate_package_underscored_names()
         section.entry_prefix = 'm'
-        section.sentence_length_items.append(('mi', 'create interactive material'))
-        section.sentence_length_items.append(('ms', 'create static material'))
+        section.keyed_menu_entry_tuples.append(('mi', 'create interactive material'))
+        section.keyed_menu_entry_tuples.append(('ms', 'create static material'))
         section = menu.make_new_section()
         section.section_title = 'setup'
-        section.sentence_length_items.append(('ft', 'forces tagline'))
-        section.sentence_length_items.append(('pf', 'performers'))
-        section.sentence_length_items.append(('tl', 'title'))
-        section.sentence_length_items.append(('yr', 'year of completion'))
+        section.keyed_menu_entry_tuples.append(('ft', 'forces tagline'))
+        section.keyed_menu_entry_tuples.append(('pf', 'performers'))
+        section.keyed_menu_entry_tuples.append(('tl', 'title'))
+        section.keyed_menu_entry_tuples.append(('yr', 'year of completion'))
         menu.hidden_items.append(('svn', 'work with repository'))
         menu.hidden_items.append(('tags', 'work with tags'))
         return menu
 
     def make_svn_menu(self):
         menu, section = self.make_new_menu(where=self.where())
-        section.sentence_length_items.append(('st', 'st', False))
-        section.sentence_length_items.append(('add', 'add', False))
-        section.sentence_length_items.append(('ci', 'ci', False))
+        section.keyed_menu_entry_tuples.append(('st', 'st', False))
+        section.keyed_menu_entry_tuples.append(('add', 'add', False))
+        section.keyed_menu_entry_tuples.append(('ci', 'ci', False))
         return menu
 
     def manage_svn(self):

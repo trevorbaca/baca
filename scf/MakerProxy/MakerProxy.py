@@ -96,10 +96,10 @@ class MakerProxy(PackageProxy):
         section.section_title = 'existing {}'.format(self.generic_output_name)
         section.items_to_number = list(self.iterate_materials_based_on_maker())
         section = menu.make_new_section()
-        section.sentence_length_items.append(('del', 'delete {}'.format(self.spaced_class_name)))
-        section.sentence_length_items.append(('new', 'create {}'.format(self.generic_output_name)))
-        section.sentence_length_items.append(('ren', 'rename {}'.format(self.spaced_class_name)))
-        section.sentence_length_items.append(('src', 'edit {} source'.format(self.spaced_class_name)))
+        section.keyed_menu_entry_tuples.append(('del', 'delete {}'.format(self.spaced_class_name)))
+        section.keyed_menu_entry_tuples.append(('new', 'create {}'.format(self.generic_output_name)))
+        section.keyed_menu_entry_tuples.append(('ren', 'rename {}'.format(self.spaced_class_name)))
+        section.keyed_menu_entry_tuples.append(('src', 'edit {} source'.format(self.spaced_class_name)))
         return menu
 
     def run(self):

@@ -398,24 +398,24 @@ class MaterialProxy(PackageProxy):
         while True:
             menu, section = self.make_new_menu(where=self.where())
             if self.is_interactive:
-                section.sentence_length_items.append(('k', 'reload user input'))
-            section.sentence_length_items.append(('i', 'input'))
-            section.sentence_length_items.append(('o', 'output'))
+                section.keyed_menu_entry_tuples.append(('k', 'reload user input'))
+            section.keyed_menu_entry_tuples.append(('i', 'input'))
+            section.keyed_menu_entry_tuples.append(('o', 'output'))
             if self.has_visualizer:
-                section.sentence_length_items.append(('v', 'visualizer'))
+                section.keyed_menu_entry_tuples.append(('v', 'visualizer'))
             if self.has_visualization_ly:
-                section.sentence_length_items.append(('l', 'ly'))
+                section.keyed_menu_entry_tuples.append(('l', 'ly'))
             if self.has_stylesheet:
-                section.sentence_length_items.append(('y', 'stylesheet'))
+                section.keyed_menu_entry_tuples.append(('y', 'stylesheet'))
             if self.has_visualization_pdf:
-                section.sentence_length_items.append(('p', 'pdf'))
-            section.sentence_length_items.append(('n', 'initializer'))
+                section.keyed_menu_entry_tuples.append(('p', 'pdf'))
+            section.keyed_menu_entry_tuples.append(('n', 'initializer'))
             section = menu.make_new_section()
-            section.sentence_length_items.append(('d', 'delete'))
-            section.sentence_length_items.append(('r', 'rename'))
-            section.sentence_length_items.append(('s', 'summarize'))
-            section.sentence_length_items.append(('t', 'tags'))
-            section.sentence_length_items.append(('z', 'regenerate'))
+            section.keyed_menu_entry_tuples.append(('d', 'delete'))
+            section.keyed_menu_entry_tuples.append(('r', 'rename'))
+            section.keyed_menu_entry_tuples.append(('s', 'summarize'))
+            section.keyed_menu_entry_tuples.append(('t', 'tags'))
+            section.keyed_menu_entry_tuples.append(('z', 'regenerate'))
             key, value = menu.run()
             if key == 'b':
                 return key, None

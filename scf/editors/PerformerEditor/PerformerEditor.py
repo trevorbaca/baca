@@ -109,15 +109,15 @@ class PerformerEditor(InteractiveEditor):
         section.section_title = 'instruments'
         instrument_names = [x.instrument_name for x in self.target.instruments]
         section.items_to_number = instrument_names
-        section.sentence_length_items.append(('add', 'add instruments', False))
+        section.keyed_menu_entry_tuples.append(('add', 'add instruments', False))
         if 0 < self.target.instrument_count:
-            section.sentence_length_items.append(('del', 'delete instruments', False))
+            section.keyed_menu_entry_tuples.append(('del', 'delete instruments', False))
         if 1 < self.target.instrument_count:
-            section.sentence_length_items.append(('mv', 'move instrument', False))
+            section.keyed_menu_entry_tuples.append(('mv', 'move instrument', False))
         if self.target.name is None:
-            section.sentence_length_items.append(('name', 'name performer', False))
+            section.keyed_menu_entry_tuples.append(('name', 'name performer', False))
         else:
-            section.sentence_length_items.append(('ren', 'rename performer', False))
+            section.keyed_menu_entry_tuples.append(('ren', 'rename performer', False))
         return menu
 
     def move_instrument_interactively(self):
@@ -149,10 +149,10 @@ class PerformerEditor(InteractiveEditor):
             section.default_index = most_likely_index
         if likely_instruments:
             section.items_to_number = likely_instrument_names
-            section.sentence_length_items.append(('other', 'other instruments', False))
+            section.keyed_menu_entry_tuples.append(('other', 'other instruments', False))
         else:
             section.items_to_number = instrumenttools.list_instrument_names()
-        section.sentence_length_items.append(('none', 'no instruments', False))
+        section.keyed_menu_entry_tuples.append(('none', 'no instruments', False))
         return menu
 
     def set_initial_configuration_interactively(self):

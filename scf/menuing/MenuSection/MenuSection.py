@@ -10,7 +10,7 @@ class MenuSection(MenuObject):
         self.entry_prefix = None
         self.items_to_number = None
         self.section_title = None
-        self.sentence_length_items = None
+        self.keyed_menu_entry_tuples = None
 
     ### PUBLIC ATTRIBUTES ###
 
@@ -57,14 +57,14 @@ class MenuSection(MenuObject):
         return property(**locals())
 
     @apply
-    def sentence_length_items():
+    def keyed_menu_entry_tuples():
         def fget(self):
-            return self._sentence_length_items
-        def fset(self, sentence_length_items):
-            if sentence_length_items is None:
-                self._sentence_length_items = []
+            return self._keyed_menu_entry_tuples
+        def fset(self, keyed_menu_entry_tuples):
+            if keyed_menu_entry_tuples is None:
+                self._keyed_menu_entry_tuples = []
             else:
-                self._sentence_length_items = sentence_length_items[:]
+                self._keyed_menu_entry_tuples = keyed_menu_entry_tuples[:]
         return property(**locals())
 
     ### PUBLIC METHODS ###
@@ -94,8 +94,8 @@ class MenuSection(MenuObject):
             all_display_strings.append(display_string)
         if self.items_to_number:
             menu_lines.append('')
-        assert all([isinstance(x, tuple) for x in self.sentence_length_items])
-        for sentence_length_item in self.sentence_length_items:
+        assert all([isinstance(x, tuple) for x in self.keyed_menu_entry_tuples])
+        for sentence_length_item in self.keyed_menu_entry_tuples:
             if len(sentence_length_item) == 2:
                 key, value = sentence_length_item
                 display_key = True
@@ -112,7 +112,7 @@ class MenuSection(MenuObject):
             all_keys.append(key)
             all_values.append(value)
             all_display_strings.append(None)
-        if self.sentence_length_items:
+        if self.keyed_menu_entry_tuples:
             menu_lines.append('')
         return menu_lines
 

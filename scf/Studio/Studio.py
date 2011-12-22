@@ -38,7 +38,7 @@ class Studio(SCFObject):
         while True:
             menu, section = self.make_new_menu(where=self.where())
             section.items_to_number = self.score_wrangler.iterate_score_titles_with_years()
-            section.sentence_length_items.append(('baca', 'baca materials directory'))
+            section.keyed_menu_entry_tuples.append(('baca', 'baca materials directory'))
             key, value = menu.run()
             if key == 'baca':
                 return self.global_proxy.materials_package_importable_name
@@ -140,8 +140,8 @@ class Studio(SCFObject):
         score_package_short_names = list(self.score_wrangler.iterate_score_package_short_names(
             scores_to_show=self.session.scores_to_show))
         section.items_to_number = zip(score_titles, score_package_short_names)
-        section.sentence_length_items.append(('k', 'work with interactive material proxies'))
-        section.sentence_length_items.append(('m', 'work with Bača materials'))
+        section.keyed_menu_entry_tuples.append(('k', 'work with interactive material proxies'))
+        section.keyed_menu_entry_tuples.append(('m', 'work with Bača materials'))
         menu.hidden_items.append(('svn', 'work with repository'))
         menu.hidden_items.append(('active', 'show active scores only'))
         menu.hidden_items.append(('all', 'show all scores'))
@@ -150,19 +150,19 @@ class Studio(SCFObject):
 
     def make_svn_menu(self):
         menu, section = self.make_new_menu(where=self.where())
-        section.sentence_length_items.append(('add', 'add', False))
-        section.sentence_length_items.append(('ci', 'ci', False))
-        section.sentence_length_items.append(('st', 'st', False))
-        section.sentence_length_items.append(('up', 'up', False))
+        section.keyed_menu_entry_tuples.append(('add', 'add', False))
+        section.keyed_menu_entry_tuples.append(('ci', 'ci', False))
+        section.keyed_menu_entry_tuples.append(('st', 'st', False))
+        section.keyed_menu_entry_tuples.append(('up', 'up', False))
         section = menu.make_new_section()
-        section.sentence_length_items.append(('add_scores', 'add_scores', False))
-        section.sentence_length_items.append(('ci_scores', 'ci_scores', False))
-        section.sentence_length_items.append(('st_scores', 'st_scores', False))
-        section.sentence_length_items.append(('up_scores', 'up_scores', False))
+        section.keyed_menu_entry_tuples.append(('add_scores', 'add_scores', False))
+        section.keyed_menu_entry_tuples.append(('ci_scores', 'ci_scores', False))
+        section.keyed_menu_entry_tuples.append(('st_scores', 'st_scores', False))
+        section.keyed_menu_entry_tuples.append(('up_scores', 'up_scores', False))
         section = menu.make_new_section()
-        section.sentence_length_items.append(('pytest', 'pytest', False))
-        section.sentence_length_items.append(('pytest_scores', 'pytest_scores', False))
-        section.sentence_length_items.append(('pytest_all', 'pytest_all', False))
+        section.keyed_menu_entry_tuples.append(('pytest', 'pytest', False))
+        section.keyed_menu_entry_tuples.append(('pytest_scores', 'pytest_scores', False))
+        section.keyed_menu_entry_tuples.append(('pytest_all', 'pytest_all', False))
         return menu
 
     def run(self, user_input=None):

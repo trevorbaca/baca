@@ -66,22 +66,22 @@ class InteractiveMaterialProxy(MaterialProxy):
             menu, section = self.make_new_menu(where=self.where())
             section.items_to_number = self.user_input_wrapper.editable_lines
             if self.user_input_wrapper.is_complete:
-                section.sentence_length_items.append(('p', 'show pdf of given input'))
-                section.sentence_length_items.append(('m', 'write material to disk'))
+                section.keyed_menu_entry_tuples.append(('p', 'show pdf of given input'))
+                section.keyed_menu_entry_tuples.append(('m', 'write material to disk'))
             if self.has_material_underscored_name:
-                section.sentence_length_items.append(('n', 'rename material'))
+                section.keyed_menu_entry_tuples.append(('n', 'rename material'))
             else:
-                section.sentence_length_items.append(('n', 'name material'))
-            section.sentence_length_items.append(('nc', 'clear name'))
-            section.sentence_length_items.append(('d', 'show demo input values'))
-            section.sentence_length_items.append(('o', 'overwrite with demo input values'))
-            section.sentence_length_items.append(('i', 'read values from disk'))
-            section.sentence_length_items.append(('c', 'clear values'))
-            #section.sentence_length_items.append(('src', 'edit source'))
+                section.keyed_menu_entry_tuples.append(('n', 'name material'))
+            section.keyed_menu_entry_tuples.append(('nc', 'clear name'))
+            section.keyed_menu_entry_tuples.append(('d', 'show demo input values'))
+            section.keyed_menu_entry_tuples.append(('o', 'overwrite with demo input values'))
+            section.keyed_menu_entry_tuples.append(('i', 'read values from disk'))
+            section.keyed_menu_entry_tuples.append(('c', 'clear values'))
+            #section.keyed_menu_entry_tuples.append(('src', 'edit source'))
             if self.purview is not None:
-                section.sentence_length_items.append(('l', 'change location'))
+                section.keyed_menu_entry_tuples.append(('l', 'change location'))
             else:
-                section.sentence_length_items.append(('l', 'set location'))
+                section.keyed_menu_entry_tuples.append(('l', 'set location'))
             key, value = menu.run()
             if key == 'b':
                 self.interactively_check_and_save_material(self.user_input_wrapper)

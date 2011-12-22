@@ -1,13 +1,11 @@
 TODO
 
-1. Rename MenuSection.sentence_length_items to MenuSection.keyed_menu_tuples.
+1. Change 'Be\xnnrung' to Unicode in tags menu.
 
-2. Change 'Be\xnnrung' to Unicode in tags menu.
+2. Implement unique instrument abbreviations.
 
-3. Implement unique instrument abbreviations.
+3. Edit instrument transposition.
 
-4. Edit instrument transposition.
+4. Edit instrument clefs.
 
-5. Edit instrument clefs.
-
-6. Add C4-style named chromatic pitch initialization.
+5. Add C4-style named chromatic pitch initialization.

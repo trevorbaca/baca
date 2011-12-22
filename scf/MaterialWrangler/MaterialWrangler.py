@@ -85,8 +85,8 @@ class MaterialWrangler(PackageWrangler, PackageProxy):
     def make_main_menu(self):
         menu, section = self.make_new_menu(where=self.where())
         section.items_to_number = list(self.iterate_material_summaries())
-        section.sentence_length_items.append(('i', 'create interactive material'))
-        section.sentence_length_items.append(('s', 'create static material'))
+        section.keyed_menu_entry_tuples.append(('i', 'create interactive material'))
+        section.keyed_menu_entry_tuples.append(('s', 'create static material'))
         return menu
 
     def run(self):

@@ -119,26 +119,26 @@ class InstrumentEditor(InteractiveEditor):
 
     def make_main_menu(self):
         menu, section = self.make_new_menu(where=self.where())
-        section.sentence_length_items = self.target_attribute_menu_entries
+        section.keyed_menu_entry_tuples = self.target_attribute_menu_entries
         section = menu.make_new_section()
         if self.session.display_pitch_ranges_with_numbered_pitches:
             pitch_range_repr = self.target.pitch_range.one_line_numbered_chromatic_pitch_repr
         else:
             pitch_range_repr = self.target.pitch_range.one_line_named_chromatic_pitch_repr
         line = 'range: {}'.format(pitch_range_repr)
-        section.sentence_length_items.append(('pr', line, False))
+        section.keyed_menu_entry_tuples.append(('pr', line, False))
         menu.hidden_items.append(('tprd', 'toggle pitch range display'))
         clefs = [clef.clef_name for clef in self.target.all_clefs]
         clefs = ', '.join(clefs)
         line = 'clefs: {}'.format(clefs)
-        section.sentence_length_items.append(('cl', line, False))
+        section.keyed_menu_entry_tuples.append(('cl', line, False))
         if self.target.is_transposing:
             line = 'sounding pitch of fingered middle C: {}'
             line = line.format(self.target.sounding_pitch_of_fingered_middle_c.pitch_class_octave_label)
-            section.sentence_length_items.append(('sp', line))
+            section.keyed_menu_entry_tuples.append(('sp', line))
             line = 'interval of transposition: {}'
             line = line.format(self.target.interval_of_transposition)
-            section.sentence_length_items.append(('int', line))
+            section.keyed_menu_entry_tuples.append(('int', line))
         return menu
 
     def select_instruments_from_instrumenttools_interactively(self):
