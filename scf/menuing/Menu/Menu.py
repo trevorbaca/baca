@@ -11,8 +11,6 @@ class Menu(MenuObject, SCFObject):
         MenuObject.__init__(self, session=session, where=where)
         self.allow_argument_range = False
         self.hide_menu = False
-        self.include_back = True
-        self.include_studio = True
         self.sections = None
 
     ### PUBLIC ATTRIBUTES ###
@@ -51,24 +49,6 @@ class Menu(MenuObject, SCFObject):
         def fset(self, hide_menu):
             assert isinstance(hide_menu, type(True))
             self._hide_menu = hide_menu
-        return property(**locals())
-
-    @apply
-    def include_back():
-        def fget(self):
-            return self._include_back
-        def fset(self, include_back):
-            assert isinstance(include_back, type(True))
-            self._include_back = include_back
-        return property(**locals())
-
-    @apply
-    def include_studio():
-        def fget(self):
-            return self._include_studio
-        def fset(self, include_studio):
-            assert isinstance(include_studio, type(True))
-            self._include_studio = include_studio
         return property(**locals())
 
     @apply

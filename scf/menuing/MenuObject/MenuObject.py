@@ -20,8 +20,7 @@ class MenuObject(SCFObject):
     @property
     def default_hidden_items(self):
         default_hidden_items = []
-        if getattr(self, 'include_back', False):
-            default_hidden_items.append(('b', 'back'))
+        default_hidden_items.append(('b', 'back'))
         default_hidden_items.append(('grep', 'grep baca directories'))
         default_hidden_items.append(('here', 'edit client source'))
         default_hidden_items.append(('hidden', 'show hidden items'))
