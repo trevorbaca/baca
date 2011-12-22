@@ -7,18 +7,14 @@ import os
 
 class Menu(MenuObject, SCFObject):
 
-    def __init__(self, allow_argument_range=False, hidden_items=None, 
-        hide_menu=False, include_back=True, include_studio=True, indent_level=1, item_width=11, 
-        sections=None, session=None, should_clear_terminal=True, where=None):
-        MenuObject.__init__(self, hidden_items=hidden_items, indent_level=indent_level, 
-            session=session, should_clear_terminal=should_clear_terminal)
-        self.allow_argument_range = allow_argument_range
-        self.hide_menu = hide_menu
-        self.include_back = include_back
-        self.include_studio = include_studio
-        self.item_width = item_width
-        self.sections = sections
-        self.where = where
+    def __init__(self, session=None, where=None):
+        MenuObject.__init__(self, session=session, where=where)
+        self.allow_argument_range = False
+        self.hide_menu = False
+        self.include_back = True
+        self.include_studio = True
+        self.item_width = 11
+        self.sections = None
 
     ### PUBLIC ATTRIBUTES ###
 

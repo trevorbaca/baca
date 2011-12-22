@@ -7,13 +7,12 @@ import subprocess
 
 class MenuObject(SCFObject):
 
-    def __init__(self, hidden_items=None, indent_level=1, prompt_default=None, session=None, 
-        should_clear_terminal=False, where=None):
+    def __init__(self, session=None, where=None):
         SCFObject.__init__(self, session=session)
-        self.hidden_items = hidden_items
-        self.indent_level = indent_level
-        self.prompt_default = prompt_default
-        self.should_clear_terminal = should_clear_terminal
+        self.hidden_items = None
+        self.indent_level = 1
+        self.prompt_default = None
+        self.should_clear_terminal = False
         self.where = where
 
     ### PUBLIC ATTRIBUTES ###

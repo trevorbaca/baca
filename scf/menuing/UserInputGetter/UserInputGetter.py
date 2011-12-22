@@ -4,15 +4,14 @@ from baca.scf.menuing.MenuObject import MenuObject
 
 class UserInputGetter(MenuObject):
 
-    def __init__(self, argument_lists=None, defaults=None, execs=None, helps=None, prompts=None, session=None, 
-        should_clear_terminal=False, tests=None, where=None):
-        MenuObject.__init__(self, session=session, should_clear_terminal=should_clear_terminal, where=where)
-        self.argument_lists = argument_lists
-        self.defaults = defaults
-        self.execs = execs
-        self.helps = helps
-        self.prompts = prompts
-        self.tests = tests
+    def __init__(self, session=None, where=None):
+        MenuObject.__init__(self, session=session, where=where)
+        self.argument_lists = None
+        self.defaults = None
+        self.execs = None
+        self.helps = None
+        self.prompts = None
+        self.tests = None
 
     ### OVERLOADS ###
 
