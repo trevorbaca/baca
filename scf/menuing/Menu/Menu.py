@@ -248,7 +248,7 @@ class Menu(MenuObject, SCFObject):
         return menu_lines
 
     def make_new_section(self):
-        section = MenuSection()
+        section = MenuSection(session=self.session, where=self.where)
         self.sections.append(section)
         return section
 

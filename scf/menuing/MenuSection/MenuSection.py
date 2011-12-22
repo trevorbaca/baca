@@ -4,10 +4,10 @@ from baca.scf.menuing.MenuObject import MenuObject
 
 class MenuSection(MenuObject):
 
-    def __init__(self):
+    def __init__(self, session=None, where=None):
+        MenuObject.__init__(self, session=session, where=where)
         self.default_index = None
         self.entry_prefix = None
-        self.indent_level = 1
         self.items_to_number = None
         self.lines_to_list = None
         self.section_title = None
@@ -28,15 +28,6 @@ class MenuSection(MenuObject):
     @property
     def has_default(self):
         return self.default_index is not None
-
-    @apply
-    def indent_level():
-        def fget(self):
-            return self._indent_level
-        def fset(self, indent_level):
-            assert isinstance(indent_level, int)
-            self._indent_level = indent_level
-        return property(**locals())
 
     @apply
     def items_to_number():
