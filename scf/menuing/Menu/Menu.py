@@ -13,7 +13,6 @@ class Menu(MenuObject, SCFObject):
         self.hide_menu = False
         self.include_back = True
         self.include_studio = True
-        self.item_width = 11
         self.sections = None
 
     ### PUBLIC ATTRIBUTES ###
@@ -70,15 +69,6 @@ class Menu(MenuObject, SCFObject):
         def fset(self, include_studio):
             assert isinstance(include_studio, type(True))
             self._include_studio = include_studio
-        return property(**locals())
-
-    @apply
-    def item_width():
-        def fget(self):
-            return self._item_width
-        def fset(self, item_width):
-            assert isinstance(item_width, int)
-            self._item_width = item_width
         return property(**locals())
 
     @apply
