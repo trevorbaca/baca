@@ -27,7 +27,7 @@ class MenuSection(MenuObject):
     @property
     def default_value(self):
         assert self.has_default
-        return self.items_to_number[self.default_index]
+        return self.menu_values[self.default_index]
 
     @apply
     def entry_prefix():

@@ -83,7 +83,8 @@ class InstrumentEditor(InteractiveEditor):
         while True:
             menu, section = self.make_new_menu(where=self.where())
             menu.should_clear_terminal = False
-            section.items_to_number = instrumenttools.UntunedPercussion.known_untuned_percussion
+            section.keyed_menu_entry_tuples = [('', x) for x in instrumenttools.UntunedPercussion.known_untuned_percussion]
+            section.number_menu_entries = True
             key, value = menu.run()
             if self.backtrack():
                 self.breadcrumbs.pop()
@@ -149,7 +150,8 @@ class InstrumentEditor(InteractiveEditor):
         menu, section = self.make_new_menu(where=self.where())
         menu.allow_argument_range = True
         menu.should_clear_terminal = False
-        section.items_to_number = instrumenttools.list_instrument_names()
+        section.keyed_menu_entry_tuples = [('', x) for x in instrumenttools.list_instrument_names()]
+        section.number_menu_entries = True
         while True:
             key, value = menu.run()
             if self.backtrack():

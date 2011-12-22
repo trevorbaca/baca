@@ -238,13 +238,17 @@ class ScoreProxy(PackageProxy):
     def make_main_menu(self):
         menu, section = self.make_new_menu(where=self.where())
         section.section_title = 'chunks'
-        section.items_to_number = self.chunk_wrangler.iterate_package_spaced_names()
+        section.keyed_menu_entry_tuples = [('', x) for x in self.chunk_wrangler.iterate_package_spaced_names()]
+        section.number_menu_entries = True
         section.entry_prefix = 'h'
+        section = menu.make_new_section()
         section.keyed_menu_entry_tuples.append(('ch', '[create chunk]'))
         section = menu.make_new_section()
         section.section_title = 'materials'
-        section.items_to_number = self.material_wrangler.iterate_package_underscored_names()
+        section.keyed_menu_entry_tuples = [('', x) for x in self.material_wrangler.iterate_package_underscored_names()]
+        section.number_menu_entries = True
         section.entry_prefix = 'm'
+        section = menu.make_new_section()
         section.keyed_menu_entry_tuples.append(('mi', 'create interactive material'))
         section.keyed_menu_entry_tuples.append(('ms', 'create static material'))
         section = menu.make_new_section()

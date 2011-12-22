@@ -1,11 +1,13 @@
 TODO
 
-1. Change 'Be\xnnrung' to Unicode in tags menu.
+1. Kill MenuSection.items_to_number property.
 
-2. Implement unique instrument abbreviations.
+2. Change 'Be\xnnrung' to Unicode in tags menu.
 
-3. Edit instrument transposition.
+3. Implement unique instrument abbreviations.
 
-4. Edit instrument clefs.
+4. Edit instrument transposition.
 
-5. Add C4-style named chromatic pitch initialization.
+5. Edit instrument clefs.
+
+6. Add C4-style named chromatic pitch initialization.

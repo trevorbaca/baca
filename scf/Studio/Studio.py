@@ -37,7 +37,9 @@ class Studio(SCFObject):
         self.breadcrumbs.append('select materials directory')
         while True:
             menu, section = self.make_new_menu(where=self.where())
-            section.items_to_number = self.score_wrangler.iterate_score_titles_with_years()
+            section.keyed_menu_entry_tuples = [('', x) for x in self.score_wrangler.iterate_score_titles_with_years()]
+            section.number_menu_entries = True
+            section = menu.make_new_section() 
             section.keyed_menu_entry_tuples.append(('baca', 'baca materials directory'))
             key, value = menu.run()
             if key == 'baca':
@@ -248,6 +250,7 @@ class Studio(SCFObject):
     def select_interactive_material_proxy(self, klasses=None):
         material_proxies = list(self.iterate_interactive_material_proxies())
         menu, section = self.make_new_menu(where=self.where())
-        menu.items_to_number = material_proxies
+        section.keyed_menu_entry_tuples = [('', x) for x in material_proxies]
+        section.number_menu_entries = True
         key, value = menu.run()
         return value
