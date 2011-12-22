@@ -9,7 +9,6 @@ class MenuSection(MenuObject):
         self.default_index = None
         self.entry_prefix = None
         self.items_to_number = None
-        self.lines_to_list = None
         self.section_title = None
         self.sentence_length_items = None
 
@@ -37,17 +36,6 @@ class MenuSection(MenuObject):
                 self._items_to_number = []
             else:
                 self._items_to_number = list(items_to_number)
-        return property(**locals())
-
-    @apply
-    def lines_to_list():
-        def fget(self):
-            return self._lines_to_list
-        def fset(self, lines_to_list):
-            if lines_to_list is None:
-                self._lines_to_list = []
-            else:
-                self._lines_to_list = lines_to_list[:]
         return property(**locals())
 
     @apply
@@ -105,11 +93,6 @@ class MenuSection(MenuObject):
             all_values.append(return_value)
             all_display_strings.append(display_string)
         if self.items_to_number:
-            menu_lines.append('')
-        for line in self.lines_to_list:
-            menu_line = self.make_tab(self.indent_level) + ' ' + line
-            menu_lines.append(menu_line)
-        if self.lines_to_list:
             menu_lines.append('')
         assert all([isinstance(x, tuple) for x in self.sentence_length_items])
         for sentence_length_item in self.sentence_length_items:
