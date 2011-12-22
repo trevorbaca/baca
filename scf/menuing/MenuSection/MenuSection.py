@@ -9,8 +9,8 @@ class MenuSection(MenuObject):
         self.default_index = None
         self.entry_prefix = None
         self.items_to_number = None
-        self.section_title = None
         self.keyed_menu_entry_tuples = None
+        self.section_title = None
 
     ### PUBLIC ATTRIBUTES ###
 
@@ -95,12 +95,12 @@ class MenuSection(MenuObject):
         if self.items_to_number:
             menu_lines.append('')
         assert all([isinstance(x, tuple) for x in self.keyed_menu_entry_tuples])
-        for sentence_length_item in self.keyed_menu_entry_tuples:
-            if len(sentence_length_item) == 2:
-                key, value = sentence_length_item
+        for keyed_menu_entry_tuple in self.keyed_menu_entry_tuples:
+            if len(keyed_menu_entry_tuple) == 2:
+                key, value = keyed_menu_entry_tuple
                 display_key = True
-            elif len(sentence_length_item) == 3:
-                key, value, display_key = sentence_length_item
+            elif len(keyed_menu_entry_tuple) == 3:
+                key, value, display_key = keyed_menu_entry_tuple
             else:
                 raise ValueError('sentence length item must have length 2 or 3.')
             menu_line = self.make_tab(self.indent_level) + ' '
