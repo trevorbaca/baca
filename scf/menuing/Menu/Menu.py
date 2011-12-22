@@ -107,19 +107,19 @@ class Menu(MenuObject):
                     return value
             elif self.allow_argument_range and self.is_argument_range_string(key):
                 for section in self.sections:
-                    if section.items_to_number:
+                    if section.menu_values:
                         break
                 else:
-                    raise ValueError('no section contains items to number.')
-                item_numbers = self.argument_range_string_to_numbers(key, section.items_to_number)
+                    raise ValueError('no section contains numbered menu entries.')
+                item_numbers = self.argument_range_string_to_numbers(key, section.menu_values)
                 if item_numbers is None:
                     return []
                 item_indices = [item_number - 1 for item_number in item_numbers]
                 for section in self.sections:
-                    if section.items_to_number:
+                    if section.menu_values:
                         result = []
                         for i in item_indices:
-                            item = section.items_to_number[i]
+                            item = section.menu_values[i]
                             result.append(item)
                         return result
 
@@ -143,11 +143,11 @@ class Menu(MenuObject):
             return key
         elif self.allow_argument_range and self.is_argument_range_string(key):
             for section in self.sections:
-                if section.items_to_number:
+                if section.menu_values:
                     break
             else:
                 raise ValueError('no section contains items to number.')
-            if self.is_valid_argument_range_string_for_argument_list(key, section.items_to_number):
+            if self.is_valid_argument_range_string_for_argument_list(key, section.menu_values):
                 return key
             else:
                 return None
