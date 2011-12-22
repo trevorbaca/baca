@@ -1,11 +1,10 @@
 from abjad.tools import iotools
-from baca.scf.SCFObject import SCFObject
 from baca.scf.menuing.MenuObject import MenuObject
 from baca.scf.menuing.MenuSection import MenuSection
 import os
 
 
-class Menu(MenuObject, SCFObject):
+class Menu(MenuObject):
 
     def __init__(self, session=None, where=None):
         MenuObject.__init__(self, session=session, where=where)
