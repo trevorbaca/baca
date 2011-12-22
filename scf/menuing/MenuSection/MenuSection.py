@@ -214,6 +214,7 @@ class MenuSection(MenuObject):
         for key, value in self.hidden_items:
             menu_line = self.make_tab(self.indent_level) + ' '
             #menu_line += '{}: {}'.format(key, value)
-            menu_line += '{}'.format(value)
+            #menu_line += '{}'.format(value)
+            menu_line += '{} ({})'.format(value, key)
             menu_lines.append(menu_line)
         self.display_lines(menu_lines)

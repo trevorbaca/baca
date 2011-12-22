@@ -1,15 +1,13 @@
 TODO
 
-1. Show keys in hidden menu.
+1. Rename MenuSection.sentence_length_items to MenuSection.keyed_menu_tuples.
 
-2. Rename MenuSection.sentence_length_items to MenuSection.keyed_menu_tuples.
+2. Change 'Be\xnnrung' to Unicode in tags menu.
 
-3. Change 'Be\xnnrung' to Unicode in tags menu.
+3. Implement unique instrument abbreviations.
 
-4. Implement unique instrument abbreviations.
+4. Edit instrument transposition.
 
-5. Edit instrument transposition.
+5. Edit instrument clefs.
 
-6. Edit instrument clefs.
-
-7. Add C4-style named chromatic pitch initialization.
+6. Add C4-style named chromatic pitch initialization.

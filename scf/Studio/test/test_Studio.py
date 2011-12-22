@@ -47,24 +47,24 @@ def test_Studio_03():
     studio = baca.scf.Studio()
     studio.run(user_input='hidden q')
 
-    assert studio.transcript[-2] == [
-     '     show active scores only',   
-     '     show all scores',
-     '     back',
-     '     exec statement',
-     '     grep baca directories',
-     '     edit client source',
-     '     show hidden items',
-     '     show mothballed scores only',
-     '     next score',
-     '     prev score',
-     '     quit',
-     '     redraw',
-     '     return to score',
-     '     return to studio',
-     '     work with repository',
-     '     show menu client',
-     '']
+    assert studio.transcript[-2] == \
+     ['     show active scores only (active)',
+      '     show all scores (all)',
+      '     back (b)',
+      '     exec statement (exec)',
+      '     grep baca directories (grep)',
+      '     edit client source (here)',
+      '     show hidden items (hidden)',
+      '     show mothballed scores only (mb)',
+      '     next score (next)',
+      '     prev score (prev)',
+      '     quit (q)',
+      '     redraw (redraw)',
+      '     return to score (score)',
+      '     return to studio (studio)',
+      '     work with repository (svn)',
+      '     show menu client (where)',
+      '']
 
 
 def test_Studio_04():

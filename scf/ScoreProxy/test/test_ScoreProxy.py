@@ -87,22 +87,22 @@ def test_ScoreProxy_03():
     archipel = baca.scf.ScoreProxy('archipel')
     archipel.run(user_input='hidden q')
 
-    assert archipel.transcript[-2] == [
-     '     back',
-     '     exec statement',
-     '     grep baca directories',
-     '     edit client source',
-     '     show hidden items',
-     '     next score',
-     '     prev score',
-     '     quit',
-     '     redraw',
-     '     return to score',
-     '     return to studio',
-     '     work with repository',
-     '     work with tags',
-     '     show menu client',
-     '']
+    assert archipel.transcript[-2] == \
+     ['     back (b)',
+      '     exec statement (exec)',
+      '     grep baca directories (grep)',
+      '     edit client source (here)',
+      '     show hidden items (hidden)',
+      '     next score (next)',
+      '     prev score (prev)',
+      '     quit (q)',
+      '     redraw (redraw)',
+      '     return to score (score)',
+      '     return to studio (studio)',
+      '     work with repository (svn)',
+      '     work with tags (tags)',
+      '     show menu client (where)',
+      '']
 
 
 def test_ScoreProxy_04():
