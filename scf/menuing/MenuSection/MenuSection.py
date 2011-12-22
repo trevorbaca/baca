@@ -4,20 +4,17 @@ from baca.scf.menuing.MenuObject import MenuObject
 
 class MenuSection(MenuObject):
 
-    def __init__(self, default_index=None, entry_prefix=None, hidden_items=None, 
-        hide_menu=False, indent_level=1, items_to_number=None, 
-        lines_to_list=None, section_title=None, named_pairs=None, 
-        sentence_length_items=None):
-        self.default_index = default_index
-        self.entry_prefix = entry_prefix
-        self.hidden_items = hidden_items
-        self.hide_menu = hide_menu
-        self.indent_level = indent_level
-        self.items_to_number = items_to_number
-        self.lines_to_list = lines_to_list
-        self.section_title = section_title
-        self.named_pairs = named_pairs
-        self.sentence_length_items = sentence_length_items
+    def __init__(self):
+        self.default_index = None
+        self.entry_prefix = None
+        self.hidden_items = None
+        self.hide_menu = False
+        self.indent_level = 1
+        self.items_to_number = None
+        self.lines_to_list = None
+        self.section_title = None
+        self.named_pairs = None
+        self.sentence_length_items = None
 
     ### PUBLIC ATTRIBUTES ###
 
