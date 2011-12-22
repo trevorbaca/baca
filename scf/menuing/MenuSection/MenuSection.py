@@ -24,6 +24,20 @@ class MenuSection(MenuObject):
         return property(**locals())
 
     @property
+    def default_value(self):
+        assert self.has_default
+        return self.items_to_number[self.default_index]
+
+    @apply
+    def entry_prefix():
+        def fget(self):
+            return self._entry_prefix
+        def fset(self, entry_prefix):
+            assert isinstance(entry_prefix, (str, type(None)))
+            self._entry_prefix = entry_prefix
+        return property(**locals())
+
+    @property
     def has_default(self):
         return self.default_index is not None
 
@@ -39,12 +53,14 @@ class MenuSection(MenuObject):
         return property(**locals())
 
     @apply
-    def entry_prefix():
+    def keyed_menu_entry_tuples():
         def fget(self):
-            return self._entry_prefix
-        def fset(self, entry_prefix):
-            assert isinstance(entry_prefix, (str, type(None)))
-            self._entry_prefix = entry_prefix
+            return self._keyed_menu_entry_tuples
+        def fset(self, keyed_menu_entry_tuples):
+            if keyed_menu_entry_tuples is None:
+                self._keyed_menu_entry_tuples = []
+            else:
+                self._keyed_menu_entry_tuples = keyed_menu_entry_tuples[:]
         return property(**locals())
 
     @apply
@@ -56,22 +72,7 @@ class MenuSection(MenuObject):
             self._section_title = section_title
         return property(**locals())
 
-    @apply
-    def keyed_menu_entry_tuples():
-        def fget(self):
-            return self._keyed_menu_entry_tuples
-        def fset(self, keyed_menu_entry_tuples):
-            if keyed_menu_entry_tuples is None:
-                self._keyed_menu_entry_tuples = []
-            else:
-                self._keyed_menu_entry_tuples = keyed_menu_entry_tuples[:]
-        return property(**locals())
-
     ### PUBLIC METHODS ###
-
-    def get_default_value(self):
-        assert self.has_default
-        return self.items_to_number[self.default_index]
 
     def make_menu_lines(self, all_keys, all_values, all_display_strings):
         menu_lines = []

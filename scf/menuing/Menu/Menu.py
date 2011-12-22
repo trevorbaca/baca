@@ -24,6 +24,11 @@ class Menu(MenuObject):
         return property(**locals())
     
     @property
+    def default_value(self):
+        for section in self.sections:
+            if section.has_default:
+                return section.default_value
+    @property
     def has_default(self):
         for section in self.sections:
             if section.has_default:
@@ -125,10 +130,10 @@ class Menu(MenuObject):
 
     def check_if_key_exists(self, key):
         if self.key_is_default(key):
-            value = self.get_default_value()
+            value = self.default_value
             return self.change_value_to_key(value)
         elif key == '' and self.has_default:
-            value = self.get_default_value()
+            value = self.default_value
             return self.change_value_to_key(value)
         elif key in self.all_keys:
             return key
@@ -194,11 +199,6 @@ class Menu(MenuObject):
         value = self.clean_value(value)
         self.session.hide_next_redraw = False
         return key, value
-
-    def get_default_value(self):
-        for section in self.sections:
-            if section.has_default:
-                return section.get_default_value() 
 
     def key_is_default(self, key):
         if 3 <= len(key):
