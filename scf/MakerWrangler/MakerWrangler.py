@@ -172,7 +172,7 @@ class MakerWrangler(PackageWrangler, PackageProxy):
     def make_main_menu(self):
         menu, section = self.make_new_menu(where=self.where())
         menu.items_to_number = self.list_maker_spaced_class_names()
-        menu.named_pairs.append(('new', 'make maker'))
+        menu.sentence_length_items.append(('new', 'make maker'))
         return menu
 
     def run(self):

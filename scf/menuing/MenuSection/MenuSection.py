@@ -11,7 +11,6 @@ class MenuSection(MenuObject):
         self.items_to_number = None
         self.lines_to_list = None
         self.section_title = None
-        self.named_pairs = None
         self.sentence_length_items = None
 
     ### PUBLIC ATTRIBUTES ###
@@ -49,17 +48,6 @@ class MenuSection(MenuObject):
                 self._lines_to_list = []
             else:
                 self._lines_to_list = lines_to_list[:]
-        return property(**locals())
-
-    @apply
-    def named_pairs():
-        def fget(self):
-            return self._named_pairs
-        def fset(self, named_pairs):
-            if named_pairs is None:
-                self._named_pairs = []
-            else:
-                self._named_pairs = named_pairs[:]
         return property(**locals())
 
     @apply
@@ -122,16 +110,6 @@ class MenuSection(MenuObject):
             menu_line = self.make_tab(self.indent_level) + ' ' + line
             menu_lines.append(menu_line)
         if self.lines_to_list:
-            menu_lines.append('')
-        for key, value in self.named_pairs:
-            if self.entry_prefix is not None:
-                key = self.entry_prefix + key
-            menu_line = self.make_tab(self.indent_level) + ' '
-            menu_line += '{}'.format(value)
-            all_keys.append(key)
-            all_values.append(value)
-            all_display_strings.append(None)
-        if self.named_pairs:
             menu_lines.append('')
         assert all([isinstance(x, tuple) for x in self.sentence_length_items])
         for sentence_length_item in self.sentence_length_items:

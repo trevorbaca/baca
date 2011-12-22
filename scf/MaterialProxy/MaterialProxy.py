@@ -399,23 +399,23 @@ class MaterialProxy(PackageProxy):
             menu, section = self.make_new_menu(where=self.where())
             if self.is_interactive:
                 section.sentence_length_items.append(('k', 'reload user input'))
-            section.named_pairs.append(('i', 'input'))
-            section.named_pairs.append(('o', 'output'))
+            section.sentence_length_items.append(('i', 'input'))
+            section.sentence_length_items.append(('o', 'output'))
             if self.has_visualizer:
-                section.named_pairs.append(('v', 'visualizer'))
+                section.sentence_length_items.append(('v', 'visualizer'))
             if self.has_visualization_ly:
-                section.named_pairs.append(('l', 'ly'))
+                section.sentence_length_items.append(('l', 'ly'))
             if self.has_stylesheet:
-                section.named_pairs.append(('y', 'stylesheet'))
+                section.sentence_length_items.append(('y', 'stylesheet'))
             if self.has_visualization_pdf:
-                section.named_pairs.append(('p', 'pdf'))
-            section.named_pairs.append(('n', 'initializer'))
+                section.sentence_length_items.append(('p', 'pdf'))
+            section.sentence_length_items.append(('n', 'initializer'))
             section = menu.make_new_section()
-            section.named_pairs.append(('d', 'delete'))
-            section.named_pairs.append(('r', 'rename'))
-            section.named_pairs.append(('s', 'summarize'))
-            section.named_pairs.append(('t', 'tags'))
-            section.named_pairs.append(('z', 'regenerate'))
+            section.sentence_length_items.append(('d', 'delete'))
+            section.sentence_length_items.append(('r', 'rename'))
+            section.sentence_length_items.append(('s', 'summarize'))
+            section.sentence_length_items.append(('t', 'tags'))
+            section.sentence_length_items.append(('z', 'regenerate'))
             key, value = menu.run()
             if key == 'b':
                 return key, None

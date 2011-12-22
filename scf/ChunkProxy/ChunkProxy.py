@@ -48,9 +48,9 @@ class ChunkProxy(PackageProxy):
 
     def make_main_menu(self):
         menu, section = self.make_new_menu(where=self.where())
-        section.named_pairs.append(('n', 'initializer'))
+        section.sentence_length_items.append(('n', 'initializer'))
         section = menu.make_new_section()
-        section.named_pairs.append(('d', 'delete'))
+        section.sentence_length_items.append(('d', 'delete'))
         return menu
 
     def run(self):

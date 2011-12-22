@@ -344,7 +344,7 @@ class PackageProxy(DirectoryProxy):
         menu, section = self.make_new_menu(where=self.where())
         score_wrangler = ScoreWrangler()
         menu.items_to_number = score_wrangler.iterate_score_titles_with_years()
-        menu.named_pairs.append(('s', 'global to studio'))
+        menu.sentence_length_items.append(('s', 'global to studio'))
         key, value = menu.run()
 
     def unimport_baca_package(self):
