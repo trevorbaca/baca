@@ -255,8 +255,9 @@ class Menu(MenuObject, SCFObject):
     def make_section_lines(self, all_keys, all_values, all_display_strings):
         menu_lines = []
         for section in self.sections:
-            section.hide_menu = self.hide_menu
             menu_lines.extend(section.make_menu_lines(all_keys, all_values, all_display_strings))
+        if self.hide_menu:
+            menu_lines = []
         return menu_lines
         
     def make_menu_title_lines(self):

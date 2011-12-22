@@ -7,7 +7,6 @@ class MenuSection(MenuObject):
     def __init__(self):
         self.default_index = None
         self.entry_prefix = None
-        self.hide_menu = False
         self.indent_level = 1
         self.items_to_number = None
         self.lines_to_list = None
@@ -29,15 +28,6 @@ class MenuSection(MenuObject):
     @property
     def has_default(self):
         return self.default_index is not None
-
-    @apply
-    def hide_menu():
-        def fget(self):
-            return self._hide_menu
-        def fset(self, hide_menu):
-            assert isinstance(hide_menu, type(True))
-            self._hide_menu = hide_menu
-        return property(**locals())
 
     @apply
     def indent_level():
@@ -126,38 +116,32 @@ class MenuSection(MenuObject):
             else:
                 display_string = return_value = value
             key = str(i + 1)
-            if not self.hide_menu:
-                menu_line = self.make_tab(self.indent_level) + ' '
-                prefix = self.entry_prefix
-                if prefix is not None:
-                    key = prefix + key
-                menu_line += '{}: {}'.format(key, display_string)
-                menu_lines.append(menu_line)
+            menu_line = self.make_tab(self.indent_level) + ' '
+            prefix = self.entry_prefix
+            if prefix is not None:
+                key = prefix + key
+            menu_line += '{}: {}'.format(key, display_string)
+            menu_lines.append(menu_line)
             all_keys.append(key)
             all_values.append(return_value)
             all_display_strings.append(display_string)
         if self.items_to_number:
-            if not self.hide_menu:
-                menu_lines.append('')
+            menu_lines.append('')
         for line in self.lines_to_list:
-            if not self.hide_menu:
-                menu_line = self.make_tab(self.indent_level) + ' ' + line
-                menu_lines.append(menu_line)
+            menu_line = self.make_tab(self.indent_level) + ' ' + line
+            menu_lines.append(menu_line)
         if self.lines_to_list:
-            if not self.hide_menu:
-                menu_lines.append('')
+            menu_lines.append('')
         for key, value in self.named_pairs:
             if self.entry_prefix is not None:
                 key = self.entry_prefix + key
-            if not self.hide_menu:
-                menu_line = self.make_tab(self.indent_level) + ' '
-                menu_line += '{}'.format(value)
+            menu_line = self.make_tab(self.indent_level) + ' '
+            menu_line += '{}'.format(value)
             all_keys.append(key)
             all_values.append(value)
             all_display_strings.append(None)
         if self.named_pairs:
-            if not self.hide_menu:
-                menu_lines.append('')
+            menu_lines.append('')
         assert all([isinstance(x, tuple) for x in self.sentence_length_items])
         for sentence_length_item in self.sentence_length_items:
             if len(sentence_length_item) == 2:
@@ -167,27 +151,24 @@ class MenuSection(MenuObject):
                 key, value, display_key = sentence_length_item
             else:
                 raise ValueError('sentence length item must have length 2 or 3.')
-            if not self.hide_menu:
-                menu_line = self.make_tab(self.indent_level) + ' '
-                if key and display_key:
-                    menu_line += '{} ({})'.format(value, key)
-                else:
-                    menu_line += '{}'.format(value)
-                menu_lines.append(menu_line)
+            menu_line = self.make_tab(self.indent_level) + ' '
+            if key and display_key:
+                menu_line += '{} ({})'.format(value, key)
+            else:
+                menu_line += '{}'.format(value)
+            menu_lines.append(menu_line)
             all_keys.append(key)
             all_values.append(value)
             all_display_strings.append(None)
         if self.sentence_length_items:
-            if not self.hide_menu:
-                menu_lines.append('')
+            menu_lines.append('')
         return menu_lines
 
     def make_section_title_lines(self):
         menu_lines = []
-        if not self.hide_menu:
-            if self.section_title:
-                menu_line = '{} {}'.format(
-                    self.make_tab(self.indent_level), iotools.capitalize_string_start(self.section_title))
-                menu_lines.append(menu_line)
-                menu_lines.append('')
+        if self.section_title:
+            menu_line = '{} {}'.format(
+                self.make_tab(self.indent_level), iotools.capitalize_string_start(self.section_title))
+            menu_lines.append(menu_line)
+            menu_lines.append('')
         return menu_lines
