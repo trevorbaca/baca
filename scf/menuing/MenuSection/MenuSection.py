@@ -7,7 +7,6 @@ class MenuSection(MenuObject):
     def __init__(self):
         self.default_index = None
         self.entry_prefix = None
-        self.hidden_items = None
         self.hide_menu = False
         self.indent_level = 1
         self.items_to_number = None
@@ -30,17 +29,6 @@ class MenuSection(MenuObject):
     @property
     def has_default(self):
         return self.default_index is not None
-
-    @apply
-    def hidden_items():
-        def fget(self):
-            return self._hidden_items
-        def fset(self, hidden_items):
-            if hidden_items is None:
-                self._hidden_items = []
-            else:
-                self._hidden_items = hidden_items[:]
-        return property(**locals())
 
     @apply
     def hide_menu():
@@ -163,7 +151,6 @@ class MenuSection(MenuObject):
                 key = self.entry_prefix + key
             if not self.hide_menu:
                 menu_line = self.make_tab(self.indent_level) + ' '
-                #menu_line += '{}: {}'.format(key, value)
                 menu_line += '{}'.format(value)
             all_keys.append(key)
             all_values.append(value)
@@ -193,10 +180,6 @@ class MenuSection(MenuObject):
         if self.sentence_length_items:
             if not self.hide_menu:
                 menu_lines.append('')
-        for key, value in self.hidden_items:
-            all_keys.append(key)
-            all_values.append(value)
-            all_display_strings.append(None)
         return menu_lines
 
     def make_section_title_lines(self):
@@ -208,13 +191,3 @@ class MenuSection(MenuObject):
                 menu_lines.append(menu_line)
                 menu_lines.append('')
         return menu_lines
-
-    def show_hidden_menu_items(self):
-        menu_lines = []
-        for key, value in self.hidden_items:
-            menu_line = self.make_tab(self.indent_level) + ' '
-            #menu_line += '{}: {}'.format(key, value)
-            #menu_line += '{}'.format(value)
-            menu_line += '{} ({})'.format(value, key)
-            menu_lines.append(menu_line)
-        self.display_lines(menu_lines)

@@ -163,13 +163,10 @@ class MenuObject(SCFObject):
         hidden_items = []
         hidden_items.extend(self.default_hidden_items)
         hidden_items.extend(self.hidden_items)
-        for section in getattr(self, 'sections', []):
-            hidden_items.extend(section.hidden_items)
         hidden_items.sort()
         menu_lines = []
         for key, value in hidden_items:
             menu_line = self.make_tab(self.indent_level) + ' '
-            #menu_line += '{}: {}'.format(key, value)
             menu_line += '{} ({})'.format(value, key)
             menu_lines.append(menu_line)
         menu_lines.append('')

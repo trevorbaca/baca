@@ -142,10 +142,10 @@ class Studio(SCFObject):
         section.items_to_number = zip(score_titles, score_package_short_names)
         section.sentence_length_items.append(('k', 'work with interactive material proxies'))
         section.sentence_length_items.append(('m', 'work with Bača materials'))
-        section.hidden_items.append(('svn', 'work with repository'))
-        section.hidden_items.append(('active', 'show active scores only'))
-        section.hidden_items.append(('all', 'show all scores'))
-        section.hidden_items.append(('mb', 'show mothballed scores only'))
+        menu.hidden_items.append(('svn', 'work with repository'))
+        menu.hidden_items.append(('active', 'show active scores only'))
+        menu.hidden_items.append(('all', 'show all scores'))
+        menu.hidden_items.append(('mb', 'show mothballed scores only'))
         return menu
 
     def make_svn_menu(self):
