@@ -188,7 +188,7 @@ class ScoreProxy(PackageProxy):
             initializer.write(''.join(lines))
             initializer.close()
 
-    def handle_main_menu_response(self, key, value):
+    def handle_main_menu_response(self, key):
         if key == 'ch':
             self.chunk_wrangler.create_chunk_interactively()
         elif key == 'ft':
@@ -224,7 +224,7 @@ class ScoreProxy(PackageProxy):
         else:
             raise ValueError
 
-    def handle_svn_response(self, key, value):
+    def handle_svn_response(self, key):
         if key == 'b':
             return True
         elif key == 'add':
@@ -273,10 +273,10 @@ class ScoreProxy(PackageProxy):
         self.breadcrumbs.append('repository commands')
         while True:
             menu = self.make_svn_menu()
-            key, value = menu.run()
+            key = menu.run()
             if self.backtrack():
                 break
-            self.handle_svn_response(key, value)
+            self.handle_svn_response(key)
             if self.backtrack():
                 break
         self.breadcrumbs.pop()
@@ -303,8 +303,7 @@ class ScoreProxy(PackageProxy):
             else:
                 self.breadcrumbs.append(self.title)
             menu = self.make_main_menu()
-            key, value = menu.run()
-            #print 'ZEE', repr(key), repr(value)
+            key = menu.run()
             if self.session.is_backtracking_to_score:
                 self.session.is_backtracking_to_score = False
                 self.breadcrumbs.pop() 
@@ -314,7 +313,7 @@ class ScoreProxy(PackageProxy):
             elif key is None:
                 self.breadcrumbs.pop()
                 continue
-            self.handle_main_menu_response(key, value)
+            self.handle_main_menu_response(key)
             if self.session.is_backtracking_to_score:
                 self.session.is_backtracking_to_score = False
                 self.breadcrumbs.pop()

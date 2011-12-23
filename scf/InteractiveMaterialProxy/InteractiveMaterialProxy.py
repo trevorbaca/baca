@@ -83,7 +83,7 @@ class InteractiveMaterialProxy(MaterialProxy):
                 section.menu_entry_tuples.append(('l', 'change location'))
             else:
                 section.menu_entry_tuples.append(('l', 'set location'))
-            key, value = menu.run()
+            key = menu.run()
             if key == 'b':
                 self.interactively_check_and_save_material(self.user_input_wrapper)
                 return key, None
@@ -119,7 +119,8 @@ class InteractiveMaterialProxy(MaterialProxy):
                     continue
                 index = number - 1
                 key, value = self.user_input_wrapper.list_items[index]
-                new_value = self.edit_item(key, value)
+                #new_value = self.edit_item(key, value)
+                new_value = self.edit_item(key)
                 self.user_input_wrapper[key] = new_value
 
     def edit_item(self, key, value):

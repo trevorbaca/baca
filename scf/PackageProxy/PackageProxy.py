@@ -251,7 +251,7 @@ class PackageProxy(DirectoryProxy):
         except ImportError:    
             return collections.OrderedDict([])
 
-    def handle_tags_response(self, key, value):
+    def handle_tags_response(self, key):
         if key == 'b':
             return True
         elif key == 'add':
@@ -287,10 +287,10 @@ class PackageProxy(DirectoryProxy):
         self.breadcrumbs.append('tags')
         while True:
             menu = self.make_tags_menu()
-            key, value = menu.run()
+            key = menu.run()
             if self.backtrack():
                 break
-            self.handle_tags_response(key, value)
+            self.handle_tags_response(key)
             if self.backtrack():
                 break
         self.breadcrumbs.pop()
@@ -350,7 +350,7 @@ class PackageProxy(DirectoryProxy):
         section.number_menu_entries = True
         section = menu.make_new_section()
         section.menu_entry_tuples.append(('s', 'global to studio'))
-        key, value = menu.run() # maybe check for backtracking here?
+        key = menu.run() # maybe check for backtracking here?
 
     def unimport_baca_package(self):
         self.remove_package_importable_name_from_sys_modules('baca')

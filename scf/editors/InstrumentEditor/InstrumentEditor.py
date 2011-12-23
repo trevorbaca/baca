@@ -85,17 +85,19 @@ class InstrumentEditor(InteractiveEditor):
             menu.should_clear_terminal = False
             section.menu_entry_tuples = [('', x) for x in instrumenttools.UntunedPercussion.known_untuned_percussion]
             section.number_menu_entries = True
-            key, value = menu.run()
+            key = menu.run()
             if self.backtrack():
                 self.breadcrumbs.pop()
                 return
-            elif key is None:
+            #elif key is None:
+            elif not key:
                 continue
             else:
                 self.breadcrumbs.pop()
-                return value
+                #return value
+                return key
         
-    def handle_main_menu_response(self, key, value):
+    def handle_main_menu_response(self, key):
         if key == 'cl':
             self.print_not_implemented()
             #self.edit_clefs_interactively()
@@ -155,7 +157,7 @@ class InstrumentEditor(InteractiveEditor):
         section.menu_entry_tuples = [('', x) for x in instrumenttools.list_instrument_names()]
         section.number_menu_entries = True
         while True:
-            key, value = menu.run()
+            key = menu.run()
             if self.backtrack():
                 self.breadcrumbs.pop()
                 return    
@@ -165,7 +167,8 @@ class InstrumentEditor(InteractiveEditor):
             else:
                 self.breadcrumbs.pop()
                 break
-        instrument_names = value
+        #instrument_names = value
+        instrument_names = key
         result = []
         for instrument_name in instrument_names:
             instrument_name = instrument_name.title()

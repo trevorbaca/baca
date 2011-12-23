@@ -157,7 +157,7 @@ class MakerWrangler(PackageWrangler, PackageProxy):
         stylesheet_file_pointer.write(stylesheet.format)
         stylesheet_file_pointer.close()
         
-    def handle_main_menu_response(self, key, value):
+    def handle_main_menu_response(self, key):
         if key == 'b':
             return 'back'
         elif key == 'new':
@@ -182,20 +182,21 @@ class MakerWrangler(PackageWrangler, PackageProxy):
         self.breadcrumbs.append('makers')
         while True:
             menu = self.make_main_menu()
-            key, value = menu.run()
+            key = menu.run()
             if self.session.is_complete:
                 result = True
                 break
-            tmp = self.handle_main_menu_response(key, value)
-            if tmp == 'back':
-                break
-            elif tmp == True:
-                result = True
-                break
-            elif tmp == False:
-                pass
-            else:
-                raise ValueError
+            tmp = self.handle_main_menu_response(key)
+#            if tmp == 'back':
+#                break
+#            elif tmp == True:
+#                result = True
+#                break
+#            elif tmp == False:
+#                pass
+#            else:
+#                raise ValueError
+            # TODO: backtrack here
         self.breadcrumbs.pop()
         return result
 
@@ -203,7 +204,7 @@ class MakerWrangler(PackageWrangler, PackageProxy):
         menu, section = self.make_new_menu(where=self.where())
         section.menu_entry_tuples = [('', x) for x in self.list_maker_spaced_class_names()]
         section.number_menu_entries = True
-        key, value = menu.run()
+        key = menu.run()
         if value is not None:
             maker_name = value.replace(' ', '_')
             maker_name = iotools.underscore_delimited_lowercase_to_uppercamelcase(maker_name)           

@@ -93,7 +93,7 @@ class InstrumentationEditor(InteractiveEditor):
             performer = None
         return performer
 
-    def handle_main_menu_response(self, key, value):
+    def handle_main_menu_response(self, key):
         if not isinstance(key, str):
             raise TypeError('key must be string.')
         if key == 'add':
@@ -143,12 +143,14 @@ class InstrumentationEditor(InteractiveEditor):
         section.menu_entry_tuples = [('', x) for x in performer_names]
         section.number_menu_entries = True
         while True:
-            key, value = menu.run()
+            key = menu.run()
             if self.backtrack():
                 self.breadcrumbs.pop()
                 return
-            if key is None:
+            #if key is None:
+            elif not key:
                 continue
             else:
                 self.breadcrumbs.pop()
-                return value
+                #return value
+                return key

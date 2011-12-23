@@ -61,7 +61,7 @@ class InteractiveEditor(SCFObject):
         if not self.session.is_complete:
             setattr(self.target, attribute_name, attribute_value)
 
-    def handle_main_menu_response(self, key, value):
+    def handle_main_menu_response(self, key):
         pass
 
     def run(self, user_input=None):
@@ -77,13 +77,14 @@ class InteractiveEditor(SCFObject):
         while True:
             self.breadcrumbs.append(self.breadcrumb)
             menu = self.make_main_menu()
-            key, value = menu.run()
+            key = menu.run()
             if self.backtrack():
                 break
-            elif key is None:
+            #elif key is None:
+            elif not key:
                 self.breadcrumbs.pop()
                 continue
-            self.handle_main_menu_response(key, value)
+            self.handle_main_menu_response(key)
             if self.backtrack():
                 break
             self.breadcrumbs.pop()

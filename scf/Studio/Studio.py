@@ -41,7 +41,7 @@ class Studio(SCFObject):
             section.number_menu_entries = True
             section = menu.make_new_section() 
             section.menu_entry_tuples.append(('baca', 'baca materials directory'))
-            key, value = menu.run()
+            key = menu.run()
             if key == 'baca':
                 return self.global_proxy.materials_package_importable_name
             else:
@@ -71,7 +71,6 @@ class Studio(SCFObject):
         prev_index = (index - 1) % len(score_package_short_names)
         return score_package_short_names[prev_index]
 
-    #def handle_main_menu_response(self, key, value):
     def handle_main_menu_response(self, key):
         if not isinstance(key, str):
             raise TypeError('key must be string.')
@@ -87,12 +86,10 @@ class Studio(SCFObject):
             self.session.scores_to_show = 'mothballed'
         elif key == 'svn':
             self.manage_svn()
-        #elif mathtools.is_integer_equivalent_expr(key):
-        #    self.edit_score_interactively(value)
         elif key in self.score_wrangler.iterate_score_package_short_names():
             self.edit_score_interactively(key)
     
-    def handle_svn_response(self, key, value):
+    def handle_svn_response(self, key):
         '''Return true to exit the svn menu.
         '''
         result = False
@@ -187,7 +184,7 @@ class Studio(SCFObject):
             self.breadcrumbs.append('{} scores'.format(self.session.scores_to_show))
             if run_main_menu:
                 menu = self.make_main_menu()
-                key, value = menu.run()
+                key = menu.run()
             else:
                 run_main_menu = True
             if self.session.is_complete:
@@ -197,11 +194,11 @@ class Studio(SCFObject):
             elif self.session.is_navigating_to_next_score:
                 self.session.is_navigating_to_next_score = False
                 self.session.is_backtracking_to_studio = False
-                key = value = self.get_next_score_package_short_name()
+                key = self.get_next_score_package_short_name()
             elif self.session.is_navigating_to_prev_score:
                 self.session.is_navigating_to_prev_score = False
                 self.session.is_backtracking_to_studio = False
-                key = value = self.get_prev_score_package_short_name()
+                key = self.get_prev_score_package_short_name()
             elif self.session.is_backtracking_to_studio:
                 self.session.is_backtracking_to_studio = False
                 self.breadcrumbs.pop()
@@ -213,7 +210,6 @@ class Studio(SCFObject):
             elif key is None:
                 self.breadcrumbs.pop()
                 continue
-            #self.handle_main_menu_response(key, value)
             self.handle_main_menu_response(key)
             if self.session.is_complete:
                 self.breadcrumbs.pop()
@@ -236,13 +232,13 @@ class Studio(SCFObject):
         self.breadcrumbs.append('repository commands')
         while True:
             menu = self.make_svn_menu()
-            key, value = menu.run()
+            key = menu.run()
             if self.session.is_backtracking_to_score:
                 self.session.is_backtracking_to_score = False
                 continue
             elif self.backtrack():
                 break
-            self.handle_svn_response(key, value)
+            self.handle_svn_response(key)
             if self.backtrack():
                 break
         self.breadcrumbs.pop()
@@ -262,5 +258,6 @@ class Studio(SCFObject):
         menu, section = self.make_new_menu(where=self.where())
         section.menu_entry_tuples = [('', x) for x in material_proxies]
         section.number_menu_entries = True
-        key, value = menu.run()
-        return value
+        key = menu.run()
+        # TODO: probably backtrack here
+        return key

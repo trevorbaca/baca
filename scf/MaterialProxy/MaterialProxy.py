@@ -416,7 +416,7 @@ class MaterialProxy(PackageProxy):
             section.menu_entry_tuples.append(('s', 'summarize'))
             section.menu_entry_tuples.append(('t', 'tags'))
             section.menu_entry_tuples.append(('z', 'regenerate'))
-            key, value = menu.run()
+            key = menu.run()
             if key == 'b':
                 return key, None
             elif key == 'd':

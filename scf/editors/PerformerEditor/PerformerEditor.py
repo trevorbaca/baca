@@ -75,7 +75,7 @@ class PerformerEditor(InteractiveEditor):
             return
         self.target.name = result
 
-    def handle_main_menu_response(self, key, value):
+    def handle_main_menu_response(self, key):
         if not isinstance(key, str):
             raise TypeError('key must be string.')
         if key == 'add':
@@ -168,7 +168,7 @@ class PerformerEditor(InteractiveEditor):
         self.breadcrumbs.append(self.target.name)
         menu = self.set_initial_configuration_menu()
         while True:
-            key, value = menu.run()
+            key = menu.run()
             if self.backtrack():
                 self.breadcrumbs.pop()
                 return
@@ -177,8 +177,8 @@ class PerformerEditor(InteractiveEditor):
                 continue
             #elif self.is_argument_range_string(key):
             if isinstance(key, list):
-                assert isinstance(value, list)
-                for instrument_name in value:
+                assert isinstance(key, list)
+                for instrument_name in key:
                     instrument_class = instrumenttools.default_instrument_name_to_instrument_class(
                         instrument_name)
                     instrument = instrument_class()
