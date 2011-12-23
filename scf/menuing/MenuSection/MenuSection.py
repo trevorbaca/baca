@@ -9,7 +9,7 @@ class MenuSection(MenuObject):
         self.default_index = None
         self.display_keys = True
         self.entry_prefix = None
-        self.items_to_number = None
+        #self.items_to_number = None
         self.menu_entry_tuples = None
         self.number_menu_entries = False
         self.section_title = None
@@ -52,16 +52,16 @@ class MenuSection(MenuObject):
     def has_default(self):
         return self.default_index is not None
 
-    @apply
-    def items_to_number():
-        def fget(self):
-            return self._items_to_number
-        def fset(self, items_to_number):
-            if items_to_number is None:
-                self._items_to_number = []
-            else:
-                self._items_to_number = list(items_to_number)
-        return property(**locals())
+#    @apply
+#    def items_to_number():
+#        def fget(self):
+#            return self._items_to_number
+#        def fset(self, items_to_number):
+#            if items_to_number is None:
+#                self._items_to_number = []
+#            else:
+#                self._items_to_number = list(items_to_number)
+#        return property(**locals())
 
     @apply
     def menu_entry_tuples():
@@ -78,8 +78,8 @@ class MenuSection(MenuObject):
     def menu_values(self):
         if self.number_menu_entries:
             return [x[1] for x in self.menu_entry_tuples]
-        elif self.items_to_number:
-            return self.items_to_number[:]
+#        elif self.items_to_number:
+#            return self.items_to_number[:]
 
     @apply
     def number_menu_entries():
@@ -101,7 +101,8 @@ class MenuSection(MenuObject):
 
     ### PUBLIC METHODS ###
 
-    def make_menu_lines(self, all_keys, all_bodies, all_display_strings):
+    #def make_menu_lines(self, all_keys, all_bodies, all_display_strings):
+    def make_menu_lines(self, all_keys, all_bodies):
         '''Display strings will be retired during migration.
         After migration the meaning of keys and values will be as follows.
         KEYS will be those things to be ultimately returned a menu by which
@@ -126,44 +127,44 @@ class MenuSection(MenuObject):
         '''
         menu_lines = []
         menu_lines.extend(self.make_section_title_lines())
-        for i, value in enumerate(self.items_to_number):
-            if isinstance(value, tuple):
-                assert len(value) == 2
-                display_string, return_value = value
-            else:
-                display_string = return_value = value
-            key = str(i + 1)
-            menu_line = self.make_tab(self.indent_level) + ' '
-            prefix = self.entry_prefix
-            if prefix is not None:
-                key = prefix + key
-            menu_line += '{}: {}'.format(key, display_string)
-            menu_lines.append(menu_line)
-            all_keys.append(key)
-            all_bodies.append(return_value)
-            all_display_strings.append(display_string)
-        if self.items_to_number:
-            menu_lines.append('')
+#        for i, value in enumerate(self.items_to_number):
+#            if isinstance(value, tuple):
+#                assert len(value) == 2
+#                display_string, return_value = value
+#            else:
+#                display_string = return_value = value
+#            key = str(i + 1)
+#            menu_line = self.make_tab(self.indent_level) + ' '
+#            prefix = self.entry_prefix
+#            if prefix is not None:
+#                key = prefix + key
+#            menu_line += '{}: {}'.format(key, display_string)
+#            menu_lines.append(menu_line)
+#            all_keys.append(key)
+#            all_bodies.append(return_value)
+#            all_display_strings.append(display_string)
+#        if self.items_to_number:
+#            menu_lines.append('')
         assert all([isinstance(x, tuple) and len(x) == 2 for x in self.menu_entry_tuples])
         for entry_index, menu_entry_tuple in enumerate(self.menu_entry_tuples):
-            key, value = menu_entry_tuple
+            key, body = menu_entry_tuple
             menu_line = self.make_tab(self.indent_level) + ' '
             if self.number_menu_entries:
                 entry_number = entry_index + 1
                 menu_line += '{}: '.format(str(entry_number))
-                all_keys.append(str(entry_number))
-                all_bodies.append(value)
-                all_display_strings.append(None)
+                #all_keys.append(str(entry_number))
+                #all_bodies.append(body)
+                #all_display_strings.append(None)
             if key and self.display_keys:
-                menu_line += '{} ({})'.format(value, key)
+                menu_line += '{} ({})'.format(body, key)
             else:
-                menu_line += '{}'.format(value)
+                menu_line += '{}'.format(body)
             menu_lines.append(menu_line)
             all_keys.append(key)
-            all_bodies.append(value)
-            all_display_strings.append(None)
-        #print all_keys
-        #print all_bodies
+            all_bodies.append(body)
+            #all_display_strings.append(None)
+        #print 'all_keys', all_keys
+        #print 'all_bodies', all_bodies
         if self.menu_entry_tuples:
             menu_lines.append('')
         return menu_lines

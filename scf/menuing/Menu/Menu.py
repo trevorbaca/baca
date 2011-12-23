@@ -1,4 +1,5 @@
 from abjad.tools import iotools
+from abjad.tools import mathtools
 from baca.scf.menuing.MenuObject import MenuObject
 from baca.scf.menuing.MenuSection import MenuSection
 import os
@@ -28,6 +29,7 @@ class Menu(MenuObject):
         for section in self.sections:
             if section.has_default:
                 return section.default_value
+
     @property
     def has_default(self):
         for section in self.sections:
@@ -81,90 +83,70 @@ class Menu(MenuObject):
         for key, value in self.default_hidden_items:
             self.all_keys.append(key)
             self.all_bodies.append(value)
-            self.all_display_strings.append(None)
         for key, value in self.hidden_items:
             self.all_keys.append(key)
             self.all_bodies.append(value)
-            self.all_display_strings.append(None)
 
     def change_all_keys_to_lowercase(self):
         self.all_keys = [key.lower() for key in self.all_keys]
 
-    def change_display_string_to_key(self, display_string):
-        if display_string:
-            pair_dictionary = dict(zip(self.all_display_strings, self.all_keys))
-            return pair_dictionary.get(display_string)
-
-    def change_key_to_value(self, key):
+    def change_key_to_value(self, user_input):
         from abjad.tools import sequencetools
-        if key:
-            pair_dictionary = dict(zip(self.all_keys, self.all_bodies))
-            if key in pair_dictionary:
-                value = pair_dictionary.get(key)
-                if self.allow_argument_range:
-                    return [value]
-                else:
-                    return value
-            elif self.allow_argument_range and self.is_argument_range_string(key):
-                for section in self.sections:
-                    if section.menu_values:
-                        break
-                else:
-                    raise ValueError('no section contains numbered menu entries.')
-                item_numbers = self.argument_range_string_to_numbers(key, section.menu_values)
-                if item_numbers is None:
-                    return []
-                item_indices = [item_number - 1 for item_number in item_numbers]
-                for section in self.sections:
-                    if section.menu_values:
-                        result = []
-                        for i in item_indices:
-                            item = section.menu_values[i]
-                            result.append(item)
-                        return result
+        print 'ALLOW', self.allow_argument_range
+        if (user_input == '' or self.key_is_default(user_input)) and self.has_default:
+            if self.allow_argument_range:
+                return [self.default_value]
+            else:
+                return self.default_value
+        elif not user_input:
+            return
+        elif user_input in self.all_keys:
+            value = user_input
+            return user_input
+        elif 'score'.startswith(user_input):
+            return user_input
+        elif 'studio'.startswith(user_input):
+            return user_input
+        elif self.allow_argument_range and self.is_argument_range_string(user_input):
+            for section in self.sections:
+                if section.menu_values:
+                    break
+            else:
+                raise ValueError('no section contains numbered menu entries.')
+            item_numbers = self.argument_range_string_to_numbers(user_input, section.menu_values)
+            print 'TTT', repr(item_numbers)
+            if item_numbers is None:
+                return []
+            item_indices = [item_number - 1 for item_number in item_numbers]
+            for section in self.sections:
+                if section.menu_values:
+                    result = []
+                    for i in item_indices:
+                        item = section.menu_values[i]
+                        result.append(item)
+                    return result
+        elif mathtools.is_integer_equivalent_expr(user_input):
+            entry_number = int(user_input)
+            for section in self.sections:
+                if section.number_menu_entries:
+                    if entry_number <= len(section.menu_entry_tuples):
+                        entry_index = entry_number - 1
+                        key, body = section.menu_entry_tuples[entry_index]
+                        if key:
+                            value = key
+                        else:
+                            value = user_input
+                        if self.allow_argument_range:
+                            return [value]
+                        else:
+                            return value
+        else:
+            return self.match_user_input_against_menu_entry_bodies(user_input)
 
     def change_value_to_key(self, value):
         if value:
             pair_dictionary = dict(zip(self.all_bodies, self.all_keys))
             return pair_dictionary.get(value)
-
-    def check_if_key_exists(self, key):
-        if self.key_is_default(key):
-            value = self.default_value
-            return self.change_value_to_key(value)
-        elif key == '' and self.has_default:
-            value = self.default_value
-            return self.change_value_to_key(value)
-        elif key in self.all_keys:
-            return key
-        elif isinstance(key, str) and 3 <= len(key) and 'score'.startswith(key):
-            return key
-        elif isinstance(key, str) and 3 <= len(key) and 'studio'.startswith(key):
-            return key
-        elif self.allow_argument_range and self.is_argument_range_string(key):
-            for section in self.sections:
-                if section.menu_values:
-                    break
-            else:
-                raise ValueError('no section contains items to number.')
-            if self.is_valid_argument_range_string_for_argument_list(key, section.menu_values):
-                return key
-            else:
-                return None
-        else:
-            return self.check_for_matching_value_string(key)
-
-    def check_for_matching_value_string(self, key):
-        if key:
-            assert len(self.all_bodies) == len(self.all_display_strings)
-            for value, display_string in zip(self.all_bodies, self.all_display_strings):
-                if 3 <= len(key) and iotools.strip_diacritics_from_binary_string(value).lower().startswith(key):
-                    key = self.change_value_to_key(value)
-                    return key
-                elif display_string is not None and iotools.strip_diacritics_from_binary_string(
-                    display_string).lower().startswith(key):
-                    key = self.change_display_string_to_key(display_string)
-                    return key 
 
     def clean_value(self, value):
         if isinstance(value, list):
@@ -192,13 +174,13 @@ class Menu(MenuObject):
         key = iotools.strip_diacritics_from_binary_string(key)
         key = key.lower()
         #print 'BAR', repr(user_response), repr(key), '||', repr(self.session.user_input)
-        key = self.check_if_key_exists(key)
-        #print 'exists?', repr(key)
         value = self.change_key_to_value(key)
-        #print repr(value)
+        print 'ZEE', repr(key), repr(value)
         value = self.clean_value(value)
+        print 'ZZZ', repr(key), repr(value)
         self.session.hide_next_redraw = False
-        return key, value
+        #return key, value
+        return value, value
 
     def key_is_default(self, key):
         if 3 <= len(key):
@@ -207,10 +189,9 @@ class Menu(MenuObject):
         return False
 
     def make_menu_lines_keys_and_values(self):
-        self.menu_lines, self.all_keys, self.all_bodies, self.all_display_strings = [], [], [], []
+        self.menu_lines, self.all_keys, self.all_bodies = [], [], []
         self.menu_lines.extend(self.make_menu_title_lines())
-        self.menu_lines.extend(self.make_section_lines(
-            self.all_keys, self.all_bodies, self.all_display_strings))
+        self.menu_lines.extend(self.make_section_lines(self.all_keys, self.all_bodies))
 
     def make_menu_lines(self):
         menu_lines, keys, values = self.make_menu_lines_keys_and_values()
@@ -221,10 +202,10 @@ class Menu(MenuObject):
         self.sections.append(section)
         return section
 
-    def make_section_lines(self, all_keys, all_bodies, all_display_strings):
+    def make_section_lines(self, all_keys, all_bodies):
         menu_lines = []
         for section in self.sections:
-            menu_lines.extend(section.make_menu_lines(all_keys, all_bodies, all_display_strings))
+            menu_lines.extend(section.make_menu_lines(all_keys, all_bodies))
         if self.hide_menu:
             menu_lines = []
         return menu_lines
@@ -236,12 +217,27 @@ class Menu(MenuObject):
             menu_lines.append('')
         return menu_lines
 
+    def match_user_input_against_menu_entry_bodies(self, user_input):
+        for section in self.sections:
+            for key, body in section.menu_entry_tuples:
+                body = iotools.strip_diacritics_from_binary_string(body).lower()
+                if body.startswith(user_input):
+                    if key is not None:
+                        value = key
+                    else:
+                        value = body
+                    if self.allow_argument_range:
+                        return [value]
+                    else:
+                        return value
+                        
     def run(self):
         should_clear_terminal, hide_menu = True, False
         while True:
             self.should_clear_terminal, self.hide_menu = should_clear_terminal, hide_menu
             key, value = self.conditionally_display_menu()
             should_clear_terminal, hide_menu = False, True
+            print 'RRR', repr(key), repr(value)
             key = self.handle_hidden_key(key)
             if self.session.is_complete:
                 break
@@ -266,7 +262,6 @@ class Menu(MenuObject):
             if rest:
                 self.session.transcribe_next_command = False
             if isinstance(self.session.user_input, str):
-                #self.session.user_input = self.session.user_input + ' ' + rest
                 self.session.user_input = rest + ' ' + self.session.user_input
             else:
                 self.session.user_input = rest

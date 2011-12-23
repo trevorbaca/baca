@@ -76,6 +76,7 @@ class PerformerEditor(InteractiveEditor):
         self.target.name = result
 
     def handle_main_menu_response(self, key, value):
+        print 'HHH', repr(key), repr(value)
         if not isinstance(key, str):
             raise TypeError('key must be string.')
         if key == 'add':
@@ -151,16 +152,18 @@ class PerformerEditor(InteractiveEditor):
             most_likely_number = most_likely_index + 1
             section.default_index = most_likely_index
         if likely_instruments:
-            section.items_to_number = likely_instrument_names
-            #section.menu_entry_tuples = [('', x) for x in likely_instrument_names]
-            #section.number_menu_entries = True
-            #section = menu.make_new_section()
+            print 'XXX'
+            #section.items_to_number = likely_instrument_names
+            section.menu_entry_tuples = [('', x) for x in likely_instrument_names]
+            section.number_menu_entries = True
+            section = menu.make_new_section()
             section.menu_entry_tuples.append(('other', 'other instruments'))
         else:
-            section.items_to_number = instrumenttools.list_instrument_names()
-            #section.menu_entry_tuples = [('', x) for x in instrumenttools.list_instrument_names()]
-            #section.number_menu_entries = True
-            #section = menu.make_new_section()
+            print 'YYY'
+            #section.items_to_number = instrumenttools.list_instrument_names()
+            section.menu_entry_tuples = [('', x) for x in instrumenttools.list_instrument_names()]
+            section.number_menu_entries = True
+            section = menu.make_new_section()
         section.menu_entry_tuples.append(('none', 'no instruments'))
         section.display_keys = False
         return menu
@@ -171,12 +174,15 @@ class PerformerEditor(InteractiveEditor):
         menu = self.set_initial_configuration_menu()
         while True:
             key, value = menu.run()
+            print 'SSS', repr(key), repr(value)
             if self.backtrack():
                 self.breadcrumbs.pop()
                 return
-            elif key is None:
+            #elif key is None:
+            elif not key:
                 continue
-            elif self.is_argument_range_string(key):
+            #elif self.is_argument_range_string(key):
+            if isinstance(key, list):
                 assert isinstance(value, list)
                 for instrument_name in value:
                     instrument_class = instrumenttools.default_instrument_name_to_instrument_class(

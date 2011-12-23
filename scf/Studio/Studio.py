@@ -71,7 +71,8 @@ class Studio(SCFObject):
         prev_index = (index - 1) % len(score_package_short_names)
         return score_package_short_names[prev_index]
 
-    def handle_main_menu_response(self, key, value):
+    #def handle_main_menu_response(self, key, value):
+    def handle_main_menu_response(self, key):
         if not isinstance(key, str):
             raise TypeError('key must be string.')
         if key == 'active':
@@ -86,8 +87,10 @@ class Studio(SCFObject):
             self.session.scores_to_show = 'mothballed'
         elif key == 'svn':
             self.manage_svn()
-        elif mathtools.is_integer_equivalent_expr(key):
-            self.edit_score_interactively(value)
+        #elif mathtools.is_integer_equivalent_expr(key):
+        #    self.edit_score_interactively(value)
+        elif key in self.score_wrangler.iterate_score_package_short_names():
+            self.edit_score_interactively(key)
     
     def handle_svn_response(self, key, value):
         '''Return true to exit the svn menu.
@@ -141,10 +144,10 @@ class Studio(SCFObject):
             scores_to_show=self.session.scores_to_show))
         score_package_short_names = list(self.score_wrangler.iterate_score_package_short_names(
             scores_to_show=self.session.scores_to_show))
-        section.items_to_number = zip(score_titles, score_package_short_names)
-#        section.menu_entry_tuples = zip(score_package_short_names, score_titles)
-#        section.number_menu_entries = True
-#        section.display_keys = False
+        #section.items_to_number = zip(score_titles, score_package_short_names)
+        section.menu_entry_tuples = zip(score_package_short_names, score_titles)
+        section.number_menu_entries = True
+        section.display_keys = False
         section = menu.make_new_section()
         section.menu_entry_tuples.append(('k', 'work with interactive material proxies'))
         section.menu_entry_tuples.append(('m', 'work with Bača materials'))
@@ -185,7 +188,7 @@ class Studio(SCFObject):
             if run_main_menu:
                 menu = self.make_main_menu()
                 key, value = menu.run()
-                #print 'FEE', repr(key), repr(value)
+                print 'FEE', repr(key), repr(value)
             else:
                 run_main_menu = True
             if self.session.is_complete:
@@ -195,11 +198,11 @@ class Studio(SCFObject):
             elif self.session.is_navigating_to_next_score:
                 self.session.is_navigating_to_next_score = False
                 self.session.is_backtracking_to_studio = False
-                key, value = '99', self.get_next_score_package_short_name()
+                key = value = self.get_next_score_package_short_name()
             elif self.session.is_navigating_to_prev_score:
                 self.session.is_navigating_to_prev_score = False
                 self.session.is_backtracking_to_studio = False
-                key, value = '99', self.get_prev_score_package_short_name()
+                key = value = self.get_prev_score_package_short_name()
             elif self.session.is_backtracking_to_studio:
                 self.session.is_backtracking_to_studio = False
                 self.breadcrumbs.pop()
@@ -211,7 +214,8 @@ class Studio(SCFObject):
             elif key is None:
                 self.breadcrumbs.pop()
                 continue
-            self.handle_main_menu_response(key, value)
+            #self.handle_main_menu_response(key, value)
+            self.handle_main_menu_response(key)
             if self.session.is_complete:
                 self.breadcrumbs.pop()
                 self.session.clean_up()
