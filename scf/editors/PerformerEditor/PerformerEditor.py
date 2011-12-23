@@ -111,15 +111,16 @@ class PerformerEditor(InteractiveEditor):
         section.keyed_menu_entry_tuples = [('', x) for x in instrument_names]
         section.number_menu_entries = True
         section = menu.make_new_section()
-        section.keyed_menu_entry_tuples.append(('add', 'add instruments', False))
+        section.keyed_menu_entry_tuples.append(('add', 'add instruments'))
         if 0 < self.target.instrument_count:
-            section.keyed_menu_entry_tuples.append(('del', 'delete instruments', False))
+            section.keyed_menu_entry_tuples.append(('del', 'delete instruments'))
         if 1 < self.target.instrument_count:
-            section.keyed_menu_entry_tuples.append(('mv', 'move instrument', False))
+            section.keyed_menu_entry_tuples.append(('mv', 'move instrument'))
         if self.target.name is None:
-            section.keyed_menu_entry_tuples.append(('name', 'name performer', False))
+            section.keyed_menu_entry_tuples.append(('name', 'name performer'))
         else:
-            section.keyed_menu_entry_tuples.append(('ren', 'rename performer', False))
+            section.keyed_menu_entry_tuples.append(('ren', 'rename performer'))
+        section.display_keys = False
         return menu
 
     def move_instrument_interactively(self):
@@ -154,13 +155,14 @@ class PerformerEditor(InteractiveEditor):
             #section.keyed_menu_entry_tuples = [('', x) for x in likely_instrument_names]
             #section.number_menu_entries = True
             #section = menu.make_new_section()
-            section.keyed_menu_entry_tuples.append(('other', 'other instruments', False))
+            section.keyed_menu_entry_tuples.append(('other', 'other instruments'))
         else:
             section.items_to_number = instrumenttools.list_instrument_names()
             #section.keyed_menu_entry_tuples = [('', x) for x in instrumenttools.list_instrument_names()]
             #section.number_menu_entries = True
             #section = menu.make_new_section()
-        section.keyed_menu_entry_tuples.append(('none', 'no instruments', False))
+        section.keyed_menu_entry_tuples.append(('none', 'no instruments'))
+        section.display_keys = False
         return menu
 
     def set_initial_configuration_interactively(self):

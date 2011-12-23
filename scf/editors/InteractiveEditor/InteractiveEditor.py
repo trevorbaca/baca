@@ -38,8 +38,7 @@ class InteractiveEditor(SCFObject):
             left_hand_labels, target_attribute_names, menu_keys):
             menu_value = '{:<{width}} {!r}'.format(
                 left_hand_label, getattr(self.target, target_attribute_name), width=left_hand_label_width) 
-            display_key = False
-            keyed_menu_tuple = (menu_key, menu_value, display_key)
+            keyed_menu_tuple = (menu_key, menu_value)
             result.append(keyed_menu_tuple)
         return result
 

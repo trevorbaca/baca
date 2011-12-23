@@ -7,7 +7,7 @@ class MenuSection(MenuObject):
     def __init__(self, session=None, where=None):
         MenuObject.__init__(self, session=session, where=where)
         self.default_index = None
-        self.entries_include_display_string = False # temporary hack
+        self.display_keys = True
         self.entry_prefix = None
         self.items_to_number = None
         self.keyed_menu_entry_tuples = None
@@ -29,6 +29,15 @@ class MenuSection(MenuObject):
     def default_value(self):
         assert self.has_default
         return self.menu_values[self.default_index]
+
+    @apply
+    def display_keys():
+        def fget(self):
+            return self._display_keys
+        def fset(self, display_keys):
+            assert isinstance(display_keys, type(True))
+            self._display_keys = display_keys
+        return property(**locals())
 
     @apply
     def entry_prefix():
@@ -139,18 +148,7 @@ class MenuSection(MenuObject):
         for entry_index, keyed_menu_entry_tuple in enumerate(self.keyed_menu_entry_tuples):
             if len(keyed_menu_entry_tuple) == 2:
                 key, value = keyed_menu_entry_tuple
-                display_key = True
                 display_string = None
-            elif len(keyed_menu_entry_tuple) == 3:
-#                if self.entries_include_display_string:
-#                    key, display_string, display_key = keyed_menu_entry_tuple
-#                    value = key
-#                else:
-#                    key, value, display_key = keyed_menu_entry_tuple
-#                    display_string = None
-                key, value, display_key = keyed_menu_entry_tuple
-                display_string = None
-                #print key, value, display_key
             else:
                 raise ValueError('keyed menu entry tuples must have length 2 or 3.')
             menu_line = self.make_tab(self.indent_level) + ' '
@@ -158,12 +156,9 @@ class MenuSection(MenuObject):
                 entry_number = entry_index + 1
                 menu_line += '{}: '.format(str(entry_number))
                 all_keys.append(str(entry_number))
-                if self.entries_include_display_string:
-                    all_values.append(key)
-                else:
-                    all_values.append(value)
+                all_values.append(value)
                 all_display_strings.append(display_string)
-            if key and display_key:
+            if key and self.display_keys:
                 menu_line += '{} ({})'.format(value, key)
             else:
                 menu_line += '{}'.format(value)

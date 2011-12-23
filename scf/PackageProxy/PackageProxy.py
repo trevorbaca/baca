@@ -278,8 +278,9 @@ class PackageProxy(DirectoryProxy):
         stuff = [('', x) for x in stuff]
         section.keyed_menu_entry_tuples = stuff
         section = menu.make_new_section()
-        section.keyed_menu_entry_tuples.append(('add', 'add tag', False))
-        section.keyed_menu_entry_tuples.append(('del', 'delete tag', False))
+        section.keyed_menu_entry_tuples.append(('add', 'add tag'))
+        section.keyed_menu_entry_tuples.append(('del', 'delete tag'))
+        section.display_keys = False
         return menu
 
     def manage_tags(self):

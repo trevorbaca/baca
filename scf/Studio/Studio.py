@@ -142,10 +142,9 @@ class Studio(SCFObject):
         score_package_short_names = list(self.score_wrangler.iterate_score_package_short_names(
             scores_to_show=self.session.scores_to_show))
         section.items_to_number = zip(score_titles, score_package_short_names)
-#        display_keys = [False for x in score_package_short_names]
-#        section.keyed_menu_entry_tuples = zip(score_package_short_names, score_titles, display_keys)
+#        section.keyed_menu_entry_tuples = zip(score_package_short_names, score_titles)
 #        section.number_menu_entries = True
-#        section.entries_include_display_string = True
+#        section.display_keys = False
         section = menu.make_new_section()
         section.keyed_menu_entry_tuples.append(('k', 'work with interactive material proxies'))
         section.keyed_menu_entry_tuples.append(('m', 'work with Bača materials'))
@@ -157,19 +156,22 @@ class Studio(SCFObject):
 
     def make_svn_menu(self):
         menu, section = self.make_new_menu(where=self.where())
-        section.keyed_menu_entry_tuples.append(('add', 'add', False))
-        section.keyed_menu_entry_tuples.append(('ci', 'ci', False))
-        section.keyed_menu_entry_tuples.append(('st', 'st', False))
-        section.keyed_menu_entry_tuples.append(('up', 'up', False))
+        section.keyed_menu_entry_tuples.append(('add', 'add'))
+        section.keyed_menu_entry_tuples.append(('ci', 'ci'))
+        section.keyed_menu_entry_tuples.append(('st', 'st'))
+        section.keyed_menu_entry_tuples.append(('up', 'up'))
+        section.display_keys = False
         section = menu.make_new_section()
-        section.keyed_menu_entry_tuples.append(('add_scores', 'add_scores', False))
-        section.keyed_menu_entry_tuples.append(('ci_scores', 'ci_scores', False))
-        section.keyed_menu_entry_tuples.append(('st_scores', 'st_scores', False))
-        section.keyed_menu_entry_tuples.append(('up_scores', 'up_scores', False))
+        section.keyed_menu_entry_tuples.append(('add_scores', 'add_scores'))
+        section.keyed_menu_entry_tuples.append(('ci_scores', 'ci_scores'))
+        section.keyed_menu_entry_tuples.append(('st_scores', 'st_scores'))
+        section.keyed_menu_entry_tuples.append(('up_scores', 'up_scores'))
+        section.display_keys = False
         section = menu.make_new_section()
-        section.keyed_menu_entry_tuples.append(('pytest', 'pytest', False))
-        section.keyed_menu_entry_tuples.append(('pytest_scores', 'pytest_scores', False))
-        section.keyed_menu_entry_tuples.append(('pytest_all', 'pytest_all', False))
+        section.keyed_menu_entry_tuples.append(('pytest', 'pytest'))
+        section.keyed_menu_entry_tuples.append(('pytest_scores', 'pytest_scores'))
+        section.keyed_menu_entry_tuples.append(('pytest_all', 'pytest_all'))
+        section.display_keys = False
         return menu
 
     def run(self, user_input=None):
