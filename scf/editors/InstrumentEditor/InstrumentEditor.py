@@ -120,7 +120,7 @@ class InstrumentEditor(InteractiveEditor):
 
     def make_main_menu(self):
         menu, section = self.make_new_menu(where=self.where())
-        section.menu_entry_tuples = self.target_attribute_menu_entries
+        section.menu_entry_tuples = self.target_attribute_menu_entry_tuples
         section.display_keys = False
         section = menu.make_new_section()
         if self.session.display_pitch_ranges_with_numbered_pitches:

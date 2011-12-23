@@ -20,9 +20,8 @@ class InteractiveEditor(SCFObject):
 
     ### PUBLIC ATTRIBUTES ###
     
-    # TODO: rename to target_attribute_keyed_menu_tuples
     @property
-    def target_attribute_menu_entries(self):
+    def target_attribute_menu_entry_tuples(self):
         result = []
         target_attribute_names, menu_keys, left_hand_labels = [], [], []
         for target_attribute_name, predicate, is_read_write, default in self.target_attribute_tuples:
@@ -38,8 +37,8 @@ class InteractiveEditor(SCFObject):
             left_hand_labels, target_attribute_names, menu_keys):
             menu_value = '{:<{width}} {!r}'.format(
                 left_hand_label, getattr(self.target, target_attribute_name), width=left_hand_label_width) 
-            keyed_menu_tuple = (menu_key, menu_value)
-            result.append(keyed_menu_tuple)
+            menu_entry_tuple = (menu_key, menu_value)
+            result.append(menu_entry_tuple)
         return result
 
     ### PUBLIC METHODS ###

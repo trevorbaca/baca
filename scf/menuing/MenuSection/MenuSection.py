@@ -144,20 +144,16 @@ class MenuSection(MenuObject):
             all_display_strings.append(display_string)
         if self.items_to_number:
             menu_lines.append('')
-        assert all([isinstance(x, tuple) for x in self.menu_entry_tuples])
-        for entry_index, keyed_menu_entry_tuple in enumerate(self.menu_entry_tuples):
-            if len(keyed_menu_entry_tuple) == 2:
-                key, value = keyed_menu_entry_tuple
-                display_string = None
-            else:
-                raise ValueError('keyed menu entry tuples must have length 2 or 3.')
+        assert all([isinstance(x, tuple) and len(x) == 2 for x in self.menu_entry_tuples])
+        for entry_index, menu_entry_tuple in enumerate(self.menu_entry_tuples):
+            key, value = menu_entry_tuple
             menu_line = self.make_tab(self.indent_level) + ' '
             if self.number_menu_entries:
                 entry_number = entry_index + 1
                 menu_line += '{}: '.format(str(entry_number))
                 all_keys.append(str(entry_number))
                 all_bodies.append(value)
-                all_display_strings.append(display_string)
+                all_display_strings.append(None)
             if key and self.display_keys:
                 menu_line += '{} ({})'.format(value, key)
             else:
@@ -165,7 +161,7 @@ class MenuSection(MenuObject):
             menu_lines.append(menu_line)
             all_keys.append(key)
             all_bodies.append(value)
-            all_display_strings.append(display_string)
+            all_display_strings.append(None)
         #print all_keys
         #print all_bodies
         if self.menu_entry_tuples:
