@@ -92,7 +92,6 @@ class Menu(MenuObject):
 
     def change_key_to_value(self, user_input):
         from abjad.tools import sequencetools
-        print 'ALLOW', self.allow_argument_range
         if (user_input == '' or self.key_is_default(user_input)) and self.has_default:
             if self.allow_argument_range:
                 return [self.default_value]
@@ -114,7 +113,6 @@ class Menu(MenuObject):
             else:
                 raise ValueError('no section contains numbered menu entries.')
             item_numbers = self.argument_range_string_to_numbers(user_input, section.menu_values)
-            print 'TTT', repr(item_numbers)
             if item_numbers is None:
                 return []
             item_indices = [item_number - 1 for item_number in item_numbers]
@@ -175,12 +173,13 @@ class Menu(MenuObject):
         key = key.lower()
         #print 'BAR', repr(user_response), repr(key), '||', repr(self.session.user_input)
         value = self.change_key_to_value(key)
-        print 'ZEE', repr(key), repr(value)
+        #print 'ZEE', repr(key), repr(value)
         value = self.clean_value(value)
-        print 'ZZZ', repr(key), repr(value)
+        #print 'ZZZ', repr(key), repr(value)
         self.session.hide_next_redraw = False
         #return key, value
-        return value, value
+        #return value, value
+        return value
 
     def key_is_default(self, key):
         if 3 <= len(key):
@@ -235,9 +234,8 @@ class Menu(MenuObject):
         should_clear_terminal, hide_menu = True, False
         while True:
             self.should_clear_terminal, self.hide_menu = should_clear_terminal, hide_menu
-            key, value = self.conditionally_display_menu()
+            key = self.conditionally_display_menu()
             should_clear_terminal, hide_menu = False, True
-            print 'RRR', repr(key), repr(value)
             key = self.handle_hidden_key(key)
             if self.session.is_complete:
                 break
@@ -245,7 +243,7 @@ class Menu(MenuObject):
                 should_clear_terminal, hide_menu = True, False
             else:
                 break
-        return key, value
+        return key, key
 
     def split_multipart_user_response(self, user_response):
         self.session.transcribe_next_command = True

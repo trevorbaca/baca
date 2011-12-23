@@ -76,7 +76,6 @@ class PerformerEditor(InteractiveEditor):
         self.target.name = result
 
     def handle_main_menu_response(self, key, value):
-        print 'HHH', repr(key), repr(value)
         if not isinstance(key, str):
             raise TypeError('key must be string.')
         if key == 'add':
@@ -152,15 +151,11 @@ class PerformerEditor(InteractiveEditor):
             most_likely_number = most_likely_index + 1
             section.default_index = most_likely_index
         if likely_instruments:
-            print 'XXX'
-            #section.items_to_number = likely_instrument_names
             section.menu_entry_tuples = [('', x) for x in likely_instrument_names]
             section.number_menu_entries = True
             section = menu.make_new_section()
             section.menu_entry_tuples.append(('other', 'other instruments'))
         else:
-            print 'YYY'
-            #section.items_to_number = instrumenttools.list_instrument_names()
             section.menu_entry_tuples = [('', x) for x in instrumenttools.list_instrument_names()]
             section.number_menu_entries = True
             section = menu.make_new_section()
@@ -174,7 +169,6 @@ class PerformerEditor(InteractiveEditor):
         menu = self.set_initial_configuration_menu()
         while True:
             key, value = menu.run()
-            print 'SSS', repr(key), repr(value)
             if self.backtrack():
                 self.breadcrumbs.pop()
                 return

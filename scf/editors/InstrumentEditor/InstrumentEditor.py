@@ -156,7 +156,6 @@ class InstrumentEditor(InteractiveEditor):
         section.number_menu_entries = True
         while True:
             key, value = menu.run()
-            print 'KKK', repr(key), repr(value)
             if self.backtrack():
                 self.breadcrumbs.pop()
                 return    
