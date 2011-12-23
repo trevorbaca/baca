@@ -101,7 +101,7 @@ class MenuSection(MenuObject):
 
     ### PUBLIC METHODS ###
 
-    def make_menu_lines(self, all_keys, all_values, all_display_strings):
+    def make_menu_lines(self, all_keys, all_bodies, all_display_strings):
         '''Display strings will be retired during migration.
         After migration the meaning of keys and values will be as follows.
         KEYS will be those things to be ultimately returned a menu by which
@@ -140,7 +140,7 @@ class MenuSection(MenuObject):
             menu_line += '{}: {}'.format(key, display_string)
             menu_lines.append(menu_line)
             all_keys.append(key)
-            all_values.append(return_value)
+            all_bodies.append(return_value)
             all_display_strings.append(display_string)
         if self.items_to_number:
             menu_lines.append('')
@@ -156,7 +156,7 @@ class MenuSection(MenuObject):
                 entry_number = entry_index + 1
                 menu_line += '{}: '.format(str(entry_number))
                 all_keys.append(str(entry_number))
-                all_values.append(value)
+                all_bodies.append(value)
                 all_display_strings.append(display_string)
             if key and self.display_keys:
                 menu_line += '{} ({})'.format(value, key)
@@ -164,10 +164,10 @@ class MenuSection(MenuObject):
                 menu_line += '{}'.format(value)
             menu_lines.append(menu_line)
             all_keys.append(key)
-            all_values.append(value)
+            all_bodies.append(value)
             all_display_strings.append(display_string)
         #print all_keys
-        #print all_values
+        #print all_bodies
         if self.keyed_menu_entry_tuples:
             menu_lines.append('')
         return menu_lines

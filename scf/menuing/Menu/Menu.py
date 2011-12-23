@@ -80,11 +80,11 @@ class Menu(MenuObject):
     def add_hidden_menu_items(self):
         for key, value in self.default_hidden_items:
             self.all_keys.append(key)
-            self.all_values.append(value)
+            self.all_bodies.append(value)
             self.all_display_strings.append(None)
         for key, value in self.hidden_items:
             self.all_keys.append(key)
-            self.all_values.append(value)
+            self.all_bodies.append(value)
             self.all_display_strings.append(None)
 
     def change_all_keys_to_lowercase(self):
@@ -98,7 +98,7 @@ class Menu(MenuObject):
     def change_key_to_value(self, key):
         from abjad.tools import sequencetools
         if key:
-            pair_dictionary = dict(zip(self.all_keys, self.all_values))
+            pair_dictionary = dict(zip(self.all_keys, self.all_bodies))
             if key in pair_dictionary:
                 value = pair_dictionary.get(key)
                 if self.allow_argument_range:
@@ -125,7 +125,7 @@ class Menu(MenuObject):
 
     def change_value_to_key(self, value):
         if value:
-            pair_dictionary = dict(zip(self.all_values, self.all_keys))
+            pair_dictionary = dict(zip(self.all_bodies, self.all_keys))
             return pair_dictionary.get(value)
 
     def check_if_key_exists(self, key):
@@ -156,8 +156,8 @@ class Menu(MenuObject):
 
     def check_for_matching_value_string(self, key):
         if key:
-            assert len(self.all_values) == len(self.all_display_strings)
-            for value, display_string in zip(self.all_values, self.all_display_strings):
+            assert len(self.all_bodies) == len(self.all_display_strings)
+            for value, display_string in zip(self.all_bodies, self.all_display_strings):
                 if 3 <= len(key) and iotools.strip_diacritics_from_binary_string(value).lower().startswith(key):
                     key = self.change_value_to_key(value)
                     return key
@@ -207,10 +207,10 @@ class Menu(MenuObject):
         return False
 
     def make_menu_lines_keys_and_values(self):
-        self.menu_lines, self.all_keys, self.all_values, self.all_display_strings = [], [], [], []
+        self.menu_lines, self.all_keys, self.all_bodies, self.all_display_strings = [], [], [], []
         self.menu_lines.extend(self.make_menu_title_lines())
         self.menu_lines.extend(self.make_section_lines(
-            self.all_keys, self.all_values, self.all_display_strings))
+            self.all_keys, self.all_bodies, self.all_display_strings))
 
     def make_menu_lines(self):
         menu_lines, keys, values = self.make_menu_lines_keys_and_values()
@@ -221,10 +221,10 @@ class Menu(MenuObject):
         self.sections.append(section)
         return section
 
-    def make_section_lines(self, all_keys, all_values, all_display_strings):
+    def make_section_lines(self, all_keys, all_bodies, all_display_strings):
         menu_lines = []
         for section in self.sections:
-            menu_lines.extend(section.make_menu_lines(all_keys, all_values, all_display_strings))
+            menu_lines.extend(section.make_menu_lines(all_keys, all_bodies, all_display_strings))
         if self.hide_menu:
             menu_lines = []
         return menu_lines
