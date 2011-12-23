@@ -142,6 +142,11 @@ class Studio(SCFObject):
         score_package_short_names = list(self.score_wrangler.iterate_score_package_short_names(
             scores_to_show=self.session.scores_to_show))
         section.items_to_number = zip(score_titles, score_package_short_names)
+#        display_keys = [False for x in score_package_short_names]
+#        section.keyed_menu_entry_tuples = zip(score_package_short_names, score_titles, display_keys)
+#        section.number_menu_entries = True
+#        section.entries_include_display_string = True
+        section = menu.make_new_section()
         section.keyed_menu_entry_tuples.append(('k', 'work with interactive material proxies'))
         section.keyed_menu_entry_tuples.append(('m', 'work with Bača materials'))
         menu.hidden_items.append(('svn', 'work with repository'))

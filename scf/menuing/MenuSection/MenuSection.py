@@ -7,6 +7,7 @@ class MenuSection(MenuObject):
     def __init__(self, session=None, where=None):
         MenuObject.__init__(self, session=session, where=where)
         self.default_index = None
+        self.entries_include_display_string = False # temporary hack
         self.entry_prefix = None
         self.items_to_number = None
         self.keyed_menu_entry_tuples = None
@@ -92,6 +93,28 @@ class MenuSection(MenuObject):
     ### PUBLIC METHODS ###
 
     def make_menu_lines(self, all_keys, all_values, all_display_strings):
+        '''Display strings will be retired during migration.
+        After migration the meaning of keys and values will be as follows.
+        KEYS will be those things to be ultimately returned a menu by which
+        calling code will be able uniquely to execute a resultant action;
+        keys will also be those things optionally shown in parentheses in each entry;
+        keys are designed to be textual (as opposed to numeric);
+        not every entry need have a key because entries may be numbered instead of keyed;
+        note that entries may be both numbered and keyed.
+        BODIES will be those things shown in each entry;
+        values are mandatory and every entry must be supplied with a value.
+        Display strings will be retired.
+
+        Match determination:
+        1. Numeric user input checked against numbered entries.
+        2. If key exists, textual user input checked for exact match against key.
+        3. Textual user input checked for 3-char match against body.
+        4. Otherwise, no match found.
+        
+        Return value resolution:
+        Keyed entries (numbered or not) supply key as return value.
+        Nonkeyed entries (always numbered) supply body as return value.
+        '''
         menu_lines = []
         menu_lines.extend(self.make_section_title_lines())
         for i, value in enumerate(self.items_to_number):
@@ -117,17 +140,29 @@ class MenuSection(MenuObject):
             if len(keyed_menu_entry_tuple) == 2:
                 key, value = keyed_menu_entry_tuple
                 display_key = True
+                display_string = None
             elif len(keyed_menu_entry_tuple) == 3:
+#                if self.entries_include_display_string:
+#                    key, display_string, display_key = keyed_menu_entry_tuple
+#                    value = key
+#                else:
+#                    key, value, display_key = keyed_menu_entry_tuple
+#                    display_string = None
                 key, value, display_key = keyed_menu_entry_tuple
+                display_string = None
+                #print key, value, display_key
             else:
-                raise ValueError('sentence length item must have length 2 or 3.')
+                raise ValueError('keyed menu entry tuples must have length 2 or 3.')
             menu_line = self.make_tab(self.indent_level) + ' '
             if self.number_menu_entries:
                 entry_number = entry_index + 1
                 menu_line += '{}: '.format(str(entry_number))
                 all_keys.append(str(entry_number))
-                all_values.append(value)
-                all_display_strings.append(None)
+                if self.entries_include_display_string:
+                    all_values.append(key)
+                else:
+                    all_values.append(value)
+                all_display_strings.append(display_string)
             if key and display_key:
                 menu_line += '{} ({})'.format(value, key)
             else:
@@ -135,7 +170,9 @@ class MenuSection(MenuObject):
             menu_lines.append(menu_line)
             all_keys.append(key)
             all_values.append(value)
-            all_display_strings.append(None)
+            all_display_strings.append(display_string)
+        #print all_keys
+        #print all_values
         if self.keyed_menu_entry_tuples:
             menu_lines.append('')
         return menu_lines
