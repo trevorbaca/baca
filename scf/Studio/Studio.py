@@ -37,10 +37,10 @@ class Studio(SCFObject):
         self.breadcrumbs.append('select materials directory')
         while True:
             menu, section = self.make_new_menu(where=self.where())
-            section.keyed_menu_entry_tuples = [('', x) for x in self.score_wrangler.iterate_score_titles_with_years()]
+            section.menu_entry_tuples = [('', x) for x in self.score_wrangler.iterate_score_titles_with_years()]
             section.number_menu_entries = True
             section = menu.make_new_section() 
-            section.keyed_menu_entry_tuples.append(('baca', 'baca materials directory'))
+            section.menu_entry_tuples.append(('baca', 'baca materials directory'))
             key, value = menu.run()
             if key == 'baca':
                 return self.global_proxy.materials_package_importable_name
@@ -142,12 +142,12 @@ class Studio(SCFObject):
         score_package_short_names = list(self.score_wrangler.iterate_score_package_short_names(
             scores_to_show=self.session.scores_to_show))
         section.items_to_number = zip(score_titles, score_package_short_names)
-#        section.keyed_menu_entry_tuples = zip(score_package_short_names, score_titles)
+#        section.menu_entry_tuples = zip(score_package_short_names, score_titles)
 #        section.number_menu_entries = True
 #        section.display_keys = False
         section = menu.make_new_section()
-        section.keyed_menu_entry_tuples.append(('k', 'work with interactive material proxies'))
-        section.keyed_menu_entry_tuples.append(('m', 'work with Bača materials'))
+        section.menu_entry_tuples.append(('k', 'work with interactive material proxies'))
+        section.menu_entry_tuples.append(('m', 'work with Bača materials'))
         menu.hidden_items.append(('svn', 'work with repository'))
         menu.hidden_items.append(('active', 'show active scores only'))
         menu.hidden_items.append(('all', 'show all scores'))
@@ -156,21 +156,21 @@ class Studio(SCFObject):
 
     def make_svn_menu(self):
         menu, section = self.make_new_menu(where=self.where())
-        section.keyed_menu_entry_tuples.append(('add', 'add'))
-        section.keyed_menu_entry_tuples.append(('ci', 'ci'))
-        section.keyed_menu_entry_tuples.append(('st', 'st'))
-        section.keyed_menu_entry_tuples.append(('up', 'up'))
+        section.menu_entry_tuples.append(('add', 'add'))
+        section.menu_entry_tuples.append(('ci', 'ci'))
+        section.menu_entry_tuples.append(('st', 'st'))
+        section.menu_entry_tuples.append(('up', 'up'))
         section.display_keys = False
         section = menu.make_new_section()
-        section.keyed_menu_entry_tuples.append(('add_scores', 'add_scores'))
-        section.keyed_menu_entry_tuples.append(('ci_scores', 'ci_scores'))
-        section.keyed_menu_entry_tuples.append(('st_scores', 'st_scores'))
-        section.keyed_menu_entry_tuples.append(('up_scores', 'up_scores'))
+        section.menu_entry_tuples.append(('add_scores', 'add_scores'))
+        section.menu_entry_tuples.append(('ci_scores', 'ci_scores'))
+        section.menu_entry_tuples.append(('st_scores', 'st_scores'))
+        section.menu_entry_tuples.append(('up_scores', 'up_scores'))
         section.display_keys = False
         section = menu.make_new_section()
-        section.keyed_menu_entry_tuples.append(('pytest', 'pytest'))
-        section.keyed_menu_entry_tuples.append(('pytest_scores', 'pytest_scores'))
-        section.keyed_menu_entry_tuples.append(('pytest_all', 'pytest_all'))
+        section.menu_entry_tuples.append(('pytest', 'pytest'))
+        section.menu_entry_tuples.append(('pytest_scores', 'pytest_scores'))
+        section.menu_entry_tuples.append(('pytest_all', 'pytest_all'))
         section.display_keys = False
         return menu
 
@@ -257,7 +257,7 @@ class Studio(SCFObject):
     def select_interactive_material_proxy(self, klasses=None):
         material_proxies = list(self.iterate_interactive_material_proxies())
         menu, section = self.make_new_menu(where=self.where())
-        section.keyed_menu_entry_tuples = [('', x) for x in material_proxies]
+        section.menu_entry_tuples = [('', x) for x in material_proxies]
         section.number_menu_entries = True
         key, value = menu.run()
         return value

@@ -10,7 +10,7 @@ class MenuSection(MenuObject):
         self.display_keys = True
         self.entry_prefix = None
         self.items_to_number = None
-        self.keyed_menu_entry_tuples = None
+        self.menu_entry_tuples = None
         self.number_menu_entries = False
         self.section_title = None
 
@@ -64,20 +64,20 @@ class MenuSection(MenuObject):
         return property(**locals())
 
     @apply
-    def keyed_menu_entry_tuples():
+    def menu_entry_tuples():
         def fget(self):
-            return self._keyed_menu_entry_tuples
-        def fset(self, keyed_menu_entry_tuples):
-            if keyed_menu_entry_tuples is None:
-                self._keyed_menu_entry_tuples = []
+            return self._menu_entry_tuples
+        def fset(self, menu_entry_tuples):
+            if menu_entry_tuples is None:
+                self._menu_entry_tuples = []
             else:
-                self._keyed_menu_entry_tuples = keyed_menu_entry_tuples[:]
+                self._menu_entry_tuples = menu_entry_tuples[:]
         return property(**locals())
 
     @property
     def menu_values(self):
         if self.number_menu_entries:
-            return [x[1] for x in self.keyed_menu_entry_tuples]
+            return [x[1] for x in self.menu_entry_tuples]
         elif self.items_to_number:
             return self.items_to_number[:]
 
@@ -144,8 +144,8 @@ class MenuSection(MenuObject):
             all_display_strings.append(display_string)
         if self.items_to_number:
             menu_lines.append('')
-        assert all([isinstance(x, tuple) for x in self.keyed_menu_entry_tuples])
-        for entry_index, keyed_menu_entry_tuple in enumerate(self.keyed_menu_entry_tuples):
+        assert all([isinstance(x, tuple) for x in self.menu_entry_tuples])
+        for entry_index, keyed_menu_entry_tuple in enumerate(self.menu_entry_tuples):
             if len(keyed_menu_entry_tuple) == 2:
                 key, value = keyed_menu_entry_tuple
                 display_string = None
@@ -168,7 +168,7 @@ class MenuSection(MenuObject):
             all_display_strings.append(display_string)
         #print all_keys
         #print all_bodies
-        if self.keyed_menu_entry_tuples:
+        if self.menu_entry_tuples:
             menu_lines.append('')
         return menu_lines
 

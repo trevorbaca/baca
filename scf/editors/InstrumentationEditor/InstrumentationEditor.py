@@ -108,14 +108,14 @@ class InstrumentationEditor(InteractiveEditor):
     def make_main_menu(self):
         menu, section = self.make_new_menu(where=self.where())
         tuples = [('', x) for x in self.summary_lines]
-        section.keyed_menu_entry_tuples = tuples
+        section.menu_entry_tuples = tuples
         section.number_menu_entries = True
         section = menu.make_new_section()
-        section.keyed_menu_entry_tuples.append(('add', 'add performers'))
+        section.menu_entry_tuples.append(('add', 'add performers'))
         if 0 < self.target.performer_count:
-            section.keyed_menu_entry_tuples.append(('del', 'delete performers'))
+            section.menu_entry_tuples.append(('del', 'delete performers'))
         if 1 < self.target.performer_count:
-            section.keyed_menu_entry_tuples.append(('mv', 'move performers'))
+            section.menu_entry_tuples.append(('mv', 'move performers'))
         section.display_keys = False
         return menu
 
@@ -140,7 +140,7 @@ class InstrumentationEditor(InteractiveEditor):
         performer_names = scoretools.list_primary_performer_names()
         performer_names.append('percussionist')
         performer_names.sort()
-        section.keyed_menu_entry_tuples = [('', x) for x in performer_names]
+        section.menu_entry_tuples = [('', x) for x in performer_names]
         section.number_menu_entries = True
         while True:
             key, value = menu.run()

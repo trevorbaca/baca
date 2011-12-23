@@ -108,18 +108,18 @@ class PerformerEditor(InteractiveEditor):
         menu, section = self.make_new_menu(where=self.where())
         section.section_title = 'instruments'
         instrument_names = [x.instrument_name for x in self.target.instruments]
-        section.keyed_menu_entry_tuples = [('', x) for x in instrument_names]
+        section.menu_entry_tuples = [('', x) for x in instrument_names]
         section.number_menu_entries = True
         section = menu.make_new_section()
-        section.keyed_menu_entry_tuples.append(('add', 'add instruments'))
+        section.menu_entry_tuples.append(('add', 'add instruments'))
         if 0 < self.target.instrument_count:
-            section.keyed_menu_entry_tuples.append(('del', 'delete instruments'))
+            section.menu_entry_tuples.append(('del', 'delete instruments'))
         if 1 < self.target.instrument_count:
-            section.keyed_menu_entry_tuples.append(('mv', 'move instrument'))
+            section.menu_entry_tuples.append(('mv', 'move instrument'))
         if self.target.name is None:
-            section.keyed_menu_entry_tuples.append(('name', 'name performer'))
+            section.menu_entry_tuples.append(('name', 'name performer'))
         else:
-            section.keyed_menu_entry_tuples.append(('ren', 'rename performer'))
+            section.menu_entry_tuples.append(('ren', 'rename performer'))
         section.display_keys = False
         return menu
 
@@ -152,16 +152,16 @@ class PerformerEditor(InteractiveEditor):
             section.default_index = most_likely_index
         if likely_instruments:
             section.items_to_number = likely_instrument_names
-            #section.keyed_menu_entry_tuples = [('', x) for x in likely_instrument_names]
+            #section.menu_entry_tuples = [('', x) for x in likely_instrument_names]
             #section.number_menu_entries = True
             #section = menu.make_new_section()
-            section.keyed_menu_entry_tuples.append(('other', 'other instruments'))
+            section.menu_entry_tuples.append(('other', 'other instruments'))
         else:
             section.items_to_number = instrumenttools.list_instrument_names()
-            #section.keyed_menu_entry_tuples = [('', x) for x in instrumenttools.list_instrument_names()]
+            #section.menu_entry_tuples = [('', x) for x in instrumenttools.list_instrument_names()]
             #section.number_menu_entries = True
             #section = menu.make_new_section()
-        section.keyed_menu_entry_tuples.append(('none', 'no instruments'))
+        section.menu_entry_tuples.append(('none', 'no instruments'))
         section.display_keys = False
         return menu
 

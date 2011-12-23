@@ -83,7 +83,7 @@ class InstrumentEditor(InteractiveEditor):
         while True:
             menu, section = self.make_new_menu(where=self.where())
             menu.should_clear_terminal = False
-            section.keyed_menu_entry_tuples = [('', x) for x in instrumenttools.UntunedPercussion.known_untuned_percussion]
+            section.menu_entry_tuples = [('', x) for x in instrumenttools.UntunedPercussion.known_untuned_percussion]
             section.number_menu_entries = True
             key, value = menu.run()
             if self.backtrack():
@@ -120,7 +120,7 @@ class InstrumentEditor(InteractiveEditor):
 
     def make_main_menu(self):
         menu, section = self.make_new_menu(where=self.where())
-        section.keyed_menu_entry_tuples = self.target_attribute_menu_entries
+        section.menu_entry_tuples = self.target_attribute_menu_entries
         section.display_keys = False
         section = menu.make_new_section()
         if self.session.display_pitch_ranges_with_numbered_pitches:
@@ -128,19 +128,19 @@ class InstrumentEditor(InteractiveEditor):
         else:
             pitch_range_repr = self.target.pitch_range.one_line_named_chromatic_pitch_repr
         line = 'range: {}'.format(pitch_range_repr)
-        section.keyed_menu_entry_tuples.append(('pr', line))
+        section.menu_entry_tuples.append(('pr', line))
         menu.hidden_items.append(('tprd', 'toggle pitch range display'))
         clefs = [clef.clef_name for clef in self.target.all_clefs]
         clefs = ', '.join(clefs)
         line = 'clefs: {}'.format(clefs)
-        section.keyed_menu_entry_tuples.append(('cl', line))
+        section.menu_entry_tuples.append(('cl', line))
         if self.target.is_transposing:
             line = 'sounding pitch of fingered middle C: {}'
             line = line.format(self.target.sounding_pitch_of_fingered_middle_c.pitch_class_octave_label)
-            section.keyed_menu_entry_tuples.append(('sp', line))
+            section.menu_entry_tuples.append(('sp', line))
             line = 'interval of transposition: {}'
             line = line.format(self.target.interval_of_transposition)
-            section.keyed_menu_entry_tuples.append(('int', line))
+            section.menu_entry_tuples.append(('int', line))
         section.display_keys = False
         return menu
 
@@ -152,7 +152,7 @@ class InstrumentEditor(InteractiveEditor):
         menu, section = self.make_new_menu(where=self.where())
         menu.allow_argument_range = True
         menu.should_clear_terminal = False
-        section.keyed_menu_entry_tuples = [('', x) for x in instrumenttools.list_instrument_names()]
+        section.menu_entry_tuples = [('', x) for x in instrumenttools.list_instrument_names()]
         section.number_menu_entries = True
         while True:
             key, value = menu.run()

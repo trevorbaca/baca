@@ -276,10 +276,10 @@ class PackageProxy(DirectoryProxy):
         menu, section = self.make_new_menu(where=self.where())
         stuff = self.list_formatted_tags()
         stuff = [('', x) for x in stuff]
-        section.keyed_menu_entry_tuples = stuff
+        section.menu_entry_tuples = stuff
         section = menu.make_new_section()
-        section.keyed_menu_entry_tuples.append(('add', 'add tag'))
-        section.keyed_menu_entry_tuples.append(('del', 'delete tag'))
+        section.menu_entry_tuples.append(('add', 'add tag'))
+        section.menu_entry_tuples.append(('del', 'delete tag'))
         section.display_keys = False
         return menu
 
@@ -346,10 +346,10 @@ class PackageProxy(DirectoryProxy):
         from baca.scf.ScoreWrangler import ScoreWrangler
         menu, section = self.make_new_menu(where=self.where())
         score_wrangler = ScoreWrangler()
-        section.keyed_menu_entry_tuples = [('', x) for x in score_wrangler.iterate_score_titles_with_years()]
+        section.menu_entry_tuples = [('', x) for x in score_wrangler.iterate_score_titles_with_years()]
         section.number_menu_entries = True
         section = menu.make_new_section()
-        section.keyed_menu_entry_tuples.append(('s', 'global to studio'))
+        section.menu_entry_tuples.append(('s', 'global to studio'))
         key, value = menu.run() # maybe check for backtracking here?
 
     def unimport_baca_package(self):

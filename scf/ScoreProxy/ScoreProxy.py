@@ -238,34 +238,34 @@ class ScoreProxy(PackageProxy):
     def make_main_menu(self):
         menu, section = self.make_new_menu(where=self.where())
         section.section_title = 'chunks'
-        section.keyed_menu_entry_tuples = [('', x) for x in self.chunk_wrangler.iterate_package_spaced_names()]
+        section.menu_entry_tuples = [('', x) for x in self.chunk_wrangler.iterate_package_spaced_names()]
         section.number_menu_entries = True
         section.entry_prefix = 'h'
         section = menu.make_new_section()
-        section.keyed_menu_entry_tuples.append(('ch', '[create chunk]'))
+        section.menu_entry_tuples.append(('ch', '[create chunk]'))
         section = menu.make_new_section()
         section.section_title = 'materials'
-        section.keyed_menu_entry_tuples = [('', x) for x in self.material_wrangler.iterate_package_underscored_names()]
+        section.menu_entry_tuples = [('', x) for x in self.material_wrangler.iterate_package_underscored_names()]
         section.number_menu_entries = True
         section.entry_prefix = 'm'
         section = menu.make_new_section()
-        section.keyed_menu_entry_tuples.append(('mi', 'create interactive material'))
-        section.keyed_menu_entry_tuples.append(('ms', 'create static material'))
+        section.menu_entry_tuples.append(('mi', 'create interactive material'))
+        section.menu_entry_tuples.append(('ms', 'create static material'))
         section = menu.make_new_section()
         section.section_title = 'setup'
-        section.keyed_menu_entry_tuples.append(('ft', 'forces tagline'))
-        section.keyed_menu_entry_tuples.append(('pf', 'performers'))
-        section.keyed_menu_entry_tuples.append(('tl', 'title'))
-        section.keyed_menu_entry_tuples.append(('yr', 'year of completion'))
+        section.menu_entry_tuples.append(('ft', 'forces tagline'))
+        section.menu_entry_tuples.append(('pf', 'performers'))
+        section.menu_entry_tuples.append(('tl', 'title'))
+        section.menu_entry_tuples.append(('yr', 'year of completion'))
         menu.hidden_items.append(('svn', 'work with repository'))
         menu.hidden_items.append(('tags', 'work with tags'))
         return menu
 
     def make_svn_menu(self):
         menu, section = self.make_new_menu(where=self.where())
-        section.keyed_menu_entry_tuples.append(('st', 'st'))
-        section.keyed_menu_entry_tuples.append(('add', 'add'))
-        section.keyed_menu_entry_tuples.append(('ci', 'ci'))
+        section.menu_entry_tuples.append(('st', 'st'))
+        section.menu_entry_tuples.append(('add', 'add'))
+        section.menu_entry_tuples.append(('ci', 'ci'))
         section.display_keys = False
         return menu
 
