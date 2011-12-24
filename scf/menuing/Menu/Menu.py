@@ -147,8 +147,7 @@ class Menu(MenuObject):
             return expr
 
     def conditionally_display_menu(self):
-        if not self.session.hide_next_redraw:
-            self.conditionally_clear_terminal()
+        self.conditionally_clear_terminal()
         self.make_menu_lines_keys_and_values()
         self.change_all_keys_to_lowercase()
         self.add_hidden_menu_items()
