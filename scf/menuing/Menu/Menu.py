@@ -92,20 +92,16 @@ class Menu(MenuObject):
 
     def change_key_to_value(self, user_input):
         if self.user_requests_default_value(user_input):
-            if self.allow_argument_range:
-                return [self.default_value]
-            else:
-                return self.default_value
+            return self.conditionally_enclose_in_list(self.default_value)
         elif not user_input:
             return
         elif user_input in self.all_keys:
-            value = user_input
             return user_input
         elif 'score'.startswith(user_input):
             return user_input
         elif 'studio'.startswith(user_input):
             return user_input
-        elif self.allow_argument_range and self.is_argument_range_string(user_input):
+        elif self.user_requests_argument_range(user_input):
             for section in self.sections:
                 if section.menu_values:
                     break
@@ -174,6 +170,12 @@ class Menu(MenuObject):
         #return key, value
         #return value, value
         return value
+
+    def conditionally_enclose_in_list(self, expr):
+        if self.allow_argument_range:
+            return [expr]
+        else:
+            return expr
 
     def make_menu_lines_keys_and_values(self):
         self.menu_lines, self.all_keys, self.all_bodies = [], [], []
@@ -255,6 +257,12 @@ class Menu(MenuObject):
         else:
             key = user_response
         return key
+
+    def user_requests_argument_range(self, user_input):
+        if self.allow_argument_range:
+            if self.is_argument_range_string(user_input):
+                return True
+        return False
 
     def user_requests_default_value(self, user_input):
         if self.has_default:
