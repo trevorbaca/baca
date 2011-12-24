@@ -249,7 +249,7 @@ class Studio(SCFObject):
             shell=True, stdout=subprocess.PIPE)
         lines = [line.strip() for line in proc.stdout.readlines()]
         if lines:
-            self.display_lines(lines)
+            self.conditionally_display_lines(lines)
         if prompt_proceed:
             self.proceed()
 

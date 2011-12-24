@@ -151,7 +151,7 @@ class Menu(MenuObject):
         self.make_menu_lines_keys_and_values()
         self.change_all_keys_to_lowercase()
         self.add_hidden_menu_items()
-        self.display_lines(self.menu_lines)
+        self.conditionally_display_lines(self.menu_lines)
         user_response = self.handle_raw_input_with_default('SCF', default=self.prompt_default)
         user_input = self.split_multipart_user_response(user_response)
         user_input = iotools.strip_diacritics_from_binary_string(user_input)

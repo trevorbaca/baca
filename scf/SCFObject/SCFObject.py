@@ -87,14 +87,14 @@ class SCFObject(object):
     def confirm(self):
         response = self.handle_raw_input('ok?', include_chevron=False)
         if not response.lower() == 'y':
-            self.display_cap_lines([''])
+            self.conditionally_display_cap_lines([''])
             return False
         return True
 
-    def display_cap_lines(self, lines):
-        self.display_lines(lines, capitalize_first_character=True)
+    def conditionally_display_cap_lines(self, lines):
+        self.conditionally_display_lines(lines, capitalize_first_character=True)
         
-    def display_lines(self, lines, capitalize_first_character=False):
+    def conditionally_display_lines(self, lines, capitalize_first_character=False):
         assert isinstance(lines, list)
         if not self.session.hide_next_redraw:
             if capitalize_first_character:
@@ -279,7 +279,7 @@ class SCFObject(object):
         lines = []
         lines.append('not yet implemented.')
         lines.append('')
-        self.display_cap_lines(lines)
+        self.conditionally_display_cap_lines(lines)
         self.proceed()
         return True, None
 
