@@ -102,27 +102,29 @@ class Menu(MenuObject):
         elif 'studio'.startswith(user_input):
             return user_input
         elif self.user_requests_argument_range(user_input):
-            for section in self.sections:
-                if section.menu_values:
-                    break
-            else:
-                raise ValueError('no section contains numbered menu entries.')
-            item_numbers = self.argument_range_string_to_numbers(user_input, section.menu_values)
-            if item_numbers is None:
-                return []
-            item_indices = [item_number - 1 for item_number in item_numbers]
-            for section in self.sections:
-                if section.menu_values:
-                    result = []
-                    for i in item_indices:
-                        item = section.menu_values[i]
-                        result.append(item)
-                    return result
+            return self.handle_argument_range_user_input(user_input)
         elif mathtools.is_integer_equivalent_expr(user_input):
             return self.handle_integer_user_input(user_input)
-
         else:
             return self.match_user_input_against_menu_entry_bodies(user_input)
+
+    def handle_argument_range_user_input(self, user_input):
+        for section in self.sections:
+            if section.menu_values:
+                break
+        else:
+            raise ValueError('no section contains numbered menu entries.')
+        item_numbers = self.argument_range_string_to_numbers(user_input, section.menu_values)
+        if item_numbers is None:
+            return []
+        item_indices = [item_number - 1 for item_number in item_numbers]
+        for section in self.sections:
+            if section.menu_values:
+                result = []
+                for i in item_indices:
+                    item = section.menu_values[i]
+                    result.append(item)
+                return result
 
     def handle_integer_user_input(self, user_input):
         entry_number = int(user_input)
