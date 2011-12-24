@@ -119,19 +119,23 @@ class Menu(MenuObject):
                         result.append(item)
                     return result
         elif mathtools.is_integer_equivalent_expr(user_input):
-            entry_number = int(user_input)
-            for section in self.sections:
-                if section.number_menu_entries:
-                    if entry_number <= len(section.menu_entry_tuples):
-                        entry_index = entry_number - 1
-                        key, body = section.menu_entry_tuples[entry_index]
-                        if key:
-                            value = key
-                        else:
-                            value = user_input
-                        return self.conditionally_enclose_in_list(value)
+            return self.handle_integer_user_input(user_input)
+
         else:
             return self.match_user_input_against_menu_entry_bodies(user_input)
+
+    def handle_integer_user_input(self, user_input):
+        entry_number = int(user_input)
+        for section in self.sections:
+            if section.number_menu_entries:
+                if entry_number <= len(section.menu_entry_tuples):
+                    entry_index = entry_number - 1
+                    key, body = section.menu_entry_tuples[entry_index]
+                    if key:
+                        value = key
+                    else:
+                        value = user_input
+                    return self.conditionally_enclose_in_list(value)
 
     def strip_default_indicators_from_strings(self, expr):
         if isinstance(expr, list):
