@@ -90,7 +90,7 @@ class Menu(MenuObject):
     def change_all_keys_to_lowercase(self):
         self.all_keys = [key.lower() for key in self.all_keys]
 
-    def change_key_to_value(self, user_input):
+    def change_user_input_to_directive(self, user_input):
         if self.user_requests_default_value(user_input):
             return self.conditionally_enclose_in_list(self.default_value)
         elif not user_input:
@@ -129,25 +129,22 @@ class Menu(MenuObject):
                             value = key
                         else:
                             value = user_input
-                        if self.allow_argument_range:
-                            return [value]
-                        else:
-                            return value
+                        return self.conditionally_enclose_in_list(value)
         else:
             return self.match_user_input_against_menu_entry_bodies(user_input)
 
-    def clean_value(self, value):
-        if isinstance(value, list):
+    def strip_default_indicators_from_strings(self, expr):
+        if isinstance(expr, list):
             cleaned_list = []
-            for element in value:
+            for element in expr:
                 if element.endswith(' (default)'):
                     element = element.replace(' (default)', '')
                 cleaned_list.append(element)
             return cleaned_list
-        elif value is not None:
-            if value.endswith(' (default)'):
-                value = value.replace(' (default)', '')
-            return value
+        elif expr is not None:
+            if expr.endswith(' (default)'):
+                expr = expr.replace(' (default)', '')
+            return expr
 
     def conditionally_display_menu(self):
         if not self.session.hide_next_redraw:
@@ -158,18 +155,13 @@ class Menu(MenuObject):
         if not self.session.hide_next_redraw:
             self.display_lines(self.menu_lines)
         user_response = self.handle_raw_input_with_default('SCF', default=self.prompt_default)
-        key = self.split_multipart_user_response(user_response)
-        key = iotools.strip_diacritics_from_binary_string(key)
-        key = key.lower()
-        #print 'BAR', repr(user_response), repr(key), '||', repr(self.session.user_input)
-        value = self.change_key_to_value(key)
-        #print 'ZEE', repr(key), repr(value)
-        value = self.clean_value(value)
-        #print 'ZZZ', repr(key), repr(value)
+        user_input = self.split_multipart_user_response(user_response)
+        user_input = iotools.strip_diacritics_from_binary_string(user_input)
+        user_input = user_input.lower()
+        directive = self.change_user_input_to_directive(user_input)
+        directive = self.strip_default_indicators_from_strings(directive)
         self.session.hide_next_redraw = False
-        #return key, value
-        #return value, value
-        return value
+        return directive
 
     def conditionally_enclose_in_list(self, expr):
         if self.allow_argument_range:
@@ -215,10 +207,7 @@ class Menu(MenuObject):
                         value = key
                     else:
                         value = body
-                    if self.allow_argument_range:
-                        return [value]
-                    else:
-                        return value
+                    return self.conditionally_enclose_in_list(value)
                         
     def run(self):
         should_clear_terminal, hide_menu = True, False
