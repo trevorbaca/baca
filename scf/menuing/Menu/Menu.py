@@ -91,8 +91,7 @@ class Menu(MenuObject):
         self.all_keys = [key.lower() for key in self.all_keys]
 
     def change_key_to_value(self, user_input):
-        from abjad.tools import sequencetools
-        if (user_input == '' or self.key_is_default(user_input)) and self.has_default:
+        if self.user_requests_default_value(user_input):
             if self.allow_argument_range:
                 return [self.default_value]
             else:
@@ -176,12 +175,6 @@ class Menu(MenuObject):
         #return value, value
         return value
 
-    def key_is_default(self, key):
-        if 3 <= len(key):
-            if 'default'.startswith(key):
-                return True
-        return False
-
     def make_menu_lines_keys_and_values(self):
         self.menu_lines, self.all_keys, self.all_bodies = [], [], []
         self.menu_lines.extend(self.make_menu_title_lines())
@@ -262,3 +255,11 @@ class Menu(MenuObject):
         else:
             key = user_response
         return key
+
+    def user_requests_default_value(self, user_input):
+        if self.has_default:
+            if user_input == '':
+                return True
+            elif 3 <= len(user_input) and 'default'.startswith(user_input):
+                return True
+        return False
