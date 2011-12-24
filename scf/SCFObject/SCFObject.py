@@ -96,14 +96,15 @@ class SCFObject(object):
         
     def display_lines(self, lines, capitalize_first_character=False):
         assert isinstance(lines, list)
-        if capitalize_first_character:
-            lines = [iotools.capitalize_string_start(line) for line in lines]
-        if lines:
-            if self.session.transcribe_next_command:
-                self.session.complete_transcript.append_lines(lines)
-        if self.session.is_displayable:
-            for line in lines:
-                print line
+        if not self.session.hide_next_redraw:
+            if capitalize_first_character:
+                lines = [iotools.capitalize_string_start(line) for line in lines]
+            if lines:
+                if self.session.transcribe_next_command:
+                    self.session.complete_transcript.append_lines(lines)
+            if self.session.is_displayable:
+                for line in lines:
+                    print line
 
     def edit_source_file(self):
         command = 'vi {}'.format(self.source_file_name)
