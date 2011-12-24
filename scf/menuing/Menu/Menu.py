@@ -161,6 +161,7 @@ class Menu(MenuObject):
         directive = self.change_user_input_to_directive(user_input)
         directive = self.strip_default_indicators_from_strings(directive)
         self.session.hide_next_redraw = False
+        directive = self.handle_hidden_key(directive)
         return directive
 
     def conditionally_enclose_in_list(self, expr):
@@ -214,15 +215,14 @@ class Menu(MenuObject):
         while True:
             self.should_clear_terminal, self.hide_menu = should_clear_terminal, hide_menu
             should_clear_terminal, hide_menu = False, True
-            key = self.conditionally_display_menu()
-            key = self.handle_hidden_key(key)
+            result = self.conditionally_display_menu()
             if self.session.is_complete:
                 break
-            elif key == 'redraw':
+            elif result == 'redraw':
                 should_clear_terminal, hide_menu = True, False
             else:
                 break
-        return key
+        return result
 
     def split_multipart_user_response(self, user_response):
         self.session.transcribe_next_command = True
