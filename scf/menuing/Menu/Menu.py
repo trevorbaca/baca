@@ -213,8 +213,8 @@ class Menu(MenuObject):
         should_clear_terminal, hide_menu = True, False
         while True:
             self.should_clear_terminal, self.hide_menu = should_clear_terminal, hide_menu
-            key = self.conditionally_display_menu()
             should_clear_terminal, hide_menu = False, True
+            key = self.conditionally_display_menu()
             key = self.handle_hidden_key(key)
             if self.session.is_complete:
                 break
