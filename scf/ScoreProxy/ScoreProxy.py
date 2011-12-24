@@ -310,7 +310,7 @@ class ScoreProxy(PackageProxy):
                 continue
             elif self.backtrack():
                 break
-            elif key is None:
+            elif not key:
                 self.breadcrumbs.pop()
                 continue
             self.handle_main_menu_response(key)

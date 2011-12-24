@@ -207,7 +207,7 @@ class Studio(SCFObject):
                 self.session.is_backtracking_to_score = False
                 self.breadcrumbs.pop()
                 continue
-            elif key is None:
+            elif not key:
                 self.breadcrumbs.pop()
                 continue
             self.handle_main_menu_response(key)

@@ -147,10 +147,8 @@ class InstrumentationEditor(InteractiveEditor):
             if self.backtrack():
                 self.breadcrumbs.pop()
                 return
-            #if key is None:
             elif not key:
                 continue
             else:
                 self.breadcrumbs.pop()
-                #return value
                 return key

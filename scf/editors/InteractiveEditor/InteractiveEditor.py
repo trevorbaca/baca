@@ -80,7 +80,6 @@ class InteractiveEditor(SCFObject):
             key = menu.run()
             if self.backtrack():
                 break
-            #elif key is None:
             elif not key:
                 self.breadcrumbs.pop()
                 continue

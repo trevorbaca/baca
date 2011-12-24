@@ -222,7 +222,6 @@ class Menu(MenuObject):
                 should_clear_terminal, hide_menu = True, False
             else:
                 break
-        #return key, key
         return key
 
     def split_multipart_user_response(self, user_response):

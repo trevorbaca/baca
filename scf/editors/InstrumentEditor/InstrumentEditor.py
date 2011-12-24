@@ -89,12 +89,10 @@ class InstrumentEditor(InteractiveEditor):
             if self.backtrack():
                 self.breadcrumbs.pop()
                 return
-            #elif key is None:
             elif not key:
                 continue
             else:
                 self.breadcrumbs.pop()
-                #return value
                 return key
         
     def handle_main_menu_response(self, key):
@@ -161,13 +159,11 @@ class InstrumentEditor(InteractiveEditor):
             if self.backtrack():
                 self.breadcrumbs.pop()
                 return    
-            #elif key is None:
             elif not key:
                 continue
             else:
                 self.breadcrumbs.pop()
                 break
-        #instrument_names = value
         instrument_names = key
         result = []
         for instrument_name in instrument_names:

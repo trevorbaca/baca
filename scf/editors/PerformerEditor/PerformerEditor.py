@@ -172,7 +172,6 @@ class PerformerEditor(InteractiveEditor):
             if self.backtrack():
                 self.breadcrumbs.pop()
                 return
-            #elif key is None:
             elif not key:
                 continue
             #elif self.is_argument_range_string(key):
