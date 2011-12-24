@@ -141,11 +141,6 @@ class Menu(MenuObject):
         else:
             return self.match_user_input_against_menu_entry_bodies(user_input)
 
-    def change_value_to_key(self, value):
-        if value:
-            pair_dictionary = dict(zip(self.all_bodies, self.all_keys))
-            return pair_dictionary.get(value)
-
     def clean_value(self, value):
         if isinstance(value, list):
             cleaned_list = []
