@@ -75,7 +75,7 @@ class MakerProxy(PackageProxy):
             initializer = os.path.join(os.environ.get('BACA'), 'materials', '__init__.py')        
         return initializer
 
-    def handle_main_menu_response(self, key):
+    def handle_main_menu_result(self, key):
         if key == 'b':
             return 'back'
         elif key == 'del':
@@ -112,7 +112,7 @@ class MakerProxy(PackageProxy):
             if self.session.is_complete:
                 result = True
                 break
-            tmp = self.handle_main_menu_response(key)
+            tmp = self.handle_main_menu_result(key)
 #            if tmp == 'back':
 #                break
 #            elif tmp == True:

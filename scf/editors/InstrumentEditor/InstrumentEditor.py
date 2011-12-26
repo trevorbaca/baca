@@ -85,36 +85,36 @@ class InstrumentEditor(InteractiveEditor):
             menu.should_clear_terminal = False
             section.menu_entry_tuples = [('', x) for x in instrumenttools.UntunedPercussion.known_untuned_percussion]
             section.number_menu_entries = True
-            key = menu.run()
+            result = menu.run()
             if self.backtrack():
                 self.breadcrumbs.pop()
                 return
-            elif not key:
+            elif not result:
                 continue
             else:
                 self.breadcrumbs.pop()
-                return key
+                return result
         
-    def handle_main_menu_response(self, key):
-        if key == 'cl':
+    def handle_main_menu_result(self, result):
+        if result == 'cl':
             self.print_not_implemented()
             #self.edit_clefs_interactively()
-        elif key == 'in':
+        elif result == 'in':
             self.edit_instrument_name_interactively()
-        elif key == 'inm':
+        elif result == 'inm':
             self.edit_instrument_name_markup_interactively()
-        elif key == 'pr':
+        elif result == 'pr':
             self.edit_pitch_range_interactively()
-        elif key == 'sin':
+        elif result == 'sin':
             self.edit_short_instrument_name_interactively()
-        elif key == 'sinm':
+        elif result == 'sinm':
             self.edit_short_instrument_name_markup_interactively()
-        elif key == 'tprd':
+        elif result == 'tprd':
             if self.session.display_pitch_ranges_with_numbered_pitches:
                 self.session.display_pitch_ranges_with_numbered_pitches = False
             else:
                 self.session.display_pitch_ranges_with_numbered_pitches = True
-        elif key == 'trans':
+        elif result == 'trans':
             self.print_not_implemented()
             #self.edit_transposition_interactively()
 
@@ -155,17 +155,17 @@ class InstrumentEditor(InteractiveEditor):
         section.menu_entry_tuples = [('', x) for x in instrumenttools.list_instrument_names()]
         section.number_menu_entries = True
         while True:
-            key = menu.run()
+            result = menu.run()
             if self.backtrack():
                 self.breadcrumbs.pop()
                 return    
-            elif not key:
+            elif not result:
                 continue
             else:
                 self.breadcrumbs.pop()
                 break
-        instrument_names = key
-        result = []
+        instrument_names = result
+        this_result = []
         for instrument_name in instrument_names:
             instrument_name = instrument_name.title()
             instrument_name = instrument_name.replace(' ', '')
@@ -177,5 +177,5 @@ class InstrumentEditor(InteractiveEditor):
                 if self.backtrack():
                     continue
                 instrument.instrument_name = instrument_name
-            result.append(instrument)
-        return result
+            this_result.append(instrument)
+        return this_result

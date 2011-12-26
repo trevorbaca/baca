@@ -75,19 +75,19 @@ class PerformerEditor(InteractiveEditor):
             return
         self.target.name = result
 
-    def handle_main_menu_response(self, key):
-        if not isinstance(key, str):
-            raise TypeError('key must be string.')
-        if key == 'add':
+    def handle_main_menu_result(self, result):
+        if not isinstance(result, str):
+            raise TypeError('result must be string.')
+        if result == 'add':
             self.add_instruments_interactively()
-        elif key == 'del':
+        elif result == 'del':
             self.delete_instruments_interactively()
-        elif key == 'mv':
+        elif result == 'mv':
             self.move_instrument_interactively()
-        elif key in ('name', 'ren'):
+        elif result in ('name', 'ren'):
             self.edit_name_interactively()
         else:
-            self.edit_instrument_interactively(key)
+            self.edit_instrument_interactively(result)
 
     def edit_instrument_interactively(self, instrument_number):
         try:
@@ -168,24 +168,23 @@ class PerformerEditor(InteractiveEditor):
         self.breadcrumbs.append(self.target.name)
         menu = self.set_initial_configuration_menu()
         while True:
-            key = menu.run()
+            result = menu.run()
             if self.backtrack():
                 self.breadcrumbs.pop()
                 return
-            elif not key:
+            elif not result:
                 continue
-            #elif self.is_argument_range_string(key):
-            if isinstance(key, list):
-                assert isinstance(key, list)
-                for instrument_name in key:
+            if isinstance(result, list):
+                assert isinstance(result, list)
+                for instrument_name in result:
                     instrument_class = instrumenttools.default_instrument_name_to_instrument_class(
                         instrument_name)
                     instrument = instrument_class()
                     self.target.instruments.append(instrument)
                 break
-            elif key == 'none':
+            elif result == 'none':
                 break
-            elif key == 'other':
+            elif result == 'other':
                 editor = self.InstrumentEditor(session=self.session)
                 instruments = editor.select_instruments_from_instrumenttools_interactively()
                 if instruments is not None:

@@ -103,16 +103,18 @@ class MenuSection(MenuObject):
     ### PUBLIC METHODS ###
 
     def make_menu_lines(self, all_keys, all_bodies):
-        '''KEYS are those things to be ultimately returned a menu by which
-        calling code will be able uniquely to execute a resultant action;
-        keys will also be those things optionally shown in parentheses in each entry;
-        keys are designed to be textual (as opposed to numeric);
+        '''Terms.
+
+        KEYS. Keys are optionally shown in parentheses in each entry;
+        keys are designed to be textual instead of numeric;
         not every entry need have a key because entries may be numbered instead of keyed;
         note that entries may be both numbered and keyed.
 
-        BODIES are those things shown in each entry;
+        BODIES. Bodies are those things shown in each entry;
         values are mandatory and every entry must be supplied with a value.
         Display strings will be retired.
+
+        RESULT. Result is the thing ultimately returned by Menu.run().
 
         Match determination:
         1. Numeric user input checked against numbered entries.

@@ -52,7 +52,7 @@ class MaterialWrangler(PackageWrangler, PackageProxy):
         else:
             return self.StaticMaterialProxy(package_importable_name)
 
-    def handle_main_menu_response(self, key):
+    def handle_main_menu_result(self, key):
         if key == 'b':
             return 'back'
         elif key == 'i':
@@ -100,7 +100,7 @@ class MaterialWrangler(PackageWrangler, PackageProxy):
             if self.session.is_complete:
                 result = True
                 break
-            tmp = self.handle_main_menu_response(key)
+            tmp = self.handle_main_menu_result(key)
 #            if tmp == 'back':
 #                break
 #            elif tmp == True:

@@ -157,7 +157,7 @@ class MakerWrangler(PackageWrangler, PackageProxy):
         stylesheet_file_pointer.write(stylesheet.format)
         stylesheet_file_pointer.close()
         
-    def handle_main_menu_response(self, key):
+    def handle_main_menu_result(self, key):
         if key == 'b':
             return 'back'
         elif key == 'new':
@@ -186,7 +186,7 @@ class MakerWrangler(PackageWrangler, PackageProxy):
             if self.session.is_complete:
                 result = True
                 break
-            tmp = self.handle_main_menu_response(key)
+            tmp = self.handle_main_menu_result(key)
 #            if tmp == 'back':
 #                break
 #            elif tmp == True:

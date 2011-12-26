@@ -93,17 +93,17 @@ class InstrumentationEditor(InteractiveEditor):
             performer = None
         return performer
 
-    def handle_main_menu_response(self, key):
-        if not isinstance(key, str):
-            raise TypeError('key must be string.')
-        if key == 'add':
+    def handle_main_menu_result(self, result):
+        if not isinstance(result, str):
+            raise TypeError('result must be string.')
+        if result == 'add':
             self.add_performers_interactively()
-        elif key == 'del':
+        elif result == 'del':
             self.delete_performers_interactively()
-        elif key == 'mv':
+        elif result == 'mv':
             self.move_performer_interactively()
         else:
-            self.edit_performer_interactively(key)
+            self.edit_performer_interactively(result)
 
     def make_main_menu(self):
         menu, section = self.make_new_menu(where=self.where())
@@ -143,12 +143,12 @@ class InstrumentationEditor(InteractiveEditor):
         section.menu_entry_tuples = [('', x) for x in performer_names]
         section.number_menu_entries = True
         while True:
-            key = menu.run()
+            result = menu.run()
             if self.backtrack():
                 self.breadcrumbs.pop()
                 return
-            elif not key:
+            elif not result:
                 continue
             else:
                 self.breadcrumbs.pop()
-                return key
+                return result

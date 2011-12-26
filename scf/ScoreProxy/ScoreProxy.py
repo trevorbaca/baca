@@ -188,26 +188,26 @@ class ScoreProxy(PackageProxy):
             initializer.write(''.join(lines))
             initializer.close()
 
-    def handle_main_menu_response(self, key):
-        if key == 'ch':
+    def handle_main_menu_result(self, result):
+        if result == 'ch':
             self.chunk_wrangler.create_chunk_interactively()
-        elif key == 'ft':
+        elif result == 'ft':
             self.edit_forces_tagline_interactively()
-        elif key == 'mi':
+        elif result == 'mi':
             self.material_wrangler.create_interactive_material_interactively()
-        elif key == 'ms':
+        elif result == 'ms':
             self.material_wrangler.create_static_material_package_interactively()
-        elif key == 'pf':
+        elif result == 'pf':
             self.edit_instrumentation_specifier_interactively()
-        elif key == 'svn':
+        elif result == 'svn':
             self.manage_svn()
-        elif key == 'tags':
+        elif result == 'tags':
             self.manage_tags()
-        elif key == 'tl':
+        elif result == 'tl':
             self.edit_title_interactively()
-        elif key == 'yr':
+        elif result == 'yr':
             self.edit_year_of_completion_interactively()
-        elif key.startswith('h'):
+        elif result.startswith('h'):
             chunk_spaced_name = value
             chunk_underscored_name = chunk_spaced_name.replace(' ', '_')
             package_importable_name = '{}.{}'.format(
@@ -215,7 +215,7 @@ class ScoreProxy(PackageProxy):
             chunk_proxy = self.chunk_wrangler.ChunkProxy(package_importable_name)
             chunk_proxy.title = self.title
             chunk_proxy.run()
-        elif key.startswith('m'):
+        elif result.startswith('m'):
             material_underscored_name = value
             package_importable_name = '{}.{}'.format(
                 self.material_wrangler.package_importable_name, material_underscored_name)
@@ -224,15 +224,15 @@ class ScoreProxy(PackageProxy):
         else:
             raise ValueError
 
-    def handle_svn_response(self, key):
-        if key == 'b':
+    def handle_svn_menu_result(self, result):
+        if result == 'b':
             return True
-        elif key == 'add':
+        elif result == 'add':
             self.svn_add()
-        elif key == 'ci':
+        elif result == 'ci':
             self.svn_ci()
             return True
-        elif key == 'st':
+        elif result == 'st':
             self.svn_st()
 
     def make_main_menu(self):
@@ -273,10 +273,10 @@ class ScoreProxy(PackageProxy):
         self.breadcrumbs.append('repository commands')
         while True:
             menu = self.make_svn_menu()
-            key = menu.run()
+            result = menu.run()
             if self.backtrack():
                 break
-            self.handle_svn_response(key)
+            self.handle_svn_menu_result(result)
             if self.backtrack():
                 break
         self.breadcrumbs.pop()
@@ -303,17 +303,17 @@ class ScoreProxy(PackageProxy):
             else:
                 self.breadcrumbs.append(self.title)
             menu = self.make_main_menu()
-            key = menu.run()
+            result = menu.run()
             if self.session.is_backtracking_to_score:
                 self.session.is_backtracking_to_score = False
                 self.breadcrumbs.pop() 
                 continue
             elif self.backtrack():
                 break
-            elif not key:
+            elif not result:
                 self.breadcrumbs.pop()
                 continue
-            self.handle_main_menu_response(key)
+            self.handle_main_menu_result(result)
             if self.session.is_backtracking_to_score:
                 self.session.is_backtracking_to_score = False
                 self.breadcrumbs.pop()
