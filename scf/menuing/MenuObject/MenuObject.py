@@ -10,7 +10,6 @@ class MenuObject(SCFObject):
     def __init__(self, session=None, where=None):
         SCFObject.__init__(self, session=session)
         self._hidden_items = []
-        self.indent_level = 1
         self.prompt_default = None
         self.should_clear_terminal = False
         self.where = where
@@ -37,15 +36,6 @@ class MenuObject(SCFObject):
     @property
     def hidden_items(self):
         return self._hidden_items
-
-    @apply
-    def indent_level():
-        def fget(self):
-            return self._indent_level
-        def fset(self, indent_level):
-            assert isinstance(indent_level, int)
-            self._indent_level = indent_level
-        return property(**locals())
 
     @apply
     def prompt_default():
@@ -159,7 +149,7 @@ class MenuObject(SCFObject):
         hidden_items.sort()
         menu_lines = []
         for key, value in hidden_items:
-            menu_line = self.make_tab(self.indent_level) + ' '
+            menu_line = self.make_tab(1) + ' '
             menu_line += '{} ({})'.format(value, key)
             menu_lines.append(menu_line)
         menu_lines.append('')

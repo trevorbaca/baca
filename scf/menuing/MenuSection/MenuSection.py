@@ -6,10 +6,10 @@ class MenuSection(MenuObject):
 
     def __init__(self, session=None, where=None):
         MenuObject.__init__(self, session=session, where=where)
+        self._indent_level = 1
         self.default_index = None
         self.display_keys = True
         self.entry_prefix = None
-        #self.items_to_number = None
         self.menu_entry_tuples = None
         self.number_menu_entries = False
         self.section_title = None
@@ -52,16 +52,9 @@ class MenuSection(MenuObject):
     def has_default(self):
         return self.default_index is not None
 
-#    @apply
-#    def items_to_number():
-#        def fget(self):
-#            return self._items_to_number
-#        def fset(self, items_to_number):
-#            if items_to_number is None:
-#                self._items_to_number = []
-#            else:
-#                self._items_to_number = list(items_to_number)
-#        return property(**locals())
+    @property
+    def indent_level(self):
+        return self._indent_level
 
     @apply
     def menu_entry_tuples():
@@ -78,8 +71,6 @@ class MenuSection(MenuObject):
     def menu_values(self):
         if self.number_menu_entries:
             return [x[1] for x in self.menu_entry_tuples]
-#        elif self.items_to_number:
-#            return self.items_to_number[:]
 
     @apply
     def number_menu_entries():
@@ -101,17 +92,15 @@ class MenuSection(MenuObject):
 
     ### PUBLIC METHODS ###
 
-    #def make_menu_lines(self, all_keys, all_bodies, all_display_strings):
     def make_menu_lines(self, all_keys, all_bodies):
-        '''Display strings will be retired during migration.
-        After migration the meaning of keys and values will be as follows.
-        KEYS will be those things to be ultimately returned a menu by which
+        '''KEYS are those things to be ultimately returned a menu by which
         calling code will be able uniquely to execute a resultant action;
         keys will also be those things optionally shown in parentheses in each entry;
         keys are designed to be textual (as opposed to numeric);
         not every entry need have a key because entries may be numbered instead of keyed;
         note that entries may be both numbered and keyed.
-        BODIES will be those things shown in each entry;
+
+        BODIES are those things shown in each entry;
         values are mandatory and every entry must be supplied with a value.
         Display strings will be retired.
 
@@ -127,24 +116,6 @@ class MenuSection(MenuObject):
         '''
         menu_lines = []
         menu_lines.extend(self.make_section_title_lines())
-#        for i, value in enumerate(self.items_to_number):
-#            if isinstance(value, tuple):
-#                assert len(value) == 2
-#                display_string, return_value = value
-#            else:
-#                display_string = return_value = value
-#            key = str(i + 1)
-#            menu_line = self.make_tab(self.indent_level) + ' '
-#            prefix = self.entry_prefix
-#            if prefix is not None:
-#                key = prefix + key
-#            menu_line += '{}: {}'.format(key, display_string)
-#            menu_lines.append(menu_line)
-#            all_keys.append(key)
-#            all_bodies.append(return_value)
-#            all_display_strings.append(display_string)
-#        if self.items_to_number:
-#            menu_lines.append('')
         assert all([isinstance(x, tuple) and len(x) == 2 for x in self.menu_entry_tuples])
         for entry_index, menu_entry_tuple in enumerate(self.menu_entry_tuples):
             key, body = menu_entry_tuple
@@ -152,9 +123,6 @@ class MenuSection(MenuObject):
             if self.number_menu_entries:
                 entry_number = entry_index + 1
                 menu_line += '{}: '.format(str(entry_number))
-                #all_keys.append(str(entry_number))
-                #all_bodies.append(body)
-                #all_display_strings.append(None)
             if key and self.display_keys:
                 menu_line += '{} ({})'.format(body, key)
             else:
@@ -162,9 +130,6 @@ class MenuSection(MenuObject):
             menu_lines.append(menu_line)
             all_keys.append(key)
             all_bodies.append(body)
-            #all_display_strings.append(None)
-        #print 'all_keys', all_keys
-        #print 'all_bodies', all_bodies
         if self.menu_entry_tuples:
             menu_lines.append('')
         return menu_lines
