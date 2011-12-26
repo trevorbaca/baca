@@ -183,7 +183,8 @@ class Menu(MenuObject):
                         value = body
                     return self.conditionally_enclose_in_list(value)
                         
-    def run(self):
+    def run(self, user_input=None):
+        self.assign_user_input(user_input)
         should_clear_terminal, hide_menu = True, False
         while True:
             self.should_clear_terminal, self.hide_menu = should_clear_terminal, hide_menu

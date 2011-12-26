@@ -175,8 +175,7 @@ class Studio(SCFObject):
 
     def run(self, user_input=None):
         self.session = None
-        if user_input is not None:
-            self.session.user_input = user_input
+        self.assign_user_input(user_input)
         self.breadcrumbs.append('studio')
         run_main_menu = True
         while True:

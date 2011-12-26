@@ -2,18 +2,16 @@ TODO
 
 1. Make sure ImportantObject.run() always returns only none; not the case for Menu.run().
 
-2. Make sure Object.run() methods always accept optional user input.
+2. Make sure 'self.handle_main_menu_result' always returns only none.
 
-3. Implement SCFObject.assign_user_input() method to come at head of Object.run() implementations.
+3. Try to put 'self.breadcrumbs.append()' inside each Object.run() main loop.
 
-4. Make sure 'self.handle_main_menu_result' always returns only none.
+4. Change 'Be\xnnrung' to Unicode in tags menu.
 
-5. Change 'Be\xnnrung' to Unicode in tags menu.
+5. Implement unique instrument abbreviations.
 
-6. Implement unique instrument abbreviations.
+6. Edit instrument transposition.
 
-7. Edit instrument transposition.
+7. Edit instrument clefs.
 
-8. Edit instrument clefs.
-
-9. Add C4-style named chromatic pitch initialization.
+8. Add C4-style named chromatic pitch initialization.

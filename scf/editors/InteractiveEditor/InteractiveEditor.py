@@ -65,8 +65,7 @@ class InteractiveEditor(SCFObject):
         pass
 
     def run(self, user_input=None):
-        if user_input is not None:
-            self.session.user_input = user_input
+        self.assign_user_input(user_input)
         self.breadcrumbs.append(self.breadcrumb)
         self.session.backtrack_preservation_is_active = True
         self.conditionally_initialize_target()

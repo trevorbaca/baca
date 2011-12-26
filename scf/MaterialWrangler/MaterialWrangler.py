@@ -92,8 +92,7 @@ class MaterialWrangler(PackageWrangler, PackageProxy):
         return menu
 
     def run(self, user_input=None):
-        if user_input is not None:
-            self.session.user_input = user_input
+        self.assign_user_input(user_input)
         while True:
             self.breadcrumbs.append('materials')
             menu = self.make_main_menu()

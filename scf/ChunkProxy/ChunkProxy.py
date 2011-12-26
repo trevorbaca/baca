@@ -53,26 +53,21 @@ class ChunkProxy(PackageProxy):
         section.menu_entry_tuples.append(('d', 'delete'))
         return menu
 
-    def run(self):
-        result = False
-        self.breadcrumbs.append(self.chunk_name)
+    def run(self, user_input=None):
+        self.assign_user_input(user_input)
         while True:
+            self.breadcrumbs.append(self.chunk_name)
             menu = self.make_main_menu()
             result = menu.run()
-            if self.session.is_complete:
-                result = True
+            if self.backtrack():
                 break
-            tmp = self.handle_main_menu_result(result)
-#            if tmp == 'back':
-#                break
-#            elif tmp == True:
-#                result = True
-#                break
-#            elif tmp == False:
-#                pass
-#            else:
-#                raise ValueError
-            # TODO: backtrack here
+            elif not result:
+                self.breadcrumbs.pop()
+                continue
+            self.handle_main_menu_result(result)
+            if self.backtrack():
+                break
+            self.breadcrumbs.pop()
         self.breadcrumbs.pop()
 
     def set_chunk_spaced_name_interactively(self):
