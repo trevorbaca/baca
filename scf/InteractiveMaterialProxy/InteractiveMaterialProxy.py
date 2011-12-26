@@ -86,7 +86,8 @@ class InteractiveMaterialProxy(MaterialProxy):
             result = menu.run()
             if result == 'b':
                 self.interactively_check_and_save_material(self.user_input_wrapper)
-                return result, None
+                #return result, None
+                # TODO: return none
             elif result == 'c':
                 self.clear_values(self.user_input_wrapper)
             elif result == 'd':
@@ -97,7 +98,8 @@ class InteractiveMaterialProxy(MaterialProxy):
                 self.set_purview_interactively()
             elif result == 'm':
                 self.save_material(self.user_input_wrapper)
-                return result, None
+                #return result, None
+                # TODO: return none if possible
             elif result == 'n':
                 self.name_material()
             elif result == 'nc':

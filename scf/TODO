@@ -1,8 +1,8 @@
 TODO
 
-1. Make sure ImportantObject.run() always returns only none; not the case for Menu.run().
+1. Try to put 'self.breadcrumbs.append()' inside each Object.run() main loop.
 
-2. Try to put 'self.breadcrumbs.append()' inside each Object.run() main loop.
+2. Implement main menu breadcrumb as read-only class attribute.
 
 3. Change 'Be\xnnrung' to Unicode in tags menu.
 

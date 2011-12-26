@@ -419,7 +419,8 @@ class MaterialProxy(PackageProxy):
             section.menu_entry_tuples.append(('z', 'regenerate'))
             result = menu.run()
             if result == 'b':
-                return result, None
+                #return result, None
+                return
             elif result == 'd':
                 self.delete_material()
                 break
