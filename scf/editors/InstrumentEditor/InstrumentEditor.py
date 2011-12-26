@@ -129,7 +129,7 @@ class InstrumentEditor(InteractiveEditor):
             pitch_range_repr = self.target.pitch_range.one_line_named_chromatic_pitch_repr
         line = 'range: {}'.format(pitch_range_repr)
         section.menu_entry_tuples.append(('pr', line))
-        menu.hidden_items.append(('tprd', 'toggle pitch range display'))
+        menu.hidden_entries.append(('tprd', 'toggle pitch range display'))
         clefs = [clef.clef_name for clef in self.target.all_clefs]
         clefs = ', '.join(clefs)
         line = 'clefs: {}'.format(clefs)

@@ -9,7 +9,7 @@ class MenuObject(SCFObject):
 
     def __init__(self, session=None, where=None):
         SCFObject.__init__(self, session=session)
-        self._hidden_items = []
+        self._hidden_entries = []
         self.prompt_default = None
         self.should_clear_terminal = False
         self.where = where
@@ -17,25 +17,25 @@ class MenuObject(SCFObject):
     ### PUBLIC ATTRIBUTES ###
 
     @property
-    def default_hidden_items(self):
-        default_hidden_items = []
-        default_hidden_items.append(('b', 'back'))
-        default_hidden_items.append(('grep', 'grep baca directories'))
-        default_hidden_items.append(('here', 'edit client source'))
-        default_hidden_items.append(('hidden', 'show hidden items'))
-        default_hidden_items.append(('q', 'quit'))
-        default_hidden_items.append(('redraw', 'redraw'))
-        default_hidden_items.append(('exec', 'exec statement'))
-        default_hidden_items.append(('next', 'next score'))
-        default_hidden_items.append(('prev', 'prev score'))
-        default_hidden_items.append(('score', 'return to score'))
-        default_hidden_items.append(('studio', 'return to studio'))
-        default_hidden_items.append(('where', 'show menu client'))
-        return default_hidden_items
+    def default_hidden_entries(self):
+        default_hidden_entries = []
+        default_hidden_entries.append(('b', 'back'))
+        default_hidden_entries.append(('grep', 'grep baca directories'))
+        default_hidden_entries.append(('here', 'edit client source'))
+        default_hidden_entries.append(('hidden', 'show hidden items'))
+        default_hidden_entries.append(('q', 'quit'))
+        default_hidden_entries.append(('redraw', 'redraw'))
+        default_hidden_entries.append(('exec', 'exec statement'))
+        default_hidden_entries.append(('next', 'next score'))
+        default_hidden_entries.append(('prev', 'prev score'))
+        default_hidden_entries.append(('score', 'return to score'))
+        default_hidden_entries.append(('studio', 'return to studio'))
+        default_hidden_entries.append(('where', 'show menu client'))
+        return default_hidden_entries
 
     @property
-    def hidden_items(self):
-        return self._hidden_items
+    def hidden_entries(self):
+        return self._hidden_entries
 
     @apply
     def prompt_default():
@@ -143,12 +143,12 @@ class MenuObject(SCFObject):
         self.session.hide_next_redraw = True
 
     def show_hidden_menu_items(self):
-        hidden_items = []
-        hidden_items.extend(self.default_hidden_items)
-        hidden_items.extend(self.hidden_items)
-        hidden_items.sort()
+        hidden_entries = []
+        hidden_entries.extend(self.default_hidden_entries)
+        hidden_entries.extend(self.hidden_entries)
+        hidden_entries.sort()
         menu_lines = []
-        for key, value in hidden_items:
+        for key, value in hidden_entries:
             menu_line = self.make_tab(1) + ' '
             menu_line += '{} ({})'.format(value, key)
             menu_lines.append(menu_line)

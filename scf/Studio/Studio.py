@@ -148,10 +148,10 @@ class Studio(SCFObject):
         section = menu.make_new_section()
         section.menu_entry_tuples.append(('k', 'work with interactive material proxies'))
         section.menu_entry_tuples.append(('m', 'work with Bača materials'))
-        menu.hidden_items.append(('svn', 'work with repository'))
-        menu.hidden_items.append(('active', 'show active scores only'))
-        menu.hidden_items.append(('all', 'show all scores'))
-        menu.hidden_items.append(('mb', 'show mothballed scores only'))
+        menu.hidden_entries.append(('svn', 'work with repository'))
+        menu.hidden_entries.append(('active', 'show active scores only'))
+        menu.hidden_entries.append(('all', 'show all scores'))
+        menu.hidden_entries.append(('mb', 'show mothballed scores only'))
         return menu
 
     def make_svn_menu(self):

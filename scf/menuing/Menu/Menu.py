@@ -53,10 +53,10 @@ class Menu(MenuObject):
     ### PUBLIC METHODS ###
 
     def add_hidden_menu_items(self):
-        for key, value in self.default_hidden_items:
+        for key, value in self.default_hidden_entries:
             self.all_keys.append(key)
             self.all_bodies.append(value)
-        for key, value in self.hidden_items:
+        for key, value in self.hidden_entries:
             self.all_keys.append(key)
             self.all_bodies.append(value)
 

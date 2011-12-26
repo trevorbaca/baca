@@ -257,8 +257,8 @@ class ScoreProxy(PackageProxy):
         section.menu_entry_tuples.append(('pf', 'performers'))
         section.menu_entry_tuples.append(('tl', 'title'))
         section.menu_entry_tuples.append(('yr', 'year of completion'))
-        menu.hidden_items.append(('svn', 'work with repository'))
-        menu.hidden_items.append(('tags', 'work with tags'))
+        menu.hidden_entries.append(('svn', 'work with repository'))
+        menu.hidden_entries.append(('tags', 'work with tags'))
         return menu
 
     def make_svn_menu(self):
