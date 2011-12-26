@@ -9,7 +9,7 @@ class MenuObject(SCFObject):
 
     def __init__(self, session=None, where=None):
         SCFObject.__init__(self, session=session)
-        self.hidden_items = None
+        self._hidden_items = []
         self.indent_level = 1
         self.prompt_default = None
         self.should_clear_terminal = False
@@ -34,16 +34,9 @@ class MenuObject(SCFObject):
         default_hidden_items.append(('where', 'show menu client'))
         return default_hidden_items
 
-    @apply
-    def hidden_items():
-        def fget(self):
-            return self._hidden_items
-        def fset(self, hidden_items):
-            if hidden_items is None:
-                self._hidden_items = []
-            else:
-                self._hidden_items = hidden_items[:]
-        return property(**locals())
+    @property
+    def hidden_items(self):
+        return self._hidden_items
 
     @apply
     def indent_level():

@@ -38,17 +38,6 @@ class Menu(MenuObject):
         return False
 
     @apply
-    def hidden_items():
-        def fget(self):
-            return self._hidden_items
-        def fset(self, hidden_items):
-            if hidden_items is None:
-                self._hidden_items = []
-            else:
-                self._hidden_items = hidden_items[:]
-        return property(**locals())
-
-    @apply
     def hide_menu():
         def fget(self):
             return self._hide_menu
