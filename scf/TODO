@@ -1,21 +1,19 @@
 TODO
 
-1. Change 'if self.backtrack() ... elif not result ...' to 'if not result ... elif self.backtrack() ...'.
+1. Make sure ImportantObject.run() always returns only none; not the case for Menu.run().
 
-2. Make sure ImportantObject.run() always returns only none; not the case for Menu.run().
+2. Make sure Object.run() methods always accept optional user input.
 
-3. Make sure Object.run() methods always accept optional user input.
+3. Implement SCFObject.assign_user_input() method to come at head of Object.run() implementations.
 
-4. Implement SCFObject.assign_user_input() method to come at head of Object.run() implementations.
+4. Make sure 'self.handle_main_menu_result' always returns only none.
 
-5. Make sure 'self.handle_main_menu_result' always returns only none.
+5. Change 'Be\xnnrung' to Unicode in tags menu.
 
-6. Change 'Be\xnnrung' to Unicode in tags menu.
+6. Implement unique instrument abbreviations.
 
-7. Implement unique instrument abbreviations.
+7. Edit instrument transposition.
 
-8. Edit instrument transposition.
+8. Edit instrument clefs.
 
-9. Edit instrument clefs.
-
-10. Add C4-style named chromatic pitch initialization.
+9. Add C4-style named chromatic pitch initialization.
