@@ -178,7 +178,7 @@ class MakerWrangler(PackageWrangler, PackageProxy):
         return menu
 
     def run(self, user_input=None):
-        self.assign_user_input(user_input)
+        self.assign_user_input(user_input=user_input)
         while True:
             self.breadcrumbs.append('makers')
             menu = self.make_main_menu()

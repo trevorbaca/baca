@@ -104,7 +104,7 @@ class MakerProxy(PackageProxy):
         return menu
 
     def run(self, user_input=None):
-        self.assign_user_input(user_input)
+        self.assign_user_input(user_input=user_input)
         while True:
             self.breadcrumbs.append(self.maker_name)
             menu = self.make_main_menu()

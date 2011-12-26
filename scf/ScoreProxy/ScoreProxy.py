@@ -301,7 +301,7 @@ class ScoreProxy(PackageProxy):
         self.conditionally_display_lines(lines)
 
     def run(self, user_input=None):
-        self.assign_user_input(user_input)
+        self.assign_user_input(user_input=user_input)
         while True:
             self.breadcrumbs.append(self.annotated_title)
             menu = self.make_main_menu()

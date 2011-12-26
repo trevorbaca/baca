@@ -395,7 +395,7 @@ class MaterialProxy(PackageProxy):
         return trimmed_temp_ly_file_lines == trimmed_visualizer_ly_lines
 
     def run(self, user_input=None):
-        self.assign_user_input(user_input)
+        self.assign_user_input(user_input=user_input)
         while True:
             menu, section = self.make_new_menu(where=self.where())
             if self.is_interactive:

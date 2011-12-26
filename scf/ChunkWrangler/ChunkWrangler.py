@@ -38,4 +38,4 @@ class ChunkWrangler(PackageWrangler, PackageProxy):
 
     def run(self, user_input=None):
         self.print_not_implemented()
-        self.assign_user_input(user_input)
+        self.assign_user_input(user_input=user_input)
