@@ -46,15 +46,6 @@ class Menu(MenuObject):
             self._hide_menu = hide_menu
         return property(**locals())
 
-    @apply
-    def prompt_default():
-        def fget(self):
-            return self._prompt_default
-        def fset(self, prompt_default):
-            assert isinstance(prompt_default, (str, type(None)))
-            self._prompt_default = prompt_default
-        return property(**locals())
-
     @property
     def sections(self):
         return self._sections
