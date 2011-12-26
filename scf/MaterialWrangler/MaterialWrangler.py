@@ -91,25 +91,20 @@ class MaterialWrangler(PackageWrangler, PackageProxy):
         section.menu_entry_tuples.append(('s', 'create static material'))
         return menu
 
-    def run(self):
-        result = False
-        self.breadcrumbs.append('materials')
+    def run(self, user_input=None):
+        if user_input is not None:
+            self.session.user_input = user_input
         while True:
+            self.breadcrumbs.append('materials')
             menu = self.make_main_menu()
-            key = menu.run()
-            if self.session.is_complete:
-                result = True
+            result = menu.run()
+            if self.backtrack():
                 break
-            tmp = self.handle_main_menu_result(key)
-#            if tmp == 'back':
-#                break
-#            elif tmp == True:
-#                result = True
-#                break
-#            elif tmp == False:
-#                pass
-#            else:
-#                raise ValueError
-            # TODO: backtrack here
+            elif not result:
+                self.breadcrumbs.pop()
+                continue
+            self.handle_main_menu_result(result)
+            if self.backtrack():
+                break
+            self.breadcrumbs.pop()
         self.breadcrumbs.pop()
-        return result

@@ -157,10 +157,10 @@ class MakerWrangler(PackageWrangler, PackageProxy):
         stylesheet_file_pointer.write(stylesheet.format)
         stylesheet_file_pointer.close()
         
-    def handle_main_menu_result(self, key):
-        if key == 'b':
+    def handle_main_menu_result(self, result):
+        if result == 'b':
             return 'back'
-        elif key == 'new':
+        elif result == 'new':
             self.make_maker()
         else:
             maker_name = value
@@ -177,36 +177,31 @@ class MakerWrangler(PackageWrangler, PackageProxy):
         section.menu_entry_tuples.append(('new', 'make maker'))
         return menu
 
-    def run(self):
-        result = True
-        self.breadcrumbs.append('makers')
+    def run(self, user_input=None):
+        if user_input is not None:
+            self.session.user_input = user_input
         while True:
+            self.breadcrumbs.append('makers')
             menu = self.make_main_menu()
-            key = menu.run()
-            if self.session.is_complete:
-                result = True
+            result = menu.run()
+            if self.backtrack():
                 break
-            tmp = self.handle_main_menu_result(key)
-#            if tmp == 'back':
-#                break
-#            elif tmp == True:
-#                result = True
-#                break
-#            elif tmp == False:
-#                pass
-#            else:
-#                raise ValueError
-            # TODO: backtrack here
+            elif not result:
+                self.breadcrumbs.pop()
+                continue
+            self.handle_main_menu_result(result)
+            if self.backtrack():
+                break
+            self.breadcrumbs.pop()
         self.breadcrumbs.pop()
-        return result
 
     def select_maker(self):
         menu, section = self.make_new_menu(where=self.where())
         section.menu_entry_tuples = [('', x) for x in self.list_maker_spaced_class_names()]
         section.number_menu_entries = True
-        key = menu.run()
-        if value is not None:
-            maker_name = value.replace(' ', '_')
+        result = menu.run()
+        if result is not None:
+            maker_name = result.replace(' ', '_')
             maker_name = iotools.underscore_delimited_lowercase_to_uppercamelcase(maker_name)           
             maker = self.get_maker(maker_name)
             return True, maker

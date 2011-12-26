@@ -1,11 +1,21 @@
 TODO
 
-1. Change 'Be\xnnrung' to Unicode in tags menu.
+1. Change 'if self.backtrack() ... elif not result ...' to 'if not result ... elif self.backtrack() ...'.
 
-2. Implement unique instrument abbreviations.
+2. Make sure ImportantObject.run() always returns only none; not the case for Menu.run().
 
-3. Edit instrument transposition.
+3. Make sure Object.run() methods always accept optional user input.
 
-4. Edit instrument clefs.
+4. Implement SCFObject.assign_user_input() method to come at head of Object.run() implementations.
 
-5. Add C4-style named chromatic pitch initialization.
+5. Make sure 'self.handle_main_menu_result' always returns only none.
+
+6. Change 'Be\xnnrung' to Unicode in tags menu.
+
+7. Implement unique instrument abbreviations.
+
+8. Edit instrument transposition.
+
+9. Edit instrument clefs.
+
+10. Add C4-style named chromatic pitch initialization.

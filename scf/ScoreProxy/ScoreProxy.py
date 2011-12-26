@@ -18,6 +18,13 @@ class ScoreProxy(PackageProxy):
     ### PUBLIC ATTRIBUTES ###
 
     @property
+    def annotated_title(self):
+        if isinstance(self.year_of_completion, int):
+            return self.title_with_year
+        else:
+            return self.title
+
+    @property
     def chunk_wrangler(self):
         return self._chunk_wrangler
 
@@ -297,11 +304,7 @@ class ScoreProxy(PackageProxy):
         if user_input is not None:
             self.session.user_input = user_input
         while True:
-            # TODO: encapsulate these four lines into public property
-            if isinstance(self.year_of_completion, int):
-                self.breadcrumbs.append(self.title_with_year)
-            else:
-                self.breadcrumbs.append(self.title)
+            self.breadcrumbs.append(self.annotated_title)
             menu = self.make_main_menu()
             result = menu.run()
             if self.session.is_backtracking_to_score:

@@ -37,13 +37,13 @@ class ChunkProxy(PackageProxy):
         self.write_package_to_disk()
         self.proceed()
 
-    def handle_main_menu_result(self, key):
-        if key == 'b':
+    def handle_main_menu_result(self, result):
+        if result == 'b':
             return 'back'
-        elif key == 'd':
+        elif result == 'd':
             self.delete_package()
             return False
-        elif key == 'n':
+        elif result == 'n':
             self.edit_initializer()
 
     def make_main_menu(self):
@@ -58,11 +58,11 @@ class ChunkProxy(PackageProxy):
         self.breadcrumbs.append(self.chunk_name)
         while True:
             menu = self.make_main_menu()
-            key = menu.run()
+            result = menu.run()
             if self.session.is_complete:
                 result = True
                 break
-            tmp = self.handle_main_menu_result(key)
+            tmp = self.handle_main_menu_result(result)
 #            if tmp == 'back':
 #                break
 #            elif tmp == True:

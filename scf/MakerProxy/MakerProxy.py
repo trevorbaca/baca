@@ -103,28 +103,23 @@ class MakerProxy(PackageProxy):
         section.menu_entry_tuples.append(('src', 'edit {} source'.format(self.spaced_class_name)))
         return menu
 
-    def run(self):
-        result = False
-        self.breadcrumbs.append(self.maker_name)
+    def run(self, user_input=None):
+        if user_input is not None:
+            self.session.user_input = user_input
         while True:
+            self.breadcrumbs.append(self.maker_name)
             menu = self.make_main_menu()
-            key = menu.run()
-            if self.session.is_complete:
-                result = True
+            result = menu.run()
+            if self.backtrack():
                 break
-            tmp = self.handle_main_menu_result(key)
-#            if tmp == 'back':
-#                break
-#            elif tmp == True:
-#                result = True
-#                break
-#            elif tmp == False:
-#                pass
-#            else:
-#                raise ValueError
-            # TODO: backtrack here
+            elif not result:
+                self.breadcrumbs.pop()
+                continue
+            self.handle_main_menu_result(result)
+            if self.backtrack():
+                break
+            self.breadcrumbs.pop()
         self.breadcrumbs.pop()
-        return result
 
     def write_initializer_to_disk(self):
         initializer = file(os.path.join(self.material_package_directory, '__init__.py'), 'w')

@@ -416,36 +416,36 @@ class MaterialProxy(PackageProxy):
             section.menu_entry_tuples.append(('s', 'summarize'))
             section.menu_entry_tuples.append(('t', 'tags'))
             section.menu_entry_tuples.append(('z', 'regenerate'))
-            key = menu.run()
-            if key == 'b':
-                return key, None
-            elif key == 'd':
+            result = menu.run()
+            if result == 'b':
+                return result, None
+            elif result == 'd':
                 self.delete_material()
                 break
-            elif key == 'i':
-                self.manage_input(key)
-            elif key == 'k':
+            elif result == 'i':
+                self.manage_input(result)
+            elif result == 'k':
                 self.reload_user_input()
-            elif key == 'l':
-                self.manage_ly(key)
-            elif key == 'n':
+            elif result == 'l':
+                self.manage_ly(result)
+            elif result == 'n':
                 self.edit_initializer()
-            elif key == 'o':
-                self.manage_output(key)
-            elif key == 'p':
-                self.manage_pdf(key)
-            elif key == 'r':
+            elif result == 'o':
+                self.manage_output(result)
+            elif result == 'p':
+                self.manage_pdf(result)
+            elif result == 'r':
                 self.rename_material()
-            elif key == 's':
+            elif result == 's':
                 self.summarize_material_package()
-            elif key == 't':
+            elif result == 't':
                 self.manage_tags()
-            elif key == 'v':
-                self.manage_visualizer(key)
-            elif key == 'y':
+            elif result == 'v':
+                self.manage_visualizer(result)
+            elif result == 'y':
                 self.edit_stylesheet()
-            elif key == 'z':
-                self.manage_regeneration(key)
+            elif result == 'z':
+                self.manage_regeneration(result)
 
     def manage_input(self, command_string):
         lines = []

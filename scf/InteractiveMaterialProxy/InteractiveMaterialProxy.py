@@ -83,45 +83,45 @@ class InteractiveMaterialProxy(MaterialProxy):
                 section.menu_entry_tuples.append(('l', 'change location'))
             else:
                 section.menu_entry_tuples.append(('l', 'set location'))
-            key = menu.run()
-            if key == 'b':
+            result = menu.run()
+            if result == 'b':
                 self.interactively_check_and_save_material(self.user_input_wrapper)
-                return key, None
-            elif key == 'c':
+                return result, None
+            elif result == 'c':
                 self.clear_values(self.user_input_wrapper)
-            elif key == 'd':
+            elif result == 'd':
                 self.show_demo_input_values()
-            elif key == 'i':
+            elif result == 'i':
                 self.read_user_input_values_from_disk()
-            elif key == 'l':
+            elif result == 'l':
                 self.set_purview_interactively()
-            elif key == 'm':
+            elif result == 'm':
                 self.save_material(self.user_input_wrapper)
-                return key, None
-            elif key == 'n':
+                return result, None
+            elif result == 'n':
                 self.name_material()
-            elif key == 'nc':
+            elif result == 'nc':
                 self.unname_material()
-            elif key == 'o':
+            elif result == 'o':
                 self.overwrite_with_demo_input_values(self.user_input_wrapper)
-            elif key == 'p':
+            elif result == 'p':
                 lilypond_file = self.make_lilypond_file_from_user_input_wrapper(self.user_input_wrapper)
                 lilypond_file.file_initial_user_includes.append(self.stylesheet)
                 lilypond_file.header_block.title = markuptools.Markup(self.generic_output_name.capitalize())
                 lilypond_file.header_block.subtitle = markuptools.Markup('(unsaved)')
                 iotools.show(lilypond_file)
-            elif key == 'src':
+            elif result == 'src':
                 self.edit_source_file()
             else:
                 try:
-                    number = int(key)
+                    number = int(result)
                 except:
                     continue
                 index = number - 1
-                key, value = self.user_input_wrapper.list_items[index]
-                #new_value = self.edit_item(key, value)
-                new_value = self.edit_item(key)
-                self.user_input_wrapper[key] = new_value
+                result, value = self.user_input_wrapper.list_items[index]
+                #new_value = self.edit_item(result, value)
+                new_value = self.edit_item(result)
+                self.user_input_wrapper[result] = new_value
 
     def edit_item(self, key, value):
         prompt = key.replace('_', ' ')
