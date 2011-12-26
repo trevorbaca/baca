@@ -9,9 +9,9 @@ class Menu(MenuObject):
 
     def __init__(self, session=None, where=None):
         MenuObject.__init__(self, session=session, where=where)
+        self._sections = []
         self.allow_argument_range = False
         self.hide_menu = False
-        self.sections = None
 
     ### PUBLIC ATTRIBUTES ###
 
@@ -66,16 +66,9 @@ class Menu(MenuObject):
             self._prompt_default = prompt_default
         return property(**locals())
 
-    @apply
-    def sections():
-        def fget(self):
-            return self._sections
-        def fset(self, sections):
-            if sections is None:
-                self._sections = []
-            else:
-                self._sections = sections[:]
-        return property(**locals())
+    @property
+    def sections(self):
+        return self._sections
 
     ### PUBLIC METHODS ###
 
