@@ -2,16 +2,14 @@ TODO
 
 1. Make sure ImportantObject.run() always returns only none; not the case for Menu.run().
 
-2. Make sure 'self.handle_main_menu_result' always returns only none.
+2. Try to put 'self.breadcrumbs.append()' inside each Object.run() main loop.
 
-3. Try to put 'self.breadcrumbs.append()' inside each Object.run() main loop.
+3. Change 'Be\xnnrung' to Unicode in tags menu.
 
-4. Change 'Be\xnnrung' to Unicode in tags menu.
+4. Implement unique instrument abbreviations.
 
-5. Implement unique instrument abbreviations.
+5. Edit instrument transposition.
 
-6. Edit instrument transposition.
+6. Edit instrument clefs.
 
-7. Edit instrument clefs.
-
-8. Add C4-style named chromatic pitch initialization.
+7. Add C4-style named chromatic pitch initialization.
