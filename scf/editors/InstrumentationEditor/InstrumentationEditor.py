@@ -136,7 +136,7 @@ class InstrumentationEditor(InteractiveEditor):
         from abjad.tools import scoretools
         self.breadcrumbs.append('add performers')
         menu, section = self.make_new_menu(where=self.where())
-        menu.allow_argument_range = True
+        section.allow_argument_range = True
         performer_names = scoretools.list_primary_performer_names()
         performer_names.append('percussionist')
         performer_names.sort()

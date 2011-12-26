@@ -7,6 +7,7 @@ class MenuSection(MenuObject):
     def __init__(self, session=None, where=None):
         MenuObject.__init__(self, session=session, where=where)
         self._indent_level = 1
+        self.allow_argument_range = False
         self.default_index = None
         self.display_keys = True
         self.entry_prefix = None
@@ -15,6 +16,15 @@ class MenuSection(MenuObject):
         self.section_title = None
 
     ### PUBLIC ATTRIBUTES ###
+
+    @apply
+    def allow_argument_range():
+        def fget(self):
+            return self._allow_argument_range
+        def fset(self, allow_argument_range):
+            assert isinstance(allow_argument_range, type(True))
+            self._allow_argument_range = allow_argument_range
+        return property(**locals())
 
     @apply
     def default_index():

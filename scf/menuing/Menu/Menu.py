@@ -2,7 +2,6 @@ from abjad.tools import iotools
 from abjad.tools import mathtools
 from baca.scf.menuing.MenuObject import MenuObject
 from baca.scf.menuing.MenuSection import MenuSection
-import os
 
 
 class Menu(MenuObject):
@@ -10,19 +9,16 @@ class Menu(MenuObject):
     def __init__(self, session=None, where=None):
         MenuObject.__init__(self, session=session, where=where)
         self._sections = []
-        self.allow_argument_range = False
         self.hide_menu = False
 
     ### PUBLIC ATTRIBUTES ###
 
-    @apply
-    def allow_argument_range():
-        def fget(self):
-            return self._allow_argument_range
-        def fset(self, allow_argument_range):
-            assert isinstance(allow_argument_range, type(True))
-            self._allow_argument_range = allow_argument_range
-        return property(**locals())
+    @property
+    def argument_range_is_allowed(self):
+        for section in self.sections:
+            if section.allow_argument_range:
+                return True
+        return False
     
     @property
     def default_value(self):
@@ -142,7 +138,7 @@ class Menu(MenuObject):
         return directive
 
     def conditionally_enclose_in_list(self, expr):
-        if self.allow_argument_range:
+        if self.argument_range_is_allowed:
             return [expr]
         else:
             return expr
@@ -224,7 +220,7 @@ class Menu(MenuObject):
         return key
 
     def user_requests_argument_range(self, user_input):
-        if self.allow_argument_range:
+        if self.argument_range_is_allowed:
             if self.is_argument_range_string(user_input):
                 return True
         return False

@@ -150,7 +150,7 @@ class InstrumentEditor(InteractiveEditor):
         from abjad.tools import instrumenttools
         self.breadcrumbs.append('select instrument')
         menu, section = self.make_new_menu(where=self.where())
-        menu.allow_argument_range = True
+        section.allow_argument_range = True
         menu.should_clear_terminal = False
         section.menu_entry_tuples = [('', x) for x in instrumenttools.list_instrument_names()]
         section.number_menu_entries = True

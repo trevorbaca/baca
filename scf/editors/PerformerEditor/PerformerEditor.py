@@ -138,7 +138,7 @@ class PerformerEditor(InteractiveEditor):
 
     def set_initial_configuration_menu(self):
         menu, section = self.make_new_menu(where=self.where()) 
-        menu.allow_argument_range = True
+        section.allow_argument_range = True
         section.section_title = 'select instruments'
         likely_instruments = self.target.likely_instruments_based_on_performer_name
         likely_instrument_names = [x().instrument_name for x in likely_instruments]
