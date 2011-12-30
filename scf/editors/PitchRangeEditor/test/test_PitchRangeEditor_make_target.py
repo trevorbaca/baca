@@ -7,6 +7,8 @@ def test_PitchRangeEditor_make_target_01():
 
     editor = baca.scf.editors.PitchRangeEditor()
     editor.run(user_input="fs True c'' True q") 
+    # TODO: make the line below work
+    #editor.run(user_input="[F#3, C5] q") 
 
     assert editor.target == pitchtools.PitchRange(
         (NamedChromaticPitch('fs'), 'inclusive'), (NamedChromaticPitch("c''"), 'inclusive'))
@@ -18,6 +20,8 @@ def test_PitchRangeEditor_make_target_02():
 
     editor = baca.scf.editors.PitchRangeEditor()
     editor.run(user_input="'fs,,' True c'' True q") 
+    # TODO: make the line below work
+    #editor.run(user_input="[F#1, C5] q")
 
     assert editor.target == pitchtools.PitchRange(
         (NamedChromaticPitch('fs,,'), 'inclusive'), (NamedChromaticPitch("c''"), 'inclusive'))
@@ -29,6 +33,8 @@ def test_PitchRangeEditor_make_target_03():
 
     editor = baca.scf.editors.PitchRangeEditor()
     editor.run(user_input='A0 True C8 True q')
+    # TODO: make the line below work
+    #editor.run(user_input='[A0, C8] q')
 
     assert editor.target == pitchtools.PitchRange(
         (NamedChromaticPitch('a,,,'), 'inclusive'), (NamedChromaticPitch("c'''''"), 'inclusive'))
