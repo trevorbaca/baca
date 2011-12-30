@@ -12,14 +12,14 @@ def test_Session_command_repetition_01():
 def test_Session_command_repetition_02():
 
     studio = baca.scf.Studio()
-    studio.run(user_input='[next perf] q')
+    studio.run(user_input='{{next perf}} q')
     assert studio.session.command_history == ['next perf', 'q']
     assert studio.ts == (4,)
 
-    studio.run(user_input='[next perf] . q')
+    studio.run(user_input='{{next perf}} . q')
     assert studio.session.command_history == ['next perf', '.', 'q']
     assert studio.ts == (6, (1, 3))
 
-    studio.run(user_input='[next perf] . . q')
+    studio.run(user_input='{{next perf}} . . q')
     assert studio.session.command_history == ['next perf', '.', '.', 'q']
     assert studio.ts == (8, (1, 3, 5))

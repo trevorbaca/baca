@@ -31,6 +31,7 @@ class InteractiveEditor(SCFObject):
             menu_keys.append(menu_key)
             spaced_attribute_name = target_attribute_name.replace('_', ' ')
             left_hand_label = '{} ({}):'.format(spaced_attribute_name, menu_key)
+            #left_hand_label = '{}:'.format(spaced_attribute_name)
             left_hand_labels.append(left_hand_label)
         left_hand_label_width = max([len(x) for x in left_hand_labels])
         for left_hand_label, target_attribute_name, menu_key in zip(

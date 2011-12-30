@@ -278,10 +278,10 @@ class SCFObject(object):
             return None
         elif '\n' in self.session.user_input:
             raise ValueError('no longer implemented.')
-        elif self.session.user_input.startswith('['):
-            index = self.session.user_input.find(']')
-            user_response = self.session.user_input[1:index]
-            user_input = self.session.user_input[index+1:].strip()
+        elif self.session.user_input.startswith('{{'):
+            index = self.session.user_input.find('}}')
+            user_response = self.session.user_input[2:index]
+            user_input = self.session.user_input[index+2:].strip()
             self.session.last_command_was_composite = True
         else:
             user_input = self.session.user_input.split(' ')

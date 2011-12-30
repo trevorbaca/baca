@@ -1,4 +1,5 @@
 from abjad.tools import iotools
+from abjad.tools import pitchtools
 from baca.scf.menuing.MenuObject import MenuObject
 
 
@@ -166,6 +167,11 @@ class UserInputGetter(MenuObject):
         message = "value for '{}' must be string or none."
         self.append_something(spaced_attribute_name, message, default=default)
         self.tests.append(self.is_string_or_none)
+
+    def append_symbolic_pitch_range_string(self, spaced_attribute_name, default=None):
+        message = "value for '{}' must be symbolic pitch range string. Ex: [A0, C8]."
+        self.append_something(spaced_attribute_name, message, default=default)
+        self.tests.append(pitchtools.is_symbolic_pitch_range_string)
 
     def load_prompt(self):
         prompt = self.prompts[self.prompt_index]

@@ -16,14 +16,14 @@ TODO
 
 8. Create test_Menu_run.py to document menu build configurations.
 
-9. Compress PitchRangeEditor.conditionally_initialize_target() steps to symbolic pitch range string only.
+9. Clean up PitchRangeEditor main menu.
 
-10. Clean up PitchRangeEditor main menu.
+10. Edit instrument transposition.
 
-11. Add example to user input getter help string for pitch ranges.
+11. Edit instrument clefs.
 
-12. Edit instrument transposition.
+12. Research 'with' for breadcrumb management.
 
-13. Edit instrument clefs.
+13. Remove blank line between help request and help response.
 
-14. Research 'with' for breadcrumb management.
+14. Remove blank line between exec request and exec response.
