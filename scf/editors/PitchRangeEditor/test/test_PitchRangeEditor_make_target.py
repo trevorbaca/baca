@@ -7,13 +7,11 @@ def test_PitchRangeEditor_make_target_01():
 
     editor = baca.scf.editors.PitchRangeEditor()
     editor.run(user_input="[F#3, C5) q") 
-    assert editor.target == pitchtools.PitchRange(
-        (NamedChromaticPitch('fs'), 'inclusive'), (NamedChromaticPitch("c''"), 'exclusive'))
+    assert editor.target == pitchtools.PitchRange('[F#3, C5)')
 
     editor = baca.scf.editors.PitchRangeEditor()
     editor.run(user_input='(A0, C8] q')
-    assert editor.target == pitchtools.PitchRange(
-        (NamedChromaticPitch('a,,,'), 'exclusive'), (NamedChromaticPitch("c'''''"), 'inclusive'))
+    assert editor.target == pitchtools.PitchRange('(A0, C8]')
 
 
 def test_PitchRangeEditor_make_target_04():
