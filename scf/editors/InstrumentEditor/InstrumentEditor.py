@@ -79,20 +79,21 @@ class InstrumentEditor(InteractiveEditor):
         self.conditionally_set_target_attribute('short_instrument_name_markup', result)
         
     def get_untuned_percussion_name_interactively(self):
-        self.breadcrumbs.append('untuned percussion')
         while True:
+            self.append_breadcrumb('untuned percussion')
             menu, section = self.make_new_menu(where=self.where())
             menu.should_clear_terminal = False
-            section.menu_entry_tuples = [('', x) for x in instrumenttools.UntunedPercussion.known_untuned_percussion]
+            section.menu_entry_tokens = instrumenttools.UntunedPercussion.known_untuned_percussion
             section.number_menu_entries = True
             result = menu.run()
             if self.backtrack():
-                self.breadcrumbs.pop()
+                self.pop_breadcrumb()
                 return
             elif not result:
+                self.pop_breadcrumb()
                 continue
             else:
-                self.breadcrumbs.pop()
+                self.pop_breadcrumb()
                 return result
         
     def handle_main_menu_result(self, result):
@@ -120,7 +121,7 @@ class InstrumentEditor(InteractiveEditor):
 
     def make_main_menu(self):
         menu, section = self.make_new_menu(where=self.where())
-        section.menu_entry_tuples = self.target_attribute_menu_entry_tuples
+        section.menu_entry_tokens = self.target_attribute_menu_entry_tokens
         section.display_keys = False
         section = menu.make_new_section()
         if self.session.display_pitch_ranges_with_numbered_pitches:
@@ -128,19 +129,19 @@ class InstrumentEditor(InteractiveEditor):
         else:
             pitch_range_repr = self.target.pitch_range.one_line_named_chromatic_pitch_repr
         line = 'range: {}'.format(pitch_range_repr)
-        section.menu_entry_tuples.append(('pr', line))
+        section.menu_entry_tokens.append(('pr', line))
         menu.hidden_entries.append(('tprd', 'toggle pitch range display'))
         clefs = [clef.clef_name for clef in self.target.all_clefs]
         clefs = ', '.join(clefs)
         line = 'clefs: {}'.format(clefs)
-        section.menu_entry_tuples.append(('cl', line))
+        section.menu_entry_tokens.append(('cl', line))
         if self.target.is_transposing:
             line = 'sounding pitch of fingered middle C: {}'
             line = line.format(self.target.sounding_pitch_of_fingered_middle_c.pitch_class_octave_label)
-            section.menu_entry_tuples.append(('sp', line))
+            section.menu_entry_tokens.append(('sp', line))
             line = 'interval of transposition: {}'
             line = line.format(self.target.interval_of_transposition)
-            section.menu_entry_tuples.append(('int', line))
+            section.menu_entry_tokens.append(('int', line))
         section.display_keys = False
         return menu
 
@@ -148,21 +149,24 @@ class InstrumentEditor(InteractiveEditor):
         '''Return list of instruments or none.
         '''
         from abjad.tools import instrumenttools
-        self.breadcrumbs.append('select instrument')
         menu, section = self.make_new_menu(where=self.where())
         section.allow_argument_range = True
         menu.should_clear_terminal = False
-        section.menu_entry_tuples = [('', x) for x in instrumenttools.list_instrument_names()]
+        section.menu_entry_tokens = instrumenttools.list_instrument_names()
         section.number_menu_entries = True
         while True:
+            self.append_breadcrumb('select instrument')
+            #print 'BEFORE: argument range is allowed: {!r}'.format(menu.argument_range_is_allowed)
             result = menu.run()
+            #print 'ZOO: {!r}'.format(result)
             if self.backtrack():
-                self.breadcrumbs.pop()
+                self.pop_breadcrumb()
                 return    
             elif not result:
+                self.pop_breadcrumb()
                 continue
             else:
-                self.breadcrumbs.pop()
+                self.pop_breadcrumb()
                 break
         instrument_names = result
         this_result = []

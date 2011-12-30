@@ -57,7 +57,7 @@ class ScoreWrangler(PackageWrangler):
 
     def select_score_proxy(self):
         menu, section = self.make_new_menu(where=self.where())
-        section.menu_entry_tuples = [('', x) for x in self.iterate_score_titles_with_years()]
+        section.menu_entry_tokens = self.iterate_score_titles_with_years()
         section.number_menu_entries = True
         score_package_short_name = self.title_to_score_package_short_name(value)
         score_proxy = self.ScoreProxy(score_package_short_name, session=self.session)

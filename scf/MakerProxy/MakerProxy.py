@@ -22,6 +22,10 @@ class MakerProxy(PackageProxy):
             return '{}({!r})'.format(self.class_name, self.maker_class_name)
 
     ### PUBLIC ATTRIBUTES ###
+    
+    @property
+    def breadcrumb(self):
+        return self.maker_name
 
     # TODO: Maybe this can't be set here? Must be derived from hardcode maker classfile?
     @apply
@@ -94,31 +98,31 @@ class MakerProxy(PackageProxy):
     def make_main_menu(self):
         menu, section = self.make_new_menu(where=self.where())
         section.section_title = 'existing {}'.format(self.generic_output_name)
-        section.menu_entry_tuples = [('', x) for x in list(self.iterate_materials_based_on_maker())]
+        section.menu_entry_tokens = list(self.iterate_materials_based_on_maker())
         section.number_menu_entries = True
         section = menu.make_new_section()
-        section.menu_entry_tuples.append(('del', 'delete {}'.format(self.spaced_class_name)))
-        section.menu_entry_tuples.append(('new', 'create {}'.format(self.generic_output_name)))
-        section.menu_entry_tuples.append(('ren', 'rename {}'.format(self.spaced_class_name)))
-        section.menu_entry_tuples.append(('src', 'edit {} source'.format(self.spaced_class_name)))
+        section.menu_entry_tokens.append(('del', 'delete {}'.format(self.spaced_class_name)))
+        section.menu_entry_tokens.append(('new', 'create {}'.format(self.generic_output_name)))
+        section.menu_entry_tokens.append(('ren', 'rename {}'.format(self.spaced_class_name)))
+        section.menu_entry_tokens.append(('src', 'edit {} source'.format(self.spaced_class_name)))
         return menu
 
     def run(self, user_input=None):
         self.assign_user_input(user_input=user_input)
         while True:
-            self.breadcrumbs.append(self.maker_name)
+            self.append_breadcrumb()
             menu = self.make_main_menu()
             result = menu.run()
             if self.backtrack():
                 break
             elif not result:
-                self.breadcrumbs.pop()
+                self.pop_breadcrumb()
                 continue
             self.handle_main_menu_result(result)
             if self.backtrack():
                 break
-            self.breadcrumbs.pop()
-        self.breadcrumbs.pop()
+            self.pop_breadcrumb()
+        self.pop_breadcrumb()
 
     def write_initializer_to_disk(self):
         initializer = file(os.path.join(self.material_package_directory, '__init__.py'), 'w')

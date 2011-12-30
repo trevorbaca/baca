@@ -274,18 +274,16 @@ class PackageProxy(DirectoryProxy):
 
     def make_tags_menu(self):
         menu, section = self.make_new_menu(where=self.where())
-        stuff = self.list_formatted_tags()
-        stuff = [('', x) for x in stuff]
-        section.menu_entry_tuples = stuff
+        section.menu_entry_tokens = self.list_formatted_tags()
         section = menu.make_new_section()
-        section.menu_entry_tuples.append(('add', 'add tag'))
-        section.menu_entry_tuples.append(('del', 'delete tag'))
+        section.menu_entry_tokens.append(('add', 'add tag'))
+        section.menu_entry_tokens.append(('del', 'delete tag'))
         section.display_keys = False
         return menu
 
     def manage_tags(self):
-        self.breadcrumbs.append('tags')
         while True:
+            self.append_breadcrumb('tags')
             menu = self.make_tags_menu()
             result = menu.run()
             if self.backtrack():
@@ -293,7 +291,8 @@ class PackageProxy(DirectoryProxy):
             self.handle_tags_menu_result(result)
             if self.backtrack():
                 break
-        self.breadcrumbs.pop()
+            self.pop_breadcrumb()
+        self.pop_breadcrumb()
         
     def pprint_tags(self, tags):
         if tags:
@@ -346,11 +345,11 @@ class PackageProxy(DirectoryProxy):
         from baca.scf.ScoreWrangler import ScoreWrangler
         menu, section = self.make_new_menu(where=self.where())
         score_wrangler = ScoreWrangler()
-        section.menu_entry_tuples = [('', x) for x in score_wrangler.iterate_score_titles_with_years()]
+        section.menu_entry_tokens = score_wrangler.iterate_score_titles_with_years()
         section.number_menu_entries = True
         section = menu.make_new_section()
-        section.menu_entry_tuples.append(('s', 'global to studio'))
-        result = menu.run() # maybe check for backtracking here?
+        section.menu_entry_tokens.append(('s', 'global to studio'))
+        result = menu.run()
 
     def unimport_baca_package(self):
         self.remove_package_importable_name_from_sys_modules('baca')

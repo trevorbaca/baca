@@ -108,18 +108,18 @@ class PerformerEditor(InteractiveEditor):
         menu, section = self.make_new_menu(where=self.where())
         section.section_title = 'instruments'
         instrument_names = [x.instrument_name for x in self.target.instruments]
-        section.menu_entry_tuples = [('', x) for x in instrument_names]
+        section.menu_entry_tokens = instrument_names
         section.number_menu_entries = True
         section = menu.make_new_section()
-        section.menu_entry_tuples.append(('add', 'add instruments'))
+        section.menu_entry_tokens.append(('add', 'add instruments'))
         if 0 < self.target.instrument_count:
-            section.menu_entry_tuples.append(('del', 'delete instruments'))
+            section.menu_entry_tokens.append(('del', 'delete instruments'))
         if 1 < self.target.instrument_count:
-            section.menu_entry_tuples.append(('mv', 'move instrument'))
+            section.menu_entry_tokens.append(('mv', 'move instrument'))
         if self.target.name is None:
-            section.menu_entry_tuples.append(('name', 'name performer'))
+            section.menu_entry_tokens.append(('name', 'name performer'))
         else:
-            section.menu_entry_tuples.append(('ren', 'rename performer'))
+            section.menu_entry_tokens.append(('ren', 'rename performer'))
         section.display_keys = False
         return menu
 
@@ -151,31 +151,33 @@ class PerformerEditor(InteractiveEditor):
             most_likely_number = most_likely_index + 1
             section.default_index = most_likely_index
         if likely_instruments:
-            section.menu_entry_tuples = [('', x) for x in likely_instrument_names]
+            section.menu_entry_tokens = likely_instrument_names
             section.number_menu_entries = True
             section = menu.make_new_section()
-            section.menu_entry_tuples.append(('other', 'other instruments'))
+            section.menu_entry_tokens.append(('other', 'other instruments'))
         else:
-            section.menu_entry_tuples = [('', x) for x in instrumenttools.list_instrument_names()]
+            section.menu_entry_tokens = instrumenttools.list_instrument_names()
             section.number_menu_entries = True
             section = menu.make_new_section()
-        section.menu_entry_tuples.append(('none', 'no instruments'))
+        section.menu_entry_tokens.append(('none', 'no instruments'))
         section.display_keys = False
         return menu
 
     def set_initial_configuration_interactively(self):
         self.conditionally_initialize_target()
-        self.breadcrumbs.append(self.target.name)
         menu = self.set_initial_configuration_menu()
+        #print 'doing initial configuration interactively ...'
         while True:
+            self.append_breadcrumb(self.target.name)
             result = menu.run()
+            #print 'result: {!r}'.format(result)
             if self.backtrack():
-                self.breadcrumbs.pop()
+                self.pop_breadcrumb()
                 return
             elif not result:
+                self.pop_breadcrumb()
                 continue
             if isinstance(result, list):
-                assert isinstance(result, list)
                 for instrument_name in result:
                     instrument_class = instrumenttools.default_instrument_name_to_instrument_class(
                         instrument_name)
@@ -193,4 +195,5 @@ class PerformerEditor(InteractiveEditor):
                 break
             else:
                 break
-        self.breadcrumbs.pop()
+            self.pop_breadcrumb()
+        self.pop_breadcrumb()

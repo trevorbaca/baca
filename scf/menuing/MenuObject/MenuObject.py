@@ -97,10 +97,14 @@ class MenuObject(SCFObject):
         lines.append('')
         self.conditionally_display_lines(lines)
 
-    def handle_hidden_key(self, key):
+    def handle_hidden_key(self, directive):
         '''Method consumes key (when possible).
         '''
-        if key == 'b':
+        if isinstance(directive, list) and len(directive) == 1:
+            key = directive[0]
+        else:
+            key = directive
+        if key in ('b', 'back'):
             self.session.is_backtracking_locally = True
         elif key == 'exec':
             self.exec_statement()
@@ -116,16 +120,21 @@ class MenuObject(SCFObject):
         elif key == 'prev':
             self.session.is_navigating_to_prev_score = True
             self.session.is_backtracking_to_studio = True
-        elif key == 'q':
+        elif key in ('q', 'quit'):
             self.session.user_specified_quit = True
         elif isinstance(key, str) and 3 <= len(key) and 'score'.startswith(key):
             self.session.is_backtracking_to_score = True
+        elif isinstance(key, str) and 3 <= len(key) and 'return to score'.startswith(key):
+            self.session.is_backtracking_to_score = True
         elif isinstance(key, str) and 3 <= len(key) and 'studio'.startswith(key):
+            self.session.is_backtracking_to_studio = True
+        elif isinstance(key, str) and 3 <= len(key) and 'return to studio'.startswith(key):
             self.session.is_backtracking_to_studio = True
         elif key == 'where':
             self.show_menu_client()
         else:
-            return key
+            #return key
+            return directive
 
     def make_is_integer_in_closed_range(self, start, stop):
         return lambda expr: self.is_integer(expr) and start <= expr <= stop

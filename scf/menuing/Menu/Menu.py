@@ -10,6 +10,7 @@ class Menu(MenuObject):
         MenuObject.__init__(self, session=session, where=where)
         self._sections = []
         self.hide_menu = False
+        self.return_menu_key = True
 
     ### PUBLIC ATTRIBUTES ###
 
@@ -42,6 +43,15 @@ class Menu(MenuObject):
             self._hide_menu = hide_menu
         return property(**locals())
 
+    @apply
+    def return_menu_key():
+        def fget(self):
+            return self._return_menu_key
+        def fset(self, return_menu_key):
+            assert isinstance(return_menu_key, type(True))
+            self._return_menu_key = return_menu_key
+        return property(**locals())
+
     @property
     def sections(self):
         return self._sections
@@ -65,10 +75,11 @@ class Menu(MenuObject):
         elif not user_input:
             return
         elif user_input in self.all_keys:
-            return user_input
+            return self.handle_menu_key_user_input(user_input)
         elif 'score'.startswith(user_input):
             return user_input
         elif 'studio'.startswith(user_input):
+            print 'ZZZ'
             return user_input
         elif self.user_requests_argument_range(user_input):
             return self.handle_argument_range_user_input(user_input)
@@ -77,13 +88,18 @@ class Menu(MenuObject):
         else:
             return self.match_user_input_against_menu_entry_bodies(user_input)
 
+    def change_menu_key_to_menu_body(self, menu_key):
+        return dict(zip(self.all_keys, self.all_bodies)).get(menu_key)
+
+    # TODO: rename 'opt' as 'menu_keys'
     def handle_argument_range_user_input(self, user_input):
         for section in self.sections:
             if section.menu_values:
                 break
         else:
             raise ValueError('no section contains numbered menu entries.')
-        item_numbers = self.argument_range_string_to_numbers(user_input, section.menu_values)
+        item_numbers = self.argument_range_string_to_numbers(
+            user_input, section.menu_values, opt=section.menu_keys)
         if item_numbers is None:
             return []
         item_indices = [item_number - 1 for item_number in item_numbers]
@@ -99,14 +115,30 @@ class Menu(MenuObject):
         entry_number = int(user_input)
         for section in self.sections:
             if section.number_menu_entries:
-                if entry_number <= len(section.menu_entry_tuples):
+                if entry_number <= len(section.menu_entry_tokens):
                     entry_index = entry_number - 1
-                    key, body = section.menu_entry_tuples[entry_index]
+                    token = section.menu_entry_tokens[entry_index]
+                    key, body = section.menu_entry_token_to_key_and_body(token)
                     if key:
                         value = key
                     else:
                         value = user_input
                     return self.conditionally_enclose_in_list(value)
+
+    def handle_menu_key_user_input(self, user_input):
+        if self.return_menu_key:
+            directive = user_input
+        else:
+            directive = self.change_menu_key_to_menu_body(user_input)
+        return self.conditionally_enclose_in_list(directive)
+
+    def is_backtracking_string(self, expr):
+        if isinstance(expr, str) and 3 <= len(expr):
+            if 'studio'.startswith(expr):
+                return True
+            elif 'score'.startswith(expr):
+                return True
+        return False
 
     def strip_default_indicators_from_strings(self, expr):
         if isinstance(expr, list):
@@ -132,9 +164,11 @@ class Menu(MenuObject):
         user_input = iotools.strip_diacritics_from_binary_string(user_input)
         user_input = user_input.lower()
         directive = self.change_user_input_to_directive(user_input)
+        #print 'here: {!r}'.format(directive)
         directive = self.strip_default_indicators_from_strings(directive)
         self.session.hide_next_redraw = False
         directive = self.handle_hidden_key(directive)
+        #print 'now: {!r}'.format(directive)
         return directive
 
     def conditionally_enclose_in_list(self, expr):
@@ -174,7 +208,8 @@ class Menu(MenuObject):
 
     def match_user_input_against_menu_entry_bodies(self, user_input):
         for section in self.sections:
-            for key, body in section.menu_entry_tuples:
+            for token in section.menu_entry_tokens:
+                key, body = section.menu_entry_token_to_key_and_body(token)
                 body = iotools.strip_diacritics_from_binary_string(body).lower()
                 if body.startswith(user_input):
                     if key is not None:
@@ -212,7 +247,7 @@ class Menu(MenuObject):
             rest = ' '.join(rest_parts)
             if rest:
                 self.session.transcribe_next_command = False
-            if isinstance(self.session.user_input, str):
+            if isinstance(self.session.user_input, str) and rest:
                 self.session.user_input = rest + ' ' + self.session.user_input
             else:
                 self.session.user_input = rest

@@ -38,7 +38,9 @@ class InstrumentationEditor(InteractiveEditor):
             if self.backtrack():
                 return
             self.session.backtrack_preservation_is_active = True
+            #print 'going to select performer names ...'
             performer_names = self.select_performer_names_interactively()
+            #print 'performer names: {!r}'.format(performer_names)
             self.session.backtrack_preservation_is_active = False
             if self.backtrack():
                 return
@@ -47,11 +49,11 @@ class InstrumentationEditor(InteractiveEditor):
                 for performer_name in performer_names:
                     performer = scoretools.Performer(performer_name)
                     performer_editor = self.PerformerEditor(session=self.session, target=performer)
-                    self.breadcrumbs.append('add performers')
+                    self.append_breadcrumb('add performers')
                     self.session.backtrack_preservation_is_active = True
                     performer_editor.set_initial_configuration_interactively()
                     self.session.backtrack_preservation_is_active = False
-                    self.breadcrumbs.pop()
+                    self.pop_breadcrumb()
                     if self.backtrack():
                         performers = []
                         try_again = True
@@ -107,15 +109,14 @@ class InstrumentationEditor(InteractiveEditor):
 
     def make_main_menu(self):
         menu, section = self.make_new_menu(where=self.where())
-        tuples = [('', x) for x in self.summary_lines]
-        section.menu_entry_tuples = tuples
+        section.menu_entry_tokens = self.summary_lines
         section.number_menu_entries = True
         section = menu.make_new_section()
-        section.menu_entry_tuples.append(('add', 'add performers'))
+        section.menu_entry_tokens.append(('add', 'add performers'))
         if 0 < self.target.performer_count:
-            section.menu_entry_tuples.append(('del', 'delete performers'))
+            section.menu_entry_tokens.append(('del', 'delete performers'))
         if 1 < self.target.performer_count:
-            section.menu_entry_tuples.append(('mv', 'move performers'))
+            section.menu_entry_tokens.append(('mv', 'move performers'))
         section.display_keys = False
         return menu
 
@@ -134,21 +135,27 @@ class InstrumentationEditor(InteractiveEditor):
 
     def select_performer_names_interactively(self):
         from abjad.tools import scoretools
-        self.breadcrumbs.append('add performers')
         menu, section = self.make_new_menu(where=self.where())
         section.allow_argument_range = True
-        performer_names = scoretools.list_primary_performer_names()
-        performer_names.append('percussionist')
-        performer_names.sort()
-        section.menu_entry_tuples = [('', x) for x in performer_names]
+        performer_names, performer_abbreviations = [], []
+        performer_pairs = scoretools.list_primary_performer_names()
+        performer_pairs = [(x[1].split()[-1].strip('.'), x[0]) for x in performer_pairs]
+        performer_pairs.append(('perc', 'percussionist'))
+        performer_pairs.sort(lambda x, y: cmp(x[1], y[1]))
+        section.menu_entry_tokens = performer_pairs
         section.number_menu_entries = True
+        section.return_menu_key = False
+        menu.return_menu_key = False
         while True:
+            self.append_breadcrumb('add performers')
             result = menu.run()
+            #print 'result: {!r}'.format(result)
             if self.backtrack():
-                self.breadcrumbs.pop()
+                self.pop_breadcrumb()
                 return
             elif not result:
+                self.pop_breadcrumb()
                 continue
             else:
-                self.breadcrumbs.pop()
+                self.pop_breadcrumb()
                 return result

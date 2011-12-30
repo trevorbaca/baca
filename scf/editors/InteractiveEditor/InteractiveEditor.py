@@ -21,7 +21,7 @@ class InteractiveEditor(SCFObject):
     ### PUBLIC ATTRIBUTES ###
     
     @property
-    def target_attribute_menu_entry_tuples(self):
+    def target_attribute_menu_entry_tokens(self):
         result = []
         target_attribute_names, menu_keys, left_hand_labels = [], [], []
         for target_attribute_name, predicate, is_read_write, default in self.target_attribute_tuples:
@@ -37,8 +37,8 @@ class InteractiveEditor(SCFObject):
             left_hand_labels, target_attribute_names, menu_keys):
             menu_value = '{:<{width}} {!r}'.format(
                 left_hand_label, getattr(self.target, target_attribute_name), width=left_hand_label_width) 
-            menu_entry_tuple = (menu_key, menu_value)
-            result.append(menu_entry_tuple)
+            menu_entry_token = (menu_key, menu_value)
+            result.append(menu_entry_token)
         return result
 
     ### PUBLIC METHODS ###
@@ -66,24 +66,24 @@ class InteractiveEditor(SCFObject):
 
     def run(self, user_input=None):
         self.assign_user_input(user_input=user_input)
-        self.breadcrumbs.append(self.breadcrumb)
+        self.append_breadcrumb()
         self.session.backtrack_preservation_is_active = True
         self.conditionally_initialize_target()
         self.session.backtrack_preservation_is_active = False
-        self.breadcrumbs.pop()
+        self.pop_breadcrumb()
         if self.backtrack():
             return
         while True:
-            self.breadcrumbs.append(self.breadcrumb)
+            self.append_breadcrumb()
             menu = self.make_main_menu()
             result = menu.run()
             if self.backtrack():
                 break
             elif not result:
-                self.breadcrumbs.pop()
+                self.pop_breadcrumb()
                 continue
             self.handle_main_menu_result(result)
             if self.backtrack():
                 break
-            self.breadcrumbs.pop()
-        self.breadcrumbs.pop()
+            self.pop_breadcrumb()
+        self.pop_breadcrumb()

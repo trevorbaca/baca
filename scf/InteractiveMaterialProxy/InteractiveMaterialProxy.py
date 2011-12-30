@@ -64,25 +64,25 @@ class InteractiveMaterialProxy(MaterialProxy):
         self._original_user_input_wrapper = copy.deepcopy(user_input_wrapper)
         while True:
             menu, section = self.make_new_menu(where=self.where())
-            section.menu_entry_tuples = [('', x) for x in self.user_input_wrapper.editable_lines]
+            section.menu_entry_tokens = self.user_input_wrapper.editable_lines
             section.number_menu_entries = True
             if self.user_input_wrapper.is_complete:
-                section.menu_entry_tuples.append(('p', 'show pdf of given input'))
-                section.menu_entry_tuples.append(('m', 'write material to disk'))
+                section.menu_entry_tokens.append(('p', 'show pdf of given input'))
+                section.menu_entry_tokens.append(('m', 'write material to disk'))
             if self.has_material_underscored_name:
-                section.menu_entry_tuples.append(('n', 'rename material'))
+                section.menu_entry_tokens.append(('n', 'rename material'))
             else:
-                section.menu_entry_tuples.append(('n', 'name material'))
-            section.menu_entry_tuples.append(('nc', 'clear name'))
-            section.menu_entry_tuples.append(('d', 'show demo input values'))
-            section.menu_entry_tuples.append(('o', 'overwrite with demo input values'))
-            section.menu_entry_tuples.append(('i', 'read values from disk'))
-            section.menu_entry_tuples.append(('c', 'clear values'))
-            #section.menu_entry_tuples.append(('src', 'edit source'))
+                section.menu_entry_tokens.append(('n', 'name material'))
+            section.menu_entry_tokens.append(('nc', 'clear name'))
+            section.menu_entry_tokens.append(('d', 'show demo input values'))
+            section.menu_entry_tokens.append(('o', 'overwrite with demo input values'))
+            section.menu_entry_tokens.append(('i', 'read values from disk'))
+            section.menu_entry_tokens.append(('c', 'clear values'))
+            #section.menu_entry_tokens.append(('src', 'edit source'))
             if self.purview is not None:
-                section.menu_entry_tuples.append(('l', 'change location'))
+                section.menu_entry_tokens.append(('l', 'change location'))
             else:
-                section.menu_entry_tuples.append(('l', 'set location'))
+                section.menu_entry_tokens.append(('l', 'set location'))
             result = menu.run()
             if result == 'b':
                 self.interactively_check_and_save_material(self.user_input_wrapper)
@@ -180,7 +180,7 @@ class InteractiveMaterialProxy(MaterialProxy):
         for i, (key, value) in enumerate(self.user_input_template.iteritems()):
             item = '{}: {!r}'.format(key.replace('_', ' '), value)
             items.append(item)
-        section.menu_entry_tuples = [('', x) for x in items]
+        section.menu_entry_tokens = items
         section.number_menu_entries = True
         menu.run()
 

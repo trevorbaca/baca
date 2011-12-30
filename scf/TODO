@@ -1,15 +1,27 @@
 TODO
 
-1. Try to put 'self.breadcrumbs.append()' inside each Object.run() main loop.
+1. Change French horn instrument names to horn and hn.
 
-2. Implement main menu breadcrumb as read-only class attribute.
+2. Change Trombone to TenorTrombone.
 
-3. Change 'Be\xnnrung' to Unicode in tags menu.
+3. Implement AltoTrombone, BassTrombone.
 
-4. Implement unique instrument abbreviations.
+4. Change Clarinet to BFlatClarinet.
 
-5. Edit instrument transposition.
+5. Implement remaining clarinets.
 
-6. Edit instrument clefs.
+6. Implement saxophones.
 
-7. Add C4-style named chromatic pitch initialization.
+7. Audit and implement remaining instruments.
+
+8. Create test_Menu_run.py to document menu build configurations.
+
+9. Add C4-style named chromatic pitch initialization.
+
+10. Allow C2, C6-style pitch range entry.
+
+11. Edit instrument transposition.
+
+12. Edit instrument clefs.
+
+13. Research 'with' for breadcrumb management.

@@ -25,6 +25,10 @@ class MaterialWrangler(PackageWrangler, PackageProxy):
         import baca
         return baca.scf.StaticMaterialProxy
 
+    @property
+    def breadcrumb(self):
+        return 'materials'
+
     @apply
     def directory_name():
         def fget(self):
@@ -84,26 +88,26 @@ class MaterialWrangler(PackageWrangler, PackageProxy):
 
     def make_main_menu(self):
         menu, section = self.make_new_menu(where=self.where())
-        section.menu_entry_tuples = [('', x) for x in list(self.iterate_material_summaries())]
+        section.menu_entry_tokens = list(self.iterate_material_summaries())
         section.number_menu_entries = True
         section = menu.make_new_section()
-        section.menu_entry_tuples.append(('i', 'create interactive material'))
-        section.menu_entry_tuples.append(('s', 'create static material'))
+        section.menu_entry_tokens.append(('i', 'create interactive material'))
+        section.menu_entry_tokens.append(('s', 'create static material'))
         return menu
 
     def run(self, user_input=None):
         self.assign_user_input(user_input=user_input)
         while True:
-            self.breadcrumbs.append('materials')
+            self.append_breadcrumb()
             menu = self.make_main_menu()
             result = menu.run()
             if self.backtrack():
                 break
             elif not result:
-                self.breadcrumbs.pop()
+                self.pop_breadcrumb()
                 continue
             self.handle_main_menu_result(result)
             if self.backtrack():
                 break
-            self.breadcrumbs.pop()
-        self.breadcrumbs.pop()
+            self.pop_breadcrumb()
+        self.pop_breadcrumb()

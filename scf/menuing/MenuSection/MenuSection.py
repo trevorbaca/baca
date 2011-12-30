@@ -11,8 +11,9 @@ class MenuSection(MenuObject):
         self.default_index = None
         self.display_keys = True
         self.entry_prefix = None
-        self.menu_entry_tuples = None
+        self.menu_entry_tokens = None
         self.number_menu_entries = False
+        self.return_menu_key = True
         self.section_title = None
 
     ### PUBLIC ATTRIBUTES ###
@@ -66,21 +67,29 @@ class MenuSection(MenuObject):
     def indent_level(self):
         return self._indent_level
 
+    @property
+    def menu_bodies(self):
+        return [self.menu_entry_token_to_key_and_body(x)[1] for x in self.menu_entry_tokens]
+
     @apply
-    def menu_entry_tuples():
+    def menu_entry_tokens():
         def fget(self):
-            return self._menu_entry_tuples
-        def fset(self, menu_entry_tuples):
-            if menu_entry_tuples is None:
-                self._menu_entry_tuples = []
+            return self._menu_entry_tokens
+        def fset(self, menu_entry_tokens):
+            if menu_entry_tokens is None:
+                self._menu_entry_tokens = []
             else:
-                self._menu_entry_tuples = menu_entry_tuples[:]
+                self._menu_entry_tokens = menu_entry_tokens[:]
         return property(**locals())
+
+    @property
+    def menu_keys(self):
+        return [self.menu_entry_token_to_key_and_body(x)[0] for x in self.menu_entry_tokens]
 
     @property
     def menu_values(self):
         if self.number_menu_entries:
-            return [x[1] for x in self.menu_entry_tuples]
+            return [self.menu_entry_token_to_value(x) for x in self.menu_entry_tokens]
 
     @apply
     def number_menu_entries():
@@ -89,6 +98,15 @@ class MenuSection(MenuObject):
         def fset(self, number_menu_entries):
             assert isinstance(number_menu_entries, type(True))
             self._number_menu_entries = number_menu_entries
+        return property(**locals())
+
+    @apply
+    def return_menu_key():
+        def fget(self):
+            return self._return_menu_key
+        def fset(self, return_menu_key):
+            assert isinstance(return_menu_key, type(True))
+            self._return_menu_key = return_menu_key
         return property(**locals())
 
     @apply
@@ -102,17 +120,21 @@ class MenuSection(MenuObject):
 
     ### PUBLIC METHODS ###
 
+    def is_menu_entry_token(self, expr):
+        if isinstance(expr, str):
+            return True
+        elif isinstance(expr, tuple) and len(expr) == 2:
+            return True
+        return False
+        
     def make_menu_lines(self, all_keys, all_bodies):
-        '''Terms.
-
-        KEYS. Keys are optionally shown in parentheses in each entry;
+        '''KEYS. Keys are optionally shown in parentheses in each entry;
         keys are designed to be textual instead of numeric;
         not every entry need have a key because entries may be numbered instead of keyed;
         note that entries may be both numbered and keyed.
 
         BODIES. Bodies are those things shown in each entry;
-        values are mandatory and every entry must be supplied with a value.
-        Display strings will be retired.
+        bodies are mandatory and every entry must be supplied with a body.
 
         RESULT. Result is the thing ultimately returned by Menu.run().
 
@@ -128,9 +150,9 @@ class MenuSection(MenuObject):
         '''
         menu_lines = []
         menu_lines.extend(self.make_section_title_lines())
-        assert all([isinstance(x, tuple) and len(x) == 2 for x in self.menu_entry_tuples])
-        for entry_index, menu_entry_tuple in enumerate(self.menu_entry_tuples):
-            key, body = menu_entry_tuple
+        assert all([self.is_menu_entry_token(x) for x in self.menu_entry_tokens])
+        for entry_index, menu_entry_token in enumerate(self.menu_entry_tokens):
+            key, body = self.menu_entry_token_to_key_and_body(menu_entry_token)
             menu_line = self.make_tab(self.indent_level) + ' '
             if self.number_menu_entries:
                 entry_number = entry_index + 1
@@ -142,7 +164,7 @@ class MenuSection(MenuObject):
             menu_lines.append(menu_line)
             all_keys.append(key)
             all_bodies.append(body)
-        if self.menu_entry_tuples:
+        if self.menu_entry_tokens:
             menu_lines.append('')
         return menu_lines
 
@@ -154,3 +176,20 @@ class MenuSection(MenuObject):
             menu_lines.append(menu_line)
             menu_lines.append('')
         return menu_lines
+
+    def menu_entry_token_to_key_and_body(self, menu_entry_token):
+        if isinstance(menu_entry_token, str):
+            key, body = '', menu_entry_token
+        elif isinstance(menu_entry_token, tuple):
+            key, body = menu_entry_token
+        else:
+            raise ValueError
+        return key, body
+
+    def menu_entry_token_to_value(self, menu_entry_token):
+        if isinstance(menu_entry_token, str):
+            return menu_entry_token
+        elif isinstance(menu_entry_token, tuple):
+            return menu_entry_token[1]
+        else:
+            raise ValueError

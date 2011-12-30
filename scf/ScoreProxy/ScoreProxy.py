@@ -25,6 +25,10 @@ class ScoreProxy(PackageProxy):
             return self.title
 
     @property
+    def breadcrumb(self):
+        return self.annotated_title
+
+    @property
     def chunk_wrangler(self):
         return self._chunk_wrangler
 
@@ -245,40 +249,40 @@ class ScoreProxy(PackageProxy):
     def make_main_menu(self):
         menu, section = self.make_new_menu(where=self.where())
         section.section_title = 'chunks'
-        section.menu_entry_tuples = [('', x) for x in self.chunk_wrangler.iterate_package_spaced_names()]
+        section.menu_entry_tokens = list(self.chunk_wrangler.iterate_package_spaced_names())
         section.number_menu_entries = True
         section.entry_prefix = 'h'
         section = menu.make_new_section()
-        section.menu_entry_tuples.append(('ch', '[create chunk]'))
+        section.menu_entry_tokens.append(('ch', '[create chunk]'))
         section = menu.make_new_section()
         section.section_title = 'materials'
-        section.menu_entry_tuples = [('', x) for x in self.material_wrangler.iterate_package_underscored_names()]
+        section.menu_entry_tokens = list(self.material_wrangler.iterate_package_underscored_names())
         section.number_menu_entries = True
         section.entry_prefix = 'm'
         section = menu.make_new_section()
-        section.menu_entry_tuples.append(('mi', 'create interactive material'))
-        section.menu_entry_tuples.append(('ms', 'create static material'))
+        section.menu_entry_tokens.append(('mi', 'create interactive material'))
+        section.menu_entry_tokens.append(('ms', 'create static material'))
         section = menu.make_new_section()
         section.section_title = 'setup'
-        section.menu_entry_tuples.append(('ft', 'forces tagline'))
-        section.menu_entry_tuples.append(('pf', 'performers'))
-        section.menu_entry_tuples.append(('tl', 'title'))
-        section.menu_entry_tuples.append(('yr', 'year of completion'))
+        section.menu_entry_tokens.append(('ft', 'forces tagline'))
+        section.menu_entry_tokens.append(('pf', 'performers'))
+        section.menu_entry_tokens.append(('tl', 'title'))
+        section.menu_entry_tokens.append(('yr', 'year of completion'))
         menu.hidden_entries.append(('svn', 'work with repository'))
         menu.hidden_entries.append(('tags', 'work with tags'))
         return menu
 
     def make_svn_menu(self):
         menu, section = self.make_new_menu(where=self.where())
-        section.menu_entry_tuples.append(('st', 'st'))
-        section.menu_entry_tuples.append(('add', 'add'))
-        section.menu_entry_tuples.append(('ci', 'ci'))
+        section.menu_entry_tokens.append(('st', 'st'))
+        section.menu_entry_tokens.append(('add', 'add'))
+        section.menu_entry_tokens.append(('ci', 'ci'))
         section.display_keys = False
         return menu
 
     def manage_svn(self):
-        self.breadcrumbs.append('repository commands')
         while True:
+            self.append_breadcrumb('repository commands')
             menu = self.make_svn_menu()
             result = menu.run()
             if self.backtrack():
@@ -286,7 +290,8 @@ class ScoreProxy(PackageProxy):
             self.handle_svn_menu_result(result)
             if self.backtrack():
                 break
-        self.breadcrumbs.pop()
+            self.pop_breadcrumb()
+        self.pop_breadcrumb()
 
     def profile_package_structure(self):
         if not os.path.exists(self.directory_name):
@@ -303,27 +308,27 @@ class ScoreProxy(PackageProxy):
     def run(self, user_input=None):
         self.assign_user_input(user_input=user_input)
         while True:
-            self.breadcrumbs.append(self.annotated_title)
+            self.append_breadcrumb()
             menu = self.make_main_menu()
             result = menu.run()
             if self.session.is_backtracking_to_score:
                 self.session.is_backtracking_to_score = False
-                self.breadcrumbs.pop() 
+                self.pop_breadcrumb() 
                 continue
             elif self.backtrack():
                 break
             elif not result:
-                self.breadcrumbs.pop()
+                self.pop_breadcrumb()
                 continue
             self.handle_main_menu_result(result)
             if self.session.is_backtracking_to_score:
                 self.session.is_backtracking_to_score = False
-                self.breadcrumbs.pop()
+                self.pop_breadcrumb()
                 continue
             elif self.backtrack():
                 break
-            self.breadcrumbs.pop()
-        self.breadcrumbs.pop()
+            self.pop_breadcrumb()
+        self.pop_breadcrumb()
 
     def run_score_package_creation_wizard(self):
         self.print_not_implemented()

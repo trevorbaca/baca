@@ -81,6 +81,61 @@ class SCFObject(object):
         if user_input is not None:
             self.session.user_input = user_input
 
+    def append_breadcrumb(self, breadcrumb=None):
+        if breadcrumb is not None:
+            self.breadcrumbs.append(breadcrumb)
+        else:
+            self.breadcrumbs.append(self.breadcrumb)
+
+    # TODO: rename 'opt' as 'menu_keys'
+    def argument_range_string_to_numbers(self, argument_range_string, menu_items, opt=None):
+        '''Return list of positive integers on success. Otherwise none.
+        '''
+        assert len(menu_items)
+        numbers = []
+        argument_range_string = argument_range_string.replace(' ', '')
+        range_parts = argument_range_string.split(',')
+        for range_part in range_parts:
+            if range_part == 'all':
+                numbers.extend(range(1, len(menu_items) + 1))
+            elif '-' in range_part:
+                start, stop = range_part.split('-')
+                start = self.argument_string_to_number(start, menu_items, opt=opt)
+                stop = self.argument_string_to_number(stop, menu_items, opt=opt)
+                if start is None or stop is None:
+                    return
+                if start <= stop:
+                    new_numbers = range(start, stop + 1)
+                    numbers.extend(new_numbers)
+                else:
+                    new_numbers = range(start, stop - 1, -1)
+                    numbers.extend(new_numbers)
+            else:
+                number = self.argument_string_to_number(range_part, menu_items, opt=opt)
+                if number is None:
+                    return
+                numbers.append(number)
+        return numbers
+
+    # TODO: rename 'opt' as 'menu_keys'
+    def argument_string_to_number(self, argument_string, menu_items, opt=None):
+        '''Return number when successful. Otherwise none.
+        '''
+        if mathtools.is_integer_equivalent_expr(argument_string):
+            menu_number = int(argument_string)
+            if menu_number <= len(menu_items):
+                return menu_number
+        for menu_index, menu_item in enumerate(menu_items):
+            if argument_string == menu_item:
+                return menu_index + 1
+            elif 3 <= len(argument_string) and menu_item.startswith(argument_string):
+                return menu_index + 1
+        if opt is None:
+            return
+        for menu_index, menu_key in enumerate(opt):
+            if argument_string == menu_key:
+                return menu_index + 1
+
     def backtrack(self):
         return self.session.backtrack()
 
@@ -116,10 +171,12 @@ class SCFObject(object):
 
     def handle_raw_input(self, prompt, include_chevron=True):
         prompt = iotools.capitalize_string_start(prompt)
+        #print 'rrr!!!'
         if include_chevron:
             prompt = prompt + '> '
         else:
             prompt = prompt + ' '
+        #print 'FOO', self.session.is_displayable
         if self.session.is_displayable:
             user_response = raw_input(prompt)
             print ''
@@ -151,48 +208,6 @@ class SCFObject(object):
             if self.argument_range_string_to_numbers(argument_range_string, argument_list) is not None:
                 return True
         return False
-
-    def argument_range_string_to_numbers(self, argument_range_string, menu_items):
-        '''Return list of positive integers on success. Otherwise none.
-        '''
-        assert len(menu_items)
-        numbers = []
-        argument_range_string = argument_range_string.replace(' ', '')
-        range_parts = argument_range_string.split(',')
-        for range_part in range_parts:
-            if range_part == 'all':
-                numbers.extend(range(1, len(menu_items) + 1))
-            elif '-' in range_part:
-                start, stop = range_part.split('-')
-                start = self.argument_string_to_number(start, menu_items)
-                stop = self.argument_string_to_number(stop, menu_items)
-                if start is None or stop is None:
-                    return
-                if start <= stop:
-                    new_numbers = range(start, stop + 1)
-                    numbers.extend(new_numbers)
-                else:
-                    new_numbers = range(start, stop - 1, -1)
-                    numbers.extend(new_numbers)
-            else:
-                number = self.argument_string_to_number(range_part, menu_items)
-                if number is None:
-                    return
-                numbers.append(number)
-        return numbers
-
-    def argument_string_to_number(self, argument_string, menu_items):
-        '''Return number when successful. Otherwise none.
-        '''
-        if mathtools.is_integer_equivalent_expr(argument_string):
-            menu_number = int(argument_string)
-            if menu_number <= len(menu_items):
-                return menu_number
-        for menu_index, menu_item in enumerate(menu_items):
-            if argument_string == menu_item:
-                return menu_index + 1
-            elif 3 <= len(argument_string) and menu_item.startswith(argument_string):
-                return menu_index + 1
 
     def is_argument_range_string(self, expr):
         pattern = re.compile('^(\w+( *- *\w+)?)(, *\w+( *- *\w+)?)*$')
@@ -250,6 +265,9 @@ class SCFObject(object):
 
     def ptc(self):
         self.session.complete_transcript.ptc()
+
+    def pop_breadcrumb(self):
+        return self.breadcrumbs.pop()
 
     def pop_next_user_response_from_user_input(self):
         self.session.last_command_was_composite = False

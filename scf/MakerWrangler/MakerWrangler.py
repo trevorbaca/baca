@@ -25,6 +25,10 @@ class MakerWrangler(PackageWrangler, PackageProxy):
         import baca
         return baca.scf.Maker
 
+    @property
+    def breadcrumb(self):
+        return 'makers'
+
     ### PUBLIC METHODS ###
 
     @apply
@@ -171,32 +175,32 @@ class MakerWrangler(PackageWrangler, PackageProxy):
 
     def make_main_menu(self):
         menu, section = self.make_new_menu(where=self.where())
-        section.menu_entry_tuples = [('', x) for x in self.list_maker_spaced_class_names()]
+        section.menu_entry_tokens = self.list_maker_spaced_class_names()
         section.number_menu_entries = True
         section = menu.make_new_section()
-        section.menu_entry_tuples.append(('new', 'make maker'))
+        section.menu_entry_tokens.append(('new', 'make maker'))
         return menu
 
     def run(self, user_input=None):
         self.assign_user_input(user_input=user_input)
         while True:
-            self.breadcrumbs.append('makers')
+            self.append_breadcrumb()
             menu = self.make_main_menu()
             result = menu.run()
             if self.backtrack():
                 break
             elif not result:
-                self.breadcrumbs.pop()
+                self.pop_breadcrumb()
                 continue
             self.handle_main_menu_result(result)
             if self.backtrack():
                 break
-            self.breadcrumbs.pop()
-        self.breadcrumbs.pop()
+            self.pop_breadcrumb()
+        self.pop_breadcrumb()
 
     def select_maker(self):
         menu, section = self.make_new_menu(where=self.where())
-        section.menu_entry_tuples = [('', x) for x in self.list_maker_spaced_class_names()]
+        section.menu_entry_tokens = self.list_maker_spaced_class_names()
         section.number_menu_entries = True
         result = menu.run()
         if result is not None:
