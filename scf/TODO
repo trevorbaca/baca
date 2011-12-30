@@ -16,9 +16,9 @@ TODO
 
 8. Create test_Menu_run.py to document menu build configurations.
 
-9. Add C4-style named chromatic pitch initialization.
+9. Reorder PitchRangeEditor.conditionally_initialize_target() steps.
 
-10. Allow C2, C6-style pitch range entry.
+10. Clean up PitchRangeEditor main menu.
 
 11. Edit instrument transposition.
 

@@ -13,7 +13,7 @@ def test_PitchRangeEditor_make_target_01():
 
 
 def test_PitchRangeEditor_make_target_02():
-    '''Use quotes as around command-terminated European pitch names in user input testing.
+    '''Use quotes around command-terminated European pitch names in user input testing.
     '''
 
     editor = baca.scf.editors.PitchRangeEditor()
@@ -24,6 +24,17 @@ def test_PitchRangeEditor_make_target_02():
 
 
 def test_PitchRangeEditor_make_target_03():
+    '''Pitch-class / octave number designation works.
+    '''
+
+    editor = baca.scf.editors.PitchRangeEditor()
+    editor.run(user_input='A0 True C8 True q')
+
+    assert editor.target == pitchtools.PitchRange(
+        (NamedChromaticPitch('a,,,'), 'inclusive'), (NamedChromaticPitch("c'''''"), 'inclusive'))
+
+
+def test_PitchRangeEditor_make_target_04():
     '''Quit, score, studio & junk all work.
 
     Note that back doesn't yet work here 
