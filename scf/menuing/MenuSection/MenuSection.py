@@ -12,8 +12,8 @@ class MenuSection(MenuObject):
         self.default_index = None
         self.display_keys = True
         self.number_menu_entries = False
-        self.return_menu_entry_key = True
         self.section_title = None
+        self.use_menu_entry_key_as_menu_entry_return_value = True
 
     ### PUBLIC ATTRIBUTES ###
 
@@ -97,21 +97,21 @@ class MenuSection(MenuObject):
         return property(**locals())
 
     @apply
-    def return_menu_entry_key():
-        def fget(self):
-            return self._return_menu_entry_key
-        def fset(self, return_menu_entry_key):
-            assert isinstance(return_menu_entry_key, type(True))
-            self._return_menu_entry_key = return_menu_entry_key
-        return property(**locals())
-
-    @apply
     def section_title():
         def fget(self):
             return self._section_title
         def fset(self, section_title):
             assert isinstance(section_title, (str, type(None)))
             self._section_title = section_title
+        return property(**locals())
+
+    @apply
+    def use_menu_entry_key_as_menu_entry_return_value():
+        def fget(self):
+            return self._use_menu_entry_key_as_menu_entry_return_value
+        def fset(self, use_menu_entry_key_as_menu_entry_return_value):
+            assert isinstance(use_menu_entry_key_as_menu_entry_return_value, type(True))
+            self._use_menu_entry_key_as_menu_entry_return_value = use_menu_entry_key_as_menu_entry_return_value
         return property(**locals())
 
     ### PUBLIC METHODS ###
