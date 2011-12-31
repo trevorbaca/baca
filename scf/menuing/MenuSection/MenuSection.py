@@ -10,7 +10,6 @@ class MenuSection(MenuObject):
         self.allow_argument_range = False
         self.default_index = None
         self.display_keys = True
-        self.entry_prefix = None
         self.menu_entry_tokens = None
         self.number_menu_entries = False
         self.return_menu_key = True
@@ -48,15 +47,6 @@ class MenuSection(MenuObject):
         def fset(self, display_keys):
             assert isinstance(display_keys, type(True))
             self._display_keys = display_keys
-        return property(**locals())
-
-    @apply
-    def entry_prefix():
-        def fget(self):
-            return self._entry_prefix
-        def fset(self, entry_prefix):
-            assert isinstance(entry_prefix, (str, type(None)))
-            self._entry_prefix = entry_prefix
         return property(**locals())
 
     @property

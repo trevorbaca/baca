@@ -251,14 +251,12 @@ class ScoreProxy(PackageProxy):
         section.section_title = 'chunks'
         section.menu_entry_tokens = list(self.chunk_wrangler.iterate_package_spaced_names())
         section.number_menu_entries = True
-        section.entry_prefix = 'h'
         section = menu.make_new_section()
         section.menu_entry_tokens.append(('ch', '[create chunk]'))
         section = menu.make_new_section()
         section.section_title = 'materials'
         section.menu_entry_tokens = list(self.material_wrangler.iterate_package_underscored_names())
         section.number_menu_entries = True
-        section.entry_prefix = 'm'
         section = menu.make_new_section()
         section.menu_entry_tokens.append(('mi', 'create interactive material'))
         section.menu_entry_tokens.append(('ms', 'create static material'))
