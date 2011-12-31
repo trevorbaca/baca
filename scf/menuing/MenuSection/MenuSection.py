@@ -40,7 +40,7 @@ class MenuSection(MenuObject):
 
     @property
     def menu_entry_return_values(self):
-        return [self.menu_entry_token_to_value(x) for x in self.menu_entry_tokens]
+        return [self.menu_entry_token_to_menu_entry_return_value(x) for x in self.menu_entry_tokens]
 
     ### READ / WRITE PUBLIC ATTRIBUTES ###
 
@@ -183,10 +183,13 @@ class MenuSection(MenuObject):
             raise ValueError
         return key, body
 
-    def menu_entry_token_to_value(self, menu_entry_token):
+    def menu_entry_token_to_menu_entry_return_value(self, menu_entry_token):
         if isinstance(menu_entry_token, str):
             return menu_entry_token
         elif isinstance(menu_entry_token, tuple):
-            return menu_entry_token[1]
+            if self.use_menu_entry_key_as_menu_entry_return_value:
+                return menu_entry_token[0]
+            else:
+                return menu_entry_token[1]
         else:
             raise ValueError
