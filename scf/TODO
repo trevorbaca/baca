@@ -1,25 +1,23 @@
 TODO
 
-1. Implement AltoTrombone, BassTrombone.
+1. Change Clarinet to BFlatClarinet.
 
-2. Change Clarinet to BFlatClarinet.
+2. Implement remaining clarinets.
 
-3. Implement remaining clarinets.
+3. Implement saxophones.
 
-4. Implement saxophones.
+4. Audit and implement remaining instruments.
 
-5. Audit and implement remaining instruments.
+5. Create test_Menu_run.py to document menu build configurations.
 
-6. Create test_Menu_run.py to document menu build configurations.
+6. Clean up PitchRangeEditor main menu.
 
-7. Clean up PitchRangeEditor main menu.
+7. Edit instrument transposition.
 
-8. Edit instrument transposition.
+8. Edit instrument clefs.
 
-9. Edit instrument clefs.
+9. Research 'with' for breadcrumb management.
 
-10. Research 'with' for breadcrumb management.
+10. Remove blank line between help request and help response.
 
-11. Remove blank line between help request and help response.
-
-12. Remove blank line between exec request and exec response.
+11. Remove blank line between exec request and exec response.
