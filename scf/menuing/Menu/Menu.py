@@ -12,7 +12,7 @@ class Menu(MenuObject):
         self.hide_menu = False
         self.use_menu_entry_key_as_menu_entry_return_value = True
 
-    ### PUBLIC ATTRIBUTES ###
+    ### READ-ONLY PUBLIC ATTRIBUTES ###
 
     @property
     def argument_range_is_allowed(self):
@@ -24,15 +24,21 @@ class Menu(MenuObject):
     @property
     def default_value(self):
         for section in self.sections:
-            if section.has_default:
+            if section.has_default_value:
                 return section.default_value
 
     @property
-    def has_default(self):
+    def has_default_value(self):
         for section in self.sections:
-            if section.has_default:
+            if section.has_default_value:
                 return True
         return False
+
+    @property
+    def sections(self):
+        return self._sections
+
+    ### READ / WRITE PUBLIC ATTRIBUTES ###
 
     @apply
     def hide_menu():
@@ -51,10 +57,6 @@ class Menu(MenuObject):
             assert isinstance(use_menu_entry_key_as_menu_entry_return_value, type(True))
             self._use_menu_entry_key_as_menu_entry_return_value = use_menu_entry_key_as_menu_entry_return_value
         return property(**locals())
-
-    @property
-    def sections(self):
-        return self._sections
 
     ### PUBLIC METHODS ###
 
@@ -269,7 +271,7 @@ class Menu(MenuObject):
         return False
 
     def user_requests_default_value(self, user_input):
-        if self.has_default:
+        if self.has_default_value:
             if user_input == '':
                 return True
             elif 3 <= len(user_input) and 'default'.startswith(user_input):

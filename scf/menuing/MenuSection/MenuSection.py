@@ -15,7 +15,35 @@ class MenuSection(MenuObject):
         self.section_title = None
         self.use_menu_entry_key_as_menu_entry_return_value = True
 
-    ### PUBLIC ATTRIBUTES ###
+    ### READ-ONLY PUBLIC ATTRIBUTES ###
+
+    @property
+    def default_value(self):
+        assert self.has_default_value
+        return self.menu_entry_return_values[self.default_index]
+
+    @property
+    def has_default_value(self):
+        return self.default_index is not None
+
+    @property
+    def indent_level(self):
+        return self._indent_level
+
+    @property
+    def menu_entry_bodies(self):
+        return [self.menu_entry_token_to_key_and_body(x)[1] for x in self.menu_entry_tokens]
+
+    @property
+    def menu_entry_keys(self):
+        return [self.menu_entry_token_to_key_and_body(x)[0] for x in self.menu_entry_tokens]
+
+    @property
+    def menu_entry_return_values(self):
+        if self.number_menu_entries:
+            return [self.menu_entry_token_to_value(x) for x in self.menu_entry_tokens]
+
+    ### READ / WRITE PUBLIC ATTRIBUTES ###
 
     @apply
     def allow_argument_range():
@@ -41,11 +69,6 @@ class MenuSection(MenuObject):
             self._default_index = default_index
         return property(**locals())
 
-    @property
-    def default_value(self):
-        assert self.has_default
-        return self.menu_entry_return_values[self.default_index]
-
     @apply
     def display_keys():
         def fget(self):
@@ -54,18 +77,6 @@ class MenuSection(MenuObject):
             assert isinstance(display_keys, type(True))
             self._display_keys = display_keys
         return property(**locals())
-
-    @property
-    def has_default(self):
-        return self.default_index is not None
-
-    @property
-    def indent_level(self):
-        return self._indent_level
-
-    @property
-    def menu_entry_bodies(self):
-        return [self.menu_entry_token_to_key_and_body(x)[1] for x in self.menu_entry_tokens]
 
     @apply
     def menu_entry_tokens():
@@ -77,15 +88,6 @@ class MenuSection(MenuObject):
             else:
                 self._menu_entry_tokens = menu_entry_tokens[:]
         return property(**locals())
-
-    @property
-    def menu_entry_keys(self):
-        return [self.menu_entry_token_to_key_and_body(x)[0] for x in self.menu_entry_tokens]
-
-    @property
-    def menu_entry_return_values(self):
-        if self.number_menu_entries:
-            return [self.menu_entry_token_to_value(x) for x in self.menu_entry_tokens]
 
     @apply
     def number_menu_entries():
