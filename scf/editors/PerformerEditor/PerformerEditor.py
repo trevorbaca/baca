@@ -143,21 +143,24 @@ class PerformerEditor(InteractiveEditor):
         likely_instruments = self.target.likely_instruments_based_on_performer_name
         likely_instrument_names = [x().instrument_name for x in likely_instruments]
         most_likely_instrument = self.target.most_likely_instrument_based_on_performer_name
+        default_index = None
         if most_likely_instrument is not None:
             most_likely_instrument_name = most_likely_instrument().instrument_name
             assert most_likely_instrument_name in likely_instrument_names
             most_likely_index = likely_instrument_names.index(most_likely_instrument_name)
             likely_instrument_names[most_likely_index] = '{} (default)'.format(most_likely_instrument_name)
             most_likely_number = most_likely_index + 1
-            section.default_index = most_likely_index
+            default_index = most_likely_index
         if likely_instruments:
             section.menu_entry_tokens = likely_instrument_names
             section.number_menu_entries = True
+            section.default_index = default_index
             section = menu.make_new_section()
             section.menu_entry_tokens.append(('other', 'other instruments'))
         else:
             section.menu_entry_tokens = instrumenttools.list_instrument_names()
             section.number_menu_entries = True
+            section.default_index = default_index
             section = menu.make_new_section()
         section.menu_entry_tokens.append(('none', 'no instruments'))
         section.display_keys = False

@@ -7,10 +7,10 @@ class MenuSection(MenuObject):
     def __init__(self, session=None, where=None):
         MenuObject.__init__(self, session=session, where=where)
         self._indent_level = 1
+        self.menu_entry_tokens = None
         self.allow_argument_range = False
         self.default_index = None
         self.display_keys = True
-        self.menu_entry_tokens = None
         self.number_menu_entries = False
         self.return_menu_entry_key = True
         self.section_title = None
@@ -32,6 +32,12 @@ class MenuSection(MenuObject):
             return self._default_index
         def fset(self, default_index):
             assert isinstance(default_index, (int, type(None)))
+            if isinstance(default_index, int):
+                count = len(self.menu_entry_tokens)
+                if default_index < 0:
+                    raise ValueError('default index must be positive integer.')
+                if count <= default_index:
+                    raise ValueError('only {} menu entry tokens in section.'.format(count))
             self._default_index = default_index
         return property(**locals())
 
