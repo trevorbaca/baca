@@ -39,7 +39,7 @@ class MenuSection(MenuObject):
     @property
     def default_value(self):
         assert self.has_default
-        return self.menu_values[self.default_index]
+        return self.menu_entry_return_values[self.default_index]
 
     @apply
     def display_keys():
@@ -86,9 +86,8 @@ class MenuSection(MenuObject):
     def menu_entry_keys(self):
         return [self.menu_entry_token_to_key_and_body(x)[0] for x in self.menu_entry_tokens]
 
-    # TODO: change name to menu_entry_values
     @property
-    def menu_values(self):
+    def menu_entry_return_values(self):
         if self.number_menu_entries:
             return [self.menu_entry_token_to_value(x) for x in self.menu_entry_tokens]
 

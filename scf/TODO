@@ -1,33 +1,39 @@
 TODO
 
-1. Implement remaining clarinets.
+1. Add aggregate Menu.menu_entry_tokens, Menu.menu_entry_bodies, etc.
 
-2. Implement saxophones.
+2. Allow only one section per menu to be numbered.
 
-3. Audit and implement remaining instruments.
+3. Implement Menu.has_numbered_section attribute.
 
 4. Create test_Menu_run.py to document menu build configurations.
 
-5. Clean up PitchRangeEditor main menu.
+5. Implement remaining clarinets.
 
-6. Edit instrument transposition.
+6. Implement saxophones.
 
-7. Edit instrument clefs.
+7. Audit and implement remaining instruments.
 
-8. Research 'with' for breadcrumb management.
+8. Clean up PitchRangeEditor main menu.
 
-9. Remove blank line between help request and help response.
+9. Edit instrument transposition.
 
-10. Remove blank line between exec request and exec response.
+10. Edit instrument clefs.
 
-11. Remove extra appearance of B-flat clarinet from clarinetist config menu.
+11. Remove blank line between help request and help response.
 
-12. Wrap tests around existing material and chunk menus.
+12. Remove blank line between exec request and exec response.
 
-13. Implement 'make new range' functionality available to studio in global purview.
+13. Remove extra appearance of B-flat clarinet from clarinetist config menu.
 
-14. Implement 'make new range' functionality available to each score.
+14. Research 'with' for breadcrumb management.
 
-15. Change Instrument._default_performer_names to house (full, abbreviation) pairs.
+15. Wrap tests around existing material and chunk menus.
 
-16. Use performer abbreviations to populate performer selection menu.
+16. Implement 'make new range' functionality available to studio in global purview.
+
+17. Implement 'make new range' functionality available to each score.
+
+18. Change Instrument._default_performer_names to house (full, abbreviation) pairs.
+
+19. Use performer abbreviations to populate performer selection menu.

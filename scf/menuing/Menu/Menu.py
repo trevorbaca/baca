@@ -94,20 +94,20 @@ class Menu(MenuObject):
     # TODO: rename 'opt' as 'menu_keys' ... or just pass section.menu_entry_tokens
     def handle_argument_range_user_input(self, user_input):
         for section in self.sections:
-            if section.menu_values:
+            if section.menu_entry_return_values:
                 break
         else:
             raise ValueError('no section contains numbered menu entries.')
         item_numbers = self.argument_range_string_to_numbers(
-            user_input, section.menu_values, opt=section.menu_entry_keys)
+            user_input, section.menu_entry_return_values, opt=section.menu_entry_keys)
         if item_numbers is None:
             return []
         item_indices = [item_number - 1 for item_number in item_numbers]
         for section in self.sections:
-            if section.menu_values:
+            if section.menu_entry_return_values:
                 result = []
                 for i in item_indices:
-                    item = section.menu_values[i]
+                    item = section.menu_entry_return_values[i]
                     result.append(item)
                 return result
 
