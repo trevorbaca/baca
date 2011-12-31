@@ -67,7 +67,14 @@ class Menu(MenuObject):
             self.all_bodies.append(value)
 
     def change_all_keys_to_lowercase(self):
-        self.all_keys = [key.lower() for key in self.all_keys]
+        all_keys = []
+        for key in self.all_keys:
+            if key is None:
+                all_keys.append(key)
+            elif isinstance(key, str):
+                all_keys.append(key.lower())
+            else:
+                raise TypeError
 
     def change_user_input_to_directive(self, user_input):
         if self.user_requests_default_value(user_input):

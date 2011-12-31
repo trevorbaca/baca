@@ -175,7 +175,7 @@ class MenuSection(MenuObject):
 
     def menu_entry_token_to_key_and_body(self, menu_entry_token):
         if isinstance(menu_entry_token, str):
-            key, body = '', menu_entry_token
+            key, body = None, menu_entry_token
         elif isinstance(menu_entry_token, tuple):
             key, body = menu_entry_token
         else:

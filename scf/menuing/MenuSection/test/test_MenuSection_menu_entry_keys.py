@@ -1,9 +1,8 @@
 import baca
 
 
-# TODO: change this behavior so that menu entry keys are none instead of emtpy strings
 def test_MenuSection_menu_entry_keys_01():
-    '''Menu entry keys equal empty strings when menu entry tokens are strings.
+    '''Menu entry keys equal none when menu entry tokens are strings.
     True whether section is numbered or not.
     '''
 
@@ -14,11 +13,11 @@ def test_MenuSection_menu_entry_keys_01():
     section.menu_entry_tokens.extend(['apple', 'banana', 'cherry'])
 
     assert not section.number_menu_entries
-    assert section.menu_entry_keys == ['', '', '']
+    assert section.menu_entry_keys == [None, None, None]
 
     section.number_menu_entries = True
     assert section.number_menu_entries
-    assert section.menu_entry_keys == ['', '', '']
+    assert section.menu_entry_keys == [None, None, None]
 
 
 def test_MenuSection_menu_entry_keys_02():
