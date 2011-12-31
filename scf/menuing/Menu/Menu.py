@@ -35,6 +35,27 @@ class Menu(MenuObject):
         return False
 
     @property
+    def menu_entry_bodies(self):
+        result = []
+        for section in self.sections:
+            result.extend(section.menu_entry_bodies)
+        return result
+
+    @property
+    def menu_entry_keys(self):
+        result = []
+        for section in self.sections:
+            result.extend(section.menu_entry_keys)
+        return result
+
+    @property
+    def menu_entry_return_values(self):
+        result = []
+        for section in self.sections:
+            result.extend(section.menu_entry_return_values)
+        return result
+
+    @property
     def sections(self):
         return self._sections
 
