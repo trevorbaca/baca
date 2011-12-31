@@ -1,23 +1,33 @@
 TODO
 
-1. Change Clarinet to BFlatClarinet.
+1. Implement remaining clarinets.
 
-2. Implement remaining clarinets.
+2. Implement saxophones.
 
-3. Implement saxophones.
+3. Audit and implement remaining instruments.
 
-4. Audit and implement remaining instruments.
+4. Create test_Menu_run.py to document menu build configurations.
 
-5. Create test_Menu_run.py to document menu build configurations.
+5. Clean up PitchRangeEditor main menu.
 
-6. Clean up PitchRangeEditor main menu.
+6. Edit instrument transposition.
 
-7. Edit instrument transposition.
+7. Edit instrument clefs.
 
-8. Edit instrument clefs.
+8. Research 'with' for breadcrumb management.
 
-9. Research 'with' for breadcrumb management.
+9. Remove blank line between help request and help response.
 
-10. Remove blank line between help request and help response.
+10. Remove blank line between exec request and exec response.
 
-11. Remove blank line between exec request and exec response.
+11. Remove extra appearance of B-flat clarinet from clarinetist config menu.
+
+12. Wrap tests around existing material and chunk menus.
+
+13. Implement 'make new range' functionality available to studio in global purview.
+
+14. Implement 'make new range' functionality available to each score.
+
+15. Change Instrument._default_performer_names to house (full, abbreviation) pairs.
+
+16. Use performer abbreviations to populate performer selection menu.
