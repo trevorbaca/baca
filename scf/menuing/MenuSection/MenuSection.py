@@ -40,8 +40,7 @@ class MenuSection(MenuObject):
 
     @property
     def menu_entry_return_values(self):
-        if self.number_menu_entries:
-            return [self.menu_entry_token_to_value(x) for x in self.menu_entry_tokens]
+        return [self.menu_entry_token_to_value(x) for x in self.menu_entry_tokens]
 
     ### READ / WRITE PUBLIC ATTRIBUTES ###
 

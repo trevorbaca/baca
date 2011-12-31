@@ -1,9 +1,7 @@
 import baca
-import py
 
 
 def test_Menu_menu_entry_return_values_01():
-    py.test.skip('make this work when return values always exist for every section.')
 
     menu = baca.scf.menuing.Menu()
     menu.append_breadcrumb('location')
@@ -14,4 +12,5 @@ def test_Menu_menu_entry_return_values_01():
     section_2.menu_entry_tokens.append(('add', 'add something'))
     section_2.menu_entry_tokens.append(('del', 'delete something'))
     section_2.menu_entry_tokens.append(('mod', 'modify something'))
-    assert menu.menu_entry_return_values == section_1.menu_entry_return_values + section_2.menu_entry_return_values
+    assert menu.menu_entry_return_values == \
+        section_1.menu_entry_return_values + section_2.menu_entry_return_values
