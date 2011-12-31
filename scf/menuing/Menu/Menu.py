@@ -10,7 +10,7 @@ class Menu(MenuObject):
         MenuObject.__init__(self, session=session, where=where)
         self._sections = []
         self.hide_menu = False
-        self.return_menu_key = True
+        self.return_menu_entry_key = True
 
     ### PUBLIC ATTRIBUTES ###
 
@@ -44,12 +44,12 @@ class Menu(MenuObject):
         return property(**locals())
 
     @apply
-    def return_menu_key():
+    def return_menu_entry_key():
         def fget(self):
-            return self._return_menu_key
-        def fset(self, return_menu_key):
-            assert isinstance(return_menu_key, type(True))
-            self._return_menu_key = return_menu_key
+            return self._return_menu_entry_key
+        def fset(self, return_menu_entry_key):
+            assert isinstance(return_menu_entry_key, type(True))
+            self._return_menu_entry_key = return_menu_entry_key
         return property(**locals())
 
     @property
@@ -126,7 +126,7 @@ class Menu(MenuObject):
                     return self.conditionally_enclose_in_list(value)
 
     def handle_menu_key_user_input(self, user_input):
-        if self.return_menu_key:
+        if self.return_menu_entry_key:
             directive = user_input
         else:
             directive = self.change_menu_key_to_menu_body(user_input)

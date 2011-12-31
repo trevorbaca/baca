@@ -12,7 +12,7 @@ class MenuSection(MenuObject):
         self.display_keys = True
         self.menu_entry_tokens = None
         self.number_menu_entries = False
-        self.return_menu_key = True
+        self.return_menu_entry_key = True
         self.section_title = None
 
     ### PUBLIC ATTRIBUTES ###
@@ -91,12 +91,12 @@ class MenuSection(MenuObject):
         return property(**locals())
 
     @apply
-    def return_menu_key():
+    def return_menu_entry_key():
         def fget(self):
-            return self._return_menu_key
-        def fset(self, return_menu_key):
-            assert isinstance(return_menu_key, type(True))
-            self._return_menu_key = return_menu_key
+            return self._return_menu_entry_key
+        def fset(self, return_menu_entry_key):
+            assert isinstance(return_menu_entry_key, type(True))
+            self._return_menu_entry_key = return_menu_entry_key
         return property(**locals())
 
     @apply

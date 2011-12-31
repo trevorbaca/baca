@@ -40,7 +40,7 @@ def test_MenuSection_menu_entry_return_values_02():
     assert section.menu_entry_return_values == section.menu_entry_bodies
 
 
-# TODO: extend behavior such that section implements return_menu_keys
+# TODO: extend behavior such that section implements return_menu_entry_keys
 #       and allows for menu keys to be returned here instead of menu bodies
 def test_MenuSection_menu_entry_return_values_03():
     '''When section is numbered and when section houses tuple menu entry tokens,
