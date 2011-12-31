@@ -56,6 +56,12 @@ class Menu(MenuObject):
         return result
 
     @property
+    def numbered_section(self):
+        for section in self.sections:
+            if section.number_menu_entries:
+                return section
+
+    @property
     def sections(self):
         return self._sections
 
@@ -123,23 +129,18 @@ class Menu(MenuObject):
 
     # TODO: rename 'opt' as 'menu_keys' ... or just pass section.menu_entry_tokens
     def handle_argument_range_user_input(self, user_input):
-        for section in self.sections:
-            if section.menu_entry_return_values:
-                break
-        else:
-            raise ValueError('no section contains numbered menu entries.')
-        item_numbers = self.argument_range_string_to_numbers(
-            user_input, section.menu_entry_return_values, opt=section.menu_entry_keys)
+        numbered_section = self.numbered_section
+        assert numbered_section is not None
+        item_numbers = self.argument_range_string_to_numbers(user_input, 
+            numbered_section.menu_entry_return_values, opt=numbered_section.menu_entry_keys)
         if item_numbers is None:
             return []
         item_indices = [item_number - 1 for item_number in item_numbers]
-        for section in self.sections:
-            if section.menu_entry_return_values:
-                result = []
-                for i in item_indices:
-                    item = section.menu_entry_return_values[i]
-                    result.append(item)
-                return result
+        result = []
+        for i in item_indices:
+            item = numbered_section.menu_entry_return_values[i]
+            result.append(item)
+        return result
 
     def handle_integer_user_input(self, user_input):
         entry_number = int(user_input)
