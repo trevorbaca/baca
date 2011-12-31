@@ -91,7 +91,7 @@ class Menu(MenuObject):
     def change_menu_key_to_menu_body(self, menu_key):
         return dict(zip(self.all_keys, self.all_bodies)).get(menu_key)
 
-    # TODO: rename 'opt' as 'menu_keys'
+    # TODO: rename 'opt' as 'menu_keys' ... or just pass section.menu_entry_tokens
     def handle_argument_range_user_input(self, user_input):
         for section in self.sections:
             if section.menu_values:
@@ -99,7 +99,7 @@ class Menu(MenuObject):
         else:
             raise ValueError('no section contains numbered menu entries.')
         item_numbers = self.argument_range_string_to_numbers(
-            user_input, section.menu_values, opt=section.menu_keys)
+            user_input, section.menu_values, opt=section.menu_entry_keys)
         if item_numbers is None:
             return []
         item_indices = [item_number - 1 for item_number in item_numbers]

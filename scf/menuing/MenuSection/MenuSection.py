@@ -82,9 +82,8 @@ class MenuSection(MenuObject):
                 self._menu_entry_tokens = menu_entry_tokens[:]
         return property(**locals())
 
-    # TODO: change name to menu_entry_keys
     @property
-    def menu_keys(self):
+    def menu_entry_keys(self):
         return [self.menu_entry_token_to_key_and_body(x)[0] for x in self.menu_entry_tokens]
 
     # TODO: change name to menu_entry_values
