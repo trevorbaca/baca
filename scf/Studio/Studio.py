@@ -183,7 +183,7 @@ class Studio(SCFObject):
         return menu
 
     def run(self, user_input=None):
-        self.session = None
+        type(self).__init__(self)
         self.assign_user_input(user_input=user_input)
         self.append_breadcrumb()
         run_main_menu = True

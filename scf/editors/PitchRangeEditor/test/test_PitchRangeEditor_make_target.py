@@ -14,7 +14,7 @@ def test_PitchRangeEditor_make_target_01():
     assert editor.target == pitchtools.PitchRange('(A0, C8]')
 
 
-def test_PitchRangeEditor_make_target_04():
+def test_PitchRangeEditor_make_target_02():
     '''Quit, score, studio & junk all work.
 
     Note that back doesn't yet work here 
