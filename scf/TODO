@@ -1,29 +1,25 @@
 TODO
 
-1. Change French horn instrument names to horn and hn.
+1. Implement AltoTrombone, BassTrombone.
 
-2. Change Trombone to TenorTrombone.
+2. Change Clarinet to BFlatClarinet.
 
-3. Implement AltoTrombone, BassTrombone.
+3. Implement remaining clarinets.
 
-4. Change Clarinet to BFlatClarinet.
+4. Implement saxophones.
 
-5. Implement remaining clarinets.
+5. Audit and implement remaining instruments.
 
-6. Implement saxophones.
+6. Create test_Menu_run.py to document menu build configurations.
 
-7. Audit and implement remaining instruments.
+7. Clean up PitchRangeEditor main menu.
 
-8. Create test_Menu_run.py to document menu build configurations.
+8. Edit instrument transposition.
 
-9. Clean up PitchRangeEditor main menu.
+9. Edit instrument clefs.
 
-10. Edit instrument transposition.
+10. Research 'with' for breadcrumb management.
 
-11. Edit instrument clefs.
+11. Remove blank line between help request and help response.
 
-12. Research 'with' for breadcrumb management.
-
-13. Remove blank line between help request and help response.
-
-14. Remove blank line between exec request and exec response.
+12. Remove blank line between exec request and exec response.
