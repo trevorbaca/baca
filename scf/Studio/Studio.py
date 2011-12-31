@@ -90,7 +90,9 @@ class Studio(SCFObject):
         elif result == 'k':
             self.global_proxy.maker_wrangler.run()
         elif result == 'm':
+            breadcrumb = self.pop_breadcrumb()
             self.global_proxy.material_wrangler.run()
+            self.append_breadcrumb(breadcrumb)
         elif result == 'mb':
             self.session.scores_to_show = 'mothballed'
         elif result == 'svn':

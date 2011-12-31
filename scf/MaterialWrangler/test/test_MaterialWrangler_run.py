@@ -21,3 +21,12 @@ def test_MaterialWrangler_run_01():
 
     studio.run(user_input='m foo q')
     assert studio.ts == (6, (2, 4))
+
+
+def test_MaterialWrangler_run_02():
+    '''Breadcrumbs work.
+    '''
+
+    studio = baca.scf.Studio()
+    studio.run(user_input='m q')
+    assert studio.transcript[-2][0] == 'Studio - materials'
