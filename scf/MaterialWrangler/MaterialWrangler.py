@@ -56,29 +56,18 @@ class MaterialWrangler(PackageWrangler, PackageProxy):
         else:
             return self.StaticMaterialProxy(package_importable_name)
 
-    def handle_main_menu_result(self, key):
-        if key == 'b':
-            return 'back'
-        elif key == 'i':
+    def handle_main_menu_result(self, result):
+        print 'result: {!r}'.format(result)
+        if result == 'i':
             menu_title = menu.menu_title
             self.material_wrangler.create_interactive_material_package_interactively()
-        elif key == 's':
+        elif result == 's':
             menu_title = menu.menu_title
             self.material_wrangler.create_static_material_interactively(menu_title=menu_title)
         else:
-            score_package_importable_name = 'baca.materials'
-            material_underscored_name = value
-            if material_underscored_name.endswith('(@)'):
-                package_importable_name = '{}.{}'.format(
-                    score_package_importable_name, material_underscored_name.strip(' (@)'))
-                material_proxy = self.StaticMaterialProxy(package_importable_name)
-            else:
-                package_importable_name = '{}.{}'.format(
-                    score_package_importable_name, material_underscored_name)
-                material_proxy = self.InteractiveMaterialProxy(package_importable_name)
-            material_proxy.title = 'Materials'
+            material_proxy = self.make_material_proxy(result)
             material_proxy.run()
-
+        
     def iterate_material_summaries(self):
         for material_proxy in self.iterate_package_proxies():
             summary = material_proxy.package_short_name
@@ -90,10 +79,24 @@ class MaterialWrangler(PackageWrangler, PackageProxy):
         menu, section = self.make_new_menu(where=self.where())
         section.menu_entry_tokens = list(self.iterate_material_summaries())
         section.number_menu_entries = True
+        section.return_menu_key = False
+        menu.return_menu_key = False
         section = menu.make_new_section()
         section.menu_entry_tokens.append(('i', 'create interactive material'))
         section.menu_entry_tokens.append(('s', 'create static material'))
         return menu
+
+    def make_material_proxy(self, material_underscored_name):
+        score_package_importable_name = 'baca.materials'
+        package_importable_name = []
+        package_importable_name.append(score_package_importable_name)
+        package_importable_name.append(material_underscored_name.strip(' (@)'))
+        package_importable_name = '.'.join(package_importable_name)
+        if material_underscored_name.endswith('(@)'):
+            material_proxy = self.StaticMaterialProxy(package_importable_name)
+        else:
+            material_proxy = self.InteractiveMaterialProxy(package_importable_name)
+        return material_proxy
 
     def run(self, user_input=None):
         self.assign_user_input(user_input=user_input)
