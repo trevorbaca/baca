@@ -1,7 +1,7 @@
 import baca
 
 
-def test_MenuSection_menu_bodies_01():
+def test_MenuSection_menu_entry_bodies_01():
     '''Menu bodies work regardless menu entry token type.
     '''
 
@@ -13,4 +13,4 @@ def test_MenuSection_menu_bodies_01():
     section.menu_entry_tokens.append(('del', 'delete something'))
     section.menu_entry_tokens.append(('mod', 'modify something'))
 
-    assert section.menu_bodies == ['add something', 'delete something', 'modify something']
+    assert section.menu_entry_bodies == ['add something', 'delete something', 'modify something']

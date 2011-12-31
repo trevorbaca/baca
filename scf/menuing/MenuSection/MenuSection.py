@@ -67,9 +67,8 @@ class MenuSection(MenuObject):
     def indent_level(self):
         return self._indent_level
 
-    # TODO: change name to menu_entry_bodies
     @property
-    def menu_bodies(self):
+    def menu_entry_bodies(self):
         return [self.menu_entry_token_to_key_and_body(x)[1] for x in self.menu_entry_tokens]
 
     @apply
