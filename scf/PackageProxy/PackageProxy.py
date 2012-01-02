@@ -273,12 +273,11 @@ class PackageProxy(DirectoryProxy):
         return formatted_tags
 
     def make_tags_menu(self):
-        menu, section = self.make_new_menu(where=self.where())
+        menu, section = self.make_new_menu(where=self.where(), is_keyed=False)
         section.menu_entry_tokens = self.list_formatted_tags()
         section = menu.make_new_section()
         section.menu_entry_tokens.append(('add', 'add tag'))
         section.menu_entry_tokens.append(('del', 'delete tag'))
-        section.is_keyed = False
         return menu
 
     def manage_tags(self):

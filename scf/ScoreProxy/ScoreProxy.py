@@ -270,11 +270,10 @@ class ScoreProxy(PackageProxy):
         return menu
 
     def make_svn_menu(self):
-        menu, section = self.make_new_menu(where=self.where())
+        menu, section = self.make_new_menu(where=self.where(), is_keyed=False)
         section.menu_entry_tokens.append(('st', 'st'))
         section.menu_entry_tokens.append(('add', 'add'))
         section.menu_entry_tokens.append(('ci', 'ci'))
-        section.is_keyed = False
         return menu
 
     def manage_svn(self):

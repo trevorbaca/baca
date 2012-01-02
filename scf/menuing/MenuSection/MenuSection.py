@@ -2,18 +2,17 @@ from abjad.tools import iotools
 from baca.scf.menuing.MenuObject import MenuObject
 
 
-# TODO: make self.is_keyed read-only
 class MenuSection(MenuObject):
 
     def __init__(self, is_hidden=False, is_keyed=True, is_numbered=False, session=None, where=None):
         MenuObject.__init__(self, session=session, where=where)
         self._indent_level = 1
         self._is_hidden = is_hidden
+        self._is_keyed = is_keyed
         self._is_numbered = is_numbered
         self.menu_entry_tokens = None
         self.allow_argument_range = False
         self.default_index = None
-        self.is_keyed = is_keyed
         self.section_title = None
         self.use_menu_entry_key_as_menu_entry_return_value = True
 
@@ -35,6 +34,10 @@ class MenuSection(MenuObject):
     @property
     def is_hidden(self):
         return self._is_hidden
+
+    @property
+    def is_keyed(self):
+        return self._is_keyed
 
     @property
     def is_numbered(self):
@@ -76,15 +79,6 @@ class MenuSection(MenuObject):
                 if count <= default_index:
                     raise ValueError('only {} menu entry tokens in section.'.format(count))
             self._default_index = default_index
-        return property(**locals())
-
-    @apply
-    def is_keyed():
-        def fget(self):
-            return self._is_keyed
-        def fset(self, is_keyed):
-            assert isinstance(is_keyed, type(True))
-            self._is_keyed = is_keyed
         return property(**locals())
 
     @apply
