@@ -44,9 +44,8 @@ class Studio(SCFObject):
     def get_materials_package_importable_name_interactively(self):
         while True:
             self.append_breadcrumb('select materials directory')
-            menu, section = self.make_new_menu(where=self.where())
+            menu, section = self.make_new_menu(where=self.where(), is_numbered=True)
             section.menu_entry_tokens = self.score_wrangler.iterate_score_titles_with_years()
-            section.is_numbered = True
             section = menu.make_new_section() 
             section.menu_entry_tokens.append(('baca', 'baca materials directory'))
             result = menu.run()
@@ -147,14 +146,12 @@ class Studio(SCFObject):
             yield material_proxy
 
     def make_main_menu(self):
-        menu, section = self.make_new_menu(where=self.where())
+        menu, section = self.make_new_menu(where=self.where(), is_numbered=True, is_keyed=False)
         score_titles = list(self.score_wrangler.iterate_score_titles_with_years(
             scores_to_show=self.session.scores_to_show))
         score_package_short_names = list(self.score_wrangler.iterate_score_package_short_names(
             scores_to_show=self.session.scores_to_show))
         section.menu_entry_tokens = zip(score_package_short_names, score_titles)
-        section.is_numbered = True
-        section.is_keyed = False
         section = menu.make_new_section()
         section.menu_entry_tokens.append(('k', 'work with interactive material proxies'))
         section.menu_entry_tokens.append(('m', 'work with Bača materials'))
@@ -165,23 +162,20 @@ class Studio(SCFObject):
         return menu
 
     def make_svn_menu(self):
-        menu, section = self.make_new_menu(where=self.where())
+        menu, section = self.make_new_menu(where=self.where(), is_keyed=False)
         section.menu_entry_tokens.append(('add', 'add'))
         section.menu_entry_tokens.append(('ci', 'ci'))
         section.menu_entry_tokens.append(('st', 'st'))
         section.menu_entry_tokens.append(('up', 'up'))
-        section.is_keyed = False
-        section = menu.make_new_section()
+        section = menu.make_new_section(is_keyed=False)
         section.menu_entry_tokens.append(('add_scores', 'add_scores'))
         section.menu_entry_tokens.append(('ci_scores', 'ci_scores'))
         section.menu_entry_tokens.append(('st_scores', 'st_scores'))
         section.menu_entry_tokens.append(('up_scores', 'up_scores'))
-        section.is_keyed = False
-        section = menu.make_new_section()
+        section = menu.make_new_section(is_keyed=False)
         section.menu_entry_tokens.append(('pytest', 'pytest'))
         section.menu_entry_tokens.append(('pytest_scores', 'pytest_scores'))
         section.menu_entry_tokens.append(('pytest_all', 'pytest_all'))
-        section.is_keyed = False
         return menu
 
     def run(self, user_input=None):
@@ -266,9 +260,8 @@ class Studio(SCFObject):
 
     def select_interactive_material_proxy(self, klasses=None):
         material_proxies = list(self.iterate_interactive_material_proxies())
-        menu, section = self.make_new_menu(where=self.where())
+        menu, section = self.make_new_menu(where=self.where(), is_numbered=True)
         section.menu_entry_tokens = material_proxies
-        section.is_numbered = True
         result = menu.run()
         # TODO: probably backtrack here
         return result

@@ -221,7 +221,7 @@ class Menu(MenuObject):
         return menu_lines
 
     def make_new_section(self, is_hidden=False, is_keyed=True, is_numbered=False):
-        section = MenuSection(is_hidden=is_hidden, is_keyed=True, is_numbered=is_numbered,
+        section = MenuSection(is_hidden=is_hidden, is_keyed=is_keyed, is_numbered=is_numbered,
             session=self.session, where=self.where)
         self.sections.append(section)
         return section

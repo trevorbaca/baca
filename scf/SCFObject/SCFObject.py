@@ -253,10 +253,10 @@ class SCFObject(object):
         import baca
         return baca.scf.menuing.UserInputGetter(where=where, session=self.session)
 
-    def make_new_menu(self, where=None):
+    def make_new_menu(self, is_hidden=False, is_keyed=True, is_numbered=False, where=None):
         import baca
         menu = baca.scf.menuing.Menu(where=where, session=self.session)
-        section = menu.make_new_section()
+        section = menu.make_new_section(is_hidden=is_hidden, is_keyed=is_keyed, is_numbered=is_numbered)
         return menu, section
 
     def pt(self):
