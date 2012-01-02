@@ -16,13 +16,6 @@ class Menu(MenuObject):
 
     ### READ-ONLY PUBLIC ATTRIBUTES ###
 
-#    @property
-#    def argument_range_is_allowed(self):
-#        for section in self.sections:
-#            if section.is_ranged:
-#                return True
-#        return False
-    
     @property
     def default_value(self):
         for section in self.sections:
@@ -30,7 +23,7 @@ class Menu(MenuObject):
                 return section.default_value
 
     @property
-    def has_default_value(self):
+    def has_default_valued_section(self):
         for section in self.sections:
             if section.has_default_value:
                 return True
@@ -304,14 +297,13 @@ class Menu(MenuObject):
         return key
 
     def user_requests_argument_range(self, user_input):
-        #if self.argument_range_is_allowed:
         if self.has_ranged_section:
             if self.is_argument_range_string(user_input):
                 return True
         return False
 
     def user_requests_default_value(self, user_input):
-        if self.has_default_value:
+        if self.has_default_valued_section:
             if user_input == '':
                 return True
             elif 3 <= len(user_input) and 'default'.startswith(user_input):
