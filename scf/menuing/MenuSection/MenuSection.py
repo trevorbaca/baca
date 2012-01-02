@@ -6,15 +6,15 @@ from baca.scf.menuing.MenuObject import MenuObject
 #       to better show division of work with menu class.
 class MenuSection(MenuObject):
 
-    def __init__(self, session=None, where=None):
+    def __init__(self, is_hidden=False, is_numbered=False, session=None, where=None):
         MenuObject.__init__(self, session=session, where=where)
         self._indent_level = 1
+        self._is_hidden = is_hidden
         self.menu_entry_tokens = None
         self.allow_argument_range = False
         self.default_index = None
         self.display_keys = True
-        self.is_hidden = False
-        self.is_numbered = False
+        self.is_numbered = is_numbered
         self.section_title = None
         self.use_menu_entry_key_as_menu_entry_return_value = True
 
@@ -32,6 +32,10 @@ class MenuSection(MenuObject):
     @property
     def indent_level(self):
         return self._indent_level
+
+    @property
+    def is_hidden(self):
+        return self._is_hidden
 
     @property
     def menu_entry_bodies(self):
@@ -80,14 +84,14 @@ class MenuSection(MenuObject):
             self._display_keys = display_keys
         return property(**locals())
 
-    @apply
-    def is_hidden():
-        def fget(self):
-            return self._is_hidden
-        def fset(self, is_hidden):
-            assert isinstance(is_hidden, type(True))
-            self._is_hidden = is_hidden
-        return property(**locals())
+#    @apply
+#    def is_hidden():
+#        def fget(self):
+#            return self._is_hidden
+#        def fset(self, is_hidden):
+#            assert isinstance(is_hidden, type(True))
+#            self._is_hidden = is_hidden
+#        return property(**locals())
 
     @apply
     def is_numbered():
