@@ -112,7 +112,7 @@ class Menu(MenuObject):
             return self.handle_argument_range_user_input(user_input)
         elif mathtools.is_integer_equivalent_expr(user_input):
             return self.handle_integer_user_input(user_input)
-        else:
+        elif self.user_enters_menu_body(user_input):
             return self.match_user_input_against_menu_entry_bodies(user_input)
 
     def change_menu_key_to_menu_body(self, menu_key):
@@ -233,6 +233,13 @@ class Menu(MenuObject):
                     else:
                         value = body
                     return self.conditionally_enclose_in_list(value)
+
+    def user_enters_menu_body(self, user_input):
+        for number, key, body, return_value in self.unpacked_menu_entries:
+            body = iotools.strip_diacritics_from_binary_string(body).lower()
+            if body.startswith(user_input):
+                return True
+        return False
                         
     # TODO: globally remove should_clear_terminal
     def run(self, user_input=None):
