@@ -4,6 +4,9 @@ from baca.scf.menuing.MenuObject import MenuObject
 from baca.scf.menuing.MenuSection import MenuSection
 
 
+# TODO: allow only 1 numbered section per menu; check at section add-time;
+# TODO: extend Menu.make_new_section() with is_numbered and is_hidden keywords.
+# TODO: make MenuSection.is_hidden read-only and force user to set at section init time.
 class Menu(MenuObject):
 
     def __init__(self, session=None, where=None):
@@ -225,7 +228,10 @@ class Menu(MenuObject):
     def make_section_lines(self, all_keys, all_bodies):
         menu_lines = []
         for section in self.sections:
-            menu_lines.extend(section.make_menu_lines(all_keys, all_bodies))
+            #menu_lines.extend(section.make_menu_lines(all_keys, all_bodies))
+            section_menu_lines = section.make_menu_lines(all_keys, all_bodies)
+            if not section.is_hidden:
+                menu_lines.extend(section_menu_lines)
         if self.hide_menu:
             menu_lines = []
         return menu_lines

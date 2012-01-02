@@ -157,10 +157,19 @@ class MenuObject(SCFObject):
         hidden_entries.extend(self.hidden_entries)
         hidden_entries.sort()
         menu_lines = []
-        for key, value in hidden_entries:
+        for key, body in hidden_entries:
             menu_line = self.make_tab(1) + ' '
-            menu_line += '{} ({})'.format(value, key)
+            menu_line += '{} ({})'.format(body, key)
             menu_lines.append(menu_line)
         menu_lines.append('')
+        for section in self.sections:
+            if section.is_hidden:
+                #for key, body in hidden_entries:
+                for menu_entry_token in section.menu_entry_tokens:
+                    number, key, body, return_value = section.unpack_menu_entry_token(menu_entry_token)
+                    menu_line = self.make_tab(1) + ' '
+                    menu_line += '{} ({})'.format(body, key)
+                    menu_lines.append(menu_line)
+                menu_lines.append('')
         self.conditionally_display_lines(menu_lines)
         self.session.hide_next_redraw = True

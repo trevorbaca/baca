@@ -143,13 +143,6 @@ class SCFObject(object):
         if self.session.is_displayable:
             iotools.clear_terminal()
 
-    def confirm(self):
-        response = self.handle_raw_input('ok?', include_chevron=False)
-        if not response.lower() == 'y':
-            self.conditionally_display_cap_lines([''])
-            return False
-        return True
-
     def conditionally_display_cap_lines(self, lines):
         self.conditionally_display_lines(lines, capitalize_first_character=True)
         
@@ -164,6 +157,13 @@ class SCFObject(object):
             if self.session.is_displayable:
                 for line in lines:
                     print line
+
+    def confirm(self):
+        response = self.handle_raw_input('ok?', include_chevron=False)
+        if not response.lower() == 'y':
+            self.conditionally_display_cap_lines([''])
+            return False
+        return True
 
     def edit_source_file(self):
         command = 'vi {}'.format(self.source_file_name)

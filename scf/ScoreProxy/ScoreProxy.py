@@ -266,8 +266,12 @@ class ScoreProxy(PackageProxy):
         section.menu_entry_tokens.append(('pf', 'performers'))
         section.menu_entry_tokens.append(('tl', 'title'))
         section.menu_entry_tokens.append(('yr', 'year of completion'))
-        menu.hidden_entries.append(('svn', 'work with repository'))
-        menu.hidden_entries.append(('tags', 'work with tags'))
+        section = menu.make_new_section()
+        section.is_hidden = True
+        section.menu_entry_tokens.append(('svn', 'work with repository'))
+        section.menu_entry_tokens.append(('tags', 'work with tags'))
+        #menu.hidden_entries.append(('svn', 'work with repository'))
+        #menu.hidden_entries.append(('tags', 'work with tags'))
         return menu
 
     def make_svn_menu(self):

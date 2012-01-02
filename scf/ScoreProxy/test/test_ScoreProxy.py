@@ -81,31 +81,6 @@ def test_ScoreProxy_02():
 
 
 def test_ScoreProxy_03():
-    '''Main menu to hidden menu.
-    '''
-
-    archipel = baca.scf.ScoreProxy('archipel')
-    archipel.run(user_input='hidden q')
-
-    assert archipel.transcript[-2] == \
-     ['     back (b)',
-      '     exec statement (exec)',
-      '     grep baca directories (grep)',
-      '     edit client source (here)',
-      '     show hidden items (hidden)',
-      '     next score (next)',
-      '     prev score (prev)',
-      '     quit (q)',
-      '     redraw (redraw)',
-      '     return to score (score)',
-      '     return to studio (studio)',
-      '     work with repository (svn)',
-      '     work with tags (tags)',
-      '     show menu client (where)',
-      '']
-
-
-def test_ScoreProxy_04():
     '''Manage tags menu.
     '''
 
@@ -115,7 +90,7 @@ def test_ScoreProxy_04():
     assert archipel.ts == (2,)
 
 
-def test_ScoreProxy_05():
+def test_ScoreProxy_04():
     '''Add and delete tag interactively.
     '''
 
@@ -130,7 +105,7 @@ def test_ScoreProxy_05():
     assert archipel.get_tag('foo') is None
 
 
-def test_ScoreProxy_06():
+def test_ScoreProxy_05():
     '''User 'studio' input results in return to studio main menu.
     '''
     
@@ -143,7 +118,7 @@ def test_ScoreProxy_06():
     assert studio.transcript[4][0] == 'Studio - active scores'
 
 
-def test_ScoreProxy_07():
+def test_ScoreProxy_06():
     '''User 'studio' input terminates execution (when score not managed from studio).
     '''
 
@@ -155,7 +130,7 @@ def test_ScoreProxy_07():
     assert archipel.transcript[1][0] == 'SCF> studio'
 
 
-def test_ScoreProxy_08():
+def test_ScoreProxy_07():
     '''User 'b' input returns to studio main menu.
     '''
 
@@ -168,7 +143,7 @@ def test_ScoreProxy_08():
     assert studio.transcript[4][0] == 'Studio - active scores'
 
 
-def test_ScoreProxy_09():
+def test_ScoreProxy_08():
     '''Shared session.
     '''
 
@@ -183,7 +158,7 @@ def test_ScoreProxy_09():
     assert score_proxy.session is score_proxy.maker_wrangler.session
 
 
-def test_ScoreProxy_10():
+def test_ScoreProxy_09():
     '''Back is handled correctly.
     '''
 

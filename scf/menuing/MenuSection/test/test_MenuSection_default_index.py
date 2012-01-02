@@ -2,7 +2,7 @@ import baca
 import py
 
 
-def test_MenuSection_indent_level_01():
+def test_MenuSection_default_index_01():
 
     menu = baca.scf.menuing.Menu()
     menu.append_breadcrumb('location')

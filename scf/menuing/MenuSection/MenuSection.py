@@ -2,6 +2,8 @@ from abjad.tools import iotools
 from baca.scf.menuing.MenuObject import MenuObject
 
 
+# TODO: remove the word 'display' from this class entirely
+#       to better show division of work with menu class.
 class MenuSection(MenuObject):
 
     def __init__(self, session=None, where=None):
@@ -11,6 +13,8 @@ class MenuSection(MenuObject):
         self.allow_argument_range = False
         self.default_index = None
         self.display_keys = True
+        self.is_hidden = False
+        # TODO: rename to is_numbered
         self.number_menu_entries = False
         self.section_title = None
         self.use_menu_entry_key_as_menu_entry_return_value = True
@@ -75,6 +79,15 @@ class MenuSection(MenuObject):
         def fset(self, display_keys):
             assert isinstance(display_keys, type(True))
             self._display_keys = display_keys
+        return property(**locals())
+
+    @apply
+    def is_hidden():
+        def fget(self):
+            return self._is_hidden
+        def fset(self, is_hidden):
+            assert isinstance(is_hidden, type(True))
+            self._is_hidden = is_hidden
         return property(**locals())
 
     @apply
@@ -193,3 +206,19 @@ class MenuSection(MenuObject):
                 return menu_entry_token[1]
         else:
             raise ValueError
+
+    def menu_entry_token_to_menu_entry_number(self, menu_entry_token):
+        if self.number_menu_entries:
+            for i, token in enumerate(self.menu_entry_tokens):
+                if token == menu_entry_token:
+                    return i + 1
+
+    # TODO: replace self.menu_entry_token_to_key_and_body() and also
+    #       replace self.menu_entry_token_to_menu_entry_return_value()
+    #       with this method.
+    # TODO: unpack all menu entry tokens only once at menu runtime.
+    def unpack_menu_entry_token(self, menu_entry_token):
+        number = self.menu_entry_token_to_menu_entry_number(menu_entry_token)
+        key, body = self.menu_entry_token_to_key_and_body(menu_entry_token)
+        return_value = self.menu_entry_token_to_menu_entry_return_value(menu_entry_token)
+        return number, key, body, return_value
