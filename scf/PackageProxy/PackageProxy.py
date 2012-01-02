@@ -346,7 +346,7 @@ class PackageProxy(DirectoryProxy):
         menu, section = self.make_new_menu(where=self.where())
         score_wrangler = ScoreWrangler()
         section.menu_entry_tokens = score_wrangler.iterate_score_titles_with_years()
-        section.number_menu_entries = True
+        section.is_numbered = True
         section = menu.make_new_section()
         section.menu_entry_tokens.append(('s', 'global to studio'))
         result = menu.run()

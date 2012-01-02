@@ -61,7 +61,7 @@ class Menu(MenuObject):
     @property
     def numbered_section(self):
         for section in self.sections:
-            if section.number_menu_entries:
+            if section.is_numbered:
                 return section
 
     @property
@@ -148,7 +148,7 @@ class Menu(MenuObject):
     def handle_integer_user_input(self, user_input):
         entry_number = int(user_input)
         for section in self.sections:
-            if section.number_menu_entries:
+            if section.is_numbered:
                 if entry_number <= len(section.menu_entry_tokens):
                     entry_index = entry_number - 1
                     token = section.menu_entry_tokens[entry_index]

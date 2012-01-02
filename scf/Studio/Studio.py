@@ -46,7 +46,7 @@ class Studio(SCFObject):
             self.append_breadcrumb('select materials directory')
             menu, section = self.make_new_menu(where=self.where())
             section.menu_entry_tokens = self.score_wrangler.iterate_score_titles_with_years()
-            section.number_menu_entries = True
+            section.is_numbered = True
             section = menu.make_new_section() 
             section.menu_entry_tokens.append(('baca', 'baca materials directory'))
             result = menu.run()
@@ -153,7 +153,7 @@ class Studio(SCFObject):
         score_package_short_names = list(self.score_wrangler.iterate_score_package_short_names(
             scores_to_show=self.session.scores_to_show))
         section.menu_entry_tokens = zip(score_package_short_names, score_titles)
-        section.number_menu_entries = True
+        section.is_numbered = True
         section.display_keys = False
         section = menu.make_new_section()
         section.menu_entry_tokens.append(('k', 'work with interactive material proxies'))
@@ -268,7 +268,7 @@ class Studio(SCFObject):
         material_proxies = list(self.iterate_interactive_material_proxies())
         menu, section = self.make_new_menu(where=self.where())
         section.menu_entry_tokens = material_proxies
-        section.number_menu_entries = True
+        section.is_numbered = True
         result = menu.run()
         # TODO: probably backtrack here
         return result

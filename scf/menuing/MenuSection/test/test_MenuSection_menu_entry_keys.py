@@ -12,11 +12,11 @@ def test_MenuSection_menu_entry_keys_01():
     section.section_title = 'section'
     section.menu_entry_tokens.extend(['apple', 'banana', 'cherry'])
 
-    assert not section.number_menu_entries
+    assert not section.is_numbered
     assert section.menu_entry_keys == [None, None, None]
 
-    section.number_menu_entries = True
-    assert section.number_menu_entries
+    section.is_numbered = True
+    assert section.is_numbered
     assert section.menu_entry_keys == [None, None, None]
 
 
@@ -33,11 +33,11 @@ def test_MenuSection_menu_entry_keys_02():
     section.menu_entry_tokens.append(('del', 'delete something'))
     section.menu_entry_tokens.append(('mod', 'modify something'))
 
-    assert not section.number_menu_entries
+    assert not section.is_numbered
     assert section.menu_entry_keys == ['add', 'del', 'mod']
     assert section.menu_entry_keys == [x[0] for x in section.menu_entry_tokens]
 
-    section.number_menu_entries = True
-    assert section.number_menu_entries
+    section.is_numbered = True
+    assert section.is_numbered
     assert section.menu_entry_keys == ['add', 'del', 'mod']
     assert section.menu_entry_keys == [x[0] for x in section.menu_entry_tokens]

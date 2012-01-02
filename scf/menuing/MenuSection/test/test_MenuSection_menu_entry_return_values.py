@@ -13,25 +13,25 @@ def test_MenuSection_menu_entry_return_values_01():
     section.menu_entry_tokens.extend(['apple', 'banana', 'cherry'])
 
     section.use_menu_entry_key_as_menu_entry_return_value = True
-    section.number_menu_entries = True
+    section.is_numbered = True
     assert section.menu_entry_return_values == ['apple', 'banana', 'cherry']
     assert section.menu_entry_return_values == section.menu_entry_bodies
     assert section.menu_entry_return_values == section.menu_entry_tokens
 
     section.use_menu_entry_key_as_menu_entry_return_value = True
-    section.number_menu_entries = False
+    section.is_numbered = False
     assert section.menu_entry_return_values == ['apple', 'banana', 'cherry']
     assert section.menu_entry_return_values == section.menu_entry_bodies
     assert section.menu_entry_return_values == section.menu_entry_tokens
 
     section.use_menu_entry_key_as_menu_entry_return_value = False
-    section.number_menu_entries = True
+    section.is_numbered = True
     assert section.menu_entry_return_values == ['apple', 'banana', 'cherry']
     assert section.menu_entry_return_values == section.menu_entry_bodies
     assert section.menu_entry_return_values == section.menu_entry_tokens
 
     section.use_menu_entry_key_as_menu_entry_return_value = False
-    section.number_menu_entries = False
+    section.is_numbered = False
     assert section.menu_entry_return_values == ['apple', 'banana', 'cherry']
     assert section.menu_entry_return_values == section.menu_entry_bodies
     assert section.menu_entry_return_values == section.menu_entry_tokens
@@ -52,21 +52,21 @@ def test_MenuSection_menu_entry_return_values_02():
     section.menu_entry_tokens.append(('mod', 'modify something'))
 
     section.use_menu_entry_key_as_menu_entry_return_value = True
-    section.number_menu_entries = True
+    section.is_numbered = True
     assert section.menu_entry_return_values == ['add', 'del', 'mod']
     assert section.menu_entry_return_values == section.menu_entry_keys
 
     section.use_menu_entry_key_as_menu_entry_return_value = True
-    section.number_menu_entries = False
+    section.is_numbered = False
     assert section.menu_entry_return_values == ['add', 'del', 'mod']
     assert section.menu_entry_return_values == section.menu_entry_keys
 
     section.use_menu_entry_key_as_menu_entry_return_value = False
-    section.number_menu_entries = True
+    section.is_numbered = True
     assert section.menu_entry_return_values == ['add something', 'delete something', 'modify something']
     assert section.menu_entry_return_values == section.menu_entry_bodies
 
     section.use_menu_entry_key_as_menu_entry_return_value = False
-    section.number_menu_entries = False
+    section.is_numbered = False
     assert section.menu_entry_return_values == ['add something', 'delete something', 'modify something']
     assert section.menu_entry_return_values == section.menu_entry_bodies

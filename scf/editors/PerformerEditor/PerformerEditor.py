@@ -109,7 +109,7 @@ class PerformerEditor(InteractiveEditor):
         section.section_title = 'instruments'
         instrument_names = [x.instrument_name for x in self.target.instruments]
         section.menu_entry_tokens = instrument_names
-        section.number_menu_entries = True
+        section.is_numbered = True
         section = menu.make_new_section()
         section.menu_entry_tokens.append(('add', 'add instruments'))
         if 0 < self.target.instrument_count:
@@ -153,13 +153,13 @@ class PerformerEditor(InteractiveEditor):
             default_index = most_likely_index
         if likely_instruments:
             section.menu_entry_tokens = likely_instrument_names
-            section.number_menu_entries = True
+            section.is_numbered = True
             section.default_index = default_index
             section = menu.make_new_section()
             section.menu_entry_tokens.append(('other', 'other instruments'))
         else:
             section.menu_entry_tokens = instrumenttools.list_instrument_names()
-            section.number_menu_entries = True
+            section.is_numbered = True
             section.default_index = default_index
             section = menu.make_new_section()
         section.menu_entry_tokens.append(('none', 'no instruments'))

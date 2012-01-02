@@ -14,8 +14,7 @@ class MenuSection(MenuObject):
         self.default_index = None
         self.display_keys = True
         self.is_hidden = False
-        # TODO: rename to is_numbered
-        self.number_menu_entries = False
+        self.is_numbered = False
         self.section_title = None
         self.use_menu_entry_key_as_menu_entry_return_value = True
 
@@ -91,6 +90,15 @@ class MenuSection(MenuObject):
         return property(**locals())
 
     @apply
+    def is_numbered():
+        def fget(self):
+            return self._is_numbered
+        def fset(self, is_numbered):
+            assert isinstance(is_numbered, type(True))
+            self._is_numbered = is_numbered
+        return property(**locals())
+
+    @apply
     def menu_entry_tokens():
         def fget(self):
             return self._menu_entry_tokens
@@ -99,15 +107,6 @@ class MenuSection(MenuObject):
                 self._menu_entry_tokens = []
             else:
                 self._menu_entry_tokens = menu_entry_tokens[:]
-        return property(**locals())
-
-    @apply
-    def number_menu_entries():
-        def fget(self):
-            return self._number_menu_entries
-        def fset(self, number_menu_entries):
-            assert isinstance(number_menu_entries, type(True))
-            self._number_menu_entries = number_menu_entries
         return property(**locals())
 
     @apply
@@ -164,7 +163,7 @@ class MenuSection(MenuObject):
         for entry_index, menu_entry_token in enumerate(self.menu_entry_tokens):
             key, body = self.menu_entry_token_to_key_and_body(menu_entry_token)
             menu_line = self.make_tab(self.indent_level) + ' '
-            if self.number_menu_entries:
+            if self.is_numbered:
                 entry_number = entry_index + 1
                 menu_line += '{}: '.format(str(entry_number))
             if key and self.display_keys:
@@ -208,7 +207,7 @@ class MenuSection(MenuObject):
             raise ValueError
 
     def menu_entry_token_to_menu_entry_number(self, menu_entry_token):
-        if self.number_menu_entries:
+        if self.is_numbered:
             for i, token in enumerate(self.menu_entry_tokens):
                 if token == menu_entry_token:
                     return i + 1
