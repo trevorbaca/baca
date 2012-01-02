@@ -9,6 +9,7 @@ class MenuObject(SCFObject):
 
     def __init__(self, session=None, where=None):
         SCFObject.__init__(self, session=session)
+        # TODO: kill self._hidden_entries
         self._hidden_entries = []
         self.prompt_default = None
         self.should_clear_terminal = False
@@ -16,6 +17,7 @@ class MenuObject(SCFObject):
 
     ### PUBLIC ATTRIBUTES ###
 
+    # TODO: replace self.default_hidden_entries with a hidden section
     @property
     def default_hidden_entries(self):
         default_hidden_entries = []
@@ -33,6 +35,7 @@ class MenuObject(SCFObject):
         default_hidden_entries.append(('where', 'show menu client'))
         return default_hidden_entries
 
+    # TODO: kill self.hidden_entries
     @property
     def hidden_entries(self):
         return self._hidden_entries
@@ -164,7 +167,6 @@ class MenuObject(SCFObject):
         menu_lines.append('')
         for section in self.sections:
             if section.is_hidden:
-                #for key, body in hidden_entries:
                 for menu_entry_token in section.menu_entry_tokens:
                     number, key, body, return_value = section.unpack_menu_entry_token(menu_entry_token)
                     menu_line = self.make_tab(1) + ' '

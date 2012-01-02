@@ -3,10 +3,12 @@ from abjad.tools import pitchtools
 from baca.scf.menuing.MenuObject import MenuObject
 
 
+# TODO: create MenuSectionAggregator for Menu and UserInputGetter to both inherit from
 class UserInputGetter(MenuObject):
 
     def __init__(self, session=None, where=None):
         MenuObject.__init__(self, session=session, where=where)
+        self._sections = []
         self.argument_lists = None
         self.defaults = None
         self.execs = None
@@ -19,7 +21,13 @@ class UserInputGetter(MenuObject):
     def __repr__(self):
         return '{}({})'.format(type(self).__name__, len(self.prompts))
 
-    ### PUBLIC ATTRIBUTES ###
+    ### READ-ONLY PUBLIC ATTRIBUTES ###
+
+    @property
+    def sections(self):
+        return self._sections
+
+    ### READ / WRITE PUBLIC ATTRIBUTES ###
 
     @apply
     def argument_lists():
