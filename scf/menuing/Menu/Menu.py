@@ -4,7 +4,6 @@ from baca.scf.menuing.MenuObject import MenuObject
 from baca.scf.menuing.MenuSection import MenuSection
 
 
-# TODO: kill Menu.all_keys, Menu.all_bodies
 class Menu(MenuObject):
 
     def __init__(self, session=None, where=None):
@@ -124,12 +123,9 @@ class Menu(MenuObject):
             return self.conditionally_enclose_in_list(self.default_value)
         elif not user_input:
             return
-        elif user_input in self.all_keys:
+        elif user_input in self.menu_entry_keys:
             return self.handle_menu_key_user_input(user_input)
-        elif 'score'.startswith(user_input):
-            return user_input
-        elif 'studio'.startswith(user_input):
-            print 'ZZZ'
+        elif self.is_backtracking_string(user_input):
             return user_input
         elif self.user_requests_argument_range(user_input):
             return self.handle_argument_range_user_input(user_input)
