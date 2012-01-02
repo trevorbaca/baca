@@ -4,6 +4,7 @@ from baca.scf.menuing.MenuObject import MenuObject
 from baca.scf.menuing.MenuSection import MenuSection
 
 
+# TODO: kill Menu.all_keys, Menu.all_bodies
 class Menu(MenuObject):
 
     def __init__(self, session=None, where=None):
