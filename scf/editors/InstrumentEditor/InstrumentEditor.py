@@ -127,7 +127,6 @@ class InstrumentEditor(InteractiveEditor):
             pitch_range_repr = self.target.pitch_range.one_line_named_chromatic_pitch_repr
         line = 'range: {}'.format(pitch_range_repr)
         section.menu_entry_tokens.append(('pr', line))
-        menu.hidden_entries.append(('tprd', 'toggle pitch range display'))
         clefs = [clef.clef_name for clef in self.target.all_clefs]
         clefs = ', '.join(clefs)
         line = 'clefs: {}'.format(clefs)
@@ -139,6 +138,8 @@ class InstrumentEditor(InteractiveEditor):
             line = 'interval of transposition: {}'
             line = line.format(self.target.interval_of_transposition)
             section.menu_entry_tokens.append(('int', line))
+        section = menu.make_new_section(is_hidden=True)
+        section.menu_entry_tokens.append(('tprd', 'toggle pitch range display'))
         return menu
 
     def select_instruments_from_instrumenttools_interactively(self):

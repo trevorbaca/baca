@@ -41,33 +41,6 @@ def test_Studio_02():
 
 
 def test_Studio_03():
-    '''Main menu to hidden menu.
-    '''
-
-    studio = baca.scf.Studio()
-    studio.run(user_input='hidden q')
-
-    assert studio.transcript[-2] == \
-     ['     show active scores only (active)',
-      '     show all scores (all)',
-      '     back (b)',
-      '     exec statement (exec)',
-      '     grep baca directories (grep)',
-      '     edit client source (here)',
-      '     show hidden items (hidden)',
-      '     show mothballed scores only (mb)',
-      '     next score (next)',
-      '     prev score (prev)',
-      '     quit (q)',
-      '     redraw (redraw)',
-      '     return to score (score)',
-      '     return to studio (studio)',
-      '     work with repository (svn)',
-      '     show menu client (where)',
-      '']
-
-
-def test_Studio_04():
     '''Main menu to score menu.
     '''
 
@@ -95,7 +68,7 @@ def test_Studio_04():
      '']
 
 
-def test_Studio_05():
+def test_Studio_04():
     '''Main menu. Mothballed scores only.
     '''
 
@@ -119,7 +92,7 @@ def test_Studio_05():
      '']
 
 
-def test_Studio_06():
+def test_Studio_05():
     '''Main menu to score menu to tags menu.
     '''
 
@@ -128,7 +101,7 @@ def test_Studio_06():
     assert studio.ts == (6,)
 
 
-def test_Studio_07():
+def test_Studio_06():
     '''Main menu to svn menu.
     '''
 
@@ -154,7 +127,7 @@ def test_Studio_07():
       '']
 
 
-def test_Studio_08():
+def test_Studio_07():
     '''Main menu header is the same even after state change to secondary menu.
     '''
 
@@ -169,7 +142,7 @@ def test_Studio_08():
     assert studio.transcript[-2][0] == 'Studio - active scores'
 
 
-def test_Studio_09():
+def test_Studio_08():
     '''Junk works.
     '''
 
@@ -182,7 +155,7 @@ def test_Studio_09():
 
 
 # TODO: combine studio, junk, back, score tests into a single case
-def test_Studio_10():
+def test_Studio_09():
     '''User 'studio' input results in (dummy) redraw of studio main menu.
     '''
     
@@ -195,7 +168,7 @@ def test_Studio_10():
     assert menu_0 == menu_2
 
 
-def test_Studio_11():
+def test_Studio_10():
     '''Back is handled correctly.
     '''
 
@@ -208,7 +181,7 @@ def test_Studio_11():
     assert menu_0 == menu_2
 
 
-def test_Studio_12():
+def test_Studio_11():
     '''Exec works.
     '''
 
@@ -222,7 +195,7 @@ def test_Studio_12():
     assert studio.transcript[4] == ['SCF> q', '']
 
 
-def test_Studio_13():
+def test_Studio_12():
     '''Exec protects against senseless input.
     '''
 
@@ -236,7 +209,7 @@ def test_Studio_13():
     assert studio.transcript[4] == ['SCF> q', '']
 
 
-def test_Studio_14():
+def test_Studio_13():
     '''Shared session.
     '''
 
@@ -246,7 +219,7 @@ def test_Studio_14():
     assert studio.session is studio.score_wrangler.session
 
 
-def test_Studio_15():
+def test_Studio_14():
     '''Display string navigation.
     '''
 
@@ -255,7 +228,7 @@ def test_Studio_15():
     assert studio.ts == (10, (0, 4, 8), (2, 6), (3, 7))
 
 
-def test_Studio_16():
+def test_Studio_15():
     '''Backtracking stu* shortcut.
     '''
 
@@ -270,7 +243,7 @@ def test_Studio_16():
     assert ts_1 == ts_2
 
 
-def test_Studio_17():
+def test_Studio_16():
     '''Backtracking sco* shortcut.
     '''
 

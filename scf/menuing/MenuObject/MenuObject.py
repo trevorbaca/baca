@@ -116,7 +116,7 @@ class MenuObject(SCFObject):
         elif key == 'here':
             self.edit_client_source_file()
         elif key == 'hidden':
-            self.show_hidden_menu_items()
+            self.show_hidden_menu_entries()
         elif key == 'next':
             self.session.is_navigating_to_next_score = True
             self.session.is_backtracking_to_studio = True
@@ -154,7 +154,7 @@ class MenuObject(SCFObject):
         self.conditionally_display_lines(lines)
         self.session.hide_next_redraw = True
 
-    def show_hidden_menu_items(self):
+    def show_hidden_menu_entries(self):
         hidden_entries = []
         hidden_entries.extend(self.default_hidden_entries)
         hidden_entries.extend(self.hidden_entries)
