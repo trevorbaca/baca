@@ -8,30 +8,44 @@ def test_MenuSection_menu_entry_return_values_01():
 
     menu = baca.scf.menuing.Menu()
     menu.append_breadcrumb('location')
+    section = menu.make_new_section(is_numbered=True)
+    section.title = 'section'
+    section.menu_entry_tokens.extend(['apple', 'banana', 'cherry'])
+    section.use_menu_entry_key_as_menu_entry_return_value = True
+    assert section.is_numbered
+    assert section.menu_entry_return_values == ['apple', 'banana', 'cherry']
+    assert section.menu_entry_return_values == section.menu_entry_bodies
+    assert section.menu_entry_return_values == section.menu_entry_tokens
+
+    menu = baca.scf.menuing.Menu()
+    menu.append_breadcrumb('location')
     section = menu.make_new_section()
     section.title = 'section'
     section.menu_entry_tokens.extend(['apple', 'banana', 'cherry'])
-
     section.use_menu_entry_key_as_menu_entry_return_value = True
-    section.is_numbered = True
+    assert not section.is_numbered
     assert section.menu_entry_return_values == ['apple', 'banana', 'cherry']
     assert section.menu_entry_return_values == section.menu_entry_bodies
     assert section.menu_entry_return_values == section.menu_entry_tokens
 
-    section.use_menu_entry_key_as_menu_entry_return_value = True
-    section.is_numbered = False
-    assert section.menu_entry_return_values == ['apple', 'banana', 'cherry']
-    assert section.menu_entry_return_values == section.menu_entry_bodies
-    assert section.menu_entry_return_values == section.menu_entry_tokens
-
+    menu = baca.scf.menuing.Menu()
+    menu.append_breadcrumb('location')
+    section = menu.make_new_section(is_numbered=True)
+    section.title = 'section'
+    section.menu_entry_tokens.extend(['apple', 'banana', 'cherry'])
     section.use_menu_entry_key_as_menu_entry_return_value = False
-    section.is_numbered = True
+    assert section.is_numbered
     assert section.menu_entry_return_values == ['apple', 'banana', 'cherry']
     assert section.menu_entry_return_values == section.menu_entry_bodies
     assert section.menu_entry_return_values == section.menu_entry_tokens
 
+    menu = baca.scf.menuing.Menu()
+    menu.append_breadcrumb('location')
+    section = menu.make_new_section()
+    section.title = 'section'
+    section.menu_entry_tokens.extend(['apple', 'banana', 'cherry'])
     section.use_menu_entry_key_as_menu_entry_return_value = False
-    section.is_numbered = False
+    assert not section.is_numbered
     assert section.menu_entry_return_values == ['apple', 'banana', 'cherry']
     assert section.menu_entry_return_values == section.menu_entry_bodies
     assert section.menu_entry_return_values == section.menu_entry_tokens
@@ -45,28 +59,48 @@ def test_MenuSection_menu_entry_return_values_02():
 
     menu = baca.scf.menuing.Menu()
     menu.append_breadcrumb('location')
+    section = menu.make_new_section(is_numbered=True)
+    section.title = 'section'
+    section.menu_entry_tokens.append(('add', 'add something'))
+    section.menu_entry_tokens.append(('del', 'delete something'))
+    section.menu_entry_tokens.append(('mod', 'modify something'))
+    section.use_menu_entry_key_as_menu_entry_return_value = True
+    assert section.is_numbered
+    assert section.menu_entry_return_values == ['add', 'del', 'mod']
+    assert section.menu_entry_return_values == section.menu_entry_keys
+
+    menu = baca.scf.menuing.Menu()
+    menu.append_breadcrumb('location')
     section = menu.make_new_section()
     section.title = 'section'
     section.menu_entry_tokens.append(('add', 'add something'))
     section.menu_entry_tokens.append(('del', 'delete something'))
     section.menu_entry_tokens.append(('mod', 'modify something'))
-
     section.use_menu_entry_key_as_menu_entry_return_value = True
-    section.is_numbered = True
+    assert not section.is_numbered
     assert section.menu_entry_return_values == ['add', 'del', 'mod']
     assert section.menu_entry_return_values == section.menu_entry_keys
 
-    section.use_menu_entry_key_as_menu_entry_return_value = True
-    section.is_numbered = False
-    assert section.menu_entry_return_values == ['add', 'del', 'mod']
-    assert section.menu_entry_return_values == section.menu_entry_keys
-
+    menu = baca.scf.menuing.Menu()
+    menu.append_breadcrumb('location')
+    section = menu.make_new_section(is_numbered=True)
+    section.title = 'section'
+    section.menu_entry_tokens.append(('add', 'add something'))
+    section.menu_entry_tokens.append(('del', 'delete something'))
+    section.menu_entry_tokens.append(('mod', 'modify something'))
     section.use_menu_entry_key_as_menu_entry_return_value = False
-    section.is_numbered = True
+    assert section.is_numbered
     assert section.menu_entry_return_values == ['add something', 'delete something', 'modify something']
     assert section.menu_entry_return_values == section.menu_entry_bodies
 
+    menu = baca.scf.menuing.Menu()
+    menu.append_breadcrumb('location')
+    section = menu.make_new_section()
+    section.title = 'section'
+    section.menu_entry_tokens.append(('add', 'add something'))
+    section.menu_entry_tokens.append(('del', 'delete something'))
+    section.menu_entry_tokens.append(('mod', 'modify something'))
     section.use_menu_entry_key_as_menu_entry_return_value = False
-    section.is_numbered = False
+    assert not section.is_numbered
     assert section.menu_entry_return_values == ['add something', 'delete something', 'modify something']
     assert section.menu_entry_return_values == section.menu_entry_bodies
