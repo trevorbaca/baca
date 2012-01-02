@@ -255,7 +255,7 @@ class UserInputGetter(MenuObject):
         input_test = self.tests[self.prompt_index]
         argument_list = self.argument_lists[self.prompt_index]
         if argument_list and input_test(user_response):
-            value = self.argument_range_string_to_numbers(user_response, argument_list)
+            value = self.argument_range_string_to_numbers(user_response, argument_list, [])
             self.values.append(value)
             self.prompt_index = self.prompt_index + 1
             return True

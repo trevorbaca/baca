@@ -1,4 +1,5 @@
 from abjad.tools import iotools
+from abjad.tools import mathtools
 from baca.scf.menuing.MenuObject import MenuObject
 
 
@@ -114,6 +115,51 @@ class MenuSection(MenuObject):
         return property(**locals())
 
     ### PUBLIC METHODS ###
+
+    def argument_range_string_to_numbers(self, argument_range_string):
+        '''Return list of positive integers on success. Otherwise none.
+        '''
+        assert self.menu_entry_tokens
+        numbers = []
+        argument_range_string = argument_range_string.replace(' ', '')
+        range_parts = argument_range_string.split(',')
+        for range_part in range_parts:
+            if range_part == 'all':
+                numbers.extend(range(1, len(self.menu_entry_tokens) + 1))
+            elif '-' in range_part:
+                start, stop = range_part.split('-')
+                start = self.argument_string_to_number(start)
+                stop = self.argument_string_to_number(stop)
+                if start is None or stop is None:
+                    return
+                if start <= stop:
+                    new_numbers = range(start, stop + 1)
+                    numbers.extend(new_numbers)
+                else:
+                    new_numbers = range(start, stop - 1, -1)
+                    numbers.extend(new_numbers)
+            else:
+                number = self.argument_string_to_number(range_part)
+                if number is None:
+                    return
+                numbers.append(number)
+        return numbers
+
+    def argument_string_to_number(self, argument_string):
+        '''Return number when successful. Otherwise none.
+        '''
+        if mathtools.is_integer_equivalent_expr(argument_string):
+            menu_number = int(argument_string)
+            if menu_number <= len(self.menu_entry_tokens):
+                return menu_number
+        for menu_index, menu_return_value in enumerate(self.menu_entry_return_values):
+            if argument_string == menu_return_value:
+                return menu_index + 1
+            elif 3 <= len(argument_string) and menu_return_value.startswith(argument_string):
+                return menu_index + 1
+        for menu_index, menu_key in enumerate(self.menu_entry_keys):
+            if argument_string == menu_key:
+                return menu_index + 1
 
     def is_menu_entry_token(self, expr):
         if isinstance(expr, str):

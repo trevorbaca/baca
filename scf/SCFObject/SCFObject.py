@@ -87,21 +87,21 @@ class SCFObject(object):
         else:
             self.breadcrumbs.append(self.breadcrumb)
 
-    # TODO: rename 'opt' as 'menu_keys'
-    def argument_range_string_to_numbers(self, argument_range_string, menu_items, opt=None):
+    # TODO: combine with MenuSection method of same name.
+    def argument_range_string_to_numbers(self, argument_range_string, menu_return_values, menu_keys):
         '''Return list of positive integers on success. Otherwise none.
         '''
-        assert len(menu_items)
+        assert len(menu_return_values)
         numbers = []
         argument_range_string = argument_range_string.replace(' ', '')
         range_parts = argument_range_string.split(',')
         for range_part in range_parts:
             if range_part == 'all':
-                numbers.extend(range(1, len(menu_items) + 1))
+                numbers.extend(range(1, len(menu_return_values) + 1))
             elif '-' in range_part:
                 start, stop = range_part.split('-')
-                start = self.argument_string_to_number(start, menu_items, opt=opt)
-                stop = self.argument_string_to_number(stop, menu_items, opt=opt)
+                start = self.argument_string_to_number(start, menu_return_values, menu_keys)
+                stop = self.argument_string_to_number(stop, menu_return_values, menu_keys)
                 if start is None or stop is None:
                     return
                 if start <= stop:
@@ -111,28 +111,26 @@ class SCFObject(object):
                     new_numbers = range(start, stop - 1, -1)
                     numbers.extend(new_numbers)
             else:
-                number = self.argument_string_to_number(range_part, menu_items, opt=opt)
+                number = self.argument_string_to_number(range_part, menu_return_values, menu_keys)
                 if number is None:
                     return
                 numbers.append(number)
         return numbers
 
-    # TODO: rename 'opt' as 'menu_keys'
-    def argument_string_to_number(self, argument_string, menu_items, opt=None):
+    # TODO: combine with MenuSection method of same name.
+    def argument_string_to_number(self, argument_string, menu_return_values, menu_keys):
         '''Return number when successful. Otherwise none.
         '''
         if mathtools.is_integer_equivalent_expr(argument_string):
             menu_number = int(argument_string)
-            if menu_number <= len(menu_items):
+            if menu_number <= len(menu_return_values):
                 return menu_number
-        for menu_index, menu_item in enumerate(menu_items):
-            if argument_string == menu_item:
+        for menu_index, menu_return_value in enumerate(menu_return_values):
+            if argument_string == menu_return_value:
                 return menu_index + 1
-            elif 3 <= len(argument_string) and menu_item.startswith(argument_string):
+            elif 3 <= len(argument_string) and menu_return_value.startswith(argument_string):
                 return menu_index + 1
-        if opt is None:
-            return
-        for menu_index, menu_key in enumerate(opt):
+        for menu_index, menu_key in enumerate(menu_keys):
             if argument_string == menu_key:
                 return menu_index + 1
 
@@ -205,7 +203,7 @@ class SCFObject(object):
 
     def is_valid_argument_range_string_for_argument_list(self, argument_range_string, argument_list):
         if isinstance(argument_range_string, str):
-            if self.argument_range_string_to_numbers(argument_range_string, argument_list) is not None:
+            if self.argument_range_string_to_numbers(argument_range_string, argument_list, []) is not None:
                 return True
         return False
 

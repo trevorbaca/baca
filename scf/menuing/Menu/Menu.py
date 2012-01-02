@@ -89,6 +89,12 @@ class Menu(MenuObject):
                 return section
 
     @property
+    def ranged_section(self):
+        for section in self.sections:
+            if section.is_ranged:
+                return section
+
+    @property
     def sections(self):
         return self._sections
 
@@ -120,18 +126,14 @@ class Menu(MenuObject):
             if key == menu_key:
                 return body 
 
-    # TODO: rename 'opt' as 'menu_keys' ... or just pass section.menu_entry_tokens
     def handle_argument_range_user_input(self, user_input):
-        numbered_section = self.numbered_section
-        assert numbered_section is not None
-        item_numbers = self.argument_range_string_to_numbers(user_input, 
-            numbered_section.menu_entry_return_values, opt=numbered_section.menu_entry_keys)
+        item_numbers = self.ranged_section.argument_range_string_to_numbers(user_input)
         if item_numbers is None:
             return []
         item_indices = [item_number - 1 for item_number in item_numbers]
         result = []
         for i in item_indices:
-            item = numbered_section.menu_entry_return_values[i]
+            item = self.ranged_section.menu_entry_return_values[i]
             result.append(item)
         return result
 
@@ -187,7 +189,6 @@ class Menu(MenuObject):
         return directive
 
     def conditionally_enclose_in_list(self, expr):
-        #if self.argument_range_is_allowed:
         if self.has_ranged_section:
             return [expr]
         else:
