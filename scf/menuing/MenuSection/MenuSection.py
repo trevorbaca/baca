@@ -119,7 +119,7 @@ class MenuSection(MenuObject):
             return True
         return False
         
-    def make_menu_lines(self, all_keys, all_bodies):
+    def make_menu_lines(self):
         '''KEYS. Keys are optionally shown in parentheses in each entry;
         keys are designed to be textual instead of numeric;
         not every entry need have a key because entries may be numbered instead of keyed;
@@ -154,8 +154,6 @@ class MenuSection(MenuObject):
             else:
                 menu_line += '{}'.format(body)
             menu_lines.append(menu_line)
-            all_keys.append(key)
-            all_bodies.append(body)
         if self.menu_entry_tokens:
             menu_lines.append('')
         return menu_lines

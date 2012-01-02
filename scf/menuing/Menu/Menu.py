@@ -116,16 +116,6 @@ class Menu(MenuObject):
 
     ### PUBLIC METHODS ###
 
-    def change_all_keys_to_lowercase(self):
-        all_keys = []
-        for key in self.all_keys:
-            if key is None:
-                all_keys.append(key)
-            elif isinstance(key, str):
-                all_keys.append(key.lower())
-            else:
-                raise TypeError
-
     def change_user_input_to_directive(self, user_input):
         if self.user_requests_default_value(user_input):
             return self.conditionally_enclose_in_list(self.default_value)
@@ -206,8 +196,7 @@ class Menu(MenuObject):
 
     def conditionally_display_menu(self):
         self.conditionally_clear_terminal()
-        self.make_menu_lines_keys_and_values()
-        self.change_all_keys_to_lowercase()
+        self.make_menu_lines()
         self.conditionally_display_lines(self.menu_lines)
         user_response = self.handle_raw_input_with_default('SCF', default=self.prompt_default)
         user_input = self.split_multipart_user_response(user_response)
@@ -227,14 +216,10 @@ class Menu(MenuObject):
         else:
             return expr
 
-    def make_menu_lines_keys_and_values(self):
-        self.menu_lines, self.all_keys, self.all_bodies = [], [], []
-        self.menu_lines.extend(self.make_menu_title_lines())
-        self.menu_lines.extend(self.make_section_lines(self.all_keys, self.all_bodies))
-
     def make_menu_lines(self):
-        menu_lines, keys, values = self.make_menu_lines_keys_and_values()
-        return menu_lines
+        self.menu_lines = []
+        self.menu_lines.extend(self.make_menu_title_lines())
+        self.menu_lines.extend(self.make_section_lines())
 
     def make_new_section(self, is_hidden=False, is_keyed=True, is_numbered=False):
         assert not (is_numbered and self.has_numbered_section)
@@ -243,10 +228,10 @@ class Menu(MenuObject):
         self.sections.append(section)
         return section
 
-    def make_section_lines(self, all_keys, all_bodies):
+    def make_section_lines(self):
         menu_lines = []
         for section in self.sections:
-            section_menu_lines = section.make_menu_lines(all_keys, all_bodies)
+            section_menu_lines = section.make_menu_lines()
             if not section.is_hidden:
                 menu_lines.extend(section_menu_lines)
         if self._hide_current_run:
