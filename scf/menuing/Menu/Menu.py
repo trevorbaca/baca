@@ -9,8 +9,7 @@ class Menu(MenuObject):
     def __init__(self, session=None, where=None):
         MenuObject.__init__(self, session=session, where=where)
         self._sections = []
-        default_hidden_section = self.make_default_hidden_section(session=session, where=where)
-        self.sections.append(default_hidden_section)
+        self.sections.append(self.make_default_hidden_section(session=session, where=where))
 
     ### READ-ONLY PUBLIC ATTRIBUTES ###
 
@@ -106,11 +105,11 @@ class Menu(MenuObject):
         if self.user_requests_default_value(user_input):
             return self.conditionally_enclose_in_list(self.default_value)
         elif not user_input:
-            return
+            return self.conditionally_enclose_in_list(None)
         elif user_input in self.menu_entry_keys:
             return self.handle_menu_key_user_input(user_input)
         elif self.is_backtracking_string(user_input):
-            return user_input
+            return self.conditionally_enclose_in_list(user_input)
         elif self.user_requests_argument_range(user_input):
             return self.handle_argument_range_user_input(user_input)
         elif mathtools.is_integer_equivalent_expr(user_input):
