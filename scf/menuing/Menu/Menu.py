@@ -201,6 +201,7 @@ class Menu(MenuObject):
 
     def make_new_section(self, is_hidden=False, is_keyed=True, is_numbered=False, is_ranged=False):
         assert not (is_numbered and self.has_numbered_section)
+        assert not (is_ranged and self.has_ranged_section)
         section = MenuSection(is_hidden=is_hidden, is_keyed=is_keyed, is_numbered=is_numbered,
             is_ranged=is_ranged, session=self.session, where=self.where)
         self.sections.append(section)
