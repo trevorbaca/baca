@@ -251,11 +251,14 @@ class UserInputGetter(MenuObject):
         self.conditionally_display_cap_lines(lines)
 
     def store_value(self, user_response):
+        from baca.scf.menuing.MenuSection import MenuSection
         assert isinstance(user_response, str)
         input_test = self.tests[self.prompt_index]
         argument_list = self.argument_lists[self.prompt_index]
         if argument_list and input_test(user_response):
-            value = self.argument_range_string_to_numbers(user_response, argument_list, [])
+            dummy_section = MenuSection()
+            dummy_section.menu_entry_tokens = argument_list[:]
+            value = dummy_section.argument_range_string_to_numbers(user_response)
             self.values.append(value)
             self.prompt_index = self.prompt_index + 1
             return True
