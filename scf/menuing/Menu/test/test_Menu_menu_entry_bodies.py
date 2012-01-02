@@ -12,4 +12,4 @@ def test_Menu_menu_entry_bodies_01():
     section_2.menu_entry_tokens.append(('add', 'add something'))
     section_2.menu_entry_tokens.append(('del', 'delete something'))
     section_2.menu_entry_tokens.append(('mod', 'modify something'))
-    assert menu.menu_entry_bodies == section_1.menu_entry_bodies + section_2.menu_entry_bodies
+    assert menu.menu_entry_bodies[-6:] == section_1.menu_entry_bodies + section_2.menu_entry_bodies

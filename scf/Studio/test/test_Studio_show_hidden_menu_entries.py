@@ -24,3 +24,4 @@ def test_Studio_show_hidden_menu_entries_01():
       '     show all scores (all)',
       '     show mothballed scores only (mb)',
       '']
+

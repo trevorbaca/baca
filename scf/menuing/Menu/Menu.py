@@ -11,6 +11,8 @@ class Menu(MenuObject):
         self._sections = []
         # TODO: allow self.use_menu_entry_key_as_menu_entry_return_value on MenuSection only
         self.use_menu_entry_key_as_menu_entry_return_value = True
+        default_hidden_section = self.make_default_hidden_section(session=session, where=where)
+        self.sections.append(default_hidden_section)
 
     ### READ-ONLY PUBLIC ATTRIBUTES ###
 

@@ -12,4 +12,4 @@ def test_Menu_menu_entry_keys_01():
     section_2.menu_entry_tokens.append(('add', 'add something'))
     section_2.menu_entry_tokens.append(('del', 'delete something'))
     section_2.menu_entry_tokens.append(('mod', 'modify something'))
-    assert menu.menu_entry_keys == section_1.menu_entry_keys + section_2.menu_entry_keys
+    assert menu.menu_entry_keys[-6:] == section_1.menu_entry_keys + section_2.menu_entry_keys

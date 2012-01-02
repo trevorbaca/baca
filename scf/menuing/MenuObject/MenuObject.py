@@ -136,8 +136,24 @@ class MenuObject(SCFObject):
         elif key == 'where':
             self.show_menu_client()
         else:
-            #return key
             return directive
+
+    def make_default_hidden_section(self, session=None, where=None):
+        from baca.scf.menuing.MenuSection import MenuSection
+        section = MenuSection(is_hidden=True, session=session, where=where)
+        section.menu_entry_tokens.append(('b', 'back'))
+        section.menu_entry_tokens.append(('exec', 'exec statement'))
+        section.menu_entry_tokens.append(('grep', 'grep baca directories'))
+        section.menu_entry_tokens.append(('here', 'edit client source'))
+        section.menu_entry_tokens.append(('hidden', 'show hidden items'))
+        section.menu_entry_tokens.append(('next', 'next score'))
+        section.menu_entry_tokens.append(('prev', 'prev score'))
+        section.menu_entry_tokens.append(('q', 'quit'))
+        section.menu_entry_tokens.append(('redraw', 'redraw'))
+        section.menu_entry_tokens.append(('score', 'return to score'))
+        section.menu_entry_tokens.append(('studio', 'return to studio'))
+        section.menu_entry_tokens.append(('where', 'show menu client')) 
+        return section
 
     def make_is_integer_in_closed_range(self, start, stop):
         return lambda expr: self.is_integer(expr) and start <= expr <= stop
@@ -160,11 +176,11 @@ class MenuObject(SCFObject):
         hidden_entries.extend(self.hidden_entries)
         hidden_entries.sort()
         menu_lines = []
-        for key, body in hidden_entries:
-            menu_line = self.make_tab(1) + ' '
-            menu_line += '{} ({})'.format(body, key)
-            menu_lines.append(menu_line)
-        menu_lines.append('')
+#        for key, body in hidden_entries:
+#            menu_line = self.make_tab(1) + ' '
+#            menu_line += '{} ({})'.format(body, key)
+#            menu_lines.append(menu_line)
+#        menu_lines.append('')
         for section in self.sections:
             if section.is_hidden:
                 for menu_entry_token in section.menu_entry_tokens:

@@ -12,5 +12,5 @@ def test_Menu_menu_entry_return_values_01():
     section_2.menu_entry_tokens.append(('add', 'add something'))
     section_2.menu_entry_tokens.append(('del', 'delete something'))
     section_2.menu_entry_tokens.append(('mod', 'modify something'))
-    assert menu.menu_entry_return_values == \
+    assert menu.menu_entry_return_values[-6:] == \
         section_1.menu_entry_return_values + section_2.menu_entry_return_values
