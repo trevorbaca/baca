@@ -79,6 +79,13 @@ class Menu(MenuObject):
         return result
 
     @property
+    def menu_entry_tokens(self):
+        result = []
+        for section in self.sections:
+            result.extend(section.menu_entry_tokens)
+        return result
+
+    @property
     def numbered_section(self):
         for section in self.sections:
             if section.is_numbered:
@@ -87,6 +94,14 @@ class Menu(MenuObject):
     @property
     def sections(self):
         return self._sections
+
+    @property
+    def unpacked_menu_entries(self):
+        dummy_section = self.sections[0]
+        result = []
+        for menu_entry_token in self.menu_entry_tokens:
+            result.append(dummy_section.unpack_menu_entry_token(menu_entry_token))
+        return result
 
     ### READ / WRITE PUBLIC ATTRIBUTES ###
 
@@ -135,7 +150,9 @@ class Menu(MenuObject):
             return self.match_user_input_against_menu_entry_bodies(user_input)
 
     def change_menu_key_to_menu_body(self, menu_key):
-        return dict(zip(self.all_keys, self.all_bodies)).get(menu_key)
+        for number, key, body, return_value in self.unpacked_menu_entries:
+            if key == menu_key:
+                return body 
 
     # TODO: rename 'opt' as 'menu_keys' ... or just pass section.menu_entry_tokens
     def handle_argument_range_user_input(self, user_input):
