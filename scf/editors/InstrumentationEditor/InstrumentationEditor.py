@@ -141,7 +141,6 @@ class InstrumentationEditor(InteractiveEditor):
         performer_pairs.sort(lambda x, y: cmp(x[1], y[1]))
         section.menu_entry_tokens = performer_pairs
         section.use_menu_entry_key_as_menu_entry_return_value = False
-        menu.use_menu_entry_key_as_menu_entry_return_value = False
         while True:
             self.append_breadcrumb('add performers')
             result = menu.run()
