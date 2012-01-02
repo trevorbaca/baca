@@ -146,8 +146,7 @@ class InstrumentEditor(InteractiveEditor):
         '''Return list of instruments or none.
         '''
         from abjad.tools import instrumenttools
-        menu, section = self.make_new_menu(where=self.where(), is_numbered=True)
-        section.allow_argument_range = True
+        menu, section = self.make_new_menu(where=self.where(), is_numbered=True, is_ranged=True)
         section.menu_entry_tokens = instrumenttools.list_instrument_names()
         while True:
             self.append_breadcrumb('select instrument')

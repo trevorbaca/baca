@@ -16,12 +16,12 @@ class Menu(MenuObject):
 
     ### READ-ONLY PUBLIC ATTRIBUTES ###
 
-    @property
-    def argument_range_is_allowed(self):
-        for section in self.sections:
-            if section.allow_argument_range:
-                return True
-        return False
+#    @property
+#    def argument_range_is_allowed(self):
+#        for section in self.sections:
+#            if section.is_ranged:
+#                return True
+#        return False
     
     @property
     def default_value(self):
@@ -54,6 +54,13 @@ class Menu(MenuObject):
     def has_numbered_section(self):
         for section in self.sections:
             if section.is_numbered:
+                return True
+        return False
+
+    @property
+    def has_ranged_section(self):
+        for section in self.sections:
+            if section.is_ranged:
                 return True
         return False
 
@@ -211,7 +218,8 @@ class Menu(MenuObject):
         return directive
 
     def conditionally_enclose_in_list(self, expr):
-        if self.argument_range_is_allowed:
+        #if self.argument_range_is_allowed:
+        if self.has_ranged_section:
             return [expr]
         else:
             return expr
@@ -221,10 +229,10 @@ class Menu(MenuObject):
         self.menu_lines.extend(self.make_menu_title_lines())
         self.menu_lines.extend(self.make_section_lines())
 
-    def make_new_section(self, is_hidden=False, is_keyed=True, is_numbered=False):
+    def make_new_section(self, is_hidden=False, is_keyed=True, is_numbered=False, is_ranged=False):
         assert not (is_numbered and self.has_numbered_section)
         section = MenuSection(is_hidden=is_hidden, is_keyed=is_keyed, is_numbered=is_numbered,
-            session=self.session, where=self.where)
+            is_ranged=is_ranged, session=self.session, where=self.where)
         self.sections.append(section)
         return section
 
@@ -296,7 +304,8 @@ class Menu(MenuObject):
         return key
 
     def user_requests_argument_range(self, user_input):
-        if self.argument_range_is_allowed:
+        #if self.argument_range_is_allowed:
+        if self.has_ranged_section:
             if self.is_argument_range_string(user_input):
                 return True
         return False

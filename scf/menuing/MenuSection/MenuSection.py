@@ -4,14 +4,15 @@ from baca.scf.menuing.MenuObject import MenuObject
 
 class MenuSection(MenuObject):
 
-    def __init__(self, is_hidden=False, is_keyed=True, is_numbered=False, session=None, where=None):
+    def __init__(self, is_hidden=False, is_keyed=True, is_numbered=False, is_ranged=False,
+        session=None, where=None):
         MenuObject.__init__(self, session=session, where=where)
         self._indent_level = 1
         self._is_hidden = is_hidden
         self._is_keyed = is_keyed
         self._is_numbered = is_numbered
+        self._is_ranged = is_ranged
         self.menu_entry_tokens = None
-        self.allow_argument_range = False
         self.default_index = None
         self.section_title = None
         self.use_menu_entry_key_as_menu_entry_return_value = True
@@ -44,6 +45,10 @@ class MenuSection(MenuObject):
         return self._is_numbered
 
     @property
+    def is_ranged(self):
+        return self._is_ranged
+
+    @property
     def menu_entry_bodies(self):
         return [self.menu_entry_token_to_key_and_body(x)[1] for x in self.menu_entry_tokens]
 
@@ -57,14 +62,14 @@ class MenuSection(MenuObject):
 
     ### READ / WRITE PUBLIC ATTRIBUTES ###
 
-    @apply
-    def allow_argument_range():
-        def fget(self):
-            return self._allow_argument_range
-        def fset(self, allow_argument_range):
-            assert isinstance(allow_argument_range, type(True))
-            self._allow_argument_range = allow_argument_range
-        return property(**locals())
+#    @apply
+#    def is_ranged():
+#        def fget(self):
+#            return self._is_ranged
+#        def fset(self, is_ranged):
+#            assert isinstance(is_ranged, type(True))
+#            self._is_ranged = is_ranged
+#        return property(**locals())
 
     @apply
     def default_index():

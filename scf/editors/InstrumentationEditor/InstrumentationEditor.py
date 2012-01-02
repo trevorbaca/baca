@@ -133,8 +133,7 @@ class InstrumentationEditor(InteractiveEditor):
 
     def select_performer_names_interactively(self):
         from abjad.tools import scoretools
-        menu, section = self.make_new_menu(where=self.where(), is_numbered=True)
-        section.allow_argument_range = True
+        menu, section = self.make_new_menu(where=self.where(), is_numbered=True, is_ranged=True)
         performer_names, performer_abbreviations = [], []
         performer_pairs = scoretools.list_primary_performer_names()
         performer_pairs = [(x[1].split()[-1].strip('.'), x[0]) for x in performer_pairs]
