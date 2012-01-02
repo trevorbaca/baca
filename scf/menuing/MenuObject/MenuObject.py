@@ -9,36 +9,11 @@ class MenuObject(SCFObject):
 
     def __init__(self, session=None, where=None):
         SCFObject.__init__(self, session=session)
-        # TODO: kill self._hidden_entries
-        self._hidden_entries = []
         self.prompt_default = None
         self.should_clear_terminal = False
         self.where = where
 
     ### PUBLIC ATTRIBUTES ###
-
-    # TODO: replace self.default_hidden_entries with a hidden section
-    @property
-    def default_hidden_entries(self):
-        default_hidden_entries = []
-        default_hidden_entries.append(('b', 'back'))
-        default_hidden_entries.append(('grep', 'grep baca directories'))
-        default_hidden_entries.append(('here', 'edit client source'))
-        default_hidden_entries.append(('hidden', 'show hidden items'))
-        default_hidden_entries.append(('q', 'quit'))
-        default_hidden_entries.append(('redraw', 'redraw'))
-        default_hidden_entries.append(('exec', 'exec statement'))
-        default_hidden_entries.append(('next', 'next score'))
-        default_hidden_entries.append(('prev', 'prev score'))
-        default_hidden_entries.append(('score', 'return to score'))
-        default_hidden_entries.append(('studio', 'return to studio'))
-        default_hidden_entries.append(('where', 'show menu client'))
-        return default_hidden_entries
-
-    # TODO: kill self.hidden_entries
-    @property
-    def hidden_entries(self):
-        return self._hidden_entries
 
     @apply
     def prompt_default():
@@ -171,16 +146,7 @@ class MenuObject(SCFObject):
         self.session.hide_next_redraw = True
 
     def show_hidden_menu_entries(self):
-        hidden_entries = []
-        hidden_entries.extend(self.default_hidden_entries)
-        hidden_entries.extend(self.hidden_entries)
-        hidden_entries.sort()
         menu_lines = []
-#        for key, body in hidden_entries:
-#            menu_line = self.make_tab(1) + ' '
-#            menu_line += '{} ({})'.format(body, key)
-#            menu_lines.append(menu_line)
-#        menu_lines.append('')
         for section in self.sections:
             if section.is_hidden:
                 for menu_entry_token in section.menu_entry_tokens:
