@@ -102,15 +102,13 @@ class Menu(MenuObject):
     ### PUBLIC METHODS ###
 
     def change_user_input_to_directive(self, user_input):
-        if self.user_requests_default_value(user_input):
-            return self.conditionally_enclose_in_list(self.default_value)
-        elif not user_input:
-            return self.conditionally_enclose_in_list(None)
-        elif user_input in self.menu_entry_keys:
-            return self.handle_menu_key_user_input(user_input)
-        elif self.is_backtracking_string(user_input):
+        if self.user_enters_nothing(user_input):
+            return self.handle_null_user_input(user_input)
+        elif self.user_enters_backtracking_string(user_input):
             return self.conditionally_enclose_in_list(user_input)
-        elif self.user_requests_argument_range(user_input):
+        elif self.user_enters_menu_key(user_input):
+            return self.handle_menu_key_user_input(user_input)
+        elif self.user_enters_argument_range(user_input):
             return self.handle_argument_range_user_input(user_input)
         elif mathtools.is_integer_equivalent_expr(user_input):
             return self.handle_integer_user_input(user_input)
@@ -156,13 +154,8 @@ class Menu(MenuObject):
             if key == menu_key:
                 return self.conditionally_enclose_in_list(return_value)
 
-    def is_backtracking_string(self, expr):
-        if isinstance(expr, str) and 3 <= len(expr):
-            if 'studio'.startswith(expr):
-                return True
-            elif 'score'.startswith(expr):
-                return True
-        return False
+    def handle_null_user_input(self, user_input):
+        return self.conditionally_enclose_in_list(self.default_value)
 
     def strip_default_indicators_from_strings(self, expr):
         if isinstance(expr, list):
@@ -279,16 +272,22 @@ class Menu(MenuObject):
             key = user_response
         return key
 
-    def user_requests_argument_range(self, user_input):
+    def user_enters_argument_range(self, user_input):
         if self.has_ranged_section:
             if self.is_argument_range_string(user_input):
                 return True
         return False
 
-    def user_requests_default_value(self, user_input):
-        if self.has_default_valued_section:
-            if user_input == '':
+    def user_enters_backtracking_string(self, expr):
+        if isinstance(expr, str) and 3 <= len(expr):
+            if 'studio'.startswith(expr):
                 return True
-            elif 3 <= len(user_input) and 'default'.startswith(user_input):
+            elif 'score'.startswith(expr):
                 return True
         return False
+
+    def user_enters_menu_key(self, user_input):
+        return user_input in self.menu_entry_keys
+
+    def user_enters_nothing(self, user_input):
+        return not user_input or (3 <= len(user_input) and 'default'.startswith(user_input))
