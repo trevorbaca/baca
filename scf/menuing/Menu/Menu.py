@@ -102,12 +102,11 @@ class Menu(MenuObject):
     ### PUBLIC METHODS ###
 
     def add_hidden_menu_items(self):
-        for key, value in self.default_hidden_entries:
+        default_hidden_section = self.sections[0]
+        for entry in default_hidden_section.menu_entry_tokens:
+            number, key, body, return_value = default_hidden_section.unpack_menu_entry_token(entry)
             self.all_keys.append(key)
-            self.all_bodies.append(value)
-        for key, value in self.hidden_entries:
-            self.all_keys.append(key)
-            self.all_bodies.append(value)
+            self.all_bodies.append(body)
 
     def change_all_keys_to_lowercase(self):
         all_keys = []
