@@ -2,18 +2,18 @@ from abjad.tools import iotools
 from baca.scf.menuing.MenuObject import MenuObject
 
 
-# TODO: remove the word 'display' from this class entirely
-#       to better show division of work with menu class.
+# TODO: make self.is_keyed read-only
+# TODO: make self.is_numbered read-only
 class MenuSection(MenuObject):
 
-    def __init__(self, is_hidden=False, is_numbered=False, session=None, where=None):
+    def __init__(self, is_hidden=False, is_keyed=True, is_numbered=False, session=None, where=None):
         MenuObject.__init__(self, session=session, where=where)
         self._indent_level = 1
         self._is_hidden = is_hidden
         self.menu_entry_tokens = None
         self.allow_argument_range = False
         self.default_index = None
-        self.display_keys = True
+        self.is_keyed = is_keyed
         self.is_numbered = is_numbered
         self.section_title = None
         self.use_menu_entry_key_as_menu_entry_return_value = True
@@ -76,22 +76,13 @@ class MenuSection(MenuObject):
         return property(**locals())
 
     @apply
-    def display_keys():
+    def is_keyed():
         def fget(self):
-            return self._display_keys
-        def fset(self, display_keys):
-            assert isinstance(display_keys, type(True))
-            self._display_keys = display_keys
+            return self._is_keyed
+        def fset(self, is_keyed):
+            assert isinstance(is_keyed, type(True))
+            self._is_keyed = is_keyed
         return property(**locals())
-
-#    @apply
-#    def is_hidden():
-#        def fget(self):
-#            return self._is_hidden
-#        def fset(self, is_hidden):
-#            assert isinstance(is_hidden, type(True))
-#            self._is_hidden = is_hidden
-#        return property(**locals())
 
     @apply
     def is_numbered():
@@ -170,7 +161,7 @@ class MenuSection(MenuObject):
             if self.is_numbered:
                 entry_number = entry_index + 1
                 menu_line += '{}: '.format(str(entry_number))
-            if key and self.display_keys:
+            if key and self.is_keyed:
                 menu_line += '{} ({})'.format(body, key)
             else:
                 menu_line += '{}'.format(body)

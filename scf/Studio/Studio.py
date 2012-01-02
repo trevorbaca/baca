@@ -154,7 +154,7 @@ class Studio(SCFObject):
             scores_to_show=self.session.scores_to_show))
         section.menu_entry_tokens = zip(score_package_short_names, score_titles)
         section.is_numbered = True
-        section.display_keys = False
+        section.is_keyed = False
         section = menu.make_new_section()
         section.menu_entry_tokens.append(('k', 'work with interactive material proxies'))
         section.menu_entry_tokens.append(('m', 'work with Bača materials'))
@@ -170,18 +170,18 @@ class Studio(SCFObject):
         section.menu_entry_tokens.append(('ci', 'ci'))
         section.menu_entry_tokens.append(('st', 'st'))
         section.menu_entry_tokens.append(('up', 'up'))
-        section.display_keys = False
+        section.is_keyed = False
         section = menu.make_new_section()
         section.menu_entry_tokens.append(('add_scores', 'add_scores'))
         section.menu_entry_tokens.append(('ci_scores', 'ci_scores'))
         section.menu_entry_tokens.append(('st_scores', 'st_scores'))
         section.menu_entry_tokens.append(('up_scores', 'up_scores'))
-        section.display_keys = False
+        section.is_keyed = False
         section = menu.make_new_section()
         section.menu_entry_tokens.append(('pytest', 'pytest'))
         section.menu_entry_tokens.append(('pytest_scores', 'pytest_scores'))
         section.menu_entry_tokens.append(('pytest_all', 'pytest_all'))
-        section.display_keys = False
+        section.is_keyed = False
         return menu
 
     def run(self, user_input=None):

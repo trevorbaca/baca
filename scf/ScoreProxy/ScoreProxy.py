@@ -276,7 +276,7 @@ class ScoreProxy(PackageProxy):
         section.menu_entry_tokens.append(('st', 'st'))
         section.menu_entry_tokens.append(('add', 'add'))
         section.menu_entry_tokens.append(('ci', 'ci'))
-        section.display_keys = False
+        section.is_keyed = False
         return menu
 
     def manage_svn(self):

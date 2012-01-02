@@ -117,7 +117,7 @@ class InstrumentationEditor(InteractiveEditor):
             section.menu_entry_tokens.append(('del', 'delete performers'))
         if 1 < self.target.performer_count:
             section.menu_entry_tokens.append(('mv', 'move performers'))
-        section.display_keys = False
+        section.is_keyed = False
         return menu
 
     def move_performer_interactively(self):

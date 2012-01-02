@@ -120,7 +120,7 @@ class PerformerEditor(InteractiveEditor):
             section.menu_entry_tokens.append(('name', 'name performer'))
         else:
             section.menu_entry_tokens.append(('ren', 'rename performer'))
-        section.display_keys = False
+        section.is_keyed = False
         return menu
 
     def move_instrument_interactively(self):
@@ -163,7 +163,7 @@ class PerformerEditor(InteractiveEditor):
             section.default_index = default_index
             section = menu.make_new_section()
         section.menu_entry_tokens.append(('none', 'no instruments'))
-        section.display_keys = False
+        section.is_keyed = False
         return menu
 
     def set_initial_configuration_interactively(self):

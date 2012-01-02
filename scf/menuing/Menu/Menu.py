@@ -220,8 +220,8 @@ class Menu(MenuObject):
         menu_lines, keys, values = self.make_menu_lines_keys_and_values()
         return menu_lines
 
-    def make_new_section(self, is_hidden=False, is_numbered=False):
-        section = MenuSection(is_hidden=is_hidden, is_numbered=is_numbered,
+    def make_new_section(self, is_hidden=False, is_keyed=True, is_numbered=False):
+        section = MenuSection(is_hidden=is_hidden, is_keyed=True, is_numbered=is_numbered,
             session=self.session, where=self.where)
         self.sections.append(section)
         return section
