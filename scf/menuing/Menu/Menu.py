@@ -116,13 +116,6 @@ class Menu(MenuObject):
 
     ### PUBLIC METHODS ###
 
-    def add_hidden_menu_items(self):
-        default_hidden_section = self.sections[0]
-        for entry in default_hidden_section.menu_entry_tokens:
-            number, key, body, return_value = default_hidden_section.unpack_menu_entry_token(entry)
-            self.all_keys.append(key)
-            self.all_bodies.append(body)
-
     def change_all_keys_to_lowercase(self):
         all_keys = []
         for key in self.all_keys:
@@ -215,7 +208,6 @@ class Menu(MenuObject):
         self.conditionally_clear_terminal()
         self.make_menu_lines_keys_and_values()
         self.change_all_keys_to_lowercase()
-        self.add_hidden_menu_items()
         self.conditionally_display_lines(self.menu_lines)
         user_response = self.handle_raw_input_with_default('SCF', default=self.prompt_default)
         user_input = self.split_multipart_user_response(user_response)
