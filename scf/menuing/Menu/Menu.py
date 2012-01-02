@@ -116,7 +116,7 @@ class Menu(MenuObject):
             return self.handle_menu_key_user_input(user_input)
         elif self.user_enters_argument_range(user_input):
             return self.handle_argument_range_user_input(user_input)
-        elif mathtools.is_integer_equivalent_expr(user_input):
+        elif self.user_enters_integer_user_input(user_input):
             return self.handle_integer_user_input(user_input)
         elif self.user_enters_menu_body(user_input):
             return self.match_user_input_against_menu_entry_bodies(user_input)
@@ -127,14 +127,14 @@ class Menu(MenuObject):
                 return body 
 
     def handle_argument_range_user_input(self, user_input):
-        item_numbers = self.ranged_section.argument_range_string_to_numbers(user_input)
-        if item_numbers is None:
+        entry_numbers = self.ranged_section.argument_range_string_to_numbers(user_input)
+        if entry_numbers is None:
             return []
-        item_indices = [item_number - 1 for item_number in item_numbers]
+        entry_indices = [entry_number - 1 for entry_number in entry_numbers]
         result = []
-        for i in item_indices:
-            item = self.ranged_section.menu_entry_return_values[i]
-            result.append(item)
+        for i in entry_indices:
+            entry = self.ranged_section.menu_entry_return_values[i]
+            result.append(entry)
         return result
 
     def handle_integer_user_input(self, user_input):
@@ -286,13 +286,16 @@ class Menu(MenuObject):
                 return True
         return False
 
-    def user_enters_backtracking_string(self, expr):
-        if isinstance(expr, str) and 3 <= len(expr):
-            if 'studio'.startswith(expr):
+    def user_enters_backtracking_string(self, user_input):
+        if isinstance(user_input, str) and 3 <= len(user_input):
+            if 'studio'.startswith(user_input):
                 return True
-            elif 'score'.startswith(expr):
+            elif 'score'.startswith(user_input):
                 return True
         return False
+    
+    def user_enters_integer_user_input(self, user_input):
+        return mathtools.is_integer_equivalent_expr(user_input)
 
     def user_enters_menu_key(self, user_input):
         return user_input in self.menu_entry_keys
