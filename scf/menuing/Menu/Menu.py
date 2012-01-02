@@ -4,18 +4,18 @@ from baca.scf.menuing.MenuObject import MenuObject
 from baca.scf.menuing.MenuSection import MenuSection
 
 
-# TODO: allow only 1 numbered section per menu; check at section add-time;
-# TODO: extend Menu.make_new_section() with is_numbered and is_hidden keywords.
-# TODO: make MenuSection.is_hidden read-only and force user to set at section init time.
+# TODO: allow only 1 numbered section per menu; check at section add-time.
 class Menu(MenuObject):
 
     def __init__(self, session=None, where=None):
         MenuObject.__init__(self, session=session, where=where)
         self._sections = []
-        self.hide_menu = False
+        # TODO: allow self.use_menu_entry_key_as_menu_entry_return_value on MenuSection only
         self.use_menu_entry_key_as_menu_entry_return_value = True
 
     ### READ-ONLY PUBLIC ATTRIBUTES ###
+
+    # TODO: self.has_hidden_section, self.has_keyed_section, self.has_numbered_section read-only attributes
 
     @property
     def argument_range_is_allowed(self):
@@ -69,15 +69,6 @@ class Menu(MenuObject):
         return self._sections
 
     ### READ / WRITE PUBLIC ATTRIBUTES ###
-
-    @apply
-    def hide_menu():
-        def fget(self):
-            return self._hide_menu
-        def fset(self, hide_menu):
-            assert isinstance(hide_menu, type(True))
-            self._hide_menu = hide_menu
-        return property(**locals())
 
     @apply
     def use_menu_entry_key_as_menu_entry_return_value():
@@ -232,13 +223,13 @@ class Menu(MenuObject):
             section_menu_lines = section.make_menu_lines(all_keys, all_bodies)
             if not section.is_hidden:
                 menu_lines.extend(section_menu_lines)
-        if self.hide_menu:
+        if self._hide_current_run:
             menu_lines = []
         return menu_lines
         
     def make_menu_title_lines(self):
         menu_lines = []
-        if not self.hide_menu:
+        if not self._hide_current_run:
             menu_lines.append(iotools.capitalize_string_start(self.session.menu_header))
             menu_lines.append('')
         return menu_lines
@@ -255,17 +246,18 @@ class Menu(MenuObject):
                         value = body
                     return self.conditionally_enclose_in_list(value)
                         
+    # TODO: globally remove should_clear_terminal
     def run(self, user_input=None):
         self.assign_user_input(user_input=user_input)
-        should_clear_terminal, hide_menu = True, False
+        should_clear_terminal, hide_current_run = True, False
         while True:
-            self.should_clear_terminal, self.hide_menu = should_clear_terminal, hide_menu
-            should_clear_terminal, hide_menu = False, True
+            self._should_clear_terminal, self._hide_current_run = should_clear_terminal, hide_current_run
+            should_clear_terminal, hide_current_run = False, True
             result = self.conditionally_display_menu()
             if self.session.is_complete:
                 break
             elif result == 'redraw':
-                should_clear_terminal, hide_menu = True, False
+                should_clear_terminal, hide_current_run = True, False
             else:
                 break
         return result
