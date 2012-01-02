@@ -64,9 +64,8 @@ class InteractiveMaterialProxy(MaterialProxy):
         self._original_material_underscored_name = self.material_underscored_name
         self._original_user_input_wrapper = copy.deepcopy(user_input_wrapper)
         while True:
-            menu, section = self.make_new_menu(where=self.where())
+            menu, section = self.make_new_menu(where=self.where(), is_numbered=True)
             section.menu_entry_tokens = self.user_input_wrapper.editable_lines
-            section.is_numbered = True
             if self.user_input_wrapper.is_complete:
                 section.menu_entry_tokens.append(('p', 'show pdf of given input'))
                 section.menu_entry_tokens.append(('m', 'write material to disk'))
@@ -176,13 +175,12 @@ class InteractiveMaterialProxy(MaterialProxy):
         return True
 
     def show_demo_input_values(self):
-        menu, section = self.make_new_menu(where=self.where())
+        menu, section = self.make_new_menu(where=self.where(), is_numbered=True)
         items = []
         for i, (key, value) in enumerate(self.user_input_template.iteritems()):
             item = '{}: {!r}'.format(key.replace('_', ' '), value)
             items.append(item)
         section.menu_entry_tokens = items
-        section.is_numbered = True
         menu.run()
 
     def unname_material(self):

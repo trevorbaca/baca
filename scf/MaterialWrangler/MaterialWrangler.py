@@ -76,9 +76,8 @@ class MaterialWrangler(PackageWrangler, PackageProxy):
             yield summary
 
     def make_main_menu(self):
-        menu, section = self.make_new_menu(where=self.where())
+        menu, section = self.make_new_menu(where=self.where(), is_numbered=True)
         section.menu_entry_tokens = list(self.iterate_material_summaries())
-        section.is_numbered = True
         section.use_menu_entry_key_as_menu_entry_return_value = False
         menu.use_menu_entry_key_as_menu_entry_return_value = False
         section = menu.make_new_section()

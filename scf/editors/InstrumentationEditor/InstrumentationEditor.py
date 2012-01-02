@@ -108,9 +108,8 @@ class InstrumentationEditor(InteractiveEditor):
             self.edit_performer_interactively(result)
 
     def make_main_menu(self):
-        menu, section = self.make_new_menu(where=self.where())
+        menu, section = self.make_new_menu(where=self.where(), is_numbered=True)
         section.menu_entry_tokens = self.summary_lines
-        section.is_numbered = True
         section = menu.make_new_section()
         section.menu_entry_tokens.append(('add', 'add performers'))
         if 0 < self.target.performer_count:
@@ -135,7 +134,7 @@ class InstrumentationEditor(InteractiveEditor):
 
     def select_performer_names_interactively(self):
         from abjad.tools import scoretools
-        menu, section = self.make_new_menu(where=self.where())
+        menu, section = self.make_new_menu(where=self.where(), is_numbered=True)
         section.allow_argument_range = True
         performer_names, performer_abbreviations = [], []
         performer_pairs = scoretools.list_primary_performer_names()
@@ -143,7 +142,6 @@ class InstrumentationEditor(InteractiveEditor):
         performer_pairs.append(('perc', 'percussionist'))
         performer_pairs.sort(lambda x, y: cmp(x[1], y[1]))
         section.menu_entry_tokens = performer_pairs
-        section.is_numbered = True
         section.use_menu_entry_key_as_menu_entry_return_value = False
         menu.use_menu_entry_key_as_menu_entry_return_value = False
         while True:

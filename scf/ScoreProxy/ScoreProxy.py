@@ -247,16 +247,14 @@ class ScoreProxy(PackageProxy):
             self.svn_st()
 
     def make_main_menu(self):
-        menu, section = self.make_new_menu(where=self.where())
+        menu, section = self.make_new_menu(where=self.where(), is_numbered=True)
         section.section_title = 'chunks'
         section.menu_entry_tokens = list(self.chunk_wrangler.iterate_package_spaced_names())
-        section.is_numbered = True
         section = menu.make_new_section()
         section.menu_entry_tokens.append(('ch', '[create chunk]'))
         section = menu.make_new_section()
         section.section_title = 'materials'
         section.menu_entry_tokens = list(self.material_wrangler.iterate_package_underscored_names())
-        section.is_numbered = True
         section = menu.make_new_section()
         section.menu_entry_tokens.append(('mi', 'create interactive material'))
         section.menu_entry_tokens.append(('ms', 'create static material'))

@@ -81,9 +81,8 @@ class InstrumentEditor(InteractiveEditor):
     def get_untuned_percussion_name_interactively(self):
         while True:
             self.append_breadcrumb('untuned percussion')
-            menu, section = self.make_new_menu(where=self.where())
+            menu, section = self.make_new_menu(where=self.where(), is_numbered=True)
             section.menu_entry_tokens = instrumenttools.UntunedPercussion.known_untuned_percussion
-            section.is_numbered = True
             result = menu.run()
             if self.backtrack():
                 self.pop_breadcrumb()
@@ -148,10 +147,9 @@ class InstrumentEditor(InteractiveEditor):
         '''Return list of instruments or none.
         '''
         from abjad.tools import instrumenttools
-        menu, section = self.make_new_menu(where=self.where())
+        menu, section = self.make_new_menu(where=self.where(), is_numbered=True)
         section.allow_argument_range = True
         section.menu_entry_tokens = instrumenttools.list_instrument_names()
-        section.is_numbered = True
         while True:
             self.append_breadcrumb('select instrument')
             #print 'BEFORE: argument range is allowed: {!r}'.format(menu.argument_range_is_allowed)

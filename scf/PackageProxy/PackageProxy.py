@@ -343,10 +343,9 @@ class PackageProxy(DirectoryProxy):
 
     def set_purview_interactively(self):
         from baca.scf.ScoreWrangler import ScoreWrangler
-        menu, section = self.make_new_menu(where=self.where())
+        menu, section = self.make_new_menu(where=self.where(), is_numbered=True)
         score_wrangler = ScoreWrangler()
         section.menu_entry_tokens = score_wrangler.iterate_score_titles_with_years()
-        section.is_numbered = True
         section = menu.make_new_section()
         section.menu_entry_tokens.append(('s', 'global to studio'))
         result = menu.run()
