@@ -3,18 +3,17 @@ from baca.scf.menuing.MenuObject import MenuObject
 
 
 # TODO: make self.is_keyed read-only
-# TODO: make self.is_numbered read-only
 class MenuSection(MenuObject):
 
     def __init__(self, is_hidden=False, is_keyed=True, is_numbered=False, session=None, where=None):
         MenuObject.__init__(self, session=session, where=where)
         self._indent_level = 1
         self._is_hidden = is_hidden
+        self._is_numbered = is_numbered
         self.menu_entry_tokens = None
         self.allow_argument_range = False
         self.default_index = None
         self.is_keyed = is_keyed
-        self.is_numbered = is_numbered
         self.section_title = None
         self.use_menu_entry_key_as_menu_entry_return_value = True
 
@@ -36,6 +35,10 @@ class MenuSection(MenuObject):
     @property
     def is_hidden(self):
         return self._is_hidden
+
+    @property
+    def is_numbered(self):
+        return self._is_numbered
 
     @property
     def menu_entry_bodies(self):
@@ -82,15 +85,6 @@ class MenuSection(MenuObject):
         def fset(self, is_keyed):
             assert isinstance(is_keyed, type(True))
             self._is_keyed = is_keyed
-        return property(**locals())
-
-    @apply
-    def is_numbered():
-        def fget(self):
-            return self._is_numbered
-        def fset(self, is_numbered):
-            assert isinstance(is_numbered, type(True))
-            self._is_numbered = is_numbered
         return property(**locals())
 
     @apply
