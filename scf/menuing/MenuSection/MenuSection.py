@@ -60,16 +60,14 @@ class MenuSection(MenuObject):
     def menu_entry_return_values(self):
         return [self.menu_entry_token_to_menu_entry_return_value(x) for x in self.menu_entry_tokens]
 
-    ### READ / WRITE PUBLIC ATTRIBUTES ###
+    @property
+    def unpacked_menu_entries(self):
+        result = []
+        for menu_entry_token in self.menu_entry_tokens:
+            result.append(self.unpack_menu_entry_token(menu_entry_token))
+        return result
 
-#    @apply
-#    def is_ranged():
-#        def fget(self):
-#            return self._is_ranged
-#        def fset(self, is_ranged):
-#            assert isinstance(is_ranged, type(True))
-#            self._is_ranged = is_ranged
-#        return property(**locals())
+    ### READ / WRITE PUBLIC ATTRIBUTES ###
 
     @apply
     def default_index():
@@ -199,8 +197,7 @@ class MenuSection(MenuObject):
                     return i + 1
 
     # TODO: replace self.menu_entry_token_to_key_and_body() and also
-    #       replace self.menu_entry_token_to_menu_entry_return_value()
-    #       with this method.
+    #       replace self.menu_entry_token_to_menu_entry_return_value().
     # TODO: unpack all menu entry tokens only once at menu runtime.
     def unpack_menu_entry_token(self, menu_entry_token):
         number = self.menu_entry_token_to_menu_entry_number(menu_entry_token)

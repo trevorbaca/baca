@@ -9,8 +9,6 @@ class Menu(MenuObject):
     def __init__(self, session=None, where=None):
         MenuObject.__init__(self, session=session, where=where)
         self._sections = []
-        # TODO: allow self.use_menu_entry_key_as_menu_entry_return_value on MenuSection only
-        self.use_menu_entry_key_as_menu_entry_return_value = True
         default_hidden_section = self.make_default_hidden_section(session=session, where=where)
         self.sections.append(default_hidden_section)
 
@@ -97,22 +95,10 @@ class Menu(MenuObject):
 
     @property
     def unpacked_menu_entries(self):
-        dummy_section = self.sections[0]
         result = []
-        for menu_entry_token in self.menu_entry_tokens:
-            result.append(dummy_section.unpack_menu_entry_token(menu_entry_token))
+        for section in self.sections:
+            result.extend(section.unpacked_menu_entries)
         return result
-
-    ### READ / WRITE PUBLIC ATTRIBUTES ###
-
-    @apply
-    def use_menu_entry_key_as_menu_entry_return_value():
-        def fget(self):
-            return self._use_menu_entry_key_as_menu_entry_return_value
-        def fset(self, use_menu_entry_key_as_menu_entry_return_value):
-            assert isinstance(use_menu_entry_key_as_menu_entry_return_value, type(True))
-            self._use_menu_entry_key_as_menu_entry_return_value = use_menu_entry_key_as_menu_entry_return_value
-        return property(**locals())
 
     ### PUBLIC METHODS ###
 
@@ -166,12 +152,10 @@ class Menu(MenuObject):
                         value = user_input
                     return self.conditionally_enclose_in_list(value)
 
-    def handle_menu_key_user_input(self, user_input):
-        if self.use_menu_entry_key_as_menu_entry_return_value:
-            directive = user_input
-        else:
-            directive = self.change_menu_key_to_menu_body(user_input)
-        return self.conditionally_enclose_in_list(directive)
+    def handle_menu_key_user_input(self, menu_key):
+        for number, key, body, return_value in self.unpacked_menu_entries:
+            if key == menu_key:
+                return self.conditionally_enclose_in_list(return_value)
 
     def is_backtracking_string(self, expr):
         if isinstance(expr, str) and 3 <= len(expr):
