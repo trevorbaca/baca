@@ -206,6 +206,33 @@ class MenuSection(MenuObject):
                 numbers.append(number)
         return numbers
 
+    def argument_range_string_to_numbers_optimized(self, argument_range_string):
+        assert self.menu_entry_tokens
+        numbers = []
+        argument_range_string = argument_range_string.replace(' ', '')
+        range_parts = argument_range_string.split(',')
+        for range_part in range_parts:
+            if range_part == 'all':
+                numbers.extend(range(1, len(self.menu_entry_tokens) + 1))
+            elif '-' in range_part:
+                start, stop = range_part.split('-')
+                start = self.argument_string_to_number_optimized(start)
+                stop = self.argument_string_to_number_optimized(stop)
+                if start is None or stop is None:
+                    return
+                if start <= stop:
+                    new_numbers = range(start, stop + 1)
+                    numbers.extend(new_numbers)
+                else:
+                    new_numbers = range(start, stop - 1, -1)
+                    numbers.extend(new_numbers)
+            else:
+                number = self.argument_string_to_number_optimized(range_part)
+                if number is None:
+                    return
+                numbers.append(number)
+        return numbers
+
     def argument_string_to_number(self, argument_string):
         '''Return number when successful. Otherwise none.
         '''
@@ -221,6 +248,16 @@ class MenuSection(MenuObject):
         for menu_index, menu_key in enumerate(self.menu_entry_keys):
             if argument_string == menu_key:
                 return menu_index + 1
+
+    def argument_string_to_number_optimized(self, argument_string):
+        for entry_index, unpacked_entry in enumerate(self.unpacked_menu_entries):
+            number, key, body, return_value, section = unpacked_entry
+            body = iotools.strip_diacritics_from_binary_string(body).lower()
+            if  (mathtools.is_integer_equivalent_expr(argument_string) and int(argument_string) == number) or \
+                (argument_string == key) or \
+                (3 <= len(argument_string) and body.startswith(argument_string)):
+                entry_number = entry_index + 1
+                return entry_number
 
     def is_menu_entry_token(self, expr):
         if isinstance(expr, str):

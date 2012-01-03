@@ -229,10 +229,9 @@ def test_Menu_optimized_run_05():
     result = menu.run(user_input='1, 3-2')
     assert result is None
 
-    # TODO: ranged entry
-#    menu.session.reinitialize()
-#    result = menu.run(user_input='app, che-ban')
-#    assert result == ['apple', 'cherry', 'banana']
+    menu.session.reinitialize()
+    result = menu.run(user_input='app, che-ban')
+    assert result == ['apple', 'cherry', 'banana']
 
 
 def test_Menu_optimized_run_06():
@@ -654,20 +653,17 @@ def test_Menu_optimized_run_10():
     result = menu.run(user_input='1, 3-2')
     assert result is None
 
-    # TODO: ranged entry
-#    menu.session.reinitialize()
-#    result = menu.run(user_input='add, mod-del')
-#    assert result == ['add', 'mod', 'del']
+    menu.session.reinitialize()
+    result = menu.run(user_input='add, mod-del')
+    assert result == ['add', 'mod', 'del']
 
-    # TODO: ranged entry
-#    menu.session.reinitialize()
-#    result = menu.run(user_input='fir, thi-sec')
-#    assert result == ['add', 'mod', 'del']
+    menu.session.reinitialize()
+    result = menu.run(user_input='fir, thi-sec')
+    assert result == ['add', 'mod', 'del']
 
-    # TODO:
-#    menu.session.reinitialize()
-#    result = menu.run(user_input='fir, mod-sec')
-#    assert result == ['add', 'mod', 'del']
+    menu.session.reinitialize()
+    result = menu.run(user_input='fir, mod-sec')
+    assert result == ['add', 'mod', 'del']
 
     '''Bodies returned instead of keys.'''
     
@@ -677,11 +673,8 @@ def test_Menu_optimized_run_10():
     result = menu.run(user_input='foo')
     assert result is None
 
-    # TODO:
     menu.session.reinitialize()
     result = menu.run(user_input='q')
-    # current behavior: assert result is None
-    # correct behavior: assert result == []
     assert result is None
 
     menu.session.reinitialize()
@@ -700,17 +693,14 @@ def test_Menu_optimized_run_10():
     result = menu.run(user_input='1, 3-2')
     assert result is None
 
-    # TODO: ranged entry
-#    menu.session.reinitialize()
-#    result = menu.run(user_input='add, mod-del')
-#    assert result == ['first command', 'third command', 'second command']
+    menu.session.reinitialize()
+    result = menu.run(user_input='add, mod-del')
+    assert result == ['first command', 'third command', 'second command']
 
-    # TODO: ranged entry
-#    menu.session.reinitialize()
-#    result = menu.run(user_input='fir, thi-sec')
-#    assert result == ['first command', 'third command', 'second command']
+    menu.session.reinitialize()
+    result = menu.run(user_input='fir, thi-sec')
+    assert result == ['first command', 'third command', 'second command']
 
-    # TODO: ranged entry
-#    menu.session.reinitialize()
-#    result = menu.run(user_input='fir, mod-sec')
-#    assert result == ['first command', 'third command', 'second command']
+    menu.session.reinitialize()
+    result = menu.run(user_input='fir, mod-sec')
+    assert result == ['first command', 'third command', 'second command']

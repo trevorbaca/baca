@@ -127,7 +127,7 @@ class Menu(MenuObject):
         if self.user_enters_nothing(user_input) and self.default_value:
             return self.conditionally_enclose_in_list(self.default_value)
         elif self.user_enters_argument_range_optimized(user_input):
-            pass
+            return self.handle_argument_range_user_input_optimized(user_input)
         else:
             for number, key, body, return_value, section in self.unpacked_menu_entries:
                 body = iotools.strip_diacritics_from_binary_string(body).lower()
@@ -146,6 +146,21 @@ class Menu(MenuObject):
         entry_numbers = self.ranged_section.argument_range_string_to_numbers(user_input)
         if entry_numbers is None:
             return []
+        entry_indices = [entry_number - 1 for entry_number in entry_numbers]
+        result = []
+        for i in entry_indices:
+            entry = self.ranged_section.menu_entry_return_values[i]
+            result.append(entry)
+        return result
+
+    def handle_argument_range_user_input_optimized(self, user_input):
+        if not self.has_ranged_section:
+            return
+        entry_numbers = self.ranged_section.argument_range_string_to_numbers_optimized(user_input)
+        print 'entry_numbers {!r}'.format(entry_numbers)
+        if entry_numbers is None:
+            #return []
+            return None
         entry_indices = [entry_number - 1 for entry_number in entry_numbers]
         result = []
         for i in entry_indices:
