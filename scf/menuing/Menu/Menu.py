@@ -19,6 +19,7 @@ class Menu(MenuObject):
             if section.has_default_value:
                 return section.default_value
 
+    # TODO: rewrite these with any()
     @property
     def has_default_valued_section(self):
         for section in self.sections:
@@ -107,20 +108,6 @@ class Menu(MenuObject):
 
     ### PUBLIC METHODS ###
 
-#    def change_user_input_to_directive(self, user_input):
-#        if self.user_enters_nothing(user_input):
-#            return self.handle_null_user_input(user_input)
-#        elif self.user_enters_backtracking_string(user_input):
-#            return self.conditionally_enclose_in_list(user_input)
-#        elif self.user_enters_menu_key(user_input):
-#            return self.handle_menu_key_user_input(user_input)
-#        elif self.user_enters_argument_range(user_input):
-#            return self.handle_argument_range_user_input(user_input)
-#        elif self.user_enters_integer_user_input(user_input):
-#            return self.handle_integer_user_input(user_input)
-#        elif self.user_enters_menu_body(user_input):
-#            return self.match_user_input_against_menu_entry_bodies(user_input)
-
     def change_user_input_to_directive_optimized(self, user_input):
         if self.user_enters_nothing(user_input) and self.default_value:
             return self.conditionally_enclose_in_list(self.default_value)
@@ -134,21 +121,25 @@ class Menu(MenuObject):
                     (3 <= len(user_input) and body.startswith(user_input)):
                     return self.conditionally_enclose_in_list(return_value)
 
-    def change_menu_key_to_menu_body(self, menu_key):
-        for number, key, body, return_value, section in self.unpacked_menu_entries:
-            if key == menu_key:
-                return body 
+    def conditionally_display_menu(self):
+        self.conditionally_clear_terminal()
+        self.make_menu_lines()
+        self.conditionally_display_lines(self.menu_lines)
+        user_response = self.handle_raw_input_with_default('SCF', default=self.prompt_default)
+        user_input = self.split_multipart_user_response(user_response)
+        user_input = iotools.strip_diacritics_from_binary_string(user_input)
+        user_input = user_input.lower()
+        directive = self.change_user_input_to_directive_optimized(user_input)
+        directive = self.strip_default_indicators_from_strings(directive)
+        self.session.hide_next_redraw = False
+        directive = self.handle_hidden_key(directive)
+        return directive
 
-#    def handle_argument_range_user_input(self, user_input):
-#        entry_numbers = self.ranged_section.argument_range_string_to_numbers(user_input)
-#        if entry_numbers is None:
-#            return []
-#        entry_indices = [entry_number - 1 for entry_number in entry_numbers]
-#        result = []
-#        for i in entry_indices:
-#            entry = self.ranged_section.menu_entry_return_values[i]
-#            result.append(entry)
-#        return result
+    def conditionally_enclose_in_list(self, expr):
+        if self.has_ranged_section:
+            return [expr]
+        else:
+            return expr
 
     def handle_argument_range_user_input_optimized(self, user_input):
         if not self.has_ranged_section:
@@ -163,74 +154,19 @@ class Menu(MenuObject):
             result.append(entry)
         return result
 
-#    def handle_integer_user_input(self, user_input):
-#        entry_number = int(user_input)
-#        for section in self.sections:
-#            if section.is_numbered:
-#                if entry_number <= len(section.menu_entry_tokens):
-#                    entry_index = entry_number - 1
-#                    token = section.menu_entry_tokens[entry_index]
-#                    key, body = section.menu_entry_token_to_key_and_body(token)
-#                    if key:
-#                        value = key
-#                    else:
-#                        value = user_input
-#                    return self.conditionally_enclose_in_list(value)
-#
-#    def handle_menu_key_user_input(self, menu_key):
-#        for number, key, body, return_value, section in self.unpacked_menu_entries:
-#            if key == menu_key:
-#                return self.conditionally_enclose_in_list(return_value)
-#
-#    def handle_null_user_input(self, user_input):
-#        return self.conditionally_enclose_in_list(self.default_value)
-
-    def strip_default_indicators_from_strings(self, expr):
-        if isinstance(expr, list):
-            cleaned_list = []
-            for element in expr:
-                if element.endswith(' (default)'):
-                    element = element.replace(' (default)', '')
-                cleaned_list.append(element)
-            return cleaned_list
-        elif expr is not None:
-            if expr.endswith(' (default)'):
-                expr = expr.replace(' (default)', '')
-            return expr
-
-    def conditionally_display_menu(self):
-        self.conditionally_clear_terminal()
-        self.make_menu_lines()
-        self.conditionally_display_lines(self.menu_lines)
-        user_response = self.handle_raw_input_with_default('SCF', default=self.prompt_default)
-        user_input = self.split_multipart_user_response(user_response)
-        user_input = iotools.strip_diacritics_from_binary_string(user_input)
-        user_input = user_input.lower()
-        #directive = self.change_user_input_to_directive(user_input)
-        directive = self.change_user_input_to_directive_optimized(user_input)
-        #print 'directive: {!r}'.format(directive)
-        directive = self.strip_default_indicators_from_strings(directive)
-        self.session.hide_next_redraw = False
-        directive = self.handle_hidden_key(directive)
-        return directive
-
-    def conditionally_enclose_in_list(self, expr):
-        if self.has_ranged_section:
-            return [expr]
-        else:
-            return expr
-
-    def make_null_return_value(self):
-        if self.has_ranged_section:
-            return []
-        else:
-            return None
-
     def make_menu_lines(self):
         self.menu_lines = []
         self.menu_lines.extend(self.make_menu_title_lines())
         self.menu_lines.extend(self.make_section_lines())
 
+    def make_menu_title_lines(self):
+        menu_lines = []
+        if not self._hide_current_run:
+            menu_lines.append(iotools.capitalize_string_start(self.session.menu_header))
+            menu_lines.append('')
+        return menu_lines
+
+    # TODO: rewrite with **kwargs
     def make_new_section(self, is_hidden=False, is_keyed=True, is_numbered=False, is_ranged=False):
         assert not (is_numbered and self.has_numbered_section)
         assert not (is_ranged and self.has_ranged_section)
@@ -249,32 +185,6 @@ class Menu(MenuObject):
             menu_lines = []
         return menu_lines
         
-    def make_menu_title_lines(self):
-        menu_lines = []
-        if not self._hide_current_run:
-            menu_lines.append(iotools.capitalize_string_start(self.session.menu_header))
-            menu_lines.append('')
-        return menu_lines
-
-#    def match_user_input_against_menu_entry_bodies(self, user_input):
-#        for section in self.sections:
-#            for token in section.menu_entry_tokens:
-#                key, body = section.menu_entry_token_to_key_and_body(token)
-#                body = iotools.strip_diacritics_from_binary_string(body).lower()
-#                if body.startswith(user_input):
-#                    if key is not None:
-#                        value = key
-#                    else:
-#                        value = body
-#                    return self.conditionally_enclose_in_list(value)
-#
-#    def user_enters_menu_body(self, user_input):
-#        for number, key, body, return_value, section in self.unpacked_menu_entries:
-#            body = iotools.strip_diacritics_from_binary_string(body).lower()
-#            if body.startswith(user_input):
-#                return True
-#        return False
-                        
     # TODO: globally remove should_clear_terminal (if possible)
     def run(self, user_input=None):
         self.assign_user_input(user_input=user_input)
@@ -313,11 +223,19 @@ class Menu(MenuObject):
             key = user_response
         return key
 
-#    def user_enters_argument_range(self, user_input):
-#        if self.has_ranged_section:
-#            if self.is_argument_range_string(user_input):
-#                return True
-#        return False
+    # TODO: apply default indicators at display time so this can be completely removed
+    def strip_default_indicators_from_strings(self, expr):
+        if isinstance(expr, list):
+            cleaned_list = []
+            for element in expr:
+                if element.endswith(' (default)'):
+                    element = element.replace(' (default)', '')
+                cleaned_list.append(element)
+            return cleaned_list
+        elif expr is not None:
+            if expr.endswith(' (default)'):
+                expr = expr.replace(' (default)', '')
+            return expr
 
     def user_enters_argument_range_optimized(self, user_input):
         if ',' in user_input:
@@ -325,20 +243,6 @@ class Menu(MenuObject):
         if '-' in user_input:
             return True
         return False
-
-#    def user_enters_backtracking_string(self, user_input):
-#        if isinstance(user_input, str) and 3 <= len(user_input):
-#            if 'studio'.startswith(user_input):
-#                return True
-#            elif 'score'.startswith(user_input):
-#                return True
-#        return False
-#    
-#    def user_enters_integer_user_input(self, user_input):
-#        return mathtools.is_integer_equivalent_expr(user_input)
-#
-#    def user_enters_menu_key(self, user_input):
-#        return user_input in self.menu_entry_keys
 
     def user_enters_nothing(self, user_input):
         return not user_input or (3 <= len(user_input) and 'default'.startswith(user_input))
