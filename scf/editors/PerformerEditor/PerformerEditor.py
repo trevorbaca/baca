@@ -3,16 +3,12 @@ from abjad.tools import mathtools
 from abjad.tools import scoretools
 from abjad.tools import sequencetools
 from baca.scf.editors.InteractiveEditor import InteractiveEditor
+from baca.scf.editors.InstrumentEditor import InstrumentEditor
 
 
 class PerformerEditor(InteractiveEditor):
 
-    ### PUBLIC ATTRIBUTES ###
-
-    @property
-    def InstrumentEditor(self):
-        import baca
-        return baca.scf.editors.InstrumentEditor
+    ### READ-ONLY PUBLIC ATTRIBUTES ###
 
     @property
     def breadcrumb(self):
@@ -46,7 +42,7 @@ class PerformerEditor(InteractiveEditor):
     ### PUBLIC METHODS ###
 
     def add_instruments_interactively(self):
-        editor = self.InstrumentEditor(session=self.session)
+        editor = InstrumentEditor(session=self.session)
         instruments = editor.select_instruments_from_instrumenttools_interactively()
         if instruments is not None:
             for instrument in instruments:
@@ -95,21 +91,20 @@ class PerformerEditor(InteractiveEditor):
         except:
             return
         if self.target.instrument_count < instrument_number:
-            message = 'there is no instrument number {}'.format(instrument_number)
-            self.conditionally_display_cap_lines([message, ''])
-            self.proceed()
+            line = 'there is no instrument number {}'.format(instrument_number)
+            self.proceed(lines=[line])
             return
         instrument_index = instrument_number - 1
         instrument = self.target.instruments[instrument_index]
-        instrument_editor = self.InstrumentEditor(session=self.session, target=instrument)
+        instrument_editor = InstrumentEditor(session=self.session, target=instrument)
         instrument_editor.run()
 
     def make_main_menu(self):
         menu, section = self.make_new_menu(where=self.where(), is_numbered=True)
-        section.return_value_attr = 'number'
+        section.return_value_attribute = 'number'
         section.section_title = 'instruments'
         instrument_names = [x.instrument_name for x in self.target.instruments]
-        section.menu_entry_tokens = instrument_names
+        section.tokens = instrument_names
         section = menu.make_new_section(is_keyed=False)
         section.append(('add', 'add instruments'))
         if 0 < self.target.instrument_count:
@@ -150,12 +145,12 @@ class PerformerEditor(InteractiveEditor):
             most_likely_number = most_likely_index + 1
             default_index = most_likely_index
         if likely_instruments:
-            section.menu_entry_tokens = likely_instrument_names
+            section.tokens = likely_instrument_names
             section.default_index = default_index
             section = menu.make_new_section(is_keyed=False)
             section.append(('other', 'other instruments'))
         else:
-            section.menu_entry_tokens = instrumenttools.list_instrument_names()
+            section.tokens = instrumenttools.list_instrument_names()
             section.default_index = default_index
             section = menu.make_new_section(is_keyed=False)
         section.append(('none', 'no instruments'))
@@ -185,7 +180,7 @@ class PerformerEditor(InteractiveEditor):
             elif result == 'none':
                 break
             elif result == 'other':
-                editor = self.InstrumentEditor(session=self.session)
+                editor = InstrumentEditor(session=self.session)
                 instruments = editor.select_instruments_from_instrumenttools_interactively()
                 if instruments is not None:
                     for instrument in instruments:

@@ -6,9 +6,10 @@ import sys
 
 class DirectoryProxy(SCFObject):
 
-    def __init__(self, directory_name=None, session=None):
+    def __init__(self, directory_name, session=None):
+        assert isinstance(directory_name, str)
+        assert os.path.exists(directory_name)
         SCFObject.__init__(self, session=session)
-        assert isinstance(directory_name, (str, type(None)))
         self._directory_name = directory_name
 
     ### OVERLOADS ###
@@ -23,22 +24,15 @@ class DirectoryProxy(SCFObject):
         return not self == other
 
     def __repr__(self):
-        if self.directory_name is not None:
-            return '{}({!r})'.format(self.class_name, self.directory_name)
-        else:
-            return '{}()'.format(self.class_name)
+#        if self.directory_name is not None:
+#            return '{}({!r})'.format(self.class_name, self.directory_name)
+#        else:
+#            return '{}()'.format(self.class_name)
+        return '{}({!r})'.format(self.class_name, self.directory_name)
 
-    ### PUBLIC ATTRIBUTES ###
+    ### READ-ONLY PUBLIC ATTRIBUTES ###
 
-    @apply
-    def directory_name():
-        def fget(self):
-            return self._directory_name
-        def fset(self, directory_name):
-            assert isinstance(directory_name, (str, type(None)))
-            self._directory_name = directory_name
-        return property(**locals())
-
+    # TODO: remove
     @property
     def has_directory(self):
         if self.directory_name is not None:
@@ -91,6 +85,18 @@ class DirectoryProxy(SCFObject):
             return True
         return False
 
+    ### READ / WRITE PUBLIC ATTRIBUTES ###
+
+    # TODO: make read-only
+    @apply
+    def directory_name():
+        def fget(self):
+            return self._directory_name
+        def fset(self, directory_name):
+            assert isinstance(directory_name, (str, type(None)))
+            self._directory_name = directory_name
+        return property(**locals())
+
     ### PUBLIC METHODS ###
 
     def create_directory(self):
@@ -103,6 +109,11 @@ class DirectoryProxy(SCFObject):
         if self.backtrack():
             return
         self.directory_name = result
+
+    def list_directory(self):
+        os.system('ls {}'.format(self.directory_name))
+        self.conditionally_display_lines(lines=[''])
+        self.session.hide_next_redraw = True
 
     def remove(self):
         if self.is_in_repository:
@@ -117,7 +128,8 @@ class DirectoryProxy(SCFObject):
         if lines:
             self.conditionally_display_lines(lines)
         if prompt_proceed:
-            self.proceed()
+            line = 'tests run.'
+            self.proceed(lines=[line])
 
     def svn_add(self, prompt_proceed=True):
         proc = subprocess.Popen('svn-add-all', shell=True, stdout=subprocess.PIPE)
@@ -131,7 +143,7 @@ class DirectoryProxy(SCFObject):
         if commit_message is None:
             commit_message = self.handle_raw_input('commit message')
             line = 'commit message will be: "{}"\n'.format(commit_message)
-            self.conditionally_display_cap_lines([line])
+            self.conditionally_display_lines([line])
             if not self.confirm():
                 return
         lines = []

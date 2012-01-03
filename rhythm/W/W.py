@@ -36,7 +36,7 @@ class W(sequencetools.Matrix):
         all_measure_divisions = sequencetools.partition_sequence_cyclically_by_counts_with_overhang(*args)
         return all_measure_divisions
 
-    ### PUBLIC ATTRIBUTES ###
+    ### READ-ONLY PUBLIC ATTRIBUTES ###
 
     @property
     def measures(self):

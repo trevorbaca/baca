@@ -21,7 +21,12 @@ class SCFObject(object):
     def __repr__(self):
         return '{}()'.format(self.class_name)
 
-    ### PUBLIC ATTRIBUTES ###
+    ### READ-ONLY PUBLIC ATTRIBUTES ###
+
+    # TODO: write test
+    @property
+    def assets_directory(self):
+        return os.path.join(self.scf_root_directory, 'assets')
 
     @property
     def breadcrumbs(self):
@@ -30,6 +35,11 @@ class SCFObject(object):
     @property
     def class_name(self):
         return type(self).__name__
+
+    # TODO: write test
+    @property
+    def global_directory_name(self):
+        return os.path.join(['Users', 'trevorbaca', 'Documents', 'other', 'baca'])
 
     @property
     def help_item_width(self):
@@ -40,29 +50,27 @@ class SCFObject(object):
         from baca.scf import helpers
         return helpers
 
+    # TODO: write test
+    @property
+    def scf_root_directory(self):
+        return os.path.join('/', 'Users', 'trevorbaca', 'Documents', 'other', 'baca', 'scf')
+
     @property
     def spaced_class_name(self):
         spaced_class_name = iotools.uppercamelcase_to_underscore_delimited_lowercase(self.class_name)
         spaced_class_name = spaced_class_name.replace('_', ' ')
         return spaced_class_name
 
-    @apply
-    def session():
-        def fget(self):
-            return self._session
-        def fset(self, session):
-            if session is None:
-                self._session = Session()
-            else:
-                assert isinstance(session, type(Session()))
-                self._session = session
-        return property(**locals())
-
     @property
     def source_file_name(self):
         source_file_name = inspect.getfile(type(self))
         source_file_name = source_file_name.strip('c')
         return source_file_name
+
+    # TODO: write test
+    @property
+    def stylesheets_directory(self):
+        return os.path.join(self.scf_root_directory, 'stylesheets')
 
     @property
     def transcript(self):
@@ -75,6 +83,28 @@ class SCFObject(object):
     @property
     def ts(self):
         return self.transcript_signature
+
+    ### READ / WRITE PUBLIC ATTRIBUTES ###
+
+    @apply
+    def preserve_backtracking():
+        def fget(self):
+            return self.session.preserve_backtracking
+        def fset(self, preserve_backtracking):
+            self.session.preserve_backtracking = preserve_backtracking
+        return property(**locals())
+
+    @apply
+    def session():
+        def fget(self):
+            return self._session
+        def fset(self, session):
+            if session is None:
+                self._session = Session()
+            else:
+                assert isinstance(session, type(Session()))
+                self._session = session
+        return property(**locals())
 
     ### PUBLIC METHODS ###
 
@@ -95,10 +125,7 @@ class SCFObject(object):
         if self.session.is_displayable:
             iotools.clear_terminal()
 
-    def conditionally_display_cap_lines(self, lines):
-        self.conditionally_display_lines(lines, capitalize_first_character=True)
-        
-    def conditionally_display_lines(self, lines, capitalize_first_character=False):
+    def conditionally_display_lines(self, lines, capitalize_first_character=True):
         assert isinstance(lines, list)
         if not self.session.hide_next_redraw:
             if capitalize_first_character:
@@ -113,7 +140,7 @@ class SCFObject(object):
     def confirm(self):
         response = self.handle_raw_input('ok?', include_chevron=False)
         if not response.lower() == 'y':
-            self.conditionally_display_cap_lines([''])
+            self.conditionally_display_lines([''])
             return False
         return True
 
@@ -123,12 +150,10 @@ class SCFObject(object):
 
     def handle_raw_input(self, prompt, include_chevron=True):
         prompt = iotools.capitalize_string_start(prompt)
-        #print 'rrr!!!'
         if include_chevron:
             prompt = prompt + '> '
         else:
             prompt = prompt + ' '
-        #print 'FOO', self.session.is_displayable
         if self.session.is_displayable:
             user_response = raw_input(prompt)
             print ''
@@ -159,7 +184,7 @@ class SCFObject(object):
         from baca.scf.menuing.MenuSection import MenuSection
         if isinstance(argument_range_string, str):
             dummy_section = MenuSection()
-            dummy_section.menu_entry_tokens = argument_list[:]
+            dummy_section.tokens = argument_list[:]
             if dummy_section.argument_range_string_to_numbers(argument_range_string) is not None:
                 return True
         return False
@@ -257,17 +282,38 @@ class SCFObject(object):
         lines = []
         lines.append('not yet implemented.')
         lines.append('')
-        self.conditionally_display_cap_lines(lines)
+        self.conditionally_display_lines(lines)
         self.proceed()
-        return True, None
 
-    def proceed(self):
+    def proceed(self, lines=None):
+        lines = lines or []
+        assert isinstance(lines, (tuple, list))
+        if lines:
+            lines.append('')
+            self.conditionally_display_lines(lines)
         response = self.handle_raw_input('press return to continue.', include_chevron=False)
         self.conditionally_clear_terminal()
+
+    # TODO: write tests
+    def purview_name_to_directory_name(self, purview_name):
+        if purview_name == 'baca':
+            directory_name = self.global_directory_name
+        else:
+            directory_name = os.path.join(['Users', 'trevorbaca', 'Documents', 'scores', purview_name])
+        if not os.path.exists(directory_name):
+            raise ValueError
+        return directory_name
 
     def query(self, prompt):
         response = handle_raw_input(prompt)
         return response.lower().startswith('y')
+
+    def reveal_modules(self):
+        command = 'module_names = sys.modules.keys()'
+        exec(command)
+        module_names = [x for x in module_names if x.startswith(self.score_package_short_name)]
+        module_names.sort()
+        return module_names
 
     def where(self):
         return inspect.stack()[1]

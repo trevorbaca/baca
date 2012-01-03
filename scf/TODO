@@ -1,39 +1,47 @@
 TODO
 
-1. Add aggregate Menu.menu_entry_tokens, Menu.menu_entry_bodies, etc.
+0. Be able safely to write junk into any system file.
 
-2. Allow only one section per menu to be numbered.
+1. Implement 'make new material: static' in studio.
 
-3. Implement Menu.has_numbered_section attribute.
+2. Implement 'make new material: static' in scores.
 
-4. Create test_Menu_run.py to document menu build configurations.
+3. Implement 'make new material: range' in studio.
 
-5. Implement remaining clarinets.
+4. Implement 'make new material: range' in scores.
 
-6. Implement saxophones.
+5. Wrap tests around existing material and chunk menus.
 
-7. Audit and implement remaining instruments.
+6. Implement remaining clarinets.
 
-8. Clean up PitchRangeEditor main menu.
+7. Implement saxophones.
 
-9. Edit instrument transposition.
+8. Audit and implement remaining instruments.
 
-10. Edit instrument clefs.
+9. Clean up PitchRangeEditor main menu.
 
-11. Remove blank line between help request and help response.
+10. Edit instrument transposition.
 
-12. Remove blank line between exec request and exec response.
+11. Edit instrument clefs.
 
-13. Remove extra appearance of B-flat clarinet from clarinetist config menu.
+12. Remove blank line between help request and help response.
 
-14. Research 'with' for breadcrumb management.
+13. Remove blank line between exec request and exec response.
 
-15. Wrap tests around existing material and chunk menus.
+14. Remove extra appearance of B-flat clarinet from clarinetist config menu.
 
-16. Implement 'make new range' functionality available to studio in global purview.
+15. Research 'with' for breadcrumb management.
 
-17. Implement 'make new range' functionality available to each score.
+16. Change Instrument._default_performer_names to house (full, abbreviation) pairs.
 
-18. Change Instrument._default_performer_names to house (full, abbreviation) pairs.
+17. Use performer abbreviations to populate performer selection menu.
 
-19. Use performer abbreviations to populate performer selection menu.
+18. Kill Trevor Bača class.
+
+19. Kill hardcoded 'baca' directory name.
+
+20. Change the names of all 'iterate_' functions to begin in 'list_'.
+
+21. Audit to remove 'diretory_name' attributes.
+
+22. Find a way to include tags management in hidden menu of every package proxy.

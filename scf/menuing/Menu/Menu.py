@@ -10,6 +10,7 @@ class Menu(MenuObject):
         MenuObject.__init__(self, session=session, where=where)
         self._sections = []
         self.sections.append(self.make_default_hidden_section(session=session, where=where))
+        self.explicit_title = None
 
     ### READ-ONLY PUBLIC ATTRIBUTES ###
 
@@ -61,11 +62,23 @@ class Menu(MenuObject):
         return result
 
     @property
-    def menu_entry_tokens(self):
+    def menu_lines(self):
         result = []
-        for section in self.sections:
-            result.extend(section.menu_entry_tokens)
+        result.extend(self.menu_title_lines)
+        result.extend(self.section_lines)
         return result
+
+    @property
+    def menu_title_lines(self):
+        menu_lines = []
+        if not self.hide_current_run:
+            if self.explicit_title is not None:
+                title = self.explicit_title
+            else:
+                title = self.session.menu_header
+            menu_lines.append(iotools.capitalize_string_start(title))
+            menu_lines.append('')
+        return menu_lines
 
     @property
     def numbered_section(self):
@@ -80,8 +93,26 @@ class Menu(MenuObject):
                 return section
 
     @property
+    def section_lines(self):
+        menu_lines = []
+        for section in self.sections:
+            section_menu_lines = section.make_menu_lines()
+            if not section.is_hidden:
+                menu_lines.extend(section_menu_lines)
+        if self.hide_current_run:
+            menu_lines = []
+        return menu_lines
+
+    @property
     def sections(self):
         return self._sections
+
+    @property
+    def tokens(self):
+        result = []
+        for section in self.sections:
+            result.extend(section.tokens)
+        return result
 
     @property
     def unpacked_menu_entries(self):
@@ -90,6 +121,17 @@ class Menu(MenuObject):
             result.extend(section.unpacked_menu_entries_optimized)
         return result
 
+    ### READ / WRITE PUBLIC ATTRIBUTES ###
+
+    @apply
+    def explicit_title():
+        def fget(self):
+            return self._explicit_title
+        def fset(self, explicit_title):
+            assert isinstance(explicit_title, (str, type(None)))
+            self._explicit_title = explicit_title
+        return property(**locals())
+    
     ### PUBLIC METHODS ###
 
     def change_user_input_to_directive(self, user_input):
@@ -109,8 +151,7 @@ class Menu(MenuObject):
 
     def conditionally_display_menu(self):
         self.conditionally_clear_terminal()
-        self.make_menu_lines()
-        self.conditionally_display_lines(self.menu_lines)
+        self.conditionally_display_lines(self.menu_lines, capitalize_first_character=False)
         user_response = self.handle_raw_input_with_default('SCF', default=self.prompt_default)
         user_input = self.split_multipart_user_response(user_response)
         directive = self.change_user_input_to_directive(user_input)
@@ -138,18 +179,6 @@ class Menu(MenuObject):
             result.append(entry)
         return result
 
-    def make_menu_lines(self):
-        self.menu_lines = []
-        self.menu_lines.extend(self.make_menu_title_lines())
-        self.menu_lines.extend(self.make_section_lines())
-
-    def make_menu_title_lines(self):
-        menu_lines = []
-        if not self.hide_current_run:
-            menu_lines.append(iotools.capitalize_string_start(self.session.menu_header))
-            menu_lines.append('')
-        return menu_lines
-
     def make_new_section(self, is_hidden=False, is_keyed=True, is_numbered=False, is_ranged=False):
         assert not (is_numbered and self.has_numbered_section)
         assert not (is_ranged and self.has_ranged_section)
@@ -158,26 +187,18 @@ class Menu(MenuObject):
         self.sections.append(section)
         return section
 
-    def make_section_lines(self):
-        menu_lines = []
-        for section in self.sections:
-            section_menu_lines = section.make_menu_lines()
-            if not section.is_hidden:
-                menu_lines.extend(section_menu_lines)
-        if self.hide_current_run:
-            menu_lines = []
-        return menu_lines
         
-    def run(self, user_input=None):
+    def run(self, should_clear_terminal=True, user_input=None):
         self.assign_user_input(user_input=user_input)
-        should_clear_terminal, hide_current_run = True, False
+        #should_clear_terminal, hide_current_run = True, False
+        should_clear_terminal, hide_current_run = should_clear_terminal, False
         while True:
             self.should_clear_terminal, self.hide_current_run = should_clear_terminal, hide_current_run
             should_clear_terminal, hide_current_run = False, True
             result = self.conditionally_display_menu()
             if self.session.is_complete:
                 break
-            elif result == 'redraw':
+            elif result == 'r':
                 should_clear_terminal, hide_current_run = True, False
             else:
                 break

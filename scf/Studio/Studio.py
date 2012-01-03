@@ -13,7 +13,7 @@ class Studio(SCFObject):
         self._global_proxy = GlobalProxy(session=self.session)
         self._score_wrangler = ScoreWrangler(session=self.session)
 
-    ### PUBLIC ATTRIBUTES ###
+    ### READ-ONLY PUBLIC ATTRIBUTES ###
 
     @property
     def breadcrumb(self):
@@ -34,7 +34,7 @@ class Studio(SCFObject):
     ### PUBLIC METHODS ###
 
     def edit_score_interactively(self, score_package_importable_name):
-        score_proxy = self.score_wrangler.ScoreProxy(score_package_importable_name, session=self.session)
+        score_proxy = self.score_wrangler.get_package_proxy(score_package_importable_name)
         score_proxy.session.current_score_package_short_name = score_package_importable_name
         breadcrumbs = self.breadcrumbs[:]
         self.session.breadcrumbs = []
@@ -45,7 +45,7 @@ class Studio(SCFObject):
         while True:
             self.append_breadcrumb('select materials directory')
             menu, section = self.make_new_menu(where=self.where(), is_numbered=True)
-            section.menu_entry_tokens = self.score_wrangler.iterate_score_titles_with_years()
+            section.tokens = self.score_wrangler.iterate_score_titles_with_years()
             section = menu.make_new_section() 
             section.append(('baca', 'baca materials directory'))
             result = menu.run()
@@ -55,8 +55,7 @@ class Studio(SCFObject):
                 score_title = value
                 score_package_importable_name = self.score_wrangler.title_to_score_package_short_name(
                     score_title)
-                score_proxy = self.score_wrangler.ScoreProxy(
-                    score_package_importable_name, session=self.session)
+                score_proxy = self.score_wrangler.get_package_proxy(score_package_importable_name)
                 return score_proxy.materials_package_importable_name
             self.pop_breadcrumb()
         self.pop_breadcrumb()
@@ -87,7 +86,8 @@ class Studio(SCFObject):
         elif result == 'all':
             self.session.scores_to_show = 'all'
         elif result == 'k':
-            self.global_proxy.maker_wrangler.run()
+            #self.global_proxy.maker_wrangler.run()
+            self.print_not_implemented()
         elif result == 'm':
             breadcrumb = self.pop_breadcrumb()
             self.global_proxy.material_wrangler.run()
@@ -103,9 +103,7 @@ class Studio(SCFObject):
         '''Return true to exit the svn menu.
         '''
         this_result = False
-        if result == 'b':
-            return 'back'
-        elif result == 'add':
+        if result == 'add':
             self.global_proxy.svn_add()
         elif result == 'add_scores':
             self.score_wrangler.svn_add()
@@ -146,20 +144,24 @@ class Studio(SCFObject):
             yield material_proxy
 
     def make_main_menu(self):
-        menu, section = self.make_new_menu(where=self.where(), is_numbered=True, is_keyed=False)
-        score_titles = list(self.score_wrangler.iterate_score_titles_with_years(
-            scores_to_show=self.session.scores_to_show))
-        score_package_short_names = list(self.score_wrangler.iterate_score_package_short_names(
-            scores_to_show=self.session.scores_to_show))
-        section.menu_entry_tokens = zip(score_package_short_names, score_titles)
+        menu = self.make_score_selection_menu()
         section = menu.make_new_section()
-        section.append(('k', 'work with interactive material proxies'))
-        section.append(('m', 'work with Bača materials'))
+        section.append(('m', 'work with materials'))
+        section.append(('k', 'work with sketches'))
         section = menu.make_new_section(is_hidden=True)
         section.append(('svn', 'work with repository'))
         section.append(('active', 'show active scores only'))
         section.append(('all', 'show all scores'))
         section.append(('mb', 'show mothballed scores only'))
+        return menu
+
+    def make_score_selection_menu(self):
+        menu, section = self.make_new_menu(where=self.where(), is_numbered=True, is_keyed=False)
+        score_titles = list(self.score_wrangler.iterate_score_titles_with_years(
+            scores_to_show=self.session.scores_to_show))
+        score_package_short_names = list(self.score_wrangler.iterate_score_package_short_names(
+            scores_to_show=self.session.scores_to_show))
+        section.tokens = zip(score_package_short_names, score_titles)
         return menu
 
     def make_svn_menu(self):
@@ -255,14 +257,15 @@ class Studio(SCFObject):
             shell=True, stdout=subprocess.PIPE)
         lines = [line.strip() for line in proc.stdout.readlines()]
         if lines:
-            self.conditionally_display_lines(lines)
+            self.conditionally_display_lines(lines, capitalize_first_character=False)
         if prompt_proceed:
-            self.proceed()
+            line = 'tests complete.'
+            self.proceed(lines=[line])
 
     def select_interactive_material_proxy(self, klasses=None):
         material_proxies = list(self.iterate_interactive_material_proxies())
         menu, section = self.make_new_menu(where=self.where(), is_numbered=True)
-        section.menu_entry_tokens = material_proxies
+        section.tokens = material_proxies
         result = menu.run()
         # TODO: probably backtrack here
         return result

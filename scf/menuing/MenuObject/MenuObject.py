@@ -12,7 +12,7 @@ class MenuObject(SCFObject):
         self.should_clear_terminal = False
         self.where = where
 
-    ### PUBLIC ATTRIBUTES ###
+    ### READ / WRITE PUBLIC ATTRIBUTES ###
 
     @apply
     def prompt_default():
@@ -56,14 +56,16 @@ class MenuObject(SCFObject):
     def exec_statement(self):
         lines = []
         statement = self.handle_raw_input('XCF')
-        exec('from abjad import *')
+        command = 'from abjad import *'
+        exec(command)
         try:
-            exec('result = {}'.format(statement))
+            command = 'result = {}'.format(statement)
+            exec(command)
             lines.append('{!r}'.format(result))
         except:
             lines.append('expression not executable.')
         lines.append('')
-        self.conditionally_display_cap_lines(lines)
+        self.conditionally_display_lines(lines)
         self.session.hide_next_redraw = True
 
     def grep_baca(self):
@@ -72,7 +74,7 @@ class MenuObject(SCFObject):
         proc = subprocess.Popen(command, shell=True, stdout=subprocess.PIPE)
         lines = [line.strip() for line in proc.stdout.readlines()]
         lines.append('')
-        self.conditionally_display_lines(lines)
+        self.conditionally_display_lines(lines, capitalize_first_character=False)
 
     def handle_hidden_key(self, directive):
         if isinstance(directive, list) and len(directive) == 1:
@@ -117,9 +119,7 @@ class MenuObject(SCFObject):
         section.append(('next', 'next score'))
         section.append(('prev', 'prev score'))
         section.append(('q', 'quit'))
-        section.append(('redraw', 'redraw'))
-        #section.append(('score', 'return to score'))
-        #section.append(('studio', 'return to studio'))
+        section.append(('r', 'redraw'))
         section.append(('score', 'score'))
         section.append(('studio', 'studio'))
         section.append(('where', 'show menu client')) 
@@ -137,18 +137,18 @@ class MenuObject(SCFObject):
         lines.append('{} line: {}'.format(self.make_tab(1), self.where[2]))
         lines.append('{} meth: {}'.format(self.make_tab(1), self.where[3]))
         lines.append('')
-        self.conditionally_display_lines(lines)
+        self.conditionally_display_lines(lines, capitalize_first_character=False)
         self.session.hide_next_redraw = True
 
     def show_hidden_menu_entries(self):
         menu_lines = []
         for section in self.sections:
             if section.is_hidden:
-                for menu_entry_token in section.menu_entry_tokens:
-                    number, key, body, return_value = section.unpack_menu_entry_token(menu_entry_token)
+                for token in section.tokens:
+                    number, key, body, return_value = section.unpack_token(token)
                     menu_line = self.make_tab(1) + ' '
                     menu_line += '{} ({})'.format(body, key)
                     menu_lines.append(menu_line)
                 menu_lines.append('')
-        self.conditionally_display_lines(menu_lines)
+        self.conditionally_display_lines(menu_lines, capitalize_first_character=False)
         self.session.hide_next_redraw = True

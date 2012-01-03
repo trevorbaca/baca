@@ -233,9 +233,9 @@ class UserInputGetter(MenuObject):
 
     def run(self, user_input=None):
         self.assign_user_input(user_input=user_input)
-        self.session.backtrack_preservation_is_active = True
+        self.preserve_backtracking = True
         self.present_prompts_and_store_values()
-        self.session.backtrack_preservation_is_active = False
+        self.preserve_backtracking = False
         if len(self.values) == 1:
             return self.values[0]
         else:
@@ -248,7 +248,7 @@ class UserInputGetter(MenuObject):
         else:
             lines.append('help string not available.')
         lines.append('')
-        self.conditionally_display_cap_lines(lines)
+        self.conditionally_display_lines(lines)
 
     def store_value(self, user_response):
         from baca.scf.menuing.MenuSection import MenuSection
@@ -257,7 +257,7 @@ class UserInputGetter(MenuObject):
         argument_list = self.argument_lists[self.prompt_index]
         if argument_list and input_test(user_response):
             dummy_section = MenuSection()
-            dummy_section.menu_entry_tokens = argument_list[:]
+            dummy_section.tokens = argument_list[:]
             value = dummy_section.argument_range_string_to_numbers(user_response)
             self.values.append(value)
             self.prompt_index = self.prompt_index + 1
@@ -268,18 +268,18 @@ class UserInputGetter(MenuObject):
             if execs:
                 for exec_string in execs:
                     try:
-                        formatted_exec_string = exec_string.format(user_response)
-                        exec(formatted_exec_string)
+                        command = exec_string.format(user_response)
+                        exec(command)
                     except:
                         try:
-                            formatted_exec_string = exec_string.format(repr(user_response))
-                            exec(formatted_exec_string)
+                            command = exec_string.format(repr(user_response))
+                            exec(command)
                         except:
                             if self.prompt_index < len(self.helps):
                                 lines = []
                                 lines.append(self.helps[self.prompt_index])
                                 lines.append('')
-                                self.conditionally_display_cap_lines(lines)
+                                self.conditionally_display_lines(lines)
                             return
             else:
                 try:
@@ -297,7 +297,7 @@ class UserInputGetter(MenuObject):
                     lines = []
                     lines.append(self.helps[self.prompt_index])
                     lines.append('')
-                    self.conditionally_display_cap_lines(lines)
+                    self.conditionally_display_lines(lines)
         else:
             self.values.append(value)
             self.prompt_index = self.prompt_index + 1

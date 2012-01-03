@@ -7,11 +7,13 @@ class ChunkProxy(PackageProxy):
         PackageProxy.__init__(self, package_importable_name=package_importable_name, session=session)
         self.score_template = score_template
 
-    ### PUBLIC ATTRIBUTES ###
+    ### READ-ONLY PUBLIC ATTRIBUTES ###
     
     @property
     def breadcrumb(self):
         return self.chunk_name
+
+    ### READ / WRITE PUBLIC ATTRIBUTES ###
 
     @apply
     def score_template():
@@ -21,7 +23,6 @@ class ChunkProxy(PackageProxy):
             from abjad.tools import scoretools
             assert isinstance(score_template, (scoretools.Score, type(None)))
             self._score_template = score_template
-
         return property(**locals())
 
     ### PUBLIC METHODS ###
@@ -29,9 +30,12 @@ class ChunkProxy(PackageProxy):
     def create_chunk(self):
         self.create_directory()
         self.create_initializer()
-        self.proceed()
+        line = 'chunk created.'
+        self.proceed(lines=[line])
 
     def create_chunk_interactively(self):
+        self.print_not_implemented()
+        return
         if self.purview is None:
             self.set_purview_interactively()
         if self.package_spaced_name is None:
@@ -39,12 +43,11 @@ class ChunkProxy(PackageProxy):
         if self.score_template is None:
             self.set_score_template_interactively()
         self.write_package_to_disk()
-        self.proceed()
+        line = 'chunk created.'
+        self.proceed(lines=[line])
 
     def handle_main_menu_result(self, result):
-        if result == 'b':
-            return 'back'
-        elif result == 'd':
+        if result == 'd':
             self.delete_package()
             return False
         elif result == 'n':
@@ -87,7 +90,8 @@ class ChunkProxy(PackageProxy):
         package_importable_name = '.'.join([self.package_importable_name, package_short_name])
         chunk_proxy = ChunkProxy(package_importable_name)
         chunk_proxy.create_chunk()
-        self.proceed()
+        line = 'chunk spaced name set.'
+        self.proceed(lines=[line])
 
     def set_score_template_interactively(self):
         self.print_not_implemented()

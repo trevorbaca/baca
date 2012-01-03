@@ -6,11 +6,11 @@ from baca.scf.PackageWrangler import PackageWrangler
 import os
 
 
-# TODO: implement MakerProxy and implement MakerWrangler in terms of MakerProxy
+# TODO: implement MakerProxy and then refactor MakerWrangler in terms of MakerProxy
 class MakerWrangler(PackageWrangler, PackageProxy):
 
     def __init__(self, session=None):
-        package_importable_name = 'baca.makers'
+        package_importable_name = 'baca.scf.makers'
         PackageProxy.__init__(self, package_importable_name=package_importable_name, session=session)
         PackageWrangler.__init__(self, directory_name=self.directory_name, session=self.session)
 
@@ -19,17 +19,13 @@ class MakerWrangler(PackageWrangler, PackageProxy):
     def __repr__(self):
         return '{}()'.format(self.class_name)
 
-    ### PUBIC ATTRIBUTES ###
-
-    def Maker(self):
-        import baca
-        return baca.scf.Maker
+    ### READ-ONLY PUBIC ATTRIBUTES ###
 
     @property
     def breadcrumb(self):
         return 'makers'
 
-    ### PUBLIC METHODS ###
+    ### READ / WRITE PUBLIC ATTRIBUTES ###
 
     @apply
     def directory_name():
@@ -40,21 +36,23 @@ class MakerWrangler(PackageWrangler, PackageProxy):
             self._directory_name = directory_name
         return property(**locals())
 
-    def get_maker(self, maker_name):
-        exec('from baca.makers import {} as maker_class'.format(maker_name))
+    ### PUBLIC METHODS ###
+
+    def get_maker(self, maker_package_short_name):
+        command = 'from baca.scf.makers import {} as maker_class'.format(maker_package_short_name)
+        exec(command)
         maker = maker_class()
         return maker
-
-    def get_package_proxy(self, package_importable_name):
-        return self.Maker(package_importable_name)
 
     # replace with wrapped call to PackageWrangler.iterate_package_proxies()
     def iterate_makers(self):
         self.unimport_baca_package()
         self.unimport_makers_package()
-        exec('import baca')
+        command = 'import baca'
+        exec(command)
         for maker_class_name in self.list_maker_class_names():
-            exec('result = baca.makers.{}()'.format(maker_class_name))
+            command = 'result = baca.scf.makers.{}()'.format(maker_class_name)
+            exec(command)
             yield result
 
     # add PackageWrangler.iterate_package_class_names and replace this with it
@@ -119,7 +117,7 @@ class MakerWrangler(PackageWrangler, PackageProxy):
         lines.append("        self.stylesheet = os.path.join(os.path.dirname(__file__), 'stylesheet.ly')")
         lines.append("        self._generic_output_name = {!r}".format(generic_output_name))
         lines.append('')
-        lines.append('    ### PUBLIC ATTRIBUTES ###')
+        lines.append('    ### READ-ONLY PUBLIC ATTRIBUTES ###')
         lines.append('')
         lines.append('    output_file_import_statements = [')
         lines.append('        ]')
@@ -145,6 +143,9 @@ class MakerWrangler(PackageWrangler, PackageProxy):
         class_file.write('\n'.join(lines))
         class_file.close()
 
+    def make_maker_selection_menu(self):
+        self.print_not_implemented()
+
     # TODO: change to boilerplate file stored in maker package
     def make_maker_stylesheet(self, maker_name):
         stylesheet = lilypondfiletools.make_basic_lilypond_file()
@@ -162,9 +163,7 @@ class MakerWrangler(PackageWrangler, PackageProxy):
         stylesheet_file_pointer.close()
         
     def handle_main_menu_result(self, result):
-        if result == 'b':
-            return 'back'
-        elif result == 'new':
+        if result == 'new':
             self.make_maker()
         else:
             maker_name = value
@@ -175,7 +174,7 @@ class MakerWrangler(PackageWrangler, PackageProxy):
 
     def make_main_menu(self):
         menu, section = self.make_new_menu(where=self.where(), is_numbered=True)
-        section.menu_entry_tokens = self.list_maker_spaced_class_names()
+        section.tokens = self.list_maker_spaced_class_names()
         section = menu.make_new_section()
         section.append(('new', 'make maker'))
         return menu
@@ -197,17 +196,26 @@ class MakerWrangler(PackageWrangler, PackageProxy):
             self.pop_breadcrumb()
         self.pop_breadcrumb()
 
-    def select_maker(self):
+    # TODO: write test
+    def select_maker_interactively(self):
         menu, section = self.make_new_menu(where=self.where(), is_numbered=True)
-        section.menu_entry_tokens = self.list_maker_spaced_class_names()
-        result = menu.run()
-        if result is not None:
-            maker_name = result.replace(' ', '_')
-            maker_name = iotools.underscore_delimited_lowercase_to_uppercamelcase(maker_name)           
-            maker = self.get_maker(maker_name)
-            return True, maker
-        else:
-            return True, None
+        section.tokens = self.list_maker_spaced_class_names()
+        while True:
+            self.append_breadcrumb('select editor')
+            result = menu.run()
+            if self.backtrack():
+                self.pop_breadcrumb()
+                return
+            elif not result:
+                self.pop_breadcrumb()
+                continue 
+            else:
+                self.pop_breadcrumb()
+                break
+        maker_name = result.replace(' ', '_')
+        maker_name = iotools.underscore_delimited_lowercase_to_uppercamelcase(maker_name)           
+        maker = self.get_maker(maker_name)
+        return maker
 
     def unimport_makers_package(self):
         self.remove_package_importable_name_from_sys_modules(self.package_importable_name)

@@ -27,7 +27,7 @@ class Composer(object):
     def __repr__(self):
         return '{}({!r}, {!r}, {!r})'.format(type(self).__name__, self.last_name, self.first_name, self.birthdate)
 
-    ### PUBLIC ATTRIBUTES ###
+    ### READ-ONLY PUBLIC ATTRIBUTES ###
 
     @property
     def birthdate(self):

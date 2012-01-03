@@ -14,7 +14,7 @@ def test_Studio_show_hidden_menu_entries_01():
       '     next score (next)',
       '     prev score (prev)',
       '     quit (q)',
-      '     redraw (redraw)',
+      '     redraw (r)',
       '     score (score)',
       '     studio (studio)',
       '     show menu client (where)',

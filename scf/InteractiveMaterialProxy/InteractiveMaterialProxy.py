@@ -4,7 +4,7 @@ import copy
 
 class InteractiveMaterialProxy(MaterialProxy):
 
-    ### PUBLIC ATTRIBUTES ###
+    ### READ-ONLY PUBLIC ATTRIBUTES ###
 
     @property
     def has_changes(self):
@@ -42,19 +42,11 @@ class InteractiveMaterialProxy(MaterialProxy):
         line = 'Interactive material package {} created.\n'.format(package_importable_name)
         self.conditionally_display_lines([line])
 
-    def create_interactively(self):
-        while True:
-            key, value = self.maker_wrangler.select_maker()
-            if value is None:
-                break
-            else:
-                maker = value
-            maker.score = self
-            result = maker.run()
-            if result:
-                break
-        self.proceed()
-        return True, None
+    def make_material_package_directory(self):
+        try:
+            os.mkdir(self.material_package_directory)
+        except OSError:
+            pass
 
     def run(self, user_input_wrapper=None):
         if user_input_wrapper is None:
@@ -65,7 +57,7 @@ class InteractiveMaterialProxy(MaterialProxy):
         self._original_user_input_wrapper = copy.deepcopy(user_input_wrapper)
         while True:
             menu, section = self.make_new_menu(where=self.where(), is_numbered=True)
-            section.menu_entry_tokens = self.user_input_wrapper.editable_lines
+            section.tokens = self.user_input_wrapper.editable_lines
             if self.user_input_wrapper.is_complete:
                 section.append(('p', 'show pdf of given input'))
                 section.append(('m', 'write material to disk'))
@@ -84,11 +76,7 @@ class InteractiveMaterialProxy(MaterialProxy):
             else:
                 section.append(('l', 'set location'))
             result = menu.run()
-            if result == 'b':
-                self.interactively_check_and_save_material(self.user_input_wrapper)
-                #return result, None
-                # TODO: return none
-            elif result == 'c':
+            if result == 'c':
                 self.clear_values(self.user_input_wrapper)
             elif result == 'd':
                 self.show_demo_input_values()
@@ -129,7 +117,8 @@ class InteractiveMaterialProxy(MaterialProxy):
         prompt = key.replace('_', ' ')
         default = repr(value)
         response = self.handle_raw_input_with_default('{}> '.format(prompt), default=default)
-        exec('from abjad import *')
+        command = 'from abjad import *'
+        exec(command)
         new_value = eval(response)
         return new_value
 
@@ -170,8 +159,7 @@ class InteractiveMaterialProxy(MaterialProxy):
         material_directory = self.write_material_to_disk(user_input_wrapper, material, lilypond_file)
         lines.append('')
         lines.append('material saved to {}.\n'.format(material_directory))
-        self.conditionally_display_lines(lines)
-        self.proceed()
+        self.proceed(lines=lines)
         return True
 
     def show_demo_input_values(self):
@@ -180,7 +168,7 @@ class InteractiveMaterialProxy(MaterialProxy):
         for i, (key, value) in enumerate(self.user_input_template.iteritems()):
             item = '{}: {!r}'.format(key.replace('_', ' '), value)
             items.append(item)
-        section.menu_entry_tokens = items
+        section.tokens = items
         menu.run()
 
     def unname_material(self):

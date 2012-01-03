@@ -15,7 +15,7 @@ class ScoreProxy(PackageProxy):
         self._material_wrangler = baca.scf.MaterialWrangler(score_package_short_name, session=self.session)
         self._maker_wrangler = baca.scf.MakerWrangler(session=self.session)
 
-    ### PUBLIC ATTRIBUTES ###
+    ### READ-ONLY PUBLIC ATTRIBUTES ###
 
     @property
     def annotated_title(self):
@@ -52,14 +52,6 @@ class ScoreProxy(PackageProxy):
     def exg_proxy(self):
         return self._exg_proxy
 
-    @apply
-    def forces_tagline():
-        def fget(self):
-            return self.get_tag('forces_tagline')
-        def fset(self, forces_tagline):
-            return self.add_tag('forces_tagline', forces_tagline)
-        return property(**locals())
-
     @property
     def has_correct_directory_structure(self):
         return all([os.path.exists(name) for name in self.score_subdirectory_names])
@@ -91,6 +83,10 @@ class ScoreProxy(PackageProxy):
     @property
     def material_wrangler(self):
         return self._material_wrangler
+
+    @property
+    def materials_package_importable_name(self):
+        return '.'.join([self.package_importable_name, 'mus', 'materials'])
 
     @property
     def mus_proxy(self):
@@ -126,6 +122,16 @@ class ScoreProxy(PackageProxy):
             self.exg_proxy,
             self.mus_proxy,)
         
+    ### READ / WRITE PUBLIC ATTRIBUTES ###
+
+    @apply
+    def forces_tagline():
+        def fget(self):
+            return self.get_tag('forces_tagline')
+        def fset(self, forces_tagline):
+            return self.add_tag('forces_tagline', forces_tagline)
+        return property(**locals())
+
     @apply
     def year_of_completion():
         def fget(self):
@@ -138,6 +144,9 @@ class ScoreProxy(PackageProxy):
 
     def create_package_structure(self):
         self.fix_score_package_directory_structure(is_interactive=False)
+
+    def create_score_interactively(self):
+        self.print_not_implemented()
 
     def edit_forces_tagline_interactively(self):
         getter = self.make_new_getter(where=self.where())
@@ -200,45 +209,28 @@ class ScoreProxy(PackageProxy):
             initializer.close()
 
     def handle_main_menu_result(self, result):
-        if result == 'ch':
-            self.chunk_wrangler.create_chunk_interactively()
+        assert isinstance(result, str)
+        if result == 'h':
+            self.chunk_wrangler.run()
+        elif  result == 'm':
+            self.material_wrangler.run()
         elif result == 'ft':
             self.edit_forces_tagline_interactively()
-        elif result == 'mi':
-            self.material_wrangler.create_interactive_material_interactively()
-        elif result == 'ms':
-            self.material_wrangler.create_static_material_package_interactively()
         elif result == 'pf':
             self.edit_instrumentation_specifier_interactively()
-        elif result == 'svn':
-            self.manage_svn()
-        elif result == 'tags':
-            self.manage_tags()
         elif result == 'tl':
             self.edit_title_interactively()
         elif result == 'yr':
             self.edit_year_of_completion_interactively()
-        elif result.startswith('h'):
-            chunk_spaced_name = value
-            chunk_underscored_name = chunk_spaced_name.replace(' ', '_')
-            package_importable_name = '{}.{}'.format(
-                self.chunk_wrangler.package_importable_name, chunk_underscored_name)
-            chunk_proxy = self.chunk_wrangler.ChunkProxy(package_importable_name)
-            chunk_proxy.title = self.title
-            chunk_proxy.run()
-        elif result.startswith('m'):
-            material_underscored_name = value
-            package_importable_name = '{}.{}'.format(
-                self.material_wrangler.package_importable_name, material_underscored_name)
-            material_proxy = self.material_wrangler.get_package_proxy(package_importable_name)
-            material_proxy.run()
+        elif result == 'svn':
+            self.manage_svn()
+        elif result == 'tags':
+            self.manage_tags()
         else:
             raise ValueError
 
     def handle_svn_menu_result(self, result):
-        if result == 'b':
-            return True
-        elif result == 'add':
+        if result == 'add':
             self.svn_add()
         elif result == 'ci':
             self.svn_ci()
@@ -248,25 +240,17 @@ class ScoreProxy(PackageProxy):
 
     def make_main_menu(self):
         menu, section = self.make_new_menu(where=self.where(), is_numbered=True)
-        section.section_title = 'chunks'
-        section.menu_entry_tokens = list(self.chunk_wrangler.iterate_package_spaced_names())
         section = menu.make_new_section()
-        section.append(('ch', '[create chunk]'))
+        section.append(('h', 'chunks'))
+        section.append(('m', 'materials'))
         section = menu.make_new_section()
-        section.section_title = 'materials'
-        section.menu_entry_tokens = list(self.material_wrangler.iterate_package_underscored_names())
-        section = menu.make_new_section()
-        section.append(('mi', 'create interactive material'))
-        section.append(('ms', 'create static material'))
-        section = menu.make_new_section()
-        section.section_title = 'setup'
         section.append(('ft', 'forces tagline'))
         section.append(('pf', 'performers'))
         section.append(('tl', 'title'))
         section.append(('yr', 'year of completion'))
-        section = menu.make_new_section(is_hidden=True)
-        section.append(('svn', 'work with repository'))
-        section.append(('tags', 'work with tags'))
+        hidden_section = menu.make_new_section(is_hidden=True)
+        hidden_section.append(('svn', 'manage repository'))
+        hidden_section.append(('tags', 'manage tags'))
         return menu
 
     def make_svn_menu(self):
@@ -325,9 +309,6 @@ class ScoreProxy(PackageProxy):
                 break
             self.pop_breadcrumb()
         self.pop_breadcrumb()
-
-    def run_score_package_creation_wizard(self):
-        self.print_not_implemented()
 
     def summarize_chunks(self):
         chunks = list(self.chunk_wrangler.iterate_package_underscored_names())

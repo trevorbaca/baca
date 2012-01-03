@@ -1,3 +1,4 @@
+from baca.scf.ChunkProxy import ChunkProxy
 from baca.scf.PackageProxy import PackageProxy
 from baca.scf.PackageWrangler import PackageWrangler
 import os
@@ -10,12 +11,13 @@ class ChunkWrangler(PackageWrangler, PackageProxy):
         PackageProxy.__init__(self, package_importable_name=package_importable_name, session=session)
         PackageWrangler.__init__(self, directory_name=self.directory_name, session=self.session)
 
-    ### PUBLIC ATTRIBUTES ###
+    ### READ-ONLY PUBLIC ATTRIBUTES ###
 
     @property
-    def ChunkProxy(self):
-        from baca.scf.ChunkProxy import ChunkProxy
-        return ChunkProxy
+    def breadcrumb(self):
+        return 'chunks'
+
+    ### READ / WRITE PUBLC ATTRIBUTES ###
 
     @apply
     def directory_name():
@@ -29,13 +31,44 @@ class ChunkWrangler(PackageWrangler, PackageProxy):
     ### PUBLIC METHODS ###
 
     def create_chunk_interactively(self):
-        chunk_proxy = self.ChunkProxy()
+        chunk_proxy = ChunkProxy(session=self.session)
         chunk_proxy.purview = self.purview
         chunk_proxy.create_chunk_interactively()
 
     def get_package_proxy(self, package_importable_name):
-        return self.ChunkProxy(package_importable_name)
+        return ChunkProxy(package_importable_name, session=self.session)
+
+    def handle_main_menu_result(self, result):
+        assert isinstance(result, str)
+        if result == 'new':
+            self.create_chunk_interactively()
+        else:
+            chunk_proxy = self.get_package_proxy(result)
+            chunk_proxy.run()
+
+    def make_main_menu(self):
+        menu, section = self.make_new_menu(where=self.where(), is_numbered=True)
+        if self.has_packages:
+            section.extend(self.iterate_package_spaced_names())
+        else:
+            menu.sections.pop()
+        section = menu.make_new_section()
+        section.append(('new', 'new chunk'))
+        return menu
 
     def run(self, user_input=None):
-        self.print_not_implemented()
         self.assign_user_input(user_input=user_input)
+        while True:
+            self.append_breadcrumb()
+            menu = self.make_main_menu()
+            result = menu.run()
+            if self.backtrack():
+                break
+            elif not result:
+                self.pop_breadcrumb()
+                continue
+            self.handle_main_menu_result(result)
+            if self.backtrack():
+                break
+            self.pop_breadcrumb()
+        self.pop_breadcrumb()

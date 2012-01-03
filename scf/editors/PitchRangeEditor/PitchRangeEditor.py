@@ -4,7 +4,7 @@ from baca.scf.editors.InteractiveEditor import InteractiveEditor
 
 class PitchRangeEditor(InteractiveEditor):
 
-    ### PUBLIC ATTRIBUTES ###
+    ### READ-ONLY PUBLIC ATTRIBUTES ###
 
     @property
     def breadcrumb(self):
@@ -69,5 +69,5 @@ class PitchRangeEditor(InteractiveEditor):
 
     def make_main_menu(self):
         menu, section = self.make_new_menu(where=self.where())
-        section.menu_entry_tokens = self.target_attribute_menu_entry_tokens
+        section.tokens = self.target_attribute_tokens
         return menu

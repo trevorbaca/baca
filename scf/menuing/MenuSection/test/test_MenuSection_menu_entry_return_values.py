@@ -14,7 +14,7 @@ def test_MenuSection_menu_entry_return_values_01():
     assert section.is_numbered
     assert section.menu_entry_return_values == ['apple', 'banana', 'cherry']
     assert section.menu_entry_return_values == section.menu_entry_bodies
-    assert section.menu_entry_return_values == section.menu_entry_tokens
+    assert section.menu_entry_return_values == section.tokens
 
     menu = baca.scf.menuing.Menu()
     menu.append_breadcrumb('location')
@@ -24,29 +24,29 @@ def test_MenuSection_menu_entry_return_values_01():
     assert not section.is_numbered
     assert section.menu_entry_return_values == ['apple', 'banana', 'cherry']
     assert section.menu_entry_return_values == section.menu_entry_bodies
-    assert section.menu_entry_return_values == section.menu_entry_tokens
+    assert section.menu_entry_return_values == section.tokens
 
     menu = baca.scf.menuing.Menu()
     menu.append_breadcrumb('location')
     section = menu.make_new_section(is_numbered=True)
     section.title = 'section'
     section.extend(['apple', 'banana', 'cherry'])
-    section.return_value_attr = 'body'
+    section.return_value_attribute = 'body'
     assert section.is_numbered
     assert section.menu_entry_return_values == ['apple', 'banana', 'cherry']
     assert section.menu_entry_return_values == section.menu_entry_bodies
-    assert section.menu_entry_return_values == section.menu_entry_tokens
+    assert section.menu_entry_return_values == section.tokens
 
     menu = baca.scf.menuing.Menu()
     menu.append_breadcrumb('location')
     section = menu.make_new_section()
     section.title = 'section'
     section.extend(['apple', 'banana', 'cherry'])
-    section.return_value_attr = 'body'
+    section.return_value_attribute = 'body'
     assert not section.is_numbered
     assert section.menu_entry_return_values == ['apple', 'banana', 'cherry']
     assert section.menu_entry_return_values == section.menu_entry_bodies
-    assert section.menu_entry_return_values == section.menu_entry_tokens
+    assert section.menu_entry_return_values == section.tokens
 
 
 def test_MenuSection_menu_entry_return_values_02():
@@ -84,7 +84,7 @@ def test_MenuSection_menu_entry_return_values_02():
     section.append(('add', 'add something'))
     section.append(('del', 'delete something'))
     section.append(('mod', 'modify something'))
-    section.return_value_attr = 'body'
+    section.return_value_attribute = 'body'
     assert section.is_numbered
     assert section.menu_entry_return_values == ['add something', 'delete something', 'modify something']
     assert section.menu_entry_return_values == section.menu_entry_bodies
@@ -96,7 +96,7 @@ def test_MenuSection_menu_entry_return_values_02():
     section.append(('add', 'add something'))
     section.append(('del', 'delete something'))
     section.append(('mod', 'modify something'))
-    section.return_value_attr = 'body'
+    section.return_value_attribute = 'body'
     assert not section.is_numbered
     assert section.menu_entry_return_values == ['add something', 'delete something', 'modify something']
     assert section.menu_entry_return_values == section.menu_entry_bodies

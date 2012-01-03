@@ -16,13 +16,13 @@ class NoteAndChordHairpin(_DynamicsSpecifier):
         _DynamicsSpecifier.__init__(self, minimum_prolated_duration = minimum_prolated_duration)
         self.hairpin_token = hairpin_token
 
-    ## OVERLOAD ##
+    ### OVERLOADS ###
 
     def __call__(self, hairpin_token = None):
         new = type(self)(hairpin_token = hairpin_token)
         return new
 
-    ### PUBLIC ATTRIBUTES ###
+    ### READ / WRITE PUBLIC ATTRIBUTES ###
 
     @apply
     def hairpin_token():

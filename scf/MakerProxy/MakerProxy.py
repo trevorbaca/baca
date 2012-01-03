@@ -8,7 +8,7 @@ class MakerProxy(PackageProxy):
     def __init__(self, maker_class_name=None, session=None):
         self.maker_class_name = maker_class_name
         if maker_class_name is not None:
-            package_importable_name = 'baca.makers.{}'.format(maker_class_name)
+            package_importable_name = 'baca.scf.makers.{}'.format(maker_class_name)
         else:
             package_importable_name = None
         PackageProxy.__init__(self, package_importable_name=package_importable_name, session=session)
@@ -21,11 +21,13 @@ class MakerProxy(PackageProxy):
         else:
             return '{}({!r})'.format(self.class_name, self.maker_class_name)
 
-    ### PUBLIC ATTRIBUTES ###
+    ### READ-ONLY PUBLIC ATTRIBUTES ###
     
     @property
     def breadcrumb(self):
         return self.maker_name
+
+    ### READ / WRITE PUBLIC ATTRIBUTES ###
 
     # TODO: Maybe this can't be set here? Must be derived from hardcode maker classfile?
     @apply
@@ -80,9 +82,7 @@ class MakerProxy(PackageProxy):
         return initializer
 
     def handle_main_menu_result(self, key):
-        if key == 'b':
-            return 'back'
-        elif key == 'del':
+        if key == 'del':
             self.delete_package()
             return False
         elif key == 'new':
@@ -98,13 +98,19 @@ class MakerProxy(PackageProxy):
     def make_main_menu(self):
         menu, section = self.make_new_menu(where=self.where(), is_numbered=True)
         section.section_title = 'existing {}'.format(self.generic_output_name)
-        section.menu_entry_tokens = list(self.iterate_materials_based_on_maker())
+        section.tokens = list(self.iterate_materials_based_on_maker())
         section = menu.make_new_section()
         section.append(('del', 'delete {}'.format(self.spaced_class_name)))
         section.append(('new', 'create {}'.format(self.generic_output_name)))
         section.append(('ren', 'rename {}'.format(self.spaced_class_name)))
         section.append(('src', 'edit {} source'.format(self.spaced_class_name)))
         return menu
+
+    def make_tags_dictionary(self):
+        tags = {}
+        tags['creation_date'] = self.helpers.get_current_date()
+        tags['maker'] = self.class_name
+        return tags
 
     def run(self, user_input=None):
         self.assign_user_input(user_input=user_input)

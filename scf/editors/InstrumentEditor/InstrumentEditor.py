@@ -6,7 +6,7 @@ from baca.scf.editors.InteractiveEditor import InteractiveEditor
 # TODO: eventually make clef information editable
 class InstrumentEditor(InteractiveEditor):
 
-    ### PUBLIC ATTRIBUTES ###
+    ### READ-ONLY PUBLIC ATTRIBUTES ###
 
     @property
     def breadcrumb(self):
@@ -82,7 +82,7 @@ class InstrumentEditor(InteractiveEditor):
         while True:
             self.append_breadcrumb('untuned percussion')
             menu, section = self.make_new_menu(where=self.where(), is_numbered=True)
-            section.menu_entry_tokens = instrumenttools.UntunedPercussion.known_untuned_percussion
+            section.tokens = instrumenttools.UntunedPercussion.known_untuned_percussion
             result = menu.run()
             if self.backtrack():
                 self.pop_breadcrumb()
@@ -120,7 +120,7 @@ class InstrumentEditor(InteractiveEditor):
     def make_main_menu(self):
         #menu, section = self.make_new_menu(where=self.where(), is_keyed=False)
         menu, section = self.make_new_menu(where=self.where())
-        section.menu_entry_tokens = self.target_attribute_menu_entry_tokens
+        section.tokens = self.target_attribute_tokens
         section = menu.make_new_section(is_keyed=False)
         if self.session.display_pitch_ranges_with_numbered_pitches:
             pitch_range_repr = self.target.pitch_range.one_line_numbered_chromatic_pitch_repr
@@ -148,7 +148,7 @@ class InstrumentEditor(InteractiveEditor):
         '''
         from abjad.tools import instrumenttools
         menu, section = self.make_new_menu(where=self.where(), is_numbered=True, is_ranged=True)
-        section.menu_entry_tokens = instrumenttools.list_instrument_names()
+        section.tokens = instrumenttools.list_instrument_names()
         while True:
             self.append_breadcrumb('select instrument')
             #print 'BEFORE: argument range is allowed: {!r}'.format(menu.argument_range_is_allowed)
@@ -168,11 +168,12 @@ class InstrumentEditor(InteractiveEditor):
         for instrument_name in instrument_names:
             instrument_name = instrument_name.title()
             instrument_name = instrument_name.replace(' ', '')
-            exec('instrument = instrumenttools.{}()'.format(instrument_name))
+            command = 'instrument = instrumenttools.{}()'.format(instrument_name)
+            exec(command)
             if isinstance(instrument, instrumenttools.UntunedPercussion):
-                self.session.backtrack_preservation_is_active = True
+                self.preserve_backtracking = True
                 instrument_name = self.get_untuned_percussion_name_interactively()
-                self.session.backtrack_preservation_is_active = False
+                self.preserve_backtracking = False
                 if self.backtrack():
                     continue
                 instrument.instrument_name = instrument_name

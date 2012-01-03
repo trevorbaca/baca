@@ -5,10 +5,12 @@ from DirectoryProxy import DirectoryProxy
 from DistProxy import DistProxy
 from EtcProxy import EtcProxy
 from ExgProxy import ExgProxy
+from FileProxy import FileProxy
 from GlobalProxy import GlobalProxy
 from InteractiveMaterialProxy import InteractiveMaterialProxy
 from MakerProxy import MakerProxy
 from MakerWrangler import MakerWrangler
+from MaterialProxy import MaterialProxy
 from MaterialWrangler import MaterialWrangler
 from MusProxy import MusProxy
 from PackageProxy import PackageProxy
@@ -19,10 +21,13 @@ from ScoreWrangler import ScoreWrangler
 from Session import Session
 from StaticMaterialProxy import StaticMaterialProxy
 from Studio import Studio
+from StylesheetProxy import StylesheetProxy
+from StylesheetWrangler import StylesheetWrangler
 from Transcript import Transcript
 from TrevorBaca import TrevorBaca
 from UserInputWrapper import UserInputWrapper
 import editors
 import exceptions
 import helpers
+import makers
 import menuing

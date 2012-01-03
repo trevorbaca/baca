@@ -1,15 +1,11 @@
 from abjad.tools import sequencetools
 from baca.scf.editors.InteractiveEditor import InteractiveEditor
+from baca.scf.editors.PerformerEditor import PerformerEditor
 
 
 class InstrumentationEditor(InteractiveEditor):
 
-    ### PUBLIC ATTRIBUTES ###
-
-    @property
-    def PerformerEditor(self):
-        import baca
-        return baca.scf.editors.PerformerEditor
+    ### READ-ONLY PUBLIC ATTRIBUTES ###
 
     @property
     def breadcrumb(self):
@@ -19,7 +15,7 @@ class InstrumentationEditor(InteractiveEditor):
     def summary_lines(self):
         result = []
         for performer in self.target.performers:
-            performer_editor = self.PerformerEditor(session=self.session, target=performer)
+            performer_editor = PerformerEditor(session=self.session, target=performer)
             result.extend(performer_editor.summary_lines)
         return result
 
@@ -37,22 +33,22 @@ class InstrumentationEditor(InteractiveEditor):
         while True:
             if self.backtrack():
                 return
-            self.session.backtrack_preservation_is_active = True
+            self.preserve_backtracking = True
             #print 'going to select performer names ...'
             performer_names = self.select_performer_names_interactively()
             #print 'performer names: {!r}'.format(performer_names)
-            self.session.backtrack_preservation_is_active = False
+            self.preserve_backtracking = False
             if self.backtrack():
                 return
             elif performer_names:
                 performers = []
                 for performer_name in performer_names:
                     performer = scoretools.Performer(performer_name)
-                    performer_editor = self.PerformerEditor(session=self.session, target=performer)
+                    performer_editor = PerformerEditor(session=self.session, target=performer)
                     self.append_breadcrumb('add performers')
-                    self.session.backtrack_preservation_is_active = True
+                    self.preserve_backtracking = True
                     performer_editor.set_initial_configuration_interactively()
-                    self.session.backtrack_preservation_is_active = False
+                    self.preserve_backtracking = False
                     self.pop_breadcrumb()
                     if self.backtrack():
                         performers = []
@@ -83,7 +79,7 @@ class InstrumentationEditor(InteractiveEditor):
         except:
             return
         performer = self.get_performer_from_performer_number(performer_number)
-        performer_editor = self.PerformerEditor(session=self.session, target=performer)
+        performer_editor = PerformerEditor(session=self.session, target=performer)
         performer_editor.run()
 
     def get_performer_from_performer_number(self, performer_number):
@@ -109,8 +105,8 @@ class InstrumentationEditor(InteractiveEditor):
 
     def make_main_menu(self):
         menu, section = self.make_new_menu(where=self.where(), is_numbered=True)
-        section.menu_entry_tokens = self.summary_lines
-        section.return_value_attr = 'number' # this is new
+        section.tokens = self.summary_lines
+        section.return_value_attribute = 'number' # this is new
         section = menu.make_new_section(is_keyed=False)
         section.append(('add', 'add performers'))
         if 0 < self.target.performer_count:
@@ -140,8 +136,8 @@ class InstrumentationEditor(InteractiveEditor):
         performer_pairs = [(x[1].split()[-1].strip('.'), x[0]) for x in performer_pairs]
         performer_pairs.append(('perc', 'percussionist'))
         performer_pairs.sort(lambda x, y: cmp(x[1], y[1]))
-        section.menu_entry_tokens = performer_pairs
-        section.return_value_attr = 'body'
+        section.tokens = performer_pairs
+        section.return_value_attribute = 'body'
         while True:
             self.append_breadcrumb('add performers')
             result = menu.run()

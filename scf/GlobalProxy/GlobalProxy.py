@@ -10,7 +10,7 @@ class GlobalProxy(PackageProxy):
         self._maker_wrangler = MakerWrangler(session=self.session)
         self._material_wrangler = MaterialWrangler('baca', session=self.session)
 
-    ### PUBLIC ATTRIBUTES ###
+    ### READ-ONLY PUBLIC ATTRIBUTES ###
 
     @property
     def is_score_local_purview(self):
