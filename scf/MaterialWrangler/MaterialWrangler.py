@@ -76,10 +76,8 @@ class MaterialWrangler(PackageWrangler, PackageProxy):
             yield summary
 
     def make_main_menu(self):
-        menu, section = self.make_new_menu(where=self.where(), is_numbered=True, is_ranged=True)
-        #menu, section = self.make_new_menu(where=self.where(), is_numbered=False)
+        menu, section = self.make_new_menu(where=self.where(), is_numbered=True)
         section.menu_entry_tokens = list(self.iterate_material_summaries())
-        print 'ZEE: {!r}'.format(section.menu_entry_tokens)
         section.return_value_attr = 'body'
         section = menu.make_new_section()
         section.append(('i', 'create interactive material'))
