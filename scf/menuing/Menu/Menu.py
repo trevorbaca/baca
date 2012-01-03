@@ -107,6 +107,7 @@ class Menu(MenuObject):
 
     ### PUBLIC METHODS ###
 
+    # TODO: reimplement entirely from scratch in a single loop
     def change_user_input_to_directive(self, user_input):
         if self.user_enters_nothing(user_input):
             return self.handle_null_user_input(user_input)

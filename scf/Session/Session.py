@@ -223,3 +223,6 @@ class Session(object):
     def clean_up(self):
         if self.dump_transcript:
             self.complete_transcript.write_to_disk(self.output_directory)
+
+    def reinitialize(self):
+        type(self).__init__(self)

@@ -108,19 +108,52 @@ def test_Menu_run_06():
     section_1 = menu.make_new_section(is_keyed=True, is_hidden=False, is_numbered=False, is_ranged=False)
     section_1.section_title = 'section'
     section_1 = menu.make_new_section()
-    section_1.menu_entry_tokens.append(('add', 'add something'))
-    section_1.menu_entry_tokens.append(('del', 'delete something'))
-    section_1.menu_entry_tokens.append(('mod', 'modify something'))
-    menu.run(user_input='q')
+    section_1.menu_entry_tokens.append(('add', 'first command'))
+    section_1.menu_entry_tokens.append(('del', 'second command'))
+    section_1.menu_entry_tokens.append(('mod', 'third command'))
+    result = menu.run(user_input='foo')
+
     assert menu.transcript[-2] == \
     ['Location',
       '',
       '     Section',
       '',
-      '     add something (add)',
-      '     delete something (del)',
-      '     modify something (mod)',
+      '     first command (add)',
+      '     second command (del)',
+      '     third command (mod)',
       '']
+    assert result is None
+
+    menu.session.reinitialize()
+    result = menu.run(user_input='q')
+    assert result is None
+
+    menu.session.reinitialize()
+    result = menu.run(user_input='1')
+    assert result is None
+
+    menu.session.reinitialize()
+    result = menu.run(user_input='add')
+    assert result == 'add'
+
+    menu.session.reinitialize()
+    result = menu.run(user_input='fir')
+    assert result == 'add'
+
+    result = menu.run(user_input='1, 3-2')
+    assert result is None
+
+    menu.session.reinitialize()
+    result = menu.run(user_input='add, mod-del')
+    assert result is None
+
+    menu.session.reinitialize()
+    result = menu.run(user_input='fir, thi-sec')
+    assert result is None
+
+    menu.session.reinitialize()
+    result = menu.run(user_input='fir, mod-sec')
+    assert result is None
 
 
 def test_Menu_run_07():
@@ -131,19 +164,53 @@ def test_Menu_run_07():
     menu.append_breadcrumb('location')
     section_1 = menu.make_new_section(is_keyed=False, is_hidden=False, is_numbered=False, is_ranged=False)
     section_1.section_title = 'section'
-    section_1.menu_entry_tokens.append(('add', 'add something'))
-    section_1.menu_entry_tokens.append(('del', 'delete something'))
-    section_1.menu_entry_tokens.append(('mod', 'modify something'))
-    menu.run(user_input='q')
+    section_1.menu_entry_tokens.append(('add', 'first command'))
+    section_1.menu_entry_tokens.append(('del', 'second command'))
+    section_1.menu_entry_tokens.append(('mod', 'third command'))
+    result = menu.run(user_input='foo')
+
     assert menu.transcript[-2] == \
     ['Location',
       '',
       '     Section',
       '',
-      '     add something',
-      '     delete something',
-      '     modify something',
+      '     first command',
+      '     second command',
+      '     third command',
       '']
+
+    assert result is None
+
+    menu.session.reinitialize()
+    result = menu.run(user_input='q')
+    assert result is None
+
+    menu.session.reinitialize()
+    result = menu.run(user_input='1')
+    assert result is None
+
+    menu.session.reinitialize()
+    result = menu.run(user_input='add')
+    assert result == 'add'
+
+    menu.session.reinitialize()
+    result = menu.run(user_input='fir')
+    assert result == 'add'
+
+    result = menu.run(user_input='1, 3-2')
+    assert result is None
+
+    menu.session.reinitialize()
+    result = menu.run(user_input='add, mod-del')
+    assert result is None
+
+    menu.session.reinitialize()
+    result = menu.run(user_input='fir, thi-sec')
+    assert result is None
+
+    menu.session.reinitialize()
+    result = menu.run(user_input='fir, mod-sec')
+    assert result is None
 
 
 def test_Menu_run_08():
@@ -154,12 +221,46 @@ def test_Menu_run_08():
     menu.append_breadcrumb('location')
     section_1 = menu.make_new_section(is_keyed=True, is_hidden=True, is_numbered=False, is_ranged=False)
     section_1.section_title = 'section'
-    section_1.menu_entry_tokens.append(('add', 'add something'))
-    section_1.menu_entry_tokens.append(('del', 'delete something'))
-    section_1.menu_entry_tokens.append(('mod', 'modify something'))
-    menu.run(user_input='q')
+    section_1.menu_entry_tokens.append(('add', 'first command'))
+    section_1.menu_entry_tokens.append(('del', 'second command'))
+    section_1.menu_entry_tokens.append(('mod', 'third command'))
+    result = menu.run(user_input='foo')
+
     assert menu.transcript[-2] == \
     ['Location', '']
+
+    assert result is None
+
+    menu.session.reinitialize()
+    result = menu.run(user_input='q')
+    assert result is None
+
+    menu.session.reinitialize()
+    result = menu.run(user_input='1')
+    assert result is None
+
+    menu.session.reinitialize()
+    result = menu.run(user_input='add')
+    assert result == 'add'
+
+    menu.session.reinitialize()
+    result = menu.run(user_input='fir')
+    assert result == 'add'
+
+    result = menu.run(user_input='1, 3-2')
+    assert result is None
+
+    menu.session.reinitialize()
+    result = menu.run(user_input='add, mod-del')
+    assert result is None
+
+    menu.session.reinitialize()
+    result = menu.run(user_input='fir, thi-sec')
+    assert result is None
+
+    menu.session.reinitialize()
+    result = menu.run(user_input='fir, mod-sec')
+    assert result is None
 
 
 def test_Menu_run_09():
@@ -170,19 +271,52 @@ def test_Menu_run_09():
     menu.append_breadcrumb('location')
     section_1 = menu.make_new_section(is_keyed=True, is_hidden=False, is_numbered=True, is_ranged=False)
     section_1.section_title = 'section'
-    section_1.menu_entry_tokens.append(('add', 'add something'))
-    section_1.menu_entry_tokens.append(('del', 'delete something'))
-    section_1.menu_entry_tokens.append(('mod', 'modify something'))
-    menu.run(user_input='q')
+    section_1.menu_entry_tokens.append(('add', 'first command'))
+    section_1.menu_entry_tokens.append(('del', 'second command'))
+    section_1.menu_entry_tokens.append(('mod', 'third command'))
+    result = menu.run(user_input='foo')
+
     assert menu.transcript[-2] == \
     ['Location',
       '',
       '     Section',
       '',
-      '     1: add something (add)',
-      '     2: delete something (del)',
-      '     3: modify something (mod)',
+      '     1: first command (add)',
+      '     2: second command (del)',
+      '     3: third command (mod)',
       '']
+    assert result is None
+
+    menu.session.reinitialize()
+    result = menu.run(user_input='q')
+    assert result is None
+
+    menu.session.reinitialize()
+    result = menu.run(user_input='1')
+    assert result == 'add'
+
+    menu.session.reinitialize()
+    result = menu.run(user_input='add')
+    assert result == 'add'
+
+    menu.session.reinitialize()
+    result = menu.run(user_input='fir')
+    assert result == 'add'
+
+    result = menu.run(user_input='1, 3-2')
+    assert result is None
+
+    menu.session.reinitialize()
+    result = menu.run(user_input='add, mod-del')
+    assert result is None
+
+    menu.session.reinitialize()
+    result = menu.run(user_input='fir, thi-sec')
+    assert result is None
+
+    menu.session.reinitialize()
+    result = menu.run(user_input='fir, mod-sec')
+    assert result is None
 
 
 def test_Menu_run_10():
@@ -193,16 +327,61 @@ def test_Menu_run_10():
     menu.append_breadcrumb('location')
     section_1 = menu.make_new_section(is_keyed=True, is_hidden=False, is_numbered=False, is_ranged=True)
     section_1.section_title = 'section'
-    section_1.menu_entry_tokens.append(('add', 'add something'))
-    section_1.menu_entry_tokens.append(('del', 'delete something'))
-    section_1.menu_entry_tokens.append(('mod', 'modify something'))
-    menu.run(user_input='q')
+    section_1.menu_entry_tokens.append(('add', 'first command'))
+    section_1.menu_entry_tokens.append(('del', 'second command'))
+    section_1.menu_entry_tokens.append(('mod', 'third command'))
+    result = menu.run(user_input='foo') 
+
     assert menu.transcript[-2] == \
     ['Location',
       '',
       '     Section',
       '',
-      '     add something (add)',
-      '     delete something (del)',
-      '     modify something (mod)',
+      '     first command (add)',
+      '     second command (del)',
+      '     third command (mod)',
       '']
+    assert result == []
+
+    # TODO:
+    menu.session.reinitialize()
+    result = menu.run(user_input='q')
+    # current behavior: assert result is None
+    # correct behavior: assert result == []
+
+    # TODO:
+    menu.session.reinitialize()
+    result = menu.run(user_input='1')
+    # current behavior: #assert result == ['add']
+    # correct behavior: assert result == []
+
+    menu.session.reinitialize()
+    result = menu.run(user_input='add')
+    assert result == ['add']
+
+    # TODO:
+    menu.session.reinitialize()
+    result = menu.run(user_input='fir')
+    # current behavior: assert result == []
+    # correct behavior: assert result == ['add']
+
+    # TODO:
+    result = menu.run(user_input='1, 3-2')
+    # current behavior: assert result == ['add', 'mod', 'del']
+    # correct behavior: assert result == []
+
+    menu.session.reinitialize()
+    result = menu.run(user_input='add, mod-del')
+    assert result == ['add', 'mod', 'del']
+
+    # TODO:
+    menu.session.reinitialize()
+    result = menu.run(user_input='fir, thi-sec')
+    # current behavior: assert result == []
+    # correct behavior: assert result == ['add', 'mod', 'del']
+
+    # TODO:
+    menu.session.reinitialize()
+    result = menu.run(user_input='fir, mod-sec')
+    # current behavior: assert result == []
+    # correct behavior: assert result == ['add', 'mod', 'del']
