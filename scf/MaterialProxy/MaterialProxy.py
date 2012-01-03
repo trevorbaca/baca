@@ -402,7 +402,11 @@ class MaterialProxy(PackageProxy):
         menu, section = self.make_new_menu(where=self.where())
         if self.is_interactive:
             section.append(('k', 'reload user input'))
-        section.append(('i', 'input'))
+        section.append(('i', 'input - edit'))
+        section.append(('id', 'input - show data'))
+        section.append(('ij', 'input - edit then run abjad'))
+        section.append(('iw', 'input - force write to output'))
+        section = menu.make_new_section()
         section.append(('o', 'output'))
         if self.has_visualizer:
             section.append(('v', 'visualizer'))
@@ -442,7 +446,22 @@ class MaterialProxy(PackageProxy):
         if result == 'd':
             self.delete_material()
         elif result == 'i':
-            self.manage_input()
+            self.edit_input_file()
+        elif result == 'id':
+            lines = []
+            lines.append(repr(self.import_material_from_input_file()))
+            lines.append('')
+            self.conditionally_display_lines(lines)
+            # this seems to work; leave in codebase and test pattern for a while
+            self.session.hide_next_redraw = True
+        elif result == 'ij':
+            self.edit_input_file()
+            self.run_abjad_on_input_file()
+        elif result == 'iw':
+            lines = []
+            self.write_input_data_to_output_file(is_forced=True)
+            lines.append('')
+            self.conditionally_display_lines(lines)
         elif result == 'k':
             self.reload_user_input()
         elif result == 'l':
@@ -465,28 +484,6 @@ class MaterialProxy(PackageProxy):
             self.edit_stylesheet()
         elif result == 'z':
             self.manage_regeneration(result)
-
-    def manage_input(self, command_string):
-        lines = []
-        if command_string == 'i':
-            self.edit_input_file()
-        elif command_string == 'id':
-            lines.append(repr(self.import_material_from_input_file()))
-            lines.append('')
-        elif command_string == 'ih':
-            lines.append('{}: edit input file'.format('i'.rjust(self.help_item_width)))
-            lines.append('{}: display input data'.format('id'.rjust(self.help_item_width)))
-            lines.append('{}: edit input file and run abjad on input file'.format(
-                'ij'.rjust(self.help_item_width)))
-            lines.append('{}: write input data to output file.'.format('iw'.rjust(self.help_item_width)))
-            lines.append('')
-        elif command_string == 'ij':
-            self.edit_input_file()
-            self.run_abjad_on_input_file()
-        elif command_string == 'iw':
-            self.write_input_data_to_output_file(is_forced=True)
-            lines.append('')
-        self.conditionally_display_lines(lines)
 
     def manage_ly(self, command_string):
         if command_string == 'l':
