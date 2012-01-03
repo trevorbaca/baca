@@ -122,6 +122,9 @@ class Menu(MenuObject):
         elif self.user_enters_menu_body(user_input):
             return self.match_user_input_against_menu_entry_bodies(user_input)
 
+    def change_user_input_to_directive_optimized(self, user_input):
+        pass
+
     def change_menu_key_to_menu_body(self, menu_key):
         for number, key, body, return_value in self.unpacked_menu_entries:
             if key == menu_key:
@@ -244,7 +247,7 @@ class Menu(MenuObject):
                 return True
         return False
                         
-    # TODO: globally remove should_clear_terminal
+    # TODO: globally remove should_clear_terminal (if possible)
     def run(self, user_input=None):
         self.assign_user_input(user_input=user_input)
         should_clear_terminal, hide_current_run = True, False

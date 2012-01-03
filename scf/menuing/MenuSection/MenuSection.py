@@ -3,6 +3,8 @@ from abjad.tools import mathtools
 from baca.scf.menuing.MenuObject import MenuObject
 
 
+# TODO: limit section to only one type of token: either string or tuple
+# TODO: implement has_string_tokens, has_tuple_tokens attributes.
 class MenuSection(MenuObject):
 
     def __init__(self, is_hidden=False, is_keyed=True, is_numbered=False, is_ranged=False,
@@ -13,6 +15,7 @@ class MenuSection(MenuObject):
         self._is_keyed = is_keyed
         self._is_numbered = is_numbered
         self._is_ranged = is_ranged
+        self._return_value_attr = 'key'
         self.menu_entry_tokens = None
         self.default_index = None
         self.section_title = None
@@ -28,6 +31,14 @@ class MenuSection(MenuObject):
     @property
     def has_default_value(self):
         return self.default_index is not None
+
+    @property
+    def has_string_tokens(self):
+        return any([isinstance(x, str) for x in self.menu_entry_tokens])
+
+    @property
+    def has_tuple_tokens(self):
+        return any([isinstance(x, tuple) for x in self.menu_entry_tokens])
 
     @property
     def indent_level(self):
@@ -97,6 +108,15 @@ class MenuSection(MenuObject):
         return property(**locals())
 
     @apply
+    def return_value_attr():
+        def fget(self):
+            return self._return_value_attr
+        def fset(self, return_value_attr):
+            assert return_value_attr in ('body', 'key', 'number')
+            self._return_value_attr = return_value_attr
+        return property(**locals())
+
+    @apply
     def section_title():
         def fget(self):
             return self._section_title
@@ -115,6 +135,17 @@ class MenuSection(MenuObject):
         return property(**locals())
 
     ### PUBLIC METHODS ###
+
+    def append(self, token):
+        assert not (isinstance(token, str) and self.has_tuple_tokens)
+        assert not (isinstance(token, tuple) and self.has_string_tokens)
+        self.menu_entry_tokens.append(token)
+
+    def extend(self, tokens):
+        assert isinstance(tokens, (tuple, list))
+        assert not (any([isinstance(x, str) for x in tokens]) and self.has_tuple_tokens)
+        assert not (any([isinstance(x, tuple) for x in tokens]) and self.has_string_tokens)
+        self.menu_entry_tokens.extend(tokens)
 
     def argument_range_string_to_numbers(self, argument_range_string):
         '''Return list of positive integers on success. Otherwise none.
