@@ -76,8 +76,6 @@ class MenuObject(SCFObject):
         self.conditionally_display_lines(lines)
 
     def handle_hidden_key(self, directive):
-        '''Method consumes key (when possible).
-        '''
         if isinstance(directive, list) and len(directive) == 1:
             key = directive[0]
         else:
@@ -102,12 +100,8 @@ class MenuObject(SCFObject):
             self.session.user_specified_quit = True
         elif isinstance(key, str) and 3 <= len(key) and 'score'.startswith(key):
             self.session.is_backtracking_to_score = True
-#        elif isinstance(key, str) and 3 <= len(key) and 'return to score'.startswith(key):
-#            self.session.is_backtracking_to_score = True
         elif isinstance(key, str) and 3 <= len(key) and 'studio'.startswith(key):
             self.session.is_backtracking_to_studio = True
-#        elif isinstance(key, str) and 3 <= len(key) and 'return to studio'.startswith(key):
-#            self.session.is_backtracking_to_studio = True
         elif key == 'where':
             self.show_menu_client()
         else:

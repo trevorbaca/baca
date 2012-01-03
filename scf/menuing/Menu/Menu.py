@@ -19,41 +19,25 @@ class Menu(MenuObject):
             if section.has_default_value:
                 return section.default_value
 
-    # TODO: rewrite these with any()
     @property
     def has_default_valued_section(self):
-        for section in self.sections:
-            if section.has_default_value:
-                return True
-        return False
+        return any([section.has_default_value for section in self.sections])
 
     @property
     def has_hidden_section(self):
-        for section in self.sections:
-            if section.is_hidden:
-                return True
-        return False
+        return any([section.is_hidden for section in self.sections])
 
     @property
     def has_keyed_section(self):
-        for section in self.sections:
-            if section.is_keyed:
-                return True
-        return False
+        return any([section.is_keyed for section in self.sections])
 
     @property
     def has_numbered_section(self):
-        for section in self.sections:
-            if section.is_numbered:
-                return True
-        return False
+        return any([section.is_numbered for section in self.sections])
 
     @property
     def has_ranged_section(self):
-        for section in self.sections:
-            if section.is_ranged:
-                return True
-        return False
+        return any([section.is_ranged for section in self.sections])
 
     @property
     def menu_entry_bodies(self):
@@ -109,6 +93,8 @@ class Menu(MenuObject):
     ### PUBLIC METHODS ###
 
     def change_user_input_to_directive_optimized(self, user_input):
+        user_input = iotools.strip_diacritics_from_binary_string(user_input)
+        user_input = user_input.lower()
         if self.user_enters_nothing(user_input) and self.default_value:
             return self.conditionally_enclose_in_list(self.default_value)
         elif self.user_enters_argument_range_optimized(user_input):
@@ -127,8 +113,6 @@ class Menu(MenuObject):
         self.conditionally_display_lines(self.menu_lines)
         user_response = self.handle_raw_input_with_default('SCF', default=self.prompt_default)
         user_input = self.split_multipart_user_response(user_response)
-        user_input = iotools.strip_diacritics_from_binary_string(user_input)
-        user_input = user_input.lower()
         directive = self.change_user_input_to_directive_optimized(user_input)
         directive = self.strip_default_indicators_from_strings(directive)
         self.session.hide_next_redraw = False
@@ -166,7 +150,6 @@ class Menu(MenuObject):
             menu_lines.append('')
         return menu_lines
 
-    # TODO: rewrite with **kwargs
     def make_new_section(self, is_hidden=False, is_keyed=True, is_numbered=False, is_ranged=False):
         assert not (is_numbered and self.has_numbered_section)
         assert not (is_ranged and self.has_ranged_section)
