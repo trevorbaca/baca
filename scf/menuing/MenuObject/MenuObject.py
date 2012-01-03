@@ -1,6 +1,5 @@
 from abjad.tools import iotools
 from baca.scf.SCFObject.SCFObject import SCFObject
-from baca.scf.exceptions import StudioException
 import os
 import subprocess
 
