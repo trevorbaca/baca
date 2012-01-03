@@ -408,6 +408,7 @@ class MaterialProxy(PackageProxy):
         section.append(('iw', 'input - force write to output'))
         section = menu.make_new_section()
         section.append(('o', 'output'))
+        section.append(('od', 'output - show data'))
         if self.has_visualizer:
             section.append(('v', 'visualizer'))
         if self.has_visualization_ly:
@@ -443,11 +444,13 @@ class MaterialProxy(PackageProxy):
         self.pop_breadcrumb()
 
     def handle_main_menu_result(self, result):
+        assert isinstance(result, str)
         if result == 'd':
             self.delete_material()
         elif result == 'i':
             self.edit_input_file()
         elif result == 'id':
+            # TODO: encapsulate
             lines = []
             lines.append(repr(self.import_material_from_input_file()))
             lines.append('')
@@ -458,6 +461,7 @@ class MaterialProxy(PackageProxy):
             self.edit_input_file()
             self.run_abjad_on_input_file()
         elif result == 'iw':
+            # TODO: encapsulate
             lines = []
             self.write_input_data_to_output_file(is_forced=True)
             lines.append('')
@@ -469,7 +473,14 @@ class MaterialProxy(PackageProxy):
         elif result == 'n':
             self.edit_initializer()
         elif result == 'o':
-            self.manage_output()
+            self.edit_output_file()
+        elif result == 'od':
+            # TODO: encapsulate
+            lines = []
+            lines.append(repr(self.import_material_from_output_file()))
+            lines.append('')
+            self.conditionally_display_lines(lines)
+            self.session.hide_next_redraw = True
         elif result == 'p':
             self.manage_pdf()
         elif result == 'r':
@@ -515,19 +526,6 @@ class MaterialProxy(PackageProxy):
             lines.append('{}: write ly and open'.format('lwo'.rjust(self.help_item_width)))
             lines.append('')
             self.conditionally_display_lines(lines)
-
-    def manage_output(self, command_string):
-        lines = []
-        if command_string == 'o':
-            self.edit_output_file()
-        elif command_string == 'od':
-            lines.append(repr(self.import_material_from_output_file()))
-            lines.append('')
-        elif command_string == 'oh':
-            lines.append('{}: open output file'.format('o'.rjust(self.help_item_width)))
-            lines.append('{}: display output data'.format('od'.rjust(self.help_item_width)))
-            lines.append('')
-        self.conditionally_display_lines(lines)
 
     def manage_pdf(self, command_string):
         if command_string == 'p':
