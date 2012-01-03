@@ -118,7 +118,8 @@ class InstrumentEditor(InteractiveEditor):
             #self.edit_transposition_interactively()
 
     def make_main_menu(self):
-        menu, section = self.make_new_menu(where=self.where(), is_keyed=False)
+        #menu, section = self.make_new_menu(where=self.where(), is_keyed=False)
+        menu, section = self.make_new_menu(where=self.where())
         section.menu_entry_tokens = self.target_attribute_menu_entry_tokens
         section = menu.make_new_section(is_keyed=False)
         if self.session.display_pitch_ranges_with_numbered_pitches:

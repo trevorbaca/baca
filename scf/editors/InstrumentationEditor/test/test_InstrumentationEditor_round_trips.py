@@ -6,7 +6,7 @@ def test_InstrumentationEditor_round_trips_01():
     '''
     
     editor = baca.scf.editors.InstrumentationEditor()
-    editor.run(user_input='add 1 1 add 2 1 mv 1 2 del 2 q')
+    editor.run(user_input='add 1 1 add 2 1 move 1 2 del 2 q')
     transcript = editor.transcript
     entry_index = -1
 
@@ -134,7 +134,7 @@ def test_InstrumentationEditor_round_trips_01():
 
     entry_index = entry_index + 1
     assert transcript[entry_index] == \
-    ['SCF> mv', '']
+    ['SCF> move', '']
 
     entry_index = entry_index + 1
     assert transcript[entry_index] == \

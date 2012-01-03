@@ -1,4 +1,6 @@
 import baca
+import py
+py.test.skip('deprecated.')
 
 
 def test_Menu_run_01():

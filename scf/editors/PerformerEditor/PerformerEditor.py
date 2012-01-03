@@ -106,6 +106,7 @@ class PerformerEditor(InteractiveEditor):
 
     def make_main_menu(self):
         menu, section = self.make_new_menu(where=self.where(), is_numbered=True)
+        section.return_value_attr = 'number'
         section.section_title = 'instruments'
         instrument_names = [x.instrument_name for x in self.target.instruments]
         section.menu_entry_tokens = instrument_names

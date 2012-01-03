@@ -1,6 +1,6 @@
 import baca
-import py
-py.test.skip('implementing now.')
+#import py
+#py.test.skip('implementing now.')
 
 
 def test_Menu_optimized_run_01():
@@ -331,7 +331,8 @@ def test_Menu_optimized_run_06():
 
 
 def test_Menu_optimized_run_07():
-    '''Tuple tokens with keys turned off.
+    '''Tuple tokens with keys hidden from user.
+    NB: User can not match on keys but key returned from menu to calling code.
     '''
 
     menu = baca.scf.menuing.Menu()
@@ -369,7 +370,7 @@ def test_Menu_optimized_run_07():
 
     menu.session.reinitialize()
     result = menu.run(user_input='fir')
-    assert result == 'first command'
+    assert result == 'add'
 
     result = menu.run(user_input='1, 3-2')
     assert result is None

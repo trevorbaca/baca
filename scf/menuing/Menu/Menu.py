@@ -102,8 +102,8 @@ class Menu(MenuObject):
     def unpacked_menu_entries(self):
         result = []
         for section in self.sections:
-            result.extend(section.unpacked_menu_entries)
-            #result.extend(section.unpacked_menu_entries_optimized)
+            #result.extend(section.unpacked_menu_entries)
+            result.extend(section.unpacked_menu_entries_optimized)
         return result
 
     ### PUBLIC METHODS ###
@@ -135,7 +135,6 @@ class Menu(MenuObject):
                     (user_input == key) or \
                     (3 <= len(user_input) and body.startswith(user_input)):
                     return self.conditionally_enclose_in_list(return_value)
-        return None
 
     def change_menu_key_to_menu_body(self, menu_key):
         for number, key, body, return_value, section in self.unpacked_menu_entries:
@@ -157,9 +156,7 @@ class Menu(MenuObject):
         if not self.has_ranged_section:
             return
         entry_numbers = self.ranged_section.argument_range_string_to_numbers_optimized(user_input)
-        print 'entry_numbers {!r}'.format(entry_numbers)
         if entry_numbers is None:
-            #return []
             return None
         entry_indices = [entry_number - 1 for entry_number in entry_numbers]
         result = []
@@ -211,13 +208,12 @@ class Menu(MenuObject):
         user_input = self.split_multipart_user_response(user_response)
         user_input = iotools.strip_diacritics_from_binary_string(user_input)
         user_input = user_input.lower()
-        directive = self.change_user_input_to_directive(user_input)
-        #directive = self.change_user_input_to_directive_optimized(user_input)
-        #print 'here: {!r}'.format(directive)
+        #directive = self.change_user_input_to_directive(user_input)
+        directive = self.change_user_input_to_directive_optimized(user_input)
+        #print 'directive: {!r}'.format(directive)
         directive = self.strip_default_indicators_from_strings(directive)
         self.session.hide_next_redraw = False
         directive = self.handle_hidden_key(directive)
-        #print 'now: {!r}'.format(directive)
         return directive
 
     def conditionally_enclose_in_list(self, expr):

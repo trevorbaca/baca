@@ -110,6 +110,7 @@ class InstrumentationEditor(InteractiveEditor):
     def make_main_menu(self):
         menu, section = self.make_new_menu(where=self.where(), is_numbered=True)
         section.menu_entry_tokens = self.summary_lines
+        section.return_value_attr = 'number' # this is new
         section = menu.make_new_section(is_keyed=False)
         section.append(('add', 'add performers'))
         if 0 < self.target.performer_count:

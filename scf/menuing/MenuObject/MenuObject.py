@@ -102,12 +102,12 @@ class MenuObject(SCFObject):
             self.session.user_specified_quit = True
         elif isinstance(key, str) and 3 <= len(key) and 'score'.startswith(key):
             self.session.is_backtracking_to_score = True
-        elif isinstance(key, str) and 3 <= len(key) and 'return to score'.startswith(key):
-            self.session.is_backtracking_to_score = True
+#        elif isinstance(key, str) and 3 <= len(key) and 'return to score'.startswith(key):
+#            self.session.is_backtracking_to_score = True
         elif isinstance(key, str) and 3 <= len(key) and 'studio'.startswith(key):
             self.session.is_backtracking_to_studio = True
-        elif isinstance(key, str) and 3 <= len(key) and 'return to studio'.startswith(key):
-            self.session.is_backtracking_to_studio = True
+#        elif isinstance(key, str) and 3 <= len(key) and 'return to studio'.startswith(key):
+#            self.session.is_backtracking_to_studio = True
         elif key == 'where':
             self.show_menu_client()
         else:
@@ -125,8 +125,10 @@ class MenuObject(SCFObject):
         section.append(('prev', 'prev score'))
         section.append(('q', 'quit'))
         section.append(('redraw', 'redraw'))
-        section.append(('score', 'return to score'))
-        section.append(('studio', 'return to studio'))
+        #section.append(('score', 'return to score'))
+        #section.append(('studio', 'return to studio'))
+        section.append(('score', 'score'))
+        section.append(('studio', 'studio'))
         section.append(('where', 'show menu client')) 
         return section
 

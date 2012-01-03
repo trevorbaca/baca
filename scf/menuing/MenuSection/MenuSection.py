@@ -95,11 +95,10 @@ class MenuSection(MenuObject):
             assert body
             if self.is_keyed and key is None:
                 key = body
-            elif not self.is_keyed and key:
-                key = None
             if self.return_value_attr == 'number':
                 if number is not None:
-                    return_value = number
+                    #return_value = number
+                    return_value = str(number)
                 elif key is not None:
                     return_value = key
                 else:
@@ -114,6 +113,8 @@ class MenuSection(MenuObject):
             else:
                 raise ValueError
             assert return_value is not None
+            if not self.is_keyed and key:
+                key = None
             unpacked_entry = (number, key, body, return_value, self)
             result.append(unpacked_entry)
         return result

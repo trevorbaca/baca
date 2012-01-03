@@ -220,39 +220,30 @@ def test_Studio_13():
 
 
 def test_Studio_14():
-    '''Display string navigation.
-    '''
-
-    studio = baca.scf.Studio()
-    studio.run(user_input='Mon b desir b q')
-    assert studio.ts == (10, (0, 4, 8), (2, 6), (3, 7))
-
-
-def test_Studio_15():
     '''Backtracking stu* shortcut.
     '''
 
     studio = baca.scf.Studio()
-    studio.run(user_input='desir perf studio q')
+    studio.run(user_input='Mon perf studio q')
     ts_1 = studio.ts
 
     studio = baca.scf.Studio()
-    studio.run(user_input='desir perf stu q')
+    studio.run(user_input='Mon perf stu q')
     ts_2 = studio.ts
     
     assert ts_1 == ts_2
 
 
-def test_Studio_16():
+def test_Studio_15():
     '''Backtracking sco* shortcut.
     '''
 
     studio = baca.scf.Studio()
-    studio.run(user_input='desir perf score q')
+    studio.run(user_input='Mon perf score q')
     ts_1 = studio.ts
 
     studio = baca.scf.Studio()
-    studio.run(user_input='desir perf sco q')
+    studio.run(user_input='Mon perf sco q')
     ts_2 = studio.ts
     
     assert ts_1 == ts_2
