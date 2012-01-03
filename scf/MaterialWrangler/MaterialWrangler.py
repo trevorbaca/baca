@@ -82,8 +82,8 @@ class MaterialWrangler(PackageWrangler, PackageProxy):
         print 'ZEE: {!r}'.format(section.menu_entry_tokens)
         section.use_menu_entry_key_as_menu_entry_return_value = False
         section = menu.make_new_section()
-        section.menu_entry_tokens.append(('i', 'create interactive material'))
-        section.menu_entry_tokens.append(('s', 'create static material'))
+        section.append(('i', 'create interactive material'))
+        section.append(('s', 'create static material'))
         return menu
 
     def make_material_proxy(self, material_underscored_name):

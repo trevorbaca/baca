@@ -7,6 +7,6 @@ def test_MenuSection_indent_level_01():
     menu.append_breadcrumb('location')
     section = menu.make_new_section()
     section.section_title = 'section'
-    section.menu_entry_tokens.extend(['apple', 'banana', 'cherry'])
+    section.extend(['apple', 'banana', 'cherry'])
 
     assert section.indent_level == 1

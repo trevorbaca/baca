@@ -251,29 +251,29 @@ class ScoreProxy(PackageProxy):
         section.section_title = 'chunks'
         section.menu_entry_tokens = list(self.chunk_wrangler.iterate_package_spaced_names())
         section = menu.make_new_section()
-        section.menu_entry_tokens.append(('ch', '[create chunk]'))
+        section.append(('ch', '[create chunk]'))
         section = menu.make_new_section()
         section.section_title = 'materials'
         section.menu_entry_tokens = list(self.material_wrangler.iterate_package_underscored_names())
         section = menu.make_new_section()
-        section.menu_entry_tokens.append(('mi', 'create interactive material'))
-        section.menu_entry_tokens.append(('ms', 'create static material'))
+        section.append(('mi', 'create interactive material'))
+        section.append(('ms', 'create static material'))
         section = menu.make_new_section()
         section.section_title = 'setup'
-        section.menu_entry_tokens.append(('ft', 'forces tagline'))
-        section.menu_entry_tokens.append(('pf', 'performers'))
-        section.menu_entry_tokens.append(('tl', 'title'))
-        section.menu_entry_tokens.append(('yr', 'year of completion'))
+        section.append(('ft', 'forces tagline'))
+        section.append(('pf', 'performers'))
+        section.append(('tl', 'title'))
+        section.append(('yr', 'year of completion'))
         section = menu.make_new_section(is_hidden=True)
-        section.menu_entry_tokens.append(('svn', 'work with repository'))
-        section.menu_entry_tokens.append(('tags', 'work with tags'))
+        section.append(('svn', 'work with repository'))
+        section.append(('tags', 'work with tags'))
         return menu
 
     def make_svn_menu(self):
         menu, section = self.make_new_menu(where=self.where(), is_keyed=False)
-        section.menu_entry_tokens.append(('st', 'st'))
-        section.menu_entry_tokens.append(('add', 'add'))
-        section.menu_entry_tokens.append(('ci', 'ci'))
+        section.append(('st', 'st'))
+        section.append(('add', 'add'))
+        section.append(('ci', 'ci'))
         return menu
 
     def manage_svn(self):

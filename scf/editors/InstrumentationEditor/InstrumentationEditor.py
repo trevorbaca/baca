@@ -111,11 +111,11 @@ class InstrumentationEditor(InteractiveEditor):
         menu, section = self.make_new_menu(where=self.where(), is_numbered=True)
         section.menu_entry_tokens = self.summary_lines
         section = menu.make_new_section(is_keyed=False)
-        section.menu_entry_tokens.append(('add', 'add performers'))
+        section.append(('add', 'add performers'))
         if 0 < self.target.performer_count:
-            section.menu_entry_tokens.append(('del', 'delete performers'))
+            section.append(('del', 'delete performers'))
         if 1 < self.target.performer_count:
-            section.menu_entry_tokens.append(('mv', 'move performers'))
+            section.append(('mv', 'move performers'))
         return menu
 
     def move_performer_interactively(self):

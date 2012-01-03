@@ -8,11 +8,11 @@ def test_MenuSection_has_string_tokens_01():
     assert not section.has_string_tokens
 
     section  = menu.make_new_section()
-    section.menu_entry_tokens.extend(['apple', 'banana', 'cherry'])
+    section.extend(['apple', 'banana', 'cherry'])
     assert section.has_string_tokens
 
     section  = menu.make_new_section()
-    section.menu_entry_tokens.append(('add', 'first command'))
-    section.menu_entry_tokens.append(('del', 'second command'))
-    section.menu_entry_tokens.append(('mod', 'third command'))
+    section.append(('add', 'first command'))
+    section.append(('del', 'second command'))
+    section.append(('mod', 'third command'))
     assert not section.has_string_tokens

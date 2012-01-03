@@ -399,24 +399,24 @@ class MaterialProxy(PackageProxy):
         while True:
             menu, section = self.make_new_menu(where=self.where())
             if self.is_interactive:
-                section.menu_entry_tokens.append(('k', 'reload user input'))
-            section.menu_entry_tokens.append(('i', 'input'))
-            section.menu_entry_tokens.append(('o', 'output'))
+                section.append(('k', 'reload user input'))
+            section.append(('i', 'input'))
+            section.append(('o', 'output'))
             if self.has_visualizer:
-                section.menu_entry_tokens.append(('v', 'visualizer'))
+                section.append(('v', 'visualizer'))
             if self.has_visualization_ly:
-                section.menu_entry_tokens.append(('l', 'ly'))
+                section.append(('l', 'ly'))
             if self.has_stylesheet:
-                section.menu_entry_tokens.append(('y', 'stylesheet'))
+                section.append(('y', 'stylesheet'))
             if self.has_visualization_pdf:
-                section.menu_entry_tokens.append(('p', 'pdf'))
-            section.menu_entry_tokens.append(('n', 'initializer'))
+                section.append(('p', 'pdf'))
+            section.append(('n', 'initializer'))
             section = menu.make_new_section()
-            section.menu_entry_tokens.append(('d', 'delete'))
-            section.menu_entry_tokens.append(('r', 'rename'))
-            section.menu_entry_tokens.append(('s', 'summarize'))
-            section.menu_entry_tokens.append(('t', 'tags'))
-            section.menu_entry_tokens.append(('z', 'regenerate'))
+            section.append(('d', 'delete'))
+            section.append(('r', 'rename'))
+            section.append(('s', 'summarize'))
+            section.append(('t', 'tags'))
+            section.append(('z', 'regenerate'))
             result = menu.run()
             if result == 'b':
                 #return result, None

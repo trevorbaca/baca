@@ -8,7 +8,7 @@ def test_MenuSection_default_index_01():
     menu.append_breadcrumb('location')
     section = menu.make_new_section()
     section.section_title = 'section'
-    section.menu_entry_tokens.extend(['apple', 'banana', 'cherry'])
+    section.extend(['apple', 'banana', 'cherry'])
 
     assert section.default_index is None
     assert py.test.raises(ValueError, 'section.default_index = -1')

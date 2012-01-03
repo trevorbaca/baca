@@ -276,8 +276,8 @@ class PackageProxy(DirectoryProxy):
         menu, section = self.make_new_menu(where=self.where(), is_keyed=False)
         section.menu_entry_tokens = self.list_formatted_tags()
         section = menu.make_new_section()
-        section.menu_entry_tokens.append(('add', 'add tag'))
-        section.menu_entry_tokens.append(('del', 'delete tag'))
+        section.append(('add', 'add tag'))
+        section.append(('del', 'delete tag'))
         return menu
 
     def manage_tags(self):
@@ -346,7 +346,7 @@ class PackageProxy(DirectoryProxy):
         score_wrangler = ScoreWrangler()
         section.menu_entry_tokens = score_wrangler.iterate_score_titles_with_years()
         section = menu.make_new_section()
-        section.menu_entry_tokens.append(('s', 'global to studio'))
+        section.append(('s', 'global to studio'))
         result = menu.run()
 
     def unimport_baca_package(self):

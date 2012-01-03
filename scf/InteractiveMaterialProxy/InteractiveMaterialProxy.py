@@ -67,22 +67,22 @@ class InteractiveMaterialProxy(MaterialProxy):
             menu, section = self.make_new_menu(where=self.where(), is_numbered=True)
             section.menu_entry_tokens = self.user_input_wrapper.editable_lines
             if self.user_input_wrapper.is_complete:
-                section.menu_entry_tokens.append(('p', 'show pdf of given input'))
-                section.menu_entry_tokens.append(('m', 'write material to disk'))
+                section.append(('p', 'show pdf of given input'))
+                section.append(('m', 'write material to disk'))
             if self.has_material_underscored_name:
-                section.menu_entry_tokens.append(('n', 'rename material'))
+                section.append(('n', 'rename material'))
             else:
-                section.menu_entry_tokens.append(('n', 'name material'))
-            section.menu_entry_tokens.append(('nc', 'clear name'))
-            section.menu_entry_tokens.append(('d', 'show demo input values'))
-            section.menu_entry_tokens.append(('o', 'overwrite with demo input values'))
-            section.menu_entry_tokens.append(('i', 'read values from disk'))
-            section.menu_entry_tokens.append(('c', 'clear values'))
-            #section.menu_entry_tokens.append(('src', 'edit source'))
+                section.append(('n', 'name material'))
+            section.append(('nc', 'clear name'))
+            section.append(('d', 'show demo input values'))
+            section.append(('o', 'overwrite with demo input values'))
+            section.append(('i', 'read values from disk'))
+            section.append(('c', 'clear values'))
+            #section.append(('src', 'edit source'))
             if self.purview is not None:
-                section.menu_entry_tokens.append(('l', 'change location'))
+                section.append(('l', 'change location'))
             else:
-                section.menu_entry_tokens.append(('l', 'set location'))
+                section.append(('l', 'set location'))
             result = menu.run()
             if result == 'b':
                 self.interactively_check_and_save_material(self.user_input_wrapper)

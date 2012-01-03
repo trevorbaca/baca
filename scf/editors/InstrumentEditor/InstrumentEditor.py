@@ -126,20 +126,20 @@ class InstrumentEditor(InteractiveEditor):
         else:
             pitch_range_repr = self.target.pitch_range.one_line_named_chromatic_pitch_repr
         line = 'range: {}'.format(pitch_range_repr)
-        section.menu_entry_tokens.append(('pr', line))
+        section.append(('pr', line))
         clefs = [clef.clef_name for clef in self.target.all_clefs]
         clefs = ', '.join(clefs)
         line = 'clefs: {}'.format(clefs)
-        section.menu_entry_tokens.append(('cl', line))
+        section.append(('cl', line))
         if self.target.is_transposing:
             line = 'sounding pitch of fingered middle C: {}'
             line = line.format(self.target.sounding_pitch_of_fingered_middle_c.pitch_class_octave_label)
-            section.menu_entry_tokens.append(('sp', line))
+            section.append(('sp', line))
             line = 'interval of transposition: {}'
             line = line.format(self.target.interval_of_transposition)
-            section.menu_entry_tokens.append(('int', line))
+            section.append(('int', line))
         section = menu.make_new_section(is_hidden=True)
-        section.menu_entry_tokens.append(('tprd', 'toggle pitch range display'))
+        section.append(('tprd', 'toggle pitch range display'))
         return menu
 
     def select_instruments_from_instrumenttools_interactively(self):

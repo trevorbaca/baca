@@ -116,18 +116,18 @@ class MenuObject(SCFObject):
     def make_default_hidden_section(self, session=None, where=None):
         from baca.scf.menuing.MenuSection import MenuSection
         section = MenuSection(is_hidden=True, session=session, where=where)
-        section.menu_entry_tokens.append(('b', 'back'))
-        section.menu_entry_tokens.append(('exec', 'exec statement'))
-        section.menu_entry_tokens.append(('grep', 'grep baca directories'))
-        section.menu_entry_tokens.append(('here', 'edit client source'))
-        section.menu_entry_tokens.append(('hidden', 'show hidden items'))
-        section.menu_entry_tokens.append(('next', 'next score'))
-        section.menu_entry_tokens.append(('prev', 'prev score'))
-        section.menu_entry_tokens.append(('q', 'quit'))
-        section.menu_entry_tokens.append(('redraw', 'redraw'))
-        section.menu_entry_tokens.append(('score', 'return to score'))
-        section.menu_entry_tokens.append(('studio', 'return to studio'))
-        section.menu_entry_tokens.append(('where', 'show menu client')) 
+        section.append(('b', 'back'))
+        section.append(('exec', 'exec statement'))
+        section.append(('grep', 'grep baca directories'))
+        section.append(('here', 'edit client source'))
+        section.append(('hidden', 'show hidden items'))
+        section.append(('next', 'next score'))
+        section.append(('prev', 'prev score'))
+        section.append(('q', 'quit'))
+        section.append(('redraw', 'redraw'))
+        section.append(('score', 'return to score'))
+        section.append(('studio', 'return to studio'))
+        section.append(('where', 'show menu client')) 
         return section
 
     def make_is_integer_in_closed_range(self, start, stop):

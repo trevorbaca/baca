@@ -10,7 +10,7 @@ def test_MenuSection_menu_entry_return_values_01():
     menu.append_breadcrumb('location')
     section = menu.make_new_section(is_numbered=True)
     section.title = 'section'
-    section.menu_entry_tokens.extend(['apple', 'banana', 'cherry'])
+    section.extend(['apple', 'banana', 'cherry'])
     section.use_menu_entry_key_as_menu_entry_return_value = True
     assert section.is_numbered
     assert section.menu_entry_return_values == ['apple', 'banana', 'cherry']
@@ -21,7 +21,7 @@ def test_MenuSection_menu_entry_return_values_01():
     menu.append_breadcrumb('location')
     section = menu.make_new_section()
     section.title = 'section'
-    section.menu_entry_tokens.extend(['apple', 'banana', 'cherry'])
+    section.extend(['apple', 'banana', 'cherry'])
     section.use_menu_entry_key_as_menu_entry_return_value = True
     assert not section.is_numbered
     assert section.menu_entry_return_values == ['apple', 'banana', 'cherry']
@@ -32,7 +32,7 @@ def test_MenuSection_menu_entry_return_values_01():
     menu.append_breadcrumb('location')
     section = menu.make_new_section(is_numbered=True)
     section.title = 'section'
-    section.menu_entry_tokens.extend(['apple', 'banana', 'cherry'])
+    section.extend(['apple', 'banana', 'cherry'])
     section.use_menu_entry_key_as_menu_entry_return_value = False
     assert section.is_numbered
     assert section.menu_entry_return_values == ['apple', 'banana', 'cherry']
@@ -43,7 +43,7 @@ def test_MenuSection_menu_entry_return_values_01():
     menu.append_breadcrumb('location')
     section = menu.make_new_section()
     section.title = 'section'
-    section.menu_entry_tokens.extend(['apple', 'banana', 'cherry'])
+    section.extend(['apple', 'banana', 'cherry'])
     section.use_menu_entry_key_as_menu_entry_return_value = False
     assert not section.is_numbered
     assert section.menu_entry_return_values == ['apple', 'banana', 'cherry']
@@ -61,9 +61,9 @@ def test_MenuSection_menu_entry_return_values_02():
     menu.append_breadcrumb('location')
     section = menu.make_new_section(is_numbered=True)
     section.title = 'section'
-    section.menu_entry_tokens.append(('add', 'add something'))
-    section.menu_entry_tokens.append(('del', 'delete something'))
-    section.menu_entry_tokens.append(('mod', 'modify something'))
+    section.append(('add', 'add something'))
+    section.append(('del', 'delete something'))
+    section.append(('mod', 'modify something'))
     section.use_menu_entry_key_as_menu_entry_return_value = True
     assert section.is_numbered
     assert section.menu_entry_return_values == ['add', 'del', 'mod']
@@ -73,9 +73,9 @@ def test_MenuSection_menu_entry_return_values_02():
     menu.append_breadcrumb('location')
     section = menu.make_new_section()
     section.title = 'section'
-    section.menu_entry_tokens.append(('add', 'add something'))
-    section.menu_entry_tokens.append(('del', 'delete something'))
-    section.menu_entry_tokens.append(('mod', 'modify something'))
+    section.append(('add', 'add something'))
+    section.append(('del', 'delete something'))
+    section.append(('mod', 'modify something'))
     section.use_menu_entry_key_as_menu_entry_return_value = True
     assert not section.is_numbered
     assert section.menu_entry_return_values == ['add', 'del', 'mod']
@@ -85,9 +85,9 @@ def test_MenuSection_menu_entry_return_values_02():
     menu.append_breadcrumb('location')
     section = menu.make_new_section(is_numbered=True)
     section.title = 'section'
-    section.menu_entry_tokens.append(('add', 'add something'))
-    section.menu_entry_tokens.append(('del', 'delete something'))
-    section.menu_entry_tokens.append(('mod', 'modify something'))
+    section.append(('add', 'add something'))
+    section.append(('del', 'delete something'))
+    section.append(('mod', 'modify something'))
     section.use_menu_entry_key_as_menu_entry_return_value = False
     assert section.is_numbered
     assert section.menu_entry_return_values == ['add something', 'delete something', 'modify something']
@@ -97,9 +97,9 @@ def test_MenuSection_menu_entry_return_values_02():
     menu.append_breadcrumb('location')
     section = menu.make_new_section()
     section.title = 'section'
-    section.menu_entry_tokens.append(('add', 'add something'))
-    section.menu_entry_tokens.append(('del', 'delete something'))
-    section.menu_entry_tokens.append(('mod', 'modify something'))
+    section.append(('add', 'add something'))
+    section.append(('del', 'delete something'))
+    section.append(('mod', 'modify something'))
     section.use_menu_entry_key_as_menu_entry_return_value = False
     assert not section.is_numbered
     assert section.menu_entry_return_values == ['add something', 'delete something', 'modify something']

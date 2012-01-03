@@ -11,7 +11,7 @@ def test_Menu_optimized_run_01():
     menu.append_breadcrumb('location')
     section_1 = menu.make_new_section(is_keyed=True, is_hidden=False, is_numbered=False, is_ranged=False)
     section_1.section_title = 'section'
-    result = section_1.menu_entry_tokens.extend(['apple', 'banana', 'cherry'])
+    result = section_1.extend(['apple', 'banana', 'cherry'])
 
     result = menu.run(user_input='foo')
     assert menu.transcript[-2] == \
@@ -80,7 +80,7 @@ def test_Menu_optimized_run_02():
     menu.append_breadcrumb('location')
     section_1 = menu.make_new_section(is_keyed=False, is_hidden=False, is_numbered=False, is_ranged=False)
     section_1.section_title = 'section'
-    section_1.menu_entry_tokens.extend(['apple', 'banana', 'cherry'])
+    section_1.extend(['apple', 'banana', 'cherry'])
     result = menu.run(user_input='foo')
 
     assert menu.transcript[-2] == \
@@ -122,7 +122,7 @@ def test_Menu_optimized_run_03():
     menu.append_breadcrumb('location')
     section_1 = menu.make_new_section(is_keyed=True, is_hidden=True, is_numbered=False, is_ranged=False)
     section_1.section_title = 'section'
-    section_1.menu_entry_tokens.extend(['apple', 'banana', 'cherry'])
+    section_1.extend(['apple', 'banana', 'cherry'])
     result = menu.run(user_input='foo')
 
     assert menu.transcript[-2] == \
@@ -157,7 +157,7 @@ def test_Menu_optimized_run_04():
     menu.append_breadcrumb('location')
     section_1 = menu.make_new_section(is_keyed=True, is_hidden=False, is_numbered=True, is_ranged=False)
     section_1.section_title = 'section'
-    section_1.menu_entry_tokens.extend(['apple', 'banana', 'cherry'])
+    section_1.extend(['apple', 'banana', 'cherry'])
     result = menu.run(user_input='foo')
 
     assert menu.transcript[-2] == \
@@ -202,7 +202,7 @@ def test_Menu_optimized_run_05():
     menu.append_breadcrumb('location')
     section_1 = menu.make_new_section(is_keyed=True, is_hidden=False, is_numbered=False, is_ranged=True)
     section_1.section_title = 'section'
-    section_1.menu_entry_tokens.extend(['apple', 'banana', 'cherry'])
+    section_1.extend(['apple', 'banana', 'cherry'])
     result = menu.run(user_input='foo')
 
     assert menu.transcript[-2] == \
@@ -254,9 +254,9 @@ def test_Menu_optimized_run_06():
     section_1 = menu.make_new_section(is_keyed=True, is_hidden=False, is_numbered=False, is_ranged=False)
     section_1.section_title = 'section'
     section_1 = menu.make_new_section()
-    section_1.menu_entry_tokens.append(('add', 'first command'))
-    section_1.menu_entry_tokens.append(('del', 'second command'))
-    section_1.menu_entry_tokens.append(('mod', 'third command'))
+    section_1.append(('add', 'first command'))
+    section_1.append(('del', 'second command'))
+    section_1.append(('mod', 'third command'))
     result = menu.run(user_input='foo')
 
     assert menu.transcript[-2] == \
@@ -352,9 +352,9 @@ def test_Menu_optimized_run_07():
     menu.append_breadcrumb('location')
     section_1 = menu.make_new_section(is_keyed=False, is_hidden=False, is_numbered=False, is_ranged=False)
     section_1.section_title = 'section'
-    section_1.menu_entry_tokens.append(('add', 'first command'))
-    section_1.menu_entry_tokens.append(('del', 'second command'))
-    section_1.menu_entry_tokens.append(('mod', 'third command'))
+    section_1.append(('add', 'first command'))
+    section_1.append(('del', 'second command'))
+    section_1.append(('mod', 'third command'))
     result = menu.run(user_input='foo')
 
     assert menu.transcript[-2] == \
@@ -454,9 +454,9 @@ def test_Menu_optimized_run_08():
     menu.append_breadcrumb('location')
     section_1 = menu.make_new_section(is_keyed=True, is_hidden=True, is_numbered=False, is_ranged=False)
     section_1.section_title = 'section'
-    section_1.menu_entry_tokens.append(('add', 'first command'))
-    section_1.menu_entry_tokens.append(('del', 'second command'))
-    section_1.menu_entry_tokens.append(('mod', 'third command'))
+    section_1.append(('add', 'first command'))
+    section_1.append(('del', 'second command'))
+    section_1.append(('mod', 'third command'))
     result = menu.run(user_input='foo')
 
     assert menu.transcript[-2] == \
@@ -545,9 +545,9 @@ def test_Menu_optimized_run_09():
     menu.append_breadcrumb('location')
     section_1 = menu.make_new_section(is_keyed=True, is_hidden=False, is_numbered=True, is_ranged=False)
     section_1.section_title = 'section'
-    section_1.menu_entry_tokens.append(('add', 'first command'))
-    section_1.menu_entry_tokens.append(('del', 'second command'))
-    section_1.menu_entry_tokens.append(('mod', 'third command'))
+    section_1.append(('add', 'first command'))
+    section_1.append(('del', 'second command'))
+    section_1.append(('mod', 'third command'))
     result = menu.run(user_input='foo')
 
     assert menu.transcript[-2] == \
@@ -646,9 +646,9 @@ def test_Menu_optimized_run_10():
     menu.append_breadcrumb('location')
     section_1 = menu.make_new_section(is_keyed=True, is_hidden=False, is_numbered=False, is_ranged=True)
     section_1.section_title = 'section'
-    section_1.menu_entry_tokens.append(('add', 'first command'))
-    section_1.menu_entry_tokens.append(('del', 'second command'))
-    section_1.menu_entry_tokens.append(('mod', 'third command'))
+    section_1.append(('add', 'first command'))
+    section_1.append(('del', 'second command'))
+    section_1.append(('mod', 'third command'))
     result = menu.run(user_input='foo') 
 
     assert menu.transcript[-2] == \
