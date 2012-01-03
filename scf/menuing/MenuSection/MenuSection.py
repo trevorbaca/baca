@@ -78,6 +78,46 @@ class MenuSection(MenuObject):
             result.append(self.unpack_menu_entry_token(menu_entry_token) + (self,))
         return result
 
+    # TODO: this can work fine as a generator
+    @property
+    def unpacked_menu_entries_optimized(self):
+        result = []
+        for i, token in enumerate(self.menu_entry_tokens):
+            number = key = body = None
+            if self.is_numbered:
+                number = i + 1
+            if isinstance(token, str):
+                body = token
+            elif isinstance(token, tuple):
+                key, body = token
+            else:
+                raise ValueError
+            assert body
+            if self.is_keyed and key is None:
+                key = body
+            elif not self.is_keyed and key:
+                key = None
+            if self.return_value_attr == 'number':
+                if number is not None:
+                    return_value = number
+                elif key is not None:
+                    return_value = key
+                else:
+                    return_value = body
+            elif self.return_value_attr == 'key':
+                if key is not None:
+                    return_value = key
+                else:
+                    return_value = body
+            elif self.return_value_attr == 'body':
+                return_value = body
+            else:
+                raise ValueError
+            assert return_value is not None
+            unpacked_entry = (number, key, body, return_value, self)
+            result.append(unpacked_entry)
+        return result
+
     ### READ / WRITE PUBLIC ATTRIBUTES ###
 
     @apply

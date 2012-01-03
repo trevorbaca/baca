@@ -8,29 +8,29 @@ When section has string tokens ...
 
     With numbering turned off ...
 
-        * return body when return_value_attr set to 'body'
-        * return body when return_value_attr set to 'key' (NB)
-        * return body when return_value_attr set to 'number' (NB)
+        * return body/key when return_value_attr set to 'number' (NB)
+        * return body/key when return_value_attr set to 'key'
+        * return body/key when return_value_attr set to 'body'
 
     With numbering turned on ...
 
-        * return body when return_value_attr set to 'body'
-        * return body when return_value_attr set to 'key' (NB)
         * return number when return_value_attr set to 'number'
+        * return body/key when return_value_attr set to 'key'
+        * return body/key when return_value_attr set to 'body'
 
 When section has tuple tokens ...
 
     With numbering turned off ...
 
-        * return body when return_value_attr set to 'body'
-        * return key when return_value_attr set to 'key'
         * return key when return_value_attr set to 'number' (NB)
+        * return key when return_value_attr set to 'key'
+        * return body when return_value_attr set to 'body'
 
     With numbering turned on ...
 
-        * return body when return_value_attr set to 'body'
-        * return key when return_value_attr set to 'key'
         * return number when return_value_attr set to 'number'
+        * return key when return_value_attr set to 'key'
+        * return body when return_value_attr set to 'body'
 '''
 
 from MenuSection import MenuSection

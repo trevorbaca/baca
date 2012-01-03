@@ -4,7 +4,7 @@ py.test.skip('implementing now.')
 
 
 def test_Menu_optimized_run_01():
-    '''String tokens with default settings.
+    '''String token defaults.
     '''
 
     menu = baca.scf.menuing.Menu()
@@ -150,7 +150,7 @@ def test_Menu_optimized_run_03():
 
 
 def test_Menu_optimized_run_04():
-    '''String tokens with numbering turned on.
+    '''Numbered string tokens.
     '''
 
     menu = baca.scf.menuing.Menu()
@@ -175,12 +175,9 @@ def test_Menu_optimized_run_04():
     result = menu.run(user_input='q')
     assert result is None
 
-    # TODO:
     menu.session.reinitialize()
     result = menu.run(user_input='1')
-    # current behavior: assert result == ['1']
-    # correct behavior: assert result == ['apple']
-    assert result == ['apple']
+    assert result == 'apple'
 
     menu.session.reinitialize()
     result = menu.run(user_input='app')
@@ -195,7 +192,7 @@ def test_Menu_optimized_run_04():
 
 
 def test_Menu_optimized_run_05():
-    '''Turning ranges on without numbering does nothing.
+    '''Ranged string tokens.
     '''
 
     menu = baca.scf.menuing.Menu()
@@ -214,39 +211,32 @@ def test_Menu_optimized_run_05():
       '     banana',
       '     cherry',
       '']
-    assert result == []
+    assert result is None
 
-    # TODO:
     menu.session.reinitialize()
     result = menu.run(user_input='q')
-    # current behavior: assert result is None
-    # correct behavior: assert result == []
-    assert result == []
+    assert result is None
 
-    # TODO:
     menu.session.reinitialize()
     result = menu.run(user_input='1')
-    # current behavior: assert result == ['apple']
-    # correct behavior: assert result == []
-    assert result == []
+    assert result is None
 
     menu.session.reinitialize()
     result = menu.run(user_input='app')
     assert result == ['apple']
 
-    # TODO:
-    result = menu.run(user_input='1, 3-2')
-    # current behavior: result == ['apple', 'cherry', 'banana']
-    # correct behavior: result == []
-    assert result == []
-
     menu.session.reinitialize()
-    result = menu.run(user_input='app, che-ban')
-    assert result == ['apple', 'cherry', 'banana']
+    result = menu.run(user_input='1, 3-2')
+    assert result is None
+
+    # TODO: ranged entry
+#    menu.session.reinitialize()
+#    result = menu.run(user_input='app, che-ban')
+#    assert result == ['apple', 'cherry', 'banana']
 
 
 def test_Menu_optimized_run_06():
-    '''Tuple tokens with default settings.
+    '''Default tuple tokens.
     '''
 
     menu = baca.scf.menuing.Menu()
@@ -321,11 +311,8 @@ def test_Menu_optimized_run_06():
     result = menu.run(user_input='add')
     assert result == 'first command'
 
-    # TODO:
     menu.session.reinitialize()
     result = menu.run(user_input='fir')
-    # current behavior: assert result == 'add'
-    # correct behavior: assert result == 'first command'
     assert result == 'first command'
 
     result = menu.run(user_input='1, 3-2')
@@ -377,16 +364,13 @@ def test_Menu_optimized_run_07():
     result = menu.run(user_input='1')
     assert result is None
 
-    # TODO:
     menu.session.reinitialize()
     result = menu.run(user_input='add')
-    # current behavior: assert result == 'add'
-    # correct behavior: assert result is None
     assert result is None
 
     menu.session.reinitialize()
     result = menu.run(user_input='fir')
-    assert result == 'add'
+    assert result == 'first command'
 
     result = menu.run(user_input='1, 3-2')
     assert result is None
@@ -419,16 +403,13 @@ def test_Menu_optimized_run_07():
     result = menu.run(user_input='1')
     assert result is None
 
-    # TODO:
     menu.session.reinitialize()
     result = menu.run(user_input='add')
-    # current behavior: assert result == 'add'
-    # correct behavior: assert result is None
     assert result is None
 
     menu.session.reinitialize()
     result = menu.run(user_input='fir')
-    assert result == 'add'
+    assert result == 'first command'
 
     result = menu.run(user_input='1, 3-2')
     assert result is None
@@ -517,8 +498,6 @@ def test_Menu_optimized_run_08():
 
     menu.session.reinitialize()
     result = menu.run(user_input='fir')
-    # current behavior: assert result == 'add'
-    # correct behavior: assert result == 'first command'
     assert result == 'first command'
 
     result = menu.run(user_input='1, 3-2')
@@ -604,22 +583,16 @@ def test_Menu_optimized_run_09():
     result = menu.run(user_input='q')
     assert result is None
 
-    # TODO:
     menu.session.reinitialize()
     result = menu.run(user_input='1')
-    # current behavior: assert result == 'add'
-    # correct behavior: assert result == 'first command'
     assert result == 'first command'
 
     menu.session.reinitialize()
     result = menu.run(user_input='add')
     assert result == 'first command'
 
-    # TODO:
     menu.session.reinitialize()
     result = menu.run(user_input='fir')
-    # current behavior: assert result == 'add'
-    # correct behavior: assert result == 'first command'
     assert result == 'first command'
 
     result = menu.run(user_input='1, 3-2')
@@ -639,7 +612,7 @@ def test_Menu_optimized_run_09():
 
 
 def test_Menu_optimized_run_10():
-    '''Turning ranges on without numbering does nothing.
+    '''Ranged tuple tokens.
     '''
 
     menu = baca.scf.menuing.Menu()
@@ -660,57 +633,41 @@ def test_Menu_optimized_run_10():
       '     second command (del)',
       '     third command (mod)',
       '']
-    assert result == []
+    assert result is None
 
-    # TODO:
     menu.session.reinitialize()
     result = menu.run(user_input='q')
-    # current behavior: assert result is None
-    # correct behavior: assert result == []
-    assert result == []
+    assert result is None
 
-    # TODO:
     menu.session.reinitialize()
     result = menu.run(user_input='1')
-    # current behavior: #assert result == ['add']
-    # correct behavior: assert result == []
-    assert result == []
+    assert result is None
 
     menu.session.reinitialize()
     result = menu.run(user_input='add')
     assert result == ['add']
 
-    # TODO:
     menu.session.reinitialize()
     result = menu.run(user_input='fir')
-    # current behavior: assert result == []
-    # correct behavior: assert result == ['add']
     assert result == ['add']
 
-    # TODO:
     result = menu.run(user_input='1, 3-2')
-    # current behavior: assert result == ['add', 'mod', 'del']
-    # correct behavior: assert result == []
-    assert result == []
+    assert result is None
 
-    menu.session.reinitialize()
-    result = menu.run(user_input='add, mod-del')
-    assert result == ['add', 'mod', 'del']
+    # TODO: ranged entry
+#    menu.session.reinitialize()
+#    result = menu.run(user_input='add, mod-del')
+#    assert result == ['add', 'mod', 'del']
 
-    # TODO:
-    menu.session.reinitialize()
-    result = menu.run(user_input='fir, thi-sec')
-    # current behavior: assert result == []
-    # correct behavior: assert result == ['add', 'mod', 'del']
-    assert result == ['add', 'mod', 'del']
-    
+    # TODO: ranged entry
+#    menu.session.reinitialize()
+#    result = menu.run(user_input='fir, thi-sec')
+#    assert result == ['add', 'mod', 'del']
 
     # TODO:
-    menu.session.reinitialize()
-    result = menu.run(user_input='fir, mod-sec')
-    # current behavior: assert result == []
-    # correct behavior: assert result == ['add', 'mod', 'del']
-    assert result == ['add', 'mod', 'del']
+#    menu.session.reinitialize()
+#    result = menu.run(user_input='fir, mod-sec')
+#    assert result == ['add', 'mod', 'del']
 
     '''Bodies returned instead of keys.'''
     
@@ -718,21 +675,18 @@ def test_Menu_optimized_run_10():
 
     menu.session.reinitialize()
     result = menu.run(user_input='foo')
-    assert result == []
+    assert result is None
 
     # TODO:
     menu.session.reinitialize()
     result = menu.run(user_input='q')
     # current behavior: assert result is None
     # correct behavior: assert result == []
-    assert result == []
+    assert result is None
 
-    # TODO:
     menu.session.reinitialize()
     result = menu.run(user_input='1')
-    # current behavior: assert result == ['first command']
-    # correct behavior: assert result == []
-    assert result == []
+    assert result is None
 
     menu.session.reinitialize()
     result = menu.run(user_input='add')
@@ -742,21 +696,21 @@ def test_Menu_optimized_run_10():
     result = menu.run(user_input='fir')
     assert result == ['first command']
 
-    # TODO:
     menu.session.reinitialize()
     result = menu.run(user_input='1, 3-2')
-    # current behavior: assert result == ['first command', 'third command', 'second command']
-    # correct behavior: assert result == []
-    assert result == []
+    assert result is None
 
-    menu.session.reinitialize()
-    result = menu.run(user_input='add, mod-del')
-    assert result == ['first command', 'third command', 'second command']
+    # TODO: ranged entry
+#    menu.session.reinitialize()
+#    result = menu.run(user_input='add, mod-del')
+#    assert result == ['first command', 'third command', 'second command']
 
-    menu.session.reinitialize()
-    result = menu.run(user_input='fir, thi-sec')
-    assert result == ['first command', 'third command', 'second command']
+    # TODO: ranged entry
+#    menu.session.reinitialize()
+#    result = menu.run(user_input='fir, thi-sec')
+#    assert result == ['first command', 'third command', 'second command']
 
-    menu.session.reinitialize()
-    result = menu.run(user_input='fir, mod-sec')
-    assert result == ['first command', 'third command', 'second command']
+    # TODO: ranged entry
+#    menu.session.reinitialize()
+#    result = menu.run(user_input='fir, mod-sec')
+#    assert result == ['first command', 'third command', 'second command']

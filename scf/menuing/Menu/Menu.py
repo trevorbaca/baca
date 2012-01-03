@@ -103,6 +103,7 @@ class Menu(MenuObject):
         result = []
         for section in self.sections:
             result.extend(section.unpacked_menu_entries)
+            #result.extend(section.unpacked_menu_entries_optimized)
         return result
 
     ### PUBLIC METHODS ###
@@ -123,12 +124,18 @@ class Menu(MenuObject):
             return self.match_user_input_against_menu_entry_bodies(user_input)
 
     def change_user_input_to_directive_optimized(self, user_input):
-        if self.user_enters_nothing(user_input):
-            default_value = self.default_value
-            if default_value:
-                return self.conditionally_enclose_in_list(default_value)
-            else:
-                return self.make_null_return_value()
+        if self.user_enters_nothing(user_input) and self.default_value:
+            return self.conditionally_enclose_in_list(self.default_value)
+        elif self.user_enters_argument_range_optimized(user_input):
+            pass
+        else:
+            for number, key, body, return_value, section in self.unpacked_menu_entries:
+                body = iotools.strip_diacritics_from_binary_string(body).lower()
+                if  (mathtools.is_integer_equivalent_expr(user_input) and int(user_input) == number) or \
+                    (user_input == key) or \
+                    (3 <= len(user_input) and body.startswith(user_input)):
+                    return self.conditionally_enclose_in_list(return_value)
+        return None
 
     def change_menu_key_to_menu_body(self, menu_key):
         for number, key, body, return_value, section in self.unpacked_menu_entries:
@@ -301,6 +308,13 @@ class Menu(MenuObject):
         if self.has_ranged_section:
             if self.is_argument_range_string(user_input):
                 return True
+        return False
+
+    def user_enters_argument_range_optimized(self, user_input):
+        if ',' in user_input:
+            return True
+        if '-' in user_input:
+            return True
         return False
 
     def user_enters_backtracking_string(self, user_input):
