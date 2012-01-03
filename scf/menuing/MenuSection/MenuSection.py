@@ -75,7 +75,7 @@ class MenuSection(MenuObject):
     def unpacked_menu_entries(self):
         result = []
         for menu_entry_token in self.menu_entry_tokens:
-            result.append(self.unpack_menu_entry_token(menu_entry_token))
+            result.append(self.unpack_menu_entry_token(menu_entry_token) + (self,))
         return result
 
     ### READ / WRITE PUBLIC ATTRIBUTES ###

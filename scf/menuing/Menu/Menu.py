@@ -124,10 +124,14 @@ class Menu(MenuObject):
 
     def change_user_input_to_directive_optimized(self, user_input):
         if self.user_enters_nothing(user_input):
-            return self.handle_null_user_input(user_input)
+            default_value = self.default_value
+            if default_value:
+                return self.conditionally_enclose_in_list(default_value)
+            else:
+                return self.make_null_return_value()
 
     def change_menu_key_to_menu_body(self, menu_key):
-        for number, key, body, return_value in self.unpacked_menu_entries:
+        for number, key, body, return_value, section in self.unpacked_menu_entries:
             if key == menu_key:
                 return body 
 
@@ -157,7 +161,7 @@ class Menu(MenuObject):
                     return self.conditionally_enclose_in_list(value)
 
     def handle_menu_key_user_input(self, menu_key):
-        for number, key, body, return_value in self.unpacked_menu_entries:
+        for number, key, body, return_value, section in self.unpacked_menu_entries:
             if key == menu_key:
                 return self.conditionally_enclose_in_list(return_value)
 
@@ -199,6 +203,12 @@ class Menu(MenuObject):
             return [expr]
         else:
             return expr
+
+    def make_null_return_value(self):
+        if self.has_ranged_section:
+            return []
+        else:
+            return None
 
     def make_menu_lines(self):
         self.menu_lines = []
@@ -243,7 +253,7 @@ class Menu(MenuObject):
                     return self.conditionally_enclose_in_list(value)
 
     def user_enters_menu_body(self, user_input):
-        for number, key, body, return_value in self.unpacked_menu_entries:
+        for number, key, body, return_value, section in self.unpacked_menu_entries:
             body = iotools.strip_diacritics_from_binary_string(body).lower()
             if body.startswith(user_input):
                 return True
