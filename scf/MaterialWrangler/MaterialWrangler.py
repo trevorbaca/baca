@@ -91,9 +91,9 @@ class MaterialWrangler(PackageWrangler, PackageProxy):
         package_importable_name.append(material_underscored_name.strip(' (@)'))
         package_importable_name = '.'.join(package_importable_name)
         if material_underscored_name.endswith('(@)'):
-            material_proxy = self.StaticMaterialProxy(package_importable_name)
+            material_proxy = self.StaticMaterialProxy(package_importable_name, session=self.session)
         else:
-            material_proxy = self.InteractiveMaterialProxy(package_importable_name)
+            material_proxy = self.InteractiveMaterialProxy(package_importable_name, session=self.session)
         return material_proxy
 
     def run(self, user_input=None):

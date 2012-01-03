@@ -14,6 +14,10 @@ class MaterialProxy(PackageProxy):
     ### PUBLIC ATTRIBUTES ###
 
     @property
+    def breadcrumb(self):
+        return self.package_spaced_name
+
+    @property
     def has_input_data(self):
         if not self.has_input_file:
             return False
@@ -394,60 +398,73 @@ class MaterialProxy(PackageProxy):
         trimmed_visualizer_ly_lines = self.trim_ly_lines(self.visualization_ly_file_name)
         return trimmed_temp_ly_file_lines == trimmed_visualizer_ly_lines
 
+    def make_main_menu(self):
+        menu, section = self.make_new_menu(where=self.where())
+        if self.is_interactive:
+            section.append(('k', 'reload user input'))
+        section.append(('i', 'input'))
+        section.append(('o', 'output'))
+        if self.has_visualizer:
+            section.append(('v', 'visualizer'))
+        if self.has_visualization_ly:
+            section.append(('l', 'ly'))
+        if self.has_stylesheet:
+            section.append(('y', 'stylesheet'))
+        if self.has_visualization_pdf:
+            section.append(('p', 'pdf'))
+        section.append(('n', 'initializer'))
+        section = menu.make_new_section()
+        section.append(('d', 'delete'))
+        section.append(('r', 'rename'))
+        section.append(('s', 'summarize'))
+        section.append(('t', 'tags'))
+        section.append(('z', 'regenerate'))
+        return menu
+
     def run(self, user_input=None):
         self.assign_user_input(user_input=user_input)
         while True:
-            menu, section = self.make_new_menu(where=self.where())
-            if self.is_interactive:
-                section.append(('k', 'reload user input'))
-            section.append(('i', 'input'))
-            section.append(('o', 'output'))
-            if self.has_visualizer:
-                section.append(('v', 'visualizer'))
-            if self.has_visualization_ly:
-                section.append(('l', 'ly'))
-            if self.has_stylesheet:
-                section.append(('y', 'stylesheet'))
-            if self.has_visualization_pdf:
-                section.append(('p', 'pdf'))
-            section.append(('n', 'initializer'))
-            section = menu.make_new_section()
-            section.append(('d', 'delete'))
-            section.append(('r', 'rename'))
-            section.append(('s', 'summarize'))
-            section.append(('t', 'tags'))
-            section.append(('z', 'regenerate'))
+            self.append_breadcrumb()
+            menu = self.make_main_menu()
             result = menu.run()
-            if result == 'b':
-                #return result, None
-                return
-            elif result == 'd':
-                self.delete_material()
+            if self.backtrack():
                 break
-            elif result == 'i':
-                self.manage_input(result)
-            elif result == 'k':
-                self.reload_user_input()
-            elif result == 'l':
-                self.manage_ly(result)
-            elif result == 'n':
-                self.edit_initializer()
-            elif result == 'o':
-                self.manage_output(result)
-            elif result == 'p':
-                self.manage_pdf(result)
-            elif result == 'r':
-                self.rename_material()
-            elif result == 's':
-                self.summarize_material_package()
-            elif result == 't':
-                self.manage_tags()
-            elif result == 'v':
-                self.manage_visualizer(result)
-            elif result == 'y':
-                self.edit_stylesheet()
-            elif result == 'z':
-                self.manage_regeneration(result)
+            elif not result:
+                self.pop_breadcrumb()
+                continue
+            self.handle_main_menu_result(result)
+            if self.backtrack():
+                break
+            self.pop_breadcrumb()
+        self.pop_breadcrumb()
+
+    def handle_main_menu_result(self, result):
+        if result == 'd':
+            self.delete_material()
+        elif result == 'i':
+            self.manage_input()
+        elif result == 'k':
+            self.reload_user_input()
+        elif result == 'l':
+            self.manage_ly()
+        elif result == 'n':
+            self.edit_initializer()
+        elif result == 'o':
+            self.manage_output()
+        elif result == 'p':
+            self.manage_pdf()
+        elif result == 'r':
+            self.rename_material()
+        elif result == 's':
+            self.summarize_material_package()
+        elif result == 't':
+            self.manage_tags()
+        elif result == 'v':
+            self.manage_visualizer()
+        elif result == 'y':
+            self.edit_stylesheet()
+        elif result == 'z':
+            self.manage_regeneration(result)
 
     def manage_input(self, command_string):
         lines = []

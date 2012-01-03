@@ -1,7 +1,7 @@
 import baca
 
 
-def test_MaterialProxy_01():
+def test_MaterialProxy_attributes_01():
     '''Unnamed material.
     '''
 
