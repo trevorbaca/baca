@@ -92,13 +92,13 @@ class Menu(MenuObject):
 
     ### PUBLIC METHODS ###
 
-    def change_user_input_to_directive_optimized(self, user_input):
+    def change_user_input_to_directive(self, user_input):
         user_input = iotools.strip_diacritics_from_binary_string(user_input)
         user_input = user_input.lower()
         if self.user_enters_nothing(user_input) and self.default_value:
             return self.conditionally_enclose_in_list(self.default_value)
-        elif self.user_enters_argument_range_optimized(user_input):
-            return self.handle_argument_range_user_input_optimized(user_input)
+        elif self.user_enters_argument_range(user_input):
+            return self.handle_argument_range_user_input(user_input)
         else:
             for number, key, body, return_value, section in self.unpacked_menu_entries:
                 body = iotools.strip_diacritics_from_binary_string(body).lower()
@@ -113,7 +113,7 @@ class Menu(MenuObject):
         self.conditionally_display_lines(self.menu_lines)
         user_response = self.handle_raw_input_with_default('SCF', default=self.prompt_default)
         user_input = self.split_multipart_user_response(user_response)
-        directive = self.change_user_input_to_directive_optimized(user_input)
+        directive = self.change_user_input_to_directive(user_input)
         directive = self.strip_default_indicators_from_strings(directive)
         self.session.hide_next_redraw = False
         directive = self.handle_hidden_key(directive)
@@ -125,7 +125,7 @@ class Menu(MenuObject):
         else:
             return expr
 
-    def handle_argument_range_user_input_optimized(self, user_input):
+    def handle_argument_range_user_input(self, user_input):
         if not self.has_ranged_section:
             return
         entry_numbers = self.ranged_section.argument_range_string_to_numbers_optimized(user_input)
@@ -145,7 +145,7 @@ class Menu(MenuObject):
 
     def make_menu_title_lines(self):
         menu_lines = []
-        if not self._hide_current_run:
+        if not self.hide_current_run:
             menu_lines.append(iotools.capitalize_string_start(self.session.menu_header))
             menu_lines.append('')
         return menu_lines
@@ -164,16 +164,15 @@ class Menu(MenuObject):
             section_menu_lines = section.make_menu_lines()
             if not section.is_hidden:
                 menu_lines.extend(section_menu_lines)
-        if self._hide_current_run:
+        if self.hide_current_run:
             menu_lines = []
         return menu_lines
         
-    # TODO: globally remove should_clear_terminal (if possible)
     def run(self, user_input=None):
         self.assign_user_input(user_input=user_input)
         should_clear_terminal, hide_current_run = True, False
         while True:
-            self._should_clear_terminal, self._hide_current_run = should_clear_terminal, hide_current_run
+            self.should_clear_terminal, self.hide_current_run = should_clear_terminal, hide_current_run
             should_clear_terminal, hide_current_run = False, True
             result = self.conditionally_display_menu()
             if self.session.is_complete:
@@ -220,7 +219,7 @@ class Menu(MenuObject):
                 expr = expr.replace(' (default)', '')
             return expr
 
-    def user_enters_argument_range_optimized(self, user_input):
+    def user_enters_argument_range(self, user_input):
         if ',' in user_input:
             return True
         if '-' in user_input:
