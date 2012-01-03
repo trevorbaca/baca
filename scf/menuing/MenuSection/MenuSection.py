@@ -19,7 +19,6 @@ class MenuSection(MenuObject):
         self.menu_entry_tokens = None
         self.default_index = None
         self.section_title = None
-        self.use_menu_entry_key_as_menu_entry_return_value = True
 
     ### READ-ONLY PUBLIC ATTRIBUTES ###
 
@@ -123,15 +122,6 @@ class MenuSection(MenuObject):
         def fset(self, section_title):
             assert isinstance(section_title, (str, type(None)))
             self._section_title = section_title
-        return property(**locals())
-
-    @apply
-    def use_menu_entry_key_as_menu_entry_return_value():
-        def fget(self):
-            return self._use_menu_entry_key_as_menu_entry_return_value
-        def fset(self, use_menu_entry_key_as_menu_entry_return_value):
-            assert isinstance(use_menu_entry_key_as_menu_entry_return_value, type(True))
-            self._use_menu_entry_key_as_menu_entry_return_value = use_menu_entry_key_as_menu_entry_return_value
         return property(**locals())
 
     ### PUBLIC METHODS ###
@@ -260,10 +250,14 @@ class MenuSection(MenuObject):
         if isinstance(menu_entry_token, str):
             return menu_entry_token
         elif isinstance(menu_entry_token, tuple):
-            if self.use_menu_entry_key_as_menu_entry_return_value:
+            if self.return_value_attr == 'key':
                 return menu_entry_token[0]
-            else:
+            elif self.return_value_attr == 'body':
                 return menu_entry_token[1]
+            elif self.return_value_attr == 'number':
+                pass
+            else:
+                raise ValueError
         else:
             raise ValueError
 

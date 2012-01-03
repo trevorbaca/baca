@@ -140,7 +140,7 @@ class InstrumentationEditor(InteractiveEditor):
         performer_pairs.append(('perc', 'percussionist'))
         performer_pairs.sort(lambda x, y: cmp(x[1], y[1]))
         section.menu_entry_tokens = performer_pairs
-        section.use_menu_entry_key_as_menu_entry_return_value = False
+        section.return_value_attr = 'body'
         while True:
             self.append_breadcrumb('add performers')
             result = menu.run()

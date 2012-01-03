@@ -46,7 +46,7 @@ def test_Menu_optimized_run_01():
 
     '''Bodies give same result as keys.'''
 
-    section_1.use_menu_entry_key_as_menu_entry_return_value = False
+    section_1.return_value_attr = 'body'
 
     menu.session.reinitialize()
     result = menu.run(user_input='foo')
@@ -303,7 +303,7 @@ def test_Menu_optimized_run_06():
 
     '''Bodies returned instead of keys.'''
     
-    section_1.use_menu_entry_key_as_menu_entry_return_value = False
+    section_1.return_value_attr = 'body'
 
     menu.session.reinitialize()
     result = menu.run(user_input='foo')
@@ -405,7 +405,7 @@ def test_Menu_optimized_run_07():
 
     '''Bodies returned instead of keys.'''
     
-    section_1.use_menu_entry_key_as_menu_entry_return_value = False
+    section_1.return_value_attr = 'body'
 
     menu.session.reinitialize()
     result = menu.run(user_input='foo')
@@ -497,7 +497,7 @@ def test_Menu_optimized_run_08():
 
     '''Bodies returned instead of keys.'''
     
-    section_1.use_menu_entry_key_as_menu_entry_return_value = False
+    section_1.return_value_attr = 'body'
 
     menu.session.reinitialize()
     result = menu.run(user_input='foo')
@@ -594,7 +594,7 @@ def test_Menu_optimized_run_09():
 
     '''Bodies returned instead of keys.'''
     
-    section_1.use_menu_entry_key_as_menu_entry_return_value = False
+    section_1.return_value_attr = 'body'
 
     menu.session.reinitialize()
     result = menu.run(user_input='foo')
@@ -714,7 +714,7 @@ def test_Menu_optimized_run_10():
 
     '''Bodies returned instead of keys.'''
     
-    section_1.use_menu_entry_key_as_menu_entry_return_value = False
+    section_1.return_value_attr = 'body'
 
     menu.session.reinitialize()
     result = menu.run(user_input='foo')

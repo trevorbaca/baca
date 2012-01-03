@@ -123,7 +123,8 @@ class Menu(MenuObject):
             return self.match_user_input_against_menu_entry_bodies(user_input)
 
     def change_user_input_to_directive_optimized(self, user_input):
-        pass
+        if self.user_enters_nothing(user_input):
+            return self.handle_null_user_input(user_input)
 
     def change_menu_key_to_menu_body(self, menu_key):
         for number, key, body, return_value in self.unpacked_menu_entries:
@@ -185,6 +186,7 @@ class Menu(MenuObject):
         user_input = iotools.strip_diacritics_from_binary_string(user_input)
         user_input = user_input.lower()
         directive = self.change_user_input_to_directive(user_input)
+        #directive = self.change_user_input_to_directive_optimized(user_input)
         #print 'here: {!r}'.format(directive)
         directive = self.strip_default_indicators_from_strings(directive)
         self.session.hide_next_redraw = False
