@@ -390,6 +390,59 @@ class MaterialProxy(PackageProxy):
             output_preamble_lines = []
         return output_preamble_lines
 
+    def handle_main_menu_result(self, result):
+        assert isinstance(result, str)
+        if result == 'd':
+            self.delete_material()
+        elif result == 'i':
+            self.edit_input_file()
+        elif result == 'id':
+            self.show_input_data()
+        elif result == 'ij':
+            self.edit_input_file()
+            self.run_abjad_on_input_file()
+        elif result == 'iw':
+            self.write_input_data_to_output_file(is_forced=True)
+        elif result == 'k':
+            self.reload_user_input()
+        elif result == 'l':
+            self.manage_ly()
+        elif result == 'lw':
+            self.create_ly_from_visualizer(is_forced=True)
+        elif result == 'lwo':
+            self.create_ly_from_visualizer(is_forced=True)
+            self.edit_visualzation_ly()
+        elif result == 'n':
+            self.edit_initializer()
+        elif result == 'o':
+            self.edit_output_file()
+        elif result == 'od':
+            self.show_output_data()
+        elif result == 'p':
+            self.manage_pdf()
+        elif result == 'pw':
+            self.create_pdf_from_visualizer(is_forced=True)
+        elif result == 'pwo':
+            self.create_pdf_from_visualizer(is_forced=True)
+            self.open_visualization_pdf()
+        elif result == 'r':
+            self.rename_material()
+        elif result == 's':
+            self.summarize_material_package()
+        elif result == 't':
+            self.manage_tags()
+        elif result == 'v':
+            self.manage_visualizer()
+        elif result == 'y':
+            self.edit_stylesheet()
+        elif result == 'z':
+            self.regenerate_everything(is_forced=True)
+        elif result == 'zo':
+            self.regenerate_everything(is_forced=True)
+            self.open_visualzation_pdf()
+        else:
+            raise ValueError
+
     def lilypond_file_format_is_equal_to_visualizer_ly(self, lilypond_file):
         temp_ly_file = os.path.join(os.environ.get('HOME'), 'tmp.ly')
         iotools.write_expr_to_ly(lilypond_file, temp_ly_file, print_status=False)
@@ -442,57 +495,6 @@ class MaterialProxy(PackageProxy):
                 break
             self.pop_breadcrumb()
         self.pop_breadcrumb()
-
-    def handle_main_menu_result(self, result):
-        assert isinstance(result, str)
-        if result == 'd':
-            self.delete_material()
-        elif result == 'i':
-            self.edit_input_file()
-        elif result == 'id':
-            self.show_input_data()
-        elif result == 'ij':
-            self.edit_input_file()
-            self.run_abjad_on_input_file()
-        elif result == 'iw':
-            self.write_input_data_to_output_file(is_forced=True)
-        elif result == 'k':
-            self.reload_user_input()
-        elif result == 'l':
-            self.manage_ly()
-        elif result == 'lw':
-            self.create_ly_from_visualizer(is_forced=True)
-        elif result == 'lwo':
-            self.create_ly_from_visualizer(is_forced=True)
-            self.edit_visualzation_ly()
-        elif result == 'n':
-            self.edit_initializer()
-        elif result == 'o':
-            self.edit_output_file()
-        elif result == 'od':
-            self.show_output_data()
-        elif result == 'p':
-            self.manage_pdf()
-        elif result == 'pw':
-            self.create_pdf_from_visualizer(is_forced=True)
-        elif result == 'pwo':
-            self.create_pdf_from_visualizer(is_forced=True)
-            self.open_visualization_pdf()
-        elif result == 'r':
-            self.rename_material()
-        elif result == 's':
-            self.summarize_material_package()
-        elif result == 't':
-            self.manage_tags()
-        elif result == 'v':
-            self.manage_visualizer()
-        elif result == 'y':
-            self.edit_stylesheet()
-        elif result == 'z':
-            self.regenerate_everything(is_forced=True)
-        elif result == 'zo':
-            self.regenerate_everything(is_forced=True)
-            self.open_visualzation_pdf()
 
     def manage_ly(self, command_string):
         if self.has_visualization_ly:

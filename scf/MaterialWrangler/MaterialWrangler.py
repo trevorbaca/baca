@@ -57,7 +57,6 @@ class MaterialWrangler(PackageWrangler, PackageProxy):
             return self.StaticMaterialProxy(package_importable_name)
 
     def handle_main_menu_result(self, result):
-        print 'result: {!r}'.format(result)
         if result == 'i':
             menu_title = menu.menu_title
             self.material_wrangler.create_interactive_material_package_interactively()

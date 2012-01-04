@@ -7,7 +7,6 @@ def test_ChunkWrangler_01():
     '''
 
     chunk_wrangler = baca.scf.ChunkWrangler('manos')
-    assert issubclass(chunk_wrangler.ChunkProxy, baca.scf.ChunkProxy)
     assert chunk_wrangler.class_name == 'ChunkWrangler'
     assert chunk_wrangler.directory_name == '/Users/trevorbaca/Documents/scores/manos/mus/chunks'
     assert chunk_wrangler.has_directory

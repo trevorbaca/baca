@@ -4,12 +4,18 @@ import os
 
 class PackageWrangler(DirectoryProxy):
 
-    ### PUBLIC ATTRIBUTES ###
+    ### READ-ONLY PUBLIC ATTRIBUTES ###
 
     @property
     def PackageProxy(self):
         import baca
         return baca.scf.PackageProxy
+
+    @property
+    def has_packages(self):
+        for x in self.iterate_package_spaced_names():
+            return True
+        return False
 
     ### PUBLIC METHODS ###
 

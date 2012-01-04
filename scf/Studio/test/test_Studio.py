@@ -47,25 +47,25 @@ def test_Studio_03():
     studio = baca.scf.Studio()
     studio.run(user_input='1 q')
 
-    assert studio.transcript[-2] == [
-     "L'archipel du corps (2011)",
-     '',
-     '     Chunks',
-     '',
-     '     [create chunk] (ch)',
-     '',
-     '     Materials',
-     '',
-     '     create interactive material (mi)',
-     '     create static material (ms)',
-     '',
-     '     Setup',
-     '',
-     '     forces tagline (ft)',
-     '     performers (pf)',
-     '     title (tl)',
-     '     year of completion (yr)',
-     '']
+#    assert studio.transcript[-2] == [
+#     "L'archipel du corps (2011)",
+#     '',
+#     '     Chunks',
+#     '',
+#     '     [create chunk] (ch)',
+#     '',
+#     '     Materials',
+#     '',
+#     '     create interactive material (mi)',
+#     '     create static material (ms)',
+#     '',
+#     '     Setup',
+#     '',
+#     '     forces tagline (ft)',
+#     '     performers (pf)',
+#     '     title (tl)',
+#     '     year of completion (yr)',
+#     '']
 
 
 def test_Studio_04():

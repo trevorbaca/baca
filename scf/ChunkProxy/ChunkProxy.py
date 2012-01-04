@@ -32,6 +32,8 @@ class ChunkProxy(PackageProxy):
         self.proceed()
 
     def create_chunk_interactively(self):
+        self.print_not_implemented()
+        return
         if self.purview is None:
             self.set_purview_interactively()
         if self.package_spaced_name is None:
