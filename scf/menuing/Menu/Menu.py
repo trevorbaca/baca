@@ -110,7 +110,7 @@ class Menu(MenuObject):
     def conditionally_display_menu(self):
         self.conditionally_clear_terminal()
         self.make_menu_lines()
-        self.conditionally_display_lines(self.menu_lines)
+        self.conditionally_display_lines(self.menu_lines, capitalize_first_character=False)
         user_response = self.handle_raw_input_with_default('SCF', default=self.prompt_default)
         user_input = self.split_multipart_user_response(user_response)
         directive = self.change_user_input_to_directive(user_input)

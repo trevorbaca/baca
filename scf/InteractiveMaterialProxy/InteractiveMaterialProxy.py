@@ -40,7 +40,7 @@ class InteractiveMaterialProxy(MaterialProxy):
     def create(self, package_importable_name):
         self.print_not_implemented()
         line = 'Interactive material package {} created.\n'.format(package_importable_name)
-        self.conditionally_display_cap_lines([line])
+        self.conditionally_display_lines([line])
 
     def create_interactively(self):
         while True:
@@ -170,7 +170,7 @@ class InteractiveMaterialProxy(MaterialProxy):
         material_directory = self.write_material_to_disk(user_input_wrapper, material, lilypond_file)
         lines.append('')
         lines.append('material saved to {}.\n'.format(material_directory))
-        self.conditionally_display_cap_lines(lines)
+        self.conditionally_display_lines(lines)
         self.proceed()
         return True
 
@@ -195,7 +195,7 @@ class InteractiveMaterialProxy(MaterialProxy):
                 self.name_material()
                 lines.append('')
             lines.append('Package short name will be {}.\n'.format(self.material_package_short_name))
-            self.conditionally_display_cap_lines(lines)
+            self.conditionally_display_lines(lines)
             if self.confirm():
                 break
 

@@ -96,7 +96,7 @@ class PerformerEditor(InteractiveEditor):
             return
         if self.target.instrument_count < instrument_number:
             message = 'there is no instrument number {}'.format(instrument_number)
-            self.conditionally_display_cap_lines([message, ''])
+            self.conditionally_display_lines([message, ''])
             self.proceed()
             return
         instrument_index = instrument_number - 1

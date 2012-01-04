@@ -95,10 +95,7 @@ class SCFObject(object):
         if self.session.is_displayable:
             iotools.clear_terminal()
 
-    def conditionally_display_cap_lines(self, lines):
-        self.conditionally_display_lines(lines, capitalize_first_character=True)
-        
-    def conditionally_display_lines(self, lines, capitalize_first_character=False):
+    def conditionally_display_lines(self, lines, capitalize_first_character=True):
         assert isinstance(lines, list)
         if not self.session.hide_next_redraw:
             if capitalize_first_character:
@@ -113,7 +110,7 @@ class SCFObject(object):
     def confirm(self):
         response = self.handle_raw_input('ok?', include_chevron=False)
         if not response.lower() == 'y':
-            self.conditionally_display_cap_lines([''])
+            self.conditionally_display_lines([''])
             return False
         return True
 
@@ -257,7 +254,7 @@ class SCFObject(object):
         lines = []
         lines.append('not yet implemented.')
         lines.append('')
-        self.conditionally_display_cap_lines(lines)
+        self.conditionally_display_lines(lines)
         self.proceed()
         return True, None
 

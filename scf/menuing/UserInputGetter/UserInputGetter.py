@@ -248,7 +248,7 @@ class UserInputGetter(MenuObject):
         else:
             lines.append('help string not available.')
         lines.append('')
-        self.conditionally_display_cap_lines(lines)
+        self.conditionally_display_lines(lines)
 
     def store_value(self, user_response):
         from baca.scf.menuing.MenuSection import MenuSection
@@ -279,7 +279,7 @@ class UserInputGetter(MenuObject):
                                 lines = []
                                 lines.append(self.helps[self.prompt_index])
                                 lines.append('')
-                                self.conditionally_display_cap_lines(lines)
+                                self.conditionally_display_lines(lines)
                             return
             else:
                 try:
@@ -297,7 +297,7 @@ class UserInputGetter(MenuObject):
                     lines = []
                     lines.append(self.helps[self.prompt_index])
                     lines.append('')
-                    self.conditionally_display_cap_lines(lines)
+                    self.conditionally_display_lines(lines)
         else:
             self.values.append(value)
             self.prompt_index = self.prompt_index + 1
