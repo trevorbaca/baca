@@ -85,6 +85,10 @@ class ScoreProxy(PackageProxy):
         return self._material_wrangler
 
     @property
+    def materials_package_importable_name(self):
+        return '.'.join([self.package_importable_name, 'mus', 'materials'])
+
+    @property
     def mus_proxy(self):
         return self._mus_proxy
 

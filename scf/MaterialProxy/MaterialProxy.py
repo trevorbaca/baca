@@ -11,7 +11,7 @@ class MaterialProxy(PackageProxy):
     def __init__(self, package_importable_name=None, session=None):
         PackageProxy.__init__(self, package_importable_name, session=session)
 
-    ### PUBLIC ATTRIBUTES ###
+    ### READ-ONLY PUBLIC ATTRIBUTES ###
 
     @property
     def breadcrumb(self):
@@ -163,19 +163,6 @@ class MaterialProxy(PackageProxy):
         if self.has_material_underscored_name:
             return self.material_underscored_name.replace('_', ' ')
 
-    @apply
-    def material_underscored_name():
-        def fget(self):
-            #return self._material_underscored_name
-            return self.package_short_name
-        def fset(self, material_underscored_name):
-            assert isinstance(material_underscored_name, (str, type(None)))
-            if isinstance(material_underscored_name, str):
-                assert iotools.is_underscore_delimited_lowercase_string(material_underscored_name)
-            #self._material_underscored_name = material_underscored_name
-            self.package_short_name = material_underscored_name
-        return property(**locals())
-
     @property
     def materials_directory_name(self):
         if self.score is None:
@@ -235,6 +222,21 @@ class MaterialProxy(PackageProxy):
     def visualization_pdf_file_name(self):
         if self.directory_name is not None:
             return os.path.join(self.directory_name, 'visualization.pdf')
+
+    ### READ / WRITE PUBLIC ATTRIBUTES ##
+
+    @apply
+    def material_underscored_name():
+        def fget(self):
+            #return self._material_underscored_name
+            return self.package_short_name
+        def fset(self, material_underscored_name):
+            assert isinstance(material_underscored_name, (str, type(None)))
+            if isinstance(material_underscored_name, str):
+                assert iotools.is_underscore_delimited_lowercase_string(material_underscored_name)
+            #self._material_underscored_name = material_underscored_name
+            self.package_short_name = material_underscored_name
+        return property(**locals())
 
     ### PUBLIC METHODS ###
 
@@ -400,7 +402,7 @@ class MaterialProxy(PackageProxy):
             self.edit_input_file()
             self.run_abjad_on_input_file()
         elif result == 'idp':
-            self.show_input_data()
+            self.print_input_data_to_terminal()
         elif result == 'idw':
             self.write_input_data_to_output_file(is_forced=True)
         elif result == 'k':
@@ -417,7 +419,7 @@ class MaterialProxy(PackageProxy):
         elif result == 'ode':
             self.edit_output_file()
         elif result == 'odp':
-            self.show_output_data()
+            self.print_output_data_to_terminal()
         elif result == 'p':
             self.manage_pdf()
         elif result == 'pw':
@@ -462,7 +464,7 @@ class MaterialProxy(PackageProxy):
         # TODO: should output section only appear when output exists?
         section = menu.make_new_section()
         section.append(('ode', 'output data - edit'))
-        section.append(('odp', 'output data - print data to terminal'))
+        section.append(('odp', 'output data - print to terminal'))
         if self.has_visualizer:
             section = menu.make_new_section()
             section.append(('v', 'visualization code - edit'))
@@ -572,6 +574,20 @@ class MaterialProxy(PackageProxy):
             material_underscored_name = '{}_{}'.format(self.score_package_short_name, material_underscored_name)
         return material_underscored_name
 
+    def print_input_data_to_terminal(self):
+        lines = []
+        lines.append(repr(self.import_material_from_input_file()))
+        lines.append('')
+        self.conditionally_display_lines(lines)
+        self.session.hide_next_redraw = True
+
+    def print_output_data_to_terminal(self):
+        lines = []
+        lines.append(repr(self.import_material_from_output_file()))
+        lines.append('')
+        self.conditionally_display_lines(lines)
+        self.session.hide_next_redraw = True
+
     def regenerate_everything(self, is_forced=False):
         is_changed = self.write_input_data_to_output_file(is_forced=is_forced)
         is_changed = self.create_ly_and_pdf_from_visualizer(is_forced=(is_changed or is_forced))
@@ -658,20 +674,6 @@ class MaterialProxy(PackageProxy):
     def run_abjad_on_visualizer(self):
         os.system('abjad {}'.format(self.visualizer_file_name))
         self.conditionally_display_lines([''])
-
-    def show_input_data(self):
-        lines = []
-        lines.append(repr(self.import_material_from_input_file()))
-        lines.append('')
-        self.conditionally_display_lines(lines)
-        self.session.hide_next_redraw = True
-
-    def show_output_data(self):
-        lines = []
-        lines.append(repr(self.import_material_from_output_file()))
-        lines.append('')
-        self.conditionally_display_lines(lines)
-        self.session.hide_next_redraw = True
 
     def summarize_material_package(self):
         lines = []
