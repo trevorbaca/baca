@@ -394,7 +394,7 @@ class MaterialProxy(PackageProxy):
 
     def handle_main_menu_result(self, result):
         assert isinstance(result, str)
-        if result == 'd':
+        if result == 'del':
             self.delete_material()
         elif result == 'ice':
             self.edit_input_file()
@@ -415,7 +415,7 @@ class MaterialProxy(PackageProxy):
         elif result == 'lwo':
             self.create_ly_from_visualizer(is_forced=True)
             self.edit_visualzation_ly()
-        elif result == 'n':
+        elif result == 'init':
             self.edit_initializer()
         elif result == 'ode':
             self.edit_output_file()
@@ -428,9 +428,9 @@ class MaterialProxy(PackageProxy):
         elif result == 'pwo':
             self.create_pdf_from_visualizer(is_forced=True)
             self.open_visualization_pdf()
-        elif result == 'r':
+        elif result == 'ren':
             self.rename_material()
-        elif result == 's':
+        elif result == 'sum':
             self.summarize_material_package()
         elif result == 't':
             self.manage_tags()
@@ -438,9 +438,9 @@ class MaterialProxy(PackageProxy):
             self.conditionally_edit_visualizer()
         elif result == 'y':
             self.edit_stylesheet()
-        elif result == 'z':
+        elif result == 'reg':
             self.regenerate_everything(is_forced=True)
-        elif result == 'zo':
+        elif result == 'rgo':
             self.regenerate_everything(is_forced=True)
             self.open_visualzation_pdf()
         else:
@@ -484,12 +484,13 @@ class MaterialProxy(PackageProxy):
             section.append(('pw', 'recreate pdf from visualizer'))
             section.append(('pwo', 'recreate pdf from visualizer & open pdf'))
         section = menu.make_new_section()
-        section.append(('n', 'edit initializer'))
-        section.append(('d', 'delete material'))
-        section.append(('r', 'rename material'))
-        section.append(('s', 'summarize material'))
+        section.append(('init', 'edit initializer'))
+        section.append(('del', 'delete material'))
+        section.append(('ren', 'rename material'))
+        section.append(('sum', 'summarize material'))
         #section.append(('t', 'tags - show'))
-        section.append(('z', 'regenerate material'))
+        section.append(('reg', 'regenerate material'))
+        section.append(('rgo', 'regenerate material & open pdf'))
         return menu
 
     def run(self, user_input=None):

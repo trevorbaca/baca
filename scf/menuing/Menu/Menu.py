@@ -177,7 +177,7 @@ class Menu(MenuObject):
             result = self.conditionally_display_menu()
             if self.session.is_complete:
                 break
-            elif result == 'redraw':
+            elif result == 'r':
                 should_clear_terminal, hide_current_run = True, False
             else:
                 break
