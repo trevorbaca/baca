@@ -272,7 +272,7 @@ class MaterialProxy(PackageProxy):
         if is_forced or not self.lilypond_file_format_is_equal_to_visualizer_ly(lilypond_file):
             iotools.write_expr_to_visualization_ly(lilypond_file, self.visualization_ly_file_name)
             iotools.write_expr_to_visualization_pdf(lilypond_file, self.visualization_pdf_file_name)
-            lines.append('output LilyPond file and PDF written to disk.')
+            lines.append('LilyPond file and PDF written to disk.')
         else:
             lines.append('LilyPond file is the same. (LilyPond file and PDF preserved.)')
         lines.append('')
@@ -285,7 +285,7 @@ class MaterialProxy(PackageProxy):
         lilypond_file = self.import_score_definition_from_visualizer()
         if is_forced or not self.lilypond_file_format_is_equal_to_visualizer_ly(lilypond_file):
             iotools.write_expr_to_ly(lilypond_file, self.visualization_ly_file_name, print_status=False)
-            lines.append('output LilyPond file written to disk.')
+            lines.append('LilyPond file written to disk.')
         else:
             lines.append('LilyPond file is the same. (LilyPond file preserved.)')
         lines.append('')
@@ -297,11 +297,12 @@ class MaterialProxy(PackageProxy):
         lines = []
         lilypond_file = self.import_score_definition_from_visualizer()
         if is_forced or not self.lilypond_file_format_is_equal_to_visualizer_ly(lilypond_file):
-            iotools.write_expr_to_visualzation_pdf(lilypond_file, self.visualization_pdf_file_name)
-            lines.append('output PDF written to disk.')
+            iotools.write_expr_to_pdf(lilypond_file, self.visualization_pdf_file_name, print_status=False)
+            lines.append('PDF written to disk.')
         else:
             lines.append('LilyPond file is the same. (PDF preserved.)')
         lines.append('')
+        self.conditionally_display_lines(lines)
         if prompt_proceed:
             self.proceed()
 
@@ -737,7 +738,7 @@ class MaterialProxy(PackageProxy):
         output_file.close()
         self.add_material_to_materials_initializer()
         #line = "material defined in 'input.py' written to 'output.py'."
-        line = 'output data written to disk.'
+        line = 'data written to disk.'
         self.conditionally_display_lines([line, ''])
         if prompt_proceed:
             self.proceed()

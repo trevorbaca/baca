@@ -2,7 +2,7 @@ import baca
 
 
 def test_MaterialProxy_run_01():
-    '''Quit, back, studio, score & junk all work.
+    '''Global materials: quit, back, studio, score & junk all work.
     '''
 
     studio = baca.scf.Studio()
@@ -24,9 +24,39 @@ def test_MaterialProxy_run_01():
 
 
 def test_MaterialProxy_run_02():
-    '''Breadcrumbs work.
+    '''Global materials: breadcrumbs work.
     '''
 
     studio = baca.scf.Studio()
     studio.run(user_input='m sargasso q')
     assert studio.transcript[-2][0] == 'Studio - materials - sargasso multipliers'
+
+
+def test_MaterialProxy_run_03():
+    '''Score materials: quit, back, studio, score & junk all work.
+    '''
+
+    studio = baca.scf.Studio()
+    studio.run(user_input='all las m 2 q')
+    assert studio.ts == (10,)
+
+    studio.run(user_input='all las m 2 b q')
+    assert studio.ts == (12, (6, 10))
+
+    studio.run(user_input='all las m 2 studio q')
+    assert studio.ts == (12, (2, 10))
+
+    studio.run(user_input='all las m 2 score q')
+    assert studio.ts == (12, (4, 10))
+
+    studio.run(user_input='all las m 2 foo q')
+    assert studio.ts == (12, (8, 10))
+
+
+def test_MaterialProxy_run_04():
+    '''Score materials: breadcrumbs work.
+    '''
+
+    studio = baca.scf.Studio()
+    studio.run(user_input='all las m 2 q')
+    assert studio.transcript[-2][0] == 'Las manos mágicas - materials - manos black pcs'
