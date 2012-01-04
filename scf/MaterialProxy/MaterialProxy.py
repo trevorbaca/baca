@@ -6,6 +6,7 @@ import subprocess
 import sys
 
 
+# POSSIBLE TODO: rename 'input.py' to 'definition.py' globally.
 class MaterialProxy(PackageProxy):
 
     def __init__(self, package_importable_name=None, session=None):
@@ -93,6 +94,12 @@ class MaterialProxy(PackageProxy):
     def input_package_importable_name(self):
         if self.package_importable_name is not None:
             return '{}.input'.format(self.package_importable_name)
+
+    @property
+    def is_changed(self):
+        input_material = self.import_material_from_input_file()
+        output_material = self.import_material_from_output_file()
+        return input_material != output_material
 
     @property
     def is_in_score(self):
@@ -303,8 +310,10 @@ class MaterialProxy(PackageProxy):
         self.remove_material_from_materials_initializer()
         PackageProxy.delete_package(self)
 
-    def edit_input_file(self):
+    def edit_input_file(self, execute_after_edit=False):
         os.system('vi + {}'.format(self.input_file_name))
+        if execute_after_edit:
+            self.run_abjad_on_input_file()
 
     def edit_visualization_ly(self):
         os.system('vi {}'.format(self.visualization_ly_file_name))
@@ -396,16 +405,14 @@ class MaterialProxy(PackageProxy):
         assert isinstance(result, str)
         if result == 'del':
             self.delete_material()
-        elif result == 'ice':
+        elif result == 'mde':
             self.edit_input_file()
-        elif result == 'icej':
-            self.edit_input_file()
+        elif result == 'mdx':
             self.run_abjad_on_input_file()
-        elif result == 'idp':
-            self.print_input_data_to_terminal()
-        elif result == 'idw':
-            self.write_input_data_to_output_file(is_forced=True)
-            self.proceed()
+        elif result == 'mdex':
+            self.edit_input_file(execute_after_edit=True)
+        elif result == 'mdco':
+            self.write_input_data_to_output_file(is_forced=True, prompt_proceed=True)
         elif result == 'k':
             self.reload_user_input()
         elif result == 'l':
@@ -458,12 +465,10 @@ class MaterialProxy(PackageProxy):
         menu, section = self.make_new_menu(where=self.where())
         if self.is_interactive:
             section.append(('k', 'reload user input'))
-        section.append(('ice', 'input code - edit'))
-        section.append(('icej', 'input code - edit & run abjad'))
-        section.append(('idp', 'input data - print to terminal'))
-        section.append(('idw', 'input data - write to output file'))
-        # TODO: should output section only appear when output exists?
-        section = menu.make_new_section()
+        section.append(('mde', 'material definition - edit'))
+        section.append(('mdx', 'material definition - execute'))
+        section.append(('mdex', 'material definition - edit & execute'))
+        section.append(('mdco', 'material definition - cache output'))
         section.append(('ode', 'output data - edit'))
         section.append(('odp', 'output data - print to terminal'))
         if self.has_visualizer:
@@ -576,12 +581,12 @@ class MaterialProxy(PackageProxy):
             material_underscored_name = '{}_{}'.format(self.score_package_short_name, material_underscored_name)
         return material_underscored_name
 
-    def print_input_data_to_terminal(self):
-        lines = []
-        lines.append(repr(self.import_material_from_input_file()))
-        lines.append('')
-        self.conditionally_display_lines(lines)
-        self.session.hide_next_redraw = True
+#    def print_input_data_to_terminal(self):
+#        lines = []
+#        lines.append(repr(self.import_material_from_input_file()))
+#        lines.append('')
+#        self.conditionally_display_lines(lines)
+#        self.session.hide_next_redraw = True
 
     def print_output_data_to_terminal(self):
         lines = []
@@ -741,7 +746,11 @@ class MaterialProxy(PackageProxy):
     def unimport_visualization_module(self):
         self.remove_package_importable_name_from_sys_modules(self.visualization_package_importable_name)
 
-    def _write_input_data_to_output_file(self):
+    def write_input_data_to_output_file(self, is_forced=False, prompt_proceed=False):
+        if not self.is_changed and not is_forced:
+            line = 'input data equals output data. (Output data preserved.)'
+            self.conditionally_display_lines([line, ''])
+            return self.is_changed
         self.remove_material_from_materials_initializer()
         self.overwrite_output_file()
         output_file = file(self.output_file_name, 'w')
@@ -753,17 +762,11 @@ class MaterialProxy(PackageProxy):
         output_file.write(output_line)
         output_file.close()
         self.add_material_to_materials_initializer()
-        line = "material in 'input.py' written to 'output.py'."
+        line = "material defined in 'input.py' cached in 'output.py'."
         self.conditionally_display_lines([line, ''])
-
-    def write_input_data_to_output_file(self, is_forced=False):
-        is_changed = self.import_material_from_input_file() != self.import_material_from_output_file()
-        if is_changed or is_forced:
-            self._write_input_data_to_output_file()
-        else:
-            line = 'input data equals output data. (Output data preserved.)'
-            self.conditionally_display_lines([line])
-        return is_changed
+        if prompt_proceed:
+            self.proceed()
+        return self.is_changed
 
     def write_output_file_to_disk(self, material):
         output_file = file(os.path.join(self.material_package_directory, 'output.py'), 'w')
