@@ -6,7 +6,8 @@ import subprocess
 import sys
 
 
-# POSSIBLE TODO: rename 'input.py' to 'definition.py' globally.
+# POSSIBLE TODO: rename 'input.py' to 'material_definition.py' globally.
+# TODO: add 'list package directory' user command & inherit from PackageProxy, somehow
 class MaterialProxy(PackageProxy):
 
     def __init__(self, package_importable_name=None, session=None):
