@@ -5,7 +5,8 @@ def test_MaterialProxy_attributes_01():
     '''Unnamed material.
     '''
 
-    material_proxy = baca.scf.MaterialProxy.MaterialProxy()
+    #material_proxy = baca.scf.MaterialProxy.MaterialProxy()
+    material_proxy = baca.scf.MaterialProxy()
     assert not material_proxy.has_input_data
     assert not material_proxy.has_input_file
     assert not material_proxy.has_output_data

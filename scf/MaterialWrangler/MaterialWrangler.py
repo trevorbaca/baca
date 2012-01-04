@@ -15,11 +15,13 @@ class MaterialWrangler(PackageWrangler, PackageProxy):
 
     ### PUBLIC ATTRIBUTES ###
 
+    # TODO: remove
     @property
     def InteractiveMaterialProxy(self):
         import baca
         return baca.scf.InteractiveMaterialProxy
 
+    # TODO: remove
     @property
     def StaticMaterialProxy(self):
         import baca
@@ -83,12 +85,14 @@ class MaterialWrangler(PackageWrangler, PackageProxy):
         section.append(('s', 'create static material'))
         return menu
 
+    # TODO: remove the need to strip these indicators
     def make_material_proxy(self, material_underscored_name):
-        score_package_importable_name = 'baca.materials'
-        package_importable_name = []
-        package_importable_name.append(score_package_importable_name)
-        package_importable_name.append(material_underscored_name.strip(' (@)'))
-        package_importable_name = '.'.join(package_importable_name)
+        #score_package_importable_name = 'baca.materials'
+        score_package_importable_name = self.package_importable_name
+        package_importable_name_parts = []
+        package_importable_name_parts.append(score_package_importable_name)
+        package_importable_name_parts.append(material_underscored_name.strip(' (@)'))
+        package_importable_name = '.'.join(package_importable_name_parts)
         if material_underscored_name.endswith('(@)'):
             material_proxy = self.StaticMaterialProxy(package_importable_name, session=self.session)
         else:

@@ -9,6 +9,7 @@ from GlobalProxy import GlobalProxy
 from InteractiveMaterialProxy import InteractiveMaterialProxy
 from MakerProxy import MakerProxy
 from MakerWrangler import MakerWrangler
+from MaterialProxy import MaterialProxy
 from MaterialWrangler import MaterialWrangler
 from MusProxy import MusProxy
 from PackageProxy import PackageProxy

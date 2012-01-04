@@ -394,19 +394,19 @@ class MaterialProxy(PackageProxy):
         assert isinstance(result, str)
         if result == 'd':
             self.delete_material()
-        elif result == 'i':
+        elif result == 'ice':
             self.edit_input_file()
-        elif result == 'id':
-            self.show_input_data()
-        elif result == 'ij':
+        elif result == 'icej':
             self.edit_input_file()
             self.run_abjad_on_input_file()
-        elif result == 'iw':
+        elif result == 'idp':
+            self.show_input_data()
+        elif result == 'idw':
             self.write_input_data_to_output_file(is_forced=True)
         elif result == 'k':
             self.reload_user_input()
         elif result == 'l':
-            self.manage_ly()
+            self.edit_ly()
         elif result == 'lw':
             self.create_ly_from_visualizer(is_forced=True)
         elif result == 'lwo':
@@ -414,9 +414,9 @@ class MaterialProxy(PackageProxy):
             self.edit_visualzation_ly()
         elif result == 'n':
             self.edit_initializer()
-        elif result == 'o':
+        elif result == 'ode':
             self.edit_output_file()
-        elif result == 'od':
+        elif result == 'odp':
             self.show_output_data()
         elif result == 'p':
             self.manage_pdf()
@@ -432,7 +432,7 @@ class MaterialProxy(PackageProxy):
         elif result == 't':
             self.manage_tags()
         elif result == 'v':
-            self.manage_visualizer()
+            self.conditionally_edit_visualizer()
         elif result == 'y':
             self.edit_stylesheet()
         elif result == 'z':
@@ -455,27 +455,37 @@ class MaterialProxy(PackageProxy):
         menu, section = self.make_new_menu(where=self.where())
         if self.is_interactive:
             section.append(('k', 'reload user input'))
-        section.append(('i', 'input - edit'))
-        section.append(('id', 'input - show data'))
-        section.append(('ij', 'input - edit then run abjad'))
-        section.append(('iw', 'input - force write to output'))
+        section.append(('ice', 'input code - edit'))
+        section.append(('icej', 'input code - edit & run abjad'))
+        section.append(('idp', 'input data - print to terminal'))
+        section.append(('idw', 'input data - write to output file'))
+        # TODO: should output section only appear when output exists?
         section = menu.make_new_section()
-        section.append(('o', 'output'))
-        section.append(('od', 'output - show data'))
+        section.append(('ode', 'output data - edit'))
+        section.append(('odp', 'output data - print data to terminal'))
         if self.has_visualizer:
-            section.append(('v', 'visualizer'))
+            section = menu.make_new_section()
+            section.append(('v', 'visualization code - edit'))
+            section.append(('vj', 'visualization code - edit & run abjad'))
+            section.append(('vjj', 'visualization code - run abjad'))
         if self.has_visualization_ly:
-            section.append(('l', 'ly'))
+            section = menu.make_new_section()
+            section.append(('l', 'ly - edit'))
+            section.append(('lw', 'ly - recreate from visualizer'))
+            section.append(('lwo', 'recreate ly from visualizer & open ly'))
         if self.has_stylesheet:
-            section.append(('y', 'stylesheet'))
+            section.append(('y', 'edit stylesheet'))
         if self.has_visualization_pdf:
-            section.append(('p', 'pdf'))
-        section.append(('n', 'initializer - edit'))
+            section = menu.make_new_section()
+            section.append(('p', 'open pdf'))
+            section.append(('pw', 'recreate pdf from visualizer'))
+            section.append(('pwo', 'recreate pdf from visualizer & open pdf'))
         section = menu.make_new_section()
+        section.append(('n', 'edit initializer'))
         section.append(('d', 'delete material'))
         section.append(('r', 'rename material'))
         section.append(('s', 'summarize material'))
-        section.append(('t', 'tags - show'))
+        #section.append(('t', 'tags - show'))
         section.append(('z', 'regenerate material'))
         return menu
 
@@ -496,7 +506,7 @@ class MaterialProxy(PackageProxy):
             self.pop_breadcrumb()
         self.pop_breadcrumb()
 
-    def manage_ly(self, command_string):
+    def edit_ly(self):
         if self.has_visualization_ly:
             self.edit_visualization_ly()
         elif self.has_visualizer:
@@ -532,15 +542,9 @@ class MaterialProxy(PackageProxy):
             if self.query('create input file? '):
                 self.edit_input_file()
 
-    def manage_visualizer(self, command_string):
+    def conditionally_edit_visualizer(self):
         if self.has_visualizer:
-            if command_string == 'v':
-                self.edit_visualizer()
-            elif command_string == 'vj':
-                self.edit_visualizer()
-                self.run_abjad_on_visualizer()
-            elif command_string == 'vjj':
-                self.run_abjad_on_visualizer()
+            self.edit_visualizer()
         elif self.has_output_data:
             line = "data exists but visualizer doesn't.\n"
             self.conditionally_display_lines([line])
