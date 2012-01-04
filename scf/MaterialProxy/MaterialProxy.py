@@ -266,35 +266,44 @@ class MaterialProxy(PackageProxy):
         parent_package = PackageProxy(self.parent_package_importable_name)
         parent_package.add_line_to_initializer(import_statement)
 
-    def create_ly_and_pdf_from_visualizer(self, is_forced=False):
+    def create_ly_and_pdf_from_visualizer(self, is_forced=False, prompt_proceed=False):
         lines = []
         lilypond_file = self.import_score_definition_from_visualizer()
         if is_forced or not self.lilypond_file_format_is_equal_to_visualizer_ly(lilypond_file):
             iotools.write_expr_to_visualization_ly(lilypond_file, self.visualization_ly_file_name)
             iotools.write_expr_to_visualization_pdf(lilypond_file, self.visualization_pdf_file_name)
+            lines.append('output LilyPond file and PDF written to disk.')
         else:
             lines.append('LilyPond file is the same. (LilyPond file and PDF preserved.)')
         lines.append('')
         self.conditionally_display_lines(lines)
+        if prompt_proceed:
+            self.proceed()
         
-    def create_ly_from_visualizer(self, is_forced=False):
+    def create_ly_from_visualizer(self, is_forced=False, prompt_proceed=False):
         lines = []
         lilypond_file = self.import_score_definition_from_visualizer()
         if is_forced or not self.lilypond_file_format_is_equal_to_visualizer_ly(lilypond_file):
-            iotools.write_expr_to_ly(lilypond_file, self.visualization_ly_file_name)
+            iotools.write_expr_to_ly(lilypond_file, self.visualization_ly_file_name, print_status=False)
+            lines.append('output LilyPond file written to disk.')
         else:
             lines.append('LilyPond file is the same. (LilyPond file preserved.)')
         lines.append('')
         self.conditionally_display_lines(lines)
+        if prompt_proceed:
+            self.proceed()
 
-    def create_pdf_from_visualizer(self, is_forced=False):
+    def create_pdf_from_visualizer(self, is_forced=False, prompt_proceed=False):
         lines = []
         lilypond_file = self.import_score_definition_from_visualizer()
         if is_forced or not self.lilypond_file_format_is_equal_to_visualizer_ly(lilypond_file):
             iotools.write_expr_to_visualzation_pdf(lilypond_file, self.visualization_pdf_file_name)
+            lines.append('output PDF written to disk.')
         else:
             lines.append('LilyPond file is the same. (PDF preserved.)')
         lines.append('')
+        if prompt_proceed:
+            self.proceed()
 
     def create_visualizer(self):
         file_pointer = file(self.visualizer_file_name, 'w')
@@ -403,53 +412,40 @@ class MaterialProxy(PackageProxy):
 
     def handle_main_menu_result(self, result):
         assert isinstance(result, str)
-        if result == 'del':
-            self.delete_material()
+        if result == 'k':
+            self.reload_user_input()
         elif result == 'mde':
             self.edit_input_file()
         elif result == 'mdx':
             self.run_abjad_on_input_file()
-        elif result == 'mdex':
-            self.edit_input_file(execute_after_edit=True)
-        elif result == 'mdco':
+        elif result == 'sbe':
+            self.conditionally_edit_visualizer()
+        elif result == 'sbx':
+            self.run_abjad_on_visualizer()
+        elif result == 'sse':
+            self.edit_stylesheet()
+        elif result == 'dc':
             self.write_input_data_to_output_file(is_forced=True, prompt_proceed=True)
-        elif result == 'k':
-            self.reload_user_input()
-        elif result == 'l':
+        elif result == 'di':
+            self.edit_output_file()
+        elif result == 'lyc':
+            self.create_ly_from_visualizer(is_forced=True, prompt_proceed=True)
+        elif result == 'lyi':
             self.edit_ly()
-        elif result == 'lw':
-            self.create_ly_from_visualizer(is_forced=True)
-        elif result == 'lwo':
-            self.create_ly_from_visualizer(is_forced=True)
-            self.edit_visualzation_ly()
+        elif result == 'pdfc':
+            self.create_pdf_from_visualizer(is_forced=True, prompt_proceed=True)
+        elif result == 'pdfi':
+            self.open_visualization_pdf()
+        elif result == 'del':
+            self.delete_material()
         elif result == 'init':
             self.edit_initializer()
-        elif result == 'ode':
-            self.edit_output_file()
-        elif result == 'odp':
-            self.print_output_data_to_terminal()
-        elif result == 'p':
-            self.manage_pdf()
-        elif result == 'pw':
-            self.create_pdf_from_visualizer(is_forced=True)
-        elif result == 'pwo':
-            self.create_pdf_from_visualizer(is_forced=True)
-            self.open_visualization_pdf()
         elif result == 'ren':
             self.rename_material()
-        elif result == 'sum':
-            self.summarize_material_package()
-        elif result == 't':
-            self.manage_tags()
-        elif result == 'v':
-            self.conditionally_edit_visualizer()
-        elif result == 'y':
-            self.edit_stylesheet()
         elif result == 'reg':
             self.regenerate_everything(is_forced=True)
-        elif result == 'rgo':
-            self.regenerate_everything(is_forced=True)
-            self.open_visualzation_pdf()
+        elif result == 'sum':
+            self.summarize_material_package()
         else:
             raise ValueError
 
@@ -467,35 +463,29 @@ class MaterialProxy(PackageProxy):
             section.append(('k', 'reload user input'))
         section.append(('mde', 'material definition - edit'))
         section.append(('mdx', 'material definition - execute'))
-        section.append(('mdex', 'material definition - edit & execute'))
-        section.append(('mdco', 'material definition - cache output'))
-        section.append(('ode', 'output data - edit'))
-        section.append(('odp', 'output data - print to terminal'))
         if self.has_visualizer:
             section = menu.make_new_section()
-            section.append(('v', 'visualization code - edit'))
-            section.append(('vj', 'visualization code - edit & run abjad'))
-            section.append(('vjj', 'visualization code - run abjad'))
+            section.append(('sbe', 'score builder - edit'))
+            section.append(('sbx', 'score builder - execute'))
+        if self.has_stylesheet:
+            section.append(('sse', 'score stylesheet - edit'))
+        section = menu.make_new_section()
+        section.append(('dc', 'output data - recreate'))
+        section.append(('di', 'output data - inspect'))
         if self.has_visualization_ly:
             section = menu.make_new_section()
-            section.append(('l', 'ly - edit'))
-            section.append(('lw', 'ly - recreate from visualizer'))
-            section.append(('lwo', 'recreate ly from visualizer & open ly'))
-        if self.has_stylesheet:
-            section.append(('y', 'edit stylesheet'))
+            section.append(('lyc', 'output ly - recreate'))
+            section.append(('lyi', 'output ly - inspect'))
         if self.has_visualization_pdf:
             section = menu.make_new_section()
-            section.append(('p', 'open pdf'))
-            section.append(('pw', 'recreate pdf from visualizer'))
-            section.append(('pwo', 'recreate pdf from visualizer & open pdf'))
+            section.append(('pdfc', 'output pdf - recreate'))
+            section.append(('pdfi', 'output pdf - inspect'))
         section = menu.make_new_section()
-        section.append(('init', 'edit initializer'))
         section.append(('del', 'delete material'))
+        section.append(('init', 'edit initializer'))
+        section.append(('reg', 'regenerate material'))
         section.append(('ren', 'rename material'))
         section.append(('sum', 'summarize material'))
-        #section.append(('t', 'tags - show'))
-        section.append(('reg', 'regenerate material'))
-        section.append(('rgo', 'regenerate material & open pdf'))
         return menu
 
     def run(self, user_input=None):
@@ -533,25 +523,7 @@ class MaterialProxy(PackageProxy):
             if self.query('create input file? '):
                 self.edit_input_file()
 
-    def manage_pdf(self):
-        if self.has_visualization_pdf:
-            self.open_visualization_pdf()
-        elif self.has_visualizer:
-            if self.query('create PDF from visualizer? '):
-                self.create_pdf_from_visualizer()
-        elif self.has_output_data:
-            line =  "data exists but visualizer doesn't.\n"
-            self.conditionally_display_lines([line])
-            if self.query('create visualizer? '):
-                self.create_visualizer()
-        elif self.has_input_file:
-            if self.query('write material to disk? '):
-                self.write_input_data_to_output_file(is_forced=True)
-        else:
-            if self.query('create input file? '):
-                self.edit_input_file()
-
-    def conditionally_edit_visualizer(self):
+    def conditionally_edit_visualizer(self, execute_after_edit=False):
         if self.has_visualizer:
             self.edit_visualizer()
         elif self.has_output_data:
@@ -565,6 +537,8 @@ class MaterialProxy(PackageProxy):
         else:
             if self.query('create input file? '):
                 self.edit_input_file()
+        if execute_after_edit:
+            self.run_abjad_on_visualizer()
 
     def open_visualization_pdf(self):
         command = 'open {}'.format(self.visualization_pdf_file_name)
@@ -588,12 +562,12 @@ class MaterialProxy(PackageProxy):
 #        self.conditionally_display_lines(lines)
 #        self.session.hide_next_redraw = True
 
-    def print_output_data_to_terminal(self):
-        lines = []
-        lines.append(repr(self.import_material_from_output_file()))
-        lines.append('')
-        self.conditionally_display_lines(lines)
-        self.session.hide_next_redraw = True
+#    def print_output_data_to_terminal(self):
+#        lines = []
+#        lines.append(repr(self.import_material_from_output_file()))
+#        lines.append('')
+#        self.conditionally_display_lines(lines)
+#        self.session.hide_next_redraw = True
 
     def regenerate_everything(self, is_forced=False):
         is_changed = self.write_input_data_to_output_file(is_forced=is_forced)
@@ -686,17 +660,17 @@ class MaterialProxy(PackageProxy):
         lines = []
         found = []
         missing = []
-        artifact_name = 'input file'
+        artifact_name = 'material definition'
         if self.has_input_file:
             found.append(artifact_name)
         else:
             missing.append(artifact_name)
-        artifact_name = 'ly'
+        artifact_name = 'LilyPond file'
         if self.has_visualization_ly:
             found.append(artifact_name)
         else:
             missing.append(artifact_name)
-        artifact_name = 'pdf'
+        artifact_name = 'PDF'
         if self.has_visualization_pdf:
             found.append(artifact_name)
         else:
@@ -762,7 +736,8 @@ class MaterialProxy(PackageProxy):
         output_file.write(output_line)
         output_file.close()
         self.add_material_to_materials_initializer()
-        line = "material defined in 'input.py' cached in 'output.py'."
+        #line = "material defined in 'input.py' written to 'output.py'."
+        line = 'output data written to disk.'
         self.conditionally_display_lines([line, ''])
         if prompt_proceed:
             self.proceed()
