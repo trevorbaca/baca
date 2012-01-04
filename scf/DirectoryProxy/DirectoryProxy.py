@@ -64,20 +64,20 @@ class DirectoryProxy(SCFObject):
 
     def _remove_nonversioned_directory(self):
         line = '{} will be removed.\n'.format(self.directory_name)
-        self.conditionally_display_lines([line])
+        self.conditionally_display_cap_lines([line])
         response = self.handle_raw_input("type 'remove' to proceed")
         if response == 'remove':
             command = 'rm -rf {}'.format(self.directory_name)
             proc = subprocess.Popen(command, shell=True, stdout=subprocess.PIPE)
             first_line = proc.stdout.readline()
             line = 'Removed {}.\n'.format(self.directory_name)
-            self.conditionally_display_lines([line])
+            self.conditionally_display_cap_lines([line])
             return True
         return False
 
     def _remove_versioned_directory(self):
         line = '{} will be completely removed from the repository!\n'.format(self.directory_name)
-        self.conditionally_display_lines([line])
+        self.conditionally_display_cap_lines([line])
         response = self.handle_raw_input("type 'remove' to proceed")
         if response == 'remove':
             command = 'svn rm {}'.format(self.directory_name)
@@ -87,7 +87,7 @@ class DirectoryProxy(SCFObject):
             lines.append('Removed {}.\n'.format(self.directory_name))
             lines.append('(Subversion will cause empty package to remain visible until next commit.)')
             lines.append('')
-            self.conditionally_display_lines(lines)
+            self.conditionally_display_cap_lines(lines)
             return True
         return False
 
@@ -115,7 +115,7 @@ class DirectoryProxy(SCFObject):
         proc = subprocess.Popen('py.test {}'.format(self.directory_name), shell=True, stdout=subprocess.PIPE)
         lines = [line.strip() for line in proc.stdout.readlines()]
         if lines:
-            self.conditionally_display_lines(lines)
+            self.conditionally_display_cap_lines(lines)
         if prompt_proceed:
             self.proceed()
 
@@ -123,7 +123,7 @@ class DirectoryProxy(SCFObject):
         proc = subprocess.Popen('svn-add-all', shell=True, stdout=subprocess.PIPE)
         lines = [line.strip() for line in proc.stdout.readlines()]
         if lines:
-            self.conditionally_display_lines(lines)
+            self.conditionally_display_cap_lines(lines)
         if prompt_proceed:
             self.proceed()
  
@@ -140,26 +140,26 @@ class DirectoryProxy(SCFObject):
         command = 'svn commit -m "{}" {}'.format(commit_message, self.directory_name)
         proc = subprocess.Popen(command, shell=True, stdout=subprocess.PIPE)
         lines.extend([line.strip() for line in proc.stdout.readlines()])
-        self.conditionally_display_lines(lines)
+        self.conditionally_display_cap_lines(lines)
         if prompt_proceed:
             self.proceed()
 
     def svn_st(self, prompt_proceed=True):
         line = self.directory_name
-        self.conditionally_display_lines([line])
+        self.conditionally_display_cap_lines([line])
         command = 'svn st -u {}'.format(self.directory_name)
         proc = subprocess.Popen(command, shell=True, stdout=subprocess.PIPE)
         lines = [line.strip() for line in proc.stdout.readlines()]
-        self.conditionally_display_lines(lines)
+        self.conditionally_display_cap_lines(lines)
         if prompt_proceed:
             self.proceed()
 
     def svn_up(self, prompt_proceed=True):
         line = self.directory_name
-        self.conditionally_display_lines([line])
+        self.conditionally_display_cap_lines([line])
         command = 'svn up {}'.format(self.directory_name)
         proc = subprocess.Popen(command, shell=True, stdout=subprocess.PIPE)
         lines = [line.strip() for line in proc.stdout.readlines()]
-        self.conditionally_display_lines(lines)
+        self.conditionally_display_cap_lines(lines)
         if prompt_proceed:
             self.proceed()

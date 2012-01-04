@@ -189,7 +189,7 @@ class PackageProxy(DirectoryProxy):
             tag_name, tag_value = result
             self.add_tag(tag_name, tag_value)
             confirm_line = 'tag added.\n'
-            self.conditionally_display_lines([confirm_line])
+            self.conditionally_display_cap_lines([confirm_line])
         if self.session.user_input is None:
             self.proceed()
 
@@ -220,7 +220,7 @@ class PackageProxy(DirectoryProxy):
             tag_name = result
             self.delete_tag(tag_name)
             confirm_line = 'tag deleted.\n'
-            self.conditionally_display_lines([confirm_line])
+            self.conditionally_display_cap_lines([confirm_line])
         if self.session.user_input is None:
             self.proceed()
 

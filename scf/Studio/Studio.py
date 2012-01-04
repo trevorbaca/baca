@@ -255,7 +255,7 @@ class Studio(SCFObject):
             shell=True, stdout=subprocess.PIPE)
         lines = [line.strip() for line in proc.stdout.readlines()]
         if lines:
-            self.conditionally_display_lines(lines)
+            self.conditionally_display_lines(lines) # this one really needs not to capitalize
         if prompt_proceed:
             self.proceed()
 
