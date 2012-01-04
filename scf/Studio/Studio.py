@@ -189,6 +189,7 @@ class Studio(SCFObject):
             if run_main_menu:
                 menu = self.make_main_menu()
                 result = menu.run()
+                print 'ZZZ: {!r}'.format(result)
             else:
                 run_main_menu = True
             if self.session.is_complete:

@@ -417,13 +417,13 @@ class MaterialProxy(PackageProxy):
             section.append(('y', 'stylesheet'))
         if self.has_visualization_pdf:
             section.append(('p', 'pdf'))
-        section.append(('n', 'initializer'))
+        section.append(('n', 'initializer - edit'))
         section = menu.make_new_section()
-        section.append(('d', 'delete'))
-        section.append(('r', 'rename'))
-        section.append(('s', 'summarize'))
-        section.append(('t', 'tags'))
-        section.append(('z', 'regenerate'))
+        section.append(('d', 'delete material'))
+        section.append(('r', 'rename material'))
+        section.append(('s', 'summarize material'))
+        section.append(('t', 'tags - show'))
+        section.append(('z', 'regenerate material'))
         return menu
 
     def run(self, user_input=None):
@@ -450,39 +450,34 @@ class MaterialProxy(PackageProxy):
         elif result == 'i':
             self.edit_input_file()
         elif result == 'id':
-            # TODO: encapsulate
-            lines = []
-            lines.append(repr(self.import_material_from_input_file()))
-            lines.append('')
-            self.conditionally_display_lines(lines)
-            # this seems to work; leave in codebase and test pattern for a while
-            self.session.hide_next_redraw = True
+            self.show_input_data()
         elif result == 'ij':
             self.edit_input_file()
             self.run_abjad_on_input_file()
         elif result == 'iw':
-            # TODO: encapsulate
-            lines = []
             self.write_input_data_to_output_file(is_forced=True)
-            lines.append('')
-            self.conditionally_display_lines(lines)
         elif result == 'k':
             self.reload_user_input()
         elif result == 'l':
             self.manage_ly()
+        elif result == 'lw':
+            self.create_ly_from_visualizer(is_forced=True)
+        elif result == 'lwo':
+            self.create_ly_from_visualizer(is_forced=True)
+            self.edit_visualzation_ly()
         elif result == 'n':
             self.edit_initializer()
         elif result == 'o':
             self.edit_output_file()
         elif result == 'od':
-            # TODO: encapsulate
-            lines = []
-            lines.append(repr(self.import_material_from_output_file()))
-            lines.append('')
-            self.conditionally_display_lines(lines)
-            self.session.hide_next_redraw = True
+            self.show_output_data()
         elif result == 'p':
             self.manage_pdf()
+        elif result == 'pw':
+            self.create_pdf_from_visualizer(is_forced=True)
+        elif result == 'pwo':
+            self.create_pdf_from_visualizer(is_forced=True)
+            self.open_visualization_pdf()
         elif result == 'r':
             self.rename_material()
         elif result == 's':
@@ -494,95 +489,51 @@ class MaterialProxy(PackageProxy):
         elif result == 'y':
             self.edit_stylesheet()
         elif result == 'z':
-            self.manage_regeneration(result)
-
-    def manage_ly(self, command_string):
-        if command_string == 'l':
-            if self.has_visualization_ly:
-                self.edit_visualization_ly()
-            elif self.has_visualizer:
-                if self.query('create LilyPond file from visualizer? '):
-                    self.create_ly_from_visualizer()    
-            elif self.has_output_data:
-                line = "data exists but visualizer doesn't.\n"
-                self.conditionally_display_lines([line])
-                if self.query('create visualizer? '):
-                    self.create_visualizer()
-            elif self.has_input_file:
-                if self.query('write material to disk? '):
-                    self.write_input_data_to_output_file(is_forced=True)
-            else:
-                if self.query('create input file? '):
-                    self.edit_input_file()
-        elif command_string == 'lw':
-            self.create_ly_from_visualizer(is_forced=True)
-        elif command_string == 'lwo':
-            self.create_ly_from_visualizer(is_forced=True)
-            self.edit_visualzation_ly()
-        elif command_string == 'lh':
-            lines = []
-            lines.append('{}: open ly'.format('l'.rjust(self.help_item_width)))
-            lines.append('{}: write ly'.format('lw'.rjust(self.help_item_width)))
-            lines.append('{}: write ly and open'.format('lwo'.rjust(self.help_item_width)))
-            lines.append('')
-            self.conditionally_display_lines(lines)
-
-    def manage_pdf(self, command_string):
-        if command_string == 'p':
-            if self.has_visualization_pdf:
-                self.open_visualization_pdf()
-            elif self.has_visualizer:
-                if self.query('create PDF from visualizer? '):
-                    self.create_pdf_from_visualizer()
-            elif self.has_output_data:
-                line =  "data exists but visualizer doesn't.\n"
-                self.conditionally_display_lines([line])
-                if self.query('create visualizer? '):
-                    self.create_visualizer()
-            elif self.has_input_file:
-                if self.query('write material to disk? '):
-                    self.write_input_data_to_output_file(is_forced=True)
-            else:
-                if self.query('create input file? '):
-                    self.edit_input_file()
-        elif command_string == 'pw':
-            self.create_pdf_from_visualizer(is_forced=True)
-        elif command_string == 'pwo':
-            self.create_pdf_from_visualizer(is_forced=True)
-            self.open_visualization_pdf()
-        elif command_string == 'ph':
-            lines = []
-            lines.append('{}: open pdf'.format('p'.rjust(self.help_item_width)))
-            lines.append('{}: write pdf '.format('pw'.rjust(self.help_item_width)))
-            lines.append('{}: write pdf and open'.format('pwo'.rjust(self.help_item_width)))
-            lines.append('')
-            self.conditionally_display_lines(lines)
-
-    def manage_regeneration(self, command_string):
-        if command_string == 'z':
             self.regenerate_everything(is_forced=True)
-        elif command_string == 'zh':
-            lines = []
-            lines.append('{}: regenerate everything'.format('z'.rjust(self.help_item_width)))
-            lines.append('{}: regenerate everything and open pdf'.format('zo'.rjust(self.help_item_width)))
-            lines.append('')
-            self.conditionally_display_lines(lines)
-        elif command_string == 'zo':
+        elif result == 'zo':
             self.regenerate_everything(is_forced=True)
             self.open_visualzation_pdf()
+
+    def manage_ly(self, command_string):
+        if self.has_visualization_ly:
+            self.edit_visualization_ly()
+        elif self.has_visualizer:
+            if self.query('create LilyPond file from visualizer? '):
+                self.create_ly_from_visualizer()    
+        elif self.has_output_data:
+            line = "data exists but visualizer doesn't.\n"
+            self.conditionally_display_lines([line])
+            if self.query('create visualizer? '):
+                self.create_visualizer()
+        elif self.has_input_file:
+            if self.query('write material to disk? '):
+                self.write_input_data_to_output_file(is_forced=True)
+        else:
+            if self.query('create input file? '):
+                self.edit_input_file()
+
+    def manage_pdf(self):
+        if self.has_visualization_pdf:
+            self.open_visualization_pdf()
+        elif self.has_visualizer:
+            if self.query('create PDF from visualizer? '):
+                self.create_pdf_from_visualizer()
+        elif self.has_output_data:
+            line =  "data exists but visualizer doesn't.\n"
+            self.conditionally_display_lines([line])
+            if self.query('create visualizer? '):
+                self.create_visualizer()
+        elif self.has_input_file:
+            if self.query('write material to disk? '):
+                self.write_input_data_to_output_file(is_forced=True)
+        else:
+            if self.query('create input file? '):
+                self.edit_input_file()
 
     def manage_visualizer(self, command_string):
         if self.has_visualizer:
             if command_string == 'v':
                 self.edit_visualizer()
-            elif command_string == 'vh':
-                lines = []
-                lines.append('{}: edit visualizer'.format('v'.rjust(self.help_item_width)))
-                lines.append('{}: edit visualizer and run abjad on visualizer'.format(
-                    'vj'.rjust(self.help_item_width)))
-                lines.append('{}: run abjad on visualizer'.format('vjj'.rjust(self.help_item_width)))
-                lines.append('')
-                self.conditionally_display_lines(lines)
             elif command_string == 'vj':
                 self.edit_visualizer()
                 self.run_abjad_on_visualizer()
@@ -701,6 +652,20 @@ class MaterialProxy(PackageProxy):
     def run_abjad_on_visualizer(self):
         os.system('abjad {}'.format(self.visualizer_file_name))
         self.conditionally_display_lines([''])
+
+    def show_input_data(self):
+        lines = []
+        lines.append(repr(self.import_material_from_input_file()))
+        lines.append('')
+        self.conditionally_display_lines(lines)
+        self.session.hide_next_redraw = True
+
+    def show_output_data(self):
+        lines = []
+        lines.append(repr(self.import_material_from_output_file()))
+        lines.append('')
+        self.conditionally_display_lines(lines)
+        self.session.hide_next_redraw = True
 
     def summarize_material_package(self):
         lines = []

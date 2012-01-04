@@ -33,11 +33,13 @@ class ScoreWrangler(PackageWrangler):
     def get_package_proxy(self, package_importable_name):
         return self.ScoreProxy(package_importable_name, session=self.session)
 
-    def iterate_score_package_short_names(self, scores_to_show='active'):
+    def iterate_score_package_short_names(self, scores_to_show=None):
+        scores_to_show = scores_to_show or self.session.scores_to_show
         for score_proxy in self.iterate_score_proxies(scores_to_show=scores_to_show):
             yield score_proxy.package_short_name
 
-    def iterate_score_proxies(self, scores_to_show='active'):
+    def iterate_score_proxies(self, scores_to_show=None):
+        scores_to_show = scores_to_show or self.session.scores_to_show
         for score_proxy in self.iterate_package_proxies():
             is_mothballed = score_proxy.get_tag('is_mothballed')
             if scores_to_show == 'all':
@@ -47,7 +49,8 @@ class ScoreWrangler(PackageWrangler):
             elif scores_to_show == 'mothballed' and is_mothballed:
                 yield score_proxy
 
-    def iterate_score_titles_with_years(self, scores_to_show='active'):
+    def iterate_score_titles_with_years(self, scores_to_show=None):
+        scores_to_show = scores_to_show or self.session.scores_to_show
         for score_proxy in self.iterate_score_proxies(scores_to_show=scores_to_show):
             yield score_proxy.title_with_year
 
