@@ -8,6 +8,7 @@ import sys
 
 # POSSIBLE TODO: rename 'input.py' to 'material_definition.py' globally.
 # TODO: add 'list package directory' user command & inherit from PackageProxy, somehow
+# TODO: remove interactive and static material proxies
 class MaterialProxy(PackageProxy):
 
     def __init__(self, package_importable_name=None, session=None):

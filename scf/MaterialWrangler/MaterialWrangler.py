@@ -1,3 +1,5 @@
+from baca.scf.InteractiveMaterialProxy import InteractiveMaterialProxy
+from baca.scf.StaticMaterialProxy import StaticMaterialProxy
 from baca.scf.PackageProxy import PackageProxy
 from baca.scf.PackageWrangler import PackageWrangler
 import os
@@ -15,18 +17,6 @@ class MaterialWrangler(PackageWrangler, PackageProxy):
 
     ### PUBLIC ATTRIBUTES ###
 
-    # TODO: remove
-    @property
-    def InteractiveMaterialProxy(self):
-        import baca
-        return baca.scf.InteractiveMaterialProxy
-
-    # TODO: remove
-    @property
-    def StaticMaterialProxy(self):
-        import baca
-        return baca.scf.StaticMaterialProxy
-
     @property
     def breadcrumb(self):
         return 'materials'
@@ -43,20 +33,19 @@ class MaterialWrangler(PackageWrangler, PackageProxy):
     ### PUBLIC METHODS ###
 
     def create_interactive_material_package_interactively(self):
-        interactive_material_proxy = self.InteractiveMaterialPackage(package_importable_name)
+        interactive_material_proxy = InteractiveMaterialProxy(package_importable_name, session=self.session)
         interactive_material_proxy.create_interactively()
 
     def create_static_material_package_interactively(self):
-        static_material_package_proxy = self.StaticMaterialProxy()
+        static_material_package_proxy = StaticMaterialProxy(session=self.session)
         static_material_package_proxy.create_interactively()
 
     def get_package_proxy(self, package_importable_name):
-        import baca
-        package_proxy = baca.scf.PackageProxy(package_importable_name)
+        package_proxy = PackageProxy(package_importable_name, session=self.session)
         if package_proxy.has_tag('maker'):
-            return self.InteractiveMaterialProxy(package_importable_name)
+            return InteractiveMaterialProxy(package_importable_name, session=self.session)
         else:
-            return self.StaticMaterialProxy(package_importable_name)
+            return StaticMaterialProxy(package_importable_name, session=self.session)
 
     def handle_main_menu_result(self, result):
         if result == 'i':
@@ -94,9 +83,9 @@ class MaterialWrangler(PackageWrangler, PackageProxy):
         package_importable_name_parts.append(material_underscored_name.strip(' (@)'))
         package_importable_name = '.'.join(package_importable_name_parts)
         if material_underscored_name.endswith('(@)'):
-            material_proxy = self.StaticMaterialProxy(package_importable_name, session=self.session)
+            material_proxy = StaticMaterialProxy(package_importable_name, session=self.session)
         else:
-            material_proxy = self.InteractiveMaterialProxy(package_importable_name, session=self.session)
+            material_proxy = InteractiveMaterialProxy(package_importable_name, session=self.session)
         return material_proxy
 
     def run(self, user_input=None):
