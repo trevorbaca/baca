@@ -162,11 +162,7 @@ class MaterialProxy(PackageProxy):
 
     @property
     def material_package_short_name(self):
-        if self.score is None:  
-            return self.material_underscored_name
-        # TODO: remove score namespacing of score materials
-        else:
-            return '{}_{}'.format(self.score.package_short_name, self.material_underscored_name)
+        return self.material_underscored_name
 
     @property
     def material_spaced_name(self):

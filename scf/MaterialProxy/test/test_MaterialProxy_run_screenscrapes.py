@@ -9,7 +9,7 @@ def test_MaterialProxy_run_screenscrapes_01():
     studio.run(user_input='all las m 2 q')
     
     assert studio.transcript[-2] == \
-     ['Las manos m\xc3\xa1gicas - materials - manos black pcs',
+     ['Las manos m\xc3\xa1gicas - materials - black pcs',
       '',
       '     material definition - edit (mde)',
       '     material definition - execute (mdx)',
@@ -38,11 +38,11 @@ def test_MaterialProxy_run_screenscrapes_02():
     '''Score material run independently.
     '''
 
-    material_proxy = baca.scf.MaterialProxy('manos.mus.materials.manos_black_pcs')
+    material_proxy = baca.scf.MaterialProxy('manos.mus.materials.black_pcs')
     material_proxy.run('q')
 
     assert material_proxy.transcript[-2] == \
-     ['Manos black pcs',
+     ['Black pcs',
       '',
       '     material definition - edit (mde)',
       '     material definition - execute (mdx)',
