@@ -258,7 +258,12 @@ class SCFObject(object):
         self.proceed()
         return True, None
 
-    def proceed(self):
+    def proceed(self, lines=None):
+        lines = lines or []
+        assert isinstance(lines, (tuple, list))
+        if lines:
+            lines.append('')
+            self.conditionally_display_lines(lines)
         response = self.handle_raw_input('press return to continue.', include_chevron=False)
         self.conditionally_clear_terminal()
 

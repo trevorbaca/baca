@@ -50,11 +50,12 @@ class MaterialWrangler(PackageWrangler, PackageProxy):
         studio = baca.scf.Studio(session=self.session)
         menu = studio.make_score_selection_menu()
         menu.title = 'select {} location'.format(material_name)
-        result = menu.run()
+        result = menu.run(should_clear_terminal=False)
         if self.backtrack():
             return
         purview = result
-        print 'ZZZ: {!r} {!r}'.format(material_name, purview)
+        line = 'data gathered so far: {!r} and {!r}.'.format(material_name, purview)
+        self.proceed(lines=[line])
 
     def get_package_proxy(self, package_importable_name):
         package_proxy = PackageProxy(package_importable_name, session=self.session)

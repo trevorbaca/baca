@@ -168,9 +168,10 @@ class Menu(MenuObject):
             menu_lines = []
         return menu_lines
         
-    def run(self, user_input=None):
+    def run(self, should_clear_terminal=True, user_input=None):
         self.assign_user_input(user_input=user_input)
-        should_clear_terminal, hide_current_run = True, False
+        #should_clear_terminal, hide_current_run = True, False
+        should_clear_terminal, hide_current_run = should_clear_terminal, False
         while True:
             self.should_clear_terminal, self.hide_current_run = should_clear_terminal, hide_current_run
             should_clear_terminal, hide_current_run = False, True

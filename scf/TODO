@@ -1,5 +1,7 @@
 TODO
 
+0. Audit all calls to 'self.proceed()' for optional notification lines.
+
 1. Implement 'make new material: static' in studio.
 
 2. Implement 'make new material: static' in scores.
