@@ -1,9 +1,7 @@
 import baca
-#import py
-#py.test.skip('implementing now.')
 
 
-def test_Menu_optimized_run_01():
+def test_Menu_run_01():
     '''String token defaults.
     '''
 
@@ -72,7 +70,7 @@ def test_Menu_optimized_run_01():
     assert result is None
 
 
-def test_Menu_optimized_run_02():
+def test_Menu_run_02():
     '''Turning off keys does nothing to string tokens.
     '''
 
@@ -114,7 +112,7 @@ def test_Menu_optimized_run_02():
     assert result is None
 
 
-def test_Menu_optimized_run_03():
+def test_Menu_run_03():
     '''Hidding suppresses output.
     '''
 
@@ -149,7 +147,7 @@ def test_Menu_optimized_run_03():
     assert result is None
 
 
-def test_Menu_optimized_run_04():
+def test_Menu_run_04():
     '''Numbered string tokens.
     '''
 
@@ -191,7 +189,7 @@ def test_Menu_optimized_run_04():
     assert result is None
 
 
-def test_Menu_optimized_run_05():
+def test_Menu_run_05():
     '''Ranged string tokens.
     '''
 
@@ -234,7 +232,7 @@ def test_Menu_optimized_run_05():
     assert result == ['apple', 'cherry', 'banana']
 
 
-def test_Menu_optimized_run_06():
+def test_Menu_run_06():
     '''Default tuple tokens.
     '''
 
@@ -330,7 +328,7 @@ def test_Menu_optimized_run_06():
     assert result is None
 
 
-def test_Menu_optimized_run_07():
+def test_Menu_run_07():
     '''Tuple tokens with keys hidden from user.
     NB: User can not match on keys but key returned from menu to calling code.
     '''
@@ -427,7 +425,7 @@ def test_Menu_optimized_run_07():
     assert result is None
 
 
-def test_Menu_optimized_run_08():
+def test_Menu_run_08():
     '''Hidding suppresses output.
     '''
 
@@ -516,7 +514,7 @@ def test_Menu_optimized_run_08():
     assert result is None
 
 
-def test_Menu_optimized_run_09():
+def test_Menu_run_09():
     '''Tuple tokens with numbering turned on.
     '''
 
@@ -611,7 +609,7 @@ def test_Menu_optimized_run_09():
     assert result is None
 
 
-def test_Menu_optimized_run_10():
+def test_Menu_run_10():
     '''Ranged tuple tokens.
     '''
 

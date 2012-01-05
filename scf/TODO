@@ -33,3 +33,7 @@ TODO
 16. Change Instrument._default_performer_names to house (full, abbreviation) pairs.
 
 17. Use performer abbreviations to populate performer selection menu.
+
+18. Kill Trevor Bača class.
+
+19. Kill hardcoded 'baca' directory name.

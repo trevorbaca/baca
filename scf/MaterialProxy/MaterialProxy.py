@@ -89,11 +89,13 @@ class MaterialProxy(PackageProxy):
     @property
     def input_file_name(self):
         if self.directory_name is not None:
-            return os.path.join(self.directory_name, 'input.py')
+            input_file_name = os.path.join(self.directory_name, 'input.py')
+            if os.path.exists(input_file_name):
+                return input_file_name
 
     @property
     def input_package_importable_name(self):
-        if self.package_importable_name is not None:
+        if self.input_file_name is not None:
             return '{}.input'.format(self.package_importable_name)
 
     @property
@@ -186,11 +188,13 @@ class MaterialProxy(PackageProxy):
     @property
     def output_file_name(self): 
         if self.directory_name is not None:
-            return os.path.join(self.directory_name, 'output.py')
+            output_file_name = os.path.join(self.directory_name, 'output.py')
+            if os.path.exists(output_file_name):
+                return output_file_name
 
     @property
     def output_package_importable_name(self):
-        if self.package_importable_name is not None:
+        if self.output_file_name is not None:
             return '{}.output'.format(self.package_importable_name)
 
     @property
@@ -202,7 +206,9 @@ class MaterialProxy(PackageProxy):
     @property
     def stylesheet_file_name(self):
         if self.directory_name is not None:
-            return os.path.join(self.directory_name, 'stylesheet.ly')
+            stylesheet_file_name = os.path.join(self.directory_name, 'stylesheet.ly')
+            if os.path.exists(stylesheet_file_name):
+                return stylesheet_file_name
 
     @property
     def user_input_wrapper(self):
@@ -214,22 +220,28 @@ class MaterialProxy(PackageProxy):
     @property
     def visualizer_file_name(self):
         if self.directory_name is not None:
-            return os.path.join(self.directory_name, 'visualization.py')
+            visualizer_file_name = os.path.join(self.directory_name, 'visualization.py')
+            if os.path.exists(visualizer_file_name):
+                return visualizer_file_name
 
     @property
     def visualization_ly_file_name(self):
         if self.directory_name is not None:
-            return os.path.join(self.directory_name, 'visualization.ly')
+            visualization_ly_file_name = os.path.join(self.directory_name, 'visualization.ly')
+            if os.path.exists(visualization_ly_file_name):
+                return visualization_ly_file_name
 
     @property
     def visualization_package_importable_name(self):
-        if self.package_importable_name is not None:
+        if self.visualizer_file_name is not None:
             return '{}.visualization'.format(self.package_importable_name)
 
     @property
     def visualization_pdf_file_name(self):
         if self.directory_name is not None:
-            return os.path.join(self.directory_name, 'visualization.pdf')
+            visualization_pdf_file_name = os.path.join(self.directory_name, 'visualization.pdf')
+            if os.path.exists(visualization_pdf_file_name):
+                return visualization_pdf_file_name
 
     ### READ / WRITE PUBLIC ATTRIBUTES ##
 

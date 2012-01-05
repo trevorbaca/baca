@@ -15,5 +15,5 @@ def test_ChunkProxy_01():
     assert chunk_proxy.source_file_name == '/Users/trevorbaca/Documents/other/baca/scf/ChunkProxy/ChunkProxy.py'
     assert chunk_proxy.spaced_class_name == 'chunk proxy'
 
-    assert not chunk_proxy.has_directory
+    assert chunk_proxy.has_directory
     assert not chunk_proxy.has_initializer

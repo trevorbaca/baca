@@ -6,14 +6,19 @@
 #from abjad.tools import spannertools
 from baca.scf.InteractiveMaterialProxy import InteractiveMaterialProxy
 from baca.scf.UserInputWrapper import UserInputWrapper
+from baca.scf.editors.InteractiveEditor import InteractiveEditor
 import baca
 import os
 
 
-class ZaggedPitchClassMaker(InteractiveMaterialProxy):
+# TODO: finish migration to interactive editor
+#class ZaggedPitchClassMaker(InteractiveMaterialProxy):
+class ZaggedPitchClassMaker(InteractiveEditor):
 
-    def __init__(self, **kwargs):
-        Maker.__init__(self, **kwargs)
+    #def __init__(self, **kwargs):
+    def __init__(self, session=None, target=None, **kwargs):
+        #Maker.__init__(self, **kwargs)
+        InteractiveEditor.__init__(self, session=session, target=target)
         self.stylesheet = os.path.join(os.path.dirname(__file__), 'stylesheet.ly')
         self._generic_output_name = 'zagged pitch-classes'
 

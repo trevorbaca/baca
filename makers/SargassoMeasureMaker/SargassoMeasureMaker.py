@@ -1,5 +1,3 @@
-from baca.scf.InteractiveMaterialProxy import InteractiveMaterialProxy
-from baca.scf.UserInputWrapper import UserInputWrapper
 from abjad.tools import durationtools
 from abjad.tools import leaftools
 from abjad.tools import lilypondfiletools
@@ -8,14 +6,21 @@ from abjad.tools import measuretools
 from abjad.tools import scoretools
 from abjad.tools import sequencetools
 from abjad.tools import stafftools
+from baca.scf.InteractiveMaterialProxy import InteractiveMaterialProxy
+from baca.scf.UserInputWrapper import UserInputWrapper
+from baca.scf.editors.InteractiveEditor import InteractiveEditor
 import fractions
 import os
 
 
-class SargassoMeasureMaker(InteractiveMaterialProxy):
+# TODO: finish migration to interactive editor
+#class SargassoMeasureMaker(InteractiveMaterialProxy):
+class SargassoMeasureMaker(InteractiveEditor):
 
-    def __init__(self, **kwargs):
-        InteractiveMaterialProxy.__init__(self, **kwargs)
+    #def __init__(self, **kwargs):
+    def __init__(self, session=None, target=None, **kwargs):
+        #InteractiveMaterialProxy.__init__(self, **kwargs)
+        InteractiveEditor.__init__(self, session=session, target=target)
         self.stylesheet = os.path.join(os.path.dirname(__file__), 'stylesheet.ly')
         self._generic_output_name = 'sargasso measures'
 

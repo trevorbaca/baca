@@ -7,8 +7,10 @@ import sys
 class DirectoryProxy(SCFObject):
 
     def __init__(self, directory_name=None, session=None):
+        #assert isinstance(directory_name, (str, type(None)))
+        assert isinstance(directory_name, (str))
+        assert os.path.exists(directory_name)
         SCFObject.__init__(self, session=session)
-        assert isinstance(directory_name, (str, type(None)))
         self._directory_name = directory_name
 
     ### OVERLOADS ###

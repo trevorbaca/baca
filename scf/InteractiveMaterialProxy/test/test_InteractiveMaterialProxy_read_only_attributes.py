@@ -1,7 +1,7 @@
 import baca
 
 
-def test_InteractiveMaterialProxy_01():
+def test_InteractiveMaterialProxy_read_only_attributes_01():
 
     imp = baca.scf.InteractiveMaterialProxy('baca.materials.test_measures_a')
     assert imp.has_input_data
@@ -27,7 +27,9 @@ def test_InteractiveMaterialProxy_01():
     assert imp.score_package_short_name == 'baca'
     assert imp.stylesheet_file_name == '/Users/trevorbaca/Documents/other/baca/materials/test_measures_a/stylesheet.ly'
     assert isinstance(imp.user_input_wrapper, baca.scf.UserInputWrapper)
-    assert imp.visualizer_file_name == '/Users/trevorbaca/Documents/other/baca/materials/test_measures_a/visualization.py'
+    #assert imp.visualizer_file_name == '/Users/trevorbaca/Documents/other/baca/materials/test_measures_a/visualization.py'
+    assert imp.visualizer_file_name is None
     assert imp.visualization_ly_file_name == '/Users/trevorbaca/Documents/other/baca/materials/test_measures_a/visualization.ly'
-    assert imp.visualization_package_importable_name == 'baca.materials.test_measures_a.visualization'
+    #assert imp.visualization_package_importable_name == 'baca.materials.test_measures_a.visualization'
+    assert imp.visualization_package_importable_name is None
     assert imp.visualization_pdf_file_name == '/Users/trevorbaca/Documents/other/baca/materials/test_measures_a/visualization.pdf'

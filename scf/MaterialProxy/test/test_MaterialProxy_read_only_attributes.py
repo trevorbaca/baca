@@ -1,12 +1,13 @@
 import baca
 
 
-def test_MaterialProxy_attributes_01():
-    '''Unnamed material.
+def test_MaterialProxy_read_only_attributes_01():
+    '''Stub material.
     '''
 
     #material_proxy = baca.scf.MaterialProxy.MaterialProxy()
-    material_proxy = baca.scf.MaterialProxy()
+    #material_proxy = baca.scf.MaterialProxy()
+    material_proxy = baca.scf.MaterialProxy('baca.materials.test_material_a')
     assert not material_proxy.has_input_data
     assert not material_proxy.has_input_file
     assert not material_proxy.has_output_data
@@ -20,14 +21,14 @@ def test_MaterialProxy_attributes_01():
     assert material_proxy.input_package_importable_name is None
     assert not material_proxy.is_in_score
     assert not material_proxy.is_interactive
-    assert not material_proxy.is_shared
+    assert material_proxy.is_shared
     assert material_proxy.is_static
-    assert material_proxy.material_spaced_name is None
-    assert material_proxy.material_underscored_name is None
-    assert material_proxy.materials_package_importable_name is None
+    assert material_proxy.material_spaced_name == 'test material a'
+    assert material_proxy.material_underscored_name == 'test_material_a'
+    assert material_proxy.materials_package_importable_name == 'baca.materials'
     assert material_proxy.output_file_name is None
     assert material_proxy.output_package_importable_name is None
-    assert material_proxy.score_package_short_name is None
+    assert material_proxy.score_package_short_name == 'baca'
     assert material_proxy.stylesheet_file_name is None
     assert material_proxy.user_input_wrapper is None
     assert material_proxy.visualizer_file_name is None
