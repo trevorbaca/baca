@@ -39,3 +39,5 @@ TODO
 18. Kill Trevor Bača class.
 
 19. Kill hardcoded 'baca' directory name.
+
+20. Change the names of all 'iterate_' functions to begin in 'list_'.

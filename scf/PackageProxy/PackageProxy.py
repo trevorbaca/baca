@@ -108,6 +108,7 @@ class PackageProxy(DirectoryProxy):
 
     ### PRIVATE METHODS ###
 
+    # TODO: make public
     def _package_importable_name_to_directory_name(self, package_importable_name):
         if package_importable_name is None:
             return
@@ -121,6 +122,7 @@ class PackageProxy(DirectoryProxy):
         directory = os.path.join(*directory_parts)
         return directory
 
+    # TODO: make public
     def _package_importable_name_to_purview(self, package_importable_name):
         import baca
         if package_importable_name is None:

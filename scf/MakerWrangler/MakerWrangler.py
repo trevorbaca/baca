@@ -6,7 +6,7 @@ from baca.scf.PackageWrangler import PackageWrangler
 import os
 
 
-# TODO: implement MakerProxy and implement MakerWrangler in terms of MakerProxy
+# TODO: implement MakerProxy and then refactor MakerWrangler in terms of MakerProxy
 class MakerWrangler(PackageWrangler, PackageProxy):
 
     def __init__(self, session=None):
@@ -19,17 +19,13 @@ class MakerWrangler(PackageWrangler, PackageProxy):
     def __repr__(self):
         return '{}()'.format(self.class_name)
 
-    ### PUBIC ATTRIBUTES ###
-
-    def Maker(self):
-        import baca
-        return baca.scf.Maker
+    ### READ-ONLY PUBIC ATTRIBUTES ###
 
     @property
     def breadcrumb(self):
         return 'makers'
 
-    ### PUBLIC METHODS ###
+    ### READ / WRITE PUBLIC ATTRIBUTES ###
 
     @apply
     def directory_name():
@@ -40,13 +36,12 @@ class MakerWrangler(PackageWrangler, PackageProxy):
             self._directory_name = directory_name
         return property(**locals())
 
-    def get_maker(self, maker_name):
-        exec('from baca.makers import {} as maker_class'.format(maker_name))
+    ### PUBLIC METHODS ###
+
+    def get_maker(self, maker_package_short_name):
+        exec('from baca.makers import {} as maker_class'.format(maker_package_short_name))
         maker = maker_class()
         return maker
-
-    def get_package_proxy(self, package_importable_name):
-        return self.Maker(package_importable_name)
 
     # replace with wrapped call to PackageWrangler.iterate_package_proxies()
     def iterate_makers(self):
@@ -144,6 +139,9 @@ class MakerWrangler(PackageWrangler, PackageProxy):
         lines.append('        return lilypond_file')
         class_file.write('\n'.join(lines))
         class_file.close()
+
+    def make_maker_selection_menu(self):
+        self.print_not_implemented()
 
     # TODO: change to boilerplate file stored in maker package
     def make_maker_stylesheet(self, maker_name):

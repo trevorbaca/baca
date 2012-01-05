@@ -8,6 +8,7 @@ import os
 
 class MaterialWrangler(PackageWrangler, PackageProxy):
 
+    # TODO: get rid of the idea that wranglers have a purview
     def __init__(self, purview_package_short_name, session=None):
         if purview_package_short_name == 'baca':
             package_importable_name = '{}.materials'.format(purview_package_short_name)
@@ -16,12 +17,20 @@ class MaterialWrangler(PackageWrangler, PackageProxy):
         PackageProxy.__init__(self, package_importable_name=package_importable_name, session=session)
         PackageWrangler.__init__(self, directory_name=self.directory_name, session=self.session)
 
-    ### PUBLIC ATTRIBUTES ###
+    ### READ-ONLY PUBLIC ATTRIBUTES ###
 
     @property
     def breadcrumb(self):
         return 'materials'
 
+    # TODO: write test
+    @property   
+    def global_materials_directory_name(self):
+        return os.path.join([self.global_directory_name, 'materials'])
+
+    ### READ / WRITE PUBLIC ATTRIBUTES ###
+
+    # TODO: remove this attribute entirely?
     @apply
     def directory_name():
         def fget(self):
@@ -33,13 +42,17 @@ class MaterialWrangler(PackageWrangler, PackageProxy):
 
     ### PUBLIC METHODS ###
 
-#    def create_interactive_material_package_interactively(self):
-#        interactive_material_proxy = InteractiveMaterialProxy(package_importable_name, session=self.session)
-#        interactive_material_proxy.create_interactively()
-#
-#    def create_static_material_package_interactively(self):
-#        static_material_package_proxy = StaticMaterialProxy(session=self.session)
-#        static_material_package_proxy.create_interactively()
+    def create_material_package(self, purview_name, material_package_short_name):
+        '''Package importable name on success.'''
+        materials_package_importable_name = \
+            self.purview_name_to_materials_package_importable_name(purview_name)
+        material_package_importable_name = '{}.{}'.format(
+            materials_package_importable_name, material_package_short_name)
+        directory_name = self._package_importable_name_to_directory_name(material_package_importable_name)
+        if os.path.exists(directory_name):
+            return False
+        #os.mkdir(directory_name)
+        return material_package_importable_name
 
     def create_material_package_interactively(self):
         import baca
@@ -48,17 +61,47 @@ class MaterialWrangler(PackageWrangler, PackageProxy):
         material_name = getter.run()
         if self.backtrack():
             return
-        directory_name = iotools.string_to_strict_directory_name(material_name)
         studio = baca.scf.Studio(session=self.session)
         menu = studio.make_score_selection_menu()
-        menu.sections[-1].menu_entry_tokens.append(('outside', 'store outside score')) 
-        menu.explicit_title = 'select {} location:'.format(material_name)
-        result = menu.run(should_clear_terminal=False)
+        menu.sections[-1].menu_entry_tokens.append(('baca', 'store elsewhere')) 
+        menu.explicit_title = 'select location for {!r}:'.format(material_name)
+        purview_name = menu.run(should_clear_terminal=False)
         if self.backtrack():
             return
-        purview = result
-        line = 'data gathered so far: {!r} and {!r}.'.format(material_name, purview)
+        material_directory_name = iotools.string_to_strict_directory_name(material_name)
+        result = self.create_material_package(purview_name, material_directory_name)
+        if result:
+            line = 'package {!r} created.'.format(result)
+        else:
+            line = 'package {!r} already exists.'.format(material_name)
         self.proceed(lines=[line])
+
+#    def foo(self):
+#        menu, section = self.make_new_menu()
+#        menu.explicit_title = 'how will you create {!r}?'.format(material_name)
+#        section.menu_entry_tokens.append(('h', 'by hand'))
+#        section.menu_entry_tokens.append(('e', 'with editor'))
+#        creation_mode = menu.run(should_clear_terminal=False)
+#        if self.backtrack():
+#            return
+#        if creation_mode == 'h':
+#            getter = self.make_new_getter()
+#            getter.append_boolean('will you build a score to visualize {!r}?'.format(material_name)) 
+#            build_score = getter.run()
+#            if self.backtrack():
+#                return
+#        elif creation_mode == 'e':
+#            studio = baca.scf.Studio(session=self.session)
+#            maker_wrangler = baca.scf.MakerWrangler(session=self.session)
+#            menu = maker_wrangler.make_maker_selection_menu()
+#            menu.explicit_title = 'selct editor with which to create {!r}:'.format(material_name)
+#            maker_package_short_name = menu.run()
+#            if self.backtrack():
+#                return
+#            maker = maker_wrangler.get_maker(maker_package_short_name)
+#            maker.run() # just guessing here; probably needs better consideration
+#        else:
+#            raise ValueError
 
     def get_package_proxy(self, package_importable_name):
         package_proxy = PackageProxy(package_importable_name, session=self.session)
@@ -101,6 +144,16 @@ class MaterialWrangler(PackageWrangler, PackageProxy):
         else:
             material_proxy = InteractiveMaterialProxy(package_importable_name, session=self.session)
         return material_proxy
+
+    # TODO: write tests
+    def purview_name_to_materials_package_importable_name(self, purview_name):
+        result = []
+        result.append(purview_name)
+        if not purview_name == 'baca':
+            result.append('mus')
+        result.append('materials')
+        result = '.'.join(result)
+        return result
 
     def run(self, user_input=None):
         self.assign_user_input(user_input=user_input)

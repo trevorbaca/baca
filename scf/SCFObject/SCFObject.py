@@ -21,7 +21,7 @@ class SCFObject(object):
     def __repr__(self):
         return '{}()'.format(self.class_name)
 
-    ### PUBLIC ATTRIBUTES ###
+    ### READ-ONLY PUBLIC ATTRIBUTES ###
 
     @property
     def breadcrumbs(self):
@@ -30,6 +30,11 @@ class SCFObject(object):
     @property
     def class_name(self):
         return type(self).__name__
+
+    # TODO: write test
+    @property
+    def global_directory_name(self):
+        return os.path.join(['Users', 'trevorbaca', 'Documents', 'other', 'baca'])
 
     @property
     def help_item_width(self):
@@ -45,18 +50,6 @@ class SCFObject(object):
         spaced_class_name = iotools.uppercamelcase_to_underscore_delimited_lowercase(self.class_name)
         spaced_class_name = spaced_class_name.replace('_', ' ')
         return spaced_class_name
-
-    @apply
-    def session():
-        def fget(self):
-            return self._session
-        def fset(self, session):
-            if session is None:
-                self._session = Session()
-            else:
-                assert isinstance(session, type(Session()))
-                self._session = session
-        return property(**locals())
 
     @property
     def source_file_name(self):
@@ -75,6 +68,20 @@ class SCFObject(object):
     @property
     def ts(self):
         return self.transcript_signature
+
+    ### READ / WRITE PUBLIC ATTRIBUTES ###
+
+    @apply
+    def session():
+        def fget(self):
+            return self._session
+        def fset(self, session):
+            if session is None:
+                self._session = Session()
+            else:
+                assert isinstance(session, type(Session()))
+                self._session = session
+        return property(**locals())
 
     ### PUBLIC METHODS ###
 
@@ -120,12 +127,10 @@ class SCFObject(object):
 
     def handle_raw_input(self, prompt, include_chevron=True):
         prompt = iotools.capitalize_string_start(prompt)
-        #print 'rrr!!!'
         if include_chevron:
             prompt = prompt + '> '
         else:
             prompt = prompt + ' '
-        #print 'FOO', self.session.is_displayable
         if self.session.is_displayable:
             user_response = raw_input(prompt)
             print ''
@@ -266,6 +271,16 @@ class SCFObject(object):
             self.conditionally_display_lines(lines)
         response = self.handle_raw_input('press return to continue.', include_chevron=False)
         self.conditionally_clear_terminal()
+
+    # TODO: write tests
+    def purview_name_to_directory_name(self, purview_name):
+        if purview_name == 'baca':
+            directory_name = self.global_directory_name
+        else:
+            directory_name = os.path.join(['Users', 'trevorbaca', 'Documents', 'scores', purview_name])
+        if not os.path.exists(directory_name):
+            raise ValueError
+        return directory_name
 
     def query(self, prompt):
         response = handle_raw_input(prompt)
