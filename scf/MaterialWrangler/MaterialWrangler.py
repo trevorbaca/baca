@@ -1,3 +1,4 @@
+from abjad.tools import iotools
 from baca.scf.InteractiveMaterialProxy import InteractiveMaterialProxy
 from baca.scf.PackageProxy import PackageProxy
 from baca.scf.PackageWrangler import PackageWrangler
@@ -47,9 +48,11 @@ class MaterialWrangler(PackageWrangler, PackageProxy):
         material_name = getter.run()
         if self.backtrack():
             return
+        directory_name = iotools.string_to_strict_directory_name(material_name)
         studio = baca.scf.Studio(session=self.session)
         menu = studio.make_score_selection_menu()
-        menu.title = 'select {} location'.format(material_name)
+        menu.sections[-1].menu_entry_tokens.append(('outside', 'store outside score')) 
+        menu.explicit_title = 'select {} location:'.format(material_name)
         result = menu.run(should_clear_terminal=False)
         if self.backtrack():
             return
