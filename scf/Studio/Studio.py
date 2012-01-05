@@ -87,7 +87,8 @@ class Studio(SCFObject):
         elif result == 'all':
             self.session.scores_to_show = 'all'
         elif result == 'k':
-            self.global_proxy.maker_wrangler.run()
+            #self.global_proxy.maker_wrangler.run()
+            self.print_not_implemented()
         elif result == 'm':
             breadcrumb = self.pop_breadcrumb()
             self.global_proxy.material_wrangler.run()
@@ -153,8 +154,9 @@ class Studio(SCFObject):
             scores_to_show=self.session.scores_to_show))
         section.menu_entry_tokens = zip(score_package_short_names, score_titles)
         section = menu.make_new_section()
-        section.append(('k', 'work with interactive material proxies'))
-        section.append(('m', 'work with Bača materials'))
+        #section.append(('k', 'work with interactive material proxies'))
+        section.append(('m', 'work with materials'))
+        section.append(('k', 'work with sketches'))
         section = menu.make_new_section(is_hidden=True)
         section.append(('svn', 'work with repository'))
         section.append(('active', 'show active scores only'))

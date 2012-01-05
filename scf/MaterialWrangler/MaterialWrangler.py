@@ -1,7 +1,7 @@
 from baca.scf.InteractiveMaterialProxy import InteractiveMaterialProxy
-from baca.scf.StaticMaterialProxy import StaticMaterialProxy
 from baca.scf.PackageProxy import PackageProxy
 from baca.scf.PackageWrangler import PackageWrangler
+from baca.scf.StaticMaterialProxy import StaticMaterialProxy
 import os
 
 
@@ -49,11 +49,9 @@ class MaterialWrangler(PackageWrangler, PackageProxy):
 
     def handle_main_menu_result(self, result):
         if result == 'i':
-            menu_title = menu.menu_title
-            self.material_wrangler.create_interactive_material_package_interactively()
+            self.create_interactive_material_package_interactively()
         elif result == 's':
-            menu_title = menu.menu_title
-            self.material_wrangler.create_static_material_interactively(menu_title=menu_title)
+            self.create_static_material_package_interactively()
         else:
             material_proxy = self.make_material_proxy(result)
             material_proxy.run()
@@ -70,8 +68,9 @@ class MaterialWrangler(PackageWrangler, PackageProxy):
         section.menu_entry_tokens = list(self.iterate_material_summaries())
         section.return_value_attr = 'body'
         section = menu.make_new_section()
-        section.append(('i', 'create interactive material'))
-        section.append(('s', 'create static material'))
+        #section.append(('i', 'create interactive material'))
+        #section.append(('s', 'create static material'))
+        section.append(('new', 'create new material'))
         return menu
 
     # TODO: remove the need to strip these indicators

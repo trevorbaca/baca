@@ -35,8 +35,8 @@ def test_Studio_02():
      '     8: Red Shift Hijinks (2005)',
      '     9: Sekka (2007)',
      '',
-     '     work with interactive material proxies (k)',
-     '     work with Bača materials (m)',
+     '     work with materials (m)',
+     '     work with sketches (k)',
      '']
 
 
@@ -87,8 +87,8 @@ def test_Studio_04():
      '     7: Territoires',
      '     8: Zeit (1998)',
      '',
-     '     work with interactive material proxies (k)',
-     '     work with Bača materials (m)',
+     '     work with materials (m)',
+     '     work with sketches (k)',
      '']
 
 
