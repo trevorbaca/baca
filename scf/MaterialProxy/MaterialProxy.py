@@ -447,8 +447,10 @@ class MaterialProxy(PackageProxy):
             self.create_pdf_from_visualizer(is_forced=True, prompt_proceed=True)
         elif result == 'pdfi':
             self.open_visualization_pdf()
+        # TODO: write tests
         elif result == 'del':
             self.delete_material()
+            self.session.is_backtracking_locally = True
         elif result == 'init':
             self.edit_initializer()
         elif result == 'ren':

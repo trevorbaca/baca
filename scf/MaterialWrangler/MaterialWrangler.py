@@ -42,8 +42,11 @@ class MaterialWrangler(PackageWrangler, PackageProxy):
 
     ### PUBLIC METHODS ###
 
+    # TODO: write tests
+    # TODO: change signature to material_package_importable_name
     def create_material_package(self, purview_name, material_package_short_name):
-        '''Package importable name on success.'''
+        '''Package importable name on success.
+        Change to just true on success.'''
         materials_package_importable_name = \
             self.purview_name_to_materials_package_importable_name(purview_name)
         material_package_importable_name = '{}.{}'.format(
@@ -51,9 +54,11 @@ class MaterialWrangler(PackageWrangler, PackageProxy):
         directory_name = self._package_importable_name_to_directory_name(material_package_importable_name)
         if os.path.exists(directory_name):
             return False
-        #os.mkdir(directory_name)
+        os.mkdir(directory_name)
+        self.write_initializer_to_package(material_package_importable_name)
         return material_package_importable_name
 
+    # TODO: write tests
     def create_material_package_interactively(self):
         import baca
         getter = self.make_new_getter(where=self.where())
