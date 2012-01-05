@@ -147,12 +147,13 @@ class Studio(SCFObject):
             yield material_proxy
 
     def make_main_menu(self):
-        menu, section = self.make_new_menu(where=self.where(), is_numbered=True, is_keyed=False)
-        score_titles = list(self.score_wrangler.iterate_score_titles_with_years(
-            scores_to_show=self.session.scores_to_show))
-        score_package_short_names = list(self.score_wrangler.iterate_score_package_short_names(
-            scores_to_show=self.session.scores_to_show))
-        section.menu_entry_tokens = zip(score_package_short_names, score_titles)
+#        menu, section = self.make_new_menu(where=self.where(), is_numbered=True, is_keyed=False)
+#        score_titles = list(self.score_wrangler.iterate_score_titles_with_years(
+#            scores_to_show=self.session.scores_to_show))
+#        score_package_short_names = list(self.score_wrangler.iterate_score_package_short_names(
+#            scores_to_show=self.session.scores_to_show))
+#        section.menu_entry_tokens = zip(score_package_short_names, score_titles)
+        menu = self.make_score_selection_menu()
         section = menu.make_new_section()
         #section.append(('k', 'work with interactive material proxies'))
         section.append(('m', 'work with materials'))
@@ -162,6 +163,15 @@ class Studio(SCFObject):
         section.append(('active', 'show active scores only'))
         section.append(('all', 'show all scores'))
         section.append(('mb', 'show mothballed scores only'))
+        return menu
+
+    def make_score_selection_menu(self):
+        menu, section = self.make_new_menu(where=self.where(), is_numbered=True, is_keyed=False)
+        score_titles = list(self.score_wrangler.iterate_score_titles_with_years(
+            scores_to_show=self.session.scores_to_show))
+        score_package_short_names = list(self.score_wrangler.iterate_score_package_short_names(
+            scores_to_show=self.session.scores_to_show))
+        section.menu_entry_tokens = zip(score_package_short_names, score_titles)
         return menu
 
     def make_svn_menu(self):

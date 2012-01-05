@@ -32,13 +32,29 @@ class MaterialWrangler(PackageWrangler, PackageProxy):
 
     ### PUBLIC METHODS ###
 
-    def create_interactive_material_package_interactively(self):
-        interactive_material_proxy = InteractiveMaterialProxy(package_importable_name, session=self.session)
-        interactive_material_proxy.create_interactively()
+#    def create_interactive_material_package_interactively(self):
+#        interactive_material_proxy = InteractiveMaterialProxy(package_importable_name, session=self.session)
+#        interactive_material_proxy.create_interactively()
+#
+#    def create_static_material_package_interactively(self):
+#        static_material_package_proxy = StaticMaterialProxy(session=self.session)
+#        static_material_package_proxy.create_interactively()
 
-    def create_static_material_package_interactively(self):
-        static_material_package_proxy = StaticMaterialProxy(session=self.session)
-        static_material_package_proxy.create_interactively()
+    def create_material_package_interactively(self):
+        import baca
+        getter = self.make_new_getter(where=self.where())
+        getter.append_string('material name')
+        material_name = getter.run()
+        if self.backtrack():
+            return
+        studio = baca.scf.Studio(session=self.session)
+        menu = studio.make_score_selection_menu()
+        menu.title = 'select {} location'.format(material_name)
+        result = menu.run()
+        if self.backtrack():
+            return
+        purview = result
+        print 'ZZZ: {!r} {!r}'.format(material_name, purview)
 
     def get_package_proxy(self, package_importable_name):
         package_proxy = PackageProxy(package_importable_name, session=self.session)
@@ -48,10 +64,8 @@ class MaterialWrangler(PackageWrangler, PackageProxy):
             return StaticMaterialProxy(package_importable_name, session=self.session)
 
     def handle_main_menu_result(self, result):
-        if result == 'i':
-            self.create_interactive_material_package_interactively()
-        elif result == 's':
-            self.create_static_material_package_interactively()
+        if result == 'new':
+            self.create_material_package_interactively()
         else:
             material_proxy = self.make_material_proxy(result)
             material_proxy.run()
@@ -68,14 +82,11 @@ class MaterialWrangler(PackageWrangler, PackageProxy):
         section.menu_entry_tokens = list(self.iterate_material_summaries())
         section.return_value_attr = 'body'
         section = menu.make_new_section()
-        #section.append(('i', 'create interactive material'))
-        #section.append(('s', 'create static material'))
-        section.append(('new', 'create new material'))
+        section.append(('new', 'make new material'))
         return menu
 
     # TODO: remove the need to strip these indicators
     def make_material_proxy(self, material_underscored_name):
-        #score_package_importable_name = 'baca.materials'
         score_package_importable_name = self.package_importable_name
         package_importable_name_parts = []
         package_importable_name_parts.append(score_package_importable_name)
