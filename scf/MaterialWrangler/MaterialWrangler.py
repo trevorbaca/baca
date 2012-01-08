@@ -122,11 +122,12 @@ class MaterialWrangler(PackageWrangler, PackageProxy):
             material_proxy = self.make_material_proxy(result)
             material_proxy.run()
         
+    # TODO: change name to self.list_material_package_short_names
     def iterate_material_summaries(self):
         for material_proxy in self.iterate_package_proxies():
             summary = material_proxy.package_short_name
-            if not material_proxy.has_tag('maker'):
-                summary = summary + ' (@)'
+            #if not material_proxy.has_tag('maker'):
+            #    summary = summary + ' (@)'
             yield summary
 
     def make_main_menu(self):
@@ -137,17 +138,18 @@ class MaterialWrangler(PackageWrangler, PackageProxy):
         section.append(('new', 'make new material'))
         return menu
 
-    # TODO: remove the need to strip these indicators
     def make_material_proxy(self, material_underscored_name):
         score_package_importable_name = self.package_importable_name
         package_importable_name_parts = []
         package_importable_name_parts.append(score_package_importable_name)
-        package_importable_name_parts.append(material_underscored_name.strip(' (@)'))
+        #package_importable_name_parts.append(material_underscored_name.strip(' (@)'))
+        package_importable_name_parts.append(material_underscored_name)
         package_importable_name = '.'.join(package_importable_name_parts)
-        if material_underscored_name.endswith('(@)'):
-            material_proxy = StaticMaterialProxy(package_importable_name, session=self.session)
-        else:
+        package_proxy = PackageProxy(package_importable_name, session=self.session)
+        if package_proxy.has_tag('maker'):
             material_proxy = InteractiveMaterialProxy(package_importable_name, session=self.session)
+        else:
+            material_proxy = StaticMaterialProxy(package_importable_name, session=self.session)
         return material_proxy
 
     # TODO: write tests

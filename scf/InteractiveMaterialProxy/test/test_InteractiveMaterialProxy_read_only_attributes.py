@@ -22,14 +22,17 @@ def test_InteractiveMaterialProxy_read_only_attributes_01():
     assert imp.material_spaced_name == 'test measures a'
     assert imp.material_underscored_name == 'test_measures_a'
     assert imp.materials_package_importable_name == 'baca.materials'
-    assert imp.output_file_name == '/Users/trevorbaca/Documents/other/baca/materials/test_measures_a/output.py'
+    assert imp.output_file_name == \
+        '/Users/trevorbaca/Documents/other/baca/materials/test_measures_a/output.py'
     assert imp.output_package_importable_name == 'baca.materials.test_measures_a.output'
     assert imp.score_package_short_name == 'baca'
-    assert imp.stylesheet_file_name == '/Users/trevorbaca/Documents/other/baca/materials/test_measures_a/stylesheet.ly'
+    assert imp.stylesheet_file_name == \
+        '/Users/trevorbaca/Documents/other/baca/materials/test_measures_a/stylesheet.ly'
     assert isinstance(imp.user_input_wrapper, baca.scf.UserInputWrapper)
-    #assert imp.visualizer_file_name == '/Users/trevorbaca/Documents/other/baca/materials/test_measures_a/visualization.py'
-    assert imp.visualizer_file_name is None
-    assert imp.visualization_ly_file_name == '/Users/trevorbaca/Documents/other/baca/materials/test_measures_a/visualization.ly'
-    #assert imp.visualization_package_importable_name == 'baca.materials.test_measures_a.visualization'
-    assert imp.visualization_package_importable_name is None
-    assert imp.visualization_pdf_file_name == '/Users/trevorbaca/Documents/other/baca/materials/test_measures_a/visualization.pdf'
+    assert imp.visualizer_file_name == \
+        '/Users/trevorbaca/Documents/other/baca/materials/test_measures_a/visualization.py'
+    assert imp.visualization_ly_file_name == \
+        '/Users/trevorbaca/Documents/other/baca/materials/test_measures_a/visualization.ly'
+    assert imp.visualization_package_importable_name == 'baca.materials.test_measures_a.visualization'
+    assert imp.visualization_pdf_file_name == \
+        '/Users/trevorbaca/Documents/other/baca/materials/test_measures_a/visualization.pdf'

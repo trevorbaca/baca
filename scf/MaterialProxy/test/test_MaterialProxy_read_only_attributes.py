@@ -17,8 +17,9 @@ def test_MaterialProxy_read_only_attributes_01():
     assert not material_proxy.has_visualization_ly
     assert not material_proxy.has_visualization_pdf
     assert not material_proxy.has_visualizer
-    assert material_proxy.input_file_name is None
-    assert material_proxy.input_package_importable_name is None
+    assert material_proxy.input_file_name == \
+        '/Users/trevorbaca/Documents/other/baca/materials/test_material_a/input.py'
+    assert material_proxy.input_package_importable_name == 'baca.materials.test_material_a.input'
     assert not material_proxy.is_in_score
     assert not material_proxy.is_interactive
     assert material_proxy.is_shared
@@ -26,12 +27,18 @@ def test_MaterialProxy_read_only_attributes_01():
     assert material_proxy.material_spaced_name == 'test material a'
     assert material_proxy.material_underscored_name == 'test_material_a'
     assert material_proxy.materials_package_importable_name == 'baca.materials'
-    assert material_proxy.output_file_name is None
-    assert material_proxy.output_package_importable_name is None
+    assert material_proxy.output_file_name == \
+        '/Users/trevorbaca/Documents/other/baca/materials/test_material_a/output.py'
+    assert material_proxy.output_package_importable_name == 'baca.materials.test_material_a.output'
     assert material_proxy.score_package_short_name == 'baca'
-    assert material_proxy.stylesheet_file_name is None
+    assert material_proxy.stylesheet_file_name == \
+        '/Users/trevorbaca/Documents/other/baca/materials/test_material_a/stylesheet.ly'
     assert material_proxy.user_input_wrapper is None
-    assert material_proxy.visualizer_file_name is None
-    assert material_proxy.visualization_ly_file_name is None
-    assert material_proxy.visualization_package_importable_name is None
-    assert material_proxy.visualization_pdf_file_name is None
+    assert material_proxy.visualizer_file_name == \
+        '/Users/trevorbaca/Documents/other/baca/materials/test_material_a/visualization.py'
+    assert material_proxy.visualization_ly_file_name == \
+        '/Users/trevorbaca/Documents/other/baca/materials/test_material_a/visualization.ly'
+    assert material_proxy.visualization_package_importable_name == \
+        'baca.materials.test_material_a.visualization'
+    assert material_proxy.visualization_pdf_file_name == \
+        '/Users/trevorbaca/Documents/other/baca/materials/test_material_a/visualization.pdf'

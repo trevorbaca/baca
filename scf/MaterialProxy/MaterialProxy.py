@@ -1,6 +1,7 @@
 from abjad.tools import iotools
 from abjad.tools import markuptools
 from baca.scf.PackageProxy import PackageProxy
+from baca.scf.StylesheetWrangler import StylesheetWrangler
 import os
 import subprocess
 import sys
@@ -91,7 +92,8 @@ class MaterialProxy(PackageProxy):
     def input_file_name(self):
         if self.directory_name is not None:
             input_file_name = os.path.join(self.directory_name, 'input.py')
-            if os.path.exists(input_file_name):
+            #if os.path.exists(input_file_name):
+            if True:
                 return input_file_name
 
     @property
@@ -186,7 +188,8 @@ class MaterialProxy(PackageProxy):
     def output_file_name(self): 
         if self.directory_name is not None:
             output_file_name = os.path.join(self.directory_name, 'output.py')
-            if os.path.exists(output_file_name):
+            #if os.path.exists(output_file_name):
+            if True:
                 return output_file_name
 
     @property
@@ -200,11 +203,22 @@ class MaterialProxy(PackageProxy):
             if self.package_importable_name.startswith('baca'):
                 return self.package_importable_name.split('.')[0]
 
+    # TODO: write test
+    @property
+    def stub_material_definition_file_name(self):
+        return os.path.join(self.assets_directory, 'stub_material_definition.py')
+
+    # TODO: write test
+    @property
+    def stub_score_builder_file_name(self):
+        return os.path.join(self.assets_directory, 'stub_score_builder.py')
+
     @property
     def stylesheet_file_name(self):
         if self.directory_name is not None:
             stylesheet_file_name = os.path.join(self.directory_name, 'stylesheet.ly')
-            if os.path.exists(stylesheet_file_name):
+            #if os.path.exists(stylesheet_file_name):
+            if True:
                 return stylesheet_file_name
 
     @property
@@ -218,14 +232,16 @@ class MaterialProxy(PackageProxy):
     def visualizer_file_name(self):
         if self.directory_name is not None:
             visualizer_file_name = os.path.join(self.directory_name, 'visualization.py')
-            if os.path.exists(visualizer_file_name):
+            #if os.path.exists(visualizer_file_name):
+            if True:
                 return visualizer_file_name
 
     @property
     def visualization_ly_file_name(self):
         if self.directory_name is not None:
             visualization_ly_file_name = os.path.join(self.directory_name, 'visualization.ly')
-            if os.path.exists(visualization_ly_file_name):
+            #if os.path.exists(visualization_ly_file_name):
+            if True:
                 return visualization_ly_file_name
 
     @property
@@ -237,7 +253,8 @@ class MaterialProxy(PackageProxy):
     def visualization_pdf_file_name(self):
         if self.directory_name is not None:
             visualization_pdf_file_name = os.path.join(self.directory_name, 'visualization.pdf')
-            if os.path.exists(visualization_pdf_file_name):
+            #if os.path.exists(visualization_pdf_file_name):
+            if True:
                 return visualization_pdf_file_name
 
     ### READ / WRITE PUBLIC ATTRIBUTES ##
@@ -256,20 +273,6 @@ class MaterialProxy(PackageProxy):
         return property(**locals())
 
     ### PUBLIC METHODS ###
-
-    # TODO: MaterialProxy
-    def make_material_package_directory(self):
-        try:
-            os.mkdir(self.material_package_directory)
-        except OSError:
-            pass
-
-    # TODO: MaterialProxy ... and extend PackageProxy
-    def make_tags_dictionary(self):
-        tags = {}
-        tags['creation_date'] = self.helpers.get_current_date()
-        tags['maker'] = self.class_name
-        return tags
 
     def add_material_to_materials_initializer(self):
         import_statement = 'from {} import {}\n'.format(self.material_underscored_name, self.material_underscored_name)
@@ -326,9 +329,24 @@ class MaterialProxy(PackageProxy):
         file_pointer.close()
         self.edit_visualizer()
 
-    def delete_material(self):
+    def delete_material_definition(self, prompt_proceed=False):
+        if self.has_input_file:
+            os.remove(self.input_file_name)
+            line = 'material definition deleted.'
+            if prompt_proceed:
+                self.proceed(lines=[line, ''])
+        
+    def delete_material_package(self):
         self.remove_material_from_materials_initializer()
         PackageProxy.delete_package(self)
+
+    def delete_output_file(self, prompt_proceed=False):
+        if self.has_output_file:
+            self.remove_material_from_materials_initializer()
+            os.remove(self.output_file_name)
+            line = 'output file deleted.'
+            if prompt_proceed:
+                self.proceed(lines=[line, ''])
 
     def edit_input_file(self, execute_after_edit=False):
         os.system('vi + {}'.format(self.input_file_name))
@@ -389,7 +407,8 @@ class MaterialProxy(PackageProxy):
             exec('result = {}'.format(self.material_underscored_name))
             return result
         except ImportError as e:
-            raise Exception('eponymous data must be kept in all I/O modules at all times.')
+            #raise Exception('eponymous data must be kept in all I/O modules at all times.')
+            pass
     
     def import_material_from_output_file(self):
         self.unimport_output_module_hierarchy()
@@ -398,7 +417,8 @@ class MaterialProxy(PackageProxy):
             exec('result = {}'.format(self.material_underscored_name))
             return result
         except ImportError as e:
-            raise Exception('eponymous data must be kept in all I/O modules at all times.')
+            #raise Exception('eponymous data must be kept in all I/O modules at all times.')
+            pass
 
     def import_score_definition_from_visualizer(self):
         if not self.has_visualizer:
@@ -425,31 +445,49 @@ class MaterialProxy(PackageProxy):
         assert isinstance(result, str)
         if result == 'k':
             self.reload_user_input()
+        elif result == 'mdd':
+            self.delete_material_definition()
         elif result == 'mde':
             self.edit_input_file()
+        elif result == 'mdt':
+            self.write_stub_material_definition_to_disk()
         elif result == 'mdx':
             self.run_abjad_on_input_file()
+        elif result == 'sbd':
+            self.delete_score_builder()
         elif result == 'sbe':
             self.conditionally_edit_visualizer()
+        elif result == 'sbt':
+            self.write_stub_score_builder_to_disk()
         elif result == 'sbx':
             self.run_abjad_on_visualizer()
+        elif result == 'ssd':
+            self.delete_score_stylesheet()
         elif result == 'sse':
             self.edit_stylesheet()
+        elif result == 'sss':
+            self.select_stylesheet()
         elif result == 'dc':
             self.write_input_data_to_output_file(is_forced=True, prompt_proceed=True)
         elif result == 'di':
             self.edit_output_file()
+        elif result == 'dd':
+            self.delete_output_file()
         elif result == 'lyc':
             self.create_ly_from_visualizer(is_forced=True, prompt_proceed=True)
+        elif result == 'lyd':
+            self.delete_ly()
         elif result == 'lyi':
             self.edit_ly()
         elif result == 'pdfc':
             self.create_pdf_from_visualizer(is_forced=True, prompt_proceed=True)
+        elif result == 'pdfd':
+            self.delete_pdf()
         elif result == 'pdfi':
             self.open_visualization_pdf()
         # TODO: write tests
         elif result == 'del':
-            self.delete_material()
+            self.delete_material_package()
             self.session.is_backtracking_locally = True
         elif result == 'init':
             self.edit_initializer()
@@ -471,27 +509,44 @@ class MaterialProxy(PackageProxy):
         return trimmed_temp_ly_file_lines == trimmed_visualizer_ly_lines
 
     def make_main_menu(self):
-        menu, section = self.make_new_menu(where=self.where())
+        menu, hidden_section = self.make_new_menu(where=self.where(), is_hidden=True)
+        section = menu.make_new_section()
         if self.is_interactive:
             section.append(('k', 'reload user input'))
-        section.append(('mde', 'material definition - edit'))
-        section.append(('mdx', 'material definition - execute'))
+        if self.has_input_file:
+            section.append(('mde', 'material definition - edit'))
+            section.append(('mdx', 'material definition - execute'))
+            hidden_section.append(('mdd', 'material definition - delete'))
+            hidden_section.append(('mdt', 'material definition - stub'))
+        else:
+            section.append(('mdt', 'material definition - stub'))
         if self.has_visualizer:
             section = menu.make_new_section()
             section.append(('sbe', 'score builder - edit'))
             section.append(('sbx', 'score builder - execute'))
+            hidden_section.append(('sbd', 'score builder - delete'))
+        hidden_section.append(('sbt', 'score builder - stub'))
         if self.has_stylesheet:
+            hidden_section.append(('ssd', 'score stylesheet - delete'))
             section.append(('sse', 'score stylesheet - edit'))
         section = menu.make_new_section()
-        section.append(('dc', 'output data - recreate'))
-        section.append(('di', 'output data - inspect'))
+        section.append(('sss', 'score stylesheet - select'))
+        if self.has_output_file:
+            section = menu.make_new_section()
+            section.append(('dc', 'output data - recreate'))
+            section.append(('di', 'output data - inspect'))
+            hidden_section.append(('dd', 'output data - delete'))
+        elif self.has_input_data:
+            section.append(('dc', 'output data - create'))
         if self.has_visualization_ly:
             section = menu.make_new_section()
             section.append(('lyc', 'output ly - recreate'))
+            hidden_section.append(('lyd', 'output ly - delete'))
             section.append(('lyi', 'output ly - inspect'))
         if self.has_visualization_pdf:
             section = menu.make_new_section()
             section.append(('pdfc', 'output pdf - recreate'))
+            hidden_section.append(('pdfd', 'output pdf - delete'))
             section.append(('pdfi', 'output pdf - inspect'))
         section = menu.make_new_section()
         section.append(('del', 'delete material'))
@@ -500,6 +555,20 @@ class MaterialProxy(PackageProxy):
         section.append(('ren', 'rename material'))
         section.append(('sum', 'summarize material'))
         return menu
+
+    # TODO: MaterialProxy
+    def make_material_package_directory(self):
+        try:
+            os.mkdir(self.material_package_directory)
+        except OSError:
+            pass
+
+    # TODO: MaterialProxy ... and extend PackageProxy
+    def make_tags_dictionary(self):
+        tags = {}
+        tags['creation_date'] = self.helpers.get_current_date()
+        tags['maker'] = self.class_name
+        return tags
 
     def run(self, user_input=None):
         self.assign_user_input(user_input=user_input)
@@ -661,14 +730,33 @@ class MaterialProxy(PackageProxy):
         module_names.sort()
         return module_names
 
+    # TODO: run abjad without -i flag to return to scf
+    # TODO: confirm and prompt proceed
     def run_abjad_on_input_file(self):
         os.system('abjad {}'.format(self.input_file_name))
         self.conditionally_display_lines([''])
 
+    # TODO: run abjad without -i flag to return to scf
+    # TODO: confirm and prompt proceed
     def run_abjad_on_visualizer(self):
         os.system('abjad {}'.format(self.visualizer_file_name))
         self.conditionally_display_lines([''])
 
+    # TODO: find os.cp() equivalent
+    def select_stylesheet(self):
+        self.print_not_implemented()
+        return
+        stylesheet_wrangler = StylesheetWrangler(session=self.session)
+        source_stylesheet_file_name = stylesheet_wrangler.select_stylesheet_file_name_interactively()
+        if self.backtrack():
+            return
+        source_stylesheet_file = file(source_stylesheet_file_name, 'r')
+        target_stylesheet_file = file(self.stylesheet_file_name, 'w')
+        for line in source_stylesheet_file.readlines():
+            target_stylesheet_file.write(line)
+        source_stylesheet_file.close()
+        target_stylesheet_file.close()
+        
     def summarize_material_package(self):
         lines = []
         found = []
@@ -738,6 +826,12 @@ class MaterialProxy(PackageProxy):
             line = 'input data equals output data. (Output data preserved.)'
             self.conditionally_display_lines([line, ''])
             return self.is_changed
+        if not self.has_input_data:
+            line = 'material not yet defined.'
+            self.conditionally_display_lines([line, ''])
+            if prompt_proceed:
+                self.proceed()
+            return self.is_changed
         self.remove_material_from_materials_initializer()
         self.overwrite_output_file()
         output_file = file(self.output_file_name, 'w')
@@ -749,7 +843,6 @@ class MaterialProxy(PackageProxy):
         output_file.write(output_line)
         output_file.close()
         self.add_material_to_materials_initializer()
-        #line = "material defined in 'input.py' written to 'output.py'."
         line = 'data written to disk.'
         self.conditionally_display_lines([line, ''])
         if prompt_proceed:
@@ -769,6 +862,24 @@ class MaterialProxy(PackageProxy):
             output_file.write(line + '\n')
         output_file.close()
 
+    # TODO: find os.cp() equivalent
+    def write_stub_material_definition_to_disk(self):
+        stub_material_definition_file = file(self.stub_material_definition_file_name, 'r')
+        material_definition_file = file(self.input_file_name, 'w')
+        for line in stub_material_definition_file.readlines():
+            material_definition_file.write(line)
+        stub_material_definition_file.close()
+        material_definition_file.close()
+
+    # TODO: find os.cp() equivalent
+    def write_stub_score_builder_to_disk(self):
+        stub_score_builder_file = file(self.stub_score_builder_file_name, 'r')
+        score_builder_file = file(self.visualization_file_name, 'w')
+        for line in stub_score_builder_file.readlines():
+            score_builder_file.write(line)
+        stub_score_builder_file.close()
+        score_builder_file.close()
+        
     def write_stylesheet_to_disk(self):
         stylesheet = os.path.join(self.material_package_directory, 'stylesheet.ly')
         shutil.copy(self.stylesheet, stylesheet)

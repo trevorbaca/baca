@@ -23,6 +23,11 @@ class SCFObject(object):
 
     ### READ-ONLY PUBLIC ATTRIBUTES ###
 
+    # TODO: write test
+    @property
+    def assets_directory(self):
+        return os.path.join(self.scf_root_directory, 'assets')
+
     @property
     def breadcrumbs(self):
         return self.session.breadcrumbs
@@ -45,6 +50,11 @@ class SCFObject(object):
         from baca.scf import helpers
         return helpers
 
+    # TODO: write test
+    @property
+    def scf_root_directory(self):
+        return os.path.join('//', 'Users', 'trevorbaca', 'Documents', 'other', 'baca', 'scf')
+
     @property
     def spaced_class_name(self):
         spaced_class_name = iotools.uppercamelcase_to_underscore_delimited_lowercase(self.class_name)
@@ -56,6 +66,11 @@ class SCFObject(object):
         source_file_name = inspect.getfile(type(self))
         source_file_name = source_file_name.strip('c')
         return source_file_name
+
+    # TODO: write test
+    @property
+    def stylesheets_directory(self):
+        return os.path.join(self.root_scf_directory, 'stylesheets')
 
     @property
     def transcript(self):
