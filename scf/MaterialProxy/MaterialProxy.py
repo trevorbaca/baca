@@ -91,10 +91,7 @@ class MaterialProxy(PackageProxy):
     @property
     def input_file_name(self):
         if self.directory_name is not None:
-            input_file_name = os.path.join(self.directory_name, 'input.py')
-            #if os.path.exists(input_file_name):
-            if True:
-                return input_file_name
+            return os.path.join(self.directory_name, 'input.py')
 
     @property
     def input_package_importable_name(self):
@@ -187,10 +184,7 @@ class MaterialProxy(PackageProxy):
     @property
     def output_file_name(self): 
         if self.directory_name is not None:
-            output_file_name = os.path.join(self.directory_name, 'output.py')
-            #if os.path.exists(output_file_name):
-            if True:
-                return output_file_name
+            return os.path.join(self.directory_name, 'output.py')
 
     @property
     def output_package_importable_name(self):
@@ -216,10 +210,7 @@ class MaterialProxy(PackageProxy):
     @property
     def stylesheet_file_name(self):
         if self.directory_name is not None:
-            stylesheet_file_name = os.path.join(self.directory_name, 'stylesheet.ly')
-            #if os.path.exists(stylesheet_file_name):
-            if True:
-                return stylesheet_file_name
+            return os.path.join(self.directory_name, 'stylesheet.ly')
 
     @property
     def user_input_wrapper(self):
@@ -231,18 +222,12 @@ class MaterialProxy(PackageProxy):
     @property
     def visualizer_file_name(self):
         if self.directory_name is not None:
-            visualizer_file_name = os.path.join(self.directory_name, 'visualization.py')
-            #if os.path.exists(visualizer_file_name):
-            if True:
-                return visualizer_file_name
+            return os.path.join(self.directory_name, 'visualization.py')
 
     @property
     def visualization_ly_file_name(self):
         if self.directory_name is not None:
-            visualization_ly_file_name = os.path.join(self.directory_name, 'visualization.ly')
-            #if os.path.exists(visualization_ly_file_name):
-            if True:
-                return visualization_ly_file_name
+            return os.path.join(self.directory_name, 'visualization.ly')
 
     @property
     def visualization_package_importable_name(self):
@@ -252,30 +237,26 @@ class MaterialProxy(PackageProxy):
     @property
     def visualization_pdf_file_name(self):
         if self.directory_name is not None:
-            visualization_pdf_file_name = os.path.join(self.directory_name, 'visualization.pdf')
-            #if os.path.exists(visualization_pdf_file_name):
-            if True:
-                return visualization_pdf_file_name
+            return os.path.join(self.directory_name, 'visualization.pdf')
 
     ### READ / WRITE PUBLIC ATTRIBUTES ##
 
     @apply
     def material_underscored_name():
         def fget(self):
-            #return self._material_underscored_name
             return self.package_short_name
         def fset(self, material_underscored_name):
             assert isinstance(material_underscored_name, (str, type(None)))
             if isinstance(material_underscored_name, str):
                 assert iotools.is_underscore_delimited_lowercase_string(material_underscored_name)
-            #self._material_underscored_name = material_underscored_name
             self.package_short_name = material_underscored_name
         return property(**locals())
 
     ### PUBLIC METHODS ###
 
     def add_material_to_materials_initializer(self):
-        import_statement = 'from {} import {}\n'.format(self.material_underscored_name, self.material_underscored_name)
+        import_statement = 'from {} import {}\n'.format(
+            self.material_underscored_name, self.material_underscored_name)
         parent_package = PackageProxy(self.parent_package_importable_name)
         parent_package.add_line_to_initializer(import_statement)
 
@@ -637,20 +618,6 @@ class MaterialProxy(PackageProxy):
             material_underscored_name = '{}_{}'.format(self.score_package_short_name, material_underscored_name)
         return material_underscored_name
 
-#    def print_input_data_to_terminal(self):
-#        lines = []
-#        lines.append(repr(self.import_material_from_input_file()))
-#        lines.append('')
-#        self.conditionally_display_lines(lines)
-#        self.session.hide_next_redraw = True
-
-#    def print_output_data_to_terminal(self):
-#        lines = []
-#        lines.append(repr(self.import_material_from_output_file()))
-#        lines.append('')
-#        self.conditionally_display_lines(lines)
-#        self.session.hide_next_redraw = True
-
     def regenerate_everything(self, is_forced=False):
         is_changed = self.write_input_data_to_output_file(is_forced=is_forced)
         is_changed = self.create_ly_and_pdf_from_visualizer(is_forced=(is_changed or is_forced))
@@ -680,7 +647,8 @@ class MaterialProxy(PackageProxy):
             self.helpers.globally_replace_in_file(
                 self.parent_initializer_file_name, self.material_underscored_name, new_material_underscored_name)
             # rename package directory
-            new_directory_name = self.directory.replace(self.material_underscored_name, new_material_underscored_name)
+            new_directory_name = self.directory.replace(
+                self.material_underscored_name, new_material_underscored_name)
             command = 'svn mv {} {}'.format(self.directory_name, new_directory_name)
             os.system(command)
             # update package initializer
@@ -693,7 +661,8 @@ class MaterialProxy(PackageProxy):
             for old_file_name in os.listdir(new_package_directory):
                 if not old_file_name.startswith(('.', '_')):
                     old_directory_name = os.path.join(new_package_directory, old_file_name)
-                    new_directory_name = old_directory_name.replace(self.material_underscored_name, new_material_underscored_name)
+                    new_directory_name = old_directory_name.replace(
+                        self.material_underscored_name, new_material_underscored_name)
                     command = 'svn mv {} {}'.format(old_directory_name, new_directory_name)
                     os.system(command)
             # rename output data
@@ -701,7 +670,8 @@ class MaterialProxy(PackageProxy):
             self.helpers.globally_replace_in_file(
                 new_output_data, self.material_underscored_name, new_material_underscored_name)
             # commit
-            commit_message = 'renamed {} to {}.'.format(self.material_underscored_name, new_material_underscored_name)
+            commit_message = 'renamed {} to {}.'.format(
+                self.material_underscored_name, new_material_underscored_name)
             commit_message = commit_message.replace('_', ' ')
             command = 'svn commit -m "{}" {}'.format(commit_message, self.parent_directory_name)
             os.system(command)
