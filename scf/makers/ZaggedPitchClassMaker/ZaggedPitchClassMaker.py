@@ -28,7 +28,8 @@ class ZaggedPitchClassMaker(InteractiveEditor):
         'from abjad.tools.sequencetools.CyclicTree import CyclicTree',]
 
     user_input_import_statements = [
-        'from baca.makers import ZaggedPitchClassMaker',
+        #'from baca.makers import ZaggedPitchClassMaker',
+        'from baca.scf.makers import ZaggedPitchClassMaker',
         'from baca.scf import UserInputWrapper',]
 
     user_input_template = UserInputWrapper([

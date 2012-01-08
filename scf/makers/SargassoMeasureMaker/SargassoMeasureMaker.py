@@ -31,7 +31,8 @@ class SargassoMeasureMaker(InteractiveEditor):
             
     user_input_import_statements = [
         'from abjad.tools.durationtools import Duration',
-        'from baca.makers import SargassoMeasureMaker',
+        #'from baca.makers import SargassoMeasureMaker',
+        'from baca.scf.makers import SargassoMeasureMaker',
         'from baca.scf import UserInputWrapper',]
 
     user_input_template = UserInputWrapper([
