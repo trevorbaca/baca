@@ -2,6 +2,7 @@ from abjad.tools import iotools
 from abjad.tools import markuptools
 from baca.scf.PackageProxy import PackageProxy
 from baca.scf.StylesheetWrangler import StylesheetWrangler
+import shutil
 import os
 import subprocess
 import sys
@@ -712,7 +713,6 @@ class MaterialProxy(PackageProxy):
         os.system('abjad {}'.format(self.visualizer_file_name))
         self.conditionally_display_lines([''])
 
-    # TODO: find os.cp() equivalent
     def select_stylesheet(self):
         self.print_not_implemented()
         return
@@ -720,12 +720,7 @@ class MaterialProxy(PackageProxy):
         source_stylesheet_file_name = stylesheet_wrangler.select_stylesheet_file_name_interactively()
         if self.backtrack():
             return
-        source_stylesheet_file = file(source_stylesheet_file_name, 'r')
-        target_stylesheet_file = file(self.stylesheet_file_name, 'w')
-        for line in source_stylesheet_file.readlines():
-            target_stylesheet_file.write(line)
-        source_stylesheet_file.close()
-        target_stylesheet_file.close()
+        shutil.copyfile(source_stylesheet_file_name, self.stylesheet_file_name)
         
     def summarize_material_package(self):
         lines = []
@@ -832,23 +827,11 @@ class MaterialProxy(PackageProxy):
             output_file.write(line + '\n')
         output_file.close()
 
-    # TODO: find os.cp() equivalent
     def write_stub_material_definition_to_disk(self):
-        stub_material_definition_file = file(self.stub_material_definition_file_name, 'r')
-        material_definition_file = file(self.input_file_name, 'w')
-        for line in stub_material_definition_file.readlines():
-            material_definition_file.write(line)
-        stub_material_definition_file.close()
-        material_definition_file.close()
+        shutil.copyfile(self.stub_material_definition_file_name, self.input_file_name)
 
-    # TODO: find os.cp() equivalent
     def write_stub_score_builder_to_disk(self):
-        stub_score_builder_file = file(self.stub_score_builder_file_name, 'r')
-        score_builder_file = file(self.visualization_file_name, 'w')
-        for line in stub_score_builder_file.readlines():
-            score_builder_file.write(line)
-        stub_score_builder_file.close()
-        score_builder_file.close()
+        shutil.copyfile(self.stub_score_builder_file_name, self.visualization_file_name)
         
     def write_stylesheet_to_disk(self):
         stylesheet = os.path.join(self.material_package_directory, 'stylesheet.ly')
