@@ -1,6 +1,5 @@
 import articulations
 import dynamics
-import makers
 import materials
 import music
 import pitch

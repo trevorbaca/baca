@@ -27,4 +27,5 @@ from UserInputWrapper import UserInputWrapper
 import editors
 import exceptions
 import helpers
+import makers
 import menuing
