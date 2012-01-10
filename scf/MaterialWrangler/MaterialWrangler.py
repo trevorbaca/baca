@@ -1,5 +1,6 @@
 from abjad.tools import iotools
 from baca.scf.InteractiveMaterialProxy import InteractiveMaterialProxy
+from baca.scf.MaterialProxy import MaterialProxy
 from baca.scf.PackageProxy import PackageProxy
 from baca.scf.PackageWrangler import PackageWrangler
 from baca.scf.StaticMaterialProxy import StaticMaterialProxy
@@ -45,8 +46,7 @@ class MaterialWrangler(PackageWrangler, PackageProxy):
     # TODO: write tests
     # TODO: change signature to material_package_importable_name
     def create_material_package(self, purview_name, material_package_short_name):
-        '''Package importable name on success.
-        Change to just true on success.'''
+        '''Package importable name on success. Change to just true on success.'''
         materials_package_importable_name = \
             self.purview_name_to_materials_package_importable_name(purview_name)
         material_package_importable_name = '{}.{}'.format(
@@ -56,6 +56,8 @@ class MaterialWrangler(PackageWrangler, PackageProxy):
             return False
         os.mkdir(directory_name)
         self.write_initializer_to_package(material_package_importable_name)
+        material_proxy = MaterialProxy(material_package_importable_name, session=self.session)
+        material_proxy.write_stub_material_definition_to_disk()
         return material_package_importable_name
 
     # TODO: write tests

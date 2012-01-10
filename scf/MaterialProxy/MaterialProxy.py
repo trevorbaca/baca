@@ -255,10 +255,14 @@ class MaterialProxy(PackageProxy):
 
     ### PUBLIC METHODS ###
 
+    def add_material_to_material_initializer(self):
+        import_statement = 'from output import {}\n'.format(self.material_underscored_name)
+        self.add_line_to_initializer(import_statement) 
+        
     def add_material_to_materials_initializer(self):
         import_statement = 'from {} import {}\n'.format(
             self.material_underscored_name, self.material_underscored_name)
-        parent_package = PackageProxy(self.parent_package_importable_name)
+        parent_package = PackageProxy(self.parent_package_importable_name, session=self.session)
         parent_package.add_line_to_initializer(import_statement)
 
     def create_ly_and_pdf_from_visualizer(self, is_forced=False, prompt_proceed=False):
@@ -517,6 +521,7 @@ class MaterialProxy(PackageProxy):
             section.append(('di', 'output data - inspect'))
             hidden_section.append(('dd', 'output data - delete'))
         elif self.has_input_data:
+            section = menu.make_new_section()
             section.append(('dc', 'output data - create'))
         if self.has_visualization_ly:
             section = menu.make_new_section()
@@ -812,6 +817,7 @@ class MaterialProxy(PackageProxy):
         output_file.write(output_line)
         output_file.close()
         self.add_material_to_materials_initializer()
+        self.add_material_to_material_initializer()
         line = 'data written to disk.'
         self.conditionally_display_lines([line, ''])
         if prompt_proceed:
@@ -832,7 +838,13 @@ class MaterialProxy(PackageProxy):
         output_file.close()
 
     def write_stub_material_definition_to_disk(self):
-        shutil.copyfile(self.stub_material_definition_file_name, self.input_file_name)
+        #shutil.copyfile(self.stub_material_definition_file_name, self.input_file_name)
+        f = file(self.input_file_name, 'w')
+        f.write('from abjad import *\n')
+        f.write('\n')
+        f.write('\n')
+        f.write('{} = None\n'.format(self.material_underscored_name))
+        f.write("output_preamble_lines = ['from abjad import *', '']")
 
     def write_stub_score_builder_to_disk(self):
         shutil.copyfile(self.stub_score_builder_file_name, self.visualization_file_name)
