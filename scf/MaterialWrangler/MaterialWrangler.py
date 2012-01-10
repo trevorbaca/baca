@@ -69,12 +69,16 @@ class MaterialWrangler(PackageWrangler, PackageProxy):
         if self.backtrack():
             return
         studio = baca.scf.Studio(session=self.session)
-        menu = studio.make_score_selection_menu()
-        menu.sections[-1].menu_entry_tokens.append(('baca', 'store elsewhere')) 
-        menu.explicit_title = 'select location for {!r}:'.format(material_name)
-        purview_name = menu.run(should_clear_terminal=False)
-        if self.backtrack():
-            return
+        # TODO: encapsulate in self.get_purview_interactively() method and write tests
+        while True:
+            menu = studio.make_score_selection_menu()
+            menu.sections[-1].menu_entry_tokens.append(('baca', 'store elsewhere')) 
+            menu.explicit_title = 'select location for {!r}:'.format(material_name)
+            purview_name = menu.run(should_clear_terminal=False)
+            if self.backtrack():
+                return
+            if purview_name:
+                break
         material_directory_name = iotools.string_to_strict_directory_name(material_name)
         result = self.create_material_package(purview_name, material_directory_name)
         if result:
@@ -156,6 +160,7 @@ class MaterialWrangler(PackageWrangler, PackageProxy):
 
     # TODO: write tests
     def purview_name_to_materials_package_importable_name(self, purview_name):
+        assert isinstance(purview_name, str)
         result = []
         result.append(purview_name)
         if not purview_name == 'baca':
