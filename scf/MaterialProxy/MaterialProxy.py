@@ -330,10 +330,8 @@ class MaterialProxy(PackageProxy):
             if prompt_proceed:
                 self.proceed(lines=[line, ''])
 
-    def edit_input_file(self, execute_after_edit=False):
+    def edit_input_file(self):
         os.system('vi + {}'.format(self.input_file_name))
-        if execute_after_edit:
-            self.run_abjad_on_input_file()
 
     def edit_visualization_ly(self):
         os.system('vi {}'.format(self.visualization_ly_file_name))
@@ -434,7 +432,7 @@ class MaterialProxy(PackageProxy):
         elif result == 'mdt':
             self.write_stub_material_definition_to_disk()
         elif result == 'mdx':
-            self.run_abjad_on_input_file()
+            self.run_python_on_input_file(prompt_proceed=True)
         elif result == 'sbd':
             self.delete_score_builder()
         elif result == 'sbe':
@@ -442,7 +440,7 @@ class MaterialProxy(PackageProxy):
         elif result == 'sbt':
             self.write_stub_score_builder_to_disk()
         elif result == 'sbx':
-            self.run_abjad_on_visualizer()
+            self.run_python_on_visualizer(prompt_proceed=True)
         elif result == 'ssd':
             self.delete_score_stylesheet()
         elif result == 'sse':
@@ -587,7 +585,7 @@ class MaterialProxy(PackageProxy):
             if self.query('create input file? '):
                 self.edit_input_file()
 
-    def conditionally_edit_visualizer(self, execute_after_edit=False):
+    def conditionally_edit_visualizer(self):
         if self.has_visualizer:
             self.edit_visualizer()
         elif self.has_output_data:
@@ -601,8 +599,6 @@ class MaterialProxy(PackageProxy):
         else:
             if self.query('create input file? '):
                 self.edit_input_file()
-        if execute_after_edit:
-            self.run_abjad_on_visualizer()
 
     def open_visualization_pdf(self):
         command = 'open {}'.format(self.visualization_pdf_file_name)
@@ -701,17 +697,25 @@ class MaterialProxy(PackageProxy):
         module_names.sort()
         return module_names
 
-    # TODO: run abjad without -i flag to return to scf
-    # TODO: confirm and prompt proceed
     def run_abjad_on_input_file(self):
         os.system('abjad {}'.format(self.input_file_name))
         self.conditionally_display_lines([''])
 
-    # TODO: run abjad without -i flag to return to scf
-    # TODO: confirm and prompt proceed
     def run_abjad_on_visualizer(self):
         os.system('abjad {}'.format(self.visualizer_file_name))
         self.conditionally_display_lines([''])
+
+    def run_python_on_input_file(self, prompt_proceed=False):
+        os.system('python {}'.format(self.input_file_name))
+        line = 'material definition executed.'
+        if prompt_proceed:
+            self.proceed(lines=[line])
+
+    def run_python_on_visualizer(self, prompt_proceed=False):
+        os.system('python {}'.format(self.visualizer_file_name))
+        line = 'score builder executed.'
+        if prompt_proceed:
+            self.proceed(lines=[line])
 
     def select_stylesheet(self):
         self.print_not_implemented()
