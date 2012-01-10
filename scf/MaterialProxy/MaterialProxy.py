@@ -56,10 +56,10 @@ class MaterialProxy(PackageProxy):
 
     @property
     def has_score_definition(self):
-        if not self.has_visualizer:
+        if not self.has_score_builder:
             return False
         else:
-            return bool(self.import_score_definition_from_visualizer())
+            return bool(self.import_score_definition_from_score_builder())
 
     @property
     def has_stylesheet(self):
@@ -83,11 +83,11 @@ class MaterialProxy(PackageProxy):
             return os.path.exists(self.visualization_pdf_file_name)
 
     @property
-    def has_visualizer(self):
-        if self.visualizer_file_name is None:
+    def has_score_builder(self):
+        if self.score_builder_file_name is None:
             return False
         else:
-            return os.path.exists(self.visualizer_file_name)
+            return os.path.exists(self.score_builder_file_name)
 
     @property
     def input_file_name(self):
@@ -193,6 +193,11 @@ class MaterialProxy(PackageProxy):
             return '{}.output'.format(self.package_importable_name)
 
     @property
+    def score_builder_file_name(self):
+        if self.directory_name is not None:
+            return os.path.join(self.directory_name, 'visualization.py')
+
+    @property
     def score_package_short_name(self):
         if self.package_importable_name is not None:
             if self.package_importable_name.startswith('baca'):
@@ -221,7 +226,7 @@ class MaterialProxy(PackageProxy):
                 return user_input
 
     @property
-    def visualizer_file_name(self):
+    def score_builder_file_name(self):
         if self.directory_name is not None:
             return os.path.join(self.directory_name, 'visualization.py')
 
@@ -232,7 +237,7 @@ class MaterialProxy(PackageProxy):
 
     @property
     def visualization_package_importable_name(self):
-        if self.visualizer_file_name is not None:
+        if self.score_builder_file_name is not None:
             return '{}.visualization'.format(self.package_importable_name)
 
     @property
@@ -265,10 +270,10 @@ class MaterialProxy(PackageProxy):
         parent_package = PackageProxy(self.parent_package_importable_name, session=self.session)
         parent_package.add_line_to_initializer(import_statement)
 
-    def create_ly_and_pdf_from_visualizer(self, is_forced=False, prompt_proceed=False):
+    def create_ly_and_pdf_from_score_builder(self, is_forced=False, prompt_proceed=False):
         lines = []
-        lilypond_file = self.import_score_definition_from_visualizer()
-        if is_forced or not self.lilypond_file_format_is_equal_to_visualizer_ly(lilypond_file):
+        lilypond_file = self.import_score_definition_from_score_builder()
+        if is_forced or not self.lilypond_file_format_is_equal_to_score_builder_ly(lilypond_file):
             iotools.write_expr_to_visualization_ly(lilypond_file, self.visualization_ly_file_name)
             iotools.write_expr_to_visualization_pdf(lilypond_file, self.visualization_pdf_file_name)
             lines.append('LilyPond file and PDF written to disk.')
@@ -279,10 +284,10 @@ class MaterialProxy(PackageProxy):
         if prompt_proceed:
             self.proceed()
         
-    def create_ly_from_visualizer(self, is_forced=False, prompt_proceed=False):
+    def create_ly_from_score_builder(self, is_forced=False, prompt_proceed=False):
         lines = []
-        lilypond_file = self.import_score_definition_from_visualizer()
-        if is_forced or not self.lilypond_file_format_is_equal_to_visualizer_ly(lilypond_file):
+        lilypond_file = self.import_score_definition_from_score_builder()
+        if is_forced or not self.lilypond_file_format_is_equal_to_score_builder_ly(lilypond_file):
             iotools.write_expr_to_ly(lilypond_file, self.visualization_ly_file_name, print_status=False)
             lines.append('LilyPond file written to disk.')
         else:
@@ -292,10 +297,10 @@ class MaterialProxy(PackageProxy):
         if prompt_proceed:
             self.proceed()
 
-    def create_pdf_from_visualizer(self, is_forced=False, prompt_proceed=False):
+    def create_pdf_from_score_builder(self, is_forced=False, prompt_proceed=False):
         lines = []
-        lilypond_file = self.import_score_definition_from_visualizer()
-        if is_forced or not self.lilypond_file_format_is_equal_to_visualizer_ly(lilypond_file):
+        lilypond_file = self.import_score_definition_from_score_builder()
+        if is_forced or not self.lilypond_file_format_is_equal_to_score_builder_ly(lilypond_file):
             iotools.write_expr_to_pdf(lilypond_file, self.visualization_pdf_file_name, print_status=False)
             lines.append('PDF written to disk.')
         else:
@@ -305,15 +310,15 @@ class MaterialProxy(PackageProxy):
         if prompt_proceed:
             self.proceed()
 
-    def create_visualizer(self):
-        file_pointer = file(self.visualizer_file_name, 'w')
+    def create_score_builder(self):
+        file_pointer = file(self.score_builder_file_name, 'w')
         file_pointer.write('from abjad import *\n')
         file_pointer.write('from abjad.tools import layouttools\n')
         line = 'from output import {}\n'.format(self.material_underscored_name)
         file_pointer.write(line)
         file_pointer.write('\n\n\n')
         file_pointer.close()
-        self.edit_visualizer()
+        self.edit_score_builder()
 
     def delete_material_definition(self, prompt_proceed=False):
         if self.has_input_file:
@@ -334,6 +339,13 @@ class MaterialProxy(PackageProxy):
             if prompt_proceed:
                 self.proceed(lines=[line, ''])
 
+    def delete_score_stylesheet(self, prompt_proceed=False):
+        if self.has_stylesheet:
+            os.remove(self.stylesheet_file_name)
+            line = 'stylesheet deleted.'
+            if prompt_proceed:
+                self.proceed(lines=[line])
+           
     def edit_input_file(self):
         os.system('vi + {}'.format(self.input_file_name))
 
@@ -346,8 +358,8 @@ class MaterialProxy(PackageProxy):
     def edit_stylesheet(self):
         os.system('vi {}'.format(self.stylesheet_file_name))
 
-    def edit_visualizer(self):
-        os.system('vi + {}'.format(self.visualizer_file_name))
+    def edit_score_builder(self):
+        os.system('vi + {}'.format(self.score_builder_file_name))
 
     def get_materials_package_importable_name(self):
         if self.purview.is_score_local_purview:
@@ -369,8 +381,8 @@ class MaterialProxy(PackageProxy):
         self.conditionally_display_lines([line])
         return package_short_name
 
-    def get_visualizer_status_of_new_material_package_interactively(self):
-        response = self.handle_raw_input('include visualizer?')
+    def get_score_builder_status_of_new_material_package_interactively(self):
+        response = self.handle_raw_input('include score builder?')
         if response == 'y':
             return True
         else:
@@ -404,8 +416,8 @@ class MaterialProxy(PackageProxy):
             #raise Exception('eponymous data must be kept in all I/O modules at all times.')
             pass
 
-    def import_score_definition_from_visualizer(self):
-        if not self.has_visualizer:
+    def import_score_definition_from_score_builder(self):
+        if not self.has_score_builder:
             return None
         self.unimport_visualization_module()
         self.unimport_output_module()
@@ -437,16 +449,20 @@ class MaterialProxy(PackageProxy):
             self.write_stub_material_definition_to_disk()
         elif result == 'mdx':
             self.run_python_on_input_file(prompt_proceed=True)
+        elif result == 'mdxi':
+            self.run_abjad_on_input_file()
         elif result == 'sbd':
             self.delete_score_builder()
         elif result == 'sbe':
-            self.conditionally_edit_visualizer()
+            self.conditionally_edit_score_builder()
         elif result == 'sbt':
-            self.write_stub_score_builder_to_disk()
+            self.write_stub_score_builder_to_disk(prompt_proceed=True)
         elif result == 'sbx':
-            self.run_python_on_visualizer(prompt_proceed=True)
+            self.run_python_on_score_builder(prompt_proceed=True)
+        elif result == 'sbxi':
+            self.run_abjad_on_score_builder()
         elif result == 'ssd':
-            self.delete_score_stylesheet()
+            self.delete_score_stylesheet(prompt_proceed=True)
         elif result == 'sse':
             self.edit_stylesheet()
         elif result == 'sss':
@@ -458,13 +474,13 @@ class MaterialProxy(PackageProxy):
         elif result == 'dd':
             self.delete_output_file()
         elif result == 'lyc':
-            self.create_ly_from_visualizer(is_forced=True, prompt_proceed=True)
+            self.create_ly_from_score_builder(is_forced=True, prompt_proceed=True)
         elif result == 'lyd':
             self.delete_ly()
         elif result == 'lyi':
             self.edit_ly()
         elif result == 'pdfc':
-            self.create_pdf_from_visualizer(is_forced=True, prompt_proceed=True)
+            self.create_pdf_from_score_builder(is_forced=True, prompt_proceed=True)
         elif result == 'pdfd':
             self.delete_pdf()
         elif result == 'pdfi':
@@ -481,16 +497,19 @@ class MaterialProxy(PackageProxy):
             self.regenerate_everything(is_forced=True)
         elif result == 'sum':
             self.summarize_material_package()
+        # TODO: add to global hidden menu
+        elif result == 'ls':
+            self.list_directory()
         else:
             raise ValueError
 
-    def lilypond_file_format_is_equal_to_visualizer_ly(self, lilypond_file):
+    def lilypond_file_format_is_equal_to_score_builder_ly(self, lilypond_file):
         temp_ly_file = os.path.join(os.environ.get('HOME'), 'tmp.ly')
         iotools.write_expr_to_ly(lilypond_file, temp_ly_file, print_status=False)
         trimmed_temp_ly_file_lines = self.trim_ly_lines(temp_ly_file)
         os.remove(temp_ly_file)
-        trimmed_visualizer_ly_lines = self.trim_ly_lines(self.visualization_ly_file_name)
-        return trimmed_temp_ly_file_lines == trimmed_visualizer_ly_lines
+        trimmed_score_builder_ly_lines = self.trim_ly_lines(self.visualization_ly_file_name)
+        return trimmed_temp_ly_file_lines == trimmed_score_builder_ly_lines
 
     def make_main_menu(self):
         menu, hidden_section = self.make_new_menu(where=self.where(), is_hidden=True)
@@ -502,19 +521,23 @@ class MaterialProxy(PackageProxy):
             section.append(('mdx', 'material definition - execute'))
             hidden_section.append(('mdd', 'material definition - delete'))
             hidden_section.append(('mdt', 'material definition - stub'))
+            hidden_section.append(('mdxi', 'material definition - execute & inspect'))
         else:
             section.append(('mdt', 'material definition - stub'))
-        if self.has_visualizer:
-            section = menu.make_new_section()
+        section = menu.make_new_section()
+        if self.has_score_builder:
             section.append(('sbe', 'score builder - edit'))
             section.append(('sbx', 'score builder - execute'))
             hidden_section.append(('sbd', 'score builder - delete'))
-        hidden_section.append(('sbt', 'score builder - stub'))
+            hidden_section.append(('sbt', 'score builder - stub'))
+            hidden_section.append(('sbxi', 'score builder - execute & inspect'))
+        else:
+            section.append(('sbt', 'score builder - stub'))
+        section = menu.make_new_section()
+        section.append(('sss', 'score stylesheet - select'))
         if self.has_stylesheet:
             hidden_section.append(('ssd', 'score stylesheet - delete'))
             section.append(('sse', 'score stylesheet - edit'))
-        section = menu.make_new_section()
-        section.append(('sss', 'score stylesheet - select'))
         if self.has_output_file:
             section = menu.make_new_section()
             section.append(('dc', 'output data - recreate'))
@@ -528,17 +551,24 @@ class MaterialProxy(PackageProxy):
             section.append(('lyc', 'output ly - recreate'))
             hidden_section.append(('lyd', 'output ly - delete'))
             section.append(('lyi', 'output ly - inspect'))
+        elif self.has_score_builder:
+            section = menu.make_new_section()
+            section.append(('lyc', 'output ly - create'))
         if self.has_visualization_pdf:
             section = menu.make_new_section()
             section.append(('pdfc', 'output pdf - recreate'))
             hidden_section.append(('pdfd', 'output pdf - delete'))
             section.append(('pdfi', 'output pdf - inspect'))
+        elif self.has_score_builder:
+            section = menu.make_new_section()
+            section.append(('pdfc', 'output pdf - create'))
         section = menu.make_new_section()
         section.append(('del', 'delete material'))
         section.append(('init', 'edit initializer'))
         section.append(('reg', 'regenerate material'))
         section.append(('ren', 'rename material'))
         section.append(('sum', 'summarize material'))
+        hidden_section.append(('ls', 'list directory'))
         return menu
 
     # TODO: MaterialProxy
@@ -575,14 +605,14 @@ class MaterialProxy(PackageProxy):
     def edit_ly(self):
         if self.has_visualization_ly:
             self.edit_visualization_ly()
-        elif self.has_visualizer:
-            if self.query('create LilyPond file from visualizer? '):
-                self.create_ly_from_visualizer()    
+        elif self.has_score_builder:
+            if self.query('create LilyPond file from score builder? '):
+                self.create_ly_from_score_builder()    
         elif self.has_output_data:
-            line = "data exists but visualizer doesn't.\n"
+            line = "data exists but score builder doesn't.\n"
             self.conditionally_display_lines([line])
-            if self.query('create visualizer? '):
-                self.create_visualizer()
+            if self.query('create score builder? '):
+                self.create_score_builder()
         elif self.has_input_file:
             if self.query('write material to disk? '):
                 self.write_input_data_to_output_file(is_forced=True)
@@ -590,14 +620,14 @@ class MaterialProxy(PackageProxy):
             if self.query('create input file? '):
                 self.edit_input_file()
 
-    def conditionally_edit_visualizer(self):
-        if self.has_visualizer:
-            self.edit_visualizer()
+    def conditionally_edit_score_builder(self):
+        if self.has_score_builder:
+            self.edit_score_builder()
         elif self.has_output_data:
-            line = "data exists but visualizer doesn't.\n"
+            line = "data exists but score builder doesn't.\n"
             self.conditionally_display_lines([line])
-            if self.query('create visualizer? '):
-                self.create_visualizer()
+            if self.query('create score builder? '):
+                self.create_score_builder()
         elif self.has_input_file:
             if self.query('write material to disk? '):
                 self.write_input_data_to_output_file(is_forced=True)
@@ -622,7 +652,7 @@ class MaterialProxy(PackageProxy):
 
     def regenerate_everything(self, is_forced=False):
         is_changed = self.write_input_data_to_output_file(is_forced=is_forced)
-        is_changed = self.create_ly_and_pdf_from_visualizer(is_forced=(is_changed or is_forced))
+        is_changed = self.create_ly_and_pdf_from_score_builder(is_forced=(is_changed or is_forced))
         return is_changed
 
     def reload_user_input(self):
@@ -706,8 +736,8 @@ class MaterialProxy(PackageProxy):
         os.system('abjad {}'.format(self.input_file_name))
         self.conditionally_display_lines([''])
 
-    def run_abjad_on_visualizer(self):
-        os.system('abjad {}'.format(self.visualizer_file_name))
+    def run_abjad_on_score_builder(self):
+        os.system('abjad {}'.format(self.score_builder_file_name))
         self.conditionally_display_lines([''])
 
     def run_python_on_input_file(self, prompt_proceed=False):
@@ -716,20 +746,29 @@ class MaterialProxy(PackageProxy):
         if prompt_proceed:
             self.proceed(lines=[line])
 
-    def run_python_on_visualizer(self, prompt_proceed=False):
-        os.system('python {}'.format(self.visualizer_file_name))
+    def run_python_on_score_builder(self, prompt_proceed=False):
+        os.system('python {}'.format(self.score_builder_file_name))
         line = 'score builder executed.'
         if prompt_proceed:
             self.proceed(lines=[line])
 
-    def select_stylesheet(self):
-        self.print_not_implemented()
-        return
+    def select_stylesheet(self, prompt_proceed=False):
         stylesheet_wrangler = StylesheetWrangler(session=self.session)
+        self.session.backtrack_preservation_is_active = True
         source_stylesheet_file_name = stylesheet_wrangler.select_stylesheet_file_name_interactively()
+        self.session.backtrack_preservation_is_active = False
         if self.backtrack():
             return
-        shutil.copyfile(source_stylesheet_file_name, self.stylesheet_file_name)
+        source = file(source_stylesheet_file_name, 'r')
+        target = file(self.stylesheet_file_name, 'w')
+        target.write('% source: {}\n\n'.format(source_stylesheet_file_name))
+        for line in source.readlines():
+            target.write(line)
+        source.close()
+        target.close()
+        line = 'stylesheet selected.'
+        if prompt_proceed:
+            self.proceed(lines=[line])
         
     def summarize_material_package(self):
         lines = []
@@ -838,16 +877,27 @@ class MaterialProxy(PackageProxy):
         output_file.close()
 
     def write_stub_material_definition_to_disk(self):
-        #shutil.copyfile(self.stub_material_definition_file_name, self.input_file_name)
-        f = file(self.input_file_name, 'w')
-        f.write('from abjad import *\n')
-        f.write('\n')
-        f.write('\n')
-        f.write('{} = None\n'.format(self.material_underscored_name))
-        f.write("output_preamble_lines = ['from abjad import *', '']")
+        material_definition = file(self.input_file_name, 'w')
+        material_definition.write('from abjad import *\n')
+        material_definition.write("output_preamble_lines = ['from abjad import *', '']\n")
+        material_definition.write('\n')
+        material_definition.write('\n')
+        material_definition.write('{} = None'.format(self.material_underscored_name))
 
-    def write_stub_score_builder_to_disk(self):
-        shutil.copyfile(self.stub_score_builder_file_name, self.visualization_file_name)
+    def write_stub_score_builder_to_disk(self, prompt_proceed=False):
+        score_builder = file(self.score_builder_file_name, 'w')
+        lines = []
+        lines.append('from abjad import *')
+        lines.append('from output import {}'.format(self.material_underscored_name))
+        lines.append('')
+        lines.append('')
+        lines.append('score, treble_staff, bass_staff = scoretools.make_piano_score_from_leaves()') 
+        lines.append('lilypond_file = lilypondfiletools.make_basic_lilypond_file(score)')
+        score_builder.write('\n'.join(lines))
+        score_builder.close()
+        line = 'stub score builder written to disk.'
+        if prompt_proceed:
+            self.proceed(lines=[line])
         
     def write_stylesheet_to_disk(self):
         stylesheet = os.path.join(self.material_package_directory, 'stylesheet.ly')

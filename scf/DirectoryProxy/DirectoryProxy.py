@@ -106,6 +106,11 @@ class DirectoryProxy(SCFObject):
             return
         self.directory_name = result
 
+    def list_directory(self):
+        os.system('ls {}'.format(self.directory_name))
+        self.conditionally_display_lines(lines=[''])
+        self.session.hide_next_redraw = True
+
     def remove(self):
         if self.is_in_repository:
             result = self._remove_versioned_directory()

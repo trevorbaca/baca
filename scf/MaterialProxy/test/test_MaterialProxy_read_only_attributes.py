@@ -16,7 +16,7 @@ def test_MaterialProxy_read_only_attributes_01():
     assert not material_proxy.has_stylesheet
     assert not material_proxy.has_visualization_ly
     assert not material_proxy.has_visualization_pdf
-    assert not material_proxy.has_visualizer
+    assert not material_proxy.has_score_builder
     assert material_proxy.input_file_name == \
         '/Users/trevorbaca/Documents/other/baca/materials/test_material_a/input.py'
     assert material_proxy.input_package_importable_name == 'baca.materials.test_material_a.input'
@@ -34,7 +34,7 @@ def test_MaterialProxy_read_only_attributes_01():
     assert material_proxy.stylesheet_file_name == \
         '/Users/trevorbaca/Documents/other/baca/materials/test_material_a/stylesheet.ly'
     assert material_proxy.user_input_wrapper is None
-    assert material_proxy.visualizer_file_name == \
+    assert material_proxy.score_builder_file_name == \
         '/Users/trevorbaca/Documents/other/baca/materials/test_material_a/visualization.py'
     assert material_proxy.visualization_ly_file_name == \
         '/Users/trevorbaca/Documents/other/baca/materials/test_material_a/visualization.ly'

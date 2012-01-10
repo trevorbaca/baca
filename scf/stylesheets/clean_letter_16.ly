@@ -1,5 +1,3 @@
-% header comment
-
 \layout {
     ragged-right = ##t
     indent = #0

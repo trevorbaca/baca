@@ -8,7 +8,7 @@ class StaticMaterialProxy(MaterialProxy):
 
     ### PUBLIC METHODS ###
 
-    def create(self, has_visualizer=True):
+    def create(self, has_score_builder=True):
         if os.path.exists(self.directory_name):
             line = 'directory {!r} already exists.'.format(self.directory_name)
             self.conditionally_display_lines([line, ''])
@@ -26,20 +26,20 @@ class StaticMaterialProxy(MaterialProxy):
         output_file.write('{} = None\n'.format(self.package_short_name))
         output_file.write('')
         output_file.close()
-        if has_visualizer:
-            visualizer = file(self.visualizer_file_name, 'w')
-            visualizer.write('from abjad import *\n')
-            visualizer.write('from abjad.tools import layouttools\n')
-            visualizer.write('from output import *\n')
-            visualizer.write('\n\n')
-            visualizer.write('lilypond_file = None\n')
-            visualizer.close()
+        if has_score_builder:
+            score_builder = file(self.score_builder_file_name, 'w')
+            score_builder.write('from abjad import *\n')
+            score_builder.write('from abjad.tools import layouttools\n')
+            score_builder.write('from output import *\n')
+            score_builder.write('\n\n')
+            score_builder.write('lilypond_file = None\n')
+            score_builder.close()
 
     def create_interactively(self):
         self.conditionally_clear_terminal()
         materials_package_importable_name = self.get_materials_package_importable_name()
         package_short_name = self.get_package_short_name_of_new_material_interactively()
-        has_visualizer = self.get_visualizer_status_of_new_material_package_interactively()
+        has_score_builder = self.get_score_builder_status_of_new_material_package_interactively()
         package_importable_name = '{}.{}'.format(materials_package_importable_name, package_short_name)
-        self.create_static_material_package(package_importable_name, has_visualizer)
+        self.create_static_material_package(package_importable_name, has_score_builder)
         self.proceed()

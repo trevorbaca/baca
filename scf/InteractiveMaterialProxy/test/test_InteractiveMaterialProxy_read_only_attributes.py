@@ -12,7 +12,7 @@ def test_InteractiveMaterialProxy_read_only_attributes_01():
     assert imp.has_stylesheet
     assert imp.has_visualization_ly
     assert imp.has_visualization_pdf
-    assert not imp.has_visualizer
+    assert not imp.has_score_builder
     assert imp.input_file_name == '/Users/trevorbaca/Documents/other/baca/materials/test_measures_a/input.py'
     assert imp.input_package_importable_name == 'baca.materials.test_measures_a.input'
     assert not imp.is_in_score
@@ -29,7 +29,7 @@ def test_InteractiveMaterialProxy_read_only_attributes_01():
     assert imp.stylesheet_file_name == \
         '/Users/trevorbaca/Documents/other/baca/materials/test_measures_a/stylesheet.ly'
     assert isinstance(imp.user_input_wrapper, baca.scf.UserInputWrapper)
-    assert imp.visualizer_file_name == \
+    assert imp.score_builder_file_name == \
         '/Users/trevorbaca/Documents/other/baca/materials/test_measures_a/visualization.py'
     assert imp.visualization_ly_file_name == \
         '/Users/trevorbaca/Documents/other/baca/materials/test_measures_a/visualization.ly'

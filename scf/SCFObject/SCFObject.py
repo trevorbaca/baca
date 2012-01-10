@@ -70,7 +70,7 @@ class SCFObject(object):
     # TODO: write test
     @property
     def stylesheets_directory(self):
-        return os.path.join(self.root_scf_directory, 'stylesheets')
+        return os.path.join(self.scf_root_directory, 'stylesheets')
 
     @property
     def transcript(self):
