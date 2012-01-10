@@ -8,7 +8,6 @@ class MakerProxy(PackageProxy):
     def __init__(self, maker_class_name=None, session=None):
         self.maker_class_name = maker_class_name
         if maker_class_name is not None:
-            #package_importable_name = 'baca.makers.{}'.format(maker_class_name)
             package_importable_name = 'baca.scf.makers.{}'.format(maker_class_name)
         else:
             package_importable_name = None

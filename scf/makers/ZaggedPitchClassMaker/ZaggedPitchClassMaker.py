@@ -1,9 +1,3 @@
-#from abjad.tools import durationtools
-#from abjad.tools import leaftools
-#from abjad.tools import lilypondfiletools
-#from abjad.tools import scoretools
-#from abjad.tools import sequencetools
-#from abjad.tools import spannertools
 from baca.scf.InteractiveMaterialProxy import InteractiveMaterialProxy
 from baca.scf.UserInputWrapper import UserInputWrapper
 from baca.scf.editors.InteractiveEditor import InteractiveEditor
@@ -28,7 +22,6 @@ class ZaggedPitchClassMaker(InteractiveEditor):
         'from abjad.tools.sequencetools.CyclicTree import CyclicTree',]
 
     user_input_import_statements = [
-        #'from baca.makers import ZaggedPitchClassMaker',
         'from baca.scf.makers import ZaggedPitchClassMaker',
         'from baca.scf import UserInputWrapper',]
 

@@ -1,5 +1,5 @@
 from abjad.tools.durationtools import Duration
-from baca.makers import SargassoMeasureMaker
+from baca.scf.makers import SargassoMeasureMaker
 from baca.scf import UserInputWrapper
 
 

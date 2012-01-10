@@ -19,7 +19,6 @@ class SargassoMeasureMaker(InteractiveEditor):
 
     #def __init__(self, **kwargs):
     def __init__(self, session=None, target=None, **kwargs):
-        #InteractiveMaterialProxy.__init__(self, **kwargs)
         InteractiveEditor.__init__(self, session=session, target=target)
         self.stylesheet = os.path.join(os.path.dirname(__file__), 'stylesheet.ly')
         self._generic_output_name = 'sargasso measures'
@@ -31,7 +30,6 @@ class SargassoMeasureMaker(InteractiveEditor):
             
     user_input_import_statements = [
         'from abjad.tools.durationtools import Duration',
-        #'from baca.makers import SargassoMeasureMaker',
         'from baca.scf.makers import SargassoMeasureMaker',
         'from baca.scf import UserInputWrapper',]
 
