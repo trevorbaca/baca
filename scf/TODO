@@ -1,5 +1,7 @@
 TODO
 
+-1. Be able safely to write junk into any system file.
+
 0. Audit all calls to 'self.proceed()' for optional notification lines.
 
 1. Implement 'make new material: static' in studio.
