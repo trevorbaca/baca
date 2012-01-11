@@ -193,8 +193,8 @@ class PackageProxy(DirectoryProxy):
         if result:
             tag_name, tag_value = result
             self.add_tag(tag_name, tag_value)
-            confirm_line = 'tag added.\n'
-            self.conditionally_display_lines([confirm_line])
+            line = 'tag added.'
+            self.conditionally_display_lines([line, ''])
         if self.session.user_input is None:
             self.proceed()
 
@@ -208,7 +208,8 @@ class PackageProxy(DirectoryProxy):
     def delete_package(self):
         result = self.remove()
         if result:
-            self.proceed()
+            line = 'package deleted.'
+            self.proceed(lines=[line])
         
     def delete_tag(self, tag_name):
         tags = self.get_tags()

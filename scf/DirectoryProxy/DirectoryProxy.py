@@ -6,7 +6,6 @@ import sys
 
 class DirectoryProxy(SCFObject):
 
-    #def __init__(self, directory_name=None, session=None):
     def __init__(self, directory_name, session=None):
         assert isinstance(directory_name, str)
         assert os.path.exists(directory_name)
@@ -129,7 +128,8 @@ class DirectoryProxy(SCFObject):
         if lines:
             self.conditionally_display_lines(lines)
         if prompt_proceed:
-            self.proceed()
+            line = 'tests run.'
+            self.proceed(lines=[line])
 
     def svn_add(self, prompt_proceed=True):
         proc = subprocess.Popen('svn-add-all', shell=True, stdout=subprocess.PIPE)

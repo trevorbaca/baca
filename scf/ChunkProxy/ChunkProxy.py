@@ -30,7 +30,8 @@ class ChunkProxy(PackageProxy):
     def create_chunk(self):
         self.create_directory()
         self.create_initializer()
-        self.proceed()
+        line = 'chunk created.'
+        self.proceed(lines=[line])
 
     def create_chunk_interactively(self):
         self.print_not_implemented()
@@ -42,7 +43,8 @@ class ChunkProxy(PackageProxy):
         if self.score_template is None:
             self.set_score_template_interactively()
         self.write_package_to_disk()
-        self.proceed()
+        line = 'chunk created.'
+        self.proceed(lines=[line])
 
     def handle_main_menu_result(self, result):
         if result == 'b':
@@ -90,7 +92,8 @@ class ChunkProxy(PackageProxy):
         package_importable_name = '.'.join([self.package_importable_name, package_short_name])
         chunk_proxy = ChunkProxy(package_importable_name)
         chunk_proxy.create_chunk()
-        self.proceed()
+        line = 'chunk spaced name set.'
+        self.proceed(lines=[line])
 
     def set_score_template_interactively(self):
         self.print_not_implemented()

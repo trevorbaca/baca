@@ -42,4 +42,5 @@ class StaticMaterialProxy(MaterialProxy):
         has_score_builder = self.get_score_builder_status_of_new_material_package_interactively()
         package_importable_name = '{}.{}'.format(materials_package_importable_name, package_short_name)
         self.create_static_material_package(package_importable_name, has_score_builder)
-        self.proceed()
+        line = 'material created.'
+        self.proceed(lines=[line])

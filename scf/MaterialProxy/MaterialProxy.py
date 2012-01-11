@@ -308,9 +308,8 @@ class MaterialProxy(PackageProxy):
         else:
             lines.append('LilyPond file is the same. (PDF and LilyPond file preserved.)')
         lines.append('')
-        self.conditionally_display_lines(lines)
         if prompt_proceed:
-            self.proceed()
+            self.proceed(lines=lines)
         
     def create_ly_from_score_builder(self, is_forced=False, prompt_proceed=False):
         lines = []
@@ -321,9 +320,8 @@ class MaterialProxy(PackageProxy):
         else:
             lines.append('LilyPond file is the same. (LilyPond file preserved.)')
         lines.append('')
-        self.conditionally_display_lines(lines)
         if prompt_proceed:
-            self.proceed()
+            self.proceed(lines=lines)
 
     def create_pdf_from_score_builder(self, is_forced=False, prompt_proceed=False):
         lines = []
@@ -334,9 +332,8 @@ class MaterialProxy(PackageProxy):
         else:
             lines.append('LilyPond file is the same. (PDF preserved.)')
         lines.append('')
-        self.conditionally_display_lines(lines)
         if prompt_proceed:
-            self.proceed()
+            self.proceed(lines=lines)
 
     def create_score_builder(self):
         file_pointer = file(self.score_builder_file_name, 'w')
@@ -351,8 +348,8 @@ class MaterialProxy(PackageProxy):
     def delete_material_definition(self, prompt_proceed=False):
         if self.has_input_file:
             os.remove(self.input_file_name)
-            line = 'material definition deleted.'
             if prompt_proceed:
+                line = 'material definition deleted.'
                 self.proceed(lines=[line, ''])
         
     def delete_material_package(self):
@@ -363,15 +360,15 @@ class MaterialProxy(PackageProxy):
         if self.has_output_file:
             self.remove_material_from_materials_initializer()
             os.remove(self.output_file_name)
-            line = 'output file deleted.'
             if prompt_proceed:
+                line = 'output file deleted.'
                 self.proceed(lines=[line, ''])
 
     def delete_score_stylesheet(self, prompt_proceed=False):
         if self.has_stylesheet:
             os.remove(self.stylesheet_file_name)
-            line = 'stylesheet deleted.'
             if prompt_proceed:
+                line = 'stylesheet deleted.'
                 self.proceed(lines=[line])
            
     def edit_input_file(self):
@@ -570,8 +567,8 @@ class MaterialProxy(PackageProxy):
             target.write(line)
         source.close()
         target.close()
-        line = 'stylesheet linked.'
         if prompt_proceed:
+            line = 'stylesheet linked.'
             self.proceed(lines=[line])
         
     def make_main_menu(self):
@@ -821,14 +818,14 @@ class MaterialProxy(PackageProxy):
 
     def run_python_on_input_file(self, prompt_proceed=False):
         os.system('python {}'.format(self.input_file_name))
-        line = 'material definition executed.'
         if prompt_proceed:
+            line = 'material definition executed.'
             self.proceed(lines=[line])
 
     def run_python_on_score_builder(self, prompt_proceed=False):
         os.system('python {}'.format(self.score_builder_file_name))
-        line = 'score builder executed.'
         if prompt_proceed:
+            line = 'score builder executed.'
             self.proceed(lines=[line])
 
     # TODO: write test
@@ -840,8 +837,8 @@ class MaterialProxy(PackageProxy):
         if self.backtrack():
             return
         self.add_tag('editor', editor.class_name)
-        line = 'editor selected.'
         if prompt_proceed:
+            line = 'editor selected.'
             self.proceed(lines=[line])
 
     def select_stylesheet_interactively(self, prompt_proceed=False):
@@ -852,8 +849,8 @@ class MaterialProxy(PackageProxy):
         if self.backtrack():
             return
         self.link_score_stylesheet(source_stylesheet_file_name)
-        line = 'stylesheet selected.'
         if prompt_proceed:
+            line = 'stylesheet selected.'
             self.proceed(lines=[line])
 
     def summarize_material_package(self):
@@ -880,8 +877,7 @@ class MaterialProxy(PackageProxy):
         if missing:
             lines.append('missing {}.'.format(', '.join(missing)))
         lines.append('')
-        self.conditionally_display_lines(lines)
-        self.proceed()
+        self.proceed(lines=lines)
         
     def trim_ly_lines(self, ly_file_name):
         '''Remove "Abjad revision 4776" and "2011-09-13 18:33" lines.
@@ -926,10 +922,9 @@ class MaterialProxy(PackageProxy):
             self.conditionally_display_lines([line, ''])
             return self.is_changed
         if not self.has_input_data:
-            line = 'material not yet defined.'
-            self.conditionally_display_lines([line, ''])
             if prompt_proceed:
-                self.proceed()
+                line = 'material not yet defined.'
+                self.proceed(lines=[line])
             return self.is_changed
         self.remove_material_from_materials_initializer()
         self.overwrite_output_file()
@@ -943,10 +938,9 @@ class MaterialProxy(PackageProxy):
         output_file.close()
         self.add_material_to_materials_initializer()
         self.add_material_to_material_initializer()
-        line = 'data written to disk.'
-        self.conditionally_display_lines([line, ''])
         if prompt_proceed:
-            self.proceed()
+            line = 'data written to disk.'
+            self.proceed(lines=[line])
         return self.is_changed
 
     def write_output_file_to_disk(self, material):

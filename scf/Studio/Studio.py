@@ -262,7 +262,8 @@ class Studio(SCFObject):
         if lines:
             self.conditionally_display_lines(lines, capitalize_first_character=False)
         if prompt_proceed:
-            self.proceed()
+            line = 'tests complete.'
+            self.proceed(lines=[line])
 
     def select_interactive_material_proxy(self, klasses=None):
         material_proxies = list(self.iterate_interactive_material_proxies())

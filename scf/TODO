@@ -1,10 +1,12 @@
 TODO
 
--2. Reverse polarity of 'prompt_proceed' keywords.
+-3. Change 'self.session.backtracking_preservation_is_active' to 'self.preserve_backtracking'.
 
--1. Be able safely to write junk into any system file.
+-2. Remove def LocalClass() pattern.
 
-0. Audit all calls to 'self.proceed()' for optional notification lines.
+-1. Reverse polarity of 'prompt_proceed' keywords.
+
+0. Be able safely to write junk into any system file.
 
 1. Implement 'make new material: static' in studio.
 

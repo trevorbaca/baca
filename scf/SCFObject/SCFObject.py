@@ -276,7 +276,6 @@ class SCFObject(object):
         lines.append('')
         self.conditionally_display_lines(lines)
         self.proceed()
-        return True, None
 
     def proceed(self, lines=None):
         lines = lines or []
