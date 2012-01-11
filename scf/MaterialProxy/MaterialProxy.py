@@ -831,9 +831,9 @@ class MaterialProxy(PackageProxy):
     # TODO: write test
     def select_editor_interactively(self, prompt_proceed=False):
         maker_wrangler = MakerWrangler(session=self.session)
-        self.session.backtrack_preservation_is_active = True
+        self.session.preserve_backtracking = True
         editor = maker_wrangler.select_maker_interactively()
-        self.session.backtrack_preservation_is_active = False
+        self.session.preserve_backtracking = False
         if self.backtrack():
             return
         self.add_tag('editor', editor.class_name)
@@ -843,9 +843,9 @@ class MaterialProxy(PackageProxy):
 
     def select_stylesheet_interactively(self, prompt_proceed=False):
         stylesheet_wrangler = StylesheetWrangler(session=self.session)
-        self.session.backtrack_preservation_is_active = True
+        self.session.preserve_backtracking = True
         source_stylesheet_file_name = stylesheet_wrangler.select_stylesheet_file_name_interactively()
-        self.session.backtrack_preservation_is_active = False
+        self.session.preserve_backtracking = False
         if self.backtrack():
             return
         self.link_score_stylesheet(source_stylesheet_file_name)

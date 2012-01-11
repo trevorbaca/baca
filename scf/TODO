@@ -1,6 +1,6 @@
 TODO
 
--3. Change 'self.session.backtracking_preservation_is_active' to 'self.preserve_backtracking'.
+-3. Change 'self.session.preserve_backtracking' to 'self.preserve_backtracking'.
 
 -2. Remove def LocalClass() pattern.
 

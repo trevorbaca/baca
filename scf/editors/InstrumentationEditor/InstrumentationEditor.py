@@ -37,11 +37,11 @@ class InstrumentationEditor(InteractiveEditor):
         while True:
             if self.backtrack():
                 return
-            self.session.backtrack_preservation_is_active = True
+            self.session.preserve_backtracking = True
             #print 'going to select performer names ...'
             performer_names = self.select_performer_names_interactively()
             #print 'performer names: {!r}'.format(performer_names)
-            self.session.backtrack_preservation_is_active = False
+            self.session.preserve_backtracking = False
             if self.backtrack():
                 return
             elif performer_names:
@@ -50,9 +50,9 @@ class InstrumentationEditor(InteractiveEditor):
                     performer = scoretools.Performer(performer_name)
                     performer_editor = self.PerformerEditor(session=self.session, target=performer)
                     self.append_breadcrumb('add performers')
-                    self.session.backtrack_preservation_is_active = True
+                    self.session.preserve_backtracking = True
                     performer_editor.set_initial_configuration_interactively()
-                    self.session.backtrack_preservation_is_active = False
+                    self.session.preserve_backtracking = False
                     self.pop_breadcrumb()
                     if self.backtrack():
                         performers = []

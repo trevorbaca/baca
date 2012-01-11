@@ -233,9 +233,9 @@ class UserInputGetter(MenuObject):
 
     def run(self, user_input=None):
         self.assign_user_input(user_input=user_input)
-        self.session.backtrack_preservation_is_active = True
+        self.session.preserve_backtracking = True
         self.present_prompts_and_store_values()
-        self.session.backtrack_preservation_is_active = False
+        self.session.preserve_backtracking = False
         if len(self.values) == 1:
             return self.values[0]
         else:
