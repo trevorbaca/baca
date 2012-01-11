@@ -173,7 +173,7 @@ class MakerWrangler(PackageWrangler, PackageProxy):
 
     def make_main_menu(self):
         menu, section = self.make_new_menu(where=self.where(), is_numbered=True)
-        section.menu_entry_tokens = self.list_maker_spaced_class_names()
+        section.tokens = self.list_maker_spaced_class_names()
         section = menu.make_new_section()
         section.append(('new', 'make maker'))
         return menu
@@ -198,7 +198,7 @@ class MakerWrangler(PackageWrangler, PackageProxy):
     # TODO: write test
     def select_maker_interactively(self):
         menu, section = self.make_new_menu(where=self.where(), is_numbered=True)
-        section.menu_entry_tokens = self.list_maker_spaced_class_names()
+        section.tokens = self.list_maker_spaced_class_names()
         while True:
             self.append_breadcrumb('select editor')
             result = menu.run()

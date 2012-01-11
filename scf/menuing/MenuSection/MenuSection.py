@@ -16,7 +16,7 @@ class MenuSection(MenuObject):
         self._is_numbered = is_numbered
         self._is_ranged = is_ranged
         self._return_value_attribute = 'key'
-        self.menu_entry_tokens = None
+        self.tokens = None
         self.default_index = None
         self.section_title = None
 
@@ -138,6 +138,17 @@ class MenuSection(MenuObject):
 
     @apply
     def menu_entry_tokens():
+        def fget(self):
+            return self._menu_entry_tokens
+        def fset(self, menu_entry_tokens):
+            if menu_entry_tokens is None:
+                self._menu_entry_tokens = []
+            else:
+                self._menu_entry_tokens = menu_entry_tokens[:]
+        return property(**locals())
+
+    @apply
+    def tokens():
         def fget(self):
             return self._menu_entry_tokens
         def fset(self, menu_entry_tokens):

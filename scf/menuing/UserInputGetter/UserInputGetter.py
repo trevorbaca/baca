@@ -257,7 +257,7 @@ class UserInputGetter(MenuObject):
         argument_list = self.argument_lists[self.prompt_index]
         if argument_list and input_test(user_response):
             dummy_section = MenuSection()
-            dummy_section.menu_entry_tokens = argument_list[:]
+            dummy_section.tokens = argument_list[:]
             value = dummy_section.argument_range_string_to_numbers(user_response)
             self.values.append(value)
             self.prompt_index = self.prompt_index + 1

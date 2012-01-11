@@ -279,7 +279,7 @@ class PackageProxy(DirectoryProxy):
 
     def make_tags_menu(self):
         menu, section = self.make_new_menu(where=self.where(), is_keyed=False)
-        section.menu_entry_tokens = self.list_formatted_tags()
+        section.tokens = self.list_formatted_tags()
         section = menu.make_new_section()
         section.append(('add', 'add tag'))
         section.append(('del', 'delete tag'))
@@ -349,7 +349,7 @@ class PackageProxy(DirectoryProxy):
         from baca.scf.ScoreWrangler import ScoreWrangler
         menu, section = self.make_new_menu(where=self.where(), is_numbered=True)
         score_wrangler = ScoreWrangler()
-        section.menu_entry_tokens = score_wrangler.iterate_score_titles_with_years()
+        section.tokens = score_wrangler.iterate_score_titles_with_years()
         section = menu.make_new_section()
         section.append(('s', 'global to studio'))
         result = menu.run()

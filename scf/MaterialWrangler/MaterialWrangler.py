@@ -72,7 +72,7 @@ class MaterialWrangler(PackageWrangler, PackageProxy):
         # TODO: encapsulate in self.get_purview_interactively() method and write tests
         while True:
             menu = studio.make_score_selection_menu()
-            menu.sections[-1].menu_entry_tokens.append(('baca', 'store elsewhere')) 
+            menu.sections[-1].tokens.append(('baca', 'store elsewhere')) 
             menu.explicit_title = 'select location for {!r}:'.format(material_name)
             purview_name = menu.run(should_clear_terminal=False)
             if self.backtrack():
@@ -90,8 +90,8 @@ class MaterialWrangler(PackageWrangler, PackageProxy):
 #    def foo(self):
 #        menu, section = self.make_new_menu()
 #        menu.explicit_title = 'how will you create {!r}?'.format(material_name)
-#        section.menu_entry_tokens.append(('h', 'by hand'))
-#        section.menu_entry_tokens.append(('e', 'with editor'))
+#        section.tokens.append(('h', 'by hand'))
+#        section.tokens.append(('e', 'with editor'))
 #        creation_mode = menu.run(should_clear_terminal=False)
 #        if self.backtrack():
 #            return
@@ -136,7 +136,7 @@ class MaterialWrangler(PackageWrangler, PackageProxy):
 
     def make_main_menu(self):
         menu, section = self.make_new_menu(where=self.where(), is_numbered=True)
-        section.menu_entry_tokens = list(self.iterate_material_summaries())
+        section.tokens = list(self.iterate_material_summaries())
         section.return_value_attribute = 'body'
         section = menu.make_new_section()
         section.append(('new', 'make new material'))

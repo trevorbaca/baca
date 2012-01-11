@@ -45,7 +45,7 @@ class Studio(SCFObject):
         while True:
             self.append_breadcrumb('select materials directory')
             menu, section = self.make_new_menu(where=self.where(), is_numbered=True)
-            section.menu_entry_tokens = self.score_wrangler.iterate_score_titles_with_years()
+            section.tokens = self.score_wrangler.iterate_score_titles_with_years()
             section = menu.make_new_section() 
             section.append(('baca', 'baca materials directory'))
             result = menu.run()
@@ -147,15 +147,8 @@ class Studio(SCFObject):
             yield material_proxy
 
     def make_main_menu(self):
-#        menu, section = self.make_new_menu(where=self.where(), is_numbered=True, is_keyed=False)
-#        score_titles = list(self.score_wrangler.iterate_score_titles_with_years(
-#            scores_to_show=self.session.scores_to_show))
-#        score_package_short_names = list(self.score_wrangler.iterate_score_package_short_names(
-#            scores_to_show=self.session.scores_to_show))
-#        section.menu_entry_tokens = zip(score_package_short_names, score_titles)
         menu = self.make_score_selection_menu()
         section = menu.make_new_section()
-        #section.append(('k', 'work with interactive material proxies'))
         section.append(('m', 'work with materials'))
         section.append(('k', 'work with sketches'))
         section = menu.make_new_section(is_hidden=True)
@@ -171,7 +164,7 @@ class Studio(SCFObject):
             scores_to_show=self.session.scores_to_show))
         score_package_short_names = list(self.score_wrangler.iterate_score_package_short_names(
             scores_to_show=self.session.scores_to_show))
-        section.menu_entry_tokens = zip(score_package_short_names, score_titles)
+        section.tokens = zip(score_package_short_names, score_titles)
         return menu
 
     def make_svn_menu(self):
@@ -274,7 +267,7 @@ class Studio(SCFObject):
     def select_interactive_material_proxy(self, klasses=None):
         material_proxies = list(self.iterate_interactive_material_proxies())
         menu, section = self.make_new_menu(where=self.where(), is_numbered=True)
-        section.menu_entry_tokens = material_proxies
+        section.tokens = material_proxies
         result = menu.run()
         # TODO: probably backtrack here
         return result

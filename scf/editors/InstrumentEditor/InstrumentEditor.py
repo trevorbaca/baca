@@ -82,7 +82,7 @@ class InstrumentEditor(InteractiveEditor):
         while True:
             self.append_breadcrumb('untuned percussion')
             menu, section = self.make_new_menu(where=self.where(), is_numbered=True)
-            section.menu_entry_tokens = instrumenttools.UntunedPercussion.known_untuned_percussion
+            section.tokens = instrumenttools.UntunedPercussion.known_untuned_percussion
             result = menu.run()
             if self.backtrack():
                 self.pop_breadcrumb()
@@ -120,7 +120,7 @@ class InstrumentEditor(InteractiveEditor):
     def make_main_menu(self):
         #menu, section = self.make_new_menu(where=self.where(), is_keyed=False)
         menu, section = self.make_new_menu(where=self.where())
-        section.menu_entry_tokens = self.target_attribute_menu_entry_tokens
+        section.tokens = self.target_attribute_menu_entry_tokens
         section = menu.make_new_section(is_keyed=False)
         if self.session.display_pitch_ranges_with_numbered_pitches:
             pitch_range_repr = self.target.pitch_range.one_line_numbered_chromatic_pitch_repr
@@ -148,7 +148,7 @@ class InstrumentEditor(InteractiveEditor):
         '''
         from abjad.tools import instrumenttools
         menu, section = self.make_new_menu(where=self.where(), is_numbered=True, is_ranged=True)
-        section.menu_entry_tokens = instrumenttools.list_instrument_names()
+        section.tokens = instrumenttools.list_instrument_names()
         while True:
             self.append_breadcrumb('select instrument')
             #print 'BEFORE: argument range is allowed: {!r}'.format(menu.argument_range_is_allowed)

@@ -55,7 +55,7 @@ class StylesheetWrangler(DirectoryProxy):
 
     def make_main_menu(self):
         menu, section = self.make_new_menu(where=self.where(), is_numbered=True)
-        section.menu_entry_tokens = self.list_stylesheet_file_names()
+        section.tokens = self.list_stylesheet_file_names()
         section = menu.make_new_section()
         section.append(('new', 'make new stylesheet'))
         return menu
@@ -80,7 +80,7 @@ class StylesheetWrangler(DirectoryProxy):
     # TODO: write test
     def select_stylesheet_file_name_interactively(self):
         menu, section = self.make_new_menu(where=self.where(), is_numbered=True)
-        section.menu_entry_tokens = self.list_stylesheet_file_names()
+        section.tokens = self.list_stylesheet_file_names()
         while True:
             self.append_breadcrumb('select stylesheet')
             result = menu.run()
