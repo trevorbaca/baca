@@ -137,7 +137,7 @@ class MaterialWrangler(PackageWrangler, PackageProxy):
     def make_main_menu(self):
         menu, section = self.make_new_menu(where=self.where(), is_numbered=True)
         section.menu_entry_tokens = list(self.iterate_material_summaries())
-        section.return_value_attr = 'body'
+        section.return_value_attribute = 'body'
         section = menu.make_new_section()
         section.append(('new', 'make new material'))
         return menu

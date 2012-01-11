@@ -110,7 +110,7 @@ class InstrumentationEditor(InteractiveEditor):
     def make_main_menu(self):
         menu, section = self.make_new_menu(where=self.where(), is_numbered=True)
         section.menu_entry_tokens = self.summary_lines
-        section.return_value_attr = 'number' # this is new
+        section.return_value_attribute = 'number' # this is new
         section = menu.make_new_section(is_keyed=False)
         section.append(('add', 'add performers'))
         if 0 < self.target.performer_count:
@@ -141,7 +141,7 @@ class InstrumentationEditor(InteractiveEditor):
         performer_pairs.append(('perc', 'percussionist'))
         performer_pairs.sort(lambda x, y: cmp(x[1], y[1]))
         section.menu_entry_tokens = performer_pairs
-        section.return_value_attr = 'body'
+        section.return_value_attribute = 'body'
         while True:
             self.append_breadcrumb('add performers')
             result = menu.run()

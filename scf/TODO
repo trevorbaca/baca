@@ -1,8 +1,6 @@
 TODO
 
--4. Reverse polarity of 'prompt_proceed' keywords.
-
--3. Rename 'return_value_attr' to 'return_value_attribute'.
+-3. Reverse polarity of 'prompt_proceed' keywords.
 
 -2. Rename 'menu_entry_tokens' to simply 'tokens'.
 

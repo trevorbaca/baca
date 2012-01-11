@@ -15,7 +15,7 @@ class MenuSection(MenuObject):
         self._is_keyed = is_keyed
         self._is_numbered = is_numbered
         self._is_ranged = is_ranged
-        self._return_value_attr = 'key'
+        self._return_value_attribute = 'key'
         self.menu_entry_tokens = None
         self.default_index = None
         self.section_title = None
@@ -95,7 +95,7 @@ class MenuSection(MenuObject):
             assert body
             if self.is_keyed and key is None:
                 key = body
-            if self.return_value_attr == 'number':
+            if self.return_value_attribute == 'number':
                 if number is not None:
                     #return_value = number
                     return_value = str(number)
@@ -103,12 +103,12 @@ class MenuSection(MenuObject):
                     return_value = key
                 else:
                     return_value = body
-            elif self.return_value_attr == 'key':
+            elif self.return_value_attribute == 'key':
                 if key is not None:
                     return_value = key
                 else:
                     return_value = body
-            elif self.return_value_attr == 'body':
+            elif self.return_value_attribute == 'body':
                 return_value = body
             else:
                 raise ValueError
@@ -148,12 +148,12 @@ class MenuSection(MenuObject):
         return property(**locals())
 
     @apply
-    def return_value_attr():
+    def return_value_attribute():
         def fget(self):
-            return self._return_value_attr
-        def fset(self, return_value_attr):
-            assert return_value_attr in ('body', 'key', 'number')
-            self._return_value_attr = return_value_attr
+            return self._return_value_attribute
+        def fset(self, return_value_attribute):
+            assert return_value_attribute in ('body', 'key', 'number')
+            self._return_value_attribute = return_value_attribute
         return property(**locals())
 
     @apply
@@ -328,11 +328,11 @@ class MenuSection(MenuObject):
         if isinstance(menu_entry_token, str):
             return menu_entry_token
         elif isinstance(menu_entry_token, tuple):
-            if self.return_value_attr == 'key':
+            if self.return_value_attribute == 'key':
                 return menu_entry_token[0]
-            elif self.return_value_attr == 'body':
+            elif self.return_value_attribute == 'body':
                 return menu_entry_token[1]
-            elif self.return_value_attr == 'number':
+            elif self.return_value_attribute == 'number':
                 pass
             else:
                 raise ValueError

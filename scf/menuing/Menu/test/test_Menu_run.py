@@ -44,7 +44,7 @@ def test_Menu_run_01():
 
     '''Bodies give same result as keys.'''
 
-    section_1.return_value_attr = 'body'
+    section_1.return_value_attribute = 'body'
 
     menu.session.reinitialize()
     result = menu.run(user_input='foo')
@@ -290,7 +290,7 @@ def test_Menu_run_06():
 
     '''Bodies returned instead of keys.'''
     
-    section_1.return_value_attr = 'body'
+    section_1.return_value_attribute = 'body'
 
     menu.session.reinitialize()
     result = menu.run(user_input='foo')
@@ -387,7 +387,7 @@ def test_Menu_run_07():
 
     '''Bodies returned instead of keys.'''
     
-    section_1.return_value_attr = 'body'
+    section_1.return_value_attribute = 'body'
 
     menu.session.reinitialize()
     result = menu.run(user_input='foo')
@@ -476,7 +476,7 @@ def test_Menu_run_08():
 
     '''Bodies returned instead of keys.'''
     
-    section_1.return_value_attr = 'body'
+    section_1.return_value_attribute = 'body'
 
     menu.session.reinitialize()
     result = menu.run(user_input='foo')
@@ -571,7 +571,7 @@ def test_Menu_run_09():
 
     '''Bodies returned instead of keys.'''
     
-    section_1.return_value_attr = 'body'
+    section_1.return_value_attribute = 'body'
 
     menu.session.reinitialize()
     result = menu.run(user_input='foo')
@@ -666,7 +666,7 @@ def test_Menu_run_10():
 
     '''Bodies returned instead of keys.'''
     
-    section_1.return_value_attr = 'body'
+    section_1.return_value_attribute = 'body'
 
     menu.session.reinitialize()
     result = menu.run(user_input='foo')

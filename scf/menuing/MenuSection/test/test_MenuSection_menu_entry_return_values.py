@@ -31,7 +31,7 @@ def test_MenuSection_menu_entry_return_values_01():
     section = menu.make_new_section(is_numbered=True)
     section.title = 'section'
     section.extend(['apple', 'banana', 'cherry'])
-    section.return_value_attr = 'body'
+    section.return_value_attribute = 'body'
     assert section.is_numbered
     assert section.menu_entry_return_values == ['apple', 'banana', 'cherry']
     assert section.menu_entry_return_values == section.menu_entry_bodies
@@ -42,7 +42,7 @@ def test_MenuSection_menu_entry_return_values_01():
     section = menu.make_new_section()
     section.title = 'section'
     section.extend(['apple', 'banana', 'cherry'])
-    section.return_value_attr = 'body'
+    section.return_value_attribute = 'body'
     assert not section.is_numbered
     assert section.menu_entry_return_values == ['apple', 'banana', 'cherry']
     assert section.menu_entry_return_values == section.menu_entry_bodies
@@ -84,7 +84,7 @@ def test_MenuSection_menu_entry_return_values_02():
     section.append(('add', 'add something'))
     section.append(('del', 'delete something'))
     section.append(('mod', 'modify something'))
-    section.return_value_attr = 'body'
+    section.return_value_attribute = 'body'
     assert section.is_numbered
     assert section.menu_entry_return_values == ['add something', 'delete something', 'modify something']
     assert section.menu_entry_return_values == section.menu_entry_bodies
@@ -96,7 +96,7 @@ def test_MenuSection_menu_entry_return_values_02():
     section.append(('add', 'add something'))
     section.append(('del', 'delete something'))
     section.append(('mod', 'modify something'))
-    section.return_value_attr = 'body'
+    section.return_value_attribute = 'body'
     assert not section.is_numbered
     assert section.menu_entry_return_values == ['add something', 'delete something', 'modify something']
     assert section.menu_entry_return_values == section.menu_entry_bodies
