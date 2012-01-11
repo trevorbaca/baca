@@ -950,19 +950,6 @@ class MaterialProxy(PackageProxy):
             self.proceed(lines=[line])
         return self.is_changed
 
-#    def write_output_data_to_disk(self, material):
-#        output_data_module = file(os.path.join(self.material_package_directory, 'output.py'), 'w')
-#        output_data_import_statements = self.output_data_import_statements[:]
-#        for line in output_data_import_statements:
-#            output_data_module.write(line + '\n')
-#        if output_data_import_statements:
-#            output_data_module.write('\n\n')
-#        material_underscored_name = os.path.basename(self.material_package_directory)
-#        output_data_module_lines = self.get_output_data_module_lines(material, material_underscored_name)
-#        for line in output_data_module_lines:
-#            output_data_module.write(line + '\n')
-#        output_data_module.close()
-
     def write_stub_material_definition_to_disk(self):
         material_definition = file(self.material_definition_file_name, 'w')
         material_definition.write('from abjad import *\n')
