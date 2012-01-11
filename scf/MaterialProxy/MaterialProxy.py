@@ -241,12 +241,12 @@ class MaterialProxy(PackageProxy):
     @property
     def score_builder_file_name(self):
         if self.directory_name is not None:
-            return os.path.join(self.directory_name, 'visualization.py')
+            return os.path.join(self.directory_name, 'score_builder.py')
 
     @property
     def score_builder_module_importable_name(self):
         if self.score_builder_file_name is not None:
-            return '{}.visualization'.format(self.package_importable_name)
+            return '{}.score_builder'.format(self.package_importable_name)
 
     @property
     def score_package_short_name(self):

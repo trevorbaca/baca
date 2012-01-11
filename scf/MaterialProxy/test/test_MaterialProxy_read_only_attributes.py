@@ -34,10 +34,10 @@ def test_MaterialProxy_read_only_attributes_01():
         '/Users/trevorbaca/Documents/other/baca/materials/test_material_a/stylesheet.ly'
     assert material_proxy.user_input_wrapper is None
     assert material_proxy.score_builder_file_name == \
-        '/Users/trevorbaca/Documents/other/baca/materials/test_material_a/visualization.py'
+        '/Users/trevorbaca/Documents/other/baca/materials/test_material_a/score_builder.py'
     assert material_proxy.output_ly_file_name == \
         '/Users/trevorbaca/Documents/other/baca/materials/test_material_a/visualization.ly'
     assert material_proxy.score_builder_module_importable_name == \
-        'baca.materials.test_material_a.visualization'
+        'baca.materials.test_material_a.score_builder'
     assert material_proxy.output_pdf_file_name == \
         '/Users/trevorbaca/Documents/other/baca/materials/test_material_a/visualization.pdf'
