@@ -87,18 +87,18 @@ class MaterialProxy(PackageProxy):
             return os.path.exists(self.stylesheet_file_name)
     
     @property
-    def has_visualization_ly(self):
-        if self.visualization_ly_file_name is None:
+    def has_output_ly(self):
+        if self.output_ly_file_name is None:
             return False
         else:
-            return os.path.exists(self.visualization_ly_file_name)
+            return os.path.exists(self.output_ly_file_name)
 
     @property
-    def has_visualization_pdf(self):
-        if self.visualization_pdf_file_name is None:
+    def has_output_pdf(self):
+        if self.output_pdf_file_name is None:
             return False
         else:
-            return os.path.exists(self.visualization_pdf_file_name)
+            return os.path.exists(self.output_pdf_file_name)
 
     @property
     def has_score_builder(self):
@@ -275,7 +275,7 @@ class MaterialProxy(PackageProxy):
             return os.path.join(self.directory_name, 'visualization.py')
 
     @property
-    def visualization_ly_file_name(self):
+    def output_ly_file_name(self):
         if self.directory_name is not None:
             return os.path.join(self.directory_name, 'visualization.ly')
 
@@ -285,7 +285,7 @@ class MaterialProxy(PackageProxy):
             return '{}.visualization'.format(self.package_importable_name)
 
     @property
-    def visualization_pdf_file_name(self):
+    def output_pdf_file_name(self):
         if self.directory_name is not None:
             return os.path.join(self.directory_name, 'visualization.pdf')
 
@@ -318,8 +318,8 @@ class MaterialProxy(PackageProxy):
         lines = []
         lilypond_file = self.import_score_definition_from_score_builder()
         if is_forced or not self.lilypond_file_format_is_equal_to_score_builder_ly(lilypond_file):
-            iotools.write_expr_to_pdf(lilypond_file, self.visualization_pdf_file_name, print_status=False)
-            iotools.write_expr_to_ly(lilypond_file, self.visualization_ly_file_name, print_status=False)
+            iotools.write_expr_to_pdf(lilypond_file, self.output_pdf_file_name, print_status=False)
+            iotools.write_expr_to_ly(lilypond_file, self.output_ly_file_name, print_status=False)
             lines.append('PDF and LilyPond file written to disk.')
         else:
             lines.append('LilyPond file is the same. (PDF and LilyPond file preserved.)')
@@ -331,7 +331,7 @@ class MaterialProxy(PackageProxy):
         lines = []
         lilypond_file = self.import_score_definition_from_score_builder()
         if is_forced or not self.lilypond_file_format_is_equal_to_score_builder_ly(lilypond_file):
-            iotools.write_expr_to_ly(lilypond_file, self.visualization_ly_file_name, print_status=False)
+            iotools.write_expr_to_ly(lilypond_file, self.output_ly_file_name, print_status=False)
             lines.append('LilyPond file written to disk.')
         else:
             lines.append('LilyPond file is the same. (LilyPond file preserved.)')
@@ -343,7 +343,7 @@ class MaterialProxy(PackageProxy):
         lines = []
         lilypond_file = self.import_score_definition_from_score_builder()
         if is_forced or not self.lilypond_file_format_is_equal_to_score_builder_ly(lilypond_file):
-            iotools.write_expr_to_pdf(lilypond_file, self.visualization_pdf_file_name, print_status=False)
+            iotools.write_expr_to_pdf(lilypond_file, self.output_pdf_file_name, print_status=False)
             lines.append('PDF written to disk.')
         else:
             lines.append('LilyPond file is the same. (PDF preserved.)')
@@ -403,8 +403,8 @@ class MaterialProxy(PackageProxy):
         stylesheet_proxy = StylesheetProxy(self.source_stylesheet_file_name, session=self.session)
         stylesheet_proxy.vi_stylesheet()
 
-    def edit_visualization_ly(self):
-        os.system('vi {}'.format(self.visualization_ly_file_name))
+    def edit_output_ly(self):
+        os.system('vi {}'.format(self.output_ly_file_name))
 
     def get_materials_package_importable_name(self):
         if self.purview.is_score_local_purview:
@@ -529,11 +529,11 @@ class MaterialProxy(PackageProxy):
             self.edit_ly()
         elif result == 'pdfc':
             self.create_ly_and_pdf_from_score_builder(is_forced=True)
-            self.open_visualization_pdf()
+            self.open_output_pdf()
         elif result == 'pdfd':
             self.delete_pdf()
         elif result == 'pdfi':
-            self.open_visualization_pdf()
+            self.open_output_pdf()
         elif result == 'er':
             self.run_editor()
         elif result == 'es':
@@ -563,7 +563,7 @@ class MaterialProxy(PackageProxy):
         iotools.write_expr_to_ly(lilypond_file, temp_ly_file, print_status=False)
         trimmed_temp_ly_file_lines = self.trim_ly_lines(temp_ly_file)
         os.remove(temp_ly_file)
-        trimmed_score_builder_ly_lines = self.trim_ly_lines(self.visualization_ly_file_name)
+        trimmed_score_builder_ly_lines = self.trim_ly_lines(self.output_ly_file_name)
         return trimmed_temp_ly_file_lines == trimmed_score_builder_ly_lines
 
     def link_score_stylesheet(self, source_stylesheet_file_name=None, prompt_proceed=True):
@@ -617,13 +617,13 @@ class MaterialProxy(PackageProxy):
         elif self.has_material_definition:
             section = menu.make_new_section()
             section.append(('dc', 'output data - create'))
-        if self.has_visualization_ly:
+        if self.has_output_ly:
             hidden_section.append(('lyc', 'output ly - recreate'))
             hidden_section.append(('lyd', 'output ly - delete'))
             hidden_section.append(('lyi', 'output ly - inspect'))
         elif self.has_score_builder:
             hidden_section.append(('lyc', 'output ly - create'))
-        if self.has_visualization_pdf:
+        if self.has_output_pdf:
             section = menu.make_new_section()
             section.append(('pdfc', 'output pdf - recreate'))
             hidden_section.append(('pdfd', 'output pdf - delete'))
@@ -664,8 +664,8 @@ class MaterialProxy(PackageProxy):
         stylesheet_wrangler.run()
 
     def edit_ly(self):
-        if self.has_visualization_ly:
-            self.edit_visualization_ly()
+        if self.has_output_ly:
+            self.edit_output_ly()
         elif self.has_score_builder:
             if self.query('create LilyPond file from score builder? '):
                 self.create_ly_from_score_builder()    
@@ -696,8 +696,8 @@ class MaterialProxy(PackageProxy):
             if self.query('create material definition? '):
                 self.edit_material_definition()
 
-    def open_visualization_pdf(self):
-        command = 'open {}'.format(self.visualization_pdf_file_name)
+    def open_output_pdf(self):
+        command = 'open {}'.format(self.output_pdf_file_name)
         os.system(command)
 
     def overwrite_output_data(self):
@@ -870,12 +870,12 @@ class MaterialProxy(PackageProxy):
         else:
             missing.append(artifact_name)
         artifact_name = 'LilyPond file'
-        if self.has_visualization_ly:
+        if self.has_output_ly:
             found.append(artifact_name)
         else:
             missing.append(artifact_name)
         artifact_name = 'PDF'
-        if self.has_visualization_pdf:
+        if self.has_output_pdf:
             found.append(artifact_name)
         else:
             missing.append(artifact_name)

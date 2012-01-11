@@ -12,8 +12,8 @@ def test_InteractiveMaterialProxy_read_only_attributes_01():
     assert imp.has_output_file
     assert not imp.has_score_definition
     assert imp.has_stylesheet
-    assert imp.has_visualization_ly
-    assert imp.has_visualization_pdf
+    assert imp.has_output_ly
+    assert imp.has_output_pdf
     assert not imp.has_score_builder
     assert imp.input_file_name == '/Users/trevorbaca/Documents/other/baca/materials/test_measures_a/input.py'
     assert imp.input_package_importable_name == 'baca.materials.test_measures_a.input'
@@ -33,8 +33,8 @@ def test_InteractiveMaterialProxy_read_only_attributes_01():
     assert isinstance(imp.user_input_wrapper, baca.scf.UserInputWrapper)
     assert imp.score_builder_file_name == \
         '/Users/trevorbaca/Documents/other/baca/materials/test_measures_a/visualization.py'
-    assert imp.visualization_ly_file_name == \
+    assert imp.output_ly_file_name == \
         '/Users/trevorbaca/Documents/other/baca/materials/test_measures_a/visualization.ly'
     assert imp.visualization_package_importable_name == 'baca.materials.test_measures_a.visualization'
-    assert imp.visualization_pdf_file_name == \
+    assert imp.output_pdf_file_name == \
         '/Users/trevorbaca/Documents/other/baca/materials/test_measures_a/visualization.pdf'
