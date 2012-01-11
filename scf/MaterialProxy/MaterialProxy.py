@@ -10,7 +10,6 @@ import subprocess
 import sys
 
 
-# POSSIBLE TODO: rename 'input.py' to 'material_definition.py' globally.
 # TODO: add 'list package directory' user command & inherit from PackageProxy, somehow
 # TODO: remove interactive and static material proxies
 class MaterialProxy(PackageProxy):
@@ -171,12 +170,12 @@ class MaterialProxy(PackageProxy):
     @property
     def material_definition_file_name(self):
         if self.directory_name is not None:
-            return os.path.join(self.directory_name, 'input.py')
+            return os.path.join(self.directory_name, 'material_definition.py')
 
     @property
     def material_definition_module_importable_name(self):
         if self.material_definition_file_name is not None:
-            return '{}.input'.format(self.package_importable_name)
+            return '{}.material_definition'.format(self.package_importable_name)
 
     @property
     def material_package_directory(self):

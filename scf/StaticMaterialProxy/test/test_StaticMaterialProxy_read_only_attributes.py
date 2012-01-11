@@ -16,8 +16,9 @@ def test_StaticMaterialProxy_read_only_attributes_01():
     assert not smp.has_output_pdf
     assert not smp.has_score_builder
     assert smp.material_definition_file_name == \
-        '/Users/trevorbaca/Documents/other/baca/materials/sargasso_multipliers/input.py'
-    assert smp.material_definition_module_importable_name == 'baca.materials.sargasso_multipliers.input'
+        '/Users/trevorbaca/Documents/other/baca/materials/sargasso_multipliers/material_definition.py'
+    assert smp.material_definition_module_importable_name == \
+        'baca.materials.sargasso_multipliers.material_definition'
     assert not smp.is_in_score
     assert not smp.is_interactive
     assert smp.is_shared

@@ -16,8 +16,9 @@ def test_MaterialProxy_read_only_attributes_01():
     assert not material_proxy.has_output_pdf
     assert not material_proxy.has_score_builder
     assert material_proxy.material_definition_file_name == \
-        '/Users/trevorbaca/Documents/other/baca/materials/test_material_a/input.py'
-    assert material_proxy.material_definition_module_importable_name == 'baca.materials.test_material_a.input'
+        '/Users/trevorbaca/Documents/other/baca/materials/test_material_a/material_definition.py'
+    assert material_proxy.material_definition_module_importable_name == \
+        'baca.materials.test_material_a.material_definition'
     assert not material_proxy.is_in_score
     assert not material_proxy.is_interactive
     assert material_proxy.is_shared
