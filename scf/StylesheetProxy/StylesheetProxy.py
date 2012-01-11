@@ -20,7 +20,7 @@ class StylesheetProxy(FileProxy):
     def audit_stylesheet(self):
         self.print_not_implemented()
 
-    def copy_stylesheet_interactively(self, prompt_proceed=False):
+    def copy_stylesheet_interactively(self, prompt_proceed=True):
         getter = self.make_new_getter()
         getter.append_string('new file name')
         new_short_file_name = getter.run()
@@ -35,7 +35,7 @@ class StylesheetProxy(FileProxy):
         if prompt_proceed:
             self.proceed(lines=[line])
         
-    def delete_stylesheet_interactively(self, prompt_proceed=False):
+    def delete_stylesheet_interactively(self, prompt_proceed=True):
         self.remove()
         line = 'stylesheet deleted.'
         if prompt_proceed:
@@ -49,18 +49,18 @@ class StylesheetProxy(FileProxy):
         if result == 'audit':
             self.audit_stylesheet()
         elif result == 'cp':
-            self.copy_stylesheet_interactively(prompt_proceed=True)
+            self.copy_stylesheet_interactively()
         elif result == 'del':
-            self.delete_stylesheet_interactively(prompt_proceed=True)
+            self.delete_stylesheet_interactively()
             self.session.is_backtracking_locally = True
         elif result == 'ren':
-            self.rename_stylesheet_interactively(prompt_proceed=False)
+            self.rename_stylesheet_interactively()
         elif result == 'vi':
             self.vi_stylesheet()
         else:
             raise ValueError
 
-    def rename_stylesheet_interactively(self, prompt_proceed):
+    def rename_stylesheet_interactively(self, prompt_proceed=True):
         getter = self.make_new_getter()
         getter.append_string('new file name')
         new_short_file_name = getter.run()

@@ -36,7 +36,7 @@ class FileProxy(SCFObject):
     def copy_file(self, new_full_file_name):
         shutil.copyfile(self.full_file_name, new_full_file_name)
 
-    def copy_file_interactively(self, prompt_proceed=False):
+    def copy_file_interactively(self, prompt_proceed=True):
         getter = self.make_new_getter()
         getter.append_string('new file name')
         new_short_file_name = getter.run()

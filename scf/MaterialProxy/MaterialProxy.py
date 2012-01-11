@@ -298,7 +298,7 @@ class MaterialProxy(PackageProxy):
         parent_package = PackageProxy(self.parent_package_importable_name, session=self.session)
         parent_package.add_line_to_initializer(import_statement)
 
-    def create_ly_and_pdf_from_score_builder(self, is_forced=False, prompt_proceed=False):
+    def create_ly_and_pdf_from_score_builder(self, is_forced=False, prompt_proceed=True):
         lines = []
         lilypond_file = self.import_score_definition_from_score_builder()
         if is_forced or not self.lilypond_file_format_is_equal_to_score_builder_ly(lilypond_file):
@@ -311,7 +311,7 @@ class MaterialProxy(PackageProxy):
         if prompt_proceed:
             self.proceed(lines=lines)
         
-    def create_ly_from_score_builder(self, is_forced=False, prompt_proceed=False):
+    def create_ly_from_score_builder(self, is_forced=False, prompt_proceed=True):
         lines = []
         lilypond_file = self.import_score_definition_from_score_builder()
         if is_forced or not self.lilypond_file_format_is_equal_to_score_builder_ly(lilypond_file):
@@ -323,7 +323,7 @@ class MaterialProxy(PackageProxy):
         if prompt_proceed:
             self.proceed(lines=lines)
 
-    def create_pdf_from_score_builder(self, is_forced=False, prompt_proceed=False):
+    def create_pdf_from_score_builder(self, is_forced=False, prompt_proceed=True):
         lines = []
         lilypond_file = self.import_score_definition_from_score_builder()
         if is_forced or not self.lilypond_file_format_is_equal_to_score_builder_ly(lilypond_file):
@@ -345,7 +345,7 @@ class MaterialProxy(PackageProxy):
         file_pointer.close()
         self.edit_score_builder()
 
-    def delete_material_definition(self, prompt_proceed=False):
+    def delete_material_definition(self, prompt_proceed=True):
         if self.has_input_file:
             os.remove(self.input_file_name)
             if prompt_proceed:
@@ -356,7 +356,7 @@ class MaterialProxy(PackageProxy):
         self.remove_material_from_materials_initializer()
         PackageProxy.delete_package(self)
 
-    def delete_output_file(self, prompt_proceed=False):
+    def delete_output_file(self, prompt_proceed=True):
         if self.has_output_file:
             self.remove_material_from_materials_initializer()
             os.remove(self.output_file_name)
@@ -364,7 +364,7 @@ class MaterialProxy(PackageProxy):
                 line = 'output file deleted.'
                 self.proceed(lines=[line, ''])
 
-    def delete_score_stylesheet(self, prompt_proceed=False):
+    def delete_score_stylesheet(self, prompt_proceed=True):
         if self.has_stylesheet:
             os.remove(self.stylesheet_file_name)
             if prompt_proceed:
@@ -481,7 +481,7 @@ class MaterialProxy(PackageProxy):
         elif result == 'mdt':
             self.write_stub_material_definition_to_disk()
         elif result == 'mdx':
-            self.run_python_on_input_file(prompt_proceed=True)
+            self.run_python_on_input_file()
         elif result == 'mdxi':
             self.run_abjad_on_input_file()
         elif result == 'sbd':
@@ -489,37 +489,37 @@ class MaterialProxy(PackageProxy):
         elif result == 'sbe':
             self.conditionally_edit_score_builder()
         elif result == 'sbt':
-            self.write_stub_score_builder_to_disk(prompt_proceed=True)
+            self.write_stub_score_builder_to_disk()
         elif result == 'sbx':
-            self.run_python_on_score_builder(prompt_proceed=True)
+            self.run_python_on_score_builder()
         elif result == 'sbxi':
             self.run_abjad_on_score_builder()
         elif result == 'ssd':
-            self.delete_score_stylesheet(prompt_proceed=True)
+            self.delete_score_stylesheet()
         elif result == 'sse':
             self.edit_stylesheet()
         elif result == 'ssm':
             self.edit_source_stylesheet()
         elif result == 'ssl':
-            self.link_score_stylesheet(prompt_proceed=True)
+            self.link_score_stylesheet()
         elif result == 'sss':
             self.select_stylesheet()
         elif result == 'stl':
             self.manage_stylesheets()
         elif result == 'dc':
-            self.write_input_data_to_output_file(is_forced=True, prompt_proceed=True)
+            self.write_input_data_to_output_file(is_forced=True)
         elif result == 'di':
             self.edit_output_file()
         elif result == 'dd':
             self.delete_output_file()
         elif result == 'lyc':
-            self.create_ly_from_score_builder(is_forced=True, prompt_proceed=True)
+            self.create_ly_from_score_builder(is_forced=True)
         elif result == 'lyd':
             self.delete_ly()
         elif result == 'lyi':
             self.edit_ly()
         elif result == 'pdfc':
-            self.create_ly_and_pdf_from_score_builder(is_forced=True, prompt_proceed=True)
+            self.create_ly_and_pdf_from_score_builder(is_forced=True)
             self.open_visualization_pdf()
         elif result == 'pdfd':
             self.delete_pdf()
@@ -557,7 +557,7 @@ class MaterialProxy(PackageProxy):
         trimmed_score_builder_ly_lines = self.trim_ly_lines(self.visualization_ly_file_name)
         return trimmed_temp_ly_file_lines == trimmed_score_builder_ly_lines
 
-    def link_score_stylesheet(self, source_stylesheet_file_name=None, prompt_proceed=False):
+    def link_score_stylesheet(self, source_stylesheet_file_name=None, prompt_proceed=True):
         if source_stylesheet_file_name is None:
             source_stylesheet_file_name = self.source_stylesheet_file_name
         source = file(source_stylesheet_file_name, 'r')
@@ -816,20 +816,20 @@ class MaterialProxy(PackageProxy):
         if self.has_editor:
             self.editor.run()
 
-    def run_python_on_input_file(self, prompt_proceed=False):
+    def run_python_on_input_file(self, prompt_proceed=True):
         os.system('python {}'.format(self.input_file_name))
         if prompt_proceed:
             line = 'material definition executed.'
             self.proceed(lines=[line])
 
-    def run_python_on_score_builder(self, prompt_proceed=False):
+    def run_python_on_score_builder(self, prompt_proceed=True):
         os.system('python {}'.format(self.score_builder_file_name))
         if prompt_proceed:
             line = 'score builder executed.'
             self.proceed(lines=[line])
 
     # TODO: write test
-    def select_editor_interactively(self, prompt_proceed=False):
+    def select_editor_interactively(self, prompt_proceed=True):
         maker_wrangler = MakerWrangler(session=self.session)
         self.preserve_backtracking = True
         editor = maker_wrangler.select_maker_interactively()
@@ -841,7 +841,7 @@ class MaterialProxy(PackageProxy):
             line = 'editor selected.'
             self.proceed(lines=[line])
 
-    def select_stylesheet_interactively(self, prompt_proceed=False):
+    def select_stylesheet_interactively(self, prompt_proceed=True):
         stylesheet_wrangler = StylesheetWrangler(session=self.session)
         self.preserve_backtracking = True
         source_stylesheet_file_name = stylesheet_wrangler.select_stylesheet_file_name_interactively()
@@ -916,7 +916,7 @@ class MaterialProxy(PackageProxy):
     def unimport_visualization_module(self):
         self.remove_package_importable_name_from_sys_modules(self.visualization_package_importable_name)
 
-    def write_input_data_to_output_file(self, is_forced=False, prompt_proceed=False):
+    def write_input_data_to_output_file(self, is_forced=False, prompt_proceed=True):
         if not self.is_changed and not is_forced:
             line = 'input data equals output data. (Output data preserved.)'
             self.conditionally_display_lines([line, ''])
@@ -964,7 +964,7 @@ class MaterialProxy(PackageProxy):
         material_definition.write('\n')
         material_definition.write('{} = None'.format(self.material_underscored_name))
 
-    def write_stub_score_builder_to_disk(self, prompt_proceed=False):
+    def write_stub_score_builder_to_disk(self, prompt_proceed=True):
         score_builder = file(self.score_builder_file_name, 'w')
         lines = []
         lines.append('from abjad import *')
