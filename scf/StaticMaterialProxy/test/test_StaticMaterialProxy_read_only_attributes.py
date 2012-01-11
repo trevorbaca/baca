@@ -7,7 +7,7 @@ def test_StaticMaterialProxy_read_only_attributes_01():
 
     smp = baca.scf.StaticMaterialProxy('baca.materials.sargasso_multipliers')
     assert smp.has_input_data
-    assert smp.has_input_file
+    assert smp.has_material_definition
     assert smp.has_output_data
     assert smp.has_output_file
     assert not smp.has_score_definition
@@ -15,7 +15,7 @@ def test_StaticMaterialProxy_read_only_attributes_01():
     assert not smp.has_visualization_ly
     assert not smp.has_visualization_pdf
     assert not smp.has_score_builder
-    assert smp.input_file_name == \
+    assert smp.material_definition_file_name == \
         '/Users/trevorbaca/Documents/other/baca/materials/sargasso_multipliers/input.py'
     assert smp.input_package_importable_name == 'baca.materials.sargasso_multipliers.input'
     assert not smp.is_in_score

@@ -42,17 +42,17 @@ class MaterialProxy(PackageProxy):
 
     @property
     def has_input_data(self):
-        if not self.has_input_file:
+        if not self.has_material_definition:
             return False
         else:
-            return bool(self.import_material_from_input_file())
+            return bool(self.import_material_from_material_definition())
 
     @property
-    def has_input_file(self):
-        if self.input_file_name is None:
+    def has_material_definition(self):
+        if self.material_definition_file_name is None:
             return False
         else:
-            return os.path.exists(self.input_file_name)
+            return os.path.exists(self.material_definition_file_name)
 
     @property
     def has_material_underscored_name(self):
@@ -108,18 +108,18 @@ class MaterialProxy(PackageProxy):
             return os.path.exists(self.score_builder_file_name)
 
     @property
-    def input_file_name(self):
+    def material_definition_file_name(self):
         if self.directory_name is not None:
             return os.path.join(self.directory_name, 'input.py')
 
     @property
     def input_package_importable_name(self):
-        if self.input_file_name is not None:
+        if self.material_definition_file_name is not None:
             return '{}.input'.format(self.package_importable_name)
 
     @property
     def is_changed(self):
-        input_material = self.import_material_from_input_file()
+        input_material = self.import_material_from_material_definition()
         output_material = self.import_material_from_output_file()
         return input_material != output_material
 
@@ -346,8 +346,8 @@ class MaterialProxy(PackageProxy):
         self.edit_score_builder()
 
     def delete_material_definition(self, prompt_proceed=True):
-        if self.has_input_file:
-            os.remove(self.input_file_name)
+        if self.has_material_definition:
+            os.remove(self.material_definition_file_name)
             if prompt_proceed:
                 line = 'material definition deleted.'
                 self.proceed(lines=[line, ''])
@@ -371,8 +371,8 @@ class MaterialProxy(PackageProxy):
                 line = 'stylesheet deleted.'
                 self.proceed(lines=[line])
            
-    def edit_input_file(self):
-        os.system('vi + {}'.format(self.input_file_name))
+    def edit_material_definition(self):
+        os.system('vi + {}'.format(self.material_definition_file_name))
 
     def edit_output_file(self):
         os.system('vi + {}'.format(self.output_file_name))
@@ -417,7 +417,7 @@ class MaterialProxy(PackageProxy):
         else:
             return False
 
-    def import_attribute_from_input_file(self, attribute_name):
+    def import_attribute_from_material_definition(self, attribute_name):
         try:
             exec('from {} import {}'.format(self.input_package_importable_name, attribute_name))
             exec('result = {}'.format(attribute_name))
@@ -425,7 +425,7 @@ class MaterialProxy(PackageProxy):
         except ImportError:
             return None
 
-    def import_material_from_input_file(self):
+    def import_material_from_material_definition(self):
         self.unimport_input_module()
         try:
             exec('from {} import {}'.format(self.input_package_importable_name, self.material_underscored_name))
@@ -477,13 +477,13 @@ class MaterialProxy(PackageProxy):
         elif result == 'mdd':
             self.delete_material_definition()
         elif result == 'mde':
-            self.edit_input_file()
+            self.edit_material_definition()
         elif result == 'mdt':
             self.write_stub_material_definition_to_disk()
         elif result == 'mdx':
-            self.run_python_on_input_file()
+            self.run_python_on_material_definition()
         elif result == 'mdxi':
-            self.run_abjad_on_input_file()
+            self.run_abjad_on_material_definition()
         elif result == 'sbd':
             self.delete_score_builder()
         elif result == 'sbe':
@@ -576,7 +576,7 @@ class MaterialProxy(PackageProxy):
         section = menu.make_new_section()
         if self.is_interactive:
             section.append(('k', 'reload user input'))
-        if self.has_input_file:
+        if self.has_material_definition:
             section.append(('mde', 'material definition - edit'))
             section.append(('mdx', 'material definition - execute'))
             hidden_section.append(('mdd', 'material definition - delete'))
@@ -668,12 +668,12 @@ class MaterialProxy(PackageProxy):
             self.conditionally_display_lines([line])
             if self.query('create score builder? '):
                 self.create_score_builder()
-        elif self.has_input_file:
+        elif self.has_material_definition:
             if self.query('write material to disk? '):
                 self.write_input_data_to_output_file(is_forced=True)
         else:
             if self.query('create input file? '):
-                self.edit_input_file()
+                self.edit_material_definition()
 
     def conditionally_edit_score_builder(self):
         if self.has_score_builder:
@@ -683,12 +683,12 @@ class MaterialProxy(PackageProxy):
             self.conditionally_display_lines([line])
             if self.query('create score builder? '):
                 self.create_score_builder()
-        elif self.has_input_file:
+        elif self.has_material_definition:
             if self.query('write material to disk? '):
                 self.write_input_data_to_output_file(is_forced=True)
         else:
             if self.query('create input file? '):
-                self.edit_input_file()
+                self.edit_material_definition()
 
     def open_visualization_pdf(self):
         command = 'open {}'.format(self.visualization_pdf_file_name)
@@ -711,9 +711,9 @@ class MaterialProxy(PackageProxy):
         return is_changed
 
     def reload_user_input(self):
-        maker = self.import_attribute_from_input_file('maker')
+        maker = self.import_attribute_from_material_definition('maker')
         maker.materials_directory_name = self.directory_name
-        user_input_wrapper = self.import_attribute_from_input_file('user_input')
+        user_input_wrapper = self.import_attribute_from_material_definition('user_input')
         maker.run(user_input_wrapper, score_title=self.title)
 
     def rename_material(self):
@@ -804,8 +804,8 @@ class MaterialProxy(PackageProxy):
             self.pop_breadcrumb()
         self.pop_breadcrumb()
 
-    def run_abjad_on_input_file(self):
-        os.system('abjad {}'.format(self.input_file_name))
+    def run_abjad_on_material_definition(self):
+        os.system('abjad {}'.format(self.material_definition_file_name))
         self.conditionally_display_lines([''])
 
     def run_abjad_on_score_builder(self):
@@ -816,8 +816,8 @@ class MaterialProxy(PackageProxy):
         if self.has_editor:
             self.editor.run()
 
-    def run_python_on_input_file(self, prompt_proceed=True):
-        os.system('python {}'.format(self.input_file_name))
+    def run_python_on_material_definition(self, prompt_proceed=True):
+        os.system('python {}'.format(self.material_definition_file_name))
         if prompt_proceed:
             line = 'material definition executed.'
             self.proceed(lines=[line])
@@ -858,7 +858,7 @@ class MaterialProxy(PackageProxy):
         found = []
         missing = []
         artifact_name = 'material definition'
-        if self.has_input_file:
+        if self.has_material_definition:
             found.append(artifact_name)
         else:
             missing.append(artifact_name)
@@ -932,7 +932,7 @@ class MaterialProxy(PackageProxy):
         output_preamble_lines = self.get_output_preamble_lines()
         if output_preamble_lines:
             output_file.write('\n'.join(output_preamble_lines))
-        input_data = self.import_material_from_input_file()
+        input_data = self.import_material_from_material_definition()
         output_line = '{} = {!r}'.format(self.material_underscored_name, input_data)
         output_file.write(output_line)
         output_file.close()
@@ -957,7 +957,7 @@ class MaterialProxy(PackageProxy):
         output_file.close()
 
     def write_stub_material_definition_to_disk(self):
-        material_definition = file(self.input_file_name, 'w')
+        material_definition = file(self.material_definition_file_name, 'w')
         material_definition.write('from abjad import *\n')
         material_definition.write("output_preamble_lines = ['from abjad import *', '']\n")
         material_definition.write('\n')

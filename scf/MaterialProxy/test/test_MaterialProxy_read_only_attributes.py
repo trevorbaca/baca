@@ -5,11 +5,9 @@ def test_MaterialProxy_read_only_attributes_01():
     '''Stub material.
     '''
 
-    #material_proxy = baca.scf.MaterialProxy.MaterialProxy()
-    #material_proxy = baca.scf.MaterialProxy()
     material_proxy = baca.scf.MaterialProxy('baca.materials.test_material_a')
     assert not material_proxy.has_input_data
-    assert not material_proxy.has_input_file
+    assert not material_proxy.has_material_definition
     assert not material_proxy.has_output_data
     assert not material_proxy.has_output_file
     assert not material_proxy.has_score_definition
@@ -17,7 +15,7 @@ def test_MaterialProxy_read_only_attributes_01():
     assert not material_proxy.has_visualization_ly
     assert not material_proxy.has_visualization_pdf
     assert not material_proxy.has_score_builder
-    assert material_proxy.input_file_name == \
+    assert material_proxy.material_definition_file_name == \
         '/Users/trevorbaca/Documents/other/baca/materials/test_material_a/input.py'
     assert material_proxy.input_package_importable_name == 'baca.materials.test_material_a.input'
     assert not material_proxy.is_in_score
