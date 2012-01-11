@@ -42,13 +42,13 @@ class MaterialProxy(PackageProxy):
 
     @property
     def has_input_data(self):
-        if not self.has_material_definition:
+        if not self.has_material_definition_module:
             return False
         else:
             return bool(self.import_material_from_material_definition())
 
     @property
-    def has_material_definition(self):
+    def has_material_definition_module(self):
         if self.material_definition_file_name is None:
             return False
         else:
@@ -113,7 +113,7 @@ class MaterialProxy(PackageProxy):
             return os.path.join(self.directory_name, 'input.py')
 
     @property
-    def input_package_importable_name(self):
+    def material_definition_module_importable_name(self):
         if self.material_definition_file_name is not None:
             return '{}.input'.format(self.package_importable_name)
 
@@ -249,8 +249,8 @@ class MaterialProxy(PackageProxy):
     @property
     def user_input_wrapper(self):
         if self.is_interactive:
-            if self.input_package_importable_name is not None:
-                exec('from {} import user_input'.format(self.input_package_importable_name))
+            if self.material_definition_module_importable_name is not None:
+                exec('from {} import user_input'.format(self.material_definition_module_importable_name))
                 return user_input
 
     @property
@@ -346,7 +346,7 @@ class MaterialProxy(PackageProxy):
         self.edit_score_builder()
 
     def delete_material_definition(self, prompt_proceed=True):
-        if self.has_material_definition:
+        if self.has_material_definition_module:
             os.remove(self.material_definition_file_name)
             if prompt_proceed:
                 line = 'material definition deleted.'
@@ -419,16 +419,16 @@ class MaterialProxy(PackageProxy):
 
     def import_attribute_from_material_definition(self, attribute_name):
         try:
-            exec('from {} import {}'.format(self.input_package_importable_name, attribute_name))
+            exec('from {} import {}'.format(self.material_definition_module_importable_name, attribute_name))
             exec('result = {}'.format(attribute_name))
             return result
         except ImportError:
             return None
 
     def import_material_from_material_definition(self):
-        self.unimport_input_module()
+        self.unimport_material_definition_module()
         try:
-            exec('from {} import {}'.format(self.input_package_importable_name, self.material_underscored_name))
+            exec('from {} import {}'.format(self.material_definition_module_importable_name, self.material_underscored_name))
             exec('result = {}'.format(self.material_underscored_name))
             return result
         except ImportError as e:
@@ -459,8 +459,8 @@ class MaterialProxy(PackageProxy):
         return lilypond_file
         
     def get_output_preamble_lines(self):
-        self.unimport_input_module()
-        command = 'from {} import output_preamble_lines'.format(self.input_package_importable_name)
+        self.unimport_material_definition_module()
+        command = 'from {} import output_preamble_lines'.format(self.material_definition_module_importable_name)
         try:
             exec(command)
             # keep list from persisting between multiple calls to this method
@@ -576,7 +576,7 @@ class MaterialProxy(PackageProxy):
         section = menu.make_new_section()
         if self.is_interactive:
             section.append(('k', 'reload user input'))
-        if self.has_material_definition:
+        if self.has_material_definition_module:
             section.append(('mde', 'material definition - edit'))
             section.append(('mdx', 'material definition - execute'))
             hidden_section.append(('mdd', 'material definition - delete'))
@@ -668,7 +668,7 @@ class MaterialProxy(PackageProxy):
             self.conditionally_display_lines([line])
             if self.query('create score builder? '):
                 self.create_score_builder()
-        elif self.has_material_definition:
+        elif self.has_material_definition_module:
             if self.query('write material to disk? '):
                 self.write_input_data_to_output_file(is_forced=True)
         else:
@@ -683,7 +683,7 @@ class MaterialProxy(PackageProxy):
             self.conditionally_display_lines([line])
             if self.query('create score builder? '):
                 self.create_score_builder()
-        elif self.has_material_definition:
+        elif self.has_material_definition_module:
             if self.query('write material to disk? '):
                 self.write_input_data_to_output_file(is_forced=True)
         else:
@@ -858,7 +858,7 @@ class MaterialProxy(PackageProxy):
         found = []
         missing = []
         artifact_name = 'material definition'
-        if self.has_material_definition:
+        if self.has_material_definition_module:
             found.append(artifact_name)
         else:
             missing.append(artifact_name)
@@ -893,8 +893,8 @@ class MaterialProxy(PackageProxy):
         trimmed_ly_content = ''.join(trimmed_ly_lines)
         return trimmed_ly_content
 
-    def unimport_input_module(self):
-        self.remove_package_importable_name_from_sys_modules(self.input_package_importable_name)
+    def unimport_material_definition_module(self):
+        self.remove_package_importable_name_from_sys_modules(self.material_definition_module_importable_name)
 
     def unimport_material_module(self):
         self.remove_package_importable_name_from_sys_modules(self.package_importable_name)
