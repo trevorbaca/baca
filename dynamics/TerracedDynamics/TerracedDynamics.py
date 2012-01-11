@@ -23,7 +23,7 @@ class TerracedDynamics(_DynamicsSpecifier):
         new.minimum_prolated_duration = self.minimum_prolated_duration
         return new
 
-    ### PUBLIC ATTRIBUTES ###
+    ### READ / WRITE PUBLIC ATTRIBUTES ###
 
     @apply
     def dynamics():

@@ -79,7 +79,7 @@ class ConstellationCircuit(object):
         lilypond_file, score = self._make_lilypond_file_and_score_from_chords(chords)
         iotools.show(lilypond_file)
 
-    ### PUBLIC ATTRIBUTES ###
+    ### READ-ONLY PUBLIC ATTRIBUTES ###
 
     @property
     def generator_chords(self):

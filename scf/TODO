@@ -1,8 +1,6 @@
 TODO
 
--5. Reverse polarity of 'prompt_proceed' keywords.
-
--4. Audit for read-only and read / write public attributes.
+-4. Reverse polarity of 'prompt_proceed' keywords.
 
 -3. Rename 'return_value_attr' to 'return_value_attribute'.
 

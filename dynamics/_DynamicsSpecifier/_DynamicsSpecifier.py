@@ -14,7 +14,7 @@ class _DynamicsSpecifier(object):
     def __repr__(self):
         return '%s()' % (type(self).__name__)
 
-    ### PUBLIC ATTRIBUTES ###
+    ### READ / WRITE PUBLIC ATTRIBUTES ###
 
     @apply
     def minimum_prolated_duration():
