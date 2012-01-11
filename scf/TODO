@@ -1,8 +1,6 @@
 TODO
 
--3. Reverse polarity of 'prompt_proceed' keywords.
-
--2. Rename 'menu_entry_tokens' to simply 'tokens'.
+-2. Reverse polarity of 'prompt_proceed' keywords.
 
 -1. Be able safely to write junk into any system file.
 
