@@ -211,6 +211,21 @@ class MaterialProxy(PackageProxy):
             return '{}.output'.format(self.package_importable_name)
 
     @property
+    def output_data_preamble_lines(self):
+        self.unimport_material_definition_module()
+        command = 'from {} import output_data_preamble_lines'.format(
+            self.material_definition_module_importable_name)
+        try:
+            exec(command)
+            # keep list from persisting between multiple calls to this method
+            output_data_preamble_lines = list(output_data_preamble_lines)
+            output_data_preamble_lines.append('\n')
+        except ImportError:
+            output_data_preamble_lines = []
+        return output_data_preamble_lines
+
+
+    @property
     def score_builder_file_name(self):
         if self.directory_name is not None:
             return os.path.join(self.directory_name, 'visualization.py')
@@ -464,18 +479,6 @@ class MaterialProxy(PackageProxy):
         lilypond_file.header_block.title = markuptools.Markup(self.material_spaced_name)
         return lilypond_file
         
-    def get_output_preamble_lines(self):
-        self.unimport_material_definition_module()
-        command = 'from {} import output_preamble_lines'.format(self.material_definition_module_importable_name)
-        try:
-            exec(command)
-            # keep list from persisting between multiple calls to this method
-            output_preamble_lines = list(output_preamble_lines)
-            output_preamble_lines.append('\n')
-        except ImportError:
-            output_preamble_lines = []
-        return output_preamble_lines
-
     def handle_main_menu_result(self, result):
         assert isinstance(result, str)
         if result == 'k':
@@ -615,12 +618,10 @@ class MaterialProxy(PackageProxy):
             section = menu.make_new_section()
             section.append(('dc', 'output data - create'))
         if self.has_visualization_ly:
-            #section = menu.make_new_section()
             hidden_section.append(('lyc', 'output ly - recreate'))
             hidden_section.append(('lyd', 'output ly - delete'))
             hidden_section.append(('lyi', 'output ly - inspect'))
         elif self.has_score_builder:
-            #section = menu.make_new_section()
             hidden_section.append(('lyc', 'output ly - create'))
         if self.has_visualization_pdf:
             section = menu.make_new_section()
@@ -645,7 +646,6 @@ class MaterialProxy(PackageProxy):
         hidden_section.append(('sum', 'summarize material'))
         return menu
 
-    # TODO: MaterialProxy
     def make_material_package_directory(self):
         try:
             os.mkdir(self.material_package_directory)
@@ -700,10 +700,10 @@ class MaterialProxy(PackageProxy):
         command = 'open {}'.format(self.visualization_pdf_file_name)
         os.system(command)
 
-    def overwrite_output_data_module(self):
+    def overwrite_output_data(self):
         output_data_module = file(self.output_data_file_name, 'w')
-        output_line = '{} = None\n'.format(self.material_underscored_name)
-        output_data_module.write(output_line)
+        line = '{} = None\n'.format(self.material_underscored_name)
+        output_data_module.write(line)
         output_data_module.close()
 
     def prepend_score_package_short_name(self, material_underscored_name):
@@ -934,14 +934,14 @@ class MaterialProxy(PackageProxy):
                 self.proceed(lines=[line])
             return self.is_changed
         self.remove_material_from_materials_initializer()
-        self.overwrite_output_data_module()
+        self.overwrite_output_data()
         output_data_module = file(self.output_data_file_name, 'w')
-        output_preamble_lines = self.get_output_preamble_lines()
-        if output_preamble_lines:
-            output_data_module.write('\n'.join(output_preamble_lines))
+        output_data_preamble_lines = self.output_data_preamble_lines
+        if output_data_preamble_lines:
+            output_data_module.write('\n'.join(output_data_preamble_lines))
         material_definition = self.import_material_definition_from_material_definition_module()
-        output_line = '{} = {!r}'.format(self.material_underscored_name, material_definition)
-        output_data_module.write(output_line)
+        line = '{} = {!r}'.format(self.material_underscored_name, material_definition)
+        output_data_module.write(line)
         output_data_module.close()
         self.add_material_to_materials_initializer()
         self.add_material_to_material_initializer()
@@ -950,23 +950,23 @@ class MaterialProxy(PackageProxy):
             self.proceed(lines=[line])
         return self.is_changed
 
-    def write_output_data_to_disk(self, material):
-        output_data_module = file(os.path.join(self.material_package_directory, 'output.py'), 'w')
-        output_data_module_import_statements = self.output_data_module_import_statements[:]
-        for line in output_data_module_import_statements:
-            output_data_module.write(line + '\n')
-        if output_data_module_import_statements:
-            output_data_module.write('\n\n')
-        material_underscored_name = os.path.basename(self.material_package_directory)
-        output_data_module_lines = self.get_output_data_module_lines(material, material_underscored_name)
-        for line in output_data_module_lines:
-            output_data_module.write(line + '\n')
-        output_data_module.close()
+#    def write_output_data_to_disk(self, material):
+#        output_data_module = file(os.path.join(self.material_package_directory, 'output.py'), 'w')
+#        output_data_import_statements = self.output_data_import_statements[:]
+#        for line in output_data_import_statements:
+#            output_data_module.write(line + '\n')
+#        if output_data_import_statements:
+#            output_data_module.write('\n\n')
+#        material_underscored_name = os.path.basename(self.material_package_directory)
+#        output_data_module_lines = self.get_output_data_module_lines(material, material_underscored_name)
+#        for line in output_data_module_lines:
+#            output_data_module.write(line + '\n')
+#        output_data_module.close()
 
     def write_stub_material_definition_to_disk(self):
         material_definition = file(self.material_definition_file_name, 'w')
         material_definition.write('from abjad import *\n')
-        material_definition.write("output_preamble_lines = ['from abjad import *', '']\n")
+        material_definition.write("output_data_preamble_lines = ['from abjad import *', '']\n")
         material_definition.write('\n')
         material_definition.write('\n')
         material_definition.write('{} = None'.format(self.material_underscored_name))

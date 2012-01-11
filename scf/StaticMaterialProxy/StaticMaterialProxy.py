@@ -19,7 +19,7 @@ class StaticMaterialProxy(MaterialProxy):
         initializer.close()
         input_file = file(self.input_file_name, 'w')
         input_file.write('{} = None\n'.format(self.package_short_name))
-        input_file.write('output_preamble_lines = []\n')
+        input_file.write('output_data_preamble_lines = []\n')
         input_file.write('')
         input_file.close()
         output_file = file(self.output_file_name, 'w')

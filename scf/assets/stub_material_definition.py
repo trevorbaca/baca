@@ -2,4 +2,4 @@ from abjad import *
 
 
 data = None
-output_preamble_lines = ['from abjad import *', '']
+output_data_preamble_lines = ['from abjad import *', '']
