@@ -62,13 +62,6 @@ class Menu(MenuObject):
         return result
 
     @property
-    def menu_entry_tokens(self):
-        result = []
-        for section in self.sections:
-            result.extend(section.menu_entry_tokens)
-        return result
-
-    @property
     def menu_lines(self):
         result = []
         result.extend(self.menu_title_lines)
@@ -113,6 +106,13 @@ class Menu(MenuObject):
     @property
     def sections(self):
         return self._sections
+
+    @property
+    def tokens(self):
+        result = []
+        for section in self.sections:
+            result.extend(section.tokens)
+        return result
 
     @property
     def unpacked_menu_entries(self):

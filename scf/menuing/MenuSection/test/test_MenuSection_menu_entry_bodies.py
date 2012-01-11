@@ -13,7 +13,7 @@ def test_MenuSection_menu_entry_bodies_01():
     section.extend(['apple', 'banana', 'cherry'])
     assert not section.is_numbered
     assert section.menu_entry_bodies == ['apple', 'banana', 'cherry']
-    assert section.menu_entry_bodies == section.menu_entry_tokens
+    assert section.menu_entry_bodies == section.tokens
 
     menu = baca.scf.menuing.Menu()
     menu.append_breadcrumb('location')
@@ -22,7 +22,7 @@ def test_MenuSection_menu_entry_bodies_01():
     section.extend(['apple', 'banana', 'cherry'])
     assert section.is_numbered
     assert section.menu_entry_bodies == ['apple', 'banana', 'cherry']
-    assert section.menu_entry_bodies == section.menu_entry_tokens
+    assert section.menu_entry_bodies == section.tokens
 
 
 def test_MenuSection_menu_entry_bodies_02():
@@ -39,7 +39,7 @@ def test_MenuSection_menu_entry_bodies_02():
     section.append(('mod', 'modify something'))
     assert not section.is_numbered
     assert section.menu_entry_bodies == ['add something', 'delete something', 'modify something']
-    assert section.menu_entry_bodies == [x[1] for x in section.menu_entry_tokens]
+    assert section.menu_entry_bodies == [x[1] for x in section.tokens]
 
     menu = baca.scf.menuing.Menu()
     menu.append_breadcrumb('location')
@@ -50,4 +50,4 @@ def test_MenuSection_menu_entry_bodies_02():
     section.append(('mod', 'modify something'))
     assert section.is_numbered
     assert section.menu_entry_bodies == ['add something', 'delete something', 'modify something']
-    assert section.menu_entry_bodies == [x[1] for x in section.menu_entry_tokens]
+    assert section.menu_entry_bodies == [x[1] for x in section.tokens]

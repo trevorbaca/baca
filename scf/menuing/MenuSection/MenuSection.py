@@ -75,7 +75,7 @@ class MenuSection(MenuObject):
     def unpacked_menu_entries(self):
         result = []
         for menu_entry_token in self.menu_entry_tokens:
-            result.append(self.unpack_menu_entry_token(menu_entry_token) + (self,))
+            result.append(self.unpack_token(menu_entry_token) + (self,))
         return result
 
     # TODO: this can work fine as a generator
@@ -359,7 +359,7 @@ class MenuSection(MenuObject):
     # TODO: replace self.menu_entry_token_to_key_and_body() and also
     #       replace self.menu_entry_token_to_menu_entry_return_value().
     # TODO: unpack all menu entry tokens only once at menu runtime.
-    def unpack_menu_entry_token(self, menu_entry_token):
+    def unpack_token(self, menu_entry_token):
         number = self.menu_entry_token_to_menu_entry_number(menu_entry_token)
         key, body = self.menu_entry_token_to_key_and_body(menu_entry_token)
         return_value = self.menu_entry_token_to_menu_entry_return_value(menu_entry_token)

@@ -21,7 +21,7 @@ class InteractiveEditor(SCFObject):
     ### READ-ONLY PUBLIC ATTRIBUTES ###
     
     @property
-    def target_attribute_menu_entry_tokens(self):
+    def target_attribute_tokens(self):
         result = []
         target_attribute_names, menu_keys, left_hand_labels = [], [], []
         for target_attribute_name, predicate, is_read_write, default in self.target_attribute_tuples:
@@ -38,8 +38,8 @@ class InteractiveEditor(SCFObject):
             left_hand_labels, target_attribute_names, menu_keys):
             menu_value = '{:<{width}} {!r}'.format(
                 left_hand_label, getattr(self.target, target_attribute_name), width=left_hand_label_width) 
-            menu_entry_token = (menu_key, menu_value)
-            result.append(menu_entry_token)
+            token = (menu_key, menu_value)
+            result.append(token)
         return result
 
     ### PUBLIC METHODS ###

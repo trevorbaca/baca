@@ -37,7 +37,7 @@ def test_MenuSection_menu_entry_keys_02():
     section.append(('mod', 'modify something'))
     assert not section.is_numbered
     assert section.menu_entry_keys == ['add', 'del', 'mod']
-    assert section.menu_entry_keys == [x[0] for x in section.menu_entry_tokens]
+    assert section.menu_entry_keys == [x[0] for x in section.tokens]
 
     menu = baca.scf.menuing.Menu()
     menu.append_breadcrumb('location')
@@ -48,4 +48,4 @@ def test_MenuSection_menu_entry_keys_02():
     section.append(('mod', 'modify something'))
     assert section.is_numbered
     assert section.menu_entry_keys == ['add', 'del', 'mod']
-    assert section.menu_entry_keys == [x[0] for x in section.menu_entry_tokens]
+    assert section.menu_entry_keys == [x[0] for x in section.tokens]

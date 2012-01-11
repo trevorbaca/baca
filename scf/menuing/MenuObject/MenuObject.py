@@ -142,8 +142,8 @@ class MenuObject(SCFObject):
         menu_lines = []
         for section in self.sections:
             if section.is_hidden:
-                for menu_entry_token in section.menu_entry_tokens:
-                    number, key, body, return_value = section.unpack_menu_entry_token(menu_entry_token)
+                for token in section.tokens:
+                    number, key, body, return_value = section.unpack_token(token)
                     menu_line = self.make_tab(1) + ' '
                     menu_line += '{} ({})'.format(body, key)
                     menu_lines.append(menu_line)
