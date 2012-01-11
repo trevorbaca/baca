@@ -231,12 +231,12 @@ class MaterialProxy(PackageProxy):
     @property
     def output_ly_file_name(self):
         if self.directory_name is not None:
-            return os.path.join(self.directory_name, 'visualization.ly')
+            return os.path.join(self.directory_name, 'output.ly')
 
     @property
     def output_pdf_file_name(self):
         if self.directory_name is not None:
-            return os.path.join(self.directory_name, 'visualization.pdf')
+            return os.path.join(self.directory_name, 'output.pdf')
 
     @property
     def score_builder_file_name(self):

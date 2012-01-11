@@ -35,7 +35,7 @@ def test_StaticMaterialProxy_read_only_attributes_01():
     assert smp.score_builder_file_name == \
         '/Users/trevorbaca/Documents/other/baca/materials/sargasso_multipliers/score_builder.py'
     assert smp.output_ly_file_name == \
-        '/Users/trevorbaca/Documents/other/baca/materials/sargasso_multipliers/visualization.ly'
+        '/Users/trevorbaca/Documents/other/baca/materials/sargasso_multipliers/output.ly'
     assert smp.score_builder_module_importable_name == 'baca.materials.sargasso_multipliers.score_builder'
     assert smp.output_pdf_file_name == \
-        '/Users/trevorbaca/Documents/other/baca/materials/sargasso_multipliers/visualization.pdf'
+        '/Users/trevorbaca/Documents/other/baca/materials/sargasso_multipliers/output.pdf'
