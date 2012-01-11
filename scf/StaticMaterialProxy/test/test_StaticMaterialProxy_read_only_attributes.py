@@ -6,7 +6,7 @@ def test_StaticMaterialProxy_read_only_attributes_01():
     '''
 
     smp = baca.scf.StaticMaterialProxy('baca.materials.sargasso_multipliers')
-    assert smp.has_input_data
+    assert smp.has_material_definition
     assert smp.has_material_definition_module
     assert smp.has_output_data
     assert smp.has_output_file

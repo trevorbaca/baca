@@ -6,7 +6,7 @@ def test_MaterialProxy_read_only_attributes_01():
     '''
 
     material_proxy = baca.scf.MaterialProxy('baca.materials.test_material_a')
-    assert not material_proxy.has_input_data
+    assert not material_proxy.has_material_definition
     assert not material_proxy.has_material_definition_module
     assert not material_proxy.has_output_data
     assert not material_proxy.has_output_file
