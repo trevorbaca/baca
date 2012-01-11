@@ -19,7 +19,7 @@ def test_MaterialWrangler_run_01():
     #studio.run(user_input='m score q')
     #assert studio.ts == (6, (2, 4))
 
-    studio.run(user_input='m foo q')
+    studio.run(user_input='m asdf q')
     assert studio.ts == (6, (2, 4))
 
 

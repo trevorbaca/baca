@@ -1,4 +1,6 @@
 import baca
+import py
+py.test.skip('skipping until filesystem layout of interactive materials is set.')
 
 
 def test_InteractiveMaterialProxy_read_only_attributes_01():
