@@ -7,7 +7,6 @@ def test_ScoreWrangler_01():
 
     score_wrangler = baca.scf.ScoreWrangler()
 
-    assert issubclass(score_wrangler.ScoreProxy, baca.scf.ScoreProxy)
     assert score_wrangler.class_name == 'ScoreWrangler'
     assert score_wrangler.directory_name == '/Users/trevorbaca/Documents/scores'
     assert score_wrangler.has_directory

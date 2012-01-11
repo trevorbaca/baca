@@ -34,7 +34,7 @@ class Studio(SCFObject):
     ### PUBLIC METHODS ###
 
     def edit_score_interactively(self, score_package_importable_name):
-        score_proxy = self.score_wrangler.ScoreProxy(score_package_importable_name, session=self.session)
+        score_proxy = self.score_wrangler.get_package_proxy(score_package_importable_name)
         score_proxy.session.current_score_package_short_name = score_package_importable_name
         breadcrumbs = self.breadcrumbs[:]
         self.session.breadcrumbs = []
@@ -55,8 +55,7 @@ class Studio(SCFObject):
                 score_title = value
                 score_package_importable_name = self.score_wrangler.title_to_score_package_short_name(
                     score_title)
-                score_proxy = self.score_wrangler.ScoreProxy(
-                    score_package_importable_name, session=self.session)
+                score_proxy = self.score_wrangler.get_package_proxy(score_package_importable_name)
                 return score_proxy.materials_package_importable_name
             self.pop_breadcrumb()
         self.pop_breadcrumb()

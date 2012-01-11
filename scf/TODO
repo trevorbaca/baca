@@ -1,7 +1,5 @@
 TODO
 
--2. Remove def LocalClass() pattern.
-
 -1. Reverse polarity of 'prompt_proceed' keywords.
 
 0. Be able safely to write junk into any system file.

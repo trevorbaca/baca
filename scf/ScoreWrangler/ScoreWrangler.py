@@ -1,4 +1,5 @@
 from baca.scf.PackageWrangler import PackageWrangler
+from baca.scf.ScoreProxy import ScoreProxy
 import os
 
 
@@ -12,17 +13,10 @@ class ScoreWrangler(PackageWrangler):
     def __repr__(self):
         return '{}()'.format(self.class_name)
 
-    ### READ-ONLY PUBLIC ATTRIBUTES ###
-
-    @property
-    def ScoreProxy(self):
-        import baca
-        return baca.scf.ScoreProxy
-
     ### PUBLIC METHODS ###
 
     def create_score_package_interactively(self, score_package_importable_name):
-        score_proxy = self.ScoreProxy(session=self.session)
+        score_proxy = ScoreProxy(session=self.session)
         score_proxy.create_score_package_creation_wizard()
 
     def fix_score_package_structures(self):
@@ -31,7 +25,7 @@ class ScoreWrangler(PackageWrangler):
             score_proxy.profile_package_structure()
 
     def get_package_proxy(self, package_importable_name):
-        return self.ScoreProxy(package_importable_name, session=self.session)
+        return ScoreProxy(package_importable_name, session=self.session)
 
     def iterate_score_package_short_names(self, scores_to_show=None):
         scores_to_show = scores_to_show or self.session.scores_to_show
@@ -62,7 +56,7 @@ class ScoreWrangler(PackageWrangler):
         menu, section = self.make_new_menu(where=self.where(), is_numbered=True)
         section.tokens = self.iterate_score_titles_with_years()
         score_package_short_name = self.title_to_score_package_short_name(value)
-        score_proxy = self.ScoreProxy(score_package_short_name, session=self.session)
+        score_proxy = ScoreProxy(score_package_short_name, session=self.session)
         return score_proxy
     
     def svn_ci(self, prompt_proceed=True):

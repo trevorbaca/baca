@@ -1,15 +1,11 @@
 from baca.scf.DirectoryProxy import DirectoryProxy
+from baca.scf.PackageProxy import PackageProxy
 import os
 
 
 class PackageWrangler(DirectoryProxy):
 
     ### READ-ONLY PUBLIC ATTRIBUTES ###
-
-    @property
-    def PackageProxy(self):
-        import baca
-        return baca.scf.PackageProxy
 
     @property
     def has_packages(self):
@@ -20,7 +16,7 @@ class PackageWrangler(DirectoryProxy):
     ### PUBLIC METHODS ###
 
     def get_package_proxy(self, package_importable_name):
-        return self.PackageProxy(package_importable_name, session=self.session)
+        return PackageProxy(package_importable_name, session=self.session)
 
     def iterate_package_importable_names(self):
         for package_proxy in self.iterate_package_proxies():

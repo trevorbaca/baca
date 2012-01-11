@@ -1,15 +1,11 @@
 from abjad.tools import sequencetools
 from baca.scf.editors.InteractiveEditor import InteractiveEditor
+from baca.scf.editors.PerformerEditor import PerformerEditor
 
 
 class InstrumentationEditor(InteractiveEditor):
 
     ### READ-ONLY PUBLIC ATTRIBUTES ###
-
-    @property
-    def PerformerEditor(self):
-        import baca
-        return baca.scf.editors.PerformerEditor
 
     @property
     def breadcrumb(self):
@@ -19,7 +15,7 @@ class InstrumentationEditor(InteractiveEditor):
     def summary_lines(self):
         result = []
         for performer in self.target.performers:
-            performer_editor = self.PerformerEditor(session=self.session, target=performer)
+            performer_editor = PerformerEditor(session=self.session, target=performer)
             result.extend(performer_editor.summary_lines)
         return result
 
@@ -48,7 +44,7 @@ class InstrumentationEditor(InteractiveEditor):
                 performers = []
                 for performer_name in performer_names:
                     performer = scoretools.Performer(performer_name)
-                    performer_editor = self.PerformerEditor(session=self.session, target=performer)
+                    performer_editor = PerformerEditor(session=self.session, target=performer)
                     self.append_breadcrumb('add performers')
                     self.preserve_backtracking = True
                     performer_editor.set_initial_configuration_interactively()
@@ -83,7 +79,7 @@ class InstrumentationEditor(InteractiveEditor):
         except:
             return
         performer = self.get_performer_from_performer_number(performer_number)
-        performer_editor = self.PerformerEditor(session=self.session, target=performer)
+        performer_editor = PerformerEditor(session=self.session, target=performer)
         performer_editor.run()
 
     def get_performer_from_performer_number(self, performer_number):

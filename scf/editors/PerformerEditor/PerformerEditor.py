@@ -3,16 +3,12 @@ from abjad.tools import mathtools
 from abjad.tools import scoretools
 from abjad.tools import sequencetools
 from baca.scf.editors.InteractiveEditor import InteractiveEditor
+from baca.scf.editors.InstrumentEditor import InstrumentEditor
 
 
 class PerformerEditor(InteractiveEditor):
 
     ### READ-ONLY PUBLIC ATTRIBUTES ###
-
-    @property
-    def InstrumentEditor(self):
-        import baca
-        return baca.scf.editors.InstrumentEditor
 
     @property
     def breadcrumb(self):
@@ -46,7 +42,7 @@ class PerformerEditor(InteractiveEditor):
     ### PUBLIC METHODS ###
 
     def add_instruments_interactively(self):
-        editor = self.InstrumentEditor(session=self.session)
+        editor = InstrumentEditor(session=self.session)
         instruments = editor.select_instruments_from_instrumenttools_interactively()
         if instruments is not None:
             for instrument in instruments:
@@ -100,7 +96,7 @@ class PerformerEditor(InteractiveEditor):
             return
         instrument_index = instrument_number - 1
         instrument = self.target.instruments[instrument_index]
-        instrument_editor = self.InstrumentEditor(session=self.session, target=instrument)
+        instrument_editor = InstrumentEditor(session=self.session, target=instrument)
         instrument_editor.run()
 
     def make_main_menu(self):
@@ -184,7 +180,7 @@ class PerformerEditor(InteractiveEditor):
             elif result == 'none':
                 break
             elif result == 'other':
-                editor = self.InstrumentEditor(session=self.session)
+                editor = InstrumentEditor(session=self.session)
                 instruments = editor.select_instruments_from_instrumenttools_interactively()
                 if instruments is not None:
                     for instrument in instruments:
