@@ -37,7 +37,7 @@ class StaticMaterialProxy(MaterialProxy):
 
     def create_interactively(self):
         self.conditionally_clear_terminal()
-        materials_package_importable_name = self.get_materials_package_importable_name()
+        materials_package_importable_name = self.materials_package_importable_name
         package_short_name = self.get_package_short_name_of_new_material_interactively()
         has_score_builder = self.get_score_builder_status_of_new_material_package_interactively()
         package_importable_name = '{}.{}'.format(materials_package_importable_name, package_short_name)

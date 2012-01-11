@@ -73,20 +73,6 @@ class MaterialProxy(PackageProxy):
             return os.path.exists(self.output_data_file_name)
 
     @property
-    def has_score_definition(self):
-        if not self.has_score_builder:
-            return False
-        else:
-            return bool(self.import_score_definition_from_score_builder())
-
-    @property
-    def has_stylesheet(self):
-        if self.stylesheet_file_name is None:
-            return False
-        else:
-            return os.path.exists(self.stylesheet_file_name)
-    
-    @property
     def has_output_ly(self):
         if self.output_ly_file_name is None:
             return False
@@ -108,15 +94,19 @@ class MaterialProxy(PackageProxy):
             return os.path.exists(self.score_builder_file_name)
 
     @property
-    def material_definition_file_name(self):
-        if self.directory_name is not None:
-            return os.path.join(self.directory_name, 'input.py')
+    def has_score_definition(self):
+        if not self.has_score_builder:
+            return False
+        else:
+            return bool(self.import_score_definition_from_score_builder())
 
     @property
-    def material_definition_module_importable_name(self):
-        if self.material_definition_file_name is not None:
-            return '{}.input'.format(self.package_importable_name)
-
+    def has_stylesheet(self):
+        if self.stylesheet_file_name is None:
+            return False
+        else:
+            return os.path.exists(self.stylesheet_file_name)
+    
     @property
     def is_changed(self):
         material_definition = self.import_material_definition_from_material_definition_module()
@@ -174,6 +164,16 @@ class MaterialProxy(PackageProxy):
         return title
 
     @property
+    def material_definition_file_name(self):
+        if self.directory_name is not None:
+            return os.path.join(self.directory_name, 'input.py')
+
+    @property
+    def material_definition_module_importable_name(self):
+        if self.material_definition_file_name is not None:
+            return '{}.input'.format(self.package_importable_name)
+
+    @property
     def material_package_directory(self):
         if self.materials_directory_name:
             if self.material_package_short_name:
@@ -224,11 +224,30 @@ class MaterialProxy(PackageProxy):
             output_data_preamble_lines = []
         return output_data_preamble_lines
 
+    @property
+    def output_ly_file_name(self):
+        if self.directory_name is not None:
+            return os.path.join(self.directory_name, 'visualization.ly')
+
+    @property
+    def output_pdf_file_name(self):
+        if self.directory_name is not None:
+            return os.path.join(self.directory_name, 'visualization.pdf')
 
     @property
     def score_builder_file_name(self):
         if self.directory_name is not None:
             return os.path.join(self.directory_name, 'visualization.py')
+
+    @property
+    def score_builder_file_name(self):
+        if self.directory_name is not None:
+            return os.path.join(self.directory_name, 'visualization.py')
+
+    @property
+    def score_builder_module_importable_name(self):
+        if self.score_builder_file_name is not None:
+            return '{}.visualization'.format(self.package_importable_name)
 
     @property
     def score_package_short_name(self):
@@ -269,26 +288,6 @@ class MaterialProxy(PackageProxy):
                 exec(command)
                 return user_input
 
-    @property
-    def score_builder_file_name(self):
-        if self.directory_name is not None:
-            return os.path.join(self.directory_name, 'visualization.py')
-
-    @property
-    def output_ly_file_name(self):
-        if self.directory_name is not None:
-            return os.path.join(self.directory_name, 'visualization.ly')
-
-    @property
-    def score_builder_module_importable_name(self):
-        if self.score_builder_file_name is not None:
-            return '{}.visualization'.format(self.package_importable_name)
-
-    @property
-    def output_pdf_file_name(self):
-        if self.directory_name is not None:
-            return os.path.join(self.directory_name, 'visualization.pdf')
-
     ### READ / WRITE PUBLIC ATTRIBUTES ##
 
     @apply
@@ -313,6 +312,21 @@ class MaterialProxy(PackageProxy):
             self.material_underscored_name, self.material_underscored_name)
         parent_package = PackageProxy(self.parent_package_importable_name, session=self.session)
         parent_package.add_line_to_initializer(import_statement)
+
+    def conditionally_edit_score_builder(self):
+        if self.has_score_builder:
+            self.edit_score_builder()
+        elif self.has_output_data:
+            line = "data exists but score builder doesn't.\n"
+            self.conditionally_display_lines([line])
+            if self.query('create score builder? '):
+                self.create_score_builder()
+        elif self.has_material_definition_module:
+            if self.query('write material to disk? '):
+                self.write_material_definition_to_output_data_module(is_forced=True)
+        else:
+            if self.query('create material definition? '):
+                self.edit_material_definition()
 
     def create_ly_and_pdf_from_score_builder(self, is_forced=False, prompt_proceed=True):
         lines = []
@@ -387,14 +401,32 @@ class MaterialProxy(PackageProxy):
                 line = 'stylesheet deleted.'
                 self.proceed(lines=[line])
            
+    def edit_ly(self):
+        if self.has_output_ly:
+            self.edit_output_ly()
+        elif self.has_score_builder:
+            if self.query('create LilyPond file from score builder? '):
+                self.create_ly_from_score_builder()    
+        elif self.has_output_data:
+            line = "output data exists but score builder doesn't.\n"
+            self.conditionally_display_lines([line])
+            if self.query('create score builder? '):
+                self.create_score_builder()
+        elif self.has_material_definition_module:
+            if self.query('write material to disk? '):
+                self.write_material_definition_to_output_data_module(is_forced=True)
+        else:
+            if self.query('create material definition? '):
+                self.edit_material_definition()
+
     def edit_material_definition(self):
         os.system('vi + {}'.format(self.material_definition_file_name))
 
     def edit_output_data_module(self):
         os.system('vi + {}'.format(self.output_data_file_name))
 
-    def edit_stylesheet(self):
-        os.system('vi {}'.format(self.stylesheet_file_name))
+    def edit_output_ly(self):
+        os.system('vi {}'.format(self.output_ly_file_name))
 
     def edit_score_builder(self):
         os.system('vi + {}'.format(self.score_builder_file_name))
@@ -403,16 +435,8 @@ class MaterialProxy(PackageProxy):
         stylesheet_proxy = StylesheetProxy(self.source_stylesheet_file_name, session=self.session)
         stylesheet_proxy.vi_stylesheet()
 
-    def edit_output_ly(self):
-        os.system('vi {}'.format(self.output_ly_file_name))
-
-    def get_materials_package_importable_name(self):
-        if self.purview.is_score_local_purview:
-            return self.purview.materials_package_importable_name
-        elif self.purview.is_studio_global_purview:
-            return self.purview.get_materials_package_importable_name_interactively()
-        else:
-            raise ValueError
+    def edit_stylesheet(self):
+        os.system('vi {}'.format(self.stylesheet_file_name))
 
     def get_package_short_name_of_new_material_interactively(self):
         response = self.handle_raw_input('material name')
@@ -662,39 +686,6 @@ class MaterialProxy(PackageProxy):
     def manage_stylesheets(self):
         stylesheet_wrangler = StylesheetWrangler(session=self.session)
         stylesheet_wrangler.run()
-
-    def edit_ly(self):
-        if self.has_output_ly:
-            self.edit_output_ly()
-        elif self.has_score_builder:
-            if self.query('create LilyPond file from score builder? '):
-                self.create_ly_from_score_builder()    
-        elif self.has_output_data:
-            line = "output data exists but score builder doesn't.\n"
-            self.conditionally_display_lines([line])
-            if self.query('create score builder? '):
-                self.create_score_builder()
-        elif self.has_material_definition_module:
-            if self.query('write material to disk? '):
-                self.write_material_definition_to_output_data_module(is_forced=True)
-        else:
-            if self.query('create material definition? '):
-                self.edit_material_definition()
-
-    def conditionally_edit_score_builder(self):
-        if self.has_score_builder:
-            self.edit_score_builder()
-        elif self.has_output_data:
-            line = "data exists but score builder doesn't.\n"
-            self.conditionally_display_lines([line])
-            if self.query('create score builder? '):
-                self.create_score_builder()
-        elif self.has_material_definition_module:
-            if self.query('write material to disk? '):
-                self.write_material_definition_to_output_data_module(is_forced=True)
-        else:
-            if self.query('create material definition? '):
-                self.edit_material_definition()
 
     def open_output_pdf(self):
         command = 'open {}'.format(self.output_pdf_file_name)
