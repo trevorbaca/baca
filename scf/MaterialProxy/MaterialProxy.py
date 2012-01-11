@@ -438,7 +438,6 @@ class MaterialProxy(PackageProxy):
             exec(command)
             return result
         except ImportError as e:
-            #raise Exception('eponymous data must be kept in all I/O modules at all times.')
             pass
     
     def import_output_data_from_output_data_module(self):
@@ -451,7 +450,6 @@ class MaterialProxy(PackageProxy):
             exec(command)
             return result
         except ImportError as e:
-            #raise Exception('eponymous data must be kept in all I/O modules at all times.')
             pass
 
     def import_score_definition_from_score_builder(self):
@@ -462,7 +460,6 @@ class MaterialProxy(PackageProxy):
         command = 'from {} import lilypond_file'.format(self.visualization_package_importable_name) 
         exec(command)
         if self.has_stylesheet:
-            #lilypond_file.file_initial_user_includes.append('stylesheet.ly')
             lilypond_file.file_initial_user_includes.append(self.stylesheet_file_name)
         lilypond_file.header_block.title = markuptools.Markup(self.material_spaced_name)
         return lilypond_file
@@ -673,7 +670,7 @@ class MaterialProxy(PackageProxy):
             if self.query('create LilyPond file from score builder? '):
                 self.create_ly_from_score_builder()    
         elif self.has_output_data:
-            line = "data exists but score builder doesn't.\n"
+            line = "output data exists but score builder doesn't.\n"
             self.conditionally_display_lines([line])
             if self.query('create score builder? '):
                 self.create_score_builder()
@@ -953,7 +950,7 @@ class MaterialProxy(PackageProxy):
             self.proceed(lines=[line])
         return self.is_changed
 
-    def write_output_data_module_to_disk(self, material):
+    def write_output_data_to_disk(self, material):
         output_data_module = file(os.path.join(self.material_package_directory, 'output.py'), 'w')
         output_data_module_import_statements = self.output_data_module_import_statements[:]
         for line in output_data_module_import_statements:
