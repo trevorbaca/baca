@@ -13,7 +13,7 @@ class Studio(SCFObject):
         self._global_proxy = GlobalProxy(session=self.session)
         self._score_wrangler = ScoreWrangler(session=self.session)
 
-    ### PUBLIC ATTRIBUTES ###
+    ### READ-ONLY PUBLIC ATTRIBUTES ###
 
     @property
     def breadcrumb(self):

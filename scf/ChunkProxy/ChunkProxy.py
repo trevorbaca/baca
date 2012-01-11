@@ -7,11 +7,13 @@ class ChunkProxy(PackageProxy):
         PackageProxy.__init__(self, package_importable_name=package_importable_name, session=session)
         self.score_template = score_template
 
-    ### PUBLIC ATTRIBUTES ###
+    ### READ-ONLY PUBLIC ATTRIBUTES ###
     
     @property
     def breadcrumb(self):
         return self.chunk_name
+
+    ### READ / WRITE PUBLIC ATTRIBUTES ###
 
     @apply
     def score_template():
@@ -21,7 +23,6 @@ class ChunkProxy(PackageProxy):
             from abjad.tools import scoretools
             assert isinstance(score_template, (scoretools.Score, type(None)))
             self._score_template = score_template
-
         return property(**locals())
 
     ### PUBLIC METHODS ###

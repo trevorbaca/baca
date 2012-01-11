@@ -42,16 +42,7 @@ class Session(object):
     def __str__(self):
         return '\n'.join(self.formatted_attributes)
 
-    ### PUBLIC ATTRIBUTES ###
-
-    @apply
-    def backtrack_preservation_is_active():
-        def fget(self):
-            return self._backtrack_preservation_is_active
-        def fset(self, backtrack_preservation_is_active):
-            assert isinstance(backtrack_preservation_is_active, bool)
-            self._backtrack_preservation_is_active = backtrack_preservation_is_active
-        return property(**locals())
+    ### READ-ONLY PUBLIC ATTRIBUTES ###
 
     @property
     def command_history(self):
@@ -65,24 +56,6 @@ class Session(object):
     def complete_transcript(self):
         return self._complete_transcript
 
-    @apply
-    def current_score_package_short_name():
-        def fget(self):
-            return self._current_score_package_short_name
-        def fset(self, current_score_package_short_name):
-            assert isinstance(current_score_package_short_name, (str, type(None)))
-            self._current_score_package_short_name = current_score_package_short_name
-        return property(**locals())
-
-    @apply
-    def dump_transcript():
-        def fget(self):
-            return self._dump_transcript
-        def fset(self, dump_transcript):
-            assert isinstance(dump_transcript, bool)
-            self._dump_transcript = dump_transcript
-        return property(**locals())
-
     @property
     def formatted_attributes(self):
         result = []
@@ -91,42 +64,6 @@ class Session(object):
         result.append('scores_to_show: {!r}'.format(self.scores_to_show))
         result.append('user_input: {!r}'.format(self.user_input))
         return result
-
-    @apply
-    def hide_next_redraw():
-        def fget(self):
-            return self._hide_next_redraw
-        def fset(self, hide_next_redraw):
-            assert isinstance(hide_next_redraw, bool)
-            self._hide_next_redraw = hide_next_redraw
-        return property(**locals())
-
-    @apply
-    def is_backtracking_locally():
-        def fget(self):
-            return self._is_backtracking_locally
-        def fset(self, is_backtracking_locally):
-            assert isinstance(is_backtracking_locally, bool)
-            self._is_backtracking_locally = is_backtracking_locally
-        return property(**locals())
-
-    @apply
-    def is_backtracking_to_score():
-        def fget(self):
-            return self._is_backtracking_to_score
-        def fset(self, is_backtracking_to_score):
-            assert isinstance(is_backtracking_to_score, bool)
-            self._is_backtracking_to_score = is_backtracking_to_score
-        return property(**locals())
-
-    @apply
-    def is_backtracking_to_studio():
-        def fget(self):
-            return self._is_backtracking_to_studio
-        def fset(self, is_backtracking_to_studio):
-            assert isinstance(is_backtracking_to_studio, bool)
-            self._is_backtracking_to_studio = is_backtracking_to_studio
-        return property(**locals())
 
     @property
     def is_complete(self):
@@ -169,17 +106,6 @@ class Session(object):
     def transcript(self):
         return self.complete_transcript.short_transcript
 
-    @apply
-    def user_input():
-        def fget(self):
-            return self._user_input
-        def fset(self, user_input):
-            assert isinstance(user_input, (str, type(None)))
-            self._user_input = user_input
-            if isinstance(user_input, str):
-                self._session_once_had_user_input = True
-        return property(**locals())
-
     @property
     def user_input_is_consumed(self):
         if self.session_once_had_user_input:
@@ -194,6 +120,82 @@ class Session(object):
         def fset(self, transcribe_next_command):
             assert isinstance(transcribe_next_command, bool)
             self._transcribe_next_command = transcribe_next_command
+        return property(**locals())
+
+    ### READ / WRITE PUBLIC METHODS ###
+
+    @apply
+    def backtrack_preservation_is_active():
+        def fget(self):
+            return self._backtrack_preservation_is_active
+        def fset(self, backtrack_preservation_is_active):
+            assert isinstance(backtrack_preservation_is_active, bool)
+            self._backtrack_preservation_is_active = backtrack_preservation_is_active
+        return property(**locals())
+
+    @apply
+    def current_score_package_short_name():
+        def fget(self):
+            return self._current_score_package_short_name
+        def fset(self, current_score_package_short_name):
+            assert isinstance(current_score_package_short_name, (str, type(None)))
+            self._current_score_package_short_name = current_score_package_short_name
+        return property(**locals())
+
+    @apply
+    def dump_transcript():
+        def fget(self):
+            return self._dump_transcript
+        def fset(self, dump_transcript):
+            assert isinstance(dump_transcript, bool)
+            self._dump_transcript = dump_transcript
+        return property(**locals())
+
+    @apply
+    def hide_next_redraw():
+        def fget(self):
+            return self._hide_next_redraw
+        def fset(self, hide_next_redraw):
+            assert isinstance(hide_next_redraw, bool)
+            self._hide_next_redraw = hide_next_redraw
+        return property(**locals())
+
+    @apply
+    def is_backtracking_locally():
+        def fget(self):
+            return self._is_backtracking_locally
+        def fset(self, is_backtracking_locally):
+            assert isinstance(is_backtracking_locally, bool)
+            self._is_backtracking_locally = is_backtracking_locally
+        return property(**locals())
+
+    @apply
+    def is_backtracking_to_score():
+        def fget(self):
+            return self._is_backtracking_to_score
+        def fset(self, is_backtracking_to_score):
+            assert isinstance(is_backtracking_to_score, bool)
+            self._is_backtracking_to_score = is_backtracking_to_score
+        return property(**locals())
+
+    @apply
+    def is_backtracking_to_studio():
+        def fget(self):
+            return self._is_backtracking_to_studio
+        def fset(self, is_backtracking_to_studio):
+            assert isinstance(is_backtracking_to_studio, bool)
+            self._is_backtracking_to_studio = is_backtracking_to_studio
+        return property(**locals())
+
+    @apply
+    def user_input():
+        def fget(self):
+            return self._user_input
+        def fset(self, user_input):
+            assert isinstance(user_input, (str, type(None)))
+            self._user_input = user_input
+            if isinstance(user_input, str):
+                self._session_once_had_user_input = True
         return property(**locals())
 
     @apply

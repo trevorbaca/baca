@@ -21,11 +21,13 @@ class MakerProxy(PackageProxy):
         else:
             return '{}({!r})'.format(self.class_name, self.maker_class_name)
 
-    ### PUBLIC ATTRIBUTES ###
+    ### READ-ONLY PUBLIC ATTRIBUTES ###
     
     @property
     def breadcrumb(self):
         return self.maker_name
+
+    ### READ / WRITE PUBLIC ATTRIBUTES ###
 
     # TODO: Maybe this can't be set here? Must be derived from hardcode maker classfile?
     @apply

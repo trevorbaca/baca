@@ -16,7 +16,7 @@ class ZaggedPitchClassMaker(InteractiveEditor):
         self.stylesheet = os.path.join(os.path.dirname(__file__), 'stylesheet.ly')
         self._generic_output_name = 'zagged pitch-classes'
 
-    ### PUBLIC ATTRIBUTES ###
+    ### READ-ONLY PUBLIC ATTRIBUTES ###
 
     output_file_import_statements = [
         'from abjad.tools.sequencetools.CyclicTree import CyclicTree',]

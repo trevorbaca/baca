@@ -3,7 +3,7 @@ import collections
 
 class UserInputWrapper(collections.OrderedDict):
     
-    ### PUBLIC ATTRIBUTES ###
+    ### READ-ONLY PUBLIC ATTRIBUTES ###
 
     @property
     def editable_lines(self):

@@ -12,7 +12,7 @@ class MenuObject(SCFObject):
         self.should_clear_terminal = False
         self.where = where
 
-    ### PUBLIC ATTRIBUTES ###
+    ### READ / WRITE PUBLIC ATTRIBUTES ###
 
     @apply
     def prompt_default():

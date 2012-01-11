@@ -4,7 +4,7 @@ import copy
 
 class InteractiveMaterialProxy(MaterialProxy):
 
-    ### PUBLIC ATTRIBUTES ###
+    ### READ-ONLY PUBLIC ATTRIBUTES ###
 
     @property
     def has_changes(self):

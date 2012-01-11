@@ -7,7 +7,7 @@ from baca.scf.editors.InteractiveEditor import InteractiveEditor
 
 class PerformerEditor(InteractiveEditor):
 
-    ### PUBLIC ATTRIBUTES ###
+    ### READ-ONLY PUBLIC ATTRIBUTES ###
 
     @property
     def InstrumentEditor(self):

@@ -3,7 +3,7 @@ class ScoreTemplate(object):
     def __init__(self, spaced_name=None):
         self.spaced_name = spaced_name
 
-    ### PUBLIC ATTRIBUTES ###
+    ### READ / WRITE PUBLIC ATTRIBUTES ###
 
     @apply
     def spaced_name():

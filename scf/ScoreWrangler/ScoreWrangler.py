@@ -12,7 +12,7 @@ class ScoreWrangler(PackageWrangler):
     def __repr__(self):
         return '{}()'.format(self.class_name)
 
-    ### PUBLIC ATTRIBUTES ###
+    ### READ-ONLY PUBLIC ATTRIBUTES ###
 
     @property
     def ScoreProxy(self):

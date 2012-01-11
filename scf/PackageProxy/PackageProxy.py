@@ -22,7 +22,7 @@ class PackageProxy(DirectoryProxy):
         else:
             return '{}()'.format(self.class_name)
 
-    ### PUBLIC ATTRIBUTES ###
+    ### READ-ONLY PUBLIC ATTRIBUTES ###
 
     @property
     def directory_name(self):
@@ -38,27 +38,6 @@ class PackageProxy(DirectoryProxy):
     def initializer_file_name(self):
         if self.directory_name is not None:
             return os.path.join(self.directory_name, '__init__.py')
-
-    @apply
-    def package_importable_name():
-        def fget(self):
-            return self._package_importable_name
-        def fset(self, package_importable_name):
-            assert isinstance(package_importable_name, (str, type(None)))
-            if isinstance(package_importable_name, str):
-                package_short_name = package_importable_name.split('.')[-1]
-                self.package_short_name = package_short_name
-            self._package_importable_name = package_importable_name
-        return property(**locals())
-
-    @apply
-    def package_short_name():
-        def fget(self):
-            return self._package_short_name
-        def fset(self, package_short_name):
-            assert isinstance(package_short_name, (str, type(None)))
-            self._package_short_name = package_short_name
-        return property(**locals())
 
     @property
     def package_spaced_name(self):
@@ -78,20 +57,6 @@ class PackageProxy(DirectoryProxy):
             result = '.'.join(self.package_importable_name.split('.')[:-1])
             if result:
                 return result
-
-    @apply
-    def purview():
-        def fget(self):
-            if self._purview is not None:
-                return self._purview
-            else:
-                return self._package_importable_name_to_purview(self.package_importable_name)
-        def fset(self, purview):
-            if self.package_importable_name is None:
-                self._purview = purview
-            else:
-                raise ValueError('package importable name already assigned.')
-        return property(**locals())
 
     @property
     def purview_name(self):
@@ -161,6 +126,43 @@ class PackageProxy(DirectoryProxy):
         initializer = file(self.initializer_file_name, 'w')
         initializer.write(''.join(new_lines))
         initializer.close()
+
+    ### READ / WRITE PUBLIC ATTRIBUTES ###
+
+    @apply
+    def package_importable_name():
+        def fget(self):
+            return self._package_importable_name
+        def fset(self, package_importable_name):
+            assert isinstance(package_importable_name, (str, type(None)))
+            if isinstance(package_importable_name, str):
+                package_short_name = package_importable_name.split('.')[-1]
+                self.package_short_name = package_short_name
+            self._package_importable_name = package_importable_name
+        return property(**locals())
+
+    @apply
+    def package_short_name():
+        def fget(self):
+            return self._package_short_name
+        def fset(self, package_short_name):
+            assert isinstance(package_short_name, (str, type(None)))
+            self._package_short_name = package_short_name
+        return property(**locals())
+
+    @apply
+    def purview():
+        def fget(self):
+            if self._purview is not None:
+                return self._purview
+            else:
+                return self._package_importable_name_to_purview(self.package_importable_name)
+        def fset(self, purview):
+            if self.package_importable_name is None:
+                self._purview = purview
+            else:
+                raise ValueError('package importable name already assigned.')
+        return property(**locals())
 
     ### PUBLIC METHODS ###
 

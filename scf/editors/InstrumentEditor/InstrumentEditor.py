@@ -6,7 +6,7 @@ from baca.scf.editors.InteractiveEditor import InteractiveEditor
 # TODO: eventually make clef information editable
 class InstrumentEditor(InteractiveEditor):
 
-    ### PUBLIC ATTRIBUTES ###
+    ### READ-ONLY PUBLIC ATTRIBUTES ###
 
     @property
     def breadcrumb(self):

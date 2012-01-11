@@ -114,7 +114,7 @@ class MakerWrangler(PackageWrangler, PackageProxy):
         lines.append("        self.stylesheet = os.path.join(os.path.dirname(__file__), 'stylesheet.ly')")
         lines.append("        self._generic_output_name = {!r}".format(generic_output_name))
         lines.append('')
-        lines.append('    ### PUBLIC ATTRIBUTES ###')
+        lines.append('    ### READ-ONLY PUBLIC ATTRIBUTES ###')
         lines.append('')
         lines.append('    output_file_import_statements = [')
         lines.append('        ]')

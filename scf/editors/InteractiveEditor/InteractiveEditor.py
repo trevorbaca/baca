@@ -18,7 +18,7 @@ class InteractiveEditor(SCFObject):
             summary = 'target={!r}'.format(self.target)
         return '{}({})'.format(type(self).__name__, summary)
 
-    ### PUBLIC ATTRIBUTES ###
+    ### READ-ONLY PUBLIC ATTRIBUTES ###
     
     @property
     def target_attribute_menu_entry_tokens(self):
