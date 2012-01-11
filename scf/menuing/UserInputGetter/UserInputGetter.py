@@ -268,12 +268,12 @@ class UserInputGetter(MenuObject):
             if execs:
                 for exec_string in execs:
                     try:
-                        formatted_exec_string = exec_string.format(user_response)
-                        exec(formatted_exec_string)
+                        command = exec_string.format(user_response)
+                        exec(command)
                     except:
                         try:
-                            formatted_exec_string = exec_string.format(repr(user_response))
-                            exec(formatted_exec_string)
+                            command = exec_string.format(repr(user_response))
+                            exec(command)
                         except:
                             if self.prompt_index < len(self.helps):
                                 lines = []

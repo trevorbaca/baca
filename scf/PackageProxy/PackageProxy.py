@@ -104,8 +104,8 @@ class PackageProxy(DirectoryProxy):
         for line in initializer.readlines():
             if line.startswith(name):
                 initializer.close()
-                executable_line = line.replace(name, 'result')
-                exec(executable_line)
+                command = line.replace(name, 'result')
+                exec(command)
                 return result
 
     def _write_initializer_metadata(self, name, value):
@@ -238,8 +238,10 @@ class PackageProxy(DirectoryProxy):
 
     def import_attribute_from_initializer(self, attribute_name):
         try:
-            exec('from {} import {}'.format(self.package_importable_name, attribute_name))
-            exec('result = {}'.format(attribute_name))
+            command = 'from {} import {}'.format(self.package_importable_name, attribute_name)
+            exec(command)
+            command = 'result = {}'.format(attribute_name)
+            exec(command)
             return result
         except ImportError:
             return None
@@ -252,7 +254,8 @@ class PackageProxy(DirectoryProxy):
     def get_tags(self):
         import collections
         try:
-            exec('from {} import tags'.format(self.package_importable_name))
+            command = 'from {} import tags'.format(self.package_importable_name)
+            exec(command)
             return tags
         except ImportError:    
             return collections.OrderedDict([])

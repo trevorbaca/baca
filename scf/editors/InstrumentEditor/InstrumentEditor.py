@@ -168,7 +168,8 @@ class InstrumentEditor(InteractiveEditor):
         for instrument_name in instrument_names:
             instrument_name = instrument_name.title()
             instrument_name = instrument_name.replace(' ', '')
-            exec('instrument = instrumenttools.{}()'.format(instrument_name))
+            command = 'instrument = instrumenttools.{}()'.format(instrument_name)
+            exec(command)
             if isinstance(instrument, instrumenttools.UntunedPercussion):
                 self.preserve_backtracking = True
                 instrument_name = self.get_untuned_percussion_name_interactively()

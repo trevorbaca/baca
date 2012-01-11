@@ -115,7 +115,8 @@ class InteractiveMaterialProxy(MaterialProxy):
         prompt = key.replace('_', ' ')
         default = repr(value)
         response = self.handle_raw_input_with_default('{}> '.format(prompt), default=default)
-        exec('from abjad import *')
+        command = 'from abjad import *'
+        exec(command)
         new_value = eval(response)
         return new_value
 

@@ -28,10 +28,10 @@ class MaterialProxy(PackageProxy):
     def editor(self):
         editor_class_name = self.get_tag('editor')
         try:
-            line = 'from baca.scf.makers import {}'.format(editor_class_name)
-            exec(line)
-            line = 'result = {}()'.format(editor_class_name)
-            exec(line)
+            command = 'from baca.scf.makers import {}'.format(editor_class_name)
+            exec(command)
+            command = 'result = {}()'.format(editor_class_name)
+            exec(command)
             return result
         except:
             pass
@@ -250,7 +250,8 @@ class MaterialProxy(PackageProxy):
     def user_input_wrapper(self):
         if self.is_interactive:
             if self.material_definition_module_importable_name is not None:
-                exec('from {} import user_input'.format(self.material_definition_module_importable_name))
+                command = 'from {} import user_input'.format(self.material_definition_module_importable_name)
+                exec(command)
                 return user_input
 
     @property
@@ -419,8 +420,10 @@ class MaterialProxy(PackageProxy):
 
     def import_attribute_from_material_definition(self, attribute_name):
         try:
-            exec('from {} import {}'.format(self.material_definition_module_importable_name, attribute_name))
-            exec('result = {}'.format(attribute_name))
+            command = 'from {} import {}'.format(self.material_definition_module_importable_name, attribute_name)
+            exec(command)
+            command = 'result = {}'.format(attribute_name)
+            exec(command)
             return result
         except ImportError:
             return None
@@ -428,8 +431,11 @@ class MaterialProxy(PackageProxy):
     def import_material_definition_from_material_definition_module(self):
         self.unimport_material_definition_module()
         try:
-            exec('from {} import {}'.format(self.material_definition_module_importable_name, self.material_underscored_name))
-            exec('result = {}'.format(self.material_underscored_name))
+            command = 'from {} import {}'.format(
+                self.material_definition_module_importable_name, self.material_underscored_name)
+            exec(command)
+            command = 'result = {}'.format(self.material_underscored_name)
+            exec(command)
             return result
         except ImportError as e:
             #raise Exception('eponymous data must be kept in all I/O modules at all times.')
@@ -438,8 +444,11 @@ class MaterialProxy(PackageProxy):
     def import_output_data_from_output_data_module(self):
         self.unimport_module_hierarchy()
         try:
-            exec('from {} import {}'.format(self.output_data_module_importable_name, self.material_underscored_name))
-            exec('result = {}'.format(self.material_underscored_name))
+            command = 'from {} import {}'.format(
+                self.output_data_module_importable_name, self.material_underscored_name)
+            exec(command)
+            command = 'result = {}'.format(self.material_underscored_name)
+            exec(command)
             return result
         except ImportError as e:
             #raise Exception('eponymous data must be kept in all I/O modules at all times.')
@@ -782,7 +791,8 @@ class MaterialProxy(PackageProxy):
         self.remove_line_from_initializer(self.parent_initializer_file_name, import_statement)
 
     def reveal_modules(self):
-        exec('module_names = sys.modules.keys()')
+        command = 'module_names = sys.modules.keys()'
+        exec(command)
         module_names = [x for x in module_names if x.startswith(self.score_package_short_name)]
         module_names.sort()
         return module_names

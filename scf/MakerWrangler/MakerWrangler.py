@@ -39,7 +39,8 @@ class MakerWrangler(PackageWrangler, PackageProxy):
     ### PUBLIC METHODS ###
 
     def get_maker(self, maker_package_short_name):
-        exec('from baca.scf.makers import {} as maker_class'.format(maker_package_short_name))
+        command = 'from baca.scf.makers import {} as maker_class'.format(maker_package_short_name)
+        exec(command)
         maker = maker_class()
         return maker
 
@@ -47,9 +48,11 @@ class MakerWrangler(PackageWrangler, PackageProxy):
     def iterate_makers(self):
         self.unimport_baca_package()
         self.unimport_makers_package()
-        exec('import baca')
+        command = 'import baca'
+        exec(command)
         for maker_class_name in self.list_maker_class_names():
-            exec('result = baca.scf.makers.{}()'.format(maker_class_name))
+            command = 'result = baca.scf.makers.{}()'.format(maker_class_name)
+            exec(command)
             yield result
 
     # add PackageWrangler.iterate_package_class_names and replace this with it

@@ -56,9 +56,11 @@ class MenuObject(SCFObject):
     def exec_statement(self):
         lines = []
         statement = self.handle_raw_input('XCF')
-        exec('from abjad import *')
+        command = 'from abjad import *'
+        exec(command)
         try:
-            exec('result = {}'.format(statement))
+            command = 'result = {}'.format(statement)
+            exec(command)
             lines.append('{!r}'.format(result))
         except:
             lines.append('expression not executable.')
