@@ -42,6 +42,4 @@ TODO
 
 20. Change the names of all 'iterate_' functions to begin in 'list_'.
 
-21. Move baca/makers to baca/scf/makers.
-
-22. Audit to remove 'diretory_name' attributes.
+21. Audit to remove 'diretory_name' attributes.
