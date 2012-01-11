@@ -42,19 +42,19 @@ class InteractiveMaterialProxy(MaterialProxy):
         line = 'Interactive material package {} created.\n'.format(package_importable_name)
         self.conditionally_display_lines([line])
 
-    def create_interactively(self):
-        while True:
-            key, value = self.maker_wrangler.select_maker()
-            if value is None:
-                break
-            else:
-                maker = value
-            maker.score = self
-            result = maker.run()
-            if result:
-                break
-        self.proceed()
-        return True, None
+#    def create_interactively(self):
+#        while True:
+#            key, value = self.maker_wrangler.select_maker()
+#            if value is None:
+#                break
+#            else:
+#                maker = value
+#            maker.score = self
+#            result = maker.run()
+#            if result:
+#                break
+#        self.proceed()
+#        return True, None
 
     def run(self, user_input_wrapper=None):
         if user_input_wrapper is None:

@@ -1,5 +1,13 @@
 TODO
 
+-5. Reverse polarity of 'prompt_proceed' keywords.
+
+-4. Audit for read-only and read / write public attributes.
+
+-3. Rename 'return_value_attr' to 'return_value_attribute'.
+
+-2. Rename 'menu_entry_tokens' to simply 'tokens'.
+
 -1. Be able safely to write junk into any system file.
 
 0. Audit all calls to 'self.proceed()' for optional notification lines.

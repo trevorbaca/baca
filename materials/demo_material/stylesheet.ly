@@ -1,3 +1,5 @@
+% source: //Users/trevorbaca/Documents/other/baca/scf/stylesheets/clean_letter_16.ly
+
 #(set-default-paper-size "letter" 'portrait)
 #(set-global-staff-size 16)
 

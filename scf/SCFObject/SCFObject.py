@@ -53,7 +53,7 @@ class SCFObject(object):
     # TODO: write test
     @property
     def scf_root_directory(self):
-        return os.path.join('//', 'Users', 'trevorbaca', 'Documents', 'other', 'baca', 'scf')
+        return os.path.join('/', 'Users', 'trevorbaca', 'Documents', 'other', 'baca', 'scf')
 
     @property
     def spaced_class_name(self):

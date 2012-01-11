@@ -195,17 +195,26 @@ class MakerWrangler(PackageWrangler, PackageProxy):
             self.pop_breadcrumb()
         self.pop_breadcrumb()
 
-    def select_maker(self):
+    # TODO: write test
+    def select_maker_interactively(self):
         menu, section = self.make_new_menu(where=self.where(), is_numbered=True)
         section.menu_entry_tokens = self.list_maker_spaced_class_names()
-        result = menu.run()
-        if result is not None:
-            maker_name = result.replace(' ', '_')
-            maker_name = iotools.underscore_delimited_lowercase_to_uppercamelcase(maker_name)           
-            maker = self.get_maker(maker_name)
-            return True, maker
-        else:
-            return True, None
+        while True:
+            self.append_breadcrumb('select editor')
+            result = menu.run()
+            if self.backtrack():
+                self.pop_breadcrumb()
+                return
+            elif not result:
+                self.pop_breadcrumb()
+                continue 
+            else:
+                self.pop_breadcrumb()
+                break
+        maker_name = result.replace(' ', '_')
+        maker_name = iotools.underscore_delimited_lowercase_to_uppercamelcase(maker_name)           
+        maker = self.get_maker(maker_name)
+        return maker
 
     def unimport_makers_package(self):
         self.remove_package_importable_name_from_sys_modules(self.package_importable_name)

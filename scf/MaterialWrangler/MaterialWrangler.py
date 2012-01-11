@@ -132,8 +132,6 @@ class MaterialWrangler(PackageWrangler, PackageProxy):
     def iterate_material_summaries(self):
         for material_proxy in self.iterate_package_proxies():
             summary = material_proxy.package_short_name
-            #if not material_proxy.has_tag('maker'):
-            #    summary = summary + ' (@)'
             yield summary
 
     def make_main_menu(self):
@@ -148,7 +146,6 @@ class MaterialWrangler(PackageWrangler, PackageProxy):
         score_package_importable_name = self.package_importable_name
         package_importable_name_parts = []
         package_importable_name_parts.append(score_package_importable_name)
-        #package_importable_name_parts.append(material_underscored_name.strip(' (@)'))
         package_importable_name_parts.append(material_underscored_name)
         package_importable_name = '.'.join(package_importable_name_parts)
         package_proxy = PackageProxy(package_importable_name, session=self.session)

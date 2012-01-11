@@ -6,9 +6,9 @@ import sys
 
 class DirectoryProxy(SCFObject):
 
-    def __init__(self, directory_name=None, session=None):
-        #assert isinstance(directory_name, (str, type(None)))
-        assert isinstance(directory_name, (str))
+    #def __init__(self, directory_name=None, session=None):
+    def __init__(self, directory_name, session=None):
+        assert isinstance(directory_name, str)
         assert os.path.exists(directory_name)
         SCFObject.__init__(self, session=session)
         self._directory_name = directory_name
@@ -25,22 +25,15 @@ class DirectoryProxy(SCFObject):
         return not self == other
 
     def __repr__(self):
-        if self.directory_name is not None:
-            return '{}({!r})'.format(self.class_name, self.directory_name)
-        else:
-            return '{}()'.format(self.class_name)
+#        if self.directory_name is not None:
+#            return '{}({!r})'.format(self.class_name, self.directory_name)
+#        else:
+#            return '{}()'.format(self.class_name)
+        return '{}({!r})'.format(self.class_name, self.directory_name)
 
-    ### PUBLIC ATTRIBUTES ###
+    ### READ-ONLY PUBLIC ATTRIBUTES ###
 
-    @apply
-    def directory_name():
-        def fget(self):
-            return self._directory_name
-        def fset(self, directory_name):
-            assert isinstance(directory_name, (str, type(None)))
-            self._directory_name = directory_name
-        return property(**locals())
-
+    # TODO: remove
     @property
     def has_directory(self):
         if self.directory_name is not None:
@@ -92,6 +85,18 @@ class DirectoryProxy(SCFObject):
             self.conditionally_display_lines(lines)
             return True
         return False
+
+    ### READ / WRITE PUBLIC ATTRIBUTES ###
+
+    # TODO: make read-only
+    @apply
+    def directory_name():
+        def fget(self):
+            return self._directory_name
+        def fset(self, directory_name):
+            assert isinstance(directory_name, (str, type(None)))
+            self._directory_name = directory_name
+        return property(**locals())
 
     ### PUBLIC METHODS ###
 

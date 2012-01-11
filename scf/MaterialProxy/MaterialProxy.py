@@ -1,6 +1,8 @@
 from abjad.tools import iotools
 from abjad.tools import markuptools
+from baca.scf.MakerWrangler import MakerWrangler
 from baca.scf.PackageProxy import PackageProxy
+from baca.scf.StylesheetProxy import StylesheetProxy
 from baca.scf.StylesheetWrangler import StylesheetWrangler
 import shutil
 import os
@@ -21,6 +23,22 @@ class MaterialProxy(PackageProxy):
     @property
     def breadcrumb(self):
         return self.package_spaced_name
+
+    @property
+    def editor(self):
+        editor_class_name = self.get_tag('editor')
+        try:
+            line = 'from baca.scf.makers import {}'.format(editor_class_name)
+            exec(line)
+            line = 'result = {}()'.format(editor_class_name)
+            exec(line)
+            return result
+        except:
+            pass
+
+    @property
+    def has_editor(self):
+        return bool(self.get_tag('editor'))
 
     @property
     def has_input_data(self):
@@ -205,6 +223,16 @@ class MaterialProxy(PackageProxy):
 
     # TODO: write test
     @property
+    def source_stylesheet_file_name(self):
+        if self.has_stylesheet:
+            stylesheet = file(self.stylesheet_file_name, 'r')
+            first_line = stylesheet.readlines()[0].strip()
+            assert first_line.endswith('.ly')
+            result = first_line.split()[-1]
+            return result
+
+    # TODO: write test
+    @property
     def stub_material_definition_file_name(self):
         return os.path.join(self.assets_directory, 'stub_material_definition.py')
 
@@ -274,11 +302,11 @@ class MaterialProxy(PackageProxy):
         lines = []
         lilypond_file = self.import_score_definition_from_score_builder()
         if is_forced or not self.lilypond_file_format_is_equal_to_score_builder_ly(lilypond_file):
-            iotools.write_expr_to_visualization_ly(lilypond_file, self.visualization_ly_file_name)
-            iotools.write_expr_to_visualization_pdf(lilypond_file, self.visualization_pdf_file_name)
-            lines.append('LilyPond file and PDF written to disk.')
+            iotools.write_expr_to_pdf(lilypond_file, self.visualization_pdf_file_name, print_status=False)
+            iotools.write_expr_to_ly(lilypond_file, self.visualization_ly_file_name, print_status=False)
+            lines.append('PDF and LilyPond file written to disk.')
         else:
-            lines.append('LilyPond file is the same. (LilyPond file and PDF preserved.)')
+            lines.append('LilyPond file is the same. (PDF and LilyPond file preserved.)')
         lines.append('')
         self.conditionally_display_lines(lines)
         if prompt_proceed:
@@ -349,9 +377,6 @@ class MaterialProxy(PackageProxy):
     def edit_input_file(self):
         os.system('vi + {}'.format(self.input_file_name))
 
-    def edit_visualization_ly(self):
-        os.system('vi {}'.format(self.visualization_ly_file_name))
-
     def edit_output_file(self):
         os.system('vi + {}'.format(self.output_file_name))
 
@@ -360,6 +385,13 @@ class MaterialProxy(PackageProxy):
 
     def edit_score_builder(self):
         os.system('vi + {}'.format(self.score_builder_file_name))
+
+    def edit_source_stylesheet(self):
+        stylesheet_proxy = StylesheetProxy(self.source_stylesheet_file_name, session=self.session)
+        stylesheet_proxy.vi_stylesheet()
+
+    def edit_visualization_ly(self):
+        os.system('vi {}'.format(self.visualization_ly_file_name))
 
     def get_materials_package_importable_name(self):
         if self.purview.is_score_local_purview:
@@ -423,6 +455,10 @@ class MaterialProxy(PackageProxy):
         self.unimport_output_module()
         command = 'from {} import lilypond_file'.format(self.visualization_package_importable_name) 
         exec(command)
+        if self.has_stylesheet:
+            #lilypond_file.file_initial_user_includes.append('stylesheet.ly')
+            lilypond_file.file_initial_user_includes.append(self.stylesheet_file_name)
+        lilypond_file.header_block.title = markuptools.Markup(self.material_spaced_name)
         return lilypond_file
         
     def get_output_preamble_lines(self):
@@ -465,8 +501,14 @@ class MaterialProxy(PackageProxy):
             self.delete_score_stylesheet(prompt_proceed=True)
         elif result == 'sse':
             self.edit_stylesheet()
+        elif result == 'ssm':
+            self.edit_source_stylesheet()
+        elif result == 'ssl':
+            self.link_score_stylesheet(prompt_proceed=True)
         elif result == 'sss':
             self.select_stylesheet()
+        elif result == 'stl':
+            self.manage_stylesheets()
         elif result == 'dc':
             self.write_input_data_to_output_file(is_forced=True, prompt_proceed=True)
         elif result == 'di':
@@ -480,15 +522,22 @@ class MaterialProxy(PackageProxy):
         elif result == 'lyi':
             self.edit_ly()
         elif result == 'pdfc':
-            self.create_pdf_from_score_builder(is_forced=True, prompt_proceed=True)
+            self.create_ly_and_pdf_from_score_builder(is_forced=True, prompt_proceed=True)
+            self.open_visualization_pdf()
         elif result == 'pdfd':
             self.delete_pdf()
         elif result == 'pdfi':
             self.open_visualization_pdf()
+        elif result == 'er':
+            self.run_editor()
+        elif result == 'es':
+            self.select_editor_interactively()
         # TODO: write tests
         elif result == 'del':
             self.delete_material_package()
             self.session.is_backtracking_locally = True
+        elif result == 'editors':
+            self.manage_editors()
         elif result == 'init':
             self.edit_initializer()
         elif result == 'ren':
@@ -511,6 +560,20 @@ class MaterialProxy(PackageProxy):
         trimmed_score_builder_ly_lines = self.trim_ly_lines(self.visualization_ly_file_name)
         return trimmed_temp_ly_file_lines == trimmed_score_builder_ly_lines
 
+    def link_score_stylesheet(self, source_stylesheet_file_name=None, prompt_proceed=False):
+        if source_stylesheet_file_name is None:
+            source_stylesheet_file_name = self.source_stylesheet_file_name
+        source = file(source_stylesheet_file_name, 'r')
+        target = file(self.stylesheet_file_name, 'w')
+        target.write('% source: {}\n\n'.format(source_stylesheet_file_name))
+        for line in source.readlines():
+            target.write(line)
+        source.close()
+        target.close()
+        line = 'stylesheet linked.'
+        if prompt_proceed:
+            self.proceed(lines=[line])
+        
     def make_main_menu(self):
         menu, hidden_section = self.make_new_menu(where=self.where(), is_hidden=True)
         section = menu.make_new_section()
@@ -538,6 +601,8 @@ class MaterialProxy(PackageProxy):
         if self.has_stylesheet:
             hidden_section.append(('ssd', 'score stylesheet - delete'))
             section.append(('sse', 'score stylesheet - edit'))
+            hidden_section.append(('ssm', 'source stylesheet - edit'))
+            hidden_section.append(('ssl', 'score stylesheet - relink'))
         if self.has_output_file:
             section = menu.make_new_section()
             section.append(('dc', 'output data - recreate'))
@@ -547,13 +612,13 @@ class MaterialProxy(PackageProxy):
             section = menu.make_new_section()
             section.append(('dc', 'output data - create'))
         if self.has_visualization_ly:
-            section = menu.make_new_section()
-            section.append(('lyc', 'output ly - recreate'))
+            #section = menu.make_new_section()
+            hidden_section.append(('lyc', 'output ly - recreate'))
             hidden_section.append(('lyd', 'output ly - delete'))
-            section.append(('lyi', 'output ly - inspect'))
+            hidden_section.append(('lyi', 'output ly - inspect'))
         elif self.has_score_builder:
-            section = menu.make_new_section()
-            section.append(('lyc', 'output ly - create'))
+            #section = menu.make_new_section()
+            hidden_section.append(('lyc', 'output ly - create'))
         if self.has_visualization_pdf:
             section = menu.make_new_section()
             section.append(('pdfc', 'output pdf - recreate'))
@@ -563,12 +628,18 @@ class MaterialProxy(PackageProxy):
             section = menu.make_new_section()
             section.append(('pdfc', 'output pdf - create'))
         section = menu.make_new_section()
-        section.append(('del', 'delete material'))
-        section.append(('init', 'edit initializer'))
-        section.append(('reg', 'regenerate material'))
-        section.append(('ren', 'rename material'))
-        section.append(('sum', 'summarize material'))
+        if self.has_editor:
+            section.append(('er', 'editor - run'))
+        section.append(('es', 'editor - select'))
+        hidden_section = menu.make_new_section(is_hidden=True)
+        hidden_section.append(('del', 'delete material'))
+        hidden_section.append(('editors', 'manage editors'))
+        hidden_section.append(('init', 'edit initializer'))
         hidden_section.append(('ls', 'list directory'))
+        hidden_section.append(('reg', 'regenerate material'))
+        hidden_section.append(('ren', 'rename material'))
+        hidden_section.append(('stl', 'manage stylesheets'))
+        hidden_section.append(('sum', 'summarize material'))
         return menu
 
     # TODO: MaterialProxy
@@ -585,22 +656,9 @@ class MaterialProxy(PackageProxy):
         tags['maker'] = self.class_name
         return tags
 
-    def run(self, user_input=None):
-        self.assign_user_input(user_input=user_input)
-        while True:
-            self.append_breadcrumb()
-            menu = self.make_main_menu()
-            result = menu.run()
-            if self.backtrack():
-                break
-            elif not result:
-                self.pop_breadcrumb()
-                continue
-            self.handle_main_menu_result(result)
-            if self.backtrack():
-                break
-            self.pop_breadcrumb()
-        self.pop_breadcrumb()
+    def manage_stylesheets(self):
+        stylesheet_wrangler = StylesheetWrangler(session=self.session)
+        stylesheet_wrangler.run()
 
     def edit_ly(self):
         if self.has_visualization_ly:
@@ -732,6 +790,23 @@ class MaterialProxy(PackageProxy):
         module_names.sort()
         return module_names
 
+    def run(self, user_input=None):
+        self.assign_user_input(user_input=user_input)
+        while True:
+            self.append_breadcrumb()
+            menu = self.make_main_menu()
+            result = menu.run()
+            if self.backtrack():
+                break
+            elif not result:
+                self.pop_breadcrumb()
+                continue
+            self.handle_main_menu_result(result)
+            if self.backtrack():
+                break
+            self.pop_breadcrumb()
+        self.pop_breadcrumb()
+
     def run_abjad_on_input_file(self):
         os.system('abjad {}'.format(self.input_file_name))
         self.conditionally_display_lines([''])
@@ -739,6 +814,10 @@ class MaterialProxy(PackageProxy):
     def run_abjad_on_score_builder(self):
         os.system('abjad {}'.format(self.score_builder_file_name))
         self.conditionally_display_lines([''])
+
+    def run_editor(self):
+        if self.has_editor:
+            self.editor.run()
 
     def run_python_on_input_file(self, prompt_proceed=False):
         os.system('python {}'.format(self.input_file_name))
@@ -752,24 +831,31 @@ class MaterialProxy(PackageProxy):
         if prompt_proceed:
             self.proceed(lines=[line])
 
-    def select_stylesheet(self, prompt_proceed=False):
+    # TODO: write test
+    def select_editor_interactively(self, prompt_proceed=False):
+        maker_wrangler = MakerWrangler(session=self.session)
+        self.session.backtrack_preservation_is_active = True
+        editor = maker_wrangler.select_maker_interactively()
+        self.session.backtrack_preservation_is_active = False
+        if self.backtrack():
+            return
+        self.add_tag('editor', editor.class_name)
+        line = 'editor selected.'
+        if prompt_proceed:
+            self.proceed(lines=[line])
+
+    def select_stylesheet_interactively(self, prompt_proceed=False):
         stylesheet_wrangler = StylesheetWrangler(session=self.session)
         self.session.backtrack_preservation_is_active = True
         source_stylesheet_file_name = stylesheet_wrangler.select_stylesheet_file_name_interactively()
         self.session.backtrack_preservation_is_active = False
         if self.backtrack():
             return
-        source = file(source_stylesheet_file_name, 'r')
-        target = file(self.stylesheet_file_name, 'w')
-        target.write('% source: {}\n\n'.format(source_stylesheet_file_name))
-        for line in source.readlines():
-            target.write(line)
-        source.close()
-        target.close()
+        self.link_score_stylesheet(source_stylesheet_file_name)
         line = 'stylesheet selected.'
         if prompt_proceed:
             self.proceed(lines=[line])
-        
+
     def summarize_material_package(self):
         lines = []
         found = []
