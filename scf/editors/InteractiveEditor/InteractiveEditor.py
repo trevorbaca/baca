@@ -68,9 +68,9 @@ class InteractiveEditor(SCFObject):
     def run(self, user_input=None):
         self.assign_user_input(user_input=user_input)
         self.append_breadcrumb()
-        self.session.preserve_backtracking = True
+        self.preserve_backtracking = True
         self.conditionally_initialize_target()
-        self.session.preserve_backtracking = False
+        self.preserve_backtracking = False
         self.pop_breadcrumb()
         if self.backtrack():
             return

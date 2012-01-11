@@ -87,6 +87,14 @@ class SCFObject(object):
     ### READ / WRITE PUBLIC ATTRIBUTES ###
 
     @apply
+    def preserve_backtracking():
+        def fget(self):
+            return self.session.preserve_backtracking
+        def fset(self, preserve_backtracking):
+            self.session.preserve_backtracking = preserve_backtracking
+        return property(**locals())
+
+    @apply
     def session():
         def fget(self):
             return self._session

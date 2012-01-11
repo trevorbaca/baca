@@ -1,7 +1,5 @@
 TODO
 
--3. Change 'self.session.preserve_backtracking' to 'self.preserve_backtracking'.
-
 -2. Remove def LocalClass() pattern.
 
 -1. Reverse polarity of 'prompt_proceed' keywords.
