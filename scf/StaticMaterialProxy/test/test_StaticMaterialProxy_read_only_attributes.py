@@ -11,7 +11,7 @@ def test_StaticMaterialProxy_read_only_attributes_01():
     assert smp.has_output_data
     assert smp.has_output_data_module
     assert not smp.has_score_definition
-    assert not smp.has_stylesheet
+    assert not smp.has_local_stylesheet
     assert not smp.has_output_ly
     assert not smp.has_output_pdf
     assert not smp.has_score_builder
@@ -29,7 +29,7 @@ def test_StaticMaterialProxy_read_only_attributes_01():
         '/Users/trevorbaca/Documents/other/baca/materials/sargasso_multipliers/output.py'
     assert smp.output_data_module_importable_name == 'baca.materials.sargasso_multipliers.output'
     assert smp.score_package_short_name == 'baca'
-    assert smp.stylesheet_file_name == \
+    assert smp.local_stylesheet_file_name == \
         '/Users/trevorbaca/Documents/other/baca/materials/sargasso_multipliers/stylesheet.ly'
     assert smp.score_builder_file_name == \
         '/Users/trevorbaca/Documents/other/baca/materials/sargasso_multipliers/visualization.py'

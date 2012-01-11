@@ -42,6 +42,12 @@ class InteractiveMaterialProxy(MaterialProxy):
         line = 'Interactive material package {} created.\n'.format(package_importable_name)
         self.conditionally_display_lines([line])
 
+    def make_material_package_directory(self):
+        try:
+            os.mkdir(self.material_package_directory)
+        except OSError:
+            pass
+
     def run(self, user_input_wrapper=None):
         if user_input_wrapper is None:
             user_input_wrapper = self.initialize_user_input_wrapper()

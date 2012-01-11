@@ -320,6 +320,17 @@ class PackageProxy(DirectoryProxy):
             result = 'tags = OrderedDict([])'
         return result
 
+    def remove_line_from_initializer(self, initializer, line):
+        file_pointer = file(initializer, 'r')
+        initializer_lines = set(file_pointer.readlines())
+        file_pointer.close()
+        initializer_lines = list(initializer_lines)
+        initializer_lines = [x for x in initializer_lines if not x == line]
+        initializer_lines.sort()
+        file_pointer = file(initializer, 'w')
+        file_pointer.write(''.join(initializer_lines))
+        file_pointer.close()
+
     def remove_package_importable_name_from_sys_modules(self, package_importable_name):
         '''Total hack. But works.
         '''

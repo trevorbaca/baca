@@ -308,5 +308,12 @@ class SCFObject(object):
         response = handle_raw_input(prompt)
         return response.lower().startswith('y')
 
+    def reveal_modules(self):
+        command = 'module_names = sys.modules.keys()'
+        exec(command)
+        module_names = [x for x in module_names if x.startswith(self.score_package_short_name)]
+        module_names.sort()
+        return module_names
+
     def where(self):
         return inspect.stack()[1]

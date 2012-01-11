@@ -11,7 +11,7 @@ def test_MaterialProxy_read_only_attributes_01():
     assert not material_proxy.has_output_data
     assert not material_proxy.has_output_data_module
     assert not material_proxy.has_score_definition
-    assert not material_proxy.has_stylesheet
+    assert not material_proxy.has_local_stylesheet
     assert not material_proxy.has_output_ly
     assert not material_proxy.has_output_pdf
     assert not material_proxy.has_score_builder
@@ -29,7 +29,7 @@ def test_MaterialProxy_read_only_attributes_01():
         '/Users/trevorbaca/Documents/other/baca/materials/test_material_a/output.py'
     assert material_proxy.output_data_module_importable_name == 'baca.materials.test_material_a.output'
     assert material_proxy.score_package_short_name == 'baca'
-    assert material_proxy.stylesheet_file_name == \
+    assert material_proxy.local_stylesheet_file_name == \
         '/Users/trevorbaca/Documents/other/baca/materials/test_material_a/stylesheet.ly'
     assert material_proxy.user_input_wrapper is None
     assert material_proxy.score_builder_file_name == \

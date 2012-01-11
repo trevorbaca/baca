@@ -101,11 +101,11 @@ class MaterialProxy(PackageProxy):
             return bool(self.import_score_definition_from_score_builder())
 
     @property
-    def has_stylesheet(self):
-        if self.stylesheet_file_name is None:
+    def has_local_stylesheet(self):
+        if self.local_stylesheet_file_name is None:
             return False
         else:
-            return os.path.exists(self.stylesheet_file_name)
+            return os.path.exists(self.local_stylesheet_file_name)
     
     @property
     def is_changed(self):
@@ -162,6 +162,11 @@ class MaterialProxy(PackageProxy):
         title = iotools.capitalize_string_start(material_spaced_name)
         title = markuptools.Markup(title)
         return title
+
+    @property
+    def local_stylesheet_file_name(self):
+        if self.directory_name is not None:
+            return os.path.join(self.directory_name, 'stylesheet.ly')
 
     @property
     def material_definition_file_name(self):
@@ -240,11 +245,6 @@ class MaterialProxy(PackageProxy):
             return os.path.join(self.directory_name, 'visualization.py')
 
     @property
-    def score_builder_file_name(self):
-        if self.directory_name is not None:
-            return os.path.join(self.directory_name, 'visualization.py')
-
-    @property
     def score_builder_module_importable_name(self):
         if self.score_builder_file_name is not None:
             return '{}.visualization'.format(self.package_importable_name)
@@ -258,9 +258,9 @@ class MaterialProxy(PackageProxy):
     # TODO: write test
     @property
     def source_stylesheet_file_name(self):
-        if self.has_stylesheet:
-            stylesheet = file(self.stylesheet_file_name, 'r')
-            first_line = stylesheet.readlines()[0].strip()
+        if self.has_local_stylesheet:
+            local_stylesheet = file(self.local_stylesheet_file_name, 'r')
+            first_line = local_stylesheet.readlines()[0].strip()
             assert first_line.endswith('.ly')
             result = first_line.split()[-1]
             return result
@@ -274,11 +274,6 @@ class MaterialProxy(PackageProxy):
     @property
     def stub_score_builder_file_name(self):
         return os.path.join(self.assets_directory, 'stub_score_builder.py')
-
-    @property
-    def stylesheet_file_name(self):
-        if self.directory_name is not None:
-            return os.path.join(self.directory_name, 'stylesheet.ly')
 
     @property
     def user_input_wrapper(self):
@@ -326,9 +321,9 @@ class MaterialProxy(PackageProxy):
                 self.write_material_definition_to_output_data_module(is_forced=True)
         else:
             if self.query('create material definition? '):
-                self.edit_material_definition()
+                self.edit_material_definition_module()
 
-    def create_ly_and_pdf_from_score_builder(self, is_forced=False, prompt_proceed=True):
+    def create_output_ly_and_output_pdf_from_score_builder(self, is_forced=False, prompt_proceed=True):
         lines = []
         lilypond_file = self.import_score_definition_from_score_builder()
         if is_forced or not self.lilypond_file_format_is_equal_to_score_builder_ly(lilypond_file):
@@ -341,7 +336,7 @@ class MaterialProxy(PackageProxy):
         if prompt_proceed:
             self.proceed(lines=lines)
         
-    def create_ly_from_score_builder(self, is_forced=False, prompt_proceed=True):
+    def create_output_ly_from_score_builder(self, is_forced=False, prompt_proceed=True):
         lines = []
         lilypond_file = self.import_score_definition_from_score_builder()
         if is_forced or not self.lilypond_file_format_is_equal_to_score_builder_ly(lilypond_file):
@@ -353,7 +348,7 @@ class MaterialProxy(PackageProxy):
         if prompt_proceed:
             self.proceed(lines=lines)
 
-    def create_pdf_from_score_builder(self, is_forced=False, prompt_proceed=True):
+    def create_output_pdf_from_score_builder(self, is_forced=False, prompt_proceed=True):
         lines = []
         lilypond_file = self.import_score_definition_from_score_builder()
         if is_forced or not self.lilypond_file_format_is_equal_to_score_builder_ly(lilypond_file):
@@ -375,7 +370,7 @@ class MaterialProxy(PackageProxy):
         file_pointer.close()
         self.edit_score_builder()
 
-    def delete_material_definition(self, prompt_proceed=True):
+    def delete_material_definition_module(self, prompt_proceed=True):
         if self.has_material_definition_module:
             os.remove(self.material_definition_file_name)
             if prompt_proceed:
@@ -394,9 +389,9 @@ class MaterialProxy(PackageProxy):
                 line = 'output data module deleted.'
                 self.proceed(lines=[line, ''])
 
-    def delete_score_stylesheet(self, prompt_proceed=True):
-        if self.has_stylesheet:
-            os.remove(self.stylesheet_file_name)
+    def delete_local_stylesheet(self, prompt_proceed=True):
+        if self.has_local_stylesheet:
+            os.remove(self.local_stylesheet_file_name)
             if prompt_proceed:
                 line = 'stylesheet deleted.'
                 self.proceed(lines=[line])
@@ -406,7 +401,7 @@ class MaterialProxy(PackageProxy):
             self.edit_output_ly()
         elif self.has_score_builder:
             if self.query('create LilyPond file from score builder? '):
-                self.create_ly_from_score_builder()    
+                self.create_output_ly_from_score_builder()    
         elif self.has_output_data:
             line = "output data exists but score builder doesn't.\n"
             self.conditionally_display_lines([line])
@@ -417,9 +412,9 @@ class MaterialProxy(PackageProxy):
                 self.write_material_definition_to_output_data_module(is_forced=True)
         else:
             if self.query('create material definition? '):
-                self.edit_material_definition()
+                self.edit_material_definition_module()
 
-    def edit_material_definition(self):
+    def edit_material_definition_module(self):
         os.system('vi + {}'.format(self.material_definition_file_name))
 
     def edit_output_data_module(self):
@@ -435,9 +430,10 @@ class MaterialProxy(PackageProxy):
         stylesheet_proxy = StylesheetProxy(self.source_stylesheet_file_name, session=self.session)
         stylesheet_proxy.vi_stylesheet()
 
-    def edit_stylesheet(self):
-        os.system('vi {}'.format(self.stylesheet_file_name))
+    def edit_local_stylesheet(self):
+        os.system('vi {}'.format(self.local_stylesheet_file_name))
 
+    # TODO: reimplement with getter and backtracking
     def get_package_short_name_of_new_material_interactively(self):
         response = self.handle_raw_input('material name')
         response = response.lower()
@@ -450,6 +446,7 @@ class MaterialProxy(PackageProxy):
         self.conditionally_display_lines([line])
         return package_short_name
 
+    # TODO: reimplement with getter and backtracking
     def get_score_builder_status_of_new_material_package_interactively(self):
         response = self.handle_raw_input('include score builder?')
         if response == 'y':
@@ -498,8 +495,8 @@ class MaterialProxy(PackageProxy):
         self.unimport_output_data_module()
         command = 'from {} import lilypond_file'.format(self.score_builder_module_importable_name) 
         exec(command)
-        if self.has_stylesheet:
-            lilypond_file.file_initial_user_includes.append(self.stylesheet_file_name)
+        if self.has_local_stylesheet:
+            lilypond_file.file_initial_user_includes.append(self.local_stylesheet_file_name)
         lilypond_file.header_block.title = markuptools.Markup(self.material_spaced_name)
         return lilypond_file
         
@@ -508,9 +505,9 @@ class MaterialProxy(PackageProxy):
         if result == 'k':
             self.reload_user_input()
         elif result == 'mdd':
-            self.delete_material_definition()
+            self.delete_material_definition_module()
         elif result == 'mde':
-            self.edit_material_definition()
+            self.edit_material_definition_module()
         elif result == 'mdt':
             self.write_stub_material_definition_to_disk()
         elif result == 'mdx':
@@ -528,13 +525,13 @@ class MaterialProxy(PackageProxy):
         elif result == 'sbxi':
             self.run_abjad_on_score_builder()
         elif result == 'ssd':
-            self.delete_score_stylesheet()
+            self.delete_local_stylesheet()
         elif result == 'sse':
-            self.edit_stylesheet()
+            self.edit_local_stylesheet()
         elif result == 'ssm':
             self.edit_source_stylesheet()
         elif result == 'ssl':
-            self.link_score_stylesheet()
+            self.link_local_stylesheet()
         elif result == 'sss':
             self.select_stylesheet()
         elif result == 'stl':
@@ -546,13 +543,13 @@ class MaterialProxy(PackageProxy):
         elif result == 'dd':
             self.delete_output_data_module()
         elif result == 'lyc':
-            self.create_ly_from_score_builder(is_forced=True)
+            self.create_output_ly_from_score_builder(is_forced=True)
         elif result == 'lyd':
             self.delete_ly()
         elif result == 'lyi':
             self.edit_ly()
         elif result == 'pdfc':
-            self.create_ly_and_pdf_from_score_builder(is_forced=True)
+            self.create_output_ly_and_output_pdf_from_score_builder(is_forced=True)
             self.open_output_pdf()
         elif result == 'pdfd':
             self.delete_pdf()
@@ -590,11 +587,11 @@ class MaterialProxy(PackageProxy):
         trimmed_score_builder_ly_lines = self.trim_ly_lines(self.output_ly_file_name)
         return trimmed_temp_ly_file_lines == trimmed_score_builder_ly_lines
 
-    def link_score_stylesheet(self, source_stylesheet_file_name=None, prompt_proceed=True):
+    def link_local_stylesheet(self, source_stylesheet_file_name=None, prompt_proceed=True):
         if source_stylesheet_file_name is None:
             source_stylesheet_file_name = self.source_stylesheet_file_name
         source = file(source_stylesheet_file_name, 'r')
-        target = file(self.stylesheet_file_name, 'w')
+        target = file(self.local_stylesheet_file_name, 'w')
         target.write('% source: {}\n\n'.format(source_stylesheet_file_name))
         for line in source.readlines():
             target.write(line)
@@ -628,7 +625,7 @@ class MaterialProxy(PackageProxy):
             section.append(('sbt', 'score builder - stub'))
         section = menu.make_new_section()
         section.append(('sss', 'score stylesheet - select'))
-        if self.has_stylesheet:
+        if self.has_local_stylesheet:
             hidden_section.append(('ssd', 'score stylesheet - delete'))
             section.append(('sse', 'score stylesheet - edit'))
             hidden_section.append(('ssm', 'source stylesheet - edit'))
@@ -670,19 +667,6 @@ class MaterialProxy(PackageProxy):
         hidden_section.append(('sum', 'summarize material'))
         return menu
 
-    def make_material_package_directory(self):
-        try:
-            os.mkdir(self.material_package_directory)
-        except OSError:
-            pass
-
-    # TODO: MaterialProxy ... and extend PackageProxy
-    def make_tags_dictionary(self):
-        tags = {}
-        tags['creation_date'] = self.helpers.get_current_date()
-        tags['maker'] = self.class_name
-        return tags
-
     def manage_stylesheets(self):
         stylesheet_wrangler = StylesheetWrangler(session=self.session)
         stylesheet_wrangler.run()
@@ -697,14 +681,9 @@ class MaterialProxy(PackageProxy):
         output_data_module.write(line)
         output_data_module.close()
 
-    def prepend_score_package_short_name(self, material_underscored_name):
-        if not material_underscored_name.startswith(self.score_package_short_name + '_'):
-            material_underscored_name = '{}_{}'.format(self.score_package_short_name, material_underscored_name)
-        return material_underscored_name
-
     def regenerate_everything(self, is_forced=False):
         is_changed = self.write_material_definition_to_output_data_module(is_forced=is_forced)
-        is_changed = self.create_ly_and_pdf_from_score_builder(is_forced=(is_changed or is_forced))
+        is_changed = self.create_output_ly_and_output_pdf_from_score_builder(is_forced=(is_changed or is_forced))
         return is_changed
 
     def reload_user_input(self):
@@ -718,7 +697,6 @@ class MaterialProxy(PackageProxy):
         self.conditionally_display_lines([line])
         new_material_spaced_name = self.handle_raw_input('new material name:     ')
         new_material_underscored_name = new_material_spaced_name.replace(' ', '_')
-        new_material_underscored_name = self.prepend_score_package_short_name(new_material_underscored_name)
         lines = []
         lines.append('current material name: {}'.format(self.material_underscored_name))
         lines.append('new material name:     {}'.format(new_material_underscored_name))
@@ -762,28 +740,10 @@ class MaterialProxy(PackageProxy):
         else:
             raise NotImplementedError('commit to repository and then rename.')
 
-    def remove_line_from_initializer(self, initializer, line):
-        file_pointer = file(initializer, 'r')
-        initializer_lines = set(file_pointer.readlines())
-        file_pointer.close()
-        initializer_lines = list(initializer_lines)
-        initializer_lines = [x for x in initializer_lines if not x == line]
-        initializer_lines.sort()
-        file_pointer = file(initializer, 'w')
-        file_pointer.write(''.join(initializer_lines))
-        file_pointer.close()
-
     def remove_material_from_materials_initializer(self):
         import_statement = 'from {} import {}\n'.format(
             self.material_underscored_name, self.material_underscored_name)
         self.remove_line_from_initializer(self.parent_initializer_file_name, import_statement)
-
-    def reveal_modules(self):
-        command = 'module_names = sys.modules.keys()'
-        exec(command)
-        module_names = [x for x in module_names if x.startswith(self.score_package_short_name)]
-        module_names.sort()
-        return module_names
 
     def run(self, user_input=None):
         self.assign_user_input(user_input=user_input)
@@ -846,7 +806,7 @@ class MaterialProxy(PackageProxy):
         self.preserve_backtracking = False
         if self.backtrack():
             return
-        self.link_score_stylesheet(source_stylesheet_file_name)
+        self.link_local_stylesheet(source_stylesheet_file_name)
         if prompt_proceed:
             line = 'stylesheet selected.'
             self.proceed(lines=[line])
@@ -908,11 +868,11 @@ class MaterialProxy(PackageProxy):
         self.unimport_material_module()
         self.unimport_output_data_module()
 
-    def unimport_score_package(self):
-        self.remove_package_importable_name_from_sys_modules(self.score_package_short_name)
-
     def unimport_score_builder_module(self):
         self.remove_package_importable_name_from_sys_modules(self.score_builder_module_importable_name)
+
+    def unimport_score_package(self):
+        self.remove_package_importable_name_from_sys_modules(self.score_package_short_name)
 
     def write_material_definition_to_output_data_module(self, is_forced=False, prompt_proceed=True):
         if not self.is_changed and not is_forced:
@@ -963,15 +923,3 @@ class MaterialProxy(PackageProxy):
         line = 'stub score builder written to disk.'
         if prompt_proceed:
             self.proceed(lines=[line])
-        
-    def write_stylesheet_to_disk(self):
-        stylesheet = os.path.join(self.material_package_directory, 'stylesheet.ly')
-        shutil.copy(self.stylesheet, stylesheet)
-        header_block = lilypondfiletools.HeaderBlock()
-        header_block.title = self.lilypond_score_title
-        header_block.subtitle = self.lilypond_score_subtitle
-        header_block.tagline = markuptools.Markup('""')
-        fp = file(stylesheet, 'a')
-        fp.write('\n')
-        fp.write(header_block.format)
-        fp.close()

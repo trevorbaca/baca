@@ -108,6 +108,12 @@ class MakerProxy(PackageProxy):
         section.append(('src', 'edit {} source'.format(self.spaced_class_name)))
         return menu
 
+    def make_tags_dictionary(self):
+        tags = {}
+        tags['creation_date'] = self.helpers.get_current_date()
+        tags['maker'] = self.class_name
+        return tags
+
     def run(self, user_input=None):
         self.assign_user_input(user_input=user_input)
         while True:
