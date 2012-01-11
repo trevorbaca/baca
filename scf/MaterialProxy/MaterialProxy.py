@@ -60,17 +60,17 @@ class MaterialProxy(PackageProxy):
 
     @property
     def has_output_data(self):
-        if not self.has_output_file:
+        if not self.has_output_data_module:
             return False
         else:
             return bool(self.import_output_data_from_output_data_module())
 
     @property
-    def has_output_file(self):
-        if self.output_file_name is None:
+    def has_output_data_module(self):
+        if self.output_data_module_name is None:
             return False
         else:
-            return os.path.exists(self.output_file_name)
+            return os.path.exists(self.output_data_module_name)
 
     @property
     def has_score_definition(self):
@@ -201,13 +201,13 @@ class MaterialProxy(PackageProxy):
             return self.purview.materials_package_importable_name
 
     @property
-    def output_file_name(self): 
+    def output_data_module_name(self): 
         if self.directory_name is not None:
             return os.path.join(self.directory_name, 'output.py')
 
     @property
     def output_data_module_importable_name(self):
-        if self.output_file_name is not None:
+        if self.output_data_module_name is not None:
             return '{}.output'.format(self.package_importable_name)
 
     @property
@@ -356,10 +356,10 @@ class MaterialProxy(PackageProxy):
         self.remove_material_from_materials_initializer()
         PackageProxy.delete_package(self)
 
-    def delete_output_file(self, prompt_proceed=True):
-        if self.has_output_file:
+    def delete_output_data_module(self, prompt_proceed=True):
+        if self.has_output_data_module:
             self.remove_material_from_materials_initializer()
-            os.remove(self.output_file_name)
+            os.remove(self.output_data_module_name)
             if prompt_proceed:
                 line = 'output file deleted.'
                 self.proceed(lines=[line, ''])
@@ -374,8 +374,8 @@ class MaterialProxy(PackageProxy):
     def edit_material_definition(self):
         os.system('vi + {}'.format(self.material_definition_file_name))
 
-    def edit_output_file(self):
-        os.system('vi + {}'.format(self.output_file_name))
+    def edit_output_data_module(self):
+        os.system('vi + {}'.format(self.output_data_module_name))
 
     def edit_stylesheet(self):
         os.system('vi {}'.format(self.stylesheet_file_name))
@@ -507,11 +507,11 @@ class MaterialProxy(PackageProxy):
         elif result == 'stl':
             self.manage_stylesheets()
         elif result == 'dc':
-            self.write_material_definition_to_output_file(is_forced=True)
+            self.write_material_definition_to_output_data_module(is_forced=True)
         elif result == 'di':
-            self.edit_output_file()
+            self.edit_output_data_module()
         elif result == 'dd':
-            self.delete_output_file()
+            self.delete_output_data_module()
         elif result == 'lyc':
             self.create_ly_from_score_builder(is_forced=True)
         elif result == 'lyd':
@@ -600,7 +600,7 @@ class MaterialProxy(PackageProxy):
             section.append(('sse', 'score stylesheet - edit'))
             hidden_section.append(('ssm', 'source stylesheet - edit'))
             hidden_section.append(('ssl', 'score stylesheet - relink'))
-        if self.has_output_file:
+        if self.has_output_data_module:
             section = menu.make_new_section()
             section.append(('dc', 'output data - recreate'))
             section.append(('di', 'output data - inspect'))
@@ -670,7 +670,7 @@ class MaterialProxy(PackageProxy):
                 self.create_score_builder()
         elif self.has_material_definition_module:
             if self.query('write material to disk? '):
-                self.write_material_definition_to_output_file(is_forced=True)
+                self.write_material_definition_to_output_data_module(is_forced=True)
         else:
             if self.query('create material definition? '):
                 self.edit_material_definition()
@@ -685,7 +685,7 @@ class MaterialProxy(PackageProxy):
                 self.create_score_builder()
         elif self.has_material_definition_module:
             if self.query('write material to disk? '):
-                self.write_material_definition_to_output_file(is_forced=True)
+                self.write_material_definition_to_output_data_module(is_forced=True)
         else:
             if self.query('create material definition? '):
                 self.edit_material_definition()
@@ -694,11 +694,11 @@ class MaterialProxy(PackageProxy):
         command = 'open {}'.format(self.visualization_pdf_file_name)
         os.system(command)
 
-    def overwrite_output_file(self):
-        output_file = file(self.output_file_name, 'w')
+    def overwrite_output_data_module(self):
+        output_data_module = file(self.output_data_module_name, 'w')
         output_line = '{} = None\n'.format(self.material_underscored_name)
-        output_file.write(output_line)
-        output_file.close()
+        output_data_module.write(output_line)
+        output_data_module.close()
 
     def prepend_score_package_short_name(self, material_underscored_name):
         if not material_underscored_name.startswith(self.score_package_short_name + '_'):
@@ -706,7 +706,7 @@ class MaterialProxy(PackageProxy):
         return material_underscored_name
 
     def regenerate_everything(self, is_forced=False):
-        is_changed = self.write_material_definition_to_output_file(is_forced=is_forced)
+        is_changed = self.write_material_definition_to_output_data_module(is_forced=is_forced)
         is_changed = self.create_ly_and_pdf_from_score_builder(is_forced=(is_changed or is_forced))
         return is_changed
 
@@ -916,7 +916,7 @@ class MaterialProxy(PackageProxy):
     def unimport_visualization_module(self):
         self.remove_package_importable_name_from_sys_modules(self.visualization_package_importable_name)
 
-    def write_material_definition_to_output_file(self, is_forced=False, prompt_proceed=True):
+    def write_material_definition_to_output_data_module(self, is_forced=False, prompt_proceed=True):
         if not self.is_changed and not is_forced:
             line = 'material definition equals output data. (Output data preserved.)'
             self.conditionally_display_lines([line, ''])
@@ -927,15 +927,15 @@ class MaterialProxy(PackageProxy):
                 self.proceed(lines=[line])
             return self.is_changed
         self.remove_material_from_materials_initializer()
-        self.overwrite_output_file()
-        output_file = file(self.output_file_name, 'w')
+        self.overwrite_output_data_module()
+        output_data_module = file(self.output_data_module_name, 'w')
         output_preamble_lines = self.get_output_preamble_lines()
         if output_preamble_lines:
-            output_file.write('\n'.join(output_preamble_lines))
+            output_data_module.write('\n'.join(output_preamble_lines))
         material_definition = self.import_material_definition_from_material_definition_module()
         output_line = '{} = {!r}'.format(self.material_underscored_name, material_definition)
-        output_file.write(output_line)
-        output_file.close()
+        output_data_module.write(output_line)
+        output_data_module.close()
         self.add_material_to_materials_initializer()
         self.add_material_to_material_initializer()
         if prompt_proceed:
@@ -943,18 +943,18 @@ class MaterialProxy(PackageProxy):
             self.proceed(lines=[line])
         return self.is_changed
 
-    def write_output_file_to_disk(self, material):
-        output_file = file(os.path.join(self.material_package_directory, 'output.py'), 'w')
-        output_file_import_statements = self.output_file_import_statements[:]
-        for line in output_file_import_statements:
-            output_file.write(line + '\n')
-        if output_file_import_statements:
-            output_file.write('\n\n')
+    def write_output_data_module_to_disk(self, material):
+        output_data_module = file(os.path.join(self.material_package_directory, 'output.py'), 'w')
+        output_data_module_import_statements = self.output_data_module_import_statements[:]
+        for line in output_data_module_import_statements:
+            output_data_module.write(line + '\n')
+        if output_data_module_import_statements:
+            output_data_module.write('\n\n')
         material_underscored_name = os.path.basename(self.material_package_directory)
-        output_file_lines = self.get_output_file_lines(material, material_underscored_name)
-        for line in output_file_lines:
-            output_file.write(line + '\n')
-        output_file.close()
+        output_data_module_lines = self.get_output_data_module_lines(material, material_underscored_name)
+        for line in output_data_module_lines:
+            output_data_module.write(line + '\n')
+        output_data_module.close()
 
     def write_stub_material_definition_to_disk(self):
         material_definition = file(self.material_definition_file_name, 'w')
