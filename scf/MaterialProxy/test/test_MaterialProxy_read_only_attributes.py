@@ -27,7 +27,7 @@ def test_MaterialProxy_read_only_attributes_01():
     assert material_proxy.materials_package_importable_name == 'baca.materials'
     assert material_proxy.output_file_name == \
         '/Users/trevorbaca/Documents/other/baca/materials/test_material_a/output.py'
-    assert material_proxy.output_package_importable_name == 'baca.materials.test_material_a.output'
+    assert material_proxy.output_data_module_importable_name == 'baca.materials.test_material_a.output'
     assert material_proxy.score_package_short_name == 'baca'
     assert material_proxy.stylesheet_file_name == \
         '/Users/trevorbaca/Documents/other/baca/materials/test_material_a/stylesheet.ly'

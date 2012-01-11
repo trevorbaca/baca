@@ -63,7 +63,7 @@ class MaterialProxy(PackageProxy):
         if not self.has_output_file:
             return False
         else:
-            return bool(self.import_material_from_output_file())
+            return bool(self.import_output_data_from_output_data_module())
 
     @property
     def has_output_file(self):
@@ -120,7 +120,7 @@ class MaterialProxy(PackageProxy):
     @property
     def is_changed(self):
         material_definition = self.import_material_definition_from_material_definition_module()
-        output_material = self.import_material_from_output_file()
+        output_material = self.import_output_data_from_output_data_module()
         return material_definition != output_material
 
     @property
@@ -206,7 +206,7 @@ class MaterialProxy(PackageProxy):
             return os.path.join(self.directory_name, 'output.py')
 
     @property
-    def output_package_importable_name(self):
+    def output_data_module_importable_name(self):
         if self.output_file_name is not None:
             return '{}.output'.format(self.package_importable_name)
 
@@ -435,10 +435,10 @@ class MaterialProxy(PackageProxy):
             #raise Exception('eponymous data must be kept in all I/O modules at all times.')
             pass
     
-    def import_material_from_output_file(self):
-        self.unimport_output_module_hierarchy()
+    def import_output_data_from_output_data_module(self):
+        self.unimport_module_hierarchy()
         try:
-            exec('from {} import {}'.format(self.output_package_importable_name, self.material_underscored_name))
+            exec('from {} import {}'.format(self.output_data_module_importable_name, self.material_underscored_name))
             exec('result = {}'.format(self.material_underscored_name))
             return result
         except ImportError as e:
@@ -449,7 +449,7 @@ class MaterialProxy(PackageProxy):
         if not self.has_score_builder:
             return None
         self.unimport_visualization_module()
-        self.unimport_output_module()
+        self.unimport_output_data_module()
         command = 'from {} import lilypond_file'.format(self.visualization_package_importable_name) 
         exec(command)
         if self.has_stylesheet:
@@ -902,13 +902,13 @@ class MaterialProxy(PackageProxy):
     def unimport_materials_module(self):
         self.remove_package_importable_name_from_sys_modules(self.materials_package_importable_name)
 
-    def unimport_output_module(self):
-        self.remove_package_importable_name_from_sys_modules(self.output_package_importable_name)
+    def unimport_output_data_module(self):
+        self.remove_package_importable_name_from_sys_modules(self.output_data_module_importable_name)
 
-    def unimport_output_module_hierarchy(self):
+    def unimport_module_hierarchy(self):
         self.unimport_materials_module()
         self.unimport_material_module()
-        self.unimport_output_module()
+        self.unimport_output_data_module()
 
     def unimport_score_package(self):
         self.remove_package_importable_name_from_sys_modules(self.score_package_short_name)
