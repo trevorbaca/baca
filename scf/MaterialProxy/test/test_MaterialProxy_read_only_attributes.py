@@ -36,7 +36,7 @@ def test_MaterialProxy_read_only_attributes_01():
         '/Users/trevorbaca/Documents/other/baca/materials/test_material_a/visualization.py'
     assert material_proxy.output_ly_file_name == \
         '/Users/trevorbaca/Documents/other/baca/materials/test_material_a/visualization.ly'
-    assert material_proxy.visualization_package_importable_name == \
+    assert material_proxy.score_builder_module_importable_name == \
         'baca.materials.test_material_a.visualization'
     assert material_proxy.output_pdf_file_name == \
         '/Users/trevorbaca/Documents/other/baca/materials/test_material_a/visualization.pdf'

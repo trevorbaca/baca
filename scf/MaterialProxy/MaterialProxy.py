@@ -280,7 +280,7 @@ class MaterialProxy(PackageProxy):
             return os.path.join(self.directory_name, 'visualization.ly')
 
     @property
-    def visualization_package_importable_name(self):
+    def score_builder_module_importable_name(self):
         if self.score_builder_file_name is not None:
             return '{}.visualization'.format(self.package_importable_name)
 
@@ -470,9 +470,9 @@ class MaterialProxy(PackageProxy):
     def import_score_definition_from_score_builder(self):
         if not self.has_score_builder:
             return None
-        self.unimport_visualization_module()
+        self.unimport_score_builder_module()
         self.unimport_output_data_module()
-        command = 'from {} import lilypond_file'.format(self.visualization_package_importable_name) 
+        command = 'from {} import lilypond_file'.format(self.score_builder_module_importable_name) 
         exec(command)
         if self.has_stylesheet:
             lilypond_file.file_initial_user_includes.append(self.stylesheet_file_name)
@@ -920,8 +920,8 @@ class MaterialProxy(PackageProxy):
     def unimport_score_package(self):
         self.remove_package_importable_name_from_sys_modules(self.score_package_short_name)
 
-    def unimport_visualization_module(self):
-        self.remove_package_importable_name_from_sys_modules(self.visualization_package_importable_name)
+    def unimport_score_builder_module(self):
+        self.remove_package_importable_name_from_sys_modules(self.score_builder_module_importable_name)
 
     def write_material_definition_to_output_data_module(self, is_forced=False, prompt_proceed=True):
         if not self.is_changed and not is_forced:
