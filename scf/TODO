@@ -61,3 +61,5 @@ TODO
 26. Make backtracking work from 'self.confirm()'.
 
 27. Extend 'self.confirm()' with optional prompt.
+
+28. Refine the check for 'from collections impor OrderedDict' check.
