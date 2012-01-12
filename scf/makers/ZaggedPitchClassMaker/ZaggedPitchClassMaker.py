@@ -5,13 +5,9 @@ import baca
 import os
 
 
-# TODO: finish migration to interactive editor
-#class ZaggedPitchClassMaker(InteractiveMaterialProxy):
 class ZaggedPitchClassMaker(InteractiveEditor):
 
-    #def __init__(self, **kwargs):
     def __init__(self, session=None, target=None, **kwargs):
-        #Maker.__init__(self, **kwargs)
         InteractiveEditor.__init__(self, session=session, target=target)
         self.stylesheet = os.path.join(os.path.dirname(__file__), 'stylesheet.ly')
         self._generic_output_name = 'zagged pitch-classes'
@@ -39,22 +35,8 @@ class ZaggedPitchClassMaker(InteractiveEditor):
         return output_file_lines
 
     def make(self, pc_cells, division_cells, grouping_counts):
-        from abjad import *
-        from abjad.tools import sequencetools
-        pc_cells = baca.util.helianthate(pc_cells, -1, 1)
-        division_cells = baca.util.helianthate(division_cells, -1, 1)
-        division_cells = sequencetools.flatten_sequence(division_cells, depth=1)
-        division_cells = sequencetools.CyclicTuple(division_cells)
-        tmp = []
-        for i, pc_segment in enumerate(pc_cells):
-            parts = sequencetools.partition_sequence_by_ratio_of_lengths(pc_segment, division_cells[i])
-            tmp.extend(parts)
-        pc_cells = tmp
-        pc_cells = sequencetools.partition_sequence_cyclically_by_counts_with_overhang(pc_cells, grouping_counts)
-        pc_cells = [sequencetools.join_subsequences(x) for x in pc_cells]
-        pc_cells = sequencetools.partition_sequence_cyclically_by_counts_with_overhang(pc_cells, grouping_counts)
-        material = sequencetools.CyclicTree(pc_cells)
-        return material
+        import baca
+        return baca.music.make_zagged_pitch_classes(pc_cells, division_cells, grouping_counts)
 
     def make_lilypond_file_from_output_material(self, material):
         from abjad import *
