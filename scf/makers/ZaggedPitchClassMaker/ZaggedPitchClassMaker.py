@@ -39,31 +39,5 @@ class ZaggedPitchClassMaker(InteractiveEditor):
         return baca.music.make_zagged_pitch_classes(pc_cells, division_cells, grouping_counts)
 
     def make_lilypond_file_from_output_material(self, material):
-        from abjad import *
-        from abjad.tools import sequencetools
-        pcs = list(material.iterate_payload())
-        leaves = leaftools.make_leaves(pcs, [Duration(1, 8)])
-        voice = Voice(leaves)
-        staff = Staff([voice])
-        score = Score([staff])
-        lilypond_file = lilypondfiletools.make_basic_lilypond_file(score)
-        voice.engraver_consists.add('Horizontal_bracket_engraver')
-        for level in (1, 2):
-            level_sizes = []
-            for x in material.iterate_at_level(level):
-                size = len(list(x.iterate_payload()))
-                level_sizes.append(size)
-            for part in sequencetools.partition_sequence_once_by_counts_without_overhang(
-                voice.leaves, level_sizes):
-                spannertools.HorizontalBracketSpanner(part)
-        cur_group = 0
-        for leaf in voice.leaves:
-            brackets = list(spannertools.get_spanners_attached_to_component(
-                leaf, klass=spannertools.HorizontalBracketSpanner))
-            if brackets[0][0] is leaf:
-                if brackets[1][0] is leaf:
-                    markuptools.Markup(r'\bold { %s }' % cur_group, 'up')(leaf)
-                    cur_group += 1
-        bar_line = scoretools.add_double_bar_to_end_of_score(score)
-        spanner = spannertools.Spanner(voice.leaves)
-        return lilypond_file
+        from baca.music.make_zagged_pitch_classes import make_lilypond_file_from_output_material
+        return make_lilypond_file_from_output_material(material)

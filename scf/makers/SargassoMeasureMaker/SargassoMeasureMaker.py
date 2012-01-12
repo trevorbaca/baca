@@ -1,12 +1,11 @@
 from abjad.tools import durationtools
-from abjad.tools import lilypondfiletools
+from abjad.tools import measuretools
 from baca.scf.InteractiveMaterialProxy import InteractiveMaterialProxy
 from baca.scf.UserInputWrapper import UserInputWrapper
 from baca.scf.editors.InteractiveEditor import InteractiveEditor
 import os
 
 
-# TODO: finish migration to interactive editor
 class SargassoMeasureMaker(InteractiveEditor):
 
     def __init__(self, session=None, target=None, **kwargs):
@@ -58,12 +57,6 @@ class SargassoMeasureMaker(InteractiveEditor):
             measure_division_denominator, measure_division_talea, total_duration,
             measures_are_scaled, measures_are_split, measures_are_shuffled)
 
-    def make_lilypond_file_from_output_material(self, measures):
-        staff = stafftools.RhythmicStaff(measures)
-        score = scoretools.Score([staff])
-        lilypond_file = lilypondfiletools.make_basic_lilypond_file(score)
-        lilypond_file.file_initial_system_comments = []
-        lilypond_file.file_initial_system_includes = []
-        measuretools.apply_beam_spanners_to_measures_in_expr(score)
-        scoretools.add_double_bar_to_end_of_score(score)
-        return lilypond_file
+    def make_lilypond_file_from_output_material(self, material):
+        from baca.music.make_sargasso_measures import make_lilypond_file_from_output_material
+        return make_lilypond_file_from_output_material(material)
