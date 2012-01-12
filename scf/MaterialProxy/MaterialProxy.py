@@ -610,8 +610,6 @@ class MaterialProxy(PackageProxy):
     def make_main_menu(self):
         menu, hidden_section = self.make_new_menu(where=self.where(), is_hidden=True)
         section = menu.make_new_section()
-        #if self.is_interactive:
-        #    section.append(('k', 'reload user input'))
         if self.has_material_definition_module:
             section.append(('mde', 'material definition - edit'))
             section.append(('mdx', 'material definition - execute'))

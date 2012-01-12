@@ -44,13 +44,8 @@ class MaterialWrangler(PackageWrangler, PackageProxy):
     ### PUBLIC METHODS ###
 
     # TODO: write tests
-    # TODO: change signature to material_package_importable_name
-    def create_material_package(self, purview_name, material_package_short_name):
+    def create_material_package(self, material_package_importable_name):
         '''Package importable name on success. Change to just true on success.'''
-        materials_package_importable_name = \
-            self.purview_name_to_materials_package_importable_name(purview_name)
-        material_package_importable_name = '{}.{}'.format(
-            materials_package_importable_name, material_package_short_name)
         directory_name = self._package_importable_name_to_directory_name(material_package_importable_name)
         if os.path.exists(directory_name):
             return False
@@ -68,14 +63,22 @@ class MaterialWrangler(PackageWrangler, PackageProxy):
         material_name = getter.run()
         if self.backtrack():
             return
+        material_package_short_name = iotools.string_to_strict_directory_name(material_name)
         studio = baca.scf.Studio(session=self.session)
         self.preserve_backtracking = True
         purview_name = studio.get_purview_interactively()
         self.preserve_backtracking = False
         if self.backtrack():
             return
-        material_directory_name = iotools.string_to_strict_directory_name(material_name)
-        result = self.create_material_package(purview_name, material_directory_name)
+        materials_package_importable_name = \
+            self.purview_name_to_materials_package_importable_name(purview_name)
+        material_package_importable_name = '{}.{}'.format(
+            materials_package_importable_name, material_package_short_name)
+        if self.material_package_exists(material_package_importable_name):
+            line = 'Material package {!r} already exists.'.format(material_package_importable_name)
+            self.proceed(lines=[line])
+            return
+        result = self.create_material_package(material_package_importable_name)
         if result:
             line = 'package {!r} created.'.format(result)
         else:
@@ -149,6 +152,14 @@ class MaterialWrangler(PackageWrangler, PackageProxy):
         else:
             material_proxy = StaticMaterialProxy(package_importable_name, session=self.session)
         return material_proxy
+
+    # TODO: write test
+    def material_package_exists(self, material_package_importable_name):
+        try:
+            MaterialProxy(material_package_importable_name)
+            return True
+        except:
+            return False
 
     # TODO: write tests
     def purview_name_to_materials_package_importable_name(self, purview_name):
