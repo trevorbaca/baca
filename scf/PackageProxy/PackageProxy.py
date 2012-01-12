@@ -13,6 +13,7 @@ class PackageProxy(DirectoryProxy):
         self._package_short_name = None
         self.package_importable_name = package_importable_name
         self._purview = None
+        #self.should_unimport_package = False
 
     ### OVERLOADS ###
 
@@ -249,20 +250,39 @@ class PackageProxy(DirectoryProxy):
         tag = tags.get(tag_name, None)
         return tag
 
+    def get_tag_interactively(self):
+        getter = self.make_new_getter(where=self.where())
+        getter.append_string('tag name')
+        result = getter.run()
+        if self.backtrack():
+            return
+        tag = self.get_tag(result)
+        line = '{!r}'.format(tag)
+        #self.conditionally_display_lines([line])
+        self.proceed(lines=[line])
+
     def get_tags(self):
         import collections
+        #if self.should_unimport_package:
+        #    self.unimport_package()
         try:
             command = 'from {} import tags'.format(self.package_importable_name)
             exec(command)
-            return tags
+            #return tags
         except ImportError:    
-            return collections.OrderedDict([])
+            #return collections.OrderedDict([])
+            tags = collections.OrderedDict([])
+            print 'just created empty tags ordered dict.'
+        #print 'ZZZ: {}'.format(id(tags))
+        return tags
 
     def handle_tags_menu_result(self, result):
         if result == 'add':
             self.add_tag_interactively()
         elif result == 'del':
             self.delete_tag_interactively()
+        elif result == 'get':
+            self.get_tag_interactively()
         return False
 
     def has_tag(self, tag_name):
@@ -285,6 +305,7 @@ class PackageProxy(DirectoryProxy):
         section = menu.make_new_section()
         section.append(('add', 'add tag'))
         section.append(('del', 'delete tag'))
+        section.append(('get', 'get tag'))
         return menu
 
     def manage_tags(self):
@@ -407,3 +428,4 @@ class PackageProxy(DirectoryProxy):
         initializer.write(''.join(lines))
         initializer.close()
         #self.unimport_package()
+        #self.should_unimport_package = True
