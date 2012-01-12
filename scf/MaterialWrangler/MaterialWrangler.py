@@ -11,12 +11,14 @@ class MaterialWrangler(PackageWrangler, PackageProxy):
 
     # TODO: get rid of the idea that wranglers have a purview
     def __init__(self, purview_package_short_name, session=None):
+        import baca
         if purview_package_short_name == 'baca':
             package_importable_name = '{}.materials'.format(purview_package_short_name)
         else:   
             package_importable_name = '{}.mus.materials'.format(purview_package_short_name)
         PackageProxy.__init__(self, package_importable_name=package_importable_name, session=session)
         PackageWrangler.__init__(self, directory_name=self.directory_name, session=self.session)
+        self._maker_wrangler = baca.scf.MakerWrangler(session=self.session)
 
     ### READ-ONLY PUBLIC ATTRIBUTES ###
 
@@ -28,6 +30,10 @@ class MaterialWrangler(PackageWrangler, PackageProxy):
     @property   
     def global_materials_directory_name(self):
         return os.path.join([self.global_directory_name, 'materials'])
+
+    @property
+    def maker_wrangler(self):
+        return self._maker_wrangler
 
     ### READ / WRITE PUBLIC ATTRIBUTES ###
 
@@ -44,15 +50,21 @@ class MaterialWrangler(PackageWrangler, PackageProxy):
     ### PUBLIC METHODS ###
 
     # TODO: write tests
-    def create_material_package(self, material_package_importable_name):
+    def create_material_package(self, material_package_importable_name, editor_class_name, has_illustration):
         '''Package importable name on success. Change to just true on success.'''
+        assert iotools.is_underscore_delimited_lowercase_package_name(material_package_importable_name)
+        assert editor_class_name is None or iotools.is_uppercamelcase_string(editor_class_name)
+        assert isinstance(has_illustration, bool)
         directory_name = self._package_importable_name_to_directory_name(material_package_importable_name)
         if os.path.exists(directory_name):
             return False
         os.mkdir(directory_name)
         self.write_initializer_to_package(material_package_importable_name)
         material_proxy = MaterialProxy(material_package_importable_name, session=self.session)
-        material_proxy.write_stub_material_definition_to_disk()
+        if editor_class_name is None:
+            material_proxy.write_stub_material_definition_to_disk()
+        material_proxy.add_tag('editor_class_name', editor_class_name)
+        material_proxy.add_tag('has_illustration', has_illustration)
         return material_package_importable_name
 
     # TODO: write tests
@@ -78,39 +90,34 @@ class MaterialWrangler(PackageWrangler, PackageProxy):
             line = 'Material package {!r} already exists.'.format(material_package_importable_name)
             self.proceed(lines=[line])
             return
-        result = self.create_material_package(material_package_importable_name)
+        menu, section = self.make_new_menu()
+        menu.explicit_title = 'how will you create {!r}?'.format(material_name)
+        section.tokens.append(('h', 'by hand'))
+        section.tokens.append(('e', 'with editor'))
+        creation_mode = menu.run(should_clear_terminal=False)
+        if self.backtrack():
+            return
+        if creation_mode == 'e':
+            breadcrumbs = self.session.breadcrumbs[:]
+            self.session.breadcrumbs[:] = []
+            editor = self.maker_wrangler.select_maker_interactively(should_clear_terminal=False)
+            self.session.breadcrumbs = breadcrumbs[:]
+            editor_class_name = editor.class_name
+            has_illustration = True
+        elif creation_mode == 'h':
+            editor_class_name = None
+            line = 'Will you build a score to illustrate {!r}?'.format(material_name)
+            self.conditionally_display_lines(lines=[line, ''])
+            has_illustration = self.confirm()
+        else:
+            raise ValueError
+        result = self.create_material_package(
+            material_package_importable_name, editor_class_name, has_illustration)
         if result:
             line = 'package {!r} created.'.format(result)
         else:
             line = 'package {!r} already exists.'.format(material_name)
         self.proceed(lines=[line])
-
-#    def foo(self):
-#        menu, section = self.make_new_menu()
-#        menu.explicit_title = 'how will you create {!r}?'.format(material_name)
-#        section.tokens.append(('h', 'by hand'))
-#        section.tokens.append(('e', 'with editor'))
-#        creation_mode = menu.run(should_clear_terminal=False)
-#        if self.backtrack():
-#            return
-#        if creation_mode == 'h':
-#            getter = self.make_new_getter()
-#            getter.append_boolean('will you build a score to visualize {!r}?'.format(material_name)) 
-#            build_score = getter.run()
-#            if self.backtrack():
-#                return
-#        elif creation_mode == 'e':
-#            studio = baca.scf.Studio(session=self.session)
-#            maker_wrangler = baca.scf.MakerWrangler(session=self.session)
-#            menu = maker_wrangler.make_maker_selection_menu()
-#            menu.explicit_title = 'selct editor with which to create {!r}:'.format(material_name)
-#            maker_package_short_name = menu.run()
-#            if self.backtrack():
-#                return
-#            maker = maker_wrangler.get_maker(maker_package_short_name)
-#            maker.run() # just guessing here; probably needs better consideration
-#        else:
-#            raise ValueError
 
     def get_package_proxy(self, package_importable_name):
         package_proxy = PackageProxy(package_importable_name, session=self.session)

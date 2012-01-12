@@ -37,7 +37,11 @@ class MaterialProxy(PackageProxy):
 
     @property
     def has_editor(self):
-        return bool(self.get_tag('editor'))
+        return bool(self.get_tag('editor_class_name'))
+
+    @property
+    def has_illustration(self):
+        return self.get_tag('has_illustration')
 
     @property
     def has_material_definition(self):
@@ -111,6 +115,10 @@ class MaterialProxy(PackageProxy):
         material_definition = self.import_material_definition_from_material_definition_module()
         output_data = self.import_output_data_from_output_data_module()
         return material_definition != output_data
+
+    @property
+    def is_data_only(self):
+        return not self.has_illustration
 
     @property
     def is_in_score(self):
@@ -560,8 +568,6 @@ class MaterialProxy(PackageProxy):
             self.open_output_pdf()
         elif result == 'er':
             self.run_editor()
-        elif result == 'es':
-            self.select_editor_interactively()
         # TODO: write tests
         elif result == 'del':
             self.delete_material_package()
@@ -606,8 +612,26 @@ class MaterialProxy(PackageProxy):
         if prompt_proceed:
             line = 'stylesheet linked.'
             self.proceed(lines=[line])
-        
+
     def make_main_menu(self):
+        if self.was_created_by_hand:
+            menu, hidden_section = self.make_main_menu_for_material_made_by_hand()
+        else:
+            menu, hidden_section = self.make_main_menu_for_material_made_with_editor()
+        self.make_main_menu_section_for_output_data(menu, hidden_section)
+        self.make_main_menu_section_for_output_ly(menu, hidden_section)
+        self.make_main_menu_section_for_output_pdf(menu, hidden_section)
+        self.make_main_menu_section_for_hidden_entries(menu)
+        return menu
+    
+    def make_main_menu_for_material_made_with_editor(self):
+        menu, hidden_section = self.make_new_menu(where=self.where(), is_hidden=True)
+        section = menu.make_new_section()
+        if self.has_editor:
+            section.append(('er', 'editor - run'))
+        return menu, hidden_section
+
+    def make_main_menu_for_material_made_by_hand(self):
         menu, hidden_section = self.make_new_menu(where=self.where(), is_hidden=True)
         section = menu.make_new_section()
         if self.has_material_definition_module:
@@ -634,33 +658,10 @@ class MaterialProxy(PackageProxy):
             section.append(('sse', 'score stylesheet - edit'))
             hidden_section.append(('ssm', 'source stylesheet - edit'))
             hidden_section.append(('ssl', 'score stylesheet - relink'))
-        if self.has_output_data_module:
-            section = menu.make_new_section()
-            section.append(('dc', 'output data - recreate'))
-            section.append(('di', 'output data - inspect'))
-            hidden_section.append(('dd', 'output data - delete'))
-        elif self.has_material_definition:
-            section = menu.make_new_section()
-            section.append(('dc', 'output data - create'))
-        if self.has_output_ly:
-            hidden_section.append(('lyc', 'output ly - recreate'))
-            hidden_section.append(('lyd', 'output ly - delete'))
-            hidden_section.append(('lyi', 'output ly - inspect'))
-        elif self.has_score_builder:
-            hidden_section.append(('lyc', 'output ly - create'))
-        if self.has_output_pdf:
-            section = menu.make_new_section()
-            section.append(('pdfc', 'output pdf - recreate'))
-            hidden_section.append(('pdfd', 'output pdf - delete'))
-            section.append(('pdfi', 'output pdf - inspect'))
-        elif self.has_score_builder:
-            section = menu.make_new_section()
-            section.append(('pdfc', 'output pdf - create'))
-        section = menu.make_new_section()
-        if self.has_editor:
-            section.append(('er', 'editor - run'))
-        section.append(('es', 'editor - select'))
-        hidden_section = menu.make_new_section(is_hidden=True)
+        return menu, hidden_section
+
+    def make_main_menu_section_for_hidden_entries(self, main_menu):
+        hidden_section = main_menu.make_new_section(is_hidden=True)
         hidden_section.append(('del', 'delete material'))
         hidden_section.append(('editors', 'manage editors'))
         hidden_section.append(('init', 'edit initializer'))
@@ -670,7 +671,34 @@ class MaterialProxy(PackageProxy):
         hidden_section.append(('stl', 'manage stylesheets'))
         hidden_section.append(('sum', 'summarize material'))
         hidden_section.append(('tags', 'manage tags'))
-        return menu
+
+    def make_main_menu_section_for_output_data(self, main_menu, hidden_section):
+        if self.has_output_data_module:
+            section = main_menu.make_new_section()
+            section.append(('dc', 'output data - recreate'))
+            section.append(('di', 'output data - inspect'))
+            hidden_section.append(('dd', 'output data - delete'))
+        elif self.has_material_definition:
+            section = main_menu.make_new_section()
+            section.append(('dc', 'output data - create'))
+
+    def make_main_menu_section_for_output_ly(self, main_menu, hidden_section):
+        if self.has_output_ly:
+            hidden_section.append(('lyc', 'output ly - recreate'))
+            hidden_section.append(('lyd', 'output ly - delete'))
+            hidden_section.append(('lyi', 'output ly - inspect'))
+        elif self.has_score_builder:
+            hidden_section.append(('lyc', 'output ly - create'))
+
+    def make_main_menu_section_for_output_pdf(self, main_menu, hidden_section):
+        if self.has_output_pdf:
+            section = main_menu.make_new_section()
+            section.append(('pdfc', 'output pdf - recreate'))
+            hidden_section.append(('pdfd', 'output pdf - delete'))
+            section.append(('pdfi', 'output pdf - inspect'))
+        elif self.has_score_builder:
+            section = main_menu.make_new_section()
+            section.append(('pdfc', 'output pdf - create'))
 
     def manage_stylesheets(self):
         stylesheet_wrangler = StylesheetWrangler(session=self.session)
