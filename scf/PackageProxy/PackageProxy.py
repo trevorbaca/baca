@@ -389,7 +389,12 @@ class PackageProxy(DirectoryProxy):
     def write_initializer_to_package(self, package_importable_name):
         directory_name = self._package_importable_name_to_directory_name(package_importable_name)
         initializer = file(os.path.join(directory_name, '__init__.py'), 'w')
-        initializer.write('')
+        lines = []
+        lines.append('from collections import OrderedDict')
+        lines.append('')
+        lines.append('')
+        lines.append('tags = OrderedDict([])')
+        initializer.write('\n'.join(lines))
         initializer.close()
 
     def write_package_to_disk(self):
