@@ -13,7 +13,6 @@ class PackageProxy(DirectoryProxy):
         self._package_short_name = None
         self.package_importable_name = package_importable_name
         self._purview = None
-        #self.should_unimport_package = False
 
     ### OVERLOADS ###
 
@@ -258,22 +257,15 @@ class PackageProxy(DirectoryProxy):
             return
         tag = self.get_tag(result)
         line = '{!r}'.format(tag)
-        #self.conditionally_display_lines([line])
         self.proceed(lines=[line])
 
     def get_tags(self):
         import collections
-        #if self.should_unimport_package:
-        #    self.unimport_package()
         try:
             command = 'from {} import tags'.format(self.package_importable_name)
             exec(command)
-            #return tags
         except ImportError:    
-            #return collections.OrderedDict([])
             tags = collections.OrderedDict([])
-            print 'just created empty tags ordered dict.'
-        #print 'ZZZ: {}'.format(id(tags))
         return tags
 
     def handle_tags_menu_result(self, result):
@@ -298,9 +290,7 @@ class PackageProxy(DirectoryProxy):
         return formatted_tags
 
     def make_tags_menu(self):
-        #print 'making tags menu ...'
         menu, section = self.make_new_menu(where=self.where(), is_keyed=False)
-        #self.unimport_package()
         section.tokens = self.list_formatted_tags()
         section = menu.make_new_section()
         section.append(('add', 'add tag'))
@@ -427,5 +417,3 @@ class PackageProxy(DirectoryProxy):
         initializer = file(self.initializer_file_name, 'w')
         initializer.write(''.join(lines))
         initializer.close()
-        #self.unimport_package()
-        #self.should_unimport_package = True
