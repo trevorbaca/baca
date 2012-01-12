@@ -193,10 +193,9 @@ class PackageProxy(DirectoryProxy):
         if result:
             tag_name, tag_value = result
             self.add_tag(tag_name, tag_value)
-            line = 'tag added.'
-            self.conditionally_display_lines([line, ''])
-        if self.session.user_input is None:
-            self.proceed()
+        # TODO: can the following two lines be removed?
+        #if self.session.user_input is None:
+        #    self.proceed()
 
     def create_initializer(self):
         if self.has_initializer:
@@ -225,10 +224,9 @@ class PackageProxy(DirectoryProxy):
         if result:
             tag_name = result
             self.delete_tag(tag_name)
-            confirm_line = 'tag deleted.\n'
-            self.conditionally_display_lines([confirm_line])
-        if self.session.user_input is None:
-            self.proceed()
+        # TODO: can the following two lines be removed?
+        #if self.session.user_input is None:
+        #    self.proceed()
 
     def edit_initializer(self):
         os.system('vi {}'.format(self.initializer_file_name))
