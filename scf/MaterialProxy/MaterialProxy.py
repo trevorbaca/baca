@@ -572,6 +572,9 @@ class MaterialProxy(PackageProxy):
             self.regenerate_everything(is_forced=True)
         elif result == 'sum':
             self.summarize_material_package()
+        # TODO: add to packge-level hidden menu
+        elif result == 'tags':
+            self.manage_tags()
         # TODO: add to global hidden menu
         elif result == 'ls':
             self.list_directory()
@@ -664,6 +667,7 @@ class MaterialProxy(PackageProxy):
         hidden_section.append(('ren', 'rename material'))
         hidden_section.append(('stl', 'manage stylesheets'))
         hidden_section.append(('sum', 'summarize material'))
+        hidden_section.append(('tags', 'manage tags'))
         return menu
 
     def manage_stylesheets(self):

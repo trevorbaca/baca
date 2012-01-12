@@ -261,9 +261,7 @@ class PackageProxy(DirectoryProxy):
             return collections.OrderedDict([])
 
     def handle_tags_menu_result(self, result):
-        if result == 'b':
-            return True
-        elif result == 'add':
+        if result == 'add':
             self.add_tag_interactively()
         elif result == 'del':
             self.delete_tag_interactively()

@@ -47,9 +47,7 @@ class ChunkProxy(PackageProxy):
         self.proceed(lines=[line])
 
     def handle_main_menu_result(self, result):
-        if result == 'b':
-            return 'back'
-        elif result == 'd':
+        if result == 'd':
             self.delete_package()
             return False
         elif result == 'n':

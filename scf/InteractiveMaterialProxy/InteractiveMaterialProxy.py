@@ -76,11 +76,7 @@ class InteractiveMaterialProxy(MaterialProxy):
             else:
                 section.append(('l', 'set location'))
             result = menu.run()
-            if result == 'b':
-                self.interactively_check_and_save_material(self.user_input_wrapper)
-                #return result, None
-                # TODO: return none
-            elif result == 'c':
+            if result == 'c':
                 self.clear_values(self.user_input_wrapper)
             elif result == 'd':
                 self.show_demo_input_values()

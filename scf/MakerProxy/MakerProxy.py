@@ -82,9 +82,7 @@ class MakerProxy(PackageProxy):
         return initializer
 
     def handle_main_menu_result(self, key):
-        if key == 'b':
-            return 'back'
-        elif key == 'del':
+        if key == 'del':
             self.delete_package()
             return False
         elif key == 'new':

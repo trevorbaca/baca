@@ -20,6 +20,6 @@ def test_ScoreProxy_show_hidden_menu_entries_01():
       '     studio (studio)',
       '     show menu client (where)',
       '',
-      '     work with repository (svn)',
-      '     work with tags (tags)',
+      '     manage repository (svn)',
+      '     manage tags (tags)',
       '']

@@ -103,9 +103,7 @@ class Studio(SCFObject):
         '''Return true to exit the svn menu.
         '''
         this_result = False
-        if result == 'b':
-            return 'back'
-        elif result == 'add':
+        if result == 'add':
             self.global_proxy.svn_add()
         elif result == 'add_scores':
             self.score_wrangler.svn_add()

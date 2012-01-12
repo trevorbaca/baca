@@ -43,3 +43,5 @@ TODO
 20. Change the names of all 'iterate_' functions to begin in 'list_'.
 
 21. Audit to remove 'diretory_name' attributes.
+
+22. Find a way to include tags management in hidden menu of every package proxy.

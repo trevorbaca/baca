@@ -163,9 +163,7 @@ class MakerWrangler(PackageWrangler, PackageProxy):
         stylesheet_file_pointer.close()
         
     def handle_main_menu_result(self, result):
-        if result == 'b':
-            return 'back'
-        elif result == 'new':
+        if result == 'new':
             self.make_maker()
         else:
             maker_name = value
