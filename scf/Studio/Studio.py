@@ -78,6 +78,18 @@ class Studio(SCFObject):
         prev_index = (index - 1) % len(score_package_short_names)
         return score_package_short_names[prev_index]
 
+    # TODO: write test
+    def get_purview_interactively(self):
+        while True:
+            menu = self.make_score_selection_menu()
+            menu.sections[-1].tokens.append(('baca', 'store elsewhere'))
+            menu.explicit_title = 'select location:'
+            purview_name = menu.run(should_clear_terminal=False)
+            if self.backtrack():
+                return
+            if purview_name:
+                return purview_name
+
     def handle_main_menu_result(self, result):
         if not isinstance(result, str):
             raise TypeError('result must be string.')

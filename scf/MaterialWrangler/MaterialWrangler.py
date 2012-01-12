@@ -69,16 +69,11 @@ class MaterialWrangler(PackageWrangler, PackageProxy):
         if self.backtrack():
             return
         studio = baca.scf.Studio(session=self.session)
-        # TODO: encapsulate in self.get_purview_interactively() method and write tests
-        while True:
-            menu = studio.make_score_selection_menu()
-            menu.sections[-1].tokens.append(('baca', 'store elsewhere')) 
-            menu.explicit_title = 'select location for {!r}:'.format(material_name)
-            purview_name = menu.run(should_clear_terminal=False)
-            if self.backtrack():
-                return
-            if purview_name:
-                break
+        self.preserve_backtracking = True
+        purview_name = studio.get_purview_interactively()
+        self.preserve_backtracking = False
+        if self.backtrack():
+            return
         material_directory_name = iotools.string_to_strict_directory_name(material_name)
         result = self.create_material_package(purview_name, material_directory_name)
         if result:
