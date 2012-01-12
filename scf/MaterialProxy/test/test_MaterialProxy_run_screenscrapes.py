@@ -24,8 +24,6 @@ def test_MaterialProxy_run_screenscrapes_01():
       '',
       '     output pdf - recreate (pdfc)',
       '     output pdf - inspect (pdfi)',
-      '',
-      '     editor - select (es)',
       '']
 
 
@@ -52,6 +50,4 @@ def test_MaterialProxy_run_screenscrapes_02():
       '',
       '     output pdf - recreate (pdfc)',
       '     output pdf - inspect (pdfi)',
-      '',
-      '     editor - select (es)',
       '']

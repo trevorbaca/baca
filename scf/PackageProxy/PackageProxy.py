@@ -193,10 +193,9 @@ class PackageProxy(DirectoryProxy):
         if result:
             tag_name, tag_value = result
             self.add_tag(tag_name, tag_value)
-            line = 'tag added.'
-            self.conditionally_display_lines([line, ''])
-        if self.session.user_input is None:
-            self.proceed()
+        # TODO: can the following two lines be removed?
+        #if self.session.user_input is None:
+        #    self.proceed()
 
     def create_initializer(self):
         if self.has_initializer:
@@ -225,10 +224,9 @@ class PackageProxy(DirectoryProxy):
         if result:
             tag_name = result
             self.delete_tag(tag_name)
-            confirm_line = 'tag deleted.\n'
-            self.conditionally_display_lines([confirm_line])
-        if self.session.user_input is None:
-            self.proceed()
+        # TODO: can the following two lines be removed?
+        #if self.session.user_input is None:
+        #    self.proceed()
 
     def edit_initializer(self):
         os.system('vi {}'.format(self.initializer_file_name))
@@ -251,20 +249,32 @@ class PackageProxy(DirectoryProxy):
         tag = tags.get(tag_name, None)
         return tag
 
+    def get_tag_interactively(self):
+        getter = self.make_new_getter(where=self.where())
+        getter.append_string('tag name')
+        result = getter.run()
+        if self.backtrack():
+            return
+        tag = self.get_tag(result)
+        line = '{!r}'.format(tag)
+        self.proceed(lines=[line])
+
     def get_tags(self):
         import collections
         try:
             command = 'from {} import tags'.format(self.package_importable_name)
             exec(command)
-            return tags
         except ImportError:    
-            return collections.OrderedDict([])
+            tags = collections.OrderedDict([])
+        return tags
 
     def handle_tags_menu_result(self, result):
         if result == 'add':
             self.add_tag_interactively()
         elif result == 'del':
             self.delete_tag_interactively()
+        elif result == 'get':
+            self.get_tag_interactively()
         return False
 
     def has_tag(self, tag_name):
@@ -285,6 +295,7 @@ class PackageProxy(DirectoryProxy):
         section = menu.make_new_section()
         section.append(('add', 'add tag'))
         section.append(('del', 'delete tag'))
+        section.append(('get', 'get tag'))
         return menu
 
     def manage_tags(self):
@@ -370,11 +381,19 @@ class PackageProxy(DirectoryProxy):
     def unimport_baca_package(self):
         self.remove_package_importable_name_from_sys_modules('baca')
 
+    def unimport_package(self):
+        self.remove_package_importable_name_from_sys_modules(self.package_importable_name)
+
     # TODO: write test
     def write_initializer_to_package(self, package_importable_name):
         directory_name = self._package_importable_name_to_directory_name(package_importable_name)
         initializer = file(os.path.join(directory_name, '__init__.py'), 'w')
-        initializer.write('')
+        lines = []
+        lines.append('from collections import OrderedDict')
+        lines.append('')
+        lines.append('')
+        lines.append('tags = OrderedDict([])')
+        initializer.write('\n'.join(lines))
         initializer.close()
 
     def write_package_to_disk(self):
@@ -383,9 +402,9 @@ class PackageProxy(DirectoryProxy):
     def write_tags_to_initializer(self, tags):
         tags = self.pprint_tags(tags)
         lines = []
-        fp = file(self.initializer_file_name, 'r')
+        initializer = file(self.initializer_file_name, 'r')
         found_tags = False
-        for line in fp.readlines():
+        for line in initializer.readlines():
             if found_tags:
                 pass
             elif line.startswith('tags ='):
@@ -395,7 +414,10 @@ class PackageProxy(DirectoryProxy):
                 lines.append(line)
         if not found_tags:
             lines.append(tags)
-        fp.close()
-        fp = file(self.initializer_file_name, 'w')
-        fp.write(''.join(lines))
-        fp.close()
+        initializer_preamble_lines = ['from collections import OrderedDict\n', '\n', '\n']
+        if not lines[:3] == initializer_preamble_lines:
+            lines[0:0] = initializer_preamble_lines[:]
+        initializer.close()
+        initializer = file(self.initializer_file_name, 'w')
+        initializer.write(''.join(lines))
+        initializer.close()

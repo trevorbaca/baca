@@ -197,12 +197,12 @@ class MakerWrangler(PackageWrangler, PackageProxy):
         self.pop_breadcrumb()
 
     # TODO: write test
-    def select_maker_interactively(self):
+    def select_maker_interactively(self, should_clear_terminal=True):
         menu, section = self.make_new_menu(where=self.where(), is_numbered=True)
         section.tokens = self.list_maker_spaced_class_names()
         while True:
             self.append_breadcrumb('select editor')
-            result = menu.run()
+            result = menu.run(should_clear_terminal=should_clear_terminal)
             if self.backtrack():
                 self.pop_breadcrumb()
                 return

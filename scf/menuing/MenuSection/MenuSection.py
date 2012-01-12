@@ -20,6 +20,12 @@ class MenuSection(MenuObject):
         self.default_index = None
         self.section_title = None
 
+    ### OVERLOADS ###
+
+    # TODO: write test
+    def __len__(self):
+        return len(self.tokens)
+
     ### READ-ONLY PUBLIC ATTRIBUTES ###
 
     @property

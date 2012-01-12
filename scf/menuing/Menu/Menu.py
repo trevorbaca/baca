@@ -12,6 +12,11 @@ class Menu(MenuObject):
         self.sections.append(self.make_default_hidden_section(session=session, where=where))
         self.explicit_title = None
 
+    ### OVERLOADS ###
+
+    def __len__(self):
+        return len(self.sections)
+
     ### READ-ONLY PUBLIC ATTRIBUTES ###
 
     @property

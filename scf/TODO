@@ -1,5 +1,11 @@
 TODO
 
+-3. Audit for should_clear_terminal keyword in the signature of every interactive method.
+
+-2. Audit for breadcrumb removal in the signature of every interactive method.
+
+-1. Shorten 'should_clear_terminal' to 'clear' and breadrumb to 'breadcrumb'.
+
 0. Be able safely to write junk into any system file.
 
 1. Implement 'make new material: static' in studio.
@@ -45,3 +51,19 @@ TODO
 21. Audit to remove 'diretory_name' attributes.
 
 22. Find a way to include tags management in hidden menu of every package proxy.
+
+23. Figure out why 'red' isn't good enough to select 'red_pcs', maybe redraw-related.
+
+24. Audit 'type(True)' and replace with 'bool'.
+
+25. Change 'conditionally_display_lines' to just 'display'.
+
+26. Make backtracking work from 'self.confirm()'.
+
+27. Extend 'self.confirm()' with optional prompt.
+
+28. Refine the check for 'from collections impor OrderedDict' check.
+
+29. Change alphabeticization of scores in score selection menu.
+
+30. Find a way to dynamically add (default) indicator to default menu entries.
