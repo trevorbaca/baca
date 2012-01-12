@@ -278,7 +278,9 @@ class PackageProxy(DirectoryProxy):
         return formatted_tags
 
     def make_tags_menu(self):
+        #print 'making tags menu ...'
         menu, section = self.make_new_menu(where=self.where(), is_keyed=False)
+        #self.unimport_package()
         section.tokens = self.list_formatted_tags()
         section = menu.make_new_section()
         section.append(('add', 'add tag'))
@@ -368,6 +370,10 @@ class PackageProxy(DirectoryProxy):
     def unimport_baca_package(self):
         self.remove_package_importable_name_from_sys_modules('baca')
 
+    def unimport_package(self):
+        print 'unimporting package ...'
+        self.remove_package_importable_name_from_sys_modules(self.package_importable_name)
+
     # TODO: write test
     def write_initializer_to_package(self, package_importable_name):
         directory_name = self._package_importable_name_to_directory_name(package_importable_name)
@@ -400,3 +406,4 @@ class PackageProxy(DirectoryProxy):
         initializer = file(self.initializer_file_name, 'w')
         initializer.write(''.join(lines))
         initializer.close()
+        #self.unimport_package()

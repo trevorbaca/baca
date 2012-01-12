@@ -858,7 +858,8 @@ class MaterialProxy(PackageProxy):
         self.remove_package_importable_name_from_sys_modules(self.material_definition_module_importable_name)
 
     def unimport_material_module(self):
-        self.remove_package_importable_name_from_sys_modules(self.package_importable_name)
+        #self.remove_package_importable_name_from_sys_modules(self.package_importable_name)
+        self.unimport_package()
 
     def unimport_materials_module(self):
         self.remove_package_importable_name_from_sys_modules(self.materials_package_importable_name)
