@@ -383,9 +383,9 @@ class PackageProxy(DirectoryProxy):
     def write_tags_to_initializer(self, tags):
         tags = self.pprint_tags(tags)
         lines = []
-        fp = file(self.initializer_file_name, 'r')
+        initializer = file(self.initializer_file_name, 'r')
         found_tags = False
-        for line in fp.readlines():
+        for line in initializer.readlines():
             if found_tags:
                 pass
             elif line.startswith('tags ='):
@@ -395,7 +395,10 @@ class PackageProxy(DirectoryProxy):
                 lines.append(line)
         if not found_tags:
             lines.append(tags)
-        fp.close()
-        fp = file(self.initializer_file_name, 'w')
-        fp.write(''.join(lines))
-        fp.close()
+        initializer_preamble_lines = ['from collections import OrderedDict\n', '\n', '\n']
+        if not lines[:3] == initializer_preamble_lines:
+            lines[0:0] = initializer_preamble_lines[:]
+        initializer.close()
+        initializer = file(self.initializer_file_name, 'w')
+        initializer.write(''.join(lines))
+        initializer.close()
