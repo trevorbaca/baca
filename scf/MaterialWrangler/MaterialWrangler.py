@@ -59,8 +59,8 @@ class MaterialWrangler(PackageWrangler, PackageProxy):
         if os.path.exists(directory_name):
             return False
         os.mkdir(directory_name)
-        self.write_stub_initializer_to_disk(material_package_importable_name)
         material_proxy = MaterialProxy(material_package_importable_name, session=self.session)
+        material_proxy.write_stub_initializer_to_disk()
         if editor_class_name is None:
             material_proxy.write_stub_material_definition_to_disk()
         material_proxy.add_tag('editor_class_name', editor_class_name)

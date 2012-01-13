@@ -373,9 +373,8 @@ class PackageProxy(DirectoryProxy):
         self.remove_package_importable_name_from_sys_modules(self.package_importable_name)
 
     # TODO: write test
-    def write_stub_initializer_to_disk(self, package_importable_name):
-        directory_name = self.package_importable_name_to_directory_name(package_importable_name)
-        initializer = file(os.path.join(directory_name, '__init__.py'), 'w')
+    def write_stub_initializer_to_disk(self):
+        initializer = file(self.initializer_file_name, 'w')
         lines = []
         lines.append('from collections import OrderedDict')
         lines.append('')
@@ -383,9 +382,6 @@ class PackageProxy(DirectoryProxy):
         lines.append('tags = OrderedDict([])')
         initializer.write('\n'.join(lines))
         initializer.close()
-
-    def write_package_to_disk(self):
-        self.print_not_implemented()
 
     def write_tags_to_initializer(self, tags):
         tags = self.pprint_tags(tags)

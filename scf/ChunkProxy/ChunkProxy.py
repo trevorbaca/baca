@@ -42,7 +42,7 @@ class ChunkProxy(PackageProxy):
             self.set_package_spaced_name_interactively()
         if self.score_template is None:
             self.set_score_template_interactively()
-        self.write_package_to_disk()
+        # TODO: create directory and do other stuff here
         line = 'chunk created.'
         self.proceed(lines=[line])
 
