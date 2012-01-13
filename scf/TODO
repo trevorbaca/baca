@@ -58,14 +58,12 @@ TODO
 
 25. Change 'conditionally_display_lines' to just 'display'.
 
-26. Make backtracking work from 'self.confirm()'.
+26. Make backtracking work from 'self.confirm()' or deprecate confirm.
 
 27. Extend 'self.confirm()' with optional prompt.
 
-28. Refine the check for 'from collections impor OrderedDict' check.
+28. Change alphabeticization of scores in score selection menu.
 
-29. Change alphabeticization of scores in score selection menu.
+29. Find a way to dynamically add (default) indicator to default menu entries.
 
-30. Find a way to dynamically add (default) indicator to default menu entries.
-
-31. Consider implementing initializer proxy to decongest package proxy.
+30. Consider implementing initializer proxy to decongest package proxy.
