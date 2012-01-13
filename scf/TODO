@@ -67,3 +67,7 @@ TODO
 29. Find a way to dynamically add (default) indicator to default menu entries.
 
 30. Consider implementing initializer proxy to decongest package proxy.
+
+31. Prevent the creation of 'baca.materials.h' package.
+
+32. Do away with local stylesheets.

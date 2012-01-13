@@ -391,7 +391,7 @@ class MaterialProxy(PackageProxy):
             os.remove(self.material_definition_file_name)
             if prompt_proceed:
                 line = 'material definition deleted.'
-                self.proceed(lines=[line, ''])
+                self.proceed(lines=[line])
         
     def delete_material_package(self):
         self.remove_material_from_materials_initializer()
@@ -403,7 +403,7 @@ class MaterialProxy(PackageProxy):
             os.remove(self.output_data_file_name)
             if prompt_proceed:
                 line = 'output data module deleted.'
-                self.proceed(lines=[line, ''])
+                self.proceed(lines=[line])
 
     def delete_local_stylesheet(self, prompt_proceed=True):
         if self.has_local_stylesheet:
@@ -696,15 +696,16 @@ class MaterialProxy(PackageProxy):
 
     def make_main_menu_section_for_score_builder(self, main_menu, hidden_section):
         section = main_menu.make_new_section()
-        if self.has_score_builder:
-            section.append(('sbe', 'score builder - edit'))
-            if self.has_output_data:
-                section.append(('sbx', 'score builder - execute'))
-            hidden_section.append(('sbd', 'score builder - delete'))
-            hidden_section.append(('sbt', 'score builder - stub'))
-            hidden_section.append(('sbxi', 'score builder - execute & inspect'))
-        elif self.has_illustration:
-            section.append(('sbt', 'score builder - stub'))
+        if self.has_output_data:
+            if self.has_score_builder:
+                section.append(('sbe', 'score builder - edit'))
+                if self.has_output_data:
+                    section.append(('sbx', 'score builder - execute'))
+                hidden_section.append(('sbd', 'score builder - delete'))
+                hidden_section.append(('sbt', 'score builder - stub'))
+                hidden_section.append(('sbxi', 'score builder - execute & inspect'))
+            elif self.has_illustration:
+                section.append(('sbt', 'score builder - stub'))
 
     def make_main_menu_section_for_stylesheet_management(self, main_menu, hidden_section):
         if self.has_output_data:
@@ -849,6 +850,7 @@ class MaterialProxy(PackageProxy):
             line = 'editor selected.'
             self.proceed(lines=[line])
 
+    # TODO: write test
     def select_stylesheet_interactively(self, prompt_proceed=True):
         stylesheet_wrangler = StylesheetWrangler(session=self.session)
         self.preserve_backtracking = True
@@ -856,10 +858,7 @@ class MaterialProxy(PackageProxy):
         self.preserve_backtracking = False
         if self.backtrack():
             return
-        self.link_local_stylesheet(source_stylesheet_file_name)
-        if prompt_proceed:
-            line = 'stylesheet selected.'
-            self.proceed(lines=[line])
+        self.link_local_stylesheet(source_stylesheet_file_name, prompt_proceed=prompt_proceed)
 
     def summarize_material_package(self):
         lines = []
@@ -939,7 +938,10 @@ class MaterialProxy(PackageProxy):
         output_data_module = file(self.output_data_file_name, 'w')
         output_data_preamble_lines = self.output_data_preamble_lines
         if output_data_preamble_lines:
-            output_data_module.write('\n'.join(output_data_preamble_lines))
+            for line in output_data_preamble_lines:
+                output_data_module.write(line + '\n')
+            output_data_module.write('\n')
+            output_data_module.write('\n')
         material_definition = self.import_material_definition_from_material_definition_module()
         line = '{} = {!r}'.format(self.material_underscored_name, material_definition)
         output_data_module.write(line)
@@ -971,7 +973,7 @@ class MaterialProxy(PackageProxy):
     def write_stub_music_material_definition_to_disk(self):
         material_definition = file(self.material_definition_file_name, 'w')
         material_definition.write('from abjad import *\n')
-        material_definition.write("output_data_preamble_lines = ['from abjad import *', '']\n")
+        material_definition.write("output_data_preamble_lines = ['from abjad import *']\n")
         material_definition.write('\n')
         material_definition.write('\n')
         material_definition.write('{} = None'.format(self.material_underscored_name))
