@@ -177,6 +177,7 @@ class PackageProxy(DirectoryProxy):
     def edit_parent_initializer(self):
         os.system('vi {}'.format(self.parent_initializer_file_name))
 
+    # TODO: move to GlobalProxy
     def import_attribute_from_initializer(self, attribute_name):
         try:
             command = 'from {} import {}'.format(self.package_importable_name, attribute_name)
@@ -254,6 +255,7 @@ class PackageProxy(DirectoryProxy):
             self.pop_breadcrumb()
         self.pop_breadcrumb()
 
+    # TODO: write tests
     def package_importable_name_to_directory_name(self, package_importable_name):
         if package_importable_name is None:
             return
@@ -267,6 +269,7 @@ class PackageProxy(DirectoryProxy):
         directory = os.path.join(*directory_parts)
         return directory
 
+    # TODO: write tests
     def package_importable_name_to_purview(self, package_importable_name):
         import baca
         if package_importable_name is None:
@@ -278,6 +281,7 @@ class PackageProxy(DirectoryProxy):
         else:
             raise ValueError('Unknown package importable name {!r}.'.format(package_importable_name))
 
+    # TODO: write test
     def parse_initializer(self, initializer_file_name=None):
         if initializer_file_name is None:
             initializer_file_name = self.initializer_file_name
@@ -298,6 +302,7 @@ class PackageProxy(DirectoryProxy):
         initializer.close()
         return initializer_import_statements, initializer_tag_lines
 
+    # TODO: write test
     def pprint_tags(self, tags):
         if tags:
             lines = []
@@ -316,6 +321,7 @@ class PackageProxy(DirectoryProxy):
             result = 'tags = OrderedDict([])'
         return result
 
+    # TODO: write test
     def remove_import_statement_from_initializer(self, import_statement, initializer_file_name):
         initializer_import_statements, initializer_tag_lines = self.parse_initializer(initializer_file_name)
         initializer_import_statements = [x for x in initializer_import_statements if x != import_statement] 
@@ -364,10 +370,11 @@ class PackageProxy(DirectoryProxy):
     def unimport_package(self):
         self.remove_package_importable_name_from_sys_modules(self.package_importable_name)
 
+    # TODO: write test
     def write_initializer_to_disk(self, 
         initializer_import_statements, initializer_tag_lines, initializer_file_name=None):
         if initializer_file_name is None:
-            initializer_file_name = self.intializer_file_name
+            initializer_file_name = self.initializer_file_name
         initializer_lines = []
         initializer_lines.extend(initializer_import_statements)
         if initializer_import_statements and initializer_tag_lines:
@@ -379,31 +386,14 @@ class PackageProxy(DirectoryProxy):
 
     # TODO: write test
     def write_stub_initializer_to_disk(self):
-        initializer_import_statments = ['from collections import OrderedDict\n']
+        initializer_import_statements = ['from collections import OrderedDict\n']
         initializer_tag_lines = ['tags = OrderedDict([])\n']
         self.write_initializer_to_disk(initializer_import_statements, initializer_tag_lines)
 
+    # TODO: write test
     def write_tags_to_initializer(self, tags):
-        tags = self.pprint_tags(tags)
-        lines = []
-        initializer = file(self.initializer_file_name, 'r')
-        found_tags = False
-        for line in initializer.readlines():
-            if found_tags:
-                pass
-            elif line.startswith('tags ='):
-                found_tags = True
-                lines.append(tags)
-            #elif line == '\n':
-            #    pass
-            else:
-                lines.append(line)
-        if not found_tags:
-            lines.append(tags)
-        initializer_preamble_lines = ['from collections import OrderedDict\n', '\n', '\n']
-        if not lines[:3] == initializer_preamble_lines:
-            lines[0:0] = initializer_preamble_lines[:]
-        initializer.close()
-        initializer = file(self.initializer_file_name, 'w')
-        initializer.write(''.join(lines))
-        initializer.close()
+        import_statement = 'from collections import OrderedDict\n'
+        self.add_import_statement_to_initializer(import_statement)
+        initializer_import_statements, initializer_tag_lines = self.parse_initializer()
+        initializer_tag_lines = self.pprint_tags(tags)
+        self.write_initializer_to_disk(initializer_import_statements, initializer_tag_lines)
