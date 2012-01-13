@@ -99,15 +99,6 @@ class PackageProxy(DirectoryProxy):
         else:
             raise ValueError('Unknown package importable name {!r}.'.format(package_importable_name))
 
-    def _read_initializer_metadata(self, name):
-        initializer = file(self.initializer_file_name, 'r')
-        for line in initializer.readlines():
-            if line.startswith(name):
-                initializer.close()
-                command = line.replace(name, 'result')
-                exec(command)
-                return result
-
     ### READ / WRITE PUBLIC ATTRIBUTES ###
 
     @apply
