@@ -410,6 +410,8 @@ class PackageProxy(DirectoryProxy):
             elif line.startswith('tags ='):
                 found_tags = True
                 lines.append(tags)
+            #elif line == '\n':
+            #    pass
             else:
                 lines.append(line)
         if not found_tags:
