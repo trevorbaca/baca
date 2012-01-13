@@ -9,7 +9,7 @@ import os
 
 class MaterialWrangler(PackageWrangler, PackageProxy):
 
-    # TODO: get rid of the idea that wranglers have a purview
+    # TODO: get rid of the idea that wranglers have a purview; always grant effective global purview
     def __init__(self, purview_package_short_name, session=None):
         import baca
         if purview_package_short_name == 'baca':
@@ -49,14 +49,43 @@ class MaterialWrangler(PackageWrangler, PackageProxy):
 
     ### PUBLIC METHODS ###
 
-    # TODO: write tests
-    def create_material_package(self, material_package_importable_name, editor_class_name, has_illustration):
-        '''Package importable name on success. Change to just true on success.'''
+    # TODO: write test
+    def create_data_package_interactively(self):
+        material_package_importable_name = self.get_new_material_package_importable_name_interactively()
+        editor_class_name = None
+        has_illustration = False
+        self.create_material_package(material_package_importable_name, editor_class_name, has_illustration)
+
+    # TODO: write test
+    def create_editable_material_package_interactively(self):
+        material_package_importable_name = self.get_new_material_package_importable_name_interactively()
+        breadcrumbs = self.session.breadcrumbs[:]
+        self.session.breadcrumbs[:] = []
+        editor = self.maker_wrangler.select_maker_interactively(should_clear_terminal=False)
+        self.session.breadcrumbs = breadcrumbs[:]
+        editor_class_name = editor.class_name
+        has_illustration = True
+        self.create_material_package(material_package_importable_name, editor_class_name, has_illustration)
+
+    # TODO: write test
+    def create_handmade_material_package_interactively(self):
+        material_package_importable_name = self.get_new_material_package_importable_name_interactively()
+        editor_class_name = None
+        has_illustration = True
+        self.create_material_package(material_package_importable_name, editor_class_name, has_illustration)
+
+    # TODO: write test
+    def create_material_package(self, material_package_importable_name, editor_class_name, has_illustration,
+        prompt_proceed=True):
+        '''True on success.'''
         assert iotools.is_underscore_delimited_lowercase_package_name(material_package_importable_name)
         assert editor_class_name is None or iotools.is_uppercamelcase_string(editor_class_name)
         assert isinstance(has_illustration, bool)
         directory_name = self.package_importable_name_to_directory_name(material_package_importable_name)
         if os.path.exists(directory_name):
+            if prompt_proceed:
+                line = 'package {!r} already exists.'.format(material_name)
+                self.proceed(lines=[line])
             return False
         os.mkdir(directory_name)
         material_proxy = MaterialProxy(material_package_importable_name, session=self.session)
@@ -65,10 +94,13 @@ class MaterialWrangler(PackageWrangler, PackageProxy):
             material_proxy.write_stub_material_definition_to_disk()
         material_proxy.add_tag('editor_class_name', editor_class_name)
         material_proxy.add_tag('has_illustration', has_illustration)
-        return material_package_importable_name
+        if prompt_proceed:
+            line = 'package {!r} created.'.format(material_package_importable_name)
+            self.proceed(lines=[line])
+        return True
 
-    # TODO: write tests
-    def create_material_package_interactively(self):
+    # TODO: write test
+    def get_new_material_package_importable_name_interactively(self):
         import baca
         getter = self.make_new_getter(where=self.where())
         getter.append_string('material name')
@@ -90,37 +122,7 @@ class MaterialWrangler(PackageWrangler, PackageProxy):
             line = 'Material package {!r} already exists.'.format(material_package_importable_name)
             self.proceed(lines=[line])
             return
-        menu, section = self.make_new_menu()
-        menu.explicit_title = 'how will you create {!r}?'.format(material_name)
-        section.tokens.append(('h', 'by hand'))
-        section.tokens.append(('e', 'with editor'))
-        creation_mode = menu.run(should_clear_terminal=False)
-        if self.backtrack():
-            return
-        if creation_mode == 'e':
-            breadcrumbs = self.session.breadcrumbs[:]
-            self.session.breadcrumbs[:] = []
-            editor = self.maker_wrangler.select_maker_interactively(should_clear_terminal=False)
-            self.session.breadcrumbs = breadcrumbs[:]
-            editor_class_name = editor.class_name
-            has_illustration = True
-        elif creation_mode == 'h':
-            editor_class_name = None
-            line = 'build score illustration'
-            getter = self.make_new_getter(where=self.where())
-            getter.append_boolean(line)
-            has_illustration = getter.run()
-            if self.backtrack():
-                return
-        else:
-            raise ValueError
-        result = self.create_material_package(
-            material_package_importable_name, editor_class_name, has_illustration)
-        if result:
-            line = 'package {!r} created.'.format(result)
-        else:
-            line = 'package {!r} already exists.'.format(material_name)
-        self.proceed(lines=[line])
+        return material_package_importable_name
 
     def get_package_proxy(self, package_importable_name):
         package_proxy = PackageProxy(package_importable_name, session=self.session)
@@ -130,8 +132,12 @@ class MaterialWrangler(PackageWrangler, PackageProxy):
             return StaticMaterialProxy(package_importable_name, session=self.session)
 
     def handle_main_menu_result(self, result):
-        if result == 'new':
-            self.create_material_package_interactively()
+        if result == 'd':
+            self.create_data_package_interactively()
+        elif result == 'h':
+            self.create_handmade_material_package_interactively()
+        elif result == 'e':
+            self.create_editable_material_package_interactively()
         else:
             material_proxy = self.make_material_proxy(result)
             material_proxy.run()
@@ -147,7 +153,9 @@ class MaterialWrangler(PackageWrangler, PackageProxy):
         section.tokens = list(self.iterate_material_summaries())
         section.return_value_attribute = 'body'
         section = menu.make_new_section()
-        section.append(('new', 'make new material'))
+        section.append(('d', 'make data'))
+        section.append(('h', 'make material by hand'))
+        section.append(('e', 'make material with editor'))
         return menu
 
     def make_material_proxy(self, material_underscored_name):
