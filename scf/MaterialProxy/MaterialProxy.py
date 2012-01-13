@@ -790,7 +790,7 @@ class MaterialProxy(PackageProxy):
     def remove_material_from_materials_initializer(self):
         import_statement = 'from {} import {}\n'.format(
             self.material_underscored_name, self.material_underscored_name)
-        self.remove_line_from_initializer(self.parent_initializer_file_name, import_statement)
+        self.remove_import_statement_from_initializer(import_statement, self.parent_initializer_file_name)
 
     def run(self, user_input=None):
         self.assign_user_input(user_input=user_input)
@@ -902,7 +902,6 @@ class MaterialProxy(PackageProxy):
         self.remove_package_importable_name_from_sys_modules(self.material_definition_module_importable_name)
 
     def unimport_material_module(self):
-        #self.remove_package_importable_name_from_sys_modules(self.package_importable_name)
         self.unimport_package()
 
     def unimport_materials_module(self):

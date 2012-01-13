@@ -74,7 +74,7 @@ class DirectoryProxy(SCFObject):
         self.conditionally_display_lines([line])
         response = self.handle_raw_input("type 'remove' to proceed")
         if response == 'remove':
-            command = 'svn rm {}'.format(self.directory_name)
+            command = 'svn --force rm {}'.format(self.directory_name)
             proc = subprocess.Popen(command, shell=True, stdout=subprocess.PIPE)
             first_line = proc.stdout.readline()
             lines = []

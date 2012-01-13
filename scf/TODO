@@ -67,3 +67,5 @@ TODO
 29. Change alphabeticization of scores in score selection menu.
 
 30. Find a way to dynamically add (default) indicator to default menu entries.
+
+31. Consider implementing initializer proxy to decongest package proxy.
