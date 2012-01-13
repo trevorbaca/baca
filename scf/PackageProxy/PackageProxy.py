@@ -8,7 +8,7 @@ import sys
 class PackageProxy(DirectoryProxy):
 
     def __init__(self, package_importable_name=None, session=None):
-        directory_name = self._package_importable_name_to_directory_name(package_importable_name)
+        directory_name = self.package_importable_name_to_directory_name(package_importable_name)
         DirectoryProxy.__init__(self, directory_name=directory_name, session=session)
         self._package_short_name = None
         self.package_importable_name = package_importable_name
@@ -27,7 +27,7 @@ class PackageProxy(DirectoryProxy):
     @property
     def directory_name(self):
         if self.package_importable_name is not None:
-            return self._package_importable_name_to_directory_name(self.package_importable_name)
+            return self.package_importable_name_to_directory_name(self.package_importable_name)
 
     @property
     def has_initializer(self):
@@ -47,7 +47,7 @@ class PackageProxy(DirectoryProxy):
     @property
     def parent_initializer_file_name(self):
         if self.parent_package_importable_name:
-            parent_directory_name = self._package_importable_name_to_directory_name(
+            parent_directory_name = self.package_importable_name_to_directory_name(
                 self.parent_package_importable_name)
             return os.path.join(parent_directory_name, '__init__.py')
 
@@ -71,36 +71,9 @@ class PackageProxy(DirectoryProxy):
         if isinstance(self.purview, baca.scf.ScoreProxy):
             return self.purview
 
-    ### PRIVATE METHODS ###
-
-    # TODO: make public
-    def _package_importable_name_to_directory_name(self, package_importable_name):
-        if package_importable_name is None:
-            return
-        package_importable_name_parts = package_importable_name.split('.')
-        if package_importable_name_parts[0] == 'baca':
-            directory_parts = [os.environ.get('BACA')] + package_importable_name_parts[1:]
-        elif package_importable_name_parts[0] in os.listdir(os.environ.get('SCORES')):
-            directory_parts = [os.environ.get('SCORES')] + package_importable_name_parts[:]
-        else:
-            raise ValueError('Unknown package importable name {!r}.'.format(package_importable_name))
-        directory = os.path.join(*directory_parts)
-        return directory
-
-    # TODO: make public
-    def _package_importable_name_to_purview(self, package_importable_name):
-        import baca
-        if package_importable_name is None:
-            return
-        elif package_importable_name.split('.')[0] == 'baca':
-            return baca.scf.GlobalProxy()
-        elif package_importable_name.split('.')[0] in os.listdir(os.environ.get('SCORES')):
-            return baca.scf.ScoreProxy(package_importable_name.split('.')[0])
-        else:
-            raise ValueError('Unknown package importable name {!r}.'.format(package_importable_name))
-
     ### READ / WRITE PUBLIC ATTRIBUTES ###
 
+    # TODO: maybe this should be read-only?
     @apply
     def package_importable_name():
         def fget(self):
@@ -113,6 +86,7 @@ class PackageProxy(DirectoryProxy):
             self._package_importable_name = package_importable_name
         return property(**locals())
 
+    # TODO: maybe this should be read-only?
     @apply
     def package_short_name():
         def fget(self):
@@ -122,13 +96,14 @@ class PackageProxy(DirectoryProxy):
             self._package_short_name = package_short_name
         return property(**locals())
 
+    # TODO: maybe this should be read-only?
     @apply
     def purview():
         def fget(self):
             if self._purview is not None:
                 return self._purview
             else:
-                return self._package_importable_name_to_purview(self.package_importable_name)
+                return self.package_importable_name_to_purview(self.package_importable_name)
         def fset(self, purview):
             if self.package_importable_name is None:
                 self._purview = purview
@@ -299,7 +274,31 @@ class PackageProxy(DirectoryProxy):
                 break
             self.pop_breadcrumb()
         self.pop_breadcrumb()
-        
+
+    def package_importable_name_to_directory_name(self, package_importable_name):
+        if package_importable_name is None:
+            return
+        package_importable_name_parts = package_importable_name.split('.')
+        if package_importable_name_parts[0] == 'baca':
+            directory_parts = [os.environ.get('BACA')] + package_importable_name_parts[1:]
+        elif package_importable_name_parts[0] in os.listdir(os.environ.get('SCORES')):
+            directory_parts = [os.environ.get('SCORES')] + package_importable_name_parts[:]
+        else:
+            raise ValueError('Unknown package importable name {!r}.'.format(package_importable_name))
+        directory = os.path.join(*directory_parts)
+        return directory
+
+    def package_importable_name_to_purview(self, package_importable_name):
+        import baca
+        if package_importable_name is None:
+            return
+        elif package_importable_name.split('.')[0] == 'baca':
+            return baca.scf.GlobalProxy()
+        elif package_importable_name.split('.')[0] in os.listdir(os.environ.get('SCORES')):
+            return baca.scf.ScoreProxy(package_importable_name.split('.')[0])
+        else:
+            raise ValueError('Unknown package importable name {!r}.'.format(package_importable_name))
+
     def pprint_tags(self, tags):
         if tags:
             lines = []
@@ -375,7 +374,7 @@ class PackageProxy(DirectoryProxy):
 
     # TODO: write test
     def write_stub_initializer_to_disk(self, package_importable_name):
-        directory_name = self._package_importable_name_to_directory_name(package_importable_name)
+        directory_name = self.package_importable_name_to_directory_name(package_importable_name)
         initializer = file(os.path.join(directory_name, '__init__.py'), 'w')
         lines = []
         lines.append('from collections import OrderedDict')

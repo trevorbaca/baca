@@ -55,7 +55,7 @@ class MaterialWrangler(PackageWrangler, PackageProxy):
         assert iotools.is_underscore_delimited_lowercase_package_name(material_package_importable_name)
         assert editor_class_name is None or iotools.is_uppercamelcase_string(editor_class_name)
         assert isinstance(has_illustration, bool)
-        directory_name = self._package_importable_name_to_directory_name(material_package_importable_name)
+        directory_name = self.package_importable_name_to_directory_name(material_package_importable_name)
         if os.path.exists(directory_name):
             return False
         os.mkdir(directory_name)
