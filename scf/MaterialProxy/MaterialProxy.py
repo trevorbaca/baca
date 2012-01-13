@@ -548,7 +548,7 @@ class MaterialProxy(PackageProxy):
         elif result == 'ssl':
             self.link_local_stylesheet()
         elif result == 'sss':
-            self.select_stylesheet()
+            self.select_stylesheet_interactively()
         elif result == 'stl':
             self.manage_stylesheets()
         elif result == 'dc':
