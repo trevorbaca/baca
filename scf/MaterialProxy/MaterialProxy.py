@@ -235,7 +235,8 @@ class MaterialProxy(PackageProxy):
             exec(command)
             # keep list from persisting between multiple calls to this method
             output_data_preamble_lines = list(output_data_preamble_lines)
-            output_data_preamble_lines.append('\n')
+            # TODO: think the following line should be removed
+            #output_data_preamble_lines.append('\n')
         except ImportError:
             output_data_preamble_lines = []
         return output_data_preamble_lines
@@ -948,7 +949,21 @@ class MaterialProxy(PackageProxy):
             self.proceed(lines=[line])
         return self.is_changed
 
+    def write_stub_data_material_definition_to_disk(self):
+        material_definition = file(self.material_definition_file_name, 'w')
+        material_definition.write('from abjad.tools import sequencetools\n')
+        material_definition.write('output_data_preamble_lines = []\n')
+        material_definition.write('\n')
+        material_definition.write('\n')
+        material_definition.write('{} = None'.format(self.material_underscored_name))
+        
     def write_stub_material_definition_to_disk(self):
+        if self.is_data_only:
+            self.write_stub_data_material_definition_to_disk()
+        else:
+            self.write_stub_music_material_definition_to_disk()
+
+    def write_stub_music_material_definition_to_disk(self):
         material_definition = file(self.material_definition_file_name, 'w')
         material_definition.write('from abjad import *\n')
         material_definition.write("output_data_preamble_lines = ['from abjad import *', '']\n")

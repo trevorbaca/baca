@@ -64,6 +64,7 @@ class MaterialWrangler(PackageWrangler, PackageProxy):
         editor = self.maker_wrangler.select_maker_interactively(should_clear_terminal=False)
         self.session.breadcrumbs = breadcrumbs[:]
         editor_class_name = editor.class_name
+        # TODO: set following attribute by editor automatically
         has_illustration = True
         self.create_material_package(material_package_importable_name, editor_class_name, has_illustration)
 
@@ -91,6 +92,11 @@ class MaterialWrangler(PackageWrangler, PackageProxy):
         material_proxy = MaterialProxy(material_package_importable_name, session=self.session)
         material_proxy.write_stub_initializer_to_disk()
         if editor_class_name is None:
+#            is_data_only = not has_illustration
+#            if is_data_only:
+#                material_proxy.write_stub_data_material_definition_to_disk()
+#            else:
+#                material_proxy.write_stub_music_material_definition_to_disk()
             material_proxy.write_stub_material_definition_to_disk()
         material_proxy.add_tag('editor_class_name', editor_class_name)
         material_proxy.add_tag('has_illustration', has_illustration)
