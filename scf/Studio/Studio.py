@@ -82,7 +82,9 @@ class Studio(SCFObject):
     def get_purview_interactively(self):
         while True:
             menu = self.make_score_selection_menu()
-            menu.sections[-1].tokens.append(('baca', 'store elsewhere'))
+            last_section = menu.sections[-1]
+            last_section.tokens.insert(0, ('baca', 'global (default)'))
+            last_section.default_index = 0
             menu.explicit_title = 'select location:'
             purview_name = menu.run(should_clear_terminal=False)
             if self.backtrack():

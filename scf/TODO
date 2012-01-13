@@ -63,3 +63,7 @@ TODO
 27. Extend 'self.confirm()' with optional prompt.
 
 28. Refine the check for 'from collections impor OrderedDict' check.
+
+29. Change alphabeticization of scores in score selection menu.
+
+30. Find a way to dynamically add (default) indicator to default menu entries.

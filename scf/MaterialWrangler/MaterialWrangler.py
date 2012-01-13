@@ -106,9 +106,12 @@ class MaterialWrangler(PackageWrangler, PackageProxy):
             has_illustration = True
         elif creation_mode == 'h':
             editor_class_name = None
-            line = 'Will you build a score to illustrate {!r}?'.format(material_name)
-            self.conditionally_display_lines(lines=[line, ''])
-            has_illustration = self.confirm()
+            line = 'build score illustration'
+            getter = self.make_new_getter(where=self.where())
+            getter.append_boolean(line)
+            has_illustration = getter.run()
+            if self.backtrack():
+                return
         else:
             raise ValueError
         result = self.create_material_package(
