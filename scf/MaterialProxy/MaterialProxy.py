@@ -690,7 +690,7 @@ class MaterialProxy(PackageProxy):
             section.append(('pdfc', 'output pdf - recreate'))
             hidden_section.append(('pdfd', 'output pdf - delete'))
             section.append(('pdfi', 'output pdf - inspect'))
-        elif self.has_score_builder:
+        elif self.has_output_data and self.has_score_builder:
             section = main_menu.make_new_section()
             section.append(('pdfc', 'output pdf - create'))
 
@@ -698,7 +698,8 @@ class MaterialProxy(PackageProxy):
         section = main_menu.make_new_section()
         if self.has_score_builder:
             section.append(('sbe', 'score builder - edit'))
-            section.append(('sbx', 'score builder - execute'))
+            if self.has_output_data:
+                section.append(('sbx', 'score builder - execute'))
             hidden_section.append(('sbd', 'score builder - delete'))
             hidden_section.append(('sbt', 'score builder - stub'))
             hidden_section.append(('sbxi', 'score builder - execute & inspect'))
@@ -706,14 +707,15 @@ class MaterialProxy(PackageProxy):
             section.append(('sbt', 'score builder - stub'))
 
     def make_main_menu_section_for_stylesheet_management(self, main_menu, hidden_section):
-        if self.has_score_builder or self.has_illustration:
-            section = main_menu.make_new_section()
-            section.append(('sss', 'score stylesheet - select'))
-            if self.has_local_stylesheet:
-                hidden_section.append(('ssd', 'score stylesheet - delete'))
-                section.append(('sse', 'score stylesheet - edit'))
-                hidden_section.append(('ssm', 'source stylesheet - edit'))
-                hidden_section.append(('ssl', 'score stylesheet - relink'))
+        if self.has_output_data:
+            if self.has_score_builder or self.has_illustration:
+                section = main_menu.make_new_section()
+                section.append(('sss', 'score stylesheet - select'))
+                if self.has_local_stylesheet:
+                    hidden_section.append(('ssd', 'score stylesheet - delete'))
+                    section.append(('sse', 'score stylesheet - edit'))
+                    hidden_section.append(('ssm', 'source stylesheet - edit'))
+                    hidden_section.append(('ssl', 'score stylesheet - relink'))
 
     def manage_stylesheets(self):
         stylesheet_wrangler = StylesheetWrangler(session=self.session)
@@ -957,11 +959,14 @@ class MaterialProxy(PackageProxy):
         material_definition.write('\n')
         material_definition.write('{} = None'.format(self.material_underscored_name))
         
-    def write_stub_material_definition_to_disk(self):
+    def write_stub_material_definition_to_disk(self, prompt_proceed=True):
         if self.is_data_only:
             self.write_stub_data_material_definition_to_disk()
         else:
             self.write_stub_music_material_definition_to_disk()
+        if prompt_proceed:
+            line = 'stub material definition written to disk.'
+            self.proceed(lines=[line])
 
     def write_stub_music_material_definition_to_disk(self):
         material_definition = file(self.material_definition_file_name, 'w')
