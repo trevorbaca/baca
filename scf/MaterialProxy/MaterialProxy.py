@@ -25,7 +25,7 @@ class MaterialProxy(PackageProxy):
 
     @property
     def editor(self):
-        editor_class_name = self.get_tag('editor')
+        editor_class_name = self.editor_class_name
         try:
             command = 'from baca.scf.makers import {}'.format(editor_class_name)
             exec(command)
@@ -36,8 +36,12 @@ class MaterialProxy(PackageProxy):
             pass
 
     @property
+    def editor_class_name(self):
+        return self.get_tag('editor_class_name')
+
+    @property
     def has_editor(self):
-        return bool(self.get_tag('editor_class_name'))
+        return bool(self.editor_class_name)
 
     @property
     def has_illustration(self):
@@ -633,31 +637,9 @@ class MaterialProxy(PackageProxy):
 
     def make_main_menu_for_material_made_by_hand(self):
         menu, hidden_section = self.make_new_menu(where=self.where(), is_hidden=True)
-        section = menu.make_new_section()
-        if self.has_material_definition_module:
-            section.append(('mde', 'material definition - edit'))
-            section.append(('mdx', 'material definition - execute'))
-            hidden_section.append(('mdd', 'material definition - delete'))
-            hidden_section.append(('mdt', 'material definition - stub'))
-            hidden_section.append(('mdxi', 'material definition - execute & inspect'))
-        else:
-            section.append(('mdt', 'material definition - stub'))
-        section = menu.make_new_section()
-        if self.has_score_builder:
-            section.append(('sbe', 'score builder - edit'))
-            section.append(('sbx', 'score builder - execute'))
-            hidden_section.append(('sbd', 'score builder - delete'))
-            hidden_section.append(('sbt', 'score builder - stub'))
-            hidden_section.append(('sbxi', 'score builder - execute & inspect'))
-        else:
-            section.append(('sbt', 'score builder - stub'))
-        section = menu.make_new_section()
-        section.append(('sss', 'score stylesheet - select'))
-        if self.has_local_stylesheet:
-            hidden_section.append(('ssd', 'score stylesheet - delete'))
-            section.append(('sse', 'score stylesheet - edit'))
-            hidden_section.append(('ssm', 'source stylesheet - edit'))
-            hidden_section.append(('ssl', 'score stylesheet - relink'))
+        self.make_main_menu_section_for_material_definition(menu, hidden_section)
+        self.make_main_menu_section_for_score_builder(menu, hidden_section)
+        self.make_main_menu_section_for_stylesheet_management(menu, hidden_section)
         return menu, hidden_section
 
     def make_main_menu_section_for_hidden_entries(self, main_menu):
@@ -671,6 +653,17 @@ class MaterialProxy(PackageProxy):
         hidden_section.append(('stl', 'manage stylesheets'))
         hidden_section.append(('sum', 'summarize material'))
         hidden_section.append(('tags', 'manage tags'))
+
+    def make_main_menu_section_for_material_definition(self, main_menu, hidden_section):
+        section = main_menu.make_new_section()
+        if self.has_material_definition_module:
+            section.append(('mde', 'material definition - edit'))
+            section.append(('mdx', 'material definition - execute'))
+            hidden_section.append(('mdd', 'material definition - delete'))
+            hidden_section.append(('mdt', 'material definition - stub'))
+            hidden_section.append(('mdxi', 'material definition - execute & inspect'))
+        else:
+            section.append(('mdt', 'material definition - stub'))
 
     def make_main_menu_section_for_output_data(self, main_menu, hidden_section):
         if self.has_output_data_module:
@@ -699,6 +692,27 @@ class MaterialProxy(PackageProxy):
         elif self.has_score_builder:
             section = main_menu.make_new_section()
             section.append(('pdfc', 'output pdf - create'))
+
+    def make_main_menu_section_for_score_builder(self, main_menu, hidden_section):
+        section = main_menu.make_new_section()
+        if self.has_score_builder:
+            section.append(('sbe', 'score builder - edit'))
+            section.append(('sbx', 'score builder - execute'))
+            hidden_section.append(('sbd', 'score builder - delete'))
+            hidden_section.append(('sbt', 'score builder - stub'))
+            hidden_section.append(('sbxi', 'score builder - execute & inspect'))
+        elif self.has_illustration:
+            section.append(('sbt', 'score builder - stub'))
+
+    def make_main_menu_section_for_stylesheet_management(self, main_menu, hidden_section):
+        if self.has_score_builder or self.has_illustration:
+            section = main_menu.make_new_section()
+            section.append(('sss', 'score stylesheet - select'))
+            if self.has_local_stylesheet:
+                hidden_section.append(('ssd', 'score stylesheet - delete'))
+                section.append(('sse', 'score stylesheet - edit'))
+                hidden_section.append(('ssm', 'source stylesheet - edit'))
+                hidden_section.append(('ssl', 'score stylesheet - relink'))
 
     def manage_stylesheets(self):
         stylesheet_wrangler = StylesheetWrangler(session=self.session)

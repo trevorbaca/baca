@@ -382,7 +382,6 @@ class PackageProxy(DirectoryProxy):
         self.remove_package_importable_name_from_sys_modules('baca')
 
     def unimport_package(self):
-        print 'unimporting package ...'
         self.remove_package_importable_name_from_sys_modules(self.package_importable_name)
 
     # TODO: write test
