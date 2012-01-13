@@ -202,10 +202,11 @@ class InteractiveMaterialProxy(MaterialProxy):
         input_file.write('{} = maker.make(**user_input)\n'.format(material_underscored_name))
         input_file.close()
 
+    # TODO: this whole method is super-old and calls nonexistent code
     def write_material_to_disk(self, user_input_wrapper, material, lilypond_file):
         self.set_material_package_spaced_name_interactively()
         self.make_material_package_directory()
-        self._write_initializer_to_disk()
+        #self._write_initializer_to_disk()
         self._write_input_file_to_disk(self.user_input_import_statements, user_input_wrapper)
         self.write_output_file_to_disk(material)
         self.write_stylesheet_to_disk()
@@ -215,5 +216,5 @@ class InteractiveMaterialProxy(MaterialProxy):
         iotools.write_expr_to_ly(lilypond_file, ly_file, print_status=False, tagline=True)
         pdf = os.path.join(self.material_package_directory, 'visualization.pdf')
         iotools.write_expr_to_pdf(lilypond_file, pdf, print_status=False, tagline=True)
-        self._add_line_to_materials_initializer()
+        #self._add_line_to_materials_initializer()
         return self.material_package_directory

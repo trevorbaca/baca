@@ -108,25 +108,6 @@ class PackageProxy(DirectoryProxy):
                 exec(command)
                 return result
 
-    def _write_initializer_metadata(self, name, value):
-        new_lines = []
-        initializer = file(self.initializer_file_name, 'r')
-        found_existing_line = False
-        for line in initializer.readlines():
-            if line.startswith(name):
-                found_existing_line = True
-                new_line = '{} = {!r}\n'.format(name, value)
-                new_lines.append(new_line)
-            else:
-                new_lines.append(line)
-        if not found_existing_line:
-            new_line = '{} = {!r}\n'.format(name, value)
-            new_lines.append(new_line)
-        initializer.close()
-        initializer = file(self.initializer_file_name, 'w')
-        initializer.write(''.join(new_lines))
-        initializer.close()
-
     ### READ / WRITE PUBLIC ATTRIBUTES ###
 
     @apply
