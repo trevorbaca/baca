@@ -383,7 +383,7 @@ class PackageProxy(DirectoryProxy):
         self.remove_package_importable_name_from_sys_modules(self.package_importable_name)
 
     # TODO: write test
-    def write_initializer_to_package(self, package_importable_name):
+    def write_stub_initializer_to_disk(self, package_importable_name):
         directory_name = self._package_importable_name_to_directory_name(package_importable_name)
         initializer = file(os.path.join(directory_name, '__init__.py'), 'w')
         lines = []

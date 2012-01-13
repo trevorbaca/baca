@@ -102,7 +102,7 @@ class MakerProxy(PackageProxy):
             self.pop_breadcrumb()
         self.pop_breadcrumb()
 
-    def write_initializer_to_disk(self):
+    def write_stub_initializer_to_disk(self):
         initializer = file(os.path.join(self.material_package_directory, '__init__.py'), 'w')
         initializer.write('from output import *\n')
         initializer.write('import datetime\n')
