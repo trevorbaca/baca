@@ -1,1 +1,12 @@
-grep 'def ' $1
+#! /usr/bin/env python
+import os
+import sys
+
+
+os.system('clear')
+for directory_name in sys.argv[1:]:
+    directory_name = directory_name.strip(os.sep)
+    package_name = directory_name.split(os.sep)[-1]
+    file_name = os.path.join(directory_name, package_name + '.py')
+    command = "grep 'def' {}".format(file_name)
+    os.system(command)

@@ -1,21 +1,18 @@
 from abjad.tools import iotools
 from abjad.tools import markuptools
-from baca.scf.MakerWrangler import MakerWrangler
+from abjad.tools import mathtools
+from baca.scf.MaterialProxyWrangler import MaterialProxyWrangler
 from baca.scf.PackageProxy import PackageProxy
 from baca.scf.StylesheetProxy import StylesheetProxy
 from baca.scf.StylesheetWrangler import StylesheetWrangler
-import shutil
 import os
-import subprocess
-import sys
 
 
-# TODO: add 'list package directory' user command & inherit from PackageProxy, somehow
-# TODO: remove interactive and static material proxies
 class MaterialProxy(PackageProxy):
 
     def __init__(self, package_importable_name=None, session=None):
-        PackageProxy.__init__(self, package_importable_name, session=session)
+        PackageProxy.__init__(self, package_importable_name=package_importable_name, session=session)
+        self._generic_output_name = None
 
     ### READ-ONLY PUBLIC ATTRIBUTES ###
 
@@ -24,29 +21,59 @@ class MaterialProxy(PackageProxy):
         return self.package_spaced_name
 
     @property
-    def editor(self):
-        editor_class_name = self.editor_class_name
-        try:
-            command = 'from baca.scf.makers import {}'.format(editor_class_name)
-            exec(command)
-            command = 'result = {}()'.format(editor_class_name)
-            exec(command)
-            return result
-        except:
-            pass
+    def formatted_user_input_lines(self):
+        lines = []
+        if self.has_user_input_module:
+            user_input_wrapper = self.user_input_wrapper 
+            # TODO: implement on user input wrapper
+            for parameter_name, parameter_value in user_input_wrapper.iteritems():
+                line = '{}: {!r}'.format(parameter_name, parameter_value)
+                lines.append(line)
+        return lines
 
     @property
-    def editor_class_name(self):
-        return self.get_tag('editor_class_name')
-
-    @property
-    def has_editor(self):
-        return bool(self.editor_class_name)
+    def has_complete_user_input_wrapper(self):
+        if self.has_user_input_wrapper:
+            user_input_wrapper = self.user_input_wrapper
+            return user_input_wrapper.is_complete
+        return False
 
     @property
     def has_illustration(self):
-        return self.get_tag('has_illustration')
+        if not self.has_illustration_builder:
+            return False
+        else:
+            return bool(self.import_illustration_from_illustration_builder())
 
+    @property
+    def has_illustration_builder(self):
+        if self.illustration_builder_file_name is None:
+            return False
+        else:
+            return os.path.exists(self.illustration_builder_file_name)
+
+    @property
+    def has_illustration_ly(self):
+        if self.illustration_ly_file_name is None:
+            return False
+        else:
+            return os.path.exists(self.illustration_ly_file_name)
+
+    @property
+    def has_illustration_pdf(self):
+        if self.illustration_pdf_file_name is None:
+            return False
+        else:
+            return os.path.exists(self.illustration_pdf_file_name)
+
+    # TODO: remove
+    @property
+    def has_local_stylesheet(self):
+        if self.local_stylesheet_file_name is None:
+            return False
+        else:
+            return os.path.exists(self.local_stylesheet_file_name)
+    
     @property
     def has_material_definition(self):
         if not self.has_material_definition_module:
@@ -62,118 +89,73 @@ class MaterialProxy(PackageProxy):
             return os.path.exists(self.material_definition_file_name)
 
     @property
-    def has_material_underscored_name(self):
-        return bool(self.material_underscored_name is not None)
-
-    @property
-    def has_output_data(self):
-        if not self.has_output_data_module:
+    def has_output_material(self):
+        if not self.has_output_material_module:
             return False
         else:
-            return bool(self.import_output_data_from_output_data_module())
+            return bool(self.import_output_material_from_output_material_module())
 
     @property
-    def has_output_data_module(self):
-        if self.output_data_file_name is None:
+    def has_output_material_module(self):
+        if self.output_material_module_file_name is None:
             return False
         else:
-            return os.path.exists(self.output_data_file_name)
+            return os.path.exists(self.output_material_module_file_name)
 
     @property
-    def has_output_ly(self):
-        if self.output_ly_file_name is None:
-            return False
-        else:
-            return os.path.exists(self.output_ly_file_name)
+    def has_user_input_handler(self):
+        return bool(self.user_input_handler_class_name)
 
     @property
-    def has_output_pdf(self):
-        if self.output_pdf_file_name is None:
+    def has_user_input_module(self):
+        if self.user_input_module_file_name is None:
             return False
         else:
-            return os.path.exists(self.output_pdf_file_name)
+            return os.path.exists(self.user_input_module_file_name)
 
     @property
-    def has_score_builder(self):
-        if self.score_builder_file_name is None:
+    def has_user_input_wrapper(self):
+        if not self.has_user_input_module:
             return False
         else:
-            return os.path.exists(self.score_builder_file_name)
+            return self.import_user_input_from_user_input_module() is not None
 
     @property
-    def has_score_definition(self):
-        if not self.has_score_builder:
-            return False
-        else:
-            return bool(self.import_score_definition_from_score_builder())
+    def illustration_builder_file_name(self):
+        if self.directory_name is not None:
+            return os.path.join(self.directory_name, 'illustration_builder.py')
 
     @property
-    def has_local_stylesheet(self):
-        if self.local_stylesheet_file_name is None:
-            return False
-        else:
-            return os.path.exists(self.local_stylesheet_file_name)
-    
+    def illustration_builder_module_importable_name(self):
+        if self.illustration_builder_file_name is not None:
+            return '{}.illustration_builder'.format(self.package_importable_name)
+
+    @property
+    def illustration_ly_file_name(self):
+        if self.directory_name is not None:
+            return os.path.join(self.directory_name, 'illustration.ly')
+
+    @property
+    def illustration_pdf_file_name(self):
+        if self.directory_name is not None:
+            return os.path.join(self.directory_name, 'illustration.pdf')
+
+    # TODO: make work
     @property
     def is_changed(self):
         material_definition = self.import_material_definition_from_material_definition_module()
-        output_data = self.import_output_data_from_output_data_module()
-        return material_definition != output_data
+        output_material = self.import_output_material_from_output_material_module()
+        return material_definition != output_material
 
     @property
     def is_data_only(self):
-        return not self.has_illustration
+        return not self.should_have_illustration
 
     @property
-    def is_in_score(self):
-        if self.purview is None:
-            return False
-        else:
-            return not self.is_shared        
+    def is_handmade(self):
+        return not(self.has_user_input_handler)
 
-    @property
-    def is_interactive(self):
-        return bool(self.has_tag('maker'))
-
-    @property
-    def is_shared(self):
-        if self.purview is None:
-            return False
-        else:
-            return self.purview.is_studio_global_purview
-
-    @property
-    def is_static(self):
-        return not self.is_interactive
-
-    @property
-    def lilypond_score_subtitle(self):
-        import baca
-        if 'scores' in self.material_package_directory:
-            materials_directory = os.path.dirname(self.material_package_directory)
-            mus_directory = os.path.dirname(materials_directory)
-            score_package_directory = os.path.dirname(mus_directory)
-            score_package_short_name = os.path.basename(score_package_directory)
-            score_wrangler = baca.scf.ScoreWrangler()
-            score_title = score_wrangler.score_package_short_name_to_score_title(score_package_short_name)
-            subtitle = '({})'.format(score_title)
-        else:
-            subtitle = '(shared material)'
-        subtitle = markuptools.Markup(subtitle)
-        return subtitle
-
-    @property
-    def lilypond_score_title(self):
-        material_underscored_name = os.path.basename(self.material_package_directory)
-        if self.is_shared:
-            material_parts = material_underscored_name.split('_')
-        else:
-            material_parts = material_underscored_name.split('_')[1:]
-        material_spaced_name = ' '.join(material_parts)
-        title = iotools.capitalize_string_start(material_spaced_name)
-        title = markuptools.Markup(title)
-        return title
-
+    # TODO: remove
     @property
     def local_stylesheet_file_name(self):
         if self.directory_name is not None:
@@ -201,8 +183,11 @@ class MaterialProxy(PackageProxy):
 
     @property
     def material_spaced_name(self):
-        if self.has_material_underscored_name:
-            return self.material_underscored_name.replace('_', ' ')
+        return self.material_underscored_name.replace('_', ' ')
+
+    @property
+    def material_underscored_name(self):
+        return self.package_short_name
 
     @property
     def materials_directory_name(self):
@@ -213,52 +198,34 @@ class MaterialProxy(PackageProxy):
 
     @property
     def materials_package_importable_name(self):
-        if self.purview is not None:
-            return self.purview.materials_package_importable_name
+        result = self.package_importable_name
+        result = result.split('.')
+        result = result[:-1]
+        result = '.'.join(result)
+        return result
 
     @property
-    def output_data_file_name(self): 
+    def output_material_module_file_name(self): 
         if self.directory_name is not None:
-            return os.path.join(self.directory_name, 'output.py')
+            return os.path.join(self.directory_name, 'output_material.py')
 
     @property
-    def output_data_module_importable_name(self):
-        if self.output_data_file_name is not None:
-            return '{}.output'.format(self.package_importable_name)
+    def output_material_module_importable_name(self):
+        if self.output_material_module_file_name is not None:
+            return '{}.output_material'.format(self.package_importable_name)
 
     @property
-    def output_data_preamble_lines(self):
+    def output_material_module_import_statements(self):
         self.unimport_material_definition_module()
-        command = 'from {} import output_data_preamble_lines'.format(
-            self.material_definition_module_importable_name)
         try:
+            command = 'from {} import output_material_module_import_statements'.format(
+                self.material_definition_module_importable_name)
             exec(command)
             # keep list from persisting between multiple calls to this method
-            output_data_preamble_lines = list(output_data_preamble_lines)
-            output_data_preamble_lines.append('\n')
+            output_material_module_import_statements = list(output_material_module_import_statements)
         except ImportError:
-            output_data_preamble_lines = []
-        return output_data_preamble_lines
-
-    @property
-    def output_ly_file_name(self):
-        if self.directory_name is not None:
-            return os.path.join(self.directory_name, 'output.ly')
-
-    @property
-    def output_pdf_file_name(self):
-        if self.directory_name is not None:
-            return os.path.join(self.directory_name, 'output.pdf')
-
-    @property
-    def score_builder_file_name(self):
-        if self.directory_name is not None:
-            return os.path.join(self.directory_name, 'score_builder.py')
-
-    @property
-    def score_builder_module_importable_name(self):
-        if self.score_builder_file_name is not None:
-            return '{}.score_builder'.format(self.package_importable_name)
+            output_material_module_import_statements = []
+        return output_material_module_import_statements
 
     @property
     def score_package_short_name(self):
@@ -266,7 +233,11 @@ class MaterialProxy(PackageProxy):
             if self.package_importable_name.startswith('baca'):
                 return self.package_importable_name.split('.')[0]
 
-    # TODO: write test
+    @property
+    def should_have_illustration(self):
+        return self.get_tag('should_have_illustration')
+
+    # TODO: reimplement and write test
     @property
     def source_stylesheet_file_name(self):
         if self.has_local_stylesheet:
@@ -283,38 +254,51 @@ class MaterialProxy(PackageProxy):
 
     # TODO: write test
     @property
-    def stub_score_builder_file_name(self):
-        return os.path.join(self.assets_directory, 'stub_score_builder.py')
+    def stub_illustration_builder_file_name(self):
+        return os.path.join(self.assets_directory, 'stub_illustration_builder.py')
 
+    @property
+    def user_input_handler(self):
+        user_input_handler_class_name = self.user_input_handler_class_name
+        try:
+            command = 'from baca.scf.materialproxies import {}'.format(user_input_handler_class_name)
+            exec(command)
+            command = 'result = {}(client_material_package_importable_name={!r}, session=self.session)'
+            command = command.format(user_input_handler_class_name, self.package_importable_name)
+            exec(command)
+            return result
+        except:
+            pass
+
+    @property
+    def user_input_handler_class_name(self):
+        return self.get_tag('user_input_handler_class_name')
+
+    # TODO: write test
+    @property
+    def user_input_module_file_name(self): 
+        if self.directory_name is not None:
+            return os.path.join(self.directory_name, 'user_input.py')
+
+    # TODO: write test
+    @property
+    def user_input_module_importable_name(self):
+        if self.user_input_module_file_name is not None:
+            return '{}.user_input'.format(self.package_importable_name)
+    
+    # TODO: write test
     @property
     def user_input_wrapper(self):
-        if self.is_interactive:
-            if self.material_definition_module_importable_name is not None:
-                command = 'from {} import user_input'.format(self.material_definition_module_importable_name)
+        if self.has_user_input_module:
+            if True:
+                command = 'from {} import user_input'.format(self.user_input_module_importable_name)
                 exec(command)
                 return user_input
-
-    @property
-    def was_created_by_hand(self):
-        return not(self.has_editor)
-
-    ### READ / WRITE PUBLIC ATTRIBUTES ##
-
-    @apply
-    def material_underscored_name():
-        def fget(self):
-            return self.package_short_name
-        def fset(self, material_underscored_name):
-            assert isinstance(material_underscored_name, (str, type(None)))
-            if isinstance(material_underscored_name, str):
-                assert iotools.is_underscore_delimited_lowercase_string(material_underscored_name)
-            self.package_short_name = material_underscored_name
-        return property(**locals())
 
     ### PUBLIC METHODS ###
 
     def add_material_to_material_initializer(self):
-        import_statement = 'from output import {}\n'.format(self.material_underscored_name)
+        import_statement = 'from output_material import {}\n'.format(self.material_underscored_name)
         self.add_import_statement_to_initializer(import_statement) 
         
     def add_material_to_materials_initializer(self):
@@ -323,87 +307,7 @@ class MaterialProxy(PackageProxy):
         parent_package = PackageProxy(self.parent_package_importable_name, session=self.session)
         parent_package.add_import_statement_to_initializer(import_statement)
 
-    def conditionally_edit_score_builder(self):
-        if self.has_score_builder:
-            self.edit_score_builder()
-        elif self.has_output_data:
-            line = "data exists but score builder doesn't.\n"
-            self.conditionally_display_lines([line])
-            if self.query('create score builder? '):
-                self.create_score_builder()
-        elif self.has_material_definition_module:
-            if self.query('write material to disk? '):
-                self.write_material_definition_to_output_data_module(is_forced=True)
-        else:
-            if self.query('create material definition? '):
-                self.edit_material_definition_module()
-
-    def create_output_ly_and_output_pdf_from_score_builder(self, is_forced=False, prompt_proceed=True):
-        lines = []
-        lilypond_file = self.import_score_definition_from_score_builder()
-        if is_forced or not self.lilypond_file_format_is_equal_to_score_builder_ly(lilypond_file):
-            iotools.write_expr_to_pdf(lilypond_file, self.output_pdf_file_name, print_status=False)
-            iotools.write_expr_to_ly(lilypond_file, self.output_ly_file_name, print_status=False)
-            lines.append('PDF and LilyPond file written to disk.')
-        else:
-            lines.append('LilyPond file is the same. (PDF and LilyPond file preserved.)')
-        lines.append('')
-        if prompt_proceed:
-            self.proceed(lines=lines)
-        
-    def create_output_ly_from_score_builder(self, is_forced=False, prompt_proceed=True):
-        lines = []
-        lilypond_file = self.import_score_definition_from_score_builder()
-        if is_forced or not self.lilypond_file_format_is_equal_to_score_builder_ly(lilypond_file):
-            iotools.write_expr_to_ly(lilypond_file, self.output_ly_file_name, print_status=False)
-            lines.append('LilyPond file written to disk.')
-        else:
-            lines.append('LilyPond file is the same. (LilyPond file preserved.)')
-        lines.append('')
-        if prompt_proceed:
-            self.proceed(lines=lines)
-
-    def create_output_pdf_from_score_builder(self, is_forced=False, prompt_proceed=True):
-        lines = []
-        lilypond_file = self.import_score_definition_from_score_builder()
-        if is_forced or not self.lilypond_file_format_is_equal_to_score_builder_ly(lilypond_file):
-            iotools.write_expr_to_pdf(lilypond_file, self.output_pdf_file_name, print_status=False)
-            lines.append('PDF written to disk.')
-        else:
-            lines.append('LilyPond file is the same. (PDF preserved.)')
-        lines.append('')
-        if prompt_proceed:
-            self.proceed(lines=lines)
-
-    def create_score_builder(self):
-        file_pointer = file(self.score_builder_file_name, 'w')
-        file_pointer.write('from abjad import *\n')
-        file_pointer.write('from abjad.tools import layouttools\n')
-        line = 'from output import {}\n'.format(self.material_underscored_name)
-        file_pointer.write(line)
-        file_pointer.write('\n\n\n')
-        file_pointer.close()
-        self.edit_score_builder()
-
-    def delete_material_definition_module(self, prompt_proceed=True):
-        if self.has_material_definition_module:
-            os.remove(self.material_definition_file_name)
-            if prompt_proceed:
-                line = 'material definition deleted.'
-                self.proceed(lines=[line, ''])
-        
-    def delete_material_package(self):
-        self.remove_material_from_materials_initializer()
-        PackageProxy.delete_package(self)
-
-    def delete_output_data_module(self, prompt_proceed=True):
-        if self.has_output_data_module:
-            self.remove_material_from_materials_initializer()
-            os.remove(self.output_data_file_name)
-            if prompt_proceed:
-                line = 'output data module deleted.'
-                self.proceed(lines=[line, ''])
-
+    # TODO: remove
     def delete_local_stylesheet(self, prompt_proceed=True):
         if self.has_local_stylesheet:
             os.remove(self.local_stylesheet_file_name)
@@ -411,73 +315,61 @@ class MaterialProxy(PackageProxy):
                 line = 'stylesheet deleted.'
                 self.proceed(lines=[line])
            
-    def edit_ly(self):
-        if self.has_output_ly:
-            self.edit_output_ly()
-        elif self.has_score_builder:
-            if self.query('create LilyPond file from score builder? '):
-                self.create_output_ly_from_score_builder()    
-        elif self.has_output_data:
-            line = "output data exists but score builder doesn't.\n"
-            self.conditionally_display_lines([line])
-            if self.query('create score builder? '):
-                self.create_score_builder()
-        elif self.has_material_definition_module:
-            if self.query('write material to disk? '):
-                self.write_material_definition_to_output_data_module(is_forced=True)
-        else:
-            if self.query('create material definition? '):
-                self.edit_material_definition_module()
+    def delete_material_definition_module(self, prompt_proceed=True):
+        if self.has_material_definition_module:
+            os.remove(self.material_definition_file_name)
+            if prompt_proceed:
+                line = 'material definition deleted.'
+                self.proceed(lines=[line])
+        
+    def delete_material_package(self):
+        self.remove_material_from_materials_initializer()
+        PackageProxy.delete_package(self)
+
+    def delete_output_material_module(self, prompt_proceed=True):
+        if self.has_output_material_module:
+            self.remove_material_from_materials_initializer()
+            os.remove(self.output_material_module_file_name)
+            if prompt_proceed:
+                line = 'output data module deleted.'
+                self.proceed(lines=[line])
+
+    def delete_illustration_ly(self, prompt_proceed=True):
+        if self.has_illustration_ly:
+            os.remove(self.illustration_ly_file_name)
+            if prompt_proceed:
+                line = 'output LilyPond file deleted.'
+                self.procced(lines=[line])
+
+    def delete_illustration_pdf(self, prompt_proceed=True):
+        if self.has_illustration_pdf:
+            os.remove(self.illustration_pdf_file_name)
+            if prompt_proceed:
+                line = 'output PDF deleted.'
+                self.proceed(lines=[line])
+
+    # TODO: make read only
+    def edit_illustration_ly(self):
+        os.system('vi {}'.format(self.illustration_ly_file_name))
+
+    def edit_illustration_builder(self):
+        os.system('vi + {}'.format(self.illustration_builder_file_name))
+
+    # TODO: remove
+    def edit_local_stylesheet(self):
+        os.system('vi {}'.format(self.local_stylesheet_file_name))
 
     def edit_material_definition_module(self):
         os.system('vi + {}'.format(self.material_definition_file_name))
 
-    def edit_output_data_module(self):
-        os.system('vi + {}'.format(self.output_data_file_name))
+    # TODO: make read only
+    def edit_output_material_module(self):
+        os.system('vi + {}'.format(self.output_material_module_file_name))
 
-    def edit_output_ly(self):
-        os.system('vi {}'.format(self.output_ly_file_name))
-
-    def edit_score_builder(self):
-        os.system('vi + {}'.format(self.score_builder_file_name))
-
+    # TODO: reimplement and keep
     def edit_source_stylesheet(self):
         stylesheet_proxy = StylesheetProxy(self.source_stylesheet_file_name, session=self.session)
         stylesheet_proxy.vi_stylesheet()
-
-    def edit_local_stylesheet(self):
-        os.system('vi {}'.format(self.local_stylesheet_file_name))
-
-    # TODO: reimplement with getter and backtracking
-    def get_package_short_name_of_new_material_interactively(self):
-        response = self.handle_raw_input('material name')
-        response = response.lower()
-        response = response.replace(' ', '_')
-        if self.has_score_local_purview:
-            package_short_name = '{}_{}'.format(self.purview.package_short_name, response)
-        else:
-            package_short_name = response
-        line = 'short package name will be {}.\n'.format(package_short_name)
-        self.conditionally_display_lines([line])
-        return package_short_name
-
-    # TODO: reimplement with getter and backtracking
-    def get_score_builder_status_of_new_material_package_interactively(self):
-        response = self.handle_raw_input('include score builder?')
-        if response == 'y':
-            return True
-        else:
-            return False
-
-    def import_attribute_from_material_definition(self, attribute_name):
-        try:
-            command = 'from {} import {}'.format(self.material_definition_module_importable_name, attribute_name)
-            exec(command)
-            command = 'result = {}'.format(attribute_name)
-            exec(command)
-            return result
-        except ImportError:
-            return None
 
     def import_material_definition_from_material_definition_module(self):
         self.unimport_material_definition_module()
@@ -491,11 +383,11 @@ class MaterialProxy(PackageProxy):
         except ImportError as e:
             pass
     
-    def import_output_data_from_output_data_module(self):
+    def import_output_material_from_output_material_module(self):
         self.unimport_module_hierarchy()
         try:
             command = 'from {} import {}'.format(
-                self.output_data_module_importable_name, self.material_underscored_name)
+                self.output_material_module_importable_name, self.material_underscored_name)
             exec(command)
             command = 'result = {}'.format(self.material_underscored_name)
             exec(command)
@@ -503,22 +395,43 @@ class MaterialProxy(PackageProxy):
         except ImportError as e:
             pass
 
-    def import_score_definition_from_score_builder(self):
-        if not self.has_score_builder:
+    # TODO: change name to self.import_illustration_from_illustration_builder_module
+    def import_illustration_from_illustration_builder(self):
+        if not self.has_illustration_builder:
             return None
-        self.unimport_score_builder_module()
-        self.unimport_output_data_module()
-        command = 'from {} import lilypond_file'.format(self.score_builder_module_importable_name) 
+        self.unimport_illustration_builder_module()
+        self.unimport_output_material_module()
+        command = 'from {} import illustration'.format(self.illustration_builder_module_importable_name) 
         exec(command)
         if self.has_local_stylesheet:
-            lilypond_file.file_initial_user_includes.append(self.local_stylesheet_file_name)
-        lilypond_file.header_block.title = markuptools.Markup(self.material_spaced_name)
-        return lilypond_file
+            illustration.file_initial_user_includes.append(self.local_stylesheet_file_name)
+        illustration.header_block.title = markuptools.Markup(self.material_spaced_name)
+        return illustration
         
+    # TODO: change name to self.import_user_input_wrapper_from_user_input_module()
+    def import_user_input_from_user_input_module(self):
+        self.unimport_user_input_module()
+        try:
+            command = 'from {} import user_input'.format(self.user_input_module_importable_name)
+            exec(command)
+            return user_input
+        except ImportError as e:
+            pass
+
+    # TODO: audit
     def handle_main_menu_result(self, result):
         assert isinstance(result, str)
-        if result == 'k':
-            self.reload_user_input()
+        if result == 'uic':
+            self.clear_user_input_wrapper(prompt_proceed=False)    
+        elif result == 'uil':
+            self.load_user_input_wrapper_demo_values(prompt_proceed=False)
+        elif result == 'uip':
+            self.populate_user_input_wrapper(prompt_proceed=False)
+        elif result == 'uis':
+            self.show_user_input_demo_values(prompt_proceed=True)
+        elif result == 'uit':
+            self.session.use_current_user_input_values_as_default = \
+                not self.session.use_current_user_input_values_as_default
         elif result == 'mdd':
             self.delete_material_definition_module()
         elif result == 'mde':
@@ -529,16 +442,16 @@ class MaterialProxy(PackageProxy):
             self.run_python_on_material_definition()
         elif result == 'mdxi':
             self.run_abjad_on_material_definition()
-        elif result == 'sbd':
-            self.delete_score_builder()
-        elif result == 'sbe':
-            self.conditionally_edit_score_builder()
-        elif result == 'sbt':
-            self.write_stub_score_builder_to_disk()
-        elif result == 'sbx':
-            self.run_python_on_score_builder()
-        elif result == 'sbxi':
-            self.run_abjad_on_score_builder()
+        elif result == 'ibd':
+            self.delete_illustration_builder()
+        elif result == 'ibe':
+            self.edit_illustration_builder()
+        elif result == 'ibt':
+            self.write_stub_illustration_builder_to_disk()
+        elif result == 'ibx':
+            self.run_python_on_illustration_builder()
+        elif result == 'ibxi':
+            self.run_abjad_on_illustration_builder()
         elif result == 'ssd':
             self.delete_local_stylesheet()
         elif result == 'sse':
@@ -552,57 +465,45 @@ class MaterialProxy(PackageProxy):
         elif result == 'stl':
             self.manage_stylesheets()
         elif result == 'dc':
-            self.write_material_definition_to_output_data_module(is_forced=True)
+            self.write_output_material_to_disk()
         elif result == 'di':
-            self.edit_output_data_module()
+            self.edit_output_material_module()
         elif result == 'dd':
-            self.delete_output_data_module()
+            self.delete_output_material_module()
         elif result == 'lyc':
-            self.create_output_ly_from_score_builder(is_forced=True)
+            self.write_illustration_ly_to_disk(is_forced=True)
         elif result == 'lyd':
-            self.delete_ly()
+            self.delete_illustration_ly()
         elif result == 'lyi':
-            self.edit_ly()
+            self.edit_illustration_ly()
         elif result == 'pdfc':
-            self.create_output_ly_and_output_pdf_from_score_builder(is_forced=True)
-            self.open_output_pdf()
+            self.write_illustration_ly_and_pdf_to_disk(is_forced=True)
+            self.open_illustration_pdf()
         elif result == 'pdfd':
-            self.delete_pdf()
+            self.delete_illustration_pdf()
         elif result == 'pdfi':
-            self.open_output_pdf()
-        elif result == 'er':
-            self.run_editor()
-        # TODO: write tests
+            self.open_illustration_pdf()
         elif result == 'del':
             self.delete_material_package()
             self.session.is_backtracking_locally = True
-        elif result == 'editors':
-            self.manage_editors()
         elif result == 'init':
             self.edit_initializer()
         elif result == 'ren':
             self.rename_material()
         elif result == 'reg':
             self.regenerate_everything(is_forced=True)
-        elif result == 'sum':
-            self.summarize_material_package()
         # TODO: add to packge-level hidden menu
         elif result == 'tags':
             self.manage_tags()
-        # TODO: add to global hidden menu
+        # TODO: add to directory-level hidden menu
         elif result == 'ls':
             self.list_directory()
+        elif mathtools.is_integer_equivalent_expr(result):
+            self.edit_user_input_at_number(int(result))
         else:
             raise ValueError
 
-    def lilypond_file_format_is_equal_to_score_builder_ly(self, lilypond_file):
-        temp_ly_file = os.path.join(os.environ.get('HOME'), 'tmp.ly')
-        iotools.write_expr_to_ly(lilypond_file, temp_ly_file, print_status=False)
-        trimmed_temp_ly_file_lines = self.trim_ly_lines(temp_ly_file)
-        os.remove(temp_ly_file)
-        trimmed_score_builder_ly_lines = self.trim_ly_lines(self.output_ly_file_name)
-        return trimmed_temp_ly_file_lines == trimmed_score_builder_ly_lines
-
+    # TODO: remove
     def link_local_stylesheet(self, source_stylesheet_file_name=None, prompt_proceed=True):
         if source_stylesheet_file_name is None:
             source_stylesheet_file_name = self.source_stylesheet_file_name
@@ -618,40 +519,31 @@ class MaterialProxy(PackageProxy):
             self.proceed(lines=[line])
 
     def make_main_menu(self):
-        if self.was_created_by_hand:
+        if self.is_handmade:
             menu, hidden_section = self.make_main_menu_for_material_made_by_hand()
         else:
-            menu, hidden_section = self.make_main_menu_for_material_made_with_editor()
-        self.make_main_menu_section_for_output_data(menu, hidden_section)
-        self.make_main_menu_section_for_output_ly(menu, hidden_section)
-        self.make_main_menu_section_for_output_pdf(menu, hidden_section)
+            menu, hidden_section = self.make_main_menu_for_material_made_with_user_input_handler()
+        self.make_main_menu_section_for_illustration_ly(menu, hidden_section)
+        self.make_main_menu_section_for_illustration_pdf(menu, hidden_section)
         self.make_main_menu_section_for_hidden_entries(menu)
         return menu
     
-    def make_main_menu_for_material_made_with_editor(self):
-        menu, hidden_section = self.make_new_menu(where=self.where(), is_hidden=True)
-        section = menu.make_new_section()
-        if self.has_editor:
-            section.append(('er', 'editor - run'))
-        return menu, hidden_section
-
     def make_main_menu_for_material_made_by_hand(self):
         menu, hidden_section = self.make_new_menu(where=self.where(), is_hidden=True)
         self.make_main_menu_section_for_material_definition(menu, hidden_section)
-        self.make_main_menu_section_for_score_builder(menu, hidden_section)
+        self.make_main_menu_section_for_output_material(menu, hidden_section)
+        self.make_main_menu_section_for_illustration_builder(menu, hidden_section)
         self.make_main_menu_section_for_stylesheet_management(menu, hidden_section)
         return menu, hidden_section
 
     def make_main_menu_section_for_hidden_entries(self, main_menu):
         hidden_section = main_menu.make_new_section(is_hidden=True)
         hidden_section.append(('del', 'delete material'))
-        hidden_section.append(('editors', 'manage editors'))
         hidden_section.append(('init', 'edit initializer'))
         hidden_section.append(('ls', 'list directory'))
         hidden_section.append(('reg', 'regenerate material'))
         hidden_section.append(('ren', 'rename material'))
         hidden_section.append(('stl', 'manage stylesheets'))
-        hidden_section.append(('sum', 'summarize material'))
         hidden_section.append(('tags', 'manage tags'))
 
     def make_main_menu_section_for_material_definition(self, main_menu, hidden_section):
@@ -662,82 +554,88 @@ class MaterialProxy(PackageProxy):
             hidden_section.append(('mdd', 'material definition - delete'))
             hidden_section.append(('mdt', 'material definition - stub'))
             hidden_section.append(('mdxi', 'material definition - execute & inspect'))
-        else:
+        elif self.user_input_handler_class_name is None:
             section.append(('mdt', 'material definition - stub'))
 
-    def make_main_menu_section_for_output_data(self, main_menu, hidden_section):
-        if self.has_output_data_module:
-            section = main_menu.make_new_section()
-            section.append(('dc', 'output data - recreate'))
-            section.append(('di', 'output data - inspect'))
-            hidden_section.append(('dd', 'output data - delete'))
-        elif self.has_material_definition:
+    def make_main_menu_section_for_output_material(self, main_menu, hidden_section):
+        has_output_material_section = False
+        if self.has_material_definition or self.has_complete_user_input_wrapper:
             section = main_menu.make_new_section()
             section.append(('dc', 'output data - create'))
+            has_output_material_section = True
+        if self.has_output_material_module:
+            if not has_output_material_section:
+                section = main_menu.make_new_section()
+            section.append(('di', 'output data - inspect'))
+            hidden_section.append(('dd', 'output data - delete'))
 
-    def make_main_menu_section_for_output_ly(self, main_menu, hidden_section):
-        if self.has_output_ly:
-            hidden_section.append(('lyc', 'output ly - recreate'))
+    def make_main_menu_section_for_illustration_ly(self, main_menu, hidden_section):
+        if self.has_output_material:
+            if self.has_illustration_builder or self.has_user_input_handler:
+                hidden_section.append(('lyc', 'output ly - create'))
+        if self.has_illustration_ly:
             hidden_section.append(('lyd', 'output ly - delete'))
             hidden_section.append(('lyi', 'output ly - inspect'))
-        elif self.has_score_builder:
-            hidden_section.append(('lyc', 'output ly - create'))
 
-    def make_main_menu_section_for_output_pdf(self, main_menu, hidden_section):
-        if self.has_output_pdf:
-            section = main_menu.make_new_section()
-            section.append(('pdfc', 'output pdf - recreate'))
+    def make_main_menu_section_for_illustration_pdf(self, main_menu, hidden_section):
+        has_illustration_pdf_section = False
+        if self.has_output_material:
+            if self.has_illustration_builder or self.has_user_input_handler:
+                section = main_menu.make_new_section()
+                has_illustration_pdf_section = True
+                section.append(('pdfc', 'output pdf - create'))
+        if self.has_illustration_pdf:
+            if not has_illustration_pdf_section:
+                section = main_menu.make_new_section()
             hidden_section.append(('pdfd', 'output pdf - delete'))
             section.append(('pdfi', 'output pdf - inspect'))
-        elif self.has_score_builder:
-            section = main_menu.make_new_section()
-            section.append(('pdfc', 'output pdf - create'))
 
-    def make_main_menu_section_for_score_builder(self, main_menu, hidden_section):
+    def make_main_menu_section_for_illustration_builder(self, main_menu, hidden_section):
         section = main_menu.make_new_section()
-        if self.has_score_builder:
-            section.append(('sbe', 'score builder - edit'))
-            section.append(('sbx', 'score builder - execute'))
-            hidden_section.append(('sbd', 'score builder - delete'))
-            hidden_section.append(('sbt', 'score builder - stub'))
-            hidden_section.append(('sbxi', 'score builder - execute & inspect'))
-        elif self.has_illustration:
-            section.append(('sbt', 'score builder - stub'))
+        if self.has_output_material:
+            if self.has_illustration_builder:
+                section.append(('ibe', 'illustration builder - edit'))
+                if self.has_output_material:
+                    section.append(('ibx', 'illustration builder - execute'))
+                hidden_section.append(('ibd', 'illustration builder - delete'))
+                hidden_section.append(('ibt', 'illustration builder - stub'))
+                hidden_section.append(('ibxi', 'illustration builder - execute & inspect'))
+            elif self.should_have_illustration:
+                section.append(('ibt', 'illustration builder - stub'))
 
     def make_main_menu_section_for_stylesheet_management(self, main_menu, hidden_section):
-        if self.has_score_builder or self.has_illustration:
-            section = main_menu.make_new_section()
-            section.append(('sss', 'score stylesheet - select'))
-            if self.has_local_stylesheet:
-                hidden_section.append(('ssd', 'score stylesheet - delete'))
-                section.append(('sse', 'score stylesheet - edit'))
-                hidden_section.append(('ssm', 'source stylesheet - edit'))
-                hidden_section.append(('ssl', 'score stylesheet - relink'))
+        if self.has_output_material:
+            if self.has_illustration_builder or self.should_have_illustration:
+                section = main_menu.make_new_section()
+                section.append(('sss', 'score stylesheet - select'))
+                if self.has_local_stylesheet:
+                    hidden_section.append(('ssd', 'score stylesheet - delete'))
+                    section.append(('sse', 'score stylesheet - edit'))
+                    hidden_section.append(('ssm', 'source stylesheet - edit'))
+                    hidden_section.append(('ssl', 'score stylesheet - relink'))
+
+    def make_illustration(self):
+        return self.import_illustration_from_illustration_builder()
+
+    def make_output_material(self):
+        return self.import_material_definition_from_material_definition_module()
+
+    def make_output_material_module_body_lines(self):
+        lines = []
+        output_material = self.make_output_material()
+        lines.append('{} = {!r}'.format(self.material_underscored_name, output_material))
+        return lines
 
     def manage_stylesheets(self):
         stylesheet_wrangler = StylesheetWrangler(session=self.session)
         stylesheet_wrangler.run()
 
-    def open_output_pdf(self):
-        command = 'open {}'.format(self.output_pdf_file_name)
+    def open_illustration_pdf(self):
+        command = 'open {}'.format(self.illustration_pdf_file_name)
         os.system(command)
 
-    def overwrite_output_data(self):
-        output_data_module = file(self.output_data_file_name, 'w')
-        line = '{} = None\n'.format(self.material_underscored_name)
-        output_data_module.write(line)
-        output_data_module.close()
-
     def regenerate_everything(self, is_forced=False):
-        is_changed = self.write_material_definition_to_output_data_module(is_forced=is_forced)
-        is_changed = self.create_output_ly_and_output_pdf_from_score_builder(is_forced=(is_changed or is_forced))
-        return is_changed
-
-    def reload_user_input(self):
-        maker = self.import_attribute_from_material_definition('maker')
-        maker.materials_directory_name = self.directory_name
-        user_input_wrapper = self.import_attribute_from_material_definition('user_input')
-        maker.run(user_input_wrapper, score_title=self.title)
+        self.print_not_implemented()
 
     def rename_material(self):
         line = 'current material name: {}'.format(self.material_underscored_name)
@@ -753,8 +651,8 @@ class MaterialProxy(PackageProxy):
             return
         if self.is_in_repository:
             # update parent initializer
-            self.helpers.globally_replace_in_file(
-                self.parent_initializer_file_name, self.material_underscored_name, new_material_underscored_name)
+            self.helpers.globally_replace_in_file(self.parent_initializer_file_name, 
+                self.material_underscored_name, new_material_underscored_name)
             # rename package directory
             new_directory_name = self.directory.replace(
                 self.material_underscored_name, new_material_underscored_name)
@@ -775,9 +673,9 @@ class MaterialProxy(PackageProxy):
                     command = 'svn mv {} {}'.format(old_directory_name, new_directory_name)
                     os.system(command)
             # rename output data
-            new_output_data = os.path.join(new_package_directory, 'output.py')
+            new_output_material = os.path.join(new_package_directory, 'output_material.py')
             self.helpers.globally_replace_in_file(
-                new_output_data, self.material_underscored_name, new_material_underscored_name)
+                new_output_material, self.material_underscored_name, new_material_underscored_name)
             # commit
             commit_message = 'renamed {} to {}.'.format(
                 self.material_underscored_name, new_material_underscored_name)
@@ -813,13 +711,9 @@ class MaterialProxy(PackageProxy):
         os.system('abjad {}'.format(self.material_definition_file_name))
         self.conditionally_display_lines([''])
 
-    def run_abjad_on_score_builder(self):
-        os.system('abjad {}'.format(self.score_builder_file_name))
+    def run_abjad_on_illustration_builder(self):
+        os.system('abjad {}'.format(self.illustration_builder_file_name))
         self.conditionally_display_lines([''])
-
-    def run_editor(self):
-        if self.has_editor:
-            self.editor.run()
 
     def run_python_on_material_definition(self, prompt_proceed=True):
         os.system('python {}'.format(self.material_definition_file_name))
@@ -827,25 +721,26 @@ class MaterialProxy(PackageProxy):
             line = 'material definition executed.'
             self.proceed(lines=[line])
 
-    def run_python_on_score_builder(self, prompt_proceed=True):
-        os.system('python {}'.format(self.score_builder_file_name))
+    def run_python_on_illustration_builder(self, prompt_proceed=True):
+        os.system('python {}'.format(self.illustration_builder_file_name))
         if prompt_proceed:
-            line = 'score builder executed.'
+            line = 'illustration builder executed.'
             self.proceed(lines=[line])
 
     # TODO: write test
-    def select_editor_interactively(self, prompt_proceed=True):
-        maker_wrangler = MakerWrangler(session=self.session)
+    def select_user_input_handler_interactively(self, prompt_proceed=True):
+        material_proxy_wrangler = MaterialProxyWrangler(session=self.session)
         self.preserve_backtracking = True
-        editor = maker_wrangler.select_maker_interactively()
+        user_input_handler = material_proxy_wrangler.select_material_proxy_class_name_interactively()
         self.preserve_backtracking = False
         if self.backtrack():
             return
-        self.add_tag('editor', editor.class_name)
+        self.add_tag('user_input_handler', user_input_handler.class_name)
         if prompt_proceed:
-            line = 'editor selected.'
+            line = 'user input handler selected.'
             self.proceed(lines=[line])
 
+    # TODO: write test
     def select_stylesheet_interactively(self, prompt_proceed=True):
         stylesheet_wrangler = StylesheetWrangler(session=self.session)
         self.preserve_backtracking = True
@@ -853,50 +748,7 @@ class MaterialProxy(PackageProxy):
         self.preserve_backtracking = False
         if self.backtrack():
             return
-        self.link_local_stylesheet(source_stylesheet_file_name)
-        if prompt_proceed:
-            line = 'stylesheet selected.'
-            self.proceed(lines=[line])
-
-    def summarize_material_package(self):
-        lines = []
-        found = []
-        missing = []
-        artifact_name = 'material definition'
-        if self.has_material_definition_module:
-            found.append(artifact_name)
-        else:
-            missing.append(artifact_name)
-        artifact_name = 'LilyPond file'
-        if self.has_output_ly:
-            found.append(artifact_name)
-        else:
-            missing.append(artifact_name)
-        artifact_name = 'PDF'
-        if self.has_output_pdf:
-            found.append(artifact_name)
-        else:
-            missing.append(artifact_name)
-        if found:
-            lines.append('found {}.'.format(', '.join(found)))
-        if missing:
-            lines.append('missing {}.'.format(', '.join(missing)))
-        lines.append('')
-        self.proceed(lines=lines)
-        
-    def trim_ly_lines(self, ly_file_name):
-        '''Remove "Abjad revision 4776" and "2011-09-13 18:33" lines.
-        '''
-        trimmed_ly_lines = []
-        file_pointer = file(ly_file_name, 'r')
-        found_version_command = False
-        for line in file_pointer.readlines():
-            if found_version_command:
-                trimmed_ly_lines.append(line)
-            if line.startswith(r'\version'):
-                found_version_command = True
-        trimmed_ly_content = ''.join(trimmed_ly_lines)
-        return trimmed_ly_content
+        self.link_local_stylesheet(source_stylesheet_file_name, prompt_proceed=prompt_proceed)
 
     def unimport_material_definition_module(self):
         self.remove_package_importable_name_from_sys_modules(self.material_definition_module_importable_name)
@@ -907,66 +759,101 @@ class MaterialProxy(PackageProxy):
     def unimport_materials_module(self):
         self.remove_package_importable_name_from_sys_modules(self.materials_package_importable_name)
 
-    def unimport_output_data_module(self):
-        self.remove_package_importable_name_from_sys_modules(self.output_data_module_importable_name)
+    def unimport_output_material_module(self):
+        self.remove_package_importable_name_from_sys_modules(self.output_material_module_importable_name)
 
     def unimport_module_hierarchy(self):
         self.unimport_materials_module()
         self.unimport_material_module()
-        self.unimport_output_data_module()
+        self.unimport_output_material_module()
 
-    def unimport_score_builder_module(self):
-        self.remove_package_importable_name_from_sys_modules(self.score_builder_module_importable_name)
+    def unimport_illustration_builder_module(self):
+        self.remove_package_importable_name_from_sys_modules(self.illustration_builder_module_importable_name)
 
     def unimport_score_package(self):
         self.remove_package_importable_name_from_sys_modules(self.score_package_short_name)
 
-    def write_material_definition_to_output_data_module(self, is_forced=False, prompt_proceed=True):
-        if not self.is_changed and not is_forced:
-            line = 'material definition equals output data. (Output data preserved.)'
-            self.conditionally_display_lines([line, ''])
-            return self.is_changed
-        if not self.has_material_definition:
-            if prompt_proceed:
-                line = 'material not yet defined.'
-                self.proceed(lines=[line])
-            return self.is_changed
+    def unimport_user_input_module(self):
+        self.remove_package_importable_name_from_sys_modules(self.user_input_module_importable_name)
+
+    def write_illustration_ly_and_pdf_to_disk(self, is_forced=False, prompt_proceed=True):
+        lines = []
+        illustration = self.make_illustration()
+        iotools.write_expr_to_pdf(illustration, self.illustration_pdf_file_name, print_status=False)
+        iotools.write_expr_to_ly(illustration, self.illustration_ly_file_name, print_status=False)
+        lines.append('PDF and LilyPond file written to disk.')
+        if prompt_proceed:
+            self.proceed(lines=lines)
+        
+    def write_illustration_ly_to_disk(self, is_forced=False, prompt_proceed=True):
+        lines = []
+        illustration = self.import_illustration_from_illustration_builder()
+        iotools.write_expr_to_ly(illustration, self.illustration_ly_file_name, print_status=False)
+        lines.append('LilyPond file written to disk.')
+        lines.append('')
+        if prompt_proceed:
+            self.proceed(lines=lines)
+
+    def write_illustration_pdf_to_disk(self, is_forced=False, prompt_proceed=True):
+        lines = []
+        illustration = self.import_illustration_illustration_builder()
+        iotools.write_expr_to_pdf(illustration, self.illustration_pdf_file_name, print_status=False)
+        lines.append('PDF written to disk.')
+        lines.append('')
+        if prompt_proceed:
+            self.proceed(lines=lines)
+
+    def write_output_material_to_disk(self, prompt_proceed=True):
         self.remove_material_from_materials_initializer()
-        self.overwrite_output_data()
-        output_data_module = file(self.output_data_file_name, 'w')
-        output_data_preamble_lines = self.output_data_preamble_lines
-        if output_data_preamble_lines:
-            output_data_module.write('\n'.join(output_data_preamble_lines))
-        material_definition = self.import_material_definition_from_material_definition_module()
-        line = '{} = {!r}'.format(self.material_underscored_name, material_definition)
-        output_data_module.write(line)
-        output_data_module.close()
+        output_material_module_body_lines = self.make_output_material_module_body_lines()
+        output_material_module = file(self.output_material_module_file_name, 'w')
+        output_material_module.write('\n'.join(self.output_material_module_import_statements))
+        output_material_module.write('\n'.join(['\n', '\n']))
+        output_material_module.write('\n'.join(output_material_module_body_lines))
+        output_material_module.close()
         self.add_material_to_materials_initializer()
         self.add_material_to_material_initializer()
         if prompt_proceed:
-            line = 'data written to disk.'
-            self.proceed(lines=[line])
-        return self.is_changed
+            self.proceed(lines=['output data written to disk.'])
 
-    def write_stub_material_definition_to_disk(self):
+    def write_stub_data_material_definition_to_disk(self):
+        material_definition = file(self.material_definition_file_name, 'w')
+        material_definition.write('from abjad.tools import sequencetools\n')
+        material_definition.write('output_material_module_import_statements = []\n')
+        material_definition.write('\n')
+        material_definition.write('\n')
+        material_definition.write('{} = None'.format(self.material_underscored_name))
+        
+    def write_stub_material_definition_to_disk(self, prompt_proceed=True):
+        if self.is_data_only:
+            self.write_stub_data_material_definition_to_disk()
+        else:
+            self.write_stub_music_material_definition_to_disk()
+        if prompt_proceed:
+            line = 'stub material definition written to disk.'
+            self.proceed(lines=[line])
+
+    def write_stub_music_material_definition_to_disk(self):
         material_definition = file(self.material_definition_file_name, 'w')
         material_definition.write('from abjad import *\n')
-        material_definition.write("output_data_preamble_lines = ['from abjad import *', '']\n")
+        material_definition.write("output_material_module_import_statements = ['from abjad import *']\n")
         material_definition.write('\n')
         material_definition.write('\n')
         material_definition.write('{} = None'.format(self.material_underscored_name))
 
-    def write_stub_score_builder_to_disk(self, prompt_proceed=True):
-        score_builder = file(self.score_builder_file_name, 'w')
+    def write_stub_illustration_builder_to_disk(self, prompt_proceed=True):
+        illustration_builder = file(self.illustration_builder_file_name, 'w')
         lines = []
         lines.append('from abjad import *')
-        lines.append('from output import {}'.format(self.material_underscored_name))
+        lines.append('from output_material import {}'.format(self.material_underscored_name))
         lines.append('')
         lines.append('')
-        lines.append('score, treble_staff, bass_staff = scoretools.make_piano_score_from_leaves()') 
-        lines.append('lilypond_file = lilypondfiletools.make_basic_lilypond_file(score)')
-        score_builder.write('\n'.join(lines))
-        score_builder.close()
-        line = 'stub score builder written to disk.'
+        line = 'score, treble_staff, bass_staff = scoretools.make_piano_score_from_leaves({})'.format(
+            self.material_underscored_name)
+        lines.append(line)
+        lines.append('illustration = lilypondfiletools.make_basic_lilypond_file(score)')
+        illustration_builder.write('\n'.join(lines))
+        illustration_builder.close()
         if prompt_proceed:
+            line = 'stub illustration builder written to disk.'
             self.proceed(lines=[line])

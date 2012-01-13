@@ -33,8 +33,6 @@ class ChunkProxy(PackageProxy):
     def create_chunk_interactively(self):
         self.print_not_implemented()
         return
-        if self.purview is None:
-            self.set_purview_interactively()
         if self.package_spaced_name is None:
             self.set_package_spaced_name_interactively()
         if self.score_template is None:

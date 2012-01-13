@@ -105,7 +105,7 @@ def test_ScoreProxy_07():
     assert score_proxy.session is score_proxy.mus_proxy.session
     assert score_proxy.session is score_proxy.chunk_wrangler.session
     assert score_proxy.session is score_proxy.material_wrangler.session
-    assert score_proxy.session is score_proxy.maker_wrangler.session
+    assert score_proxy.session is score_proxy.material_proxy_wrangler.session
 
 
 def test_ScoreProxy_08():

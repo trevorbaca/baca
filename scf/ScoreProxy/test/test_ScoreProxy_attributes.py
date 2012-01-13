@@ -15,7 +15,7 @@ def test_ScoreProxy_attributes_01():
     assert isinstance(score_proxy.dist_proxy, baca.scf.DirectoryProxy)
     assert isinstance(score_proxy.etc_proxy, baca.scf.DirectoryProxy)
     assert isinstance(score_proxy.exg_proxy, baca.scf.DirectoryProxy)
-    assert isinstance(score_proxy.maker_wrangler, baca.scf.MakerWrangler)
+    assert isinstance(score_proxy.material_proxy_wrangler, baca.scf.MaterialProxyWrangler)
     assert isinstance(score_proxy.material_wrangler, baca.scf.MaterialWrangler)
     assert isinstance(score_proxy.mus_proxy, baca.scf.MusProxy)
 
@@ -41,13 +41,11 @@ def test_ScoreProxy_attributes_01():
 
     assert score_proxy.score_initializer_file_names == (
         '/Users/trevorbaca/Documents/scores/manos/__init__.py',
-        '/Users/trevorbaca/Documents/scores/manos/mus/__init__.py',
-        '/Users/trevorbaca/Documents/scores/manos/mus/chunks/__init__.py',
-        '/Users/trevorbaca/Documents/scores/manos/mus/materials/__init__.py')
+        '/Users/trevorbaca/Documents/scores/manos/mus/__init__.py',)
 
     assert score_proxy.score_package_wranglers == (
-        baca.scf.ChunkWrangler('manos'),
-        baca.scf.MaterialWrangler('manos'))    
+        baca.scf.ChunkWrangler(),
+        baca.scf.MaterialWrangler())    
 
     assert score_proxy.top_level_subdirectories == (
         baca.scf.DistProxy('manos'),

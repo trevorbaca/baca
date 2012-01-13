@@ -50,7 +50,7 @@ class Transcript(object):
 
     def append_lines(self, lines, clear_terminal=None):
         assert isinstance(lines, list)
-        assert isinstance(clear_terminal, (type(True), type(None)))
+        assert isinstance(clear_terminal, (bool, type(None)))
         entry = []
         entry.append(self.current_time)
         entry.append(lines[:])

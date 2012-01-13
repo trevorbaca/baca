@@ -1,20 +1,28 @@
 from abjad.tools import iotools
-from baca.scf.DirectoryProxy import DirectoryProxy
+from baca.scf.PackageWrangler import PackageWrangler
 from baca.scf.StylesheetProxy import StylesheetProxy
 import os
 
 
-class StylesheetWrangler(DirectoryProxy):
+class StylesheetWrangler(PackageWrangler):
 
     def __init__(self, session=None):
-        directory_name = self.stylesheets_directory
-        DirectoryProxy.__init__(self, directory_name=directory_name, session=session)
+        PackageWrangler.__init__(self, 'baca.scf.stylesheets', session=session)
 
     ### READ-ONLY PUBLIC ATTRIBUTES ###
 
     @property
     def breadcrumb(self):
         return 'stylesheets'
+
+    # TODO: write test
+    @property
+    def stylesheet_file_names(self):
+        result = []
+        for file_name in os.listdir(self.stylesheets_directory):
+            if file_name.endswith('.ly'):
+                result.append(file_name)
+        return result
 
     ### PUBLIC METHODS ###
 
@@ -33,29 +41,17 @@ class StylesheetWrangler(DirectoryProxy):
         stylesheet_proxy = StylesheetProxy(stylesheet_file_name, session=self.session)
         stylesheet_proxy.edit_stylesheet()
 
-#    def edit_stylesheet(self, stylesheet_file_name):
-#        os.system('vi {}'.format(stylesheet_file_name))
-
     def handle_main_menu_result(self, result):
         if result == 'new':
             self.create_new_stylesheet_interactively()
         else:
             stylesheet_file_name = os.path.join(self.stylesheets_directory, result)  
-            #self.edit_stylesheet(stylesheet_file_name)
             stylesheet_proxy = StylesheetProxy(stylesheet_file_name, session=self.session)
             stylesheet_proxy.run()
          
-    # TODO: write test
-    def list_stylesheet_file_names(self):
-        result = []
-        for file_name in os.listdir(self.stylesheets_directory):
-            if file_name.endswith('.ly'):
-                result.append(file_name)
-        return result
-
     def make_main_menu(self):
         menu, section = self.make_new_menu(where=self.where(), is_numbered=True)
-        section.tokens = self.list_stylesheet_file_names()
+        section.tokens = self.stylesheet_file_names
         section = menu.make_new_section()
         section.append(('new', 'make new stylesheet'))
         return menu
@@ -80,7 +76,7 @@ class StylesheetWrangler(DirectoryProxy):
     # TODO: write test
     def select_stylesheet_file_name_interactively(self):
         menu, section = self.make_new_menu(where=self.where(), is_numbered=True)
-        section.tokens = self.list_stylesheet_file_names()
+        section.tokens = self.stylesheet_file_names
         while True:
             self.append_breadcrumb('select stylesheet')
             result = menu.run()

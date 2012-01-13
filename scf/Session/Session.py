@@ -22,6 +22,7 @@ class Session(object):
         self.last_command_was_composite = False
         self.scores_to_show = 'active'
         self.transcribe_next_command = True
+        self.use_current_user_input_values_as_default = False
         self.user_input = user_input
         self.user_specified_quit = False
 
@@ -205,6 +206,15 @@ class Session(object):
         def fset(self, user_specified_quit):
             assert isinstance(user_specified_quit, bool)
             self._user_specified_quit = user_specified_quit
+        return property(**locals())
+
+    @apply
+    def use_current_user_input_values_as_default():
+        def fget(self):
+            return self._use_current_user_input_values_as_default
+        def fset(self, use_current_user_input_values_as_default):
+            assert isinstance(use_current_user_input_values_as_default, bool)
+            self._use_current_user_input_values_as_default = use_current_user_input_values_as_default
         return property(**locals())
 
     ### PUBLIC METHODS ###

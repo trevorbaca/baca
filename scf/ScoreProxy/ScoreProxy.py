@@ -11,9 +11,9 @@ class ScoreProxy(PackageProxy):
         self._etc_proxy = baca.scf.EtcProxy(score_package_short_name, session=self.session)
         self._exg_proxy = baca.scf.ExgProxy(score_package_short_name, session=self.session)
         self._mus_proxy = baca.scf.MusProxy(score_package_short_name, session=self.session)
-        self._chunk_wrangler = baca.scf.ChunkWrangler(score_package_short_name, session=self.session)
-        self._material_wrangler = baca.scf.MaterialWrangler(score_package_short_name, session=self.session)
-        self._maker_wrangler = baca.scf.MakerWrangler(session=self.session)
+        self._chunk_wrangler = baca.scf.ChunkWrangler(session=self.session)
+        self._material_wrangler = baca.scf.MaterialWrangler(session=self.session)
+        self._material_proxy_wrangler = baca.scf.MaterialProxyWrangler(session=self.session)
 
     ### READ-ONLY PUBLIC ATTRIBUTES ###
 
@@ -77,8 +77,8 @@ class ScoreProxy(PackageProxy):
         return False
 
     @property
-    def maker_wrangler(self):
-        return self._maker_wrangler
+    def material_proxy_wrangler(self):
+        return self._material_proxy_wrangler
 
     @property
     def material_wrangler(self):
@@ -95,9 +95,7 @@ class ScoreProxy(PackageProxy):
     @property
     def score_initializer_file_names(self):
         return (self.initializer_file_name,
-            self.mus_proxy.initializer_file_name,
-            self.chunk_wrangler.initializer_file_name,
-            self.material_wrangler.initializer_file_name,)
+            self.mus_proxy.initializer_file_name,)
 
     @property
     def score_package_wranglers(self):
@@ -211,9 +209,9 @@ class ScoreProxy(PackageProxy):
     def handle_main_menu_result(self, result):
         assert isinstance(result, str)
         if result == 'h':
-            self.chunk_wrangler.run()
+            self.chunk_wrangler.run(head=self.package_short_name)
         elif  result == 'm':
-            self.material_wrangler.run()
+            self.material_wrangler.run(head=self.package_short_name)
         elif result == 'ft':
             self.edit_forces_tagline_interactively()
         elif result == 'pf':
@@ -311,7 +309,7 @@ class ScoreProxy(PackageProxy):
         self.pop_breadcrumb()
 
     def summarize_chunks(self):
-        chunks = list(self.chunk_wrangler.iterate_package_underscored_names())
+        chunks = self.chunk_wrangler.package_underscored_names
         lines = []
         if not chunks:
             lines.append('{}Chunks (none yet)'.format(self.make_tab(1)))
@@ -323,7 +321,7 @@ class ScoreProxy(PackageProxy):
         self.conditionally_display_lines(lines)
 
     def summarize_materials(self):
-        materials = list(self.material_wrangler.iterate_package_underscored_names())
+        materials = self.material_wrangler.package_spaced_names
         lines = []
         if not materials:
             lines.append('{}Materials (none yet)'.format(self.make_tab(1)))
@@ -332,5 +330,5 @@ class ScoreProxy(PackageProxy):
         if materials:
             lines.append('')
         for i, material in enumerate(materials):
-            lines.append('{}({}) {}'.format(self.make_tab(1), i + 1, material.replace('_', ' ')))
+            lines.append('{}({}) {}'.format(self.make_tab(1), i + 1, material))
         self.conditionally_display_lines(lines)

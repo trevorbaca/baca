@@ -11,8 +11,7 @@ class PackageProxy(DirectoryProxy):
         directory_name = self.package_importable_name_to_directory_name(package_importable_name)
         DirectoryProxy.__init__(self, directory_name=directory_name, session=session)
         self._package_short_name = None
-        self.package_importable_name = package_importable_name
-        self._purview = None
+        self._package_importable_name = package_importable_name
 
     ### OVERLOADS ###
 
@@ -30,6 +29,15 @@ class PackageProxy(DirectoryProxy):
             return self.package_importable_name_to_directory_name(self.package_importable_name)
 
     @property
+    def formatted_tags(self):
+        formatted_tags = []
+        tags = self.get_tags()
+        for key in sorted(tags):
+            formatted_tag = '{!r}: {!r}'.format(key, tags[key])
+            formatted_tags.append(formatted_tag)
+        return formatted_tags
+
+    @property
     def has_initializer(self):
         if self.initializer_file_name is not None:
             return os.path.isfile(self.initializer_file_name)
@@ -38,6 +46,14 @@ class PackageProxy(DirectoryProxy):
     def initializer_file_name(self):
         if self.directory_name is not None:
             return os.path.join(self.directory_name, '__init__.py')
+
+    @property
+    def package_importable_name(self):
+        return self._package_importable_name
+
+    @property
+    def package_short_name(self):
+        return self.package_importable_name.split('.')[-1]
 
     @property
     def package_spaced_name(self):
@@ -58,58 +74,35 @@ class PackageProxy(DirectoryProxy):
             if result:
                 return result
 
+    # TODO: write test
+    @property
+    def purview(self):
+        import baca
+        if self.score_package_short_name is None:
+            return baca.scf.GlobalProxy()
+        else:
+            return baca.scf.ScoreProxy(self.score_package_short_name)
+
+    # TODO: write test
     @property
     def purview_name(self):
-        if self.score is not None:
-            return self.score.title
+        if self.score_package_short_name is None:
+            return 'baca'
         else:
-            return 'studio'
+            return self.score_package_short_name
 
+    # TODO: write test
     @property
     def score(self):
         import baca
-        if isinstance(self.purview, baca.scf.ScoreProxy):
-            return self.purview
+        if self.score_package_short_name is not None:
+            return baca.scf.ScoreProxy(self.score_package_short_name)
 
-    ### READ / WRITE PUBLIC ATTRIBUTES ###
-
-    # TODO: maybe this should be read-only?
-    @apply
-    def package_importable_name():
-        def fget(self):
-            return self._package_importable_name
-        def fset(self, package_importable_name):
-            assert isinstance(package_importable_name, (str, type(None)))
-            if isinstance(package_importable_name, str):
-                package_short_name = package_importable_name.split('.')[-1]
-                self.package_short_name = package_short_name
-            self._package_importable_name = package_importable_name
-        return property(**locals())
-
-    # TODO: maybe this should be read-only?
-    @apply
-    def package_short_name():
-        def fget(self):
-            return self._package_short_name
-        def fset(self, package_short_name):
-            assert isinstance(package_short_name, (str, type(None)))
-            self._package_short_name = package_short_name
-        return property(**locals())
-
-    # TODO: maybe this should be read-only?
-    @apply
-    def purview():
-        def fget(self):
-            if self._purview is not None:
-                return self._purview
-            else:
-                return self.package_importable_name_to_purview(self.package_importable_name)
-        def fset(self, purview):
-            if self.package_importable_name is None:
-                self._purview = purview
-            else:
-                raise ValueError('package importable name already assigned.')
-        return property(**locals())
+    # TODO: write test
+    @property
+    def score_package_short_name(self):
+        if not self.package_importable_name.startswith('baca'):
+            return self.package_importable_name.split('.')[0]
 
     ### PUBLIC METHODS ###
 
@@ -136,9 +129,6 @@ class PackageProxy(DirectoryProxy):
         if result:
             tag_name, tag_value = result
             self.add_tag(tag_name, tag_value)
-        # TODO: can the following two lines be removed?
-        #if self.session.user_input is None:
-        #    self.proceed()
 
     def delete_package(self):
         result = self.remove()
@@ -160,9 +150,6 @@ class PackageProxy(DirectoryProxy):
         if result:
             tag_name = result
             self.delete_tag(tag_name)
-        # TODO: can the following two lines be removed?
-        #if self.session.user_input is None:
-        #    self.proceed()
 
     def edit_initializer(self):
         os.system('vi {}'.format(self.initializer_file_name))
@@ -207,17 +194,9 @@ class PackageProxy(DirectoryProxy):
         tags = self.get_tags()
         return bool(tag_name in tags)
 
-    def list_formatted_tags(self):
-        formatted_tags = []
-        tags = self.get_tags()
-        for key in sorted(tags):
-            formatted_tag = '{!r}: {!r}'.format(key, tags[key])
-            formatted_tags.append(formatted_tag)
-        return formatted_tags
-
     def make_tags_menu(self):
         menu, section = self.make_new_menu(where=self.where(), is_keyed=False)
-        section.tokens = self.list_formatted_tags()
+        section.tokens = self.formatted_tags
         section = menu.make_new_section()
         section.append(('add', 'add tag'))
         section.append(('del', 'delete tag'))
@@ -236,20 +215,6 @@ class PackageProxy(DirectoryProxy):
                 break
             self.pop_breadcrumb()
         self.pop_breadcrumb()
-
-    # TODO: write tests
-    def package_importable_name_to_directory_name(self, package_importable_name):
-        if package_importable_name is None:
-            return
-        package_importable_name_parts = package_importable_name.split('.')
-        if package_importable_name_parts[0] == 'baca':
-            directory_parts = [os.environ.get('BACA')] + package_importable_name_parts[1:]
-        elif package_importable_name_parts[0] in os.listdir(os.environ.get('SCORES')):
-            directory_parts = [os.environ.get('SCORES')] + package_importable_name_parts[:]
-        else:
-            raise ValueError('Unknown package importable name {!r}.'.format(package_importable_name))
-        directory = os.path.join(*directory_parts)
-        return directory
 
     # TODO: write tests
     def package_importable_name_to_purview(self, package_importable_name):
@@ -307,7 +272,8 @@ class PackageProxy(DirectoryProxy):
     def remove_import_statement_from_initializer(self, import_statement, initializer_file_name):
         initializer_import_statements, initializer_tag_lines = self.parse_initializer(initializer_file_name)
         initializer_import_statements = [x for x in initializer_import_statements if x != import_statement] 
-        self.write_initializer_to_disk(initializer_import_statements, initializer_tag_lines, initializer_file_name)
+        self.write_initializer_to_disk(
+            initializer_import_statements, initializer_tag_lines, initializer_file_name)
 
     def remove_package_importable_name_from_sys_modules(self, package_importable_name):
         '''Total hack. But works.'''
@@ -337,15 +303,6 @@ class PackageProxy(DirectoryProxy):
             return
         self.package_spaced_name = result
 
-    def set_purview_interactively(self):
-        from baca.scf.ScoreWrangler import ScoreWrangler
-        menu, section = self.make_new_menu(where=self.where(), is_numbered=True)
-        score_wrangler = ScoreWrangler()
-        section.tokens = score_wrangler.iterate_score_titles_with_years()
-        section = menu.make_new_section()
-        section.append(('s', 'global to studio'))
-        result = menu.run()
-
     def unimport_baca_package(self):
         self.remove_package_importable_name_from_sys_modules('baca')
 
@@ -367,9 +324,9 @@ class PackageProxy(DirectoryProxy):
         initializer.close()
 
     # TODO: write test
-    def write_stub_initializer_to_disk(self):
+    def write_stub_initializer_to_disk(self, tags=None):
         initializer_import_statements = ['from collections import OrderedDict\n']
-        initializer_tag_lines = ['tags = OrderedDict([])\n']
+        initializer_tag_lines = self.pprint_tags(tags)
         self.write_initializer_to_disk(initializer_import_statements, initializer_tag_lines)
 
     # TODO: write test

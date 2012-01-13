@@ -1,22 +1,24 @@
 TODO
 
--3. Audit for should_clear_terminal keyword in the signature of every interactive method.
+-4. Implement populate_user_input_wrapper().
 
--2. Audit for breadcrumb removal in the signature of every interactive method.
+-3. Implement material move and rename methods.
 
--1. Shorten 'should_clear_terminal' to 'clear' and breadrumb to 'breadcrumb'.
+-2. Extend self.proceed() to accept a single line.
 
-0. Be able safely to write junk into any system file.
+-1. Audit for should_clear_terminal keyword in the signature of every interactive method.
 
-1. Implement 'make new material: static' in studio.
+0. Audit for breadcrumb removal in the signature of every interactive method.
 
-2. Implement 'make new material: static' in scores.
+1. Shorten 'should_clear_terminal' to 'clear'.
+
+2. Be able safely to write junk into any system file.
 
 3. Implement 'make new material: range' in studio.
 
 4. Implement 'make new material: range' in scores.
 
-5. Wrap tests around existing material and chunk menus.
+5. Wrap tests around existing material menus.
 
 6. Implement remaining clarinets.
 
@@ -46,24 +48,60 @@ TODO
 
 19. Kill hardcoded 'baca' directory name.
 
-20. Change the names of all 'iterate_' functions to begin in 'list_'.
+20. Find a way to include tags management in hidden menu of every package proxy.
 
-21. Audit to remove 'diretory_name' attributes.
+21. Figure out why 'red' isn't good enough to select 'red_pcs', maybe redraw-related.
 
-22. Find a way to include tags management in hidden menu of every package proxy.
+22. Change 'conditionally_display_lines' to just 'display'.
 
-23. Figure out why 'red' isn't good enough to select 'red_pcs', maybe redraw-related.
+23. Make backtracking work from 'self.confirm()'.
 
-24. Audit 'type(True)' and replace with 'bool'.
+24. Extend 'self.confirm()' with optional prompt.
 
-25. Change 'conditionally_display_lines' to just 'display'.
+25. Change alphabeticization of scores in score selection menu.
 
-26. Make backtracking work from 'self.confirm()' or deprecate confirm.
+26. Find a way to dynamically add (default) indicator to default menu entries.
 
-27. Extend 'self.confirm()' with optional prompt.
+27. Implement initializer file proxy to decongest package proxy.
 
-28. Change alphabeticization of scores in score selection menu.
+28. Implement user input module file proxy.
 
-29. Find a way to dynamically add (default) indicator to default menu entries.
+29. Prevent the creation of 'baca.materials.h' package.
 
-30. Consider implementing initializer proxy to decongest package proxy.
+30. Do away with local stylesheets.
+
+31. Consider keyword backtracking protocol to replace two-line backtracking protocol.
+
+32. Implement something to tour all materials everywhere and inspect in sequence.
+
+33. Implement measuretools.all_are_measures() and other checkers.
+
+34. Extend self.proceed(line(s), prompt_proceed=True) with 'prompt_proceed' keyword.
+
+35. Change 'create_' everywhere to 'make_'.
+
+36. Change 'prompt_proceed' to simply 'prompt'.
+
+37. Encapsulate user input getter subprocedures.
+
+38. Make 'ls' hide or remove .pyc files.
+
+39. Make 'edit initializer' read only.
+
+40. Author is-alphabetized script.
+
+41. Port output change awareness.
+
+42. Make user input handler creation work.
+
+43. Change 'user_input' to 'user_input_wrapper'.
+
+44. Make some zagged pitch-classes.
+
+45. Implement RangeInventory in Abjad. Integrate into SCF.
+
+46. Define range inventories for all scores.
+
+47. Remove three blank lines at head of data-only output material module.
+
+48. Author read-only attribute tests.

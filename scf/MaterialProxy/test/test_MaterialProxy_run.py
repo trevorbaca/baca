@@ -58,5 +58,5 @@ def test_MaterialProxy_run_04():
     '''
 
     studio = baca.scf.Studio()
-    studio.run(user_input='all las m 2 q')
+    studio.run(user_input='all las m black q')
     assert studio.transcript[-2][0] == 'Las manos mágicas - materials - black pcs'

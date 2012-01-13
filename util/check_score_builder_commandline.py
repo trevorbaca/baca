@@ -1,4 +1,4 @@
-def check_score_builder_commandline(argv, usage_string = None):
+def check_illustration_builder_commandline(argv, usage_string = None):
     '''Function exists to encapsulate logic used in scripts like Manifolds
     show_horizontal_pitch_fields.py and show_segmented_pitch_fields.py.'''
 

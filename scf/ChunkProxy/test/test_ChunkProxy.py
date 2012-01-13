@@ -12,8 +12,8 @@ def test_ChunkProxy_01():
     assert chunk_proxy.purview == baca.scf.ScoreProxy('manos')
     assert chunk_proxy.score == baca.scf.ScoreProxy('manos')
     assert chunk_proxy.score_template is None
-    assert chunk_proxy.source_file_name == '/Users/trevorbaca/Documents/other/baca/scf/ChunkProxy/ChunkProxy.py'
+    assert chunk_proxy.source_file_name == \
+        '/Users/trevorbaca/Documents/other/baca/scf/ChunkProxy/ChunkProxy.py'
     assert chunk_proxy.spaced_class_name == 'chunk proxy'
 
-    assert chunk_proxy.has_directory
     assert not chunk_proxy.has_initializer

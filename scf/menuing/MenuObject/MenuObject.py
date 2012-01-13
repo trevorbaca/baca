@@ -28,7 +28,7 @@ class MenuObject(SCFObject):
         def fget(self):
             return self._should_clear_terminal
         def fset(self, should_clear_terminal):
-            assert isinstance(should_clear_terminal, type(True))
+            assert isinstance(should_clear_terminal, bool)
             self._should_clear_terminal = should_clear_terminal
         return property(**locals())
 

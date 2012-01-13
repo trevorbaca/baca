@@ -14,7 +14,7 @@ import readline
 class SCFObject(object):
     
     def __init__(self, session=None):
-        self.session = session
+        self._session = session or Session()
 
     ### OVERLOADS ###
 
@@ -52,14 +52,40 @@ class SCFObject(object):
 
     # TODO: write test
     @property
+    def materialproxies_directory_name(self):
+        return os.path.join(self.scf_root_directory, 'materialproxies')
+
+    # TODO: write test
+    @property
+    def materialproxies_package_importable_name(self):
+        return '{}.materialproxies'.format(self.scf_package_importable_name)
+
+    # TODO: write test
+    @property
+    def scf_package_importable_name(self):
+        return 'baca.scf'
+
+    # TODO: write test
+    @property
     def scf_root_directory(self):
         return os.path.join('/', 'Users', 'trevorbaca', 'Documents', 'other', 'baca', 'scf')
 
     @property
+    def score_package_short_names(self):
+        result = []
+        scores_directory = os.environ.get('SCORES')
+        for x in os.listdir(scores_directory):
+            if x[0].isalpha():
+                result.append(x)
+        return result
+
+    @property
+    def session(self):
+        return self._session
+
+    @property
     def spaced_class_name(self):
-        spaced_class_name = iotools.uppercamelcase_to_underscore_delimited_lowercase(self.class_name)
-        spaced_class_name = spaced_class_name.replace('_', ' ')
-        return spaced_class_name
+        return iotools.uppercamelcase_to_space_delimited_lowercase(self.class_name)
 
     @property
     def source_file_name(self):
@@ -92,18 +118,6 @@ class SCFObject(object):
             return self.session.preserve_backtracking
         def fset(self, preserve_backtracking):
             self.session.preserve_backtracking = preserve_backtracking
-        return property(**locals())
-
-    @apply
-    def session():
-        def fget(self):
-            return self._session
-        def fset(self, session):
-            if session is None:
-                self._session = Session()
-            else:
-                assert isinstance(session, type(Session()))
-                self._session = session
         return property(**locals())
 
     ### PUBLIC METHODS ###
@@ -143,6 +157,12 @@ class SCFObject(object):
             self.conditionally_display_lines([''])
             return False
         return True
+
+    def debug(self, value, annotation=None):
+        if annotation is None:
+            print 'debug: {!r}'.format(value)
+        else:
+            print 'debug ({}): {!r}'.format(annotation, value)
 
     def edit_source_file(self):
         command = 'vi {}'.format(self.source_file_name)
@@ -194,7 +214,7 @@ class SCFObject(object):
         return pattern.match(expr) is not None
 
     def is_boolean(self, expr):
-        return isinstance(expr, type(True))
+        return isinstance(expr, bool)
 
     def is_integer(self, expr):
         return isinstance(expr, int)
@@ -239,6 +259,26 @@ class SCFObject(object):
         section = menu.make_new_section(
             is_hidden=is_hidden, is_keyed=is_keyed, is_numbered=is_numbered, is_ranged=is_ranged)
         return menu, section
+
+    # TODO: write test
+    def package_exists(self, package_importable_name):
+        assert isinstance(package_importable_name, str)
+        directory_name = self.package_importable_name_to_directory_name(package_importable_name)
+        return os.path.exists(directory_name)
+
+    # TODO: write tests
+    def package_importable_name_to_directory_name(self, package_importable_name):
+        if package_importable_name is None:
+            return
+        package_importable_name_parts = package_importable_name.split('.')
+        if package_importable_name_parts[0] == 'baca':
+            directory_parts = [os.environ.get('BACA')] + package_importable_name_parts[1:]
+        elif package_importable_name_parts[0] in os.listdir(os.environ.get('SCORES')):
+            directory_parts = [os.environ.get('SCORES')] + package_importable_name_parts[:]
+        else:
+            raise ValueError('Unknown package importable name {!r}.'.format(package_importable_name))
+        directory = os.path.join(*directory_parts)
+        return directory
 
     def pt(self):
         pprint.pprint(self.transcript)

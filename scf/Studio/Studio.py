@@ -41,28 +41,8 @@ class Studio(SCFObject):
         score_proxy.run()
         self.session.breadcrumbs = breadcrumbs
 
-    def get_materials_package_importable_name_interactively(self):
-        while True:
-            self.append_breadcrumb('select materials directory')
-            menu, section = self.make_new_menu(where=self.where(), is_numbered=True)
-            section.tokens = self.score_wrangler.iterate_score_titles_with_years()
-            section = menu.make_new_section() 
-            section.append(('baca', 'baca materials directory'))
-            result = menu.run()
-            if result == 'baca':
-                return self.global_proxy.materials_package_importable_name
-            else:
-                score_title = value
-                score_package_importable_name = self.score_wrangler.title_to_score_package_short_name(
-                    score_title)
-                score_proxy = self.score_wrangler.get_package_proxy(score_package_importable_name)
-                return score_proxy.materials_package_importable_name
-            self.pop_breadcrumb()
-        self.pop_breadcrumb()
-
     def get_next_score_package_short_name(self):
-        score_package_short_names = list(self.score_wrangler.iterate_score_package_short_names(
-            scores_to_show=self.session.scores_to_show))
+        score_package_short_names = self.score_wrangler.score_package_short_names_to_display
         if self.session.current_score_package_short_name is None:
             return score_package_short_names[0]
         index = score_package_short_names.index(self.session.current_score_package_short_name)
@@ -70,8 +50,7 @@ class Studio(SCFObject):
         return score_package_short_names[next_index]
 
     def get_prev_score_package_short_name(self):
-        score_package_short_names = list(self.score_wrangler.iterate_score_package_short_names(
-            scores_to_show=self.session.scores_to_show))
+        score_package_short_names = self.score_wrangler.score_package_short_names_to_display
         if self.session.current_score_package_short_name is None:
             return score_package_short_names[-1]
         index = score_package_short_names.index(self.session.current_score_package_short_name)
@@ -100,17 +79,16 @@ class Studio(SCFObject):
         elif result == 'all':
             self.session.scores_to_show = 'all'
         elif result == 'k':
-            #self.global_proxy.maker_wrangler.run()
             self.print_not_implemented()
         elif result == 'm':
             breadcrumb = self.pop_breadcrumb()
-            self.global_proxy.material_wrangler.run()
+            self.global_proxy.material_wrangler.run(head='baca')
             self.append_breadcrumb(breadcrumb)
         elif result == 'mb':
             self.session.scores_to_show = 'mothballed'
         elif result == 'svn':
             self.manage_svn()
-        elif result in self.score_wrangler.iterate_score_package_short_names():
+        elif result in self.score_wrangler.score_package_short_names_to_display:
             self.edit_score_interactively(result)
     
     def handle_svn_menu_result(self, result):
@@ -144,19 +122,6 @@ class Studio(SCFObject):
             return True
         return this_result
 
-    def iterate_interactive_material_proxies(self):
-        for material_proxy in self.iterate_material_proxies():
-            if material_proxy.is_interactive:
-                yield material_proxy
-
-    def iterate_material_proxies(self, class_names=None):
-        for score_proxy in self.iterate_score_proxies():
-            for material_proxy in score_proxy.iterate_material_proxies():
-                if class_names is None or material_proxy.get_tag('maker') in class_names:
-                    yield material_proxy
-        for material_proxy in self.global_proxy.material_wrangler.iterate_package_proxies():
-            yield material_proxy
-
     def make_main_menu(self):
         menu = self.make_score_selection_menu()
         section = menu.make_new_section()
@@ -171,10 +136,8 @@ class Studio(SCFObject):
 
     def make_score_selection_menu(self):
         menu, section = self.make_new_menu(where=self.where(), is_numbered=True, is_keyed=False)
-        score_titles = list(self.score_wrangler.iterate_score_titles_with_years(
-            scores_to_show=self.session.scores_to_show))
-        score_package_short_names = list(self.score_wrangler.iterate_score_package_short_names(
-            scores_to_show=self.session.scores_to_show))
+        score_titles = self.score_wrangler.score_titles_with_years
+        score_package_short_names = self.score_wrangler.score_package_short_names_to_display
         section.tokens = zip(score_package_short_names, score_titles)
         return menu
 
@@ -275,11 +238,3 @@ class Studio(SCFObject):
         if prompt_proceed:
             line = 'tests complete.'
             self.proceed(lines=[line])
-
-    def select_interactive_material_proxy(self, klasses=None):
-        material_proxies = list(self.iterate_interactive_material_proxies())
-        menu, section = self.make_new_menu(where=self.where(), is_numbered=True)
-        section.tokens = material_proxies
-        result = menu.run()
-        # TODO: probably backtrack here
-        return result
