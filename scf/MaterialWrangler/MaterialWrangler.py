@@ -55,12 +55,12 @@ class MaterialWrangler(PackageWrangler, PackageProxy):
         assert iotools.is_underscore_delimited_lowercase_package_name(material_package_importable_name)
         assert editor_class_name is None or iotools.is_uppercamelcase_string(editor_class_name)
         assert isinstance(has_illustration, bool)
-        directory_name = self._package_importable_name_to_directory_name(material_package_importable_name)
+        directory_name = self.package_importable_name_to_directory_name(material_package_importable_name)
         if os.path.exists(directory_name):
             return False
         os.mkdir(directory_name)
-        self.write_initializer_to_package(material_package_importable_name)
         material_proxy = MaterialProxy(material_package_importable_name, session=self.session)
+        material_proxy.write_stub_initializer_to_disk()
         if editor_class_name is None:
             material_proxy.write_stub_material_definition_to_disk()
         material_proxy.add_tag('editor_class_name', editor_class_name)

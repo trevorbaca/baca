@@ -29,7 +29,7 @@ class MakerProxy(PackageProxy):
 
     ### READ / WRITE PUBLIC ATTRIBUTES ###
 
-    # TODO: Maybe this can't be set here? Must be derived from hardcode maker classfile?
+    # TODO: Maybe this can't be set here? Must be derived from hardcoded maker classfile?
     @apply
     def generic_output_name():
         def fget(self):
@@ -53,33 +53,6 @@ class MakerProxy(PackageProxy):
         return property(**locals())
 
     ### PUBLIC METHODS ###
-
-    def add_line_to_initializer(self, initializer, line):
-        file_pointer = file(initializer, 'r')
-        initializer_lines = set(file_pointer.readlines())
-        file_pointer.close()
-        initializer_lines.add(line)
-        initializer_lines = list(initializer_lines)
-        initializer_lines = [x for x in initializer_lines if not x == '\n']
-        initializer_lines.sort()
-        file_pointer = file(initializer, 'w')
-        file_pointer.write(''.join(initializer_lines))
-        file_pointer.close()
-
-    # TODO: Possibly MakerWrangler?
-    def add_line_to_materials_initializer(self):
-        material_underscored_name = os.path.basename(self.material_package_directory)
-        import_statement = 'from {} import {}\n'.format(material_underscored_name, material_underscored_name)
-        initializer = self._get_initializer()
-        self._add_line_to_initializer(initializer, import_statement)
-
-    def get_initializer(self):
-        if 'scores' in self.material_package_directory:
-            materials_directory = os.path.dirname(self.material_package_directory)
-            initializer = os.path.join(materials_directory, '__init__.py')
-        else:
-            initializer = os.path.join(os.environ.get('BACA'), 'materials', '__init__.py')        
-        return initializer
 
     def handle_main_menu_result(self, key):
         if key == 'del':
@@ -129,7 +102,7 @@ class MakerProxy(PackageProxy):
             self.pop_breadcrumb()
         self.pop_breadcrumb()
 
-    def write_initializer_to_disk(self):
+    def write_stub_initializer_to_disk(self):
         initializer = file(os.path.join(self.material_package_directory, '__init__.py'), 'w')
         initializer.write('from output import *\n')
         initializer.write('import datetime\n')

@@ -8,7 +8,7 @@ import sys
 class PackageProxy(DirectoryProxy):
 
     def __init__(self, package_importable_name=None, session=None):
-        directory_name = self._package_importable_name_to_directory_name(package_importable_name)
+        directory_name = self.package_importable_name_to_directory_name(package_importable_name)
         DirectoryProxy.__init__(self, directory_name=directory_name, session=session)
         self._package_short_name = None
         self.package_importable_name = package_importable_name
@@ -27,7 +27,7 @@ class PackageProxy(DirectoryProxy):
     @property
     def directory_name(self):
         if self.package_importable_name is not None:
-            return self._package_importable_name_to_directory_name(self.package_importable_name)
+            return self.package_importable_name_to_directory_name(self.package_importable_name)
 
     @property
     def has_initializer(self):
@@ -47,7 +47,7 @@ class PackageProxy(DirectoryProxy):
     @property
     def parent_initializer_file_name(self):
         if self.parent_package_importable_name:
-            parent_directory_name = self._package_importable_name_to_directory_name(
+            parent_directory_name = self.package_importable_name_to_directory_name(
                 self.parent_package_importable_name)
             return os.path.join(parent_directory_name, '__init__.py')
 
@@ -71,64 +71,9 @@ class PackageProxy(DirectoryProxy):
         if isinstance(self.purview, baca.scf.ScoreProxy):
             return self.purview
 
-    ### PRIVATE METHODS ###
-
-    # TODO: make public
-    def _package_importable_name_to_directory_name(self, package_importable_name):
-        if package_importable_name is None:
-            return
-        package_importable_name_parts = package_importable_name.split('.')
-        if package_importable_name_parts[0] == 'baca':
-            directory_parts = [os.environ.get('BACA')] + package_importable_name_parts[1:]
-        elif package_importable_name_parts[0] in os.listdir(os.environ.get('SCORES')):
-            directory_parts = [os.environ.get('SCORES')] + package_importable_name_parts[:]
-        else:
-            raise ValueError('Unknown package importable name {!r}.'.format(package_importable_name))
-        directory = os.path.join(*directory_parts)
-        return directory
-
-    # TODO: make public
-    def _package_importable_name_to_purview(self, package_importable_name):
-        import baca
-        if package_importable_name is None:
-            return
-        elif package_importable_name.split('.')[0] == 'baca':
-            return baca.scf.GlobalProxy()
-        elif package_importable_name.split('.')[0] in os.listdir(os.environ.get('SCORES')):
-            return baca.scf.ScoreProxy(package_importable_name.split('.')[0])
-        else:
-            raise ValueError('Unknown package importable name {!r}.'.format(package_importable_name))
-
-    def _read_initializer_metadata(self, name):
-        initializer = file(self.initializer_file_name, 'r')
-        for line in initializer.readlines():
-            if line.startswith(name):
-                initializer.close()
-                command = line.replace(name, 'result')
-                exec(command)
-                return result
-
-    def _write_initializer_metadata(self, name, value):
-        new_lines = []
-        initializer = file(self.initializer_file_name, 'r')
-        found_existing_line = False
-        for line in initializer.readlines():
-            if line.startswith(name):
-                found_existing_line = True
-                new_line = '{} = {!r}\n'.format(name, value)
-                new_lines.append(new_line)
-            else:
-                new_lines.append(line)
-        if not found_existing_line:
-            new_line = '{} = {!r}\n'.format(name, value)
-            new_lines.append(new_line)
-        initializer.close()
-        initializer = file(self.initializer_file_name, 'w')
-        initializer.write(''.join(new_lines))
-        initializer.close()
-
     ### READ / WRITE PUBLIC ATTRIBUTES ###
 
+    # TODO: maybe this should be read-only?
     @apply
     def package_importable_name():
         def fget(self):
@@ -141,6 +86,7 @@ class PackageProxy(DirectoryProxy):
             self._package_importable_name = package_importable_name
         return property(**locals())
 
+    # TODO: maybe this should be read-only?
     @apply
     def package_short_name():
         def fget(self):
@@ -150,13 +96,14 @@ class PackageProxy(DirectoryProxy):
             self._package_short_name = package_short_name
         return property(**locals())
 
+    # TODO: maybe this should be read-only?
     @apply
     def purview():
         def fget(self):
             if self._purview is not None:
                 return self._purview
             else:
-                return self._package_importable_name_to_purview(self.package_importable_name)
+                return self.package_importable_name_to_purview(self.package_importable_name)
         def fset(self, purview):
             if self.package_importable_name is None:
                 self._purview = purview
@@ -166,17 +113,13 @@ class PackageProxy(DirectoryProxy):
 
     ### PUBLIC METHODS ###
 
-    def add_line_to_initializer(self, line):
-        file_pointer = file(self.initializer_file_name, 'r')
-        initializer_lines = set(file_pointer.readlines())
-        file_pointer.close()
-        initializer_lines.add(line)
-        initializer_lines = list(initializer_lines)
-        initializer_lines = [x for x in initializer_lines if not x == '\n']
-        initializer_lines.sort()
-        file_pointer = file(self.initializer_file_name, 'w')
-        file_pointer.write(''.join(initializer_lines))
-        file_pointer.close()
+    def add_import_statement_to_initializer(self, import_statement):
+        initializer_import_statements, initializer_tag_lines = self.parse_initializer()
+        initializer_import_statements = set(initializer_import_statements)
+        initializer_import_statements.add(import_statement)
+        initializer_import_statements = list(initializer_import_statements)
+        initializer_import_statements.sort()
+        self.write_initializer_to_disk(initializer_import_statements, initializer_tag_lines)
 
     def add_tag(self, tag_name, tag_value):
         tags = self.get_tags()
@@ -196,13 +139,6 @@ class PackageProxy(DirectoryProxy):
         # TODO: can the following two lines be removed?
         #if self.session.user_input is None:
         #    self.proceed()
-
-    def create_initializer(self):
-        if self.has_initializer:
-            raise OSError('package {!r} already has initializer.'.format(self))
-        initializer = file(self.initializer_file_name, 'a')        
-        initializer.write('')
-        initializer.close()
 
     def delete_package(self):
         result = self.remove()
@@ -233,16 +169,6 @@ class PackageProxy(DirectoryProxy):
 
     def edit_parent_initializer(self):
         os.system('vi {}'.format(self.parent_initializer_file_name))
-
-    def import_attribute_from_initializer(self, attribute_name):
-        try:
-            command = 'from {} import {}'.format(self.package_importable_name, attribute_name)
-            exec(command)
-            command = 'result = {}'.format(attribute_name)
-            exec(command)
-            return result
-        except ImportError:
-            return None
 
     def get_tag(self, tag_name):
         tags = self.get_tags()
@@ -310,7 +236,55 @@ class PackageProxy(DirectoryProxy):
                 break
             self.pop_breadcrumb()
         self.pop_breadcrumb()
-        
+
+    # TODO: write tests
+    def package_importable_name_to_directory_name(self, package_importable_name):
+        if package_importable_name is None:
+            return
+        package_importable_name_parts = package_importable_name.split('.')
+        if package_importable_name_parts[0] == 'baca':
+            directory_parts = [os.environ.get('BACA')] + package_importable_name_parts[1:]
+        elif package_importable_name_parts[0] in os.listdir(os.environ.get('SCORES')):
+            directory_parts = [os.environ.get('SCORES')] + package_importable_name_parts[:]
+        else:
+            raise ValueError('Unknown package importable name {!r}.'.format(package_importable_name))
+        directory = os.path.join(*directory_parts)
+        return directory
+
+    # TODO: write tests
+    def package_importable_name_to_purview(self, package_importable_name):
+        import baca
+        if package_importable_name is None:
+            return
+        elif package_importable_name.split('.')[0] == 'baca':
+            return baca.scf.GlobalProxy()
+        elif package_importable_name.split('.')[0] in os.listdir(os.environ.get('SCORES')):
+            return baca.scf.ScoreProxy(package_importable_name.split('.')[0])
+        else:
+            raise ValueError('Unknown package importable name {!r}.'.format(package_importable_name))
+
+    # TODO: write test
+    def parse_initializer(self, initializer_file_name=None):
+        if initializer_file_name is None:
+            initializer_file_name = self.initializer_file_name
+        initializer = file(initializer_file_name, 'r')
+        initializer_import_statements = []
+        initializer_tag_lines = []
+        found_tags = False
+        for line in initializer.readlines():
+            if line == '\n':
+                pass
+            elif line.startswith('tags ='):
+                found_tags = True
+                initializer_tag_lines.append(line)
+            elif not found_tags:
+                initializer_import_statements.append(line)
+            else:
+                initializer_tag_lines.append(line)
+        initializer.close()
+        return initializer_import_statements, initializer_tag_lines
+
+    # TODO: write test
     def pprint_tags(self, tags):
         if tags:
             lines = []
@@ -329,20 +303,14 @@ class PackageProxy(DirectoryProxy):
             result = 'tags = OrderedDict([])'
         return result
 
-    def remove_line_from_initializer(self, initializer, line):
-        file_pointer = file(initializer, 'r')
-        initializer_lines = set(file_pointer.readlines())
-        file_pointer.close()
-        initializer_lines = list(initializer_lines)
-        initializer_lines = [x for x in initializer_lines if not x == line]
-        initializer_lines.sort()
-        file_pointer = file(initializer, 'w')
-        file_pointer.write(''.join(initializer_lines))
-        file_pointer.close()
+    # TODO: write test
+    def remove_import_statement_from_initializer(self, import_statement, initializer_file_name):
+        initializer_import_statements, initializer_tag_lines = self.parse_initializer(initializer_file_name)
+        initializer_import_statements = [x for x in initializer_import_statements if x != import_statement] 
+        self.write_initializer_to_disk(initializer_import_statements, initializer_tag_lines, initializer_file_name)
 
     def remove_package_importable_name_from_sys_modules(self, package_importable_name):
-        '''Total hack. But works.
-        '''
+        '''Total hack. But works.'''
         command = "if '{}' in sys.modules: del(sys.modules['{}'])".format(
             package_importable_name, package_importable_name)
         exec(command)
@@ -385,39 +353,29 @@ class PackageProxy(DirectoryProxy):
         self.remove_package_importable_name_from_sys_modules(self.package_importable_name)
 
     # TODO: write test
-    def write_initializer_to_package(self, package_importable_name):
-        directory_name = self._package_importable_name_to_directory_name(package_importable_name)
-        initializer = file(os.path.join(directory_name, '__init__.py'), 'w')
-        lines = []
-        lines.append('from collections import OrderedDict')
-        lines.append('')
-        lines.append('')
-        lines.append('tags = OrderedDict([])')
-        initializer.write('\n'.join(lines))
+    def write_initializer_to_disk(self, 
+        initializer_import_statements, initializer_tag_lines, initializer_file_name=None):
+        if initializer_file_name is None:
+            initializer_file_name = self.initializer_file_name
+        initializer_lines = []
+        initializer_lines.extend(initializer_import_statements)
+        if initializer_import_statements and initializer_tag_lines:
+            initializer_lines.extend(['\n', '\n'])
+        initializer_lines.extend(initializer_tag_lines)
+        initializer = file(initializer_file_name, 'w')
+        initializer.write(''.join(initializer_lines))
         initializer.close()
 
-    def write_package_to_disk(self):
-        self.print_not_implemented()
+    # TODO: write test
+    def write_stub_initializer_to_disk(self):
+        initializer_import_statements = ['from collections import OrderedDict\n']
+        initializer_tag_lines = ['tags = OrderedDict([])\n']
+        self.write_initializer_to_disk(initializer_import_statements, initializer_tag_lines)
 
+    # TODO: write test
     def write_tags_to_initializer(self, tags):
-        tags = self.pprint_tags(tags)
-        lines = []
-        initializer = file(self.initializer_file_name, 'r')
-        found_tags = False
-        for line in initializer.readlines():
-            if found_tags:
-                pass
-            elif line.startswith('tags ='):
-                found_tags = True
-                lines.append(tags)
-            else:
-                lines.append(line)
-        if not found_tags:
-            lines.append(tags)
-        initializer_preamble_lines = ['from collections import OrderedDict\n', '\n', '\n']
-        if not lines[:3] == initializer_preamble_lines:
-            lines[0:0] = initializer_preamble_lines[:]
-        initializer.close()
-        initializer = file(self.initializer_file_name, 'w')
-        initializer.write(''.join(lines))
-        initializer.close()
+        import_statement = 'from collections import OrderedDict\n'
+        self.add_import_statement_to_initializer(import_statement)
+        initializer_import_statements, initializer_tag_lines = self.parse_initializer()
+        initializer_tag_lines = self.pprint_tags(tags)
+        self.write_initializer_to_disk(initializer_import_statements, initializer_tag_lines)
