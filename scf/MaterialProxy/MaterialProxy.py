@@ -324,22 +324,6 @@ class MaterialProxy(PackageProxy):
         parent_package = PackageProxy(self.parent_package_importable_name, session=self.session)
         parent_package.add_import_statement_to_initializer(import_statement)
 
-    # TODO: remove this overly complicated method
-    def conditionally_edit_score_builder(self):
-        if self.has_score_builder:
-            self.edit_score_builder()
-        elif self.has_output_data:
-            line = "data exists but score builder doesn't.\n"
-            self.conditionally_display_lines([line])
-            if self.query('create score builder? '):
-                self.write_stub_score_builder_to_disk()
-        elif self.has_material_definition_module:
-            if self.query('write material to disk? '):
-                self.write_material_definition_to_output_data_module(is_forced=True)
-        else:
-            if self.query('create material definition? '):
-                self.edit_material_definition_module()
-
     def create_output_ly_and_output_pdf_from_score_builder(self, is_forced=False, prompt_proceed=True):
         lines = []
         lilypond_file = self.import_score_definition_from_score_builder()
@@ -415,25 +399,6 @@ class MaterialProxy(PackageProxy):
             if prompt_proceed:
                 line = 'output PDF deleted.'
                 self.proceed(lines=[line])
-
-    # TODO: remove this overly complicated method
-    def edit_ly(self):
-        if self.has_output_ly:
-            self.edit_output_ly()
-        elif self.has_score_builder:
-            if self.query('create LilyPond file from score builder? '):
-                self.create_output_ly_from_score_builder()    
-        elif self.has_output_data:
-            line = "output data exists but score builder doesn't.\n"
-            self.conditionally_display_lines([line])
-            if self.query('create score builder? '):
-                self.write_stub_score_builder_to_disk()
-        elif self.has_material_definition_module:
-            if self.query('write material to disk? '):
-                self.write_material_definition_to_output_data_module(is_forced=True)
-        else:
-            if self.query('create material definition? '):
-                self.edit_material_definition_module()
 
     def edit_material_definition_module(self):
         os.system('vi + {}'.format(self.material_definition_file_name))
@@ -538,7 +503,8 @@ class MaterialProxy(PackageProxy):
         elif result == 'sbd':
             self.delete_score_builder()
         elif result == 'sbe':
-            self.conditionally_edit_score_builder()
+            #self.conditionally_edit_score_builder()
+            self.edit_score_builder()
         elif result == 'sbt':
             self.write_stub_score_builder_to_disk()
         elif result == 'sbx':
@@ -568,7 +534,7 @@ class MaterialProxy(PackageProxy):
         elif result == 'lyd':
             self.delete_output_ly()
         elif result == 'lyi':
-            self.edit_ly()
+            self.edit_output_ly()
         elif result == 'pdfc':
             self.create_output_ly_and_output_pdf_from_score_builder(is_forced=True)
             self.open_output_pdf()
