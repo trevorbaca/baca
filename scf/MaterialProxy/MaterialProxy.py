@@ -315,13 +315,13 @@ class MaterialProxy(PackageProxy):
 
     def add_material_to_material_initializer(self):
         import_statement = 'from output import {}\n'.format(self.material_underscored_name)
-        self.add_line_to_initializer(import_statement) 
+        self.add_import_statement_to_initializer(import_statement) 
         
     def add_material_to_materials_initializer(self):
         import_statement = 'from {} import {}\n'.format(
             self.material_underscored_name, self.material_underscored_name)
         parent_package = PackageProxy(self.parent_package_importable_name, session=self.session)
-        parent_package.add_line_to_initializer(import_statement)
+        parent_package.add_import_statement_to_initializer(import_statement)
 
     def conditionally_edit_score_builder(self):
         if self.has_score_builder:

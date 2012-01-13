@@ -166,13 +166,12 @@ class PackageProxy(DirectoryProxy):
 
     ### PUBLIC METHODS ###
 
-    def add_line_to_initializer(self, new_line):
-        file_pointer = file(self.initializer_file_name, 'r')
-        #initializer_lines = set(file_pointer.readlines())
+    def add_import_statement_to_initializer(self, import_statement):
+        initializer = file(self.initializer_file_name, 'r')
         initializer_import_statements = []
         initializer_tag_lines = []
         found_tags = False
-        for line in file_pointer.readlines():
+        for line in initializer.readlines():
             if line == '\n':
                 pass
             elif line.startswith('tags ='):
@@ -182,20 +181,19 @@ class PackageProxy(DirectoryProxy):
                 initializer_import_statements.append(line)
             else:
                 initializer_tag_lines.append(line)
-        file_pointer.close()
+        initializer.close()
         initializer_import_statements = set(initializer_import_statements)
-        initializer_import_statements.add(new_line)
+        initializer_import_statements.add(import_statement)
         initializer_import_statements = list(initializer_import_statements)
-        #initializer_lines = [x for x in initializer_lines if not x == '\n']
         initializer_import_statements.sort()
         initializer_lines = []
         initializer_lines.extend(initializer_import_statements)
         if initializer_import_statements and initializer_tag_lines:
             initializer_lines.extend(['\n', '\n'])
         initializer_lines.extend(initializer_tag_lines)
-        file_pointer = file(self.initializer_file_name, 'w')
-        file_pointer.write(''.join(initializer_lines))
-        file_pointer.close()
+        initializer = file(self.initializer_file_name, 'w')
+        initializer.write(''.join(initializer_lines))
+        initializer.close()
 
     def add_tag(self, tag_name, tag_value):
         tags = self.get_tags()
