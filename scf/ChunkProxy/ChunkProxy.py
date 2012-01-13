@@ -28,10 +28,7 @@ class ChunkProxy(PackageProxy):
     ### PUBLIC METHODS ###
 
     def create_chunk(self):
-        self.create_directory()
-        self.create_initializer()
-        line = 'chunk created.'
-        self.proceed(lines=[line])
+        self.print_not_implemented()
 
     def create_chunk_interactively(self):
         self.print_not_implemented()

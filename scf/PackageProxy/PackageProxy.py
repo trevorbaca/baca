@@ -140,13 +140,6 @@ class PackageProxy(DirectoryProxy):
         #if self.session.user_input is None:
         #    self.proceed()
 
-    def create_initializer(self):
-        if self.has_initializer:
-            raise OSError('package {!r} already has initializer.'.format(self))
-        initializer = file(self.initializer_file_name, 'a')        
-        initializer.write('')
-        initializer.close()
-
     def delete_package(self):
         result = self.remove()
         if result:
@@ -176,17 +169,6 @@ class PackageProxy(DirectoryProxy):
 
     def edit_parent_initializer(self):
         os.system('vi {}'.format(self.parent_initializer_file_name))
-
-    # TODO: move to GlobalProxy
-    def import_attribute_from_initializer(self, attribute_name):
-        try:
-            command = 'from {} import {}'.format(self.package_importable_name, attribute_name)
-            exec(command)
-            command = 'result = {}'.format(attribute_name)
-            exec(command)
-            return result
-        except ImportError:
-            return None
 
     def get_tag(self, tag_name):
         tags = self.get_tags()
