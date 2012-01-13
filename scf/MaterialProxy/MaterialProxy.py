@@ -324,6 +324,7 @@ class MaterialProxy(PackageProxy):
         parent_package = PackageProxy(self.parent_package_importable_name, session=self.session)
         parent_package.add_import_statement_to_initializer(import_statement)
 
+    # TODO: remove this overly complicated method
     def conditionally_edit_score_builder(self):
         if self.has_score_builder:
             self.edit_score_builder()
@@ -331,7 +332,7 @@ class MaterialProxy(PackageProxy):
             line = "data exists but score builder doesn't.\n"
             self.conditionally_display_lines([line])
             if self.query('create score builder? '):
-                self.create_score_builder()
+                self.write_stub_score_builder_to_disk()
         elif self.has_material_definition_module:
             if self.query('write material to disk? '):
                 self.write_material_definition_to_output_data_module(is_forced=True)
@@ -348,7 +349,6 @@ class MaterialProxy(PackageProxy):
             lines.append('PDF and LilyPond file written to disk.')
         else:
             lines.append('LilyPond file is the same. (PDF and LilyPond file preserved.)')
-        lines.append('')
         if prompt_proceed:
             self.proceed(lines=lines)
         
@@ -376,16 +376,13 @@ class MaterialProxy(PackageProxy):
         if prompt_proceed:
             self.proceed(lines=lines)
 
-    def create_score_builder(self):
-        file_pointer = file(self.score_builder_file_name, 'w')
-        file_pointer.write('from abjad import *\n')
-        file_pointer.write('from abjad.tools import layouttools\n')
-        line = 'from output import {}\n'.format(self.material_underscored_name)
-        file_pointer.write(line)
-        file_pointer.write('\n\n\n')
-        file_pointer.close()
-        self.edit_score_builder()
-
+    def delete_local_stylesheet(self, prompt_proceed=True):
+        if self.has_local_stylesheet:
+            os.remove(self.local_stylesheet_file_name)
+            if prompt_proceed:
+                line = 'stylesheet deleted.'
+                self.proceed(lines=[line])
+           
     def delete_material_definition_module(self, prompt_proceed=True):
         if self.has_material_definition_module:
             os.remove(self.material_definition_file_name)
@@ -405,13 +402,21 @@ class MaterialProxy(PackageProxy):
                 line = 'output data module deleted.'
                 self.proceed(lines=[line])
 
-    def delete_local_stylesheet(self, prompt_proceed=True):
-        if self.has_local_stylesheet:
-            os.remove(self.local_stylesheet_file_name)
+    def delete_output_ly(self, prompt_proceed=True):
+        if self.has_output_ly:
+            os.remove(self.output_ly_file_name)
             if prompt_proceed:
-                line = 'stylesheet deleted.'
+                line = 'output LilyPond file deleted.'
+                self.procced(lines=[line])
+
+    def delete_output_pdf(self, prompt_proceed=True):
+        if self.has_output_pdf:
+            os.remove(self.output_pdf_file_name)
+            if prompt_proceed:
+                line = 'output PDF deleted.'
                 self.proceed(lines=[line])
-           
+
+    # TODO: remove this overly complicated method
     def edit_ly(self):
         if self.has_output_ly:
             self.edit_output_ly()
@@ -422,7 +427,7 @@ class MaterialProxy(PackageProxy):
             line = "output data exists but score builder doesn't.\n"
             self.conditionally_display_lines([line])
             if self.query('create score builder? '):
-                self.create_score_builder()
+                self.write_stub_score_builder_to_disk()
         elif self.has_material_definition_module:
             if self.query('write material to disk? '):
                 self.write_material_definition_to_output_data_module(is_forced=True)
@@ -561,14 +566,14 @@ class MaterialProxy(PackageProxy):
         elif result == 'lyc':
             self.create_output_ly_from_score_builder(is_forced=True)
         elif result == 'lyd':
-            self.delete_ly()
+            self.delete_output_ly()
         elif result == 'lyi':
             self.edit_ly()
         elif result == 'pdfc':
             self.create_output_ly_and_output_pdf_from_score_builder(is_forced=True)
             self.open_output_pdf()
         elif result == 'pdfd':
-            self.delete_pdf()
+            self.delete_output_pdf()
         elif result == 'pdfi':
             self.open_output_pdf()
         elif result == 'er':
@@ -623,7 +628,7 @@ class MaterialProxy(PackageProxy):
             menu, hidden_section = self.make_main_menu_for_material_made_by_hand()
         else:
             menu, hidden_section = self.make_main_menu_for_material_made_with_editor()
-        self.make_main_menu_section_for_output_data(menu, hidden_section)
+        #self.make_main_menu_section_for_output_data(menu, hidden_section)
         self.make_main_menu_section_for_output_ly(menu, hidden_section)
         self.make_main_menu_section_for_output_pdf(menu, hidden_section)
         self.make_main_menu_section_for_hidden_entries(menu)
@@ -639,6 +644,7 @@ class MaterialProxy(PackageProxy):
     def make_main_menu_for_material_made_by_hand(self):
         menu, hidden_section = self.make_new_menu(where=self.where(), is_hidden=True)
         self.make_main_menu_section_for_material_definition(menu, hidden_section)
+        self.make_main_menu_section_for_output_data(menu, hidden_section)
         self.make_main_menu_section_for_score_builder(menu, hidden_section)
         self.make_main_menu_section_for_stylesheet_management(menu, hidden_section)
         return menu, hidden_section
@@ -985,7 +991,9 @@ class MaterialProxy(PackageProxy):
         lines.append('from output import {}'.format(self.material_underscored_name))
         lines.append('')
         lines.append('')
-        lines.append('score, treble_staff, bass_staff = scoretools.make_piano_score_from_leaves()') 
+        line = 'score, treble_staff, bass_staff = scoretools.make_piano_score_from_leaves({})'.format(
+            self.material_underscored_name)
+        lines.append(line)
         lines.append('lilypond_file = lilypondfiletools.make_basic_lilypond_file(score)')
         score_builder.write('\n'.join(lines))
         score_builder.close()
