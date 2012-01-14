@@ -1,32 +1,28 @@
 from abjad.tools import durationtools
 from abjad.tools import measuretools
-from baca.scf.InteractiveMaterialProxy import InteractiveMaterialProxy
+from baca.scf.MakerProxy import MakerProxy
 from baca.scf.UserInputWrapper import UserInputWrapper
-from baca.scf.editors.InteractiveEditor import InteractiveEditor
-import os
 
 
-class SargassoMeasureMaker(InteractiveEditor):
+class SargassoMeasureMaker(MakerProxy):
 
-    def __init__(self, session=None, target=None, **kwargs):
-        InteractiveEditor.__init__(self, session=session, target=target)
-        self.stylesheet = os.path.join(os.path.dirname(__file__), 'stylesheet.ly')
+    def __init__(self, client_material_package_importable_name, session=None):
+        MakerProxy.__init__(self, client_material_package_importable_name, session=session)
         self._generic_output_name = 'sargasso measures'
 
     ### READ-ONLY PUBLIC ATTRIBUTES ###
 
-    @property
-    def breadcrumb(self):
-        return self.class_name
-
+    # TODO: rename output_data_module_import_statements
     output_file_import_statements = [
         'from abjad.tools.measuretools.Measure import Measure',]
             
+    # TODO: keep this name
     user_input_import_statements = [
         'from abjad.tools.durationtools import Duration',
         'from baca.scf.makers import SargassoMeasureMaker',
         'from baca.scf import UserInputWrapper',]
 
+    # TODO: rename user_input_demo_values
     user_input_template = UserInputWrapper([
         ('measure_denominator', 4),
         ('measure_numerator_talea', [2, 2, 2, 2, 1, 1, 4, 4]),

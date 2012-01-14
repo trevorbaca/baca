@@ -51,6 +51,19 @@ class SCFObject(object):
         return helpers
 
     # TODO: write test
+    def makers_directory_name(self):
+        return os.path.join(self.scf_root_directory, 'makers')
+
+    # TODO: write test
+    def makers_package_importable_name(self):
+        return '{}.makers'.format(self.scf_package_importable_name)
+
+    # TODO: write test
+    @property
+    def scf_package_importable_name(self):
+        return 'baca.scf'
+
+    # TODO: write test
     @property
     def scf_root_directory(self):
         return os.path.join('/', 'Users', 'trevorbaca', 'Documents', 'other', 'baca', 'scf')

@@ -48,6 +48,13 @@ class MaterialProxy(PackageProxy):
         return self.get_tag('has_illustration')
 
     @property
+    def has_local_stylesheet(self):
+        if self.local_stylesheet_file_name is None:
+            return False
+        else:
+            return os.path.exists(self.local_stylesheet_file_name)
+    
+    @property
     def has_material_definition(self):
         if not self.has_material_definition_module:
             return False
@@ -108,12 +115,19 @@ class MaterialProxy(PackageProxy):
             return bool(self.import_score_definition_from_score_builder())
 
     @property
-    def has_local_stylesheet(self):
-        if self.local_stylesheet_file_name is None:
+    def has_user_input(self):
+        if not self.has_user_input_module:
             return False
         else:
-            return os.path.exists(self.local_stylesheet_file_name)
-    
+            return bool(self.import_user_input_from_user_input_module())
+
+    @property
+    def has_user_input_module(self):
+        if self.user_input_module_file_name is None:
+            return False
+        else:
+            return os.path.exists(self.user_input_module_file_name)
+
     @property
     def is_changed(self):
         material_definition = self.import_material_definition_from_material_definition_module()
@@ -235,8 +249,6 @@ class MaterialProxy(PackageProxy):
             exec(command)
             # keep list from persisting between multiple calls to this method
             output_data_preamble_lines = list(output_data_preamble_lines)
-            # TODO: think the following line should be removed
-            #output_data_preamble_lines.append('\n')
         except ImportError:
             output_data_preamble_lines = []
         return output_data_preamble_lines
@@ -287,14 +299,31 @@ class MaterialProxy(PackageProxy):
     def stub_score_builder_file_name(self):
         return os.path.join(self.assets_directory, 'stub_score_builder.py')
 
+    # TODO: write test
+    @property
+    def user_input_module_file_name(self): 
+        if self.directory_name is not None:
+            return os.path.join(self.directory_name, 'user_input.py')
+
+    # TODO: write test
+    @property
+    def user_input_module_importable_name(self):
+        if self.user_input_module_file_name is not None:
+            return '{}.user_input'.format(self.package_importable_name)
+    
+    # TODO: write test
     @property
     def user_input_wrapper(self):
-        if self.is_interactive:
-            if self.material_definition_module_importable_name is not None:
-                command = 'from {} import user_input'.format(self.material_definition_module_importable_name)
+        #if self.is_interactive:
+        if self.has_user_input_module:
+            #if self.material_definition_module_importable_name is not None:
+            if True:
+                #command = 'from {} import user_input'.format(self.material_definition_module_importable_name)
+                command = 'from {} import user_input'.format(self.user_input_module_importable_name)
                 exec(command)
                 return user_input
 
+    # TODO: change to 'is_handmade'
     @property
     def was_created_by_hand(self):
         return not(self.has_editor)
@@ -503,7 +532,6 @@ class MaterialProxy(PackageProxy):
         elif result == 'sbd':
             self.delete_score_builder()
         elif result == 'sbe':
-            #self.conditionally_edit_score_builder()
             self.edit_score_builder()
         elif result == 'sbt':
             self.write_stub_score_builder_to_disk()
@@ -544,7 +572,6 @@ class MaterialProxy(PackageProxy):
             self.open_output_pdf()
         elif result == 'er':
             self.run_editor()
-        # TODO: write tests
         elif result == 'del':
             self.delete_material_package()
             self.session.is_backtracking_locally = True
@@ -594,7 +621,6 @@ class MaterialProxy(PackageProxy):
             menu, hidden_section = self.make_main_menu_for_material_made_by_hand()
         else:
             menu, hidden_section = self.make_main_menu_for_material_made_with_editor()
-        #self.make_main_menu_section_for_output_data(menu, hidden_section)
         self.make_main_menu_section_for_output_ly(menu, hidden_section)
         self.make_main_menu_section_for_output_pdf(menu, hidden_section)
         self.make_main_menu_section_for_hidden_entries(menu)
