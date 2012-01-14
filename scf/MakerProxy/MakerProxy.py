@@ -6,7 +6,12 @@ import os
 class MakerProxy(PackageProxy):
 
     def __init__(self, client_material_package_importable_name, session=None):
-        package_importable_name = '{}.{}'.format(self.makers_package_importable_name, type(self).__name__)
+        #foo = type(self).__name__
+        #mpin = self.makers_package_importable_name
+        foo = 'SargassoMeasureMaker'
+        mpin = 'baca.scf.makers'
+        package_importable_name = '{}.{}'.format(mpin, foo)
+        print 'ZZZ: {!r}'.format(package_importable_name)
         PackageProxy.__init__(self, package_importable_name=package_importable_name, session=session)
         self._client = MaterialProxy(client_material_package_importable_name, session=self.session)
 

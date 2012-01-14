@@ -6,7 +6,7 @@ from baca.scf.UserInputWrapper import UserInputWrapper
 
 class SargassoMeasureMaker(MakerProxy):
 
-    def __init__(self, client_material_package_importable_name, session=None):
+    def __init__(self, client_material_package_importable_name=None, session=None):
         MakerProxy.__init__(self, client_material_package_importable_name, session=session)
         self._generic_output_name = 'sargasso measures'
 
