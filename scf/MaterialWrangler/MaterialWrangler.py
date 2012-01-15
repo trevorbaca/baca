@@ -1,5 +1,4 @@
 from abjad.tools import iotools
-from baca.scf.InteractiveMaterialProxy import InteractiveMaterialProxy
 from baca.scf.MaterialProxy import MaterialProxy
 from baca.scf.PackageProxy import PackageProxy
 from baca.scf.PackageWrangler import PackageWrangler
@@ -129,11 +128,7 @@ class MaterialWrangler(PackageWrangler, PackageProxy):
         return material_package_importable_name
 
     def get_package_proxy(self, package_importable_name):
-        package_proxy = PackageProxy(package_importable_name, session=self.session)
-        if package_proxy.has_tag('maker'):
-            return InteractiveMaterialProxy(package_importable_name, session=self.session)
-        else:
-            return MaterialProxy(package_importable_name, session=self.session)
+        return MaterialProxy(package_importable_name, session=self.session)
 
     def handle_main_menu_result(self, result):
         if result == 'd':
@@ -168,14 +163,7 @@ class MaterialWrangler(PackageWrangler, PackageProxy):
         package_importable_name_parts.append(score_package_importable_name)
         package_importable_name_parts.append(material_underscored_name)
         package_importable_name = '.'.join(package_importable_name_parts)
-        package_proxy = PackageProxy(package_importable_name, session=self.session)
-        if package_proxy.has_tag('maker'):
-            #print 'AAA'
-            material_proxy = InteractiveMaterialProxy(package_importable_name, session=self.session)
-        else:
-            #print 'BBB'
-            material_proxy = MaterialProxy(package_importable_name, session=self.session)
-        #print 'CCC', repr(material_proxy)
+        material_proxy = MaterialProxy(package_importable_name, session=self.session)
         return material_proxy
 
     # TODO: write test
