@@ -7,7 +7,7 @@ class GlobalProxy(PackageProxy):
     
     def __init__(self, session=None):
         PackageProxy.__init__(self, 'baca', session=session)
-        self._maker_wrangler = MaterialProxyWrangler(session=self.session)
+        self._material_proxy_wrangler = MaterialProxyWrangler(session=self.session)
         self._material_wrangler = MaterialWrangler('baca', session=self.session)
 
     ### READ-ONLY PUBLIC ATTRIBUTES ###
@@ -21,8 +21,8 @@ class GlobalProxy(PackageProxy):
         return True
 
     @property
-    def maker_wrangler(self):
-        return self._maker_wrangler
+    def material_proxy_wrangler(self):
+        return self._material_proxy_wrangler
 
     @property
     def material_wrangler(self):

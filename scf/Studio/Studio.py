@@ -100,7 +100,7 @@ class Studio(SCFObject):
         elif result == 'all':
             self.session.scores_to_show = 'all'
         elif result == 'k':
-            #self.global_proxy.maker_wrangler.run()
+            #self.global_proxy.material_proxy_wrangler.run()
             self.print_not_implemented()
         elif result == 'm':
             breadcrumb = self.pop_breadcrumb()
@@ -152,7 +152,7 @@ class Studio(SCFObject):
     def list_material_proxies(self, class_names=None):
         for score_proxy in self.list_score_proxies():
             for material_proxy in score_proxy.list_material_proxies():
-                if class_names is None or material_proxy.get_tag('maker') in class_names:
+                if class_names is None or material_proxy.get_tag('material_proxy') in class_names:
                     yield material_proxy
         for material_proxy in self.global_proxy.material_wrangler.list_package_proxies():
             yield material_proxy

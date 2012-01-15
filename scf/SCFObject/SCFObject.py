@@ -52,12 +52,12 @@ class SCFObject(object):
 
     # TODO: write test
     @property
-    def makers_directory_name(self):
+    def material_proxys_directory_name(self):
         return os.path.join(self.scf_root_directory, 'materialproxies')
 
     # TODO: write test
     @property
-    def makers_package_importable_name(self):
+    def material_proxys_package_importable_name(self):
         return '{}.materialproxies'.format(self.scf_package_importable_name)
 
     # TODO: write test

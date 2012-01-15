@@ -17,7 +17,7 @@ class MaterialWrangler(PackageWrangler, PackageProxy):
             package_importable_name = '{}.mus.materials'.format(purview_package_short_name)
         PackageProxy.__init__(self, package_importable_name=package_importable_name, session=session)
         PackageWrangler.__init__(self, directory_name=self.directory_name, session=self.session)
-        self._maker_wrangler = baca.scf.MaterialProxyWrangler(session=self.session)
+        self._material_proxy_wrangler = baca.scf.MaterialProxyWrangler(session=self.session)
 
     ### READ-ONLY PUBLIC ATTRIBUTES ###
 
@@ -31,8 +31,8 @@ class MaterialWrangler(PackageWrangler, PackageProxy):
         return os.path.join([self.global_directory_name, 'materials'])
 
     @property
-    def maker_wrangler(self):
-        return self._maker_wrangler
+    def material_proxy_wrangler(self):
+        return self._material_proxy_wrangler
     
     @property
     def material_package_short_names(self):
@@ -67,7 +67,7 @@ class MaterialWrangler(PackageWrangler, PackageProxy):
         material_package_importable_name = self.get_new_material_package_importable_name_interactively()
         breadcrumbs = self.session.breadcrumbs[:]
         self.session.breadcrumbs[:] = []
-        editor = self.maker_wrangler.select_maker_interactively(should_clear_terminal=False)
+        editor = self.material_proxy_wrangler.select_material_proxy_interactively(should_clear_terminal=False)
         self.session.breadcrumbs = breadcrumbs[:]
         editor_class_name = editor.class_name
         # TODO: set following attribute by editor automatically

@@ -16,7 +16,7 @@ def test_GlobalProxy_01():
     assert not global_proxy.is_score_local_purview
     assert global_proxy.is_studio_global_purview
     assert global_proxy.list_formatted_tags() == []
-    assert global_proxy.maker_wrangler == baca.scf.MaterialProxyWrangler()
+    assert global_proxy.material_proxy_wrangler == baca.scf.MaterialProxyWrangler()
     assert global_proxy.material_wrangler == baca.scf.MaterialWrangler('baca')
     assert global_proxy.materials_package_importable_name == 'baca.materials'
     assert global_proxy.package_importable_name == 'baca'
@@ -46,5 +46,5 @@ def test_GlobalProxy_03():
 
     global_proxy = baca.scf.GlobalProxy()
 
-    assert global_proxy.session is global_proxy.maker_wrangler.session
+    assert global_proxy.session is global_proxy.material_proxy_wrangler.session
     assert global_proxy.session is global_proxy.material_wrangler.session

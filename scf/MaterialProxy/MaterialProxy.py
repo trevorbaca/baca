@@ -153,7 +153,7 @@ class MaterialProxy(PackageProxy):
 
     @property
     def is_interactive(self):
-        return bool(self.has_tag('maker'))
+        return bool(self.has_tag('material_proxy'))
 
     @property
     def is_shared(self):
@@ -764,10 +764,10 @@ class MaterialProxy(PackageProxy):
         return is_changed
 
     def reload_user_input(self):
-        maker = self.import_attribute_from_material_definition('maker')
-        maker.materials_directory_name = self.directory_name
+        material_proxy = self.import_attribute_from_material_definition('material_proxy')
+        material_proxy.materials_directory_name = self.directory_name
         user_input_wrapper = self.import_attribute_from_material_definition('user_input')
-        maker.run(user_input_wrapper, score_title=self.title)
+        material_proxy.run(user_input_wrapper, score_title=self.title)
 
     def rename_material(self):
         line = 'current material name: {}'.format(self.material_underscored_name)
@@ -865,9 +865,9 @@ class MaterialProxy(PackageProxy):
 
     # TODO: write test
     def select_editor_interactively(self, prompt_proceed=True):
-        maker_wrangler = MaterialProxyWrangler(session=self.session)
+        material_proxy_wrangler = MaterialProxyWrangler(session=self.session)
         self.preserve_backtracking = True
-        editor = maker_wrangler.select_maker_interactively()
+        editor = material_proxy_wrangler.select_material_proxy_interactively()
         self.preserve_backtracking = False
         if self.backtrack():
             return

@@ -1,5 +1,5 @@
 from abjad.tools.durationtools import Duration
-from baca.scf.makers import SargassoMeasureMaterialProxy
+from baca.scf.material_proxys import SargassoMeasureMaterialProxy
 from baca.scf import UserInputWrapper
 
 
@@ -13,5 +13,5 @@ user_input = UserInputWrapper([
 	('measures_are_split', False),
 	('measures_are_shuffled', False)])
 
-maker = SargassoMeasureMaterialProxy()
-test_measures_a = maker.make(**user_input)
+material_proxy = SargassoMeasureMaterialProxy()
+test_measures_a = material_proxy.make(**user_input)
