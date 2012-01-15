@@ -9,7 +9,7 @@ import os
 class MakerWrangler(PackageWrangler, PackageProxy):
 
     def __init__(self, session=None):
-        package_importable_name = 'baca.scf.makers'
+        package_importable_name = 'baca.scf.materialproxies'
         PackageProxy.__init__(self, package_importable_name=package_importable_name, session=session)
         PackageWrangler.__init__(self, directory_name=self.directory_name, session=self.session)
 
@@ -22,7 +22,7 @@ class MakerWrangler(PackageWrangler, PackageProxy):
 
     @property
     def breadcrumb(self):
-        return 'makers'
+        return 'material proxies'
 
     ### READ / WRITE PUBLIC ATTRIBUTES ###
 
@@ -39,7 +39,7 @@ class MakerWrangler(PackageWrangler, PackageProxy):
     ### PUBLIC METHODS ###
 
     def get_maker(self, maker_package_short_name):
-        command = 'from baca.scf.makers import {} as maker_class'.format(maker_package_short_name)
+        command = 'from baca.scf.materialproxies import {} as maker_class'.format(maker_package_short_name)
         exec(command)
         maker = maker_class()
         return maker
@@ -51,7 +51,7 @@ class MakerWrangler(PackageWrangler, PackageProxy):
         command = 'import baca'
         exec(command)
         for maker_class_name in self.list_maker_class_names():
-            command = 'result = baca.scf.makers.{}()'.format(maker_class_name)
+            command = 'result = baca.scf.materialproxies.{}()'.format(maker_class_name)
             exec(command)
             yield result
 

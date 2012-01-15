@@ -28,7 +28,7 @@ class MaterialProxy(PackageProxy):
     def editor(self):
         editor_class_name = self.editor_class_name
         try:
-            command = 'from baca.scf.makers import {}'.format(editor_class_name)
+            command = 'from baca.scf.materialproxies import {}'.format(editor_class_name)
             exec(command)
             command = 'result = {}(client_material_package_importable_name={!r}, session=self.session)'
             command = command.format(editor_class_name, self.package_importable_name)

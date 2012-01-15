@@ -19,7 +19,7 @@ class SargassoMeasureMaker(MaterialProxy):
     # TODO: keep this name
     user_input_import_statements = [
         'from abjad.tools.durationtools import Duration',
-        'from baca.scf.makers import SargassoMeasureMaker',
+        'from baca.scf.materialproxies import SargassoMeasureMaker',
         'from baca.scf import UserInputWrapper',]
 
     # TODO: rename user_input_demo_values
