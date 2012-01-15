@@ -1,16 +1,12 @@
 TODO
 
--3. Audit for should_clear_terminal keyword in the signature of every interactive method.
+-1. Audit for should_clear_terminal keyword in the signature of every interactive method.
 
--2. Audit for breadcrumb removal in the signature of every interactive method.
+0. Audit for breadcrumb removal in the signature of every interactive method.
 
--1. Shorten 'should_clear_terminal' to 'clear' and breadrumb to 'breadcrumb'.
+1. Shorten 'should_clear_terminal' to 'clear' and breadrumb to 'breadcrumb'.
 
-0. Be able safely to write junk into any system file.
-
-1. Implement 'make new material: static' in studio.
-
-2. Implement 'make new material: static' in scores.
+2. Be able safely to write junk into any system file.
 
 3. Implement 'make new material: range' in studio.
 
