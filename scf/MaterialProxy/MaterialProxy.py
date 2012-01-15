@@ -1,6 +1,6 @@
 from abjad.tools import iotools
 from abjad.tools import markuptools
-from baca.scf.MakerWrangler import MakerWrangler
+from baca.scf.MaterialProxyWrangler import MaterialProxyWrangler
 from baca.scf.PackageProxy import PackageProxy
 from baca.scf.StylesheetProxy import StylesheetProxy
 from baca.scf.StylesheetWrangler import StylesheetWrangler
@@ -865,7 +865,7 @@ class MaterialProxy(PackageProxy):
 
     # TODO: write test
     def select_editor_interactively(self, prompt_proceed=True):
-        maker_wrangler = MakerWrangler(session=self.session)
+        maker_wrangler = MaterialProxyWrangler(session=self.session)
         self.preserve_backtracking = True
         editor = maker_wrangler.select_maker_interactively()
         self.preserve_backtracking = False

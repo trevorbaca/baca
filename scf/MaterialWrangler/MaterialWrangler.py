@@ -17,7 +17,7 @@ class MaterialWrangler(PackageWrangler, PackageProxy):
             package_importable_name = '{}.mus.materials'.format(purview_package_short_name)
         PackageProxy.__init__(self, package_importable_name=package_importable_name, session=session)
         PackageWrangler.__init__(self, directory_name=self.directory_name, session=self.session)
-        self._maker_wrangler = baca.scf.MakerWrangler(session=self.session)
+        self._maker_wrangler = baca.scf.MaterialProxyWrangler(session=self.session)
 
     ### READ-ONLY PUBLIC ATTRIBUTES ###
 

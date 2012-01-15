@@ -13,7 +13,7 @@ class ScoreProxy(PackageProxy):
         self._mus_proxy = baca.scf.MusProxy(score_package_short_name, session=self.session)
         self._chunk_wrangler = baca.scf.ChunkWrangler(score_package_short_name, session=self.session)
         self._material_wrangler = baca.scf.MaterialWrangler(score_package_short_name, session=self.session)
-        self._maker_wrangler = baca.scf.MakerWrangler(session=self.session)
+        self._maker_wrangler = baca.scf.MaterialProxyWrangler(session=self.session)
 
     ### READ-ONLY PUBLIC ATTRIBUTES ###
 
