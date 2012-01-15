@@ -1,4 +1,4 @@
-from baca.scf.MaterialProxyWrangler import MaterialProxyWrangler
+from baca.scf.materialproxies.MaterialProxyWrangler import MaterialProxyWrangler
 from baca.scf.MaterialWrangler import MaterialWrangler
 from baca.scf.PackageProxy import PackageProxy
 

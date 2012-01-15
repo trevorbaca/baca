@@ -105,7 +105,7 @@ class MaterialProxyWrangler(PackageWrangler, PackageProxy):
         class_file = file(class_file_name, 'w')
         lines = []
         lines.append('from abjad.tools import lilypondfiletools')
-        lines.append('from baca.scf.MaterialProxy import MaterialProxy')
+        lines.append('from baca.scf.materialproxies.MaterialProxy import MaterialProxy')
         lines.append('from baca.scf.UserInputWrapper import UserInputWrapper')
         lines.append('import os')
         lines.append('')

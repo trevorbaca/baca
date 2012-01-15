@@ -1,6 +1,6 @@
 from abjad.tools import iotools
 from abjad.tools import markuptools
-from baca.scf.MaterialProxyWrangler import MaterialProxyWrangler
+from baca.scf.materialproxies.MaterialProxyWrangler import MaterialProxyWrangler
 from baca.scf.PackageProxy import PackageProxy
 from baca.scf.StylesheetProxy import StylesheetProxy
 from baca.scf.StylesheetWrangler import StylesheetWrangler
