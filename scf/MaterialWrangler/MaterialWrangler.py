@@ -3,7 +3,6 @@ from baca.scf.InteractiveMaterialProxy import InteractiveMaterialProxy
 from baca.scf.MaterialProxy import MaterialProxy
 from baca.scf.PackageProxy import PackageProxy
 from baca.scf.PackageWrangler import PackageWrangler
-from baca.scf.StaticMaterialProxy import StaticMaterialProxy
 import os
 
 
@@ -134,7 +133,7 @@ class MaterialWrangler(PackageWrangler, PackageProxy):
         if package_proxy.has_tag('maker'):
             return InteractiveMaterialProxy(package_importable_name, session=self.session)
         else:
-            return StaticMaterialProxy(package_importable_name, session=self.session)
+            return MaterialProxy(package_importable_name, session=self.session)
 
     def handle_main_menu_result(self, result):
         if result == 'd':
@@ -171,9 +170,12 @@ class MaterialWrangler(PackageWrangler, PackageProxy):
         package_importable_name = '.'.join(package_importable_name_parts)
         package_proxy = PackageProxy(package_importable_name, session=self.session)
         if package_proxy.has_tag('maker'):
+            #print 'AAA'
             material_proxy = InteractiveMaterialProxy(package_importable_name, session=self.session)
         else:
-            material_proxy = StaticMaterialProxy(package_importable_name, session=self.session)
+            #print 'BBB'
+            material_proxy = MaterialProxy(package_importable_name, session=self.session)
+        #print 'CCC', repr(material_proxy)
         return material_proxy
 
     # TODO: write test
