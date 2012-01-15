@@ -16,7 +16,7 @@ class MakerProxy(PackageProxy):
     
     @property
     def breadcrumb(self):
-        return self.class_name
+        return self.spaced_class_name
 
     @property
     def client(self):

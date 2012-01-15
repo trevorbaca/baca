@@ -29,7 +29,8 @@ class MaterialProxy(PackageProxy):
         try:
             command = 'from baca.scf.makers import {}'.format(editor_class_name)
             exec(command)
-            command = 'result = {}()'.format(editor_class_name)
+            command = 'result = {}(client_material_package_importable_name={!r}, session=self.session)'
+            command = command.format(editor_class_name, self.package_importable_name)
             exec(command)
             return result
         except:
@@ -658,7 +659,7 @@ class MaterialProxy(PackageProxy):
             hidden_section.append(('mdd', 'material definition - delete'))
             hidden_section.append(('mdt', 'material definition - stub'))
             hidden_section.append(('mdxi', 'material definition - execute & inspect'))
-        else:
+        elif self.editor_class_name is None:
             section.append(('mdt', 'material definition - stub'))
 
     def make_main_menu_section_for_output_data(self, main_menu, hidden_section):
