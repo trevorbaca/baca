@@ -119,7 +119,7 @@ class MaterialProxy(PackageProxy):
         if not self.has_user_input_module:
             return False
         else:
-            return bool(self.import_user_input_from_user_input_module())
+            return self.import_user_input_from_user_input_module() is not None
 
     @property
     def has_user_input_module(self):
@@ -512,6 +512,15 @@ class MaterialProxy(PackageProxy):
         lilypond_file.header_block.title = markuptools.Markup(self.material_spaced_name)
         return lilypond_file
         
+    def import_user_input_from_user_input_module(self):
+        self.unimport_user_input_module()
+        try:
+            command = 'from {} import user_input'.format(self.user_input_module_importable_name)
+            exec(command)
+            return user_input
+        except ImportError as e:
+            pass
+
     def handle_main_menu_result(self, result):
         assert isinstance(result, str)
         if result == 'k':
@@ -918,6 +927,9 @@ class MaterialProxy(PackageProxy):
     def unimport_score_package(self):
         self.remove_package_importable_name_from_sys_modules(self.score_package_short_name)
 
+    def unimport_user_input_module(self):
+        self.remove_package_importable_name_from_sys_modules(self.user_input_module_importable_name)
+
     def write_material_definition_to_output_data_module(self, is_forced=False, prompt_proceed=True):
         if not self.is_changed and not is_forced:
             line = 'material definition equals output data. (Output data preserved.)'
@@ -986,10 +998,23 @@ class MaterialProxy(PackageProxy):
         lines.append('lilypond_file = lilypondfiletools.make_basic_lilypond_file(score)')
         score_builder.write('\n'.join(lines))
         score_builder.close()
-        line = 'stub score builder written to disk.'
         if prompt_proceed:
+            line = 'stub score builder written to disk.'
             self.proceed(lines=[line])
-    
+
+    def write_stub_user_input_module_to_disk(self, prompt_proceed=True):
+        user_input_module = file(self.user_input_module_file_name, 'w')
+        lines = []
+        lines.append('from baca.scf import UserInputWrapper')
+        lines.append('')
+        lines.append('')
+        lines.append('user_input = UserInputWrapper([])')
+        user_input_module.write('\n'.join(lines))
+        user_input_module.close()
+        if prompt_proceed:
+            line = 'stub user input module written to disk.'
+            self.proceed(lines=[line])
+        
     ### OLD INTERACTIVE MATERIAL PROXY PUBLIC METHODS ###
 
     def clear_user_input_wrapper(self, user_input_wrapper):

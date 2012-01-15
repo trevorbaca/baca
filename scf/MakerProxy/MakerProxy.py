@@ -32,9 +32,6 @@ class MakerProxy(PackageProxy):
 
     ### PUBLIC METHODS ###
 
-    def create_user_input(self):
-        self.print_not_implemented()
-
     def display_user_input(self):
         self.print_not_implemented()
 
@@ -42,7 +39,7 @@ class MakerProxy(PackageProxy):
         if result == 'ind':
             self.display_user_input()
         elif result == 'inc':
-            self.create_user_input()
+            self.client.write_stub_user_input_module_to_disk()
         else:
             raise ValueError
     
