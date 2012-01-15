@@ -42,28 +42,26 @@ TODO
 
 19. Kill hardcoded 'baca' directory name.
 
-20. Change the names of all 'iterate_' functions to begin in 'list_'.
+20. Audit to remove 'diretory_name' attributes.
 
-21. Audit to remove 'diretory_name' attributes.
+21. Find a way to include tags management in hidden menu of every package proxy.
 
-22. Find a way to include tags management in hidden menu of every package proxy.
+22. Figure out why 'red' isn't good enough to select 'red_pcs', maybe redraw-related.
 
-23. Figure out why 'red' isn't good enough to select 'red_pcs', maybe redraw-related.
+23. Audit 'type(True)' and replace with 'bool'.
 
-24. Audit 'type(True)' and replace with 'bool'.
+24. Change 'conditionally_display_lines' to just 'display'.
 
-25. Change 'conditionally_display_lines' to just 'display'.
+25. Make backtracking work from 'self.confirm()' or deprecate confirm.
 
-26. Make backtracking work from 'self.confirm()' or deprecate confirm.
+26. Extend 'self.confirm()' with optional prompt.
 
-27. Extend 'self.confirm()' with optional prompt.
+27. Change alphabeticization of scores in score selection menu.
 
-28. Change alphabeticization of scores in score selection menu.
+28. Find a way to dynamically add (default) indicator to default menu entries.
 
-29. Find a way to dynamically add (default) indicator to default menu entries.
+29. Consider implementing initializer proxy to decongest package proxy.
 
-30. Consider implementing initializer proxy to decongest package proxy.
+30. Prevent the creation of 'baca.materials.h' package.
 
-31. Prevent the creation of 'baca.materials.h' package.
-
-32. Do away with local stylesheets.
+31. Do away with local stylesheets.

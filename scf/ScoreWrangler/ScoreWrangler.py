@@ -20,21 +20,21 @@ class ScoreWrangler(PackageWrangler):
         score_proxy.create_score_package_creation_wizard()
 
     def fix_score_package_structures(self):
-        for score_proxy in self.iterate_score_proxies(scores_to_show=self.session.scores_to_show):
+        for score_proxy in self.list_score_proxies(scores_to_show=self.session.scores_to_show):
             score_proxy.fix_package_structure()
             score_proxy.profile_package_structure()
 
     def get_package_proxy(self, package_importable_name):
         return ScoreProxy(package_importable_name, session=self.session)
 
-    def iterate_score_package_short_names(self, scores_to_show=None):
+    def list_score_package_short_names(self, scores_to_show=None):
         scores_to_show = scores_to_show or self.session.scores_to_show
-        for score_proxy in self.iterate_score_proxies(scores_to_show=scores_to_show):
+        for score_proxy in self.list_score_proxies(scores_to_show=scores_to_show):
             yield score_proxy.package_short_name
 
-    def iterate_score_proxies(self, scores_to_show=None):
+    def list_score_proxies(self, scores_to_show=None):
         scores_to_show = scores_to_show or self.session.scores_to_show
-        for score_proxy in self.iterate_package_proxies():
+        for score_proxy in self.list_package_proxies():
             is_mothballed = score_proxy.get_tag('is_mothballed')
             if scores_to_show == 'all':
                 yield score_proxy
@@ -43,18 +43,18 @@ class ScoreWrangler(PackageWrangler):
             elif scores_to_show == 'mothballed' and is_mothballed:
                 yield score_proxy
 
-    def iterate_score_titles_with_years(self, scores_to_show=None):
+    def list_score_titles_with_years(self, scores_to_show=None):
         scores_to_show = scores_to_show or self.session.scores_to_show
-        for score_proxy in self.iterate_score_proxies(scores_to_show=scores_to_show):
+        for score_proxy in self.list_score_proxies(scores_to_show=scores_to_show):
             yield score_proxy.title_with_year
 
     def profile_score_package_structures(self):
-        for score_proxy in self.iterate_score_proxies(scores_to_show=self.session.scores_to_show):
+        for score_proxy in self.list_score_proxies(scores_to_show=self.session.scores_to_show):
             score_proxy.profile_package_structure()
 
     def select_score_proxy(self):
         menu, section = self.make_new_menu(where=self.where(), is_numbered=True)
-        section.tokens = self.iterate_score_titles_with_years()
+        section.tokens = self.list_score_titles_with_years()
         score_package_short_name = self.title_to_score_package_short_name(value)
         score_proxy = ScoreProxy(score_package_short_name, session=self.session)
         return score_proxy
@@ -65,19 +65,19 @@ class ScoreWrangler(PackageWrangler):
         self.conditionally_display_lines([line])
         if not self.confirm():
             return
-        for score_proxy in self.iterate_score_proxies(scores_to_show=self.session.scores_to_show):
+        for score_proxy in self.list_score_proxies(scores_to_show=self.session.scores_to_show):
             score_proxy.svn_ci(commit_message=commit_message, prompt_proceed=False)
         if prompt_proceed:
             self.proceed()
 
     def svn_st(self, prompt_proceed=True):
-        for score_proxy in self.iterate_score_proxies(scores_to_show=self.session.scores_to_show):
+        for score_proxy in self.list_score_proxies(scores_to_show=self.session.scores_to_show):
             score_proxy.svn_st(prompt_proceed=False)
         if prompt_proceed:
             self.proceed()
 
     def svn_up(self, prompt_proceed=True):
-        for score_proxy in self.iterate_score_proxies(scores_to_show=self.session.scores_to_show):
+        for score_proxy in self.list_score_proxies(scores_to_show=self.session.scores_to_show):
             score_proxy.svn_up(prompt_proceed=False)
         if prompt_proceed:
             self.proceed()

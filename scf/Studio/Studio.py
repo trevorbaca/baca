@@ -45,7 +45,7 @@ class Studio(SCFObject):
         while True:
             self.append_breadcrumb('select materials directory')
             menu, section = self.make_new_menu(where=self.where(), is_numbered=True)
-            section.tokens = self.score_wrangler.iterate_score_titles_with_years()
+            section.tokens = self.score_wrangler.list_score_titles_with_years()
             section = menu.make_new_section() 
             section.append(('baca', 'baca materials directory'))
             result = menu.run()
@@ -61,7 +61,7 @@ class Studio(SCFObject):
         self.pop_breadcrumb()
 
     def get_next_score_package_short_name(self):
-        score_package_short_names = list(self.score_wrangler.iterate_score_package_short_names(
+        score_package_short_names = list(self.score_wrangler.list_score_package_short_names(
             scores_to_show=self.session.scores_to_show))
         if self.session.current_score_package_short_name is None:
             return score_package_short_names[0]
@@ -70,7 +70,7 @@ class Studio(SCFObject):
         return score_package_short_names[next_index]
 
     def get_prev_score_package_short_name(self):
-        score_package_short_names = list(self.score_wrangler.iterate_score_package_short_names(
+        score_package_short_names = list(self.score_wrangler.list_score_package_short_names(
             scores_to_show=self.session.scores_to_show))
         if self.session.current_score_package_short_name is None:
             return score_package_short_names[-1]
@@ -110,7 +110,7 @@ class Studio(SCFObject):
             self.session.scores_to_show = 'mothballed'
         elif result == 'svn':
             self.manage_svn()
-        elif result in self.score_wrangler.iterate_score_package_short_names():
+        elif result in self.score_wrangler.list_score_package_short_names():
             self.edit_score_interactively(result)
     
     def handle_svn_menu_result(self, result):
@@ -144,17 +144,17 @@ class Studio(SCFObject):
             return True
         return this_result
 
-    def iterate_interactive_material_proxies(self):
-        for material_proxy in self.iterate_material_proxies():
+    def list_interactive_material_proxies(self):
+        for material_proxy in self.list_material_proxies():
             if material_proxy.is_interactive:
                 yield material_proxy
 
-    def iterate_material_proxies(self, class_names=None):
-        for score_proxy in self.iterate_score_proxies():
-            for material_proxy in score_proxy.iterate_material_proxies():
+    def list_material_proxies(self, class_names=None):
+        for score_proxy in self.list_score_proxies():
+            for material_proxy in score_proxy.list_material_proxies():
                 if class_names is None or material_proxy.get_tag('maker') in class_names:
                     yield material_proxy
-        for material_proxy in self.global_proxy.material_wrangler.iterate_package_proxies():
+        for material_proxy in self.global_proxy.material_wrangler.list_package_proxies():
             yield material_proxy
 
     def make_main_menu(self):
@@ -171,9 +171,9 @@ class Studio(SCFObject):
 
     def make_score_selection_menu(self):
         menu, section = self.make_new_menu(where=self.where(), is_numbered=True, is_keyed=False)
-        score_titles = list(self.score_wrangler.iterate_score_titles_with_years(
+        score_titles = list(self.score_wrangler.list_score_titles_with_years(
             scores_to_show=self.session.scores_to_show))
-        score_package_short_names = list(self.score_wrangler.iterate_score_package_short_names(
+        score_package_short_names = list(self.score_wrangler.list_score_package_short_names(
             scores_to_show=self.session.scores_to_show))
         section.tokens = zip(score_package_short_names, score_titles)
         return menu
@@ -277,7 +277,7 @@ class Studio(SCFObject):
             self.proceed(lines=[line])
 
     def select_interactive_material_proxy(self, klasses=None):
-        material_proxies = list(self.iterate_interactive_material_proxies())
+        material_proxies = list(self.list_interactive_material_proxies())
         menu, section = self.make_new_menu(where=self.where(), is_numbered=True)
         section.tokens = material_proxies
         result = menu.run()

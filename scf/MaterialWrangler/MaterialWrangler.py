@@ -142,14 +142,14 @@ class MaterialWrangler(PackageWrangler, PackageProxy):
             material_proxy.run()
         
     # TODO: change name to self.list_material_package_short_names
-    def iterate_material_summaries(self):
-        for material_proxy in self.iterate_package_proxies():
+    def list_material_summaries(self):
+        for material_proxy in self.list_package_proxies():
             summary = material_proxy.package_short_name
             yield summary
 
     def make_main_menu(self):
         menu, section = self.make_new_menu(where=self.where(), is_numbered=True)
-        section.tokens = list(self.iterate_material_summaries())
+        section.tokens = list(self.list_material_summaries())
         section.return_value_attribute = 'body'
         section = menu.make_new_section()
         section.append(('d', 'make data'))

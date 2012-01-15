@@ -341,7 +341,7 @@ class PackageProxy(DirectoryProxy):
         from baca.scf.ScoreWrangler import ScoreWrangler
         menu, section = self.make_new_menu(where=self.where(), is_numbered=True)
         score_wrangler = ScoreWrangler()
-        section.tokens = score_wrangler.iterate_score_titles_with_years()
+        section.tokens = score_wrangler.list_score_titles_with_years()
         section = menu.make_new_section()
         section.append(('s', 'global to studio'))
         result = menu.run()

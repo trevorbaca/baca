@@ -311,7 +311,7 @@ class ScoreProxy(PackageProxy):
         self.pop_breadcrumb()
 
     def summarize_chunks(self):
-        chunks = list(self.chunk_wrangler.iterate_package_underscored_names())
+        chunks = list(self.chunk_wrangler.list_package_underscored_names())
         lines = []
         if not chunks:
             lines.append('{}Chunks (none yet)'.format(self.make_tab(1)))
@@ -323,7 +323,7 @@ class ScoreProxy(PackageProxy):
         self.conditionally_display_lines(lines)
 
     def summarize_materials(self):
-        materials = list(self.material_wrangler.iterate_package_underscored_names())
+        materials = list(self.material_wrangler.list_package_underscored_names())
         lines = []
         if not materials:
             lines.append('{}Materials (none yet)'.format(self.make_tab(1)))

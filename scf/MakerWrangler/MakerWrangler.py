@@ -44,8 +44,8 @@ class MakerWrangler(PackageWrangler, PackageProxy):
         maker = maker_class()
         return maker
 
-    # replace with wrapped call to PackageWrangler.iterate_package_proxies()
-    def iterate_makers(self):
+    # replace with wrapped call to PackageWrangler.list_package_proxies()
+    def list_makers(self):
         self.unimport_baca_package()
         self.unimport_makers_package()
         command = 'import baca'
@@ -55,7 +55,7 @@ class MakerWrangler(PackageWrangler, PackageProxy):
             exec(command)
             yield result
 
-    # add PackageWrangler.iterate_package_class_names and replace this with it
+    # add PackageWrangler.list_package_class_names and replace this with it
     def list_maker_class_names(self):
         maker_directories = []
         for name in os.listdir(self.directory_name):
@@ -69,7 +69,7 @@ class MakerWrangler(PackageWrangler, PackageProxy):
 
     def list_maker_spaced_class_names(self):
         maker_spaced_class_names = []
-        for maker in self.iterate_makers():
+        for maker in self.list_makers():
             maker_spaced_class_names.append(maker.spaced_class_name)
         return maker_spaced_class_names
 
