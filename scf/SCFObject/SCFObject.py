@@ -51,10 +51,12 @@ class SCFObject(object):
         return helpers
 
     # TODO: write test
+    @property
     def makers_directory_name(self):
         return os.path.join(self.scf_root_directory, 'makers')
 
     # TODO: write test
+    @property
     def makers_package_importable_name(self):
         return '{}.makers'.format(self.scf_package_importable_name)
 

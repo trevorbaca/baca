@@ -9,7 +9,6 @@ class PackageProxy(DirectoryProxy):
 
     def __init__(self, package_importable_name=None, session=None):
         directory_name = self.package_importable_name_to_directory_name(package_importable_name)
-        print 'FFF: {!r}'.format(directory_name)
         DirectoryProxy.__init__(self, directory_name=directory_name, session=session)
         self._package_short_name = None
         self.package_importable_name = package_importable_name
