@@ -1,15 +1,12 @@
-from baca.scf.InteractiveMaterialProxy import InteractiveMaterialProxy
+from baca.scf.MakerProxy import MakerProxy
 from baca.scf.UserInputWrapper import UserInputWrapper
 from baca.scf.editors.InteractiveEditor import InteractiveEditor
-import baca
-import os
 
 
-class ZaggedPitchClassMaker(InteractiveEditor):
+class ZaggedPitchClassMaker(MakerProxy):
 
-    def __init__(self, session=None, target=None, **kwargs):
-        InteractiveEditor.__init__(self, session=session, target=target)
-        self.stylesheet = os.path.join(os.path.dirname(__file__), 'stylesheet.ly')
+    def __init__(self, client_material_package_importable_name, session=None):
+        MakerProxy.__init__(self, client_material_package_importable_name, session=session)
         self._generic_output_name = 'zagged pitch-classes'
 
     ### READ-ONLY PUBLIC ATTRIBUTES ###
