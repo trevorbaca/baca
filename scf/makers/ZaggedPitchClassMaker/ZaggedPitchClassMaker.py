@@ -5,7 +5,7 @@ from baca.scf.editors.InteractiveEditor import InteractiveEditor
 
 class ZaggedPitchClassMaker(MakerProxy):
 
-    def __init__(self, client_material_package_importable_name, session=None):
+    def __init__(self, client_material_package_importable_name=None, session=None):
         MakerProxy.__init__(self, client_material_package_importable_name, session=session)
         self._generic_output_name = 'zagged pitch-classes'
 
