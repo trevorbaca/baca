@@ -3,7 +3,7 @@ from baca.scf.UserInputWrapper import UserInputWrapper
 from baca.scf.editors.InteractiveEditor import InteractiveEditor
 
 
-class ZaggedPitchClassMaker(MaterialProxy):
+class ZaggedPitchClassMaterialProxy(MaterialProxy):
 
     def __init__(self, package_importable_name=None, session=None):
         MaterialProxy.__init__(self, package_importable_name, session=session)
@@ -15,7 +15,7 @@ class ZaggedPitchClassMaker(MaterialProxy):
         'from abjad.tools.sequencetools.CyclicTree import CyclicTree',]
 
     user_input_import_statements = [
-        'from baca.scf.materialproxies import ZaggedPitchClassMaker',
+        'from baca.scf.materialproxies import ZaggedPitchClassMaterialProxy',
         'from baca.scf import UserInputWrapper',]
 
     user_input_template = UserInputWrapper([

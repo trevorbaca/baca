@@ -4,7 +4,7 @@ from baca.scf.MaterialProxy import MaterialProxy
 from baca.scf.UserInputWrapper import UserInputWrapper
 
 
-class SargassoMeasureMaker(MaterialProxy):
+class SargassoMeasureMaterialProxy(MaterialProxy):
 
     def __init__(self, package_importable_name=None, session=None):
         MaterialProxy.__init__(self, package_importable_name=package_importable_name, session=session)
@@ -19,7 +19,7 @@ class SargassoMeasureMaker(MaterialProxy):
     # TODO: keep this name
     user_input_import_statements = [
         'from abjad.tools.durationtools import Duration',
-        'from baca.scf.materialproxies import SargassoMeasureMaker',
+        'from baca.scf.materialproxies import SargassoMeasureMaterialProxy',
         'from baca.scf import UserInputWrapper',]
 
     # TODO: rename user_input_demo_values
