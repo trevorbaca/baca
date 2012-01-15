@@ -27,6 +27,7 @@ class MakerWrangler(PackageWrangler, PackageProxy):
 
     ### READ / WRITE PUBLIC ATTRIBUTES ###
 
+    # TODO: make this read-only
     @apply
     def directory_name():
         def fget(self):

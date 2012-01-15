@@ -327,6 +327,7 @@ class MaterialProxy(PackageProxy):
 
     ### READ / WRITE PUBLIC ATTRIBUTES ##
 
+    # TODO: make this read-only
     @apply
     def material_underscored_name():
         def fget(self):
@@ -426,6 +427,9 @@ class MaterialProxy(PackageProxy):
                 line = 'output PDF deleted.'
                 self.proceed(lines=[line])
 
+    def display_user_input(self):
+        self.print_not_implemented()
+
     def edit_material_definition_module(self):
         os.system('vi + {}'.format(self.material_definition_file_name))
 
@@ -523,8 +527,12 @@ class MaterialProxy(PackageProxy):
 
     def handle_main_menu_result(self, result):
         assert isinstance(result, str)
-        if result == 'k':
-            self.reload_user_input()
+#        if result == 'k':
+#            self.reload_user_input()
+        if result == 'uid':
+            self.display_user_input()    
+        elif result == 'uis':
+            self.write_stub_user_input_module_to_disk()
         elif result == 'mdd':
             self.delete_material_definition_module()
         elif result == 'mde':
@@ -635,8 +643,12 @@ class MaterialProxy(PackageProxy):
     def make_main_menu_for_material_made_with_editor(self):
         menu, hidden_section = self.make_new_menu(where=self.where(), is_hidden=True)
         section = menu.make_new_section()
-        if self.has_editor:
-            section.append(('er', 'editor - run'))
+#        if self.has_editor:
+#            section.append(('er', 'editor - run'))
+        if self.has_user_input_module:
+            section.append(('uid', 'user input - display'))
+        else:
+            section.append(('uis', 'user input - write stub'))
         return menu, hidden_section
 
     def make_main_menu_for_material_made_by_hand(self):
