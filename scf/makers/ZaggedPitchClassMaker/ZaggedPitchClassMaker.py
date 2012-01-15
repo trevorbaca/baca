@@ -1,12 +1,12 @@
-from baca.scf.MakerProxy import MakerProxy
+from baca.scf.MaterialProxy import MaterialProxy
 from baca.scf.UserInputWrapper import UserInputWrapper
 from baca.scf.editors.InteractiveEditor import InteractiveEditor
 
 
-class ZaggedPitchClassMaker(MakerProxy):
+class ZaggedPitchClassMaker(MaterialProxy):
 
-    def __init__(self, client_material_package_importable_name=None, session=None):
-        MakerProxy.__init__(self, client_material_package_importable_name, session=session)
+    def __init__(self, package_importable_name=None, session=None):
+        MaterialProxy.__init__(self, package_importable_name, session=session)
         self._generic_output_name = 'zagged pitch-classes'
 
     ### READ-ONLY PUBLIC ATTRIBUTES ###

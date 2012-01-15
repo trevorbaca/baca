@@ -1,13 +1,13 @@
 from abjad.tools import durationtools
 from abjad.tools import measuretools
-from baca.scf.MakerProxy import MakerProxy
+from baca.scf.MaterialProxy import MaterialProxy
 from baca.scf.UserInputWrapper import UserInputWrapper
 
 
-class SargassoMeasureMaker(MakerProxy):
+class SargassoMeasureMaker(MaterialProxy):
 
-    def __init__(self, client_material_package_importable_name=None, session=None):
-        MakerProxy.__init__(self, client_material_package_importable_name, session=session)
+    def __init__(self, package_importable_name=None, session=None):
+        MaterialProxy.__init__(self, package_importable_name=package_importable_name, session=session)
         self._generic_output_name = 'sargasso measures'
 
     ### READ-ONLY PUBLIC ATTRIBUTES ###

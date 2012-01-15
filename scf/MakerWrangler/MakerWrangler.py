@@ -6,7 +6,6 @@ from baca.scf.PackageWrangler import PackageWrangler
 import os
 
 
-# TODO: implement MakerProxy and then refactor MakerWrangler in terms of MakerProxy
 class MakerWrangler(PackageWrangler, PackageProxy):
 
     def __init__(self, session=None):
@@ -106,16 +105,15 @@ class MakerWrangler(PackageWrangler, PackageProxy):
         class_file = file(class_file_name, 'w')
         lines = []
         lines.append('from abjad.tools import lilypondfiletools')
-        lines.append('from baca.scf.MakerProxy import MakerProxy')
+        lines.append('from baca.scf.MaterialProxy import MaterialProxy')
         lines.append('from baca.scf.UserInputWrapper import UserInputWrapper')
         lines.append('import os')
         lines.append('')
         lines.append('')
-        lines.append('class {}(MakerProxy):'.format(maker_name))
+        lines.append('class {}(MaterialProxy):'.format(maker_name))
         lines.append('')
         lines.append('    def __init__(self, **kwargs):')
-        lines.append('        MakerProxy.__init__(self, **kwargs)')
-        lines.append("        self.stylesheet = os.path.join(os.path.dirname(__file__), 'stylesheet.ly')")
+        lines.append('        MaterialProxy.__init__(self, **kwargs)')
         lines.append("        self._generic_output_name = {!r}".format(generic_output_name))
         lines.append('')
         lines.append('    ### READ-ONLY PUBLIC ATTRIBUTES ###')
