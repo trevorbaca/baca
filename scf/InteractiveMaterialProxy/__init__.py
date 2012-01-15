@@ -1,1 +1,0 @@
-from InteractiveMaterialProxy import InteractiveMaterialProxy
