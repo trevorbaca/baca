@@ -1,1 +1,0 @@
-from StaticMaterialProxy import StaticMaterialProxy

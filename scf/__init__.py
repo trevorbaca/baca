@@ -19,7 +19,6 @@ from ScoreProxy import ScoreProxy
 from ScoreTemplate import ScoreTemplate
 from ScoreWrangler import ScoreWrangler
 from Session import Session
-from StaticMaterialProxy import StaticMaterialProxy
 from Studio import Studio
 from StylesheetProxy import StylesheetProxy
 from StylesheetWrangler import StylesheetWrangler
