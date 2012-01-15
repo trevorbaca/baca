@@ -659,7 +659,6 @@ class MaterialProxy(PackageProxy):
             hidden_section.append(('mdt', 'material definition - stub'))
             hidden_section.append(('mdxi', 'material definition - execute & inspect'))
         elif self.editor_class_name is None:
-            print 'ZZZ: {!r}'.format(self.editor_class_name)
             section.append(('mdt', 'material definition - stub'))
 
     def make_main_menu_section_for_output_data(self, main_menu, hidden_section):

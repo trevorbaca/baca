@@ -33,6 +33,13 @@ class MaterialWrangler(PackageWrangler, PackageProxy):
     @property
     def maker_wrangler(self):
         return self._maker_wrangler
+    
+    @property
+    def material_package_short_names(self):
+        result = []
+        for material_proxy in self.list_package_proxies():
+            result.append(material_proxy.package_short_name)
+        return result
 
     ### READ / WRITE PUBLIC ATTRIBUTES ###
 
@@ -143,15 +150,9 @@ class MaterialWrangler(PackageWrangler, PackageProxy):
             material_proxy = self.make_material_proxy(result)
             material_proxy.run()
         
-    # TODO: change name to self.list_material_package_short_names
-    def list_material_summaries(self):
-        for material_proxy in self.list_package_proxies():
-            summary = material_proxy.package_short_name
-            yield summary
-
     def make_main_menu(self):
         menu, section = self.make_new_menu(where=self.where(), is_numbered=True)
-        section.tokens = list(self.list_material_summaries())
+        section.tokens = self.material_package_short_names
         section.return_value_attribute = 'body'
         section = menu.make_new_section()
         section.append(('d', 'make data'))
