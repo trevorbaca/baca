@@ -2,6 +2,7 @@ from abjad.tools import iotools
 from baca.scf.MaterialProxy import MaterialProxy
 from baca.scf.PackageProxy import PackageProxy
 from baca.scf.PackageWrangler import PackageWrangler
+import collections
 import os
 
 
@@ -88,15 +89,16 @@ class MaterialWrangler(PackageWrangler, PackageProxy):
             return False
         os.mkdir(directory_name)
         material_proxy = MaterialProxy(material_package_importable_name, session=self.session)
-        material_proxy.write_stub_initializer_to_disk()
+        tags = collections.OrderedDict([])
+        tags['editor_class_name'] = editor_class_name
+        tags['has_illustration'] = has_illustration
+        material_proxy.write_stub_initializer_to_disk(tags=tags)
         if editor_class_name is None:
             if has_illustration:
                 material_proxy.write_stub_music_material_definition_to_disk()
                 material_proxy.write_stub_score_builder_to_disk(prompt_proceed=False)
             else:
                 material_proxy.write_stub_data_material_definition_to_disk()
-        material_proxy.add_tag('editor_class_name', editor_class_name)
-        material_proxy.add_tag('has_illustration', has_illustration)
         if prompt_proceed:
             line = 'material package {!r} created.'.format(material_package_importable_name)
             self.proceed(lines=[line])

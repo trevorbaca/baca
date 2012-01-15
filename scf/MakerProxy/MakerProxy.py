@@ -34,11 +34,9 @@ class MakerProxy(PackageProxy):
 
     def create_user_input(self):
         self.print_not_implemented()
-        self.proceed()
 
     def display_user_input(self):
         self.print_not_implemented()
-        self.proceed()
 
     def handle_main_menu_result(self, result):
         if result == 'ind':

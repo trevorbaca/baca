@@ -367,9 +367,9 @@ class PackageProxy(DirectoryProxy):
         initializer.close()
 
     # TODO: write test
-    def write_stub_initializer_to_disk(self):
+    def write_stub_initializer_to_disk(self, tags=None):
         initializer_import_statements = ['from collections import OrderedDict\n']
-        initializer_tag_lines = ['tags = OrderedDict([])\n']
+        initializer_tag_lines = self.pprint_tags(tags)
         self.write_initializer_to_disk(initializer_import_statements, initializer_tag_lines)
 
     # TODO: write test
