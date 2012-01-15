@@ -15,6 +15,8 @@ class MaterialProxy(PackageProxy):
 
     def __init__(self, package_importable_name=None, session=None):
         PackageProxy.__init__(self, package_importable_name, session=session)
+        self._generic_output_name = None
+        self._recommended_stylesheet_file_name = None
 
     ### READ-ONLY PUBLIC ATTRIBUTES ###
 
@@ -38,6 +40,10 @@ class MaterialProxy(PackageProxy):
     @property
     def editor_class_name(self):
         return self.get_tag('editor_class_name')
+
+    @property
+    def generic_output_name(self):
+        return self._generic_output_name
 
     @property
     def has_editor(self):
@@ -262,6 +268,10 @@ class MaterialProxy(PackageProxy):
     def output_pdf_file_name(self):
         if self.directory_name is not None:
             return os.path.join(self.directory_name, 'output.pdf')
+
+    @property
+    def recommended_stylesheet_file_name(self):
+        return self._recommended_stylesheet_file_name
 
     @property
     def score_builder_file_name(self):
