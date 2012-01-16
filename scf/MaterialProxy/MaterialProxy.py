@@ -1,5 +1,6 @@
 from abjad.tools import iotools
 from abjad.tools import markuptools
+from abjad.tools import mathtools
 from baca.scf.MaterialProxyWrangler import MaterialProxyWrangler
 from baca.scf.PackageProxy import PackageProxy
 from baca.scf.StylesheetProxy import StylesheetProxy
@@ -449,16 +450,25 @@ class MaterialProxy(PackageProxy):
         stylesheet_proxy.vi_stylesheet()
 
     def edit_user_input_at_number(self, number):
-        if self.user_input is None:
+        print 'AAA: {!r}'.format(type(self))
+        if self.user_input_wrapper is None:
             return
         user_input_wrapper = self.user_input_wrapper
         if len(user_input_wrapper) < number:
             return
         index = number - 1
-        current_value = user_input_wrapper[index]
+        key, current_value = user_input_wrapper.list_items[index]
+        #test = self.user_input_tests[index][1]
+        #default = self.user_input_demo_values[index][1]
+        test = type(self).user_input_tests[index][1]
+        default = type(self).user_input_demo_values[index][1]
         getter = self.make_new_getter()
+        spaced_attribute_name = key.replace('_', ' ')
+        message = "value for '{}' must satisfy " + 'foo' + '.'
+        getter.append_something(spaced_attribute_name, message, default=default)
+        getter.tests.append(test)
         
-        
+
 
     # TODO: reimplement with getter and backtracking
     def get_package_short_name_of_new_material_interactively(self):
@@ -610,7 +620,7 @@ class MaterialProxy(PackageProxy):
         elif result == 'ls':
             self.list_directory()
         elif mathtools.is_integer_equivalent_expr(result):
-            self.edit_user_input_at_number_interactively(result)
+            self.edit_user_input_at_number(int(result))
         else:
             raise ValueError
 
@@ -650,6 +660,7 @@ class MaterialProxy(PackageProxy):
         menu, hidden_section = self.make_new_menu(where=self.where(), is_hidden=True)
         section = menu.make_new_section(is_numbered=True)
         section.tokens = self.formatted_user_input_lines
+        section.return_value_attribute = 'number'
         section = menu.make_new_section()
         section.append(('uic', 'user input - clear'))
         return menu, hidden_section

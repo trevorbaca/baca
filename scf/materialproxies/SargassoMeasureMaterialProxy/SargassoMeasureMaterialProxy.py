@@ -17,23 +17,25 @@ class SargassoMeasureMaterialProxy(MaterialProxy):
     output_data_module_import_statements = [
         'from abjad.tools.measuretools.Measure import Measure',]
             
-    user_input_demo_values = UserInputWrapper([
-        ('measure_denominator', 4),
+    @property
+    def user_input_demo_values(self):
+        return [('measure_denominator', 4),
         ('measure_numerator_talea', [2, 2, 2, 2, 1, 1, 4, 4]),
         ('measure_division_denominator', 16),
         ('measure_division_talea', [1, 1, 2, 3, 1, 2, 3, 4, 1, 1, 1, 1, 4]),
         ('total_duration', durationtools.Duration(44, 8)),
         ('measures_are_scaled', True),
         ('measures_are_split', True),
-        ('measures_are_shuffled', True),])
+        ('measures_are_shuffled', True),]
 
     user_input_module_import_statements = [
         'from abjad.tools.durationtools import Duration',
         'from baca.scf.materialproxies import SargassoMeasureMaterialProxy',
         'from baca.scf import UserInputWrapper',]
 
-    user_input_tests = [
-        ('measure_denominator', mathtools.is_nonnegative_integer_power_of_two),
+    @property
+    def user_input_tests(self):
+        return [('measure_denominator', mathtools.is_nonnegative_integer_power_of_two),
         ('measure_numerator_talea', sequencetools.all_are_nonnegative_integers),
         ('measure_division_denominator', mathtools.is_nonnegative_integer_power_of_two),
         ('measure_division_talea', sequencetools.all_are_nonnegative_integers),
