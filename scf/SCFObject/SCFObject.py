@@ -14,7 +14,7 @@ import readline
 class SCFObject(object):
     
     def __init__(self, session=None):
-        self.session = session
+        self._session = session or Session()
 
     ### OVERLOADS ###
 
@@ -71,6 +71,10 @@ class SCFObject(object):
         return os.path.join('/', 'Users', 'trevorbaca', 'Documents', 'other', 'baca', 'scf')
 
     @property
+    def session(self):
+        return self._session
+
+    @property
     def spaced_class_name(self):
         return iotools.uppercamelcase_to_space_delimited_lowercase(self.class_name)
 
@@ -105,18 +109,6 @@ class SCFObject(object):
             return self.session.preserve_backtracking
         def fset(self, preserve_backtracking):
             self.session.preserve_backtracking = preserve_backtracking
-        return property(**locals())
-
-    @apply
-    def session():
-        def fget(self):
-            return self._session
-        def fset(self, session):
-            if session is None:
-                self._session = Session()
-            else:
-                assert isinstance(session, type(Session()))
-                self._session = session
         return property(**locals())
 
     ### PUBLIC METHODS ###
