@@ -12,7 +12,6 @@ class PackageProxy(DirectoryProxy):
         DirectoryProxy.__init__(self, directory_name=directory_name, session=session)
         self._package_short_name = None
         self._package_importable_name = package_importable_name
-        self._purview = None
 
     ### OVERLOADS ###
 
@@ -66,39 +65,35 @@ class PackageProxy(DirectoryProxy):
             if result:
                 return result
 
+    # TODO: write test
+    @property
+    def purview(self):
+        import baca
+        if self.score_package_short_name is None:
+            return baca.scf.GlobalProxy()
+        else:
+            return baca.scf.ScoreProxy(self.score_package_short_name)
+
+    # TODO: write test
     @property
     def purview_name(self):
-        if self.score is not None:
-            return self.score.title
+        if self.score_package_short_name is None:
+            return 'baca'
         else:
-            return 'studio'
+            return self.score_package_short_name
 
+    # TODO: write test
     @property
     def score(self):
         import baca
-        if isinstance(self.purview, baca.scf.ScoreProxy):
-            return self.purview
+        if self.score_package_short_name is not None:
+            return baca.scf.ScoreProxy(self.score_package_short_name)
 
-    ### READ / WRITE PUBLIC ATTRIBUTES ###
-
-    # TODO: maybe this should be read-only?
-    @apply
-    def purview():
-        def fget(self):
-            if self._purview is not None:
-                return self._purview
-            else:
-                return self.package_importable_name_to_purview(self.package_importable_name)
-        def fset(self, purview):
-            if self.package_importable_name is None:
-                self._purview = purview
-            else:
-                raise ValueError('package importable name already assigned.')
-        return property(**locals())
-
-#    @property
-#    def purview(self):
-#        return self._purview
+    # TODO: write test
+    @property
+    def score_package_short_name(self):
+        if not self.package_importable_name.startswith('baca'):
+            return self.package_importable_name.split('.')[0]
 
     ### PUBLIC METHODS ###
 

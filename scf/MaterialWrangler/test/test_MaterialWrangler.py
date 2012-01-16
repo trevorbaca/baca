@@ -8,8 +8,6 @@ def test_MaterialWrangler_01():
 
     material_wrangler = baca.scf.MaterialWrangler('baca')
 
-    assert material_wrangler.purview.is_studio_global_purview
-    
     material_proxy = material_wrangler.get_package_proxy('baca.materials.sargasso_multipliers')
     assert isinstance(material_proxy, baca.scf.materialproxies.MaterialProxy)
 
@@ -38,8 +36,6 @@ def test_MaterialWrangler_02():
 
     material_wrangler = baca.scf.MaterialWrangler('manos')
 
-    assert material_wrangler.purview.is_score_local_purview
-    
     material_proxy = material_wrangler.get_package_proxy('baca.materials.sargasso_multipliers')
     assert isinstance(material_proxy, baca.scf.materialproxies.MaterialProxy)
 

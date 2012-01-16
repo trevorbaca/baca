@@ -223,8 +223,11 @@ class MaterialProxy(PackageProxy):
 
     @property
     def materials_package_importable_name(self):
-        if self.purview is not None:
-            return self.purview.materials_package_importable_name
+        result = self.package_importable_name
+        result = result.split('.')
+        result = result[:-1]
+        result = '.'.join(result)
+        return result
 
     @property
     def output_data_file_name(self): 

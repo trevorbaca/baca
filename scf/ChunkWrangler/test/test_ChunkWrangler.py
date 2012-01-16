@@ -15,8 +15,6 @@ def test_ChunkWrangler_01():
     assert chunk_wrangler.package_importable_name == 'manos.mus.chunks'
     assert chunk_wrangler.package_short_name == 'chunks'
     assert chunk_wrangler.package_spaced_name == 'chunks'
-    assert chunk_wrangler.purview == baca.scf.ScoreProxy('manos')
-    assert chunk_wrangler.purview.is_score_local_purview
     assert chunk_wrangler.score == baca.scf.ScoreProxy('manos')
     assert chunk_wrangler.source_file_name == '/Users/trevorbaca/Documents/other/baca/scf/ChunkWrangler/ChunkWrangler.py'
     assert chunk_wrangler.spaced_class_name == 'chunk wrangler'

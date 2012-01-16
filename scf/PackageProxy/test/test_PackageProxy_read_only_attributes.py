@@ -19,5 +19,4 @@ def test_PackageProxy_read_only_attributes_01():
     assert package_proxy.parent_initializer_file_name == \
         '/Users/trevorbaca/Documents/other/baca/materials/__init__.py'
     assert package_proxy.parent_package_importable_name == 'baca.materials'
-    assert package_proxy.purview.is_studio_global_purview
     assert package_proxy.score is None

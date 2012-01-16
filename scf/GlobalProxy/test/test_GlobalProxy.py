@@ -12,8 +12,6 @@ def test_GlobalProxy_01():
     assert global_proxy.get_tag('foo') is None
     assert global_proxy.get_tags() == {}
     assert global_proxy.initializer_file_name == '/Users/trevorbaca/Documents/other/baca/__init__.py'
-    assert not global_proxy.is_score_local_purview
-    assert global_proxy.is_studio_global_purview
     assert global_proxy.list_formatted_tags() == []
     assert global_proxy.material_proxy_wrangler == baca.scf.materialproxies.MaterialProxyWrangler()
     assert global_proxy.material_wrangler == baca.scf.MaterialWrangler('baca')
@@ -23,7 +21,6 @@ def test_GlobalProxy_01():
     assert global_proxy.package_spaced_name == 'baca'
     assert global_proxy.parent_initializer_file_name is None
     assert global_proxy.parent_package_importable_name is None
-    assert global_proxy.purview == global_proxy
     assert global_proxy.score is None
     assert global_proxy.source_file_name == \
         '/Users/trevorbaca/Documents/other/baca/scf/GlobalProxy/GlobalProxy.py'
