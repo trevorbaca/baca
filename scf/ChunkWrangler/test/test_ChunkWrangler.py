@@ -9,7 +9,6 @@ def test_ChunkWrangler_01():
     chunk_wrangler = baca.scf.ChunkWrangler('manos')
     assert chunk_wrangler.class_name == 'ChunkWrangler'
     assert chunk_wrangler.directory_name == '/Users/trevorbaca/Documents/scores/manos/mus/chunks'
-    assert chunk_wrangler.has_directory
     assert chunk_wrangler.has_initializer
     assert chunk_wrangler.initializer_file_name == \
         '/Users/trevorbaca/Documents/scores/manos/mus/chunks/__init__.py'

@@ -32,19 +32,17 @@ class DirectoryProxy(SCFObject):
     def directory_name(self):
         return self._directory_name
 
-    # TODO: remove
-    @property
-    def has_directory(self):
-        if self.directory_name is not None:
-            return os.path.exists(self.directory_name)
-        else:
-            return False
+#    # TODO: remove
+#    @property
+#    def has_directory(self):
+#        if self.directory_name is not None:
+#            return os.path.exists(self.directory_name)
+#        else:
+#            return False
 
     @property
     def is_in_repository(self):
         if self.directory_name is None:
-            return False
-        if not self.has_directory:
             return False
         command = 'svn st {}'.format(self.directory_name)
         proc = subprocess.Popen(command, shell=True, stdout=subprocess.PIPE)

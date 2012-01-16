@@ -9,7 +9,6 @@ def test_PackageProxy_read_only_attributes_01():
     assert package_proxy.directory_name == '/Users/trevorbaca/Documents/other/baca/materials/test_material_a'
     assert package_proxy.get_tag('foo') is None
     assert package_proxy.get_tags() == {}
-    assert package_proxy.has_directory
     assert package_proxy.initializer_file_name == \
         '/Users/trevorbaca/Documents/other/baca/materials/test_material_a/__init__.py'
     #assert package_proxy.is_in_repository

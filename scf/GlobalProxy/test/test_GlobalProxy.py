@@ -11,7 +11,6 @@ def test_GlobalProxy_01():
     assert global_proxy.directory_name == '/Users/trevorbaca/Documents/other/baca'
     assert global_proxy.get_tag('foo') is None
     assert global_proxy.get_tags() == {}
-    assert global_proxy.has_directory
     assert global_proxy.initializer_file_name == '/Users/trevorbaca/Documents/other/baca/__init__.py'
     assert not global_proxy.is_score_local_purview
     assert global_proxy.is_studio_global_purview
