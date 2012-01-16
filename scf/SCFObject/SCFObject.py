@@ -72,9 +72,7 @@ class SCFObject(object):
 
     @property
     def spaced_class_name(self):
-        spaced_class_name = iotools.uppercamelcase_to_underscore_delimited_lowercase(self.class_name)
-        spaced_class_name = spaced_class_name.replace('_', ' ')
-        return spaced_class_name
+        return iotools.uppercamelcase_to_space_delimited_lowercase(self.class_name)
 
     @property
     def source_file_name(self):

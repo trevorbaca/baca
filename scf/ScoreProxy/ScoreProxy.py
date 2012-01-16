@@ -323,7 +323,7 @@ class ScoreProxy(PackageProxy):
         self.conditionally_display_lines(lines)
 
     def summarize_materials(self):
-        materials = list(self.material_wrangler.list_package_underscored_names())
+        materials = list(self.material_wrangler.list_package_spaced_names())
         lines = []
         if not materials:
             lines.append('{}Materials (none yet)'.format(self.make_tab(1)))
@@ -332,5 +332,5 @@ class ScoreProxy(PackageProxy):
         if materials:
             lines.append('')
         for i, material in enumerate(materials):
-            lines.append('{}({}) {}'.format(self.make_tab(1), i + 1, material.replace('_', ' ')))
+            lines.append('{}({}) {}'.format(self.make_tab(1), i + 1, material))
         self.conditionally_display_lines(lines)

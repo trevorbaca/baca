@@ -49,7 +49,7 @@ class MaterialProxyWrangler(PackageWrangler, PackageProxy):
     def list_material_proxy_spaced_class_names(self):
         result = []
         for package_short_name in self.list_package_short_names():
-            spaced_class_name = iotools.uppercamelcase_to_underscore_delimited_lowercase(package_short_name)
+            spaced_class_name = iotools.uppercamelcase_to_space_delimited_lowercase(package_short_name)
             result.append(spaced_class_name)
         return result
 
@@ -167,7 +167,7 @@ class MaterialProxyWrangler(PackageWrangler, PackageProxy):
         menu, section = self.make_new_menu(where=self.where(), is_numbered=True)
         section.tokens = self.list_material_proxy_spaced_class_names()
         while True:
-            self.append_breadcrumb('select editor')
+            self.append_breadcrumb('select material proxy:')
             result = menu.run(should_clear_terminal=should_clear_terminal)
             if self.backtrack():
                 self.pop_breadcrumb()
