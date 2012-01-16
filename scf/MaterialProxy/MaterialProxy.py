@@ -844,7 +844,7 @@ class MaterialProxy(PackageProxy):
     def select_editor_interactively(self, prompt_proceed=True):
         material_proxy_wrangler = MaterialProxyWrangler(session=self.session)
         self.preserve_backtracking = True
-        editor = material_proxy_wrangler.select_material_proxy_interactively()
+        editor = material_proxy_wrangler.select_material_proxy_class_name_interactively()
         self.preserve_backtracking = False
         if self.backtrack():
             return

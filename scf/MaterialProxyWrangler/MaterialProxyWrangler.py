@@ -21,27 +21,22 @@ class MaterialProxyWrangler(PackageWrangler, PackageProxy):
 
     ### PUBLIC METHODS ###
 
-    # TODO: demand material_package_importable_name here
-    #def get_material_proxy(self, material_proxy_package_short_name, material_package_importable_name):
-    def get_material_proxy(self, material_proxy_package_short_name):
+    # TODO: write test
+    def get_material_proxy(self, material_proxy_package_short_name, material_package_importable_name):
         command = 'from baca.scf.materialproxies import {} as material_proxy_class'.format(
             material_proxy_package_short_name)
         exec(command)
-        material_proxy = material_proxy_class(session=self.session)
-        #material_proxy = material_proxy_class(
-        #    material_package_importable_name=material_package_importable_name, session=self.session)
+        material_proxy = material_proxy_class(
+            material_package_importable_name=material_package_importable_name, session=self.session)
         return material_proxy
 
     def handle_main_menu_result(self, result):
         if result == 'new':
             self.make_material_proxy()
         else:
-            material_proxy_name = value
-            material_proxy_name = iotools.space_delimited_lowercase_to_uppercamelcase(
-                material_proxy_name)
-            material_proxy = self.get_material_proxy(material_proxy_name)
-            material_proxy.run()
+            raise ValueError
 
+    # TODO: write test
     def list_material_proxy_class_names(self):
         self.list_package_short_names()
 
@@ -162,7 +157,7 @@ class MaterialProxyWrangler(PackageWrangler, PackageProxy):
         self.pop_breadcrumb()
 
     # TODO: write test
-    def select_material_proxy_interactively(self, should_clear_terminal=True):
+    def select_material_proxy_class_name_interactively(self, should_clear_terminal=True):
         menu, section = self.make_new_menu(where=self.where(), is_numbered=True)
         section.tokens = self.list_material_proxy_spaced_class_names()
         while True:
@@ -178,8 +173,7 @@ class MaterialProxyWrangler(PackageWrangler, PackageProxy):
                 self.pop_breadcrumb()
                 break
         material_proxy_name = iotools.space_delimited_lowercase_to_uppercamelcase(material_proxy_name) 
-        material_proxy = self.get_material_proxy(material_proxy_name)
-        return material_proxy
+        return material_proxy_name
 
     def unimport_materialproxies_package(self):
         self.remove_package_importable_name_from_sys_modules(self.package_importable_name)

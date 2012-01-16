@@ -67,7 +67,8 @@ class MaterialWrangler(PackageWrangler, PackageProxy):
         material_package_importable_name = self.get_new_material_package_importable_name_interactively()
         breadcrumbs = self.session.breadcrumbs[:]
         self.session.breadcrumbs[:] = []
-        editor = self.material_proxy_wrangler.select_material_proxy_interactively(should_clear_terminal=False)
+        editor = self.material_proxy_wrangler.select_material_proxy_class_name_interactively(
+            should_clear_terminal=False)
         self.session.breadcrumbs = breadcrumbs[:]
         editor_class_name = editor.class_name
         # TODO: set following attribute by editor automatically
