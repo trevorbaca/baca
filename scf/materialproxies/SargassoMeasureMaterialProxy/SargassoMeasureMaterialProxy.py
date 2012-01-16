@@ -1,6 +1,6 @@
 from abjad.tools import durationtools
 from abjad.tools import measuretools
-from baca.scf.materialproxies.MaterialProxy import MaterialProxy
+from baca.scf.MaterialProxy import MaterialProxy
 from baca.scf.UserInputWrapper import UserInputWrapper
 
 

@@ -31,7 +31,7 @@ def test_MaterialProxy_run_screenscrapes_02():
     '''Score material run independently.
     '''
 
-    material_proxy = baca.scf.materialproxies.MaterialProxy('manos.mus.materials.black_pcs')
+    material_proxy = baca.scf.MaterialProxy('manos.mus.materials.black_pcs')
     material_proxy.run('q')
 
     assert material_proxy.transcript[-2] == \

@@ -1,4 +1,4 @@
-from baca.scf.materialproxies.MaterialProxy import MaterialProxy
+from baca.scf.MaterialProxy import MaterialProxy
 from baca.scf.UserInputWrapper import UserInputWrapper
 from baca.scf.editors.InteractiveEditor import InteractiveEditor
 

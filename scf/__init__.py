@@ -7,6 +7,8 @@ from EtcProxy import EtcProxy
 from ExgProxy import ExgProxy
 from FileProxy import FileProxy
 from GlobalProxy import GlobalProxy
+from MaterialProxy import MaterialProxy
+from MaterialProxyWrangler import MaterialProxyWrangler
 from MaterialWrangler import MaterialWrangler
 from MusProxy import MusProxy
 from PackageProxy import PackageProxy

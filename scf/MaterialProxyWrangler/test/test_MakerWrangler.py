@@ -5,7 +5,7 @@ def test_MaterialProxyWrangler_01():
     '''Attributes.
     '''
 
-    material_proxy_wrangler = baca.scf.materialproxies.MaterialProxyWrangler()
+    material_proxy_wrangler = baca.scf.MaterialProxyWrangler()
 
     assert material_proxy_wrangler.class_name == 'MaterialProxyWrangler'
     assert material_proxy_wrangler.directory_name == \
@@ -18,7 +18,7 @@ def test_MaterialProxyWrangler_01():
     assert material_proxy_wrangler.package_spaced_name == 'materialproxies'
     assert material_proxy_wrangler.score is None
     assert material_proxy_wrangler.source_file_name == \
-        '/Users/trevorbaca/Documents/other/baca/scf/materialproxies/MaterialProxyWrangler/MaterialProxyWrangler.py'
+        '/Users/trevorbaca/Documents/other/baca/scf/MaterialProxyWrangler/MaterialProxyWrangler.py'
     assert material_proxy_wrangler.spaced_class_name == 'material proxy wrangler'
 
 
@@ -26,4 +26,4 @@ def test_MaterialProxyWrangler_02():
     '''Iteration.
     '''
 
-    material_proxy_wrangler = baca.scf.materialproxies.MaterialProxyWrangler()
+    material_proxy_wrangler = baca.scf.MaterialProxyWrangler()
