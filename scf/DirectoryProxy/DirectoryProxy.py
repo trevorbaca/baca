@@ -24,13 +24,13 @@ class DirectoryProxy(SCFObject):
         return not self == other
 
     def __repr__(self):
-#        if self.directory_name is not None:
-#            return '{}({!r})'.format(self.class_name, self.directory_name)
-#        else:
-#            return '{}()'.format(self.class_name)
         return '{}({!r})'.format(self.class_name, self.directory_name)
 
     ### READ-ONLY PUBLIC ATTRIBUTES ###
+
+    @property
+    def directory_name(self):
+        return self._directory_name
 
     # TODO: remove
     @property
@@ -84,18 +84,6 @@ class DirectoryProxy(SCFObject):
             self.conditionally_display_lines(lines)
             return True
         return False
-
-    ### READ / WRITE PUBLIC ATTRIBUTES ###
-
-    # TODO: make read-only
-    @apply
-    def directory_name():
-        def fget(self):
-            return self._directory_name
-        def fset(self, directory_name):
-            assert isinstance(directory_name, (str, type(None)))
-            self._directory_name = directory_name
-        return property(**locals())
 
     ### PUBLIC METHODS ###
 
