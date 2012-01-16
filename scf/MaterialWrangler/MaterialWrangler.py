@@ -177,11 +177,8 @@ class MaterialWrangler(PackageWrangler, PackageProxy):
 
     # TODO: write test
     def material_package_exists(self, material_package_importable_name):
-        try:
-            MaterialProxy(material_package_importable_name)
-            return True
-        except:
-            return False
+        return os.path.exists(self.package_importable_name_to_directory_name(
+            material_package_importable_name))
 
     # TODO: write tests
     def purview_name_to_materials_package_importable_name(self, purview_name):
