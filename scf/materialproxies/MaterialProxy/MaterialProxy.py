@@ -145,22 +145,8 @@ class MaterialProxy(PackageProxy):
         return not self.has_illustration
 
     @property
-    def is_in_score(self):
-        if self.purview is None:
-            return False
-        else:
-            return not self.is_shared        
-
-    @property
     def is_interactive(self):
         return bool(self.has_tag('material_proxy'))
-
-    @property
-    def is_shared(self):
-        if self.purview is None:
-            return False
-        else:
-            return self.purview.is_studio_global_purview
 
     @property
     def is_static(self):
