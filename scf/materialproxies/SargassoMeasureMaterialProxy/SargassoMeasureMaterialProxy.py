@@ -1,5 +1,7 @@
 from abjad.tools import durationtools
+from abjad.tools import mathtools
 from abjad.tools import measuretools
+from abjad.tools import sequencetools
 from baca.scf.MaterialProxy import MaterialProxy
 from baca.scf.UserInputWrapper import UserInputWrapper
 
@@ -12,18 +14,10 @@ class SargassoMeasureMaterialProxy(MaterialProxy):
 
     ### READ-ONLY PUBLIC ATTRIBUTES ###
 
-    # TODO: rename output_data_module_import_statements
-    output_file_import_statements = [
+    output_data_module_import_statements = [
         'from abjad.tools.measuretools.Measure import Measure',]
             
-    # TODO: keep this name
-    user_input_import_statements = [
-        'from abjad.tools.durationtools import Duration',
-        'from baca.scf.materialproxies import SargassoMeasureMaterialProxy',
-        'from baca.scf import UserInputWrapper',]
-
-    # TODO: rename user_input_demo_values
-    user_input_template = UserInputWrapper([
+    user_input_demo_values = UserInputWrapper([
         ('measure_denominator', 4),
         ('measure_numerator_talea', [2, 2, 2, 2, 1, 1, 4, 4]),
         ('measure_division_denominator', 16),
@@ -32,6 +26,21 @@ class SargassoMeasureMaterialProxy(MaterialProxy):
         ('measures_are_scaled', True),
         ('measures_are_split', True),
         ('measures_are_shuffled', True),])
+
+    user_input_module_import_statements = [
+        'from abjad.tools.durationtools import Duration',
+        'from baca.scf.materialproxies import SargassoMeasureMaterialProxy',
+        'from baca.scf import UserInputWrapper',]
+
+    user_input_tests = [
+        ('measure_denominator', mathtools.is_nonnegative_integer_power_of_two),
+        ('measure_numerator_talea', sequencetools.all_are_nonnegative_integers),
+        ('measure_division_denominator', mathtools.is_nonnegative_integer_power_of_two),
+        ('measure_division_talea', sequencetools.all_are_nonnegative_integers),
+        ('total_duration', durationtools.is_duration_token),
+        ('measures_are_scaled', bool),
+        ('measures_are_split', bool),
+        ('measures_are_shuffled', bool),]
 
     ### PUBLIC METHODS ###
 

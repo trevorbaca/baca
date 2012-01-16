@@ -1,3 +1,4 @@
+from abjad.tools import sequencetools
 from baca.scf.MaterialProxy import MaterialProxy
 from baca.scf.UserInputWrapper import UserInputWrapper
 from baca.scf.editors.InteractiveEditor import InteractiveEditor
@@ -11,18 +12,24 @@ class ZaggedPitchClassMaterialProxy(MaterialProxy):
 
     ### READ-ONLY PUBLIC ATTRIBUTES ###
 
-    output_file_import_statements = [
+    output_data_module_import_statements = [
         'from abjad.tools.sequencetools.CyclicTree import CyclicTree',]
 
-    user_input_import_statements = [
+    user_input_demo_values = UserInputWrapper([
+        ('pc_cells', [[0, 7, 2, 10], [9, 6, 1, 8], [5, 4, 2, 11, 10, 9]]),
+        ('division_cells', [[[1], [1], [1], [1, 1]], [[1], [1], [1], [1, 1, 1], [1, 1, 1]]]),
+        ('grouping_counts', [1, 1, 2, 3]),])
+
+    user_input_module_import_statements = [
         'from baca.scf.materialproxies import ZaggedPitchClassMaterialProxy',
         'from baca.scf import UserInputWrapper',]
 
-    user_input_template = UserInputWrapper([
-        ('pc_cells', [[0, 7, 2, 10], [9, 6, 1, 8], [5, 4, 2, 11, 10, 9]]),
-        ('division_cells', [[[1], [1], [1], [1, 1]], [[1], [1], [1], [1, 1, 1], [1, 1, 1]]]),
-        ('grouping_counts', [1, 1, 2, 3]),
-        ])
+    # TODO: implement pitchtools.is_sequence_of_pitch_class_token_sequences()
+    # TODO: implement sequencetools.all_are_nonnegative_integers(depth=n) keyword
+    user_input_tests = [
+        ('pc_cells', list),
+        ('division_cells', list),
+        ('grouping_counts', sequencetools.all_are_nonnegative_integers),]
 
     ### PUBLIC METHODS ###
 

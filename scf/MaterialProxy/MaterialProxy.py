@@ -13,7 +13,6 @@ import sys
 # TODO: add 'list package directory' user command & inherit from PackageProxy, somehow
 class MaterialProxy(PackageProxy):
 
-    #def __init__(self, package_importable_name=None, session=None):
     def __init__(self, material_package_importable_name=None, session=None):
         PackageProxy.__init__(self, package_importable_name=material_package_importable_name, session=session)
         self._generic_output_name = None
@@ -41,6 +40,16 @@ class MaterialProxy(PackageProxy):
     @property
     def editor_class_name(self):
         return self.get_tag('editor_class_name')
+
+    @property
+    def formatted_user_input_lines(self):
+        lines = []
+        if self.has_user_input_module:
+            user_input_wrapper = self.user_input_wrapper 
+            for parameter_name, parameter_value in user_input_wrapper.iteritems():
+                line = '{}: {!r}'.format(parameter_name, parameter_value)
+                lines.append(line)
+        return lines
 
     @property
     def generic_output_name(self):
@@ -341,6 +350,9 @@ class MaterialProxy(PackageProxy):
         parent_package = PackageProxy(self.parent_package_importable_name, session=self.session)
         parent_package.add_import_statement_to_initializer(import_statement)
 
+    def clear_user_input(self):
+        self.print_not_implemented()
+
     def create_output_ly_and_output_pdf_from_score_builder(self, is_forced=False, prompt_proceed=True):
         lines = []
         lilypond_file = self.import_score_definition_from_score_builder()
@@ -417,8 +429,8 @@ class MaterialProxy(PackageProxy):
                 line = 'output PDF deleted.'
                 self.proceed(lines=[line])
 
-    def display_user_input(self):
-        self.print_not_implemented()
+    def edit_local_stylesheet(self):
+        os.system('vi {}'.format(self.local_stylesheet_file_name))
 
     def edit_material_definition_module(self):
         os.system('vi + {}'.format(self.material_definition_file_name))
@@ -436,8 +448,10 @@ class MaterialProxy(PackageProxy):
         stylesheet_proxy = StylesheetProxy(self.source_stylesheet_file_name, session=self.session)
         stylesheet_proxy.vi_stylesheet()
 
-    def edit_local_stylesheet(self):
-        os.system('vi {}'.format(self.local_stylesheet_file_name))
+    def edit_user_input_at_number(self, number):
+        if self.is_handmade:
+            return
+        index = number - 1
 
     # TODO: reimplement with getter and backtracking
     def get_package_short_name_of_new_material_interactively(self):
@@ -514,12 +528,8 @@ class MaterialProxy(PackageProxy):
 
     def handle_main_menu_result(self, result):
         assert isinstance(result, str)
-#        if result == 'k':
-#            self.reload_user_input()
-        if result == 'uid':
-            self.display_user_input()    
-        elif result == 'uis':
-            self.write_stub_user_input_module_to_disk()
+        if result == 'uic':
+            self.clear_user_input()    
         elif result == 'mdd':
             self.delete_material_definition_module()
         elif result == 'mde':
@@ -589,9 +599,11 @@ class MaterialProxy(PackageProxy):
         # TODO: add to packge-level hidden menu
         elif result == 'tags':
             self.manage_tags()
-        # TODO: add to global hidden menu
+        # TODO: add to directory-level hidden menu
         elif result == 'ls':
             self.list_directory()
+        elif mathtools.is_integer_equivalent_expr(result):
+            self.edit_user_input_at_number_interactively(result)
         else:
             raise ValueError
 
@@ -629,13 +641,10 @@ class MaterialProxy(PackageProxy):
     
     def make_main_menu_for_material_made_with_editor(self):
         menu, hidden_section = self.make_new_menu(where=self.where(), is_hidden=True)
+        section = menu.make_new_section(is_numbered=True)
+        section.tokens = self.formatted_user_input_lines
         section = menu.make_new_section()
-#        if self.has_editor:
-#            section.append(('er', 'editor - run'))
-        if self.has_user_input_module:
-            section.append(('uid', 'user input - display'))
-        else:
-            section.append(('uis', 'user input - write stub'))
+        section.append(('uic', 'user input - clear'))
         return menu, hidden_section
 
     def make_main_menu_for_material_made_by_hand(self):
@@ -1030,7 +1039,7 @@ class MaterialProxy(PackageProxy):
         return new_value
 
     def initialize_user_input_wrapper(self):
-        user_input_wrapper = copy.deepcopy(self.user_input_template)
+        user_input_wrapper = copy.deepcopy(self.user_input_demo_values)
         for key in user_input_wrapper:
             user_input_wrapper[key] = None
         return user_input_wrapper
@@ -1041,8 +1050,8 @@ class MaterialProxy(PackageProxy):
         return lilypond_file
 
     def overwrite_user_input_wrapper_with_demo_user_input_values(self, user_input_wrapper):
-        for key in self.user_input_template:
-            user_input_wrapper[key] = self.user_input_template[key]    
+        for key in self.user_input_demo_values:
+            user_input_wrapper[key] = self.user_input_demo_values[key]    
 
     def read_user_input_values_from_disk(self):
         import baca
@@ -1103,7 +1112,7 @@ class MaterialProxy(PackageProxy):
     def show_demo_user_input_values(self):
         menu, section = self.make_new_menu(where=self.where(), is_numbered=True)
         items = []
-        for i, (key, value) in enumerate(self.user_input_template.iteritems()):
+        for i, (key, value) in enumerate(self.user_input_demo_values.iteritems()):
             item = '{}: {!r}'.format(key.replace('_', ' '), value)
             items.append(item)
         section.tokens = items

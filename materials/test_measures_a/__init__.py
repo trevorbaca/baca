@@ -1,5 +1,7 @@
-from output import *
-import datetime
+from collections import OrderedDict
+from output import test_measures_a
 
 
-tags = {'material_proxy': 'SargassoMeasureMaterialProxy', 'creation_date': datetime.date(2011, 10, 06)}
+tags = OrderedDict([
+    ('editor_class_name', 'SargassoMeasureMaterialProxy'),
+    ('has_illustration', True)])
