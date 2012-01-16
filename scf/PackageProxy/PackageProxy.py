@@ -216,20 +216,6 @@ class PackageProxy(DirectoryProxy):
         self.pop_breadcrumb()
 
     # TODO: write tests
-    def package_importable_name_to_directory_name(self, package_importable_name):
-        if package_importable_name is None:
-            return
-        package_importable_name_parts = package_importable_name.split('.')
-        if package_importable_name_parts[0] == 'baca':
-            directory_parts = [os.environ.get('BACA')] + package_importable_name_parts[1:]
-        elif package_importable_name_parts[0] in os.listdir(os.environ.get('SCORES')):
-            directory_parts = [os.environ.get('SCORES')] + package_importable_name_parts[:]
-        else:
-            raise ValueError('Unknown package importable name {!r}.'.format(package_importable_name))
-        directory = os.path.join(*directory_parts)
-        return directory
-
-    # TODO: write tests
     def package_importable_name_to_purview(self, package_importable_name):
         import baca
         if package_importable_name is None:
