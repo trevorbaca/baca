@@ -138,6 +138,7 @@ class MaterialWrangler(PackageWrangler, PackageProxy):
             return
         return material_package_importable_name
 
+    # TODO: get rid of this or get rid of self.make_material_proxy()
     def get_package_proxy(self, package_importable_name):
         return MaterialProxy(package_importable_name, session=self.session)
 
@@ -162,6 +163,7 @@ class MaterialWrangler(PackageWrangler, PackageProxy):
         section.append(('e', 'make material with editor'))
         return menu
 
+    # TODO: get rid of this or get rid of self.get_package_proxy()
     def make_material_proxy(self, material_underscored_name):
         score_package_importable_name = self.package_importable_name
         package_importable_name_parts = []
