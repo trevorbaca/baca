@@ -149,6 +149,12 @@ class SCFObject(object):
             return False
         return True
 
+    def debug(self, value, annotation=None):
+        if annotation is None:
+            print 'debug: {!r}'.format(value)
+        else:
+            print 'debug ({}): {!r}'.format(annotation, value)
+
     def edit_source_file(self):
         command = 'vi {}'.format(self.source_file_name)
         os.system(command)
