@@ -225,6 +225,10 @@ class MaterialProxy(PackageProxy):
             return self.material_underscored_name.replace('_', ' ')
 
     @property
+    def material_underscored_name(self):
+        return self.package_short_name
+
+    @property
     def materials_directory_name(self):
         if self.score is None:
             return self.baca_materials_directory
@@ -334,20 +338,6 @@ class MaterialProxy(PackageProxy):
     @property
     def was_created_by_hand(self):
         return not(self.has_editor)
-
-    ### READ / WRITE PUBLIC ATTRIBUTES ##
-
-    # TODO: make this read-only
-    @apply
-    def material_underscored_name():
-        def fget(self):
-            return self.package_short_name
-        def fset(self, material_underscored_name):
-            assert isinstance(material_underscored_name, (str, type(None)))
-            if isinstance(material_underscored_name, str):
-                assert iotools.is_underscore_delimited_lowercase_string(material_underscored_name)
-            self.package_short_name = material_underscored_name
-        return property(**locals())
 
     ### PUBLIC METHODS ###
 
