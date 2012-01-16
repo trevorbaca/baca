@@ -37,8 +37,7 @@ class MaterialProxyWrangler(PackageWrangler, PackageProxy):
             self.make_material_proxy()
         else:
             material_proxy_name = value
-            material_proxy_name = material_proxy_name.replace(' ', '_')
-            material_proxy_name = iotools.underscore_delimited_lowercase_to_uppercamelcase(
+            material_proxy_name = iotools.space_delimited_lowercase_to_uppercamelcase(
                 material_proxy_name)
             material_proxy = self.get_material_proxy(material_proxy_name)
             material_proxy.run()
@@ -178,8 +177,7 @@ class MaterialProxyWrangler(PackageWrangler, PackageProxy):
             else:
                 self.pop_breadcrumb()
                 break
-        material_proxy_name = result.replace(' ', '_')
-        material_proxy_name = iotools.underscore_delimited_lowercase_to_uppercamelcase(material_proxy_name)           
+        material_proxy_name = iotools.space_delimited_lowercase_to_uppercamelcase(material_proxy_name) 
         material_proxy = self.get_material_proxy(material_proxy_name)
         return material_proxy
 

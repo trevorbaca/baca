@@ -760,8 +760,8 @@ class MaterialProxy(PackageProxy):
             return
         if self.is_in_repository:
             # update parent initializer
-            self.helpers.globally_replace_in_file(
-                self.parent_initializer_file_name, self.material_underscored_name, new_material_underscored_name)
+            self.helpers.globally_replace_in_file(self.parent_initializer_file_name, 
+                self.material_underscored_name, new_material_underscored_name)
             # rename package directory
             new_directory_name = self.directory.replace(
                 self.material_underscored_name, new_material_underscored_name)
