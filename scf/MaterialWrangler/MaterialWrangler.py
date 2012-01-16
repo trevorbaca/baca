@@ -57,20 +57,31 @@ class MaterialWrangler(PackageWrangler, PackageProxy):
 
     # TODO: write test
     def create_data_package_interactively(self):
+        self.preserve_backtracking = True
         material_package_importable_name = self.get_new_material_package_importable_name_interactively()
+        self.preserve_backtracking = False
+        if self.backtrack():
+            return
         editor_class_name = None
         has_illustration = False
         self.create_material_package(material_package_importable_name, editor_class_name, has_illustration)
 
     # TODO: write test
     def create_editable_material_package_interactively(self):
+        self.preserve_backtracking = True
         material_package_importable_name = self.get_new_material_package_importable_name_interactively()
+        self.preserve_backtracking = False
+        if self.backtrack():
+            return
+        self.preserve_backtracking = True
         breadcrumbs = self.session.breadcrumbs[:]
         self.session.breadcrumbs[:] = []
-        editor = self.material_proxy_wrangler.select_material_proxy_class_name_interactively(
+        editor_class_name = self.material_proxy_wrangler.select_material_proxy_class_name_interactively(
             should_clear_terminal=False)
         self.session.breadcrumbs = breadcrumbs[:]
-        editor_class_name = editor.class_name
+        self.preserve_backtracking = False
+        if self.backtrack():
+            return
         # TODO: set following attribute by editor automatically
         has_illustration = True
         self.create_material_package(material_package_importable_name, editor_class_name, has_illustration)
@@ -117,7 +128,9 @@ class MaterialWrangler(PackageWrangler, PackageProxy):
         import baca
         getter = self.make_new_getter(where=self.where())
         getter.append_string('material name')
+        self.preserve_backtracking = True
         material_name = getter.run()
+        self.preserve_backtracking = False
         if self.backtrack():
             return
         material_package_short_name = iotools.string_to_strict_directory_name(material_name)

@@ -172,8 +172,8 @@ class MaterialProxyWrangler(PackageWrangler, PackageProxy):
             else:
                 self.pop_breadcrumb()
                 break
-        material_proxy_name = iotools.space_delimited_lowercase_to_uppercamelcase(material_proxy_name) 
-        return material_proxy_name
+        material_proxy_class_name = iotools.space_delimited_lowercase_to_uppercamelcase(result) 
+        return material_proxy_class_name
 
     def unimport_materialproxies_package(self):
         self.remove_package_importable_name_from_sys_modules(self.package_importable_name)
