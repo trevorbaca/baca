@@ -9,12 +9,12 @@ class UserInputGetter(MenuObject):
     def __init__(self, session=None, where=None):
         MenuObject.__init__(self, session=session, where=where)
         self._sections = []
-        self.argument_lists = None
-        self.defaults = None
-        self.execs = None
-        self.helps = None
-        self.prompts = None
-        self.tests = None
+        self._argument_lists = []
+        self._defaults = []
+        self._execs = []
+        self._helps = []
+        self._prompts = []
+        self._tests = []
 
     ### OVERLOADS ###
 
@@ -24,80 +24,32 @@ class UserInputGetter(MenuObject):
     ### READ-ONLY PUBLIC ATTRIBUTES ###
 
     @property
+    def argument_lists(self):
+        return self._argument_lists
+
+    @property
+    def defaults(self):
+        return self._defaults
+
+    @property
+    def execs(self):
+        return self._execs
+
+    @property
+    def helps(self):
+        return self._helps
+
+    @property
+    def prompts(self):
+        return self._prompts
+
+    @property
     def sections(self):
         return self._sections
 
-    ### READ / WRITE PUBLIC ATTRIBUTES ###
-
-    @apply
-    def argument_lists():
-        def fget(self):
-            return self._argument_lists
-        def fset(self, argument_lists):
-            if argument_lists is None:
-                self._argument_lists = []
-            else:
-                assert all([isinstance(x, list) for x in argument_lists])
-                self._argument_lists = argument_lists
-        return property(**locals())
-
-    @apply
-    def defaults():
-        def fget(self):
-            return self._defaults
-        def fset(self, defaults):
-            if defaults is None:
-                self._defaults = []
-            else:
-                assert all([isinstance(x, list) for x in defaults])
-                self._defaults = defaults
-        return property(**locals())
-
-    @apply
-    def execs():
-        def fget(self):
-            return self._execs
-        def fset(self, execs):
-            if execs is None:
-                self._execs = []
-            else:
-                assert all([isinstance(x, list) for x in execs])
-                self._execs = execs
-        return property(**locals())
-
-    @apply
-    def helps():
-        def fget(self):
-            return self._helps
-        def fset(self, helps):
-            if helps is None:
-                self._helps = []
-            else:
-                assert all([isinstance(x, str) for x in helps])
-                self._helps = helps
-        return property(**locals())
-
-    @apply
-    def prompts():
-        def fget(self):
-            return self._prompts
-        def fset(self, prompts):
-            if prompts is None:
-                self._prompts = []
-            else:
-                self._prompts = prompts
-        return property(**locals())
-
-    @apply
-    def tests():
-        def fget(self):
-            return self._tests
-        def fset(self, tests):
-            if tests is None:
-                self._tests = []
-            else:
-                self._tests = tests
-        return property(**locals())
+    @property
+    def tests(self):
+        return self._tests
 
     ### PUBLIC METHODS ###
 

@@ -449,9 +449,16 @@ class MaterialProxy(PackageProxy):
         stylesheet_proxy.vi_stylesheet()
 
     def edit_user_input_at_number(self, number):
-        if self.is_handmade:
+        if self.user_input is None:
+            return
+        user_input_wrapper = self.user_input_wrapper
+        if len(user_input_wrapper) < number:
             return
         index = number - 1
+        current_value = user_input_wrapper[index]
+        getter = self.make_new_getter()
+        
+        
 
     # TODO: reimplement with getter and backtracking
     def get_package_short_name_of_new_material_interactively(self):
