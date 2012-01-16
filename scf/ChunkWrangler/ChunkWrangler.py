@@ -32,7 +32,6 @@ class ChunkWrangler(PackageWrangler, PackageProxy):
 
     def create_chunk_interactively(self):
         chunk_proxy = ChunkProxy(session=self.session)
-        chunk_proxy.purview = self.purview
         chunk_proxy.create_chunk_interactively()
 
     def get_package_proxy(self, package_importable_name):
