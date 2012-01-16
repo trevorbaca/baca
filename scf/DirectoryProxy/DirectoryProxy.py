@@ -32,14 +32,6 @@ class DirectoryProxy(SCFObject):
     def directory_name(self):
         return self._directory_name
 
-#    # TODO: remove
-#    @property
-#    def has_directory(self):
-#        if self.directory_name is not None:
-#            return os.path.exists(self.directory_name)
-#        else:
-#            return False
-
     @property
     def is_in_repository(self):
         if self.directory_name is None:
@@ -52,37 +44,6 @@ class DirectoryProxy(SCFObject):
         else:
             return True
     
-    ### PRIVATE METHODS ###
-
-    def _remove_nonversioned_directory(self):
-        line = '{} will be removed.\n'.format(self.directory_name)
-        self.conditionally_display_lines([line])
-        response = self.handle_raw_input("type 'remove' to proceed")
-        if response == 'remove':
-            command = 'rm -rf {}'.format(self.directory_name)
-            proc = subprocess.Popen(command, shell=True, stdout=subprocess.PIPE)
-            first_line = proc.stdout.readline()
-            line = 'Removed {}.\n'.format(self.directory_name)
-            self.conditionally_display_lines([line])
-            return True
-        return False
-
-    def _remove_versioned_directory(self):
-        line = '{} will be completely removed from the repository!\n'.format(self.directory_name)
-        self.conditionally_display_lines([line])
-        response = self.handle_raw_input("type 'remove' to proceed")
-        if response == 'remove':
-            command = 'svn --force rm {}'.format(self.directory_name)
-            proc = subprocess.Popen(command, shell=True, stdout=subprocess.PIPE)
-            first_line = proc.stdout.readline()
-            lines = []
-            lines.append('Removed {}.\n'.format(self.directory_name))
-            lines.append('(Subversion will cause empty package to remain visible until next commit.)')
-            lines.append('')
-            self.conditionally_display_lines(lines)
-            return True
-        return False
-
     ### PUBLIC METHODS ###
 
     def create_directory(self):
@@ -103,10 +64,39 @@ class DirectoryProxy(SCFObject):
 
     def remove(self):
         if self.is_in_repository:
-            result = self._remove_versioned_directory()
+            result = self.remove_versioned_directory()
         else:
-            result = self._remove_nonversioned_directory()    
+            result = self.remove_nonversioned_directory()    
         return result
+
+    def remove_nonversioned_directory(self):
+        line = '{} will be removed.\n'.format(self.directory_name)
+        self.conditionally_display_lines([line])
+        response = self.handle_raw_input("type 'remove' to proceed")
+        if response == 'remove':
+            command = 'rm -rf {}'.format(self.directory_name)
+            proc = subprocess.Popen(command, shell=True, stdout=subprocess.PIPE)
+            first_line = proc.stdout.readline()
+            line = 'Removed {}.\n'.format(self.directory_name)
+            self.conditionally_display_lines([line])
+            return True
+        return False
+
+    def remove_versioned_directory(self):
+        line = '{} will be completely removed from the repository!\n'.format(self.directory_name)
+        self.conditionally_display_lines([line])
+        response = self.handle_raw_input("type 'remove' to proceed")
+        if response == 'remove':
+            command = 'svn --force rm {}'.format(self.directory_name)
+            proc = subprocess.Popen(command, shell=True, stdout=subprocess.PIPE)
+            first_line = proc.stdout.readline()
+            lines = []
+            lines.append('Removed {}.\n'.format(self.directory_name))
+            lines.append('(Subversion will cause empty package to remain visible until next commit.)')
+            lines.append('')
+            self.conditionally_display_lines(lines)
+            return True
+        return False
 
     def run_py_test(self, prompt_proceed=True):
         proc = subprocess.Popen('py.test {}'.format(self.directory_name), shell=True, stdout=subprocess.PIPE)
