@@ -100,7 +100,6 @@ class Studio(SCFObject):
         elif result == 'all':
             self.session.scores_to_show = 'all'
         elif result == 'k':
-            #self.global_proxy.material_proxy_wrangler.run()
             self.print_not_implemented()
         elif result == 'm':
             breadcrumb = self.pop_breadcrumb()
@@ -143,19 +142,6 @@ class Studio(SCFObject):
             self.score_wrangler.svn_up()
             return True
         return this_result
-
-    def list_interactive_material_proxies(self):
-        for material_proxy in self.list_material_proxies():
-            if material_proxy.is_interactive:
-                yield material_proxy
-
-    def list_material_proxies(self, class_names=None):
-        for score_proxy in self.list_score_proxies():
-            for material_proxy in score_proxy.list_material_proxies():
-                if class_names is None or material_proxy.get_tag('material_proxy') in class_names:
-                    yield material_proxy
-        for material_proxy in self.global_proxy.material_wrangler.list_package_proxies():
-            yield material_proxy
 
     def make_main_menu(self):
         menu = self.make_score_selection_menu()
@@ -275,11 +261,3 @@ class Studio(SCFObject):
         if prompt_proceed:
             line = 'tests complete.'
             self.proceed(lines=[line])
-
-    def select_interactive_material_proxy(self, klasses=None):
-        material_proxies = list(self.list_interactive_material_proxies())
-        menu, section = self.make_new_menu(where=self.where(), is_numbered=True)
-        section.tokens = material_proxies
-        result = menu.run()
-        # TODO: probably backtrack here
-        return result

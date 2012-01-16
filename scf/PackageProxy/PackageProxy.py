@@ -120,9 +120,6 @@ class PackageProxy(DirectoryProxy):
         if result:
             tag_name, tag_value = result
             self.add_tag(tag_name, tag_value)
-        # TODO: can the following two lines be removed?
-        #if self.session.user_input is None:
-        #    self.proceed()
 
     def delete_package(self):
         result = self.remove()
@@ -144,9 +141,6 @@ class PackageProxy(DirectoryProxy):
         if result:
             tag_name = result
             self.delete_tag(tag_name)
-        # TODO: can the following two lines be removed?
-        #if self.session.user_input is None:
-        #    self.proceed()
 
     def edit_initializer(self):
         os.system('vi {}'.format(self.initializer_file_name))
@@ -291,7 +285,8 @@ class PackageProxy(DirectoryProxy):
     def remove_import_statement_from_initializer(self, import_statement, initializer_file_name):
         initializer_import_statements, initializer_tag_lines = self.parse_initializer(initializer_file_name)
         initializer_import_statements = [x for x in initializer_import_statements if x != import_statement] 
-        self.write_initializer_to_disk(initializer_import_statements, initializer_tag_lines, initializer_file_name)
+        self.write_initializer_to_disk(
+            initializer_import_statements, initializer_tag_lines, initializer_file_name)
 
     def remove_package_importable_name_from_sys_modules(self, package_importable_name):
         '''Total hack. But works.'''
@@ -320,15 +315,6 @@ class PackageProxy(DirectoryProxy):
         if self.backtrack():
             return
         self.package_spaced_name = result
-
-    def set_purview_interactively(self):
-        from baca.scf.ScoreWrangler import ScoreWrangler
-        menu, section = self.make_new_menu(where=self.where(), is_numbered=True)
-        score_wrangler = ScoreWrangler()
-        section.tokens = score_wrangler.list_score_titles_with_years()
-        section = menu.make_new_section()
-        section.append(('s', 'global to studio'))
-        result = menu.run()
 
     def unimport_baca_package(self):
         self.remove_package_importable_name_from_sys_modules('baca')

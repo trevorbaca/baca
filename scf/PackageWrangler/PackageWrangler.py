@@ -19,14 +19,13 @@ class PackageWrangler(DirectoryProxy):
         return PackageProxy(package_importable_name, session=self.session)
 
     def list_package_importable_names(self):
+        result = []
         for package_proxy in self.list_package_proxies():
-            yield package_proxy.package_importable_name
-
-    def list_package_short_names(self):
-        for package_proxy in self.list_package_proxies():
-            yield package_proxy.package_short_name
+            result.append(package_proxy.package_importable_name)
+        return result
 
     def list_package_proxies(self):
+        result = []
         for x in os.listdir(self.directory_name):
             if x[0].isalpha():
                 directory = os.path.join(self.directory_name, x)
@@ -38,11 +37,20 @@ class PackageWrangler(DirectoryProxy):
                         else:
                             package_importable_name = x
                         package_proxy = self.get_package_proxy(package_importable_name)
-                        yield package_proxy
+                        result.append(package_proxy)
+        return result
+
+    def list_package_short_names(self):
+        result = []
+        for package_proxy in self.list_package_proxies():
+            result.append(package_proxy.package_short_name)
+        return result
 
     def list_package_spaced_names(self):
+        result = []
         for package_proxy in self.list_package_proxies():
-            yield package_proxy.package_spaced_name
+            result.append(package_proxy.package_spaced_name)
+        return result
 
     def list_package_underscored_names(self):
         return self.list_package_short_names()

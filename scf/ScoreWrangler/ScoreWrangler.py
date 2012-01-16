@@ -28,25 +28,31 @@ class ScoreWrangler(PackageWrangler):
         return ScoreProxy(package_importable_name, session=self.session)
 
     def list_score_package_short_names(self, scores_to_show=None):
+        result = []
         scores_to_show = scores_to_show or self.session.scores_to_show
         for score_proxy in self.list_score_proxies(scores_to_show=scores_to_show):
-            yield score_proxy.package_short_name
+            result.append(score_proxy.package_short_name)
+        return result
 
     def list_score_proxies(self, scores_to_show=None):
+        result = []
         scores_to_show = scores_to_show or self.session.scores_to_show
         for score_proxy in self.list_package_proxies():
             is_mothballed = score_proxy.get_tag('is_mothballed')
             if scores_to_show == 'all':
-                yield score_proxy
+                result.append(score_proxy)
             elif scores_to_show == 'active' and not is_mothballed:
-                yield score_proxy
+                result.append(score_proxy)
             elif scores_to_show == 'mothballed' and is_mothballed:
-                yield score_proxy
+                result.append(score_proxy)
+        return result
 
     def list_score_titles_with_years(self, scores_to_show=None):
+        result = []
         scores_to_show = scores_to_show or self.session.scores_to_show
         for score_proxy in self.list_score_proxies(scores_to_show=scores_to_show):
-            yield score_proxy.title_with_year
+            result.append(score_proxy.title_with_year)
+        return result
 
     def profile_score_package_structures(self):
         for score_proxy in self.list_score_proxies(scores_to_show=self.session.scores_to_show):

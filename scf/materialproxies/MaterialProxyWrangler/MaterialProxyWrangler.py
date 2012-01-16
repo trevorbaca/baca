@@ -21,11 +21,15 @@ class MaterialProxyWrangler(PackageWrangler, PackageProxy):
 
     ### PUBLIC METHODS ###
 
+    # TODO: demand material_package_importable_name here
+    #def get_material_proxy(self, material_proxy_package_short_name, material_package_importable_name):
     def get_material_proxy(self, material_proxy_package_short_name):
         command = 'from baca.scf.materialproxies import {} as material_proxy_class'.format(
             material_proxy_package_short_name)
         exec(command)
-        material_proxy = material_proxy_class()
+        material_proxy = material_proxy_class(session=self.session)
+        #material_proxy = material_proxy_class(
+        #    material_package_importable_name=material_package_importable_name, session=self.session)
         return material_proxy
 
     def handle_main_menu_result(self, result):
@@ -39,35 +43,15 @@ class MaterialProxyWrangler(PackageWrangler, PackageProxy):
             material_proxy = self.get_material_proxy(material_proxy_name)
             material_proxy.run()
 
-    # replace with wrapped call to PackageWrangler.list_package_proxies()
-    def list_material_proxies(self):
-        self.unimport_baca_package()
-        self.unimport_materialproxies_package()
-        command = 'import baca'
-        exec(command)
-        for material_proxy_class_name in self.list_material_proxy_class_names():
-            command = 'result = baca.scf.materialproxies.{}()'.format(material_proxy_class_name)
-            print 'XXX: {!r}'.format(command)
-            exec(command)
-            yield result
-
-    # add PackageWrangler.list_package_class_names and replace this with it
     def list_material_proxy_class_names(self):
-        material_proxy_directories = []
-        for name in os.listdir(self.directory_name):
-            if name[0].isalpha():
-                directory = os.path.join(self.directory_name, name)
-                if os.path.isdir(directory):
-                    initializer = os.path.join(directory, '__init__.py')
-                    if os.path.isfile(initializer):
-                        material_proxy_directories.append(name)
-        return material_proxy_directories
+        self.list_package_short_names()
 
     def list_material_proxy_spaced_class_names(self):
-        material_proxy_spaced_class_names = []
-        for material_proxy in self.list_material_proxies():
-            material_proxy_spaced_class_names.append(material_proxy.spaced_class_name)
-        return material_proxy_spaced_class_names
+        result = []
+        for package_short_name in self.list_package_short_names():
+            spaced_class_name = iotools.uppercamelcase_to_underscore_delimited_lowercase(package_short_name)
+            result.append(spaced_class_name)
+        return result
 
     def make_main_menu(self):
         menu, section = self.make_new_menu(where=self.where(), is_numbered=True)

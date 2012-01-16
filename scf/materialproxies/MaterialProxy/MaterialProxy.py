@@ -13,8 +13,9 @@ import sys
 # TODO: add 'list package directory' user command & inherit from PackageProxy, somehow
 class MaterialProxy(PackageProxy):
 
-    def __init__(self, package_importable_name=None, session=None):
-        PackageProxy.__init__(self, package_importable_name=package_importable_name, session=session)
+    #def __init__(self, package_importable_name=None, session=None):
+    def __init__(self, material_package_importable_name=None, session=None):
+        PackageProxy.__init__(self, package_importable_name=material_package_importable_name, session=session)
         self._generic_output_name = None
         self._recommended_stylesheet_file_name = None
 
@@ -443,10 +444,7 @@ class MaterialProxy(PackageProxy):
         response = self.handle_raw_input('material name')
         response = response.lower()
         response = response.replace(' ', '_')
-        if self.has_score_local_purview:
-            package_short_name = '{}_{}'.format(self.purview.package_short_name, response)
-        else:
-            package_short_name = response
+        package_short_name = response
         line = 'short package name will be {}.\n'.format(package_short_name)
         self.conditionally_display_lines([line])
         return package_short_name
@@ -1071,10 +1069,7 @@ class MaterialProxy(PackageProxy):
             section.append(('o', 'overwrite with demo input values'))
             section.append(('i', 'read values from disk'))
             section.append(('c', 'clear values'))
-            if self.purview is not None:
-                section.append(('l', 'change location'))
-            else:
-                section.append(('l', 'set location'))
+            section.append(('l', 'change location'))
             result = menu.run()
             if result == 'c':
                 self.clear_user_input_wrapper(self.user_input_wrapper)
@@ -1083,7 +1078,7 @@ class MaterialProxy(PackageProxy):
             elif result == 'i':
                 self.read_user_input_values_from_disk()
             elif result == 'l':
-                self.set_purview_interactively()
+                self.move_material_to_location()
             elif result == 'n':
                 self.name_material()
             elif result == 'nc':

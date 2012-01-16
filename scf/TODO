@@ -67,3 +67,5 @@ TODO
 31. Prevent the creation of 'baca.materials.h' package.
 
 32. Do away with local stylesheets.
+
+33. Change all list functions to read-only properties.
