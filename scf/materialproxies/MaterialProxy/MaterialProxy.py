@@ -14,7 +14,7 @@ import sys
 class MaterialProxy(PackageProxy):
 
     def __init__(self, package_importable_name=None, session=None):
-        PackageProxy.__init__(self, package_importable_name, session=session)
+        PackageProxy.__init__(self, package_importable_name=package_importable_name, session=session)
         self._generic_output_name = None
         self._recommended_stylesheet_file_name = None
 

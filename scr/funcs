@@ -3,6 +3,7 @@ import os
 import sys
 
 
+os.system('clear')
 for directory_name in sys.argv[1:]:
     directory_name = directory_name.strip(os.sep)
     package_name = directory_name.split(os.sep)[-1]

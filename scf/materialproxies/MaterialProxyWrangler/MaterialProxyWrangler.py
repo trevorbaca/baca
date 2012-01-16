@@ -13,45 +13,41 @@ class MaterialProxyWrangler(PackageWrangler, PackageProxy):
         PackageProxy.__init__(self, package_importable_name=package_importable_name, session=session)
         PackageWrangler.__init__(self, directory_name=self.directory_name, session=self.session)
 
-    ### OVERLOADS ###
-
-    def __repr__(self):
-        return '{}()'.format(self.class_name)
-
     ### READ-ONLY PUBIC ATTRIBUTES ###
 
     @property
     def breadcrumb(self):
         return 'material proxies'
 
-    ### READ / WRITE PUBLIC ATTRIBUTES ###
-
-    # TODO: make this read-only
-    @apply
-    def directory_name():
-        def fget(self):
-            return self._directory_name
-        def fset(self, directory_name):
-            assert isinstance(directory_name, (str, type(None)))
-            self._directory_name = directory_name
-        return property(**locals())
-
     ### PUBLIC METHODS ###
 
     def get_material_proxy(self, material_proxy_package_short_name):
-        command = 'from baca.scf.materialproxies import {} as material_proxy_class'.format(material_proxy_package_short_name)
+        command = 'from baca.scf.materialproxies import {} as material_proxy_class'.format(
+            material_proxy_package_short_name)
         exec(command)
         material_proxy = material_proxy_class()
         return material_proxy
 
+    def handle_main_menu_result(self, result):
+        if result == 'new':
+            self.make_material_proxy()
+        else:
+            material_proxy_name = value
+            material_proxy_name = material_proxy_name.replace(' ', '_')
+            material_proxy_name = iotools.underscore_delimited_lowercase_to_uppercamelcase(
+                material_proxy_name)
+            material_proxy = self.get_material_proxy(material_proxy_name)
+            material_proxy.run()
+
     # replace with wrapped call to PackageWrangler.list_package_proxies()
-    def list_material_proxys(self):
+    def list_material_proxies(self):
         self.unimport_baca_package()
-        self.unimport_material_proxys_package()
+        self.unimport_materialproxies_package()
         command = 'import baca'
         exec(command)
         for material_proxy_class_name in self.list_material_proxy_class_names():
             command = 'result = baca.scf.materialproxies.{}()'.format(material_proxy_class_name)
+            print 'XXX: {!r}'.format(command)
             exec(command)
             yield result
 
@@ -69,9 +65,16 @@ class MaterialProxyWrangler(PackageWrangler, PackageProxy):
 
     def list_material_proxy_spaced_class_names(self):
         material_proxy_spaced_class_names = []
-        for material_proxy in self.list_material_proxys():
+        for material_proxy in self.list_material_proxies():
             material_proxy_spaced_class_names.append(material_proxy.spaced_class_name)
         return material_proxy_spaced_class_names
+
+    def make_main_menu(self):
+        menu, section = self.make_new_menu(where=self.where(), is_numbered=True)
+        section.tokens = self.list_material_proxy_spaced_class_names()
+        section = menu.make_new_section()
+        section.append(('new', 'make material_proxy'))
+        return menu
 
     # replace with material_proxy wizard
     def make_material_proxy(self):
@@ -99,7 +102,7 @@ class MaterialProxyWrangler(PackageWrangler, PackageProxy):
         initializer.write("_import_structured_package(__path__[0], globals(), 'baca')\n")
         initializer.close() 
 
-    # TODO: change to boilerplate file stored in material_proxy package
+    # TODO: implement MaterialProxyClassFile object to model and customize these settings
     def make_material_proxy_class_file(self, material_proxy_name, generic_output_name):
         class_file_name = os.path.join(self.directory_name, material_proxy_name, material_proxy_name + '.py')
         class_file = file(class_file_name, 'w')
@@ -142,10 +145,7 @@ class MaterialProxyWrangler(PackageWrangler, PackageProxy):
         class_file.write('\n'.join(lines))
         class_file.close()
 
-    def make_material_proxy_selection_menu(self):
-        self.print_not_implemented()
-
-    # TODO: change to boilerplate file stored in material_proxy package
+    # TODO: change to boilerplate file stored somewhere
     def make_material_proxy_stylesheet(self, material_proxy_name):
         stylesheet = lilypondfiletools.make_basic_lilypond_file()
         stylesheet.pop()
@@ -161,23 +161,6 @@ class MaterialProxyWrangler(PackageWrangler, PackageProxy):
         stylesheet_file_pointer.write(stylesheet.format)
         stylesheet_file_pointer.close()
         
-    def handle_main_menu_result(self, result):
-        if result == 'new':
-            self.make_material_proxy()
-        else:
-            material_proxy_name = value
-            material_proxy_name = material_proxy_name.replace(' ', '_')
-            material_proxy_name = iotools.underscore_delimited_lowercase_to_uppercamelcase(material_proxy_name)
-            material_proxy = self.get_material_proxy(material_proxy_name)
-            material_proxy.run()
-
-    def make_main_menu(self):
-        menu, section = self.make_new_menu(where=self.where(), is_numbered=True)
-        section.tokens = self.list_material_proxy_spaced_class_names()
-        section = menu.make_new_section()
-        section.append(('new', 'make material_proxy'))
-        return menu
-
     def run(self, user_input=None):
         self.assign_user_input(user_input=user_input)
         while True:
@@ -216,5 +199,5 @@ class MaterialProxyWrangler(PackageWrangler, PackageProxy):
         material_proxy = self.get_material_proxy(material_proxy_name)
         return material_proxy
 
-    def unimport_material_proxys_package(self):
+    def unimport_materialproxies_package(self):
         self.remove_package_importable_name_from_sys_modules(self.package_importable_name)
