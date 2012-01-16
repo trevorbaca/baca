@@ -16,7 +16,8 @@ def test_ChunkWrangler_01():
     assert chunk_wrangler.package_short_name == 'chunks'
     assert chunk_wrangler.package_spaced_name == 'chunks'
     assert chunk_wrangler.score == baca.scf.ScoreProxy('manos')
-    assert chunk_wrangler.source_file_name == '/Users/trevorbaca/Documents/other/baca/scf/ChunkWrangler/ChunkWrangler.py'
+    assert chunk_wrangler.source_file_name == \
+        '/Users/trevorbaca/Documents/other/baca/scf/ChunkWrangler/ChunkWrangler.py'
     assert chunk_wrangler.spaced_class_name == 'chunk wrangler'
     
 
@@ -25,19 +26,19 @@ def test_ChunkWrangler_02():
     '''
 
     chunk_wrangler = baca.scf.ChunkWrangler('manos')
-    chunk_proxies = chunk_wrangler.list_package_proxies()
+    chunk_proxies = chunk_wrangler.package_proxies
     assert all([isinstance(x, baca.scf.ChunkProxy) for x in chunk_proxies])
 
-    names = chunk_wrangler.list_package_importable_names()
+    names = chunk_wrangler.package_importable_names
     assert all([iotools.is_underscore_delimited_lowercase_package_name(x) for x in names])
 
-    names = chunk_wrangler.list_package_short_names()
+    names = chunk_wrangler.package_short_names
     assert all([iotools.is_underscore_delimited_lowercase_string(x) for x in names])
 
-    names = chunk_wrangler.list_package_spaced_names()
+    names = chunk_wrangler.package_spaced_names
     assert all([iotools.is_space_delimited_lowercase_string(x) for x in names])
 
-    names = chunk_wrangler.list_package_underscored_names()
+    names = chunk_wrangler.package_underscored_names
     assert all([iotools.is_underscore_delimited_lowercase_string(x) for x in names])
 
 

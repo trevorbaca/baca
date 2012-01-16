@@ -12,7 +12,7 @@ def test_PackageProxy_read_only_attributes_01():
     assert package_proxy.initializer_file_name == \
         '/Users/trevorbaca/Documents/other/baca/materials/test_material_a/__init__.py'
     #assert package_proxy.is_in_repository
-    assert package_proxy.list_formatted_tags() == []
+    assert package_proxy.formatted_tags == []
     assert package_proxy.package_importable_name == 'baca.materials.test_material_a'
     assert package_proxy.package_short_name == 'test_material_a'
     assert package_proxy.package_spaced_name == 'test material a'

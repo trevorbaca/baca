@@ -9,22 +9,19 @@ class PackageWrangler(DirectoryProxy):
 
     @property
     def has_packages(self):
-        for x in self.list_package_spaced_names():
+        for x in self.package_spaced_names:
             return True
         return False
 
-    ### PUBLIC METHODS ###
-
-    def get_package_proxy(self, package_importable_name):
-        return PackageProxy(package_importable_name, session=self.session)
-
-    def list_package_importable_names(self):
+    @property
+    def package_importable_names(self):
         result = []
-        for package_proxy in self.list_package_proxies():
+        for package_proxy in self.package_proxies:
             result.append(package_proxy.package_importable_name)
         return result
 
-    def list_package_proxies(self):
+    @property
+    def package_proxies(self):
         result = []
         for x in os.listdir(self.directory_name):
             if x[0].isalpha():
@@ -40,17 +37,25 @@ class PackageWrangler(DirectoryProxy):
                         result.append(package_proxy)
         return result
 
-    def list_package_short_names(self):
+    @property
+    def package_short_names(self):
         result = []
-        for package_proxy in self.list_package_proxies():
+        for package_proxy in self.package_proxies:
             result.append(package_proxy.package_short_name)
         return result
 
-    def list_package_spaced_names(self):
+    @property
+    def package_spaced_names(self):
         result = []
-        for package_proxy in self.list_package_proxies():
+        for package_proxy in self.package_proxies:
             result.append(package_proxy.package_spaced_name)
         return result
 
-    def list_package_underscored_names(self):
-        return self.list_package_short_names()
+    @property
+    def package_underscored_names(self):
+        return self.package_short_names
+
+    ### PUBLIC METHODS ###
+
+    def get_package_proxy(self, package_importable_name):
+        return PackageProxy(package_importable_name, session=self.session)

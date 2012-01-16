@@ -37,7 +37,7 @@ class MaterialWrangler(PackageWrangler, PackageProxy):
     @property
     def material_package_short_names(self):
         result = []
-        for material_proxy in self.list_package_proxies():
+        for material_proxy in self.package_proxies:
             result.append(material_proxy.package_short_name)
         return result
 

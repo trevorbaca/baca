@@ -12,7 +12,7 @@ def test_GlobalProxy_01():
     assert global_proxy.get_tag('foo') is None
     assert global_proxy.get_tags() == {}
     assert global_proxy.initializer_file_name == '/Users/trevorbaca/Documents/other/baca/__init__.py'
-    assert global_proxy.list_formatted_tags() == []
+    assert global_proxy.formatted_tags == []
     assert global_proxy.material_proxy_wrangler == baca.scf.MaterialProxyWrangler()
     assert global_proxy.material_wrangler == baca.scf.MaterialWrangler('baca')
     assert global_proxy.materials_package_importable_name == 'baca.materials'

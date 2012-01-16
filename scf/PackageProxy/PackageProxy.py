@@ -29,6 +29,15 @@ class PackageProxy(DirectoryProxy):
             return self.package_importable_name_to_directory_name(self.package_importable_name)
 
     @property
+    def formatted_tags(self):
+        formatted_tags = []
+        tags = self.get_tags()
+        for key in sorted(tags):
+            formatted_tag = '{!r}: {!r}'.format(key, tags[key])
+            formatted_tags.append(formatted_tag)
+        return formatted_tags
+
+    @property
     def has_initializer(self):
         if self.initializer_file_name is not None:
             return os.path.isfile(self.initializer_file_name)
@@ -185,17 +194,9 @@ class PackageProxy(DirectoryProxy):
         tags = self.get_tags()
         return bool(tag_name in tags)
 
-    def list_formatted_tags(self):
-        formatted_tags = []
-        tags = self.get_tags()
-        for key in sorted(tags):
-            formatted_tag = '{!r}: {!r}'.format(key, tags[key])
-            formatted_tags.append(formatted_tag)
-        return formatted_tags
-
     def make_tags_menu(self):
         menu, section = self.make_new_menu(where=self.where(), is_keyed=False)
-        section.tokens = self.list_formatted_tags()
+        section.tokens = self.formatted_tags
         section = menu.make_new_section()
         section.append(('add', 'add tag'))
         section.append(('del', 'delete tag'))

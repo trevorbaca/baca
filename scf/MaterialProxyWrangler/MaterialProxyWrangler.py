@@ -22,12 +22,12 @@ class MaterialProxyWrangler(PackageWrangler, PackageProxy):
     # TODO: write test
     @property
     def material_proxy_class_names(self):
-        self.list_package_short_names()
+        return self.package_short_names
 
     @property
     def material_proxy_spaced_class_names(self):
         result = []
-        for package_short_name in self.list_package_short_names():
+        for package_short_name in self.package_short_names:
             spaced_class_name = iotools.uppercamelcase_to_space_delimited_lowercase(package_short_name)
             result.append(spaced_class_name)
         return result

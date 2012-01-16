@@ -48,7 +48,7 @@ class ChunkWrangler(PackageWrangler, PackageProxy):
     def make_main_menu(self):
         menu, section = self.make_new_menu(where=self.where(), is_numbered=True)
         if self.has_packages:
-            section.extend(self.list_package_spaced_names())
+            section.extend(self.package_spaced_names)
         else:
             menu.sections.pop()
         section = menu.make_new_section()
