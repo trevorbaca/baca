@@ -16,6 +16,16 @@ class StylesheetWrangler(DirectoryProxy):
     def breadcrumb(self):
         return 'stylesheets'
 
+    # TODO: write test
+    @property
+    def stylesheet_file_names(self):
+        result = []
+        for file_name in os.listdir(self.stylesheets_directory):
+            if file_name.endswith('.ly'):
+                result.append(file_name)
+        return result
+
+
     ### PUBLIC METHODS ###
 
     # TODO: write test
@@ -45,17 +55,9 @@ class StylesheetWrangler(DirectoryProxy):
             stylesheet_proxy = StylesheetProxy(stylesheet_file_name, session=self.session)
             stylesheet_proxy.run()
          
-    # TODO: write test
-    def list_stylesheet_file_names(self):
-        result = []
-        for file_name in os.listdir(self.stylesheets_directory):
-            if file_name.endswith('.ly'):
-                result.append(file_name)
-        return result
-
     def make_main_menu(self):
         menu, section = self.make_new_menu(where=self.where(), is_numbered=True)
-        section.tokens = self.list_stylesheet_file_names()
+        section.tokens = self.stylesheet_file_names
         section = menu.make_new_section()
         section.append(('new', 'make new stylesheet'))
         return menu
@@ -80,7 +82,7 @@ class StylesheetWrangler(DirectoryProxy):
     # TODO: write test
     def select_stylesheet_file_name_interactively(self):
         menu, section = self.make_new_menu(where=self.where(), is_numbered=True)
-        section.tokens = self.list_stylesheet_file_names()
+        section.tokens = self.stylesheet_file_names
         while True:
             self.append_breadcrumb('select stylesheet')
             result = menu.run()

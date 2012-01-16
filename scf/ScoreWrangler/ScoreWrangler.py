@@ -13,30 +13,20 @@ class ScoreWrangler(PackageWrangler):
     def __repr__(self):
         return '{}()'.format(self.class_name)
 
-    ### PUBLIC METHODS ###
+    ### READ-ONLY PUBLIC ATTRIBUTES ###
 
-    def create_score_package_interactively(self, score_package_importable_name):
-        score_proxy = ScoreProxy(session=self.session)
-        score_proxy.create_score_package_creation_wizard()
-
-    def fix_score_package_structures(self):
-        for score_proxy in self.list_score_proxies(scores_to_show=self.session.scores_to_show):
-            score_proxy.fix_package_structure()
-            score_proxy.profile_package_structure()
-
-    def get_package_proxy(self, package_importable_name):
-        return ScoreProxy(package_importable_name, session=self.session)
-
-    def list_score_package_short_names(self, scores_to_show=None):
+    @property
+    def score_package_short_names(self):
         result = []
-        scores_to_show = scores_to_show or self.session.scores_to_show
-        for score_proxy in self.list_score_proxies(scores_to_show=scores_to_show):
+        for score_proxy in self.score_proxies:
             result.append(score_proxy.package_short_name)
         return result
 
-    def list_score_proxies(self, scores_to_show=None):
+    @property
+    def score_proxies(self):
         result = []
-        scores_to_show = scores_to_show or self.session.scores_to_show
+        #scores_to_show = scores_to_show or self.session.scores_to_show
+        scores_to_show = self.session.scores_to_show
         for score_proxy in self.list_package_proxies():
             is_mothballed = score_proxy.get_tag('is_mothballed')
             if scores_to_show == 'all':
@@ -47,20 +37,34 @@ class ScoreWrangler(PackageWrangler):
                 result.append(score_proxy)
         return result
 
-    def list_score_titles_with_years(self, scores_to_show=None):
+    @property
+    def score_titles_with_years(self):
         result = []
-        scores_to_show = scores_to_show or self.session.scores_to_show
-        for score_proxy in self.list_score_proxies(scores_to_show=scores_to_show):
+        for score_proxy in self.score_proxies:
             result.append(score_proxy.title_with_year)
         return result
 
+    ### PUBLIC METHODS ###
+
+    def create_score_package_interactively(self, score_package_importable_name):
+        score_proxy = ScoreProxy(session=self.session)
+        score_proxy.create_score_package_creation_wizard()
+
+    def fix_score_package_structures(self):
+        for score_proxy in self.score_proxies:
+            score_proxy.fix_package_structure()
+            score_proxy.profile_package_structure()
+
+    def get_package_proxy(self, package_importable_name):
+        return ScoreProxy(package_importable_name, session=self.session)
+
     def profile_score_package_structures(self):
-        for score_proxy in self.list_score_proxies(scores_to_show=self.session.scores_to_show):
+        for score_proxy in self.score_proxies:
             score_proxy.profile_package_structure()
 
     def select_score_proxy(self):
         menu, section = self.make_new_menu(where=self.where(), is_numbered=True)
-        section.tokens = self.list_score_titles_with_years()
+        section.tokens = self.score_titles_with_years
         score_package_short_name = self.title_to_score_package_short_name(value)
         score_proxy = ScoreProxy(score_package_short_name, session=self.session)
         return score_proxy
@@ -71,19 +75,19 @@ class ScoreWrangler(PackageWrangler):
         self.conditionally_display_lines([line])
         if not self.confirm():
             return
-        for score_proxy in self.list_score_proxies(scores_to_show=self.session.scores_to_show):
+        for score_proxy in self.score_proxies:
             score_proxy.svn_ci(commit_message=commit_message, prompt_proceed=False)
         if prompt_proceed:
             self.proceed()
 
     def svn_st(self, prompt_proceed=True):
-        for score_proxy in self.list_score_proxies(scores_to_show=self.session.scores_to_show):
+        for score_proxy in self.score_proxies:
             score_proxy.svn_st(prompt_proceed=False)
         if prompt_proceed:
             self.proceed()
 
     def svn_up(self, prompt_proceed=True):
-        for score_proxy in self.list_score_proxies(scores_to_show=self.session.scores_to_show):
+        for score_proxy in self.score_proxies:
             score_proxy.svn_up(prompt_proceed=False)
         if prompt_proceed:
             self.proceed()

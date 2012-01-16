@@ -19,6 +19,19 @@ class MaterialProxyWrangler(PackageWrangler, PackageProxy):
     def breadcrumb(self):
         return 'material proxies'
 
+    # TODO: write test
+    @property
+    def material_proxy_class_names(self):
+        self.list_package_short_names()
+
+    @property
+    def material_proxy_spaced_class_names(self):
+        result = []
+        for package_short_name in self.list_package_short_names():
+            spaced_class_name = iotools.uppercamelcase_to_space_delimited_lowercase(package_short_name)
+            result.append(spaced_class_name)
+        return result
+
     ### PUBLIC METHODS ###
 
     # TODO: write test
@@ -36,20 +49,9 @@ class MaterialProxyWrangler(PackageWrangler, PackageProxy):
         else:
             raise ValueError
 
-    # TODO: write test
-    def list_material_proxy_class_names(self):
-        self.list_package_short_names()
-
-    def list_material_proxy_spaced_class_names(self):
-        result = []
-        for package_short_name in self.list_package_short_names():
-            spaced_class_name = iotools.uppercamelcase_to_space_delimited_lowercase(package_short_name)
-            result.append(spaced_class_name)
-        return result
-
     def make_main_menu(self):
         menu, section = self.make_new_menu(where=self.where(), is_numbered=True)
-        section.tokens = self.list_material_proxy_spaced_class_names()
+        section.tokens = self.material_proxy_spaced_class_names
         section = menu.make_new_section()
         section.append(('new', 'make material_proxy'))
         return menu
@@ -159,7 +161,7 @@ class MaterialProxyWrangler(PackageWrangler, PackageProxy):
     # TODO: write test
     def select_material_proxy_class_name_interactively(self, should_clear_terminal=True):
         menu, section = self.make_new_menu(where=self.where(), is_numbered=True)
-        section.tokens = self.list_material_proxy_spaced_class_names()
+        section.tokens = self.material_proxy_spaced_class_names
         while True:
             self.append_breadcrumb('select material proxy:')
             result = menu.run(should_clear_terminal=should_clear_terminal)
