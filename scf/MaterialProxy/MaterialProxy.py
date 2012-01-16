@@ -450,7 +450,8 @@ class MaterialProxy(PackageProxy):
         stylesheet_proxy.vi_stylesheet()
 
     def edit_user_input_at_number(self, number):
-        print 'AAA: {!r}'.format(type(self))
+        self.debug(self.class_name, 1)
+        self.debug(self.package_importable_name, 2)
         if self.user_input_wrapper is None:
             return
         user_input_wrapper = self.user_input_wrapper
@@ -460,7 +461,7 @@ class MaterialProxy(PackageProxy):
         key, current_value = user_input_wrapper.list_items[index]
         #test = self.user_input_tests[index][1]
         #default = self.user_input_demo_values[index][1]
-        test = type(self).user_input_tests[index][1]
+        kest = type(self).user_input_tests[index][1]
         default = type(self).user_input_demo_values[index][1]
         getter = self.make_new_getter()
         spaced_attribute_name = key.replace('_', ' ')

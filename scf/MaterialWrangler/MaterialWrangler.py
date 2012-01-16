@@ -41,18 +41,6 @@ class MaterialWrangler(PackageWrangler, PackageProxy):
             result.append(material_proxy.package_short_name)
         return result
 
-    ### READ / WRITE PUBLIC ATTRIBUTES ###
-
-    # TODO: remove this attribute entirely?
-    @apply
-    def directory_name():
-        def fget(self):
-            return self._directory_name
-        def fset(self, directory_name):
-            assert isinstance(directory_name, (str, type(None)))
-            self._directory_name = directory_name
-        return property(**locals())
-
     ### PUBLIC METHODS ###
 
     # TODO: write test
@@ -180,7 +168,9 @@ class MaterialWrangler(PackageWrangler, PackageProxy):
         package_importable_name_parts.append(score_package_importable_name)
         package_importable_name_parts.append(material_underscored_name)
         package_importable_name = '.'.join(package_importable_name_parts)
-        material_proxy = MaterialProxy(package_importable_name, session=self.session)
+        #package_proxy = PackageProxy(package_importable_name=package_importable_name, session=self.session)
+        material_proxy = MaterialProxy(
+            material_package_importable_name=package_importable_name, session=self.session)
         return material_proxy
 
     # TODO: write test

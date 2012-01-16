@@ -13,7 +13,7 @@ class MaterialProxyWrangler(PackageWrangler, PackageProxy):
         PackageProxy.__init__(self, package_importable_name=package_importable_name, session=session)
         PackageWrangler.__init__(self, directory_name=self.directory_name, session=self.session)
 
-    ### READ-ONLY PUBIC ATTRIBUTES ###
+    ### READ-ONLY PUBLIC ATTRIBUTES ###
 
     @property
     def breadcrumb(self):
