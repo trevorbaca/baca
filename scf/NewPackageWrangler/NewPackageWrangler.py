@@ -29,8 +29,15 @@ class NewPackageWrangler(SCFObject):
         return False
 
     def __repr__(self):
-        return '{}({!r})'.format(
-            self.class_name, self.toplevel_global_package_importable_name.split('.')[-1])
+        body = None
+        if self.toplevel_global_package_importable_name:
+            body = self.toplevel_global_package_importable_name.split('.')[-1]
+        elif self.toplevel_score_package_importable_name_body:
+            body = self.toplevel_score_package_importable_name_body.split('.')[-1]
+        if body:
+            return '{}({!r})'.format(self.class_name, body)
+        else:
+            return '{}()'.format(self.class_name)
 
     ### READ-ONLY PUBLIC ATTRIBUTES ###
 
@@ -62,7 +69,8 @@ class NewPackageWrangler(SCFObject):
     @property
     def toplevel_package_importable_names(self):
         result = [] 
-        result.append(self.toplevel_global_package_importable_name)
+        if self.toplevel_global_package_importable_name:
+            result.append(self.toplevel_global_package_importable_name)
         result.extend(self.toplevel_score_package_importable_names)
         return result
 
@@ -74,19 +82,22 @@ class NewPackageWrangler(SCFObject):
     def toplevel_score_package_importable_names(self):
         result = []
         for score_package_short_name in self.score_package_short_names:
-            toplevel_score_package_importable_name = '{}.{}'.format(
-                score_package_short_name, self.toplevel_score_package_importable_name_body)
+            parts = [score_package_short_name]
+            if self.toplevel_score_package_importable_name_body:
+                parts.append(self.toplevel_score_package_importable_name_body)
+            toplevel_score_package_importable_name = '.'.join(parts)
             result.append(toplevel_score_package_importable_name)
         return result
 
     @property
     def wrangled_global_package_importable_names(self):
         result = []
-        global_package_directory_name = self.package_importable_name_to_directory_name(
-            self.toplevel_global_package_importable_name)
-        for name in os.listdir(global_package_directory_name):
-            if name[0].isalpha():
-                result.append('{}.{}'.format(self.toplevel_global_package_importable_name, name))
+        if self.toplevel_global_package_importable_name is not None:
+            global_package_directory_name = self.package_importable_name_to_directory_name(
+                self.toplevel_global_package_importable_name)
+            for name in os.listdir(global_package_directory_name):
+                if name[0].isalpha():
+                    result.append('{}.{}'.format(self.toplevel_global_package_importable_name, name))
         return result
 
     @property
@@ -94,6 +105,14 @@ class NewPackageWrangler(SCFObject):
         result = [] 
         result.extend(self.wrangled_global_package_importable_names)
         result.extend(self.wrangled_score_package_importable_names)
+        return result
+
+    @property
+    def wrangled_package_proxies(self):
+        result = []
+        for package_importable_name in self.wrangled_package_importable_names:
+            wrangled_package_proxy = self.get_package_proxy(package_importable_name)
+            result.append(wrangled_package_proxy)
         return result
 
     @property
@@ -114,9 +133,12 @@ class NewPackageWrangler(SCFObject):
     def wrangled_score_package_importable_names(self):
         result = []
         for toplevel_score_package_importable_name in self.toplevel_score_package_importable_names:
-            toplevel_score_package_directory_name = self.package_importable_name_to_directory_name(
-                toplevel_score_package_importable_name)
-            for name in os.listdir(toplevel_score_package_directory_name):
-                if name[0].isalpha():
-                    result.append('{}.{}'.format(toplevel_score_package_importable_name, name))
+            if self.toplevel_score_package_importable_name_body:
+                toplevel_score_package_directory_name = self.package_importable_name_to_directory_name(
+                    toplevel_score_package_importable_name)
+                for name in os.listdir(toplevel_score_package_directory_name):
+                    if name[0].isalpha():
+                        result.append('{}.{}'.format(toplevel_score_package_importable_name, name))
+            else:
+                result.append(toplevel_score_package_importable_name)
         return result

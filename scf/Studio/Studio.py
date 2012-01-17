@@ -41,27 +41,8 @@ class Studio(SCFObject):
         score_proxy.run()
         self.session.breadcrumbs = breadcrumbs
 
-    def get_materials_package_importable_name_interactively(self):
-        while True:
-            self.append_breadcrumb('select materials directory')
-            menu, section = self.make_new_menu(where=self.where(), is_numbered=True)
-            section.tokens = self.score_wrangler.score_titles_with_years
-            section = menu.make_new_section() 
-            section.append(('baca', 'baca materials directory'))
-            result = menu.run()
-            if result == 'baca':
-                return self.global_proxy.materials_package_importable_name
-            else:
-                score_title = value
-                score_package_importable_name = self.score_wrangler.title_to_score_package_short_name(
-                    score_title)
-                score_proxy = self.score_wrangler.get_package_proxy(score_package_importable_name)
-                return score_proxy.materials_package_importable_name
-            self.pop_breadcrumb()
-        self.pop_breadcrumb()
-
     def get_next_score_package_short_name(self):
-        score_package_short_names = self.score_wrangler.score_package_short_names
+        score_package_short_names = self.score_wrangler.score_package_short_names_to_display
         if self.session.current_score_package_short_name is None:
             return score_package_short_names[0]
         index = score_package_short_names.index(self.session.current_score_package_short_name)
@@ -69,7 +50,7 @@ class Studio(SCFObject):
         return score_package_short_names[next_index]
 
     def get_prev_score_package_short_name(self):
-        score_package_short_names = self.score_wrangler.score_package_short_names
+        score_package_short_names = self.score_wrangler.score_package_short_names_to_display
         if self.session.current_score_package_short_name is None:
             return score_package_short_names[-1]
         index = score_package_short_names.index(self.session.current_score_package_short_name)
@@ -107,7 +88,7 @@ class Studio(SCFObject):
             self.session.scores_to_show = 'mothballed'
         elif result == 'svn':
             self.manage_svn()
-        elif result in self.score_wrangler.score_package_short_names:
+        elif result in self.score_wrangler.score_package_short_names_to_display:
             self.edit_score_interactively(result)
     
     def handle_svn_menu_result(self, result):
@@ -156,7 +137,7 @@ class Studio(SCFObject):
     def make_score_selection_menu(self):
         menu, section = self.make_new_menu(where=self.where(), is_numbered=True, is_keyed=False)
         score_titles = self.score_wrangler.score_titles_with_years
-        score_package_short_names = self.score_wrangler.score_package_short_names
+        score_package_short_names = self.score_wrangler.score_package_short_names_to_display
         section.tokens = zip(score_package_short_names, score_titles)
         return menu
 

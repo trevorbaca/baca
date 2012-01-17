@@ -1,34 +1,27 @@
-from baca.scf.PackageWrangler import PackageWrangler
+from baca.scf.NewPackageWrangler import NewPackageWrangler
 from baca.scf.ScoreProxy import ScoreProxy
 import os
 
 
-# TODO: inherit from only NewPackageWrangler
-class ScoreWrangler(PackageWrangler):
+class ScoreWrangler(NewPackageWrangler):
 
     def __init__(self, session=None):
-        PackageWrangler.__init__(self, directory_name=os.environ.get('SCORES'), session=session)
-
-    ### OVERLOADS ###
-
-    def __repr__(self):
-        return '{}()'.format(self.class_name)
+        NewPackageWrangler.__init__(self, None, '', session=session)
 
     ### READ-ONLY PUBLIC ATTRIBUTES ###
 
     @property
-    def score_package_short_names(self):
+    def score_package_short_names_to_display(self):
         result = []
-        for score_proxy in self.score_proxies:
+        for score_proxy in self.score_proxies_to_display:
             result.append(score_proxy.package_short_name)
         return result
 
     @property
-    def score_proxies(self):
+    def score_proxies_to_display(self):
         result = []
-        #scores_to_show = scores_to_show or self.session.scores_to_show
         scores_to_show = self.session.scores_to_show
-        for score_proxy in self.package_proxies:
+        for score_proxy in self.wrangled_package_proxies:
             is_mothballed = score_proxy.get_tag('is_mothballed')
             if scores_to_show == 'all':
                 result.append(score_proxy)
@@ -41,7 +34,7 @@ class ScoreWrangler(PackageWrangler):
     @property
     def score_titles_with_years(self):
         result = []
-        for score_proxy in self.score_proxies:
+        for score_proxy in self.score_proxies_to_display:
             result.append(score_proxy.title_with_year)
         return result
 
@@ -52,7 +45,7 @@ class ScoreWrangler(PackageWrangler):
         score_proxy.create_score_package_creation_wizard()
 
     def fix_score_package_structures(self):
-        for score_proxy in self.score_proxies:
+        for score_proxy in self.score_proxies_to_display:
             score_proxy.fix_package_structure()
             score_proxy.profile_package_structure()
 
@@ -60,7 +53,7 @@ class ScoreWrangler(PackageWrangler):
         return ScoreProxy(package_importable_name, session=self.session)
 
     def profile_score_package_structures(self):
-        for score_proxy in self.score_proxies:
+        for score_proxy in self.score_proxies_to_display:
             score_proxy.profile_package_structure()
 
     def select_score_proxy(self):
@@ -70,25 +63,28 @@ class ScoreWrangler(PackageWrangler):
         score_proxy = ScoreProxy(score_package_short_name, session=self.session)
         return score_proxy
     
+    # TODO: move up to level of wrangler
     def svn_ci(self, prompt_proceed=True):
         commit_message = self.handle_raw_input('commit message')
         line = 'commit message will be: "{}"\n'.format(commit_message)
         self.conditionally_display_lines([line])
         if not self.confirm():
             return
-        for score_proxy in self.score_proxies:
+        for score_proxy in self.score_proxies_to_display:
             score_proxy.svn_ci(commit_message=commit_message, prompt_proceed=False)
         if prompt_proceed:
             self.proceed()
 
+    # TODO: move up to level of wrangler
     def svn_st(self, prompt_proceed=True):
-        for score_proxy in self.score_proxies:
+        for score_proxy in self.score_proxies_to_display:
             score_proxy.svn_st(prompt_proceed=False)
         if prompt_proceed:
             self.proceed()
 
+    # TODO: move up to level of wrangler
     def svn_up(self, prompt_proceed=True):
-        for score_proxy in self.score_proxies:
+        for score_proxy in self.score_proxies_to_display:
             score_proxy.svn_up(prompt_proceed=False)
         if prompt_proceed:
             self.proceed()
