@@ -1,13 +1,14 @@
 from abjad.tools import sequencetools
-from baca.scf.MaterialProxy import MaterialProxy
+from baca.scf.UserInputHandlingMaterialProxy import UserInputHandlingMaterialProxy
 from baca.scf.UserInputWrapper import UserInputWrapper
 from baca.scf.editors.InteractiveEditor import InteractiveEditor
 
 
-class ZaggedPitchClassMaterialProxy(MaterialProxy):
+class ZaggedPitchClassMaterialProxy(UserInputHandlingMaterialProxy):
 
     def __init__(self, package_importable_name=None, session=None):
-        MaterialProxy.__init__(self, package_importable_name, session=session)
+        UserInputHandlingMaterialProxy.__init__(
+            self, package_importable_name=package_importable_name, session=session)
         self._generic_output_name = 'zagged pitch-classes'
 
     ### READ-ONLY PUBLIC ATTRIBUTES ###
