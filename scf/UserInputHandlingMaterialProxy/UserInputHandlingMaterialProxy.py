@@ -107,66 +107,27 @@ class UserInputHandlingMaterialProxy(MaterialProxy):
         lilypond_file = self.make_lilypond_file_from_output_material(material)
         return lilypond_file
 
-    def overwrite_user_input_wrapper_with_demo_user_input_values(self, user_input_wrapper):
-        for key in self.user_input_demo_values:
-            user_input_wrapper[key] = self.user_input_demo_values[key]    
-
-    def read_user_input_values_from_disk(self):
-        import baca
-        score_wrangler = baca.scf.ScoreWrangler()
-        material_proxy = score_wrangler.select_interactive_material_proxy(klasses=(type(self),))
-        self.user_input_wrapper = copy.deepcopy(material_proxy.user_input_wrapper)
-    
     def old_run_interactive(self):
-        self._original_score = self.score
-        self._original_material_underscored_name = self.material_underscored_name
-        self._original_user_input_wrapper = copy.deepcopy(self.user_input_wrapper)
         while True:
             menu, section = self.make_new_menu(where=self.where(), is_numbered=True)
             section.tokens = self.user_input_wrapper.editable_lines
             if self.user_input_wrapper.is_complete:
                 section.append(('p', 'show pdf of given input'))
-                section.append(('m', 'write material to disk'))
-            if self.has_material_underscored_name:
-                section.append(('n', 'rename material'))
-            else:
-                section.append(('n', 'name material'))
-            section.append(('nc', 'clear name'))
             section.append(('d', 'show demo input values'))
-            section.append(('o', 'overwrite with demo input values'))
-            section.append(('i', 'read values from disk'))
-            section.append(('c', 'clear values'))
             section.append(('l', 'change location'))
             result = menu.run()
-            if result == 'c':
-                self.clear_user_input_wrapper(self.user_input_wrapper)
-            elif result == 'd':
+            if result == 'd':
                 self.show_demo_user_input_values()
-            elif result == 'i':
-                self.read_user_input_values_from_disk()
             elif result == 'l':
                 self.move_material_to_location()
-            elif result == 'n':
-                self.name_material()
-            elif result == 'nc':
-                self.unname_material()
-            elif result == 'o':
-                self.overwrite_user_input_wrapper_with_demo_user_input_values(self.user_input_wrapper)
             elif result == 'p':
                 lilypond_file = self.make_lilypond_file_from_user_input_wrapper(self.user_input_wrapper)
                 lilypond_file.file_initial_user_includes.append(self.stylesheet)
                 lilypond_file.header_block.title = markuptools.Markup(self.generic_output_name.capitalize())
                 lilypond_file.header_block.subtitle = markuptools.Markup('(unsaved)')
                 iotools.show(lilypond_file)
-            elif result == 'src':
-                self.edit_source_file()
-            elif mathtools.is_integer_equivalent_expr(result):
-                number = int(result)    
-                index = number - 1
-                result, value = self.user_input_wrapper.list_items[index]
-                new_value = self.edit_item(result)
-                self.user_input_wrapper[result] = new_value
 
+    # TODO: promote to current code
     def show_demo_user_input_values(self):
         menu, section = self.make_new_menu(where=self.where(), is_numbered=True)
         items = []

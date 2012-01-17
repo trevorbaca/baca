@@ -1,5 +1,7 @@
 TODO
 
+-3. Implement material move and rename methods.
+
 -2. Extend self.proceed() to accept a single line.
 
 -1. Audit for should_clear_terminal keyword in the signature of every interactive method.
