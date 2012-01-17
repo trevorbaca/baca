@@ -3,6 +3,7 @@ from baca.scf.PackageProxy import PackageProxy
 import os
 
 
+# TODO: replace with NewPackageWrangler
 class PackageWrangler(DirectoryProxy):
 
     ### READ-ONLY PUBLIC ATTRIBUTES ###

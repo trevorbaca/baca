@@ -6,6 +6,7 @@ from baca.scf.PackageWrangler import PackageWrangler
 import os
 
 
+# TODO: inherit from only NewPackageWrangler
 class MaterialProxyWrangler(PackageWrangler, PackageProxy):
 
     def __init__(self, session=None):

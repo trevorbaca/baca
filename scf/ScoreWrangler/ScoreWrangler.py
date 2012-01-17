@@ -3,6 +3,7 @@ from baca.scf.ScoreProxy import ScoreProxy
 import os
 
 
+# TODO: inherit from only NewPackageWrangler
 class ScoreWrangler(PackageWrangler):
 
     def __init__(self, session=None):

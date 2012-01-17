@@ -1,8 +1,6 @@
 from abjad.tools import iotools
 from baca.scf.MaterialProxy import MaterialProxy 
 from baca.scf.NewPackageWrangler import NewPackageWrangler
-from baca.scf.PackageProxy import PackageProxy
-from baca.scf.PackageWrangler import PackageWrangler
 import collections
 import os
 

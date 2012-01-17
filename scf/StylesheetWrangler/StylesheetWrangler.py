@@ -4,6 +4,7 @@ from baca.scf.StylesheetProxy import StylesheetProxy
 import os
 
 
+# TODO: inherit from only NewPackageWrangler
 class StylesheetWrangler(DirectoryProxy):
 
     def __init__(self, session=None):
