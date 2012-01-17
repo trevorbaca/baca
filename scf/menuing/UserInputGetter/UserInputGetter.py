@@ -1,6 +1,7 @@
 from abjad.tools import iotools
 from abjad.tools import pitchtools
 from baca.scf.menuing.MenuObject import MenuObject
+import types
 
 
 # TODO: create MenuSectionAggregator for Menu and UserInputGetter to both inherit from
@@ -203,12 +204,18 @@ class UserInputGetter(MenuObject):
         lines.append('')
         self.conditionally_display_lines(lines)
 
+    def evaluate_test(self, test, argument):
+        if isinstance(test, types.TypeType):
+            return isinstance(argument, test)
+        else:
+            return test(argument)
+
     def store_value(self, user_response):
         from baca.scf.menuing.MenuSection import MenuSection
         assert isinstance(user_response, str)
         input_test = self.tests[self.prompt_index]
         argument_list = self.argument_lists[self.prompt_index]
-        if argument_list and input_test(user_response):
+        if argument_list and self.evaluate_test(input_test, user_response):
             dummy_section = MenuSection()
             dummy_section.tokens = argument_list[:]
             value = dummy_section.argument_range_string_to_numbers(user_response)
@@ -241,7 +248,7 @@ class UserInputGetter(MenuObject):
                     value = user_response
         if self.prompt_index < len(self.tests):
             input_test = self.tests[self.prompt_index]
-            if input_test(value):
+            if self.evaluate_test(input_test, value):
                 self.values.append(value)
                 self.prompt_index = self.prompt_index + 1
                 return True

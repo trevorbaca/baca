@@ -9,5 +9,5 @@ user_input = UserInputWrapper([
 	('measure_division_talea', None),
 	('total_duration', (7, 8)),
 	('measures_are_scaled', None),
-	('measures_are_split', None),
-	('measures_are_shuffled', True)])
+	('measures_are_split', True),
+	('measures_are_shuffled', False)])
