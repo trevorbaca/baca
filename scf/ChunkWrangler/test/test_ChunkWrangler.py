@@ -23,10 +23,10 @@ def test_ChunkWrangler_02():
     names = chunk_wrangler.list_wrangled_package_importable_names()
     assert all([iotools.is_underscore_delimited_lowercase_package_name(x) for x in names])
 
-    names = chunk_wrangler.wrangled_package_short_names
+    names = chunk_wrangler.list_wrangled_package_short_names()
     assert all([iotools.is_underscore_delimited_lowercase_string(x) for x in names])
 
-    names = chunk_wrangler.wrangled_package_spaced_names
+    names = chunk_wrangler.list_wrangled_package_spaced_names()
     assert all([iotools.is_space_delimited_lowercase_string(x) for x in names])
 
 

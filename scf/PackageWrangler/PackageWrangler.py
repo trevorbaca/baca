@@ -92,28 +92,6 @@ class PackageWrangler(SCFObject):
         return result
 
     @property
-    def wrangled_package_proxies(self):
-        result = []
-        for package_importable_name in self.list_wrangled_package_importable_names():
-            wrangled_package_proxy = self.get_package_proxy(package_importable_name)
-            result.append(wrangled_package_proxy)
-        return result
-
-    @property
-    def wrangled_package_short_names(self):
-        result = []
-        for x in self.list_wrangled_package_importable_names():
-            result.append(x.split('.')[-1])
-        return result
-
-    @property
-    def wrangled_package_spaced_names(self):
-        result = []
-        for x in self.wrangled_package_short_names:
-            result.append(x.replace('_', ' '))
-        return result
-
-    @property
     def wrangled_score_package_importable_names(self):
         result = []
         for toplevel_score_package_importable_name in self.toplevel_score_package_importable_names:
@@ -137,4 +115,23 @@ class PackageWrangler(SCFObject):
         for package_importable_name in package_importable_names:
             if package_importable_name.startswith(head):
                 result.append(package_importable_name)
+        return result
+
+    def list_wrangled_package_proxies(self, head=None):
+        result = []
+        for package_importable_name in self.list_wrangled_package_importable_names(head=head):
+            wrangled_package_proxy = self.get_package_proxy(package_importable_name)
+            result.append(wrangled_package_proxy)
+        return result
+
+    def list_wrangled_package_short_names(self, head=None):
+        result = []
+        for x in self.list_wrangled_package_importable_names(head=head):
+            result.append(x.split('.')[-1])
+        return result
+
+    def list_wrangled_package_spaced_names(self, head=None):
+        result = []
+        for x in self.list_wrangled_package_short_names(head=head):
+            result.append(x.replace('_', ' '))
         return result
