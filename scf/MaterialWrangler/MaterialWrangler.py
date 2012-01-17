@@ -133,9 +133,9 @@ class MaterialWrangler(PackageWrangler):
             material_proxy = self.get_package_proxy(result)
             material_proxy.run()
         
-    def make_main_menu(self):
+    def make_main_menu(self, head=None):
         menu, section = self.make_new_menu(where=self.where(), is_numbered=True)
-        section.tokens = self.list_wrangled_package_importable_names()
+        section.tokens = self.list_wrangled_package_importable_names(head=head)
         section.return_value_attribute = 'body'
         section = menu.make_new_section()
         section.append(('d', 'make data'))
@@ -154,11 +154,11 @@ class MaterialWrangler(PackageWrangler):
         result = '.'.join(result)
         return result
 
-    def run(self, user_input=None):
+    def run(self, user_input=None, head=None):
         self.assign_user_input(user_input=user_input)
         while True:
             self.append_breadcrumb()
-            menu = self.make_main_menu()
+            menu = self.make_main_menu(head=head)
             result = menu.run()
             if self.backtrack():
                 break

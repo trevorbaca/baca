@@ -209,9 +209,9 @@ class ScoreProxy(PackageProxy):
     def handle_main_menu_result(self, result):
         assert isinstance(result, str)
         if result == 'h':
-            self.chunk_wrangler.run()
+            self.chunk_wrangler.run(head=self.package_short_name)
         elif  result == 'm':
-            self.material_wrangler.run()
+            self.material_wrangler.run(head=self.package_short_name)
         elif result == 'ft':
             self.edit_forces_tagline_interactively()
         elif result == 'pf':

@@ -129,7 +129,8 @@ class PackageWrangler(SCFObject):
 
     ### PUBLIC METHODS ###
 
-    def list_wrangled_package_importable_names(self, head=''):
+    def list_wrangled_package_importable_names(self, head=None):
+        if head is None: head = ''
         result, package_importable_names = [], []
         package_importable_names.extend(self.wrangled_global_package_importable_names)
         package_importable_names.extend(self.wrangled_score_package_importable_names)
