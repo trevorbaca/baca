@@ -61,8 +61,8 @@ class MaterialProxy(PackageProxy):
         return bool(self.editor_class_name)
 
     @property
-    def has_illustration(self):
-        return self.get_tag('has_illustration')
+    def should_have_illustration(self):
+        return self.get_tag('should_have_illustration')
 
     @property
     def has_local_stylesheet(self):
@@ -153,7 +153,7 @@ class MaterialProxy(PackageProxy):
 
     @property
     def is_data_only(self):
-        return not self.has_illustration
+        return not self.should_have_illustration
 
     @property
     def is_interactive(self):
@@ -703,12 +703,12 @@ class MaterialProxy(PackageProxy):
                 hidden_section.append(('sbd', 'score builder - delete'))
                 hidden_section.append(('sbt', 'score builder - stub'))
                 hidden_section.append(('sbxi', 'score builder - execute & inspect'))
-            elif self.has_illustration:
+            elif self.should_have_illustration:
                 section.append(('sbt', 'score builder - stub'))
 
     def make_main_menu_section_for_stylesheet_management(self, main_menu, hidden_section):
         if self.has_output_data:
-            if self.has_score_builder or self.has_illustration:
+            if self.has_score_builder or self.should_have_illustration:
                 section = main_menu.make_new_section()
                 section.append(('sss', 'score stylesheet - select'))
                 if self.has_local_stylesheet:

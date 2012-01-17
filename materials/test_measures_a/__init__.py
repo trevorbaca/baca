@@ -4,4 +4,4 @@ from output import test_measures_a
 
 tags = OrderedDict([
     ('editor_class_name', 'SargassoMeasureMaterialProxy'),
-    ('has_illustration', True)])
+    ('should_have_illustration', True)])
