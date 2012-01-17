@@ -125,7 +125,8 @@ class MaterialWrangler(NewPackageWrangler):
             self.purview_name_to_materials_package_importable_name(purview_name)
         material_package_importable_name = '{}.{}'.format(
             materials_package_importable_name, material_package_short_name)
-        if self.material_package_exists(material_package_importable_name):
+        #if self.material_package_exists(material_package_importable_name):
+        if self.package_exists(material_package_importable_name):
             line = 'Material package {!r} already exists.'.format(material_package_importable_name)
             self.proceed(lines=[line])
             return
@@ -154,12 +155,6 @@ class MaterialWrangler(NewPackageWrangler):
         section.append(('h', 'make material by hand'))
         section.append(('e', 'make material with editor'))
         return menu
-
-    # TODO: write test
-    # TODO: replace with SCFObject.package_exists() generalization
-    def material_package_exists(self, material_package_importable_name):
-        return os.path.exists(self.package_importable_name_to_directory_name(
-            material_package_importable_name))
 
     # TODO: write tests
     def purview_name_to_materials_package_importable_name(self, purview_name):

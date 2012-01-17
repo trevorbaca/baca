@@ -251,6 +251,12 @@ class SCFObject(object):
             is_hidden=is_hidden, is_keyed=is_keyed, is_numbered=is_numbered, is_ranged=is_ranged)
         return menu, section
 
+    # TODO: write test
+    def package_exists(self, package_importable_name):
+        assert isinstance(package_importable_name, str)
+        directory_name = self.package_importable_name_to_directory_name(package_importable_name)
+        return os.path.exists(directory_name)
+
     # TODO: write tests
     def package_importable_name_to_directory_name(self, package_importable_name):
         if package_importable_name is None:
