@@ -1,18 +1,14 @@
 from abjad.tools import iotools
 from abjad.tools import layouttools
 from abjad.tools import lilypondfiletools
-from baca.scf.PackageProxy import PackageProxy
-from baca.scf.PackageWrangler import PackageWrangler
+from baca.scf.NewPackageWrangler import NewPackageWrangler
 import os
 
 
-# TODO: inherit from only NewPackageWrangler
-class MaterialProxyWrangler(PackageWrangler, PackageProxy):
+class MaterialProxyWrangler(NewPackageWrangler):
 
     def __init__(self, session=None):
-        package_importable_name = 'baca.scf.materialproxies'
-        PackageProxy.__init__(self, package_importable_name=package_importable_name, session=session)
-        PackageWrangler.__init__(self, directory_name=self.directory_name, session=self.session)
+        NewPackageWrangler.__init__(self, 'baca.scf.materialproxies', session=session)
 
     ### READ-ONLY PUBLIC ATTRIBUTES ###
 
@@ -20,29 +16,7 @@ class MaterialProxyWrangler(PackageWrangler, PackageProxy):
     def breadcrumb(self):
         return 'material proxies'
 
-    # TODO: write test
-    @property
-    def material_proxy_class_names(self):
-        return self.package_short_names
-
-    @property
-    def material_proxy_spaced_class_names(self):
-        result = []
-        for package_short_name in self.package_short_names:
-            spaced_class_name = iotools.uppercamelcase_to_space_delimited_lowercase(package_short_name)
-            result.append(spaced_class_name)
-        return result
-
     ### PUBLIC METHODS ###
-
-#    # TODO: reimplement
-#    def get_material_proxy(self, material_proxy_package_short_name, material_package_importable_name):
-#        command = 'from baca.scf.materialproxies import {} as material_proxy_class'.format(
-#            material_proxy_package_short_name)
-#        exec(command)
-#        material_proxy = material_proxy_class(
-#            package_importable_name=material_package_importable_name, session=self.session)
-#        return material_proxy
 
     def get_material_proxy(self, material_package_importable_name):
         import baca
