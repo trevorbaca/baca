@@ -17,9 +17,8 @@ class SargassoMeasureMaterialProxy(MaterialProxy):
     output_data_module_import_statements = [
         'from abjad.tools.measuretools.Measure import Measure',]
             
-    @property
-    def user_input_demo_values(self):
-        return [('measure_denominator', 4),
+    user_input_demo_values = [
+        ('measure_denominator', 4),
         ('measure_numerator_talea', [2, 2, 2, 2, 1, 1, 4, 4]),
         ('measure_division_denominator', 16),
         ('measure_division_talea', [1, 1, 2, 3, 1, 2, 3, 4, 1, 1, 1, 1, 4]),
@@ -33,9 +32,8 @@ class SargassoMeasureMaterialProxy(MaterialProxy):
         'from baca.scf.materialproxies import SargassoMeasureMaterialProxy',
         'from baca.scf import UserInputWrapper',]
 
-    @property
-    def user_input_tests(self):
-        return [('measure_denominator', mathtools.is_nonnegative_integer_power_of_two),
+    user_input_tests = [
+        ('measure_denominator', mathtools.is_nonnegative_integer_power_of_two),
         ('measure_numerator_talea', sequencetools.all_are_nonnegative_integers),
         ('measure_division_denominator', mathtools.is_nonnegative_integer_power_of_two),
         ('measure_division_talea', sequencetools.all_are_nonnegative_integers),
@@ -46,7 +44,7 @@ class SargassoMeasureMaterialProxy(MaterialProxy):
 
     ### PUBLIC METHODS ###
 
-    def get_output_file_lines(self, measures, material_underscored_name):
+    def get_output_data_file_lines(self, measures, material_underscored_name):
         output_file_lines = []
         output_file_lines.append('%s = [' % material_underscored_name)
         for measure in measures[:-1]:

@@ -1,6 +1,6 @@
 TODO
 
--2. Remove wrangler purview.
+-2. Extend self.proceed() to accept a single line.
 
 -1. Audit for should_clear_terminal keyword in the signature of every interactive method.
 
@@ -77,3 +77,5 @@ TODO
 35. Implement something to tour all materials everywhere and inspect in sequence.
 
 36. Change MaterialWrangler to MaterialPackageWrangler to distinguish MaterialProxyWrangler.
+
+37. Consider implementing UserInputHandlingMaterialProxy as intermediate class.

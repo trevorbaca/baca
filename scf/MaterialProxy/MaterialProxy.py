@@ -450,26 +450,29 @@ class MaterialProxy(PackageProxy):
         stylesheet_proxy.vi_stylesheet()
 
     def edit_user_input_at_number(self, number):
-        self.debug(self.class_name, 1)
-        self.debug(self.package_importable_name, 2)
-        if self.user_input_wrapper is None:
-            return
+        #self.debug(self.class_name, 1)
+        #self.debug(self.package_importable_name, 2)
         user_input_wrapper = self.user_input_wrapper
+        if user_input_wrapper is None:
+            return
         if len(user_input_wrapper) < number:
             return
         index = number - 1
         key, current_value = user_input_wrapper.list_items[index]
         #test = self.user_input_tests[index][1]
         #default = self.user_input_demo_values[index][1]
-        kest = type(self).user_input_tests[index][1]
+        test = type(self).user_input_tests[index][1]
         default = type(self).user_input_demo_values[index][1]
         getter = self.make_new_getter()
         spaced_attribute_name = key.replace('_', ' ')
         message = "value for '{}' must satisfy " + 'foo' + '.'
         getter.append_something(spaced_attribute_name, message, default=default)
         getter.tests.append(test)
-        
-
+        new_value = getter.run()
+        if self.backtrack():
+            return
+        user_input_wrapper[key] = new_value 
+        self.write_user_input_wrapper_to_disk(user_input_wrapper)
 
     # TODO: reimplement with getter and backtracking
     def get_package_short_name_of_new_material_interactively(self):
@@ -768,12 +771,6 @@ class MaterialProxy(PackageProxy):
         is_changed = self.create_output_ly_and_output_pdf_from_score_builder(is_forced=(is_changed or is_forced))
         return is_changed
 
-    def reload_user_input(self):
-        material_proxy = self.import_attribute_from_material_definition('material_proxy')
-        material_proxy.materials_directory_name = self.directory_name
-        user_input_wrapper = self.import_attribute_from_material_definition('user_input')
-        material_proxy.run(user_input_wrapper, score_title=self.title)
-
     def rename_material(self):
         line = 'current material name: {}'.format(self.material_underscored_name)
         self.conditionally_display_lines([line])
@@ -1040,6 +1037,15 @@ class MaterialProxy(PackageProxy):
         user_input_module.close()
         if prompt_proceed:
             line = 'stub user input module written to disk.'
+            self.proceed(lines=[line])
+
+    def write_user_input_wrapper_to_disk(self, user_input_wrapper, prompt_proceed=True):
+        formatted_user_input_lines = user_input_wrapper.formatted_lines
+        user_input_module = file(self.user_input_module_file_name, 'w')
+        user_input_module.write('\n'.join(formatted_user_input_lines))
+        user_input_module.close()
+        if prompt_proceed:
+            line = 'user input written to disk.'
             self.proceed(lines=[line])
         
     ### OLD INTERACTIVE MATERIAL PROXY PUBLIC METHODS ###

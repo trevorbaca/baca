@@ -33,7 +33,7 @@ class ZaggedPitchClassMaterialProxy(MaterialProxy):
 
     ### PUBLIC METHODS ###
 
-    def get_output_file_lines(self, material, material_underscored_name):
+    def get_output_data_file_lines(self, material, material_underscored_name):
         output_file_lines = []
         output_file_lines.append('%s = %s' % (material_underscored_name, material))
         return output_file_lines

@@ -98,7 +98,7 @@ class MaterialProxyWrangler(PackageWrangler):
         lines.append('')
         lines.append('    ### PUBLIC METHODS ###')
         lines.append('')
-        lines.append('    def get_output_file_lines(self, material, material_underscored_name):')
+        lines.append('    def get_output_data_file_lines(self, material, material_underscored_name):')
         lines.append('        output_file_lines = []')
         lines.append('        return output_file_lines')
         lines.append('')
