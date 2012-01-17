@@ -123,7 +123,6 @@ class MaterialWrangler(PackageWrangler):
         return self.material_proxy_wrangler.get_package_proxy(package_importable_name)
 
     def handle_main_menu_result(self, result):
-        self.debug(result)
         if result == 'd':
             self.create_data_package_interactively()
         elif result == 'h':

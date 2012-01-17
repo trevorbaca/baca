@@ -68,16 +68,20 @@ class UserInputHandlingMaterialProxy(MaterialProxy):
 
     def make_main_menu_for_material_made_with_editor(self):
         menu, hidden_section = self.make_new_menu(where=self.where(), is_hidden=True)
-        section = menu.make_new_section(is_numbered=True)
+        self.make_main_menu_section_for_user_input_module(menu, hidden_section)
+        self.make_main_menu_section_for_output_data(menu, hidden_section)
+        return menu, hidden_section
+
+    def make_main_menu_section_for_user_input_module(self, main_menu, hidden_section):
+        section = main_menu.make_new_section(is_numbered=True)
         section.tokens = self.formatted_user_input_lines
         section.return_value_attribute = 'number'
-        section = menu.make_new_section()
+        section = main_menu.make_new_section()
         section.append(('uic', 'user input - clear'))
         section.append(('uil', 'user input - load demo values'))
         section.append(('uip', 'user input - populate'))
         section.append(('uis', 'user input - show demo values'))
         hidden_section.append(('uit','user input - toggle default mode'))
-        return menu, hidden_section
 
     # TODO: implement
     def populate_user_input_wrapper(self, prompt_proceed=True):
@@ -139,4 +143,3 @@ class UserInputHandlingMaterialProxy(MaterialProxy):
                 lilypond_file.header_block.title = markuptools.Markup(self.generic_output_name.capitalize())
                 lilypond_file.header_block.subtitle = markuptools.Markup('(unsaved)')
                 iotools.show(lilypond_file)
-

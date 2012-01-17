@@ -57,6 +57,13 @@ class MaterialProxy(PackageProxy):
         return self._generic_output_name
 
     @property
+    def has_complete_user_input_wrapper(self):
+        if self.has_user_input_wrapper:
+            user_input_wrapper = self.user_input_wrapper
+            return user_input_wrapper.is_complete
+        return False
+
+    @property
     def has_editor(self):
         return bool(self.editor_class_name)
 
@@ -132,18 +139,18 @@ class MaterialProxy(PackageProxy):
             return bool(self.import_score_definition_from_score_builder())
 
     @property
-    def has_user_input(self):
-        if not self.has_user_input_module:
-            return False
-        else:
-            return self.import_user_input_from_user_input_module() is not None
-
-    @property
     def has_user_input_module(self):
         if self.user_input_module_file_name is None:
             return False
         else:
             return os.path.exists(self.user_input_module_file_name)
+
+    @property
+    def has_user_input_wrapper(self):
+        if not self.has_user_input_module:
+            return False
+        else:
+            return self.import_user_input_from_user_input_module() is not None
 
     @property
     def is_changed(self):
@@ -564,6 +571,7 @@ class MaterialProxy(PackageProxy):
             self.select_stylesheet_interactively()
         elif result == 'stl':
             self.manage_stylesheets()
+        # TODO: extend this to work with user input-handling material proxies
         elif result == 'dc':
             self.write_material_definition_to_output_data_module(is_forced=True)
         elif result == 'di':
@@ -679,6 +687,9 @@ class MaterialProxy(PackageProxy):
             section.append(('di', 'output data - inspect'))
             hidden_section.append(('dd', 'output data - delete'))
         elif self.has_material_definition:
+            section = main_menu.make_new_section()
+            section.append(('dc', 'output data - create'))
+        elif self.has_complete_user_input_wrapper:
             section = main_menu.make_new_section()
             section.append(('dc', 'output data - create'))
 
