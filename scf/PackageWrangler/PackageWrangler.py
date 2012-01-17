@@ -54,15 +54,6 @@ class PackageWrangler(SCFObject):
         return False
 
     @property
-    def score_package_short_names(self):
-        result = []
-        scores_directory = os.environ.get('SCORES')        
-        for x in os.listdir(scores_directory):
-            if x[0].isalpha():
-                result.append(x)
-        return result
-
-    @property
     def toplevel_global_package_importable_name(self):
         return self._toplevel_global_package_importable_name
 

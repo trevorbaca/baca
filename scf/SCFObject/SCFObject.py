@@ -71,6 +71,15 @@ class SCFObject(object):
         return os.path.join('/', 'Users', 'trevorbaca', 'Documents', 'other', 'baca', 'scf')
 
     @property
+    def score_package_short_names(self):
+        result = []
+        scores_directory = os.environ.get('SCORES')
+        for x in os.listdir(scores_directory):
+            if x[0].isalpha():
+                result.append(x)
+        return result
+
+    @property
     def session(self):
         return self._session
 
