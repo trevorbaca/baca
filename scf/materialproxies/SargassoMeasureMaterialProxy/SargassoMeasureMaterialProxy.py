@@ -33,7 +33,7 @@ class SargassoMeasureMaterialProxy(UserInputHandlingMaterialProxy):
         'from baca.scf import UserInputWrapper',]
 
     user_input_tests = [
-        ('measure_denominator', mathtools.is_nonnegative_integer_power_of_two),
+        ('measure_denominator', mathtools.is_positive_integer_power_of_two),
         ('measure_numerator_talea', sequencetools.all_are_nonnegative_integers),
         ('measure_division_denominator', mathtools.is_nonnegative_integer_power_of_two),
         ('measure_division_talea', sequencetools.all_are_nonnegative_integers),

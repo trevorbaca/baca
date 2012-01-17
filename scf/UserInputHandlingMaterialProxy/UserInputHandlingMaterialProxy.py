@@ -26,17 +26,20 @@ class UserInputHandlingMaterialProxy(MaterialProxy):
         index = number - 1
         key, current_value = user_input_wrapper.list_items[index]
         test = type(self).user_input_tests[index][1]
-        default = type(self).user_input_demo_values[index][1]
+        if self.session.use_current_user_input_values_as_default:
+            default = current_value
+        else:
+            default = None
         getter = self.make_new_getter()
         spaced_attribute_name = key.replace('_', ' ')
-        message = "value for '{}' must satisfy " + 'foo' + '.'
+        message = "value for '{}' must satisfy " + test.__name__ + '().'
         getter.append_something(spaced_attribute_name, message, default=default)
         getter.tests.append(test)
         new_value = getter.run()
         if self.backtrack():
             return
         user_input_wrapper[key] = new_value 
-        self.write_user_input_wrapper_to_disk(user_input_wrapper, prompt_proceed=False)
+        self.write_user_input_wrapper_to_disk(user_input_wrapper)
 
     def format_user_input_wrapper_for_writing_to_disk(self, user_input_wrapper):
         result = []
@@ -64,6 +67,7 @@ class UserInputHandlingMaterialProxy(MaterialProxy):
         section = menu.make_new_section()
         section.append(('uic', 'user input - clear'))
         section.append(('uil', 'user input - load demo values'))
+        hidden_section.append(('uit','user input - toggle default mode'))
         return menu, hidden_section
 
     def write_stub_user_input_module_to_disk(self, prompt_proceed=True):
