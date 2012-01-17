@@ -1,33 +1,19 @@
 from baca.scf.ChunkProxy import ChunkProxy
-from baca.scf.PackageProxy import PackageProxy
-from baca.scf.PackageWrangler import PackageWrangler
+from baca.scf.NewPackageWrangler import NewPackageWrangler
 import os
 
 
-class ChunkWrangler(PackageWrangler, PackageProxy):
+class ChunkWrangler(NewPackageWrangler):
 
-    # TODO: remove purview
-    def __init__(self, purview_package_short_name, session=None):
-        package_importable_name = '.'.join([purview_package_short_name, 'mus', 'chunks'])
-        PackageProxy.__init__(self, package_importable_name=package_importable_name, session=session)
-        PackageWrangler.__init__(self, directory_name=self.directory_name, session=self.session)
+    def __init__(self, session=None):
+        import baca
+        NewPackageWrangler.__init__(self, 'baca.sketches', 'mus.chunks', session=session)
 
     ### READ-ONLY PUBLIC ATTRIBUTES ###
 
     @property
     def breadcrumb(self):
         return 'chunks'
-
-    ### READ / WRITE PUBLC ATTRIBUTES ###
-
-    @apply
-    def directory_name():
-        def fget(self):
-            return self._directory_name
-        def fset(self, directory_name):
-            assert isinstance(directory_name, (str, type(None)))
-            self._directory_name = directory_name
-        return property(**locals())
 
     ### PUBLIC METHODS ###
 
@@ -48,10 +34,7 @@ class ChunkWrangler(PackageWrangler, PackageProxy):
 
     def make_main_menu(self):
         menu, section = self.make_new_menu(where=self.where(), is_numbered=True)
-        if self.has_packages:
-            section.extend(self.package_spaced_names)
-        else:
-            menu.sections.pop()
+        section.tokens = self.wrangled_package_short_names()
         section = menu.make_new_section()
         section.append(('new', 'new chunk'))
         return menu

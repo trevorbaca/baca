@@ -11,8 +11,7 @@ class ScoreProxy(PackageProxy):
         self._etc_proxy = baca.scf.EtcProxy(score_package_short_name, session=self.session)
         self._exg_proxy = baca.scf.ExgProxy(score_package_short_name, session=self.session)
         self._mus_proxy = baca.scf.MusProxy(score_package_short_name, session=self.session)
-        self._chunk_wrangler = baca.scf.ChunkWrangler(score_package_short_name, session=self.session)
-        #self._material_wrangler = baca.scf.MaterialWrangler(score_package_short_name, session=self.session)
+        self._chunk_wrangler = baca.scf.ChunkWrangler(session=self.session)
         self._material_wrangler = baca.scf.MaterialWrangler(session=self.session)
         self._material_proxy_wrangler = baca.scf.MaterialProxyWrangler(session=self.session)
 
@@ -96,8 +95,7 @@ class ScoreProxy(PackageProxy):
     @property
     def score_initializer_file_names(self):
         return (self.initializer_file_name,
-            self.mus_proxy.initializer_file_name,
-            self.chunk_wrangler.initializer_file_name,)
+            self.mus_proxy.initializer_file_name,)
 
     @property
     def score_package_wranglers(self):

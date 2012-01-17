@@ -156,6 +156,7 @@ class MaterialWrangler(NewPackageWrangler):
         return menu
 
     # TODO: write test
+    # TODO: replace with SCFObject.package_exists() generalization
     def material_package_exists(self, material_package_importable_name):
         return os.path.exists(self.package_importable_name_to_directory_name(
             material_package_importable_name))
