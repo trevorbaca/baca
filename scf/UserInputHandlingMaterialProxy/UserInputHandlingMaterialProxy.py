@@ -5,8 +5,16 @@ class UserInputHandlingMaterialProxy(MaterialProxy):
 
     ### PUBLIC METHODS ###
 
-    def clear_user_input(self):
-        self.print_not_implemented()
+    def clear_user_input_wrapper(self, prompt_proceed=True):
+        user_input_wrapper = self.user_input_wrapper
+        if user_input_wrapper.is_empty:
+            self.conditionally_display_lines(lines=['user input already empty.', ''])
+            self.proceed()
+        else:
+            user_input_wrapper.clear()
+            self.write_user_input_wrapper_to_disk(user_input_wrapper)
+            if prompt_proceed:
+                self.proceed(lines=['user input wrapper cleared.'])
 
     def edit_user_input_at_number(self, number):
         user_input_wrapper = self.user_input_wrapper
@@ -60,21 +68,14 @@ class UserInputHandlingMaterialProxy(MaterialProxy):
             line = 'stub user input module written to disk.'
             self.proceed(lines=[line])
 
-    def write_user_input_wrapper_to_disk(self, user_input_wrapper, prompt_proceed=True):
+    def write_user_input_wrapper_to_disk(self, user_input_wrapper):
         formatted_user_input_lines = self.format_user_input_wrapper_for_writing_to_disk(user_input_wrapper)
         user_input_module = file(self.user_input_module_file_name, 'w')
         user_input_module.write('\n'.join(formatted_user_input_lines))
         user_input_module.close()
-        if prompt_proceed:
-            line = 'user input written to disk.'
-            self.proceed(lines=[line])
 
     ### OLD INTERACTIVE MATERIAL PROXY PUBLIC METHODS ###
 
-    def clear_user_input_wrapper(self, user_input_wrapper):
-        for key in user_input_wrapper:
-            user_input_wrapper[key] = None
-        
     def edit_item(self, key, value):
         prompt = key.replace('_', ' ')
         default = repr(value)

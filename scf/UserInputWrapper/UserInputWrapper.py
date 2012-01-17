@@ -45,3 +45,9 @@ class UserInputWrapper(collections.OrderedDict):
     @property
     def values(self):
         return list(self.itervalues())
+
+    ### PUBLIC METHODS ###
+
+    def clear(self):
+        for key in self:
+            self[key] = None

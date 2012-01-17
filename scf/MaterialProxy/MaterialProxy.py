@@ -522,7 +522,7 @@ class MaterialProxy(PackageProxy):
     def handle_main_menu_result(self, result):
         assert isinstance(result, str)
         if result == 'uic':
-            self.clear_user_input()    
+            self.clear_user_input_wrapper(prompt_proceed=False)    
         elif result == 'mdd':
             self.delete_material_definition_module()
         elif result == 'mde':
