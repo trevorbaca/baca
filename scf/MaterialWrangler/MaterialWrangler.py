@@ -136,9 +136,7 @@ class MaterialWrangler(PackageWrangler):
         
     def make_main_menu(self, head=None):
         menu, section = self.make_new_menu(where=self.where(), is_numbered=True, is_keyed=False)
-        names = self.list_wrangled_package_importable_names(head=head)
-        heads = [name.split('.')[-1] for name in names]
-        section.tokens = zip(names, heads)
+        section.tokens = self.list_wrangled_package_menuing_pairs(head=head)
         section = menu.make_new_section()
         section.append(('d', 'make data'))
         section.append(('h', 'make material by hand'))

@@ -117,6 +117,11 @@ class PackageWrangler(SCFObject):
                 result.append(package_importable_name)
         return result
 
+    def list_wrangled_package_menuing_pairs(self, head=None):
+        package_importable_names = self.list_wrangled_package_importable_names(head=head)
+        package_spaced_names = self.list_wrangled_package_spaced_names(head=head)
+        return zip(package_importable_names, package_spaced_names)
+
     def list_wrangled_package_proxies(self, head=None):
         result = []
         for package_importable_name in self.list_wrangled_package_importable_names(head=head):
