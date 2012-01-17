@@ -7,25 +7,11 @@ import collections
 import os
 
 
-#class MaterialWrangler(PackageWrangler, PackageProxy):
 class MaterialWrangler(NewPackageWrangler):
 
-    # TODO: get rid of the idea that wranglers have a purview; always grant effective global purview
-    #def __init__(self, purview_package_short_name, session=None):
     def __init__(self, session=None):
         import baca
-#        if purview_package_short_name == 'baca':
-#            package_importable_name = '{}.materials'.format(purview_package_short_name)
-#        else:   
-#            package_importable_name = '{}.mus.materials'.format(purview_package_short_name)
-#        PackageProxy.__init__(self, package_importable_name=package_importable_name, session=session)
-#        PackageWrangler.__init__(self, directory_name=self.directory_name, session=self.session)
-        toplevel_global_package_importable_name = 'baca.materials'
-        toplevel_score_package_importable_name_body = 'mus.materials'
-        NewPackageWrangler.__init__(self, 
-            toplevel_global_package_importable_name=toplevel_global_package_importable_name,
-            toplevel_score_package_importable_name_body=toplevel_score_package_importable_name_body,
-            session=session)
+        NewPackageWrangler.__init__(self, 'baca.materials', 'mus.materials', session=session)
         self._material_proxy_wrangler = baca.scf.MaterialProxyWrangler(session=self.session)
 
     ### READ-ONLY PUBLIC ATTRIBUTES ###
@@ -46,9 +32,7 @@ class MaterialWrangler(NewPackageWrangler):
     @property
     def material_package_short_names(self):
         result = []
-        #for material_proxy in self.package_proxies:
         for wrangled_package_importable_name in self.wrangled_package_importable_names:
-            #result.append(material_proxy.package_short_name)
             result.append(wrangled_package_importable_name)
         return result
 
@@ -149,8 +133,8 @@ class MaterialWrangler(NewPackageWrangler):
             return
         return material_package_importable_name
 
-    def get_package_proxy(self, package_importable_name):
-        return MaterialProxy(package_importable_name, session=self.session)
+    def get_material_proxy(self, package_importable_name):
+        return self.material_proxy_wrangler.get_material_proxy(package_importable_name)
 
     def handle_main_menu_result(self, result):
         if result == 'd':
@@ -160,8 +144,7 @@ class MaterialWrangler(NewPackageWrangler):
         elif result == 'e':
             self.create_editable_material_package_interactively()
         else:
-            #material_proxy = self.make_material_proxy(result)
-            material_proxy = self.material_proxy_wrangler.get_material_proxy(result)
+            material_proxy = self.get_material_proxy(result)
             material_proxy.run()
         
     def make_main_menu(self):
@@ -173,17 +156,6 @@ class MaterialWrangler(NewPackageWrangler):
         section.append(('h', 'make material by hand'))
         section.append(('e', 'make material with editor'))
         return menu
-
-#    def make_material_proxy(self, material_underscored_name):
-#        score_package_importable_name = self.package_importable_name
-#        package_importable_name_parts = []
-#        package_importable_name_parts.append(score_package_importable_name)
-#        package_importable_name_parts.append(material_underscored_name)
-#        package_importable_name = '.'.join(package_importable_name_parts)
-#        #package_proxy = PackageProxy(package_importable_name=package_importable_name, session=self.session)
-#        material_proxy = MaterialProxy(
-#            package_importable_name=package_importable_name, session=self.session)
-#        return material_proxy
 
     # TODO: write test
     def material_package_exists(self, material_package_importable_name):

@@ -6,6 +6,7 @@ import os
 
 class ChunkWrangler(PackageWrangler, PackageProxy):
 
+    # TODO: remove purview
     def __init__(self, purview_package_short_name, session=None):
         package_importable_name = '.'.join([purview_package_short_name, 'mus', 'chunks'])
         PackageProxy.__init__(self, package_importable_name=package_importable_name, session=session)

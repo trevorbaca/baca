@@ -8,11 +8,11 @@ def test_MaterialWrangler_01():
 
     material_wrangler = baca.scf.MaterialWrangler('baca')
 
-    material_proxy = material_wrangler.get_package_proxy('baca.materials.sargasso_multipliers')
+    material_proxy = material_wrangler.get_material_proxy('baca.materials.sargasso_multipliers')
     assert isinstance(material_proxy, baca.scf.MaterialProxy)
 
-    material_proxy = material_wrangler.get_package_proxy('baca.materials.test_measures_a')
-    assert isinstance(material_proxy, baca.scf.MaterialProxy)
+    material_proxy = material_wrangler.get_material_proxy('baca.materials.test_measures_a')
+    assert isinstance(material_proxy, baca.scf.materialproxies.SargassoMeasureMaterialProxy)
 
     #material_proxies = material_wrangler.package_proxies
     #assert all([isinstance(x, baca.scf.MaterialProxy) for x in material_proxies])
@@ -33,11 +33,11 @@ def test_MaterialWrangler_02():
 
     material_wrangler = baca.scf.MaterialWrangler('manos')
 
-    material_proxy = material_wrangler.get_package_proxy('baca.materials.sargasso_multipliers')
+    material_proxy = material_wrangler.get_material_proxy('baca.materials.sargasso_multipliers')
     assert isinstance(material_proxy, baca.scf.MaterialProxy)
 
-    material_proxy = material_wrangler.get_package_proxy('baca.materials.test_measures_a')
-    assert isinstance(material_proxy, baca.scf.MaterialProxy)
+    material_proxy = material_wrangler.get_material_proxy('baca.materials.test_measures_a')
+    assert isinstance(material_proxy, baca.scf.materialproxies.SargassoMeasureMaterialProxy)
 
     #material_proxies = material_wrangler.package_proxies
     #assert all([isinstance(x, baca.scf.MaterialProxy) for x in material_proxies])
