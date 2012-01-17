@@ -351,9 +351,6 @@ class MaterialProxy(PackageProxy):
         parent_package = PackageProxy(self.parent_package_importable_name, session=self.session)
         parent_package.add_import_statement_to_initializer(import_statement)
 
-    def clear_user_input(self):
-        self.print_not_implemented()
-
     def create_output_ly_and_output_pdf_from_score_builder(self, is_forced=False, prompt_proceed=True):
         lines = []
         lilypond_file = self.import_score_definition_from_score_builder()
@@ -448,31 +445,6 @@ class MaterialProxy(PackageProxy):
     def edit_source_stylesheet(self):
         stylesheet_proxy = StylesheetProxy(self.source_stylesheet_file_name, session=self.session)
         stylesheet_proxy.vi_stylesheet()
-
-    def edit_user_input_at_number(self, number):
-        #self.debug(self.class_name, 1)
-        #self.debug(self.package_importable_name, 2)
-        user_input_wrapper = self.user_input_wrapper
-        if user_input_wrapper is None:
-            return
-        if len(user_input_wrapper) < number:
-            return
-        index = number - 1
-        key, current_value = user_input_wrapper.list_items[index]
-        #test = self.user_input_tests[index][1]
-        #default = self.user_input_demo_values[index][1]
-        test = type(self).user_input_tests[index][1]
-        default = type(self).user_input_demo_values[index][1]
-        getter = self.make_new_getter()
-        spaced_attribute_name = key.replace('_', ' ')
-        message = "value for '{}' must satisfy " + 'foo' + '.'
-        getter.append_something(spaced_attribute_name, message, default=default)
-        getter.tests.append(test)
-        new_value = getter.run()
-        if self.backtrack():
-            return
-        user_input_wrapper[key] = new_value 
-        self.write_user_input_wrapper_to_disk(user_input_wrapper)
 
     # TODO: reimplement with getter and backtracking
     def get_package_short_name_of_new_material_interactively(self):
@@ -660,15 +632,6 @@ class MaterialProxy(PackageProxy):
         self.make_main_menu_section_for_hidden_entries(menu)
         return menu
     
-    def make_main_menu_for_material_made_with_editor(self):
-        menu, hidden_section = self.make_new_menu(where=self.where(), is_hidden=True)
-        section = menu.make_new_section(is_numbered=True)
-        section.tokens = self.formatted_user_input_lines
-        section.return_value_attribute = 'number'
-        section = menu.make_new_section()
-        section.append(('uic', 'user input - clear'))
-        return menu, hidden_section
-
     def make_main_menu_for_material_made_by_hand(self):
         menu, hidden_section = self.make_new_menu(where=self.where(), is_hidden=True)
         self.make_main_menu_section_for_material_definition(menu, hidden_section)
@@ -1025,26 +988,3 @@ class MaterialProxy(PackageProxy):
         if prompt_proceed:
             line = 'stub score builder written to disk.'
             self.proceed(lines=[line])
-
-    def write_stub_user_input_module_to_disk(self, prompt_proceed=True):
-        user_input_module = file(self.user_input_module_file_name, 'w')
-        lines = []
-        lines.append('from baca.scf import UserInputWrapper')
-        lines.append('')
-        lines.append('')
-        lines.append('user_input = UserInputWrapper([])')
-        user_input_module.write('\n'.join(lines))
-        user_input_module.close()
-        if prompt_proceed:
-            line = 'stub user input module written to disk.'
-            self.proceed(lines=[line])
-
-    def write_user_input_wrapper_to_disk(self, user_input_wrapper, prompt_proceed=True):
-        formatted_user_input_lines = user_input_wrapper.formatted_lines
-        user_input_module = file(self.user_input_module_file_name, 'w')
-        user_input_module.write('\n'.join(formatted_user_input_lines))
-        user_input_module.close()
-        if prompt_proceed:
-            line = 'user input written to disk.'
-            self.proceed(lines=[line])
-        
