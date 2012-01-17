@@ -20,7 +20,7 @@ def test_ChunkWrangler_02():
 
     chunk_wrangler = baca.scf.ChunkWrangler()
 
-    names = chunk_wrangler.wrangled_package_importable_names
+    names = chunk_wrangler.list_wrangled_package_importable_names()
     assert all([iotools.is_underscore_delimited_lowercase_package_name(x) for x in names])
 
     names = chunk_wrangler.wrangled_package_short_names

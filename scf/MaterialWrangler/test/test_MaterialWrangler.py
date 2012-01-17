@@ -12,7 +12,7 @@ def test_MaterialWrangler_01():
     material_proxy = material_wrangler.get_material_proxy('baca.materials.test_measures_a')
     assert isinstance(material_proxy, baca.scf.materialproxies.SargassoMeasureMaterialProxy)
 
-    names = material_wrangler.wrangled_package_importable_names
+    names = material_wrangler.list_wrangled_package_importable_names()
     assert all([iotools.is_underscore_delimited_lowercase_package_name(x) for x in names])
 
     names = material_wrangler.wrangled_package_short_names
@@ -27,7 +27,7 @@ def test_MaterialWrangler_01():
     material_proxy = material_wrangler.get_material_proxy('baca.materials.test_measures_a')
     assert isinstance(material_proxy, baca.scf.materialproxies.SargassoMeasureMaterialProxy)
 
-    names = material_wrangler.wrangled_package_importable_names
+    names = material_wrangler.list_wrangled_package_importable_names()
     assert all([iotools.is_underscore_delimited_lowercase_package_name(x) for x in names])
 
     names = material_wrangler.wrangled_package_short_names

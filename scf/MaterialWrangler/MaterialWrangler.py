@@ -30,7 +30,7 @@ class MaterialWrangler(PackageWrangler):
     @property
     def material_package_short_names(self):
         result = []
-        for wrangled_package_importable_name in self.wrangled_package_importable_names:
+        for wrangled_package_importable_name in self.list_wrangled_package_importable_names():
             result.append(wrangled_package_importable_name)
         return result
 

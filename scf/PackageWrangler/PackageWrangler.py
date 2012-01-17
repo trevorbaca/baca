@@ -49,7 +49,7 @@ class PackageWrangler(SCFObject):
 
     @property
     def has_wrangled_packages(self):
-        for wrangler_package_importable_name in self.wrangled_package_importable_names:
+        for wrangler_package_importable_name in self.list_wrangled_package_importable_names():
             return True
         return False
 
@@ -92,16 +92,9 @@ class PackageWrangler(SCFObject):
         return result
 
     @property
-    def wrangled_package_importable_names(self):
-        result = [] 
-        result.extend(self.wrangled_global_package_importable_names)
-        result.extend(self.wrangled_score_package_importable_names)
-        return result
-
-    @property
     def wrangled_package_proxies(self):
         result = []
-        for package_importable_name in self.wrangled_package_importable_names:
+        for package_importable_name in self.list_wrangled_package_importable_names():
             wrangled_package_proxy = self.get_package_proxy(package_importable_name)
             result.append(wrangled_package_proxy)
         return result
@@ -109,7 +102,7 @@ class PackageWrangler(SCFObject):
     @property
     def wrangled_package_short_names(self):
         result = []
-        for x in self.wrangled_package_importable_names:
+        for x in self.list_wrangled_package_importable_names():
             result.append(x.split('.')[-1])
         return result
 
@@ -132,4 +125,15 @@ class PackageWrangler(SCFObject):
                         result.append('{}.{}'.format(toplevel_score_package_importable_name, name))
             else:
                 result.append(toplevel_score_package_importable_name)
+        return result
+
+    ### PUBLIC METHODS ###
+
+    def list_wrangled_package_importable_names(self, head=''):
+        result, package_importable_names = [], []
+        package_importable_names.extend(self.wrangled_global_package_importable_names)
+        package_importable_names.extend(self.wrangled_score_package_importable_names)
+        for package_importable_name in package_importable_names:
+            if package_importable_name.startswith(head):
+                result.append(package_importable_name)
         return result
