@@ -527,6 +527,8 @@ class MaterialProxy(PackageProxy):
             self.load_user_input_wrapper_demo_values(prompt_proceed=False)
         elif result == 'uip':
             self.populate_user_input_wrapper(prompt_proceed=False)
+        elif result == 'uis':
+            self.show_user_input_demo_values(prompt_proceed=True)
         elif result == 'uit':
             self.session.use_current_user_input_values_as_default = \
                 not self.session.use_current_user_input_values_as_default

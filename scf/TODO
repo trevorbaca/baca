@@ -1,5 +1,7 @@
 TODO
 
+-4. Implement populate_user_input_wrapper().
+
 -3. Implement material move and rename methods.
 
 -2. Extend self.proceed() to accept a single line.

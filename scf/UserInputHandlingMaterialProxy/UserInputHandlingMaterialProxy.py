@@ -75,11 +75,23 @@ class UserInputHandlingMaterialProxy(MaterialProxy):
         section.append(('uic', 'user input - clear'))
         section.append(('uil', 'user input - load demo values'))
         section.append(('uip', 'user input - populate'))
+        section.append(('uis', 'user input - show demo values'))
         hidden_section.append(('uit','user input - toggle default mode'))
         return menu, hidden_section
 
+    # TODO: implement
     def populate_user_input_wrapper(self, prompt_proceed=True):
         self.print_not_implemented()
+
+    def show_user_input_demo_values(self, prompt_proceed=True):
+        lines = []
+        for i, (key, value) in enumerate(self.user_input_demo_values):
+            line = '    {}: {!r}'.format(key.replace('_', ' '), value)
+            lines.append(line)
+        lines.append('')
+        self.conditionally_display_lines(lines=lines)
+        if prompt_proceed:
+            self.proceed()
 
     def write_stub_user_input_module_to_disk(self, prompt_proceed=True):
         user_input_module = file(self.user_input_module_file_name, 'w')
@@ -102,6 +114,7 @@ class UserInputHandlingMaterialProxy(MaterialProxy):
 
     ### OLD INTERACTIVE MATERIAL PROXY PUBLIC METHODS ###
 
+    # TODO: promote to current code
     def make_lilypond_file_from_user_input_wrapper(self, user_input_wrapper):
         material = self.make(*user_input_wrapper.values)
         lilypond_file = self.make_lilypond_file_from_output_material(material)
@@ -127,12 +140,3 @@ class UserInputHandlingMaterialProxy(MaterialProxy):
                 lilypond_file.header_block.subtitle = markuptools.Markup('(unsaved)')
                 iotools.show(lilypond_file)
 
-    # TODO: promote to current code
-    def show_demo_user_input_values(self):
-        menu, section = self.make_new_menu(where=self.where(), is_numbered=True)
-        items = []
-        for i, (key, value) in enumerate(self.user_input_demo_values.iteritems()):
-            item = '{}: {!r}'.format(key.replace('_', ' '), value)
-            items.append(item)
-        section.tokens = items
-        menu.run()
