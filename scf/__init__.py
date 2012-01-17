@@ -13,7 +13,6 @@ from MaterialWrangler import MaterialWrangler
 from MusProxy import MusProxy
 from NewPackageWrangler import NewPackageWrangler
 from PackageProxy import PackageProxy
-from PackageWrangler import PackageWrangler
 from ScoreProxy import ScoreProxy
 from ScoreTemplate import ScoreTemplate
 from ScoreWrangler import ScoreWrangler
