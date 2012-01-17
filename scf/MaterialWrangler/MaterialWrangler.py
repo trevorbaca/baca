@@ -18,22 +18,10 @@ class MaterialWrangler(PackageWrangler):
     def breadcrumb(self):
         return 'materials'
 
-    # TODO: write test
-    @property   
-    def global_materials_directory_name(self):
-        return os.path.join([self.global_directory_name, 'materials'])
-
     @property
     def material_proxy_wrangler(self):
         return self._material_proxy_wrangler
     
-    @property
-    def material_package_short_names(self):
-        result = []
-        for wrangled_package_importable_name in self.list_wrangled_package_importable_names():
-            result.append(wrangled_package_importable_name)
-        return result
-
     ### PUBLIC METHODS ###
 
     # TODO: write test
@@ -125,15 +113,14 @@ class MaterialWrangler(PackageWrangler):
             self.purview_name_to_materials_package_importable_name(purview_name)
         material_package_importable_name = '{}.{}'.format(
             materials_package_importable_name, material_package_short_name)
-        #if self.material_package_exists(material_package_importable_name):
         if self.package_exists(material_package_importable_name):
             line = 'Material package {!r} already exists.'.format(material_package_importable_name)
             self.proceed(lines=[line])
             return
         return material_package_importable_name
 
-    def get_material_proxy(self, package_importable_name):
-        return self.material_proxy_wrangler.get_material_proxy(package_importable_name)
+    def get_package_proxy(self, package_importable_name):
+        return self.material_proxy_wrangler.get_package_proxy(package_importable_name)
 
     def handle_main_menu_result(self, result):
         if result == 'd':
@@ -143,12 +130,12 @@ class MaterialWrangler(PackageWrangler):
         elif result == 'e':
             self.create_editable_material_package_interactively()
         else:
-            material_proxy = self.get_material_proxy(result)
+            material_proxy = self.get_package_proxy(result)
             material_proxy.run()
         
     def make_main_menu(self):
         menu, section = self.make_new_menu(where=self.where(), is_numbered=True)
-        section.tokens = self.material_package_short_names
+        section.tokens = self.list_wrangled_package_importable_names()
         section.return_value_attribute = 'body'
         section = menu.make_new_section()
         section.append(('d', 'make data'))
