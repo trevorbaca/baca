@@ -123,6 +123,7 @@ class MaterialWrangler(PackageWrangler):
         return self.material_proxy_wrangler.get_package_proxy(package_importable_name)
 
     def handle_main_menu_result(self, result):
+        self.debug(result)
         if result == 'd':
             self.create_data_package_interactively()
         elif result == 'h':
@@ -134,9 +135,10 @@ class MaterialWrangler(PackageWrangler):
             material_proxy.run()
         
     def make_main_menu(self, head=None):
-        menu, section = self.make_new_menu(where=self.where(), is_numbered=True)
-        section.tokens = self.list_wrangled_package_importable_names(head=head)
-        section.return_value_attribute = 'body'
+        menu, section = self.make_new_menu(where=self.where(), is_numbered=True, is_keyed=False)
+        names = self.list_wrangled_package_importable_names(head=head)
+        heads = [name.split('.')[-1] for name in names]
+        section.tokens = zip(names, heads)
         section = menu.make_new_section()
         section.append(('d', 'make data'))
         section.append(('h', 'make material by hand'))
