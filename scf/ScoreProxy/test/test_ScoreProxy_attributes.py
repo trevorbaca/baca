@@ -42,8 +42,7 @@ def test_ScoreProxy_attributes_01():
     assert score_proxy.score_initializer_file_names == (
         '/Users/trevorbaca/Documents/scores/manos/__init__.py',
         '/Users/trevorbaca/Documents/scores/manos/mus/__init__.py',
-        '/Users/trevorbaca/Documents/scores/manos/mus/chunks/__init__.py',
-        '/Users/trevorbaca/Documents/scores/manos/mus/materials/__init__.py')
+        '/Users/trevorbaca/Documents/scores/manos/mus/chunks/__init__.py',)
 
     assert score_proxy.score_package_wranglers == (
         baca.scf.ChunkWrangler('manos'),

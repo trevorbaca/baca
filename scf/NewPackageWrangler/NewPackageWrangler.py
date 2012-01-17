@@ -20,6 +20,14 @@ class NewPackageWrangler(SCFObject):
 
     ### OVERLOADS ###
 
+    def __eq__(self, other):
+        if isinstance(other, type(self)):
+            if self.toplevel_global_package_importable_name == other.toplevel_global_package_importable_name:
+                if self.toplevel_score_package_importable_name_body == \
+                    other.toplevel_score_package_importable_name_body:
+                    return True
+        return False
+
     def __repr__(self):
         return '{}({!r})'.format(
             self.class_name, self.toplevel_global_package_importable_name.split('.')[-1])
@@ -86,6 +94,20 @@ class NewPackageWrangler(SCFObject):
         result = [] 
         result.extend(self.wrangled_global_package_importable_names)
         result.extend(self.wrangled_score_package_importable_names)
+        return result
+
+    @property
+    def wrangled_package_short_names(self):
+        result = []
+        for x in self.wrangled_package_importable_names:
+            result.append(x.split('.')[-1])
+        return result
+
+    @property
+    def wrangled_package_spaced_names(self):
+        result = []
+        for x in self.wrangled_package_short_names:
+            result.append(x.replace('_', ' '))
         return result
 
     @property

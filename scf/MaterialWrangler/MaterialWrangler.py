@@ -1,22 +1,31 @@
 from abjad.tools import iotools
-from baca.scf.MaterialProxy import MaterialProxy
+from baca.scf.MaterialProxy import MaterialProxy 
+from baca.scf.NewPackageWrangler import NewPackageWrangler
 from baca.scf.PackageProxy import PackageProxy
 from baca.scf.PackageWrangler import PackageWrangler
 import collections
 import os
 
 
-class MaterialWrangler(PackageWrangler, PackageProxy):
+#class MaterialWrangler(PackageWrangler, PackageProxy):
+class MaterialWrangler(NewPackageWrangler):
 
     # TODO: get rid of the idea that wranglers have a purview; always grant effective global purview
-    def __init__(self, purview_package_short_name, session=None):
+    #def __init__(self, purview_package_short_name, session=None):
+    def __init__(self, session=None):
         import baca
-        if purview_package_short_name == 'baca':
-            package_importable_name = '{}.materials'.format(purview_package_short_name)
-        else:   
-            package_importable_name = '{}.mus.materials'.format(purview_package_short_name)
-        PackageProxy.__init__(self, package_importable_name=package_importable_name, session=session)
-        PackageWrangler.__init__(self, directory_name=self.directory_name, session=self.session)
+#        if purview_package_short_name == 'baca':
+#            package_importable_name = '{}.materials'.format(purview_package_short_name)
+#        else:   
+#            package_importable_name = '{}.mus.materials'.format(purview_package_short_name)
+#        PackageProxy.__init__(self, package_importable_name=package_importable_name, session=session)
+#        PackageWrangler.__init__(self, directory_name=self.directory_name, session=self.session)
+        toplevel_global_package_importable_name = 'baca.materials'
+        toplevel_score_package_importable_name_body = 'mus.materials'
+        NewPackageWrangler.__init__(self, 
+            toplevel_global_package_importable_name=toplevel_global_package_importable_name,
+            toplevel_score_package_importable_name_body=toplevel_score_package_importable_name_body,
+            session=session)
         self._material_proxy_wrangler = baca.scf.MaterialProxyWrangler(session=self.session)
 
     ### READ-ONLY PUBLIC ATTRIBUTES ###
@@ -37,8 +46,10 @@ class MaterialWrangler(PackageWrangler, PackageProxy):
     @property
     def material_package_short_names(self):
         result = []
-        for material_proxy in self.package_proxies:
-            result.append(material_proxy.package_short_name)
+        #for material_proxy in self.package_proxies:
+        for wrangled_package_importable_name in self.wrangled_package_importable_names:
+            #result.append(material_proxy.package_short_name)
+            result.append(wrangled_package_importable_name)
         return result
 
     ### PUBLIC METHODS ###
@@ -138,7 +149,6 @@ class MaterialWrangler(PackageWrangler, PackageProxy):
             return
         return material_package_importable_name
 
-    # TODO: get rid of this or get rid of self.make_material_proxy()
     def get_package_proxy(self, package_importable_name):
         return MaterialProxy(package_importable_name, session=self.session)
 
@@ -150,7 +160,8 @@ class MaterialWrangler(PackageWrangler, PackageProxy):
         elif result == 'e':
             self.create_editable_material_package_interactively()
         else:
-            material_proxy = self.make_material_proxy(result)
+            #material_proxy = self.make_material_proxy(result)
+            material_proxy = self.material_proxy_wrangler.get_material_proxy(result)
             material_proxy.run()
         
     def make_main_menu(self):
@@ -163,17 +174,16 @@ class MaterialWrangler(PackageWrangler, PackageProxy):
         section.append(('e', 'make material with editor'))
         return menu
 
-    # TODO: get rid of this or get rid of self.get_package_proxy()
-    def make_material_proxy(self, material_underscored_name):
-        score_package_importable_name = self.package_importable_name
-        package_importable_name_parts = []
-        package_importable_name_parts.append(score_package_importable_name)
-        package_importable_name_parts.append(material_underscored_name)
-        package_importable_name = '.'.join(package_importable_name_parts)
-        #package_proxy = PackageProxy(package_importable_name=package_importable_name, session=self.session)
-        material_proxy = MaterialProxy(
-            material_package_importable_name=package_importable_name, session=self.session)
-        return material_proxy
+#    def make_material_proxy(self, material_underscored_name):
+#        score_package_importable_name = self.package_importable_name
+#        package_importable_name_parts = []
+#        package_importable_name_parts.append(score_package_importable_name)
+#        package_importable_name_parts.append(material_underscored_name)
+#        package_importable_name = '.'.join(package_importable_name_parts)
+#        #package_proxy = PackageProxy(package_importable_name=package_importable_name, session=self.session)
+#        material_proxy = MaterialProxy(
+#            package_importable_name=package_importable_name, session=self.session)
+#        return material_proxy
 
     # TODO: write test
     def material_package_exists(self, material_package_importable_name):

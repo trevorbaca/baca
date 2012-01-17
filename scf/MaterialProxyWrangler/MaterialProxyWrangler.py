@@ -34,18 +34,29 @@ class MaterialProxyWrangler(PackageWrangler, PackageProxy):
 
     ### PUBLIC METHODS ###
 
-    # TODO: write test
-    def get_material_proxy(self, material_proxy_package_short_name, material_package_importable_name):
-        command = 'from baca.scf.materialproxies import {} as material_proxy_class'.format(
-            material_proxy_package_short_name)
-        exec(command)
-        material_proxy = material_proxy_class(
-            material_package_importable_name=material_package_importable_name, session=self.session)
-        return material_proxy
+#    # TODO: reimplement
+#    def get_material_proxy(self, material_proxy_package_short_name, material_package_importable_name):
+#        command = 'from baca.scf.materialproxies import {} as material_proxy_class'.format(
+#            material_proxy_package_short_name)
+#        exec(command)
+#        material_proxy = material_proxy_class(
+#            package_importable_name=material_package_importable_name, session=self.session)
+#        return material_proxy
 
+    def get_material_proxy(self, material_package_importable_name):
+        import baca
+        material_proxy = baca.scf.MaterialProxy(material_package_importable_name, session=self.session)
+        editor_class_name = material_proxy.editor_class_name
+        if editor_class_name is not None:
+            command = 'from baca.scf.materialproxies import {} as material_proxy_class'
+            command = command.format(editor_class_name)
+            exec(command)
+            material_proxy = material_proxy_class(material_package_importable_name, session=self.session)
+        return material_proxy
+            
     def handle_main_menu_result(self, result):
         if result == 'new':
-            self.make_material_proxy()
+            self.create_material_proxy_interactively()
         else:
             raise ValueError
 
@@ -57,7 +68,7 @@ class MaterialProxyWrangler(PackageWrangler, PackageProxy):
         return menu
 
     # replace with material_proxy wizard
-    def make_material_proxy(self):
+    def create_material_proxy_interactively(self):
         while True:
             material_proxy_name = self.handle_raw_input('material_proxy name')
             if iotools.is_uppercamelcase_string(material_proxy_name):
@@ -68,12 +79,12 @@ class MaterialProxyWrangler(PackageWrangler, PackageProxy):
             break
         material_proxy_directory = os.path.join(self.directory_name, material_proxy_name)
         os.mkdir(material_proxy_directory)
-        self.make_material_proxy_initializer(material_proxy_name)
-        self.make_material_proxy_class_file(material_proxy_name, generic_output_product)
-        self.make_material_proxy_stylesheet(material_proxy_name)
+        self.create_material_proxy_initializer(material_proxy_name)
+        self.create_material_proxy_class_file(material_proxy_name, generic_output_product)
+        self.create_material_proxy_stylesheet(material_proxy_name)
 
     # TODO: change to boilerplate file stored in material_proxy package
-    def make_material_proxy_initializer(self, material_proxy_name):
+    def create_material_proxy_initializer(self, material_proxy_name):
         initializer_file_name = os.path.join(self.directory_name, material_proxy_name, '__init__.py')
         initializer = file(initializer_file_name, 'w')
         line = 'from abjad.tools.importtools._import_structured_package import _import_structured_package\n'
@@ -83,7 +94,7 @@ class MaterialProxyWrangler(PackageWrangler, PackageProxy):
         initializer.close() 
 
     # TODO: implement MaterialProxyClassFile object to model and customize these settings
-    def make_material_proxy_class_file(self, material_proxy_name, generic_output_name):
+    def create_material_proxy_class_file(self, material_proxy_name, generic_output_name):
         class_file_name = os.path.join(self.directory_name, material_proxy_name, material_proxy_name + '.py')
         class_file = file(class_file_name, 'w')
         lines = []
@@ -126,7 +137,7 @@ class MaterialProxyWrangler(PackageWrangler, PackageProxy):
         class_file.close()
 
     # TODO: change to boilerplate file stored somewhere
-    def make_material_proxy_stylesheet(self, material_proxy_name):
+    def create_material_proxy_stylesheet(self, material_proxy_name):
         stylesheet = lilypondfiletools.make_basic_lilypond_file()
         stylesheet.pop()
         stylesheet.file_initial_system_comments = []

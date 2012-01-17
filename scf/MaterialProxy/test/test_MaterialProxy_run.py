@@ -6,20 +6,20 @@ def test_MaterialProxy_run_01():
     '''
 
     studio = baca.scf.Studio()
-    studio.run(user_input='m sargasso q')
+    studio.run(user_input='m baca.materials.sargasso q')
     assert studio.ts == (6,)
 
-    studio.run(user_input='m sargasso b q')
+    studio.run(user_input='m baca.materials.sargasso b q')
     assert studio.ts == (8, (2, 6))
 
-    studio.run(user_input='m sargasso studio q')
+    studio.run(user_input='m baca.materials.sargasso studio q')
     assert studio.ts == (8, (0, 6))
 
     # TODO: make this work by causing score backtracking to be ignored
-    #studio.run(user_input='m sargasso score q')
+    #studio.run(user_input='m baca.materials.sargasso score q')
     #assert studio.ts == (8, (4, 6))
 
-    studio.run(user_input='m sargasso foo q')
+    studio.run(user_input='m baca.materials.sargasso foo q')
     assert studio.ts == (8, (4, 6))
 
 
@@ -28,7 +28,7 @@ def test_MaterialProxy_run_02():
     '''
 
     studio = baca.scf.Studio()
-    studio.run(user_input='m sargasso q')
+    studio.run(user_input='m baca.materials.sargasso q')
     assert studio.transcript[-2][0] == 'Studio - materials - sargasso multipliers'
 
 
@@ -58,5 +58,5 @@ def test_MaterialProxy_run_04():
     '''
 
     studio = baca.scf.Studio()
-    studio.run(user_input='all las m 2 q')
+    studio.run(user_input='all las m manos.mus.materials.black q')
     assert studio.transcript[-2][0] == 'Las manos mágicas - materials - black pcs'

@@ -14,8 +14,8 @@ import sys
 # TODO: add 'list package directory' user command & inherit from PackageProxy, somehow
 class MaterialProxy(PackageProxy):
 
-    def __init__(self, material_package_importable_name=None, session=None):
-        PackageProxy.__init__(self, package_importable_name=material_package_importable_name, session=session)
+    def __init__(self, package_importable_name=None, session=None):
+        PackageProxy.__init__(self, package_importable_name=package_importable_name, session=session)
         self._generic_output_name = None
         self._recommended_stylesheet_file_name = None
 
