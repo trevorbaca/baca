@@ -22,6 +22,7 @@ from StylesheetProxy import StylesheetProxy
 from StylesheetWrangler import StylesheetWrangler
 from Transcript import Transcript
 from TrevorBaca import TrevorBaca
+from UserInputHandlingMaterialProxy import UserInputHandlingMaterialProxy
 from UserInputWrapper import UserInputWrapper
 import editors
 import exceptions
