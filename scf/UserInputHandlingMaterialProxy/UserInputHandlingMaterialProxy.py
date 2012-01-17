@@ -1,4 +1,5 @@
 from baca.scf.MaterialProxy import MaterialProxy
+import copy
 
 
 class UserInputHandlingMaterialProxy(MaterialProxy):
@@ -46,6 +47,15 @@ class UserInputHandlingMaterialProxy(MaterialProxy):
         result.extend(user_input_wrapper.formatted_lines)
         return result
 
+    def load_user_input_wrapper_demo_values(self, prompt_proceed=True):
+        user_input_wrapper = self.user_input_wrapper
+        user_input_demo_values = copy.deepcopy(type(self).user_input_demo_values)
+        for key, value in user_input_demo_values:
+            user_input_wrapper[key] = value
+        self.write_user_input_wrapper_to_disk(user_input_wrapper) 
+        if prompt_proceed:
+            self.proceed(lines=['demo values loaded.'])
+
     def make_main_menu_for_material_made_with_editor(self):
         menu, hidden_section = self.make_new_menu(where=self.where(), is_hidden=True)
         section = menu.make_new_section(is_numbered=True)
@@ -53,6 +63,7 @@ class UserInputHandlingMaterialProxy(MaterialProxy):
         section.return_value_attribute = 'number'
         section = menu.make_new_section()
         section.append(('uic', 'user input - clear'))
+        section.append(('uil', 'user input - load demo values'))
         return menu, hidden_section
 
     def write_stub_user_input_module_to_disk(self, prompt_proceed=True):
@@ -84,12 +95,6 @@ class UserInputHandlingMaterialProxy(MaterialProxy):
         exec(command)
         new_value = eval(response)
         return new_value
-
-    def initialize_user_input_wrapper(self):
-        user_input_wrapper = copy.deepcopy(self.user_input_demo_values)
-        for key in user_input_wrapper:
-            user_input_wrapper[key] = None
-        return user_input_wrapper
 
     def make_lilypond_file_from_user_input_wrapper(self, user_input_wrapper):
         material = self.make(*user_input_wrapper.values)
