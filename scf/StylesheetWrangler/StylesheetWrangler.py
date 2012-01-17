@@ -1,15 +1,13 @@
 from abjad.tools import iotools
-from baca.scf.DirectoryProxy import DirectoryProxy
+from baca.scf.NewPackageWrangler import NewPackageWrangler
 from baca.scf.StylesheetProxy import StylesheetProxy
 import os
 
 
-# TODO: inherit from only NewPackageWrangler
-class StylesheetWrangler(DirectoryProxy):
+class StylesheetWrangler(NewPackageWrangler):
 
     def __init__(self, session=None):
-        directory_name = self.stylesheets_directory
-        DirectoryProxy.__init__(self, directory_name=directory_name, session=session)
+        NewPackageWrangler.__init__(self, 'baca.scf.stylesheets', session=session)
 
     ### READ-ONLY PUBLIC ATTRIBUTES ###
 
@@ -25,7 +23,6 @@ class StylesheetWrangler(DirectoryProxy):
             if file_name.endswith('.ly'):
                 result.append(file_name)
         return result
-
 
     ### PUBLIC METHODS ###
 
@@ -44,15 +41,11 @@ class StylesheetWrangler(DirectoryProxy):
         stylesheet_proxy = StylesheetProxy(stylesheet_file_name, session=self.session)
         stylesheet_proxy.edit_stylesheet()
 
-#    def edit_stylesheet(self, stylesheet_file_name):
-#        os.system('vi {}'.format(stylesheet_file_name))
-
     def handle_main_menu_result(self, result):
         if result == 'new':
             self.create_new_stylesheet_interactively()
         else:
             stylesheet_file_name = os.path.join(self.stylesheets_directory, result)  
-            #self.edit_stylesheet(stylesheet_file_name)
             stylesheet_proxy = StylesheetProxy(stylesheet_file_name, session=self.session)
             stylesheet_proxy.run()
          
