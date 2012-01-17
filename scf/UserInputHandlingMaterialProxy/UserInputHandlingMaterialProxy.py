@@ -25,7 +25,12 @@ class UserInputHandlingMaterialProxy(MaterialProxy):
             return
         index = number - 1
         key, current_value = user_input_wrapper.list_items[index]
-        test = type(self).user_input_tests[index][1]
+        test_tuple = type(self).user_input_tests[index]
+        test = test_tuple[1]
+        if len(test_tuple) == 3:
+            exec_string = test_tuple[2]
+        else:   
+            exec_string = 'value = {}'
         if self.session.use_current_user_input_values_as_default:
             default = current_value
         else:
@@ -35,6 +40,8 @@ class UserInputHandlingMaterialProxy(MaterialProxy):
         message = "value for '{}' must satisfy " + test.__name__ + '().'
         getter.append_something(spaced_attribute_name, message, default=default)
         getter.tests.append(test)
+        getter.execs[-1].append('from abjad import *')
+        getter.execs[-1].append(exec_string)
         new_value = getter.run()
         if self.backtrack():
             return
@@ -67,8 +74,12 @@ class UserInputHandlingMaterialProxy(MaterialProxy):
         section = menu.make_new_section()
         section.append(('uic', 'user input - clear'))
         section.append(('uil', 'user input - load demo values'))
+        section.append(('uip', 'user input - populate'))
         hidden_section.append(('uit','user input - toggle default mode'))
         return menu, hidden_section
+
+    def populate_user_input_wrapper(self, prompt_proceed=True):
+        self.print_not_implemented()
 
     def write_stub_user_input_module_to_disk(self, prompt_proceed=True):
         user_input_module = file(self.user_input_module_file_name, 'w')
@@ -90,15 +101,6 @@ class UserInputHandlingMaterialProxy(MaterialProxy):
         user_input_module.close()
 
     ### OLD INTERACTIVE MATERIAL PROXY PUBLIC METHODS ###
-
-    def edit_item(self, key, value):
-        prompt = key.replace('_', ' ')
-        default = repr(value)
-        response = self.handle_raw_input_with_default('{}> '.format(prompt), default=default)
-        command = 'from abjad import *'
-        exec(command)
-        new_value = eval(response)
-        return new_value
 
     def make_lilypond_file_from_user_input_wrapper(self, user_input_wrapper):
         material = self.make(*user_input_wrapper.values)
