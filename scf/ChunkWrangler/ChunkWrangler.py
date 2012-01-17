@@ -1,13 +1,13 @@
 from baca.scf.ChunkProxy import ChunkProxy
-from baca.scf.NewPackageWrangler import NewPackageWrangler
+from baca.scf.PackageWrangler import PackageWrangler
 import os
 
 
-class ChunkWrangler(NewPackageWrangler):
+class ChunkWrangler(PackageWrangler):
 
     def __init__(self, session=None):
         import baca
-        NewPackageWrangler.__init__(self, 'baca.sketches', 'mus.chunks', session=session)
+        PackageWrangler.__init__(self, 'baca.sketches', 'mus.chunks', session=session)
 
     ### READ-ONLY PUBLIC ATTRIBUTES ###
 

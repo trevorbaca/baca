@@ -1,15 +1,15 @@
 from abjad.tools import iotools
 from baca.scf.MaterialProxy import MaterialProxy 
-from baca.scf.NewPackageWrangler import NewPackageWrangler
+from baca.scf.PackageWrangler import PackageWrangler
 import collections
 import os
 
 
-class MaterialWrangler(NewPackageWrangler):
+class MaterialWrangler(PackageWrangler):
 
     def __init__(self, session=None):
         import baca
-        NewPackageWrangler.__init__(self, 'baca.materials', 'mus.materials', session=session)
+        PackageWrangler.__init__(self, 'baca.materials', 'mus.materials', session=session)
         self._material_proxy_wrangler = baca.scf.MaterialProxyWrangler(session=self.session)
 
     ### READ-ONLY PUBLIC ATTRIBUTES ###

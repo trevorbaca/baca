@@ -4,7 +4,7 @@ import os
 
 
 # TODO: write tests
-class NewPackageWrangler(SCFObject):
+class PackageWrangler(SCFObject):
 
     def __init__(self, toplevel_global_package_importable_name=None, 
         toplevel_score_package_importable_name_body=None, session=None):

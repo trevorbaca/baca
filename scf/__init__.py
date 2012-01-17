@@ -11,7 +11,7 @@ from MaterialProxy import MaterialProxy
 from MaterialProxyWrangler import MaterialProxyWrangler
 from MaterialWrangler import MaterialWrangler
 from MusProxy import MusProxy
-from NewPackageWrangler import NewPackageWrangler
+from PackageWrangler import PackageWrangler
 from PackageProxy import PackageProxy
 from ScoreProxy import ScoreProxy
 from ScoreTemplate import ScoreTemplate

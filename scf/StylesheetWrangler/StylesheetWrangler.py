@@ -1,13 +1,13 @@
 from abjad.tools import iotools
-from baca.scf.NewPackageWrangler import NewPackageWrangler
+from baca.scf.PackageWrangler import PackageWrangler
 from baca.scf.StylesheetProxy import StylesheetProxy
 import os
 
 
-class StylesheetWrangler(NewPackageWrangler):
+class StylesheetWrangler(PackageWrangler):
 
     def __init__(self, session=None):
-        NewPackageWrangler.__init__(self, 'baca.scf.stylesheets', session=session)
+        PackageWrangler.__init__(self, 'baca.scf.stylesheets', session=session)
 
     ### READ-ONLY PUBLIC ATTRIBUTES ###
 

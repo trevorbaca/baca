@@ -1,12 +1,12 @@
-from baca.scf.NewPackageWrangler import NewPackageWrangler
+from baca.scf.PackageWrangler import PackageWrangler
 from baca.scf.ScoreProxy import ScoreProxy
 import os
 
 
-class ScoreWrangler(NewPackageWrangler):
+class ScoreWrangler(PackageWrangler):
 
     def __init__(self, session=None):
-        NewPackageWrangler.__init__(self, None, '', session=session)
+        PackageWrangler.__init__(self, None, '', session=session)
 
     ### READ-ONLY PUBLIC ATTRIBUTES ###
 

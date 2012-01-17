@@ -1,14 +1,14 @@
 from abjad.tools import iotools
 from abjad.tools import layouttools
 from abjad.tools import lilypondfiletools
-from baca.scf.NewPackageWrangler import NewPackageWrangler
+from baca.scf.PackageWrangler import PackageWrangler
 import os
 
 
-class MaterialProxyWrangler(NewPackageWrangler):
+class MaterialProxyWrangler(PackageWrangler):
 
     def __init__(self, session=None):
-        NewPackageWrangler.__init__(self, 'baca.scf.materialproxies', session=session)
+        PackageWrangler.__init__(self, 'baca.scf.materialproxies', session=session)
 
     ### READ-ONLY PUBLIC ATTRIBUTES ###
 
