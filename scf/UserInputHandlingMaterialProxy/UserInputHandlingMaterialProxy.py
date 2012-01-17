@@ -9,8 +9,6 @@ class UserInputHandlingMaterialProxy(MaterialProxy):
         self.print_not_implemented()
 
     def edit_user_input_at_number(self, number):
-        #self.debug(self.class_name, 1)
-        #self.debug(self.package_importable_name, 2)
         user_input_wrapper = self.user_input_wrapper
         if user_input_wrapper is None:
             return
@@ -18,8 +16,6 @@ class UserInputHandlingMaterialProxy(MaterialProxy):
             return
         index = number - 1
         key, current_value = user_input_wrapper.list_items[index]
-        #test = self.user_input_tests[index][1]
-        #default = self.user_input_demo_values[index][1]
         test = type(self).user_input_tests[index][1]
         default = type(self).user_input_demo_values[index][1]
         getter = self.make_new_getter()
@@ -31,8 +27,16 @@ class UserInputHandlingMaterialProxy(MaterialProxy):
         if self.backtrack():
             return
         user_input_wrapper[key] = new_value 
-        self.write_user_input_wrapper_to_disk(user_input_wrapper)
+        self.write_user_input_wrapper_to_disk(user_input_wrapper, prompt_proceed=False)
 
+    def format_user_input_wrapper_for_writing_to_disk(self, user_input_wrapper):
+        result = []
+        result.extend(type(self).user_input_module_import_statements)
+        if result:
+            result.append('')
+            result.append('')
+        result.extend(user_input_wrapper.formatted_lines)
+        return result
 
     def make_main_menu_for_material_made_with_editor(self):
         menu, hidden_section = self.make_new_menu(where=self.where(), is_hidden=True)
@@ -57,7 +61,7 @@ class UserInputHandlingMaterialProxy(MaterialProxy):
             self.proceed(lines=[line])
 
     def write_user_input_wrapper_to_disk(self, user_input_wrapper, prompt_proceed=True):
-        formatted_user_input_lines = user_input_wrapper.formatted_lines
+        formatted_user_input_lines = self.format_user_input_wrapper_for_writing_to_disk(user_input_wrapper)
         user_input_module = file(self.user_input_module_file_name, 'w')
         user_input_module.write('\n'.join(formatted_user_input_lines))
         user_input_module.close()

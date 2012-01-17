@@ -30,7 +30,6 @@ class SargassoMeasureMaterialProxy(UserInputHandlingMaterialProxy):
 
     user_input_module_import_statements = [
         'from abjad.tools.durationtools import Duration',
-        'from baca.scf.materialproxies import SargassoMeasureMaterialProxy',
         'from baca.scf import UserInputWrapper',]
 
     user_input_tests = [
