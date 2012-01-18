@@ -353,45 +353,6 @@ class MaterialProxy(PackageProxy):
         parent_package = PackageProxy(self.parent_package_importable_name, session=self.session)
         parent_package.add_import_statement_to_initializer(import_statement)
 
-    # TODO: change name to self.write_output_ly_and_output_pdf_to_disk()
-    def create_output_ly_and_output_pdf_from_score_builder(self, is_forced=False, prompt_proceed=True):
-        lines = []
-        #lilypond_file = self.import_score_definition_from_score_builder()
-        illustration = self.make_illustration_object()
-        #if is_forced or not self.lilypond_file_format_is_equal_to_score_builder_ly(lilypond_file):
-        if True:
-            iotools.write_expr_to_pdf(illustration, self.output_pdf_file_name, print_status=False)
-            iotools.write_expr_to_ly(illustration, self.output_ly_file_name, print_status=False)
-            lines.append('PDF and LilyPond file written to disk.')
-        else:
-            lines.append('LilyPond file is the same. (PDF and LilyPond file preserved.)')
-        if prompt_proceed:
-            self.proceed(lines=lines)
-        
-    def create_output_ly_from_score_builder(self, is_forced=False, prompt_proceed=True):
-        lines = []
-        lilypond_file = self.import_score_definition_from_score_builder()
-        if is_forced or not self.lilypond_file_format_is_equal_to_score_builder_ly(lilypond_file):
-            iotools.write_expr_to_ly(lilypond_file, self.output_ly_file_name, print_status=False)
-            lines.append('LilyPond file written to disk.')
-        else:
-            lines.append('LilyPond file is the same. (LilyPond file preserved.)')
-        lines.append('')
-        if prompt_proceed:
-            self.proceed(lines=lines)
-
-    def create_output_pdf_from_score_builder(self, is_forced=False, prompt_proceed=True):
-        lines = []
-        lilypond_file = self.import_score_definition_from_score_builder()
-        if is_forced or not self.lilypond_file_format_is_equal_to_score_builder_ly(lilypond_file):
-            iotools.write_expr_to_pdf(lilypond_file, self.output_pdf_file_name, print_status=False)
-            lines.append('PDF written to disk.')
-        else:
-            lines.append('LilyPond file is the same. (PDF preserved.)')
-        lines.append('')
-        if prompt_proceed:
-            self.proceed(lines=lines)
-
     def delete_local_stylesheet(self, prompt_proceed=True):
         if self.has_local_stylesheet:
             os.remove(self.local_stylesheet_file_name)
@@ -578,13 +539,13 @@ class MaterialProxy(PackageProxy):
         elif result == 'dd':
             self.delete_output_data_module()
         elif result == 'lyc':
-            self.create_output_ly_from_score_builder(is_forced=True)
+            self.write_illustration_ly_to_disk(is_forced=True)
         elif result == 'lyd':
             self.delete_output_ly()
         elif result == 'lyi':
             self.edit_output_ly()
         elif result == 'pdfc':
-            self.create_output_ly_and_output_pdf_from_score_builder(is_forced=True)
+            self.write_illustration_ly_and_pdf_to_disk(is_forced=True)
             self.open_output_pdf()
         elif result == 'pdfd':
             self.delete_output_pdf()
@@ -704,12 +665,13 @@ class MaterialProxy(PackageProxy):
         if self.has_output_data:
             if self.has_score_builder or self.has_editor:
                 section = main_menu.make_new_section()
+                has_output_pdf_section = True
                 section.append(('pdfc', 'output pdf - create'))
         if self.has_output_pdf:
             if not has_output_pdf_section:
                 section = main_menu.make_new_section()
-                hidden_section.append(('pdfd', 'output pdf - delete'))
-                section.append(('pdfi', 'output pdf - inspect'))
+            hidden_section.append(('pdfd', 'output pdf - delete'))
+            section.append(('pdfi', 'output pdf - inspect'))
 
     def make_main_menu_section_for_score_builder(self, main_menu, hidden_section):
         section = main_menu.make_new_section()
@@ -941,6 +903,43 @@ class MaterialProxy(PackageProxy):
 
     def unimport_user_input_module(self):
         self.remove_package_importable_name_from_sys_modules(self.user_input_module_importable_name)
+
+    def write_illustration_ly_and_pdf_to_disk(self, is_forced=False, prompt_proceed=True):
+        lines = []
+        illustration = self.make_illustration_object()
+        #if is_forced or not self.lilypond_file_format_is_equal_to_score_builder_ly(lilypond_file):
+        if True:
+            iotools.write_expr_to_pdf(illustration, self.output_pdf_file_name, print_status=False)
+            iotools.write_expr_to_ly(illustration, self.output_ly_file_name, print_status=False)
+            lines.append('PDF and LilyPond file written to disk.')
+        else:
+            lines.append('LilyPond file is the same. (PDF and LilyPond file preserved.)')
+        if prompt_proceed:
+            self.proceed(lines=lines)
+        
+    def write_illustration_ly_to_disk(self, is_forced=False, prompt_proceed=True):
+        lines = []
+        lilypond_file = self.import_score_definition_from_score_builder()
+        if is_forced or not self.lilypond_file_format_is_equal_to_score_builder_ly(lilypond_file):
+            iotools.write_expr_to_ly(lilypond_file, self.output_ly_file_name, print_status=False)
+            lines.append('LilyPond file written to disk.')
+        else:
+            lines.append('LilyPond file is the same. (LilyPond file preserved.)')
+        lines.append('')
+        if prompt_proceed:
+            self.proceed(lines=lines)
+
+    def write_illustration_pdf_to_disk(self, is_forced=False, prompt_proceed=True):
+        lines = []
+        lilypond_file = self.import_score_definition_from_score_builder()
+        if is_forced or not self.lilypond_file_format_is_equal_to_score_builder_ly(lilypond_file):
+            iotools.write_expr_to_pdf(lilypond_file, self.output_pdf_file_name, print_status=False)
+            lines.append('PDF written to disk.')
+        else:
+            lines.append('LilyPond file is the same. (PDF preserved.)')
+        lines.append('')
+        if prompt_proceed:
+            self.proceed(lines=lines)
 
     def write_output_data_to_disk(self, prompt_proceed=True):
         self.remove_material_from_materials_initializer()
