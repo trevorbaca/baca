@@ -5,19 +5,15 @@ from baca.scf.MaterialProxyWrangler import MaterialProxyWrangler
 from baca.scf.PackageProxy import PackageProxy
 from baca.scf.StylesheetProxy import StylesheetProxy
 from baca.scf.StylesheetWrangler import StylesheetWrangler
-import shutil
 import os
-import subprocess
-import sys
 
 
-# TODO: add 'list package directory' user command & inherit from PackageProxy, somehow
+# TODO: make 'list package directory' inherit from package proxy
 class MaterialProxy(PackageProxy):
 
     def __init__(self, package_importable_name=None, session=None):
         PackageProxy.__init__(self, package_importable_name=package_importable_name, session=session)
         self._generic_output_name = None
-        self._recommended_stylesheet_file_name = None
 
     ### READ-ONLY PUBLIC ATTRIBUTES ###
 
@@ -125,6 +121,26 @@ class MaterialProxy(PackageProxy):
         else:
             return self.import_user_input_from_user_input_module() is not None
 
+    @property
+    def illustration_builder_file_name(self):
+        if self.directory_name is not None:
+            return os.path.join(self.directory_name, 'illustration_builder.py')
+
+    @property
+    def illustration_builder_module_importable_name(self):
+        if self.illustration_builder_file_name is not None:
+            return '{}.illustration_builder'.format(self.package_importable_name)
+
+    @property
+    def illustration_ly_file_name(self):
+        if self.directory_name is not None:
+            return os.path.join(self.directory_name, 'illustration.ly')
+
+    @property
+    def illustration_pdf_file_name(self):
+        if self.directory_name is not None:
+            return os.path.join(self.directory_name, 'illustration.pdf')
+
     # TODO: make work
     @property
     def is_changed(self):
@@ -213,30 +229,6 @@ class MaterialProxy(PackageProxy):
         return output_data_module_import_statements
 
     @property
-    def illustration_ly_file_name(self):
-        if self.directory_name is not None:
-            return os.path.join(self.directory_name, 'illustration.ly')
-
-    @property
-    def illustration_pdf_file_name(self):
-        if self.directory_name is not None:
-            return os.path.join(self.directory_name, 'illustration.pdf')
-
-    @property
-    def recommended_stylesheet_file_name(self):
-        return self._recommended_stylesheet_file_name
-
-    @property
-    def illustration_builder_file_name(self):
-        if self.directory_name is not None:
-            return os.path.join(self.directory_name, 'illustration_builder.py')
-
-    @property
-    def illustration_builder_module_importable_name(self):
-        if self.illustration_builder_file_name is not None:
-            return '{}.illustration_builder'.format(self.package_importable_name)
-
-    @property
     def score_package_short_name(self):
         if self.package_importable_name is not None:
             if self.package_importable_name.startswith('baca'):
@@ -246,7 +238,7 @@ class MaterialProxy(PackageProxy):
     def should_have_illustration(self):
         return self.get_tag('should_have_illustration')
 
-    # TODO: write test
+    # TODO: reimplement and write test
     @property
     def source_stylesheet_file_name(self):
         if self.has_local_stylesheet:
