@@ -9,6 +9,15 @@ def make_sargasso_measures(measure_denominator, measure_numerator_talea,
     measure_division_denominator, measure_division_talea, total_duration,
     measures_are_scaled, measures_are_split, measures_are_shuffled):
 
+    #print measure_denominator
+    #print measure_numerator_talea
+    #print measure_division_denominator
+    #print measure_division_talea
+    #print total_duration
+    #print measures_are_scaled
+    #print measures_are_split
+    #print measures_are_shuffled
+
     assert mathtools.is_nonnegative_integer_power_of_two(measure_denominator)
     assert mathtools.is_nonnegative_integer_power_of_two(measure_division_denominator)
     assert measure_denominator <= measure_division_denominator
@@ -97,11 +106,13 @@ def make_sargasso_measures(measure_denominator, measure_numerator_talea,
     division_tokens = []
     for measure_duration, division_token in divided_measure_tokens:
         division_tokens.append(division_token)
+    #print division_tokens
 
     measures = []
     for meter_token, division_token in zip(meter_tokens, division_tokens):
         leaves = leaftools.make_leaves_from_note_value_signal(division_token, measure_division_denominator)
         measure = measuretools.Measure(meter_token, leaves)
+        measures.append(measure)
     #print measures
 
     return measures

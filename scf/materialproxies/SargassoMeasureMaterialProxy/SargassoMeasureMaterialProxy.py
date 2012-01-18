@@ -22,12 +22,14 @@ class SargassoMeasureMaterialProxy(UserInputHandlingMaterialProxy):
     lilypond_file_maker = make_lilypond_file_from_output_material
 
     # TODO: implement measuretools predicate
-    output_data_checker = lambda x: componenttools.all_are_components(x, klasses=measuretools.Measure)
+    output_data_checker = staticmethod(
+        lambda x: componenttools.all_are_components(x, klasses=measuretools.Measure))
             
-    output_data_maker = baca.music.make_sargasso_measures
+    output_data_maker = staticmethod(baca.music.make_sargasso_measures)
 
     output_data_module_import_statements = [
-        'from abjad.tools.measuretools.Measure import Measure',]
+        'from abjad.tools.measuretools.Measure import Measure',
+        ]
 
     user_input_demo_values = [
         ('measure_denominator', 4),
@@ -37,11 +39,13 @@ class SargassoMeasureMaterialProxy(UserInputHandlingMaterialProxy):
         ('total_duration', durationtools.Duration(44, 8)),
         ('measures_are_scaled', True),
         ('measures_are_split', True),
-        ('measures_are_shuffled', True),]
+        ('measures_are_shuffled', True),
+        ]
 
     user_input_module_import_statements = [
         'from abjad.tools.durationtools import Duration',
-        'from baca.scf import UserInputWrapper',]
+        'from baca.scf import UserInputWrapper',
+        ]
 
     user_input_tests = [
         ('measure_denominator', mathtools.is_positive_integer_power_of_two),
@@ -51,7 +55,8 @@ class SargassoMeasureMaterialProxy(UserInputHandlingMaterialProxy):
         ('total_duration', durationtools.is_duration_token, 'value = Duration({})'),
         ('measures_are_scaled', bool),
         ('measures_are_split', bool),
-        ('measures_are_shuffled', bool),]
+        ('measures_are_shuffled', bool),
+        ]
 
     ### PUBLIC METHODS ###
 
@@ -62,6 +67,6 @@ class SargassoMeasureMaterialProxy(UserInputHandlingMaterialProxy):
         for measure in output_data[:-1]:
             line = measuretools.measure_to_one_line_input_string(measure)
             lines.append('\t%s,' % line)
-        line = measuretools.measure_to_one_line_input_string(measures[-1])
+        line = measuretools.measure_to_one_line_input_string(output_data[-1])
         lines.append('\t%s]' % line)
         return lines

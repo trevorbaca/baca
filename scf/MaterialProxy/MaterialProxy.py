@@ -739,17 +739,6 @@ class MaterialProxy(PackageProxy):
         lines.append('{} = {!r}'.format(self.material_underscored_name, output_data))
         return lines
 
-    def make_output_data_module_preamble_lines(self):
-        lines = []
-        output_data_module_import_statements = getattr(
-            type(self), 'output_data_module_import_statements', self.output_data_module_import_statements)
-        if output_data_module_import_statements:
-            for output_data_module_import_statement in output_data_module_import_statements:
-                lines.write(output_data_module_import_statement + '\n')
-            lines.append('\n')
-            lines.append('\n')
-        return lines
-
     def manage_stylesheets(self):
         stylesheet_wrangler = StylesheetWrangler(session=self.session)
         stylesheet_wrangler.run()
@@ -947,10 +936,10 @@ class MaterialProxy(PackageProxy):
 
     def write_output_data_to_disk(self, prompt_proceed=True):
         self.remove_material_from_materials_initializer()
-        output_data_module_preamble_lines = self.make_ouput_data_module_preamble_lines()
         output_data_module_body_lines = self.make_output_data_module_body_lines()
         output_data_module = file(self.output_data_module_file_name, 'w')
-        output_data_module.write('\n'.join(output_data_module_preamble_lines))
+        output_data_module.write('\n'.join(self.output_data_module_import_statements))
+        output_data_module.write('\n'.join(['\n', '\n']))
         output_data_module.write('\n'.join(output_data_module_body_lines))
         output_data_module.close()
         self.add_material_to_materials_initializer()

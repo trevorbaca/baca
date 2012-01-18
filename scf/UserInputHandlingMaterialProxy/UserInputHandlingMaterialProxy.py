@@ -84,7 +84,7 @@ class UserInputHandlingMaterialProxy(MaterialProxy):
         hidden_section.append(('uit','user input - toggle default mode'))
 
     def make_output_data(self):
-        output_data = type(self).output_data_maker(*self.user_input_wrapper.values)
+        output_data = self.output_data_maker(*self.user_input_wrapper.values)
         assert type(self).output_data_checker(output_data)
         return output_data
 
