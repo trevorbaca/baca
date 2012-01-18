@@ -63,10 +63,10 @@ class SargassoMeasureMaterialProxy(UserInputHandlingMaterialProxy):
     def make_output_data_module_body_lines(self):
         lines = []
         output_data = self.make_output_data()
-        lines.append('%s = [' % self.material_underscored_name)
+        lines.append('{} = ['.format(self.material_underscored_name))
         for measure in output_data[:-1]:
             line = measuretools.measure_to_one_line_input_string(measure)
-            lines.append('\t%s,' % line)
+            lines.append('\t{},'.format(line))
         line = measuretools.measure_to_one_line_input_string(output_data[-1])
-        lines.append('\t%s]' % line)
+        lines.append('\t%{}]'.format(line))
         return lines

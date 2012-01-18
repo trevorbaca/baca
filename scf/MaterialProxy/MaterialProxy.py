@@ -121,18 +121,18 @@ class MaterialProxy(PackageProxy):
             return os.path.exists(self.output_pdf_file_name)
 
     @property
-    def has_score_builder(self):
-        if self.score_builder_file_name is None:
+    def has_illustration_builder(self):
+        if self.illustration_builder_file_name is None:
             return False
         else:
-            return os.path.exists(self.score_builder_file_name)
+            return os.path.exists(self.illustration_builder_file_name)
 
     @property
     def has_score_definition(self):
-        if not self.has_score_builder:
+        if not self.has_illustration_builder:
             return False
         else:
-            return bool(self.import_score_definition_from_score_builder())
+            return bool(self.import_score_definition_from_illustration_builder())
 
     @property
     def has_user_input_module(self):
@@ -285,14 +285,14 @@ class MaterialProxy(PackageProxy):
         return self._recommended_stylesheet_file_name
 
     @property
-    def score_builder_file_name(self):
+    def illustration_builder_file_name(self):
         if self.directory_name is not None:
-            return os.path.join(self.directory_name, 'score_builder.py')
+            return os.path.join(self.directory_name, 'illustration_builder.py')
 
     @property
-    def score_builder_module_importable_name(self):
-        if self.score_builder_file_name is not None:
-            return '{}.score_builder'.format(self.package_importable_name)
+    def illustration_builder_module_importable_name(self):
+        if self.illustration_builder_file_name is not None:
+            return '{}.illustration_builder'.format(self.package_importable_name)
 
     @property
     def score_package_short_name(self):
@@ -317,8 +317,8 @@ class MaterialProxy(PackageProxy):
 
     # TODO: write test
     @property
-    def stub_score_builder_file_name(self):
-        return os.path.join(self.assets_directory, 'stub_score_builder.py')
+    def stub_illustration_builder_file_name(self):
+        return os.path.join(self.assets_directory, 'stub_illustration_builder.py')
 
     # TODO: write test
     @property
@@ -405,8 +405,8 @@ class MaterialProxy(PackageProxy):
     def edit_output_ly(self):
         os.system('vi {}'.format(self.output_ly_file_name))
 
-    def edit_score_builder(self):
-        os.system('vi + {}'.format(self.score_builder_file_name))
+    def edit_illustration_builder(self):
+        os.system('vi + {}'.format(self.illustration_builder_file_name))
 
     def edit_source_stylesheet(self):
         stylesheet_proxy = StylesheetProxy(self.source_stylesheet_file_name, session=self.session)
@@ -423,7 +423,7 @@ class MaterialProxy(PackageProxy):
         return package_short_name
 
     # TODO: reimplement with getter and backtracking
-    def get_score_builder_status_of_new_material_package_interactively(self):
+    def get_illustration_builder_status_of_new_material_package_interactively(self):
         response = self.handle_raw_input('include score builder?')
         if response == 'y':
             return True
@@ -465,12 +465,12 @@ class MaterialProxy(PackageProxy):
             pass
 
     # TODO: change to self.import_illustration_from_illustration_builder()
-    def import_score_definition_from_score_builder(self):
-        if not self.has_score_builder:
+    def import_score_definition_from_illustration_builder(self):
+        if not self.has_illustration_builder:
             return None
-        self.unimport_score_builder_module()
+        self.unimport_illustration_builder_module()
         self.unimport_output_data_module()
-        command = 'from {} import lilypond_file'.format(self.score_builder_module_importable_name) 
+        command = 'from {} import lilypond_file'.format(self.illustration_builder_module_importable_name) 
         exec(command)
         if self.has_local_stylesheet:
             lilypond_file.file_initial_user_includes.append(self.local_stylesheet_file_name)
@@ -510,15 +510,15 @@ class MaterialProxy(PackageProxy):
         elif result == 'mdxi':
             self.run_abjad_on_material_definition()
         elif result == 'sbd':
-            self.delete_score_builder()
+            self.delete_illustration_builder()
         elif result == 'sbe':
-            self.edit_score_builder()
+            self.edit_illustration_builder()
         elif result == 'sbt':
-            self.write_stub_score_builder_to_disk()
+            self.write_stub_illustration_builder_to_disk()
         elif result == 'sbx':
-            self.run_python_on_score_builder()
+            self.run_python_on_illustration_builder()
         elif result == 'sbxi':
-            self.run_abjad_on_score_builder()
+            self.run_abjad_on_illustration_builder()
         elif result == 'ssd':
             self.delete_local_stylesheet()
         elif result == 'sse':
@@ -577,13 +577,13 @@ class MaterialProxy(PackageProxy):
         else:
             raise ValueError
 
-    def lilypond_file_format_is_equal_to_score_builder_ly(self, lilypond_file):
+    def lilypond_file_format_is_equal_to_illustration_builder_ly(self, lilypond_file):
         temp_ly_file = os.path.join(os.environ.get('HOME'), 'tmp.ly')
         iotools.write_expr_to_ly(lilypond_file, temp_ly_file, print_status=False)
         trimmed_temp_ly_file_lines = self.trim_ly_lines(temp_ly_file)
         os.remove(temp_ly_file)
-        trimmed_score_builder_ly_lines = self.trim_ly_lines(self.output_ly_file_name)
-        return trimmed_temp_ly_file_lines == trimmed_score_builder_ly_lines
+        trimmed_illustration_builder_ly_lines = self.trim_ly_lines(self.output_ly_file_name)
+        return trimmed_temp_ly_file_lines == trimmed_illustration_builder_ly_lines
 
     def link_local_stylesheet(self, source_stylesheet_file_name=None, prompt_proceed=True):
         if source_stylesheet_file_name is None:
@@ -613,7 +613,7 @@ class MaterialProxy(PackageProxy):
         menu, hidden_section = self.make_new_menu(where=self.where(), is_hidden=True)
         self.make_main_menu_section_for_material_definition(menu, hidden_section)
         self.make_main_menu_section_for_output_data(menu, hidden_section)
-        self.make_main_menu_section_for_score_builder(menu, hidden_section)
+        self.make_main_menu_section_for_illustration_builder(menu, hidden_section)
         self.make_main_menu_section_for_stylesheet_management(menu, hidden_section)
         return menu, hidden_section
 
@@ -654,7 +654,7 @@ class MaterialProxy(PackageProxy):
 
     def make_main_menu_section_for_output_ly(self, main_menu, hidden_section):
         if self.has_output_data:
-            if self.has_score_builder or self.has_editor:
+            if self.has_illustration_builder or self.has_editor:
                 hidden_section.append(('lyc', 'output ly - create'))
         if self.has_output_ly:
             hidden_section.append(('lyd', 'output ly - delete'))
@@ -663,7 +663,7 @@ class MaterialProxy(PackageProxy):
     def make_main_menu_section_for_output_pdf(self, main_menu, hidden_section):
         has_output_pdf_section = False
         if self.has_output_data:
-            if self.has_score_builder or self.has_editor:
+            if self.has_illustration_builder or self.has_editor:
                 section = main_menu.make_new_section()
                 has_output_pdf_section = True
                 section.append(('pdfc', 'output pdf - create'))
@@ -673,10 +673,10 @@ class MaterialProxy(PackageProxy):
             hidden_section.append(('pdfd', 'output pdf - delete'))
             section.append(('pdfi', 'output pdf - inspect'))
 
-    def make_main_menu_section_for_score_builder(self, main_menu, hidden_section):
+    def make_main_menu_section_for_illustration_builder(self, main_menu, hidden_section):
         section = main_menu.make_new_section()
         if self.has_output_data:
-            if self.has_score_builder:
+            if self.has_illustration_builder:
                 section.append(('sbe', 'score builder - edit'))
                 if self.has_output_data:
                     section.append(('sbx', 'score builder - execute'))
@@ -688,7 +688,7 @@ class MaterialProxy(PackageProxy):
 
     def make_main_menu_section_for_stylesheet_management(self, main_menu, hidden_section):
         if self.has_output_data:
-            if self.has_score_builder or self.should_have_illustration:
+            if self.has_illustration_builder or self.should_have_illustration:
                 section = main_menu.make_new_section()
                 section.append(('sss', 'score stylesheet - select'))
                 if self.has_local_stylesheet:
@@ -698,7 +698,7 @@ class MaterialProxy(PackageProxy):
                     hidden_section.append(('ssl', 'score stylesheet - relink'))
 
     def make_illustration_object(self):
-        return self.import_score_definition_from_score_builder()
+        return self.import_score_definition_from_illustration_builder()
 
     def make_output_data(self):
         return self.import_material_definition_from_material_definition_module()
@@ -794,8 +794,8 @@ class MaterialProxy(PackageProxy):
         os.system('abjad {}'.format(self.material_definition_file_name))
         self.conditionally_display_lines([''])
 
-    def run_abjad_on_score_builder(self):
-        os.system('abjad {}'.format(self.score_builder_file_name))
+    def run_abjad_on_illustration_builder(self):
+        os.system('abjad {}'.format(self.illustration_builder_file_name))
         self.conditionally_display_lines([''])
 
     def run_editor(self):
@@ -808,8 +808,8 @@ class MaterialProxy(PackageProxy):
             line = 'material definition executed.'
             self.proceed(lines=[line])
 
-    def run_python_on_score_builder(self, prompt_proceed=True):
-        os.system('python {}'.format(self.score_builder_file_name))
+    def run_python_on_illustration_builder(self, prompt_proceed=True):
+        os.system('python {}'.format(self.illustration_builder_file_name))
         if prompt_proceed:
             line = 'score builder executed.'
             self.proceed(lines=[line])
@@ -895,8 +895,8 @@ class MaterialProxy(PackageProxy):
         self.unimport_material_module()
         self.unimport_output_data_module()
 
-    def unimport_score_builder_module(self):
-        self.remove_package_importable_name_from_sys_modules(self.score_builder_module_importable_name)
+    def unimport_illustration_builder_module(self):
+        self.remove_package_importable_name_from_sys_modules(self.illustration_builder_module_importable_name)
 
     def unimport_score_package(self):
         self.remove_package_importable_name_from_sys_modules(self.score_package_short_name)
@@ -907,7 +907,7 @@ class MaterialProxy(PackageProxy):
     def write_illustration_ly_and_pdf_to_disk(self, is_forced=False, prompt_proceed=True):
         lines = []
         illustration = self.make_illustration_object()
-        #if is_forced or not self.lilypond_file_format_is_equal_to_score_builder_ly(lilypond_file):
+        #if is_forced or not self.lilypond_file_format_is_equal_to_illustration_builder_ly(lilypond_file):
         if True:
             iotools.write_expr_to_pdf(illustration, self.output_pdf_file_name, print_status=False)
             iotools.write_expr_to_ly(illustration, self.output_ly_file_name, print_status=False)
@@ -919,8 +919,8 @@ class MaterialProxy(PackageProxy):
         
     def write_illustration_ly_to_disk(self, is_forced=False, prompt_proceed=True):
         lines = []
-        lilypond_file = self.import_score_definition_from_score_builder()
-        if is_forced or not self.lilypond_file_format_is_equal_to_score_builder_ly(lilypond_file):
+        lilypond_file = self.import_score_definition_from_illustration_builder()
+        if is_forced or not self.lilypond_file_format_is_equal_to_illustration_builder_ly(lilypond_file):
             iotools.write_expr_to_ly(lilypond_file, self.output_ly_file_name, print_status=False)
             lines.append('LilyPond file written to disk.')
         else:
@@ -931,8 +931,8 @@ class MaterialProxy(PackageProxy):
 
     def write_illustration_pdf_to_disk(self, is_forced=False, prompt_proceed=True):
         lines = []
-        lilypond_file = self.import_score_definition_from_score_builder()
-        if is_forced or not self.lilypond_file_format_is_equal_to_score_builder_ly(lilypond_file):
+        lilypond_file = self.import_score_definition_from_illustration_builder()
+        if is_forced or not self.lilypond_file_format_is_equal_to_illustration_builder_ly(lilypond_file):
             iotools.write_expr_to_pdf(lilypond_file, self.output_pdf_file_name, print_status=False)
             lines.append('PDF written to disk.')
         else:
@@ -979,8 +979,8 @@ class MaterialProxy(PackageProxy):
         material_definition.write('\n')
         material_definition.write('{} = None'.format(self.material_underscored_name))
 
-    def write_stub_score_builder_to_disk(self, prompt_proceed=True):
-        score_builder = file(self.score_builder_file_name, 'w')
+    def write_stub_illustration_builder_to_disk(self, prompt_proceed=True):
+        illustration_builder = file(self.illustration_builder_file_name, 'w')
         lines = []
         lines.append('from abjad import *')
         lines.append('from output import {}'.format(self.material_underscored_name))
@@ -989,9 +989,9 @@ class MaterialProxy(PackageProxy):
         line = 'score, treble_staff, bass_staff = scoretools.make_piano_score_from_leaves({})'.format(
             self.material_underscored_name)
         lines.append(line)
-        lines.append('lilypond_file = lilypondfiletools.make_basic_lilypond_file(score)')
-        score_builder.write('\n'.join(lines))
-        score_builder.close()
+        lines.append('illustration = lilypondfiletools.make_basic_lilypond_file(score)')
+        illustration_builder.write('\n'.join(lines))
+        illustration_builder.close()
         if prompt_proceed:
-            line = 'stub score builder written to disk.'
+            line = 'stub illustration builder written to disk.'
             self.proceed(lines=[line])

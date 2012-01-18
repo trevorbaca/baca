@@ -88,10 +88,12 @@ TODO
 
 39. Extend self.proceed(line(s), prompt_proceed=True) with 'prompt_proceed' keyword.
 
-40. Rename 'score_builder.py' to 'illustration_builder.py'.
+40. Rename 'illustration_builder.py' to 'illustration_builder.py'.
 
 41. Rename 'output.ly', 'output.pdf' to 'illustration.ly', 'illustration.pdf'.
 
 42. Change 'create_' everywhere to 'make_'.
 
 42. Change 'prompt_proceed' to simply 'prompt'.
+
+43. Rename 'output.py' to 'output_material.py'.

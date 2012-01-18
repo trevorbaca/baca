@@ -84,7 +84,7 @@ class MaterialWrangler(PackageWrangler):
         if editor_class_name is None:
             if should_have_illustration:
                 material_proxy.write_stub_music_material_definition_to_disk()
-                material_proxy.write_stub_score_builder_to_disk(prompt_proceed=False)
+                material_proxy.write_stub_illustration_builder_to_disk(prompt_proceed=False)
             else:
                 material_proxy.write_stub_data_material_definition_to_disk()
         if prompt_proceed:

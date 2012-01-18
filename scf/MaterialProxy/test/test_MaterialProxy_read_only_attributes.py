@@ -14,7 +14,7 @@ def test_MaterialProxy_read_only_attributes_01():
     assert not material_proxy.has_local_stylesheet
     assert not material_proxy.has_output_ly
     assert not material_proxy.has_output_pdf
-    assert not material_proxy.has_score_builder
+    assert not material_proxy.has_illustration_builder
     assert material_proxy.material_definition_file_name == \
         '/Users/trevorbaca/Documents/other/baca/materials/test_material_a/material_definition.py'
     assert material_proxy.material_definition_module_importable_name == \
@@ -31,12 +31,12 @@ def test_MaterialProxy_read_only_attributes_01():
     assert material_proxy.local_stylesheet_file_name == \
         '/Users/trevorbaca/Documents/other/baca/materials/test_material_a/stylesheet.ly'
     assert material_proxy.user_input_wrapper is None
-    assert material_proxy.score_builder_file_name == \
-        '/Users/trevorbaca/Documents/other/baca/materials/test_material_a/score_builder.py'
+    assert material_proxy.illustration_builder_file_name == \
+        '/Users/trevorbaca/Documents/other/baca/materials/test_material_a/illustration_builder.py'
     assert material_proxy.output_ly_file_name == \
         '/Users/trevorbaca/Documents/other/baca/materials/test_material_a/output.ly'
-    assert material_proxy.score_builder_module_importable_name == \
-        'baca.materials.test_material_a.score_builder'
+    assert material_proxy.illustration_builder_module_importable_name == \
+        'baca.materials.test_material_a.illustration_builder'
     assert material_proxy.output_pdf_file_name == \
         '/Users/trevorbaca/Documents/other/baca/materials/test_material_a/output.pdf'
 
@@ -54,7 +54,7 @@ def test_MaterialProxy_read_only_attributes_02():
     assert not smp.has_local_stylesheet
     assert not smp.has_output_ly
     assert not smp.has_output_pdf
-    assert not smp.has_score_builder
+    assert not smp.has_illustration_builder
     assert smp.material_definition_file_name == \
         '/Users/trevorbaca/Documents/other/baca/materials/sargasso_multipliers/material_definition.py'
     assert smp.material_definition_module_importable_name == \
@@ -70,10 +70,10 @@ def test_MaterialProxy_read_only_attributes_02():
     assert smp.score_package_short_name == 'baca'
     assert smp.local_stylesheet_file_name == \
         '/Users/trevorbaca/Documents/other/baca/materials/sargasso_multipliers/stylesheet.ly'
-    assert smp.score_builder_file_name == \
-        '/Users/trevorbaca/Documents/other/baca/materials/sargasso_multipliers/score_builder.py'
+    assert smp.illustration_builder_file_name == \
+        '/Users/trevorbaca/Documents/other/baca/materials/sargasso_multipliers/illustration_builder.py'
     assert smp.output_ly_file_name == \
         '/Users/trevorbaca/Documents/other/baca/materials/sargasso_multipliers/output.ly'
-    assert smp.score_builder_module_importable_name == 'baca.materials.sargasso_multipliers.score_builder'
+    assert smp.illustration_builder_module_importable_name == 'baca.materials.sargasso_multipliers.illustration_builder'
     assert smp.output_pdf_file_name == \
         '/Users/trevorbaca/Documents/other/baca/materials/sargasso_multipliers/output.pdf'
