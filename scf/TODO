@@ -95,3 +95,7 @@ TODO
 42. Rename 'output.py' to 'output_material.py'; change 'output_data' to 'output_material'.
 
 43. Encapsualte user input getter subprocedures.
+
+44. Make 'ls' hide or remove .pyc files.
+
+45. Make 'edit initializer' read only.

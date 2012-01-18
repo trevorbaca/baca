@@ -563,8 +563,6 @@ class MaterialProxy(PackageProxy):
             self.rename_material()
         elif result == 'reg':
             self.regenerate_everything(is_forced=True)
-        elif result == 'sum':
-            self.summarize_material_package()
         # TODO: add to packge-level hidden menu
         elif result == 'tags':
             self.manage_tags()
@@ -617,7 +615,6 @@ class MaterialProxy(PackageProxy):
         hidden_section.append(('reg', 'regenerate material'))
         hidden_section.append(('ren', 'rename material'))
         hidden_section.append(('stl', 'manage stylesheets'))
-        hidden_section.append(('sum', 'summarize material'))
         hidden_section.append(('tags', 'manage tags'))
 
     def make_main_menu_section_for_material_definition(self, main_menu, hidden_section):
@@ -828,32 +825,6 @@ class MaterialProxy(PackageProxy):
             return
         self.link_local_stylesheet(source_stylesheet_file_name, prompt_proceed=prompt_proceed)
 
-    def summarize_material_package(self):
-        lines = []
-        found = []
-        missing = []
-        artifact_name = 'material definition'
-        if self.has_material_definition_module:
-            found.append(artifact_name)
-        else:
-            missing.append(artifact_name)
-        artifact_name = 'LilyPond file'
-        if self.has_illustration_ly:
-            found.append(artifact_name)
-        else:
-            missing.append(artifact_name)
-        artifact_name = 'PDF'
-        if self.has_illustration_pdf:
-            found.append(artifact_name)
-        else:
-            missing.append(artifact_name)
-        if found:
-            lines.append('found {}.'.format(', '.join(found)))
-        if missing:
-            lines.append('missing {}.'.format(', '.join(missing)))
-        lines.append('')
-        self.proceed(lines=lines)
-        
     def unimport_material_definition_module(self):
         self.remove_package_importable_name_from_sys_modules(self.material_definition_module_importable_name)
 
