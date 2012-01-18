@@ -141,12 +141,12 @@ def get_possible_meter_multipliers(multiplied_measure_numerator):
     return possible_meter_multipliers
 
 
-def make_lilypond_file_from_output_material(measures):
+def make_illustration_from_output_material(measures):
     staff = stafftools.RhythmicStaff(measures)
     score = scoretools.Score([staff])
-    lilypond_file = lilypondfiletools.make_basic_lilypond_file(score)
-    lilypond_file.file_initial_system_comments = []
-    lilypond_file.file_initial_system_includes = []
+    illustrationt = lilypondfiletools.make_basic_lilypond_file(score)
+    illustration.file_initial_system_comments = []
+    illustration.file_initial_system_includes = []
     measuretools.apply_beam_spanners_to_measures_in_expr(score)
     scoretools.add_double_bar_to_end_of_score(score)
-    return lilypond_file
+    return illustration

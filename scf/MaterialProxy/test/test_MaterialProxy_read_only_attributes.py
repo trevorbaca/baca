@@ -10,7 +10,7 @@ def test_MaterialProxy_read_only_attributes_01():
     assert not material_proxy.has_material_definition_module
     assert not material_proxy.has_output_data
     assert not material_proxy.has_output_data_module
-    assert not material_proxy.has_score_definition
+    assert not material_proxy.has_illustration
     assert not material_proxy.has_local_stylesheet
     assert not material_proxy.has_illustration_ly
     assert not material_proxy.has_illustration_pdf
@@ -50,7 +50,7 @@ def test_MaterialProxy_read_only_attributes_02():
     assert smp.has_material_definition_module
     assert smp.has_output_data
     assert smp.has_output_data_module
-    assert not smp.has_score_definition
+    assert not smp.has_illustration
     assert not smp.has_local_stylesheet
     assert not smp.has_illustration_ly
     assert not smp.has_illustration_pdf

@@ -69,7 +69,7 @@ class UserInputHandlingMaterialProxy(MaterialProxy):
     def make_illustration_object(self):
         output_data = self.import_output_data_from_output_data_module()
         self.debug(output_data, 1)
-        illustration = self.lilypond_file_maker(output_data)
+        illustration = self.illustration_maker(output_data)
         self.debug(illustration, 2)
         return illustration
 
@@ -131,10 +131,10 @@ class UserInputHandlingMaterialProxy(MaterialProxy):
     ### OLD INTERACTIVE MATERIAL PROXY PUBLIC METHODS ###
 
     # TODO: promote to current code
-    def make_lilypond_file_from_user_input_wrapper(self, user_input_wrapper):
+    def make_illustration_from_user_input_wrapper(self, user_input_wrapper):
         material = self.make(*user_input_wrapper.values)
-        lilypond_file = self.make_lilypond_file_from_output_material(material)
-        return lilypond_file
+        illustration = self.make_illustration_from_output_material(material)
+        return illustration 
 
     def old_run_interactive(self):
         while True:
@@ -150,8 +150,8 @@ class UserInputHandlingMaterialProxy(MaterialProxy):
             elif result == 'l':
                 self.move_material_to_location()
             elif result == 'p':
-                lilypond_file = self.make_lilypond_file_from_user_input_wrapper(self.user_input_wrapper)
-                lilypond_file.file_initial_user_includes.append(self.stylesheet)
-                lilypond_file.header_block.title = markuptools.Markup(self.generic_output_name.capitalize())
-                lilypond_file.header_block.subtitle = markuptools.Markup('(unsaved)')
-                iotools.show(lilypond_file)
+                illustration = self.make_illustration_from_user_input_wrapper(self.user_input_wrapper)
+                illustration.file_initial_user_includes.append(self.stylesheet)
+                illustration.header_block.title = markuptools.Markup(self.generic_output_name.capitalize())
+                illustration.header_block.subtitle = markuptools.Markup('(unsaved)')
+                iotools.show(illustration)

@@ -20,13 +20,13 @@ def make_zagged_pitch_classes(pc_cells, division_cells, grouping_counts):
     return material
 
 
-def make_lilypond_file_from_output_material(material):
+def make_illustration_from_output_material(material):
     pcs = list(material.iterate_payload())
     leaves = leaftools.make_leaves(pcs, [Duration(1, 8)])
     voice = Voice(leaves)
     staff = Staff([voice])
     score = Score([staff])
-    lilypond_file = lilypondfiletools.make_basic_lilypond_file(score)
+    illustration = lilypondfiletools.make_basic_lilypond_file(score)
     voice.engraver_consists.add('Horizontal_bracket_engraver')
     for level in (1, 2):
         level_sizes = []
@@ -46,4 +46,4 @@ def make_lilypond_file_from_output_material(material):
                 cur_group += 1
     bar_line = scoretools.add_double_bar_to_end_of_score(score)
     spanner = spannertools.Spanner(voice.leaves)
-    return lilypond_file
+    return illustration

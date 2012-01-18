@@ -3,7 +3,7 @@ from abjad.tools import durationtools
 from abjad.tools import mathtools
 from abjad.tools import measuretools
 from abjad.tools import sequencetools
-from baca.music.make_sargasso_measures import make_lilypond_file_from_output_material
+from baca.music.make_sargasso_measures import make_illustration_from_output_material
 from baca.scf.UserInputHandlingMaterialProxy import UserInputHandlingMaterialProxy
 from baca.scf.UserInputWrapper import UserInputWrapper
 import baca
@@ -19,7 +19,7 @@ class SargassoMeasureMaterialProxy(UserInputHandlingMaterialProxy):
 
     generic_output_name = 'sargasso measures'
 
-    lilypond_file_maker = staticmethod(make_lilypond_file_from_output_material)
+    illustration_maker = staticmethod(make_illustration_from_output_material)
 
     # TODO: implement measuretools predicate
     output_data_checker = staticmethod(

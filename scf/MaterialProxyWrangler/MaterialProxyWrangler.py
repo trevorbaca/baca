@@ -74,7 +74,7 @@ class MaterialProxyWrangler(PackageWrangler):
         class_file = file(class_file_name, 'w')
         lines = []
         lines.append('from baca.music.foo import foo')
-        lines.append('from baca.music.foo import make_lilypond_file_from_output_material')
+        lines.append('from baca.music.foo import make_illustration_from_output_material')
         lines.append('from baca.scf.UserInputHandlingMaterialProxy import UserInputHandlingMaterialProxy')
         lines.append('from baca.scf.UserInputWrapper import UserInputWrapper')
         lines.append('import baca')
@@ -90,7 +90,7 @@ class MaterialProxyWrangler(PackageWrangler):
         lines.append('')
         lines.append("    generic_output_name = 'generic output'")
         lines.append('')
-        lines.append('    lilypond_file_maker = staticmethod(make_lilypond_file_from_output_material)')
+        lines.append('    illustration_maker = staticmethod(make_illustration_from_output_material)')
         lines.append('')
         lines.append('    output_data_checker = staticmethod(componenttools.all_are_components)')
         lines.append('')

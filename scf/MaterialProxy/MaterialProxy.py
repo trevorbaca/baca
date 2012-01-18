@@ -128,11 +128,11 @@ class MaterialProxy(PackageProxy):
             return os.path.exists(self.illustration_builder_file_name)
 
     @property
-    def has_score_definition(self):
+    def has_illustration(self):
         if not self.has_illustration_builder:
             return False
         else:
-            return bool(self.import_score_definition_from_illustration_builder())
+            return bool(self.import_illustration_from_illustration_builder())
 
     @property
     def has_user_input_module(self):
@@ -464,18 +464,17 @@ class MaterialProxy(PackageProxy):
         except ImportError as e:
             pass
 
-    # TODO: change to self.import_illustration_from_illustration_builder()
-    def import_score_definition_from_illustration_builder(self):
+    def import_illustration_from_illustration_builder(self):
         if not self.has_illustration_builder:
             return None
         self.unimport_illustration_builder_module()
         self.unimport_output_data_module()
-        command = 'from {} import lilypond_file'.format(self.illustration_builder_module_importable_name) 
+        command = 'from {} import illustration'.format(self.illustration_builder_module_importable_name) 
         exec(command)
         if self.has_local_stylesheet:
-            lilypond_file.file_initial_user_includes.append(self.local_stylesheet_file_name)
-        lilypond_file.header_block.title = markuptools.Markup(self.material_spaced_name)
-        return lilypond_file
+            illustration.file_initial_user_includes.append(self.local_stylesheet_file_name)
+        illustration.header_block.title = markuptools.Markup(self.material_spaced_name)
+        return illustration
         
     def import_user_input_from_user_input_module(self):
         self.unimport_user_input_module()
@@ -576,14 +575,6 @@ class MaterialProxy(PackageProxy):
             self.edit_user_input_at_number(int(result))
         else:
             raise ValueError
-
-    def lilypond_file_format_is_equal_to_illustration_builder_ly(self, lilypond_file):
-        temp_ly_file = os.path.join(os.environ.get('HOME'), 'tmp.ly')
-        iotools.write_expr_to_ly(lilypond_file, temp_ly_file, print_status=False)
-        trimmed_temp_ly_file_lines = self.trim_ly_lines(temp_ly_file)
-        os.remove(temp_ly_file)
-        trimmed_illustration_builder_ly_lines = self.trim_ly_lines(self.illustration_ly_file_name)
-        return trimmed_temp_ly_file_lines == trimmed_illustration_builder_ly_lines
 
     def link_local_stylesheet(self, source_stylesheet_file_name=None, prompt_proceed=True):
         if source_stylesheet_file_name is None:
@@ -698,7 +689,7 @@ class MaterialProxy(PackageProxy):
                     hidden_section.append(('ssl', 'score stylesheet - relink'))
 
     def make_illustration_object(self):
-        return self.import_score_definition_from_illustration_builder()
+        return self.import_illustration_from_illustration_builder()
 
     def make_output_data(self):
         return self.import_material_definition_from_material_definition_module()
@@ -863,21 +854,6 @@ class MaterialProxy(PackageProxy):
         lines.append('')
         self.proceed(lines=lines)
         
-    # TODO: remove
-    def trim_ly_lines(self, ly_file_name):
-        '''Remove "Abjad revision 4776" and "2011-09-13 18:33" lines.
-        '''
-        trimmed_ly_lines = []
-        file_pointer = file(ly_file_name, 'r')
-        found_version_command = False
-        for line in file_pointer.readlines():
-            if found_version_command:
-                trimmed_ly_lines.append(line)
-            if line.startswith(r'\version'):
-                found_version_command = True
-        trimmed_ly_content = ''.join(trimmed_ly_lines)
-        return trimmed_ly_content
-
     def unimport_material_definition_module(self):
         self.remove_package_importable_name_from_sys_modules(self.material_definition_module_importable_name)
 
@@ -907,36 +883,26 @@ class MaterialProxy(PackageProxy):
     def write_illustration_ly_and_pdf_to_disk(self, is_forced=False, prompt_proceed=True):
         lines = []
         illustration = self.make_illustration_object()
-        #if is_forced or not self.lilypond_file_format_is_equal_to_illustration_builder_ly(lilypond_file):
-        if True:
-            iotools.write_expr_to_pdf(illustration, self.illustration_pdf_file_name, print_status=False)
-            iotools.write_expr_to_ly(illustration, self.illustration_ly_file_name, print_status=False)
-            lines.append('PDF and LilyPond file written to disk.')
-        else:
-            lines.append('LilyPond file is the same. (PDF and LilyPond file preserved.)')
+        iotools.write_expr_to_pdf(illustration, self.illustration_pdf_file_name, print_status=False)
+        iotools.write_expr_to_ly(illustration, self.illustration_ly_file_name, print_status=False)
+        lines.append('PDF and LilyPond file written to disk.')
         if prompt_proceed:
             self.proceed(lines=lines)
         
     def write_illustration_ly_to_disk(self, is_forced=False, prompt_proceed=True):
         lines = []
-        lilypond_file = self.import_score_definition_from_illustration_builder()
-        if is_forced or not self.lilypond_file_format_is_equal_to_illustration_builder_ly(lilypond_file):
-            iotools.write_expr_to_ly(lilypond_file, self.illustration_ly_file_name, print_status=False)
-            lines.append('LilyPond file written to disk.')
-        else:
-            lines.append('LilyPond file is the same. (LilyPond file preserved.)')
+        illustration = self.import_illustration_from_illustration_builder()
+        iotools.write_expr_to_ly(illustration, self.illustration_ly_file_name, print_status=False)
+        lines.append('LilyPond file written to disk.')
         lines.append('')
         if prompt_proceed:
             self.proceed(lines=lines)
 
     def write_illustration_pdf_to_disk(self, is_forced=False, prompt_proceed=True):
         lines = []
-        lilypond_file = self.import_score_definition_from_illustration_builder()
-        if is_forced or not self.lilypond_file_format_is_equal_to_illustration_builder_ly(lilypond_file):
-            iotools.write_expr_to_pdf(lilypond_file, self.illustration_pdf_file_name, print_status=False)
-            lines.append('PDF written to disk.')
-        else:
-            lines.append('LilyPond file is the same. (PDF preserved.)')
+        illustration = self.import_illustration_illustration_builder()
+        iotools.write_expr_to_pdf(illustration, self.illustration_pdf_file_name, print_status=False)
+        lines.append('PDF written to disk.')
         lines.append('')
         if prompt_proceed:
             self.proceed(lines=lines)

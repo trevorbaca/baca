@@ -1,5 +1,5 @@
 from abjad.tools import sequencetools
-from baca.music.make_zagged_pitch_classes import make_lilypond_file_from_output_material
+from baca.music.make_zagged_pitch_classes import make_illustration_from_output_material
 from baca.scf.UserInputHandlingMaterialProxy import UserInputHandlingMaterialProxy
 from baca.scf.UserInputWrapper import UserInputWrapper
 from baca.scf.editors.InteractiveEditor import InteractiveEditor
@@ -16,7 +16,7 @@ class ZaggedPitchClassMaterialProxy(UserInputHandlingMaterialProxy):
 
     generic_output_name = 'zagged pitch-classes'
 
-    lilypond_file_make = make_lilypond_file_from_output_material
+    illustration_maker = make_illustration_from_output_material
 
     # TODO: implement baca.pitchtools.is_cyclic_pitch_class_tree
     output_data_checker = lambda x: True
