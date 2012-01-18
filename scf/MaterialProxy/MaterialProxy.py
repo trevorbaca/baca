@@ -730,6 +730,26 @@ class MaterialProxy(PackageProxy):
                     hidden_section.append(('ssm', 'source stylesheet - edit'))
                     hidden_section.append(('ssl', 'score stylesheet - relink'))
 
+    def make_output_data(self):
+        return self.import_material_definition_from_material_definition_module()
+
+    def make_output_data_module_body_lines(self):
+        lines = []
+        output_data = self.make_output_data()
+        lines.append('{} = {!r}'.format(self.material_underscored_name, output_data))
+        return lines
+
+    def make_output_data_module_preamble_lines(self):
+        lines = []
+        output_data_module_import_statements = getattr(
+            type(self), 'output_data_module_import_statements', self.output_data_module_import_statements)
+        if output_data_module_import_statements:
+            for output_data_module_import_statement in output_data_module_import_statements:
+                lines.write(output_data_module_import_statement + '\n')
+            lines.append('\n')
+            lines.append('\n')
+        return lines
+
     def manage_stylesheets(self):
         stylesheet_wrangler = StylesheetWrangler(session=self.session)
         stylesheet_wrangler.run()
@@ -937,26 +957,6 @@ class MaterialProxy(PackageProxy):
         self.add_material_to_material_initializer()
         if prompt_proceed:
             self.proceed(lines=['output data written to disk.'])
-
-    def make_output_data_module_body_lines(self):
-        lines = []
-        output_data = self.make_output_data()
-        lines.append('{} = {!r}'.format(self.material_underscored_name, output_data))
-        return lines
-
-    def make_output_data_module_preamble_lines(self):
-        lines = []
-        output_data_module_import_statements = getattr(
-            type(self), 'output_data_module_import_statements', self.output_data_module_import_statements)
-        if output_data_module_import_statements:
-            for output_data_module_import_statement in output_data_module_import_statements:
-                lines.write(output_data_module_import_statement + '\n')
-            lines.append('\n')
-            lines.append('\n')
-        return lines
-
-    def make_output_data(self):
-        return self.import_material_definition_from_material_definition_module()
 
     def write_stub_data_material_definition_to_disk(self):
         material_definition = file(self.material_definition_file_name, 'w')
