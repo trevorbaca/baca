@@ -258,17 +258,17 @@ class MaterialProxy(PackageProxy):
             return '{}.output'.format(self.package_importable_name)
 
     @property
-    def output_data_preamble_lines(self):
+    def output_data_module_import_statements(self):
         self.unimport_material_definition_module()
-        command = 'from {} import output_data_preamble_lines'.format(
-            self.material_definition_module_importable_name)
         try:
+            command = 'from {} import output_data_module_import_statements'.format(
+                self.material_definition_module_importable_name)
             exec(command)
             # keep list from persisting between multiple calls to this method
-            output_data_preamble_lines = list(output_data_preamble_lines)
+            output_data_module_import_statements = list(output_data_module_import_statements)
         except ImportError:
-            output_data_preamble_lines = []
-        return output_data_preamble_lines
+            output_data_module_import_statements = []
+        return output_data_module_import_statements
 
     @property
     def output_ly_file_name(self):
@@ -938,9 +938,9 @@ class MaterialProxy(PackageProxy):
             return self.is_changed
         self.remove_material_from_materials_initializer()
         output_data_module = file(self.output_data_module_file_name, 'w')
-        output_data_preamble_lines = self.output_data_preamble_lines
-        if output_data_preamble_lines:
-            for line in output_data_preamble_lines:
+        output_data_module_import_statements = self.output_data_module_import_statements
+        if output_data_module_import_statements:
+            for line in output_data_module_import_statements:
                 output_data_module.write(line + '\n')
             output_data_module.write('\n')
             output_data_module.write('\n')
@@ -951,9 +951,7 @@ class MaterialProxy(PackageProxy):
         self.add_material_to_materials_initializer()
         self.add_material_to_material_initializer()
         if prompt_proceed:
-            line = 'data written to disk.'
-            self.proceed(lines=[line])
-        return self.is_changed
+            self.proceed(lines=['data written to disk.'])
 
     def write_output_data_to_disk(self):
         if self.is_handmade:
@@ -964,7 +962,7 @@ class MaterialProxy(PackageProxy):
     def write_stub_data_material_definition_to_disk(self):
         material_definition = file(self.material_definition_file_name, 'w')
         material_definition.write('from abjad.tools import sequencetools\n')
-        material_definition.write('output_data_preamble_lines = []\n')
+        material_definition.write('output_data_module_import_statements = []\n')
         material_definition.write('\n')
         material_definition.write('\n')
         material_definition.write('{} = None'.format(self.material_underscored_name))
@@ -981,7 +979,7 @@ class MaterialProxy(PackageProxy):
     def write_stub_music_material_definition_to_disk(self):
         material_definition = file(self.material_definition_file_name, 'w')
         material_definition.write('from abjad import *\n')
-        material_definition.write("output_data_preamble_lines = ['from abjad import *']\n")
+        material_definition.write("output_data_module_import_statements = ['from abjad import *']\n")
         material_definition.write('\n')
         material_definition.write('\n')
         material_definition.write('{} = None'.format(self.material_underscored_name))
