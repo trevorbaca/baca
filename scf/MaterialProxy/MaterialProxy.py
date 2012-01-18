@@ -26,7 +26,7 @@ class MaterialProxy(PackageProxy):
         return self.package_spaced_name
 
     @property
-    def editor(self):
+    def user_input_handler(self):
         user_input_handler_class_name = self.user_input_handler_class_name
         try:
             command = 'from baca.scf.materialproxies import {}'.format(user_input_handler_class_name)
@@ -60,7 +60,7 @@ class MaterialProxy(PackageProxy):
         return False
 
     @property
-    def has_editor(self):
+    def has_user_input_handler(self):
         return bool(self.user_input_handler_class_name)
 
     @property
@@ -160,7 +160,7 @@ class MaterialProxy(PackageProxy):
 
     @property
     def is_handmade(self):
-        return not(self.has_editor)
+        return not(self.has_user_input_handler)
 
     @property
     def is_interactive(self):
@@ -550,13 +550,9 @@ class MaterialProxy(PackageProxy):
             self.delete_illustration_pdf()
         elif result == 'pdfi':
             self.open_illustration_pdf()
-        elif result == 'er':
-            self.run_editor()
         elif result == 'del':
             self.delete_material_package()
             self.session.is_backtracking_locally = True
-        elif result == 'editors':
-            self.manage_editors()
         elif result == 'init':
             self.edit_initializer()
         elif result == 'ren':
@@ -592,7 +588,7 @@ class MaterialProxy(PackageProxy):
         if self.is_handmade:
             menu, hidden_section = self.make_main_menu_for_material_made_by_hand()
         else:
-            menu, hidden_section = self.make_main_menu_for_material_made_with_editor()
+            menu, hidden_section = self.make_main_menu_for_material_made_with_user_input_handler()
         self.make_main_menu_section_for_illustration_ly(menu, hidden_section)
         self.make_main_menu_section_for_illustration_pdf(menu, hidden_section)
         self.make_main_menu_section_for_hidden_entries(menu)
@@ -609,7 +605,6 @@ class MaterialProxy(PackageProxy):
     def make_main_menu_section_for_hidden_entries(self, main_menu):
         hidden_section = main_menu.make_new_section(is_hidden=True)
         hidden_section.append(('del', 'delete material'))
-        hidden_section.append(('editors', 'manage editors'))
         hidden_section.append(('init', 'edit initializer'))
         hidden_section.append(('ls', 'list directory'))
         hidden_section.append(('reg', 'regenerate material'))
@@ -642,7 +637,7 @@ class MaterialProxy(PackageProxy):
 
     def make_main_menu_section_for_illustration_ly(self, main_menu, hidden_section):
         if self.has_output_data:
-            if self.has_illustration_builder or self.has_editor:
+            if self.has_illustration_builder or self.has_user_input_handler:
                 hidden_section.append(('lyc', 'output ly - create'))
         if self.has_illustration_ly:
             hidden_section.append(('lyd', 'output ly - delete'))
@@ -651,7 +646,7 @@ class MaterialProxy(PackageProxy):
     def make_main_menu_section_for_illustration_pdf(self, main_menu, hidden_section):
         has_illustration_pdf_section = False
         if self.has_output_data:
-            if self.has_illustration_builder or self.has_editor:
+            if self.has_illustration_builder or self.has_user_input_handler:
                 section = main_menu.make_new_section()
                 has_illustration_pdf_section = True
                 section.append(('pdfc', 'output pdf - create'))
@@ -786,10 +781,6 @@ class MaterialProxy(PackageProxy):
         os.system('abjad {}'.format(self.illustration_builder_file_name))
         self.conditionally_display_lines([''])
 
-    def run_editor(self):
-        if self.has_editor:
-            self.editor.run()
-
     def run_python_on_material_definition(self, prompt_proceed=True):
         os.system('python {}'.format(self.material_definition_file_name))
         if prompt_proceed:
@@ -803,16 +794,16 @@ class MaterialProxy(PackageProxy):
             self.proceed(lines=[line])
 
     # TODO: write test
-    def select_editor_interactively(self, prompt_proceed=True):
+    def select_user_input_handler_interactively(self, prompt_proceed=True):
         material_proxy_wrangler = MaterialProxyWrangler(session=self.session)
         self.preserve_backtracking = True
-        editor = material_proxy_wrangler.select_material_proxy_class_name_interactively()
+        user_input_handler = material_proxy_wrangler.select_material_proxy_class_name_interactively()
         self.preserve_backtracking = False
         if self.backtrack():
             return
-        self.add_tag('editor', editor.class_name)
+        self.add_tag('user_input_handler', user_input_handler.class_name)
         if prompt_proceed:
-            line = 'editor selected.'
+            line = 'user input handler selected.'
             self.proceed(lines=[line])
 
     # TODO: write test
