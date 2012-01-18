@@ -676,35 +676,36 @@ class MaterialProxy(PackageProxy):
             section.append(('mdt', 'material definition - stub'))
 
     def make_main_menu_section_for_output_data(self, main_menu, hidden_section):
-        if self.has_output_data_module:
+        has_output_data_section = False
+        if self.has_material_definition or self.has_complete_user_input_wrapper:
             section = main_menu.make_new_section()
-            section.append(('dc', 'output data - recreate'))
+            section.append(('dc', 'output data - create'))
+            has_output_data_section = True
+        if self.has_output_data_module:
+            if not has_output_data_section:
+                section = main_menu.make_new_section()
             section.append(('di', 'output data - inspect'))
             hidden_section.append(('dd', 'output data - delete'))
-        elif self.has_material_definition:
-            section = main_menu.make_new_section()
-            section.append(('dc', 'output data - create'))
-        elif self.has_complete_user_input_wrapper:
-            section = main_menu.make_new_section()
-            section.append(('dc', 'output data - create'))
 
     def make_main_menu_section_for_output_ly(self, main_menu, hidden_section):
+        if self.has_output_data:
+            if self.has_score_builder or self.has_editor:
+                hidden_section.append(('lyc', 'output ly - create'))
         if self.has_output_ly:
-            hidden_section.append(('lyc', 'output ly - recreate'))
             hidden_section.append(('lyd', 'output ly - delete'))
             hidden_section.append(('lyi', 'output ly - inspect'))
-        elif self.has_score_builder:
-            hidden_section.append(('lyc', 'output ly - create'))
 
     def make_main_menu_section_for_output_pdf(self, main_menu, hidden_section):
+        has_output_pdf_section = False
+        if self.has_output_data:
+            if self.has_score_builder or self.has_editor:
+                section = main_menu.make_new_section()
+                section.append(('pdfc', 'output pdf - create'))
         if self.has_output_pdf:
-            section = main_menu.make_new_section()
-            section.append(('pdfc', 'output pdf - recreate'))
-            hidden_section.append(('pdfd', 'output pdf - delete'))
-            section.append(('pdfi', 'output pdf - inspect'))
-        elif self.has_output_data and self.has_score_builder:
-            section = main_menu.make_new_section()
-            section.append(('pdfc', 'output pdf - create'))
+            if not has_output_pdf_section:
+                section = main_menu.make_new_section()
+                hidden_section.append(('pdfd', 'output pdf - delete'))
+                section.append(('pdfi', 'output pdf - inspect'))
 
     def make_main_menu_section_for_score_builder(self, main_menu, hidden_section):
         section = main_menu.make_new_section()
