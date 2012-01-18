@@ -1,7 +1,9 @@
 from abjad.tools import sequencetools
+from baca.music.make_zagged_pitch_classes import make_lilypond_file_from_output_material
 from baca.scf.UserInputHandlingMaterialProxy import UserInputHandlingMaterialProxy
 from baca.scf.UserInputWrapper import UserInputWrapper
 from baca.scf.editors.InteractiveEditor import InteractiveEditor
+import baca
 
 
 class ZaggedPitchClassMaterialProxy(UserInputHandlingMaterialProxy):
@@ -13,6 +15,13 @@ class ZaggedPitchClassMaterialProxy(UserInputHandlingMaterialProxy):
     ### READ-ONLY PUBLIC ATTRIBUTES ###
 
     generic_output_name = 'zagged pitch-classes'
+
+    lilypond_file_make = make_lilypond_file_from_output_material
+
+    # TODO: implement baca.pitchtools.is_cyclic_pitch_class_tree
+    output_data_checker = lambda x: True
+
+    output_data_maker = baca.music.make_zagged_pitch_classes
 
     output_data_module_import_statements = [
         'from abjad.tools.sequencetools.CyclicTree import CyclicTree',]
@@ -26,7 +35,7 @@ class ZaggedPitchClassMaterialProxy(UserInputHandlingMaterialProxy):
         'from baca.scf.materialproxies import ZaggedPitchClassMaterialProxy',
         'from baca.scf import UserInputWrapper',]
 
-    # TODO: implement pitchtools.is_sequence_of_pitch_class_token_sequences()
+    # TODO: implement pitchtools.are_pitch_class_tokens()
     # TODO: implement sequencetools.all_are_nonnegative_integers(depth=n) keyword
     user_input_tests = [
         ('pc_cells', list),
@@ -35,14 +44,10 @@ class ZaggedPitchClassMaterialProxy(UserInputHandlingMaterialProxy):
 
     ### PUBLIC METHODS ###
 
-    def get_output_data_file_lines(self, material, material_underscored_name):
-        output_file_lines = []
-        output_file_lines.append('%s = %s' % (material_underscored_name, material))
-        return output_file_lines
-
-    def make(self, pc_cells, division_cells, grouping_counts):
-        import baca
-        return baca.music.make_zagged_pitch_classes(pc_cells, division_cells, grouping_counts)
+    def format_output_data_for_writing_to_disk(self, output_data):
+        lines = []
+        lines.append('%s = %s' % (self.material_underscored_name, output_data))
+        return lines
 
     def make_lilypond_file_from_output_material(self, material):
         from baca.music.make_zagged_pitch_classes import make_lilypond_file_from_output_material

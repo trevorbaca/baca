@@ -3,6 +3,7 @@ from abjad.tools import durationtools
 from abjad.tools import mathtools
 from abjad.tools import measuretools
 from abjad.tools import sequencetools
+from baca.music.make_sargasso_measures import make_lilypond_file_from_output_material
 from baca.scf.UserInputHandlingMaterialProxy import UserInputHandlingMaterialProxy
 from baca.scf.UserInputWrapper import UserInputWrapper
 import baca
@@ -17,6 +18,8 @@ class SargassoMeasureMaterialProxy(UserInputHandlingMaterialProxy):
     ### READ-ONLY PUBLIC ATTRIBUTES ###
 
     generic_output_name = 'sargasso measures'
+
+    lilypond_file_maker = make_lilypond_file_from_output_material
 
     # TODO: implement measuretools predicate
     output_data_checker = lambda x: componenttools.all_are_components(x, klasses=measuretools.Measure)
@@ -52,8 +55,7 @@ class SargassoMeasureMaterialProxy(UserInputHandlingMaterialProxy):
 
     ### PUBLIC METHODS ###
 
-    #def get_output_data_file_lines(self, measures, material_underscored_name):
-    def format_output_data_for_writing_to_disk(output_data):
+    def format_output_data_for_writing_to_disk(self, output_data):
         lines = []
         lines.append('%s = [' % self.material_underscored_name)
         for measure in output_data[:-1]:
@@ -62,7 +64,3 @@ class SargassoMeasureMaterialProxy(UserInputHandlingMaterialProxy):
         line = measuretools.measure_to_one_line_input_string(measures[-1])
         lines.append('\t%s]' % line)
         return lines
-
-    def make_lilypond_file_from_output_material(self, material):
-        from baca.music.make_sargasso_measures import make_lilypond_file_from_output_material
-        return make_lilypond_file_from_output_material(material)
