@@ -114,11 +114,11 @@ class MaterialProxy(PackageProxy):
             return os.path.exists(self.illustration_ly_file_name)
 
     @property
-    def has_output_pdf(self):
-        if self.output_pdf_file_name is None:
+    def has_illustration_pdf(self):
+        if self.illustration_pdf_file_name is None:
             return False
         else:
-            return os.path.exists(self.output_pdf_file_name)
+            return os.path.exists(self.illustration_pdf_file_name)
 
     @property
     def has_illustration_builder(self):
@@ -276,9 +276,9 @@ class MaterialProxy(PackageProxy):
             return os.path.join(self.directory_name, 'illustration.ly')
 
     @property
-    def output_pdf_file_name(self):
+    def illustration_pdf_file_name(self):
         if self.directory_name is not None:
-            return os.path.join(self.directory_name, 'output.pdf')
+            return os.path.join(self.directory_name, 'illustration.pdf')
 
     @property
     def recommended_stylesheet_file_name(self):
@@ -386,9 +386,9 @@ class MaterialProxy(PackageProxy):
                 line = 'output LilyPond file deleted.'
                 self.procced(lines=[line])
 
-    def delete_output_pdf(self, prompt_proceed=True):
-        if self.has_output_pdf:
-            os.remove(self.output_pdf_file_name)
+    def delete_illustration_pdf(self, prompt_proceed=True):
+        if self.has_illustration_pdf:
+            os.remove(self.illustration_pdf_file_name)
             if prompt_proceed:
                 line = 'output PDF deleted.'
                 self.proceed(lines=[line])
@@ -546,11 +546,11 @@ class MaterialProxy(PackageProxy):
             self.edit_illustration_ly()
         elif result == 'pdfc':
             self.write_illustration_ly_and_pdf_to_disk(is_forced=True)
-            self.open_output_pdf()
+            self.open_illustration_pdf()
         elif result == 'pdfd':
-            self.delete_output_pdf()
+            self.delete_illustration_pdf()
         elif result == 'pdfi':
-            self.open_output_pdf()
+            self.open_illustration_pdf()
         elif result == 'er':
             self.run_editor()
         elif result == 'del':
@@ -605,7 +605,7 @@ class MaterialProxy(PackageProxy):
         else:
             menu, hidden_section = self.make_main_menu_for_material_made_with_editor()
         self.make_main_menu_section_for_illustration_ly(menu, hidden_section)
-        self.make_main_menu_section_for_output_pdf(menu, hidden_section)
+        self.make_main_menu_section_for_illustration_pdf(menu, hidden_section)
         self.make_main_menu_section_for_hidden_entries(menu)
         return menu
     
@@ -660,15 +660,15 @@ class MaterialProxy(PackageProxy):
             hidden_section.append(('lyd', 'output ly - delete'))
             hidden_section.append(('lyi', 'output ly - inspect'))
 
-    def make_main_menu_section_for_output_pdf(self, main_menu, hidden_section):
-        has_output_pdf_section = False
+    def make_main_menu_section_for_illustration_pdf(self, main_menu, hidden_section):
+        has_illustration_pdf_section = False
         if self.has_output_data:
             if self.has_illustration_builder or self.has_editor:
                 section = main_menu.make_new_section()
-                has_output_pdf_section = True
+                has_illustration_pdf_section = True
                 section.append(('pdfc', 'output pdf - create'))
-        if self.has_output_pdf:
-            if not has_output_pdf_section:
+        if self.has_illustration_pdf:
+            if not has_illustration_pdf_section:
                 section = main_menu.make_new_section()
             hidden_section.append(('pdfd', 'output pdf - delete'))
             section.append(('pdfi', 'output pdf - inspect'))
@@ -713,8 +713,8 @@ class MaterialProxy(PackageProxy):
         stylesheet_wrangler = StylesheetWrangler(session=self.session)
         stylesheet_wrangler.run()
 
-    def open_output_pdf(self):
-        command = 'open {}'.format(self.output_pdf_file_name)
+    def open_illustration_pdf(self):
+        command = 'open {}'.format(self.illustration_pdf_file_name)
         os.system(command)
 
     def regenerate_everything(self, is_forced=False):
@@ -852,7 +852,7 @@ class MaterialProxy(PackageProxy):
         else:
             missing.append(artifact_name)
         artifact_name = 'PDF'
-        if self.has_output_pdf:
+        if self.has_illustration_pdf:
             found.append(artifact_name)
         else:
             missing.append(artifact_name)
@@ -909,7 +909,7 @@ class MaterialProxy(PackageProxy):
         illustration = self.make_illustration_object()
         #if is_forced or not self.lilypond_file_format_is_equal_to_illustration_builder_ly(lilypond_file):
         if True:
-            iotools.write_expr_to_pdf(illustration, self.output_pdf_file_name, print_status=False)
+            iotools.write_expr_to_pdf(illustration, self.illustration_pdf_file_name, print_status=False)
             iotools.write_expr_to_ly(illustration, self.illustration_ly_file_name, print_status=False)
             lines.append('PDF and LilyPond file written to disk.')
         else:
@@ -933,7 +933,7 @@ class MaterialProxy(PackageProxy):
         lines = []
         lilypond_file = self.import_score_definition_from_illustration_builder()
         if is_forced or not self.lilypond_file_format_is_equal_to_illustration_builder_ly(lilypond_file):
-            iotools.write_expr_to_pdf(lilypond_file, self.output_pdf_file_name, print_status=False)
+            iotools.write_expr_to_pdf(lilypond_file, self.illustration_pdf_file_name, print_status=False)
             lines.append('PDF written to disk.')
         else:
             lines.append('LilyPond file is the same. (PDF preserved.)')

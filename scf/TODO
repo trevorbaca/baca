@@ -88,10 +88,10 @@ TODO
 
 39. Extend self.proceed(line(s), prompt_proceed=True) with 'prompt_proceed' keyword.
 
-41. Rename 'illustration.ly', 'output.pdf' to 'illustration.ly', 'illustration.pdf'.
+40. Change 'create_' everywhere to 'make_'.
 
-42. Change 'create_' everywhere to 'make_'.
+41. Change 'prompt_proceed' to simply 'prompt'.
 
-42. Change 'prompt_proceed' to simply 'prompt'.
+42. Rename 'output.py' to 'output_material.py'; change 'output_data' to 'output_material'.
 
-43. Rename 'output.py' to 'output_material.py'; change 'output_data' to 'output_material'.
+43. Encapsualte user input getter subprocedures.
