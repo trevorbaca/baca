@@ -24,7 +24,7 @@ def test_MaterialProxy_read_only_attributes_01():
     assert material_proxy.material_spaced_name == 'test material a'
     assert material_proxy.material_underscored_name == 'test_material_a'
     assert material_proxy.materials_package_importable_name == 'baca.materials'
-    assert material_proxy.output_data_file_name == \
+    assert material_proxy.output_data_module_file_name == \
         '/Users/trevorbaca/Documents/other/baca/materials/test_material_a/output.py'
     assert material_proxy.output_data_module_importable_name == 'baca.materials.test_material_a.output'
     assert material_proxy.score_package_short_name == 'baca'
@@ -64,7 +64,7 @@ def test_MaterialProxy_read_only_attributes_02():
     assert smp.material_spaced_name == 'sargasso multipliers'
     assert smp.material_underscored_name == 'sargasso_multipliers'
     assert smp.materials_package_importable_name == 'baca.materials'
-    assert smp.output_data_file_name == \
+    assert smp.output_data_module_file_name == \
         '/Users/trevorbaca/Documents/other/baca/materials/sargasso_multipliers/output.py'
     assert smp.output_data_module_importable_name == 'baca.materials.sargasso_multipliers.output'
     assert smp.score_package_short_name == 'baca'

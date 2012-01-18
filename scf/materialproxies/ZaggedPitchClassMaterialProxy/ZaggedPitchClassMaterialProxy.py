@@ -48,7 +48,3 @@ class ZaggedPitchClassMaterialProxy(UserInputHandlingMaterialProxy):
         lines = []
         lines.append('%s = %s' % (self.material_underscored_name, output_data))
         return lines
-
-    def make_lilypond_file_from_output_material(self, material):
-        from baca.music.make_zagged_pitch_classes import make_lilypond_file_from_output_material
-        return make_lilypond_file_from_output_material(material)

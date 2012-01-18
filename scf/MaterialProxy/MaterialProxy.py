@@ -101,10 +101,10 @@ class MaterialProxy(PackageProxy):
 
     @property
     def has_output_data_module(self):
-        if self.output_data_file_name is None:
+        if self.output_data_module_file_name is None:
             return False
         else:
-            return os.path.exists(self.output_data_file_name)
+            return os.path.exists(self.output_data_module_file_name)
 
     @property
     def has_output_ly(self):
@@ -248,13 +248,13 @@ class MaterialProxy(PackageProxy):
         return result
 
     @property
-    def output_data_file_name(self): 
+    def output_data_module_file_name(self): 
         if self.directory_name is not None:
             return os.path.join(self.directory_name, 'output.py')
 
     @property
     def output_data_module_importable_name(self):
-        if self.output_data_file_name is not None:
+        if self.output_data_module_file_name is not None:
             return '{}.output'.format(self.package_importable_name)
 
     @property
@@ -410,7 +410,7 @@ class MaterialProxy(PackageProxy):
     def delete_output_data_module(self, prompt_proceed=True):
         if self.has_output_data_module:
             self.remove_material_from_materials_initializer()
-            os.remove(self.output_data_file_name)
+            os.remove(self.output_data_module_file_name)
             if prompt_proceed:
                 line = 'output data module deleted.'
                 self.proceed(lines=[line])
@@ -436,7 +436,7 @@ class MaterialProxy(PackageProxy):
         os.system('vi + {}'.format(self.material_definition_file_name))
 
     def edit_output_data_module(self):
-        os.system('vi + {}'.format(self.output_data_file_name))
+        os.system('vi + {}'.format(self.output_data_module_file_name))
 
     def edit_output_ly(self):
         os.system('vi {}'.format(self.output_ly_file_name))
@@ -937,7 +937,7 @@ class MaterialProxy(PackageProxy):
                 self.proceed(lines=[line])
             return self.is_changed
         self.remove_material_from_materials_initializer()
-        output_data_module = file(self.output_data_file_name, 'w')
+        output_data_module = file(self.output_data_module_file_name, 'w')
         output_data_preamble_lines = self.output_data_preamble_lines
         if output_data_preamble_lines:
             for line in output_data_preamble_lines:
