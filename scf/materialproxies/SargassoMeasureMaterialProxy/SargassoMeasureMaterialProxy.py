@@ -55,8 +55,9 @@ class SargassoMeasureMaterialProxy(UserInputHandlingMaterialProxy):
 
     ### PUBLIC METHODS ###
 
-    def format_output_data_for_writing_to_disk(self, output_data):
+    def make_output_data_module_body_lines(self):
         lines = []
+        output_data = self.make_output_data()
         lines.append('%s = [' % self.material_underscored_name)
         for measure in output_data[:-1]:
             line = measuretools.measure_to_one_line_input_string(measure)

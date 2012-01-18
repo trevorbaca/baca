@@ -89,10 +89,6 @@ class UserInputHandlingMaterialProxy(MaterialProxy):
         return output_data
 
     # TODO: implement
-    def make_output_data_and_write_to_disk(self):
-        output_data = self.make_output_data()
-
-    # TODO: implement
     def populate_user_input_wrapper(self, prompt_proceed=True):
         self.print_not_implemented()
 

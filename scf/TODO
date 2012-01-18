@@ -85,3 +85,5 @@ TODO
 37. Consider implementing UserInputHandlingMaterialProxy as intermediate class.
 
 38. Implement measuretools.all_are_measures() and other checkers.
+
+39. Extend self.proceed(line(s), prompt_proceed=True) with 'prompt_proceed' keyword.

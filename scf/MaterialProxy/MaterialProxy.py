@@ -739,9 +739,7 @@ class MaterialProxy(PackageProxy):
         os.system(command)
 
     def regenerate_everything(self, is_forced=False):
-        is_changed = self.write_material_definition_to_output_data_module(is_forced=is_forced)
-        is_changed = self.create_output_ly_and_output_pdf_from_score_builder(is_forced=(is_changed or is_forced))
-        return is_changed
+        self.print_not_implemented()
 
     def rename_material(self):
         line = 'current material name: {}'.format(self.material_underscored_name)
@@ -886,6 +884,7 @@ class MaterialProxy(PackageProxy):
         lines.append('')
         self.proceed(lines=lines)
         
+    # TODO: remove
     def trim_ly_lines(self, ly_file_name):
         '''Remove "Abjad revision 4776" and "2011-09-13 18:33" lines.
         '''
@@ -926,38 +925,38 @@ class MaterialProxy(PackageProxy):
     def unimport_user_input_module(self):
         self.remove_package_importable_name_from_sys_modules(self.user_input_module_importable_name)
 
-    def write_material_definition_to_output_data_module(self, is_forced=False, prompt_proceed=True):
-        if not self.is_changed and not is_forced:
-            line = 'material definition equals output data. (Output data preserved.)'
-            self.conditionally_display_lines([line, ''])
-            return self.is_changed
-        if not self.has_material_definition:
-            if prompt_proceed:
-                line = 'material not yet defined.'
-                self.proceed(lines=[line])
-            return self.is_changed
+    def write_output_data_to_disk(self, prompt_proceed=True):
         self.remove_material_from_materials_initializer()
+        output_data_module_preamble_lines = self.make_ouput_data_module_preamble_lines()
+        output_data_module_body_lines = self.make_output_data_module_body_lines()
         output_data_module = file(self.output_data_module_file_name, 'w')
-        output_data_module_import_statements = self.output_data_module_import_statements
-        if output_data_module_import_statements:
-            for line in output_data_module_import_statements:
-                output_data_module.write(line + '\n')
-            output_data_module.write('\n')
-            output_data_module.write('\n')
-        material_definition = self.import_material_definition_from_material_definition_module()
-        line = '{} = {!r}'.format(self.material_underscored_name, material_definition)
-        output_data_module.write(line)
+        output_data_module.write('\n'.join(output_data_module_preamble_lines))
+        output_data_module.write('\n'.join(output_data_module_body_lines))
         output_data_module.close()
         self.add_material_to_materials_initializer()
         self.add_material_to_material_initializer()
         if prompt_proceed:
-            self.proceed(lines=['data written to disk.'])
+            self.proceed(lines=['output data written to disk.'])
 
-    def write_output_data_to_disk(self):
-        if self.is_handmade:
-            self.write_material_definition_to_output_data_module(is_forced=True)
-        elif self.has_user_input_module:
-            self.make_output_data_and_write_to_disk()
+    def make_output_data_module_body_lines(self):
+        lines = []
+        output_data = self.make_output_data()
+        lines.append('{} = {!r}'.format(self.material_underscored_name, output_data))
+        return lines
+
+    def make_output_data_module_preamble_lines(self):
+        lines = []
+        output_data_module_import_statements = getattr(
+            type(self), 'output_data_module_import_statements', self.output_data_module_import_statements)
+        if output_data_module_import_statements:
+            for output_data_module_import_statement in output_data_module_import_statements:
+                lines.write(output_data_module_import_statement + '\n')
+            lines.append('\n')
+            lines.append('\n')
+        return lines
+
+    def make_output_data(self):
+        return self.import_material_definition_from_material_definition_module()
 
     def write_stub_data_material_definition_to_disk(self):
         material_definition = file(self.material_definition_file_name, 'w')

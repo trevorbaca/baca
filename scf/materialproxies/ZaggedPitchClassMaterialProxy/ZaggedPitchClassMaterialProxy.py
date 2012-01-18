@@ -44,7 +44,9 @@ class ZaggedPitchClassMaterialProxy(UserInputHandlingMaterialProxy):
 
     ### PUBLIC METHODS ###
 
-    def format_output_data_for_writing_to_disk(self, output_data):
-        lines = []
-        lines.append('%s = %s' % (self.material_underscored_name, output_data))
-        return lines
+    # TODO: MaterialProxy.make_output_data_module_body_lines() should do
+    #def make_output_data_module_body_lines(self):
+    #    lines = []
+    #    output_data = self.make_output_data()
+    #    lines.append('{} = {!r}'.format(self.material_underscored_name, output_data))
+    #    return lines
