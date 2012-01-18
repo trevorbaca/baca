@@ -140,42 +140,7 @@ class MaterialProxy(PackageProxy):
     def is_handmade(self):
         return not(self.has_user_input_handler)
 
-    @property
-    def is_interactive(self):
-        return bool(self.has_tag('material_proxy'))
-
-    @property
-    def is_static(self):
-        return not self.is_interactive
-
-    @property
-    def lilypond_score_subtitle(self):
-        import baca
-        if 'scores' in self.material_package_directory:
-            materials_directory = os.path.dirname(self.material_package_directory)
-            mus_directory = os.path.dirname(materials_directory)
-            score_package_directory = os.path.dirname(mus_directory)
-            score_package_short_name = os.path.basename(score_package_directory)
-            score_wrangler = baca.scf.ScoreWrangler()
-            score_title = score_wrangler.score_package_short_name_to_score_title(score_package_short_name)
-            subtitle = '({})'.format(score_title)
-        else:
-            subtitle = '(shared material)'
-        subtitle = markuptools.Markup(subtitle)
-        return subtitle
-
-    @property
-    def lilypond_score_title(self):
-        material_underscored_name = os.path.basename(self.material_package_directory)
-        if self.is_shared:
-            material_parts = material_underscored_name.split('_')
-        else:
-            material_parts = material_underscored_name.split('_')[1:]
-        material_spaced_name = ' '.join(material_parts)
-        title = iotools.capitalize_string_start(material_spaced_name)
-        title = markuptools.Markup(title)
-        return title
-
+    # TODO: remove
     @property
     def local_stylesheet_file_name(self):
         if self.directory_name is not None:

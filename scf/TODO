@@ -107,3 +107,5 @@ TODO
 48. Author is-alphabetized script.
 
 49. Port output change awareness.
+
+50. Make user input handler creation work.
