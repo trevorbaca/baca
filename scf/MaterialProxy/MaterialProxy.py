@@ -353,12 +353,15 @@ class MaterialProxy(PackageProxy):
         parent_package = PackageProxy(self.parent_package_importable_name, session=self.session)
         parent_package.add_import_statement_to_initializer(import_statement)
 
+    # TODO: change name to self.write_output_ly_and_output_pdf_to_disk()
     def create_output_ly_and_output_pdf_from_score_builder(self, is_forced=False, prompt_proceed=True):
         lines = []
-        lilypond_file = self.import_score_definition_from_score_builder()
-        if is_forced or not self.lilypond_file_format_is_equal_to_score_builder_ly(lilypond_file):
-            iotools.write_expr_to_pdf(lilypond_file, self.output_pdf_file_name, print_status=False)
-            iotools.write_expr_to_ly(lilypond_file, self.output_ly_file_name, print_status=False)
+        #lilypond_file = self.import_score_definition_from_score_builder()
+        illustration = self.make_illustration_object()
+        #if is_forced or not self.lilypond_file_format_is_equal_to_score_builder_ly(lilypond_file):
+        if True:
+            iotools.write_expr_to_pdf(illustration, self.output_pdf_file_name, print_status=False)
+            iotools.write_expr_to_ly(illustration, self.output_ly_file_name, print_status=False)
             lines.append('PDF and LilyPond file written to disk.')
         else:
             lines.append('LilyPond file is the same. (PDF and LilyPond file preserved.)')
@@ -500,6 +503,7 @@ class MaterialProxy(PackageProxy):
         except ImportError as e:
             pass
 
+    # TODO: change to self.import_illustration_from_illustration_builder()
     def import_score_definition_from_score_builder(self):
         if not self.has_score_builder:
             return None
@@ -730,6 +734,9 @@ class MaterialProxy(PackageProxy):
                     section.append(('sse', 'score stylesheet - edit'))
                     hidden_section.append(('ssm', 'source stylesheet - edit'))
                     hidden_section.append(('ssl', 'score stylesheet - relink'))
+
+    def make_illustration_object(self):
+        return self.import_score_definition_from_score_builder()
 
     def make_output_data(self):
         return self.import_material_definition_from_material_definition_module()

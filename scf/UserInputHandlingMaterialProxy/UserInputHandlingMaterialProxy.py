@@ -66,6 +66,13 @@ class UserInputHandlingMaterialProxy(MaterialProxy):
         if prompt_proceed:
             self.proceed(lines=['demo values loaded.'])
 
+    def make_illustration_object(self):
+        output_data = self.import_output_data_from_output_data_module()
+        self.debug(output_data, 1)
+        illustration = self.lilypond_file_maker(output_data)
+        self.debug(illustration, 2)
+        return illustration
+
     def make_main_menu_for_material_made_with_editor(self):
         menu, hidden_section = self.make_new_menu(where=self.where(), is_hidden=True)
         self.make_main_menu_section_for_user_input_module(menu, hidden_section)

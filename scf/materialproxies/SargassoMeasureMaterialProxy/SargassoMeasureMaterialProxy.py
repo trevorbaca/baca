@@ -19,7 +19,7 @@ class SargassoMeasureMaterialProxy(UserInputHandlingMaterialProxy):
 
     generic_output_name = 'sargasso measures'
 
-    lilypond_file_maker = make_lilypond_file_from_output_material
+    lilypond_file_maker = staticmethod(make_lilypond_file_from_output_material)
 
     # TODO: implement measuretools predicate
     output_data_checker = staticmethod(
