@@ -22,12 +22,12 @@ class SargassoMeasureMaterialProxy(UserInputHandlingMaterialProxy):
     illustration_maker = staticmethod(make_illustration_from_output_material)
 
     # TODO: implement measuretools predicate
-    output_data_checker = staticmethod(
+    output_material_checker = staticmethod(
         lambda x: componenttools.all_are_components(x, klasses=measuretools.Measure))
             
-    output_data_maker = staticmethod(baca.music.make_sargasso_measures)
+    output_material_maker = staticmethod(baca.music.make_sargasso_measures)
 
-    output_data_module_import_statements = [
+    output_material_module_import_statements = [
         'from abjad.tools.measuretools.Measure import Measure',
         ]
 
@@ -60,13 +60,13 @@ class SargassoMeasureMaterialProxy(UserInputHandlingMaterialProxy):
 
     ### PUBLIC METHODS ###
 
-    def make_output_data_module_body_lines(self):
+    def make_output_material_module_body_lines(self):
         lines = []
-        output_data = self.make_output_data()
+        output_material = self.make_output_material()
         lines.append('{} = ['.format(self.material_underscored_name))
-        for measure in output_data[:-1]:
+        for measure in output_material[:-1]:
             line = measuretools.measure_to_one_line_input_string(measure)
             lines.append('\t{},'.format(line))
-        line = measuretools.measure_to_one_line_input_string(output_data[-1])
+        line = measuretools.measure_to_one_line_input_string(output_material[-1])
         lines.append('\t%{}]'.format(line))
         return lines

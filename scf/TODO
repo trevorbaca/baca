@@ -84,26 +84,26 @@ TODO
 
 37. Change 'prompt_proceed' to simply 'prompt'.
 
-38. Change 'output_data' to 'output_material'.
+38. Encapsulate user input getter subprocedures.
 
-39. Rename 'output.py' everywhere to 'output_material.py'.
+39. Make 'ls' hide or remove .pyc files.
 
-40. Encapsulate user input getter subprocedures.
+40. Make 'edit initializer' read only.
 
-41. Make 'ls' hide or remove .pyc files.
+41. Author is-alphabetized script.
 
-42. Make 'edit initializer' read only.
+42. Port output change awareness.
 
-43. Author is-alphabetized script.
+43. Make user input handler creation work.
 
-44. Port output change awareness.
+44. Change 'user_input' to 'user_input_wrapper'.
 
-45. Make user input handler creation work.
+45. Make some zagged pitch-classes.
 
-46. Change 'user_input' to 'user_input_wrapper'.
+46. Implement RangeInventory in Abjad. Integrate into SCF.
 
-47. Make some zagged pitch-classes.
+47. Define range inventories for all scores.
 
-48. Implement RangeInventory in Abjad. Integrate into SCF.
+48. Remove three blank lines at head of data-only output material module.
 
-49. Define range inventories for all scores.
+49. Author read-only attribute tests.

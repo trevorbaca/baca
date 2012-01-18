@@ -1,5 +1,5 @@
 from collections import OrderedDict
-from output import red_sargasso
+from output_material import red_sargasso
 
 
 tags = OrderedDict([

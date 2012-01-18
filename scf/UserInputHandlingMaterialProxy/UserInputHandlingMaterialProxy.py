@@ -67,16 +67,16 @@ class UserInputHandlingMaterialProxy(MaterialProxy):
             self.proceed(lines=['demo values loaded.'])
 
     def make_illustration(self):
-        output_data = self.import_output_data_from_output_data_module()
-        self.debug(output_data, 1)
-        illustration = self.illustration_maker(output_data)
+        output_material = self.import_output_material_from_output_material_module()
+        self.debug(output_material, 1)
+        illustration = self.illustration_maker(output_material)
         self.debug(illustration, 2)
         return illustration
 
     def make_main_menu_for_material_made_with_editor(self):
         menu, hidden_section = self.make_new_menu(where=self.where(), is_hidden=True)
         self.make_main_menu_section_for_user_input_module(menu, hidden_section)
-        self.make_main_menu_section_for_output_data(menu, hidden_section)
+        self.make_main_menu_section_for_output_material(menu, hidden_section)
         return menu, hidden_section
 
     def make_main_menu_section_for_user_input_module(self, main_menu, hidden_section):
@@ -90,10 +90,10 @@ class UserInputHandlingMaterialProxy(MaterialProxy):
         section.append(('uis', 'user input - show demo values'))
         hidden_section.append(('uit','user input - toggle default mode'))
 
-    def make_output_data(self):
-        output_data = self.output_data_maker(*self.user_input_wrapper.values)
-        assert type(self).output_data_checker(output_data)
-        return output_data
+    def make_output_material(self):
+        output_material = self.output_material_maker(*self.user_input_wrapper.values)
+        assert type(self).output_material_checker(output_material)
+        return output_material
 
     # TODO: implement
     def populate_user_input_wrapper(self, prompt_proceed=True):

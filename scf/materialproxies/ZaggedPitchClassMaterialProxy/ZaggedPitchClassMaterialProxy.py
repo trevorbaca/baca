@@ -19,11 +19,11 @@ class ZaggedPitchClassMaterialProxy(UserInputHandlingMaterialProxy):
     illustration_maker = make_illustration_from_output_material
 
     # TODO: implement baca.pitchtools.is_cyclic_pitch_class_tree
-    output_data_checker = lambda x: True
+    output_material_checker = lambda x: True
 
-    output_data_maker = baca.music.make_zagged_pitch_classes
+    output_material_maker = baca.music.make_zagged_pitch_classes
 
-    output_data_module_import_statements = [
+    output_material_module_import_statements = [
         'from abjad.tools.sequencetools.CyclicTree import CyclicTree',]
 
     user_input_demo_values = UserInputWrapper([
@@ -41,12 +41,3 @@ class ZaggedPitchClassMaterialProxy(UserInputHandlingMaterialProxy):
         ('pc_cells', list),
         ('division_cells', list),
         ('grouping_counts', sequencetools.all_are_nonnegative_integers),]
-
-    ### PUBLIC METHODS ###
-
-    # TODO: MaterialProxy.make_output_data_module_body_lines() should do
-    #def make_output_data_module_body_lines(self):
-    #    lines = []
-    #    output_data = self.make_output_data()
-    #    lines.append('{} = {!r}'.format(self.material_underscored_name, output_data))
-    #    return lines
