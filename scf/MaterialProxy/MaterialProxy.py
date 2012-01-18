@@ -53,10 +53,6 @@ class MaterialProxy(PackageProxy):
         return lines
 
     @property
-    def generic_output_name(self):
-        return self._generic_output_name
-
-    @property
     def has_complete_user_input_wrapper(self):
         if self.has_user_input_wrapper:
             user_input_wrapper = self.user_input_wrapper
@@ -161,6 +157,10 @@ class MaterialProxy(PackageProxy):
     @property
     def is_data_only(self):
         return not self.should_have_illustration
+
+    @property
+    def is_handmade(self):
+        return not(self.has_editor)
 
     @property
     def is_interactive(self):
@@ -340,11 +340,6 @@ class MaterialProxy(PackageProxy):
                 command = 'from {} import user_input'.format(self.user_input_module_importable_name)
                 exec(command)
                 return user_input
-
-    # TODO: change to 'is_handmade'
-    @property
-    def was_created_by_hand(self):
-        return not(self.has_editor)
 
     ### PUBLIC METHODS ###
 
@@ -573,7 +568,7 @@ class MaterialProxy(PackageProxy):
             self.manage_stylesheets()
         # TODO: extend this to work with user input-handling material proxies
         elif result == 'dc':
-            self.write_material_definition_to_output_data_module(is_forced=True)
+            self.write_output_data_to_disk()
         elif result == 'di':
             self.edit_output_data_module()
         elif result == 'dd':
@@ -640,7 +635,7 @@ class MaterialProxy(PackageProxy):
             self.proceed(lines=[line])
 
     def make_main_menu(self):
-        if self.was_created_by_hand:
+        if self.is_handmade:
             menu, hidden_section = self.make_main_menu_for_material_made_by_hand()
         else:
             menu, hidden_section = self.make_main_menu_for_material_made_with_editor()
@@ -742,12 +737,6 @@ class MaterialProxy(PackageProxy):
     def open_output_pdf(self):
         command = 'open {}'.format(self.output_pdf_file_name)
         os.system(command)
-
-    def overwrite_output_data(self):
-        output_data_module = file(self.output_data_file_name, 'w')
-        line = '{} = None\n'.format(self.material_underscored_name)
-        output_data_module.write(line)
-        output_data_module.close()
 
     def regenerate_everything(self, is_forced=False):
         is_changed = self.write_material_definition_to_output_data_module(is_forced=is_forced)
@@ -948,7 +937,6 @@ class MaterialProxy(PackageProxy):
                 self.proceed(lines=[line])
             return self.is_changed
         self.remove_material_from_materials_initializer()
-        self.overwrite_output_data()
         output_data_module = file(self.output_data_file_name, 'w')
         output_data_preamble_lines = self.output_data_preamble_lines
         if output_data_preamble_lines:
@@ -966,6 +954,12 @@ class MaterialProxy(PackageProxy):
             line = 'data written to disk.'
             self.proceed(lines=[line])
         return self.is_changed
+
+    def write_output_data_to_disk(self):
+        if self.is_handmade:
+            self.write_material_definition_to_output_data_module(is_forced=True)
+        elif self.has_user_input_module:
+            self.make_output_data_and_write_to_disk()
 
     def write_stub_data_material_definition_to_disk(self):
         material_definition = file(self.material_definition_file_name, 'w')

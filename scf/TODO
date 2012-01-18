@@ -83,3 +83,5 @@ TODO
 36. Change MaterialWrangler to MaterialPackageWrangler to distinguish MaterialProxyWrangler.
 
 37. Consider implementing UserInputHandlingMaterialProxy as intermediate class.
+
+38. Implement measuretools.all_are_measures() and other checkers.

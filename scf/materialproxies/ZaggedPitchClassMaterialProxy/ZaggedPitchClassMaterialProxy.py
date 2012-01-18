@@ -9,9 +9,10 @@ class ZaggedPitchClassMaterialProxy(UserInputHandlingMaterialProxy):
     def __init__(self, package_importable_name=None, session=None):
         UserInputHandlingMaterialProxy.__init__(
             self, package_importable_name=package_importable_name, session=session)
-        self._generic_output_name = 'zagged pitch-classes'
 
     ### READ-ONLY PUBLIC ATTRIBUTES ###
+
+    generic_output_name = 'zagged pitch-classes'
 
     output_data_module_import_statements = [
         'from abjad.tools.sequencetools.CyclicTree import CyclicTree',]

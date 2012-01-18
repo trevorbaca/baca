@@ -83,6 +83,15 @@ class UserInputHandlingMaterialProxy(MaterialProxy):
         section.append(('uis', 'user input - show demo values'))
         hidden_section.append(('uit','user input - toggle default mode'))
 
+    def make_output_data(self):
+        output_data = type(self).output_data_maker(*self.user_input_wrapper.values)
+        assert type(self).output_data_checker(output_data)
+        return output_data
+
+    # TODO: implement
+    def make_output_data_and_write_to_disk(self):
+        output_data = self.make_output_data()
+
     # TODO: implement
     def populate_user_input_wrapper(self, prompt_proceed=True):
         self.print_not_implemented()
