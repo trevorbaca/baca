@@ -26,27 +26,11 @@ class MaterialProxy(PackageProxy):
         return self.package_spaced_name
 
     @property
-    def user_input_handler(self):
-        user_input_handler_class_name = self.user_input_handler_class_name
-        try:
-            command = 'from baca.scf.materialproxies import {}'.format(user_input_handler_class_name)
-            exec(command)
-            command = 'result = {}(client_material_package_importable_name={!r}, session=self.session)'
-            command = command.format(user_input_handler_class_name, self.package_importable_name)
-            exec(command)
-            return result
-        except:
-            pass
-
-    @property
-    def user_input_handler_class_name(self):
-        return self.get_tag('user_input_handler_class_name')
-
-    @property
     def formatted_user_input_lines(self):
         lines = []
         if self.has_user_input_module:
             user_input_wrapper = self.user_input_wrapper 
+            # TODO: implement on user input wrapper
             for parameter_name, parameter_value in user_input_wrapper.iteritems():
                 line = '{}: {!r}'.format(parameter_name, parameter_value)
                 lines.append(line)
@@ -60,13 +44,34 @@ class MaterialProxy(PackageProxy):
         return False
 
     @property
-    def has_user_input_handler(self):
-        return bool(self.user_input_handler_class_name)
+    def has_illustration(self):
+        if not self.has_illustration_builder:
+            return False
+        else:
+            return bool(self.import_illustration_from_illustration_builder())
 
     @property
-    def should_have_illustration(self):
-        return self.get_tag('should_have_illustration')
+    def has_illustration_builder(self):
+        if self.illustration_builder_file_name is None:
+            return False
+        else:
+            return os.path.exists(self.illustration_builder_file_name)
 
+    @property
+    def has_illustration_ly(self):
+        if self.illustration_ly_file_name is None:
+            return False
+        else:
+            return os.path.exists(self.illustration_ly_file_name)
+
+    @property
+    def has_illustration_pdf(self):
+        if self.illustration_pdf_file_name is None:
+            return False
+        else:
+            return os.path.exists(self.illustration_pdf_file_name)
+
+    # TODO: remove
     @property
     def has_local_stylesheet(self):
         if self.local_stylesheet_file_name is None:
@@ -89,10 +94,6 @@ class MaterialProxy(PackageProxy):
             return os.path.exists(self.material_definition_file_name)
 
     @property
-    def has_material_underscored_name(self):
-        return bool(self.material_underscored_name is not None)
-
-    @property
     def has_output_data(self):
         if not self.has_output_data_module:
             return False
@@ -107,32 +108,8 @@ class MaterialProxy(PackageProxy):
             return os.path.exists(self.output_data_module_file_name)
 
     @property
-    def has_illustration_ly(self):
-        if self.illustration_ly_file_name is None:
-            return False
-        else:
-            return os.path.exists(self.illustration_ly_file_name)
-
-    @property
-    def has_illustration_pdf(self):
-        if self.illustration_pdf_file_name is None:
-            return False
-        else:
-            return os.path.exists(self.illustration_pdf_file_name)
-
-    @property
-    def has_illustration_builder(self):
-        if self.illustration_builder_file_name is None:
-            return False
-        else:
-            return os.path.exists(self.illustration_builder_file_name)
-
-    @property
-    def has_illustration(self):
-        if not self.has_illustration_builder:
-            return False
-        else:
-            return bool(self.import_illustration_from_illustration_builder())
+    def has_user_input_handler(self):
+        return bool(self.user_input_handler_class_name)
 
     @property
     def has_user_input_module(self):
@@ -148,6 +125,7 @@ class MaterialProxy(PackageProxy):
         else:
             return self.import_user_input_from_user_input_module() is not None
 
+    # TODO: make work
     @property
     def is_changed(self):
         material_definition = self.import_material_definition_from_material_definition_module()
@@ -225,8 +203,7 @@ class MaterialProxy(PackageProxy):
 
     @property
     def material_spaced_name(self):
-        if self.has_material_underscored_name:
-            return self.material_underscored_name.replace('_', ' ')
+        return self.material_underscored_name.replace('_', ' ')
 
     @property
     def material_underscored_name(self):
@@ -300,6 +277,10 @@ class MaterialProxy(PackageProxy):
             if self.package_importable_name.startswith('baca'):
                 return self.package_importable_name.split('.')[0]
 
+    @property
+    def should_have_illustration(self):
+        return self.get_tag('should_have_illustration')
+
     # TODO: write test
     @property
     def source_stylesheet_file_name(self):
@@ -319,6 +300,23 @@ class MaterialProxy(PackageProxy):
     @property
     def stub_illustration_builder_file_name(self):
         return os.path.join(self.assets_directory, 'stub_illustration_builder.py')
+
+    @property
+    def user_input_handler(self):
+        user_input_handler_class_name = self.user_input_handler_class_name
+        try:
+            command = 'from baca.scf.materialproxies import {}'.format(user_input_handler_class_name)
+            exec(command)
+            command = 'result = {}(client_material_package_importable_name={!r}, session=self.session)'
+            command = command.format(user_input_handler_class_name, self.package_importable_name)
+            exec(command)
+            return result
+        except:
+            pass
+
+    @property
+    def user_input_handler_class_name(self):
+        return self.get_tag('user_input_handler_class_name')
 
     # TODO: write test
     @property

@@ -92,12 +92,18 @@ TODO
 
 41. Change 'prompt_proceed' to simply 'prompt'.
 
-42. Rename 'output.py' to 'output_material.py'; change 'output_data' to 'output_material'.
+42. Change 'output_data' to 'output_material'.
 
-43. Encapsualte user input getter subprocedures.
+43. Rename 'output.py' everywhere to 'output_material.py'.
 
-44. Make 'ls' hide or remove .pyc files.
+44. Encapsulate user input getter subprocedures.
 
-45. Make 'edit initializer' read only.
+45. Make 'ls' hide or remove .pyc files.
 
-46. Change 'editor' to 'user input handler'.
+46. Make 'edit initializer' read only.
+
+47. Change 'editor' to 'user input handler'.
+
+48. Author is-alphabetized script.
+
+49. Port output change awareness.
