@@ -8,7 +8,6 @@ from baca.scf.StylesheetWrangler import StylesheetWrangler
 import os
 
 
-# TODO: make 'list package directory' inherit from package proxy
 class MaterialProxy(PackageProxy):
 
     def __init__(self, package_importable_name=None, session=None):
@@ -308,6 +307,7 @@ class MaterialProxy(PackageProxy):
         parent_package = PackageProxy(self.parent_package_importable_name, session=self.session)
         parent_package.add_import_statement_to_initializer(import_statement)
 
+    # TODO: remove
     def delete_local_stylesheet(self, prompt_proceed=True):
         if self.has_local_stylesheet:
             os.remove(self.local_stylesheet_file_name)
@@ -348,52 +348,28 @@ class MaterialProxy(PackageProxy):
                 line = 'output PDF deleted.'
                 self.proceed(lines=[line])
 
-    def edit_local_stylesheet(self):
-        os.system('vi {}'.format(self.local_stylesheet_file_name))
-
-    def edit_material_definition_module(self):
-        os.system('vi + {}'.format(self.material_definition_file_name))
-
-    def edit_output_data_module(self):
-        os.system('vi + {}'.format(self.output_data_module_file_name))
-
+    # TODO: make read only
     def edit_illustration_ly(self):
         os.system('vi {}'.format(self.illustration_ly_file_name))
 
     def edit_illustration_builder(self):
         os.system('vi + {}'.format(self.illustration_builder_file_name))
 
+    # TODO: remove
+    def edit_local_stylesheet(self):
+        os.system('vi {}'.format(self.local_stylesheet_file_name))
+
+    def edit_material_definition_module(self):
+        os.system('vi + {}'.format(self.material_definition_file_name))
+
+    # TODO: make read only
+    def edit_output_data_module(self):
+        os.system('vi + {}'.format(self.output_data_module_file_name))
+
+    # TODO: reimplement and keep
     def edit_source_stylesheet(self):
         stylesheet_proxy = StylesheetProxy(self.source_stylesheet_file_name, session=self.session)
         stylesheet_proxy.vi_stylesheet()
-
-    # TODO: reimplement with getter and backtracking
-    def get_package_short_name_of_new_material_interactively(self):
-        response = self.handle_raw_input('material name')
-        response = response.lower()
-        response = response.replace(' ', '_')
-        package_short_name = response
-        line = 'short package name will be {}.\n'.format(package_short_name)
-        self.conditionally_display_lines([line])
-        return package_short_name
-
-    # TODO: reimplement with getter and backtracking
-    def get_illustration_builder_status_of_new_material_package_interactively(self):
-        response = self.handle_raw_input('include illustration builder?')
-        if response == 'y':
-            return True
-        else:
-            return False
-
-    def import_attribute_from_material_definition(self, attribute_name):
-        try:
-            command = 'from {} import {}'.format(self.material_definition_module_importable_name, attribute_name)
-            exec(command)
-            command = 'result = {}'.format(attribute_name)
-            exec(command)
-            return result
-        except ImportError:
-            return None
 
     def import_material_definition_from_material_definition_module(self):
         self.unimport_material_definition_module()
@@ -419,6 +395,7 @@ class MaterialProxy(PackageProxy):
         except ImportError as e:
             pass
 
+    # TODO: change name to self.import_illustration_from_illustration_builder_module
     def import_illustration_from_illustration_builder(self):
         if not self.has_illustration_builder:
             return None
@@ -431,6 +408,7 @@ class MaterialProxy(PackageProxy):
         illustration.header_block.title = markuptools.Markup(self.material_spaced_name)
         return illustration
         
+    # TODO: change name to self.import_user_input_wrapper_from_user_input_module()
     def import_user_input_from_user_input_module(self):
         self.unimport_user_input_module()
         try:
@@ -440,6 +418,7 @@ class MaterialProxy(PackageProxy):
         except ImportError as e:
             pass
 
+    # TODO: audit
     def handle_main_menu_result(self, result):
         assert isinstance(result, str)
         if result == 'uic':
@@ -485,7 +464,6 @@ class MaterialProxy(PackageProxy):
             self.select_stylesheet_interactively()
         elif result == 'stl':
             self.manage_stylesheets()
-        # TODO: extend this to work with user input-handling material proxies
         elif result == 'dc':
             self.write_output_data_to_disk()
         elif result == 'di':
@@ -525,6 +503,7 @@ class MaterialProxy(PackageProxy):
         else:
             raise ValueError
 
+    # TODO: remove
     def link_local_stylesheet(self, source_stylesheet_file_name=None, prompt_proceed=True):
         if source_stylesheet_file_name is None:
             source_stylesheet_file_name = self.source_stylesheet_file_name
@@ -635,7 +614,7 @@ class MaterialProxy(PackageProxy):
                     hidden_section.append(('ssm', 'source stylesheet - edit'))
                     hidden_section.append(('ssl', 'score stylesheet - relink'))
 
-    def make_illustration_object(self):
+    def make_illustration(self):
         return self.import_illustration_from_illustration_builder()
 
     def make_output_data(self):
@@ -799,7 +778,7 @@ class MaterialProxy(PackageProxy):
 
     def write_illustration_ly_and_pdf_to_disk(self, is_forced=False, prompt_proceed=True):
         lines = []
-        illustration = self.make_illustration_object()
+        illustration = self.make_illustration()
         iotools.write_expr_to_pdf(illustration, self.illustration_pdf_file_name, print_status=False)
         iotools.write_expr_to_ly(illustration, self.illustration_ly_file_name, print_status=False)
         lines.append('PDF and LilyPond file written to disk.')

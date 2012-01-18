@@ -109,3 +109,11 @@ TODO
 49. Port output change awareness.
 
 50. Make user input handler creation work.
+
+51. Change 'user_input' to 'user_input_wrapper'.
+
+52. Make some zagged pitch-classes.
+
+53. Implement RangeInventory in Abjad. Integrate into SCF.
+
+54. Define range inventories for all scores.

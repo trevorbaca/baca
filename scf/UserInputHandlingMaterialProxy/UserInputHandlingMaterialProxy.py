@@ -66,7 +66,7 @@ class UserInputHandlingMaterialProxy(MaterialProxy):
         if prompt_proceed:
             self.proceed(lines=['demo values loaded.'])
 
-    def make_illustration_object(self):
+    def make_illustration(self):
         output_data = self.import_output_data_from_output_data_module()
         self.debug(output_data, 1)
         illustration = self.illustration_maker(output_data)
