@@ -107,11 +107,11 @@ class MaterialProxy(PackageProxy):
             return os.path.exists(self.output_data_module_file_name)
 
     @property
-    def has_output_ly(self):
-        if self.output_ly_file_name is None:
+    def has_illustration_ly(self):
+        if self.illustration_ly_file_name is None:
             return False
         else:
-            return os.path.exists(self.output_ly_file_name)
+            return os.path.exists(self.illustration_ly_file_name)
 
     @property
     def has_output_pdf(self):
@@ -271,9 +271,9 @@ class MaterialProxy(PackageProxy):
         return output_data_module_import_statements
 
     @property
-    def output_ly_file_name(self):
+    def illustration_ly_file_name(self):
         if self.directory_name is not None:
-            return os.path.join(self.directory_name, 'output.ly')
+            return os.path.join(self.directory_name, 'illustration.ly')
 
     @property
     def output_pdf_file_name(self):
@@ -379,9 +379,9 @@ class MaterialProxy(PackageProxy):
                 line = 'output data module deleted.'
                 self.proceed(lines=[line])
 
-    def delete_output_ly(self, prompt_proceed=True):
-        if self.has_output_ly:
-            os.remove(self.output_ly_file_name)
+    def delete_illustration_ly(self, prompt_proceed=True):
+        if self.has_illustration_ly:
+            os.remove(self.illustration_ly_file_name)
             if prompt_proceed:
                 line = 'output LilyPond file deleted.'
                 self.procced(lines=[line])
@@ -402,8 +402,8 @@ class MaterialProxy(PackageProxy):
     def edit_output_data_module(self):
         os.system('vi + {}'.format(self.output_data_module_file_name))
 
-    def edit_output_ly(self):
-        os.system('vi {}'.format(self.output_ly_file_name))
+    def edit_illustration_ly(self):
+        os.system('vi {}'.format(self.illustration_ly_file_name))
 
     def edit_illustration_builder(self):
         os.system('vi + {}'.format(self.illustration_builder_file_name))
@@ -541,9 +541,9 @@ class MaterialProxy(PackageProxy):
         elif result == 'lyc':
             self.write_illustration_ly_to_disk(is_forced=True)
         elif result == 'lyd':
-            self.delete_output_ly()
+            self.delete_illustration_ly()
         elif result == 'lyi':
-            self.edit_output_ly()
+            self.edit_illustration_ly()
         elif result == 'pdfc':
             self.write_illustration_ly_and_pdf_to_disk(is_forced=True)
             self.open_output_pdf()
@@ -582,7 +582,7 @@ class MaterialProxy(PackageProxy):
         iotools.write_expr_to_ly(lilypond_file, temp_ly_file, print_status=False)
         trimmed_temp_ly_file_lines = self.trim_ly_lines(temp_ly_file)
         os.remove(temp_ly_file)
-        trimmed_illustration_builder_ly_lines = self.trim_ly_lines(self.output_ly_file_name)
+        trimmed_illustration_builder_ly_lines = self.trim_ly_lines(self.illustration_ly_file_name)
         return trimmed_temp_ly_file_lines == trimmed_illustration_builder_ly_lines
 
     def link_local_stylesheet(self, source_stylesheet_file_name=None, prompt_proceed=True):
@@ -604,7 +604,7 @@ class MaterialProxy(PackageProxy):
             menu, hidden_section = self.make_main_menu_for_material_made_by_hand()
         else:
             menu, hidden_section = self.make_main_menu_for_material_made_with_editor()
-        self.make_main_menu_section_for_output_ly(menu, hidden_section)
+        self.make_main_menu_section_for_illustration_ly(menu, hidden_section)
         self.make_main_menu_section_for_output_pdf(menu, hidden_section)
         self.make_main_menu_section_for_hidden_entries(menu)
         return menu
@@ -652,11 +652,11 @@ class MaterialProxy(PackageProxy):
             section.append(('di', 'output data - inspect'))
             hidden_section.append(('dd', 'output data - delete'))
 
-    def make_main_menu_section_for_output_ly(self, main_menu, hidden_section):
+    def make_main_menu_section_for_illustration_ly(self, main_menu, hidden_section):
         if self.has_output_data:
             if self.has_illustration_builder or self.has_editor:
                 hidden_section.append(('lyc', 'output ly - create'))
-        if self.has_output_ly:
+        if self.has_illustration_ly:
             hidden_section.append(('lyd', 'output ly - delete'))
             hidden_section.append(('lyi', 'output ly - inspect'))
 
@@ -847,7 +847,7 @@ class MaterialProxy(PackageProxy):
         else:
             missing.append(artifact_name)
         artifact_name = 'LilyPond file'
-        if self.has_output_ly:
+        if self.has_illustration_ly:
             found.append(artifact_name)
         else:
             missing.append(artifact_name)
@@ -910,7 +910,7 @@ class MaterialProxy(PackageProxy):
         #if is_forced or not self.lilypond_file_format_is_equal_to_illustration_builder_ly(lilypond_file):
         if True:
             iotools.write_expr_to_pdf(illustration, self.output_pdf_file_name, print_status=False)
-            iotools.write_expr_to_ly(illustration, self.output_ly_file_name, print_status=False)
+            iotools.write_expr_to_ly(illustration, self.illustration_ly_file_name, print_status=False)
             lines.append('PDF and LilyPond file written to disk.')
         else:
             lines.append('LilyPond file is the same. (PDF and LilyPond file preserved.)')
@@ -921,7 +921,7 @@ class MaterialProxy(PackageProxy):
         lines = []
         lilypond_file = self.import_score_definition_from_illustration_builder()
         if is_forced or not self.lilypond_file_format_is_equal_to_illustration_builder_ly(lilypond_file):
-            iotools.write_expr_to_ly(lilypond_file, self.output_ly_file_name, print_status=False)
+            iotools.write_expr_to_ly(lilypond_file, self.illustration_ly_file_name, print_status=False)
             lines.append('LilyPond file written to disk.')
         else:
             lines.append('LilyPond file is the same. (LilyPond file preserved.)')
