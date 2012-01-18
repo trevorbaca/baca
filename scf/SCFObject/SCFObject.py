@@ -214,7 +214,7 @@ class SCFObject(object):
         return pattern.match(expr) is not None
 
     def is_boolean(self, expr):
-        return isinstance(expr, type(True))
+        return isinstance(expr, bool)
 
     def is_integer(self, expr):
         return isinstance(expr, int)

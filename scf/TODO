@@ -52,58 +52,56 @@ TODO
 
 21. Figure out why 'red' isn't good enough to select 'red_pcs', maybe redraw-related.
 
-22. Audit 'type(True)' and replace with 'bool'.
+22. Change 'conditionally_display_lines' to just 'display'.
 
-23. Change 'conditionally_display_lines' to just 'display'.
+23. Make backtracking work from 'self.confirm()'.
 
-24. Make backtracking work from 'self.confirm()'.
+24. Extend 'self.confirm()' with optional prompt.
 
-25. Extend 'self.confirm()' with optional prompt.
+25. Change alphabeticization of scores in score selection menu.
 
-26. Change alphabeticization of scores in score selection menu.
+26. Find a way to dynamically add (default) indicator to default menu entries.
 
-27. Find a way to dynamically add (default) indicator to default menu entries.
+27. Implement initializer file proxy to decongest package proxy.
 
-28. Implement initializer file proxy to decongest package proxy.
+28. Implement user input module file proxy.
 
-29. Implement user input module file proxy.
+29. Prevent the creation of 'baca.materials.h' package.
 
-30. Prevent the creation of 'baca.materials.h' package.
+30. Do away with local stylesheets.
 
-31. Do away with local stylesheets.
+31. Consider keyword backtracking protocol to replace two-line backtracking protocol.
 
-32. Consider keyword backtracking protocol to replace two-line backtracking protocol.
+32. Implement something to tour all materials everywhere and inspect in sequence.
 
-33. Implement something to tour all materials everywhere and inspect in sequence.
+33. Implement measuretools.all_are_measures() and other checkers.
 
-34. Implement measuretools.all_are_measures() and other checkers.
+34. Extend self.proceed(line(s), prompt_proceed=True) with 'prompt_proceed' keyword.
 
-35. Extend self.proceed(line(s), prompt_proceed=True) with 'prompt_proceed' keyword.
+35. Change 'create_' everywhere to 'make_'.
 
-36. Change 'create_' everywhere to 'make_'.
+36. Change 'prompt_proceed' to simply 'prompt'.
 
-37. Change 'prompt_proceed' to simply 'prompt'.
+37. Encapsulate user input getter subprocedures.
 
-38. Encapsulate user input getter subprocedures.
+38. Make 'ls' hide or remove .pyc files.
 
-39. Make 'ls' hide or remove .pyc files.
+39. Make 'edit initializer' read only.
 
-40. Make 'edit initializer' read only.
+40. Author is-alphabetized script.
 
-41. Author is-alphabetized script.
+41. Port output change awareness.
 
-42. Port output change awareness.
+42. Make user input handler creation work.
 
-43. Make user input handler creation work.
+43. Change 'user_input' to 'user_input_wrapper'.
 
-44. Change 'user_input' to 'user_input_wrapper'.
+44. Make some zagged pitch-classes.
 
-45. Make some zagged pitch-classes.
+45. Implement RangeInventory in Abjad. Integrate into SCF.
 
-46. Implement RangeInventory in Abjad. Integrate into SCF.
+46. Define range inventories for all scores.
 
-47. Define range inventories for all scores.
+47. Remove three blank lines at head of data-only output material module.
 
-48. Remove three blank lines at head of data-only output material module.
-
-49. Author read-only attribute tests.
+48. Author read-only attribute tests.
