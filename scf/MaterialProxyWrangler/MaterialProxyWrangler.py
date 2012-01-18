@@ -21,10 +21,10 @@ class MaterialProxyWrangler(PackageWrangler):
     def get_package_proxy(self, material_package_importable_name):
         import baca
         material_proxy = baca.scf.MaterialProxy(material_package_importable_name, session=self.session)
-        editor_class_name = material_proxy.editor_class_name
-        if editor_class_name is not None:
+        user_input_handler_class_name = material_proxy.user_input_handler_class_name
+        if user_input_handler_class_name is not None:
             command = 'from baca.scf.materialproxies import {} as material_proxy_class'
-            command = command.format(editor_class_name)
+            command = command.format(user_input_handler_class_name)
             exec(command)
             material_proxy = material_proxy_class(material_package_importable_name, session=self.session)
         return material_proxy

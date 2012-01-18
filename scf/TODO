@@ -99,3 +99,5 @@ TODO
 44. Make 'ls' hide or remove .pyc files.
 
 45. Make 'edit initializer' read only.
+
+46. Change 'editor' to 'user input handler'.

@@ -27,20 +27,20 @@ class MaterialProxy(PackageProxy):
 
     @property
     def editor(self):
-        editor_class_name = self.editor_class_name
+        user_input_handler_class_name = self.user_input_handler_class_name
         try:
-            command = 'from baca.scf.materialproxies import {}'.format(editor_class_name)
+            command = 'from baca.scf.materialproxies import {}'.format(user_input_handler_class_name)
             exec(command)
             command = 'result = {}(client_material_package_importable_name={!r}, session=self.session)'
-            command = command.format(editor_class_name, self.package_importable_name)
+            command = command.format(user_input_handler_class_name, self.package_importable_name)
             exec(command)
             return result
         except:
             pass
 
     @property
-    def editor_class_name(self):
-        return self.get_tag('editor_class_name')
+    def user_input_handler_class_name(self):
+        return self.get_tag('user_input_handler_class_name')
 
     @property
     def formatted_user_input_lines(self):
@@ -61,7 +61,7 @@ class MaterialProxy(PackageProxy):
 
     @property
     def has_editor(self):
-        return bool(self.editor_class_name)
+        return bool(self.user_input_handler_class_name)
 
     @property
     def should_have_illustration(self):
@@ -625,7 +625,7 @@ class MaterialProxy(PackageProxy):
             hidden_section.append(('mdd', 'material definition - delete'))
             hidden_section.append(('mdt', 'material definition - stub'))
             hidden_section.append(('mdxi', 'material definition - execute & inspect'))
-        elif self.editor_class_name is None:
+        elif self.user_input_handler_class_name is None:
             section.append(('mdt', 'material definition - stub'))
 
     def make_main_menu_section_for_output_data(self, main_menu, hidden_section):

@@ -31,9 +31,9 @@ class MaterialWrangler(PackageWrangler):
         self.preserve_backtracking = False
         if self.backtrack():
             return
-        editor_class_name = None
+        user_input_handler_class_name = None
         should_have_illustration = False
-        self.create_material_package(material_package_importable_name, editor_class_name, should_have_illustration)
+        self.create_material_package(material_package_importable_name, user_input_handler_class_name, should_have_illustration)
 
     # TODO: write test
     def create_editable_material_package_interactively(self):
@@ -45,7 +45,7 @@ class MaterialWrangler(PackageWrangler):
         self.preserve_backtracking = True
         breadcrumbs = self.session.breadcrumbs[:]
         self.session.breadcrumbs[:] = []
-        editor_class_name = self.material_proxy_wrangler.select_material_proxy_class_name_interactively(
+        user_input_handler_class_name = self.material_proxy_wrangler.select_material_proxy_class_name_interactively(
             should_clear_terminal=False)
         self.session.breadcrumbs = breadcrumbs[:]
         self.preserve_backtracking = False
@@ -53,21 +53,21 @@ class MaterialWrangler(PackageWrangler):
             return
         # TODO: set following attribute by editor automatically
         should_have_illustration = True
-        self.create_material_package(material_package_importable_name, editor_class_name, should_have_illustration)
+        self.create_material_package(material_package_importable_name, user_input_handler_class_name, should_have_illustration)
 
     # TODO: write test
     def create_handmade_material_package_interactively(self):
         material_package_importable_name = self.get_new_material_package_importable_name_interactively()
-        editor_class_name = None
+        user_input_handler_class_name = None
         should_have_illustration = True
-        self.create_material_package(material_package_importable_name, editor_class_name, should_have_illustration)
+        self.create_material_package(material_package_importable_name, user_input_handler_class_name, should_have_illustration)
 
     # TODO: write test
-    def create_material_package(self, material_package_importable_name, editor_class_name, should_have_illustration,
+    def create_material_package(self, material_package_importable_name, user_input_handler_class_name, should_have_illustration,
         prompt_proceed=True):
         '''True on success.'''
         assert iotools.is_underscore_delimited_lowercase_package_name(material_package_importable_name)
-        assert editor_class_name is None or iotools.is_uppercamelcase_string(editor_class_name)
+        assert user_input_handler_class_name is None or iotools.is_uppercamelcase_string(user_input_handler_class_name)
         assert isinstance(should_have_illustration, bool)
         directory_name = self.package_importable_name_to_directory_name(material_package_importable_name)
         if os.path.exists(directory_name):
@@ -78,10 +78,10 @@ class MaterialWrangler(PackageWrangler):
         os.mkdir(directory_name)
         material_proxy = MaterialProxy(material_package_importable_name, session=self.session)
         tags = collections.OrderedDict([])
-        tags['editor_class_name'] = editor_class_name
+        tags['user_input_handler_class_name'] = user_input_handler_class_name
         tags['should_have_illustration'] = should_have_illustration
         material_proxy.write_stub_initializer_to_disk(tags=tags)
-        if editor_class_name is None:
+        if user_input_handler_class_name is None:
             if should_have_illustration:
                 material_proxy.write_stub_music_material_definition_to_disk()
                 material_proxy.write_stub_illustration_builder_to_disk(prompt_proceed=False)
