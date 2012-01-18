@@ -424,7 +424,7 @@ class MaterialProxy(PackageProxy):
 
     # TODO: reimplement with getter and backtracking
     def get_illustration_builder_status_of_new_material_package_interactively(self):
-        response = self.handle_raw_input('include score builder?')
+        response = self.handle_raw_input('include illustration builder?')
         if response == 'y':
             return True
         else:
@@ -509,15 +509,15 @@ class MaterialProxy(PackageProxy):
             self.run_python_on_material_definition()
         elif result == 'mdxi':
             self.run_abjad_on_material_definition()
-        elif result == 'sbd':
+        elif result == 'ibd':
             self.delete_illustration_builder()
-        elif result == 'sbe':
+        elif result == 'ibe':
             self.edit_illustration_builder()
-        elif result == 'sbt':
+        elif result == 'ibt':
             self.write_stub_illustration_builder_to_disk()
-        elif result == 'sbx':
+        elif result == 'ibx':
             self.run_python_on_illustration_builder()
-        elif result == 'sbxi':
+        elif result == 'ibxi':
             self.run_abjad_on_illustration_builder()
         elif result == 'ssd':
             self.delete_local_stylesheet()
@@ -677,14 +677,14 @@ class MaterialProxy(PackageProxy):
         section = main_menu.make_new_section()
         if self.has_output_data:
             if self.has_illustration_builder:
-                section.append(('sbe', 'score builder - edit'))
+                section.append(('ibe', 'illustration builder - edit'))
                 if self.has_output_data:
-                    section.append(('sbx', 'score builder - execute'))
-                hidden_section.append(('sbd', 'score builder - delete'))
-                hidden_section.append(('sbt', 'score builder - stub'))
-                hidden_section.append(('sbxi', 'score builder - execute & inspect'))
+                    section.append(('ibx', 'illustration builder - execute'))
+                hidden_section.append(('ibd', 'illustration builder - delete'))
+                hidden_section.append(('ibt', 'illustration builder - stub'))
+                hidden_section.append(('ibxi', 'illustration builder - execute & inspect'))
             elif self.should_have_illustration:
-                section.append(('sbt', 'score builder - stub'))
+                section.append(('ibt', 'illustration builder - stub'))
 
     def make_main_menu_section_for_stylesheet_management(self, main_menu, hidden_section):
         if self.has_output_data:
@@ -811,7 +811,7 @@ class MaterialProxy(PackageProxy):
     def run_python_on_illustration_builder(self, prompt_proceed=True):
         os.system('python {}'.format(self.illustration_builder_file_name))
         if prompt_proceed:
-            line = 'score builder executed.'
+            line = 'illustration builder executed.'
             self.proceed(lines=[line])
 
     # TODO: write test
