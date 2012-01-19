@@ -104,7 +104,7 @@ class MaterialWrangler(PackageWrangler):
         material_package_short_name = iotools.string_to_strict_directory_name(material_name)
         studio = baca.scf.Studio(session=self.session)
         self.preserve_backtracking = True
-        purview_name = studio.get_purview_interactively()
+        purview_name = studio.get_purview_interactively(clear=False)
         self.preserve_backtracking = False
         if self.backtrack():
             return
@@ -152,12 +152,12 @@ class MaterialWrangler(PackageWrangler):
         result = '.'.join(result)
         return result
 
-    def run(self, user_input=None, head=None):
+    def run(self, user_input=None, head=None, clear=True):
         self.assign_user_input(user_input=user_input)
         while True:
             self.append_breadcrumb()
             menu = self.make_main_menu(head=head)
-            result = menu.run()
+            result = menu.run(clear=clear)
             if self.backtrack():
                 break
             elif not result:

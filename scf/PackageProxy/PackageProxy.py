@@ -203,11 +203,11 @@ class PackageProxy(DirectoryProxy):
         section.append(('get', 'get tag'))
         return menu
 
-    def manage_tags(self):
+    def manage_tags(self, clear=True):
         while True:
             self.append_breadcrumb('tags')
             menu = self.make_tags_menu()
-            result = menu.run()
+            result = menu.run(clear=clear)
             if self.backtrack():
                 break
             self.handle_tags_menu_result(result)

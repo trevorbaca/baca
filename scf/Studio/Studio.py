@@ -58,14 +58,14 @@ class Studio(SCFObject):
         return score_package_short_names[prev_index]
 
     # TODO: write test
-    def get_purview_interactively(self):
+    def get_purview_interactively(self, clear=True):
         while True:
             menu = self.make_score_selection_menu()
             last_section = menu.sections[-1]
             last_section.tokens.insert(0, ('baca', 'global (default)'))
             last_section.default_index = 0
             menu.explicit_title = 'select location:'
-            purview_name = menu.run(clear=False)
+            purview_name = menu.run(clear=clear)
             if self.backtrack():
                 return
             if purview_name:
@@ -158,7 +158,7 @@ class Studio(SCFObject):
         section.append(('pytest_all', 'pytest_all'))
         return menu
 
-    def run(self, user_input=None):
+    def run(self, user_input=None, clear=True):
         type(self).__init__(self)
         self.assign_user_input(user_input=user_input)
         self.append_breadcrumb()
@@ -167,7 +167,7 @@ class Studio(SCFObject):
             self.append_breadcrumb(self.score_status_string)
             if run_main_menu:
                 menu = self.make_main_menu()
-                result = menu.run()
+                result = menu.run(clear=clear)
             else:
                 run_main_menu = True
             if self.session.is_complete:
@@ -211,11 +211,11 @@ class Studio(SCFObject):
             self.pop_breadcrumb()
         self.pop_breadcrumb()
 
-    def manage_svn(self):
+    def manage_svn(self, clear=True):
         while True:
             self.append_breadcrumb('repository commands')
             menu = self.make_svn_menu()
-            result = menu.run()
+            result = menu.run(clear=clear)
             if self.session.is_backtracking_to_score:
                 self.session.is_backtracking_to_score = False
                 self.pop_breadcrumb()

@@ -258,11 +258,11 @@ class ScoreProxy(PackageProxy):
         section.append(('ci', 'ci'))
         return menu
 
-    def manage_svn(self):
+    def manage_svn(self, clear=True):
         while True:
             self.append_breadcrumb('repository commands')
             menu = self.make_svn_menu()
-            result = menu.run()
+            result = menu.run(clear=clear)
             if self.backtrack():
                 break
             self.handle_svn_menu_result(result)
@@ -283,12 +283,12 @@ class ScoreProxy(PackageProxy):
             lines.append('{} {}'.format(initializer.ljust(80), os.path.exists(initializer)))
         self.display(lines)
 
-    def run(self, user_input=None):
+    def run(self, user_input=None, clear=True):
         self.assign_user_input(user_input=user_input)
         while True:
             self.append_breadcrumb()
             menu = self.make_main_menu()
-            result = menu.run()
+            result = menu.run(clear=clear)
             if self.session.is_backtracking_to_score:
                 self.session.is_backtracking_to_score = False
                 self.pop_breadcrumb() 

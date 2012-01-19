@@ -56,12 +56,12 @@ class StylesheetWrangler(PackageWrangler):
         section.append(('new', 'make new stylesheet'))
         return menu
 
-    def run(self, user_input=None):
+    def run(self, user_input=None, clear=True):
         self.assign_user_input(user_input=user_input)
         while True:
             self.append_breadcrumb()
             menu = self.make_main_menu()
-            result = menu.run()
+            result = menu.run(clear=clear)
             if self.backtrack():
                 break
             elif not result:
@@ -74,12 +74,12 @@ class StylesheetWrangler(PackageWrangler):
         self.pop_breadcrumb()
         
     # TODO: write test
-    def select_stylesheet_file_name_interactively(self):
+    def select_stylesheet_file_name_interactively(self, clear=True):
         menu, section = self.make_new_menu(where=self.where(), is_numbered=True)
         section.tokens = self.stylesheet_file_names
         while True:
             self.append_breadcrumb('select stylesheet')
-            result = menu.run()
+            result = menu.run(clear=clear)
             if self.backtrack():
                 self.pop_breadcrumb()
                 return

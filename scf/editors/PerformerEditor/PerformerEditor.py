@@ -156,13 +156,13 @@ class PerformerEditor(InteractiveEditor):
         section.append(('none', 'no instruments'))
         return menu
 
-    def set_initial_configuration_interactively(self):
+    def set_initial_configuration_interactively(self, clear=True):
         self.conditionally_initialize_target()
         menu = self.set_initial_configuration_menu()
         #print 'doing initial configuration interactively ...'
         while True:
             self.append_breadcrumb(self.target.name)
-            result = menu.run()
+            result = menu.run(clear=clear)
             #print 'result: {!r}'.format(result)
             if self.backtrack():
                 self.pop_breadcrumb()

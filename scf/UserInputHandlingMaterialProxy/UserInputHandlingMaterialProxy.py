@@ -135,7 +135,7 @@ class UserInputHandlingMaterialProxy(MaterialProxy):
         illustration = self.make_illustration_from_output_material(material)
         return illustration 
 
-    def old_run_interactive(self):
+    def old_run_interactive(self, clear=True):
         while True:
             menu, section = self.make_new_menu(where=self.where(), is_numbered=True)
             section.tokens = self.user_input_wrapper.editable_lines
@@ -143,7 +143,7 @@ class UserInputHandlingMaterialProxy(MaterialProxy):
                 section.append(('p', 'show pdf of given input'))
             section.append(('d', 'show demo input values'))
             section.append(('l', 'change location'))
-            result = menu.run()
+            result = menu.run(clear=clear)
             if result == 'd':
                 self.show_demo_user_input_values()
             elif result == 'l':

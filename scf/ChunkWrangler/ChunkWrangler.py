@@ -39,12 +39,12 @@ class ChunkWrangler(PackageWrangler):
         section.append(('new', 'new chunk'))
         return menu
 
-    def run(self, user_input=None, head=None):
+    def run(self, user_input=None, clear=True, head=None):
         self.assign_user_input(user_input=user_input)
         while True:
             self.append_breadcrumb()
             menu = self.make_main_menu(head=head)
-            result = menu.run()
+            result = menu.run(clear=clear)
             if self.backtrack():
                 break
             elif not result:

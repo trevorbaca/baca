@@ -55,12 +55,12 @@ class ChunkProxy(PackageProxy):
         section.append(('d', 'delete'))
         return menu
 
-    def run(self, user_input=None):
+    def run(self, user_input=None, clear=True):
         self.assign_user_input(user_input=user_input)
         while True:
             self.append_breadcrumb()
             menu = self.make_main_menu()
-            result = menu.run()
+            result = menu.run(clear=clear)
             if self.backtrack():
                 break
             elif not result:

@@ -1,10 +1,8 @@
 TODO
 
--2. Implement populate_user_input_wrapper().
+-1. Implement populate_user_input_wrapper().
 
--1. Implement material move and rename methods.
-
-0. Audit 'clear' keyword in the signature of every interactive method.
+0. Implement material move and rename methods.
 
 1. Audit for breadcrumb removal in the signature of every interactive method.
 
