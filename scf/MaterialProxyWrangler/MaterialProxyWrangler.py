@@ -42,16 +42,19 @@ class MaterialProxyWrangler(PackageWrangler):
         section.append(('new', 'make material_proxy'))
         return menu
 
-    # replace with material_proxy wizard
     def create_material_proxy_interactively(self):
-        while True:
-            material_proxy_name = self.handle_raw_input('material_proxy name')
-            if iotools.is_uppercamelcase_string(material_proxy_name):
-                if material_proxy_name.endswith('Maker'):
-                    break
-        while True:
-            generic_output_product = self.handle_raw_input('generic output product')
-            break
+        getter = self.make_new_getter(where=self.where())
+        getter.append_string('material proxy name')
+        material_proxy_name = getter.run()
+        if self.backtack():
+            return
+        assert iotools.is_uppercamelcase_string(material_proxy_name)
+        assert material_proxy_name.endswith('Maker')
+        getter = self.make_new_getter(where=self.where())
+        getter.append_string('generic output product')
+        generic_output_product = getter.run()
+        if self.backtrack():
+            return
         material_proxy_directory = os.path.join(self.directory_name, material_proxy_name)
         os.mkdir(material_proxy_directory)
         self.create_material_proxy_initializer(material_proxy_name)

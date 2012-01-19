@@ -640,7 +640,11 @@ class MaterialProxy(PackageProxy):
     def rename_material(self):
         line = 'current material name: {}'.format(self.material_underscored_name)
         self.conditionally_display_lines([line])
-        new_material_spaced_name = self.handle_raw_input('new material name:     ')
+        getter = self.make_new_getter(where=self.where())
+        getter.append_string('new material name')
+        new_material_spaced_name = getter.run()
+        if self.backtrack():
+            return
         new_material_underscored_name = new_material_spaced_name.replace(' ', '_')
         lines = []
         lines.append('current material name: {}'.format(self.material_underscored_name))

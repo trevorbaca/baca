@@ -72,7 +72,11 @@ class DirectoryProxy(SCFObject):
     def remove_nonversioned_directory(self):
         line = '{} will be removed.\n'.format(self.directory_name)
         self.conditionally_display_lines([line])
-        response = self.handle_raw_input("type 'remove' to proceed")
+        getter = self.make_new_getter(where=self.where())
+        getter.append_string("type 'remove' to proceed")
+        response = getter.run()
+        if self.backtrack():
+            return
         if response == 'remove':
             command = 'rm -rf {}'.format(self.directory_name)
             proc = subprocess.Popen(command, shell=True, stdout=subprocess.PIPE)
@@ -85,7 +89,11 @@ class DirectoryProxy(SCFObject):
     def remove_versioned_directory(self):
         line = '{} will be completely removed from the repository!\n'.format(self.directory_name)
         self.conditionally_display_lines([line])
-        response = self.handle_raw_input("type 'remove' to proceed")
+        getter = self.make_new_getter(where=self.where())
+        getter.append_string("type 'remove' to proceed")
+        response = getter.run()
+        if self.backtrack():
+            return
         if response == 'remove':
             command = 'svn --force rm {}'.format(self.directory_name)
             proc = subprocess.Popen(command, shell=True, stdout=subprocess.PIPE)
@@ -117,7 +125,10 @@ class DirectoryProxy(SCFObject):
  
     def svn_ci(self, commit_message=None, prompt=True):
         if commit_message is None:
-            commit_message = self.handle_raw_input('commit message')
+            getter.append_string('commit message')
+            commit_message = getter.run()
+            if self.backtrack():
+                return
             line = 'commit message will be: "{}"\n'.format(commit_message)
             self.conditionally_display_lines([line])
             if not self.confirm():
