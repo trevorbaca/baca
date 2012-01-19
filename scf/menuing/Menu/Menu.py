@@ -193,18 +193,17 @@ class Menu(MenuObject):
         return section
 
         
-    def run(self, should_clear_terminal=True, user_input=None):
+    def run(self, clear=True, user_input=None):
         self.assign_user_input(user_input=user_input)
-        #should_clear_terminal, hide_current_run = True, False
-        should_clear_terminal, hide_current_run = should_clear_terminal, False
+        clear, hide_current_run = clear, False
         while True:
-            self.should_clear_terminal, self.hide_current_run = should_clear_terminal, hide_current_run
-            should_clear_terminal, hide_current_run = False, True
+            self.should_clear_terminal, self.hide_current_run = clear, hide_current_run
+            clear, hide_current_run = False, True
             result = self.conditionally_display_menu()
             if self.session.is_complete:
                 break
             elif result == 'r':
-                should_clear_terminal, hide_current_run = True, False
+                clear, hide_current_run = True, False
             else:
                 break
         return result

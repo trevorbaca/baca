@@ -154,12 +154,12 @@ class MaterialProxyWrangler(PackageWrangler):
         self.pop_breadcrumb()
 
     # TODO: write test
-    def select_material_proxy_class_name_interactively(self, should_clear_terminal=True):
+    def select_material_proxy_class_name_interactively(self, clear=True):
         menu, section = self.make_new_menu(where=self.where(), is_numbered=True)
         section.tokens = self.material_proxy_spaced_class_names
         while True:
             self.append_breadcrumb('select material proxy:')
-            result = menu.run(should_clear_terminal=should_clear_terminal)
+            result = menu.run(clear=clear)
             if self.backtrack():
                 self.pop_breadcrumb()
                 return

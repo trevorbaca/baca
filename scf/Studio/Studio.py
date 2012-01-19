@@ -65,7 +65,7 @@ class Studio(SCFObject):
             last_section.tokens.insert(0, ('baca', 'global (default)'))
             last_section.default_index = 0
             menu.explicit_title = 'select location:'
-            purview_name = menu.run(should_clear_terminal=False)
+            purview_name = menu.run(clear=False)
             if self.backtrack():
                 return
             if purview_name:
