@@ -162,10 +162,8 @@ class MaterialProxyWrangler(PackageWrangler):
         self.pop_breadcrumb()
 
     # TODO: write test
-    def select_material_proxy_class_name_interactively(self, clear=True, root=False):
-        if root:
-            breadcrumbs = self.session.breadcrumbs[:]
-            self.session.breadcrumbs[:] = []
+    def select_material_proxy_class_name_interactively(self, clear=True, cache=False):
+        self.cache_breadcrumbs(cache=cache)
         menu, section = self.make_new_menu(where=self.where(), is_numbered=True)
         section.tokens = self.material_proxy_spaced_class_names
         while True:
@@ -173,7 +171,7 @@ class MaterialProxyWrangler(PackageWrangler):
             result = menu.run(clear=clear)
             if self.backtrack():
                 self.pop_breadcrumb()
-                if root: self.session.breadcrumbs = breadcrumbs[:]
+                self.restore_breadcrumbs(cache=cache)
                 return
             elif not result:
                 self.pop_breadcrumb()
@@ -182,7 +180,7 @@ class MaterialProxyWrangler(PackageWrangler):
                 self.pop_breadcrumb()
                 break
         material_proxy_class_name = iotools.space_delimited_lowercase_to_uppercamelcase(result) 
-        if root: self.session.breadcrumbs = breadcrumbs[:]
+        self.restore_breadcrumbs(cache=cache)
         return material_proxy_class_name
 
     def unimport_materialproxies_package(self):

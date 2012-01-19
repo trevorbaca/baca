@@ -122,6 +122,16 @@ class SCFObject(object):
 
     ### PUBLIC METHODS ###
 
+    def cache_breadcrumbs(self, cache=False):
+        self.session.cached_breadcrumbs = []
+        if cache:
+            self.session.cached_breadcrumbs = self.session.breadcrumbs[:]
+            self.session.breadcrumbs[:] = []
+
+    def restore_breadcrumbs(self, cache=False):
+        if cache:
+            self.session.breadcrumbs[:] = self.session.cached_breadcrumbs[:]
+
     def assign_user_input(self, user_input=None):
         if user_input is not None:
             self.session.user_input = user_input

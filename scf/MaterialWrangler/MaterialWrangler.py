@@ -47,7 +47,7 @@ class MaterialWrangler(PackageWrangler):
         self.session.breadcrumbs[:] = []
         user_input_handler_class_name = \
             self.material_proxy_wrangler.select_material_proxy_class_name_interactively(
-            clear=False, root=True)
+            clear=False, cache=True)
         self.session.breadcrumbs = breadcrumbs[:]
         self.preserve_backtracking = False
         if self.backtrack():

@@ -55,8 +55,9 @@ class ChunkProxy(PackageProxy):
         section.append(('d', 'delete'))
         return menu
 
-    def run(self, user_input=None, clear=True):
+    def run(self, user_input=None, clear=True, cache=False):
         self.assign_user_input(user_input=user_input)
+        self.cachce_breadcrumbs(cache=cache)
         while True:
             self.append_breadcrumb()
             menu = self.make_main_menu()
@@ -71,6 +72,7 @@ class ChunkProxy(PackageProxy):
                 break
             self.pop_breadcrumb()
         self.pop_breadcrumb()
+        self.restore_breadcrumbs(cache=cache)
 
     def set_chunk_spaced_name_interactively(self, prompt=True):
         getter = self.make_new_getter(where=self.where())
