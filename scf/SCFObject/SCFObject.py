@@ -38,8 +38,8 @@ class SCFObject(object):
 
     # TODO: write test
     @property
-    def global_directory_name(self):
-        return os.path.join(['Users', 'trevorbaca', 'Documents', 'other', 'baca'])
+    def studio_directory_name(self):
+        return self.package_importable_name_to_directory_name(self.studio_package_importable_name)
 
     @property
     def help_item_width(self):
@@ -63,12 +63,12 @@ class SCFObject(object):
     # TODO: write test
     @property
     def scf_package_importable_name(self):
-        return 'baca.scf'
+        return '.'.join([self.studio_package_importable_name, 'scf'])
 
     # TODO: write test
     @property
     def scf_root_directory(self):
-        return os.path.join('/', 'Users', 'trevorbaca', 'Documents', 'other', 'baca', 'scf')
+        return self.package_importable_name_to_directory_name(self.scf_package_importable_name)
 
     @property
     def score_package_short_names(self):
@@ -92,6 +92,10 @@ class SCFObject(object):
         source_file_name = inspect.getfile(type(self))
         source_file_name = source_file_name.strip('c')
         return source_file_name
+
+    @property
+    def studio_package_importable_name(self):
+        return 'baca'
 
     # TODO: write test
     @property
@@ -287,7 +291,7 @@ class SCFObject(object):
         if package_importable_name is None:
             return
         package_importable_name_parts = package_importable_name.split('.')
-        if package_importable_name_parts[0] == 'baca':
+        if package_importable_name_parts[0] == self.studio_package_importable_name:
             directory_parts = [os.environ.get('BACA')] + package_importable_name_parts[1:]
         elif package_importable_name_parts[0] in os.listdir(os.environ.get('SCORES')):
             directory_parts = [os.environ.get('SCORES')] + package_importable_name_parts[:]
@@ -357,8 +361,8 @@ class SCFObject(object):
 
     # TODO: write tests
     def purview_name_to_directory_name(self, purview_name):
-        if purview_name == 'baca':
-            directory_name = self.global_directory_name
+        if purview_name == self.studio_package_importable_name:
+            directory_name = self.studio_directory_name
         else:
             directory_name = os.path.join(['Users', 'trevorbaca', 'Documents', 'scores', purview_name])
         if not os.path.exists(directory_name):
