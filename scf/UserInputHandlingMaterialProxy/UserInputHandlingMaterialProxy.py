@@ -74,7 +74,7 @@ class UserInputHandlingMaterialProxy(MaterialProxy):
         self.debug(illustration, 2)
         return illustration
 
-    def make_main_menu_for_material_made_with_editor(self):
+    def make_main_menu_for_material_made_with_user_input_handler(self):
         menu, hidden_section = self.make_new_menu(where=self.where(), is_hidden=True)
         self.make_main_menu_section_for_user_input_module(menu, hidden_section)
         self.make_main_menu_section_for_output_material(menu, hidden_section)

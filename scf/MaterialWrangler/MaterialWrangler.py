@@ -45,15 +45,17 @@ class MaterialWrangler(PackageWrangler):
         self.preserve_backtracking = True
         breadcrumbs = self.session.breadcrumbs[:]
         self.session.breadcrumbs[:] = []
-        user_input_handler_class_name = self.material_proxy_wrangler.select_material_proxy_class_name_interactively(
-            clear=False)
+        user_input_handler_class_name = \
+            self.material_proxy_wrangler.select_material_proxy_class_name_interactively(
+            clear=False, root=True)
         self.session.breadcrumbs = breadcrumbs[:]
         self.preserve_backtracking = False
         if self.backtrack():
             return
         # TODO: set following attribute by editor automatically
         should_have_illustration = True
-        self.make_material_package(material_package_importable_name, user_input_handler_class_name, should_have_illustration)
+        self.make_material_package(
+            material_package_importable_name, user_input_handler_class_name, should_have_illustration)
 
     # TODO: write test
     def make_handmade_material_package_interactively(self):

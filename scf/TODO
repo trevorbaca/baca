@@ -87,3 +87,5 @@ TODO
 41. Remove three blank lines at head of data-only output material module.
 
 42. Author read-only attribute tests.
+
+43. Audit and reimplement purview to always equal only a string like 'baca'.
