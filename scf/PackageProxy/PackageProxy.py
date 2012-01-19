@@ -134,7 +134,7 @@ class PackageProxy(DirectoryProxy):
         result = self.remove()
         if result:
             line = 'package deleted.'
-            self.proceed(lines=[line])
+            self.proceed(line)
         
     def delete_tag(self, tag_name):
         tags = self.get_tags()
@@ -170,7 +170,7 @@ class PackageProxy(DirectoryProxy):
             return
         tag = self.get_tag(result)
         line = '{!r}'.format(tag)
-        self.proceed(lines=[line])
+        self.proceed(line)
 
     def get_tags(self):
         import collections

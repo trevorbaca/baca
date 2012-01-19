@@ -92,7 +92,7 @@ class PerformerEditor(InteractiveEditor):
             return
         if self.target.instrument_count < instrument_number:
             line = 'there is no instrument number {}'.format(instrument_number)
-            self.proceed(lines=[line])
+            self.proceed(line)
             return
         instrument_index = instrument_number - 1
         instrument = self.target.instruments[instrument_index]

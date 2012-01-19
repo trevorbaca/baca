@@ -113,7 +113,7 @@ class DirectoryProxy(SCFObject):
             self.display(lines)
         if prompt:
             line = 'tests run.'
-            self.proceed(lines=[line])
+            self.proceed(line)
 
     def svn_add(self, prompt=True):
         proc = subprocess.Popen('svn-add-all', shell=True, stdout=subprocess.PIPE)

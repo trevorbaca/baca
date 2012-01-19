@@ -313,14 +313,14 @@ class MaterialProxy(PackageProxy):
             os.remove(self.local_stylesheet_file_name)
             if prompt:
                 line = 'stylesheet deleted.'
-                self.proceed(lines=[line])
+                self.proceed(line)
            
     def delete_material_definition_module(self, prompt=True):
         if self.has_material_definition_module:
             os.remove(self.material_definition_file_name)
             if prompt:
                 line = 'material definition deleted.'
-                self.proceed(lines=[line])
+                self.proceed(line)
         
     def delete_material_package(self):
         self.remove_material_from_materials_initializer()
@@ -332,7 +332,7 @@ class MaterialProxy(PackageProxy):
             os.remove(self.output_material_module_file_name)
             if prompt:
                 line = 'output data module deleted.'
-                self.proceed(lines=[line])
+                self.proceed(line)
 
     def delete_illustration_ly(self, prompt=True):
         if self.has_illustration_ly:
@@ -346,7 +346,7 @@ class MaterialProxy(PackageProxy):
             os.remove(self.illustration_pdf_file_name)
             if prompt:
                 line = 'output PDF deleted.'
-                self.proceed(lines=[line])
+                self.proceed(line)
 
     # TODO: make read only
     def edit_illustration_ly(self):
@@ -516,7 +516,7 @@ class MaterialProxy(PackageProxy):
         target.close()
         if prompt:
             line = 'stylesheet linked.'
-            self.proceed(lines=[line])
+            self.proceed(line)
 
     def make_main_menu(self):
         if self.is_handmade:
@@ -723,13 +723,13 @@ class MaterialProxy(PackageProxy):
         os.system('python {}'.format(self.material_definition_file_name))
         if prompt:
             line = 'material definition executed.'
-            self.proceed(lines=[line])
+            self.proceed(line)
 
     def run_python_on_illustration_builder(self, prompt=True):
         os.system('python {}'.format(self.illustration_builder_file_name))
         if prompt:
             line = 'illustration builder executed.'
-            self.proceed(lines=[line])
+            self.proceed(line)
 
     # TODO: write test
     def select_user_input_handler_interactively(self, prompt=True):
@@ -742,7 +742,7 @@ class MaterialProxy(PackageProxy):
         self.add_tag('user_input_handler', user_input_handler.class_name)
         if prompt:
             line = 'user input handler selected.'
-            self.proceed(lines=[line])
+            self.proceed(line)
 
     # TODO: write test
     def select_stylesheet_interactively(self, prompt=True):
@@ -787,7 +787,7 @@ class MaterialProxy(PackageProxy):
         iotools.write_expr_to_ly(illustration, self.illustration_ly_file_name, print_status=False)
         lines.append('PDF and LilyPond file written to disk.')
         if prompt:
-            self.proceed(lines=lines)
+            self.proceed(lines)
         
     def write_illustration_ly_to_disk(self, is_forced=False, prompt=True):
         lines = []
@@ -796,7 +796,7 @@ class MaterialProxy(PackageProxy):
         lines.append('LilyPond file written to disk.')
         lines.append('')
         if prompt:
-            self.proceed(lines=lines)
+            self.proceed(lines)
 
     def write_illustration_pdf_to_disk(self, is_forced=False, prompt=True):
         lines = []
@@ -805,7 +805,7 @@ class MaterialProxy(PackageProxy):
         lines.append('PDF written to disk.')
         lines.append('')
         if prompt:
-            self.proceed(lines=lines)
+            self.proceed(lines)
 
     def write_output_material_to_disk(self, prompt=True):
         self.remove_material_from_materials_initializer()
@@ -818,7 +818,8 @@ class MaterialProxy(PackageProxy):
         self.add_material_to_materials_initializer()
         self.add_material_to_material_initializer()
         if prompt:
-            self.proceed(lines=['output data written to disk.'])
+            line = 'output data written to disk.'
+            self.proceed(line)
 
     def write_stub_data_material_definition_to_disk(self):
         material_definition = file(self.material_definition_file_name, 'w')
@@ -835,7 +836,7 @@ class MaterialProxy(PackageProxy):
             self.write_stub_music_material_definition_to_disk()
         if prompt:
             line = 'stub material definition written to disk.'
-            self.proceed(lines=[line])
+            self.proceed(line)
 
     def write_stub_music_material_definition_to_disk(self):
         material_definition = file(self.material_definition_file_name, 'w')
@@ -860,4 +861,4 @@ class MaterialProxy(PackageProxy):
         illustration_builder.close()
         if prompt:
             line = 'stub illustration builder written to disk.'
-            self.proceed(lines=[line])
+            self.proceed(line)

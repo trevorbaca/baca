@@ -39,7 +39,7 @@ class ChunkProxy(PackageProxy):
             self.set_score_template_interactively()
         # TODO: create directory and do other stuff here
         line = 'chunk created.'
-        self.proceed(lines=[line])
+        self.proceed(line)
 
     def handle_main_menu_result(self, result):
         if result == 'd':
@@ -86,7 +86,7 @@ class ChunkProxy(PackageProxy):
         chunk_proxy = ChunkProxy(package_importable_name)
         chunk_proxy.create_chunk()
         line = 'chunk spaced name set.'
-        self.proceed(lines=[line])
+        self.proceed(line)
 
     def set_score_template_interactively(self):
         self.print_not_implemented()

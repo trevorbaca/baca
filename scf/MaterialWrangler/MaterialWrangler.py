@@ -73,7 +73,7 @@ class MaterialWrangler(PackageWrangler):
         if os.path.exists(directory_name):
             if prompt:
                 line = 'package {!r} already exists.'.format(material_name)
-                self.proceed(lines=[line])
+                self.proceed(line)
             return False
         os.mkdir(directory_name)
         material_proxy = MaterialProxy(material_package_importable_name, session=self.session)
@@ -89,7 +89,7 @@ class MaterialWrangler(PackageWrangler):
                 material_proxy.write_stub_data_material_definition_to_disk()
         if prompt:
             line = 'material package {!r} created.'.format(material_package_importable_name)
-            self.proceed(lines=[line])
+            self.proceed(line)
         return True
 
     # TODO: write test
@@ -115,7 +115,7 @@ class MaterialWrangler(PackageWrangler):
             materials_package_importable_name, material_package_short_name)
         if self.package_exists(material_package_importable_name):
             line = 'Material package {!r} already exists.'.format(material_package_importable_name)
-            self.proceed(lines=[line])
+            self.proceed(line)
             return
         return material_package_importable_name
 

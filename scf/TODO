@@ -1,10 +1,8 @@
 TODO
 
--4. Implement populate_user_input_wrapper().
+-3. Implement populate_user_input_wrapper().
 
--3. Implement material move and rename methods.
-
--2. Extend self.proceed() to accept a single line.
+-2. Implement material move and rename methods.
 
 -1. Audit for should_clear_terminal keyword in the signature of every interactive method.
 

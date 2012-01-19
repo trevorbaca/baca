@@ -46,7 +46,7 @@ class FileProxy(SCFObject):
         self.copy_file(new_full_file_name)
         line = 'file copied.'
         if prompt:
-            self.proceed(lines=[line])
+            self.proceed(line)
 
     def rename_file(self, new_full_file_name):
         os.rename(self.full_file_name, new_full_file_name)

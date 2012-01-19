@@ -237,4 +237,4 @@ class Studio(SCFObject):
             self.display(lines, capitalize_first_character=False)
         if prompt:
             line = 'tests complete.'
-            self.proceed(lines=[line])
+            self.proceed(line)
