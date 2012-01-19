@@ -36,54 +36,52 @@ TODO
 
 17. Use performer abbreviations to populate performer selection menu.
 
-18. Kill Trevor Bača class.
+18. Kill hardcoded 'baca' directory name.
 
-19. Kill hardcoded 'baca' directory name.
+19. Find a way to include tags management in hidden menu of every package proxy.
 
-20. Find a way to include tags management in hidden menu of every package proxy.
+20. Figure out why 'red' isn't good enough to select 'red_pcs', maybe redraw-related.
 
-21. Figure out why 'red' isn't good enough to select 'red_pcs', maybe redraw-related.
+21. Change alphabeticization of scores in score selection menu.
 
-22. Change alphabeticization of scores in score selection menu.
+22. Find a way to dynamically add (default) indicator to default menu entries.
 
-23. Find a way to dynamically add (default) indicator to default menu entries.
+23. Implement initializer file proxy to decongest package proxy.
 
-24. Implement initializer file proxy to decongest package proxy.
+24. Implement user input module file proxy.
 
-25. Implement user input module file proxy.
+25. Prevent the creation of 'baca.materials.h' package.
 
-26. Prevent the creation of 'baca.materials.h' package.
+26. Do away with local stylesheets.
 
-27. Do away with local stylesheets.
+27. Consider keyword backtracking protocol to replace two-line backtracking protocol.
 
-28. Consider keyword backtracking protocol to replace two-line backtracking protocol.
+28. Implement something to tour all materials everywhere and inspect in sequence.
 
-29. Implement something to tour all materials everywhere and inspect in sequence.
+29. Implement measuretools.all_are_measures() and other checkers.
 
-30. Implement measuretools.all_are_measures() and other checkers.
+30. Encapsulate user input getter subprocedures.
 
-31. Encapsulate user input getter subprocedures.
+31. Make 'ls' hide or remove .pyc files.
 
-32. Make 'ls' hide or remove .pyc files.
+32. Make 'edit initializer' read only.
 
-33. Make 'edit initializer' read only.
+33. Author is-alphabetized script.
 
-34. Author is-alphabetized script.
+34. Port output change awareness.
 
-35. Port output change awareness.
+35. Make user input handler creation work.
 
-36. Make user input handler creation work.
+36. Change 'user_input' to 'user_input_wrapper'.
 
-37. Change 'user_input' to 'user_input_wrapper'.
+37. Make some zagged pitch-classes.
 
-38. Make some zagged pitch-classes.
+38. Implement RangeInventory in Abjad. Integrate into SCF.
 
-39. Implement RangeInventory in Abjad. Integrate into SCF.
+39. Define range inventories for all scores.
 
-40. Define range inventories for all scores.
+40. Remove three blank lines at head of data-only output material module.
 
-41. Remove three blank lines at head of data-only output material module.
+41. Author read-only attribute tests.
 
-42. Author read-only attribute tests.
-
-43. Audit and reimplement purview to always equal only a string like 'baca'.
+42. Audit and reimplement purview to always equal only a string like 'baca'.
