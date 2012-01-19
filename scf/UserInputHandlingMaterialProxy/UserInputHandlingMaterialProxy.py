@@ -6,7 +6,7 @@ class UserInputHandlingMaterialProxy(MaterialProxy):
 
     ### PUBLIC METHODS ###
 
-    def clear_user_input_wrapper(self, prompt_proceed=True):
+    def clear_user_input_wrapper(self, prompt=True):
         user_input_wrapper = self.user_input_wrapper
         if user_input_wrapper.is_empty:
             self.conditionally_display_lines(lines=['user input already empty.', ''])
@@ -14,7 +14,7 @@ class UserInputHandlingMaterialProxy(MaterialProxy):
         else:
             user_input_wrapper.clear()
             self.write_user_input_wrapper_to_disk(user_input_wrapper)
-            if prompt_proceed:
+            if prompt:
                 self.proceed(lines=['user input wrapper cleared.'])
 
     def edit_user_input_at_number(self, number):
@@ -57,13 +57,13 @@ class UserInputHandlingMaterialProxy(MaterialProxy):
         result.extend(user_input_wrapper.formatted_lines)
         return result
 
-    def load_user_input_wrapper_demo_values(self, prompt_proceed=True):
+    def load_user_input_wrapper_demo_values(self, prompt=True):
         user_input_wrapper = self.user_input_wrapper
         user_input_demo_values = copy.deepcopy(type(self).user_input_demo_values)
         for key, value in user_input_demo_values:
             user_input_wrapper[key] = value
         self.write_user_input_wrapper_to_disk(user_input_wrapper) 
-        if prompt_proceed:
+        if prompt:
             self.proceed(lines=['demo values loaded.'])
 
     def make_illustration(self):
@@ -96,20 +96,20 @@ class UserInputHandlingMaterialProxy(MaterialProxy):
         return output_material
 
     # TODO: implement
-    def populate_user_input_wrapper(self, prompt_proceed=True):
+    def populate_user_input_wrapper(self, prompt=True):
         self.print_not_implemented()
 
-    def show_user_input_demo_values(self, prompt_proceed=True):
+    def show_user_input_demo_values(self, prompt=True):
         lines = []
         for i, (key, value) in enumerate(self.user_input_demo_values):
             line = '    {}: {!r}'.format(key.replace('_', ' '), value)
             lines.append(line)
         lines.append('')
         self.conditionally_display_lines(lines=lines)
-        if prompt_proceed:
+        if prompt:
             self.proceed()
 
-    def write_stub_user_input_module_to_disk(self, prompt_proceed=True):
+    def write_stub_user_input_module_to_disk(self, prompt=True):
         user_input_module = file(self.user_input_module_file_name, 'w')
         lines = []
         lines.append('from baca.scf import UserInputWrapper')
@@ -118,7 +118,7 @@ class UserInputHandlingMaterialProxy(MaterialProxy):
         lines.append('user_input = UserInputWrapper([])')
         user_input_module.write('\n'.join(lines))
         user_input_module.close()
-        if prompt_proceed:
+        if prompt:
             line = 'stub user input module written to disk.'
             self.proceed(lines=[line])
 

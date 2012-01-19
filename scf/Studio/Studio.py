@@ -228,13 +228,13 @@ class Studio(SCFObject):
             self.pop_breadcrumb()
         self.pop_breadcrumb()
 
-    def run_py_test_all(self, prompt_proceed=True):
+    def run_py_test_all(self, prompt=True):
         proc = subprocess.Popen(
             'py.test {} {}'.format(self.directory_name, self.score_wrangler.directory_name), 
             shell=True, stdout=subprocess.PIPE)
         lines = [line.strip() for line in proc.stdout.readlines()]
         if lines:
             self.conditionally_display_lines(lines, capitalize_first_character=False)
-        if prompt_proceed:
+        if prompt:
             line = 'tests complete.'
             self.proceed(lines=[line])

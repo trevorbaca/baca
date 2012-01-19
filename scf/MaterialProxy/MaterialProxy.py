@@ -308,17 +308,17 @@ class MaterialProxy(PackageProxy):
         parent_package.add_import_statement_to_initializer(import_statement)
 
     # TODO: remove
-    def delete_local_stylesheet(self, prompt_proceed=True):
+    def delete_local_stylesheet(self, prompt=True):
         if self.has_local_stylesheet:
             os.remove(self.local_stylesheet_file_name)
-            if prompt_proceed:
+            if prompt:
                 line = 'stylesheet deleted.'
                 self.proceed(lines=[line])
            
-    def delete_material_definition_module(self, prompt_proceed=True):
+    def delete_material_definition_module(self, prompt=True):
         if self.has_material_definition_module:
             os.remove(self.material_definition_file_name)
-            if prompt_proceed:
+            if prompt:
                 line = 'material definition deleted.'
                 self.proceed(lines=[line])
         
@@ -326,25 +326,25 @@ class MaterialProxy(PackageProxy):
         self.remove_material_from_materials_initializer()
         PackageProxy.delete_package(self)
 
-    def delete_output_material_module(self, prompt_proceed=True):
+    def delete_output_material_module(self, prompt=True):
         if self.has_output_material_module:
             self.remove_material_from_materials_initializer()
             os.remove(self.output_material_module_file_name)
-            if prompt_proceed:
+            if prompt:
                 line = 'output data module deleted.'
                 self.proceed(lines=[line])
 
-    def delete_illustration_ly(self, prompt_proceed=True):
+    def delete_illustration_ly(self, prompt=True):
         if self.has_illustration_ly:
             os.remove(self.illustration_ly_file_name)
-            if prompt_proceed:
+            if prompt:
                 line = 'output LilyPond file deleted.'
                 self.procced(lines=[line])
 
-    def delete_illustration_pdf(self, prompt_proceed=True):
+    def delete_illustration_pdf(self, prompt=True):
         if self.has_illustration_pdf:
             os.remove(self.illustration_pdf_file_name)
-            if prompt_proceed:
+            if prompt:
                 line = 'output PDF deleted.'
                 self.proceed(lines=[line])
 
@@ -422,13 +422,13 @@ class MaterialProxy(PackageProxy):
     def handle_main_menu_result(self, result):
         assert isinstance(result, str)
         if result == 'uic':
-            self.clear_user_input_wrapper(prompt_proceed=False)    
+            self.clear_user_input_wrapper(prompt=False)    
         elif result == 'uil':
-            self.load_user_input_wrapper_demo_values(prompt_proceed=False)
+            self.load_user_input_wrapper_demo_values(prompt=False)
         elif result == 'uip':
-            self.populate_user_input_wrapper(prompt_proceed=False)
+            self.populate_user_input_wrapper(prompt=False)
         elif result == 'uis':
-            self.show_user_input_demo_values(prompt_proceed=True)
+            self.show_user_input_demo_values(prompt=True)
         elif result == 'uit':
             self.session.use_current_user_input_values_as_default = \
                 not self.session.use_current_user_input_values_as_default
@@ -504,7 +504,7 @@ class MaterialProxy(PackageProxy):
             raise ValueError
 
     # TODO: remove
-    def link_local_stylesheet(self, source_stylesheet_file_name=None, prompt_proceed=True):
+    def link_local_stylesheet(self, source_stylesheet_file_name=None, prompt=True):
         if source_stylesheet_file_name is None:
             source_stylesheet_file_name = self.source_stylesheet_file_name
         source = file(source_stylesheet_file_name, 'r')
@@ -514,7 +514,7 @@ class MaterialProxy(PackageProxy):
             target.write(line)
         source.close()
         target.close()
-        if prompt_proceed:
+        if prompt:
             line = 'stylesheet linked.'
             self.proceed(lines=[line])
 
@@ -715,20 +715,20 @@ class MaterialProxy(PackageProxy):
         os.system('abjad {}'.format(self.illustration_builder_file_name))
         self.conditionally_display_lines([''])
 
-    def run_python_on_material_definition(self, prompt_proceed=True):
+    def run_python_on_material_definition(self, prompt=True):
         os.system('python {}'.format(self.material_definition_file_name))
-        if prompt_proceed:
+        if prompt:
             line = 'material definition executed.'
             self.proceed(lines=[line])
 
-    def run_python_on_illustration_builder(self, prompt_proceed=True):
+    def run_python_on_illustration_builder(self, prompt=True):
         os.system('python {}'.format(self.illustration_builder_file_name))
-        if prompt_proceed:
+        if prompt:
             line = 'illustration builder executed.'
             self.proceed(lines=[line])
 
     # TODO: write test
-    def select_user_input_handler_interactively(self, prompt_proceed=True):
+    def select_user_input_handler_interactively(self, prompt=True):
         material_proxy_wrangler = MaterialProxyWrangler(session=self.session)
         self.preserve_backtracking = True
         user_input_handler = material_proxy_wrangler.select_material_proxy_class_name_interactively()
@@ -736,19 +736,19 @@ class MaterialProxy(PackageProxy):
         if self.backtrack():
             return
         self.add_tag('user_input_handler', user_input_handler.class_name)
-        if prompt_proceed:
+        if prompt:
             line = 'user input handler selected.'
             self.proceed(lines=[line])
 
     # TODO: write test
-    def select_stylesheet_interactively(self, prompt_proceed=True):
+    def select_stylesheet_interactively(self, prompt=True):
         stylesheet_wrangler = StylesheetWrangler(session=self.session)
         self.preserve_backtracking = True
         source_stylesheet_file_name = stylesheet_wrangler.select_stylesheet_file_name_interactively()
         self.preserve_backtracking = False
         if self.backtrack():
             return
-        self.link_local_stylesheet(source_stylesheet_file_name, prompt_proceed=prompt_proceed)
+        self.link_local_stylesheet(source_stylesheet_file_name, prompt=prompt)
 
     def unimport_material_definition_module(self):
         self.remove_package_importable_name_from_sys_modules(self.material_definition_module_importable_name)
@@ -776,34 +776,34 @@ class MaterialProxy(PackageProxy):
     def unimport_user_input_module(self):
         self.remove_package_importable_name_from_sys_modules(self.user_input_module_importable_name)
 
-    def write_illustration_ly_and_pdf_to_disk(self, is_forced=False, prompt_proceed=True):
+    def write_illustration_ly_and_pdf_to_disk(self, is_forced=False, prompt=True):
         lines = []
         illustration = self.make_illustration()
         iotools.write_expr_to_pdf(illustration, self.illustration_pdf_file_name, print_status=False)
         iotools.write_expr_to_ly(illustration, self.illustration_ly_file_name, print_status=False)
         lines.append('PDF and LilyPond file written to disk.')
-        if prompt_proceed:
+        if prompt:
             self.proceed(lines=lines)
         
-    def write_illustration_ly_to_disk(self, is_forced=False, prompt_proceed=True):
+    def write_illustration_ly_to_disk(self, is_forced=False, prompt=True):
         lines = []
         illustration = self.import_illustration_from_illustration_builder()
         iotools.write_expr_to_ly(illustration, self.illustration_ly_file_name, print_status=False)
         lines.append('LilyPond file written to disk.')
         lines.append('')
-        if prompt_proceed:
+        if prompt:
             self.proceed(lines=lines)
 
-    def write_illustration_pdf_to_disk(self, is_forced=False, prompt_proceed=True):
+    def write_illustration_pdf_to_disk(self, is_forced=False, prompt=True):
         lines = []
         illustration = self.import_illustration_illustration_builder()
         iotools.write_expr_to_pdf(illustration, self.illustration_pdf_file_name, print_status=False)
         lines.append('PDF written to disk.')
         lines.append('')
-        if prompt_proceed:
+        if prompt:
             self.proceed(lines=lines)
 
-    def write_output_material_to_disk(self, prompt_proceed=True):
+    def write_output_material_to_disk(self, prompt=True):
         self.remove_material_from_materials_initializer()
         output_material_module_body_lines = self.make_output_material_module_body_lines()
         output_material_module = file(self.output_material_module_file_name, 'w')
@@ -813,7 +813,7 @@ class MaterialProxy(PackageProxy):
         output_material_module.close()
         self.add_material_to_materials_initializer()
         self.add_material_to_material_initializer()
-        if prompt_proceed:
+        if prompt:
             self.proceed(lines=['output data written to disk.'])
 
     def write_stub_data_material_definition_to_disk(self):
@@ -824,12 +824,12 @@ class MaterialProxy(PackageProxy):
         material_definition.write('\n')
         material_definition.write('{} = None'.format(self.material_underscored_name))
         
-    def write_stub_material_definition_to_disk(self, prompt_proceed=True):
+    def write_stub_material_definition_to_disk(self, prompt=True):
         if self.is_data_only:
             self.write_stub_data_material_definition_to_disk()
         else:
             self.write_stub_music_material_definition_to_disk()
-        if prompt_proceed:
+        if prompt:
             line = 'stub material definition written to disk.'
             self.proceed(lines=[line])
 
@@ -841,7 +841,7 @@ class MaterialProxy(PackageProxy):
         material_definition.write('\n')
         material_definition.write('{} = None'.format(self.material_underscored_name))
 
-    def write_stub_illustration_builder_to_disk(self, prompt_proceed=True):
+    def write_stub_illustration_builder_to_disk(self, prompt=True):
         illustration_builder = file(self.illustration_builder_file_name, 'w')
         lines = []
         lines.append('from abjad import *')
@@ -854,6 +854,6 @@ class MaterialProxy(PackageProxy):
         lines.append('illustration = lilypondfiletools.make_basic_lilypond_file(score)')
         illustration_builder.write('\n'.join(lines))
         illustration_builder.close()
-        if prompt_proceed:
+        if prompt:
             line = 'stub illustration builder written to disk.'
             self.proceed(lines=[line])

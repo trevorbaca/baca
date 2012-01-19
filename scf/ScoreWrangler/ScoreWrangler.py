@@ -64,27 +64,27 @@ class ScoreWrangler(PackageWrangler):
         return score_proxy
     
     # TODO: move up to level of wrangler
-    def svn_ci(self, prompt_proceed=True):
+    def svn_ci(self, prompt=True):
         commit_message = self.handle_raw_input('commit message')
         line = 'commit message will be: "{}"\n'.format(commit_message)
         self.conditionally_display_lines([line])
         if not self.confirm():
             return
         for score_proxy in self.score_proxies_to_display:
-            score_proxy.svn_ci(commit_message=commit_message, prompt_proceed=False)
-        if prompt_proceed:
+            score_proxy.svn_ci(commit_message=commit_message, prompt=False)
+        if prompt:
             self.proceed()
 
     # TODO: move up to level of wrangler
-    def svn_st(self, prompt_proceed=True):
+    def svn_st(self, prompt=True):
         for score_proxy in self.score_proxies_to_display:
-            score_proxy.svn_st(prompt_proceed=False)
-        if prompt_proceed:
+            score_proxy.svn_st(prompt=False)
+        if prompt:
             self.proceed()
 
     # TODO: move up to level of wrangler
-    def svn_up(self, prompt_proceed=True):
+    def svn_up(self, prompt=True):
         for score_proxy in self.score_proxies_to_display:
-            score_proxy.svn_up(prompt_proceed=False)
-        if prompt_proceed:
+            score_proxy.svn_up(prompt=False)
+        if prompt:
             self.proceed()

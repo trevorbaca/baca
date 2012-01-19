@@ -64,14 +64,14 @@ class MaterialWrangler(PackageWrangler):
 
     # TODO: write test
     def create_material_package(self, material_package_importable_name, user_input_handler_class_name, should_have_illustration,
-        prompt_proceed=True):
+        prompt=True):
         '''True on success.'''
         assert iotools.is_underscore_delimited_lowercase_package_name(material_package_importable_name)
         assert user_input_handler_class_name is None or iotools.is_uppercamelcase_string(user_input_handler_class_name)
         assert isinstance(should_have_illustration, bool)
         directory_name = self.package_importable_name_to_directory_name(material_package_importable_name)
         if os.path.exists(directory_name):
-            if prompt_proceed:
+            if prompt:
                 line = 'package {!r} already exists.'.format(material_name)
                 self.proceed(lines=[line])
             return False
@@ -84,10 +84,10 @@ class MaterialWrangler(PackageWrangler):
         if user_input_handler_class_name is None:
             if should_have_illustration:
                 material_proxy.write_stub_music_material_definition_to_disk()
-                material_proxy.write_stub_illustration_builder_to_disk(prompt_proceed=False)
+                material_proxy.write_stub_illustration_builder_to_disk(prompt=False)
             else:
                 material_proxy.write_stub_data_material_definition_to_disk()
-        if prompt_proceed:
+        if prompt:
             line = 'material package {!r} created.'.format(material_package_importable_name)
             self.proceed(lines=[line])
         return True

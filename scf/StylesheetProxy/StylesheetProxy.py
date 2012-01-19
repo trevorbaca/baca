@@ -20,7 +20,7 @@ class StylesheetProxy(FileProxy):
     def audit_stylesheet(self):
         self.print_not_implemented()
 
-    def copy_stylesheet_interactively(self, prompt_proceed=True):
+    def copy_stylesheet_interactively(self, prompt=True):
         getter = self.make_new_getter()
         getter.append_string('new file name')
         new_short_file_name = getter.run()
@@ -32,13 +32,13 @@ class StylesheetProxy(FileProxy):
         new_full_file_name = os.path.join(self.path_name, new_short_file_name)
         self.copy_file(new_full_file_name)
         line = 'file copied.'
-        if prompt_proceed:
+        if prompt:
             self.proceed(lines=[line])
         
-    def delete_stylesheet_interactively(self, prompt_proceed=True):
+    def delete_stylesheet_interactively(self, prompt=True):
         self.remove()
         line = 'stylesheet deleted.'
-        if prompt_proceed:
+        if prompt:
             self.proceed(lines=[line])
 
     def vi_stylesheet(self):
@@ -60,7 +60,7 @@ class StylesheetProxy(FileProxy):
         else:
             raise ValueError
 
-    def rename_stylesheet_interactively(self, prompt_proceed=True):
+    def rename_stylesheet_interactively(self, prompt=True):
         getter = self.make_new_getter()
         getter.append_string('new file name')
         new_short_file_name = getter.run()
@@ -72,7 +72,7 @@ class StylesheetProxy(FileProxy):
         new_full_file_name = os.path.join(self.path_name, new_short_file_name)
         self.rename_file(new_full_file_name)
         line = 'stylesheet renamed.'
-        if prompt_proceed:
+        if prompt:
             self.proceed(lines=[line])
 
     def make_main_menu(self):

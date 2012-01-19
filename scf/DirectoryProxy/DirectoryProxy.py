@@ -98,24 +98,24 @@ class DirectoryProxy(SCFObject):
             return True
         return False
 
-    def run_py_test(self, prompt_proceed=True):
+    def run_py_test(self, prompt=True):
         proc = subprocess.Popen('py.test {}'.format(self.directory_name), shell=True, stdout=subprocess.PIPE)
         lines = [line.strip() for line in proc.stdout.readlines()]
         if lines:
             self.conditionally_display_lines(lines)
-        if prompt_proceed:
+        if prompt:
             line = 'tests run.'
             self.proceed(lines=[line])
 
-    def svn_add(self, prompt_proceed=True):
+    def svn_add(self, prompt=True):
         proc = subprocess.Popen('svn-add-all', shell=True, stdout=subprocess.PIPE)
         lines = [line.strip() for line in proc.stdout.readlines()]
         if lines:
             self.conditionally_display_lines(lines)
-        if prompt_proceed:
+        if prompt:
             self.proceed()
  
-    def svn_ci(self, commit_message=None, prompt_proceed=True):
+    def svn_ci(self, commit_message=None, prompt=True):
         if commit_message is None:
             commit_message = self.handle_raw_input('commit message')
             line = 'commit message will be: "{}"\n'.format(commit_message)
@@ -129,25 +129,25 @@ class DirectoryProxy(SCFObject):
         proc = subprocess.Popen(command, shell=True, stdout=subprocess.PIPE)
         lines.extend([line.strip() for line in proc.stdout.readlines()])
         self.conditionally_display_lines(lines)
-        if prompt_proceed:
+        if prompt:
             self.proceed()
 
-    def svn_st(self, prompt_proceed=True):
+    def svn_st(self, prompt=True):
         line = self.directory_name
         self.conditionally_display_lines([line])
         command = 'svn st -u {}'.format(self.directory_name)
         proc = subprocess.Popen(command, shell=True, stdout=subprocess.PIPE)
         lines = [line.strip() for line in proc.stdout.readlines()]
         self.conditionally_display_lines(lines)
-        if prompt_proceed:
+        if prompt:
             self.proceed()
 
-    def svn_up(self, prompt_proceed=True):
+    def svn_up(self, prompt=True):
         line = self.directory_name
         self.conditionally_display_lines([line])
         command = 'svn up {}'.format(self.directory_name)
         proc = subprocess.Popen(command, shell=True, stdout=subprocess.PIPE)
         lines = [line.strip() for line in proc.stdout.readlines()]
         self.conditionally_display_lines(lines)
-        if prompt_proceed:
+        if prompt:
             self.proceed()
