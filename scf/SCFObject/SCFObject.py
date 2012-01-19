@@ -151,12 +151,13 @@ class SCFObject(object):
                 for line in lines:
                     print line
 
-    def confirm(self):
-        response = self.handle_raw_input('ok?', include_chevron=False)
-        if not response.lower() == 'y':
-            self.conditionally_display_lines([''])
-            return False
-        return True
+    def confirm(self, prompt_string='ok'):
+        getter = self.make_new_getter(where=self.where())
+        getter.append_yes_no_string(prompt_string)
+        result = getter.run()
+        if self.backtrack():
+            return
+        return 'yes'.startswith(result.lower())
 
     def debug(self, value, annotation=None):
         if annotation is None:
@@ -248,6 +249,9 @@ class SCFObject(object):
 
     def is_string_or_none(self, expr):
         return isinstance(expr, (str, type(None)))
+
+    def is_yes_no_string(self, expr):
+        return 'yes'.startswith(expr.lower()) or 'no'.startswith(expr.lower())
 
     def make_new_getter(self, where=None):
         import baca

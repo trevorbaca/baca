@@ -55,17 +55,6 @@ class UserInputGetter(MenuObject):
 
     ### PUBLIC METHODS ###
 
-    def append_something(self, spaced_attribute_name, message, 
-        additional_message_arguments=None, default=None):
-        assert isinstance(spaced_attribute_name, str)
-        self.prompts.append(spaced_attribute_name)
-        self.argument_lists.append([])
-        self.execs.append([])
-        if additional_message_arguments is None:
-            additional_message_arguments = []
-        self.helps.append(message.format(spaced_attribute_name, *additional_message_arguments))
-        self.defaults.append(default)
-
     def append_argument_range(self, spaced_attribute_name, argument_list, default=None):
         message = "value for '{}' must be argument range."
         self.append_something(spaced_attribute_name, message, default=default)
@@ -120,6 +109,17 @@ class UserInputGetter(MenuObject):
         self.execs[-1] = execs
         self.tests.append(self.is_pitch_range_or_none)
 
+    def append_something(self, spaced_attribute_name, message, 
+        additional_message_arguments=None, default=None):
+        assert isinstance(spaced_attribute_name, str)
+        self.prompts.append(spaced_attribute_name)
+        self.argument_lists.append([])
+        self.execs.append([])
+        if additional_message_arguments is None:
+            additional_message_arguments = []
+        self.helps.append(message.format(spaced_attribute_name, *additional_message_arguments))
+        self.defaults.append(default)
+
     def append_string(self, spaced_attribute_name, default=None):
         message = "value for '{}' must be string."
         self.append_something(spaced_attribute_name, message, default=default)
@@ -134,6 +134,11 @@ class UserInputGetter(MenuObject):
         message = "value for '{}' must be symbolic pitch range string. Ex: [A0, C8]."
         self.append_something(spaced_attribute_name, message, default=default)
         self.tests.append(pitchtools.is_symbolic_pitch_range_string)
+
+    def append_yes_no_string(self, spaced_attribute_name, default=None):
+        message = "value for '{}' must be 'y' or 'n'."
+        self.append_something(spaced_attribute_name, message, default=default)
+        self.tests.append(self.is_yes_no_string)
 
     def load_prompt(self):
         prompt = self.prompts[self.prompt_index]

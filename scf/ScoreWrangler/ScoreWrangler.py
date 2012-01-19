@@ -65,6 +65,7 @@ class ScoreWrangler(PackageWrangler):
     
     # TODO: move up to level of wrangler
     def svn_ci(self, prompt=True):
+        # TODO: replace with getter
         commit_message = self.handle_raw_input('commit message')
         line = 'commit message will be: "{}"\n'.format(commit_message)
         self.conditionally_display_lines([line])
