@@ -235,6 +235,5 @@ class Studio(SCFObject):
         lines = [line.strip() for line in proc.stdout.readlines()]
         if lines:
             self.display(lines, capitalize_first_character=False)
-        if prompt:
-            line = 'tests complete.'
-            self.proceed(line)
+        line = 'tests complete.'
+        self.proceed(line, prompt=prompt)

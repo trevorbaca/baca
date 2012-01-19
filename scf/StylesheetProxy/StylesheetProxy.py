@@ -32,14 +32,12 @@ class StylesheetProxy(FileProxy):
         new_full_file_name = os.path.join(self.path_name, new_short_file_name)
         self.copy_file(new_full_file_name)
         line = 'file copied.'
-        if prompt:
-            self.proceed(line)
+        self.proceed(line, prompt=prompt)
         
     def delete_stylesheet_interactively(self, prompt=True):
         self.remove()
         line = 'stylesheet deleted.'
-        if prompt:
-            self.proceed(line)
+        self.proceed(line, prompt=prompt)
 
     def vi_stylesheet(self):
         os.system('vi {}'.format(self.full_file_name))
@@ -72,8 +70,7 @@ class StylesheetProxy(FileProxy):
         new_full_file_name = os.path.join(self.path_name, new_short_file_name)
         self.rename_file(new_full_file_name)
         line = 'stylesheet renamed.'
-        if prompt:
-            self.proceed(line)
+        self.proceed(line, prompt=prompt)
 
     def make_main_menu(self):
         menu, section = self.make_new_menu(where=self.where)

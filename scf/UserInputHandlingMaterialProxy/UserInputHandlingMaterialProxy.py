@@ -15,9 +15,8 @@ class UserInputHandlingMaterialProxy(MaterialProxy):
         else:
             user_input_wrapper.clear()
             self.write_user_input_wrapper_to_disk(user_input_wrapper)
-            if prompt:
-                lines=['user input wrapper cleared.']
-                self.proceed(lines)
+            lines=['user input wrapper cleared.']
+            self.proceed(lines, prompt=prompt)
 
     def edit_user_input_at_number(self, number):
         user_input_wrapper = self.user_input_wrapper
@@ -65,9 +64,8 @@ class UserInputHandlingMaterialProxy(MaterialProxy):
         for key, value in user_input_demo_values:
             user_input_wrapper[key] = value
         self.write_user_input_wrapper_to_disk(user_input_wrapper) 
-        if prompt:
-            line = 'demo values loaded.'
-            self.proceed(line)
+        line = 'demo values loaded.'
+        self.proceed(line, prompt=prompt)
 
     def make_illustration(self):
         output_material = self.import_output_material_from_output_material_module()
@@ -109,8 +107,7 @@ class UserInputHandlingMaterialProxy(MaterialProxy):
             lines.append(line)
         lines.append('')
         self.display(lines)
-        if prompt:
-            self.proceed()
+        self.proceed(prompt=prompt)
 
     def write_stub_user_input_module_to_disk(self, prompt=True):
         user_input_module = file(self.user_input_module_file_name, 'w')
@@ -121,9 +118,8 @@ class UserInputHandlingMaterialProxy(MaterialProxy):
         lines.append('user_input = UserInputWrapper([])')
         user_input_module.write('\n'.join(lines))
         user_input_module.close()
-        if prompt:
-            line = 'stub user input module written to disk.'
-            self.proceed(line)
+        line = 'stub user input module written to disk.'
+        self.proceed(line, prompt=prompt)
 
     def write_user_input_wrapper_to_disk(self, user_input_wrapper):
         formatted_user_input_lines = self.format_user_input_wrapper_for_writing_to_disk(user_input_wrapper)

@@ -111,17 +111,15 @@ class DirectoryProxy(SCFObject):
         lines = [line.strip() for line in proc.stdout.readlines()]
         if lines:
             self.display(lines)
-        if prompt:
-            line = 'tests run.'
-            self.proceed(line)
+        line = 'tests run.'
+        self.proceed(line, prompt=prompt)
 
     def svn_add(self, prompt=True):
         proc = subprocess.Popen('svn-add-all', shell=True, stdout=subprocess.PIPE)
         lines = [line.strip() for line in proc.stdout.readlines()]
         if lines:
             self.display(lines)
-        if prompt:
-            self.proceed()
+        self.proceed(prompt=prompt)
  
     def svn_ci(self, commit_message=None, prompt=True):
         if commit_message is None:
@@ -140,8 +138,7 @@ class DirectoryProxy(SCFObject):
         proc = subprocess.Popen(command, shell=True, stdout=subprocess.PIPE)
         lines.extend([line.strip() for line in proc.stdout.readlines()])
         self.display(lines)
-        if prompt:
-            self.proceed()
+        self.proceed(prompt=prompt)
 
     def svn_st(self, prompt=True):
         line = self.directory_name
@@ -150,8 +147,7 @@ class DirectoryProxy(SCFObject):
         proc = subprocess.Popen(command, shell=True, stdout=subprocess.PIPE)
         lines = [line.strip() for line in proc.stdout.readlines()]
         self.display(lines)
-        if prompt:
-            self.proceed()
+        self.proceed(prompt=prompt)
 
     def svn_up(self, prompt=True):
         line = self.directory_name
@@ -160,5 +156,4 @@ class DirectoryProxy(SCFObject):
         proc = subprocess.Popen(command, shell=True, stdout=subprocess.PIPE)
         lines = [line.strip() for line in proc.stdout.readlines()]
         self.display(lines)
-        if prompt:
-            self.proceed()
+        self.proceed(prompt=prompt)

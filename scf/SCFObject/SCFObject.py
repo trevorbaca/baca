@@ -331,12 +331,14 @@ class SCFObject(object):
         self.display(lines)
         self.proceed()
 
-    def proceed(self, lines=None):
+    def proceed(self, lines=None, prompt=True):
         assert isinstance(lines, (tuple, list, str, type(None)))
+        if not prompt:
+            return
         if isinstance(lines, str):
             lines = [lines]
         elif lines is None:
-            liens = []
+            lines = []
         if lines:
             lines.append('')
             self.display(lines)

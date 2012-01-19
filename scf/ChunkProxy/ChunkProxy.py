@@ -30,7 +30,7 @@ class ChunkProxy(PackageProxy):
     def create_chunk(self):
         self.print_not_implemented()
 
-    def create_chunk_interactively(self):
+    def create_chunk_interactively(self, prompt=True):
         self.print_not_implemented()
         return
         if self.package_spaced_name is None:
@@ -39,7 +39,7 @@ class ChunkProxy(PackageProxy):
             self.set_score_template_interactively()
         # TODO: create directory and do other stuff here
         line = 'chunk created.'
-        self.proceed(line)
+        self.proceed(line, prompt=prompt)
 
     def handle_main_menu_result(self, result):
         if result == 'd':
@@ -72,7 +72,7 @@ class ChunkProxy(PackageProxy):
             self.pop_breadcrumb()
         self.pop_breadcrumb()
 
-    def set_chunk_spaced_name_interactively(self):
+    def set_chunk_spaced_name_interactively(self, prompt=True):
         getter = self.make_new_getter(where=self.where())
         # TODO: implement getter.append_space_delimited_lowercase_string
         getter.prompts.append('chunk name')
@@ -86,7 +86,7 @@ class ChunkProxy(PackageProxy):
         chunk_proxy = ChunkProxy(package_importable_name)
         chunk_proxy.create_chunk()
         line = 'chunk spaced name set.'
-        self.proceed(line)
+        self.proceed(line, prompt=prompt)
 
     def set_score_template_interactively(self):
         self.print_not_implemented()

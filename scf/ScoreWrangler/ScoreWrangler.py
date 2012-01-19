@@ -76,19 +76,16 @@ class ScoreWrangler(PackageWrangler):
             return
         for score_proxy in self.score_proxies_to_display:
             score_proxy.svn_ci(commit_message=commit_message, prompt=False)
-        if prompt:
-            self.proceed()
+        self.proceed(prompt=prompt)
 
     # TODO: move up to level of wrangler
     def svn_st(self, prompt=True):
         for score_proxy in self.score_proxies_to_display:
             score_proxy.svn_st(prompt=False)
-        if prompt:
-            self.proceed()
+        self.proceed(prompt=prompt)
 
     # TODO: move up to level of wrangler
     def svn_up(self, prompt=True):
         for score_proxy in self.score_proxies_to_display:
             score_proxy.svn_up(prompt=False)
-        if prompt:
-            self.proceed()
+        self.proceed(prompt=prompt)
