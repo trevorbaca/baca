@@ -154,8 +154,9 @@ class MaterialWrangler(PackageWrangler):
         result = '.'.join(result)
         return result
 
-    def run(self, user_input=None, head=None, clear=True):
+    def run(self, user_input=None, head=None, clear=True, cache=False):
         self.assign_user_input(user_input=user_input)
+        self.cache_breadcrumbs(cache=cache)
         while True:
             self.append_breadcrumb()
             menu = self.make_main_menu(head=head)
@@ -170,3 +171,4 @@ class MaterialWrangler(PackageWrangler):
                 break
             self.pop_breadcrumb()
         self.pop_breadcrumb()
+        self.restore_breadcrumbs(cache=cache)

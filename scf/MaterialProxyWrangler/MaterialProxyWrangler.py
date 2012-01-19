@@ -144,8 +144,9 @@ class MaterialProxyWrangler(PackageWrangler):
         stylesheet_file_pointer.write(stylesheet.format)
         stylesheet_file_pointer.close()
         
-    def run(self, user_input=None, clear=True):
+    def run(self, user_input=None, clear=True, cache=False):
         self.assign_user_input(user_input=user_input)
+        self.cachce_breadcrumbs(cache=cache)
         while True:
             self.append_breadcrumb()
             menu = self.make_main_menu()
@@ -160,6 +161,7 @@ class MaterialProxyWrangler(PackageWrangler):
                 break
             self.pop_breadcrumb()
         self.pop_breadcrumb()
+        self.restore_breadcrumbs(cache=cache)
 
     # TODO: write test
     def select_material_proxy_class_name_interactively(self, clear=True, cache=False):

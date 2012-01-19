@@ -1,10 +1,8 @@
 TODO
 
--1. Implement populate_user_input_wrapper().
+0. Implement populate_user_input_wrapper().
 
-0. Implement material move and rename methods.
-
-1. Audit for breadcrumb removal in the signature of every interactive method.
+1. Implement material move and rename methods.
 
 2. Be able safely to write junk into any system file.
 

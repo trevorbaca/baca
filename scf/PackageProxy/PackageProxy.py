@@ -203,7 +203,8 @@ class PackageProxy(DirectoryProxy):
         section.append(('get', 'get tag'))
         return menu
 
-    def manage_tags(self, clear=True):
+    def manage_tags(self, clear=True, cache=False):
+        self.cache_breadcrumbs(cache=cache)
         while True:
             self.append_breadcrumb('tags')
             menu = self.make_tags_menu()
@@ -215,6 +216,7 @@ class PackageProxy(DirectoryProxy):
                 break
             self.pop_breadcrumb()
         self.pop_breadcrumb()
+        self.restore_breadcrumbs(cache=cache)
 
     # TODO: write tests
     def package_importable_name_to_purview(self, package_importable_name):

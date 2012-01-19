@@ -135,7 +135,8 @@ class UserInputHandlingMaterialProxy(MaterialProxy):
         illustration = self.make_illustration_from_output_material(material)
         return illustration 
 
-    def old_run_interactive(self, clear=True):
+    def old_run_interactive(self, clear=True, cache=False):
+        self.cache_breadcrumbs(cache=cache)
         while True:
             menu, section = self.make_new_menu(where=self.where(), is_numbered=True)
             section.tokens = self.user_input_wrapper.editable_lines
@@ -154,3 +155,4 @@ class UserInputHandlingMaterialProxy(MaterialProxy):
                 illustration.header_block.title = markuptools.Markup(self.generic_output_name.capitalize())
                 illustration.header_block.subtitle = markuptools.Markup('(unsaved)')
                 iotools.show(illustration)
+        self.restore_breadcrumbs(cache=cache)

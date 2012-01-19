@@ -58,7 +58,8 @@ class Studio(SCFObject):
         return score_package_short_names[prev_index]
 
     # TODO: write test
-    def get_purview_interactively(self, clear=True):
+    def get_purview_interactively(self, clear=True, cache=False):
+        self.cache_breadcrumbs(cache=cache)
         while True:
             menu = self.make_score_selection_menu()
             last_section = menu.sections[-1]
@@ -67,8 +68,10 @@ class Studio(SCFObject):
             menu.explicit_title = 'select location:'
             purview_name = menu.run(clear=clear)
             if self.backtrack():
+                self.restore_breadcrumbs(cache=cache)
                 return
             if purview_name:
+                self.restore_breadcrumbs(cache=cache)
                 return purview_name
 
     def handle_main_menu_result(self, result):
@@ -158,9 +161,10 @@ class Studio(SCFObject):
         section.append(('pytest_all', 'pytest_all'))
         return menu
 
-    def run(self, user_input=None, clear=True):
+    def run(self, user_input=None, clear=True, cache=False):
         type(self).__init__(self)
         self.assign_user_input(user_input=user_input)
+        self.cache_breadcrumbs(cache=cache)
         self.append_breadcrumb()
         run_main_menu = True
         while True:
@@ -210,6 +214,7 @@ class Studio(SCFObject):
                 continue
             self.pop_breadcrumb()
         self.pop_breadcrumb()
+        self.restore_breadcrumbs(cache=cache)
 
     def manage_svn(self, clear=True):
         while True:

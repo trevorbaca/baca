@@ -688,8 +688,9 @@ class MaterialProxy(PackageProxy):
             self.material_underscored_name, self.material_underscored_name)
         self.remove_import_statement_from_initializer(import_statement, self.parent_initializer_file_name)
 
-    def run(self, user_input=None, clear=True):
+    def run(self, user_input=None, clear=True, cache=False):
         self.assign_user_input(user_input=user_input)
+        self.cache_breadcrumbs(cache=cache)
         while True:
             self.append_breadcrumb()
             menu = self.make_main_menu()
@@ -704,6 +705,7 @@ class MaterialProxy(PackageProxy):
                 break
             self.pop_breadcrumb()
         self.pop_breadcrumb()
+        self.restore_breadcrumbs(cache=cache)
 
     def run_abjad_on_material_definition(self):
         os.system('abjad {}'.format(self.material_definition_file_name))

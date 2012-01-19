@@ -56,8 +56,9 @@ class StylesheetWrangler(PackageWrangler):
         section.append(('new', 'make new stylesheet'))
         return menu
 
-    def run(self, user_input=None, clear=True):
+    def run(self, user_input=None, clear=True, cache=False):
         self.assign_user_input(user_input=user_input)
+        self.cache_breadcrumbs(cache=cache)
         while True:
             self.append_breadcrumb()
             menu = self.make_main_menu()
@@ -72,9 +73,11 @@ class StylesheetWrangler(PackageWrangler):
                 break
             self.pop_breadcrumb()
         self.pop_breadcrumb()
+        self.restore_breadcrumbs(cache=cache)
         
     # TODO: write test
-    def select_stylesheet_file_name_interactively(self, clear=True):
+    def select_stylesheet_file_name_interactively(self, clear=True, cache=False):
+        self.cache_breadcrumbs(cache=cache)
         menu, section = self.make_new_menu(where=self.where(), is_numbered=True)
         section.tokens = self.stylesheet_file_names
         while True:
@@ -82,6 +85,7 @@ class StylesheetWrangler(PackageWrangler):
             result = menu.run(clear=clear)
             if self.backtrack():
                 self.pop_breadcrumb()
+                self.restore_breadcrumbs(cache=cache)
                 return
             elif not result:
                 self.pop_breadcrumb()
@@ -89,5 +93,6 @@ class StylesheetWrangler(PackageWrangler):
             else:
                 self.pop_breadcrumb()
                 break
+        self.restore_breadcrumbs(cache=cache)
         result = os.path.join(self.stylesheets_directory, result)
         return result

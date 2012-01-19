@@ -78,7 +78,8 @@ class InstrumentEditor(InteractiveEditor):
             return
         self.conditionally_set_target_attribute('short_instrument_name_markup', result)
         
-    def get_untuned_percussion_name_interactively(self, clear=True):
+    def get_untuned_percussion_name_interactively(self, clear=True, cache=False):
+        self.cache_breadcrumbs(cache=cache)
         while True:
             self.append_breadcrumb('untuned percussion')
             menu, section = self.make_new_menu(where=self.where(), is_numbered=True)
@@ -86,12 +87,14 @@ class InstrumentEditor(InteractiveEditor):
             result = menu.run(clear=clear)
             if self.backtrack():
                 self.pop_breadcrumb()
+                self.restore_breadcrumbs(cache=cache)
                 return
             elif not result:
                 self.pop_breadcrumb()
                 continue
             else:
                 self.pop_breadcrumb()
+                self.restore_breadcrumbs(cache=cache)
                 return result
         
     def handle_main_menu_result(self, result):
@@ -143,19 +146,18 @@ class InstrumentEditor(InteractiveEditor):
         section.append(('tprd', 'toggle pitch range display'))
         return menu
 
-    def select_instruments_from_instrumenttools_interactively(self, clear=True):
-        '''Return list of instruments or none.
-        '''
+    def select_instruments_from_instrumenttools_interactively(self, clear=True, cache=False):
+        '''Return list of instruments or none.'''
         from abjad.tools import instrumenttools
+        self.cache_breadcrumbs(cache=cache)
         menu, section = self.make_new_menu(where=self.where(), is_numbered=True, is_ranged=True)
         section.tokens = instrumenttools.list_instrument_names()
         while True:
             self.append_breadcrumb('select instrument')
-            #print 'BEFORE: argument range is allowed: {!r}'.format(menu.argument_range_is_allowed)
             result = menu.run(clear=clear)
-            #print 'ZOO: {!r}'.format(result)
             if self.backtrack():
                 self.pop_breadcrumb()
+                self.restore_breadcrumbs(cache=cache)
                 return    
             elif not result:
                 self.pop_breadcrumb()
@@ -178,4 +180,5 @@ class InstrumentEditor(InteractiveEditor):
                     continue
                 instrument.instrument_name = instrument_name
             this_result.append(instrument)
+        self.restore_breadcrumbs(cache=cache)
         return this_result

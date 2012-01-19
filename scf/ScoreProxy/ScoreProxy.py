@@ -258,7 +258,8 @@ class ScoreProxy(PackageProxy):
         section.append(('ci', 'ci'))
         return menu
 
-    def manage_svn(self, clear=True):
+    def manage_svn(self, clear=True, cache=False):
+        self.cache_breadcrumbs(cache=cache)
         while True:
             self.append_breadcrumb('repository commands')
             menu = self.make_svn_menu()
@@ -270,6 +271,7 @@ class ScoreProxy(PackageProxy):
                 break
             self.pop_breadcrumb()
         self.pop_breadcrumb()
+        self.restore_breadcrumbs(cache=cache)
 
     def profile_package_structure(self):
         if not os.path.exists(self.directory_name):
@@ -283,8 +285,9 @@ class ScoreProxy(PackageProxy):
             lines.append('{} {}'.format(initializer.ljust(80), os.path.exists(initializer)))
         self.display(lines)
 
-    def run(self, user_input=None, clear=True):
+    def run(self, user_input=None, clear=True, cache=False):
         self.assign_user_input(user_input=user_input)
+        self.cache_breadcrumbs(cache=cache)
         while True:
             self.append_breadcrumb()
             menu = self.make_main_menu()
@@ -307,6 +310,7 @@ class ScoreProxy(PackageProxy):
                 break
             self.pop_breadcrumb()
         self.pop_breadcrumb()
+        self.restore_breadcrumbs(cache=cache)
 
     def summarize_chunks(self):
         chunks = self.chunk_wrangler.package_underscored_names

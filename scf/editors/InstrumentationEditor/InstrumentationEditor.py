@@ -128,8 +128,9 @@ class InstrumentationEditor(InteractiveEditor):
         self.target.performers.remove(performer)
         self.target.performers.insert(new_index, performer)
 
-    def select_performer_names_interactively(self, clear=True):
+    def select_performer_names_interactively(self, clear=True, cache=False):
         from abjad.tools import scoretools
+        self.cache_breadcrumbs(cache=cache)
         menu, section = self.make_new_menu(where=self.where(), is_numbered=True, is_ranged=True)
         performer_names, performer_abbreviations = [], []
         performer_pairs = scoretools.list_primary_performer_names()
@@ -141,13 +142,14 @@ class InstrumentationEditor(InteractiveEditor):
         while True:
             self.append_breadcrumb('add performers')
             result = menu.run(clear=clear)
-            #print 'result: {!r}'.format(result)
             if self.backtrack():
                 self.pop_breadcrumb()
+                self.restore_breadcrumbs(cache=cache)
                 return
             elif not result:
                 self.pop_breadcrumb()
                 continue
             else:
                 self.pop_breadcrumb()
+                self.restore_breadcrumbs(cache=cache)
                 return result

@@ -81,8 +81,9 @@ class StylesheetProxy(FileProxy):
         section.append(('vi', 'vi stylesheet'))
         return menu
 
-    def run(self, user_input=None, clear=True):
+    def run(self, user_input=None, clear=True, cache=False):
         self.assign_user_input(user_input=user_input)
+        self.cache_breadcrumbs(cache=cache)
         while True:
             self.append_breadcrumb()
             menu = self.make_main_menu()
@@ -97,3 +98,4 @@ class StylesheetProxy(FileProxy):
                 break
             self.pop_breadcrumb()
         self.pop_breadcrumb()
+        self.restore_breadcrumbs(cache=cache)
