@@ -46,7 +46,7 @@ class DirectoryProxy(SCFObject):
     
     ### PUBLIC METHODS ###
 
-    def create_directory(self):
+    def make_directory(self):
         os.mkdir(self.directory_name)
 
     def get_directory_name_interactively(self):

@@ -25,7 +25,7 @@ class MaterialWrangler(PackageWrangler):
     ### PUBLIC METHODS ###
 
     # TODO: write test
-    def create_data_package_interactively(self):
+    def make_data_package_interactively(self):
         self.preserve_backtracking = True
         material_package_importable_name = self.get_new_material_package_importable_name_interactively()
         self.preserve_backtracking = False
@@ -33,10 +33,10 @@ class MaterialWrangler(PackageWrangler):
             return
         user_input_handler_class_name = None
         should_have_illustration = False
-        self.create_material_package(material_package_importable_name, user_input_handler_class_name, should_have_illustration)
+        self.make_material_package(material_package_importable_name, user_input_handler_class_name, should_have_illustration)
 
     # TODO: write test
-    def create_editable_material_package_interactively(self):
+    def make_editable_material_package_interactively(self):
         self.preserve_backtracking = True
         material_package_importable_name = self.get_new_material_package_importable_name_interactively()
         self.preserve_backtracking = False
@@ -53,17 +53,17 @@ class MaterialWrangler(PackageWrangler):
             return
         # TODO: set following attribute by editor automatically
         should_have_illustration = True
-        self.create_material_package(material_package_importable_name, user_input_handler_class_name, should_have_illustration)
+        self.make_material_package(material_package_importable_name, user_input_handler_class_name, should_have_illustration)
 
     # TODO: write test
-    def create_handmade_material_package_interactively(self):
+    def make_handmade_material_package_interactively(self):
         material_package_importable_name = self.get_new_material_package_importable_name_interactively()
         user_input_handler_class_name = None
         should_have_illustration = True
-        self.create_material_package(material_package_importable_name, user_input_handler_class_name, should_have_illustration)
+        self.make_material_package(material_package_importable_name, user_input_handler_class_name, should_have_illustration)
 
     # TODO: write test
-    def create_material_package(self, material_package_importable_name, user_input_handler_class_name, 
+    def make_material_package(self, material_package_importable_name, user_input_handler_class_name, 
         should_have_illustration, prompt=True):
         '''True on success.'''
         assert iotools.is_underscore_delimited_lowercase_package_name(material_package_importable_name)
@@ -123,11 +123,11 @@ class MaterialWrangler(PackageWrangler):
 
     def handle_main_menu_result(self, result):
         if result == 'd':
-            self.create_data_package_interactively()
+            self.make_data_package_interactively()
         elif result == 'h':
-            self.create_handmade_material_package_interactively()
+            self.make_handmade_material_package_interactively()
         elif result == 'e':
-            self.create_editable_material_package_interactively()
+            self.make_editable_material_package_interactively()
         else:
             material_proxy = self.get_package_proxy(result)
             material_proxy.run()

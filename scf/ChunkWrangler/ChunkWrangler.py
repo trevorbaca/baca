@@ -17,9 +17,9 @@ class ChunkWrangler(PackageWrangler):
 
     ### PUBLIC METHODS ###
 
-    def create_chunk_interactively(self):
+    def make_chunk_interactively(self):
         chunk_proxy = ChunkProxy(session=self.session)
-        chunk_proxy.create_chunk_interactively()
+        chunk_proxy.make_chunk_interactively()
 
     def get_package_proxy(self, package_importable_name):
         return ChunkProxy(package_importable_name, session=self.session)
@@ -27,7 +27,7 @@ class ChunkWrangler(PackageWrangler):
     def handle_main_menu_result(self, result):
         assert isinstance(result, str)
         if result == 'new':
-            self.create_chunk_interactively()
+            self.make_chunk_interactively()
         else:
             chunk_proxy = self.get_package_proxy(result)
             chunk_proxy.run()

@@ -140,10 +140,10 @@ class ScoreProxy(PackageProxy):
 
     ### PUBLIC METHODS ###
 
-    def create_package_structure(self):
+    def make_package_structure(self):
         self.fix_score_package_directory_structure(is_interactive=False)
 
-    def create_score_interactively(self):
+    def make_score_interactively(self):
         self.print_not_implemented()
 
     def edit_forces_tagline_interactively(self):

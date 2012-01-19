@@ -68,28 +68,26 @@ TODO
 
 30. Implement measuretools.all_are_measures() and other checkers.
 
-31. Change 'create_' everywhere to 'make_'.
+31. Encapsulate user input getter subprocedures.
 
-32. Encapsulate user input getter subprocedures.
+32. Make 'ls' hide or remove .pyc files.
 
-33. Make 'ls' hide or remove .pyc files.
+33. Make 'edit initializer' read only.
 
-34. Make 'edit initializer' read only.
+34. Author is-alphabetized script.
 
-35. Author is-alphabetized script.
+35. Port output change awareness.
 
-36. Port output change awareness.
+36. Make user input handler creation work.
 
-37. Make user input handler creation work.
+37. Change 'user_input' to 'user_input_wrapper'.
 
-38. Change 'user_input' to 'user_input_wrapper'.
+38. Make some zagged pitch-classes.
 
-39. Make some zagged pitch-classes.
+39. Implement RangeInventory in Abjad. Integrate into SCF.
 
-40. Implement RangeInventory in Abjad. Integrate into SCF.
+40. Define range inventories for all scores.
 
-41. Define range inventories for all scores.
+41. Remove three blank lines at head of data-only output material module.
 
-42. Remove three blank lines at head of data-only output material module.
-
-43. Author read-only attribute tests.
+42. Author read-only attribute tests.

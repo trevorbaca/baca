@@ -27,7 +27,7 @@ class StylesheetWrangler(PackageWrangler):
     ### PUBLIC METHODS ###
 
     # TODO: write test
-    def create_new_stylesheet_interactively(self):
+    def make_new_stylesheet_interactively(self):
         getter = self.make_new_getter()
         getter.append_string('stylesheet name')
         stylesheet_name = getter.run()
@@ -43,7 +43,7 @@ class StylesheetWrangler(PackageWrangler):
 
     def handle_main_menu_result(self, result):
         if result == 'new':
-            self.create_new_stylesheet_interactively()
+            self.make_new_stylesheet_interactively()
         else:
             stylesheet_file_name = os.path.join(self.stylesheets_directory, result)  
             stylesheet_proxy = StylesheetProxy(stylesheet_file_name, session=self.session)

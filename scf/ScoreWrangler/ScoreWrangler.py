@@ -40,9 +40,9 @@ class ScoreWrangler(PackageWrangler):
 
     ### PUBLIC METHODS ###
 
-    def create_score_package_interactively(self, score_package_importable_name):
+    def make_score_package_interactively(self, score_package_importable_name):
         score_proxy = ScoreProxy(session=self.session)
-        score_proxy.create_score_package_creation_wizard()
+        score_proxy.make_score_package_creation_wizard()
 
     def fix_score_package_structures(self):
         for score_proxy in self.score_proxies_to_display:
