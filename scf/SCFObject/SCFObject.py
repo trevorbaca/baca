@@ -139,7 +139,7 @@ class SCFObject(object):
         if self.session.is_displayable:
             iotools.clear_terminal()
 
-    def conditionally_display_lines(self, lines, capitalize_first_character=True):
+    def display(self, lines, capitalize_first_character=True):
         assert isinstance(lines, list)
         if not self.session.hide_next_redraw:
             if capitalize_first_character:
@@ -326,7 +326,7 @@ class SCFObject(object):
         lines = []
         lines.append('not yet implemented.')
         lines.append('')
-        self.conditionally_display_lines(lines)
+        self.display(lines)
         self.proceed()
 
     def proceed(self, lines=None):
@@ -334,7 +334,7 @@ class SCFObject(object):
         assert isinstance(lines, (tuple, list))
         if lines:
             lines.append('')
-            self.conditionally_display_lines(lines)
+            self.display(lines)
         response = self.handle_raw_input('press return to continue.', include_chevron=False)
         self.conditionally_clear_terminal()
 

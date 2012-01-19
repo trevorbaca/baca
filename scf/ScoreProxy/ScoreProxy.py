@@ -281,7 +281,7 @@ class ScoreProxy(PackageProxy):
             lines.append('{} {}'.format(subdirectory_name.ljust(80), os.path.exists(subdirectory_name)))
         for initializer in self.score_initializer_file_names:
             lines.append('{} {}'.format(initializer.ljust(80), os.path.exists(initializer)))
-        self.conditionally_display_lines(lines)
+        self.display(lines)
 
     def run(self, user_input=None):
         self.assign_user_input(user_input=user_input)
@@ -318,7 +318,7 @@ class ScoreProxy(PackageProxy):
         for chunk in chunks:
             lines.append('{}{}'.format(self.make_tab(2), chunk))
         lines.append('')
-        self.conditionally_display_lines(lines)
+        self.display(lines)
 
     def summarize_materials(self):
         materials = self.material_wrangler.package_spaced_names
@@ -331,4 +331,4 @@ class ScoreProxy(PackageProxy):
             lines.append('')
         for i, material in enumerate(materials):
             lines.append('{}({}) {}'.format(self.make_tab(1), i + 1, material))
-        self.conditionally_display_lines(lines)
+        self.display(lines)

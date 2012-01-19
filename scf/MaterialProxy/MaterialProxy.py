@@ -639,7 +639,7 @@ class MaterialProxy(PackageProxy):
 
     def rename_material(self):
         line = 'current material name: {}'.format(self.material_underscored_name)
-        self.conditionally_display_lines([line])
+        self.display([line])
         getter = self.make_new_getter(where=self.where())
         getter.append_string('new material name')
         new_material_spaced_name = getter.run()
@@ -650,7 +650,7 @@ class MaterialProxy(PackageProxy):
         lines.append('current material name: {}'.format(self.material_underscored_name))
         lines.append('new material name:     {}'.format(new_material_underscored_name))
         lines.append('')
-        self.conditionally_display_lines(lines)
+        self.display(lines)
         if not self.confirm():
             return
         if self.is_in_repository:
@@ -713,11 +713,11 @@ class MaterialProxy(PackageProxy):
 
     def run_abjad_on_material_definition(self):
         os.system('abjad {}'.format(self.material_definition_file_name))
-        self.conditionally_display_lines([''])
+        self.display([''])
 
     def run_abjad_on_illustration_builder(self):
         os.system('abjad {}'.format(self.illustration_builder_file_name))
-        self.conditionally_display_lines([''])
+        self.display([''])
 
     def run_python_on_material_definition(self, prompt=True):
         os.system('python {}'.format(self.material_definition_file_name))

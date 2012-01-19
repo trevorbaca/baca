@@ -9,7 +9,7 @@ class UserInputHandlingMaterialProxy(MaterialProxy):
     def clear_user_input_wrapper(self, prompt=True):
         user_input_wrapper = self.user_input_wrapper
         if user_input_wrapper.is_empty:
-            self.conditionally_display_lines(lines=['user input already empty.', ''])
+            self.display(lines=['user input already empty.', ''])
             self.proceed()
         else:
             user_input_wrapper.clear()
@@ -105,7 +105,7 @@ class UserInputHandlingMaterialProxy(MaterialProxy):
             line = '    {}: {!r}'.format(key.replace('_', ' '), value)
             lines.append(line)
         lines.append('')
-        self.conditionally_display_lines(lines=lines)
+        self.display(lines=lines)
         if prompt:
             self.proceed()
 

@@ -71,7 +71,7 @@ class ScoreWrangler(PackageWrangler):
         if self.backtrack():
             return
         line = 'commit message will be: "{}"\n'.format(commit_message)
-        self.conditionally_display_lines([line])
+        self.display([line])
         if not self.confirm():
             return
         for score_proxy in self.score_proxies_to_display:

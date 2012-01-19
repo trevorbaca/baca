@@ -52,50 +52,48 @@ TODO
 
 21. Figure out why 'red' isn't good enough to select 'red_pcs', maybe redraw-related.
 
-22. Change 'conditionally_display_lines' to just 'display'.
+22. Change alphabeticization of scores in score selection menu.
 
-23. Change alphabeticization of scores in score selection menu.
+23. Find a way to dynamically add (default) indicator to default menu entries.
 
-24. Find a way to dynamically add (default) indicator to default menu entries.
+24. Implement initializer file proxy to decongest package proxy.
 
-25. Implement initializer file proxy to decongest package proxy.
+25. Implement user input module file proxy.
 
-26. Implement user input module file proxy.
+26. Prevent the creation of 'baca.materials.h' package.
 
-27. Prevent the creation of 'baca.materials.h' package.
+27. Do away with local stylesheets.
 
-28. Do away with local stylesheets.
+28. Consider keyword backtracking protocol to replace two-line backtracking protocol.
 
-29. Consider keyword backtracking protocol to replace two-line backtracking protocol.
+29. Implement something to tour all materials everywhere and inspect in sequence.
 
-30. Implement something to tour all materials everywhere and inspect in sequence.
+30. Implement measuretools.all_are_measures() and other checkers.
 
-31. Implement measuretools.all_are_measures() and other checkers.
+31. Extend self.proceed(line(s), prompt=True) with 'prompt' keyword.
 
-32. Extend self.proceed(line(s), prompt=True) with 'prompt' keyword.
+32. Change 'create_' everywhere to 'make_'.
 
-33. Change 'create_' everywhere to 'make_'.
+33. Encapsulate user input getter subprocedures.
 
-34. Encapsulate user input getter subprocedures.
+34. Make 'ls' hide or remove .pyc files.
 
-35. Make 'ls' hide or remove .pyc files.
+35. Make 'edit initializer' read only.
 
-36. Make 'edit initializer' read only.
+36. Author is-alphabetized script.
 
-37. Author is-alphabetized script.
+37. Port output change awareness.
 
-38. Port output change awareness.
+38. Make user input handler creation work.
 
-39. Make user input handler creation work.
+39. Change 'user_input' to 'user_input_wrapper'.
 
-40. Change 'user_input' to 'user_input_wrapper'.
+40. Make some zagged pitch-classes.
 
-41. Make some zagged pitch-classes.
+41. Implement RangeInventory in Abjad. Integrate into SCF.
 
-42. Implement RangeInventory in Abjad. Integrate into SCF.
+42. Define range inventories for all scores.
 
-43. Define range inventories for all scores.
+43. Remove three blank lines at head of data-only output material module.
 
-44. Remove three blank lines at head of data-only output material module.
-
-45. Author read-only attribute tests.
+44. Author read-only attribute tests.

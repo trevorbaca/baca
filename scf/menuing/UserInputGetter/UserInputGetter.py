@@ -207,7 +207,7 @@ class UserInputGetter(MenuObject):
         else:
             lines.append('help string not available.')
         lines.append('')
-        self.conditionally_display_lines(lines)
+        self.display(lines)
 
     def evaluate_test(self, test, argument):
         if isinstance(test, types.TypeType):
@@ -244,7 +244,7 @@ class UserInputGetter(MenuObject):
                                 lines = []
                                 lines.append(self.helps[self.prompt_index])
                                 lines.append('')
-                                self.conditionally_display_lines(lines)
+                                self.display(lines)
                             return
             else:
                 try:
@@ -262,7 +262,7 @@ class UserInputGetter(MenuObject):
                     lines = []
                     lines.append(self.helps[self.prompt_index])
                     lines.append('')
-                    self.conditionally_display_lines(lines)
+                    self.display(lines)
         else:
             self.values.append(value)
             self.prompt_index = self.prompt_index + 1
