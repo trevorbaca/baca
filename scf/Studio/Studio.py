@@ -85,7 +85,7 @@ class Studio(SCFObject):
             self.print_not_implemented()
         elif result == 'm':
             breadcrumb = self.pop_breadcrumb()
-            self.global_proxy.material_wrangler.run(head='baca')
+            self.global_proxy.material_wrangler.run(head=self.studio_package_importable_name)
             self.append_breadcrumb(breadcrumb)
         elif result == 'mb':
             self.session.scores_to_show = 'mothballed'

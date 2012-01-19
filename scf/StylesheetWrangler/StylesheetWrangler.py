@@ -7,7 +7,7 @@ import os
 class StylesheetWrangler(PackageWrangler):
 
     def __init__(self, session=None):
-        PackageWrangler.__init__(self, 'baca.scf.stylesheets', session=session)
+        PackageWrangler.__init__(self, self.stylesheets_package_importable_name, session=session)
 
     ### READ-ONLY PUBLIC ATTRIBUTES ###
 

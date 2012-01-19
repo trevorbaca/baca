@@ -38,8 +38,23 @@ class SCFObject(object):
 
     # TODO: write test
     @property
+    def sketches_package_importable_name(self):
+        return '.'.join([self.studio_package_importable_name, 'sketches'])
+
+    # TODO: write test
+    @property
     def studio_directory_name(self):
         return self.package_importable_name_to_directory_name(self.studio_package_importable_name)
+
+    # TODO: write test
+    @property
+    def studio_materials_package_importable_name(self):
+        return '.'.join([self.studio_package_importable_name, 'materials'])
+
+    # TODO: write test
+    @property
+    def stylesheets_package_importable_name(self):
+        '.'.join([self.scf_package_importable_name, 'stylesheets'])
 
     @property
     def help_item_width(self):
@@ -58,7 +73,7 @@ class SCFObject(object):
     # TODO: write test
     @property
     def materialproxies_package_importable_name(self):
-        return '{}.materialproxies'.format(self.scf_package_importable_name)
+        return '.'.join([self.scf_package_importable_name, 'materialproxies'])
 
     # TODO: write test
     @property

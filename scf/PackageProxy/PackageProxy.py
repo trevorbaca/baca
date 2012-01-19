@@ -87,7 +87,7 @@ class PackageProxy(DirectoryProxy):
     @property
     def purview_name(self):
         if self.score_package_short_name is None:
-            return 'baca'
+            return self.studio_package_importable_name
         else:
             return self.score_package_short_name
 
@@ -101,7 +101,7 @@ class PackageProxy(DirectoryProxy):
     # TODO: write test
     @property
     def score_package_short_name(self):
-        if not self.package_importable_name.startswith('baca'):
+        if not self.package_importable_name.startswith(self.studio_package_importable_name):
             return self.package_importable_name.split('.')[0]
 
     ### PUBLIC METHODS ###
@@ -223,7 +223,7 @@ class PackageProxy(DirectoryProxy):
         import baca
         if package_importable_name is None:
             return
-        elif package_importable_name.split('.')[0] == 'baca':
+        elif package_importable_name.split('.')[0] == self.studio_package_importable_name:
             return baca.scf.GlobalProxy()
         elif package_importable_name.split('.')[0] in os.listdir(os.environ.get('SCORES')):
             return baca.scf.ScoreProxy(package_importable_name.split('.')[0])
@@ -305,8 +305,9 @@ class PackageProxy(DirectoryProxy):
             return
         self.package_spaced_name = result
 
+    # TODO: rename without hardcoding
     def unimport_baca_package(self):
-        self.remove_package_importable_name_from_sys_modules('baca')
+        self.remove_package_importable_name_from_sys_modules(self.studio_package_importable_name)
 
     def unimport_package(self):
         self.remove_package_importable_name_from_sys_modules(self.package_importable_name)

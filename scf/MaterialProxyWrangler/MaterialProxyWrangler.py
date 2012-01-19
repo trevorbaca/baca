@@ -8,7 +8,7 @@ import os
 class MaterialProxyWrangler(PackageWrangler):
 
     def __init__(self, session=None):
-        PackageWrangler.__init__(self, 'baca.scf.materialproxies', session=session)
+        PackageWrangler.__init__(self, self.materialproxies_package_importable_name, session=session)
 
     ### READ-ONLY PUBLIC ATTRIBUTES ###
 
@@ -19,7 +19,7 @@ class MaterialProxyWrangler(PackageWrangler):
     @property
     def material_proxy_spaced_class_names(self):
         result = []
-        for name in self.list_wrangled_package_short_names(head='baca'):
+        for name in self.list_wrangled_package_short_names(head=self.studio_package_importable_name):
             spaced_class_name = iotools.uppercamelcase_to_space_delimited_lowercase(name)
             result.append(spaced_class_name)
         return result

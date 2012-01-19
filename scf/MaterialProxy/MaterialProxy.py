@@ -230,7 +230,7 @@ class MaterialProxy(PackageProxy):
     @property
     def score_package_short_name(self):
         if self.package_importable_name is not None:
-            if self.package_importable_name.startswith('baca'):
+            if self.package_importable_name.startswith(self.studio_package_importable_name):
                 return self.package_importable_name.split('.')[0]
 
     @property

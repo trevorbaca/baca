@@ -9,7 +9,8 @@ class MaterialWrangler(PackageWrangler):
 
     def __init__(self, session=None):
         import baca
-        PackageWrangler.__init__(self, 'baca.materials', 'mus.materials', session=session)
+        PackageWrangler.__init__(self, 
+            self.studio_materials_package_importable_name, 'mus.materials', session=session)
         self._material_proxy_wrangler = baca.scf.MaterialProxyWrangler(session=self.session)
 
     ### READ-ONLY PUBLIC ATTRIBUTES ###
@@ -148,7 +149,7 @@ class MaterialWrangler(PackageWrangler):
         assert isinstance(purview_name, str)
         result = []
         result.append(purview_name)
-        if not purview_name == 'baca':
+        if not purview_name == self.studio_package_importable_name:
             result.append('mus')
         result.append('materials')
         result = '.'.join(result)
