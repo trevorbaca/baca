@@ -37,12 +37,12 @@ class ScoreProxy(PackageProxy):
         return self.get_tag('composer')
 
     @property
-    def dist_proxy(self):
-        return self._dist_proxy
-
-    @property
     def dist_pdf_directory_name(self):
         return os.path.join(self.dist_proxy.directory_name, 'pdf')
+
+    @property
+    def dist_proxy(self):
+        return self._dist_proxy
 
     @property
     def etc_proxy(self):
@@ -140,10 +140,10 @@ class ScoreProxy(PackageProxy):
 
     ### PUBLIC METHODS ###
 
-    def create_package_structure(self):
+    def make_package_structure(self):
         self.fix_score_package_directory_structure(is_interactive=False)
 
-    def create_score_interactively(self):
+    def make_score_interactively(self):
         self.print_not_implemented()
 
     def edit_forces_tagline_interactively(self):
@@ -258,11 +258,12 @@ class ScoreProxy(PackageProxy):
         section.append(('ci', 'ci'))
         return menu
 
-    def manage_svn(self):
+    def manage_svn(self, clear=True, cache=False):
+        self.cache_breadcrumbs(cache=cache)
         while True:
-            self.append_breadcrumb('repository commands')
+            self.push_breadcrumb('repository commands')
             menu = self.make_svn_menu()
-            result = menu.run()
+            result = menu.run(clear=clear)
             if self.backtrack():
                 break
             self.handle_svn_menu_result(result)
@@ -270,6 +271,7 @@ class ScoreProxy(PackageProxy):
                 break
             self.pop_breadcrumb()
         self.pop_breadcrumb()
+        self.restore_breadcrumbs(cache=cache)
 
     def profile_package_structure(self):
         if not os.path.exists(self.directory_name):
@@ -281,14 +283,15 @@ class ScoreProxy(PackageProxy):
             lines.append('{} {}'.format(subdirectory_name.ljust(80), os.path.exists(subdirectory_name)))
         for initializer in self.score_initializer_file_names:
             lines.append('{} {}'.format(initializer.ljust(80), os.path.exists(initializer)))
-        self.conditionally_display_lines(lines)
+        self.display(lines)
 
-    def run(self, user_input=None):
+    def run(self, user_input=None, clear=True, cache=False):
         self.assign_user_input(user_input=user_input)
+        self.cache_breadcrumbs(cache=cache)
         while True:
-            self.append_breadcrumb()
+            self.push_breadcrumb()
             menu = self.make_main_menu()
-            result = menu.run()
+            result = menu.run(clear=clear)
             if self.session.is_backtracking_to_score:
                 self.session.is_backtracking_to_score = False
                 self.pop_breadcrumb() 
@@ -307,6 +310,7 @@ class ScoreProxy(PackageProxy):
                 break
             self.pop_breadcrumb()
         self.pop_breadcrumb()
+        self.restore_breadcrumbs(cache=cache)
 
     def summarize_chunks(self):
         chunks = self.chunk_wrangler.package_underscored_names
@@ -318,7 +322,7 @@ class ScoreProxy(PackageProxy):
         for chunk in chunks:
             lines.append('{}{}'.format(self.make_tab(2), chunk))
         lines.append('')
-        self.conditionally_display_lines(lines)
+        self.display(lines)
 
     def summarize_materials(self):
         materials = self.material_wrangler.package_spaced_names
@@ -331,4 +335,4 @@ class ScoreProxy(PackageProxy):
             lines.append('')
         for i, material in enumerate(materials):
             lines.append('{}({}) {}'.format(self.make_tab(1), i + 1, material))
-        self.conditionally_display_lines(lines)
+        self.display(lines)

@@ -4,11 +4,11 @@ from baca.scf.Transcript import Transcript
 class Session(object):
     
     def __init__(self, user_input=None):
+        self._backtracking_stack = []
+        self._breadcrumb_stack = []
         self._command_history = []
         self._complete_transcript = Transcript()
         self._session_once_had_user_input = False
-        self.preserve_backtracking = False
-        self.breadcrumbs = []
         self.current_score_package_short_name = None
         self.display_pitch_ranges_with_numbered_pitches = False
         self.dump_transcript = False
@@ -20,6 +20,7 @@ class Session(object):
         self.is_navigating_to_next_score = False
         self.is_navigating_to_prev_score = False
         self.last_command_was_composite = False
+        self.nonnumbered_menu_sections_are_hidden = False
         self.scores_to_show = 'active'
         self.transcribe_next_command = True
         self.use_current_user_input_values_as_default = False
@@ -46,6 +47,14 @@ class Session(object):
     ### READ-ONLY PUBLIC ATTRIBUTES ###
 
     @property
+    def backtracking_stack(self):
+        return self._backtracking_stack
+
+    @property
+    def breadcrumb_stack(self):
+        return self._breadcrumb_stack
+
+    @property
     def command_history(self):
         return self._command_history
 
@@ -61,7 +70,7 @@ class Session(object):
     def formatted_attributes(self):
         result = []
         result.append('initial_user_input: {!r}'.format(self.initial_user_input))
-        result.append('breadcrumbs: {!r}'.format(self.breadcrumbs))
+        result.append('breadcrumbs: {!r}'.format(self.breadcrumb_stack))
         result.append('scores_to_show: {!r}'.format(self.scores_to_show))
         result.append('user_input: {!r}'.format(self.user_input))
         return result
@@ -90,8 +99,8 @@ class Session(object):
 
     @property
     def menu_header(self):
-        if self.breadcrumbs:
-            return ' - '.join(self.breadcrumbs)
+        if self.breadcrumb_stack:
+            return ' - '.join(self.breadcrumb_stack)
         else:
             return ''
 
@@ -102,6 +111,15 @@ class Session(object):
     @property
     def session_once_had_user_input(self):
         return self._session_once_had_user_input
+
+    @apply
+    def transcribe_next_command():
+        def fget(self):
+            return self._transcribe_next_command
+        def fset(self, transcribe_next_command):
+            assert isinstance(transcribe_next_command, bool)
+            self._transcribe_next_command = transcribe_next_command
+        return property(**locals())
 
     @property
     def transcript(self):
@@ -114,25 +132,7 @@ class Session(object):
                 return True
         return False
 
-    @apply
-    def transcribe_next_command():
-        def fget(self):
-            return self._transcribe_next_command
-        def fset(self, transcribe_next_command):
-            assert isinstance(transcribe_next_command, bool)
-            self._transcribe_next_command = transcribe_next_command
-        return property(**locals())
-
     ### READ / WRITE PUBLIC METHODS ###
-
-    @apply
-    def preserve_backtracking():
-        def fget(self):
-            return self._preserve_backtracking
-        def fset(self, preserve_backtracking):
-            assert isinstance(preserve_backtracking, bool)
-            self._preserve_backtracking = preserve_backtracking
-        return property(**locals())
 
     @apply
     def current_score_package_short_name():
@@ -189,6 +189,24 @@ class Session(object):
         return property(**locals())
 
     @apply
+    def nonnumbered_menu_sections_are_hidden():
+        def fget(self):
+            return self._nonnumbered_menu_sections_are_hidden
+        def fset(self, nonnumbered_menu_sections_are_hidden):
+            assert isinstance(nonnumbered_menu_sections_are_hidden, bool)
+            self._nonnumbered_menu_sections_are_hidden = nonnumbered_menu_sections_are_hidden
+        return property(**locals())
+
+    @apply
+    def use_current_user_input_values_as_default():
+        def fget(self):
+            return self._use_current_user_input_values_as_default
+        def fset(self, use_current_user_input_values_as_default):
+            assert isinstance(use_current_user_input_values_as_default, bool)
+            self._use_current_user_input_values_as_default = use_current_user_input_values_as_default
+        return property(**locals())
+
+    @apply
     def user_input():
         def fget(self):
             return self._user_input
@@ -208,15 +226,6 @@ class Session(object):
             self._user_specified_quit = user_specified_quit
         return property(**locals())
 
-    @apply
-    def use_current_user_input_values_as_default():
-        def fget(self):
-            return self._use_current_user_input_values_as_default
-        def fset(self, use_current_user_input_values_as_default):
-            assert isinstance(use_current_user_input_values_as_default, bool)
-            self._use_current_user_input_values_as_default = use_current_user_input_values_as_default
-        return property(**locals())
-
     ### PUBLIC METHODS ###
 
     def backtrack(self):
@@ -226,9 +235,9 @@ class Session(object):
             return True
         elif self.is_backtracking_to_score:
             return True
-        elif self.is_backtracking_locally and self.preserve_backtracking:
+        elif self.is_backtracking_locally and self.backtracking_stack:
             return True
-        elif self.is_backtracking_locally and not self.preserve_backtracking:
+        elif self.is_backtracking_locally and not self.backtracking_stack:
             self.is_backtracking_locally = False
             return True
             

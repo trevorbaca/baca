@@ -1,14 +1,13 @@
 from abjad.tools import iotools
 from abjad.tools import mathtools
-from baca.scf.menuing.MenuObject import MenuObject
 from baca.scf.menuing.MenuSection import MenuSection
+from baca.scf.menuing.MenuSectionAggregator import MenuSectionAggregator
 
 
-class Menu(MenuObject):
+class Menu(MenuSectionAggregator):
 
     def __init__(self, session=None, where=None):
-        MenuObject.__init__(self, session=session, where=where)
-        self._sections = []
+        MenuSectionAggregator.__init__(self, session=session, where=where)
         self.sections.append(self.make_default_hidden_section(session=session, where=where))
         self.explicit_title = None
 
@@ -102,15 +101,14 @@ class Menu(MenuObject):
         menu_lines = []
         for section in self.sections:
             section_menu_lines = section.make_menu_lines()
+            #if not section.is_hidden:
+            #    menu_lines.extend(section_menu_lines)
             if not section.is_hidden:
-                menu_lines.extend(section_menu_lines)
+                if not self.session.nonnumbered_menu_sections_are_hidden or section.is_numbered:
+                    menu_lines.extend(section_menu_lines)
         if self.hide_current_run:
             menu_lines = []
         return menu_lines
-
-    @property
-    def sections(self):
-        return self._sections
 
     @property
     def tokens(self):
@@ -156,7 +154,7 @@ class Menu(MenuObject):
 
     def conditionally_display_menu(self):
         self.conditionally_clear_terminal()
-        self.conditionally_display_lines(self.menu_lines, capitalize_first_character=False)
+        self.display(self.menu_lines, capitalize_first_character=False)
         user_response = self.handle_raw_input_with_default('SCF', default=self.prompt_default)
         user_input = self.split_multipart_user_response(user_response)
         directive = self.change_user_input_to_directive(user_input)
@@ -193,18 +191,17 @@ class Menu(MenuObject):
         return section
 
         
-    def run(self, should_clear_terminal=True, user_input=None):
+    def run(self, clear=True, user_input=None):
         self.assign_user_input(user_input=user_input)
-        #should_clear_terminal, hide_current_run = True, False
-        should_clear_terminal, hide_current_run = should_clear_terminal, False
+        clear, hide_current_run = clear, False
         while True:
-            self.should_clear_terminal, self.hide_current_run = should_clear_terminal, hide_current_run
-            should_clear_terminal, hide_current_run = False, True
+            self.should_clear_terminal, self.hide_current_run = clear, hide_current_run
+            clear, hide_current_run = False, True
             result = self.conditionally_display_menu()
             if self.session.is_complete:
                 break
             elif result == 'r':
-                should_clear_terminal, hide_current_run = True, False
+                clear, hide_current_run = True, False
             else:
                 break
         return result
@@ -244,6 +241,12 @@ class Menu(MenuObject):
             if expr.endswith(' (default)'):
                 expr = expr.replace(' (default)', '')
             return expr
+
+    def toggle_menu(self):
+        if self.session.nonnumbered_menu_sections_are_hidden:
+            self.session.nonnumbered_menu_sections_are_hidden = False
+        else:
+            self.session.nonnumbered_menu_sections_are_hidden = True
 
     def user_enters_argument_range(self, user_input):
         if ',' in user_input:

@@ -6,16 +6,17 @@ class UserInputHandlingMaterialProxy(MaterialProxy):
 
     ### PUBLIC METHODS ###
 
-    def clear_user_input_wrapper(self, prompt_proceed=True):
+    def clear_user_input_wrapper(self, prompt=True):
         user_input_wrapper = self.user_input_wrapper
         if user_input_wrapper.is_empty:
-            self.conditionally_display_lines(lines=['user input already empty.', ''])
+            lines=['user input already empty.', '']
+            self.display(lines)
             self.proceed()
         else:
             user_input_wrapper.clear()
             self.write_user_input_wrapper_to_disk(user_input_wrapper)
-            if prompt_proceed:
-                self.proceed(lines=['user input wrapper cleared.'])
+            lines=['user input wrapper cleared.']
+            self.proceed(lines, prompt=prompt)
 
     def edit_user_input_at_number(self, number):
         user_input_wrapper = self.user_input_wrapper
@@ -57,23 +58,21 @@ class UserInputHandlingMaterialProxy(MaterialProxy):
         result.extend(user_input_wrapper.formatted_lines)
         return result
 
-    def load_user_input_wrapper_demo_values(self, prompt_proceed=True):
+    def load_user_input_wrapper_demo_values(self, prompt=True):
         user_input_wrapper = self.user_input_wrapper
         user_input_demo_values = copy.deepcopy(type(self).user_input_demo_values)
         for key, value in user_input_demo_values:
             user_input_wrapper[key] = value
         self.write_user_input_wrapper_to_disk(user_input_wrapper) 
-        if prompt_proceed:
-            self.proceed(lines=['demo values loaded.'])
+        line = 'demo values loaded.'
+        self.proceed(line, prompt=prompt)
 
     def make_illustration(self):
         output_material = self.import_output_material_from_output_material_module()
-        self.debug(output_material, 1)
         illustration = self.illustration_maker(output_material)
-        self.debug(illustration, 2)
         return illustration
 
-    def make_main_menu_for_material_made_with_editor(self):
+    def make_main_menu_for_material_made_with_user_input_handler(self):
         menu, hidden_section = self.make_new_menu(where=self.where(), is_hidden=True)
         self.make_main_menu_section_for_user_input_module(menu, hidden_section)
         self.make_main_menu_section_for_output_material(menu, hidden_section)
@@ -95,21 +94,37 @@ class UserInputHandlingMaterialProxy(MaterialProxy):
         assert type(self).output_material_checker(output_material)
         return output_material
 
-    # TODO: implement
-    def populate_user_input_wrapper(self, prompt_proceed=True):
-        self.print_not_implemented()
+    # TODO: make backtracking work
+    def populate_user_input_wrapper(self, prompt=True):
+        total_elements = len(self.user_input_wrapper)
+        getter = self.make_new_getter(where=self.where())
+        getter.append_integer_in_closed_range('start at element number', 1, total_elements)
+        self.push_backtracking()
+        current_element_number = getter.run()
+        self.pop_backtracking()
+        if self.backtrack():
+            return
+        current_element_index = current_element_number - 1
+        while True:
+            self.push_backtracking()
+            self.edit_user_input_at_number(current_element_number)
+            self.pop_backtracking()
+            if self.backtrack():
+                return
+            current_element_index += 1
+            current_element_index %= total_elements
+            current_element_number = current_element_index + 1
 
-    def show_user_input_demo_values(self, prompt_proceed=True):
+    def show_user_input_demo_values(self, prompt=True):
         lines = []
         for i, (key, value) in enumerate(self.user_input_demo_values):
             line = '    {}: {!r}'.format(key.replace('_', ' '), value)
             lines.append(line)
         lines.append('')
-        self.conditionally_display_lines(lines=lines)
-        if prompt_proceed:
-            self.proceed()
+        self.display(lines)
+        self.proceed(prompt=prompt)
 
-    def write_stub_user_input_module_to_disk(self, prompt_proceed=True):
+    def write_stub_user_input_module_to_disk(self, prompt=True):
         user_input_module = file(self.user_input_module_file_name, 'w')
         lines = []
         lines.append('from baca.scf import UserInputWrapper')
@@ -118,9 +133,8 @@ class UserInputHandlingMaterialProxy(MaterialProxy):
         lines.append('user_input = UserInputWrapper([])')
         user_input_module.write('\n'.join(lines))
         user_input_module.close()
-        if prompt_proceed:
-            line = 'stub user input module written to disk.'
-            self.proceed(lines=[line])
+        line = 'stub user input module written to disk.'
+        self.proceed(line, prompt=prompt)
 
     def write_user_input_wrapper_to_disk(self, user_input_wrapper):
         formatted_user_input_lines = self.format_user_input_wrapper_for_writing_to_disk(user_input_wrapper)
@@ -136,7 +150,8 @@ class UserInputHandlingMaterialProxy(MaterialProxy):
         illustration = self.make_illustration_from_output_material(material)
         return illustration 
 
-    def old_run_interactive(self):
+    def old_run_interactive(self, clear=True, cache=False):
+        self.cache_breadcrumbs(cache=cache)
         while True:
             menu, section = self.make_new_menu(where=self.where(), is_numbered=True)
             section.tokens = self.user_input_wrapper.editable_lines
@@ -144,7 +159,7 @@ class UserInputHandlingMaterialProxy(MaterialProxy):
                 section.append(('p', 'show pdf of given input'))
             section.append(('d', 'show demo input values'))
             section.append(('l', 'change location'))
-            result = menu.run()
+            result = menu.run(clear=clear)
             if result == 'd':
                 self.show_demo_user_input_values()
             elif result == 'l':
@@ -155,3 +170,4 @@ class UserInputHandlingMaterialProxy(MaterialProxy):
                 illustration.header_block.title = markuptools.Markup(self.generic_output_name.capitalize())
                 illustration.header_block.subtitle = markuptools.Markup('(unsaved)')
                 iotools.show(illustration)
+        self.restore_breadcrumbs(cache=cache)

@@ -33,11 +33,11 @@ class InstrumentationEditor(InteractiveEditor):
         while True:
             if self.backtrack():
                 return
-            self.preserve_backtracking = True
-            #print 'going to select performer names ...'
+            #self.push_backtracking()
+            self.push_backtracking()
             performer_names = self.select_performer_names_interactively()
-            #print 'performer names: {!r}'.format(performer_names)
-            self.preserve_backtracking = False
+            #self.pop_backtracking()
+            self.pop_backtracking()
             if self.backtrack():
                 return
             elif performer_names:
@@ -45,10 +45,10 @@ class InstrumentationEditor(InteractiveEditor):
                 for performer_name in performer_names:
                     performer = scoretools.Performer(performer_name)
                     performer_editor = PerformerEditor(session=self.session, target=performer)
-                    self.append_breadcrumb('add performers')
-                    self.preserve_backtracking = True
+                    self.push_breadcrumb('add performers')
+                    self.push_backtracking()
                     performer_editor.set_initial_configuration_interactively()
-                    self.preserve_backtracking = False
+                    self.pop_backtracking()
                     self.pop_breadcrumb()
                     if self.backtrack():
                         performers = []
@@ -128,8 +128,9 @@ class InstrumentationEditor(InteractiveEditor):
         self.target.performers.remove(performer)
         self.target.performers.insert(new_index, performer)
 
-    def select_performer_names_interactively(self):
+    def select_performer_names_interactively(self, clear=True, cache=False):
         from abjad.tools import scoretools
+        self.cache_breadcrumbs(cache=cache)
         menu, section = self.make_new_menu(where=self.where(), is_numbered=True, is_ranged=True)
         performer_names, performer_abbreviations = [], []
         performer_pairs = scoretools.list_primary_performer_names()
@@ -139,15 +140,16 @@ class InstrumentationEditor(InteractiveEditor):
         section.tokens = performer_pairs
         section.return_value_attribute = 'body'
         while True:
-            self.append_breadcrumb('add performers')
-            result = menu.run()
-            #print 'result: {!r}'.format(result)
+            self.push_breadcrumb('add performers')
+            result = menu.run(clear=clear)
             if self.backtrack():
                 self.pop_breadcrumb()
+                self.restore_breadcrumbs(cache=cache)
                 return
             elif not result:
                 self.pop_breadcrumb()
                 continue
             else:
                 self.pop_breadcrumb()
+                self.restore_breadcrumbs(cache=cache)
                 return result

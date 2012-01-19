@@ -8,13 +8,21 @@ import os
 class MaterialProxyWrangler(PackageWrangler):
 
     def __init__(self, session=None):
-        PackageWrangler.__init__(self, 'baca.scf.materialproxies', session=session)
+        PackageWrangler.__init__(self, self.materialproxies_package_importable_name, session=session)
 
     ### READ-ONLY PUBLIC ATTRIBUTES ###
 
     @property
     def breadcrumb(self):
         return 'material proxies'
+
+    @property
+    def material_proxy_spaced_class_names(self):
+        result = []
+        for name in self.list_wrangled_package_short_names(head=self.studio_package_importable_name):
+            spaced_class_name = iotools.uppercamelcase_to_space_delimited_lowercase(name)
+            result.append(spaced_class_name)
+        return result
 
     ### PUBLIC METHODS ###
 
@@ -31,7 +39,7 @@ class MaterialProxyWrangler(PackageWrangler):
             
     def handle_main_menu_result(self, result):
         if result == 'new':
-            self.create_material_proxy_interactively()
+            self.make_material_proxy_interactively()
         else:
             raise ValueError
 
@@ -42,24 +50,27 @@ class MaterialProxyWrangler(PackageWrangler):
         section.append(('new', 'make material_proxy'))
         return menu
 
-    # replace with material_proxy wizard
-    def create_material_proxy_interactively(self):
-        while True:
-            material_proxy_name = self.handle_raw_input('material_proxy name')
-            if iotools.is_uppercamelcase_string(material_proxy_name):
-                if material_proxy_name.endswith('Maker'):
-                    break
-        while True:
-            generic_output_product = self.handle_raw_input('generic output product')
-            break
+    def make_material_proxy_interactively(self):
+        getter = self.make_new_getter(where=self.where())
+        getter.append_string('material proxy name')
+        material_proxy_name = getter.run()
+        if self.backtack():
+            return
+        assert iotools.is_uppercamelcase_string(material_proxy_name)
+        assert material_proxy_name.endswith('Maker')
+        getter = self.make_new_getter(where=self.where())
+        getter.append_string('generic output product')
+        generic_output_product = getter.run()
+        if self.backtrack():
+            return
         material_proxy_directory = os.path.join(self.directory_name, material_proxy_name)
         os.mkdir(material_proxy_directory)
-        self.create_material_proxy_initializer(material_proxy_name)
-        self.create_material_proxy_class_file(material_proxy_name, generic_output_product)
-        self.create_material_proxy_stylesheet(material_proxy_name)
+        self.make_material_proxy_initializer(material_proxy_name)
+        self.make_material_proxy_class_file(material_proxy_name, generic_output_product)
+        self.make_material_proxy_stylesheet(material_proxy_name)
 
     # TODO: change to boilerplate file stored in material_proxy package
-    def create_material_proxy_initializer(self, material_proxy_name):
+    def make_material_proxy_initializer(self, material_proxy_name):
         initializer_file_name = os.path.join(self.directory_name, material_proxy_name, '__init__.py')
         initializer = file(initializer_file_name, 'w')
         line = 'from abjad.tools.importtools._import_structured_package import _import_structured_package\n'
@@ -69,7 +80,7 @@ class MaterialProxyWrangler(PackageWrangler):
         initializer.close() 
 
     # TODO: implement MaterialProxyClassFile object to model and customize these settings
-    def create_material_proxy_class_file(self, material_proxy_name, generic_output_name):
+    def make_material_proxy_class_file(self, material_proxy_name, generic_output_name):
         class_file_name = os.path.join(self.directory_name, material_proxy_name, material_proxy_name + '.py')
         class_file = file(class_file_name, 'w')
         lines = []
@@ -118,7 +129,7 @@ class MaterialProxyWrangler(PackageWrangler):
         class_file.close()
 
     # TODO: change to boilerplate file stored somewhere
-    def create_material_proxy_stylesheet(self, material_proxy_name):
+    def make_material_proxy_stylesheet(self, material_proxy_name):
         stylesheet = lilypondfiletools.make_basic_lilypond_file()
         stylesheet.pop()
         stylesheet.file_initial_system_comments = []
@@ -133,12 +144,13 @@ class MaterialProxyWrangler(PackageWrangler):
         stylesheet_file_pointer.write(stylesheet.format)
         stylesheet_file_pointer.close()
         
-    def run(self, user_input=None):
+    def run(self, user_input=None, clear=True, cache=False):
         self.assign_user_input(user_input=user_input)
+        self.cachce_breadcrumbs(cache=cache)
         while True:
-            self.append_breadcrumb()
+            self.push_breadcrumb()
             menu = self.make_main_menu()
-            result = menu.run()
+            result = menu.run(clear=clear)
             if self.backtrack():
                 break
             elif not result:
@@ -149,16 +161,19 @@ class MaterialProxyWrangler(PackageWrangler):
                 break
             self.pop_breadcrumb()
         self.pop_breadcrumb()
+        self.restore_breadcrumbs(cache=cache)
 
     # TODO: write test
-    def select_material_proxy_class_name_interactively(self, should_clear_terminal=True):
+    def select_material_proxy_class_name_interactively(self, clear=True, cache=False):
+        self.cache_breadcrumbs(cache=cache)
         menu, section = self.make_new_menu(where=self.where(), is_numbered=True)
         section.tokens = self.material_proxy_spaced_class_names
         while True:
-            self.append_breadcrumb('select material proxy:')
-            result = menu.run(should_clear_terminal=should_clear_terminal)
+            self.push_breadcrumb('select material proxy:')
+            result = menu.run(clear=clear)
             if self.backtrack():
                 self.pop_breadcrumb()
+                self.restore_breadcrumbs(cache=cache)
                 return
             elif not result:
                 self.pop_breadcrumb()
@@ -167,6 +182,7 @@ class MaterialProxyWrangler(PackageWrangler):
                 self.pop_breadcrumb()
                 break
         material_proxy_class_name = iotools.space_delimited_lowercase_to_uppercamelcase(result) 
+        self.restore_breadcrumbs(cache=cache)
         return material_proxy_class_name
 
     def unimport_materialproxies_package(self):

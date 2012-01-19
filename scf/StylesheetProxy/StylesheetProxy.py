@@ -20,7 +20,7 @@ class StylesheetProxy(FileProxy):
     def audit_stylesheet(self):
         self.print_not_implemented()
 
-    def copy_stylesheet_interactively(self, prompt_proceed=True):
+    def copy_stylesheet_interactively(self, prompt=True):
         getter = self.make_new_getter()
         getter.append_string('new file name')
         new_short_file_name = getter.run()
@@ -32,14 +32,12 @@ class StylesheetProxy(FileProxy):
         new_full_file_name = os.path.join(self.path_name, new_short_file_name)
         self.copy_file(new_full_file_name)
         line = 'file copied.'
-        if prompt_proceed:
-            self.proceed(lines=[line])
+        self.proceed(line, prompt=prompt)
         
-    def delete_stylesheet_interactively(self, prompt_proceed=True):
+    def delete_stylesheet_interactively(self, prompt=True):
         self.remove()
         line = 'stylesheet deleted.'
-        if prompt_proceed:
-            self.proceed(lines=[line])
+        self.proceed(line, prompt=prompt)
 
     def vi_stylesheet(self):
         os.system('vi {}'.format(self.full_file_name))
@@ -60,7 +58,7 @@ class StylesheetProxy(FileProxy):
         else:
             raise ValueError
 
-    def rename_stylesheet_interactively(self, prompt_proceed=True):
+    def rename_stylesheet_interactively(self, prompt=True):
         getter = self.make_new_getter()
         getter.append_string('new file name')
         new_short_file_name = getter.run()
@@ -72,8 +70,7 @@ class StylesheetProxy(FileProxy):
         new_full_file_name = os.path.join(self.path_name, new_short_file_name)
         self.rename_file(new_full_file_name)
         line = 'stylesheet renamed.'
-        if prompt_proceed:
-            self.proceed(lines=[line])
+        self.proceed(line, prompt=prompt)
 
     def make_main_menu(self):
         menu, section = self.make_new_menu(where=self.where)
@@ -84,12 +81,13 @@ class StylesheetProxy(FileProxy):
         section.append(('vi', 'vi stylesheet'))
         return menu
 
-    def run(self, user_input=None):
+    def run(self, user_input=None, clear=True, cache=False):
         self.assign_user_input(user_input=user_input)
+        self.cache_breadcrumbs(cache=cache)
         while True:
-            self.append_breadcrumb()
+            self.push_breadcrumb()
             menu = self.make_main_menu()
-            result = menu.run()
+            result = menu.run(clear=clear)
             if self.backtrack():
                 break
             elif not result:
@@ -100,3 +98,4 @@ class StylesheetProxy(FileProxy):
                 break
             self.pop_breadcrumb()
         self.pop_breadcrumb()
+        self.restore_breadcrumbs(cache=cache)

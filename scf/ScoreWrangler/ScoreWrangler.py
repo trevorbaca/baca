@@ -40,9 +40,9 @@ class ScoreWrangler(PackageWrangler):
 
     ### PUBLIC METHODS ###
 
-    def create_score_package_interactively(self, score_package_importable_name):
+    def make_score_package_interactively(self, score_package_importable_name):
         score_proxy = ScoreProxy(session=self.session)
-        score_proxy.create_score_package_creation_wizard()
+        score_proxy.make_score_package_creation_wizard()
 
     def fix_score_package_structures(self):
         for score_proxy in self.score_proxies_to_display:
@@ -64,27 +64,28 @@ class ScoreWrangler(PackageWrangler):
         return score_proxy
     
     # TODO: move up to level of wrangler
-    def svn_ci(self, prompt_proceed=True):
-        commit_message = self.handle_raw_input('commit message')
+    def svn_ci(self, prompt=True):
+        getter = self.make_new_getter(where=self.where())
+        getter.append_string('commit message')
+        commit_message = getter.run()
+        if self.backtrack():
+            return
         line = 'commit message will be: "{}"\n'.format(commit_message)
-        self.conditionally_display_lines([line])
+        self.display(line)
         if not self.confirm():
             return
         for score_proxy in self.score_proxies_to_display:
-            score_proxy.svn_ci(commit_message=commit_message, prompt_proceed=False)
-        if prompt_proceed:
-            self.proceed()
+            score_proxy.svn_ci(commit_message=commit_message, prompt=False)
+        self.proceed(prompt=prompt)
 
     # TODO: move up to level of wrangler
-    def svn_st(self, prompt_proceed=True):
+    def svn_st(self, prompt=True):
         for score_proxy in self.score_proxies_to_display:
-            score_proxy.svn_st(prompt_proceed=False)
-        if prompt_proceed:
-            self.proceed()
+            score_proxy.svn_st(prompt=False)
+        self.proceed(prompt=prompt)
 
     # TODO: move up to level of wrangler
-    def svn_up(self, prompt_proceed=True):
+    def svn_up(self, prompt=True):
         for score_proxy in self.score_proxies_to_display:
-            score_proxy.svn_up(prompt_proceed=False)
-        if prompt_proceed:
-            self.proceed()
+            score_proxy.svn_up(prompt=False)
+        self.proceed(prompt=prompt)

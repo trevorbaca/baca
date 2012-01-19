@@ -1,16 +1,14 @@
 from abjad.tools import iotools
 from abjad.tools import pitchtools
-from baca.scf.menuing.MenuObject import MenuObject
+from baca.scf.menuing.MenuSectionAggregator import MenuSectionAggregator
 import types
 
 
-# TODO: create MenuSectionAggregator for Menu and UserInputGetter to both inherit from
 # TODO: write UserInputGetter tests
-class UserInputGetter(MenuObject):
+class UserInputGetter(MenuSectionAggregator):
 
     def __init__(self, session=None, where=None):
-        MenuObject.__init__(self, session=session, where=where)
-        self._sections = []
+        MenuSectionAggregator.__init__(self, session=session, where=where)
         self._argument_lists = []
         self._defaults = []
         self._execs = []
@@ -46,25 +44,10 @@ class UserInputGetter(MenuObject):
         return self._prompts
 
     @property
-    def sections(self):
-        return self._sections
-
-    @property
     def tests(self):
         return self._tests
 
     ### PUBLIC METHODS ###
-
-    def append_something(self, spaced_attribute_name, message, 
-        additional_message_arguments=None, default=None):
-        assert isinstance(spaced_attribute_name, str)
-        self.prompts.append(spaced_attribute_name)
-        self.argument_lists.append([])
-        self.execs.append([])
-        if additional_message_arguments is None:
-            additional_message_arguments = []
-        self.helps.append(message.format(spaced_attribute_name, *additional_message_arguments))
-        self.defaults.append(default)
 
     def append_argument_range(self, spaced_attribute_name, argument_list, default=None):
         message = "value for '{}' must be argument range."
@@ -120,6 +103,17 @@ class UserInputGetter(MenuObject):
         self.execs[-1] = execs
         self.tests.append(self.is_pitch_range_or_none)
 
+    def append_something(self, spaced_attribute_name, message, 
+        additional_message_arguments=None, default=None):
+        assert isinstance(spaced_attribute_name, str)
+        self.prompts.append(spaced_attribute_name)
+        self.argument_lists.append([])
+        self.execs.append([])
+        if additional_message_arguments is None:
+            additional_message_arguments = []
+        self.helps.append(message.format(spaced_attribute_name, *additional_message_arguments))
+        self.defaults.append(default)
+
     def append_string(self, spaced_attribute_name, default=None):
         message = "value for '{}' must be string."
         self.append_something(spaced_attribute_name, message, default=default)
@@ -134,6 +128,11 @@ class UserInputGetter(MenuObject):
         message = "value for '{}' must be symbolic pitch range string. Ex: [A0, C8]."
         self.append_something(spaced_attribute_name, message, default=default)
         self.tests.append(pitchtools.is_symbolic_pitch_range_string)
+
+    def append_yes_no_string(self, spaced_attribute_name, default=None):
+        message = "value for '{}' must be 'y' or 'n'."
+        self.append_something(spaced_attribute_name, message, default=default)
+        self.tests.append(self.is_yes_no_string)
 
     def load_prompt(self):
         prompt = self.prompts[self.prompt_index]
@@ -187,9 +186,9 @@ class UserInputGetter(MenuObject):
 
     def run(self, user_input=None):
         self.assign_user_input(user_input=user_input)
-        self.preserve_backtracking = True
+        self.push_backtracking()
         self.present_prompts_and_store_values()
-        self.preserve_backtracking = False
+        self.pop_backtracking()
         if len(self.values) == 1:
             return self.values[0]
         else:
@@ -202,7 +201,7 @@ class UserInputGetter(MenuObject):
         else:
             lines.append('help string not available.')
         lines.append('')
-        self.conditionally_display_lines(lines)
+        self.display(lines)
 
     def evaluate_test(self, test, argument):
         if isinstance(test, types.TypeType):
@@ -239,7 +238,7 @@ class UserInputGetter(MenuObject):
                                 lines = []
                                 lines.append(self.helps[self.prompt_index])
                                 lines.append('')
-                                self.conditionally_display_lines(lines)
+                                self.display(lines)
                             return
             else:
                 try:
@@ -257,7 +256,7 @@ class UserInputGetter(MenuObject):
                     lines = []
                     lines.append(self.helps[self.prompt_index])
                     lines.append('')
-                    self.conditionally_display_lines(lines)
+                    self.display(lines)
         else:
             self.values.append(value)
             self.prompt_index = self.prompt_index + 1

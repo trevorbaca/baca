@@ -7,7 +7,7 @@ class ChunkWrangler(PackageWrangler):
 
     def __init__(self, session=None):
         import baca
-        PackageWrangler.__init__(self, 'baca.sketches', 'mus.chunks', session=session)
+        PackageWrangler.__init__(self, self.sketches_package_importable_name, 'mus.chunks', session=session)
 
     ### READ-ONLY PUBLIC ATTRIBUTES ###
 
@@ -17,9 +17,9 @@ class ChunkWrangler(PackageWrangler):
 
     ### PUBLIC METHODS ###
 
-    def create_chunk_interactively(self):
+    def make_chunk_interactively(self):
         chunk_proxy = ChunkProxy(session=self.session)
-        chunk_proxy.create_chunk_interactively()
+        chunk_proxy.make_chunk_interactively()
 
     def get_package_proxy(self, package_importable_name):
         return ChunkProxy(package_importable_name, session=self.session)
@@ -27,7 +27,7 @@ class ChunkWrangler(PackageWrangler):
     def handle_main_menu_result(self, result):
         assert isinstance(result, str)
         if result == 'new':
-            self.create_chunk_interactively()
+            self.make_chunk_interactively()
         else:
             chunk_proxy = self.get_package_proxy(result)
             chunk_proxy.run()
@@ -39,12 +39,13 @@ class ChunkWrangler(PackageWrangler):
         section.append(('new', 'new chunk'))
         return menu
 
-    def run(self, user_input=None, head=None):
+    def run(self, user_input=None, clear=True, head=None, cache=False):
         self.assign_user_input(user_input=user_input)
+        self.cache_breadcrumbs(cache=cache)
         while True:
-            self.append_breadcrumb()
+            self.push_breadcrumb()
             menu = self.make_main_menu(head=head)
-            result = menu.run()
+            result = menu.run(clear=clear)
             if self.backtrack():
                 break
             elif not result:
@@ -55,3 +56,4 @@ class ChunkWrangler(PackageWrangler):
                 break
             self.pop_breadcrumb()
         self.pop_breadcrumb()
+        self.restore_breadcrumbs(cache=cache)

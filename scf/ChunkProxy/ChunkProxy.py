@@ -27,10 +27,10 @@ class ChunkProxy(PackageProxy):
 
     ### PUBLIC METHODS ###
 
-    def create_chunk(self):
+    def make_chunk(self):
         self.print_not_implemented()
 
-    def create_chunk_interactively(self):
+    def make_chunk_interactively(self, prompt=True):
         self.print_not_implemented()
         return
         if self.package_spaced_name is None:
@@ -39,7 +39,7 @@ class ChunkProxy(PackageProxy):
             self.set_score_template_interactively()
         # TODO: create directory and do other stuff here
         line = 'chunk created.'
-        self.proceed(lines=[line])
+        self.proceed(line, prompt=prompt)
 
     def handle_main_menu_result(self, result):
         if result == 'd':
@@ -55,12 +55,13 @@ class ChunkProxy(PackageProxy):
         section.append(('d', 'delete'))
         return menu
 
-    def run(self, user_input=None):
+    def run(self, user_input=None, clear=True, cache=False):
         self.assign_user_input(user_input=user_input)
+        self.cachce_breadcrumbs(cache=cache)
         while True:
-            self.append_breadcrumb()
+            self.push_breadcrumb()
             menu = self.make_main_menu()
-            result = menu.run()
+            result = menu.run(clear=clear)
             if self.backtrack():
                 break
             elif not result:
@@ -71,8 +72,9 @@ class ChunkProxy(PackageProxy):
                 break
             self.pop_breadcrumb()
         self.pop_breadcrumb()
+        self.restore_breadcrumbs(cache=cache)
 
-    def set_chunk_spaced_name_interactively(self):
+    def set_chunk_spaced_name_interactively(self, prompt=True):
         getter = self.make_new_getter(where=self.where())
         # TODO: implement getter.append_space_delimited_lowercase_string
         getter.prompts.append('chunk name')
@@ -84,9 +86,9 @@ class ChunkProxy(PackageProxy):
         package_short_name = result.replace(' ', '_')
         package_importable_name = '.'.join([self.package_importable_name, package_short_name])
         chunk_proxy = ChunkProxy(package_importable_name)
-        chunk_proxy.create_chunk()
+        chunk_proxy.make_chunk()
         line = 'chunk spaced name set.'
-        self.proceed(lines=[line])
+        self.proceed(line, prompt=prompt)
 
     def set_score_template_interactively(self):
         self.print_not_implemented()

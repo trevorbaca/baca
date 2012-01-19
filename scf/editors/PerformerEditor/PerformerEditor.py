@@ -92,7 +92,7 @@ class PerformerEditor(InteractiveEditor):
             return
         if self.target.instrument_count < instrument_number:
             line = 'there is no instrument number {}'.format(instrument_number)
-            self.proceed(lines=[line])
+            self.proceed(line)
             return
         instrument_index = instrument_number - 1
         instrument = self.target.instruments[instrument_index]
@@ -156,16 +156,16 @@ class PerformerEditor(InteractiveEditor):
         section.append(('none', 'no instruments'))
         return menu
 
-    def set_initial_configuration_interactively(self):
+    def set_initial_configuration_interactively(self, clear=True, cache=False):
+        self.cache_breadcrumbs(cache=cache)
         self.conditionally_initialize_target()
         menu = self.set_initial_configuration_menu()
-        #print 'doing initial configuration interactively ...'
         while True:
-            self.append_breadcrumb(self.target.name)
-            result = menu.run()
-            #print 'result: {!r}'.format(result)
+            self.push_breadcrumb(self.target.name)
+            result = menu.run(clear=clear)
             if self.backtrack():
                 self.pop_breadcrumb()
+                self.restore_breadcrumbs(cache=cache)
                 return
             elif not result:
                 self.pop_breadcrumb()
@@ -190,3 +190,4 @@ class PerformerEditor(InteractiveEditor):
                 break
             self.pop_breadcrumb()
         self.pop_breadcrumb()
+        self.restore_breadcrumbs(cache=cache)

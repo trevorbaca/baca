@@ -55,7 +55,7 @@ class MenuObject(SCFObject):
 
     def exec_statement(self):
         lines = []
-        statement = self.handle_raw_input('XCF')
+        statement = self.handle_raw_input('XCF', include_newline=False)
         command = 'from abjad import *'
         exec(command)
         try:
@@ -65,7 +65,7 @@ class MenuObject(SCFObject):
         except:
             lines.append('expression not executable.')
         lines.append('')
-        self.conditionally_display_lines(lines)
+        self.display(lines)
         self.session.hide_next_redraw = True
 
     def grep_baca(self):
@@ -74,7 +74,7 @@ class MenuObject(SCFObject):
         proc = subprocess.Popen(command, shell=True, stdout=subprocess.PIPE)
         lines = [line.strip() for line in proc.stdout.readlines()]
         lines.append('')
-        self.conditionally_display_lines(lines, capitalize_first_character=False)
+        self.display(lines, capitalize_first_character=False)
 
     def handle_hidden_key(self, directive):
         if isinstance(directive, list) and len(directive) == 1:
@@ -103,6 +103,8 @@ class MenuObject(SCFObject):
             self.session.is_backtracking_to_score = True
         elif isinstance(key, str) and 3 <= len(key) and 'studio'.startswith(key):
             self.session.is_backtracking_to_studio = True
+        elif key == 'tm':
+            self.toggle_menu()
         elif key == 'where':
             self.show_menu_client()
         else:
@@ -122,6 +124,7 @@ class MenuObject(SCFObject):
         section.append(('r', 'redraw'))
         section.append(('score', 'score'))
         section.append(('studio', 'studio'))
+        section.append(('tm', 'toggle menu'))
         section.append(('where', 'show menu client')) 
         return section
 
@@ -137,7 +140,7 @@ class MenuObject(SCFObject):
         lines.append('{} line: {}'.format(self.make_tab(1), self.where[2]))
         lines.append('{} meth: {}'.format(self.make_tab(1), self.where[3]))
         lines.append('')
-        self.conditionally_display_lines(lines, capitalize_first_character=False)
+        self.display(lines, capitalize_first_character=False)
         self.session.hide_next_redraw = True
 
     def show_hidden_menu_entries(self):
@@ -150,5 +153,5 @@ class MenuObject(SCFObject):
                     menu_line += '{} ({})'.format(body, key)
                     menu_lines.append(menu_line)
                 menu_lines.append('')
-        self.conditionally_display_lines(menu_lines, capitalize_first_character=False)
+        self.display(menu_lines, capitalize_first_character=False)
         self.session.hide_next_redraw = True

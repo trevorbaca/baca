@@ -60,7 +60,7 @@ def test_ScoreProxy_04():
     '''
     
     studio = baca.scf.Studio()
-    studio.run(user_input='1 studio q')
+    studio.run(user_input="l'arch studio q")
 
     assert len(studio.transcript) == 6
     assert studio.transcript[0][0] == 'Studio - active scores'
@@ -85,7 +85,7 @@ def test_ScoreProxy_06():
     '''
 
     studio = baca.scf.Studio()
-    studio.run(user_input='1 b q')
+    studio.run(user_input="l'arch b q")
 
     assert len(studio.transcript) == 6
     assert studio.transcript[0][0] == 'Studio - active scores'
@@ -113,7 +113,7 @@ def test_ScoreProxy_08():
     '''
 
     studio = baca.scf.Studio()
-    studio.run(user_input='1 b q')
+    studio.run(user_input="l'arch b q")
     transcript = studio.transcript
     
     assert len(transcript) == 6

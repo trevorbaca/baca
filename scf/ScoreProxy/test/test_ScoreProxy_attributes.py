@@ -33,7 +33,7 @@ def test_ScoreProxy_attributes_01():
 
     assert score_proxy.annotated_title == 'Las manos mágicas'
     assert score_proxy.breadcrumb == 'Las manos mágicas'
-    assert score_proxy.composer == baca.scf.TrevorBaca()
+    assert score_proxy.composer == 'Trevor Bača'
     assert score_proxy.instrumentation == instrumentation
     assert score_proxy.materials_package_importable_name == 'manos.mus.materials'
     assert score_proxy.title == 'Las manos mágicas'

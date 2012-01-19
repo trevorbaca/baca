@@ -143,28 +143,6 @@ class MenuSection(MenuObject):
         return property(**locals())
 
     @apply
-    def tokens():
-        def fget(self):
-            return self._tokens
-        def fset(self, tokens):
-            if tokens is None:
-                self._tokens = []
-            else:
-                self._tokens = tokens[:]
-        return property(**locals())
-
-    @apply
-    def tokens():
-        def fget(self):
-            return self._tokens
-        def fset(self, tokens):
-            if tokens is None:
-                self._tokens = []
-            else:
-                self._tokens = tokens[:]
-        return property(**locals())
-
-    @apply
     def return_value_attribute():
         def fget(self):
             return self._return_value_attribute
@@ -180,6 +158,17 @@ class MenuSection(MenuObject):
         def fset(self, section_title):
             assert isinstance(section_title, (str, type(None)))
             self._section_title = section_title
+        return property(**locals())
+
+    @apply
+    def tokens():
+        def fget(self):
+            return self._tokens
+        def fset(self, tokens):
+            if tokens is None:
+                self._tokens = []
+            else:
+                self._tokens = tokens[:]
         return property(**locals())
 
     ### PUBLIC METHODS ###

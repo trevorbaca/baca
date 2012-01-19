@@ -7,7 +7,7 @@ def test_MenuSection_menu_entry_bodies_01():
     '''
 
     menu = baca.scf.menuing.Menu()
-    menu.append_breadcrumb('location')
+    menu.push_breadcrumb('location')
     section = menu.make_new_section()
     section.section_title = 'section'
     section.extend(['apple', 'banana', 'cherry'])
@@ -16,7 +16,7 @@ def test_MenuSection_menu_entry_bodies_01():
     assert section.menu_entry_bodies == section.tokens
 
     menu = baca.scf.menuing.Menu()
-    menu.append_breadcrumb('location')
+    menu.push_breadcrumb('location')
     section = menu.make_new_section(is_numbered=True)
     section.section_title = 'section'
     section.extend(['apple', 'banana', 'cherry'])
@@ -31,7 +31,7 @@ def test_MenuSection_menu_entry_bodies_02():
     '''
 
     menu = baca.scf.menuing.Menu()
-    menu.append_breadcrumb('location')
+    menu.push_breadcrumb('location')
     section = menu.make_new_section()
     section.section_title = 'section title'
     section.append(('add', 'add something'))
@@ -42,7 +42,7 @@ def test_MenuSection_menu_entry_bodies_02():
     assert section.menu_entry_bodies == [x[1] for x in section.tokens]
 
     menu = baca.scf.menuing.Menu()
-    menu.append_breadcrumb('location')
+    menu.push_breadcrumb('location')
     section = menu.make_new_section(is_numbered=True)
     section.section_title = 'section title'
     section.append(('add', 'add something'))

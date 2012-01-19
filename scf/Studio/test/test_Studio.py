@@ -25,12 +25,12 @@ def test_Studio_02():
     assert studio.transcript[-2] == \
     ['Studio - active scores',
      '',
-     "     1: L'archipel du corps (2011)",
-     '     2: Betörung',
-     '     3: Čáry (2006)',
-     '     4: Mon seul désir (2009)',
-     "     5: L'imaginare (2010)",
-     '     6: Lidércfény (2008)',
+     '     1: Betörung',
+     '     2: Čáry (2006)',
+     "     3: L'archipel du corps (2011)",
+     "     4: L'imaginare (2010)",
+     '     5: Lidércfény (2008)',
+     '     6: Mon seul désir (2009)',
      '     7: Poème récursif (2005)',
      '     8: Red Shift Hijinks (2005)',
      '     9: Sekka (2007)',
@@ -81,8 +81,8 @@ def test_Studio_04():
      '     1: Arac\xc4\xb1l\xc4\xb1k',
      '     2: Chrysanthemums (1995)',
      '     3: Jivan Mukti',
-     '     4: Manifolds',
-     '     5: Las manos mágicas',
+     '     4: Las manos mágicas',
+     '     5: Manifolds',
      '     6: Tack (1996)',
      '     7: Territoires',
      '     8: Zeit (1998)',
@@ -190,7 +190,7 @@ def test_Studio_11():
 
     assert len(studio.transcript) == 5
     assert studio.transcript[1] == ['SCF> exec', '']
-    assert studio.transcript[2] == ['XCF> 2**30', '']
+    assert studio.transcript[2] == ['XCF> 2**30']
     assert studio.transcript[3] == ['1073741824', '']
     assert studio.transcript[4] == ['SCF> q', '']
 
@@ -204,7 +204,7 @@ def test_Studio_12():
 
     assert len(studio.transcript) == 5
     assert studio.transcript[1] == ['SCF> exec', '']
-    assert studio.transcript[2] == ['XCF> foo', '']
+    assert studio.transcript[2] == ['XCF> foo']
     assert studio.transcript[3] == ['Expression not executable.', '']
     assert studio.transcript[4] == ['SCF> q', '']
 

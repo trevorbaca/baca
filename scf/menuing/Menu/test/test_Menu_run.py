@@ -6,7 +6,7 @@ def test_Menu_run_01():
     '''
 
     menu = baca.scf.menuing.Menu()
-    menu.append_breadcrumb('location')
+    menu.push_breadcrumb('location')
     section_1 = menu.make_new_section(is_keyed=True, is_hidden=False, is_numbered=False, is_ranged=False)
     section_1.section_title = 'section'
     result = section_1.extend(['apple', 'banana', 'cherry'])
@@ -75,7 +75,7 @@ def test_Menu_run_02():
     '''
 
     menu = baca.scf.menuing.Menu()
-    menu.append_breadcrumb('location')
+    menu.push_breadcrumb('location')
     section_1 = menu.make_new_section(is_keyed=False, is_hidden=False, is_numbered=False, is_ranged=False)
     section_1.section_title = 'section'
     section_1.extend(['apple', 'banana', 'cherry'])
@@ -117,7 +117,7 @@ def test_Menu_run_03():
     '''
 
     menu = baca.scf.menuing.Menu()
-    menu.append_breadcrumb('location')
+    menu.push_breadcrumb('location')
     section_1 = menu.make_new_section(is_keyed=True, is_hidden=True, is_numbered=False, is_ranged=False)
     section_1.section_title = 'section'
     section_1.extend(['apple', 'banana', 'cherry'])
@@ -152,7 +152,7 @@ def test_Menu_run_04():
     '''
 
     menu = baca.scf.menuing.Menu()
-    menu.append_breadcrumb('location')
+    menu.push_breadcrumb('location')
     section_1 = menu.make_new_section(is_keyed=True, is_hidden=False, is_numbered=True, is_ranged=False)
     section_1.section_title = 'section'
     section_1.extend(['apple', 'banana', 'cherry'])
@@ -194,7 +194,7 @@ def test_Menu_run_05():
     '''
 
     menu = baca.scf.menuing.Menu()
-    menu.append_breadcrumb('location')
+    menu.push_breadcrumb('location')
     section_1 = menu.make_new_section(is_keyed=True, is_hidden=False, is_numbered=False, is_ranged=True)
     section_1.section_title = 'section'
     section_1.extend(['apple', 'banana', 'cherry'])
@@ -237,7 +237,7 @@ def test_Menu_run_06():
     '''
 
     menu = baca.scf.menuing.Menu()
-    menu.append_breadcrumb('location')
+    menu.push_breadcrumb('location')
     section_1 = menu.make_new_section(is_keyed=True, is_hidden=False, is_numbered=False, is_ranged=False)
     section_1.section_title = 'section'
     section_1 = menu.make_new_section()
@@ -334,7 +334,7 @@ def test_Menu_run_07():
     '''
 
     menu = baca.scf.menuing.Menu()
-    menu.append_breadcrumb('location')
+    menu.push_breadcrumb('location')
     section_1 = menu.make_new_section(is_keyed=False, is_hidden=False, is_numbered=False, is_ranged=False)
     section_1.section_title = 'section'
     section_1.append(('add', 'first command'))
@@ -430,7 +430,7 @@ def test_Menu_run_08():
     '''
 
     menu = baca.scf.menuing.Menu()
-    menu.append_breadcrumb('location')
+    menu.push_breadcrumb('location')
     section_1 = menu.make_new_section(is_keyed=True, is_hidden=True, is_numbered=False, is_ranged=False)
     section_1.section_title = 'section'
     section_1.append(('add', 'first command'))
@@ -519,7 +519,7 @@ def test_Menu_run_09():
     '''
 
     menu = baca.scf.menuing.Menu()
-    menu.append_breadcrumb('location')
+    menu.push_breadcrumb('location')
     section_1 = menu.make_new_section(is_keyed=True, is_hidden=False, is_numbered=True, is_ranged=False)
     section_1.section_title = 'section'
     section_1.append(('add', 'first command'))
@@ -614,7 +614,7 @@ def test_Menu_run_10():
     '''
 
     menu = baca.scf.menuing.Menu()
-    menu.append_breadcrumb('location')
+    menu.push_breadcrumb('location')
     section_1 = menu.make_new_section(is_keyed=True, is_hidden=False, is_numbered=False, is_ranged=True)
     section_1.section_title = 'section'
     section_1.append(('add', 'first command'))

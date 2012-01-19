@@ -87,7 +87,7 @@ class PackageProxy(DirectoryProxy):
     @property
     def purview_name(self):
         if self.score_package_short_name is None:
-            return 'baca'
+            return self.studio_package_importable_name
         else:
             return self.score_package_short_name
 
@@ -101,7 +101,7 @@ class PackageProxy(DirectoryProxy):
     # TODO: write test
     @property
     def score_package_short_name(self):
-        if not self.package_importable_name.startswith('baca'):
+        if not self.package_importable_name.startswith(self.studio_package_importable_name):
             return self.package_importable_name.split('.')[0]
 
     ### PUBLIC METHODS ###
@@ -134,7 +134,7 @@ class PackageProxy(DirectoryProxy):
         result = self.remove()
         if result:
             line = 'package deleted.'
-            self.proceed(lines=[line])
+            self.proceed(line)
         
     def delete_tag(self, tag_name):
         tags = self.get_tags()
@@ -170,7 +170,7 @@ class PackageProxy(DirectoryProxy):
             return
         tag = self.get_tag(result)
         line = '{!r}'.format(tag)
-        self.proceed(lines=[line])
+        self.proceed(line)
 
     def get_tags(self):
         import collections
@@ -203,11 +203,12 @@ class PackageProxy(DirectoryProxy):
         section.append(('get', 'get tag'))
         return menu
 
-    def manage_tags(self):
+    def manage_tags(self, clear=True, cache=False):
+        self.cache_breadcrumbs(cache=cache)
         while True:
-            self.append_breadcrumb('tags')
+            self.push_breadcrumb('tags')
             menu = self.make_tags_menu()
-            result = menu.run()
+            result = menu.run(clear=clear)
             if self.backtrack():
                 break
             self.handle_tags_menu_result(result)
@@ -215,13 +216,14 @@ class PackageProxy(DirectoryProxy):
                 break
             self.pop_breadcrumb()
         self.pop_breadcrumb()
+        self.restore_breadcrumbs(cache=cache)
 
     # TODO: write tests
     def package_importable_name_to_purview(self, package_importable_name):
         import baca
         if package_importable_name is None:
             return
-        elif package_importable_name.split('.')[0] == 'baca':
+        elif package_importable_name.split('.')[0] == self.studio_package_importable_name:
             return baca.scf.GlobalProxy()
         elif package_importable_name.split('.')[0] in os.listdir(os.environ.get('SCORES')):
             return baca.scf.ScoreProxy(package_importable_name.split('.')[0])
@@ -303,8 +305,9 @@ class PackageProxy(DirectoryProxy):
             return
         self.package_spaced_name = result
 
+    # TODO: rename without hardcoding
     def unimport_baca_package(self):
-        self.remove_package_importable_name_from_sys_modules('baca')
+        self.remove_package_importable_name_from_sys_modules(self.studio_package_importable_name)
 
     def unimport_package(self):
         self.remove_package_importable_name_from_sys_modules(self.package_importable_name)

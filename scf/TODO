@@ -1,16 +1,8 @@
 TODO
 
--4. Implement populate_user_input_wrapper().
+0. Implement populate_user_input_wrapper().
 
--3. Implement material move and rename methods.
-
--2. Extend self.proceed() to accept a single line.
-
--1. Audit for should_clear_terminal keyword in the signature of every interactive method.
-
-0. Audit for breadcrumb removal in the signature of every interactive method.
-
-1. Shorten 'should_clear_terminal' to 'clear'.
+1. Implement material move and rename methods.
 
 2. Be able safely to write junk into any system file.
 
@@ -32,76 +24,56 @@ TODO
 
 11. Edit instrument clefs.
 
-12. Remove blank line between help request and help response.
+12. Remove extra appearance of B-flat clarinet from clarinetist config menu.
 
-13. Remove blank line between exec request and exec response.
+13. Research 'with' for breadcrumb management.
 
-14. Remove extra appearance of B-flat clarinet from clarinetist config menu.
+14. Change Instrument._default_performer_names to house (full, abbreviation) pairs.
 
-15. Research 'with' for breadcrumb management.
+15. Use performer abbreviations to populate performer selection menu.
 
-16. Change Instrument._default_performer_names to house (full, abbreviation) pairs.
+16. Find a way to include tags management in hidden menu of every package proxy.
 
-17. Use performer abbreviations to populate performer selection menu.
+17. Figure out why 'red' isn't good enough to select 'red_pcs', maybe redraw-related.
 
-18. Kill Trevor Bača class.
+18. Find a way to dynamically add (default) indicator to default menu entries.
 
-19. Kill hardcoded 'baca' directory name.
+19. Implement initializer file proxy to decongest package proxy.
 
-20. Find a way to include tags management in hidden menu of every package proxy.
+20. Implement user input module file proxy.
 
-21. Figure out why 'red' isn't good enough to select 'red_pcs', maybe redraw-related.
+21. Prevent the creation of 'baca.materials.h' package.
 
-22. Change 'conditionally_display_lines' to just 'display'.
+22. Do away with local stylesheets.
 
-23. Make backtracking work from 'self.confirm()'.
+23. Consider keyword backtracking protocol to replace two-line backtracking protocol.
 
-24. Extend 'self.confirm()' with optional prompt.
+24. Implement something to tour all materials everywhere and inspect in sequence.
 
-25. Change alphabeticization of scores in score selection menu.
+25. Implement measuretools.all_are_measures() and other checkers.
 
-26. Find a way to dynamically add (default) indicator to default menu entries.
+26. Encapsulate user input getter subprocedures.
 
-27. Implement initializer file proxy to decongest package proxy.
+27. Make 'ls' hide or remove .pyc files.
 
-28. Implement user input module file proxy.
+28. Make 'edit initializer' read only.
 
-29. Prevent the creation of 'baca.materials.h' package.
+29. Port output change awareness.
 
-30. Do away with local stylesheets.
+30. Make user input handler creation work.
 
-31. Consider keyword backtracking protocol to replace two-line backtracking protocol.
+31. Change 'user_input' to 'user_input_wrapper'.
 
-32. Implement something to tour all materials everywhere and inspect in sequence.
+32. Make some zagged pitch-classes.
 
-33. Implement measuretools.all_are_measures() and other checkers.
+33. Implement RangeInventory in Abjad. Integrate into SCF.
 
-34. Extend self.proceed(line(s), prompt_proceed=True) with 'prompt_proceed' keyword.
+34. Define range inventories for all scores.
 
-35. Change 'create_' everywhere to 'make_'.
+35. Remove three blank lines at head of data-only output material module.
 
-36. Change 'prompt_proceed' to simply 'prompt'.
+36. Author read-only attribute tests.
 
-37. Encapsulate user input getter subprocedures.
+37. Audit and reimplement purview to always equal only a string.
 
-38. Make 'ls' hide or remove .pyc files.
-
-39. Make 'edit initializer' read only.
-
-40. Author is-alphabetized script.
-
-41. Port output change awareness.
-
-42. Make user input handler creation work.
-
-43. Change 'user_input' to 'user_input_wrapper'.
-
-44. Make some zagged pitch-classes.
-
-45. Implement RangeInventory in Abjad. Integrate into SCF.
-
-46. Define range inventories for all scores.
-
-47. Remove three blank lines at head of data-only output material module.
-
-48. Author read-only attribute tests.
+38. Remove blank lines between successive getter attribute entries.

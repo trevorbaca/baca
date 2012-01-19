@@ -8,20 +8,20 @@ def test_PerformerEditor_move_instrument_01():
     '''
 
     studio = baca.scf.Studio()
-    studio.run(user_input='1 perf 1 move q')
-    assert studio.ts == (9, (1, 5))
+    studio.run(user_input="l'arch perf flutist move q")
+    assert studio.ts == (9,)
 
-    studio.run(user_input='1 perf 1 move b q')
-    assert studio.ts == (11, (1, 5), (6, 9))
+    studio.run(user_input="l'arch perf flutist move b q")
+    assert studio.ts == (11, (6, 9))
 
-    studio.run(user_input='1 perf 1 move studio q')
-    assert studio.ts == (11, (0, 9), (1, 5))
+    studio.run(user_input="l'arch perf flutist move studio q")
+    assert studio.ts == (11, (0, 9))
 
-    studio.run(user_input='1 perf 1 move score q')
-    assert studio.ts == (11, (1, 5), (2, 9))
+    studio.run(user_input="l'arch perf flutist move score q")
+    assert studio.ts == (11, (2, 9))
 
-    studio.run(user_input='1 perf 1 move foo q')
-    assert studio.ts == (11, (1, 5))
+    studio.run(user_input="l'arch perf flutist move foo q")
+    assert studio.ts == (11,)
 
 
 def test_PerformerEditor_move_instrument_02():

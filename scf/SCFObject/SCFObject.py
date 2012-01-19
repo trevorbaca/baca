@@ -29,17 +29,12 @@ class SCFObject(object):
         return os.path.join(self.scf_root_directory, 'assets')
 
     @property
-    def breadcrumbs(self):
-        return self.session.breadcrumbs
+    def breadcrumb_stack(self):
+        return self.session.breadcrumb_stack
 
     @property
     def class_name(self):
         return type(self).__name__
-
-    # TODO: write test
-    @property
-    def global_directory_name(self):
-        return os.path.join(['Users', 'trevorbaca', 'Documents', 'other', 'baca'])
 
     @property
     def help_item_width(self):
@@ -58,17 +53,17 @@ class SCFObject(object):
     # TODO: write test
     @property
     def materialproxies_package_importable_name(self):
-        return '{}.materialproxies'.format(self.scf_package_importable_name)
+        return '.'.join([self.scf_package_importable_name, 'materialproxies'])
 
     # TODO: write test
     @property
     def scf_package_importable_name(self):
-        return 'baca.scf'
+        return '.'.join([self.studio_package_importable_name, 'scf'])
 
     # TODO: write test
     @property
     def scf_root_directory(self):
-        return os.path.join('/', 'Users', 'trevorbaca', 'Documents', 'other', 'baca', 'scf')
+        return self.package_importable_name_to_directory_name(self.scf_package_importable_name)
 
     @property
     def score_package_short_names(self):
@@ -83,9 +78,10 @@ class SCFObject(object):
     def session(self):
         return self._session
 
+    # TODO: write test
     @property
-    def spaced_class_name(self):
-        return iotools.uppercamelcase_to_space_delimited_lowercase(self.class_name)
+    def sketches_package_importable_name(self):
+        return '.'.join([self.studio_package_importable_name, 'sketches'])
 
     @property
     def source_file_name(self):
@@ -93,10 +89,33 @@ class SCFObject(object):
         source_file_name = source_file_name.strip('c')
         return source_file_name
 
+    @property
+    def spaced_class_name(self):
+        return iotools.uppercamelcase_to_space_delimited_lowercase(self.class_name)
+
     # TODO: write test
+    @property
+    def studio_directory_name(self):
+        return self.package_importable_name_to_directory_name(self.studio_package_importable_name)
+
+    # TODO: write test
+    @property
+    def studio_materials_package_importable_name(self):
+        return '.'.join([self.studio_package_importable_name, 'materials'])
+
+    @property
+    def studio_package_importable_name(self):
+        return 'baca'
+
+    # TODO: write test; change to stylesheets_directory_name
     @property
     def stylesheets_directory(self):
         return os.path.join(self.scf_root_directory, 'stylesheets')
+
+    # TODO: write test
+    @property
+    def stylesheets_package_importable_name(self):
+        '.'.join([self.scf_package_importable_name, 'stylesheets'])
 
     @property
     def transcript(self):
@@ -110,37 +129,35 @@ class SCFObject(object):
     def ts(self):
         return self.transcript_signature
 
-    ### READ / WRITE PUBLIC ATTRIBUTES ###
-
-    @apply
-    def preserve_backtracking():
-        def fget(self):
-            return self.session.preserve_backtracking
-        def fset(self, preserve_backtracking):
-            self.session.preserve_backtracking = preserve_backtracking
-        return property(**locals())
-
     ### PUBLIC METHODS ###
 
     def assign_user_input(self, user_input=None):
         if user_input is not None:
             self.session.user_input = user_input
 
-    def append_breadcrumb(self, breadcrumb=None):
+    def push_breadcrumb(self, breadcrumb=None):
         if breadcrumb is not None:
-            self.breadcrumbs.append(breadcrumb)
+            self.breadcrumb_stack.append(breadcrumb)
         else:
-            self.breadcrumbs.append(self.breadcrumb)
+            self.breadcrumb_stack.append(self.breadcrumb)
 
     def backtrack(self):
         return self.session.backtrack()
+
+    def cache_breadcrumbs(self, cache=False):
+        self.session.cached_breadcrumbs = []
+        if cache:
+            self.session.cached_breadcrumbs = self.session.breadcrumb_stack[:]
+            self.session._breadcrumb_stack[:] = []
 
     def conditionally_clear_terminal(self):
         if self.session.is_displayable:
             iotools.clear_terminal()
 
-    def conditionally_display_lines(self, lines, capitalize_first_character=True):
-        assert isinstance(lines, list)
+    def display(self, lines, capitalize_first_character=True):
+        assert isinstance(lines, (str, list))
+        if isinstance(lines, str):
+            lines = [lines]
         if not self.session.hide_next_redraw:
             if capitalize_first_character:
                 lines = [iotools.capitalize_string_start(line) for line in lines]
@@ -151,12 +168,13 @@ class SCFObject(object):
                 for line in lines:
                     print line
 
-    def confirm(self):
-        response = self.handle_raw_input('ok?', include_chevron=False)
-        if not response.lower() == 'y':
-            self.conditionally_display_lines([''])
-            return False
-        return True
+    def confirm(self, prompt_string='ok'):
+        getter = self.make_new_getter(where=self.where())
+        getter.append_yes_no_string(prompt_string)
+        result = getter.run()
+        if self.backtrack():
+            return
+        return 'yes'.startswith(result.lower())
 
     def debug(self, value, annotation=None):
         if annotation is None:
@@ -168,7 +186,7 @@ class SCFObject(object):
         command = 'vi {}'.format(self.source_file_name)
         os.system(command)
 
-    def handle_raw_input(self, prompt, include_chevron=True):
+    def handle_raw_input(self, prompt, include_chevron=True, include_newline=True):
         prompt = iotools.capitalize_string_start(prompt)
         if include_chevron:
             prompt = prompt + '> '
@@ -176,7 +194,9 @@ class SCFObject(object):
             prompt = prompt + ' '
         if self.session.is_displayable:
             user_response = raw_input(prompt)
-            print ''
+            if include_newline:
+                if not user_response == 'help':
+                    print ''
         else:
             user_response = self.pop_next_user_response_from_user_input()
         if self.session.transcribe_next_command:
@@ -187,16 +207,18 @@ class SCFObject(object):
         if self.session.transcribe_next_command:
             menu_chunk = []
             menu_chunk.append('{}{}'.format(prompt, user_response))
-            menu_chunk.append('')
+            if include_newline:
+                if not user_response == 'help':
+                    menu_chunk.append('')
             self.session.complete_transcript.append_lines(menu_chunk)
         return user_response
 
-    def handle_raw_input_with_default(self, prompt, default=None):
+    def handle_raw_input_with_default(self, prompt, default=None, include_chevron=True, include_newline=True):
         if default in (None, 'None'):
             default = ''
         readline.set_startup_hook(lambda: readline.insert_text(default))
         try:
-            return self.handle_raw_input(prompt)
+            return self.handle_raw_input(prompt, include_chevron=include_chevron, include_newline=include_newline)
         finally:
             readline.set_startup_hook()
 
@@ -249,6 +271,9 @@ class SCFObject(object):
     def is_string_or_none(self, expr):
         return isinstance(expr, (str, type(None)))
 
+    def is_yes_no_string(self, expr):
+        return 'yes'.startswith(expr.lower()) or 'no'.startswith(expr.lower())
+
     def make_new_getter(self, where=None):
         import baca
         return baca.scf.menuing.UserInputGetter(where=where, session=self.session)
@@ -271,7 +296,7 @@ class SCFObject(object):
         if package_importable_name is None:
             return
         package_importable_name_parts = package_importable_name.split('.')
-        if package_importable_name_parts[0] == 'baca':
+        if package_importable_name_parts[0] == self.studio_package_importable_name:
             directory_parts = [os.environ.get('BACA')] + package_importable_name_parts[1:]
         elif package_importable_name_parts[0] in os.listdir(os.environ.get('SCORES')):
             directory_parts = [os.environ.get('SCORES')] + package_importable_name_parts[:]
@@ -287,8 +312,11 @@ class SCFObject(object):
     def ptc(self):
         self.session.complete_transcript.ptc()
 
+    def pop_backtracking(self):
+        return self.session.backtracking_stack.pop()
+
     def pop_breadcrumb(self):
-        return self.breadcrumbs.pop()
+        return self.breadcrumb_stack.pop()
 
     def pop_next_user_response_from_user_input(self):
         self.session.last_command_was_composite = False
@@ -322,27 +350,39 @@ class SCFObject(object):
         lines = []
         lines.append('not yet implemented.')
         lines.append('')
-        self.conditionally_display_lines(lines)
+        self.display(lines)
         self.proceed()
 
-    def proceed(self, lines=None):
-        lines = lines or []
-        assert isinstance(lines, (tuple, list))
+    def proceed(self, lines=None, prompt=True):
+        assert isinstance(lines, (tuple, list, str, type(None)))
+        if not prompt:
+            return
+        if isinstance(lines, str):
+            lines = [lines]
+        elif lines is None:
+            lines = []
         if lines:
             lines.append('')
-            self.conditionally_display_lines(lines)
+            self.display(lines)
         response = self.handle_raw_input('press return to continue.', include_chevron=False)
         self.conditionally_clear_terminal()
 
     # TODO: write tests
     def purview_name_to_directory_name(self, purview_name):
-        if purview_name == 'baca':
-            directory_name = self.global_directory_name
+        if purview_name == self.studio_package_importable_name:
+            directory_name = self.studio_directory_name
         else:
             directory_name = os.path.join(['Users', 'trevorbaca', 'Documents', 'scores', purview_name])
         if not os.path.exists(directory_name):
             raise ValueError
         return directory_name
+
+    def push_backtracking(self):
+        if self.session.backtracking_stack:
+            last_number = self.session.backtracking_stack[-1]
+            self.session.backtracking_stack.append(last_number + 1)
+        else:
+            self.session.backtracking_stack.append(0)
 
     def query(self, prompt):
         response = handle_raw_input(prompt)
@@ -354,6 +394,10 @@ class SCFObject(object):
         module_names = [x for x in module_names if x.startswith(self.score_package_short_name)]
         module_names.sort()
         return module_names
+
+    def restore_breadcrumbs(self, cache=False):
+        if cache:
+            self.session._breadcrumb_stack[:] = self.session.cached_breadcrumbs[:]
 
     def where(self):
         return inspect.stack()[1]
