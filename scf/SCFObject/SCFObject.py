@@ -140,7 +140,9 @@ class SCFObject(object):
             iotools.clear_terminal()
 
     def display(self, lines, capitalize_first_character=True):
-        assert isinstance(lines, list)
+        assert isinstance(lines, (str, list))
+        if isinstance(lines, str):
+            lines = [lines]
         if not self.session.hide_next_redraw:
             if capitalize_first_character:
                 lines = [iotools.capitalize_string_start(line) for line in lines]

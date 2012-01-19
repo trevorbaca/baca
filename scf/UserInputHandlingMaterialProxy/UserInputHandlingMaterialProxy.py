@@ -9,13 +9,15 @@ class UserInputHandlingMaterialProxy(MaterialProxy):
     def clear_user_input_wrapper(self, prompt=True):
         user_input_wrapper = self.user_input_wrapper
         if user_input_wrapper.is_empty:
-            self.display(lines=['user input already empty.', ''])
+            lines=['user input already empty.', '']
+            self.display(lines)
             self.proceed()
         else:
             user_input_wrapper.clear()
             self.write_user_input_wrapper_to_disk(user_input_wrapper)
             if prompt:
-                self.proceed(lines=['user input wrapper cleared.'])
+                lines=['user input wrapper cleared.']
+                self.proceed(lines)
 
     def edit_user_input_at_number(self, number):
         user_input_wrapper = self.user_input_wrapper
@@ -105,7 +107,7 @@ class UserInputHandlingMaterialProxy(MaterialProxy):
             line = '    {}: {!r}'.format(key.replace('_', ' '), value)
             lines.append(line)
         lines.append('')
-        self.display(lines=lines)
+        self.display(lines)
         if prompt:
             self.proceed()
 
