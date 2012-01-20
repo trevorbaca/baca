@@ -8,6 +8,7 @@ import os
 import pprint
 import re
 import readline
+import sys
 
 
 # TODO: move all self.is_ predicates to MenuObject
@@ -47,13 +48,13 @@ class SCFObject(object):
 
     # TODO: write test
     @property
-    def materialproxies_directory_name(self):
-        return os.path.join(self.scf_root_directory, 'materialproxies')
+    def materialpackagemakers_directory_name(self):
+        return os.path.join(self.scf_root_directory, 'materialpackagemakers')
 
     # TODO: write test
     @property
-    def materialproxies_package_importable_name(self):
-        return '.'.join([self.scf_package_importable_name, 'materialproxies'])
+    def materialpackagemakers_package_importable_name(self):
+        return '.'.join([self.scf_package_importable_name, 'materialpackagemakers'])
 
     # TODO: write test
     @property
@@ -218,7 +219,8 @@ class SCFObject(object):
             default = ''
         readline.set_startup_hook(lambda: readline.insert_text(default))
         try:
-            return self.handle_raw_input(prompt, include_chevron=include_chevron, include_newline=include_newline)
+            return self.handle_raw_input(
+                prompt, include_chevron=include_chevron, include_newline=include_newline)
         finally:
             readline.set_startup_hook()
 
@@ -285,6 +287,13 @@ class SCFObject(object):
             is_hidden=is_hidden, is_keyed=is_keyed, is_numbered=is_numbered, is_ranged=is_ranged)
         return menu, section
 
+
+    # TODO: write test
+    def module_importable_name_to_full_file_name(self, module_importable_name):
+        tmp = self.package_importable_name_to_directory_name(module_importable_name)
+        if tmp:
+            return tmp + '.py'
+
     # TODO: write test
     def package_exists(self, package_importable_name):
         assert isinstance(package_importable_name, str)
@@ -312,7 +321,7 @@ class SCFObject(object):
     def ptc(self):
         self.session.complete_transcript.ptc()
 
-    def pop_backtracking(self):
+    def pop_backtrack(self):
         return self.session.backtracking_stack.pop()
 
     def pop_breadcrumb(self):
@@ -377,7 +386,7 @@ class SCFObject(object):
             raise ValueError
         return directory_name
 
-    def push_backtracking(self):
+    def push_backtrack(self):
         if self.session.backtracking_stack:
             last_number = self.session.backtracking_stack[-1]
             self.session.backtracking_stack.append(last_number + 1)
@@ -387,6 +396,12 @@ class SCFObject(object):
     def query(self, prompt):
         response = handle_raw_input(prompt)
         return response.lower().startswith('y')
+
+    def remove_package_importable_name_from_sys_modules(self, package_importable_name):
+        '''Total hack. But works.'''
+        command = "if '{}' in sys.modules: del(sys.modules['{}'])".format(
+            package_importable_name, package_importable_name)
+        exec(command)
 
     def reveal_modules(self):
         command = 'module_names = sys.modules.keys()'

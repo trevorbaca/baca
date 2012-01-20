@@ -1,79 +1,66 @@
 TODO
 
-0. Implement populate_user_input_wrapper().
+1. Audit and reimplement purview to always equal only a string.
 
-1. Implement material move and rename methods.
+2. Author materials management read-only attribute tests.
 
-2. Be able safely to write junk into any system file.
+3. Encapsulate user input getter subprocedures.
 
-3. Implement 'make new material: range' in studio.
+4. Author user input getter tests.
 
-4. Implement 'make new material: range' in scores.
+5. Author materials management menuing tests.
 
-5. Wrap tests around existing material menus.
+6. Do away with local stylesheets.
 
-6. Implement remaining clarinets.
+7. Implement InstrumentRangeInventory in Abjad. Integrate into SCF.
 
-7. Implement saxophones.
+8. Implement remaining clarinets.
 
-8. Audit and implement remaining instruments.
+9. Implement saxophones.
 
-9. Clean up PitchRangeEditor main menu.
+10. Remove blank lines between successive getter attribute entries.
 
-10. Edit instrument transposition.
+11. Make user input getter defaults work like menu defaults;
+    Implement default_value on user input getter.
 
-11. Edit instrument clefs.
+12. Fix SCFObject.handle_user_input_with_default() default handling.
 
-12. Remove extra appearance of B-flat clarinet from clarinetist config menu.
+13. Implement populate_user_input_wrapper().
 
-13. Research 'with' for breadcrumb management.
+14. Implement material move and rename methods.
 
-14. Change Instrument._default_performer_names to house (full, abbreviation) pairs.
+15. Implement 'make new material: range' in studio.
 
-15. Use performer abbreviations to populate performer selection menu.
+16. Implement 'make new material: range' in scores.
 
-16. Find a way to include tags management in hidden menu of every package proxy.
+17. Define range inventories for all scores.
 
-17. Figure out why 'red' isn't good enough to select 'red_pcs', maybe redraw-related.
+18. Find a way to include tags management in hidden menu of every package proxy.
 
-18. Find a way to dynamically add (default) indicator to default menu entries.
+19. Figure out why 'red' isn't good enough to select 'red_pcs', maybe redraw-related.
 
-19. Implement initializer file proxy to decongest package proxy.
+20. Make some zagged pitch-classes.
 
-20. Implement user input module file proxy.
+21. Port output change awareness.
 
-21. Prevent the creation of 'baca.materials.h' package.
+22. Implement something to tour all materials everywhere and inspect in sequence.
 
-22. Do away with local stylesheets.
+23. Make user input handler creation work.
 
-23. Consider keyword backtracking protocol to replace two-line backtracking protocol.
+24. Wrap tests around existing material functionality.
 
-24. Implement something to tour all materials everywhere and inspect in sequence.
+25. Clean up PitchRangeEditor main menu.
 
-25. Implement measuretools.all_are_measures() and other checkers.
+26. Edit instrument transposition.
 
-26. Encapsulate user input getter subprocedures.
+27. Edit instrument clefs.
 
-27. Make 'ls' hide or remove .pyc files.
+28. Remove extra appearance of B-flat clarinet from clarinetist config menu.
 
-28. Make 'edit initializer' read only.
+29. Change Instrument._default_performer_names to house (full, abbreviation) pairs.
 
-29. Port output change awareness.
+30. Use performer abbreviations to populate performer selection menu.
 
-30. Make user input handler creation work.
+31. Find a way to dynamically add (default) indicator to default menu entries.
 
-31. Change 'user_input' to 'user_input_wrapper'.
-
-32. Make some zagged pitch-classes.
-
-33. Implement RangeInventory in Abjad. Integrate into SCF.
-
-34. Define range inventories for all scores.
-
-35. Remove three blank lines at head of data-only output material module.
-
-36. Author read-only attribute tests.
-
-37. Audit and reimplement purview to always equal only a string.
-
-38. Remove blank lines between successive getter attribute entries.
+32. Consider keyword backtracking protocol to replace two-line backtracking protocol.

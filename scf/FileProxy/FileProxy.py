@@ -7,8 +7,8 @@ import shutil
 class FileProxy(SCFObject):
     
     def __init__(self, full_file_name, session=None):
-        assert isinstance(full_file_name, str)
-        assert os.path.exists(full_file_name)
+        assert isinstance(full_file_name, str), '{!r} is not a string.'.format(full_file_name)
+        assert os.path.exists(full_file_name), 'Initializer {!r} does not exist.'.format(full_file_name)
         SCFObject.__init__(self, session=session)
         self._full_file_name = full_file_name
 
@@ -33,6 +33,10 @@ class FileProxy(SCFObject):
 
     ### PUBLIC METHODS ###
 
+    def clear(self):
+        for section, is_sorted, blank_line_count  in self.sections:
+            section[:] = []
+
     def copy_file(self, new_full_file_name):
         shutil.copyfile(self.full_file_name, new_full_file_name)
 
@@ -47,10 +51,20 @@ class FileProxy(SCFObject):
         line = 'file copied.'
         self.proceed(line, prompt=prompt)
 
+    def edit(self):
+        os.system('vi + {}'.format(self.full_file_name))
+
     def rename_file(self, new_full_file_name):
         os.rename(self.full_file_name, new_full_file_name)
         self._full_file_name = new_full_file_name
         
     # TODO: extend for repository
-    def remove(self):
+    def remove(self, prompt=False):
         os.remove(self.full_file_name)
+        self.proceed('file deleted.', prompt=prompt)
+
+    def short_file_name(self):
+        return os.path.sep.split(self.full_file_name)[-1]
+
+    def view(self):
+        os.system('vi -R {}'.format(self.full_file_name))

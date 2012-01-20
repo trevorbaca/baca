@@ -1,1 +1,0 @@
-from ScoreTemplate import ScoreTemplate

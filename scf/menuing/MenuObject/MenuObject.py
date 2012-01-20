@@ -136,11 +136,16 @@ class MenuObject(SCFObject):
 
     def show_menu_client(self):
         lines = []
-        lines.append('{} file: {}'.format(self.make_tab(1), self.where[1]))
-        lines.append('{} line: {}'.format(self.make_tab(1), self.where[2]))
-        lines.append('{} meth: {}'.format(self.make_tab(1), self.where[3]))
-        lines.append('')
-        self.display(lines, capitalize_first_character=False)
+        if self.where is not None:
+            lines.append('{} file: {}'.format(self.make_tab(1), self.where[1]))
+            lines.append('{} line: {}'.format(self.make_tab(1), self.where[2]))
+            lines.append('{} meth: {}'.format(self.make_tab(1), self.where[3]))
+            lines.append('')
+            self.display(lines, capitalize_first_character=False)
+        else:
+            lines.append('location not known.')
+            lines.append('')
+            self.display(lines)
         self.session.hide_next_redraw = True
 
     def show_hidden_menu_entries(self):

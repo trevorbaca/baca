@@ -144,7 +144,7 @@ def get_possible_meter_multipliers(multiplied_measure_numerator):
 def make_illustration_from_output_material(measures):
     staff = stafftools.RhythmicStaff(measures)
     score = scoretools.Score([staff])
-    illustrationt = lilypondfiletools.make_basic_lilypond_file(score)
+    illustration = lilypondfiletools.make_basic_lilypond_file(score)
     illustration.file_initial_system_comments = []
     illustration.file_initial_system_includes = []
     measuretools.apply_beam_spanners_to_measures_in_expr(score)

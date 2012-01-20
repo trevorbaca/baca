@@ -1,7 +1,9 @@
+from baca.scf.helpers import safe_import
 from collections import OrderedDict
-from output_material import red_sargasso
+
+safe_import(globals(), 'output_material', 'red_sargasso')
 
 
 tags = OrderedDict([
-    ('user_input_handler_class_name', 'SargassoMeasureMaterialProxy'),
+    ('material_package_maker_class_name', 'SargassoMeasureMaterialPackageMaker'),
     ('should_have_illustration', True)])

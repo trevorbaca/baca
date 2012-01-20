@@ -1,1 +1,0 @@
-from GlobalProxy import GlobalProxy
