@@ -9,4 +9,6 @@ class MenuSectionAggregator(MenuObject):
 
     ### READ-ONLY ATTRIBUTES ###
 
-    
+    @property
+    def sections(self):
+        return self._sections

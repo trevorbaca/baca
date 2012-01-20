@@ -4,7 +4,6 @@ from baca.scf.menuing.MenuSectionAggregator import MenuSectionAggregator
 import types
 
 
-# TODO: create MenuSectionAggregator for Menu and UserInputGetter to both inherit from
 # TODO: write UserInputGetter tests
 class UserInputGetter(MenuSectionAggregator):
 
@@ -43,10 +42,6 @@ class UserInputGetter(MenuSectionAggregator):
     @property
     def prompts(self):
         return self._prompts
-
-    @property
-    def sections(self):
-        return self._sections
 
     @property
     def tests(self):

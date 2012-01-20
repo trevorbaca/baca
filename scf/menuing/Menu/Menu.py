@@ -108,10 +108,6 @@ class Menu(MenuSectionAggregator):
         return menu_lines
 
     @property
-    def sections(self):
-        return self._sections
-
-    @property
     def tokens(self):
         result = []
         for section in self.sections:
