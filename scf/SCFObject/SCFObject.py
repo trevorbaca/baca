@@ -141,16 +141,6 @@ class SCFObject(object):
 
     ### PUBLIC METHODS ###
 
-    def cache_breadcrumbs(self, cache=False):
-        self.session.cached_breadcrumbs = []
-        if cache:
-            self.session.cached_breadcrumbs = self.session.breadcrumbs[:]
-            self.session.breadcrumbs[:] = []
-
-    def restore_breadcrumbs(self, cache=False):
-        if cache:
-            self.session.breadcrumbs[:] = self.session.cached_breadcrumbs[:]
-
     def assign_user_input(self, user_input=None):
         if user_input is not None:
             self.session.user_input = user_input
@@ -163,6 +153,12 @@ class SCFObject(object):
 
     def backtrack(self):
         return self.session.backtrack()
+
+    def cache_breadcrumbs(self, cache=False):
+        self.session.cached_breadcrumbs = []
+        if cache:
+            self.session.cached_breadcrumbs = self.session.breadcrumbs[:]
+            self.session.breadcrumbs[:] = []
 
     def conditionally_clear_terminal(self):
         if self.session.is_displayable:
@@ -322,6 +318,9 @@ class SCFObject(object):
     def ptc(self):
         self.session.complete_transcript.ptc()
 
+    def pop_backtracking(self):
+        self.session.backtracking_stack.pop()
+
     def pop_breadcrumb(self):
         return self.breadcrumbs.pop()
 
@@ -384,6 +383,13 @@ class SCFObject(object):
             raise ValueError
         return directory_name
 
+    def push_backtracking(self):
+        if self.session.bactracking_stack:
+            last_number = self.session.backtracking_stack[-1]
+            self.session.backtracking_stack.append(last_number + 1)
+        else:
+            self.session.backtracking_stack.append(0)
+
     def query(self, prompt):
         response = handle_raw_input(prompt)
         return response.lower().startswith('y')
@@ -394,6 +400,10 @@ class SCFObject(object):
         module_names = [x for x in module_names if x.startswith(self.score_package_short_name)]
         module_names.sort()
         return module_names
+
+    def restore_breadcrumbs(self, cache=False):
+        if cache:
+            self.session.breadcrumbs[:] = self.session.cached_breadcrumbs[:]
 
     def where(self):
         return inspect.stack()[1]

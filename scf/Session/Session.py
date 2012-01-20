@@ -4,6 +4,7 @@ from baca.scf.Transcript import Transcript
 class Session(object):
     
     def __init__(self, user_input=None):
+        self._backtracking_stack = []
         self._command_history = []
         self._complete_transcript = Transcript()
         self._session_once_had_user_input = False
@@ -44,6 +45,10 @@ class Session(object):
         return '\n'.join(self.formatted_attributes)
 
     ### READ-ONLY PUBLIC ATTRIBUTES ###
+
+    @property
+    def backtracking_stack(self):
+        return self._backtracking_stack
 
     @property
     def command_history(self):
