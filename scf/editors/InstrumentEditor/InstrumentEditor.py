@@ -81,7 +81,7 @@ class InstrumentEditor(InteractiveEditor):
     def get_untuned_percussion_name_interactively(self, clear=True, cache=False):
         self.cache_breadcrumbs(cache=cache)
         while True:
-            self.append_breadcrumb('untuned percussion')
+            self.push_breadcrumb('untuned percussion')
             menu, section = self.make_new_menu(where=self.where(), is_numbered=True)
             section.tokens = instrumenttools.UntunedPercussion.known_untuned_percussion
             result = menu.run(clear=clear)
@@ -153,7 +153,7 @@ class InstrumentEditor(InteractiveEditor):
         menu, section = self.make_new_menu(where=self.where(), is_numbered=True, is_ranged=True)
         section.tokens = instrumenttools.list_instrument_names()
         while True:
-            self.append_breadcrumb('select instrument')
+            self.push_breadcrumb('select instrument')
             result = menu.run(clear=clear)
             if self.backtrack():
                 self.pop_breadcrumb()

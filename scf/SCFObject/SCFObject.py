@@ -135,7 +135,7 @@ class SCFObject(object):
         if user_input is not None:
             self.session.user_input = user_input
 
-    def append_breadcrumb(self, breadcrumb=None):
+    def push_breadcrumb(self, breadcrumb=None):
         if breadcrumb is not None:
             self.breadcrumb_stack.append(breadcrumb)
         else:

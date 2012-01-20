@@ -161,7 +161,7 @@ class PerformerEditor(InteractiveEditor):
         self.conditionally_initialize_target()
         menu = self.set_initial_configuration_menu()
         while True:
-            self.append_breadcrumb(self.target.name)
+            self.push_breadcrumb(self.target.name)
             result = menu.run(clear=clear)
             if self.backtrack():
                 self.pop_breadcrumb()

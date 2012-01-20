@@ -87,7 +87,7 @@ class Studio(SCFObject):
         elif result == 'm':
             breadcrumb = self.pop_breadcrumb()
             self.global_proxy.material_wrangler.run(head=self.studio_package_importable_name)
-            self.append_breadcrumb(breadcrumb)
+            self.push_breadcrumb(breadcrumb)
         elif result == 'mb':
             self.session.scores_to_show = 'mothballed'
         elif result == 'svn':
@@ -166,10 +166,10 @@ class Studio(SCFObject):
         type(self).__init__(self)
         self.assign_user_input(user_input=user_input)
         self.cache_breadcrumbs(cache=cache)
-        self.append_breadcrumb()
+        self.push_breadcrumb()
         run_main_menu = True
         while True:
-            self.append_breadcrumb(self.score_status_string)
+            self.push_breadcrumb(self.score_status_string)
             if run_main_menu:
                 menu = self.make_main_menu()
                 result = menu.run(clear=clear)
@@ -219,7 +219,7 @@ class Studio(SCFObject):
 
     def manage_svn(self, clear=True):
         while True:
-            self.append_breadcrumb('repository commands')
+            self.push_breadcrumb('repository commands')
             menu = self.make_svn_menu()
             result = menu.run(clear=clear)
             if self.session.is_backtracking_to_score:

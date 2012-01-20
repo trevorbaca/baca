@@ -85,7 +85,7 @@ class StylesheetProxy(FileProxy):
         self.assign_user_input(user_input=user_input)
         self.cache_breadcrumbs(cache=cache)
         while True:
-            self.append_breadcrumb()
+            self.push_breadcrumb()
             menu = self.make_main_menu()
             result = menu.run(clear=clear)
             if self.backtrack():

@@ -45,7 +45,7 @@ class InstrumentationEditor(InteractiveEditor):
                 for performer_name in performer_names:
                     performer = scoretools.Performer(performer_name)
                     performer_editor = PerformerEditor(session=self.session, target=performer)
-                    self.append_breadcrumb('add performers')
+                    self.push_breadcrumb('add performers')
                     self.push_backtracking()
                     performer_editor.set_initial_configuration_interactively()
                     self.pop_backtracking()
@@ -140,7 +140,7 @@ class InstrumentationEditor(InteractiveEditor):
         section.tokens = performer_pairs
         section.return_value_attribute = 'body'
         while True:
-            self.append_breadcrumb('add performers')
+            self.push_breadcrumb('add performers')
             result = menu.run(clear=clear)
             if self.backtrack():
                 self.pop_breadcrumb()

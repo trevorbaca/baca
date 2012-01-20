@@ -148,7 +148,7 @@ class MaterialProxyWrangler(PackageWrangler):
         self.assign_user_input(user_input=user_input)
         self.cachce_breadcrumbs(cache=cache)
         while True:
-            self.append_breadcrumb()
+            self.push_breadcrumb()
             menu = self.make_main_menu()
             result = menu.run(clear=clear)
             if self.backtrack():
@@ -169,7 +169,7 @@ class MaterialProxyWrangler(PackageWrangler):
         menu, section = self.make_new_menu(where=self.where(), is_numbered=True)
         section.tokens = self.material_proxy_spaced_class_names
         while True:
-            self.append_breadcrumb('select material proxy:')
+            self.push_breadcrumb('select material proxy:')
             result = menu.run(clear=clear)
             if self.backtrack():
                 self.pop_breadcrumb()

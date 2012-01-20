@@ -89,5 +89,3 @@ TODO
 43. Remove blank lines between successive getter attribute entries.
 
 44. Implement 'tm' to toggle menu visibility at any menu.
-
-45. Rename self.append_breadcrumb() to self.push_breadcrumb().

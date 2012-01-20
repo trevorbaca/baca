@@ -206,7 +206,7 @@ class PackageProxy(DirectoryProxy):
     def manage_tags(self, clear=True, cache=False):
         self.cache_breadcrumbs(cache=cache)
         while True:
-            self.append_breadcrumb('tags')
+            self.push_breadcrumb('tags')
             menu = self.make_tags_menu()
             result = menu.run(clear=clear)
             if self.backtrack():

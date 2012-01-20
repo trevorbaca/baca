@@ -68,7 +68,7 @@ class InteractiveEditor(SCFObject):
     def run(self, user_input=None, clear=True, cache=False):
         self.assign_user_input(user_input=user_input)
         self.cache_breadcrumbs(cache=cache)
-        self.append_breadcrumb()
+        self.push_breadcrumb()
         self.push_backtracking()
         self.conditionally_initialize_target()
         self.pop_backtracking()
@@ -77,7 +77,7 @@ class InteractiveEditor(SCFObject):
             self.restore_breadcrumbs(cache=cache)
             return
         while True:
-            self.append_breadcrumb()
+            self.push_breadcrumb()
             menu = self.make_main_menu()
             result = menu.run(clear=clear)
             if self.backtrack():

@@ -5,7 +5,7 @@ import py
 def test_MenuSection_default_index_01():
 
     menu = baca.scf.menuing.Menu()
-    menu.append_breadcrumb('location')
+    menu.push_breadcrumb('location')
     section = menu.make_new_section()
     section.section_title = 'section'
     section.extend(['apple', 'banana', 'cherry'])

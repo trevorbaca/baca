@@ -261,7 +261,7 @@ class ScoreProxy(PackageProxy):
     def manage_svn(self, clear=True, cache=False):
         self.cache_breadcrumbs(cache=cache)
         while True:
-            self.append_breadcrumb('repository commands')
+            self.push_breadcrumb('repository commands')
             menu = self.make_svn_menu()
             result = menu.run(clear=clear)
             if self.backtrack():
@@ -289,7 +289,7 @@ class ScoreProxy(PackageProxy):
         self.assign_user_input(user_input=user_input)
         self.cache_breadcrumbs(cache=cache)
         while True:
-            self.append_breadcrumb()
+            self.push_breadcrumb()
             menu = self.make_main_menu()
             result = menu.run(clear=clear)
             if self.session.is_backtracking_to_score:

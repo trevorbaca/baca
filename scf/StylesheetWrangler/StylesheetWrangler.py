@@ -60,7 +60,7 @@ class StylesheetWrangler(PackageWrangler):
         self.assign_user_input(user_input=user_input)
         self.cache_breadcrumbs(cache=cache)
         while True:
-            self.append_breadcrumb()
+            self.push_breadcrumb()
             menu = self.make_main_menu()
             result = menu.run(clear=clear)
             if self.backtrack():
@@ -81,7 +81,7 @@ class StylesheetWrangler(PackageWrangler):
         menu, section = self.make_new_menu(where=self.where(), is_numbered=True)
         section.tokens = self.stylesheet_file_names
         while True:
-            self.append_breadcrumb('select stylesheet')
+            self.push_breadcrumb('select stylesheet')
             result = menu.run(clear=clear)
             if self.backtrack():
                 self.pop_breadcrumb()
