@@ -728,9 +728,9 @@ class MaterialProxy(PackageProxy):
     # TODO: write test
     def select_user_input_handler_interactively(self, prompt=True):
         material_proxy_wrangler = MaterialProxyWrangler(session=self.session)
-        self.preserve_backtracking = True
+        self.push_backtracking()
         user_input_handler = material_proxy_wrangler.select_material_proxy_class_name_interactively()
-        self.preserve_backtracking = False
+        self.pop_backtracking()
         if self.backtrack():
             return
         self.add_tag('user_input_handler', user_input_handler.class_name)
@@ -740,9 +740,9 @@ class MaterialProxy(PackageProxy):
     # TODO: write test
     def select_stylesheet_interactively(self, prompt=True):
         stylesheet_wrangler = StylesheetWrangler(session=self.session)
-        self.preserve_backtracking = True
+        self.push_backtracking()
         source_stylesheet_file_name = stylesheet_wrangler.select_stylesheet_file_name_interactively()
-        self.preserve_backtracking = False
+        self.pop_backtracking()
         if self.backtrack():
             return
         self.link_local_stylesheet(source_stylesheet_file_name, prompt=prompt)

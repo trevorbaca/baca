@@ -186,9 +186,9 @@ class UserInputGetter(MenuSectionAggregator):
 
     def run(self, user_input=None):
         self.assign_user_input(user_input=user_input)
-        self.preserve_backtracking = True
+        self.push_backtracking()
         self.present_prompts_and_store_values()
-        self.preserve_backtracking = False
+        self.pop_backtracking()
         if len(self.values) == 1:
             return self.values[0]
         else:

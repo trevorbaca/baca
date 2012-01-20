@@ -129,16 +129,6 @@ class SCFObject(object):
     def ts(self):
         return self.transcript_signature
 
-    ### READ / WRITE PUBLIC ATTRIBUTES ###
-
-    @apply
-    def preserve_backtracking():
-        def fget(self):
-            return self.session.preserve_backtracking
-        def fset(self, preserve_backtracking):
-            self.session.preserve_backtracking = preserve_backtracking
-        return property(**locals())
-
     ### PUBLIC METHODS ###
 
     def assign_user_input(self, user_input=None):
@@ -319,7 +309,7 @@ class SCFObject(object):
         self.session.complete_transcript.ptc()
 
     def pop_backtracking(self):
-        self.session.backtracking_stack.pop()
+        return self.session.backtracking_stack.pop()
 
     def pop_breadcrumb(self):
         return self.breadcrumbs.pop()
@@ -384,7 +374,7 @@ class SCFObject(object):
         return directory_name
 
     def push_backtracking(self):
-        if self.session.bactracking_stack:
+        if self.session.backtracking_stack:
             last_number = self.session.backtracking_stack[-1]
             self.session.backtracking_stack.append(last_number + 1)
         else:

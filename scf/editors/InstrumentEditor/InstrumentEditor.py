@@ -173,9 +173,9 @@ class InstrumentEditor(InteractiveEditor):
             command = 'instrument = instrumenttools.{}()'.format(instrument_name)
             exec(command)
             if isinstance(instrument, instrumenttools.UntunedPercussion):
-                self.preserve_backtracking = True
+                self.push_backtracking()
                 instrument_name = self.get_untuned_percussion_name_interactively()
-                self.preserve_backtracking = False
+                self.pop_backtracking()
                 if self.backtrack():
                     continue
                 instrument.instrument_name = instrument_name

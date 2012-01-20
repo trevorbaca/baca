@@ -99,16 +99,16 @@ class UserInputHandlingMaterialProxy(MaterialProxy):
         total_elements = len(self.user_input_wrapper)
         getter = self.make_new_getter(where=self.where())
         getter.append_integer_in_closed_range('start at element number', 1, total_elements)
-        self.preserve_backtracking = True
+        self.push_backtracking()
         current_element_number = getter.run()
-        self.preserve_backtracking = False
+        self.pop_backtracking()
         if self.backtrack():
             return
         current_element_index = current_element_number - 1
         while True:
-            self.preserve_backtracking = True
+            self.push_backtracking()
             self.edit_user_input_at_number(current_element_number)
-            self.preserve_backtracking = False
+            self.pop_backtracking()
             if self.backtrack():
                 return
             current_element_index += 1

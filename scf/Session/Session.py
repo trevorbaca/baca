@@ -8,7 +8,6 @@ class Session(object):
         self._command_history = []
         self._complete_transcript = Transcript()
         self._session_once_had_user_input = False
-        self.preserve_backtracking = False
         self.breadcrumbs = []
         self.current_score_package_short_name = None
         self.display_pitch_ranges_with_numbered_pitches = False
@@ -131,15 +130,6 @@ class Session(object):
     ### READ / WRITE PUBLIC METHODS ###
 
     @apply
-    def preserve_backtracking():
-        def fget(self):
-            return self._preserve_backtracking
-        def fset(self, preserve_backtracking):
-            assert isinstance(preserve_backtracking, bool)
-            self._preserve_backtracking = preserve_backtracking
-        return property(**locals())
-
-    @apply
     def current_score_package_short_name():
         def fget(self):
             return self._current_score_package_short_name
@@ -231,9 +221,9 @@ class Session(object):
             return True
         elif self.is_backtracking_to_score:
             return True
-        elif self.is_backtracking_locally and self.preserve_backtracking:
+        elif self.is_backtracking_locally and self.backtracking_stack:
             return True
-        elif self.is_backtracking_locally and not self.preserve_backtracking:
+        elif self.is_backtracking_locally and not self.backtracking_stack:
             self.is_backtracking_locally = False
             return True
             
