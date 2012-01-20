@@ -3,7 +3,7 @@ from baca.scf import UserInputWrapper
 
 
 user_input = UserInputWrapper([
-	('measure_denominator', 8),
+	('measure_denominator', 4),
 	('measure_numerator_talea', [1, 1, 1, 1, 9]),
 	('measure_division_denominator', 16),
 	('measure_division_talea', [1, 1, 2, 1, 1, 2]),

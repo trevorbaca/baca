@@ -29,8 +29,8 @@ class SCFObject(object):
         return os.path.join(self.scf_root_directory, 'assets')
 
     @property
-    def breadcrumbs(self):
-        return self.session.breadcrumbs
+    def breadcrumb_stack(self):
+        return self.session.breadcrumb_stack
 
     @property
     def class_name(self):
@@ -137,9 +137,9 @@ class SCFObject(object):
 
     def append_breadcrumb(self, breadcrumb=None):
         if breadcrumb is not None:
-            self.breadcrumbs.append(breadcrumb)
+            self.breadcrumb_stack.append(breadcrumb)
         else:
-            self.breadcrumbs.append(self.breadcrumb)
+            self.breadcrumb_stack.append(self.breadcrumb)
 
     def backtrack(self):
         return self.session.backtrack()
@@ -147,8 +147,8 @@ class SCFObject(object):
     def cache_breadcrumbs(self, cache=False):
         self.session.cached_breadcrumbs = []
         if cache:
-            self.session.cached_breadcrumbs = self.session.breadcrumbs[:]
-            self.session.breadcrumbs[:] = []
+            self.session.cached_breadcrumbs = self.session.breadcrumb_stack[:]
+            self.session._breadcrumb_stack[:] = []
 
     def conditionally_clear_terminal(self):
         if self.session.is_displayable:
@@ -312,7 +312,7 @@ class SCFObject(object):
         return self.session.backtracking_stack.pop()
 
     def pop_breadcrumb(self):
-        return self.breadcrumbs.pop()
+        return self.breadcrumb_stack.pop()
 
     def pop_next_user_response_from_user_input(self):
         self.session.last_command_was_composite = False
@@ -393,7 +393,7 @@ class SCFObject(object):
 
     def restore_breadcrumbs(self, cache=False):
         if cache:
-            self.session.breadcrumbs[:] = self.session.cached_breadcrumbs[:]
+            self.session._breadcrumb_stack[:] = self.session.cached_breadcrumbs[:]
 
     def where(self):
         return inspect.stack()[1]

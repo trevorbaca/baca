@@ -90,8 +90,4 @@ TODO
 
 44. Implement 'tm' to toggle menu visibility at any menu.
 
-45. Perhaps make backtracking examine a *stack* of backtracks.
-
-46. Rename self.breadcrumbs to self.breadcrumb_stack.
-
-47. Rename self.append_breadcrumb() to self.push_breadcrumb().
+45. Rename self.append_breadcrumb() to self.push_breadcrumb().

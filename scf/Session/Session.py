@@ -5,10 +5,10 @@ class Session(object):
     
     def __init__(self, user_input=None):
         self._backtracking_stack = []
+        self._breadcrumb_stack = []
         self._command_history = []
         self._complete_transcript = Transcript()
         self._session_once_had_user_input = False
-        self.breadcrumbs = []
         self.current_score_package_short_name = None
         self.display_pitch_ranges_with_numbered_pitches = False
         self.dump_transcript = False
@@ -50,6 +50,10 @@ class Session(object):
         return self._backtracking_stack
 
     @property
+    def breadcrumb_stack(self):
+        return self._breadcrumb_stack
+
+    @property
     def command_history(self):
         return self._command_history
 
@@ -65,7 +69,7 @@ class Session(object):
     def formatted_attributes(self):
         result = []
         result.append('initial_user_input: {!r}'.format(self.initial_user_input))
-        result.append('breadcrumbs: {!r}'.format(self.breadcrumbs))
+        result.append('breadcrumbs: {!r}'.format(self.breadcrumb_stack))
         result.append('scores_to_show: {!r}'.format(self.scores_to_show))
         result.append('user_input: {!r}'.format(self.user_input))
         return result
@@ -94,8 +98,8 @@ class Session(object):
 
     @property
     def menu_header(self):
-        if self.breadcrumbs:
-            return ' - '.join(self.breadcrumbs)
+        if self.breadcrumb_stack:
+            return ' - '.join(self.breadcrumb_stack)
         else:
             return ''
 
