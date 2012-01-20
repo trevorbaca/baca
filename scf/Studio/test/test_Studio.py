@@ -190,7 +190,7 @@ def test_Studio_11():
 
     assert len(studio.transcript) == 5
     assert studio.transcript[1] == ['SCF> exec', '']
-    assert studio.transcript[2] == ['XCF> 2**30', '']
+    assert studio.transcript[2] == ['XCF> 2**30']
     assert studio.transcript[3] == ['1073741824', '']
     assert studio.transcript[4] == ['SCF> q', '']
 
@@ -204,7 +204,7 @@ def test_Studio_12():
 
     assert len(studio.transcript) == 5
     assert studio.transcript[1] == ['SCF> exec', '']
-    assert studio.transcript[2] == ['XCF> foo', '']
+    assert studio.transcript[2] == ['XCF> foo']
     assert studio.transcript[3] == ['Expression not executable.', '']
     assert studio.transcript[4] == ['SCF> q', '']
 

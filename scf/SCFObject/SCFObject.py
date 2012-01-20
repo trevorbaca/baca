@@ -186,7 +186,7 @@ class SCFObject(object):
         command = 'vi {}'.format(self.source_file_name)
         os.system(command)
 
-    def handle_raw_input(self, prompt, include_chevron=True):
+    def handle_raw_input(self, prompt, include_chevron=True, include_newline=True):
         prompt = iotools.capitalize_string_start(prompt)
         if include_chevron:
             prompt = prompt + '> '
@@ -194,7 +194,8 @@ class SCFObject(object):
             prompt = prompt + ' '
         if self.session.is_displayable:
             user_response = raw_input(prompt)
-            print ''
+            if include_newline:
+                print ''
         else:
             user_response = self.pop_next_user_response_from_user_input()
         if self.session.transcribe_next_command:
@@ -205,7 +206,8 @@ class SCFObject(object):
         if self.session.transcribe_next_command:
             menu_chunk = []
             menu_chunk.append('{}{}'.format(prompt, user_response))
-            menu_chunk.append('')
+            if include_newline:
+                menu_chunk.append('')
             self.session.complete_transcript.append_lines(menu_chunk)
         return user_response
 

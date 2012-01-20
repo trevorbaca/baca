@@ -55,7 +55,7 @@ class MenuObject(SCFObject):
 
     def exec_statement(self):
         lines = []
-        statement = self.handle_raw_input('XCF')
+        statement = self.handle_raw_input('XCF', include_newline=False)
         command = 'from abjad import *'
         exec(command)
         try:

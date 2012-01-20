@@ -26,58 +26,56 @@ TODO
 
 12. Remove blank line between help request and help response.
 
-13. Remove blank line between exec request and exec response.
+13. Remove extra appearance of B-flat clarinet from clarinetist config menu.
 
-14. Remove extra appearance of B-flat clarinet from clarinetist config menu.
+14. Research 'with' for breadcrumb management.
 
-15. Research 'with' for breadcrumb management.
+15. Change Instrument._default_performer_names to house (full, abbreviation) pairs.
 
-16. Change Instrument._default_performer_names to house (full, abbreviation) pairs.
+16. Use performer abbreviations to populate performer selection menu.
 
-17. Use performer abbreviations to populate performer selection menu.
+17. Find a way to include tags management in hidden menu of every package proxy.
 
-18. Find a way to include tags management in hidden menu of every package proxy.
+18. Figure out why 'red' isn't good enough to select 'red_pcs', maybe redraw-related.
 
-19. Figure out why 'red' isn't good enough to select 'red_pcs', maybe redraw-related.
+19. Find a way to dynamically add (default) indicator to default menu entries.
 
-20. Find a way to dynamically add (default) indicator to default menu entries.
+20. Implement initializer file proxy to decongest package proxy.
 
-21. Implement initializer file proxy to decongest package proxy.
+21. Implement user input module file proxy.
 
-22. Implement user input module file proxy.
+22. Prevent the creation of 'baca.materials.h' package.
 
-23. Prevent the creation of 'baca.materials.h' package.
+23. Do away with local stylesheets.
 
-24. Do away with local stylesheets.
+24. Consider keyword backtracking protocol to replace two-line backtracking protocol.
 
-25. Consider keyword backtracking protocol to replace two-line backtracking protocol.
+25. Implement something to tour all materials everywhere and inspect in sequence.
 
-26. Implement something to tour all materials everywhere and inspect in sequence.
+26. Implement measuretools.all_are_measures() and other checkers.
 
-27. Implement measuretools.all_are_measures() and other checkers.
+27. Encapsulate user input getter subprocedures.
 
-28. Encapsulate user input getter subprocedures.
+28. Make 'ls' hide or remove .pyc files.
 
-29. Make 'ls' hide or remove .pyc files.
+29. Make 'edit initializer' read only.
 
-30. Make 'edit initializer' read only.
+30. Port output change awareness.
 
-31. Port output change awareness.
+31. Make user input handler creation work.
 
-32. Make user input handler creation work.
+32. Change 'user_input' to 'user_input_wrapper'.
 
-33. Change 'user_input' to 'user_input_wrapper'.
+33. Make some zagged pitch-classes.
 
-34. Make some zagged pitch-classes.
+34. Implement RangeInventory in Abjad. Integrate into SCF.
 
-35. Implement RangeInventory in Abjad. Integrate into SCF.
+35. Define range inventories for all scores.
 
-36. Define range inventories for all scores.
+36. Remove three blank lines at head of data-only output material module.
 
-37. Remove three blank lines at head of data-only output material module.
+37. Author read-only attribute tests.
 
-38. Author read-only attribute tests.
+38. Audit and reimplement purview to always equal only a string.
 
-39. Audit and reimplement purview to always equal only a string.
-
-40. Remove blank lines between successive getter attribute entries.
+39. Remove blank lines between successive getter attribute entries.
