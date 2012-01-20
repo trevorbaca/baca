@@ -1,14 +1,13 @@
 from abjad.tools import iotools
 from abjad.tools import mathtools
-from baca.scf.menuing.MenuObject import MenuObject
 from baca.scf.menuing.MenuSection import MenuSection
+from baca.scf.menuing.MenuSectionAggregator import MenuSectionAggregator
 
 
-class Menu(MenuObject):
+class Menu(MenuSectionAggregator):
 
     def __init__(self, session=None, where=None):
-        MenuObject.__init__(self, session=session, where=where)
-        self._sections = []
+        MenuSectionAggregator.__init__(self, session=session, where=where)
         self.sections.append(self.make_default_hidden_section(session=session, where=where))
         self.explicit_title = None
 

@@ -1,16 +1,15 @@
 from abjad.tools import iotools
 from abjad.tools import pitchtools
-from baca.scf.menuing.MenuObject import MenuObject
+from baca.scf.menuing.MenuSectionAggregator import MenuSectionAggregator
 import types
 
 
 # TODO: create MenuSectionAggregator for Menu and UserInputGetter to both inherit from
 # TODO: write UserInputGetter tests
-class UserInputGetter(MenuObject):
+class UserInputGetter(MenuSectionAggregator):
 
     def __init__(self, session=None, where=None):
-        MenuObject.__init__(self, session=session, where=where)
-        self._sections = []
+        MenuSectionAggregator.__init__(self, session=session, where=where)
         self._argument_lists = []
         self._defaults = []
         self._execs = []

@@ -98,7 +98,20 @@ class UserInputHandlingMaterialProxy(MaterialProxy):
 
     # TODO: implement
     def populate_user_input_wrapper(self, prompt=True):
-        self.print_not_implemented()
+        total_elements = len(self.user_input_wrapper)
+        getter = self.make_new_getter(where=self.where())
+        getter.append_integer_in_closed_range('start at element number', 1, total_elements)
+        current_element_number = getter.run()
+        current_element_index = current_element_number - 1
+        if self.backtrack():
+            return
+        while True:
+            self.edit_user_input_at_number(current_element_number)
+            if self.backtrack():
+                return
+            current_element_index += 1
+            current_element_index %= total_elements
+            current_element_number = current_element_index + 1
 
     def show_user_input_demo_values(self, prompt=True):
         lines = []
