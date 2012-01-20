@@ -20,6 +20,7 @@ class Session(object):
         self.is_navigating_to_next_score = False
         self.is_navigating_to_prev_score = False
         self.last_command_was_composite = False
+        self.nonnumbered_menu_sections_are_hidden = False
         self.scores_to_show = 'active'
         self.transcribe_next_command = True
         self.use_current_user_input_values_as_default = False
@@ -185,6 +186,15 @@ class Session(object):
         def fset(self, is_backtracking_to_studio):
             assert isinstance(is_backtracking_to_studio, bool)
             self._is_backtracking_to_studio = is_backtracking_to_studio
+        return property(**locals())
+
+    @apply
+    def nonnumbered_menu_sections_are_hidden():
+        def fget(self):
+            return self._nonnumbered_menu_sections_are_hidden
+        def fset(self, nonnumbered_menu_sections_are_hidden):
+            assert isinstance(nonnumbered_menu_sections_are_hidden, bool)
+            self._nonnumbered_menu_sections_are_hidden = nonnumbered_menu_sections_are_hidden
         return property(**locals())
 
     @apply

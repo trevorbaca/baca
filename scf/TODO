@@ -81,5 +81,3 @@ TODO
 39. Audit and reimplement purview to always equal only a string.
 
 40. Remove blank lines between successive getter attribute entries.
-
-41. Implement 'tm' to toggle menu visibility at any menu.

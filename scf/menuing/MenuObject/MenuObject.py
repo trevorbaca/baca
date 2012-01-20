@@ -103,6 +103,8 @@ class MenuObject(SCFObject):
             self.session.is_backtracking_to_score = True
         elif isinstance(key, str) and 3 <= len(key) and 'studio'.startswith(key):
             self.session.is_backtracking_to_studio = True
+        elif key == 'tm':
+            self.toggle_menu()
         elif key == 'where':
             self.show_menu_client()
         else:
@@ -122,6 +124,7 @@ class MenuObject(SCFObject):
         section.append(('r', 'redraw'))
         section.append(('score', 'score'))
         section.append(('studio', 'studio'))
+        section.append(('tm', 'toggle menu'))
         section.append(('where', 'show menu client')) 
         return section
 

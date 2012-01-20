@@ -18,6 +18,7 @@ def test_ScoreProxy_show_hidden_menu_entries_01():
       '     redraw (r)',
       '     score (score)',
       '     studio (studio)',
+      '     toggle menu (tm)',
       '     show menu client (where)',
       '',
       '     manage repository (svn)',

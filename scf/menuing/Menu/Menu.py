@@ -101,8 +101,11 @@ class Menu(MenuSectionAggregator):
         menu_lines = []
         for section in self.sections:
             section_menu_lines = section.make_menu_lines()
+            #if not section.is_hidden:
+            #    menu_lines.extend(section_menu_lines)
             if not section.is_hidden:
-                menu_lines.extend(section_menu_lines)
+                if not self.session.nonnumbered_menu_sections_are_hidden or section.is_numbered:
+                    menu_lines.extend(section_menu_lines)
         if self.hide_current_run:
             menu_lines = []
         return menu_lines
@@ -238,6 +241,12 @@ class Menu(MenuSectionAggregator):
             if expr.endswith(' (default)'):
                 expr = expr.replace(' (default)', '')
             return expr
+
+    def toggle_menu(self):
+        if self.session.nonnumbered_menu_sections_are_hidden:
+            self.session.nonnumbered_menu_sections_are_hidden = False
+        else:
+            self.session.nonnumbered_menu_sections_are_hidden = True
 
     def user_enters_argument_range(self, user_input):
         if ',' in user_input:
