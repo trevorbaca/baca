@@ -84,8 +84,6 @@ TODO
 
 41. Audit and reimplement purview to always equal only a string.
 
-42. Make getters work with 'b' backtracking.
+42. Remove blank lines between successive getter attribute entries.
 
-43. Remove blank lines between successive getter attribute entries.
-
-44. Implement 'tm' to toggle menu visibility at any menu.
+43. Implement 'tm' to toggle menu visibility at any menu.
