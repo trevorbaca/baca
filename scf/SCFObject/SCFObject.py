@@ -195,7 +195,8 @@ class SCFObject(object):
         if self.session.is_displayable:
             user_response = raw_input(prompt)
             if include_newline:
-                print ''
+                if not user_response == 'help':
+                    print ''
         else:
             user_response = self.pop_next_user_response_from_user_input()
         if self.session.transcribe_next_command:
@@ -207,16 +208,17 @@ class SCFObject(object):
             menu_chunk = []
             menu_chunk.append('{}{}'.format(prompt, user_response))
             if include_newline:
-                menu_chunk.append('')
+                if not user_response == 'help':
+                    menu_chunk.append('')
             self.session.complete_transcript.append_lines(menu_chunk)
         return user_response
 
-    def handle_raw_input_with_default(self, prompt, default=None):
+    def handle_raw_input_with_default(self, prompt, default=None, include_chevron=True, include_newline=True):
         if default in (None, 'None'):
             default = ''
         readline.set_startup_hook(lambda: readline.insert_text(default))
         try:
-            return self.handle_raw_input(prompt)
+            return self.handle_raw_input(prompt, include_chevron=include_chevron, include_newline=include_newline)
         finally:
             readline.set_startup_hook()
 
