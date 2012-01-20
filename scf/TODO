@@ -89,3 +89,5 @@ TODO
 43. Remove blank lines between successive getter attribute entries.
 
 44. Implement 'tm' to toggle menu visibility at any menu.
+
+45. Perhaps make backtracking examine a *stack* of backtracks.

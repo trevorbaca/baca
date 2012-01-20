@@ -69,9 +69,7 @@ class UserInputHandlingMaterialProxy(MaterialProxy):
 
     def make_illustration(self):
         output_material = self.import_output_material_from_output_material_module()
-        self.debug(output_material, 1)
         illustration = self.illustration_maker(output_material)
-        self.debug(illustration, 2)
         return illustration
 
     def make_main_menu_for_material_made_with_user_input_handler(self):
@@ -96,17 +94,21 @@ class UserInputHandlingMaterialProxy(MaterialProxy):
         assert type(self).output_material_checker(output_material)
         return output_material
 
-    # TODO: implement
+    # TODO: make backtracking work
     def populate_user_input_wrapper(self, prompt=True):
         total_elements = len(self.user_input_wrapper)
         getter = self.make_new_getter(where=self.where())
         getter.append_integer_in_closed_range('start at element number', 1, total_elements)
+        self.preserve_backtracking = True
         current_element_number = getter.run()
-        current_element_index = current_element_number - 1
+        self.preserve_backtracking = False
         if self.backtrack():
             return
+        current_element_index = current_element_number - 1
         while True:
+            self.preserve_backtracking = True
             self.edit_user_input_at_number(current_element_number)
+            self.preserve_backtracking = False
             if self.backtrack():
                 return
             current_element_index += 1
