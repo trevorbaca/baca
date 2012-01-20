@@ -1,4 +1,5 @@
 # -*- encoding: utf-8 -*-
+from abjad.tools import iotools
 from abjad.tools import mathtools
 from baca.scf.SCFObject import SCFObject
 from baca.scf.GlobalProxy import GlobalProxy
@@ -142,7 +143,11 @@ class Studio(SCFObject):
         menu, section = self.make_new_menu(where=self.where(), is_numbered=True, is_keyed=False)
         score_titles = self.score_wrangler.score_titles_with_years
         score_package_short_names = self.score_wrangler.score_package_short_names_to_display
-        section.tokens = zip(score_package_short_names, score_titles)
+        #section.tokens = zip(score_package_short_names, score_titles)
+        tokens = zip(score_package_short_names, score_titles)
+        tmp = iotools.strip_diacritics_from_binary_string
+        tokens.sort(lambda x, y: cmp(tmp(x[1]), tmp(y[1])))
+        section.tokens = tokens
         return menu
 
     def make_svn_menu(self):

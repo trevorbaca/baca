@@ -40,50 +40,48 @@ TODO
 
 19. Figure out why 'red' isn't good enough to select 'red_pcs', maybe redraw-related.
 
-20. Change alphabeticization of scores in score selection menu.
+20. Find a way to dynamically add (default) indicator to default menu entries.
 
-21. Find a way to dynamically add (default) indicator to default menu entries.
+21. Implement initializer file proxy to decongest package proxy.
 
-22. Implement initializer file proxy to decongest package proxy.
+22. Implement user input module file proxy.
 
-23. Implement user input module file proxy.
+23. Prevent the creation of 'baca.materials.h' package.
 
-24. Prevent the creation of 'baca.materials.h' package.
+24. Do away with local stylesheets.
 
-25. Do away with local stylesheets.
+25. Consider keyword backtracking protocol to replace two-line backtracking protocol.
 
-26. Consider keyword backtracking protocol to replace two-line backtracking protocol.
+26. Implement something to tour all materials everywhere and inspect in sequence.
 
-27. Implement something to tour all materials everywhere and inspect in sequence.
+27. Implement measuretools.all_are_measures() and other checkers.
 
-28. Implement measuretools.all_are_measures() and other checkers.
+28. Encapsulate user input getter subprocedures.
 
-29. Encapsulate user input getter subprocedures.
+29. Make 'ls' hide or remove .pyc files.
 
-30. Make 'ls' hide or remove .pyc files.
+30. Make 'edit initializer' read only.
 
-31. Make 'edit initializer' read only.
+31. Author is-alphabetized script.
 
-32. Author is-alphabetized script.
+32. Port output change awareness.
 
-33. Port output change awareness.
+33. Make user input handler creation work.
 
-34. Make user input handler creation work.
+34. Change 'user_input' to 'user_input_wrapper'.
 
-35. Change 'user_input' to 'user_input_wrapper'.
+35. Make some zagged pitch-classes.
 
-36. Make some zagged pitch-classes.
+36. Implement RangeInventory in Abjad. Integrate into SCF.
 
-37. Implement RangeInventory in Abjad. Integrate into SCF.
+37. Define range inventories for all scores.
 
-38. Define range inventories for all scores.
+38. Remove three blank lines at head of data-only output material module.
 
-39. Remove three blank lines at head of data-only output material module.
+39. Author read-only attribute tests.
 
-40. Author read-only attribute tests.
+40. Audit and reimplement purview to always equal only a string.
 
-41. Audit and reimplement purview to always equal only a string.
+41. Remove blank lines between successive getter attribute entries.
 
-42. Remove blank lines between successive getter attribute entries.
-
-43. Implement 'tm' to toggle menu visibility at any menu.
+42. Implement 'tm' to toggle menu visibility at any menu.
