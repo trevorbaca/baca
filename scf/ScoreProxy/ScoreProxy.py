@@ -37,12 +37,12 @@ class ScoreProxy(PackageProxy):
         return self.get_tag('composer')
 
     @property
-    def dist_proxy(self):
-        return self._dist_proxy
-
-    @property
     def dist_pdf_directory_name(self):
         return os.path.join(self.dist_proxy.directory_name, 'pdf')
+
+    @property
+    def dist_proxy(self):
+        return self._dist_proxy
 
     @property
     def etc_proxy(self):

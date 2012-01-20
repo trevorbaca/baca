@@ -62,26 +62,24 @@ TODO
 
 30. Make 'edit initializer' read only.
 
-31. Author is-alphabetized script.
+31. Port output change awareness.
 
-32. Port output change awareness.
+32. Make user input handler creation work.
 
-33. Make user input handler creation work.
+33. Change 'user_input' to 'user_input_wrapper'.
 
-34. Change 'user_input' to 'user_input_wrapper'.
+34. Make some zagged pitch-classes.
 
-35. Make some zagged pitch-classes.
+35. Implement RangeInventory in Abjad. Integrate into SCF.
 
-36. Implement RangeInventory in Abjad. Integrate into SCF.
+36. Define range inventories for all scores.
 
-37. Define range inventories for all scores.
+37. Remove three blank lines at head of data-only output material module.
 
-38. Remove three blank lines at head of data-only output material module.
+38. Author read-only attribute tests.
 
-39. Author read-only attribute tests.
+39. Audit and reimplement purview to always equal only a string.
 
-40. Audit and reimplement purview to always equal only a string.
+40. Remove blank lines between successive getter attribute entries.
 
-41. Remove blank lines between successive getter attribute entries.
-
-42. Implement 'tm' to toggle menu visibility at any menu.
+41. Implement 'tm' to toggle menu visibility at any menu.

@@ -111,6 +111,15 @@ class Session(object):
     def session_once_had_user_input(self):
         return self._session_once_had_user_input
 
+    @apply
+    def transcribe_next_command():
+        def fget(self):
+            return self._transcribe_next_command
+        def fset(self, transcribe_next_command):
+            assert isinstance(transcribe_next_command, bool)
+            self._transcribe_next_command = transcribe_next_command
+        return property(**locals())
+
     @property
     def transcript(self):
         return self.complete_transcript.short_transcript
@@ -121,15 +130,6 @@ class Session(object):
             if self.user_input is None:
                 return True
         return False
-
-    @apply
-    def transcribe_next_command():
-        def fget(self):
-            return self._transcribe_next_command
-        def fset(self, transcribe_next_command):
-            assert isinstance(transcribe_next_command, bool)
-            self._transcribe_next_command = transcribe_next_command
-        return property(**locals())
 
     ### READ / WRITE PUBLIC METHODS ###
 
@@ -188,6 +188,15 @@ class Session(object):
         return property(**locals())
 
     @apply
+    def use_current_user_input_values_as_default():
+        def fget(self):
+            return self._use_current_user_input_values_as_default
+        def fset(self, use_current_user_input_values_as_default):
+            assert isinstance(use_current_user_input_values_as_default, bool)
+            self._use_current_user_input_values_as_default = use_current_user_input_values_as_default
+        return property(**locals())
+
+    @apply
     def user_input():
         def fget(self):
             return self._user_input
@@ -205,15 +214,6 @@ class Session(object):
         def fset(self, user_specified_quit):
             assert isinstance(user_specified_quit, bool)
             self._user_specified_quit = user_specified_quit
-        return property(**locals())
-
-    @apply
-    def use_current_user_input_values_as_default():
-        def fget(self):
-            return self._use_current_user_input_values_as_default
-        def fset(self, use_current_user_input_values_as_default):
-            assert isinstance(use_current_user_input_values_as_default, bool)
-            self._use_current_user_input_values_as_default = use_current_user_input_values_as_default
         return property(**locals())
 
     ### PUBLIC METHODS ###

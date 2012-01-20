@@ -210,11 +210,6 @@ class MaterialProxy(PackageProxy):
             return os.path.join(self.directory_name, 'output_material.py')
 
     @property
-    def output_material_module_importable_name(self):
-        if self.output_material_module_file_name is not None:
-            return '{}.output_material'.format(self.package_importable_name)
-
-    @property
     def output_material_module_import_statements(self):
         self.unimport_material_definition_module()
         try:
@@ -226,6 +221,11 @@ class MaterialProxy(PackageProxy):
         except ImportError:
             output_material_module_import_statements = []
         return output_material_module_import_statements
+
+    @property
+    def output_material_module_importable_name(self):
+        if self.output_material_module_file_name is not None:
+            return '{}.output_material'.format(self.package_importable_name)
 
     @property
     def score_package_short_name(self):
@@ -249,13 +249,13 @@ class MaterialProxy(PackageProxy):
 
     # TODO: write test
     @property
-    def stub_material_definition_file_name(self):
-        return os.path.join(self.assets_directory, 'stub_material_definition.py')
+    def stub_illustration_builder_file_name(self):
+        return os.path.join(self.assets_directory, 'stub_illustration_builder.py')
 
     # TODO: write test
     @property
-    def stub_illustration_builder_file_name(self):
-        return os.path.join(self.assets_directory, 'stub_illustration_builder.py')
+    def stub_material_definition_file_name(self):
+        return os.path.join(self.assets_directory, 'stub_material_definition.py')
 
     @property
     def user_input_handler(self):

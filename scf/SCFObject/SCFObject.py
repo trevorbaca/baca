@@ -36,26 +36,6 @@ class SCFObject(object):
     def class_name(self):
         return type(self).__name__
 
-    # TODO: write test
-    @property
-    def sketches_package_importable_name(self):
-        return '.'.join([self.studio_package_importable_name, 'sketches'])
-
-    # TODO: write test
-    @property
-    def studio_directory_name(self):
-        return self.package_importable_name_to_directory_name(self.studio_package_importable_name)
-
-    # TODO: write test
-    @property
-    def studio_materials_package_importable_name(self):
-        return '.'.join([self.studio_package_importable_name, 'materials'])
-
-    # TODO: write test
-    @property
-    def stylesheets_package_importable_name(self):
-        '.'.join([self.scf_package_importable_name, 'stylesheets'])
-
     @property
     def help_item_width(self):
         return 5
@@ -98,9 +78,10 @@ class SCFObject(object):
     def session(self):
         return self._session
 
+    # TODO: write test
     @property
-    def spaced_class_name(self):
-        return iotools.uppercamelcase_to_space_delimited_lowercase(self.class_name)
+    def sketches_package_importable_name(self):
+        return '.'.join([self.studio_package_importable_name, 'sketches'])
 
     @property
     def source_file_name(self):
@@ -109,13 +90,32 @@ class SCFObject(object):
         return source_file_name
 
     @property
-    def studio_package_importable_name(self):
-        return 'baca'
+    def spaced_class_name(self):
+        return iotools.uppercamelcase_to_space_delimited_lowercase(self.class_name)
 
     # TODO: write test
     @property
+    def studio_directory_name(self):
+        return self.package_importable_name_to_directory_name(self.studio_package_importable_name)
+
+    # TODO: write test
+    @property
+    def studio_materials_package_importable_name(self):
+        return '.'.join([self.studio_package_importable_name, 'materials'])
+
+    @property
+    def studio_package_importable_name(self):
+        return 'baca'
+
+    # TODO: write test; change to stylesheets_directory_name
+    @property
     def stylesheets_directory(self):
         return os.path.join(self.scf_root_directory, 'stylesheets')
+
+    # TODO: write test
+    @property
+    def stylesheets_package_importable_name(self):
+        '.'.join([self.scf_package_importable_name, 'stylesheets'])
 
     @property
     def transcript(self):
