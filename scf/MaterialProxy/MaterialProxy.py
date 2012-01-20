@@ -228,6 +228,13 @@ class MaterialProxy(PackageProxy):
             return '{}.output_material'.format(self.package_importable_name)
 
     @property
+    def output_material_module_spacer_lines(self):
+        lines = []
+        if self.output_material_module_import_statements:
+            lines.extend(['\n', '\n'])
+        return lines
+
+    @property
     def score_package_short_name(self):
         if self.package_importable_name is not None:
             if self.package_importable_name.startswith(self.studio_package_importable_name):
@@ -802,7 +809,7 @@ class MaterialProxy(PackageProxy):
         output_material_module_body_lines = self.make_output_material_module_body_lines()
         output_material_module = file(self.output_material_module_file_name, 'w')
         output_material_module.write('\n'.join(self.output_material_module_import_statements))
-        output_material_module.write('\n'.join(['\n', '\n']))
+        output_material_module.write('\n'.join(self.output_material_module_spacer_lines))
         output_material_module.write('\n'.join(output_material_module_body_lines))
         output_material_module.close()
         self.add_material_to_materials_initializer()

@@ -70,10 +70,8 @@ TODO
 
 34. Define range inventories for all scores.
 
-35. Remove three blank lines at head of data-only output material module.
+35. Author read-only attribute tests.
 
-36. Author read-only attribute tests.
+36. Audit and reimplement purview to always equal only a string.
 
-37. Audit and reimplement purview to always equal only a string.
-
-38. Remove blank lines between successive getter attribute entries.
+37. Remove blank lines between successive getter attribute entries.
