@@ -69,9 +69,9 @@ class InteractiveEditor(SCFObject):
         self.assign_user_input(user_input=user_input)
         self.cache_breadcrumbs(cache=cache)
         self.push_breadcrumb()
-        self.push_backtracking()
+        self.push_backtrack()
         self.conditionally_initialize_target()
-        self.pop_backtracking()
+        self.pop_backtrack()
         self.pop_breadcrumb()
         if self.backtrack():
             self.restore_breadcrumbs(cache=cache)

@@ -27,9 +27,9 @@ class MaterialWrangler(PackageWrangler):
 
     # TODO: write test
     def make_data_package_interactively(self):
-        self.push_backtracking()
+        self.push_backtrack()
         material_package_importable_name = self.get_new_material_package_importable_name_interactively()
-        self.pop_backtracking()
+        self.pop_backtrack()
         if self.backtrack():
             return
         user_input_handler_class_name = None
@@ -38,15 +38,15 @@ class MaterialWrangler(PackageWrangler):
 
     # TODO: write test
     def make_editable_material_package_interactively(self):
-        self.push_backtracking()
+        self.push_backtrack()
         material_package_importable_name = self.get_new_material_package_importable_name_interactively()
-        self.pop_backtracking()
+        self.pop_backtrack()
         if self.backtrack():
             return
-        self.push_backtracking()
+        self.push_backtrack()
         user_input_handler_class_name = \
             self.material_proxy_wrangler.select_material_proxy_class_name_interactively(clear=False, cache=True)
-        self.pop_backtracking()
+        self.pop_backtrack()
         if self.backtrack():
             return
         # TODO: set following attribute by editor automatically
@@ -95,16 +95,16 @@ class MaterialWrangler(PackageWrangler):
         import baca
         getter = self.make_new_getter(where=self.where())
         getter.append_string('material name')
-        self.push_backtracking()
+        self.push_backtrack()
         material_name = getter.run()
-        self.pop_backtracking()
+        self.pop_backtrack()
         if self.backtrack():
             return
         material_package_short_name = iotools.string_to_strict_directory_name(material_name)
         studio = baca.scf.Studio(session=self.session)
-        self.push_backtracking()
+        self.push_backtrack()
         purview_name = studio.get_purview_interactively(clear=False)
-        self.pop_backtracking()
+        self.pop_backtrack()
         if self.backtrack():
             return
         materials_package_importable_name = \

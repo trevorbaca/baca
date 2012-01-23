@@ -312,7 +312,7 @@ class SCFObject(object):
     def ptc(self):
         self.session.complete_transcript.ptc()
 
-    def pop_backtracking(self):
+    def pop_backtrack(self):
         return self.session.backtracking_stack.pop()
 
     def pop_breadcrumb(self):
@@ -377,7 +377,7 @@ class SCFObject(object):
             raise ValueError
         return directory_name
 
-    def push_backtracking(self):
+    def push_backtrack(self):
         if self.session.backtracking_stack:
             last_number = self.session.backtracking_stack[-1]
             self.session.backtracking_stack.append(last_number + 1)

@@ -33,11 +33,11 @@ class InstrumentationEditor(InteractiveEditor):
         while True:
             if self.backtrack():
                 return
-            #self.push_backtracking()
-            self.push_backtracking()
+            #self.push_backtrack()
+            self.push_backtrack()
             performer_names = self.select_performer_names_interactively()
-            #self.pop_backtracking()
-            self.pop_backtracking()
+            #self.pop_backtrack()
+            self.pop_backtrack()
             if self.backtrack():
                 return
             elif performer_names:
@@ -46,9 +46,9 @@ class InstrumentationEditor(InteractiveEditor):
                     performer = scoretools.Performer(performer_name)
                     performer_editor = PerformerEditor(session=self.session, target=performer)
                     self.push_breadcrumb('add performers')
-                    self.push_backtracking()
+                    self.push_backtrack()
                     performer_editor.set_initial_configuration_interactively()
-                    self.pop_backtracking()
+                    self.pop_backtrack()
                     self.pop_breadcrumb()
                     if self.backtrack():
                         performers = []
