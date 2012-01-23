@@ -152,10 +152,10 @@ class PackageProxy(DirectoryProxy):
             self.delete_tag(tag_name)
 
     def edit_initializer(self):
-        os.system('vi -m {}'.format(self.initializer_file_name))
+        os.system('vi -R {}'.format(self.initializer_file_name))
     
     def edit_parent_initializer(self):
-        os.system('vi -m {}'.format(self.parent_initializer_file_name))
+        os.system('vi -R {}'.format(self.parent_initializer_file_name))
 
     def get_tag(self, tag_name):
         tags = self.get_tags()

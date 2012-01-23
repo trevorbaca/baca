@@ -351,7 +351,7 @@ class MaterialProxy(PackageProxy):
             self.proceed(line, prompt=prompt)
 
     def edit_illustration_ly(self):
-        os.system('vi -m {}'.format(self.illustration_ly_file_name))
+        os.system('vi -R {}'.format(self.illustration_ly_file_name))
 
     def edit_illustration_builder(self):
         os.system('vi + {}'.format(self.illustration_builder_file_name))
@@ -364,7 +364,7 @@ class MaterialProxy(PackageProxy):
         os.system('vi + {}'.format(self.material_definition_file_name))
 
     def edit_output_material_module(self):
-        os.system('vi -m + {}'.format(self.output_material_module_file_name))
+        os.system('vi -R + {}'.format(self.output_material_module_file_name))
 
     # TODO: reimplement and keep
     def edit_source_stylesheet(self):
