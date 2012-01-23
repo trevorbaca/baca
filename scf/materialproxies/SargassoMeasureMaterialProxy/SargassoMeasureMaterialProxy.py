@@ -1,4 +1,3 @@
-from abjad.tools import componenttools
 from abjad.tools import durationtools
 from abjad.tools import mathtools
 from abjad.tools import measuretools
@@ -21,9 +20,7 @@ class SargassoMeasureMaterialProxy(UserInputHandlingMaterialProxy):
 
     illustration_maker = staticmethod(make_illustration_from_output_material)
 
-    # TODO: implement measuretools predicate
-    output_material_checker = staticmethod(
-        lambda x: componenttools.all_are_components(x, klasses=measuretools.Measure))
+    output_material_checker = staticmethod(measuretools.all_are_measures)
             
     output_material_maker = staticmethod(baca.music.make_sargasso_measures)
 

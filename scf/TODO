@@ -50,29 +50,27 @@ TODO
 
 24. Implement something to tour all materials everywhere and inspect in sequence.
 
-25. Implement measuretools.all_are_measures() and other checkers.
+25. Encapsulate user input getter subprocedures.
 
-26. Encapsulate user input getter subprocedures.
+26. Port output change awareness.
 
-27. Port output change awareness.
+27. Make user input handler creation work.
 
-28. Make user input handler creation work.
+28. Change 'user_input' to 'user_input_wrapper'.
 
-29. Change 'user_input' to 'user_input_wrapper'.
+29. Make some zagged pitch-classes.
 
-30. Make some zagged pitch-classes.
+30. Implement RangeInventory in Abjad. Integrate into SCF.
 
-31. Implement RangeInventory in Abjad. Integrate into SCF.
+31. Define range inventories for all scores.
 
-32. Define range inventories for all scores.
+32. Author read-only attribute tests.
 
-33. Author read-only attribute tests.
+33. Audit and reimplement purview to always equal only a string.
 
-34. Audit and reimplement purview to always equal only a string.
+34. Remove blank lines between successive getter attribute entries.
 
-35. Remove blank lines between successive getter attribute entries.
-
-36. Make user input getter defaults work like menu defaults;
+35. Make user input getter defaults work like menu defaults;
     Implement default_value on user input getter.
 
-37. Fix SCFObject.handle_user_input_with_default() default handling.
+36. Fix SCFObject.handle_user_input_with_default() default handling.
