@@ -54,22 +54,20 @@ TODO
 
 26. Encapsulate user input getter subprocedures.
 
-27. Make 'edit initializer' read only.
+27. Port output change awareness.
 
-28. Port output change awareness.
+28. Make user input handler creation work.
 
-29. Make user input handler creation work.
+29. Change 'user_input' to 'user_input_wrapper'.
 
-30. Change 'user_input' to 'user_input_wrapper'.
+30. Make some zagged pitch-classes.
 
-31. Make some zagged pitch-classes.
+31. Implement RangeInventory in Abjad. Integrate into SCF.
 
-32. Implement RangeInventory in Abjad. Integrate into SCF.
+32. Define range inventories for all scores.
 
-33. Define range inventories for all scores.
+33. Author read-only attribute tests.
 
-34. Author read-only attribute tests.
+34. Audit and reimplement purview to always equal only a string.
 
-35. Audit and reimplement purview to always equal only a string.
-
-36. Remove blank lines between successive getter attribute entries.
+35. Remove blank lines between successive getter attribute entries.
