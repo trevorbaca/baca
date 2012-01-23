@@ -218,7 +218,8 @@ class SCFObject(object):
             default = ''
         readline.set_startup_hook(lambda: readline.insert_text(default))
         try:
-            return self.handle_raw_input(prompt, include_chevron=include_chevron, include_newline=include_newline)
+            return self.handle_raw_input(
+                prompt, include_chevron=include_chevron, include_newline=include_newline)
         finally:
             readline.set_startup_hook()
 

@@ -71,3 +71,8 @@ TODO
 34. Audit and reimplement purview to always equal only a string.
 
 35. Remove blank lines between successive getter attribute entries.
+
+36. Make user input getter defaults work like menu defaults;
+    Implement default_value on user input getter.
+
+37. Fix SCFObject.handle_user_input_with_default() default handling.

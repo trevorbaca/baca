@@ -94,11 +94,10 @@ class UserInputHandlingMaterialProxy(MaterialProxy):
         assert type(self).output_material_checker(output_material)
         return output_material
 
-    # TODO: make backtracking work
     def populate_user_input_wrapper(self, prompt=True):
         total_elements = len(self.user_input_wrapper)
         getter = self.make_new_getter(where=self.where())
-        getter.append_integer_in_closed_range('start at element number', 1, total_elements)
+        getter.append_integer_in_closed_range('start at element number', 1, total_elements, default=1)
         self.push_backtrack()
         current_element_number = getter.run()
         self.pop_backtrack()
