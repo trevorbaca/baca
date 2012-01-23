@@ -58,6 +58,7 @@ class DirectoryProxy(SCFObject):
         self.directory_name = result
 
     def list_directory(self):
+        os.system('rm {}/*pyc'.format(self.directory_name))
         os.system('ls {}'.format(self.directory_name))
         self.display('')
         self.session.hide_next_redraw = True
