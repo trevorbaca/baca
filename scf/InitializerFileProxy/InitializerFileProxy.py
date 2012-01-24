@@ -153,6 +153,13 @@ class InitializerFileProxy(FileProxy):
     def view(self):
         os.system('vi -R {}'.format(self.full_file_name))
 
+    def write_stub_to_disk(self, tags=None):
+        self.clear()
+        initializer.setup_statements.append('from collections import OrderedDict\n')
+        tag_lines = initializer.pprint_tags(tags)
+        initializer.tag_lines.extend(tag_lines[:])
+        initializer.write_to_disk()
+
     def write_to_disk(self):
         initializer = file(self.full_file_name, 'w')
         initializer.write(self.format)

@@ -260,15 +260,6 @@ class PackageProxy(DirectoryProxy):
         self.remove_package_importable_name_from_sys_modules(self.package_importable_name)
 
     # TODO: move to initializer file proxy
-    def write_stub_initializer_to_disk(self, tags=None):
-        initializer = self.initializer_file_proxy
-        initializer.clear()
-        initializer.setup_statements.append('from collections import OrderedDict\n')
-        tag_lines = initializer.pprint_tags(tags)
-        initializer.tag_lines.extend(tag_lines[:])
-        initializer.write_to_disk()
-
-    # TODO: move to initializer file proxy
     def write_tags_to_initializer(self, tags):
         initializer = self.initializer_file_proxy
         initializer.parse()

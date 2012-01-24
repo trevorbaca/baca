@@ -80,7 +80,7 @@ class MaterialPackageWrangler(PackageWrangler):
         tags = collections.OrderedDict([])
         tags['user_input_handler_class_name'] = user_input_handler_class_name
         tags['should_have_illustration'] = should_have_illustration
-        material_proxy.write_stub_initializer_to_disk(tags=tags)
+        material_proxy.initializer_file_proxy.write_stub_to_disk(tags=tags)
         if user_input_handler_class_name is None:
             if should_have_illustration:
                 material_proxy.write_stub_music_material_definition_to_disk()
