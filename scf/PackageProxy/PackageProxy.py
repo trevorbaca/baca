@@ -224,25 +224,6 @@ class PackageProxy(DirectoryProxy):
         else:
             raise ValueError('Unknown package importable name {!r}.'.format(package_importable_name))
 
-    # TODO: remove
-    def pprint_tags(self, tags):
-        if tags:
-            lines = []
-            for key, value in sorted(tags.iteritems()):
-                key = repr(key)
-                if hasattr(value, '_get_multiline_repr'):
-                    repr_lines = value._get_multiline_repr(include_tools_package=True)
-                    value = '\n    '.join(repr_lines)
-                    lines.append('({}, {})'.format(key, value))
-                else:
-                    value = getattr(value, '_repr_with_tools_package', repr(value))
-                    lines.append('({}, {})'.format(key, value))
-            lines = ',\n    '.join(lines)
-            result = 'tags = OrderedDict([\n    {}])'.format(lines)
-        else:
-            result = 'tags = OrderedDict([])'
-        return result
-
     # TODO: write test
     def remove_import_statement_from_initializer(self, import_statement, initializer_file_name):
         initializer = InitializerFileProxy(initializer_file_name, session=self.session)
@@ -308,10 +289,10 @@ class PackageProxy(DirectoryProxy):
         initializer.tag_lines.extend(tag_lines[:])
         initializer.write_to_disk()
 
-    # TODO: move to initializer file proxy; write test
+    # TODO: move to initializer file proxy
     def write_tags_to_initializer(self, tags):
         initializer = self.initializer_file_proxy
         initializer.parse()
-        tag_lines = self.pprint_tags(tags)
+        tag_lines = initializer.pprint_tags(tags)
         initializer._tag_lines = tag_lines
         initializer.write_to_disk()
