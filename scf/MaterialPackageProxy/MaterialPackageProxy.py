@@ -1,10 +1,13 @@
 from abjad.tools import iotools
 from abjad.tools import markuptools
 from abjad.tools import mathtools
+from baca.scf.MaterialDefinitionModuleFileProxy import MaterialDefinitionModuleFileProxy
 from baca.scf.MaterialPackageMakerWrangler import MaterialPackageMakerWrangler
+from baca.scf.OutputMaterialModuleFileProxy import OutputMaterialModuleFileProxy
 from baca.scf.PackageProxy import PackageProxy
 from baca.scf.StylesheetFileProxy import StylesheetFileProxy
 from baca.scf.StylesheetWrangler import StylesheetWrangler
+from baca.scf.UserInputModuleFileProxy import UserInputModuleFileProxy
 import baca
 import os
 
@@ -162,10 +165,16 @@ class MaterialPackageProxy(PackageProxy):
         if self.directory_name is not None:
             return os.path.join(self.directory_name, 'stylesheet.ly')
 
+    # TODO: change name to self.material_definition_module_file_name
     @property
     def material_definition_file_name(self):
         if self.directory_name is not None:
             return os.path.join(self.directory_name, 'material_definition.py')
+
+    # TODO: write test
+    @property
+    def material_definition_module_file_proxy(self):
+        return MaterialDefinitionModuleFileProxy(self.material_definition_file_name, session=self.session)
 
     @property
     def material_definition_module_importable_name(self):
@@ -209,6 +218,11 @@ class MaterialPackageProxy(PackageProxy):
     def output_material_module_file_name(self): 
         if self.directory_name is not None:
             return os.path.join(self.directory_name, 'output_material.py')
+
+    # TODO: write test
+    @property
+    def output_material_module_file_proxy(self):
+        return OutputMaterialModuleFileProxy(self.output_material_module_file_name, session=self.session)
 
     # TODO: reimplement with helpers.safe_import()
     @property
@@ -289,6 +303,11 @@ class MaterialPackageProxy(PackageProxy):
     def user_input_module_file_name(self): 
         if self.directory_name is not None:
             return os.path.join(self.directory_name, 'user_input.py')
+    
+    # TODO: write test
+    @property
+    def user_input_module_file_proxy(self):
+        return UserInputModuleFileProxy(self.user_input_module_file_name, session=self.session)
 
     # TODO: write test
     @property
