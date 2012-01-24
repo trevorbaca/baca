@@ -487,7 +487,7 @@ class MaterialPackageProxy(PackageProxy):
             self.delete_material_package()
             self.session.is_backtracking_locally = True
         elif result == 'init':
-            self.edit_initializer()
+            self.initializer_file_proxy.view()
         elif result == 'ren':
             self.rename_material()
         elif result == 'reg':

@@ -46,7 +46,7 @@ class ChunkPackageProxy(PackageProxy):
             self.delete_package()
             return False
         elif result == 'n':
-            self.edit_initializer()
+            self.initializer_file_proxy.view()
 
     def make_main_menu(self):
         menu, section = self.make_new_menu(where=self.where())
