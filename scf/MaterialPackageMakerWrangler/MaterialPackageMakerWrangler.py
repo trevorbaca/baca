@@ -8,7 +8,7 @@ import os
 class MaterialPackageMakerWrangler(PackageWrangler):
 
     def __init__(self, session=None):
-        PackageWrangler.__init__(self, self.materialproxies_package_importable_name, session=session)
+        PackageWrangler.__init__(self, self.materialpackagemakers_package_importable_name, session=session)
 
     ### READ-ONLY PUBLIC ATTRIBUTES ###
 
@@ -31,7 +31,7 @@ class MaterialPackageMakerWrangler(PackageWrangler):
         material_proxy = baca.scf.MaterialPackageProxy(material_package_importable_name, session=self.session)
         user_input_handler_class_name = material_proxy.user_input_handler_class_name
         if user_input_handler_class_name is not None:
-            command = 'from baca.scf.materialproxies import {} as material_proxy_class'
+            command = 'from baca.scf.materialpackagemakers import {} as material_proxy_class'
             command = command.format(user_input_handler_class_name)
             exec(command)
             material_proxy = material_proxy_class(material_package_importable_name, session=self.session)
@@ -185,5 +185,5 @@ class MaterialPackageMakerWrangler(PackageWrangler):
         self.restore_breadcrumbs(cache=cache)
         return material_proxy_class_name
 
-    def unimport_materialproxies_package(self):
+    def unimport_materialpackagemakers_package(self):
         self.remove_package_importable_name_from_sys_modules(self.package_importable_name)

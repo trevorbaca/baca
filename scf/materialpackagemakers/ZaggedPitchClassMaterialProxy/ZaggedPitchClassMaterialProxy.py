@@ -32,7 +32,7 @@ class ZaggedPitchClassMaterialPackageProxy(UserInputHandlingMaterialPackageProxy
         ('grouping_counts', [1, 1, 2, 3]),])
 
     user_input_module_import_statements = [
-        'from baca.scf.materialproxies import ZaggedPitchClassMaterialPackageProxy',
+        'from baca.scf.materialpackagemakers import ZaggedPitchClassMaterialPackageProxy',
         'from baca.scf import UserInputWrapper',]
 
     # TODO: implement pitchtools.are_pitch_class_tokens()

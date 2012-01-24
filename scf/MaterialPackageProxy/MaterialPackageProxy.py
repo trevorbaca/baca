@@ -271,7 +271,7 @@ class MaterialPackageProxy(PackageProxy):
     def user_input_handler(self):
         user_input_handler_class_name = self.user_input_handler_class_name
         try:
-            command = 'from baca.scf.materialproxies import {}'.format(user_input_handler_class_name)
+            command = 'from baca.scf.materialpackagemakers import {}'.format(user_input_handler_class_name)
             exec(command)
             command = 'result = {}(client_material_package_importable_name={!r}, session=self.session)'
             command = command.format(user_input_handler_class_name, self.package_importable_name)

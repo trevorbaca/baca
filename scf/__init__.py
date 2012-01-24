@@ -29,5 +29,5 @@ from UserInputWrapper import UserInputWrapper
 import editors
 import exceptions
 import helpers
-import materialproxies
+import materialpackagemakers
 import menuing

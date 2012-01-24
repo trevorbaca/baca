@@ -47,13 +47,13 @@ class SCFObject(object):
 
     # TODO: write test
     @property
-    def materialproxies_directory_name(self):
-        return os.path.join(self.scf_root_directory, 'materialproxies')
+    def materialpackagemakers_directory_name(self):
+        return os.path.join(self.scf_root_directory, 'materialpackagemakers')
 
     # TODO: write test
     @property
-    def materialproxies_package_importable_name(self):
-        return '.'.join([self.scf_package_importable_name, 'materialproxies'])
+    def materialpackagemakers_package_importable_name(self):
+        return '.'.join([self.scf_package_importable_name, 'materialpackagemakers'])
 
     # TODO: write test
     @property
