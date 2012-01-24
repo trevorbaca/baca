@@ -19,12 +19,12 @@ class InitializerFileProxy(FileProxy):
     @property
     def content_chunks(self):
         return (
-            (self.encoding_directives, True),
-            (self.docstring_lines, False),
-            (self.setup_statements, True),
-            (self.protected_import_statements, True),
-            (self.tag_lines, False),
-            (self.teardown_statements, True),
+            (self._encoding_directives, True),
+            (self._docstring_lines, False),
+            (self._setup_statements, True),
+            (self._protected_import_statements, True),
+            (self._tag_lines, False),
+            (self._teardown_statements, True),
             )
 
     @property
@@ -71,6 +71,15 @@ class InitializerFileProxy(FileProxy):
         return self._teardown_statements
 
     ### PUBLIC METHODS ###
+
+    def add_protected_import_statement(self, source_module_short_name, source_attribute_name):
+        import_statement = 'safe_import(globals(), {!r}, {!r})'
+        import_statement = import_statement.format(source_module_short_name, source_attribute_name)
+        self.protected_import_statements.append(import_statement)
+        
+    def clear(self):
+        for content_chunk, is_sorted in self.content_chunks:
+            content_chunk[:] = []
 
     def display(self):
         print self.format
