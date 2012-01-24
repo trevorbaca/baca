@@ -116,7 +116,7 @@ class PackageProxy(DirectoryProxy):
     def add_tag(self, tag_name, tag_value):
         tags = self.get_tags()
         tags[tag_name] = tag_value
-        self.write_tags_to_initializer(tags)
+        self.initializer_file_proxy.write_tags_to_disk(tags)
 
     def add_tag_interactively(self):
         getter = self.make_new_getter(where=self.where())
@@ -138,7 +138,7 @@ class PackageProxy(DirectoryProxy):
     def delete_tag(self, tag_name):
         tags = self.get_tags()
         del(tags[tag_name])
-        self.write_tags_to_initializer(tags)
+        self.initializer_file_proxy.write_tags_to_disk(tags)
 
     def delete_tag_interactively(self):
         getter = self.make_new_getter(where=self.where())
@@ -258,11 +258,3 @@ class PackageProxy(DirectoryProxy):
 
     def unimport_package(self):
         self.remove_package_importable_name_from_sys_modules(self.package_importable_name)
-
-    # TODO: move to initializer file proxy
-    def write_tags_to_initializer(self, tags):
-        initializer = self.initializer_file_proxy
-        initializer.parse()
-        tag_lines = initializer.pprint_tags(tags)
-        initializer._tag_lines = tag_lines
-        initializer.write_to_disk()

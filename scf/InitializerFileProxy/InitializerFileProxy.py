@@ -160,6 +160,12 @@ class InitializerFileProxy(FileProxy):
         initializer.tag_lines.extend(tag_lines[:])
         initializer.write_to_disk()
 
+    def write_tags_to_disk(self, tags):
+        self.parse()
+        tag_lines = self.pprint_tags(tags)
+        self._tag_lines = tag_lines
+        self.write_to_disk()
+
     def write_to_disk(self):
         initializer = file(self.full_file_name, 'w')
         initializer.write(self.format)
