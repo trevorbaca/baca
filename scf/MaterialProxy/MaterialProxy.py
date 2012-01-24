@@ -5,6 +5,7 @@ from baca.scf.MaterialProxyWrangler import MaterialProxyWrangler
 from baca.scf.PackageProxy import PackageProxy
 from baca.scf.StylesheetFileProxy import StylesheetFileProxy
 from baca.scf.StylesheetWrangler import StylesheetWrangler
+import baca
 import os
 
 
@@ -209,6 +210,7 @@ class MaterialProxy(PackageProxy):
         if self.directory_name is not None:
             return os.path.join(self.directory_name, 'output_material.py')
 
+    # TODO: reimplement with helpers.safe_import()
     @property
     def output_material_module_import_statements(self):
         self.unimport_material_definition_module()
@@ -264,6 +266,7 @@ class MaterialProxy(PackageProxy):
     def stub_material_definition_file_name(self):
         return os.path.join(self.assets_directory, 'stub_material_definition.py')
 
+    # TODO: reimplement with helpers.safe_import()
     @property
     def user_input_handler(self):
         user_input_handler_class_name = self.user_input_handler_class_name
@@ -294,6 +297,7 @@ class MaterialProxy(PackageProxy):
             return '{}.user_input'.format(self.package_importable_name)
     
     # TODO: write test
+    # TODO: reimplement with helpers.safe_import()
     @property
     def user_input_wrapper(self):
         if self.has_user_input_module:
@@ -372,19 +376,12 @@ class MaterialProxy(PackageProxy):
         stylesheet_proxy = StylesheetFileProxy(self.source_stylesheet_file_name, session=self.session)
         stylesheet_proxy.vi_stylesheet()
 
-    # TODO: replace with helpers.safe_import()
     def import_material_definition_from_material_definition_module(self):
         self.unimport_material_definition_module()
-        try:
-            command = 'from {} import {}'.format(
-                self.material_definition_module_importable_name, self.material_underscored_name)
-            exec(command)
-            command = 'result = {}'.format(self.material_underscored_name)
-            exec(command)
-            return result
-        except ImportError as e:
-            pass
+        return baca.scf.helpers.safe_import(locals(), 'material_definition', self.material_underscored_name, 
+            source_parent_module_importable_name=self.package_importable_name)
     
+    # TODO: reimplement with helpers.safe_import()
     def import_output_material_from_output_material_module(self):
         self.unimport_module_hierarchy()
         try:
@@ -398,6 +395,7 @@ class MaterialProxy(PackageProxy):
             pass
 
     # TODO: change name to self.import_illustration_from_illustration_builder_module
+    # TODO: reimplement with helpers.safe_import()
     def import_illustration_from_illustration_builder(self):
         if not self.has_illustration_builder:
             return None
@@ -411,6 +409,7 @@ class MaterialProxy(PackageProxy):
         return illustration
         
     # TODO: change name to self.import_user_input_wrapper_from_user_input_module()
+    # TODO: reimplement with helpers.safe_import()
     def import_user_input_from_user_input_module(self):
         self.unimport_user_input_module()
         try:
