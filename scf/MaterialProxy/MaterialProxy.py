@@ -372,6 +372,7 @@ class MaterialProxy(PackageProxy):
         stylesheet_proxy = StylesheetFileProxy(self.source_stylesheet_file_name, session=self.session)
         stylesheet_proxy.vi_stylesheet()
 
+    # TODO: replace with helpers.safe_import()
     def import_material_definition_from_material_definition_module(self):
         self.unimport_material_definition_module()
         try:
