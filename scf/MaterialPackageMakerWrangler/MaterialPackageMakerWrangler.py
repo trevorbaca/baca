@@ -5,7 +5,7 @@ from baca.scf.PackageWrangler import PackageWrangler
 import os
 
 
-class MaterialPackageProxyWrangler(PackageWrangler):
+class MaterialPackageMakerWrangler(PackageWrangler):
 
     def __init__(self, session=None):
         PackageWrangler.__init__(self, self.materialproxies_package_importable_name, session=session)

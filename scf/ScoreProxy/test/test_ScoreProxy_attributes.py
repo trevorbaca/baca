@@ -15,7 +15,7 @@ def test_ScoreProxy_attributes_01():
     assert isinstance(score_proxy.dist_proxy, baca.scf.DirectoryProxy)
     assert isinstance(score_proxy.etc_proxy, baca.scf.DirectoryProxy)
     assert isinstance(score_proxy.exg_proxy, baca.scf.DirectoryProxy)
-    assert isinstance(score_proxy.material_proxy_wrangler, baca.scf.MaterialPackageProxyWrangler)
+    assert isinstance(score_proxy.material_proxy_wrangler, baca.scf.MaterialPackageMakerWrangler)
     assert isinstance(score_proxy.material_wrangler, baca.scf.MaterialWrangler)
     assert isinstance(score_proxy.mus_proxy, baca.scf.MusPackageProxy)
 

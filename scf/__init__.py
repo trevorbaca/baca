@@ -9,7 +9,7 @@ from GlobalProxy import GlobalProxy
 from InitializerFileProxy import InitializerFileProxy
 from MaterialDefinitionModuleFileProxy import MaterialDefinitionModuleFileProxy
 from MaterialPackageProxy import MaterialPackageProxy
-from MaterialPackageProxyWrangler import MaterialPackageProxyWrangler
+from MaterialPackageMakerWrangler import MaterialPackageMakerWrangler
 from MaterialWrangler import MaterialWrangler
 from MusPackageProxy import MusPackageProxy
 from OutputMaterialModuleFileProxy import OutputMaterialModuleFileProxy
