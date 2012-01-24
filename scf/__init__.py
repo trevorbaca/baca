@@ -1,5 +1,5 @@
-from ChunkProxy import ChunkProxy
-from ChunkWrangler import ChunkWrangler
+from ChunkPackageProxy import ChunkPackageProxy
+from ChunkPackageProxyWrangler import ChunkPackageProxyWrangler
 from Composer import Composer
 from DirectoryProxy import DirectoryProxy
 from DistProxy import DistProxy

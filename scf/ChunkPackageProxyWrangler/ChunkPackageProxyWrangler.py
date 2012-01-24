@@ -1,9 +1,9 @@
-from baca.scf.ChunkProxy import ChunkProxy
+from baca.scf.ChunkPackageProxy import ChunkPackageProxy
 from baca.scf.PackageWrangler import PackageWrangler
 import os
 
 
-class ChunkWrangler(PackageWrangler):
+class ChunkPackageProxyWrangler(PackageWrangler):
 
     def __init__(self, session=None):
         import baca
@@ -18,11 +18,11 @@ class ChunkWrangler(PackageWrangler):
     ### PUBLIC METHODS ###
 
     def make_chunk_interactively(self):
-        chunk_proxy = ChunkProxy(session=self.session)
+        chunk_proxy = ChunkPackageProxy(session=self.session)
         chunk_proxy.make_chunk_interactively()
 
     def get_package_proxy(self, package_importable_name):
-        return ChunkProxy(package_importable_name, session=self.session)
+        return ChunkPackageProxy(package_importable_name, session=self.session)
 
     def handle_main_menu_result(self, result):
         assert isinstance(result, str)

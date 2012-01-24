@@ -1,7 +1,7 @@
 from baca.scf.PackageProxy import PackageProxy
 
 
-class ChunkProxy(PackageProxy):
+class ChunkPackageProxy(PackageProxy):
 
     def __init__(self, package_importable_name=None, score_template=None, session=None):
         PackageProxy.__init__(self, package_importable_name=package_importable_name, session=session)
@@ -85,7 +85,7 @@ class ChunkProxy(PackageProxy):
             return
         package_short_name = result.replace(' ', '_')
         package_importable_name = '.'.join([self.package_importable_name, package_short_name])
-        chunk_proxy = ChunkProxy(package_importable_name)
+        chunk_proxy = ChunkPackageProxy(package_importable_name)
         chunk_proxy.make_chunk()
         line = 'chunk spaced name set.'
         self.proceed(line, prompt=prompt)

@@ -2,23 +2,23 @@ from abjad.tools import iotools
 import baca
 
 
-def test_ChunkWrangler_01():
+def test_ChunkPackageProxyWrangler_01():
     '''Attributes.
     '''
 
-    chunk_wrangler = baca.scf.ChunkWrangler()
-    assert chunk_wrangler.class_name == 'ChunkWrangler'
+    chunk_wrangler = baca.scf.ChunkPackageProxyWrangler()
+    assert chunk_wrangler.class_name == 'ChunkPackageProxyWrangler'
     assert chunk_wrangler.toplevel_score_package_importable_name_body == 'mus.chunks'
     assert chunk_wrangler.source_file_name == \
-        '/Users/trevorbaca/Documents/other/baca/scf/ChunkWrangler/ChunkWrangler.py'
-    assert chunk_wrangler.spaced_class_name == 'chunk wrangler'
+        '/Users/trevorbaca/Documents/other/baca/scf/ChunkPackageProxyWrangler/ChunkPackageProxyWrangler.py'
+    assert chunk_wrangler.spaced_class_name == 'chunk package proxy wrangler'
     
 
-def test_ChunkWrangler_02():
+def test_ChunkPackageProxyWrangler_02():
     '''Iteration.
     '''
 
-    chunk_wrangler = baca.scf.ChunkWrangler()
+    chunk_wrangler = baca.scf.ChunkPackageProxyWrangler()
 
     names = chunk_wrangler.list_wrangled_package_importable_names()
     assert all([iotools.is_underscore_delimited_lowercase_package_name(x) for x in names])
@@ -30,11 +30,11 @@ def test_ChunkWrangler_02():
     assert all([iotools.is_space_delimited_lowercase_string(x) for x in names])
 
 
-def test_ChunkWrangler_03():
+def test_ChunkPackageProxyWrangler_03():
     '''Straightforward methods.
     '''
 
-    chunk_wrangler = baca.scf.ChunkWrangler()
+    chunk_wrangler = baca.scf.ChunkPackageProxyWrangler()
 
     chunk_proxy = chunk_wrangler.get_package_proxy('manos.mus.chunks.test_chunk')
-    assert isinstance(chunk_proxy, baca.scf.ChunkProxy)
+    assert isinstance(chunk_proxy, baca.scf.ChunkPackageProxy)

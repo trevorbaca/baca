@@ -11,7 +11,7 @@ def test_ScoreProxy_attributes_01():
     score_proxy = baca.scf.ScoreProxy('manos')
 
 
-    assert isinstance(score_proxy.chunk_wrangler, baca.scf.ChunkWrangler)
+    assert isinstance(score_proxy.chunk_wrangler, baca.scf.ChunkPackageProxyWrangler)
     assert isinstance(score_proxy.dist_proxy, baca.scf.DirectoryProxy)
     assert isinstance(score_proxy.etc_proxy, baca.scf.DirectoryProxy)
     assert isinstance(score_proxy.exg_proxy, baca.scf.DirectoryProxy)
@@ -44,7 +44,7 @@ def test_ScoreProxy_attributes_01():
         '/Users/trevorbaca/Documents/scores/manos/mus/__init__.py',)
 
     assert score_proxy.score_package_wranglers == (
-        baca.scf.ChunkWrangler(),
+        baca.scf.ChunkPackageProxyWrangler(),
         baca.scf.MaterialWrangler())    
 
     assert score_proxy.top_level_subdirectories == (
