@@ -28,15 +28,6 @@ def test_GlobalProxy_01():
 
 
 def test_GlobalProxy_02():
-    '''Straightforward methods.
-    '''
-
-    global_proxy = baca.scf.GlobalProxy()
-    
-    assert isinstance(global_proxy.import_attribute_from_initializer('scf'), types.ModuleType)
-
-
-def test_GlobalProxy_03():
     '''Shared session.
     '''
 

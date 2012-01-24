@@ -31,16 +31,3 @@ class GlobalProxy(PackageProxy):
     @property
     def materials_package_importable_name(self):
         return self.studio_materials_package_importable_name
-
-    ### PUBLIC METHODS ###
-
-    # TODO: write test
-    def import_attribute_from_initializer(self, attribute_name):
-        try:
-            command = 'from {} import {}'.format(self.package_importable_name, attribute_name)
-            exec(command)
-            command = 'result = {}'.format(attribute_name)
-            exec(command)
-            return result
-        except ImportError:
-            return None
