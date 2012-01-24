@@ -17,7 +17,7 @@ def test_ScoreProxy_attributes_01():
     assert isinstance(score_proxy.exg_proxy, baca.scf.DirectoryProxy)
     assert isinstance(score_proxy.material_proxy_wrangler, baca.scf.MaterialPackageProxyWrangler)
     assert isinstance(score_proxy.material_wrangler, baca.scf.MaterialWrangler)
-    assert isinstance(score_proxy.mus_proxy, baca.scf.MusProxy)
+    assert isinstance(score_proxy.mus_proxy, baca.scf.MusPackageProxy)
 
     assert score_proxy.has_correct_initializers
     assert score_proxy.is_score_local_purview
@@ -48,7 +48,7 @@ def test_ScoreProxy_attributes_01():
         baca.scf.MaterialWrangler())    
 
     assert score_proxy.top_level_subdirectories == (
-        baca.scf.DistProxy('manos'),
-        baca.scf.EtcProxy('manos'),
-        baca.scf.ExgProxy('manos'),
-        baca.scf.MusProxy('manos'))
+        baca.scf.DistDirectoryProxy('manos'),
+        baca.scf.EtcDirectoryProxy('manos'),
+        baca.scf.ExgDirectoryProxy('manos'),
+        baca.scf.MusPackageProxy('manos'))
