@@ -1,9 +1,9 @@
 from baca.scf.PackageWrangler import PackageWrangler
-from baca.scf.ScoreProxy import ScoreProxy
+from baca.scf.ScorePackageProxy import ScorePackageProxy
 import os
 
 
-class ScoreWrangler(PackageWrangler):
+class ScorePackageWrangler(PackageWrangler):
 
     def __init__(self, session=None):
         PackageWrangler.__init__(self, None, '', session=session)
@@ -41,7 +41,7 @@ class ScoreWrangler(PackageWrangler):
     ### PUBLIC METHODS ###
 
     def make_score_package_interactively(self, score_package_importable_name):
-        score_proxy = ScoreProxy(session=self.session)
+        score_proxy = ScorePackageProxy(session=self.session)
         score_proxy.make_score_package_creation_wizard()
 
     def fix_score_package_structures(self):
@@ -50,7 +50,7 @@ class ScoreWrangler(PackageWrangler):
             score_proxy.profile_package_structure()
 
     def get_package_proxy(self, package_importable_name):
-        return ScoreProxy(package_importable_name, session=self.session)
+        return ScorePackageProxy(package_importable_name, session=self.session)
 
     def profile_score_package_structures(self):
         for score_proxy in self.score_proxies_to_display:
@@ -60,7 +60,7 @@ class ScoreWrangler(PackageWrangler):
         menu, section = self.make_new_menu(where=self.where(), is_numbered=True)
         section.tokens = self.score_titles_with_years
         score_package_short_name = self.title_to_score_package_short_name(value)
-        score_proxy = ScoreProxy(score_package_short_name, session=self.session)
+        score_proxy = ScorePackageProxy(score_package_short_name, session=self.session)
         return score_proxy
     
     # TODO: move up to level of wrangler

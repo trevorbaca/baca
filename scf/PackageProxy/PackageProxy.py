@@ -81,7 +81,7 @@ class PackageProxy(DirectoryProxy):
         if self.score_package_short_name is None:
             return baca.scf.GlobalProxy()
         else:
-            return baca.scf.ScoreProxy(self.score_package_short_name)
+            return baca.scf.ScorePackageProxy(self.score_package_short_name)
 
     # TODO: write test
     @property
@@ -96,7 +96,7 @@ class PackageProxy(DirectoryProxy):
     def score(self):
         import baca
         if self.score_package_short_name is not None:
-            return baca.scf.ScoreProxy(self.score_package_short_name)
+            return baca.scf.ScorePackageProxy(self.score_package_short_name)
 
     # TODO: write test
     @property
@@ -226,7 +226,7 @@ class PackageProxy(DirectoryProxy):
         elif package_importable_name.split('.')[0] == self.studio_package_importable_name:
             return baca.scf.GlobalProxy()
         elif package_importable_name.split('.')[0] in os.listdir(os.environ.get('SCORES')):
-            return baca.scf.ScoreProxy(package_importable_name.split('.')[0])
+            return baca.scf.ScorePackageProxy(package_importable_name.split('.')[0])
         else:
             raise ValueError('Unknown package importable name {!r}.'.format(package_importable_name))
 

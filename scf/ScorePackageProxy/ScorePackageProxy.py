@@ -2,7 +2,7 @@ from baca.scf.PackageProxy import PackageProxy
 import os
 
 
-class ScoreProxy(PackageProxy):
+class ScorePackageProxy(PackageProxy):
 
     def __init__(self, score_package_short_name, session=None):
         import baca

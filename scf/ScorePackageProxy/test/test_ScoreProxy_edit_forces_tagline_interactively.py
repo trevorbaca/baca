@@ -2,7 +2,7 @@
 import baca
 
 
-def test_ScoreProxy_edit_forces_tagline_interactively_01():
+def test_ScorePackageProxy_edit_forces_tagline_interactively_01():
     '''Quit, back, score & studio all work.
     '''
 
@@ -20,13 +20,13 @@ def test_ScoreProxy_edit_forces_tagline_interactively_01():
     assert studio.ts == (7, (0, 5))
 
 
-def test_ScoreProxy_edit_forces_tagline_interactively_02():
+def test_ScorePackageProxy_edit_forces_tagline_interactively_02():
 
     studio = baca.scf.Studio()
     studio.run(user_input='poeme forces for_foo_bar q')
-    recursif = baca.scf.ScoreProxy('recursif')
+    recursif = baca.scf.ScorePackageProxy('recursif')
     assert recursif.forces_tagline == 'for foo bar'
 
     studio.run(user_input='poeme forces for_64_pieces_of_percussion q')
-    recursif = baca.scf.ScoreProxy('recursif')
+    recursif = baca.scf.ScorePackageProxy('recursif')
     assert recursif.forces_tagline == 'for 64 pieces of percussion'

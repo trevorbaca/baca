@@ -2,7 +2,7 @@
 import baca
 
 
-def test_ScoreProxy_edit_title_interactively_01():
+def test_ScorePackageProxy_edit_title_interactively_01():
 
     studio = baca.scf.Studio()
     studio.run(user_input='bet title Foo q')

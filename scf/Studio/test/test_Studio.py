@@ -9,7 +9,7 @@ def test_Studio_01():
 
     assert studio.class_name == 'Studio'
     assert isinstance(studio.global_proxy, baca.scf.GlobalProxy)
-    assert isinstance(studio.score_wrangler, baca.scf.ScoreWrangler)
+    assert isinstance(studio.score_wrangler, baca.scf.ScorePackageWrangler)
     assert studio.source_file_name == \
         '/Users/trevorbaca/Documents/other/baca/scf/Studio/Studio.py'
     assert studio.spaced_class_name == 'studio'

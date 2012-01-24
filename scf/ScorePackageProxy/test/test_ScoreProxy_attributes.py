@@ -4,11 +4,11 @@ from abjad.tools import scoretools
 import baca
 
 
-def test_ScoreProxy_attributes_01():
+def test_ScorePackageProxy_attributes_01():
     '''Read-only public attributes.
     '''
 
-    score_proxy = baca.scf.ScoreProxy('manos')
+    score_proxy = baca.scf.ScorePackageProxy('manos')
 
 
     assert isinstance(score_proxy.chunk_wrangler, baca.scf.ChunkPackageWrangler)

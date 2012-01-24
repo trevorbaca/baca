@@ -15,8 +15,8 @@ from MusPackageProxy import MusPackageProxy
 from OutputMaterialModuleFileProxy import OutputMaterialModuleFileProxy
 from PackageWrangler import PackageWrangler
 from PackageProxy import PackageProxy
-from ScoreProxy import ScoreProxy
-from ScoreWrangler import ScoreWrangler
+from ScorePackageProxy import ScorePackageProxy
+from ScorePackageWrangler import ScorePackageWrangler
 from Session import Session
 from Studio import Studio
 from StylesheetFileProxy import StylesheetFileProxy
