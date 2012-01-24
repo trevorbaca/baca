@@ -1,7 +1,7 @@
 import baca
 
 
-def test_MaterialProxy_run_01():
+def test_MaterialPackageProxy_run_01():
     '''Global materials: quit, back, studio, score & junk all work.
     '''
 
@@ -23,7 +23,7 @@ def test_MaterialProxy_run_01():
     assert studio.ts == (8, (4, 6))
 
 
-def test_MaterialProxy_run_02():
+def test_MaterialPackageProxy_run_02():
     '''Global materials: breadcrumbs work.
     '''
 
@@ -32,7 +32,7 @@ def test_MaterialProxy_run_02():
     assert studio.transcript[-2][0] == 'Studio - materials - sargasso multipliers'
 
 
-def test_MaterialProxy_run_03():
+def test_MaterialPackageProxy_run_03():
     '''Score materials: quit, back, studio, score & junk all work.
     '''
 
@@ -53,7 +53,7 @@ def test_MaterialProxy_run_03():
     assert studio.ts == (12, (8, 10))
 
 
-def test_MaterialProxy_run_04():
+def test_MaterialPackageProxy_run_04():
     '''Score materials: breadcrumbs work.
     '''
 

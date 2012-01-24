@@ -1,4 +1,4 @@
-from baca.scf.MaterialProxyWrangler import MaterialProxyWrangler
+from baca.scf.MaterialPackageProxyWrangler import MaterialPackageProxyWrangler
 from baca.scf.MaterialWrangler import MaterialWrangler
 from baca.scf.PackageProxy import PackageProxy
 
@@ -7,7 +7,7 @@ class GlobalProxy(PackageProxy):
     
     def __init__(self, session=None):
         PackageProxy.__init__(self, self.studio_package_importable_name, session=session)
-        self._material_proxy_wrangler = MaterialProxyWrangler(session=self.session)
+        self._material_proxy_wrangler = MaterialPackageProxyWrangler(session=self.session)
         self._material_wrangler = MaterialWrangler(session=self.session)
 
     ### READ-ONLY PUBLIC ATTRIBUTES ###

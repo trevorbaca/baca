@@ -5,7 +5,7 @@ from baca.scf.PackageWrangler import PackageWrangler
 import os
 
 
-class MaterialProxyWrangler(PackageWrangler):
+class MaterialPackageProxyWrangler(PackageWrangler):
 
     def __init__(self, session=None):
         PackageWrangler.__init__(self, self.materialproxies_package_importable_name, session=session)
@@ -28,7 +28,7 @@ class MaterialProxyWrangler(PackageWrangler):
 
     def get_package_proxy(self, material_package_importable_name):
         import baca
-        material_proxy = baca.scf.MaterialProxy(material_package_importable_name, session=self.session)
+        material_proxy = baca.scf.MaterialPackageProxy(material_package_importable_name, session=self.session)
         user_input_handler_class_name = material_proxy.user_input_handler_class_name
         if user_input_handler_class_name is not None:
             command = 'from baca.scf.materialproxies import {} as material_proxy_class'
@@ -79,22 +79,22 @@ class MaterialProxyWrangler(PackageWrangler):
         initializer.write("_import_structured_package(__path__[0], globals(), 'baca')\n")
         initializer.close() 
 
-    # TODO: implement MaterialProxyClassFile object to model and customize these settings
+    # TODO: implement MaterialPackageProxyClassFile object to model and customize these settings
     def make_material_proxy_class_file(self, material_proxy_name, generic_output_name):
         class_file_name = os.path.join(self.directory_name, material_proxy_name, material_proxy_name + '.py')
         class_file = file(class_file_name, 'w')
         lines = []
         lines.append('from baca.music.foo import foo')
         lines.append('from baca.music.foo import make_illustration_from_output_material')
-        lines.append('from baca.scf.UserInputHandlingMaterialProxy import UserInputHandlingMaterialProxy')
+        lines.append('from baca.scf.UserInputHandlingMaterialPackageProxy import UserInputHandlingMaterialPackageProxy')
         lines.append('from baca.scf.UserInputWrapper import UserInputWrapper')
         lines.append('import baca')
         lines.append('')
         lines.append('')
-        lines.append('class {}(UserInputHandlingMaterialProxy):'.format(material_proxy_name))
+        lines.append('class {}(UserInputHandlingMaterialPackageProxy):'.format(material_proxy_name))
         lines.append('')
         lines.append('    def __init__(self, package_importable_name=None, session=None):')
-        lines.append('        UserInputHandlingMaterialProxy.__init__(')
+        lines.append('        UserInputHandlingMaterialPackageProxy.__init__(')
         lines.append('            self, package_importable_name=package_importable_name, session=seession')
         lines.append('')
         lines.append('    ### READ-ONLY PUBLIC ATTRIBUTES ###')

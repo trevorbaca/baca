@@ -1,5 +1,5 @@
 from abjad.tools import iotools
-from baca.scf.MaterialProxy import MaterialProxy 
+from baca.scf.MaterialPackageProxy import MaterialPackageProxy 
 from baca.scf.PackageWrangler import PackageWrangler
 import collections
 import os
@@ -11,7 +11,7 @@ class MaterialWrangler(PackageWrangler):
         import baca
         PackageWrangler.__init__(self, 
             self.studio_materials_package_importable_name, 'mus.materials', session=session)
-        self._material_proxy_wrangler = baca.scf.MaterialProxyWrangler(session=self.session)
+        self._material_proxy_wrangler = baca.scf.MaterialPackageProxyWrangler(session=self.session)
 
     ### READ-ONLY PUBLIC ATTRIBUTES ###
 
@@ -75,7 +75,7 @@ class MaterialWrangler(PackageWrangler):
             self.proceed(line, prompt=prompt)
             return False
         os.mkdir(directory_name)
-        material_proxy = MaterialProxy(material_package_importable_name, session=self.session)
+        material_proxy = MaterialPackageProxy(material_package_importable_name, session=self.session)
         tags = collections.OrderedDict([])
         tags['user_input_handler_class_name'] = user_input_handler_class_name
         tags['should_have_illustration'] = should_have_illustration

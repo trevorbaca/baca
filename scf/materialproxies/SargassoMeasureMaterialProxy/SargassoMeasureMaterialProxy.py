@@ -3,15 +3,15 @@ from abjad.tools import mathtools
 from abjad.tools import measuretools
 from abjad.tools import sequencetools
 from baca.music.make_sargasso_measures import make_illustration_from_output_material
-from baca.scf.UserInputHandlingMaterialProxy import UserInputHandlingMaterialProxy
+from baca.scf.UserInputHandlingMaterialPackageProxy import UserInputHandlingMaterialPackageProxy
 from baca.scf.UserInputWrapper import UserInputWrapper
 import baca
 
 
-class SargassoMeasureMaterialProxy(UserInputHandlingMaterialProxy):
+class SargassoMeasureMaterialPackageProxy(UserInputHandlingMaterialPackageProxy):
 
     def __init__(self, package_importable_name=None, session=None):
-        UserInputHandlingMaterialProxy.__init__(
+        UserInputHandlingMaterialPackageProxy.__init__(
             self, package_importable_name=package_importable_name, session=session)
 
     ### READ-ONLY PUBLIC ATTRIBUTES ###

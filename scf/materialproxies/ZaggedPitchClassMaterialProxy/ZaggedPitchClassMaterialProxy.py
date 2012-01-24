@@ -1,15 +1,15 @@
 from abjad.tools import sequencetools
 from baca.music.make_zagged_pitch_classes import make_illustration_from_output_material
-from baca.scf.UserInputHandlingMaterialProxy import UserInputHandlingMaterialProxy
+from baca.scf.UserInputHandlingMaterialPackageProxy import UserInputHandlingMaterialPackageProxy
 from baca.scf.UserInputWrapper import UserInputWrapper
 from baca.scf.editors.InteractiveEditor import InteractiveEditor
 import baca
 
 
-class ZaggedPitchClassMaterialProxy(UserInputHandlingMaterialProxy):
+class ZaggedPitchClassMaterialPackageProxy(UserInputHandlingMaterialPackageProxy):
 
     def __init__(self, package_importable_name=None, session=None):
-        UserInputHandlingMaterialProxy.__init__(
+        UserInputHandlingMaterialPackageProxy.__init__(
             self, package_importable_name=package_importable_name, session=session)
 
     ### READ-ONLY PUBLIC ATTRIBUTES ###
@@ -32,7 +32,7 @@ class ZaggedPitchClassMaterialProxy(UserInputHandlingMaterialProxy):
         ('grouping_counts', [1, 1, 2, 3]),])
 
     user_input_module_import_statements = [
-        'from baca.scf.materialproxies import ZaggedPitchClassMaterialProxy',
+        'from baca.scf.materialproxies import ZaggedPitchClassMaterialPackageProxy',
         'from baca.scf import UserInputWrapper',]
 
     # TODO: implement pitchtools.are_pitch_class_tokens()

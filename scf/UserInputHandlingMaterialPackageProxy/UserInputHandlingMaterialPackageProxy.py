@@ -1,8 +1,8 @@
-from baca.scf.MaterialProxy import MaterialProxy
+from baca.scf.MaterialPackageProxy import MaterialPackageProxy
 import copy
 
 
-class UserInputHandlingMaterialProxy(MaterialProxy):
+class UserInputHandlingMaterialPackageProxy(MaterialPackageProxy):
 
     ### PUBLIC METHODS ###
 

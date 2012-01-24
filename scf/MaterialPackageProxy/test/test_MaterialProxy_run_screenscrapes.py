@@ -3,7 +3,7 @@ import py
 py.test.skip('debug tomorrow.')
 
 
-def test_MaterialProxy_run_screenscrapes_01():
+def test_MaterialPackageProxy_run_screenscrapes_01():
     '''Score material run from studio.
     '''
 
@@ -30,11 +30,11 @@ def test_MaterialProxy_run_screenscrapes_01():
       '']
 
 
-def test_MaterialProxy_run_screenscrapes_02():
+def test_MaterialPackageProxy_run_screenscrapes_02():
     '''Score material run independently.
     '''
 
-    material_proxy = baca.scf.MaterialProxy('manos.mus.materials.black_pcs')
+    material_proxy = baca.scf.MaterialPackageProxy('manos.mus.materials.black_pcs')
     material_proxy.run('q')
 
     assert material_proxy.transcript[-2] == \

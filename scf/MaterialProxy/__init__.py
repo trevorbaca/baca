@@ -1,1 +1,0 @@
-from MaterialProxy import MaterialProxy

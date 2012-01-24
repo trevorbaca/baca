@@ -9,8 +9,8 @@ from FileProxy import FileProxy
 from GlobalProxy import GlobalProxy
 from InitializerFileProxy import InitializerFileProxy
 from MaterialDefinitionModuleFileProxy import MaterialDefinitionModuleFileProxy
-from MaterialProxy import MaterialProxy
-from MaterialProxyWrangler import MaterialProxyWrangler
+from MaterialPackageProxy import MaterialPackageProxy
+from MaterialPackageProxyWrangler import MaterialPackageProxyWrangler
 from MaterialWrangler import MaterialWrangler
 from MusProxy import MusProxy
 from OutputMaterialModuleFileProxy import OutputMaterialModuleFileProxy
@@ -24,7 +24,7 @@ from Studio import Studio
 from StylesheetFileProxy import StylesheetFileProxy
 from StylesheetWrangler import StylesheetWrangler
 from Transcript import Transcript
-from UserInputHandlingMaterialProxy import UserInputHandlingMaterialProxy
+from UserInputHandlingMaterialPackageProxy import UserInputHandlingMaterialPackageProxy
 from UserInputModuleFileProxy import UserInputModuleFileProxy
 from UserInputWrapper import UserInputWrapper
 import editors

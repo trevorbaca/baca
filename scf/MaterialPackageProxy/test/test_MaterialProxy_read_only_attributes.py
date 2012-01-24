@@ -1,11 +1,11 @@
 import baca
 
 
-def test_MaterialProxy_read_only_attributes_01():
+def test_MaterialPackageProxy_read_only_attributes_01():
     '''Stub material.
     '''
 
-    material_proxy = baca.scf.MaterialProxy('baca.materials.test_material_a')
+    material_proxy = baca.scf.MaterialPackageProxy('baca.materials.test_material_a')
     assert not material_proxy.has_material_definition
     assert not material_proxy.has_material_definition_module
     assert not material_proxy.has_output_material
@@ -41,11 +41,11 @@ def test_MaterialProxy_read_only_attributes_01():
         '/Users/trevorbaca/Documents/other/baca/materials/test_material_a/illustration.pdf'
 
 
-def test_MaterialProxy_read_only_attributes_02():
+def test_MaterialPackageProxy_read_only_attributes_02():
     '''Data-only material (without illustration).
     '''
 
-    smp = baca.scf.MaterialProxy('baca.materials.sargasso_multipliers')
+    smp = baca.scf.MaterialPackageProxy('baca.materials.sargasso_multipliers')
     assert smp.has_material_definition
     assert smp.has_material_definition_module
     assert smp.has_output_material

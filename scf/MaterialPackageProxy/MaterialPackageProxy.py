@@ -1,7 +1,7 @@
 from abjad.tools import iotools
 from abjad.tools import markuptools
 from abjad.tools import mathtools
-from baca.scf.MaterialProxyWrangler import MaterialProxyWrangler
+from baca.scf.MaterialPackageProxyWrangler import MaterialPackageProxyWrangler
 from baca.scf.PackageProxy import PackageProxy
 from baca.scf.StylesheetFileProxy import StylesheetFileProxy
 from baca.scf.StylesheetWrangler import StylesheetWrangler
@@ -9,7 +9,7 @@ import baca
 import os
 
 
-class MaterialProxy(PackageProxy):
+class MaterialPackageProxy(PackageProxy):
 
     def __init__(self, package_importable_name=None, session=None):
         PackageProxy.__init__(self, package_importable_name=package_importable_name, session=session)
@@ -733,7 +733,7 @@ class MaterialProxy(PackageProxy):
 
     # TODO: write test
     def select_user_input_handler_interactively(self, prompt=True):
-        material_proxy_wrangler = MaterialProxyWrangler(session=self.session)
+        material_proxy_wrangler = MaterialPackageProxyWrangler(session=self.session)
         self.push_backtrack()
         user_input_handler = material_proxy_wrangler.select_material_proxy_class_name_interactively()
         self.pop_backtrack()
