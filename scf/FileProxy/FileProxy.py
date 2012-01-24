@@ -7,8 +7,8 @@ import shutil
 class FileProxy(SCFObject):
     
     def __init__(self, full_file_name, session=None):
-        assert isinstance(full_file_name, str)
-        assert os.path.exists(full_file_name)
+        assert isinstance(full_file_name, str), '{!r} is not a string.'.format(full_file_name)
+        assert os.path.exists(full_file_name), 'Initializer {!r} does not exist.'.format(full_file_name)
         SCFObject.__init__(self, session=session)
         self._full_file_name = full_file_name
 

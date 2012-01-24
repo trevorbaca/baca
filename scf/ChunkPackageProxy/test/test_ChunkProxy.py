@@ -16,4 +16,4 @@ def test_ChunkPackageProxy_01():
         '/Users/trevorbaca/Documents/other/baca/scf/ChunkPackageProxy/ChunkPackageProxy.py'
     assert chunk_proxy.spaced_class_name == 'chunk package proxy'
 
-    assert not chunk_proxy.has_initializer
+    assert chunk_proxy.has_initializer

@@ -1,5 +1,6 @@
 from abjad.tools import iotools
 from baca.scf.DirectoryProxy import DirectoryProxy
+from baca.scf.InitializerFileProxy import InitializerFileProxy
 import os
 import sys
 
@@ -12,6 +13,7 @@ class PackageProxy(DirectoryProxy):
         DirectoryProxy.__init__(self, directory_name=directory_name, session=session)
         self._package_short_name = None
         self._package_importable_name = package_importable_name
+        self._initializer_file_proxy = InitializerFileProxy(self.initializer_file_name, session=self.session)
 
     ### OVERLOADS ###
 
@@ -47,6 +49,11 @@ class PackageProxy(DirectoryProxy):
         if self.directory_name is not None:
             return os.path.join(self.directory_name, '__init__.py')
 
+    # TODO: write test
+    @property
+    def initializer_file_proxy(self):
+        return self._initializer_file_proxy
+
     @property
     def package_importable_name(self):
         return self._package_importable_name
@@ -74,7 +81,7 @@ class PackageProxy(DirectoryProxy):
             if result:
                 return result
 
-    # TODO: write test
+    # TODO: write test; collapse with purview_name
     @property
     def purview(self):
         import baca
@@ -83,7 +90,7 @@ class PackageProxy(DirectoryProxy):
         else:
             return baca.scf.ScorePackageProxy(self.score_package_short_name)
 
-    # TODO: write test
+    # TODO: write test; collapse with purview
     @property
     def purview_name(self):
         if self.score_package_short_name is None:
@@ -91,14 +98,14 @@ class PackageProxy(DirectoryProxy):
         else:
             return self.score_package_short_name
 
-    # TODO: write test
+    # TODO: write test; or remove?
     @property
     def score(self):
         import baca
         if self.score_package_short_name is not None:
             return baca.scf.ScorePackageProxy(self.score_package_short_name)
 
-    # TODO: write test
+    # TODO: write test; or remove?
     @property
     def score_package_short_name(self):
         if not self.package_importable_name.startswith(self.studio_package_importable_name):
@@ -312,7 +319,7 @@ class PackageProxy(DirectoryProxy):
     def unimport_package(self):
         self.remove_package_importable_name_from_sys_modules(self.package_importable_name)
 
-    # TODO: write test
+    # TODO: move to initializer file proxy; write test
     def write_initializer_to_disk(self, 
         initializer_import_statements, initializer_tag_lines, initializer_file_name=None):
         if initializer_file_name is None:
@@ -326,13 +333,13 @@ class PackageProxy(DirectoryProxy):
         initializer.write(''.join(initializer_lines))
         initializer.close()
 
-    # TODO: write test
+    # TODO: move to initializer file proxy; write test
     def write_stub_initializer_to_disk(self, tags=None):
         initializer_import_statements = ['from collections import OrderedDict\n']
         initializer_tag_lines = self.pprint_tags(tags)
         self.write_initializer_to_disk(initializer_import_statements, initializer_tag_lines)
 
-    # TODO: write test
+    # TODO: move to initializer file proxy; write test
     def write_tags_to_initializer(self, tags):
         import_statement = 'from collections import OrderedDict\n'
         self.add_import_statement_to_initializer(import_statement)
