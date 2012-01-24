@@ -79,7 +79,7 @@ class PackageProxy(DirectoryProxy):
     def purview(self):
         import baca
         if self.score_package_short_name is None:
-            return baca.scf.GlobalProxy()
+            return baca.scf.HomePackageProxy()
         else:
             return baca.scf.ScorePackageProxy(self.score_package_short_name)
 
@@ -224,7 +224,7 @@ class PackageProxy(DirectoryProxy):
         if package_importable_name is None:
             return
         elif package_importable_name.split('.')[0] == self.studio_package_importable_name:
-            return baca.scf.GlobalProxy()
+            return baca.scf.HomePackageProxy()
         elif package_importable_name.split('.')[0] in os.listdir(os.environ.get('SCORES')):
             return baca.scf.ScorePackageProxy(package_importable_name.split('.')[0])
         else:

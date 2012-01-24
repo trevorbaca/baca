@@ -3,7 +3,7 @@ from baca.scf.MaterialPackageWrangler import MaterialPackageWrangler
 from baca.scf.PackageProxy import PackageProxy
 
 
-class GlobalProxy(PackageProxy):
+class HomePackageProxy(PackageProxy):
     
     def __init__(self, session=None):
         PackageProxy.__init__(self, self.studio_package_importable_name, session=session)

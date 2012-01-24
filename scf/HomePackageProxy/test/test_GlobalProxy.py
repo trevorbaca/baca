@@ -2,12 +2,12 @@ import baca
 import types
 
 
-def test_GlobalProxy_01():
+def test_HomePackageProxy_01():
     '''Attributes.
     '''
 
-    global_proxy = baca.scf.GlobalProxy()
-    assert global_proxy.class_name == 'GlobalProxy'
+    global_proxy = baca.scf.HomePackageProxy()
+    assert global_proxy.class_name == 'HomePackageProxy'
     assert global_proxy.directory_name == '/Users/trevorbaca/Documents/other/baca'
     assert global_proxy.get_tag('foo') is None
     assert global_proxy.get_tags() == {}
@@ -23,15 +23,15 @@ def test_GlobalProxy_01():
     assert global_proxy.parent_package_importable_name is None
     assert global_proxy.score is None
     assert global_proxy.source_file_name == \
-        '/Users/trevorbaca/Documents/other/baca/scf/GlobalProxy/GlobalProxy.py'
-    assert global_proxy.spaced_class_name == 'global proxy'
+        '/Users/trevorbaca/Documents/other/baca/scf/HomePackageProxy/HomePackageProxy.py'
+    assert global_proxy.spaced_class_name == 'home package proxy'
 
 
-def test_GlobalProxy_02():
+def test_HomePackageProxy_02():
     '''Shared session.
     '''
 
-    global_proxy = baca.scf.GlobalProxy()
+    global_proxy = baca.scf.HomePackageProxy()
 
     assert global_proxy.session is global_proxy.material_proxy_wrangler.session
     assert global_proxy.session is global_proxy.material_wrangler.session

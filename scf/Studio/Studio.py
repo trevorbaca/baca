@@ -2,7 +2,7 @@
 from abjad.tools import iotools
 from abjad.tools import mathtools
 from baca.scf.SCFObject import SCFObject
-from baca.scf.GlobalProxy import GlobalProxy
+from baca.scf.HomePackageProxy import HomePackageProxy
 from baca.scf.ScorePackageWrangler import ScorePackageWrangler
 import subprocess
 
@@ -11,7 +11,7 @@ class Studio(SCFObject):
 
     def __init__(self, session=None):
         SCFObject.__init__(self, session=session)
-        self._global_proxy = GlobalProxy(session=self.session)
+        self._global_proxy = HomePackageProxy(session=self.session)
         self._score_wrangler = ScorePackageWrangler(session=self.session)
 
     ### READ-ONLY PUBLIC ATTRIBUTES ###

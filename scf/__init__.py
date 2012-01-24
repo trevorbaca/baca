@@ -5,7 +5,7 @@ from DistDirectoryProxy import DistDirectoryProxy
 from EtcDirectoryProxy import EtcDirectoryProxy
 from ExgDirectoryProxy import ExgDirectoryProxy
 from FileProxy import FileProxy
-from GlobalProxy import GlobalProxy
+from HomePackageProxy import HomePackageProxy
 from InitializerFileProxy import InitializerFileProxy
 from MaterialDefinitionModuleFileProxy import MaterialDefinitionModuleFileProxy
 from MaterialPackageProxy import MaterialPackageProxy
