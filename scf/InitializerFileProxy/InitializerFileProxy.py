@@ -6,12 +6,8 @@ class InitializerFileProxy(FileProxy):
 
     def __init__(self, full_file_name, session=None):
         FileProxy.__init__(self, full_file_name, session=session)
-        self._encoding_directives = []
-        self._docstring_lines = []
-        self._setup_statements = []
         self._protected_import_statements = []
         self._tag_lines = []
-        self._teardown_statements = []
         self.parse()
 
     ### READ-ONLY PUBLIC ATTRIBUTES ##
@@ -28,47 +24,12 @@ class InitializerFileProxy(FileProxy):
             )
 
     @property
-    def docstring_lines(self):
-        return self._docstring_lines
-
-    @property
-    def encoding_directives(self):
-        return self._encoding_directives
-
-    @property
-    def format(self):
-        return ''.join(self.formatted_lines)
-
-    @property
-    def formatted_lines(self):
-        lines = []
-        for content_collection, is_sorted in self.content_chunks:
-            if content_collection:
-                content_collection = content_collection[:]
-                if is_sorted:
-                    content_collection.sort()
-                lines.extend(content_collection)
-                lines.append('\n')
-        if lines: 
-            lines.pop()
-            lines[-1] = lines[-1].strip()
-        return lines
-
-    @property
     def protected_import_statements(self):
         return self._protected_import_statements
 
     @property
-    def setup_statements(self):
-        return self._setup_statements
-
-    @property
     def tag_lines(self):
         return self._tag_lines
-
-    @property
-    def teardown_statements(self):
-        return self._teardown_statements
 
     ### PUBLIC METHODS ###
 
@@ -77,13 +38,6 @@ class InitializerFileProxy(FileProxy):
         import_statement = import_statement.format(source_module_short_name, source_attribute_name)
         self.protected_import_statements.append(import_statement)
         
-    def clear(self):
-        for content_chunk, is_sorted in self.content_chunks:
-            content_chunk[:] = []
-
-    def display(self):
-        print self.format
-
     def parse(self, initializer_file_name=None):
         if initializer_file_name is None:
             initializer_file_name = self.full_file_name
@@ -150,9 +104,6 @@ class InitializerFileProxy(FileProxy):
             result = 'tags = OrderedDict([])'
         return result
 
-    def view(self):
-        os.system('vi -R {}'.format(self.full_file_name))
-
     def write_stub_to_disk(self, tags=None):
         self.clear()
         initializer.setup_statements.append('from collections import OrderedDict\n')
@@ -165,7 +116,3 @@ class InitializerFileProxy(FileProxy):
         tag_lines = self.pprint_tags(tags)
         self._tag_lines = tag_lines
         self.write_to_disk()
-
-    def write_to_disk(self):
-        initializer = file(self.full_file_name, 'w')
-        initializer.write(self.format)
