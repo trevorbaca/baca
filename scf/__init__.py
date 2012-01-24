@@ -13,6 +13,7 @@ from MaterialProxy import MaterialProxy
 from MaterialProxyWrangler import MaterialProxyWrangler
 from MaterialWrangler import MaterialWrangler
 from MusProxy import MusProxy
+from OutputMaterialModuleFileProxy import OutputMaterialModuleFileProxy
 from PackageWrangler import PackageWrangler
 from PackageProxy import PackageProxy
 from ScoreProxy import ScoreProxy
