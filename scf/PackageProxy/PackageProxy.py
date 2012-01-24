@@ -224,7 +224,7 @@ class PackageProxy(DirectoryProxy):
         else:
             raise ValueError('Unknown package importable name {!r}.'.format(package_importable_name))
 
-    # TODO: write test
+    # TODO: remove
     def pprint_tags(self, tags):
         if tags:
             lines = []
@@ -299,11 +299,14 @@ class PackageProxy(DirectoryProxy):
         initializer.write(''.join(initializer_lines))
         initializer.close()
 
-    # TODO: move to initializer file proxy; write test
+    # TODO: move to initializer file proxy
     def write_stub_initializer_to_disk(self, tags=None):
-        initializer_import_statements = ['from collections import OrderedDict\n']
-        initializer_tag_lines = self.pprint_tags(tags)
-        self.write_initializer_to_disk(initializer_import_statements, initializer_tag_lines)
+        initializer = self.initializer_file_proxy
+        initializer.clear()
+        initializer.setup_statements.append('from collections import OrderedDict\n')
+        tag_lines = initializer.pprint_tags(tags)
+        initializer.tag_lines.extend(tag_lines[:])
+        initializer.write_to_disk()
 
     # TODO: move to initializer file proxy; write test
     def write_tags_to_initializer(self, tags):

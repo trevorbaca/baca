@@ -132,6 +132,24 @@ class InitializerFileProxy(FileProxy):
         self._tag_lines = tag_lines
         self._teardown_statements = teardown_statements
 
+    def pprint_tags(self, tags):
+        if tags:
+            lines = []
+            for key, value in sorted(tags.iteritems()):
+                key = repr(key)
+                if hasattr(value, '_get_multiline_repr'):
+                    repr_lines = value._get_multiline_repr(include_tools_package=True)
+                    value = '\n    '.join(repr_lines)
+                    lines.append('({}, {})'.format(key, value))
+                else:
+                    value = getattr(value, '_repr_with_tools_package', repr(value))
+                    lines.append('({}, {})'.format(key, value))
+            lines = ',\n    '.join(lines)
+            result = 'tags = OrderedDict([\n    {}])'.format(lines)
+        else:
+            result = 'tags = OrderedDict([])'
+        return result
+
     def view(self):
         os.system('vi -R {}'.format(self.full_file_name))
 
