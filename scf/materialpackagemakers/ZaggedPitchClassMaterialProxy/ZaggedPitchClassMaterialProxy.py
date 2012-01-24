@@ -1,15 +1,15 @@
 from abjad.tools import sequencetools
 from baca.music.make_zagged_pitch_classes import make_illustration_from_output_material
-from baca.scf.UserInputHandlingMaterialPackageProxy import UserInputHandlingMaterialPackageProxy
+from baca.scf.MaterialPackageMaker import MaterialPackageMaker
 from baca.scf.UserInputWrapper import UserInputWrapper
 from baca.scf.editors.InteractiveEditor import InteractiveEditor
 import baca
 
 
-class ZaggedPitchClassMaterialPackageProxy(UserInputHandlingMaterialPackageProxy):
+class ZaggedPitchClassMaterialPackageProxy(MaterialPackageMaker):
 
     def __init__(self, package_importable_name=None, session=None):
-        UserInputHandlingMaterialPackageProxy.__init__(
+        MaterialPackageMaker.__init__(
             self, package_importable_name=package_importable_name, session=session)
 
     ### READ-ONLY PUBLIC ATTRIBUTES ###

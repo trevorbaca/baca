@@ -2,7 +2,7 @@ from baca.scf.MaterialPackageProxy import MaterialPackageProxy
 import copy
 
 
-class UserInputHandlingMaterialPackageProxy(MaterialPackageProxy):
+class MaterialPackageMaker(MaterialPackageProxy):
 
     ### PUBLIC METHODS ###
 

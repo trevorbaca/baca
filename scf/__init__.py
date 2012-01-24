@@ -23,7 +23,7 @@ from Studio import Studio
 from StylesheetFileProxy import StylesheetFileProxy
 from StylesheetWrangler import StylesheetWrangler
 from Transcript import Transcript
-from UserInputHandlingMaterialPackageProxy import UserInputHandlingMaterialPackageProxy
+from MaterialPackageMaker import MaterialPackageMaker
 from UserInputModuleFileProxy import UserInputModuleFileProxy
 from UserInputWrapper import UserInputWrapper
 import editors
