@@ -113,13 +113,16 @@ class PackageProxy(DirectoryProxy):
 
     ### PUBLIC METHODS ###
 
-    def add_import_statement_to_initializer(self, import_statement):
-        initializer_import_statements, initializer_tag_lines = self.parse_initializer()
-        initializer_import_statements = set(initializer_import_statements)
-        initializer_import_statements.add(import_statement)
-        initializer_import_statements = list(initializer_import_statements)
-        initializer_import_statements.sort()
-        self.write_initializer_to_disk(initializer_import_statements, initializer_tag_lines)
+    #def add_import_statement_to_initializer(self, import_statement):
+    def add_import_statement_to_initializer(self, source_module_short_name, source_attribute_name):
+#        initializer_import_statements, initializer_tag_lines = self.parse_initializer()
+#        initializer_import_statements = set(initializer_import_statements)
+#        initializer_import_statements.add(import_statement)
+#        initializer_import_statements = list(initializer_import_statements)
+#        initializer_import_statements.sort()
+#        self.write_initializer_to_disk(initializer_import_statements, initializer_tag_lines)
+        statement = 'safe_import(globals(), {!r}, {!r})'.format(source_module_short_name, source_attribute_name)
+        self.initializer_file_proxy.protected_import_statements.append(statement)
 
     def add_tag(self, tag_name, tag_value):
         tags = self.get_tags()
@@ -341,8 +344,13 @@ class PackageProxy(DirectoryProxy):
 
     # TODO: move to initializer file proxy; write test
     def write_tags_to_initializer(self, tags):
-        import_statement = 'from collections import OrderedDict\n'
-        self.add_import_statement_to_initializer(import_statement)
-        initializer_import_statements, initializer_tag_lines = self.parse_initializer()
-        initializer_tag_lines = self.pprint_tags(tags)
-        self.write_initializer_to_disk(initializer_import_statements, initializer_tag_lines)
+        #import_statement = 'from collections import OrderedDict\n'
+        #self.add_import_statement_to_initializer(import_statement)
+        #initializer_import_statements, initializer_tag_lines = self.parse_initializer()
+        #initializer_tag_lines = self.pprint_tags(tags)
+        #self.write_initializer_to_disk(initializer_import_statements, initializer_tag_lines)
+        initializer = self.initializer_file_proxy
+        initializer.parse()
+        tag_lines = self.pprint_tags(tags)
+        initializer._tag_lines = tag_lines
+        initializer.write_to_disk()

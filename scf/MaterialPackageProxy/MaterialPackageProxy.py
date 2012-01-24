@@ -309,14 +309,17 @@ class MaterialPackageProxy(PackageProxy):
     ### PUBLIC METHODS ###
 
     def add_material_to_material_initializer(self):
-        import_statement = 'from output_material import {}\n'.format(self.material_underscored_name)
-        self.add_import_statement_to_initializer(import_statement) 
+        #import_statement = 'from output_material import {}\n'.format(self.material_underscored_name)
+        #self.add_import_statement_to_initializer(import_statement) 
+        self.add_import_statement_to_initializer('output_material', self.material_underscored_name)
         
     def add_material_to_materials_initializer(self):
-        import_statement = 'from {} import {}\n'.format(
-            self.material_underscored_name, self.material_underscored_name)
+        #import_statement = 'from {} import {}\n'.format(
+        #    self.material_underscored_name, self.material_underscored_name)
         parent_package = PackageProxy(self.parent_package_importable_name, session=self.session)
-        parent_package.add_import_statement_to_initializer(import_statement)
+        #parent_package.add_import_statement_to_initializer(import_statement)
+        parent_package.initializer_file_proxy.protected_import_statements.add_import_statement_to_initializer(
+            self.material_underscored_name, self.material_underscored_name)
 
     # TODO: remove
     def delete_local_stylesheet(self, prompt=True):
