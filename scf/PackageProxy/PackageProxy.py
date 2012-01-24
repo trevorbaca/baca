@@ -224,13 +224,6 @@ class PackageProxy(DirectoryProxy):
         else:
             raise ValueError('Unknown package importable name {!r}.'.format(package_importable_name))
 
-    # TODO: write test
-    def remove_import_statement_from_initializer(self, import_statement, initializer_file_name):
-        initializer = InitializerFileProxy(initializer_file_name, session=self.session)
-        initializer._protected_import_statements = [
-            x for x in initializer.protected_import_statements if x != import_statement] 
-        initializer.write_to_disk()
-
     def remove_package_importable_name_from_sys_modules(self, package_importable_name):
         '''Total hack. But works.'''
         command = "if '{}' in sys.modules: del(sys.modules['{}'])".format(
@@ -265,20 +258,6 @@ class PackageProxy(DirectoryProxy):
 
     def unimport_package(self):
         self.remove_package_importable_name_from_sys_modules(self.package_importable_name)
-
-    # TODO: move to initializer file proxy; write test
-    def write_initializer_to_disk(self, 
-        initializer_import_statements, initializer_tag_lines, initializer_file_name=None):
-        if initializer_file_name is None:
-            initializer_file_name = self.initializer_file_name
-        initializer_lines = []
-        initializer_lines.extend(initializer_import_statements)
-        if initializer_import_statements and initializer_tag_lines:
-            initializer_lines.extend(['\n', '\n'])
-        initializer_lines.extend(initializer_tag_lines)
-        initializer = file(initializer_file_name, 'w')
-        initializer.write(''.join(initializer_lines))
-        initializer.close()
 
     # TODO: move to initializer file proxy
     def write_stub_initializer_to_disk(self, tags=None):

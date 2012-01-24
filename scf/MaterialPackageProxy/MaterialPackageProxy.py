@@ -689,9 +689,13 @@ class MaterialPackageProxy(PackageProxy):
             raise NotImplementedError('commit to repository and then rename.')
 
     def remove_material_from_materials_initializer(self):
-        import_statement = 'from {} import {}\n'.format(
+        #import_statement = 'from {} import {}\n'.format(
+        #    self.material_underscored_name, self.material_underscored_name)
+        #self.remove_import_statement_from_initializer(import_statement, self.parent_initializer_file_name)
+        import_statement = 'safe_import({!r}, {!r})\n'.format(
             self.material_underscored_name, self.material_underscored_name)
-        self.remove_import_statement_from_initializer(import_statement, self.parent_initializer_file_name)
+        parent_package = PackageProxy(self.parent_package_importable_name, session=self.session)
+        parent_package.initializer_file_proxy.protected_import_statements.remove(import_statement)
 
     def run(self, user_input=None, clear=True, cache=False):
         self.assign_user_input(user_input=user_input)
