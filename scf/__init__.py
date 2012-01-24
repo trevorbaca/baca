@@ -19,7 +19,7 @@ from ScoreTemplate import ScoreTemplate
 from ScoreWrangler import ScoreWrangler
 from Session import Session
 from Studio import Studio
-from StylesheetProxy import StylesheetProxy
+from StylesheetFileProxy import StylesheetFileProxy
 from StylesheetWrangler import StylesheetWrangler
 from Transcript import Transcript
 from UserInputHandlingMaterialProxy import UserInputHandlingMaterialProxy

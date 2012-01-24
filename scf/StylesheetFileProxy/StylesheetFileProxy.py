@@ -3,7 +3,7 @@ from baca.scf.FileProxy import FileProxy
 import os
 
 
-class StylesheetProxy(FileProxy):
+class StylesheetFileProxy(FileProxy):
 
     def __init__(self, full_file_name, session=None):
         FileProxy.__init__(self, full_file_name, session=session)

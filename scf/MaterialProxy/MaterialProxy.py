@@ -3,7 +3,7 @@ from abjad.tools import markuptools
 from abjad.tools import mathtools
 from baca.scf.MaterialProxyWrangler import MaterialProxyWrangler
 from baca.scf.PackageProxy import PackageProxy
-from baca.scf.StylesheetProxy import StylesheetProxy
+from baca.scf.StylesheetFileProxy import StylesheetFileProxy
 from baca.scf.StylesheetWrangler import StylesheetWrangler
 import os
 
@@ -369,7 +369,7 @@ class MaterialProxy(PackageProxy):
 
     # TODO: reimplement and keep
     def edit_source_stylesheet(self):
-        stylesheet_proxy = StylesheetProxy(self.source_stylesheet_file_name, session=self.session)
+        stylesheet_proxy = StylesheetFileProxy(self.source_stylesheet_file_name, session=self.session)
         stylesheet_proxy.vi_stylesheet()
 
     def import_material_definition_from_material_definition_module(self):

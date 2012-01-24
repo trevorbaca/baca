@@ -1,6 +1,6 @@
 from abjad.tools import iotools
 from baca.scf.PackageWrangler import PackageWrangler
-from baca.scf.StylesheetProxy import StylesheetProxy
+from baca.scf.StylesheetFileProxy import StylesheetFileProxy
 import os
 
 
@@ -38,7 +38,7 @@ class StylesheetWrangler(PackageWrangler):
             stylesheet_name = stylesheet_name + '.ly'
         stylesheet_file_name = os.path.join(self.stylesheets_directory, stylesheet_name)
         #self.edit_stylesheet(stylesheet_file_name)
-        stylesheet_proxy = StylesheetProxy(stylesheet_file_name, session=self.session)
+        stylesheet_proxy = StylesheetFileProxy(stylesheet_file_name, session=self.session)
         stylesheet_proxy.edit_stylesheet()
 
     def handle_main_menu_result(self, result):
@@ -46,7 +46,7 @@ class StylesheetWrangler(PackageWrangler):
             self.make_new_stylesheet_interactively()
         else:
             stylesheet_file_name = os.path.join(self.stylesheets_directory, result)  
-            stylesheet_proxy = StylesheetProxy(stylesheet_file_name, session=self.session)
+            stylesheet_proxy = StylesheetFileProxy(stylesheet_file_name, session=self.session)
             stylesheet_proxy.run()
          
     def make_main_menu(self):
