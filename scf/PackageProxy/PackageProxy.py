@@ -13,7 +13,6 @@ class PackageProxy(DirectoryProxy):
         DirectoryProxy.__init__(self, directory_name=directory_name, session=session)
         self._package_short_name = None
         self._package_importable_name = package_importable_name
-        self._initializer_file_proxy = InitializerFileProxy(self.initializer_file_name, session=self.session)
 
     ### OVERLOADS ###
 
@@ -52,7 +51,7 @@ class PackageProxy(DirectoryProxy):
     # TODO: write test
     @property
     def initializer_file_proxy(self):
-        return self._initializer_file_proxy
+        return InitializerFileProxy(self.initializer_file_name, session=self.session)
 
     @property
     def package_importable_name(self):
