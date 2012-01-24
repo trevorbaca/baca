@@ -16,7 +16,6 @@ from OutputMaterialModuleFileProxy import OutputMaterialModuleFileProxy
 from PackageWrangler import PackageWrangler
 from PackageProxy import PackageProxy
 from ScoreProxy import ScoreProxy
-from ScoreTemplate import ScoreTemplate
 from ScoreWrangler import ScoreWrangler
 from Session import Session
 from Studio import Studio
