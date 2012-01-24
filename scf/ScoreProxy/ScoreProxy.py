@@ -11,7 +11,7 @@ class ScoreProxy(PackageProxy):
         self._etc_proxy = baca.scf.EtcDirectoryProxy(score_package_short_name, session=self.session)
         self._exg_proxy = baca.scf.ExgDirectoryProxy(score_package_short_name, session=self.session)
         self._mus_proxy = baca.scf.MusPackageProxy(score_package_short_name, session=self.session)
-        self._chunk_wrangler = baca.scf.ChunkPackageProxyWrangler(session=self.session)
+        self._chunk_wrangler = baca.scf.ChunkPackageWrangler(session=self.session)
         self._material_wrangler = baca.scf.MaterialWrangler(session=self.session)
         self._material_proxy_wrangler = baca.scf.MaterialPackageMakerWrangler(session=self.session)
 

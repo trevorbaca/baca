@@ -3,7 +3,7 @@ from baca.scf.PackageWrangler import PackageWrangler
 import os
 
 
-class ChunkPackageProxyWrangler(PackageWrangler):
+class ChunkPackageWrangler(PackageWrangler):
 
     def __init__(self, session=None):
         import baca
