@@ -1,5 +1,9 @@
 TODO
 
+-1. Implement initializer file proxy to decongest package proxy.
+
+0. Implement user input module file proxy.
+
 1. Be able safely to write junk into any system file.
 
 2. Prevent the creation of 'baca.materials.h' package.
@@ -43,32 +47,28 @@ TODO
 
 21. Figure out why 'red' isn't good enough to select 'red_pcs', maybe redraw-related.
 
-22. Implement initializer file proxy to decongest package proxy.
+22. Make some zagged pitch-classes.
 
-23. Implement user input module file proxy.
+23. Port output change awareness.
 
-24. Make some zagged pitch-classes.
+24. Implement something to tour all materials everywhere and inspect in sequence.
 
-25. Port output change awareness.
+25. Make user input handler creation work.
 
-26. Implement something to tour all materials everywhere and inspect in sequence.
+26. Wrap tests around existing material functionality.
 
-27. Make user input handler creation work.
+27. Clean up PitchRangeEditor main menu.
 
-28. Wrap tests around existing material functionality.
+28. Edit instrument transposition.
 
-29. Clean up PitchRangeEditor main menu.
+29. Edit instrument clefs.
 
-30. Edit instrument transposition.
+30. Remove extra appearance of B-flat clarinet from clarinetist config menu.
 
-31. Edit instrument clefs.
+31. Change Instrument._default_performer_names to house (full, abbreviation) pairs.
 
-32. Remove extra appearance of B-flat clarinet from clarinetist config menu.
+32. Use performer abbreviations to populate performer selection menu.
 
-33. Change Instrument._default_performer_names to house (full, abbreviation) pairs.
+33. Find a way to dynamically add (default) indicator to default menu entries.
 
-34. Use performer abbreviations to populate performer selection menu.
-
-35. Find a way to dynamically add (default) indicator to default menu entries.
-
-36. Consider keyword backtracking protocol to replace two-line backtracking protocol.
+34. Consider keyword backtracking protocol to replace two-line backtracking protocol.
