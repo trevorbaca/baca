@@ -361,7 +361,8 @@ class MaterialProxy(PackageProxy):
         os.system('vi {}'.format(self.local_stylesheet_file_name))
 
     def edit_material_definition_module(self):
-        os.system('vi + {}'.format(self.material_definition_file_name))
+        columns = len(self.material_underscored_name) + 3
+        os.system("vi + -c'norm {}l' {}".format(columns, self.material_definition_file_name))
 
     def edit_output_material_module(self):
         os.system('vi -R + {}'.format(self.output_material_module_file_name))
