@@ -75,6 +75,7 @@ class MaterialPackageWrangler(PackageWrangler):
             self.proceed(line, prompt=prompt)
             return False
         os.mkdir(directory_name)
+        file(os.path.join(directory_name, '__init__.py'), 'w').write('')
         material_proxy = MaterialPackageProxy(material_package_importable_name, session=self.session)
         tags = collections.OrderedDict([])
         tags['user_input_handler_class_name'] = user_input_handler_class_name

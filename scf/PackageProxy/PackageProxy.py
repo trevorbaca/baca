@@ -165,6 +165,7 @@ class PackageProxy(DirectoryProxy):
         line = '{!r}'.format(tag)
         self.proceed(line)
 
+    # TODO: try reimplementing with safe_import()
     def get_tags(self):
         import collections
         try:
@@ -224,27 +225,6 @@ class PackageProxy(DirectoryProxy):
             raise ValueError('Unknown package importable name {!r}.'.format(package_importable_name))
 
     # TODO: write test
-    def parse_initializer(self, initializer_file_name=None):
-        if initializer_file_name is None:
-            initializer_file_name = self.initializer_file_name
-        initializer = file(initializer_file_name, 'r')
-        initializer_import_statements = []
-        initializer_tag_lines = []
-        found_tags = False
-        for line in initializer.readlines():
-            if line == '\n':
-                pass
-            elif line.startswith('tags ='):
-                found_tags = True
-                initializer_tag_lines.append(line)
-            elif not found_tags:
-                initializer_import_statements.append(line)
-            else:
-                initializer_tag_lines.append(line)
-        initializer.close()
-        return initializer_import_statements, initializer_tag_lines
-
-    # TODO: write test
     def pprint_tags(self, tags):
         if tags:
             lines = []
@@ -265,10 +245,10 @@ class PackageProxy(DirectoryProxy):
 
     # TODO: write test
     def remove_import_statement_from_initializer(self, import_statement, initializer_file_name):
-        initializer_import_statements, initializer_tag_lines = self.parse_initializer(initializer_file_name)
-        initializer_import_statements = [x for x in initializer_import_statements if x != import_statement] 
-        self.write_initializer_to_disk(
-            initializer_import_statements, initializer_tag_lines, initializer_file_name)
+        initializer = InitializerFileProxy(initializer_file_name, session=self.session)
+        initializer._protected_import_statements = [
+            x for x in initializer.protected_import_statements if x != import_statement] 
+        initializer.write_to_disk()
 
     def remove_package_importable_name_from_sys_modules(self, package_importable_name):
         '''Total hack. But works.'''
