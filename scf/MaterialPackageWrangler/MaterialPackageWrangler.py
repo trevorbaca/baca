@@ -5,7 +5,7 @@ import collections
 import os
 
 
-class MaterialWrangler(PackageWrangler):
+class MaterialPackageWrangler(PackageWrangler):
 
     def __init__(self, session=None):
         import baca

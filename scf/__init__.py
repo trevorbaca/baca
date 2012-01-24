@@ -10,7 +10,7 @@ from InitializerFileProxy import InitializerFileProxy
 from MaterialDefinitionModuleFileProxy import MaterialDefinitionModuleFileProxy
 from MaterialPackageProxy import MaterialPackageProxy
 from MaterialPackageMakerWrangler import MaterialPackageMakerWrangler
-from MaterialWrangler import MaterialWrangler
+from MaterialPackageWrangler import MaterialPackageWrangler
 from MusPackageProxy import MusPackageProxy
 from OutputMaterialModuleFileProxy import OutputMaterialModuleFileProxy
 from PackageWrangler import PackageWrangler

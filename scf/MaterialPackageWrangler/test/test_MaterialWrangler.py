@@ -2,9 +2,9 @@ from abjad.tools import iotools
 import baca
 
 
-def test_MaterialWrangler_01():
+def test_MaterialPackageWrangler_01():
 
-    material_wrangler = baca.scf.MaterialWrangler()
+    material_wrangler = baca.scf.MaterialPackageWrangler()
 
     material_proxy = material_wrangler.get_package_proxy('baca.materials.sargasso_multipliers')
     assert isinstance(material_proxy, baca.scf.MaterialPackageProxy)

@@ -1,7 +1,7 @@
 import baca
 
 
-def test_MaterialWrangler_run_01():
+def test_MaterialPackageWrangler_run_01():
     '''Quit, back, studio, score & junk all work.
     '''
 
@@ -23,7 +23,7 @@ def test_MaterialWrangler_run_01():
     assert studio.ts == (6, (2, 4))
 
 
-def test_MaterialWrangler_run_02():
+def test_MaterialPackageWrangler_run_02():
     '''Breadcrumbs work.
     '''
 

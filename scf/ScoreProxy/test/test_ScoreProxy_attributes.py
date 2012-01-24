@@ -16,7 +16,7 @@ def test_ScoreProxy_attributes_01():
     assert isinstance(score_proxy.etc_proxy, baca.scf.DirectoryProxy)
     assert isinstance(score_proxy.exg_proxy, baca.scf.DirectoryProxy)
     assert isinstance(score_proxy.material_proxy_wrangler, baca.scf.MaterialPackageMakerWrangler)
-    assert isinstance(score_proxy.material_wrangler, baca.scf.MaterialWrangler)
+    assert isinstance(score_proxy.material_wrangler, baca.scf.MaterialPackageWrangler)
     assert isinstance(score_proxy.mus_proxy, baca.scf.MusPackageProxy)
 
     assert score_proxy.has_correct_initializers
@@ -45,7 +45,7 @@ def test_ScoreProxy_attributes_01():
 
     assert score_proxy.score_package_wranglers == (
         baca.scf.ChunkPackageWrangler(),
-        baca.scf.MaterialWrangler())    
+        baca.scf.MaterialPackageWrangler())    
 
     assert score_proxy.top_level_subdirectories == (
         baca.scf.DistDirectoryProxy('manos'),
