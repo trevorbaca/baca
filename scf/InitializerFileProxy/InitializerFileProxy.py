@@ -13,6 +13,10 @@ class InitializerFileProxy(FileProxy):
     ### READ-ONLY PUBLIC ATTRIBUTES ##
 
     @property
+    def protected_import_statements(self):
+        return self._protected_import_statements
+
+    @property
     def sections(self):
         return (
             (self._encoding_directives, True, 0),
@@ -22,10 +26,6 @@ class InitializerFileProxy(FileProxy):
             (self._tag_lines, False, 1),
             (self._teardown_statements, True, 0),
             )
-
-    @property
-    def protected_import_statements(self):
-        return self._protected_import_statements
 
     @property
     def tag_lines(self):

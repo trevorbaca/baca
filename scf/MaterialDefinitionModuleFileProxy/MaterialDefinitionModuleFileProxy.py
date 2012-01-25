@@ -19,8 +19,6 @@ class MaterialDefinitionModuleFileProxy(FileProxy):
     def output_material_module_import_lines(self):
         return self._output_material_module_import_lines
 
-    ### PUBLIC METHODS ###
-
     @property
     def sections(self):
         return (
@@ -31,17 +29,22 @@ class MaterialDefinitionModuleFileProxy(FileProxy):
             (self._body_lines, False, 0),
             )
 
+    ### PUBLIC METHODS ###
+
     def parse(self):
-        definition_module = file(self.full_file_name, 'r')
+        material_definition_module = file(self.full_file_name, 'r')
         encoding_directives = []
         docstring_lines = []
         setup_statements = []
         output_material_module_import_lines = []
         body_lines = []
         current_section = None
-        for line in definition_module.readlines():
+        for line in material_definition_module.readlines():
             if line == '\n':
-                current_section = 'body'
+                if current_section == 'docstring':
+                    current_section = 'setup'
+                else:
+                    current_section = 'body'
                 continue
             elif line.startswith('# -*-'):
                 current_section = 'encoding'
@@ -63,7 +66,7 @@ class MaterialDefinitionModuleFileProxy(FileProxy):
                 body_lines.append(line)
             else:
                 raise ValueError('{!r}: can not parse line: {!r}.'.format(self.full_file_name, line))
-        definition_module.close()
+        material_definition_module.close()
         self._encoding_directives = encoding_directives
         self._docstring_lines = docstring_lines
         self._setup_statements = setup_statements

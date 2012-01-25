@@ -47,7 +47,7 @@ class FileProxy(SCFObject):
                 for x in range(blank_line_count):
                     lines.append('\n')
         if lines:
-            lines[-1] = lines[-1].strip()
+            lines[-1] = lines[-1].strip('\n')
         return lines
 
     @property
