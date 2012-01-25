@@ -8,6 +8,8 @@ from ExgDirectoryProxy import ExgDirectoryProxy
 from FileProxy import FileProxy
 from HomePackageProxy import HomePackageProxy
 from IllustrationBuilderModuleProxy import IllustrationBuilderModuleProxy
+from IllustrationLyFileProxy import IllustrationLyFileProxy
+from IllustrationPdfFileProxy import IllustrationPdfFileProxy
 from InitializerFileProxy import InitializerFileProxy
 from MaterialDefinitionModuleProxy import MaterialDefinitionModuleProxy
 from MaterialPackageProxy import MaterialPackageProxy

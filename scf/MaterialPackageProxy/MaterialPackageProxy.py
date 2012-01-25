@@ -2,6 +2,8 @@ from abjad.tools import iotools
 from abjad.tools import markuptools
 from abjad.tools import mathtools
 from baca.scf.IllustrationBuilderModuleProxy import IllustrationBuilderModuleProxy
+from baca.scf.IllustrationLyFileProxy import IllustrationLyFileProxy
+from baca.scf.IllustrationPdfFileProxy import IllustrationPdfFileProxy
 from baca.scf.MaterialDefinitionModuleProxy import MaterialDefinitionModuleProxy
 from baca.scf.MaterialPackageMakerWrangler import MaterialPackageMakerWrangler
 from baca.scf.OutputMaterialModuleProxy import OutputMaterialModuleProxy
@@ -133,9 +135,17 @@ class MaterialPackageProxy(PackageProxy):
             return os.path.join(self.directory_name, 'illustration.ly')
 
     @property
+    def illustration_ly_file_proxy(self):
+        return IllustrationLyFileProxy(self.illustration_ly_file_name, session=self.session)
+
+    @property
     def illustration_pdf_file_name(self):
         if self.directory_name is not None:
             return os.path.join(self.directory_name, 'illustration.pdf')
+
+    @property
+    def illustration_pdf_file_proxy(self):
+        return IllustrationPdfFileProxy(self.illustration_pdf_file_name, session=self.session)
 
     # TODO: make work
     @property
@@ -322,20 +332,6 @@ class MaterialPackageProxy(PackageProxy):
         parent_package.initializer_file_proxy.add_protected_import_statement(
             self.material_underscored_name, self.material_underscored_name)
 
-    # TODO: delegate to IllustrationLyFileProxy
-    def delete_illustration_ly(self, prompt=True):
-        if self.has_illustration_ly:
-            os.remove(self.illustration_ly_file_name)
-            line = 'output LilyPond file deleted.'
-            self.proceed(line, prompt=prompt)
-
-    # TODO: delegate to IllustrationPdfFileProxy
-    def delete_illustration_pdf(self, prompt=True):
-        if self.has_illustration_pdf:
-            os.remove(self.illustration_pdf_file_name)
-            line = 'output PDF deleted.'
-            self.proceed(line, prompt=prompt)
-
     # TODO: delegate to MaterialDefinitionModuleProxy
     def import_material_definition_from_material_definition_module(self):
         self.unimport_material_definition_module()
@@ -430,14 +426,16 @@ class MaterialPackageProxy(PackageProxy):
         elif result == 'lyc':
             self.write_illustration_ly_to_disk(is_forced=True)
         elif result == 'lyd':
-            self.delete_illustration_ly()
+            #self.delete_illustration_ly()
+            self.illustration_ly_file_proxy.remove(prompt=True)
         elif result == 'lyi':
             self.view_illustration_ly()
         elif result == 'pdfc':
             self.write_illustration_ly_and_pdf_to_disk(is_forced=True)
             self.view_illustration_pdf()
         elif result == 'pdfd':
-            self.delete_illustration_pdf()
+            #self.delete_illustration_pdf()
+            self.illustration_pdf_file_proxy.remove(prompt=True)
         elif result == 'pdfi':
             self.view_illustration_pdf()
         elif result == 'del':
