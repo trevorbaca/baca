@@ -80,7 +80,7 @@ class MaterialPackageMaker(MaterialPackageProxy):
 
     def make_main_menu_section_for_user_input_module(self, main_menu, hidden_section):
         section = main_menu.make_new_section(is_numbered=True)
-        section.tokens = self.formatted_user_input_wrapper_lines
+        section.tokens = self.user_input_wrapper.editable_lines
         section.return_value_attribute = 'number'
         section = main_menu.make_new_section()
         section.append(('uic', 'user input - clear'))
