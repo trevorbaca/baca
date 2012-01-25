@@ -8,7 +8,7 @@ from baca.scf.UserInputWrapper import UserInputWrapper
 import baca
 
 
-class SargassoMeasureMaterialPackageProxy(MaterialPackageMaker):
+class SargassoMeasureMaterialPackageMaker(MaterialPackageMaker):
 
     def __init__(self, package_importable_name=None, session=None):
         MaterialPackageMaker.__init__(

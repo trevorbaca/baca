@@ -6,7 +6,7 @@ from baca.scf.editors.InteractiveEditor import InteractiveEditor
 import baca
 
 
-class ZaggedPitchClassMaterialPackageProxy(MaterialPackageMaker):
+class ZaggedPitchClassMaterialPackageMaker(MaterialPackageMaker):
 
     def __init__(self, package_importable_name=None, session=None):
         MaterialPackageMaker.__init__(
@@ -32,7 +32,7 @@ class ZaggedPitchClassMaterialPackageProxy(MaterialPackageMaker):
         ('grouping_counts', [1, 1, 2, 3]),])
 
     user_input_module_import_statements = [
-        'from baca.scf.materialpackagemakers import ZaggedPitchClassMaterialPackageProxy',
+        'from baca.scf.materialpackagemakers import ZaggedPitchClassMaterialPackageMaker',
         'from baca.scf import UserInputWrapper',]
 
     # TODO: implement pitchtools.are_pitch_class_tokens()

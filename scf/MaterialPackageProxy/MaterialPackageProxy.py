@@ -25,7 +25,7 @@ class MaterialPackageProxy(PackageProxy):
         return self.package_spaced_name
 
     @property
-    def formatted_user_input_lines(self):
+    def formatted_user_input_wrapper_lines(self):
         lines = []
         if self.has_user_input_module:
             user_input_wrapper = self.user_input_wrapper 

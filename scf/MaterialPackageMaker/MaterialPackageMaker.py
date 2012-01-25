@@ -80,7 +80,7 @@ class MaterialPackageMaker(MaterialPackageProxy):
 
     def make_main_menu_section_for_user_input_module(self, main_menu, hidden_section):
         section = main_menu.make_new_section(is_numbered=True)
-        section.tokens = self.formatted_user_input_lines
+        section.tokens = self.formatted_user_input_wrapper_lines
         section.return_value_attribute = 'number'
         section = main_menu.make_new_section()
         section.append(('uic', 'user input - clear'))
@@ -136,9 +136,9 @@ class MaterialPackageMaker(MaterialPackageProxy):
         self.proceed(line, prompt=prompt)
 
     def write_user_input_wrapper_to_disk(self, user_input_wrapper):
-        formatted_user_input_lines = self.format_user_input_wrapper_for_writing_to_disk(user_input_wrapper)
+        formatted_user_input_wrapper_lines = self.format_user_input_wrapper_for_writing_to_disk(user_input_wrapper)
         user_input_module = file(self.user_input_module_file_name, 'w')
-        user_input_module.write('\n'.join(formatted_user_input_lines))
+        user_input_module.write('\n'.join(formatted_user_input_wrapper_lines))
         user_input_module.close()
 
     ### OLD INTERACTIVE MATERIAL PROXY PUBLIC METHODS ###
