@@ -807,7 +807,7 @@ class MaterialPackageProxy(PackageProxy):
 
     def write_illustration_ly_and_pdf_to_disk(self, is_forced=False, prompt=True):
         lines = []
-        illustration = self.make_illustration()
+        illustration = self.illustration
         iotools.write_expr_to_pdf(illustration, self.illustration_pdf_file_name, print_status=False)
         iotools.write_expr_to_ly(illustration, self.illustration_ly_file_name, print_status=False)
         lines.append('PDF and LilyPond file written to disk.')

@@ -4,6 +4,14 @@ import copy
 
 class MaterialPackageMaker(MaterialPackageProxy):
 
+    ### READ-ONLY PUBLIC ATTRIBUTES ###
+
+    @property
+    def illustration(self):
+        output_material = self.import_output_material_from_output_material_module()
+        illustration = self.illustration_maker(output_material)
+        return illustration
+
     ### PUBLIC METHODS ###
 
     def clear_user_input_wrapper(self, prompt=True):
@@ -66,12 +74,6 @@ class MaterialPackageMaker(MaterialPackageProxy):
         self.write_user_input_wrapper_to_disk(user_input_wrapper) 
         line = 'demo values loaded.'
         self.proceed(line, prompt=prompt)
-
-    # TODO: consider making read-only attribute
-    def make_illustration(self):
-        output_material = self.import_output_material_from_output_material_module()
-        illustration = self.illustration_maker(output_material)
-        return illustration
 
     def make_main_menu_for_material_made_with_material_package_maker(self):
         menu, hidden_section = self.make_new_menu(where=self.where(), is_hidden=True)
@@ -145,12 +147,6 @@ class MaterialPackageMaker(MaterialPackageProxy):
 
     ### OLD INTERACTIVE MATERIAL PROXY PUBLIC METHODS ###
 
-    # TODO: promote to current code
-    def make_illustration_from_user_input_wrapper(self, user_input_wrapper):
-        material = self.make(*user_input_wrapper.values)
-        illustration = self.make_illustration_from_output_material(material)
-        return illustration 
-
     def old_run_interactive(self, clear=True, cache=False):
         self.cache_breadcrumbs(cache=cache)
         while True:
@@ -166,7 +162,7 @@ class MaterialPackageMaker(MaterialPackageProxy):
             elif result == 'l':
                 self.move_material_to_location()
             elif result == 'p':
-                illustration = self.make_illustration_from_user_input_wrapper(self.user_input_wrapper)
+                illustration = self.illustration
                 illustration.file_initial_user_includes.append(self.stylesheet)
                 illustration.header_block.title = markuptools.Markup(self.generic_output_name.capitalize())
                 illustration.header_block.subtitle = markuptools.Markup('(unsaved)')
