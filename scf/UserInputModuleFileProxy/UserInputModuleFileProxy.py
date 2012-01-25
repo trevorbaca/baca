@@ -5,7 +5,7 @@ class UserInputModuleFileProxy(FileProxy):
 
     def __init__(self, full_file_name, session=None):
         FileProxy.__init__(self, full_file_name, session=session)
-        self._user_input_wrapper_lines = []
+        self.user_input_wrapper_lines = []
         self.parse()
 
     ### READ-ONLY PUBLIC ATTRIBUTES ###
@@ -13,16 +13,12 @@ class UserInputModuleFileProxy(FileProxy):
     @property
     def sections(self):
         return (
-            (self._encoding_directives, False, 0),
-            (self._docstring_lines, False, 1),
-            (self._setup_statements, True, 2),
-            (self._user_input_wrapper_lines, False, 0),
+            (self.encoding_directives, False, 0),
+            (self.docstring_lines, False, 1),
+            (self.setup_statements, True, 2),
+            (self.user_input_wrapper_lines, False, 0),
             )
             
-    @property
-    def user_input_wrapper_lines(self):
-        return self._user_input_wrapper_lines
-
     ### PUBLIC METHODS ###
 
     def parse(self):
@@ -56,7 +52,7 @@ class UserInputModuleFileProxy(FileProxy):
             else:
                 raise ValueError('{!r}: can not parse line: {!r}.'.format(self.full_file_name, line))
         output_material_module.close()
-        self._encoding_directives = encoding_directives
-        self._docstring_lines = docstring_lines
-        self._setup_statements = setup_statements
-        self._user_input_wrapper_lines = user_input_wrapper_lines
+        self.encoding_directives = encoding_directives
+        self.docstring_lines = docstring_lines
+        self.setup_statements = setup_statements
+        self.user_input_wrapper_lines = user_input_wrapper_lines

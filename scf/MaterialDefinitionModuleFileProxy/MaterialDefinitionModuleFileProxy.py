@@ -5,28 +5,20 @@ class MaterialDefinitionModuleFileProxy(FileProxy):
 
     def __init__(self, full_file_name, session=None):
         FileProxy.__init__(self, full_file_name, session=session)
-        self._output_material_module_import_lines = []
-        self._body_lines = []
+        self.output_material_module_import_lines = []
+        self.body_lines = []
         self.parse()
 
     ### READ-ONLY PUBLIC ATTRIBUTES ###
 
     @property
-    def body_lines(self):
-        return self._body_lines
-
-    @property
-    def output_material_module_import_lines(self):
-        return self._output_material_module_import_lines
-
-    @property
     def sections(self):
         return (
-            (self._encoding_directives, False, 0),
-            (self._docstring_lines, False, 1),
-            (self._setup_statements, True, 0),
-            (self._output_material_module_import_lines, True, 2),
-            (self._body_lines, False, 0),
+            (self.encoding_directives, False, 0),
+            (self.docstring_lines, False, 1),
+            (self.setup_statements, True, 0),
+            (self.output_material_module_import_lines, True, 2),
+            (self.body_lines, False, 0),
             )
 
     ### PUBLIC METHODS ###
@@ -67,8 +59,8 @@ class MaterialDefinitionModuleFileProxy(FileProxy):
             else:
                 raise ValueError('{!r}: can not parse line: {!r}.'.format(self.full_file_name, line))
         material_definition_module.close()
-        self._encoding_directives = encoding_directives
-        self._docstring_lines = docstring_lines
-        self._setup_statements = setup_statements
-        self._output_material_module_import_lines = output_material_module_import_lines
-        self._body_lines = body_lines
+        self.encoding_directives = encoding_directives[:]
+        self.docstring_lines = docstring_lines[:]
+        self.setup_statements = setup_statements[:]
+        self.output_material_module_import_lines = output_material_module_import_lines[:]
+        self.body_lines = body_lines[:]

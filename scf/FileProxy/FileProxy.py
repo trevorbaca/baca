@@ -11,10 +11,10 @@ class FileProxy(SCFObject):
         assert os.path.exists(full_file_name), 'Initializer {!r} does not exist.'.format(full_file_name)
         SCFObject.__init__(self, session=session)
         self._full_file_name = full_file_name
-        self._encoding_directives = []
-        self._docstring_lines = []
-        self._setup_statements = []
-        self._teardown_statements = []
+        self.encoding_directives = []
+        self.docstring_lines = []
+        self.setup_statements = []
+        self.teardown_statements = []
 
     ### OVERLOADS ###
 
@@ -22,14 +22,6 @@ class FileProxy(SCFObject):
         return '{}({!r})'.format(self.class_name, self.full_file_name)
 
     ### READ-ONLY PUBLIC ATTRIBUTES ###
-
-    @property
-    def docstring_lines(self):
-        return self._docstring_lines
-
-    @property
-    def encoding_directives(self):
-        return self._encoding_directives
 
     @property
     def format(self):
@@ -59,16 +51,8 @@ class FileProxy(SCFObject):
         return os.path.dirname(self.full_file_name)
 
     @property
-    def setup_statements(self):
-        return self._setup_statements
-
-    @property
     def short_file_name(self):
         return self.full_file_name.split(os.path.sep)[-1]
-
-    @property
-    def teardown_statements(self):
-        return self._teardown_statements
 
     ### PUBLIC METHODS ###
 

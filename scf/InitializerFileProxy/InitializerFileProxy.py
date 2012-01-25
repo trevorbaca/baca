@@ -6,30 +6,22 @@ class InitializerFileProxy(FileProxy):
 
     def __init__(self, full_file_name, session=None):
         FileProxy.__init__(self, full_file_name, session=session)
-        self._protected_import_statements = []
-        self._tag_lines = []
+        self.protected_import_statements = []
+        self.tag_lines = []
         self.parse()
 
     ### READ-ONLY PUBLIC ATTRIBUTES ##
 
     @property
-    def protected_import_statements(self):
-        return self._protected_import_statements
-
-    @property
     def sections(self):
         return (
-            (self._encoding_directives, True, 0),
-            (self._docstring_lines, False, 1),
-            (self._setup_statements, True, 1),
-            (self._protected_import_statements, True, 1),
-            (self._tag_lines, False, 1),
-            (self._teardown_statements, True, 0),
+            (self.encoding_directives, True, 0),
+            (self.docstring_lines, False, 1),
+            (self.setup_statements, True, 1),
+            (self.protected_import_statements, True, 1),
+            (self.tag_lines, False, 1),
+            (self.teardown_statements, True, 0),
             )
-
-    @property
-    def tag_lines(self):
-        return self._tag_lines
 
     ### PUBLIC METHODS ###
 
@@ -79,13 +71,14 @@ class InitializerFileProxy(FileProxy):
             else:
                 raise ValueError('{!r}: can not parse line: {!r}.'.format(self.full_file_name, line))
         initializer.close()
-        self._encoding_directives = encoding_directives
-        self._docstring_lines = docstring_lines
-        self._setup_statements = setup_statements
-        self._protected_import_statements = protected_import_statements
-        self._tag_lines = tag_lines
-        self._teardown_statements = teardown_statements
+        self.encoding_directives = encoding_directives[:]
+        self.docstring_lines = docstring_lines[:]
+        self.setup_statements = setup_statements[:]
+        self.protected_import_statements = protected_import_statements[:]
+        self.tag_lines = tag_lines[:]
+        self.teardown_statements = teardown_statements[:]
 
+    # TODO: change to nonabbreviated name.
     def pprint_tags(self, tags):
         if tags:
             lines = []
@@ -114,5 +107,5 @@ class InitializerFileProxy(FileProxy):
     def write_tags_to_disk(self, tags):
         self.parse()
         tag_lines = self.pprint_tags(tags)
-        self._tag_lines = tag_lines
+        self.tag_lines = tag_lines[:]
         self.write_to_disk()
