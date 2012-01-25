@@ -404,7 +404,7 @@ class MaterialPackageProxy(PackageProxy):
     
     # TODO: reimplement with helpers.safe_import()
     def import_output_material_from_output_material_module(self):
-        self.unimport_module_hierarchy()
+        self.unimport_material_module_hierarchy()
         try:
             command = 'from {} import {}'.format(
                 self.output_material_module_importable_name, self.material_underscored_name)
@@ -703,7 +703,8 @@ class MaterialPackageProxy(PackageProxy):
         import_statement = 'safe_import({!r}, {!r})\n'.format(
             self.material_underscored_name, self.material_underscored_name)
         parent_package = PackageProxy(self.parent_package_importable_name, session=self.session)
-        parent_package.initializer_file_proxy.protected_import_statements.remove(import_statement)
+        if import_statement in parent_package.initializer_file_proxy.protected_import_statements:
+            parent_package.initializer_file_proxy.protected_import_statements.remove(import_statement)
 
     def run(self, user_input=None, clear=True, cache=False):
         self.assign_user_input(user_input=user_input)
@@ -780,8 +781,7 @@ class MaterialPackageProxy(PackageProxy):
     def unimport_output_material_module(self):
         self.remove_package_importable_name_from_sys_modules(self.output_material_module_importable_name)
 
-    # TODO: change name to self.unimport_material_module_hierarchy()
-    def unimport_module_hierarchy(self):
+    def unimport_material_module_hierarchy(self):
         self.unimport_materials_module()
         self.unimport_material_module()
         self.unimport_output_material_module()
@@ -829,15 +829,12 @@ class MaterialPackageProxy(PackageProxy):
         lines.append('')
         self.proceed(lines, prompt=prompt)
 
-    # TODO: migrate to output material module file proxy
     def write_output_material_to_disk(self, prompt=True):
         self.remove_material_from_materials_initializer()
-        output_material_module_body_lines = self.make_output_material_module_body_lines()
-        output_material_module = file(self.output_material_module_file_name, 'w')
-        output_material_module.write('\n'.join(self.output_material_module_import_statements))
-        output_material_module.write('\n'.join(self.output_material_module_spacer_lines))
-        output_material_module.write('\n'.join(output_material_module_body_lines))
-        output_material_module.close()
+        output_material_module_file_proxy = self.output_material_module_file_proxy
+        lines = self.make_output_material_module_body_lines()
+        output_material_module_file_proxy._body_lines[:] = lines
+        output_material_module_file_proxy.write_to_disk()
         self.add_material_to_materials_initializer()
         self.add_material_to_material_initializer()
         line = 'output data written to disk.'

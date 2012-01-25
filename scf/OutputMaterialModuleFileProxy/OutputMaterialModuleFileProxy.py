@@ -45,6 +45,8 @@ class OutputMaterialModuleFileProxy(FileProxy):
                 current_section = 'docstring'
             elif line.startswith(('from', 'import')):
                 current_section = 'setup'
+            else:
+                current_section = 'body'
             if current_section == 'encoding':
                 encoding_directives.append(line)
             elif current_section == 'docstring':
