@@ -60,14 +60,6 @@ class MaterialPackageProxy(PackageProxy):
         else:
             return os.path.exists(self.illustration_pdf_file_name)
 
-    # TODO: remove
-    @property
-    def has_local_stylesheet(self):
-        if self.local_stylesheet_file_name is None:
-            return False
-        else:
-            return os.path.exists(self.local_stylesheet_file_name)
-    
     @property
     def has_material_definition(self):
         if not self.has_material_definition_module:
@@ -157,12 +149,6 @@ class MaterialPackageProxy(PackageProxy):
     def is_handmade(self):
         return not(self.has_material_package_maker)
 
-    # TODO: remove
-    @property
-    def local_stylesheet_file_name(self):
-        if self.directory_name is not None:
-            return os.path.join(self.directory_name, 'stylesheet.ly')
-
     @property
     def material_definition_module_file_name(self):
         if self.directory_name is not None:
@@ -171,7 +157,6 @@ class MaterialPackageProxy(PackageProxy):
     # TODO: write test
     @property
     def material_definition_module_proxy(self):
-        #return MaterialDefinitionModuleProxy(self.material_definition_module_file_name, session=self.session)
         return MaterialDefinitionModuleProxy(
             self.material_definition_module_importable_name, session=self.session)
 
@@ -246,13 +231,13 @@ class MaterialPackageProxy(PackageProxy):
         if self.output_material_module_file_name is not None:
             return '{}.output_material'.format(self.package_importable_name)
 
-    # TODO: remove
-    @property
-    def output_material_module_spacer_lines(self):
-        lines = []
-        if self.output_material_module_import_statements:
-            lines.extend(['\n', '\n'])
-        return lines
+#    # TODO: remove
+#    @property
+#    def output_material_module_spacer_lines(self):
+#        lines = []
+#        if self.output_material_module_import_statements:
+#            lines.extend(['\n', '\n'])
+#        return lines
 
     @property
     def score_package_short_name(self):
@@ -267,12 +252,7 @@ class MaterialPackageProxy(PackageProxy):
     # TODO: reimplement and write test
     @property
     def source_stylesheet_file_name(self):
-        if self.has_local_stylesheet:
-            local_stylesheet = file(self.local_stylesheet_file_name, 'r')
-            first_line = local_stylesheet.readlines()[0].strip()
-            assert first_line.endswith('.ly')
-            result = first_line.split()[-1]
-            return result
+        self.print_not_implemented()
 
     # TODO: remove
     @property
@@ -358,13 +338,6 @@ class MaterialPackageProxy(PackageProxy):
             line = 'output PDF deleted.'
             self.proceed(line, prompt=prompt)
 
-    # TODO: remove
-    def delete_local_stylesheet(self, prompt=True):
-        if self.has_local_stylesheet:
-            os.remove(self.local_stylesheet_file_name)
-            line = 'stylesheet deleted.'
-            self.proceed(line, prompt=prompt)
-           
     def delete_material_definition_module(self, prompt=True):
         if self.has_material_definition_module:
             os.remove(self.material_definition_module_file_name)
@@ -388,10 +361,6 @@ class MaterialPackageProxy(PackageProxy):
             line = 'user input module deleted.'
             self.proceed(line, prompt=prompt)
     
-    # TODO: remove
-    def edit_local_stylesheet(self):
-        os.system('vi {}'.format(self.local_stylesheet_file_name))
-
     # TODO: reimplement and keep
     def edit_source_stylesheet(self):
         stylesheet_proxy = StylesheetFileProxy(self.source_stylesheet_file_name, session=self.session)
@@ -423,8 +392,6 @@ class MaterialPackageProxy(PackageProxy):
         self.unimport_output_material_module()
         command = 'from {} import illustration'.format(self.illustration_builder_module_importable_name) 
         exec(command)
-        if self.has_local_stylesheet:
-            illustration.file_initial_user_includes.append(self.local_stylesheet_file_name)
         illustration.header_block.title = markuptools.Markup(self.material_spaced_name)
         return illustration
         
@@ -472,14 +439,8 @@ class MaterialPackageProxy(PackageProxy):
             self.run_python_on_illustration_builder()
         elif result == 'ibxi':
             self.run_abjad_on_illustration_builder()
-        elif result == 'ssd':
-            self.delete_local_stylesheet()
-        elif result == 'sse':
-            self.edit_local_stylesheet()
         elif result == 'ssm':
             self.edit_source_stylesheet()
-        elif result == 'ssl':
-            self.link_local_stylesheet()
         elif result == 'sss':
             self.select_stylesheet_interactively()
         elif result == 'stl':
@@ -522,20 +483,6 @@ class MaterialPackageProxy(PackageProxy):
             self.edit_user_input_at_number(int(result))
         else:
             raise ValueError
-
-    # TODO: remove
-    def link_local_stylesheet(self, source_stylesheet_file_name=None, prompt=True):
-        if source_stylesheet_file_name is None:
-            source_stylesheet_file_name = self.source_stylesheet_file_name
-        source = file(source_stylesheet_file_name, 'r')
-        target = file(self.local_stylesheet_file_name, 'w')
-        target.write('% source: {}\n\n'.format(source_stylesheet_file_name))
-        for line in source.readlines():
-            target.write(line)
-        source.close()
-        target.close()
-        line = 'stylesheet linked.'
-        self.proceed(line, prompt=prompt)
 
     def make_main_menu(self):
         if self.is_handmade:
@@ -628,10 +575,7 @@ class MaterialPackageProxy(PackageProxy):
                 section = main_menu.make_new_section()
                 section.append(('sss', 'score stylesheet - select'))
                 if self.has_local_stylesheet:
-                    hidden_section.append(('ssd', 'score stylesheet - delete'))
-                    section.append(('sse', 'score stylesheet - edit'))
                     hidden_section.append(('ssm', 'source stylesheet - edit'))
-                    hidden_section.append(('ssl', 'score stylesheet - relink'))
 
     # TODO: migrate to output material module file proxy
     def make_output_material_module_body_lines(self):
@@ -767,7 +711,8 @@ class MaterialPackageProxy(PackageProxy):
         self.pop_backtrack()
         if self.backtrack():
             return
-        self.link_local_stylesheet(source_stylesheet_file_name, prompt=prompt)
+        # TODO: replace with something nonlocal
+        #self.link_local_stylesheet(source_stylesheet_file_name, prompt=prompt)
 
     def unimport_material_definition_module(self):
         self.remove_package_importable_name_from_sys_modules(self.material_definition_module_importable_name)

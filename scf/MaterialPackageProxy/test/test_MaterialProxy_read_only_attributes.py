@@ -11,7 +11,6 @@ def test_MaterialPackageProxy_read_only_attributes_01():
     assert not material_proxy.has_output_material
     assert not material_proxy.has_output_material_module
     assert not material_proxy.has_illustration
-    assert not material_proxy.has_local_stylesheet
     assert not material_proxy.has_illustration_ly
     assert not material_proxy.has_illustration_pdf
     assert not material_proxy.has_illustration_builder
@@ -28,8 +27,6 @@ def test_MaterialPackageProxy_read_only_attributes_01():
     assert material_proxy.output_material_module_importable_name == \
         'baca.materials.test_material_a.output_material'
     assert material_proxy.score_package_short_name == 'baca'
-    assert material_proxy.local_stylesheet_file_name == \
-        '/Users/trevorbaca/Documents/other/baca/materials/test_material_a/stylesheet.ly'
     assert material_proxy.user_input_wrapper is None
     assert material_proxy.illustration_builder_module_file_name == \
         '/Users/trevorbaca/Documents/other/baca/materials/test_material_a/illustration_builder.py'
@@ -51,7 +48,6 @@ def test_MaterialPackageProxy_read_only_attributes_02():
     assert smp.has_output_material
     assert smp.has_output_material_module
     assert not smp.has_illustration
-    assert not smp.has_local_stylesheet
     assert not smp.has_illustration_ly
     assert not smp.has_illustration_pdf
     assert not smp.has_illustration_builder
@@ -67,8 +63,6 @@ def test_MaterialPackageProxy_read_only_attributes_02():
         '/Users/trevorbaca/Documents/other/baca/materials/sargasso_multipliers/output_material.py'
     assert smp.output_material_module_importable_name == 'baca.materials.sargasso_multipliers.output_material'
     assert smp.score_package_short_name == 'baca'
-    assert smp.local_stylesheet_file_name == \
-        '/Users/trevorbaca/Documents/other/baca/materials/sargasso_multipliers/stylesheet.ly'
     assert smp.illustration_builder_module_file_name == \
         '/Users/trevorbaca/Documents/other/baca/materials/sargasso_multipliers/illustration_builder.py'
     assert smp.illustration_ly_file_name == \
