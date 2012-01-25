@@ -124,7 +124,7 @@ class MaterialPackageProxy(PackageProxy):
             return os.path.join(self.directory_name, 'illustration_builder.py')
 
     @property
-    def illustration_builder_module_file_proxy(self):
+    def illustration_builder_module_proxy(self):
         return IllustrationBuilderModuleProxy(self.illustration_builder_module_file_name, session=self.session)
 
     @property
@@ -170,7 +170,7 @@ class MaterialPackageProxy(PackageProxy):
 
     # TODO: write test
     @property
-    def material_definition_module_file_proxy(self):
+    def material_definition_module_proxy(self):
         #return MaterialDefinitionModuleProxy(self.material_definition_module_file_name, session=self.session)
         return MaterialDefinitionModuleProxy(
             self.material_definition_module_importable_name, session=self.session)
@@ -224,7 +224,7 @@ class MaterialPackageProxy(PackageProxy):
 
     # TODO: write test
     @property
-    def output_material_module_file_proxy(self):
+    def output_material_module_proxy(self):
         return OutputMaterialModuleProxy(self.output_material_module_importable_name, session=self.session)
 
     # TODO: reimplement with helpers.safe_import()
@@ -310,7 +310,7 @@ class MaterialPackageProxy(PackageProxy):
     
     # TODO: write test
     @property
-    def user_input_module_file_proxy(self):
+    def user_input_module_proxy(self):
         return UserInputModuleProxy(self.user_input_module_file_name, session=self.session)
 
     # TODO: write test
@@ -455,7 +455,7 @@ class MaterialPackageProxy(PackageProxy):
         elif result == 'mdd':
             self.delete_material_definition_module()
         elif result == 'mde':
-            self.material_definition_module_file_proxy.edit()
+            self.material_definition_module_proxy.edit()
         elif result == 'mdt':
             self.write_stub_material_definition_to_disk()
         elif result == 'mdx':
@@ -465,7 +465,7 @@ class MaterialPackageProxy(PackageProxy):
         elif result == 'ibd':
             self.delete_illustration_builder()
         elif result == 'ibe':
-            self.illustration_builder_module_file_proxy.edit()
+            self.illustration_builder_module_proxy.edit()
         elif result == 'ibt':
             self.write_stub_illustration_builder_to_disk()
         elif result == 'ibx':
@@ -487,7 +487,7 @@ class MaterialPackageProxy(PackageProxy):
         elif result == 'dc':
             self.write_output_material_to_disk()
         elif result == 'di':
-            self.output_material_module_file_proxy.view()
+            self.output_material_module_proxy.view()
         elif result == 'dd':
             self.delete_output_material_module()
         elif result == 'lyc':
@@ -828,10 +828,10 @@ class MaterialPackageProxy(PackageProxy):
 
     def write_output_material_to_disk(self, prompt=True):
         self.remove_material_from_materials_initializer()
-        output_material_module_file_proxy = self.output_material_module_file_proxy
+        output_material_module_proxy = self.output_material_module_proxy
         lines = self.make_output_material_module_body_lines()
-        output_material_module_file_proxy.body_lines[:] = lines
-        output_material_module_file_proxy.write_to_disk()
+        output_material_module_proxy.body_lines[:] = lines
+        output_material_module_proxy.write_to_disk()
         self.add_material_to_materials_initializer()
         self.add_material_to_material_initializer()
         line = 'output data written to disk.'
