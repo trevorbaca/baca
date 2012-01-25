@@ -1,6 +1,6 @@
-from baca.scf.BasicParsableModuleProxy import BasicParsableModuleProxy
+from baca.scf.BasicModuleProxy import BasicModuleProxy
 
 
-class OutputMaterialModuleProxy(BasicParsableModuleProxy):
+class OutputMaterialModuleProxy(BasicModuleProxy):
 
     pass

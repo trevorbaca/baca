@@ -1,7 +1,7 @@
-from baca.scf.BasicParsableModuleProxy import BasicParsableModuleProxy
+from baca.scf.BasicModuleProxy import BasicModuleProxy
 
 
-class IllustrationBuilderModuleProxy(BasicParsableModuleProxy):
+class IllustrationBuilderModuleProxy(BasicModuleProxy):
 
     ### PUBLIC METHODS ###
 

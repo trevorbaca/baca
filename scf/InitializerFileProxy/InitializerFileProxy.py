@@ -1,11 +1,11 @@
-from baca.scf.FileProxy import FileProxy
+from baca.scf.ParsableFileProxy import ParsableFileProxy
 import os
 
 
-class InitializerFileProxy(FileProxy):
+class InitializerFileProxy(ParsableFileProxy):
 
     def __init__(self, full_file_name, session=None):
-        FileProxy.__init__(self, full_file_name, session=session)
+        ParsableFileProxy.__init__(self, full_file_name, session=session)
         self.protected_import_statements = []
         self.tag_lines = []
         self.parse()

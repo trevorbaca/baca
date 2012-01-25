@@ -1,4 +1,4 @@
-from BasicParsableModuleProxy import BasicParsableModuleProxy
+from BasicModuleProxy import BasicModuleProxy
 from ChunkPackageProxy import ChunkPackageProxy
 from ChunkPackageWrangler import ChunkPackageWrangler
 from DirectoryProxy import DirectoryProxy
