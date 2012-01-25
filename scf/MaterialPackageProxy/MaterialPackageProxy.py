@@ -198,6 +198,7 @@ class MaterialPackageProxy(PackageProxy):
         result = '.'.join(result)
         return result
 
+    # TODO: migrate to OutputMaterialModuleProxy and remove
     @property
     def output_material(self):
         return self.import_material_definition_from_material_definition_module()
@@ -247,6 +248,10 @@ class MaterialPackageProxy(PackageProxy):
     @property
     def source_stylesheet_file_name(self):
         self.print_not_implemented()
+
+    @property
+    def source_stylesheet_file_proxy(self):
+        return StylesheetFileProxy(self.source_stylesheet_file_name, session=self.session)
 
     # TODO: remove
     @property
@@ -314,29 +319,28 @@ class MaterialPackageProxy(PackageProxy):
         parent_package.initializer_file_proxy.add_protected_import_statement(
             self.material_underscored_name, self.material_underscored_name)
 
+    # TODO: delegate to IllustrationLyFileProxy
     def delete_illustration_ly(self, prompt=True):
         if self.has_illustration_ly:
             os.remove(self.illustration_ly_file_name)
             line = 'output LilyPond file deleted.'
             self.proceed(line, prompt=prompt)
 
+    # TODO: delegate to IllustrationPdfFileProxy
     def delete_illustration_pdf(self, prompt=True):
         if self.has_illustration_pdf:
             os.remove(self.illustration_pdf_file_name)
             line = 'output PDF deleted.'
             self.proceed(line, prompt=prompt)
 
-    # TODO: reimplement
-    def edit_source_stylesheet(self):
-        stylesheet_proxy = StylesheetFileProxy(self.source_stylesheet_file_name, session=self.session)
-        stylesheet_proxy.vi_stylesheet()
-
+    # TODO: delegate to MaterialDefinitionModuleProxy
     def import_material_definition_from_material_definition_module(self):
         self.unimport_material_definition_module()
         return baca.scf.helpers.safe_import(locals(), 'material_definition', self.material_underscored_name, 
             source_parent_module_importable_name=self.package_importable_name)
     
     # TODO: reimplement with helpers.safe_import()
+    # TODO: delegate to OutputMaterialModuleProxy
     def import_output_material_from_output_material_module(self):
         self.unimport_material_module_hierarchy()
         try:
@@ -350,6 +354,7 @@ class MaterialPackageProxy(PackageProxy):
             pass
 
     # TODO: reimplement with helpers.safe_import()
+    # TODO: delegate to IllustrationBuilderModuleProxy
     def import_illustration_from_illustration_builder_module(self):
         if not self.has_illustration_builder:
             return None
@@ -361,6 +366,7 @@ class MaterialPackageProxy(PackageProxy):
         return illustration
         
     # TODO: reimplement with helpers.safe_import()
+    # TODO: delegate to UserInputModuleProxy
     def import_user_input_wrapper_from_user_input_module(self):
         self.unimport_user_input_module()
         try:
@@ -407,7 +413,7 @@ class MaterialPackageProxy(PackageProxy):
         elif result == 'ibxi':
             self.run_abjad_on_illustration_builder()
         elif result == 'ssm':
-            self.edit_source_stylesheet()
+            self.source_stylesheet_file_proxy.edit()
         elif result == 'sss':
             self.select_stylesheet_interactively()
         elif result == 'stl':
@@ -544,7 +550,7 @@ class MaterialPackageProxy(PackageProxy):
                 if self.has_local_stylesheet:
                     hidden_section.append(('ssm', 'source stylesheet - edit'))
 
-    # TODO: migrate to output material module file proxy
+    # TODO: migrate to OutputMaterialModuleProxy and remove
     def make_output_material_module_body_lines(self):
         lines = []
         output_material = self.output_material
@@ -640,23 +646,23 @@ class MaterialPackageProxy(PackageProxy):
         self.pop_breadcrumb()
         self.restore_breadcrumbs(cache=cache)
 
-    # TODO: migrate to material definition module file proxy
+    # TODO: migrate to material definition module proxy
     def run_abjad_on_material_definition(self):
         os.system('abjad {}'.format(self.material_definition_module_file_name))
         self.display('')
 
-    # TODO: migrate to illustration builder file proxy
+    # TODO: migrate to illustration builder module proxy
     def run_abjad_on_illustration_builder(self):
         os.system('abjad {}'.format(self.illustration_builder_module_file_name))
         self.display('')
 
-    # TODO: migrate to material definition module file proxy
+    # TODO: migrate to material definition module proxy
     def run_python_on_material_definition(self, prompt=True):
         os.system('python {}'.format(self.material_definition_module_file_name))
         line = 'material definition executed.'
         self.proceed(line, prompt=prompt)
 
-    # TODO: migrate to illustration builder file proxy
+    # TODO: migrate to illustration builder module proxy
     def run_python_on_illustration_builder(self, prompt=True):
         os.system('python {}'.format(self.illustration_builder_module_file_name))
         line = 'illustration builder executed.'
@@ -711,9 +717,11 @@ class MaterialPackageProxy(PackageProxy):
     def unimport_user_input_module(self):
         self.remove_package_importable_name_from_sys_modules(self.user_input_module_importable_name)
 
+    # TODO: migrate to IllustrationLyFileProxy
     def view_illustration_ly(self):
         os.system('vi -R {}'.format(self.illustration_ly_file_name))
 
+    # TODO: migrate to IllustrationPdfFileProxy
     def view_illustration_pdf(self):
         command = 'open {}'.format(self.illustration_pdf_file_name)
         os.system(command)
