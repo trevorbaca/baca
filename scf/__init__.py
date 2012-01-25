@@ -6,6 +6,7 @@ from EtcDirectoryProxy import EtcDirectoryProxy
 from ExgDirectoryProxy import ExgDirectoryProxy
 from FileProxy import FileProxy
 from HomePackageProxy import HomePackageProxy
+from IllustrationBuilderModuleFileProxy import IllustrationBuilderModuleFileProxy
 from InitializerFileProxy import InitializerFileProxy
 from MaterialDefinitionModuleFileProxy import MaterialDefinitionModuleFileProxy
 from MaterialPackageProxy import MaterialPackageProxy
