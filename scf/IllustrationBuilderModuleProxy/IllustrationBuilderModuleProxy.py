@@ -1,8 +1,8 @@
-from baca.scf.OutputMaterialModuleFileProxy import OutputMaterialModuleFileProxy
+from baca.scf.OutputMaterialModuleProxy import OutputMaterialModuleProxy
 
 
-# TODO: create intermediate class from which both OutputMaterialModuleFileProxy and
+# TODO: create intermediate class from which both OutputMaterialModuleProxy and
 #       IllustrationBuilderModuleProxy can inherit.
-class IllustrationBuilderModuleProxy(OutputMaterialModuleFileProxy):
+class IllustrationBuilderModuleProxy(OutputMaterialModuleProxy):
 
     pass

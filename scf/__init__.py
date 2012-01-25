@@ -14,7 +14,7 @@ from MaterialPackageMakerWrangler import MaterialPackageMakerWrangler
 from MaterialPackageWrangler import MaterialPackageWrangler
 from ModuleProxy import ModuleProxy
 from MusPackageProxy import MusPackageProxy
-from OutputMaterialModuleFileProxy import OutputMaterialModuleFileProxy
+from OutputMaterialModuleProxy import OutputMaterialModuleProxy
 from PackageWrangler import PackageWrangler
 from PackageProxy import PackageProxy
 from ScorePackageProxy import ScorePackageProxy
