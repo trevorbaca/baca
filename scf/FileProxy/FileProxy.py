@@ -74,19 +74,20 @@ class FileProxy(SCFObject):
         line = 'file copied.'
         self.proceed(line, prompt=prompt)
 
-    def display(self):
-        print self.format
-
     def edit(self):
         os.system('vi + {}'.format(self.full_file_name))
+
+    def print_to_screen(self):
+        print self.format
 
     def rename_file(self, new_full_file_name):
         os.rename(self.full_file_name, new_full_file_name)
         self._full_file_name = new_full_file_name
         
     # TODO: extend for repository
-    def remove(self):
+    def remove(self, prompt=False):
         os.remove(self.full_file_name)
+        self.proceed('file deleted.', prompt=prompt)
 
     def short_file_name(self):
         return os.path.sep.split(self.full_file_name)[-1]

@@ -93,6 +93,7 @@ class MaterialPackageMaker(MaterialPackageProxy):
         section.return_value_attribute = 'number'
         section = main_menu.make_new_section()
         section.append(('uic', 'user input - clear'))
+        section.append(('uid', 'user input - delete module'))
         section.append(('uil', 'user input - load demo values'))
         section.append(('uip', 'user input - populate'))
         section.append(('uis', 'user input - show demo values'))

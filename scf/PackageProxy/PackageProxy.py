@@ -134,6 +134,7 @@ class PackageProxy(DirectoryProxy):
             line = 'initializer deleted.'
             self.proceed(line, prompt=prompt)
 
+    # TODO: rename to self.remove()
     def delete_package(self):
         result = self.remove()
         if result:

@@ -210,6 +210,8 @@ class MaterialPackageProxy(PackageProxy):
     # TODO: write test
     @property
     def output_material_module_proxy(self):
+        if not self.has_output_material_module:
+            file(self.output_material_module_file_name, 'w').write('')    
         return OutputMaterialModuleProxy(self.output_material_module_importable_name, session=self.session)
 
     # TODO: reimplement with helpers.safe_import()
@@ -230,14 +232,6 @@ class MaterialPackageProxy(PackageProxy):
     def output_material_module_importable_name(self):
         if self.output_material_module_file_name is not None:
             return '{}.output_material'.format(self.package_importable_name)
-
-#    # TODO: remove
-#    @property
-#    def output_material_module_spacer_lines(self):
-#        lines = []
-#        if self.output_material_module_import_statements:
-#            lines.extend(['\n', '\n'])
-#        return lines
 
     @property
     def score_package_short_name(self):
@@ -320,12 +314,6 @@ class MaterialPackageProxy(PackageProxy):
         parent_package.initializer_file_proxy.add_protected_import_statement(
             self.material_underscored_name, self.material_underscored_name)
 
-    def delete_illustration_builder_module(self, prompt=True):
-        if self.has_illustration_builder:
-            os.remove(self.illustration_builder_module_file_name)
-            line = 'illustration builder deleted.'
-            self.proceed(line, prompt=prompt)
-
     def delete_illustration_ly(self, prompt=True):
         if self.has_illustration_ly:
             os.remove(self.illustration_ly_file_name)
@@ -338,30 +326,12 @@ class MaterialPackageProxy(PackageProxy):
             line = 'output PDF deleted.'
             self.proceed(line, prompt=prompt)
 
-    def delete_material_definition_module(self, prompt=True):
-        if self.has_material_definition_module:
-            os.remove(self.material_definition_module_file_name)
-            line = 'material definition deleted.'
-            self.proceed(line, prompt=prompt)
-
+    # TODO: rename to self.remove()
     def delete_material_package(self):
         self.remove_material_from_materials_initializer()
         PackageProxy.delete_package(self)
 
-    def delete_output_material_module(self, prompt=True):
-        if self.has_output_material_module:
-            self.remove_material_from_materials_initializer()
-            os.remove(self.output_material_module_file_name)
-            line = 'output data module deleted.'
-            self.proceed(line, prompt=prompt)
-
-    def delete_user_input_module(self, prompt=True):
-        if self.has_user_input_module:
-            os.remove(self.user_input_module_file_name)
-            line = 'user input module deleted.'
-            self.proceed(line, prompt=prompt)
-    
-    # TODO: reimplement and keep
+    # TODO: reimplement
     def edit_source_stylesheet(self):
         stylesheet_proxy = StylesheetFileProxy(self.source_stylesheet_file_name, session=self.session)
         stylesheet_proxy.vi_stylesheet()
@@ -410,6 +380,8 @@ class MaterialPackageProxy(PackageProxy):
         assert isinstance(result, str)
         if result == 'uic':
             self.clear_user_input_wrapper(prompt=False)    
+        elif result == 'uid':
+            self.user_input_module_proxy.remove(prompt=True)
         elif result == 'uil':
             self.load_user_input_wrapper_demo_values(prompt=False)
         elif result == 'uip':
@@ -420,7 +392,7 @@ class MaterialPackageProxy(PackageProxy):
             self.session.use_current_user_input_values_as_default = \
                 not self.session.use_current_user_input_values_as_default
         elif result == 'mdd':
-            self.delete_material_definition_module()
+            self.material_definition_module_proxy.remove(prompt=True)
         elif result == 'mde':
             self.material_definition_module_proxy.edit()
         elif result == 'mdt':
@@ -430,7 +402,7 @@ class MaterialPackageProxy(PackageProxy):
         elif result == 'mdxi':
             self.run_abjad_on_material_definition()
         elif result == 'ibd':
-            self.delete_illustration_builder()
+            self.illustration_builder_module_proxy.remove(prompt=True)
         elif result == 'ibe':
             self.illustration_builder_module_proxy.edit()
         elif result == 'ibt':
@@ -450,7 +422,7 @@ class MaterialPackageProxy(PackageProxy):
         elif result == 'di':
             self.output_material_module_proxy.view()
         elif result == 'dd':
-            self.delete_output_material_module()
+            self.output_material_module_proxy.remove(prompt=True)
         elif result == 'lyc':
             self.write_illustration_ly_to_disk(is_forced=True)
         elif result == 'lyd':

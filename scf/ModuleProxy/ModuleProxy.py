@@ -6,7 +6,6 @@ class ModuleProxy(FileProxy):
     def __init__(self, module_importable_name, session=None):
         assert isinstance(module_importable_name, str), '{!r} is not a string.'.format(module_importable_name)
         full_file_name = self.module_importable_name_to_full_file_name(module_importable_name)
-        self.debug(full_file_name)
         FileProxy.__init__(self, full_file_name, session=session)
         self._module_importable_name = module_importable_name
 
