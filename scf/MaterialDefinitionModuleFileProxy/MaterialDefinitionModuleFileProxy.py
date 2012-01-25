@@ -1,10 +1,12 @@
-from baca.scf.FileProxy import FileProxy
+from baca.scf.ModuleProxy import ModuleProxy
+import os
 
 
-class MaterialDefinitionModuleFileProxy(FileProxy):
+# TODO: rename MaterialDefinitionModuleProxy
+class MaterialDefinitionModuleFileProxy(ModuleProxy):
 
-    def __init__(self, full_file_name, session=None):
-        FileProxy.__init__(self, full_file_name, session=session)
+    def __init__(self, module_importable_name, session=None):
+        ModuleProxy.__init__(self, module_importable_name, session=session)
         self.output_material_module_import_lines = []
         self.body_lines = []
         self.parse()
@@ -22,6 +24,10 @@ class MaterialDefinitionModuleFileProxy(FileProxy):
             )
 
     ### PUBLIC METHODS ###
+
+    def edit(self):
+        columns = len(self.module_short_name) + 3
+        os.system("vi + -c'norm {}l' {}".format(columns, self.full_file_name))
 
     def parse(self):
         material_definition_module = file(self.full_file_name, 'r')

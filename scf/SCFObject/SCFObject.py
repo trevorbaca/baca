@@ -286,6 +286,13 @@ class SCFObject(object):
             is_hidden=is_hidden, is_keyed=is_keyed, is_numbered=is_numbered, is_ranged=is_ranged)
         return menu, section
 
+
+    # TODO: write test
+    def module_importable_name_to_full_file_name(self, module_importable_name):
+        tmp = self.package_importable_name_to_directory_name(module_importable_name)
+        if tmp:
+            return tmp + '.py'
+
     # TODO: write test
     def package_exists(self, package_importable_name):
         assert isinstance(package_importable_name, str)

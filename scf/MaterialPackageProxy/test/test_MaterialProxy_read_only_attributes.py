@@ -31,7 +31,7 @@ def test_MaterialPackageProxy_read_only_attributes_01():
     assert material_proxy.local_stylesheet_file_name == \
         '/Users/trevorbaca/Documents/other/baca/materials/test_material_a/stylesheet.ly'
     assert material_proxy.user_input_wrapper is None
-    assert material_proxy.illustration_builder_file_name == \
+    assert material_proxy.illustration_builder_module_file_name == \
         '/Users/trevorbaca/Documents/other/baca/materials/test_material_a/illustration_builder.py'
     assert material_proxy.illustration_ly_file_name == \
         '/Users/trevorbaca/Documents/other/baca/materials/test_material_a/illustration.ly'
@@ -69,7 +69,7 @@ def test_MaterialPackageProxy_read_only_attributes_02():
     assert smp.score_package_short_name == 'baca'
     assert smp.local_stylesheet_file_name == \
         '/Users/trevorbaca/Documents/other/baca/materials/sargasso_multipliers/stylesheet.ly'
-    assert smp.illustration_builder_file_name == \
+    assert smp.illustration_builder_module_file_name == \
         '/Users/trevorbaca/Documents/other/baca/materials/sargasso_multipliers/illustration_builder.py'
     assert smp.illustration_ly_file_name == \
         '/Users/trevorbaca/Documents/other/baca/materials/sargasso_multipliers/illustration.ly'

@@ -12,6 +12,7 @@ from MaterialDefinitionModuleFileProxy import MaterialDefinitionModuleFileProxy
 from MaterialPackageProxy import MaterialPackageProxy
 from MaterialPackageMakerWrangler import MaterialPackageMakerWrangler
 from MaterialPackageWrangler import MaterialPackageWrangler
+from ModuleProxy import ModuleProxy
 from MusPackageProxy import MusPackageProxy
 from OutputMaterialModuleFileProxy import OutputMaterialModuleFileProxy
 from PackageWrangler import PackageWrangler

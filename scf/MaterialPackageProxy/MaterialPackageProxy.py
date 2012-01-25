@@ -1,6 +1,7 @@
 from abjad.tools import iotools
 from abjad.tools import markuptools
 from abjad.tools import mathtools
+from baca.scf.IllustrationBuilderModuleFileProxy import IllustrationBuilderModuleFileProxy
 from baca.scf.MaterialDefinitionModuleFileProxy import MaterialDefinitionModuleFileProxy
 from baca.scf.MaterialPackageMakerWrangler import MaterialPackageMakerWrangler
 from baca.scf.OutputMaterialModuleFileProxy import OutputMaterialModuleFileProxy
@@ -40,10 +41,10 @@ class MaterialPackageProxy(PackageProxy):
 
     @property
     def has_illustration_builder(self):
-        if self.illustration_builder_file_name is None:
+        if self.illustration_builder_module_file_name is None:
             return False
         else:
-            return os.path.exists(self.illustration_builder_file_name)
+            return os.path.exists(self.illustration_builder_module_file_name)
 
     @property
     def has_illustration_ly(self):
@@ -118,13 +119,17 @@ class MaterialPackageProxy(PackageProxy):
         return self.import_illustration_from_illustration_builder_module()
 
     @property
-    def illustration_builder_file_name(self):
+    def illustration_builder_module_file_name(self):
         if self.directory_name is not None:
             return os.path.join(self.directory_name, 'illustration_builder.py')
 
     @property
+    def illustration_builder_module_file_proxy(self):
+        return IllustrationBuilderModuleFileProxy(self.illustration_builder_module_file_name, session=self.session)
+
+    @property
     def illustration_builder_module_importable_name(self):
-        if self.illustration_builder_file_name is not None:
+        if self.illustration_builder_module_file_name is not None:
             return '{}.illustration_builder'.format(self.package_importable_name)
 
     @property
@@ -166,7 +171,9 @@ class MaterialPackageProxy(PackageProxy):
     # TODO: write test
     @property
     def material_definition_module_file_proxy(self):
-        return MaterialDefinitionModuleFileProxy(self.material_definition_module_file_name, session=self.session)
+        #return MaterialDefinitionModuleFileProxy(self.material_definition_module_file_name, session=self.session)
+        return MaterialDefinitionModuleFileProxy(
+            self.material_definition_module_importable_name, session=self.session)
 
     @property
     def material_definition_module_importable_name(self):
@@ -269,7 +276,7 @@ class MaterialPackageProxy(PackageProxy):
 
     # TODO: remove
     @property
-    def stub_illustration_builder_file_name(self):
+    def stub_illustration_builder_module_file_name(self):
         return os.path.join(self.assets_directory, 'stub_illustration_builder.py')
 
     # TODO: remove
@@ -381,16 +388,9 @@ class MaterialPackageProxy(PackageProxy):
             line = 'user input module deleted.'
             self.proceed(line, prompt=prompt)
     
-    def edit_illustration_builder(self):
-        os.system('vi + {}'.format(self.illustration_builder_file_name))
-
     # TODO: remove
     def edit_local_stylesheet(self):
         os.system('vi {}'.format(self.local_stylesheet_file_name))
-
-    def edit_material_definition_module(self):
-        columns = len(self.material_underscored_name) + 3
-        os.system("vi + -c'norm {}l' {}".format(columns, self.material_definition_module_file_name))
 
     # TODO: reimplement and keep
     def edit_source_stylesheet(self):
@@ -455,7 +455,7 @@ class MaterialPackageProxy(PackageProxy):
         elif result == 'mdd':
             self.delete_material_definition_module()
         elif result == 'mde':
-            self.edit_material_definition_module()
+            self.material_definition_module_file_proxy.edit()
         elif result == 'mdt':
             self.write_stub_material_definition_to_disk()
         elif result == 'mdx':
@@ -465,7 +465,7 @@ class MaterialPackageProxy(PackageProxy):
         elif result == 'ibd':
             self.delete_illustration_builder()
         elif result == 'ibe':
-            self.edit_illustration_builder()
+            self.illustration_builder_module_file_proxy.edit()
         elif result == 'ibt':
             self.write_stub_illustration_builder_to_disk()
         elif result == 'ibx':
@@ -732,7 +732,7 @@ class MaterialPackageProxy(PackageProxy):
 
     # TODO: migrate to illustration builder file proxy
     def run_abjad_on_illustration_builder(self):
-        os.system('abjad {}'.format(self.illustration_builder_file_name))
+        os.system('abjad {}'.format(self.illustration_builder_module_file_name))
         self.display('')
 
     # TODO: migrate to material definition module file proxy
@@ -743,7 +743,7 @@ class MaterialPackageProxy(PackageProxy):
 
     # TODO: migrate to illustration builder file proxy
     def run_python_on_illustration_builder(self, prompt=True):
-        os.system('python {}'.format(self.illustration_builder_file_name))
+        os.system('python {}'.format(self.illustration_builder_module_file_name))
         line = 'illustration builder executed.'
         self.proceed(line, prompt=prompt)
 
@@ -866,7 +866,7 @@ class MaterialPackageProxy(PackageProxy):
 
     # TODO: migrate to illustration builder file proxy
     def write_stub_illustration_builder_to_disk(self, prompt=True):
-        illustration_builder = file(self.illustration_builder_file_name, 'w')
+        illustration_builder = file(self.illustration_builder_module_file_name, 'w')
         lines = []
         lines.append('from abjad import *')
         lines.append('from output_material import {}'.format(self.material_underscored_name))

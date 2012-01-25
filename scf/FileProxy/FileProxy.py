@@ -77,6 +77,9 @@ class FileProxy(SCFObject):
     def display(self):
         print self.format
 
+    def edit(self):
+        os.system('vi + {}'.format(self.full_file_name))
+
     def rename_file(self, new_full_file_name):
         os.rename(self.full_file_name, new_full_file_name)
         self._full_file_name = new_full_file_name
@@ -84,6 +87,9 @@ class FileProxy(SCFObject):
     # TODO: extend for repository
     def remove(self):
         os.remove(self.full_file_name)
+
+    def short_file_name(self):
+        return os.path.sep.split(self.full_file_name)[-1]
 
     def view(self):
         os.system('vi -R {}'.format(self.full_file_name))
