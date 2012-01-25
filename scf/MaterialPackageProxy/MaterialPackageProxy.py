@@ -326,11 +326,6 @@ class MaterialPackageProxy(PackageProxy):
             line = 'output PDF deleted.'
             self.proceed(line, prompt=prompt)
 
-    # TODO: rename to self.remove()
-    def delete_material_package(self):
-        self.remove_material_from_materials_initializer()
-        PackageProxy.delete_package(self)
-
     # TODO: reimplement
     def edit_source_stylesheet(self):
         stylesheet_proxy = StylesheetFileProxy(self.source_stylesheet_file_name, session=self.session)
@@ -437,7 +432,7 @@ class MaterialPackageProxy(PackageProxy):
         elif result == 'pdfi':
             self.view_illustration_pdf()
         elif result == 'del':
-            self.delete_material_package()
+            self.remove()
             self.session.is_backtracking_locally = True
         elif result == 'init':
             self.initializer_file_proxy.view()
@@ -614,6 +609,10 @@ class MaterialPackageProxy(PackageProxy):
             os.system(command)
         else:
             raise NotImplementedError('commit to repository and then rename.')
+
+    def remove(self):
+        self.remove_material_from_materials_initializer()
+        PackageProxy.remove(self)
 
     def remove_material_from_materials_initializer(self):
         import_statement = 'safe_import({!r}, {!r})\n'.format(

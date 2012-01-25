@@ -43,7 +43,7 @@ class ChunkPackageProxy(PackageProxy):
 
     def handle_main_menu_result(self, result):
         if result == 'd':
-            self.delete_package()
+            self.remove()
             return False
         elif result == 'n':
             self.initializer_file_proxy.view()

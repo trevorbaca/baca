@@ -134,13 +134,6 @@ class PackageProxy(DirectoryProxy):
             line = 'initializer deleted.'
             self.proceed(line, prompt=prompt)
 
-    # TODO: rename to self.remove()
-    def delete_package(self):
-        result = self.remove()
-        if result:
-            line = 'package deleted.'
-            self.proceed(line)
-        
     def delete_tag(self, tag_name):
         tags = self.get_tags()
         del(tags[tag_name])
@@ -230,6 +223,12 @@ class PackageProxy(DirectoryProxy):
         else:
             raise ValueError('Unknown package importable name {!r}.'.format(package_importable_name))
 
+    def remove(self):
+        result = DirectoryProxy.remove(self)
+        if result:
+            line = 'package deleted.'
+            self.proceed(line)
+        
     def remove_package_importable_name_from_sys_modules(self, package_importable_name):
         '''Total hack. But works.'''
         command = "if '{}' in sys.modules: del(sys.modules['{}'])".format(
