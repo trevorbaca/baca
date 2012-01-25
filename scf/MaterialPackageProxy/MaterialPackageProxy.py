@@ -487,7 +487,7 @@ class MaterialPackageProxy(PackageProxy):
         elif result == 'dc':
             self.write_output_material_to_disk()
         elif result == 'di':
-            self.view_output_material_module()
+            self.output_material_module_file_proxy.view()
         elif result == 'dd':
             self.delete_output_material_module()
         elif result == 'lyc':
@@ -801,9 +801,6 @@ class MaterialPackageProxy(PackageProxy):
     def view_illustration_pdf(self):
         command = 'open {}'.format(self.illustration_pdf_file_name)
         os.system(command)
-
-    def view_output_material_module(self):
-        os.system('vi -R + {}'.format(self.output_material_module_file_name))
 
     def write_illustration_ly_and_pdf_to_disk(self, is_forced=False, prompt=True):
         lines = []
