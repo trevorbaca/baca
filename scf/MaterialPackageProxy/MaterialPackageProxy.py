@@ -93,6 +93,10 @@ class MaterialPackageProxy(PackageProxy):
             return os.path.exists(self.material_definition_file_name)
 
     @property
+    def has_material_package_maker(self):
+        return bool(self.material_package_maker_class_name)
+
+    @property
     def has_output_material(self):
         if not self.has_output_material_module:
             return False
@@ -105,10 +109,6 @@ class MaterialPackageProxy(PackageProxy):
             return False
         else:
             return os.path.exists(self.output_material_module_file_name)
-
-    @property
-    def has_user_input_handler(self):
-        return bool(self.user_input_handler_class_name)
 
     @property
     def has_user_input_module(self):
@@ -157,7 +157,7 @@ class MaterialPackageProxy(PackageProxy):
 
     @property
     def is_handmade(self):
-        return not(self.has_user_input_handler)
+        return not(self.has_material_package_maker)
 
     # TODO: remove
     @property
@@ -282,21 +282,21 @@ class MaterialPackageProxy(PackageProxy):
 
     # TODO: reimplement with helpers.safe_import()
     @property
-    def user_input_handler(self):
-        user_input_handler_class_name = self.user_input_handler_class_name
+    def material_package_maker(self):
+        material_package_maker_class_name = self.material_package_maker_class_name
         try:
-            command = 'from baca.scf.materialpackagemakers import {}'.format(user_input_handler_class_name)
+            command = 'from baca.scf.materialpackagemakers import {}'.format(material_package_maker_class_name)
             exec(command)
             command = 'result = {}(client_material_package_importable_name={!r}, session=self.session)'
-            command = command.format(user_input_handler_class_name, self.package_importable_name)
+            command = command.format(material_package_maker_class_name, self.package_importable_name)
             exec(command)
             return result
         except:
             pass
 
     @property
-    def user_input_handler_class_name(self):
-        return self.get_tag('user_input_handler_class_name')
+    def material_package_maker_class_name(self):
+        return self.get_tag('material_package_maker_class_name')
 
     # TODO: write test
     @property
@@ -540,7 +540,7 @@ class MaterialPackageProxy(PackageProxy):
         if self.is_handmade:
             menu, hidden_section = self.make_main_menu_for_material_made_by_hand()
         else:
-            menu, hidden_section = self.make_main_menu_for_material_made_with_user_input_handler()
+            menu, hidden_section = self.make_main_menu_for_material_made_with_material_package_maker()
         self.make_main_menu_section_for_illustration_ly(menu, hidden_section)
         self.make_main_menu_section_for_illustration_pdf(menu, hidden_section)
         self.make_main_menu_section_for_hidden_entries(menu)
@@ -572,7 +572,7 @@ class MaterialPackageProxy(PackageProxy):
             hidden_section.append(('mdd', 'material definition - delete'))
             hidden_section.append(('mdt', 'material definition - stub'))
             hidden_section.append(('mdxi', 'material definition - execute & inspect'))
-        elif self.user_input_handler_class_name is None:
+        elif self.material_package_maker_class_name is None:
             section.append(('mdt', 'material definition - stub'))
 
     def make_main_menu_section_for_output_material(self, main_menu, hidden_section):
@@ -589,7 +589,7 @@ class MaterialPackageProxy(PackageProxy):
 
     def make_main_menu_section_for_illustration_ly(self, main_menu, hidden_section):
         if self.has_output_material:
-            if self.has_illustration_builder or self.has_user_input_handler:
+            if self.has_illustration_builder or self.has_material_package_maker:
                 hidden_section.append(('lyc', 'output ly - create'))
         if self.has_illustration_ly:
             hidden_section.append(('lyd', 'output ly - delete'))
@@ -598,7 +598,7 @@ class MaterialPackageProxy(PackageProxy):
     def make_main_menu_section_for_illustration_pdf(self, main_menu, hidden_section):
         has_illustration_pdf_section = False
         if self.has_output_material:
-            if self.has_illustration_builder or self.has_user_input_handler:
+            if self.has_illustration_builder or self.has_material_package_maker:
                 section = main_menu.make_new_section()
                 has_illustration_pdf_section = True
                 section.append(('pdfc', 'output pdf - create'))
@@ -754,14 +754,14 @@ class MaterialPackageProxy(PackageProxy):
         self.proceed(line, prompt=prompt)
 
     # TODO: write test
-    def select_user_input_handler_interactively(self, prompt=True):
+    def select_material_package_maker_interactively(self, prompt=True):
         material_proxy_wrangler = MaterialPackageMakerWrangler(session=self.session)
         self.push_backtrack()
-        user_input_handler = material_proxy_wrangler.select_material_proxy_class_name_interactively()
+        material_package_maker = material_proxy_wrangler.select_material_proxy_class_name_interactively()
         self.pop_backtrack()
         if self.backtrack():
             return
-        self.add_tag('user_input_handler', user_input_handler.class_name)
+        self.add_tag('material_package_maker', material_package_maker.class_name)
         line = 'user input handler selected.'
         self.proceed(line, prompt=prompt)
 

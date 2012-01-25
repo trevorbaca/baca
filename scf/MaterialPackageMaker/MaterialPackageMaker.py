@@ -72,7 +72,7 @@ class MaterialPackageMaker(MaterialPackageProxy):
         illustration = self.illustration_maker(output_material)
         return illustration
 
-    def make_main_menu_for_material_made_with_user_input_handler(self):
+    def make_main_menu_for_material_made_with_material_package_maker(self):
         menu, hidden_section = self.make_new_menu(where=self.where(), is_hidden=True)
         self.make_main_menu_section_for_user_input_module(menu, hidden_section)
         self.make_main_menu_section_for_output_material(menu, hidden_section)

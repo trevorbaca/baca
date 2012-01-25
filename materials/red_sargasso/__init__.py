@@ -5,5 +5,5 @@ safe_import(globals(), 'output_material', 'red_sargasso')
 
 
 tags = OrderedDict([
-    ('user_input_handler_class_name', 'SargassoMeasureMaterialPackageMaker'),
+    ('material_package_maker_class_name', 'SargassoMeasureMaterialPackageMaker'),
     ('should_have_illustration', True)])
