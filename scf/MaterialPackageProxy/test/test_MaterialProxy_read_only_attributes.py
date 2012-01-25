@@ -15,7 +15,7 @@ def test_MaterialPackageProxy_read_only_attributes_01():
     assert not material_proxy.has_illustration_ly
     assert not material_proxy.has_illustration_pdf
     assert not material_proxy.has_illustration_builder
-    assert material_proxy.material_definition_file_name == \
+    assert material_proxy.material_definition_module_file_name == \
         '/Users/trevorbaca/Documents/other/baca/materials/test_material_a/material_definition.py'
     assert material_proxy.material_definition_module_importable_name == \
         'baca.materials.test_material_a.material_definition'
@@ -55,7 +55,7 @@ def test_MaterialPackageProxy_read_only_attributes_02():
     assert not smp.has_illustration_ly
     assert not smp.has_illustration_pdf
     assert not smp.has_illustration_builder
-    assert smp.material_definition_file_name == \
+    assert smp.material_definition_module_file_name == \
         '/Users/trevorbaca/Documents/other/baca/materials/sargasso_multipliers/material_definition.py'
     assert smp.material_definition_module_importable_name == \
         'baca.materials.sargasso_multipliers.material_definition'

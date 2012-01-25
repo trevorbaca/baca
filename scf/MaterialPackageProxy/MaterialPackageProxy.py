@@ -87,10 +87,10 @@ class MaterialPackageProxy(PackageProxy):
 
     @property
     def has_material_definition_module(self):
-        if self.material_definition_file_name is None:
+        if self.material_definition_module_file_name is None:
             return False
         else:
-            return os.path.exists(self.material_definition_file_name)
+            return os.path.exists(self.material_definition_module_file_name)
 
     @property
     def has_material_package_maker(self):
@@ -167,18 +167,18 @@ class MaterialPackageProxy(PackageProxy):
 
     # TODO: change name to self.material_definition_module_file_name
     @property
-    def material_definition_file_name(self):
+    def material_definition_module_file_name(self):
         if self.directory_name is not None:
             return os.path.join(self.directory_name, 'material_definition.py')
 
     # TODO: write test
     @property
     def material_definition_module_file_proxy(self):
-        return MaterialDefinitionModuleFileProxy(self.material_definition_file_name, session=self.session)
+        return MaterialDefinitionModuleFileProxy(self.material_definition_module_file_name, session=self.session)
 
     @property
     def material_definition_module_importable_name(self):
-        if self.material_definition_file_name is not None:
+        if self.material_definition_module_file_name is not None:
             return '{}.material_definition'.format(self.package_importable_name)
 
     @property
@@ -277,7 +277,7 @@ class MaterialPackageProxy(PackageProxy):
 
     # TODO: write test
     @property
-    def stub_material_definition_file_name(self):
+    def stub_material_definition_module_file_name(self):
         return os.path.join(self.assets_directory, 'stub_material_definition.py')
 
     # TODO: reimplement with helpers.safe_import()
@@ -345,7 +345,7 @@ class MaterialPackageProxy(PackageProxy):
            
     def delete_material_definition_module(self, prompt=True):
         if self.has_material_definition_module:
-            os.remove(self.material_definition_file_name)
+            os.remove(self.material_definition_module_file_name)
             line = 'material definition deleted.'
             self.proceed(line, prompt=prompt)
         
@@ -384,7 +384,7 @@ class MaterialPackageProxy(PackageProxy):
 
     def edit_material_definition_module(self):
         columns = len(self.material_underscored_name) + 3
-        os.system("vi + -c'norm {}l' {}".format(columns, self.material_definition_file_name))
+        os.system("vi + -c'norm {}l' {}".format(columns, self.material_definition_module_file_name))
 
     def edit_output_material_module(self):
         os.system('vi -R + {}'.format(self.output_material_module_file_name))
@@ -736,7 +736,7 @@ class MaterialPackageProxy(PackageProxy):
         self.restore_breadcrumbs(cache=cache)
 
     def run_abjad_on_material_definition(self):
-        os.system('abjad {}'.format(self.material_definition_file_name))
+        os.system('abjad {}'.format(self.material_definition_module_file_name))
         self.display('')
 
     def run_abjad_on_illustration_builder(self):
@@ -744,7 +744,7 @@ class MaterialPackageProxy(PackageProxy):
         self.display('')
 
     def run_python_on_material_definition(self, prompt=True):
-        os.system('python {}'.format(self.material_definition_file_name))
+        os.system('python {}'.format(self.material_definition_module_file_name))
         line = 'material definition executed.'
         self.proceed(line, prompt=prompt)
 
@@ -839,7 +839,7 @@ class MaterialPackageProxy(PackageProxy):
         self.proceed(line, prompt=prompt)
 
     def write_stub_data_material_definition_to_disk(self):
-        material_definition = file(self.material_definition_file_name, 'w')
+        material_definition = file(self.material_definition_module_file_name, 'w')
         material_definition.write('from abjad.tools import sequencetools\n')
         material_definition.write('output_material_module_import_statements = []\n')
         material_definition.write('\n')
@@ -855,7 +855,7 @@ class MaterialPackageProxy(PackageProxy):
         self.proceed(line, prompt=prompt)
 
     def write_stub_music_material_definition_to_disk(self):
-        material_definition = file(self.material_definition_file_name, 'w')
+        material_definition = file(self.material_definition_module_file_name, 'w')
         material_definition.write('from abjad import *\n')
         material_definition.write("output_material_module_import_statements = ['from abjad import *']\n")
         material_definition.write('\n')
