@@ -17,7 +17,7 @@ class OutputMaterialModuleFileProxy(FileProxy):
     @property
     def sections(self):
         return (
-            (self._encoding_directives, True, 0),
+            (self._encoding_directives, False, 0),
             (self._docstring_lines, False, 1),
             (self._setup_statements, True, 2),
             (self._body_lines, False, 0),
