@@ -1,76 +1,70 @@
 TODO
 
-1. Implement material definition module file proxy.
+1. Implement illustration builder module file proxy.
 
-2. Implement output material module file proxy.
+2. Be able safely to write junk into any system file.
 
-3. Implement user input module file proxy.
+3. Prevent the creation of 'baca.materials.h' package.
 
-4. Be able safely to write junk into any system file.
+4. Do away with local stylesheets.
 
-5. Prevent the creation of 'baca.materials.h' package.
+5. Audit and reimplement purview to always equal only a string.
 
-6. Change 'user_input' to 'user_input_wrapper'.
+6. Author read-only attribute tests.
 
-7. Do away with local stylesheets.
+7. Implement InstrumentRangeInventory in Abjad. Integrate into SCF.
 
-8. Audit and reimplement purview to always equal only a string.
+8. Implement remaining clarinets.
 
-9. Author read-only attribute tests.
+9. Implement saxophones.
 
-10. Implement RangeInventory in Abjad. Integrate into SCF.
+10. Encapsulate user input getter subprocedures.
 
-11. Implement remaining clarinets.
+11. Author user input getter tests.
 
-12. Implement saxophones.
+12. Remove blank lines between successive getter attribute entries.
 
-13. Encapsulate user input getter subprocedures.
-
-14. Author user input getter tests.
-
-15. Remove blank lines between successive getter attribute entries.
-
-16. Make user input getter defaults work like menu defaults;
+13. Make user input getter defaults work like menu defaults;
     Implement default_value on user input getter.
 
-17. Fix SCFObject.handle_user_input_with_default() default handling.
+14. Fix SCFObject.handle_user_input_with_default() default handling.
 
-18. Implement populate_user_input_wrapper().
+15. Implement populate_user_input_wrapper().
 
-19. Implement material move and rename methods.
+16. Implement material move and rename methods.
 
-20. Implement 'make new material: range' in studio.
+17. Implement 'make new material: range' in studio.
 
-21. Implement 'make new material: range' in scores.
+18. Implement 'make new material: range' in scores.
 
-22. Define range inventories for all scores.
+19. Define range inventories for all scores.
 
-23. Find a way to include tags management in hidden menu of every package proxy.
+20. Find a way to include tags management in hidden menu of every package proxy.
 
-24. Figure out why 'red' isn't good enough to select 'red_pcs', maybe redraw-related.
+21. Figure out why 'red' isn't good enough to select 'red_pcs', maybe redraw-related.
 
-25. Make some zagged pitch-classes.
+22. Make some zagged pitch-classes.
 
-26. Port output change awareness.
+23. Port output change awareness.
 
-27. Implement something to tour all materials everywhere and inspect in sequence.
+24. Implement something to tour all materials everywhere and inspect in sequence.
 
-28. Make user input handler creation work.
+25. Make user input handler creation work.
 
-29. Wrap tests around existing material functionality.
+26. Wrap tests around existing material functionality.
 
-30. Clean up PitchRangeEditor main menu.
+27. Clean up PitchRangeEditor main menu.
 
-31. Edit instrument transposition.
+28. Edit instrument transposition.
 
-32. Edit instrument clefs.
+29. Edit instrument clefs.
 
-33. Remove extra appearance of B-flat clarinet from clarinetist config menu.
+30. Remove extra appearance of B-flat clarinet from clarinetist config menu.
 
-34. Change Instrument._default_performer_names to house (full, abbreviation) pairs.
+31. Change Instrument._default_performer_names to house (full, abbreviation) pairs.
 
-35. Use performer abbreviations to populate performer selection menu.
+32. Use performer abbreviations to populate performer selection menu.
 
-36. Find a way to dynamically add (default) indicator to default menu entries.
+33. Find a way to dynamically add (default) indicator to default menu entries.
 
-37. Consider keyword backtracking protocol to replace two-line backtracking protocol.
+34. Consider keyword backtracking protocol to replace two-line backtracking protocol.

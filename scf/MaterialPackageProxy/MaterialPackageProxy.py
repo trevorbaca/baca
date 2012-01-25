@@ -47,7 +47,7 @@ class MaterialPackageProxy(PackageProxy):
         if not self.has_illustration_builder:
             return False
         else:
-            return bool(self.import_illustration_from_illustration_builder())
+            return bool(self.import_illustration_from_illustration_builder_module())
 
     @property
     def has_illustration_builder(self):
@@ -122,7 +122,7 @@ class MaterialPackageProxy(PackageProxy):
         if not self.has_user_input_module:
             return False
         else:
-            return self.import_user_input_from_user_input_module() is not None
+            return self.import_user_input_wrapper_from_user_input_module() is not None
 
     @property
     def illustration_builder_file_name(self):
@@ -243,6 +243,7 @@ class MaterialPackageProxy(PackageProxy):
         if self.output_material_module_file_name is not None:
             return '{}.output_material'.format(self.package_importable_name)
 
+    # TODO: remove
     @property
     def output_material_module_spacer_lines(self):
         lines = []
@@ -270,12 +271,12 @@ class MaterialPackageProxy(PackageProxy):
             result = first_line.split()[-1]
             return result
 
-    # TODO: write test
+    # TODO: remove
     @property
     def stub_illustration_builder_file_name(self):
         return os.path.join(self.assets_directory, 'stub_illustration_builder.py')
 
-    # TODO: write test
+    # TODO: remove
     @property
     def stub_material_definition_module_file_name(self):
         return os.path.join(self.assets_directory, 'stub_material_definition.py')
@@ -372,9 +373,6 @@ class MaterialPackageProxy(PackageProxy):
             line = 'output PDF deleted.'
             self.proceed(line, prompt=prompt)
 
-    def edit_illustration_ly(self):
-        os.system('vi -R {}'.format(self.illustration_ly_file_name))
-
     def edit_illustration_builder(self):
         os.system('vi + {}'.format(self.illustration_builder_file_name))
 
@@ -385,9 +383,6 @@ class MaterialPackageProxy(PackageProxy):
     def edit_material_definition_module(self):
         columns = len(self.material_underscored_name) + 3
         os.system("vi + -c'norm {}l' {}".format(columns, self.material_definition_module_file_name))
-
-    def edit_output_material_module(self):
-        os.system('vi -R + {}'.format(self.output_material_module_file_name))
 
     # TODO: reimplement and keep
     def edit_source_stylesheet(self):
@@ -412,9 +407,8 @@ class MaterialPackageProxy(PackageProxy):
         except ImportError as e:
             pass
 
-    # TODO: change name to self.import_illustration_from_illustration_builder_module
     # TODO: reimplement with helpers.safe_import()
-    def import_illustration_from_illustration_builder(self):
+    def import_illustration_from_illustration_builder_module(self):
         if not self.has_illustration_builder:
             return None
         self.unimport_illustration_builder_module()
@@ -426,9 +420,8 @@ class MaterialPackageProxy(PackageProxy):
         illustration.header_block.title = markuptools.Markup(self.material_spaced_name)
         return illustration
         
-    # TODO: change name to self.import_user_input_wrapper_from_user_input_module()
     # TODO: reimplement with helpers.safe_import()
-    def import_user_input_from_user_input_module(self):
+    def import_user_input_wrapper_from_user_input_module(self):
         self.unimport_user_input_module()
         try:
             command = 'from {} import user_input'.format(self.user_input_module_importable_name)
@@ -486,7 +479,7 @@ class MaterialPackageProxy(PackageProxy):
         elif result == 'dc':
             self.write_output_material_to_disk()
         elif result == 'di':
-            self.edit_output_material_module()
+            self.view_output_material_module()
         elif result == 'dd':
             self.delete_output_material_module()
         elif result == 'lyc':
@@ -494,7 +487,7 @@ class MaterialPackageProxy(PackageProxy):
         elif result == 'lyd':
             self.delete_illustration_ly()
         elif result == 'lyi':
-            self.edit_illustration_ly()
+            self.view_illustration_ly()
         elif result == 'pdfc':
             self.write_illustration_ly_and_pdf_to_disk(is_forced=True)
             self.open_illustration_pdf()
@@ -633,11 +626,12 @@ class MaterialPackageProxy(PackageProxy):
                     hidden_section.append(('ssl', 'score stylesheet - relink'))
 
     def make_illustration(self):
-        return self.import_illustration_from_illustration_builder()
+        return self.import_illustration_from_illustration_builder_module()
 
     def make_output_material(self):
         return self.import_material_definition_from_material_definition_module()
 
+    # TODO: migrate to output material module file proxy
     def make_output_material_module_body_lines(self):
         lines = []
         output_material = self.make_output_material()
@@ -708,9 +702,6 @@ class MaterialPackageProxy(PackageProxy):
             raise NotImplementedError('commit to repository and then rename.')
 
     def remove_material_from_materials_initializer(self):
-        #import_statement = 'from {} import {}\n'.format(
-        #    self.material_underscored_name, self.material_underscored_name)
-        #self.remove_import_statement_from_initializer(import_statement, self.parent_initializer_file_name)
         import_statement = 'safe_import({!r}, {!r})\n'.format(
             self.material_underscored_name, self.material_underscored_name)
         parent_package = PackageProxy(self.parent_package_importable_name, session=self.session)
@@ -735,19 +726,23 @@ class MaterialPackageProxy(PackageProxy):
         self.pop_breadcrumb()
         self.restore_breadcrumbs(cache=cache)
 
+    # TODO: migrate to material definition module file proxy
     def run_abjad_on_material_definition(self):
         os.system('abjad {}'.format(self.material_definition_module_file_name))
         self.display('')
 
+    # TODO: migrate to illustration builder file proxy
     def run_abjad_on_illustration_builder(self):
         os.system('abjad {}'.format(self.illustration_builder_file_name))
         self.display('')
 
+    # TODO: migrate to material definition module file proxy
     def run_python_on_material_definition(self, prompt=True):
         os.system('python {}'.format(self.material_definition_module_file_name))
         line = 'material definition executed.'
         self.proceed(line, prompt=prompt)
 
+    # TODO: migrate to illustration builder file proxy
     def run_python_on_illustration_builder(self, prompt=True):
         os.system('python {}'.format(self.illustration_builder_file_name))
         line = 'illustration builder executed.'
@@ -787,6 +782,7 @@ class MaterialPackageProxy(PackageProxy):
     def unimport_output_material_module(self):
         self.remove_package_importable_name_from_sys_modules(self.output_material_module_importable_name)
 
+    # TODO: change name to self.unimport_material_module_hierarchy()
     def unimport_module_hierarchy(self):
         self.unimport_materials_module()
         self.unimport_material_module()
@@ -801,6 +797,12 @@ class MaterialPackageProxy(PackageProxy):
     def unimport_user_input_module(self):
         self.remove_package_importable_name_from_sys_modules(self.user_input_module_importable_name)
 
+    def view_illustration_ly(self):
+        os.system('vi -R {}'.format(self.illustration_ly_file_name))
+
+    def view_output_material_module(self):
+        os.system('vi -R + {}'.format(self.output_material_module_file_name))
+
     def write_illustration_ly_and_pdf_to_disk(self, is_forced=False, prompt=True):
         lines = []
         illustration = self.make_illustration()
@@ -811,7 +813,7 @@ class MaterialPackageProxy(PackageProxy):
         
     def write_illustration_ly_to_disk(self, is_forced=False, prompt=True):
         lines = []
-        illustration = self.import_illustration_from_illustration_builder()
+        illustration = self.import_illustration_from_illustration_builder_module()
         iotools.write_expr_to_ly(illustration, self.illustration_ly_file_name, print_status=False)
         lines.append('LilyPond file written to disk.')
         lines.append('')
@@ -825,6 +827,7 @@ class MaterialPackageProxy(PackageProxy):
         lines.append('')
         self.proceed(lines, prompt=prompt)
 
+    # TODO: migrate to output material module file proxy
     def write_output_material_to_disk(self, prompt=True):
         self.remove_material_from_materials_initializer()
         output_material_module_body_lines = self.make_output_material_module_body_lines()
@@ -838,6 +841,7 @@ class MaterialPackageProxy(PackageProxy):
         line = 'output data written to disk.'
         self.proceed(line, prompt=prompt)
 
+    # TODO: migrate to material definition module file proxy
     def write_stub_data_material_definition_to_disk(self):
         material_definition = file(self.material_definition_module_file_name, 'w')
         material_definition.write('from abjad.tools import sequencetools\n')
@@ -846,6 +850,7 @@ class MaterialPackageProxy(PackageProxy):
         material_definition.write('\n')
         material_definition.write('{} = None'.format(self.material_underscored_name))
         
+    # TODO: migrate to material definition module file proxy
     def write_stub_material_definition_to_disk(self, prompt=True):
         if self.is_data_only:
             self.write_stub_data_material_definition_to_disk()
@@ -854,6 +859,7 @@ class MaterialPackageProxy(PackageProxy):
         line = 'stub material definition written to disk.'
         self.proceed(line, prompt=prompt)
 
+    # TODO: migrate to material definition module file proxy
     def write_stub_music_material_definition_to_disk(self):
         material_definition = file(self.material_definition_module_file_name, 'w')
         material_definition.write('from abjad import *\n')
@@ -862,6 +868,7 @@ class MaterialPackageProxy(PackageProxy):
         material_definition.write('\n')
         material_definition.write('{} = None'.format(self.material_underscored_name))
 
+    # TODO: migrate to illustration builder file proxy
     def write_stub_illustration_builder_to_disk(self, prompt=True):
         illustration_builder = file(self.illustration_builder_file_name, 'w')
         lines = []
