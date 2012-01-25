@@ -1,9 +1,7 @@
-from baca.scf.OutputMaterialModuleProxy import OutputMaterialModuleProxy
+from baca.scf.BasicParsableModuleProxy import BasicParsableModuleProxy
 
 
-# TODO: create intermediate class from which both OutputMaterialModuleProxy and
-#       IllustrationBuilderModuleProxy can inherit.
-class IllustrationBuilderModuleProxy(OutputMaterialModuleProxy):
+class IllustrationBuilderModuleProxy(BasicParsableModuleProxy):
 
     ### PUBLIC METHODS ###
 
