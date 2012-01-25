@@ -123,7 +123,7 @@ class MaterialPackageMakerWrangler(PackageWrangler):
         lines.append('')
         lines.append('    def make_output_material_module_body_lines(self):')
         lines.append('        lines = []')
-        lines.append('        output_material = self.make_output_material()')
+        lines.append('        output_material = self.output_material')
         lines.append("        lines.append('{} = {!r}'.format(self.material_underscored_name, output_material)")
         class_file.write('\n'.join(lines))
         class_file.close()

@@ -636,7 +636,7 @@ class MaterialPackageProxy(PackageProxy):
     # TODO: migrate to output material module file proxy
     def make_output_material_module_body_lines(self):
         lines = []
-        output_material = self.make_output_material()
+        output_material = self.output_material
         lines.append('{} = {!r}'.format(self.material_underscored_name, output_material))
         return lines
 

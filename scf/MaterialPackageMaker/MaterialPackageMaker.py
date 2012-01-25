@@ -12,6 +12,12 @@ class MaterialPackageMaker(MaterialPackageProxy):
         illustration = self.illustration_maker(output_material)
         return illustration
 
+    @property
+    def output_material(self):
+        output_material = self.output_material_maker(*self.user_input_wrapper.values)
+        assert type(self).output_material_checker(output_material)
+        return output_material
+
     ### PUBLIC METHODS ###
 
     def clear_user_input_wrapper(self, prompt=True):
@@ -92,12 +98,6 @@ class MaterialPackageMaker(MaterialPackageProxy):
         section.append(('uis', 'user input - show demo values'))
         hidden_section.append(('uit','user input - toggle default mode'))
 
-    # TODO: consider making read-only attribute
-    def make_output_material(self):
-        output_material = self.output_material_maker(*self.user_input_wrapper.values)
-        assert type(self).output_material_checker(output_material)
-        return output_material
-
     def populate_user_input_wrapper(self, prompt=True):
         total_elements = len(self.user_input_wrapper)
         getter = self.make_new_getter(where=self.where())
@@ -147,6 +147,7 @@ class MaterialPackageMaker(MaterialPackageProxy):
 
     ### OLD INTERACTIVE MATERIAL PROXY PUBLIC METHODS ###
 
+    # TODO: audit
     def old_run_interactive(self, clear=True, cache=False):
         self.cache_breadcrumbs(cache=cache)
         while True:
