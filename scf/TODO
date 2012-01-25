@@ -1,6 +1,6 @@
 TODO
 
-1. Implement illustration builder module file proxy.
+1. Migrate material package proxy functionality to file proxies.
 
 2. Be able safely to write junk into any system file.
 
