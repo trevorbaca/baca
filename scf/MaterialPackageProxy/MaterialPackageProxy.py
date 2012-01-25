@@ -114,6 +114,10 @@ class MaterialPackageProxy(PackageProxy):
             return self.import_user_input_wrapper_from_user_input_module() is not None
 
     @property
+    def illustration(self):
+        return self.import_illustration_from_illustration_builder_module()
+
+    @property
     def illustration_builder_file_name(self):
         if self.directory_name is not None:
             return os.path.join(self.directory_name, 'illustration_builder.py')
@@ -154,7 +158,6 @@ class MaterialPackageProxy(PackageProxy):
         if self.directory_name is not None:
             return os.path.join(self.directory_name, 'stylesheet.ly')
 
-    # TODO: change name to self.material_definition_module_file_name
     @property
     def material_definition_module_file_name(self):
         if self.directory_name is not None:
@@ -202,6 +205,10 @@ class MaterialPackageProxy(PackageProxy):
         result = result[:-1]
         result = '.'.join(result)
         return result
+
+    @property
+    def output_material(self):
+        return self.import_material_definition_from_material_definition_module()
 
     @property
     def output_material_module_file_name(self): 
@@ -326,28 +333,10 @@ class MaterialPackageProxy(PackageProxy):
         parent_package.initializer_file_proxy.add_protected_import_statement(
             self.material_underscored_name, self.material_underscored_name)
 
-    # TODO: remove
-    def delete_local_stylesheet(self, prompt=True):
-        if self.has_local_stylesheet:
-            os.remove(self.local_stylesheet_file_name)
-            line = 'stylesheet deleted.'
-            self.proceed(line, prompt=prompt)
-           
-    def delete_material_definition_module(self, prompt=True):
-        if self.has_material_definition_module:
-            os.remove(self.material_definition_module_file_name)
-            line = 'material definition deleted.'
-            self.proceed(line, prompt=prompt)
-        
-    def delete_material_package(self):
-        self.remove_material_from_materials_initializer()
-        PackageProxy.delete_package(self)
-
-    def delete_output_material_module(self, prompt=True):
-        if self.has_output_material_module:
-            self.remove_material_from_materials_initializer()
-            os.remove(self.output_material_module_file_name)
-            line = 'output data module deleted.'
+    def delete_illustration_builder_module(self, prompt=True):
+        if self.has_illustration_builder:
+            os.remove(self.illustration_builder_module_file_name)
+            line = 'illustration builder deleted.'
             self.proceed(line, prompt=prompt)
 
     def delete_illustration_ly(self, prompt=True):
@@ -362,6 +351,36 @@ class MaterialPackageProxy(PackageProxy):
             line = 'output PDF deleted.'
             self.proceed(line, prompt=prompt)
 
+    # TODO: remove
+    def delete_local_stylesheet(self, prompt=True):
+        if self.has_local_stylesheet:
+            os.remove(self.local_stylesheet_file_name)
+            line = 'stylesheet deleted.'
+            self.proceed(line, prompt=prompt)
+           
+    def delete_material_definition_module(self, prompt=True):
+        if self.has_material_definition_module:
+            os.remove(self.material_definition_module_file_name)
+            line = 'material definition deleted.'
+            self.proceed(line, prompt=prompt)
+
+    def delete_material_package(self):
+        self.remove_material_from_materials_initializer()
+        PackageProxy.delete_package(self)
+
+    def delete_output_material_module(self, prompt=True):
+        if self.has_output_material_module:
+            self.remove_material_from_materials_initializer()
+            os.remove(self.output_material_module_file_name)
+            line = 'output data module deleted.'
+            self.proceed(line, prompt=prompt)
+
+    def delete_user_input_module(self, prompt=True):
+        if self.has_user_input_module:
+            os.remove(self.user_input_module_file_name)
+            line = 'user input module deleted.'
+            self.proceed(line, prompt=prompt)
+    
     def edit_illustration_builder(self):
         os.system('vi + {}'.format(self.illustration_builder_file_name))
 
@@ -479,11 +498,11 @@ class MaterialPackageProxy(PackageProxy):
             self.view_illustration_ly()
         elif result == 'pdfc':
             self.write_illustration_ly_and_pdf_to_disk(is_forced=True)
-            self.open_illustration_pdf()
+            self.view_illustration_pdf()
         elif result == 'pdfd':
             self.delete_illustration_pdf()
         elif result == 'pdfi':
-            self.open_illustration_pdf()
+            self.view_illustration_pdf()
         elif result == 'del':
             self.delete_material_package()
             self.session.is_backtracking_locally = True
@@ -614,12 +633,6 @@ class MaterialPackageProxy(PackageProxy):
                     hidden_section.append(('ssm', 'source stylesheet - edit'))
                     hidden_section.append(('ssl', 'score stylesheet - relink'))
 
-    def make_illustration(self):
-        return self.import_illustration_from_illustration_builder_module()
-
-    def make_output_material(self):
-        return self.import_material_definition_from_material_definition_module()
-
     # TODO: migrate to output material module file proxy
     def make_output_material_module_body_lines(self):
         lines = []
@@ -630,10 +643,6 @@ class MaterialPackageProxy(PackageProxy):
     def manage_stylesheets(self):
         stylesheet_wrangler = StylesheetWrangler(session=self.session)
         stylesheet_wrangler.run()
-
-    def open_illustration_pdf(self):
-        command = 'open {}'.format(self.illustration_pdf_file_name)
-        os.system(command)
 
     def regenerate_everything(self, is_forced=False):
         self.print_not_implemented()
@@ -788,6 +797,10 @@ class MaterialPackageProxy(PackageProxy):
 
     def view_illustration_ly(self):
         os.system('vi -R {}'.format(self.illustration_ly_file_name))
+
+    def view_illustration_pdf(self):
+        command = 'open {}'.format(self.illustration_pdf_file_name)
+        os.system(command)
 
     def view_output_material_module(self):
         os.system('vi -R + {}'.format(self.output_material_module_file_name))

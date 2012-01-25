@@ -67,6 +67,7 @@ class MaterialPackageMaker(MaterialPackageProxy):
         line = 'demo values loaded.'
         self.proceed(line, prompt=prompt)
 
+    # TODO: consider making read-only attribute
     def make_illustration(self):
         output_material = self.import_output_material_from_output_material_module()
         illustration = self.illustration_maker(output_material)
@@ -89,6 +90,7 @@ class MaterialPackageMaker(MaterialPackageProxy):
         section.append(('uis', 'user input - show demo values'))
         hidden_section.append(('uit','user input - toggle default mode'))
 
+    # TODO: consider making read-only attribute
     def make_output_material(self):
         output_material = self.output_material_maker(*self.user_input_wrapper.values)
         assert type(self).output_material_checker(output_material)

@@ -128,6 +128,12 @@ class PackageProxy(DirectoryProxy):
             tag_name, tag_value = result
             self.add_tag(tag_name, tag_value)
 
+    def delete_initializer(self, prompt=True):
+        if self.has_initializer:
+            os.remove(self.initializer_file_name)
+            line = 'initializer deleted.'
+            self.proceed(line, prompt=prompt)
+
     def delete_package(self):
         result = self.remove()
         if result:
