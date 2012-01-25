@@ -13,14 +13,14 @@ class InitializerFileProxy(FileProxy):
     ### READ-ONLY PUBLIC ATTRIBUTES ##
 
     @property
-    def content_chunks(self):
+    def sections(self):
         return (
-            (self._encoding_directives, True),
-            (self._docstring_lines, False),
-            (self._setup_statements, True),
-            (self._protected_import_statements, True),
-            (self._tag_lines, False),
-            (self._teardown_statements, True),
+            (self._encoding_directives, True, 0),
+            (self._docstring_lines, False, 1),
+            (self._setup_statements, True, 1),
+            (self._protected_import_statements, True, 1),
+            (self._tag_lines, False, 1),
+            (self._teardown_statements, True, 0),
             )
 
     @property

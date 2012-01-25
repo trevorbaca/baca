@@ -38,15 +38,15 @@ class FileProxy(SCFObject):
     @property
     def formatted_lines(self):
         lines = []
-        for content_collection, is_sorted in self.content_chunks:
-            if content_collection:
-                content_collection = content_collection[:]
+        for section, is_sorted, blank_line_count in self.sections:
+            if section:
+                section = section[:]
                 if is_sorted:
-                    content_collection.sort()
-                lines.extend(content_collection)
-                lines.append('\n')
+                    section.sort()
+                lines.extend(section)
+                for x in range(blank_line_count):
+                    lines.append('\n')
         if lines:
-            lines.pop()
             lines[-1] = lines[-1].strip()
         return lines
 
@@ -73,7 +73,7 @@ class FileProxy(SCFObject):
     ### PUBLIC METHODS ###
 
     def clear(self):
-        for content_chunk, is_sorted in self.content_chunks:
+        for content_chunk, is_sorted in self.sections:
             content_chunk[:] = []
 
     def copy_file(self, new_full_file_name):

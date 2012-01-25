@@ -5,8 +5,7 @@ class MaterialDefinitionModuleFileProxy(FileProxy):
 
     def __init__(self, full_file_name, session=None):
         FileProxy.__init__(self, full_file_name, session=session)
-        # TODO: rename from statements to lines
-        self._output_material_module_import_statements = []
+        self._output_material_module_import_lines = []
         self._body_lines = []
         self.parse()
 
@@ -17,20 +16,19 @@ class MaterialDefinitionModuleFileProxy(FileProxy):
         return self._body_lines
 
     @property
-    def output_material_module_import_statements(self):
-        return self._output_material_module_import_statements
+    def output_material_module_import_lines(self):
+        return self._output_material_module_import_lines
 
     ### PUBLIC METHODS ###
 
-    # TODO: customize with has_blank_line value
     @property
-    def content_chunks(self):
+    def sections(self):
         return (
-            (self._encoding_directives, True,),
-            (self._docstring_lines, False),
-            (self._setup_statements, True),
-            (self._output_material_module_import_statements, True),
-            (self._body_lines, False),
+            (self._encoding_directives, True, 0),
+            (self._docstring_lines, False, 1),
+            (self._setup_statements, True, 0),
+            (self._output_material_module_import_lines, True, 2),
+            (self._body_lines, False, 0),
             )
 
     def parse(self):
@@ -38,7 +36,7 @@ class MaterialDefinitionModuleFileProxy(FileProxy):
         encoding_directives = []
         docstring_lines = []
         setup_statements = []
-        output_material_module_import_statements = []
+        output_material_module_import_lines = []
         body_lines = []
         current_section = None
         for line in definition_module.readlines():
@@ -60,7 +58,7 @@ class MaterialDefinitionModuleFileProxy(FileProxy):
             elif current_section == 'setup':
                 setup_statements.append(line)
             elif current_section == 'output material module imports':
-                output_material_module_import_statements.append(line)
+                output_material_module_import_lines.append(line)
             elif current_section == 'body':
                 body_lines.append(line)
             else:
@@ -69,5 +67,5 @@ class MaterialDefinitionModuleFileProxy(FileProxy):
         self._encoding_directives = encoding_directives
         self._docstring_lines = docstring_lines
         self._setup_statements = setup_statements
-        self._output_material_module_import_statements = output_material_module_import_statements
+        self._output_material_module_import_lines = output_material_module_import_lines
         self._body_lines = body_lines
