@@ -25,7 +25,7 @@ from StylesheetFileProxy import StylesheetFileProxy
 from StylesheetWrangler import StylesheetWrangler
 from Transcript import Transcript
 from MaterialPackageMaker import MaterialPackageMaker
-from UserInputModuleFileProxy import UserInputModuleFileProxy
+from UserInputModuleProxy import UserInputModuleProxy
 from UserInputWrapper import UserInputWrapper
 import editors
 import exceptions

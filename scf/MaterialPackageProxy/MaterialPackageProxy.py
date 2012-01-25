@@ -8,7 +8,7 @@ from baca.scf.OutputMaterialModuleProxy import OutputMaterialModuleProxy
 from baca.scf.PackageProxy import PackageProxy
 from baca.scf.StylesheetFileProxy import StylesheetFileProxy
 from baca.scf.StylesheetWrangler import StylesheetWrangler
-from baca.scf.UserInputModuleFileProxy import UserInputModuleFileProxy
+from baca.scf.UserInputModuleProxy import UserInputModuleProxy
 import baca
 import os
 
@@ -311,7 +311,7 @@ class MaterialPackageProxy(PackageProxy):
     # TODO: write test
     @property
     def user_input_module_file_proxy(self):
-        return UserInputModuleFileProxy(self.user_input_module_file_name, session=self.session)
+        return UserInputModuleProxy(self.user_input_module_file_name, session=self.session)
 
     # TODO: write test
     @property

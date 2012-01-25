@@ -1,7 +1,7 @@
 from baca.scf.FileProxy import FileProxy
 
 
-class UserInputModuleFileProxy(FileProxy):
+class UserInputModuleProxy(FileProxy):
 
     def __init__(self, full_file_name, session=None):
         FileProxy.__init__(self, full_file_name, session=session)
