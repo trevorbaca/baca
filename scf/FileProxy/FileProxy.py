@@ -57,8 +57,8 @@ class FileProxy(SCFObject):
     ### PUBLIC METHODS ###
 
     def clear(self):
-        for content_chunk, is_sorted in self.sections:
-            content_chunk[:] = []
+        for section, is_sorted, blank_line_count  in self.sections:
+            section[:] = []
 
     def copy_file(self, new_full_file_name):
         shutil.copyfile(self.full_file_name, new_full_file_name)

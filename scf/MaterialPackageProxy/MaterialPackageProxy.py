@@ -117,7 +117,10 @@ class MaterialPackageProxy(PackageProxy):
 
     @property
     def illustration_builder_module_proxy(self):
-        return IllustrationBuilderModuleProxy(self.illustration_builder_module_file_name, session=self.session)
+        if not self.has_illustration_builder:
+            file(self.illustration_builder_module_file_name, 'w').write('')
+        return IllustrationBuilderModuleProxy(
+            self.illustration_builder_module_importable_name, session=self.session)
 
     @property
     def illustration_builder_module_importable_name(self):
@@ -407,7 +410,7 @@ class MaterialPackageProxy(PackageProxy):
         elif result == 'ibe':
             self.illustration_builder_module_proxy.edit()
         elif result == 'ibt':
-            self.write_stub_illustration_builder_to_disk()
+            self.illustration_builder_module_proxy.write_stub_to_disk(prompt=True)
         elif result == 'ibx':
             self.run_python_on_illustration_builder()
         elif result == 'ibxi':
@@ -547,7 +550,8 @@ class MaterialPackageProxy(PackageProxy):
             if self.has_illustration_builder or self.should_have_illustration:
                 section = main_menu.make_new_section()
                 section.append(('sss', 'score stylesheet - select'))
-                if self.has_local_stylesheet:
+                # TODO: fix this
+                if True:
                     hidden_section.append(('ssm', 'source stylesheet - edit'))
 
     # TODO: migrate to OutputMaterialModuleProxy and remove
@@ -787,20 +791,3 @@ class MaterialPackageProxy(PackageProxy):
         material_definition.write('\n')
         material_definition.write('\n')
         material_definition.write('{} = None'.format(self.material_underscored_name))
-
-    # TODO: migrate to illustration builder file proxy
-    def write_stub_illustration_builder_to_disk(self, prompt=True):
-        illustration_builder = file(self.illustration_builder_module_file_name, 'w')
-        lines = []
-        lines.append('from abjad import *')
-        lines.append('from output_material import {}'.format(self.material_underscored_name))
-        lines.append('')
-        lines.append('')
-        line = 'score, treble_staff, bass_staff = scoretools.make_piano_score_from_leaves({})'.format(
-            self.material_underscored_name)
-        lines.append(line)
-        lines.append('illustration = lilypondfiletools.make_basic_lilypond_file(score)')
-        illustration_builder.write('\n'.join(lines))
-        illustration_builder.close()
-        line = 'stub illustration builder written to disk.'
-        self.proceed(line, prompt=prompt)

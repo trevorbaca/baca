@@ -84,7 +84,7 @@ class MaterialPackageWrangler(PackageWrangler):
         if material_package_maker_class_name is None:
             if should_have_illustration:
                 material_proxy.write_stub_music_material_definition_to_disk()
-                material_proxy.write_stub_illustration_builder_to_disk(prompt=False)
+                material_proxy.illustration_builder_module_proxy.write_stub_to_disk(prompt=False)
             else:
                 material_proxy.write_stub_data_material_definition_to_disk()
         line = 'material package {!r} created.'.format(material_package_importable_name)
