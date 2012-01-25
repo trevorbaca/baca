@@ -1,7 +1,7 @@
 from baca.scf.ModuleProxy import ModuleProxy
 
 
-class OutputMaterialModuleModuleProxy(ModuleProxy):
+class OutputMaterialModuleProxy(ModuleProxy):
 
     def __init__(self, module_importable_name, session=None):
         ModuleProxy.__init__(self, module_importable_name, session=session)
