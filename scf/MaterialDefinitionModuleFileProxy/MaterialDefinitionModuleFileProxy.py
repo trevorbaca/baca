@@ -2,7 +2,6 @@ from baca.scf.ModuleProxy import ModuleProxy
 import os
 
 
-# TODO: rename MaterialDefinitionModuleProxy
 class MaterialDefinitionModuleFileProxy(ModuleProxy):
 
     def __init__(self, module_importable_name, session=None):

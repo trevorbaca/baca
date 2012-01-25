@@ -1,7 +1,7 @@
 from abjad.tools import iotools
 from abjad.tools import markuptools
 from abjad.tools import mathtools
-from baca.scf.IllustrationBuilderModuleFileProxy import IllustrationBuilderModuleFileProxy
+from baca.scf.IllustrationBuilderModuleProxy import IllustrationBuilderModuleProxy
 from baca.scf.MaterialDefinitionModuleFileProxy import MaterialDefinitionModuleFileProxy
 from baca.scf.MaterialPackageMakerWrangler import MaterialPackageMakerWrangler
 from baca.scf.OutputMaterialModuleFileProxy import OutputMaterialModuleFileProxy
@@ -125,7 +125,7 @@ class MaterialPackageProxy(PackageProxy):
 
     @property
     def illustration_builder_module_file_proxy(self):
-        return IllustrationBuilderModuleFileProxy(self.illustration_builder_module_file_name, session=self.session)
+        return IllustrationBuilderModuleProxy(self.illustration_builder_module_file_name, session=self.session)
 
     @property
     def illustration_builder_module_importable_name(self):
