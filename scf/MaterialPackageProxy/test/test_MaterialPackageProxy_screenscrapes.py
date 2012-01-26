@@ -1,6 +1,4 @@
 import baca
-import py
-py.test.skip('debug tomorrow.')
 
 
 def test_MaterialPackageProxy_screenscrapes_01():
@@ -17,15 +15,15 @@ def test_MaterialPackageProxy_screenscrapes_01():
       '     material definition - edit (mde)',
       '     material definition - execute (mdx)',
       '',
-      '     output data - recreate (dc)',
+      '     output data - create (dc)',
       '     output data - inspect (di)',
       '',
-      '     illustration builder - edit (sbe)',
-      '     illustration builder - execute (sbx)',
+      '     illustration builder - edit (ibe)',
+      '     illustration builder - execute (ibx)',
       '',
       '     score stylesheet - select (sss)',
       '',
-      '     output pdf - recreate (pdfc)',
+      '     output pdf - create (pdfc)',
       '     output pdf - inspect (pdfi)',
       '']
 
@@ -43,14 +41,14 @@ def test_MaterialPackageProxy_screenscrapes_02():
       '     material definition - edit (mde)',
       '     material definition - execute (mdx)',
       '',
-      '     output data - recreate (dc)',
+      '     output data - create (dc)',
       '     output data - inspect (di)',
       '',
-      '     illustration builder - edit (sbe)',
-      '     illustration builder - execute (sbx)',
+      '     illustration builder - edit (ibe)',
+      '     illustration builder - execute (ibx)',
       '',
       '     score stylesheet - select (sss)',
       '',
-      '     output pdf - recreate (pdfc)',
+      '     output pdf - create (pdfc)',
       '     output pdf - inspect (pdfi)',
       '']
