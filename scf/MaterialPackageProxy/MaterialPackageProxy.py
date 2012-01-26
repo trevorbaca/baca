@@ -211,6 +211,24 @@ class MaterialPackageProxy(PackageProxy):
         result = '.'.join(result)
         return result
 
+    # TODO: reimplement with helpers.safe_import()
+    @property
+    def material_package_maker(self):
+        material_package_maker_class_name = self.material_package_maker_class_name
+        try:
+            command = 'from baca.scf.materialpackagemakers import {}'.format(material_package_maker_class_name)
+            exec(command)
+            command = 'result = {}(client_material_package_importable_name={!r}, session=self.session)'
+            command = command.format(material_package_maker_class_name, self.package_importable_name)
+            exec(command)
+            return result
+        except:
+            pass
+
+    @property
+    def material_package_maker_class_name(self):
+        return self.get_tag('material_package_maker_class_name')
+
     # TODO: migrate to OutputMaterialModuleProxy and remove
     @property
     def output_material(self):
@@ -265,34 +283,6 @@ class MaterialPackageProxy(PackageProxy):
     @property
     def source_stylesheet_file_proxy(self):
         return StylesheetFileProxy(self.source_stylesheet_file_name, session=self.session)
-
-    # TODO: remove
-    @property
-    def stub_illustration_builder_module_file_name(self):
-        return os.path.join(self.assets_directory, 'stub_illustration_builder.py')
-
-    # TODO: remove
-    @property
-    def stub_material_definition_module_file_name(self):
-        return os.path.join(self.assets_directory, 'stub_material_definition.py')
-
-    # TODO: reimplement with helpers.safe_import()
-    @property
-    def material_package_maker(self):
-        material_package_maker_class_name = self.material_package_maker_class_name
-        try:
-            command = 'from baca.scf.materialpackagemakers import {}'.format(material_package_maker_class_name)
-            exec(command)
-            command = 'result = {}(client_material_package_importable_name={!r}, session=self.session)'
-            command = command.format(material_package_maker_class_name, self.package_importable_name)
-            exec(command)
-            return result
-        except:
-            pass
-
-    @property
-    def material_package_maker_class_name(self):
-        return self.get_tag('material_package_maker_class_name')
 
     # TODO: write test
     @property
