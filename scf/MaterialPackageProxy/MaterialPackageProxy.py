@@ -664,41 +664,24 @@ class MaterialPackageProxy(PackageProxy):
         self.unimport_material_module()
         self.unimport_output_material_module()
 
-    def unimport_illustration_builder_module(self):
-        self.remove_package_importable_name_from_sys_modules(self.illustration_builder_module_importable_name)
-
-    def unimport_score_package(self):
-        self.remove_package_importable_name_from_sys_modules(self.score_package_short_name)
-
     def unimport_user_input_module(self):
         self.remove_package_importable_name_from_sys_modules(self.user_input_module_importable_name)
 
-    # TODO: migrate to IllustrationBuilderModuleProxy and remove
     def write_illustration_ly_and_pdf_to_disk(self, is_forced=False, prompt=True):
-        lines = []
         illustration = self.illustration
         iotools.write_expr_to_pdf(illustration, self.illustration_pdf_file_name, print_status=False)
         iotools.write_expr_to_ly(illustration, self.illustration_ly_file_name, print_status=False)
-        lines.append('PDF and LilyPond file written to disk.')
-        self.proceed(lines, prompt=prompt)
+        self.proceed(['PDF and LilyPond file written to disk.', ''], prompt=prompt)
 
-    # TODO: migrate to IllustrationBuilderModuleProxy and remove
     def write_illustration_ly_to_disk(self, is_forced=False, prompt=True):
-        lines = []
         illustration = self.illustration
         iotools.write_expr_to_ly(illustration, self.illustration_ly_file_name, print_status=False)
-        lines.append('LilyPond file written to disk.')
-        lines.append('')
-        self.proceed(lines, prompt=prompt)
+        self.proceed(['LilyPond file written to disk.', ''], prompt=prompt)
 
-    # TODO: migrate to IllustrationBuilderModuleProxy and remove
     def write_illustration_pdf_to_disk(self, is_forced=False, prompt=True):
-        lines = []
         illustration = self.illustration
         iotools.write_expr_to_pdf(illustration, self.illustration_pdf_file_name, print_status=False)
-        lines.append('PDF written to disk.')
-        lines.append('')
-        self.proceed(lines, prompt=prompt)
+        self.proceed(['PDF written to disk.', ''], prompt=prompt)
 
     def write_output_material_to_disk(self, prompt=True):
         self.remove_material_from_materials_initializer()
