@@ -69,3 +69,14 @@ class UserInputModuleProxy(ModuleProxy):
         self.docstring_lines = docstring_lines
         self.setup_statements = setup_statements
         self.user_input_wrapper_lines = user_input_wrapper_lines
+
+    def write_stub_to_disk(self, prompt=True):
+        self.clear()
+        self.setup_statements.append('from baca.scf import UserInputWrapper\n')
+        self.body_lines.append('user_input = UserInputWrapper([])]\n')
+        self.write_to_disk()
+        self.proceed('stub user input module written to disk.')
+
+    def write_to_disk(self, user_input_wrapper):
+        self.user_input_wrapper_lines[:] = user_input_wrapper.formatted_lines
+        ModuleProxy.write_to_disk(self) 

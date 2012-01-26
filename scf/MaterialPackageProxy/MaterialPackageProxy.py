@@ -12,7 +12,6 @@ from baca.scf.StylesheetFileProxy import StylesheetFileProxy
 from baca.scf.StylesheetWrangler import StylesheetWrangler
 from baca.scf.UserInputModuleProxy import UserInputModuleProxy
 from baca.scf.helpers import safe_import
-import baca
 import os
 
 

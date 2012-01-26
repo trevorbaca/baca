@@ -18,19 +18,20 @@ class MaterialPackageMaker(MaterialPackageProxy):
         assert type(self).output_material_checker(output_material)
         return output_material
 
+    @property
+    def user_input_wrapper(self):
+        return self.user_input_module_proxy.import_user_input_wrapper()
+
     ### PUBLIC METHODS ###
 
     def clear_user_input_wrapper(self, prompt=True):
         user_input_wrapper = self.user_input_wrapper
         if user_input_wrapper.is_empty:
-            lines=['user input already empty.', '']
-            self.display(lines)
-            self.proceed()
+            self.proceed('user input already empty.')
         else:
             user_input_wrapper.clear()
-            self.write_user_input_wrapper_to_disk(user_input_wrapper)
-            lines=['user input wrapper cleared.']
-            self.proceed(lines, prompt=prompt)
+            self.user_input_module_proxy.write_to_disk(user_input_wrapper)
+            self.proceed('user input wrapper cleared.', prompt=prompt)
 
     def edit_user_input_at_number(self, number):
         user_input_wrapper = self.user_input_wrapper
@@ -61,25 +62,15 @@ class MaterialPackageMaker(MaterialPackageProxy):
         if self.backtrack():
             return
         user_input_wrapper[key] = new_value 
-        self.write_user_input_wrapper_to_disk(user_input_wrapper)
-
-    def format_user_input_wrapper_for_writing_to_disk(self, user_input_wrapper):
-        result = []
-        result.extend(type(self).user_input_module_import_statements)
-        if result:
-            result.append('')
-            result.append('')
-        result.extend(user_input_wrapper.formatted_lines)
-        return result
+        self.user_input_module_proxy.write_to_disk(user_input_wrapper)
 
     def load_user_input_wrapper_demo_values(self, prompt=True):
         user_input_wrapper = self.user_input_wrapper
         user_input_demo_values = copy.deepcopy(type(self).user_input_demo_values)
         for key, value in user_input_demo_values:
             user_input_wrapper[key] = value
-        self.write_user_input_wrapper_to_disk(user_input_wrapper) 
-        line = 'demo values loaded.'
-        self.proceed(line, prompt=prompt)
+        self.user_input_module_proxy.write_to_disk(user_input_wrapper)
+        self.proceed('demo values loaded.', prompt=prompt)
 
     def make_main_menu_for_material_made_with_material_package_maker(self):
         menu, hidden_section = self.make_new_menu(where=self.where(), is_hidden=True)
@@ -89,7 +80,7 @@ class MaterialPackageMaker(MaterialPackageProxy):
 
     def make_main_menu_section_for_user_input_module(self, main_menu, hidden_section):
         section = main_menu.make_new_section(is_numbered=True)
-        section.tokens = self.user_input_module_proxy.import_user_input_wrapper().editable_lines
+        section.tokens = self.user_input_wrapper.editable_lines
         section.return_value_attribute = 'number'
         section = main_menu.make_new_section()
         section.append(('uic', 'user input - clear'))
@@ -127,47 +118,3 @@ class MaterialPackageMaker(MaterialPackageProxy):
         lines.append('')
         self.display(lines)
         self.proceed(prompt=prompt)
-
-    # TODO: delete to UserInputModuleProxy and remove
-    def write_stub_user_input_module_to_disk(self, prompt=True):
-        user_input_module = file(self.user_input_module_file_name, 'w')
-        lines = []
-        lines.append('from baca.scf import UserInputWrapper')
-        lines.append('')
-        lines.append('')
-        lines.append('user_input = UserInputWrapper([])')
-        user_input_module.write('\n'.join(lines))
-        user_input_module.close()
-        line = 'stub user input module written to disk.'
-        self.proceed(line, prompt=prompt)
-
-    def write_user_input_wrapper_to_disk(self, user_input_wrapper):
-        formatted_user_input_wrapper_lines = self.format_user_input_wrapper_for_writing_to_disk(user_input_wrapper)
-        user_input_module = file(self.user_input_module_file_name, 'w')
-        user_input_module.write('\n'.join(formatted_user_input_wrapper_lines))
-        user_input_module.close()
-
-    ### OLD INTERACTIVE MATERIAL PROXY PUBLIC METHODS ###
-
-    # TODO: audit
-    def old_run_interactive(self, clear=True, cache=False):
-        self.cache_breadcrumbs(cache=cache)
-        while True:
-            menu, section = self.make_new_menu(where=self.where(), is_numbered=True)
-            section.tokens = self.user_input_wrapper.editable_lines
-            if self.user_input_wrapper.is_complete:
-                section.append(('p', 'show pdf of given input'))
-            section.append(('d', 'show demo input values'))
-            section.append(('l', 'change location'))
-            result = menu.run(clear=clear)
-            if result == 'd':
-                self.show_demo_user_input_values()
-            elif result == 'l':
-                self.move_material_to_location()
-            elif result == 'p':
-                illustration = self.illustration
-                illustration.file_initial_user_includes.append(self.stylesheet)
-                illustration.header_block.title = markuptools.Markup(self.generic_output_name.capitalize())
-                illustration.header_block.subtitle = markuptools.Markup('(unsaved)')
-                iotools.show(illustration)
-        self.restore_breadcrumbs(cache=cache)
