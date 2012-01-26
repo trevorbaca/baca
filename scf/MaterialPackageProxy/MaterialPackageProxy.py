@@ -86,7 +86,8 @@ class MaterialPackageProxy(PackageProxy):
         if not self.has_output_material_module:
             return False
         else:
-            return bool(self.import_output_material_from_output_material_module())
+            #return bool(self.import_output_material_from_output_material_module())
+            return bool(self.output_material_module_proxy.import_output_material())
 
     @property
     def has_output_material_module(self):
@@ -152,7 +153,8 @@ class MaterialPackageProxy(PackageProxy):
     @property
     def is_changed(self):
         material_definition = self.material_definition_module_proxy.import_material_definition()
-        output_material = self.import_output_material_from_output_material_module()
+        #output_material = self.import_output_material_from_output_material_module()
+        output_material = self.output_material_module_proxy.import_output_material()
         return material_definition != output_material
 
     @property
@@ -204,13 +206,14 @@ class MaterialPackageProxy(PackageProxy):
         else:
             return self.score.materials_directory_name
 
-    @property
-    def materials_package_importable_name(self):
-        result = self.package_importable_name
-        result = result.split('.')
-        result = result[:-1]
-        result = '.'.join(result)
-        return result
+    # TODO: remove
+#    @property
+#    def materials_package_importable_name(self):
+#        result = self.package_importable_name
+#        result = result.split('.')
+#        result = result[:-1]
+#        result = '.'.join(result)
+#        return result
 
     # TODO: reimplement with helpers.safe_import()
     @property
@@ -287,7 +290,7 @@ class MaterialPackageProxy(PackageProxy):
     # TODO: write test
     @property
     def user_input_module_proxy(self):
-        return UserInputModuleProxy(self.user_input_module_file_name, session=self.session)
+        return UserInputModuleProxy(self.user_input_module_importable_name, session=self.session)
 
     # TODO: write test
     @property
@@ -315,20 +318,6 @@ class MaterialPackageProxy(PackageProxy):
         parent_package = PackageProxy(self.parent_package_importable_name, session=self.session)
         parent_package.initializer_file_proxy.add_protected_import_statement(
             self.material_underscored_name, self.material_underscored_name)
-
-    # TODO: reimplement with helpers.safe_import()
-    # TODO: delegate to OutputMaterialModuleProxy
-    def import_output_material_from_output_material_module(self):
-        self.unimport_material_module_hierarchy()
-        try:
-            command = 'from {} import {}'.format(
-                self.output_material_module_importable_name, self.material_underscored_name)
-            exec(command)
-            command = 'result = {}'.format(self.material_underscored_name)
-            exec(command)
-            return result
-        except ImportError as e:
-            pass
 
     # TODO: audit
     def handle_main_menu_result(self, result):
@@ -639,41 +628,26 @@ class MaterialPackageProxy(PackageProxy):
         # TODO: replace with something nonlocal
         #self.link_local_stylesheet(source_stylesheet_file_name, prompt=prompt)
 
-    def unimport_material_module(self):
-        self.unimport_package()
-
-    def unimport_materials_module(self):
-        self.remove_package_importable_name_from_sys_modules(self.materials_package_importable_name)
-
-    def unimport_output_material_module(self):
-        self.remove_package_importable_name_from_sys_modules(self.output_material_module_importable_name)
-
-    def unimport_material_module_hierarchy(self):
-        self.unimport_materials_module()
-        self.unimport_material_module()
-        self.unimport_output_material_module()
-
     def write_illustration_ly_and_pdf_to_disk(self, is_forced=False, prompt=True):
         illustration = self.illustration
         iotools.write_expr_to_pdf(illustration, self.illustration_pdf_file_name, print_status=False)
         iotools.write_expr_to_ly(illustration, self.illustration_ly_file_name, print_status=False)
-        self.proceed(['PDF and LilyPond file written to disk.', ''], prompt=prompt)
+        self.proceed(['PDF and LilyPond file written to disk.'], prompt=prompt)
 
     def write_illustration_ly_to_disk(self, is_forced=False, prompt=True):
         illustration = self.illustration
         iotools.write_expr_to_ly(illustration, self.illustration_ly_file_name, print_status=False)
-        self.proceed(['LilyPond file written to disk.', ''], prompt=prompt)
+        self.proceed(['LilyPond file written to disk.'], prompt=prompt)
 
     def write_illustration_pdf_to_disk(self, is_forced=False, prompt=True):
         illustration = self.illustration
         iotools.write_expr_to_pdf(illustration, self.illustration_pdf_file_name, print_status=False)
-        self.proceed(['PDF written to disk.', ''], prompt=prompt)
+        self.proceed(['PDF written to disk.'], prompt=prompt)
 
     def write_output_material_to_disk(self, prompt=True):
         self.remove_material_from_materials_initializer()
         output_material_module_proxy = self.output_material_module_proxy
         lines = self.output_material_module_body_lines
-        self.debug(lines)
         output_material_module_proxy.body_lines[:] = lines
         output_material_module_proxy.write_to_disk()
         self.add_material_to_materials_initializer()

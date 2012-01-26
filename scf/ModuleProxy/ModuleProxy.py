@@ -13,6 +13,16 @@ class ModuleProxy(ParsableFileProxy):
 
     # TODO: abstract out to MaterialModuleProxy
     @property
+    def material_package_importable_name(self):
+        return self.parent_module_importable_name
+    
+    # TODO: abstract out to MaterialModuleProxy
+    @property
+    def materials_package_importable_name(self):
+        return '.'.join(self.parent_module_importable_name.split('.')[:-1])
+    
+    # TODO: abstract out to MaterialModuleProxy
+    @property
     def material_spaced_name(self):
         return self.material_underscored_name.replace('_', ' ')
 
@@ -37,3 +47,11 @@ class ModuleProxy(ParsableFileProxy):
 
     def unimport(self):
         self.remove_package_importable_name_from_sys_modules(self.module_importable_name)
+
+    # TODO: abstract out to MaterialModuleProxy
+    def unimport_material_package(self):
+        self.remove_package_importable_name_from_sys_modules(self.material_package_importable_name)
+
+    # TODO: abstract out to MaterialModuleProxy
+    def unimport_materials_package(self):
+        self.remove_package_importable_name_from_sys_modules(self.materials_package_importable_name)

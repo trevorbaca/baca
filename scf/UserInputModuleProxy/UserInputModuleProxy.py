@@ -1,11 +1,11 @@
-from baca.scf.FileProxy import FileProxy
+from baca.scf.ModuleProxy import ModuleProxy
 from baca.scf.helpers import safe_import
 
 
-class UserInputModuleProxy(FileProxy):
+class UserInputModuleProxy(ModuleProxy):
 
-    def __init__(self, full_file_name, session=None):
-        FileProxy.__init__(self, full_file_name, session=session)
+    def __init__(self, module_importable_name, session=None):
+        ModuleProxy.__init__(self, module_importable_name, session=session)
         self.user_input_wrapper_lines = []
         self.parse()
 
