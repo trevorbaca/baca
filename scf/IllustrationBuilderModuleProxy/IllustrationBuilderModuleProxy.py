@@ -15,21 +15,14 @@ class IllustrationBuilderModuleProxy(BasicModuleProxy):
     def illustration_pdf_file_name(self):
         return self.full_file_name.replace('.py', '.pdf')
 
-    @property
-    def material_spaced_name(self):
-        return self.material_underscored_name.replace('_', ' ')
-
-    @property
-    def material_underscored_name(self):
-        return self.module_importable_name.split('.')[-2]
-
     ### PUBLIC METHODS ###
 
     def import_illustration(self):
-        #self.unimport_illustration_builder_module()
+        self.unimport()
+        # TODO: port unimport
         #self.unimport_output_material_module()
-        illustration = safe_import(
-            locals(), self.module_short_name, 'illustration', self.parent_module_importable_name)
+        illustration = safe_import(locals(), self.module_short_name, 'illustration', 
+            source_parent_module_importable_nmae=self.parent_module_importable_name)
         illustration.header_block.title = markuptools.Markup(self.material_spaced_name)
         return illustration
 

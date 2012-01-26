@@ -68,7 +68,7 @@ class MaterialPackageProxy(PackageProxy):
         if not self.has_material_definition_module:
             return False
         else:
-            return bool(self.import_material_definition_from_material_definition_module())
+            return bool(self.material_definition_module_proxy.import_material_definition())
 
     @property
     def has_material_definition_module(self):
@@ -151,7 +151,7 @@ class MaterialPackageProxy(PackageProxy):
     # TODO: make work
     @property
     def is_changed(self):
-        material_definition = self.import_material_definition_from_material_definition_module()
+        material_definition = self.material_definition_module_proxy.import_material_definition()
         output_material = self.import_output_material_from_output_material_module()
         return material_definition != output_material
 
@@ -230,10 +230,10 @@ class MaterialPackageProxy(PackageProxy):
     def material_package_maker_class_name(self):
         return self.get_tag('material_package_maker_class_name')
 
-    # TODO: migrate to OutputMaterialModuleProxy and remove
+    # TODO: ambigous; change name to show explicitly material comes from
     @property
     def output_material(self):
-        return self.import_material_definition_from_material_definition_module()
+        return self.material_definition_module_proxy.import_material_definition()
 
     @property
     def output_material_module_body_lines(self):
@@ -253,20 +253,6 @@ class MaterialPackageProxy(PackageProxy):
         if not self.has_output_material_module:
             file(self.output_material_module_file_name, 'w').write('')    
         return OutputMaterialModuleProxy(self.output_material_module_importable_name, session=self.session)
-
-    # TODO: reimplement with helpers.safe_import()
-    @property
-    def output_material_module_import_statements(self):
-        self.unimport_material_definition_module()
-        try:
-            command = 'from {} import output_material_module_import_statements'.format(
-                self.material_definition_module_importable_name)
-            exec(command)
-            # keep list from persisting between multiple calls to this method
-            output_material_module_import_statements = list(output_material_module_import_statements)
-        except ImportError:
-            output_material_module_import_statements = []
-        return output_material_module_import_statements
 
     @property
     def output_material_module_importable_name(self):
@@ -330,12 +316,6 @@ class MaterialPackageProxy(PackageProxy):
         parent_package.initializer_file_proxy.add_protected_import_statement(
             self.material_underscored_name, self.material_underscored_name)
 
-    # TODO: delegate to MaterialDefinitionModuleProxy
-    def import_material_definition_from_material_definition_module(self):
-        self.unimport_material_definition_module()
-        return safe_import(locals(), 'material_definition', self.material_underscored_name, 
-            source_parent_module_importable_name=self.package_importable_name)
-    
     # TODO: reimplement with helpers.safe_import()
     # TODO: delegate to OutputMaterialModuleProxy
     def import_output_material_from_output_material_module(self):
@@ -670,9 +650,6 @@ class MaterialPackageProxy(PackageProxy):
         # TODO: replace with something nonlocal
         #self.link_local_stylesheet(source_stylesheet_file_name, prompt=prompt)
 
-    def unimport_material_definition_module(self):
-        self.remove_package_importable_name_from_sys_modules(self.material_definition_module_importable_name)
-
     def unimport_material_module(self):
         self.unimport_package()
 
@@ -727,6 +704,7 @@ class MaterialPackageProxy(PackageProxy):
         self.remove_material_from_materials_initializer()
         output_material_module_proxy = self.output_material_module_proxy
         lines = self.output_material_module_body_lines
+        self.debug(lines)
         output_material_module_proxy.body_lines[:] = lines
         output_material_module_proxy.write_to_disk()
         self.add_material_to_materials_initializer()

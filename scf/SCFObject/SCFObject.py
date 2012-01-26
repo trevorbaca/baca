@@ -8,6 +8,7 @@ import os
 import pprint
 import re
 import readline
+import sys
 
 
 # TODO: move all self.is_ predicates to MenuObject
@@ -395,6 +396,12 @@ class SCFObject(object):
     def query(self, prompt):
         response = handle_raw_input(prompt)
         return response.lower().startswith('y')
+
+    def remove_package_importable_name_from_sys_modules(self, package_importable_name):
+        '''Total hack. But works.'''
+        command = "if '{}' in sys.modules: del(sys.modules['{}'])".format(
+            package_importable_name, package_importable_name)
+        exec(command)
 
     def reveal_modules(self):
         command = 'module_names = sys.modules.keys()'

@@ -1,4 +1,5 @@
 from baca.scf.ModuleProxy import ModuleProxy
+from baca.scf.helpers import safe_import
 import os
 
 
@@ -11,6 +12,16 @@ class MaterialDefinitionModuleProxy(ModuleProxy):
         self.parse()
 
     ### READ-ONLY PUBLIC ATTRIBUTES ###
+
+    @property
+    def output_material_module_import_statements(self):
+        self.unimport()
+        result = safe_import(locals(), self.module_short_name, 'output_material_module_import_statements',
+            source_parent_module_importable_name=self.parent_module_importable_name)
+        # keep list from persisting between multiple calls to this method
+        if result:
+            result = list(result)
+            return result
 
     @property
     def sections(self):
@@ -27,6 +38,11 @@ class MaterialDefinitionModuleProxy(ModuleProxy):
     def edit(self):
         columns = len(self.module_short_name) + 3
         os.system("vi + -c'norm {}l' {}".format(columns, self.full_file_name))
+
+    def import_material_definition(self):
+        self.unimport()
+        return safe_import(locals(), self.module_short_name, self.material_underscored_name,                 
+            source_parent_module_importable_name=self.parent_module_importable_name)
 
     def parse(self):
         material_definition_module = file(self.full_file_name, 'r')

@@ -229,12 +229,6 @@ class PackageProxy(DirectoryProxy):
             line = 'package deleted.'
             self.proceed(line)
         
-    def remove_package_importable_name_from_sys_modules(self, package_importable_name):
-        '''Total hack. But works.'''
-        command = "if '{}' in sys.modules: del(sys.modules['{}'])".format(
-            package_importable_name, package_importable_name)
-        exec(command)
-
     def set_package_importable_name_interactively(self):
         getter = self.make_new_getter(where=self.where())
         # TODO: implement getter.append_package_name
