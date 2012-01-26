@@ -28,13 +28,6 @@ class MaterialPackageProxy(PackageProxy):
         return self.package_spaced_name
 
     @property
-    def has_illustration(self):
-        if not self.has_illustration_builder:
-            return False
-        else:
-            return bool(self.illustration_builder_module_proxy.import_illustration())
-
-    @property
     def has_illustration_builder(self):
         if self.illustration_builder_module_file_name is None:
             return False

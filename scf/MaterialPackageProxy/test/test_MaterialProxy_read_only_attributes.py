@@ -10,7 +10,6 @@ def test_MaterialPackageProxy_read_only_attributes_01():
     assert not material_proxy.has_material_definition_module
     assert not material_proxy.has_output_material
     assert not material_proxy.has_output_material_module
-    assert not material_proxy.has_illustration
     assert not material_proxy.has_illustration_ly
     assert not material_proxy.has_illustration_pdf
     assert not material_proxy.has_illustration_builder
@@ -45,7 +44,6 @@ def test_MaterialPackageProxy_read_only_attributes_02():
     assert smp.has_material_definition_module
     assert smp.has_output_material
     assert smp.has_output_material_module
-    assert not smp.has_illustration
     assert not smp.has_illustration_ly
     assert not smp.has_illustration_pdf
     assert not smp.has_illustration_builder
