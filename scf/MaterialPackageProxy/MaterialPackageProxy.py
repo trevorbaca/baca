@@ -86,7 +86,6 @@ class MaterialPackageProxy(PackageProxy):
         if not self.has_output_material_module:
             return False
         else:
-            #return bool(self.import_output_material_from_output_material_module())
             return bool(self.output_material_module_proxy.import_output_material())
 
     @property
@@ -153,7 +152,6 @@ class MaterialPackageProxy(PackageProxy):
     @property
     def is_changed(self):
         material_definition = self.material_definition_module_proxy.import_material_definition()
-        #output_material = self.import_output_material_from_output_material_module()
         output_material = self.output_material_module_proxy.import_output_material()
         return material_definition != output_material
 
@@ -173,6 +171,8 @@ class MaterialPackageProxy(PackageProxy):
     # TODO: write test
     @property
     def material_definition_module_proxy(self):
+        if not self.has_material_definition_module:
+            file(self.material_definition_module_file_name, 'w').write('')    
         return MaterialDefinitionModuleProxy(
             self.material_definition_module_importable_name, session=self.session)
 
@@ -340,7 +340,8 @@ class MaterialPackageProxy(PackageProxy):
         elif result == 'mde':
             self.material_definition_module_proxy.edit()
         elif result == 'mdt':
-            self.write_stub_material_definition_to_disk()
+            #self.write_stub_material_definition_to_disk()
+            self.material_definition_module_proxy.write_stub_to_disk(self.is_data_only, prompt=True)
         elif result == 'mdx':
             self.run_python_on_material_definition()
         elif result == 'mdxi':
@@ -654,30 +655,3 @@ class MaterialPackageProxy(PackageProxy):
         self.add_material_to_material_initializer()
         line = 'output data written to disk.'
         self.proceed(line, prompt=prompt)
-
-    # TODO: migrate to material definition module file proxy
-    def write_stub_data_material_definition_to_disk(self):
-        material_definition = file(self.material_definition_module_file_name, 'w')
-        material_definition.write('from abjad.tools import sequencetools\n')
-        material_definition.write('output_material_module_import_statements = []\n')
-        material_definition.write('\n')
-        material_definition.write('\n')
-        material_definition.write('{} = None'.format(self.material_underscored_name))
-        
-    # TODO: migrate to material definition module file proxy
-    def write_stub_material_definition_to_disk(self, prompt=True):
-        if self.is_data_only:
-            self.write_stub_data_material_definition_to_disk()
-        else:
-            self.write_stub_music_material_definition_to_disk()
-        line = 'stub material definition written to disk.'
-        self.proceed(line, prompt=prompt)
-
-    # TODO: migrate to material definition module file proxy
-    def write_stub_music_material_definition_to_disk(self):
-        material_definition = file(self.material_definition_module_file_name, 'w')
-        material_definition.write('from abjad import *\n')
-        material_definition.write("output_material_module_import_statements = ['from abjad import *']\n")
-        material_definition.write('\n')
-        material_definition.write('\n')
-        material_definition.write('{} = None'.format(self.material_underscored_name))

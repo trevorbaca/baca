@@ -99,10 +99,10 @@ class InitializerFileProxy(ParsableFileProxy):
 
     def write_stub_to_disk(self, tags=None):
         self.clear()
-        initializer.setup_statements.append('from collections import OrderedDict\n')
-        tag_lines = initializer.pprint_tags(tags)
-        initializer.tag_lines.extend(tag_lines[:])
-        initializer.write_to_disk()
+        self.setup_statements.append('from collections import OrderedDict\n')
+        tag_lines = self.pprint_tags(tags)
+        self.tag_lines.extend(tag_lines[:])
+        self.write_to_disk()
 
     def write_tags_to_disk(self, tags):
         self.parse()

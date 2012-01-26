@@ -85,3 +85,25 @@ class MaterialDefinitionModuleProxy(ModuleProxy):
         self.setup_statements = setup_statements[:]
         self.output_material_module_import_lines = output_material_module_import_lines[:]
         self.body_lines = body_lines[:]
+
+    def write_stub_data_material_definition_to_disk(self):
+        self.clear()
+        self.setup_statements.append('from abjad.tools import sequencetools\n')
+        self.output_material_module_import_lines.append('output_material_module_import_statements = []\n')
+        self.body_lines.append('{} = None'.format(self.material_underscored_name))
+        self.write_to_disk()
+
+    def write_stub_music_material_definition_to_disk(self):
+        self.clear()
+        self.setup_statements.append('from abjad import *\n')
+        lines = "output_material_module_import_statements = ['from abjad import *']\n"
+        self.output_material_module_import_lines.append(line)
+        self.body_lines.append('{} = None'.format(self.material_underscored_name))
+        self.write_to_disk()
+
+    def write_stub_to_disk(self, is_data_only, prompt=True):
+        if is_data_only:
+            self.write_stub_data_material_definition_to_disk()
+        else:
+            self.write_stub_music_material_definition_to_disk()
+        self.proceed('stub material definitiion written to disk.', prompt=prompt)
