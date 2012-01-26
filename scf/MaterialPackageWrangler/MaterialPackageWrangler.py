@@ -96,6 +96,8 @@ class MaterialPackageWrangler(PackageWrangler):
         import baca
         getter = self.make_new_getter(where=self.where())
         getter.append_string('material name')
+        getter.tests[-1] = lambda x: isinstance(x, str) and 3 <= len(x)
+        getter.helps[-1] = "value for 'material name' must be string of length at least 3."
         self.push_backtrack()
         material_name = getter.run()
         self.pop_backtrack()
