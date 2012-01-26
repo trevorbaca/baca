@@ -1,4 +1,6 @@
+from abjad.tools import markuptools
 from baca.scf.BasicModuleProxy import BasicModuleProxy
+from baca.scf.helpers import safe_import
 
 
 class IllustrationBuilderModuleProxy(BasicModuleProxy):
@@ -23,14 +25,11 @@ class IllustrationBuilderModuleProxy(BasicModuleProxy):
 
     ### PUBLIC METHODS ###
 
-    # TODO: reimplement with helpers.safe_import()
     def import_illustration(self):
         #self.unimport_illustration_builder_module()
         #self.unimport_output_material_module()
-        module_importable_name = self.module_importable_name
-        command = 'from {} import illustration'.format(module_importable_name)
-        self.debug(command)
-        exec(command)
+        illustration = safe_import(
+            locals(), self.module_short_name, 'illustration', self.parent_module_importable_name)
         illustration.header_block.title = markuptools.Markup(self.material_spaced_name)
         return illustration
 

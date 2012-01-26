@@ -1,11 +1,9 @@
-% Abjad revision 4952M
-% 2012-01-10 19:31
+% Abjad revision 4972M
+% 2012-01-26 11:01
 
-\version "2.15.17"
+\version "2.15.24"
 \include "english.ly"
 \include "/Users/trevorbaca/Documents/abjad/trunk/abjad/cfg/abjad.scm"
-
-\include "/Users/trevorbaca/Documents/other/baca/materials/demo_material/stylesheet.ly"
 
 \header {
 	tagline = \markup { "" }

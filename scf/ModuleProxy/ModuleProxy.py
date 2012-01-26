@@ -18,3 +18,7 @@ class ModuleProxy(ParsableFileProxy):
     @property
     def module_short_name(self):
         return self.module_importable_name.split('.')[-1]
+
+    @property
+    def parent_module_importable_name(self):
+        return '.'.join(self.module_importable_name.split('.')[:-1])

@@ -11,6 +11,7 @@ from baca.scf.PackageProxy import PackageProxy
 from baca.scf.StylesheetFileProxy import StylesheetFileProxy
 from baca.scf.StylesheetWrangler import StylesheetWrangler
 from baca.scf.UserInputModuleProxy import UserInputModuleProxy
+from baca.scf.helpers import safe_import
 import baca
 import os
 
@@ -39,7 +40,7 @@ class MaterialPackageProxy(PackageProxy):
         if not self.has_illustration_builder:
             return False
         else:
-            return bool(self.import_illustration_from_illustration_builder_module())
+            return bool(self.illustration_builder_module_proxy.import_illustration())
 
     @property
     def has_illustration_builder(self):
@@ -108,10 +109,8 @@ class MaterialPackageProxy(PackageProxy):
         else:
             return self.import_user_input_wrapper_from_user_input_module() is not None
 
-    # TODO: migrate to IllustrationBuilderModuleProxy and remove
     @property
     def illustration(self):
-        #return self.import_illustration_from_illustration_builder_module()
         return self.illustration_builder_module_proxy.import_illustration()
 
     @property
@@ -334,7 +333,7 @@ class MaterialPackageProxy(PackageProxy):
     # TODO: delegate to MaterialDefinitionModuleProxy
     def import_material_definition_from_material_definition_module(self):
         self.unimport_material_definition_module()
-        return baca.scf.helpers.safe_import(locals(), 'material_definition', self.material_underscored_name, 
+        return safe_import(locals(), 'material_definition', self.material_underscored_name, 
             source_parent_module_importable_name=self.package_importable_name)
     
     # TODO: reimplement with helpers.safe_import()
@@ -351,18 +350,6 @@ class MaterialPackageProxy(PackageProxy):
         except ImportError as e:
             pass
 
-#    # TODO: reimplement with helpers.safe_import()
-#    # TODO: delegate to IllustrationBuilderModuleProxy
-#    def import_illustration_from_illustration_builder_module(self):
-#        if not self.has_illustration_builder:
-#            return None
-#        self.unimport_illustration_builder_module()
-#        self.unimport_output_material_module()
-#        command = 'from {} import illustration'.format(self.illustration_builder_module_importable_name) 
-#        exec(command)
-#        illustration.header_block.title = markuptools.Markup(self.material_spaced_name)
-#        return illustration
-        
     # TODO: reimplement with helpers.safe_import()
     # TODO: delegate to UserInputModuleProxy
     def import_user_input_wrapper_from_user_input_module(self):
