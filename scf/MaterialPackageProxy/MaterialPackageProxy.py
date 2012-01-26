@@ -340,12 +340,11 @@ class MaterialPackageProxy(PackageProxy):
         elif result == 'mde':
             self.material_definition_module_proxy.edit()
         elif result == 'mdt':
-            #self.write_stub_material_definition_to_disk()
             self.material_definition_module_proxy.write_stub_to_disk(self.is_data_only, prompt=True)
         elif result == 'mdx':
-            self.run_python_on_material_definition()
+            self.material_definition_module_proxy.run_python(prompt=True)
         elif result == 'mdxi':
-            self.run_abjad_on_material_definition()
+            self.material_definition_module_proxy.run_abjad(prompt=True)
         elif result == 'ibd':
             self.illustration_builder_module_proxy.remove(prompt=True)
         elif result == 'ibe':
@@ -353,9 +352,9 @@ class MaterialPackageProxy(PackageProxy):
         elif result == 'ibt':
             self.illustration_builder_module_proxy.write_stub_to_disk(prompt=True)
         elif result == 'ibx':
-            self.run_python_on_illustration_builder()
+            self.illustration_builder_module_proxy.run_python(prompt=True)
         elif result == 'ibxi':
-            self.run_abjad_on_illustration_builder()
+            self.illustration_builder_module_proxy.run_abjad(prompt=True)
         elif result == 'ssm':
             self.source_stylesheet_file_proxy.edit()
         elif result == 'sss':
@@ -583,28 +582,6 @@ class MaterialPackageProxy(PackageProxy):
             self.pop_breadcrumb()
         self.pop_breadcrumb()
         self.restore_breadcrumbs(cache=cache)
-
-    # TODO: migrate to material definition module proxy
-    def run_abjad_on_material_definition(self):
-        os.system('abjad {}'.format(self.material_definition_module_file_name))
-        self.display('')
-
-    # TODO: migrate to illustration builder module proxy
-    def run_abjad_on_illustration_builder(self):
-        os.system('abjad {}'.format(self.illustration_builder_module_file_name))
-        self.display('')
-
-    # TODO: migrate to material definition module proxy
-    def run_python_on_material_definition(self, prompt=True):
-        os.system('python {}'.format(self.material_definition_module_file_name))
-        line = 'material definition executed.'
-        self.proceed(line, prompt=prompt)
-
-    # TODO: migrate to illustration builder module proxy
-    def run_python_on_illustration_builder(self, prompt=True):
-        os.system('python {}'.format(self.illustration_builder_module_file_name))
-        line = 'illustration builder executed.'
-        self.proceed(line, prompt=prompt)
 
     # TODO: write test
     def select_material_package_maker_interactively(self, prompt=True):

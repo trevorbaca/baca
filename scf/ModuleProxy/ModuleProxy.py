@@ -1,4 +1,5 @@
 from baca.scf.ParsableFileProxy import ParsableFileProxy
+import os
 
 
 class ModuleProxy(ParsableFileProxy):
@@ -44,6 +45,14 @@ class ModuleProxy(ParsableFileProxy):
         return '.'.join(self.module_importable_name.split('.')[:-1])
 
     ### PUBLIC METHODS ###
+
+    def run_abjad(self, prompt=True):
+        os.system('abjad {}'.format(self.full_file_name))
+        self.display('file executed', prompt=prompt)
+
+    def run_python(self, prompt=True):
+        os.system('python {}'.format(self.full_file_name))
+        self.proceed('file executed.', prompt=prompt)
 
     def unimport(self):
         self.remove_package_importable_name_from_sys_modules(self.module_importable_name)
