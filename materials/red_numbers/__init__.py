@@ -1,5 +1,6 @@
+from baca.scf.helpers import safe_import
 from collections import OrderedDict
-from output_material import red_numbers
+safe_import(globals(), 'output_material', 'red_numbers')
 
 
 tags = OrderedDict([
