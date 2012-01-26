@@ -12,6 +12,13 @@ class UserInputModuleProxy(ModuleProxy):
     ### READ-ONLY PUBLIC ATTRIBUTES ###
 
     @property
+    def has_complete_user_input_wrapper(self):
+        user_input_wrapper = self.import_user_input_wrapper()
+        if user_input_wrapper is not None:
+            return user_input_wrapper.is_complete
+        return False
+        
+    @property
     def sections(self):
         return (
             (self.encoding_directives, False, 0),

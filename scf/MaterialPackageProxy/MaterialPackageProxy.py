@@ -29,13 +29,6 @@ class MaterialPackageProxy(PackageProxy):
         return self.package_spaced_name
 
     @property
-    def has_complete_user_input_wrapper(self):
-        if self.has_user_input_wrapper:
-            user_input_wrapper = self.user_input_wrapper
-            return user_input_wrapper.is_complete
-        return False
-
-    @property
     def has_illustration(self):
         if not self.has_illustration_builder:
             return False
@@ -206,28 +199,12 @@ class MaterialPackageProxy(PackageProxy):
         else:
             return self.score.materials_directory_name
 
-    # TODO: remove
-#    @property
-#    def materials_package_importable_name(self):
-#        result = self.package_importable_name
-#        result = result.split('.')
-#        result = result[:-1]
-#        result = '.'.join(result)
-#        return result
-
-    # TODO: reimplement with helpers.safe_import()
     @property
     def material_package_maker(self):
-        material_package_maker_class_name = self.material_package_maker_class_name
-        try:
-            command = 'from baca.scf.materialpackagemakers import {}'.format(material_package_maker_class_name)
-            exec(command)
-            command = 'result = {}(client_material_package_importable_name={!r}, session=self.session)'
-            command = command.format(material_package_maker_class_name, self.package_importable_name)
-            exec(command)
-            return result
-        except:
-            pass
+        maker_class = safe_import(locals(), 'materialpackagemakers', self.material_package_maker_class_name,
+            source_parent_module_importable_name=self.scf_package_importable_name)
+        maker = maker_class(self.package_importable_name, session=self.session)
+        return maker
 
     @property
     def material_package_maker_class_name(self):
@@ -298,16 +275,6 @@ class MaterialPackageProxy(PackageProxy):
         if self.user_input_module_file_name is not None:
             return '{}.user_input'.format(self.package_importable_name)
     
-    # TODO: write test
-    # TODO: reimplement with helpers.safe_import()
-    @property
-    def user_input_wrapper(self):
-        if self.has_user_input_module:
-            if True:
-                command = 'from {} import user_input'.format(self.user_input_module_importable_name)
-                exec(command)
-                return user_input
-
     ### PUBLIC METHODS ###
 
     def add_material_to_material_initializer(self):
@@ -441,7 +408,7 @@ class MaterialPackageProxy(PackageProxy):
 
     def make_main_menu_section_for_output_material(self, main_menu, hidden_section):
         has_output_material_section = False
-        if self.has_material_definition or self.has_complete_user_input_wrapper:
+        if self.has_material_definition or self.user_input_module_proxy.has_complete_user_input_wrapper:
             section = main_menu.make_new_section()
             section.append(('dc', 'output data - create'))
             has_output_material_section = True
