@@ -122,6 +122,8 @@ class MaterialPackageProxy(PackageProxy):
 
     @property
     def illustration_ly_file_proxy(self):
+        if not self.has_illustration_ly_file:
+            file(self.illustration_ly_file_name, 'w').write('')
         return IllustrationLyFileProxy(self.illustration_ly_file_name, session=self.session)
 
     @property
@@ -131,9 +133,11 @@ class MaterialPackageProxy(PackageProxy):
 
     @property
     def illustration_pdf_file_proxy(self):
+        if not self.has_illustration_pdf_file:
+            file(self.illustration_pdf_file_name, 'w').write('')
         return IllustrationPdfFileProxy(self.illustration_pdf_file_name, session=self.session)
 
-    # TODO: make work
+    # TODO: port
     @property
     def is_changed(self):
         material_definition = self.material_definition_module_proxy.import_material_definition()
@@ -158,7 +162,6 @@ class MaterialPackageProxy(PackageProxy):
         if self.material_definition_module_file_name is not None:
             return '{}.material_definition'.format(self.package_importable_name)
 
-    # TODO: write test
     @property
     def material_definition_module_proxy(self):
         if not self.has_material_definition_module:
@@ -202,7 +205,6 @@ class MaterialPackageProxy(PackageProxy):
         else:
             return self.score.materials_directory_name
 
-    # TODO: ambigous; change name to show explicitly material comes from
     @property
     def output_material(self):
         return self.material_definition_module_proxy.import_material_definition()
@@ -224,7 +226,6 @@ class MaterialPackageProxy(PackageProxy):
         if self.output_material_module_file_name is not None:
             return '{}.output_material'.format(self.package_importable_name)
 
-    # TODO: write test
     @property
     def output_material_module_proxy(self):
         if not self.has_output_material_module:
@@ -241,7 +242,7 @@ class MaterialPackageProxy(PackageProxy):
     def should_have_illustration(self):
         return self.get_tag('should_have_illustration')
 
-    # TODO: reimplement and write test
+    # TODO: implement
     @property
     def source_stylesheet_file_name(self):
         self.print_not_implemented()
@@ -250,19 +251,16 @@ class MaterialPackageProxy(PackageProxy):
     def source_stylesheet_file_proxy(self):
         return StylesheetFileProxy(self.source_stylesheet_file_name, session=self.session)
 
-    # TODO: write test
     @property
     def user_input_module_file_name(self): 
         if self.directory_name is not None:
             return os.path.join(self.directory_name, 'user_input.py')
     
-    # TODO: write test
     @property
     def user_input_module_importable_name(self):
         if self.user_input_module_file_name is not None:
             return '{}.user_input'.format(self.package_importable_name)
 
-    # TODO: write test
     @property
     def user_input_module_proxy(self):
         return UserInputModuleProxy(self.user_input_module_importable_name, session=self.session)
@@ -348,7 +346,7 @@ class MaterialPackageProxy(PackageProxy):
             self.rename_material()
         elif result == 'reg':
             self.regenerate_everything(is_forced=True)
-        # TODO: add to packge-level hidden menu
+        # TODO: add to package-level hidden menu
         elif result == 'tags':
             self.manage_tags()
         # TODO: add to directory-level hidden menu
@@ -457,9 +455,11 @@ class MaterialPackageProxy(PackageProxy):
         stylesheet_wrangler = StylesheetWrangler(session=self.session)
         stylesheet_wrangler.run()
 
+    # TODO: port
     def regenerate_everything(self, is_forced=False):
         self.print_not_implemented()
 
+    # TODO: port
     def rename_material(self):
         line = 'current material name: {}'.format(self.material_underscored_name)
         self.display(line)
@@ -542,7 +542,6 @@ class MaterialPackageProxy(PackageProxy):
         self.pop_breadcrumb()
         self.restore_breadcrumbs(cache=cache)
 
-    # TODO: write test
     def select_material_package_maker_interactively(self, prompt=True):
         material_proxy_wrangler = MaterialPackageMakerWrangler(session=self.session)
         self.push_backtrack()
@@ -554,7 +553,6 @@ class MaterialPackageProxy(PackageProxy):
         line = 'user input handler selected.'
         self.proceed(line, prompt=prompt)
 
-    # TODO: write test
     def select_stylesheet_interactively(self, prompt=True):
         stylesheet_wrangler = StylesheetWrangler(session=self.session)
         self.push_backtrack()

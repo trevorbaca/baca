@@ -1,16 +1,16 @@
 TODO
 
-1. Migrate material package proxy functionality to file proxies.
+1. Be able safely to write junk into any system file.
 
-2. Be able safely to write junk into any system file.
+2. Prevent the creation of 'baca.materials.h' package.
 
-3. Prevent the creation of 'baca.materials.h' package.
+3. Audit and reimplement purview to always equal only a string.
 
-4. Do away with local stylesheets.
+4. Author materials management read-only attribute tests.
 
-5. Audit and reimplement purview to always equal only a string.
+5. Author materials management menuing tests.
 
-6. Author read-only attribute tests.
+6. Do away with local stylesheets.
 
 7. Implement InstrumentRangeInventory in Abjad. Integrate into SCF.
 
