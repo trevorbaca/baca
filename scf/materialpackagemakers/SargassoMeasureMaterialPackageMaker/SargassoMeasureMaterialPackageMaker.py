@@ -14,7 +14,7 @@ class SargassoMeasureMaterialPackageMaker(MaterialPackageMaker):
         MaterialPackageMaker.__init__(
             self, package_importable_name=package_importable_name, session=session)
 
-    ### READ-ONLY PUBLIC ATTRIBUTES ###
+    ### PUBLIC CLASS ATTRIBUTES ###
 
     generic_output_name = 'sargasso measures'
 
@@ -55,9 +55,10 @@ class SargassoMeasureMaterialPackageMaker(MaterialPackageMaker):
         ('measures_are_shuffled', bool),
         ]
 
-    ### PUBLIC METHODS ###
+    ### READ-ONLY PUBLIC ATTRIBUTES ###
 
-    def make_output_material_module_body_lines(self):
+    @property
+    def output_material_module_body_lines(self):
         lines = []
         output_material = self.output_material
         lines.append('{} = ['.format(self.material_underscored_name))

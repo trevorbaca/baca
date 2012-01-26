@@ -235,6 +235,13 @@ class MaterialPackageProxy(PackageProxy):
         return self.import_material_definition_from_material_definition_module()
 
     @property
+    def output_material_module_body_lines(self):
+        lines = []
+        output_material = self.output_material
+        lines.append('{} = {!r}'.format(self.material_underscored_name, output_material))
+        return lines
+
+    @property
     def output_material_module_file_name(self): 
         if self.directory_name is not None:
             return os.path.join(self.directory_name, 'output_material.py')
@@ -416,7 +423,6 @@ class MaterialPackageProxy(PackageProxy):
         elif result == 'lyc':
             self.write_illustration_ly_to_disk(is_forced=True)
         elif result == 'lyd':
-            #self.delete_illustration_ly()
             self.illustration_ly_file_proxy.remove(prompt=True)
         elif result == 'lyi':
             self.view_illustration_ly()
@@ -424,7 +430,6 @@ class MaterialPackageProxy(PackageProxy):
             self.write_illustration_ly_and_pdf_to_disk(is_forced=True)
             self.view_illustration_pdf()
         elif result == 'pdfd':
-            #self.delete_illustration_pdf()
             self.illustration_pdf_file_proxy.remove(prompt=True)
         elif result == 'pdfi':
             self.view_illustration_pdf()
@@ -541,13 +546,6 @@ class MaterialPackageProxy(PackageProxy):
                 # TODO: fix this
                 if True:
                     hidden_section.append(('ssm', 'source stylesheet - edit'))
-
-    # TODO: migrate to OutputMaterialModuleProxy and remove
-    def make_output_material_module_body_lines(self):
-        lines = []
-        output_material = self.output_material
-        lines.append('{} = {!r}'.format(self.material_underscored_name, output_material))
-        return lines
 
     def manage_stylesheets(self):
         stylesheet_wrangler = StylesheetWrangler(session=self.session)
@@ -745,7 +743,7 @@ class MaterialPackageProxy(PackageProxy):
     def write_output_material_to_disk(self, prompt=True):
         self.remove_material_from_materials_initializer()
         output_material_module_proxy = self.output_material_module_proxy
-        lines = self.make_output_material_module_body_lines()
+        lines = self.output_material_module_body_lines
         output_material_module_proxy.body_lines[:] = lines
         output_material_module_proxy.write_to_disk()
         self.add_material_to_materials_initializer()
