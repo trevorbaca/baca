@@ -233,12 +233,6 @@ class MaterialPackageProxy(PackageProxy):
         return OutputMaterialModuleProxy(self.output_material_module_importable_name, session=self.session)
 
     @property
-    def score_package_short_name(self):
-        if self.package_importable_name is not None:
-            if self.package_importable_name.startswith(self.studio_package_importable_name):
-                return self.package_importable_name.split('.')[0]
-
-    @property
     def should_have_illustration(self):
         return self.get_tag('should_have_illustration')
 

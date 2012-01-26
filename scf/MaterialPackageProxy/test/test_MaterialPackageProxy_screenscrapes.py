@@ -3,7 +3,7 @@ import py
 py.test.skip('debug tomorrow.')
 
 
-def test_MaterialPackageProxy_run_screenscrapes_01():
+def test_MaterialPackageProxy_screenscrapes_01():
     '''Score material run from studio.
     '''
 
@@ -30,7 +30,7 @@ def test_MaterialPackageProxy_run_screenscrapes_01():
       '']
 
 
-def test_MaterialPackageProxy_run_screenscrapes_02():
+def test_MaterialPackageProxy_screenscrapes_02():
     '''Score material run independently.
     '''
 
