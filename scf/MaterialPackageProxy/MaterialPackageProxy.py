@@ -425,14 +425,14 @@ class MaterialPackageProxy(PackageProxy):
         elif result == 'lyd':
             self.illustration_ly_file_proxy.remove(prompt=True)
         elif result == 'lyi':
-            self.view_illustration_ly()
+            self.illustration_ly_file_proxy.view()
         elif result == 'pdfc':
             self.write_illustration_ly_and_pdf_to_disk(is_forced=True)
-            self.view_illustration_pdf()
+            self.illustration_pdf_file_proxy.view()
         elif result == 'pdfd':
             self.illustration_pdf_file_proxy.remove(prompt=True)
         elif result == 'pdfi':
-            self.view_illustration_pdf()
+            self.illustration_pdf_file_proxy.view()
         elif result == 'del':
             self.remove()
             self.session.is_backtracking_locally = True
@@ -706,15 +706,6 @@ class MaterialPackageProxy(PackageProxy):
 
     def unimport_user_input_module(self):
         self.remove_package_importable_name_from_sys_modules(self.user_input_module_importable_name)
-
-    # TODO: migrate to IllustrationLyFileProxy
-    def view_illustration_ly(self):
-        os.system('vi -R {}'.format(self.illustration_ly_file_name))
-
-    # TODO: migrate to IllustrationPdfFileProxy
-    def view_illustration_pdf(self):
-        command = 'open {}'.format(self.illustration_pdf_file_name)
-        os.system(command)
 
     def write_illustration_ly_and_pdf_to_disk(self, is_forced=False, prompt=True):
         lines = []
