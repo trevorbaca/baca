@@ -128,6 +128,7 @@ class MaterialPackageMaker(MaterialPackageProxy):
         self.display(lines)
         self.proceed(prompt=prompt)
 
+    # TODO: delete to UserInputModuleProxy and remove
     def write_stub_user_input_module_to_disk(self, prompt=True):
         user_input_module = file(self.user_input_module_file_name, 'w')
         lines = []

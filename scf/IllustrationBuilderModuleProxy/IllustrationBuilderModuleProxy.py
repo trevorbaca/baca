@@ -3,7 +3,36 @@ from baca.scf.BasicModuleProxy import BasicModuleProxy
 
 class IllustrationBuilderModuleProxy(BasicModuleProxy):
 
+    ### READ-ONLY PUBLIC ATTRIBUTES ###
+
+    @property
+    def illustration_ly_file_name(self):
+        return self.full_file_name.replace('.py', '.ly')
+
+    @property
+    def illustration_pdf_file_name(self):
+        return self.full_file_name.replace('.py', '.pdf')
+
+    @property
+    def material_spaced_name(self):
+        return self.material_underscored_name.replace('_', ' ')
+
+    @property
+    def material_underscored_name(self):
+        return self.module_importable_name.split('.')[-2]
+
     ### PUBLIC METHODS ###
+
+    # TODO: reimplement with helpers.safe_import()
+    def import_illustration(self):
+        #self.unimport_illustration_builder_module()
+        #self.unimport_output_material_module()
+        module_importable_name = self.module_importable_name
+        command = 'from {} import illustration'.format(module_importable_name)
+        self.debug(command)
+        exec(command)
+        illustration.header_block.title = markuptools.Markup(self.material_spaced_name)
+        return illustration
 
     def write_stub_to_disk(self, prompt=True):
         self.clear()
