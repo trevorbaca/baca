@@ -12,6 +12,10 @@ def safe_import(target_namespace, source_module_short_name, source_attribute_nam
         message = 'Syntax error in {!r}.'.format(source_module_importable_name)
         print message
         return
+    except ImportError:
+        message = 'Import error in {!r}.'.format(source_module_importable_name)
+        print message
+        return
 
     try:
         source_attribute_value = source_module.__dict__[source_attribute_name]
