@@ -104,16 +104,16 @@ class MaterialPackageProxy(PackageProxy):
             return os.path.join(self.directory_name, 'illustration_builder.py')
 
     @property
+    def illustration_builder_module_importable_name(self):
+        if self.illustration_builder_module_file_name is not None:
+            return '{}.illustration_builder'.format(self.package_importable_name)
+
+    @property
     def illustration_builder_module_proxy(self):
         if not self.has_illustration_builder:
             file(self.illustration_builder_module_file_name, 'w').write('')
         return IllustrationBuilderModuleProxy(
             self.illustration_builder_module_importable_name, session=self.session)
-
-    @property
-    def illustration_builder_module_importable_name(self):
-        if self.illustration_builder_module_file_name is not None:
-            return '{}.illustration_builder'.format(self.package_importable_name)
 
     @property
     def illustration_ly_file_name(self):
@@ -153,6 +153,11 @@ class MaterialPackageProxy(PackageProxy):
         if self.directory_name is not None:
             return os.path.join(self.directory_name, 'material_definition.py')
 
+    @property
+    def material_definition_module_importable_name(self):
+        if self.material_definition_module_file_name is not None:
+            return '{}.material_definition'.format(self.package_importable_name)
+
     # TODO: write test
     @property
     def material_definition_module_proxy(self):
@@ -162,15 +167,21 @@ class MaterialPackageProxy(PackageProxy):
             self.material_definition_module_importable_name, session=self.session)
 
     @property
-    def material_definition_module_importable_name(self):
-        if self.material_definition_module_file_name is not None:
-            return '{}.material_definition'.format(self.package_importable_name)
-
-    @property
     def material_package_directory(self):
         if self.materials_directory_name:
             if self.material_package_short_name:
                 return os.path.join(self.materials_directory_name, self.material_package_short_name)
+
+    @property
+    def material_package_maker(self):
+        maker_class = safe_import(locals(), 'materialpackagemakers', self.material_package_maker_class_name,
+            source_parent_module_importable_name=self.scf_package_importable_name)
+        maker = maker_class(self.package_importable_name, session=self.session)
+        return maker
+
+    @property
+    def material_package_maker_class_name(self):
+        return self.get_tag('material_package_maker_class_name')
 
     @property
     def material_package_short_name(self):
@@ -191,17 +202,6 @@ class MaterialPackageProxy(PackageProxy):
         else:
             return self.score.materials_directory_name
 
-    @property
-    def material_package_maker(self):
-        maker_class = safe_import(locals(), 'materialpackagemakers', self.material_package_maker_class_name,
-            source_parent_module_importable_name=self.scf_package_importable_name)
-        maker = maker_class(self.package_importable_name, session=self.session)
-        return maker
-
-    @property
-    def material_package_maker_class_name(self):
-        return self.get_tag('material_package_maker_class_name')
-
     # TODO: ambigous; change name to show explicitly material comes from
     @property
     def output_material(self):
@@ -219,17 +219,17 @@ class MaterialPackageProxy(PackageProxy):
         if self.directory_name is not None:
             return os.path.join(self.directory_name, 'output_material.py')
 
+    @property
+    def output_material_module_importable_name(self):
+        if self.output_material_module_file_name is not None:
+            return '{}.output_material'.format(self.package_importable_name)
+
     # TODO: write test
     @property
     def output_material_module_proxy(self):
         if not self.has_output_material_module:
             file(self.output_material_module_file_name, 'w').write('')    
         return OutputMaterialModuleProxy(self.output_material_module_importable_name, session=self.session)
-
-    @property
-    def output_material_module_importable_name(self):
-        if self.output_material_module_file_name is not None:
-            return '{}.output_material'.format(self.package_importable_name)
 
     @property
     def score_package_short_name(self):
@@ -258,14 +258,14 @@ class MaterialPackageProxy(PackageProxy):
     
     # TODO: write test
     @property
-    def user_input_module_proxy(self):
-        return UserInputModuleProxy(self.user_input_module_importable_name, session=self.session)
-
-    # TODO: write test
-    @property
     def user_input_module_importable_name(self):
         if self.user_input_module_file_name is not None:
             return '{}.user_input'.format(self.package_importable_name)
+
+    # TODO: write test
+    @property
+    def user_input_module_proxy(self):
+        return UserInputModuleProxy(self.user_input_module_importable_name, session=self.session)
     
     ### PUBLIC METHODS ###
 
@@ -387,28 +387,18 @@ class MaterialPackageProxy(PackageProxy):
         hidden_section.append(('stl', 'manage stylesheets'))
         hidden_section.append(('tags', 'manage tags'))
 
-    def make_main_menu_section_for_material_definition(self, main_menu, hidden_section):
+    def make_main_menu_section_for_illustration_builder(self, main_menu, hidden_section):
         section = main_menu.make_new_section()
-        if self.has_material_definition_module:
-            section.append(('mde', 'material definition - edit'))
-            section.append(('mdx', 'material definition - execute'))
-            hidden_section.append(('mdd', 'material definition - delete'))
-            hidden_section.append(('mdt', 'material definition - stub'))
-            hidden_section.append(('mdxi', 'material definition - execute & inspect'))
-        elif self.material_package_maker_class_name is None:
-            section.append(('mdt', 'material definition - stub'))
-
-    def make_main_menu_section_for_output_material(self, main_menu, hidden_section):
-        has_output_material_section = False
-        if self.has_material_definition or self.user_input_module_proxy.has_complete_user_input_wrapper:
-            section = main_menu.make_new_section()
-            section.append(('dc', 'output data - create'))
-            has_output_material_section = True
-        if self.has_output_material_module:
-            if not has_output_material_section:
-                section = main_menu.make_new_section()
-            section.append(('di', 'output data - inspect'))
-            hidden_section.append(('dd', 'output data - delete'))
+        if self.has_output_material:
+            if self.has_illustration_builder:
+                section.append(('ibe', 'illustration builder - edit'))
+                if self.has_output_material:
+                    section.append(('ibx', 'illustration builder - execute'))
+                hidden_section.append(('ibd', 'illustration builder - delete'))
+                hidden_section.append(('ibt', 'illustration builder - stub'))
+                hidden_section.append(('ibxi', 'illustration builder - execute & inspect'))
+            elif self.should_have_illustration:
+                section.append(('ibt', 'illustration builder - stub'))
 
     def make_main_menu_section_for_illustration_ly(self, main_menu, hidden_section):
         if self.has_output_material:
@@ -431,18 +421,28 @@ class MaterialPackageProxy(PackageProxy):
             hidden_section.append(('pdfd', 'output pdf - delete'))
             section.append(('pdfi', 'output pdf - inspect'))
 
-    def make_main_menu_section_for_illustration_builder(self, main_menu, hidden_section):
+    def make_main_menu_section_for_material_definition(self, main_menu, hidden_section):
         section = main_menu.make_new_section()
-        if self.has_output_material:
-            if self.has_illustration_builder:
-                section.append(('ibe', 'illustration builder - edit'))
-                if self.has_output_material:
-                    section.append(('ibx', 'illustration builder - execute'))
-                hidden_section.append(('ibd', 'illustration builder - delete'))
-                hidden_section.append(('ibt', 'illustration builder - stub'))
-                hidden_section.append(('ibxi', 'illustration builder - execute & inspect'))
-            elif self.should_have_illustration:
-                section.append(('ibt', 'illustration builder - stub'))
+        if self.has_material_definition_module:
+            section.append(('mde', 'material definition - edit'))
+            section.append(('mdx', 'material definition - execute'))
+            hidden_section.append(('mdd', 'material definition - delete'))
+            hidden_section.append(('mdt', 'material definition - stub'))
+            hidden_section.append(('mdxi', 'material definition - execute & inspect'))
+        elif self.material_package_maker_class_name is None:
+            section.append(('mdt', 'material definition - stub'))
+
+    def make_main_menu_section_for_output_material(self, main_menu, hidden_section):
+        has_output_material_section = False
+        if self.has_material_definition or self.user_input_module_proxy.has_complete_user_input_wrapper:
+            section = main_menu.make_new_section()
+            section.append(('dc', 'output data - create'))
+            has_output_material_section = True
+        if self.has_output_material_module:
+            if not has_output_material_section:
+                section = main_menu.make_new_section()
+            section.append(('di', 'output data - inspect'))
+            hidden_section.append(('dd', 'output data - delete'))
 
     def make_main_menu_section_for_stylesheet_management(self, main_menu, hidden_section):
         if self.has_output_material:

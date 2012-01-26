@@ -19,11 +19,6 @@ class ModuleProxy(ParsableFileProxy):
     
     # TODO: abstract out to MaterialModuleProxy
     @property
-    def materials_package_importable_name(self):
-        return '.'.join(self.parent_module_importable_name.split('.')[:-1])
-    
-    # TODO: abstract out to MaterialModuleProxy
-    @property
     def material_spaced_name(self):
         return self.material_underscored_name.replace('_', ' ')
 
@@ -32,6 +27,11 @@ class ModuleProxy(ParsableFileProxy):
     def material_underscored_name(self):
         return self.module_importable_name.split('.')[-2]
 
+    # TODO: abstract out to MaterialModuleProxy
+    @property
+    def materials_package_importable_name(self):
+        return '.'.join(self.parent_module_importable_name.split('.')[:-1])
+    
     @property
     def module_importable_name(self):
         return self._module_importable_name
