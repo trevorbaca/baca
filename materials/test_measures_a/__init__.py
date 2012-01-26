@@ -1,5 +1,6 @@
+from baca.scf.helpers import safe_import
 from collections import OrderedDict
-from output_material import test_measures_a
+safe_import(globals(), 'output_material', 'test_measures_a')
 
 
 tags = OrderedDict([
