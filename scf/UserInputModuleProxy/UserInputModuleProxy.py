@@ -1,4 +1,5 @@
 from baca.scf.FileProxy import FileProxy
+from baca.scf.helpers import safe_import
 
 
 class UserInputModuleProxy(FileProxy):
@@ -20,6 +21,11 @@ class UserInputModuleProxy(FileProxy):
             )
             
     ### PUBLIC METHODS ###
+
+    def import_user_input_wrapper(self):
+        self.unimport()
+        return safe_import(locals(), self.module_short_name, 'user_input',
+            source_parent_module_importable_name=self.parent_module_importable_name)
 
     def parse(self):
         output_material_module = file(self.full_file_name, 'r')

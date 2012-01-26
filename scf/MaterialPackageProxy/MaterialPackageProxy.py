@@ -107,7 +107,7 @@ class MaterialPackageProxy(PackageProxy):
         if not self.has_user_input_module:
             return False
         else:
-            return self.import_user_input_wrapper_from_user_input_module() is not None
+            return bool(self.user_input_module_proxy.import_user_input_wrapper())
 
     @property
     def illustration(self):
@@ -327,17 +327,6 @@ class MaterialPackageProxy(PackageProxy):
             command = 'result = {}'.format(self.material_underscored_name)
             exec(command)
             return result
-        except ImportError as e:
-            pass
-
-    # TODO: reimplement with helpers.safe_import()
-    # TODO: delegate to UserInputModuleProxy
-    def import_user_input_wrapper_from_user_input_module(self):
-        self.unimport_user_input_module()
-        try:
-            command = 'from {} import user_input'.format(self.user_input_module_importable_name)
-            exec(command)
-            return user_input
         except ImportError as e:
             pass
 
@@ -663,9 +652,6 @@ class MaterialPackageProxy(PackageProxy):
         self.unimport_materials_module()
         self.unimport_material_module()
         self.unimport_output_material_module()
-
-    def unimport_user_input_module(self):
-        self.remove_package_importable_name_from_sys_modules(self.user_input_module_importable_name)
 
     def write_illustration_ly_and_pdf_to_disk(self, is_forced=False, prompt=True):
         illustration = self.illustration
