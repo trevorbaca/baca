@@ -50,10 +50,13 @@ class MaterialPackageProxy(PackageProxy):
 
     @property
     def has_material_definition(self):
-        if not self.has_material_definition_module:
-            return False
-        else:
+#        if not self.has_material_definition_module:
+#            return False
+#        else:
+#            return bool(self.material_definition_module_proxy.import_material_definition())
+        if self.should_have_material_definition_module:
             return bool(self.material_definition_module_proxy.import_material_definition())
+        return False
 
     @property
     def has_material_definition_module(self):
@@ -114,7 +117,7 @@ class MaterialPackageProxy(PackageProxy):
 
     @property
     def illustration_builder_module_proxy(self):
-        if self.should_have_illustration:
+        if self.should_have_illustration_builder_module:
             if not self.has_illustration_builder_module:
                 file(self.illustration_builder_module_file_name, 'w').write('')
             return IllustrationBuilderModuleProxy(
@@ -126,8 +129,8 @@ class MaterialPackageProxy(PackageProxy):
 
     @property
     def illustration_ly_file_proxy(self):
-        if self.should_have_illustration:
-            if not self.has_illustration_ly_file:
+        if self.should_have_illustration_ly:
+            if not self.has_illustration_ly:
                 file(self.illustration_ly_file_name, 'w').write('')
             return IllustrationLyFileProxy(self.illustration_ly_file_name, session=self.session)
 
@@ -137,14 +140,15 @@ class MaterialPackageProxy(PackageProxy):
 
     @property
     def illustration_pdf_file_proxy(self):
-        if self.should_have_illustration:
-            if not self.has_illustration_pdf_file:
+        if self.should_have_illustration_pdf:
+            if not self.has_illustration_pdf:
                 file(self.illustration_pdf_file_name, 'w').write('')
             return IllustrationPdfFileProxy(self.illustration_pdf_file_name, session=self.session)
 
     # TODO: port
     @property
     def is_changed(self):
+        self.print_not_implemented()
         material_definition = self.material_definition_module_proxy.import_material_definition()
         output_material = self.output_material_module_proxy.import_output_material()
         return material_definition != output_material
@@ -158,21 +162,24 @@ class MaterialPackageProxy(PackageProxy):
         return not(self.has_material_package_maker)
 
     @property
+    def is_makermade(self):
+        return self.has_material_package_maker
+
+    @property
     def material_definition_module_file_name(self):
-        if self.directory_name is not None:
-            return os.path.join(self.directory_name, 'material_definition.py')
+        return os.path.join(self.directory_name, 'material_definition.py')
 
     @property
     def material_definition_module_importable_name(self):
-        if self.material_definition_module_file_name is not None:
-            return '{}.material_definition'.format(self.package_importable_name)
+        return '.'.join([self.package_importable_name, 'material_definition'])
 
     @property
     def material_definition_module_proxy(self):
-        if not self.has_material_definition_module:
-            file(self.material_definition_module_file_name, 'w').write('')    
-        return MaterialDefinitionModuleProxy(
-            self.material_definition_module_importable_name, session=self.session)
+        if self.should_have_material_definition_module:
+            if not self.has_material_definition_module:
+                file(self.material_definition_module_file_name, 'w').write('')    
+            return MaterialDefinitionModuleProxy(
+                self.material_definition_module_importable_name, session=self.session)
 
     @property
     def material_package_directory(self):
@@ -180,13 +187,15 @@ class MaterialPackageProxy(PackageProxy):
             if self.material_package_short_name:
                 return os.path.join(self.materials_directory_name, self.material_package_short_name)
 
+    # TODO: reimplement as (noninstantiated) class
     @property
     def material_package_maker(self):
         if self.material_package_maker_class_name is not None:
             maker_class = safe_import(locals(), 'materialpackagemakers', self.material_package_maker_class_name,
                 source_parent_module_importable_name=self.scf_package_importable_name)
-            maker = maker_class(self.package_importable_name, session=self.session)
-            return maker
+            #maker = maker_class(self.package_importable_name, session=self.session)
+            #return maker
+            return maker_class
 
     @property
     def material_package_maker_class_name(self):
@@ -218,10 +227,11 @@ class MaterialPackageProxy(PackageProxy):
 
     @property
     def output_material_module_body_lines(self):
-        lines = []
-        output_material = self.output_material
-        lines.append('{} = {!r}'.format(self.material_underscored_name, output_material))
-        return lines
+        if self.should_have_material_definition_module:
+            lines = []
+            output_material = self.output_material
+            lines.append('{} = {!r}'.format(self.material_underscored_name, output_material))
+            return lines
 
     @property
     def output_material_module_file_name(self): 
@@ -235,23 +245,55 @@ class MaterialPackageProxy(PackageProxy):
 
     @property
     def output_material_module_proxy(self):
-        if not self.has_output_material_module:
-            file(self.output_material_module_file_name, 'w').write('')    
-        return OutputMaterialModuleProxy(self.output_material_module_importable_name, session=self.session)
+        if self.should_have_output_material_module:
+            if not self.has_output_material_module:
+                file(self.output_material_module_file_name, 'w').write('')    
+            return OutputMaterialModuleProxy(self.output_material_module_importable_name, session=self.session)
 
     @property
     def should_have_illustration(self):
         return self.get_tag('should_have_illustration')
 
+    @property
+    def should_have_illustration_builder_module(self):
+        if self.should_have_illustration:
+            if self.material_package_maker_class_name is None:
+                return True
+        return False
+
+    @property
+    def should_have_illustration_ly(self):
+        return self.should_have_illustration
+
+    @property
+    def should_have_illustration_pdf(self):
+        return self.should_have_illustration
+
+    @property
+    def should_have_material_definition_module(self):
+        return self.material_package_maker_class_name is None
+
+    @property
+    def should_have_output_material_module(self):
+        return True
+
+    @property
+    def should_have_source_stylesheet(self):
+        return self.should_have_illustration
+
+    @property
+    def should_have_user_input_module(self):
+        return self.material_package_maker_class_name is not None
+
     # TODO: implement
     @property
     def source_stylesheet_file_name(self):
-        if self.has_source_stylesheet:
+        if self.should_have_source_stylesheet:
             self.print_not_implemented()
 
     @property
     def source_stylesheet_file_proxy(self):
-        if self.has_source_stylesheet:
+        if self.should_have_source_stylesheet:
             return StylesheetFileProxy(self.source_stylesheet_file_name, session=self.session)
 
     @property
@@ -264,7 +306,7 @@ class MaterialPackageProxy(PackageProxy):
 
     @property
     def user_input_module_proxy(self):
-        if self.has_material_package_maker:
+        if self.should_have_user_input_module:
             if not self.has_user_input_module:
                 file(self.user_input_module_file_name, 'w').write('')
             return UserInputModuleProxy(self.user_input_module_importable_name, session=self.session)

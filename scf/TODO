@@ -1,5 +1,9 @@
 TODO
 
+-1. Change 'source_stylesheet' to 'stylesheet'.
+
+0. Remove MaterialPackageProxy.is_data_only attribute.
+
 1. Audit and reimplement purview to always equal only a string.
 
 2. Author materials management read-only attribute tests.
