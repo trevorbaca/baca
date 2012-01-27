@@ -84,11 +84,6 @@ class PackageProxy(DirectoryProxy):
             if result:
                 return result
 
-    # TODO: replace with self.package_root_name
-    @property
-    def purview(self):
-        return self.package_root_name
-
     # TODO: write test; or remove?
     @property
     def score(self):
@@ -202,18 +197,6 @@ class PackageProxy(DirectoryProxy):
             self.pop_breadcrumb()
         self.pop_breadcrumb()
         self.restore_breadcrumbs(cache=cache)
-
-    # TODO: write tests
-    def package_importable_name_to_purview(self, package_importable_name):
-        import baca
-        if package_importable_name is None:
-            return
-        elif package_importable_name.split('.')[0] == self.studio_package_importable_name:
-            return baca.scf.HomePackageProxy()
-        elif package_importable_name.split('.')[0] in os.listdir(os.environ.get('SCORES')):
-            return baca.scf.ScorePackageProxy(package_importable_name.split('.')[0])
-        else:
-            raise ValueError('Unknown package importable name {!r}.'.format(package_importable_name))
 
     def remove(self):
         result = DirectoryProxy.remove(self)
