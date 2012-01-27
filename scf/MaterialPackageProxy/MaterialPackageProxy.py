@@ -84,7 +84,7 @@ class MaterialPackageProxy(PackageProxy):
 
     # TODO: impelement
     @property
-    def has_source_stylesheet(self):
+    def has_stylesheet(self):
         return False
 
     @property
@@ -279,7 +279,7 @@ class MaterialPackageProxy(PackageProxy):
         return True
 
     @property
-    def should_have_source_stylesheet(self):
+    def should_have_stylesheet(self):
         return self.should_have_illustration
 
     @property
@@ -288,14 +288,14 @@ class MaterialPackageProxy(PackageProxy):
 
     # TODO: implement
     @property
-    def source_stylesheet_file_name(self):
-        if self.should_have_source_stylesheet:
+    def stylesheet_file_name(self):
+        if self.should_have_stylesheet:
             self.print_not_implemented()
 
     @property
-    def source_stylesheet_file_proxy(self):
-        if self.should_have_source_stylesheet:
-            return StylesheetFileProxy(self.source_stylesheet_file_name, session=self.session)
+    def stylesheet_file_proxy(self):
+        if self.should_have_stylesheet:
+            return StylesheetFileProxy(self.stylesheet_file_name, session=self.session)
 
     @property
     def user_input_module_file_name(self): 
@@ -362,7 +362,7 @@ class MaterialPackageProxy(PackageProxy):
         elif result == 'ibxi':
             self.illustration_builder_module_proxy.run_abjad(prompt=True)
         elif result == 'ssm':
-            self.source_stylesheet_file_proxy.edit()
+            self.stylesheet_file_proxy.edit()
         elif result == 'sss':
             self.select_stylesheet_interactively()
         elif result == 'stl':
@@ -605,12 +605,12 @@ class MaterialPackageProxy(PackageProxy):
     def select_stylesheet_interactively(self, prompt=True):
         stylesheet_wrangler = StylesheetWrangler(session=self.session)
         self.push_backtrack()
-        source_stylesheet_file_name = stylesheet_wrangler.select_stylesheet_file_name_interactively()
+        stylesheet_file_name = stylesheet_wrangler.select_stylesheet_file_name_interactively()
         self.pop_backtrack()
         if self.backtrack():
             return
         # TODO: replace with something nonlocal
-        #self.link_local_stylesheet(source_stylesheet_file_name, prompt=prompt)
+        #self.link_local_stylesheet(stylesheet_file_name, prompt=prompt)
 
     def write_illustration_ly_and_pdf_to_disk(self, is_forced=False, prompt=True):
         illustration = self.illustration
