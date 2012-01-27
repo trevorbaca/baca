@@ -1,62 +1,58 @@
 TODO
 
-1. Encapsulate user input getter subprocedures.
+1. Author materials management menuing tests.
 
-2. Author user input getter tests.
+2. Do away with local stylesheets.
 
-3. Do away with local stylesheets.
+3. Implement InstrumentRangeInventory in Abjad. Integrate into SCF.
 
-4. Author materials management menuing tests.
+4. Implement remaining clarinets.
 
-5. Implement InstrumentRangeInventory in Abjad. Integrate into SCF.
+5. Implement saxophones.
 
-6. Implement remaining clarinets.
+6. Remove blank lines between successive getter attribute entries.
 
-7. Implement saxophones.
-
-8. Remove blank lines between successive getter attribute entries.
-
-9. Make user input getter defaults work like menu defaults;
+7. Make user input getter defaults work like menu defaults;
     Implement default_value on user input getter.
 
-10. Fix SCFObject.handle_user_input_with_default() default handling.
+8. Fix SCFObject.handle_user_input_with_default() default handling.
 
-11. Implement populate_user_input_wrapper().
+9. Implement populate_user_input_wrapper().
 
-12. Implement material move and rename methods.
+10. Implement material move and rename methods.
 
-13. Implement 'make new material: range' in studio.
+11. Implement 'make new material: range' in studio.
 
-14. Implement 'make new material: range' in scores.
+12. Implement 'make new material: range' in scores.
 
-15. Define range inventories for all scores.
+13. Define range inventories for all scores.
 
-16. Find a way to include tags management in hidden menu of every package proxy.
+14. Find a way to include tags management in hidden menu of every package proxy.
 
-17. Figure out why 'red' isn't good enough to select 'red_pcs', maybe redraw-related.
+15. Figure out why 'red' isn't good enough to select 'red_pcs', maybe redraw-related.
 
-18. Make some zagged pitch-classes.
+16. Make some zagged pitch-classes.
 
-19. Port output change awareness.
+17. Port output change awareness.
 
-20. Implement something to tour all materials everywhere and inspect in sequence.
+18. Implement something to tour all materials everywhere and inspect in sequence.
 
-21. Make user input handler creation work.
+19. Make user input handler creation work.
 
-22. Wrap tests around existing material functionality.
+20. Wrap tests around existing material functionality.
 
-23. Clean up PitchRangeEditor main menu.
+21. Clean up PitchRangeEditor main menu.
 
-24. Edit instrument transposition.
+22. Edit instrument transposition.
 
-25. Edit instrument clefs.
+23. Edit instrument clefs.
 
-26. Remove extra appearance of B-flat clarinet from clarinetist config menu.
+24. Remove extra appearance of B-flat clarinet from clarinetist config menu.
 
-27. Change Instrument._default_performer_names to house (full, abbreviation) pairs.
+25. Change Instrument._default_performer_names to house (full, abbreviation) pairs.
 
-28. Use performer abbreviations to populate performer selection menu.
+26. Use performer abbreviations to populate performer selection menu.
 
-29. Find a way to dynamically add (default) indicator to default menu entries.
+27. Find a way to dynamically add (default) indicator to default menu entries.
 
-30. Consider keyword backtracking protocol to replace two-line backtracking protocol.
+28. Consider keyword backtracking protocol to replace two-line backtracking protocol.

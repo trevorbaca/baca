@@ -134,6 +134,57 @@ class UserInputGetter(MenuSectionAggregator):
         self.append_something(spaced_attribute_name, message, default=default)
         self.tests.append(self.is_yes_no_string)
 
+    def apply_tests_to_value(self, value):
+        if self.prompt_index < len(self.tests):
+            input_test = self.tests[self.prompt_index]
+            return self.evaluate_test(input_test, value)
+        return True
+
+    def change_user_response_to_value(self, user_response):
+        execs = self.execs[self.prompt_index]
+        assert isinstance(execs, list)
+        if execs:
+            value = self.get_value_from_execs(user_response, execs)
+            if not value:
+                return '!!!'
+        else:
+            value = self.get_value_from_direct_evaluation(user_response)
+        return value
+
+    def conditionally_display_help(self):
+        if self.prompt_index < len(self.helps):
+            lines = []
+            lines.append(self.helps[self.prompt_index])
+            lines.append('')
+            self.display(lines)
+
+    def evaluate_test(self, test, argument):
+        if isinstance(test, types.TypeType):
+            return isinstance(argument, test)
+        else:
+            return test(argument)
+
+    def get_value_from_direct_evaluation(self, user_response):
+        try:
+            value = eval(user_response)
+        except (NameError, SyntaxError):
+            value = user_response
+        return value
+
+    def get_value_from_execs(self, user_response, execs):
+        for exec_string in execs:
+            try:
+                command = exec_string.format(user_response)
+                exec(command)
+            except:
+                try:
+                    command = exec_string.format(repr(user_response))
+                    exec(command)
+                except:
+                    self.conditionally_display_help()
+                    return False
+        return value
+
     def load_prompt(self):
         prompt = self.prompts[self.prompt_index]
         prompt = iotools.capitalize_string_start(prompt)
@@ -200,11 +251,19 @@ class UserInputGetter(MenuSectionAggregator):
         lines.append('')
         self.display(lines)
 
-    def evaluate_test(self, test, argument):
-        if isinstance(test, types.TypeType):
-            return isinstance(argument, test)
-        else:
-            return test(argument)
+    def store_value(self, user_response):
+        assert isinstance(user_response, str)
+        if self.try_to_store_value_from_argument_list(user_response):
+            return True
+        value = self.change_user_response_to_value(user_response)
+        if value == '!!!':
+            return False
+        if not self.apply_tests_to_value(value):
+            self.conditionally_display_help()
+            return False
+        self.values.append(value)
+        self.prompt_index = self.prompt_index + 1
+        return True
 
     def store_value_from_argument_list(self, user_response, argument_list):
         from baca.scf.menuing.MenuSection import MenuSection
@@ -222,62 +281,3 @@ class UserInputGetter(MenuSectionAggregator):
             return True
         else:
             return False
-
-    def change_user_response_to_value(self, user_response):
-        execs = self.execs[self.prompt_index]
-        assert isinstance(execs, list)
-        if execs:
-            value = self.get_value_from_execs(user_response, execs)
-            if not value:
-                return '!!!'
-        else:
-            value = self.get_value_from_direct_evaluation(user_response)
-        return value
-
-    def store_value(self, user_response):
-        assert isinstance(user_response, str)
-        if self.try_to_store_value_from_argument_list(user_response):
-            return True
-        value = self.change_user_response_to_value(user_response)
-        if value == '!!!':
-            return False
-        if not self.apply_tests_to_value(value):
-            self.conditionally_display_help()
-            return False
-        self.values.append(value)
-        self.prompt_index = self.prompt_index + 1
-        return True
-            
-    def apply_tests_to_value(self, value):
-        if self.prompt_index < len(self.tests):
-            input_test = self.tests[self.prompt_index]
-            return self.evaluate_test(input_test, value)
-        return True
-
-    def conditionally_display_help(self):
-        if self.prompt_index < len(self.helps):
-            lines = []
-            lines.append(self.helps[self.prompt_index])
-            lines.append('')
-            self.display(lines)
-
-    def get_value_from_execs(self, user_response, execs):
-        for exec_string in execs:
-            try:
-                command = exec_string.format(user_response)
-                exec(command)
-            except:
-                try:
-                    command = exec_string.format(repr(user_response))
-                    exec(command)
-                except:
-                    self.conditionally_display_help()
-                    return False
-        return value
-
-    def get_value_from_direct_evaluation(self, user_response):
-        try:
-            value = eval(user_response)
-        except (NameError, SyntaxError):
-            value = user_response
-        return value
