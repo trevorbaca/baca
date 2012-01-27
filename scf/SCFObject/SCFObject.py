@@ -11,7 +11,6 @@ import readline
 import sys
 
 
-# TODO: move all self.is_ predicates to MenuObject
 class SCFObject(object):
     
     def __init__(self, session=None):
@@ -24,7 +23,6 @@ class SCFObject(object):
 
     ### READ-ONLY PUBLIC ATTRIBUTES ###
 
-    # TODO: write test
     @property
     def assets_directory(self):
         return os.path.join(self.scf_root_directory, 'assets')
@@ -42,44 +40,25 @@ class SCFObject(object):
         return 5
 
     @property
-    def helpers(self):
-        from baca.scf import helpers
-        return helpers
-
-    # TODO: write test
-    @property
     def materialpackagemakers_directory_name(self):
         return os.path.join(self.scf_root_directory, 'materialpackagemakers')
 
-    # TODO: write test
     @property
     def materialpackagemakers_package_importable_name(self):
         return '.'.join([self.scf_package_importable_name, 'materialpackagemakers'])
 
-    # TODO: write test
     @property
     def scf_package_importable_name(self):
         return '.'.join([self.studio_package_importable_name, 'scf'])
 
-    # TODO: write test
     @property
     def scf_root_directory(self):
         return self.package_importable_name_to_directory_name(self.scf_package_importable_name)
 
     @property
-    def score_package_short_names(self):
-        result = []
-        scores_directory = os.environ.get('SCORES')
-        for x in os.listdir(scores_directory):
-            if x[0].isalpha():
-                result.append(x)
-        return result
-
-    @property
     def session(self):
         return self._session
 
-    # TODO: write test
     @property
     def sketches_package_importable_name(self):
         return '.'.join([self.studio_package_importable_name, 'sketches'])
@@ -94,12 +73,10 @@ class SCFObject(object):
     def spaced_class_name(self):
         return iotools.uppercamelcase_to_space_delimited_lowercase(self.class_name)
 
-    # TODO: write test
     @property
     def studio_directory_name(self):
         return self.package_importable_name_to_directory_name(self.studio_package_importable_name)
 
-    # TODO: write test
     @property
     def studio_materials_package_importable_name(self):
         return '.'.join([self.studio_package_importable_name, 'materials'])
@@ -108,15 +85,13 @@ class SCFObject(object):
     def studio_package_importable_name(self):
         return 'baca'
 
-    # TODO: write test; change to stylesheets_directory_name
     @property
-    def stylesheets_directory(self):
+    def stylesheets_directory_name(self):
         return os.path.join(self.scf_root_directory, 'stylesheets')
 
-    # TODO: write test
     @property
     def stylesheets_package_importable_name(self):
-        '.'.join([self.scf_package_importable_name, 'stylesheets'])
+        return '.'.join([self.scf_package_importable_name, 'stylesheets'])
 
     @property
     def transcript(self):
@@ -136,12 +111,6 @@ class SCFObject(object):
         if user_input is not None:
             self.session.user_input = user_input
 
-    def push_breadcrumb(self, breadcrumb=None):
-        if breadcrumb is not None:
-            self.breadcrumb_stack.append(breadcrumb)
-        else:
-            self.breadcrumb_stack.append(self.breadcrumb)
-
     def backtrack(self):
         return self.session.backtrack()
 
@@ -151,9 +120,32 @@ class SCFObject(object):
             self.session.cached_breadcrumbs = self.session.breadcrumb_stack[:]
             self.session._breadcrumb_stack[:] = []
 
+    def conditionally_add_terminal_newlines(self, lines):
+        terminated_lines = []
+        for line in lines:
+            if not line.endswith('\n'):
+                line = line + '\n'
+            terminated_lines.append(line)
+        terminated_lines = type(lines)(terminated_lines)
+        return terminated_lines
+        
     def conditionally_clear_terminal(self):
         if self.session.is_displayable:
             iotools.clear_terminal()
+
+    def confirm(self, prompt_string='ok', include_chevron=False):
+        getter = self.make_new_getter(where=self.where())
+        getter.append_yes_no_string(prompt_string)
+        result = getter.run()
+        if self.backtrack():
+            return
+        return 'yes'.startswith(result.lower())
+
+    def debug(self, value, annotation=None):
+        if annotation is None:
+            print 'debug: {!r}'.format(value)
+        else:
+            print 'debug ({}): {!r}'.format(annotation, value)
 
     def display(self, lines, capitalize_first_character=True):
         assert isinstance(lines, (str, list))
@@ -168,24 +160,6 @@ class SCFObject(object):
             if self.session.is_displayable:
                 for line in lines:
                     print line
-
-    def confirm(self, prompt_string='ok'):
-        getter = self.make_new_getter(where=self.where())
-        getter.append_yes_no_string(prompt_string)
-        result = getter.run()
-        if self.backtrack():
-            return
-        return 'yes'.startswith(result.lower())
-
-    def debug(self, value, annotation=None):
-        if annotation is None:
-            print 'debug: {!r}'.format(value)
-        else:
-            print 'debug ({}): {!r}'.format(annotation, value)
-
-    def edit_source_file(self):
-        command = 'vi {}'.format(self.source_file_name)
-        os.system(command)
 
     def handle_raw_input(self, prompt, include_chevron=True, include_newline=True):
         prompt = iotools.capitalize_string_start(prompt)
@@ -224,58 +198,6 @@ class SCFObject(object):
         finally:
             readline.set_startup_hook()
 
-    def is_valid_argument_range_string_for_argument_list(self, argument_range_string, argument_list):
-        from baca.scf.menuing.MenuSection import MenuSection
-        if isinstance(argument_range_string, str):
-            dummy_section = MenuSection()
-            dummy_section.tokens = argument_list[:]
-            if dummy_section.argument_range_string_to_numbers(argument_range_string) is not None:
-                return True
-        return False
-
-    def is_argument_range_string(self, expr):
-        pattern = re.compile('^(\w+( *- *\w+)?)(, *\w+( *- *\w+)?)*$')
-        return pattern.match(expr) is not None
-
-    def is_boolean(self, expr):
-        return isinstance(expr, bool)
-
-    def is_integer(self, expr):
-        return isinstance(expr, int)
-
-    def is_integer_or_none(self, expr):
-        return expr is None or self.is_integer(expr)
-
-    def is_markup(self, expr):
-        return isinstance(expr, markuptools.Markup)
-
-    def is_named_chromatic_pitch(self, expr):
-        return isinstance(expr, pitchtools.NamedChromaticPitch)
-
-    def is_negative_integer(self, expr):
-        return self.is_integer(expr) and expr < 0
-
-    def is_nonnegative_integer(self, expr):
-        return self.is_integer(expr) and expr <= 0
-
-    def is_nonpositive_integer(self, expr):
-        return self.is_integer(expr) and 0 <= expr
-
-    def is_pitch_range_or_none(self, expr):
-        return isinstance(expr, (pitchtools.PitchRange, type(None)))
-
-    def is_positive_integer(self, expr):
-        return self.is_integer(expr) and 0 < expr
-
-    def is_string(self, expr):
-        return isinstance(expr, str)
-
-    def is_string_or_none(self, expr):
-        return isinstance(expr, (str, type(None)))
-
-    def is_yes_no_string(self, expr):
-        return 'yes'.startswith(expr.lower()) or 'no'.startswith(expr.lower())
-
     def make_new_getter(self, where=None):
         import baca
         return baca.scf.menuing.UserInputGetter(where=where, session=self.session)
@@ -287,39 +209,28 @@ class SCFObject(object):
             is_hidden=is_hidden, is_keyed=is_keyed, is_numbered=is_numbered, is_ranged=is_ranged)
         return menu, section
 
-
-    # TODO: write test
     def module_importable_name_to_full_file_name(self, module_importable_name):
-        tmp = self.package_importable_name_to_directory_name(module_importable_name)
-        if tmp:
-            return tmp + '.py'
+        full_file_name = self.package_importable_name_to_directory_name(module_importable_name) + '.py'
+        return full_file_name
 
-    # TODO: write test
     def package_exists(self, package_importable_name):
         assert isinstance(package_importable_name, str)
         directory_name = self.package_importable_name_to_directory_name(package_importable_name)
         return os.path.exists(directory_name)
 
-    # TODO: write tests
     def package_importable_name_to_directory_name(self, package_importable_name):
         if package_importable_name is None:
             return
         package_importable_name_parts = package_importable_name.split('.')
         if package_importable_name_parts[0] == self.studio_package_importable_name:
             directory_parts = [os.environ.get('BACA')] + package_importable_name_parts[1:]
-        elif package_importable_name_parts[0] in os.listdir(os.environ.get('SCORES')):
-            directory_parts = [os.environ.get('SCORES')] + package_importable_name_parts[:]
+        #elif package_importable_name_parts[0] in os.listdir(os.environ.get('SCORES')):
         else:
-            raise ValueError('Unknown package importable name {!r}.'.format(package_importable_name))
+            directory_parts = [os.environ.get('SCORES')] + package_importable_name_parts[:]
+        #else:
+        #    raise ValueError('Unknown package importable name {!r}.'.format(package_importable_name))
         directory = os.path.join(*directory_parts)
         return directory
-
-    def pt(self):
-        pprint.pprint(self.transcript)
-        print len(self.transcript)
-
-    def ptc(self):
-        self.session.complete_transcript.ptc()
 
     def pop_backtrack(self):
         return self.session.backtracking_stack.pop()
@@ -351,7 +262,8 @@ class SCFObject(object):
             rest_parts = user_input[i+1:]
             user_response = ' '.join(first_parts)
             user_input = ' '.join(rest_parts)
-        user_response = user_response.replace('_', ' ')
+        #user_response = user_response.replace('_', ' ')
+        user_response = user_response.replace('~', ' ')
         self.session.user_input = user_input
         return user_response
 
@@ -376,15 +288,12 @@ class SCFObject(object):
         response = self.handle_raw_input('press return to continue.', include_chevron=False)
         self.conditionally_clear_terminal()
 
-    # TODO: write tests
-    def purview_name_to_directory_name(self, purview_name):
-        if purview_name == self.studio_package_importable_name:
-            directory_name = self.studio_directory_name
-        else:
-            directory_name = os.path.join(['Users', 'trevorbaca', 'Documents', 'scores', purview_name])
-        if not os.path.exists(directory_name):
-            raise ValueError
-        return directory_name
+    def pt(self):
+        pprint.pprint(self.transcript)
+        print len(self.transcript)
+
+    def ptc(self):
+        self.session.complete_transcript.ptc()
 
     def push_backtrack(self):
         if self.session.backtracking_stack:
@@ -393,22 +302,17 @@ class SCFObject(object):
         else:
             self.session.backtracking_stack.append(0)
 
-    def query(self, prompt):
-        response = handle_raw_input(prompt)
-        return response.lower().startswith('y')
+    def push_breadcrumb(self, breadcrumb=None):
+        if breadcrumb is not None:
+            self.breadcrumb_stack.append(breadcrumb)
+        else:
+            self.breadcrumb_stack.append(self.breadcrumb)
 
     def remove_package_importable_name_from_sys_modules(self, package_importable_name):
         '''Total hack. But works.'''
         command = "if '{}' in sys.modules: del(sys.modules['{}'])".format(
             package_importable_name, package_importable_name)
         exec(command)
-
-    def reveal_modules(self):
-        command = 'module_names = sys.modules.keys()'
-        exec(command)
-        module_names = [x for x in module_names if x.startswith(self.score_package_short_name)]
-        module_names.sort()
-        return module_names
 
     def restore_breadcrumbs(self, cache=False):
         if cache:

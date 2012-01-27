@@ -23,10 +23,10 @@ def test_ScorePackageProxy_edit_forces_tagline_interactively_01():
 def test_ScorePackageProxy_edit_forces_tagline_interactively_02():
 
     studio = baca.scf.Studio()
-    studio.run(user_input='poeme forces for_foo_bar q')
+    studio.run(user_input='poeme forces for~foo~bar q')
     recursif = baca.scf.ScorePackageProxy('recursif')
     assert recursif.forces_tagline == 'for foo bar'
 
-    studio.run(user_input='poeme forces for_64_pieces_of_percussion q')
+    studio.run(user_input='poeme forces for~64~pieces~of~percussion q')
     recursif = baca.scf.ScorePackageProxy('recursif')
     assert recursif.forces_tagline == 'for 64 pieces of percussion'

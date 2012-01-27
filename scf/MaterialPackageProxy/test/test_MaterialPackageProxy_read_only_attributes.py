@@ -19,7 +19,7 @@ def test_MaterialPackageProxy_read_only_attributes_01():
     assert     mpp.has_output_material
     assert     mpp.has_output_material_module
     assert not mpp.has_user_input_module
-    assert not mpp.has_user_input_wrapper        
+    assert not mpp.has_user_input_wrapper_on_disk
     assert     mpp.illustration is None
     assert     mpp.illustration_builder_module_file_name is None
     assert     mpp.illustration_builder_module_importable_name is None
@@ -32,6 +32,7 @@ def test_MaterialPackageProxy_read_only_attributes_01():
     #assert not mpp.is_changed   
     assert     mpp.is_data_only
     assert     mpp.is_handmade
+    assert     mpp.material_definition == [1, 2, 3, 4, 5]
     assert     mpp.material_definition_module_file_name == \
         '/Users/trevorbaca/Documents/other/baca/materials/red_numbers/material_definition.py'
     assert     mpp.material_definition_module_importable_name == \
@@ -72,7 +73,7 @@ def test_MaterialPackageProxy_read_only_attributes_02():
     '''Makermade material.
     '''
 
-    mpp = baca.scf.MaterialPackageProxy('baca.materials.red_sargasso')
+    mpp = baca.scf.materialpackagemakers.SargassoMeasureMaterialPackageMaker('baca.materials.red_sargasso')
     assert     mpp.breadcrumb == 'red sargasso'
     assert not mpp.has_illustration_builder_module
     assert     mpp.has_illustration_ly
@@ -83,8 +84,9 @@ def test_MaterialPackageProxy_read_only_attributes_02():
     assert     mpp.has_output_material
     assert     mpp.has_output_material_module
     assert     mpp.has_user_input_module
-    assert     mpp.has_user_input_wrapper        
-    assert not mpp.illustration is not None
+    assert     mpp.has_user_input_wrapper_on_disk        
+    assert     mpp.has_user_input_wrapper_in_memory
+    assert     mpp.illustration is not None
     assert     mpp.illustration_builder_module_file_name is None
     assert     mpp.illustration_builder_module_importable_name is None
     assert     mpp.illustration_builder_module_proxy is None
@@ -112,9 +114,8 @@ def test_MaterialPackageProxy_read_only_attributes_02():
     assert     mpp.materials_directory_name == \
         '/Users/trevorbaca/Documents/other/baca/materials'
     assert     mpp.materials_package_importable_name == 'baca.materials'
-    # TODO:
-    #assert     measuretools.all_are_measures(mpp.output_material)
-    assert     mpp.output_material_module_body_lines is None
+    assert     measuretools.all_are_measures(mpp.output_material)
+    assert     mpp.output_material_module_body_lines is not None
     assert     mpp.output_material_module_file_name == \
         '/Users/trevorbaca/Documents/other/baca/materials/red_sargasso/output_material.py'
     assert     mpp.output_material_module_importable_name == \
@@ -152,7 +153,7 @@ def test_MaterialPackageProxy_read_only_attributes_03():
     assert     mpp.has_output_material
     assert     mpp.has_output_material_module
     assert not mpp.has_user_input_module
-    assert not mpp.has_user_input_wrapper        
+    assert not mpp.has_user_input_wrapper_on_disk
     assert     mpp.illustration is not None
     assert     mpp.illustration_builder_module_file_name == \
         '/Users/trevorbaca/Documents/other/baca/materials/red_notes/illustration_builder.py'
@@ -185,7 +186,7 @@ def test_MaterialPackageProxy_read_only_attributes_03():
     assert     mpp.materials_directory_name == \
         '/Users/trevorbaca/Documents/other/baca/materials'
     assert     mpp.materials_package_importable_name == 'baca.materials'
-    assert     notetools.all_are_notes(mpp.output_material)
+    assert     notetools.all_are_notes(mpp.material_definition)
     assert     mpp.output_material_module_body_lines is not None
     assert     mpp.output_material_module_file_name == \
         '/Users/trevorbaca/Documents/other/baca/materials/red_notes/output_material.py'

@@ -24,6 +24,14 @@ class FileProxy(SCFObject):
         return self._full_file_name
 
     @property
+    def is_exceptionless(self):
+        try:
+            self.execute_file_lines()
+            return True
+        except:
+            return False
+
+    @property
     def path_name(self):
         return os.path.dirname(self.full_file_name)
 
@@ -54,17 +62,52 @@ class FileProxy(SCFObject):
     def edit(self):
         os.system('vi + {}'.format(self.full_file_name))
 
-    def rename_file(self, new_full_file_name):
-        os.rename(self.full_file_name, new_full_file_name)
-        self._full_file_name = new_full_file_name
+    def execute_file_lines(self):
+        file_pointer = open(self.full_file_name, 'r')
+        file_contents_string = file_pointer.read()
+        file_pointer.close()
+        exec(file_contents_string)
+
+    def has_line(self, line):
+        file_reference = open(self.full_file_name, 'r')
+        for file_line in file_reference.readlines():
+            if file_line == line:
+                file_reference.close()
+                return True
+        file_reference.close()
+        return False
         
     # TODO: extend for repository
     def remove(self, prompt=False):
         os.remove(self.full_file_name)
         self.proceed('file deleted.', prompt=prompt)
 
+    def rename_file(self, new_full_file_name):
+        os.rename(self.full_file_name, new_full_file_name)
+        self._full_file_name = new_full_file_name
+        
     def short_file_name(self):
         return os.path.sep.split(self.full_file_name)[-1]
 
+    def touch(self):
+        os.system('touch {}'.format(self.full_file_name))
+
     def view(self):
         os.system('vi -R {}'.format(self.full_file_name))
+
+    # TODO: write test
+    def write_canned_file_to_disk(self, prompt=True):
+        getter = self.make_new_getter(where=self.where())
+        getter.append_string('name of canned file')
+        self.push_backtrack()
+        canned_file_name = getter.run()
+        self.pop_backtrack()
+        if self.backtrack():
+            return
+        if not os.path.exists(canned_file_name):
+            canned_file_name = os.path.join(self.assets_directory, canned_file_name)
+        if not os.path.exists(canned_file_name):
+            self.proceed('canned file {!r} does not exist.'.format(canned_file_name), prompt=prompt)
+        else:
+            shutil.copyfile(canned_file_name, self.full_file_name)
+            self.proceed('canned file copied.', prompt=prompt)

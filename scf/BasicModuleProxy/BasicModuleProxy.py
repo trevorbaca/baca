@@ -1,10 +1,10 @@
-from baca.scf.ModuleProxy import ModuleProxy
+from baca.scf.MaterialModuleProxy import MaterialModuleProxy
 
 
-class BasicModuleProxy(ModuleProxy):
+class BasicModuleProxy(MaterialModuleProxy):
 
     def __init__(self, module_importable_name, session=None):
-        ModuleProxy.__init__(self, module_importable_name, session=session)
+        MaterialModuleProxy.__init__(self, module_importable_name, session=session)
         self.body_lines = []
         self.parse()
 
@@ -22,6 +22,7 @@ class BasicModuleProxy(ModuleProxy):
     ### PUBLIC METHODS ###
 
     def parse(self):
+        is_parsable = True
         output_material_module = file(self.full_file_name, 'r')
         encoding_directives = []
         docstring_lines = []
@@ -52,9 +53,10 @@ class BasicModuleProxy(ModuleProxy):
             elif current_section == 'body':
                 body_lines.append(line)
             else:
-                raise ValueError('{!r}: can not parse line: {!r}.'.format(self.full_file_name, line))
+                is_parsable = False
         output_material_module.close()
         self.encoding_directives = encoding_directives
         self.docstring_lines = docstring_lines
         self.setup_statements = setup_statements
         self.body_lines = body_lines
+        return is_parsable

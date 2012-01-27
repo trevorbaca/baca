@@ -1,5 +1,6 @@
 from abjad.tools import iotools
 from baca.scf.SCFObject.SCFObject import SCFObject
+from baca.scf import predicates
 import os
 import subprocess
 
@@ -100,7 +101,8 @@ class MenuObject(SCFObject):
         elif key in ('q', 'quit'):
             self.session.user_specified_quit = True
         elif isinstance(key, str) and 3 <= len(key) and 'score'.startswith(key):
-            self.session.is_backtracking_to_score = True
+            if self.session.is_in_score:
+                self.session.is_backtracking_to_score = True
         elif isinstance(key, str) and 3 <= len(key) and 'studio'.startswith(key):
             self.session.is_backtracking_to_studio = True
         elif key == 'tm':
@@ -129,10 +131,23 @@ class MenuObject(SCFObject):
         return section
 
     def make_is_integer_in_closed_range(self, start, stop):
-        return lambda expr: self.is_integer(expr) and start <= expr <= stop
+        return lambda expr: predicates.is_integer(expr) and start <= expr <= stop
 
     def make_tab(self, n):
         return 4 * n * ' '
+
+    def show_hidden_menu_entries(self):
+        menu_lines = []
+        for section in self.sections:
+            if section.is_hidden:
+                for token in section.tokens:
+                    number, key, body, return_value = section.unpack_token(token)
+                    menu_line = self.make_tab(1) + ' '
+                    menu_line += '{} ({})'.format(body, key)
+                    menu_lines.append(menu_line)
+                menu_lines.append('')
+        self.display(menu_lines, capitalize_first_character=False)
+        self.session.hide_next_redraw = True
 
     def show_menu_client(self):
         lines = []
@@ -146,17 +161,4 @@ class MenuObject(SCFObject):
             lines.append('location not known.')
             lines.append('')
             self.display(lines)
-        self.session.hide_next_redraw = True
-
-    def show_hidden_menu_entries(self):
-        menu_lines = []
-        for section in self.sections:
-            if section.is_hidden:
-                for token in section.tokens:
-                    number, key, body, return_value = section.unpack_token(token)
-                    menu_line = self.make_tab(1) + ' '
-                    menu_line += '{} ({})'.format(body, key)
-                    menu_lines.append(menu_line)
-                menu_lines.append('')
-        self.display(menu_lines, capitalize_first_character=False)
         self.session.hide_next_redraw = True

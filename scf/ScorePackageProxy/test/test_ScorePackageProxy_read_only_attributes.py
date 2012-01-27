@@ -4,7 +4,7 @@ from abjad.tools import scoretools
 import baca
 
 
-def test_ScorePackageProxy_attributes_01():
+def test_ScorePackageProxy_read_only_attributes_01():
     '''Read-only public attributes.
     '''
 
@@ -15,13 +15,11 @@ def test_ScorePackageProxy_attributes_01():
     assert isinstance(score_proxy.dist_proxy, baca.scf.DirectoryProxy)
     assert isinstance(score_proxy.etc_proxy, baca.scf.DirectoryProxy)
     assert isinstance(score_proxy.exg_proxy, baca.scf.DirectoryProxy)
-    assert isinstance(score_proxy.material_proxy_wrangler, baca.scf.MaterialPackageMakerWrangler)
-    assert isinstance(score_proxy.material_wrangler, baca.scf.MaterialPackageWrangler)
+    assert isinstance(score_proxy.material_package_maker_wrangler, baca.scf.MaterialPackageMakerWrangler)
+    assert isinstance(score_proxy.material_package_wrangler, baca.scf.MaterialPackageWrangler)
     assert isinstance(score_proxy.mus_proxy, baca.scf.MusPackageProxy)
 
     assert score_proxy.has_correct_initializers
-    assert score_proxy.is_score_local_purview
-    assert not score_proxy.is_studio_global_purview
 
     instrumentation = scoretools.InstrumentationSpecifier()
     performer_1 = scoretools.Performer('flutist')
@@ -47,7 +45,7 @@ def test_ScorePackageProxy_attributes_01():
         baca.scf.ChunkPackageWrangler(),
         baca.scf.MaterialPackageWrangler())    
 
-    assert score_proxy.top_level_subdirectories == (
+    assert score_proxy.top_level_directory_proxies == (
         baca.scf.DistDirectoryProxy('manos'),
         baca.scf.EtcDirectoryProxy('manos'),
         baca.scf.ExgDirectoryProxy('manos'),

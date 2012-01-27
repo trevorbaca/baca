@@ -178,12 +178,6 @@ class MenuSection(MenuObject):
         assert not (isinstance(token, tuple) and self.has_string_tokens)
         self.tokens.append(token)
 
-    def extend(self, tokens):
-        assert isinstance(tokens, (tuple, list))
-        assert not (any([isinstance(x, str) for x in tokens]) and self.has_tuple_tokens)
-        assert not (any([isinstance(x, tuple) for x in tokens]) and self.has_string_tokens)
-        self.tokens.extend(tokens)
-
     def argument_range_string_to_numbers(self, argument_range_string):
         '''Return list of positive integers on success. Otherwise none.
         '''
@@ -266,6 +260,12 @@ class MenuSection(MenuObject):
                 entry_number = entry_index + 1
                 return entry_number
 
+    def extend(self, tokens):
+        assert isinstance(tokens, (tuple, list))
+        assert not (any([isinstance(x, str) for x in tokens]) and self.has_tuple_tokens)
+        assert not (any([isinstance(x, tuple) for x in tokens]) and self.has_string_tokens)
+        self.tokens.extend(tokens)
+
     def is_token(self, expr):
         if isinstance(expr, str):
             return True
@@ -330,6 +330,12 @@ class MenuSection(MenuObject):
             raise ValueError
         return key, body
 
+    def token_to_menu_entry_number(self, token):
+        if self.is_numbered:
+            for i, x in enumerate(self.tokens):
+                if x == token:
+                    return i + 1
+
     def token_to_menu_entry_return_value(self, token):
         if isinstance(token, str):
             return token
@@ -344,12 +350,6 @@ class MenuSection(MenuObject):
                 raise ValueError
         else:
             raise ValueError
-
-    def token_to_menu_entry_number(self, token):
-        if self.is_numbered:
-            for i, x in enumerate(self.tokens):
-                if x == token:
-                    return i + 1
 
     # TODO: replace self.token_to_key_and_body() and also
     #       replace self.token_to_menu_entry_return_value().

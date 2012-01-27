@@ -9,7 +9,7 @@ def test_Studio_01():
 
     assert studio.class_name == 'Studio'
     assert isinstance(studio.global_proxy, baca.scf.HomePackageProxy)
-    assert isinstance(studio.score_wrangler, baca.scf.ScorePackageWrangler)
+    assert isinstance(studio.score_package_wrangler, baca.scf.ScorePackageWrangler)
     assert studio.source_file_name == \
         '/Users/trevorbaca/Documents/other/baca/scf/Studio/Studio.py'
     assert studio.spaced_class_name == 'studio'
@@ -37,6 +37,7 @@ def test_Studio_02():
      '',
      '     work with materials (m)',
      '     work with sketches (k)',
+     '     make new score (new)',
      '']
 
 
@@ -89,6 +90,7 @@ def test_Studio_04():
      '',
      '     work with materials (m)',
      '     work with sketches (k)',
+     '     make new score (new)',
      '']
 
 
@@ -148,78 +150,58 @@ def test_Studio_08():
 
     studio = baca.scf.Studio()
     studio.run(user_input='foo q')
-    assert len(studio.transcript) == 4
+    assert studio.ts == (4, (0, 2))
 
     studio.run(user_input='foo bar q')
-    assert len(studio.transcript) == 6
+    assert studio.ts == (6, (0, 2, 4))
 
 
-# TODO: combine studio, junk, back, score tests into a single case
 def test_Studio_09():
-    '''User 'studio' input results in (dummy) redraw of studio main menu.
-    '''
-    
-    studio = baca.scf.Studio()
-    studio.run(user_input='foo q')
-    assert len(studio.transcript) == 4
-
-    menu_0 = studio.transcript[0]
-    menu_2 = studio.transcript[2]
-    assert menu_0 == menu_2
-
-
-def test_Studio_10():
     '''Back is handled correctly.
     '''
 
     studio = baca.scf.Studio()
-    studio.run(user_input='foo q')
-    assert len(studio.transcript) == 4
-
-    menu_0 = studio.transcript[0]
-    menu_2 = studio.transcript[2]
-    assert menu_0 == menu_2
+    studio.run(user_input='b q')
+    assert studio.ts == (4, (0, 2))
 
 
-def test_Studio_11():
+def test_Studio_10():
     '''Exec works.
     '''
 
     studio = baca.scf.Studio()
     studio.run(user_input='exec 2**30 q')
 
-    assert len(studio.transcript) == 5
     assert studio.transcript[1] == ['SCF> exec', '']
     assert studio.transcript[2] == ['XCF> 2**30']
     assert studio.transcript[3] == ['1073741824', '']
     assert studio.transcript[4] == ['SCF> q', '']
 
 
-def test_Studio_12():
+def test_Studio_11():
     '''Exec protects against senseless input.
     '''
 
     studio = baca.scf.Studio()
     studio.run(user_input='exec foo q')
 
-    assert len(studio.transcript) == 5
     assert studio.transcript[1] == ['SCF> exec', '']
     assert studio.transcript[2] == ['XCF> foo']
     assert studio.transcript[3] == ['Expression not executable.', '']
     assert studio.transcript[4] == ['SCF> q', '']
 
 
-def test_Studio_13():
+def test_Studio_12():
     '''Shared session.
     '''
 
     studio = baca.scf.Studio()
 
     assert studio.session is studio.global_proxy.session
-    assert studio.session is studio.score_wrangler.session
+    assert studio.session is studio.score_package_wrangler.session
 
 
-def test_Studio_14():
+def test_Studio_13():
     '''Backtracking stu* shortcut.
     '''
 
@@ -234,7 +216,7 @@ def test_Studio_14():
     assert ts_1 == ts_2
 
 
-def test_Studio_15():
+def test_Studio_14():
     '''Backtracking sco* shortcut.
     '''
 

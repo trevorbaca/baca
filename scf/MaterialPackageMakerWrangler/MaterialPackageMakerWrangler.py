@@ -50,35 +50,6 @@ class MaterialPackageMakerWrangler(PackageWrangler):
         section.append(('new', 'make material_proxy'))
         return menu
 
-    def make_material_proxy_interactively(self):
-        getter = self.make_new_getter(where=self.where())
-        getter.append_string('material proxy name')
-        material_proxy_name = getter.run()
-        if self.backtack():
-            return
-        assert iotools.is_uppercamelcase_string(material_proxy_name)
-        assert material_proxy_name.endswith('Maker')
-        getter = self.make_new_getter(where=self.where())
-        getter.append_string('generic output product')
-        generic_output_product = getter.run()
-        if self.backtrack():
-            return
-        material_proxy_directory = os.path.join(self.directory_name, material_proxy_name)
-        os.mkdir(material_proxy_directory)
-        self.make_material_proxy_initializer(material_proxy_name)
-        self.make_material_proxy_class_file(material_proxy_name, generic_output_product)
-        self.make_material_proxy_stylesheet(material_proxy_name)
-
-    # TODO: change to boilerplate file stored in material_proxy package
-    def make_material_proxy_initializer(self, material_proxy_name):
-        initializer_file_name = os.path.join(self.directory_name, material_proxy_name, '__init__.py')
-        initializer = file(initializer_file_name, 'w')
-        line = 'from abjad.tools.importtools._import_structured_package import _import_structured_package\n'
-        initializer.write(line)
-        initializer.write('\n')
-        initializer.write("_import_structured_package(__path__[0], globals(), 'baca')\n")
-        initializer.close() 
-
     # TODO: implement MaterialPackageProxyClassFile object to model and customize these settings
     def make_material_proxy_class_file(self, material_proxy_name, generic_output_name):
         class_file_name = os.path.join(self.directory_name, material_proxy_name, material_proxy_name + '.py')
@@ -128,6 +99,36 @@ class MaterialPackageMakerWrangler(PackageWrangler):
         lines.append("        lines.append('{} = {!r}'.format(self.material_underscored_name, output_material)")
         class_file.write('\n'.join(lines))
         class_file.close()
+
+    # TODO: change to boilerplate file stored in material_proxy package
+    def make_material_proxy_initializer(self, material_proxy_name):
+        initializer_file_name = os.path.join(self.directory_name, material_proxy_name, '__init__.py')
+        initializer = file(initializer_file_name, 'w')
+        line = 'from abjad.tools.importtools._import_structured_package import _import_structured_package\n'
+        initializer.write(line)
+        initializer.write('\n')
+        initializer.write("_import_structured_package(__path__[0], globals(), 'baca')\n")
+        initializer.close() 
+
+    def make_material_proxy_interactively(self):
+        getter = self.make_new_getter(where=self.where())
+        getter.append_string('material proxy name')
+        material_proxy_name = getter.run()
+        if self.backtack():
+            return
+        assert iotools.is_uppercamelcase_string(material_proxy_name)
+        assert material_proxy_name.endswith('Maker')
+        getter = self.make_new_getter(where=self.where())
+        getter.append_string('generic output product')
+        generic_output_product = getter.run()
+        if self.backtrack():
+            return
+        material_proxy_directory = os.path.join(self.directory_name, material_proxy_name)
+        os.mkdir(material_proxy_directory)
+        self.make_material_proxy_initializer(material_proxy_name)
+        self.make_material_proxy_class_file(material_proxy_name, generic_output_product)
+        self.make_material_proxy_stylesheet(material_proxy_name)
+
 
     # TODO: change to boilerplate file stored somewhere
     def make_material_proxy_stylesheet(self, material_proxy_name):

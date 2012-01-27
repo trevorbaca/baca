@@ -26,8 +26,8 @@ def test_PitchRangeEditor_make_target_02():
     assert editor.ts == (1,)
 
     editor = baca.scf.editors.PitchRangeEditor()
-    editor.run(user_input='sco')
-    assert editor.ts == (1,)
+    editor.run(user_input='sco q')
+    assert editor.ts == (2,)
 
     editor = baca.scf.editors.PitchRangeEditor()
     editor.run(user_input='stu')

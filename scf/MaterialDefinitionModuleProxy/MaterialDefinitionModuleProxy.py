@@ -1,12 +1,12 @@
-from baca.scf.ModuleProxy import ModuleProxy
+from baca.scf.MaterialModuleProxy import MaterialModuleProxy
 from baca.scf.helpers import safe_import
 import os
 
 
-class MaterialDefinitionModuleProxy(ModuleProxy):
+class MaterialDefinitionModuleProxy(MaterialModuleProxy):
 
     def __init__(self, module_importable_name, session=None):
-        ModuleProxy.__init__(self, module_importable_name, session=session)
+        MaterialModuleProxy.__init__(self, module_importable_name, session=session)
         self.output_material_module_import_lines = []
         self.body_lines = []
         self.parse()
@@ -14,10 +14,16 @@ class MaterialDefinitionModuleProxy(ModuleProxy):
     ### READ-ONLY PUBLIC ATTRIBUTES ###
 
     @property
+    def is_user_finalized(self):
+        # TODO: maybe replace with bool(self.material_definition)
+        return bool(self.import_output_material_module_import_statements_and_material_definition()[1])
+
+    @property
     def output_material_module_import_statements(self):
         self.unimport()
-        result = safe_import(locals(), self.module_short_name, 'output_material_module_import_statements',
-            source_parent_module_importable_name=self.parent_module_importable_name)
+        result = safe_import(
+            locals(), self.module_short_name, 'output_material_module_import_statements',
+            source_parent_package_importable_name=self.parent_package_importable_name)
         # keep list from persisting between multiple calls to this method
         if result:
             result = list(result)
@@ -39,12 +45,19 @@ class MaterialDefinitionModuleProxy(ModuleProxy):
         columns = len(self.material_underscored_name) + 3
         os.system("vi + -c'norm {}l' {}".format(columns, self.full_file_name))
 
-    def import_material_definition(self):
-        self.unimport()
-        return safe_import(locals(), self.module_short_name, self.material_underscored_name,                 
-            source_parent_module_importable_name=self.parent_module_importable_name)
+    def import_output_material_module_import_statements_and_material_definition(self):
+        if os.path.exists(self.full_file_name):
+            file_pointer = open(self.full_file_name, 'r')
+            file_contents_string = file_pointer.read()
+            file_pointer.close()
+            exec(file_contents_string)
+            material_definition = locals().get(self.material_underscored_name)
+            output_material_module_import_statements = locals().get(
+                'output_material_module_import_statements')
+            return output_material_module_import_statements, material_definition
 
     def parse(self):
+        is_parsable = True
         material_definition_module = file(self.full_file_name, 'r')
         encoding_directives = []
         docstring_lines = []
@@ -78,13 +91,14 @@ class MaterialDefinitionModuleProxy(ModuleProxy):
             elif current_section == 'body':
                 body_lines.append(line)
             else:
-                raise ValueError('{!r}: can not parse line: {!r}.'.format(self.full_file_name, line))
+                is_parsable = False
         material_definition_module.close()
         self.encoding_directives = encoding_directives[:]
         self.docstring_lines = docstring_lines[:]
         self.setup_statements = setup_statements[:]
         self.output_material_module_import_lines = output_material_module_import_lines[:]
         self.body_lines = body_lines[:]
+        return is_parsable
 
     def write_stub_data_material_definition_to_disk(self):
         self.clear()

@@ -21,6 +21,10 @@ def test_ScorePackageProxy_show_hidden_menu_entries_01():
       '     toggle menu (tm)',
       '     show menu client (where)',
       '',
+      '     fix package structure (fix)',
+      '     list directory contents (ls)',
+      '     profile package structure (profile)',
+      '     remove score package (removescore)',
       '     manage repository (svn)',
       '     manage tags (tags)',
       '']

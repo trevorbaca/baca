@@ -12,26 +12,18 @@ class ModuleProxy(ParsableFileProxy):
 
     ### READ-ONLY ATTRIBUTES ###
 
-    # TODO: abstract out to MaterialModuleProxy
     @property
-    def material_package_importable_name(self):
-        return self.parent_module_importable_name
-    
-    # TODO: abstract out to MaterialModuleProxy
-    @property
-    def material_spaced_name(self):
-        return self.material_underscored_name.replace('_', ' ')
+    def grandparent_package_directory_name(self):
+        return self.package_importable_name_to_directory_name(self.grandparent_package_importable_name)
 
-    # TODO: abstract out to MaterialModuleProxy
     @property
-    def material_underscored_name(self):
-        return self.module_importable_name.split('.')[-2]
+    def grandparent_package_importable_name(self):
+        return '.'.join(self.module_importable_name.split('.')[:-2])
 
-    # TODO: abstract out to MaterialModuleProxy
     @property
-    def materials_package_importable_name(self):
-        return '.'.join(self.parent_module_importable_name.split('.')[:-1])
-    
+    def grandparent_package_initializer_file_name(self):
+        return os.path.join(self.grandparent_package_directory_name, '__init__.py')
+
     @property
     def module_importable_name(self):
         return self._module_importable_name
@@ -41,9 +33,17 @@ class ModuleProxy(ParsableFileProxy):
         return self.module_importable_name.split('.')[-1]
 
     @property
-    def parent_module_importable_name(self):
+    def parent_package_directory_name(self):
+        return self.package_importable_name_to_directory_name(self.parent_package_importable_name)
+
+    @property
+    def parent_package_importable_name(self):
         return '.'.join(self.module_importable_name.split('.')[:-1])
 
+    @property
+    def parent_package_initializer_file_name(self):
+        return os.path.join(self.parent_package_directory_name, '__init__.py')
+        
     ### PUBLIC METHODS ###
 
     def run_abjad(self, prompt=True):
@@ -56,11 +56,3 @@ class ModuleProxy(ParsableFileProxy):
 
     def unimport(self):
         self.remove_package_importable_name_from_sys_modules(self.module_importable_name)
-
-    # TODO: abstract out to MaterialModuleProxy
-    def unimport_material_package(self):
-        self.remove_package_importable_name_from_sys_modules(self.material_package_importable_name)
-
-    # TODO: abstract out to MaterialModuleProxy
-    def unimport_materials_package(self):
-        self.remove_package_importable_name_from_sys_modules(self.materials_package_importable_name)

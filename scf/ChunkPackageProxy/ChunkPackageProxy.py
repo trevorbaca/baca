@@ -27,6 +27,13 @@ class ChunkPackageProxy(PackageProxy):
 
     ### PUBLIC METHODS ###
 
+    def handle_main_menu_result(self, result):
+        if result == 'd':
+            self.remove()
+            return False
+        elif result == 'n':
+            self.initializer_file_proxy.view()
+
     def make_chunk(self):
         self.print_not_implemented()
 
@@ -40,13 +47,6 @@ class ChunkPackageProxy(PackageProxy):
         # TODO: create directory and do other stuff here
         line = 'chunk created.'
         self.proceed(line, prompt=prompt)
-
-    def handle_main_menu_result(self, result):
-        if result == 'd':
-            self.remove()
-            return False
-        elif result == 'n':
-            self.initializer_file_proxy.view()
 
     def make_main_menu(self):
         menu, section = self.make_new_menu(where=self.where())

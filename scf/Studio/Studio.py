@@ -12,7 +12,7 @@ class Studio(SCFObject):
     def __init__(self, session=None):
         SCFObject.__init__(self, session=session)
         self._global_proxy = HomePackageProxy(session=self.session)
-        self._score_wrangler = ScorePackageWrangler(session=self.session)
+        self._score_package_wrangler = ScorePackageWrangler(session=self.session)
 
     ### READ-ONLY PUBLIC ATTRIBUTES ###
 
@@ -29,38 +29,31 @@ class Studio(SCFObject):
         return '{} scores'.format(self.session.scores_to_show)
 
     @property
-    def score_wrangler(self):
-        return self._score_wrangler
+    def score_package_wrangler(self):
+        return self._score_package_wrangler
 
     ### PUBLIC METHODS ###
 
     def edit_score_interactively(self, score_package_importable_name):
-        score_proxy = self.score_wrangler.get_package_proxy(score_package_importable_name)
-        score_proxy.session.current_score_package_short_name = score_package_importable_name
+        score_package_proxy = self.score_package_wrangler.get_package_proxy(score_package_importable_name)
+        score_package_proxy.session.current_score_package_short_name = score_package_importable_name
         # TODO: use cache keyword
         breadcrumbs = self.breadcrumb_stack[:]
         self.session._breadcrumb_stack = []
-        score_proxy.run()
+        score_package_proxy.run()
         self.session._breadcrumb_stack = breadcrumbs
+        self.session.current_score_package_name = None
 
     def get_next_score_package_short_name(self):
-        score_package_short_names = self.score_wrangler.score_package_short_names_to_display
+        score_package_short_names = self.score_package_wrangler.score_package_short_names_to_display
         if self.session.current_score_package_short_name is None:
             return score_package_short_names[0]
         index = score_package_short_names.index(self.session.current_score_package_short_name)
         next_index = (index + 1) % len(score_package_short_names)
         return score_package_short_names[next_index]
 
-    def get_prev_score_package_short_name(self):
-        score_package_short_names = self.score_wrangler.score_package_short_names_to_display
-        if self.session.current_score_package_short_name is None:
-            return score_package_short_names[-1]
-        index = score_package_short_names.index(self.session.current_score_package_short_name)
-        prev_index = (index - 1) % len(score_package_short_names)
-        return score_package_short_names[prev_index]
-
     # TODO: write test
-    def get_purview_interactively(self, clear=True, cache=False):
+    def get_package_root_name_interactively(self, clear=True, cache=False):
         self.cache_breadcrumbs(cache=cache)
         while True:
             menu = self.make_score_selection_menu()
@@ -68,13 +61,21 @@ class Studio(SCFObject):
             last_section.tokens.insert(0, ('baca', 'global (default)'))
             last_section.default_index = 0
             menu.explicit_title = 'select location:'
-            purview_name = menu.run(clear=clear)
+            package_root_name = menu.run(clear=clear)
             if self.backtrack():
                 self.restore_breadcrumbs(cache=cache)
                 return
-            if purview_name:
+            if package_root_name:
                 self.restore_breadcrumbs(cache=cache)
-                return purview_name
+                return package_root_name
+
+    def get_prev_score_package_short_name(self):
+        score_package_short_names = self.score_package_wrangler.score_package_short_names_to_display
+        if self.session.current_score_package_short_name is None:
+            return score_package_short_names[-1]
+        index = score_package_short_names.index(self.session.current_score_package_short_name)
+        prev_index = (index - 1) % len(score_package_short_names)
+        return score_package_short_names[prev_index]
 
     def handle_main_menu_result(self, result):
         if not isinstance(result, str):
@@ -87,13 +88,17 @@ class Studio(SCFObject):
             self.print_not_implemented()
         elif result == 'm':
             breadcrumb = self.pop_breadcrumb()
-            self.global_proxy.material_wrangler.run(head=self.studio_package_importable_name)
+            self.global_proxy.material_package_wrangler.run(head=self.studio_package_importable_name)
+            self.push_breadcrumb(breadcrumb)
+        elif result == 'new':
+            breadcrumb = self.pop_breadcrumb()
+            self.score_package_wrangler.make_score_package_interactively(head=self.studio_package_importable_name)
             self.push_breadcrumb(breadcrumb)
         elif result == 'mb':
             self.session.scores_to_show = 'mothballed'
         elif result == 'svn':
             self.manage_svn()
-        elif result in self.score_wrangler.score_package_short_names_to_display:
+        elif result in self.score_package_wrangler.score_package_short_names_to_display:
             self.edit_score_interactively(result)
     
     def handle_svn_menu_result(self, result):
@@ -103,27 +108,27 @@ class Studio(SCFObject):
         if result == 'add':
             self.global_proxy.svn_add()
         elif result == 'add_scores':
-            self.score_wrangler.svn_add()
+            self.score_package_wrangler.svn_add()
         elif result == 'ci':
             self.global_proxy.svn_ci()
             return True
         elif result == 'ci_scores':
-            self.score_wrangler.svn_ci()
+            self.score_package_wrangler.svn_ci()
         elif result == 'pytest':
             self.global_proxy.run_py_test()
         elif result == 'pytest_scores':
-            self.score_wrangler.run_py_test()
+            self.score_package_wrangler.run_py_test()
         elif result == 'pytest_all':
             self.run_py_test_all()
         elif result == 'st':
             self.global_proxy.svn_st()
         elif result == 'st_scores':
-            self.score_wrangler.svn_st()
+            self.score_package_wrangler.svn_st()
         elif result == 'up':
             self.global_proxy.svn_up()
             return True
         elif result == 'up_scores':
-            self.score_wrangler.svn_up()
+            self.score_package_wrangler.svn_up()
             return True
         return this_result
 
@@ -132,6 +137,7 @@ class Studio(SCFObject):
         section = menu.make_new_section()
         section.append(('m', 'work with materials'))
         section.append(('k', 'work with sketches'))
+        section.append(('new', 'make new score'))
         section = menu.make_new_section(is_hidden=True)
         section.append(('svn', 'work with repository'))
         section.append(('active', 'show active scores only'))
@@ -141,9 +147,8 @@ class Studio(SCFObject):
 
     def make_score_selection_menu(self):
         menu, section = self.make_new_menu(where=self.where(), is_numbered=True, is_keyed=False)
-        score_titles = self.score_wrangler.score_titles_with_years
-        score_package_short_names = self.score_wrangler.score_package_short_names_to_display
-        #section.tokens = zip(score_package_short_names, score_titles)
+        score_package_short_names = self.score_package_wrangler.score_package_short_names_to_display
+        score_titles = self.score_package_wrangler.score_titles_with_years
         tokens = zip(score_package_short_names, score_titles)
         tmp = iotools.strip_diacritics_from_binary_string
         tokens.sort(lambda x, y: cmp(tmp(x[1]), tmp(y[1])))
@@ -166,6 +171,23 @@ class Studio(SCFObject):
         section.append(('pytest_scores', 'pytest_scores'))
         section.append(('pytest_all', 'pytest_all'))
         return menu
+
+    def manage_svn(self, clear=True):
+        while True:
+            self.push_breadcrumb('repository commands')
+            menu = self.make_svn_menu()
+            result = menu.run(clear=clear)
+            if self.session.is_backtracking_to_score:
+                self.session.is_backtracking_to_score = False
+                self.pop_breadcrumb()
+                continue
+            elif self.backtrack():
+                break
+            self.handle_svn_menu_result(result)
+            if self.backtrack():
+                break
+            self.pop_breadcrumb()
+        self.pop_breadcrumb()
 
     def run(self, user_input=None, clear=True, cache=False):
         type(self).__init__(self)
@@ -222,26 +244,9 @@ class Studio(SCFObject):
         self.pop_breadcrumb()
         self.restore_breadcrumbs(cache=cache)
 
-    def manage_svn(self, clear=True):
-        while True:
-            self.push_breadcrumb('repository commands')
-            menu = self.make_svn_menu()
-            result = menu.run(clear=clear)
-            if self.session.is_backtracking_to_score:
-                self.session.is_backtracking_to_score = False
-                self.pop_breadcrumb()
-                continue
-            elif self.backtrack():
-                break
-            self.handle_svn_menu_result(result)
-            if self.backtrack():
-                break
-            self.pop_breadcrumb()
-        self.pop_breadcrumb()
-
     def run_py_test_all(self, prompt=True):
         proc = subprocess.Popen(
-            'py.test {} {}'.format(self.directory_name, self.score_wrangler.directory_name), 
+            'py.test {} {}'.format(self.directory_name, self.score_package_wrangler.directory_name), 
             shell=True, stdout=subprocess.PIPE)
         lines = [line.strip() for line in proc.stdout.readlines()]
         if lines:

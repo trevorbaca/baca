@@ -1,6 +1,7 @@
 from abjad.tools import iotools
 from baca.scf.DirectoryProxy import DirectoryProxy
 from baca.scf.InitializerFileProxy import InitializerFileProxy
+from baca.scf.helpers import safe_import
 import os
 import sys
 
@@ -44,6 +45,15 @@ class PackageProxy(DirectoryProxy):
             return os.path.isfile(self.initializer_file_name)
 
     @property
+    def has_parent_initializer(self):
+        if self.parent_initializer_file_name is not None:
+            return os.path.isfile(self.parent_initializer_file_name)
+
+    @property
+    def has_tags_file(self):
+        return os.path.isfile(self.tags_file_name)
+
+    @property
     def initializer_file_name(self):
         if self.directory_name is not None:
             return os.path.join(self.directory_name, '__init__.py')
@@ -51,11 +61,16 @@ class PackageProxy(DirectoryProxy):
     # TODO: write test
     @property
     def initializer_file_proxy(self):
-        return InitializerFileProxy(self.initializer_file_name, session=self.session)
+        if self.has_initializer:
+            return InitializerFileProxy(self.initializer_file_name, session=self.session)
 
     @property
     def package_importable_name(self):
         return self._package_importable_name
+
+    @property
+    def package_root_name(self):
+        return self.package_importable_name.split('.')[0]
 
     @property
     def package_short_name(self):
@@ -73,29 +88,19 @@ class PackageProxy(DirectoryProxy):
                 self.parent_package_importable_name)
             return os.path.join(parent_directory_name, '__init__.py')
 
+    # TODO: write test
+    @property
+    def parent_initializer_file_proxy(self):
+        if self.has_parent_initializer:
+            return InitializerFileProxy(
+                self.parent_initializer_file_name, session=self.session)
+
     @property
     def parent_package_importable_name(self):
         if self.package_importable_name is not None:
             result = '.'.join(self.package_importable_name.split('.')[:-1])
             if result:
                 return result
-
-    # TODO: write test; collapse with purview_name
-    @property
-    def purview(self):
-        import baca
-        if self.score_package_short_name is None:
-            return baca.scf.HomePackageProxy()
-        else:
-            return baca.scf.ScorePackageProxy(self.score_package_short_name)
-
-    # TODO: write test; collapse with purview
-    @property
-    def purview_name(self):
-        if self.score_package_short_name is None:
-            return self.studio_package_importable_name
-        else:
-            return self.score_package_short_name
 
     # TODO: write test; or remove?
     @property
@@ -110,12 +115,25 @@ class PackageProxy(DirectoryProxy):
         if not self.package_importable_name.startswith(self.studio_package_importable_name):
             return self.package_importable_name.split('.')[0]
 
+    @property
+    def tags_file_name(self):
+        return os.path.join(self.directory_name, 'tags.py')
+
+    @property
+    def tags_file_proxy(self):
+        if self.has_tags_file:
+            return InitializerFileProxy(self.tags_file_name, session=self.session)
+
+
     ### PUBLIC METHODS ###
 
     def add_tag(self, tag_name, tag_value):
         tags = self.get_tags()
         tags[tag_name] = tag_value
-        self.initializer_file_proxy.write_tags_to_disk(tags)
+        if self.has_tags_file:
+            self.tags_file_proxy.write_tags_to_disk(tags)
+        else:
+            self.initializer_file_proxy.write_tags_to_disk(tags)
 
     def add_tag_interactively(self):
         getter = self.make_new_getter(where=self.where())
@@ -137,7 +155,10 @@ class PackageProxy(DirectoryProxy):
     def delete_tag(self, tag_name):
         tags = self.get_tags()
         del(tags[tag_name])
-        self.initializer_file_proxy.write_tags_to_disk(tags)
+        if self.has_tags_file:
+            self.tags_file_proxy.write_tags_to_disk(tags)
+        else:
+            self.initializer_file_proxy.write_tags_to_disk(tags)
 
     def delete_tag_interactively(self):
         getter = self.make_new_getter(where=self.where())
@@ -164,14 +185,15 @@ class PackageProxy(DirectoryProxy):
         line = '{!r}'.format(tag)
         self.proceed(line)
 
-    # TODO: try reimplementing with safe_import()
     def get_tags(self):
         import collections
-        try:
-            command = 'from {} import tags'.format(self.package_importable_name)
-            exec(command)
-        except ImportError:    
+        tags = self.read_tags_from_tags_file()
+        if tags is None:
+            tags = safe_import(locals(), self.package_short_name, 'tags', 
+                source_parent_package_importable_name=self.parent_package_importable_name)
+        if tags is None:
             tags = collections.OrderedDict([])
+        #tags = self.read_tags_from_disk() or collections.OrderedDict([])
         return tags
 
     def handle_tags_menu_result(self, result):
@@ -211,17 +233,16 @@ class PackageProxy(DirectoryProxy):
         self.pop_breadcrumb()
         self.restore_breadcrumbs(cache=cache)
 
-    # TODO: write tests
-    def package_importable_name_to_purview(self, package_importable_name):
-        import baca
-        if package_importable_name is None:
+    def read_tags_from_tags_file(self):
+        from collections import OrderedDict
+        if not os.path.exists(self.tags_file_name):
             return
-        elif package_importable_name.split('.')[0] == self.studio_package_importable_name:
-            return baca.scf.HomePackageProxy()
-        elif package_importable_name.split('.')[0] in os.listdir(os.environ.get('SCORES')):
-            return baca.scf.ScorePackageProxy(package_importable_name.split('.')[0])
-        else:
-            raise ValueError('Unknown package importable name {!r}.'.format(package_importable_name))
+        file_pointer = open(self.tags_file_name, 'r')
+        file_contents_string = file_pointer.read()
+        file_pointer.close()
+        exec(file_contents_string)
+        result = locals().get('tags') or OrderedDict([])
+        return result
 
     def remove(self):
         result = DirectoryProxy.remove(self)

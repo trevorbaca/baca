@@ -31,6 +31,17 @@ class ParsableFileProxy(FileProxy):
             lines[-1] = lines[-1].strip('\n')
         return lines
 
+    @property
+    def is_parsable(self):
+        return self.parse()
+
+    @property
+    def is_readable(self):
+        if self.is_parsable:
+            if self.is_exceptionless:
+                return True
+        return False
+
     ### PUBLIC METHODS ###
 
     def print_to_screen(self):

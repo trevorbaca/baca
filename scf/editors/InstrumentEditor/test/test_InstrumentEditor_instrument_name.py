@@ -23,9 +23,7 @@ def test_InstrumentEditor_instrument_name_02():
 
     studio = baca.scf.Studio()
     studio.run(user_input='1 perf 1 1 in -99 q')
-    transcript = studio.transcript
-    assert len(transcript) == 13
-    assert transcript[-1][0][:10] == transcript[-3][0][:10]
+    assert studio.ts == (13, (1, 5, 7))
 
 
 def test_InstrumentEditor_instrument_name_03():

@@ -1,7 +1,6 @@
 from collections import OrderedDict
-from output_material import demo_material
 
 
 tags = OrderedDict([
-    ('should_have_illustration', True),
+    ('should_have_illustration', False),
     ('material_package_maker_class_name', None)])

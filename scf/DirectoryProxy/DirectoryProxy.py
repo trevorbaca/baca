@@ -7,8 +7,9 @@ import sys
 class DirectoryProxy(SCFObject):
 
     def __init__(self, directory_name, session=None):
-        assert isinstance(directory_name, str)
-        assert os.path.exists(directory_name)
+        #assert isinstance(directory_name, str)
+        assert isinstance(directory_name, (str, type(None)))
+        #assert os.path.exists(directory_name)
         SCFObject.__init__(self, session=session)
         self._directory_name = directory_name
 
@@ -29,6 +30,14 @@ class DirectoryProxy(SCFObject):
     ### READ-ONLY PUBLIC ATTRIBUTES ###
 
     @property
+    def directory_contents(self):
+        for file_name in os.listdir(self.directory_name):
+            if file_name.endswith('.pyc'):
+                full_file_name = os.path.join(self.directory_name, file_name)
+                os.remove(full_file_name)
+        return os.listdir(self.directory_name)
+
+    @property
     def directory_name(self):
         return self._directory_name
 
@@ -37,17 +46,14 @@ class DirectoryProxy(SCFObject):
         if self.directory_name is None:
             return False
         command = 'svn st {}'.format(self.directory_name)
-        proc = subprocess.Popen(command, shell=True, stdout=subprocess.PIPE)
+        proc = subprocess.Popen(command, shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
         first_line = proc.stdout.readline()
-        if first_line.startswith('?'):
+        if first_line.startswith(('?', 'svn: warning:')):
             return False
         else:
             return True
     
     ### PUBLIC METHODS ###
-
-    def make_directory(self):
-        os.mkdir(self.directory_name)
 
     def get_directory_name_interactively(self):
         getter = self.make_new_getter(where=self.where())
@@ -57,9 +63,11 @@ class DirectoryProxy(SCFObject):
             return
         self.directory_name = result
 
-    def list_directory(self):
-        os.system('rm {}/*pyc'.format(self.directory_name))
-        os.system('ls {}'.format(self.directory_name))
+    def make_directory(self):
+        os.mkdir(self.directory_name)
+
+    def print_directory_contents(self):
+        self.display(self.directory_contents, capitalize_first_character=False)
         self.display('')
         self.session.hide_next_redraw = True
 
@@ -80,7 +88,7 @@ class DirectoryProxy(SCFObject):
             return
         if response == 'remove':
             command = 'rm -rf {}'.format(self.directory_name)
-            proc = subprocess.Popen(command, shell=True, stdout=subprocess.PIPE)
+            proc = subprocess.Popen(command, shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
             first_line = proc.stdout.readline()
             line = 'removed {}.\n'.format(self.directory_name)
             self.display(line)

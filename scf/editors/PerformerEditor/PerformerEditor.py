@@ -59,6 +59,20 @@ class PerformerEditor(InteractiveEditor):
         instruments = sequencetools.remove_sequence_elements_at_indices(instruments, instrument_indices)
         self.target.instruments[:] = instruments
     
+    def edit_instrument_interactively(self, instrument_number):
+        try:
+            instrument_number = int(instrument_number)
+        except:
+            return
+        if self.target.instrument_count < instrument_number:
+            line = 'there is no instrument number {}'.format(instrument_number)
+            self.proceed(line)
+            return
+        instrument_index = instrument_number - 1
+        instrument = self.target.instruments[instrument_index]
+        instrument_editor = InstrumentEditor(session=self.session, target=instrument)
+        instrument_editor.run()
+
     def edit_name_interactively(self):
         if self.target.name is None:
             spaced_variable_name = 'performer name'
@@ -84,20 +98,6 @@ class PerformerEditor(InteractiveEditor):
             self.edit_name_interactively()
         else:
             self.edit_instrument_interactively(result)
-
-    def edit_instrument_interactively(self, instrument_number):
-        try:
-            instrument_number = int(instrument_number)
-        except:
-            return
-        if self.target.instrument_count < instrument_number:
-            line = 'there is no instrument number {}'.format(instrument_number)
-            self.proceed(line)
-            return
-        instrument_index = instrument_number - 1
-        instrument = self.target.instruments[instrument_index]
-        instrument_editor = InstrumentEditor(session=self.session, target=instrument)
-        instrument_editor.run()
 
     def make_main_menu(self):
         menu, section = self.make_new_menu(where=self.where(), is_numbered=True)
@@ -129,32 +129,6 @@ class PerformerEditor(InteractiveEditor):
         instrument = self.target.instruments[old_instrument_index]
         self.target.instruments.remove(instrument)
         self.target.instruments.insert(new_instrument_index, instrument)
-
-    def set_initial_configuration_menu(self):
-        menu, section = self.make_new_menu(where=self.where(), is_numbered=True, is_ranged=True) 
-        section.section_title = 'select instruments'
-        likely_instruments = self.target.likely_instruments_based_on_performer_name
-        likely_instrument_names = [x().instrument_name for x in likely_instruments]
-        most_likely_instrument = self.target.most_likely_instrument_based_on_performer_name
-        default_index = None
-        if most_likely_instrument is not None:
-            most_likely_instrument_name = most_likely_instrument().instrument_name
-            assert most_likely_instrument_name in likely_instrument_names
-            most_likely_index = likely_instrument_names.index(most_likely_instrument_name)
-            likely_instrument_names[most_likely_index] = '{} (default)'.format(most_likely_instrument_name)
-            most_likely_number = most_likely_index + 1
-            default_index = most_likely_index
-        if likely_instruments:
-            section.tokens = likely_instrument_names
-            section.default_index = default_index
-            section = menu.make_new_section(is_keyed=False)
-            section.append(('other', 'other instruments'))
-        else:
-            section.tokens = instrumenttools.list_instrument_names()
-            section.default_index = default_index
-            section = menu.make_new_section(is_keyed=False)
-        section.append(('none', 'no instruments'))
-        return menu
 
     def set_initial_configuration_interactively(self, clear=True, cache=False):
         self.cache_breadcrumbs(cache=cache)
@@ -191,3 +165,29 @@ class PerformerEditor(InteractiveEditor):
             self.pop_breadcrumb()
         self.pop_breadcrumb()
         self.restore_breadcrumbs(cache=cache)
+
+    def set_initial_configuration_menu(self):
+        menu, section = self.make_new_menu(where=self.where(), is_numbered=True, is_ranged=True) 
+        section.section_title = 'select instruments'
+        likely_instruments = self.target.likely_instruments_based_on_performer_name
+        likely_instrument_names = [x().instrument_name for x in likely_instruments]
+        most_likely_instrument = self.target.most_likely_instrument_based_on_performer_name
+        default_index = None
+        if most_likely_instrument is not None:
+            most_likely_instrument_name = most_likely_instrument().instrument_name
+            assert most_likely_instrument_name in likely_instrument_names
+            most_likely_index = likely_instrument_names.index(most_likely_instrument_name)
+            likely_instrument_names[most_likely_index] = '{} (default)'.format(most_likely_instrument_name)
+            most_likely_number = most_likely_index + 1
+            default_index = most_likely_index
+        if likely_instruments:
+            section.tokens = likely_instrument_names
+            section.default_index = default_index
+            section = menu.make_new_section(is_keyed=False)
+            section.append(('other', 'other instruments'))
+        else:
+            section.tokens = instrumenttools.list_instrument_names()
+            section.default_index = default_index
+            section = menu.make_new_section(is_keyed=False)
+        section.append(('none', 'no instruments'))
+        return menu

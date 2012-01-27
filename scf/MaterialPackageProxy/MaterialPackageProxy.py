@@ -28,13 +28,15 @@ class MaterialPackageProxy(PackageProxy):
         return self.package_spaced_name
 
     @property
-    def has_complete_user_input_wrapper(self):
-        user_input_module_proxy = self.user_input_module_proxy
-        if user_input_module_proxy is not None:
-            user_input_wrapper = user_input_module_proxy.user_input_wrapper
-            if user_input_wrapper is not None:
-                return user_input_wrapper.is_complete
+    def has_complete_user_input_wrapper_in_memory(self):
+        if self.has_user_input_wrapper_in_memory:
+            return self.user_input_wrapper_in_memory.is_complete
         return False
+
+    @property
+    def has_complete_user_input_wrapper_on_disk(self):
+        if self.has_user_input_wrapper_on_disk:
+            return self.user_input_wrapper_on_disk.is_complete
 
     @property
     def has_illustration_builder_module(self):
@@ -55,9 +57,16 @@ class MaterialPackageProxy(PackageProxy):
         return False
 
     @property
+    def has_initializer(self):
+        if self.should_have_initializer:
+            return os.path.exists(self.initializer_file_name)
+        return False
+
+    @property
     def has_material_definition(self):
         if self.should_have_material_definition_module:
-            return bool(self.material_definition_module_proxy.import_material_definition())
+            if self.has_material_definition_module:
+                return bool(self.material_definition)
         return False
 
     @property
@@ -73,7 +82,8 @@ class MaterialPackageProxy(PackageProxy):
     @property
     def has_output_material(self):
         if self.should_have_output_material_module:
-            return bool(self.output_material_module_proxy.import_output_material())
+            if self.has_output_material_module:
+                return bool(self.output_material_module_proxy.import_output_material_safely())
         return False
 
     @property
@@ -94,9 +104,56 @@ class MaterialPackageProxy(PackageProxy):
         return False
 
     @property
-    def has_user_input_wrapper(self):
+    def has_user_input_wrapper_on_disk(self):
         if self.should_have_user_input_module:
-            return bool(self.user_input_module_proxy.import_user_input_wrapper())
+            return bool(self.user_input_module_proxy.read_user_input_wrapper_from_disk())
+        return False
+
+    @property
+    def has_user_input_wrapper_in_memory(self):
+        if self.should_have_user_input_module:
+            return bool(self.user_input_wrapper_in_memory)
+        return False
+
+    @property
+    def has_readable_illustration_builder_module(self):
+        if self.has_illustration_builder_module:
+            return self.illustration_builder_module_proxy.is_readable
+        return False
+
+    @property
+    def has_readable_initializer(self):
+        if self.has_initializer:
+            return self.initializer_file_proxy.is_readable
+        return False
+
+    @property
+    def has_readable_material_definition_module(self):
+        if self.has_material_definition_module:
+            return self.material_definition_module_proxy.is_readable
+        return False
+
+    @property
+    def has_readable_output_material_module(self):
+        if self.has_output_material_module:
+            return self.output_material_module_proxy.is_readable
+        return False
+
+    @property
+    def has_readable_user_input_module(self):
+        if self.has_user_input_module:
+            return self.user_input_module_proxy.is_readable
+        return False
+
+    @property
+    def has_user_finalized_illustration_builder_module(self):
+        if self.has_readable_illustration_builder_module:
+            return self.illustration_builder_module_proxy.is_user_finalized
+
+    @property
+    def has_user_finalized_material_definition_module(self):
+        if self.has_material_definition_module:
+            return self.material_definition_module_proxy.is_user_finalized
         return False
 
     @property
@@ -146,12 +203,18 @@ class MaterialPackageProxy(PackageProxy):
                 file(self.illustration_pdf_file_name, 'w').write('')
             return IllustrationPdfFileProxy(self.illustration_pdf_file_name, session=self.session)
 
+    @property
+    def initializer_has_output_material_safe_import_statement(self):
+        if self.has_initializer:
+            return self.initializer_file_proxy.has_safe_import_statement(
+                'output_material', self.material_underscored_name)
+
     # TODO: port
     @property
     def is_changed(self):
         self.print_not_implemented()
         material_definition = self.material_definition_module_proxy.import_material_definition()
-        output_material = self.output_material_module_proxy.import_output_material()
+        output_material = self.output_material_module_proxy.import_output_material_safely()
         return material_definition != output_material
 
     @property
@@ -166,6 +229,25 @@ class MaterialPackageProxy(PackageProxy):
     def is_makermade(self):
         return self.has_material_package_maker
 
+    # TODO: replace with self.material_definition_module_proxy.material_definition
+    @property
+    def material_definition(self):
+        if self.has_readable_material_definition_module:
+            pair = self.output_material_module_import_statements_and_material_definition
+            material_definition = pair[1]
+            return material_definition
+
+    @property
+    def output_material(self):
+        if self.has_readable_output_material_module:
+            return self.output_material_module_proxy.import_output_material()
+    
+    @property
+    def output_material_module_import_statements_and_material_definition(self):
+        if self.should_have_material_definition_module:
+            tmp = self.material_definition_module_proxy
+            return tmp.import_output_material_module_import_statements_and_material_definition()
+
     @property
     def material_definition_module_file_name(self):
         if self.should_have_material_definition_module:
@@ -179,10 +261,9 @@ class MaterialPackageProxy(PackageProxy):
     @property
     def material_definition_module_proxy(self):
         if self.should_have_material_definition_module:
-            if not self.has_material_definition_module:
-                file(self.material_definition_module_file_name, 'w').write('')    
-            return MaterialDefinitionModuleProxy(
-                self.material_definition_module_importable_name, session=self.session)
+            if self.has_material_definition_module:
+                return MaterialDefinitionModuleProxy(
+                    self.material_definition_module_importable_name, session=self.session)
 
     @property
     def material_package_directory(self):
@@ -193,8 +274,9 @@ class MaterialPackageProxy(PackageProxy):
     @property
     def material_package_maker(self):
         if self.material_package_maker_class_name is not None:
-            maker_class = safe_import(locals(), 'materialpackagemakers', self.material_package_maker_class_name,
-                source_parent_module_importable_name=self.scf_package_importable_name)
+            maker_class = safe_import(
+                locals(), 'materialpackagemakers', self.material_package_maker_class_name,
+                source_parent_package_importable_name=self.scf_package_importable_name)
             return maker_class
 
     @property
@@ -222,18 +304,20 @@ class MaterialPackageProxy(PackageProxy):
         return '.'.join(self.package_importable_name.split('.')[:-1])
 
     @property
-    def output_material(self):
-        if self.should_have_output_material_module:
-            return self.material_definition_module_proxy.import_material_definition()
-
-    @property
     def output_material_module_body_lines(self):
         if self.should_have_material_definition_module:
-            lines = []
-            output_material = self.output_material
-            lines.append('{} = {!r}'.format(self.material_underscored_name, output_material))
-            return lines
+            return self.output_material_module_import_statements_and_output_material_module_body_lines[1]
 
+    @property
+    def output_material_module_import_statements_and_output_material_module_body_lines(self):
+        if self.should_have_material_definition_module:
+            pair = self.output_material_module_import_statements_and_material_definition
+            output_material_module_import_statements, material_definition = pair
+            output_material_module_body_lines = []
+            output_material_module_body_lines.append('{} = {!r}'.format(
+                self.material_underscored_name, material_definition))
+            return output_material_module_import_statements, output_material_module_body_lines
+            
     @property
     def output_material_module_file_name(self): 
         if self.should_have_output_material_module:
@@ -247,9 +331,15 @@ class MaterialPackageProxy(PackageProxy):
     @property
     def output_material_module_proxy(self):
         if self.should_have_output_material_module:
-            if not self.has_output_material_module:
-                file(self.output_material_module_file_name, 'w').write('')    
-            return OutputMaterialModuleProxy(self.output_material_module_importable_name, session=self.session)
+            if self.has_output_material_module:
+                return OutputMaterialModuleProxy(
+                    self.output_material_module_importable_name, session=self.session)
+
+    @property
+    def parent_initializer_has_output_material_safe_import_statement(self):
+        if self.has_parent_initializer:
+            return self.parent_initializer_file_proxy.has_safe_import_statement(
+            self.material_underscored_name, self.material_underscored_name)
 
     @property
     def should_have_illustration(self):
@@ -269,6 +359,10 @@ class MaterialPackageProxy(PackageProxy):
     @property
     def should_have_illustration_pdf(self):
         return self.should_have_illustration
+
+    @property
+    def should_have_initializer(self):
+        return True
 
     @property
     def should_have_material_definition_module(self):
@@ -317,13 +411,53 @@ class MaterialPackageProxy(PackageProxy):
     ### PUBLIC METHODS ###
 
     def add_material_to_material_initializer(self):
-        self.initializer_file_proxy.add_protected_import_statement(
+        self.initializer_file_proxy.add_safe_import_statement(
             'output_material', self.material_underscored_name)
         
     def add_material_to_materials_initializer(self):
         parent_package = PackageProxy(self.parent_package_importable_name, session=self.session)
-        parent_package.initializer_file_proxy.add_protected_import_statement(
+        parent_package.initializer_file_proxy.add_safe_import_statement(
             self.material_underscored_name, self.material_underscored_name)
+
+    def delete_illustration_builder_module(self, prompt=True):
+        self.delete_illustration_pdf(prompt=False)
+        if self.has_illustration_builder_module:
+            self.illustration_builder_module_proxy.remove(prompt=prompt)
+
+    def delete_illustration_ly(self, prompt=True):
+        if self.has_illustration_ly:
+            self.illustration_ly_file_proxy.remove(prompt=prompt)
+
+    def delete_illustration_pdf(self, prompt=True):
+        self.delete_illustration_ly(prompt=False)
+        if self.has_illustration_pdf:
+            self.illustration_pdf_file_proxy.remove(prompt=prompt)
+
+    def delete_material_definition_module(self, prompt=True):
+        self.delete_output_material_module(prompt=False)
+        self.delete_illustration_builder_module(prompt=False)
+        if self.has_material_definition_module:
+            self.material_definition_module_proxy.remove(prompt=prompt)
+
+    def delete_material_package(self):
+        self.remove()
+        self.session.is_backtracking_locally = True
+
+    def delete_output_material_module(self, prompt=True):
+        self.delete_illustration_builder_module(prompt=False)
+        if self.has_output_material_module:
+            self.output_material_module_proxy.remove(prompt=prompt)
+
+    # NOTE: not currently used
+    def delete_parent_initializer_pyc_file(self):
+        if self.has_parent_initializer:
+            parent_initializer_pyc_file_name = self.parent_initializer_file_name + 'c'
+            if os.path.exists(parent_initializer_pyc_file_name):
+                os.remove(parent_initializer_pyc_file_name)
+        
+    def delete_user_input_module(self, prompt=True):
+        if self.has_user_input_module:
+            self.user_input_module_proxy.remove(prompt=prompt)
 
     # TODO: audit
     def handle_main_menu_result(self, result):
@@ -331,7 +465,7 @@ class MaterialPackageProxy(PackageProxy):
         if result == 'uic':
             self.clear_user_input_wrapper(prompt=False)    
         elif result == 'uid':
-            self.user_input_module_proxy.remove(prompt=True)
+            self.delete_user_input_module(prompt=True)
         elif result == 'uil':
             self.load_user_input_wrapper_demo_values(prompt=False)
         elif result == 'uip':
@@ -339,20 +473,23 @@ class MaterialPackageProxy(PackageProxy):
         elif result == 'uis':
             self.show_user_input_demo_values(prompt=True)
         elif result == 'uit':
-            self.session.use_current_user_input_values_as_default = \
-                not self.session.use_current_user_input_values_as_default
-        elif result == 'mdd':
-            self.material_definition_module_proxy.remove(prompt=True)
+            self.session.swap_user_input_values_default_status()
+        elif result == 'uimv':
+            self.user_input_module_proxy.view()
+        elif result == 'mdcanned':
+            self.material_definition_module_proxy.write_canned_file_to_disk(prompt=True)
+        elif result == 'mddelete':
+            self.delete_material_definition_module(prompt=True)
         elif result == 'mde':
             self.material_definition_module_proxy.edit()
-        elif result == 'mdt':
-            self.material_definition_module_proxy.write_stub_to_disk(self.is_data_only, prompt=True)
+        elif result == 'mdstub':
+            self.write_stub_material_definition_module_to_disk(prompt=True)
         elif result == 'mdx':
             self.material_definition_module_proxy.run_python(prompt=True)
-        elif result == 'mdxi':
+        elif result == 'mdxe':
             self.material_definition_module_proxy.run_abjad(prompt=True)
         elif result == 'ibd':
-            self.illustration_builder_module_proxy.remove(prompt=True)
+            self.delete_illustration_builder_module(prompt=True)
         elif result == 'ibe':
             self.illustration_builder_module_proxy.edit()
         elif result == 'ibt':
@@ -367,93 +504,93 @@ class MaterialPackageProxy(PackageProxy):
             self.select_stylesheet_interactively()
         elif result == 'stl':
             self.manage_stylesheets()
-        elif result == 'dc':
+        elif result == 'omm':
             self.write_output_material_to_disk()
-        elif result == 'di':
+        elif result == 'omcanned':
+            self.output_material_module_proxy.write_canned_file_to_disk(prompt=True)
+        elif result == 'omdelete':
+            self.delete_output_material_module(prompt=True)
+        elif result == 'omv':
             self.output_material_module_proxy.view()
-        elif result == 'dd':
-            self.output_material_module_proxy.remove(prompt=True)
-        elif result == 'lyc':
+        elif result == 'omfetch':
+            self.output_material_module_proxy.display_output_material()
+        elif result == 'lym':
             self.write_illustration_ly_to_disk(is_forced=True)
         elif result == 'lyd':
-            self.illustration_ly_file_proxy.remove(prompt=True)
-        elif result == 'lyi':
+            self.delete_illustration_ly(prompt=True)
+        elif result == 'lyv':
             self.illustration_ly_file_proxy.view()
-        elif result == 'pdfc':
+        elif result == 'pdfm':
             self.write_illustration_ly_and_pdf_to_disk(is_forced=True)
-            self.illustration_pdf_file_proxy.view()
         elif result == 'pdfd':
-            self.illustration_pdf_file_proxy.remove(prompt=True)
-        elif result == 'pdfi':
+            self.delete_illustration_pdf(prompt=True)
+        elif result == 'pdfv':
             self.illustration_pdf_file_proxy.view()
         elif result == 'del':
-            self.remove()
-            self.session.is_backtracking_locally = True
-        elif result == 'init':
+            self.delete_material_package()
+        elif result == 'inr':
+            self.initializer_file_proxy.restore_interactively(prompt=True)
+        elif result == 'inv':
             self.initializer_file_proxy.view()
+        elif result == 'incanned':
+            self.initializer_file_proxy.write_canned_file_to_disk(prompt=True)
+        elif result == 'instub':
+            self.initializer_file_proxy.write_stub_file_to_disk(prompt=True)
         elif result == 'ren':
-            self.rename_material()
+            self.rename_material_interactively()
         elif result == 'reg':
-            self.regenerate_everything(is_forced=True)
+            self.regenerate_everything(prompt=True)
         # TODO: add to package-level hidden menu
         elif result == 'tags':
             self.manage_tags()
         # TODO: add to directory-level hidden menu
         elif result == 'ls':
-            self.list_directory()
+            self.print_directory_contents()
         elif mathtools.is_integer_equivalent_expr(result):
             self.edit_user_input_at_number(int(result))
         else:
             raise ValueError
 
     def make_main_menu(self):
-        if self.is_handmade:
-            menu, hidden_section = self.make_main_menu_for_material_made_by_hand()
-        else:
-            menu, hidden_section = self.make_main_menu_for_material_made_with_material_package_maker()
+        menu, hidden_section = self.make_new_menu(where=self.where(), is_hidden=True)
+        self.make_main_menu_section_for_initializer(menu, hidden_section)
+        self.make_main_menu_sections(menu, hidden_section)
         self.make_main_menu_section_for_illustration_ly(menu, hidden_section)
         self.make_main_menu_section_for_illustration_pdf(menu, hidden_section)
         self.make_main_menu_section_for_hidden_entries(menu)
         return menu
     
-    def make_main_menu_for_material_made_by_hand(self):
-        menu, hidden_section = self.make_new_menu(where=self.where(), is_hidden=True)
-        self.make_main_menu_section_for_material_definition(menu, hidden_section)
-        self.make_main_menu_section_for_output_material(menu, hidden_section)
-        self.make_main_menu_section_for_illustration_builder(menu, hidden_section)
-        self.make_main_menu_section_for_stylesheet_management(menu, hidden_section)
-        return menu, hidden_section
-
     def make_main_menu_section_for_hidden_entries(self, main_menu):
         hidden_section = main_menu.make_new_section(is_hidden=True)
-        hidden_section.append(('del', 'delete material'))
-        hidden_section.append(('init', 'edit initializer'))
-        hidden_section.append(('ls', 'list directory'))
-        hidden_section.append(('reg', 'regenerate material'))
-        hidden_section.append(('ren', 'rename material'))
+        hidden_section.append(('del', 'delete package'))
+        hidden_section.append(('ls', 'list package'))
+        hidden_section.append(('reg', 'regenerate package'))
+        hidden_section.append(('ren', 'rename package'))
         hidden_section.append(('stl', 'manage stylesheets'))
         hidden_section.append(('tags', 'manage tags'))
 
     def make_main_menu_section_for_illustration_builder(self, main_menu, hidden_section):
         section = main_menu.make_new_section()
         if self.has_output_material:
-            if self.has_illustration_builder_module:
+            if self.should_have_illustration:
+                if not self.has_illustration_builder_module:
+                    self.illustration_builder_module_proxy.write_stub_to_disk(prompt=False)
                 section.append(('ibe', 'illustration builder - edit'))
                 if self.has_output_material:
                     section.append(('ibx', 'illustration builder - execute'))
                 hidden_section.append(('ibd', 'illustration builder - delete'))
                 hidden_section.append(('ibt', 'illustration builder - stub'))
-                hidden_section.append(('ibxi', 'illustration builder - execute & inspect'))
-            elif self.should_have_illustration:
-                section.append(('ibt', 'illustration builder - stub'))
+                hidden_section.append(('ibex', 'illustration builder - edit & execute'))
+                section.append(('sss', 'score stylesheet - select'))
+                hidden_section.append(('ssm', 'source stylesheet - edit'))
 
     def make_main_menu_section_for_illustration_ly(self, main_menu, hidden_section):
         if self.has_output_material:
             if self.has_illustration_builder_module or self.has_material_package_maker:
-                hidden_section.append(('lyc', 'output ly - create'))
+                hidden_section.append(('lym', 'output ly - make'))
         if self.has_illustration_ly:
             hidden_section.append(('lyd', 'output ly - delete'))
-            hidden_section.append(('lyi', 'output ly - inspect'))
+            hidden_section.append(('lyv', 'output ly - view'))
 
     def make_main_menu_section_for_illustration_pdf(self, main_menu, hidden_section):
         has_illustration_pdf_section = False
@@ -461,55 +598,99 @@ class MaterialPackageProxy(PackageProxy):
             if self.has_illustration_builder_module or self.has_material_package_maker:
                 section = main_menu.make_new_section()
                 has_illustration_pdf_section = True
-                section.append(('pdfc', 'output pdf - create'))
+                section.append(('pdfm', 'output pdf - make'))
         if self.has_illustration_pdf:
             if not has_illustration_pdf_section:
                 section = main_menu.make_new_section()
             hidden_section.append(('pdfd', 'output pdf - delete'))
-            section.append(('pdfi', 'output pdf - inspect'))
+            section.append(('pdfv', 'output pdf - view'))
+
+    def make_main_menu_section_for_initializer(self, main_menu, hidden_section):
+        if not self.has_initializer:
+            section = main_menu.make_new_section()
+            section.section_title = '(Note: package has no initializer.)' 
+            section.append(('inr', 'initializer - restore'))
+        elif not self.has_readable_initializer:
+            section = main_menu.make_new_section()
+            section.section_title = '(Note: package has invalid initializer.)' 
+            section.append(('inr', 'initializer - restore'))
+        hidden_section.append(('inv', 'view package initializer'))
+        hidden_section.append(('incanned', 'copy canned package initializer'))
+        hidden_section.append(('instub', 'write stub package initializer'))
 
     def make_main_menu_section_for_material_definition(self, main_menu, hidden_section):
+        if not self.has_readable_initializer:
+            return
         section = main_menu.make_new_section()
         if self.has_material_definition_module:
+            has_invalid_material_definition_module = not self.has_readable_material_definition_module
+            if has_invalid_material_definition_module:
+                section.section_title = '(Note: has invalid material definition module.)'
             section.append(('mde', 'material definition - edit'))
-            section.append(('mdx', 'material definition - execute'))
-            hidden_section.append(('mdd', 'material definition - delete'))
-            hidden_section.append(('mdt', 'material definition - stub'))
-            hidden_section.append(('mdxi', 'material definition - execute & inspect'))
+            if not has_invalid_material_definition_module:
+                section.append(('mdx', 'material definition - execute'))
+            hidden_section.append(('mdcanned', 'material definition - copy canned module'))
+            hidden_section.append(('mddelete', 'material definition - delete'))
+            hidden_section.append(('mdstub', 'material definition - stub'))
+            if not has_invalid_material_definition_module:
+                hidden_section.append(('mdxe', 'material definition - execute & edit'))
         elif self.material_package_maker_class_name is None:
-            section.append(('mdt', 'material definition - stub'))
+            section.append(('mdstub', 'material definition - stub'))
 
     def make_main_menu_section_for_output_material(self, main_menu, hidden_section):
+        if not self.has_readable_initializer:
+            return
         has_output_material_section = False
-        if self.has_material_definition or self.has_complete_user_input_wrapper:
-            section = main_menu.make_new_section()
-            section.append(('dc', 'output data - create'))
-            has_output_material_section = True
-        if self.has_output_material_module:
-            if not has_output_material_section:
+        if self.has_readable_material_definition_module:
+            if self.has_material_definition or self.has_complete_user_input_wrapper_on_disk:
                 section = main_menu.make_new_section()
-            section.append(('di', 'output data - inspect'))
-            hidden_section.append(('dd', 'output data - delete'))
+                if self.has_output_material_module and not self.has_readable_output_material_module:
+                    section.section_title = '(Note: has invalid output material module.)'
+                section.append(('omm', 'output material - make'))
+                has_output_material_section = True
+            if self.has_output_material_module:
+                if not has_output_material_section:
+                    section = main_menu.make_new_section()
+                section.append(('omv', 'output material - view'))
+                hidden_section.append(('omdelete', 'output material - delete'))
+                hidden_section.append(('omfetch', 'output material - fetch'))
+        hidden_section.append(('omcanned', 'output material - copy canned module'))
 
-    def make_main_menu_section_for_stylesheet_management(self, main_menu, hidden_section):
-        if self.has_output_material:
-            if self.has_illustration_builder_module or self.should_have_illustration:
-                section = main_menu.make_new_section()
-                section.append(('sss', 'score stylesheet - select'))
-                # TODO: fix this
-                if True:
-                    hidden_section.append(('ssm', 'source stylesheet - edit'))
+    def make_main_menu_sections(self, menu, hidden_section):
+        self.make_main_menu_section_for_material_definition(menu, hidden_section)
+        self.make_main_menu_section_for_output_material(menu, hidden_section)
+        self.make_main_menu_section_for_illustration_builder(menu, hidden_section)
 
     def manage_stylesheets(self):
         stylesheet_wrangler = StylesheetWrangler(session=self.session)
         stylesheet_wrangler.run()
 
-    # TODO: port
-    def regenerate_everything(self, is_forced=False):
-        self.print_not_implemented()
+    def overwrite_output_material_module(self):
+        file(self.output_material_module_file_name, 'w').write('')
 
     # TODO: port
-    def rename_material(self):
+    def regenerate_everything(self, prompt=True):
+        self.print_not_implemented()
+
+    def remove(self):
+        self.remove_material_from_materials_initializer()
+        PackageProxy.remove(self)
+
+    def remove_material_from_materials_initializer(self):
+        import_statement = 'safe_import(globals(), {!r}, {!r})\n'
+        import_statement = import_statement.format(
+            self.material_underscored_name, self.material_underscored_name)
+        parent_package = PackageProxy(self.parent_package_importable_name, session=self.session)
+        parent_package_initializer_file_proxy = parent_package.initializer_file_proxy
+        filtered_import_statements = []
+        for safe_import_statement in parent_package_initializer_file_proxy.safe_import_statements:
+            if not safe_import_statement == import_statement:
+                filtered_import_statements.append(safe_import_statement)
+        parent_package_initializer_file_proxy.safe_import_statements[:] = filtered_import_statements
+        parent_package_initializer_file_proxy.write_to_disk()
+
+    # TODO: port
+    def rename_material_interactively(self):
         line = 'current material name: {}'.format(self.material_underscored_name)
         self.display(line)
         getter = self.make_new_getter(where=self.where())
@@ -548,7 +729,7 @@ class MaterialPackageProxy(PackageProxy):
                         self.material_underscored_name, new_material_underscored_name)
                     command = 'svn mv {} {}'.format(old_directory_name, new_directory_name)
                     os.system(command)
-            # rename output data
+            # rename output material
             new_output_material = os.path.join(new_package_directory, 'output_material.py')
             self.helpers.globally_replace_in_file(
                 new_output_material, self.material_underscored_name, new_material_underscored_name)
@@ -560,17 +741,6 @@ class MaterialPackageProxy(PackageProxy):
             os.system(command)
         else:
             raise NotImplementedError('commit to repository and then rename.')
-
-    def remove(self):
-        self.remove_material_from_materials_initializer()
-        PackageProxy.remove(self)
-
-    def remove_material_from_materials_initializer(self):
-        import_statement = 'safe_import({!r}, {!r})\n'.format(
-            self.material_underscored_name, self.material_underscored_name)
-        parent_package = PackageProxy(self.parent_package_importable_name, session=self.session)
-        if import_statement in parent_package.initializer_file_proxy.protected_import_statements:
-            parent_package.initializer_file_proxy.protected_import_statements.remove(import_statement)
 
     def run(self, user_input=None, clear=True, cache=False):
         self.assign_user_input(user_input=user_input)
@@ -612,6 +782,11 @@ class MaterialPackageProxy(PackageProxy):
         # TODO: replace with something nonlocal
         #self.link_local_stylesheet(stylesheet_file_name, prompt=prompt)
 
+    # NOTE: not currently used
+    def touch_parent_initializer(self):
+        if self.has_parent_initializer:
+            self.parent_initializer_file_proxy.touch()
+
     def write_illustration_ly_and_pdf_to_disk(self, is_forced=False, prompt=True):
         illustration = self.illustration
         iotools.write_expr_to_pdf(illustration, self.illustration_pdf_file_name, print_status=False)
@@ -630,11 +805,20 @@ class MaterialPackageProxy(PackageProxy):
 
     def write_output_material_to_disk(self, prompt=True):
         self.remove_material_from_materials_initializer()
+        self.overwrite_output_material_module()
         output_material_module_proxy = self.output_material_module_proxy
-        lines = self.output_material_module_body_lines
-        output_material_module_proxy.body_lines[:] = lines
+        pair = self.output_material_module_import_statements_and_output_material_module_body_lines
+        output_material_module_import_statements, output_material_module_body_lines = pair
+        output_material_module_import_statements = [x + '\n' for x in output_material_module_import_statements]
+        output_material_module_proxy.setup_statements = output_material_module_import_statements
+        output_material_module_proxy.body_lines[:] = output_material_module_body_lines
         output_material_module_proxy.write_to_disk()
         self.add_material_to_materials_initializer()
         self.add_material_to_material_initializer()
-        line = 'output data written to disk.'
+        line = 'output material written to disk.'
         self.proceed(line, prompt=prompt)
+
+    def write_stub_material_definition_module_to_disk(self, prompt=True):
+        if self.should_have_material_definition_module:
+            file(self.material_definition_module_file_name, 'w').write('')
+            self.material_definition_module_proxy.write_stub_to_disk(self.is_data_only, prompt=True)

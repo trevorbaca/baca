@@ -1,6 +1,7 @@
 from abjad.tools import iotools
 from abjad.tools import pitchtools
 from baca.scf.menuing.MenuSectionAggregator import MenuSectionAggregator
+from baca.scf import predicates
 import types
 
 
@@ -10,6 +11,7 @@ class UserInputGetter(MenuSectionAggregator):
     def __init__(self, session=None, where=None):
         MenuSectionAggregator.__init__(self, session=session, where=where)
         self._argument_lists = []
+        self._chevrons = []
         self._defaults = []
         self._execs = []
         self._helps = []
@@ -26,6 +28,10 @@ class UserInputGetter(MenuSectionAggregator):
     @property
     def argument_lists(self):
         return self._argument_lists
+
+    @property
+    def chevrons(self):
+        return self._chevrons
 
     @property
     def defaults(self):
@@ -53,18 +59,18 @@ class UserInputGetter(MenuSectionAggregator):
         message = "value for '{}' must be argument range."
         self.append_something(spaced_attribute_name, message, default=default)
         self.argument_lists[-1] = argument_list
-        test = lambda expr: self.is_valid_argument_range_string_for_argument_list(expr, argument_list)
+        test = lambda expr: predicates.is_readable_argument_range_string_for_argument_list(expr, argument_list)
         self.tests.append(test)
 
     def append_boolean(self, spaced_attribute_name, default=None):
         message = "value for '{}' must be boolean."
         self.append_something(spaced_attribute_name, message, default=default)
-        self.tests.append(self.is_boolean)
+        self.tests.append(predicates.is_boolean)
 
     def append_integer(self, spaced_attribute_name, default=None):
         message = "value for '{}' must be integer."
         self.append_something(spaced_attribute_name, message, default=default)
-        self.tests.append(self.is_integer)
+        self.tests.append(predicates.is_integer)
 
     def append_integer_in_closed_range(self, spaced_attribute_name, start, stop, default=None):
         message = "value for '{}' must be integer between {} and {}, inclusive."
@@ -74,7 +80,7 @@ class UserInputGetter(MenuSectionAggregator):
     def append_integer_or_none(self, spaced_attribute_name, default=None):
         message = "value for '{}' must be integer or none."
         self.append_something(spaced_attribute_name, message, default=default)
-        self.tests.append(self.is_integer_or_none)
+        self.tests.append(predicates.is_integer_or_none)
 
     def append_markup(self, spaced_attribute_name, default=None):
         message = "value for '{}' must be markup."
@@ -83,7 +89,7 @@ class UserInputGetter(MenuSectionAggregator):
         execs.append('from abjad import *')
         execs.append('value = markuptools.Markup({})')
         self.execs[-1] = execs
-        self.tests.append(self.is_markup)
+        self.tests.append(predicates.is_markup)
 
     def append_named_chromatic_pitch(self, spaced_attribute_name, default=None):
         message = "value for '{}' must be named chromatic pitch."
@@ -92,7 +98,7 @@ class UserInputGetter(MenuSectionAggregator):
         execs.append('from abjad import *')
         execs.append('value = pitchtools.NamedChromaticPitch({})')
         self.execs[-1] = execs
-        self.tests.append(self.is_named_chromatic_pitch)
+        self.tests.append(predicates.is_named_chromatic_pitch)
 
     def append_pitch_range(self, spaced_attribute_name, default=None):
         message = "value for '{}' must be pitch range."
@@ -101,10 +107,10 @@ class UserInputGetter(MenuSectionAggregator):
         execs.append('from abjad import *')
         execs.append('value = pitchtools.PitchRange({})')
         self.execs[-1] = execs
-        self.tests.append(self.is_pitch_range_or_none)
+        self.tests.append(predicates.is_pitch_range_or_none)
 
     def append_something(self, spaced_attribute_name, message, 
-        additional_message_arguments=None, default=None):
+        additional_message_arguments=None, default=None, include_chevron=True):
         assert isinstance(spaced_attribute_name, str)
         self.prompts.append(spaced_attribute_name)
         self.argument_lists.append([])
@@ -113,26 +119,83 @@ class UserInputGetter(MenuSectionAggregator):
             additional_message_arguments = []
         self.helps.append(message.format(spaced_attribute_name, *additional_message_arguments))
         self.defaults.append(default)
+        self.chevrons.append(include_chevron)
 
     def append_string(self, spaced_attribute_name, default=None):
         message = "value for '{}' must be string."
         self.append_something(spaced_attribute_name, message, default=default)
-        self.tests.append(self.is_string)
+        self.tests.append(predicates.is_string)
 
     def append_string_or_none(self, spaced_attribute_name, default=None):
         message = "value for '{}' must be string or none."
         self.append_something(spaced_attribute_name, message, default=default)
-        self.tests.append(self.is_string_or_none)
+        self.tests.append(predicates.is_string_or_none)
 
     def append_symbolic_pitch_range_string(self, spaced_attribute_name, default=None):
         message = "value for '{}' must be symbolic pitch range string. Ex: [A0, C8]."
         self.append_something(spaced_attribute_name, message, default=default)
         self.tests.append(pitchtools.is_symbolic_pitch_range_string)
 
-    def append_yes_no_string(self, spaced_attribute_name, default=None):
-        message = "value for '{}' must be 'y' or 'n'."
+    def append_underscore_delimited_lowercase_package_name(self, spaced_attribute_name, default=None):
+        message = "value for {!r} must be underscore-delimited lowercase package name of length at least 3."
         self.append_something(spaced_attribute_name, message, default=default)
-        self.tests.append(self.is_yes_no_string)
+        self.tests.append(lambda x: iotools.is_underscore_delimited_lowercase_package_name(x) and 3 <= len(x))
+
+    def append_yes_no_string(self, spaced_attribute_name, default=None, include_chevron=False):
+        message = "value for '{}' must be 'y' or 'n'."
+        self.append_something(spaced_attribute_name, message, default=default, include_chevron=include_chevron)
+        self.tests.append(predicates.is_yes_no_string)
+
+    def apply_tests_to_value(self, value):
+        if self.prompt_index < len(self.tests):
+            input_test = self.tests[self.prompt_index]
+            return self.evaluate_test(input_test, value)
+        return True
+
+    def change_user_response_to_value(self, user_response):
+        execs = self.execs[self.prompt_index]
+        assert isinstance(execs, list)
+        if execs:
+            value = self.get_value_from_execs(user_response, execs)
+            if not value:
+                return '!!!'
+        else:
+            value = self.get_value_from_direct_evaluation(user_response)
+        return value
+
+    def conditionally_display_help(self):
+        if self.prompt_index < len(self.helps):
+            lines = []
+            lines.append(self.helps[self.prompt_index])
+            lines.append('')
+            self.display(lines)
+
+    def evaluate_test(self, test, argument):
+        if isinstance(test, types.TypeType):
+            return isinstance(argument, test)
+        else:
+            return test(argument)
+
+    def get_value_from_direct_evaluation(self, user_response):
+        try:
+            value = eval(user_response)
+        except (NameError, SyntaxError):
+            value = user_response
+        return value
+
+    def get_value_from_execs(self, user_response, execs):
+        for exec_string in execs:
+            try:
+                command = exec_string.format(user_response)
+                exec(command)
+            except:
+                try:
+                    command = exec_string.format(repr(user_response))
+                    exec(command)
+                except:
+                    self.conditionally_display_help()
+                    return False
+        return value
 
     def load_prompt(self):
         prompt = self.prompts[self.prompt_index]
@@ -150,9 +213,10 @@ class UserInputGetter(MenuSectionAggregator):
         self.load_prompt()
         while True:
             prompt = self.menu_lines[-1]
-            default = self.defaults[self.prompt_index]
-            default = str(default)
-            user_response = self.handle_raw_input_with_default(prompt, default=default)
+            default = str(self.defaults[self.prompt_index])
+            include_chevron = self.chevrons[self.prompt_index]
+            user_response = self.handle_raw_input_with_default(
+                prompt, default=default, include_chevron=include_chevron)
             if user_response is None:
                 self.prompt_index = self.prompt_index + 1
                 break
@@ -177,9 +241,7 @@ class UserInputGetter(MenuSectionAggregator):
 
     def present_prompts_and_store_values(self):
         self.conditionally_clear_terminal()
-        self.menu_lines = []
-        self.values = []
-        self.prompt_index = 0
+        self.menu_lines, self.values, self.prompt_index = [], [], 0
         while self.prompt_index < len(self.prompts):
             if not self.present_prompt_and_store_value():
                 break
@@ -203,61 +265,33 @@ class UserInputGetter(MenuSectionAggregator):
         lines.append('')
         self.display(lines)
 
-    def evaluate_test(self, test, argument):
-        if isinstance(test, types.TypeType):
-            return isinstance(argument, test)
-        else:
-            return test(argument)
-
     def store_value(self, user_response):
-        from baca.scf.menuing.MenuSection import MenuSection
         assert isinstance(user_response, str)
+        if self.try_to_store_value_from_argument_list(user_response):
+            return True
+        value = self.change_user_response_to_value(user_response)
+        if value == '!!!':
+            return False
+        if not self.apply_tests_to_value(value):
+            self.conditionally_display_help()
+            return False
+        self.values.append(value)
+        self.prompt_index = self.prompt_index + 1
+        return True
+
+    def store_value_from_argument_list(self, user_response, argument_list):
+        from baca.scf.menuing.MenuSection import MenuSection
+        dummy_section = MenuSection()
+        dummy_section.tokens = argument_list[:]
+        value = dummy_section.argument_range_string_to_numbers(user_response)
+        self.values.append(value)
+        self.prompt_index = self.prompt_index + 1
+
+    def try_to_store_value_from_argument_list(self, user_response):
         input_test = self.tests[self.prompt_index]
         argument_list = self.argument_lists[self.prompt_index]
         if argument_list and self.evaluate_test(input_test, user_response):
-            dummy_section = MenuSection()
-            dummy_section.tokens = argument_list[:]
-            value = dummy_section.argument_range_string_to_numbers(user_response)
-            self.values.append(value)
-            self.prompt_index = self.prompt_index + 1
+            self.store_value_from_argument_list(user_response, argument_list)
             return True
         else:
-            execs = self.execs[self.prompt_index]
-            assert isinstance(execs, list)
-            if execs:
-                for exec_string in execs:
-                    try:
-                        command = exec_string.format(user_response)
-                        exec(command)
-                    except:
-                        try:
-                            command = exec_string.format(repr(user_response))
-                            exec(command)
-                        except:
-                            if self.prompt_index < len(self.helps):
-                                lines = []
-                                lines.append(self.helps[self.prompt_index])
-                                lines.append('')
-                                self.display(lines)
-                            return
-            else:
-                try:
-                    value = eval(user_response)
-                except (NameError, SyntaxError):
-                    value = user_response
-        if self.prompt_index < len(self.tests):
-            input_test = self.tests[self.prompt_index]
-            if self.evaluate_test(input_test, value):
-                self.values.append(value)
-                self.prompt_index = self.prompt_index + 1
-                return True
-            else:
-                if self.prompt_index < len(self.helps):
-                    lines = []
-                    lines.append(self.helps[self.prompt_index])
-                    lines.append('')
-                    self.display(lines)
-        else:
-            self.values.append(value)
-            self.prompt_index = self.prompt_index + 1
-            return True
+            return False

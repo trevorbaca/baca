@@ -60,11 +60,21 @@ class Session(object):
 
     @property
     def command_history_string(self):
-        return ' '.join(self.command_history)
+        return ' '.join(self.explicit_command_history)
 
     @property
     def complete_transcript(self):
         return self._complete_transcript
+
+    @property
+    def explicit_command_history(self):
+        result = []
+        for command in self.command_history:
+            if command == '':
+                result.append('default')
+            else:
+                result.append(command)
+        return result
 
     @property
     def formatted_attributes(self):
@@ -82,6 +92,10 @@ class Session(object):
     @property
     def is_displayable(self):
         return not self.user_input
+
+    @property
+    def is_in_score(self):
+        return self.current_score_package_short_name is not None
 
     @property
     def is_navigating_to_sibling_score(self):
@@ -247,3 +261,7 @@ class Session(object):
 
     def reinitialize(self):
         type(self).__init__(self)
+
+    def swap_user_input_values_default_status(self):
+        current = self.use_current_user_input_values_as_default
+        self.use_current_user_input_values_as_default = not current
