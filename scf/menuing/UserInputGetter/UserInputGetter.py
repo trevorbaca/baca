@@ -150,8 +150,7 @@ class UserInputGetter(MenuSectionAggregator):
         self.load_prompt()
         while True:
             prompt = self.menu_lines[-1]
-            default = self.defaults[self.prompt_index]
-            default = str(default)
+            default = str(self.defaults[self.prompt_index])
             user_response = self.handle_raw_input_with_default(prompt, default=default)
             if user_response is None:
                 self.prompt_index = self.prompt_index + 1
@@ -177,9 +176,7 @@ class UserInputGetter(MenuSectionAggregator):
 
     def present_prompts_and_store_values(self):
         self.conditionally_clear_terminal()
-        self.menu_lines = []
-        self.values = []
-        self.prompt_index = 0
+        self.menu_lines, self.values, self.prompt_index = [], [], 0
         while self.prompt_index < len(self.prompts):
             if not self.present_prompt_and_store_value():
                 break
@@ -209,42 +206,41 @@ class UserInputGetter(MenuSectionAggregator):
         else:
             return test(argument)
 
-    def store_value(self, user_response):
+    def store_value_from_argument_list(self, user_response, argument_list):
         from baca.scf.menuing.MenuSection import MenuSection
-        assert isinstance(user_response, str)
+        dummy_section = MenuSection()
+        dummy_section.tokens = argument_list[:]
+        value = dummy_section.argument_range_string_to_numbers(user_response)
+        self.values.append(value)
+        self.prompt_index = self.prompt_index + 1
+
+    def try_to_store_value_from_argument_list(self, user_response):
         input_test = self.tests[self.prompt_index]
         argument_list = self.argument_lists[self.prompt_index]
         if argument_list and self.evaluate_test(input_test, user_response):
-            dummy_section = MenuSection()
-            dummy_section.tokens = argument_list[:]
-            value = dummy_section.argument_range_string_to_numbers(user_response)
-            self.values.append(value)
-            self.prompt_index = self.prompt_index + 1
+            self.store_value_from_argument_list(user_response, argument_list)
             return True
         else:
-            execs = self.execs[self.prompt_index]
-            assert isinstance(execs, list)
-            if execs:
-                for exec_string in execs:
-                    try:
-                        command = exec_string.format(user_response)
-                        exec(command)
-                    except:
-                        try:
-                            command = exec_string.format(repr(user_response))
-                            exec(command)
-                        except:
-                            if self.prompt_index < len(self.helps):
-                                lines = []
-                                lines.append(self.helps[self.prompt_index])
-                                lines.append('')
-                                self.display(lines)
-                            return
-            else:
-                try:
-                    value = eval(user_response)
-                except (NameError, SyntaxError):
-                    value = user_response
+            return False
+
+    def change_user_response_to_value(self, user_response):
+        execs = self.execs[self.prompt_index]
+        assert isinstance(execs, list)
+        if execs:
+            value = self.get_value_from_execs(user_response, execs)
+            if not value:
+                return '!!!'
+        else:
+            value = self.get_value_from_direct_evaluation(user_response)
+        return value
+
+    def store_value(self, user_response):
+        assert isinstance(user_response, str)
+        if self.try_to_store_value_from_argument_list(user_response):
+            return True
+        value = self.change_user_response_to_value(user_response)
+        if value == '!!!':
+            return
         if self.prompt_index < len(self.tests):
             input_test = self.tests[self.prompt_index]
             if self.evaluate_test(input_test, value):
@@ -252,12 +248,36 @@ class UserInputGetter(MenuSectionAggregator):
                 self.prompt_index = self.prompt_index + 1
                 return True
             else:
-                if self.prompt_index < len(self.helps):
-                    lines = []
-                    lines.append(self.helps[self.prompt_index])
-                    lines.append('')
-                    self.display(lines)
+                self.conditionally_display_help()
         else:
             self.values.append(value)
             self.prompt_index = self.prompt_index + 1
             return True
+
+    def conditionally_display_help(self):
+        if self.prompt_index < len(self.helps):
+            lines = []
+            lines.append(self.helps[self.prompt_index])
+            lines.append('')
+            self.display(lines)
+
+    def get_value_from_execs(self, user_response, execs):
+        for exec_string in execs:
+            try:
+                command = exec_string.format(user_response)
+                exec(command)
+            except:
+                try:
+                    command = exec_string.format(repr(user_response))
+                    exec(command)
+                except:
+                    self.conditionally_display_help()
+                    return False
+        return value
+
+    def get_value_from_direct_evaluation(self, user_response):
+        try:
+            value = eval(user_response)
+        except (NameError, SyntaxError):
+            value = user_response
+        return value
