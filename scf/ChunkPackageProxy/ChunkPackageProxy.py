@@ -11,7 +11,7 @@ class ChunkPackageProxy(PackageProxy):
     
     @property
     def breadcrumb(self):
-        return self.chunk_name
+        return self.package_spaced_name
 
     ### READ / WRITE PUBLIC ATTRIBUTES ###
 
