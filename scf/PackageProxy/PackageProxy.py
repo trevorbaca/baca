@@ -58,6 +58,10 @@ class PackageProxy(DirectoryProxy):
         return self._package_importable_name
 
     @property
+    def package_root_name(self):
+        return self.package_importable_name.split('.')[0]
+
+    @property
     def package_short_name(self):
         return self.package_importable_name.split('.')[-1]
 
@@ -80,22 +84,10 @@ class PackageProxy(DirectoryProxy):
             if result:
                 return result
 
-    # TODO: write test; collapse with purview_name
+    # TODO: replace with self.package_root_name
     @property
     def purview(self):
-        import baca
-        if self.score_package_short_name is None:
-            return baca.scf.HomePackageProxy()
-        else:
-            return baca.scf.ScorePackageProxy(self.score_package_short_name)
-
-    # TODO: write test; collapse with purview
-    @property
-    def purview_name(self):
-        if self.score_package_short_name is None:
-            return self.studio_package_importable_name
-        else:
-            return self.score_package_short_name
+        return self.package_root_name
 
     # TODO: write test; or remove?
     @property

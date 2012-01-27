@@ -13,14 +13,6 @@ class HomePackageProxy(PackageProxy):
     ### READ-ONLY PUBLIC ATTRIBUTES ###
 
     @property
-    def is_score_local_purview(self):
-        return False
-
-    @property
-    def is_studio_global_purview(self):
-        return True
-
-    @property
     def material_proxy_wrangler(self):
         return self._material_proxy_wrangler
 

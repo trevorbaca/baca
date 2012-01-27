@@ -1,6 +1,8 @@
 TODO
 
-1. Audit and reimplement purview to always equal only a string.
+0. Audit and reimplement purview to always equal only a string.
+
+1. Consider changing 'purview' to 'package_root_name'.
 
 2. Encapsulate user input getter subprocedures.
 

@@ -4,7 +4,7 @@ from abjad.tools import scoretools
 import baca
 
 
-def test_ScorePackageProxy_attributes_01():
+def test_ScorePackageProxy_read_only_attributes_01():
     '''Read-only public attributes.
     '''
 
@@ -20,8 +20,6 @@ def test_ScorePackageProxy_attributes_01():
     assert isinstance(score_proxy.mus_proxy, baca.scf.MusPackageProxy)
 
     assert score_proxy.has_correct_initializers
-    assert score_proxy.is_score_local_purview
-    assert not score_proxy.is_studio_global_purview
 
     instrumentation = scoretools.InstrumentationSpecifier()
     performer_1 = scoretools.Performer('flutist')
