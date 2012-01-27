@@ -20,17 +20,14 @@ def test_MaterialPackageProxy_read_only_attributes_01():
     assert not mpp.has_user_input_module
     assert not mpp.has_user_input_wrapper        
     assert     mpp.illustration is None
-    assert     mpp.illustration_builder_module_file_name == \
-        '/Users/trevorbaca/Documents/other/baca/materials/red_numbers/illustration_builder.py'
-    assert     mpp.illustration_builder_module_importable_name == \
-        'baca.materials.red_numbers.illustration_builder'
+    assert     mpp.illustration_builder_module_file_name is None
+    assert     mpp.illustration_builder_module_importable_name is None
     assert     mpp.illustration_builder_module_proxy is None
-    assert     mpp.illustration_ly_file_name == \
-        '/Users/trevorbaca/Documents/other/baca/materials/red_numbers/illustration.ly'
+    assert     mpp.illustration_ly_file_name is None
     assert     mpp.illustration_ly_file_proxy is None
-    assert     mpp.illustration_pdf_file_name == \
-        '/Users/trevorbaca/Documents/other/baca/materials/red_numbers/illustration.pdf'
+    assert     mpp.illustration_pdf_file_name is None
     assert     mpp.illustration_pdf_file_proxy is None
+    # TODO:
     #assert not mpp.is_changed   
     assert     mpp.is_data_only
     assert     mpp.is_handmade
@@ -65,10 +62,8 @@ def test_MaterialPackageProxy_read_only_attributes_01():
     assert not  mpp.should_have_user_input_module
     assert      mpp.source_stylesheet_file_name is None
     assert      mpp.source_stylesheet_file_proxy is None
-    assert      mpp.user_input_module_file_name == \
-        '/Users/trevorbaca/Documents/other/baca/materials/red_numbers/user_input.py'
-    assert      mpp.user_input_module_importable_name == \
-        'baca.materials.red_numbers.user_input'
+    assert      mpp.user_input_module_file_name is None
+    assert      mpp.user_input_module_importable_name is None
     assert      mpp.user_input_module_proxy is None
 
 
@@ -89,10 +84,8 @@ def test_MaterialPackageProxy_read_only_attributes_02():
     assert     mpp.has_user_input_module
     assert     mpp.has_user_input_wrapper        
     assert not mpp.illustration is not None
-    assert     mpp.illustration_builder_module_file_name == \
-        '/Users/trevorbaca/Documents/other/baca/materials/red_sargasso/illustration_builder.py'
-    assert     mpp.illustration_builder_module_importable_name == \
-        'baca.materials.red_sargasso.illustration_builder'
+    assert     mpp.illustration_builder_module_file_name is None
+    assert     mpp.illustration_builder_module_importable_name is None
     assert     mpp.illustration_builder_module_proxy is None
     assert     mpp.illustration_ly_file_name == \
         '/Users/trevorbaca/Documents/other/baca/materials/red_sargasso/illustration.ly'
@@ -100,14 +93,13 @@ def test_MaterialPackageProxy_read_only_attributes_02():
     assert     mpp.illustration_pdf_file_name == \
         '/Users/trevorbaca/Documents/other/baca/materials/red_sargasso/illustration.pdf'
     assert     mpp.illustration_pdf_file_proxy is not None
+    # TODO:
     #assert not mpp.is_changed   
     assert not mpp.is_data_only
     assert not mpp.is_handmade
     assert     mpp.is_makermade
-    assert     mpp.material_definition_module_file_name == \
-        '/Users/trevorbaca/Documents/other/baca/materials/red_sargasso/material_definition.py'
-    assert     mpp.material_definition_module_importable_name == \
-        'baca.materials.red_sargasso.material_definition' 
+    assert     mpp.material_definition_module_file_name is None
+    assert     mpp.material_definition_module_importable_name is None
     assert     mpp.material_definition_module_proxy is None
     assert     mpp.material_package_directory == \
         '/Users/trevorbaca/Documents/other/baca/materials/red_sargasso'
