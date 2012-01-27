@@ -240,19 +240,19 @@ class UserInputGetter(MenuSectionAggregator):
             return True
         value = self.change_user_response_to_value(user_response)
         if value == '!!!':
-            return
+            return False
+        if not self.apply_tests_to_value(value):
+            self.conditionally_display_help()
+            return False
+        self.values.append(value)
+        self.prompt_index = self.prompt_index + 1
+        return True
+            
+    def apply_tests_to_value(self, value):
         if self.prompt_index < len(self.tests):
             input_test = self.tests[self.prompt_index]
-            if self.evaluate_test(input_test, value):
-                self.values.append(value)
-                self.prompt_index = self.prompt_index + 1
-                return True
-            else:
-                self.conditionally_display_help()
-        else:
-            self.values.append(value)
-            self.prompt_index = self.prompt_index + 1
-            return True
+            return self.evaluate_test(input_test, value)
+        return True
 
     def conditionally_display_help(self):
         if self.prompt_index < len(self.helps):
