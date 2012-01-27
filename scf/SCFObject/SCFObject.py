@@ -376,16 +376,6 @@ class SCFObject(object):
         response = self.handle_raw_input('press return to continue.', include_chevron=False)
         self.conditionally_clear_terminal()
 
-    # TODO: write tests
-    def purview_name_to_directory_name(self, purview_name):
-        if purview_name == self.studio_package_importable_name:
-            directory_name = self.studio_directory_name
-        else:
-            directory_name = os.path.join(['Users', 'trevorbaca', 'Documents', 'scores', purview_name])
-        if not os.path.exists(directory_name):
-            raise ValueError
-        return directory_name
-
     def push_backtrack(self):
         if self.session.backtracking_stack:
             last_number = self.session.backtracking_stack[-1]
