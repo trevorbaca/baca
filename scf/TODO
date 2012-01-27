@@ -6,9 +6,9 @@ TODO
 
 3. Author user input getter tests.
 
-4. Author materials management menuing tests.
+4. Do away with local stylesheets.
 
-5. Do away with local stylesheets.
+5. Author materials management menuing tests.
 
 6. Implement InstrumentRangeInventory in Abjad. Integrate into SCF.
 
