@@ -29,41 +29,33 @@ class MaterialPackageProxy(PackageProxy):
 
     @property
     def has_illustration_builder_module(self):
-        if self.illustration_builder_module_file_name is None:
-            return False
-        else:
+        if self.should_have_illustration_builder_module:
             return os.path.exists(self.illustration_builder_module_file_name)
+        return False
 
     @property
     def has_illustration_ly(self):
-        if self.illustration_ly_file_name is None:
-            return False
-        else:
+        if self.should_have_illustration_ly:
             return os.path.exists(self.illustration_ly_file_name)
+        return False
 
     @property
     def has_illustration_pdf(self):
-        if self.illustration_pdf_file_name is None:
-            return False
-        else:
+        if self.should_have_illustration_pdf:
             return os.path.exists(self.illustration_pdf_file_name)
+        return False
 
     @property
     def has_material_definition(self):
-#        if not self.has_material_definition_module:
-#            return False
-#        else:
-#            return bool(self.material_definition_module_proxy.import_material_definition())
         if self.should_have_material_definition_module:
             return bool(self.material_definition_module_proxy.import_material_definition())
         return False
 
     @property
     def has_material_definition_module(self):
-        if self.material_definition_module_file_name is None:
-            return False
-        else:
+        if self.should_have_material_definition_module:
             return os.path.exists(self.material_definition_module_file_name)
+        return False
 
     @property
     def has_material_package_maker(self):
@@ -71,17 +63,15 @@ class MaterialPackageProxy(PackageProxy):
 
     @property
     def has_output_material(self):
-        if not self.has_output_material_module:
-            return False
-        else:
+        if self.should_have_output_material_module:
             return bool(self.output_material_module_proxy.import_output_material())
+        return False
 
     @property
     def has_output_material_module(self):
-        if self.output_material_module_file_name is None:
-            return False
-        else:
+        if self.should_have_output_material_module:
             return os.path.exists(self.output_material_module_file_name)
+        return False
 
     # TODO: impelement
     @property
@@ -90,10 +80,9 @@ class MaterialPackageProxy(PackageProxy):
 
     @property
     def has_user_input_module(self):
-        if self.user_input_module_file_name is None:
-            return False
-        else:
+        if self.should_have_user_input_module:
             return os.path.exists(self.user_input_module_file_name)
+        return False
 
     @property
     def has_user_input_wrapper(self):
