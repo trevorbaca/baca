@@ -60,7 +60,7 @@ class Studio(SCFObject):
         return score_package_short_names[prev_index]
 
     # TODO: write test
-    def get_purview_interactively(self, clear=True, cache=False):
+    def get_package_root_name_interactively(self, clear=True, cache=False):
         self.cache_breadcrumbs(cache=cache)
         while True:
             menu = self.make_score_selection_menu()
@@ -68,13 +68,13 @@ class Studio(SCFObject):
             last_section.tokens.insert(0, ('baca', 'global (default)'))
             last_section.default_index = 0
             menu.explicit_title = 'select location:'
-            purview_name = menu.run(clear=clear)
+            package_root_name = menu.run(clear=clear)
             if self.backtrack():
                 self.restore_breadcrumbs(cache=cache)
                 return
-            if purview_name:
+            if package_root_name:
                 self.restore_breadcrumbs(cache=cache)
-                return purview_name
+                return package_root_name
 
     def handle_main_menu_result(self, result):
         if not isinstance(result, str):

@@ -106,12 +106,12 @@ class MaterialPackageWrangler(PackageWrangler):
         material_package_short_name = iotools.string_to_strict_directory_name(material_name)
         studio = baca.scf.Studio(session=self.session)
         self.push_backtrack()
-        purview_name = studio.get_purview_interactively(clear=False)
+        package_root_name = studio.get_package_root_name_interactively(clear=False)
         self.pop_backtrack()
         if self.backtrack():
             return
         materials_package_importable_name = \
-            self.purview_name_to_materials_package_importable_name(purview_name)
+            self.package_root_name_to_materials_package_importable_name(package_root_name)
         material_package_importable_name = '{}.{}'.format(
             materials_package_importable_name, material_package_short_name)
         if self.package_exists(material_package_importable_name):
@@ -144,11 +144,11 @@ class MaterialPackageWrangler(PackageWrangler):
         return menu
 
     # TODO: write tests
-    def purview_name_to_materials_package_importable_name(self, purview_name):
-        assert isinstance(purview_name, str)
+    def package_root_name_to_materials_package_importable_name(self, package_root_name):
+        assert isinstance(package_root_name, str)
         result = []
-        result.append(purview_name)
-        if not purview_name == self.studio_package_importable_name:
+        result.append(package_root_name)
+        if not package_root_name == self.studio_package_importable_name:
             result.append('mus')
         result.append('materials')
         result = '.'.join(result)
