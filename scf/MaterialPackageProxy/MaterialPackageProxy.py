@@ -28,6 +28,15 @@ class MaterialPackageProxy(PackageProxy):
         return self.package_spaced_name
 
     @property
+    def has_complete_user_input_wrapper(self):
+        user_input_module_proxy = self.user_input_module_proxy
+        if user_input_module_proxy is not None:
+            user_input_wrapper = user_input_module_proxy.user_input_wrapper
+            if user_input_wrapper is not None:
+                return user_input_wrapper.is_complete
+        return False
+
+    @property
     def has_illustration_builder_module(self):
         if self.should_have_illustration_builder_module:
             return os.path.exists(self.illustration_builder_module_file_name)
@@ -472,7 +481,7 @@ class MaterialPackageProxy(PackageProxy):
 
     def make_main_menu_section_for_output_material(self, main_menu, hidden_section):
         has_output_material_section = False
-        if self.has_material_definition or self.user_input_module_proxy.has_complete_user_input_wrapper:
+        if self.has_material_definition or self.has_complete_user_input_wrapper:
             section = main_menu.make_new_section()
             section.append(('dc', 'output data - create'))
             has_output_material_section = True

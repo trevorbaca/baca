@@ -36,7 +36,7 @@ class MaterialDefinitionModuleProxy(ModuleProxy):
     ### PUBLIC METHODS ###
 
     def edit(self):
-        columns = len(self.module_short_name) + 3
+        columns = len(self.material_underscored_name) + 3
         os.system("vi + -c'norm {}l' {}".format(columns, self.full_file_name))
 
     def import_material_definition(self):
@@ -96,7 +96,7 @@ class MaterialDefinitionModuleProxy(ModuleProxy):
     def write_stub_music_material_definition_to_disk(self):
         self.clear()
         self.setup_statements.append('from abjad import *\n')
-        lines = "output_material_module_import_statements = ['from abjad import *']\n"
+        line = "output_material_module_import_statements = ['from abjad import *']\n"
         self.output_material_module_import_lines.append(line)
         self.body_lines.append('{} = None'.format(self.material_underscored_name))
         self.write_to_disk()
