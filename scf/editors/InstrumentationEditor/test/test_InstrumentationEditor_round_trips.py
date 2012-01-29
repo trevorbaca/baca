@@ -35,11 +35,12 @@ def test_InstrumentationEditor_round_trips_01():
      '     11: oboist (ob)',
      '     12: percussionist (perc)',
      '     13: pianist (pf)',
-     '     14: trombonist (trb)',
-     '     15: trumpeter (tp)',
-     '     16: tubist (tb)',
-     '     17: violinist (vn)',
-     '     18: violist (va)',
+     '     14: saxophonist (sax)',
+     '     15: trombonist (trb)',
+     '     16: trumpeter (tp)',
+     '     17: tubist (tb)',
+     '     18: violinist (vn)',
+     '     19: violist (va)',
      '']
 
     entry_index = entry_index + 1
@@ -93,11 +94,12 @@ def test_InstrumentationEditor_round_trips_01():
      '     11: oboist (ob)',
      '     12: percussionist (perc)',
      '     13: pianist (pf)',
-     '     14: trombonist (trb)',
-     '     15: trumpeter (tp)',
-     '     16: tubist (tb)',
-     '     17: violinist (vn)',
-     '     18: violist (va)',
+     '     14: saxophonist (sax)',
+     '     15: trombonist (trb)',
+     '     16: trumpeter (tp)',
+     '     17: tubist (tb)',
+     '     18: violinist (vn)',
+     '     19: violist (va)',
      '']
 
     entry_index = entry_index + 1

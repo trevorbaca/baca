@@ -6,53 +6,49 @@ TODO
 
 3. Implement InstrumentRangeInventory in Abjad. Integrate into SCF.
 
-4. Implement remaining clarinets.
+4. Remove blank lines between successive getter attribute entries.
 
-5. Implement saxophones.
-
-6. Remove blank lines between successive getter attribute entries.
-
-7. Make user input getter defaults work like menu defaults;
+5. Make user input getter defaults work like menu defaults;
     Implement default_value on user input getter.
 
-8. Fix SCFObject.handle_user_input_with_default() default handling.
+6. Fix SCFObject.handle_user_input_with_default() default handling.
 
-9. Implement populate_user_input_wrapper().
+7. Implement populate_user_input_wrapper().
 
-10. Implement material move and rename methods.
+8. Implement 'make new material: range' in studio.
 
-11. Implement 'make new material: range' in studio.
+9. Implement 'make new material: range' in scores.
 
-12. Implement 'make new material: range' in scores.
+10. Define range inventories for all scores.
 
-13. Define range inventories for all scores.
+11. Implement material move and rename methods.
 
-14. Find a way to include tags management in hidden menu of every package proxy.
+12. Find a way to include tags management in hidden menu of every package proxy.
 
-15. Figure out why 'red' isn't good enough to select 'red_pcs', maybe redraw-related.
+13. Figure out why 'red' isn't good enough to select 'red_pcs', maybe redraw-related.
 
-16. Make some zagged pitch-classes.
+14. Make some zagged pitch-classes.
 
-17. Port output change awareness.
+15. Port output change awareness.
 
-18. Implement something to tour all materials everywhere and inspect in sequence.
+16. Implement something to tour all materials everywhere and inspect in sequence.
 
-19. Make user input handler creation work.
+17. Make user input handler creation work.
 
-20. Wrap tests around existing material functionality.
+18. Wrap tests around existing material functionality.
 
-21. Clean up PitchRangeEditor main menu.
+19. Clean up PitchRangeEditor main menu.
 
-22. Edit instrument transposition.
+20. Edit instrument transposition.
 
-23. Edit instrument clefs.
+21. Edit instrument clefs.
 
-24. Remove extra appearance of B-flat clarinet from clarinetist config menu.
+22. Remove extra appearance of B-flat clarinet from clarinetist config menu.
 
-25. Change Instrument._default_performer_names to house (full, abbreviation) pairs.
+23. Change Instrument._default_performer_names to house (full, abbreviation) pairs.
 
-26. Use performer abbreviations to populate performer selection menu.
+24. Use performer abbreviations to populate performer selection menu.
 
-27. Find a way to dynamically add (default) indicator to default menu entries.
+25. Find a way to dynamically add (default) indicator to default menu entries.
 
-28. Consider keyword backtracking protocol to replace two-line backtracking protocol.
+26. Consider keyword backtracking protocol to replace two-line backtracking protocol.
