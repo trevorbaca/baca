@@ -152,10 +152,6 @@ class SCFObject(object):
                 for line in lines:
                     print line
 
-    def edit_source_file(self):
-        command = 'vi {}'.format(self.source_file_name)
-        os.system(command)
-
     def handle_raw_input(self, prompt, include_chevron=True, include_newline=True):
         prompt = iotools.capitalize_string_start(prompt)
         if include_chevron:
@@ -204,19 +200,16 @@ class SCFObject(object):
             is_hidden=is_hidden, is_keyed=is_keyed, is_numbered=is_numbered, is_ranged=is_ranged)
         return menu, section
 
-    # TODO: write test
     def module_importable_name_to_full_file_name(self, module_importable_name):
-        tmp = self.package_importable_name_to_directory_name(module_importable_name)
-        if tmp:
-            return tmp + '.py'
+        full_file_name = self.package_importable_name_to_directory_name(module_importable_name) + '.py'
+        assert os.path.isfile(full_file_name)
+        return full_file_name
 
-    # TODO: write test
     def package_exists(self, package_importable_name):
         assert isinstance(package_importable_name, str)
         directory_name = self.package_importable_name_to_directory_name(package_importable_name)
         return os.path.exists(directory_name)
 
-    # TODO: write tests
     def package_importable_name_to_directory_name(self, package_importable_name):
         if package_importable_name is None:
             return
@@ -318,13 +311,6 @@ class SCFObject(object):
     def restore_breadcrumbs(self, cache=False):
         if cache:
             self.session._breadcrumb_stack[:] = self.session.cached_breadcrumbs[:]
-
-    def reveal_modules(self):
-        command = 'module_names = sys.modules.keys()'
-        exec(command)
-        module_names = [x for x in module_names if x.startswith(self.score_package_short_name)]
-        module_names.sort()
-        return module_names
 
     def where(self):
         return inspect.stack()[1]
