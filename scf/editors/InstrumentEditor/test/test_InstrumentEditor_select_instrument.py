@@ -7,22 +7,20 @@ def test_InstrumentEditor_select_instrument_01():
 
     editor = baca.scf.editors.InstrumentEditor()
     editor.run(user_input='q')
-    assert len(editor.transcript) == 2
+    assert editor.ts == (2,)
 
     editor = baca.scf.editors.InstrumentEditor()
     editor.run(user_input='b q')
-    assert len(editor.transcript) == 2
+    assert (2,)
 
     editor = baca.scf.editors.InstrumentEditor()
     editor.run(user_input='studio q')
-    assert len(editor.transcript) == 2
+    assert (2,)
 
     editor = baca.scf.editors.InstrumentEditor()
     editor.run(user_input='score q')
-    assert len(editor.transcript) == 2
+    assert editor.ts == (4, (0, 2))
 
     editor = baca.scf.editors.InstrumentEditor()
     editor.run(user_input='foo q')
-    transcript = editor.transcript
-    assert len(transcript) == 4
-    assert transcript[-2] == transcript[-4]
+    assert editor.ts == (4, (0, 2))

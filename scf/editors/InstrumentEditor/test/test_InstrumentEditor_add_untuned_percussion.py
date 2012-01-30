@@ -14,8 +14,8 @@ def test_InstrumentEditor_add_untuned_percussion_01():
     assert editor.ts == (4,)
 
     editor = baca.scf.editors.InstrumentEditor()
-    editor.run(user_input='untuned sco')
-    assert editor.ts == (4,)
+    editor.run(user_input='untuned sco q')
+    assert editor.ts == (6, (2, 4))
 
     editor = baca.scf.editors.InstrumentEditor()
     editor.run(user_input='untuned stu')

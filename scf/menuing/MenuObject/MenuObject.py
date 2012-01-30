@@ -101,8 +101,7 @@ class MenuObject(SCFObject):
         elif key in ('q', 'quit'):
             self.session.user_specified_quit = True
         elif isinstance(key, str) and 3 <= len(key) and 'score'.startswith(key):
-            #if self.session.is_in_score:
-            if True:
+            if self.session.is_in_score:
                 self.session.is_backtracking_to_score = True
         elif isinstance(key, str) and 3 <= len(key) and 'studio'.startswith(key):
             self.session.is_backtracking_to_studio = True
