@@ -1,5 +1,4 @@
 from abjad.tools import iotools
-from baca.scf.MaterialPackageProxy import MaterialPackageProxy 
 from baca.scf.PackageWrangler import PackageWrangler
 import collections
 import os
@@ -77,7 +76,8 @@ class MaterialPackageWrangler(PackageWrangler):
             return
         material_package_maker_class_name = None
         should_have_illustration = False
-        self.make_material_package(material_package_importable_name, material_package_maker_class_name, should_have_illustration)
+        self.make_material_package(
+            material_package_importable_name, material_package_maker_class_name, should_have_illustration)
 
     # TODO: write test
     def make_editable_material_package_interactively(self):
@@ -102,7 +102,8 @@ class MaterialPackageWrangler(PackageWrangler):
         material_package_importable_name = self.get_new_material_package_importable_name_interactively()
         material_package_maker_class_name = None
         should_have_illustration = True
-        self.make_material_package(material_package_importable_name, material_package_maker_class_name, should_have_illustration)
+        self.make_material_package(
+            material_package_importable_name, material_package_maker_class_name, should_have_illustration)
 
     def make_main_menu(self, head=None):
         menu, section = self.make_new_menu(where=self.where(), is_numbered=True, is_keyed=False)
@@ -117,6 +118,7 @@ class MaterialPackageWrangler(PackageWrangler):
     def make_material_package(self, material_package_importable_name, material_package_maker_class_name, 
         should_have_illustration, prompt=True):
         '''True on success.'''
+        from baca.scf.MaterialPackageProxy import MaterialPackageProxy 
         assert iotools.is_underscore_delimited_lowercase_package_name(material_package_importable_name)
         assert material_package_maker_class_name is None or iotools.is_uppercamelcase_string(
             material_package_maker_class_name)
