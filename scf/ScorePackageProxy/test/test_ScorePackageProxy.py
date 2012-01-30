@@ -54,7 +54,7 @@ def test_ScorePackageProxy_04():
     studio = baca.scf.Studio()
     studio.run(user_input="l'arch studio q")
 
-    assert len(studio.transcript) == 6
+    assert studio.ts == (6, (0, 4))
     assert studio.transcript[0][0] == 'Studio - active scores'
     assert studio.transcript[2][0] == "L'archipel du corps (2011)"
     assert studio.transcript[4][0] == 'Studio - active scores'
@@ -67,7 +67,7 @@ def test_ScorePackageProxy_05():
     archipel = baca.scf.ScorePackageProxy('archipel')
     archipel.run(user_input='studio')
 
-    assert len(archipel.transcript) == 2
+    assert archipel.ts == (2,)
     assert archipel.transcript[0][0] == "L'archipel du corps (2011)"
     assert archipel.transcript[1][0] == 'SCF> studio'
 
@@ -79,7 +79,7 @@ def test_ScorePackageProxy_06():
     studio = baca.scf.Studio()
     studio.run(user_input="l'arch b q")
 
-    assert len(studio.transcript) == 6
+    assert studio.ts == (6, (0, 4))
     assert studio.transcript[0][0] == 'Studio - active scores'
     assert studio.transcript[2][0] == "L'archipel du corps (2011)"
     assert studio.transcript[4][0] == 'Studio - active scores'
@@ -98,15 +98,3 @@ def test_ScorePackageProxy_07():
     assert spp.session is spp.chunk_wrangler.session
     assert spp.session is spp.material_package_wrangler.session
     assert spp.session is spp.material_package_maker_wrangler.session
-
-
-def test_ScorePackageProxy_08():
-    '''Back is handled correctly.
-    '''
-
-    studio = baca.scf.Studio()
-    studio.run(user_input="l'arch b q")
-    transcript = studio.transcript
-    
-    assert len(transcript) == 6
-    assert transcript[0] == transcript[4]

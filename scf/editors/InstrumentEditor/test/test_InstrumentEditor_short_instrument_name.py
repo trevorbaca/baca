@@ -8,17 +8,13 @@ def test_InstrumentEditor_short_instrument_name_01():
 
     studio = baca.scf.Studio()
     studio.run(user_input='1 perf 1 1 sin q')
-    assert len(studio.transcript) == 11
+    assert studio.ts == (11, (1, 5, 7))
 
     studio.run(user_input='1 perf 1 1 sin b q')
-    transcript = studio.transcript
-    assert len(transcript) == 13
-    assert transcript[-2] == transcript[-5]
+    assert studio.ts == (13, (1, 5, 7), (8, 11))
 
     studio.run(user_input='1 perf 1 1 sin studio q')
-    transcript = studio.transcript
-    assert len(transcript) == 13
-    assert transcript[-2] == transcript[-13]
+    assert studio.ts == (13, (0, 11), (1, 5, 7))
 
 
 def test_InstrumentEditor_short_instrument_name_02():
@@ -27,9 +23,7 @@ def test_InstrumentEditor_short_instrument_name_02():
 
     studio = baca.scf.Studio()
     studio.run(user_input='1 perf 1 1 sin -99 q')
-    transcript = studio.transcript
-    assert len(transcript) == 13
-    assert transcript[-1][0][:10] == transcript[-3][0][:10]
+    assert studio.ts == (13, (1, 5, 7))
 
 
 def test_InstrumentEditor_short_instrument_name_03():
