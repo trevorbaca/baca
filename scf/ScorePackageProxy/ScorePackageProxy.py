@@ -13,7 +13,7 @@ class ScorePackageProxy(PackageProxy):
         self._mus_proxy = baca.scf.MusPackageProxy(score_package_short_name, session=self.session)
         self._chunk_wrangler = baca.scf.ChunkPackageWrangler(session=self.session)
         self._material_wrangler = baca.scf.MaterialPackageWrangler(session=self.session)
-        self._material_proxy_wrangler = baca.scf.MaterialPackageMakerWrangler(session=self.session)
+        self._material_package_maker_wrangler = baca.scf.MaterialPackageMakerWrangler(session=self.session)
 
     ### READ-ONLY PUBLIC ATTRIBUTES ###
 
@@ -69,8 +69,8 @@ class ScorePackageProxy(PackageProxy):
         return self.get_tag('instrumentation')
 
     @property
-    def material_proxy_wrangler(self):
-        return self._material_proxy_wrangler
+    def material_package_maker_wrangler(self):
+        return self._material_package_maker_wrangler
 
     @property
     def material_wrangler(self):

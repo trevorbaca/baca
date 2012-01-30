@@ -9,25 +9,17 @@ def test_ScorePackageProxy_01():
     archipel = baca.scf.ScorePackageProxy('archipel')
     archipel.run(user_input='q')
 
-#    assert archipel.transcript[-2] == \
-#    ["L'archipel du corps (2011)",
-#      '',
-#      '     Chunks',
-#      '',
-#      '     [create chunk] (ch)',
-#      '',
-#      '     Materials',
-#      '',
-#      '     create interactive material (mi)',
-#      '     create static material (ms)',
-#      '',
-#      '     Setup',
-#      '',
-#      '     forces tagline (ft)',
-#      '     performers (pf)',
-#      '     title (tl)',
-#      '     year of completion (yr)',
-#      '']
+    assert archipel.transcript[-2] == \
+    ["L'archipel du corps (2011)",
+      '',
+      '     chunks (h)',
+      '     materials (m)',
+      '',
+      '     forces tagline (ft)',
+      '     performers (pf)',
+      '     title (tl)',
+      '     year of completion (yr)',
+      '']
 
 
 def test_ScorePackageProxy_02():
@@ -97,15 +89,15 @@ def test_ScorePackageProxy_07():
     '''Shared session.
     '''
 
-    score_proxy = baca.scf.ScorePackageProxy('archipel')
+    spp = baca.scf.ScorePackageProxy('archipel')
 
-    assert score_proxy.session is score_proxy.dist_proxy.session
-    assert score_proxy.session is score_proxy.etc_proxy.session
-    assert score_proxy.session is score_proxy.exg_proxy.session
-    assert score_proxy.session is score_proxy.mus_proxy.session
-    assert score_proxy.session is score_proxy.chunk_wrangler.session
-    assert score_proxy.session is score_proxy.material_wrangler.session
-    assert score_proxy.session is score_proxy.material_proxy_wrangler.session
+    assert spp.session is spp.dist_proxy.session
+    assert spp.session is spp.etc_proxy.session
+    assert spp.session is spp.exg_proxy.session
+    assert spp.session is spp.mus_proxy.session
+    assert spp.session is spp.chunk_wrangler.session
+    assert spp.session is spp.material_wrangler.session
+    assert spp.session is spp.material_package_maker_wrangler.session
 
 
 def test_ScorePackageProxy_08():

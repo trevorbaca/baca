@@ -10,7 +10,7 @@ class MaterialPackageWrangler(PackageWrangler):
         import baca
         PackageWrangler.__init__(self, 
             self.studio_materials_package_importable_name, 'mus.materials', session=session)
-        self._material_proxy_wrangler = baca.scf.MaterialPackageMakerWrangler(session=self.session)
+        self._material_package_maker_wrangler = baca.scf.MaterialPackageMakerWrangler(session=self.session)
 
     ### READ-ONLY PUBLIC ATTRIBUTES ###
 
@@ -19,8 +19,8 @@ class MaterialPackageWrangler(PackageWrangler):
         return 'materials'
 
     @property
-    def material_proxy_wrangler(self):
-        return self._material_proxy_wrangler
+    def material_package_maker_wrangler(self):
+        return self._material_package_maker_wrangler
     
     ### PUBLIC METHODS ###
 
@@ -54,7 +54,7 @@ class MaterialPackageWrangler(PackageWrangler):
         return material_package_importable_name
 
     def get_package_proxy(self, package_importable_name):
-        return self.material_proxy_wrangler.get_package_proxy(package_importable_name)
+        return self.material_package_maker_wrangler.get_package_proxy(package_importable_name)
 
     def handle_main_menu_result(self, result):
         if result == 'd':
@@ -88,7 +88,8 @@ class MaterialPackageWrangler(PackageWrangler):
             return
         self.push_backtrack()
         material_package_maker_class_name = \
-            self.material_proxy_wrangler.select_material_proxy_class_name_interactively(clear=False, cache=True)
+            self.material_package_maker_wrangler.select_material_proxy_class_name_interactively(
+                clear=False, cache=True)
         self.pop_backtrack()
         if self.backtrack():
             return
