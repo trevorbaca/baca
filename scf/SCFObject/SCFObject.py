@@ -218,58 +218,6 @@ class SCFObject(object):
         finally:
             readline.set_startup_hook()
 
-    def is_argument_range_string(self, expr):
-        pattern = re.compile('^(\w+( *- *\w+)?)(, *\w+( *- *\w+)?)*$')
-        return pattern.match(expr) is not None
-
-    def is_boolean(self, expr):
-        return isinstance(expr, bool)
-
-    def is_integer(self, expr):
-        return isinstance(expr, int)
-
-    def is_integer_or_none(self, expr):
-        return expr is None or self.is_integer(expr)
-
-    def is_markup(self, expr):
-        return isinstance(expr, markuptools.Markup)
-
-    def is_named_chromatic_pitch(self, expr):
-        return isinstance(expr, pitchtools.NamedChromaticPitch)
-
-    def is_negative_integer(self, expr):
-        return self.is_integer(expr) and expr < 0
-
-    def is_nonnegative_integer(self, expr):
-        return self.is_integer(expr) and expr <= 0
-
-    def is_nonpositive_integer(self, expr):
-        return self.is_integer(expr) and 0 <= expr
-
-    def is_pitch_range_or_none(self, expr):
-        return isinstance(expr, (pitchtools.PitchRange, type(None)))
-
-    def is_positive_integer(self, expr):
-        return self.is_integer(expr) and 0 < expr
-
-    def is_string(self, expr):
-        return isinstance(expr, str)
-
-    def is_string_or_none(self, expr):
-        return isinstance(expr, (str, type(None)))
-
-    def is_valid_argument_range_string_for_argument_list(self, argument_range_string, argument_list):
-        from baca.scf.menuing.MenuSection import MenuSection
-        if isinstance(argument_range_string, str):
-            dummy_section = MenuSection()
-            dummy_section.tokens = argument_list[:]
-            if dummy_section.argument_range_string_to_numbers(argument_range_string) is not None:
-                return True
-        return False
-
-    def is_yes_no_string(self, expr):
-        return 'yes'.startswith(expr.lower()) or 'no'.startswith(expr.lower())
-
     def make_new_getter(self, where=None):
         import baca
         return baca.scf.menuing.UserInputGetter(where=where, session=self.session)

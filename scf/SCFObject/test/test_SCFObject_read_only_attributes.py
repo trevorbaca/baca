@@ -2,7 +2,7 @@ import baca
 import types
 
 
-def test_SCFObject_01():
+def test_SCFObject_read_only_attributes_01():
     '''SCF object attributes.
     '''
 

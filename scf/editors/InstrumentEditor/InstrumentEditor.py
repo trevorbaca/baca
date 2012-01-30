@@ -1,5 +1,6 @@
 from abjad.tools import instrumenttools
 from baca.scf.editors.InteractiveEditor import InteractiveEditor
+from baca.scf import predicates
 
 
 # TODO: eventually make transposition information editable
@@ -18,10 +19,10 @@ class InstrumentEditor(InteractiveEditor):
     @property
     def target_attribute_tuples(self):
         return (
-            ('instrument_name', self.is_string, True, None),
-            ('instrument_name_markup', self.is_markup, True, None), 
-            ('short_instrument_name',  self.is_string, True, None),
-            ('short_instrument_name_markup', self.is_markup, True, None),)
+            ('instrument_name', predicates.is_string, True, None),
+            ('instrument_name_markup', predicates.is_markup, True, None), 
+            ('short_instrument_name',  predicates.is_string, True, None),
+            ('short_instrument_name_markup', predicates.is_markup, True, None),)
             
     @property
     def target_class(self):

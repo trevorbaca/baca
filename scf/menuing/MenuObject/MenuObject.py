@@ -1,5 +1,6 @@
 from abjad.tools import iotools
 from baca.scf.SCFObject.SCFObject import SCFObject
+from baca.scf import predicates
 import os
 import subprocess
 
@@ -110,6 +111,7 @@ class MenuObject(SCFObject):
         else:
             return directive
 
+
     def make_default_hidden_section(self, session=None, where=None):
         from baca.scf.menuing.MenuSection import MenuSection
         section = MenuSection(is_hidden=True, session=session, where=where)
@@ -129,7 +131,7 @@ class MenuObject(SCFObject):
         return section
 
     def make_is_integer_in_closed_range(self, start, stop):
-        return lambda expr: self.is_integer(expr) and start <= expr <= stop
+        return lambda expr: predicates.is_integer(expr) and start <= expr <= stop
 
     def make_tab(self, n):
         return 4 * n * ' '

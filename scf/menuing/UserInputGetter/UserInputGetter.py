@@ -1,6 +1,7 @@
 from abjad.tools import iotools
 from abjad.tools import pitchtools
 from baca.scf.menuing.MenuSectionAggregator import MenuSectionAggregator
+from baca.scf import predicates
 import types
 
 
@@ -53,18 +54,18 @@ class UserInputGetter(MenuSectionAggregator):
         message = "value for '{}' must be argument range."
         self.append_something(spaced_attribute_name, message, default=default)
         self.argument_lists[-1] = argument_list
-        test = lambda expr: self.is_valid_argument_range_string_for_argument_list(expr, argument_list)
+        test = lambda expr: predicates.is_valid_argument_range_string_for_argument_list(expr, argument_list)
         self.tests.append(test)
 
     def append_boolean(self, spaced_attribute_name, default=None):
         message = "value for '{}' must be boolean."
         self.append_something(spaced_attribute_name, message, default=default)
-        self.tests.append(self.is_boolean)
+        self.tests.append(predicates.is_boolean)
 
     def append_integer(self, spaced_attribute_name, default=None):
         message = "value for '{}' must be integer."
         self.append_something(spaced_attribute_name, message, default=default)
-        self.tests.append(self.is_integer)
+        self.tests.append(predicates.is_integer)
 
     def append_integer_in_closed_range(self, spaced_attribute_name, start, stop, default=None):
         message = "value for '{}' must be integer between {} and {}, inclusive."
@@ -74,7 +75,7 @@ class UserInputGetter(MenuSectionAggregator):
     def append_integer_or_none(self, spaced_attribute_name, default=None):
         message = "value for '{}' must be integer or none."
         self.append_something(spaced_attribute_name, message, default=default)
-        self.tests.append(self.is_integer_or_none)
+        self.tests.append(predicates.is_integer_or_none)
 
     def append_markup(self, spaced_attribute_name, default=None):
         message = "value for '{}' must be markup."
@@ -83,7 +84,7 @@ class UserInputGetter(MenuSectionAggregator):
         execs.append('from abjad import *')
         execs.append('value = markuptools.Markup({})')
         self.execs[-1] = execs
-        self.tests.append(self.is_markup)
+        self.tests.append(predicates.is_markup)
 
     def append_named_chromatic_pitch(self, spaced_attribute_name, default=None):
         message = "value for '{}' must be named chromatic pitch."
@@ -92,7 +93,7 @@ class UserInputGetter(MenuSectionAggregator):
         execs.append('from abjad import *')
         execs.append('value = pitchtools.NamedChromaticPitch({})')
         self.execs[-1] = execs
-        self.tests.append(self.is_named_chromatic_pitch)
+        self.tests.append(predicates.is_named_chromatic_pitch)
 
     def append_pitch_range(self, spaced_attribute_name, default=None):
         message = "value for '{}' must be pitch range."
@@ -101,7 +102,7 @@ class UserInputGetter(MenuSectionAggregator):
         execs.append('from abjad import *')
         execs.append('value = pitchtools.PitchRange({})')
         self.execs[-1] = execs
-        self.tests.append(self.is_pitch_range_or_none)
+        self.tests.append(predicates.is_pitch_range_or_none)
 
     def append_something(self, spaced_attribute_name, message, 
         additional_message_arguments=None, default=None):
@@ -117,12 +118,12 @@ class UserInputGetter(MenuSectionAggregator):
     def append_string(self, spaced_attribute_name, default=None):
         message = "value for '{}' must be string."
         self.append_something(spaced_attribute_name, message, default=default)
-        self.tests.append(self.is_string)
+        self.tests.append(predicates.is_string)
 
     def append_string_or_none(self, spaced_attribute_name, default=None):
         message = "value for '{}' must be string or none."
         self.append_something(spaced_attribute_name, message, default=default)
-        self.tests.append(self.is_string_or_none)
+        self.tests.append(predicates.is_string_or_none)
 
     def append_symbolic_pitch_range_string(self, spaced_attribute_name, default=None):
         message = "value for '{}' must be symbolic pitch range string. Ex: [A0, C8]."
@@ -132,7 +133,7 @@ class UserInputGetter(MenuSectionAggregator):
     def append_yes_no_string(self, spaced_attribute_name, default=None):
         message = "value for '{}' must be 'y' or 'n'."
         self.append_something(spaced_attribute_name, message, default=default)
-        self.tests.append(self.is_yes_no_string)
+        self.tests.append(predicates.is_yes_no_string)
 
     def apply_tests_to_value(self, value):
         if self.prompt_index < len(self.tests):

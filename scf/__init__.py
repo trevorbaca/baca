@@ -35,3 +35,4 @@ import exceptions
 import helpers
 import materialpackagemakers
 import menuing
+import predicates

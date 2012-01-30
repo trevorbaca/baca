@@ -1,5 +1,6 @@
 from abjad.tools import pitchtools
 from baca.scf.editors.InteractiveEditor import InteractiveEditor
+from baca.scf import predicates
 
 
 class PitchRangeEditor(InteractiveEditor):
@@ -13,10 +14,10 @@ class PitchRangeEditor(InteractiveEditor):
     @property
     def target_attribute_tuples(self):
         return (
-            ('start_pitch', self.is_named_chromatic_pitch, False, None),
-            ('start_pitch_is_included_in_range', self.is_boolean, False, True),
-            ('stop_pitch', self.is_named_chromatic_pitch, False, None),
-            ('stop_pitch_is_included_in_range', self.is_boolean, False, True),)
+            ('start_pitch', predicates.is_named_chromatic_pitch, False, None),
+            ('start_pitch_is_included_in_range', predicates.is_boolean, False, True),
+            ('stop_pitch', predicates.is_named_chromatic_pitch, False, None),
+            ('stop_pitch_is_included_in_range', predicates.is_boolean, False, True),)
 
     @property
     def target_class(self):
