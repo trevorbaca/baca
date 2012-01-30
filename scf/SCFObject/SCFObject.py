@@ -11,7 +11,6 @@ import readline
 import sys
 
 
-# TODO: move all self.is_ predicates to MenuObject
 class SCFObject(object):
     
     def __init__(self, session=None):
@@ -24,7 +23,6 @@ class SCFObject(object):
 
     ### READ-ONLY PUBLIC ATTRIBUTES ###
 
-    # TODO: write test
     @property
     def assets_directory(self):
         return os.path.join(self.scf_root_directory, 'assets')
@@ -42,44 +40,25 @@ class SCFObject(object):
         return 5
 
     @property
-    def helpers(self):
-        from baca.scf import helpers
-        return helpers
-
-    # TODO: write test
-    @property
     def materialpackagemakers_directory_name(self):
         return os.path.join(self.scf_root_directory, 'materialpackagemakers')
 
-    # TODO: write test
     @property
     def materialpackagemakers_package_importable_name(self):
         return '.'.join([self.scf_package_importable_name, 'materialpackagemakers'])
 
-    # TODO: write test
     @property
     def scf_package_importable_name(self):
         return '.'.join([self.studio_package_importable_name, 'scf'])
 
-    # TODO: write test
     @property
     def scf_root_directory(self):
         return self.package_importable_name_to_directory_name(self.scf_package_importable_name)
 
     @property
-    def score_package_short_names(self):
-        result = []
-        scores_directory = os.environ.get('SCORES')
-        for x in os.listdir(scores_directory):
-            if x[0].isalpha():
-                result.append(x)
-        return result
-
-    @property
     def session(self):
         return self._session
 
-    # TODO: write test
     @property
     def sketches_package_importable_name(self):
         return '.'.join([self.studio_package_importable_name, 'sketches'])
@@ -94,12 +73,10 @@ class SCFObject(object):
     def spaced_class_name(self):
         return iotools.uppercamelcase_to_space_delimited_lowercase(self.class_name)
 
-    # TODO: write test
     @property
     def studio_directory_name(self):
         return self.package_importable_name_to_directory_name(self.studio_package_importable_name)
 
-    # TODO: write test
     @property
     def studio_materials_package_importable_name(self):
         return '.'.join([self.studio_package_importable_name, 'materials'])
@@ -108,15 +85,13 @@ class SCFObject(object):
     def studio_package_importable_name(self):
         return 'baca'
 
-    # TODO: write test; change to stylesheets_directory_name
     @property
-    def stylesheets_directory(self):
+    def stylesheets_directory_name(self):
         return os.path.join(self.scf_root_directory, 'stylesheets')
 
-    # TODO: write test
     @property
     def stylesheets_package_importable_name(self):
-        '.'.join([self.scf_package_importable_name, 'stylesheets'])
+        return '.'.join([self.scf_package_importable_name, 'stylesheets'])
 
     @property
     def transcript(self):
