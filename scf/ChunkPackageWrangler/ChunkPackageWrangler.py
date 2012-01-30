@@ -17,10 +17,6 @@ class ChunkPackageWrangler(PackageWrangler):
 
     ### PUBLIC METHODS ###
 
-    def make_chunk_interactively(self):
-        chunk_proxy = ChunkPackageProxy(session=self.session)
-        chunk_proxy.make_chunk_interactively()
-
     def get_package_proxy(self, package_importable_name):
         return ChunkPackageProxy(package_importable_name, session=self.session)
 
@@ -31,6 +27,10 @@ class ChunkPackageWrangler(PackageWrangler):
         else:
             chunk_proxy = self.get_package_proxy(result)
             chunk_proxy.run()
+
+    def make_chunk_interactively(self):
+        chunk_proxy = ChunkPackageProxy(session=self.session)
+        chunk_proxy.make_chunk_interactively()
 
     def make_main_menu(self, head=None):
         menu, section = self.make_new_menu(where=self.where(), is_numbered=True)

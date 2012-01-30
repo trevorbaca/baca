@@ -51,14 +51,6 @@ class Studio(SCFObject):
         next_index = (index + 1) % len(score_package_short_names)
         return score_package_short_names[next_index]
 
-    def get_prev_score_package_short_name(self):
-        score_package_short_names = self.score_wrangler.score_package_short_names_to_display
-        if self.session.current_score_package_short_name is None:
-            return score_package_short_names[-1]
-        index = score_package_short_names.index(self.session.current_score_package_short_name)
-        prev_index = (index - 1) % len(score_package_short_names)
-        return score_package_short_names[prev_index]
-
     # TODO: write test
     def get_package_root_name_interactively(self, clear=True, cache=False):
         self.cache_breadcrumbs(cache=cache)
@@ -75,6 +67,14 @@ class Studio(SCFObject):
             if package_root_name:
                 self.restore_breadcrumbs(cache=cache)
                 return package_root_name
+
+    def get_prev_score_package_short_name(self):
+        score_package_short_names = self.score_wrangler.score_package_short_names_to_display
+        if self.session.current_score_package_short_name is None:
+            return score_package_short_names[-1]
+        index = score_package_short_names.index(self.session.current_score_package_short_name)
+        prev_index = (index - 1) % len(score_package_short_names)
+        return score_package_short_names[prev_index]
 
     def handle_main_menu_result(self, result):
         if not isinstance(result, str):
@@ -167,6 +167,23 @@ class Studio(SCFObject):
         section.append(('pytest_all', 'pytest_all'))
         return menu
 
+    def manage_svn(self, clear=True):
+        while True:
+            self.push_breadcrumb('repository commands')
+            menu = self.make_svn_menu()
+            result = menu.run(clear=clear)
+            if self.session.is_backtracking_to_score:
+                self.session.is_backtracking_to_score = False
+                self.pop_breadcrumb()
+                continue
+            elif self.backtrack():
+                break
+            self.handle_svn_menu_result(result)
+            if self.backtrack():
+                break
+            self.pop_breadcrumb()
+        self.pop_breadcrumb()
+
     def run(self, user_input=None, clear=True, cache=False):
         type(self).__init__(self)
         self.assign_user_input(user_input=user_input)
@@ -221,23 +238,6 @@ class Studio(SCFObject):
             self.pop_breadcrumb()
         self.pop_breadcrumb()
         self.restore_breadcrumbs(cache=cache)
-
-    def manage_svn(self, clear=True):
-        while True:
-            self.push_breadcrumb('repository commands')
-            menu = self.make_svn_menu()
-            result = menu.run(clear=clear)
-            if self.session.is_backtracking_to_score:
-                self.session.is_backtracking_to_score = False
-                self.pop_breadcrumb()
-                continue
-            elif self.backtrack():
-                break
-            self.handle_svn_menu_result(result)
-            if self.backtrack():
-                break
-            self.pop_breadcrumb()
-        self.pop_breadcrumb()
 
     def run_py_test_all(self, prompt=True):
         proc = subprocess.Popen(

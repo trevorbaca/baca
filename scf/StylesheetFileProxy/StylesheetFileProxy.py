@@ -39,9 +39,6 @@ class StylesheetFileProxy(FileProxy):
         line = 'stylesheet deleted.'
         self.proceed(line, prompt=prompt)
 
-    def vi_stylesheet(self):
-        os.system('vi {}'.format(self.full_file_name))
-
     def handle_main_menu_result(self, result):
         assert isinstance(result, str)
         if result == 'audit':
@@ -58,6 +55,15 @@ class StylesheetFileProxy(FileProxy):
         else:
             raise ValueError
 
+    def make_main_menu(self):
+        menu, section = self.make_new_menu(where=self.where)
+        section.append(('audit', 'audit stylesheet'))
+        section.append(('cp', 'copy stylesheet'))
+        section.append(('del', 'delete stylesheet'))
+        section.append(('ren', 'rename stylesheet'))
+        section.append(('vi', 'vi stylesheet'))
+        return menu
+
     def rename_stylesheet_interactively(self, prompt=True):
         getter = self.make_new_getter()
         getter.append_string('new file name')
@@ -71,15 +77,6 @@ class StylesheetFileProxy(FileProxy):
         self.rename_file(new_full_file_name)
         line = 'stylesheet renamed.'
         self.proceed(line, prompt=prompt)
-
-    def make_main_menu(self):
-        menu, section = self.make_new_menu(where=self.where)
-        section.append(('audit', 'audit stylesheet'))
-        section.append(('cp', 'copy stylesheet'))
-        section.append(('del', 'delete stylesheet'))
-        section.append(('ren', 'rename stylesheet'))
-        section.append(('vi', 'vi stylesheet'))
-        return menu
 
     def run(self, user_input=None, clear=True, cache=False):
         self.assign_user_input(user_input=user_input)
@@ -99,3 +96,6 @@ class StylesheetFileProxy(FileProxy):
             self.pop_breadcrumb()
         self.pop_breadcrumb()
         self.restore_breadcrumbs(cache=cache)
+
+    def vi_stylesheet(self):
+        os.system('vi {}'.format(self.full_file_name))

@@ -132,12 +132,6 @@ class ScorePackageProxy(PackageProxy):
 
     ### PUBLIC METHODS ###
 
-    def make_package_structure(self):
-        self.fix_score_package_directory_structure(is_interactive=False)
-
-    def make_score_interactively(self):
-        self.print_not_implemented()
-
     def edit_forces_tagline_interactively(self):
         getter = self.make_new_getter(where=self.where())
         getter.append_string('Forces tagline')
@@ -242,6 +236,12 @@ class ScorePackageProxy(PackageProxy):
         hidden_section.append(('svn', 'manage repository'))
         hidden_section.append(('tags', 'manage tags'))
         return menu
+
+    def make_package_structure(self):
+        self.fix_score_package_directory_structure(is_interactive=False)
+
+    def make_score_interactively(self):
+        self.print_not_implemented()
 
     def make_svn_menu(self):
         menu, section = self.make_new_menu(where=self.where(), is_keyed=False)

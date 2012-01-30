@@ -508,6 +508,17 @@ class MaterialPackageProxy(PackageProxy):
     def regenerate_everything(self, is_forced=False):
         self.print_not_implemented()
 
+    def remove(self):
+        self.remove_material_from_materials_initializer()
+        PackageProxy.remove(self)
+
+    def remove_material_from_materials_initializer(self):
+        import_statement = 'safe_import({!r}, {!r})\n'.format(
+            self.material_underscored_name, self.material_underscored_name)
+        parent_package = PackageProxy(self.parent_package_importable_name, session=self.session)
+        if import_statement in parent_package.initializer_file_proxy.protected_import_statements:
+            parent_package.initializer_file_proxy.protected_import_statements.remove(import_statement)
+
     # TODO: port
     def rename_material(self):
         line = 'current material name: {}'.format(self.material_underscored_name)
@@ -560,17 +571,6 @@ class MaterialPackageProxy(PackageProxy):
             os.system(command)
         else:
             raise NotImplementedError('commit to repository and then rename.')
-
-    def remove(self):
-        self.remove_material_from_materials_initializer()
-        PackageProxy.remove(self)
-
-    def remove_material_from_materials_initializer(self):
-        import_statement = 'safe_import({!r}, {!r})\n'.format(
-            self.material_underscored_name, self.material_underscored_name)
-        parent_package = PackageProxy(self.parent_package_importable_name, session=self.session)
-        if import_statement in parent_package.initializer_file_proxy.protected_import_statements:
-            parent_package.initializer_file_proxy.protected_import_statements.remove(import_statement)
 
     def run(self, user_input=None, clear=True, cache=False):
         self.assign_user_input(user_input=user_input)

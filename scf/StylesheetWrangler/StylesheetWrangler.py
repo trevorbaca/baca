@@ -26,21 +26,6 @@ class StylesheetWrangler(PackageWrangler):
 
     ### PUBLIC METHODS ###
 
-    # TODO: write test
-    def make_new_stylesheet_interactively(self):
-        getter = self.make_new_getter()
-        getter.append_string('stylesheet name')
-        stylesheet_name = getter.run()
-        if self.backtrack():
-            return
-        stylesheet_name = iotools.string_to_strict_directory_name(stylesheet_name)
-        if not stylesheet_name.endswith('.ly'):
-            stylesheet_name = stylesheet_name + '.ly'
-        stylesheet_file_name = os.path.join(self.stylesheets_directory, stylesheet_name)
-        #self.edit_stylesheet(stylesheet_file_name)
-        stylesheet_proxy = StylesheetFileProxy(stylesheet_file_name, session=self.session)
-        stylesheet_proxy.edit_stylesheet()
-
     def handle_main_menu_result(self, result):
         if result == 'new':
             self.make_new_stylesheet_interactively()
@@ -55,6 +40,21 @@ class StylesheetWrangler(PackageWrangler):
         section = menu.make_new_section()
         section.append(('new', 'make new stylesheet'))
         return menu
+
+    # TODO: write test
+    def make_new_stylesheet_interactively(self):
+        getter = self.make_new_getter()
+        getter.append_string('stylesheet name')
+        stylesheet_name = getter.run()
+        if self.backtrack():
+            return
+        stylesheet_name = iotools.string_to_strict_directory_name(stylesheet_name)
+        if not stylesheet_name.endswith('.ly'):
+            stylesheet_name = stylesheet_name + '.ly'
+        stylesheet_file_name = os.path.join(self.stylesheets_directory, stylesheet_name)
+        #self.edit_stylesheet(stylesheet_file_name)
+        stylesheet_proxy = StylesheetFileProxy(stylesheet_file_name, session=self.session)
+        stylesheet_proxy.edit_stylesheet()
 
     def run(self, user_input=None, clear=True, cache=False):
         self.assign_user_input(user_input=user_input)

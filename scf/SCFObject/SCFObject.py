@@ -136,12 +136,6 @@ class SCFObject(object):
         if user_input is not None:
             self.session.user_input = user_input
 
-    def push_breadcrumb(self, breadcrumb=None):
-        if breadcrumb is not None:
-            self.breadcrumb_stack.append(breadcrumb)
-        else:
-            self.breadcrumb_stack.append(self.breadcrumb)
-
     def backtrack(self):
         return self.session.backtrack()
 
@@ -154,20 +148,6 @@ class SCFObject(object):
     def conditionally_clear_terminal(self):
         if self.session.is_displayable:
             iotools.clear_terminal()
-
-    def display(self, lines, capitalize_first_character=True):
-        assert isinstance(lines, (str, list))
-        if isinstance(lines, str):
-            lines = [lines]
-        if not self.session.hide_next_redraw:
-            if capitalize_first_character:
-                lines = [iotools.capitalize_string_start(line) for line in lines]
-            if lines:
-                if self.session.transcribe_next_command:
-                    self.session.complete_transcript.append_lines(lines)
-            if self.session.is_displayable:
-                for line in lines:
-                    print line
 
     def confirm(self, prompt_string='ok'):
         getter = self.make_new_getter(where=self.where())
@@ -182,6 +162,20 @@ class SCFObject(object):
             print 'debug: {!r}'.format(value)
         else:
             print 'debug ({}): {!r}'.format(annotation, value)
+
+    def display(self, lines, capitalize_first_character=True):
+        assert isinstance(lines, (str, list))
+        if isinstance(lines, str):
+            lines = [lines]
+        if not self.session.hide_next_redraw:
+            if capitalize_first_character:
+                lines = [iotools.capitalize_string_start(line) for line in lines]
+            if lines:
+                if self.session.transcribe_next_command:
+                    self.session.complete_transcript.append_lines(lines)
+            if self.session.is_displayable:
+                for line in lines:
+                    print line
 
     def edit_source_file(self):
         command = 'vi {}'.format(self.source_file_name)
@@ -224,15 +218,6 @@ class SCFObject(object):
         finally:
             readline.set_startup_hook()
 
-    def is_valid_argument_range_string_for_argument_list(self, argument_range_string, argument_list):
-        from baca.scf.menuing.MenuSection import MenuSection
-        if isinstance(argument_range_string, str):
-            dummy_section = MenuSection()
-            dummy_section.tokens = argument_list[:]
-            if dummy_section.argument_range_string_to_numbers(argument_range_string) is not None:
-                return True
-        return False
-
     def is_argument_range_string(self, expr):
         pattern = re.compile('^(\w+( *- *\w+)?)(, *\w+( *- *\w+)?)*$')
         return pattern.match(expr) is not None
@@ -273,6 +258,15 @@ class SCFObject(object):
     def is_string_or_none(self, expr):
         return isinstance(expr, (str, type(None)))
 
+    def is_valid_argument_range_string_for_argument_list(self, argument_range_string, argument_list):
+        from baca.scf.menuing.MenuSection import MenuSection
+        if isinstance(argument_range_string, str):
+            dummy_section = MenuSection()
+            dummy_section.tokens = argument_list[:]
+            if dummy_section.argument_range_string_to_numbers(argument_range_string) is not None:
+                return True
+        return False
+
     def is_yes_no_string(self, expr):
         return 'yes'.startswith(expr.lower()) or 'no'.startswith(expr.lower())
 
@@ -286,7 +280,6 @@ class SCFObject(object):
         section = menu.make_new_section(
             is_hidden=is_hidden, is_keyed=is_keyed, is_numbered=is_numbered, is_ranged=is_ranged)
         return menu, section
-
 
     # TODO: write test
     def module_importable_name_to_full_file_name(self, module_importable_name):
@@ -313,13 +306,6 @@ class SCFObject(object):
             raise ValueError('Unknown package importable name {!r}.'.format(package_importable_name))
         directory = os.path.join(*directory_parts)
         return directory
-
-    def pt(self):
-        pprint.pprint(self.transcript)
-        print len(self.transcript)
-
-    def ptc(self):
-        self.session.complete_transcript.ptc()
 
     def pop_backtrack(self):
         return self.session.backtracking_stack.pop()
@@ -376,12 +362,25 @@ class SCFObject(object):
         response = self.handle_raw_input('press return to continue.', include_chevron=False)
         self.conditionally_clear_terminal()
 
+    def pt(self):
+        pprint.pprint(self.transcript)
+        print len(self.transcript)
+
+    def ptc(self):
+        self.session.complete_transcript.ptc()
+
     def push_backtrack(self):
         if self.session.backtracking_stack:
             last_number = self.session.backtracking_stack[-1]
             self.session.backtracking_stack.append(last_number + 1)
         else:
             self.session.backtracking_stack.append(0)
+
+    def push_breadcrumb(self, breadcrumb=None):
+        if breadcrumb is not None:
+            self.breadcrumb_stack.append(breadcrumb)
+        else:
+            self.breadcrumb_stack.append(self.breadcrumb)
 
     def query(self, prompt):
         response = handle_raw_input(prompt)
@@ -393,16 +392,16 @@ class SCFObject(object):
             package_importable_name, package_importable_name)
         exec(command)
 
+    def restore_breadcrumbs(self, cache=False):
+        if cache:
+            self.session._breadcrumb_stack[:] = self.session.cached_breadcrumbs[:]
+
     def reveal_modules(self):
         command = 'module_names = sys.modules.keys()'
         exec(command)
         module_names = [x for x in module_names if x.startswith(self.score_package_short_name)]
         module_names.sort()
         return module_names
-
-    def restore_breadcrumbs(self, cache=False):
-        if cache:
-            self.session._breadcrumb_stack[:] = self.session.cached_breadcrumbs[:]
 
     def where(self):
         return inspect.stack()[1]

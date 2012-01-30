@@ -26,72 +26,6 @@ class MaterialPackageWrangler(PackageWrangler):
     ### PUBLIC METHODS ###
 
     # TODO: write test
-    def make_data_package_interactively(self):
-        self.push_backtrack()
-        material_package_importable_name = self.get_new_material_package_importable_name_interactively()
-        self.pop_backtrack()
-        if self.backtrack():
-            return
-        material_package_maker_class_name = None
-        should_have_illustration = False
-        self.make_material_package(material_package_importable_name, material_package_maker_class_name, should_have_illustration)
-
-    # TODO: write test
-    def make_editable_material_package_interactively(self):
-        self.push_backtrack()
-        material_package_importable_name = self.get_new_material_package_importable_name_interactively()
-        self.pop_backtrack()
-        if self.backtrack():
-            return
-        self.push_backtrack()
-        material_package_maker_class_name = \
-            self.material_proxy_wrangler.select_material_proxy_class_name_interactively(clear=False, cache=True)
-        self.pop_backtrack()
-        if self.backtrack():
-            return
-        # TODO: set following attribute by editor automatically
-        should_have_illustration = True
-        self.make_material_package(
-            material_package_importable_name, material_package_maker_class_name, should_have_illustration)
-
-    # TODO: write test
-    def make_handmade_material_package_interactively(self):
-        material_package_importable_name = self.get_new_material_package_importable_name_interactively()
-        material_package_maker_class_name = None
-        should_have_illustration = True
-        self.make_material_package(material_package_importable_name, material_package_maker_class_name, should_have_illustration)
-
-    # TODO: write test
-    def make_material_package(self, material_package_importable_name, material_package_maker_class_name, 
-        should_have_illustration, prompt=True):
-        '''True on success.'''
-        assert iotools.is_underscore_delimited_lowercase_package_name(material_package_importable_name)
-        assert material_package_maker_class_name is None or iotools.is_uppercamelcase_string(
-            material_package_maker_class_name)
-        assert isinstance(should_have_illustration, bool)
-        directory_name = self.package_importable_name_to_directory_name(material_package_importable_name)
-        if os.path.exists(directory_name):
-            line = 'package {!r} already exists.'.format(material_name)
-            self.proceed(line, prompt=prompt)
-            return False
-        os.mkdir(directory_name)
-        file(os.path.join(directory_name, '__init__.py'), 'w').write('')
-        material_proxy = MaterialPackageProxy(material_package_importable_name, session=self.session)
-        tags = collections.OrderedDict([])
-        tags['material_package_maker_class_name'] = material_package_maker_class_name
-        tags['should_have_illustration'] = should_have_illustration
-        material_proxy.initializer_file_proxy.write_stub_to_disk(tags=tags)
-        if material_package_maker_class_name is None:
-            if should_have_illustration:
-                material_proxy.material_definition_module_proxy.write_stub_to_disk(False, prompt=False)
-                material_proxy.illustration_builder_module_proxy.write_stub_to_disk(prompt=False)
-            else:
-                material_proxy.material_definition_module_proxy.write_stub_to_disk(True, prompt=False)
-        line = 'material package {!r} created.'.format(material_package_importable_name)
-        self.proceed(line, prompt=prompt)
-        return True
-
-    # TODO: write test
     def get_new_material_package_importable_name_interactively(self):
         import baca
         getter = self.make_new_getter(where=self.where())
@@ -134,6 +68,42 @@ class MaterialPackageWrangler(PackageWrangler):
             material_proxy = self.get_package_proxy(result)
             material_proxy.run()
         
+    # TODO: write test
+    def make_data_package_interactively(self):
+        self.push_backtrack()
+        material_package_importable_name = self.get_new_material_package_importable_name_interactively()
+        self.pop_backtrack()
+        if self.backtrack():
+            return
+        material_package_maker_class_name = None
+        should_have_illustration = False
+        self.make_material_package(material_package_importable_name, material_package_maker_class_name, should_have_illustration)
+
+    # TODO: write test
+    def make_editable_material_package_interactively(self):
+        self.push_backtrack()
+        material_package_importable_name = self.get_new_material_package_importable_name_interactively()
+        self.pop_backtrack()
+        if self.backtrack():
+            return
+        self.push_backtrack()
+        material_package_maker_class_name = \
+            self.material_proxy_wrangler.select_material_proxy_class_name_interactively(clear=False, cache=True)
+        self.pop_backtrack()
+        if self.backtrack():
+            return
+        # TODO: set following attribute by editor automatically
+        should_have_illustration = True
+        self.make_material_package(
+            material_package_importable_name, material_package_maker_class_name, should_have_illustration)
+
+    # TODO: write test
+    def make_handmade_material_package_interactively(self):
+        material_package_importable_name = self.get_new_material_package_importable_name_interactively()
+        material_package_maker_class_name = None
+        should_have_illustration = True
+        self.make_material_package(material_package_importable_name, material_package_maker_class_name, should_have_illustration)
+
     def make_main_menu(self, head=None):
         menu, section = self.make_new_menu(where=self.where(), is_numbered=True, is_keyed=False)
         section.tokens = self.list_wrangled_package_menuing_pairs(head=head)
@@ -142,6 +112,36 @@ class MaterialPackageWrangler(PackageWrangler):
         section.append(('h', 'make material by hand'))
         section.append(('e', 'make material with editor'))
         return menu
+
+    # TODO: write test
+    def make_material_package(self, material_package_importable_name, material_package_maker_class_name, 
+        should_have_illustration, prompt=True):
+        '''True on success.'''
+        assert iotools.is_underscore_delimited_lowercase_package_name(material_package_importable_name)
+        assert material_package_maker_class_name is None or iotools.is_uppercamelcase_string(
+            material_package_maker_class_name)
+        assert isinstance(should_have_illustration, bool)
+        directory_name = self.package_importable_name_to_directory_name(material_package_importable_name)
+        if os.path.exists(directory_name):
+            line = 'package {!r} already exists.'.format(material_name)
+            self.proceed(line, prompt=prompt)
+            return False
+        os.mkdir(directory_name)
+        file(os.path.join(directory_name, '__init__.py'), 'w').write('')
+        material_proxy = MaterialPackageProxy(material_package_importable_name, session=self.session)
+        tags = collections.OrderedDict([])
+        tags['material_package_maker_class_name'] = material_package_maker_class_name
+        tags['should_have_illustration'] = should_have_illustration
+        material_proxy.initializer_file_proxy.write_stub_to_disk(tags=tags)
+        if material_package_maker_class_name is None:
+            if should_have_illustration:
+                material_proxy.material_definition_module_proxy.write_stub_to_disk(False, prompt=False)
+                material_proxy.illustration_builder_module_proxy.write_stub_to_disk(prompt=False)
+            else:
+                material_proxy.material_definition_module_proxy.write_stub_to_disk(True, prompt=False)
+        line = 'material package {!r} created.'.format(material_package_importable_name)
+        self.proceed(line, prompt=prompt)
+        return True
 
     # TODO: write tests
     def package_root_name_to_materials_package_importable_name(self, package_root_name):

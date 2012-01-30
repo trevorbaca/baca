@@ -46,9 +46,6 @@ class DirectoryProxy(SCFObject):
     
     ### PUBLIC METHODS ###
 
-    def make_directory(self):
-        os.mkdir(self.directory_name)
-
     def get_directory_name_interactively(self):
         getter = self.make_new_getter(where=self.where())
         getter.append_string('directory name')
@@ -62,6 +59,9 @@ class DirectoryProxy(SCFObject):
         os.system('ls {}'.format(self.directory_name))
         self.display('')
         self.session.hide_next_redraw = True
+
+    def make_directory(self):
+        os.mkdir(self.directory_name)
 
     def remove(self):
         if self.is_in_repository:

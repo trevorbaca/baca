@@ -134,6 +134,19 @@ class MenuObject(SCFObject):
     def make_tab(self, n):
         return 4 * n * ' '
 
+    def show_hidden_menu_entries(self):
+        menu_lines = []
+        for section in self.sections:
+            if section.is_hidden:
+                for token in section.tokens:
+                    number, key, body, return_value = section.unpack_token(token)
+                    menu_line = self.make_tab(1) + ' '
+                    menu_line += '{} ({})'.format(body, key)
+                    menu_lines.append(menu_line)
+                menu_lines.append('')
+        self.display(menu_lines, capitalize_first_character=False)
+        self.session.hide_next_redraw = True
+
     def show_menu_client(self):
         lines = []
         if self.where is not None:
@@ -146,17 +159,4 @@ class MenuObject(SCFObject):
             lines.append('location not known.')
             lines.append('')
             self.display(lines)
-        self.session.hide_next_redraw = True
-
-    def show_hidden_menu_entries(self):
-        menu_lines = []
-        for section in self.sections:
-            if section.is_hidden:
-                for token in section.tokens:
-                    number, key, body, return_value = section.unpack_token(token)
-                    menu_line = self.make_tab(1) + ' '
-                    menu_line += '{} ({})'.format(body, key)
-                    menu_lines.append(menu_line)
-                menu_lines.append('')
-        self.display(menu_lines, capitalize_first_character=False)
         self.session.hide_next_redraw = True
