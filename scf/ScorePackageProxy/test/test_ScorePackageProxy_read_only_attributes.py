@@ -16,7 +16,7 @@ def test_ScorePackageProxy_read_only_attributes_01():
     assert isinstance(score_proxy.etc_proxy, baca.scf.DirectoryProxy)
     assert isinstance(score_proxy.exg_proxy, baca.scf.DirectoryProxy)
     assert isinstance(score_proxy.material_package_maker_wrangler, baca.scf.MaterialPackageMakerWrangler)
-    assert isinstance(score_proxy.material_wrangler, baca.scf.MaterialPackageWrangler)
+    assert isinstance(score_proxy.material_package_wrangler, baca.scf.MaterialPackageWrangler)
     assert isinstance(score_proxy.mus_proxy, baca.scf.MusPackageProxy)
 
     assert score_proxy.has_correct_initializers

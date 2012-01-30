@@ -14,7 +14,7 @@ def test_HomePackageProxy_01():
     assert hpp.initializer_file_name == '/Users/trevorbaca/Documents/other/baca/__init__.py'
     assert hpp.formatted_tags == []
     assert hpp.material_package_maker_wrangler == baca.scf.MaterialPackageMakerWrangler()
-    assert hpp.material_wrangler == baca.scf.MaterialPackageWrangler()
+    assert hpp.material_package_wrangler == baca.scf.MaterialPackageWrangler()
     assert hpp.materials_package_importable_name == 'baca.materials'
     assert hpp.package_importable_name == 'baca'
     assert hpp.package_short_name == 'baca'
@@ -34,4 +34,4 @@ def test_HomePackageProxy_02():
     hpp = baca.scf.HomePackageProxy()
 
     assert hpp.session is hpp.material_package_maker_wrangler.session
-    assert hpp.session is hpp.material_wrangler.session
+    assert hpp.session is hpp.material_package_wrangler.session

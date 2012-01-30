@@ -12,7 +12,7 @@ class ScorePackageProxy(PackageProxy):
         self._exg_proxy = baca.scf.ExgDirectoryProxy(score_package_short_name, session=self.session)
         self._mus_proxy = baca.scf.MusPackageProxy(score_package_short_name, session=self.session)
         self._chunk_wrangler = baca.scf.ChunkPackageWrangler(session=self.session)
-        self._material_wrangler = baca.scf.MaterialPackageWrangler(session=self.session)
+        self._material_package_wrangler = baca.scf.MaterialPackageWrangler(session=self.session)
         self._material_package_maker_wrangler = baca.scf.MaterialPackageMakerWrangler(session=self.session)
 
     ### READ-ONLY PUBLIC ATTRIBUTES ###
@@ -73,8 +73,8 @@ class ScorePackageProxy(PackageProxy):
         return self._material_package_maker_wrangler
 
     @property
-    def material_wrangler(self):
-        return self._material_wrangler
+    def material_package_wrangler(self):
+        return self._material_package_wrangler
 
     @property
     def materials_package_importable_name(self):
@@ -92,7 +92,7 @@ class ScorePackageProxy(PackageProxy):
     @property
     def score_package_wranglers(self):
         return (self.chunk_wrangler,
-            self.material_wrangler,)
+            self.material_package_wrangler,)
 
     @property
     def title(self):
@@ -197,7 +197,7 @@ class ScorePackageProxy(PackageProxy):
         if result == 'h':
             self.chunk_wrangler.run(head=self.package_short_name)
         elif  result == 'm':
-            self.material_wrangler.run(head=self.package_short_name)
+            self.material_package_wrangler.run(head=self.package_short_name)
         elif result == 'ft':
             self.edit_forces_tagline_interactively()
         elif result == 'pf':
@@ -317,7 +317,7 @@ class ScorePackageProxy(PackageProxy):
         self.display(lines)
 
     def summarize_materials(self):
-        materials = self.material_wrangler.package_spaced_names
+        materials = self.material_package_wrangler.package_spaced_names
         lines = []
         if not materials:
             lines.append('{}Materials (none yet)'.format(self.make_tab(1)))
