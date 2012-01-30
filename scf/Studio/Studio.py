@@ -42,6 +42,7 @@ class Studio(SCFObject):
         self.session._breadcrumb_stack = []
         score_proxy.run()
         self.session._breadcrumb_stack = breadcrumbs
+        self.session.current_score_package_name = None
 
     def get_next_score_package_short_name(self):
         score_package_short_names = self.score_wrangler.score_package_short_names_to_display

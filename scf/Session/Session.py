@@ -84,6 +84,10 @@ class Session(object):
         return not self.user_input
 
     @property
+    def is_in_score(self):
+        return self.current_score_package_short_name is not None
+
+    @property
     def is_navigating_to_sibling_score(self):
         if self.is_navigating_to_next_score:
             return True
