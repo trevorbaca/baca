@@ -60,6 +60,7 @@ def test_MaterialPackageWrangler_run_04():
         'testdata mdcanned canned_testdata_material_definition.py default '
         'dc default q')
     assert studio.package_exists('baca.materials.testdata')
+    assert baca.materials.testdata == [1, 2, 3, 4, 5]
 
     mpp = baca.scf.MaterialPackageProxy('baca.materials.testdata')
     assert mpp.directory_contents == ['__init__.py', 'material_definition.py', 'output_material.py']

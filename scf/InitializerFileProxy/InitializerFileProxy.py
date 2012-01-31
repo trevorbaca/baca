@@ -17,7 +17,7 @@ class InitializerFileProxy(ParsableFileProxy):
         return (
             (self.encoding_directives, True, 0),
             (self.docstring_lines, False, 1),
-            (self.setup_statements, True, 1),
+            (self.setup_statements, True, 2),
             (self.protected_import_statements, True, 1),
             (self.tag_lines, False, 1),
             (self.teardown_statements, True, 0),
@@ -26,9 +26,15 @@ class InitializerFileProxy(ParsableFileProxy):
     ### PUBLIC METHODS ###
 
     def add_protected_import_statement(self, source_module_short_name, source_attribute_name):
-        import_statement = 'safe_import(globals(), {!r}, {!r})'
-        import_statement = import_statement.format(source_module_short_name, source_attribute_name)
-        self.protected_import_statements.append(import_statement)
+        safe_import_import_statement = 'from baca.scf.helpers import safe_import\n'
+        if safe_import_import_statement not in self.setup_statements:
+            self.setup_statements.append(safe_import_import_statement)
+        protected_import_statement = 'safe_import(globals(), {!r}, {!r})\n'
+        protected_import_statement = protected_import_statement.format(
+            source_module_short_name, source_attribute_name)
+        if protected_import_statement not in self.protected_import_statements:
+            self.protected_import_statements.append(protected_import_statement)
+        self.write_to_disk()
         
     def parse(self, initializer_file_name=None):
         if initializer_file_name is None:

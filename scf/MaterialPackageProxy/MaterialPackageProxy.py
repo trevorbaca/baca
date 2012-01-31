@@ -529,11 +529,16 @@ class MaterialPackageProxy(PackageProxy):
         PackageProxy.remove(self)
 
     def remove_material_from_materials_initializer(self):
-        import_statement = 'safe_import({!r}, {!r})\n'.format(
-            self.material_underscored_name, self.material_underscored_name)
+        import_statement = 'safe_import(globals(), {!r}, {!r})\n'
+        import_statement = import_statement.format(self.material_underscored_name, self.material_underscored_name)
         parent_package = PackageProxy(self.parent_package_importable_name, session=self.session)
-        if import_statement in parent_package.initializer_file_proxy.protected_import_statements:
-            parent_package.initializer_file_proxy.protected_import_statements.remove(import_statement)
+        parent_package_initializer_file_proxy = parent_package.initializer_file_proxy
+        filtered_import_statements = []
+        for protected_import_statement in parent_package_initializer_file_proxy.protected_import_statements:
+            if not protected_import_statement == import_statement:
+                filtered_import_statements.append(protected_import_statement)
+        parent_package_initializer_file_proxy.protected_import_statements[:] = filtered_import_statements
+        parent_package_initializer_file_proxy.write_to_disk()
 
     # TODO: port
     def rename_material(self):
