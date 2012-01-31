@@ -74,3 +74,19 @@ def test_MaterialPackageWrangler_run_04():
 
     studio.run(user_input='m testdata del remove default q')
     assert not studio.package_exists('baca.materials.testdata')
+
+
+def test_MaterialPackageWrangler_run_05():
+    '''Make data package. Delete material definition module. Test. Remove package.
+    '''
+    py.test.skip('implementing now.')
+
+    studio = baca.scf.Studio()
+    assert not studio.package_exists('baca.materials.testdata')
+
+    studio.run(user_input='m d testdata default default '
+        'mdd default q')
+    assert studio.package_exists('baca.materials.testdata')
+
+    mpp = baca.scf.MaterialPackageProxy('baca.materials.testdata')
+    assert mpp.directory_contents == ['__init__.py']
