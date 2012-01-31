@@ -57,7 +57,8 @@ class MaterialPackageProxy(PackageProxy):
     @property
     def has_material_definition(self):
         if self.should_have_material_definition_module:
-            return bool(self.material_definition_module_proxy.import_material_definition())
+            if self.has_material_definition_module:
+                return bool(self.material_definition_module_proxy.import_material_definition())
         return False
 
     @property
@@ -180,10 +181,11 @@ class MaterialPackageProxy(PackageProxy):
     @property
     def material_definition_module_proxy(self):
         if self.should_have_material_definition_module:
-            if not self.has_material_definition_module:
-                file(self.material_definition_module_file_name, 'w').write('')    
-            return MaterialDefinitionModuleProxy(
-                self.material_definition_module_importable_name, session=self.session)
+            #if not self.has_material_definition_module:
+            #    file(self.material_definition_module_file_name, 'w').write('')    
+            if self.has_material_definition_module:
+                return MaterialDefinitionModuleProxy(
+                    self.material_definition_module_importable_name, session=self.session)
 
     @property
     def material_package_directory(self):

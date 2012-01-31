@@ -141,6 +141,7 @@ class MaterialPackageWrangler(PackageWrangler):
                 material_proxy.material_definition_module_proxy.write_stub_to_disk(False, prompt=False)
                 material_proxy.illustration_builder_module_proxy.write_stub_to_disk(prompt=False)
             else:
+                file(os.path.join(directory_name, 'material_definition.py'), 'w').write('')
                 material_proxy.material_definition_module_proxy.write_stub_to_disk(True, prompt=False)
         line = 'material package {!r} created.'.format(material_package_importable_name)
         self.proceed(line, prompt=prompt)
