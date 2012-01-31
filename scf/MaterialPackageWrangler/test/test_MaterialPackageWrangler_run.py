@@ -31,7 +31,15 @@ def test_MaterialPackageWrangler_run_02():
     assert studio.transcript[-2][0] == 'Studio - materials'
 
 
-def test_foo_03():
+def test_MaterialPackageWrangler_run_03():
+    '''Create test data package. Then delete.
+    '''
     
     studio = baca.scf.Studio()
+    assert not studio.package_exists('baca.materials.testdata')
+
+    studio.run(user_input='m d testdata default default q')
+    assert studio.package_exists('baca.materials.testdata')
+
+    studio.run(user_input='m testdata del remove default q')
     assert not studio.package_exists('baca.materials.testdata')
