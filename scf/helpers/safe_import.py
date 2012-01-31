@@ -8,12 +8,8 @@ def safe_import(target_namespace, source_module_short_name, source_attribute_nam
 
     try:
         source_module = __import__(source_module_importable_name, fromlist=['*'])
-    except SyntaxError:
-        message = 'Syntax error in {!r}.'.format(source_module_importable_name)
-        print message
-        return
-    except ImportError:
-        message = 'Import error in {!r}.'.format(source_module_importable_name)
+    except:
+        message = 'Error importing {!r}.'.format(source_module_importable_name)
         print message
         return
 

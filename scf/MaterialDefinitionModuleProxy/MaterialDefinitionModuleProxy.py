@@ -41,6 +41,8 @@ class MaterialDefinitionModuleProxy(ModuleProxy):
         os.system("vi + -c'norm {}l' {}".format(columns, self.full_file_name))
 
     def import_material_definition(self):
+        #self.unimport_materials_package()
+        #self.unimport_material_package()
         self.unimport()
         return safe_import(locals(), self.module_short_name, self.material_underscored_name,                 
             source_parent_module_importable_name=self.parent_module_importable_name)
