@@ -377,10 +377,12 @@ class MaterialPackageProxy(PackageProxy):
             self.manage_stylesheets()
         elif result == 'dc':
             self.write_output_material_to_disk()
-        elif result == 'di':
-            self.output_material_module_proxy.view()
         elif result == 'dd':
             self.output_material_module_proxy.remove(prompt=True)
+        elif result == 'di':
+            self.output_material_module_proxy.view()
+        elif result == 'dfetch':
+            self.output_material_module_proxy.display_output_material_repr()
         elif result == 'lyc':
             self.write_illustration_ly_to_disk(is_forced=True)
         elif result == 'lyd':
@@ -500,6 +502,7 @@ class MaterialPackageProxy(PackageProxy):
                 section = main_menu.make_new_section()
             section.append(('di', 'output data - inspect'))
             hidden_section.append(('dd', 'output data - delete'))
+            hidden_section.append(('dfetch', 'output data - fetch'))
 
     def make_main_menu_section_for_stylesheet_management(self, main_menu, hidden_section):
         if self.has_output_material:
