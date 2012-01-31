@@ -6,7 +6,7 @@ class OutputMaterialModuleProxy(BasicModuleProxy):
 
     ### PUBLIC METHODS ###
 
-    def display_output_material_repr(self):
+    def display_output_material(self):
         output_material = self.import_output_material()
         self.display([repr(output_material), ''], capitalize_first_character=False)
         self.session.hide_next_redraw = True

@@ -382,7 +382,7 @@ class MaterialPackageProxy(PackageProxy):
         elif result == 'di':
             self.output_material_module_proxy.view()
         elif result == 'dfetch':
-            self.output_material_module_proxy.display_output_material_repr()
+            self.output_material_module_proxy.display_output_material()
         elif result == 'lyc':
             self.write_illustration_ly_to_disk(is_forced=True)
         elif result == 'lyd':
