@@ -1,4 +1,5 @@
 import baca
+import py
 
 
 def test_MaterialPackageWrangler_run_01():
@@ -41,6 +42,9 @@ def test_MaterialPackageWrangler_run_03():
     studio.run(user_input='m d testdata default default q')
     assert studio.package_exists('baca.materials.testdata')
 
+    mpp = baca.scf.MaterialPackageProxy('baca.materials.testdata')
+    assert mpp.directory_contents == ['__init__.py', 'material_definition.py']
+
     studio.run(user_input='m testdata del remove default q')
     assert not studio.package_exists('baca.materials.testdata')
 
@@ -48,6 +52,7 @@ def test_MaterialPackageWrangler_run_03():
 def test_MaterialPackageWrangler_run_04():
     '''Make data package. Create output material. Delete package." 
     '''
+    py.test.skip('working on this one.')
 
     studio = baca.scf.Studio()
     assert not studio.package_exists('baca.materials.testdata')

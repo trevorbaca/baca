@@ -29,6 +29,11 @@ class DirectoryProxy(SCFObject):
     ### READ-ONLY PUBLIC ATTRIBUTES ###
 
     @property
+    def directory_contents(self):
+        os.system('rm {}/*pyc'.format(self.directory_name))
+        return os.listdir(self.directory_name)
+
+    @property
     def directory_name(self):
         return self._directory_name
 
@@ -54,14 +59,14 @@ class DirectoryProxy(SCFObject):
             return
         self.directory_name = result
 
-    def list_directory(self):
+    def make_directory(self):
+        os.mkdir(self.directory_name)
+
+    def print_directory_contents(self):
         os.system('rm {}/*pyc'.format(self.directory_name))
         os.system('ls {}'.format(self.directory_name))
         self.display('')
         self.session.hide_next_redraw = True
-
-    def make_directory(self):
-        os.mkdir(self.directory_name)
 
     def remove(self):
         if self.is_in_repository:

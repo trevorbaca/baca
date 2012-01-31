@@ -403,7 +403,7 @@ class MaterialPackageProxy(PackageProxy):
             self.manage_tags()
         # TODO: add to directory-level hidden menu
         elif result == 'ls':
-            self.list_directory()
+            self.print_directory_contents()
         elif mathtools.is_integer_equivalent_expr(result):
             self.edit_user_input_at_number(int(result))
         else:
