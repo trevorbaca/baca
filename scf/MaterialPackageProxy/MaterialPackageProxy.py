@@ -72,7 +72,8 @@ class MaterialPackageProxy(PackageProxy):
 
     @property
     def has_output_material(self):
-        if self.should_have_output_material_module:
+        #if self.should_have_output_material_module:
+        if self.has_output_material_module:
             return bool(self.output_material_module_proxy.import_output_material())
         return False
 
@@ -247,9 +248,10 @@ class MaterialPackageProxy(PackageProxy):
     @property
     def output_material_module_proxy(self):
         if self.should_have_output_material_module:
-            if not self.has_output_material_module:
-                file(self.output_material_module_file_name, 'w').write('')    
-            return OutputMaterialModuleProxy(self.output_material_module_importable_name, session=self.session)
+            #if not self.has_output_material_module:
+            #    file(self.output_material_module_file_name, 'w').write('')    
+            if self.has_output_material_module:
+                return OutputMaterialModuleProxy(self.output_material_module_importable_name, session=self.session)
 
     @property
     def should_have_illustration(self):
@@ -508,6 +510,9 @@ class MaterialPackageProxy(PackageProxy):
         stylesheet_wrangler = StylesheetWrangler(session=self.session)
         stylesheet_wrangler.run()
 
+    def overwrite_output_material_module(self):
+        file(self.output_material_module_file_name, 'w').write('')
+
     # TODO: port
     def regenerate_everything(self, is_forced=False):
         self.print_not_implemented()
@@ -634,6 +639,7 @@ class MaterialPackageProxy(PackageProxy):
 
     def write_output_material_to_disk(self, prompt=True):
         self.remove_material_from_materials_initializer()
+        self.overwrite_output_material_module()
         output_material_module_proxy = self.output_material_module_proxy
         lines = self.output_material_module_body_lines
         output_material_module_proxy.body_lines[:] = lines
