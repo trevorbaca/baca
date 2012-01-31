@@ -41,11 +41,16 @@ class MaterialDefinitionModuleProxy(ModuleProxy):
         os.system("vi + -c'norm {}l' {}".format(columns, self.full_file_name))
 
     def import_material_definition(self):
-        #self.unimport_materials_package()
-        #self.unimport_material_package()
-        self.unimport()
-        return safe_import(locals(), self.module_short_name, self.material_underscored_name,                 
-            source_parent_module_importable_name=self.parent_module_importable_name)
+        #self.unimport()
+        #return safe_import(locals(), self.module_short_name, self.material_underscored_name,                 
+        #    source_parent_module_importable_name=self.parent_module_importable_name)
+        material_definition_module = __import__(self.module_importable_name, fromlist=['*'])
+        self.debug(material_definition_module, 'a')
+        self.touch()
+        reload(material_definition_module)
+        material_definition = getattr(material_definition_module, self.material_underscored_name)
+        self.debug(material_definition, 'c')
+        return material_definition
 
     def parse(self):
         material_definition_module = file(self.full_file_name, 'r')

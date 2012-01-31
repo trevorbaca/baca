@@ -66,6 +66,9 @@ class FileProxy(SCFObject):
     def short_file_name(self):
         return os.path.sep.split(self.full_file_name)[-1]
 
+    def touch(self):
+        os.system('touch {}'.format(self.full_file_name))
+
     def view(self):
         os.system('vi -R {}'.format(self.full_file_name))
 

@@ -57,7 +57,7 @@ class MaterialPackageProxy(PackageProxy):
     @property
     def has_material_definition(self):
         if self.should_have_material_definition_module:
-            self.debug(self.material_definition_module_proxy.import_material_definition(), 1)
+            #self.debug(self.material_definition_module_proxy.import_material_definition(), 1)
             return bool(self.material_definition_module_proxy.import_material_definition())
         return False
 
@@ -350,6 +350,9 @@ class MaterialPackageProxy(PackageProxy):
             self.material_definition_module_proxy.remove(prompt=True)
         elif result == 'mde':
             self.material_definition_module_proxy.edit()
+        # TODO: this is experimental
+        elif result == 'mdr':
+            self.material_definition_module_proxy.reload_material_definition()
         elif result == 'mdt':
             self.material_definition_module_proxy.write_stub_to_disk(
                 self.is_data_only, prompt=True)
@@ -482,6 +485,7 @@ class MaterialPackageProxy(PackageProxy):
             section.append(('mdx', 'material definition - execute'))
             hidden_section.append(('mdcanned', 'material definition - copy canned'))
             hidden_section.append(('mdd', 'material definition - delete'))
+            hidden_section.append(('mdr', 'material definition - reload'))
             hidden_section.append(('mdt', 'material definition - stub'))
             hidden_section.append(('mdxi', 'material definition - execute & inspect'))
         elif self.material_package_maker_class_name is None:
@@ -489,7 +493,7 @@ class MaterialPackageProxy(PackageProxy):
 
     def make_main_menu_section_for_output_material(self, main_menu, hidden_section):
         has_output_material_section = False
-        self.debug(self.has_material_definition)
+        #self.debug(self.has_material_definition)
         if self.has_material_definition or self.has_complete_user_input_wrapper:
             section = main_menu.make_new_section()
             section.append(('dc', 'output data - create'))
