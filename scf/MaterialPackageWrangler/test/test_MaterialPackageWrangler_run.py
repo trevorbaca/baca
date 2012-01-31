@@ -29,3 +29,9 @@ def test_MaterialPackageWrangler_run_02():
     studio = baca.scf.Studio()
     studio.run(user_input='m q')
     assert studio.transcript[-2][0] == 'Studio - materials'
+
+
+def test_foo_03():
+    
+    studio = baca.scf.Studio()
+    assert not studio.package_exists('baca.materials.testdata')

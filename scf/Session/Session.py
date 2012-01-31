@@ -60,11 +60,21 @@ class Session(object):
 
     @property
     def command_history_string(self):
-        return ' '.join(self.command_history)
+        return ' '.join(self.explicit_command_history)
 
     @property
     def complete_transcript(self):
         return self._complete_transcript
+
+    @property
+    def explicit_command_history(self):
+        result = []
+        for command in self.command_history:
+            if command == '':
+                result.append('default')
+            else:
+                result.append(command)
+        return result
 
     @property
     def formatted_attributes(self):
