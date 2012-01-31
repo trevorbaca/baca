@@ -57,7 +57,6 @@ class MaterialPackageProxy(PackageProxy):
     @property
     def has_material_definition(self):
         if self.should_have_material_definition_module:
-            #self.debug(self.material_definition_module_proxy.import_material_definition(), 1)
             return bool(self.material_definition_module_proxy.import_material_definition())
         return False
 
@@ -416,7 +415,6 @@ class MaterialPackageProxy(PackageProxy):
             raise ValueError
 
     def make_main_menu(self):
-        self.debug('making main menu')
         if self.is_handmade:
             menu, hidden_section = self.make_main_menu_for_material_made_by_hand()
         else:
@@ -493,7 +491,6 @@ class MaterialPackageProxy(PackageProxy):
 
     def make_main_menu_section_for_output_material(self, main_menu, hidden_section):
         has_output_material_section = False
-        #self.debug(self.has_material_definition)
         if self.has_material_definition or self.has_complete_user_input_wrapper:
             section = main_menu.make_new_section()
             section.append(('dc', 'output data - create'))
