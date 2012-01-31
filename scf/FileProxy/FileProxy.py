@@ -68,3 +68,20 @@ class FileProxy(SCFObject):
 
     def view(self):
         os.system('vi -R {}'.format(self.full_file_name))
+
+    # TODO: write test
+    def write_canned_file_to_disk(self, prompt=True):
+        getter = self.make_new_getter(where=self.where())
+        getter.append_string('name of canned file')
+        self.push_backtrack()
+        canned_file_name = getter.run()
+        self.pop_backtrack()
+        if self.backtrack():
+            return
+        if not os.path.exists(canned_file_name):
+            canned_file_name = os.path.join(self.assets_directory, canned_file_name)
+        if not os.path.exists(canned_file_name):
+            self.proceed('canned file {!r} does not exist.'.format(canned_file_name), prompt=prompt)
+        else:
+            shutil.copyfile(canned_file_name, self.full_file_name)
+            self.proceed('canned file copied.', prompt=prompt)

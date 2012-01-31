@@ -253,7 +253,8 @@ class SCFObject(object):
             rest_parts = user_input[i+1:]
             user_response = ' '.join(first_parts)
             user_input = ' '.join(rest_parts)
-        user_response = user_response.replace('_', ' ')
+        #user_response = user_response.replace('_', ' ')
+        user_response = user_response.replace('~', ' ')
         self.session.user_input = user_input
         return user_response
 

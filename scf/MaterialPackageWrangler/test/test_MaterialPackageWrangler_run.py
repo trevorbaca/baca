@@ -32,13 +32,29 @@ def test_MaterialPackageWrangler_run_02():
 
 
 def test_MaterialPackageWrangler_run_03():
-    '''Create test data package. Then delete.
+    '''Make data package. Delete package.
     '''
     
     studio = baca.scf.Studio()
     assert not studio.package_exists('baca.materials.testdata')
 
     studio.run(user_input='m d testdata default default q')
+    assert studio.package_exists('baca.materials.testdata')
+
+    studio.run(user_input='m testdata del remove default q')
+    assert not studio.package_exists('baca.materials.testdata')
+
+
+def test_MaterialPackageWrangler_run_04():
+    '''Make data package. Create output material. Delete package." 
+    '''
+
+    studio = baca.scf.Studio()
+    assert not studio.package_exists('baca.materials.testdata')
+
+    studio.run(user_input='m d testdata default default '
+        'testdata mdcanned canned_testdata_material_definition.py default '
+        'dc default q')
     assert studio.package_exists('baca.materials.testdata')
 
     studio.run(user_input='m testdata del remove default q')

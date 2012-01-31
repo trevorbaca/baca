@@ -112,7 +112,6 @@ class MenuObject(SCFObject):
         else:
             return directive
 
-
     def make_default_hidden_section(self, session=None, where=None):
         from baca.scf.menuing.MenuSection import MenuSection
         section = MenuSection(is_hidden=True, session=session, where=where)

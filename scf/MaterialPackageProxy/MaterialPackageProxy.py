@@ -341,12 +341,15 @@ class MaterialPackageProxy(PackageProxy):
         elif result == 'uit':
             self.session.use_current_user_input_values_as_default = \
                 not self.session.use_current_user_input_values_as_default
+        elif result == 'mdcanned':
+            self.material_definition_module_proxy.write_canned_file_to_disk(prompt=True)
         elif result == 'mdd':
             self.material_definition_module_proxy.remove(prompt=True)
         elif result == 'mde':
             self.material_definition_module_proxy.edit()
         elif result == 'mdt':
-            self.material_definition_module_proxy.write_stub_to_disk(self.is_data_only, prompt=True)
+            self.material_definition_module_proxy.write_stub_to_disk(
+                self.is_data_only, prompt=True)
         elif result == 'mdx':
             self.material_definition_module_proxy.run_python(prompt=True)
         elif result == 'mdxi':
@@ -473,6 +476,7 @@ class MaterialPackageProxy(PackageProxy):
         if self.has_material_definition_module:
             section.append(('mde', 'material definition - edit'))
             section.append(('mdx', 'material definition - execute'))
+            hidden_section.append(('mdcanned', 'material definition - copy canned'))
             hidden_section.append(('mdd', 'material definition - delete'))
             hidden_section.append(('mdt', 'material definition - stub'))
             hidden_section.append(('mdxi', 'material definition - execute & inspect'))
