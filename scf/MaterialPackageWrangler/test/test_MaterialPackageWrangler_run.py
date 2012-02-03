@@ -112,3 +112,27 @@ def test_MaterialPackageWrangler_run_06():
 
     studio.run(user_input='m testdata del remove default q')
     assert not studio.package_exists('baca.materials.testdata')
+
+
+def test_MaterialPackageWrangler_run_07():
+    '''Make data package. Copy canned material definition. Make data. Remove output material.
+    Remove package.
+    '''
+
+    studio = baca.scf.Studio()
+    assert not studio.package_exists('baca.materials.testdata')
+
+    studio.run(user_input=
+        'm d testdata default default '
+        'testdata mdcanned canned_testdata_material_definition.py default '
+        'dc default '
+        'dd default q')
+    assert studio.package_exists('baca.materials.testdata')
+
+    mpp = baca.scf.MaterialPackageProxy('baca.materials.testdata')
+    assert mpp.directory_contents == ['__init__.py', 'material_definition.py']
+    # TODO: make this work
+    #assert not mpp.initializer_file_proxy.has_safe_import('output_material', 'testdata')
+
+    studio.run(user_input='m testdata del remove default q')
+    assert not studio.package_exists('baca.materials.testdata')

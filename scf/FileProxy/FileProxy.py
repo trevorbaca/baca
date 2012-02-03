@@ -54,6 +54,15 @@ class FileProxy(SCFObject):
     def edit(self):
         os.system('vi + {}'.format(self.full_file_name))
 
+    def has_line(self, line):
+        file_reference = open(self.full_file_name, 'r')
+        for file_line in file_reference.readlines():
+            if file_line == line:
+                file_reference.close()
+                return True
+        file_reference.close()
+        return False
+        
     # TODO: extend for repository
     def remove(self, prompt=False):
         os.remove(self.full_file_name)

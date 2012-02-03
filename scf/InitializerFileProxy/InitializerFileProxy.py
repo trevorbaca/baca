@@ -35,6 +35,11 @@ class InitializerFileProxy(ParsableFileProxy):
         if protected_import_statement not in self.protected_import_statements:
             self.protected_import_statements.append(protected_import_statement)
         self.write_to_disk()
+
+    def has_safe_import(self, source_module_short_name, source_module_attribute_name):
+        safe_import_line = 'safe_import(globals(), {!r}, {!r})\n'
+        safe_import_line = safe_import_line.format(source_module_short_name, source_module_attribute_name)
+        return self.has_line(safe_import_line)
         
     def parse(self, initializer_file_name=None):
         if initializer_file_name is None:
