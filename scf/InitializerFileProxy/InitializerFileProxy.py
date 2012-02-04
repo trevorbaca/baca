@@ -108,6 +108,17 @@ class InitializerFileProxy(ParsableFileProxy):
             result = 'tags = OrderedDict([])'
         return result
 
+    def remove_protected_import_statement(self, source_module_short_name, source_attribute_name):
+        protected_import_statement = 'safe_import(globals(), {!r}, {!r})\n'
+        protected_import_statement = protected_import_statement.format(
+            source_module_short_name, source_attribute_name)
+        protected_import_statements = []
+        for current_protected_import_statement in self.protected_import_statements:
+            if not current_protected_import_statement == protected_import_statement:
+                protected_import_statements.append(current_protected_import_statement)
+        self.protected_import_statements[:] = protected_import_statements
+        self.write_to_disk()
+
     def write_stub_to_disk(self, tags=None):
         self.clear()
         self.setup_statements.append('from collections import OrderedDict\n')

@@ -14,6 +14,21 @@ class ModuleProxy(ParsableFileProxy):
 
     # TODO: abstract out to MaterialModuleProxy
     @property
+    def grandparent_package_directory_name(self):
+        return self.package_importable_name_to_directory_name(self.grandparent_package_importable_name)
+
+    # TODO: abstract out to MaterialModuleProxy
+    @property
+    def grandparent_package_importable_name(self):
+        return '.'.join(self.module_importable_name.split('.')[:-2])
+
+    # TODO: abstract out to MaterialModuleProxy
+    @property
+    def grandparent_package_initializer_file_name(self):
+        return os.path.join(self.grandparent_package_directory_name, '__init__.py')
+
+    # TODO: abstract out to MaterialModuleProxy
+    @property
     def material_package_importable_name(self):
         return self.parent_module_importable_name
     
@@ -45,6 +60,15 @@ class ModuleProxy(ParsableFileProxy):
     def parent_module_importable_name(self):
         return '.'.join(self.module_importable_name.split('.')[:-1])
 
+    @property
+    def parent_package_directory_name(self):
+        return self.package_importable_name_to_directory_name(self.parent_module_importable_name)
+
+    # TODO: abstract out to MaterialModuleProxy
+    @property
+    def parent_package_initializer_file_name(self):
+        return os.path.join(self.parent_package_directory_name, '__init__.py')
+        
     ### PUBLIC METHODS ###
 
     def run_abjad(self, prompt=True):
