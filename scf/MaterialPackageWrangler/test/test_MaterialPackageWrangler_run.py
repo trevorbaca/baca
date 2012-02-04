@@ -132,7 +132,6 @@ def test_MaterialPackageWrangler_run_07():
 
         mpp = baca.scf.MaterialPackageProxy('baca.materials.testdata')
         assert mpp.directory_contents == ['__init__.py', 'material_definition.py']
-        # TODO: make this work
         assert not mpp.initializer_file_proxy.has_safe_import('output_material', 'testdata')
 
     finally:

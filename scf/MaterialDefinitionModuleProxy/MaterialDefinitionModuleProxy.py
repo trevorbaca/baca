@@ -1,12 +1,12 @@
-from baca.scf.ModuleProxy import ModuleProxy
+from baca.scf.MaterialModuleProxy import MaterialModuleProxy
 from baca.scf.helpers import safe_import
 import os
 
 
-class MaterialDefinitionModuleProxy(ModuleProxy):
+class MaterialDefinitionModuleProxy(MaterialModuleProxy):
 
     def __init__(self, module_importable_name, session=None):
-        ModuleProxy.__init__(self, module_importable_name, session=session)
+        MaterialModuleProxy.__init__(self, module_importable_name, session=session)
         self.output_material_module_import_lines = []
         self.body_lines = []
         self.parse()

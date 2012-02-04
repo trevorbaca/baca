@@ -1,10 +1,10 @@
-from baca.scf.ModuleProxy import ModuleProxy
+from baca.scf.MaterialModuleProxy import MaterialModuleProxy
 
 
-class BasicModuleProxy(ModuleProxy):
+class BasicModuleProxy(MaterialModuleProxy):
 
     def __init__(self, module_importable_name, session=None):
-        ModuleProxy.__init__(self, module_importable_name, session=session)
+        MaterialModuleProxy.__init__(self, module_importable_name, session=session)
         self.body_lines = []
         self.parse()
 
