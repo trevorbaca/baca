@@ -15,7 +15,11 @@ class MaterialDefinitionModuleProxy(MaterialModuleProxy):
 
     @property
     def is_faulty(self):
-        return not bool(self.import_material_definition())
+        try:
+            self.import_material_definition()
+            return False
+        except:
+            return True
 
     @property
     def output_material_module_import_statements(self):
@@ -49,11 +53,7 @@ class MaterialDefinitionModuleProxy(MaterialModuleProxy):
             md = open(self.full_file_name, 'r')
             file_contents_string = md.read()
             md.close()
-            try:
-                exec(file_contents_string)
-            except:
-                print 'exception raised executing {!r}.'.format(self.full_file_name)
-                return 
+            exec(file_contents_string)
             result = locals().get(self.material_underscored_name)
             return result
 
