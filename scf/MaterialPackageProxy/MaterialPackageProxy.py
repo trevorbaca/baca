@@ -512,19 +512,21 @@ class MaterialPackageProxy(PackageProxy):
 
     def make_main_menu_section_for_output_material(self, main_menu, hidden_section):
         has_output_material_section = False
-        if self.has_material_definition or self.has_complete_user_input_wrapper:
-            section = main_menu.make_new_section()
-            has_faulty_output_material_module = self.has_faulty_output_material_module
-            if has_faulty_output_material_module:
-                section.section_title = '(Note: has faulty output material module.)'
-            section.append(('dc', 'output data - create'))
-            has_output_material_section = True
-        if self.has_output_material_module:
-            if not has_output_material_section:
+        has_faulty_material_definition_module = self.has_faulty_material_definition_module
+        if not has_faulty_material_definition_module:
+            if self.has_material_definition or self.has_complete_user_input_wrapper:
                 section = main_menu.make_new_section()
-            section.append(('di', 'output data - inspect'))
-            hidden_section.append(('dd', 'output data - delete'))
-            hidden_section.append(('dfetch', 'output data - fetch'))
+                has_faulty_output_material_module = self.has_faulty_output_material_module
+                if has_faulty_output_material_module:
+                    section.section_title = '(Note: has faulty output material module.)'
+                section.append(('dc', 'output data - create'))
+                has_output_material_section = True
+            if self.has_output_material_module:
+                if not has_output_material_section:
+                    section = main_menu.make_new_section()
+                section.append(('di', 'output data - inspect'))
+                hidden_section.append(('dd', 'output data - delete'))
+                hidden_section.append(('dfetch', 'output data - fetch'))
         hidden_section.append(('dcanned', 'output data - copy canned module'))
 
     def make_main_menu_section_for_stylesheet_management(self, main_menu, hidden_section):
