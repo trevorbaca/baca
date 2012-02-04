@@ -1,10 +1,10 @@
 def safe_import(target_namespace, source_module_short_name, source_attribute_name,
-    source_parent_module_importable_name=None):
+    source_parent_package_importable_name=None):
 
-    if source_parent_module_importable_name is None:
-        source_parent_module_importable_name = target_namespace['__name__']
+    if source_parent_package_importable_name is None:
+        source_parent_package_importable_name = target_namespace['__name__']
 
-    source_module_importable_name = '{}.{}'.format(source_parent_module_importable_name, source_module_short_name)
+    source_module_importable_name = '{}.{}'.format(source_parent_package_importable_name, source_module_short_name)
 
     try:
         source_module = __import__(source_module_importable_name, fromlist=['*'])

@@ -22,7 +22,7 @@ class IllustrationBuilderModuleProxy(BasicModuleProxy):
         # TODO: port unimport
         #self.unimport_output_material_module()
         illustration = safe_import(locals(), self.module_short_name, 'illustration', 
-            source_parent_module_importable_name=self.parent_module_importable_name)
+            source_parent_package_importable_name=self.parent_package_importable_name)
         illustration.header_block.title = markuptools.Markup(self.material_spaced_name)
         return illustration
 

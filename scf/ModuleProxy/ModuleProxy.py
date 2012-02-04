@@ -32,14 +32,13 @@ class ModuleProxy(ParsableFileProxy):
     def module_short_name(self):
         return self.module_importable_name.split('.')[-1]
 
-    # REAL TODO: change name to self.parent_PACKAGE_importable_name
-    @property
-    def parent_module_importable_name(self):
-        return '.'.join(self.module_importable_name.split('.')[:-1])
-
     @property
     def parent_package_directory_name(self):
-        return self.package_importable_name_to_directory_name(self.parent_module_importable_name)
+        return self.package_importable_name_to_directory_name(self.parent_package_importable_name)
+
+    @property
+    def parent_package_importable_name(self):
+        return '.'.join(self.module_importable_name.split('.')[:-1])
 
     @property
     def parent_package_initializer_file_name(self):

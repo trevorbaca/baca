@@ -20,7 +20,7 @@ class OutputMaterialModuleProxy(BasicModuleProxy):
         self.unimport_material_package()
         self.unimport()
         return safe_import(locals(), self.module_short_name, self.material_underscored_name,
-            source_parent_module_importable_name=self.parent_module_importable_name)
+            source_parent_package_importable_name=self.parent_package_importable_name)
 
     def remove(self, prompt=True):
         import baca
