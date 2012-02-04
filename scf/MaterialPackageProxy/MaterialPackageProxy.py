@@ -87,9 +87,9 @@ class MaterialPackageProxy(PackageProxy):
 
     @property
     def has_output_material(self):
-        #if self.should_have_output_material_module:
-        if self.has_output_material_module:
-            return bool(self.output_material_module_proxy.import_output_material())
+        if self.should_have_output_material_module:
+            if self.has_output_material_module:
+                return bool(self.output_material_module_proxy.import_output_material_safely())
         return False
 
     @property
@@ -167,7 +167,7 @@ class MaterialPackageProxy(PackageProxy):
     def is_changed(self):
         self.print_not_implemented()
         material_definition = self.material_definition_module_proxy.import_material_definition()
-        output_material = self.output_material_module_proxy.import_output_material()
+        output_material = self.output_material_module_proxy.import_output_material_safely()
         return material_definition != output_material
 
     @property

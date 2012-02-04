@@ -8,7 +8,7 @@ class MaterialPackageMaker(MaterialPackageProxy):
 
     @property
     def illustration(self):
-        output_material = self.output_material_module_proxy.import_output_material()
+        output_material = self.output_material_module_proxy.import_output_material_safely()
         illustration = self.illustration_maker(output_material)
         return illustration
 
