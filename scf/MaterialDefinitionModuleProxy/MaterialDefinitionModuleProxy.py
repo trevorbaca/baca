@@ -15,7 +15,7 @@ class MaterialDefinitionModuleProxy(MaterialModuleProxy):
 
     @property
     def is_faulty(self):
-        return self.import_material_definition() is None
+        return not bool(self.import_material_definition())
 
     @property
     def output_material_module_import_statements(self):
@@ -91,7 +91,7 @@ class MaterialDefinitionModuleProxy(MaterialModuleProxy):
             elif current_section == 'body':
                 body_lines.append(line)
             else:
-                raise ValueError('{!r}: can not parse line: {!r}.'.format(self.full_file_name, line))
+                print '{!r}: can not parse line: {!r}.'.format(self.full_file_name, line)
         material_definition_module.close()
         self.encoding_directives = encoding_directives[:]
         self.docstring_lines = docstring_lines[:]

@@ -90,7 +90,7 @@ def test_MaterialPackageWrangler_run_data_only_package_04():
 
 
 def test_MaterialPackageWrangler_run_data_only_package_05():
-    '''Make data package. Copy canned material definition. Make data. Remove output material.
+    '''Make data package. Copy canned material definition. Make output material. Remove output material.
     Remove package.
     '''
 
@@ -127,7 +127,32 @@ def test_MaterialPackageWrangler_run_data_only_package_06():
         assert studio.package_exists('baca.materials.testdata')
         mpp = baca.scf.MaterialPackageProxy('baca.materials.testdata')
         assert mpp.directory_contents == ['__init__.py', 'material_definition.py']
-        assert mpp.has_faulty_material_definition
+        assert mpp.has_faulty_material_definition_module
+    finally:
+        studio.run(user_input='m testdata del remove default q')
+        assert not studio.package_exists('baca.materials.testdata')
+
+
+def test_MaterialPackageWrangler_run_data_only_package_07():
+    '''Make data package. Copy canned material definition module. Make output data. Corrupt output data.
+    Verify faulty output material module. Remove package.
+    '''
+    py.test.skip('implementing now.')
+
+    studio = baca.scf.Studio()
+    assert not studio.package_exists('baca.materials.testdata')
+
+    try:
+        studio.run(user_input=
+            'm d testdata default default '
+            'testdata mdcanned canned_testdata_material_definition.py default'
+            'dc default '
+            'dcanned canned_exception.py default q')
+        assert studio.package_exists('baca.materials.testdata')
+        mpp = baca.scf.MaterialPackageProxy('baca.materials.testdata')
+        assert     mpp.directory_contents == ['__init__.py', 'material_definition.py', 'output_material.py']
+        assert not mpp.has_faulty_material_definition_module
+        assert     mpp.has_faulty_output_material_module
     finally:
         studio.run(user_input='m testdata del remove default q')
         assert not studio.package_exists('baca.materials.testdata')

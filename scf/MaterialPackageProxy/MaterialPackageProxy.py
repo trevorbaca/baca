@@ -37,10 +37,17 @@ class MaterialPackageProxy(PackageProxy):
         return False
 
     @property
-    def has_faulty_material_definition(self):
+    def has_faulty_material_definition_module(self):
         if self.should_have_material_definition_module:
             if self.has_material_definition_module:
                 return self.material_definition_module_proxy.is_faulty
+        return False
+
+    @property
+    def has_faulty_output_material_module(self):
+        if self.should_have_output_material_module:
+            if self.has_output_material_module:
+                return self.output_material_module_proxy.is_faulty
         return False
 
     @property
@@ -358,9 +365,6 @@ class MaterialPackageProxy(PackageProxy):
             self.material_definition_module_proxy.remove(prompt=True)
         elif result == 'mde':
             self.material_definition_module_proxy.edit()
-        # TODO: this is experimental
-        elif result == 'mdr':
-            self.material_definition_module_proxy.reload_material_definition()
         elif result == 'mdt':
             self.material_definition_module_proxy.write_stub_to_disk(
                 self.is_data_only, prompt=True)
@@ -386,6 +390,8 @@ class MaterialPackageProxy(PackageProxy):
             self.manage_stylesheets()
         elif result == 'dc':
             self.write_output_material_to_disk()
+        elif result == 'dcanned':
+            self.output_material_module_proxy.write_canned_file_to_disk(prompt=True)
         elif result == 'dd':
             self.output_material_module_proxy.remove(prompt=True)
         elif result == 'di':
@@ -490,17 +496,17 @@ class MaterialPackageProxy(PackageProxy):
     def make_main_menu_section_for_material_definition(self, main_menu, hidden_section):
         section = main_menu.make_new_section()
         if self.has_material_definition_module:
-            has_faulty_material_definition = self.has_faulty_material_definition
-            if has_faulty_material_definition:
-                section.section_title = 'note: has faulty material definition.'
+            has_faulty_material_definition_module = self.has_faulty_material_definition_module
+            self.debug('aaa {}'.format(has_faulty_material_definition_module))
+            if has_faulty_material_definition_module:
+                section.section_title = '(Note: has faulty material definition module.)'
             section.append(('mde', 'material definition - edit'))
-            if not has_faulty_material_definition:
+            if not has_faulty_material_definition_module:
                 section.append(('mdx', 'material definition - execute'))
-            hidden_section.append(('mdcanned', 'material definition - copy canned'))
+            hidden_section.append(('mdcanned', 'material definition - copy canned module'))
             hidden_section.append(('mdd', 'material definition - delete'))
-            #hidden_section.append(('mdr', 'material definition - reload'))
             hidden_section.append(('mdt', 'material definition - stub'))
-            if not has_faulty_material_definition:
+            if not has_faulty_material_definition_module:
                 hidden_section.append(('mdxi', 'material definition - execute & inspect'))
         elif self.material_package_maker_class_name is None:
             section.append(('mdt', 'material definition - stub'))
@@ -509,6 +515,10 @@ class MaterialPackageProxy(PackageProxy):
         has_output_material_section = False
         if self.has_material_definition or self.has_complete_user_input_wrapper:
             section = main_menu.make_new_section()
+            has_faulty_output_material_module = self.has_faulty_output_material_module
+            if has_faulty_output_material_module:
+                #section.section_title = '(Note: has faulty output material module.)'
+                pass
             section.append(('dc', 'output data - create'))
             has_output_material_section = True
         if self.has_output_material_module:
@@ -517,6 +527,7 @@ class MaterialPackageProxy(PackageProxy):
             section.append(('di', 'output data - inspect'))
             hidden_section.append(('dd', 'output data - delete'))
             hidden_section.append(('dfetch', 'output data - fetch'))
+        hidden_section.append(('dcanned', 'output data - copy canned module'))
 
     def make_main_menu_section_for_stylesheet_management(self, main_menu, hidden_section):
         if self.has_output_material:

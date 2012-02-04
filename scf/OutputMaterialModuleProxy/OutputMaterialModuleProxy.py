@@ -4,8 +4,11 @@ from baca.scf.helpers import safe_import
 
 class OutputMaterialModuleProxy(BasicModuleProxy):
 
-    #def __init__(self, module_importable_name, session=None):
-    #    BasicModuleProxy.__init__(self, module_importable_name, session=session)
+    ### READ-ONLY PUBLIC ATTRIBUTES ###
+
+    @property
+    def is_faulty(self):
+        return not bool(self.import_output_material())
 
     ### PUBLIC METHODS ###
 
@@ -15,6 +18,7 @@ class OutputMaterialModuleProxy(BasicModuleProxy):
         self.session.hide_next_redraw = True
         
     # note that this might have to be reimplement with exec() but seems to work for now
+    # ... think it's now time
     def import_output_material(self):
         self.unimport_materials_package()
         self.unimport_material_package()
