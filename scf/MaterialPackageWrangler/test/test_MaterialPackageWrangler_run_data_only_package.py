@@ -34,6 +34,7 @@ def test_MaterialPackageWrangler_run_data_only_package_02():
             'testdata mdcanned canned_testdata_material_definition.py default '
             'dc default q')
         assert studio.package_exists('baca.materials.testdata')
+        # TODO: add more assets like the following
         assert baca.materials.testdata == [1, 2, 3, 4, 5]
         mpp = baca.scf.MaterialPackageProxy('baca.materials.testdata')
         assert mpp.directory_contents == ['__init__.py', 'material_definition.py', 'output_material.py']
@@ -137,7 +138,6 @@ def test_MaterialPackageWrangler_run_data_only_package_07():
     '''Make data package. Copy canned material definition module. Make output data. Corrupt output data.
     Verify faulty output material module. Remove package.
     '''
-    py.test.skip('implementing now.')
 
     studio = baca.scf.Studio()
     assert not studio.package_exists('baca.materials.testdata')
@@ -145,7 +145,7 @@ def test_MaterialPackageWrangler_run_data_only_package_07():
     try:
         studio.run(user_input=
             'm d testdata default default '
-            'testdata mdcanned canned_testdata_material_definition.py default'
+            'testdata mdcanned canned_testdata_material_definition.py default '
             'dc default '
             'dcanned canned_exception.py default q')
         assert studio.package_exists('baca.materials.testdata')

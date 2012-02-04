@@ -497,7 +497,6 @@ class MaterialPackageProxy(PackageProxy):
         section = main_menu.make_new_section()
         if self.has_material_definition_module:
             has_faulty_material_definition_module = self.has_faulty_material_definition_module
-            self.debug('aaa {}'.format(has_faulty_material_definition_module))
             if has_faulty_material_definition_module:
                 section.section_title = '(Note: has faulty material definition module.)'
             section.append(('mde', 'material definition - edit'))
@@ -517,8 +516,7 @@ class MaterialPackageProxy(PackageProxy):
             section = main_menu.make_new_section()
             has_faulty_output_material_module = self.has_faulty_output_material_module
             if has_faulty_output_material_module:
-                #section.section_title = '(Note: has faulty output material module.)'
-                pass
+                section.section_title = '(Note: has faulty output material module.)'
             section.append(('dc', 'output data - create'))
             has_output_material_section = True
         if self.has_output_material_module:

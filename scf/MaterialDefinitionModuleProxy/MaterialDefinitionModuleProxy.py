@@ -46,9 +46,9 @@ class MaterialDefinitionModuleProxy(MaterialModuleProxy):
 
     def import_material_definition(self):
         if os.path.exists(self.full_file_name):
-            m = open(self.full_file_name, 'r')
-            file_contents_string = m.read()
-            m.close()
+            md = open(self.full_file_name, 'r')
+            file_contents_string = md.read()
+            md.close()
             try:
                 exec(file_contents_string)
             except:

@@ -1,5 +1,6 @@
 from baca.scf.BasicModuleProxy import BasicModuleProxy
 from baca.scf.helpers import safe_import
+import os
 
 
 class OutputMaterialModuleProxy(BasicModuleProxy):
@@ -17,14 +18,22 @@ class OutputMaterialModuleProxy(BasicModuleProxy):
         self.display([repr(output_material), ''], capitalize_first_character=False)
         self.session.hide_next_redraw = True
         
-    # note that this might have to be reimplement with exec() but seems to work for now
-    # ... think it's now time
     def import_output_material(self):
+        # the next two lines actually matter
         self.unimport_materials_package()
         self.unimport_material_package()
-        self.unimport()
-        return safe_import(locals(), self.module_short_name, self.material_underscored_name,
-            source_parent_package_importable_name=self.parent_package_importable_name)
+        #self.unimport()
+        if os.path.exists(self.full_file_name):
+            om = open(self.full_file_name, 'r')
+            file_contents_string = om.read()
+            om.close()
+            try:
+                exec(file_contents_string)
+            except:
+                print 'exception raise executing {!r}.'.format(self.full_file_name)
+                return
+            result = locals().get(self.material_underscored_name)
+            return result
 
     def remove(self, prompt=True):
         import baca
