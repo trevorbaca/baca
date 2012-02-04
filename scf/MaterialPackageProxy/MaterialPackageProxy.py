@@ -37,6 +37,13 @@ class MaterialPackageProxy(PackageProxy):
         return False
 
     @property
+    def has_faulty_material_definition(self):
+        if self.should_have_material_definition_module:
+            if self.has_material_definition_module:
+                return self.material_definition_module_proxy.is_faulty
+        return False
+
+    @property
     def has_illustration_builder_module(self):
         if self.should_have_illustration_builder_module:
             return os.path.exists(self.illustration_builder_module_file_name)
@@ -483,13 +490,18 @@ class MaterialPackageProxy(PackageProxy):
     def make_main_menu_section_for_material_definition(self, main_menu, hidden_section):
         section = main_menu.make_new_section()
         if self.has_material_definition_module:
+            has_faulty_material_definition = self.has_faulty_material_definition
+            if has_faulty_material_definition:
+                section.section_title = 'note: has faulty material definition.'
             section.append(('mde', 'material definition - edit'))
-            section.append(('mdx', 'material definition - execute'))
+            if not has_faulty_material_definition:
+                section.append(('mdx', 'material definition - execute'))
             hidden_section.append(('mdcanned', 'material definition - copy canned'))
             hidden_section.append(('mdd', 'material definition - delete'))
-            hidden_section.append(('mdr', 'material definition - reload'))
+            #hidden_section.append(('mdr', 'material definition - reload'))
             hidden_section.append(('mdt', 'material definition - stub'))
-            hidden_section.append(('mdxi', 'material definition - execute & inspect'))
+            if not has_faulty_material_definition:
+                hidden_section.append(('mdxi', 'material definition - execute & inspect'))
         elif self.material_package_maker_class_name is None:
             section.append(('mdt', 'material definition - stub'))
 

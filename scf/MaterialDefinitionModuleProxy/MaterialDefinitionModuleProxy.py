@@ -14,6 +14,10 @@ class MaterialDefinitionModuleProxy(MaterialModuleProxy):
     ### READ-ONLY PUBLIC ATTRIBUTES ###
 
     @property
+    def is_faulty(self):
+        return self.import_material_definition() is None
+
+    @property
     def output_material_module_import_statements(self):
         self.unimport()
         result = safe_import(
@@ -45,7 +49,11 @@ class MaterialDefinitionModuleProxy(MaterialModuleProxy):
             m = open(self.full_file_name, 'r')
             file_contents_string = m.read()
             m.close()
-            exec(file_contents_string)
+            try:
+                exec(file_contents_string)
+            except:
+                print 'exception raised executing {!r}.'.format(self.full_file_name)
+                return 
             result = locals().get(self.material_underscored_name)
             return result
 
