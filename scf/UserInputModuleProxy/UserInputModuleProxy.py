@@ -35,6 +35,7 @@ class UserInputModuleProxy(ModuleProxy):
             source_parent_package_importable_name=self.parent_package_importable_name)
 
     def parse(self):
+        is_parsable = True
         output_material_module = file(self.full_file_name, 'r')
         encoding_directives = []
         docstring_lines = []
@@ -63,12 +64,13 @@ class UserInputModuleProxy(ModuleProxy):
             elif current_section == 'user input wrapper':
                 user_input_wrapper_lines.append(line)
             else:
-                raise ValueError('{!r}: can not parse line: {!r}.'.format(self.full_file_name, line))
+                is_parsable = False
         output_material_module.close()
         self.encoding_directives = encoding_directives
         self.docstring_lines = docstring_lines
         self.setup_statements = setup_statements
         self.user_input_wrapper_lines = user_input_wrapper_lines
+        return is_parsable
 
     def write_stub_to_disk(self, prompt=True):
         self.clear()

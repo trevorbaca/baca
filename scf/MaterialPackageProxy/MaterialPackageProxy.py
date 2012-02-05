@@ -37,6 +37,13 @@ class MaterialPackageProxy(PackageProxy):
         return False
 
     @property
+    def has_faulty_initializer(self):
+        if self.should_have_initializer:
+            if self.has_initializer:
+                return self.initializer_file_proxy.is_faulty
+        return False
+
+    @property
     def has_faulty_material_definition_module(self):
         if self.should_have_material_definition_module:
             if self.has_material_definition_module:
@@ -66,6 +73,12 @@ class MaterialPackageProxy(PackageProxy):
     def has_illustration_pdf(self):
         if self.should_have_illustration_pdf:
             return os.path.exists(self.illustration_pdf_file_name)
+        return False
+
+    @property
+    def has_initializer(self):
+        if self.should_have_initializer:
+            return os.path.exists(self.initializer_file_name)
         return False
 
     @property
@@ -289,6 +302,10 @@ class MaterialPackageProxy(PackageProxy):
         return self.should_have_illustration
 
     @property
+    def should_have_initializer(self):
+        return True
+
+    @property
     def should_have_material_definition_module(self):
         return self.material_package_maker_class_name is None
 
@@ -414,11 +431,11 @@ class MaterialPackageProxy(PackageProxy):
         elif result == 'del':
             self.remove()
             self.session.is_backtracking_locally = True
-        elif result == 'init':
+        elif result == 'inv':
             self.initializer_file_proxy.view()
-        elif result == 'initcanned':
+        elif result == 'incanned':
             self.initializer_file_proxy.write_canned_file_to_disk(prompt=True)
-        elif result == 'initstub':
+        elif result == 'instub':
             self.initializer_file_proxy.write_stub_file_to_disk(prompt=True)
         elif result == 'ren':
             self.rename_material()
@@ -447,9 +464,9 @@ class MaterialPackageProxy(PackageProxy):
     def make_main_menu_section_for_hidden_entries(self, main_menu):
         hidden_section = main_menu.make_new_section(is_hidden=True)
         hidden_section.append(('del', 'delete package'))
-        hidden_section.append(('init', 'view package initializer'))
-        hidden_section.append(('initcanned', 'copy canned package initializer'))
-        hidden_section.append(('initstub', 'write stub package initializer'))
+#        hidden_section.append(('init', 'view package initializer'))
+#        hidden_section.append(('initcanned', 'copy canned package initializer'))
+#        hidden_section.append(('initstub', 'write stub package initializer'))
         hidden_section.append(('ls', 'list package'))
         hidden_section.append(('reg', 'regenerate package'))
         hidden_section.append(('ren', 'rename package'))
@@ -490,8 +507,14 @@ class MaterialPackageProxy(PackageProxy):
             hidden_section.append(('pdfd', 'output pdf - delete'))
             section.append(('pdfi', 'output pdf - inspect'))
 
-    def make_main_menu_section_for_initializer(self, menu, hidden_section):
-        pass
+    def make_main_menu_section_for_initializer(self, main_menu, hidden_section):
+        if self.has_faulty_initializer:
+            section = main_menu.make_new_section()
+            section.section_title = '(Note: has faulty initializer.)' 
+            section.append(('inr', 'initializer - restore'))
+        hidden_section.append(('inv', 'view package initializer'))
+        hidden_section.append(('incanned', 'copy canned package initializer'))
+        hidden_section.append(('instub', 'write stub package initializer'))
 
     def make_main_menu_section_for_material_definition(self, main_menu, hidden_section):
         section = main_menu.make_new_section()

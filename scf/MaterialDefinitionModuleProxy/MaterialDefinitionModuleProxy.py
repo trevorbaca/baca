@@ -58,6 +58,7 @@ class MaterialDefinitionModuleProxy(MaterialModuleProxy):
             return result
 
     def parse(self):
+        is_parsable = True
         material_definition_module = file(self.full_file_name, 'r')
         encoding_directives = []
         docstring_lines = []
@@ -91,13 +92,14 @@ class MaterialDefinitionModuleProxy(MaterialModuleProxy):
             elif current_section == 'body':
                 body_lines.append(line)
             else:
-                print '{!r}: can not parse line: {!r}.'.format(self.full_file_name, line)
+                is_parsable = False
         material_definition_module.close()
         self.encoding_directives = encoding_directives[:]
         self.docstring_lines = docstring_lines[:]
         self.setup_statements = setup_statements[:]
         self.output_material_module_import_lines = output_material_module_import_lines[:]
         self.body_lines = body_lines[:]
+        return is_parsable
 
     def write_stub_data_material_definition_to_disk(self):
         self.clear()

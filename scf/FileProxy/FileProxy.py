@@ -24,6 +24,14 @@ class FileProxy(SCFObject):
         return self._full_file_name
 
     @property
+    def is_exceptionless(self):
+        try:
+            self.execute_file_lines()
+            return True
+        except:
+            return False
+
+    @property
     def path_name(self):
         return os.path.dirname(self.full_file_name)
 
@@ -53,6 +61,12 @@ class FileProxy(SCFObject):
 
     def edit(self):
         os.system('vi + {}'.format(self.full_file_name))
+
+    def execute_file_lines(self):
+        file_pointer = open(self.full_file_name, 'r')
+        file_contents_string = file_pointer.read()
+        file_pointer.close()
+        exec(file_contents_string)
 
     def has_line(self, line):
         file_reference = open(self.full_file_name, 'r')

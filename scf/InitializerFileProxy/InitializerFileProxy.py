@@ -13,6 +13,14 @@ class InitializerFileProxy(ParsableFileProxy):
     ### READ-ONLY PUBLIC ATTRIBUTES ##
 
     @property
+    def is_faulty(self):
+        #self.debug(is_faulty, 'f')
+        if self.is_parsable:
+            if self.is_exceptionless:
+                return False
+        return True
+        
+    @property
     def sections(self):
         return (
             (self.encoding_directives, True, 0),
@@ -60,6 +68,7 @@ class InitializerFileProxy(ParsableFileProxy):
         return result
 
     def parse(self, initializer_file_name=None):
+        is_parsable = True
         if initializer_file_name is None:
             initializer_file_name = self.full_file_name
         initializer = file(initializer_file_name, 'r')
@@ -98,7 +107,7 @@ class InitializerFileProxy(ParsableFileProxy):
             elif current_section == 'teardown':
                 teardown_statements.append(line)
             else:
-                print '{!r}: can not parse line: {!r}.'.format(self.full_file_name, line)
+                is_parsable = False
         initializer.close()
         self.encoding_directives = encoding_directives[:]
         self.docstring_lines = docstring_lines[:]
@@ -106,6 +115,7 @@ class InitializerFileProxy(ParsableFileProxy):
         self.safe_import_statements = safe_import_statements[:]
         self.tag_lines = tag_lines[:]
         self.teardown_statements = teardown_statements[:]
+        return is_parsable
 
     def remove_safe_import_statement(self, source_module_short_name, source_attribute_name):
         safe_import_statement = 'safe_import(globals(), {!r}, {!r})\n'
