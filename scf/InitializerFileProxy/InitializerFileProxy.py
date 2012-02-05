@@ -1,4 +1,5 @@
 from baca.scf.ParsableFileProxy import ParsableFileProxy
+import collections
 import os
 
 
@@ -14,7 +15,6 @@ class InitializerFileProxy(ParsableFileProxy):
 
     @property
     def is_faulty(self):
-        #self.debug(is_faulty, 'f')
         if self.is_parsable:
             if self.is_exceptionless:
                 return False
@@ -127,6 +127,37 @@ class InitializerFileProxy(ParsableFileProxy):
                 safe_import_statements.append(current_safe_import_statement)
         self.safe_import_statements[:] = safe_import_statements
         self.write_to_disk()
+
+    def restore_interactively(self, prompt=True):
+        import baca
+        getter = self.make_new_getter(where=self.where())
+        getter.append_yes_no_string('make material by hand')
+        result = getter.run()
+        if self.backtrack():
+            return
+        if 'yes'.startswith(result.lower()):
+            material_package_maker_class_name = None
+            getter = self.make_new_getter(where=self.where())
+            getter.append_yes_no_string('should have illustration')
+            result = getter.run()
+            if self.backtrack():
+                return
+            should_have_illustration = 'yes'.startswith(result.lower())
+        else:
+            material_package_maker_wrangler = baca.scf.MaterialPackageMakerWrangler(session=self.session)
+            self.push_backtrack()
+            material_package_maker_class_name = \
+                material_package_maker_wrangler.select_material_proxy_class_name_interactively(
+                    clear=False, cache=True)
+            self.pop_backtrack()
+            if self.backtrack():
+                return
+            should_have_illustration = True
+        tags = collections.OrderedDict([])
+        tags['should_have_illustration'] = should_have_illustration
+        tags['material_package_maker_class_name'] = material_package_maker_class_name
+        self.write_stub_to_disk(tags=tags)
+        self.proceed('initializer restored.', prompt=prompt)
 
     def write_stub_to_disk(self, tags=None):
         self.clear()
