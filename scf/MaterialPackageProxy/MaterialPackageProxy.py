@@ -361,16 +361,16 @@ class MaterialPackageProxy(PackageProxy):
                 not self.session.use_current_user_input_values_as_default
         elif result == 'mdcanned':
             self.material_definition_module_proxy.write_canned_file_to_disk(prompt=True)
-        elif result == 'mdd':
+        elif result == 'mddelete':
             self.material_definition_module_proxy.remove(prompt=True)
         elif result == 'mde':
             self.material_definition_module_proxy.edit()
-        elif result == 'mdt':
+        elif result == 'mdstub':
             self.material_definition_module_proxy.write_stub_to_disk(
                 self.is_data_only, prompt=True)
         elif result == 'mdx':
             self.material_definition_module_proxy.run_python(prompt=True)
-        elif result == 'mdxi':
+        elif result == 'mdxe':
             self.material_definition_module_proxy.run_abjad(prompt=True)
         elif result == 'ibd':
             self.illustration_builder_module_proxy.remove(prompt=True)
@@ -388,15 +388,15 @@ class MaterialPackageProxy(PackageProxy):
             self.select_stylesheet_interactively()
         elif result == 'stl':
             self.manage_stylesheets()
-        elif result == 'dc':
+        elif result == 'omm':
             self.write_output_material_to_disk()
-        elif result == 'dcanned':
+        elif result == 'omcanned':
             self.output_material_module_proxy.write_canned_file_to_disk(prompt=True)
-        elif result == 'dd':
+        elif result == 'omdelete':
             self.output_material_module_proxy.remove(prompt=True)
-        elif result == 'di':
+        elif result == 'omv':
             self.output_material_module_proxy.view()
-        elif result == 'dfetch':
+        elif result == 'omfetch':
             self.output_material_module_proxy.display_output_material()
         elif result == 'lyc':
             self.write_illustration_ly_to_disk(is_forced=True)
@@ -503,10 +503,10 @@ class MaterialPackageProxy(PackageProxy):
             if not has_faulty_material_definition_module:
                 section.append(('mdx', 'material definition - execute'))
             hidden_section.append(('mdcanned', 'material definition - copy canned module'))
-            hidden_section.append(('mdd', 'material definition - delete'))
-            hidden_section.append(('mdt', 'material definition - stub'))
+            hidden_section.append(('mddelete', 'material definition - delete'))
+            hidden_section.append(('mdstub', 'material definition - stub'))
             if not has_faulty_material_definition_module:
-                hidden_section.append(('mdxi', 'material definition - execute & inspect'))
+                hidden_section.append(('mdxe', 'material definition - execute & edit'))
         elif self.material_package_maker_class_name is None:
             section.append(('mdt', 'material definition - stub'))
 
@@ -519,15 +519,15 @@ class MaterialPackageProxy(PackageProxy):
                 has_faulty_output_material_module = self.has_faulty_output_material_module
                 if has_faulty_output_material_module:
                     section.section_title = '(Note: has faulty output material module.)'
-                section.append(('dc', 'output data - create'))
+                section.append(('omm', 'output material - make'))
                 has_output_material_section = True
             if self.has_output_material_module:
                 if not has_output_material_section:
                     section = main_menu.make_new_section()
-                section.append(('di', 'output data - inspect'))
-                hidden_section.append(('dd', 'output data - delete'))
-                hidden_section.append(('dfetch', 'output data - fetch'))
-        hidden_section.append(('dcanned', 'output data - copy canned module'))
+                section.append(('omv', 'output material - view'))
+                hidden_section.append(('omdelete', 'output material - delete'))
+                hidden_section.append(('omfetch', 'output material - fetch'))
+        hidden_section.append(('omcanned', 'output material - copy canned module'))
 
     def make_main_menu_section_for_stylesheet_management(self, main_menu, hidden_section):
         if self.has_output_material:
@@ -605,7 +605,7 @@ class MaterialPackageProxy(PackageProxy):
                         self.material_underscored_name, new_material_underscored_name)
                     command = 'svn mv {} {}'.format(old_directory_name, new_directory_name)
                     os.system(command)
-            # rename output data
+            # rename output material
             new_output_material = os.path.join(new_package_directory, 'output_material.py')
             self.helpers.globally_replace_in_file(
                 new_output_material, self.material_underscored_name, new_material_underscored_name)
@@ -683,5 +683,5 @@ class MaterialPackageProxy(PackageProxy):
         output_material_module_proxy.write_to_disk()
         self.add_material_to_materials_initializer()
         self.add_material_to_material_initializer()
-        line = 'output data written to disk.'
+        line = 'output material written to disk.'
         self.proceed(line, prompt=prompt)

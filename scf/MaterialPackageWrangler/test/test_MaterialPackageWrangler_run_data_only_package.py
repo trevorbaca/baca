@@ -32,7 +32,7 @@ def test_MaterialPackageWrangler_run_data_only_package_02():
         studio.run(user_input=
             'm d testdata default default '
             'testdata mdcanned canned_testdata_material_definition.py default '
-            'dc default q')
+            'omm default q')
         assert studio.package_exists('baca.materials.testdata')
         # TODO: add more assets like the following
         assert baca.materials.testdata == [1, 2, 3, 4, 5]
@@ -61,7 +61,7 @@ def test_MaterialPackageWrangler_run_data_only_package_03():
     try:
         studio.run(user_input=
             'm d testdata default default '
-            'testdata mdd default q')
+            'testdata mddelete default q')
         assert studio.package_exists('baca.materials.testdata')
         mpp = baca.scf.MaterialPackageProxy('baca.materials.testdata')
         assert mpp.directory_contents == ['__init__.py']
@@ -81,7 +81,7 @@ def test_MaterialPackageWrangler_run_data_only_package_04():
     try:
         studio.run(user_input=
             'm d testdata default default '
-            'testdata mdt default q')
+            'testdata mdstub default q')
         assert studio.package_exists('baca.materials.testdata')
         mpp = baca.scf.MaterialPackageProxy('baca.materials.testdata')
         assert mpp.directory_contents == ['__init__.py', 'material_definition.py']
@@ -102,8 +102,8 @@ def test_MaterialPackageWrangler_run_data_only_package_05():
         studio.run(user_input=
             'm d testdata default default '
             'testdata mdcanned canned_testdata_material_definition.py default '
-            'dc default '
-            'dd default q')
+            'omm default '
+            'omdelete default q')
         assert studio.package_exists('baca.materials.testdata')
         mpp = baca.scf.MaterialPackageProxy('baca.materials.testdata')
         assert mpp.directory_contents == ['__init__.py', 'material_definition.py']
@@ -146,8 +146,8 @@ def test_MaterialPackageWrangler_run_data_only_package_07():
         studio.run(user_input=
             'm d testdata default default '
             'testdata mdcanned canned_testdata_material_definition.py default '
-            'dc default '
-            'dcanned canned_exception.py default q')
+            'omm default '
+            'omcanned canned_exception.py default q')
         assert studio.package_exists('baca.materials.testdata')
         mpp = baca.scf.MaterialPackageProxy('baca.materials.testdata')
         assert     mpp.directory_contents == ['__init__.py', 'material_definition.py', 'output_material.py']
