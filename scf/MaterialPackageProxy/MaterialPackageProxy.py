@@ -335,12 +335,12 @@ class MaterialPackageProxy(PackageProxy):
     ### PUBLIC METHODS ###
 
     def add_material_to_material_initializer(self):
-        self.initializer_file_proxy.add_protected_import_statement(
+        self.initializer_file_proxy.add_safe_import_statement(
             'output_material', self.material_underscored_name)
         
     def add_material_to_materials_initializer(self):
         parent_package = PackageProxy(self.parent_package_importable_name, session=self.session)
-        parent_package.initializer_file_proxy.add_protected_import_statement(
+        parent_package.initializer_file_proxy.add_safe_import_statement(
             self.material_underscored_name, self.material_underscored_name)
 
     # TODO: audit
@@ -559,10 +559,10 @@ class MaterialPackageProxy(PackageProxy):
         parent_package = PackageProxy(self.parent_package_importable_name, session=self.session)
         parent_package_initializer_file_proxy = parent_package.initializer_file_proxy
         filtered_import_statements = []
-        for protected_import_statement in parent_package_initializer_file_proxy.protected_import_statements:
-            if not protected_import_statement == import_statement:
-                filtered_import_statements.append(protected_import_statement)
-        parent_package_initializer_file_proxy.protected_import_statements[:] = filtered_import_statements
+        for safe_import_statement in parent_package_initializer_file_proxy.safe_import_statements:
+            if not safe_import_statement == import_statement:
+                filtered_import_statements.append(safe_import_statement)
+        parent_package_initializer_file_proxy.safe_import_statements[:] = filtered_import_statements
         parent_package_initializer_file_proxy.write_to_disk()
 
     # TODO: port

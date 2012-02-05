@@ -6,7 +6,7 @@ class InitializerFileProxy(ParsableFileProxy):
 
     def __init__(self, full_file_name, session=None):
         ParsableFileProxy.__init__(self, full_file_name, session=session)
-        self.protected_import_statements = []
+        self.safe_import_statements = []
         self.tag_lines = []
         self.parse()
 
@@ -18,22 +18,22 @@ class InitializerFileProxy(ParsableFileProxy):
             (self.encoding_directives, True, 0),
             (self.docstring_lines, False, 1),
             (self.setup_statements, True, 2),
-            (self.protected_import_statements, True, 1),
+            (self.safe_import_statements, True, 1),
             (self.tag_lines, False, 1),
             (self.teardown_statements, True, 0),
             )
 
     ### PUBLIC METHODS ###
 
-    def add_protected_import_statement(self, source_module_short_name, source_attribute_name):
+    def add_safe_import_statement(self, source_module_short_name, source_attribute_name):
         safe_import_import_statement = 'from baca.scf.helpers import safe_import\n'
         if safe_import_import_statement not in self.setup_statements:
             self.setup_statements.append(safe_import_import_statement)
-        protected_import_statement = 'safe_import(globals(), {!r}, {!r})\n'
-        protected_import_statement = protected_import_statement.format(
+        safe_import_statement = 'safe_import(globals(), {!r}, {!r})\n'
+        safe_import_statement = safe_import_statement.format(
             source_module_short_name, source_attribute_name)
-        if protected_import_statement not in self.protected_import_statements:
-            self.protected_import_statements.append(protected_import_statement)
+        if safe_import_statement not in self.safe_import_statements:
+            self.safe_import_statements.append(safe_import_statement)
         self.write_to_disk()
 
     def has_safe_import(self, source_module_short_name, source_module_attribute_name):
@@ -48,7 +48,7 @@ class InitializerFileProxy(ParsableFileProxy):
         encoding_directives = []
         docstring_lines = []
         setup_statements = []
-        protected_import_statements = []
+        safe_import_statements = []
         tag_lines = []
         teardown_statements = []
         current_section = None
@@ -76,7 +76,7 @@ class InitializerFileProxy(ParsableFileProxy):
             elif current_section == 'tags':
                 tag_lines.append(line)
             elif current_section == 'protected imports':
-                protected_import_statements.append(line)
+                safe_import_statements.append(line)
             elif current_section == 'teardown':
                 teardown_statements.append(line)
             else:
@@ -85,7 +85,7 @@ class InitializerFileProxy(ParsableFileProxy):
         self.encoding_directives = encoding_directives[:]
         self.docstring_lines = docstring_lines[:]
         self.setup_statements = setup_statements[:]
-        self.protected_import_statements = protected_import_statements[:]
+        self.safe_import_statements = safe_import_statements[:]
         self.tag_lines = tag_lines[:]
         self.teardown_statements = teardown_statements[:]
 
@@ -108,15 +108,15 @@ class InitializerFileProxy(ParsableFileProxy):
             result = 'tags = OrderedDict([])'
         return result
 
-    def remove_protected_import_statement(self, source_module_short_name, source_attribute_name):
-        protected_import_statement = 'safe_import(globals(), {!r}, {!r})\n'
-        protected_import_statement = protected_import_statement.format(
+    def remove_safe_import_statement(self, source_module_short_name, source_attribute_name):
+        safe_import_statement = 'safe_import(globals(), {!r}, {!r})\n'
+        safe_import_statement = safe_import_statement.format(
             source_module_short_name, source_attribute_name)
-        protected_import_statements = []
-        for current_protected_import_statement in self.protected_import_statements:
-            if not current_protected_import_statement == protected_import_statement:
-                protected_import_statements.append(current_protected_import_statement)
-        self.protected_import_statements[:] = protected_import_statements
+        safe_import_statements = []
+        for current_safe_import_statement in self.safe_import_statements:
+            if not current_safe_import_statement == safe_import_statement:
+                safe_import_statements.append(current_safe_import_statement)
+        self.safe_import_statements[:] = safe_import_statements
         self.write_to_disk()
 
     def write_stub_to_disk(self, tags=None):
