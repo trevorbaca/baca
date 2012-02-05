@@ -451,11 +451,11 @@ class MaterialPackageProxy(PackageProxy):
 
     def make_main_menu_section_for_hidden_entries(self, main_menu):
         hidden_section = main_menu.make_new_section(is_hidden=True)
-        hidden_section.append(('del', 'delete material'))
-        hidden_section.append(('init', 'edit initializer'))
-        hidden_section.append(('ls', 'list directory'))
-        hidden_section.append(('reg', 'regenerate material'))
-        hidden_section.append(('ren', 'rename material'))
+        hidden_section.append(('del', 'delete package'))
+        hidden_section.append(('init', 'view package initializer'))
+        hidden_section.append(('ls', 'list package'))
+        hidden_section.append(('reg', 'regenerate package'))
+        hidden_section.append(('ren', 'rename package'))
         hidden_section.append(('stl', 'manage stylesheets'))
         hidden_section.append(('tags', 'manage tags'))
 
