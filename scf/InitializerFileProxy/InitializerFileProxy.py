@@ -40,7 +40,25 @@ class InitializerFileProxy(ParsableFileProxy):
         safe_import_line = 'safe_import(globals(), {!r}, {!r})\n'
         safe_import_line = safe_import_line.format(source_module_short_name, source_module_attribute_name)
         return self.has_line(safe_import_line)
-        
+
+    def make_tag_lines(self, tags):
+        if tags:
+            lines = []
+            for key, value in sorted(tags.iteritems()):
+                key = repr(key)
+                if hasattr(value, '_get_multiline_repr'):
+                    repr_lines = value._get_multiline_repr(include_tools_package=True)
+                    value = '\n    '.join(repr_lines)
+                    lines.append('({}, {})'.format(key, value))
+                else:
+                    value = getattr(value, '_repr_with_tools_package', repr(value))
+                    lines.append('({}, {})'.format(key, value))
+            lines = ',\n    '.join(lines)
+            result = 'tags = OrderedDict([\n    {}])'.format(lines)
+        else:
+            result = 'tags = OrderedDict([])'
+        return result
+
     def parse(self, initializer_file_name=None):
         if initializer_file_name is None:
             initializer_file_name = self.full_file_name
@@ -89,25 +107,6 @@ class InitializerFileProxy(ParsableFileProxy):
         self.tag_lines = tag_lines[:]
         self.teardown_statements = teardown_statements[:]
 
-    # TODO: change to nonabbreviated name.
-    def pprint_tags(self, tags):
-        if tags:
-            lines = []
-            for key, value in sorted(tags.iteritems()):
-                key = repr(key)
-                if hasattr(value, '_get_multiline_repr'):
-                    repr_lines = value._get_multiline_repr(include_tools_package=True)
-                    value = '\n    '.join(repr_lines)
-                    lines.append('({}, {})'.format(key, value))
-                else:
-                    value = getattr(value, '_repr_with_tools_package', repr(value))
-                    lines.append('({}, {})'.format(key, value))
-            lines = ',\n    '.join(lines)
-            result = 'tags = OrderedDict([\n    {}])'.format(lines)
-        else:
-            result = 'tags = OrderedDict([])'
-        return result
-
     def remove_safe_import_statement(self, source_module_short_name, source_attribute_name):
         safe_import_statement = 'safe_import(globals(), {!r}, {!r})\n'
         safe_import_statement = safe_import_statement.format(
@@ -122,12 +121,12 @@ class InitializerFileProxy(ParsableFileProxy):
     def write_stub_to_disk(self, tags=None):
         self.clear()
         self.setup_statements.append('from collections import OrderedDict\n')
-        tag_lines = self.pprint_tags(tags)
+        tag_lines = self.make_tag_lines(tags)
         self.tag_lines.extend(tag_lines[:])
         self.write_to_disk()
 
     def write_tags_to_disk(self, tags):
         self.parse()
-        tag_lines = self.pprint_tags(tags)
+        tag_lines = self.make_tag_lines(tags)
         self.tag_lines = tag_lines[:]
         self.write_to_disk()
