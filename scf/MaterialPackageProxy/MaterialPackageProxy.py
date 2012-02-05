@@ -431,6 +431,8 @@ class MaterialPackageProxy(PackageProxy):
         elif result == 'del':
             self.remove()
             self.session.is_backtracking_locally = True
+        elif result == 'inr':
+            self.initializer_file_proxy.restore_interactively(prompt=True)
         elif result == 'inv':
             self.initializer_file_proxy.view()
         elif result == 'incanned':
@@ -510,13 +512,15 @@ class MaterialPackageProxy(PackageProxy):
     def make_main_menu_section_for_initializer(self, main_menu, hidden_section):
         if self.has_faulty_initializer:
             section = main_menu.make_new_section()
-            section.section_title = '(Note: has faulty initializer.)' 
+            section.section_title = '(Note: package has faulty initializer.)' 
             section.append(('inr', 'initializer - restore'))
         hidden_section.append(('inv', 'view package initializer'))
         hidden_section.append(('incanned', 'copy canned package initializer'))
         hidden_section.append(('instub', 'write stub package initializer'))
 
     def make_main_menu_section_for_material_definition(self, main_menu, hidden_section):
+        if self.has_faulty_initializer:
+            return
         section = main_menu.make_new_section()
         if self.has_material_definition_module:
             has_faulty_material_definition_module = self.has_faulty_material_definition_module
@@ -534,6 +538,8 @@ class MaterialPackageProxy(PackageProxy):
             section.append(('mdt', 'material definition - stub'))
 
     def make_main_menu_section_for_output_material(self, main_menu, hidden_section):
+        if self.has_faulty_initializer:
+            return
         has_output_material_section = False
         has_faulty_material_definition_module = self.has_faulty_material_definition_module
         if not has_faulty_material_definition_module:
