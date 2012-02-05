@@ -152,17 +152,6 @@ class PackageProxy(DirectoryProxy):
         line = '{!r}'.format(tag)
         self.proceed(line)
 
-    # TODO: try reimplementing with safe_import()
-#    def get_tags(self):
-#        import collections
-#        try:
-#            command = 'from {} import tags'.format(self.package_importable_name)
-#            self.debug(command)
-#            exec(command)
-#        except ImportError:    
-#            tags = collections.OrderedDict([])
-#        return tags
-
     def get_tags(self):
         import collections
         tags = safe_import(locals(), self.package_short_name, 'tags', 

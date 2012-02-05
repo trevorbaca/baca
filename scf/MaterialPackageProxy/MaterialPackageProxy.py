@@ -436,23 +436,14 @@ class MaterialPackageProxy(PackageProxy):
             raise ValueError
 
     def make_main_menu(self):
-        if self.is_handmade:
-            menu, hidden_section = self.make_main_menu_for_material_made_by_hand()
-        else:
-            menu, hidden_section = self.make_main_menu_for_material_made_with_material_package_maker()
+        menu, hidden_section = self.make_new_menu(where=self.where(), is_hidden=True)
+        self.make_main_menu_section_for_initializer(menu, hidden_section)
+        self.make_main_menu_sections(menu, hidden_section)
         self.make_main_menu_section_for_illustration_ly(menu, hidden_section)
         self.make_main_menu_section_for_illustration_pdf(menu, hidden_section)
         self.make_main_menu_section_for_hidden_entries(menu)
         return menu
     
-    def make_main_menu_for_material_made_by_hand(self):
-        menu, hidden_section = self.make_new_menu(where=self.where(), is_hidden=True)
-        self.make_main_menu_section_for_material_definition(menu, hidden_section)
-        self.make_main_menu_section_for_output_material(menu, hidden_section)
-        self.make_main_menu_section_for_illustration_builder(menu, hidden_section)
-        self.make_main_menu_section_for_stylesheet_management(menu, hidden_section)
-        return menu, hidden_section
-
     def make_main_menu_section_for_hidden_entries(self, main_menu):
         hidden_section = main_menu.make_new_section(is_hidden=True)
         hidden_section.append(('del', 'delete package'))
@@ -499,6 +490,9 @@ class MaterialPackageProxy(PackageProxy):
             hidden_section.append(('pdfd', 'output pdf - delete'))
             section.append(('pdfi', 'output pdf - inspect'))
 
+    def make_main_menu_section_for_initializer(self, menu, hidden_section):
+        pass
+
     def make_main_menu_section_for_material_definition(self, main_menu, hidden_section):
         section = main_menu.make_new_section()
         if self.has_material_definition_module:
@@ -543,6 +537,12 @@ class MaterialPackageProxy(PackageProxy):
                 # TODO: fix this
                 if True:
                     hidden_section.append(('ssm', 'source stylesheet - edit'))
+
+    def make_main_menu_sections(self, menu, hidden_section):
+        self.make_main_menu_section_for_material_definition(menu, hidden_section)
+        self.make_main_menu_section_for_output_material(menu, hidden_section)
+        self.make_main_menu_section_for_illustration_builder(menu, hidden_section)
+        self.make_main_menu_section_for_stylesheet_management(menu, hidden_section)
 
     def manage_stylesheets(self):
         stylesheet_wrangler = StylesheetWrangler(session=self.session)

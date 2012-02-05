@@ -72,12 +72,6 @@ class MaterialPackageMaker(MaterialPackageProxy):
         self.user_input_module_proxy.write_to_disk(user_input_wrapper)
         self.proceed('demo values loaded.', prompt=prompt)
 
-    def make_main_menu_for_material_made_with_material_package_maker(self):
-        menu, hidden_section = self.make_new_menu(where=self.where(), is_hidden=True)
-        self.make_main_menu_section_for_user_input_module(menu, hidden_section)
-        self.make_main_menu_section_for_output_material(menu, hidden_section)
-        return menu, hidden_section
-
     def make_main_menu_section_for_user_input_module(self, main_menu, hidden_section):
         section = main_menu.make_new_section(is_numbered=True)
         section.tokens = self.user_input_wrapper.editable_lines
@@ -89,6 +83,10 @@ class MaterialPackageMaker(MaterialPackageProxy):
         section.append(('uip', 'user input - populate'))
         section.append(('uis', 'user input - show demo values'))
         hidden_section.append(('uit','user input - toggle default mode'))
+
+    def make_main_menu_sections(self, menu, hidden_section):
+        self.make_main_menu_section_for_user_input_module(menu, hidden_section)
+        self.make_main_menu_section_for_output_material(menu, hidden_section)
 
     def populate_user_input_wrapper(self, prompt=True):
         total_elements = len(self.user_input_wrapper)
