@@ -416,6 +416,10 @@ class MaterialPackageProxy(PackageProxy):
             self.session.is_backtracking_locally = True
         elif result == 'init':
             self.initializer_file_proxy.view()
+        elif result == 'initcanned':
+            self.initializer_file_proxy.write_canned_file_to_disk(prompt=True)
+        elif result == 'initstub':
+            self.initializer_file_proxy.write_stub_file_to_disk(prompt=True)
         elif result == 'ren':
             self.rename_material()
         elif result == 'reg':
@@ -453,6 +457,8 @@ class MaterialPackageProxy(PackageProxy):
         hidden_section = main_menu.make_new_section(is_hidden=True)
         hidden_section.append(('del', 'delete package'))
         hidden_section.append(('init', 'view package initializer'))
+        hidden_section.append(('initcanned', 'copy canned package initializer'))
+        hidden_section.append(('initstub', 'write stub package initializer'))
         hidden_section.append(('ls', 'list package'))
         hidden_section.append(('reg', 'regenerate package'))
         hidden_section.append(('ren', 'rename package'))

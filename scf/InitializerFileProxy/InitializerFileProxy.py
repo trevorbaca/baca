@@ -80,7 +80,7 @@ class InitializerFileProxy(ParsableFileProxy):
             elif current_section == 'teardown':
                 teardown_statements.append(line)
             else:
-                raise ValueError('{!r}: can not parse line: {!r}.'.format(self.full_file_name, line))
+                print '{!r}: can not parse line: {!r}.'.format(self.full_file_name, line)
         initializer.close()
         self.encoding_directives = encoding_directives[:]
         self.docstring_lines = docstring_lines[:]

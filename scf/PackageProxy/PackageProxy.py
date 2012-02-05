@@ -1,6 +1,7 @@
 from abjad.tools import iotools
 from baca.scf.DirectoryProxy import DirectoryProxy
 from baca.scf.InitializerFileProxy import InitializerFileProxy
+from baca.scf.helpers import safe_import
 import os
 import sys
 
@@ -152,13 +153,21 @@ class PackageProxy(DirectoryProxy):
         self.proceed(line)
 
     # TODO: try reimplementing with safe_import()
+#    def get_tags(self):
+#        import collections
+#        try:
+#            command = 'from {} import tags'.format(self.package_importable_name)
+#            self.debug(command)
+#            exec(command)
+#        except ImportError:    
+#            tags = collections.OrderedDict([])
+#        return tags
+
     def get_tags(self):
         import collections
-        try:
-            command = 'from {} import tags'.format(self.package_importable_name)
-            exec(command)
-        except ImportError:    
-            tags = collections.OrderedDict([])
+        tags = safe_import(locals(), self.package_short_name, 'tags', 
+            source_parent_package_importable_name=self.parent_package_importable_name)
+        tags = tags or collections.OrderedDict([])
         return tags
 
     def handle_tags_menu_result(self, result):
