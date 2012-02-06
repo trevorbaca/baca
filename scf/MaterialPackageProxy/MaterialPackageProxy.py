@@ -735,6 +735,7 @@ class MaterialPackageProxy(PackageProxy):
         output_material_module_proxy = self.output_material_module_proxy
         pair = self.output_material_module_import_statements_and_output_material_module_body_lines
         output_material_module_import_statements, output_material_module_body_lines = pair
+        output_material_module_proxy.setup_statements = output_material_module_import_statements
         output_material_module_proxy.body_lines[:] = output_material_module_body_lines
         output_material_module_proxy.write_to_disk()
         self.add_material_to_materials_initializer()
