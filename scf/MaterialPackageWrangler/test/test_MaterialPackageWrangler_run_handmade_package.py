@@ -112,7 +112,7 @@ def test_MaterialPackageWrangler_run_handmade_package_05():
             'testnotes mddelete default q')
         assert studio.package_exists('baca.materials.testnotes')
         mpp = baca.scf.MaterialPackageProxy('baca.materials.testnotes')
-        assert mpp.directory_contents == ['__init__.py', 'illustration_builder.py']
+        assert mpp.directory_contents == ['__init__.py']
     finally:
         studio.run(user_input='m testnotes del remove default q')
         assert not studio.package_exists('baca.materials.testnotes')

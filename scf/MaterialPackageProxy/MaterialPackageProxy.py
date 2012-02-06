@@ -380,6 +380,19 @@ class MaterialPackageProxy(PackageProxy):
         parent_package.initializer_file_proxy.add_safe_import_statement(
             self.material_underscored_name, self.material_underscored_name)
 
+    def delete_material_definition_module(self, prompt=True):
+        if self.has_output_material_module:
+            self.output_material_module_proxy.remove(prompt=False)
+        if self.has_illustration_pdf:
+            self.illustration_pdf_proxy.remove(prompt=False)
+        if self.has_illustration_ly:
+            self.illustration_ly_proxy.remove(prompt=False)
+        if self.has_illustration_builder_module:
+            self.illustration_builder_module_proxy.remove(prompt=False)
+        if self.has_material_definition_module:
+            self.material_definition_module_proxy.remove(prompt=False)
+        self.proceed('everything deleted.', prompt=prompt)
+
     # TODO: audit
     def handle_main_menu_result(self, result):
         assert isinstance(result, str)
@@ -399,7 +412,8 @@ class MaterialPackageProxy(PackageProxy):
         elif result == 'mdcanned':
             self.material_definition_module_proxy.write_canned_file_to_disk(prompt=True)
         elif result == 'mddelete':
-            self.material_definition_module_proxy.remove(prompt=True)
+            #self.material_definition_module_proxy.remove(prompt=True)
+            self.delete_material_definition_module(prompt=True)
         elif result == 'mde':
             self.material_definition_module_proxy.edit()
         elif result == 'mdstub':
