@@ -20,10 +20,9 @@ def test_MaterialPackageProxy_screenscrapes_01():
       '',
       '     illustration builder - edit (ibe)',
       '     illustration builder - execute (ibx)',
-      '',
       '     score stylesheet - select (sss)',
       '',
-      '     output pdf - create (pdfc)',
+      '     output pdf - make (pdfm)',
       '     output pdf - view (pdfv)',
       '']
 
@@ -46,9 +45,8 @@ def test_MaterialPackageProxy_screenscrapes_02():
       '',
       '     illustration builder - edit (ibe)',
       '     illustration builder - execute (ibx)',
-      '',
       '     score stylesheet - select (sss)',
       '',
-      '     output pdf - create (pdfc)',
+      '     output pdf - make (pdfm)',
       '     output pdf - view (pdfv)',
       '']

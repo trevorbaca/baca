@@ -380,18 +380,33 @@ class MaterialPackageProxy(PackageProxy):
         parent_package.initializer_file_proxy.add_safe_import_statement(
             self.material_underscored_name, self.material_underscored_name)
 
-    def delete_material_definition_module(self, prompt=True):
-        if self.has_output_material_module:
-            self.output_material_module_proxy.remove(prompt=False)
-        if self.has_illustration_pdf:
-            self.illustration_pdf_proxy.remove(prompt=False)
-        if self.has_illustration_ly:
-            self.illustration_ly_proxy.remove(prompt=False)
+    def delete_illustration_builder_module(self, prompt=True):
+        self.delete_illustration_pdf(prompt=False)
         if self.has_illustration_builder_module:
-            self.illustration_builder_module_proxy.remove(prompt=False)
+            self.illustration_builder_module_proxy.remove(prompt=prompt)
+
+    def delete_illustration_ly(self, prompt=True):
+        if self.has_illustration_ly:
+            self.illustration_ly_file_proxy.remove(prompt=prompt)
+
+    def delete_illustration_pdf(self, prompt=True):
+        self.delete_illustration_ly(prompt=False)
+        if self.has_illustration_pdf:
+            self.illustration_pdf_file_proxy.remove(prompt=prompt)
+
+    def delete_material_definition_module(self, prompt=True):
+        self.delete_output_material_module(prompt=False)
+        self.delete_illustration_builder_module(prompt=False)
         if self.has_material_definition_module:
-            self.material_definition_module_proxy.remove(prompt=False)
-        self.proceed('everything deleted.', prompt=prompt)
+            self.material_definition_module_proxy.remove(prompt=prompt)
+
+    def delete_output_material_module(self, prompt=True):
+        if self.has_output_material_module:
+            self.output_material_module_proxy.remove(prompt=prompt)
+
+    def delete_user_input_module(self, prompt=True):
+        if self.has_user_input_module:
+            self.user_input_module_proxy.remove(prompt=prompt)
 
     # TODO: audit
     def handle_main_menu_result(self, result):
@@ -399,7 +414,8 @@ class MaterialPackageProxy(PackageProxy):
         if result == 'uic':
             self.clear_user_input_wrapper(prompt=False)    
         elif result == 'uid':
-            self.user_input_module_proxy.remove(prompt=True)
+            #self.user_input_module_proxy.remove(prompt=True)
+            self.delete_user_input_module(prompt=True)
         elif result == 'uil':
             self.load_user_input_wrapper_demo_values(prompt=False)
         elif result == 'uip':
@@ -425,7 +441,8 @@ class MaterialPackageProxy(PackageProxy):
         elif result == 'mdxe':
             self.material_definition_module_proxy.run_abjad(prompt=True)
         elif result == 'ibd':
-            self.illustration_builder_module_proxy.remove(prompt=True)
+            #self.illustration_builder_module_proxy.remove(prompt=True)
+            self.delete_illustration_builder_module(prompt=True)
         elif result == 'ibe':
             self.illustration_builder_module_proxy.edit()
         elif result == 'ibt':
@@ -445,22 +462,25 @@ class MaterialPackageProxy(PackageProxy):
         elif result == 'omcanned':
             self.output_material_module_proxy.write_canned_file_to_disk(prompt=True)
         elif result == 'omdelete':
-            self.output_material_module_proxy.remove(prompt=True)
+            #self.output_material_module_proxy.remove(prompt=True)
+            self.delete_output_material_module(prompt=True)
         elif result == 'omv':
             self.output_material_module_proxy.view()
         elif result == 'omfetch':
             self.output_material_module_proxy.display_output_material()
-        elif result == 'lyc':
+        elif result == 'lym':
             self.write_illustration_ly_to_disk(is_forced=True)
         elif result == 'lyd':
-            self.illustration_ly_file_proxy.remove(prompt=True)
+            #self.illustration_ly_file_proxy.remove(prompt=True)
+            self.delete_illustration_ly(prompt=True)
         elif result == 'lyv':
             self.illustration_ly_file_proxy.view()
-        elif result == 'pdfc':
+        elif result == 'pdfm':
             self.write_illustration_ly_and_pdf_to_disk(is_forced=True)
             self.illustration_pdf_file_proxy.view()
         elif result == 'pdfd':
-            self.illustration_pdf_file_proxy.remove(prompt=True)
+            #self.illustration_pdf_file_proxy.remove(prompt=True)
+            self.delete_illustration_pdf(prompt=True)
         elif result == 'pdfv':
             self.illustration_pdf_file_proxy.view()
         elif result == 'del':
@@ -520,13 +540,15 @@ class MaterialPackageProxy(PackageProxy):
                 hidden_section.append(('ibd', 'illustration builder - delete'))
                 hidden_section.append(('ibt', 'illustration builder - stub'))
                 hidden_section.append(('ibex', 'illustration builder - edit & execute'))
+                section.append(('sss', 'score stylesheet - select'))
+                hidden_section.append(('ssm', 'source stylesheet - edit'))
             elif self.should_have_illustration:
                 section.append(('ibt', 'illustration builder - stub'))
 
     def make_main_menu_section_for_illustration_ly(self, main_menu, hidden_section):
         if self.has_output_material:
             if self.has_illustration_builder_module or self.has_material_package_maker:
-                hidden_section.append(('lyc', 'output ly - create'))
+                hidden_section.append(('lym', 'output ly - make'))
         if self.has_illustration_ly:
             hidden_section.append(('lyd', 'output ly - delete'))
             hidden_section.append(('lyv', 'output ly - view'))
@@ -537,7 +559,7 @@ class MaterialPackageProxy(PackageProxy):
             if self.has_illustration_builder_module or self.has_material_package_maker:
                 section = main_menu.make_new_section()
                 has_illustration_pdf_section = True
-                section.append(('pdfc', 'output pdf - create'))
+                section.append(('pdfm', 'output pdf - make'))
         if self.has_illustration_pdf:
             if not has_illustration_pdf_section:
                 section = main_menu.make_new_section()
@@ -593,20 +615,10 @@ class MaterialPackageProxy(PackageProxy):
                 hidden_section.append(('omfetch', 'output material - fetch'))
         hidden_section.append(('omcanned', 'output material - copy canned module'))
 
-    def make_main_menu_section_for_stylesheet_management(self, main_menu, hidden_section):
-        if self.has_output_material:
-            if self.has_illustration_builder_module or self.should_have_illustration:
-                section = main_menu.make_new_section()
-                section.append(('sss', 'score stylesheet - select'))
-                # TODO: fix this
-                if True:
-                    hidden_section.append(('ssm', 'source stylesheet - edit'))
-
     def make_main_menu_sections(self, menu, hidden_section):
         self.make_main_menu_section_for_material_definition(menu, hidden_section)
         self.make_main_menu_section_for_output_material(menu, hidden_section)
         self.make_main_menu_section_for_illustration_builder(menu, hidden_section)
-        self.make_main_menu_section_for_stylesheet_management(menu, hidden_section)
 
     def manage_stylesheets(self):
         stylesheet_wrangler = StylesheetWrangler(session=self.session)
