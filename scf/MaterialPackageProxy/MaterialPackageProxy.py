@@ -713,8 +713,10 @@ class MaterialPackageProxy(PackageProxy):
         self.remove_material_from_materials_initializer()
         self.overwrite_output_material_module()
         output_material_module_proxy = self.output_material_module_proxy
-        lines = self.output_material_module_body_lines
-        output_material_module_proxy.body_lines[:] = lines
+        #output_material_module_setup_statements, output_material_module_body_lines = \
+        #    self.output_material_module_setup_statements_and_output_material_module_body_lines
+        output_material_module_body_lines = self.output_material_module_body_lines
+        output_material_module_proxy.body_lines[:] = output_material_module_body_lines
         output_material_module_proxy.write_to_disk()
         self.add_material_to_materials_initializer()
         self.add_material_to_material_initializer()
