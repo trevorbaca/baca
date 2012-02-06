@@ -24,7 +24,7 @@ def test_MaterialPackageProxy_screenscrapes_01():
       '     score stylesheet - select (sss)',
       '',
       '     output pdf - create (pdfc)',
-      '     output pdf - inspect (pdfi)',
+      '     output pdf - view (pdfv)',
       '']
 
 
@@ -50,5 +50,5 @@ def test_MaterialPackageProxy_screenscrapes_02():
       '     score stylesheet - select (sss)',
       '',
       '     output pdf - create (pdfc)',
-      '     output pdf - inspect (pdfi)',
+      '     output pdf - view (pdfv)',
       '']

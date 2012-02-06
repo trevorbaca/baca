@@ -440,14 +440,14 @@ class MaterialPackageProxy(PackageProxy):
             self.write_illustration_ly_to_disk(is_forced=True)
         elif result == 'lyd':
             self.illustration_ly_file_proxy.remove(prompt=True)
-        elif result == 'lyi':
+        elif result == 'lyv':
             self.illustration_ly_file_proxy.view()
         elif result == 'pdfc':
             self.write_illustration_ly_and_pdf_to_disk(is_forced=True)
             self.illustration_pdf_file_proxy.view()
         elif result == 'pdfd':
             self.illustration_pdf_file_proxy.remove(prompt=True)
-        elif result == 'pdfi':
+        elif result == 'pdfv':
             self.illustration_pdf_file_proxy.view()
         elif result == 'del':
             self.remove()
@@ -505,7 +505,7 @@ class MaterialPackageProxy(PackageProxy):
                     section.append(('ibx', 'illustration builder - execute'))
                 hidden_section.append(('ibd', 'illustration builder - delete'))
                 hidden_section.append(('ibt', 'illustration builder - stub'))
-                hidden_section.append(('ibxi', 'illustration builder - execute & inspect'))
+                hidden_section.append(('ibex', 'illustration builder - edit & execute'))
             elif self.should_have_illustration:
                 section.append(('ibt', 'illustration builder - stub'))
 
@@ -515,7 +515,7 @@ class MaterialPackageProxy(PackageProxy):
                 hidden_section.append(('lyc', 'output ly - create'))
         if self.has_illustration_ly:
             hidden_section.append(('lyd', 'output ly - delete'))
-            hidden_section.append(('lyi', 'output ly - inspect'))
+            hidden_section.append(('lyv', 'output ly - view'))
 
     def make_main_menu_section_for_illustration_pdf(self, main_menu, hidden_section):
         has_illustration_pdf_section = False
@@ -528,7 +528,7 @@ class MaterialPackageProxy(PackageProxy):
             if not has_illustration_pdf_section:
                 section = main_menu.make_new_section()
             hidden_section.append(('pdfd', 'output pdf - delete'))
-            section.append(('pdfi', 'output pdf - inspect'))
+            section.append(('pdfv', 'output pdf - view'))
 
     def make_main_menu_section_for_initializer(self, main_menu, hidden_section):
         if self.has_faulty_initializer:
@@ -563,7 +563,7 @@ class MaterialPackageProxy(PackageProxy):
             return
         has_output_material_section = False
         has_faulty_material_definition_module = self.has_faulty_material_definition_module
-        if not has_faulty_material_definition_module:
+        if self.has_material_definition_module and not has_faulty_material_definition_module:
             if self.has_material_definition or self.has_complete_user_input_wrapper:
                 section = main_menu.make_new_section()
                 has_faulty_output_material_module = self.has_faulty_output_material_module
