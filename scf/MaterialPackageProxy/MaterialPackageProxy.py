@@ -203,7 +203,11 @@ class MaterialPackageProxy(PackageProxy):
             material_definition = pair[1]
             return material_definition
 
-    # TODO: add self.output_material property to execute lines from *output material module*
+    @property
+    def output_material(self):
+        if self.should_have_output_material_module:
+            if self.has_output_material_module:
+                return self.output_material_module_proxy.import_output_material()
     
     @property
     def output_material_module_import_statements_and_material_definition(self):
@@ -295,8 +299,6 @@ class MaterialPackageProxy(PackageProxy):
     @property
     def output_material_module_proxy(self):
         if self.should_have_output_material_module:
-            #if not self.has_output_material_module:
-            #    file(self.output_material_module_file_name, 'w').write('')    
             if self.has_output_material_module:
                 return OutputMaterialModuleProxy(self.output_material_module_importable_name, session=self.session)
 

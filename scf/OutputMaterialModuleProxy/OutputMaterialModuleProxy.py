@@ -28,9 +28,9 @@ class OutputMaterialModuleProxy(BasicModuleProxy):
         self.unimport_material_package()
         #self.unimport()
         if os.path.exists(self.full_file_name):
-            om = open(self.full_file_name, 'r')
-            file_contents_string = om.read()
-            om.close()
+            file_pointer = open(self.full_file_name, 'r')
+            file_contents_string = file_pointer.read()
+            file_pointer.close()
             exec(file_contents_string)
             result = locals().get(self.material_underscored_name)
             return result
