@@ -85,7 +85,8 @@ class MaterialPackageProxy(PackageProxy):
     def has_material_definition(self):
         if self.should_have_material_definition_module:
             if self.has_material_definition_module:
-                return bool(self.material_definition_module_proxy.import_material_definition())
+                #return bool(self.material_definition_module_proxy.import_material_definition())
+                return bool(self.material_definition)
         return False
 
     @property
@@ -196,6 +197,21 @@ class MaterialPackageProxy(PackageProxy):
         return self.has_material_package_maker
 
     @property
+    def material_definition(self):
+        if self.should_have_material_definition_module:
+            pair = self.output_material_module_import_statements_and_material_definition
+            material_definition = pair[1]
+            return material_definition
+
+    # TODO: add self.output_material property to execute lines from *output material module*
+    
+    @property
+    def output_material_module_import_statements_and_material_definition(self):
+        if self.should_have_material_definition_module:
+            tmp = self.material_definition_module_proxy
+            return tmp.import_output_material_module_import_statements_and_material_definition()
+
+    @property
     def material_definition_module_file_name(self):
         if self.should_have_material_definition_module:
             return os.path.join(self.directory_name, 'material_definition.py')
@@ -252,18 +268,20 @@ class MaterialPackageProxy(PackageProxy):
         return '.'.join(self.package_importable_name.split('.')[:-1])
 
     @property
-    def output_material(self):
-        if self.should_have_output_material_module:
-            return self.material_definition_module_proxy.import_material_definition()
-
-    @property
     def output_material_module_body_lines(self):
         if self.should_have_material_definition_module:
-            lines = []
-            output_material = self.output_material
-            lines.append('{} = {!r}'.format(self.material_underscored_name, output_material))
-            return lines
+            return self.output_material_module_import_statements_and_output_material_module_body_lines[1]
 
+    @property
+    def output_material_module_import_statements_and_output_material_module_body_lines(self):
+        if self.should_have_material_definition_module:
+            pair = self.output_material_module_import_statements_and_material_definition
+            output_material_module_import_statements, material_definition = pair
+            output_material_module_body_lines = []
+            output_material_module_body_lines.append('{} = {!r}'.format(
+                self.material_underscored_name, material_definition))
+            return output_material_module_import_statements, output_material_module_body_lines
+            
     @property
     def output_material_module_file_name(self): 
         if self.should_have_output_material_module:
@@ -713,9 +731,8 @@ class MaterialPackageProxy(PackageProxy):
         self.remove_material_from_materials_initializer()
         self.overwrite_output_material_module()
         output_material_module_proxy = self.output_material_module_proxy
-        #output_material_module_setup_statements, output_material_module_body_lines = \
-        #    self.output_material_module_setup_statements_and_output_material_module_body_lines
-        output_material_module_body_lines = self.output_material_module_body_lines
+        pair = self.output_material_module_import_statements_and_output_material_module_body_lines
+        output_material_module_import_statements, output_material_module_body_lines = pair
         output_material_module_proxy.body_lines[:] = output_material_module_body_lines
         output_material_module_proxy.write_to_disk()
         self.add_material_to_materials_initializer()

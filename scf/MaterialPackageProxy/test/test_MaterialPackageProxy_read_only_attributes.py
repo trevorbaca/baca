@@ -32,6 +32,8 @@ def test_MaterialPackageProxy_read_only_attributes_01():
     #assert not mpp.is_changed   
     assert     mpp.is_data_only
     assert     mpp.is_handmade
+    #assert     mpp.output_material == [1, 2, 3, 4, 5]
+    assert     mpp.material_definition == [1, 2, 3, 4, 5]
     assert     mpp.material_definition_module_file_name == \
         '/Users/trevorbaca/Documents/other/baca/materials/red_numbers/material_definition.py'
     assert     mpp.material_definition_module_importable_name == \
@@ -47,7 +49,6 @@ def test_MaterialPackageProxy_read_only_attributes_01():
     assert     mpp.materials_directory_name == \
         '/Users/trevorbaca/Documents/other/baca/materials'
     assert     mpp.materials_package_importable_name == 'baca.materials'
-    assert     mpp.output_material == [1, 2, 3, 4, 5]
     assert     mpp.output_material_module_body_lines == ['red_numbers = [1, 2, 3, 4, 5]']
     assert     mpp.output_material_module_file_name == \
         '/Users/trevorbaca/Documents/other/baca/materials/red_numbers/output_material.py'
@@ -185,7 +186,7 @@ def test_MaterialPackageProxy_read_only_attributes_03():
     assert     mpp.materials_directory_name == \
         '/Users/trevorbaca/Documents/other/baca/materials'
     assert     mpp.materials_package_importable_name == 'baca.materials'
-    assert     notetools.all_are_notes(mpp.output_material)
+    assert     notetools.all_are_notes(mpp.material_definition)
     assert     mpp.output_material_module_body_lines is not None
     assert     mpp.output_material_module_file_name == \
         '/Users/trevorbaca/Documents/other/baca/materials/red_notes/output_material.py'

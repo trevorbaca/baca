@@ -16,7 +16,7 @@ class MaterialDefinitionModuleProxy(MaterialModuleProxy):
     @property
     def is_faulty(self):
         try:
-            self.import_material_definition()
+            self.import_output_material_module_import_statements_and_material_definition()
             return False
         except:
             return True
@@ -48,8 +48,7 @@ class MaterialDefinitionModuleProxy(MaterialModuleProxy):
         columns = len(self.material_underscored_name) + 3
         os.system("vi + -c'norm {}l' {}".format(columns, self.full_file_name))
 
-    #def import_material_definition_and_output_material_module_import_statements(self):
-    def import_material_definition(self):
+    def import_output_material_module_import_statements_and_material_definition(self):
         if os.path.exists(self.full_file_name):
             file_pointer = open(self.full_file_name, 'r')
             file_contents_string = file_pointer.read()
@@ -58,8 +57,7 @@ class MaterialDefinitionModuleProxy(MaterialModuleProxy):
             material_definition = locals().get(self.material_underscored_name)
             output_material_module_import_statements = locals().get(
                 'output_material_module_import_statements')
-            return material_definition
-            #return material_definition, output_material_module_import_statements
+            return output_material_module_import_statements, material_definition
 
     def parse(self):
         is_parsable = True

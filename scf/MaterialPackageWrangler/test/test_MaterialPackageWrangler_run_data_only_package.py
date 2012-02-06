@@ -89,7 +89,7 @@ def test_MaterialPackageWrangler_run_data_only_package_04():
         assert mpp.has_output_material_module
         assert mpp.is_data_only
         assert mpp.is_handmade
-        assert mpp.output_material == [1, 2, 3, 4, 5]
+        assert mpp.material_definition == [1, 2, 3, 4, 5]
     finally:
         studio.run(user_input='m testnumbers del remove default q')
         assert not studio.package_exists('baca.materials.testnumbers')
