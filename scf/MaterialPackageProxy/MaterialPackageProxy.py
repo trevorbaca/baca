@@ -403,6 +403,7 @@ class MaterialPackageProxy(PackageProxy):
         elif result == 'mde':
             self.material_definition_module_proxy.edit()
         elif result == 'mdstub':
+            file(self.material_definition_module_file_name, 'w').write('')
             self.material_definition_module_proxy.write_stub_to_disk(
                 self.is_data_only, prompt=True)
         elif result == 'mdx':
@@ -555,7 +556,7 @@ class MaterialPackageProxy(PackageProxy):
             if not has_faulty_material_definition_module:
                 hidden_section.append(('mdxe', 'material definition - execute & edit'))
         elif self.material_package_maker_class_name is None:
-            section.append(('mdt', 'material definition - stub'))
+            section.append(('mdstub', 'material definition - stub'))
 
     def make_main_menu_section_for_output_material(self, main_menu, hidden_section):
         if self.has_faulty_initializer:
