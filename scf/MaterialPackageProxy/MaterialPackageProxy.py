@@ -446,7 +446,6 @@ class MaterialPackageProxy(PackageProxy):
             parent_initializer_pyc_file_name = self.parent_initializer_file_name + 'c'
             if os.path.exists(parent_initializer_pyc_file_name):
                 os.remove(parent_initializer_pyc_file_name)
-                self.debug('parent initializer pyc file deleted.')
         
     def delete_user_input_module(self, prompt=True):
         if self.has_user_input_module:

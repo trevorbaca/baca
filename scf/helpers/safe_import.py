@@ -1,8 +1,12 @@
+import inspect
+
+
 def safe_import(target_namespace, source_module_short_name, source_attribute_name,
     source_parent_package_importable_name=None):
 
-    #print repr(target_namespace)
+    #print repr(target_namespace.keys())
     #print repr(source_module_short_name)
+    #print repr(source_attribute_name)
     #print repr(source_parent_package_importable_name)
 
     if source_parent_package_importable_name is None:
