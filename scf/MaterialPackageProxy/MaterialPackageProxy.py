@@ -195,14 +195,6 @@ class MaterialPackageProxy(PackageProxy):
             return self.initializer_file_proxy.has_safe_import_statement(
                 'output_material', self.material_underscored_name)
 
-    @property
-    def parent_initializer_has_output_material_safe_import_statement(self):
-        import baca
-        parent_initializer_file_proxy = baca.scf.InitializerFileProxy(
-            self.parent_initializer_file_name)
-        return parent_initializer_file_proxy.has_safe_import_statement(
-            self.material_underscored_name, self.material_underscored_name)
-
     # TODO: port
     @property
     def is_changed(self):
@@ -256,8 +248,6 @@ class MaterialPackageProxy(PackageProxy):
     @property
     def material_definition_module_proxy(self):
         if self.should_have_material_definition_module:
-            #if not self.has_material_definition_module:
-            #    file(self.material_definition_module_file_name, 'w').write('')    
             if self.has_material_definition_module:
                 return MaterialDefinitionModuleProxy(
                     self.material_definition_module_importable_name, session=self.session)
@@ -271,7 +261,8 @@ class MaterialPackageProxy(PackageProxy):
     @property
     def material_package_maker(self):
         if self.material_package_maker_class_name is not None:
-            maker_class = safe_import(locals(), 'materialpackagemakers', self.material_package_maker_class_name,
+            maker_class = safe_import(
+                locals(), 'materialpackagemakers', self.material_package_maker_class_name,
                 source_parent_package_importable_name=self.scf_package_importable_name)
             return maker_class
 
@@ -328,7 +319,15 @@ class MaterialPackageProxy(PackageProxy):
     def output_material_module_proxy(self):
         if self.should_have_output_material_module:
             if self.has_output_material_module:
-                return OutputMaterialModuleProxy(self.output_material_module_importable_name, session=self.session)
+                return OutputMaterialModuleProxy(
+                    self.output_material_module_importable_name, session=self.session)
+
+    @property
+    def parent_initializer_has_output_material_safe_import_statement(self):
+        import baca
+        if self.has_parent_initializer:
+            return self.parent_initializer_file_proxy.has_safe_import_statement(
+            self.material_underscored_name, self.material_underscored_name)
 
     @property
     def should_have_illustration(self):
@@ -542,9 +541,6 @@ class MaterialPackageProxy(PackageProxy):
     def make_main_menu_section_for_hidden_entries(self, main_menu):
         hidden_section = main_menu.make_new_section(is_hidden=True)
         hidden_section.append(('del', 'delete package'))
-#        hidden_section.append(('init', 'view package initializer'))
-#        hidden_section.append(('initcanned', 'copy canned package initializer'))
-#        hidden_section.append(('initstub', 'write stub package initializer'))
         hidden_section.append(('ls', 'list package'))
         hidden_section.append(('reg', 'regenerate package'))
         hidden_section.append(('ren', 'rename package'))
@@ -660,7 +656,8 @@ class MaterialPackageProxy(PackageProxy):
 
     def remove_material_from_materials_initializer(self):
         import_statement = 'safe_import(globals(), {!r}, {!r})\n'
-        import_statement = import_statement.format(self.material_underscored_name, self.material_underscored_name)
+        import_statement = import_statement.format(
+            self.material_underscored_name, self.material_underscored_name)
         parent_package = PackageProxy(self.parent_package_importable_name, session=self.session)
         parent_package_initializer_file_proxy = parent_package.initializer_file_proxy
         filtered_import_statements = []

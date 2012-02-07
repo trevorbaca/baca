@@ -45,6 +45,11 @@ class PackageProxy(DirectoryProxy):
             return os.path.isfile(self.initializer_file_name)
 
     @property
+    def has_parent_initializer(self):
+        if self.parent_initializer_file_name is not None:
+            return os.path.isfile(self.parent_initializer_file_name)
+
+    @property
     def initializer_file_name(self):
         if self.directory_name is not None:
             return os.path.join(self.directory_name, '__init__.py')
@@ -77,6 +82,13 @@ class PackageProxy(DirectoryProxy):
             parent_directory_name = self.package_importable_name_to_directory_name(
                 self.parent_package_importable_name)
             return os.path.join(parent_directory_name, '__init__.py')
+
+    # TODO: write test
+    @property
+    def parent_initializer_file_proxy(self):
+        if self.parent_initializer_file_name:
+            return InitializerFileProxy(
+                self.parent_initializer_file_name, session=self.session)
 
     @property
     def parent_package_importable_name(self):
