@@ -154,7 +154,8 @@ def test_MaterialPackageWrangler_run_handmade_package_07():
         assert studio.package_exists('baca.materials.testnotes')
         mpp = baca.scf.MaterialPackageProxy('baca.materials.testnotes')
         assert mpp.directory_contents == ['__init__.py', 'illustration_builder.py', 'material_definition.py']
-        assert not mpp.initializer_file_proxy.has_safe_import('output_material', 'testnotes')
+        assert not mpp.initializer_has_output_material_safe_import_statement
+        assert not mpp.parent_initializer_has_output_material_safe_import_statement
     finally:
         studio.run(user_input='m testnotes del remove default q')
         assert not studio.package_exists('baca.materials.testnotes')

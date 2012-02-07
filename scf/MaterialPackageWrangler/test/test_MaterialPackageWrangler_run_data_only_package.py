@@ -1,5 +1,6 @@
 import baca
 import py
+import types
 
 
 def test_MaterialPackageWrangler_run_data_only_package_01():
@@ -14,7 +15,16 @@ def test_MaterialPackageWrangler_run_data_only_package_01():
         studio.run(user_input='m d testnumbers default default q')
         assert studio.package_exists('baca.materials.testnumbers')
         mpp = baca.scf.MaterialPackageProxy('baca.materials.testnumbers')
+        assert mpp.is_data_only
         assert mpp.directory_contents == ['__init__.py', 'material_definition.py']
+        assert mpp.has_valid_initializer
+        assert mpp.has_valid_material_definition_module
+        assert not mpp.has_output_material_module
+        assert not mpp.initializer_has_output_material_safe_import_statement
+        assert not mpp.parent_initializer_has_output_material_safe_import_statement
+        assert mpp.material_definition is None
+        assert mpp.output_material is None
+        assert isinstance(baca.materials.testnumbers, types.ModuleType)
     finally:
         studio.run(user_input='m testnumbers del remove default q')
         assert not studio.package_exists('baca.materials.testnumbers')
@@ -34,9 +44,16 @@ def test_MaterialPackageWrangler_run_data_only_package_02():
             'testnumbers incanned canned_exception.py default q')
         assert studio.package_exists('baca.materials.testnumbers')
         mpp = baca.scf.MaterialPackageProxy('baca.materials.testnumbers')
+        assert mpp.is_data_only
         assert mpp.directory_contents == ['__init__.py', 'material_definition.py']
         assert not mpp.has_valid_initializer
         assert mpp.has_valid_material_definition_module
+        assert not mpp.has_output_material_module
+        assert not mpp.initializer_has_output_material_safe_import_statement
+        assert not mpp.parent_initializer_has_output_material_safe_import_statement
+        assert mpp.material_definition is None
+        assert mpp.output_material is None
+        assert isinstance(baca.materials.testnumbers, types.ModuleType)
     finally:
         studio.run(user_input='m testnumbers del remove default q')
         assert not studio.package_exists('baca.materials.testnumbers')
@@ -57,9 +74,16 @@ def test_MaterialPackageWrangler_run_data_only_package_03():
             'inr yes no default q')
         assert studio.package_exists('baca.materials.testnumbers')
         mpp = baca.scf.MaterialPackageProxy('baca.materials.testnumbers')
+        assert mpp.is_data_only
         assert mpp.directory_contents == ['__init__.py', 'material_definition.py']
         assert mpp.has_valid_initializer
         assert mpp.has_valid_material_definition_module
+        assert not mpp.has_output_material_module
+        assert not mpp.initializer_has_output_material_safe_import_statement
+        assert not mpp.parent_initializer_has_output_material_safe_import_statement
+        assert mpp.material_definition is None
+        assert mpp.output_material is None
+        assert isinstance(baca.materials.testnumbers, types.ModuleType)
     finally:
         studio.run(user_input='m testnumbers del remove default q')
         assert not studio.package_exists('baca.materials.testnumbers')
@@ -79,18 +103,17 @@ def test_MaterialPackageWrangler_run_data_only_package_04():
             'testnumbers mdcanned canned_testnumbers_material_definition.py default '
             'omm default q')
         assert studio.package_exists('baca.materials.testnumbers')
-        # TODO: add more assets like the following
-        assert baca.materials.testnumbers == [1, 2, 3, 4, 5]
         mpp = baca.scf.MaterialPackageProxy('baca.materials.testnumbers')
-        assert mpp.directory_contents == ['__init__.py', 'material_definition.py', 'output_material.py']
-        assert mpp.has_material_definition
-        assert mpp.has_material_definition_module
-        assert mpp.has_output_material
-        assert mpp.has_output_material_module
         assert mpp.is_data_only
-        assert mpp.is_handmade
+        assert mpp.directory_contents == ['__init__.py', 'material_definition.py', 'output_material.py']
+        assert mpp.has_valid_initializer
+        assert mpp.has_valid_material_definition_module
+        assert mpp.has_valid_output_material_module
+        assert mpp.initializer_has_output_material_safe_import_statement
+        assert mpp.parent_initializer_has_output_material_safe_import_statement
         assert mpp.material_definition == [1, 2, 3, 4, 5]
         assert mpp.output_material == [1, 2, 3, 4, 5]
+        assert baca.materials.testnumbers == [1, 2, 3, 4, 5]
     finally:
         studio.run(user_input='m testnumbers del remove default q')
         assert not studio.package_exists('baca.materials.testnumbers')
@@ -110,7 +133,18 @@ def test_MaterialPackageWrangler_run_data_only_package_05():
             'testnumbers mddelete default q')
         assert studio.package_exists('baca.materials.testnumbers')
         mpp = baca.scf.MaterialPackageProxy('baca.materials.testnumbers')
+        assert mpp.is_data_only
         assert mpp.directory_contents == ['__init__.py']
+        assert mpp.has_valid_initializer
+        assert not mpp.has_material_definition_module
+        assert not mpp.has_output_material_module
+        assert not mpp.initializer_has_output_material_safe_import_statement
+        assert not mpp.parent_initializer_has_output_material_safe_import_statement
+        assert mpp.material_definition is None
+        assert mpp.output_material is None
+        # TODO: maybe the following line can be made to work?
+        # TODO: if Python can be convinced to reread baca.materials?
+        #assert isinstance(baca.materials.testnumbers, types.ModuleType)
     finally:
         studio.run(user_input='m testnumbers del remove default q')
         assert not studio.package_exists('baca.materials.testnumbers')
@@ -130,6 +164,7 @@ def test_MaterialPackageWrangler_run_data_only_package_06():
             'testnumbers mdstub default q')
         assert studio.package_exists('baca.materials.testnumbers')
         mpp = baca.scf.MaterialPackageProxy('baca.materials.testnumbers')
+        assert mpp.is_data_only
         assert mpp.directory_contents == ['__init__.py', 'material_definition.py']
     finally:
         studio.run(user_input='m testnumbers del remove default q')
@@ -152,8 +187,10 @@ def test_MaterialPackageWrangler_run_data_only_package_07():
             'omdelete default q')
         assert studio.package_exists('baca.materials.testnumbers')
         mpp = baca.scf.MaterialPackageProxy('baca.materials.testnumbers')
+        assert mpp.is_data_only
         assert mpp.directory_contents == ['__init__.py', 'material_definition.py']
-        assert not mpp.initializer_file_proxy.has_safe_import('output_material', 'testnumbers')
+        assert not mpp.initializer_has_output_material_safe_import_statement
+        assert not mpp.parent_initializer_has_output_material_safe_import_statement
     finally:
         studio.run(user_input='m testnumbers del remove default q')
         assert not studio.package_exists('baca.materials.testnumbers')
@@ -173,6 +210,7 @@ def test_MaterialPackageWrangler_run_data_only_package_08():
             'testnumbers mdcanned canned_testnumbers_material_definition_with_exception.py default q')
         assert studio.package_exists('baca.materials.testnumbers')
         mpp = baca.scf.MaterialPackageProxy('baca.materials.testnumbers')
+        assert mpp.is_data_only
         assert mpp.directory_contents == ['__init__.py', 'material_definition.py']
         assert mpp.has_valid_initializer
         assert not mpp.has_valid_material_definition_module
@@ -197,6 +235,7 @@ def test_MaterialPackageWrangler_run_data_only_package_09():
             'omcanned canned_exception.py default q')
         assert studio.package_exists('baca.materials.testnumbers')
         mpp = baca.scf.MaterialPackageProxy('baca.materials.testnumbers')
+        assert mpp.is_data_only
         assert mpp.directory_contents == ['__init__.py', 'material_definition.py', 'output_material.py']
         assert mpp.has_valid_initializer
         assert mpp.has_valid_material_definition_module

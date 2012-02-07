@@ -129,6 +129,8 @@ class MaterialPackageWrangler(PackageWrangler):
             line = 'package {!r} already exists.'.format(material_name)
             self.proceed(line, prompt=prompt)
             return False
+        #self.debug('next one or two lines are experimental.')
+        #self.unimport_material_package()
         os.mkdir(directory_name)
         file(os.path.join(directory_name, '__init__.py'), 'w').write('')
         material_proxy = MaterialPackageProxy(material_package_importable_name, session=self.session)

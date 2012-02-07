@@ -189,6 +189,20 @@ class MaterialPackageProxy(PackageProxy):
                 file(self.illustration_pdf_file_name, 'w').write('')
             return IllustrationPdfFileProxy(self.illustration_pdf_file_name, session=self.session)
 
+    @property
+    def initializer_has_output_material_safe_import_statement(self):
+        if self.has_initializer:
+            return self.initializer_file_proxy.has_safe_import_statement(
+                'output_material', self.material_underscored_name)
+
+    @property
+    def parent_initializer_has_output_material_safe_import_statement(self):
+        import baca
+        parent_initializer_file_proxy = baca.scf.InitializerFileProxy(
+            self.parent_initializer_file_name)
+        return parent_initializer_file_proxy.has_safe_import_statement(
+            self.material_underscored_name, self.material_underscored_name)
+
     # TODO: port
     @property
     def is_changed(self):
@@ -212,9 +226,10 @@ class MaterialPackageProxy(PackageProxy):
     @property
     def material_definition(self):
         if self.should_have_material_definition_module:
-            pair = self.output_material_module_import_statements_and_material_definition
-            material_definition = pair[1]
-            return material_definition
+            if self.has_material_definition_module:
+                pair = self.output_material_module_import_statements_and_material_definition
+                material_definition = pair[1]
+                return material_definition
 
     @property
     def output_material(self):

@@ -33,8 +33,9 @@ class OutputMaterialModuleProxy(BasicModuleProxy):
 
     def remove(self, prompt=True):
         import baca
-        parent_package_initializer = baca.scf.InitializerFileProxy(self.parent_package_initializer_file_name)
-        parent_package_initializer.remove_safe_import_statement(
+        parent_package_initializer_file_proxy = baca.scf.InitializerFileProxy(
+            self.parent_package_initializer_file_name)
+        parent_package_initializer_file_proxy.remove_safe_import_statement(
             'output_material', self.material_underscored_name)
         grandparent_package_initializer = baca.scf.InitializerFileProxy(
             self.grandparent_package_initializer_file_name)
