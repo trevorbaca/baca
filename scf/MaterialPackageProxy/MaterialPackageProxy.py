@@ -436,6 +436,7 @@ class MaterialPackageProxy(PackageProxy):
         self.session.is_backtracking_locally = True
 
     def delete_output_material_module(self, prompt=True):
+        self.delete_illustration_builder_module(prompt=False)
         if self.has_output_material_module:
             self.output_material_module_proxy.remove(prompt=prompt)
 

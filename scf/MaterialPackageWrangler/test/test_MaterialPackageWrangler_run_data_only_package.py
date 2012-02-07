@@ -4,8 +4,7 @@ import types
 
 
 def test_MaterialPackageWrangler_run_data_only_package_01():
-    '''Make data package.
-    Delete package.
+    '''Make data package. Delete package.
     '''
     
     studio = baca.scf.Studio()
@@ -104,7 +103,7 @@ def test_MaterialPackageWrangler_run_data_only_package_04():
         assert mpp.is_data_only
         assert mpp.directory_contents == ['__init__.py', 'material_definition.py', 'output_material.py']
         assert mpp.has_readable_initializer
-        assert mpp.has_readable_material_definition_module
+        assert mpp.has_user_finalized_material_definition_module
         assert mpp.has_readable_output_material_module
         assert mpp.initializer_has_output_material_safe_import_statement
         assert mpp.parent_initializer_has_output_material_safe_import_statement
@@ -190,7 +189,7 @@ def test_MaterialPackageWrangler_run_data_only_package_07():
         assert mpp.is_data_only
         assert mpp.directory_contents == ['__init__.py', 'material_definition.py']
         assert mpp.has_readable_initializer
-        assert mpp.has_readable_material_definition_module
+        assert mpp.has_user_finalized_material_definition_module
         assert not mpp.has_output_material_module
         assert not mpp.initializer_has_output_material_safe_import_statement
         assert not mpp.parent_initializer_has_output_material_safe_import_statement
@@ -248,7 +247,7 @@ def test_MaterialPackageWrangler_run_data_only_package_09():
         assert mpp.is_data_only
         assert mpp.directory_contents == ['__init__.py', 'material_definition.py', 'output_material.py']
         assert mpp.has_readable_initializer
-        assert mpp.has_readable_material_definition_module
+        assert mpp.has_user_finalized_material_definition_module
         assert not mpp.has_readable_output_material_module
         assert mpp.initializer_has_output_material_safe_import_statement
         assert mpp.parent_initializer_has_output_material_safe_import_statement

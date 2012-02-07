@@ -18,8 +18,8 @@ def test_MaterialPackageWrangler_run_handmade_package_01():
         assert mpp.directory_contents == ['__init__.py', 'material_definition.py']
         assert mpp.has_readable_initializer
         assert mpp.has_readable_material_definition_module
-        assert not mpp.has_illustration_builder_module
         assert not mpp.has_output_material_module 
+        assert not mpp.has_illustration_builder_module
         assert not mpp.initializer_has_output_material_safe_import_statement
         assert not mpp.parent_initializer_has_output_material_safe_import_statement
         assert mpp.material_definition is None
@@ -43,9 +43,17 @@ def test_MaterialPackageWrangler_run_handmade_package_02():
             'testnotes incanned canned_exception.py default q')
         assert studio.package_exists('baca.materials.testnotes')
         mpp = baca.scf.MaterialPackageProxy('baca.materials.testnotes')
+        assert mpp.is_handmade and not mpp.is_data_only
         assert mpp.directory_contents == ['__init__.py', 'material_definition.py']
         assert not mpp.has_readable_initializer
-        assert not mpp.has_readable_output_material_module
+        assert mpp.has_readable_material_definition_module
+        assert not mpp.has_output_material_module
+        assert not mpp.has_illustration_builder_module
+        assert not mpp.initializer_has_output_material_safe_import_statement
+        assert not mpp.parent_initializer_has_output_material_safe_import_statement
+        assert mpp.material_definition is None
+        assert mpp.output_material is None
+        assert mpp.illustration is None
     finally:
         studio.run(user_input='m testnotes del remove default q')
         assert not studio.package_exists('baca.materials.testnotes')
@@ -66,9 +74,16 @@ def test_MaterialPackageWrangler_run_handmade_package_03():
             'inr yes yes default q')
         assert studio.package_exists('baca.materials.testnotes')
         mpp = baca.scf.MaterialPackageProxy('baca.materials.testnotes')
+        assert mpp.is_handmade and not mpp.is_data_only
         assert mpp.directory_contents == ['__init__.py', 'material_definition.py']
         assert mpp.has_readable_initializer
-        assert not mpp.has_readable_output_material_module
+        assert mpp.has_readable_material_definition_module
+        assert not mpp.has_output_material_module 
+        assert not mpp.has_illustration_builder_module
+        assert not mpp.initializer_has_output_material_safe_import_statement
+        assert not mpp.parent_initializer_has_output_material_safe_import_statement
+        assert mpp.material_definition is None
+        assert mpp.output_material is None
     finally:
         studio.run(user_input='m testnotes del remove default q')
         assert not studio.package_exists('baca.materials.testnotes')
@@ -89,16 +104,17 @@ def test_MaterialPackageWrangler_run_handmade_package_04():
             'omm default q')
         assert studio.package_exists('baca.materials.testnotes')
         mpp = baca.scf.MaterialPackageProxy('baca.materials.testnotes')
-        assert mpp.directory_contents == ['__init__.py', 'illustration_builder.py', 'material_definition.py', 'output_material.py']
-        assert     mpp.has_illustration_builder_module
-        assert     mpp.has_material_definition
-        assert     mpp.has_material_definition_module
-        assert     mpp.has_output_material
-        assert     mpp.has_output_material_module
-        assert not mpp.is_data_only
-        assert     mpp.is_handmade
-        assert notetools.all_are_notes(mpp.material_definition) and mpp.material_definition
-        assert notetools.all_are_notes(mpp.output_material) and mpp.output_material
+        assert mpp.is_handmade and not mpp.is_data_only
+        assert mpp.directory_contents == ['__init__.py', 
+            'illustration_builder.py', 'material_definition.py', 'output_material.py']
+        assert mpp.has_readable_initializer
+        assert mpp.has_user_finalized_material_definition_module
+        assert mpp.has_readable_output_material_module
+        assert mpp.has_illustration_builder_module
+        assert mpp.initializer_has_output_material_safe_import_statement
+        assert mpp.parent_initializer_has_output_material_safe_import_statement
+        assert mpp.material_definition and notetools.all_are_notes(mpp.material_definition)
+        assert mpp.output_material and notetools.all_are_notes(mpp.output_material)
     finally:
         studio.run(user_input='m testnotes del remove default q')
         assert not studio.package_exists('baca.materials.testnotes')
@@ -118,7 +134,16 @@ def test_MaterialPackageWrangler_run_handmade_package_05():
             'testnotes mddelete default q')
         assert studio.package_exists('baca.materials.testnotes')
         mpp = baca.scf.MaterialPackageProxy('baca.materials.testnotes')
+        assert mpp.is_handmade and not mpp.is_data_only
         assert mpp.directory_contents == ['__init__.py']
+        assert mpp.has_readable_initializer
+        assert not mpp.has_material_definition_module
+        assert not mpp.has_output_material_module
+        assert not mpp.has_illustration_builder_module
+        assert not mpp.initializer_has_output_material_safe_import_statement
+        assert not mpp.parent_initializer_has_output_material_safe_import_statement
+        assert mpp.material_definition is None
+        assert mpp.output_material is None
     finally:
         studio.run(user_input='m testnotes del remove default q')
         assert not studio.package_exists('baca.materials.testnotes')
@@ -138,7 +163,16 @@ def test_MaterialPackageWrangler_run_handmade_package_06():
             'testnotes mdstub default q')
         assert studio.package_exists('baca.materials.testnotes')
         mpp = baca.scf.MaterialPackageProxy('baca.materials.testnotes')
+        assert mpp.is_handmade and not mpp.is_data_only
         assert mpp.directory_contents == ['__init__.py', 'material_definition.py']
+        assert mpp.has_readable_initializer
+        assert mpp.has_readable_material_definition_module
+        assert not mpp.has_output_material_module 
+        assert not mpp.has_illustration_builder_module
+        assert not mpp.initializer_has_output_material_safe_import_statement
+        assert not mpp.parent_initializer_has_output_material_safe_import_statement
+        assert mpp.material_definition is None
+        assert mpp.output_material is None
     finally:
         studio.run(user_input='m testnotes del remove default q')
         assert not studio.package_exists('baca.materials.testnotes')
@@ -160,9 +194,16 @@ def test_MaterialPackageWrangler_run_handmade_package_07():
             'omdelete default q')
         assert studio.package_exists('baca.materials.testnotes')
         mpp = baca.scf.MaterialPackageProxy('baca.materials.testnotes')
-        assert mpp.directory_contents == ['__init__.py', 'illustration_builder.py', 'material_definition.py']
+        assert mpp.is_handmade and not mpp.is_data_only
+        assert mpp.directory_contents == ['__init__.py', 'material_definition.py']
+        assert mpp.has_readable_initializer
+        assert mpp.has_user_finalized_material_definition_module
+        assert not mpp.has_output_material_module 
+        assert not mpp.has_illustration_builder_module
         assert not mpp.initializer_has_output_material_safe_import_statement
         assert not mpp.parent_initializer_has_output_material_safe_import_statement
+        assert mpp.material_definition and notetools.all_are_notes(mpp.material_definition)
+        assert mpp.output_material is None
     finally:
         studio.run(user_input='m testnotes del remove default q')
         assert not studio.package_exists('baca.materials.testnotes')
@@ -182,9 +223,16 @@ def test_MaterialPackageWrangler_run_handmade_package_08():
             'testnotes mdcanned canned_exception.py default q')
         assert studio.package_exists('baca.materials.testnotes')
         mpp = baca.scf.MaterialPackageProxy('baca.materials.testnotes')
+        assert mpp.is_handmade and not mpp.is_data_only
         assert mpp.directory_contents == ['__init__.py', 'material_definition.py']
         assert mpp.has_readable_initializer
         assert not mpp.has_readable_material_definition_module
+        assert not mpp.has_output_material_module
+        assert not mpp.has_illustration_builder_module
+        assert not mpp.initializer_has_output_material_safe_import_statement
+        assert not mpp.parent_initializer_has_output_material_safe_import_statement
+        assert mpp.material_definition is None
+        assert mpp.output_material is None
     finally:
         studio.run(user_input='m testnotes del remove default q')
         assert not studio.package_exists('baca.materials.testnotes')
@@ -206,11 +254,17 @@ def test_MaterialPackageWrangler_run_handmade_package_09():
             'omcanned canned_exception.py default q')
         assert studio.package_exists('baca.materials.testnotes')
         mpp = baca.scf.MaterialPackageProxy('baca.materials.testnotes')
+        assert mpp.is_handmade and not mpp.is_data_only
         assert mpp.directory_contents == ['__init__.py',
             'illustration_builder.py', 'material_definition.py', 'output_material.py']
         assert mpp.has_readable_initializer
-        assert mpp.has_readable_material_definition_module
+        assert mpp.has_user_finalized_material_definition_module
         assert not mpp.has_readable_output_material_module
+        assert mpp.has_illustration_builder_module
+        assert mpp.initializer_has_output_material_safe_import_statement
+        assert mpp.parent_initializer_has_output_material_safe_import_statement
+        assert mpp.material_definition and notetools.all_are_notes(mpp.material_definition)
+        assert mpp.output_material is None
     finally:
         studio.run(user_input='m testnotes del remove default q')
         assert not studio.package_exists('baca.materials.testnotes')
@@ -233,17 +287,20 @@ def test_MaterialPackageWrangler_run_handmade_package_10():
             'q')
         assert studio.package_exists('baca.materials.testnotes')
         mpp = baca.scf.MaterialPackageProxy('baca.materials.testnotes')
+        assert mpp.is_handmade and not mpp.is_data_only
         assert mpp.directory_contents == [
             '__init__.py', 'illustration.ly', 'illustration.pdf', 
             'illustration_builder.py', 'material_definition.py', 'output_material.py']
-        assert mpp.has_output_material
-        assert mpp.has_output_material_module
         assert mpp.has_readable_initializer        
-        assert mpp.has_readable_material_definition_module
+        assert mpp.has_user_finalized_material_definition_module
         assert mpp.has_readable_output_material_module
-        assert mpp.has_readable_illustration_builder_module
+        assert mpp.has_user_finalized_illustration_builder_module
         assert mpp.has_illustration_ly
         assert mpp.has_illustration_pdf
+        assert mpp.initializer_has_output_material_safe_import_statement
+        assert mpp.parent_initializer_has_output_material_safe_import_statement
+        assert mpp.material_definition and notetools.all_are_notes(mpp.material_definition)
+        assert mpp.output_material and notetools.all_are_notes(mpp.output_material)
     finally:
         studio.run(user_input='m testnotes del remove default q')
         assert not studio.package_exists('baca.materials.testnotes')
