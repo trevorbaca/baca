@@ -1,4 +1,5 @@
 from baca.scf.MaterialPackageProxy import MaterialPackageProxy
+from baca.scf.UserInputWrapper import UserInputWrapper
 import copy
 
 
@@ -20,7 +21,7 @@ class MaterialPackageMaker(MaterialPackageProxy):
 
     @property
     def user_input_wrapper(self):
-        return self.user_input_module_proxy.import_user_input_wrapper()
+        return self.user_input_module_proxy.import_user_input_wrapper() or UserInputWrapper()
 
     ### PUBLIC METHODS ###
 
@@ -77,13 +78,14 @@ class MaterialPackageMaker(MaterialPackageProxy):
             section = main_menu.make_new_section(is_numbered=True)
             section.tokens = self.user_input_wrapper.editable_lines
             section.return_value_attribute = 'number'
-            section = main_menu.make_new_section()
-            section.append(('uic', 'user input - clear'))
-            section.append(('uid', 'user input - delete module'))
-            section.append(('uil', 'user input - load demo values'))
-            section.append(('uip', 'user input - populate'))
-            section.append(('uis', 'user input - show demo values'))
-            hidden_section.append(('uit','user input - toggle default mode'))
+        section = main_menu.make_new_section()
+        section.append(('uic', 'user input - clear'))
+        section.append(('uid', 'user input - delete module'))
+        section.append(('uil', 'user input - load demo values'))
+        section.append(('uip', 'user input - populate'))
+        section.append(('uis', 'user input - show demo values'))
+        section.append(('uimv', 'user input module - view'))
+        hidden_section.append(('uit','user input - toggle default mode'))
 
     def make_main_menu_sections(self, menu, hidden_section):
         self.make_main_menu_section_for_user_input_module(menu, hidden_section)

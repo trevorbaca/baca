@@ -1,5 +1,6 @@
 from baca.scf.ModuleProxy import ModuleProxy
 from baca.scf.helpers import safe_import
+import os
 
 
 class UserInputModuleProxy(ModuleProxy):
@@ -31,8 +32,17 @@ class UserInputModuleProxy(ModuleProxy):
 
     def import_user_input_wrapper(self):
         self.unimport()
-        return safe_import(locals(), self.module_short_name, 'user_input',
-            source_parent_package_importable_name=self.parent_package_importable_name)
+        #return safe_import(locals(), self.module_short_name, 'user_input',
+        #    source_parent_package_importable_name=self.parent_package_importable_name)
+        if os.path.exists(self.full_file_name):
+            file_pointer = open(self.full_file_name, 'r')
+            file_contents_string = file_pointer.read()
+            file_pointer.close()
+            exec(file_contents_string)
+            #material_definition = locals().get(self.material_underscored_name)
+            #output_material_module_import_statements = locals().get(
+            #    'output_material_module_import_statements')
+            return user_input
 
     def parse(self):
         is_parsable = True

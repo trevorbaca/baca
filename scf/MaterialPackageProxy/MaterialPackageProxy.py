@@ -466,6 +466,8 @@ class MaterialPackageProxy(PackageProxy):
             self.show_user_input_demo_values(prompt=True)
         elif result == 'uit':
             self.session.swap_user_input_values_default_status()
+        elif result == 'uimv':
+            self.user_input_module_proxy.view()
         elif result == 'mdcanned':
             self.material_definition_module_proxy.write_canned_file_to_disk(prompt=True)
         elif result == 'mddelete':
