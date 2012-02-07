@@ -62,7 +62,7 @@ class MaterialPackageWrangler(PackageWrangler):
             self.make_data_package_interactively()
         elif result == 'h':
             self.make_handmade_material_package_interactively()
-        elif result == 'e':
+        elif result == 'm':
             self.make_editable_material_package_interactively()
         else:
             material_proxy = self.get_package_proxy(result)
@@ -113,7 +113,7 @@ class MaterialPackageWrangler(PackageWrangler):
         section = menu.make_new_section()
         section.append(('d', 'make data'))
         section.append(('h', 'make material by hand'))
-        section.append(('e', 'make material with editor'))
+        section.append(('m', 'make material with maker'))
         return menu
 
     # TODO: write test
