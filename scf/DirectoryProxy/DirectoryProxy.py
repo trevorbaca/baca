@@ -30,7 +30,10 @@ class DirectoryProxy(SCFObject):
 
     @property
     def directory_contents(self):
-        os.system('rm {}/*pyc'.format(self.directory_name))
+        for file_name in os.listdir(self.directory_name):
+            if file_name.endswith('.pyc'):
+                full_file_name = os.path.join(self.directory_name, file_name)
+                os.remove(full_file_name)
         return os.listdir(self.directory_name)
 
     @property
@@ -63,8 +66,7 @@ class DirectoryProxy(SCFObject):
         os.mkdir(self.directory_name)
 
     def print_directory_contents(self):
-        os.system('rm {}/*pyc'.format(self.directory_name))
-        os.system('ls {}'.format(self.directory_name))
+        self.display(self.directory_contents, capitalize_first_character=False)
         self.display('')
         self.session.hide_next_redraw = True
 

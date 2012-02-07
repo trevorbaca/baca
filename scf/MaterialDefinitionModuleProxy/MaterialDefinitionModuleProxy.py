@@ -14,6 +14,11 @@ class MaterialDefinitionModuleProxy(MaterialModuleProxy):
     ### READ-ONLY PUBLIC ATTRIBUTES ###
 
     @property
+    def is_user_finalized(self):
+        # TODO: maybe replace with bool(self.material_definition)
+        return bool(self.import_output_material_module_import_statements_and_material_definition()[1])
+
+    @property
     def output_material_module_import_statements(self):
         self.unimport()
         result = safe_import(

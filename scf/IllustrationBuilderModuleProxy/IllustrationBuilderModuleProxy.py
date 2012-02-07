@@ -15,8 +15,13 @@ class IllustrationBuilderModuleProxy(BasicModuleProxy):
     def illustration_pdf_file_name(self):
         return self.full_file_name.replace('.py', '.pdf')
 
+    @property
+    def is_user_finalized(self):
+        return bool(self.import_illustration())
+
     ### PUBLIC METHODS ###
 
+    # TODO: probably replace with in-place file execution
     def import_illustration(self):
         self.unimport()
         # TODO: port unimport

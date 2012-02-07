@@ -27,6 +27,7 @@ class MaterialPackageWrangler(PackageWrangler):
     # TODO: write test
     def get_new_material_package_importable_name_interactively(self):
         import baca
+        # TODO: attempted package name of 'b' passes here and then raises an assertion error
         getter = self.make_new_getter(where=self.where())
         getter.append_string('material name')
         getter.tests[-1] = lambda x: isinstance(x, str) and 3 <= len(x)
@@ -138,9 +139,10 @@ class MaterialPackageWrangler(PackageWrangler):
         material_proxy.initializer_file_proxy.write_stub_to_disk(tags=tags)
         if material_package_maker_class_name is None:
             file(os.path.join(directory_name, 'material_definition.py'), 'w').write('')
+            # TODO: maybe possible to collapse these two branches?
             if should_have_illustration:
                 material_proxy.material_definition_module_proxy.write_stub_to_disk(False, prompt=False)
-                material_proxy.illustration_builder_module_proxy.write_stub_to_disk(prompt=False)
+                #material_proxy.illustration_builder_module_proxy.write_stub_to_disk(prompt=False)
             else:
                 material_proxy.material_definition_module_proxy.write_stub_to_disk(True, prompt=False)
         line = 'material package {!r} created.'.format(material_package_importable_name)

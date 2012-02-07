@@ -15,11 +15,10 @@ def test_MaterialPackageWrangler_run_handmade_package_01():
         assert studio.package_exists('baca.materials.testnotes')
         mpp = baca.scf.MaterialPackageProxy('baca.materials.testnotes')
         assert mpp.is_handmade and not mpp.is_data_only
-        assert mpp.directory_contents == ['__init__.py', 'illustration_builder.py', 'material_definition.py']
+        assert mpp.directory_contents == ['__init__.py', 'material_definition.py']
         assert mpp.has_readable_initializer
         assert mpp.has_readable_material_definition_module
-        # TODO: replace with mpp.has_readable_illustration_builder_module
-        #assert mpp.has_readable_illustration_builder_module
+        assert not mpp.has_illustration_builder_module
         assert not mpp.has_output_material_module 
         assert not mpp.initializer_has_output_material_safe_import_statement
         assert not mpp.parent_initializer_has_output_material_safe_import_statement
@@ -44,7 +43,7 @@ def test_MaterialPackageWrangler_run_handmade_package_02():
             'testnotes incanned canned_exception.py default q')
         assert studio.package_exists('baca.materials.testnotes')
         mpp = baca.scf.MaterialPackageProxy('baca.materials.testnotes')
-        assert mpp.directory_contents == ['__init__.py', 'illustration_builder.py', 'material_definition.py']
+        assert mpp.directory_contents == ['__init__.py', 'material_definition.py']
         assert not mpp.has_readable_initializer
         assert not mpp.has_readable_output_material_module
     finally:
@@ -67,7 +66,7 @@ def test_MaterialPackageWrangler_run_handmade_package_03():
             'inr yes yes default q')
         assert studio.package_exists('baca.materials.testnotes')
         mpp = baca.scf.MaterialPackageProxy('baca.materials.testnotes')
-        assert mpp.directory_contents == ['__init__.py', 'illustration_builder.py', 'material_definition.py']
+        assert mpp.directory_contents == ['__init__.py', 'material_definition.py']
         assert mpp.has_readable_initializer
         assert not mpp.has_readable_output_material_module
     finally:
@@ -89,8 +88,6 @@ def test_MaterialPackageWrangler_run_handmade_package_04():
             'testnotes mdcanned canned_testnotes_material_definition.py default '
             'omm default q')
         assert studio.package_exists('baca.materials.testnotes')
-        # TODO: make this work
-        #assert notetools.all_are_notes(baca.materials.testnotes)
         mpp = baca.scf.MaterialPackageProxy('baca.materials.testnotes')
         assert mpp.directory_contents == ['__init__.py', 'illustration_builder.py', 'material_definition.py', 'output_material.py']
         assert     mpp.has_illustration_builder_module
@@ -141,7 +138,7 @@ def test_MaterialPackageWrangler_run_handmade_package_06():
             'testnotes mdstub default q')
         assert studio.package_exists('baca.materials.testnotes')
         mpp = baca.scf.MaterialPackageProxy('baca.materials.testnotes')
-        assert mpp.directory_contents == ['__init__.py', 'illustration_builder.py', 'material_definition.py']
+        assert mpp.directory_contents == ['__init__.py', 'material_definition.py']
     finally:
         studio.run(user_input='m testnotes del remove default q')
         assert not studio.package_exists('baca.materials.testnotes')
@@ -185,7 +182,7 @@ def test_MaterialPackageWrangler_run_handmade_package_08():
             'testnotes mdcanned canned_exception.py default q')
         assert studio.package_exists('baca.materials.testnotes')
         mpp = baca.scf.MaterialPackageProxy('baca.materials.testnotes')
-        assert mpp.directory_contents == ['__init__.py', 'illustration_builder.py', 'material_definition.py']
+        assert mpp.directory_contents == ['__init__.py', 'material_definition.py']
         assert mpp.has_readable_initializer
         assert not mpp.has_readable_material_definition_module
     finally:

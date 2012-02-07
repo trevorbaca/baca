@@ -138,6 +138,17 @@ class MaterialPackageProxy(PackageProxy):
         return False
 
     @property
+    def has_user_finalized_illustration_builder_module(self):
+        if self.has_readable_illustration_builder_module:
+            return self.illustration_builder_module_proxy.is_user_finalized
+
+    @property
+    def has_user_finalized_material_definition_module(self):
+        if self.has_material_definition_module:
+            return self.material_definition_module_proxy.is_user_finalized
+        return False
+
+    @property
     def illustration(self):
         if self.has_illustration_builder_module:
             return self.illustration_builder_module_proxy.import_illustration()
@@ -210,6 +221,7 @@ class MaterialPackageProxy(PackageProxy):
     def is_makermade(self):
         return self.has_material_package_maker
 
+    # TODO: replace with self.material_definition_module_proxy.material_definition
     @property
     def material_definition(self):
         if self.has_readable_material_definition_module:
@@ -550,7 +562,9 @@ class MaterialPackageProxy(PackageProxy):
     def make_main_menu_section_for_illustration_builder(self, main_menu, hidden_section):
         section = main_menu.make_new_section()
         if self.has_output_material:
-            if self.has_illustration_builder_module:
+            if self.should_have_illustration:
+                if not self.has_illustration_builder_module:
+                    self.illustration_builder_module_proxy.write_stub_to_disk(prompt=False)
                 section.append(('ibe', 'illustration builder - edit'))
                 if self.has_output_material:
                     section.append(('ibx', 'illustration builder - execute'))
@@ -559,8 +573,6 @@ class MaterialPackageProxy(PackageProxy):
                 hidden_section.append(('ibex', 'illustration builder - edit & execute'))
                 section.append(('sss', 'score stylesheet - select'))
                 hidden_section.append(('ssm', 'source stylesheet - edit'))
-            elif self.should_have_illustration:
-                section.append(('ibt', 'illustration builder - stub'))
 
     def make_main_menu_section_for_illustration_ly(self, main_menu, hidden_section):
         if self.has_output_material:
