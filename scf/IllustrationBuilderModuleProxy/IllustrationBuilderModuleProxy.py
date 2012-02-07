@@ -29,7 +29,8 @@ class IllustrationBuilderModuleProxy(BasicModuleProxy):
     def write_stub_to_disk(self, prompt=True):
         self.clear()
         self.setup_statements.append('from abjad import *\n')
-        line = 'from output_material import {}\n'.format(self.material_underscored_name)
+        line = 'from {}.output_material import {}\n'.format(
+            self.material_package_importable_name, self.material_underscored_name)
         self.setup_statements.append(line)
         line = 'score, treble_staff, bass_staff = scoretools.make_piano_score_from_leaves({})\n'
         line = line.format(self.material_underscored_name)

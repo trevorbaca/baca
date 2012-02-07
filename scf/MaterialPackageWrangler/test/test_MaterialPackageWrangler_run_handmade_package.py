@@ -228,17 +228,14 @@ def test_MaterialPackageWrangler_run_handmade_package_10():
         assert mpp.directory_contents == [
             '__init__.py', 'illustration.ly', 'illustration.pdf', 
             'illustration_builder.py', 'material_definition.py', 'output_material.py']
-        assert mpp.has_illustration_builder_module
-        assert mpp.has_illustration_ly
-        assert mpp.has_illustration_pdf
-        assert mpp.has_initializer
-        assert mpp.has_material_definition
-        assert mpp.has_material_definition_module
         assert mpp.has_output_material
         assert mpp.has_output_material_module
         assert mpp.has_valid_initializer        
         assert mpp.has_valid_material_definition_module
         assert mpp.has_valid_output_material_module
+        assert mpp.has_valid_illustration_builder_module
+        assert mpp.has_illustration_ly
+        assert mpp.has_illustration_pdf
     finally:
         studio.run(user_input='m testnotes del remove default q')
         assert not studio.package_exists('baca.materials.testnotes')

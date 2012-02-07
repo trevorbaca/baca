@@ -107,6 +107,12 @@ class MaterialPackageProxy(PackageProxy):
             return bool(self.user_input_module_proxy.import_user_input_wrapper())
         return False
 
+    @property
+    def has_valid_illustration_builder_module(self):
+        if self.should_have_illustration_builder_module:
+            if self.has_illustration_builder_module:
+                return self.illustration_builder_module_proxy.is_valid
+        return False
 
     @property
     def has_valid_initializer(self):
@@ -129,6 +135,12 @@ class MaterialPackageProxy(PackageProxy):
                 return self.output_material_module_proxy.is_valid
         return False
 
+    @property
+    def has_valid_user_input_module(self):
+        if self.should_have_user_input_module:
+            if self.has_user_input_module:
+                return self.user_input_module_proxy.is_valid
+        return False
 
     @property
     def illustration(self):
