@@ -261,3 +261,7 @@ class Session(object):
 
     def reinitialize(self):
         type(self).__init__(self)
+
+    def swap_user_input_values_default_status(self):
+        current = self.use_current_user_input_values_as_default
+        self.use_current_user_input_values_as_default = not current

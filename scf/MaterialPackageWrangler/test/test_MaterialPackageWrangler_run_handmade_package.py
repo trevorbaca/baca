@@ -205,3 +205,39 @@ def test_MaterialPackageWrangler_run_handmade_package_09():
     finally:
         studio.run(user_input='m testnotes del remove default q')
         assert not studio.package_exists('baca.materials.testnotes')
+
+
+def test_MaterialPackageWrangler_run_handmade_package_10():
+    '''Make handmade package. Copy canned material definition module. 
+    Make output data. Make PDF. Remove package.
+    '''
+
+    studio = baca.scf.Studio()
+    assert not studio.package_exists('baca.materials.testnotes')
+
+    try:
+        studio.run(user_input=
+            'm h testnotes default default '
+            'testnotes mdcanned canned_testnotes_material_definition.py default '
+            'omm default '
+            'pdfm default '
+            'q')
+        assert studio.package_exists('baca.materials.testnotes')
+        mpp = baca.scf.MaterialPackageProxy('baca.materials.testnotes')
+        assert mpp.directory_contents == [
+            '__init__.py', 'illustration.ly', 'illustration.pdf', 
+            'illustration_builder.py', 'material_definition.py', 'output_material.py']
+        assert not mpp.has_faulty_initializer
+        assert not mpp.has_faulty_material_definition_module
+        assert not mpp.has_faulty_output_material_module
+        assert mpp.has_illustration_builder_module
+        assert mpp.has_illustration_ly
+        assert mpp.has_illustration_pdf
+        assert mpp.has_initializer
+        assert mpp.has_material_definition
+        assert mpp.has_material_definition_module
+        assert mpp.has_output_material
+        assert mpp.has_output_material_module
+    finally:
+        studio.run(user_input='m testnotes del remove default q')
+        assert not studio.package_exists('baca.materials.testnotes')
