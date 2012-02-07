@@ -35,6 +35,13 @@ class ParsableFileProxy(FileProxy):
     def is_parsable(self):
         return self.parse()
 
+    @property
+    def is_valid(self):
+        if self.is_parsable:
+            if self.is_exceptionless:
+                return True
+        return False
+
     ### PUBLIC METHODS ###
 
     def print_to_screen(self):

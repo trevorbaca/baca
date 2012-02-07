@@ -5,15 +5,6 @@ import os
 
 class OutputMaterialModuleProxy(BasicModuleProxy):
 
-    ### READ-ONLY PUBLIC ATTRIBUTES ###
-
-    @property
-    def is_valid(self):
-        if self.is_parsable:
-            if self.is_exceptionless:
-                return True
-        return False
-
     ### PUBLIC METHODS ###
 
     def display_output_material(self):
