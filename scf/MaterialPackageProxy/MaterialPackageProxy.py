@@ -37,27 +37,6 @@ class MaterialPackageProxy(PackageProxy):
         return False
 
     @property
-    def has_faulty_initializer(self):
-        if self.should_have_initializer:
-            if self.has_initializer:
-                return self.initializer_file_proxy.is_faulty
-        return False
-
-    @property
-    def has_faulty_material_definition_module(self):
-        if self.should_have_material_definition_module:
-            if self.has_material_definition_module:
-                return self.material_definition_module_proxy.is_faulty
-        return False
-
-    @property
-    def has_faulty_output_material_module(self):
-        if self.should_have_output_material_module:
-            if self.has_output_material_module:
-                return self.output_material_module_proxy.is_faulty
-        return False
-
-    @property
     def has_illustration_builder_module(self):
         if self.should_have_illustration_builder_module:
             return os.path.exists(self.illustration_builder_module_file_name)
@@ -582,44 +561,46 @@ class MaterialPackageProxy(PackageProxy):
             section.append(('pdfv', 'output pdf - view'))
 
     def make_main_menu_section_for_initializer(self, main_menu, hidden_section):
-        if self.has_faulty_initializer:
+        if not self.has_initializer:
             section = main_menu.make_new_section()
-            section.section_title = '(Note: package has faulty initializer.)' 
+            section.section_title = '(Note: package has no initializer.)' 
+            section.append(('inr', 'initializer - restore'))
+        elif not self.has_valid_initializer:
+            section = main_menu.make_new_section()
+            section.section_title = '(Note: package has invalid initializer.)' 
             section.append(('inr', 'initializer - restore'))
         hidden_section.append(('inv', 'view package initializer'))
         hidden_section.append(('incanned', 'copy canned package initializer'))
         hidden_section.append(('instub', 'write stub package initializer'))
 
     def make_main_menu_section_for_material_definition(self, main_menu, hidden_section):
-        if self.has_faulty_initializer:
+        if not self.has_valid_initializer:
             return
         section = main_menu.make_new_section()
         if self.has_material_definition_module:
-            has_faulty_material_definition_module = self.has_faulty_material_definition_module
-            if has_faulty_material_definition_module:
-                section.section_title = '(Note: has faulty material definition module.)'
+            has_invalid_material_definition_module = not self.has_valid_material_definition_module
+            if has_invalid_material_definition_module:
+                section.section_title = '(Note: has invalid material definition module.)'
             section.append(('mde', 'material definition - edit'))
-            if not has_faulty_material_definition_module:
+            if not has_invalid_material_definition_module:
                 section.append(('mdx', 'material definition - execute'))
             hidden_section.append(('mdcanned', 'material definition - copy canned module'))
             hidden_section.append(('mddelete', 'material definition - delete'))
             hidden_section.append(('mdstub', 'material definition - stub'))
-            if not has_faulty_material_definition_module:
+            if not has_invalid_material_definition_module:
                 hidden_section.append(('mdxe', 'material definition - execute & edit'))
         elif self.material_package_maker_class_name is None:
             section.append(('mdstub', 'material definition - stub'))
 
     def make_main_menu_section_for_output_material(self, main_menu, hidden_section):
-        if self.has_faulty_initializer:
+        if not self.has_valid_initializer:
             return
         has_output_material_section = False
-        has_faulty_material_definition_module = self.has_faulty_material_definition_module
-        if self.has_material_definition_module and not has_faulty_material_definition_module:
+        if self.has_valid_material_definition_module:
             if self.has_material_definition or self.has_complete_user_input_wrapper:
                 section = main_menu.make_new_section()
-                has_faulty_output_material_module = self.has_faulty_output_material_module
-                if has_faulty_output_material_module:
-                    section.section_title = '(Note: has faulty output material module.)'
+                if self.has_output_material_module and not self.has_valid_output_material_module:
+                    section.section_title = '(Note: has invalid output material module.)'
                 section.append(('omm', 'output material - make'))
                 has_output_material_section = True
             if self.has_output_material_module:

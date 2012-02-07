@@ -14,12 +14,11 @@ class MaterialDefinitionModuleProxy(MaterialModuleProxy):
     ### READ-ONLY PUBLIC ATTRIBUTES ###
 
     @property
-    def is_faulty(self):
-        try:
-            self.import_output_material_module_import_statements_and_material_definition()
-            return False
-        except:
-            return True
+    def is_valid(self):
+        if self.is_parsable:
+            if self.is_exceptionless:
+                return True
+        return False
 
     @property
     def output_material_module_import_statements(self):

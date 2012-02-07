@@ -14,11 +14,11 @@ class InitializerFileProxy(ParsableFileProxy):
     ### READ-ONLY PUBLIC ATTRIBUTES ##
 
     @property
-    def is_faulty(self):
+    def is_valid(self):
         if self.is_parsable:
             if self.is_exceptionless:
-                return False
-        return True
+                return True
+        return False
         
     @property
     def sections(self):

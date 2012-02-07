@@ -8,12 +8,11 @@ class OutputMaterialModuleProxy(BasicModuleProxy):
     ### READ-ONLY PUBLIC ATTRIBUTES ###
 
     @property
-    def is_faulty(self):
-        try:
-            self.import_output_material()
-            return False
-        except:
-            return True
+    def is_valid(self):
+        if self.is_parsable:
+            if self.is_exceptionless:
+                return True
+        return False
 
     ### PUBLIC METHODS ###
 

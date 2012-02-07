@@ -21,8 +21,8 @@ def test_MaterialPackageWrangler_run_data_only_package_01():
 
 
 def test_MaterialPackageWrangler_run_data_only_package_02():
-    '''Make data package. Corrupt initializer.
-    Verify faulty initializer. Remove package.
+    '''Make data package. Invalidate initializer.
+    Verify invalid initializer. Remove package.
     '''
 
     studio = baca.scf.Studio()
@@ -34,9 +34,9 @@ def test_MaterialPackageWrangler_run_data_only_package_02():
             'testnumbers incanned canned_exception.py default q')
         assert studio.package_exists('baca.materials.testnumbers')
         mpp = baca.scf.MaterialPackageProxy('baca.materials.testnumbers')
-        assert     mpp.directory_contents == ['__init__.py', 'material_definition.py']
-        assert     mpp.has_faulty_initializer
-        assert not mpp.has_faulty_output_material_module
+        assert mpp.directory_contents == ['__init__.py', 'material_definition.py']
+        assert not mpp.has_valid_initializer
+        assert mpp.has_valid_material_definition_module
     finally:
         studio.run(user_input='m testnumbers del remove default q')
         assert not studio.package_exists('baca.materials.testnumbers')
@@ -44,7 +44,7 @@ def test_MaterialPackageWrangler_run_data_only_package_02():
 
 def test_MaterialPackageWrangler_run_data_only_package_03():
     '''Make data package. Corrupt initializer. Restore initializer.
-    Verify nonfaulty initializer. Remove package.
+    Verify initializer. Remove package.
     '''
 
     studio = baca.scf.Studio()
@@ -57,9 +57,9 @@ def test_MaterialPackageWrangler_run_data_only_package_03():
             'inr yes no default q')
         assert studio.package_exists('baca.materials.testnumbers')
         mpp = baca.scf.MaterialPackageProxy('baca.materials.testnumbers')
-        assert     mpp.directory_contents == ['__init__.py', 'material_definition.py']
-        assert not mpp.has_faulty_initializer
-        assert not mpp.has_faulty_output_material_module
+        assert mpp.directory_contents == ['__init__.py', 'material_definition.py']
+        assert mpp.has_valid_initializer
+        assert mpp.has_valid_material_definition_module
     finally:
         studio.run(user_input='m testnumbers del remove default q')
         assert not studio.package_exists('baca.materials.testnumbers')
@@ -174,7 +174,8 @@ def test_MaterialPackageWrangler_run_data_only_package_08():
         assert studio.package_exists('baca.materials.testnumbers')
         mpp = baca.scf.MaterialPackageProxy('baca.materials.testnumbers')
         assert mpp.directory_contents == ['__init__.py', 'material_definition.py']
-        assert mpp.has_faulty_material_definition_module
+        assert mpp.has_valid_initializer
+        assert not mpp.has_valid_material_definition_module
     finally:
         studio.run(user_input='m testnumbers del remove default q')
         assert not studio.package_exists('baca.materials.testnumbers')
@@ -182,7 +183,7 @@ def test_MaterialPackageWrangler_run_data_only_package_08():
 
 def test_MaterialPackageWrangler_run_data_only_package_09():
     '''Make data package. Copy canned material definition module. Make output data. Corrupt output data.
-    Verify faulty output material module. Remove package.
+    Verify invalid output material module. Remove package.
     '''
 
     studio = baca.scf.Studio()
@@ -196,9 +197,10 @@ def test_MaterialPackageWrangler_run_data_only_package_09():
             'omcanned canned_exception.py default q')
         assert studio.package_exists('baca.materials.testnumbers')
         mpp = baca.scf.MaterialPackageProxy('baca.materials.testnumbers')
-        assert     mpp.directory_contents == ['__init__.py', 'material_definition.py', 'output_material.py']
-        assert not mpp.has_faulty_material_definition_module
-        assert     mpp.has_faulty_output_material_module
+        assert mpp.directory_contents == ['__init__.py', 'material_definition.py', 'output_material.py']
+        assert mpp.has_valid_initializer
+        assert mpp.has_valid_material_definition_module
+        assert not mpp.has_valid_output_material_module
     finally:
         studio.run(user_input='m testnumbers del remove default q')
         assert not studio.package_exists('baca.materials.testnumbers')
