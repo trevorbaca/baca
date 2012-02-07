@@ -217,17 +217,15 @@ class MaterialPackageProxy(PackageProxy):
 
     @property
     def material_definition(self):
-        if self.should_have_material_definition_module:
-            if self.has_material_definition_module:
-                pair = self.output_material_module_import_statements_and_material_definition
-                material_definition = pair[1]
-                return material_definition
+        if self.has_valid_material_definition_module:
+            pair = self.output_material_module_import_statements_and_material_definition
+            material_definition = pair[1]
+            return material_definition
 
     @property
     def output_material(self):
-        if self.should_have_output_material_module:
-            if self.has_output_material_module:
-                return self.output_material_module_proxy.import_output_material()
+        if self.has_valid_output_material_module:
+            return self.output_material_module_proxy.import_output_material()
     
     @property
     def output_material_module_import_statements_and_material_definition(self):
@@ -324,7 +322,6 @@ class MaterialPackageProxy(PackageProxy):
 
     @property
     def parent_initializer_has_output_material_safe_import_statement(self):
-        import baca
         if self.has_parent_initializer:
             return self.parent_initializer_file_proxy.has_safe_import_statement(
             self.material_underscored_name, self.material_underscored_name)
@@ -435,6 +432,14 @@ class MaterialPackageProxy(PackageProxy):
         if self.has_output_material_module:
             self.output_material_module_proxy.remove(prompt=prompt)
 
+    # NOTE: not currently used
+    def delete_parent_initializer_pyc_file(self):
+        if self.has_parent_initializer:
+            parent_initializer_pyc_file_name = self.parent_initializer_file_name + 'c'
+            if os.path.exists(parent_initializer_pyc_file_name):
+                os.remove(parent_initializer_pyc_file_name)
+                self.debug('parent initializer pyc file deleted.')
+        
     def delete_user_input_module(self, prompt=True):
         if self.has_user_input_module:
             self.user_input_module_proxy.remove(prompt=prompt)
@@ -759,6 +764,11 @@ class MaterialPackageProxy(PackageProxy):
             return
         # TODO: replace with something nonlocal
         #self.link_local_stylesheet(stylesheet_file_name, prompt=prompt)
+
+    # NOTE: not currently used
+    def touch_parent_initializer(self):
+        if self.has_parent_initializer:
+            self.parent_initializer_file_proxy.touch()
 
     def write_illustration_ly_and_pdf_to_disk(self, is_forced=False, prompt=True):
         illustration = self.illustration

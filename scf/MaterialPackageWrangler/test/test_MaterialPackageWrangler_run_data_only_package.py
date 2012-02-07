@@ -24,7 +24,6 @@ def test_MaterialPackageWrangler_run_data_only_package_01():
         assert not mpp.parent_initializer_has_output_material_safe_import_statement
         assert mpp.material_definition is None
         assert mpp.output_material is None
-        assert isinstance(baca.materials.testnumbers, types.ModuleType)
     finally:
         studio.run(user_input='m testnumbers del remove default q')
         assert not studio.package_exists('baca.materials.testnumbers')
@@ -53,7 +52,6 @@ def test_MaterialPackageWrangler_run_data_only_package_02():
         assert not mpp.parent_initializer_has_output_material_safe_import_statement
         assert mpp.material_definition is None
         assert mpp.output_material is None
-        assert isinstance(baca.materials.testnumbers, types.ModuleType)
     finally:
         studio.run(user_input='m testnumbers del remove default q')
         assert not studio.package_exists('baca.materials.testnumbers')
@@ -83,7 +81,6 @@ def test_MaterialPackageWrangler_run_data_only_package_03():
         assert not mpp.parent_initializer_has_output_material_safe_import_statement
         assert mpp.material_definition is None
         assert mpp.output_material is None
-        assert isinstance(baca.materials.testnumbers, types.ModuleType)
     finally:
         studio.run(user_input='m testnumbers del remove default q')
         assert not studio.package_exists('baca.materials.testnumbers')
@@ -113,7 +110,6 @@ def test_MaterialPackageWrangler_run_data_only_package_04():
         assert mpp.parent_initializer_has_output_material_safe_import_statement
         assert mpp.material_definition == [1, 2, 3, 4, 5]
         assert mpp.output_material == [1, 2, 3, 4, 5]
-        assert baca.materials.testnumbers == [1, 2, 3, 4, 5]
     finally:
         studio.run(user_input='m testnumbers del remove default q')
         assert not studio.package_exists('baca.materials.testnumbers')
@@ -142,9 +138,6 @@ def test_MaterialPackageWrangler_run_data_only_package_05():
         assert not mpp.parent_initializer_has_output_material_safe_import_statement
         assert mpp.material_definition is None
         assert mpp.output_material is None
-        # TODO: maybe the following line can be made to work?
-        # TODO: if Python can be convinced to reread baca.materials?
-        #assert isinstance(baca.materials.testnumbers, types.ModuleType)
     finally:
         studio.run(user_input='m testnumbers del remove default q')
         assert not studio.package_exists('baca.materials.testnumbers')
@@ -166,6 +159,13 @@ def test_MaterialPackageWrangler_run_data_only_package_06():
         mpp = baca.scf.MaterialPackageProxy('baca.materials.testnumbers')
         assert mpp.is_data_only
         assert mpp.directory_contents == ['__init__.py', 'material_definition.py']
+        assert mpp.has_valid_initializer
+        assert mpp.has_valid_material_definition_module
+        assert not mpp.has_output_material_module
+        assert not mpp.initializer_has_output_material_safe_import_statement
+        assert not mpp.parent_initializer_has_output_material_safe_import_statement
+        assert mpp.material_definition is None
+        assert mpp.output_material is None
     finally:
         studio.run(user_input='m testnumbers del remove default q')
         assert not studio.package_exists('baca.materials.testnumbers')
@@ -189,8 +189,13 @@ def test_MaterialPackageWrangler_run_data_only_package_07():
         mpp = baca.scf.MaterialPackageProxy('baca.materials.testnumbers')
         assert mpp.is_data_only
         assert mpp.directory_contents == ['__init__.py', 'material_definition.py']
+        assert mpp.has_valid_initializer
+        assert mpp.has_valid_material_definition_module
+        assert not mpp.has_output_material_module
         assert not mpp.initializer_has_output_material_safe_import_statement
         assert not mpp.parent_initializer_has_output_material_safe_import_statement
+        assert mpp.material_definition == [1, 2, 3, 4, 5]
+        assert mpp.output_material is None
     finally:
         studio.run(user_input='m testnumbers del remove default q')
         assert not studio.package_exists('baca.materials.testnumbers')
@@ -214,6 +219,11 @@ def test_MaterialPackageWrangler_run_data_only_package_08():
         assert mpp.directory_contents == ['__init__.py', 'material_definition.py']
         assert mpp.has_valid_initializer
         assert not mpp.has_valid_material_definition_module
+        assert not mpp.has_output_material_module
+        assert not mpp.initializer_has_output_material_safe_import_statement
+        assert not mpp.parent_initializer_has_output_material_safe_import_statement
+        assert mpp.material_definition is None
+        assert mpp.output_material is None
     finally:
         studio.run(user_input='m testnumbers del remove default q')
         assert not studio.package_exists('baca.materials.testnumbers')
@@ -240,6 +250,10 @@ def test_MaterialPackageWrangler_run_data_only_package_09():
         assert mpp.has_valid_initializer
         assert mpp.has_valid_material_definition_module
         assert not mpp.has_valid_output_material_module
+        assert mpp.initializer_has_output_material_safe_import_statement
+        assert mpp.parent_initializer_has_output_material_safe_import_statement
+        assert mpp.material_definition == [1, 2, 3, 4, 5]
+        assert mpp.output_material is None
     finally:
         studio.run(user_input='m testnumbers del remove default q')
         assert not studio.package_exists('baca.materials.testnumbers')

@@ -57,7 +57,8 @@ class PackageProxy(DirectoryProxy):
     # TODO: write test
     @property
     def initializer_file_proxy(self):
-        return InitializerFileProxy(self.initializer_file_name, session=self.session)
+        if self.has_initializer:
+            return InitializerFileProxy(self.initializer_file_name, session=self.session)
 
     @property
     def package_importable_name(self):
@@ -86,7 +87,7 @@ class PackageProxy(DirectoryProxy):
     # TODO: write test
     @property
     def parent_initializer_file_proxy(self):
-        if self.parent_initializer_file_name:
+        if self.has_parent_initializer:
             return InitializerFileProxy(
                 self.parent_initializer_file_name, session=self.session)
 
