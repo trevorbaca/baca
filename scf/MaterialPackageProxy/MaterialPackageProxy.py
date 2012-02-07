@@ -108,38 +108,38 @@ class MaterialPackageProxy(PackageProxy):
         return False
 
     @property
-    def has_valid_illustration_builder_module(self):
+    def has_readable_illustration_builder_module(self):
         if self.should_have_illustration_builder_module:
             if self.has_illustration_builder_module:
-                return self.illustration_builder_module_proxy.is_valid
+                return self.illustration_builder_module_proxy.is_readable
         return False
 
     @property
-    def has_valid_initializer(self):
+    def has_readable_initializer(self):
         if self.should_have_initializer:
             if self.has_initializer:
-                return self.initializer_file_proxy.is_valid
+                return self.initializer_file_proxy.is_readable
         return False
 
     @property
-    def has_valid_material_definition_module(self):
+    def has_readable_material_definition_module(self):
         if self.should_have_material_definition_module:
             if self.has_material_definition_module:
-                return self.material_definition_module_proxy.is_valid
+                return self.material_definition_module_proxy.is_readable
         return False
 
     @property
-    def has_valid_output_material_module(self):
+    def has_readable_output_material_module(self):
         if self.should_have_output_material_module:
             if self.has_output_material_module:
-                return self.output_material_module_proxy.is_valid
+                return self.output_material_module_proxy.is_readable
         return False
 
     @property
-    def has_valid_user_input_module(self):
+    def has_readable_user_input_module(self):
         if self.should_have_user_input_module:
             if self.has_user_input_module:
-                return self.user_input_module_proxy.is_valid
+                return self.user_input_module_proxy.is_readable
         return False
 
     @property
@@ -217,14 +217,14 @@ class MaterialPackageProxy(PackageProxy):
 
     @property
     def material_definition(self):
-        if self.has_valid_material_definition_module:
+        if self.has_readable_material_definition_module:
             pair = self.output_material_module_import_statements_and_material_definition
             material_definition = pair[1]
             return material_definition
 
     @property
     def output_material(self):
-        if self.has_valid_output_material_module:
+        if self.has_readable_output_material_module:
             return self.output_material_module_proxy.import_output_material()
     
     @property
@@ -593,7 +593,7 @@ class MaterialPackageProxy(PackageProxy):
             section = main_menu.make_new_section()
             section.section_title = '(Note: package has no initializer.)' 
             section.append(('inr', 'initializer - restore'))
-        elif not self.has_valid_initializer:
+        elif not self.has_readable_initializer:
             section = main_menu.make_new_section()
             section.section_title = '(Note: package has invalid initializer.)' 
             section.append(('inr', 'initializer - restore'))
@@ -602,11 +602,11 @@ class MaterialPackageProxy(PackageProxy):
         hidden_section.append(('instub', 'write stub package initializer'))
 
     def make_main_menu_section_for_material_definition(self, main_menu, hidden_section):
-        if not self.has_valid_initializer:
+        if not self.has_readable_initializer:
             return
         section = main_menu.make_new_section()
         if self.has_material_definition_module:
-            has_invalid_material_definition_module = not self.has_valid_material_definition_module
+            has_invalid_material_definition_module = not self.has_readable_material_definition_module
             if has_invalid_material_definition_module:
                 section.section_title = '(Note: has invalid material definition module.)'
             section.append(('mde', 'material definition - edit'))
@@ -621,13 +621,13 @@ class MaterialPackageProxy(PackageProxy):
             section.append(('mdstub', 'material definition - stub'))
 
     def make_main_menu_section_for_output_material(self, main_menu, hidden_section):
-        if not self.has_valid_initializer:
+        if not self.has_readable_initializer:
             return
         has_output_material_section = False
-        if self.has_valid_material_definition_module:
+        if self.has_readable_material_definition_module:
             if self.has_material_definition or self.has_complete_user_input_wrapper:
                 section = main_menu.make_new_section()
-                if self.has_output_material_module and not self.has_valid_output_material_module:
+                if self.has_output_material_module and not self.has_readable_output_material_module:
                     section.section_title = '(Note: has invalid output material module.)'
                 section.append(('omm', 'output material - make'))
                 has_output_material_section = True

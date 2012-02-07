@@ -17,8 +17,8 @@ def test_MaterialPackageWrangler_run_data_only_package_01():
         mpp = baca.scf.MaterialPackageProxy('baca.materials.testnumbers')
         assert mpp.is_data_only
         assert mpp.directory_contents == ['__init__.py', 'material_definition.py']
-        assert mpp.has_valid_initializer
-        assert mpp.has_valid_material_definition_module
+        assert mpp.has_readable_initializer
+        assert mpp.has_readable_material_definition_module
         assert not mpp.has_output_material_module
         assert not mpp.initializer_has_output_material_safe_import_statement
         assert not mpp.parent_initializer_has_output_material_safe_import_statement
@@ -45,8 +45,8 @@ def test_MaterialPackageWrangler_run_data_only_package_02():
         mpp = baca.scf.MaterialPackageProxy('baca.materials.testnumbers')
         assert mpp.is_data_only
         assert mpp.directory_contents == ['__init__.py', 'material_definition.py']
-        assert not mpp.has_valid_initializer
-        assert mpp.has_valid_material_definition_module
+        assert not mpp.has_readable_initializer
+        assert mpp.has_readable_material_definition_module
         assert not mpp.has_output_material_module
         assert not mpp.initializer_has_output_material_safe_import_statement
         assert not mpp.parent_initializer_has_output_material_safe_import_statement
@@ -74,8 +74,8 @@ def test_MaterialPackageWrangler_run_data_only_package_03():
         mpp = baca.scf.MaterialPackageProxy('baca.materials.testnumbers')
         assert mpp.is_data_only
         assert mpp.directory_contents == ['__init__.py', 'material_definition.py']
-        assert mpp.has_valid_initializer
-        assert mpp.has_valid_material_definition_module
+        assert mpp.has_readable_initializer
+        assert mpp.has_readable_material_definition_module
         assert not mpp.has_output_material_module
         assert not mpp.initializer_has_output_material_safe_import_statement
         assert not mpp.parent_initializer_has_output_material_safe_import_statement
@@ -103,9 +103,9 @@ def test_MaterialPackageWrangler_run_data_only_package_04():
         mpp = baca.scf.MaterialPackageProxy('baca.materials.testnumbers')
         assert mpp.is_data_only
         assert mpp.directory_contents == ['__init__.py', 'material_definition.py', 'output_material.py']
-        assert mpp.has_valid_initializer
-        assert mpp.has_valid_material_definition_module
-        assert mpp.has_valid_output_material_module
+        assert mpp.has_readable_initializer
+        assert mpp.has_readable_material_definition_module
+        assert mpp.has_readable_output_material_module
         assert mpp.initializer_has_output_material_safe_import_statement
         assert mpp.parent_initializer_has_output_material_safe_import_statement
         assert mpp.material_definition == [1, 2, 3, 4, 5]
@@ -131,7 +131,7 @@ def test_MaterialPackageWrangler_run_data_only_package_05():
         mpp = baca.scf.MaterialPackageProxy('baca.materials.testnumbers')
         assert mpp.is_data_only
         assert mpp.directory_contents == ['__init__.py']
-        assert mpp.has_valid_initializer
+        assert mpp.has_readable_initializer
         assert not mpp.has_material_definition_module
         assert not mpp.has_output_material_module
         assert not mpp.initializer_has_output_material_safe_import_statement
@@ -159,8 +159,8 @@ def test_MaterialPackageWrangler_run_data_only_package_06():
         mpp = baca.scf.MaterialPackageProxy('baca.materials.testnumbers')
         assert mpp.is_data_only
         assert mpp.directory_contents == ['__init__.py', 'material_definition.py']
-        assert mpp.has_valid_initializer
-        assert mpp.has_valid_material_definition_module
+        assert mpp.has_readable_initializer
+        assert mpp.has_readable_material_definition_module
         assert not mpp.has_output_material_module
         assert not mpp.initializer_has_output_material_safe_import_statement
         assert not mpp.parent_initializer_has_output_material_safe_import_statement
@@ -189,8 +189,8 @@ def test_MaterialPackageWrangler_run_data_only_package_07():
         mpp = baca.scf.MaterialPackageProxy('baca.materials.testnumbers')
         assert mpp.is_data_only
         assert mpp.directory_contents == ['__init__.py', 'material_definition.py']
-        assert mpp.has_valid_initializer
-        assert mpp.has_valid_material_definition_module
+        assert mpp.has_readable_initializer
+        assert mpp.has_readable_material_definition_module
         assert not mpp.has_output_material_module
         assert not mpp.initializer_has_output_material_safe_import_statement
         assert not mpp.parent_initializer_has_output_material_safe_import_statement
@@ -217,8 +217,8 @@ def test_MaterialPackageWrangler_run_data_only_package_08():
         mpp = baca.scf.MaterialPackageProxy('baca.materials.testnumbers')
         assert mpp.is_data_only
         assert mpp.directory_contents == ['__init__.py', 'material_definition.py']
-        assert mpp.has_valid_initializer
-        assert not mpp.has_valid_material_definition_module
+        assert mpp.has_readable_initializer
+        assert not mpp.has_readable_material_definition_module
         assert not mpp.has_output_material_module
         assert not mpp.initializer_has_output_material_safe_import_statement
         assert not mpp.parent_initializer_has_output_material_safe_import_statement
@@ -247,9 +247,9 @@ def test_MaterialPackageWrangler_run_data_only_package_09():
         mpp = baca.scf.MaterialPackageProxy('baca.materials.testnumbers')
         assert mpp.is_data_only
         assert mpp.directory_contents == ['__init__.py', 'material_definition.py', 'output_material.py']
-        assert mpp.has_valid_initializer
-        assert mpp.has_valid_material_definition_module
-        assert not mpp.has_valid_output_material_module
+        assert mpp.has_readable_initializer
+        assert mpp.has_readable_material_definition_module
+        assert not mpp.has_readable_output_material_module
         assert mpp.initializer_has_output_material_safe_import_statement
         assert mpp.parent_initializer_has_output_material_safe_import_statement
         assert mpp.material_definition == [1, 2, 3, 4, 5]

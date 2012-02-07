@@ -14,7 +14,17 @@ def test_MaterialPackageWrangler_run_handmade_package_01():
         studio.run(user_input='m h testnotes default default q')
         assert studio.package_exists('baca.materials.testnotes')
         mpp = baca.scf.MaterialPackageProxy('baca.materials.testnotes')
+        assert mpp.is_handmade and not mpp.is_data_only
         assert mpp.directory_contents == ['__init__.py', 'illustration_builder.py', 'material_definition.py']
+        assert mpp.has_readable_initializer
+        assert mpp.has_readable_material_definition_module
+        # TODO: replace with mpp.has_readable_illustration_builder_module
+        #assert mpp.has_readable_illustration_builder_module
+        assert not mpp.has_output_material_module 
+        assert not mpp.initializer_has_output_material_safe_import_statement
+        assert not mpp.parent_initializer_has_output_material_safe_import_statement
+        assert mpp.material_definition is None
+        assert mpp.output_material is None
     finally:
         studio.run(user_input='m testnotes del remove default q')
         assert not studio.package_exists('baca.materials.testnotes')
@@ -35,8 +45,8 @@ def test_MaterialPackageWrangler_run_handmade_package_02():
         assert studio.package_exists('baca.materials.testnotes')
         mpp = baca.scf.MaterialPackageProxy('baca.materials.testnotes')
         assert mpp.directory_contents == ['__init__.py', 'illustration_builder.py', 'material_definition.py']
-        assert not mpp.has_valid_initializer
-        assert not mpp.has_valid_output_material_module
+        assert not mpp.has_readable_initializer
+        assert not mpp.has_readable_output_material_module
     finally:
         studio.run(user_input='m testnotes del remove default q')
         assert not studio.package_exists('baca.materials.testnotes')
@@ -58,8 +68,8 @@ def test_MaterialPackageWrangler_run_handmade_package_03():
         assert studio.package_exists('baca.materials.testnotes')
         mpp = baca.scf.MaterialPackageProxy('baca.materials.testnotes')
         assert mpp.directory_contents == ['__init__.py', 'illustration_builder.py', 'material_definition.py']
-        assert mpp.has_valid_initializer
-        assert not mpp.has_valid_output_material_module
+        assert mpp.has_readable_initializer
+        assert not mpp.has_readable_output_material_module
     finally:
         studio.run(user_input='m testnotes del remove default q')
         assert not studio.package_exists('baca.materials.testnotes')
@@ -176,8 +186,8 @@ def test_MaterialPackageWrangler_run_handmade_package_08():
         assert studio.package_exists('baca.materials.testnotes')
         mpp = baca.scf.MaterialPackageProxy('baca.materials.testnotes')
         assert mpp.directory_contents == ['__init__.py', 'illustration_builder.py', 'material_definition.py']
-        assert mpp.has_valid_initializer
-        assert not mpp.has_valid_material_definition_module
+        assert mpp.has_readable_initializer
+        assert not mpp.has_readable_material_definition_module
     finally:
         studio.run(user_input='m testnotes del remove default q')
         assert not studio.package_exists('baca.materials.testnotes')
@@ -201,9 +211,9 @@ def test_MaterialPackageWrangler_run_handmade_package_09():
         mpp = baca.scf.MaterialPackageProxy('baca.materials.testnotes')
         assert mpp.directory_contents == ['__init__.py',
             'illustration_builder.py', 'material_definition.py', 'output_material.py']
-        assert mpp.has_valid_initializer
-        assert mpp.has_valid_material_definition_module
-        assert not mpp.has_valid_output_material_module
+        assert mpp.has_readable_initializer
+        assert mpp.has_readable_material_definition_module
+        assert not mpp.has_readable_output_material_module
     finally:
         studio.run(user_input='m testnotes del remove default q')
         assert not studio.package_exists('baca.materials.testnotes')
@@ -231,10 +241,10 @@ def test_MaterialPackageWrangler_run_handmade_package_10():
             'illustration_builder.py', 'material_definition.py', 'output_material.py']
         assert mpp.has_output_material
         assert mpp.has_output_material_module
-        assert mpp.has_valid_initializer        
-        assert mpp.has_valid_material_definition_module
-        assert mpp.has_valid_output_material_module
-        assert mpp.has_valid_illustration_builder_module
+        assert mpp.has_readable_initializer        
+        assert mpp.has_readable_material_definition_module
+        assert mpp.has_readable_output_material_module
+        assert mpp.has_readable_illustration_builder_module
         assert mpp.has_illustration_ly
         assert mpp.has_illustration_pdf
     finally:

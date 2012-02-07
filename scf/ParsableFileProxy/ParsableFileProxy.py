@@ -36,7 +36,7 @@ class ParsableFileProxy(FileProxy):
         return self.parse()
 
     @property
-    def is_valid(self):
+    def is_readable(self):
         if self.is_parsable:
             if self.is_exceptionless:
                 return True

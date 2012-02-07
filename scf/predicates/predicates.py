@@ -42,7 +42,7 @@ def is_string(expr):
 def is_string_or_none(expr):
     return isinstance(expr, (str, type(None)))
 
-def is_valid_argument_range_string_for_argument_list(argument_range_string, argument_list):
+def is_readable_argument_range_string_for_argument_list(argument_range_string, argument_list):
     from baca.scf.menuing.MenuSection import MenuSection
     if isinstance(argument_range_string, str):
         dummy_section = MenuSection()
