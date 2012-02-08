@@ -43,7 +43,6 @@ def test_MaterialPackageWrangler_run_handmade_package_02():
             'testnotes incanned canned_exception.py default q')
         assert studio.package_exists('baca.materials.testnotes')
         mpp = baca.scf.MaterialPackageProxy('baca.materials.testnotes')
-        assert mpp.is_handmade and not mpp.is_data_only
         assert mpp.directory_contents == ['__init__.py', 'material_definition.py']
         assert not mpp.has_readable_initializer
         assert mpp.has_readable_material_definition_module

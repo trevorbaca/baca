@@ -170,6 +170,7 @@ class PackageProxy(DirectoryProxy):
         tags = safe_import(locals(), self.package_short_name, 'tags', 
             source_parent_package_importable_name=self.parent_package_importable_name)
         tags = tags or collections.OrderedDict([])
+        #tags = self.read_tags_from_disk() or collections.OrderedDict([])
         return tags
 
     def handle_tags_menu_result(self, result):
@@ -208,6 +209,29 @@ class PackageProxy(DirectoryProxy):
             self.pop_breadcrumb()
         self.pop_breadcrumb()
         self.restore_breadcrumbs(cache=cache)
+
+    def read_tags_from_disk(self):
+        if not os.path.exists(self.initializer_file_name):
+            return
+        file_pointer = open(self.initializer_file_name, 'r')
+        file_contents_lines = file_pointer.readlines()
+        file_pointer.close()
+        tags_lines = []
+        found_tags = False
+        for line in file_contents_lines:
+            if line.startswith('tags = '):
+                found_tags = True
+            if found_tags:
+                if line == '\n':
+                    found_tags = False
+                else:
+                    tags_lines.append(line)
+        if tags_lines:
+            exec('from collections import OrderedDict')
+            exec('from abjad import *')
+            exec(''.join(tags_lines))
+        result = locals().get('tags')
+        return result
 
     def remove(self):
         result = DirectoryProxy.remove(self)

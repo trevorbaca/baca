@@ -36,7 +36,7 @@ class ScorePackageWrangler(PackageWrangler):
     def score_titles_with_years(self):
         result = []
         for score_package_proxy in self.score_package_proxies_to_display:
-            result.append(score_package_proxy.title_with_year)
+            result.append(score_package_proxy.title_with_year or '(untitled score)')
         return result
 
     ### PUBLIC METHODS ###
@@ -66,11 +66,8 @@ class ScorePackageWrangler(PackageWrangler):
             self.proceed('score directory {!r} already exists.'.format(score_package_directory_name))
             return
         os.mkdir(score_package_directory_name)
-        self.display('score directory {!r} created.'.format(score_package_directory_name))
         score_package_proxy = self.get_package_proxy(score_package_importable_name)
-        score_package_proxy.fix_package_structure()
-        score_package_proxy.profile_package_sturcture()
-        self.proceed('score package {!r} created.'.format(score_package_importable_name))
+        score_package_proxy.fix_package_structure(is_interactive=False)
 
     def make_score_package_interactively(self, head=None):
         self.push_backtrack()

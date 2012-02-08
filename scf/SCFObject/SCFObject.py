@@ -133,7 +133,7 @@ class SCFObject(object):
         if self.session.is_displayable:
             iotools.clear_terminal()
 
-    def confirm(self, prompt_string='ok'):
+    def confirm(self, prompt_string='ok', include_chevron=False):
         getter = self.make_new_getter(where=self.where())
         getter.append_yes_no_string(prompt_string)
         result = getter.run()
@@ -224,10 +224,11 @@ class SCFObject(object):
         package_importable_name_parts = package_importable_name.split('.')
         if package_importable_name_parts[0] == self.studio_package_importable_name:
             directory_parts = [os.environ.get('BACA')] + package_importable_name_parts[1:]
-        elif package_importable_name_parts[0] in os.listdir(os.environ.get('SCORES')):
-            directory_parts = [os.environ.get('SCORES')] + package_importable_name_parts[:]
+        #elif package_importable_name_parts[0] in os.listdir(os.environ.get('SCORES')):
         else:
-            raise ValueError('Unknown package importable name {!r}.'.format(package_importable_name))
+            directory_parts = [os.environ.get('SCORES')] + package_importable_name_parts[:]
+        #else:
+        #    raise ValueError('Unknown package importable name {!r}.'.format(package_importable_name))
         directory = os.path.join(*directory_parts)
         return directory
 
@@ -306,10 +307,6 @@ class SCFObject(object):
             self.breadcrumb_stack.append(breadcrumb)
         else:
             self.breadcrumb_stack.append(self.breadcrumb)
-
-    def query(self, prompt):
-        response = handle_raw_input(prompt)
-        return response.lower().startswith('y')
 
     def remove_package_importable_name_from_sys_modules(self, package_importable_name):
         '''Total hack. But works.'''

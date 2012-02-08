@@ -45,7 +45,7 @@ def test_ScorePackageProxy_read_only_attributes_01():
         baca.scf.ChunkPackageWrangler(),
         baca.scf.MaterialPackageWrangler())    
 
-    assert score_proxy.top_level_subdirectories == (
+    assert score_proxy.top_level_directory_proxies == (
         baca.scf.DistDirectoryProxy('manos'),
         baca.scf.EtcDirectoryProxy('manos'),
         baca.scf.ExgDirectoryProxy('manos'),

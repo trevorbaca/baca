@@ -11,6 +11,7 @@ class UserInputGetter(MenuSectionAggregator):
     def __init__(self, session=None, where=None):
         MenuSectionAggregator.__init__(self, session=session, where=where)
         self._argument_lists = []
+        self._chevrons = []
         self._defaults = []
         self._execs = []
         self._helps = []
@@ -27,6 +28,10 @@ class UserInputGetter(MenuSectionAggregator):
     @property
     def argument_lists(self):
         return self._argument_lists
+
+    @property
+    def chevrons(self):
+        return self._chevrons
 
     @property
     def defaults(self):
@@ -105,7 +110,7 @@ class UserInputGetter(MenuSectionAggregator):
         self.tests.append(predicates.is_pitch_range_or_none)
 
     def append_something(self, spaced_attribute_name, message, 
-        additional_message_arguments=None, default=None):
+        additional_message_arguments=None, default=None, include_chevron=True):
         assert isinstance(spaced_attribute_name, str)
         self.prompts.append(spaced_attribute_name)
         self.argument_lists.append([])
@@ -114,6 +119,7 @@ class UserInputGetter(MenuSectionAggregator):
             additional_message_arguments = []
         self.helps.append(message.format(spaced_attribute_name, *additional_message_arguments))
         self.defaults.append(default)
+        self.chevrons.append(include_chevron)
 
     def append_string(self, spaced_attribute_name, default=None):
         message = "value for '{}' must be string."
@@ -135,9 +141,9 @@ class UserInputGetter(MenuSectionAggregator):
         self.append_something(spaced_attribute_name, message, default=default)
         self.tests.append(lambda x: iotools.is_underscore_delimited_lowercase_package_name(x) and 3 <= len(x))
 
-    def append_yes_no_string(self, spaced_attribute_name, default=None):
+    def append_yes_no_string(self, spaced_attribute_name, default=None, include_chevron=False):
         message = "value for '{}' must be 'y' or 'n'."
-        self.append_something(spaced_attribute_name, message, default=default)
+        self.append_something(spaced_attribute_name, message, default=default, include_chevron=include_chevron)
         self.tests.append(predicates.is_yes_no_string)
 
     def apply_tests_to_value(self, value):
@@ -208,7 +214,9 @@ class UserInputGetter(MenuSectionAggregator):
         while True:
             prompt = self.menu_lines[-1]
             default = str(self.defaults[self.prompt_index])
-            user_response = self.handle_raw_input_with_default(prompt, default=default)
+            include_chevron = self.chevrons[self.prompt_index]
+            user_response = self.handle_raw_input_with_default(
+                prompt, default=default, include_chevron=include_chevron)
             if user_response is None:
                 self.prompt_index = self.prompt_index + 1
                 break

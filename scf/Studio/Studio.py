@@ -35,12 +35,12 @@ class Studio(SCFObject):
     ### PUBLIC METHODS ###
 
     def edit_score_interactively(self, score_package_importable_name):
-        score_proxy = self.score_package_wrangler.get_package_proxy(score_package_importable_name)
-        score_proxy.session.current_score_package_short_name = score_package_importable_name
+        score_package_proxy = self.score_package_wrangler.get_package_proxy(score_package_importable_name)
+        score_package_proxy.session.current_score_package_short_name = score_package_importable_name
         # TODO: use cache keyword
         breadcrumbs = self.breadcrumb_stack[:]
         self.session._breadcrumb_stack = []
-        score_proxy.run()
+        score_package_proxy.run()
         self.session._breadcrumb_stack = breadcrumbs
         self.session.current_score_package_name = None
 
@@ -147,9 +147,8 @@ class Studio(SCFObject):
 
     def make_score_selection_menu(self):
         menu, section = self.make_new_menu(where=self.where(), is_numbered=True, is_keyed=False)
-        score_titles = self.score_package_wrangler.score_titles_with_years
         score_package_short_names = self.score_package_wrangler.score_package_short_names_to_display
-        #section.tokens = zip(score_package_short_names, score_titles)
+        score_titles = self.score_package_wrangler.score_titles_with_years
         tokens = zip(score_package_short_names, score_titles)
         tmp = iotools.strip_diacritics_from_binary_string
         tokens.sort(lambda x, y: cmp(tmp(x[1]), tmp(y[1])))

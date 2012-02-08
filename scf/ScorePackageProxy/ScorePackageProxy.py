@@ -54,7 +54,7 @@ class ScorePackageProxy(PackageProxy):
 
     @property
     def has_correct_directory_structure(self):
-        return all([os.path.exists(name) for name in self.score_subdirectory_names])
+        return all([os.path.exists(name) for name in self.top_level_directory_names])
 
     @property
     def has_correct_initializers(self):
@@ -86,17 +86,21 @@ class ScorePackageProxy(PackageProxy):
 
     @property
     def score_initializer_file_names(self):
-        return (self.initializer_file_name,
-            self.mus_proxy.initializer_file_name,)
+        return (
+            self.initializer_file_name,
+            self.mus_proxy.initializer_file_name,
+            )
 
     @property
     def score_package_wranglers(self):
-        return (self.chunk_wrangler,
-            self.material_package_wrangler,)
+        return (
+            self.chunk_wrangler,
+            self.material_package_wrangler,
+            )
 
     @property
     def title(self):
-        return self.get_tag('title')
+        return self.get_tag('title') or self.untitled_indicator
 
     @property
     def title_with_year(self):
@@ -106,11 +110,21 @@ class ScorePackageProxy(PackageProxy):
             return self.title
 
     @property
-    def top_level_subdirectories(self):
-        return (self.dist_proxy,
+    def top_level_directory_names(self):
+        return tuple([x.directory_name for x in self.top_level_directory_proxies])
+
+    @property
+    def top_level_directory_proxies(self):
+        return (
+            self.dist_proxy,
             self.etc_proxy,
             self.exg_proxy,
-            self.mus_proxy,)
+            self.mus_proxy,
+            )
+
+    @property   
+    def untitled_indicator(self):
+        return '(untitled score)'
         
     ### READ / WRITE PUBLIC ATTRIBUTES ###
 
@@ -166,18 +180,23 @@ class ScorePackageProxy(PackageProxy):
     def fix_package_structure(self, is_interactive=True):
         if self.package_short_name == 'recursif':
             return
-        for directory_name in self.score_subdirectory_names:
+        for directory_name in self.top_level_directory_names:
             if not os.path.exists(directory_name):
-                prompt = 'Create {}? '.format(directory_name)
-                if not is_interactive or self.query(prompt):
+                prompt = 'create {!r}? '.format(directory_name)
+                if not is_interactive or self.confirm(prompt):
                     os.mkdir(directory_name)
-        for initializer in self.score_initializer_file_names:
-            if not os.path.exists(initializer):
-                prompt = 'Create {}? '.format(initializer)
-                if not is_interactive or self.query(prompt):
-                    initializer = file(initializer, 'w')
-                    initializer.write('')
-                    initializer.close()
+        if not os.path.exists(self.initializer_file_name):
+            prompt = 'create {}? '.format(self.initializer_file_name)
+            if not is_interactive or self.confirm(prompt):
+                initializer = file(self.initializer_file_name, 'w')
+                initializer.write('from collections import OrderedDict\n')
+                initializer.close()
+        if not os.path.exists(self.mus_proxy.initializer_file_name):
+            prompt = 'create {}? '.format(self.mus_proxy.initializer_file_name)
+            if not is_interactive or self.confirm(prompt):
+                initializer = file(self.mus_proxy.initializer_file_name, 'w')
+                initializer.write('from collections import OrderedDict\n')
+                initializer.close()
         lines = []
         initializer = file(self.mus_proxy.initializer_file_name, 'r')
         found_materials_import = False
@@ -191,6 +210,7 @@ class ScorePackageProxy(PackageProxy):
             initializer = file(self.mus_proxy.initializer_file_name, 'w')
             initializer.write(''.join(lines))
             initializer.close()
+        self.proceed('packaged structure fixed.', prompt=is_interactive)
 
     def handle_main_menu_result(self, result):
         assert isinstance(result, str)
@@ -206,6 +226,14 @@ class ScorePackageProxy(PackageProxy):
             self.edit_title_interactively()
         elif result == 'yr':
             self.edit_year_of_completion_interactively()
+        elif result == 'fix':
+            self.fix_package_structure()
+        elif result == 'ls':
+            self.print_directory_contents()
+        elif result == 'profile':
+            self.profile_package_structure()
+        elif result == 'removescore':
+            self.remove_interactively()
         elif result == 'svn':
             self.manage_svn()
         elif result == 'tags':
@@ -233,6 +261,10 @@ class ScorePackageProxy(PackageProxy):
         section.append(('tl', 'title'))
         section.append(('yr', 'year of completion'))
         hidden_section = menu.make_new_section(is_hidden=True)
+        hidden_section.append(('fix', 'fix package structure'))
+        hidden_section.append(('ls', 'list directory contents'))
+        hidden_section.append(('profile', 'profile package structure'))
+        hidden_section.append(('removescore', 'remove score package'))
         hidden_section.append(('svn', 'manage repository'))
         hidden_section.append(('tags', 'manage tags'))
         return menu
@@ -265,18 +297,38 @@ class ScorePackageProxy(PackageProxy):
         self.pop_breadcrumb()
         self.restore_breadcrumbs(cache=cache)
 
-    def profile_package_structure(self):
+    def profile_package_structure(self, prompt=True):
         if not os.path.exists(self.directory_name):
             raise OSError('directory {!r} does not exist.'.format(self.directory_name))
         if self.package_short_name == 'recursif':
             return
         lines = []
-        for subdirectory_name in self.score_subdirectory_names:
+        for subdirectory_name in self.top_level_directory_names:
             lines.append('{} {}'.format(subdirectory_name.ljust(80), os.path.exists(subdirectory_name)))
         for initializer in self.score_initializer_file_names:
             lines.append('{} {}'.format(initializer.ljust(80), os.path.exists(initializer)))
+        lines.append('')
         self.display(lines)
+        self.proceed(prompt=prompt)
 
+    def remove_interactively(self):
+        line = 'WARNING! Score package {!r} will be completely removed.'.format(self.package_importable_name)
+        self.display([line, ''])
+        getter = self.make_new_getter(where=self.where())
+        getter.append_string("type 'clobberscore' to proceed")
+        self.push_backtrack()
+        should_clobber = getter.run()
+        self.pop_backtrack()
+        if self.backtrack():
+            return
+        if should_clobber == 'clobberscore':
+            self.push_backtrack()
+            self.remove()
+            self.pop_backtrack()
+            if self.backtrack():
+                return
+            self.session.is_backtracking_locally = True
+        
     def run(self, user_input=None, clear=True, cache=False):
         self.assign_user_input(user_input=user_input)
         self.cache_breadcrumbs(cache=cache)

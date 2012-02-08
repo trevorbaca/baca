@@ -7,8 +7,9 @@ import sys
 class DirectoryProxy(SCFObject):
 
     def __init__(self, directory_name, session=None):
-        assert isinstance(directory_name, str)
-        assert os.path.exists(directory_name)
+        #assert isinstance(directory_name, str)
+        assert isinstance(directory_name, (str, type(None)))
+        #assert os.path.exists(directory_name)
         SCFObject.__init__(self, session=session)
         self._directory_name = directory_name
 
@@ -45,9 +46,9 @@ class DirectoryProxy(SCFObject):
         if self.directory_name is None:
             return False
         command = 'svn st {}'.format(self.directory_name)
-        proc = subprocess.Popen(command, shell=True, stdout=subprocess.PIPE)
+        proc = subprocess.Popen(command, shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
         first_line = proc.stdout.readline()
-        if first_line.startswith('?'):
+        if first_line.startswith(('?', 'svn: warning:')):
             return False
         else:
             return True
@@ -87,7 +88,7 @@ class DirectoryProxy(SCFObject):
             return
         if response == 'remove':
             command = 'rm -rf {}'.format(self.directory_name)
-            proc = subprocess.Popen(command, shell=True, stdout=subprocess.PIPE)
+            proc = subprocess.Popen(command, shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
             first_line = proc.stdout.readline()
             line = 'removed {}.\n'.format(self.directory_name)
             self.display(line)
