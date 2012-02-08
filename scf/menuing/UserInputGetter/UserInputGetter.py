@@ -130,6 +130,11 @@ class UserInputGetter(MenuSectionAggregator):
         self.append_something(spaced_attribute_name, message, default=default)
         self.tests.append(pitchtools.is_symbolic_pitch_range_string)
 
+    def append_underscore_delimited_lowercase_package_name(self, spaced_attribute_name, default=None):
+        message = "value for {!r} must be underscore-delimited lowercase package name of length at least 3."
+        self.append_something(spaced_attribute_name, message, default=default)
+        self.tests.append(lambda x: iotools.is_underscore_delimited_lowercase_package_name(x) and 3 <= len(x))
+
     def append_yes_no_string(self, spaced_attribute_name, default=None):
         message = "value for '{}' must be 'y' or 'n'."
         self.append_something(spaced_attribute_name, message, default=default)

@@ -27,11 +27,8 @@ class MaterialPackageWrangler(PackageWrangler):
     # TODO: write test
     def get_new_material_package_importable_name_interactively(self):
         import baca
-        # TODO: attempted package name of 'b' passes here and then raises an assertion error
         getter = self.make_new_getter(where=self.where())
-        getter.append_string('material name')
-        getter.tests[-1] = lambda x: isinstance(x, str) and 3 <= len(x)
-        getter.helps[-1] = "value for 'material name' must be string of length at least 3."
+        getter.append_underscore_delimited_lowercase_package_name('material name')
         self.push_backtrack()
         material_name = getter.run()
         self.pop_backtrack()
