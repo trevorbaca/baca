@@ -28,13 +28,15 @@ class MaterialPackageProxy(PackageProxy):
         return self.package_spaced_name
 
     @property
-    def has_complete_user_input_wrapper(self):
-        user_input_module_proxy = self.user_input_module_proxy
-        if user_input_module_proxy is not None:
-            user_input_wrapper = user_input_module_proxy.user_input_wrapper
-            if user_input_wrapper is not None:
-                return user_input_wrapper.is_complete
+    def has_complete_user_input_wrapper_in_memory(self):
+        if self.has_user_input_wrapper_in_memory:
+            return self.user_input_wrapper_in_memory.is_complete
         return False
+
+    @property
+    def has_complete_user_input_wrapper_on_disk(self):
+        if self.has_user_input_wrapper_on_disk:
+            return self.user_input_wrapper_on_disk.is_complete
 
     @property
     def has_illustration_builder_module(self):
@@ -102,9 +104,15 @@ class MaterialPackageProxy(PackageProxy):
         return False
 
     @property
-    def has_user_input_wrapper(self):
+    def has_user_input_wrapper_on_disk(self):
         if self.should_have_user_input_module:
-            return bool(self.user_input_module_proxy.import_user_input_wrapper())
+            return bool(self.user_input_module_proxy.read_user_input_wrapper_from_disk())
+        return False
+
+    @property
+    def has_user_input_wrapper_in_memory(self):
+        if self.should_have_user_input_module:
+            return bool(self.user_input_wrapper_in_memory)
         return False
 
     @property
@@ -634,7 +642,7 @@ class MaterialPackageProxy(PackageProxy):
             return
         has_output_material_section = False
         if self.has_readable_material_definition_module:
-            if self.has_material_definition or self.has_complete_user_input_wrapper:
+            if self.has_material_definition or self.has_complete_user_input_wrapper_on_disk:
                 section = main_menu.make_new_section()
                 if self.has_output_material_module and not self.has_readable_output_material_module:
                     section.section_title = '(Note: has invalid output material module.)'

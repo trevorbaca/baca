@@ -5,6 +5,21 @@ import copy
 
 class MaterialPackageMaker(MaterialPackageProxy):
 
+    def __init__(self, package_importable_name=None, session=None):
+        MaterialPackageProxy.__init__(self, package_importable_name=package_importable_name, session=session)
+        self._user_input_wrapper_in_memory = self._init_user_input_wrapper_in_memory()
+
+    ### PRIVATE METHODS ###
+
+    def _init_user_input_wrapper_in_memory(self):
+        user_input_wrapper_in_memory = self.user_input_module_proxy.read_user_input_wrapper_from_disk()
+        if user_input_wrapper_in_memory:
+            user_input_wrapper_in_memory._user_input_module_import_statements = \
+                self.user_input_module_import_statements[:]
+        else:
+            user_input_wrapper_in_memory = self.make_empty_user_input_wrapper()
+        return user_input_wrapper_in_memory
+
     ### READ-ONLY PUBLIC ATTRIBUTES ###
 
     @property
@@ -15,33 +30,32 @@ class MaterialPackageMaker(MaterialPackageProxy):
 
     @property
     def output_material(self):
-        output_material = self.output_material_maker(*self.user_input_wrapper.values)
+        output_material = self.output_material_maker(*self.user_input_wrapper_in_memory.values)
         assert type(self).output_material_checker(output_material)
         return output_material
 
     @property
-    def user_input_wrapper(self):
-        return self.user_input_module_proxy.import_user_input_wrapper() or UserInputWrapper()
+    def user_input_wrapper_in_memory(self):
+        return self._user_input_wrapper_in_memory
 
     ### PUBLIC METHODS ###
 
     def clear_user_input_wrapper(self, prompt=True):
-        user_input_wrapper = self.user_input_wrapper
-        if user_input_wrapper.is_empty:
+        if self.user_input_wrapper_in_memory.is_empty:
             self.proceed('user input already empty.')
         else:
-            user_input_wrapper.clear()
-            self.user_input_module_proxy.write_to_disk(user_input_wrapper)
-            self.proceed('user input wrapper cleared.', prompt=prompt)
+            self.user_input_wrapper_in_memory.clear()
+            self.user_input_module_proxy.write_to_disk(self.user_input_wrapper_in_memory)
+            self.proceed('user input wrapper cleared and written to disk.', prompt=prompt)
 
     def edit_user_input_at_number(self, number):
-        user_input_wrapper = self.user_input_wrapper
-        if user_input_wrapper is None:
+        #user_input_wrapper = self.user_input_wrapper
+        if self.user_input_wrapper_in_memory is None:
             return
-        if len(user_input_wrapper) < number:
+        if len(self.user_input_wrapper_in_memory) < number:
             return
         index = number - 1
-        key, current_value = user_input_wrapper.list_items[index]
+        key, current_value = self.user_input_wrapper_in_memory.list_items[index]
         test_tuple = type(self).user_input_tests[index]
         test = test_tuple[1]
         if len(test_tuple) == 3:
@@ -62,22 +76,27 @@ class MaterialPackageMaker(MaterialPackageProxy):
         new_value = getter.run()
         if self.backtrack():
             return
-        user_input_wrapper[key] = new_value 
-        self.user_input_module_proxy.write_to_disk(user_input_wrapper)
+        self.user_input_wrapper_in_memory[key] = new_value 
+        self.user_input_module_proxy.write_to_disk(self.user_input_wrapper_in_memory)
 
     def load_user_input_wrapper_demo_values(self, prompt=True):
-        user_input_wrapper = self.user_input_wrapper
+        #user_input_wrapper = self.user_input_wrapper
         user_input_demo_values = copy.deepcopy(type(self).user_input_demo_values)
         for key, value in user_input_demo_values:
-            user_input_wrapper[key] = value
-        self.user_input_module_proxy.write_to_disk(user_input_wrapper)
-        self.proceed('demo values loaded.', prompt=prompt)
+            self.user_input_wrapper_in_memory[key] = value
+        self.user_input_module_proxy.write_to_disk(self.user_input_wrapper_in_memory)
+        self.proceed('demo values loaded and written to disk.', prompt=prompt)
+
+    def make_empty_user_input_wrapper(self):
+        user_input_wrapper = UserInputWrapper()
+        user_input_wrapper._user_input_module_import_statements = \
+            self.user_input_module_import_statements[:]
+        return user_input_wrapper
 
     def make_main_menu_section_for_user_input_module(self, main_menu, hidden_section):
-        if self.has_user_input_wrapper:
-            section = main_menu.make_new_section(is_numbered=True)
-            section.tokens = self.user_input_wrapper.editable_lines
-            section.return_value_attribute = 'number'
+        section = main_menu.make_new_section(is_numbered=True)
+        section.tokens = self.user_input_wrapper_in_memory.editable_lines
+        section.return_value_attribute = 'number'
         section = main_menu.make_new_section()
         section.append(('uic', 'user input - clear'))
         section.append(('uid', 'user input - delete module'))
@@ -92,7 +111,7 @@ class MaterialPackageMaker(MaterialPackageProxy):
         self.make_main_menu_section_for_output_material(menu, hidden_section)
 
     def populate_user_input_wrapper(self, prompt=True):
-        total_elements = len(self.user_input_wrapper)
+        total_elements = len(self.self.user_input_wrapper_in_memory)
         getter = self.make_new_getter(where=self.where())
         getter.append_integer_in_closed_range('start at element number', 1, total_elements, default=1)
         self.push_backtrack()

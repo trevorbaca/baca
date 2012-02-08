@@ -43,6 +43,10 @@ class UserInputWrapper(collections.OrderedDict):
         return list(self.iteritems())
 
     @property
+    def user_input_module_import_statements(self):
+        return self._user_input_module_import_statements
+
+    @property
     def values(self):
         return list(self.itervalues())
 

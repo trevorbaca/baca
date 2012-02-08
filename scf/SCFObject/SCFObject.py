@@ -120,6 +120,15 @@ class SCFObject(object):
             self.session.cached_breadcrumbs = self.session.breadcrumb_stack[:]
             self.session._breadcrumb_stack[:] = []
 
+    def conditionally_add_terminal_newlines(self, lines):
+        terminated_lines = []
+        for line in lines:
+            if not line.endswith('\n'):
+                line = line + '\n'
+            terminated_lines.append(line)
+        terminated_lines = type(lines)(terminated_lines)
+        return terminated_lines
+        
     def conditionally_clear_terminal(self):
         if self.session.is_displayable:
             iotools.clear_terminal()
