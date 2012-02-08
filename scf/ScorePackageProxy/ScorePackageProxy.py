@@ -33,6 +33,18 @@ class ScorePackageProxy(PackageProxy):
         return self._chunk_wrangler
 
     @property
+    def chunks_package_directory_name(self):
+        return os.path.join(self.directory_name, 'mus', 'chunks')
+
+    @property
+    def chunks_package_importable_name(self):
+        return '.'.join([self.package_importable_name, 'mus', 'chunks'])
+
+    @property
+    def chunks_package_initializer_file_name(self):
+        return os.path.join(self.chunks_package_directory_name, '__init__.py')
+
+    @property
     def composer(self):
         return self.get_tag('composer')
 
@@ -77,8 +89,16 @@ class ScorePackageProxy(PackageProxy):
         return self._material_package_wrangler
 
     @property
+    def materials_package_directory_name(self):
+        return os.path.join(self.directory_name, 'mus', 'materials')
+
+    @property
     def materials_package_importable_name(self):
         return '.'.join([self.package_importable_name, 'mus', 'materials'])
+
+    @property
+    def materials_package_initializer_file_name(self):
+        return os.path.join(self.materials_package_directory_name, '__init__.py')
 
     @property
     def mus_proxy(self):
@@ -218,6 +238,18 @@ class ScorePackageProxy(PackageProxy):
                 tags_file.write('\n')
                 tags_file.write('tags = OrderedDict([])\n')
                 tags_file.close()
+        if not os.path.exists(self.materials_package_directory_name):
+            prompt = 'create {}'.format(self.materials_package_directory_name)
+            if not is_interactive or self.confirm(prompt):
+                os.mkdir(self.materials_package_directory_name)
+        if not os.path.exists(self.materials_package_initializer_file_name):
+            file(self.materials_package_initializer_file_name, 'w').write('')
+        if not os.path.exists(self.chunks_package_directory_name):
+            prompt = 'create {}'.format(self.chunks_package_directory_name)
+            if not is_interactive or self.confirm(prompt):
+                os.mkdir(self.chunks_package_directory_name)
+        if not os.path.exists(self.chunks_package_initializer_file_name):
+            file(self.chunks_package_initializer_file_name, 'w').write('')
         self.proceed('packaged structure fixed.', prompt=is_interactive)
 
     def handle_main_menu_result(self, result):

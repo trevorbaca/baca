@@ -94,7 +94,7 @@ class ScorePackageWrangler(PackageWrangler):
             self.make_score_package()
         finally:
             if os.path.exists(self.temporary_score_package_directory_name):
-                os.rmdir(self.temporary_score_package_directory_name)
+                os.system('rm -rf {}'.format(self.temporary_score_package_directory_name))
         
     def profile_score_package_structures(self):
         for score_package_proxy in self.score_package_proxies_to_display:
