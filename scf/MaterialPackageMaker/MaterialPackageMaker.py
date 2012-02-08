@@ -37,12 +37,6 @@ class MaterialPackageMaker(MaterialPackageProxy):
         return illustration
 
     @property
-    def output_material(self):
-        output_material = self.output_material_maker(*self.user_input_wrapper_in_memory.values)
-        assert type(self).output_material_checker(output_material)
-        return output_material
-
-    @property
     def user_input_attribute_names(self):
         return tuple([x[0] for x in self.user_input_demo_values])
 
@@ -121,6 +115,11 @@ class MaterialPackageMaker(MaterialPackageProxy):
     def make_main_menu_sections(self, menu, hidden_section):
         self.make_main_menu_section_for_user_input_module(menu, hidden_section)
         self.make_main_menu_section_for_output_material(menu, hidden_section)
+
+    def make_output_material_from_user_input_wrapper_in_memory(self):
+        output_material = self.output_material_maker(*self.user_input_wrapper_in_memory.values)
+        assert type(self).output_material_checker(output_material)
+        return output_material
 
     def populate_user_input_wrapper(self, prompt=True):
         total_elements = len(self.self.user_input_wrapper_in_memory)
