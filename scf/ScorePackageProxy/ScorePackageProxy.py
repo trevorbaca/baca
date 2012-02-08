@@ -217,6 +217,8 @@ class ScorePackageProxy(PackageProxy):
             if not is_interactive or self.confirm(prompt):
                 tags_file = file(self.tags_file_name, 'w')
                 tags_file.write('from collections import OrderedDict\n')
+                tags_file.write('\n')
+                tags_file.write('tags = OrderedDict([])\n')
                 tags_file.close()
         self.proceed('packaged structure fixed.', prompt=is_interactive)
 

@@ -2,6 +2,7 @@ from abjad.tools import iotools
 from baca.scf.PackageWrangler import PackageWrangler
 from baca.scf.ScorePackageProxy import ScorePackageProxy
 import os
+import shutil
 
 
 class ScorePackageWrangler(PackageWrangler):
@@ -39,6 +40,14 @@ class ScorePackageWrangler(PackageWrangler):
             result.append(score_package_proxy.title_with_year or '(untitled score)')
         return result
 
+    @property
+    def temporary_score_package_directory_name(self):
+        return os.path.join(os.environ.get('SCORES'), '__temporary_score_package')
+
+    @property
+    def temporary_score_package_importable_name(self):
+        return '__temporary_score_package'
+
     ### PUBLIC METHODS ###
 
     def fix_score_package_structures(self):
@@ -59,24 +68,34 @@ class ScorePackageWrangler(PackageWrangler):
             return 
         return score_package_importable_name
 
-    def make_score_package(self, score_package_importable_name):
-        assert iotools.is_underscore_delimited_lowercase_package_name(score_package_importable_name)
-        score_package_directory_name = os.path.join(os.environ.get('SCORES'), score_package_importable_name)
-        if os.path.exists(score_package_directory_name):
-            self.proceed('score directory {!r} already exists.'.format(score_package_directory_name))
-            return
-        os.mkdir(score_package_directory_name)
-        score_package_proxy = self.get_package_proxy(score_package_importable_name)
+    def make_score_package(self):
+        os.mkdir(self.temporary_score_package_directory_name)
+        score_package_proxy = self.get_package_proxy(self.temporary_score_package_importable_name)
         score_package_proxy.fix_package_structure(is_interactive=False)
-
-    def make_score_package_interactively(self, head=None):
+        score_package_proxy.edit_title_interactively()
         self.push_backtrack()
-        score_package_importable_name = self.get_score_package_importable_name_interactively()
+        permanent_score_package_importable_name = self.get_score_package_importable_name_interactively()
         self.pop_backtrack()
         if self.backtrack():
+            os.remove(temporary_score_directory_name)
             return
-        self.make_score_package(score_package_importable_name)
+        assert iotools.is_underscore_delimited_lowercase_package_name(permanent_score_package_importable_name)
+        permanent_score_package_directory_name = os.path.join(
+            os.environ.get('SCORES'), permanent_score_package_importable_name)
+        if os.path.exists(permanent_score_package_directory_name):
+            self.proceed('score directory {!r} already exists.'.format(permanent_score_package_directory_name))
+            os.remove(temporary_score_directory_name)
+            return
+        score_package_proxy.edit_year_of_completion_interactively()
+        os.rename(self.temporary_score_package_directory_name, permanent_score_package_directory_name)
 
+    def make_score_package_interactively(self, head=None):
+        try:
+            self.make_score_package()
+        finally:
+            if os.path.exists(self.temporary_score_package_directory_name):
+                os.rmdir(self.temporary_score_package_directory_name)
+        
     def profile_score_package_structures(self):
         for score_package_proxy in self.score_package_proxies_to_display:
             score_package_proxy.profile_package_structure()
