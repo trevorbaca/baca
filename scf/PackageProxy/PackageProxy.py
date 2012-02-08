@@ -50,6 +50,10 @@ class PackageProxy(DirectoryProxy):
             return os.path.isfile(self.parent_initializer_file_name)
 
     @property
+    def has_tags_file(self):
+        return os.path.isfile(self.tags_file_name)
+
+    @property
     def initializer_file_name(self):
         if self.directory_name is not None:
             return os.path.join(self.directory_name, '__init__.py')
@@ -111,12 +115,25 @@ class PackageProxy(DirectoryProxy):
         if not self.package_importable_name.startswith(self.studio_package_importable_name):
             return self.package_importable_name.split('.')[0]
 
+    @property
+    def tags_file_name(self):
+        return os.path.join(self.directory_name, 'tags.py')
+
+    @property
+    def tags_file_proxy(self):
+        if self.has_tags_file:
+            return InitializerFileProxy(self.tags_file_name, session=self.session)
+
+
     ### PUBLIC METHODS ###
 
     def add_tag(self, tag_name, tag_value):
         tags = self.get_tags()
         tags[tag_name] = tag_value
-        self.initializer_file_proxy.write_tags_to_disk(tags)
+        if self.has_tags_file:
+            self.tags_file_proxy.write_tags_to_disk(tags)
+        else:
+            self.initializer_file_proxy.write_tags_to_disk(tags)
 
     def add_tag_interactively(self):
         getter = self.make_new_getter(where=self.where())
@@ -138,7 +155,10 @@ class PackageProxy(DirectoryProxy):
     def delete_tag(self, tag_name):
         tags = self.get_tags()
         del(tags[tag_name])
-        self.initializer_file_proxy.write_tags_to_disk(tags)
+        if self.has_tags_file:
+            self.tags_file_proxy.write_tags_to_disk(tags)
+        else:
+            self.initializer_file_proxy.write_tags_to_disk(tags)
 
     def delete_tag_interactively(self):
         getter = self.make_new_getter(where=self.where())
@@ -167,9 +187,12 @@ class PackageProxy(DirectoryProxy):
 
     def get_tags(self):
         import collections
-        tags = safe_import(locals(), self.package_short_name, 'tags', 
-            source_parent_package_importable_name=self.parent_package_importable_name)
-        tags = tags or collections.OrderedDict([])
+        tags = self.read_tags_from_tags_file()
+        if not tags:
+            tags = safe_import(locals(), self.package_short_name, 'tags', 
+                source_parent_package_importable_name=self.parent_package_importable_name)
+        if not tags:
+            tags = collections.OrderedDict([])
         #tags = self.read_tags_from_disk() or collections.OrderedDict([])
         return tags
 
@@ -232,6 +255,15 @@ class PackageProxy(DirectoryProxy):
             exec(''.join(tags_lines))
         result = locals().get('tags')
         return result
+
+    def read_tags_from_tags_file(self):
+        if not os.path.exists(self.tags_file_name):
+            return
+        file_pointer = open(self.tags_file_name, 'r')
+        file_contents_string = file_pointer.read()
+        file_pointer.close()
+        exec(file_contents_string)
+        return locals().get('tags')
 
     def remove(self):
         result = DirectoryProxy.remove(self)

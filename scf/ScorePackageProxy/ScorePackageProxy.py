@@ -189,13 +189,15 @@ class ScorePackageProxy(PackageProxy):
             prompt = 'create {}? '.format(self.initializer_file_name)
             if not is_interactive or self.confirm(prompt):
                 initializer = file(self.initializer_file_name, 'w')
-                initializer.write('from collections import OrderedDict\n')
+                #initializer.write('from collections import OrderedDict\n')
+                initializer.write('')
                 initializer.close()
         if not os.path.exists(self.mus_proxy.initializer_file_name):
             prompt = 'create {}? '.format(self.mus_proxy.initializer_file_name)
             if not is_interactive or self.confirm(prompt):
                 initializer = file(self.mus_proxy.initializer_file_name, 'w')
-                initializer.write('from collections import OrderedDict\n')
+                #initializer.write('from collections import OrderedDict\n')
+                initializer.write('')
                 initializer.close()
         lines = []
         initializer = file(self.mus_proxy.initializer_file_name, 'r')
@@ -210,6 +212,12 @@ class ScorePackageProxy(PackageProxy):
             initializer = file(self.mus_proxy.initializer_file_name, 'w')
             initializer.write(''.join(lines))
             initializer.close()
+        if not os.path.exists(self.tags_file_name):
+            prompt = 'create {}? '.format(self.tags_file_name)
+            if not is_interactive or self.confirm(prompt):
+                tags_file = file(self.tags_file_name, 'w')
+                tags_file.write('from collections import OrderedDict\n')
+                tags_file.close()
         self.proceed('packaged structure fixed.', prompt=is_interactive)
 
     def handle_main_menu_result(self, result):
