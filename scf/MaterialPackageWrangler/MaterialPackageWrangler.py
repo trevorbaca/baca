@@ -120,7 +120,7 @@ class MaterialPackageWrangler(PackageWrangler):
     def make_material_package(self, material_package_importable_name, material_package_maker_class_name, 
         should_have_illustration, prompt=True):
         '''True on success.'''
-        from baca.scf.MaterialPackageProxy import MaterialPackageProxy 
+        import baca
         assert iotools.is_underscore_delimited_lowercase_package_name(material_package_importable_name)
         assert material_package_maker_class_name is None or iotools.is_uppercamelcase_string(
             material_package_maker_class_name)
@@ -132,19 +132,22 @@ class MaterialPackageWrangler(PackageWrangler):
             return False
         os.mkdir(directory_name)
         file(os.path.join(directory_name, '__init__.py'), 'w').write('')
-        material_proxy = MaterialPackageProxy(material_package_importable_name, session=self.session)
+        if material_package_maker_class_name is None: 
+            material_proxy = baca.scf.MaterialPackageProxy(
+                material_package_importable_name, session=self.session)
+        else:
+            command = 'material_proxy = baca.scf.materialpackagemakers.{}(material_package_importable_name, session=self.session)'.format(material_package_maker_class_name)
+            exec(command)
         tags = collections.OrderedDict([])
         tags['material_package_maker_class_name'] = material_package_maker_class_name
         tags['should_have_illustration'] = should_have_illustration
         material_proxy.initializer_file_proxy.write_stub_to_disk(tags=tags)
         if material_package_maker_class_name is None:
             file(os.path.join(directory_name, 'material_definition.py'), 'w').write('')
-            # TODO: maybe possible to collapse these two branches?
-            if should_have_illustration:
-                material_proxy.material_definition_module_proxy.write_stub_to_disk(False, prompt=False)
-                #material_proxy.illustration_builder_module_proxy.write_stub_to_disk(prompt=False)
-            else:
-                material_proxy.material_definition_module_proxy.write_stub_to_disk(True, prompt=False)
+            is_data_only = not should_have_illustration
+            material_proxy.material_definition_module_proxy.write_stub_to_disk(is_data_only, prompt=False)
+        else:
+            material_proxy.write_stub_user_input_module_to_disk(prompt=False)
         line = 'material package {!r} created.'.format(material_package_importable_name)
         self.proceed(line, prompt=prompt)
         return True

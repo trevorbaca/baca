@@ -211,7 +211,6 @@ class SCFObject(object):
 
     def module_importable_name_to_full_file_name(self, module_importable_name):
         full_file_name = self.package_importable_name_to_directory_name(module_importable_name) + '.py'
-        assert os.path.isfile(full_file_name)
         return full_file_name
 
     def package_exists(self, package_importable_name):

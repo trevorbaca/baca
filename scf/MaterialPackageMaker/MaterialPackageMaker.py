@@ -1,24 +1,32 @@
 from baca.scf.MaterialPackageProxy import MaterialPackageProxy
 from baca.scf.UserInputWrapper import UserInputWrapper
 import copy
+import os
 
 
 class MaterialPackageMaker(MaterialPackageProxy):
 
     def __init__(self, package_importable_name=None, session=None):
         MaterialPackageProxy.__init__(self, package_importable_name=package_importable_name, session=session)
-        self._user_input_wrapper_in_memory = self._init_user_input_wrapper_in_memory()
+        self._user_input_wrapper_in_memory = self._initialize_user_input_wrapper_in_memory()
 
     ### PRIVATE METHODS ###
 
-    def _init_user_input_wrapper_in_memory(self):
-        user_input_wrapper_in_memory = self.user_input_module_proxy.read_user_input_wrapper_from_disk()
-        if user_input_wrapper_in_memory:
-            user_input_wrapper_in_memory._user_input_module_import_statements = \
+    def _initialize_user_input_wrapper_in_memory(self):
+        import baca
+        user_input_module_importable_name = '.'.join([self.package_importable_name, 'user_input'])
+        user_input_module_file_name = self.module_importable_name_to_full_file_name(
+            user_input_module_importable_name)
+        if not os.path.exists(user_input_module_file_name):
+            file(user_input_module_file_name, 'w').write('')
+        proxy = baca.scf.UserInputModuleProxy(user_input_module_importable_name, session=self.session)
+        user_input_wrapper = proxy.read_user_input_wrapper_from_disk()
+        if user_input_wrapper:
+            user_input_wrapper._user_input_module_import_statements = \
                 self.user_input_module_import_statements[:]
         else:
-            user_input_wrapper_in_memory = self.make_empty_user_input_wrapper()
-        return user_input_wrapper_in_memory
+            user_input_wrapper = self.initialize_empty_user_input_wrapper()
+        return user_input_wrapper
 
     ### READ-ONLY PUBLIC ATTRIBUTES ###
 
@@ -35,6 +43,10 @@ class MaterialPackageMaker(MaterialPackageProxy):
         return output_material
 
     @property
+    def user_input_attribute_names(self):
+        return tuple([x[0] for x in self.user_input_demo_values])
+
+    @property
     def user_input_wrapper_in_memory(self):
         return self._user_input_wrapper_in_memory
 
@@ -49,7 +61,6 @@ class MaterialPackageMaker(MaterialPackageProxy):
             self.proceed('user input wrapper cleared and written to disk.', prompt=prompt)
 
     def edit_user_input_at_number(self, number):
-        #user_input_wrapper = self.user_input_wrapper
         if self.user_input_wrapper_in_memory is None:
             return
         if len(self.user_input_wrapper_in_memory) < number:
@@ -79,19 +90,20 @@ class MaterialPackageMaker(MaterialPackageProxy):
         self.user_input_wrapper_in_memory[key] = new_value 
         self.user_input_module_proxy.write_to_disk(self.user_input_wrapper_in_memory)
 
+    def initialize_empty_user_input_wrapper(self):
+        user_input_wrapper = UserInputWrapper()
+        user_input_wrapper._user_input_module_import_statements = \
+            self.user_input_module_import_statements[:]
+        for user_input_attribute_name in self.user_input_attribute_names:
+            user_input_wrapper[user_input_attribute_name] = None
+        return user_input_wrapper
+
     def load_user_input_wrapper_demo_values(self, prompt=True):
-        #user_input_wrapper = self.user_input_wrapper
         user_input_demo_values = copy.deepcopy(type(self).user_input_demo_values)
         for key, value in user_input_demo_values:
             self.user_input_wrapper_in_memory[key] = value
         self.user_input_module_proxy.write_to_disk(self.user_input_wrapper_in_memory)
         self.proceed('demo values loaded and written to disk.', prompt=prompt)
-
-    def make_empty_user_input_wrapper(self):
-        user_input_wrapper = UserInputWrapper()
-        user_input_wrapper._user_input_module_import_statements = \
-            self.user_input_module_import_statements[:]
-        return user_input_wrapper
 
     def make_main_menu_section_for_user_input_module(self, main_menu, hidden_section):
         section = main_menu.make_new_section(is_numbered=True)
@@ -99,12 +111,12 @@ class MaterialPackageMaker(MaterialPackageProxy):
         section.return_value_attribute = 'number'
         section = main_menu.make_new_section()
         section.append(('uic', 'user input - clear'))
-        section.append(('uid', 'user input - delete module'))
         section.append(('uil', 'user input - load demo values'))
         section.append(('uip', 'user input - populate'))
         section.append(('uis', 'user input - show demo values'))
         section.append(('uimv', 'user input module - view'))
         hidden_section.append(('uit','user input - toggle default mode'))
+        hidden_section.append(('uimdelete', 'user input module - delete'))
 
     def make_main_menu_sections(self, menu, hidden_section):
         self.make_main_menu_section_for_user_input_module(menu, hidden_section)
@@ -138,3 +150,8 @@ class MaterialPackageMaker(MaterialPackageProxy):
         lines.append('')
         self.display(lines)
         self.proceed(prompt=prompt)
+
+    def write_stub_user_input_module_to_disk(self, prompt=True):
+        empty_user_input_wrapper = self.initialize_empty_user_input_wrapper()
+        self.user_input_module_proxy.write_to_disk(empty_user_input_wrapper)
+        self.proceed('stub user input module written to disk.', prompt=prompt)
