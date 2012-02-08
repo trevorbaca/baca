@@ -48,9 +48,8 @@ class ScorePackageWrangler(PackageWrangler):
     def get_package_proxy(self, package_importable_name):
         return ScorePackageProxy(package_importable_name, session=self.session)
 
-    def make_score_package_interactively(self, score_package_importable_name):
-        score_proxy = ScorePackageProxy(session=self.session)
-        score_proxy.make_score_package_creation_wizard()
+    def make_score_package_interactively(self, head=None):
+        self.print_not_implemented()
 
     def profile_score_package_structures(self):
         for score_proxy in self.score_proxies_to_display:

@@ -9,7 +9,7 @@ def test_Studio_01():
 
     assert studio.class_name == 'Studio'
     assert isinstance(studio.global_proxy, baca.scf.HomePackageProxy)
-    assert isinstance(studio.score_wrangler, baca.scf.ScorePackageWrangler)
+    assert isinstance(studio.score_package_wrangler, baca.scf.ScorePackageWrangler)
     assert studio.source_file_name == \
         '/Users/trevorbaca/Documents/other/baca/scf/Studio/Studio.py'
     assert studio.spaced_class_name == 'studio'
@@ -37,6 +37,7 @@ def test_Studio_02():
      '',
      '     work with materials (m)',
      '     work with sketches (k)',
+     '     make new score (new)',
      '']
 
 
@@ -89,6 +90,7 @@ def test_Studio_04():
      '',
      '     work with materials (m)',
      '     work with sketches (k)',
+     '     make new score (new)',
      '']
 
 
@@ -196,7 +198,7 @@ def test_Studio_12():
     studio = baca.scf.Studio()
 
     assert studio.session is studio.global_proxy.session
-    assert studio.session is studio.score_wrangler.session
+    assert studio.session is studio.score_package_wrangler.session
 
 
 def test_Studio_13():
