@@ -189,14 +189,12 @@ class ScorePackageProxy(PackageProxy):
             prompt = 'create {}? '.format(self.initializer_file_name)
             if not is_interactive or self.confirm(prompt):
                 initializer = file(self.initializer_file_name, 'w')
-                #initializer.write('from collections import OrderedDict\n')
                 initializer.write('')
                 initializer.close()
         if not os.path.exists(self.mus_proxy.initializer_file_name):
             prompt = 'create {}? '.format(self.mus_proxy.initializer_file_name)
             if not is_interactive or self.confirm(prompt):
                 initializer = file(self.mus_proxy.initializer_file_name, 'w')
-                #initializer.write('from collections import OrderedDict\n')
                 initializer.write('')
                 initializer.close()
         lines = []
