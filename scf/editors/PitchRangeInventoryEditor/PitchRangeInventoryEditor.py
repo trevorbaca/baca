@@ -1,6 +1,7 @@
 from abjad.tools import pitchtools
 from baca.scf.editors.InteractiveEditor import InteractiveEditor
-from baca.scf.editors.PerformerEditor import PerformerEditor
+from baca.scf.editors.PitchRangeEditor import PitchRangeEditor
+from baca.scf.menuing.UserInputGetter import UserInputGetter
 
 
 class PitchRangeInventoryEditor(InteractiveEditor):
@@ -22,12 +23,11 @@ class PitchRangeInventoryEditor(InteractiveEditor):
 
     target_class = pitchtools.PitchRangeInventory
 
-    target_item_getter_configuration_method = \
-        baca.scf.menuing.UserInputGetter.append_symbolic_pitch_range_string
+    target_item_getter_configuration_method = UserInputGetter.append_symbolic_pitch_range_string
 
     target_item_class = pitchtools.PitchRange
 
-    target_item_editor_class = baca.scf.editors.PitchRangeEditor
+    target_item_editor_class = PitchRangeEditor
 
     @property
     def target_items(self):
