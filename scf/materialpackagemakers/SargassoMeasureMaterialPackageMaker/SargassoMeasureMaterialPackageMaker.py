@@ -57,14 +57,13 @@ class SargassoMeasureMaterialPackageMaker(MaterialPackageMaker):
 
     ### READ-ONLY PUBLIC ATTRIBUTES ###
 
-    @property
-    def output_material_module_body_lines(self):
+    def make_output_material_module_body_lines(self, output_material):
         lines = []
-        output_material = self.output_material
         lines.append('{} = ['.format(self.material_underscored_name))
         for measure in output_material[:-1]:
             line = measuretools.measure_to_one_line_input_string(measure)
             lines.append('\t{},'.format(line))
         line = measuretools.measure_to_one_line_input_string(output_material[-1])
-        lines.append('\t%{}]'.format(line))
+        lines.append('\t{}]'.format(line))
+        lines = [line + '\n' for line in lines]
         return lines

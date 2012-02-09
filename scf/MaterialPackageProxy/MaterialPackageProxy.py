@@ -312,12 +312,19 @@ class MaterialPackageProxy(PackageProxy):
     def output_material_module_import_statements_and_output_material_module_body_lines(self):
         if self.should_have_material_definition_module:
             pair = self.output_material_module_import_statements_and_material_definition
-            output_material_module_import_statements, material_definition = pair
-            output_material_module_body_lines = []
-            output_material_module_body_lines.append('{} = {!r}'.format(
-                self.material_underscored_name, material_definition))
-            return output_material_module_import_statements, output_material_module_body_lines
-            
+            output_material_module_import_statements, output_material = pair
+        elif self.has_material_package_maker:
+            output_material_module_import_statements = self.output_material_module_import_statements
+            output_material = self.make_output_material_from_user_input_wrapper_in_memory()
+        else:
+            raise ValueError
+        if hasattr(self, 'make_output_material_module_body_lines'):
+            output_material_module_body_lines = self.make_output_material_module_body_lines(output_material)
+        else:
+            line = '{} = {!r}'.format(self.material_underscored_name, output_material)
+            output_material_module_body_lines = [line]
+        return output_material_module_import_statements, output_material_module_body_lines
+
     @property
     def output_material_module_file_name(self): 
         if self.should_have_output_material_module:
@@ -641,8 +648,9 @@ class MaterialPackageProxy(PackageProxy):
         if not self.has_readable_initializer:
             return
         has_output_material_section = False
-        if self.has_readable_material_definition_module:
-            if self.has_material_definition or self.has_complete_user_input_wrapper_on_disk:
+        if self.has_readable_material_definition_module or self.has_complete_user_input_wrapper_in_memory:
+            #if self.has_material_definition or self.has_complete_user_input_wrapper_on_disk:
+            if self.has_material_definition or self.has_complete_user_input_wrapper_in_memory:
                 section = main_menu.make_new_section()
                 if self.has_output_material_module and not self.has_readable_output_material_module:
                     section.section_title = '(Note: has invalid output material module.)'
@@ -808,6 +816,7 @@ class MaterialPackageProxy(PackageProxy):
         self.overwrite_output_material_module()
         output_material_module_proxy = self.output_material_module_proxy
         pair = self.output_material_module_import_statements_and_output_material_module_body_lines
+        self.debug(pair, 'pair')
         output_material_module_import_statements, output_material_module_body_lines = pair
         output_material_module_import_statements = [x + '\n' for x in output_material_module_import_statements]
         output_material_module_proxy.setup_statements = output_material_module_import_statements
