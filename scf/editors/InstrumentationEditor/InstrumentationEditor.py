@@ -1,3 +1,4 @@
+from abjad.tools import scoretools
 from abjad.tools import sequencetools
 from baca.scf.editors.InteractiveEditor import InteractiveEditor
 from baca.scf.editors.PerformerEditor import PerformerEditor
@@ -21,8 +22,15 @@ class InstrumentationEditor(InteractiveEditor):
 
     @property
     def target_class(self):
-        from abjad.tools import scoretools
         return scoretools.InstrumentationSpecifier
+
+    #target_class = scoretools.InstrumentationSpecifier
+
+    target_item_class = scoretools.Performer
+
+    @property
+    def target_items(self):
+        return self.target.performers
 
     ### PUBLIC METHODS ###
 
@@ -33,10 +41,8 @@ class InstrumentationEditor(InteractiveEditor):
         while True:
             if self.backtrack():
                 return
-            #self.push_backtrack()
             self.push_backtrack()
             performer_names = self.select_performer_names_interactively()
-            #self.pop_backtrack()
             self.pop_backtrack()
             if self.backtrack():
                 return
@@ -61,6 +67,7 @@ class InstrumentationEditor(InteractiveEditor):
                     continue
                 break
 
+    # TODO: abstract up to ListEditor.delete_items_interactively
     def delete_performers_interactively(self):
         getter = self.make_new_getter(where=self.where())
         getter.append_argument_range('performers', self.summary_lines)
