@@ -29,15 +29,12 @@ class PerformerEditor(InteractiveEditor):
             self.target.instruments[0].instrument_name:
             result = '{}'.format(self.target.name)
         else:
-            #instruments = ', '.join([x.instrument_name for x in self.target.instruments])
             instruments = ', '.join(self.instrument_names)
             result = '{} ({})'.format(self.target.name, instruments)
         result = [result]
         return result
 
-    @property
-    def target_class(self):
-        return scoretools.Performer
+    target_class = scoretools.Performer
 
     ### PUBLIC METHODS ###
 

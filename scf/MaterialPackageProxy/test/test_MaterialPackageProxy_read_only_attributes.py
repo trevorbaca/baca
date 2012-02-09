@@ -115,7 +115,7 @@ def test_MaterialPackageProxy_read_only_attributes_02():
         '/Users/trevorbaca/Documents/other/baca/materials'
     assert     mpp.materials_package_importable_name == 'baca.materials'
     assert     measuretools.all_are_measures(mpp.output_material)
-    assert     mpp.output_material_module_body_lines is not None
+    assert     mpp.output_material_module_body_lines is None
     assert     mpp.output_material_module_file_name == \
         '/Users/trevorbaca/Documents/other/baca/materials/red_sargasso/output_material.py'
     assert     mpp.output_material_module_importable_name == \

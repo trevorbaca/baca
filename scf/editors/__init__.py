@@ -3,3 +3,4 @@ from InstrumentationEditor import InstrumentationEditor
 from InteractiveEditor import InteractiveEditor
 from PerformerEditor import PerformerEditor
 from PitchRangeEditor import PitchRangeEditor
+from PitchRangeInventoryEditor import PitchRangeInventoryEditor

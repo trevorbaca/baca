@@ -87,6 +87,10 @@ class MaterialPackageProxy(PackageProxy):
         return False
 
     @property
+    def has_output_material_editor(self):
+        return hasattr(self, 'output_material_editor')
+
+    @property
     def has_output_material_module(self):
         if self.should_have_output_material_module:
             return os.path.exists(self.output_material_module_file_name)
@@ -312,12 +316,19 @@ class MaterialPackageProxy(PackageProxy):
     def output_material_module_import_statements_and_output_material_module_body_lines(self):
         if self.should_have_material_definition_module:
             pair = self.output_material_module_import_statements_and_material_definition
-            output_material_module_import_statements, material_definition = pair
-            output_material_module_body_lines = []
-            output_material_module_body_lines.append('{} = {!r}'.format(
-                self.material_underscored_name, material_definition))
-            return output_material_module_import_statements, output_material_module_body_lines
-            
+            output_material_module_import_statements, output_material = pair
+        elif self.has_material_package_maker:
+            output_material_module_import_statements = self.output_material_module_import_statements
+            output_material = self.make_output_material_from_user_input_wrapper_in_memory()
+        else:
+            raise ValueError
+        if hasattr(self, 'make_output_material_module_body_lines'):
+            output_material_module_body_lines = self.make_output_material_module_body_lines(output_material)
+        else:
+            line = '{} = {!r}'.format(self.material_underscored_name, output_material)
+            output_material_module_body_lines = [line]
+        return output_material_module_import_statements, output_material_module_body_lines
+
     @property
     def output_material_module_file_name(self): 
         if self.should_have_output_material_module:
@@ -459,6 +470,26 @@ class MaterialPackageProxy(PackageProxy):
         if self.has_user_input_module:
             self.user_input_module_proxy.remove(prompt=prompt)
 
+    def edit_output_material_interactively(self):
+        if not self.has_output_material_editor:
+            return
+        if self.has_output_material:
+            target = self.output_material
+        else:
+            target = None
+        output_material_editor = self.output_material_editor(target=target, session=self.session)
+        output_material_editor.run()
+        output_material_module_import_statements = self.output_material_module_import_statements
+        if hasattr(self, 'make_output_material_module_body_lines'):
+            output_material_module_body_lines = self.make_output_material_module_body_lines(
+                output_material_editor.target)
+        else:
+            line = '{} = {!r}'.format(self.material_underscored_name, output_material_editor.target)
+            output_material_module_body_lines = [line]
+        self.write_output_material_to_disk(
+            output_material_module_import_statements=output_material_module_import_statements,
+            output_material_module_body_lines=output_material_module_body_lines)
+
     # TODO: audit
     def handle_main_menu_result(self, result):
         assert isinstance(result, str)
@@ -506,6 +537,8 @@ class MaterialPackageProxy(PackageProxy):
             self.manage_stylesheets()
         elif result == 'omm':
             self.write_output_material_to_disk()
+        elif result == 'omi':
+            self.edit_output_material_interactively()
         elif result == 'omcanned':
             self.output_material_module_proxy.write_canned_file_to_disk(prompt=True)
         elif result == 'omdelete':
@@ -641,12 +674,25 @@ class MaterialPackageProxy(PackageProxy):
         if not self.has_readable_initializer:
             return
         has_output_material_section = False
-        if self.has_readable_material_definition_module:
-            if self.has_material_definition or self.has_complete_user_input_wrapper_on_disk:
+        if self.has_readable_material_definition_module or \
+            self.has_complete_user_input_wrapper_in_memory or \
+            self.has_output_material_editor:
+            if self.has_material_definition or \
+                self.has_complete_user_input_wrapper_in_memory:
                 section = main_menu.make_new_section()
                 if self.has_output_material_module and not self.has_readable_output_material_module:
                     section.section_title = '(Note: has invalid output material module.)'
                 section.append(('omm', 'output material - make'))
+                has_output_material_section = True
+            if self.has_output_material_editor:
+                section = main_menu.make_new_section()
+                if self.has_output_material:
+                    output_material_editor = self.output_material_editor(
+                        target=self.output_material, session=self.session)
+                    summary_lines = output_material_editor.summary_lines
+                    if summary_lines:
+                        section.section_title = summary_lines
+                section.append(('omi', 'output material - interact'))
                 has_output_material_section = True
             if self.has_output_material_module:
                 if not has_output_material_section:
@@ -803,20 +849,21 @@ class MaterialPackageProxy(PackageProxy):
         iotools.write_expr_to_pdf(illustration, self.illustration_pdf_file_name, print_status=False)
         self.proceed(['PDF written to disk.'], prompt=prompt)
 
-    def write_output_material_to_disk(self, prompt=True):
+    def write_output_material_to_disk(self, output_material_module_import_statements=None, 
+        output_material_module_body_lines=None, prompt=True):
         self.remove_material_from_materials_initializer()
         self.overwrite_output_material_module()
         output_material_module_proxy = self.output_material_module_proxy
-        pair = self.output_material_module_import_statements_and_output_material_module_body_lines
-        output_material_module_import_statements, output_material_module_body_lines = pair
+        if not output_material_module_import_statements or not output_material_module_body_lines:
+            pair = self.output_material_module_import_statements_and_output_material_module_body_lines
+            output_material_module_import_statements, output_material_module_body_lines = pair
         output_material_module_import_statements = [x + '\n' for x in output_material_module_import_statements]
         output_material_module_proxy.setup_statements = output_material_module_import_statements
         output_material_module_proxy.body_lines[:] = output_material_module_body_lines
         output_material_module_proxy.write_to_disk()
         self.add_material_to_materials_initializer()
         self.add_material_to_material_initializer()
-        line = 'output material written to disk.'
-        self.proceed(line, prompt=prompt)
+        self.proceed('output material written to disk.', prompt=prompt)
 
     def write_stub_material_definition_module_to_disk(self, prompt=True):
         if self.should_have_material_definition_module:
