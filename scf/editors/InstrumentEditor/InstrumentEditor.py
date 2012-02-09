@@ -17,9 +17,7 @@ class InstrumentEditor(InteractiveEditor):
         else:
             return 'instrument editor'
 
-    @property
-    def target_attribute_tuples(self):
-        return (
+    target_attribute_tuples = (
             ('instrument_name', predicates.is_string, True, None),
             ('instrument_name_markup', predicates.is_markup, True, None), 
             ('short_instrument_name',  predicates.is_string, True, None),

@@ -11,9 +11,7 @@ class PitchRangeEditor(InteractiveEditor):
     def breadcrumb(self):
         return 'pitch range editor'
 
-    @property
-    def target_attribute_tuples(self):
-        return (
+    target_attribute_tuples = (
             ('start_pitch', predicates.is_named_chromatic_pitch, False, None),
             ('start_pitch_is_included_in_range', predicates.is_boolean, False, True),
             ('stop_pitch', predicates.is_named_chromatic_pitch, False, None),
