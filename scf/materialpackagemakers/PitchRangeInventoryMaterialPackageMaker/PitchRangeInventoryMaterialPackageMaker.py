@@ -1,7 +1,7 @@
 from abjad.tools import pitchtools
 from baca.scf.MaterialPackageMaker import MaterialPackageMaker
 from make_illustration_from_output_material import make_illustration_from_output_material
-import baca
+from baca.scf.editors.PitchRangeInventoryEditor import PitchRangeInventoryEditor
 
 
 class PitchRangeInventoryMaterialPackageMaker(MaterialPackageMaker):
@@ -17,6 +17,8 @@ class PitchRangeInventoryMaterialPackageMaker(MaterialPackageMaker):
     illustration_maker = staticmethod(make_illustration_from_output_material)
 
     output_material_checker = staticmethod(lambda x: isinstance(x, pitchtools.PitchRangeInventory))
+
+    output_material_editor = PitchRangeInventoryEditor
 
     output_material_maker = pitchtools.PitchRangeInventory
 

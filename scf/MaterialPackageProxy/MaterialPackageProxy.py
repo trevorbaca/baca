@@ -87,6 +87,10 @@ class MaterialPackageProxy(PackageProxy):
         return False
 
     @property
+    def has_output_material_editor(self):
+        return hasattr(self, 'output_material_editor')
+
+    @property
     def has_output_material_module(self):
         if self.should_have_output_material_module:
             return os.path.exists(self.output_material_module_file_name)
@@ -466,6 +470,15 @@ class MaterialPackageProxy(PackageProxy):
         if self.has_user_input_module:
             self.user_input_module_proxy.remove(prompt=prompt)
 
+    def edit_output_material_interactively(self):
+        if not self.has_output_material_editor:
+            return
+        if self.has_output_material_module:
+            self.print_not_implemented()
+        else:
+            output_material_editor = self.output_material_editor(session=self.session)
+            output_material_editor.run()
+
     # TODO: audit
     def handle_main_menu_result(self, result):
         assert isinstance(result, str)
@@ -513,6 +526,8 @@ class MaterialPackageProxy(PackageProxy):
             self.manage_stylesheets()
         elif result == 'omm':
             self.write_output_material_to_disk()
+        elif result == 'omi':
+            self.edit_output_material_interactively()
         elif result == 'omcanned':
             self.output_material_module_proxy.write_canned_file_to_disk(prompt=True)
         elif result == 'omdelete':
@@ -648,13 +663,19 @@ class MaterialPackageProxy(PackageProxy):
         if not self.has_readable_initializer:
             return
         has_output_material_section = False
-        if self.has_readable_material_definition_module or self.has_complete_user_input_wrapper_in_memory:
-            #if self.has_material_definition or self.has_complete_user_input_wrapper_on_disk:
-            if self.has_material_definition or self.has_complete_user_input_wrapper_in_memory:
+        if self.has_readable_material_definition_module or \
+            self.has_complete_user_input_wrapper_in_memory or \
+            self.has_output_material_editor:
+            if self.has_material_definition or \
+                self.has_complete_user_input_wrapper_in_memory:
                 section = main_menu.make_new_section()
                 if self.has_output_material_module and not self.has_readable_output_material_module:
                     section.section_title = '(Note: has invalid output material module.)'
                 section.append(('omm', 'output material - make'))
+                has_output_material_section = True
+            if self.has_output_material_editor:
+                section = main_menu.make_new_section()
+                section.append(('omi', 'output material - interact'))
                 has_output_material_section = True
             if self.has_output_material_module:
                 if not has_output_material_section:
@@ -816,7 +837,6 @@ class MaterialPackageProxy(PackageProxy):
         self.overwrite_output_material_module()
         output_material_module_proxy = self.output_material_module_proxy
         pair = self.output_material_module_import_statements_and_output_material_module_body_lines
-        self.debug(pair, 'pair')
         output_material_module_import_statements, output_material_module_body_lines = pair
         output_material_module_import_statements = [x + '\n' for x in output_material_module_import_statements]
         output_material_module_proxy.setup_statements = output_material_module_import_statements

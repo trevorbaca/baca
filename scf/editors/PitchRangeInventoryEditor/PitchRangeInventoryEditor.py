@@ -1,4 +1,5 @@
 from abjad.tools import pitchtools
+from abjad.tools import sequencetools
 from baca.scf.editors.InteractiveEditor import InteractiveEditor
 from baca.scf.editors.PitchRangeEditor import PitchRangeEditor
 from baca.scf.menuing.UserInputGetter import UserInputGetter
@@ -8,7 +9,6 @@ class PitchRangeInventoryEditor(InteractiveEditor):
 
     ### READ-ONLY PUBLIC ATTRIBUTES ###
 
-    # TODO: maybe make into class attribute?
     @property
     def breadcrumb(self):
         return 'pitch-range inventory'
@@ -17,8 +17,7 @@ class PitchRangeInventoryEditor(InteractiveEditor):
     def summary_lines(self):
         result = []
         for pitch_range in self.target:
-            pitch_range_editor = PitchRangeEditor(session=self.sesion, target=pitch_range)
-            result.extend(pitch_range_editor.summary_lines)
+            result.append(repr(pitch_range))
         return result
 
     target_class = pitchtools.PitchRangeInventory
@@ -29,18 +28,20 @@ class PitchRangeInventoryEditor(InteractiveEditor):
 
     target_item_editor_class = PitchRangeEditor
 
+    target_item_identifier = 'pitch range'
+
     @property
     def target_items(self):
         return self.target
 
-    target_items_label = 'pitch ranges'
+    target_items_identifier = 'pitch ranges'
 
     ### PUBLIC METHODS ####
 
     # TODO: abstract up to ListEditor.add_item_interactively()
     def add_target_item_interactively(self):
         getter = self.make_new_getter(where=self.where())
-        self.target_item_getter_configuration_method(getter)
+        self.target_item_getter_configuration_method(getter, self.target_item_identifier)
         self.push_backtrack()
         target_item_initialization_token = getter.run()
         self.pop_backtrack()
@@ -51,8 +52,8 @@ class PitchRangeInventoryEditor(InteractiveEditor):
 
     # TODO: abstract up to ListEditor.delete_items_interactively()
     def delete_target_items_interactively(self):
-        getter = make_new_getter(where=self.where())
-        getter.append_argument_range('pitch ranges', self.summary_lines)
+        getter = self.make_new_getter(where=self.where())
+        getter.append_argument_range(self.target_items_identifier, self.summary_lines)
         argument_range = getter.run()
         if self.backtrack():
             return
@@ -95,11 +96,11 @@ class PitchRangeInventoryEditor(InteractiveEditor):
         section.tokens = self.summary_lines
         section.return_value_attribute = 'number'
         section = menu.make_new_section(is_keyed=False)
-        section.append(('add', 'add {}'.format(self.target_items_label)))
-        if 0 < self.target.performer_count:
-            section.append(('del', 'delete {}'.format(self.target_items_label)))
-        if 1 < self.target.performer_count:
-            section.append(('mv', 'move {}'.format(self.target_items_label)))
+        section.append(('add', 'add {}'.format(self.target_item_identifier)))
+        if 0 < len(self.target_items):
+            section.append(('del', 'delete {}'.format(self.target_items_identifier)))
+        if 1 < len(self.target_items):
+            section.append(('mv', 'move {}'.format(self.target_items_identifier)))
         return menu
 
     # TODO: abstract up to ListEditor.edit_item_interactively()
