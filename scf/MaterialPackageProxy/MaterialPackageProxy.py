@@ -685,14 +685,13 @@ class MaterialPackageProxy(PackageProxy):
                 section.append(('omm', 'output material - make'))
                 has_output_material_section = True
             if self.has_output_material_editor:
+                section = main_menu.make_new_section()
                 if self.has_output_material:
                     output_material_editor = self.output_material_editor(
                         target=self.output_material, session=self.session)
                     summary_lines = output_material_editor.summary_lines
                     if summary_lines:
-                        section = main_menu.make_new_section(is_keyed=False)
-                        section._tokens[:] = summary_lines
-                section = main_menu.make_new_section()
+                        section.section_title = summary_lines
                 section.append(('omi', 'output material - interact'))
                 has_output_material_section = True
             if self.has_output_material_module:

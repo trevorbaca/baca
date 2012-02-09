@@ -159,7 +159,7 @@ class MenuSection(MenuObject):
         def fget(self):
             return self._section_title
         def fset(self, section_title):
-            assert isinstance(section_title, (str, type(None)))
+            assert isinstance(section_title, (str, list, type(None)))
             self._section_title = section_title
         return property(**locals())
 
@@ -317,10 +317,15 @@ class MenuSection(MenuObject):
 
     def make_section_title_lines(self):
         menu_lines = []
-        if self.section_title:
-            menu_line = '{} {}'.format(
-                self.make_tab(self.indent_level), iotools.capitalize_string_start(self.section_title))
-            menu_lines.append(menu_line)
+        if isinstance(self.section_title, str):
+            section_title_lines = [iotools.capitalize_string_start(self.section_title)]
+        elif isinstance(self.section_title, list):
+            section_title_lines = self.section_title
+        else:
+            section_title_lines = []
+        for section_title_line in section_title_lines:
+            menu_lines.append('{} {}'.format(self.make_tab(self.indent_level), section_title_line))
+        if menu_lines:
             menu_lines.append('')
         return menu_lines
 
