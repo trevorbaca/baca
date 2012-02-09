@@ -20,11 +20,7 @@ class InstrumentationEditor(InteractiveEditor):
             result.extend(performer_editor.summary_lines)
         return result
 
-    @property
-    def target_class(self):
-        return scoretools.InstrumentationSpecifier
-
-    #target_class = scoretools.InstrumentationSpecifier
+    target_class = scoretools.InstrumentationSpecifier
 
     target_item_class = scoretools.Performer
 

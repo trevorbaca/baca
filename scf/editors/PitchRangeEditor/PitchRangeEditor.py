@@ -19,9 +19,7 @@ class PitchRangeEditor(InteractiveEditor):
             ('stop_pitch', predicates.is_named_chromatic_pitch, False, None),
             ('stop_pitch_is_included_in_range', predicates.is_boolean, False, True),)
 
-    @property
-    def target_class(self):
-        return pitchtools.PitchRange
+    target_class = pitchtools.PitchRange
 
     ### PUBLIC METHODS ###
 

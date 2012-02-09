@@ -1,3 +1,4 @@
+from abjad.tools.instrumenttools._Instrument import _Instrument
 from abjad.tools import instrumenttools
 from baca.scf.editors.InteractiveEditor import InteractiveEditor
 from baca.scf import predicates
@@ -24,10 +25,7 @@ class InstrumentEditor(InteractiveEditor):
             ('short_instrument_name',  predicates.is_string, True, None),
             ('short_instrument_name_markup', predicates.is_markup, True, None),)
             
-    @property
-    def target_class(self):
-        from abjad.tools.instrumenttools._Instrument import _Instrument
-        return _Instrument
+    target_class = _Instrument
 
     ### PUBLIC METHODS ###
 
