@@ -473,11 +473,22 @@ class MaterialPackageProxy(PackageProxy):
     def edit_output_material_interactively(self):
         if not self.has_output_material_editor:
             return
-        if self.has_output_material_module:
-            self.print_not_implemented()
+        if self.has_output_material:
+            target = self.output_material
         else:
-            output_material_editor = self.output_material_editor(session=self.session)
-            output_material_editor.run()
+            target = None
+        output_material_editor = self.output_material_editor(target=target, session=self.session)
+        output_material_editor.run()
+        output_material_module_import_statements = self.output_material_module_import_statements
+        if hasattr(self, 'make_output_material_module_body_lines'):
+            output_material_module_body_lines = self.make_output_material_module_body_lines(
+                output_material_editor.target)
+        else:
+            line = '{} = {!r}'.format(self.material_underscored_name, output_material_editor.target)
+            output_material_module_body_lines = [line]
+        self.write_output_material_to_disk(
+            output_material_module_import_statements=output_material_module_import_statements,
+            output_material_module_body_lines=output_material_module_body_lines)
 
     # TODO: audit
     def handle_main_menu_result(self, result):
@@ -674,6 +685,13 @@ class MaterialPackageProxy(PackageProxy):
                 section.append(('omm', 'output material - make'))
                 has_output_material_section = True
             if self.has_output_material_editor:
+                if self.has_output_material:
+                    output_material_editor = self.output_material_editor(
+                        target=self.output_material, session=self.session)
+                    summary_lines = output_material_editor.summary_lines
+                    if summary_lines:
+                        section = main_menu.make_new_section(is_keyed=False)
+                        section._tokens[:] = summary_lines
                 section = main_menu.make_new_section()
                 section.append(('omi', 'output material - interact'))
                 has_output_material_section = True
@@ -832,20 +850,21 @@ class MaterialPackageProxy(PackageProxy):
         iotools.write_expr_to_pdf(illustration, self.illustration_pdf_file_name, print_status=False)
         self.proceed(['PDF written to disk.'], prompt=prompt)
 
-    def write_output_material_to_disk(self, prompt=True):
+    def write_output_material_to_disk(self, output_material_module_import_statements=None, 
+        output_material_module_body_lines=None, prompt=True):
         self.remove_material_from_materials_initializer()
         self.overwrite_output_material_module()
         output_material_module_proxy = self.output_material_module_proxy
-        pair = self.output_material_module_import_statements_and_output_material_module_body_lines
-        output_material_module_import_statements, output_material_module_body_lines = pair
+        if not output_material_module_import_statements or not output_material_module_body_lines:
+            pair = self.output_material_module_import_statements_and_output_material_module_body_lines
+            output_material_module_import_statements, output_material_module_body_lines = pair
         output_material_module_import_statements = [x + '\n' for x in output_material_module_import_statements]
         output_material_module_proxy.setup_statements = output_material_module_import_statements
         output_material_module_proxy.body_lines[:] = output_material_module_body_lines
         output_material_module_proxy.write_to_disk()
         self.add_material_to_materials_initializer()
         self.add_material_to_material_initializer()
-        line = 'output material written to disk.'
-        self.proceed(line, prompt=prompt)
+        self.proceed('output material written to disk.', prompt=prompt)
 
     def write_stub_material_definition_module_to_disk(self, prompt=True):
         if self.should_have_material_definition_module:

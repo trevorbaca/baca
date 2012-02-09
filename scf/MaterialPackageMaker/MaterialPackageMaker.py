@@ -113,8 +113,7 @@ class MaterialPackageMaker(MaterialPackageProxy):
         hidden_section.append(('uimdelete', 'user input module - delete'))
 
     def make_main_menu_sections(self, menu, hidden_section):
-        #if not self.has_output_material_editor:
-        if True:
+        if not self.has_output_material_editor:
             self.make_main_menu_section_for_user_input_module(menu, hidden_section)
         self.make_main_menu_section_for_output_material(menu, hidden_section)
 

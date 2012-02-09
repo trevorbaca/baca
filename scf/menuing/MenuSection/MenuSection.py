@@ -3,12 +3,11 @@ from abjad.tools import mathtools
 from baca.scf.menuing.MenuObject import MenuObject
 
 
-# TODO: limit section to only one type of token: either string or tuple
-# TODO: implement has_string_tokens, has_tuple_tokens attributes.
+# TODO: implement is_read_only keyword for read-only menu sections
 class MenuSection(MenuObject):
 
     def __init__(self, is_hidden=False, is_keyed=True, is_numbered=False, is_ranged=False,
-        session=None, where=None):
+        is_read_only=False, session=None, where=None):
         MenuObject.__init__(self, session=session, where=where)
         self._indent_level = 1
         self._is_hidden = is_hidden
@@ -64,6 +63,10 @@ class MenuSection(MenuObject):
     @property
     def is_ranged(self):
         return self._is_ranged
+
+    @property
+    def is_read_only(self):
+        return self._is_read_only
 
     @property
     def menu_entry_bodies(self):
