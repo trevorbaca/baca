@@ -7,7 +7,9 @@ import os
 class StylesheetWrangler(PackageWrangler):
 
     def __init__(self, session=None):
-        PackageWrangler.__init__(self, self.stylesheets_package_importable_name, session=session)
+        PackageWrangler.__init__(self, 
+            toplevel_global_package_importable_name=self.stylesheets_package_importable_name, 
+            session=session)
 
     ### READ-ONLY PUBLIC ATTRIBUTES ###
 
@@ -28,22 +30,22 @@ class StylesheetWrangler(PackageWrangler):
 
     def handle_main_menu_result(self, result):
         if result == 'new':
-            self.make_new_stylesheet_interactively()
+            self.make_stylesheet_interactively()
         else:
             stylesheet_file_name = os.path.join(self.stylesheets_directory_name, result)  
             stylesheet_proxy = StylesheetFileProxy(stylesheet_file_name, session=self.session)
             stylesheet_proxy.run()
          
     def make_main_menu(self):
-        menu, section = self.make_new_menu(where=self.where(), is_numbered=True)
+        menu, section = self.make_menu(where=self.where(), is_parenthetically_numbered=True)
         section.tokens = self.stylesheet_file_names
-        section = menu.make_new_section()
-        section.append(('new', 'make new stylesheet'))
+        section = menu.make_section()
+        section.append(('new', 'new stylesheet'))
         return menu
 
     # TODO: write test
-    def make_new_stylesheet_interactively(self):
-        getter = self.make_new_getter()
+    def make_stylesheet_interactively(self):
+        getter = self.make_getter(where=self.where())
         getter.append_string('stylesheet name')
         stylesheet_name = getter.run()
         if self.backtrack():
@@ -52,9 +54,8 @@ class StylesheetWrangler(PackageWrangler):
         if not stylesheet_name.endswith('.ly'):
             stylesheet_name = stylesheet_name + '.ly'
         stylesheet_file_name = os.path.join(self.stylesheets_directory_name, stylesheet_name)
-        #self.edit_stylesheet(stylesheet_file_name)
         stylesheet_proxy = StylesheetFileProxy(stylesheet_file_name, session=self.session)
-        stylesheet_proxy.edit_stylesheet()
+        stylesheet_proxy.edit()
 
     def run(self, user_input=None, clear=True, cache=False):
         self.assign_user_input(user_input=user_input)
@@ -78,21 +79,19 @@ class StylesheetWrangler(PackageWrangler):
     # TODO: write test
     def select_stylesheet_file_name_interactively(self, clear=True, cache=False):
         self.cache_breadcrumbs(cache=cache)
-        menu, section = self.make_new_menu(where=self.where(), is_numbered=True)
+        menu, section = self.make_menu(where=self.where(), is_parenthetically_numbered=True)
         section.tokens = self.stylesheet_file_names
         while True:
             self.push_breadcrumb('select stylesheet')
             result = menu.run(clear=clear)
             if self.backtrack():
-                self.pop_breadcrumb()
-                self.restore_breadcrumbs(cache=cache)
-                return
+                break
             elif not result:
                 self.pop_breadcrumb()
                 continue
             else:
-                self.pop_breadcrumb()
                 break
+        self.pop_breadcrumb()
         self.restore_breadcrumbs(cache=cache)
         result = os.path.join(self.stylesheets_directory_name, result)
         return result

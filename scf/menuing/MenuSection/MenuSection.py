@@ -3,21 +3,23 @@ from abjad.tools import mathtools
 from baca.scf.menuing.MenuObject import MenuObject
 
 
-# TODO: implement is_read_only keyword for read-only menu sections
 class MenuSection(MenuObject):
 
-    def __init__(self, is_hidden=False, is_keyed=True, is_numbered=False, is_ranged=False,
-        is_read_only=False, session=None, where=None):
-        MenuObject.__init__(self, session=session, where=where)
-        self._indent_level = 1
+    def __init__(self, is_hidden=False, is_internally_keyed=False, is_keyed=True, 
+        is_numbered=False, is_parenthetically_numbered=False, is_ranged=False, 
+        is_read_only=False, session=None, where=None, title=None):
+        MenuObject.__init__(self, session=session, where=where, title=title)
         self._is_hidden = is_hidden
+        self._is_internally_keyed = is_internally_keyed
         self._is_keyed = is_keyed
         self._is_numbered = is_numbered
+        self._is_parenthetically_numbered = is_parenthetically_numbered
         self._is_ranged = is_ranged
         self._return_value_attribute = 'key'
-        self.tokens = None
         self.default_index = None
-        self.section_title = None
+        self.indent_level = 1
+        self.show_existing_values = False
+        self.tokens = None
 
     ### OVERLOADS ###
 
@@ -37,6 +39,10 @@ class MenuSection(MenuObject):
         return self.default_index is not None
 
     @property
+    def has_existing_value_tuple_tokens(self):
+        return any([isinstance(x, tuple) and len(tuple) == 3 for x in self.tokens])
+
+    @property
     def has_string_tokens(self):
         return any([isinstance(x, str) for x in self.tokens])
 
@@ -45,12 +51,12 @@ class MenuSection(MenuObject):
         return any([isinstance(x, tuple) for x in self.tokens])
 
     @property
-    def indent_level(self):
-        return self._indent_level
-
-    @property
     def is_hidden(self):
         return self._is_hidden
+
+    @property
+    def is_internally_keyed(self):
+        return self._is_internally_keyed
 
     @property
     def is_keyed(self):
@@ -59,6 +65,10 @@ class MenuSection(MenuObject):
     @property
     def is_numbered(self):
         return self._is_numbered
+
+    @property
+    def is_parenthetically_numbered(self):
+        return self._is_parenthetically_numbered
 
     @property
     def is_ranged(self):
@@ -80,6 +90,7 @@ class MenuSection(MenuObject):
     def menu_entry_return_values(self):
         return [self.token_to_menu_entry_return_value(x) for x in self.tokens]
 
+    # TODO: rename these two properties to something more sensible when testing resumes
     @property
     def unpacked_menu_entries(self):
         result = []
@@ -87,18 +98,20 @@ class MenuSection(MenuObject):
             result.append(self.unpack_token(token) + (self,))
         return result
 
-    # TODO: this can work fine as a generator
+    # TODO: rename these two properties to something more sensible when testing resumes
     @property
     def unpacked_menu_entries_optimized(self):
         result = []
         for i, token in enumerate(self.tokens):
             number = key = body = None
-            if self.is_numbered:
+            if self.is_numbered or self.is_parenthetically_numbered:
                 number = i + 1
             if isinstance(token, str):
                 body = token
-            elif isinstance(token, tuple):
+            elif isinstance(token, tuple) and len(token) == 2:
                 key, body = token
+            elif isinstance(token, tuple) and len(token) == 3:
+                key, body, existing_value = token
             else:
                 raise ValueError
             assert body
@@ -106,7 +119,6 @@ class MenuSection(MenuObject):
                 key = body
             if self.return_value_attribute == 'number':
                 if number is not None:
-                    #return_value = number
                     return_value = str(number)
                 elif key is not None:
                     return_value = key
@@ -152,15 +164,6 @@ class MenuSection(MenuObject):
         def fset(self, return_value_attribute):
             assert return_value_attribute in ('body', 'key', 'number')
             self._return_value_attribute = return_value_attribute
-        return property(**locals())
-
-    @apply
-    def section_title():
-        def fget(self):
-            return self._section_title
-        def fset(self, section_title):
-            assert isinstance(section_title, (str, list, type(None)))
-            self._section_title = section_title
         return property(**locals())
 
     @apply
@@ -272,7 +275,8 @@ class MenuSection(MenuObject):
     def is_token(self, expr):
         if isinstance(expr, str):
             return True
-        elif isinstance(expr, tuple) and len(expr) == 2:
+        #elif isinstance(expr, tuple) and len(expr) == 2:
+        elif isinstance(expr, tuple) and len(expr) in (2, 3):
             return True
         return False
         
@@ -298,37 +302,34 @@ class MenuSection(MenuObject):
         Nonkeyed entries (always numbered) supply body as return value.
         '''
         menu_lines = []
-        menu_lines.extend(self.make_section_title_lines())
+        menu_lines.extend(self.make_title_lines())
         assert all([self.is_token(x) for x in self.tokens])
         for entry_index, token in enumerate(self.tokens):
-            key, body = self.token_to_key_and_body(token)
+            #key, body = self.token_to_key_and_body(token)
+            key, body, existing_value = self.token_to_key_body_and_existing_value(token)
             menu_line = self.make_tab(self.indent_level) + ' '
-            if self.is_numbered:
+            if self.is_parenthetically_numbered:
+                entry_number = entry_index + 1
+                menu_line += '({}) '.format(str(entry_number))
+            elif self.is_numbered:
                 entry_number = entry_index + 1
                 menu_line += '{}: '.format(str(entry_number))
             if key and self.is_keyed:
-                menu_line += '{} ({})'.format(body, key)
+                if self.show_existing_values:
+                    menu_line += '{} ({}): {}'.format(body, key, existing_value)
+                else:
+                    menu_line += '{} ({})'.format(body, key)
             else:
-                menu_line += '{}'.format(body)
+                if self.show_existing_values:
+                    menu_line += '{}: {}'.format(body, existing_value)
+                else:
+                    menu_line += '{}'.format(body)
             menu_lines.append(menu_line)
         if self.tokens:
             menu_lines.append('')
         return menu_lines
 
-    def make_section_title_lines(self):
-        menu_lines = []
-        if isinstance(self.section_title, str):
-            section_title_lines = [iotools.capitalize_string_start(self.section_title)]
-        elif isinstance(self.section_title, list):
-            section_title_lines = self.section_title
-        else:
-            section_title_lines = []
-        for section_title_line in section_title_lines:
-            menu_lines.append('{} {}'.format(self.make_tab(self.indent_level), section_title_line))
-        if menu_lines:
-            menu_lines.append('')
-        return menu_lines
-
+    # TODO: this can probably deprecate in favor of self.token_to_key_body_and_existing_value
     def token_to_key_and_body(self, token):
         if isinstance(token, str):
             key, body = None, token
@@ -338,8 +339,19 @@ class MenuSection(MenuObject):
             raise ValueError
         return key, body
 
+    def token_to_key_body_and_existing_value(self, token):
+        if isinstance(token, str):
+            key, body, existing_value = None, token, None
+        elif isinstance(token, tuple) and len(token) == 2:
+            key, body, existing_value = token[0], token[1], None
+        elif isinstance(token, tuple) and len(token) == 3:
+            key, body, existing_value = token
+        else:
+            raise ValueError
+        return key, body, existing_value
+
     def token_to_menu_entry_number(self, token):
-        if self.is_numbered:
+        if self.is_numbered or self.is_parenthetically_numbered:
             for i, x in enumerate(self.tokens):
                 if x == token:
                     return i + 1

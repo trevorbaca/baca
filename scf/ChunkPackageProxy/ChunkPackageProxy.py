@@ -1,3 +1,4 @@
+from abjad.tools import iotools
 from baca.scf.PackageProxy import PackageProxy
 
 
@@ -49,15 +50,15 @@ class ChunkPackageProxy(PackageProxy):
         self.proceed(line, prompt=prompt)
 
     def make_main_menu(self):
-        menu, section = self.make_new_menu(where=self.where())
+        menu, section = self.make_menu(where=self.where())
         section.append(('n', 'initializer'))
-        section = menu.make_new_section()
+        section = menu.make_section()
         section.append(('d', 'delete'))
         return menu
 
     def run(self, user_input=None, clear=True, cache=False):
         self.assign_user_input(user_input=user_input)
-        self.cachce_breadcrumbs(cache=cache)
+        self.cache_breadcrumbs(cache=cache)
         while True:
             self.push_breadcrumb()
             menu = self.make_main_menu()
@@ -75,7 +76,7 @@ class ChunkPackageProxy(PackageProxy):
         self.restore_breadcrumbs(cache=cache)
 
     def set_chunk_spaced_name_interactively(self, prompt=True):
-        getter = self.make_new_getter(where=self.where())
+        getter = self.make_getter(where=self.where())
         # TODO: implement getter.append_space_delimited_lowercase_string
         getter.prompts.append('chunk name')
         getter.tests.append(iotools.is_space_delimited_lowercase_string)
@@ -84,7 +85,7 @@ class ChunkPackageProxy(PackageProxy):
         if self.backtrack():
             return
         package_short_name = result.replace(' ', '_')
-        package_importable_name = '.'.join([self.package_importable_name, package_short_name])
+        package_importable_name = self.dot_join([self.package_importable_name, package_short_name])
         chunk_proxy = ChunkPackageProxy(package_importable_name)
         chunk_proxy.make_chunk()
         line = 'chunk spaced name set.'

@@ -25,7 +25,7 @@ def test_Studio_02():
     assert studio.transcript[-2] == \
     ['Studio - active scores',
      '',
-     '     1: Betörung',
+     '     1: Betörung (2012)',
      '     2: Čáry (2006)',
      "     3: L'archipel du corps (2011)",
      "     4: L'imaginare (2010)",
@@ -35,9 +35,9 @@ def test_Studio_02():
      '     8: Red Shift Hijinks (2005)',
      '     9: Sekka (2007)',
      '',
-     '     work with materials (m)',
-     '     work with sketches (k)',
-     '     make new score (new)',
+     '     materials (m)',
+     '     sketches (k)',
+     '     new score (new)',
      '']
 
 
@@ -88,9 +88,9 @@ def test_Studio_04():
      '     7: Territoires',
      '     8: Zeit (1998)',
      '',
-     '     work with materials (m)',
-     '     work with sketches (k)',
-     '     make new score (new)',
+     '     materials (m)',
+     '     sketches (k)',
+     '     new score (new)',
      '']
 
 

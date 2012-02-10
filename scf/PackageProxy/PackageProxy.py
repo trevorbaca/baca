@@ -98,7 +98,7 @@ class PackageProxy(DirectoryProxy):
     @property
     def parent_package_importable_name(self):
         if self.package_importable_name is not None:
-            result = '.'.join(self.package_importable_name.split('.')[:-1])
+            result = self.dot_join(self.package_importable_name.split('.')[:-1])
             if result:
                 return result
 
@@ -136,7 +136,7 @@ class PackageProxy(DirectoryProxy):
             self.initializer_file_proxy.write_tags_to_disk(tags)
 
     def add_tag_interactively(self):
-        getter = self.make_new_getter(where=self.where())
+        getter = self.make_getter(where=self.where())
         getter.append_string('tag name')
         getter.append_string('tag value')
         result = getter.run()
@@ -146,13 +146,13 @@ class PackageProxy(DirectoryProxy):
             tag_name, tag_value = result
             self.add_tag(tag_name, tag_value)
 
-    def delete_initializer(self, prompt=True):
+    def remove_initializer(self, prompt=True):
         if self.has_initializer:
             os.remove(self.initializer_file_name)
             line = 'initializer deleted.'
             self.proceed(line, prompt=prompt)
 
-    def delete_tag(self, tag_name):
+    def remove_tag(self, tag_name):
         tags = self.get_tags()
         del(tags[tag_name])
         if self.has_tags_file:
@@ -160,15 +160,15 @@ class PackageProxy(DirectoryProxy):
         else:
             self.initializer_file_proxy.write_tags_to_disk(tags)
 
-    def delete_tag_interactively(self):
-        getter = self.make_new_getter(where=self.where())
+    def remove_tag_interactively(self):
+        getter = self.make_getter(where=self.where())
         getter.append_string('tag name')
         result = getter.run()
         if self.backtrack():
             return
         if result:
             tag_name = result
-            self.delete_tag(tag_name)
+            self.remove_tag(tag_name)
 
     def get_tag(self, tag_name):
         tags = self.get_tags()
@@ -176,7 +176,7 @@ class PackageProxy(DirectoryProxy):
         return tag
 
     def get_tag_interactively(self):
-        getter = self.make_new_getter(where=self.where())
+        getter = self.make_getter(where=self.where())
         getter.append_string('tag name')
         result = getter.run()
         if self.backtrack():
@@ -200,7 +200,7 @@ class PackageProxy(DirectoryProxy):
         if result == 'add':
             self.add_tag_interactively()
         elif result == 'del':
-            self.delete_tag_interactively()
+            self.remove_tag_interactively()
         elif result == 'get':
             self.get_tag_interactively()
         return False
@@ -210,9 +210,9 @@ class PackageProxy(DirectoryProxy):
         return bool(tag_name in tags)
 
     def make_tags_menu(self):
-        menu, section = self.make_new_menu(where=self.where(), is_keyed=False)
+        menu, section = self.make_menu(where=self.where(), is_keyed=False)
         section.tokens = self.formatted_tags
-        section = menu.make_new_section()
+        section = menu.make_section()
         section.append(('add', 'add tag'))
         section.append(('del', 'delete tag'))
         section.append(('get', 'get tag'))
@@ -251,7 +251,7 @@ class PackageProxy(DirectoryProxy):
             self.proceed(line)
         
     def set_package_importable_name_interactively(self):
-        getter = self.make_new_getter(where=self.where())
+        getter = self.make_getter(where=self.where())
         # TODO: implement getter.append_package_name
         getter.prompts.append('package importable name')
         getter.tests.append(iotools.is_underscore_delimited_lowercase_package_name)
@@ -262,7 +262,7 @@ class PackageProxy(DirectoryProxy):
         self.package_importable_name = result
 
     def set_package_spaced_name_interactively(self):
-        getter = self.make_new_getter(where=self.where())
+        getter = self.make_getter(where=self.where())
         # TODO: implement package spaced name
         getter.prompts.append('package spaced name')
         getter.tests.append(iotools.is_space_delimited_lowercase_string)

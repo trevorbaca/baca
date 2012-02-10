@@ -9,7 +9,9 @@ class MaterialPackageWrangler(PackageWrangler):
     def __init__(self, session=None):
         import baca
         PackageWrangler.__init__(self, 
-            self.studio_materials_package_importable_name, 'mus.materials', session=session)
+            toplevel_global_package_importable_name=self.studio_materials_package_importable_name, 
+            toplevel_score_package_importable_name_body=self.score_materials_package_importable_name_body,
+            session=session)
         self._material_package_maker_wrangler = baca.scf.MaterialPackageMakerWrangler(session=self.session)
 
     ### READ-ONLY PUBLIC ATTRIBUTES ###
@@ -21,35 +23,36 @@ class MaterialPackageWrangler(PackageWrangler):
     @property
     def material_package_maker_wrangler(self):
         return self._material_package_maker_wrangler
+
+    # TODO: write test
+    @property
+    def materials_package_importable_name(self):
+        if self.session.is_in_score:
+            score_package_short_name = self.session.current_score_package_short_name
+            return self.dot_join([score_package_short_name, self.toplevel_score_package_importable_name_body])
+        else:
+            return self.toplevel_global_package_importable_name
     
     ### PUBLIC METHODS ###
 
     # TODO: write test
     def get_new_material_package_importable_name_interactively(self):
-        import baca
-        getter = self.make_new_getter(where=self.where())
-        getter.append_underscore_delimited_lowercase_package_name('material name')
-        self.push_backtrack()
-        material_name = getter.run()
-        self.pop_backtrack()
-        if self.backtrack():
-            return
-        material_package_short_name = iotools.string_to_strict_directory_name(material_name)
-        studio = baca.scf.Studio(session=self.session)
-        self.push_backtrack()
-        package_root_name = studio.get_package_root_name_interactively(clear=False)
-        self.pop_backtrack()
-        if self.backtrack():
-            return
-        materials_package_importable_name = \
-            self.package_root_name_to_materials_package_importable_name(package_root_name)
-        material_package_importable_name = '{}.{}'.format(
-            materials_package_importable_name, material_package_short_name)
-        if self.package_exists(material_package_importable_name):
-            line = 'Material package {!r} already exists.'.format(material_package_importable_name)
-            self.proceed(line)
-            return
-        return material_package_importable_name
+        while True:
+            getter = self.make_getter(where=self.where())
+            getter.append_space_delimited_lowercase_string('material name')
+            self.push_backtrack()
+            material_name = getter.run()
+            self.pop_backtrack()
+            if self.backtrack():
+                return
+            material_package_short_name = iotools.string_to_strict_directory_name(material_name)
+            material_package_importable_name = self.dot_join([
+                self.materials_package_importable_name, material_package_short_name])
+            if self.package_exists(material_package_importable_name):
+                line = 'Material package {!r} already exists.'.format(material_package_importable_name)
+                self.display([line, ''])
+            else:
+                return material_package_importable_name
 
     def get_package_proxy(self, package_importable_name):
         return self.material_package_maker_wrangler.get_package_proxy(package_importable_name)
@@ -60,7 +63,7 @@ class MaterialPackageWrangler(PackageWrangler):
         elif result == 'h':
             self.make_handmade_material_package_interactively()
         elif result == 'm':
-            self.make_editable_material_package_interactively()
+            self.make_makermade_material_package_interactively()
         else:
             material_proxy = self.get_package_proxy(result)
             material_proxy.run()
@@ -78,16 +81,24 @@ class MaterialPackageWrangler(PackageWrangler):
             material_package_importable_name, material_package_maker_class_name, should_have_illustration)
 
     # TODO: write test
-    def make_editable_material_package_interactively(self):
-        self.push_backtrack()
+    def make_handmade_material_package_interactively(self):
         material_package_importable_name = self.get_new_material_package_importable_name_interactively()
+        material_package_maker_class_name = None
+        should_have_illustration = True
+        self.make_material_package(
+            material_package_importable_name, material_package_maker_class_name, should_have_illustration)
+
+    # TODO: write test
+    def make_makermade_material_package_interactively(self):
+        self.push_backtrack()
+        result = self.material_package_maker_wrangler.select_material_proxy_class_name_interactively(
+            clear=False, cache=True)
+        material_package_maker_class_name = result
         self.pop_backtrack()
         if self.backtrack():
             return
         self.push_backtrack()
-        material_package_maker_class_name = \
-            self.material_package_maker_wrangler.select_material_proxy_class_name_interactively(
-                clear=False, cache=True)
+        material_package_importable_name = self.get_new_material_package_importable_name_interactively()
         self.pop_backtrack()
         if self.backtrack():
             return
@@ -96,21 +107,13 @@ class MaterialPackageWrangler(PackageWrangler):
         self.make_material_package(
             material_package_importable_name, material_package_maker_class_name, should_have_illustration)
 
-    # TODO: write test
-    def make_handmade_material_package_interactively(self):
-        material_package_importable_name = self.get_new_material_package_importable_name_interactively()
-        material_package_maker_class_name = None
-        should_have_illustration = True
-        self.make_material_package(
-            material_package_importable_name, material_package_maker_class_name, should_have_illustration)
-
     def make_main_menu(self, head=None):
-        menu, section = self.make_new_menu(where=self.where(), is_numbered=True, is_keyed=False)
+        menu, section = self.make_menu(where=self.where(), is_numbered=True, is_keyed=False)
         section.tokens = self.list_wrangled_package_menuing_pairs(head=head)
-        section = menu.make_new_section()
-        section.append(('d', 'make data'))
-        section.append(('h', 'make material by hand'))
-        section.append(('m', 'make material with maker'))
+        section = menu.make_section()
+        section.append(('d', 'data-only'))
+        section.append(('h', 'handmade'))
+        section.append(('m', 'maker-made'))
         return menu
 
     # TODO: write test
@@ -157,7 +160,7 @@ class MaterialPackageWrangler(PackageWrangler):
         if not package_root_name == self.studio_package_importable_name:
             result.append('mus')
         result.append('materials')
-        result = '.'.join(result)
+        result = self.dot_join(result)
         return result
 
     def run(self, user_input=None, head=None, clear=True, cache=False):

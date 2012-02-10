@@ -7,14 +7,14 @@ def test_InstrumentEditor_instrument_name_01():
     '''
 
     studio = baca.scf.Studio()
-    studio.run(user_input='1 perf 1 1 in q')
-    assert studio.ts == (11, (1, 5, 7))
+    studio.run(user_input='1 setup performers 1 1 in q')
+    assert studio.ts == (13, (1, 7, 9))
 
-    studio.run(user_input='1 perf 1 1 in b q')
-    assert studio.ts == (13, (1, 5, 7), (8, 11))
+    studio.run(user_input='1 setup performers 1 1 in b q')
+    assert studio.ts == (15, (1, 7, 9), (10, 13))
 
-    studio.run(user_input='1 perf 1 1 in studio q')
-    assert studio.ts == (13, (0, 11), (1, 5, 7))
+    studio.run(user_input='1 setup performers 1 1 in studio q')
+    assert studio.ts == (15, (0, 13), (1, 7, 9))
 
 
 def test_InstrumentEditor_instrument_name_02():
@@ -22,8 +22,8 @@ def test_InstrumentEditor_instrument_name_02():
     '''
 
     studio = baca.scf.Studio()
-    studio.run(user_input='1 perf 1 1 in -99 q')
-    assert studio.ts == (13, (1, 5, 7))
+    studio.run(user_input='1 setup performers 1 1 in -99 q')
+    assert studio.ts == (15, (1, 7, 9))
 
 
 def test_InstrumentEditor_instrument_name_03():
@@ -38,7 +38,7 @@ def test_InstrumentEditor_instrument_name_03():
     assert instrument.instrument_name_markup == markuptools.Markup('Foo')
 
     editor = baca.scf.editors.InstrumentEditor()
-    editor.run(user_input="1 inm 'bar' in 'foo' q")
+    editor.run(user_input="1 im 'bar' in 'foo' q")
     instrument = editor.target
     assert instrument.instrument_name == 'foo'
     assert instrument.instrument_name_markup == markuptools.Markup('bar')

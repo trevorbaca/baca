@@ -2,7 +2,7 @@ from abjad.tools.durationtools import Duration
 from baca.scf import UserInputWrapper
 
 
-user_input = UserInputWrapper([
+user_input_wrapper = UserInputWrapper([
 	('measure_denominator', 4),
 	('measure_numerator_talea', [2, 2, 2, 2, 1, 1, 4, 4]),
 	('measure_division_denominator', 16),

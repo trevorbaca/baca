@@ -8,20 +8,20 @@ def test_PerformerEditor_add_instruments_01():
     '''
 
     studio = baca.scf.Studio()
-    studio.run(user_input='1 perf 1 add q')
-    assert studio.ts == (10, (1, 5))
+    studio.run(user_input='1 setup perf 1 add q')
+    assert studio.ts == (12, (1, 7))
 
-    studio.run(user_input='1 perf 1 add b q')
-    assert studio.ts == (12, (1, 5), (6, 10))
+    studio.run(user_input='1 setup perf 1 add b q')
+    assert studio.ts == (14, (1, 7), (8, 12))
 
-    studio.run(user_input='1 perf 1 add studio q')
-    assert studio.ts == (12, (0, 10), (1, 5))
+    studio.run(user_input='1 setup perf 1 add studio q')
+    assert studio.ts == (14, (0, 12), (1, 7))
 
-    studio.run(user_input='1 perf 1 add score q')
-    assert studio.ts == (12, (1, 5), (2, 10))
+    studio.run(user_input='1 setup perf 1 add score q')
+    assert studio.ts == (14, (1, 7), (2, 12))
 
-    studio.run(user_input='1 perf 1 add foo q')
-    assert studio.ts == (12, (1, 5), (8, 10))
+    studio.run(user_input='1 setup perf 1 add foo q')
+    assert studio.ts == (14, (1, 7), (10, 12))
 
 
 def test_PerformerEditor_add_instruments_02():

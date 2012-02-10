@@ -1,4 +1,4 @@
-#from abjad import *
+from abjad import *
 from abjad.tools import sequencetools
 import baca
 

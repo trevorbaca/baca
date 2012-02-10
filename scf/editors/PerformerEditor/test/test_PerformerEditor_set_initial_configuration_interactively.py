@@ -6,17 +6,17 @@ def test_PerformerEditor_set_initial_configuration_interactively_01():
     '''
 
     studio = baca.scf.Studio()
-    studio.run(user_input='1 perf add 1 q')
-    assert studio.ts == (10, (1, 7))
+    studio.run(user_input='1 setup performers add 1 q')
+    assert studio.ts == (12, (1, 9))
 
-    studio.run(user_input='1 perf add 1 b q')
-    assert studio.ts == (12, (1, 7), (6, 10))
+    studio.run(user_input='1 setup performers add 1 b q')
+    assert studio.ts == (14, (1, 9), (8, 12))
 
-    studio.run(user_input='1 perf add 1 studio q')
-    assert studio.ts == (12, (0, 10), (1, 7))
+    studio.run(user_input='1 setup performers add 1 studio q')
+    assert studio.ts == (14, (0, 12), (1, 9))
 
-    studio.run(user_input='1 perf add 1 score q')
-    assert studio.ts == (12, (1, 7), (2, 10))
+    studio.run(user_input='1 setup performers add 1 score q')
+    assert studio.ts == (14, (1, 9), (2, 12))
 
-    studio.run(user_input='1 perf add 1 foo q')
-    assert studio.ts == (12, (1, 7), (8, 10))
+    studio.run(user_input='1 setup performers add 1 foo q')
+    assert studio.ts == (14, (1, 9), (10, 12))

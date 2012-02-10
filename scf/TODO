@@ -1,56 +1,36 @@
 TODO
 
-1. Author materials management menuing tests.
+1. Do away with local stylesheets.
 
-2. Do away with local stylesheets.
-
-3. Implement InstrumentRangeInventory in Abjad. Integrate into SCF.
-
-4. Remove blank lines between successive getter attribute entries.
-
-5. Make user input getter defaults work like menu defaults;
+2. Make user input getter defaults work like menu defaults;
     Implement default_value on user input getter.
 
-6. Fix SCFObject.handle_user_input_with_default() default handling.
+3. Fix SCFObject.handle_user_input_with_default() default handling.
 
-7. Implement populate_user_input_wrapper().
+4. Define range inventories for all scores.
 
-8. Implement 'make new material: range' in studio.
+5. Implement material move and rename methods.
 
-9. Implement 'make new material: range' in scores.
+6. Find a way to include tags management in hidden menu of every package proxy.
 
-10. Define range inventories for all scores.
+7. Figure out why 'red' isn't good enough to select 'red_pcs', maybe redraw-related.
 
-11. Implement material move and rename methods.
+8. Port output change awareness.
 
-12. Find a way to include tags management in hidden menu of every package proxy.
+9. Implement something to tour all materials everywhere and inspect in sequence.
 
-13. Figure out why 'red' isn't good enough to select 'red_pcs', maybe redraw-related.
+10. Make user input handler creation work.
 
-14. Make some zagged pitch-classes.
+11. Edit instrument transposition.
 
-15. Port output change awareness.
+12. Edit instrument clefs.
 
-16. Implement something to tour all materials everywhere and inspect in sequence.
+13. Remove extra appearance of B-flat clarinet from clarinetist config menu.
 
-17. Make user input handler creation work.
+14. Change Instrument._default_performer_names to house (full, abbreviation) pairs.
 
-18. Wrap tests around existing material functionality.
+15. Use performer abbreviations to populate performer selection menu.
 
-19. Clean up PitchRangeEditor main menu.
+16. Find a way to dynamically present (default) indicator to default menu entries.
 
-20. Edit instrument transposition.
-
-21. Edit instrument clefs.
-
-22. Remove extra appearance of B-flat clarinet from clarinetist config menu.
-
-23. Change Instrument._default_performer_names to house (full, abbreviation) pairs.
-
-24. Use performer abbreviations to populate performer selection menu.
-
-25. Find a way to dynamically add (default) indicator to default menu entries.
-
-26. Consider keyword backtracking protocol to replace two-line backtracking protocol.
-
-27. Replace all occurrences of 'delete' with 'remove'.
+17. Consider keyword backtracking protocol to replace two-line backtracking protocol.

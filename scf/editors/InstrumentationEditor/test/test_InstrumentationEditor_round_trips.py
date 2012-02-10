@@ -67,7 +67,7 @@ def test_InstrumentationEditor_round_trips_01():
     assert transcript[entry_index] == \
     ['Performers',
      '',
-     '     1: accordionist (accordion)',
+     '     (1) accordionist: accordion',
      '',
      '     add performers',
      '     delete performers',
@@ -126,8 +126,8 @@ def test_InstrumentationEditor_round_trips_01():
     assert transcript[entry_index] == \
     ['Performers',
      '',
-     '     1: accordionist (accordion)',
-     '     2: bassist (contrabass)',
+     '     (1) accordionist: accordion',
+     '     (2) bassist: contrabass',
      '',
      '     add performers',
      '     delete performers',
@@ -150,8 +150,8 @@ def test_InstrumentationEditor_round_trips_01():
     assert transcript[entry_index] == \
     ['Performers',
      '',
-     '     1: bassist (contrabass)',
-     '     2: accordionist (accordion)',
+     '     (1) bassist: contrabass',
+     '     (2) accordionist: accordion',
      '',
      '     add performers',
      '     delete performers',
@@ -170,7 +170,7 @@ def test_InstrumentationEditor_round_trips_01():
     assert transcript[entry_index] == \
     ['Performers',
      '',
-     '     1: bassist (contrabass)',
+     '     (1) bassist: contrabass',
      '',
      '     add performers',
      '     delete performers',

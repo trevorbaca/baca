@@ -1,9 +1,11 @@
-% Abjad revision 4973M
-% 2012-01-27 14:45
+% Abjad revision 5047M
+% 2012-02-13 16:15
 
 \version "2.15.24"
 \include "english.ly"
 \include "/Users/trevorbaca/Documents/abjad/trunk/abjad/cfg/abjad.scm"
+
+\include "/Users/trevorbaca/Documents/other/baca/scf/stylesheets/clean_letter_14.ly"
 
 \header {
 	tagline = \markup { "" }
@@ -33,6 +35,7 @@
 				d'8
 				e'16
 				f'8
+				r4
 			}
 			\context Staff = "bass" {
 				\clef "bass"
@@ -54,6 +57,7 @@
 				r8
 				r16
 				r8
+				r4
 			}
 		>>
 	>>

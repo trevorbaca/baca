@@ -7,14 +7,14 @@ def test_PerformerEditor_run_01():
     '''
 
     studio = baca.scf.Studio()
-    studio.run(user_input='1 perf 1 q')
-    assert studio.ts == (8, (1, 5))
+    studio.run(user_input='1 setup performers 1 q')
+    assert studio.ts == (10, (1, 7))
     
-    studio.run(user_input='1 perf 1 b q')
-    assert studio.ts == (10, (1, 5), (4, 8))
+    studio.run(user_input='1 setup performers 1 b q')
+    assert studio.ts == (12, (1, 7), (6, 10))
 
-    studio.run(user_input='1 perf 1 studio q')
-    assert studio.ts == (10, (0, 8), (1, 5))
+    studio.run(user_input='1 setup performers 1 studio q')
+    assert studio.ts == (12, (0, 10), (1, 7))
 
-    studio.run(user_input='1 perf 1 foo q')
-    assert studio.ts == (10, (1, 5), (6, 8))
+    studio.run(user_input='1 setup performers 1 foo q')
+    assert studio.ts == (12, (1, 7), (8, 10))

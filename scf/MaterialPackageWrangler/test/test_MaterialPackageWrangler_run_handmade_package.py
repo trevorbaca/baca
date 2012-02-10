@@ -158,7 +158,7 @@ def test_MaterialPackageWrangler_run_handmade_package_06():
 
     try:
         studio.run(user_input=
-            'm h testnotes default default '
+            'm h testnotes default '
             'testnotes mdstub default q')
         assert studio.package_exists('baca.materials.testnotes')
         mpp = baca.scf.MaterialPackageProxy('baca.materials.testnotes')

@@ -24,13 +24,13 @@ class PerformerEditor(InteractiveEditor):
     @property
     def summary_lines(self):
         if not self.target.instruments:
-            result = '{} (no instruments)'.format(self.target.name)
+            result = '{}: no instruments'.format(self.target.name)
         elif len(self.target.instruments) == 1 and self.target.name == \
             self.target.instruments[0].instrument_name:
             result = '{}'.format(self.target.name)
         else:
             instruments = ', '.join(self.instrument_names)
-            result = '{} ({})'.format(self.target.name, instruments)
+            result = '{}: {}'.format(self.target.name, instruments)
         result = [result]
         return result
 
@@ -45,8 +45,8 @@ class PerformerEditor(InteractiveEditor):
             for instrument in instruments:
                 self.target.instruments.append(instrument)
 
-    def delete_instruments_interactively(self):
-        getter = self.make_new_getter(where=self.where())
+    def remove_instruments_interactively(self):
+        getter = self.make_getter(where=self.where())
         getter.append_argument_range('instruments', self.instrument_names)
         result = getter.run()
         if self.backtrack():
@@ -75,7 +75,7 @@ class PerformerEditor(InteractiveEditor):
             spaced_variable_name = 'performer name'
         else:
             spaced_variable_name = 'new performer name'
-        getter = self.make_new_getter(where=self.where())
+        getter = self.make_getter(where=self.where())
         getter.append_string_or_none(spaced_variable_name)
         result = getter.run()
         if self.backtrack():
@@ -88,7 +88,7 @@ class PerformerEditor(InteractiveEditor):
         if result == 'add':
             self.add_instruments_interactively()
         elif result == 'del':
-            self.delete_instruments_interactively()
+            self.remove_instruments_interactively()
         elif result == 'mv':
             self.move_instrument_interactively()
         elif result in ('name', 'ren'):
@@ -97,12 +97,12 @@ class PerformerEditor(InteractiveEditor):
             self.edit_instrument_interactively(result)
 
     def make_main_menu(self):
-        menu, section = self.make_new_menu(where=self.where(), is_numbered=True)
+        menu, section = self.make_menu(where=self.where(), is_numbered=True)
         section.return_value_attribute = 'number'
-        section.section_title = 'instruments'
+        section.title = 'instruments'
         instrument_names = [x.instrument_name for x in self.target.instruments]
         section.tokens = instrument_names
-        section = menu.make_new_section(is_keyed=False)
+        section = menu.make_section(is_keyed=False)
         section.append(('add', 'add instruments'))
         if 0 < self.target.instrument_count:
             section.append(('del', 'delete instruments'))
@@ -115,9 +115,9 @@ class PerformerEditor(InteractiveEditor):
         return menu
 
     def move_instrument_interactively(self):
-        getter = self.make_new_getter(where=self.where())
-        getter.append_integer_in_closed_range('old instrument number', 1, self.target.instrument_count)
-        getter.append_integer_in_closed_range('new instrument number', 1, self.target.instrument_count)
+        getter = self.make_getter(where=self.where())
+        getter.append_integer_in_range('old instrument number', 1, self.target.instrument_count)
+        getter.append_integer_in_range('new instrument number', 1, self.target.instrument_count)
         result = getter.run()
         if self.backtrack():
             return
@@ -164,8 +164,8 @@ class PerformerEditor(InteractiveEditor):
         self.restore_breadcrumbs(cache=cache)
 
     def set_initial_configuration_menu(self):
-        menu, section = self.make_new_menu(where=self.where(), is_numbered=True, is_ranged=True) 
-        section.section_title = 'select instruments'
+        menu, section = self.make_menu(where=self.where(), is_numbered=True, is_ranged=True) 
+        section.title = 'select instruments'
         likely_instruments = self.target.likely_instruments_based_on_performer_name
         likely_instrument_names = [x().instrument_name for x in likely_instruments]
         most_likely_instrument = self.target.most_likely_instrument_based_on_performer_name
@@ -180,11 +180,11 @@ class PerformerEditor(InteractiveEditor):
         if likely_instruments:
             section.tokens = likely_instrument_names
             section.default_index = default_index
-            section = menu.make_new_section(is_keyed=False)
+            section = menu.make_section(is_keyed=False)
             section.append(('other', 'other instruments'))
         else:
             section.tokens = instrumenttools.list_instrument_names()
             section.default_index = default_index
-            section = menu.make_new_section(is_keyed=False)
+            section = menu.make_section(is_keyed=False)
         section.append(('none', 'no instruments'))
         return menu

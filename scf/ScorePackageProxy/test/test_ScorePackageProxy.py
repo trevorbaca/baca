@@ -14,11 +14,8 @@ def test_ScorePackageProxy_01():
       '',
       '     chunks (h)',
       '     materials (m)',
-      '',
-      '     forces tagline (ft)',
-      '     performers (pf)',
-      '     title (tl)',
-      '     year of completion (yr)',
+      '     music specifiers (ms)',
+      '     setup (s)',
       '']
 
 

@@ -22,7 +22,7 @@ class UserInputWrapper(collections.OrderedDict):
     @property
     def formatted_lines(self):
         formatted_lines = []
-        formatted_lines.append('user_input = {}(['.format(type(self).__name__))
+        formatted_lines.append('user_input_wrapper = {}(['.format(type(self).__name__))
         items = self.list_items
         for name, value in items[:-1]:
             line = '\t({!r}, {!r}),'.format(name, value)
@@ -37,6 +37,10 @@ class UserInputWrapper(collections.OrderedDict):
     @property
     def is_empty(self):
         return all([x is None for x in self.itervalues()])
+
+    @property
+    def is_partially_complete(self):
+        return not self.is_complete and not self.is_empty
 
     @property
     def list_items(self):

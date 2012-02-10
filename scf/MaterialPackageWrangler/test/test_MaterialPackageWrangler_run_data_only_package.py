@@ -9,7 +9,7 @@ def test_MaterialPackageWrangler_run_data_only_package_01():
     assert not studio.package_exists('baca.materials.testnumbers')
 
     try:
-        studio.run(user_input='m d testnumbers default default q')
+        studio.run(user_input='m d testnumbers default q')
         assert studio.package_exists('baca.materials.testnumbers')
         mpp = baca.scf.MaterialPackageProxy('baca.materials.testnumbers')
         assert mpp.is_data_only
@@ -36,7 +36,7 @@ def test_MaterialPackageWrangler_run_data_only_package_02():
 
     try:
         studio.run(user_input=
-            'm d testnumbers default default '
+            'm d testnumbers default '
             'testnumbers incanned canned_exception.py default q')
         assert studio.package_exists('baca.materials.testnumbers')
         mpp = baca.scf.MaterialPackageProxy('baca.materials.testnumbers')
@@ -64,7 +64,7 @@ def test_MaterialPackageWrangler_run_data_only_package_03():
 
     try:
         studio.run(user_input=
-            'm d testnumbers default default '
+            'm d testnumbers default '
             'testnumbers incanned canned_exception.py default '
             'inr yes no default q')
         assert studio.package_exists('baca.materials.testnumbers')
@@ -93,7 +93,7 @@ def test_MaterialPackageWrangler_run_data_only_package_04():
 
     try:
         studio.run(user_input=
-            'm d testnumbers default default '
+            'm d testnumbers default '
             'testnumbers mdcanned canned_testnumbers_material_definition.py default '
             'omm default q')
         assert studio.package_exists('baca.materials.testnumbers')
@@ -122,7 +122,7 @@ def test_MaterialPackageWrangler_run_data_only_package_05():
 
     try:
         studio.run(user_input=
-            'm d testnumbers default default '
+            'm d testnumbers default '
             'testnumbers mddelete default q')
         assert studio.package_exists('baca.materials.testnumbers')
         mpp = baca.scf.MaterialPackageProxy('baca.materials.testnumbers')
@@ -150,7 +150,7 @@ def test_MaterialPackageWrangler_run_data_only_package_06():
 
     try:
         studio.run(user_input=
-            'm d testnumbers default default '
+            'm d testnumbers default '
             'testnumbers mdstub default q')
         assert studio.package_exists('baca.materials.testnumbers')
         mpp = baca.scf.MaterialPackageProxy('baca.materials.testnumbers')
@@ -178,7 +178,7 @@ def test_MaterialPackageWrangler_run_data_only_package_07():
 
     try:
         studio.run(user_input=
-            'm d testnumbers default default '
+            'm d testnumbers default '
             'testnumbers mdcanned canned_testnumbers_material_definition.py default '
             'omm default '
             'omdelete default q')
@@ -208,7 +208,7 @@ def test_MaterialPackageWrangler_run_data_only_package_08():
 
     try:
         studio.run(user_input=
-            'm d testnumbers default default '
+            'm d testnumbers default '
             'testnumbers mdcanned canned_testnumbers_material_definition_with_exception.py default q')
         assert studio.package_exists('baca.materials.testnumbers')
         mpp = baca.scf.MaterialPackageProxy('baca.materials.testnumbers')
@@ -236,7 +236,7 @@ def test_MaterialPackageWrangler_run_data_only_package_09():
 
     try:
         studio.run(user_input=
-            'm d testnumbers default default '
+            'm d testnumbers default '
             'testnumbers mdcanned canned_testnumbers_material_definition.py default '
             'omm default '
             'omcanned canned_exception.py default q')

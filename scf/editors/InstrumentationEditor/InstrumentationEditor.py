@@ -64,8 +64,8 @@ class InstrumentationEditor(InteractiveEditor):
                 break
 
     # TODO: abstract up to ListEditor.delete_items_interactively
-    def delete_performers_interactively(self):
-        getter = self.make_new_getter(where=self.where())
+    def remove_performers_interactively(self):
+        getter = self.make_getter(where=self.where())
         getter.append_argument_range('performers', self.summary_lines)
         result = getter.run()
         if self.backtrack():
@@ -100,17 +100,17 @@ class InstrumentationEditor(InteractiveEditor):
         if result == 'add':
             self.add_performers_interactively()
         elif result == 'del':
-            self.delete_performers_interactively()
+            self.remove_performers_interactively()
         elif result == 'mv':
             self.move_performer_interactively()
         else:
             self.edit_performer_interactively(result)
 
     def make_main_menu(self):
-        menu, section = self.make_new_menu(where=self.where(), is_numbered=True)
+        menu, section = self.make_menu(where=self.where(), is_parenthetically_numbered=True)
         section.tokens = self.summary_lines
-        section.return_value_attribute = 'number' # this is new
-        section = menu.make_new_section(is_keyed=False)
+        section.return_value_attribute = 'number'
+        section = menu.make_section(is_keyed=False)
         section.append(('add', 'add performers'))
         if 0 < self.target.performer_count:
             section.append(('del', 'delete performers'))
@@ -119,9 +119,9 @@ class InstrumentationEditor(InteractiveEditor):
         return menu
 
     def move_performer_interactively(self):
-        getter = self.make_new_getter(where=self.where())
-        getter.append_integer_in_closed_range('old number', 1, self.target.performer_count)
-        getter.append_integer_in_closed_range('new number', 1, self.target.performer_count)
+        getter = self.make_getter(where=self.where())
+        getter.append_integer_in_range('old number', 1, self.target.performer_count)
+        getter.append_integer_in_range('new number', 1, self.target.performer_count)
         result = getter.run()
         if self.backtrack():
             return
@@ -134,7 +134,7 @@ class InstrumentationEditor(InteractiveEditor):
     def select_performer_names_interactively(self, clear=True, cache=False):
         from abjad.tools import scoretools
         self.cache_breadcrumbs(cache=cache)
-        menu, section = self.make_new_menu(where=self.where(), is_numbered=True, is_ranged=True)
+        menu, section = self.make_menu(where=self.where(), is_numbered=True, is_ranged=True)
         performer_names, performer_abbreviations = [], []
         performer_pairs = scoretools.list_primary_performer_names()
         performer_pairs = [(x[1].split()[-1].strip('.'), x[0]) for x in performer_pairs]

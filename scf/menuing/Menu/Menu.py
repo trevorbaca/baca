@@ -38,7 +38,7 @@ class Menu(MenuSectionAggregator):
 
     @property
     def has_numbered_section(self):
-        return any([section.is_numbered for section in self.sections])
+        return any([section.is_numbered or section.is_parenthetically_numbered for section in self.sections])
 
     @property
     def has_ranged_section(self):
@@ -87,7 +87,7 @@ class Menu(MenuSectionAggregator):
     @property
     def numbered_section(self):
         for section in self.sections:
-            if section.is_numbered:
+            if section.is_numbered or section.is_parenthetically_numbered:
                 return section
 
     @property
@@ -101,10 +101,9 @@ class Menu(MenuSectionAggregator):
         menu_lines = []
         for section in self.sections:
             section_menu_lines = section.make_menu_lines()
-            #if not section.is_hidden:
-            #    menu_lines.extend(section_menu_lines)
             if not section.is_hidden:
-                if not self.session.nonnumbered_menu_sections_are_hidden or section.is_numbered:
+                if not self.session.nonnumbered_menu_sections_are_hidden or \
+                    section.is_numbered or section.is_parenthetically_numbered:
                     menu_lines.extend(section_menu_lines)
         if self.hide_current_run:
             menu_lines = []
@@ -182,15 +181,18 @@ class Menu(MenuSectionAggregator):
             result.append(entry)
         return result
 
-    def make_new_section(self, is_hidden=False, is_keyed=True, is_numbered=False, is_ranged=False):
+    def make_section(self, is_hidden=False, is_internally_keyed=False, is_keyed=True, 
+        is_numbered=False, is_parenthetically_numbered=False, is_ranged=False):
         assert not (is_numbered and self.has_numbered_section)
+        assert not (is_parenthetically_numbered and self.has_numbered_section)
         assert not (is_ranged and self.has_ranged_section)
-        section = MenuSection(is_hidden=is_hidden, is_keyed=is_keyed, is_numbered=is_numbered,
-            is_ranged=is_ranged, session=self.session, where=self.where)
+        section = MenuSection(is_hidden=is_hidden, is_internally_keyed=is_internally_keyed, 
+            is_keyed=is_keyed, is_numbered=is_numbered, 
+            is_parenthetically_numbered=is_parenthetically_numbered, is_ranged=is_ranged, 
+            session=self.session, where=self.where)
         self.sections.append(section)
         return section
 
-        
     def run(self, clear=True, user_input=None):
         self.assign_user_input(user_input=user_input)
         clear, hide_current_run = clear, False
@@ -241,12 +243,6 @@ class Menu(MenuSectionAggregator):
             if expr.endswith(' (default)'):
                 expr = expr.replace(' (default)', '')
             return expr
-
-    def toggle_menu(self):
-        if self.session.nonnumbered_menu_sections_are_hidden:
-            self.session.nonnumbered_menu_sections_are_hidden = False
-        else:
-            self.session.nonnumbered_menu_sections_are_hidden = True
 
     def user_enters_argument_range(self, user_input):
         if ',' in user_input:

@@ -21,7 +21,7 @@ class StylesheetFileProxy(FileProxy):
         self.print_not_implemented()
 
     def copy_stylesheet_interactively(self, prompt=True):
-        getter = self.make_new_getter()
+        getter = self.make_getter()
         getter.append_string('new file name')
         new_short_file_name = getter.run()
         if self.backtrack():
@@ -34,11 +34,6 @@ class StylesheetFileProxy(FileProxy):
         line = 'file copied.'
         self.proceed(line, prompt=prompt)
         
-    def delete_stylesheet_interactively(self, prompt=True):
-        self.remove()
-        line = 'stylesheet deleted.'
-        self.proceed(line, prompt=prompt)
-
     def handle_main_menu_result(self, result):
         assert isinstance(result, str)
         if result == 'audit':
@@ -46,17 +41,17 @@ class StylesheetFileProxy(FileProxy):
         elif result == 'cp':
             self.copy_stylesheet_interactively()
         elif result == 'del':
-            self.delete_stylesheet_interactively()
+            self.remove_stylesheet_interactively()
             self.session.is_backtracking_locally = True
         elif result == 'ren':
             self.rename_stylesheet_interactively()
         elif result == 'vi':
-            self.vi_stylesheet()
+            self.edit()
         else:
             raise ValueError
 
     def make_main_menu(self):
-        menu, section = self.make_new_menu(where=self.where)
+        menu, section = self.make_menu(where=self.where)
         section.append(('audit', 'audit stylesheet'))
         section.append(('cp', 'copy stylesheet'))
         section.append(('del', 'delete stylesheet'))
@@ -64,8 +59,13 @@ class StylesheetFileProxy(FileProxy):
         section.append(('vi', 'vi stylesheet'))
         return menu
 
+    def remove_stylesheet_interactively(self, prompt=True):
+        self.remove()
+        line = 'stylesheet deleted.'
+        self.proceed(line, prompt=prompt)
+
     def rename_stylesheet_interactively(self, prompt=True):
-        getter = self.make_new_getter()
+        getter = self.make_getter()
         getter.append_string('new file name')
         new_short_file_name = getter.run()
         if self.backtrack():
@@ -96,6 +96,3 @@ class StylesheetFileProxy(FileProxy):
             self.pop_breadcrumb()
         self.pop_breadcrumb()
         self.restore_breadcrumbs(cache=cache)
-
-    def vi_stylesheet(self):
-        os.system('vi {}'.format(self.full_file_name))

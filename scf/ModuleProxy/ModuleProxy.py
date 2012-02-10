@@ -18,7 +18,7 @@ class ModuleProxy(ParsableFileProxy):
 
     @property
     def grandparent_package_importable_name(self):
-        return '.'.join(self.module_importable_name.split('.')[:-2])
+        return self.dot_join(self.module_importable_name.split('.')[:-2])
 
     @property
     def grandparent_package_initializer_file_name(self):
@@ -38,7 +38,7 @@ class ModuleProxy(ParsableFileProxy):
 
     @property
     def parent_package_importable_name(self):
-        return '.'.join(self.module_importable_name.split('.')[:-1])
+        return self.dot_join(self.module_importable_name.split('.')[:-1])
 
     @property
     def parent_package_initializer_file_name(self):
@@ -48,7 +48,7 @@ class ModuleProxy(ParsableFileProxy):
 
     def run_abjad(self, prompt=True):
         os.system('abjad {}'.format(self.full_file_name))
-        self.display('file executed', prompt=prompt)
+        self.proceed('file executed', prompt=prompt)
 
     def run_python(self, prompt=True):
         os.system('python {}'.format(self.full_file_name))

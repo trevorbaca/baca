@@ -22,23 +22,19 @@ class InteractiveEditor(SCFObject):
     
     @property
     def target_attribute_tokens(self):
-        result = []
-        target_attribute_names, menu_keys, left_hand_labels = [], [], []
-        for target_attribute_name, predicate, is_read_write, default in self.target_attribute_tuples:
-            target_attribute_names.append(target_attribute_name)
-            menu_key = self.attribute_name_to_menu_key(target_attribute_name, menu_keys)
+        result, menu_keys, display_attribute = [], [], None
+        for target_attribute_tuple in self.target_attribute_tuples:
+            target_attribute_name, predicate, is_read_write, default, menu_key = target_attribute_tuple[:5]
             assert menu_key not in menu_keys
             menu_keys.append(menu_key)
-            spaced_attribute_name = target_attribute_name.replace('_', ' ')
-            left_hand_label = '{} ({}):'.format(spaced_attribute_name, menu_key)
-            #left_hand_label = '{}:'.format(spaced_attribute_name)
-            left_hand_labels.append(left_hand_label)
-        left_hand_label_width = max([len(x) for x in left_hand_labels])
-        for left_hand_label, target_attribute_name, menu_key in zip(
-            left_hand_labels, target_attribute_names, menu_keys):
-            menu_value = '{:<{width}} {!r}'.format(
-                left_hand_label, getattr(self.target, target_attribute_name), width=left_hand_label_width) 
-            token = (menu_key, menu_value)
+            menu_body = target_attribute_name.replace('_', ' ')
+            attribute_value = getattr(self.target, target_attribute_name) 
+            existing_value = repr(attribute_value)
+            if len(target_attribute_tuple) == 6:
+                display_attribute = target_attribute_tuple[5]
+                if display_attribute is not None:
+                    existing_value = getattr(attribute_value, display_attribute)
+            token = (menu_key, menu_body, existing_value)
             result.append(token)
         return result
 
@@ -80,6 +76,7 @@ class InteractiveEditor(SCFObject):
             self.push_breadcrumb()
             menu = self.make_main_menu()
             result = menu.run(clear=clear)
+            #self.debug(result)
             if self.backtrack():
                 break
             elif not result:

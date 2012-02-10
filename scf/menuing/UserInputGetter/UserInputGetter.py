@@ -5,7 +5,6 @@ from baca.scf import predicates
 import types
 
 
-# TODO: write UserInputGetter tests
 class UserInputGetter(MenuSectionAggregator):
 
     def __init__(self, session=None, where=None):
@@ -17,6 +16,13 @@ class UserInputGetter(MenuSectionAggregator):
         self._helps = []
         self._prompts = []
         self._tests = []
+        self.allow_none = False
+        self.capitalize_prompts = True
+        self.include_newlines = True
+        self.indent_level = 0
+        self.number_prompts = False
+        self.prompt_character = '>'
+        self.title = None
 
     ### OVERLOADS ###
 
@@ -56,34 +62,41 @@ class UserInputGetter(MenuSectionAggregator):
     ### PUBLIC METHODS ###
 
     def append_argument_range(self, spaced_attribute_name, argument_list, default=None):
-        message = "value for '{}' must be argument range."
+        message = 'value for {!r} must be argument range.'
         self.append_something(spaced_attribute_name, message, default=default)
         self.argument_lists[-1] = argument_list
         test = lambda expr: predicates.is_readable_argument_range_string_for_argument_list(expr, argument_list)
         self.tests.append(test)
 
+    def append_available_underscore_delimited_lowercase_package_name(self, spaced_attribute_name, default=None):
+        message = \
+            'value for {!r} must be available underscore-delimited lowercase package name of length at least 3.'
+        self.append_something(spaced_attribute_name, message, default=default)
+        self.tests.append(predicates.is_available_underscore_delimited_lowercase_package_name)
+
     def append_boolean(self, spaced_attribute_name, default=None):
-        message = "value for '{}' must be boolean."
+        message = 'value for {!r} must be boolean.'
         self.append_something(spaced_attribute_name, message, default=default)
         self.tests.append(predicates.is_boolean)
 
+    def append_existing_package_name(self, spaced_attribute_name, default=None):
+        message = 'value for {!r} must be existing package name.'
+        self.append_something(spaced_attribute_name, message, default=default)
+        self.tests.append(predicates.is_existing_package_name)
+
     def append_integer(self, spaced_attribute_name, default=None):
-        message = "value for '{}' must be integer."
+        message = 'value for {!r} must be integer.'
         self.append_something(spaced_attribute_name, message, default=default)
         self.tests.append(predicates.is_integer)
 
-    def append_integer_in_closed_range(self, spaced_attribute_name, start, stop, default=None):
-        message = "value for '{}' must be integer between {} and {}, inclusive."
+    def append_integer_in_range(self, spaced_attribute_name, 
+        start=None, stop=None, allow_none=False, default=None):
+        message = 'value for {!r} must be integer between {} and {}, inclusive.'
         self.append_something(spaced_attribute_name, message, (start, stop), default=default)
-        self.tests.append(self.make_is_integer_in_closed_range(start, stop))
-
-    def append_integer_or_none(self, spaced_attribute_name, default=None):
-        message = "value for '{}' must be integer or none."
-        self.append_something(spaced_attribute_name, message, default=default)
-        self.tests.append(predicates.is_integer_or_none)
+        self.tests.append(self.make_is_integer_in_range(start, stop, allow_none=allow_none))
 
     def append_markup(self, spaced_attribute_name, default=None):
-        message = "value for '{}' must be markup."
+        message = 'value for {!r} must be markup.'
         self.append_something(spaced_attribute_name, message, default=default)
         execs = []
         execs.append('from abjad import *')
@@ -92,7 +105,7 @@ class UserInputGetter(MenuSectionAggregator):
         self.tests.append(predicates.is_markup)
 
     def append_named_chromatic_pitch(self, spaced_attribute_name, default=None):
-        message = "value for '{}' must be named chromatic pitch."
+        message = 'value for {!r} must be named chromatic pitch.'
         self.append_something(spaced_attribute_name, message, default=default)
         execs = []
         execs.append('from abjad import *')
@@ -101,7 +114,7 @@ class UserInputGetter(MenuSectionAggregator):
         self.tests.append(predicates.is_named_chromatic_pitch)
 
     def append_pitch_range(self, spaced_attribute_name, default=None):
-        message = "value for '{}' must be pitch range."
+        message = 'value for {!r} must be pitch range.'
         self.append_something(spaced_attribute_name, message, default=default)
         execs = []
         execs.append('from abjad import *')
@@ -121,25 +134,35 @@ class UserInputGetter(MenuSectionAggregator):
         self.defaults.append(default)
         self.chevrons.append(include_chevron)
 
+    def append_space_delimited_lowercase_string(self, spaced_attribute_name, default=None):
+        message = 'value for {!r} must be space-delimited lowercase string.'
+        self.append_something(spaced_attribute_name, message, default=default)
+        self.tests.append(iotools.is_space_delimited_lowercase_string)
+
     def append_string(self, spaced_attribute_name, default=None):
-        message = "value for '{}' must be string."
+        message = 'value for {!r} must be string.'
         self.append_something(spaced_attribute_name, message, default=default)
         self.tests.append(predicates.is_string)
 
     def append_string_or_none(self, spaced_attribute_name, default=None):
-        message = "value for '{}' must be string or none."
+        message = 'value for {!r} must be string or none.'
         self.append_something(spaced_attribute_name, message, default=default)
         self.tests.append(predicates.is_string_or_none)
 
     def append_symbolic_pitch_range_string(self, spaced_attribute_name, default=None):
-        message = "value for '{}' must be symbolic pitch range string. Ex: [A0, C8]."
+        message = 'value for {!r} must be symbolic pitch range string. Ex: [A0, C8].'
         self.append_something(spaced_attribute_name, message, default=default)
         self.tests.append(pitchtools.is_symbolic_pitch_range_string)
 
     def append_underscore_delimited_lowercase_package_name(self, spaced_attribute_name, default=None):
-        message = "value for {!r} must be underscore-delimited lowercase package name of length at least 3."
+        message = 'value for {!r} must be underscore-delimited lowercase package name of length at least 3.'
         self.append_something(spaced_attribute_name, message, default=default)
-        self.tests.append(lambda x: iotools.is_underscore_delimited_lowercase_package_name(x) and 3 <= len(x))
+        self.tests.append(predicates.is_underscore_delimited_lowercase_package_name)
+
+    def append_underscore_delimited_lowercase_string(self, spaced_attribute_name, default=None):
+        message = 'value for {!r} must be underscore-delimited lowercase string.'
+        self.append_something(spaced_attribute_name, message, default=default)
+        self.tests.append(predicates.is_underscore_delimited_lowercase_string)
 
     def append_yes_no_string(self, spaced_attribute_name, default=None, include_chevron=False):
         message = "value for '{}' must be 'y' or 'n'."
@@ -147,6 +170,8 @@ class UserInputGetter(MenuSectionAggregator):
         self.tests.append(predicates.is_yes_no_string)
 
     def apply_tests_to_value(self, value):
+        if self.allow_none and value is None:
+            return True
         if self.prompt_index < len(self.tests):
             input_test = self.tests[self.prompt_index]
             return self.evaluate_test(input_test, value)
@@ -157,7 +182,9 @@ class UserInputGetter(MenuSectionAggregator):
         assert isinstance(execs, list)
         if execs:
             value = self.get_value_from_execs(user_response, execs)
-            if not value:
+            #if not value:
+            #if value is None:
+            if value is None and not user_response == 'None':
                 return '!!!'
         else:
             value = self.get_value_from_direct_evaluation(user_response)
@@ -175,6 +202,12 @@ class UserInputGetter(MenuSectionAggregator):
             return isinstance(argument, test)
         else:
             return test(argument)
+
+    def display_title(self):
+        title_lines = self.make_title_lines()
+        if title_lines:
+            self.display(title_lines)
+        pass
 
     def get_value_from_direct_evaluation(self, user_response):
         try:
@@ -197,16 +230,27 @@ class UserInputGetter(MenuSectionAggregator):
                     return False
         return value
 
+    def indent_and_number_prompt(self, prompt):
+        if self.number_prompts:
+            prompt_number = self.prompt_index + 1
+            total_prompts = len(self.prompts)
+            prompt = '({}/{}) {}'.format(prompt_number, total_prompts, prompt)
+        if self.indent_level:
+            return '{} {}'.format(self.make_tab(self.indent_level), prompt)
+        else:
+            return prompt
+
     def load_prompt(self):
         prompt = self.prompts[self.prompt_index]
-        prompt = iotools.capitalize_string_start(prompt)
+        if self.capitalize_prompts:
+            prompt = iotools.capitalize_string_start(prompt)
         self.menu_lines.append(prompt)
 
     def move_to_prev_prompt(self):
         self.values.pop()
         self.prompt_index = self.prompt_index - 1
 
-    def present_prompt_and_store_value(self):
+    def present_prompt_and_store_value(self, include_chevron=True):
         '''True when user response obtained. Or when user skips prompt.
         False when user quits system or aborts getter.
         '''
@@ -215,8 +259,10 @@ class UserInputGetter(MenuSectionAggregator):
             prompt = self.menu_lines[-1]
             default = str(self.defaults[self.prompt_index])
             include_chevron = self.chevrons[self.prompt_index]
-            user_response = self.handle_raw_input_with_default(
-                prompt, default=default, include_chevron=include_chevron)
+            prompt = self.indent_and_number_prompt(prompt)
+            user_response = self.handle_raw_input_with_default(prompt, default=default, 
+                include_chevron=include_chevron, include_newline=self.include_newlines,
+                prompt_character=self.prompt_character, capitalize_prompt=self.capitalize_prompts)
             if user_response is None:
                 self.prompt_index = self.prompt_index + 1
                 break
@@ -239,17 +285,18 @@ class UserInputGetter(MenuSectionAggregator):
                 self.print_not_implemented()
         return True
 
-    def present_prompts_and_store_values(self):
+    def present_prompts_and_store_values(self, include_chevron=True):
         self.conditionally_clear_terminal()
         self.menu_lines, self.values, self.prompt_index = [], [], 0
+        self.display_title()
         while self.prompt_index < len(self.prompts):
-            if not self.present_prompt_and_store_value():
+            if not self.present_prompt_and_store_value(include_chevron=include_chevron):
                 break
 
-    def run(self, user_input=None):
+    def run(self, user_input=None, include_chevron=True):
         self.assign_user_input(user_input=user_input)
         self.push_backtrack()
-        self.present_prompts_and_store_values()
+        self.present_prompts_and_store_values(include_chevron=include_chevron)
         self.pop_backtrack()
         if len(self.values) == 1:
             return self.values[0]

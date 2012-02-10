@@ -14,6 +14,7 @@ class ScorePackageProxy(PackageProxy):
         self._chunk_wrangler = baca.scf.ChunkPackageWrangler(session=self.session)
         self._material_package_wrangler = baca.scf.MaterialPackageWrangler(session=self.session)
         self._material_package_maker_wrangler = baca.scf.MaterialPackageMakerWrangler(session=self.session)
+        self._music_specifier_wrangler = baca.scf.MusicSpecifierModuleProxyWrangler(session=self.session)
 
     ### READ-ONLY PUBLIC ATTRIBUTES ###
 
@@ -38,7 +39,7 @@ class ScorePackageProxy(PackageProxy):
 
     @property
     def chunks_package_importable_name(self):
-        return '.'.join([self.package_importable_name, 'mus', 'chunks'])
+        return self.dot_join([self.package_importable_name, 'mus', 'chunks'])
 
     @property
     def chunks_package_initializer_file_name(self):
@@ -94,7 +95,7 @@ class ScorePackageProxy(PackageProxy):
 
     @property
     def materials_package_importable_name(self):
-        return '.'.join([self.package_importable_name, 'mus', 'materials'])
+        return self.dot_join([self.package_importable_name, 'mus', 'materials'])
 
     @property
     def materials_package_initializer_file_name(self):
@@ -103,6 +104,10 @@ class ScorePackageProxy(PackageProxy):
     @property
     def mus_proxy(self):
         return self._mus_proxy
+
+    @property
+    def music_specifier_wrangler(self):
+        return self._music_specifier_wrangler
 
     @property
     def score_initializer_file_names(self):
@@ -167,7 +172,7 @@ class ScorePackageProxy(PackageProxy):
     ### PUBLIC METHODS ###
 
     def edit_forces_tagline_interactively(self):
-        getter = self.make_new_getter(where=self.where())
+        getter = self.make_getter(where=self.where())
         getter.append_string('Forces tagline')
         result = getter.run()
         if self.backtrack():
@@ -182,7 +187,7 @@ class ScorePackageProxy(PackageProxy):
         self.add_tag('instrumentation', editor.target)
 
     def edit_title_interactively(self):
-        getter = self.make_new_getter(where=self.where())
+        getter = self.make_getter(where=self.where())
         getter.append_string('new title')
         result = getter.run()
         if self.backtrack():
@@ -190,8 +195,8 @@ class ScorePackageProxy(PackageProxy):
         self.add_tag('title', result)
 
     def edit_year_of_completion_interactively(self):
-        getter = self.make_new_getter(where=self.where())
-        getter.append_integer_or_none('year of completion')
+        getter = self.make_getter(where=self.where())
+        getter.append_integer_in_range('year of completion', start=1, allow_none=True)
         result = getter.run()
         if self.backtrack():
             return
@@ -234,6 +239,7 @@ class ScorePackageProxy(PackageProxy):
             prompt = 'create {}? '.format(self.tags_file_name)
             if not is_interactive or self.confirm(prompt):
                 tags_file = file(self.tags_file_name, 'w')
+                tags_file.write('from abjad import *\n')
                 tags_file.write('from collections import OrderedDict\n')
                 tags_file.write('\n')
                 tags_file.write('tags = OrderedDict([])\n')
@@ -258,14 +264,10 @@ class ScorePackageProxy(PackageProxy):
             self.chunk_wrangler.run(head=self.package_short_name)
         elif  result == 'm':
             self.material_package_wrangler.run(head=self.package_short_name)
-        elif result == 'ft':
-            self.edit_forces_tagline_interactively()
-        elif result == 'pf':
-            self.edit_instrumentation_specifier_interactively()
-        elif result == 'tl':
-            self.edit_title_interactively()
-        elif result == 'yr':
-            self.edit_year_of_completion_interactively()
+        elif result == 'ms':
+            self.music_specifier_wrangler.run()
+        elif result == 's':
+            self.manage_setup(cache=True)
         elif result == 'fix':
             self.fix_package_structure()
         elif result == 'ls':
@@ -291,16 +293,13 @@ class ScorePackageProxy(PackageProxy):
             self.svn_st()
 
     def make_main_menu(self):
-        menu, section = self.make_new_menu(where=self.where(), is_numbered=True)
-        section = menu.make_new_section()
+        menu, section = self.make_menu(where=self.where(), is_numbered=True)
+        section = menu.make_section()
         section.append(('h', 'chunks'))
         section.append(('m', 'materials'))
-        section = menu.make_new_section()
-        section.append(('ft', 'forces tagline'))
-        section.append(('pf', 'performers'))
-        section.append(('tl', 'title'))
-        section.append(('yr', 'year of completion'))
-        hidden_section = menu.make_new_section(is_hidden=True)
+        section.append(('ms', 'music specifiers'))
+        section.append(('s', 'setup'))
+        hidden_section = menu.make_section(is_hidden=True)
         hidden_section.append(('fix', 'fix package structure'))
         hidden_section.append(('ls', 'list directory contents'))
         hidden_section.append(('profile', 'profile package structure'))
@@ -315,12 +314,72 @@ class ScorePackageProxy(PackageProxy):
     def make_score_interactively(self):
         self.print_not_implemented()
 
+    @property
+    def setup_value_menu_tokens(self):
+        result = []
+        if self.title:
+            result.append(('title', 'title: {!r}'.format(self.title)))
+        else:
+            result.append(('title', 'title:'))
+        if self.year_of_completion:
+            result.append(('year', 'year: {!r}'.format(self.year_of_completion)))
+        else:
+            result.append(('year', 'year:'))
+        if self.get_tag('instrumentation'):
+            result.append(('performers', 'performers: {}'.format(
+                self.get_tag('instrumentation').performer_name_string)))
+        else:
+            result.append(('performers', 'performers:'))
+        if self.forces_tagline:
+            result.append(('tagline', 'tagline: {!r}'.format(self.forces_tagline)))
+        else:
+            result.append(('tagline', 'tagline:'))
+        return result
+        
+    def make_setup_menu(self):
+        setup_menu, section = self.make_menu(where=self.where(), 
+            is_parenthetically_numbered=True, is_keyed=False)
+        section.tokens = self.setup_value_menu_tokens 
+        section.return_value_attribute = 'key'
+        return setup_menu
+
     def make_svn_menu(self):
-        menu, section = self.make_new_menu(where=self.where(), is_keyed=False)
+        menu, section = self.make_menu(where=self.where(), is_keyed=False)
         section.append(('st', 'st'))
         section.append(('add', 'add'))
         section.append(('ci', 'ci'))
         return menu
+
+    def handle_setup_menu_result(self, result):
+        assert isinstance(result, str)
+        if result == 'title':
+            self.edit_title_interactively()
+        elif result == 'year':
+            self.edit_year_of_completion_interactively()
+        elif result == 'tagline':
+            self.edit_forces_tagline_interactively()
+        elif result == 'performers':
+            self.edit_instrumentation_specifier_interactively()
+        else:
+            raise ValueError()
+
+    def manage_setup(self, clear=True, cache=False):
+        self.cache_breadcrumbs(cache=cache)
+        while True:
+            self.push_breadcrumb('{} - setup'.format(self.annotated_title))
+            setup_menu = self.make_setup_menu()
+            result = setup_menu.run(clear=clear)
+            if self.backtrack():
+                break
+            elif not result:
+                self.pop_breadcrumb()
+                continue
+            self.handle_setup_menu_result(result)
+            if self.backtrack():
+                break
+            self.pop_breadcrumb()
+        self.pop_breadcrumb()
+        self.restore_breadcrumbs(cache=cache)
 
     def manage_svn(self, clear=True, cache=False):
         self.cache_breadcrumbs(cache=cache)
@@ -330,6 +389,9 @@ class ScorePackageProxy(PackageProxy):
             result = menu.run(clear=clear)
             if self.backtrack():
                 break
+            elif not result:
+                self.pop_breadcrumb()
+                continue
             self.handle_svn_menu_result(result)
             if self.backtrack():
                 break
@@ -354,7 +416,7 @@ class ScorePackageProxy(PackageProxy):
     def remove_interactively(self):
         line = 'WARNING! Score package {!r} will be completely removed.'.format(self.package_importable_name)
         self.display([line, ''])
-        getter = self.make_new_getter(where=self.where())
+        getter = self.make_getter(where=self.where())
         getter.append_string("type 'clobberscore' to proceed")
         self.push_backtrack()
         should_clobber = getter.run()

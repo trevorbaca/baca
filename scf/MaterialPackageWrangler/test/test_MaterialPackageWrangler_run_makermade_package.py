@@ -11,7 +11,7 @@ def test_MaterialPackageWrangler_run_makermade_package_01():
     assert not studio.package_exists('baca.materials.testsargasso')
 
     try:
-        studio.run(user_input='m m testsargasso default sargasso default q')
+        studio.run(user_input='m m sargasso testsargasso default q')
         assert studio.package_exists('baca.materials.testsargasso')
         mpp = baca.scf.materialpackagemakers.SargassoMeasureMaterialPackageMaker(
             'baca.materials.testsargasso')
@@ -28,7 +28,32 @@ def test_MaterialPackageWrangler_run_makermade_package_01():
         assert not studio.package_exists('baca.materials.testsargasso')
 
 
-#def test_MaterialPackageWrangler_run_makermade_package_02():
+def test_MaterialPackageWrangler_run_makermade_package_02():
+    '''Make score-resident makermade package. Delete package.
+    '''
+    
+    studio = baca.scf.Studio()
+    assert not studio.package_exists('betoerung.mus.materials.testsargasso')
+
+    try:
+        studio.run(user_input='betörung m m sargasso testsargasso default q')
+        assert studio.package_exists('betoerung.mus.materials.testsargasso')
+        mpp = baca.scf.materialpackagemakers.SargassoMeasureMaterialPackageMaker(
+            'betoerung.mus.materials.testsargasso')
+        assert mpp.is_makermade
+        assert mpp.directory_contents == ['__init__.py', 'user_input.py']
+        assert mpp.has_initializer
+        assert not mpp.has_output_material_module 
+        assert mpp.has_user_input_module
+        assert not mpp.initializer_has_output_material_safe_import_statement
+        assert not mpp.parent_initializer_has_output_material_safe_import_statement
+        assert mpp.output_material is None
+    finally:
+        studio.run(user_input='betörung m testsargasso del remove default q')
+        assert not studio.package_exists('betoerung.mus.materials.testsargasso')
+
+
+#def test_MaterialPackageWrangler_run_makermade_package_03():
 #    '''Make makermade package. Corrupt initializer.
 #    Verify invalid initializer. Remove package.
 #    '''
@@ -58,7 +83,7 @@ def test_MaterialPackageWrangler_run_makermade_package_01():
 #        assert not studio.package_exists('baca.materials.testsargasso')
 #
 #
-#def test_MaterialPackageWrangler_run_makermade_package_03():
+#def test_MaterialPackageWrangler_run_makermade_package_04():
 #    '''Make makermade package. Corrupt initializer. Restore initializer.
 #    Verify initializer. Remove package.
 #    '''
@@ -88,7 +113,7 @@ def test_MaterialPackageWrangler_run_makermade_package_01():
 #        assert not studio.package_exists('baca.materials.testsargasso')
 #
 #
-#def test_MaterialPackageWrangler_run_makermade_package_04():
+#def test_MaterialPackageWrangler_run_makermade_package_05():
 #    '''Make makermade package. Create output material.
 #    Delete package." 
 #    '''
@@ -119,7 +144,7 @@ def test_MaterialPackageWrangler_run_makermade_package_01():
 #        assert not studio.package_exists('baca.materials.testsargasso')
 #
 #
-#def test_MaterialPackageWrangler_run_makermade_package_05():
+#def test_MaterialPackageWrangler_run_makermade_package_06():
 #    '''Make makermade package. Delete material definition module.
 #    Remove package.
 #    '''
@@ -148,7 +173,7 @@ def test_MaterialPackageWrangler_run_makermade_package_01():
 #        assert not studio.package_exists('baca.materials.testsargasso')
 #
 #
-#def test_MaterialPackageWrangler_run_makermade_package_06():
+#def test_MaterialPackageWrangler_run_makermade_package_07():
 #    '''Make makermade package. Overwrite material definition module with stub.
 #    Delete package.
 #    '''
@@ -177,7 +202,7 @@ def test_MaterialPackageWrangler_run_makermade_package_01():
 #        assert not studio.package_exists('baca.materials.testsargasso')
 #
 #
-#def test_MaterialPackageWrangler_run_makermade_package_07():
+#def test_MaterialPackageWrangler_run_makermade_package_08():
 #    '''Make makermade package. Copy canned material definition. Make output material. Remove output material.
 #    Remove package.
 #    '''
@@ -208,7 +233,7 @@ def test_MaterialPackageWrangler_run_makermade_package_01():
 #        assert not studio.package_exists('baca.materials.testsargasso')
 #
 #
-#def test_MaterialPackageWrangler_run_makermade_package_08():
+#def test_MaterialPackageWrangler_run_makermade_package_09():
 #    '''Make makermade package. Copy canned material definition with exception.
 #    Examine package state. Remove package.
 #    '''
@@ -237,7 +262,7 @@ def test_MaterialPackageWrangler_run_makermade_package_01():
 #        assert not studio.package_exists('baca.materials.testsargasso')
 #
 #
-#def test_MaterialPackageWrangler_run_makermade_package_09():
+#def test_MaterialPackageWrangler_run_makermade_package_10():
 #    '''Make makermade package. Copy canned material definition module. Make output data. Corrupt output data.
 #    Verify invalid output material module. Remove package.
 #    '''
@@ -269,7 +294,7 @@ def test_MaterialPackageWrangler_run_makermade_package_01():
 #        assert not studio.package_exists('baca.materials.testsargasso')
 #
 #
-#def test_MaterialPackageWrangler_run_makermade_package_10():
+#def test_MaterialPackageWrangler_run_makermade_package_11():
 #    '''Make makermade package. Copy canned material definition module. 
 #    Make output data. Make PDF. Remove package.
 #    '''

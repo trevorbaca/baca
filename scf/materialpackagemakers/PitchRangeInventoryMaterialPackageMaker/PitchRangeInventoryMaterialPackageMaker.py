@@ -22,6 +22,10 @@ class PitchRangeInventoryMaterialPackageMaker(MaterialPackageMaker):
 
     output_material_maker = pitchtools.PitchRangeInventory
 
+    # TODO:
+    #output_material_module_import_statements = [
+    #    'from abjad.tools import pitchtools',
+    #    ]
     output_material_module_import_statements = [
         'from abjad.tools.pitchtools.PitchRange import PitchRange',
         'from abjad.tools.pitchtools.PitchRangeInventory import PitchRangeInventory',
@@ -31,6 +35,7 @@ class PitchRangeInventoryMaterialPackageMaker(MaterialPackageMaker):
         ('pitch_range_tokens', ['[A0, C8]', '[C3, F#5]']),
         ]
 
+    # TODO: remove self.user_input_module_import_statements from editable maker
     user_input_module_import_statements = [
         'from baca.scf import UserInputWrapper',
         ]

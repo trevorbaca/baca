@@ -92,7 +92,7 @@ class Studio(SCFObject):
             self.push_breadcrumb(breadcrumb)
         elif result == 'new':
             breadcrumb = self.pop_breadcrumb()
-            self.score_package_wrangler.make_score_package_interactively(head=self.studio_package_importable_name)
+            self.score_package_wrangler.make_score_package_interactively()
             self.push_breadcrumb(breadcrumb)
         elif result == 'mb':
             self.session.scores_to_show = 'mothballed'
@@ -134,11 +134,11 @@ class Studio(SCFObject):
 
     def make_main_menu(self):
         menu = self.make_score_selection_menu()
-        section = menu.make_new_section()
-        section.append(('m', 'work with materials'))
-        section.append(('k', 'work with sketches'))
-        section.append(('new', 'make new score'))
-        section = menu.make_new_section(is_hidden=True)
+        section = menu.make_section()
+        section.append(('m', 'materials'))
+        section.append(('k', 'sketches'))
+        section.append(('new', 'new score'))
+        section = menu.make_section(is_hidden=True)
         section.append(('svn', 'work with repository'))
         section.append(('active', 'show active scores only'))
         section.append(('all', 'show all scores'))
@@ -146,7 +146,7 @@ class Studio(SCFObject):
         return menu
 
     def make_score_selection_menu(self):
-        menu, section = self.make_new_menu(where=self.where(), is_numbered=True, is_keyed=False)
+        menu, section = self.make_menu(where=self.where(), is_numbered=True, is_keyed=False)
         score_package_short_names = self.score_package_wrangler.score_package_short_names_to_display
         score_titles = self.score_package_wrangler.score_titles_with_years
         tokens = zip(score_package_short_names, score_titles)
@@ -156,17 +156,17 @@ class Studio(SCFObject):
         return menu
 
     def make_svn_menu(self):
-        menu, section = self.make_new_menu(where=self.where(), is_keyed=False)
+        menu, section = self.make_menu(where=self.where(), is_keyed=False)
         section.append(('add', 'add'))
         section.append(('ci', 'ci'))
         section.append(('st', 'st'))
         section.append(('up', 'up'))
-        section = menu.make_new_section(is_keyed=False)
+        section = menu.make_section(is_keyed=False)
         section.append(('add_scores', 'add_scores'))
         section.append(('ci_scores', 'ci_scores'))
         section.append(('st_scores', 'st_scores'))
         section.append(('up_scores', 'up_scores'))
-        section = menu.make_new_section(is_keyed=False)
+        section = menu.make_section(is_keyed=False)
         section.append(('pytest', 'pytest'))
         section.append(('pytest_scores', 'pytest_scores'))
         section.append(('pytest_all', 'pytest_all'))

@@ -6,7 +6,6 @@ from baca.scf.Session import Session
 import inspect
 import os
 import pprint
-import re
 import readline
 import sys
 
@@ -28,6 +27,10 @@ class SCFObject(object):
         return os.path.join(self.scf_root_directory, 'assets')
 
     @property
+    def breadcrumb(self):
+        return 'SCF object'
+
+    @property
     def breadcrumb_stack(self):
         return self.session.breadcrumb_stack
 
@@ -45,15 +48,23 @@ class SCFObject(object):
 
     @property
     def materialpackagemakers_package_importable_name(self):
-        return '.'.join([self.scf_package_importable_name, 'materialpackagemakers'])
+        return self.dot_join([self.scf_package_importable_name, 'materialpackagemakers'])
 
     @property
     def scf_package_importable_name(self):
-        return '.'.join([self.studio_package_importable_name, 'scf'])
+        return self.dot_join([self.studio_package_importable_name, 'scf'])
 
     @property
     def scf_root_directory(self):
         return self.package_importable_name_to_directory_name(self.scf_package_importable_name)
+
+    @property
+    def score_materials_package_importable_name_body(self):
+        return 'mus.materials'
+
+    @property
+    def score_specifiers_package_importable_name_body(self):
+        return 'mus.specifiers'
 
     @property
     def session(self):
@@ -61,7 +72,7 @@ class SCFObject(object):
 
     @property
     def sketches_package_importable_name(self):
-        return '.'.join([self.studio_package_importable_name, 'sketches'])
+        return self.dot_join([self.studio_package_importable_name, 'sketches'])
 
     @property
     def source_file_name(self):
@@ -79,7 +90,11 @@ class SCFObject(object):
 
     @property
     def studio_materials_package_importable_name(self):
-        return '.'.join([self.studio_package_importable_name, 'materials'])
+        return self.dot_join([self.studio_package_importable_name, 'materials'])
+
+    @property
+    def studio_specifiers_package_importable_name(self):
+        return self.dot_join([self.studio_package_importable_name, 'specifiers'])
 
     @property
     def studio_package_importable_name(self):
@@ -91,7 +106,7 @@ class SCFObject(object):
 
     @property
     def stylesheets_package_importable_name(self):
-        return '.'.join([self.scf_package_importable_name, 'stylesheets'])
+        return self.dot_join([self.scf_package_importable_name, 'stylesheets'])
 
     @property
     def transcript(self):
@@ -115,9 +130,8 @@ class SCFObject(object):
         return self.session.backtrack()
 
     def cache_breadcrumbs(self, cache=False):
-        self.session.cached_breadcrumbs = []
         if cache:
-            self.session.cached_breadcrumbs = self.session.breadcrumb_stack[:]
+            self.session.breadcrumb_cache_stack.append(self.session.breadcrumb_stack[:])
             self.session._breadcrumb_stack[:] = []
 
     def conditionally_add_terminal_newlines(self, lines):
@@ -134,9 +148,9 @@ class SCFObject(object):
             iotools.clear_terminal()
 
     def confirm(self, prompt_string='ok', include_chevron=False):
-        getter = self.make_new_getter(where=self.where())
+        getter = self.make_getter(where=self.where())
         getter.append_yes_no_string(prompt_string)
-        result = getter.run()
+        result = getter.run(include_chevron=include_chevron)
         if self.backtrack():
             return
         return 'yes'.startswith(result.lower())
@@ -161,10 +175,15 @@ class SCFObject(object):
                 for line in lines:
                     print line
 
-    def handle_raw_input(self, prompt, include_chevron=True, include_newline=True):
-        prompt = iotools.capitalize_string_start(prompt)
+    def dot_join(self, expr):
+        return '.'.join(expr)
+
+    def handle_raw_input(self, prompt, include_chevron=True, include_newline=True, prompt_character='>',
+        capitalize_prompt=True):
+        if capitalize_prompt:
+            prompt = iotools.capitalize_string_start(prompt)
         if include_chevron:
-            prompt = prompt + '> '
+            prompt = prompt + prompt_character + ' '
         else:
             prompt = prompt + ' '
         if self.session.is_displayable:
@@ -188,25 +207,30 @@ class SCFObject(object):
             self.session.complete_transcript.append_lines(menu_chunk)
         return user_response
 
-    def handle_raw_input_with_default(self, prompt, default=None, include_chevron=True, include_newline=True):
+    def handle_raw_input_with_default(self, prompt, default=None, include_chevron=True, include_newline=True,
+        prompt_character='>', capitalize_prompt=True):
         if default in (None, 'None'):
             default = ''
         readline.set_startup_hook(lambda: readline.insert_text(default))
         try:
-            return self.handle_raw_input(
-                prompt, include_chevron=include_chevron, include_newline=include_newline)
+            return self.handle_raw_input(prompt, include_chevron=include_chevron, 
+                include_newline=include_newline, prompt_character=prompt_character,
+                capitalize_prompt=capitalize_prompt)
         finally:
             readline.set_startup_hook()
 
-    def make_new_getter(self, where=None):
+    def make_getter(self, where=None):
         import baca
         return baca.scf.menuing.UserInputGetter(where=where, session=self.session)
 
-    def make_new_menu(self, is_hidden=False, is_keyed=True, is_numbered=False, is_ranged=False, where=None):
+    def make_menu(self, is_hidden=False, is_internally_keyed=False, is_keyed=True, 
+        is_numbered=False, is_parenthetically_numbered=False, is_ranged=False, where=None):
         import baca
         menu = baca.scf.menuing.Menu(where=where, session=self.session)
-        section = menu.make_new_section(
-            is_hidden=is_hidden, is_keyed=is_keyed, is_numbered=is_numbered, is_ranged=is_ranged)
+        section = menu.make_section(
+            is_hidden=is_hidden, is_internally_keyed=is_internally_keyed, is_keyed=is_keyed, 
+            is_numbered=is_numbered, is_parenthetically_numbered=is_parenthetically_numbered, 
+            is_ranged=is_ranged)
         return menu, section
 
     def module_importable_name_to_full_file_name(self, module_importable_name):
@@ -224,11 +248,8 @@ class SCFObject(object):
         package_importable_name_parts = package_importable_name.split('.')
         if package_importable_name_parts[0] == self.studio_package_importable_name:
             directory_parts = [os.environ.get('BACA')] + package_importable_name_parts[1:]
-        #elif package_importable_name_parts[0] in os.listdir(os.environ.get('SCORES')):
         else:
             directory_parts = [os.environ.get('SCORES')] + package_importable_name_parts[:]
-        #else:
-        #    raise ValueError('Unknown package importable name {!r}.'.format(package_importable_name))
         directory = os.path.join(*directory_parts)
         return directory
 
@@ -285,7 +306,7 @@ class SCFObject(object):
         if lines:
             lines.append('')
             self.display(lines)
-        response = self.handle_raw_input('press return to continue.', include_chevron=False)
+        self.handle_raw_input('press return to continue.', include_chevron=False)
         self.conditionally_clear_terminal()
 
     def pt(self):
@@ -316,7 +337,8 @@ class SCFObject(object):
 
     def restore_breadcrumbs(self, cache=False):
         if cache:
-            self.session._breadcrumb_stack[:] = self.session.cached_breadcrumbs[:]
+            #self.session._breadcrumb_stack[:] = self.session.cached_breadcrumbs[:]
+            self.session._breadcrumb_stack[:] = self.session.breadcrumb_cache_stack.pop()
 
     def where(self):
         return inspect.stack()[1]

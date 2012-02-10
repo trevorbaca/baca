@@ -6,7 +6,6 @@ import os
 class ChunkPackageWrangler(PackageWrangler):
 
     def __init__(self, session=None):
-        import baca
         PackageWrangler.__init__(self, self.sketches_package_importable_name, 'mus.chunks', session=session)
 
     ### READ-ONLY PUBLIC ATTRIBUTES ###
@@ -33,9 +32,9 @@ class ChunkPackageWrangler(PackageWrangler):
         chunk_proxy.make_chunk_interactively()
 
     def make_main_menu(self, head=None):
-        menu, section = self.make_new_menu(where=self.where(), is_numbered=True)
+        menu, section = self.make_menu(where=self.where(), is_numbered=True)
         section.tokens = self.list_wrangled_package_short_names(head=head)
-        section = menu.make_new_section()
+        section = menu.make_section()
         section.append(('new', 'new chunk'))
         return menu
 

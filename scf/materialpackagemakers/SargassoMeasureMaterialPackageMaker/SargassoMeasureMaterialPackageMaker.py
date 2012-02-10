@@ -5,6 +5,7 @@ from abjad.tools import sequencetools
 from baca.music.make_sargasso_measures import make_illustration_from_output_material
 from baca.scf.MaterialPackageMaker import MaterialPackageMaker
 from baca.scf.UserInputWrapper import UserInputWrapper
+from baca.scf import predicates
 import baca
 
 
@@ -24,6 +25,10 @@ class SargassoMeasureMaterialPackageMaker(MaterialPackageMaker):
             
     output_material_maker = staticmethod(baca.music.make_sargasso_measures)
 
+    # TODO: 
+    #output_material_module_import_statements = [
+    #    'from abjad.tools import measuretools',
+    #]
     output_material_module_import_statements = [
         'from abjad.tools.measuretools.Measure import Measure',
         ]
@@ -39,6 +44,10 @@ class SargassoMeasureMaterialPackageMaker(MaterialPackageMaker):
         ('measures_are_shuffled', True),
         ]
 
+    # TODO:
+    #user_input_module_import_statements = [
+    #    'from abjad.tools import durationtools',
+    #]
     user_input_module_import_statements = [
         'from abjad.tools.durationtools import Duration',
         'from baca.scf import UserInputWrapper',
@@ -50,9 +59,9 @@ class SargassoMeasureMaterialPackageMaker(MaterialPackageMaker):
         ('measure_division_denominator', mathtools.is_nonnegative_integer_power_of_two),
         ('measure_division_talea', sequencetools.all_are_nonnegative_integers),
         ('total_duration', durationtools.is_duration_token, 'value = Duration({})'),
-        ('measures_are_scaled', bool),
-        ('measures_are_split', bool),
-        ('measures_are_shuffled', bool),
+        ('measures_are_scaled', predicates.is_boolean),
+        ('measures_are_split', predicates.is_boolean),
+        ('measures_are_shuffled', predicates.is_boolean),
         ]
 
     ### READ-ONLY PUBLIC ATTRIBUTES ###
