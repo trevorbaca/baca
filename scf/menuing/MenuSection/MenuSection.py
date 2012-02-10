@@ -5,13 +5,15 @@ from baca.scf.menuing.MenuObject import MenuObject
 
 class MenuSection(MenuObject):
 
-    def __init__(self, is_hidden=False, is_keyed=True, is_numbered=False, is_ranged=False,
-        is_read_only=False, session=None, where=None, title=None):
+    def __init__(self, is_hidden=False, is_keyed=True, is_numbered=False, 
+        is_parenthetically_numbered=False, is_ranged=False, is_read_only=False, 
+        session=None, where=None, title=None):
         MenuObject.__init__(self, session=session, where=where, title=title)
         self._indent_level = 1
         self._is_hidden = is_hidden
         self._is_keyed = is_keyed
         self._is_numbered = is_numbered
+        self._is_parenthetically_numbered = is_parenthetically_numbered
         self._is_ranged = is_ranged
         self._return_value_attribute = 'key'
         self.tokens = None
@@ -59,6 +61,10 @@ class MenuSection(MenuObject):
         return self._is_numbered
 
     @property
+    def is_parenthetically_numbered(self):
+        return self._is_parenthetically_numbered
+
+    @property
     def is_ranged(self):
         return self._is_ranged
 
@@ -91,7 +97,7 @@ class MenuSection(MenuObject):
         result = []
         for i, token in enumerate(self.tokens):
             number = key = body = None
-            if self.is_numbered:
+            if self.is_numbered or self.is_parenthetically_numbered:
                 number = i + 1
             if isinstance(token, str):
                 body = token
@@ -292,7 +298,10 @@ class MenuSection(MenuObject):
         for entry_index, token in enumerate(self.tokens):
             key, body = self.token_to_key_and_body(token)
             menu_line = self.make_tab(self.indent_level) + ' '
-            if self.is_numbered:
+            if self.is_parenthetically_numbered:
+                entry_number = entry_index + 1
+                menu_line += '({}) '.format(str(entry_number))
+            elif self.is_numbered:
                 entry_number = entry_index + 1
                 menu_line += '{}: '.format(str(entry_number))
             if key and self.is_keyed:
@@ -314,7 +323,7 @@ class MenuSection(MenuObject):
         return key, body
 
     def token_to_menu_entry_number(self, token):
-        if self.is_numbered:
+        if self.is_numbered or self.is_parenthetically_numbered:
             for i, x in enumerate(self.tokens):
                 if x == token:
                     return i + 1

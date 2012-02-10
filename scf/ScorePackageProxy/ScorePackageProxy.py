@@ -319,29 +319,31 @@ class ScorePackageProxy(PackageProxy):
         self.print_not_implemented()
 
     @property
-    def formatted_setup_values(self):
+    def setup_value_menu_tokens(self):
         result = []
         if self.title:
-            result.append('title: {!r}'.format(self.title))
+            result.append(('title', 'title: {!r}'.format(self.title)))
         else:
-            result.append('title:')
+            result.append(('title', 'title:'))
         if self.year_of_completion:
-            result.append('year: {!r}'.format(self.year_of_completion))
+            result.append(('year', 'year: {!r}'.format(self.year_of_completion)))
         else:
-            result.append('year:')
+            result.append(('year', 'year:'))
         if self.forces_tagline:
-            result.append('tagline: {!r}'.format(self.forces_tagline))
+            result.append(('tagline', 'tagline: {!r}'.format(self.forces_tagline)))
         else:
-            result.append('tagline:')
+            result.append(('tagline', 'tagline:'))
         if self.get_tag('instrumentation'):
-            result.append('performers: {!r}'.format(self.get_tag('instrumentation')))
+            result.append(('performers', 'performers: {!r}'.format(self.get_tag('instrumentation'))))
         else:
-            result.append('performers:')
+            result.append(('performers', 'performers:'))
         return result
         
     def make_setup_menu(self):
-        setup_menu, section = self.make_new_menu(where=self.where(), is_numbered=True)
-        section.tokens = self.formatted_setup_values 
+        setup_menu, section = self.make_new_menu(where=self.where(), 
+            is_parenthetically_numbered=True, is_keyed=False)
+        section.tokens = self.setup_value_menu_tokens 
+        section.return_value_attribute = 'key'
         return setup_menu
 
     def make_svn_menu(self):
@@ -352,7 +354,17 @@ class ScorePackageProxy(PackageProxy):
         return menu
 
     def handle_setup_menu_result(self, result):
-        pass
+        assert isinstance(result, str)
+        if result == 'title':
+            self.edit_title_interactively()
+        elif result == 'year':
+            self.edit_year_of_completion_interactively()
+        elif result == 'tagline':
+            self.edit_forces_tagline_interactively()
+        elif result == 'performers':
+            self.edit_instrumentation_specifier_interactively()
+        else:
+            raise ValueError()
 
     def manage_setup(self, clear=True, cache=False):
         self.cache_breadcrumbs(cache=cache)
