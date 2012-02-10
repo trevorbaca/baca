@@ -258,6 +258,8 @@ class ScorePackageProxy(PackageProxy):
             self.chunk_wrangler.run(head=self.package_short_name)
         elif  result == 'm':
             self.material_package_wrangler.run(head=self.package_short_name)
+        elif result == 's':
+            self.manage_setup()
         elif result == 'ft':
             self.edit_forces_tagline_interactively()
         elif result == 'pf':
@@ -295,6 +297,7 @@ class ScorePackageProxy(PackageProxy):
         section = menu.make_new_section()
         section.append(('h', 'chunks'))
         section.append(('m', 'materials'))
+        section.append(('s', 'setup'))
         section = menu.make_new_section()
         section.append(('ft', 'forces tagline'))
         section.append(('pf', 'performers'))
@@ -315,12 +318,57 @@ class ScorePackageProxy(PackageProxy):
     def make_score_interactively(self):
         self.print_not_implemented()
 
+    @property
+    def formatted_setup_values(self):
+        result = []
+        if self.title:
+            result.append('title: {!r}'.format(self.title))
+        else:
+            result.append('title:')
+        if self.year_of_completion:
+            result.append('year: {!r}'.format(self.year_of_completion))
+        else:
+            result.append('year:')
+        if self.forces_tagline:
+            result.append('tagline: {!r}'.format(self.forces_tagline))
+        else:
+            result.append('tagline:')
+        if self.get_tag('instrumentation'):
+            result.append('performers: {!r}'.format(self.get_tag('instrumentation')))
+        else:
+            result.append('performers:')
+        return result
+        
+    def make_setup_menu(self):
+        setup_menu, section = self.make_new_menu(where=self.where(), is_numbered=True)
+        section.tokens = self.formatted_setup_values 
+        return setup_menu
+
     def make_svn_menu(self):
         menu, section = self.make_new_menu(where=self.where(), is_keyed=False)
         section.append(('st', 'st'))
         section.append(('add', 'add'))
         section.append(('ci', 'ci'))
         return menu
+
+    def handle_setup_menu_result(self, result):
+        pass
+
+    def manage_setup(self, clear=True, cache=False):
+        self.cache_breadcrumbs(cache=cache)
+        setup_menu = self.make_setup_menu()
+        while True:
+            self.push_breadcrumb('setup')
+            setup_menu = self.make_setup_menu()
+            result = setup_menu.run(clear=clear)
+            if self.backtrack():
+                break
+            self.handle_setup_menu_result(result)
+            if self.backtrack():
+                break
+            self.pop_breadcrumb()
+        self.pop_breadcrumb()
+        self.restore_breadcrumbs(cache=cache)
 
     def manage_svn(self, clear=True, cache=False):
         self.cache_breadcrumbs(cache=cache)
