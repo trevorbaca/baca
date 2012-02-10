@@ -7,21 +7,21 @@ import types
 
 class UserInputGetter(MenuSectionAggregator):
 
-    def __init__(self, session=None, where=None, include_newlines=True, title=None, indent_level=0,
-        prompt_character='>', capitalize_prompts=True):
+    def __init__(self, session=None, where=None):
         MenuSectionAggregator.__init__(self, session=session, where=where)
         self._argument_lists = []
         self._chevrons = []
         self._defaults = []
         self._execs = []
         self._helps = []
-        self.include_newlines = include_newlines
-        self._indent_level = indent_level
         self._prompts = []
         self._tests = []
-        self.capitalize_prompts = capitalize_prompts
-        self.prompt_character = prompt_character
-        self.title = title
+        self.capitalize_prompts = True
+        self.include_newlines = True
+        self.indent_level = 0
+        self.number_prompts = False
+        self.prompt_character = '>'
+        self.title = None
 
     ### OVERLOADS ###
 
@@ -49,10 +49,6 @@ class UserInputGetter(MenuSectionAggregator):
     @property
     def helps(self):
         return self._helps
-
-    @property
-    def indent_level(self):
-        return self._indent_level
 
     @property
     def prompts(self):
