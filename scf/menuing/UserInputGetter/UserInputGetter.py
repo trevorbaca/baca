@@ -7,13 +7,14 @@ import types
 
 class UserInputGetter(MenuSectionAggregator):
 
-    def __init__(self, session=None, where=None):
+    def __init__(self, session=None, where=None, include_newlines=True):
         MenuSectionAggregator.__init__(self, session=session, where=where)
         self._argument_lists = []
         self._chevrons = []
         self._defaults = []
         self._execs = []
         self._helps = []
+        self.include_newlines = include_newlines
         self._prompts = []
         self._tests = []
 
@@ -219,8 +220,8 @@ class UserInputGetter(MenuSectionAggregator):
             prompt = self.menu_lines[-1]
             default = str(self.defaults[self.prompt_index])
             include_chevron = self.chevrons[self.prompt_index]
-            user_response = self.handle_raw_input_with_default(
-                prompt, default=default, include_chevron=include_chevron)
+            user_response = self.handle_raw_input_with_default(prompt, default=default, 
+                include_chevron=include_chevron, include_newline=self.include_newlines)
             if user_response is None:
                 self.prompt_index = self.prompt_index + 1
                 break

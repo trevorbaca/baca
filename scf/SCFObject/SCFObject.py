@@ -198,9 +198,10 @@ class SCFObject(object):
         finally:
             readline.set_startup_hook()
 
-    def make_new_getter(self, where=None):
+    def make_new_getter(self, where=None, include_newlines=True):
         import baca
-        return baca.scf.menuing.UserInputGetter(where=where, session=self.session)
+        return baca.scf.menuing.UserInputGetter(
+            where=where, session=self.session, include_newlines=include_newlines)
 
     def make_new_menu(self, is_hidden=False, is_keyed=True, is_numbered=False, is_ranged=False, where=None):
         import baca
