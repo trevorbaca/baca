@@ -137,7 +137,7 @@ class Studio(SCFObject):
         section = menu.make_new_section()
         section.append(('m', 'work with materials'))
         section.append(('k', 'work with sketches'))
-        section.append(('new', 'make new score'))
+        section.append(('new', 'new score'))
         section = menu.make_new_section(is_hidden=True)
         section.append(('svn', 'work with repository'))
         section.append(('active', 'show active scores only'))

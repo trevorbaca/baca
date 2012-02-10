@@ -37,7 +37,7 @@ def test_Studio_02():
      '',
      '     work with materials (m)',
      '     work with sketches (k)',
-     '     make new score (new)',
+     '     new score (new)',
      '']
 
 
@@ -90,7 +90,7 @@ def test_Studio_04():
      '',
      '     work with materials (m)',
      '     work with sketches (k)',
-     '     make new score (new)',
+     '     new score (new)',
      '']
 
 
