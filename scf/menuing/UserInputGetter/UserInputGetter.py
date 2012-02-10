@@ -213,7 +213,11 @@ class UserInputGetter(MenuSectionAggregator):
                     return False
         return value
 
-    def indent_prompt(self, prompt):
+    def indent_and_number_prompt(self, prompt):
+        if self.number_prompts:
+            prompt_number = self.prompt_index + 1
+            total_prompts = len(self.prompts)
+            prompt = '({}/{}) {}'.format(prompt_number, total_prompts, prompt)
         if self.indent_level:
             return '{} {}'.format(self.make_tab(self.indent_level), prompt)
         else:
@@ -238,7 +242,7 @@ class UserInputGetter(MenuSectionAggregator):
             prompt = self.menu_lines[-1]
             default = str(self.defaults[self.prompt_index])
             include_chevron = self.chevrons[self.prompt_index]
-            prompt = self.indent_prompt(prompt)
+            prompt = self.indent_and_number_prompt(prompt)
             user_response = self.handle_raw_input_with_default(prompt, default=default, 
                 include_chevron=include_chevron, include_newline=self.include_newlines,
                 prompt_character=self.prompt_character, capitalize_prompt=self.capitalize_prompts)
