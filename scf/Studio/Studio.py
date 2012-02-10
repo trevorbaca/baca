@@ -92,7 +92,7 @@ class Studio(SCFObject):
             self.push_breadcrumb(breadcrumb)
         elif result == 'new':
             breadcrumb = self.pop_breadcrumb()
-            self.score_package_wrangler.make_score_package_interactively(head=self.studio_package_importable_name)
+            self.score_package_wrangler.make_score_package_interactively()
             self.push_breadcrumb(breadcrumb)
         elif result == 'mb':
             self.session.scores_to_show = 'mothballed'

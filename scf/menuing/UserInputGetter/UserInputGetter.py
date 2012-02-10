@@ -5,7 +5,6 @@ from baca.scf import predicates
 import types
 
 
-# TODO: write UserInputGetter tests
 class UserInputGetter(MenuSectionAggregator):
 
     def __init__(self, session=None, where=None):
@@ -72,6 +71,7 @@ class UserInputGetter(MenuSectionAggregator):
         self.append_something(spaced_attribute_name, message, default=default)
         self.tests.append(predicates.is_integer)
 
+    # TODO: change to append_integer_in_range and allow mixed open / closed range
     def append_integer_in_closed_range(self, spaced_attribute_name, start, stop, default=None):
         message = "value for '{}' must be integer between {} and {}, inclusive."
         self.append_something(spaced_attribute_name, message, (start, stop), default=default)
@@ -135,6 +135,10 @@ class UserInputGetter(MenuSectionAggregator):
         message = "value for '{}' must be symbolic pitch range string. Ex: [A0, C8]."
         self.append_something(spaced_attribute_name, message, default=default)
         self.tests.append(pitchtools.is_symbolic_pitch_range_string)
+
+    # TODO: add self.append_available_underscore_delimited_lowercase_package_name()
+
+    # TODO: add self.append_existing_package_name()
 
     def append_underscore_delimited_lowercase_package_name(self, spaced_attribute_name, default=None):
         message = "value for {!r} must be underscore-delimited lowercase package name of length at least 3."
