@@ -234,6 +234,7 @@ class ScorePackageProxy(PackageProxy):
             prompt = 'create {}? '.format(self.tags_file_name)
             if not is_interactive or self.confirm(prompt):
                 tags_file = file(self.tags_file_name, 'w')
+                tags_file.write('from abjad import *\n')
                 tags_file.write('from collections import OrderedDict\n')
                 tags_file.write('\n')
                 tags_file.write('tags = OrderedDict([])\n')
@@ -259,7 +260,7 @@ class ScorePackageProxy(PackageProxy):
         elif  result == 'm':
             self.material_package_wrangler.run(head=self.package_short_name)
         elif result == 's':
-            self.manage_setup()
+            self.manage_setup(cache=True)
         elif result == 'ft':
             self.edit_forces_tagline_interactively()
         elif result == 'pf':
@@ -329,14 +330,15 @@ class ScorePackageProxy(PackageProxy):
             result.append(('year', 'year: {!r}'.format(self.year_of_completion)))
         else:
             result.append(('year', 'year:'))
+        if self.get_tag('instrumentation'):
+            result.append(('performers', 'performers: {}'.format(
+                self.get_tag('instrumentation').performer_name_string)))
+        else:
+            result.append(('performers', 'performers:'))
         if self.forces_tagline:
             result.append(('tagline', 'tagline: {!r}'.format(self.forces_tagline)))
         else:
             result.append(('tagline', 'tagline:'))
-        if self.get_tag('instrumentation'):
-            result.append(('performers', 'performers: {!r}'.format(self.get_tag('instrumentation'))))
-        else:
-            result.append(('performers', 'performers:'))
         return result
         
     def make_setup_menu(self):
@@ -370,6 +372,7 @@ class ScorePackageProxy(PackageProxy):
         self.cache_breadcrumbs(cache=cache)
         setup_menu = self.make_setup_menu()
         while True:
+            self.push_breadcrumb(self.annotated_title)
             self.push_breadcrumb('setup')
             setup_menu = self.make_setup_menu()
             result = setup_menu.run(clear=clear)
@@ -379,6 +382,8 @@ class ScorePackageProxy(PackageProxy):
             if self.backtrack():
                 break
             self.pop_breadcrumb()
+            self.pop_breadcrumb()
+        self.pop_breadcrumb()
         self.pop_breadcrumb()
         self.restore_breadcrumbs(cache=cache)
 
