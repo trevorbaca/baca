@@ -99,7 +99,7 @@ class PerformerEditor(InteractiveEditor):
     def make_main_menu(self):
         menu, section = self.make_new_menu(where=self.where(), is_numbered=True)
         section.return_value_attribute = 'number'
-        section.section_title = 'instruments'
+        section.title = 'instruments'
         instrument_names = [x.instrument_name for x in self.target.instruments]
         section.tokens = instrument_names
         section = menu.make_new_section(is_keyed=False)
@@ -165,7 +165,7 @@ class PerformerEditor(InteractiveEditor):
 
     def set_initial_configuration_menu(self):
         menu, section = self.make_new_menu(where=self.where(), is_numbered=True, is_ranged=True) 
-        section.section_title = 'select instruments'
+        section.title = 'select instruments'
         likely_instruments = self.target.likely_instruments_based_on_performer_name
         likely_instrument_names = [x().instrument_name for x in likely_instruments]
         most_likely_instrument = self.target.most_likely_instrument_based_on_performer_name

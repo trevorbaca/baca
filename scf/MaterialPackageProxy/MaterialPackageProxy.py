@@ -641,11 +641,11 @@ class MaterialPackageProxy(PackageProxy):
     def make_main_menu_section_for_initializer(self, main_menu, hidden_section):
         if not self.has_initializer:
             section = main_menu.make_new_section()
-            section.section_title = '(Note: package has no initializer.)' 
+            section.title = '(Note: package has no initializer.)' 
             section.append(('inr', 'initializer - restore'))
         elif not self.has_readable_initializer:
             section = main_menu.make_new_section()
-            section.section_title = '(Note: package has invalid initializer.)' 
+            section.title = '(Note: package has invalid initializer.)' 
             section.append(('inr', 'initializer - restore'))
         hidden_section.append(('inv', 'view package initializer'))
         hidden_section.append(('incanned', 'copy canned package initializer'))
@@ -658,7 +658,7 @@ class MaterialPackageProxy(PackageProxy):
         if self.has_material_definition_module:
             has_invalid_material_definition_module = not self.has_readable_material_definition_module
             if has_invalid_material_definition_module:
-                section.section_title = '(Note: has invalid material definition module.)'
+                section.title = '(Note: has invalid material definition module.)'
             section.append(('mde', 'material definition - edit'))
             if not has_invalid_material_definition_module:
                 section.append(('mdx', 'material definition - execute'))
@@ -681,7 +681,7 @@ class MaterialPackageProxy(PackageProxy):
                 self.has_complete_user_input_wrapper_in_memory:
                 section = main_menu.make_new_section()
                 if self.has_output_material_module and not self.has_readable_output_material_module:
-                    section.section_title = '(Note: has invalid output material module.)'
+                    section.title = '(Note: has invalid output material module.)'
                 section.append(('omm', 'output material - make'))
                 has_output_material_section = True
             if self.has_output_material_editor:
@@ -691,7 +691,7 @@ class MaterialPackageProxy(PackageProxy):
                         target=self.output_material, session=self.session)
                     summary_lines = output_material_editor.summary_lines
                     if summary_lines:
-                        section.section_title = summary_lines
+                        section.title = summary_lines
                 section.append(('omi', 'output material - interact'))
                 has_output_material_section = True
             if self.has_output_material_module:

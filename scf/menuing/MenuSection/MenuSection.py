@@ -3,12 +3,11 @@ from abjad.tools import mathtools
 from baca.scf.menuing.MenuObject import MenuObject
 
 
-# TODO: implement is_read_only keyword for read-only menu sections
 class MenuSection(MenuObject):
 
     def __init__(self, is_hidden=False, is_keyed=True, is_numbered=False, is_ranged=False,
-        is_read_only=False, session=None, where=None):
-        MenuObject.__init__(self, session=session, where=where)
+        is_read_only=False, session=None, where=None, title=None):
+        MenuObject.__init__(self, session=session, where=where, title=title)
         self._indent_level = 1
         self._is_hidden = is_hidden
         self._is_keyed = is_keyed
@@ -17,7 +16,6 @@ class MenuSection(MenuObject):
         self._return_value_attribute = 'key'
         self.tokens = None
         self.default_index = None
-        self.section_title = None
 
     ### OVERLOADS ###
 
@@ -155,15 +153,6 @@ class MenuSection(MenuObject):
         return property(**locals())
 
     @apply
-    def section_title():
-        def fget(self):
-            return self._section_title
-        def fset(self, section_title):
-            assert isinstance(section_title, (str, list, type(None)))
-            self._section_title = section_title
-        return property(**locals())
-
-    @apply
     def tokens():
         def fget(self):
             return self._tokens
@@ -298,7 +287,7 @@ class MenuSection(MenuObject):
         Nonkeyed entries (always numbered) supply body as return value.
         '''
         menu_lines = []
-        menu_lines.extend(self.make_section_title_lines())
+        menu_lines.extend(self.make_title_lines())
         assert all([self.is_token(x) for x in self.tokens])
         for entry_index, token in enumerate(self.tokens):
             key, body = self.token_to_key_and_body(token)
@@ -312,20 +301,6 @@ class MenuSection(MenuObject):
                 menu_line += '{}'.format(body)
             menu_lines.append(menu_line)
         if self.tokens:
-            menu_lines.append('')
-        return menu_lines
-
-    def make_section_title_lines(self):
-        menu_lines = []
-        if isinstance(self.section_title, str):
-            section_title_lines = [iotools.capitalize_string_start(self.section_title)]
-        elif isinstance(self.section_title, list):
-            section_title_lines = self.section_title
-        else:
-            section_title_lines = []
-        for section_title_line in section_title_lines:
-            menu_lines.append('{} {}'.format(self.make_tab(self.indent_level), section_title_line))
-        if menu_lines:
             menu_lines.append('')
         return menu_lines
 

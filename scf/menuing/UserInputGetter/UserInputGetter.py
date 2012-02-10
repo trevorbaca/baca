@@ -7,7 +7,8 @@ import types
 
 class UserInputGetter(MenuSectionAggregator):
 
-    def __init__(self, session=None, where=None, include_newlines=True):
+    def __init__(self, session=None, where=None, include_newlines=True, title=None, indent_level=0,
+        prompt_character='>', capitalize_prompts=True):
         MenuSectionAggregator.__init__(self, session=session, where=where)
         self._argument_lists = []
         self._chevrons = []
@@ -15,8 +16,12 @@ class UserInputGetter(MenuSectionAggregator):
         self._execs = []
         self._helps = []
         self.include_newlines = include_newlines
+        self._indent_level = indent_level
         self._prompts = []
         self._tests = []
+        self.capitalize_prompts = capitalize_prompts
+        self.prompt_character = prompt_character
+        self.title = title
 
     ### OVERLOADS ###
 
@@ -44,6 +49,10 @@ class UserInputGetter(MenuSectionAggregator):
     @property
     def helps(self):
         return self._helps
+
+    @property
+    def indent_level(self):
+        return self._indent_level
 
     @property
     def prompts(self):
@@ -181,6 +190,12 @@ class UserInputGetter(MenuSectionAggregator):
         else:
             return test(argument)
 
+    def display_title(self):
+        title_lines = self.make_title_lines()
+        if title_lines:
+            self.display(title_lines)
+        pass
+
     def get_value_from_direct_evaluation(self, user_response):
         try:
             value = eval(user_response)
@@ -202,9 +217,16 @@ class UserInputGetter(MenuSectionAggregator):
                     return False
         return value
 
+    def indent_prompt(self, prompt):
+        if self.indent_level:
+            return '{} {}'.format(self.make_tab(self.indent_level), prompt)
+        else:
+            return prompt
+
     def load_prompt(self):
         prompt = self.prompts[self.prompt_index]
-        prompt = iotools.capitalize_string_start(prompt)
+        if self.capitalize_prompts:
+            prompt = iotools.capitalize_string_start(prompt)
         self.menu_lines.append(prompt)
 
     def move_to_prev_prompt(self):
@@ -220,8 +242,10 @@ class UserInputGetter(MenuSectionAggregator):
             prompt = self.menu_lines[-1]
             default = str(self.defaults[self.prompt_index])
             include_chevron = self.chevrons[self.prompt_index]
+            prompt = self.indent_prompt(prompt)
             user_response = self.handle_raw_input_with_default(prompt, default=default, 
-                include_chevron=include_chevron, include_newline=self.include_newlines)
+                include_chevron=include_chevron, include_newline=self.include_newlines,
+                prompt_character=self.prompt_character, capitalize_prompt=self.capitalize_prompts)
             if user_response is None:
                 self.prompt_index = self.prompt_index + 1
                 break
@@ -247,6 +271,7 @@ class UserInputGetter(MenuSectionAggregator):
     def present_prompts_and_store_values(self):
         self.conditionally_clear_terminal()
         self.menu_lines, self.values, self.prompt_index = [], [], 0
+        self.display_title()
         while self.prompt_index < len(self.prompts):
             if not self.present_prompt_and_store_value():
                 break

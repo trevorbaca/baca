@@ -1,17 +1,17 @@
 from abjad.tools import iotools
 from baca.scf.SCFObject.SCFObject import SCFObject
 from baca.scf import predicates
-import os
-import subprocess
+import os, subprocess
 
 
 class MenuObject(SCFObject):
 
-    def __init__(self, session=None, where=None):
+    def __init__(self, session=None, where=None, title=None):
         SCFObject.__init__(self, session=session)
         self.prompt_default = None
         self.should_clear_terminal = False
         self.where = where
+        self.title = title
 
     ### READ / WRITE PUBLIC ATTRIBUTES ###
 
@@ -31,6 +31,15 @@ class MenuObject(SCFObject):
         def fset(self, should_clear_terminal):
             assert isinstance(should_clear_terminal, bool)
             self._should_clear_terminal = should_clear_terminal
+        return property(**locals())
+
+    @apply
+    def title():
+        def fget(self):
+            return self._title
+        def fset(self, title):
+            assert isinstance(title, (str, list, type(None)))
+            self._title = title
         return property(**locals())
 
     @apply
@@ -135,6 +144,23 @@ class MenuObject(SCFObject):
 
     def make_tab(self, n):
         return 4 * n * ' '
+
+    def make_title_lines(self):
+        menu_lines = []
+        if isinstance(self.title, str):
+            title_lines = [iotools.capitalize_string_start(self.title)]
+        elif isinstance(self.title, list):
+            title_lines = self.title
+        else:
+            title_lines = []
+        for title_line in title_lines:
+            if self.indent_level:
+                menu_lines.append('{} {}'.format(self.make_tab(self.indent_level), title_line))
+            else:
+                menu_lines.append(title_line)
+        if menu_lines:
+            menu_lines.append('')
+        return menu_lines
 
     def show_hidden_menu_entries(self):
         menu_lines = []

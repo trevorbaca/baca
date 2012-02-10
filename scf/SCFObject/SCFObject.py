@@ -161,10 +161,12 @@ class SCFObject(object):
                 for line in lines:
                     print line
 
-    def handle_raw_input(self, prompt, include_chevron=True, include_newline=True):
-        prompt = iotools.capitalize_string_start(prompt)
+    def handle_raw_input(self, prompt, include_chevron=True, include_newline=True, prompt_character='>',
+        capitalize_prompt=True):
+        if capitalize_prompt:
+            prompt = iotools.capitalize_string_start(prompt)
         if include_chevron:
-            prompt = prompt + '> '
+            prompt = prompt + prompt_character + ' '
         else:
             prompt = prompt + ' '
         if self.session.is_displayable:
@@ -188,20 +190,23 @@ class SCFObject(object):
             self.session.complete_transcript.append_lines(menu_chunk)
         return user_response
 
-    def handle_raw_input_with_default(self, prompt, default=None, include_chevron=True, include_newline=True):
+    def handle_raw_input_with_default(self, prompt, default=None, include_chevron=True, include_newline=True,
+        prompt_character='>', capitalize_prompt=True):
         if default in (None, 'None'):
             default = ''
         readline.set_startup_hook(lambda: readline.insert_text(default))
         try:
-            return self.handle_raw_input(
-                prompt, include_chevron=include_chevron, include_newline=include_newline)
+            return self.handle_raw_input(prompt, include_chevron=include_chevron, 
+                include_newline=include_newline, prompt_character=prompt_character,
+                capitalize_prompt=capitalize_prompt)
         finally:
             readline.set_startup_hook()
 
-    def make_new_getter(self, where=None, include_newlines=True):
+    def make_new_getter(self, where=None, include_newlines=True, title=None, indent_level=0,
+        prompt_character='>'):
         import baca
-        return baca.scf.menuing.UserInputGetter(
-            where=where, session=self.session, include_newlines=include_newlines)
+        return baca.scf.menuing.UserInputGetter(where=where, session=self.session, 
+            include_newlines=include_newlines, title=title, indent_level=indent_level)
 
     def make_new_menu(self, is_hidden=False, is_keyed=True, is_numbered=False, is_ranged=False, where=None):
         import baca

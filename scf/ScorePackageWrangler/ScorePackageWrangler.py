@@ -75,7 +75,9 @@ class ScorePackageWrangler(PackageWrangler):
         score_package_proxy.fix_package_structure(is_interactive=False)
 
     def make_score_package_interactively(self):
-        getter = self.make_new_getter(where=self.where(), include_newlines=False)
+        getter = self.make_new_getter(where=self.where(), include_newlines=False, indent_level=1)
+        getter.prompt_character = ':'
+        getter.capitalize_prompts = False
         getter.append_string('score title')
         getter.append_underscore_delimited_lowercase_package_name('package name')
         getter.append_integer_in_closed_range('year', 0, sys.maxint)

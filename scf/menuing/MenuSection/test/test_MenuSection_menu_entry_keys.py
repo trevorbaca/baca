@@ -9,7 +9,7 @@ def test_MenuSection_menu_entry_keys_01():
     menu = baca.scf.menuing.Menu()
     menu.push_breadcrumb('location')
     section = menu.make_new_section()
-    section.section_title = 'section'
+    section.title = 'section'
     section.extend(['apple', 'banana', 'cherry'])
     assert not section.is_numbered
     assert section.menu_entry_keys == [None, None, None]
@@ -17,7 +17,7 @@ def test_MenuSection_menu_entry_keys_01():
     menu = baca.scf.menuing.Menu()
     menu.push_breadcrumb('location')
     section = menu.make_new_section(is_numbered=True)
-    section.section_title = 'section'
+    section.title = 'section'
     section.extend(['apple', 'banana', 'cherry'])
     assert section.is_numbered
     assert section.menu_entry_keys == [None, None, None]
@@ -31,7 +31,7 @@ def test_MenuSection_menu_entry_keys_02():
     menu = baca.scf.menuing.Menu()
     menu.push_breadcrumb('location')
     section = menu.make_new_section()
-    section.section_title = 'section title'
+    section.title = 'section title'
     section.append(('add', 'add something'))
     section.append(('del', 'delete something'))
     section.append(('mod', 'modify something'))
@@ -42,7 +42,7 @@ def test_MenuSection_menu_entry_keys_02():
     menu = baca.scf.menuing.Menu()
     menu.push_breadcrumb('location')
     section = menu.make_new_section(is_numbered=True)
-    section.section_title = 'section title'
+    section.title = 'section title'
     section.append(('add', 'add something'))
     section.append(('del', 'delete something'))
     section.append(('mod', 'modify something'))
