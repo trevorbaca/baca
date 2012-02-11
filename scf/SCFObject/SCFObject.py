@@ -233,11 +233,8 @@ class SCFObject(object):
         package_importable_name_parts = package_importable_name.split('.')
         if package_importable_name_parts[0] == self.studio_package_importable_name:
             directory_parts = [os.environ.get('BACA')] + package_importable_name_parts[1:]
-        #elif package_importable_name_parts[0] in os.listdir(os.environ.get('SCORES')):
         else:
             directory_parts = [os.environ.get('SCORES')] + package_importable_name_parts[:]
-        #else:
-        #    raise ValueError('Unknown package importable name {!r}.'.format(package_importable_name))
         directory = os.path.join(*directory_parts)
         return directory
 

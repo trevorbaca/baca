@@ -67,10 +67,21 @@ class UserInputGetter(MenuSectionAggregator):
         test = lambda expr: predicates.is_readable_argument_range_string_for_argument_list(expr, argument_list)
         self.tests.append(test)
 
+    def append_available_underscore_delimited_lowercase_package_name(self, spaced_attribute_name, default=None):
+        message = \
+            "value for {!r} must be available underscore-delimited lowercase package name of length at least 3."
+        self.append_something(spaced_attribute_name, message, default=default)
+        self.tests.append(predicates.is_available_underscore_delimited_lowercase_package_name)
+
     def append_boolean(self, spaced_attribute_name, default=None):
         message = "value for '{}' must be boolean."
         self.append_something(spaced_attribute_name, message, default=default)
         self.tests.append(predicates.is_boolean)
+
+    def append_existing_package_name(self, spaced_attribute_name, default=None):
+        message = "value for {!r} must be existing package name."
+        self.append_something(spaced_attribute_name, message, default=default)
+        self.tests.append(predicates.is_existing_package_name)
 
     def append_integer(self, spaced_attribute_name, default=None):
         message = "value for '{}' must be integer."
@@ -137,14 +148,10 @@ class UserInputGetter(MenuSectionAggregator):
         self.append_something(spaced_attribute_name, message, default=default)
         self.tests.append(pitchtools.is_symbolic_pitch_range_string)
 
-    # TODO: add self.append_available_underscore_delimited_lowercase_package_name()
-
-    # TODO: add self.append_existing_package_name()
-
     def append_underscore_delimited_lowercase_package_name(self, spaced_attribute_name, default=None):
         message = "value for {!r} must be underscore-delimited lowercase package name of length at least 3."
         self.append_something(spaced_attribute_name, message, default=default)
-        self.tests.append(lambda x: iotools.is_underscore_delimited_lowercase_package_name(x) and 3 <= len(x))
+        self.tests.append(predicates.is_underscore_delimited_lowercase_package_name)
 
     def append_yes_no_string(self, spaced_attribute_name, default=None, include_chevron=False):
         message = "value for '{}' must be 'y' or 'n'."
