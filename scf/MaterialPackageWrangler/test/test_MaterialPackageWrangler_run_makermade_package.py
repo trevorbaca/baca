@@ -11,7 +11,7 @@ def test_MaterialPackageWrangler_run_makermade_package_01():
     assert not studio.package_exists('baca.materials.testsargasso')
 
     try:
-        studio.run(user_input='m m testsargasso default sargasso default q')
+        studio.run(user_input='m m sargasso testsargasso default q')
         assert studio.package_exists('baca.materials.testsargasso')
         mpp = baca.scf.materialpackagemakers.SargassoMeasureMaterialPackageMaker(
             'baca.materials.testsargasso')

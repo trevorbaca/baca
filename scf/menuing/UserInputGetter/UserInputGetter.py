@@ -133,6 +133,11 @@ class UserInputGetter(MenuSectionAggregator):
         self.defaults.append(default)
         self.chevrons.append(include_chevron)
 
+    def append_space_delimited_lowercase_string(self, spaced_attribute_name, default=None):
+        message = "value for {!r} must be space-delimited lowercase string."
+        self.append_something(spaced_attribute_name, message, default=default)
+        self.tests.append(iotools.is_space_delimited_lowercase_string)
+
     def append_string(self, spaced_attribute_name, default=None):
         message = "value for '{}' must be string."
         self.append_something(spaced_attribute_name, message, default=default)

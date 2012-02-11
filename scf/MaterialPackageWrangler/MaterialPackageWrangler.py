@@ -26,30 +26,22 @@ class MaterialPackageWrangler(PackageWrangler):
 
     # TODO: write test
     def get_new_material_package_importable_name_interactively(self):
-        import baca
-        getter = self.make_new_getter(where=self.where())
-        getter.append_underscore_delimited_lowercase_package_name('material name')
-        self.push_backtrack()
-        material_name = getter.run()
-        self.pop_backtrack()
-        if self.backtrack():
-            return
-        material_package_short_name = iotools.string_to_strict_directory_name(material_name)
-        studio = baca.scf.Studio(session=self.session)
-        self.push_backtrack()
-        package_root_name = studio.get_package_root_name_interactively(clear=False)
-        self.pop_backtrack()
-        if self.backtrack():
-            return
-        materials_package_importable_name = \
-            self.package_root_name_to_materials_package_importable_name(package_root_name)
-        material_package_importable_name = '{}.{}'.format(
-            materials_package_importable_name, material_package_short_name)
-        if self.package_exists(material_package_importable_name):
-            line = 'Material package {!r} already exists.'.format(material_package_importable_name)
-            self.proceed(line)
-            return
-        return material_package_importable_name
+        while True:
+            getter = self.make_new_getter(where=self.where())
+            getter.append_space_delimited_lowercase_string('material name')
+            self.push_backtrack()
+            material_name = getter.run()
+            self.pop_backtrack()
+            if self.backtrack():
+                return
+            material_package_short_name = iotools.string_to_strict_directory_name(material_name)
+            package_root_name = self.toplevel_global_package_importable_name
+            material_package_importable_name = '.'.join([package_root_name, material_package_short_name])
+            if self.package_exists(material_package_importable_name):
+                line = 'Material package {!r} already exists.'.format(material_package_importable_name)
+                self.display([line, ''])
+            else:
+                return material_package_importable_name
 
     def get_package_proxy(self, package_importable_name):
         return self.material_package_maker_wrangler.get_package_proxy(package_importable_name)
@@ -88,14 +80,14 @@ class MaterialPackageWrangler(PackageWrangler):
     # TODO: write test
     def make_makermade_material_package_interactively(self):
         self.push_backtrack()
-        material_package_importable_name = self.get_new_material_package_importable_name_interactively()
+        result = self.material_package_maker_wrangler.select_material_proxy_class_name_interactively(
+            clear=False, cache=True)
+        material_package_maker_class_name = result
         self.pop_backtrack()
         if self.backtrack():
             return
         self.push_backtrack()
-        material_package_maker_class_name = \
-            self.material_package_maker_wrangler.select_material_proxy_class_name_interactively(
-                clear=False, cache=True)
+        material_package_importable_name = self.get_new_material_package_importable_name_interactively()
         self.pop_backtrack()
         if self.backtrack():
             return
