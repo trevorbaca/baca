@@ -260,12 +260,7 @@ class ScorePackageProxy(PackageProxy):
         elif  result == 'm':
             self.material_package_wrangler.run(head=self.package_short_name)
         elif result == 's':
-            #self.manage_setup(cache=True)
-            # TODO: set cache=True after caches are layerable in Session
-            breadcrumb_stack = self.session.breadcrumb_stack[:]
-            self.session._breadcrumb_stack = []
-            self.manage_setup(cache=False)
-            self.session._breadcrumb_stack = breadcrumb_stack[:]
+            self.manage_setup(cache=True)
         elif result == 'fix':
             self.fix_package_structure()
         elif result == 'ls':
@@ -360,8 +355,6 @@ class ScorePackageProxy(PackageProxy):
         else:
             raise ValueError()
 
-    # TODO: breadcrumbing caching needs to be layerable;
-    #       doing this will require a stack of caches.
     def manage_setup(self, clear=True, cache=False):
         self.cache_breadcrumbs(cache=cache)
         while True:
