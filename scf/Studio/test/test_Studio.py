@@ -35,8 +35,8 @@ def test_Studio_02():
      '     8: Red Shift Hijinks (2005)',
      '     9: Sekka (2007)',
      '',
-     '     work with materials (m)',
-     '     work with sketches (k)',
+     '     materials (m)',
+     '     sketches (k)',
      '     new score (new)',
      '']
 
@@ -88,8 +88,8 @@ def test_Studio_04():
      '     7: Territoires',
      '     8: Zeit (1998)',
      '',
-     '     work with materials (m)',
-     '     work with sketches (k)',
+     '     materials (m)',
+     '     sketches (k)',
      '     new score (new)',
      '']
 

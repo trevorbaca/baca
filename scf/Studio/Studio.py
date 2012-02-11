@@ -135,8 +135,8 @@ class Studio(SCFObject):
     def make_main_menu(self):
         menu = self.make_score_selection_menu()
         section = menu.make_new_section()
-        section.append(('m', 'work with materials'))
-        section.append(('k', 'work with sketches'))
+        section.append(('m', 'materials'))
+        section.append(('k', 'sketches'))
         section.append(('new', 'new score'))
         section = menu.make_new_section(is_hidden=True)
         section.append(('svn', 'work with repository'))
