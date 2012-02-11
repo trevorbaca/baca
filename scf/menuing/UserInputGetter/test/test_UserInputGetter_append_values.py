@@ -9,7 +9,7 @@ def test_UserInputGetter_append_values_01():
     assert getter.run(user_input='foo -99') == -99
 
     getter = baca.scf.menuing.UserInputGetter()
-    getter.append_integer_in_closed_range('attribute', 1, 10)
+    getter.append_integer_in_range('attribute', 1, 10)
     assert getter.run(user_input='foo -99 99 7') == 7
 
     getter = baca.scf.menuing.UserInputGetter()

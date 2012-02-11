@@ -106,8 +106,8 @@ class PitchRangeInventoryEditor(InteractiveEditor):
     # TODO: abstract up to ListEditor.edit_item_interactively()
     def move_target_item_interactively(self):
         getter = self.make_new_getter(where=self.where())
-        getter.append_integer_in_closed_range('old number', 1, len(self.target_items))
-        getter.append_integer_in_closed_range('new number', 1, len(self.target_items))
+        getter.append_integer_in_range('old number', 1, len(self.target_items))
+        getter.append_integer_in_range('new number', 1, len(self.target_items))
         result = getter.run()
         if self.backtrack():
             return

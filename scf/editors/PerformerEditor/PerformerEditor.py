@@ -116,8 +116,8 @@ class PerformerEditor(InteractiveEditor):
 
     def move_instrument_interactively(self):
         getter = self.make_new_getter(where=self.where())
-        getter.append_integer_in_closed_range('old instrument number', 1, self.target.instrument_count)
-        getter.append_integer_in_closed_range('new instrument number', 1, self.target.instrument_count)
+        getter.append_integer_in_range('old instrument number', 1, self.target.instrument_count)
+        getter.append_integer_in_range('new instrument number', 1, self.target.instrument_count)
         result = getter.run()
         if self.backtrack():
             return

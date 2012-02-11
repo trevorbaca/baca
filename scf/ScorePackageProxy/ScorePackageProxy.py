@@ -191,7 +191,7 @@ class ScorePackageProxy(PackageProxy):
 
     def edit_year_of_completion_interactively(self):
         getter = self.make_new_getter(where=self.where())
-        getter.append_integer_or_none('year of completion')
+        getter.append_integer_in_range('year of completion', start=1, allow_none=True)
         result = getter.run()
         if self.backtrack():
             return

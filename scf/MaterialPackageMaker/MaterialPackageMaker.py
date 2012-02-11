@@ -125,7 +125,7 @@ class MaterialPackageMaker(MaterialPackageProxy):
     def populate_user_input_wrapper(self, prompt=True):
         total_elements = len(self.self.user_input_wrapper_in_memory)
         getter = self.make_new_getter(where=self.where())
-        getter.append_integer_in_closed_range('start at element number', 1, total_elements, default=1)
+        getter.append_integer_in_range('start at element number', 1, total_elements, default=1)
         self.push_backtrack()
         current_element_number = getter.run()
         self.pop_backtrack()

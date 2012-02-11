@@ -77,16 +77,11 @@ class UserInputGetter(MenuSectionAggregator):
         self.append_something(spaced_attribute_name, message, default=default)
         self.tests.append(predicates.is_integer)
 
-    # TODO: change to append_integer_in_range and allow mixed open / closed range
-    def append_integer_in_closed_range(self, spaced_attribute_name, start, stop, default=None):
+    def append_integer_in_range(self, spaced_attribute_name, 
+        start=None, stop=None, allow_none=False, default=None):
         message = "value for '{}' must be integer between {} and {}, inclusive."
         self.append_something(spaced_attribute_name, message, (start, stop), default=default)
-        self.tests.append(self.make_is_integer_in_closed_range(start, stop))
-
-    def append_integer_or_none(self, spaced_attribute_name, default=None):
-        message = "value for '{}' must be integer or none."
-        self.append_something(spaced_attribute_name, message, default=default)
-        self.tests.append(predicates.is_integer_or_none)
+        self.tests.append(self.make_is_integer_in_range(start, stop, allow_none=allow_none))
 
     def append_markup(self, spaced_attribute_name, default=None):
         message = "value for '{}' must be markup."

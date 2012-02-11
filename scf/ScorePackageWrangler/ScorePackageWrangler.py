@@ -83,7 +83,7 @@ class ScorePackageWrangler(PackageWrangler):
         getter.number_prompts = True
         getter.append_string('score title')
         getter.append_underscore_delimited_lowercase_package_name('package name')
-        getter.append_integer_in_closed_range('year', 0, sys.maxint)
+        getter.append_integer_in_range('year', start=1, allow_none=True)
         result = getter.run()
         if self.backtrack():
             return

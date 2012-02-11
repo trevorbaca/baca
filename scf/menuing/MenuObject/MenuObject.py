@@ -139,8 +139,11 @@ class MenuObject(SCFObject):
         section.append(('where', 'show menu client')) 
         return section
 
-    def make_is_integer_in_closed_range(self, start, stop):
-        return lambda expr: predicates.is_integer(expr) and start <= expr <= stop
+    def make_is_integer_in_range(self, start=None, stop=None, allow_none=False):
+        return lambda expr: (expr is None and allow_none) or \
+            (predicates.is_integer(expr) and 
+            (start is None or start <= expr) and
+            (stop is None or expr <= stop))
 
     def make_tab(self, n):
         return 4 * n * ' '
