@@ -24,13 +24,13 @@ class PerformerEditor(InteractiveEditor):
     @property
     def summary_lines(self):
         if not self.target.instruments:
-            result = '{} (no instruments)'.format(self.target.name)
+            result = '{}: no instruments'.format(self.target.name)
         elif len(self.target.instruments) == 1 and self.target.name == \
             self.target.instruments[0].instrument_name:
             result = '{}'.format(self.target.name)
         else:
             instruments = ', '.join(self.instrument_names)
-            result = '{} ({})'.format(self.target.name, instruments)
+            result = '{}: {}'.format(self.target.name, instruments)
         result = [result]
         return result
 

@@ -27,3 +27,15 @@ def test_predicates_02():
     assert not predicates.is_existing_package_name('baca.scf.asdf')
     assert not predicates.is_existing_package_name('baca.materials.asdf')
     assert not predicates.is_existing_package_name('baca.sketches.asdf')
+
+
+
+def test_predicates_03():
+
+    assert predicates.is_boolean(True)
+    assert predicates.is_boolean(False)
+
+    assert not predicates.is_boolean(None)
+    assert not predicates.is_boolean('')
+    assert not predicates.is_boolean(0)
+    assert not predicates.is_boolean(1)
