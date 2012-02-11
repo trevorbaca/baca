@@ -68,7 +68,6 @@ class UserInputModuleProxy(ModuleProxy):
         self.user_input_wrapper_lines = user_input_wrapper_lines
         return is_parsable
 
-    # TODO: eventually rename 'user_input' to 'user_input_wrapper' everywhere
     def read_user_input_wrapper_from_disk(self):
         self.unimport()
         if os.path.exists(self.full_file_name):
@@ -76,7 +75,7 @@ class UserInputModuleProxy(ModuleProxy):
             file_contents_string = file_pointer.read()
             file_pointer.close()
             exec(file_contents_string)
-            return locals().get('user_input', None)
+            return locals().get('user_input_wrapper', None)
 
     def write_to_disk(self, user_input_wrapper_in_memory):
         self.setup_statements[:] = self.conditionally_add_terminal_newlines(
