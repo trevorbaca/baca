@@ -5,6 +5,7 @@ class Session(object):
     
     def __init__(self, user_input=None):
         self._backtracking_stack = []
+        self._breadcrumb_cache_stack = []
         self._breadcrumb_stack = []
         self._command_history = []
         self._complete_transcript = Transcript()
@@ -49,6 +50,10 @@ class Session(object):
     @property
     def backtracking_stack(self):
         return self._backtracking_stack
+
+    @property
+    def breadcrumb_cache_stack(self):
+        return self._breadcrumb_cache_stack
 
     @property
     def breadcrumb_stack(self):

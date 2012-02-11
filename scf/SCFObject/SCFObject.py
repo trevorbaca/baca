@@ -115,9 +115,12 @@ class SCFObject(object):
         return self.session.backtrack()
 
     def cache_breadcrumbs(self, cache=False):
-        self.session.cached_breadcrumbs = []
+        #self.session.cached_breadcrumbs = []
+        #if cache:
+        #    self.session.cached_breadcrumbs = self.session.breadcrumb_stack[:]
+        #    self.session._breadcrumb_stack[:] = []
         if cache:
-            self.session.cached_breadcrumbs = self.session.breadcrumb_stack[:]
+            self.session.breadcrumb_cache_stack.append(self.session.breadcrumb_stack[:])
             self.session._breadcrumb_stack[:] = []
 
     def conditionally_add_terminal_newlines(self, lines):
@@ -322,7 +325,8 @@ class SCFObject(object):
 
     def restore_breadcrumbs(self, cache=False):
         if cache:
-            self.session._breadcrumb_stack[:] = self.session.cached_breadcrumbs[:]
+            #self.session._breadcrumb_stack[:] = self.session.cached_breadcrumbs[:]
+            self.session._breadcrumb_stack[:] = self.session.breadcrumb_cache_stack.pop()
 
     def where(self):
         return inspect.stack()[1]
