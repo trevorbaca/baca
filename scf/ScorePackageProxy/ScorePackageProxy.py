@@ -260,15 +260,12 @@ class ScorePackageProxy(PackageProxy):
         elif  result == 'm':
             self.material_package_wrangler.run(head=self.package_short_name)
         elif result == 's':
-            self.manage_setup(cache=True)
-        elif result == 'ft':
-            self.edit_forces_tagline_interactively()
-        elif result == 'pf':
-            self.edit_instrumentation_specifier_interactively()
-        elif result == 'tl':
-            self.edit_title_interactively()
-        elif result == 'yr':
-            self.edit_year_of_completion_interactively()
+            #self.manage_setup(cache=True)
+            # TODO: set cache=True after caches are layerable in Session
+            breadcrumb_stack = self.session.breadcrumb_stack[:]
+            self.session._breadcrumb_stack = []
+            self.manage_setup(cache=False)
+            self.session._breadcrumb_stack = breadcrumb_stack[:]
         elif result == 'fix':
             self.fix_package_structure()
         elif result == 'ls':
@@ -299,11 +296,6 @@ class ScorePackageProxy(PackageProxy):
         section.append(('h', 'chunks'))
         section.append(('m', 'materials'))
         section.append(('s', 'setup'))
-        section = menu.make_new_section()
-        section.append(('ft', 'forces tagline'))
-        section.append(('pf', 'performers'))
-        section.append(('tl', 'title'))
-        section.append(('yr', 'year of completion'))
         hidden_section = menu.make_new_section(is_hidden=True)
         hidden_section.append(('fix', 'fix package structure'))
         hidden_section.append(('ls', 'list directory contents'))
@@ -368,22 +360,23 @@ class ScorePackageProxy(PackageProxy):
         else:
             raise ValueError()
 
+    # TODO: breadcrumbing caching needs to be layerable;
+    #       doing this will require a stack of caches.
     def manage_setup(self, clear=True, cache=False):
         self.cache_breadcrumbs(cache=cache)
-        setup_menu = self.make_setup_menu()
         while True:
-            self.push_breadcrumb(self.annotated_title)
-            self.push_breadcrumb('setup')
+            self.push_breadcrumb('{} - setup'.format(self.annotated_title))
             setup_menu = self.make_setup_menu()
             result = setup_menu.run(clear=clear)
             if self.backtrack():
                 break
+            elif not result:
+                self.pop_breadcrumb()
+                continue
             self.handle_setup_menu_result(result)
             if self.backtrack():
                 break
             self.pop_breadcrumb()
-            self.pop_breadcrumb()
-        self.pop_breadcrumb()
         self.pop_breadcrumb()
         self.restore_breadcrumbs(cache=cache)
 
@@ -395,6 +388,10 @@ class ScorePackageProxy(PackageProxy):
             result = menu.run(clear=clear)
             if self.backtrack():
                 break
+            # TODO: add these three lines in to make this conform to manage_setup(), above
+            #elif not result:
+            #    self.pop_breadcrumb()
+            #    continue
             self.handle_svn_menu_result(result)
             if self.backtrack():
                 break

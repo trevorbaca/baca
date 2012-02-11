@@ -6,17 +6,17 @@ def test_InstrumentationEditor_run_01():
     '''
 
     studio = baca.scf.Studio()
-    studio.run(user_input='1 perf q')
-    assert studio.ts == (6,)
+    studio.run(user_input='1 setup perf q')
+    assert studio.ts == (8,)
 
-    studio.run(user_input='1 perf b q')
-    assert studio.ts == (8, (2, 6))
+    studio.run(user_input='1 setup perf b q')
+    assert studio.ts == (10, (4, 8))
 
-    studio.run(user_input='1 perf studio q')
-    assert studio.ts == (8, (0, 6))
+    studio.run(user_input='1 setup perf studio q')
+    assert studio.ts == (10, (0, 8))
 
-    studio.run(user_input='1 perf score q')
-    assert studio.ts == (8, (2, 6))
+    studio.run(user_input='1 setup perf score q')
+    assert studio.ts == (10, (2, 8))
 
-    studio.run(user_input='1 perf foo q')
-    assert studio.ts == (8, (4, 6))
+    studio.run(user_input='1 setup perf foo q')
+    assert studio.ts == (10, (6, 8))

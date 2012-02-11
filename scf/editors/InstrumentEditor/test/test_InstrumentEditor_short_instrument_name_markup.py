@@ -7,11 +7,11 @@ def test_InstrumentEditor_short_instrument_name_markup_01():
     '''
 
     studio = baca.scf.Studio()
-    studio.run(user_input='1 perf 1 1 sinm q')
-    assert studio.ts == (11, (1, 5, 7))
+    studio.run(user_input='1 setup performers 1 1 sinm q')
+    assert studio.ts == (13, (1, 7, 9))
 
-    studio.run(user_input='1 perf 1 1 sinm b q')
-    assert studio.ts == (13, (1, 5, 7), (8, 11))
+    studio.run(user_input='1 setup performers 1 1 sinm b q')
+    assert studio.ts == (15, (1, 7, 9), (10, 13))
 
-    studio.run(user_input='1 perf 1 1 sinm studio q')
-    assert studio.ts == (13, (0, 11), (1, 5, 7))
+    studio.run(user_input='1 setup performers 1 1 sinm studio q')
+    assert studio.ts == (15, (0, 13), (1, 7, 9))

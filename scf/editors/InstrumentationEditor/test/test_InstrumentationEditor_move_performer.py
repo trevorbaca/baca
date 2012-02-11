@@ -9,20 +9,20 @@ def test_InstrumentationEditor_move_performer_01():
     '''
 
     studio = baca.scf.Studio()
-    studio.run(user_input='1 perf move q')
-    assert studio.ts == (7,)
-
-    studio.run(user_input='1 perf move b q')
-    assert studio.ts == (9, (4, 7))
-
-    studio.run(user_input='1 perf move studio q')
-    assert studio.ts == (9, (0, 7))
-
-    studio.run(user_input='1 perf move score q')
-    assert studio.ts == (9, (2, 7))
-
-    studio.run(user_input='1 perf move foo q')
+    studio.run(user_input='1 setup perf move q')
     assert studio.ts == (9,)
+
+    studio.run(user_input='1 setup perf move b q')
+    assert studio.ts == (11, (6, 9))
+
+    studio.run(user_input='1 setup perf move studio q')
+    assert studio.ts == (11, (0, 9))
+
+    studio.run(user_input='1 setup perf move score q')
+    assert studio.ts == (11, (2, 9))
+
+    studio.run(user_input='1 setup perf move foo q')
+    assert studio.ts == (11,)
 
 
 def test_InstrumentationEditor_move_performer_02():

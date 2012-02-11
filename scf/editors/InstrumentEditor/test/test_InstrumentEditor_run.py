@@ -7,21 +7,21 @@ def test_InstrumentEditor_run_01():
     '''
 
     studio = baca.scf.Studio()
-    studio.run(user_input='1 perf 1 1 q')
-    assert studio.ts == (10, (1, 5, 7))
+    studio.run(user_input='1 setup performers 1 1 q')
+    assert studio.ts == (12, (1, 7, 9))
 
     studio = baca.scf.Studio()
-    studio.run(user_input='1 perf 1 1 b q')
-    assert studio.ts == (12, (1, 5, 7), (6, 10))
+    studio.run(user_input='1 setup performers 1 1 b q')
+    assert studio.ts == (14, (1, 7, 9), (8, 12))
 
     studio = baca.scf.Studio()
-    studio.run(user_input='1 perf 1 1 studio q')
-    assert studio.ts == (12, (0, 10), (1, 5, 7))
+    studio.run(user_input='1 setup performers 1 1 studio q')
+    assert studio.ts == (14, (0, 12), (1, 7, 9))
 
     studio = baca.scf.Studio()
-    studio.run(user_input='1 perf 1 1 score q')
-    assert studio.ts == (12, (1, 5, 7), (2, 10))
+    studio.run(user_input='1 setup performers 1 1 score q')
+    assert studio.ts == (14, (1, 7, 9), (2, 12))
 
     studio = baca.scf.Studio()
-    studio.run(user_input='1 perf 1 1 foo q')
-    assert studio.ts == (12, (1, 5, 7), (8, 10))
+    studio.run(user_input='1 setup performers 1 1 foo q')
+    assert studio.ts == (14, (1, 7, 9), (10, 12))
