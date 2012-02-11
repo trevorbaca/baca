@@ -388,10 +388,9 @@ class ScorePackageProxy(PackageProxy):
             result = menu.run(clear=clear)
             if self.backtrack():
                 break
-            # TODO: add these three lines in to make this conform to manage_setup(), above
-            #elif not result:
-            #    self.pop_breadcrumb()
-            #    continue
+            elif not result:
+                self.pop_breadcrumb()
+                continue
             self.handle_svn_menu_result(result)
             if self.backtrack():
                 break
