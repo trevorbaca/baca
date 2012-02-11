@@ -60,7 +60,7 @@ class MaterialPackageWrangler(PackageWrangler):
         elif result == 'h':
             self.make_handmade_material_package_interactively()
         elif result == 'm':
-            self.make_editable_material_package_interactively()
+            self.make_makermade_material_package_interactively()
         else:
             material_proxy = self.get_package_proxy(result)
             material_proxy.run()
@@ -78,7 +78,15 @@ class MaterialPackageWrangler(PackageWrangler):
             material_package_importable_name, material_package_maker_class_name, should_have_illustration)
 
     # TODO: write test
-    def make_editable_material_package_interactively(self):
+    def make_handmade_material_package_interactively(self):
+        material_package_importable_name = self.get_new_material_package_importable_name_interactively()
+        material_package_maker_class_name = None
+        should_have_illustration = True
+        self.make_material_package(
+            material_package_importable_name, material_package_maker_class_name, should_have_illustration)
+
+    # TODO: write test
+    def make_makermade_material_package_interactively(self):
         self.push_backtrack()
         material_package_importable_name = self.get_new_material_package_importable_name_interactively()
         self.pop_backtrack()
@@ -92,14 +100,6 @@ class MaterialPackageWrangler(PackageWrangler):
         if self.backtrack():
             return
         # TODO: set following attribute by editor automatically
-        should_have_illustration = True
-        self.make_material_package(
-            material_package_importable_name, material_package_maker_class_name, should_have_illustration)
-
-    # TODO: write test
-    def make_handmade_material_package_interactively(self):
-        material_package_importable_name = self.get_new_material_package_importable_name_interactively()
-        material_package_maker_class_name = None
         should_have_illustration = True
         self.make_material_package(
             material_package_importable_name, material_package_maker_class_name, should_have_illustration)
