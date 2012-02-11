@@ -44,7 +44,6 @@ class MaterialPackageWrangler(PackageWrangler):
             if self.backtrack():
                 return
             material_package_short_name = iotools.string_to_strict_directory_name(material_name)
-            self.debug(self.materials_package_importable_name) 
             material_package_importable_name = '.'.join([
                 self.materials_package_importable_name, material_package_short_name])
             if self.package_exists(material_package_importable_name):
