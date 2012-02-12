@@ -580,7 +580,7 @@ class MaterialPackageProxy(PackageProxy):
         elif result == 'ls':
             self.print_directory_contents()
         elif mathtools.is_integer_equivalent_expr(result):
-            self.edit_user_input_wrapper_at_number(int(result))
+            self.edit_user_input_wrapper_at_number(result, include_newline=False)
         else:
             raise ValueError
 

@@ -176,6 +176,8 @@ class UserInputGetter(MenuSectionAggregator):
             value = self.get_value_from_execs(user_response, execs)
             #if not value:
             if value is None:
+            #if value is None and not user_response == 'None':
+                #self.debug('zanzibar')
                 return '!!!'
         else:
             value = self.get_value_from_direct_evaluation(user_response)
@@ -305,9 +307,9 @@ class UserInputGetter(MenuSectionAggregator):
 
     def store_value(self, user_response):
         assert isinstance(user_response, str)
-    
         if self.try_to_store_value_from_argument_list(user_response):
             return True
+        #self.debug(user_response, 'going to change response to value')
         value = self.change_user_response_to_value(user_response)
         if value == '!!!':
             return False

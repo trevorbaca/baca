@@ -55,6 +55,7 @@ class MaterialPackageMaker(MaterialPackageProxy):
             self.proceed('user input wrapper cleared and written to disk.', prompt=prompt)
 
     def edit_user_input_wrapper_at_number(self, number, include_newline=True):
+        number = int(number)
         if self.user_input_wrapper_in_memory is None:
             return
         if len(self.user_input_wrapper_in_memory) < number:
@@ -101,7 +102,7 @@ class MaterialPackageMaker(MaterialPackageProxy):
         self.proceed('demo values loaded and written to disk.', prompt=prompt)
 
     def make_main_menu_section_for_user_input_module(self, main_menu, hidden_section):
-        section = main_menu.make_new_section(is_numbered=True)
+        section = main_menu.make_new_section(is_parenthetically_numbered=True)
         section.tokens = self.user_input_wrapper_in_memory.editable_lines
         section.return_value_attribute = 'number'
         section = main_menu.make_new_section()
