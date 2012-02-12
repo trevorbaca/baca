@@ -181,18 +181,18 @@ class Menu(MenuSectionAggregator):
             result.append(entry)
         return result
 
-    def make_new_section(self, is_hidden=False, is_keyed=True, is_numbered=False, 
-        is_parenthetically_numbered=False, is_ranged=False):
+    def make_new_section(self, is_hidden=False, is_internally_keyed=False, is_keyed=True, 
+        is_numbered=False, is_parenthetically_numbered=False, is_ranged=False):
         assert not (is_numbered and self.has_numbered_section)
         assert not (is_parenthetically_numbered and self.has_numbered_section)
         assert not (is_ranged and self.has_ranged_section)
-        section = MenuSection(is_hidden=is_hidden, is_keyed=is_keyed, is_numbered=is_numbered,
+        section = MenuSection(is_hidden=is_hidden, is_internally_keyed=is_internally_keyed, 
+            is_keyed=is_keyed, is_numbered=is_numbered, 
             is_parenthetically_numbered=is_parenthetically_numbered, is_ranged=is_ranged, 
             session=self.session, where=self.where)
         self.sections.append(section)
         return section
 
-        
     def run(self, clear=True, user_input=None):
         self.assign_user_input(user_input=user_input)
         clear, hide_current_run = clear, False

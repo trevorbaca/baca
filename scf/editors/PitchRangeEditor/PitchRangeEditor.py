@@ -12,10 +12,13 @@ class PitchRangeEditor(InteractiveEditor):
         return 'pitch range editor'
 
     target_attribute_tuples = (
-            ('start_pitch', predicates.is_named_chromatic_pitch, False, None),
-            ('start_pitch_is_included_in_range', predicates.is_boolean, False, True),
-            ('stop_pitch', predicates.is_named_chromatic_pitch, False, None),
-            ('stop_pitch_is_included_in_range', predicates.is_boolean, False, True),)
+        ('start_pitch', predicates.is_named_chromatic_pitch, False, None, 'sp', 'pitch_class_octave_label'),
+        ('stop_pitch', predicates.is_named_chromatic_pitch, False, None, 'tp', 'pitch_class_octave_label'),
+        ('start_pitch_is_included_in_range', predicates.is_boolean, False, True, 'si'),
+        ('stop_pitch_is_included_in_range', predicates.is_boolean, False, True, 'ti'),
+        ('pitch_range_name', predicates.is_string, False, None, 'nm'),
+        ('pitch_range_name_markup', predicates.is_markup_token, False, None, 'mk'),
+        )
 
     target_class = pitchtools.PitchRange
 
@@ -65,6 +68,7 @@ class PitchRangeEditor(InteractiveEditor):
         self.conditionally_set_target_attribute('stop_pitch_is_included_in_range', result)
 
     def make_main_menu(self):
-        menu, section = self.make_new_menu(where=self.where())
+        #menu, section = self.make_new_menu(where=self.where(), is_parenthetically_numbered=True, is_keyed=False)
+        menu, section = self.make_new_menu(where=self.where(), is_parenthetically_numbered=True)
         section.tokens = self.target_attribute_tokens
         return menu

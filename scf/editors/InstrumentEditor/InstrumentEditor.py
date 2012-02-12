@@ -18,10 +18,11 @@ class InstrumentEditor(InteractiveEditor):
             return 'instrument editor'
 
     target_attribute_tuples = (
-            ('instrument_name', predicates.is_string, True, None),
-            ('instrument_name_markup', predicates.is_markup, True, None), 
-            ('short_instrument_name',  predicates.is_string, True, None),
-            ('short_instrument_name_markup', predicates.is_markup, True, None),)
+        ('instrument_name', predicates.is_string, True, None, 'in', None),
+        ('instrument_name_markup', predicates.is_markup, True, None, 'im', None), 
+        ('short_instrument_name',  predicates.is_string, True, None, 'sn', None),
+        ('short_instrument_name_markup', predicates.is_markup, True, None, 'sm'),
+        )
             
     target_class = _Instrument
 
@@ -118,8 +119,8 @@ class InstrumentEditor(InteractiveEditor):
             #self.edit_transposition_interactively()
 
     def make_main_menu(self):
-        #menu, section = self.make_new_menu(where=self.where(), is_keyed=False)
-        menu, section = self.make_new_menu(where=self.where())
+        menu, section = self.make_new_menu(where=self.where(), 
+            is_parenthetically_numbered=True, is_internally_keyed=True)
         section.tokens = self.target_attribute_tokens
         section = menu.make_new_section(is_keyed=False)
         if self.session.display_pitch_ranges_with_numbered_pitches:

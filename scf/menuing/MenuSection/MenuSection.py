@@ -5,12 +5,13 @@ from baca.scf.menuing.MenuObject import MenuObject
 
 class MenuSection(MenuObject):
 
-    def __init__(self, is_hidden=False, is_keyed=True, is_numbered=False, 
-        is_parenthetically_numbered=False, is_ranged=False, is_read_only=False, 
-        session=None, where=None, title=None):
+    def __init__(self, is_hidden=False, is_internally_keyed=False, is_keyed=True, 
+        is_numbered=False, is_parenthetically_numbered=False, is_ranged=False, 
+        is_read_only=False, session=None, where=None, title=None):
         MenuObject.__init__(self, session=session, where=where, title=title)
         self._indent_level = 1
         self._is_hidden = is_hidden
+        self._is_internally_keyed = is_internally_keyed
         self._is_keyed = is_keyed
         self._is_numbered = is_numbered
         self._is_parenthetically_numbered = is_parenthetically_numbered
@@ -51,6 +52,10 @@ class MenuSection(MenuObject):
     @property
     def is_hidden(self):
         return self._is_hidden
+
+    @property
+    def is_internally_keyed(self):
+        return self._is_internally_keyed
 
     @property
     def is_keyed(self):
@@ -110,7 +115,6 @@ class MenuSection(MenuObject):
                 key = body
             if self.return_value_attribute == 'number':
                 if number is not None:
-                    #return_value = number
                     return_value = str(number)
                 elif key is not None:
                     return_value = key

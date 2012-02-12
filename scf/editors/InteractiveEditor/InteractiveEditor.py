@@ -20,25 +20,28 @@ class InteractiveEditor(SCFObject):
 
     ### READ-ONLY PUBLIC ATTRIBUTES ###
     
+    # TODO: encapsulate menu entry formatting in menu section ONLY
     @property
     def target_attribute_tokens(self):
-        result = []
-        target_attribute_names, menu_keys, left_hand_labels = [], [], []
-        for target_attribute_name, predicate, is_read_write, default in self.target_attribute_tuples:
-            target_attribute_names.append(target_attribute_name)
-            menu_key = self.attribute_name_to_menu_key(target_attribute_name, menu_keys)
+        result, menu_keys, display_attribute = [], [], None
+        for target_attribute_tuple in self.target_attribute_tuples:
+            target_attribute_name, predicate, is_read_write, default, menu_key = target_attribute_tuple[:5]
             assert menu_key not in menu_keys
             menu_keys.append(menu_key)
             spaced_attribute_name = target_attribute_name.replace('_', ' ')
-            left_hand_label = '{} ({}):'.format(spaced_attribute_name, menu_key)
-            #left_hand_label = '{}:'.format(spaced_attribute_name)
-            left_hand_labels.append(left_hand_label)
-        left_hand_label_width = max([len(x) for x in left_hand_labels])
-        for left_hand_label, target_attribute_name, menu_key in zip(
-            left_hand_labels, target_attribute_names, menu_keys):
-            menu_value = '{:<{width}} {!r}'.format(
-                left_hand_label, getattr(self.target, target_attribute_name), width=left_hand_label_width) 
-            token = (menu_key, menu_value)
+            attribute_value = getattr(self.target, target_attribute_name) 
+            display_value = repr(attribute_value)
+            if len(target_attribute_tuple) == 6:
+                display_attribute = target_attribute_tuple[5]
+                if display_attribute is not None:
+                    display_value = getattr(attribute_value, display_attribute)
+            #if display_value is None:
+            #    menu_value = '{} ({}): '.format(spaced_attribute_name, menu_key)
+            #else:
+            #    menu_value = '{} ({}): {}'.format(spaced_attribute_name, menu_key, display_value)
+            # TODO: do we need a new, three-part token here? probably so ...
+            #token = (menu_key, menu_value)
+            token = (menu_key, attribute_name, attribute_value)
             result.append(token)
         return result
 

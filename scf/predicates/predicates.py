@@ -32,6 +32,13 @@ def is_integer_or_none(expr):
 def is_markup(expr):
     return isinstance(expr, markuptools.Markup)
 
+def is_markup_token(expr):
+    try:
+        result = markuptools.Markup(expr)
+        return isinstance(result, markuptools.Markup)
+    except:
+        return False
+        
 def is_named_chromatic_pitch(expr):
     return isinstance(expr, pitchtools.NamedChromaticPitch)
 
