@@ -128,10 +128,11 @@ class MaterialPackageMaker(MaterialPackageProxy):
         getter = self.make_new_getter(where=self.where())
         getter.append_integer_in_range('start at element number', 1, total_elements, default=1)
         self.push_backtrack()
-        current_element_number = getter.run()
+        start_element_number = getter.run()
         self.pop_backtrack()
         if self.backtrack():
             return
+        current_element_number = start_element_number
         current_element_index = current_element_number - 1
         while True:
             self.push_backtrack()
@@ -142,6 +143,8 @@ class MaterialPackageMaker(MaterialPackageProxy):
             current_element_index += 1
             current_element_index %= total_elements
             current_element_number = current_element_index + 1
+            if current_element_number == start_element_number:
+                break
 
     def show_user_input_demo_values(self, prompt=True):
         lines = []
