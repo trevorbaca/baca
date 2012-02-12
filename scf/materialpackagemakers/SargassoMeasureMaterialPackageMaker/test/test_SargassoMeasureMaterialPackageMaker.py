@@ -4,7 +4,7 @@ import baca
 
 
 def test_SargassoMeasureMaterialPackageMaker_01():
-    '''Wrapper prior to population.'''
+    '''Empty wrapper.'''
 
     studio = baca.scf.Studio()
     assert not studio.package_exists('baca.materials.testsargasso')
@@ -91,6 +91,8 @@ def test_SargassoMeasureMaterialPackageMaker_03():
 
 
 def test_SargassoMeasureMaterialPackageMaker_04():
+    '''Edit one value.'''
+
     studio = baca.scf.Studio()
     assert not studio.package_exists('baca.materials.testsargasso')
     try:
@@ -118,7 +120,7 @@ def test_SargassoMeasureMaterialPackageMaker_04():
 
 
 def test_SargassoMeasureMaterialPackageMaker_05():
-    '''Complete population, starting midway through wrapper.'''
+    '''Populate wrapper.'''
 
     studio = baca.scf.Studio()
     assert not studio.package_exists('baca.materials.testsargasso')
@@ -148,7 +150,7 @@ def test_SargassoMeasureMaterialPackageMaker_05():
 
 
 def test_SargassoMeasureMaterialPackageMaker_06():
-    '''Incomplete population.'''
+    '''Partial poputation.'''
 
     studio = baca.scf.Studio()
     assert not studio.package_exists('baca.materials.testsargasso')
@@ -178,7 +180,7 @@ def test_SargassoMeasureMaterialPackageMaker_06():
 
 
 def test_SargassoMeasureMaterialPackageMaker_07():
-    '''Clearing out individual values by hand.'''
+    '''Set some values to none.'''
 
     studio = baca.scf.Studio()
     assert not studio.package_exists('baca.materials.testsargasso')
