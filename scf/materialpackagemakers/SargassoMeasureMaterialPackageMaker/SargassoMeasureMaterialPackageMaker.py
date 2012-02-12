@@ -25,6 +25,10 @@ class SargassoMeasureMaterialPackageMaker(MaterialPackageMaker):
             
     output_material_maker = staticmethod(baca.music.make_sargasso_measures)
 
+    # TODO: 
+    #output_material_module_import_statements = [
+    #    'from abjad.tools import measuretools',
+    #]
     output_material_module_import_statements = [
         'from abjad.tools.measuretools.Measure import Measure',
         ]
@@ -40,6 +44,10 @@ class SargassoMeasureMaterialPackageMaker(MaterialPackageMaker):
         ('measures_are_shuffled', True),
         ]
 
+    # TODO:
+    #user_input_module_import_statements = [
+    #    'from abjad.tools import durationtools',
+    #]
     user_input_module_import_statements = [
         'from abjad.tools.durationtools import Duration',
         'from baca.scf import UserInputWrapper',

@@ -39,6 +39,10 @@ class UserInputWrapper(collections.OrderedDict):
         return all([x is None for x in self.itervalues()])
 
     @property
+    def is_partially_complete(self):
+        return not self.is_complete and not self.is_empty
+
+    @property
     def list_items(self):
         return list(self.iteritems())
 

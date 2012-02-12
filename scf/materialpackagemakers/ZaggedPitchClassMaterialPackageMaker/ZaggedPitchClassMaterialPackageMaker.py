@@ -31,8 +31,8 @@ class ZaggedPitchClassMaterialPackageMaker(MaterialPackageMaker):
         ('grouping_counts', [1, 1, 2, 3]),
         ]
 
+    # TODO: user_input_module_import_statementes = []
     user_input_module_import_statements = [
-        'from baca.scf.materialpackagemakers import ZaggedPitchClassMaterialPackageMaker',
         'from baca.scf import UserInputWrapper',
         ]
 
