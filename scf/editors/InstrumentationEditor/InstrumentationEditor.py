@@ -64,7 +64,7 @@ class InstrumentationEditor(InteractiveEditor):
                 break
 
     # TODO: abstract up to ListEditor.delete_items_interactively
-    def delete_performers_interactively(self):
+    def remove_performers_interactively(self):
         getter = self.make_new_getter(where=self.where())
         getter.append_argument_range('performers', self.summary_lines)
         result = getter.run()
@@ -100,7 +100,7 @@ class InstrumentationEditor(InteractiveEditor):
         if result == 'add':
             self.add_performers_interactively()
         elif result == 'del':
-            self.delete_performers_interactively()
+            self.remove_performers_interactively()
         elif result == 'mv':
             self.move_performer_interactively()
         else:

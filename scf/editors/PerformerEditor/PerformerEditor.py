@@ -45,7 +45,7 @@ class PerformerEditor(InteractiveEditor):
             for instrument in instruments:
                 self.target.instruments.append(instrument)
 
-    def delete_instruments_interactively(self):
+    def remove_instruments_interactively(self):
         getter = self.make_new_getter(where=self.where())
         getter.append_argument_range('instruments', self.instrument_names)
         result = getter.run()
@@ -88,7 +88,7 @@ class PerformerEditor(InteractiveEditor):
         if result == 'add':
             self.add_instruments_interactively()
         elif result == 'del':
-            self.delete_instruments_interactively()
+            self.remove_instruments_interactively()
         elif result == 'mv':
             self.move_instrument_interactively()
         elif result in ('name', 'ren'):

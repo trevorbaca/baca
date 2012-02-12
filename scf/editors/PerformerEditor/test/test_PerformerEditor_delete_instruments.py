@@ -3,7 +3,7 @@ from abjad.tools.scoretools import Performer
 from abjad.tools.instrumenttools import *
 
 
-def test_PerformerEditor_delete_instruments_01():
+def test_PerformerEditor_remove_instruments_01():
     '''Quit, back, studio, score & junk all work.
     '''
 
@@ -25,7 +25,7 @@ def test_PerformerEditor_delete_instruments_01():
     assert studio.ts == (13, (1, 7))
 
 
-def test_PerformerEditor_delete_instruments_02():
+def test_PerformerEditor_remove_instruments_02():
     '''Add two instruments. Delete one.
     '''
 
@@ -34,7 +34,7 @@ def test_PerformerEditor_delete_instruments_02():
     assert editor.target == Performer(instruments=[Accordion()])
 
 
-def test_PerformerEditor_delete_instruments_03():
+def test_PerformerEditor_remove_instruments_03():
     '''Numeric range handling.
     '''
 

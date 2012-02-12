@@ -34,7 +34,7 @@ class StylesheetFileProxy(FileProxy):
         line = 'file copied.'
         self.proceed(line, prompt=prompt)
         
-    def delete_stylesheet_interactively(self, prompt=True):
+    def remove_stylesheet_interactively(self, prompt=True):
         self.remove()
         line = 'stylesheet deleted.'
         self.proceed(line, prompt=prompt)
@@ -46,7 +46,7 @@ class StylesheetFileProxy(FileProxy):
         elif result == 'cp':
             self.copy_stylesheet_interactively()
         elif result == 'del':
-            self.delete_stylesheet_interactively()
+            self.remove_stylesheet_interactively()
             self.session.is_backtracking_locally = True
         elif result == 'ren':
             self.rename_stylesheet_interactively()

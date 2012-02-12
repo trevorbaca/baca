@@ -146,13 +146,13 @@ class PackageProxy(DirectoryProxy):
             tag_name, tag_value = result
             self.add_tag(tag_name, tag_value)
 
-    def delete_initializer(self, prompt=True):
+    def remove_initializer(self, prompt=True):
         if self.has_initializer:
             os.remove(self.initializer_file_name)
             line = 'initializer deleted.'
             self.proceed(line, prompt=prompt)
 
-    def delete_tag(self, tag_name):
+    def remove_tag(self, tag_name):
         tags = self.get_tags()
         del(tags[tag_name])
         if self.has_tags_file:
@@ -160,7 +160,7 @@ class PackageProxy(DirectoryProxy):
         else:
             self.initializer_file_proxy.write_tags_to_disk(tags)
 
-    def delete_tag_interactively(self):
+    def remove_tag_interactively(self):
         getter = self.make_new_getter(where=self.where())
         getter.append_string('tag name')
         result = getter.run()
@@ -168,7 +168,7 @@ class PackageProxy(DirectoryProxy):
             return
         if result:
             tag_name = result
-            self.delete_tag(tag_name)
+            self.remove_tag(tag_name)
 
     def get_tag(self, tag_name):
         tags = self.get_tags()
@@ -200,7 +200,7 @@ class PackageProxy(DirectoryProxy):
         if result == 'add':
             self.add_tag_interactively()
         elif result == 'del':
-            self.delete_tag_interactively()
+            self.remove_tag_interactively()
         elif result == 'get':
             self.get_tag_interactively()
         return False

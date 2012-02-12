@@ -51,7 +51,7 @@ class PitchRangeInventoryEditor(InteractiveEditor):
         self.target_items.append(target_item)
 
     # TODO: abstract up to ListEditor.delete_items_interactively()
-    def delete_target_items_interactively(self):
+    def remove_target_items_interactively(self):
         getter = self.make_new_getter(where=self.where())
         getter.append_argument_range(self.target_items_identifier, self.summary_lines)
         argument_range = getter.run()
@@ -84,7 +84,7 @@ class PitchRangeInventoryEditor(InteractiveEditor):
         if result == 'add':
             self.add_target_item_interactively()
         elif result == 'del':
-            self.delete_target_items_interactively()
+            self.remove_target_items_interactively()
         elif result == 'mv':
             self.move_target_item_interactively()
         else:

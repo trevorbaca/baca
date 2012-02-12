@@ -4,7 +4,7 @@ from abjad.tools.instrumenttools import *
 import baca
 
 
-def test_InstrumentationEditor_delete_performers_01():
+def test_InstrumentationEditor_remove_performers_01():
     '''Quit, back, studio, score & junk all work.
     '''
 
@@ -25,7 +25,7 @@ def test_InstrumentationEditor_delete_performers_01():
     assert studio.ts == (11,)
 
 
-def test_InstrumentationEditor_delete_performers_02():
+def test_InstrumentationEditor_remove_performers_02():
     '''Add three performers. Delete two.
     '''
 
@@ -34,7 +34,7 @@ def test_InstrumentationEditor_delete_performers_02():
     assert editor.target == InstrumentationSpecifier([Performer('accordionist', instruments=[Accordion()])])
 
 
-def test_InstrumentationEditor_delete_performers_03():
+def test_InstrumentationEditor_remove_performers_03():
     '''Range handling.
     '''
 
