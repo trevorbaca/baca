@@ -430,43 +430,43 @@ class MaterialPackageProxy(PackageProxy):
         parent_package.initializer_file_proxy.add_safe_import_statement(
             self.material_underscored_name, self.material_underscored_name)
 
-    def delete_illustration_builder_module(self, prompt=True):
-        self.delete_illustration_pdf(prompt=False)
+    def remove_illustration_builder_module(self, prompt=True):
+        self.remove_illustration_pdf(prompt=False)
         if self.has_illustration_builder_module:
             self.illustration_builder_module_proxy.remove(prompt=prompt)
 
-    def delete_illustration_ly(self, prompt=True):
+    def remove_illustration_ly(self, prompt=True):
         if self.has_illustration_ly:
             self.illustration_ly_file_proxy.remove(prompt=prompt)
 
-    def delete_illustration_pdf(self, prompt=True):
-        self.delete_illustration_ly(prompt=False)
+    def remove_illustration_pdf(self, prompt=True):
+        self.remove_illustration_ly(prompt=False)
         if self.has_illustration_pdf:
             self.illustration_pdf_file_proxy.remove(prompt=prompt)
 
-    def delete_material_definition_module(self, prompt=True):
-        self.delete_output_material_module(prompt=False)
-        self.delete_illustration_builder_module(prompt=False)
+    def remove_material_definition_module(self, prompt=True):
+        self.remove_output_material_module(prompt=False)
+        self.remove_illustration_builder_module(prompt=False)
         if self.has_material_definition_module:
             self.material_definition_module_proxy.remove(prompt=prompt)
 
-    def delete_material_package(self):
+    def remove_material_package(self):
         self.remove()
         self.session.is_backtracking_locally = True
 
-    def delete_output_material_module(self, prompt=True):
-        self.delete_illustration_builder_module(prompt=False)
+    def remove_output_material_module(self, prompt=True):
+        self.remove_illustration_builder_module(prompt=False)
         if self.has_output_material_module:
             self.output_material_module_proxy.remove(prompt=prompt)
 
     # NOTE: not currently used
-    def delete_parent_initializer_pyc_file(self):
+    def remove_parent_initializer_pyc_file(self):
         if self.has_parent_initializer:
             parent_initializer_pyc_file_name = self.parent_initializer_file_name + 'c'
             if os.path.exists(parent_initializer_pyc_file_name):
                 os.remove(parent_initializer_pyc_file_name)
         
-    def delete_user_input_module(self, prompt=True):
+    def remove_user_input_module(self, prompt=True):
         if self.has_user_input_module:
             self.user_input_module_proxy.remove(prompt=prompt)
 
@@ -496,7 +496,7 @@ class MaterialPackageProxy(PackageProxy):
         if result == 'uic':
             self.clear_user_input_wrapper(prompt=False)    
         elif result == 'uid':
-            self.delete_user_input_module(prompt=True)
+            self.remove_user_input_module(prompt=True)
         elif result == 'uil':
             self.load_user_input_wrapper_demo_values(prompt=False)
         elif result == 'uip':
@@ -510,7 +510,7 @@ class MaterialPackageProxy(PackageProxy):
         elif result == 'mdcanned':
             self.material_definition_module_proxy.write_canned_file_to_disk(prompt=True)
         elif result == 'mddelete':
-            self.delete_material_definition_module(prompt=True)
+            self.remove_material_definition_module(prompt=True)
         elif result == 'mde':
             self.material_definition_module_proxy.edit()
         elif result == 'mdstub':
@@ -520,7 +520,7 @@ class MaterialPackageProxy(PackageProxy):
         elif result == 'mdxe':
             self.material_definition_module_proxy.run_abjad(prompt=True)
         elif result == 'ibd':
-            self.delete_illustration_builder_module(prompt=True)
+            self.remove_illustration_builder_module(prompt=True)
         elif result == 'ibe':
             self.illustration_builder_module_proxy.edit()
         elif result == 'ibt':
@@ -542,7 +542,7 @@ class MaterialPackageProxy(PackageProxy):
         elif result == 'omcanned':
             self.output_material_module_proxy.write_canned_file_to_disk(prompt=True)
         elif result == 'omdelete':
-            self.delete_output_material_module(prompt=True)
+            self.remove_output_material_module(prompt=True)
         elif result == 'omv':
             self.output_material_module_proxy.view()
         elif result == 'omfetch':
@@ -550,17 +550,17 @@ class MaterialPackageProxy(PackageProxy):
         elif result == 'lym':
             self.write_illustration_ly_to_disk(is_forced=True)
         elif result == 'lyd':
-            self.delete_illustration_ly(prompt=True)
+            self.remove_illustration_ly(prompt=True)
         elif result == 'lyv':
             self.illustration_ly_file_proxy.view()
         elif result == 'pdfm':
             self.write_illustration_ly_and_pdf_to_disk(is_forced=True)
         elif result == 'pdfd':
-            self.delete_illustration_pdf(prompt=True)
+            self.remove_illustration_pdf(prompt=True)
         elif result == 'pdfv':
             self.illustration_pdf_file_proxy.view()
         elif result == 'del':
-            self.delete_material_package()
+            self.remove_material_package()
         elif result == 'inr':
             self.initializer_file_proxy.restore_interactively(prompt=True)
         elif result == 'inv':
