@@ -80,6 +80,7 @@ class MaterialPackageMaker(MaterialPackageProxy):
         getter.execs[-1].append('from abjad import *')
         getter.execs[-1].append(exec_string)
         getter.include_newlines = include_newline
+        getter.allow_none = True
         new_value = getter.run()
         if self.backtrack():
             return

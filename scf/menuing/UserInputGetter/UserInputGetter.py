@@ -16,6 +16,7 @@ class UserInputGetter(MenuSectionAggregator):
         self._helps = []
         self._prompts = []
         self._tests = []
+        self.allow_none = False
         self.capitalize_prompts = True
         self.include_newlines = True
         self.indent_level = 0
@@ -164,6 +165,8 @@ class UserInputGetter(MenuSectionAggregator):
         self.tests.append(predicates.is_yes_no_string)
 
     def apply_tests_to_value(self, value):
+        if self.allow_none and value is None:
+            return True
         if self.prompt_index < len(self.tests):
             input_test = self.tests[self.prompt_index]
             return self.evaluate_test(input_test, value)
