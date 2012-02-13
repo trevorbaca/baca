@@ -20,6 +20,7 @@ class MaterialPackageProxy(PackageProxy):
     def __init__(self, package_importable_name=None, session=None):
         PackageProxy.__init__(self, package_importable_name=package_importable_name, session=session)
         self._generic_output_name = None
+        self.stylesheet_file_name_in_memory = None
 
     ### READ-ONLY PUBLIC ATTRIBUTES ###
 
@@ -164,6 +165,13 @@ class MaterialPackageProxy(PackageProxy):
     def illustration(self):
         if self.has_illustration_builder_module:
             return self.illustration_builder_module_proxy.import_illustration()
+
+    @property
+    def illustration_with_stylesheet(self):
+        illustration = self.illustration
+        if illustration and self.stylesheet_file_name_in_memory:
+            illustration.file_initial_user_includes.append(self.stylesheet_file_name_in_memory)
+        return illustration
 
     @property
     def illustration_builder_module_file_name(self):
@@ -391,11 +399,13 @@ class MaterialPackageProxy(PackageProxy):
     def should_have_user_input_module(self):
         return self.material_package_maker_class_name is not None
 
-    # TODO: implement
     @property
-    def stylesheet_file_name(self):
-        if self.should_have_stylesheet:
-            self.print_not_implemented()
+    def stylesheet_file_name_on_disk(self):
+        if self.has_illustration_ly:
+            for line in self.illustration_ly_file_proxy.file_lines:
+                if line.startswith(r'\include') and 'stylesheets' in line:
+                    file_name = line.split()[-1].replace('"', '')
+                    return file_name
 
     @property
     def stylesheet_file_proxy(self):
@@ -825,8 +835,7 @@ class MaterialPackageProxy(PackageProxy):
         self.pop_backtrack()
         if self.backtrack():
             return
-        # TODO: replace with something nonlocal
-        #self.link_local_stylesheet(stylesheet_file_name, prompt=prompt)
+        self.stylesheet_file_name_in_memory = stylesheet_file_name
 
     # NOTE: not currently used
     def touch_parent_initializer(self):
@@ -834,18 +843,18 @@ class MaterialPackageProxy(PackageProxy):
             self.parent_initializer_file_proxy.touch()
 
     def write_illustration_ly_and_pdf_to_disk(self, is_forced=False, prompt=True):
-        illustration = self.illustration
+        illustration = self.illustration_with_stylesheet
         iotools.write_expr_to_pdf(illustration, self.illustration_pdf_file_name, print_status=False)
         iotools.write_expr_to_ly(illustration, self.illustration_ly_file_name, print_status=False)
         self.proceed(['PDF and LilyPond file written to disk.'], prompt=prompt)
 
     def write_illustration_ly_to_disk(self, is_forced=False, prompt=True):
-        illustration = self.illustration
+        illustration = self.illustration_with_stylesheet
         iotools.write_expr_to_ly(illustration, self.illustration_ly_file_name, print_status=False)
         self.proceed(['LilyPond file written to disk.'], prompt=prompt)
 
     def write_illustration_pdf_to_disk(self, is_forced=False, prompt=True):
-        illustration = self.illustration
+        illustration = self.illustration_with_stylesheet
         iotools.write_expr_to_pdf(illustration, self.illustration_pdf_file_name, print_status=False)
         self.proceed(['PDF written to disk.'], prompt=prompt)
 

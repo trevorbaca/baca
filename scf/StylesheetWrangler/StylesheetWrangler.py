@@ -78,7 +78,7 @@ class StylesheetWrangler(PackageWrangler):
     # TODO: write test
     def select_stylesheet_file_name_interactively(self, clear=True, cache=False):
         self.cache_breadcrumbs(cache=cache)
-        menu, section = self.make_new_menu(where=self.where(), is_numbered=True)
+        menu, section = self.make_new_menu(where=self.where(), is_parenthetically_numbered=True)
         section.tokens = self.stylesheet_file_names
         while True:
             self.push_breadcrumb('select stylesheet')

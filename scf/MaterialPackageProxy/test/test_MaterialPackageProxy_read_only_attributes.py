@@ -62,7 +62,7 @@ def test_MaterialPackageProxy_read_only_attributes_01():
     assert      mpp.should_have_material_definition_module
     assert      mpp.should_have_output_material_module
     assert not  mpp.should_have_user_input_module
-    assert      mpp.stylesheet_file_name is None
+    assert      mpp.stylesheet_file_name_on_disk is None
     assert      mpp.stylesheet_file_proxy is None
     assert      mpp.user_input_module_file_name is None
     assert      mpp.user_input_module_importable_name is None
@@ -129,7 +129,7 @@ def test_MaterialPackageProxy_read_only_attributes_02():
     assert      mpp.should_have_output_material_module
     assert      mpp.should_have_user_input_module
     # TODO:
-    #assert      mpp.stylesheet_file_name is None
+    #assert      mpp.stylesheet_file_name_on_disk is None
     #assert      mpp.stylesheet_file_proxy is None
     assert      mpp.user_input_module_file_name == \
         '/Users/trevorbaca/Documents/other/baca/materials/red_sargasso/user_input.py'
@@ -200,8 +200,8 @@ def test_MaterialPackageProxy_read_only_attributes_03():
     assert      mpp.should_have_material_definition_module
     assert      mpp.should_have_output_material_module
     assert not  mpp.should_have_user_input_module
+    assert      mpp.stylesheet_file_name_on_disk == '/Users/trevorbaca/Documents/other/baca/scf/stylesheets/clean_letter_14.ly'
     # TODO:
-    #assert      mpp.stylesheet_file_name == 'something'
     #assert      mpp.stylesheet_file_proxy is not None
     assert      mpp.user_input_module_file_name is None
     assert      mpp.user_input_module_importable_name is None

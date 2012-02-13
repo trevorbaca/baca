@@ -20,6 +20,13 @@ class FileProxy(SCFObject):
     ### READ-ONLY PUBLIC ATTRIBUTES ###
 
     @property
+    def file_lines(self):
+        file_pointer = file(self.full_file_name)
+        file_lines = file_pointer.readlines()
+        file_pointer.close()
+        return file_lines
+
+    @property
     def full_file_name(self):
         return self._full_file_name
 
