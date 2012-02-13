@@ -21,18 +21,16 @@ TODO
 
 10. Make user input handler creation work.
 
-11. Clean up PitchRangeEditor main menu.
+11. Edit instrument transposition.
 
-12. Edit instrument transposition.
+12. Edit instrument clefs.
 
-13. Edit instrument clefs.
+13. Remove extra appearance of B-flat clarinet from clarinetist config menu.
 
-14. Remove extra appearance of B-flat clarinet from clarinetist config menu.
+14. Change Instrument._default_performer_names to house (full, abbreviation) pairs.
 
-15. Change Instrument._default_performer_names to house (full, abbreviation) pairs.
+15. Use performer abbreviations to populate performer selection menu.
 
-16. Use performer abbreviations to populate performer selection menu.
+16. Find a way to dynamically present (default) indicator to default menu entries.
 
-17. Find a way to dynamically present (default) indicator to default menu entries.
-
-18. Consider keyword backtracking protocol to replace two-line backtracking protocol.
+17. Consider keyword backtracking protocol to replace two-line backtracking protocol.

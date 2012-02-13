@@ -67,8 +67,25 @@ class PitchRangeEditor(InteractiveEditor):
             return
         self.conditionally_set_target_attribute('stop_pitch_is_included_in_range', result)
 
+    def handle_main_menu_result(self, result):
+        if result == 'sp':
+            self.edit_start_pitch_interactively()
+        elif result == 'tp':
+            self.edit_stop_pitch_interactively()
+        elif result == 'si':
+            self.edit_start_pitch_is_included_in_range_interactively()
+        elif result == 'ti':
+            self.edit_stop_pitch_is_included_in_range_interactively()
+        elif result == 'nm':
+            self.edit_pitch_range_name_interactively()
+        elif result == 'mk':
+            self.edit_pitch_range_name_markup_interacitvely()
+        else:
+            raise ValueError
+
     def make_main_menu(self):
         #menu, section = self.make_new_menu(where=self.where(), is_parenthetically_numbered=True, is_keyed=False)
         menu, section = self.make_new_menu(where=self.where(), is_parenthetically_numbered=True)
         section.tokens = self.target_attribute_tokens
+        section.show_existing_values = True
         return menu

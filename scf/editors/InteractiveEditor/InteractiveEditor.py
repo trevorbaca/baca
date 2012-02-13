@@ -20,7 +20,6 @@ class InteractiveEditor(SCFObject):
 
     ### READ-ONLY PUBLIC ATTRIBUTES ###
     
-    # TODO: encapsulate menu entry formatting in menu section ONLY
     @property
     def target_attribute_tokens(self):
         result, menu_keys, display_attribute = [], [], None
@@ -28,20 +27,14 @@ class InteractiveEditor(SCFObject):
             target_attribute_name, predicate, is_read_write, default, menu_key = target_attribute_tuple[:5]
             assert menu_key not in menu_keys
             menu_keys.append(menu_key)
-            spaced_attribute_name = target_attribute_name.replace('_', ' ')
+            menu_body = target_attribute_name.replace('_', ' ')
             attribute_value = getattr(self.target, target_attribute_name) 
-            display_value = repr(attribute_value)
+            existing_value = repr(attribute_value)
             if len(target_attribute_tuple) == 6:
                 display_attribute = target_attribute_tuple[5]
                 if display_attribute is not None:
-                    display_value = getattr(attribute_value, display_attribute)
-            #if display_value is None:
-            #    menu_value = '{} ({}): '.format(spaced_attribute_name, menu_key)
-            #else:
-            #    menu_value = '{} ({}): {}'.format(spaced_attribute_name, menu_key, display_value)
-            # TODO: do we need a new, three-part token here? probably so ...
-            #token = (menu_key, menu_value)
-            token = (menu_key, attribute_name, attribute_value)
+                    existing_value = getattr(attribute_value, display_attribute)
+            token = (menu_key, menu_body, existing_value)
             result.append(token)
         return result
 
@@ -83,6 +76,7 @@ class InteractiveEditor(SCFObject):
             self.push_breadcrumb()
             menu = self.make_main_menu()
             result = menu.run(clear=clear)
+            #self.debug(result)
             if self.backtrack():
                 break
             elif not result:
