@@ -25,7 +25,7 @@ def test_Studio_02():
     assert studio.transcript[-2] == \
     ['Studio - active scores',
      '',
-     '     1: Betörung',
+     '     1: Betörung (2012)',
      '     2: Čáry (2006)',
      "     3: L'archipel du corps (2011)",
      "     4: L'imaginare (2010)",
