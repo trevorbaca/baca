@@ -77,6 +77,7 @@ class StylesheetWrangler(PackageWrangler):
         self.restore_breadcrumbs(cache=cache)
         
     # TODO: write test
+    # TODO: remove loop-internal explicit return
     def select_stylesheet_file_name_interactively(self, clear=True, cache=False):
         self.cache_breadcrumbs(cache=cache)
         menu, section = self.make_menu(where=self.where(), is_parenthetically_numbered=True)

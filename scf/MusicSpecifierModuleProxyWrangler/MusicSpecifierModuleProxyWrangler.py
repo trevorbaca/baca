@@ -55,3 +55,40 @@ class MusicSpecifierModuleProxyWrangler(PackageWrangler):
             self.specifiers_package_importable_name, specifier_module_short_name)
         specifier_module_proxy = MusicSpecifierModuleProxy(specifier_module_importable_name)
         specifier_module_proxy.run()
+
+    def run(self, user_input=None, clear=True, cache=False):
+        self.assign_user_input(user_input=user_input)
+        self.cache_breadcrumbs(cache=cache)
+        while True:
+            self.push_breadcrumb()
+            menu = make_main_menu()
+            result = menu.run(clear=clear)
+            if self.backtrack():
+                break
+            elif not result:
+                self.pop_breadcrumb()
+                continue
+            self.handle_main_menu_result(result)
+            if self.backtrack():
+                break
+            self.pop_breadcrumb()
+        self.pop_breadcrumb()
+        self.restore_breadcrumbs(cache=cache)
+
+    def select_specifier_spaced_name_interactively(self, clear=True, cache=False):
+        self.cache_breadcrumbs(cache=cache)
+        menu, section = self.make_menu(where=self.where(), is_parenthetically_numbered=True)
+        section.tokens = self.specifier_spaced_names
+        while True:
+            self.push_breadcrumb('select specifier')
+            result = menu.run(clear=clear)
+            if self.backtrack():
+                break
+            elif not result:
+                self.pop_breadcrumb()
+                continue
+            else:
+                break
+        self.pop_breadcrumb()
+        self.restore_breadcrumbs(cache=cache)
+        return result
