@@ -39,3 +39,19 @@ class MusicSpecifierWrangler(PackageWrangler):
 
     def make_main_menu(self):
         menu, section = self.make_menu(where=self.where(), is_parenthetically_numbered=True)
+        section.tokens = self.specifier_file_names
+        section.make_section()
+        section.append(('new', 'new specifier'))
+        return menu
+
+    def make_specifier_interactively(self):
+        getter = self.make_getter()
+        getter.append_space_delimited_lowercase_string('specifier name')
+        specifier_name = getter.run()
+        if self.backtrack():
+            return
+        specifier_module_short_name = specifier_name.replace(' ', '_')
+        specifier_module_importable_name = self.join(
+            self.specifiers_package_importable_name, specifier_module_short_name)
+        specifier_module_proxy = MusicSpecifierModuleProxy(specifier_module_importable_name)
+        specifier_module_proxy.run()

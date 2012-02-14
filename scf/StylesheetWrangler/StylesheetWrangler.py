@@ -37,15 +37,15 @@ class StylesheetWrangler(PackageWrangler):
             stylesheet_proxy.run()
          
     def make_main_menu(self):
-        menu, section = self.make_menu(where=self.where(), is_numbered=True)
+        menu, section = self.make_menu(where=self.where(), is_parenthetically_numbered=True)
         section.tokens = self.stylesheet_file_names
         section = menu.make_section()
-        section.append(('new', 'make new stylesheet'))
+        section.append(('new', 'new stylesheet'))
         return menu
 
     # TODO: write test
     def make_stylesheet_interactively(self):
-        getter = self.make_getter()
+        getter = self.make_getter(where=self.where())
         getter.append_string('stylesheet name')
         stylesheet_name = getter.run()
         if self.backtrack():
@@ -54,7 +54,6 @@ class StylesheetWrangler(PackageWrangler):
         if not stylesheet_name.endswith('.ly'):
             stylesheet_name = stylesheet_name + '.ly'
         stylesheet_file_name = os.path.join(self.stylesheets_directory_name, stylesheet_name)
-        #self.edit_stylesheet(stylesheet_file_name)
         stylesheet_proxy = StylesheetFileProxy(stylesheet_file_name, session=self.session)
         stylesheet_proxy.edit_stylesheet()
 

@@ -62,7 +62,7 @@ class UserInputGetter(MenuSectionAggregator):
     ### PUBLIC METHODS ###
 
     def append_argument_range(self, spaced_attribute_name, argument_list, default=None):
-        message = "value for '{}' must be argument range."
+        message = 'value for {!r} must be argument range.'
         self.append_something(spaced_attribute_name, message, default=default)
         self.argument_lists[-1] = argument_list
         test = lambda expr: predicates.is_readable_argument_range_string_for_argument_list(expr, argument_list)
@@ -70,33 +70,33 @@ class UserInputGetter(MenuSectionAggregator):
 
     def append_available_underscore_delimited_lowercase_package_name(self, spaced_attribute_name, default=None):
         message = \
-            "value for {!r} must be available underscore-delimited lowercase package name of length at least 3."
+            'value for {!r} must be available underscore-delimited lowercase package name of length at least 3.'
         self.append_something(spaced_attribute_name, message, default=default)
         self.tests.append(predicates.is_available_underscore_delimited_lowercase_package_name)
 
     def append_boolean(self, spaced_attribute_name, default=None):
-        message = "value for '{}' must be boolean."
+        message = 'value for {!r} must be boolean.'
         self.append_something(spaced_attribute_name, message, default=default)
         self.tests.append(predicates.is_boolean)
 
     def append_existing_package_name(self, spaced_attribute_name, default=None):
-        message = "value for {!r} must be existing package name."
+        message = 'value for {!r} must be existing package name.'
         self.append_something(spaced_attribute_name, message, default=default)
         self.tests.append(predicates.is_existing_package_name)
 
     def append_integer(self, spaced_attribute_name, default=None):
-        message = "value for '{}' must be integer."
+        message = 'value for {!r} must be integer.'
         self.append_something(spaced_attribute_name, message, default=default)
         self.tests.append(predicates.is_integer)
 
     def append_integer_in_range(self, spaced_attribute_name, 
         start=None, stop=None, allow_none=False, default=None):
-        message = "value for '{}' must be integer between {} and {}, inclusive."
+        message = 'value for {!r} must be integer between {} and {}, inclusive.'
         self.append_something(spaced_attribute_name, message, (start, stop), default=default)
         self.tests.append(self.make_is_integer_in_range(start, stop, allow_none=allow_none))
 
     def append_markup(self, spaced_attribute_name, default=None):
-        message = "value for '{}' must be markup."
+        message = 'value for {!r} must be markup.'
         self.append_something(spaced_attribute_name, message, default=default)
         execs = []
         execs.append('from abjad import *')
@@ -105,7 +105,7 @@ class UserInputGetter(MenuSectionAggregator):
         self.tests.append(predicates.is_markup)
 
     def append_named_chromatic_pitch(self, spaced_attribute_name, default=None):
-        message = "value for '{}' must be named chromatic pitch."
+        message = 'value for {!r} must be named chromatic pitch.'
         self.append_something(spaced_attribute_name, message, default=default)
         execs = []
         execs.append('from abjad import *')
@@ -114,7 +114,7 @@ class UserInputGetter(MenuSectionAggregator):
         self.tests.append(predicates.is_named_chromatic_pitch)
 
     def append_pitch_range(self, spaced_attribute_name, default=None):
-        message = "value for '{}' must be pitch range."
+        message = 'value for {!r} must be pitch range.'
         self.append_something(spaced_attribute_name, message, default=default)
         execs = []
         execs.append('from abjad import *')
@@ -135,29 +135,34 @@ class UserInputGetter(MenuSectionAggregator):
         self.chevrons.append(include_chevron)
 
     def append_space_delimited_lowercase_string(self, spaced_attribute_name, default=None):
-        message = "value for {!r} must be space-delimited lowercase string."
+        message = 'value for {!r} must be space-delimited lowercase string.'
         self.append_something(spaced_attribute_name, message, default=default)
         self.tests.append(iotools.is_space_delimited_lowercase_string)
 
     def append_string(self, spaced_attribute_name, default=None):
-        message = "value for '{}' must be string."
+        message = 'value for {!r} must be string.'
         self.append_something(spaced_attribute_name, message, default=default)
         self.tests.append(predicates.is_string)
 
     def append_string_or_none(self, spaced_attribute_name, default=None):
-        message = "value for '{}' must be string or none."
+        message = 'value for {!r} must be string or none.'
         self.append_something(spaced_attribute_name, message, default=default)
         self.tests.append(predicates.is_string_or_none)
 
     def append_symbolic_pitch_range_string(self, spaced_attribute_name, default=None):
-        message = "value for '{}' must be symbolic pitch range string. Ex: [A0, C8]."
+        message = 'value for {!r} must be symbolic pitch range string. Ex: [A0, C8].'
         self.append_something(spaced_attribute_name, message, default=default)
         self.tests.append(pitchtools.is_symbolic_pitch_range_string)
 
     def append_underscore_delimited_lowercase_package_name(self, spaced_attribute_name, default=None):
-        message = "value for {!r} must be underscore-delimited lowercase package name of length at least 3."
+        message = 'value for {!r} must be underscore-delimited lowercase package name of length at least 3.'
         self.append_something(spaced_attribute_name, message, default=default)
         self.tests.append(predicates.is_underscore_delimited_lowercase_package_name)
+
+    def append_underscore_delimited_lowercase_string(self, spaced_attribute_name, default=None):
+        message = 'value for {!r} must be underscore-delimited lowercase string.'
+        self.append_something(spaced_attribute_name, message, default=default)
+        self.tests.append(predicates.is_underscore_delimited_lowercase_string)
 
     def append_yes_no_string(self, spaced_attribute_name, default=None, include_chevron=False):
         message = "value for '{}' must be 'y' or 'n'."
