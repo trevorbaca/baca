@@ -85,7 +85,7 @@ class PackageWrangler(SCFObject):
             parts = [score_package_short_name]
             if self.toplevel_score_package_importable_name_body:
                 parts.append(self.toplevel_score_package_importable_name_body)
-            toplevel_score_package_importable_name = '.'.join(parts)
+            toplevel_score_package_importable_name = self.dot_join(parts)
             result.append(toplevel_score_package_importable_name)
         return result
 

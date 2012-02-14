@@ -31,7 +31,7 @@ class MaterialPackageWrangler(PackageWrangler):
             return self.toplevel_global_package_importable_name
         else:
             score_package_short_name = self.session.current_score_package_short_name
-            return '.'.join([score_package_short_name, self.toplevel_score_package_importable_name_body])
+            return self.dot_join([score_package_short_name, self.toplevel_score_package_importable_name_body])
     
     ### PUBLIC METHODS ###
 
@@ -46,7 +46,7 @@ class MaterialPackageWrangler(PackageWrangler):
             if self.backtrack():
                 return
             material_package_short_name = iotools.string_to_strict_directory_name(material_name)
-            material_package_importable_name = '.'.join([
+            material_package_importable_name = self.dot_join([
                 self.materials_package_importable_name, material_package_short_name])
             if self.package_exists(material_package_importable_name):
                 line = 'Material package {!r} already exists.'.format(material_package_importable_name)
@@ -160,7 +160,7 @@ class MaterialPackageWrangler(PackageWrangler):
         if not package_root_name == self.studio_package_importable_name:
             result.append('mus')
         result.append('materials')
-        result = '.'.join(result)
+        result = self.dot_join(result)
         return result
 
     def run(self, user_input=None, head=None, clear=True, cache=False):

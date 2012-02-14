@@ -19,7 +19,7 @@ class MaterialModuleProxy(ModuleProxy):
 
     @property
     def materials_package_importable_name(self):
-        return '.'.join(self.parent_package_importable_name.split('.')[:-1])
+        return self.dot_join(self.parent_package_importable_name.split('.')[:-1])
 
     ### PUBLIC METHODS ###
 

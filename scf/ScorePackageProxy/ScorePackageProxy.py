@@ -39,7 +39,7 @@ class ScorePackageProxy(PackageProxy):
 
     @property
     def chunks_package_importable_name(self):
-        return '.'.join([self.package_importable_name, 'mus', 'chunks'])
+        return self.dot_join([self.package_importable_name, 'mus', 'chunks'])
 
     @property
     def chunks_package_initializer_file_name(self):
@@ -95,7 +95,7 @@ class ScorePackageProxy(PackageProxy):
 
     @property
     def materials_package_importable_name(self):
-        return '.'.join([self.package_importable_name, 'mus', 'materials'])
+        return self.dot_join([self.package_importable_name, 'mus', 'materials'])
 
     @property
     def materials_package_initializer_file_name(self):

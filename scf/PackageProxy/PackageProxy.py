@@ -98,7 +98,7 @@ class PackageProxy(DirectoryProxy):
     @property
     def parent_package_importable_name(self):
         if self.package_importable_name is not None:
-            result = '.'.join(self.package_importable_name.split('.')[:-1])
+            result = self.dot_join(self.package_importable_name.split('.')[:-1])
             if result:
                 return result
 
