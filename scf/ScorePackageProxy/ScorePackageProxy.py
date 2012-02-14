@@ -14,7 +14,7 @@ class ScorePackageProxy(PackageProxy):
         self._chunk_wrangler = baca.scf.ChunkPackageWrangler(session=self.session)
         self._material_package_wrangler = baca.scf.MaterialPackageWrangler(session=self.session)
         self._material_package_maker_wrangler = baca.scf.MaterialPackageMakerWrangler(session=self.session)
-        self._music_specifier_wrangler = baca.scf.MusicSpecifierWrangler(session=self.session)
+        self._music_specifier_wrangler = baca.scf.MusicSpecifierModuleProxyWrangler(session=self.session)
 
     ### READ-ONLY PUBLIC ATTRIBUTES ###
 

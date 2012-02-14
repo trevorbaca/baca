@@ -1,7 +1,7 @@
 from baca.scf.PackageWrangler import PackageWrangler
 
 
-class MusicSpecifierWrangler(PackageWrangler):
+class MusicSpecifierModuleProxyWrangler(PackageWrangler):
 
     def __init__(self, session=None):
         PackageWrangler.__init__(self,
