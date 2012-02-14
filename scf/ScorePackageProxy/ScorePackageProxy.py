@@ -14,6 +14,7 @@ class ScorePackageProxy(PackageProxy):
         self._chunk_wrangler = baca.scf.ChunkPackageWrangler(session=self.session)
         self._material_package_wrangler = baca.scf.MaterialPackageWrangler(session=self.session)
         self._material_package_maker_wrangler = baca.scf.MaterialPackageMakerWrangler(session=self.session)
+        self._music_specifier_wrangler = baca.scf.MusicSpecifierWrangler(session=self.session)
 
     ### READ-ONLY PUBLIC ATTRIBUTES ###
 
@@ -103,6 +104,10 @@ class ScorePackageProxy(PackageProxy):
     @property
     def mus_proxy(self):
         return self._mus_proxy
+
+    @property
+    def music_specifier_wrangler(self):
+        return self._music_specifier_wrangler
 
     @property
     def score_initializer_file_names(self):
@@ -259,6 +264,8 @@ class ScorePackageProxy(PackageProxy):
             self.chunk_wrangler.run(head=self.package_short_name)
         elif  result == 'm':
             self.material_package_wrangler.run(head=self.package_short_name)
+        elif result == 'p':
+            self.music_specifier_wrangler.run(head=self.package_short_name)
         elif result == 's':
             self.manage_setup(cache=True)
         elif result == 'fix':
@@ -290,6 +297,7 @@ class ScorePackageProxy(PackageProxy):
         section = menu.make_new_section()
         section.append(('h', 'chunks'))
         section.append(('m', 'materials'))
+        section.append(('p', 'specifiers'))
         section.append(('s', 'setup'))
         hidden_section = menu.make_new_section(is_hidden=True)
         hidden_section.append(('fix', 'fix package structure'))

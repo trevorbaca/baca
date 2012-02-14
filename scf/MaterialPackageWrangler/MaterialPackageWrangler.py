@@ -9,7 +9,9 @@ class MaterialPackageWrangler(PackageWrangler):
     def __init__(self, session=None):
         import baca
         PackageWrangler.__init__(self, 
-            self.studio_materials_package_importable_name, 'mus.materials', session=session)
+            toplevel_global_package_importable_name=self.studio_materials_package_importable_name, 
+            toplevel_score_package_importable_name_body=self.score_materials_package_importable_name_body,
+            session=session)
         self._material_package_maker_wrangler = baca.scf.MaterialPackageMakerWrangler(session=self.session)
 
     ### READ-ONLY PUBLIC ATTRIBUTES ###

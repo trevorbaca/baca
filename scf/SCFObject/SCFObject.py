@@ -45,15 +45,23 @@ class SCFObject(object):
 
     @property
     def materialpackagemakers_package_importable_name(self):
-        return '.'.join([self.scf_package_importable_name, 'materialpackagemakers'])
+        return self.dot_join([self.scf_package_importable_name, 'materialpackagemakers'])
 
     @property
     def scf_package_importable_name(self):
-        return '.'.join([self.studio_package_importable_name, 'scf'])
+        return self.dot_join([self.studio_package_importable_name, 'scf'])
 
     @property
     def scf_root_directory(self):
         return self.package_importable_name_to_directory_name(self.scf_package_importable_name)
+
+    @property
+    def score_materials_package_importable_name_body(self):
+        return 'mus.materials'
+
+    @property
+    def score_specifiers_package_importable_name_body(self):
+        return 'mus.specifiers'
 
     @property
     def session(self):
@@ -61,7 +69,7 @@ class SCFObject(object):
 
     @property
     def sketches_package_importable_name(self):
-        return '.'.join([self.studio_package_importable_name, 'sketches'])
+        return self.dot_join([self.studio_package_importable_name, 'sketches'])
 
     @property
     def source_file_name(self):
@@ -79,7 +87,11 @@ class SCFObject(object):
 
     @property
     def studio_materials_package_importable_name(self):
-        return '.'.join([self.studio_package_importable_name, 'materials'])
+        return self.dot_join([self.studio_package_importable_name, 'materials'])
+
+    @property
+    def studio_specifiers_package_importable_name(self):
+        return self.dot_join([self.studio_package_importable_name, 'specifiers'])
 
     @property
     def studio_package_importable_name(self):
@@ -91,7 +103,7 @@ class SCFObject(object):
 
     @property
     def stylesheets_package_importable_name(self):
-        return '.'.join([self.scf_package_importable_name, 'stylesheets'])
+        return self.dot_join([self.scf_package_importable_name, 'stylesheets'])
 
     @property
     def transcript(self):
@@ -115,10 +127,6 @@ class SCFObject(object):
         return self.session.backtrack()
 
     def cache_breadcrumbs(self, cache=False):
-        #self.session.cached_breadcrumbs = []
-        #if cache:
-        #    self.session.cached_breadcrumbs = self.session.breadcrumb_stack[:]
-        #    self.session._breadcrumb_stack[:] = []
         if cache:
             self.session.breadcrumb_cache_stack.append(self.session.breadcrumb_stack[:])
             self.session._breadcrumb_stack[:] = []
@@ -163,6 +171,9 @@ class SCFObject(object):
             if self.session.is_displayable:
                 for line in lines:
                     print line
+
+    def dot_join(self, expr):
+        return '.'.join(expr)
 
     def handle_raw_input(self, prompt, include_chevron=True, include_newline=True, prompt_character='>',
         capitalize_prompt=True):
