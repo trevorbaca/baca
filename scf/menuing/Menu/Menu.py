@@ -181,7 +181,7 @@ class Menu(MenuSectionAggregator):
             result.append(entry)
         return result
 
-    def make_new_section(self, is_hidden=False, is_internally_keyed=False, is_keyed=True, 
+    def make_section(self, is_hidden=False, is_internally_keyed=False, is_keyed=True, 
         is_numbered=False, is_parenthetically_numbered=False, is_ranged=False):
         assert not (is_numbered and self.has_numbered_section)
         assert not (is_parenthetically_numbered and self.has_numbered_section)

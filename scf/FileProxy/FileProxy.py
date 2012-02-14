@@ -56,7 +56,7 @@ class FileProxy(SCFObject):
         shutil.copyfile(self.full_file_name, new_full_file_name)
 
     def copy_file_interactively(self, prompt=True):
-        getter = self.make_new_getter()
+        getter = self.make_getter()
         getter.append_string('new file name')
         new_short_file_name = getter.run()
         if self.backtrack():
@@ -104,7 +104,7 @@ class FileProxy(SCFObject):
 
     # TODO: write test
     def write_canned_file_to_disk(self, prompt=True):
-        getter = self.make_new_getter(where=self.where())
+        getter = self.make_getter(where=self.where())
         getter.append_string('name of canned file')
         self.push_backtrack()
         canned_file_name = getter.run()

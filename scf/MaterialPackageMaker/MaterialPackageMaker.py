@@ -72,7 +72,7 @@ class MaterialPackageMaker(MaterialPackageProxy):
             default = current_value
         else:
             default = None
-        getter = self.make_new_getter()
+        getter = self.make_getter()
         spaced_attribute_name = key.replace('_', ' ')
         message = "value for '{}' must satisfy " + test.__name__ + '().'
         getter.append_something(spaced_attribute_name, message, default=default)
@@ -103,10 +103,10 @@ class MaterialPackageMaker(MaterialPackageProxy):
         self.proceed('demo values loaded and written to disk.', prompt=prompt)
 
     def make_main_menu_section_for_user_input_module(self, main_menu, hidden_section):
-        section = main_menu.make_new_section(is_parenthetically_numbered=True)
+        section = main_menu.make_section(is_parenthetically_numbered=True)
         section.tokens = self.user_input_wrapper_in_memory.editable_lines
         section.return_value_attribute = 'number'
-        section = main_menu.make_new_section()
+        section = main_menu.make_section()
         section.append(('uic', 'user input - clear'))
         section.append(('uil', 'user input - load demo values'))
         section.append(('uip', 'user input - populate'))
@@ -127,7 +127,7 @@ class MaterialPackageMaker(MaterialPackageProxy):
 
     def populate_user_input_wrapper(self, prompt=True):
         total_elements = len(self.user_input_wrapper_in_memory)
-        getter = self.make_new_getter(where=self.where())
+        getter = self.make_getter(where=self.where())
         getter.append_integer_in_range('start at element number', 1, total_elements, default=1)
         self.push_backtrack()
         start_element_number = getter.run()

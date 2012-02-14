@@ -136,7 +136,7 @@ class PackageProxy(DirectoryProxy):
             self.initializer_file_proxy.write_tags_to_disk(tags)
 
     def add_tag_interactively(self):
-        getter = self.make_new_getter(where=self.where())
+        getter = self.make_getter(where=self.where())
         getter.append_string('tag name')
         getter.append_string('tag value')
         result = getter.run()
@@ -161,7 +161,7 @@ class PackageProxy(DirectoryProxy):
             self.initializer_file_proxy.write_tags_to_disk(tags)
 
     def remove_tag_interactively(self):
-        getter = self.make_new_getter(where=self.where())
+        getter = self.make_getter(where=self.where())
         getter.append_string('tag name')
         result = getter.run()
         if self.backtrack():
@@ -176,7 +176,7 @@ class PackageProxy(DirectoryProxy):
         return tag
 
     def get_tag_interactively(self):
-        getter = self.make_new_getter(where=self.where())
+        getter = self.make_getter(where=self.where())
         getter.append_string('tag name')
         result = getter.run()
         if self.backtrack():
@@ -210,9 +210,9 @@ class PackageProxy(DirectoryProxy):
         return bool(tag_name in tags)
 
     def make_tags_menu(self):
-        menu, section = self.make_new_menu(where=self.where(), is_keyed=False)
+        menu, section = self.make_menu(where=self.where(), is_keyed=False)
         section.tokens = self.formatted_tags
-        section = menu.make_new_section()
+        section = menu.make_section()
         section.append(('add', 'add tag'))
         section.append(('del', 'delete tag'))
         section.append(('get', 'get tag'))
@@ -251,7 +251,7 @@ class PackageProxy(DirectoryProxy):
             self.proceed(line)
         
     def set_package_importable_name_interactively(self):
-        getter = self.make_new_getter(where=self.where())
+        getter = self.make_getter(where=self.where())
         # TODO: implement getter.append_package_name
         getter.prompts.append('package importable name')
         getter.tests.append(iotools.is_underscore_delimited_lowercase_package_name)
@@ -262,7 +262,7 @@ class PackageProxy(DirectoryProxy):
         self.package_importable_name = result
 
     def set_package_spaced_name_interactively(self):
-        getter = self.make_new_getter(where=self.where())
+        getter = self.make_getter(where=self.where())
         # TODO: implement package spaced name
         getter.prompts.append('package spaced name')
         getter.tests.append(iotools.is_space_delimited_lowercase_string)

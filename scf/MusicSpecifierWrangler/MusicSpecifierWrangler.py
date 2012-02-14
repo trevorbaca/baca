@@ -38,4 +38,4 @@ class MusicSpecifierWrangler(PackageWrangler):
             specifier_proxy.run()
 
     def make_main_menu(self):
-        menu, section = self.make_new_menu(where=self.where(), is_parenthetically_numbered=True)
+        menu, section = self.make_menu(where=self.where(), is_parenthetically_numbered=True)

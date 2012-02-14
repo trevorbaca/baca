@@ -21,7 +21,7 @@ class StylesheetFileProxy(FileProxy):
         self.print_not_implemented()
 
     def copy_stylesheet_interactively(self, prompt=True):
-        getter = self.make_new_getter()
+        getter = self.make_getter()
         getter.append_string('new file name')
         new_short_file_name = getter.run()
         if self.backtrack():
@@ -56,7 +56,7 @@ class StylesheetFileProxy(FileProxy):
             raise ValueError
 
     def make_main_menu(self):
-        menu, section = self.make_new_menu(where=self.where)
+        menu, section = self.make_menu(where=self.where)
         section.append(('audit', 'audit stylesheet'))
         section.append(('cp', 'copy stylesheet'))
         section.append(('del', 'delete stylesheet'))
@@ -65,7 +65,7 @@ class StylesheetFileProxy(FileProxy):
         return menu
 
     def rename_stylesheet_interactively(self, prompt=True):
-        getter = self.make_new_getter()
+        getter = self.make_getter()
         getter.append_string('new file name')
         new_short_file_name = getter.run()
         if self.backtrack():

@@ -49,9 +49,9 @@ class ChunkPackageProxy(PackageProxy):
         self.proceed(line, prompt=prompt)
 
     def make_main_menu(self):
-        menu, section = self.make_new_menu(where=self.where())
+        menu, section = self.make_menu(where=self.where())
         section.append(('n', 'initializer'))
-        section = menu.make_new_section()
+        section = menu.make_section()
         section.append(('d', 'delete'))
         return menu
 
@@ -75,7 +75,7 @@ class ChunkPackageProxy(PackageProxy):
         self.restore_breadcrumbs(cache=cache)
 
     def set_chunk_spaced_name_interactively(self, prompt=True):
-        getter = self.make_new_getter(where=self.where())
+        getter = self.make_getter(where=self.where())
         # TODO: implement getter.append_space_delimited_lowercase_string
         getter.prompts.append('chunk name')
         getter.tests.append(iotools.is_space_delimited_lowercase_string)

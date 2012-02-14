@@ -37,7 +37,7 @@ class InstrumentEditor(InteractiveEditor):
                 self.target = None
     
     def edit_instrument_name_interactively(self):
-        getter = self.make_new_getter(where=self.where())
+        getter = self.make_getter(where=self.where())
         getter.append_string('instrument name')
         result = getter.run()
         if self.backtrack():
@@ -45,7 +45,7 @@ class InstrumentEditor(InteractiveEditor):
         self.conditionally_set_target_attribute('instrument_name', result)
 
     def edit_instrument_name_markup_interactively(self):
-        getter = self.make_new_getter(where=self.where())
+        getter = self.make_getter(where=self.where())
         getter.append_markup('instrument name markup')
         result = getter.run()
         if self.backtrack():
@@ -53,7 +53,7 @@ class InstrumentEditor(InteractiveEditor):
         self.conditionally_set_target_attribute('instrument_name_markup', result)
 
     def edit_pitch_range_interactively(self):
-        getter = self.make_new_getter(where=self.where())
+        getter = self.make_getter(where=self.where())
         getter.append_pitch_range('pitch range')
         result = getter.run()
         if self.backtrack():
@@ -61,7 +61,7 @@ class InstrumentEditor(InteractiveEditor):
         self.conditionally_set_target_attribute('pitch_range', result)
         
     def edit_short_instrument_name_interactively(self):
-        getter = self.make_new_getter(where=self.where())
+        getter = self.make_getter(where=self.where())
         getter.append_string('short instrument name')
         result = getter.run()
         if self.backtrack():
@@ -69,7 +69,7 @@ class InstrumentEditor(InteractiveEditor):
         self.conditionally_set_target_attribute('short_instrument_name', result)
 
     def edit_short_instrument_name_markup_interactively(self):
-        getter = self.make_new_getter(where=self.where())
+        getter = self.make_getter(where=self.where())
         getter.append_markup('short instrument name markup')
         result = getter.run()
         if self.backtrack():
@@ -80,7 +80,7 @@ class InstrumentEditor(InteractiveEditor):
         self.cache_breadcrumbs(cache=cache)
         while True:
             self.push_breadcrumb('untuned percussion')
-            menu, section = self.make_new_menu(where=self.where(), is_numbered=True)
+            menu, section = self.make_menu(where=self.where(), is_numbered=True)
             section.tokens = instrumenttools.UntunedPercussion.known_untuned_percussion
             result = menu.run(clear=clear)
             if self.backtrack():
@@ -119,10 +119,10 @@ class InstrumentEditor(InteractiveEditor):
             #self.edit_transposition_interactively()
 
     def make_main_menu(self):
-        menu, section = self.make_new_menu(where=self.where(), is_parenthetically_numbered=True, is_keyed=True)
+        menu, section = self.make_menu(where=self.where(), is_parenthetically_numbered=True, is_keyed=True)
         section.tokens = self.target_attribute_tokens
         section.show_existing_values = True
-        section = menu.make_new_section(is_keyed=False)
+        section = menu.make_section(is_keyed=False)
         if self.session.display_pitch_ranges_with_numbered_pitches:
             pitch_range_repr = self.target.pitch_range.one_line_numbered_chromatic_pitch_repr
         else:
@@ -140,7 +140,7 @@ class InstrumentEditor(InteractiveEditor):
             line = 'interval of transposition: {}'
             line = line.format(self.target.interval_of_transposition)
             section.append(('int', line))
-        section = menu.make_new_section(is_hidden=True)
+        section = menu.make_section(is_hidden=True)
         section.append(('tprd', 'toggle pitch range display'))
         return menu
 
@@ -148,7 +148,7 @@ class InstrumentEditor(InteractiveEditor):
         '''Return list of instruments or none.'''
         from abjad.tools import instrumenttools
         self.cache_breadcrumbs(cache=cache)
-        menu, section = self.make_new_menu(where=self.where(), is_numbered=True, is_ranged=True)
+        menu, section = self.make_menu(where=self.where(), is_numbered=True, is_ranged=True)
         section.tokens = instrumenttools.list_instrument_names()
         while True:
             self.push_breadcrumb('select instrument')

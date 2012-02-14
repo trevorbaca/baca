@@ -56,7 +56,7 @@ class DirectoryProxy(SCFObject):
     ### PUBLIC METHODS ###
 
     def get_directory_name_interactively(self):
-        getter = self.make_new_getter(where=self.where())
+        getter = self.make_getter(where=self.where())
         getter.append_string('directory name')
         result = getter.run()
         if self.backtrack():
@@ -81,7 +81,7 @@ class DirectoryProxy(SCFObject):
     def remove_nonversioned_directory(self):
         line = '{} will be removed.\n'.format(self.directory_name)
         self.display(line)
-        getter = self.make_new_getter(where=self.where())
+        getter = self.make_getter(where=self.where())
         getter.append_string("type 'remove' to proceed")
         response = getter.run()
         if self.backtrack():
@@ -98,7 +98,7 @@ class DirectoryProxy(SCFObject):
     def remove_versioned_directory(self):
         line = '{} will be completely removed from the repository!\n'.format(self.directory_name)
         self.display(line)
-        getter = self.make_new_getter(where=self.where())
+        getter = self.make_getter(where=self.where())
         getter.append_string("type 'remove' to proceed")
         response = getter.run()
         if self.backtrack():

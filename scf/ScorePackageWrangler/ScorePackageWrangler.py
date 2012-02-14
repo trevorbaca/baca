@@ -58,7 +58,7 @@ class ScorePackageWrangler(PackageWrangler):
         return ScorePackageProxy(package_importable_name, session=self.session)
 
     def get_score_package_importable_name_interactively(self, prompt=True):
-        getter = self.make_new_getter(where=self.where())
+        getter = self.make_getter(where=self.where())
         getter.append_underscore_delimited_lowercase_package_name('score package name')
         self.push_backtrack()
         score_package_importable_name = getter.run()
@@ -75,7 +75,7 @@ class ScorePackageWrangler(PackageWrangler):
         score_package_proxy.fix_package_structure(is_interactive=False)
 
     def make_score_package_interactively(self):
-        getter = self.make_new_getter(where=self.where())
+        getter = self.make_getter(where=self.where())
         getter.indent_level = 1
         getter.prompt_character = ':'
         getter.capitalize_prompts = False
@@ -98,7 +98,7 @@ class ScorePackageWrangler(PackageWrangler):
             score_package_proxy.profile_package_structure()
 
     def select_score_package_proxy(self):
-        menu, section = self.make_new_menu(where=self.where(), is_numbered=True)
+        menu, section = self.make_menu(where=self.where(), is_numbered=True)
         section.tokens = self.score_titles_with_years
         score_package_short_name = self.title_to_score_package_short_name(value)
         score_package_proxy = ScorePackageProxy(score_package_short_name, session=self.session)
@@ -106,7 +106,7 @@ class ScorePackageWrangler(PackageWrangler):
     
     # TODO: move up to level of wrangler
     def svn_ci(self, prompt=True):
-        getter = self.make_new_getter(where=self.where())
+        getter = self.make_getter(where=self.where())
         getter.append_string('commit message')
         commit_message = getter.run()
         if self.backtrack():

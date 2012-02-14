@@ -38,7 +38,7 @@ class MaterialPackageWrangler(PackageWrangler):
     # TODO: write test
     def get_new_material_package_importable_name_interactively(self):
         while True:
-            getter = self.make_new_getter(where=self.where())
+            getter = self.make_getter(where=self.where())
             getter.append_space_delimited_lowercase_string('material name')
             self.push_backtrack()
             material_name = getter.run()
@@ -108,9 +108,9 @@ class MaterialPackageWrangler(PackageWrangler):
             material_package_importable_name, material_package_maker_class_name, should_have_illustration)
 
     def make_main_menu(self, head=None):
-        menu, section = self.make_new_menu(where=self.where(), is_numbered=True, is_keyed=False)
+        menu, section = self.make_menu(where=self.where(), is_numbered=True, is_keyed=False)
         section.tokens = self.list_wrangled_package_menuing_pairs(head=head)
-        section = menu.make_new_section()
+        section = menu.make_section()
         section.append(('d', 'data-only'))
         section.append(('h', 'handmade'))
         section.append(('m', 'maker-made'))

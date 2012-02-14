@@ -595,7 +595,7 @@ class MaterialPackageProxy(PackageProxy):
             raise ValueError
 
     def make_main_menu(self):
-        menu, hidden_section = self.make_new_menu(where=self.where(), is_hidden=True)
+        menu, hidden_section = self.make_menu(where=self.where(), is_hidden=True)
         self.make_main_menu_section_for_initializer(menu, hidden_section)
         self.make_main_menu_sections(menu, hidden_section)
         self.make_main_menu_section_for_illustration_ly(menu, hidden_section)
@@ -604,7 +604,7 @@ class MaterialPackageProxy(PackageProxy):
         return menu
     
     def make_main_menu_section_for_hidden_entries(self, main_menu):
-        hidden_section = main_menu.make_new_section(is_hidden=True)
+        hidden_section = main_menu.make_section(is_hidden=True)
         hidden_section.append(('del', 'delete package'))
         hidden_section.append(('ls', 'list package'))
         hidden_section.append(('reg', 'regenerate package'))
@@ -613,7 +613,7 @@ class MaterialPackageProxy(PackageProxy):
         hidden_section.append(('tags', 'manage tags'))
 
     def make_main_menu_section_for_illustration_builder(self, main_menu, hidden_section):
-        section = main_menu.make_new_section()
+        section = main_menu.make_section()
         if self.has_output_material:
             if self.should_have_illustration:
                 if not self.has_illustration_builder_module:
@@ -639,22 +639,22 @@ class MaterialPackageProxy(PackageProxy):
         has_illustration_pdf_section = False
         if self.has_output_material:
             if self.has_illustration_builder_module or self.has_material_package_maker:
-                section = main_menu.make_new_section()
+                section = main_menu.make_section()
                 has_illustration_pdf_section = True
                 section.append(('pdfm', 'output pdf - make'))
         if self.has_illustration_pdf:
             if not has_illustration_pdf_section:
-                section = main_menu.make_new_section()
+                section = main_menu.make_section()
             hidden_section.append(('pdfd', 'output pdf - delete'))
             section.append(('pdfv', 'output pdf - view'))
 
     def make_main_menu_section_for_initializer(self, main_menu, hidden_section):
         if not self.has_initializer:
-            section = main_menu.make_new_section()
+            section = main_menu.make_section()
             section.title = '(Note: package has no initializer.)' 
             section.append(('inr', 'initializer - restore'))
         elif not self.has_readable_initializer:
-            section = main_menu.make_new_section()
+            section = main_menu.make_section()
             section.title = '(Note: package has invalid initializer.)' 
             section.append(('inr', 'initializer - restore'))
         hidden_section.append(('inv', 'view package initializer'))
@@ -664,7 +664,7 @@ class MaterialPackageProxy(PackageProxy):
     def make_main_menu_section_for_material_definition(self, main_menu, hidden_section):
         if not self.has_readable_initializer:
             return
-        section = main_menu.make_new_section()
+        section = main_menu.make_section()
         if self.has_material_definition_module:
             has_invalid_material_definition_module = not self.has_readable_material_definition_module
             if has_invalid_material_definition_module:
@@ -689,13 +689,13 @@ class MaterialPackageProxy(PackageProxy):
             self.has_output_material_editor:
             if self.has_material_definition or \
                 self.has_complete_user_input_wrapper_in_memory:
-                section = main_menu.make_new_section()
+                section = main_menu.make_section()
                 if self.has_output_material_module and not self.has_readable_output_material_module:
                     section.title = '(Note: has invalid output material module.)'
                 section.append(('omm', 'output material - make'))
                 has_output_material_section = True
             if self.has_output_material_editor:
-                section = main_menu.make_new_section()
+                section = main_menu.make_section()
                 if self.has_output_material:
                     output_material_editor = self.output_material_editor(
                         target=self.output_material, session=self.session)
@@ -706,7 +706,7 @@ class MaterialPackageProxy(PackageProxy):
                 has_output_material_section = True
             if self.has_output_material_module:
                 if not has_output_material_section:
-                    section = main_menu.make_new_section()
+                    section = main_menu.make_section()
                 section.append(('omv', 'output material - view'))
                 hidden_section.append(('omdelete', 'output material - delete'))
                 hidden_section.append(('omfetch', 'output material - fetch'))
@@ -749,7 +749,7 @@ class MaterialPackageProxy(PackageProxy):
     def rename_material_interactively(self):
         line = 'current material name: {}'.format(self.material_underscored_name)
         self.display(line)
-        getter = self.make_new_getter(where=self.where())
+        getter = self.make_getter(where=self.where())
         getter.append_string('new material name')
         new_material_spaced_name = getter.run()
         if self.backtrack():

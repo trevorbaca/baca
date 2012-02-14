@@ -44,9 +44,9 @@ class MaterialPackageMakerWrangler(PackageWrangler):
             raise ValueError
 
     def make_main_menu(self):
-        menu, section = self.make_new_menu(where=self.where(), is_numbered=True)
+        menu, section = self.make_menu(where=self.where(), is_numbered=True)
         section.tokens = self.material_proxy_spaced_class_names
-        section = menu.make_new_section()
+        section = menu.make_section()
         section.append(('new', 'make material_proxy'))
         return menu
 
@@ -111,14 +111,14 @@ class MaterialPackageMakerWrangler(PackageWrangler):
         initializer.close() 
 
     def make_material_proxy_interactively(self):
-        getter = self.make_new_getter(where=self.where())
+        getter = self.make_getter(where=self.where())
         getter.append_string('material proxy name')
         material_proxy_name = getter.run()
         if self.backtack():
             return
         assert iotools.is_uppercamelcase_string(material_proxy_name)
         assert material_proxy_name.endswith('Maker')
-        getter = self.make_new_getter(where=self.where())
+        getter = self.make_getter(where=self.where())
         getter.append_string('generic output product')
         generic_output_product = getter.run()
         if self.backtrack():
@@ -168,7 +168,7 @@ class MaterialPackageMakerWrangler(PackageWrangler):
     # TODO: write test
     def select_material_proxy_class_name_interactively(self, clear=True, cache=False):
         self.cache_breadcrumbs(cache=cache)
-        menu, section = self.make_new_menu(where=self.where(), is_numbered=True)
+        menu, section = self.make_menu(where=self.where(), is_numbered=True)
         section.tokens = self.material_proxy_spaced_class_names
         while True:
             self.push_breadcrumb('select material proxy:')

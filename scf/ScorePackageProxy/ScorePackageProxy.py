@@ -172,7 +172,7 @@ class ScorePackageProxy(PackageProxy):
     ### PUBLIC METHODS ###
 
     def edit_forces_tagline_interactively(self):
-        getter = self.make_new_getter(where=self.where())
+        getter = self.make_getter(where=self.where())
         getter.append_string('Forces tagline')
         result = getter.run()
         if self.backtrack():
@@ -187,7 +187,7 @@ class ScorePackageProxy(PackageProxy):
         self.add_tag('instrumentation', editor.target)
 
     def edit_title_interactively(self):
-        getter = self.make_new_getter(where=self.where())
+        getter = self.make_getter(where=self.where())
         getter.append_string('new title')
         result = getter.run()
         if self.backtrack():
@@ -195,7 +195,7 @@ class ScorePackageProxy(PackageProxy):
         self.add_tag('title', result)
 
     def edit_year_of_completion_interactively(self):
-        getter = self.make_new_getter(where=self.where())
+        getter = self.make_getter(where=self.where())
         getter.append_integer_in_range('year of completion', start=1, allow_none=True)
         result = getter.run()
         if self.backtrack():
@@ -293,13 +293,13 @@ class ScorePackageProxy(PackageProxy):
             self.svn_st()
 
     def make_main_menu(self):
-        menu, section = self.make_new_menu(where=self.where(), is_numbered=True)
-        section = menu.make_new_section()
+        menu, section = self.make_menu(where=self.where(), is_numbered=True)
+        section = menu.make_section()
         section.append(('h', 'chunks'))
         section.append(('m', 'materials'))
         section.append(('p', 'specifiers'))
         section.append(('s', 'setup'))
-        hidden_section = menu.make_new_section(is_hidden=True)
+        hidden_section = menu.make_section(is_hidden=True)
         hidden_section.append(('fix', 'fix package structure'))
         hidden_section.append(('ls', 'list directory contents'))
         hidden_section.append(('profile', 'profile package structure'))
@@ -337,14 +337,14 @@ class ScorePackageProxy(PackageProxy):
         return result
         
     def make_setup_menu(self):
-        setup_menu, section = self.make_new_menu(where=self.where(), 
+        setup_menu, section = self.make_menu(where=self.where(), 
             is_parenthetically_numbered=True, is_keyed=False)
         section.tokens = self.setup_value_menu_tokens 
         section.return_value_attribute = 'key'
         return setup_menu
 
     def make_svn_menu(self):
-        menu, section = self.make_new_menu(where=self.where(), is_keyed=False)
+        menu, section = self.make_menu(where=self.where(), is_keyed=False)
         section.append(('st', 'st'))
         section.append(('add', 'add'))
         section.append(('ci', 'ci'))
@@ -416,7 +416,7 @@ class ScorePackageProxy(PackageProxy):
     def remove_interactively(self):
         line = 'WARNING! Score package {!r} will be completely removed.'.format(self.package_importable_name)
         self.display([line, ''])
-        getter = self.make_new_getter(where=self.where())
+        getter = self.make_getter(where=self.where())
         getter.append_string("type 'clobberscore' to proceed")
         self.push_backtrack()
         should_clobber = getter.run()

@@ -127,14 +127,14 @@ class InitializerFileProxy(ParsableFileProxy):
 
     def restore_interactively(self, prompt=True):
         import baca
-        getter = self.make_new_getter(where=self.where())
+        getter = self.make_getter(where=self.where())
         getter.append_yes_no_string('handmade')
         result = getter.run()
         if self.backtrack():
             return
         if 'yes'.startswith(result.lower()):
             material_package_maker_class_name = None
-            getter = self.make_new_getter(where=self.where())
+            getter = self.make_getter(where=self.where())
             getter.append_yes_no_string('should have illustration')
             result = getter.run()
             if self.backtrack():

@@ -145,7 +145,7 @@ class SCFObject(object):
             iotools.clear_terminal()
 
     def confirm(self, prompt_string='ok', include_chevron=False):
-        getter = self.make_new_getter(where=self.where())
+        getter = self.make_getter(where=self.where())
         getter.append_yes_no_string(prompt_string)
         result = getter.run()
         if self.backtrack():
@@ -216,15 +216,15 @@ class SCFObject(object):
         finally:
             readline.set_startup_hook()
 
-    def make_new_getter(self, where=None):
+    def make_getter(self, where=None):
         import baca
         return baca.scf.menuing.UserInputGetter(where=where, session=self.session)
 
-    def make_new_menu(self, is_hidden=False, is_internally_keyed=False, is_keyed=True, 
+    def make_menu(self, is_hidden=False, is_internally_keyed=False, is_keyed=True, 
         is_numbered=False, is_parenthetically_numbered=False, is_ranged=False, where=None):
         import baca
         menu = baca.scf.menuing.Menu(where=where, session=self.session)
-        section = menu.make_new_section(
+        section = menu.make_section(
             is_hidden=is_hidden, is_internally_keyed=is_internally_keyed, is_keyed=is_keyed, 
             is_numbered=is_numbered, is_parenthetically_numbered=is_parenthetically_numbered, 
             is_ranged=is_ranged)
