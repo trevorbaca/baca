@@ -27,11 +27,11 @@ class MaterialPackageWrangler(PackageWrangler):
     # TODO: write test
     @property
     def materials_package_importable_name(self):
-        if not self.session.is_in_score:
-            return self.toplevel_global_package_importable_name
-        else:
+        if self.session.is_in_score:
             score_package_short_name = self.session.current_score_package_short_name
             return self.dot_join([score_package_short_name, self.toplevel_score_package_importable_name_body])
+        else:
+            return self.toplevel_global_package_importable_name
     
     ### PUBLIC METHODS ###
 

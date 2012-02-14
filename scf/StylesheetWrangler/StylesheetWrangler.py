@@ -30,7 +30,7 @@ class StylesheetWrangler(PackageWrangler):
 
     def handle_main_menu_result(self, result):
         if result == 'new':
-            self.make_new_stylesheet_interactively()
+            self.make_stylesheet_interactively()
         else:
             stylesheet_file_name = os.path.join(self.stylesheets_directory_name, result)  
             stylesheet_proxy = StylesheetFileProxy(stylesheet_file_name, session=self.session)
@@ -44,7 +44,7 @@ class StylesheetWrangler(PackageWrangler):
         return menu
 
     # TODO: write test
-    def make_new_stylesheet_interactively(self):
+    def make_stylesheet_interactively(self):
         getter = self.make_new_getter()
         getter.append_string('stylesheet name')
         stylesheet_name = getter.run()
