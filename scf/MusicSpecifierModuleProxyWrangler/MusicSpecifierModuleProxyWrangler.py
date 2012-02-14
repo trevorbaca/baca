@@ -75,6 +75,7 @@ class MusicSpecifierModuleProxyWrangler(PackageWrangler):
         self.pop_breadcrumb()
         self.restore_breadcrumbs(cache=cache)
 
+    # TODO: write test
     def select_specifier_spaced_name_interactively(self, clear=True, cache=False):
         self.cache_breadcrumbs(cache=cache)
         menu, section = self.make_menu(where=self.where(), is_parenthetically_numbered=True)
