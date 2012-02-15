@@ -1,3 +1,4 @@
+from baca.scf.MusicSpecifierModuleProxy import MusicSpecifierModuleProxy
 from baca.scf.PackageWrangler import PackageWrangler
 
 
@@ -13,7 +14,11 @@ class MusicSpecifierModuleProxyWrangler(PackageWrangler):
 
     @property
     def breadcrumb(self):
-        return 'specifiers'
+        return 'music specifiers'
+
+    @property
+    def specifier_spaced_names(self):
+        self.list_wrangled_package_spaced_names
 
     @property
     def specifiers_directory_name(self):
@@ -22,7 +27,7 @@ class MusicSpecifierModuleProxyWrangler(PackageWrangler):
     @property
     def specifiers_package_importable_name(self):
         if self.session.is_in_score:
-            score_package_short_name = self.session.current_score_package_importable_name
+            score_package_short_name = self.session.current_score_package_short_name
             return self.dot_join([score_package_short_name, self.toplevel_score_package_importable_name_body])
         else:
             return self.toplevel_global_package_importable_name
@@ -33,26 +38,26 @@ class MusicSpecifierModuleProxyWrangler(PackageWrangler):
         if result == 'new':
             self.make_specifier_interactively()
         else:
-            specifier_module_name = self.dot_join(self.specifiers_package_importable_name, result)
+            specifier_module_name = self.dot_join([self.specifiers_package_importable_name, result])
             specifier_proxy = MusicSpecifierModuleProxy(specifier_module_importable_name, session=self.session)
             specifier_proxy.run()
 
     def make_main_menu(self):
         menu, section = self.make_menu(where=self.where(), is_parenthetically_numbered=True)
-        section.tokens = self.specifier_file_names
-        section.make_section()
-        section.append(('new', 'new specifier'))
+        section.tokens = self.specifier_spaced_names
+        section = menu.make_section()
+        section.append(('new', 'new music specifier'))
         return menu
 
     def make_specifier_interactively(self):
         getter = self.make_getter()
-        getter.append_space_delimited_lowercase_string('specifier name')
+        getter.append_space_delimited_lowercase_string('music specifier name')
         specifier_name = getter.run()
         if self.backtrack():
             return
         specifier_module_short_name = specifier_name.replace(' ', '_')
-        specifier_module_importable_name = self.join(
-            self.specifiers_package_importable_name, specifier_module_short_name)
+        specifier_module_importable_name = self.dot_join([
+            self.specifiers_package_importable_name, specifier_module_short_name])
         specifier_module_proxy = MusicSpecifierModuleProxy(specifier_module_importable_name)
         specifier_module_proxy.run()
 
@@ -61,7 +66,7 @@ class MusicSpecifierModuleProxyWrangler(PackageWrangler):
         self.cache_breadcrumbs(cache=cache)
         while True:
             self.push_breadcrumb()
-            menu = make_main_menu()
+            menu = self.make_main_menu()
             result = menu.run(clear=clear)
             if self.backtrack():
                 break
@@ -81,7 +86,7 @@ class MusicSpecifierModuleProxyWrangler(PackageWrangler):
         menu, section = self.make_menu(where=self.where(), is_parenthetically_numbered=True)
         section.tokens = self.specifier_spaced_names
         while True:
-            self.push_breadcrumb('select specifier')
+            self.push_breadcrumb('select music specifier')
             result = menu.run(clear=clear)
             if self.backtrack():
                 break
