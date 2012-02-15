@@ -8,6 +8,7 @@ class MenuObject(SCFObject):
 
     def __init__(self, session=None, where=None, title=None):
         SCFObject.__init__(self, session=session)
+        self.indent_level = 0
         self.prompt_default = None
         self.should_clear_terminal = False
         self.where = where
@@ -69,6 +70,7 @@ class MenuObject(SCFObject):
         command = 'from abjad import *'
         exec(command)
         try:
+            result = None
             command = 'result = {}'.format(statement)
             exec(command)
             lines.append('{!r}'.format(result))
@@ -85,41 +87,6 @@ class MenuObject(SCFObject):
         lines = [line.strip() for line in proc.stdout.readlines()]
         lines.append('')
         self.display(lines, capitalize_first_character=False)
-
-    def handle_hidden_key(self, directive):
-        if isinstance(directive, list) and len(directive) == 1:
-            key = directive[0]
-        else:
-            key = directive
-        if key in ('b', 'back'):
-            self.session.is_backtracking_locally = True
-        elif key == 'exec':
-            self.exec_statement()
-        elif key == 'grep':
-            self.grep_baca()
-        elif key == 'here':
-            self.edit_client_source_file()
-        elif key == 'hidden':
-            self.show_hidden_menu_entries()
-        elif key == 'next':
-            self.session.is_navigating_to_next_score = True
-            self.session.is_backtracking_to_studio = True
-        elif key == 'prev':
-            self.session.is_navigating_to_prev_score = True
-            self.session.is_backtracking_to_studio = True
-        elif key in ('q', 'quit'):
-            self.session.user_specified_quit = True
-        elif isinstance(key, str) and 3 <= len(key) and 'score'.startswith(key):
-            if self.session.is_in_score:
-                self.session.is_backtracking_to_score = True
-        elif isinstance(key, str) and 3 <= len(key) and 'studio'.startswith(key):
-            self.session.is_backtracking_to_studio = True
-        elif key == 'tm':
-            self.toggle_menu()
-        elif key == 'where':
-            self.show_menu_client()
-        else:
-            return directive
 
     def make_default_hidden_section(self, session=None, where=None):
         from baca.scf.menuing.MenuSection import MenuSection
@@ -165,19 +132,6 @@ class MenuObject(SCFObject):
             menu_lines.append('')
         return menu_lines
 
-    def show_hidden_menu_entries(self):
-        menu_lines = []
-        for section in self.sections:
-            if section.is_hidden:
-                for token in section.tokens:
-                    number, key, body, return_value = section.unpack_token(token)
-                    menu_line = self.make_tab(1) + ' '
-                    menu_line += '{} ({})'.format(body, key)
-                    menu_lines.append(menu_line)
-                menu_lines.append('')
-        self.display(menu_lines, capitalize_first_character=False)
-        self.session.hide_next_redraw = True
-
     def show_menu_client(self):
         lines = []
         if self.where is not None:
@@ -191,3 +145,9 @@ class MenuObject(SCFObject):
             lines.append('')
             self.display(lines)
         self.session.hide_next_redraw = True
+
+    def toggle_menu(self):
+        if self.session.nonnumbered_menu_sections_are_hidden:
+            self.session.nonnumbered_menu_sections_are_hidden = False
+        else:
+            self.session.nonnumbered_menu_sections_are_hidden = True

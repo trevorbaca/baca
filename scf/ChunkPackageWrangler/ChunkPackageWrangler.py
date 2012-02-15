@@ -6,7 +6,6 @@ import os
 class ChunkPackageWrangler(PackageWrangler):
 
     def __init__(self, session=None):
-        import baca
         PackageWrangler.__init__(self, self.sketches_package_importable_name, 'mus.chunks', session=session)
 
     ### READ-ONLY PUBLIC ATTRIBUTES ###

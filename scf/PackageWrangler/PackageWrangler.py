@@ -1,4 +1,5 @@
 from abjad.tools import iotools
+from baca.scf.PackageProxy import PackageProxy
 from baca.scf.SCFObject import SCFObject
 import os
 
@@ -116,6 +117,9 @@ class PackageWrangler(SCFObject):
 
     ### PUBLIC METHODS ###
 
+    def get_package_proxy(self, package_importable_name):
+        return PackageProxy(package_importable_name, session=self.session)
+        
     def list_wrangled_package_importable_names(self, head=None):
         if head is None: head = ''
         result, package_importable_names = [], []

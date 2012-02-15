@@ -9,7 +9,6 @@ class MenuSection(MenuObject):
         is_numbered=False, is_parenthetically_numbered=False, is_ranged=False, 
         is_read_only=False, session=None, where=None, title=None):
         MenuObject.__init__(self, session=session, where=where, title=title)
-        self._indent_level = 1
         self._is_hidden = is_hidden
         self._is_internally_keyed = is_internally_keyed
         self._is_keyed = is_keyed
@@ -18,6 +17,7 @@ class MenuSection(MenuObject):
         self._is_ranged = is_ranged
         self._return_value_attribute = 'key'
         self.default_index = None
+        self.indent_level = 1
         self.show_existing_values = False
         self.tokens = None
 
@@ -49,10 +49,6 @@ class MenuSection(MenuObject):
     @property
     def has_tuple_tokens(self):
         return any([isinstance(x, tuple) for x in self.tokens])
-
-    @property
-    def indent_level(self):
-        return self._indent_level
 
     @property
     def is_hidden(self):

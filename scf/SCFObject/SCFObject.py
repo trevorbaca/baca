@@ -6,7 +6,6 @@ from baca.scf.Session import Session
 import inspect
 import os
 import pprint
-import re
 import readline
 import sys
 
@@ -26,6 +25,10 @@ class SCFObject(object):
     @property
     def assets_directory(self):
         return os.path.join(self.scf_root_directory, 'assets')
+
+    @property
+    def breadcrumb(self):
+        return 'SCF object'
 
     @property
     def breadcrumb_stack(self):
@@ -147,7 +150,7 @@ class SCFObject(object):
     def confirm(self, prompt_string='ok', include_chevron=False):
         getter = self.make_getter(where=self.where())
         getter.append_yes_no_string(prompt_string)
-        result = getter.run()
+        result = getter.run(include_chevron=include_chevron)
         if self.backtrack():
             return
         return 'yes'.startswith(result.lower())
@@ -303,7 +306,7 @@ class SCFObject(object):
         if lines:
             lines.append('')
             self.display(lines)
-        response = self.handle_raw_input('press return to continue.', include_chevron=False)
+        self.handle_raw_input('press return to continue.', include_chevron=False)
         self.conditionally_clear_terminal()
 
     def pt(self):

@@ -1,6 +1,7 @@
 from abjad.tools import iotools
 from abjad.tools import markuptools
 from abjad.tools import pitchtools
+import re
 
 
 def is_argument_range_string(expr):

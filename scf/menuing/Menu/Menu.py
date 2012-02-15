@@ -244,12 +244,6 @@ class Menu(MenuSectionAggregator):
                 expr = expr.replace(' (default)', '')
             return expr
 
-    def toggle_menu(self):
-        if self.session.nonnumbered_menu_sections_are_hidden:
-            self.session.nonnumbered_menu_sections_are_hidden = False
-        else:
-            self.session.nonnumbered_menu_sections_are_hidden = True
-
     def user_enters_argument_range(self, user_input):
         if ',' in user_input:
             return True

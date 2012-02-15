@@ -77,7 +77,7 @@ class UserInputModuleProxy(ModuleProxy):
             exec(file_contents_string)
             return locals().get('user_input_wrapper', None)
 
-    def write_to_disk(self, user_input_wrapper_in_memory):
+    def write_user_input_wrapper_to_disk(self, user_input_wrapper_in_memory):
         self.setup_statements[:] = self.conditionally_add_terminal_newlines(
             user_input_wrapper_in_memory.user_input_module_import_statements)[:]
         self.user_input_wrapper_lines[:] = self.conditionally_add_terminal_newlines(

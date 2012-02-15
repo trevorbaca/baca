@@ -12,6 +12,7 @@ from baca.scf.StylesheetFileProxy import StylesheetFileProxy
 from baca.scf.StylesheetWrangler import StylesheetWrangler
 from baca.scf.UserInputModuleProxy import UserInputModuleProxy
 from baca.scf.helpers import safe_import
+from baca.scf import helpers
 import os
 
 
@@ -250,17 +251,6 @@ class MaterialPackageProxy(PackageProxy):
             return material_definition
 
     @property
-    def output_material(self):
-        if self.has_readable_output_material_module:
-            return self.output_material_module_proxy.import_output_material()
-    
-    @property
-    def output_material_module_import_statements_and_material_definition(self):
-        if self.should_have_material_definition_module:
-            tmp = self.material_definition_module_proxy
-            return tmp.import_output_material_module_import_statements_and_material_definition()
-
-    @property
     def material_definition_module_file_name(self):
         if self.should_have_material_definition_module:
             return os.path.join(self.directory_name, 'material_definition.py')
@@ -316,9 +306,20 @@ class MaterialPackageProxy(PackageProxy):
         return self.dot_join(self.package_importable_name.split('.')[:-1])
 
     @property
+    def output_material(self):
+        if self.has_readable_output_material_module:
+            return self.output_material_module_proxy.import_output_material()
+    
+    @property
     def output_material_module_body_lines(self):
         if self.should_have_material_definition_module:
             return self.output_material_module_import_statements_and_output_material_module_body_lines[1]
+
+    @property
+    def output_material_module_import_statements_and_material_definition(self):
+        if self.should_have_material_definition_module:
+            tmp = self.material_definition_module_proxy
+            return tmp.import_output_material_module_import_statements_and_material_definition()
 
     @property
     def output_material_module_import_statements_and_output_material_module_body_lines(self):
@@ -524,7 +525,7 @@ class MaterialPackageProxy(PackageProxy):
         elif result == 'mde':
             self.material_definition_module_proxy.edit()
         elif result == 'mdstub':
-            self.write_stub_material_definition_module_to_disk(prompt=True)
+            self.write_stub_material_definition_module_to_disk()
         elif result == 'mdx':
             self.material_definition_module_proxy.run_python(prompt=True)
         elif result == 'mdxe':
@@ -558,13 +559,13 @@ class MaterialPackageProxy(PackageProxy):
         elif result == 'omfetch':
             self.output_material_module_proxy.display_output_material()
         elif result == 'lym':
-            self.write_illustration_ly_to_disk(is_forced=True)
+            self.write_illustration_ly_to_disk(True)
         elif result == 'lyd':
             self.remove_illustration_ly(prompt=True)
         elif result == 'lyv':
             self.illustration_ly_file_proxy.view()
         elif result == 'pdfm':
-            self.write_illustration_ly_and_pdf_to_disk(is_forced=True)
+            self.write_illustration_ly_and_pdf_to_disk(True)
         elif result == 'pdfd':
             self.remove_illustration_pdf(prompt=True)
         elif result == 'pdfv':
@@ -594,11 +595,14 @@ class MaterialPackageProxy(PackageProxy):
         else:
             raise ValueError
 
+    def load_user_input_wrapper_demo_values(self, prompt=False):
+        pass
+
     def make_main_menu(self):
         menu, hidden_section = self.make_menu(where=self.where(), is_hidden=True)
         self.make_main_menu_section_for_initializer(menu, hidden_section)
         self.make_main_menu_sections(menu, hidden_section)
-        self.make_main_menu_section_for_illustration_ly(menu, hidden_section)
+        self.make_main_menu_section_for_illustration_ly(hidden_section)
         self.make_main_menu_section_for_illustration_pdf(menu, hidden_section)
         self.make_main_menu_section_for_hidden_entries(menu)
         return menu
@@ -627,7 +631,7 @@ class MaterialPackageProxy(PackageProxy):
                 section.append(('sss', 'score stylesheet - select'))
                 hidden_section.append(('ssm', 'source stylesheet - edit'))
 
-    def make_main_menu_section_for_illustration_ly(self, main_menu, hidden_section):
+    def make_main_menu_section_for_illustration_ly(self, hidden_section):
         if self.has_output_material:
             if self.has_illustration_builder_module or self.has_material_package_maker:
                 hidden_section.append(('lym', 'output ly - make'))
@@ -724,9 +728,13 @@ class MaterialPackageProxy(PackageProxy):
     def overwrite_output_material_module(self):
         file(self.output_material_module_file_name, 'w').write('')
 
+    def populate_user_input_wrapper(self, prompt=False):
+        pass
+
     # TODO: port
     def regenerate_everything(self, prompt=True):
         self.print_not_implemented()
+        self.proceed(prompt=prompt)
 
     def remove(self):
         self.remove_material_from_materials_initializer()
@@ -764,10 +772,10 @@ class MaterialPackageProxy(PackageProxy):
             return
         if self.is_in_repository:
             # update parent initializer
-            self.helpers.globally_replace_in_file(self.parent_initializer_file_name, 
+            helpers.globally_replace_in_file(self.parent_initializer_file_name, 
                 self.material_underscored_name, new_material_underscored_name)
             # rename package directory
-            new_directory_name = self.directory.replace(
+            new_directory_name = self.directory_name.replace(
                 self.material_underscored_name, new_material_underscored_name)
             command = 'svn mv {} {}'.format(self.directory_name, new_directory_name)
             os.system(command)
@@ -775,7 +783,7 @@ class MaterialPackageProxy(PackageProxy):
             parent_directory_name = os.path.directory(self.directory_name)
             new_package_directory = os.path.join(parent_directory_name, new_material_underscored_name)
             new_initializer = os.path.join(new_package_directory, '__init__.py')
-            self.helpers.globally_replace_in_file(
+            helpers.globally_replace_in_file(
                 new_initializer, self.material_underscored_name, new_material_underscored_name)
             # rename files in package
             for old_file_name in os.listdir(new_package_directory):
@@ -787,7 +795,7 @@ class MaterialPackageProxy(PackageProxy):
                     os.system(command)
             # rename output material
             new_output_material = os.path.join(new_package_directory, 'output_material.py')
-            self.helpers.globally_replace_in_file(
+            helpers.globally_replace_in_file(
                 new_output_material, self.material_underscored_name, new_material_underscored_name)
             # commit
             commit_message = 'renamed {} to {}.'.format(
@@ -836,24 +844,25 @@ class MaterialPackageProxy(PackageProxy):
         if self.backtrack():
             return
         self.stylesheet_file_name_in_memory = stylesheet_file_name
+        self.proceed('stylesheet selected.', prompt=prompt)
 
     # NOTE: not currently used
     def touch_parent_initializer(self):
         if self.has_parent_initializer:
             self.parent_initializer_file_proxy.touch()
 
-    def write_illustration_ly_and_pdf_to_disk(self, is_forced=False, prompt=True):
+    def write_illustration_ly_and_pdf_to_disk(self, prompt=True):
         illustration = self.illustration_with_stylesheet
         iotools.write_expr_to_pdf(illustration, self.illustration_pdf_file_name, print_status=False)
         iotools.write_expr_to_ly(illustration, self.illustration_ly_file_name, print_status=False)
         self.proceed(['PDF and LilyPond file written to disk.'], prompt=prompt)
 
-    def write_illustration_ly_to_disk(self, is_forced=False, prompt=True):
+    def write_illustration_ly_to_disk(self, prompt=True):
         illustration = self.illustration_with_stylesheet
         iotools.write_expr_to_ly(illustration, self.illustration_ly_file_name, print_status=False)
         self.proceed(['LilyPond file written to disk.'], prompt=prompt)
 
-    def write_illustration_pdf_to_disk(self, is_forced=False, prompt=True):
+    def write_illustration_pdf_to_disk(self, prompt=True):
         illustration = self.illustration_with_stylesheet
         iotools.write_expr_to_pdf(illustration, self.illustration_pdf_file_name, print_status=False)
         self.proceed(['PDF written to disk.'], prompt=prompt)
@@ -874,7 +883,7 @@ class MaterialPackageProxy(PackageProxy):
         self.add_material_to_material_initializer()
         self.proceed('output material written to disk.', prompt=prompt)
 
-    def write_stub_material_definition_module_to_disk(self, prompt=True):
+    def write_stub_material_definition_module_to_disk(self):
         if self.should_have_material_definition_module:
             file(self.material_definition_module_file_name, 'w').write('')
             self.material_definition_module_proxy.write_stub_to_disk(self.is_data_only, prompt=True)

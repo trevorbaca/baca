@@ -1,3 +1,4 @@
+from abjad.tools import iotools
 from baca.scf.PackageProxy import PackageProxy
 
 
@@ -57,7 +58,7 @@ class ChunkPackageProxy(PackageProxy):
 
     def run(self, user_input=None, clear=True, cache=False):
         self.assign_user_input(user_input=user_input)
-        self.cachce_breadcrumbs(cache=cache)
+        self.cache_breadcrumbs(cache=cache)
         while True:
             self.push_breadcrumb()
             menu = self.make_main_menu()

@@ -250,7 +250,7 @@ class UserInputGetter(MenuSectionAggregator):
         self.values.pop()
         self.prompt_index = self.prompt_index - 1
 
-    def present_prompt_and_store_value(self):
+    def present_prompt_and_store_value(self, include_chevron=True):
         '''True when user response obtained. Or when user skips prompt.
         False when user quits system or aborts getter.
         '''
@@ -285,18 +285,18 @@ class UserInputGetter(MenuSectionAggregator):
                 self.print_not_implemented()
         return True
 
-    def present_prompts_and_store_values(self):
+    def present_prompts_and_store_values(self, include_chevron=True):
         self.conditionally_clear_terminal()
         self.menu_lines, self.values, self.prompt_index = [], [], 0
         self.display_title()
         while self.prompt_index < len(self.prompts):
-            if not self.present_prompt_and_store_value():
+            if not self.present_prompt_and_store_value(include_chevron=include_chevron):
                 break
 
-    def run(self, user_input=None):
+    def run(self, user_input=None, include_chevron=True):
         self.assign_user_input(user_input=user_input)
         self.push_backtrack()
-        self.present_prompts_and_store_values()
+        self.present_prompts_and_store_values(include_chevron=include_chevron)
         self.pop_backtrack()
         if len(self.values) == 1:
             return self.values[0]

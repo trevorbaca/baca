@@ -48,7 +48,7 @@ class ModuleProxy(ParsableFileProxy):
 
     def run_abjad(self, prompt=True):
         os.system('abjad {}'.format(self.full_file_name))
-        self.display('file executed', prompt=prompt)
+        self.proceed('file executed', prompt=prompt)
 
     def run_python(self, prompt=True):
         os.system('python {}'.format(self.full_file_name))

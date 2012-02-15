@@ -43,6 +43,10 @@ class FileProxy(SCFObject):
         return os.path.dirname(self.full_file_name)
 
     @property
+    def sections(self):
+        return ()
+
+    @property
     def short_file_name(self):
         return self.full_file_name.split(os.path.sep)[-1]
 
@@ -99,9 +103,6 @@ class FileProxy(SCFObject):
         os.rename(self.full_file_name, new_full_file_name)
         self._full_file_name = new_full_file_name
         
-    def short_file_name(self):
-        return os.path.sep.split(self.full_file_name)[-1]
-
     def touch(self):
         os.system('touch {}'.format(self.full_file_name))
 

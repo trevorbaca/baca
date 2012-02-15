@@ -51,7 +51,7 @@ class MaterialPackageMaker(MaterialPackageProxy):
             self.proceed('user input already empty.')
         else:
             self.user_input_wrapper_in_memory.clear()
-            self.user_input_module_proxy.write_to_disk(self.user_input_wrapper_in_memory)
+            self.user_input_module_proxy.write_user_input_wrapper_to_disk(self.user_input_wrapper_in_memory)
             self.proceed('user input wrapper cleared and written to disk.', prompt=prompt)
 
     def edit_user_input_wrapper_at_number(self, number, include_newline=True):
@@ -85,7 +85,7 @@ class MaterialPackageMaker(MaterialPackageProxy):
         if self.backtrack():
             return
         self.user_input_wrapper_in_memory[key] = new_value 
-        self.user_input_module_proxy.write_to_disk(self.user_input_wrapper_in_memory)
+        self.user_input_module_proxy.write_user_input_wrapper_to_disk(self.user_input_wrapper_in_memory)
 
     def initialize_empty_user_input_wrapper(self):
         user_input_wrapper = UserInputWrapper()
@@ -99,7 +99,7 @@ class MaterialPackageMaker(MaterialPackageProxy):
         user_input_demo_values = copy.deepcopy(type(self).user_input_demo_values)
         for key, value in user_input_demo_values:
             self.user_input_wrapper_in_memory[key] = value
-        self.user_input_module_proxy.write_to_disk(self.user_input_wrapper_in_memory)
+        self.user_input_module_proxy.write_user_input_wrapper_to_disk(self.user_input_wrapper_in_memory)
         self.proceed('demo values loaded and written to disk.', prompt=prompt)
 
     def make_main_menu_section_for_user_input_module(self, main_menu, hidden_section):
@@ -159,5 +159,5 @@ class MaterialPackageMaker(MaterialPackageProxy):
 
     def write_stub_user_input_module_to_disk(self, prompt=True):
         empty_user_input_wrapper = self.initialize_empty_user_input_wrapper()
-        self.user_input_module_proxy.write_to_disk(empty_user_input_wrapper)
+        self.user_input_module_proxy.write_user_input_wrapper_to_disk(empty_user_input_wrapper)
         self.proceed('stub user input module written to disk.', prompt=prompt)

@@ -34,11 +34,6 @@ class StylesheetFileProxy(FileProxy):
         line = 'file copied.'
         self.proceed(line, prompt=prompt)
         
-    def remove_stylesheet_interactively(self, prompt=True):
-        self.remove()
-        line = 'stylesheet deleted.'
-        self.proceed(line, prompt=prompt)
-
     def handle_main_menu_result(self, result):
         assert isinstance(result, str)
         if result == 'audit':
@@ -51,7 +46,7 @@ class StylesheetFileProxy(FileProxy):
         elif result == 'ren':
             self.rename_stylesheet_interactively()
         elif result == 'vi':
-            self.vi_stylesheet()
+            self.edit()
         else:
             raise ValueError
 
@@ -63,6 +58,11 @@ class StylesheetFileProxy(FileProxy):
         section.append(('ren', 'rename stylesheet'))
         section.append(('vi', 'vi stylesheet'))
         return menu
+
+    def remove_stylesheet_interactively(self, prompt=True):
+        self.remove()
+        line = 'stylesheet deleted.'
+        self.proceed(line, prompt=prompt)
 
     def rename_stylesheet_interactively(self, prompt=True):
         getter = self.make_getter()
@@ -96,6 +96,3 @@ class StylesheetFileProxy(FileProxy):
             self.pop_breadcrumb()
         self.pop_breadcrumb()
         self.restore_breadcrumbs(cache=cache)
-
-    def vi_stylesheet(self):
-        os.system('vi {}'.format(self.full_file_name))

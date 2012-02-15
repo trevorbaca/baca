@@ -30,9 +30,6 @@ class Session(object):
 
     ### OVERLOADS ###
 
-    def __bool__(self):
-        return True
-
     def __repr__(self):
         summary = []
         if self.initial_user_input is not None:

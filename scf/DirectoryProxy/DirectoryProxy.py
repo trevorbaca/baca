@@ -1,15 +1,12 @@
 from baca.scf.SCFObject import SCFObject
 import os
 import subprocess
-import sys
 
 
 class DirectoryProxy(SCFObject):
 
     def __init__(self, directory_name, session=None):
-        #assert isinstance(directory_name, str)
         assert isinstance(directory_name, (str, type(None)))
-        #assert os.path.exists(directory_name)
         SCFObject.__init__(self, session=session)
         self._directory_name = directory_name
 
@@ -89,7 +86,7 @@ class DirectoryProxy(SCFObject):
         if response == 'remove':
             command = 'rm -rf {}'.format(self.directory_name)
             proc = subprocess.Popen(command, shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
-            first_line = proc.stdout.readline()
+            proc.stdout.readline()
             line = 'removed {}.\n'.format(self.directory_name)
             self.display(line)
             return True
@@ -106,7 +103,7 @@ class DirectoryProxy(SCFObject):
         if response == 'remove':
             command = 'svn --force rm {}'.format(self.directory_name)
             proc = subprocess.Popen(command, shell=True, stdout=subprocess.PIPE)
-            first_line = proc.stdout.readline()
+            proc.stdout.readline()
             lines = []
             lines.append('Removed {}.\n'.format(self.directory_name))
             lines.append('(Subversion will cause empty package to remain visible until next commit.)')
@@ -132,6 +129,7 @@ class DirectoryProxy(SCFObject):
  
     def svn_ci(self, commit_message=None, prompt=True):
         if commit_message is None:
+            getter = self.make_getter(where=self.where())
             getter.append_string('commit message')
             commit_message = getter.run()
             if self.backtrack():

@@ -31,6 +31,7 @@ class MaterialPackageMakerWrangler(PackageWrangler):
         material_proxy = baca.scf.MaterialPackageProxy(material_package_importable_name, session=self.session)
         material_package_maker_class_name = material_proxy.material_package_maker_class_name
         if material_package_maker_class_name is not None:
+            material_proxy_class = None
             command = 'from baca.scf.materialpackagemakers import {} as material_proxy_class'
             command = command.format(material_package_maker_class_name)
             exec(command)
@@ -52,7 +53,8 @@ class MaterialPackageMakerWrangler(PackageWrangler):
 
     # TODO: implement MaterialPackageProxyClassFile object to model and customize these settings
     def make_material_proxy_class_file(self, material_proxy_name, generic_output_name):
-        class_file_name = os.path.join(self.directory_name, material_proxy_name, material_proxy_name + '.py')
+        class_file_name = os.path.join(
+            self.toplevel_global_package_importable_name, material_proxy_name, material_proxy_name + '.py')
         class_file = file(class_file_name, 'w')
         lines = []
         lines.append('from baca.music.foo import foo')
@@ -70,7 +72,7 @@ class MaterialPackageMakerWrangler(PackageWrangler):
         lines.append('')
         lines.append('    ### READ-ONLY PUBLIC ATTRIBUTES ###')
         lines.append('')
-        lines.append("    generic_output_name = 'generic output'")
+        lines.append('    generic_output_name = {!r}'.format(generic_output_name))
         lines.append('')
         lines.append('    illustration_maker = staticmethod(make_illustration_from_output_material)')
         lines.append('')
@@ -102,7 +104,8 @@ class MaterialPackageMakerWrangler(PackageWrangler):
 
     # TODO: change to boilerplate file stored in material_proxy package
     def make_material_proxy_initializer(self, material_proxy_name):
-        initializer_file_name = os.path.join(self.directory_name, material_proxy_name, '__init__.py')
+        initializer_file_name = os.path.join(
+            self.toplevel_global_package_importable_name, material_proxy_name, '__init__.py')
         initializer = file(initializer_file_name, 'w')
         line = 'from abjad.tools.importtools._import_structured_package import _import_structured_package\n'
         initializer.write(line)
@@ -114,7 +117,7 @@ class MaterialPackageMakerWrangler(PackageWrangler):
         getter = self.make_getter(where=self.where())
         getter.append_string('material proxy name')
         material_proxy_name = getter.run()
-        if self.backtack():
+        if self.backtrack():
             return
         assert iotools.is_uppercamelcase_string(material_proxy_name)
         assert material_proxy_name.endswith('Maker')
@@ -123,7 +126,7 @@ class MaterialPackageMakerWrangler(PackageWrangler):
         generic_output_product = getter.run()
         if self.backtrack():
             return
-        material_proxy_directory = os.path.join(self.directory_name, material_proxy_name)
+        material_proxy_directory = os.path.join(self.toplevel_global_package_importable_name, material_proxy_name)
         os.mkdir(material_proxy_directory)
         self.make_material_proxy_initializer(material_proxy_name)
         self.make_material_proxy_class_file(material_proxy_name, generic_output_product)
@@ -141,14 +144,15 @@ class MaterialPackageMakerWrangler(PackageWrangler):
         stylesheet.layout_block.ragged_right = True
         stylesheet.paper_block.makup_system_spacing = layouttools.make_spacing_vector(0, 0, 12, 0)
         stylesheet.paper_block.system_system_spacing = layouttools.make_spacing_vector(0, 0, 10, 0)
-        stylesheet_file_name = os.path.join(self.directory_name, material_proxy_name, 'stylesheet.ly')
+        stylesheet_file_name = os.path.join(
+            self.toplevel_global_package_importable_name, material_proxy_name, 'stylesheet.ly')
         stylesheet_file_pointer = file(stylesheet_file_name, 'w')
         stylesheet_file_pointer.write(stylesheet.format)
         stylesheet_file_pointer.close()
         
     def run(self, user_input=None, clear=True, cache=False):
         self.assign_user_input(user_input=user_input)
-        self.cachce_breadcrumbs(cache=cache)
+        self.cache_breadcrumbs(cache=cache)
         while True:
             self.push_breadcrumb()
             menu = self.make_main_menu()
@@ -188,4 +192,4 @@ class MaterialPackageMakerWrangler(PackageWrangler):
         return material_proxy_class_name
 
     def unimport_materialpackagemakers_package(self):
-        self.remove_package_importable_name_from_sys_modules(self.package_importable_name)
+        self.remove_package_importable_name_from_sys_modules(self.toplevel_global_package_importable_name)

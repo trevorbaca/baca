@@ -55,7 +55,7 @@ class StylesheetWrangler(PackageWrangler):
             stylesheet_name = stylesheet_name + '.ly'
         stylesheet_file_name = os.path.join(self.stylesheets_directory_name, stylesheet_name)
         stylesheet_proxy = StylesheetFileProxy(stylesheet_file_name, session=self.session)
-        stylesheet_proxy.edit_stylesheet()
+        stylesheet_proxy.edit()
 
     def run(self, user_input=None, clear=True, cache=False):
         self.assign_user_input(user_input=user_input)
