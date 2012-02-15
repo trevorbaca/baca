@@ -315,13 +315,19 @@ class MenuSection(MenuObject):
                 entry_number = entry_index + 1
                 menu_line += '{}: '.format(str(entry_number))
             if key and self.is_keyed:
-                if self.show_existing_values:
-                    menu_line += '{} ({}): {}'.format(body, key, existing_value)
+                if self.show_existing_values and existing_value:
+                    if existing_value in (None, 'None'):
+                        menu_line += '{} ({}):'.format(body, key)
+                    else:
+                        menu_line += '{} ({}): {}'.format(body, key, existing_value)
                 else:
                     menu_line += '{} ({})'.format(body, key)
             else:
-                if self.show_existing_values:
-                    menu_line += '{}: {}'.format(body, existing_value)
+                if self.show_existing_values and existing_value:
+                    if existing_value in (None, 'None'):
+                        menu_line += '{}:'.format(body)
+                    else:
+                        menu_line += '{}: {}'.format(body, existing_value)
                 else:
                     menu_line += '{}'.format(body)
             menu_lines.append(menu_line)

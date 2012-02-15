@@ -1,3 +1,4 @@
+from abjad.tools import durationtools
 from abjad.tools import iotools
 from abjad.tools import pitchtools
 from baca.scf.menuing.MenuSectionAggregator import MenuSectionAggregator
@@ -79,6 +80,11 @@ class UserInputGetter(MenuSectionAggregator):
         self.append_something(spaced_attribute_name, message, default=default)
         self.tests.append(predicates.is_boolean)
 
+    def append_duration(self, spaced_attribute_name, default=None):
+        message = 'value for {!r} must be duration.'
+        self.append_something(spaced_attribute_name, message, default=default)
+        self.tests.append(durationtools.is_duration_token)
+
     def append_existing_package_name(self, spaced_attribute_name, default=None):
         message = 'value for {!r} must be existing package name.'
         self.append_something(spaced_attribute_name, message, default=default)
@@ -153,6 +159,11 @@ class UserInputGetter(MenuSectionAggregator):
         message = 'value for {!r} must be symbolic pitch range string. Ex: [A0, C8].'
         self.append_something(spaced_attribute_name, message, default=default)
         self.tests.append(pitchtools.is_symbolic_pitch_range_string)
+
+    def append_tempo(self, spaced_attribute_name, default=None):
+        message = 'value for {!r} must successfully initialize tempo mark.'
+        self.append_something(spaced_attribute_name, message, default=default)
+        self.tests.append(predicates.is_tempo_token)
 
     def append_underscore_delimited_lowercase_package_name(self, spaced_attribute_name, default=None):
         message = 'value for {!r} must be underscore-delimited lowercase package name of length at least 3.'

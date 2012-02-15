@@ -17,15 +17,13 @@ from MaterialPackageProxy import MaterialPackageProxy
 from MaterialPackageMakerWrangler import MaterialPackageMakerWrangler
 from MaterialPackageWrangler import MaterialPackageWrangler
 from ModuleProxy import ModuleProxy
-from MusicSpecifier import MusicSpecifier
 from MusicSpecifierModuleProxy import MusicSpecifierModuleProxy
 from MusicSpecifierModuleProxyWrangler import MusicSpecifierModuleProxyWrangler
 from MusPackageProxy import MusPackageProxy
+from TargetManifest import TargetManifest
 from OutputMaterialModuleProxy import OutputMaterialModuleProxy
 from PackageWrangler import PackageWrangler
 from PackageProxy import PackageProxy
-from PerformerContributionSpecifier import PerformerContributionSpecifier
-from PerformerContributionSpecifierList import PerformerContributionSpecifierList
 from ScorePackageProxy import ScorePackageProxy
 from ScorePackageWrangler import ScorePackageWrangler
 from Session import Session
@@ -36,9 +34,11 @@ from Transcript import Transcript
 from MaterialPackageMaker import MaterialPackageMaker
 from UserInputModuleProxy import UserInputModuleProxy
 from UserInputWrapper import UserInputWrapper
+from menuing import getters
 import editors
 import exceptions
 import helpers
 import materialpackagemakers
 import menuing
 import predicates
+import specifiers
