@@ -3,6 +3,11 @@ from baca.scf.Specifier import Specifier
 
 class PerformerContributionSpecifierList(Specifier, list):
     
+    ### OVERLOADS ###
+    
+    def __repr__(self):
+        return '{}({})'.format(type(self).__name__, len(self))
+
     ### READ-ONLY ATTRIBUTES ###
 
     @property
