@@ -24,6 +24,7 @@ from MusPackageProxy import MusPackageProxy
 from OutputMaterialModuleProxy import OutputMaterialModuleProxy
 from PackageWrangler import PackageWrangler
 from PackageProxy import PackageProxy
+from PerformerContributionSpecifier import PerformerContributionSpecifier
 from ScorePackageProxy import ScorePackageProxy
 from ScorePackageWrangler import ScorePackageWrangler
 from Session import Session
