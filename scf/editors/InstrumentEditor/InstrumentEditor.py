@@ -12,19 +12,21 @@ class InstrumentEditor(InteractiveEditor):
 
     @property
     def breadcrumb(self):
-        if self.target is not None and self.target.instrument_name is not None:
-            return self.target.instrument_name
-        else:
-            return 'instrument editor'
+        return self.target_name or 'instrument editor'
 
     target_attribute_tuples = (
-        ('instrument_name', predicates.is_string, True, None, 'in', None),
-        ('instrument_name_markup', predicates.is_markup, True, None, 'im', None), 
-        ('short_instrument_name',  predicates.is_string, True, None, 'sn', None),
+        ('instrument_name', predicates.is_string, True, None, 'in'),
+        ('instrument_name_markup', predicates.is_markup, True, None, 'im'),
+        ('short_instrument_name',  predicates.is_string, True, None, 'sn'),
         ('short_instrument_name_markup', predicates.is_markup, True, None, 'sm'),
         )
             
     target_class = _Instrument
+
+    @property
+    def target_name(self):
+        if self.target is not None:
+            return self.target.instrument_name
 
     ### PUBLIC METHODS ###
 
