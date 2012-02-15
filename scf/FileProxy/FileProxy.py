@@ -8,7 +8,7 @@ class FileProxy(SCFObject):
     
     def __init__(self, full_file_name, session=None):
         assert isinstance(full_file_name, str), '{!r} is not a string.'.format(full_file_name)
-        assert os.path.exists(full_file_name), 'Initializer {!r} does not exist.'.format(full_file_name)
+        #assert os.path.exists(full_file_name), 'Initializer {!r} does not exist.'.format(full_file_name)
         SCFObject.__init__(self, session=session)
         self._full_file_name = full_file_name
 
@@ -52,6 +52,12 @@ class FileProxy(SCFObject):
         for section, is_sorted, blank_line_count  in self.sections:
             section[:] = []
 
+    def conditionally_make_file(self):
+        if not os.path.exists(self.full_file_name):
+            file_reference = open(self.full_file_name, 'w')
+            file_reference.write('')
+            file_reference.close()
+        
     def copy_file(self, new_full_file_name):
         shutil.copyfile(self.full_file_name, new_full_file_name)
 
@@ -83,7 +89,7 @@ class FileProxy(SCFObject):
                 return True
         file_reference.close()
         return False
-        
+
     # TODO: extend for repository
     def remove(self, prompt=False):
         os.remove(self.full_file_name)
