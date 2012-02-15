@@ -1,5 +1,4 @@
 from baca.scf.ModuleProxy import ModuleProxy
-from baca.scf.helpers import safe_import
 import os
 
 
