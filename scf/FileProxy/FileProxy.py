@@ -58,7 +58,7 @@ class FileProxy(SCFObject):
 
     def conditionally_make_file(self):
         if not os.path.exists(self.full_file_name):
-            file_reference = open(self.full_file_name, 'w')
+            file_reference = file(self.full_file_name, 'w')
             file_reference.write('')
             file_reference.close()
         

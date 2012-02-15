@@ -1,5 +1,6 @@
 from baca.scf.MusicSpecifierModuleProxy import MusicSpecifierModuleProxy
 from baca.scf.PackageWrangler import PackageWrangler
+import os
 
 
 class MusicSpecifierModuleProxyWrangler(PackageWrangler):
@@ -15,6 +16,10 @@ class MusicSpecifierModuleProxyWrangler(PackageWrangler):
     @property
     def breadcrumb(self):
         return 'music specifiers'
+
+    @property
+    def initializer_file_name(self):
+        return os.path.join(self.specifiers_directory_name, '__init__.py')
 
     @property
     def specifier_spaced_names(self):
@@ -33,6 +38,15 @@ class MusicSpecifierModuleProxyWrangler(PackageWrangler):
             return self.toplevel_global_package_importable_name
             
     ### PUBLIC METHODS ###
+
+    def conditionally_make_specifiers_package(self):
+        if self.session.is_in_score:
+            if not self.package_exists(self.specifiers_package_importable_name):
+                os.mkdir(self.specifiers_directory_name)
+            if not os.path.exists(self.initializer_file_name):
+                file_pointer = open(self.initializer_file_name, 'w')
+                file_pointer.write('')
+                file_pointer.close()
 
     def handle_main_menu_result(self, result):
         if result == 'new':
@@ -62,6 +76,7 @@ class MusicSpecifierModuleProxyWrangler(PackageWrangler):
         specifier_module_proxy.run()
 
     def run(self, user_input=None, clear=True, cache=False):
+        self.conditionally_make_specifiers_package()
         self.assign_user_input(user_input=user_input)
         self.cache_breadcrumbs(cache=cache)
         while True:
