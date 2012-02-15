@@ -17,6 +17,7 @@ from MaterialPackageProxy import MaterialPackageProxy
 from MaterialPackageMakerWrangler import MaterialPackageMakerWrangler
 from MaterialPackageWrangler import MaterialPackageWrangler
 from ModuleProxy import ModuleProxy
+from MusicSpecifier import MusicSpecifier
 from MusicSpecifierModuleProxy import MusicSpecifierModuleProxy
 from MusicSpecifierModuleProxyWrangler import MusicSpecifierModuleProxyWrangler
 from MusPackageProxy import MusPackageProxy
