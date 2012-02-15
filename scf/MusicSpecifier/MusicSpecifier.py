@@ -1,3 +1,4 @@
+from baca.scf.PerformerContributionSpecifierList import PerformerContributionSpecifierList
 from baca.scf.Specifier import Specifier
 
 
@@ -9,7 +10,8 @@ class MusicSpecifier(Specifier):
         tempo=None,
         ):
         self.music_specifier_name = music_specifier_name
-        self.performer_contribution_specifiers = performer_contribution_specifiers or []
+        self.performer_contribution_specifiers = \
+            performer_contribution_specifiers or PerformerContributionSpecifierList()
         self.tempo = tempo
 
     ### OVERLOADS ###

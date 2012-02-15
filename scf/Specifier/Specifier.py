@@ -1,17 +1,15 @@
 class Specifier(object):
 
+    ### OVERLOADS ###
+
+    def __repr__(self):
+        return '{}()'.format(type(self).__name__)
+
     ### READ-ONLY ATTRIBUTES ###
 
     @property
-    def attribute_format_pieces(self):
-        result = []
-        for co_name in self.__init__.im_func.func_code.co_names:
-            value = getattr(self, co_name)
-            if value is not None:
-                format_pieces = self.get_format_pieces_of_expr(value)
-                format_pieces = self.indent_format_pieces(co_name, format_pieces)
-                result.extend(format_pieces)
-        return result
+    def variable_names(self):
+        return self.__init__.im_func.func_code.co_varnames[1:]
 
     @property
     def format(self):
@@ -21,9 +19,13 @@ class Specifier(object):
     def format_pieces(self):
         result = []
         result.append('{}('.format(type(self).__name__))
-        for attribute_format_piece in self.attribute_format_pieces:
-            result.append('\t' + attribute_format_piece + ',')
-        result.append('\t' + ')')
+        for variable_name in sorted(self.variable_names):
+            variable_value = getattr(self, variable_name)
+            if variable_value is not None:
+                format_pieces = self.get_format_pieces_of_expr(variable_value)
+                format_pieces = self.indent_format_pieces(variable_name, format_pieces)
+                result.extend(format_pieces)
+        result.append('\t)')
         return result
 
     ### PUBLIC METHODS ###
@@ -31,32 +33,16 @@ class Specifier(object):
     def get_format_pieces_of_expr(self, expr):
         if hasattr(expr, 'format_pieces'):
             return expr.format_pieces
-        elif isinstance(expr, list):
-            result = []
-            result.append('[')
-            for element in expr:
-                format_pieces = self.get_format_pieces_of_expr(element)
-                format_pieces = self.indent_format_pieces(format_pieces)
-                for format_piece in format_pieces:
-                    result.append('\t' + format_piece + ',')
-            result.append(']')
         else:
             return [repr(expr)]
 
-    def indent_format_pieces(self, format_pieces, name=None):
+    def indent_format_pieces(self, name, format_pieces):
         result = []
         if len(format_pieces) == 1:
-            if name is not None:
-                result.append('{}={}'.format(name, format_pieces[0]))
-            else:
-                result.append('{}'.format(format_pieces[0]))
+            result.append('\t{}={},'.format(name, format_pieces[0]))
         elif 1 < len(format_pieces):
-            if name is not None:
-                result.append('{}={}'.format(name, format_pieces[0]))
-                for format_piece in format_pieces[1:]:
-                    result.append('\t' + format_piece)
-            else:
-                result.append('{}'.format(format_pieces[0]))
-                for format_piece in format_pieces[1:]:
-                    result.append('\t' + format_piece)
+            result.append('\t{}={}'.format(name, format_pieces[0]))
+            for format_piece in format_pieces[1:-1]:
+                result.append('\t' + format_piece)
+            result.append('\t' + format_pieces[-1] + ',') 
         return result
