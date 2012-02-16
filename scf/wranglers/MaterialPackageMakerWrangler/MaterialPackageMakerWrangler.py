@@ -22,6 +22,7 @@ class MaterialPackageMakerWrangler(PackageWrangler):
         for name in self.list_wrangled_package_short_names(head=self.studio_package_importable_name):
             spaced_class_name = iotools.uppercamelcase_to_space_delimited_lowercase(name)
             result.append(spaced_class_name)
+        result.remove('material package maker')
         return result
 
     ### PUBLIC METHODS ###
@@ -59,7 +60,7 @@ class MaterialPackageMakerWrangler(PackageWrangler):
         lines = []
         lines.append('from baca.music.foo import foo')
         lines.append('from baca.music.foo import make_illustration_from_output_material')
-        lines.append('from baca.scf.MaterialPackageMaker import MaterialPackageMaker')
+        lines.append('from baca.scf.materialpackagemakers.MaterialPackageMaker import MaterialPackageMaker')
         lines.append('from baca.scf.UserInputWrapper import UserInputWrapper')
         lines.append('import baca')
         lines.append('')

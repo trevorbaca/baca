@@ -3,7 +3,7 @@ from abjad.tools import mathtools
 from abjad.tools import measuretools
 from abjad.tools import sequencetools
 from baca.music.make_sargasso_measures import make_illustration_from_output_material
-from baca.scf.MaterialPackageMaker import MaterialPackageMaker
+from baca.scf.materialpackagemakers.MaterialPackageMaker import MaterialPackageMaker
 from baca.scf.UserInputWrapper import UserInputWrapper
 from baca.scf import predicates
 import baca

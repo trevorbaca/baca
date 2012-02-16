@@ -1,6 +1,6 @@
 from abjad.tools import sequencetools
 from baca.music.make_zagged_pitch_classes import make_illustration_from_output_material
-from baca.scf.MaterialPackageMaker import MaterialPackageMaker
+from baca.scf.materialpackagemakers.MaterialPackageMaker import MaterialPackageMaker
 from baca.scf.UserInputWrapper import UserInputWrapper
 from baca.scf.editors.InteractiveEditor import InteractiveEditor
 import baca

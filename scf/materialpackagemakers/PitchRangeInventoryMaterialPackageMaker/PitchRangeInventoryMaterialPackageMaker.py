@@ -1,5 +1,5 @@
 from abjad.tools import pitchtools
-from baca.scf.MaterialPackageMaker import MaterialPackageMaker
+from baca.scf.materialpackagemakers.MaterialPackageMaker import MaterialPackageMaker
 from make_illustration_from_output_material import make_illustration_from_output_material
 from baca.scf.editors.PitchRangeInventoryEditor import PitchRangeInventoryEditor
 
