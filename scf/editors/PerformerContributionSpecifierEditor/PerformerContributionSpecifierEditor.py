@@ -7,20 +7,20 @@ class PerformerContributionSpecifierEditor(InteractiveEditor):
 
     target_class = PerformerContributionSpecifier
 #    target_manifest = TargetManifest(PerformerContributionSpecifier,
-#        ('articulation_indicator', 'art', ArticulationIndicatorEditor),
-#        ('clef_indicator', 'clf', ClefIndicatorEditor),
-#        ('directive_indicator', 'dir', DirectiveIndicatorEditor),
-#        ('dynamic_indicator', 'dyn', DynamicIndicatorEditor),
-#        ('instrument_indicator', 'ins', InstrumentIndicatorEditor),
-#        ('note_head_indicator', 'nhd', NoteHeadIndicatorEditor),
-#        ('override_indicator', 'ovr', OverrideIndicatorEditor),
-#        ('performer_indicator', 'per', PerformerIndicatorEditor),
-#        ('pitch_class_indicator', 'pcs', PitchClassIndicatorEditor),
-#        ('registration_indicator', 'reg', RegistrationIndicatorEditor),
-#        ('rhythm_indicator', 'rhy', RhythmIndicatorEditor),
-#        ('staff_indicator', 'stf', StaffIndicatorEditor),
-#        ('trill_indicator', 'trl', TrillIndicatorEditor),
-#        ('troping_indicator', 'trp', TropingIndicatorEditor),
+#        ('articulation_specifier', 'art', ArticulationSpecifierEditor),
+#        ('clef_specifier', 'clf', ClefSpecifierEditor),
+#        ('directive_specifier', 'dir', DirectiveSpecifierEditor),
+#        ('dynamic_specifier', 'dyn', DynamicSpecifierEditor),
+#        ('instrument_specifier', 'ins', InstrumentSpecifierEditor),
+#        ('note_head_specifier', 'nhd', NoteHeadSpecifierEditor),
+#        ('override_specifier', 'ovr', OverrideSpecifierEditor),
+#        ('performer_specifier', 'per', PerformerSpecifierEditor),
+#        ('pitch_class_specifier', 'pcs', PitchClassSpecifierEditor),
+#        ('registration_specifier', 'reg', RegistrationSpecifierEditor),
+#        ('rhythm_specifier', 'rhy', RhythmSpecifierEditor),
+#        ('staff_specifier', 'stf', StaffSpecifierEditor),
+#        ('trill_specifier', 'trl', TrillSpecifierEditor),
+#        ('troping_specifier', 'trp', TropingSpecifierEditor),
 #        )
 
     ### READ-ONLY PUBLIC ATTRIBUTES ###
@@ -32,7 +32,7 @@ class PerformerContributionSpecifierEditor(InteractiveEditor):
     @property
     def target_name(self):
         if self.target is not None:
-            if self.target.performer_indicator is not None:
-                performer_name = self.target.performer_indicator.performer_name
+            if self.target.performer_specifier is not None:
+                performer_name = self.target.performer_specifier.performer_name
                 if performer_name:
                     return '{} contribution'.format(performer_name)
