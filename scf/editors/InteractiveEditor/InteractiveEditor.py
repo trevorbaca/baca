@@ -58,8 +58,24 @@ class InteractiveEditor(SCFObject):
         if not self.session.is_complete:
             setattr(self.target, attribute_name, attribute_value)
 
-    def handle_main_menu_result(self, key):
-        pass
+    def handle_main_menu_result(self, result):
+        editor = self.menu_key_to_editor(result)
+        self.debug(editor)
+        if editor is not None:
+            editor.run()
+
+    def make_main_menu(self):
+        menu, section = self.make_menu(where=self.where(), is_parenthetically_numbered=True)
+        section.tokens = self.target_attribute_tokens
+        section.show_existing_values = True
+        return menu
+
+    def menu_key_to_editor(self, menu_key):
+        for target_attribute_tuple in self.target_attribute_tuples:
+            if target_attribute_tuple[4] == 'menu_key':
+                if 6 <= len(target_attribute_tuple):
+                    editor = target_attribute_tuple[5]
+                    return editor
 
     def run(self, user_input=None, clear=True, cache=False):
         self.assign_user_input(user_input=user_input)

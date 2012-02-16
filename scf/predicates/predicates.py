@@ -1,6 +1,8 @@
-from abjad.tools import iotools
-from abjad.tools import markuptools
-from abjad.tools import pitchtools
+from abjad import *
+#from abjad.tools import contexttools
+#from abjad.tools import iotools
+#from abjad.tools import markuptools
+#from abjad.tools import pitchtools
 import re
 
 
@@ -72,6 +74,14 @@ def is_readable_argument_range_string_for_argument_list(argument_range_string, a
         if dummy_section.argument_range_string_to_numbers(argument_range_string) is not None:
             return True
     return False
+
+def is_tempo_token(expr):
+    try:
+        command = 'tempo_mark = contexttools.TempoMark({})'.format(expr)
+        exec(command)
+        return isinstance(tempo_mark, contexttools.TempoMark)
+    except:
+        return False
 
 def is_underscore_delimited_lowercase_package_name(expr):
     return iotools.is_underscore_delimited_lowercase_package_name(expr) and 3 <= len(expr)
