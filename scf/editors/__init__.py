@@ -10,3 +10,4 @@ from PitchRangeEditor import PitchRangeEditor
 from PitchRangeInventoryEditor import PitchRangeInventoryEditor
 from TargetManifest import TargetManifest
 from TempoMarkEditor import TempoMarkEditor
+from UserInputWrapper import UserInputWrapper

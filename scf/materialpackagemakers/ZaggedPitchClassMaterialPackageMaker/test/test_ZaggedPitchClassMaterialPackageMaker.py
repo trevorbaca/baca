@@ -1,4 +1,4 @@
-from baca.scf import UserInputWrapper
+from baca.scf.editors import UserInputWrapper
 import baca
 
 

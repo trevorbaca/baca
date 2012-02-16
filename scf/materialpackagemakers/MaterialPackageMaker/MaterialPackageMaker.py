@@ -1,5 +1,5 @@
 from baca.scf.proxies.MaterialPackageProxy import MaterialPackageProxy
-from baca.scf.UserInputWrapper import UserInputWrapper
+from baca.scf.editors.UserInputWrapper import UserInputWrapper
 import copy
 import os
 

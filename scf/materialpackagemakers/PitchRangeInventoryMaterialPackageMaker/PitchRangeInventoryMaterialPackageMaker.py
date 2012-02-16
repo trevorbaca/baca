@@ -37,5 +37,5 @@ class PitchRangeInventoryMaterialPackageMaker(MaterialPackageMaker):
 
     # TODO: remove self.user_input_module_import_statements from editable maker
     user_input_module_import_statements = [
-        'from baca.scf import UserInputWrapper',
+        'from baca.scf.editors import UserInputWrapper',
         ]

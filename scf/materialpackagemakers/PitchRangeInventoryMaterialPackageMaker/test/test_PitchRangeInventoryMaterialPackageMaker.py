@@ -1,5 +1,5 @@
 from abjad.tools import pitchtools
-from baca.scf import UserInputWrapper
+from baca.scf.editors import UserInputWrapper
 import baca
 
 

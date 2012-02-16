@@ -61,7 +61,7 @@ class MaterialPackageMakerWrangler(PackageWrangler):
         lines.append('from baca.music.foo import foo')
         lines.append('from baca.music.foo import make_illustration_from_output_material')
         lines.append('from baca.scf.materialpackagemakers.MaterialPackageMaker import MaterialPackageMaker')
-        lines.append('from baca.scf.UserInputWrapper import UserInputWrapper')
+        lines.append('from baca.scf.editors.UserInputWrapper import UserInputWrapper')
         lines.append('import baca')
         lines.append('')
         lines.append('')

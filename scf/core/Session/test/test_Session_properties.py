@@ -3,7 +3,7 @@ import baca
 
 def test_Session_properties_01():
 
-    session = baca.scf.Session()
+    session = baca.scf.core.Session()
 
     assert     session.is_displayable
     assert     session.menu_header == ''

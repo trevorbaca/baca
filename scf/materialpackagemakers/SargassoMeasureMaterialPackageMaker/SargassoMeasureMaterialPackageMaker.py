@@ -4,7 +4,7 @@ from abjad.tools import measuretools
 from abjad.tools import sequencetools
 from baca.music.make_sargasso_measures import make_illustration_from_output_material
 from baca.scf.materialpackagemakers.MaterialPackageMaker import MaterialPackageMaker
-from baca.scf.UserInputWrapper import UserInputWrapper
+from baca.scf.editors.UserInputWrapper import UserInputWrapper
 from baca.scf import predicates
 import baca
 
@@ -50,7 +50,7 @@ class SargassoMeasureMaterialPackageMaker(MaterialPackageMaker):
     #]
     user_input_module_import_statements = [
         'from abjad.tools.durationtools import Duration',
-        'from baca.scf import UserInputWrapper',
+        'from baca.scf.editors import UserInputWrapper',
         ]
 
     user_input_tests = [

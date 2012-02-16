@@ -27,7 +27,7 @@ def test_InstrumentEditor_base_states_02():
     '''
 
     editor = baca.scf.editors.InstrumentEditor()
-    assert isinstance(editor.session, baca.scf.Session)
+    assert isinstance(editor.session, baca.scf.core.Session)
     assert editor.target is None
 
 
@@ -39,5 +39,5 @@ def test_InstrumentEditor_base_states_03():
     accordion.instrument_name = 'accordion I'
     accordion.short_instrument_name = 'acc. I'
     editor = baca.scf.editors.InstrumentEditor(target=accordion)
-    assert isinstance(editor.session, baca.scf.Session)
+    assert isinstance(editor.session, baca.scf.core.Session)
     assert editor.target is accordion

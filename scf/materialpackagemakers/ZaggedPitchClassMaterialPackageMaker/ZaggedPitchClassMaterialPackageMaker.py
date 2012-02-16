@@ -1,7 +1,7 @@
 from abjad.tools import sequencetools
 from baca.music.make_zagged_pitch_classes import make_illustration_from_output_material
 from baca.scf.materialpackagemakers.MaterialPackageMaker import MaterialPackageMaker
-from baca.scf.UserInputWrapper import UserInputWrapper
+from baca.scf.editors.UserInputWrapper import UserInputWrapper
 from baca.scf.editors.InteractiveEditor import InteractiveEditor
 import baca
 
@@ -33,7 +33,7 @@ class ZaggedPitchClassMaterialPackageMaker(MaterialPackageMaker):
 
     # TODO: user_input_module_import_statementes = []
     user_input_module_import_statements = [
-        'from baca.scf import UserInputWrapper',
+        'from baca.scf.editors import UserInputWrapper',
         ]
 
     user_input_tests = [

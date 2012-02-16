@@ -1,4 +1,4 @@
-from baca.scf.Transcript import Transcript
+from baca.scf.core.Transcript import Transcript
 
 
 class Session(object):

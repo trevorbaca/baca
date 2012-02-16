@@ -2,7 +2,7 @@ from abjad.tools import iotools
 from abjad.tools import markuptools
 from abjad.tools import mathtools
 from abjad.tools import pitchtools
-from baca.scf.Session import Session
+from baca.scf.core.Session import Session
 import inspect
 import os
 import pprint

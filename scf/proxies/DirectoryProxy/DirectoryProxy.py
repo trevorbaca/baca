@@ -1,4 +1,4 @@
-from baca.scf.SCFObject import SCFObject
+from baca.scf.core.SCFObject import SCFObject
 import os
 import subprocess
 
