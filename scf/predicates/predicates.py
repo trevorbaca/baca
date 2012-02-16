@@ -11,7 +11,7 @@ def is_argument_range_string(expr):
     return pattern.match(expr) is not None
 
 def is_available_underscore_delimited_lowercase_package_name(expr):
-    from baca.scf.SCFObject import SCFObject
+    from baca.scf.core.SCFObject import SCFObject
     if iotools.is_underscore_delimited_lowercase_package_name(expr):
         if 3 <= len(expr):
             scf_object = SCFObject()
@@ -22,7 +22,7 @@ def is_boolean(expr):
     return isinstance(expr, bool)
 
 def is_existing_package_name(expr):
-    from baca.scf.SCFObject import SCFObject
+    from baca.scf.core.SCFObject import SCFObject
     scf_object = SCFObject()
     return scf_object.package_exists(expr)
 

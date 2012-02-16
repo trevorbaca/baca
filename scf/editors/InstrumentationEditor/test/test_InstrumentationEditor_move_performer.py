@@ -8,7 +8,7 @@ def test_InstrumentationEditor_move_performer_01():
     '''Quit, back, studio, score & junk all work.
     '''
 
-    studio = baca.scf.Studio()
+    studio = baca.scf.studio.Studio()
     studio.run(user_input='1 setup perf move q')
     assert studio.ts == (9,)
 

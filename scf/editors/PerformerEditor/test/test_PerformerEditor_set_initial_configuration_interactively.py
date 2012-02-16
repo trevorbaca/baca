@@ -5,7 +5,7 @@ def test_PerformerEditor_set_initial_configuration_interactively_01():
     '''Quit, back, studio, score & junk all work.
     '''
 
-    studio = baca.scf.Studio()
+    studio = baca.scf.studio.Studio()
     studio.run(user_input='1 setup performers add 1 q')
     assert studio.ts == (12, (1, 9))
 

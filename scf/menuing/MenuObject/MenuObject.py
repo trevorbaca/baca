@@ -1,5 +1,5 @@
 from abjad.tools import iotools
-from baca.scf.SCFObject.SCFObject import SCFObject
+from baca.scf.core.SCFObject.SCFObject import SCFObject
 from baca.scf import predicates
 import os, subprocess
 
