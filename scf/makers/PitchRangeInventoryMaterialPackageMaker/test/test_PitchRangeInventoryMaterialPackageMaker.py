@@ -13,7 +13,7 @@ def test_PitchRangeInventoryMaterialPackageMaker_01():
             'materials maker pitch testpir default '
             'q'
             )
-        mpp = baca.scf.materialpackagemakers.PitchRangeInventoryMaterialPackageMaker(
+        mpp = baca.scf.makers.PitchRangeInventoryMaterialPackageMaker(
             'baca.materials.testpir')
         # TODO: mpp.directory_contents == ['__init__.py']
         assert mpp.directory_contents == ['__init__.py', 'user_input.py']
@@ -36,7 +36,7 @@ def test_PitchRangeInventoryMaterialPackageMaker_02():
             'del 1 move 1 2 b default '
             'q'
             )
-        mpp = baca.scf.materialpackagemakers.PitchRangeInventoryMaterialPackageMaker(
+        mpp = baca.scf.makers.PitchRangeInventoryMaterialPackageMaker(
             'baca.materials.testpir')
         # TODO: mpp.directory_contents == ['__init__.py', 'output_material.py']
         assert mpp.directory_contents == ['__init__.py', 'output_material.py', 'user_input.py']

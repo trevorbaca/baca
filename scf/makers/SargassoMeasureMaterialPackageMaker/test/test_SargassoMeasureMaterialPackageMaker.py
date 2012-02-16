@@ -13,7 +13,7 @@ def test_SargassoMeasureMaterialPackageMaker_01():
             'materials maker sargasso testsargasso default '
             'q'
             )
-        mpp = baca.scf.materialpackagemakers.SargassoMeasureMaterialPackageMaker(
+        mpp = baca.scf.makers.SargassoMeasureMaterialPackageMaker(
             'baca.materials.testsargasso')
         assert mpp.directory_contents == ['__init__.py', 'user_input.py']
         user_input_wrapper = UserInputWrapper([
@@ -43,7 +43,7 @@ def test_SargassoMeasureMaterialPackageMaker_02():
             'testsargasso uil '
             'q'
             )
-        mpp = baca.scf.materialpackagemakers.SargassoMeasureMaterialPackageMaker(
+        mpp = baca.scf.makers.SargassoMeasureMaterialPackageMaker(
             'baca.materials.testsargasso')
         assert mpp.directory_contents == ['__init__.py', 'user_input.py']
         user_input_wrapper = UserInputWrapper([
@@ -72,7 +72,7 @@ def test_SargassoMeasureMaterialPackageMaker_03():
             'testsargasso uil uic '
             'q'
             )
-        mpp = baca.scf.materialpackagemakers.SargassoMeasureMaterialPackageMaker(
+        mpp = baca.scf.makers.SargassoMeasureMaterialPackageMaker(
             'baca.materials.testsargasso')
         assert mpp.directory_contents == ['__init__.py', 'user_input.py']
         user_input_wrapper = UserInputWrapper([
@@ -101,7 +101,7 @@ def test_SargassoMeasureMaterialPackageMaker_04():
             'testsargasso 3 16 '
             'q'
             )
-        mpp = baca.scf.materialpackagemakers.SargassoMeasureMaterialPackageMaker(
+        mpp = baca.scf.makers.SargassoMeasureMaterialPackageMaker(
             'baca.materials.testsargasso')
         assert mpp.directory_contents == ['__init__.py', 'user_input.py']
         user_input_wrapper = UserInputWrapper([
@@ -131,7 +131,7 @@ def test_SargassoMeasureMaterialPackageMaker_05():
             'Duration(11, 2) False True True 4 [2, 2, 2, 2, 1, 1, 4, 4] 16 [1, 1, 2, 3, 4] '
             'q'
             )
-        mpp = baca.scf.materialpackagemakers.SargassoMeasureMaterialPackageMaker(
+        mpp = baca.scf.makers.SargassoMeasureMaterialPackageMaker(
             'baca.materials.testsargasso')
         assert mpp.directory_contents == ['__init__.py', 'user_input.py']
         user_input_wrapper = UserInputWrapper([
@@ -161,7 +161,7 @@ def test_SargassoMeasureMaterialPackageMaker_06():
             '4 [2, 2, 3, 3] 16 [1, 1, 1, 1, 6, 6] b '
             'q'
             )
-        mpp = baca.scf.materialpackagemakers.SargassoMeasureMaterialPackageMaker(
+        mpp = baca.scf.makers.SargassoMeasureMaterialPackageMaker(
             'baca.materials.testsargasso')
         assert mpp.directory_contents == ['__init__.py', 'user_input.py']
         user_input_wrapper = UserInputWrapper([
@@ -190,7 +190,7 @@ def test_SargassoMeasureMaterialPackageMaker_07():
             'testsargasso uil 6 None 7 None 8 None '
             'q'
             )
-        mpp = baca.scf.materialpackagemakers.SargassoMeasureMaterialPackageMaker(
+        mpp = baca.scf.makers.SargassoMeasureMaterialPackageMaker(
             'baca.materials.testsargasso')
         assert mpp.directory_contents == ['__init__.py', 'user_input.py']
         user_input_wrapper = UserInputWrapper([

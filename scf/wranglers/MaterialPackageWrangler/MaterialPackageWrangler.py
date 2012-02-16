@@ -136,7 +136,7 @@ class MaterialPackageWrangler(PackageWrangler):
             material_proxy = baca.scf.proxies.MaterialPackageProxy(
                 material_package_importable_name, session=self.session)
         else:
-            command = 'material_proxy = baca.scf.materialpackagemakers.{}(material_package_importable_name, session=self.session)'.format(material_package_maker_class_name)
+            command = 'material_proxy = baca.scf.makers.{}(material_package_importable_name, session=self.session)'.format(material_package_maker_class_name)
             exec(command)
         tags = collections.OrderedDict([])
         tags['material_package_maker_class_name'] = material_package_maker_class_name

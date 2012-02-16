@@ -43,12 +43,12 @@ class SCFObject(object):
         return 5
 
     @property
-    def materialpackagemakers_directory_name(self):
-        return os.path.join(self.scf_root_directory, 'materialpackagemakers')
+    def makers_directory_name(self):
+        return os.path.join(self.scf_root_directory, 'makers')
 
     @property
-    def materialpackagemakers_package_importable_name(self):
-        return self.dot_join([self.scf_package_importable_name, 'materialpackagemakers'])
+    def makers_package_importable_name(self):
+        return self.dot_join([self.scf_package_importable_name, 'makers'])
 
     @property
     def scf_package_importable_name(self):

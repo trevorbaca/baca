@@ -73,7 +73,7 @@ def test_MaterialPackageProxy_read_only_attributes_02():
     '''Makermade material.
     '''
 
-    mpp = baca.scf.materialpackagemakers.SargassoMeasureMaterialPackageMaker('baca.materials.red_sargasso')
+    mpp = baca.scf.makers.SargassoMeasureMaterialPackageMaker('baca.materials.red_sargasso')
     assert     mpp.breadcrumb == 'red sargasso'
     assert not mpp.has_illustration_builder_module
     assert     mpp.has_illustration_ly
@@ -106,7 +106,7 @@ def test_MaterialPackageProxy_read_only_attributes_02():
     assert     mpp.material_definition_module_proxy is None
     assert     mpp.material_package_directory == \
         '/Users/trevorbaca/Documents/other/baca/materials/red_sargasso'
-    assert     mpp.material_package_maker is baca.scf.materialpackagemakers.SargassoMeasureMaterialPackageMaker
+    assert     mpp.material_package_maker is baca.scf.makers.SargassoMeasureMaterialPackageMaker
     assert     mpp.material_package_maker_class_name == 'SargassoMeasureMaterialPackageMaker'
     assert     mpp.material_package_short_name == 'red_sargasso'
     assert     mpp.material_spaced_name == 'red sargasso'

@@ -13,7 +13,7 @@ def test_MaterialPackageWrangler_run_makermade_package_01():
     try:
         studio.run(user_input='m m sargasso testsargasso default q')
         assert studio.package_exists('baca.materials.testsargasso')
-        mpp = baca.scf.materialpackagemakers.SargassoMeasureMaterialPackageMaker(
+        mpp = baca.scf.makers.SargassoMeasureMaterialPackageMaker(
             'baca.materials.testsargasso')
         assert mpp.is_makermade
         assert mpp.directory_contents == ['__init__.py', 'user_input.py']
@@ -38,7 +38,7 @@ def test_MaterialPackageWrangler_run_makermade_package_02():
     try:
         studio.run(user_input='betörung m m sargasso testsargasso default q')
         assert studio.package_exists('betoerung.mus.materials.testsargasso')
-        mpp = baca.scf.materialpackagemakers.SargassoMeasureMaterialPackageMaker(
+        mpp = baca.scf.makers.SargassoMeasureMaterialPackageMaker(
             'betoerung.mus.materials.testsargasso')
         assert mpp.is_makermade
         assert mpp.directory_contents == ['__init__.py', 'user_input.py']
@@ -66,7 +66,7 @@ def test_MaterialPackageWrangler_run_makermade_package_02():
 #            'm m testsargasso default default '
 #            'testsargasso incanned canned_exception.py default q')
 #        assert studio.package_exists('baca.materials.testsargasso')
-#        mpp = baca.scf.materialpackagemakers.SargassoMeasureMaterialPackageMaker('baca.materials.testsargasso')
+#        mpp = baca.scf.makers.SargassoMeasureMaterialPackageMaker('baca.materials.testsargasso')
 #        assert mpp.is_makermade and not mpp.is_data_only
 #        assert mpp.directory_contents == ['__init__.py', 'material_definition.py']
 #        assert not mpp.has_readable_initializer
@@ -97,7 +97,7 @@ def test_MaterialPackageWrangler_run_makermade_package_02():
 #            'testsargasso incanned canned_exception.py default '
 #            'inr yes yes default q')
 #        assert studio.package_exists('baca.materials.testsargasso')
-#        mpp = baca.scf.materialpackagemakers.SargassoMeasureMaterialPackageMaker('baca.materials.testsargasso')
+#        mpp = baca.scf.makers.SargassoMeasureMaterialPackageMaker('baca.materials.testsargasso')
 #        assert mpp.is_makermade and not mpp.is_data_only
 #        assert mpp.directory_contents == ['__init__.py', 'material_definition.py']
 #        assert mpp.has_readable_initializer
@@ -127,7 +127,7 @@ def test_MaterialPackageWrangler_run_makermade_package_02():
 #            'testsargasso mdcanned canned_testsargasso_material_definition.py default '
 #            'omm default q')
 #        assert studio.package_exists('baca.materials.testsargasso')
-#        mpp = baca.scf.materialpackagemakers.SargassoMeasureMaterialPackageMaker('baca.materials.testsargasso')
+#        mpp = baca.scf.makers.SargassoMeasureMaterialPackageMaker('baca.materials.testsargasso')
 #        assert mpp.is_makermade and not mpp.is_data_only
 #        assert mpp.directory_contents == ['__init__.py', 
 #            'illustration_builder.py', 'material_definition.py', 'output_material.py']
@@ -157,7 +157,7 @@ def test_MaterialPackageWrangler_run_makermade_package_02():
 #            'm m testsargasso default default '
 #            'testsargasso mddelete default q')
 #        assert studio.package_exists('baca.materials.testsargasso')
-#        mpp = baca.scf.materialpackagemakers.SargassoMeasureMaterialPackageMaker('baca.materials.testsargasso')
+#        mpp = baca.scf.makers.SargassoMeasureMaterialPackageMaker('baca.materials.testsargasso')
 #        assert mpp.is_makermade and not mpp.is_data_only
 #        assert mpp.directory_contents == ['__init__.py']
 #        assert mpp.has_readable_initializer
@@ -186,7 +186,7 @@ def test_MaterialPackageWrangler_run_makermade_package_02():
 #            'm m testsargasso default default '
 #            'testsargasso mdstub default q')
 #        assert studio.package_exists('baca.materials.testsargasso')
-#        mpp = baca.scf.materialpackagemakers.SargassoMeasureMaterialPackageMaker('baca.materials.testsargasso')
+#        mpp = baca.scf.makers.SargassoMeasureMaterialPackageMaker('baca.materials.testsargasso')
 #        assert mpp.is_makermade and not mpp.is_data_only
 #        assert mpp.directory_contents == ['__init__.py', 'material_definition.py']
 #        assert mpp.has_readable_initializer
@@ -217,7 +217,7 @@ def test_MaterialPackageWrangler_run_makermade_package_02():
 #            'omm default '
 #            'omdelete default q')
 #        assert studio.package_exists('baca.materials.testsargasso')
-#        mpp = baca.scf.materialpackagemakers.SargassoMeasureMaterialPackageMaker('baca.materials.testsargasso')
+#        mpp = baca.scf.makers.SargassoMeasureMaterialPackageMaker('baca.materials.testsargasso')
 #        assert mpp.is_makermade and not mpp.is_data_only
 #        assert mpp.directory_contents == ['__init__.py', 'material_definition.py']
 #        assert mpp.has_readable_initializer
@@ -246,7 +246,7 @@ def test_MaterialPackageWrangler_run_makermade_package_02():
 #            'm m testsargasso default default '
 #            'testsargasso mdcanned canned_exception.py default q')
 #        assert studio.package_exists('baca.materials.testsargasso')
-#        mpp = baca.scf.materialpackagemakers.SargassoMeasureMaterialPackageMaker('baca.materials.testsargasso')
+#        mpp = baca.scf.makers.SargassoMeasureMaterialPackageMaker('baca.materials.testsargasso')
 #        assert mpp.is_makermade and not mpp.is_data_only
 #        assert mpp.directory_contents == ['__init__.py', 'material_definition.py']
 #        assert mpp.has_readable_initializer
@@ -277,7 +277,7 @@ def test_MaterialPackageWrangler_run_makermade_package_02():
 #            'omm default '
 #            'omcanned canned_exception.py default q')
 #        assert studio.package_exists('baca.materials.testsargasso')
-#        mpp = baca.scf.materialpackagemakers.SargassoMeasureMaterialPackageMaker('baca.materials.testsargasso')
+#        mpp = baca.scf.makers.SargassoMeasureMaterialPackageMaker('baca.materials.testsargasso')
 #        assert mpp.is_makermade and not mpp.is_data_only
 #        assert mpp.directory_contents == ['__init__.py',
 #            'illustration_builder.py', 'material_definition.py', 'output_material.py']
@@ -310,7 +310,7 @@ def test_MaterialPackageWrangler_run_makermade_package_02():
 #            'pdfm default '
 #            'q')
 #        assert studio.package_exists('baca.materials.testsargasso')
-#        mpp = baca.scf.materialpackagemakers.SargassoMeasureMaterialPackageMaker('baca.materials.testsargasso')
+#        mpp = baca.scf.makers.SargassoMeasureMaterialPackageMaker('baca.materials.testsargasso')
 #        assert mpp.is_makermade and not mpp.is_data_only
 #        assert mpp.directory_contents == [
 #            '__init__.py', 'illustration.ly', 'illustration.pdf', 

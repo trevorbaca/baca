@@ -2,7 +2,7 @@ from menuing import getters
 import editors
 import exceptions
 import helpers
-import materialpackagemakers
+import makers
 import menuing
 import predicates
 import proxies

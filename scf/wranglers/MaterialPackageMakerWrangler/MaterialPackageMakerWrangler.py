@@ -8,7 +8,7 @@ import os
 class MaterialPackageMakerWrangler(PackageWrangler):
 
     def __init__(self, session=None):
-        PackageWrangler.__init__(self, self.materialpackagemakers_package_importable_name, session=session)
+        PackageWrangler.__init__(self, self.makers_package_importable_name, session=session)
 
     ### READ-ONLY PUBLIC ATTRIBUTES ###
 
@@ -33,7 +33,7 @@ class MaterialPackageMakerWrangler(PackageWrangler):
         material_package_maker_class_name = material_proxy.material_package_maker_class_name
         if material_package_maker_class_name is not None:
             material_proxy_class = None
-            command = 'from baca.scf.materialpackagemakers import {} as material_proxy_class'
+            command = 'from baca.scf.makers import {} as material_proxy_class'
             command = command.format(material_package_maker_class_name)
             exec(command)
             material_proxy = material_proxy_class(material_package_importable_name, session=self.session)
@@ -60,7 +60,7 @@ class MaterialPackageMakerWrangler(PackageWrangler):
         lines = []
         lines.append('from baca.music.foo import foo')
         lines.append('from baca.music.foo import make_illustration_from_output_material')
-        lines.append('from baca.scf.materialpackagemakers.MaterialPackageMaker import MaterialPackageMaker')
+        lines.append('from baca.scf.makers.MaterialPackageMaker import MaterialPackageMaker')
         lines.append('from baca.scf.editors.UserInputWrapper import UserInputWrapper')
         lines.append('import baca')
         lines.append('')
@@ -192,5 +192,5 @@ class MaterialPackageMakerWrangler(PackageWrangler):
         self.restore_breadcrumbs(cache=cache)
         return material_proxy_class_name
 
-    def unimport_materialpackagemakers_package(self):
+    def unimport_makers_package(self):
         self.remove_package_importable_name_from_sys_modules(self.toplevel_global_package_importable_name)
