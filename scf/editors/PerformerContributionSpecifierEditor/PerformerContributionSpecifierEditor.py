@@ -1,12 +1,12 @@
 from baca.scf.editors.InteractiveEditor import InteractiveEditor
-from baca.scf.ObjectManifest import ObjectManifest
+from baca.scf.TargetManifest import TargetManifest
 from baca.scf.specifiers.PerformerContributionSpecifier import PerformerContributionSpecifier
 
 
 class PerformerContributionSpecifierEditor(InteractiveEditor):
 
     target_class = PerformerContributionSpecifier
-#    target_manifest = ObjectManifest(PerformerContributionSpecifier,
+#    target_manifest = TargetManifest(PerformerContributionSpecifier,
 #        ('articulation_indicator', 'art', ArticulationIndicatorEditor),
 #        ('clef_indicator', 'clf', ClefIndicatorEditor),
 #        ('directive_indicator', 'dir', DirectiveIndicatorEditor),

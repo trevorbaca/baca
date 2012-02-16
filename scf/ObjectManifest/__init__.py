@@ -1,1 +1,0 @@
-from ObjectManifest import ObjectManifest

@@ -1,7 +1,7 @@
 from baca.scf.AttributeDetail import AttributeDetail
 
 
-class ObjectManifest(object):
+class TargetManifest(object):
 
     def __init__(self, target_class, *attribute_details, **kwargs):
         self.target_class = target_class

@@ -2,7 +2,7 @@ from baca.scf.editors.InteractiveEditor import InteractiveEditor
 from baca.scf.editors.PerformerContributionSpecifierListEditor import PerformerContributionSpecifierListEditor
 from baca.scf.editors.TempoMarkEditor import TempoMarkEditor
 from baca.scf.specifiers.MusicSpecifier import MusicSpecifier
-from baca.scf.ObjectManifest import ObjectManifest
+from baca.scf.TargetManifest import TargetManifest
 from baca.scf import getters
 from baca.scf import predicates
 
@@ -10,7 +10,7 @@ from baca.scf import predicates
 class MusicSpecifierEditor(InteractiveEditor):
 
     target_class = MusicSpecifier
-    target_manifest = ObjectManifest(MusicSpecifier,
+    target_manifest = TargetManifest(MusicSpecifier,
         ('music_specifier_name', 'nm', getters.get_string),
         ('tempo', 'tp', TempoMarkEditor),
         ('performer_contribution_specifiers', 'pc', PerformerContributionSpecifierListEditor),
