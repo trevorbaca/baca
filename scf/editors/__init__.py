@@ -3,6 +3,7 @@ from InstrumentationEditor import InstrumentationEditor
 from InteractiveEditor import InteractiveEditor
 from ListEditor import ListEditor
 from MusicSpecifierEditor import MusicSpecifierEditor
+from PerformerContributionSpecifierEditor import PerformerContributionSpecifierEditor
 from PerformerContributionSpecifierListEditor import PerformerContributionSpecifierListEditor
 from PerformerEditor import PerformerEditor
 from PitchRangeEditor import PitchRangeEditor
