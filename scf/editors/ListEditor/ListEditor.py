@@ -11,6 +11,12 @@ class ListEditor(InteractiveEditor):
     target_item_identifier = 'element'
     target_items_identifier = 'elements'
 
+    ### READ-ONLY PUBLIC ATTRIBUTES ###
+
+    @property
+    def target_items(self):
+        return self.target
+
     ### PUBLIC METHODS ###
 
     def add_target_item_interactively(self):

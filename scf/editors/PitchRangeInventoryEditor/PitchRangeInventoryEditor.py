@@ -7,6 +7,13 @@ from baca.scf.menuing.UserInputGetter import UserInputGetter
 
 class PitchRangeInventoryEditor(ListEditor):
 
+    target_class = pitchtools.PitchRangeInventory
+    target_item_getter_configuration_method = UserInputGetter.append_symbolic_pitch_range_string
+    target_item_class = pitchtools.PitchRange
+    target_item_editor_class = PitchRangeEditor
+    target_item_identifier = 'pitch range'
+    target_items_identifier = 'pitch ranges'
+
     ### READ-ONLY PUBLIC ATTRIBUTES ###
 
     @property
@@ -19,19 +26,3 @@ class PitchRangeInventoryEditor(ListEditor):
         for pitch_range in self.target:
             result.append(repr(pitch_range))
         return result
-
-    target_class = pitchtools.PitchRangeInventory
-
-    target_item_getter_configuration_method = UserInputGetter.append_symbolic_pitch_range_string
-
-    target_item_class = pitchtools.PitchRange
-
-    target_item_editor_class = PitchRangeEditor
-
-    target_item_identifier = 'pitch range'
-
-    @property
-    def target_items(self):
-        return self.target
-
-    target_items_identifier = 'pitch ranges'
