@@ -1,4 +1,4 @@
-from baca.scf.ParsableFileProxy import ParsableFileProxy
+from baca.scf.proxies.ParsableFileProxy import ParsableFileProxy
 import collections
 import os
 

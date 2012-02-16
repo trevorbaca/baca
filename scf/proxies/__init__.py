@@ -18,6 +18,7 @@ from MusicSpecifierModuleProxy import MusicSpecifierModuleProxy
 from MusPackageProxy import MusPackageProxy
 from OutputMaterialModuleProxy import OutputMaterialModuleProxy
 from PackageProxy import PackageProxy
+from ParsableFileProxy import ParsableFileProxy
 from ScorePackageProxy import ScorePackageProxy
 from StylesheetFileProxy import StylesheetFileProxy
 from UserInputModuleProxy import UserInputModuleProxy
