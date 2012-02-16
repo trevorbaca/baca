@@ -10,7 +10,7 @@ class PerformerContributionSpecifier(Specifier):
         dynamic_specifier=None,
         instrument_specifier=None,
         note_head_specifier=None,
-        override_spanner_specifier=None,
+        override_specifier=None,
         performer_specifier=None,
         pitch_class_specifier=None,
         registration_specifier=None,
@@ -25,7 +25,7 @@ class PerformerContributionSpecifier(Specifier):
         self.dynamic_specifier = dynamic_specifier
         self.instrument_specifier = instrument_specifier
         self.note_head_specifier = note_head_specifier
-        self.override_spanner_specifier = override_spanner_specifier
+        self.override_specifier = override_specifier
         self.performer_specifier = performer_specifier
         self.pitch_class_specifier = pitch_class_specifier
         self.registration_specifier = registration_specifier
