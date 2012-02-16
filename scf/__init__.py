@@ -21,6 +21,7 @@ from MusicSpecifier import MusicSpecifier
 from MusicSpecifierModuleProxy import MusicSpecifierModuleProxy
 from MusicSpecifierModuleProxyWrangler import MusicSpecifierModuleProxyWrangler
 from MusPackageProxy import MusPackageProxy
+from ObjectManifest import ObjectManifest
 from OutputMaterialModuleProxy import OutputMaterialModuleProxy
 from PackageWrangler import PackageWrangler
 from PackageProxy import PackageProxy
@@ -36,6 +37,7 @@ from Transcript import Transcript
 from MaterialPackageMaker import MaterialPackageMaker
 from UserInputModuleProxy import UserInputModuleProxy
 from UserInputWrapper import UserInputWrapper
+from menuing import getters
 import editors
 import exceptions
 import helpers

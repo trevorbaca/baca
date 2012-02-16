@@ -1,10 +1,20 @@
 from baca.scf.editors.InteractiveEditor import InteractiveEditor
 from baca.scf.editors.PerformerContributionSpecifierListEditor import PerformerContributionSpecifierListEditor
+from baca.scf.editors.TempoMarkEditor import TempoMarkEditor
 from baca.scf.MusicSpecifier import MusicSpecifier
+from baca.scf.ObjectManifest import ObjectManifest
+from baca.scf import getters
 from baca.scf import predicates
 
 
 class MusicSpecifierEditor(InteractiveEditor):
+
+    target_class = MusicSpecifier
+    target_manifest = ObjectManifest(MusicSpecifier,
+        ('music_specifier_name', 'nm', getters.get_string),
+        ('tempo', 'tp', TempoMarkEditor),
+        ('performer_contribution_specifiers', 'pc', PerformerContributionSpecifierListEditor),
+        )
 
     ### READ-ONLY PUBLIC ATTRIBUTES ###
 
@@ -12,15 +22,6 @@ class MusicSpecifierEditor(InteractiveEditor):
     def breadcrumb(self):
         return self.target_name or 'music specifier editor'
         
-    target_attribute_tuples = (
-        ('music_specifier_name', predicates.is_string, True, None, 'sn'),
-        ('tempo', predicates.is_tempo_token, True, None, 'tp'),
-        ('performer_contribution_specifiers', object, False, None, 'pc', None,
-            PerformerContributionSpecifierListEditor),
-        )
-
-    target_class = MusicSpecifier
-
     @property
     def target_name(self):
         if self.target is not None:
