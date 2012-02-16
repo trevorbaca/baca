@@ -6,3 +6,4 @@ from PerformerContributionSpecifierListEditor import PerformerContributionSpecif
 from PerformerEditor import PerformerEditor
 from PitchRangeEditor import PitchRangeEditor
 from PitchRangeInventoryEditor import PitchRangeInventoryEditor
+from TempoMarkEditor import TempoMarkEditor
