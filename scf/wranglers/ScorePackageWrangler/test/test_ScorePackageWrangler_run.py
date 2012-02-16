@@ -5,7 +5,7 @@ def test_ScorePackageWrangler_run_01():
     '''Create score package. Remove score package.
     '''
 
-    studio = baca.scf.Studio()
+    studio = baca.scf.studiopackage.Studio()
     assert not studio.package_exists('testscore')
 
     try:

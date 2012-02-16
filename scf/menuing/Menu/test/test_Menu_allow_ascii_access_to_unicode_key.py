@@ -3,7 +3,7 @@ import baca
 
 def test_Menu_allow_ascii_access_to_unicode_key_01():
 
-    studio = baca.scf.Studio()
+    studio = baca.scf.studiopackage.Studio()
     studio.run(user_input='Čáry q')
     assert studio.ts == (4,)
 

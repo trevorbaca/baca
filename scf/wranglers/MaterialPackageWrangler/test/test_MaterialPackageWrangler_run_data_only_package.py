@@ -5,7 +5,7 @@ def test_MaterialPackageWrangler_run_data_only_package_01():
     '''Make data package. Delete package.
     '''
     
-    studio = baca.scf.Studio()
+    studio = baca.scf.studiopackage.Studio()
     assert not studio.package_exists('baca.materials.testnumbers')
 
     try:
@@ -31,7 +31,7 @@ def test_MaterialPackageWrangler_run_data_only_package_02():
     Verify invalid initializer. Remove package.
     '''
 
-    studio = baca.scf.Studio()
+    studio = baca.scf.studiopackage.Studio()
     assert not studio.package_exists('baca.materials.testnumbers')
 
     try:
@@ -59,7 +59,7 @@ def test_MaterialPackageWrangler_run_data_only_package_03():
     Verify initializer. Remove package.
     '''
 
-    studio = baca.scf.Studio()
+    studio = baca.scf.studiopackage.Studio()
     assert not studio.package_exists('baca.materials.testnumbers')
 
     try:
@@ -88,7 +88,7 @@ def test_MaterialPackageWrangler_run_data_only_package_04():
     Delete package." 
     '''
 
-    studio = baca.scf.Studio()
+    studio = baca.scf.studiopackage.Studio()
     assert not studio.package_exists('baca.materials.testnumbers')
 
     try:
@@ -117,7 +117,7 @@ def test_MaterialPackageWrangler_run_data_only_package_05():
     Remove package.
     '''
 
-    studio = baca.scf.Studio()
+    studio = baca.scf.studiopackage.Studio()
     assert not studio.package_exists('baca.materials.testnumbers')
 
     try:
@@ -145,7 +145,7 @@ def test_MaterialPackageWrangler_run_data_only_package_06():
     Delete package.
     '''
 
-    studio = baca.scf.Studio()
+    studio = baca.scf.studiopackage.Studio()
     assert not studio.package_exists('baca.materials.testnumbers')
 
     try:
@@ -173,7 +173,7 @@ def test_MaterialPackageWrangler_run_data_only_package_07():
     Remove package.
     '''
 
-    studio = baca.scf.Studio()
+    studio = baca.scf.studiopackage.Studio()
     assert not studio.package_exists('baca.materials.testnumbers')
 
     try:
@@ -203,7 +203,7 @@ def test_MaterialPackageWrangler_run_data_only_package_08():
     Examine package state. Remove package.
     '''
 
-    studio = baca.scf.Studio()
+    studio = baca.scf.studiopackage.Studio()
     assert not studio.package_exists('baca.materials.testnumbers')
 
     try:
@@ -231,7 +231,7 @@ def test_MaterialPackageWrangler_run_data_only_package_09():
     Verify invalid output material module. Remove package.
     '''
 
-    studio = baca.scf.Studio()
+    studio = baca.scf.studiopackage.Studio()
     assert not studio.package_exists('baca.materials.testnumbers')
 
     try:

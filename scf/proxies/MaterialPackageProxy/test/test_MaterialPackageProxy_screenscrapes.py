@@ -6,7 +6,7 @@ def test_MaterialPackageProxy_screenscrapes_01():
     '''
 
 
-    studio = baca.scf.Studio()
+    studio = baca.scf.studiopackage.Studio()
     studio.run(user_input='all las m black q')
     
     assert studio.transcript[-2] == \

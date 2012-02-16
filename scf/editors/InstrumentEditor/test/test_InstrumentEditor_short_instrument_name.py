@@ -6,7 +6,7 @@ def test_InstrumentEditor_short_instrument_name_01():
     '''Quit, back & studio all work.
     '''
 
-    studio = baca.scf.Studio()
+    studio = baca.scf.studiopackage.Studio()
     studio.run(user_input='1 setup perf 1 1 sn q')
     assert studio.ts == (13, (1, 7, 9))
 
@@ -21,7 +21,7 @@ def test_InstrumentEditor_short_instrument_name_02():
     '''String only.
     '''
 
-    studio = baca.scf.Studio()
+    studio = baca.scf.studiopackage.Studio()
     studio.run(user_input='1 setup performers 1 1 sn -99 q')
     assert studio.ts == (15, (1, 7, 9))
 

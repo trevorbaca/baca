@@ -5,7 +5,7 @@ import baca
 def test_ZaggedPitchClassMaterialPackageMaker_01():
     '''Emtpy wrapper.'''
 
-    studio = baca.scf.Studio()
+    studio = baca.scf.studiopackage.Studio()
     assert not studio.package_exists('baca.materials.testzagged')
     try:
         studio.run(user_input=
@@ -28,7 +28,7 @@ def test_ZaggedPitchClassMaterialPackageMaker_01():
 def test_ZaggedPitchClassMaterialPackageMaker_02():
     '''Populate wrapper.'''
 
-    studio = baca.scf.Studio()
+    studio = baca.scf.studiopackage.Studio()
     assert not studio.package_exists('baca.materials.testzagged')
     try:
         studio.run(user_input=

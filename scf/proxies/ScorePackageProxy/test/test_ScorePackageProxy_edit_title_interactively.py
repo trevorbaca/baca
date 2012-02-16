@@ -5,7 +5,7 @@ import baca
 def test_ScorePackageProxy_edit_title_interactively_01():
 
     try:
-        studio = baca.scf.Studio()
+        studio = baca.scf.studiopackage.Studio()
         studio.run(user_input='betorung setup title Foo q')
         assert studio.ts == (9,)
         assert studio.transcript[-5][0] == 'Betörung (2012) - setup'

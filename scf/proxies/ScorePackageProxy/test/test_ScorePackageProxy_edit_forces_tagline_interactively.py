@@ -6,7 +6,7 @@ def test_ScorePackageProxy_edit_forces_tagline_interactively_01():
     '''Quit, back, score & studio all work.
     '''
 
-    studio = baca.scf.Studio()
+    studio = baca.scf.studiopackage.Studio()
     studio.run(user_input='1 setup tagline q')
     assert studio.ts == (7,)
 
@@ -23,7 +23,7 @@ def test_ScorePackageProxy_edit_forces_tagline_interactively_01():
 def test_ScorePackageProxy_edit_forces_tagline_interactively_02():
 
     try:
-        studio = baca.scf.Studio()
+        studio = baca.scf.studiopackage.Studio()
         studio.run(user_input='poeme setup tagline for~foo~bar q')
         recursif = baca.scf.proxies.ScorePackageProxy('recursif')
         assert recursif.forces_tagline == 'for foo bar'

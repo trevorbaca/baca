@@ -6,7 +6,7 @@ import baca
 def test_PitchRangeInventoryMaterialPackageMaker_01():
     '''Empty wrapper.'''
 
-    studio = baca.scf.Studio()
+    studio = baca.scf.studiopackage.Studio()
     assert not studio.package_exists('baca.materials.testpir')
     try:
         studio.run(user_input=
@@ -27,7 +27,7 @@ def test_PitchRangeInventoryMaterialPackageMaker_01():
 def test_PitchRangeInventoryMaterialPackageMaker_02():
     '''Populate wrapper.'''
 
-    studio = baca.scf.Studio()
+    studio = baca.scf.studiopackage.Studio()
     assert not studio.package_exists('baca.materials.testpir')
     try:
         studio.run(user_input=

@@ -5,7 +5,7 @@ def test_PackageProxy_manage_tags_01():
     '''Quit, back, studio, score & junk all work.
     '''
    
-    studio = baca.scf.Studio()
+    studio = baca.scf.studiopackage.Studio()
     studio.run(user_input='1 tags q') 
     assert studio.ts == (6,)
 
