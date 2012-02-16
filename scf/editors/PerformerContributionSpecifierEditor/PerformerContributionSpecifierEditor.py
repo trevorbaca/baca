@@ -1,6 +1,8 @@
+#from baca.scf.editors.ArticulationSpecifierEditor import ArticulationSpecifierEditor
 from baca.scf.editors.InteractiveEditor import InteractiveEditor
 from baca.scf.editors.TargetManifest import TargetManifest
 from baca.scf.specifiers.PerformerContributionSpecifier import PerformerContributionSpecifier
+
 
 
 class PerformerContributionSpecifierEditor(InteractiveEditor):
