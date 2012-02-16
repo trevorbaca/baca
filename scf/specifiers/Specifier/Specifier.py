@@ -1,15 +1,36 @@
 class Specifier(object):
 
+    def __init__(self):
+        variable_names = self.__init__.im_func.func_code.co_varnames[1:]
+        self._variable_names = variable_names
+
     ### OVERLOADS ###
 
+    def __eq__(self, other):
+        if self is other:
+            return True
+        if isinstance(other, type(self)):
+            if self.variable_names == other.variable_names:
+                for variable_name in self.variable_names:
+                    if not getattr(self, variable_name) == getattr(other, variable_name):
+                        return False
+                return True
+        return False
+
+    def __ne__(self, other):
+        return not self == other
+
     def __repr__(self):
-        return '{}()'.format(type(self).__name__)
+        if self.variable_names:
+            return '{}{!r}'.format(self.class_name, self.variable_names)
+        else:
+            return '{}()'.format(self.class_name)
 
     ### READ-ONLY ATTRIBUTES ###
 
     @property
-    def variable_names(self):
-        return self.__init__.im_func.func_code.co_varnames[1:]
+    def class_name(self):
+        return type(self).__name__
 
     @property
     def format(self):
@@ -27,6 +48,15 @@ class Specifier(object):
                 result.extend(format_pieces)
         result.append('\t)')
         return result
+
+    @property
+    def human_readable_class_name(self):
+        return iotools.uppercamelcase_to_space_delimited_lowercase(self.class_name)
+
+    @property
+    def variable_names(self):
+        #return self.__init__.im_func.func_code.co_varnames[1:]
+        return self._variable_names
 
     ### PUBLIC METHODS ###
 

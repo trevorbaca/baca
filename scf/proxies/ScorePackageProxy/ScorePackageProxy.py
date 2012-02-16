@@ -13,8 +13,9 @@ class ScorePackageProxy(PackageProxy):
         self._mus_proxy = baca.scf.proxies.MusPackageProxy(score_package_short_name, session=self.session)
         self._chunk_wrangler = baca.scf.wranglers.ChunkPackageWrangler(session=self.session)
         self._material_package_wrangler = baca.scf.wranglers.MaterialPackageWrangler(session=self.session)
-        self._material_package_maker_wrangler = baca.scf.wranglers.MaterialPackageMakerWrangler(session=self.session)
-        self._music_specifier_wrangler = baca.scf.wranglers.MusicSpecifierModuleProxyWrangler(session=self.session)
+        self._material_package_maker_wrangler = baca.scf.wranglers.MaterialPackageMakerWrangler(
+            session=self.session)
+        self._music_specifier_module_wrangler = baca.scf.wranglers.MusicSpecifierModuleWrangler(session=self.session)
 
     ### READ-ONLY PUBLIC ATTRIBUTES ###
 
@@ -24,6 +25,10 @@ class ScorePackageProxy(PackageProxy):
             return self.title_with_year
         else:
             return self.title
+
+    @property
+    def backtracking_source(self):
+        return 'score'
 
     @property
     def breadcrumb(self):
@@ -39,7 +44,7 @@ class ScorePackageProxy(PackageProxy):
 
     @property
     def chunks_package_importable_name(self):
-        return self.dot_join([self.package_importable_name, 'mus', 'chunks'])
+        return self.dot_join([self.importable_name, 'mus', 'chunks'])
 
     @property
     def chunks_package_initializer_file_name(self):
@@ -95,7 +100,7 @@ class ScorePackageProxy(PackageProxy):
 
     @property
     def materials_package_importable_name(self):
-        return self.dot_join([self.package_importable_name, 'mus', 'materials'])
+        return self.dot_join([self.importable_name, 'mus', 'materials'])
 
     @property
     def materials_package_initializer_file_name(self):
@@ -106,8 +111,8 @@ class ScorePackageProxy(PackageProxy):
         return self._mus_proxy
 
     @property
-    def music_specifier_wrangler(self):
-        return self._music_specifier_wrangler
+    def music_specifier_module_wrangler(self):
+        return self._music_specifier_module_wrangler
 
     @property
     def score_initializer_file_names(self):
@@ -202,21 +207,25 @@ class ScorePackageProxy(PackageProxy):
             return
         self.add_tag('year_of_completion', result)
 
-    def fix_package_structure(self, is_interactive=True):
-        if self.package_short_name == 'recursif':
-            return
+    def fix(self, is_interactive=True):
+        result = True
+        if self.short_name == 'recursif':
+            return True
         for directory_name in self.top_level_directory_names:
             if not os.path.exists(directory_name):
+                result = False
                 prompt = 'create {!r}? '.format(directory_name)
                 if not is_interactive or self.confirm(prompt):
                     os.mkdir(directory_name)
         if not os.path.exists(self.initializer_file_name):
+            result = False
             prompt = 'create {}? '.format(self.initializer_file_name)
             if not is_interactive or self.confirm(prompt):
                 initializer = file(self.initializer_file_name, 'w')
                 initializer.write('')
                 initializer.close()
         if not os.path.exists(self.mus_proxy.initializer_file_name):
+            result = False
             prompt = 'create {}? '.format(self.mus_proxy.initializer_file_name)
             if not is_interactive or self.confirm(prompt):
                 initializer = file(self.mus_proxy.initializer_file_name, 'w')
@@ -231,49 +240,58 @@ class ScorePackageProxy(PackageProxy):
                 found_materials_import = True
         initializer.close()
         if not found_materials_import:
+            result = False
             lines.insert(0, 'import materials\n')
             initializer = file(self.mus_proxy.initializer_file_name, 'w')
             initializer.write(''.join(lines))
             initializer.close()
         if not os.path.exists(self.tags_file_name):
+            result = False
             prompt = 'create {}? '.format(self.tags_file_name)
             if not is_interactive or self.confirm(prompt):
                 tags_file = file(self.tags_file_name, 'w')
+                tags_file.write('# -*- encoding: utf-8 -*-\n')
                 tags_file.write('from abjad import *\n')
                 tags_file.write('from collections import OrderedDict\n')
+                tags_file.write('\n')
                 tags_file.write('\n')
                 tags_file.write('tags = OrderedDict([])\n')
                 tags_file.close()
         if not os.path.exists(self.materials_package_directory_name):
+            result = False
             prompt = 'create {}'.format(self.materials_package_directory_name)
             if not is_interactive or self.confirm(prompt):
                 os.mkdir(self.materials_package_directory_name)
         if not os.path.exists(self.materials_package_initializer_file_name):
+            result = False
             file(self.materials_package_initializer_file_name, 'w').write('')
         if not os.path.exists(self.chunks_package_directory_name):
+            result = False
             prompt = 'create {}'.format(self.chunks_package_directory_name)
             if not is_interactive or self.confirm(prompt):
                 os.mkdir(self.chunks_package_directory_name)
         if not os.path.exists(self.chunks_package_initializer_file_name):
+            result = False
             file(self.chunks_package_initializer_file_name, 'w').write('')
         self.proceed('packaged structure fixed.', prompt=is_interactive)
+        return result
 
     def handle_main_menu_result(self, result):
         assert isinstance(result, str)
         if result == 'h':
-            self.chunk_wrangler.run(head=self.package_short_name)
+            self.chunk_wrangler.run(head=self.short_name)
         elif  result == 'm':
-            self.material_package_wrangler.run(head=self.package_short_name)
+            self.material_package_wrangler.run(head=self.short_name)
         elif result == 'ms':
-            self.music_specifier_wrangler.run()
+            self.music_specifier_module_wrangler.run()
         elif result == 's':
             self.manage_setup(cache=True)
         elif result == 'fix':
-            self.fix_package_structure()
+            self.fix()
         elif result == 'ls':
             self.print_directory_contents()
         elif result == 'profile':
-            self.profile_package_structure()
+            self.profile()
         elif result == 'removescore':
             self.remove_interactively()
         elif result == 'svn':
@@ -308,7 +326,7 @@ class ScorePackageProxy(PackageProxy):
         hidden_section.append(('tags', 'manage tags'))
         return menu
 
-    def make_package_structure(self):
+    def make_asset_structure(self):
         self.fix_score_package_directory_structure(is_interactive=False)
 
     def make_score_interactively(self):
@@ -399,10 +417,10 @@ class ScorePackageProxy(PackageProxy):
         self.pop_breadcrumb()
         self.restore_breadcrumbs(cache=cache)
 
-    def profile_package_structure(self, prompt=True):
+    def profile(self, prompt=True):
         if not os.path.exists(self.directory_name):
             raise OSError('directory {!r} does not exist.'.format(self.directory_name))
-        if self.package_short_name == 'recursif':
+        if self.short_name == 'recursif':
             return
         lines = []
         for subdirectory_name in self.top_level_directory_names:
@@ -414,7 +432,7 @@ class ScorePackageProxy(PackageProxy):
         self.proceed(prompt=prompt)
 
     def remove_interactively(self):
-        line = 'WARNING! Score package {!r} will be completely removed.'.format(self.package_importable_name)
+        line = 'WARNING! Score package {!r} will be completely removed.'.format(self.importable_name)
         self.display([line, ''])
         getter = self.make_getter(where=self.where())
         getter.append_string("type 'clobberscore' to proceed")
@@ -431,33 +449,6 @@ class ScorePackageProxy(PackageProxy):
                 return
             self.session.is_backtracking_locally = True
         
-    def run(self, user_input=None, clear=True, cache=False):
-        self.assign_user_input(user_input=user_input)
-        self.cache_breadcrumbs(cache=cache)
-        while True:
-            self.push_breadcrumb()
-            menu = self.make_main_menu()
-            result = menu.run(clear=clear)
-            if self.session.is_backtracking_to_score:
-                self.session.is_backtracking_to_score = False
-                self.pop_breadcrumb() 
-                continue
-            elif self.backtrack():
-                break
-            elif not result:
-                self.pop_breadcrumb()
-                continue
-            self.handle_main_menu_result(result)
-            if self.session.is_backtracking_to_score:
-                self.session.is_backtracking_to_score = False
-                self.pop_breadcrumb()
-                continue
-            elif self.backtrack():
-                break
-            self.pop_breadcrumb()
-        self.pop_breadcrumb()
-        self.restore_breadcrumbs(cache=cache)
-
     def summarize_chunks(self):
         chunks = self.chunk_wrangler.package_underscored_names
         lines = []
@@ -471,7 +462,7 @@ class ScorePackageProxy(PackageProxy):
         self.display(lines)
 
     def summarize_materials(self):
-        materials = self.material_package_wrangler.package_spaced_names
+        materials = self.material_package_wrangler.human_readable_names
         lines = []
         if not materials:
             lines.append('{}Materials (none yet)'.format(self.make_tab(1)))

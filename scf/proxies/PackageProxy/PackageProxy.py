@@ -10,16 +10,15 @@ import sys
 class PackageProxy(DirectoryProxy):
 
     def __init__(self, package_importable_name=None, session=None):
-        directory_name = self.package_importable_name_to_directory_name(package_importable_name)
+        directory_name = self.package_importable_name_to_path_name(package_importable_name)
         DirectoryProxy.__init__(self, directory_name=directory_name, session=session)
-        self._package_short_name = None
-        self._package_importable_name = package_importable_name
+        self._importable_name = package_importable_name
 
     ### OVERLOADS ###
 
     def __repr__(self):
-        if self.package_importable_name is not None:
-            return '{}({!r})'.format(self.class_name, self.package_importable_name)
+        if self.importable_name is not None:
+            return '{}({!r})'.format(self.class_name, self.importable_name)
         else:
             return '{}()'.format(self.class_name)
 
@@ -27,8 +26,8 @@ class PackageProxy(DirectoryProxy):
 
     @property
     def directory_name(self):
-        if self.package_importable_name is not None:
-            return self.package_importable_name_to_directory_name(self.package_importable_name)
+        if self.importable_name is not None:
+            return self.package_importable_name_to_path_name(self.importable_name)
 
     @property
     def formatted_tags(self):
@@ -54,6 +53,10 @@ class PackageProxy(DirectoryProxy):
         return os.path.isfile(self.tags_file_name)
 
     @property
+    def human_readable_name(self):
+        return self.short_name.replace('_', ' ')
+
+    @property
     def initializer_file_name(self):
         if self.directory_name is not None:
             return os.path.join(self.directory_name, '__init__.py')
@@ -65,26 +68,17 @@ class PackageProxy(DirectoryProxy):
             return InitializerFileProxy(self.initializer_file_name, session=self.session)
 
     @property
-    def package_importable_name(self):
-        return self._package_importable_name
+    def importable_name(self):
+        return self._importable_name
 
     @property
     def package_root_name(self):
-        return self.package_importable_name.split('.')[0]
+        return self.importable_name.split('.')[0]
 
-    @property
-    def package_short_name(self):
-        return self.package_importable_name.split('.')[-1]
-
-    @property
-    def package_spaced_name(self):
-        if self.package_short_name is not None:
-            return self.package_short_name.replace('_', ' ')
-        
     @property
     def parent_initializer_file_name(self):
         if self.parent_package_importable_name:
-            parent_directory_name = self.package_importable_name_to_directory_name(
+            parent_directory_name = self.package_importable_name_to_path_name(
                 self.parent_package_importable_name)
             return os.path.join(parent_directory_name, '__init__.py')
 
@@ -97,8 +91,8 @@ class PackageProxy(DirectoryProxy):
 
     @property
     def parent_package_importable_name(self):
-        if self.package_importable_name is not None:
-            result = self.dot_join(self.package_importable_name.split('.')[:-1])
+        if self.importable_name is not None:
+            result = self.dot_join(self.importable_name.split('.')[:-1])
             if result:
                 return result
 
@@ -112,8 +106,8 @@ class PackageProxy(DirectoryProxy):
     # TODO: write test; or remove?
     @property
     def score_package_short_name(self):
-        if not self.package_importable_name.startswith(self.studio_package_importable_name):
-            return self.package_importable_name.split('.')[0]
+        if not self.importable_name.startswith(self.home_package_importable_name):
+            return self.importable_name.split('.')[0]
 
     @property
     def tags_file_name(self):
@@ -145,6 +139,10 @@ class PackageProxy(DirectoryProxy):
         if result:
             tag_name, tag_value = result
             self.add_tag(tag_name, tag_value)
+
+    def fix(self, is_interactive=True):
+        self.print_implemented_on_child_classes()
+        return True
 
     def remove_initializer(self, prompt=True):
         if self.has_initializer:
@@ -189,7 +187,7 @@ class PackageProxy(DirectoryProxy):
         import collections
         tags = self.read_tags_from_tags_file()
         if tags is None:
-            tags = safe_import(locals(), self.package_short_name, 'tags', 
+            tags = safe_import(locals(), self.short_name, 'tags', 
                 source_parent_package_importable_name=self.parent_package_importable_name)
         if tags is None:
             tags = collections.OrderedDict([])
@@ -233,6 +231,9 @@ class PackageProxy(DirectoryProxy):
         self.pop_breadcrumb()
         self.restore_breadcrumbs(cache=cache)
 
+    def profile(self):
+        self.print_implemented_on_child_classes()
+
     def read_tags_from_tags_file(self):
         from collections import OrderedDict
         if not os.path.exists(self.tags_file_name):
@@ -247,34 +248,16 @@ class PackageProxy(DirectoryProxy):
     def remove(self):
         result = DirectoryProxy.remove(self)
         if result:
-            line = 'package deleted.'
+            line = 'package removed.'
             self.proceed(line)
         
     def set_package_importable_name_interactively(self):
         getter = self.make_getter(where=self.where())
-        # TODO: implement getter.append_package_name
-        getter.prompts.append('package importable name')
-        getter.tests.append(iotools.is_underscore_delimited_lowercase_package_name)
-        getter.helps.append('must be underscore-delimited lowercase package name.')
+        geter.append_underscore_delimited_lowercase_package_name('package importable name')
         result = getter.run()
         if self.backtrack():
             return
-        self.package_importable_name = result
-
-    def set_package_spaced_name_interactively(self):
-        getter = self.make_getter(where=self.where())
-        # TODO: implement package spaced name
-        getter.prompts.append('package spaced name')
-        getter.tests.append(iotools.is_space_delimited_lowercase_string)
-        getter.helps.append('must be space-delimited lowercase string.')
-        result = getter.run()
-        if self.backtrack():
-            return
-        self.package_spaced_name = result
-
-    # TODO: rename without hardcoding
-    def unimport_baca_package(self):
-        self.remove_package_importable_name_from_sys_modules(self.studio_package_importable_name)
+        self.importable_name = result
 
     def unimport_package(self):
-        self.remove_package_importable_name_from_sys_modules(self.package_importable_name)
+        self.remove_package_importable_name_from_sys_modules(self.importable_name)

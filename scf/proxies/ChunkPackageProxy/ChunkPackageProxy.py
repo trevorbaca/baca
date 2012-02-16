@@ -12,7 +12,7 @@ class ChunkPackageProxy(PackageProxy):
     
     @property
     def breadcrumb(self):
-        return self.package_spaced_name
+        return self.human_readable_name
 
     ### READ / WRITE PUBLIC ATTRIBUTES ###
 
@@ -35,19 +35,11 @@ class ChunkPackageProxy(PackageProxy):
         elif result == 'n':
             self.initializer_file_proxy.view()
 
-    def make_chunk(self):
+    def make_asset(self):
         self.print_not_implemented()
 
-    def make_chunk_interactively(self, prompt=True):
+    def make_asset_interactively(self, prompt=True):
         self.print_not_implemented()
-        return
-        if self.package_spaced_name is None:
-            self.set_package_spaced_name_interactively()
-        if self.score_template is None:
-            self.set_score_template_interactively()
-        # TODO: create directory and do other stuff here
-        line = 'chunk created.'
-        self.proceed(line, prompt=prompt)
 
     def make_main_menu(self):
         menu, section = self.make_menu(where=self.where())
@@ -56,38 +48,16 @@ class ChunkPackageProxy(PackageProxy):
         section.append(('d', 'delete'))
         return menu
 
-    def run(self, user_input=None, clear=True, cache=False):
-        self.assign_user_input(user_input=user_input)
-        self.cache_breadcrumbs(cache=cache)
-        while True:
-            self.push_breadcrumb()
-            menu = self.make_main_menu()
-            result = menu.run(clear=clear)
-            if self.backtrack():
-                break
-            elif not result:
-                self.pop_breadcrumb()
-                continue
-            self.handle_main_menu_result(result)
-            if self.backtrack():
-                break
-            self.pop_breadcrumb()
-        self.pop_breadcrumb()
-        self.restore_breadcrumbs(cache=cache)
-
     def set_chunk_spaced_name_interactively(self, prompt=True):
         getter = self.make_getter(where=self.where())
-        # TODO: implement getter.append_space_delimited_lowercase_string
-        getter.prompts.append('chunk name')
-        getter.tests.append(iotools.is_space_delimited_lowercase_string)
-        getter.helps.append('must be space-delimited lowercase string.')
+        getter.append_spaced_delimited_lowercase_string('chunk name')
         result = getter.run()
         if self.backtrack():
             return
         package_short_name = result.replace(' ', '_')
-        package_importable_name = self.dot_join([self.package_importable_name, package_short_name])
+        package_importable_name = self.dot_join([self.importable_name, package_short_name])
         chunk_proxy = ChunkPackageProxy(package_importable_name)
-        chunk_proxy.make_chunk()
+        chunk_proxy.make_asset()
         line = 'chunk spaced name set.'
         self.proceed(line, prompt=prompt)
 

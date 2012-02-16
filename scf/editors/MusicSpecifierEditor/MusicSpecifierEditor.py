@@ -20,7 +20,7 @@ class MusicSpecifierEditor(InteractiveEditor):
 
     @property
     def breadcrumb(self):
-        return self.target_name or 'music specifier editor'
+        return self.target_name or self.human_readable_class_name
         
     @property
     def target_name(self):

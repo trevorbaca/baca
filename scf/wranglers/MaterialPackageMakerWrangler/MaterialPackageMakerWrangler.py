@@ -8,54 +8,85 @@ import os
 class MaterialPackageMakerWrangler(PackageWrangler):
 
     def __init__(self, session=None):
-        PackageWrangler.__init__(self, self.makers_package_importable_name, session=session)
+        PackageWrangler.__init__(self, 
+            score_external_asset_container_importable_names=[self.makers_package_importable_name], 
+            score_internal_asset_container_importable_name_infix=None,
+            session=session)
 
     ### READ-ONLY PUBLIC ATTRIBUTES ###
 
     @property
-    def breadcrumb(self):
-        return 'material proxies'
+    def base_class_name(self):
+        return self.dot_join(['baca.scf.makers', 'MaterialPackageMaker'])
 
     @property
-    def material_proxy_spaced_class_names(self):
-        result = []
-        for name in self.list_wrangled_package_short_names(head=self.studio_package_importable_name):
-            spaced_class_name = iotools.uppercamelcase_to_space_delimited_lowercase(name)
-            result.append(spaced_class_name)
-        result.remove('material package maker')
-        return result
+    def breadcrumb(self):
+        return 'material package makers'
 
     ### PUBLIC METHODS ###
 
-    def get_package_proxy(self, material_package_importable_name):
-        import baca
-        material_proxy = baca.scf.proxies.MaterialPackageProxy(material_package_importable_name, session=self.session)
-        material_package_maker_class_name = material_proxy.material_package_maker_class_name
+    def get_asset_proxy(self, package_importable_name):
+        from baca.scf.proxies.MaterialPackageProxy import MaterialPackageProxy
+        material_package_proxy = MaterialPackageProxy(package_importable_name, session=self.session)
+        material_package_maker_class_name = material_package_proxy.material_package_maker_class_name
         if material_package_maker_class_name is not None:
-            material_proxy_class = None
-            command = 'from baca.scf.makers import {} as material_proxy_class'
+            material_package_maker_class = None
+            command = 'from baca.scf.makers import {} as material_package_maker_class'
             command = command.format(material_package_maker_class_name)
             exec(command)
-            material_proxy = material_proxy_class(material_package_importable_name, session=self.session)
-        return material_proxy
+            material_package_proxy = material_package_maker_class(
+                package_importable_name, session=self.session)
+        return material_package_proxy
             
     def handle_main_menu_result(self, result):
         if result == 'new':
-            self.make_material_proxy_interactively()
+            self.make_asset_interactively()
         else:
             raise ValueError
 
-    def make_main_menu(self):
+    def list_score_external_asset_importable_names(self, head=None):
+        result = PackageWrangler.list_score_external_asset_importable_names(self, head=head)
+        if self.base_class_name in result:
+            result.remove(self.base_class_name)
+        return result
+
+    def list_score_internal_asset_container_importable_names(self, head=None):
+        return []
+
+    def list_asset_human_readable_names(self, head=None):
+        result = []
+        for path_name in self.list_asset_path_names(head=head):
+            path_name = path_name.rstrip(os.path.sep)
+            base_name = os.path.basename(path_name)
+            if base_name == 'MaterialPackageMaker':
+                continue
+            human_readable_name = iotools.uppercamelcase_to_space_delimited_lowercase(base_name)
+            result.append(human_readable_name)
+        return result
+
+    def make_visible_asset_menu_tokens(self, head=None):
+        keys = self.list_asset_importable_names(head=head)
+        bodies = self.list_asset_human_readable_names(head=head)
+        return zip(keys, bodies)
+        
+    def make_class_selection_menu(self, head=None):
+        menu, section = self.make_menu(where=self.where(), is_keyed=False, is_numbered=True)
+        section.tokens = self.make_visible_asset_menu_tokens(head=head)
+        section.return_value_attribute = 'key'
+        return menu
+
+    def make_main_menu(self, head=None):
         menu, section = self.make_menu(where=self.where(), is_numbered=True)
-        section.tokens = self.material_proxy_spaced_class_names
+        section.tokens = self.list_asset_human_readable_names(head=head)
         section = menu.make_section()
-        section.append(('new', 'make material_proxy'))
+        section.append(('new', 'new material package maker'))
         return menu
 
     # TODO: implement MaterialPackageProxyClassFile object to model and customize these settings
-    def make_material_proxy_class_file(self, material_proxy_name, generic_output_name):
+    def make_asset_class_file(self, package_short_name, generic_output_name):
         class_file_name = os.path.join(
-            self.toplevel_global_package_importable_name, material_proxy_name, material_proxy_name + '.py')
+            self.list_score_external_asset_container_importable_names()[0], 
+            package_short_name, package_short_name + '.py')
         class_file = file(class_file_name, 'w')
         lines = []
         lines.append('from baca.music.foo import foo')
@@ -65,7 +96,7 @@ class MaterialPackageMakerWrangler(PackageWrangler):
         lines.append('import baca')
         lines.append('')
         lines.append('')
-        lines.append('class {}(MaterialPackageMaker):'.format(material_proxy_name))
+        lines.append('class {}(MaterialPackageMaker):'.format(package_short_name))
         lines.append('')
         lines.append('    def __init__(self, package_importable_name=None, session=None):')
         lines.append('        MaterialPackageMaker.__init__(')
@@ -103,10 +134,11 @@ class MaterialPackageMakerWrangler(PackageWrangler):
         class_file.write('\n'.join(lines))
         class_file.close()
 
-    # TODO: change to boilerplate file stored in material_proxy package
-    def make_material_proxy_initializer(self, material_proxy_name):
+    # TODO: change to boilerplate file stored in material_package_maker package
+    def make_asset_initializer(self, package_short_name):
         initializer_file_name = os.path.join(
-            self.toplevel_global_package_importable_name, material_proxy_name, '__init__.py')
+            self.list_score_external_asset_container_importable_names()[0], 
+            package_short_name, '__init__.py')
         initializer = file(initializer_file_name, 'w')
         line = 'from abjad.tools.importtools._import_structured_package import _import_structured_package\n'
         initializer.write(line)
@@ -114,28 +146,25 @@ class MaterialPackageMakerWrangler(PackageWrangler):
         initializer.write("_import_structured_package(__path__[0], globals(), 'baca')\n")
         initializer.close() 
 
-    def make_material_proxy_interactively(self):
+    def make_asset_interactively(self):
         getter = self.make_getter(where=self.where())
-        getter.append_string('material proxy name')
-        material_proxy_name = getter.run()
+        getter.append_material_package_maker_class_name('material proxy name')
+        getter.append_space_delimited_lowercase_string('generic output product')
+        result = getter.run()
         if self.backtrack():
             return
-        assert iotools.is_uppercamelcase_string(material_proxy_name)
-        assert material_proxy_name.endswith('Maker')
-        getter = self.make_getter(where=self.where())
-        getter.append_string('generic output product')
-        generic_output_product = getter.run()
-        if self.backtrack():
-            return
-        material_proxy_directory = os.path.join(self.toplevel_global_package_importable_name, material_proxy_name)
-        os.mkdir(material_proxy_directory)
-        self.make_material_proxy_initializer(material_proxy_name)
-        self.make_material_proxy_class_file(material_proxy_name, generic_output_product)
-        self.make_material_proxy_stylesheet(material_proxy_name)
-
+        material_package_maker_class_name, generic_output_product_name = result
+        material_package_maker_directory = os.path.join(
+            self.list_score_external_asset_container_importable_names[0], 
+            material_package_maker_class_name)
+        os.mkdir(material_package_maker_directory)
+        self.make_asset_initializer(material_package_maker_class_name)
+        self.make_asset_class_file(
+            material_package_maker_class_name, generic_output_product_name)
+        self.make_asset_stylesheet(material_package_maker_class_name)
 
     # TODO: change to boilerplate file stored somewhere
-    def make_material_proxy_stylesheet(self, material_proxy_name):
+    def make_asset_stylesheet(self, package_short_name):
         stylesheet = lilypondfiletools.make_basic_lilypond_file()
         stylesheet.pop()
         stylesheet.file_initial_system_comments = []
@@ -146,51 +175,27 @@ class MaterialPackageMakerWrangler(PackageWrangler):
         stylesheet.paper_block.makup_system_spacing = layouttools.make_spacing_vector(0, 0, 12, 0)
         stylesheet.paper_block.system_system_spacing = layouttools.make_spacing_vector(0, 0, 10, 0)
         stylesheet_file_name = os.path.join(
-            self.toplevel_global_package_importable_name, material_proxy_name, 'stylesheet.ly')
+            self.list_score_external_asset_container_importable_names()[0], 
+            package_short_name, 'stylesheet.ly')
         stylesheet_file_pointer = file(stylesheet_file_name, 'w')
         stylesheet_file_pointer.write(stylesheet.format)
         stylesheet_file_pointer.close()
-        
-    def run(self, user_input=None, clear=True, cache=False):
-        self.assign_user_input(user_input=user_input)
-        self.cache_breadcrumbs(cache=cache)
-        while True:
-            self.push_breadcrumb()
-            menu = self.make_main_menu()
-            result = menu.run(clear=clear)
-            if self.backtrack():
-                break
-            elif not result:
-                self.pop_breadcrumb()
-                continue
-            self.handle_main_menu_result(result)
-            if self.backtrack():
-                break
-            self.pop_breadcrumb()
-        self.pop_breadcrumb()
-        self.restore_breadcrumbs(cache=cache)
 
     # TODO: write test
-    def select_material_proxy_class_name_interactively(self, clear=True, cache=False):
+    def select_asset_importable_name_interactively(
+        self, clear=True, cache=False, head=None, user_input=None):
         self.cache_breadcrumbs(cache=cache)
-        menu, section = self.make_menu(where=self.where(), is_numbered=True)
-        section.tokens = self.material_proxy_spaced_class_names
         while True:
             self.push_breadcrumb('select material proxy:')
+            menu = self.make_class_selection_menu(head=head)
             result = menu.run(clear=clear)
             if self.backtrack():
-                self.pop_breadcrumb()
-                self.restore_breadcrumbs(cache=cache)
-                return
+                break
             elif not result:
                 self.pop_breadcrumb()
                 continue 
             else:
-                self.pop_breadcrumb()
                 break
-        material_proxy_class_name = iotools.space_delimited_lowercase_to_uppercamelcase(result) 
+        self.pop_breadcrumb()
         self.restore_breadcrumbs(cache=cache)
-        return material_proxy_class_name
-
-    def unimport_makers_package(self):
-        self.remove_package_importable_name_from_sys_modules(self.toplevel_global_package_importable_name)
+        return result

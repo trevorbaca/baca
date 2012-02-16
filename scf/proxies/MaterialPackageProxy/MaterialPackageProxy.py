@@ -9,7 +9,7 @@ from baca.scf.wranglers.MaterialPackageMakerWrangler import MaterialPackageMaker
 from baca.scf.proxies.OutputMaterialModuleProxy import OutputMaterialModuleProxy
 from baca.scf.proxies.PackageProxy import PackageProxy
 from baca.scf.proxies.StylesheetFileProxy import StylesheetFileProxy
-from baca.scf.wranglers.StylesheetWrangler import StylesheetWrangler
+from baca.scf.wranglers.StylesheetFileWrangler import StylesheetFileWrangler
 from baca.scf.proxies.UserInputModuleProxy import UserInputModuleProxy
 from baca.scf.helpers import safe_import
 from baca.scf import helpers
@@ -27,7 +27,15 @@ class MaterialPackageProxy(PackageProxy):
 
     @property
     def breadcrumb(self):
-        return self.package_spaced_name
+        return self.human_readable_name
+
+    @property
+    def current_materials_directory_name(self):
+        return self.package_importable_name_to_path_name(self.current_materials_package_importable_name)
+
+    @property
+    def current_materials_package_importable_name(self):
+        return self.dot_join(self.importable_name.split('.')[:-1])
 
     @property
     def has_complete_user_input_wrapper_in_memory(self):
@@ -182,7 +190,7 @@ class MaterialPackageProxy(PackageProxy):
     @property
     def illustration_builder_module_importable_name(self):
         if self.should_have_illustration_builder_module:
-            return self.dot_join([self.package_importable_name, 'illustration_builder'])
+            return self.dot_join([self.importable_name, 'illustration_builder'])
 
     @property
     def illustration_builder_module_proxy(self):
@@ -258,7 +266,7 @@ class MaterialPackageProxy(PackageProxy):
     @property
     def material_definition_module_importable_name(self):
         if self.should_have_material_definition_module:
-            return self.dot_join([self.package_importable_name, 'material_definition'])
+            return self.dot_join([self.importable_name, 'material_definition'])
 
     @property
     def material_definition_module_proxy(self):
@@ -269,9 +277,9 @@ class MaterialPackageProxy(PackageProxy):
 
     @property
     def material_package_directory(self):
-        if self.materials_directory_name:
+        if self.current_materials_directory_name:
             if self.material_package_short_name:
-                return os.path.join(self.materials_directory_name, self.material_package_short_name)
+                return os.path.join(self.current_materials_directory_name, self.material_package_short_name)
 
     @property
     def material_package_maker(self):
@@ -295,15 +303,7 @@ class MaterialPackageProxy(PackageProxy):
 
     @property
     def material_underscored_name(self):
-        return self.package_short_name
-
-    @property
-    def materials_directory_name(self):
-        return self.package_importable_name_to_directory_name(self.materials_package_importable_name)
-
-    @property
-    def materials_package_importable_name(self):
-        return self.dot_join(self.package_importable_name.split('.')[:-1])
+        return self.short_name
 
     @property
     def output_material(self):
@@ -346,7 +346,7 @@ class MaterialPackageProxy(PackageProxy):
     @property
     def output_material_module_importable_name(self):
         if self.should_have_output_material_module:
-            return '{}.output_material'.format(self.package_importable_name)
+            return '{}.output_material'.format(self.importable_name)
 
     @property
     def output_material_module_proxy(self):
@@ -421,7 +421,7 @@ class MaterialPackageProxy(PackageProxy):
     @property
     def user_input_module_importable_name(self):
         if self.should_have_user_input_module:
-            return self.dot_join([self.package_importable_name, 'user_input'])
+            return self.dot_join([self.importable_name, 'user_input'])
 
     @property
     def user_input_module_proxy(self):
@@ -722,8 +722,8 @@ class MaterialPackageProxy(PackageProxy):
         self.make_main_menu_section_for_illustration_builder(menu, hidden_section)
 
     def manage_stylesheets(self):
-        stylesheet_wrangler = StylesheetWrangler(session=self.session)
-        stylesheet_wrangler.run()
+        stylesheet_file_wrangler = StylesheetFileWrangler(session=self.session)
+        stylesheet_file_wrangler.run()
 
     def overwrite_output_material_module(self):
         file(self.output_material_module_file_name, 'w').write('')
@@ -806,25 +806,6 @@ class MaterialPackageProxy(PackageProxy):
         else:
             raise NotImplementedError('commit to repository and then rename.')
 
-    def run(self, user_input=None, clear=True, cache=False):
-        self.assign_user_input(user_input=user_input)
-        self.cache_breadcrumbs(cache=cache)
-        while True:
-            self.push_breadcrumb()
-            menu = self.make_main_menu()
-            result = menu.run(clear=clear)
-            if self.backtrack():
-                break
-            elif not result:
-                self.pop_breadcrumb()
-                continue
-            self.handle_main_menu_result(result)
-            if self.backtrack():
-                break
-            self.pop_breadcrumb()
-        self.pop_breadcrumb()
-        self.restore_breadcrumbs(cache=cache)
-
     def select_material_package_maker_interactively(self, prompt=True):
         material_proxy_wrangler = MaterialPackageMakerWrangler(session=self.session)
         self.push_backtrack()
@@ -837,9 +818,9 @@ class MaterialPackageProxy(PackageProxy):
         self.proceed(line, prompt=prompt)
 
     def select_stylesheet_interactively(self, prompt=True):
-        stylesheet_wrangler = StylesheetWrangler(session=self.session)
+        stylesheet_file_wrangler = StylesheetFileWrangler(session=self.session)
         self.push_backtrack()
-        stylesheet_file_name = stylesheet_wrangler.select_stylesheet_file_name_interactively()
+        stylesheet_file_name = stylesheet_file_wrangler.select_stylesheet_file_name_interactively()
         self.pop_backtrack()
         if self.backtrack():
             return

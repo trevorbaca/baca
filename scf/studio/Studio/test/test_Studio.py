@@ -8,7 +8,7 @@ def test_Studio_01():
     studio = baca.scf.studio.Studio()
 
     assert studio.class_name == 'Studio'
-    assert isinstance(studio.global_proxy, baca.scf.proxies.HomePackageProxy)
+    assert isinstance(studio.home_package_proxy, baca.scf.proxies.HomePackageProxy)
     assert isinstance(studio.score_package_wrangler, baca.scf.wranglers.ScorePackageWrangler)
     assert studio.source_file_name == \
         '/Users/trevorbaca/Documents/other/baca/scf/studio/Studio/Studio.py'
@@ -197,7 +197,7 @@ def test_Studio_12():
 
     studio = baca.scf.studio.Studio()
 
-    assert studio.session is studio.global_proxy.session
+    assert studio.session is studio.home_package_proxy.session
     assert studio.session is studio.score_package_wrangler.session
 
 

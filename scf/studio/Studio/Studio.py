@@ -2,8 +2,13 @@
 from abjad.tools import iotools
 from abjad.tools import mathtools
 from baca.scf.core.SCFObject import SCFObject
+from baca.scf.wranglers.ChunkPackageWrangler import ChunkPackageWrangler
 from baca.scf.proxies.HomePackageProxy import HomePackageProxy
+from baca.scf.wranglers.MaterialPackageMakerWrangler import MaterialPackageMakerWrangler
+from baca.scf.wranglers.MaterialPackageWrangler import MaterialPackageWrangler
+from baca.scf.wranglers.MusicSpecifierModuleWrangler import MusicSpecifierModuleWrangler
 from baca.scf.wranglers.ScorePackageWrangler import ScorePackageWrangler
+from baca.scf.wranglers.StylesheetFileWrangler import StylesheetFileWrangler
 import subprocess
 
 
@@ -11,8 +16,13 @@ class Studio(SCFObject):
 
     def __init__(self, session=None):
         SCFObject.__init__(self, session=session)
-        self._global_proxy = HomePackageProxy(session=self.session)
+        self._chunk_package_wrangler = ChunkPackageWrangler(session=self.session)
+        self._home_package_proxy = HomePackageProxy(session=self.session)
+        self._material_package_maker_wrangler = MaterialPackageMakerWrangler(session=self.session)
+        self._material_package_wrangler = MaterialPackageWrangler(session=self.session)
+        self._music_specifier_module_wrangler = MusicSpecifierModuleWrangler(session=self.session)
         self._score_package_wrangler = ScorePackageWrangler(session=self.session)
+        self._stylesheet_file_wrangler = StylesheetFileWrangler(session=self.session)
 
     ### READ-ONLY PUBLIC ATTRIBUTES ###
 
@@ -21,8 +31,24 @@ class Studio(SCFObject):
         return 'studio'
 
     @property
-    def global_proxy(self):
-        return self._global_proxy
+    def chunk_package_wrangler(self):
+        return self._chunk_package_wrangler
+
+    @property
+    def home_package_proxy(self):
+        return self._home_package_proxy
+
+    @property
+    def material_package_maker_wrangler(self):
+        return self._material_package_maker_wrangler
+
+    @property
+    def material_package_wrangler(self):
+        return self._material_package_wrangler
+
+    @property
+    def music_specifier_module_wrangler(self):
+        return self._music_specifier_module_wrangler
 
     @property
     def score_status_string(self):
@@ -32,10 +58,14 @@ class Studio(SCFObject):
     def score_package_wrangler(self):
         return self._score_package_wrangler
 
+    @property
+    def stylesheet_file_wrangler(self):
+        return self._stylesheet_file_wrangler
+
     ### PUBLIC METHODS ###
 
     def edit_score_interactively(self, score_package_importable_name):
-        score_package_proxy = self.score_package_wrangler.get_package_proxy(score_package_importable_name)
+        score_package_proxy = self.score_package_wrangler.get_asset_proxy(score_package_importable_name)
         score_package_proxy.session.current_score_package_short_name = score_package_importable_name
         # TODO: use cache keyword
         breadcrumbs = self.breadcrumb_stack[:]
@@ -45,7 +75,7 @@ class Studio(SCFObject):
         self.session.current_score_package_name = None
 
     def get_next_score_package_short_name(self):
-        score_package_short_names = self.score_package_wrangler.score_package_short_names_to_display
+        score_package_short_names = self.score_package_wrangler.list_visible_asset_human_readable_names()
         if self.session.current_score_package_short_name is None:
             return score_package_short_names[0]
         index = score_package_short_names.index(self.session.current_score_package_short_name)
@@ -70,7 +100,7 @@ class Studio(SCFObject):
                 return package_root_name
 
     def get_prev_score_package_short_name(self):
-        score_package_short_names = self.score_package_wrangler.score_package_short_names_to_display
+        score_package_short_names = self.score_package_wrangler.list_visible_asset_human_readable_names()
         if self.session.current_score_package_short_name is None:
             return score_package_short_names[-1]
         index = score_package_short_names.index(self.session.current_score_package_short_name)
@@ -81,24 +111,26 @@ class Studio(SCFObject):
         if not isinstance(result, str):
             raise TypeError('result must be string.')
         if result == 'active':
-            self.session.scores_to_show = 'active'
+            self.session.show_active_scores()
         elif result == 'all':
-            self.session.scores_to_show = 'all'
+            self.session.show_all_scores()
         elif result == 'k':
             self.print_not_implemented()
         elif result == 'm':
             breadcrumb = self.pop_breadcrumb()
-            self.global_proxy.material_package_wrangler.run(head=self.studio_package_importable_name)
+            self.material_package_wrangler.run(head=self.home_package_importable_name)
             self.push_breadcrumb(breadcrumb)
         elif result == 'new':
             breadcrumb = self.pop_breadcrumb()
-            self.score_package_wrangler.make_score_package_interactively()
+            self.score_package_wrangler.make_asset_interactively()
             self.push_breadcrumb(breadcrumb)
         elif result == 'mb':
-            self.session.scores_to_show = 'mothballed'
+            self.session.show_mothballed_scores()
         elif result == 'svn':
             self.manage_svn()
-        elif result in self.score_package_wrangler.score_package_short_names_to_display:
+        elif result == 'profile':
+            self.score_package_wrangler.profile_visible_assets()
+        elif result in self.score_package_wrangler.list_visible_asset_human_readable_names():
             self.edit_score_interactively(result)
     
     def handle_svn_menu_result(self, result):
@@ -106,26 +138,26 @@ class Studio(SCFObject):
         '''
         this_result = False
         if result == 'add':
-            self.global_proxy.svn_add()
+            self.home_package_proxy.svn_add()
         elif result == 'add_scores':
             self.score_package_wrangler.svn_add()
         elif result == 'ci':
-            self.global_proxy.svn_ci()
+            self.home_package_proxy.svn_ci()
             return True
         elif result == 'ci_scores':
             self.score_package_wrangler.svn_ci()
         elif result == 'pytest':
-            self.global_proxy.run_py_test()
+            self.home_package_proxy.run_py_test()
         elif result == 'pytest_scores':
             self.score_package_wrangler.run_py_test()
         elif result == 'pytest_all':
             self.run_py_test_all()
         elif result == 'st':
-            self.global_proxy.svn_st()
+            self.home_package_proxy.svn_st()
         elif result == 'st_scores':
             self.score_package_wrangler.svn_st()
         elif result == 'up':
-            self.global_proxy.svn_up()
+            self.home_package_proxy.svn_up()
             return True
         elif result == 'up_scores':
             self.score_package_wrangler.svn_up()
@@ -138,21 +170,17 @@ class Studio(SCFObject):
         section.append(('m', 'materials'))
         section.append(('k', 'sketches'))
         section.append(('new', 'new score'))
-        section = menu.make_section(is_hidden=True)
-        section.append(('svn', 'work with repository'))
-        section.append(('active', 'show active scores only'))
-        section.append(('all', 'show all scores'))
-        section.append(('mb', 'show mothballed scores only'))
+        hidden_section = menu.make_section(is_hidden=True)
+        hidden_section.append(('svn', 'work with repository'))
+        hidden_section.append(('active', 'show active scores only'))
+        hidden_section.append(('all', 'show all scores'))
+        hidden_section.append(('mb', 'show mothballed scores only'))
+        hidden_section.append(('profile', 'profile packages'))
         return menu
 
     def make_score_selection_menu(self):
         menu, section = self.make_menu(where=self.where(), is_numbered=True, is_keyed=False)
-        score_package_short_names = self.score_package_wrangler.score_package_short_names_to_display
-        score_titles = self.score_package_wrangler.score_titles_with_years
-        tokens = zip(score_package_short_names, score_titles)
-        tmp = iotools.strip_diacritics_from_binary_string
-        tokens.sort(lambda x, y: cmp(tmp(x[1]), tmp(y[1])))
-        section.tokens = tokens
+        section.tokens = self.score_package_wrangler.make_visible_asset_menu_tokens()
         return menu
 
     def make_svn_menu(self):
@@ -202,7 +230,7 @@ class Studio(SCFObject):
                 result = menu.run(clear=clear)
             else:
                 run_main_menu = True
-            if self.session.is_complete:
+            if self.backtrack(source='studio'):
                 self.pop_breadcrumb()
                 self.session.clean_up()
                 break
@@ -214,32 +242,16 @@ class Studio(SCFObject):
                 self.session.is_navigating_to_prev_score = False
                 self.session.is_backtracking_to_studio = False
                 result = self.get_prev_score_package_short_name()
-            elif self.session.is_backtracking_to_studio:
-                self.session.is_backtracking_to_studio = False
-                self.pop_breadcrumb()
-                continue
-            elif self.session.is_backtracking_to_score:
-                self.session.is_backtracking_to_score = False
-                self.pop_breadcrumb()
-                continue
             elif not result:
                 self.pop_breadcrumb()
                 continue
             self.handle_main_menu_result(result)
-            if self.session.is_complete:
+            if self.backtrack(source='studio'):
                 self.pop_breadcrumb()
                 self.session.clean_up()
                 break
             elif self.session.is_navigating_to_sibling_score:
                 run_main_menu = False
-            elif self.session.is_backtracking_to_studio:
-                self.session.is_backtracking_to_studio = False
-                self.pop_breadcrumb()
-                continue
-            elif self.session.is_backtracking_to_score:
-                self.session.is_backtracking_to_score = False
-                self.pop_breadcrumb()
-                continue
             self.pop_breadcrumb()
         self.pop_breadcrumb()
         self.restore_breadcrumbs(cache=cache)

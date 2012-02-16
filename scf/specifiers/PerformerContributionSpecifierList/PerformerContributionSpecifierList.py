@@ -3,10 +3,17 @@ from baca.scf.specifiers.Specifier import Specifier
 
 class PerformerContributionSpecifierList(Specifier, list):
     
+    def __init__(self, *args):
+        Specifier.__init__(self)
+        list.__init__(self, *args)
+
     ### OVERLOADS ###
     
+    def __eq__(self, other):
+        return list.__eq__(self, other)
+
     def __repr__(self):
-        return '{}({})'.format(type(self).__name__, len(self))
+        return '{}({})'.format(self.class_name, len(self))
 
     ### READ-ONLY ATTRIBUTES ###
 

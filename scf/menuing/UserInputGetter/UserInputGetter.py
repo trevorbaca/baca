@@ -110,6 +110,11 @@ class UserInputGetter(MenuSectionAggregator):
         self.execs[-1] = execs
         self.tests.append(predicates.is_markup)
 
+    def append_material_package_maker_class_name(self, spaced_attribute_name, default=None):
+        message = 'value for {!r} must be uppercamelcase string ending in -Maker.'
+        self.append_something(spaced_attribute_name, message, default=default)
+        self.tests.append(lambda x: iotools.is_uppercamelcase_string(x) and x.endswith('Maker'))
+
     def append_named_chromatic_pitch(self, spaced_attribute_name, default=None):
         message = 'value for {!r} must be named chromatic pitch.'
         self.append_something(spaced_attribute_name, message, default=default)

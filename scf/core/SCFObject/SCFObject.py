@@ -23,8 +23,12 @@ class SCFObject(object):
     ### READ-ONLY PUBLIC ATTRIBUTES ###
 
     @property
-    def assets_directory(self):
-        return os.path.join(self.scf_root_directory, 'assets')
+    def backtracking_source(self):
+        return
+
+    @property
+    def boilerplate_directory(self):
+        return os.path.join(self.scf_root_directory, 'boilerplate')
 
     @property
     def breadcrumb(self):
@@ -43,6 +47,9 @@ class SCFObject(object):
         return 5
 
     @property
+    def human_readable_class_name(self): return self.change_string_to_human_readable_string(self.class_name)
+
+    @property
     def makers_directory_name(self):
         return os.path.join(self.scf_root_directory, 'makers')
 
@@ -52,27 +59,35 @@ class SCFObject(object):
 
     @property
     def scf_package_importable_name(self):
-        return self.dot_join([self.studio_package_importable_name, 'scf'])
+        return self.dot_join([self.home_package_importable_name, 'scf'])
 
     @property
     def scf_root_directory(self):
-        return self.package_importable_name_to_directory_name(self.scf_package_importable_name)
+        return self.package_importable_name_to_path_name(self.scf_package_importable_name)
 
     @property
-    def score_materials_package_importable_name_body(self):
+    def score_internal_chunks_package_importable_name_infix(self):
+        return 'mus.chunks'
+
+    @property
+    def score_internal_materials_package_importable_name_infix(self):
         return 'mus.materials'
 
     @property
-    def score_specifiers_package_importable_name_body(self):
+    def score_internal_specifiers_package_importable_name_infix(self):
         return 'mus.specifiers'
+
+    @property
+    def scores_directory_name(self):
+        return os.environ.get('SCORES')
 
     @property
     def session(self):
         return self._session
 
     @property
-    def sketches_package_importable_name(self):
-        return self.dot_join([self.studio_package_importable_name, 'sketches'])
+    def score_external_chunks_package_importable_name(self):
+        return self.dot_join([self.home_package_importable_name, 'sketches'])
 
     @property
     def source_file_name(self):
@@ -86,18 +101,22 @@ class SCFObject(object):
 
     @property
     def studio_directory_name(self):
-        return self.package_importable_name_to_directory_name(self.studio_package_importable_name)
+        return self.package_importable_name_to_path_name(self.home_package_importable_name)
 
     @property
-    def studio_materials_package_importable_name(self):
-        return self.dot_join([self.studio_package_importable_name, 'materials'])
+    def score_external_materials_package_importable_name(self):
+        return self.dot_join([self.home_package_importable_name, 'materials'])
 
     @property
-    def studio_specifiers_package_importable_name(self):
-        return self.dot_join([self.studio_package_importable_name, 'specifiers'])
+    def score_external_specifiers_package_importable_name(self):
+        return self.dot_join([self.home_package_importable_name, 'specifiers'])
 
     @property
-    def studio_package_importable_name(self):
+    def home_package_path_name(self):
+        return os.environ.get('BACA')
+
+    @property
+    def home_package_importable_name(self):
         return 'baca'
 
     @property
@@ -126,13 +145,22 @@ class SCFObject(object):
         if user_input is not None:
             self.session.user_input = user_input
 
-    def backtrack(self):
-        return self.session.backtrack()
+    def backtrack(self, source=None):
+        return self.session.backtrack(source=source)
 
     def cache_breadcrumbs(self, cache=False):
         if cache:
             self.session.breadcrumb_cache_stack.append(self.session.breadcrumb_stack[:])
             self.session._breadcrumb_stack[:] = []
+
+    def change_string_to_human_readable_string(self, string):
+        assert isinstance(string, str)
+        if not string:
+            return string
+        elif string[0].isupper():
+            return iotools.uppercamelcase_to_space_delimited_lowercase(string)
+        else:
+            return string.replace('_', ' ')
 
     def conditionally_add_terminal_newlines(self, lines):
         terminated_lines = []
@@ -146,6 +174,19 @@ class SCFObject(object):
     def conditionally_clear_terminal(self):
         if self.session.is_displayable:
             iotools.clear_terminal()
+
+    # TODO: write test
+    def conditionally_make_empty_package(self, package_importable_name):
+        if package_importable_name is None:
+            return
+        package_directory_name = self.package_importable_name_to_path_name(
+            package_importable_name)
+        if not os.path.exists(package_directory_name):
+            os.mkdir(package_directory_name)
+            initializer_file_name = os.path.join(package_directory_name, '__init__.py')
+            file_reference = file(initializer_file_name, 'w')
+            file_reference.write('')
+            file_reference.close()
 
     def confirm(self, prompt_string='ok', include_chevron=False):
         getter = self.make_getter(where=self.where())
@@ -219,6 +260,16 @@ class SCFObject(object):
         finally:
             readline.set_startup_hook()
 
+    def list_score_package_short_names(self, head=None):
+        result = []
+        for name in os.listdir(self.scores_directory_name):
+            if name[0].isalpha():
+                if head and name == head:
+                    return [name]
+                elif not head:
+                    result.append(name)
+        return result
+
     def make_getter(self, where=None):
         import baca
         return baca.scf.menuing.UserInputGetter(where=where, session=self.session)
@@ -233,25 +284,45 @@ class SCFObject(object):
             is_ranged=is_ranged)
         return menu, section
 
-    def module_importable_name_to_full_file_name(self, module_importable_name):
-        full_file_name = self.package_importable_name_to_directory_name(module_importable_name) + '.py'
-        return full_file_name
+    def module_importable_name_to_path_name(self, module_importable_name):
+        path_name = self.package_importable_name_to_path_name(module_importable_name) + '.py'
+        return path_name
 
     def package_exists(self, package_importable_name):
         assert isinstance(package_importable_name, str)
-        directory_name = self.package_importable_name_to_directory_name(package_importable_name)
+        directory_name = self.package_importable_name_to_path_name(package_importable_name)
         return os.path.exists(directory_name)
 
-    def package_importable_name_to_directory_name(self, package_importable_name):
+    def package_importable_name_to_path_name(self, package_importable_name):
         if package_importable_name is None:
             return
         package_importable_name_parts = package_importable_name.split('.')
-        if package_importable_name_parts[0] == self.studio_package_importable_name:
+        if package_importable_name_parts[0] == self.home_package_importable_name:
             directory_parts = [os.environ.get('BACA')] + package_importable_name_parts[1:]
         else:
-            directory_parts = [os.environ.get('SCORES')] + package_importable_name_parts[:]
+            directory_parts = [self.scores_directory_name] + package_importable_name_parts[:]
         directory = os.path.join(*directory_parts)
         return directory
+    
+    def path_name_to_human_readable_base_name(self, path_name):
+        path_name = path_name.rstrip(os.path.sep)
+        base_name = os.path.basename(path_name)
+        base_name = self.strip_extension_from_base_name(base_name)
+        return self.change_string_to_human_readable_string(base_name)
+
+    def path_name_to_package_importable_name(self, path_name):
+        if path_name is None:
+            return
+        path_name = path_name.rstrip(os.path.sep)
+        if path_name.startswith(self.home_package_path_name):
+            prefix_length = len(os.path.dirname(self.home_package_path_name)) + 1
+        elif path_name.startswith(self.scores_directory_name):
+            prefix_length = len(self.scores_directory_name) + 1
+        else:
+            return
+        package_importable_name = path_name[prefix_length:]
+        package_importable_name = package_importable_name.replace(os.path.sep, '.')
+        return package_importable_name
 
     def pop_backtrack(self):
         return self.session.backtracking_stack.pop()
@@ -283,16 +354,16 @@ class SCFObject(object):
             rest_parts = user_input[i+1:]
             user_response = ' '.join(first_parts)
             user_input = ' '.join(rest_parts)
-        #user_response = user_response.replace('_', ' ')
         user_response = user_response.replace('~', ' ')
         self.session.user_input = user_input
         return user_response
 
+    def print_implemented_on_child_classes(self):
+        self.display(['method implemented on child classes.', ''])
+        self.proceed()
+
     def print_not_implemented(self):
-        lines = []
-        lines.append('not yet implemented.')
-        lines.append('')
-        self.display(lines)
+        self.display(['not yet implemented', ''])
         self.proceed()
 
     def proceed(self, lines=None, prompt=True):
@@ -337,8 +408,12 @@ class SCFObject(object):
 
     def restore_breadcrumbs(self, cache=False):
         if cache:
-            #self.session._breadcrumb_stack[:] = self.session.cached_breadcrumbs[:]
             self.session._breadcrumb_stack[:] = self.session.breadcrumb_cache_stack.pop()
+
+    def strip_extension_from_base_name(self, base_name):
+        if '.' in base_name:
+            return base_name[:base_name.rindex('.')]
+        return base_name
 
     def where(self):
         return inspect.stack()[1]

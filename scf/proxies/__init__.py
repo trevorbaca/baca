@@ -1,3 +1,4 @@
+from AssetProxy import AssetProxy
 from BasicModuleProxy import BasicModuleProxy
 from ChunkPackageProxy import ChunkPackageProxy
 from DirectoryProxy import DirectoryProxy

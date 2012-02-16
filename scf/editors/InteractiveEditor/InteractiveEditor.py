@@ -16,10 +16,14 @@ class InteractiveEditor(SCFObject):
             summary = ''
         else:
             summary = 'target={!r}'.format(self.target)
-        return '{}({})'.format(type(self).__name__, summary)
+        return '{}({})'.format(self.class_name, summary)
 
     ### READ-ONLY PUBLIC ATTRIBUTES ###
     
+    @property
+    def has_target(self):
+        return self.target is not None
+
     @property
     def target_attribute_tokens(self):
         if hasattr(self, 'target_manifest'):
@@ -93,16 +97,17 @@ class InteractiveEditor(SCFObject):
 
     def make_target_attribute_tokens_from_target_manifest(self):
         result = []
-        for attribute_detail in self.target_manifest.attribute_details:
-            menu_key = attribute_detail.menu_key
-            target_attribute_name = attribute_detail.name
-            menu_body = target_attribute_name.replace('_', ' ')
-            attribute_value = getattr(self.target, target_attribute_name)
-            if hasattr(attribute_value, '__len__') and not len(attribute_value):
-                attribute_value = None
-            existing_value = repr(attribute_value)
-            token = (menu_key, menu_body, existing_value)
-            result.append(token)
+        if self.target:
+            for attribute_detail in self.target_manifest.attribute_details:
+                menu_key = attribute_detail.menu_key
+                target_attribute_name = attribute_detail.name
+                menu_body = target_attribute_name.replace('_', ' ')
+                attribute_value = getattr(self.target, target_attribute_name)
+                if hasattr(attribute_value, '__len__') and not len(attribute_value):
+                    attribute_value = None
+                existing_value = repr(attribute_value)
+                token = (menu_key, menu_body, existing_value)
+                result.append(token)
         return result
 
     def menu_key_to_existing_value(self, menu_key):

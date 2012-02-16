@@ -1,13 +1,13 @@
-from baca.scf.core.SCFObject import SCFObject
+from baca.scf.proxies.AssetProxy import AssetProxy
 import os
 import subprocess
 
 
-class DirectoryProxy(SCFObject):
+class DirectoryProxy(AssetProxy):
 
     def __init__(self, directory_name, session=None):
         assert isinstance(directory_name, (str, type(None)))
-        SCFObject.__init__(self, session=session)
+        AssetProxy.__init__(self, session=session)
         self._directory_name = directory_name
 
     ### OVERLOADS ###
@@ -30,8 +30,8 @@ class DirectoryProxy(SCFObject):
     def directory_contents(self):
         for file_name in os.listdir(self.directory_name):
             if file_name.endswith('.pyc'):
-                full_file_name = os.path.join(self.directory_name, file_name)
-                os.remove(full_file_name)
+                path_name = os.path.join(self.directory_name, file_name)
+                os.remove(path_name)
         return os.listdir(self.directory_name)
 
     @property
@@ -49,6 +49,14 @@ class DirectoryProxy(SCFObject):
             return False
         else:
             return True
+
+    @property
+    def path_name(self):
+        return self.directory_name
+
+    @property
+    def svn_add_command(self):
+        return 'cd {} && svn-add-all'.format(self.directory_name)
     
     ### PUBLIC METHODS ###
 
@@ -119,48 +127,3 @@ class DirectoryProxy(SCFObject):
             self.display(lines)
         line = 'tests run.'
         self.proceed(line, prompt=prompt)
-
-    def svn_add(self, prompt=True):
-        proc = subprocess.Popen('svn-add-all', shell=True, stdout=subprocess.PIPE)
-        lines = [line.strip() for line in proc.stdout.readlines()]
-        if lines:
-            self.display(lines)
-        self.proceed(prompt=prompt)
- 
-    def svn_ci(self, commit_message=None, prompt=True):
-        if commit_message is None:
-            getter = self.make_getter(where=self.where())
-            getter.append_string('commit message')
-            commit_message = getter.run()
-            if self.backtrack():
-                return
-            line = 'commit message will be: "{}"\n'.format(commit_message)
-            self.display(line)
-            if not self.confirm():
-                return
-        lines = []
-        lines.append('')
-        lines.append(self.directory_name)
-        command = 'svn commit -m "{}" {}'.format(commit_message, self.directory_name)
-        proc = subprocess.Popen(command, shell=True, stdout=subprocess.PIPE)
-        lines.extend([line.strip() for line in proc.stdout.readlines()])
-        self.display(lines)
-        self.proceed(prompt=prompt)
-
-    def svn_st(self, prompt=True):
-        line = self.directory_name
-        self.display(line)
-        command = 'svn st -u {}'.format(self.directory_name)
-        proc = subprocess.Popen(command, shell=True, stdout=subprocess.PIPE)
-        lines = [line.strip() for line in proc.stdout.readlines()]
-        self.display(lines)
-        self.proceed(prompt=prompt)
-
-    def svn_up(self, prompt=True):
-        line = self.directory_name
-        self.display(line)
-        command = 'svn up {}'.format(self.directory_name)
-        proc = subprocess.Popen(command, shell=True, stdout=subprocess.PIPE)
-        lines = [line.strip() for line in proc.stdout.readlines()]
-        self.display(lines)
-        self.proceed(prompt=prompt)
