@@ -1,4 +1,4 @@
-from baca.scf.AttributeDetail import AttributeDetail
+from baca.scf.editors.AttributeDetail import AttributeDetail
 
 
 class TargetManifest(object):

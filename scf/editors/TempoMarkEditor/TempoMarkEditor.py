@@ -1,7 +1,7 @@
 from abjad.tools import contexttools
 from abjad.tools import durationtools
 from baca.scf.editors.InteractiveEditor import InteractiveEditor
-from baca.scf.TargetManifest import TargetManifest
+from baca.scf.editors.TargetManifest import TargetManifest
 from baca.scf import getters
 
 

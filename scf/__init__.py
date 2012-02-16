@@ -20,7 +20,6 @@ from ModuleProxy import ModuleProxy
 from MusicSpecifierModuleProxy import MusicSpecifierModuleProxy
 from MusicSpecifierModuleProxyWrangler import MusicSpecifierModuleProxyWrangler
 from MusPackageProxy import MusPackageProxy
-from TargetManifest import TargetManifest
 from OutputMaterialModuleProxy import OutputMaterialModuleProxy
 from PackageWrangler import PackageWrangler
 from PackageProxy import PackageProxy

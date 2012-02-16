@@ -2,7 +2,7 @@ from baca.scf.editors.InteractiveEditor import InteractiveEditor
 from baca.scf.editors.PerformerContributionSpecifierListEditor import PerformerContributionSpecifierListEditor
 from baca.scf.editors.TempoMarkEditor import TempoMarkEditor
 from baca.scf.specifiers.MusicSpecifier import MusicSpecifier
-from baca.scf.TargetManifest import TargetManifest
+from baca.scf.editors.TargetManifest import TargetManifest
 from baca.scf import getters
 from baca.scf import predicates
 
