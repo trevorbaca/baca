@@ -2,8 +2,8 @@
 from abjad.tools import iotools
 from abjad.tools import mathtools
 from baca.scf.SCFObject import SCFObject
-from baca.scf.HomePackageProxy import HomePackageProxy
-from baca.scf.ScorePackageWrangler import ScorePackageWrangler
+from baca.scf.proxies.HomePackageProxy import HomePackageProxy
+from baca.scf.wranglers.ScorePackageWrangler import ScorePackageWrangler
 import subprocess
 
 

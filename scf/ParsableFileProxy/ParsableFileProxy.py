@@ -1,4 +1,4 @@
-from baca.scf.FileProxy import FileProxy
+from baca.scf.proxies.FileProxy import FileProxy
 
 
 class ParsableFileProxy(FileProxy):

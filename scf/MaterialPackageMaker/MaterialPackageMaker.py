@@ -1,4 +1,4 @@
-from baca.scf.MaterialPackageProxy import MaterialPackageProxy
+from baca.scf.proxies.MaterialPackageProxy import MaterialPackageProxy
 from baca.scf.UserInputWrapper import UserInputWrapper
 import copy
 import os
@@ -19,7 +19,7 @@ class MaterialPackageMaker(MaterialPackageProxy):
             user_input_module_importable_name)
         if not os.path.exists(user_input_module_file_name):
             file(user_input_module_file_name, 'w').write('')
-        proxy = baca.scf.UserInputModuleProxy(user_input_module_importable_name, session=self.session)
+        proxy = baca.scf.proxies.UserInputModuleProxy(user_input_module_importable_name, session=self.session)
         user_input_wrapper = proxy.read_user_input_wrapper_from_disk()
         if user_input_wrapper:
             user_input_wrapper._user_input_module_import_statements = \
