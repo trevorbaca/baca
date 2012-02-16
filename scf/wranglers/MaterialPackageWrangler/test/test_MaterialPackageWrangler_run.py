@@ -6,7 +6,7 @@ def test_MaterialPackageWrangler_run_01():
     '''Quit, back, studio, score & junk all work.
     '''
 
-    studio = baca.scf.studiopackage.Studio()
+    studio = baca.scf.studio.Studio()
     studio.run(user_input='m q')
     assert studio.ts == (4,)
 
@@ -27,6 +27,6 @@ def test_MaterialPackageWrangler_run_02():
     '''Breadcrumbs work.
     '''
 
-    studio = baca.scf.studiopackage.Studio()
+    studio = baca.scf.studio.Studio()
     studio.run(user_input='m q')
     assert studio.transcript[-2][0] == 'Studio - materials'

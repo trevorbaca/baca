@@ -6,7 +6,7 @@ def test_PerformerEditor_rename_performer_01():
     '''Quit, back and studio all work.
     '''
 
-    studio = baca.scf.studiopackage.Studio()
+    studio = baca.scf.studio.Studio()
     studio.run(user_input='1 setup performers 1 ren q')
     assert studio.ts == (11, (1, 7))
 
@@ -21,7 +21,7 @@ def test_PerformerEditor_rename_performer_02():
     '''String input only.
     '''
 
-    studio = baca.scf.studiopackage.Studio()
+    studio = baca.scf.studio.Studio()
     studio.run(user_input='1 setup performers 1 ren -99 q')
     assert studio.ts == (13, (1, 7))
 

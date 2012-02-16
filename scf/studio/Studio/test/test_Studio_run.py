@@ -5,7 +5,7 @@ def test_Studio_run_01():
     '''Running studio establishes new sesssion correctly.
     '''
 
-    studio = baca.scf.studiopackage.Studio()
+    studio = baca.scf.studio.Studio()
     old_session = studio.session
     assert studio.session is studio.global_proxy.session is studio.global_proxy.material_package_wrangler.session 
     

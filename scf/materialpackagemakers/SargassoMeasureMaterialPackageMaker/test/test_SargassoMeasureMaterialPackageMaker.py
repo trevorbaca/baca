@@ -6,7 +6,7 @@ import baca
 def test_SargassoMeasureMaterialPackageMaker_01():
     '''Empty wrapper.'''
 
-    studio = baca.scf.studiopackage.Studio()
+    studio = baca.scf.studio.Studio()
     assert not studio.package_exists('baca.materials.testsargasso')
     try:
         studio.run(user_input=
@@ -34,7 +34,7 @@ def test_SargassoMeasureMaterialPackageMaker_01():
 def test_SargassoMeasureMaterialPackageMaker_02():
     '''Load demo values.'''
 
-    studio = baca.scf.studiopackage.Studio()
+    studio = baca.scf.studio.Studio()
     assert not studio.package_exists('baca.materials.testsargasso')
 
     try:
@@ -64,7 +64,7 @@ def test_SargassoMeasureMaterialPackageMaker_02():
 def test_SargassoMeasureMaterialPackageMaker_03():
     '''Load demo values and then clear all.'''
 
-    studio = baca.scf.studiopackage.Studio()
+    studio = baca.scf.studio.Studio()
     assert not studio.package_exists('baca.materials.testsargasso')
     try:
         studio.run(user_input=
@@ -93,7 +93,7 @@ def test_SargassoMeasureMaterialPackageMaker_03():
 def test_SargassoMeasureMaterialPackageMaker_04():
     '''Edit one value.'''
 
-    studio = baca.scf.studiopackage.Studio()
+    studio = baca.scf.studio.Studio()
     assert not studio.package_exists('baca.materials.testsargasso')
     try:
         studio.run(user_input=
@@ -122,7 +122,7 @@ def test_SargassoMeasureMaterialPackageMaker_04():
 def test_SargassoMeasureMaterialPackageMaker_05():
     '''Populate wrapper.'''
 
-    studio = baca.scf.studiopackage.Studio()
+    studio = baca.scf.studio.Studio()
     assert not studio.package_exists('baca.materials.testsargasso')
     try:
         studio.run(user_input=
@@ -152,7 +152,7 @@ def test_SargassoMeasureMaterialPackageMaker_05():
 def test_SargassoMeasureMaterialPackageMaker_06():
     '''Partial poputation.'''
 
-    studio = baca.scf.studiopackage.Studio()
+    studio = baca.scf.studio.Studio()
     assert not studio.package_exists('baca.materials.testsargasso')
     try:
         studio.run(user_input=
@@ -182,7 +182,7 @@ def test_SargassoMeasureMaterialPackageMaker_06():
 def test_SargassoMeasureMaterialPackageMaker_07():
     '''Set some values to none.'''
 
-    studio = baca.scf.studiopackage.Studio()
+    studio = baca.scf.studio.Studio()
     assert not studio.package_exists('baca.materials.testsargasso')
     try:
         studio.run(user_input=

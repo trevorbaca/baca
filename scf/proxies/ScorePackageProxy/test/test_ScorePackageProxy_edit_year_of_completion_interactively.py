@@ -5,7 +5,7 @@ import baca
 def test_ScorePackageProxy_edit_year_of_completion_interactively_01():
 
     try:
-        studio = baca.scf.studiopackage.Studio()
+        studio = baca.scf.studio.Studio()
         studio.run(user_input="L'arch setup year 2001 q")
         assert studio.ts == (9,)
         assert studio.transcript[-5][0] == "L'archipel du corps (2011) - setup"

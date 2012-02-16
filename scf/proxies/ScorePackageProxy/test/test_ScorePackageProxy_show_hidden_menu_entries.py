@@ -3,7 +3,7 @@ import baca
 
 def test_ScorePackageProxy_show_hidden_menu_entries_01():
 
-    studio = baca.scf.studiopackage.Studio()
+    studio = baca.scf.studio.Studio()
     studio.run(user_input='1 hidden q')
 
     assert studio.transcript[-2] == \

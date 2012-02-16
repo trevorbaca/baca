@@ -7,5 +7,5 @@ import menuing
 import predicates
 import proxies
 import specifiers
-import studiopackage
+import studio
 import wranglers

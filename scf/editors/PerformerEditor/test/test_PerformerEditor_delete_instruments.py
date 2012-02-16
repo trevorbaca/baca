@@ -7,7 +7,7 @@ def test_PerformerEditor_delete_instruments_01():
     '''Quit, back, studio, score & junk all work.
     '''
 
-    studio = baca.scf.studiopackage.Studio()
+    studio = baca.scf.studio.Studio()
     studio.run(user_input='1 setup perf 1 del q')
     assert studio.ts == (11, (1, 7))
 

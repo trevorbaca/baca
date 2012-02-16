@@ -48,7 +48,7 @@ def test_ScorePackageProxy_04():
     '''User 'studio' input results in return to studio main menu.
     '''
     
-    studio = baca.scf.studiopackage.Studio()
+    studio = baca.scf.studio.Studio()
     studio.run(user_input="l'arch studio q")
 
     assert studio.ts == (6, (0, 4))
@@ -73,7 +73,7 @@ def test_ScorePackageProxy_06():
     '''User 'b' input returns to studio main menu.
     '''
 
-    studio = baca.scf.studiopackage.Studio()
+    studio = baca.scf.studio.Studio()
     studio.run(user_input="l'arch b q")
 
     assert studio.ts == (6, (0, 4))

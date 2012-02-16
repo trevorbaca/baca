@@ -7,7 +7,7 @@ def test_PerformerEditor_move_instrument_01():
     '''Quit, back, studio, score & junk all work.
     '''
 
-    studio = baca.scf.studiopackage.Studio()
+    studio = baca.scf.studio.Studio()
     studio.run(user_input="l'arch setup performers flutist move q")
     assert studio.ts == (11,)
 

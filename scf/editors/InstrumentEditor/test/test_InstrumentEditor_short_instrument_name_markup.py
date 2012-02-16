@@ -6,7 +6,7 @@ def test_InstrumentEditor_short_instrument_name_markup_01():
     '''Quit, back & studio all work.
     '''
 
-    studio = baca.scf.studiopackage.Studio()
+    studio = baca.scf.studio.Studio()
     studio.run(user_input='1 setup performers 1 1 sm q')
     assert studio.ts == (13, (1, 7, 9))
 
