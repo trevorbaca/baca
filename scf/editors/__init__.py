@@ -1,6 +1,7 @@
 from InstrumentEditor import InstrumentEditor
 from InstrumentationEditor import InstrumentationEditor
 from InteractiveEditor import InteractiveEditor
+from ListEditor import ListEditor
 from MusicSpecifierEditor import MusicSpecifierEditor
 from PerformerContributionSpecifierListEditor import PerformerContributionSpecifierListEditor
 from PerformerEditor import PerformerEditor

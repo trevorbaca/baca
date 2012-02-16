@@ -1,6 +1,7 @@
 from abjad.tools import pitchtools
 from abjad.tools import sequencetools
 from baca.scf.editors.InteractiveEditor import InteractiveEditor
+from baca.scf.editors.ListEditor import ListEditor
 from baca.scf.editors.PitchRangeEditor import PitchRangeEditor
 from baca.scf.menuing.UserInputGetter import UserInputGetter
 
