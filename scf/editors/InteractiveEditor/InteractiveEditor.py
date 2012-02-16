@@ -29,39 +29,6 @@ class InteractiveEditor(SCFObject):
         else:
             raise ValueError
 
-    def make_target_attribute_tokens_from_target_attribute_tuples(self):
-        result, menu_keys, display_attribute = [], [], None
-        for target_attribute_tuple in self.target_attribute_tuples:
-            target_attribute_name, predicate, is_read_write, default, menu_key = target_attribute_tuple[:5]
-            assert menu_key not in menu_keys
-            menu_keys.append(menu_key)
-            menu_body = target_attribute_name.replace('_', ' ')
-            attribute_value = getattr(self.target, target_attribute_name) 
-            if hasattr(attribute_value, '__len__') and not len(attribute_value):
-                attribute_value = None
-            existing_value = repr(attribute_value)
-            if 6 <= len(target_attribute_tuple):
-                display_attribute = target_attribute_tuple[5]
-                if display_attribute is not None:
-                    existing_value = getattr(attribute_value, display_attribute)
-            token = (menu_key, menu_body, existing_value)
-            result.append(token)
-        return result
-
-    def make_target_attribute_tokens_from_target_manifest(self):
-        result = []
-        for attribute_detail in self.target_manifest.attribute_details:
-            menu_key = attribute_detail.menu_key
-            target_attribute_name = attribute_detail.name
-            menu_body = target_attribute_name.replace('_', ' ')
-            attribute_value = getattr(self.target, target_attribute_name)
-            if hasattr(attribute_value, '__len__') and not len(attribute_value):
-                attribute_value = None
-            existing_value = repr(attribute_value)
-            token = (menu_key, menu_body, existing_value)
-            result.append(token)
-        return result
-
     ### PUBLIC METHODS ###
 
     def attribute_name_to_menu_key(self, attribute_name, menu_keys):
@@ -104,6 +71,39 @@ class InteractiveEditor(SCFObject):
         section.tokens = self.target_attribute_tokens
         section.show_existing_values = True
         return menu
+
+    def make_target_attribute_tokens_from_target_attribute_tuples(self):
+        result, menu_keys, display_attribute = [], [], None
+        for target_attribute_tuple in self.target_attribute_tuples:
+            target_attribute_name, predicate, is_read_write, default, menu_key = target_attribute_tuple[:5]
+            assert menu_key not in menu_keys
+            menu_keys.append(menu_key)
+            menu_body = target_attribute_name.replace('_', ' ')
+            attribute_value = getattr(self.target, target_attribute_name) 
+            if hasattr(attribute_value, '__len__') and not len(attribute_value):
+                attribute_value = None
+            existing_value = repr(attribute_value)
+            if 6 <= len(target_attribute_tuple):
+                display_attribute = target_attribute_tuple[5]
+                if display_attribute is not None:
+                    existing_value = getattr(attribute_value, display_attribute)
+            token = (menu_key, menu_body, existing_value)
+            result.append(token)
+        return result
+
+    def make_target_attribute_tokens_from_target_manifest(self):
+        result = []
+        for attribute_detail in self.target_manifest.attribute_details:
+            menu_key = attribute_detail.menu_key
+            target_attribute_name = attribute_detail.name
+            menu_body = target_attribute_name.replace('_', ' ')
+            attribute_value = getattr(self.target, target_attribute_name)
+            if hasattr(attribute_value, '__len__') and not len(attribute_value):
+                attribute_value = None
+            existing_value = repr(attribute_value)
+            token = (menu_key, menu_body, existing_value)
+            result.append(token)
+        return result
 
     def menu_key_to_existing_value(self, menu_key):
         attribute_name = self.target_manifest.menu_key_to_attribute_name(menu_key)
