@@ -1,4 +1,4 @@
-from baca.scf.Specifier import Specifier
+from baca.scf.specifiers.Specifier import Specifier
 
 
 class PerformerContributionSpecifierList(Specifier, list):

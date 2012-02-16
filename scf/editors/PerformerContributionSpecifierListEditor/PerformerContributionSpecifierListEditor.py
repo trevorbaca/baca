@@ -1,5 +1,5 @@
-from baca.scf.PerformerContributionSpecifierList import PerformerContributionSpecifierList
-from baca.scf.PerformerContributionSpecifier import PerformerContributionSpecifier
+from baca.scf.specifiers.PerformerContributionSpecifierList import PerformerContributionSpecifierList
+from baca.scf.specifiers.PerformerContributionSpecifier import PerformerContributionSpecifier
 from baca.scf.editors.ListEditor import ListEditor
 from baca.scf.editors.PerformerContributionSpecifierEditor import PerformerContributionSpecifierEditor
 

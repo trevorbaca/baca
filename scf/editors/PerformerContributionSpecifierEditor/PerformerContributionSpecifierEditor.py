@@ -1,6 +1,6 @@
 from baca.scf.editors.InteractiveEditor import InteractiveEditor
 from baca.scf.ObjectManifest import ObjectManifest
-from baca.scf.PerformerContributionSpecifier import PerformerContributionSpecifier
+from baca.scf.specifiers.PerformerContributionSpecifier import PerformerContributionSpecifier
 
 
 class PerformerContributionSpecifierEditor(InteractiveEditor):

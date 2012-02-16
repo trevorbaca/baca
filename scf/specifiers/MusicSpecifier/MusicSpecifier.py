@@ -1,5 +1,5 @@
-from baca.scf.PerformerContributionSpecifierList import PerformerContributionSpecifierList
-from baca.scf.Specifier import Specifier
+from baca.scf.specifiers.PerformerContributionSpecifierList import PerformerContributionSpecifierList
+from baca.scf.specifiers.Specifier import Specifier
 
 
 class MusicSpecifier(Specifier):

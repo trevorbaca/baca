@@ -3,7 +3,7 @@ import baca
 
 def test_PerformerContributionSpecifier_format_01():
 
-    specifier = baca.scf.PerformerContributionSpecifier()
+    specifier = baca.scf.specifiers.PerformerContributionSpecifier()
     specifier.articulation_indicator = 'foo'
     specifier.clef_indicator = 'bar'
     specifier.directive_indicator = ['apple', 'banana', 'cherry']
