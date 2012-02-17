@@ -244,12 +244,15 @@ class Session(object):
 
     ### PUBLIC METHODS ###
 
-    def backtrack(self):
+    def backtrack(self, source=None):
         if self.is_complete:
             return True
         elif self.is_backtracking_to_studio:
             return True
-        elif self.is_backtracking_to_score:
+        elif self.is_backtracking_to_score and source == 'score':
+            self.is_backtracking_to_score = False
+            return False
+        elif self.is_backtracking_to_score and not source == 'score':
             return True
         elif self.is_backtracking_locally and self.backtracking_stack:
             return True

@@ -70,6 +70,12 @@ class MusicSpecifierModuleProxy(ModuleProxy):
             exec(file_contents_string)
             return locals().get('music_specifier', None)
 
+    def run(self, user_input=None, clear=True, cache=False):
+        self.assign_user_input(user_input=user_input)
+        self.cache_breadcrumbs(cache=cache)
+        while True:
+            break
+
     def write_music_specifier_to_disk(self, music_specifier_in_memory):
         self.setup_statements[:] = self.conditionally_add_terminal_newlines(
             music_specifier_in_memory.music_specifier_module_import_statements)[:]

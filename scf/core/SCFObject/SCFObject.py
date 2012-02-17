@@ -126,8 +126,8 @@ class SCFObject(object):
         if user_input is not None:
             self.session.user_input = user_input
 
-    def backtrack(self):
-        return self.session.backtrack()
+    def backtrack(self, source=None):
+        return self.session.backtrack(source=source)
 
     def cache_breadcrumbs(self, cache=False):
         if cache:

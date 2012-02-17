@@ -438,21 +438,13 @@ class ScorePackageProxy(PackageProxy):
             self.push_breadcrumb()
             menu = self.make_main_menu()
             result = menu.run(clear=clear)
-            if self.session.is_backtracking_to_score:
-                self.session.is_backtracking_to_score = False
-                self.pop_breadcrumb() 
-                continue
-            elif self.backtrack():
+            if self.backtrack(source='score'):
                 break
             elif not result:
                 self.pop_breadcrumb()
                 continue
             self.handle_main_menu_result(result)
-            if self.session.is_backtracking_to_score:
-                self.session.is_backtracking_to_score = False
-                self.pop_breadcrumb()
-                continue
-            elif self.backtrack():
+            if self.backtrack(source='score'):
                 break
             self.pop_breadcrumb()
         self.pop_breadcrumb()
