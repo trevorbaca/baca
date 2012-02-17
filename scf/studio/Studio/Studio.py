@@ -202,7 +202,7 @@ class Studio(SCFObject):
                 result = menu.run(clear=clear)
             else:
                 run_main_menu = True
-            if self.session.is_complete:
+            if self.backtrack(source='studio'):
                 self.pop_breadcrumb()
                 self.session.clean_up()
                 break
@@ -214,32 +214,16 @@ class Studio(SCFObject):
                 self.session.is_navigating_to_prev_score = False
                 self.session.is_backtracking_to_studio = False
                 result = self.get_prev_score_package_short_name()
-            elif self.session.is_backtracking_to_studio:
-                self.session.is_backtracking_to_studio = False
-                self.pop_breadcrumb()
-                continue
-            elif self.session.is_backtracking_to_score:
-                self.session.is_backtracking_to_score = False
-                self.pop_breadcrumb()
-                continue
             elif not result:
                 self.pop_breadcrumb()
                 continue
             self.handle_main_menu_result(result)
-            if self.session.is_complete:
+            if self.backtrack(source='studio'):
                 self.pop_breadcrumb()
                 self.session.clean_up()
                 break
             elif self.session.is_navigating_to_sibling_score:
                 run_main_menu = False
-            elif self.session.is_backtracking_to_studio:
-                self.session.is_backtracking_to_studio = False
-                self.pop_breadcrumb()
-                continue
-            elif self.session.is_backtracking_to_score:
-                self.session.is_backtracking_to_score = False
-                self.pop_breadcrumb()
-                continue
             self.pop_breadcrumb()
         self.pop_breadcrumb()
         self.restore_breadcrumbs(cache=cache)

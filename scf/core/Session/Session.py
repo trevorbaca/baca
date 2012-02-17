@@ -247,16 +247,21 @@ class Session(object):
     def backtrack(self, source=None):
         if self.is_complete:
             return True
-        elif self.is_backtracking_to_studio:
+        elif self.is_backtracking_to_studio and source == 'studio':
+            self.is_backtracking_to_studio = False
+            return False
+        elif self.is_backtracking_to_studio and not source == 'studio':
             return True
-        elif self.is_backtracking_to_score and source == 'score':
+        elif self.is_backtracking_to_score and source in ('score', 'studio'):
             self.is_backtracking_to_score = False
             return False
-        elif self.is_backtracking_to_score and not source == 'score':
+        elif self.is_backtracking_to_score and not source in ('score', 'studio'):
             return True
-        elif self.is_backtracking_locally and self.backtracking_stack:
+        elif self.is_backtracking_locally and not source == 'studio' and \
+            self.backtracking_stack:
             return True
-        elif self.is_backtracking_locally and not self.backtracking_stack:
+        elif self.is_backtracking_locally and not source == 'studio' and \
+            not self.backtracking_stack:
             self.is_backtracking_locally = False
             return True
             
