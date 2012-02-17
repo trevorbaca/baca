@@ -74,7 +74,20 @@ class MusicSpecifierModuleProxy(ModuleProxy):
         self.assign_user_input(user_input=user_input)
         self.cache_breadcrumbs(cache=cache)
         while True:
-            break
+            self.push_breadcrumb()
+            menu = self.make_main_menu()
+            result = menu.run(clear=clear)
+            if self.backtrack():
+                break
+            elif not result:
+                self.pop_breacrumb()
+                continue
+            self.handle_main_menu_result(result)
+            if self.backtrack():
+                break
+            self.pop_breadcrumb()
+        self.pop_breadcrumb()
+        self.restore_breadcrumbs(cache=cache)
 
     def write_music_specifier_to_disk(self, music_specifier_in_memory):
         self.setup_statements[:] = self.conditionally_add_terminal_newlines(

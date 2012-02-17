@@ -18,6 +18,7 @@ class PackageWrangler(SCFObject):
                 toplevel_score_package_importable_name_body)
         self._toplevel_global_package_importable_name = toplevel_global_package_importable_name
         self._toplevel_score_package_importable_name_body = toplevel_score_package_importable_name_body
+        self.conditionally_make_empty_package(self.toplevel_global_package_importable_name)
 
     ### OVERLOADS ###
 
@@ -116,7 +117,7 @@ class PackageWrangler(SCFObject):
         return result
 
     ### PUBLIC METHODS ###
-
+    
     def get_package_proxy(self, package_importable_name):
         return PackageProxy(package_importable_name, session=self.session)
         
@@ -128,6 +129,7 @@ class PackageWrangler(SCFObject):
         for package_importable_name in package_importable_names:
             if package_importable_name.startswith(head):
                 result.append(package_importable_name)
+        self.debug(result, 'red')
         return result
 
     def list_wrangled_package_menuing_pairs(self, head=None):

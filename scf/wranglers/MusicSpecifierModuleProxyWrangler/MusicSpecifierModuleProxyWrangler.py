@@ -2,7 +2,7 @@ from baca.scf.proxies.MusicSpecifierModuleProxy import MusicSpecifierModuleProxy
 from baca.scf.wranglers.PackageWrangler import PackageWrangler
 import os
 
-
+# TODO: write tests
 class MusicSpecifierModuleProxyWrangler(PackageWrangler):
 
     def __init__(self, session=None):
@@ -58,6 +58,7 @@ class MusicSpecifierModuleProxyWrangler(PackageWrangler):
 
     def make_main_menu(self):
         menu, section = self.make_menu(where=self.where(), is_parenthetically_numbered=True)
+        self.debug(self.specifier_spaced_names)
         section.tokens = self.specifier_spaced_names
         section = menu.make_section()
         section.append(('new', 'new music specifier'))
@@ -73,7 +74,7 @@ class MusicSpecifierModuleProxyWrangler(PackageWrangler):
         specifier_module_importable_name = self.dot_join([
             self.specifiers_package_importable_name, specifier_module_short_name])
         specifier_module_proxy = MusicSpecifierModuleProxy(specifier_module_importable_name)
-        specifier_module_proxy.run()
+        #specifier_module_proxy.run()
 
     def run(self, user_input=None, clear=True, cache=False):
         self.conditionally_make_specifiers_package()
