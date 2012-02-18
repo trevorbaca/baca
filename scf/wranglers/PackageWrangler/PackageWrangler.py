@@ -129,7 +129,6 @@ class PackageWrangler(SCFObject):
         for package_importable_name in package_importable_names:
             if package_importable_name.startswith(head):
                 result.append(package_importable_name)
-        self.debug(result, 'red')
         return result
 
     def list_wrangled_package_menuing_pairs(self, head=None):
