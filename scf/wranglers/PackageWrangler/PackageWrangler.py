@@ -4,7 +4,6 @@ from baca.scf.core.SCFObject import SCFObject
 import os
 
 
-# TODO: write tests
 class PackageWrangler(SCFObject):
 
     def __init__(self, toplevel_global_package_importable_name=None, 
@@ -142,6 +141,9 @@ class PackageWrangler(SCFObject):
             wrangled_package_proxy = self.get_package_proxy(package_importable_name)
             result.append(wrangled_package_proxy)
         return result
+
+    def list_wrangled_package_proxies_to_display(self, head=None):
+        return self.list_wrangled_package_proxies(head=head)
 
     def list_wrangled_package_short_names(self, head=None):
         result = []

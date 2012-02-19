@@ -16,28 +16,14 @@ class ScorePackageWrangler(PackageWrangler):
     @property
     def score_package_short_names_to_display(self):
         result = []
-        for score_package_proxy in self.score_package_proxies_to_display:
+        for score_package_proxy in self.list_wrangled_package_proxies_to_display():
             result.append(score_package_proxy.package_short_name)
-        return result
-
-    @property
-    def score_package_proxies_to_display(self):
-        result = []
-        scores_to_show = self.session.scores_to_show
-        for score_package_proxy in self.list_wrangled_package_proxies():
-            is_mothballed = score_package_proxy.get_tag('is_mothballed')
-            if scores_to_show == 'all':
-                result.append(score_package_proxy)
-            elif scores_to_show == 'active' and not is_mothballed:
-                result.append(score_package_proxy)
-            elif scores_to_show == 'mothballed' and is_mothballed:
-                result.append(score_package_proxy)
         return result
 
     @property
     def score_titles_with_years(self):
         result = []
-        for score_package_proxy in self.score_package_proxies_to_display:
+        for score_package_proxy in self.list_wrangled_package_proxies_to_display():
             result.append(score_package_proxy.title_with_year or '(untitled score)')
         return result
 
@@ -51,9 +37,10 @@ class ScorePackageWrangler(PackageWrangler):
 
     ### PUBLIC METHODS ###
 
-    def fix_score_package_structures(self, prompt=True):
+    # TODO: move up to level of wrangler
+    def fix_package_structures(self, prompt=True):
         results = []
-        for score_package_proxy in self.score_package_proxies_to_display:
+        for score_package_proxy in self.list_wrangled_package_proxies_to_display():
             results.append(score_package_proxy.fix_package_structure(is_interactive=prompt))
             if prompt:
                 score_package_proxy.profile_package_structure()
@@ -71,6 +58,19 @@ class ScorePackageWrangler(PackageWrangler):
         if self.backtrack():
             return 
         return score_package_importable_name
+
+    def list_wrangled_package_proxies_to_display(self):
+        result = []
+        scores_to_show = self.session.scores_to_show
+        for score_package_proxy in PackageWrangler.list_wrangled_package_proxies(self):
+            is_mothballed = score_package_proxy.get_tag('is_mothballed')
+            if scores_to_show == 'all':
+                result.append(score_package_proxy)
+            elif scores_to_show == 'active' and not is_mothballed:
+                result.append(score_package_proxy)
+            elif scores_to_show == 'mothballed' and is_mothballed:
+                result.append(score_package_proxy)
+        return result
 
     def make_score_package(self, score_package_short_name):
         assert iotools.is_underscore_delimited_lowercase_package_name(score_package_short_name)
@@ -99,7 +99,7 @@ class ScorePackageWrangler(PackageWrangler):
         score_package_proxy.year_of_completion = year
         
     def profile_score_package_structures(self):
-        for score_package_proxy in self.score_package_proxies_to_display:
+        for score_package_proxy in self.list_wrangled_package_proxies_to_display():
             score_package_proxy.profile_package_structure()
 
     def select_score_package_proxy(self):
@@ -111,7 +111,7 @@ class ScorePackageWrangler(PackageWrangler):
     
     # TODO: move up to level of wrangler
     def svn_add(self, prompt=True):
-        for score_package_proxy in self.score_package_proxies_to_display:
+        for score_package_proxy in self.list_wrangled_package_proxies_to_display():
             score_package_proxy.svn_add(prompt=False)
         self.proceed(prompt=prompt)
 
@@ -126,18 +126,18 @@ class ScorePackageWrangler(PackageWrangler):
         self.display(line)
         if not self.confirm():
             return
-        for score_package_proxy in self.score_package_proxies_to_display:
+        for score_package_proxy in self.list_wrangled_package_proxies_to_display():
             score_package_proxy.svn_ci(commit_message=commit_message, prompt=False)
         self.proceed(prompt=prompt)
 
     # TODO: move up to level of wrangler
     def svn_st(self, prompt=True):
-        for score_package_proxy in self.score_package_proxies_to_display:
+        for score_package_proxy in self.list_wrangled_package_proxies_to_display():
             score_package_proxy.svn_st(prompt=False)
         self.proceed(prompt=prompt)
 
     # TODO: move up to level of wrangler
     def svn_up(self, prompt=True):
-        for score_package_proxy in self.score_package_proxies_to_display:
+        for score_package_proxy in self.list_wrangled_package_proxies_to_display():
             score_package_proxy.svn_up(prompt=False)
         self.proceed(prompt=prompt)

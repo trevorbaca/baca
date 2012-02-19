@@ -10,7 +10,6 @@ def test_ScorePackageWrangler_read_only_attributes_01():
     assert wrangler.has_wrangled_packages
     assert 'lidercfeny' in wrangler.score_package_short_names
     assert 'lidercfeny' in wrangler.score_package_short_names_to_display
-    assert baca.scf.proxies.ScorePackageProxy('lidercfeny') in wrangler.score_package_proxies_to_display
     assert 'Lidércfény (2008)' in wrangler.score_titles_with_years 
     assert wrangler.temporary_score_package_directory_name.endswith('__temporary_score_package')
     assert wrangler.toplevel_global_package_importable_name is None
