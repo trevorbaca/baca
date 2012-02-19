@@ -51,10 +51,13 @@ class ScorePackageWrangler(PackageWrangler):
 
     ### PUBLIC METHODS ###
 
-    def fix_score_package_structures(self):
+    def fix_score_package_structures(self, prompt=True):
+        results = []
         for score_package_proxy in self.score_package_proxies_to_display:
-            score_package_proxy.fix_package_structure()
-            score_package_proxy.profile_package_structure()
+            results.append(score_package_proxy.fix_package_structure(is_interactive=prompt))
+            if prompt:
+                score_package_proxy.profile_package_structure()
+        return results
 
     def get_package_proxy(self, package_importable_name):
         return ScorePackageProxy(package_importable_name, session=self.session)
@@ -106,6 +109,12 @@ class ScorePackageWrangler(PackageWrangler):
         score_package_proxy = ScorePackageProxy(score_package_short_name, session=self.session)
         return score_package_proxy
     
+    # TODO: move up to level of wrangler
+    def svn_add(self, prompt=True):
+        for score_package_proxy in self.score_package_proxies_to_display:
+            score_package_proxy.svn_add(prompt=False)
+        self.proceed(prompt=prompt)
+
     # TODO: move up to level of wrangler
     def svn_ci(self, prompt=True):
         getter = self.make_getter(where=self.where())

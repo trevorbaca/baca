@@ -81,9 +81,9 @@ class Studio(SCFObject):
         if not isinstance(result, str):
             raise TypeError('result must be string.')
         if result == 'active':
-            self.session.scores_to_show = 'active'
+            self.session.show_active_scores()
         elif result == 'all':
-            self.session.scores_to_show = 'all'
+            self.session.show_all_scores()
         elif result == 'k':
             self.print_not_implemented()
         elif result == 'm':
@@ -95,7 +95,7 @@ class Studio(SCFObject):
             self.score_package_wrangler.make_score_package_interactively()
             self.push_breadcrumb(breadcrumb)
         elif result == 'mb':
-            self.session.scores_to_show = 'mothballed'
+            self.session.show_mothballed_scores()
         elif result == 'svn':
             self.manage_svn()
         elif result in self.score_package_wrangler.score_package_short_names_to_display:

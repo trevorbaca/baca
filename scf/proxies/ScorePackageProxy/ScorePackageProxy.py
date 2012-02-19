@@ -203,20 +203,24 @@ class ScorePackageProxy(PackageProxy):
         self.add_tag('year_of_completion', result)
 
     def fix_package_structure(self, is_interactive=True):
+        result = True
         if self.package_short_name == 'recursif':
-            return
+            return True
         for directory_name in self.top_level_directory_names:
             if not os.path.exists(directory_name):
+                result = False
                 prompt = 'create {!r}? '.format(directory_name)
                 if not is_interactive or self.confirm(prompt):
                     os.mkdir(directory_name)
         if not os.path.exists(self.initializer_file_name):
+            result = False
             prompt = 'create {}? '.format(self.initializer_file_name)
             if not is_interactive or self.confirm(prompt):
                 initializer = file(self.initializer_file_name, 'w')
                 initializer.write('')
                 initializer.close()
         if not os.path.exists(self.mus_proxy.initializer_file_name):
+            result = False
             prompt = 'create {}? '.format(self.mus_proxy.initializer_file_name)
             if not is_interactive or self.confirm(prompt):
                 initializer = file(self.mus_proxy.initializer_file_name, 'w')
@@ -231,32 +235,41 @@ class ScorePackageProxy(PackageProxy):
                 found_materials_import = True
         initializer.close()
         if not found_materials_import:
+            result = False
             lines.insert(0, 'import materials\n')
             initializer = file(self.mus_proxy.initializer_file_name, 'w')
             initializer.write(''.join(lines))
             initializer.close()
         if not os.path.exists(self.tags_file_name):
+            result = False
             prompt = 'create {}? '.format(self.tags_file_name)
             if not is_interactive or self.confirm(prompt):
                 tags_file = file(self.tags_file_name, 'w')
+                tags_file.write('# -*- encoding: utf-8 -*-\n')
                 tags_file.write('from abjad import *\n')
                 tags_file.write('from collections import OrderedDict\n')
+                tags_file.write('\n')
                 tags_file.write('\n')
                 tags_file.write('tags = OrderedDict([])\n')
                 tags_file.close()
         if not os.path.exists(self.materials_package_directory_name):
+            result = False
             prompt = 'create {}'.format(self.materials_package_directory_name)
             if not is_interactive or self.confirm(prompt):
                 os.mkdir(self.materials_package_directory_name)
         if not os.path.exists(self.materials_package_initializer_file_name):
+            result = False
             file(self.materials_package_initializer_file_name, 'w').write('')
         if not os.path.exists(self.chunks_package_directory_name):
+            result = False
             prompt = 'create {}'.format(self.chunks_package_directory_name)
             if not is_interactive or self.confirm(prompt):
                 os.mkdir(self.chunks_package_directory_name)
         if not os.path.exists(self.chunks_package_initializer_file_name):
+            result = False
             file(self.chunks_package_initializer_file_name, 'w').write('')
         self.proceed('packaged structure fixed.', prompt=is_interactive)
+        return result
 
     def handle_main_menu_result(self, result):
         assert isinstance(result, str)

@@ -22,11 +22,11 @@ class Session(object):
         self.is_navigating_to_prev_score = False
         self.last_command_was_composite = False
         self.nonnumbered_menu_sections_are_hidden = False
-        self.scores_to_show = 'active'
         self.transcribe_next_command = True
         self.use_current_user_input_values_as_default = False
         self.user_input = user_input
         self.user_specified_quit = False
+        self.show_active_scores()
 
     ### OVERLOADS ###
 
@@ -124,6 +124,10 @@ class Session(object):
     def output_directory(self):
         return '/Users/trevorbaca/.scf/output'
 
+    @property   
+    def scores_to_show(self):
+        return self._scores_to_show
+
     @property
     def session_once_had_user_input(self):
         return self._session_once_had_user_input
@@ -148,7 +152,7 @@ class Session(object):
                 return True
         return False
 
-    ### READ / WRITE PUBLIC METHODS ###
+    ### READ / WRITE PUBLIC ATTRIBUTES ###
 
     @apply
     def current_score_package_short_name():
@@ -271,6 +275,15 @@ class Session(object):
 
     def reinitialize(self):
         type(self).__init__(self)
+
+    def show_active_scores(self):
+        self._scores_to_show = 'active'
+
+    def show_all_scores(self):
+        self._scores_to_show = 'all'
+
+    def show_mothballed_scores(self):
+        self._scores_to_show = 'mothballed'
 
     def swap_user_input_values_default_status(self):
         current = self.use_current_user_input_values_as_default
