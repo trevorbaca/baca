@@ -8,7 +8,8 @@ class ChunkPackageWrangler(PackageWrangler):
     def __init__(self, session=None):
         PackageWrangler.__init__(self, 
             toplevel_wrangler_target_package_importable_name=self.sketches_package_importable_name, 
-            score_resident_wrangled_package_importable_name_prefix=self.score_chunks_package_importable_name_prefix,
+            score_resident_wrangled_package_importable_name_prefix=\
+                self.score_chunks_package_importable_name_prefix,
             session=session)
 
     ### READ-ONLY PUBLIC ATTRIBUTES ###

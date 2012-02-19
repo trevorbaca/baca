@@ -18,14 +18,16 @@ class PackageWrangler(SCFObject):
             assert iotools.is_underscore_delimited_lowercase_package_name(
                 score_resident_wrangled_package_importable_name_prefix)
         self._toplevel_wrangler_target_package_importable_name = toplevel_wrangler_target_package_importable_name
-        self._score_resident_wrangled_package_importable_name_prefix = score_resident_wrangled_package_importable_name_prefix
+        self._score_resident_wrangled_package_importable_name_prefix = \
+            score_resident_wrangled_package_importable_name_prefix
         self.conditionally_make_empty_package(self.toplevel_wrangler_target_package_importable_name)
 
     ### OVERLOADS ###
 
     def __eq__(self, other):
         if isinstance(other, type(self)):
-            if self.toplevel_wrangler_target_package_importable_name == other.toplevel_wrangler_target_package_importable_name:
+            if self.toplevel_wrangler_target_package_importable_name == \
+                other.toplevel_wrangler_target_package_importable_name:
                 if self.score_resident_wrangled_package_importable_name_prefix == \
                     other.score_resident_wrangled_package_importable_name_prefix:
                     return True
@@ -52,7 +54,8 @@ class PackageWrangler(SCFObject):
     def current_containing_package_importable_name(self):
         if self.session.is_in_score:
             score_package_short_name = self.session.current_score_package_short_name
-            return self.dot_join([score_package_short_name, self.score_resident_wrangled_package_importable_name_prefix])
+            return self.dot_join([
+                score_package_short_name, self.score_resident_wrangled_package_importable_name_prefix])
         else:
             return self.toplevel_wrangler_target_package_importable_name
 
@@ -67,6 +70,31 @@ class PackageWrangler(SCFObject):
         for wrangler_package_importable_name in self.list_wrangled_package_importable_names():
             return True
         return False
+
+    @property
+    def score_resident_wrangled_package_importable_name_prefix(self):
+        return self._score_resident_wrangled_package_importable_name_prefix
+
+    @property
+    def score_resident_wrangled_package_importable_names(self):
+        result = []
+        for toplevel_score_package_importable_name in self.score_resident_wrangler_target_package_importable_names:
+            if self.score_resident_wrangled_package_importable_name_prefix:
+                toplevel_score_package_directory_name = self.package_importable_name_to_directory_name(
+                    toplevel_score_package_importable_name)
+                for name in os.listdir(toplevel_score_package_directory_name):
+                    if name[0].isalpha():
+                        result.append('{}.{}'.format(toplevel_score_package_importable_name, name))
+            else:
+                result.append(toplevel_score_package_importable_name)
+        return result
+
+    @property
+    def score_resident_wrangled_package_directory_names(self):
+        result = []
+        for package_importable_name in self.score_resident_wrangled_package_importable_names:
+            result.append(self.package_importable_name_to_directory_name(package_importable_name))
+        return result
 
     @property
     def score_resident_wrangler_target_package_directory_names(self):
@@ -115,24 +143,6 @@ class PackageWrangler(SCFObject):
         return result
 
     @property
-    def score_resident_wrangled_package_importable_name_prefix(self):
-        return self._score_resident_wrangled_package_importable_name_prefix
-
-    @property
-    def wrangled_score_package_importable_names(self):
-        result = []
-        for toplevel_score_package_importable_name in self.score_resident_wrangler_target_package_importable_names:
-            if self.score_resident_wrangled_package_importable_name_prefix:
-                toplevel_score_package_directory_name = self.package_importable_name_to_directory_name(
-                    toplevel_score_package_importable_name)
-                for name in os.listdir(toplevel_score_package_directory_name):
-                    if name[0].isalpha():
-                        result.append('{}.{}'.format(toplevel_score_package_importable_name, name))
-            else:
-                result.append(toplevel_score_package_importable_name)
-        return result
-
-    @property
     def wrangler_target_package_directory_names(self):
         result = []
         for wrangler_target_package_importable_name in self.wrangler_target_package_importable_names:
@@ -164,7 +174,7 @@ class PackageWrangler(SCFObject):
         if head is None: head = ''
         result, package_importable_names = [], []
         package_importable_names.extend(self.wrangled_studio_package_importable_names)
-        package_importable_names.extend(self.wrangled_score_package_importable_names)
+        package_importable_names.extend(self.score_resident_wrangled_package_importable_names)
         for package_importable_name in package_importable_names:
             if package_importable_name.startswith(head):
                 result.append(package_importable_name)
