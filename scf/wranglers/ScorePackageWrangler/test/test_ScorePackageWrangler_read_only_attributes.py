@@ -15,5 +15,5 @@ def test_ScorePackageWrangler_read_only_attributes_01():
     assert 'lidercfeny' in wrangler.wrangler_target_package_importable_names
     assert wrangler.wrangled_score_package_importable_name_prefix is None
     assert 'lidercfeny' in wrangler.score_resident_wrangler_target_package_importable_names
-    assert wrangler.wrangled_global_package_importable_names == []
+    assert wrangler.wrangled_studio_package_importable_names == []
     assert 'lidercfeny' in wrangler.wrangled_score_package_importable_names

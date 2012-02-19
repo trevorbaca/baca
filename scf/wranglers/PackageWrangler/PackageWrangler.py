@@ -96,14 +96,15 @@ class PackageWrangler(SCFObject):
 
     @property
     def toplevel_wrangler_target_package_directory_name(self):
-        return self.package_importable_name_to_directory_name(self.toplevel_wrangler_target_package_importable_name)
+        return self.package_importable_name_to_directory_name(
+            self.toplevel_wrangler_target_package_importable_name)
 
     @property
     def toplevel_wrangler_target_package_importable_name(self):
         return self._toplevel_wrangler_target_package_importable_name
     
     @property
-    def wrangled_global_package_importable_names(self):
+    def wrangled_studio_package_importable_names(self):
         result = []
         if self.toplevel_wrangler_target_package_importable_name is not None:
             global_package_directory_name = self.package_importable_name_to_directory_name(
@@ -146,7 +147,6 @@ class PackageWrangler(SCFObject):
         result.extend(self.score_resident_wrangler_target_package_importable_names)
         return result
 
-
     ### PUBLIC METHODS ###
     
     def fix_structure_of_wrangled_packages_to_display(self, prompt=True):
@@ -163,7 +163,7 @@ class PackageWrangler(SCFObject):
     def list_wrangled_package_importable_names(self, head=None):
         if head is None: head = ''
         result, package_importable_names = [], []
-        package_importable_names.extend(self.wrangled_global_package_importable_names)
+        package_importable_names.extend(self.wrangled_studio_package_importable_names)
         package_importable_names.extend(self.wrangled_score_package_importable_names)
         for package_importable_name in package_importable_names:
             if package_importable_name.startswith(head):
