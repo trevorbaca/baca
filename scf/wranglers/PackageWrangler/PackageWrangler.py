@@ -123,16 +123,14 @@ class PackageWrangler(SCFObject):
         return '__temporary_package'
 
     @property
-    def toplevel_wrangler_target_package_directory_name(self):
-        return self.package_importable_name_to_directory_name(
-            self.toplevel_wrangler_target_package_importable_name)
-
+    def toplevel_wrangled_package_directory_names(self):
+        result = []
+        for package_importable_name in self.toplevel_wrangled_package_importable_names:
+            result.append(self.package_importable_name_to_directory_name(package_importable_name))
+        return result
+        
     @property
-    def toplevel_wrangler_target_package_importable_name(self):
-        return self._toplevel_wrangler_target_package_importable_name
-    
-    @property
-    def wrangled_studio_package_importable_names(self):
+    def toplevel_wrangled_package_importable_names(self):
         result = []
         if self.toplevel_wrangler_target_package_importable_name is not None:
             global_package_directory_name = self.package_importable_name_to_directory_name(
@@ -142,6 +140,15 @@ class PackageWrangler(SCFObject):
                     result.append('{}.{}'.format(self.toplevel_wrangler_target_package_importable_name, name))
         return result
 
+    @property
+    def toplevel_wrangler_target_package_directory_name(self):
+        return self.package_importable_name_to_directory_name(
+            self.toplevel_wrangler_target_package_importable_name)
+
+    @property
+    def toplevel_wrangler_target_package_importable_name(self):
+        return self._toplevel_wrangler_target_package_importable_name
+    
     @property
     def wrangler_target_package_directory_names(self):
         result = []
@@ -173,7 +180,7 @@ class PackageWrangler(SCFObject):
     def list_wrangled_package_importable_names(self, head=None):
         if head is None: head = ''
         result, package_importable_names = [], []
-        package_importable_names.extend(self.wrangled_studio_package_importable_names)
+        package_importable_names.extend(self.toplevel_wrangled_package_importable_names)
         package_importable_names.extend(self.score_resident_wrangled_package_importable_names)
         for package_importable_name in package_importable_names:
             if package_importable_name.startswith(head):
