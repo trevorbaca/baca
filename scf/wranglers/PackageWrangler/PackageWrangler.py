@@ -85,17 +85,6 @@ class PackageWrangler(SCFObject):
         return '__temporary_package'
 
     @property
-    def wrangler_target_score_resident_package_importable_names(self):
-        result = []
-        for score_package_short_name in self.score_package_short_names:
-            parts = [score_package_short_name]
-            if self.wrangled_score_package_importable_name_prefix:
-                parts.append(self.wrangled_score_package_importable_name_prefix)
-            toplevel_score_package_importable_name = self.dot_join(parts)
-            result.append(toplevel_score_package_importable_name)
-        return result
-
-    @property
     def toplevel_studio_package_directory_name(self):
         return self.package_importable_name_to_directory_name(self.toplevel_studio_package_importable_name)
 
@@ -121,7 +110,7 @@ class PackageWrangler(SCFObject):
     @property
     def wrangled_score_package_importable_names(self):
         result = []
-        for toplevel_score_package_importable_name in self.wrangler_target_score_resident_package_importable_names:
+        for toplevel_score_package_importable_name in self.score_resident_wrangler_target_package_importable_names:
             if self.wrangled_score_package_importable_name_prefix:
                 toplevel_score_package_directory_name = self.package_importable_name_to_directory_name(
                     toplevel_score_package_importable_name)
@@ -144,7 +133,18 @@ class PackageWrangler(SCFObject):
         result = [] 
         if self.toplevel_studio_package_importable_name:
             result.append(self.toplevel_studio_package_importable_name)
-        result.extend(self.wrangler_target_score_resident_package_importable_names)
+        result.extend(self.score_resident_wrangler_target_package_importable_names)
+        return result
+
+    @property
+    def score_resident_wrangler_target_package_importable_names(self):
+        result = []
+        for score_package_short_name in self.score_package_short_names:
+            parts = [score_package_short_name]
+            if self.wrangled_score_package_importable_name_prefix:
+                parts.append(self.wrangled_score_package_importable_name_prefix)
+            toplevel_score_package_importable_name = self.dot_join(parts)
+            result.append(toplevel_score_package_importable_name)
         return result
 
     ### PUBLIC METHODS ###
