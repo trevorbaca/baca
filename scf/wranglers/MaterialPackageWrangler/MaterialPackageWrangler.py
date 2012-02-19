@@ -8,11 +8,12 @@ class MaterialPackageWrangler(PackageWrangler):
 
     def __init__(self, session=None):
         import baca
+        from baca.scf.wranglers.MaterialPackageMakerWrangler import MaterialPackageMakerWrangler
         PackageWrangler.__init__(self, 
             toplevel_global_package_importable_name=self.studio_materials_package_importable_name, 
             toplevel_score_package_importable_name_body=self.score_materials_package_importable_name_body,
             session=session)
-        self._material_package_maker_wrangler = baca.scf.wranglers.MaterialPackageMakerWrangler(session=self.session)
+        self._material_package_maker_wrangler = MaterialPackageMakerWrangler(session=self.session)
 
     ### READ-ONLY PUBLIC ATTRIBUTES ###
 
@@ -24,9 +25,10 @@ class MaterialPackageWrangler(PackageWrangler):
     def material_package_maker_wrangler(self):
         return self._material_package_maker_wrangler
 
+    # TODO: move up to Wrangler.current_containing_package_importable_name
     # TODO: write test
     @property
-    def materials_package_importable_name(self):
+    def current_materials_package_importable_name(self):
         if self.session.is_in_score:
             score_package_short_name = self.session.current_score_package_short_name
             return self.dot_join([score_package_short_name, self.toplevel_score_package_importable_name_body])
@@ -47,7 +49,7 @@ class MaterialPackageWrangler(PackageWrangler):
                 return
             material_package_short_name = iotools.string_to_strict_directory_name(material_name)
             material_package_importable_name = self.dot_join([
-                self.materials_package_importable_name, material_package_short_name])
+                self.current_materials_package_importable_name, material_package_short_name])
             if self.package_exists(material_package_importable_name):
                 line = 'Material package {!r} already exists.'.format(material_package_importable_name)
                 self.display([line, ''])

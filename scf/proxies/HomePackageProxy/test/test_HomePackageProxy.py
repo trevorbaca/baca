@@ -15,7 +15,7 @@ def test_HomePackageProxy_01():
     assert hpp.formatted_tags == []
     assert hpp.material_package_maker_wrangler == baca.scf.wranglers.MaterialPackageMakerWrangler()
     assert hpp.material_package_wrangler == baca.scf.wranglers.MaterialPackageWrangler()
-    assert hpp.materials_package_importable_name == 'baca.materials'
+    assert hpp.current_materials_package_importable_name == 'baca.materials'
     assert hpp.package_importable_name == 'baca'
     assert hpp.package_short_name == 'baca'
     assert hpp.package_spaced_name == 'baca'

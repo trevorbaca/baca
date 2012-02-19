@@ -297,12 +297,13 @@ class MaterialPackageProxy(PackageProxy):
     def material_underscored_name(self):
         return self.package_short_name
 
+    # TODO: rename to current_materials_directory_name
     @property
     def materials_directory_name(self):
-        return self.package_importable_name_to_directory_name(self.materials_package_importable_name)
+        return self.package_importable_name_to_directory_name(self.current_materials_package_importable_name)
 
     @property
-    def materials_package_importable_name(self):
+    def current_materials_package_importable_name(self):
         return self.dot_join(self.package_importable_name.split('.')[:-1])
 
     @property

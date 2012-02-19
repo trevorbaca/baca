@@ -21,5 +21,5 @@ class HomePackageProxy(PackageProxy):
         return self._material_package_wrangler
   
     @property
-    def materials_package_importable_name(self):
+    def current_materials_package_importable_name(self):
         return self.studio_materials_package_importable_name
