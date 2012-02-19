@@ -200,3 +200,7 @@ class PackageWrangler(SCFObject):
 
     def make_package_interactively(self):
         self.print_implemented_on_child_classes()
+
+    def profile_visible_package_structures(self):
+        for package_proxy in self.list_wrangled_package_proxies_to_display():
+            package_proxy.profile_package_structure()

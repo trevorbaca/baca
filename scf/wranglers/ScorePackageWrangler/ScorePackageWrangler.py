@@ -31,16 +31,6 @@ class ScorePackageWrangler(PackageWrangler):
     def get_package_proxy(self, package_importable_name):
         return ScorePackageProxy(package_importable_name, session=self.session)
 
-#    def get_score_package_importable_name_interactively(self, prompt=True):
-#        getter = self.make_getter(where=self.where())
-#        getter.append_underscore_delimited_lowercase_package_name('score package name')
-#        self.push_backtrack()
-#        score_package_importable_name = getter.run()
-#        self.pop_backtrack()
-#        if self.backtrack():
-#            return 
-#        return score_package_importable_name
-
     def list_wrangled_package_proxies_to_display(self, head=None):
         result = []
         scores_to_show = self.session.scores_to_show
@@ -55,7 +45,6 @@ class ScorePackageWrangler(PackageWrangler):
                 result.append(score_package_proxy)
         return result
 
-    # TODO: move up to wrangler
     def make_package_interactively(self):
         getter = self.make_getter(where=self.where())
         getter.indent_level = 1
@@ -75,17 +64,6 @@ class ScorePackageWrangler(PackageWrangler):
         score_package_proxy.add_tag('title', title)
         score_package_proxy.year_of_completion = year
         
-    def profile_score_package_structures(self):
-        for score_package_proxy in self.list_wrangled_package_proxies_to_display():
-            score_package_proxy.profile_package_structure()
-
-    def select_score_package_proxy(self):
-        menu, section = self.make_menu(where=self.where(), is_numbered=True)
-        section.tokens = self.score_titles_with_years_to_display
-        score_package_short_name = self.title_to_score_package_short_name(value)
-        score_package_proxy = ScorePackageProxy(score_package_short_name, session=self.session)
-        return score_package_proxy
-    
     # TODO: move up to level of wrangler
     def svn_add(self, prompt=True):
         for score_package_proxy in self.list_wrangled_package_proxies_to_display():

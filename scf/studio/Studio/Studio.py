@@ -98,6 +98,8 @@ class Studio(SCFObject):
             self.session.show_mothballed_scores()
         elif result == 'svn':
             self.manage_svn()
+        elif result == 'profile':
+            self.score_package_wrangler.profile_visible_package_structures()
         elif result in self.score_package_wrangler.list_wrangled_package_short_names_to_display():
             self.edit_score_interactively(result)
     
@@ -138,11 +140,12 @@ class Studio(SCFObject):
         section.append(('m', 'materials'))
         section.append(('k', 'sketches'))
         section.append(('new', 'new score'))
-        section = menu.make_section(is_hidden=True)
-        section.append(('svn', 'work with repository'))
-        section.append(('active', 'show active scores only'))
-        section.append(('all', 'show all scores'))
-        section.append(('mb', 'show mothballed scores only'))
+        hidden_section = menu.make_section(is_hidden=True)
+        hidden_section.append(('svn', 'work with repository'))
+        hidden_section.append(('active', 'show active scores only'))
+        hidden_section.append(('all', 'show all scores'))
+        hidden_section.append(('mb', 'show mothballed scores only'))
+        hidden_section.append(('profile', 'profile packages'))
         return menu
 
     def make_score_selection_menu(self):
