@@ -125,6 +125,14 @@ class PackageWrangler(SCFObject):
 
     ### PUBLIC METHODS ###
     
+    def fix_structure_of_wrangled_packages_to_display(self, prompt=True):
+        results = []
+        for package_proxy in self.list_wrangled_package_proxies_to_display():
+            results.append(package_proxy.fix_package_structure(is_interactive=prompt))
+            if prompt:
+                package_proxy.profile_package_structure()
+        return results
+
     def get_package_proxy(self, package_importable_name):
         return PackageProxy(package_importable_name, session=self.session)
         

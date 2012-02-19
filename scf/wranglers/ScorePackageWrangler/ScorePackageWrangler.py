@@ -24,15 +24,6 @@ class ScorePackageWrangler(PackageWrangler):
 
     ### PUBLIC METHODS ###
 
-    # TODO: move up to level of wrangler
-    def fix_package_structures(self, prompt=True):
-        results = []
-        for score_package_proxy in self.list_wrangled_package_proxies_to_display():
-            results.append(score_package_proxy.fix_package_structure(is_interactive=prompt))
-            if prompt:
-                score_package_proxy.profile_package_structure()
-        return results
-
     def get_package_proxy(self, package_importable_name):
         return ScorePackageProxy(package_importable_name, session=self.session)
 
