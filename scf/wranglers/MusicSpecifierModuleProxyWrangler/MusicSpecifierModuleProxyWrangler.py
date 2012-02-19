@@ -2,12 +2,13 @@ from baca.scf.proxies.MusicSpecifierModuleProxy import MusicSpecifierModuleProxy
 from baca.scf.wranglers.PackageWrangler import PackageWrangler
 import os
 
+
 # TODO: write tests
 class MusicSpecifierModuleProxyWrangler(PackageWrangler):
 
     def __init__(self, session=None):
         PackageWrangler.__init__(self,
-            toplevel_global_package_importable_name=self.studio_specifiers_package_importable_name,
+            toplevel_studio_package_importable_name=self.studio_specifiers_package_importable_name,
             wrangled_score_package_importable_name_prefix=self.score_specifiers_package_importable_name_prefix,
             session=session)
 
@@ -35,7 +36,7 @@ class MusicSpecifierModuleProxyWrangler(PackageWrangler):
             score_package_short_name = self.session.current_score_package_short_name
             return self.dot_join([score_package_short_name, self.wrangled_score_package_importable_name_prefix])
         else:
-            return self.toplevel_global_package_importable_name
+            return self.toplevel_studio_package_importable_name
             
     ### PUBLIC METHODS ###
 

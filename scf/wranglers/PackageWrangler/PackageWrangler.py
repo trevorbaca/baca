@@ -7,25 +7,25 @@ import os
 class PackageWrangler(SCFObject):
 
     def __init__(self, 
-        toplevel_global_package_importable_name=None, 
+        toplevel_studio_package_importable_name=None, 
         wrangled_score_package_importable_name_prefix=None, 
         session=None):
         SCFObject.__init__(self, session=session)
-        if toplevel_global_package_importable_name is not None:
+        if toplevel_studio_package_importable_name is not None:
             assert iotools.is_underscore_delimited_lowercase_package_name(
-                toplevel_global_package_importable_name)
+                toplevel_studio_package_importable_name)
         if wrangled_score_package_importable_name_prefix is not None:
             assert iotools.is_underscore_delimited_lowercase_package_name(
                 wrangled_score_package_importable_name_prefix)
-        self._toplevel_global_package_importable_name = toplevel_global_package_importable_name
+        self._toplevel_studio_package_importable_name = toplevel_studio_package_importable_name
         self._wrangled_score_package_importable_name_prefix = wrangled_score_package_importable_name_prefix
-        self.conditionally_make_empty_package(self.toplevel_global_package_importable_name)
+        self.conditionally_make_empty_package(self.toplevel_studio_package_importable_name)
 
     ### OVERLOADS ###
 
     def __eq__(self, other):
         if isinstance(other, type(self)):
-            if self.toplevel_global_package_importable_name == other.toplevel_global_package_importable_name:
+            if self.toplevel_studio_package_importable_name == other.toplevel_studio_package_importable_name:
                 if self.wrangled_score_package_importable_name_prefix == \
                     other.wrangled_score_package_importable_name_prefix:
                     return True
@@ -33,8 +33,8 @@ class PackageWrangler(SCFObject):
 
     def __repr__(self):
         body = None
-        if self.toplevel_global_package_importable_name:
-            body = self.toplevel_global_package_importable_name.split('.')[-1]
+        if self.toplevel_studio_package_importable_name:
+            body = self.toplevel_studio_package_importable_name.split('.')[-1]
         elif self.wrangled_score_package_importable_name_prefix:
             body = self.wrangled_score_package_importable_name_prefix.split('.')[-1]
         if body:
@@ -54,7 +54,7 @@ class PackageWrangler(SCFObject):
             score_package_short_name = self.session.current_score_package_short_name
             return self.dot_join([score_package_short_name, self.wrangled_score_package_importable_name_prefix])
         else:
-            return self.toplevel_global_package_importable_name
+            return self.toplevel_studio_package_importable_name
 
     @property
     def has_toplevel_packages(self):
@@ -85,14 +85,14 @@ class PackageWrangler(SCFObject):
         return '__temporary_package'
 
     @property
-    def toplevel_global_package_importable_name(self):
-        return self._toplevel_global_package_importable_name
+    def toplevel_studio_package_importable_name(self):
+        return self._toplevel_studio_package_importable_name
 
     @property
     def toplevel_package_importable_names(self):
         result = [] 
-        if self.toplevel_global_package_importable_name:
-            result.append(self.toplevel_global_package_importable_name)
+        if self.toplevel_studio_package_importable_name:
+            result.append(self.toplevel_studio_package_importable_name)
         result.extend(self.toplevel_score_package_importable_names)
         return result
 
@@ -114,12 +114,12 @@ class PackageWrangler(SCFObject):
     @property
     def wrangled_global_package_importable_names(self):
         result = []
-        if self.toplevel_global_package_importable_name is not None:
+        if self.toplevel_studio_package_importable_name is not None:
             global_package_directory_name = self.package_importable_name_to_directory_name(
-                self.toplevel_global_package_importable_name)
+                self.toplevel_studio_package_importable_name)
             for name in os.listdir(global_package_directory_name):
                 if name[0].isalpha():
-                    result.append('{}.{}'.format(self.toplevel_global_package_importable_name, name))
+                    result.append('{}.{}'.format(self.toplevel_studio_package_importable_name, name))
         return result
 
     @property

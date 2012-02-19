@@ -6,7 +6,7 @@ class ScorePackageWrangler(PackageWrangler):
 
     def __init__(self, session=None):
         PackageWrangler.__init__(self, 
-            toplevel_global_package_importable_name=None, 
+            toplevel_studio_package_importable_name=None, 
             wrangled_score_package_importable_name_prefix='',  # TODO: change from '' to None
             session=session)
 
