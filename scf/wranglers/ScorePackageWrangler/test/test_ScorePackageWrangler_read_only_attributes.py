@@ -6,6 +6,7 @@ def test_ScorePackageWrangler_read_only_attributes_01():
     studio = baca.scf.studio.Studio()
     wrangler = studio.score_package_wrangler
 
+    assert wrangler.current_containing_directory_name == wrangler.scores_directory_name
     assert wrangler.has_toplevel_packages
     assert wrangler.has_wrangled_packages
     assert 'lidercfeny' in wrangler.score_package_short_names

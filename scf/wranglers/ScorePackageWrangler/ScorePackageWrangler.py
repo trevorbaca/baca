@@ -16,6 +16,10 @@ class ScorePackageWrangler(PackageWrangler):
     ### READ-ONLY PUBLIC ATTRIBUTES ###
 
     @property
+    def current_containing_directory_name(self):
+        return self.scores_directory_name
+
+    @property
     def score_titles_with_years_to_display(self):
         result = []
         for score_package_proxy in self.list_wrangled_package_proxies_to_display():
@@ -50,14 +54,6 @@ class ScorePackageWrangler(PackageWrangler):
             elif scores_to_show == 'mothballed' and is_mothballed:
                 result.append(score_package_proxy)
         return result
-
-    # TODO: move up to wrangler
-    def make_package(self, package_short_name):
-        assert iotools.is_underscore_delimited_lowercase_package_name(package_short_name)
-        package_directory_name = os.path.join(self.scores_directory_name, package_short_name)
-        os.mkdir(package_directory_name)
-        score_package_proxy = self.get_package_proxy(package_short_name)
-        score_package_proxy.fix_package_structure(is_interactive=False)
 
     # TODO: move up to wrangler
     def make_package_interactively(self):
