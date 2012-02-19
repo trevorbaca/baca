@@ -45,7 +45,7 @@ def test_MaterialPackageProxy_read_only_attributes_01():
     assert     mpp.material_package_short_name == 'red_numbers'
     assert     mpp.material_spaced_name == 'red numbers'
     assert     mpp.material_underscored_name == 'red_numbers'
-    assert     mpp.materials_directory_name == \
+    assert     mpp.current_materials_directory_name == \
         '/Users/trevorbaca/Documents/other/baca/materials'
     assert     mpp.current_materials_package_importable_name == 'baca.materials'
     assert     mpp.output_material == [1, 2, 3, 4, 5]
@@ -111,7 +111,7 @@ def test_MaterialPackageProxy_read_only_attributes_02():
     assert     mpp.material_package_short_name == 'red_sargasso'
     assert     mpp.material_spaced_name == 'red sargasso'
     assert     mpp.material_underscored_name == 'red_sargasso'
-    assert     mpp.materials_directory_name == \
+    assert     mpp.current_materials_directory_name == \
         '/Users/trevorbaca/Documents/other/baca/materials'
     assert     mpp.current_materials_package_importable_name == 'baca.materials'
     assert     measuretools.all_are_measures(mpp.output_material)
@@ -183,7 +183,7 @@ def test_MaterialPackageProxy_read_only_attributes_03():
     assert     mpp.material_package_short_name == 'red_notes'
     assert     mpp.material_spaced_name == 'red notes'
     assert     mpp.material_underscored_name == 'red_notes'
-    assert     mpp.materials_directory_name == \
+    assert     mpp.current_materials_directory_name == \
         '/Users/trevorbaca/Documents/other/baca/materials'
     assert     mpp.current_materials_package_importable_name == 'baca.materials'
     assert     notetools.all_are_notes(mpp.material_definition)

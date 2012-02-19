@@ -30,6 +30,14 @@ class MaterialPackageProxy(PackageProxy):
         return self.package_spaced_name
 
     @property
+    def current_materials_directory_name(self):
+        return self.package_importable_name_to_directory_name(self.current_materials_package_importable_name)
+
+    @property
+    def current_materials_package_importable_name(self):
+        return self.dot_join(self.package_importable_name.split('.')[:-1])
+
+    @property
     def has_complete_user_input_wrapper_in_memory(self):
         if self.has_user_input_wrapper_in_memory:
             return self.user_input_wrapper_in_memory.is_complete
@@ -269,9 +277,9 @@ class MaterialPackageProxy(PackageProxy):
 
     @property
     def material_package_directory(self):
-        if self.materials_directory_name:
+        if self.current_materials_directory_name:
             if self.material_package_short_name:
-                return os.path.join(self.materials_directory_name, self.material_package_short_name)
+                return os.path.join(self.current_materials_directory_name, self.material_package_short_name)
 
     @property
     def material_package_maker(self):
@@ -296,15 +304,6 @@ class MaterialPackageProxy(PackageProxy):
     @property
     def material_underscored_name(self):
         return self.package_short_name
-
-    # TODO: rename to current_materials_directory_name
-    @property
-    def materials_directory_name(self):
-        return self.package_importable_name_to_directory_name(self.current_materials_package_importable_name)
-
-    @property
-    def current_materials_package_importable_name(self):
-        return self.dot_join(self.package_importable_name.split('.')[:-1])
 
     @property
     def output_material(self):

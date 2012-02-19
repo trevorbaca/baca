@@ -25,8 +25,12 @@ class MaterialPackageWrangler(PackageWrangler):
     def material_package_maker_wrangler(self):
         return self._material_package_maker_wrangler
 
-    # TODO: move up to Wrangler.current_containing_package_importable_name
-    # TODO: write test
+    # TODO: move to Wrangler.current_containing_package_directory_name
+    @property
+    def current_materials_directory_name(self):
+        return self.package_importable_name_to_directory_name(self.current_materials_package_importable_name)
+
+    # TODO: move to Wrangler.current_containing_package_importable_name
     @property
     def current_materials_package_importable_name(self):
         if self.session.is_in_score:
