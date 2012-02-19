@@ -9,7 +9,9 @@ import sys
 class ScorePackageWrangler(PackageWrangler):
 
     def __init__(self, session=None):
-        PackageWrangler.__init__(self, None, '', session=session)
+        PackageWrangler.__init__(self, 
+            toplevel_global_package_importable_name=None, 
+            toplevel_score_package_importable_name_body='', session=session)
 
     ### READ-ONLY PUBLIC ATTRIBUTES ###
 
@@ -19,15 +21,6 @@ class ScorePackageWrangler(PackageWrangler):
         for score_package_proxy in self.list_wrangled_package_proxies_to_display():
             result.append(score_package_proxy.title_with_year or '(untitled score)')
         return result
-
-    @property
-    def temporary_score_package_directory_name(self):
-        return os.path.join(self.scores_directory_name,
-            self.temporary_package_importable_name)
-
-    @property
-    def temporary_package_importable_name(self):
-        return '__temporary_score_package'
 
     ### PUBLIC METHODS ###
 

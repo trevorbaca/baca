@@ -6,7 +6,8 @@ import os
 
 class PackageWrangler(SCFObject):
 
-    def __init__(self, toplevel_global_package_importable_name=None, 
+    def __init__(self, 
+        toplevel_global_package_importable_name=None, 
         toplevel_score_package_importable_name_body=None, session=None):
         SCFObject.__init__(self, session=session)
         if toplevel_global_package_importable_name is not None:
@@ -61,6 +62,14 @@ class PackageWrangler(SCFObject):
             if x[0].isalpha():
                 result.append(x)
         return result
+
+    @property
+    def temporary_package_directory_name(self):
+        return self.package_importable_name_to_directory_name(self.temporary_package_importable_name)
+
+    @property
+    def temporary_package_importable_name(self):
+        return '__temporary_package'
 
     @property
     def toplevel_global_package_importable_name(self):
