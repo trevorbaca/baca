@@ -22,10 +22,11 @@ class ScorePackageWrangler(PackageWrangler):
 
     @property
     def temporary_score_package_directory_name(self):
-        return os.path.join(os.environ.get('SCORES'), '__temporary_score_package')
+        return os.path.join(self.scores_directory_name,
+            self.temporary_package_importable_name)
 
     @property
-    def temporary_score_package_importable_name(self):
+    def temporary_package_importable_name(self):
         return '__temporary_score_package'
 
     ### PUBLIC METHODS ###
@@ -68,7 +69,7 @@ class ScorePackageWrangler(PackageWrangler):
 
     def make_score_package(self, score_package_short_name):
         assert iotools.is_underscore_delimited_lowercase_package_name(score_package_short_name)
-        score_package_directory_name = os.path.join(os.environ.get('SCORES'), score_package_short_name)
+        score_package_directory_name = os.path.join(self.scores_directory_name, score_package_short_name)
         os.mkdir(score_package_directory_name)
         score_package_proxy = self.get_package_proxy(score_package_short_name)
         score_package_proxy.fix_package_structure(is_interactive=False)

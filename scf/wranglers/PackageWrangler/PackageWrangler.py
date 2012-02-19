@@ -57,8 +57,7 @@ class PackageWrangler(SCFObject):
     @property
     def score_package_short_names(self):
         result = []
-        scores_directory = os.environ.get('SCORES')
-        for x in os.listdir(scores_directory):
+        for x in os.listdir(self.scores_directory_name):
             if x[0].isalpha():
                 result.append(x)
         return result

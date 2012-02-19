@@ -5,5 +5,5 @@ import os
 class ExgDirectoryProxy(DirectoryProxy):
 
     def __init__(self, score_package_short_name, session=None):
-        directory_name = os.path.join(os.environ.get('SCORES'), score_package_short_name, 'exg')
+        directory_name = os.path.join(self.scores_directory_name, score_package_short_name, 'exg')
         DirectoryProxy.__init__(self, directory_name, session=session)

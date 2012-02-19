@@ -67,6 +67,10 @@ class SCFObject(object):
         return 'mus.specifiers'
 
     @property
+    def scores_directory_name(self):
+        return os.environ.get('SCORES')
+
+    @property
     def session(self):
         return self._session
 
@@ -262,7 +266,7 @@ class SCFObject(object):
         if package_importable_name_parts[0] == self.studio_package_importable_name:
             directory_parts = [os.environ.get('BACA')] + package_importable_name_parts[1:]
         else:
-            directory_parts = [os.environ.get('SCORES')] + package_importable_name_parts[:]
+            directory_parts = [self.scores_directory_name] + package_importable_name_parts[:]
         directory = os.path.join(*directory_parts)
         return directory
 
