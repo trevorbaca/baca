@@ -1,7 +1,9 @@
 from abjad.tools import iotools
 from baca.scf.wranglers.PackageWrangler import PackageWrangler
 from baca.scf.proxies.ScorePackageProxy import ScorePackageProxy
-import os, shutil, sys
+import os
+import shutil
+import sys
 
 
 class ScorePackageWrangler(PackageWrangler):
