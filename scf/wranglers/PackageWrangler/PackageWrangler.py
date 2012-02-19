@@ -58,7 +58,7 @@ class PackageWrangler(SCFObject):
 
     @property
     def has_toplevel_packages(self):
-        for toplevel_package_importable_name in self.toplevel_package_importable_names:
+        for wrangler_target_package_importable_name in self.wrangler_target_package_importable_names:
             return True
         return False
 
@@ -85,11 +85,15 @@ class PackageWrangler(SCFObject):
         return '__temporary_package'
 
     @property
+    def toplevel_studio_package_directory_name(self):
+        return self.package_importable_name_to_directory_name(self.toplevel_studio_package_importable_name)
+
+    @property
     def toplevel_studio_package_importable_name(self):
         return self._toplevel_studio_package_importable_name
 
     @property
-    def toplevel_package_importable_names(self):
+    def wrangler_target_package_importable_names(self):
         result = [] 
         if self.toplevel_studio_package_importable_name:
             result.append(self.toplevel_studio_package_importable_name)
