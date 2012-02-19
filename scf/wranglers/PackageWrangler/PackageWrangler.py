@@ -44,6 +44,18 @@ class PackageWrangler(SCFObject):
     ### READ-ONLY PUBLIC ATTRIBUTES ###
 
     @property
+    def current_containing_package_directory_name(self):
+        return self.package_importable_name_to_directory_name(self.current_containing_package_importable_name)
+
+    @property
+    def current_containing_package_importable_name(self):
+        if self.session.is_in_score:
+            score_package_short_name = self.session.current_score_package_short_name
+            return self.dot_join([score_package_short_name, self.toplevel_score_package_importable_name_body])
+        else:
+            return self.toplevel_global_package_importable_name
+
+    @property
     def has_toplevel_packages(self):
         for toplevel_package_importable_name in self.toplevel_package_importable_names:
             return True

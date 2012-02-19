@@ -25,20 +25,6 @@ class MaterialPackageWrangler(PackageWrangler):
     def material_package_maker_wrangler(self):
         return self._material_package_maker_wrangler
 
-    # TODO: move to Wrangler.current_containing_package_directory_name
-    @property
-    def current_materials_directory_name(self):
-        return self.package_importable_name_to_directory_name(self.current_materials_package_importable_name)
-
-    # TODO: move to Wrangler.current_containing_package_importable_name
-    @property
-    def current_materials_package_importable_name(self):
-        if self.session.is_in_score:
-            score_package_short_name = self.session.current_score_package_short_name
-            return self.dot_join([score_package_short_name, self.toplevel_score_package_importable_name_body])
-        else:
-            return self.toplevel_global_package_importable_name
-    
     ### PUBLIC METHODS ###
 
     # TODO: write test
@@ -53,7 +39,7 @@ class MaterialPackageWrangler(PackageWrangler):
                 return
             material_package_short_name = iotools.string_to_strict_directory_name(material_name)
             material_package_importable_name = self.dot_join([
-                self.current_materials_package_importable_name, material_package_short_name])
+                self.current_containing_package_importable_name, material_package_short_name])
             if self.package_exists(material_package_importable_name):
                 line = 'Material package {!r} already exists.'.format(material_package_importable_name)
                 self.display([line, ''])
