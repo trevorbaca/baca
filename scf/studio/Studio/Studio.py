@@ -11,7 +11,7 @@ class Studio(SCFObject):
 
     def __init__(self, session=None):
         SCFObject.__init__(self, session=session)
-        self._global_proxy = HomePackageProxy(session=self.session)
+        self._home_package_proxy = HomePackageProxy(session=self.session)
         self._score_package_wrangler = ScorePackageWrangler(session=self.session)
 
     ### READ-ONLY PUBLIC ATTRIBUTES ###
@@ -21,8 +21,8 @@ class Studio(SCFObject):
         return 'studio'
 
     @property
-    def global_proxy(self):
-        return self._global_proxy
+    def home_package_proxy(self):
+        return self._home_package_proxy
 
     @property
     def score_status_string(self):
@@ -88,7 +88,7 @@ class Studio(SCFObject):
             self.print_not_implemented()
         elif result == 'm':
             breadcrumb = self.pop_breadcrumb()
-            self.global_proxy.material_package_wrangler.run(head=self.studio_package_importable_name)
+            self.home_package_proxy.material_package_wrangler.run(head=self.studio_package_importable_name)
             self.push_breadcrumb(breadcrumb)
         elif result == 'new':
             breadcrumb = self.pop_breadcrumb()
@@ -106,26 +106,26 @@ class Studio(SCFObject):
         '''
         this_result = False
         if result == 'add':
-            self.global_proxy.svn_add()
+            self.home_package_proxy.svn_add()
         elif result == 'add_scores':
             self.score_package_wrangler.svn_add()
         elif result == 'ci':
-            self.global_proxy.svn_ci()
+            self.home_package_proxy.svn_ci()
             return True
         elif result == 'ci_scores':
             self.score_package_wrangler.svn_ci()
         elif result == 'pytest':
-            self.global_proxy.run_py_test()
+            self.home_package_proxy.run_py_test()
         elif result == 'pytest_scores':
             self.score_package_wrangler.run_py_test()
         elif result == 'pytest_all':
             self.run_py_test_all()
         elif result == 'st':
-            self.global_proxy.svn_st()
+            self.home_package_proxy.svn_st()
         elif result == 'st_scores':
             self.score_package_wrangler.svn_st()
         elif result == 'up':
-            self.global_proxy.svn_up()
+            self.home_package_proxy.svn_up()
             return True
         elif result == 'up_scores':
             self.score_package_wrangler.svn_up()

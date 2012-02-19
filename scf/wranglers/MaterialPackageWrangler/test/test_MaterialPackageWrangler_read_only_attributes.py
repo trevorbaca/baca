@@ -4,7 +4,7 @@ import baca
 def test_MaterialPackageWrangler_read_only_attributes_01():
 
     studio = baca.scf.studio.Studio()
-    wrangler = studio.global_proxy.material_package_wrangler
+    wrangler = studio.home_package_proxy.material_package_wrangler
     
     assert wrangler.breadcrumb == 'materials'
     assert wrangler.materials_package_importable_name == 'baca.materials'
@@ -13,7 +13,7 @@ def test_MaterialPackageWrangler_read_only_attributes_01():
 def test_MaterialPackageWrangler_read_only_attributes_02():
 
     studio = baca.scf.studio.Studio()
-    wrangler = studio.global_proxy.material_package_wrangler
+    wrangler = studio.home_package_proxy.material_package_wrangler
     
     assert wrangler.breadcrumb == 'materials'
     assert wrangler.materials_package_importable_name == 'baca.materials'

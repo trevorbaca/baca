@@ -6,4 +6,4 @@ def test_Studio___init___01():
     '''
 
     studio = baca.scf.studio.Studio()
-    assert studio.session is studio.global_proxy.session is studio.score_package_wrangler.session
+    assert studio.session is studio.home_package_proxy.session is studio.score_package_wrangler.session
