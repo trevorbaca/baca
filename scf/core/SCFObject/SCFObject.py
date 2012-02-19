@@ -59,11 +59,15 @@ class SCFObject(object):
         return self.package_importable_name_to_directory_name(self.scf_package_importable_name)
 
     @property
-    def score_materials_package_importable_name_body(self):
+    def score_chunks_package_importable_name_prefix(self):
+        return 'mus.chunks'
+
+    @property
+    def score_materials_package_importable_name_prefix(self):
         return 'mus.materials'
 
     @property
-    def score_specifiers_package_importable_name_body(self):
+    def score_specifiers_package_importable_name_prefix(self):
         return 'mus.specifiers'
 
     @property
@@ -354,7 +358,6 @@ class SCFObject(object):
 
     def restore_breadcrumbs(self, cache=False):
         if cache:
-            #self.session._breadcrumb_stack[:] = self.session.cached_breadcrumbs[:]
             self.session._breadcrumb_stack[:] = self.session.breadcrumb_cache_stack.pop()
 
     def where(self):
