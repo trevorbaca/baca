@@ -9,7 +9,6 @@ def test_ScorePackageWrangler_read_only_attributes_01():
     assert wrangler.current_containing_directory_name == wrangler.scores_directory_name
     assert wrangler.has_toplevel_packages
     assert wrangler.has_wrangled_packages
-    assert 'lidercfeny' in wrangler.score_package_short_names
     assert 'Lidércfény (2008)' in wrangler.score_titles_with_years_to_display 
     assert wrangler.temporary_package_directory_name.endswith('__temporary_package')
     assert wrangler.toplevel_studio_package_importable_name is None

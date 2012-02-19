@@ -67,6 +67,14 @@ class SCFObject(object):
         return 'mus.materials'
 
     @property
+    def score_package_short_names(self):
+        result = []
+        for x in os.listdir(self.scores_directory_name):
+            if x[0].isalpha():
+                result.append(x)
+        return result
+
+    @property
     def score_specifiers_package_importable_name_prefix(self):
         return 'mus.specifiers'
 

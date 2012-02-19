@@ -69,11 +69,21 @@ class PackageWrangler(SCFObject):
         return False
 
     @property
-    def score_package_short_names(self):
+    def score_resident_wrangler_target_package_directory_names(self):
         result = []
-        for x in os.listdir(self.scores_directory_name):
-            if x[0].isalpha():
-                result.append(x)
+        for package_importable_name in self.score_resident_wrangler_target_package_importable_names:
+            result.append(self.package_importable_name_to_directory_name(package_importable_name)
+        return result            
+
+    @property
+    def score_resident_wrangler_target_package_importable_names(self):
+        result = []
+        for score_package_short_name in self.score_package_short_names:
+            parts = [score_package_short_name]
+            if self.wrangled_score_package_importable_name_prefix:
+                parts.append(self.wrangled_score_package_importable_name_prefix)
+            toplevel_score_package_importable_name = self.dot_join(parts)
+            result.append(toplevel_score_package_importable_name)
         return result
 
     @property
@@ -136,16 +146,6 @@ class PackageWrangler(SCFObject):
         result.extend(self.score_resident_wrangler_target_package_importable_names)
         return result
 
-    @property
-    def score_resident_wrangler_target_package_importable_names(self):
-        result = []
-        for score_package_short_name in self.score_package_short_names:
-            parts = [score_package_short_name]
-            if self.wrangled_score_package_importable_name_prefix:
-                parts.append(self.wrangled_score_package_importable_name_prefix)
-            toplevel_score_package_importable_name = self.dot_join(parts)
-            result.append(toplevel_score_package_importable_name)
-        return result
 
     ### PUBLIC METHODS ###
     
