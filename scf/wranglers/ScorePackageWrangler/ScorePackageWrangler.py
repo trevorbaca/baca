@@ -1,9 +1,5 @@
-from abjad.tools import iotools
 from baca.scf.wranglers.PackageWrangler import PackageWrangler
 from baca.scf.proxies.ScorePackageProxy import ScorePackageProxy
-import os
-import shutil
-import sys
 
 
 class ScorePackageWrangler(PackageWrangler):
@@ -11,7 +7,8 @@ class ScorePackageWrangler(PackageWrangler):
     def __init__(self, session=None):
         PackageWrangler.__init__(self, 
             toplevel_global_package_importable_name=None, 
-            toplevel_score_package_importable_name_body='', session=session)
+            toplevel_score_package_importable_name_body='', 
+            session=session)
 
     ### READ-ONLY PUBLIC ATTRIBUTES ###
 
@@ -63,36 +60,3 @@ class ScorePackageWrangler(PackageWrangler):
         score_package_proxy = self.get_package_proxy(score_package_short_name)
         score_package_proxy.add_tag('title', title)
         score_package_proxy.year_of_completion = year
-        
-    # TODO: move up to level of wrangler
-    def svn_add(self, prompt=True):
-        for score_package_proxy in self.list_wrangled_package_proxies_to_display():
-            score_package_proxy.svn_add(prompt=False)
-        self.proceed(prompt=prompt)
-
-    # TODO: move up to level of wrangler
-    def svn_ci(self, prompt=True):
-        getter = self.make_getter(where=self.where())
-        getter.append_string('commit message')
-        commit_message = getter.run()
-        if self.backtrack():
-            return
-        line = 'commit message will be: "{}"\n'.format(commit_message)
-        self.display(line)
-        if not self.confirm():
-            return
-        for score_package_proxy in self.list_wrangled_package_proxies_to_display():
-            score_package_proxy.svn_ci(commit_message=commit_message, prompt=False)
-        self.proceed(prompt=prompt)
-
-    # TODO: move up to level of wrangler
-    def svn_st(self, prompt=True):
-        for score_package_proxy in self.list_wrangled_package_proxies_to_display():
-            score_package_proxy.svn_st(prompt=False)
-        self.proceed(prompt=prompt)
-
-    # TODO: move up to level of wrangler
-    def svn_up(self, prompt=True):
-        for score_package_proxy in self.list_wrangled_package_proxies_to_display():
-            score_package_proxy.svn_up(prompt=False)
-        self.proceed(prompt=prompt)

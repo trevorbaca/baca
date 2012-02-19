@@ -204,3 +204,32 @@ class PackageWrangler(SCFObject):
     def profile_visible_package_structures(self):
         for package_proxy in self.list_wrangled_package_proxies_to_display():
             package_proxy.profile_package_structure()
+
+    def svn_add(self, prompt=True):
+        for package_proxy in self.list_wrangled_package_proxies_to_display():
+            package_proxy.svn_add(prompt=False)
+        self.proceed(prompt=prompt)
+
+    def svn_ci(self, prompt=True):
+        getter = self.make_getter(where=self.where())
+        getter.append_string('commit message')
+        commit_message = getter.run()
+        if self.backtrack():
+            return
+        line = 'commit message will be: "{}"\n'.format(commit_message)
+        self.display(line)
+        if not self.confirm():
+            return
+        for package_proxy in self.list_wrangled_package_proxies_to_display():
+            package_proxy.svn_ci(commit_message=commit_message, prompt=False)
+        self.proceed(prompt=prompt)
+
+    def svn_st(self, prompt=True):
+        for package_proxy in self.list_wrangled_package_proxies_to_display():
+            package_proxy.svn_st(prompt=False)
+        self.proceed(prompt=prompt)
+
+    def svn_up(self, prompt=True):
+        for package_proxy in self.list_wrangled_package_proxies_to_display():
+            package_proxy.svn_up(prompt=False)
+        self.proceed(prompt=prompt)
