@@ -11,7 +11,7 @@ def test_ScorePackageWrangler_read_only_attributes_01():
     assert wrangler.has_wrangled_packages
     assert 'Lidércfény (2008)' in wrangler.score_titles_with_years_to_display 
     assert wrangler.temporary_package_directory_name.endswith('__temporary_package')
-    assert wrangler.toplevel_studio_package_importable_name is None
+    assert wrangler.toplevel_wrangler_target_package_importable_name is None
     assert 'lidercfeny' in wrangler.wrangler_target_package_importable_names
     assert wrangler.wrangled_score_package_importable_name_prefix is None
     assert 'lidercfeny' in wrangler.score_resident_wrangler_target_package_importable_names

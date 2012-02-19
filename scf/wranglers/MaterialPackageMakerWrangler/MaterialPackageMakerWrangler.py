@@ -55,7 +55,7 @@ class MaterialPackageMakerWrangler(PackageWrangler):
     # TODO: implement MaterialPackageProxyClassFile object to model and customize these settings
     def make_material_proxy_class_file(self, material_proxy_name, generic_output_name):
         class_file_name = os.path.join(
-            self.toplevel_studio_package_importable_name, material_proxy_name, material_proxy_name + '.py')
+            self.toplevel_wrangler_target_package_importable_name, material_proxy_name, material_proxy_name + '.py')
         class_file = file(class_file_name, 'w')
         lines = []
         lines.append('from baca.music.foo import foo')
@@ -106,7 +106,7 @@ class MaterialPackageMakerWrangler(PackageWrangler):
     # TODO: change to boilerplate file stored in material_proxy package
     def make_material_proxy_initializer(self, material_proxy_name):
         initializer_file_name = os.path.join(
-            self.toplevel_studio_package_importable_name, material_proxy_name, '__init__.py')
+            self.toplevel_wrangler_target_package_importable_name, material_proxy_name, '__init__.py')
         initializer = file(initializer_file_name, 'w')
         line = 'from abjad.tools.importtools._import_structured_package import _import_structured_package\n'
         initializer.write(line)
@@ -127,7 +127,7 @@ class MaterialPackageMakerWrangler(PackageWrangler):
         generic_output_product = getter.run()
         if self.backtrack():
             return
-        material_proxy_directory = os.path.join(self.toplevel_studio_package_importable_name, material_proxy_name)
+        material_proxy_directory = os.path.join(self.toplevel_wrangler_target_package_importable_name, material_proxy_name)
         os.mkdir(material_proxy_directory)
         self.make_material_proxy_initializer(material_proxy_name)
         self.make_material_proxy_class_file(material_proxy_name, generic_output_product)
@@ -146,7 +146,7 @@ class MaterialPackageMakerWrangler(PackageWrangler):
         stylesheet.paper_block.makup_system_spacing = layouttools.make_spacing_vector(0, 0, 12, 0)
         stylesheet.paper_block.system_system_spacing = layouttools.make_spacing_vector(0, 0, 10, 0)
         stylesheet_file_name = os.path.join(
-            self.toplevel_studio_package_importable_name, material_proxy_name, 'stylesheet.ly')
+            self.toplevel_wrangler_target_package_importable_name, material_proxy_name, 'stylesheet.ly')
         stylesheet_file_pointer = file(stylesheet_file_name, 'w')
         stylesheet_file_pointer.write(stylesheet.format)
         stylesheet_file_pointer.close()
@@ -193,4 +193,4 @@ class MaterialPackageMakerWrangler(PackageWrangler):
         return material_proxy_class_name
 
     def unimport_makers_package(self):
-        self.remove_package_importable_name_from_sys_modules(self.toplevel_studio_package_importable_name)
+        self.remove_package_importable_name_from_sys_modules(self.toplevel_wrangler_target_package_importable_name)
