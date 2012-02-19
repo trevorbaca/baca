@@ -7,7 +7,6 @@ import os
 class MaterialPackageWrangler(PackageWrangler):
 
     def __init__(self, session=None):
-        import baca
         from baca.scf.wranglers.MaterialPackageMakerWrangler import MaterialPackageMakerWrangler
         PackageWrangler.__init__(self, 
             toplevel_global_package_importable_name=self.studio_materials_package_importable_name, 
@@ -57,8 +56,8 @@ class MaterialPackageWrangler(PackageWrangler):
         elif result == 'm':
             self.make_makermade_material_package_interactively()
         else:
-            material_proxy = self.get_package_proxy(result)
-            material_proxy.run()
+            material_package_proxy = self.get_package_proxy(result)
+            material_package_proxy.run()
         
     # TODO: write test
     def make_data_package_interactively(self):
@@ -83,7 +82,7 @@ class MaterialPackageWrangler(PackageWrangler):
     # TODO: write test
     def make_makermade_material_package_interactively(self):
         self.push_backtrack()
-        result = self.material_package_maker_wrangler.select_material_proxy_class_name_interactively(
+        result = self.material_package_maker_wrangler.select_material_package_proxy_class_name_interactively(
             clear=False, cache=True)
         material_package_maker_class_name = result
         self.pop_backtrack()
@@ -125,21 +124,21 @@ class MaterialPackageWrangler(PackageWrangler):
         os.mkdir(directory_name)
         file(os.path.join(directory_name, '__init__.py'), 'w').write('')
         if material_package_maker_class_name is None: 
-            material_proxy = baca.scf.proxies.MaterialPackageProxy(
+            material_package_proxy = baca.scf.proxies.MaterialPackageProxy(
                 material_package_importable_name, session=self.session)
         else:
-            command = 'material_proxy = baca.scf.makers.{}(material_package_importable_name, session=self.session)'.format(material_package_maker_class_name)
+            command = 'material_package_proxy = baca.scf.makers.{}(material_package_importable_name, session=self.session)'.format(material_package_maker_class_name)
             exec(command)
         tags = collections.OrderedDict([])
         tags['material_package_maker_class_name'] = material_package_maker_class_name
         tags['should_have_illustration'] = should_have_illustration
-        material_proxy.initializer_file_proxy.write_stub_to_disk(tags=tags)
+        material_package_proxy.initializer_file_proxy.write_stub_to_disk(tags=tags)
         if material_package_maker_class_name is None:
             file(os.path.join(directory_name, 'material_definition.py'), 'w').write('')
             is_data_only = not should_have_illustration
-            material_proxy.material_definition_module_proxy.write_stub_to_disk(is_data_only, prompt=False)
+            material_package_proxy.material_definition_module_proxy.write_stub_to_disk(is_data_only, prompt=False)
         else:
-            material_proxy.write_stub_user_input_module_to_disk(prompt=False)
+            material_package_proxy.write_stub_user_input_module_to_disk(prompt=False)
         line = 'material package {!r} created.'.format(material_package_importable_name)
         self.proceed(line, prompt=prompt)
         return True

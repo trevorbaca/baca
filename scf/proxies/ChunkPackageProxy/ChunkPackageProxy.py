@@ -35,10 +35,10 @@ class ChunkPackageProxy(PackageProxy):
         elif result == 'n':
             self.initializer_file_proxy.view()
 
-    def make_chunk(self):
+    def make_package(self):
         self.print_not_implemented()
 
-    def make_chunk_interactively(self, prompt=True):
+    def make_package_interactively(self, prompt=True):
         self.print_not_implemented()
         return
         if self.package_spaced_name is None:
@@ -87,7 +87,7 @@ class ChunkPackageProxy(PackageProxy):
         package_short_name = result.replace(' ', '_')
         package_importable_name = self.dot_join([self.package_importable_name, package_short_name])
         chunk_proxy = ChunkPackageProxy(package_importable_name)
-        chunk_proxy.make_chunk()
+        chunk_proxy.make_package()
         line = 'chunk spaced name set.'
         self.proceed(line, prompt=prompt)
 

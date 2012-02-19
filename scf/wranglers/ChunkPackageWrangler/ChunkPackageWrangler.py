@@ -6,7 +6,10 @@ import os
 class ChunkPackageWrangler(PackageWrangler):
 
     def __init__(self, session=None):
-        PackageWrangler.__init__(self, self.sketches_package_importable_name, 'mus.chunks', session=session)
+        PackageWrangler.__init__(self, 
+            toplevel_global_package_importable_name=self.sketches_package_importable_name, 
+            toplevel_score_package_importable_name_body='mus.chunks', 
+            session=session)
 
     ### READ-ONLY PUBLIC ATTRIBUTES ###
 
@@ -22,14 +25,14 @@ class ChunkPackageWrangler(PackageWrangler):
     def handle_main_menu_result(self, result):
         assert isinstance(result, str)
         if result == 'new':
-            self.make_chunk_interactively()
+            self.make_package_interactively()
         else:
-            chunk_proxy = self.get_package_proxy(result)
-            chunk_proxy.run()
+            chunk_package_proxy = self.get_package_proxy(result)
+            chunk_package_proxy.run()
 
-    def make_chunk_interactively(self):
-        chunk_proxy = ChunkPackageProxy(session=self.session)
-        chunk_proxy.make_chunk_interactively()
+    def make_package_interactively(self):
+        chunk_package_proxy = ChunkPackageProxy(session=self.session)
+        chunk_package_proxy.make_package_interactively()
 
     def make_main_menu(self, head=None):
         menu, section = self.make_menu(where=self.where(), is_numbered=True)

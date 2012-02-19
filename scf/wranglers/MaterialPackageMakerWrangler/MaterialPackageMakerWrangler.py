@@ -171,7 +171,7 @@ class MaterialPackageMakerWrangler(PackageWrangler):
         self.restore_breadcrumbs(cache=cache)
 
     # TODO: write test
-    def select_material_proxy_class_name_interactively(self, clear=True, cache=False):
+    def select_material_package_proxy_class_name_interactively(self, clear=True, cache=False):
         self.cache_breadcrumbs(cache=cache)
         menu, section = self.make_menu(where=self.where(), is_numbered=True)
         section.tokens = self.material_proxy_spaced_class_names
