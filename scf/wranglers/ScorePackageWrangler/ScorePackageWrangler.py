@@ -14,14 +14,7 @@ class ScorePackageWrangler(PackageWrangler):
     ### READ-ONLY PUBLIC ATTRIBUTES ###
 
     @property
-    def score_package_short_names_to_display(self):
-        result = []
-        for score_package_proxy in self.list_wrangled_package_proxies_to_display():
-            result.append(score_package_proxy.package_short_name)
-        return result
-
-    @property
-    def score_titles_with_years(self):
+    def score_titles_with_years_to_display(self):
         result = []
         for score_package_proxy in self.list_wrangled_package_proxies_to_display():
             result.append(score_package_proxy.title_with_year or '(untitled score)')
@@ -59,10 +52,11 @@ class ScorePackageWrangler(PackageWrangler):
             return 
         return score_package_importable_name
 
-    def list_wrangled_package_proxies_to_display(self):
+    def list_wrangled_package_proxies_to_display(self, head=None):
         result = []
         scores_to_show = self.session.scores_to_show
-        for score_package_proxy in PackageWrangler.list_wrangled_package_proxies(self):
+        for score_package_proxy in PackageWrangler.list_wrangled_package_proxies(
+            self, head=head):
             is_mothballed = score_package_proxy.get_tag('is_mothballed')
             if scores_to_show == 'all':
                 result.append(score_package_proxy)
@@ -104,7 +98,7 @@ class ScorePackageWrangler(PackageWrangler):
 
     def select_score_package_proxy(self):
         menu, section = self.make_menu(where=self.where(), is_numbered=True)
-        section.tokens = self.score_titles_with_years
+        section.tokens = self.score_titles_with_years_to_display
         score_package_short_name = self.title_to_score_package_short_name(value)
         score_package_proxy = ScorePackageProxy(score_package_short_name, session=self.session)
         return score_package_proxy

@@ -151,6 +151,12 @@ class PackageWrangler(SCFObject):
             result.append(x.split('.')[-1])
         return result
 
+    def list_wrangled_package_short_names_to_display(self, head=None):
+        result = []
+        for package_proxy in self.list_wrangled_package_proxies_to_display(head=head):
+            result.append(package_proxy.package_short_name)
+        return result
+
     def list_wrangled_package_spaced_names(self, head=None):
         result = []
         for x in self.list_wrangled_package_short_names(head=head):
