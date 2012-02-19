@@ -178,3 +178,9 @@ class PackageWrangler(SCFObject):
         for x in self.list_wrangled_package_short_names(head=head):
             result.append(x.replace('_', ' '))
         return result
+
+    def make_package(self, package_short_name):
+        self.print_implemented_on_child_classes()
+
+    def make_package_interactively(self):
+        self.print_implemented_on_child_classes()

@@ -147,8 +147,7 @@ class PackageProxy(DirectoryProxy):
             self.add_tag(tag_name, tag_value)
 
     def fix_package_structure(self, is_interactive=True):
-        if is_interactive:
-            self.display('method implemented on child classes.')
+        self.print_implemented_on_child_classes()
         return True
 
     def remove_initializer(self, prompt=True):

@@ -27,15 +27,15 @@ class ScorePackageWrangler(PackageWrangler):
     def get_package_proxy(self, package_importable_name):
         return ScorePackageProxy(package_importable_name, session=self.session)
 
-    def get_score_package_importable_name_interactively(self, prompt=True):
-        getter = self.make_getter(where=self.where())
-        getter.append_underscore_delimited_lowercase_package_name('score package name')
-        self.push_backtrack()
-        score_package_importable_name = getter.run()
-        self.pop_backtrack()
-        if self.backtrack():
-            return 
-        return score_package_importable_name
+#    def get_score_package_importable_name_interactively(self, prompt=True):
+#        getter = self.make_getter(where=self.where())
+#        getter.append_underscore_delimited_lowercase_package_name('score package name')
+#        self.push_backtrack()
+#        score_package_importable_name = getter.run()
+#        self.pop_backtrack()
+#        if self.backtrack():
+#            return 
+#        return score_package_importable_name
 
     def list_wrangled_package_proxies_to_display(self, head=None):
         result = []
@@ -51,14 +51,16 @@ class ScorePackageWrangler(PackageWrangler):
                 result.append(score_package_proxy)
         return result
 
-    def make_score_package(self, score_package_short_name):
-        assert iotools.is_underscore_delimited_lowercase_package_name(score_package_short_name)
-        score_package_directory_name = os.path.join(self.scores_directory_name, score_package_short_name)
-        os.mkdir(score_package_directory_name)
-        score_package_proxy = self.get_package_proxy(score_package_short_name)
+    # TODO: move up to wrangler
+    def make_package(self, package_short_name):
+        assert iotools.is_underscore_delimited_lowercase_package_name(package_short_name)
+        package_directory_name = os.path.join(self.scores_directory_name, package_short_name)
+        os.mkdir(package_directory_name)
+        score_package_proxy = self.get_package_proxy(package_short_name)
         score_package_proxy.fix_package_structure(is_interactive=False)
 
-    def make_score_package_interactively(self):
+    # TODO: move up to wrangler
+    def make_package_interactively(self):
         getter = self.make_getter(where=self.where())
         getter.indent_level = 1
         getter.prompt_character = ':'
@@ -72,7 +74,7 @@ class ScorePackageWrangler(PackageWrangler):
         if self.backtrack():
             return
         title, score_package_short_name, year = result
-        self.make_score_package(score_package_short_name)
+        self.make_package(score_package_short_name)
         score_package_proxy = self.get_package_proxy(score_package_short_name)
         score_package_proxy.add_tag('title', title)
         score_package_proxy.year_of_completion = year

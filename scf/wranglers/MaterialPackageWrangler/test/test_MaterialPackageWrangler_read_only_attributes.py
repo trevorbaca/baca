@@ -1,10 +1,19 @@
-from abjad.tools import iotools
 import baca
 
 
 def test_MaterialPackageWrangler_read_only_attributes_01():
 
-    mpw = baca.scf.wranglers.MaterialPackageWrangler()
+    studio = baca.scf.studio.Studio()
+    wrangler = studio.global_proxy.material_package_wrangler
     
-    assert mpw.breadcrumb == 'materials'
-    assert isinstance(mpw.material_package_maker_wrangler, baca.scf.wranglers.MaterialPackageMakerWrangler)
+    assert wrangler.breadcrumb == 'materials'
+    assert wrangler.materials_package_importable_name == 'baca.materials'
+
+
+def test_MaterialPackageWrangler_read_only_attributes_02():
+
+    studio = baca.scf.studio.Studio()
+    wrangler = studio.global_proxy.material_package_wrangler
+    
+    assert wrangler.breadcrumb == 'materials'
+    assert wrangler.materials_package_importable_name == 'baca.materials'
