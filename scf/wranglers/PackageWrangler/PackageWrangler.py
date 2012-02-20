@@ -68,15 +68,15 @@ class PackageWrangler(SCFObject):
     @property
     def score_resident_wrangled_package_importable_names(self):
         result = []
-        for toplevel_score_package_importable_name in self.score_resident_wrangler_target_package_importable_names:
+        for package_importable_name in self.score_resident_wrangler_target_package_importable_names:
             if self.score_resident_wrangled_package_importable_name_infix:
-                toplevel_score_package_directory_name = self.package_importable_name_to_directory_name(
-                    toplevel_score_package_importable_name)
-                for name in os.listdir(toplevel_score_package_directory_name):
+                package_directory_name = self.package_importable_name_to_directory_name(
+                    package_importable_name)
+                for name in os.listdir(package_directory_name):
                     if name[0].isalpha():
-                        result.append('{}.{}'.format(toplevel_score_package_importable_name, name))
+                        result.append('{}.{}'.format(package_importable_name, name))
             else:
-                result.append(toplevel_score_package_importable_name)
+                result.append(package_importable_name)
         return result
 
     @property
