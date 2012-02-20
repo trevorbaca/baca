@@ -1,3 +1,4 @@
+from abjad.tools import iotools
 from baca.scf.wranglers.PackageWrangler import PackageWrangler
 from baca.scf.proxies.ScorePackageProxy import ScorePackageProxy
 
@@ -11,6 +12,10 @@ class ScorePackageWrangler(PackageWrangler):
             session=session)
 
     ### READ-ONLY PUBLIC ATTRIBUTES ###
+
+    @property
+    def breadcrumb(self):
+        return 'scores'
 
     @property
     def current_wrangler_target_directory_name(self):
@@ -41,6 +46,14 @@ class ScorePackageWrangler(PackageWrangler):
             elif scores_to_show == 'mothballed' and is_mothballed:
                 result.append(score_package_proxy)
         return result
+
+    def list_wrangled_package_menuing_pairs(self, head=None):
+        score_package_short_names = self.list_visible_wrangled_package_short_names()
+        score_titles = self.visible_score_titles_with_years
+        menuing_pairs = zip(score_package_short_names, score_titles)
+        tmp = iotools.strip_diacritics_from_binary_string
+        menuing_pairs.sort(lambda x, y: cmp(tmp(x[1]), tmp(y[1])))
+        return menuing_pairs
 
     def make_wrangled_package_interactively(self):
         getter = self.make_getter(where=self.where())

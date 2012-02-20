@@ -156,12 +156,7 @@ class Studio(SCFObject):
 
     def make_score_selection_menu(self):
         menu, section = self.make_menu(where=self.where(), is_numbered=True, is_keyed=False)
-        score_package_short_names = self.score_package_wrangler.list_visible_wrangled_package_short_names()
-        score_titles = self.score_package_wrangler.visible_score_titles_with_years
-        tokens = zip(score_package_short_names, score_titles)
-        tmp = iotools.strip_diacritics_from_binary_string
-        tokens.sort(lambda x, y: cmp(tmp(x[1]), tmp(y[1])))
-        section.tokens = tokens
+        section.tokens = self.score_package_wrangler.list_wrangled_package_menuing_pairs()
         return menu
 
     def make_svn_menu(self):
