@@ -9,7 +9,7 @@ class MusicSpecifierModuleProxyWrangler(PackageWrangler):
     def __init__(self, session=None):
         PackageWrangler.__init__(self,
             toplevel_wrangler_target_package_importable_name=self.studio_specifiers_package_importable_name,
-            score_resident_wrangled_package_importable_name_infix=\
+            score_internal_wrangled_package_importable_name_infix=\
                 self.score_specifiers_package_importable_name_infix,
             session=session)
 
@@ -35,7 +35,7 @@ class MusicSpecifierModuleProxyWrangler(PackageWrangler):
     def specifiers_package_importable_name(self):
         if self.session.is_in_score:
             score_package_short_name = self.session.current_score_package_short_name
-            return self.dot_join([score_package_short_name, self.score_resident_wrangled_package_importable_name_infix])
+            return self.dot_join([score_package_short_name, self.score_internal_wrangled_package_importable_name_infix])
         else:
             return self.toplevel_wrangler_target_package_importable_name
             

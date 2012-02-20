@@ -11,8 +11,8 @@ def test_ScorePackageWrangler_read_only_attributes_01():
     assert wrangler.temporary_package_directory_name.endswith('__temporary_package')
     assert wrangler.toplevel_wrangler_target_package_importable_name is None
     assert 'lidercfeny' in wrangler.wrangler_target_package_importable_names
-    assert wrangler.score_resident_wrangled_package_importable_name_infix is None
+    assert wrangler.score_internal_wrangled_package_importable_name_infix is None
     assert 'lidercfeny' in \
-        wrangler.list_score_resident_wrangler_target_package_importable_names()
+        wrangler.list_score_internal_wrangler_target_package_importable_names()
     assert wrangler.toplevel_wrangled_package_importable_names == []
-    assert 'lidercfeny' in wrangler.list_score_resident_wrangled_package_importable_names()
+    assert 'lidercfeny' in wrangler.list_score_internal_wrangled_package_importable_names()
