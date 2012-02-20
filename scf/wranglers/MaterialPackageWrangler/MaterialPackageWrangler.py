@@ -163,7 +163,7 @@ class MaterialPackageWrangler(PackageWrangler):
         result = self.dot_join(result)
         return result
 
-    def run(self, user_input=None, head=None, clear=True, cache=False):
+    def run(self, cache=False, clear=True, head=None, user_input=None):
         self.assign_user_input(user_input=user_input)
         self.cache_breadcrumbs(cache=cache)
         while True:

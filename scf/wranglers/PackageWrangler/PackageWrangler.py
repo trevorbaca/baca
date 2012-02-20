@@ -251,6 +251,9 @@ class PackageWrangler(SCFObject):
         for package_proxy in self.list_visible_wrangled_package_proxies():
             package_proxy.profile_package_structure()
 
+    def run(self):
+        self.print_implemented_on_child_classes()
+
     def svn_add(self, prompt=True):
         for package_proxy in self.list_visible_wrangled_package_proxies():
             package_proxy.svn_add(prompt=False)

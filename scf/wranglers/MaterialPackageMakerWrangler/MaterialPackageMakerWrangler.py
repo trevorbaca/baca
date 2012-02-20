@@ -49,7 +49,8 @@ class MaterialPackageMakerWrangler(PackageWrangler):
         else:
             raise ValueError
 
-    def make_main_menu(self):
+    # TODO: use self.list_wrangled_package_menuing_pairs() here
+    def make_main_menu(self, head=None):
         menu, section = self.make_menu(where=self.where(), is_numbered=True)
         section.tokens = self.wrangled_proxy_lowercase_spaced_class_names
         section = menu.make_section()
@@ -132,10 +133,10 @@ class MaterialPackageMakerWrangler(PackageWrangler):
         os.mkdir(material_proxy_directory)
         self.make_material_proxy_initializer(material_package_maker_class_name)
         self.make_material_proxy_class_file(material_package_maker_class_name, generic_output_product_name)
-        self.make_material_proxy_stylesheet(material_package_maker_class_name)
+        self.make_material_package_maker_stylesheet(material_package_maker_class_name)
 
     # TODO: change to boilerplate file stored somewhere
-    def make_material_proxy_stylesheet(self, material_proxy_name):
+    def make_material_package_maker_stylesheet(self, material_proxy_name):
         stylesheet = lilypondfiletools.make_basic_lilypond_file()
         stylesheet.pop()
         stylesheet.file_initial_system_comments = []
@@ -146,17 +147,18 @@ class MaterialPackageMakerWrangler(PackageWrangler):
         stylesheet.paper_block.makup_system_spacing = layouttools.make_spacing_vector(0, 0, 12, 0)
         stylesheet.paper_block.system_system_spacing = layouttools.make_spacing_vector(0, 0, 10, 0)
         stylesheet_file_name = os.path.join(
-            self.score_external_wrangler_target_package_importable_name, material_proxy_name, 'stylesheet.ly')
+            self.score_external_wrangler_target_package_importable_name, 
+            material_proxy_name, 'stylesheet.ly')
         stylesheet_file_pointer = file(stylesheet_file_name, 'w')
         stylesheet_file_pointer.write(stylesheet.format)
         stylesheet_file_pointer.close()
         
-    def run(self, user_input=None, clear=True, cache=False):
+    def run(self, cache=False, clear=True, head=None, user_input=None):
         self.assign_user_input(user_input=user_input)
         self.cache_breadcrumbs(cache=cache)
         while True:
             self.push_breadcrumb()
-            menu = self.make_main_menu()
+            menu = self.make_main_menu(head=head)
             result = menu.run(clear=clear)
             if self.backtrack():
                 break
