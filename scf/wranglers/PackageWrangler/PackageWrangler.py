@@ -48,12 +48,12 @@ class PackageWrangler(SCFObject):
     ### READ-ONLY PUBLIC ATTRIBUTES ###
 
     @property
-    def current_containing_directory_name(self):
+    def current_wrangler_target_directory_name(self):
         return self.package_importable_name_to_directory_name(
-            self.current_containing_package_importable_name)
+            self.current_wrangler_target_package_importable_name)
 
     @property
-    def current_containing_package_importable_name(self):
+    def current_wrangler_target_package_importable_name(self):
         if self.session.is_in_score:
             score_package_short_name = self.session.current_score_package_short_name
             return self.dot_join([
@@ -212,7 +212,7 @@ class PackageWrangler(SCFObject):
 
     def make_package(self, package_short_name):
         assert iotools.is_underscore_delimited_lowercase_package_name(package_short_name)
-        package_directory_name = os.path.join(self.current_containing_directory_name, package_short_name)
+        package_directory_name = os.path.join(self.current_wrangler_target_directory_name, package_short_name)
         os.mkdir(package_directory_name)
         score_package_proxy = self.get_package_proxy(package_short_name)
         score_package_proxy.fix_package_structure(is_interactive=False)

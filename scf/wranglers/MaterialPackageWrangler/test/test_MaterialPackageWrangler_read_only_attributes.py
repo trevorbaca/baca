@@ -7,7 +7,7 @@ def test_MaterialPackageWrangler_read_only_attributes_01():
     wrangler = studio.home_package_proxy.material_package_wrangler
     
     assert wrangler.breadcrumb == 'materials'
-    assert wrangler.current_containing_package_importable_name == 'baca.materials'
+    assert wrangler.current_wrangler_target_package_importable_name == 'baca.materials'
 
 
 def test_MaterialPackageWrangler_read_only_attributes_02():
@@ -16,4 +16,4 @@ def test_MaterialPackageWrangler_read_only_attributes_02():
     wrangler = studio.home_package_proxy.material_package_wrangler
     
     assert wrangler.breadcrumb == 'materials'
-    assert wrangler.current_containing_package_importable_name == 'baca.materials'
+    assert wrangler.current_wrangler_target_package_importable_name == 'baca.materials'

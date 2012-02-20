@@ -39,7 +39,7 @@ class MaterialPackageWrangler(PackageWrangler):
                 return
             material_package_short_name = iotools.string_to_strict_directory_name(material_name)
             material_package_importable_name = self.dot_join([
-                self.current_containing_package_importable_name, material_package_short_name])
+                self.current_wrangler_target_package_importable_name, material_package_short_name])
             if self.package_exists(material_package_importable_name):
                 line = 'Material package {!r} already exists.'.format(material_package_importable_name)
                 self.display([line, ''])

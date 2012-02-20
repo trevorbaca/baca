@@ -13,7 +13,7 @@ class ScorePackageWrangler(PackageWrangler):
     ### READ-ONLY PUBLIC ATTRIBUTES ###
 
     @property
-    def current_containing_directory_name(self):
+    def current_wrangler_target_directory_name(self):
         return self.scores_directory_name
 
     @property

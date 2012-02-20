@@ -6,7 +6,7 @@ def test_ScorePackageWrangler_read_only_attributes_01():
     studio = baca.scf.studio.Studio()
     wrangler = studio.score_package_wrangler
 
-    assert wrangler.current_containing_directory_name == wrangler.scores_directory_name
+    assert wrangler.current_wrangler_target_directory_name == wrangler.scores_directory_name
     assert 'Lidércfény (2008)' in wrangler.score_titles_with_years_to_display 
     assert wrangler.temporary_package_directory_name.endswith('__temporary_package')
     assert wrangler.toplevel_wrangler_target_package_importable_name is None
