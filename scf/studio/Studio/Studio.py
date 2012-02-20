@@ -3,6 +3,7 @@ from abjad.tools import iotools
 from abjad.tools import mathtools
 from baca.scf.core.SCFObject import SCFObject
 from baca.scf.proxies.HomePackageProxy import HomePackageProxy
+from baca.scf.wranglers.MaterialPackageWrangler import MaterialPackageWrangler
 from baca.scf.wranglers.ScorePackageWrangler import ScorePackageWrangler
 import subprocess
 
@@ -12,6 +13,7 @@ class Studio(SCFObject):
     def __init__(self, session=None):
         SCFObject.__init__(self, session=session)
         self._home_package_proxy = HomePackageProxy(session=self.session)
+        self._material_package_wrangler = MaterialPackageWrangler(session=self.session)
         self._score_package_wrangler = ScorePackageWrangler(session=self.session)
 
     ### READ-ONLY PUBLIC ATTRIBUTES ###
@@ -23,6 +25,10 @@ class Studio(SCFObject):
     @property
     def home_package_proxy(self):
         return self._home_package_proxy
+
+    @property
+    def material_package_wrangler(self):
+        return self._material_package_wrangler
 
     @property
     def score_status_string(self):
@@ -88,7 +94,7 @@ class Studio(SCFObject):
             self.print_not_implemented()
         elif result == 'm':
             breadcrumb = self.pop_breadcrumb()
-            self.home_package_proxy.material_package_wrangler.run(head=self.home_package_importable_name)
+            self.material_package_wrangler.run(head=self.home_package_importable_name)
             self.push_breadcrumb(breadcrumb)
         elif result == 'new':
             breadcrumb = self.pop_breadcrumb()

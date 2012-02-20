@@ -1,7 +1,7 @@
 import baca
 
 
-def test_ScorePackageWrangler_fix_visible_wrangled_package_structures_01():
+def test_ScorePackageWrangler_fix_structure_of_wrangled_packages_to_display_01():
 
     studio = baca.scf.studio.Studio()
     wrangler = studio.score_package_wrangler

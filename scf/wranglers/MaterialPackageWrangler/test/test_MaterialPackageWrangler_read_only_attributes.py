@@ -4,7 +4,7 @@ import baca
 def test_MaterialPackageWrangler_read_only_attributes_01():
 
     studio = baca.scf.studio.Studio()
-    wrangler = studio.home_package_proxy.material_package_wrangler
+    wrangler = studio.material_package_wrangler
     assert not wrangler.session.is_in_score
     
     assert wrangler.breadcrumb == 'materials'
@@ -21,7 +21,7 @@ def test_MaterialPackageWrangler_read_only_attributes_01():
 def test_MaterialPackageWrangler_read_only_attributes_02():
 
     studio = baca.scf.studio.Studio()
-    wrangler = studio.home_package_proxy.material_package_wrangler
+    wrangler = studio.material_package_wrangler
     wrangler.session.current_score_package_short_name = 'aracilik'
     assert wrangler.session.is_in_score
     
