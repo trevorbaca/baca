@@ -6,7 +6,7 @@ from baca.scf.proxies.PackageProxy import PackageProxy
 class HomePackageProxy(PackageProxy):
     
     def __init__(self, session=None):
-        PackageProxy.__init__(self, self.studio_package_importable_name, session=session)
+        PackageProxy.__init__(self, self.home_package_importable_name, session=session)
         self._material_package_maker_wrangler = MaterialPackageMakerWrangler(session=self.session)
         self._material_package_wrangler = MaterialPackageWrangler(session=self.session)
 

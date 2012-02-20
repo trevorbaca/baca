@@ -112,7 +112,7 @@ class PackageProxy(DirectoryProxy):
     # TODO: write test; or remove?
     @property
     def score_package_short_name(self):
-        if not self.package_importable_name.startswith(self.studio_package_importable_name):
+        if not self.package_importable_name.startswith(self.home_package_importable_name):
             return self.package_importable_name.split('.')[0]
 
     @property
@@ -272,7 +272,7 @@ class PackageProxy(DirectoryProxy):
 
     # TODO: rename without hardcoding
     def unimport_baca_package(self):
-        self.remove_package_importable_name_from_sys_modules(self.studio_package_importable_name)
+        self.remove_package_importable_name_from_sys_modules(self.home_package_importable_name)
 
     def unimport_package(self):
         self.remove_package_importable_name_from_sys_modules(self.package_importable_name)

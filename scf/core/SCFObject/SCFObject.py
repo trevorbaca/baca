@@ -52,7 +52,7 @@ class SCFObject(object):
 
     @property
     def scf_package_importable_name(self):
-        return self.dot_join([self.studio_package_importable_name, 'scf'])
+        return self.dot_join([self.home_package_importable_name, 'scf'])
 
     @property
     def scf_root_directory(self):
@@ -80,7 +80,7 @@ class SCFObject(object):
 
     @property
     def score_external_chunks_package_importable_name(self):
-        return self.dot_join([self.studio_package_importable_name, 'sketches'])
+        return self.dot_join([self.home_package_importable_name, 'sketches'])
 
     @property
     def source_file_name(self):
@@ -94,18 +94,18 @@ class SCFObject(object):
 
     @property
     def studio_directory_name(self):
-        return self.package_importable_name_to_directory_name(self.studio_package_importable_name)
+        return self.package_importable_name_to_directory_name(self.home_package_importable_name)
 
     @property
     def score_external_materials_package_importable_name(self):
-        return self.dot_join([self.studio_package_importable_name, 'materials'])
+        return self.dot_join([self.home_package_importable_name, 'materials'])
 
     @property
     def score_external_specifiers_package_importable_name(self):
-        return self.dot_join([self.studio_package_importable_name, 'specifiers'])
+        return self.dot_join([self.home_package_importable_name, 'specifiers'])
 
     @property
-    def studio_package_importable_name(self):
+    def home_package_importable_name(self):
         return 'baca'
 
     @property
@@ -277,7 +277,7 @@ class SCFObject(object):
         if package_importable_name is None:
             return
         package_importable_name_parts = package_importable_name.split('.')
-        if package_importable_name_parts[0] == self.studio_package_importable_name:
+        if package_importable_name_parts[0] == self.home_package_importable_name:
             directory_parts = [os.environ.get('BACA')] + package_importable_name_parts[1:]
         else:
             directory_parts = [self.scores_directory_name] + package_importable_name_parts[:]

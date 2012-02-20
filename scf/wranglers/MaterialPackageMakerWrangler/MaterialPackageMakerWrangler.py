@@ -19,7 +19,7 @@ class MaterialPackageMakerWrangler(PackageWrangler):
     @property
     def material_proxy_spaced_class_names(self):
         result = []
-        for name in self.list_wrangled_package_short_names(head=self.studio_package_importable_name):
+        for name in self.list_wrangled_package_short_names(head=self.home_package_importable_name):
             spaced_class_name = iotools.uppercamelcase_to_space_delimited_lowercase(name)
             result.append(spaced_class_name)
         result.remove('material package maker')
