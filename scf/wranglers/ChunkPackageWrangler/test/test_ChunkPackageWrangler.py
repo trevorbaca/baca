@@ -8,7 +8,7 @@ def test_ChunkPackageWrangler_01():
 
     chunk_wrangler = baca.scf.wranglers.ChunkPackageWrangler()
     assert chunk_wrangler.class_name == 'ChunkPackageWrangler'
-    assert chunk_wrangler.score_resident_wrangled_package_importable_name_prefix == 'mus.chunks'
+    assert chunk_wrangler.score_resident_wrangled_package_importable_name_infix == 'mus.chunks'
     assert chunk_wrangler.source_file_name == \
         '/Users/trevorbaca/Documents/other/baca/scf/wranglers/ChunkPackageWrangler/ChunkPackageWrangler.py'
     assert chunk_wrangler.spaced_class_name == 'chunk package wrangler'
