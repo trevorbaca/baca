@@ -21,7 +21,6 @@ class PackageWrangler(SCFObject):
             score_external_wrangler_target_package_importable_name
         self._score_internal_wrangler_target_package_importable_name_suffix = \
             score_internal_wrangler_target_package_importable_name_suffix
-        self.conditionally_make_empty_package(self.score_external_wrangler_target_package_importable_name)
 
     ### OVERLOADS ###
 
@@ -122,6 +121,18 @@ class PackageWrangler(SCFObject):
 
     ### PUBLIC METHODS ###
     
+    def conditionally_make_score_external_wrangler_target_package(self):
+        self.conditionally_make_empty_package(self.score_external_wrangler_target_package_importable_name)
+
+    def conditionally_make_score_internal_wrangler_target_packages(self, head=None):
+        for score_internal_wrangler_target_package_importable_name in \
+            self.list_score_internal_wrangler_target_package_importable_names(head=head):
+            self.conditionally_make_empty_package(score_internal_wrangler_target_package_importable_name)
+
+    def conditionally_make_wrangler_target_packages(self):
+        self.conditionally_make_score_external_wrangler_target_package()
+        self.conditionally_make_score_internal_wrangler_target_packages()
+
     def fix_structure_of_wrangled_packages_to_display(self, prompt=True):
         results = []
         for package_proxy in self.list_wrangled_package_proxies_to_display():
@@ -218,8 +229,8 @@ class PackageWrangler(SCFObject):
         assert iotools.is_underscore_delimited_lowercase_package_name(package_short_name)
         package_directory_name = os.path.join(self.current_wrangler_target_directory_name, package_short_name)
         os.mkdir(package_directory_name)
-        score_package_proxy = self.get_package_proxy(package_short_name)
-        score_package_proxy.fix_package_structure(is_interactive=False)
+        package_proxy = self.get_package_proxy(package_short_name)
+        package_proxy.fix_package_structure(is_interactive=False)
 
     def make_package_interactively(self):
         self.print_implemented_on_child_classes()

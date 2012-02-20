@@ -251,15 +251,12 @@ class PackageProxy(DirectoryProxy):
     def remove(self):
         result = DirectoryProxy.remove(self)
         if result:
-            line = 'package deleted.'
+            line = 'package removed.'
             self.proceed(line)
         
     def set_package_importable_name_interactively(self):
         getter = self.make_getter(where=self.where())
-        # TODO: implement getter.append_package_name
-        getter.prompts.append('package importable name')
-        getter.tests.append(iotools.is_underscore_delimited_lowercase_package_name)
-        getter.helps.append('must be underscore-delimited lowercase package name.')
+        geter.append_underscore_delimited_lowercase_package_name('package importable name')
         result = getter.run()
         if self.backtrack():
             return
@@ -267,10 +264,7 @@ class PackageProxy(DirectoryProxy):
 
     def set_package_spaced_name_interactively(self):
         getter = self.make_getter(where=self.where())
-        # TODO: implement package spaced name
-        getter.prompts.append('package spaced name')
-        getter.tests.append(iotools.is_space_delimited_lowercase_string)
-        getter.helps.append('must be space-delimited lowercase string.')
+        getter.append_space_delimited_lowercase_string('package spaced name')
         result = getter.run()
         if self.backtrack():
             return
