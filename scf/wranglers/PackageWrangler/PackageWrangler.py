@@ -177,8 +177,8 @@ class PackageWrangler(SCFObject):
             parts = [score_package_short_name]
             if self.score_internal_wrangler_target_package_importable_name_suffix:
                 parts.append(self.score_internal_wrangler_target_package_importable_name_suffix)
-            score_external_score_package_importable_name = self.dot_join(parts)
-            result.append(score_external_score_package_importable_name)
+            score_internal_score_package_importable_name = self.dot_join(parts)
+            result.append(score_internal_score_package_importable_name)
         return result
 
     def list_visible_wrangled_package_proxies(self, head=None):

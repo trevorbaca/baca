@@ -22,7 +22,7 @@ class MaterialPackageMakerWrangler(PackageWrangler):
 
     @property
     def breadcrumb(self):
-        return 'material proxies'
+        return 'material package makers'
 
     @property
     def score_external_wrangled_package_importable_names(self):
@@ -50,6 +50,9 @@ class MaterialPackageMakerWrangler(PackageWrangler):
             self.make_wrangled_package_interactively()
         else:
             raise ValueError
+
+    def list_score_internal_wrangler_target_package_importable_names(self, head=None):
+        return []
 
     def list_wrangled_package_lowercase_spaced_class_names(self, head=None):
         result = []
