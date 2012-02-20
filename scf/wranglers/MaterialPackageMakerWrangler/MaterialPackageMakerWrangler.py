@@ -17,9 +17,18 @@ class MaterialPackageMakerWrangler(PackageWrangler):
     ### READ-ONLY PUBLIC ATTRIBUTES ###
 
     @property
+    def base_class_name(self):
+        return self.dot_join(['baca.scf.makers', 'MaterialPackageMaker'])
+
+    @property
     def breadcrumb(self):
         return 'material proxies'
 
+    @property
+    def score_external_wrangled_package_importable_names(self):
+        result = PackageWrangler.score_external_wrangled_package_importable_names.fget(self)
+        result.remove(self.base_class_name)
+        return result
 
     ### PUBLIC METHODS ###
 
@@ -46,7 +55,7 @@ class MaterialPackageMakerWrangler(PackageWrangler):
         for name in self.list_wrangled_package_short_names(head=head):
             spaced_class_name = iotools.uppercamelcase_to_space_delimited_lowercase(name)
             result.append(spaced_class_name)
-        result.remove('material package maker')
+        #result.remove('material package maker')
         return result
 
     def list_wrangled_package_menuing_pairs(self, head=None):
@@ -182,10 +191,10 @@ class MaterialPackageMakerWrangler(PackageWrangler):
         self, clear=True, cache=False, head=None, user_input=None):
         self.cache_breadcrumbs(cache=cache)
         menu, section = self.make_menu(where=self.where(), is_keyed=False, is_numbered=True)
-        section.tokens = self.list_wrangled_package_lowercase_spaced_class_names(
-            head=self.home_package_importable_name)
-        #section.tokens = self.list_wrangled_package_menuing_pairs(head=self.home_package_importable_name)
-        #section.return_value_attribute = 'key'
+        #section.tokens = self.list_wrangled_package_lowercase_spaced_class_names(
+        #    head=self.home_package_importable_name)
+        section.tokens = self.list_wrangled_package_menuing_pairs(head=self.home_package_importable_name)
+        section.return_value_attribute = 'key'
         while True:
             self.push_breadcrumb('select material proxy:')
             result = menu.run(clear=clear)
@@ -196,8 +205,10 @@ class MaterialPackageMakerWrangler(PackageWrangler):
                 continue 
             else:
                 break
-        if result:
-            result = iotools.space_delimited_lowercase_to_uppercamelcase(result) 
+        #self.debug(result)
+        #if result:
+        #    result = iotools.space_delimited_lowercase_to_uppercamelcase(result) 
+        #self.debug(result)
         self.pop_breadcrumb()
         self.restore_breadcrumbs(cache=cache)
         return result
