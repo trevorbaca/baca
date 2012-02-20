@@ -7,7 +7,7 @@ class ChunkPackageWrangler(PackageWrangler):
 
     def __init__(self, session=None):
         PackageWrangler.__init__(self, 
-            score_externalwrangler_target_package_importable_name=self.sketches_package_importable_name, 
+            score_external_wrangler_target_package_importable_name=self.sketches_package_importable_name, 
             score_internal_wrangled_package_importable_name_infix=\
                 self.score_chunks_package_importable_name_infix,
             session=session)
