@@ -9,8 +9,8 @@ class ChunkPackageWrangler(PackageWrangler):
         PackageWrangler.__init__(self, 
             score_external_wrangler_target_package_importable_name= \
                 self.score_external_chunks_package_importable_name, 
-            score_internal_wrangled_package_importable_name_infix= \
-                self.score_internal_chunks_package_importable_name_infix,
+            score_internal_wrangler_target_package_importable_name_suffix= \
+                self.score_internal_chunks_package_importable_name_suffix,
             session=session)
 
     ### READ-ONLY PUBLIC ATTRIBUTES ###
