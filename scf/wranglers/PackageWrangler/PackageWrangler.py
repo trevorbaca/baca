@@ -132,7 +132,7 @@ class PackageWrangler(SCFObject):
         self.conditionally_make_score_external_wrangler_target_package()
         self.conditionally_make_score_internal_wrangler_target_packages()
 
-    def fix_structure_of_visible_wrangled_packages(self, prompt=True):
+    def fix_visible_wrangled_package_structures(self, prompt=True):
         results = []
         for package_proxy in self.list_visible_wrangled_package_proxies():
             results.append(package_proxy.fix_package_structure(is_interactive=prompt))
@@ -230,17 +230,23 @@ class PackageWrangler(SCFObject):
             result.append(x.replace('_', ' '))
         return result
 
-    def make_package(self, package_short_name):
+    def list_visible_wrangled_package_spaced_names(self, head=None):
+        result = []
+        for x in self.list_visible_wrangled_package_short_names(head=head):
+            result.append(x.replace('_', ' '))
+        return result
+
+    def make_wrangled_package(self, package_short_name):
         assert iotools.is_underscore_delimited_lowercase_package_name(package_short_name)
         package_directory_name = os.path.join(self.current_wrangler_target_directory_name, package_short_name)
         os.mkdir(package_directory_name)
         package_proxy = self.get_wrangled_package_proxy(package_short_name)
         package_proxy.fix_package_structure(is_interactive=False)
 
-    def make_package_interactively(self):
+    def make_wrangled_package_interactively(self):
         self.print_implemented_on_child_classes()
 
-    def profile_visible_package_structures(self):
+    def profile_visible_wrangled_package_structures(self):
         for package_proxy in self.list_visible_wrangled_package_proxies():
             package_proxy.profile_package_structure()
 

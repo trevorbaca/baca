@@ -1,10 +1,10 @@
 import baca
 
 
-def test_ScorePackageWrangler_fix_structure_of_visible_wrangled_packages_01():
+def test_ScorePackageWrangler_fix_visible_wrangled_package_structures_01():
 
     studio = baca.scf.studio.Studio()
     wrangler = studio.score_package_wrangler
     wrangler.session.show_all_scores()
 
-    assert all(wrangler.fix_structure_of_visible_wrangled_packages(prompt=False))
+    assert all(wrangler.fix_visible_wrangled_package_structures(prompt=False))

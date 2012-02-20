@@ -42,7 +42,7 @@ class ScorePackageWrangler(PackageWrangler):
                 result.append(score_package_proxy)
         return result
 
-    def make_package_interactively(self):
+    def make_wrangled_package_interactively(self):
         getter = self.make_getter(where=self.where())
         getter.indent_level = 1
         getter.prompt_character = ':'
@@ -56,7 +56,7 @@ class ScorePackageWrangler(PackageWrangler):
         if self.backtrack():
             return
         title, score_package_short_name, year = result
-        self.make_package(score_package_short_name)
+        self.make_wrangled_package(score_package_short_name)
         score_package_proxy = self.get_wrangled_package_proxy(score_package_short_name)
         score_package_proxy.add_tag('title', title)
         score_package_proxy.year_of_completion = year
