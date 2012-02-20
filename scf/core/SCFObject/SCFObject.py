@@ -67,14 +67,6 @@ class SCFObject(object):
         return 'mus.materials'
 
     @property
-    def score_package_short_names(self):
-        result = []
-        for x in os.listdir(self.scores_directory_name):
-            if x[0].isalpha():
-                result.append(x)
-        return result
-
-    @property
     def score_specifiers_package_importable_name_infix(self):
         return 'mus.specifiers'
 
@@ -247,6 +239,16 @@ class SCFObject(object):
                 capitalize_prompt=capitalize_prompt)
         finally:
             readline.set_startup_hook()
+
+    def list_score_package_short_names(self, head=None):
+        result = []
+        for name in os.listdir(self.scores_directory_name):
+            if name[0].isalpha():
+                if name == head:
+                    return [name]
+                else:
+                    result.append(name)
+        return result
 
     def make_getter(self, where=None):
         import baca

@@ -66,45 +66,6 @@ class PackageWrangler(SCFObject):
         return self._score_resident_wrangled_package_importable_name_infix
 
     @property
-    def score_resident_wrangled_package_importable_names(self):
-        result = []
-        for package_importable_name in self.score_resident_wrangler_target_package_importable_names:
-            if self.score_resident_wrangled_package_importable_name_infix:
-                package_directory_name = self.package_importable_name_to_directory_name(
-                    package_importable_name)
-                for name in os.listdir(package_directory_name):
-                    if name[0].isalpha():
-                        result.append('{}.{}'.format(package_importable_name, name))
-            else:
-                result.append(package_importable_name)
-        return result
-
-    @property
-    def score_resident_wrangled_package_directory_names(self):
-        result = []
-        for package_importable_name in self.score_resident_wrangled_package_importable_names:
-            result.append(self.package_importable_name_to_directory_name(package_importable_name))
-        return result
-
-    @property
-    def score_resident_wrangler_target_directory_names(self):
-        result = []
-        for package_importable_name in self.score_resident_wrangler_target_package_importable_names:
-            result.append(self.package_importable_name_to_directory_name(package_importable_name))
-        return result            
-
-    @property
-    def score_resident_wrangler_target_package_importable_names(self):
-        result = []
-        for score_package_short_name in self.score_package_short_names:
-            parts = [score_package_short_name]
-            if self.score_resident_wrangled_package_importable_name_infix:
-                parts.append(self.score_resident_wrangled_package_importable_name_infix)
-            toplevel_score_package_importable_name = self.dot_join(parts)
-            result.append(toplevel_score_package_importable_name)
-        return result
-
-    @property
     def temporary_package_directory_name(self):
         return os.path.join(self.current_wrangler_target_directory_name, '__temporary_package')
 
@@ -152,7 +113,7 @@ class PackageWrangler(SCFObject):
         result = [] 
         if self.toplevel_wrangler_target_package_importable_name:
             result.append(self.toplevel_wrangler_target_package_importable_name)
-        result.extend(self.score_resident_wrangler_target_package_importable_names)
+        result.extend(self.list_score_resident_wrangler_target_package_importable_names())
         return result
 
     ### PUBLIC METHODS ###
@@ -168,11 +129,49 @@ class PackageWrangler(SCFObject):
     def get_package_proxy(self, package_importable_name):
         return PackageProxy(package_importable_name, session=self.session)
         
+    def list_score_resident_wrangled_package_directory_names(self, head=None):
+        result = []
+        for package_importable_name in self.list_score_resident_wrangled_package_importable_names(head=head):
+            result.append(self.package_importable_name_to_directory_name(package_importable_name))
+        return result
+
+    def list_score_resident_wrangled_package_importable_names(self, head=None):
+        result = []
+        for package_importable_name in \
+            self.list_score_resident_wrangler_target_package_importable_names(head=head):
+            if self.score_resident_wrangled_package_importable_name_infix:
+                package_directory_name = self.package_importable_name_to_directory_name(
+                    package_importable_name)
+                for name in os.listdir(package_directory_name):
+                    if name[0].isalpha():
+                        result.append('{}.{}'.format(package_importable_name, name))
+            else:
+                result.append(package_importable_name)
+        return result
+
+    def list_score_resident_wrangler_target_directory_names(self, head=None):
+        result = []
+        for package_importable_name in \
+            self.list_score_resident_wrangler_target_package_importable_names(head=head):
+            result.append(self.package_importable_name_to_directory_name(package_importable_name))
+        return result            
+
+    def list_score_resident_wrangler_target_package_importable_names(self, head=None):
+        result = []
+        for score_package_short_name in self.list_score_package_short_names(head=head):
+            parts = [score_package_short_name]
+            if self.score_resident_wrangled_package_importable_name_infix:
+                parts.append(self.score_resident_wrangled_package_importable_name_infix)
+            toplevel_score_package_importable_name = self.dot_join(parts)
+            result.append(toplevel_score_package_importable_name)
+        return result
+
     def list_wrangled_package_importable_names(self, head=None):
         if head is None: head = ''
         result, package_importable_names = [], []
         package_importable_names.extend(self.toplevel_wrangled_package_importable_names)
-        package_importable_names.extend(self.score_resident_wrangled_package_importable_names)
+        package_importable_names.extend(
+            self.list_score_resident_wrangled_package_importable_names(head=head))
         for package_importable_name in package_importable_names:
             if package_importable_name.startswith(head):
                 result.append(package_importable_name)
