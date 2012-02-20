@@ -106,11 +106,11 @@ class PackageWrangler(SCFObject):
 
     @property
     def temporary_package_directory_name(self):
-        return self.package_importable_name_to_directory_name(self.temporary_package_importable_name)
+        return os.path.join(self.current_wrangler_target_directory_name, '__temporary_package')
 
     @property
     def temporary_package_importable_name(self):
-        return '__temporary_package'
+        return self.directory_name_to_package_importable_name(self.temporary_package_directory_name)
 
     @property
     def toplevel_wrangled_package_directory_names(self):
