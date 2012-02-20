@@ -41,7 +41,8 @@ class MaterialPackageMakerWrangler(PackageWrangler):
             command = 'from baca.scf.makers import {} as material_package_maker_class'
             command = command.format(material_package_maker_class_name)
             exec(command)
-            material_package_proxy = material_package_maker_class(package_importable_name, session=self.session)
+            material_package_proxy = material_package_maker_class(
+                package_importable_name, session=self.session)
         return material_package_proxy
             
     def handle_main_menu_result(self, result):
@@ -76,10 +77,10 @@ class MaterialPackageMakerWrangler(PackageWrangler):
         return menu
 
     # TODO: implement MaterialPackageProxyClassFile object to model and customize these settings
-    def make_material_package_maker_class_file(self, material_package_maker_name, generic_output_name):
+    def make_wrangled_package_class_file(self, package_short_name, generic_output_name):
         class_file_name = os.path.join(
             self.score_external_wrangler_target_package_importable_name, 
-            material_package_maker_name, material_package_maker_name + '.py')
+            package_short_name, package_short_name + '.py')
         class_file = file(class_file_name, 'w')
         lines = []
         lines.append('from baca.music.foo import foo')
@@ -89,7 +90,7 @@ class MaterialPackageMakerWrangler(PackageWrangler):
         lines.append('import baca')
         lines.append('')
         lines.append('')
-        lines.append('class {}(MaterialPackageMaker):'.format(material_package_maker_name))
+        lines.append('class {}(MaterialPackageMaker):'.format(package_short_name))
         lines.append('')
         lines.append('    def __init__(self, package_importable_name=None, session=None):')
         lines.append('        MaterialPackageMaker.__init__(')
@@ -128,33 +129,16 @@ class MaterialPackageMakerWrangler(PackageWrangler):
         class_file.close()
 
     # TODO: change to boilerplate file stored in material_package_maker package
-    def make_material_package_maker_initializer(self, material_package_maker_name):
+    def make_wrangled_package_initializer(self, package_short_name):
         initializer_file_name = os.path.join(
-            self.score_external_wrangler_target_package_importable_name, material_package_maker_name, '__init__.py')
+            self.score_external_wrangler_target_package_importable_name, 
+            package_short_name, '__init__.py')
         initializer = file(initializer_file_name, 'w')
         line = 'from abjad.tools.importtools._import_structured_package import _import_structured_package\n'
         initializer.write(line)
         initializer.write('\n')
         initializer.write("_import_structured_package(__path__[0], globals(), 'baca')\n")
         initializer.close() 
-
-    # TODO: change to boilerplate file stored somewhere
-    def make_material_package_maker_stylesheet(self, material_package_maker_name):
-        stylesheet = lilypondfiletools.make_basic_lilypond_file()
-        stylesheet.pop()
-        stylesheet.file_initial_system_comments = []
-        stylesheet.default_paper_size = 'letter', 'portrait'
-        stylesheet.global_staff_size = 14
-        stylesheet.layout_block.indent = 0
-        stylesheet.layout_block.ragged_right = True
-        stylesheet.paper_block.makup_system_spacing = layouttools.make_spacing_vector(0, 0, 12, 0)
-        stylesheet.paper_block.system_system_spacing = layouttools.make_spacing_vector(0, 0, 10, 0)
-        stylesheet_file_name = os.path.join(
-            self.score_external_wrangler_target_package_importable_name, 
-            material_package_maker_name, 'stylesheet.ly')
-        stylesheet_file_pointer = file(stylesheet_file_name, 'w')
-        stylesheet_file_pointer.write(stylesheet.format)
-        stylesheet_file_pointer.close()
 
     def make_wrangled_package_interactively(self):
         getter = self.make_getter(where=self.where())
@@ -167,9 +151,28 @@ class MaterialPackageMakerWrangler(PackageWrangler):
         material_package_maker_directory = os.path.join(
             self.score_external_wrangler_target_package_importable_name, material_package_maker_class_name)
         os.mkdir(material_package_maker_directory)
-        self.make_material_package_maker_initializer(material_package_maker_class_name)
-        self.make_material_package_maker_class_file(material_package_maker_class_name, generic_output_product_name)
-        self.make_material_package_maker_stylesheet(material_package_maker_class_name)
+        self.make_wrangled_package_initializer(material_package_maker_class_name)
+        self.make_wrangled_package_class_file(
+            material_package_maker_class_name, generic_output_product_name)
+        self.make_wrangled_package_stylesheet(material_package_maker_class_name)
+
+    # TODO: change to boilerplate file stored somewhere
+    def make_wrangled_package_stylesheet(self, package_short_name):
+        stylesheet = lilypondfiletools.make_basic_lilypond_file()
+        stylesheet.pop()
+        stylesheet.file_initial_system_comments = []
+        stylesheet.default_paper_size = 'letter', 'portrait'
+        stylesheet.global_staff_size = 14
+        stylesheet.layout_block.indent = 0
+        stylesheet.layout_block.ragged_right = True
+        stylesheet.paper_block.makup_system_spacing = layouttools.make_spacing_vector(0, 0, 12, 0)
+        stylesheet.paper_block.system_system_spacing = layouttools.make_spacing_vector(0, 0, 10, 0)
+        stylesheet_file_name = os.path.join(
+            self.score_external_wrangler_target_package_importable_name, 
+            package_short_name, 'stylesheet.ly')
+        stylesheet_file_pointer = file(stylesheet_file_name, 'w')
+        stylesheet_file_pointer.write(stylesheet.format)
+        stylesheet_file_pointer.close()
 
     def run(self, cache=False, clear=True, head=None, user_input=None):
         self.assign_user_input(user_input=user_input)
@@ -191,7 +194,7 @@ class MaterialPackageMakerWrangler(PackageWrangler):
         self.restore_breadcrumbs(cache=cache)
 
     # TODO: write test
-    def select_material_package_maker_class_name_interactively(
+    def select_wrangled_package_class_name_interactively(
         self, clear=True, cache=False, head=None, user_input=None):
         self.cache_breadcrumbs(cache=cache)
         while True:
