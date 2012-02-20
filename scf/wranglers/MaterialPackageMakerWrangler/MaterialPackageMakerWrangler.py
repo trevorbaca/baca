@@ -41,7 +41,7 @@ class MaterialPackageMakerWrangler(PackageWrangler):
         else:
             raise ValueError
 
-    def list_wrangled_proxy_lowercase_spaced_class_names(self, head=None):
+    def list_wrangled_package_lowercase_spaced_class_names(self, head=None):
         result = []
         for name in self.list_wrangled_package_short_names(head=head):
             spaced_class_name = iotools.uppercamelcase_to_space_delimited_lowercase(name)
@@ -49,10 +49,15 @@ class MaterialPackageMakerWrangler(PackageWrangler):
         result.remove('material package maker')
         return result
 
+    def list_wrangled_package_menuing_pairs(self, head=None):
+        keys = self.list_wrangled_package_short_names(head=head)
+        bodies = self.list_wrangled_package_lowercase_spaced_class_names(head=head)
+        return zip(keys, bodies)
+        
     # TODO: use self.list_wrangled_package_menuing_pairs() here
     def make_main_menu(self, head=None):
         menu, section = self.make_menu(where=self.where(), is_numbered=True)
-        section.tokens = self.list_wrangled_proxy_lowercase_spaced_class_names(head=head)
+        section.tokens = self.list_wrangled_package_lowercase_spaced_class_names(head=head)
         section = menu.make_section()
         section.append(('new', 'new material package maker'))
         return menu
@@ -176,10 +181,10 @@ class MaterialPackageMakerWrangler(PackageWrangler):
     def select_material_package_proxy_class_name_interactively(
         self, clear=True, cache=False, head=None, user_input=None):
         self.cache_breadcrumbs(cache=cache)
-        menu, section = self.make_menu(where=self.where(), is_numbered=True)
-        section.tokens = self.list_wrangled_proxy_lowercase_spaced_class_names(
+        menu, section = self.make_menu(where=self.where(), is_keyed=False, is_numbered=True)
+        section.tokens = self.list_wrangled_package_lowercase_spaced_class_names(
             head=self.home_package_importable_name)
-        #section.tokens = self.list_wrangled_package_menuing_pairs()
+        #section.tokens = self.list_wrangled_package_menuing_pairs(head=self.home_package_importable_name)
         #section.return_value_attribute = 'key'
         while True:
             self.push_breadcrumb('select material proxy:')
