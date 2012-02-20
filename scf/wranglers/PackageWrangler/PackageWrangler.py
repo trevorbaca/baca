@@ -34,15 +34,13 @@ class PackageWrangler(SCFObject):
         return False
 
     def __repr__(self):
-        body = None
+        parts = []
         if self.score_external_wrangler_target_package_importable_name:
-            body = self.score_external_wrangler_target_package_importable_name.split('.')[-1]
-        elif self.score_internal_wrangler_target_package_importable_name_suffix:
-            body = self.score_internal_wrangler_target_package_importable_name_suffix.split('.')[-1]
-        if body:
-            return '{}({!r})'.format(self.class_name, body)
-        else:
-            return '{}()'.format(self.class_name)
+            parts.append(self.score_external_wrangler_target_package_importable_name)
+        if self.score_internal_wrangler_target_package_importable_name_suffix:
+            parts.append(self.score_internal_wrangler_target_package_importable_name_suffix)
+        parts = ', '.join([repr(part) for part in parts])
+        return '{}({})'.format(self.class_name, parts)
 
     ### READ-ONLY PUBLIC ATTRIBUTES ###
 
@@ -77,21 +75,22 @@ class PackageWrangler(SCFObject):
             return '__temporary_package'
 
     @property
-    def score_externalwrangled_package_directory_names(self):
+    def score_external_wrangled_package_directory_names(self):
         result = []
-        for package_importable_name in self.score_externalwrangled_package_importable_names:
+        for package_importable_name in self.score_external_wrangled_package_importable_names:
             result.append(self.package_importable_name_to_directory_name(package_importable_name))
         return result
         
     @property
-    def score_externalwrangled_package_importable_names(self):
+    def score_external_wrangled_package_importable_names(self):
         result = []
         if self.score_external_wrangler_target_package_importable_name is not None:
             global_package_directory_name = self.package_importable_name_to_directory_name(
                 self.score_external_wrangler_target_package_importable_name)
             for name in os.listdir(global_package_directory_name):
                 if name[0].isalpha():
-                    result.append('{}.{}'.format(self.score_external_wrangler_target_package_importable_name, name))
+                    result.append('{}.{}'.format(
+                        self.score_external_wrangler_target_package_importable_name, name))
         return result
 
     @property
@@ -184,7 +183,7 @@ class PackageWrangler(SCFObject):
     def list_wrangled_package_importable_names(self, head=None):
         if head is None: head = ''
         result, package_importable_names = [], []
-        package_importable_names.extend(self.score_externalwrangled_package_importable_names)
+        package_importable_names.extend(self.score_external_wrangled_package_importable_names)
         package_importable_names.extend(
             self.list_score_internal_wrangled_package_importable_names(head=head))
         for package_importable_name in package_importable_names:
