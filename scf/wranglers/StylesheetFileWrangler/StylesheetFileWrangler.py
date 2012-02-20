@@ -4,7 +4,7 @@ from baca.scf.proxies.StylesheetFileProxy import StylesheetFileProxy
 import os
 
 
-class StylesheetWrangler(PackageWrangler):
+class StylesheetFileWrangler(PackageWrangler):
 
     def __init__(self, session=None):
         PackageWrangler.__init__(self, 

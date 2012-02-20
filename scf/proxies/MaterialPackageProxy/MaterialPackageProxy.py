@@ -9,7 +9,7 @@ from baca.scf.wranglers.MaterialPackageMakerWrangler import MaterialPackageMaker
 from baca.scf.proxies.OutputMaterialModuleProxy import OutputMaterialModuleProxy
 from baca.scf.proxies.PackageProxy import PackageProxy
 from baca.scf.proxies.StylesheetFileProxy import StylesheetFileProxy
-from baca.scf.wranglers.StylesheetWrangler import StylesheetWrangler
+from baca.scf.wranglers.StylesheetFileWrangler import StylesheetFileWrangler
 from baca.scf.proxies.UserInputModuleProxy import UserInputModuleProxy
 from baca.scf.helpers import safe_import
 from baca.scf import helpers
@@ -722,8 +722,8 @@ class MaterialPackageProxy(PackageProxy):
         self.make_main_menu_section_for_illustration_builder(menu, hidden_section)
 
     def manage_stylesheets(self):
-        stylesheet_wrangler = StylesheetWrangler(session=self.session)
-        stylesheet_wrangler.run()
+        stylesheet_file_wrangler = StylesheetFileWrangler(session=self.session)
+        stylesheet_file_wrangler.run()
 
     def overwrite_output_material_module(self):
         file(self.output_material_module_file_name, 'w').write('')
@@ -837,9 +837,9 @@ class MaterialPackageProxy(PackageProxy):
         self.proceed(line, prompt=prompt)
 
     def select_stylesheet_interactively(self, prompt=True):
-        stylesheet_wrangler = StylesheetWrangler(session=self.session)
+        stylesheet_file_wrangler = StylesheetFileWrangler(session=self.session)
         self.push_backtrack()
-        stylesheet_file_name = stylesheet_wrangler.select_stylesheet_file_name_interactively()
+        stylesheet_file_name = stylesheet_file_wrangler.select_stylesheet_file_name_interactively()
         self.pop_backtrack()
         if self.backtrack():
             return
