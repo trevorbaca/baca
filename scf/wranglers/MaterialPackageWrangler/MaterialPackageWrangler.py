@@ -9,7 +9,7 @@ class MaterialPackageWrangler(PackageWrangler):
     def __init__(self, session=None):
         from baca.scf.wranglers.MaterialPackageMakerWrangler import MaterialPackageMakerWrangler
         PackageWrangler.__init__(self, 
-            toplevel_wrangler_target_package_importable_name=self.studio_materials_package_importable_name, 
+            score_externalwrangler_target_package_importable_name=self.studio_materials_package_importable_name, 
             score_internal_wrangled_package_importable_name_infix=\
                 self.score_materials_package_importable_name_infix,
             session=session)

@@ -8,7 +8,7 @@ class StylesheetWrangler(PackageWrangler):
 
     def __init__(self, session=None):
         PackageWrangler.__init__(self, 
-            toplevel_wrangler_target_package_importable_name=self.stylesheets_package_importable_name, 
+            score_externalwrangler_target_package_importable_name=self.stylesheets_package_importable_name, 
             session=session)
 
     ### READ-ONLY PUBLIC ATTRIBUTES ###
