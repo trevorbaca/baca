@@ -270,9 +270,5 @@ class PackageProxy(DirectoryProxy):
             return
         self.package_spaced_name = result
 
-    # TODO: rename without hardcoding
-    def unimport_baca_package(self):
-        self.remove_package_importable_name_from_sys_modules(self.home_package_importable_name)
-
     def unimport_package(self):
         self.remove_package_importable_name_from_sys_modules(self.package_importable_name)
