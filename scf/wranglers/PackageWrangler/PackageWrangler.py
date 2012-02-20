@@ -17,7 +17,8 @@ class PackageWrangler(SCFObject):
         if score_resident_wrangled_package_importable_name_prefix is not None:
             assert iotools.is_underscore_delimited_lowercase_package_name(
                 score_resident_wrangled_package_importable_name_prefix)
-        self._toplevel_wrangler_target_package_importable_name = toplevel_wrangler_target_package_importable_name
+        self._toplevel_wrangler_target_package_importable_name = \
+            toplevel_wrangler_target_package_importable_name
         self._score_resident_wrangled_package_importable_name_prefix = \
             score_resident_wrangled_package_importable_name_prefix
         self.conditionally_make_empty_package(self.toplevel_wrangler_target_package_importable_name)
@@ -48,7 +49,8 @@ class PackageWrangler(SCFObject):
 
     @property
     def current_containing_directory_name(self):
-        return self.package_importable_name_to_directory_name(self.current_containing_package_importable_name)
+        return self.package_importable_name_to_directory_name(
+            self.current_containing_package_importable_name)
 
     @property
     def current_containing_package_importable_name(self):
@@ -59,17 +61,11 @@ class PackageWrangler(SCFObject):
         else:
             return self.toplevel_wrangler_target_package_importable_name
 
-    @property
-    def has_toplevel_packages(self):
-        for wrangler_target_package_importable_name in self.wrangler_target_package_importable_names:
-            return True
-        return False
-
-    @property
-    def has_wrangled_packages(self):
-        for wrangler_package_importable_name in self.list_wrangled_package_importable_names():
-            return True
-        return False
+#    @property
+#    def has_wrangled_packages(self):
+#        for wrangler_package_importable_name in self.list_wrangled_package_importable_names():
+#            return True
+#        return False
 
     @property
     def score_resident_wrangled_package_importable_name_prefix(self):
