@@ -132,9 +132,9 @@ class PackageWrangler(SCFObject):
         self.conditionally_make_score_external_wrangler_target_package()
         self.conditionally_make_score_internal_wrangler_target_packages()
 
-    def fix_structure_of_wrangled_packages_to_display(self, prompt=True):
+    def fix_structure_of_visible_wrangled_packages(self, prompt=True):
         results = []
-        for package_proxy in self.list_wrangled_package_proxies_to_display():
+        for package_proxy in self.list_visible_wrangled_package_proxies():
             results.append(package_proxy.fix_package_structure(is_interactive=prompt))
             if prompt:
                 package_proxy.profile_package_structure()
@@ -203,7 +203,7 @@ class PackageWrangler(SCFObject):
             result.append(wrangled_package_proxy)
         return result
 
-    def list_wrangled_package_proxies_to_display(self, head=None):
+    def list_visible_wrangled_package_proxies(self, head=None):
         return self.list_wrangled_package_proxies(head=head)
 
     def list_wrangled_package_short_names(self, head=None):
@@ -214,7 +214,7 @@ class PackageWrangler(SCFObject):
 
     def list_wrangled_package_short_names_to_display(self, head=None):
         result = []
-        for package_proxy in self.list_wrangled_package_proxies_to_display(head=head):
+        for package_proxy in self.list_visible_wrangled_package_proxies(head=head):
             result.append(package_proxy.package_short_name)
         return result
 
@@ -235,11 +235,11 @@ class PackageWrangler(SCFObject):
         self.print_implemented_on_child_classes()
 
     def profile_visible_package_structures(self):
-        for package_proxy in self.list_wrangled_package_proxies_to_display():
+        for package_proxy in self.list_visible_wrangled_package_proxies():
             package_proxy.profile_package_structure()
 
     def svn_add(self, prompt=True):
-        for package_proxy in self.list_wrangled_package_proxies_to_display():
+        for package_proxy in self.list_visible_wrangled_package_proxies():
             package_proxy.svn_add(prompt=False)
         self.proceed(prompt=prompt)
 
@@ -253,16 +253,16 @@ class PackageWrangler(SCFObject):
         self.display(line)
         if not self.confirm():
             return
-        for package_proxy in self.list_wrangled_package_proxies_to_display():
+        for package_proxy in self.list_visible_wrangled_package_proxies():
             package_proxy.svn_ci(commit_message=commit_message, prompt=False)
         self.proceed(prompt=prompt)
 
     def svn_st(self, prompt=True):
-        for package_proxy in self.list_wrangled_package_proxies_to_display():
+        for package_proxy in self.list_visible_wrangled_package_proxies():
             package_proxy.svn_st(prompt=False)
         self.proceed(prompt=prompt)
 
     def svn_up(self, prompt=True):
-        for package_proxy in self.list_wrangled_package_proxies_to_display():
+        for package_proxy in self.list_visible_wrangled_package_proxies():
             package_proxy.svn_up(prompt=False)
         self.proceed(prompt=prompt)

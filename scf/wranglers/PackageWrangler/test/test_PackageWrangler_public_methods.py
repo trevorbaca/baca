@@ -14,6 +14,6 @@ def test_PackageWrangler_public_methods_01():
     lidercfeny = baca.scf.proxies.PackageProxy('lidercfeny')
     assert lidercfeny in wrangler.list_wrangled_package_proxies()
 
-    assert wrangler.list_wrangled_package_proxies() == wrangler.list_wrangled_package_proxies_to_display()
+    assert wrangler.list_wrangled_package_proxies() == wrangler.list_visible_wrangled_package_proxies()
     assert 'lidercfeny' in wrangler.list_wrangled_package_short_names()
     assert 'lidercfeny' in wrangler.list_wrangled_package_spaced_names()

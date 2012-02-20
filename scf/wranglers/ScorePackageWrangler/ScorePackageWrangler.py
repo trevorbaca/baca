@@ -19,7 +19,7 @@ class ScorePackageWrangler(PackageWrangler):
     @property
     def score_titles_with_years_to_display(self):
         result = []
-        for score_package_proxy in self.list_wrangled_package_proxies_to_display():
+        for score_package_proxy in self.list_visible_wrangled_package_proxies():
             result.append(score_package_proxy.title_with_year or '(untitled score)')
         return result
 
@@ -28,7 +28,7 @@ class ScorePackageWrangler(PackageWrangler):
     def get_package_proxy(self, package_importable_name):
         return ScorePackageProxy(package_importable_name, session=self.session)
 
-    def list_wrangled_package_proxies_to_display(self, head=None):
+    def list_visible_wrangled_package_proxies(self, head=None):
         result = []
         scores_to_show = self.session.scores_to_show
         for score_package_proxy in PackageWrangler.list_wrangled_package_proxies(
