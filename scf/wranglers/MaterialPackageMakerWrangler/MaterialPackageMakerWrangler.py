@@ -193,6 +193,3 @@ class MaterialPackageMakerWrangler(PackageWrangler):
         material_proxy_class_name = iotools.space_delimited_lowercase_to_uppercamelcase(result) 
         self.restore_breadcrumbs(cache=cache)
         return material_proxy_class_name
-
-    def unimport_makers_package(self):
-        self.remove_package_importable_name_from_sys_modules(self.score_external_wrangler_target_package_importable_name)
