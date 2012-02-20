@@ -17,7 +17,10 @@ class ChunkPackageWrangler(PackageWrangler):
 
     @property
     def breadcrumb(self):
-        return 'chunks'
+        if self.session.is_in_score:
+            return 'chunks'
+        else:
+            return 'sketches'
 
     ### PUBLIC METHODS ###
 

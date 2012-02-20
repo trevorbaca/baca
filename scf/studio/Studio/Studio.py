@@ -2,6 +2,7 @@
 from abjad.tools import iotools
 from abjad.tools import mathtools
 from baca.scf.core.SCFObject import SCFObject
+from baca.scf.wranglers.ChunkPackageWrangler import ChunkPackageWrangler
 from baca.scf.proxies.HomePackageProxy import HomePackageProxy
 from baca.scf.wranglers.MaterialPackageWrangler import MaterialPackageWrangler
 from baca.scf.wranglers.ScorePackageWrangler import ScorePackageWrangler
@@ -12,6 +13,7 @@ class Studio(SCFObject):
 
     def __init__(self, session=None):
         SCFObject.__init__(self, session=session)
+        self._chunk_package_wrangler = ChunkPackageWrangler(session=self.session)
         self._home_package_proxy = HomePackageProxy(session=self.session)
         self._material_package_wrangler = MaterialPackageWrangler(session=self.session)
         self._score_package_wrangler = ScorePackageWrangler(session=self.session)
@@ -21,6 +23,10 @@ class Studio(SCFObject):
     @property
     def breadcrumb(self):
         return 'studio'
+
+    @property
+    def chunk_package_wrangler(self):
+        return self._chunk_package_wrangler
 
     @property
     def home_package_proxy(self):
