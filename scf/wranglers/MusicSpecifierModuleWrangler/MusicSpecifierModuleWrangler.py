@@ -4,7 +4,7 @@ import os
 
 
 # TODO: write tests
-class MusicSpecifierModuleProxyWrangler(PackageWrangler):
+class MusicSpecifierModuleWrangler(PackageWrangler):
 
     def __init__(self, session=None):
         PackageWrangler.__init__(self,
