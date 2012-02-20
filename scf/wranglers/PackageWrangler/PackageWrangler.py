@@ -87,7 +87,7 @@ class PackageWrangler(SCFObject):
         return result
 
     @property
-    def score_resident_wrangler_target_package_directory_names(self):
+    def score_resident_wrangler_target_directory_names(self):
         result = []
         for package_importable_name in self.score_resident_wrangler_target_package_importable_names:
             result.append(self.package_importable_name_to_directory_name(package_importable_name))
@@ -131,7 +131,7 @@ class PackageWrangler(SCFObject):
         return result
 
     @property
-    def toplevel_wrangler_target_package_directory_name(self):
+    def toplevel_wrangler_target_directory_name(self):
         return self.package_importable_name_to_directory_name(
             self.toplevel_wrangler_target_package_importable_name)
 
@@ -140,10 +140,11 @@ class PackageWrangler(SCFObject):
         return self._toplevel_wrangler_target_package_importable_name
     
     @property
-    def wrangler_target_package_directory_names(self):
+    def wrangler_target_directory_names(self):
         result = []
         for wrangler_target_package_importable_name in self.wrangler_target_package_importable_names:
-            result.append(self.package_importable_name_to_directory_name(wrangler_target_package_importable_name))
+            result.append(self.package_importable_name_to_directory_name(
+                wrangler_target_package_importable_name))
         return result
 
     @property
