@@ -244,9 +244,9 @@ class SCFObject(object):
         result = []
         for name in os.listdir(self.scores_directory_name):
             if name[0].isalpha():
-                if name == head:
+                if head and name == head:
                     return [name]
-                else:
+                elif not head:
                     result.append(name)
         return result
 

@@ -180,6 +180,12 @@ class PackageWrangler(SCFObject):
             result.append(score_external_score_package_importable_name)
         return result
 
+    def list_wrangled_package_directory_names(self, head=None):
+        result = []
+        for package_importable_name in self.list_wrangled_package_importable_names(head=head):
+            result.append(self.package_importable_name_to_directory_name(package_importable_name))
+        return result
+
     def list_wrangled_package_importable_names(self, head=None):
         if head is None: head = ''
         result, package_importable_names = [], []
@@ -212,7 +218,7 @@ class PackageWrangler(SCFObject):
             result.append(x.split('.')[-1])
         return result
 
-    def list_wrangled_package_short_names_to_display(self, head=None):
+    def list_visible_wrangled_package_short_names(self, head=None):
         result = []
         for package_proxy in self.list_visible_wrangled_package_proxies(head=head):
             result.append(package_proxy.package_short_name)

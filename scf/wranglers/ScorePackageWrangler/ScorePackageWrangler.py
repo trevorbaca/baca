@@ -17,7 +17,7 @@ class ScorePackageWrangler(PackageWrangler):
         return self.scores_directory_name
 
     @property
-    def score_titles_with_years_to_display(self):
+    def visible_score_titles_with_years(self):
         result = []
         for score_package_proxy in self.list_visible_wrangled_package_proxies():
             result.append(score_package_proxy.title_with_year or '(untitled score)')

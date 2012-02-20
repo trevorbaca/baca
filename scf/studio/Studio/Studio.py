@@ -45,7 +45,7 @@ class Studio(SCFObject):
         self.session.current_score_package_name = None
 
     def get_next_score_package_short_name(self):
-        score_package_short_names = self.score_package_wrangler.list_wrangled_package_short_names_to_display()
+        score_package_short_names = self.score_package_wrangler.list_visible_wrangled_package_short_names()
         if self.session.current_score_package_short_name is None:
             return score_package_short_names[0]
         index = score_package_short_names.index(self.session.current_score_package_short_name)
@@ -70,7 +70,7 @@ class Studio(SCFObject):
                 return package_root_name
 
     def get_prev_score_package_short_name(self):
-        score_package_short_names = self.score_package_wrangler.list_wrangled_package_short_names_to_display()
+        score_package_short_names = self.score_package_wrangler.list_visible_wrangled_package_short_names()
         if self.session.current_score_package_short_name is None:
             return score_package_short_names[-1]
         index = score_package_short_names.index(self.session.current_score_package_short_name)
@@ -100,7 +100,7 @@ class Studio(SCFObject):
             self.manage_svn()
         elif result == 'profile':
             self.score_package_wrangler.profile_visible_package_structures()
-        elif result in self.score_package_wrangler.list_wrangled_package_short_names_to_display():
+        elif result in self.score_package_wrangler.list_visible_wrangled_package_short_names():
             self.edit_score_interactively(result)
     
     def handle_svn_menu_result(self, result):
@@ -150,8 +150,8 @@ class Studio(SCFObject):
 
     def make_score_selection_menu(self):
         menu, section = self.make_menu(where=self.where(), is_numbered=True, is_keyed=False)
-        score_package_short_names = self.score_package_wrangler.list_wrangled_package_short_names_to_display()
-        score_titles = self.score_package_wrangler.score_titles_with_years_to_display
+        score_package_short_names = self.score_package_wrangler.list_visible_wrangled_package_short_names()
+        score_titles = self.score_package_wrangler.visible_score_titles_with_years
         tokens = zip(score_package_short_names, score_titles)
         tmp = iotools.strip_diacritics_from_binary_string
         tokens.sort(lambda x, y: cmp(tmp(x[1]), tmp(y[1])))
