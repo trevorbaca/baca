@@ -6,6 +6,7 @@ from baca.scf.wranglers.ChunkPackageWrangler import ChunkPackageWrangler
 from baca.scf.proxies.HomePackageProxy import HomePackageProxy
 from baca.scf.wranglers.MaterialPackageMakerWrangler import MaterialPackageMakerWrangler
 from baca.scf.wranglers.MaterialPackageWrangler import MaterialPackageWrangler
+from baca.scf.wranglers.MusicSpecifierModuleWrangler import MusicSpecifierModuleWrangler
 from baca.scf.wranglers.ScorePackageWrangler import ScorePackageWrangler
 import subprocess
 
@@ -18,6 +19,7 @@ class Studio(SCFObject):
         self._home_package_proxy = HomePackageProxy(session=self.session)
         self._material_package_maker_wrangler = MaterialPackageMakerWrangler(session=self.session)
         self._material_package_wrangler = MaterialPackageWrangler(session=self.session)
+        self._music_specifier_module_wrangler = MusicSpecifierModuleWrangler(session=self.session)
         self._score_package_wrangler = ScorePackageWrangler(session=self.session)
 
     ### READ-ONLY PUBLIC ATTRIBUTES ###
@@ -41,6 +43,10 @@ class Studio(SCFObject):
     @property
     def material_package_wrangler(self):
         return self._material_package_wrangler
+
+    @property
+    def music_specifier_module_wrangler(self):
+        return self._music_specifier_module_wrangler
 
     @property
     def score_status_string(self):

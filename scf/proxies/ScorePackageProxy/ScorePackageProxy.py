@@ -15,7 +15,7 @@ class ScorePackageProxy(PackageProxy):
         self._material_package_wrangler = baca.scf.wranglers.MaterialPackageWrangler(session=self.session)
         self._material_package_maker_wrangler = baca.scf.wranglers.MaterialPackageMakerWrangler(
             session=self.session)
-        self._music_specifier_wrangler = baca.scf.wranglers.MusicSpecifierModuleWrangler(session=self.session)
+        self._music_specifier_module_wrangler = baca.scf.wranglers.MusicSpecifierModuleWrangler(session=self.session)
 
     ### READ-ONLY PUBLIC ATTRIBUTES ###
 
@@ -107,8 +107,8 @@ class ScorePackageProxy(PackageProxy):
         return self._mus_proxy
 
     @property
-    def music_specifier_wrangler(self):
-        return self._music_specifier_wrangler
+    def music_specifier_module_wrangler(self):
+        return self._music_specifier_module_wrangler
 
     @property
     def score_initializer_file_names(self):
@@ -279,7 +279,7 @@ class ScorePackageProxy(PackageProxy):
         elif  result == 'm':
             self.material_package_wrangler.run(head=self.package_short_name)
         elif result == 'ms':
-            self.music_specifier_wrangler.run()
+            self.music_specifier_module_wrangler.run()
         elif result == 's':
             self.manage_setup(cache=True)
         elif result == 'fix':
