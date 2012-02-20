@@ -22,4 +22,4 @@ class HomePackageProxy(PackageProxy):
   
     @property
     def current_materials_package_importable_name(self):
-        return self.studio_materials_package_importable_name
+        return self.score_external_materials_package_importable_name

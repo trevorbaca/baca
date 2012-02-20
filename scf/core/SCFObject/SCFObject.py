@@ -59,15 +59,15 @@ class SCFObject(object):
         return self.package_importable_name_to_directory_name(self.scf_package_importable_name)
 
     @property
-    def score_chunks_package_importable_name_infix(self):
+    def score_internal_chunks_package_importable_name_infix(self):
         return 'mus.chunks'
 
     @property
-    def score_materials_package_importable_name_infix(self):
+    def score_internal_materials_package_importable_name_infix(self):
         return 'mus.materials'
 
     @property
-    def score_specifiers_package_importable_name_infix(self):
+    def score_internal_specifiers_package_importable_name_infix(self):
         return 'mus.specifiers'
 
     @property
@@ -79,7 +79,7 @@ class SCFObject(object):
         return self._session
 
     @property
-    def sketches_package_importable_name(self):
+    def score_external_chunks_package_importable_name(self):
         return self.dot_join([self.studio_package_importable_name, 'sketches'])
 
     @property
@@ -97,11 +97,11 @@ class SCFObject(object):
         return self.package_importable_name_to_directory_name(self.studio_package_importable_name)
 
     @property
-    def studio_materials_package_importable_name(self):
+    def score_external_materials_package_importable_name(self):
         return self.dot_join([self.studio_package_importable_name, 'materials'])
 
     @property
-    def studio_specifiers_package_importable_name(self):
+    def score_external_specifiers_package_importable_name(self):
         return self.dot_join([self.studio_package_importable_name, 'specifiers'])
 
     @property
