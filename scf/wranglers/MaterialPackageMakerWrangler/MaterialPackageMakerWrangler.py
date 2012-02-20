@@ -181,15 +181,14 @@ class MaterialPackageMakerWrangler(PackageWrangler):
             self.push_breadcrumb('select material proxy:')
             result = menu.run(clear=clear)
             if self.backtrack():
-                self.pop_breadcrumb()
-                self.restore_breadcrumbs(cache=cache)
-                return
+                break
             elif not result:
                 self.pop_breadcrumb()
                 continue 
             else:
-                self.pop_breadcrumb()
                 break
-        material_proxy_class_name = iotools.space_delimited_lowercase_to_uppercamelcase(result) 
+        if result:
+            result = iotools.space_delimited_lowercase_to_uppercamelcase(result) 
+        self.pop_breadcrumb()
         self.restore_breadcrumbs(cache=cache)
-        return material_proxy_class_name
+        return result
