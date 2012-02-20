@@ -83,6 +83,10 @@ class PackageWrangler(SCFObject):
             self.score_external_wrangler_target_package_importable_name)
 
     @property
+    def score_external_wrangler_target_initializer_file_name(self):
+        return os.path.join(self.score_external_wrangler_target_directory_name, '__init__.py')
+
+    @property
     def score_external_wrangler_target_package_importable_name(self):
         return self._score_external_wrangler_target_package_importable_name
     

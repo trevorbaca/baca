@@ -21,10 +21,6 @@ class MusicSpecifierModuleProxyWrangler(PackageWrangler):
         return 'music specifiers'
 
     @property
-    def initializer_file_name(self):
-        return os.path.join(self.specifiers_directory_name, '__init__.py')
-
-    @property
     def specifier_spaced_names(self):
         self.list_wrangled_package_spaced_names
 
@@ -46,8 +42,8 @@ class MusicSpecifierModuleProxyWrangler(PackageWrangler):
         if self.session.is_in_score:
             if not self.package_exists(self.specifiers_package_importable_name):
                 os.mkdir(self.specifiers_directory_name)
-            if not os.path.exists(self.initializer_file_name):
-                file_pointer = open(self.initializer_file_name, 'w')
+            if not os.path.exists(self.score_external_wrangler_target_initializer_file_name):
+                file_pointer = open(self.score_external_wrangler_target_initializer_file_name, 'w')
                 file_pointer.write('')
                 file_pointer.close()
 
