@@ -21,7 +21,7 @@ class ChunkPackageWrangler(PackageWrangler):
 
     ### PUBLIC METHODS ###
 
-    def get_package_proxy(self, package_importable_name):
+    def get_wrangled_package_proxy(self, package_importable_name):
         return ChunkPackageProxy(package_importable_name, session=self.session)
 
     def handle_main_menu_result(self, result):
@@ -29,7 +29,7 @@ class ChunkPackageWrangler(PackageWrangler):
         if result == 'new':
             self.make_package_interactively()
         else:
-            chunk_package_proxy = self.get_package_proxy(result)
+            chunk_package_proxy = self.get_wrangled_package_proxy(result)
             chunk_package_proxy.run()
 
     def make_package_interactively(self):

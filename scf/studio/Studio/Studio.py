@@ -35,7 +35,7 @@ class Studio(SCFObject):
     ### PUBLIC METHODS ###
 
     def edit_score_interactively(self, score_package_importable_name):
-        score_package_proxy = self.score_package_wrangler.get_package_proxy(score_package_importable_name)
+        score_package_proxy = self.score_package_wrangler.get_wrangled_package_proxy(score_package_importable_name)
         score_package_proxy.session.current_score_package_short_name = score_package_importable_name
         # TODO: use cache keyword
         breadcrumbs = self.breadcrumb_stack[:]

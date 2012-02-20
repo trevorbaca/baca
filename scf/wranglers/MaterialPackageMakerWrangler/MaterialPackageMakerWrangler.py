@@ -27,7 +27,7 @@ class MaterialPackageMakerWrangler(PackageWrangler):
 
     ### PUBLIC METHODS ###
 
-    def get_package_proxy(self, material_package_importable_name):
+    def get_wrangled_package_proxy(self, material_package_importable_name):
         import baca
         material_proxy = baca.scf.proxies.MaterialPackageProxy(material_package_importable_name, session=self.session)
         material_package_maker_class_name = material_proxy.material_package_maker_class_name

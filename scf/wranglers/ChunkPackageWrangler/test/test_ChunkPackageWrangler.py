@@ -36,5 +36,5 @@ def test_ChunkPackageWrangler_03():
 
     chunk_wrangler = baca.scf.wranglers.ChunkPackageWrangler()
 
-    chunk_proxy = chunk_wrangler.get_package_proxy('manos.mus.chunks.test_chunk')
+    chunk_proxy = chunk_wrangler.get_wrangled_package_proxy('manos.mus.chunks.test_chunk')
     assert isinstance(chunk_proxy, baca.scf.proxies.ChunkPackageProxy)

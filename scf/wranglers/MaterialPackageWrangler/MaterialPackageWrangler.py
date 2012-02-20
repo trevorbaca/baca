@@ -47,8 +47,8 @@ class MaterialPackageWrangler(PackageWrangler):
             else:
                 return material_package_importable_name
 
-    def get_package_proxy(self, package_importable_name):
-        return self.material_package_maker_wrangler.get_package_proxy(package_importable_name)
+    def get_wrangled_package_proxy(self, package_importable_name):
+        return self.material_package_maker_wrangler.get_wrangled_package_proxy(package_importable_name)
 
     def handle_main_menu_result(self, result):
         if result == 'd':
@@ -58,7 +58,7 @@ class MaterialPackageWrangler(PackageWrangler):
         elif result == 'm':
             self.make_makermade_material_package_interactively()
         else:
-            material_package_proxy = self.get_package_proxy(result)
+            material_package_proxy = self.get_wrangled_package_proxy(result)
             material_package_proxy.run()
         
     # TODO: write test
