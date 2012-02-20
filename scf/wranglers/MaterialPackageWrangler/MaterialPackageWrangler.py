@@ -57,6 +57,10 @@ class MaterialPackageWrangler(PackageWrangler):
             self.make_handmade_material_package_interactively()
         elif result == 'm':
             self.make_makermade_material_package_interactively()
+        elif result == 'missing':
+            self.conditionally_make_wrangler_target_packages(is_interactive=True)
+        elif result == 'profile':
+            self.profile_visible_wrangled_package_structures()
         else:
             material_package_proxy = self.get_wrangled_package_proxy(result)
             material_package_proxy.run()
@@ -107,6 +111,9 @@ class MaterialPackageWrangler(PackageWrangler):
         section.append(('d', 'data-only'))
         section.append(('h', 'handmade'))
         section.append(('m', 'maker-made'))
+        hidden_section = menu.make_section(is_hidden=True)
+        hidden_section.append(('missing', 'create missing packages'))
+        hidden_section.append(('profile', 'profile packages'))
         return menu
 
     # TODO: write test

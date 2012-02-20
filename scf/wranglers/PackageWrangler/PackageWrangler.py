@@ -59,22 +59,6 @@ class PackageWrangler(SCFObject):
             return self.score_external_wrangler_target_package_importable_name
 
     @property
-    def score_internal_wrangler_target_package_importable_name_suffix(self):
-        return self._score_internal_wrangler_target_package_importable_name_suffix
-
-    @property
-    def temporary_package_directory_name(self):
-        return os.path.join(self.current_wrangler_target_directory_name, '__temporary_package')
-
-    @property
-    def temporary_package_importable_name(self):
-        package_path = self.current_wrangler_target_package_importable_name
-        if package_path:
-            return self.dot_join([package_path, '__temporary_package'])
-        else:
-            return '__temporary_package'
-
-    @property
     def score_external_wrangled_package_directory_names(self):
         result = []
         for package_importable_name in self.score_external_wrangled_package_importable_names:
@@ -103,6 +87,22 @@ class PackageWrangler(SCFObject):
         return self._score_external_wrangler_target_package_importable_name
     
     @property
+    def score_internal_wrangler_target_package_importable_name_suffix(self):
+        return self._score_internal_wrangler_target_package_importable_name_suffix
+
+    @property
+    def temporary_package_directory_name(self):
+        return os.path.join(self.current_wrangler_target_directory_name, '__temporary_package')
+
+    @property
+    def temporary_package_importable_name(self):
+        package_path = self.current_wrangler_target_package_importable_name
+        if package_path:
+            return self.dot_join([package_path, '__temporary_package'])
+        else:
+            return '__temporary_package'
+
+    @property
     def wrangler_target_directory_names(self):
         result = []
         for wrangler_target_package_importable_name in self.wrangler_target_package_importable_names:
@@ -128,9 +128,10 @@ class PackageWrangler(SCFObject):
             self.list_score_internal_wrangler_target_package_importable_names(head=head):
             self.conditionally_make_empty_package(score_internal_wrangler_target_package_importable_name)
 
-    def conditionally_make_wrangler_target_packages(self):
+    def conditionally_make_wrangler_target_packages(self, is_interactive=False):
         self.conditionally_make_score_external_wrangler_target_package()
         self.conditionally_make_score_internal_wrangler_target_packages()
+        self.proceed('missing packages created.', prompt=is_interactive)
 
     def fix_visible_wrangled_package_structures(self, prompt=True):
         results = []
@@ -180,6 +181,21 @@ class PackageWrangler(SCFObject):
             result.append(score_external_score_package_importable_name)
         return result
 
+    def list_visible_wrangled_package_proxies(self, head=None):
+        return self.list_wrangled_package_proxies(head=head)
+
+    def list_visible_wrangled_package_short_names(self, head=None):
+        result = []
+        for package_proxy in self.list_visible_wrangled_package_proxies(head=head):
+            result.append(package_proxy.package_short_name)
+        return result
+
+    def list_visible_wrangled_package_spaced_names(self, head=None):
+        result = []
+        for x in self.list_visible_wrangled_package_short_names(head=head):
+            result.append(x.replace('_', ' '))
+        return result
+
     def list_wrangled_package_directory_names(self, head=None):
         result = []
         for package_importable_name in self.list_wrangled_package_importable_names(head=head):
@@ -209,30 +225,15 @@ class PackageWrangler(SCFObject):
             result.append(wrangled_package_proxy)
         return result
 
-    def list_visible_wrangled_package_proxies(self, head=None):
-        return self.list_wrangled_package_proxies(head=head)
-
     def list_wrangled_package_short_names(self, head=None):
         result = []
         for x in self.list_wrangled_package_importable_names(head=head):
             result.append(x.split('.')[-1])
         return result
 
-    def list_visible_wrangled_package_short_names(self, head=None):
-        result = []
-        for package_proxy in self.list_visible_wrangled_package_proxies(head=head):
-            result.append(package_proxy.package_short_name)
-        return result
-
     def list_wrangled_package_spaced_names(self, head=None):
         result = []
         for x in self.list_wrangled_package_short_names(head=head):
-            result.append(x.replace('_', ' '))
-        return result
-
-    def list_visible_wrangled_package_spaced_names(self, head=None):
-        result = []
-        for x in self.list_visible_wrangled_package_short_names(head=head):
             result.append(x.replace('_', ' '))
         return result
 
