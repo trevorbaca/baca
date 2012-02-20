@@ -37,11 +37,11 @@ class MaterialPackageMakerWrangler(PackageWrangler):
         material_package_proxy = MaterialPackageProxy(package_importable_name, session=self.session)
         material_package_maker_class_name = material_package_proxy.material_package_maker_class_name
         if material_package_maker_class_name is not None:
-            material_proxy_class = None
-            command = 'from baca.scf.makers import {} as material_proxy_class'
+            material_package_maker_class = None
+            command = 'from baca.scf.makers import {} as material_package_maker_class'
             command = command.format(material_package_maker_class_name)
             exec(command)
-            material_package_proxy = material_proxy_class(package_importable_name, session=self.session)
+            material_package_proxy = material_package_maker_class(package_importable_name, session=self.session)
         return material_package_proxy
             
     def handle_main_menu_result(self, result):
@@ -75,29 +75,11 @@ class MaterialPackageMakerWrangler(PackageWrangler):
         section.append(('new', 'new material package maker'))
         return menu
 
-    # TODO: change to boilerplate file stored somewhere
-    def make_material_package_maker_stylesheet(self, material_proxy_name):
-        stylesheet = lilypondfiletools.make_basic_lilypond_file()
-        stylesheet.pop()
-        stylesheet.file_initial_system_comments = []
-        stylesheet.default_paper_size = 'letter', 'portrait'
-        stylesheet.global_staff_size = 14
-        stylesheet.layout_block.indent = 0
-        stylesheet.layout_block.ragged_right = True
-        stylesheet.paper_block.makup_system_spacing = layouttools.make_spacing_vector(0, 0, 12, 0)
-        stylesheet.paper_block.system_system_spacing = layouttools.make_spacing_vector(0, 0, 10, 0)
-        stylesheet_file_name = os.path.join(
-            self.score_external_wrangler_target_package_importable_name, 
-            material_proxy_name, 'stylesheet.ly')
-        stylesheet_file_pointer = file(stylesheet_file_name, 'w')
-        stylesheet_file_pointer.write(stylesheet.format)
-        stylesheet_file_pointer.close()
-
     # TODO: implement MaterialPackageProxyClassFile object to model and customize these settings
-    def make_material_proxy_class_file(self, material_proxy_name, generic_output_name):
+    def make_material_package_maker_class_file(self, material_package_maker_name, generic_output_name):
         class_file_name = os.path.join(
             self.score_external_wrangler_target_package_importable_name, 
-            material_proxy_name, material_proxy_name + '.py')
+            material_package_maker_name, material_package_maker_name + '.py')
         class_file = file(class_file_name, 'w')
         lines = []
         lines.append('from baca.music.foo import foo')
@@ -107,7 +89,7 @@ class MaterialPackageMakerWrangler(PackageWrangler):
         lines.append('import baca')
         lines.append('')
         lines.append('')
-        lines.append('class {}(MaterialPackageMaker):'.format(material_proxy_name))
+        lines.append('class {}(MaterialPackageMaker):'.format(material_package_maker_name))
         lines.append('')
         lines.append('    def __init__(self, package_importable_name=None, session=None):')
         lines.append('        MaterialPackageMaker.__init__(')
@@ -145,16 +127,34 @@ class MaterialPackageMakerWrangler(PackageWrangler):
         class_file.write('\n'.join(lines))
         class_file.close()
 
-    # TODO: change to boilerplate file stored in material_proxy package
-    def make_material_proxy_initializer(self, material_proxy_name):
+    # TODO: change to boilerplate file stored in material_package_maker package
+    def make_material_package_maker_initializer(self, material_package_maker_name):
         initializer_file_name = os.path.join(
-            self.score_external_wrangler_target_package_importable_name, material_proxy_name, '__init__.py')
+            self.score_external_wrangler_target_package_importable_name, material_package_maker_name, '__init__.py')
         initializer = file(initializer_file_name, 'w')
         line = 'from abjad.tools.importtools._import_structured_package import _import_structured_package\n'
         initializer.write(line)
         initializer.write('\n')
         initializer.write("_import_structured_package(__path__[0], globals(), 'baca')\n")
         initializer.close() 
+
+    # TODO: change to boilerplate file stored somewhere
+    def make_material_package_maker_stylesheet(self, material_package_maker_name):
+        stylesheet = lilypondfiletools.make_basic_lilypond_file()
+        stylesheet.pop()
+        stylesheet.file_initial_system_comments = []
+        stylesheet.default_paper_size = 'letter', 'portrait'
+        stylesheet.global_staff_size = 14
+        stylesheet.layout_block.indent = 0
+        stylesheet.layout_block.ragged_right = True
+        stylesheet.paper_block.makup_system_spacing = layouttools.make_spacing_vector(0, 0, 12, 0)
+        stylesheet.paper_block.system_system_spacing = layouttools.make_spacing_vector(0, 0, 10, 0)
+        stylesheet_file_name = os.path.join(
+            self.score_external_wrangler_target_package_importable_name, 
+            material_package_maker_name, 'stylesheet.ly')
+        stylesheet_file_pointer = file(stylesheet_file_name, 'w')
+        stylesheet_file_pointer.write(stylesheet.format)
+        stylesheet_file_pointer.close()
 
     def make_wrangled_package_interactively(self):
         getter = self.make_getter(where=self.where())
@@ -164,11 +164,11 @@ class MaterialPackageMakerWrangler(PackageWrangler):
         if self.backtrack():
             return
         material_package_maker_class_name, generic_output_product_name = result
-        material_proxy_directory = os.path.join(
+        material_package_maker_directory = os.path.join(
             self.score_external_wrangler_target_package_importable_name, material_package_maker_class_name)
-        os.mkdir(material_proxy_directory)
-        self.make_material_proxy_initializer(material_package_maker_class_name)
-        self.make_material_proxy_class_file(material_package_maker_class_name, generic_output_product_name)
+        os.mkdir(material_package_maker_directory)
+        self.make_material_package_maker_initializer(material_package_maker_class_name)
+        self.make_material_package_maker_class_file(material_package_maker_class_name, generic_output_product_name)
         self.make_material_package_maker_stylesheet(material_package_maker_class_name)
 
     def run(self, cache=False, clear=True, head=None, user_input=None):
