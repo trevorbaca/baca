@@ -6,7 +6,8 @@ import os
 
 class ModuleWrangler(AssetWrangler):
 
-    ### PUBLIC METHODS ###
+    ### READ-ONLY PUBLIC ATTRIBUTES ###
 
-    def get_wrangled_asset_proxy(self, asset_full_name):
-        return ModuleProxy(asset_full_name, session=self.session)
+    @property
+    def wrangled_asset_class(self):
+        return ModuleProxy

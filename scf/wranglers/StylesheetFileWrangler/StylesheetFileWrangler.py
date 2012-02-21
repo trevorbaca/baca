@@ -26,6 +26,10 @@ class StylesheetFileWrangler(PackageWrangler):
                 result.append(file_name)
         return result
 
+    @property
+    def wrangled_asset_class(self):
+        return StylesheetFileProxy
+
     ### PUBLIC METHODS ###
 
     def handle_main_menu_result(self, result):

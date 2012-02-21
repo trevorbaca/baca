@@ -22,10 +22,11 @@ class ChunkPackageWrangler(PackageWrangler):
         else:
             return 'sketches'
 
-    ### PUBLIC METHODS ###
+    @property
+    def wrangled_asset_class(self):
+        return ChunkPackageProxy
 
-    def get_wrangled_asset_proxy(self, package_importable_name):
-        return ChunkPackageProxy(package_importable_name, session=self.session)
+    ### PUBLIC METHODS ###
 
     def handle_main_menu_result(self, result):
         assert isinstance(result, str)

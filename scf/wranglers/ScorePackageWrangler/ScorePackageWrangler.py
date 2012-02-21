@@ -28,10 +28,11 @@ class ScorePackageWrangler(PackageWrangler):
             result.append(score_package_proxy.title_with_year or '(untitled score)')
         return result
 
-    ### PUBLIC METHODS ###
+    @property
+    def wrangled_asset_class(self):
+        return ScorePackageProxy
 
-    def get_wrangled_asset_proxy(self, package_importable_name):
-        return ScorePackageProxy(package_importable_name, session=self.session)
+    ### PUBLIC METHODS ###
 
     def list_visible_wrangled_asset_proxies(self, head=None):
         result = []

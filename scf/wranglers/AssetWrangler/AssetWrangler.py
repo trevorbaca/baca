@@ -99,6 +99,10 @@ class AssetWrangler(SCFObject):
         result.extend(self.list_score_internal_asset_container_package_importable_names())
         return result
 
+    @property
+    def wrangled_asset_class(self):
+        self.print_implemented_on_child_classes()
+
     ### PUBLIC METHODS ###
     
     def conditionally_make_score_external_asset_container_package(self):
@@ -115,7 +119,7 @@ class AssetWrangler(SCFObject):
         self.proceed('missing packages created.', prompt=is_interactive)
 
     def get_wrangled_asset_proxy(self, asset_full_name):
-        self.print_implemented_on_child_classes()
+        return self.wrangled_asset_class(asset_full_name, session=self.session)
         
     def list_score_internal_wrangled_asset_path_names(self, head=None):
         result = []
@@ -151,7 +155,11 @@ class AssetWrangler(SCFObject):
         return zip(keys, bodies)
 
     def list_wrangled_asset_proxies(self, head=None):
-        self.print_not_implemented()
+        result = []
+        for asset_path_name in self.list_asset_path_names(head=head):
+            wrangled_asset_proxy = self.get_wrangled_asset_proxy(asset_path_name)
+            result.append(wrangled_asset_proxy)
+        return result
 
     def make_wrangled_asset(self, package_short_name):
         self.print_not_implemented()

@@ -31,6 +31,10 @@ class PackageWrangler(AssetWrangler):
             return self.dot_join([package_path, '__temporary_package'])
         else:
             return '__temporary_package'
+    
+    @property
+    def wrangled_asset_class(self):
+        return PackageProxy
 
     ### PUBLIC METHODS ###
 
@@ -41,9 +45,6 @@ class PackageWrangler(AssetWrangler):
             if prompt:
                 package_proxy.profile_package_structure()
         return results
-
-    def get_wrangled_asset_proxy(self, asset_full_name):
-        return PackageProxy(asset_full_name, session=self.session)
 
     def list_score_internal_wrangled_package_directory_names(self, head=None):
         result = []

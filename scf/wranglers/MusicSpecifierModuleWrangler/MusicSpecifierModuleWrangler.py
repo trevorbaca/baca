@@ -19,10 +19,11 @@ class MusicSpecifierModuleWrangler(PackageWrangler):
     def breadcrumb(self):
         return 'music specifiers'
 
-    ### PUBLIC METHODS ###
+    @property
+    def wrangled_asset_class(self):
+        return MusicSpecifierModuleProxy
 
-    def get_wrangled_asset_proxy(self, package_importable_name):
-        return MusicSpecifierModuleProxy(package_importable_name, session=self.session)
+    ### PUBLIC METHODS ###
 
     def handle_main_menu_result(self, result):
         if result == 'new':
