@@ -197,11 +197,24 @@ class AssetWrangler(SCFObject):
         bodies = self.list_visible_asset_human_readable_names(head=head)
         return zip(keys, bodies)
 
+    def list_wrangled_asset_path_names(self, head=None):
+        result = []
+        if self.score_external_asset_container_path_name:
+            result.append(self.score_external_asset_container_path_name)
+        result.extend(self.list_score_internal_wrangled_asset_path_names(head=head))
+        return result
+
     def list_wrangled_asset_proxies(self, head=None):
         result = []
         for asset_path_name in self.list_asset_path_names(head=head):
             wrangled_asset_proxy = self.get_wrangled_asset_proxy(asset_path_name)
             result.append(wrangled_asset_proxy)
+        return result
+
+    def list_wrangled_asset_short_names(self, head=None):
+        result = []
+        for path_name in self.list_wrangled_asset_path_names(head=head):
+            result.append(path_name.split(os.path.sep)[-1])
         return result
 
     def make_wrangled_asset(self, asset_short_name):

@@ -43,3 +43,26 @@ class ImportableAssetWrangler(AssetWrangler):
         for asset_proxy in self.list_visible_asset_proxies(head=head):
             result.append(asset_proxy.importable_name)
         return result
+
+    def list_wrangled_asset_menuing_pairs(self, head=None):
+        keys = self.list_visible_asset_importable_names(head=head)
+        bodies = self.list_visible_asset_human_readable_names(head=head)
+        return zip(keys, bodies)
+
+    def list_wrangled_asset_proxies(self, head=None):
+        result = []
+        for package_importable_name in self.list_wrangled_asset_importable_names(head=head):
+            wrangled_package_proxy = self.get_wrangled_asset_proxy(package_importable_name)
+            result.append(wrangled_package_proxy)
+        return result
+
+    def list_wrangled_asset_importable_names(self, head=None):
+        if head is None: head = ''
+        result, asset_importable_names = [], []
+        asset_importable_names.extend(self.score_external_wrangled_asset_importable_names)
+        asset_importable_names.extend(
+            self.list_score_internal_wrangled_asset_importable_names(head=head))
+        for asset_importable_name in asset_importable_names:
+            if asset_importable_name.startswith(head):
+                result.append(asset_importable_name)
+        return result
