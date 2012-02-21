@@ -76,10 +76,6 @@ class PackageProxy(DirectoryProxy):
         return self.importable_name.split('.')[0]
 
     @property
-    def package_spaced_name(self):
-        return self.human_readable_name
-        
-    @property
     def parent_initializer_file_name(self):
         if self.parent_package_importable_name:
             parent_directory_name = self.package_importable_name_to_path_name(
