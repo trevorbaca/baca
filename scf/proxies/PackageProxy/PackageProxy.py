@@ -58,6 +58,10 @@ class PackageProxy(DirectoryProxy):
         return self.package_short_name.replace('_', ' ')
 
     @property
+    def importable_name(self):
+        return self.package_importable_name
+
+    @property
     def initializer_file_name(self):
         if self.directory_name is not None:
             return os.path.join(self.directory_name, '__init__.py')

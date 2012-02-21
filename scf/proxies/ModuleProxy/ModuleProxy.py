@@ -27,6 +27,10 @@ class ModuleProxy(ParsableFileProxy):
     @property
     def human_readable_name(self):
         return self.short_name_without_extension
+
+    @property
+    def importable_name(self):
+        return self.module_importable_name
         
     @property
     def module_importable_name(self):

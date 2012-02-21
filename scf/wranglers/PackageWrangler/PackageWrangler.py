@@ -36,22 +36,22 @@ class PackageWrangler(AssetWrangler):
 
     def list_score_internal_wrangled_asset_importable_names(self, head=None):
         result = []
-        for package_importable_name in \
+        for asset_container_importable_name in \
             self.list_score_internal_asset_container_importable_names(head=head):
             if self.score_internal_asset_container_importable_name_infix:
                 asset_path_name = self.package_importable_name_to_path_name(
-                    package_importable_name)
+                    asset_container_importable_name)
                 for name in os.listdir(asset_path_name):
                     if name[0].isalpha():
-                        result.append('{}.{}'.format(package_importable_name, name))
+                        result.append('{}.{}'.format(asset_container_importable_name, name))
             else:
-                result.append(package_importable_name)
+                result.append(asset_container_importable_name)
         return result
 
-    def list_visible_package_importable_names(self, head=None):
+    def list_visible_asset_importable_names(self, head=None):
         result = []
-        for package_proxy in self.list_visible_asset_proxies(head=head):
-            result.append(package_proxy.package_importable_name)
+        for asset_proxy in self.list_visible_asset_proxies(head=head):
+            result.append(asset_proxy.importable_name)
         return result
 
     def list_visible_package_short_names(self, head=None):
@@ -61,7 +61,7 @@ class PackageWrangler(AssetWrangler):
         return result
 
     def list_wrangled_asset_menuing_pairs(self, head=None):
-        keys = self.list_visible_package_importable_names(head=head)
+        keys = self.list_visible_asset_importable_names(head=head)
         bodies = self.list_visible_asset_human_readable_names(head=head)
         return zip(keys, bodies)
 
