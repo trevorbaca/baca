@@ -8,7 +8,7 @@ def test_MaterialPackageWrangler_read_only_attributes_01():
     assert not wrangler.session.is_in_score
     
     assert wrangler.breadcrumb == 'materials'
-    assert wrangler.current_asset_container_package_importable_name == 'baca.materials'
+    assert wrangler.current_asset_container_importable_name == 'baca.materials'
     assert all([
         x.startswith('baca.materials.') for x in wrangler.score_external_wrangled_asset_importable_names])
 
@@ -17,8 +17,8 @@ def test_MaterialPackageWrangler_read_only_attributes_01():
 
     assert wrangler.temporary_package_importable_name == 'baca.materials.__temporary_package'
 
-    assert 'baca.materials' in wrangler.asset_container_package_importable_names
-    assert 'aracilik.mus.materials' in wrangler.asset_container_package_importable_names
+    assert 'baca.materials' in wrangler.asset_container_importable_names
+    assert 'aracilik.mus.materials' in wrangler.asset_container_importable_names
 
     
 def test_MaterialPackageWrangler_read_only_attributes_02():
@@ -30,7 +30,7 @@ def test_MaterialPackageWrangler_read_only_attributes_02():
     
     assert wrangler.breadcrumb == 'materials'
 
-    assert wrangler.current_asset_container_package_importable_name == 'aracilik.mus.materials'
+    assert wrangler.current_asset_container_importable_name == 'aracilik.mus.materials'
 
     assert all([
         x.startswith('baca.materials.') for x in wrangler.score_external_wrangled_asset_importable_names])
@@ -40,5 +40,5 @@ def test_MaterialPackageWrangler_read_only_attributes_02():
 
     assert wrangler.temporary_package_importable_name == 'aracilik.mus.materials.__temporary_package'
 
-    assert 'baca.materials' in wrangler.asset_container_package_importable_names
-    assert 'aracilik.mus.materials' in wrangler.asset_container_package_importable_names
+    assert 'baca.materials' in wrangler.asset_container_importable_names
+    assert 'aracilik.mus.materials' in wrangler.asset_container_importable_names

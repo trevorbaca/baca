@@ -44,28 +44,27 @@ class AssetWrangler(SCFObject):
     ### READ-ONLY PUBLIC ATTRIBUTES ###
 
     @property
-    def asset_container_package_importable_names(self):
+    def asset_container_importable_names(self):
         result = [] 
         if self.score_external_asset_container_importable_name:
             result.append(self.score_external_asset_container_importable_name)
-        result.extend(self.list_score_internal_asset_container_package_importable_names())
+        result.extend(self.list_score_internal_asset_container_importable_names())
         return result
 
     @property
     def asset_container_path_names(self):
         result = []
-        for asset_container_package_importable_name in self.asset_container_package_importable_names:
-            result.append(self.package_importable_name_to_path_name(
-                asset_container_package_importable_name))
+        for package_importable_name in self.asset_container_importable_names:
+            result.append(self.package_importable_name_to_path_name(package_importable_name))
         return result
 
     @property
     def current_asset_container_path_name(self):
         return self.package_importable_name_to_path_name(
-            self.current_asset_container_package_importable_name)
+            self.current_asset_container_importable_name)
 
     @property
-    def current_asset_container_package_importable_name(self):
+    def current_asset_container_importable_name(self):
         if self.session.is_in_score:
             return self.dot_join([
                 self.session.current_score_package_short_name, 
@@ -125,9 +124,9 @@ class AssetWrangler(SCFObject):
         self.conditionally_make_empty_package(self.score_external_asset_container_importable_name)
 
     def conditionally_make_score_internal_asset_container_packages(self, head=None):
-        for score_internal_asset_container_package_importable_name in \
-            self.list_score_internal_asset_container_package_importable_names(head=head):
-            self.conditionally_make_empty_package(score_internal_asset_container_package_importable_name)
+        for score_internal_asset_container_importable_name in \
+            self.list_score_internal_asset_container_importable_names(head=head):
+            self.conditionally_make_empty_package(score_internal_asset_container_importable_name)
 
     def conditionally_make_asset_container_packages(self, is_interactive=False):
         self.conditionally_make_score_external_asset_container_package()
@@ -137,22 +136,14 @@ class AssetWrangler(SCFObject):
     def get_wrangled_asset_proxy(self, asset_full_name):
         return self.wrangled_asset_class(asset_full_name, session=self.session)
         
-    def list_score_internal_wrangled_asset_path_names(self, head=None):
-        result = []
-        for path_name in self.list_score_internal_asset_container_path_names(head=head):
-            for name in os.listdir(path_name):
-                if name[0].isalpha():
-                    result.append(os.path.join(path_name, name))
-        return result
-
     def list_score_internal_asset_container_path_names(self, head=None):
         result = []
         for package_importable_name in \
-            self.list_score_internal_asset_container_package_importable_names(head=head):
+            self.list_score_internal_asset_container_importable_names(head=head):
             result.append(self.package_importable_name_to_path_name(package_importable_name))
         return result            
 
-    def list_score_internal_asset_container_package_importable_names(self, head=None):
+    def list_score_internal_asset_container_importable_names(self, head=None):
         result = []
         for score_package_short_name in self.list_score_package_short_names(head=head):
             parts = [score_package_short_name]
@@ -160,6 +151,14 @@ class AssetWrangler(SCFObject):
                 parts.append(self.score_internal_asset_container_importable_name_infix)
             score_internal_score_package_importable_name = self.dot_join(parts)
             result.append(score_internal_score_package_importable_name)
+        return result
+
+    def list_score_internal_wrangled_asset_path_names(self, head=None):
+        result = []
+        for path_name in self.list_score_internal_asset_container_path_names(head=head):
+            for name in os.listdir(path_name):
+                if name[0].isalpha():
+                    result.append(os.path.join(path_name, name))
         return result
 
     def list_visible_wrangled_asset_human_readable_names(self, head=None):

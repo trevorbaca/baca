@@ -7,7 +7,7 @@ def test_MaterialPackageMakerWrangler_read_only_attributes_01():
     wrangler = studio.material_package_maker_wrangler
 
     assert wrangler.breadcrumb == 'material package makers'
-    assert wrangler.current_asset_container_package_importable_name == 'baca.scf.makers'
+    assert wrangler.current_asset_container_importable_name == 'baca.scf.makers'
     assert all([
         x.startswith('baca.scf.makers.') for x in wrangler.score_external_wrangled_asset_importable_names])
 
@@ -16,4 +16,4 @@ def test_MaterialPackageMakerWrangler_read_only_attributes_01():
 
     assert wrangler.temporary_package_importable_name == 'baca.scf.makers.__temporary_package'
 
-    assert wrangler.asset_container_package_importable_names == ['baca.scf.makers']
+    assert wrangler.asset_container_importable_names == ['baca.scf.makers']

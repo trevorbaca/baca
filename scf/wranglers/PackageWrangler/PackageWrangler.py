@@ -21,7 +21,7 @@ class PackageWrangler(AssetWrangler):
 
     @property
     def temporary_package_importable_name(self):
-        package_path = self.current_asset_container_package_importable_name
+        package_path = self.current_asset_container_importable_name
         if package_path:
             return self.dot_join([package_path, '__temporary_package'])
         else:
@@ -50,7 +50,7 @@ class PackageWrangler(AssetWrangler):
     def list_score_internal_wrangled_package_importable_names(self, head=None):
         result = []
         for package_importable_name in \
-            self.list_score_internal_asset_container_package_importable_names(head=head):
+            self.list_score_internal_asset_container_importable_names(head=head):
             if self.score_internal_asset_container_importable_name_infix:
                 package_directory_name = self.package_importable_name_to_path_name(
                     package_importable_name)

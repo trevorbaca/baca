@@ -51,7 +51,7 @@ class MaterialPackageMakerWrangler(PackageWrangler):
         else:
             raise ValueError
 
-    def list_score_internal_asset_container_package_importable_names(self, head=None):
+    def list_score_internal_asset_container_importable_names(self, head=None):
         return []
 
     def list_wrangled_package_lowercase_spaced_class_names(self, head=None):

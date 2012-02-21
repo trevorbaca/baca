@@ -11,7 +11,7 @@ def test_MaterialPackageMakerWrangler_iteration_01():
 
 def test_MaterialPackageMakerWrangler_iteration_02():
 
-    assert wrangler.list_score_internal_asset_container_package_importable_names() == []
+    assert wrangler.list_score_internal_asset_container_importable_names() == []
 
 
 def test_MaterialPackageMakerWrangler_iteration_03():
