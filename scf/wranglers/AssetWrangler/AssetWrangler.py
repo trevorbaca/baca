@@ -133,26 +133,10 @@ class AssetWrangler(SCFObject):
         return result
 
     def list_wrangled_asset_menuing_pairs(self, head=None):
-        self.not_yet_implemented()
+        self.print_not_implemented()
 
-    def list_wrangled_package_proxies(self, head=None):
-        result = []
-        for package_importable_name in self.list_wrangled_package_importable_names(head=head):
-            wrangled_package_proxy = self.get_wrangled_asset_proxy(package_importable_name)
-            result.append(wrangled_package_proxy)
-        return result
-
-    def list_wrangled_package_short_names(self, head=None):
-        result = []
-        for x in self.list_wrangled_package_importable_names(head=head):
-            result.append(x.split('.')[-1])
-        return result
-
-    def list_wrangled_package_spaced_names(self, head=None):
-        result = []
-        for x in self.list_wrangled_package_short_names(head=head):
-            result.append(x.replace('_', ' '))
-        return result
+    def list_wrangled_asset_proxies(self, head=None):
+        self.print_not_implemented()
 
     def make_wrangled_package(self, package_short_name):
         assert iotools.is_underscore_delimited_lowercase_package_name(package_short_name)

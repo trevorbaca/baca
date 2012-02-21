@@ -36,7 +36,7 @@ class ScorePackageWrangler(PackageWrangler):
     def list_visible_wrangled_package_proxies(self, head=None):
         result = []
         scores_to_show = self.session.scores_to_show
-        for score_package_proxy in PackageWrangler.list_wrangled_package_proxies(
+        for score_package_proxy in PackageWrangler.list_wrangled_asset_proxies(
             self, head=head):
             is_mothballed = score_package_proxy.get_tag('is_mothballed')
             if scores_to_show == 'all':

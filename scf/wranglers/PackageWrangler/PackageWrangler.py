@@ -73,7 +73,7 @@ class PackageWrangler(AssetWrangler):
         return result
 
     def list_visible_wrangled_package_proxies(self, head=None):
-        return self.list_wrangled_package_proxies(head=head)
+        return self.list_wrangled_asset_proxies(head=head)
 
     def list_visible_wrangled_package_short_names(self, head=None):
         result = []
@@ -92,6 +92,13 @@ class PackageWrangler(AssetWrangler):
         bodies = self.list_wrangled_package_spaced_names(head=head)
         return zip(keys, bodies)
 
+    def list_wrangled_asset_proxies(self, head=None):
+        result = []
+        for package_importable_name in self.list_wrangled_package_importable_names(head=head):
+            wrangled_package_proxy = self.get_wrangled_asset_proxy(package_importable_name)
+            result.append(wrangled_package_proxy)
+        return result
+
     def list_wrangled_package_directory_names(self, head=None):
         result = []
         for package_importable_name in self.list_wrangled_package_importable_names(head=head):
@@ -107,4 +114,16 @@ class PackageWrangler(AssetWrangler):
         for package_importable_name in package_importable_names:
             if package_importable_name.startswith(head):
                 result.append(package_importable_name)
+        return result
+
+    def list_wrangled_package_short_names(self, head=None):
+        result = []
+        for x in self.list_wrangled_package_importable_names(head=head):
+            result.append(x.split('.')[-1])
+        return result
+
+    def list_wrangled_package_spaced_names(self, head=None):
+        result = []
+        for x in self.list_wrangled_package_short_names(head=head):
+            result.append(x.replace('_', ' '))
         return result

@@ -12,8 +12,8 @@ def test_PackageWrangler_public_methods_01():
     assert ('lidercfeny', 'lidercfeny') in wrangler.list_wrangled_asset_menuing_pairs()
    
     lidercfeny = baca.scf.proxies.PackageProxy('lidercfeny')
-    assert lidercfeny in wrangler.list_wrangled_package_proxies()
+    assert lidercfeny in wrangler.list_wrangled_asset_proxies()
 
-    assert wrangler.list_wrangled_package_proxies() == wrangler.list_visible_wrangled_package_proxies()
+    assert wrangler.list_wrangled_asset_proxies() == wrangler.list_visible_wrangled_package_proxies()
     assert 'lidercfeny' in wrangler.list_wrangled_package_short_names()
     assert 'lidercfeny' in wrangler.list_wrangled_package_spaced_names()
