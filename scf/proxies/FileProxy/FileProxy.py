@@ -49,6 +49,13 @@ class FileProxy(AssetProxy):
     def short_name(self):
         return self.path_name.split(os.path.sep)[-1]
 
+    @property
+    def short_name_without_extension(self):
+        if '.' in self.short_name:
+            return self.short_name[:self.short_name.rdindex('.')]
+        else:
+            return self.short_name
+
     ### PUBLIC METHODS ###
 
     def clear(self):

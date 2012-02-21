@@ -58,12 +58,28 @@ class AssetWrangler(SCFObject):
             return self.score_external_asset_container_importable_name
 
     @property
+    def score_external_wrangled_asset_human_readable_names(self):
+        result = []
+        for asset_proxy in self.score_external_wrangled_asset_proxies:
+            result.append(asset_proxy.human_readable_name)
+        return result
+
+    @property
     def score_external_wrangled_asset_path_names(self):
         result = []
         if self.score_external_asset_container_path_name:
             for name in os.listdir(self.score_external_asset_container_path_name):
                 if name[0].isalpha():
                     result.append(os.path.join(self.score_external_asset_container_path_name, name))
+        return result
+
+    @property
+    def score_external_wrangled_asset_short_names(self):
+        result = []
+        if self.score_external_asset_container_path_name:
+            for name in os.listdir(self.score_external_asset_container_path_name):
+                if name[0].isalpha():
+                    result.append(name)
         return result
 
     @property
