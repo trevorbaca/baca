@@ -44,7 +44,7 @@ class AssetWrangler(SCFObject):
     ### READ-ONLY PUBLIC ATTRIBUTES ###
 
     @property
-    def current_asset_container_directory_name(self):
+    def current_asset_container_path_name(self):
         return self.package_importable_name_to_path_name(
             self.current_asset_container_package_importable_name)
 
@@ -60,20 +60,20 @@ class AssetWrangler(SCFObject):
     @property
     def score_external_wrangled_asset_path_names(self):
         result = []
-        if self.score_external_asset_container_directory_name:
-            for name in os.listdir(self.score_external_asset_container_directory_name):
+        if self.score_external_asset_container_path_name:
+            for name in os.listdir(self.score_external_asset_container_path_name):
                 if name[0].isalpha():
-                    result.append(os.path.join(self.score_external_asset_container_directory_name, name))
+                    result.append(os.path.join(self.score_external_asset_container_path_name, name))
         return result
 
     @property
-    def score_external_asset_container_directory_name(self):
+    def score_external_asset_container_path_name(self):
         return self.package_importable_name_to_path_name(
             self.score_external_asset_container_importable_name)
 
     @property
     def score_external_asset_container_initializer_file_name(self):
-        return os.path.join(self.score_external_asset_container_directory_name, '__init__.py')
+        return os.path.join(self.score_external_asset_container_path_name, '__init__.py')
 
     @property
     def score_external_asset_container_importable_name(self):
@@ -84,7 +84,7 @@ class AssetWrangler(SCFObject):
         return self._score_internal_asset_container_importable_name_suffix
 
     @property
-    def asset_container_directory_names(self):
+    def asset_container_path_names(self):
         result = []
         for asset_container_package_importable_name in self.asset_container_package_importable_names:
             result.append(self.package_importable_name_to_path_name(
@@ -123,13 +123,13 @@ class AssetWrangler(SCFObject):
         
     def list_score_internal_wrangled_asset_path_names(self, head=None):
         result = []
-        for directory_name in self.list_score_internal_asset_container_directory_names(head=head):
-            for name in os.listdir(directory_name):
+        for path_name in self.list_score_internal_asset_container_path_names(head=head):
+            for name in os.listdir(path_name):
                 if name[0].isalpha():
-                    result.append(os.path.join(directory_name, name))
+                    result.append(os.path.join(path_name, name))
         return result
 
-    def list_score_internal_asset_container_directory_names(self, head=None):
+    def list_score_internal_asset_container_path_names(self, head=None):
         result = []
         for package_importable_name in \
             self.list_score_internal_asset_container_package_importable_names(head=head):
@@ -169,7 +169,7 @@ class AssetWrangler(SCFObject):
 
     def make_wrangled_asset(self, asset_short_name):
         assert iotools.is_underscore_delimited_lowercase_string(asset_short_name)
-        asset_path_name = os.path.join(self.current_asset_container_directory_name, asset_short_name)
+        asset_path_name = os.path.join(self.current_asset_container_path_name, asset_short_name)
         asset_proxy = self.get_wrangled_asset_proxy(asset_path_name)
         asset_proxy.write_stub_to_disk()
 

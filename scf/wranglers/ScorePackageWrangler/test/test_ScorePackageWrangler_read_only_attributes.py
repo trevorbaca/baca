@@ -8,7 +8,7 @@ def test_ScorePackageWrangler_read_only_attributes_01():
 
     assert wrangler.breadcrumb == 'scores'
 
-    assert wrangler.current_asset_container_directory_name == wrangler.scores_directory_name
+    assert wrangler.current_asset_container_path_name == wrangler.scores_directory_name
     assert wrangler.current_asset_container_package_importable_name is None
 
     assert wrangler.score_external_wrangled_asset_importable_names == []
