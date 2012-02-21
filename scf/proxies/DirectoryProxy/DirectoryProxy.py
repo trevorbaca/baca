@@ -1,13 +1,13 @@
-from baca.scf.core.SCFObject import SCFObject
+from baca.scf.proxies.AssetProxy import AssetProxy
 import os
 import subprocess
 
 
-class DirectoryProxy(SCFObject):
+class DirectoryProxy(AssetProxy):
 
     def __init__(self, directory_name, session=None):
         assert isinstance(directory_name, (str, type(None)))
-        SCFObject.__init__(self, session=session)
+        AssetProxy.__init__(self, session=session)
         self._directory_name = directory_name
 
     ### OVERLOADS ###

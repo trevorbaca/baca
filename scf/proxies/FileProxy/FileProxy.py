@@ -1,15 +1,14 @@
-from baca.scf.core.SCFObject import SCFObject
+from baca.scf.proxies.AssetProxy import AssetProxy
 import os
 import shutil
 
 
 # TODO: write all tests
-class FileProxy(SCFObject):
+class FileProxy(AssetProxy):
     
     def __init__(self, full_file_name, session=None):
         assert isinstance(full_file_name, str), '{!r} is not a string.'.format(full_file_name)
-        #assert os.path.exists(full_file_name), 'Initializer {!r} does not exist.'.format(full_file_name)
-        SCFObject.__init__(self, session=session)
+        AssetProxy.__init__(self, session=session)
         self._full_file_name = full_file_name
 
     ### OVERLOADS ###
