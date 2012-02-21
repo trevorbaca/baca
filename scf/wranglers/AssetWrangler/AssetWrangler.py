@@ -186,6 +186,12 @@ class AssetWrangler(SCFObject):
     def list_visible_asset_proxies(self, head=None):
         return self.list_wrangled_asset_proxies(head=head)
 
+    def list_visible_asset_short_names(self, head=None):
+        result = []
+        for asset_proxy in self.list_visible_asset_proxies(head=head):
+            result.append(asset_proxy.short_name)
+        return result
+
     def list_wrangled_asset_menuing_pairs(self, head=None):
         keys = self.list_visible_asset_path_names(head=head)
         bodies = self.list_visible_asset_human_readable_names(head=head)

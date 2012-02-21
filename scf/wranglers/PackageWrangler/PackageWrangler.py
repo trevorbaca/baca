@@ -18,12 +18,6 @@ class PackageWrangler(ImportableAssetWrangler):
 
     ### PUBLIC METHODS ###
 
-    def list_visible_package_short_names(self, head=None):
-        result = []
-        for package_proxy in self.list_visible_asset_proxies(head=head):
-            result.append(package_proxy.package_short_name)
-        return result
-
     def list_wrangled_asset_menuing_pairs(self, head=None):
         keys = self.list_visible_asset_importable_names(head=head)
         bodies = self.list_visible_asset_human_readable_names(head=head)

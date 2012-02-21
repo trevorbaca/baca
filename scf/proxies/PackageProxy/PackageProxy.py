@@ -82,7 +82,8 @@ class PackageProxy(DirectoryProxy):
 
     @property
     def package_short_name(self):
-        return self.package_importable_name.split('.')[-1]
+        #return self.package_importable_name.split('.')[-1]
+        return self.short_name
 
     @property
     def package_spaced_name(self):

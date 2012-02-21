@@ -20,9 +20,9 @@ def test_ScorePackageWrangler_iteration_02():
 
 def test_ScorePackageWrangler_iteration_03():
 
-    assert 'archipel' in wrangler.list_visible_package_short_names()
-    assert 'archipel' not in wrangler.list_visible_package_short_names(head='aracilik')
-    assert wrangler.list_visible_package_short_names(head='asdf') == []
+    assert 'archipel' in wrangler.list_visible_asset_short_names()
+    assert 'archipel' not in wrangler.list_visible_asset_short_names(head='aracilik')
+    assert wrangler.list_visible_asset_short_names(head='asdf') == []
 
 
 def test_ScorePackageWrangler_iteration_04():
