@@ -1,19 +1,12 @@
 from abjad.tools import iotools
 from baca.scf.proxies.PackageProxy import PackageProxy
-from baca.scf.wranglers.AssetWrangler import AssetWrangler
+from baca.scf.wranglers.ImportableAssetWrangler import ImportableAssetWrangler
 import os
 
 
-class PackageWrangler(AssetWrangler):
+class PackageWrangler(ImportableAssetWrangler):
 
     ### READ-ONLY PUBLIC ATTRIBUTES ###
-
-    @property
-    def score_external_wrangled_asset_importable_names(self):
-        result = []
-        for short_name in self.score_external_wrangled_asset_short_names:
-            result.append('{}.{}'.format(self.score_external_asset_container_importable_name, short_name))
-        return result
 
     @property
     def temporary_asset_importable_name(self):
