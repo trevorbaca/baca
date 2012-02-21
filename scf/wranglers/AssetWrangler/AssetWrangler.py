@@ -51,9 +51,8 @@ class AssetWrangler(SCFObject):
     @property
     def current_asset_container_package_importable_name(self):
         if self.session.is_in_score:
-            score_package_short_name = self.session.current_score_package_short_name
             return self.dot_join([
-                score_package_short_name, 
+                self.session.current_score_package_short_name, 
                 self.score_internal_asset_container_package_importable_name_suffix])
         else:
             return self.score_external_asset_container_package_importable_name
@@ -119,7 +118,12 @@ class AssetWrangler(SCFObject):
         self.print_implemented_on_child_classes()
         
     def list_score_internal_wrangled_asset_path_names(self, head=None):
-        self.print_not_implemented()
+        result = []
+        for directory_name in self.list_score_internal_asset_container_directory_names(head=head):
+            for name in os.listdir(directory_name):
+                if name[0].isalpha():
+                    result.append(os.path.join(directory_name, name))
+        return result
 
     def list_score_internal_asset_container_directory_names(self, head=None):
         result = []
@@ -142,7 +146,9 @@ class AssetWrangler(SCFObject):
         return self.list_wrangled_asset_proxies(head=head)
 
     def list_wrangled_asset_menuing_pairs(self, head=None):
-        self.print_not_implemented()
+        keys = self.list_visible_wrangled_asset_path_names(head=head)
+        bodies = self.list_visible_wrangled_asset_human_readable_names(head=head)
+        return zip(keys, bodies)
 
     def list_wrangled_asset_proxies(self, head=None):
         self.print_not_implemented()
