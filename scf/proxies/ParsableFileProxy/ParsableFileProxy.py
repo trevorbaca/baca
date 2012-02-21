@@ -3,8 +3,8 @@ from baca.scf.proxies.FileProxy import FileProxy
 
 class ParsableFileProxy(FileProxy):
 
-    def __init__(self, full_file_name, session=None):
-        FileProxy.__init__(self, full_file_name, session=session)    
+    def __init__(self, path_name, session=None):
+        FileProxy.__init__(self, path_name, session=session)    
         self.encoding_directives = []
         self.docstring_lines = []
         self.setup_statements = []
@@ -48,5 +48,5 @@ class ParsableFileProxy(FileProxy):
         print self.format
 
     def write_to_disk(self):
-        initializer = file(self.full_file_name, 'w')
+        initializer = file(self.path_name, 'w')
         initializer.write(self.format)

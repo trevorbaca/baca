@@ -264,9 +264,9 @@ class SCFObject(object):
             is_ranged=is_ranged)
         return menu, section
 
-    def module_importable_name_to_full_file_name(self, module_importable_name):
-        full_file_name = self.package_importable_name_to_directory_name(module_importable_name) + '.py'
-        return full_file_name
+    def module_importable_name_to_path_name(self, module_importable_name):
+        path_name = self.package_importable_name_to_directory_name(module_importable_name) + '.py'
+        return path_name
 
     def package_exists(self, package_importable_name):
         assert isinstance(package_importable_name, str)

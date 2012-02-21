@@ -30,8 +30,8 @@ class DirectoryProxy(AssetProxy):
     def directory_contents(self):
         for file_name in os.listdir(self.directory_name):
             if file_name.endswith('.pyc'):
-                full_file_name = os.path.join(self.directory_name, file_name)
-                os.remove(full_file_name)
+                path_name = os.path.join(self.directory_name, file_name)
+                os.remove(path_name)
         return os.listdir(self.directory_name)
 
     @property

@@ -5,8 +5,8 @@ import os
 
 class StylesheetFileProxy(FileProxy):
 
-    def __init__(self, full_file_name, session=None):
-        FileProxy.__init__(self, full_file_name, session=session)
+    def __init__(self, path_name, session=None):
+        FileProxy.__init__(self, path_name, session=session)
 
     ### READ-ONLY PUBLIC ATTRIBUTES ###
 
@@ -29,8 +29,8 @@ class StylesheetFileProxy(FileProxy):
         new_short_name = iotools.string_to_strict_directory_name(new_short_name)
         if not new_short_name.endswith('.ly'):
             new_short_name = new_short_name + '.ly'
-        new_full_file_name = os.path.join(self.parent_directory_name, new_short_name)
-        self.copy_file(new_full_file_name)
+        new_path_name = os.path.join(self.parent_directory_name, new_short_name)
+        self.copy_file(new_path_name)
         line = 'file copied.'
         self.proceed(line, prompt=prompt)
         
@@ -73,8 +73,8 @@ class StylesheetFileProxy(FileProxy):
         new_short_name = iotools.string_to_strict_directory_name(new_short_name)
         if not new_short_name.endswith('.ly'):
             new_short_name = new_short_name + '.ly'
-        new_full_file_name = os.path.join(self.parent_directory_name, new_short_name)
-        self.rename_file(new_full_file_name)
+        new_path_name = os.path.join(self.parent_directory_name, new_short_name)
+        self.rename_file(new_path_name)
         line = 'stylesheet renamed.'
         self.proceed(line, prompt=prompt)
 

@@ -7,5 +7,5 @@ class IllustrationPdfFileProxy(FileProxy):
     ### PUBLIC METHODS ###
 
     def view(self):
-        command = 'open {}'.format(self.full_file_name)
+        command = 'open {}'.format(self.path_name)
         os.system(command)
