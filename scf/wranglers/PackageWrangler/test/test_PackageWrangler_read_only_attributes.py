@@ -10,4 +10,4 @@ def test_PackageWrangler_read_only_attributes_01():
     assert 'lidercfeny' in \
         wrangler.list_score_internal_asset_container_importable_names()
     assert wrangler.score_external_wrangled_asset_importable_names == []
-    assert 'lidercfeny' in wrangler.list_score_internal_wrangled_package_importable_names()
+    assert 'lidercfeny' in wrangler.list_score_internal_wrangled_asset_importable_names()

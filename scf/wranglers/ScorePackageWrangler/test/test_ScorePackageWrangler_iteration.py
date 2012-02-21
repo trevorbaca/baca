@@ -6,9 +6,9 @@ wrangler = studio.score_package_wrangler
 
 def test_ScorePackageWrangler_iteration_01():
 
-    assert 'archipel' in wrangler.list_score_internal_wrangled_package_importable_names()
-    assert 'archipel' not in wrangler.list_score_internal_wrangled_package_importable_names(head='aracilik')
-    assert wrangler.list_score_internal_wrangled_package_importable_names(head='asdf') == []
+    assert 'archipel' in wrangler.list_score_internal_wrangled_asset_importable_names()
+    assert 'archipel' not in wrangler.list_score_internal_wrangled_asset_importable_names(head='aracilik')
+    assert wrangler.list_score_internal_wrangled_asset_importable_names(head='asdf') == []
 
 
 def test_ScorePackageWrangler_iteration_02():

@@ -6,7 +6,7 @@ wrangler = studio.material_package_maker_wrangler
 
 def test_MaterialPackageMakerWrangler_iteration_01():
 
-    assert wrangler.list_score_internal_wrangled_package_importable_names() == []
+    assert wrangler.list_score_internal_wrangled_asset_importable_names() == []
 
 
 def test_MaterialPackageMakerWrangler_iteration_02():
@@ -23,7 +23,7 @@ def test_MaterialPackageMakerWrangler_iteration_03():
 def test_MaterialPackageMakerWrangler_iteration_04():
 
     assert 'baca.scf.makers.PitchRangeInventoryMaterialPackageMaker' in \
-        wrangler.list_wrangled_package_importable_names()
+        wrangler.list_wrangled_asset_importable_names()
     
 
 def test_MaterialPackageMakerWrangler_iteration_05():
