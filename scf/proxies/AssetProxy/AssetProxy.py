@@ -8,6 +8,10 @@ class AssetProxy(SCFObject):
     ### READ-ONLY PUBLIC ATTRIBUTES ###
 
     @property
+    def human_readable_name(self):
+        return self.path_name.split(os.path.sep)[-1]
+        
+    @property
     def path_name(self):
         self.print_implemented_on_child_classes()
 

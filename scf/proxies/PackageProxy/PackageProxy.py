@@ -54,6 +54,10 @@ class PackageProxy(DirectoryProxy):
         return os.path.isfile(self.tags_file_name)
 
     @property
+    def human_readable_name(self):
+        return self.package_short_name.replace('_', ' ')
+
+    @property
     def initializer_file_name(self):
         if self.directory_name is not None:
             return os.path.join(self.directory_name, '__init__.py')

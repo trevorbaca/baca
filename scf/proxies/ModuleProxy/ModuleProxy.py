@@ -25,6 +25,10 @@ class ModuleProxy(ParsableFileProxy):
         return os.path.join(self.grandparent_package_directory_name, '__init__.py')
 
     @property
+    def human_readable_name(self):
+        return FileProxy.human_readable_name.fget(self)[:-3].replace('_', ' ')
+        
+    @property
     def module_importable_name(self):
         return self._module_importable_name
 

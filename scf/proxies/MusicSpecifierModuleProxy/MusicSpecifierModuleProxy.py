@@ -7,7 +7,7 @@ class MusicSpecifierModuleProxy(ModuleProxy):
     def __init__(self, module_importable_name, session=None):
         ModuleProxy.__init__(self, module_importable_name, session=session)
         self.music_specifier_lines = []
-        self.conditionally_make_file()
+        #self.conditionally_make_file()
         self.parse() 
 
     ### READ-ONLY ATTRIBUTES ###
