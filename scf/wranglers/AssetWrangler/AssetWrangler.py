@@ -116,7 +116,11 @@ class AssetWrangler(SCFObject):
 
     @property
     def temporary_asset_path_name(self):
-        return os.path.join(self.current_asset_container_path_name, '__temporary_package')
+        return os.path.join(self.current_asset_container_path_name, self.temporary_asset_short_name)
+
+    @property
+    def temporary_asset_short_name(self):
+        self.print_implemented_on_child_classes()
 
     @property
     def wrangled_asset_class(self):

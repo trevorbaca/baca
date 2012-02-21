@@ -14,6 +14,10 @@ class StylesheetFileProxy(FileProxy):
     def breadcrumb(self):
         return self.short_name
 
+    @property
+    def temporary_asset_short_name(self):
+        return '__temporary_stylesheet.ly'
+
     ### PUBLIC METHODS ###
 
     # TODO: implement

@@ -18,9 +18,15 @@ class PackageWrangler(AssetWrangler):
     @property
     def temporary_asset_importable_name(self):
         if self.current_asset_container_importable_name:
-            return self.dot_join([self.current_asset_container_importable_name, '__temporary_package'])
+            return self.dot_join([
+                self.current_asset_container_importable_name, 
+                self.temporary_asset_short_name])
         else:
-            return '__temporary_package'
+            return self.temporary_asset_short_name
+
+    @property
+    def temporary_asset_short_name(self):
+        return '__temporary_package'
     
     @property
     def wrangled_asset_class(self):

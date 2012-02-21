@@ -47,6 +47,10 @@ class ModuleProxy(ParsableFileProxy):
     @property
     def parent_package_initializer_file_name(self):
         return os.path.join(self.parent_package_directory_name, '__init__.py')
+
+    @property
+    def temporary_asset_short_name(self):
+        return '__temporary_module.py'
         
     ### PUBLIC METHODS ###
 
