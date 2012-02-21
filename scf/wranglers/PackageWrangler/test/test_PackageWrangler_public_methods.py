@@ -9,7 +9,7 @@ def test_PackageWrangler_public_methods_01():
     assert isinstance(wrangler_2, baca.scf.proxies.PackageProxy)
 
     assert 'lidercfeny' in wrangler.list_wrangled_package_importable_names()
-    assert ('lidercfeny', 'lidercfeny') in wrangler.list_wrangled_package_menuing_pairs()
+    assert ('lidercfeny', 'lidercfeny') in wrangler.list_wrangled_asset_menuing_pairs()
    
     lidercfeny = baca.scf.proxies.PackageProxy('lidercfeny')
     assert lidercfeny in wrangler.list_wrangled_package_proxies()

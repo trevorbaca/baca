@@ -37,7 +37,7 @@ class MusicSpecifierModuleWrangler(PackageWrangler):
 
     def make_main_menu(self, head=None):
         menu, section = self.make_menu(where=self.where(), is_parenthetically_numbered=True)
-        section.tokens = self.list_wrangled_package_menuing_pairs(head=head)
+        section.tokens = self.list_wrangled_asset_menuing_pairs(head=head)
         section = menu.make_section()
         section.append(('new', 'new music specifier'))
         hidden_section = menu.make_section(is_hidden=True)
@@ -78,7 +78,7 @@ class MusicSpecifierModuleWrangler(PackageWrangler):
     def select_specifier_spaced_name_interactively(self, cache=False, clear=True, head=None):
         self.cache_breadcrumbs(cache=cache)
         menu, section = self.make_menu(where=self.where(), is_parenthetically_numbered=True)
-        section.tokens = self.list_wrangled_package_menuing_pairs(head=head)
+        section.tokens = self.list_wrangled_asset_menuing_pairs(head=head)
         while True:
             self.push_breadcrumb('select music specifier')
             result = menu.run(clear=clear)

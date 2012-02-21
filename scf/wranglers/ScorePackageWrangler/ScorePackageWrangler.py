@@ -47,7 +47,7 @@ class ScorePackageWrangler(PackageWrangler):
                 result.append(score_package_proxy)
         return result
 
-    def list_wrangled_package_menuing_pairs(self, head=None):
+    def list_wrangled_asset_menuing_pairs(self, head=None):
         score_package_short_names = self.list_visible_wrangled_package_short_names()
         score_titles = self.visible_score_titles_with_years
         menuing_pairs = zip(score_package_short_names, score_titles)

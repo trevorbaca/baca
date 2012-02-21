@@ -174,7 +174,7 @@ class Studio(SCFObject):
 
     def make_score_selection_menu(self):
         menu, section = self.make_menu(where=self.where(), is_numbered=True, is_keyed=False)
-        section.tokens = self.score_package_wrangler.list_wrangled_package_menuing_pairs()
+        section.tokens = self.score_package_wrangler.list_wrangled_asset_menuing_pairs()
         return menu
 
     def make_svn_menu(self):

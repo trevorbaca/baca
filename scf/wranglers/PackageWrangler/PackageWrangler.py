@@ -87,6 +87,11 @@ class PackageWrangler(AssetWrangler):
             result.append(x.replace('_', ' '))
         return result
 
+    def list_wrangled_asset_menuing_pairs(self, head=None):
+        keys = self.list_wrangled_package_importable_names(head=head)
+        bodies = self.list_wrangled_package_spaced_names(head=head)
+        return zip(keys, bodies)
+
     def list_wrangled_package_directory_names(self, head=None):
         result = []
         for package_importable_name in self.list_wrangled_package_importable_names(head=head):

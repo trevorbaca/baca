@@ -132,10 +132,8 @@ class AssetWrangler(SCFObject):
             result.append(score_internal_score_package_importable_name)
         return result
 
-    def list_wrangled_package_menuing_pairs(self, head=None):
-        keys = self.list_wrangled_package_importable_names(head=head)
-        bodies = self.list_wrangled_package_spaced_names(head=head)
-        return zip(keys, bodies)
+    def list_wrangled_asset_menuing_pairs(self, head=None):
+        self.not_yet_implemented()
 
     def list_wrangled_package_proxies(self, head=None):
         result = []

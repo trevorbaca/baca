@@ -45,13 +45,13 @@ def test_MaterialPackageWrangler_iteration_04():
 def test_MaterialPackageWrangler_iteration_05():
 
     assert ('baca.materials.red_sargasso', 'red sargasso') in \
-        wrangler.list_wrangled_package_menuing_pairs()
+        wrangler.list_wrangled_asset_menuing_pairs()
     assert ('manos.mus.materials.turquoise_pcs', 'turquoise pcs') in \
-        wrangler.list_wrangled_package_menuing_pairs()
+        wrangler.list_wrangled_asset_menuing_pairs()
     assert ('baca.materials.red_sargasso', 'red sargasso') not in \
-        wrangler.list_wrangled_package_menuing_pairs(head='aracilik')
+        wrangler.list_wrangled_asset_menuing_pairs(head='aracilik')
     assert ('manos.mus.materials.turquoise_pcs', 'turquoise pcs') not in \
-        wrangler.list_wrangled_package_menuing_pairs(head='aracilik')
+        wrangler.list_wrangled_asset_menuing_pairs(head='aracilik')
 
 
 def test_MaterialPackageWrangler_iteration_06():
