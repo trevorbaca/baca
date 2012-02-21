@@ -16,7 +16,7 @@ class PackageWrangler(AssetWrangler):
         return result
 
     @property
-    def temporary_package_directory_name(self):
+    def temporary_asset_path_name(self):
         return os.path.join(self.current_asset_container_path_name, '__temporary_package')
 
     @property
@@ -41,20 +41,14 @@ class PackageWrangler(AssetWrangler):
                 package_proxy.profile()
         return results
 
-    def list_score_internal_wrangled_package_directory_names(self, head=None):
-        result = []
-        for package_importable_name in self.list_score_internal_wrangled_package_importable_names(head=head):
-            result.append(self.package_importable_name_to_path_name(package_importable_name))
-        return result
-
     def list_score_internal_wrangled_package_importable_names(self, head=None):
         result = []
         for package_importable_name in \
             self.list_score_internal_asset_container_importable_names(head=head):
             if self.score_internal_asset_container_importable_name_infix:
-                package_directory_name = self.package_importable_name_to_path_name(
+                asset_path_name = self.package_importable_name_to_path_name(
                     package_importable_name)
-                for name in os.listdir(package_directory_name):
+                for name in os.listdir(asset_path_name):
                     if name[0].isalpha():
                         result.append('{}.{}'.format(package_importable_name, name))
             else:
@@ -85,12 +79,6 @@ class PackageWrangler(AssetWrangler):
             result.append(wrangled_package_proxy)
         return result
 
-    def list_wrangled_package_directory_names(self, head=None):
-        result = []
-        for package_importable_name in self.list_wrangled_package_importable_names(head=head):
-            result.append(self.package_importable_name_to_path_name(package_importable_name))
-        return result
-
     def list_wrangled_package_importable_names(self, head=None):
         if head is None: head = ''
         result, package_importable_names = [], []
@@ -114,9 +102,9 @@ class PackageWrangler(AssetWrangler):
             result.append(x.replace('_', ' '))
         return result
 
-    def make_wrangled_asset(self, package_short_name):
-        assert iotools.is_underscore_delimited_lowercase_package_name(package_short_name)
-        package_directory_name = os.path.join(self.current_asset_container_path_name, package_short_name)
-        os.mkdir(package_directory_name)
-        package_proxy = self.get_wrangled_asset_proxy(package_short_name)
+    def make_wrangled_asset(self, asset_short_name):
+        assert iotools.is_underscore_delimited_lowercase_package_name(asset_short_name)
+        asset_path_name = os.path.join(self.current_asset_container_path_name, asset_short_name)
+        os.mkdir(asset_path_name)
+        package_proxy = self.get_wrangled_asset_proxy(asset_short_name)
         package_proxy.fix_package_structure(is_interactive=False)
