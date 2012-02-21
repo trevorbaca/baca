@@ -36,21 +36,20 @@ class ScorePackageWrangler(PackageWrangler):
     def list_visible_wrangled_asset_proxies(self, head=None):
         result = []
         scores_to_show = self.session.scores_to_show
-        for score_package_proxy in PackageWrangler.list_wrangled_asset_proxies(
-            self, head=head):
-            is_mothballed = score_package_proxy.get_tag('is_mothballed')
+        for asset_proxy in PackageWrangler.list_wrangled_asset_proxies(self, head=head):
+            is_mothballed = asset_proxy.get_tag('is_mothballed')
             if scores_to_show == 'all':
-                result.append(score_package_proxy)
+                result.append(asset_proxy)
             elif scores_to_show == 'active' and not is_mothballed:
-                result.append(score_package_proxy)
+                result.append(asset_proxy)
             elif scores_to_show == 'mothballed' and is_mothballed:
-                result.append(score_package_proxy)
+                result.append(asset_proxy)
         return result
 
     def list_wrangled_asset_menuing_pairs(self, head=None):
-        score_package_short_names = self.list_visible_wrangled_package_short_names()
-        score_titles = self.visible_score_titles_with_years
-        menuing_pairs = zip(score_package_short_names, score_titles)
+        keys = self.list_visible_wrangled_package_short_names()
+        bodies = self.visible_score_titles_with_years
+        menuing_pairs = zip(keys, bodies)
         tmp = iotools.strip_diacritics_from_binary_string
         menuing_pairs.sort(lambda x, y: cmp(tmp(x[1]), tmp(y[1])))
         return menuing_pairs

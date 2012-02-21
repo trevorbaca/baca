@@ -8,6 +8,7 @@ from baca.scf.wranglers.MaterialPackageMakerWrangler import MaterialPackageMaker
 from baca.scf.wranglers.MaterialPackageWrangler import MaterialPackageWrangler
 from baca.scf.wranglers.MusicSpecifierModuleWrangler import MusicSpecifierModuleWrangler
 from baca.scf.wranglers.ScorePackageWrangler import ScorePackageWrangler
+from baca.scf.wranglers.StylesheetFileWrangler import StylesheetFileWrangler
 import subprocess
 
 
@@ -21,6 +22,7 @@ class Studio(SCFObject):
         self._material_package_wrangler = MaterialPackageWrangler(session=self.session)
         self._music_specifier_module_wrangler = MusicSpecifierModuleWrangler(session=self.session)
         self._score_package_wrangler = ScorePackageWrangler(session=self.session)
+        self._stylesheet_file_wrangler = StylesheetFileWrangler(session=self.session)
 
     ### READ-ONLY PUBLIC ATTRIBUTES ###
 
@@ -55,6 +57,10 @@ class Studio(SCFObject):
     @property
     def score_package_wrangler(self):
         return self._score_package_wrangler
+
+    @property
+    def stylesheet_file_wrangler(self):
+        return self._stylesheet_file_wrangler
 
     ### PUBLIC METHODS ###
 

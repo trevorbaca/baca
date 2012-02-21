@@ -53,13 +53,19 @@ class AssetWrangler(SCFObject):
         if self.session.is_in_score:
             score_package_short_name = self.session.current_score_package_short_name
             return self.dot_join([
-                score_package_short_name, self.score_internal_wrangler_target_package_importable_name_suffix])
+                score_package_short_name, 
+                self.score_internal_wrangler_target_package_importable_name_suffix])
         else:
             return self.score_external_wrangler_target_package_importable_name
 
     @property
     def score_external_wrangled_asset_path_names(self):
-        self.print_not_implemented()
+        result = []
+        if self.score_external_wrangler_target_directory_name:
+            for name in os.listdir(self.score_external_wrangler_target_directory_name):
+                if name[0].isalpha():
+                    result.append(os.path.join(self.score_external_wrangler_target_directory_name, name))
+        return result
 
     @property
     def score_external_wrangler_target_directory_name(self):
@@ -153,13 +159,11 @@ class AssetWrangler(SCFObject):
     def run(self):
         self.print_implemented_on_child_classes()
 
-    # TODO: leave here but generalize for all asset wranglers
     def svn_add(self, prompt=True):
-        for package_proxy in self.list_visible_wrangled_asset_proxies():
-            package_proxy.svn_add(prompt=False)
+        for asset_proxy in self.list_visible_wrangled_asset_proxies():
+            asset_proxy.svn_add(prompt=False)
         self.proceed(prompt=prompt)
 
-    # TODO: leave here but generalize for all asset wranglers
     def svn_ci(self, prompt=True):
         getter = self.make_getter(where=self.where())
         getter.append_string('commit message')
@@ -170,18 +174,16 @@ class AssetWrangler(SCFObject):
         self.display(line)
         if not self.confirm():
             return
-        for package_proxy in self.list_visible_wrangled_asset_proxies():
-            package_proxy.svn_ci(commit_message=commit_message, prompt=False)
+        for asset_proxy in self.list_visible_wrangled_asset_proxies():
+            asset_proxy.svn_ci(commit_message=commit_message, prompt=False)
         self.proceed(prompt=prompt)
 
-    # TODO: leave here but generalize for all asset wranglers
     def svn_st(self, prompt=True):
-        for package_proxy in self.list_visible_wrangled_asset_proxies():
-            package_proxy.svn_st(prompt=False)
+        for asset_proxy in self.list_visible_wrangled_asset_proxies():
+            asset_proxy.svn_st(prompt=False)
         self.proceed(prompt=prompt)
 
-    # TODO: leave here but generalize for all asset wranglers
     def svn_up(self, prompt=True):
-        for package_proxy in self.list_visible_wrangled_asset_proxies():
-            package_proxy.svn_up(prompt=False)
+        for asset_proxy in self.list_visible_wrangled_asset_proxies():
+            asset_proxy.svn_up(prompt=False)
         self.proceed(prompt=prompt)
