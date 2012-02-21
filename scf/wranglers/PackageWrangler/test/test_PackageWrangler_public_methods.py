@@ -16,4 +16,4 @@ def test_PackageWrangler_public_methods_01():
 
     assert wrangler.list_wrangled_asset_proxies() == wrangler.list_visible_asset_proxies()
     assert 'lidercfeny' in wrangler.list_wrangled_package_short_names()
-    assert 'lidercfeny' in wrangler.list_wrangled_package_spaced_names()
+    assert 'lidercfeny' in wrangler.list_wrangled_asset_human_readable_names()

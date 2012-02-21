@@ -26,9 +26,6 @@ class PackageWrangler(ImportableAssetWrangler):
         return result
         #return self.list_wrangled_asset_short_names(head=head)
 
-    def list_wrangled_package_spaced_names(self, head=None):
-        return self.list_wrangled_asset_human_readable_names(head=head)
-
     def make_wrangled_asset(self, asset_short_name):
         assert iotools.is_underscore_delimited_lowercase_package_name(asset_short_name)
         asset_path_name = os.path.join(self.current_asset_container_path_name, asset_short_name)

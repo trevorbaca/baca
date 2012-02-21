@@ -39,4 +39,4 @@ def test_MaterialPackageMakerWrangler_iteration_06():
     
 def test_MaterialPackageMakerWrangler_iteration_07():
 
-    assert 'PitchRangeInventoryMaterialPackageMaker' in wrangler.list_wrangled_package_spaced_names()
+    assert 'PitchRangeInventoryMaterialPackageMaker' in wrangler.list_wrangled_asset_human_readable_names()

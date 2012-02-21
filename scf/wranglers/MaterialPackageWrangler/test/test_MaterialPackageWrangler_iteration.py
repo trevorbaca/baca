@@ -64,7 +64,7 @@ def test_MaterialPackageWrangler_iteration_06():
 
 def test_MaterialPackageWrangler_iteration_07():
 
-    assert 'red sargasso' in wrangler.list_wrangled_package_spaced_names()
-    assert 'turquoise pcs' in wrangler.list_wrangled_package_spaced_names()
-    assert 'red sargasso' not in wrangler.list_wrangled_package_spaced_names(head='aracilik')
-    assert 'turquoise pcs' not in wrangler.list_wrangled_package_spaced_names(head='aracilik')
+    assert 'red sargasso' in wrangler.list_wrangled_asset_human_readable_names()
+    assert 'turquoise pcs' in wrangler.list_wrangled_asset_human_readable_names()
+    assert 'red sargasso' not in wrangler.list_wrangled_asset_human_readable_names(head='aracilik')
+    assert 'turquoise pcs' not in wrangler.list_wrangled_asset_human_readable_names(head='aracilik')
