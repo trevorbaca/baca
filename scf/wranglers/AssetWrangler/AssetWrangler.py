@@ -171,7 +171,8 @@ class AssetWrangler(SCFObject):
         self.print_implemented_on_child_classes()
 
     def profile_visible_assets(self):
-        self.print_not_implemented()
+        for asset_proxy in self.list_visible_asset_proxies():
+            asset_proxy.profile()
 
     def run(self):
         self.print_implemented_on_child_classes()
