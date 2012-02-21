@@ -102,6 +102,14 @@ class AssetWrangler(SCFObject):
         return result
 
     @property
+    def score_external_wrangled_asset_proxies(self):
+        result = []
+        for asset_path_name in self.score_external_wrangled_asset_path_names:
+            wrangled_asset_proxy = self.get_wrangled_asset_proxy(asset_path_name)
+            result.append(wrangled_asset_proxy)
+        return result
+
+    @property
     def score_external_wrangled_asset_short_names(self):
         result = []
         if self.score_external_asset_container_path_name:

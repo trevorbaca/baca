@@ -105,6 +105,10 @@ class SCFObject(object):
         return self.dot_join([self.home_package_importable_name, 'specifiers'])
 
     @property
+    def home_package_path_name(self):
+        return os.environ.get('BACA')
+
+    @property
     def home_package_importable_name(self):
         return 'baca'
 
@@ -283,6 +287,20 @@ class SCFObject(object):
             directory_parts = [self.scores_directory_name] + package_importable_name_parts[:]
         directory = os.path.join(*directory_parts)
         return directory
+
+    def path_name_to_package_importable_name(self, path_name):
+        if path_name is None:
+            return
+        path_name = path_name.rstrip(os.path.sep)
+        if path_name.startswith(self.home_package_path_name):
+            prefix_length = len(os.path.dirname(self.home_package_path_name)) + 1
+        elif path_name.startswith(self.scores_directory_name):
+            prefix_length = len(self.scores_directory_name) + 1
+        else:
+            return
+        package_importable_name = path_name[prefix_length:]
+        package_importable_name = package_importable_name.replace(os.path.sep, '.')
+        return package_importable_name
 
     def pop_backtrack(self):
         return self.session.backtracking_stack.pop()
