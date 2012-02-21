@@ -78,15 +78,9 @@ class PackageWrangler(AssetWrangler):
             result.append(package_proxy.package_short_name)
         return result
 
-    def list_visible_wrangled_package_spaced_names(self, head=None):
-        result = []
-        for x in self.list_visible_wrangled_package_short_names(head=head):
-            result.append(x.replace('_', ' '))
-        return result
-
     def list_wrangled_asset_menuing_pairs(self, head=None):
         keys = self.list_visible_wrangled_package_importable_names(head=head)
-        bodies = self.list_visible_wrangled_package_spaced_names(head=head)
+        bodies = self.list_visible_wrangled_asset_human_readable_names(head=head)
         return zip(keys, bodies)
 
     def list_wrangled_asset_proxies(self, head=None):

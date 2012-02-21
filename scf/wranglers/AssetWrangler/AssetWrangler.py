@@ -148,7 +148,7 @@ class AssetWrangler(SCFObject):
 
     def list_visible_wrangled_asset_human_readable_names(self, head=None):
         result = []
-        for asset_proxy in self.list_visible_wrangled_asset_proxies():
+        for asset_proxy in self.list_visible_wrangled_asset_proxies(head=head):
             result.append(asset_proxy.human_readable_name)
         return result
 
