@@ -322,7 +322,7 @@ class ScorePackageProxy(PackageProxy):
         hidden_section.append(('tags', 'manage tags'))
         return menu
 
-    def make_wrangled_package_structure(self):
+    def make_wrangled_asset_structure(self):
         self.fix_score_package_directory_structure(is_interactive=False)
 
     def make_score_interactively(self):

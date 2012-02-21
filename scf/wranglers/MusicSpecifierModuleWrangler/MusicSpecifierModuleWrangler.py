@@ -26,11 +26,11 @@ class MusicSpecifierModuleWrangler(PackageWrangler):
 
     def handle_main_menu_result(self, result):
         if result == 'new':
-            self.make_wrangled_package_interactively()
+            self.make_wrangled_asset_interactively()
         elif result == 'missing':
             self.conditionally_make_wrangler_target_packages(is_interactive=True)
         elif result == 'profile':
-            self.profile_visible_wrangled_package_structures()
+            self.profile_visible_assets()
         else:
             package_proxy = self.get_wrangled_asset_proxy(result)
             package_proxy.run()
@@ -45,14 +45,14 @@ class MusicSpecifierModuleWrangler(PackageWrangler):
         hidden_section.append(('profile', 'profile packages'))
         return menu
 
-    def make_wrangled_package_interactively(self):
+    def make_wrangled_asset_interactively(self):
         getter = self.make_getter()
         getter.append_space_delimited_lowercase_string('music specifier name')
         specifier_name = getter.run()
         if self.backtrack():
             return
         package_short_name = specifier_name.replace(' ', '_')
-        self.make_wrangled_package(package_short_name)
+        self.make_wrangled_asset(package_short_name)
 
     def run(self, user_input=None, clear=True, cache=False):
         self.conditionally_make_wrangler_target_packages()

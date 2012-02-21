@@ -138,19 +138,14 @@ class AssetWrangler(SCFObject):
     def list_wrangled_asset_proxies(self, head=None):
         self.print_not_implemented()
 
-    def make_wrangled_package(self, package_short_name):
-        assert iotools.is_underscore_delimited_lowercase_package_name(package_short_name)
-        package_directory_name = os.path.join(self.current_wrangler_target_directory_name, package_short_name)
-        os.mkdir(package_directory_name)
-        package_proxy = self.get_wrangled_asset_proxy(package_short_name)
-        package_proxy.fix_package_structure(is_interactive=False)
+    def make_wrangled_asset(self, package_short_name):
+        self.print_not_implemented()
 
-    def make_wrangled_package_interactively(self):
+    def make_wrangled_asset_interactively(self):
         self.print_implemented_on_child_classes()
 
-    def profile_visible_wrangled_package_structures(self):
-        for package_proxy in self.list_visible_wrangled_package_proxies():
-            package_proxy.profile_package_structure()
+    def profile_visible_assets(self):
+        self.print_not_implemented()
 
     def run(self):
         self.print_implemented_on_child_classes()

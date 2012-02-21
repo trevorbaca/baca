@@ -127,3 +127,14 @@ class PackageWrangler(AssetWrangler):
         for x in self.list_wrangled_package_short_names(head=head):
             result.append(x.replace('_', ' '))
         return result
+
+    def make_wrangled_asset(self, package_short_name):
+        assert iotools.is_underscore_delimited_lowercase_package_name(package_short_name)
+        package_directory_name = os.path.join(self.current_wrangler_target_directory_name, package_short_name)
+        os.mkdir(package_directory_name)
+        package_proxy = self.get_wrangled_asset_proxy(package_short_name)
+        package_proxy.fix_package_structure(is_interactive=False)
+
+    def profile_visible_assets(self):
+        for package_proxy in self.list_visible_wrangled_package_proxies():
+            package_proxy.profile_package_structure()

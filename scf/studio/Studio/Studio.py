@@ -116,14 +116,14 @@ class Studio(SCFObject):
             self.push_breadcrumb(breadcrumb)
         elif result == 'new':
             breadcrumb = self.pop_breadcrumb()
-            self.score_package_wrangler.make_wrangled_package_interactively()
+            self.score_package_wrangler.make_wrangled_asset_interactively()
             self.push_breadcrumb(breadcrumb)
         elif result == 'mb':
             self.session.show_mothballed_scores()
         elif result == 'svn':
             self.manage_svn()
         elif result == 'profile':
-            self.score_package_wrangler.profile_visible_wrangled_package_structures()
+            self.score_package_wrangler.profile_visible_assets()
         elif result in self.score_package_wrangler.list_visible_wrangled_package_short_names():
             self.edit_score_interactively(result)
     

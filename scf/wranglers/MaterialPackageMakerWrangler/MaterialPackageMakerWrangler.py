@@ -47,7 +47,7 @@ class MaterialPackageMakerWrangler(PackageWrangler):
             
     def handle_main_menu_result(self, result):
         if result == 'new':
-            self.make_wrangled_package_interactively()
+            self.make_wrangled_asset_interactively()
         else:
             raise ValueError
 
@@ -80,7 +80,7 @@ class MaterialPackageMakerWrangler(PackageWrangler):
         return menu
 
     # TODO: implement MaterialPackageProxyClassFile object to model and customize these settings
-    def make_wrangled_package_class_file(self, package_short_name, generic_output_name):
+    def make_wrangled_asset_class_file(self, package_short_name, generic_output_name):
         class_file_name = os.path.join(
             self.score_external_wrangler_target_package_importable_name, 
             package_short_name, package_short_name + '.py')
@@ -132,7 +132,7 @@ class MaterialPackageMakerWrangler(PackageWrangler):
         class_file.close()
 
     # TODO: change to boilerplate file stored in material_package_maker package
-    def make_wrangled_package_initializer(self, package_short_name):
+    def make_wrangled_asset_initializer(self, package_short_name):
         initializer_file_name = os.path.join(
             self.score_external_wrangler_target_package_importable_name, 
             package_short_name, '__init__.py')
@@ -143,7 +143,7 @@ class MaterialPackageMakerWrangler(PackageWrangler):
         initializer.write("_import_structured_package(__path__[0], globals(), 'baca')\n")
         initializer.close() 
 
-    def make_wrangled_package_interactively(self):
+    def make_wrangled_asset_interactively(self):
         getter = self.make_getter(where=self.where())
         getter.append_material_package_maker_class_name('material proxy name')
         getter.append_space_delimited_lowercase_string('generic output product')
@@ -154,13 +154,13 @@ class MaterialPackageMakerWrangler(PackageWrangler):
         material_package_maker_directory = os.path.join(
             self.score_external_wrangler_target_package_importable_name, material_package_maker_class_name)
         os.mkdir(material_package_maker_directory)
-        self.make_wrangled_package_initializer(material_package_maker_class_name)
-        self.make_wrangled_package_class_file(
+        self.make_wrangled_asset_initializer(material_package_maker_class_name)
+        self.make_wrangled_asset_class_file(
             material_package_maker_class_name, generic_output_product_name)
-        self.make_wrangled_package_stylesheet(material_package_maker_class_name)
+        self.make_wrangled_asset_stylesheet(material_package_maker_class_name)
 
     # TODO: change to boilerplate file stored somewhere
-    def make_wrangled_package_stylesheet(self, package_short_name):
+    def make_wrangled_asset_stylesheet(self, package_short_name):
         stylesheet = lilypondfiletools.make_basic_lilypond_file()
         stylesheet.pop()
         stylesheet.file_initial_system_comments = []

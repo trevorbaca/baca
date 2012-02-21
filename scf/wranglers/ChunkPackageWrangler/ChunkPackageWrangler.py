@@ -30,14 +30,14 @@ class ChunkPackageWrangler(PackageWrangler):
     def handle_main_menu_result(self, result):
         assert isinstance(result, str)
         if result == 'new':
-            self.make_wrangled_package_interactively()
+            self.make_wrangled_asset_interactively()
         else:
             chunk_package_proxy = self.get_wrangled_asset_proxy(result)
             chunk_package_proxy.run()
 
-    def make_wrangled_package_interactively(self):
+    def make_wrangled_asset_interactively(self):
         chunk_package_proxy = ChunkPackageProxy(session=self.session)
-        chunk_package_proxy.make_wrangled_package_interactively()
+        chunk_package_proxy.make_wrangled_asset_interactively()
 
     def make_main_menu(self, head=None):
         menu, section = self.make_menu(where=self.where(), is_numbered=True)

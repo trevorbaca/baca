@@ -60,7 +60,7 @@ class MaterialPackageWrangler(PackageWrangler):
         elif result == 'missing':
             self.conditionally_make_wrangler_target_packages(is_interactive=True)
         elif result == 'profile':
-            self.profile_visible_wrangled_package_structures()
+            self.profile_visible_assets()
         else:
             material_package_proxy = self.get_wrangled_asset_proxy(result)
             material_package_proxy.run()

@@ -55,7 +55,7 @@ class ScorePackageWrangler(PackageWrangler):
         menuing_pairs.sort(lambda x, y: cmp(tmp(x[1]), tmp(y[1])))
         return menuing_pairs
 
-    def make_wrangled_package_interactively(self):
+    def make_wrangled_asset_interactively(self):
         getter = self.make_getter(where=self.where())
         getter.indent_level = 1
         getter.prompt_character = ':'
@@ -69,7 +69,7 @@ class ScorePackageWrangler(PackageWrangler):
         if self.backtrack():
             return
         title, score_package_short_name, year = result
-        self.make_wrangled_package(score_package_short_name)
+        self.make_wrangled_asset(score_package_short_name)
         score_package_proxy = self.get_wrangled_asset_proxy(score_package_short_name)
         score_package_proxy.add_tag('title', title)
         score_package_proxy.year_of_completion = year
