@@ -3,6 +3,7 @@ from ChunkPackageWrangler import ChunkPackageWrangler
 from FileWrangler import FileWrangler
 from MaterialPackageMakerWrangler import MaterialPackageMakerWrangler
 from MaterialPackageWrangler import MaterialPackageWrangler
+from ModuleWrangler import ModuleWrangler
 from MusicSpecifierModuleWrangler import MusicSpecifierModuleWrangler
 from PackageWrangler import PackageWrangler
 from ScorePackageWrangler import ScorePackageWrangler
