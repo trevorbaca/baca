@@ -9,15 +9,6 @@ class PackageWrangler(ImportableAssetWrangler):
     ### READ-ONLY PUBLIC ATTRIBUTES ###
 
     @property
-    def temporary_asset_importable_name(self):
-        if self.current_asset_container_importable_name:
-            return self.dot_join([
-                self.current_asset_container_importable_name, 
-                self.temporary_asset_short_name])
-        else:
-            return self.temporary_asset_short_name
-
-    @property
     def temporary_asset_short_name(self):
         return '__temporary_package'
     
@@ -26,26 +17,6 @@ class PackageWrangler(ImportableAssetWrangler):
         return PackageProxy
 
     ### PUBLIC METHODS ###
-
-    def list_score_internal_wrangled_asset_importable_names(self, head=None):
-        result = []
-        for asset_container_importable_name in \
-            self.list_score_internal_asset_container_importable_names(head=head):
-            if self.score_internal_asset_container_importable_name_infix:
-                asset_path_name = self.package_importable_name_to_path_name(
-                    asset_container_importable_name)
-                for name in os.listdir(asset_path_name):
-                    if name[0].isalpha():
-                        result.append('{}.{}'.format(asset_container_importable_name, name))
-            else:
-                result.append(asset_container_importable_name)
-        return result
-
-    def list_visible_asset_importable_names(self, head=None):
-        result = []
-        for asset_proxy in self.list_visible_asset_proxies(head=head):
-            result.append(asset_proxy.importable_name)
-        return result
 
     def list_visible_package_short_names(self, head=None):
         result = []
