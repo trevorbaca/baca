@@ -18,6 +18,7 @@ class PackageWrangler(ImportableAssetWrangler):
 
     ### PUBLIC METHODS ###
 
+    # TODO: remove
     def list_wrangled_package_short_names(self, head=None):
         result = []
         for x in self.list_wrangled_asset_importable_names(head=head):
@@ -26,11 +27,7 @@ class PackageWrangler(ImportableAssetWrangler):
         #return self.list_wrangled_asset_short_names(head=head)
 
     def list_wrangled_package_spaced_names(self, head=None):
-        result = []
-        for x in self.list_wrangled_package_short_names(head=head):
-            result.append(x.replace('_', ' '))
-        return result
-        #return self.list_wrangled_asset_human_readable_names(head=head)
+        return self.list_wrangled_asset_human_readable_names(head=head)
 
     def make_wrangled_asset(self, asset_short_name):
         assert iotools.is_underscore_delimited_lowercase_package_name(asset_short_name)

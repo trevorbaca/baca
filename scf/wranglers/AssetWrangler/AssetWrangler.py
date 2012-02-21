@@ -192,6 +192,13 @@ class AssetWrangler(SCFObject):
             result.append(asset_proxy.short_name)
         return result
 
+    # TODO: do not instantiate proxies here; use string operations instead
+    def list_wrangled_asset_human_readable_names(self, head=None):
+        result = []
+        for asset_proxy in self.list_wrangled_asset_proxies(head=head):
+            result.append(asset_proxy.human_readable_name)
+        return result
+
     def list_wrangled_asset_menuing_pairs(self, head=None):
         keys = self.list_visible_asset_path_names(head=head)
         bodies = self.list_visible_asset_human_readable_names(head=head)
@@ -199,8 +206,8 @@ class AssetWrangler(SCFObject):
 
     def list_wrangled_asset_path_names(self, head=None):
         result = []
-        if self.score_external_asset_container_path_name:
-            result.append(self.score_external_asset_container_path_name)
+        if head is None:
+            result.extend(self.score_external_wrangled_asset_path_names)
         result.extend(self.list_score_internal_wrangled_asset_path_names(head=head))
         return result
 
