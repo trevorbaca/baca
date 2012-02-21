@@ -82,8 +82,7 @@ class PackageProxy(DirectoryProxy):
 
     @property
     def package_spaced_name(self):
-        if self.package_short_name is not None:
-            return self.package_short_name.replace('_', ' ')
+        return self.human_readable_name
         
     @property
     def parent_initializer_file_name(self):
@@ -268,14 +267,6 @@ class PackageProxy(DirectoryProxy):
         if self.backtrack():
             return
         self.package_importable_name = result
-
-    def set_package_spaced_name_interactively(self):
-        getter = self.make_getter(where=self.where())
-        getter.append_space_delimited_lowercase_string('package spaced name')
-        result = getter.run()
-        if self.backtrack():
-            return
-        self.package_spaced_name = result
 
     def unimport_package(self):
         self.remove_package_importable_name_from_sys_modules(self.package_importable_name)

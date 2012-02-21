@@ -40,14 +40,6 @@ class ChunkPackageProxy(PackageProxy):
 
     def make_wrangled_asset_interactively(self, prompt=True):
         self.print_not_implemented()
-        return
-        if self.package_spaced_name is None:
-            self.set_package_spaced_name_interactively()
-        if self.score_template is None:
-            self.set_score_template_interactively()
-        # TODO: create directory and do other stuff here
-        line = 'chunk created.'
-        self.proceed(line, prompt=prompt)
 
     def make_main_menu(self):
         menu, section = self.make_menu(where=self.where())
