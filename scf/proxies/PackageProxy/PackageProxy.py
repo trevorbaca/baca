@@ -12,7 +12,6 @@ class PackageProxy(DirectoryProxy):
     def __init__(self, package_importable_name=None, session=None):
         directory_name = self.package_importable_name_to_path_name(package_importable_name)
         DirectoryProxy.__init__(self, directory_name=directory_name, session=session)
-        self._package_short_name = None
         self._package_importable_name = package_importable_name
 
     ### OVERLOADS ###
@@ -55,7 +54,7 @@ class PackageProxy(DirectoryProxy):
 
     @property
     def human_readable_name(self):
-        return self.package_short_name.replace('_', ' ')
+        return self.short_name.replace('_', ' ')
 
     @property
     def importable_name(self):
@@ -79,11 +78,6 @@ class PackageProxy(DirectoryProxy):
     @property
     def package_root_name(self):
         return self.package_importable_name.split('.')[0]
-
-    @property
-    def package_short_name(self):
-        #return self.package_importable_name.split('.')[-1]
-        return self.short_name
 
     @property
     def package_spaced_name(self):
@@ -201,7 +195,7 @@ class PackageProxy(DirectoryProxy):
         import collections
         tags = self.read_tags_from_tags_file()
         if tags is None:
-            tags = safe_import(locals(), self.package_short_name, 'tags', 
+            tags = safe_import(locals(), self.short_name, 'tags', 
                 source_parent_package_importable_name=self.parent_package_importable_name)
         if tags is None:
             tags = collections.OrderedDict([])

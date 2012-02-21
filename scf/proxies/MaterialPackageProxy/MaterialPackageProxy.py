@@ -303,7 +303,7 @@ class MaterialPackageProxy(PackageProxy):
 
     @property
     def material_underscored_name(self):
-        return self.package_short_name
+        return self.short_name
 
     @property
     def output_material(self):

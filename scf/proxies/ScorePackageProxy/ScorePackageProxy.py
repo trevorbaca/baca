@@ -205,7 +205,7 @@ class ScorePackageProxy(PackageProxy):
 
     def fix(self, is_interactive=True):
         result = True
-        if self.package_short_name == 'recursif':
+        if self.short_name == 'recursif':
             return True
         for directory_name in self.top_level_directory_names:
             if not os.path.exists(directory_name):
@@ -275,9 +275,9 @@ class ScorePackageProxy(PackageProxy):
     def handle_main_menu_result(self, result):
         assert isinstance(result, str)
         if result == 'h':
-            self.chunk_wrangler.run(head=self.package_short_name)
+            self.chunk_wrangler.run(head=self.short_name)
         elif  result == 'm':
-            self.material_package_wrangler.run(head=self.package_short_name)
+            self.material_package_wrangler.run(head=self.short_name)
         elif result == 'ms':
             self.music_specifier_module_wrangler.run()
         elif result == 's':
@@ -416,7 +416,7 @@ class ScorePackageProxy(PackageProxy):
     def profile(self, prompt=True):
         if not os.path.exists(self.directory_name):
             raise OSError('directory {!r} does not exist.'.format(self.directory_name))
-        if self.package_short_name == 'recursif':
+        if self.short_name == 'recursif':
             return
         lines = []
         for subdirectory_name in self.top_level_directory_names:
