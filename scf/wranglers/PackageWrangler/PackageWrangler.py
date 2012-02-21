@@ -43,7 +43,7 @@ class PackageWrangler(AssetWrangler):
 
     def fix_visible_wrangled_package_structures(self, prompt=True):
         results = []
-        for package_proxy in self.list_visible_wrangled_package_proxies():
+        for package_proxy in self.list_visible_wrangled_asset_proxies():
             results.append(package_proxy.fix_package_structure(is_interactive=prompt))
             if prompt:
                 package_proxy.profile_package_structure()
@@ -72,12 +72,9 @@ class PackageWrangler(AssetWrangler):
                 result.append(package_importable_name)
         return result
 
-    def list_visible_wrangled_package_proxies(self, head=None):
-        return self.list_wrangled_asset_proxies(head=head)
-
     def list_visible_wrangled_package_short_names(self, head=None):
         result = []
-        for package_proxy in self.list_visible_wrangled_package_proxies(head=head):
+        for package_proxy in self.list_visible_wrangled_asset_proxies(head=head):
             result.append(package_proxy.package_short_name)
         return result
 
@@ -136,5 +133,5 @@ class PackageWrangler(AssetWrangler):
         package_proxy.fix_package_structure(is_interactive=False)
 
     def profile_visible_assets(self):
-        for package_proxy in self.list_visible_wrangled_package_proxies():
+        for package_proxy in self.list_visible_wrangled_asset_proxies():
             package_proxy.profile_package_structure()

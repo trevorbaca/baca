@@ -24,7 +24,7 @@ class ScorePackageWrangler(PackageWrangler):
     @property
     def visible_score_titles_with_years(self):
         result = []
-        for score_package_proxy in self.list_visible_wrangled_package_proxies():
+        for score_package_proxy in self.list_visible_wrangled_asset_proxies():
             result.append(score_package_proxy.title_with_year or '(untitled score)')
         return result
 
@@ -33,7 +33,7 @@ class ScorePackageWrangler(PackageWrangler):
     def get_wrangled_asset_proxy(self, package_importable_name):
         return ScorePackageProxy(package_importable_name, session=self.session)
 
-    def list_visible_wrangled_package_proxies(self, head=None):
+    def list_visible_wrangled_asset_proxies(self, head=None):
         result = []
         scores_to_show = self.session.scores_to_show
         for score_package_proxy in PackageWrangler.list_wrangled_asset_proxies(

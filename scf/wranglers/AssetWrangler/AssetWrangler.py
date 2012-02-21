@@ -132,6 +132,9 @@ class AssetWrangler(SCFObject):
             result.append(score_internal_score_package_importable_name)
         return result
 
+    def list_visible_wrangled_asset_proxies(self, head=None):
+        return self.list_wrangled_asset_proxies(head=head)
+
     def list_wrangled_asset_menuing_pairs(self, head=None):
         self.print_not_implemented()
 
@@ -152,7 +155,7 @@ class AssetWrangler(SCFObject):
 
     # TODO: leave here but generalize for all asset wranglers
     def svn_add(self, prompt=True):
-        for package_proxy in self.list_visible_wrangled_package_proxies():
+        for package_proxy in self.list_visible_wrangled_asset_proxies():
             package_proxy.svn_add(prompt=False)
         self.proceed(prompt=prompt)
 
@@ -167,18 +170,18 @@ class AssetWrangler(SCFObject):
         self.display(line)
         if not self.confirm():
             return
-        for package_proxy in self.list_visible_wrangled_package_proxies():
+        for package_proxy in self.list_visible_wrangled_asset_proxies():
             package_proxy.svn_ci(commit_message=commit_message, prompt=False)
         self.proceed(prompt=prompt)
 
     # TODO: leave here but generalize for all asset wranglers
     def svn_st(self, prompt=True):
-        for package_proxy in self.list_visible_wrangled_package_proxies():
+        for package_proxy in self.list_visible_wrangled_asset_proxies():
             package_proxy.svn_st(prompt=False)
         self.proceed(prompt=prompt)
 
     # TODO: leave here but generalize for all asset wranglers
     def svn_up(self, prompt=True):
-        for package_proxy in self.list_visible_wrangled_package_proxies():
+        for package_proxy in self.list_visible_wrangled_asset_proxies():
             package_proxy.svn_up(prompt=False)
         self.proceed(prompt=prompt)
