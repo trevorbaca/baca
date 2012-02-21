@@ -38,7 +38,7 @@ class FileProxy(AssetProxy):
             return False
 
     @property
-    def path_name(self):
+    def parent_directory_name(self):
         return os.path.dirname(self.full_file_name)
 
     @property
@@ -70,7 +70,7 @@ class FileProxy(AssetProxy):
         new_short_name = getter.run()
         if self.backtrack():
             return
-        new_full_file_name = os.path.join(self.path_name, new_short_name)
+        new_full_file_name = os.path.join(self.parent_directory_name, new_short_name)
         self.copy_file(new_full_file_name)
         line = 'file copied.'
         self.proceed(line, prompt=prompt)
