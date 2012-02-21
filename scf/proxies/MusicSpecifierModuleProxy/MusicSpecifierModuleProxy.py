@@ -23,6 +23,9 @@ class MusicSpecifierModuleProxy(ModuleProxy):
 
     ### PUBLIC METHODS ###
 
+    def fix(self):
+        self.print_not_implemented()
+
     def parse(self):
         is_parsable = True
         output_material_module = file(self.path_name, 'r')

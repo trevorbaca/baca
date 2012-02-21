@@ -137,6 +137,14 @@ class AssetWrangler(SCFObject):
             self.list_score_internal_asset_container_importable_names(head=head):
             self.conditionally_make_empty_package(score_internal_asset_container_importable_name)
 
+    def fix_visible_assets(self, is_interactive=True):
+        results = []
+        for asset_proxy in self.list_visible_asset_proxies():
+            results.append(asset_proxy.fix(is_interactive=is_interactive))
+            if is_interactive:
+                asset_proxy.profile()
+        return results
+
     def get_wrangled_asset_proxy(self, asset_full_name):
         return self.wrangled_asset_class(asset_full_name, session=self.session)
         

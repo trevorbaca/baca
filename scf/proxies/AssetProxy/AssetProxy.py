@@ -25,6 +25,9 @@ class AssetProxy(SCFObject):
 
     ### PUBLIC METHODS ###
 
+    def fix(self):
+        self.print_implemented_on_child_classes()
+
     def svn_add(self, prompt=False):
         self.display(self.path_name)
         proc = subprocess.Popen(self.svn_add_command, shell=True, stdout=subprocess.PIPE)

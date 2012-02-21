@@ -17,9 +17,8 @@ class PackageWrangler(AssetWrangler):
 
     @property
     def temporary_asset_importable_name(self):
-        package_path = self.current_asset_container_importable_name
-        if package_path:
-            return self.dot_join([package_path, '__temporary_package'])
+        if self.current_asset_container_importable_name:
+            return self.dot_join([self.current_asset_container_importable_name, '__temporary_package'])
         else:
             return '__temporary_package'
     
@@ -28,14 +27,6 @@ class PackageWrangler(AssetWrangler):
         return PackageProxy
 
     ### PUBLIC METHODS ###
-
-    def fix_visible_assets(self, prompt=True):
-        results = []
-        for package_proxy in self.list_visible_asset_proxies():
-            results.append(package_proxy.fix(is_interactive=prompt))
-            if prompt:
-                package_proxy.profile()
-        return results
 
     def list_score_internal_wrangled_package_importable_names(self, head=None):
         result = []

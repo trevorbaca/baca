@@ -91,6 +91,9 @@ class FileProxy(AssetProxy):
         file_pointer.close()
         exec(file_contents_string)
 
+    def fix(self):
+        self.print_implemented_on_child_classes()
+
     def has_line(self, line):
         file_reference = open(self.path_name, 'r')
         for file_line in file_reference.readlines():

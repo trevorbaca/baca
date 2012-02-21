@@ -33,6 +33,9 @@ class StylesheetFileProxy(FileProxy):
         self.copy_file(new_path_name)
         line = 'file copied.'
         self.proceed(line, prompt=prompt)
+
+    def fix(self):
+        self.print_not_implemented()
         
     def handle_main_menu_result(self, result):
         assert isinstance(result, str)
