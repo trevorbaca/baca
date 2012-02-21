@@ -9,6 +9,15 @@ class PackageWrangler(ImportableAssetWrangler):
     ### READ-ONLY PUBLIC ATTRIBUTES ###
 
     @property
+    def score_external_wrangled_asset_proxies(self):
+        result = []
+        for asset_path_name in self.score_external_wrangled_asset_path_names:
+            asset_package_importable_name = self.path_name_to_package_importable_name(asset_path_name)
+            wrangled_asset_proxy = self.get_wrangled_asset_proxy(asset_package_importable_name)
+            result.append(wrangled_asset_proxy)
+        return result
+
+    @property
     def temporary_asset_short_name(self):
         return '__temporary_package'
     

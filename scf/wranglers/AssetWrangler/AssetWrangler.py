@@ -85,6 +85,7 @@ class AssetWrangler(SCFObject):
         return self.package_importable_name_to_path_name(
             self.score_external_asset_container_importable_name)
 
+    # TODO: reimplement without proxies
     @property
     def score_external_wrangled_asset_human_readable_names(self):
         result = []
