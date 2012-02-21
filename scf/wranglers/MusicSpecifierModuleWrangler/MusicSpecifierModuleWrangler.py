@@ -7,9 +7,9 @@ class MusicSpecifierModuleWrangler(PackageWrangler):
 
     def __init__(self, session=None):
         PackageWrangler.__init__(self,
-            score_external_wrangler_target_package_importable_name= \
+            score_external_asset_container_package_importable_name= \
                 self.score_external_specifiers_package_importable_name,
-            score_internal_wrangler_target_package_importable_name_suffix= \
+            score_internal_asset_container_package_importable_name_suffix= \
                 self.score_internal_specifiers_package_importable_name_suffix,
             session=session)
 
@@ -28,7 +28,7 @@ class MusicSpecifierModuleWrangler(PackageWrangler):
         if result == 'new':
             self.make_wrangled_asset_interactively()
         elif result == 'missing':
-            self.conditionally_make_wrangler_target_packages(is_interactive=True)
+            self.conditionally_make_asset_container_packages(is_interactive=True)
         elif result == 'profile':
             self.profile_visible_assets()
         else:
@@ -55,7 +55,7 @@ class MusicSpecifierModuleWrangler(PackageWrangler):
         self.make_wrangled_asset(package_short_name)
 
     def run(self, user_input=None, clear=True, cache=False):
-        self.conditionally_make_wrangler_target_packages()
+        self.conditionally_make_asset_container_packages()
         self.assign_user_input(user_input=user_input)
         self.cache_breadcrumbs(cache=cache)
         while True:

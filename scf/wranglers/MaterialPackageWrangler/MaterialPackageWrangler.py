@@ -9,9 +9,9 @@ class MaterialPackageWrangler(PackageWrangler):
     def __init__(self, session=None):
         from baca.scf.wranglers.MaterialPackageMakerWrangler import MaterialPackageMakerWrangler
         PackageWrangler.__init__(self, 
-            score_external_wrangler_target_package_importable_name= \
+            score_external_asset_container_package_importable_name= \
                 self.score_external_materials_package_importable_name, 
-            score_internal_wrangler_target_package_importable_name_suffix= \
+            score_internal_asset_container_package_importable_name_suffix= \
                 self.score_internal_materials_package_importable_name_suffix,
             session=session)
         self._material_package_maker_wrangler = MaterialPackageMakerWrangler(session=self.session)
@@ -40,7 +40,7 @@ class MaterialPackageWrangler(PackageWrangler):
                 return
             material_package_short_name = iotools.string_to_strict_directory_name(material_name)
             material_package_importable_name = self.dot_join([
-                self.current_wrangler_target_package_importable_name, material_package_short_name])
+                self.current_asset_container_package_importable_name, material_package_short_name])
             if self.package_exists(material_package_importable_name):
                 line = 'Material package {!r} already exists.'.format(material_package_importable_name)
                 self.display([line, ''])
@@ -58,7 +58,7 @@ class MaterialPackageWrangler(PackageWrangler):
         elif result == 'm':
             self.make_makermade_material_package_interactively()
         elif result == 'missing':
-            self.conditionally_make_wrangler_target_packages(is_interactive=True)
+            self.conditionally_make_asset_container_packages(is_interactive=True)
         elif result == 'profile':
             self.profile_visible_assets()
         else:

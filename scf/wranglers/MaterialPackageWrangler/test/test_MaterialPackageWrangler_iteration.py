@@ -17,10 +17,10 @@ def test_MaterialPackageWrangler_iteration_01():
 def test_MaterialPackageWrangler_iteration_02():
 
     assert 'manos.mus.materials' in \
-        wrangler.list_score_internal_wrangler_target_package_importable_names()
+        wrangler.list_score_internal_asset_container_package_importable_names()
     assert 'manos.mus.materials' not in \
-        wrangler.list_score_internal_wrangler_target_package_importable_names(head='aracilik')
-    assert wrangler.list_score_internal_wrangler_target_package_importable_names(head='asdf') == []
+        wrangler.list_score_internal_asset_container_package_importable_names(head='aracilik')
+    assert wrangler.list_score_internal_asset_container_package_importable_names(head='asdf') == []
 
 
 def test_MaterialPackageWrangler_iteration_03():

@@ -13,9 +13,9 @@ def test_ScorePackageWrangler_iteration_01():
 
 def test_ScorePackageWrangler_iteration_02():
 
-    assert 'archipel' in wrangler.list_score_internal_wrangler_target_package_importable_names()
-    assert 'archipel' not in wrangler.list_score_internal_wrangler_target_package_importable_names(head='aracilik')
-    assert wrangler.list_score_internal_wrangler_target_package_importable_names(head='asdf') == []
+    assert 'archipel' in wrangler.list_score_internal_asset_container_package_importable_names()
+    assert 'archipel' not in wrangler.list_score_internal_asset_container_package_importable_names(head='aracilik')
+    assert wrangler.list_score_internal_asset_container_package_importable_names(head='asdf') == []
     
 
 def test_ScorePackageWrangler_iteration_03():

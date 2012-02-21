@@ -7,8 +7,8 @@ class ScorePackageWrangler(PackageWrangler):
 
     def __init__(self, session=None):
         PackageWrangler.__init__(self, 
-            score_external_wrangler_target_package_importable_name=None, 
-            score_internal_wrangler_target_package_importable_name_suffix=None,
+            score_external_asset_container_package_importable_name=None, 
+            score_internal_asset_container_package_importable_name_suffix=None,
             session=session)
 
     ### READ-ONLY PUBLIC ATTRIBUTES ###
@@ -18,7 +18,7 @@ class ScorePackageWrangler(PackageWrangler):
         return 'scores'
 
     @property
-    def current_wrangler_target_directory_name(self):
+    def current_asset_container_directory_name(self):
         return self.scores_directory_name
 
     @property
