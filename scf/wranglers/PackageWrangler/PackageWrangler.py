@@ -41,5 +41,65 @@ class PackageWrangler(AssetWrangler):
 
     ### PUBLIC METHODS ###
 
+    def fix_visible_wrangled_package_structures(self, prompt=True):
+        results = []
+        for package_proxy in self.list_visible_wrangled_package_proxies():
+            results.append(package_proxy.fix_package_structure(is_interactive=prompt))
+            if prompt:
+                package_proxy.profile_package_structure()
+        return results
+
     def get_wrangled_asset_proxy(self, asset_full_name):
         return PackageProxy(asset_full_name, session=self.session)
+
+    def list_score_internal_wrangled_package_directory_names(self, head=None):
+        result = []
+        for package_importable_name in self.list_score_internal_wrangled_package_importable_names(head=head):
+            result.append(self.package_importable_name_to_directory_name(package_importable_name))
+        return result
+
+    def list_score_internal_wrangled_package_importable_names(self, head=None):
+        result = []
+        for package_importable_name in \
+            self.list_score_internal_wrangler_target_package_importable_names(head=head):
+            if self.score_internal_wrangler_target_package_importable_name_suffix:
+                package_directory_name = self.package_importable_name_to_directory_name(
+                    package_importable_name)
+                for name in os.listdir(package_directory_name):
+                    if name[0].isalpha():
+                        result.append('{}.{}'.format(package_importable_name, name))
+            else:
+                result.append(package_importable_name)
+        return result
+
+    def list_visible_wrangled_package_proxies(self, head=None):
+        return self.list_wrangled_package_proxies(head=head)
+
+    def list_visible_wrangled_package_short_names(self, head=None):
+        result = []
+        for package_proxy in self.list_visible_wrangled_package_proxies(head=head):
+            result.append(package_proxy.package_short_name)
+        return result
+
+    def list_visible_wrangled_package_spaced_names(self, head=None):
+        result = []
+        for x in self.list_visible_wrangled_package_short_names(head=head):
+            result.append(x.replace('_', ' '))
+        return result
+
+    def list_wrangled_package_directory_names(self, head=None):
+        result = []
+        for package_importable_name in self.list_wrangled_package_importable_names(head=head):
+            result.append(self.package_importable_name_to_directory_name(package_importable_name))
+        return result
+
+    def list_wrangled_package_importable_names(self, head=None):
+        if head is None: head = ''
+        result, package_importable_names = [], []
+        package_importable_names.extend(self.score_external_wrangled_package_importable_names)
+        package_importable_names.extend(
+            self.list_score_internal_wrangled_package_importable_names(head=head))
+        for package_importable_name in package_importable_names:
+            if package_importable_name.startswith(head):
+                result.append(package_importable_name)
+        return result
