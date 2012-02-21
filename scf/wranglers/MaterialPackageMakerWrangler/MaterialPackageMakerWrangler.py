@@ -9,9 +9,9 @@ class MaterialPackageMakerWrangler(PackageWrangler):
 
     def __init__(self, session=None):
         PackageWrangler.__init__(self, 
-            score_external_asset_container_package_importable_name= \
+            score_external_asset_container_importable_name= \
                 self.makers_package_importable_name, 
-            score_internal_asset_container_package_importable_name_suffix=None,
+            score_internal_asset_container_importable_name_suffix=None,
             session=session)
 
     ### READ-ONLY PUBLIC ATTRIBUTES ###
@@ -82,7 +82,7 @@ class MaterialPackageMakerWrangler(PackageWrangler):
     # TODO: implement MaterialPackageProxyClassFile object to model and customize these settings
     def make_wrangled_asset_class_file(self, package_short_name, generic_output_name):
         class_file_name = os.path.join(
-            self.score_external_asset_container_package_importable_name, 
+            self.score_external_asset_container_importable_name, 
             package_short_name, package_short_name + '.py')
         class_file = file(class_file_name, 'w')
         lines = []
@@ -134,7 +134,7 @@ class MaterialPackageMakerWrangler(PackageWrangler):
     # TODO: change to boilerplate file stored in material_package_maker package
     def make_wrangled_asset_initializer(self, package_short_name):
         initializer_file_name = os.path.join(
-            self.score_external_asset_container_package_importable_name, 
+            self.score_external_asset_container_importable_name, 
             package_short_name, '__init__.py')
         initializer = file(initializer_file_name, 'w')
         line = 'from abjad.tools.importtools._import_structured_package import _import_structured_package\n'
@@ -152,7 +152,7 @@ class MaterialPackageMakerWrangler(PackageWrangler):
             return
         material_package_maker_class_name, generic_output_product_name = result
         material_package_maker_directory = os.path.join(
-            self.score_external_asset_container_package_importable_name, material_package_maker_class_name)
+            self.score_external_asset_container_importable_name, material_package_maker_class_name)
         os.mkdir(material_package_maker_directory)
         self.make_wrangled_asset_initializer(material_package_maker_class_name)
         self.make_wrangled_asset_class_file(
@@ -171,7 +171,7 @@ class MaterialPackageMakerWrangler(PackageWrangler):
         stylesheet.paper_block.makup_system_spacing = layouttools.make_spacing_vector(0, 0, 12, 0)
         stylesheet.paper_block.system_system_spacing = layouttools.make_spacing_vector(0, 0, 10, 0)
         stylesheet_file_name = os.path.join(
-            self.score_external_asset_container_package_importable_name, 
+            self.score_external_asset_container_importable_name, 
             package_short_name, 'stylesheet.ly')
         stylesheet_file_pointer = file(stylesheet_file_name, 'w')
         stylesheet_file_pointer.write(stylesheet.format)

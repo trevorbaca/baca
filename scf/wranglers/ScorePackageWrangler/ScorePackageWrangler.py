@@ -7,8 +7,8 @@ class ScorePackageWrangler(PackageWrangler):
 
     def __init__(self, session=None):
         PackageWrangler.__init__(self, 
-            score_external_asset_container_package_importable_name=None, 
-            score_internal_asset_container_package_importable_name_suffix=None,
+            score_external_asset_container_importable_name=None, 
+            score_internal_asset_container_importable_name_suffix=None,
             session=session)
 
     ### READ-ONLY PUBLIC ATTRIBUTES ###
