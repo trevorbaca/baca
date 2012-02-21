@@ -6,4 +6,7 @@ import os
 
 class FileWrangler(AssetWrangler):
 
-    pass
+    ### PUBLIC METHODS ###
+
+    def get_wrangled_asset_proxy(self, asset_full_name):
+        return FileProxy(asset_full_name, session=self.session)
