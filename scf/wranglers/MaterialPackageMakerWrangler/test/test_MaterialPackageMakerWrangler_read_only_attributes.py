@@ -14,6 +14,6 @@ def test_MaterialPackageMakerWrangler_read_only_attributes_01():
     assert wrangler.score_external_asset_container_importable_name == 'baca.scf.makers'
     assert wrangler.score_internal_asset_container_importable_name_infix is None
 
-    assert wrangler.temporary_package_importable_name == 'baca.scf.makers.__temporary_package'
+    assert wrangler.temporary_asset_importable_name == 'baca.scf.makers.__temporary_package'
 
     assert wrangler.asset_container_importable_names == ['baca.scf.makers']

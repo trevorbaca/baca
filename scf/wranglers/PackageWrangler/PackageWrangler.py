@@ -16,11 +16,7 @@ class PackageWrangler(AssetWrangler):
         return result
 
     @property
-    def temporary_asset_path_name(self):
-        return os.path.join(self.current_asset_container_path_name, '__temporary_package')
-
-    @property
-    def temporary_package_importable_name(self):
+    def temporary_asset_importable_name(self):
         package_path = self.current_asset_container_importable_name
         if package_path:
             return self.dot_join([package_path, '__temporary_package'])
