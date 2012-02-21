@@ -125,7 +125,7 @@ class MaterialPackageWrangler(PackageWrangler):
         assert material_package_maker_class_name is None or iotools.is_uppercamelcase_string(
             material_package_maker_class_name)
         assert isinstance(should_have_illustration, bool)
-        directory_name = self.package_importable_name_to_directory_name(material_package_importable_name)
+        directory_name = self.package_importable_name_to_path_name(material_package_importable_name)
         if os.path.exists(directory_name):
             line = 'package {!r} already exists.'.format(material_name)
             self.proceed(line, prompt=prompt)

@@ -45,7 +45,7 @@ class AssetWrangler(SCFObject):
 
     @property
     def current_asset_container_directory_name(self):
-        return self.package_importable_name_to_directory_name(
+        return self.package_importable_name_to_path_name(
             self.current_asset_container_package_importable_name)
 
     @property
@@ -68,7 +68,7 @@ class AssetWrangler(SCFObject):
 
     @property
     def score_external_asset_container_directory_name(self):
-        return self.package_importable_name_to_directory_name(
+        return self.package_importable_name_to_path_name(
             self.score_external_asset_container_importable_name)
 
     @property
@@ -87,7 +87,7 @@ class AssetWrangler(SCFObject):
     def asset_container_directory_names(self):
         result = []
         for asset_container_package_importable_name in self.asset_container_package_importable_names:
-            result.append(self.package_importable_name_to_directory_name(
+            result.append(self.package_importable_name_to_path_name(
                 asset_container_package_importable_name))
         return result
 
@@ -133,7 +133,7 @@ class AssetWrangler(SCFObject):
         result = []
         for package_importable_name in \
             self.list_score_internal_asset_container_package_importable_names(head=head):
-            result.append(self.package_importable_name_to_directory_name(package_importable_name))
+            result.append(self.package_importable_name_to_path_name(package_importable_name))
         return result            
 
     def list_score_internal_asset_container_package_importable_names(self, head=None):

@@ -12,7 +12,7 @@ class PackageWrangler(AssetWrangler):
     def score_external_wrangled_asset_importable_names(self):
         result = []
         if self.score_external_asset_container_importable_name:
-            asset_container_directory_name = self.package_importable_name_to_directory_name(
+            asset_container_directory_name = self.package_importable_name_to_path_name(
                 self.score_external_asset_container_importable_name)
             for name in os.listdir(asset_container_directory_name):
                 if name[0].isalpha():
@@ -49,7 +49,7 @@ class PackageWrangler(AssetWrangler):
     def list_score_internal_wrangled_package_directory_names(self, head=None):
         result = []
         for package_importable_name in self.list_score_internal_wrangled_package_importable_names(head=head):
-            result.append(self.package_importable_name_to_directory_name(package_importable_name))
+            result.append(self.package_importable_name_to_path_name(package_importable_name))
         return result
 
     def list_score_internal_wrangled_package_importable_names(self, head=None):
@@ -57,7 +57,7 @@ class PackageWrangler(AssetWrangler):
         for package_importable_name in \
             self.list_score_internal_asset_container_package_importable_names(head=head):
             if self.score_internal_asset_container_importable_name_suffix:
-                package_directory_name = self.package_importable_name_to_directory_name(
+                package_directory_name = self.package_importable_name_to_path_name(
                     package_importable_name)
                 for name in os.listdir(package_directory_name):
                     if name[0].isalpha():
@@ -93,7 +93,7 @@ class PackageWrangler(AssetWrangler):
     def list_wrangled_package_directory_names(self, head=None):
         result = []
         for package_importable_name in self.list_wrangled_package_importable_names(head=head):
-            result.append(self.package_importable_name_to_directory_name(package_importable_name))
+            result.append(self.package_importable_name_to_path_name(package_importable_name))
         return result
 
     def list_wrangled_package_importable_names(self, head=None):

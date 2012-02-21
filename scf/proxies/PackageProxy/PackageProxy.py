@@ -10,7 +10,7 @@ import sys
 class PackageProxy(DirectoryProxy):
 
     def __init__(self, package_importable_name=None, session=None):
-        directory_name = self.package_importable_name_to_directory_name(package_importable_name)
+        directory_name = self.package_importable_name_to_path_name(package_importable_name)
         DirectoryProxy.__init__(self, directory_name=directory_name, session=session)
         self._package_short_name = None
         self._package_importable_name = package_importable_name
@@ -28,7 +28,7 @@ class PackageProxy(DirectoryProxy):
     @property
     def directory_name(self):
         if self.package_importable_name is not None:
-            return self.package_importable_name_to_directory_name(self.package_importable_name)
+            return self.package_importable_name_to_path_name(self.package_importable_name)
 
     @property
     def formatted_tags(self):
@@ -87,7 +87,7 @@ class PackageProxy(DirectoryProxy):
     @property
     def parent_initializer_file_name(self):
         if self.parent_package_importable_name:
-            parent_directory_name = self.package_importable_name_to_directory_name(
+            parent_directory_name = self.package_importable_name_to_path_name(
                 self.parent_package_importable_name)
             return os.path.join(parent_directory_name, '__init__.py')
 

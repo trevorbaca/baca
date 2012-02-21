@@ -56,7 +56,7 @@ class SCFObject(object):
 
     @property
     def scf_root_directory(self):
-        return self.package_importable_name_to_directory_name(self.scf_package_importable_name)
+        return self.package_importable_name_to_path_name(self.scf_package_importable_name)
 
     @property
     def score_internal_chunks_package_importable_name_suffix(self):
@@ -94,7 +94,7 @@ class SCFObject(object):
 
     @property
     def studio_directory_name(self):
-        return self.package_importable_name_to_directory_name(self.home_package_importable_name)
+        return self.package_importable_name_to_path_name(self.home_package_importable_name)
 
     @property
     def score_external_materials_package_importable_name(self):
@@ -159,7 +159,7 @@ class SCFObject(object):
     def conditionally_make_empty_package(self, package_importable_name):
         if package_importable_name is None:
             return
-        package_directory_name = self.package_importable_name_to_directory_name(
+        package_directory_name = self.package_importable_name_to_path_name(
             package_importable_name)
         if not os.path.exists(package_directory_name):
             os.mkdir(package_directory_name)
@@ -265,15 +265,15 @@ class SCFObject(object):
         return menu, section
 
     def module_importable_name_to_path_name(self, module_importable_name):
-        path_name = self.package_importable_name_to_directory_name(module_importable_name) + '.py'
+        path_name = self.package_importable_name_to_path_name(module_importable_name) + '.py'
         return path_name
 
     def package_exists(self, package_importable_name):
         assert isinstance(package_importable_name, str)
-        directory_name = self.package_importable_name_to_directory_name(package_importable_name)
+        directory_name = self.package_importable_name_to_path_name(package_importable_name)
         return os.path.exists(directory_name)
 
-    def package_importable_name_to_directory_name(self, package_importable_name):
+    def package_importable_name_to_path_name(self, package_importable_name):
         if package_importable_name is None:
             return
         package_importable_name_parts = package_importable_name.split('.')

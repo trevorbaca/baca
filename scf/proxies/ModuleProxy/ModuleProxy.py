@@ -14,7 +14,7 @@ class ModuleProxy(ParsableFileProxy):
 
     @property
     def grandparent_package_directory_name(self):
-        return self.package_importable_name_to_directory_name(self.grandparent_package_importable_name)
+        return self.package_importable_name_to_path_name(self.grandparent_package_importable_name)
 
     @property
     def grandparent_package_importable_name(self):
@@ -38,7 +38,7 @@ class ModuleProxy(ParsableFileProxy):
 
     @property
     def parent_package_directory_name(self):
-        return self.package_importable_name_to_directory_name(self.parent_package_importable_name)
+        return self.package_importable_name_to_path_name(self.parent_package_importable_name)
 
     @property
     def parent_package_importable_name(self):
