@@ -1,16 +1,16 @@
 from abjad.tools import iotools
 from baca.scf.proxies.PackageProxy import PackageProxy
-from baca.scf.core.SCFObject import SCFObject
+from baca.scf.wranglers.AssetWrangler import AssetWrangler
 import os
 
 
-class PackageWrangler(SCFObject):
+class PackageWrangler(AssetWrangler):
 
     def __init__(self, 
         score_external_wrangler_target_package_importable_name=None, 
         score_internal_wrangler_target_package_importable_name_suffix=None, 
         session=None):
-        SCFObject.__init__(self, session=session)
+        AssetWrangler.__init__(self, session=session)
         if score_external_wrangler_target_package_importable_name is not None:
             assert iotools.is_underscore_delimited_lowercase_package_name(
                 score_external_wrangler_target_package_importable_name)
@@ -218,9 +218,9 @@ class PackageWrangler(SCFObject):
         return result
 
     def list_wrangled_package_menuing_pairs(self, head=None):
-        package_importable_names = self.list_wrangled_package_importable_names(head=head)
-        package_spaced_names = self.list_wrangled_package_spaced_names(head=head)
-        return zip(package_importable_names, package_spaced_names)
+        keys = self.list_wrangled_package_importable_names(head=head)
+        bodies = self.list_wrangled_package_spaced_names(head=head)
+        return zip(keys, bodies)
 
     def list_wrangled_package_proxies(self, head=None):
         result = []

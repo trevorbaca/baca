@@ -1,3 +1,4 @@
+from AssetWrangler import AssetWrangler
 from ChunkPackageWrangler import ChunkPackageWrangler
 from MaterialPackageMakerWrangler import MaterialPackageMakerWrangler
 from MaterialPackageWrangler import MaterialPackageWrangler
