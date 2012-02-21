@@ -14,7 +14,7 @@ def test_ScorePackageWrangler_read_only_attributes_01():
     assert wrangler.score_external_wrangled_asset_importable_names == []
     assert wrangler.score_external_asset_container_importable_name is None
 
-    assert wrangler.score_internal_asset_container_importable_name_suffix is None
+    assert wrangler.score_internal_asset_container_importable_name_infix is None
 
     assert wrangler.temporary_package_importable_name == '__temporary_package'
 

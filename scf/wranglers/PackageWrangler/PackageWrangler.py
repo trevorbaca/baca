@@ -51,7 +51,7 @@ class PackageWrangler(AssetWrangler):
         result = []
         for package_importable_name in \
             self.list_score_internal_asset_container_package_importable_names(head=head):
-            if self.score_internal_asset_container_importable_name_suffix:
+            if self.score_internal_asset_container_importable_name_infix:
                 package_directory_name = self.package_importable_name_to_path_name(
                     package_importable_name)
                 for name in os.listdir(package_directory_name):

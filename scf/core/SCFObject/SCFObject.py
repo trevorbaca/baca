@@ -59,15 +59,15 @@ class SCFObject(object):
         return self.package_importable_name_to_path_name(self.scf_package_importable_name)
 
     @property
-    def score_internal_chunks_package_importable_name_suffix(self):
+    def score_internal_chunks_package_importable_name_infix(self):
         return 'mus.chunks'
 
     @property
-    def score_internal_materials_package_importable_name_suffix(self):
+    def score_internal_materials_package_importable_name_infix(self):
         return 'mus.materials'
 
     @property
-    def score_internal_specifiers_package_importable_name_suffix(self):
+    def score_internal_specifiers_package_importable_name_infix(self):
         return 'mus.specifiers'
 
     @property

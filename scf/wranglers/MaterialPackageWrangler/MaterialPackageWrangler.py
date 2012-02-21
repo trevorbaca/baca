@@ -11,8 +11,8 @@ class MaterialPackageWrangler(PackageWrangler):
         PackageWrangler.__init__(self, 
             score_external_asset_container_importable_name= \
                 self.score_external_materials_package_importable_name, 
-            score_internal_asset_container_importable_name_suffix= \
-                self.score_internal_materials_package_importable_name_suffix,
+            score_internal_asset_container_importable_name_infix= \
+                self.score_internal_materials_package_importable_name_infix,
             session=session)
         self._material_package_maker_wrangler = MaterialPackageMakerWrangler(session=self.session)
 
