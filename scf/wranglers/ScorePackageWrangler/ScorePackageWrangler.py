@@ -30,7 +30,7 @@ class ScorePackageWrangler(PackageWrangler):
 
     ### PUBLIC METHODS ###
 
-    def get_wrangled_package_proxy(self, package_importable_name):
+    def get_wrangled_asset_proxy(self, package_importable_name):
         return ScorePackageProxy(package_importable_name, session=self.session)
 
     def list_visible_wrangled_package_proxies(self, head=None):
@@ -70,6 +70,6 @@ class ScorePackageWrangler(PackageWrangler):
             return
         title, score_package_short_name, year = result
         self.make_wrangled_package(score_package_short_name)
-        score_package_proxy = self.get_wrangled_package_proxy(score_package_short_name)
+        score_package_proxy = self.get_wrangled_asset_proxy(score_package_short_name)
         score_package_proxy.add_tag('title', title)
         score_package_proxy.year_of_completion = year

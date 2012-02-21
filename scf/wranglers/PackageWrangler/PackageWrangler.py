@@ -6,4 +6,5 @@ import os
 
 class PackageWrangler(AssetWrangler):
 
-    pass
+    def get_wrangled_asset_proxy(self, asset_full_name):
+        return PackageProxy(asset_full_name, session=self.session)

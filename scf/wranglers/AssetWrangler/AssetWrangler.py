@@ -1,6 +1,5 @@
 from abjad.tools import iotools
 from baca.scf.core.SCFObject import SCFObject
-from baca.scf.proxies.PackageProxy import PackageProxy
 import os
 
 
@@ -145,8 +144,8 @@ class AssetWrangler(SCFObject):
                 package_proxy.profile_package_structure()
         return results
 
-    def get_wrangled_package_proxy(self, package_importable_name):
-        return PackageProxy(package_importable_name, session=self.session)
+    def get_wrangled_asset_proxy(self, asset_full_name):
+        self.print_implemented_on_child_classes()
         
     def list_score_internal_wrangled_package_directory_names(self, head=None):
         result = []
@@ -225,7 +224,7 @@ class AssetWrangler(SCFObject):
     def list_wrangled_package_proxies(self, head=None):
         result = []
         for package_importable_name in self.list_wrangled_package_importable_names(head=head):
-            wrangled_package_proxy = self.get_wrangled_package_proxy(package_importable_name)
+            wrangled_package_proxy = self.get_wrangled_asset_proxy(package_importable_name)
             result.append(wrangled_package_proxy)
         return result
 
@@ -245,7 +244,7 @@ class AssetWrangler(SCFObject):
         assert iotools.is_underscore_delimited_lowercase_package_name(package_short_name)
         package_directory_name = os.path.join(self.current_wrangler_target_directory_name, package_short_name)
         os.mkdir(package_directory_name)
-        package_proxy = self.get_wrangled_package_proxy(package_short_name)
+        package_proxy = self.get_wrangled_asset_proxy(package_short_name)
         package_proxy.fix_package_structure(is_interactive=False)
 
     def make_wrangled_package_interactively(self):

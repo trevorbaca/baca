@@ -21,7 +21,7 @@ class MusicSpecifierModuleWrangler(PackageWrangler):
 
     ### PUBLIC METHODS ###
 
-    def get_wrangled_package_proxy(self, package_importable_name):
+    def get_wrangled_asset_proxy(self, package_importable_name):
         return MusicSpecifierModuleProxy(package_importable_name, session=self.session)
 
     def handle_main_menu_result(self, result):
@@ -32,7 +32,7 @@ class MusicSpecifierModuleWrangler(PackageWrangler):
         elif result == 'profile':
             self.profile_visible_wrangled_package_structures()
         else:
-            package_proxy = self.get_wrangled_package_proxy(result)
+            package_proxy = self.get_wrangled_asset_proxy(result)
             package_proxy.run()
 
     def make_main_menu(self, head=None):

@@ -5,7 +5,7 @@ def test_PackageWrangler_public_methods_01():
 
     wrangler = baca.scf.wranglers.PackageWrangler()
 
-    wrangler_2 = wrangler.get_wrangled_package_proxy('scf')
+    wrangler_2 = wrangler.get_wrangled_asset_proxy('scf')
     assert isinstance(wrangler_2, baca.scf.proxies.PackageProxy)
 
     assert 'lidercfeny' in wrangler.list_wrangled_package_importable_names()

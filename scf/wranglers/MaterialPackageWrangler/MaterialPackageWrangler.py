@@ -47,8 +47,8 @@ class MaterialPackageWrangler(PackageWrangler):
             else:
                 return material_package_importable_name
 
-    def get_wrangled_package_proxy(self, package_importable_name):
-        return self.material_package_maker_wrangler.get_wrangled_package_proxy(package_importable_name)
+    def get_wrangled_asset_proxy(self, package_importable_name):
+        return self.material_package_maker_wrangler.get_wrangled_asset_proxy(package_importable_name)
 
     def handle_main_menu_result(self, result):
         if result == 'd':
@@ -62,7 +62,7 @@ class MaterialPackageWrangler(PackageWrangler):
         elif result == 'profile':
             self.profile_visible_wrangled_package_structures()
         else:
-            material_package_proxy = self.get_wrangled_package_proxy(result)
+            material_package_proxy = self.get_wrangled_asset_proxy(result)
             material_package_proxy.run()
         
     # TODO: write test
