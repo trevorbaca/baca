@@ -29,10 +29,10 @@ class PackageWrangler(AssetWrangler):
 
     ### PUBLIC METHODS ###
 
-    def fix_visible_wrangled_package_structures(self, prompt=True):
+    def fix_visible_wrangled_assets(self, prompt=True):
         results = []
         for package_proxy in self.list_visible_wrangled_asset_proxies():
-            results.append(package_proxy.fix_package_structure(is_interactive=prompt))
+            results.append(package_proxy.fix(is_interactive=prompt))
             if prompt:
                 package_proxy.profile()
         return results
@@ -103,4 +103,4 @@ class PackageWrangler(AssetWrangler):
         asset_path_name = os.path.join(self.current_asset_container_path_name, asset_short_name)
         os.mkdir(asset_path_name)
         package_proxy = self.get_wrangled_asset_proxy(asset_short_name)
-        package_proxy.fix_package_structure(is_interactive=False)
+        package_proxy.fix(is_interactive=False)

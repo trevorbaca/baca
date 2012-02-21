@@ -203,7 +203,7 @@ class ScorePackageProxy(PackageProxy):
             return
         self.add_tag('year_of_completion', result)
 
-    def fix_package_structure(self, is_interactive=True):
+    def fix(self, is_interactive=True):
         result = True
         if self.package_short_name == 'recursif':
             return True
@@ -283,7 +283,7 @@ class ScorePackageProxy(PackageProxy):
         elif result == 's':
             self.manage_setup(cache=True)
         elif result == 'fix':
-            self.fix_package_structure()
+            self.fix()
         elif result == 'ls':
             self.print_directory_contents()
         elif result == 'profile':

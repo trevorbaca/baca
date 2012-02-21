@@ -149,7 +149,7 @@ class PackageProxy(DirectoryProxy):
             tag_name, tag_value = result
             self.add_tag(tag_name, tag_value)
 
-    def fix_package_structure(self, is_interactive=True):
+    def fix(self, is_interactive=True):
         self.print_implemented_on_child_classes()
         return True
 
