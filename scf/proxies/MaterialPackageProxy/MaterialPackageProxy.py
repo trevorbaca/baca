@@ -27,7 +27,7 @@ class MaterialPackageProxy(PackageProxy):
 
     @property
     def breadcrumb(self):
-        return self.package_spaced_name
+        return self.human_readable_name
 
     @property
     def current_materials_directory_name(self):

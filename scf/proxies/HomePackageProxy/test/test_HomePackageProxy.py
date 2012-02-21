@@ -15,7 +15,7 @@ def test_HomePackageProxy_01():
     assert hpp.formatted_tags == []
     assert hpp.package_importable_name == 'baca'
     assert hpp.package_short_name == 'baca'
-    assert hpp.package_spaced_name == 'baca'
+    assert hpp.human_readable_name == 'baca'
     assert hpp.parent_initializer_file_name is None
     assert hpp.parent_package_importable_name is None
     assert hpp.score is None

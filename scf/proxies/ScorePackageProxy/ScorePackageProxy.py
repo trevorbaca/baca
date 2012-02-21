@@ -477,7 +477,7 @@ class ScorePackageProxy(PackageProxy):
         self.display(lines)
 
     def summarize_materials(self):
-        materials = self.material_package_wrangler.package_spaced_names
+        materials = self.material_package_wrangler.human_readable_names
         lines = []
         if not materials:
             lines.append('{}Materials (none yet)'.format(self.make_tab(1)))
