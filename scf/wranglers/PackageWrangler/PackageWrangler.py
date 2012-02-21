@@ -18,8 +18,8 @@ class PackageWrangler(ImportableAssetWrangler):
 
     ### PUBLIC METHODS ###
 
-    # TODO: remove
-    def list_wrangled_package_short_names(self, head=None):
+    # TODO: remove in favor of AssetWrangler.list_wrangled_asset_short_names()
+    def list_wrangled_asset_short_names(self, head=None):
         result = []
         for x in self.list_wrangled_asset_importable_names(head=head):
             result.append(x.split('.')[-1])

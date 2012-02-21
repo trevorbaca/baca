@@ -34,7 +34,7 @@ def test_MaterialPackageMakerWrangler_iteration_05():
 
 def test_MaterialPackageMakerWrangler_iteration_06():
 
-    assert 'PitchRangeInventoryMaterialPackageMaker' in wrangler.list_wrangled_package_short_names()
+    assert 'PitchRangeInventoryMaterialPackageMaker' in wrangler.list_wrangled_asset_short_names()
 
     
 def test_MaterialPackageMakerWrangler_iteration_07():

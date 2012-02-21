@@ -56,10 +56,10 @@ def test_MaterialPackageWrangler_iteration_05():
 
 def test_MaterialPackageWrangler_iteration_06():
 
-    assert 'red_sargasso' in wrangler.list_wrangled_package_short_names()
-    assert 'turquoise_pcs' in wrangler.list_wrangled_package_short_names()
-    assert 'red_sargasso' not in wrangler.list_wrangled_package_short_names(head='aracilik')
-    assert 'turquoise_pcs' not in wrangler.list_wrangled_package_short_names(head='aracilik')
+    assert 'red_sargasso' in wrangler.list_wrangled_asset_short_names()
+    assert 'turquoise_pcs' in wrangler.list_wrangled_asset_short_names()
+    assert 'red_sargasso' not in wrangler.list_wrangled_asset_short_names(head='aracilik')
+    assert 'turquoise_pcs' not in wrangler.list_wrangled_asset_short_names(head='aracilik')
 
 
 def test_MaterialPackageWrangler_iteration_07():

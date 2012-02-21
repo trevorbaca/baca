@@ -56,13 +56,13 @@ class MaterialPackageMakerWrangler(PackageWrangler):
 
     def list_wrangled_package_lowercase_spaced_class_names(self, head=None):
         result = []
-        for name in self.list_wrangled_package_short_names(head=head):
+        for name in self.list_wrangled_asset_short_names(head=head):
             spaced_class_name = iotools.uppercamelcase_to_space_delimited_lowercase(name)
             result.append(spaced_class_name)
         return result
 
     def list_wrangled_asset_menuing_pairs(self, head=None):
-        keys = self.list_wrangled_package_short_names(head=head)
+        keys = self.list_wrangled_asset_short_names(head=head)
         bodies = self.list_wrangled_package_lowercase_spaced_class_names(head=head)
         return zip(keys, bodies)
         
