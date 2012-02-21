@@ -11,13 +11,8 @@ class PackageWrangler(AssetWrangler):
     @property
     def score_external_wrangled_asset_importable_names(self):
         result = []
-        if self.score_external_asset_container_importable_name:
-            asset_container_path_name = self.package_importable_name_to_path_name(
-                self.score_external_asset_container_importable_name)
-            for name in os.listdir(asset_container_path_name):
-                if name[0].isalpha():
-                    result.append('{}.{}'.format(
-                        self.score_external_asset_container_importable_name, name))
+        for short_name in self.score_external_wrangled_asset_short_names:
+            result.append('{}.{}'.format(self.score_external_asset_container_importable_name, short_name))
         return result
 
     @property
