@@ -9,7 +9,7 @@ class PackageWrangler(AssetWrangler):
     ### READ-ONLY PUBLIC ATTRIBUTES ###
 
     @property
-    def score_external_wrangled_package_importable_names(self):
+    def score_external_wrangled_asset_importable_names(self):
         result = []
         if self.score_external_asset_container_package_importable_name:
             asset_container_directory_name = self.package_importable_name_to_directory_name(
@@ -99,7 +99,7 @@ class PackageWrangler(AssetWrangler):
     def list_wrangled_package_importable_names(self, head=None):
         if head is None: head = ''
         result, package_importable_names = [], []
-        package_importable_names.extend(self.score_external_wrangled_package_importable_names)
+        package_importable_names.extend(self.score_external_wrangled_asset_importable_names)
         package_importable_names.extend(
             self.list_score_internal_wrangled_package_importable_names(head=head))
         for package_importable_name in package_importable_names:

@@ -10,7 +10,7 @@ def test_ChunkPackageWrangler_read_only_attributes_01():
     assert wrangler.breadcrumb == 'sketches'
     assert wrangler.current_asset_container_package_importable_name == 'baca.sketches'
     assert all([
-        x.startswith('baca.sketches.') for x in wrangler.score_external_wrangled_package_importable_names])
+        x.startswith('baca.sketches.') for x in wrangler.score_external_wrangled_asset_importable_names])
 
     assert wrangler.score_external_asset_container_package_importable_name == 'baca.sketches'
     assert wrangler.score_internal_asset_container_package_importable_name_suffix == 'mus.chunks'
@@ -33,7 +33,7 @@ def test_ChunkPackageWrangler_read_only_attributes_02():
     assert wrangler.current_asset_container_package_importable_name == 'aracilik.mus.chunks'
 
     assert all([
-        x.startswith('baca.sketches.') for x in wrangler.score_external_wrangled_package_importable_names])
+        x.startswith('baca.sketches.') for x in wrangler.score_external_wrangled_asset_importable_names])
     assert wrangler.score_external_asset_container_package_importable_name == 'baca.sketches'
 
     assert wrangler.score_internal_asset_container_package_importable_name_suffix == 'mus.chunks'

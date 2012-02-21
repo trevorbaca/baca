@@ -25,8 +25,8 @@ class MaterialPackageMakerWrangler(PackageWrangler):
         return 'material package makers'
 
     @property
-    def score_external_wrangled_package_importable_names(self):
-        result = PackageWrangler.score_external_wrangled_package_importable_names.fget(self)
+    def score_external_wrangled_asset_importable_names(self):
+        result = PackageWrangler.score_external_wrangled_asset_importable_names.fget(self)
         result.remove(self.base_class_name)
         return result
 
