@@ -43,7 +43,7 @@ class PackageWrangler(AssetWrangler):
         for package_proxy in self.list_visible_wrangled_asset_proxies():
             results.append(package_proxy.fix_package_structure(is_interactive=prompt))
             if prompt:
-                package_proxy.profile_package_structure()
+                package_proxy.profile()
         return results
 
     def list_score_internal_wrangled_package_directory_names(self, head=None):
@@ -134,4 +134,4 @@ class PackageWrangler(AssetWrangler):
 
     def profile_visible_assets(self):
         for package_proxy in self.list_visible_wrangled_asset_proxies():
-            package_proxy.profile_package_structure()
+            package_proxy.profile()

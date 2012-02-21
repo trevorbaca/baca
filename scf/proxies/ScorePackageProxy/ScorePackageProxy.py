@@ -287,7 +287,7 @@ class ScorePackageProxy(PackageProxy):
         elif result == 'ls':
             self.print_directory_contents()
         elif result == 'profile':
-            self.profile_package_structure()
+            self.profile()
         elif result == 'removescore':
             self.remove_interactively()
         elif result == 'svn':
@@ -413,7 +413,7 @@ class ScorePackageProxy(PackageProxy):
         self.pop_breadcrumb()
         self.restore_breadcrumbs(cache=cache)
 
-    def profile_package_structure(self, prompt=True):
+    def profile(self, prompt=True):
         if not os.path.exists(self.directory_name):
             raise OSError('directory {!r} does not exist.'.format(self.directory_name))
         if self.package_short_name == 'recursif':

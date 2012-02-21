@@ -237,7 +237,7 @@ class PackageProxy(DirectoryProxy):
         self.pop_breadcrumb()
         self.restore_breadcrumbs(cache=cache)
 
-    def profile_package_structure(self):
+    def profile(self):
         self.print_implemented_on_child_classes()
 
     def read_tags_from_tags_file(self):

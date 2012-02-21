@@ -161,8 +161,11 @@ class AssetWrangler(SCFObject):
             result.append(wrangled_asset_proxy)
         return result
 
-    def make_wrangled_asset(self, package_short_name):
-        self.print_not_implemented()
+    def make_wrangled_asset(self, asset_short_name):
+        assert iotools.is_underscore_delimited_lowercase_string(asset_short_name)
+        asset_path_name = os.path.join(self.current_asset_container_directory_name, asset_short_name)
+        asset_proxy = self.get_wrangled_asset_proxy(asset_path_name)
+        asset_proxy.write_stub_to_disk()
 
     def make_wrangled_asset_interactively(self):
         self.print_implemented_on_child_classes()
