@@ -35,7 +35,7 @@ class MaterialPackageProxy(PackageProxy):
 
     @property
     def current_materials_package_importable_name(self):
-        return self.dot_join(self.package_importable_name.split('.')[:-1])
+        return self.dot_join(self.importable_name.split('.')[:-1])
 
     @property
     def has_complete_user_input_wrapper_in_memory(self):
@@ -190,7 +190,7 @@ class MaterialPackageProxy(PackageProxy):
     @property
     def illustration_builder_module_importable_name(self):
         if self.should_have_illustration_builder_module:
-            return self.dot_join([self.package_importable_name, 'illustration_builder'])
+            return self.dot_join([self.importable_name, 'illustration_builder'])
 
     @property
     def illustration_builder_module_proxy(self):
@@ -266,7 +266,7 @@ class MaterialPackageProxy(PackageProxy):
     @property
     def material_definition_module_importable_name(self):
         if self.should_have_material_definition_module:
-            return self.dot_join([self.package_importable_name, 'material_definition'])
+            return self.dot_join([self.importable_name, 'material_definition'])
 
     @property
     def material_definition_module_proxy(self):
@@ -346,7 +346,7 @@ class MaterialPackageProxy(PackageProxy):
     @property
     def output_material_module_importable_name(self):
         if self.should_have_output_material_module:
-            return '{}.output_material'.format(self.package_importable_name)
+            return '{}.output_material'.format(self.importable_name)
 
     @property
     def output_material_module_proxy(self):
@@ -421,7 +421,7 @@ class MaterialPackageProxy(PackageProxy):
     @property
     def user_input_module_importable_name(self):
         if self.should_have_user_input_module:
-            return self.dot_join([self.package_importable_name, 'user_input'])
+            return self.dot_join([self.importable_name, 'user_input'])
 
     @property
     def user_input_module_proxy(self):

@@ -7,4 +7,4 @@ def test_MusPackageProxy_01():
 
     assert mus_proxy.directory_name == '/Users/trevorbaca/Documents/scores/manos/mus'
     assert mus_proxy.short_name == 'mus'
-    assert mus_proxy.package_importable_name == 'manos.mus'
+    assert mus_proxy.importable_name == 'manos.mus'

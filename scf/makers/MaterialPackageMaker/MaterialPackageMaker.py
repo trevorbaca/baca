@@ -14,7 +14,7 @@ class MaterialPackageMaker(MaterialPackageProxy):
 
     def _initialize_user_input_wrapper_in_memory(self):
         import baca
-        user_input_module_importable_name = self.dot_join([self.package_importable_name, 'user_input'])
+        user_input_module_importable_name = self.dot_join([self.importable_name, 'user_input'])
         user_input_module_file_name = self.module_importable_name_to_path_name(
             user_input_module_importable_name)
         if not os.path.exists(user_input_module_file_name):

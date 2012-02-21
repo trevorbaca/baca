@@ -12,13 +12,13 @@ class PackageProxy(DirectoryProxy):
     def __init__(self, package_importable_name=None, session=None):
         directory_name = self.package_importable_name_to_path_name(package_importable_name)
         DirectoryProxy.__init__(self, directory_name=directory_name, session=session)
-        self._package_importable_name = package_importable_name
+        self._importable_name = package_importable_name
 
     ### OVERLOADS ###
 
     def __repr__(self):
-        if self.package_importable_name is not None:
-            return '{}({!r})'.format(self.class_name, self.package_importable_name)
+        if self.importable_name is not None:
+            return '{}({!r})'.format(self.class_name, self.importable_name)
         else:
             return '{}()'.format(self.class_name)
 
@@ -26,8 +26,8 @@ class PackageProxy(DirectoryProxy):
 
     @property
     def directory_name(self):
-        if self.package_importable_name is not None:
-            return self.package_importable_name_to_path_name(self.package_importable_name)
+        if self.importable_name is not None:
+            return self.package_importable_name_to_path_name(self.importable_name)
 
     @property
     def formatted_tags(self):
@@ -57,10 +57,6 @@ class PackageProxy(DirectoryProxy):
         return self.short_name.replace('_', ' ')
 
     @property
-    def importable_name(self):
-        return self.package_importable_name
-
-    @property
     def initializer_file_name(self):
         if self.directory_name is not None:
             return os.path.join(self.directory_name, '__init__.py')
@@ -72,12 +68,12 @@ class PackageProxy(DirectoryProxy):
             return InitializerFileProxy(self.initializer_file_name, session=self.session)
 
     @property
-    def package_importable_name(self):
-        return self._package_importable_name
+    def importable_name(self):
+        return self._importable_name
 
     @property
     def package_root_name(self):
-        return self.package_importable_name.split('.')[0]
+        return self.importable_name.split('.')[0]
 
     @property
     def package_spaced_name(self):
@@ -99,8 +95,8 @@ class PackageProxy(DirectoryProxy):
 
     @property
     def parent_package_importable_name(self):
-        if self.package_importable_name is not None:
-            result = self.dot_join(self.package_importable_name.split('.')[:-1])
+        if self.importable_name is not None:
+            result = self.dot_join(self.importable_name.split('.')[:-1])
             if result:
                 return result
 
@@ -114,8 +110,8 @@ class PackageProxy(DirectoryProxy):
     # TODO: write test; or remove?
     @property
     def score_package_short_name(self):
-        if not self.package_importable_name.startswith(self.home_package_importable_name):
-            return self.package_importable_name.split('.')[0]
+        if not self.importable_name.startswith(self.home_package_importable_name):
+            return self.importable_name.split('.')[0]
 
     @property
     def tags_file_name(self):
@@ -265,7 +261,7 @@ class PackageProxy(DirectoryProxy):
         result = getter.run()
         if self.backtrack():
             return
-        self.package_importable_name = result
+        self.importable_name = result
 
     def unimport_package(self):
-        self.remove_package_importable_name_from_sys_modules(self.package_importable_name)
+        self.remove_package_importable_name_from_sys_modules(self.importable_name)

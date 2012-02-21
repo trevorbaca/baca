@@ -40,7 +40,7 @@ class ScorePackageProxy(PackageProxy):
 
     @property
     def chunks_package_importable_name(self):
-        return self.dot_join([self.package_importable_name, 'mus', 'chunks'])
+        return self.dot_join([self.importable_name, 'mus', 'chunks'])
 
     @property
     def chunks_package_initializer_file_name(self):
@@ -96,7 +96,7 @@ class ScorePackageProxy(PackageProxy):
 
     @property
     def materials_package_importable_name(self):
-        return self.dot_join([self.package_importable_name, 'mus', 'materials'])
+        return self.dot_join([self.importable_name, 'mus', 'materials'])
 
     @property
     def materials_package_initializer_file_name(self):
@@ -428,7 +428,7 @@ class ScorePackageProxy(PackageProxy):
         self.proceed(prompt=prompt)
 
     def remove_interactively(self):
-        line = 'WARNING! Score package {!r} will be completely removed.'.format(self.package_importable_name)
+        line = 'WARNING! Score package {!r} will be completely removed.'.format(self.importable_name)
         self.display([line, ''])
         getter = self.make_getter(where=self.where())
         getter.append_string("type 'clobberscore' to proceed")
