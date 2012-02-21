@@ -12,7 +12,7 @@ class StylesheetFileProxy(FileProxy):
 
     @property
     def breadcrumb(self):
-        return self.short_file_name
+        return self.short_name
 
     ### PUBLIC METHODS ###
 
@@ -23,13 +23,13 @@ class StylesheetFileProxy(FileProxy):
     def copy_stylesheet_interactively(self, prompt=True):
         getter = self.make_getter()
         getter.append_string('new file name')
-        new_short_file_name = getter.run()
+        new_short_name = getter.run()
         if self.backtrack():
             return
-        new_short_file_name = iotools.string_to_strict_directory_name(new_short_file_name)
-        if not new_short_file_name.endswith('.ly'):
-            new_short_file_name = new_short_file_name + '.ly'
-        new_full_file_name = os.path.join(self.path_name, new_short_file_name)
+        new_short_name = iotools.string_to_strict_directory_name(new_short_name)
+        if not new_short_name.endswith('.ly'):
+            new_short_name = new_short_name + '.ly'
+        new_full_file_name = os.path.join(self.path_name, new_short_name)
         self.copy_file(new_full_file_name)
         line = 'file copied.'
         self.proceed(line, prompt=prompt)
@@ -67,13 +67,13 @@ class StylesheetFileProxy(FileProxy):
     def rename_stylesheet_interactively(self, prompt=True):
         getter = self.make_getter()
         getter.append_string('new file name')
-        new_short_file_name = getter.run()
+        new_short_name = getter.run()
         if self.backtrack():
             return
-        new_short_file_name = iotools.string_to_strict_directory_name(new_short_file_name)
-        if not new_short_file_name.endswith('.ly'):
-            new_short_file_name = new_short_file_name + '.ly'
-        new_full_file_name = os.path.join(self.path_name, new_short_file_name)
+        new_short_name = iotools.string_to_strict_directory_name(new_short_name)
+        if not new_short_name.endswith('.ly'):
+            new_short_name = new_short_name + '.ly'
+        new_full_file_name = os.path.join(self.path_name, new_short_name)
         self.rename_file(new_full_file_name)
         line = 'stylesheet renamed.'
         self.proceed(line, prompt=prompt)

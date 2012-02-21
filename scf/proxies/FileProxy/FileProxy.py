@@ -46,7 +46,7 @@ class FileProxy(AssetProxy):
         return ()
 
     @property
-    def short_file_name(self):
+    def short_name(self):
         return self.full_file_name.split(os.path.sep)[-1]
 
     ### PUBLIC METHODS ###
@@ -67,10 +67,10 @@ class FileProxy(AssetProxy):
     def copy_file_interactively(self, prompt=True):
         getter = self.make_getter()
         getter.append_string('new file name')
-        new_short_file_name = getter.run()
+        new_short_name = getter.run()
         if self.backtrack():
             return
-        new_full_file_name = os.path.join(self.path_name, new_short_file_name)
+        new_full_file_name = os.path.join(self.path_name, new_short_name)
         self.copy_file(new_full_file_name)
         line = 'file copied.'
         self.proceed(line, prompt=prompt)

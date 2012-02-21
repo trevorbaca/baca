@@ -9,11 +9,15 @@ class AssetProxy(SCFObject):
 
     @property
     def human_readable_name(self):
-        return self.path_name.split(os.path.sep)[-1]
+        return self.short_name
         
     @property
     def path_name(self):
         self.print_implemented_on_child_classes()
+
+    @property
+    def short_name(self):
+        return self.path_name.split(os.path.sep)[-1]
 
     @property
     def svn_add_command(self):

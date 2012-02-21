@@ -26,7 +26,7 @@ class ModuleProxy(ParsableFileProxy):
 
     @property
     def human_readable_name(self):
-        return FileProxy.human_readable_name.fget(self)[:-3].replace('_', ' ')
+        return self.short_name[:-3].replace('_', ' ')
         
     @property
     def module_importable_name(self):
