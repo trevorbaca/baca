@@ -75,7 +75,7 @@ class Studio(SCFObject):
         self.session.current_score_package_name = None
 
     def get_next_score_package_short_name(self):
-        score_package_short_names = self.score_package_wrangler.list_visible_wrangled_package_short_names()
+        score_package_short_names = self.score_package_wrangler.list_visible_package_short_names()
         if self.session.current_score_package_short_name is None:
             return score_package_short_names[0]
         index = score_package_short_names.index(self.session.current_score_package_short_name)
@@ -100,7 +100,7 @@ class Studio(SCFObject):
                 return package_root_name
 
     def get_prev_score_package_short_name(self):
-        score_package_short_names = self.score_package_wrangler.list_visible_wrangled_package_short_names()
+        score_package_short_names = self.score_package_wrangler.list_visible_package_short_names()
         if self.session.current_score_package_short_name is None:
             return score_package_short_names[-1]
         index = score_package_short_names.index(self.session.current_score_package_short_name)
@@ -130,7 +130,7 @@ class Studio(SCFObject):
             self.manage_svn()
         elif result == 'profile':
             self.score_package_wrangler.profile_visible_assets()
-        elif result in self.score_package_wrangler.list_visible_wrangled_package_short_names():
+        elif result in self.score_package_wrangler.list_visible_package_short_names():
             self.edit_score_interactively(result)
     
     def handle_svn_menu_result(self, result):

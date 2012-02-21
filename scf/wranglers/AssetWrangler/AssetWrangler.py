@@ -165,18 +165,18 @@ class AssetWrangler(SCFObject):
                     result.append(os.path.join(path_name, name))
         return result
 
-    def list_visible_wrangled_asset_human_readable_names(self, head=None):
+    def list_visible_asset_human_readable_names(self, head=None):
         result = []
-        for asset_proxy in self.list_visible_wrangled_asset_proxies(head=head):
+        for asset_proxy in self.list_visible_asset_proxies(head=head):
             result.append(asset_proxy.human_readable_name)
         return result
 
-    def list_visible_wrangled_asset_proxies(self, head=None):
+    def list_visible_asset_proxies(self, head=None):
         return self.list_wrangled_asset_proxies(head=head)
 
     def list_wrangled_asset_menuing_pairs(self, head=None):
-        keys = self.list_visible_wrangled_asset_path_names(head=head)
-        bodies = self.list_visible_wrangled_asset_human_readable_names(head=head)
+        keys = self.list_visible_asset_path_names(head=head)
+        bodies = self.list_visible_asset_human_readable_names(head=head)
         return zip(keys, bodies)
 
     def list_wrangled_asset_proxies(self, head=None):
@@ -203,7 +203,7 @@ class AssetWrangler(SCFObject):
         self.print_implemented_on_child_classes()
 
     def svn_add(self, prompt=True):
-        for asset_proxy in self.list_visible_wrangled_asset_proxies():
+        for asset_proxy in self.list_visible_asset_proxies():
             asset_proxy.svn_add(prompt=False)
         self.proceed(prompt=prompt)
 
@@ -217,16 +217,16 @@ class AssetWrangler(SCFObject):
         self.display(line)
         if not self.confirm():
             return
-        for asset_proxy in self.list_visible_wrangled_asset_proxies():
+        for asset_proxy in self.list_visible_asset_proxies():
             asset_proxy.svn_ci(commit_message=commit_message, prompt=False)
         self.proceed(prompt=prompt)
 
     def svn_st(self, prompt=True):
-        for asset_proxy in self.list_visible_wrangled_asset_proxies():
+        for asset_proxy in self.list_visible_asset_proxies():
             asset_proxy.svn_st(prompt=False)
         self.proceed(prompt=prompt)
 
     def svn_up(self, prompt=True):
-        for asset_proxy in self.list_visible_wrangled_asset_proxies():
+        for asset_proxy in self.list_visible_asset_proxies():
             asset_proxy.svn_up(prompt=False)
         self.proceed(prompt=prompt)

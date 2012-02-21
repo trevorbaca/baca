@@ -25,9 +25,9 @@ def test_MaterialPackageWrangler_iteration_02():
 
 def test_MaterialPackageWrangler_iteration_03():
 
-    assert 'turquoise_pcs' in wrangler.list_visible_wrangled_package_short_names()
-    assert 'turquoise_pcs' not in wrangler.list_visible_wrangled_package_short_names(head='aracilik')
-    assert wrangler.list_visible_wrangled_package_short_names(head='asdf') == []
+    assert 'turquoise_pcs' in wrangler.list_visible_package_short_names()
+    assert 'turquoise_pcs' not in wrangler.list_visible_package_short_names(head='aracilik')
+    assert wrangler.list_visible_package_short_names(head='asdf') == []
 
 
 def test_MaterialPackageWrangler_iteration_04():

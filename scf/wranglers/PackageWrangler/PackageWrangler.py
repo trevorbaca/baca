@@ -29,9 +29,9 @@ class PackageWrangler(AssetWrangler):
 
     ### PUBLIC METHODS ###
 
-    def fix_visible_wrangled_assets(self, prompt=True):
+    def fix_visible_assets(self, prompt=True):
         results = []
-        for package_proxy in self.list_visible_wrangled_asset_proxies():
+        for package_proxy in self.list_visible_asset_proxies():
             results.append(package_proxy.fix(is_interactive=prompt))
             if prompt:
                 package_proxy.profile()
@@ -51,21 +51,21 @@ class PackageWrangler(AssetWrangler):
                 result.append(package_importable_name)
         return result
 
-    def list_visible_wrangled_package_importable_names(self, head=None):
+    def list_visible_package_importable_names(self, head=None):
         result = []
-        for package_proxy in self.list_visible_wrangled_asset_proxies(head=head):
+        for package_proxy in self.list_visible_asset_proxies(head=head):
             result.append(package_proxy.package_importable_name)
         return result
 
-    def list_visible_wrangled_package_short_names(self, head=None):
+    def list_visible_package_short_names(self, head=None):
         result = []
-        for package_proxy in self.list_visible_wrangled_asset_proxies(head=head):
+        for package_proxy in self.list_visible_asset_proxies(head=head):
             result.append(package_proxy.package_short_name)
         return result
 
     def list_wrangled_asset_menuing_pairs(self, head=None):
-        keys = self.list_visible_wrangled_package_importable_names(head=head)
-        bodies = self.list_visible_wrangled_asset_human_readable_names(head=head)
+        keys = self.list_visible_package_importable_names(head=head)
+        bodies = self.list_visible_asset_human_readable_names(head=head)
         return zip(keys, bodies)
 
     def list_wrangled_asset_proxies(self, head=None):
