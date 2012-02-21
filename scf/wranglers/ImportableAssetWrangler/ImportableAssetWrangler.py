@@ -38,6 +38,7 @@ class ImportableAssetWrangler(AssetWrangler):
                 result.append(asset_container_importable_name)
         return result
 
+    # TODO: try to reimplement without proxy instantiation
     def list_visible_asset_importable_names(self, head=None):
         result = []
         for asset_proxy in self.list_visible_asset_proxies(head=head):
