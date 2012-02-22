@@ -54,6 +54,18 @@ class MaterialPackageMakerWrangler(PackageWrangler):
     def list_score_internal_asset_container_importable_names(self, head=None):
         return []
 
+    # TODO: use this implementation to avoid short names
+#    def list_asset_human_readable_names(self, head=None):
+#        result = []
+#        for path_name in self.list_asset_path_names(head=head):
+#            path_name = path_name.rstrip(os.path.sep)
+#            base_name = os.path.basename(path_name)
+#            if base_name == 'MaterialPackageMaker':
+#                continue
+#            human_readable_name = iotools.uppercamelcase_to_space_delimited_lowercase(base_name)
+#            result.append(human_readable_name)
+#        return result
+
     def list_asset_human_readable_names(self, head=None):
         result = []
         for name in self.list_asset_short_names(head=head):
