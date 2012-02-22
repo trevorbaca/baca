@@ -61,7 +61,7 @@ def test_MaterialPackageWrangler_iteration_06():
     assert wrangler.list_score_internal_asset_container_importable_names(head='asdf') == []
 
 
-def test_MaterialPackageWrangler_iteration007():
+def test_MaterialPackageWrangler_iteration_07():
 
     assert '/Users/trevorbaca/Documents/scores/manos/mus/materials' in \
         wrangler.list_score_internal_asset_container_path_names()
@@ -120,14 +120,7 @@ def test_MaterialPackageWrangler_iteration_12():
         wrangler.list_visible_asset_menuing_pairs(head='aracilik')
 
 
-def test_MaterialPackageWrangler_iteration113():
+def test_MaterialPackageWrangler_iteration_13():
 
     # wrangler.list_visible_asset_proxies()
     pass
-
-
-def test_MaterialPackageWrangler_iteration_14():
-
-    assert 'turquoise_pcs' in wrangler.list_visible_asset_short_names()
-    assert 'turquoise_pcs' not in wrangler.list_visible_asset_short_names(head='aracilik')
-    assert wrangler.list_visible_asset_short_names(head='asdf') == []
