@@ -184,11 +184,6 @@ class AssetWrangler(SCFObject):
             result.append(asset_proxy.human_readable_name)
         return result
 
-    def list_visible_asset_menuing_pairs(self, head=None):
-        keys = self.list_visible_asset_path_names(head=head)
-        bodies = self.list_visible_asset_human_readable_names(head=head)
-        return zip(keys, bodies)
-
     def list_asset_path_names(self, head=None):
         result = []
         if head is None:
@@ -245,6 +240,11 @@ class AssetWrangler(SCFObject):
         for asset_proxy in self.list_visible_asset_proxies(head=head):
             result.append(asset_proxy.human_readable_name)
         return result
+
+    def list_visible_asset_menuing_pairs(self, head=None):
+        keys = self.list_visible_asset_path_names(head=head)
+        bodies = self.list_visible_asset_human_readable_names(head=head)
+        return zip(keys, bodies)
 
     def list_visible_asset_proxies(self, head=None):
         return self.list_asset_proxies(head=head)
