@@ -233,7 +233,7 @@ class AssetWrangler(SCFObject):
             result.append(human_readable_name)
         return result
 
-    def list_visible_asset_menuing_pairs(self, head=None):
+    def make_visible_asset_menu_tokens(self, head=None):
         keys = self.list_visible_asset_path_names(head=head)
         bodies = self.list_visible_asset_human_readable_names(head=head)
         return zip(keys, bodies)

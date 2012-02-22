@@ -103,13 +103,13 @@ def test_MaterialPackageWrangler_iteration_10():
 def test_MaterialPackageWrangler_iteration_11():
 
     assert ('baca.materials.red_sargasso', 'red sargasso') in \
-        wrangler.list_visible_asset_menuing_pairs()
+        wrangler.make_visible_asset_menu_tokens()
     assert ('manos.mus.materials.turquoise_pcs', 'turquoise pcs') in \
-        wrangler.list_visible_asset_menuing_pairs()
+        wrangler.make_visible_asset_menu_tokens()
     assert ('baca.materials.red_sargasso', 'red sargasso') not in \
-        wrangler.list_visible_asset_menuing_pairs(head='aracilik')
+        wrangler.make_visible_asset_menu_tokens(head='aracilik')
     assert ('manos.mus.materials.turquoise_pcs', 'turquoise pcs') not in \
-        wrangler.list_visible_asset_menuing_pairs(head='aracilik')
+        wrangler.make_visible_asset_menu_tokens(head='aracilik')
 
 
 def test_MaterialPackageWrangler_iteration_12():

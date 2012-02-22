@@ -53,7 +53,7 @@ class ScorePackageWrangler(PackageWrangler):
                 result.append(asset_proxy)
         return result
 
-    def list_visible_asset_menuing_pairs(self, head=None):
+    def make_visible_asset_menu_tokens(self, head=None):
         keys = self.list_visible_asset_importable_names()
         bodies = self.visible_score_titles_with_years
         menuing_pairs = zip(keys, bodies)
