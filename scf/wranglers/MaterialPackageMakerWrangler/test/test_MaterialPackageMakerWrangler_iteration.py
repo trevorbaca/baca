@@ -14,12 +14,6 @@ def test_MaterialPackageMakerWrangler_iteration_02():
     assert wrangler.list_score_internal_asset_container_importable_names() == []
 
 
-def test_MaterialPackageMakerWrangler_iteration_03():
-
-    assert 'PitchRangeInventoryMaterialPackageMaker' in \
-        wrangler.list_visible_asset_short_names()
-
-
 def test_MaterialPackageMakerWrangler_iteration_04():
 
     assert 'baca.scf.makers.PitchRangeInventoryMaterialPackageMaker' in \

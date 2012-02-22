@@ -243,14 +243,6 @@ class AssetWrangler(SCFObject):
     def list_visible_asset_proxies(self, head=None):
         return self.list_asset_proxies(head=head)
 
-    # TODO: remove
-    def list_visible_asset_short_names(self, head=None):
-        #result = []
-        #for asset_proxy in self.list_visible_asset_proxies(head=head):
-        #    result.append(asset_proxy.short_name)
-        #return result
-        return self.list_visible_asset_human_readable_names(head=head)
-
     # other #
 
     def make_asset(self, asset_short_name):
