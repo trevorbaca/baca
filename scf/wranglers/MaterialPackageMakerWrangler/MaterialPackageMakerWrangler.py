@@ -24,14 +24,6 @@ class MaterialPackageMakerWrangler(PackageWrangler):
     def breadcrumb(self):
         return 'material package makers'
 
-    #@property
-    #def score_external_asset_importable_names(self):
-    def list_score_external_asset_importable_names(self, head=None):
-        #result = PackageWrangler.score_external_asset_importable_names.fget(self)
-        result = PackageWrangler.list_score_external_asset_importable_names(self, head=head)
-        result.remove(self.base_class_name)
-        return result
-
     ### PUBLIC METHODS ###
 
     def get_asset_proxy(self, package_importable_name):
@@ -52,6 +44,11 @@ class MaterialPackageMakerWrangler(PackageWrangler):
             self.make_asset_interactively()
         else:
             raise ValueError
+
+    def list_score_external_asset_importable_names(self, head=None):
+        result = PackageWrangler.list_score_external_asset_importable_names(self, head=head)
+        result.remove(self.base_class_name)
+        return result
 
     def list_score_internal_asset_container_importable_names(self, head=None):
         return []

@@ -97,40 +97,6 @@ class AssetWrangler(SCFObject):
         return self.package_importable_name_to_path_name(
             self.score_external_asset_container_importable_name)
 
-    # score-external assets #
-
-    #@property
-    #def score_external_asset_human_readable_names(self):
-    def list_score_external_asset_human_readable_names(self, head=None):
-        result = []
-        #for path_name in self.score_external_asset_path_names:
-        for path_name in self.list_score_external_asset_path_names(head=head):
-            path_name = path_name.rstrip(os.path.sep)
-            base_name = os.path.basename(path_name)
-            human_readable_name = self.change_string_to_human_readable_string(base_name)
-            result.append(human_readable_name)
-        return result
-
-    #@property
-    #def score_external_asset_path_names(self):
-    def list_score_external_asset_path_names(self, head=None):
-        result = []
-        if self.score_external_asset_container_path_name:
-            for name in os.listdir(self.score_external_asset_container_path_name):
-                if name[0].isalpha():
-                    result.append(os.path.join(self.score_external_asset_container_path_name, name))
-        return result
-
-    #@property
-    #def score_external_asset_proxies(self):
-    def list_score_external_asset_proxies(self, head=None):
-        result = []
-        #for asset_path_name in self.score_external_asset_path_names:
-        for asset_path_name in self.list_score_external_asset_path_names(head=head):
-            asset_proxy = self.get_asset_proxy(asset_path_name)
-            result.append(asset_proxy)
-        return result
-
     # infix #
 
     @property
@@ -187,7 +153,6 @@ class AssetWrangler(SCFObject):
     def list_asset_path_names(self, head=None):
         result = []
         if head in (None, self.home_package_importable_name):
-            #result.extend(self.score_external_asset_path_names)
             result.extend(self.list_score_external_asset_path_names(head=head))
         result.extend(self.list_score_internal_asset_path_names(head=head))
         return result
@@ -195,6 +160,32 @@ class AssetWrangler(SCFObject):
     def list_asset_proxies(self, head=None):
         result = []
         for asset_path_name in self.list_asset_path_names(head=head):
+            asset_proxy = self.get_asset_proxy(asset_path_name)
+            result.append(asset_proxy)
+        return result
+
+    # score-external assets #
+
+    def list_score_external_asset_human_readable_names(self, head=None):
+        result = []
+        for path_name in self.list_score_external_asset_path_names(head=head):
+            path_name = path_name.rstrip(os.path.sep)
+            base_name = os.path.basename(path_name)
+            human_readable_name = self.change_string_to_human_readable_string(base_name)
+            result.append(human_readable_name)
+        return result
+
+    def list_score_external_asset_path_names(self, head=None):
+        result = []
+        if self.score_external_asset_container_path_name:
+            for name in os.listdir(self.score_external_asset_container_path_name):
+                if name[0].isalpha():
+                    result.append(os.path.join(self.score_external_asset_container_path_name, name))
+        return result
+
+    def list_score_external_asset_proxies(self, head=None):
+        result = []
+        for asset_path_name in self.list_score_external_asset_path_names(head=head):
             asset_proxy = self.get_asset_proxy(asset_path_name)
             result.append(asset_proxy)
         return result
@@ -239,11 +230,6 @@ class AssetWrangler(SCFObject):
             result.append(human_readable_name)
         return result
 
-    def make_visible_asset_menu_tokens(self, head=None):
-        keys = self.list_visible_asset_path_names(head=head)
-        bodies = self.list_visible_asset_human_readable_names(head=head)
-        return zip(keys, bodies)
-
     def list_visible_asset_path_names(self, head=None):
         return self.list_asset_path_names(head=head)
 
@@ -260,6 +246,11 @@ class AssetWrangler(SCFObject):
 
     def make_asset_interactively(self):
         self.print_implemented_on_child_classes()
+
+    def make_visible_asset_menu_tokens(self, head=None):
+        keys = self.list_visible_asset_path_names(head=head)
+        bodies = self.list_visible_asset_human_readable_names(head=head)
+        return zip(keys, bodies)
 
     def profile_visible_assets(self):
         for asset_proxy in self.list_visible_asset_proxies():
