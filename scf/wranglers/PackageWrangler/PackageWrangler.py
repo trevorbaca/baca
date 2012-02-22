@@ -27,14 +27,6 @@ class PackageWrangler(ImportableAssetWrangler):
 
     ### PUBLIC METHODS ###
 
-    # TODO: remove in favor of AssetWrangler.list_asset_huamn_readable_names()
-    def list_asset_short_names(self, head=None):
-        result = []
-        for x in self.list_asset_importable_names(head=head):
-            result.append(x.split('.')[-1])
-        return result
-        #return self.list_asset_human_readable_names(head=head)
-
     def make_asset(self, asset_short_name):
         assert iotools.is_underscore_delimited_lowercase_package_name(asset_short_name)
         asset_path_name = os.path.join(self.current_asset_container_path_name, asset_short_name)

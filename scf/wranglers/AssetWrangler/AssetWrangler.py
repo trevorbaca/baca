@@ -198,9 +198,6 @@ class AssetWrangler(SCFObject):
             result.append(asset_proxy)
         return result
 
-    def list_asset_short_names(self, head=None):
-        return self.list_asset_human_readable_names(head=head)
-
     # score-internal asset containers #
 
     def list_score_internal_asset_container_importable_names(self, head=None):
