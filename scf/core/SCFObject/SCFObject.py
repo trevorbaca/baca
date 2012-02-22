@@ -146,6 +146,15 @@ class SCFObject(object):
             self.session.breadcrumb_cache_stack.append(self.session.breadcrumb_stack[:])
             self.session._breadcrumb_stack[:] = []
 
+    def change_string_to_human_readable_string(self, string):
+        assert isinstance(string, str)
+        if not string:
+            return string
+        elif string[0].isupper():
+            return iotools.uppercamelcase_to_spaced_delimited_lowercase(string)
+        else:
+            return string.replace('_', ' ')
+
     def conditionally_add_terminal_newlines(self, lines):
         terminated_lines = []
         for line in lines:

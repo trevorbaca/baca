@@ -99,12 +99,14 @@ class AssetWrangler(SCFObject):
 
     # score-external assets #
 
-    # TODO: reimplement without proxies
     @property
     def score_external_asset_human_readable_names(self):
         result = []
-        for asset_proxy in self.score_external_asset_proxies:
-            result.append(asset_proxy.human_readable_name)
+        for path_name in self.score_external_asset_path_names:
+            path_name = path_name.rstrip(os.path.sep)
+            base_name = os.path.basename(path_name)
+            human_readable_name = self.change_string_to_human_readable_string(base_name)
+            result.append(human_readable_name)
         return result
 
     @property
@@ -177,16 +179,18 @@ class AssetWrangler(SCFObject):
 
     # assets (all) #
 
-    # TODO: do not instantiate proxies here; use string operations instead
     def list_asset_human_readable_names(self, head=None):
         result = []
-        for asset_proxy in self.list_asset_proxies(head=head):
-            result.append(asset_proxy.human_readable_name)
+        for path_name in self.list_asset_path_names(head=head):
+            path_name = path_name.rstrip(os.path.sep)
+            base_name = os.path.basename(path_name)
+            human_readable_name = self.change_string_to_human_readable_string(base_name)
+            result.append(human_readable_name)
         return result
 
     def list_asset_path_names(self, head=None):
         result = []
-        if head is None:
+        if head in (None, self.home_package_importable_name):
             result.extend(self.score_external_asset_path_names)
         result.extend(self.list_score_internal_asset_path_names(head=head))
         return result
@@ -231,14 +235,20 @@ class AssetWrangler(SCFObject):
 
     def list_visible_asset_human_readable_names(self, head=None):
         result = []
-        for asset_proxy in self.list_visible_asset_proxies(head=head):
-            result.append(asset_proxy.human_readable_name)
+        for path_name in self.list_visible_asset_path_names(head=head):
+            path_name = path_name.rstrip(os.path.sep)
+            base_name = os.path.basename(path_name)
+            human_readable_name = self.change_string_to_human_readable_string(base_name)
+            result.append(human_readable_name)
         return result
 
     def list_visible_asset_menuing_pairs(self, head=None):
         keys = self.list_visible_asset_path_names(head=head)
         bodies = self.list_visible_asset_human_readable_names(head=head)
         return zip(keys, bodies)
+
+    def list_visible_asset_path_names(self, head=None):
+        return self.list_asset_path_names(head=head)
 
     def list_visible_asset_proxies(self, head=None):
         return self.list_asset_proxies(head=head)
