@@ -16,4 +16,4 @@ def test_MaterialPackageMakerWrangler_read_only_attributes_01():
 
     assert wrangler.temporary_asset_importable_name == 'baca.scf.makers.__temporary_package'
 
-    assert wrangler.asset_container_importable_names == ['baca.scf.makers']
+    assert wrangler.list_asset_container_importable_names() == ['baca.scf.makers']

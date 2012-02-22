@@ -17,8 +17,8 @@ def test_ChunkPackageWrangler_read_only_attributes_01():
 
     assert wrangler.temporary_asset_importable_name == 'baca.sketches.__temporary_package'
 
-    assert 'baca.sketches' in wrangler.asset_container_importable_names
-    assert 'aracilik.mus.chunks' in wrangler.asset_container_importable_names
+    assert 'baca.sketches' in wrangler.list_asset_container_importable_names()
+    assert 'aracilik.mus.chunks' in wrangler.list_asset_container_importable_names()
 
 
 def test_ChunkPackageWrangler_read_only_attributes_02():
@@ -40,5 +40,5 @@ def test_ChunkPackageWrangler_read_only_attributes_02():
 
     assert wrangler.temporary_asset_importable_name == 'aracilik.mus.chunks.__temporary_package'
 
-    assert 'baca.sketches' in wrangler.asset_container_importable_names
-    assert 'aracilik.mus.chunks' in wrangler.asset_container_importable_names
+    assert 'baca.sketches' in wrangler.list_asset_container_importable_names()
+    assert 'aracilik.mus.chunks' in wrangler.list_asset_container_importable_names()

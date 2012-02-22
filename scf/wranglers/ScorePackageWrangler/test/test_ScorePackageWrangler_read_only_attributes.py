@@ -15,8 +15,8 @@ def test_ScorePackageWrangler_read_only_attributes_02():
     '''Asset containers (all).
     '''
 
-    assert 'lidercfeny' in wrangler.asset_container_importable_names
-    assert '/Users/trevorbaca/Documents/scores/lidercfeny' in wrangler.asset_container_path_names
+    assert 'lidercfeny' in wrangler.list_asset_container_importable_names()
+    assert '/Users/trevorbaca/Documents/scores/lidercfeny' in wrangler.list_asset_container_path_names()
 
 
 def test_ScorePackageWrangler_read_only_attributes_03():

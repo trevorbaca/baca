@@ -16,10 +16,10 @@ def test_MaterialPackageWrangler_read_only_attributes_02():
     '''Asset containers (all).
     '''
 
-    assert 'baca.materials' in wrangler.asset_container_importable_names
-    assert 'aracilik.mus.materials' in wrangler.asset_container_importable_names
-    assert '/Users/trevorbaca/Documents/other/baca/materials' in wrangler.asset_container_path_names
-    assert '/Users/trevorbaca/Documents/scores/aracilik/mus/materials' in wrangler.asset_container_path_names
+    assert 'baca.materials' in wrangler.list_asset_container_importable_names()
+    assert 'aracilik.mus.materials' in wrangler.list_asset_container_importable_names()
+    assert '/Users/trevorbaca/Documents/other/baca/materials' in wrangler.list_asset_container_path_names()
+    assert '/Users/trevorbaca/Documents/scores/aracilik/mus/materials' in wrangler.list_asset_container_path_names()
 
 
 def test_MaterialPackageWrangler_read_only_attributes_03():
@@ -77,7 +77,7 @@ def test_MaterialPackageWrangler_read_only_attributes_08():
     wrangler.session.current_score_package_short_name = 'aracilik'
     assert wrangler.session.is_in_score
     
-    assert 'aracilik.mus.materials' in wrangler.asset_container_importable_names
+    assert 'aracilik.mus.materials' in wrangler.list_asset_container_importable_names()
     assert wrangler.current_asset_container_importable_name == 'aracilik.mus.materials'
     assert wrangler.temporary_asset_importable_name == 'aracilik.mus.materials.__temporary_package'
     assert wrangler.temporary_asset_path_name == \

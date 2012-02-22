@@ -49,23 +49,6 @@ class AssetWrangler(SCFObject):
     def asset_class(self):
         self.print_implemented_on_child_classes()
 
-    # asset containers (all) #
-
-    @property
-    def asset_container_importable_names(self):
-        result = [] 
-        if self.score_external_asset_container_importable_name:
-            result.append(self.score_external_asset_container_importable_name)
-        result.extend(self.list_score_internal_asset_container_importable_names())
-        return result
-
-    @property
-    def asset_container_path_names(self):
-        result = []
-        for package_importable_name in self.asset_container_importable_names:
-            result.append(self.package_importable_name_to_path_name(package_importable_name))
-        return result
-
     # current asset container #
 
     @property
@@ -138,6 +121,21 @@ class AssetWrangler(SCFObject):
 
     def get_asset_proxy(self, asset_full_name):
         return self.asset_class(asset_full_name, session=self.session)
+
+    # asset containers (all) #
+
+    def list_asset_container_importable_names(self, head=None):
+        result = [] 
+        if self.score_external_asset_container_importable_name:
+            result.append(self.score_external_asset_container_importable_name)
+        result.extend(self.list_score_internal_asset_container_importable_names(head=head))
+        return result
+
+    def list_asset_container_path_names(self, head=None):
+        result = []
+        for package_importable_name in self.list_asset_container_importable_names(head=head):
+            result.append(self.package_importable_name_to_path_name(package_importable_name))
+        return result
 
     # assets (all) #
 
