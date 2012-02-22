@@ -197,7 +197,7 @@ class MaterialPackageMakerWrangler(PackageWrangler):
         self.restore_breadcrumbs(cache=cache)
 
     # TODO: write test
-    def select_wrangled_package_class_name_interactively(
+    def select_wrangled_asset_short_name_interactively(
         self, clear=True, cache=False, head=None, user_input=None):
         self.cache_breadcrumbs(cache=cache)
         while True:

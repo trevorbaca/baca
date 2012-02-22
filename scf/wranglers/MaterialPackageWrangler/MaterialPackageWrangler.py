@@ -88,7 +88,7 @@ class MaterialPackageWrangler(PackageWrangler):
     # TODO: write test
     def make_makermade_material_package_interactively(self):
         self.push_backtrack()
-        result = self.material_package_maker_wrangler.select_wrangled_package_class_name_interactively(
+        result = self.material_package_maker_wrangler.select_wrangled_asset_short_name_interactively(
             clear=False, cache=True)
         material_package_maker_class_name = result
         self.pop_backtrack()
