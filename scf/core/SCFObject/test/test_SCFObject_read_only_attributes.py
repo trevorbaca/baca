@@ -5,7 +5,7 @@ def test_SCFObject_read_only_attributes_01():
 
     scf = baca.scf.core.SCFObject()
 
-    assert scf.assets_directory == '/Users/trevorbaca/Documents/other/baca/scf/assets'
+    assert scf.boilerplate_directory == '/Users/trevorbaca/Documents/other/baca/scf/boilerplate'
     assert isinstance(scf.breadcrumb_stack, list)
     assert scf.class_name == 'SCFObject'
     assert scf.help_item_width == 5

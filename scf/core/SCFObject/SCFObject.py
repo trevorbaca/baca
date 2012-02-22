@@ -23,8 +23,8 @@ class SCFObject(object):
     ### READ-ONLY PUBLIC ATTRIBUTES ###
 
     @property
-    def assets_directory(self):
-        return os.path.join(self.scf_root_directory, 'assets')
+    def boilerplate_directory(self):
+        return os.path.join(self.scf_root_directory, 'boilerplate')
 
     @property
     def breadcrumb(self):

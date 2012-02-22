@@ -128,7 +128,7 @@ class FileProxy(AssetProxy):
         if self.backtrack():
             return
         if not os.path.exists(canned_file_name):
-            canned_file_name = os.path.join(self.assets_directory, canned_file_name)
+            canned_file_name = os.path.join(self.boilerplate_directory, canned_file_name)
         if not os.path.exists(canned_file_name):
             self.proceed('canned file {!r} does not exist.'.format(canned_file_name), prompt=prompt)
         else:
