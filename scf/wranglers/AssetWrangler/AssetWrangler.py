@@ -43,6 +43,8 @@ class AssetWrangler(SCFObject):
 
     ### READ-ONLY PUBLIC ATTRIBUTES ###
 
+    # asset containers (all) #
+
     @property
     def asset_container_importable_names(self):
         result = [] 
@@ -58,6 +60,8 @@ class AssetWrangler(SCFObject):
             result.append(self.package_importable_name_to_path_name(package_importable_name))
         return result
 
+    # current asset container #
+
     @property
     def current_asset_container_importable_name(self):
         if self.session.is_in_score:
@@ -72,6 +76,8 @@ class AssetWrangler(SCFObject):
         return self.package_importable_name_to_path_name(
             self.current_asset_container_importable_name)
 
+    # score-external asset container #
+
     @property
     def score_external_asset_container_importable_name(self):
         return self._score_external_asset_container_importable_name
@@ -84,6 +90,8 @@ class AssetWrangler(SCFObject):
     def score_external_asset_container_path_name(self):
         return self.package_importable_name_to_path_name(
             self.score_external_asset_container_importable_name)
+
+    # score-external wrangled assets #
 
     # TODO: reimplement without proxies
     @property
@@ -119,9 +127,13 @@ class AssetWrangler(SCFObject):
                     result.append(name)
         return result
 
+    # infix #
+
     @property
     def score_internal_asset_container_importable_name_infix(self):
         return self._score_internal_asset_container_importable_name_infix
+
+    # temporary asset #
 
     @property
     def temporary_asset_path_name(self):
@@ -130,6 +142,8 @@ class AssetWrangler(SCFObject):
     @property
     def temporary_asset_short_name(self):
         self.print_implemented_on_child_classes()
+
+    # wrangled asset class #
 
     @property
     def wrangled_asset_class(self):
@@ -161,6 +175,8 @@ class AssetWrangler(SCFObject):
     def get_wrangled_asset_proxy(self, asset_full_name):
         return self.wrangled_asset_class(asset_full_name, session=self.session)
         
+    # score-internal asset containers #
+
     def list_score_internal_asset_container_importable_names(self, head=None):
         result = []
         for score_package_short_name in self.list_score_package_short_names(head=head):
@@ -178,6 +194,8 @@ class AssetWrangler(SCFObject):
             result.append(self.package_importable_name_to_path_name(package_importable_name))
         return result            
 
+    # score-internal wrangled assets #
+
     def list_score_internal_wrangled_asset_path_names(self, head=None):
         result = []
         for path_name in self.list_score_internal_asset_container_path_names(head=head):
@@ -185,6 +203,8 @@ class AssetWrangler(SCFObject):
                 if name[0].isalpha():
                     result.append(os.path.join(path_name, name))
         return result
+
+    # visible assets #
 
     def list_visible_asset_human_readable_names(self, head=None):
         result = []
@@ -200,6 +220,8 @@ class AssetWrangler(SCFObject):
         for asset_proxy in self.list_visible_asset_proxies(head=head):
             result.append(asset_proxy.short_name)
         return result
+
+    # wrangled assets (all) #
 
     # TODO: do not instantiate proxies here; use string operations instead
     def list_wrangled_asset_human_readable_names(self, head=None):
@@ -232,6 +254,8 @@ class AssetWrangler(SCFObject):
         for path_name in self.list_wrangled_asset_path_names(head=head):
             result.append(path_name.split(os.path.sep)[-1])
         return result
+
+    # other methods #
 
     def make_wrangled_asset(self, asset_short_name):
         assert iotools.is_underscore_delimited_lowercase_string(asset_short_name)
