@@ -7,9 +7,9 @@ class ImportableAssetWrangler(AssetWrangler):
     ### READ-ONLY PUBLIC ATTRIBUTES ###
 
     @property
-    def score_external_wrangled_asset_importable_names(self):
+    def score_external_asset_importable_names(self):
         result = []
-        for short_name in self.score_external_wrangled_asset_short_names:
+        for short_name in self.score_external_asset_short_names:
             result.append('{}.{}'.format(self.score_external_asset_container_importable_name, short_name))
         return result
 
@@ -24,7 +24,7 @@ class ImportableAssetWrangler(AssetWrangler):
 
     ### PUBLIC METHODS ###
 
-    def list_score_internal_wrangled_asset_importable_names(self, head=None):
+    def list_score_internal_asset_importable_names(self, head=None):
         result = []
         for asset_container_importable_name in \
             self.list_score_internal_asset_container_importable_names(head=head):
@@ -45,24 +45,24 @@ class ImportableAssetWrangler(AssetWrangler):
             result.append(asset_proxy.importable_name)
         return result
 
-    def list_wrangled_asset_menuing_pairs(self, head=None):
+    def list_asset_menuing_pairs(self, head=None):
         keys = self.list_visible_asset_importable_names(head=head)
         bodies = self.list_visible_asset_human_readable_names(head=head)
         return zip(keys, bodies)
 
-    def list_wrangled_asset_proxies(self, head=None):
+    def list_asset_proxies(self, head=None):
         result = []
-        for package_importable_name in self.list_wrangled_asset_importable_names(head=head):
-            wrangled_asset_proxy = self.get_wrangled_asset_proxy(package_importable_name)
-            result.append(wrangled_asset_proxy)
+        for package_importable_name in self.list_asset_importable_names(head=head):
+            asset_proxy = self.get_asset_proxy(package_importable_name)
+            result.append(asset_proxy)
         return result
 
-    def list_wrangled_asset_importable_names(self, head=None):
+    def list_asset_importable_names(self, head=None):
         if head is None: head = ''
         result, asset_importable_names = [], []
-        asset_importable_names.extend(self.score_external_wrangled_asset_importable_names)
+        asset_importable_names.extend(self.score_external_asset_importable_names)
         asset_importable_names.extend(
-            self.list_score_internal_wrangled_asset_importable_names(head=head))
+            self.list_score_internal_asset_importable_names(head=head))
         for asset_importable_name in asset_importable_names:
             if asset_importable_name.startswith(head):
                 result.append(asset_importable_name)

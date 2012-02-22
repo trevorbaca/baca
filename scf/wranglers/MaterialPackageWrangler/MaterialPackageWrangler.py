@@ -47,8 +47,8 @@ class MaterialPackageWrangler(PackageWrangler):
             else:
                 return material_package_importable_name
 
-    def get_wrangled_asset_proxy(self, package_importable_name):
-        return self.material_package_maker_wrangler.get_wrangled_asset_proxy(package_importable_name)
+    def get_asset_proxy(self, package_importable_name):
+        return self.material_package_maker_wrangler.get_asset_proxy(package_importable_name)
 
     def handle_main_menu_result(self, result):
         if result == 'd':
@@ -62,7 +62,7 @@ class MaterialPackageWrangler(PackageWrangler):
         elif result == 'profile':
             self.profile_visible_assets()
         else:
-            material_package_proxy = self.get_wrangled_asset_proxy(result)
+            material_package_proxy = self.get_asset_proxy(result)
             material_package_proxy.run()
         
     # TODO: write test
@@ -88,7 +88,7 @@ class MaterialPackageWrangler(PackageWrangler):
     # TODO: write test
     def make_makermade_material_package_interactively(self):
         self.push_backtrack()
-        result = self.material_package_maker_wrangler.select_wrangled_asset_short_name_interactively(
+        result = self.material_package_maker_wrangler.select_asset_short_name_interactively(
             clear=False, cache=True)
         material_package_maker_class_name = result
         self.pop_backtrack()
@@ -106,7 +106,7 @@ class MaterialPackageWrangler(PackageWrangler):
 
     def make_main_menu(self, head=None):
         menu, section = self.make_menu(where=self.where(), is_numbered=True, is_keyed=False)
-        section.tokens = self.list_wrangled_asset_menuing_pairs(head=head)
+        section.tokens = self.list_asset_menuing_pairs(head=head)
         section = menu.make_section()
         section.append(('d', 'data-only'))
         section.append(('h', 'handmade'))

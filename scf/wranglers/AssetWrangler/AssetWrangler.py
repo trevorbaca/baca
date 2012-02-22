@@ -95,14 +95,14 @@ class AssetWrangler(SCFObject):
 
     # TODO: reimplement without proxies
     @property
-    def score_external_wrangled_asset_human_readable_names(self):
+    def score_external_asset_human_readable_names(self):
         result = []
-        for asset_proxy in self.score_external_wrangled_asset_proxies:
+        for asset_proxy in self.score_external_asset_proxies:
             result.append(asset_proxy.human_readable_name)
         return result
 
     @property
-    def score_external_wrangled_asset_path_names(self):
+    def score_external_asset_path_names(self):
         result = []
         if self.score_external_asset_container_path_name:
             for name in os.listdir(self.score_external_asset_container_path_name):
@@ -111,15 +111,15 @@ class AssetWrangler(SCFObject):
         return result
 
     @property
-    def score_external_wrangled_asset_proxies(self):
+    def score_external_asset_proxies(self):
         result = []
-        for asset_path_name in self.score_external_wrangled_asset_path_names:
-            wrangled_asset_proxy = self.get_wrangled_asset_proxy(asset_path_name)
-            result.append(wrangled_asset_proxy)
+        for asset_path_name in self.score_external_asset_path_names:
+            asset_proxy = self.get_asset_proxy(asset_path_name)
+            result.append(asset_proxy)
         return result
 
     @property
-    def score_external_wrangled_asset_short_names(self):
+    def score_external_asset_short_names(self):
         result = []
         if self.score_external_asset_container_path_name:
             for name in os.listdir(self.score_external_asset_container_path_name):
@@ -146,7 +146,7 @@ class AssetWrangler(SCFObject):
     # wrangled asset class #
 
     @property
-    def wrangled_asset_class(self):
+    def asset_class(self):
         self.print_implemented_on_child_classes()
 
     ### PUBLIC METHODS ###
@@ -172,8 +172,8 @@ class AssetWrangler(SCFObject):
                 asset_proxy.profile()
         return results
 
-    def get_wrangled_asset_proxy(self, asset_full_name):
-        return self.wrangled_asset_class(asset_full_name, session=self.session)
+    def get_asset_proxy(self, asset_full_name):
+        return self.asset_class(asset_full_name, session=self.session)
         
     # score-internal asset containers #
 
@@ -196,7 +196,7 @@ class AssetWrangler(SCFObject):
 
     # score-internal wrangled assets #
 
-    def list_score_internal_wrangled_asset_path_names(self, head=None):
+    def list_score_internal_asset_path_names(self, head=None):
         result = []
         for path_name in self.list_score_internal_asset_container_path_names(head=head):
             for name in os.listdir(path_name):
@@ -213,7 +213,7 @@ class AssetWrangler(SCFObject):
         return result
 
     def list_visible_asset_proxies(self, head=None):
-        return self.list_wrangled_asset_proxies(head=head)
+        return self.list_asset_proxies(head=head)
 
     def list_visible_asset_short_names(self, head=None):
         result = []
@@ -224,46 +224,46 @@ class AssetWrangler(SCFObject):
     # wrangled assets (all) #
 
     # TODO: do not instantiate proxies here; use string operations instead
-    def list_wrangled_asset_human_readable_names(self, head=None):
+    def list_asset_human_readable_names(self, head=None):
         result = []
-        for asset_proxy in self.list_wrangled_asset_proxies(head=head):
+        for asset_proxy in self.list_asset_proxies(head=head):
             result.append(asset_proxy.human_readable_name)
         return result
 
-    def list_wrangled_asset_menuing_pairs(self, head=None):
+    def list_asset_menuing_pairs(self, head=None):
         keys = self.list_visible_asset_path_names(head=head)
         bodies = self.list_visible_asset_human_readable_names(head=head)
         return zip(keys, bodies)
 
-    def list_wrangled_asset_path_names(self, head=None):
+    def list_asset_path_names(self, head=None):
         result = []
         if head is None:
-            result.extend(self.score_external_wrangled_asset_path_names)
-        result.extend(self.list_score_internal_wrangled_asset_path_names(head=head))
+            result.extend(self.score_external_asset_path_names)
+        result.extend(self.list_score_internal_asset_path_names(head=head))
         return result
 
-    def list_wrangled_asset_proxies(self, head=None):
+    def list_asset_proxies(self, head=None):
         result = []
         for asset_path_name in self.list_asset_path_names(head=head):
-            wrangled_asset_proxy = self.get_wrangled_asset_proxy(asset_path_name)
-            result.append(wrangled_asset_proxy)
+            asset_proxy = self.get_asset_proxy(asset_path_name)
+            result.append(asset_proxy)
         return result
 
-    def list_wrangled_asset_short_names(self, head=None):
+    def list_asset_short_names(self, head=None):
         result = []
-        for path_name in self.list_wrangled_asset_path_names(head=head):
+        for path_name in self.list_asset_path_names(head=head):
             result.append(path_name.split(os.path.sep)[-1])
         return result
 
     # other methods #
 
-    def make_wrangled_asset(self, asset_short_name):
+    def make_asset(self, asset_short_name):
         assert iotools.is_underscore_delimited_lowercase_string(asset_short_name)
         asset_path_name = os.path.join(self.current_asset_container_path_name, asset_short_name)
-        asset_proxy = self.get_wrangled_asset_proxy(asset_path_name)
+        asset_proxy = self.get_asset_proxy(asset_path_name)
         asset_proxy.write_stub_to_disk()
 
-    def make_wrangled_asset_interactively(self):
+    def make_asset_interactively(self):
         self.print_implemented_on_child_classes()
 
     def profile_visible_assets(self):

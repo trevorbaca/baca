@@ -45,11 +45,11 @@ def test_MaterialPackageWrangler_read_only_attributes_05():
     '''Score-external wrangled assets.
     '''
 
-    assert 'red notes' in wrangler.score_external_wrangled_asset_human_readable_names
-    assert 'baca.materials.red_notes' in wrangler.score_external_wrangled_asset_importable_names
+    assert 'red notes' in wrangler.score_external_asset_human_readable_names
+    assert 'baca.materials.red_notes' in wrangler.score_external_asset_importable_names
     assert '/Users/trevorbaca/Documents/other/baca/materials/red_notes' in \
-        wrangler.score_external_wrangled_asset_path_names
-    assert 'red_notes' in wrangler.score_external_wrangled_asset_short_names
+        wrangler.score_external_asset_path_names
+    assert 'red_notes' in wrangler.score_external_asset_short_names
 
 
 def test_MaterialPackageWrangler_read_only_attributes_06():

@@ -9,5 +9,5 @@ class FileWrangler(AssetWrangler):
     ### READ-ONLY PUBLIC ATTRIBUTES ###
 
     @property
-    def wrangled_asset_class(self):
+    def asset_class(self):
         return FileProxy

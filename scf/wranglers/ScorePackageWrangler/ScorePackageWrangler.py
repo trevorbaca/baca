@@ -29,7 +29,7 @@ class ScorePackageWrangler(PackageWrangler):
         return result
 
     @property
-    def wrangled_asset_class(self):
+    def asset_class(self):
         return ScorePackageProxy
 
     ### PUBLIC METHODS ###
@@ -37,7 +37,7 @@ class ScorePackageWrangler(PackageWrangler):
     def list_visible_asset_proxies(self, head=None):
         result = []
         scores_to_show = self.session.scores_to_show
-        for asset_proxy in PackageWrangler.list_wrangled_asset_proxies(self, head=head):
+        for asset_proxy in PackageWrangler.list_asset_proxies(self, head=head):
             is_mothballed = asset_proxy.get_tag('is_mothballed')
             if scores_to_show == 'all':
                 result.append(asset_proxy)
@@ -47,7 +47,7 @@ class ScorePackageWrangler(PackageWrangler):
                 result.append(asset_proxy)
         return result
 
-    def list_wrangled_asset_menuing_pairs(self, head=None):
+    def list_asset_menuing_pairs(self, head=None):
         keys = self.list_visible_asset_short_names()
         bodies = self.visible_score_titles_with_years
         menuing_pairs = zip(keys, bodies)
@@ -55,7 +55,7 @@ class ScorePackageWrangler(PackageWrangler):
         menuing_pairs.sort(lambda x, y: cmp(tmp(x[1]), tmp(y[1])))
         return menuing_pairs
 
-    def make_wrangled_asset_interactively(self):
+    def make_asset_interactively(self):
         getter = self.make_getter(where=self.where())
         getter.indent_level = 1
         getter.prompt_character = ':'
@@ -69,7 +69,7 @@ class ScorePackageWrangler(PackageWrangler):
         if self.backtrack():
             return
         title, score_package_short_name, year = result
-        self.make_wrangled_asset(score_package_short_name)
-        score_package_proxy = self.get_wrangled_asset_proxy(score_package_short_name)
+        self.make_asset(score_package_short_name)
+        score_package_proxy = self.get_asset_proxy(score_package_short_name)
         score_package_proxy.add_tag('title', title)
         score_package_proxy.year_of_completion = year

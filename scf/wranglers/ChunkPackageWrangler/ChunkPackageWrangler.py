@@ -23,7 +23,7 @@ class ChunkPackageWrangler(PackageWrangler):
             return 'sketches'
 
     @property
-    def wrangled_asset_class(self):
+    def asset_class(self):
         return ChunkPackageProxy
 
     ### PUBLIC METHODS ###
@@ -31,18 +31,18 @@ class ChunkPackageWrangler(PackageWrangler):
     def handle_main_menu_result(self, result):
         assert isinstance(result, str)
         if result == 'new':
-            self.make_wrangled_asset_interactively()
+            self.make_asset_interactively()
         else:
-            chunk_package_proxy = self.get_wrangled_asset_proxy(result)
+            chunk_package_proxy = self.get_asset_proxy(result)
             chunk_package_proxy.run()
 
-    def make_wrangled_asset_interactively(self):
+    def make_asset_interactively(self):
         chunk_package_proxy = ChunkPackageProxy(session=self.session)
-        chunk_package_proxy.make_wrangled_asset_interactively()
+        chunk_package_proxy.make_asset_interactively()
 
     def make_main_menu(self, head=None):
         menu, section = self.make_menu(where=self.where(), is_numbered=True)
-        section.tokens = self.list_wrangled_asset_short_names(head=head)
+        section.tokens = self.list_asset_short_names(head=head)
         section = menu.make_section()
         section.append(('new', 'new chunk'))
         return menu

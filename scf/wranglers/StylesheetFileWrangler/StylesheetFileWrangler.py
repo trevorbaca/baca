@@ -27,7 +27,7 @@ class StylesheetFileWrangler(PackageWrangler):
         return result
 
     @property
-    def wrangled_asset_class(self):
+    def asset_class(self):
         return StylesheetFileProxy
 
     ### PUBLIC METHODS ###

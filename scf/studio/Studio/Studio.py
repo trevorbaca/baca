@@ -65,7 +65,7 @@ class Studio(SCFObject):
     ### PUBLIC METHODS ###
 
     def edit_score_interactively(self, score_package_importable_name):
-        score_package_proxy = self.score_package_wrangler.get_wrangled_asset_proxy(score_package_importable_name)
+        score_package_proxy = self.score_package_wrangler.get_asset_proxy(score_package_importable_name)
         score_package_proxy.session.current_score_package_short_name = score_package_importable_name
         # TODO: use cache keyword
         breadcrumbs = self.breadcrumb_stack[:]
@@ -122,7 +122,7 @@ class Studio(SCFObject):
             self.push_breadcrumb(breadcrumb)
         elif result == 'new':
             breadcrumb = self.pop_breadcrumb()
-            self.score_package_wrangler.make_wrangled_asset_interactively()
+            self.score_package_wrangler.make_asset_interactively()
             self.push_breadcrumb(breadcrumb)
         elif result == 'mb':
             self.session.show_mothballed_scores()
@@ -180,7 +180,7 @@ class Studio(SCFObject):
 
     def make_score_selection_menu(self):
         menu, section = self.make_menu(where=self.where(), is_numbered=True, is_keyed=False)
-        section.tokens = self.score_package_wrangler.list_wrangled_asset_menuing_pairs()
+        section.tokens = self.score_package_wrangler.list_asset_menuing_pairs()
         return menu
 
     def make_svn_menu(self):

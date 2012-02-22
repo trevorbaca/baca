@@ -35,10 +35,10 @@ class ChunkPackageProxy(PackageProxy):
         elif result == 'n':
             self.initializer_file_proxy.view()
 
-    def make_wrangled_asset(self):
+    def make_asset(self):
         self.print_not_implemented()
 
-    def make_wrangled_asset_interactively(self, prompt=True):
+    def make_asset_interactively(self, prompt=True):
         self.print_not_implemented()
 
     def make_main_menu(self):
@@ -76,7 +76,7 @@ class ChunkPackageProxy(PackageProxy):
         package_short_name = result.replace(' ', '_')
         package_importable_name = self.dot_join([self.importable_name, package_short_name])
         chunk_proxy = ChunkPackageProxy(package_importable_name)
-        chunk_proxy.make_wrangled_asset()
+        chunk_proxy.make_asset()
         line = 'chunk spaced name set.'
         self.proceed(line, prompt=prompt)
 
