@@ -199,10 +199,7 @@ class AssetWrangler(SCFObject):
         return result
 
     def list_asset_short_names(self, head=None):
-        result = []
-        for path_name in self.list_asset_path_names(head=head):
-            result.append(path_name.split(os.path.sep)[-1])
-        return result
+        return self.list_asset_human_readable_names(head=head)
 
     # score-internal asset containers #
 
