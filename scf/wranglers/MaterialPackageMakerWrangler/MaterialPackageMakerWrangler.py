@@ -61,14 +61,14 @@ class MaterialPackageMakerWrangler(PackageWrangler):
             result.append(spaced_class_name)
         return result
 
-    def list_asset_menuing_pairs(self, head=None):
+    def list_visible_asset_menuing_pairs(self, head=None):
         keys = self.list_asset_short_names(head=head)
         bodies = self.list_asset_human_readable_names(head=head)
         return zip(keys, bodies)
         
     def make_class_selection_menu(self, head=None):
         menu, section = self.make_menu(where=self.where(), is_keyed=False, is_numbered=True)
-        section.tokens = self.list_asset_menuing_pairs(head=self.home_package_importable_name)
+        section.tokens = self.list_visible_asset_menuing_pairs(head=self.home_package_importable_name)
         section.return_value_attribute = 'key'
         return menu
 

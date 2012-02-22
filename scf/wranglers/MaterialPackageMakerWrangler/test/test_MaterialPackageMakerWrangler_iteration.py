@@ -29,7 +29,7 @@ def test_MaterialPackageMakerWrangler_iteration_04():
 def test_MaterialPackageMakerWrangler_iteration_05():
 
     assert ('PitchRangeInventoryMaterialPackageMaker', 
-        'pitch range inventory material package maker') in wrangler.list_asset_menuing_pairs()
+        'pitch range inventory material package maker') in wrangler.list_visible_asset_menuing_pairs()
 
 
 def test_MaterialPackageMakerWrangler_iteration_06():
