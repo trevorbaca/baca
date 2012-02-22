@@ -54,7 +54,7 @@ class MaterialPackageMakerWrangler(PackageWrangler):
     def list_score_internal_asset_container_importable_names(self, head=None):
         return []
 
-    def list_wrangled_package_lowercase_spaced_class_names(self, head=None):
+    def list_wrangled_asset_human_readable_names(self, head=None):
         result = []
         for name in self.list_wrangled_asset_short_names(head=head):
             spaced_class_name = iotools.uppercamelcase_to_space_delimited_lowercase(name)
@@ -63,7 +63,7 @@ class MaterialPackageMakerWrangler(PackageWrangler):
 
     def list_wrangled_asset_menuing_pairs(self, head=None):
         keys = self.list_wrangled_asset_short_names(head=head)
-        bodies = self.list_wrangled_package_lowercase_spaced_class_names(head=head)
+        bodies = self.list_wrangled_asset_human_readable_names(head=head)
         return zip(keys, bodies)
         
     def make_class_selection_menu(self, head=None):
@@ -74,7 +74,7 @@ class MaterialPackageMakerWrangler(PackageWrangler):
 
     def make_main_menu(self, head=None):
         menu, section = self.make_menu(where=self.where(), is_numbered=True)
-        section.tokens = self.list_wrangled_package_lowercase_spaced_class_names(head=head)
+        section.tokens = self.list_wrangled_asset_human_readable_names(head=head)
         section = menu.make_section()
         section.append(('new', 'new material package maker'))
         return menu

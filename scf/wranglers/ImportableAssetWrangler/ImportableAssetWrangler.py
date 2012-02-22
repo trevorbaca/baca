@@ -53,8 +53,8 @@ class ImportableAssetWrangler(AssetWrangler):
     def list_wrangled_asset_proxies(self, head=None):
         result = []
         for package_importable_name in self.list_wrangled_asset_importable_names(head=head):
-            wrangled_package_proxy = self.get_wrangled_asset_proxy(package_importable_name)
-            result.append(wrangled_package_proxy)
+            wrangled_asset_proxy = self.get_wrangled_asset_proxy(package_importable_name)
+            result.append(wrangled_asset_proxy)
         return result
 
     def list_wrangled_asset_importable_names(self, head=None):
