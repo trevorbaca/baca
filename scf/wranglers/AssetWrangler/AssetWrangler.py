@@ -51,6 +51,8 @@ class AssetWrangler(SCFObject):
 
     # current asset container #
 
+    # TODO: current_asset_container_human_readable_name
+
     @property
     def current_asset_container_importable_name(self):
         if self.session.is_in_score:
@@ -65,20 +67,26 @@ class AssetWrangler(SCFObject):
         return self.package_importable_name_to_path_name(
             self.current_asset_container_importable_name)
 
+    # TODO: current_asset_container_proxy
+
     # score-external asset container #
 
-    @property
+    # TODO: list_score_external_asset_container_human_readable_names
+
+    @property # TODO: change to method
     def score_external_asset_container_importable_name(self):
         return self._score_external_asset_container_importable_name
     
-    @property
+    @property # TODO: demote
     def score_external_asset_container_initializer_file_name(self):
         return os.path.join(self.score_external_asset_container_path_name, '__init__.py')
 
-    @property
+    @property # TODO: change to method
     def score_external_asset_container_path_name(self):
         return self.package_importable_name_to_path_name(
             self.score_external_asset_container_importable_name)
+
+    # TODO: list_score_external_asset_container_proxies
 
     # infix #
 
@@ -88,6 +96,10 @@ class AssetWrangler(SCFObject):
 
     # temporary asset #
 
+    # TODO: temporary_asset_human_readable_name
+
+    # TODO: ImportableAssetWrangler.temporary_asset_importable_name
+
     @property
     def temporary_asset_path_name(self):
         return os.path.join(self.current_asset_container_path_name, self.temporary_asset_short_name)
@@ -95,6 +107,8 @@ class AssetWrangler(SCFObject):
     @property
     def temporary_asset_short_name(self):
         self.print_implemented_on_child_classes()
+
+    # TODO: temporary_asset_proxy
 
     ### PUBLIC METHODS ###
     
@@ -124,6 +138,8 @@ class AssetWrangler(SCFObject):
 
     # asset containers (all) #
 
+    # TODO: list_asset_container_human_readable_names
+
     def list_asset_container_importable_names(self, head=None):
         result = [] 
         if self.score_external_asset_container_importable_name:
@@ -136,6 +152,8 @@ class AssetWrangler(SCFObject):
         for package_importable_name in self.list_asset_container_importable_names(head=head):
             result.append(self.package_importable_name_to_path_name(package_importable_name))
         return result
+
+    # TODO: list_asset_container_proxies
 
     # assets (all) #
 
@@ -190,6 +208,8 @@ class AssetWrangler(SCFObject):
 
     # score-internal asset containers #
 
+    # TODO: list_score_internal_asset_container_human_readable_names
+
     def list_score_internal_asset_container_importable_names(self, head=None):
         result = []
         for score_package_short_name in self.list_score_package_short_names(head=head):
@@ -207,7 +227,13 @@ class AssetWrangler(SCFObject):
             result.append(self.package_importable_name_to_path_name(package_importable_name))
         return result            
 
+    # TODO: list_score_internal_asset_container_proxies
+
     # score-internal assets #
+
+    # TODO: list_score_internal_asset_human_readable_names
+
+    # TODO: ImportableAssetWrangler.list_score_internal_asset_importable_names
 
     def list_score_internal_asset_path_names(self, head=None):
         result = []
@@ -216,6 +242,8 @@ class AssetWrangler(SCFObject):
                 if name[0].isalpha():
                     result.append(os.path.join(path_name, name))
         return result
+
+    # TODO: list_score_internal_asset_proxies
 
     # visible assets #
 
