@@ -48,7 +48,7 @@ class ScorePackageWrangler(PackageWrangler):
         return result
 
     def list_visible_asset_menuing_pairs(self, head=None):
-        keys = self.list_visible_asset_short_names()
+        keys = self.list_visible_asset_importable_names()
         bodies = self.visible_score_titles_with_years
         menuing_pairs = zip(keys, bodies)
         tmp = iotools.strip_diacritics_from_binary_string
