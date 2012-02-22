@@ -42,7 +42,7 @@ def test_MaterialPackageWrangler_read_only_attributes_04():
 
 
 def test_MaterialPackageWrangler_read_only_attributes_05():
-    '''Score-external wrangled assets.
+    '''Score-external assets.
     '''
 
     assert 'red notes' in wrangler.score_external_asset_human_readable_names
@@ -70,7 +70,7 @@ def test_MaterialPackageWrangler_read_only_attributes_07():
     
 
 def test_MaterialPackageWrangler_read_only_attributes_08():
-    '''Wrangler currently in score.
+    '''In-score wrangler.
     '''
 
     studio = baca.scf.studio.Studio()

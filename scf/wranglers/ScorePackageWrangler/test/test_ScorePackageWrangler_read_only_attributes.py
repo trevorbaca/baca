@@ -35,7 +35,7 @@ def test_ScorePackageWrangler_read_only_attributes_04():
 
 
 def test_ScorePackageWrangler_read_only_attributes_05():
-    '''Score-external wrangled assets.
+    '''Score-external assets.
     '''
 
     assert wrangler.score_external_asset_importable_names == []
