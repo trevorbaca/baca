@@ -9,8 +9,10 @@ class ImportableAssetWrangler(AssetWrangler):
     @property
     def score_external_asset_importable_names(self):
         result = []
-        for short_name in self.score_external_asset_short_names:
-            result.append('{}.{}'.format(self.score_external_asset_container_importable_name, short_name))
+        if self.score_external_asset_container_path_name:
+            for name in os.listdir(self.score_external_asset_container_path_name):
+                if name[0].isalpha():
+                    result.append(self.dot_join([self.score_external_asset_container_importable_name, name]))
         return result
 
     @property

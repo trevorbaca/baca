@@ -49,7 +49,6 @@ def test_MaterialPackageWrangler_read_only_attributes_05():
     assert 'baca.materials.red_notes' in wrangler.score_external_asset_importable_names
     assert '/Users/trevorbaca/Documents/other/baca/materials/red_notes' in \
         wrangler.score_external_asset_path_names
-    assert 'red_notes' in wrangler.score_external_asset_short_names
 
 
 def test_MaterialPackageWrangler_read_only_attributes_06():

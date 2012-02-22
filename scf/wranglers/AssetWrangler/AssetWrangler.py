@@ -126,15 +126,6 @@ class AssetWrangler(SCFObject):
             result.append(asset_proxy)
         return result
 
-    @property
-    def score_external_asset_short_names(self):
-        result = []
-        if self.score_external_asset_container_path_name:
-            for name in os.listdir(self.score_external_asset_container_path_name):
-                if name[0].isalpha():
-                    result.append(name)
-        return result
-
     # infix #
 
     @property
