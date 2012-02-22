@@ -54,23 +54,15 @@ class MaterialPackageMakerWrangler(PackageWrangler):
     def list_score_internal_asset_container_importable_names(self, head=None):
         return []
 
-    # TODO: use this implementation to avoid short names
-#    def list_asset_human_readable_names(self, head=None):
-#        result = []
-#        for path_name in self.list_asset_path_names(head=head):
-#            path_name = path_name.rstrip(os.path.sep)
-#            base_name = os.path.basename(path_name)
-#            if base_name == 'MaterialPackageMaker':
-#                continue
-#            human_readable_name = iotools.uppercamelcase_to_space_delimited_lowercase(base_name)
-#            result.append(human_readable_name)
-#        return result
-
     def list_asset_human_readable_names(self, head=None):
         result = []
-        for name in self.list_asset_short_names(head=head):
-            spaced_class_name = iotools.uppercamelcase_to_space_delimited_lowercase(name)
-            result.append(spaced_class_name)
+        for path_name in self.list_asset_path_names(head=head):
+            path_name = path_name.rstrip(os.path.sep)
+            base_name = os.path.basename(path_name)
+            if base_name == 'MaterialPackageMaker':
+                continue
+            human_readable_name = iotools.uppercamelcase_to_space_delimited_lowercase(base_name)
+            result.append(human_readable_name)
         return result
 
     def list_visible_asset_menuing_pairs(self, head=None):
@@ -80,7 +72,7 @@ class MaterialPackageMakerWrangler(PackageWrangler):
         
     def make_class_selection_menu(self, head=None):
         menu, section = self.make_menu(where=self.where(), is_keyed=False, is_numbered=True)
-        section.tokens = self.list_visible_asset_menuing_pairs(head=self.home_package_importable_name)
+        section.tokens = self.list_visible_asset_menuing_pairs(head=head)
         section.return_value_attribute = 'key'
         return menu
 
