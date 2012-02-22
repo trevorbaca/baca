@@ -88,9 +88,10 @@ class MaterialPackageWrangler(PackageWrangler):
     # TODO: write test
     def make_makermade_material_package_interactively(self):
         self.push_backtrack()
-        result = self.material_package_maker_wrangler.select_asset_short_name_interactively(
+        result = self.material_package_maker_wrangler.select_asset_importable_name_interactively(
             clear=False, cache=True)
-        material_package_maker_class_name = result
+        material_package_maker_importable_name = result
+        material_package_maker_class_name = material_package_maker_importable_name.split('.')[-1]
         self.pop_backtrack()
         if self.backtrack():
             return

@@ -42,7 +42,7 @@ class ChunkPackageWrangler(PackageWrangler):
 
     def make_main_menu(self, head=None):
         menu, section = self.make_menu(where=self.where(), is_numbered=True)
-        section.tokens = self.list_asset_short_names(head=head)
+        section.tokens = self.list_asset_human_readable_names(head=head)
         section = menu.make_section()
         section.append(('new', 'new chunk'))
         return menu

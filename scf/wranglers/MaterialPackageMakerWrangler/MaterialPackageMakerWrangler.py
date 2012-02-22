@@ -62,7 +62,7 @@ class MaterialPackageMakerWrangler(PackageWrangler):
         return result
 
     def list_visible_asset_menuing_pairs(self, head=None):
-        keys = self.list_asset_short_names(head=head)
+        keys = self.list_asset_importable_names(head=head)
         bodies = self.list_asset_human_readable_names(head=head)
         return zip(keys, bodies)
         
@@ -197,7 +197,7 @@ class MaterialPackageMakerWrangler(PackageWrangler):
         self.restore_breadcrumbs(cache=cache)
 
     # TODO: write test
-    def select_asset_short_name_interactively(
+    def select_asset_importable_name_interactively(
         self, clear=True, cache=False, head=None, user_input=None):
         self.cache_breadcrumbs(cache=cache)
         while True:

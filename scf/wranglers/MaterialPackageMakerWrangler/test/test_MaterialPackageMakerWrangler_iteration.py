@@ -28,7 +28,7 @@ def test_MaterialPackageMakerWrangler_iteration_04():
 
 def test_MaterialPackageMakerWrangler_iteration_05():
 
-    assert ('PitchRangeInventoryMaterialPackageMaker', 
+    assert ('baca.scf.makers.PitchRangeInventoryMaterialPackageMaker', 
         'pitch range inventory material package maker') in wrangler.list_visible_asset_menuing_pairs()
 
 
