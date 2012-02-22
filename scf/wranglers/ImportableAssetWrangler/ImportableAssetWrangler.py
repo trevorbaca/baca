@@ -6,8 +6,9 @@ class ImportableAssetWrangler(AssetWrangler):
 
     ### READ-ONLY PUBLIC ATTRIBUTES ###
 
-    @property
-    def score_external_asset_importable_names(self):
+    #@property
+    #def score_external_asset_importable_names(self):
+    def list_score_external_asset_importable_names(self, head=None):
         result = []
         if self.score_external_asset_container_path_name:
             for name in os.listdir(self.score_external_asset_container_path_name):
@@ -62,7 +63,8 @@ class ImportableAssetWrangler(AssetWrangler):
     def list_asset_importable_names(self, head=None):
         if head is None: head = ''
         result, asset_importable_names = [], []
-        asset_importable_names.extend(self.score_external_asset_importable_names)
+        #asset_importable_names.extend(self.score_external_asset_importable_names)
+        asset_importable_names.extend(self.list_score_external_asset_importable_names(head=head))
         asset_importable_names.extend(
             self.list_score_internal_asset_importable_names(head=head))
         for asset_importable_name in asset_importable_names:
