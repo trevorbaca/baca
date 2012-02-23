@@ -1,3 +1,4 @@
+from baca.scf.editors.MusicSpecifierEditor import MusicSpecifierEditor
 from baca.scf.proxies.ModuleProxy import ModuleProxy
 import os
 
@@ -38,7 +39,7 @@ class MusicSpecifierModuleProxy(ModuleProxy):
     # MusicSpecifierEditor must handle reading from disk and writing to disk
     def edit_music_specifier_at_number(self, number, include_newline=True):
         number = int(number)
-        self.music_specifier_editor.edit_at_number(number)
+        self.editor.edit_at_number(number)
         
     def fix(self):
         self.print_not_implemented()
@@ -60,7 +61,7 @@ class MusicSpecifierModuleProxy(ModuleProxy):
         return menu
 
     def make_music_specifier_menu_tokens(self):
-        return self.music_specifier_editor.make_menu_tokens()
+        return self.editor.target_attribute_tokens
 
     def parse(self):
         is_parsable = True
