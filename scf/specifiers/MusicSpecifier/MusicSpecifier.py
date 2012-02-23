@@ -18,6 +18,7 @@ class MusicSpecifier(Specifier):
     ### READ-ONLY ATTRIBUTES ###
 
     storage_module_import_statements = [
+        'from abjad.tools.contexttools.TempoMark import TempoMark',
         'from baca.scf.specifiers.MusicSpecifier import MusicSpecifier',
         'from baca.scf.specifiers.PerformerContributionSpecifierList import PerformerContributionSpecifierList',
         ]

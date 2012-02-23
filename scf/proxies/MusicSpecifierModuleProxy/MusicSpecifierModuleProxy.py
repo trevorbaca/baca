@@ -100,10 +100,16 @@ class MusicSpecifierModuleProxy(ModuleProxy):
             target = locals().get(self.target_name_in_storage_module, None)
             return target
 
+    def preprend_target_name(self, target_format_pieces):
+        if target_format_pieces:
+            target_format_pieces[0] = '{} = {}'.format(
+                self.target_name_in_storage_module, target_format_pieces[0])
+        return target_format_pieces
+
     def write_target_to_disk(self, target_in_memory):
         self.parse()
         self.setup_statements[:] = self.conditionally_add_terminal_newlines(
             self.target_in_memory.storage_module_import_statements)[:]
         self.target_lines[:] = self.conditionally_add_terminal_newlines(
-            self.target_in_memory.format_pieces)
+            self.preprend_target_name(self.target_in_memory.format_pieces))
         ModuleProxy.write_to_disk(self)
