@@ -9,7 +9,6 @@ class ModuleProxy(ParsableFileProxy, ImportableAssetProxy):
         path_name = self.module_importable_name_to_path_name(module_importable_name)
         ParsableFileProxy.__init__(self, path_name, session=session)
         ImportableAssetProxy.__init__(self, asset_full_name=path_name, session=self.session)
-        self._module_importable_name = module_importable_name
 
     ### READ-ONLY ATTRIBUTES ###
 
@@ -30,13 +29,8 @@ class ModuleProxy(ParsableFileProxy, ImportableAssetProxy):
         return self.short_name_without_extension
 
     @property
-    def importable_name(self):
-        return self.module_importable_name
-        
-    @property
     def module_importable_name(self):
-        return self._module_importable_name
-        #return self.importable_name
+        return self.importable_name
 
     @property
     def module_short_name(self):
