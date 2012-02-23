@@ -402,5 +402,10 @@ class SCFObject(object):
         if cache:
             self.session._breadcrumb_stack[:] = self.session.breadcrumb_cache_stack.pop()
 
+    def strip_extension_from_base_name(self, base_name):
+        if '.' in base_name:
+            return base_name[:base_name.rindex('.')]
+        return base_name
+
     def where(self):
         return inspect.stack()[1]

@@ -33,7 +33,6 @@ class ImportableAssetWrangler(AssetWrangler):
     def list_asset_proxies(self, head=None):
         result = []
         for package_importable_name in self.list_asset_importable_names(head=head):
-            #self.debug(package_importable_name, 'pp')
             asset_proxy = self.get_asset_proxy(package_importable_name)
             result.append(asset_proxy)
         return result
@@ -56,7 +55,9 @@ class ImportableAssetWrangler(AssetWrangler):
                     asset_container_importable_name)
                 for name in os.listdir(asset_path_name):
                     if name[0].isalpha():
-                        result.append('{}.{}'.format(asset_container_importable_name, name))
+                        importable_base_name = self.strip_extension_from_base_name(name)
+                        result.append('{}.{}'.format(
+                            asset_container_importable_name, importable_base_name))
             else:
                 result.append(asset_container_importable_name)
         return result

@@ -126,7 +126,6 @@ class AssetWrangler(SCFObject):
         return results
 
     def get_asset_proxy(self, asset_full_name):
-        #self.debug(asset_full_name)
         return self.asset_class(asset_full_name, session=self.session)
 
     # asset containers (all) #
