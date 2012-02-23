@@ -107,7 +107,7 @@ class AssetWrangler(SCFObject):
 
     @property
     def temporary_asset_proxy(self):
-        return self.asset_class(self.temporary_asset_importable_name)
+        return self.get_asset_proxy(self.temporary_asset_importable_name)
 
     ### PUBLIC METHODS ###
     
@@ -325,7 +325,7 @@ class AssetWrangler(SCFObject):
             asset_proxy.profile()
 
     # TODO: write test
-    def remove_asset_interactively(self, head=None):
+    def remove_assets_interactively(self, head=None):
         getter = self.make_getter(where=self.where())
         argument_list = self.list_visible_asset_path_names(head=head)
         getter.append_argument_range(self.asset_class_plural_human_readable_name, argument_list)
