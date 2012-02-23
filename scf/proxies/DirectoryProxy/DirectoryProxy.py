@@ -5,13 +5,6 @@ import subprocess
 
 class DirectoryProxy(AssetProxy):
 
-    # TODO: remove initializer in favor of AssetProxy initializer
-    #def __init__(self, directory_name=None, session=None):
-    #    AssetProxy.__init__(self, session=session)
-    #    self._directory_name = directory_name
-    def __init__(self, directory_name=None, session=None):
-        AssetProxy.__init__(self, path_name=directory_name, session=session)
-
     ### OVERLOADS ###
 
     def __eq__(self, other):

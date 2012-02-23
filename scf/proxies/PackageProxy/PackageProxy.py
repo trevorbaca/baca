@@ -11,8 +11,8 @@ import sys
 class PackageProxy(ImportableAssetProxy, DirectoryProxy):
 
     def __init__(self, package_importable_name=None, session=None):
-        directory_name = self.package_importable_name_to_path_name(package_importable_name)
-        DirectoryProxy.__init__(self, directory_name=directory_name, session=session)
+        path_name = self.package_importable_name_to_path_name(package_importable_name)
+        DirectoryProxy.__init__(self, path_name=path_name, session=session)
         self._importable_name = package_importable_name
 
     ### OVERLOADS ###
