@@ -1,9 +1,10 @@
 import baca
 
+scf_object = baca.scf.core.SCFObject()
+
 
 def test_SCFObject_path_name_to_package_importable_name_01():
 
-    scf_object = baca.scf.core.SCFObject()
     assert scf_object.path_name_to_package_importable_name(
         '/Users/trevorbaca/Documents/other/baca') == 'baca'
     assert scf_object.path_name_to_package_importable_name(
@@ -14,7 +15,6 @@ def test_SCFObject_path_name_to_package_importable_name_01():
 
 def test_SCFObject_path_name_to_package_importable_name_02():
 
-    scf_object = baca.scf.core.SCFObject()
     assert scf_object.path_name_to_package_importable_name(
         '/Users/trevorbaca/Documents/other/baca/') == 'baca'
     assert scf_object.path_name_to_package_importable_name(
@@ -25,7 +25,6 @@ def test_SCFObject_path_name_to_package_importable_name_02():
 
 def test_SCFObject_path_name_to_package_importable_name_03():
 
-    scf_object = baca.scf.core.SCFObject()
     assert scf_object.path_name_to_package_importable_name(
         '/Users/trevorbaca/Documents/scores/aracilik') == 'aracilik'
     assert scf_object.path_name_to_package_importable_name(
@@ -36,10 +35,17 @@ def test_SCFObject_path_name_to_package_importable_name_03():
 
 def test_SCFObject_path_name_to_package_importable_name_04():
 
-    scf_object = baca.scf.core.SCFObject()
     assert scf_object.path_name_to_package_importable_name(
         '/Users/trevorbaca/Documents/scores/aracilik/') == 'aracilik'
     assert scf_object.path_name_to_package_importable_name(
         '/Users/trevorbaca/Documents/scores/aracilik/mus/') == 'aracilik.mus'
     assert scf_object.path_name_to_package_importable_name(
         '/Users/trevorbaca/Documents/scores/aracilik/mus/materials/') == 'aracilik.mus.materials'
+
+
+def test_SCFObject_path_name_to_package_importable_name_05():
+
+    assert scf_object.path_name_to_package_importable_name(
+        '/Users/trevorbaca/Documents/scores/aracilik/foo') == 'aracilik.foo'
+    assert scf_object.path_name_to_package_importable_name(
+        '/Users/trevorbaca/Documents/scores/aracilik/foo.py') == 'aracilik.foo'

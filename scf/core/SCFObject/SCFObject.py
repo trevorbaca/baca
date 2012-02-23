@@ -334,11 +334,12 @@ class SCFObject(object):
         base_name = self.strip_extension_from_base_name(base_name)
         return self.change_string_to_human_readable_string(base_name)
 
-    # TODO: WRONG! Make handle /Users/trevorbaca/Documents/other/baca/scf/foo.py correctly!
     def path_name_to_package_importable_name(self, path_name):
         if path_name is None:
             return
         path_name = path_name.rstrip(os.path.sep)
+        if path_name.endswith('.py'):
+            path_name = path_name[:-3]
         if path_name.startswith(self.home_package_path_name):
             prefix_length = len(os.path.dirname(self.home_package_path_name)) + 1
         elif path_name.startswith(self.scores_directory_name):
