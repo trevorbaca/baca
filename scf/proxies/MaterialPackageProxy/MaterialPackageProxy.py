@@ -444,22 +444,22 @@ class MaterialPackageProxy(PackageProxy):
     def remove_illustration_builder_module(self, prompt=True):
         self.remove_illustration_pdf(prompt=False)
         if self.has_illustration_builder_module:
-            self.illustration_builder_module_proxy.remove(prompt=prompt)
+            self.illustration_builder_module_proxy.remove(is_interactive=prompt)
 
     def remove_illustration_ly(self, prompt=True):
         if self.has_illustration_ly:
-            self.illustration_ly_file_proxy.remove(prompt=prompt)
+            self.illustration_ly_file_proxy.remove(is_interactive=prompt)
 
     def remove_illustration_pdf(self, prompt=True):
         self.remove_illustration_ly(prompt=False)
         if self.has_illustration_pdf:
-            self.illustration_pdf_file_proxy.remove(prompt=prompt)
+            self.illustration_pdf_file_proxy.remove(is_interactive=prompt)
 
     def remove_material_definition_module(self, prompt=True):
         self.remove_output_material_module(prompt=False)
         self.remove_illustration_builder_module(prompt=False)
         if self.has_material_definition_module:
-            self.material_definition_module_proxy.remove(prompt=prompt)
+            self.material_definition_module_proxy.remove(is_interactive=prompt)
 
     def remove_material_package(self):
         self.remove()
@@ -468,7 +468,7 @@ class MaterialPackageProxy(PackageProxy):
     def remove_output_material_module(self, prompt=True):
         self.remove_illustration_builder_module(prompt=False)
         if self.has_output_material_module:
-            self.output_material_module_proxy.remove(prompt=prompt)
+            self.output_material_module_proxy.remove(is_interactive=prompt)
 
     # NOTE: not currently used
     def remove_parent_initializer_pyc_file(self):
@@ -479,7 +479,7 @@ class MaterialPackageProxy(PackageProxy):
         
     def remove_user_input_module(self, prompt=True):
         if self.has_user_input_module:
-            self.user_input_module_proxy.remove(prompt=prompt)
+            self.user_input_module_proxy.remove(is_interactive=prompt)
 
     def edit_output_material_interactively(self):
         if not self.has_output_material_editor:
@@ -736,9 +736,9 @@ class MaterialPackageProxy(PackageProxy):
         self.print_not_implemented()
         self.proceed(prompt=prompt)
 
-    def remove(self):
+    def remove(self, is_interactive=False):
         self.remove_material_from_materials_initializer()
-        PackageProxy.remove(self)
+        PackageProxy.remove(self, is_interactive=is_interactive)
 
     def remove_material_from_materials_initializer(self):
         import_statement = 'safe_import(globals(), {!r}, {!r})\n'

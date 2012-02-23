@@ -130,7 +130,7 @@ def test_MaterialPackageWrangler_run_handmade_package_05():
     try:
         studio.run(user_input=
             'm h testnotes default default '
-            'testnotes mddelete default q')
+            'testnotes mddelete remove default q')
         assert studio.package_exists('baca.materials.testnotes')
         mpp = baca.scf.proxies.MaterialPackageProxy('baca.materials.testnotes')
         assert mpp.is_handmade and not mpp.is_data_only
@@ -190,7 +190,7 @@ def test_MaterialPackageWrangler_run_handmade_package_07():
             'm h testnotes default default '
             'testnotes mdcanned canned_testnotes_material_definition.py default '
             'omm default '
-            'omdelete default q')
+            'omdelete remove default q')
         assert studio.package_exists('baca.materials.testnotes')
         mpp = baca.scf.proxies.MaterialPackageProxy('baca.materials.testnotes')
         assert mpp.is_handmade and not mpp.is_data_only

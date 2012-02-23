@@ -45,47 +45,51 @@ class AssetProxy(SCFObject):
     def fix(self):
         self.print_implemented_on_child_classes()
 
-    def remove(self):
+    def remove(self, is_interactive=False):
         if self.is_in_repository:
-            result = self.remove_versioned_asset()
+            result = self.remove_versioned_asset(is_interactive=is_interactive)
         else:
-            result = self.remove_nonversioned_asset()
+            result = self.remove_nonversioned_asset(is_interactive=is_interactive)
         return result
 
-    def remove_nonversioned_asset(self):
-        line = '{} will be removed.\n'.format(self.path_name)
-        self.display(line)
-        getter = self.make_getter(where=self.where())
-        getter.append_string("type 'remove' to proceed")
-        response = getter.run()
-        if self.backtrack():
-            return
-        if response == 'remove':
+    def remove_nonversioned_asset(self, is_interactive=False):
+        if is_interactive:
+            line = '{} will be removed.\n'.format(self.path_name)
+            self.display(line)
+            getter = self.make_getter(where=self.where())
+            getter.append_string("type 'remove' to proceed")
+            response = getter.run()
+            if self.backtrack():
+                return
+        if not is_interactive or response == 'remove':
             command = 'rm -rf {}'.format(self.path_name)
             proc = subprocess.Popen(command, shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
             proc.stdout.readline()
-            line = 'removed {}.\n'.format(self.path_name)
-            self.display(line)
+            if is_interactive:
+                line = 'removed {}.\n'.format(self.path_name)
+                self.display(line)
             return True
         return False
 
-    def remove_versioned_asset(self):
-        line = '{} will be completely removed from the repository!\n'.format(self.path_name)
-        self.display(line)
-        getter = self.make_getter(where=self.where())
-        getter.append_string("type 'remove' to proceed")
-        response = getter.run()
-        if self.backtrack():
-            return
-        if response == 'remove':
+    def remove_versioned_asset(self, is_interactive=False):
+        if is_interactive:
+            line = '{} will be completely removed from the repository!\n'.format(self.path_name)
+            self.display(line)
+            getter = self.make_getter(where=self.where())
+            getter.append_string("type 'remove' to proceed")
+            response = getter.run()
+            if self.backtrack():
+                return
+        if not is_interactive or response == 'remove':
             command = 'svn --force rm {}'.format(self.path_name)
             proc = subprocess.Popen(command, shell=True, stdout=subprocess.PIPE)
             proc.stdout.readline()
-            lines = []
-            lines.append('Removed {}.\n'.format(self.path_name))
-            lines.append('(Subversion will cause empty package to remain visible until next commit.)')
-            lines.append('')
-            self.display(lines)
+            if is_interactive:
+                lines = []
+                lines.append('Removed {}.\n'.format(self.path_name))
+                lines.append('(Subversion will cause empty package to remain visible until next commit.)')
+                lines.append('')
+                self.display(lines)
             return True
         return False
 

@@ -28,22 +28,25 @@ class FileProxy(AssetProxy):
         except:
             return False
 
+    # TODO: move up to AssetProxy
     @property
     def parent_directory_name(self):
         return os.path.dirname(self.path_name)
 
-    @property
-    def path_name(self):
-        return self._path_name
+#    @property
+#    def path_name(self):
+#        return self._path_name
 
     @property
     def sections(self):
         return ()
 
+    # TODO: move up to AssetProxy
     @property
     def short_name(self):
         return self.path_name.split(os.path.sep)[-1]
 
+    # TODO: move up to AssetProxy
     @property
     def short_name_without_extension(self):
         if '.' in self.short_name:
@@ -63,9 +66,11 @@ class FileProxy(AssetProxy):
             file_reference.write('')
             file_reference.close()
         
+    # TODO: move up to AssetProxy.copy_asset()
     def copy_file(self, new_path_name):
         shutil.copyfile(self.path_name, new_path_name)
 
+    # TODO: move up to AssetProxy.copy_asset_interactively()
     def copy_file_interactively(self, prompt=True):
         getter = self.make_getter()
         getter.append_string('new file name')
@@ -98,11 +103,7 @@ class FileProxy(AssetProxy):
         file_reference.close()
         return False
 
-    # TODO: extend for repository
-    def remove(self, prompt=False):
-        os.remove(self.path_name)
-        self.proceed('file deleted.', prompt=prompt)
-
+    # TODO: move up to AssetProxy
     def rename_file(self, new_path_name):
         os.rename(self.path_name, new_path_name)
         self._path_name = new_path_name

@@ -123,7 +123,7 @@ def test_MaterialPackageWrangler_run_data_only_package_05():
     try:
         studio.run(user_input=
             'm d testnumbers default '
-            'testnumbers mddelete default q')
+            'testnumbers mddelete remove default q')
         assert studio.package_exists('baca.materials.testnumbers')
         mpp = baca.scf.proxies.MaterialPackageProxy('baca.materials.testnumbers')
         assert mpp.is_data_only
@@ -181,7 +181,7 @@ def test_MaterialPackageWrangler_run_data_only_package_07():
             'm d testnumbers default '
             'testnumbers mdcanned canned_testnumbers_material_definition.py default '
             'omm default '
-            'omdelete default q')
+            'omdelete remove default q')
         assert studio.package_exists('baca.materials.testnumbers')
         mpp = baca.scf.proxies.MaterialPackageProxy('baca.materials.testnumbers')
         assert mpp.is_data_only

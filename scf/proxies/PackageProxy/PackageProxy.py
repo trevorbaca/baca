@@ -138,11 +138,11 @@ class PackageProxy(DirectoryProxy, ImportableAssetProxy):
         self.print_implemented_on_child_classes()
         return True
 
-    def remove_initializer(self, prompt=True):
+    def remove_initializer(self, is_interactive=True):
         if self.has_initializer:
             os.remove(self.initializer_file_name)
             line = 'initializer deleted.'
-            self.proceed(line, prompt=prompt)
+            self.proceed(line, prompt=is_interactive)
 
     def remove_tag(self, tag_name):
         tags = self.get_tags()
@@ -239,11 +239,11 @@ class PackageProxy(DirectoryProxy, ImportableAssetProxy):
         result = locals().get('tags') or OrderedDict([])
         return result
 
-    def remove(self):
-        result = DirectoryProxy.remove(self)
+    def remove(self, is_interactive=False):
+        result = DirectoryProxy.remove(self, is_interactive=is_interactive)
         if result:
             line = 'package removed.'
-            self.proceed(line)
+            self.proceed(line, prompt=is_interactive)
         
     def set_package_importable_name_interactively(self):
         getter = self.make_getter(where=self.where())
