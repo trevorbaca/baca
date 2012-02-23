@@ -23,6 +23,10 @@ class SCFObject(object):
     ### READ-ONLY PUBLIC ATTRIBUTES ###
 
     @property
+    def backtracking_source(self):
+        return
+
+    @property
     def boilerplate_directory(self):
         return os.path.join(self.scf_root_directory, 'boilerplate')
 

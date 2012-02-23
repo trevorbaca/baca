@@ -32,7 +32,7 @@ def test_MaterialPackageProxy_screenscrapes_02():
     '''
 
     material_proxy = baca.scf.proxies.MaterialPackageProxy('manos.mus.materials.black_pcs')
-    material_proxy.run('q')
+    material_proxy.run(user_input='q')
 
     assert material_proxy.transcript[-2] == \
     ['Black pcs',
