@@ -260,6 +260,18 @@ class SCFObject(object):
         finally:
             readline.set_startup_hook()
 
+    def is_module_name(self, expr):
+        if isinstance(expr, str):
+            if os.path.sep not in expr:
+                return True
+        return False
+
+    def is_path_name(self, expr):
+        if isinstance(expr, str):
+            if os.path.sep in expr:
+                return True
+        return False
+
     def list_score_package_short_names(self, head=None):
         result = []
         for name in os.listdir(self.scores_directory_name):
@@ -324,6 +336,14 @@ class SCFObject(object):
         package_importable_name = package_importable_name.replace(os.path.sep, '.')
         return package_importable_name
 
+    def pluralize_string(self, string):
+        if string.endswith('y'):
+            return string[:-1] + 'ies'
+        elif string.endswith('s', 'sh', 'x', 'z'):
+            return string + 'es'
+        else:
+            return string
+        
     def pop_backtrack(self):
         return self.session.backtracking_stack.pop()
 

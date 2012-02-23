@@ -16,12 +16,12 @@ class MusicSpecifierModuleWrangler(ModuleWrangler):
     ### READ-ONLY PUBLIC ATTRIBUTES ###
 
     @property
-    def breadcrumb(self):
-        return 'music specifiers'
-
-    @property
     def asset_class(self):
         return MusicSpecifierModuleProxy
+
+    @property
+    def breadcrumb(self):
+        return 'music specifiers'
 
     ### PUBLIC METHODS ###
 

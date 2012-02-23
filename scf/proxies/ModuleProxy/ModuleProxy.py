@@ -1,8 +1,9 @@
+from baca.scf.proxies.ImportableAssetProxy import ImportableAssetProxy
 from baca.scf.proxies.ParsableFileProxy import ParsableFileProxy
 import os
 
 
-class ModuleProxy(ParsableFileProxy):
+class ModuleProxy(ImportableAssetProxy, ParsableFileProxy):
 
     def __init__(self, module_importable_name, session=None):
         assert isinstance(module_importable_name, str), '{!r} is not a string.'.format(module_importable_name)

@@ -14,6 +14,10 @@ class ScorePackageWrangler(PackageWrangler):
     ### READ-ONLY PUBLIC ATTRIBUTES ###
 
     @property
+    def asset_class(self):
+        return ScorePackageProxy
+
+    @property
     def breadcrumb(self):
         return 'scores'
 
@@ -27,10 +31,6 @@ class ScorePackageWrangler(PackageWrangler):
         for score_package_proxy in self.list_visible_asset_proxies():
             result.append(score_package_proxy.title_with_year or '(untitled score)')
         return result
-
-    @property
-    def asset_class(self):
-        return ScorePackageProxy
 
     ### PUBLIC METHODS ###
 

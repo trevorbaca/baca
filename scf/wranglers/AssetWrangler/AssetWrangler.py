@@ -51,11 +51,11 @@ class AssetWrangler(SCFObject):
 
     @property
     def asset_class_human_readable_name(self):
-        return self.change_string_to_human_readable_string(self.asset_class.class_name)
+        return self.change_string_to_human_readable_string(self.asset_class.__name__)
 
     @property
     def asset_class_plural_human_readable_name(self):
-        return self.change_string_to_human_readable_string(self.asset_class.class_name) + 's'
+        return self.pluralize_string(self.asset_class_human_readable_name)
 
     @property
     def asset_container_class(self):
@@ -332,13 +332,14 @@ class AssetWrangler(SCFObject):
         result = getter.run()
         if self.backtrack():
             return
-        self.debug(result)
         asset_indices = [asset_number - 1 for asset_number in result]
         total_assets_removed = 0
         for asset_number in result:
             asset_index = asset_number - 1
             asset_path_name = argument_list[asset_index]
+            self.debug(asset_path_name)
             asset_proxy = self.get_asset_proxy(asset_path_name)
+            self.debug(asset_proxy)
             asset_proxy.remove()
             total_assets_removed += 1
         self.proceed('{} asset(s) removed.'.format(total_assets_remove))

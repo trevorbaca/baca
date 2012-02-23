@@ -1,5 +1,6 @@
 from abjad.tools import iotools
 from baca.scf.proxies.DirectoryProxy import DirectoryProxy
+from baca.scf.proxies.ImportableAssetProxy import ImportableAssetProxy
 from baca.scf.proxies.InitializerFileProxy import InitializerFileProxy
 from baca.scf.helpers import safe_import
 import os
@@ -7,7 +8,7 @@ import sys
 
 
 # TODO: find way to add 'list package directory' user command, somehow
-class PackageProxy(DirectoryProxy):
+class PackageProxy(ImportableAssetProxy, DirectoryProxy):
 
     def __init__(self, package_importable_name=None, session=None):
         directory_name = self.package_importable_name_to_path_name(package_importable_name)
