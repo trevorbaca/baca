@@ -181,25 +181,6 @@ class MaterialPackageMakerWrangler(PackageWrangler):
         stylesheet_file_pointer.write(stylesheet.format)
         stylesheet_file_pointer.close()
 
-    def run(self, cache=False, clear=True, head=None, user_input=None):
-        self.assign_user_input(user_input=user_input)
-        self.cache_breadcrumbs(cache=cache)
-        while True:
-            self.push_breadcrumb()
-            menu = self.make_main_menu(head=head)
-            result = menu.run(clear=clear)
-            if self.backtrack():
-                break
-            elif not result:
-                self.pop_breadcrumb()
-                continue
-            self.handle_main_menu_result(result)
-            if self.backtrack():
-                break
-            self.pop_breadcrumb()
-        self.pop_breadcrumb()
-        self.restore_breadcrumbs(cache=cache)
-
     # TODO: write test
     def select_asset_importable_name_interactively(
         self, clear=True, cache=False, head=None, user_input=None):

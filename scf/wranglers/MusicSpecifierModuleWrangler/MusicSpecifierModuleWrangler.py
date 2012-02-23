@@ -55,26 +55,6 @@ class MusicSpecifierModuleWrangler(ModuleWrangler):
         package_short_name = specifier_name.replace(' ', '_')
         self.make_asset(package_short_name)
 
-    def run(self, user_input=None, clear=True, cache=False):
-        self.conditionally_make_asset_container_packages()
-        self.assign_user_input(user_input=user_input)
-        self.cache_breadcrumbs(cache=cache)
-        while True:
-            self.push_breadcrumb()
-            menu = self.make_main_menu()
-            result = menu.run(clear=clear)
-            if self.backtrack():
-                break
-            elif not result:
-                self.pop_breadcrumb()
-                continue
-            self.handle_main_menu_result(result)
-            if self.backtrack():
-                break
-            self.pop_breadcrumb()
-        self.pop_breadcrumb()
-        self.restore_breadcrumbs(cache=cache)
-
     # TODO: write test
     def select_specifier_spaced_name_interactively(self, cache=False, clear=True, head=None):
         self.cache_breadcrumbs(cache=cache)
