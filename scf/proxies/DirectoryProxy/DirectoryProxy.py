@@ -31,7 +31,6 @@ class DirectoryProxy(AssetProxy):
 
     @property
     def directory_name(self):
-        #return self._directory_name
         return self._path_name
 
     @property
@@ -45,10 +44,6 @@ class DirectoryProxy(AssetProxy):
             return False
         else:
             return True
-
-    @property
-    def path_name(self):
-        return self.directory_name
 
     @property
     def svn_add_command(self):

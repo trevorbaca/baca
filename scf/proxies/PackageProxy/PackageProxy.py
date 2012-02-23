@@ -8,12 +8,12 @@ import sys
 
 
 # TODO: find way to add 'list package directory' user command, somehow
-class PackageProxy(ImportableAssetProxy, DirectoryProxy):
+class PackageProxy(DirectoryProxy, ImportableAssetProxy):
 
     def __init__(self, package_importable_name=None, session=None):
         path_name = self.package_importable_name_to_path_name(package_importable_name)
         DirectoryProxy.__init__(self, path_name=path_name, session=session)
-        self._importable_name = package_importable_name
+        ImportableAssetProxy.__init__(self, asset_full_name=package_importable_name, session=self.session)
 
     ### OVERLOADS ###
 
@@ -67,10 +67,6 @@ class PackageProxy(ImportableAssetProxy, DirectoryProxy):
     def initializer_file_proxy(self):
         if self.has_initializer:
             return InitializerFileProxy(self.initializer_file_name, session=self.session)
-
-    @property
-    def importable_name(self):
-        return self._importable_name
 
     @property
     def package_root_name(self):
