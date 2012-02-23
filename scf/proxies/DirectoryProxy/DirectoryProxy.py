@@ -34,18 +34,6 @@ class DirectoryProxy(AssetProxy):
         return self._path_name
 
     @property
-    def is_in_repository(self):
-        if self.directory_name is None:
-            return False
-        command = 'svn st {}'.format(self.directory_name)
-        proc = subprocess.Popen(command, shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
-        first_line = proc.stdout.readline()
-        if first_line.startswith(('?', 'svn: warning:')):
-            return False
-        else:
-            return True
-
-    @property
     def svn_add_command(self):
         return 'cd {} && svn-add-all'.format(self.directory_name)
     
@@ -66,55 +54,3 @@ class DirectoryProxy(AssetProxy):
         self.display(self.directory_contents, capitalize_first_character=False)
         self.display('')
         self.session.hide_next_redraw = True
-
-    def remove(self):
-        if self.is_in_repository:
-            result = self.remove_versioned_directory()
-        else:
-            result = self.remove_nonversioned_directory()    
-        return result
-
-    def remove_nonversioned_directory(self):
-        line = '{} will be removed.\n'.format(self.directory_name)
-        self.display(line)
-        getter = self.make_getter(where=self.where())
-        getter.append_string("type 'remove' to proceed")
-        response = getter.run()
-        if self.backtrack():
-            return
-        if response == 'remove':
-            command = 'rm -rf {}'.format(self.directory_name)
-            proc = subprocess.Popen(command, shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
-            proc.stdout.readline()
-            line = 'removed {}.\n'.format(self.directory_name)
-            self.display(line)
-            return True
-        return False
-
-    def remove_versioned_directory(self):
-        line = '{} will be completely removed from the repository!\n'.format(self.directory_name)
-        self.display(line)
-        getter = self.make_getter(where=self.where())
-        getter.append_string("type 'remove' to proceed")
-        response = getter.run()
-        if self.backtrack():
-            return
-        if response == 'remove':
-            command = 'svn --force rm {}'.format(self.directory_name)
-            proc = subprocess.Popen(command, shell=True, stdout=subprocess.PIPE)
-            proc.stdout.readline()
-            lines = []
-            lines.append('Removed {}.\n'.format(self.directory_name))
-            lines.append('(Subversion will cause empty package to remain visible until next commit.)')
-            lines.append('')
-            self.display(lines)
-            return True
-        return False
-
-    def run_py_test(self, prompt=True):
-        proc = subprocess.Popen('py.test {}'.format(self.directory_name), shell=True, stdout=subprocess.PIPE)
-        lines = [line.strip() for line in proc.stdout.readlines()]
-        if lines:
-            self.display(lines)
-        line = 'tests run.'
-        self.proceed(line, prompt=prompt)

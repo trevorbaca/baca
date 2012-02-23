@@ -15,6 +15,18 @@ class AssetProxy(SCFObject):
     @property
     def human_readable_name(self):
         return self.short_name
+
+    @property
+    def is_in_repository(self):
+        if self.path_name is None:
+            return False
+        command = 'svn st {}'.format(self.path_name)
+        proc = subprocess.Popen(command, shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
+        first_line = proc.stdout.readline()
+        if first_line.startswith(('?', 'svn: warning:')):
+            return False
+        else:
+            return True
         
     @property
     def path_name(self):
@@ -32,6 +44,50 @@ class AssetProxy(SCFObject):
 
     def fix(self):
         self.print_implemented_on_child_classes()
+
+    def remove(self):
+        if self.is_in_repository:
+            result = self.remove_versioned_asset()
+        else:
+            result = self.remove_nonversioned_asset()
+        return result
+
+    def remove_nonversioned_asset(self):
+        line = '{} will be removed.\n'.format(self.directory_name)
+        self.display(line)
+        getter = self.make_getter(where=self.where())
+        getter.append_string("type 'remove' to proceed")
+        response = getter.run()
+        if self.backtrack():
+            return
+        if response == 'remove':
+            command = 'rm -rf {}'.format(self.path_name)
+            proc = subprocess.Popen(command, shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
+            proc.stdout.readline()
+            line = 'removed {}.\n'.format(self.path_name)
+            self.display(line)
+            return True
+        return False
+
+    def remove_versioned_asset(self):
+        line = '{} will be completely removed from the repository!\n'.format(self.path_name)
+        self.display(line)
+        getter = self.make_getter(where=self.where())
+        getter.append_string("type 'remove' to proceed")
+        response = getter.run()
+        if self.backtrack():
+            return
+        if response == 'remove':
+            command = 'svn --force rm {}'.format(self.path_name)
+            proc = subprocess.Popen(command, shell=True, stdout=subprocess.PIPE)
+            proc.stdout.readline()
+            lines = []
+            lines.append('Removed {}.\n'.format(self.path_name))
+            lines.append('(Subversion will cause empty package to remain visible until next commit.)')
+            lines.append('')
+            self.display(lines)
+            return True
+        return False
 
     def run(self, cache=False, clear=True, user_input=None):
         self.assign_user_input(user_input=user_input)
@@ -51,6 +107,14 @@ class AssetProxy(SCFObject):
             self.pop_breadcrumb()
         self.pop_breadcrumb()
         self.restore_breadcrumbs(cache=cache)
+
+    def run_py_test(self, prompt=True):
+        proc = subprocess.Popen('py.test {}'.format(self.directory_name), shell=True, stdout=subprocess.PIPE)
+        lines = [line.strip() for line in proc.stdout.readlines()]
+        if lines:
+            self.display(lines)
+        line = 'tests run.'
+        self.proceed(line, prompt=prompt)
 
     def svn_add(self, prompt=False):
         self.display(self.path_name)
