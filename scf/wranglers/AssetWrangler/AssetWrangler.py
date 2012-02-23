@@ -7,18 +7,18 @@ import os
 class AssetWrangler(SCFObject):
 
     def __init__(self, 
-        score_external_asset_container_importable_name=None, 
+        score_external_asset_container_importable_names=None, 
         score_internal_asset_container_importable_name_infix=None, 
         session=None):
         SCFObject.__init__(self, session=session)
-        if score_external_asset_container_importable_name is not None:
-            assert iotools.is_underscore_delimited_lowercase_package_name(
-                score_external_asset_container_importable_name)
-        if score_internal_asset_container_importable_name_infix is not None:
+        if score_external_asset_container_importable_names:
+            assert all([iotools.is_underscore_delimited_lowercase_package_name(x)
+                for x in score_external_asset_container_importable_names])
+        if score_internal_asset_container_importable_name_infix:
             assert iotools.is_underscore_delimited_lowercase_package_name(
                 score_internal_asset_container_importable_name_infix)
-        self._score_external_asset_container_importable_name = \
-            score_external_asset_container_importable_name
+        self._score_external_asset_container_importable_names = \
+            score_external_asset_container_importable_names or []
         self._score_internal_asset_container_importable_name_infix = \
             score_internal_asset_container_importable_name_infix
 
@@ -185,10 +185,11 @@ class AssetWrangler(SCFObject):
         return result
 
     def list_score_external_asset_container_importable_names(self, head=None):
-        result = []
-        if self._score_external_asset_container_importable_name:
-            result.append(self._score_external_asset_container_importable_name)
-        return result
+        #result = []
+        #if self._score_external_asset_container_importable_name:
+        #    result.append(self._score_external_asset_container_importable_name)
+        #return result
+        return self._score_external_asset_container_importable_names[:]
     
     def list_score_external_asset_container_path_names(self, head=None):
         result = []
