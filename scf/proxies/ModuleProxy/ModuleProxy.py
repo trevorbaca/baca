@@ -3,12 +3,12 @@ from baca.scf.proxies.ParsableFileProxy import ParsableFileProxy
 import os
 
 
-class ModuleProxy(ImportableAssetProxy, ParsableFileProxy):
+class ModuleProxy(ParsableFileProxy, ImportableAssetProxy):
 
     def __init__(self, module_importable_name, session=None):
-        assert isinstance(module_importable_name, str), '{!r} is not a string.'.format(module_importable_name)
         path_name = self.module_importable_name_to_path_name(module_importable_name)
         ParsableFileProxy.__init__(self, path_name, session=session)
+        ImportableAssetProxy.__init__(self, asset_full_name=path_name, session=self.session)
         self._module_importable_name = module_importable_name
 
     ### READ-ONLY ATTRIBUTES ###
@@ -36,6 +36,7 @@ class ModuleProxy(ImportableAssetProxy, ParsableFileProxy):
     @property
     def module_importable_name(self):
         return self._module_importable_name
+        #return self.importable_name
 
     @property
     def module_short_name(self):

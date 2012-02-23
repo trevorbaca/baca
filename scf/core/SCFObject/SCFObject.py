@@ -334,6 +334,7 @@ class SCFObject(object):
         base_name = self.strip_extension_from_base_name(base_name)
         return self.change_string_to_human_readable_string(base_name)
 
+    # TODO: WRONG! Make handle /Users/trevorbaca/Documents/other/baca/scf/foo.py correctly!
     def path_name_to_package_importable_name(self, path_name):
         if path_name is None:
             return
