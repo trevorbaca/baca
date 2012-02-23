@@ -36,7 +36,11 @@ class MusicSpecifierModuleProxy(ModuleProxy):
 
     ### PUBLIC METHODS ###
 
-    # MusicSpecifierEditor must handle reading from disk and writing to disk
+    # STRATEGY: get rid of removal from this class.
+    #           Move removal up to MusicSpecifierModuleWrangler instead.
+    #           Then delegate all editing directly to MusicSpecifierEditor.
+    #           Use this class only to read from disk and write to disk.
+
     def edit_music_specifier_at_number(self, number, include_newline=True):
         number = int(number)
         self.editor.edit_at_number(number)
@@ -46,9 +50,7 @@ class MusicSpecifierModuleProxy(ModuleProxy):
 
     def handle_main_menu_result(self, result):
         assert isinstance(result, str)
-        if result == 'rm':
-            self.remove()
-        elif mathtools.is_integer_equivalent_expr(result):
+        if mathtools.is_integer_equivalent_expr(result):
             self.edit_music_specifier_at_number(result, include_newline=False)
         else:
             raise ValueError
@@ -56,11 +58,11 @@ class MusicSpecifierModuleProxy(ModuleProxy):
     def make_main_menu(self):
         menu, section = self.make_menu(where=self.where(), is_keyed=False, is_parenthetically_numbered=True)
         section.tokens = self.make_music_specifier_menu_tokens()
-        section = menu.make_section()
-        section.append(('rm', 'remove music specifier'))
         return menu
 
     def make_music_specifier_menu_tokens(self):
+        self.debug(self.editor.target)
+        self.debug(self.editor.target_attribute_tokens)
         return self.editor.target_attribute_tokens
 
     def parse(self):
