@@ -25,8 +25,8 @@ class AssetWrangler(SCFObject):
 
     def __eq__(self, other):
         if isinstance(other, type(self)):
-            if self.score_external_asset_container_importable_name == \
-                other.score_external_asset_container_importable_name:
+            if self.list_score_external_asset_container_importable_names() == \
+                other.list_score_external_asset_container_importable_names():
                 if self.score_internal_asset_container_importable_name_infix == \
                     other.score_internal_asset_container_importable_name_infix:
                     return True
@@ -34,8 +34,7 @@ class AssetWrangler(SCFObject):
 
     def __repr__(self):
         parts = []
-        if self.score_external_asset_container_importable_name:
-            parts.append(self.score_external_asset_container_importable_name)
+        parts.extend(self.list_score_external_asset_container_importable_names())
         if self.score_internal_asset_container_importable_name_infix:
             parts.append(self.score_internal_asset_container_importable_name_infix)
         parts = ', '.join([repr(part) for part in parts])
@@ -59,8 +58,8 @@ class AssetWrangler(SCFObject):
             return self.dot_join([
                 self.session.current_score_package_short_name, 
                 self.score_internal_asset_container_importable_name_infix])
-        else:
-            return self.score_external_asset_container_importable_name
+        elif self.list_score_external_asset_container_importable_names():
+            return self.list_score_external_asset_container_importable_names()[0]
 
     @property
     def current_asset_container_path_name(self):
@@ -68,24 +67,6 @@ class AssetWrangler(SCFObject):
             self.current_asset_container_importable_name)
 
     # TODO: current_asset_container_proxy
-
-    # score-external asset container #
-
-    # TODO: list_score_external_asset_container_human_readable_names
-
-    @property # TODO: change to method
-    def score_external_asset_container_importable_name(self):
-        return self._score_external_asset_container_importable_name
-    
-    def list_score_external_asset_container_path_names(self, head=None):
-        result = []
-        path_name = self.package_importable_name_to_path_name(
-            self.score_external_asset_container_importable_name)
-        if path_name:
-            result.append(path_name)
-        return result
-
-    # TODO: list_score_external_asset_container_proxies
 
     # infix #
 
@@ -117,7 +98,8 @@ class AssetWrangler(SCFObject):
         self.proceed('missing packages created.', prompt=is_interactive)
 
     def conditionally_make_score_external_asset_container_package(self):
-        self.conditionally_make_empty_package(self.score_external_asset_container_importable_name)
+        for importable_name in self.list_score_external_asset_container_importable_names():
+            self.conditionally_make_empty_package(importable_name)
 
     def conditionally_make_score_internal_asset_container_packages(self, head=None):
         for score_internal_asset_container_importable_name in \
@@ -141,8 +123,7 @@ class AssetWrangler(SCFObject):
 
     def list_asset_container_importable_names(self, head=None):
         result = [] 
-        if self.score_external_asset_container_importable_name:
-            result.append(self.score_external_asset_container_importable_name)
+        result.extend(self.list_score_external_asset_container_importable_names(head=head))
         result.extend(self.list_score_internal_asset_container_importable_names(head=head))
         return result
 
@@ -179,6 +160,24 @@ class AssetWrangler(SCFObject):
             result.append(asset_proxy)
         return result
 
+    # score-external asset containers #
+
+    # TODO: list_score_external_asset_container_human_readable_names
+
+    def list_score_external_asset_container_importable_names(self, head=None):
+        result = []
+        if self._score_external_asset_container_importable_name:
+            result.append(self._score_external_asset_container_importable_name)
+        return result
+    
+    def list_score_external_asset_container_path_names(self, head=None):
+        result = []
+        for importable_name in self.list_score_external_asset_container_importable_names(head=head):
+            result.append(self.package_importable_name_to_path_name(importable_name))
+        return result
+
+    # TODO: list_score_external_asset_container_proxies
+
     # score-external assets #
 
     def list_score_external_asset_human_readable_names(self, head=None):
@@ -192,12 +191,9 @@ class AssetWrangler(SCFObject):
 
     def list_score_external_asset_path_names(self, head=None):
         result = []
-        #if self.score_external_asset_container_path_name:
         for path_name in self.list_score_external_asset_container_path_names(head=head):
-            #for name in os.listdir(self.score_external_asset_container_path_name):
             for name in os.listdir(path_name):
                 if name[0].isalpha():
-                    #result.append(os.path.join(self.score_external_asset_container_path_name, name))
                     result.append(os.path.join(path_name, name))
         return result
 

@@ -12,7 +12,8 @@ def test_ChunkPackageWrangler_read_only_attributes_01():
     assert all([
         x.startswith('baca.sketches.') for x in wrangler.list_score_external_asset_importable_names()])
 
-    assert wrangler.score_external_asset_container_importable_name == 'baca.sketches'
+    assert wrangler.list_score_external_asset_container_importable_names() == \
+        ['baca.sketches']
     assert wrangler.score_internal_asset_container_importable_name_infix == 'mus.chunks'
 
     assert wrangler.temporary_asset_importable_name == 'baca.sketches.__temporary_package'
@@ -34,7 +35,8 @@ def test_ChunkPackageWrangler_read_only_attributes_02():
 
     assert all([
         x.startswith('baca.sketches.') for x in wrangler.list_score_external_asset_importable_names()])
-    assert wrangler.score_external_asset_container_importable_name == 'baca.sketches'
+    assert wrangler.list_score_external_asset_container_importable_names() == \
+        ['baca.sketches']
 
     assert wrangler.score_internal_asset_container_importable_name_infix == 'mus.chunks'
 
