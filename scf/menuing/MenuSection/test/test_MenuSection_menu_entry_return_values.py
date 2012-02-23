@@ -60,10 +60,10 @@ def test_MenuSection_menu_entry_return_values_02():
     section = menu.make_section(is_numbered=True)
     section.title = 'section'
     section.append(('add', 'add something'))
-    section.append(('del', 'delete something'))
+    section.append(('rm', 'delete something'))
     section.append(('mod', 'modify something'))
     assert section.is_numbered
-    assert section.menu_entry_return_values == ['add', 'del', 'mod']
+    assert section.menu_entry_return_values == ['add', 'rm', 'mod']
     assert section.menu_entry_return_values == section.menu_entry_keys
 
     menu = baca.scf.menuing.Menu()
@@ -71,10 +71,10 @@ def test_MenuSection_menu_entry_return_values_02():
     section = menu.make_section()
     section.title = 'section'
     section.append(('add', 'add something'))
-    section.append(('del', 'delete something'))
+    section.append(('rm', 'delete something'))
     section.append(('mod', 'modify something'))
     assert not section.is_numbered
-    assert section.menu_entry_return_values == ['add', 'del', 'mod']
+    assert section.menu_entry_return_values == ['add', 'rm', 'mod']
     assert section.menu_entry_return_values == section.menu_entry_keys
 
     menu = baca.scf.menuing.Menu()
@@ -82,7 +82,7 @@ def test_MenuSection_menu_entry_return_values_02():
     section = menu.make_section(is_numbered=True)
     section.title = 'section'
     section.append(('add', 'add something'))
-    section.append(('del', 'delete something'))
+    section.append(('rm', 'delete something'))
     section.append(('mod', 'modify something'))
     section.return_value_attribute = 'body'
     assert section.is_numbered
@@ -94,7 +94,7 @@ def test_MenuSection_menu_entry_return_values_02():
     section = menu.make_section()
     section.title = 'section'
     section.append(('add', 'add something'))
-    section.append(('del', 'delete something'))
+    section.append(('rm', 'delete something'))
     section.append(('mod', 'modify something'))
     section.return_value_attribute = 'body'
     assert not section.is_numbered

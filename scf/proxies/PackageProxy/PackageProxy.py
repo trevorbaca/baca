@@ -197,7 +197,7 @@ class PackageProxy(DirectoryProxy):
     def handle_tags_menu_result(self, result):
         if result == 'add':
             self.add_tag_interactively()
-        elif result == 'del':
+        elif result == 'rm':
             self.remove_tag_interactively()
         elif result == 'get':
             self.get_tag_interactively()
@@ -212,7 +212,7 @@ class PackageProxy(DirectoryProxy):
         section.tokens = self.formatted_tags
         section = menu.make_section()
         section.append(('add', 'add tag'))
-        section.append(('del', 'delete tag'))
+        section.append(('rm', 'delete tag'))
         section.append(('get', 'get tag'))
         return menu
 

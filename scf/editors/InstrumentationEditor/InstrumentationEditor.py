@@ -99,7 +99,7 @@ class InstrumentationEditor(InteractiveEditor):
             raise TypeError('result must be string.')
         if result == 'add':
             self.add_performers_interactively()
-        elif result == 'del':
+        elif result == 'rm':
             self.remove_performers_interactively()
         elif result == 'mv':
             self.move_performer_interactively()
@@ -113,7 +113,7 @@ class InstrumentationEditor(InteractiveEditor):
         section = menu.make_section(is_keyed=False)
         section.append(('add', 'add performers'))
         if 0 < self.target.performer_count:
-            section.append(('del', 'delete performers'))
+            section.append(('rm', 'delete performers'))
         if 1 < self.target.performer_count:
             section.append(('mv', 'move performers'))
         return menu

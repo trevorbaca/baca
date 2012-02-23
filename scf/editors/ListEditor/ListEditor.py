@@ -47,7 +47,7 @@ class ListEditor(InteractiveEditor):
             raise TypeError('result must be string.')
         if result == 'add':
             self.add_target_item_interactively()
-        elif result == 'del':
+        elif result == 'rm':
             self.remove_target_items_interactively()
         elif result == 'mv':
             self.move_target_item_interactively()
@@ -61,7 +61,7 @@ class ListEditor(InteractiveEditor):
         section = menu.make_section(is_keyed=False)
         section.append(('add', 'add {}'.format(self.target_item_identifier)))
         if 0 < len(self.target_items):
-            section.append(('del', 'delete {}'.format(self.target_items_identifier)))
+            section.append(('rm', 'delete {}'.format(self.target_items_identifier)))
         if 1 < len(self.target_items):
             section.append(('mv', 'move {}'.format(self.target_items_identifier)))
         return menu

@@ -35,7 +35,7 @@ def test_MenuSection_menu_entry_bodies_02():
     section = menu.make_section()
     section.title = 'section title'
     section.append(('add', 'add something'))
-    section.append(('del', 'delete something'))
+    section.append(('rm', 'delete something'))
     section.append(('mod', 'modify something'))
     assert not section.is_numbered
     assert section.menu_entry_bodies == ['add something', 'delete something', 'modify something']
@@ -46,7 +46,7 @@ def test_MenuSection_menu_entry_bodies_02():
     section = menu.make_section(is_numbered=True)
     section.title = 'section title'
     section.append(('add', 'add something'))
-    section.append(('del', 'delete something'))
+    section.append(('rm', 'delete something'))
     section.append(('mod', 'modify something'))
     assert section.is_numbered
     assert section.menu_entry_bodies == ['add something', 'delete something', 'modify something']

@@ -89,7 +89,7 @@ class InitializerFileProxy(ParsableFileProxy):
                 current_section = 'tags'
             elif line.startswith('safe_import'):
                 current_section = 'protected imports'
-            elif line.startswith('del'):
+            elif line.startswith('rm'):
                 current_section = 'teardown'
             if current_section == 'encoding':
                 encoding_directives.append(line)

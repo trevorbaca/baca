@@ -47,7 +47,7 @@ class StylesheetFileProxy(FileProxy):
             self.audit_stylesheet()
         elif result == 'cp':
             self.copy_stylesheet_interactively()
-        elif result == 'del':
+        elif result == 'rm':
             self.remove_stylesheet_interactively()
             self.session.is_backtracking_locally = True
         elif result == 'ren':
@@ -61,7 +61,7 @@ class StylesheetFileProxy(FileProxy):
         menu, section = self.make_menu(where=self.where)
         section.append(('audit', 'audit stylesheet'))
         section.append(('cp', 'copy stylesheet'))
-        section.append(('del', 'delete stylesheet'))
+        section.append(('rm', 'delete stylesheet'))
         section.append(('ren', 'rename stylesheet'))
         section.append(('vi', 'vi stylesheet'))
         return menu

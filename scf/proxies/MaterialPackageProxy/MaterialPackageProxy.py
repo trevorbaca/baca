@@ -570,7 +570,7 @@ class MaterialPackageProxy(PackageProxy):
             self.remove_illustration_pdf(prompt=True)
         elif result == 'pdfv':
             self.illustration_pdf_file_proxy.view()
-        elif result == 'del':
+        elif result == 'rm':
             self.remove_material_package()
         elif result == 'inr':
             self.initializer_file_proxy.restore_interactively(prompt=True)
@@ -609,7 +609,7 @@ class MaterialPackageProxy(PackageProxy):
     
     def make_main_menu_section_for_hidden_entries(self, main_menu):
         hidden_section = main_menu.make_section(is_hidden=True)
-        hidden_section.append(('del', 'delete package'))
+        hidden_section.append(('rm', 'delete package'))
         hidden_section.append(('ls', 'list package'))
         hidden_section.append(('reg', 'regenerate package'))
         hidden_section.append(('ren', 'rename package'))

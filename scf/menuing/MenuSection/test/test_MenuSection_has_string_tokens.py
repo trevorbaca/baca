@@ -13,6 +13,6 @@ def test_MenuSection_has_string_tokens_01():
 
     section  = menu.make_section()
     section.append(('add', 'first command'))
-    section.append(('del', 'second command'))
+    section.append(('rm', 'second command'))
     section.append(('mod', 'third command'))
     assert not section.has_string_tokens
