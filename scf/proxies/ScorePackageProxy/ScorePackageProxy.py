@@ -449,25 +449,6 @@ class ScorePackageProxy(PackageProxy):
                 return
             self.session.is_backtracking_locally = True
         
-    def run(self, cache=False, clear=True, user_input=None):
-        self.assign_user_input(user_input=user_input)
-        self.cache_breadcrumbs(cache=cache)
-        while True:
-            self.push_breadcrumb()
-            menu = self.make_main_menu()
-            result = menu.run(clear=clear)
-            if self.backtrack(source=self.backtracking_source):
-                break
-            elif not result:
-                self.pop_breadcrumb()
-                continue
-            self.handle_main_menu_result(result)
-            if self.backtrack(source=self.backtracking_source):
-                break
-            self.pop_breadcrumb()
-        self.pop_breadcrumb()
-        self.restore_breadcrumbs(cache=cache)
-
     def summarize_chunks(self):
         chunks = self.chunk_wrangler.package_underscored_names
         lines = []

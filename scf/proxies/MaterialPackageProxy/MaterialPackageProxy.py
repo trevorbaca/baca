@@ -806,25 +806,6 @@ class MaterialPackageProxy(PackageProxy):
         else:
             raise NotImplementedError('commit to repository and then rename.')
 
-    def run(self, cache=False, clear=True, user_input=None):
-        self.assign_user_input(user_input=user_input)
-        self.cache_breadcrumbs(cache=cache)
-        while True:
-            self.push_breadcrumb()
-            menu = self.make_main_menu()
-            result = menu.run(clear=clear)
-            if self.backtrack(source=self.backtracking_source):
-                break
-            elif not result:
-                self.pop_breadcrumb()
-                continue
-            self.handle_main_menu_result(result)
-            if self.backtrack(source=self.backtracking_source):
-                break
-            self.pop_breadcrumb()
-        self.pop_breadcrumb()
-        self.restore_breadcrumbs(cache=cache)
-
     def select_material_package_maker_interactively(self, prompt=True):
         material_proxy_wrangler = MaterialPackageMakerWrangler(session=self.session)
         self.push_backtrack()

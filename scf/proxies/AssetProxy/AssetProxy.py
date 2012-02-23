@@ -28,6 +28,25 @@ class AssetProxy(SCFObject):
     def fix(self):
         self.print_implemented_on_child_classes()
 
+    def run(self, cache=False, clear=True, user_input=None):
+        self.assign_user_input(user_input=user_input)
+        self.cache_breadcrumbs(cache=cache)
+        while True:
+            self.push_breadcrumb()
+            menu = self.make_main_menu()
+            result = menu.run(clear=clear)
+            if self.backtrack(source=self.backtracking_source):
+                break
+            elif not result:
+                self.pop_breadcrumb()
+                continue
+            self.handle_main_menu_result(result)
+            if self.backtrack(source=self.backtracking_source):
+                break
+            self.pop_breadcrumb()
+        self.pop_breadcrumb()
+        self.restore_breadcrumbs(cache=cache)
+
     def svn_add(self, prompt=False):
         self.display(self.path_name)
         proc = subprocess.Popen(self.svn_add_command, shell=True, stdout=subprocess.PIPE)
