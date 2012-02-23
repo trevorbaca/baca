@@ -300,6 +300,7 @@ class SCFObject(object):
     def path_name_to_human_readable_base_name(self, path_name):
         path_name = path_name.rstrip(os.path.sep)
         base_name = os.path.basename(path_name)
+        base_name = self.strip_extension_from_base_name(base_name)
         return self.change_string_to_human_readable_string(base_name)
 
     def path_name_to_package_importable_name(self, path_name):

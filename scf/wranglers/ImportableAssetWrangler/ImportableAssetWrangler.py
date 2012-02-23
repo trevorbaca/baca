@@ -19,13 +19,6 @@ class ImportableAssetWrangler(AssetWrangler):
 
     def list_asset_importable_names(self, head=None):
         result = []
-#        if head is None: head = ''
-#        result, asset_importable_names = [], []
-#        asset_importable_names.extend(self.list_score_external_asset_importable_names(head=head))
-#        asset_importable_names.extend(self.list_score_internal_asset_importable_names(head=head))
-#        for asset_importable_name in asset_importable_names:
-#            if asset_importable_name.startswith(head):
-#                result.append(asset_importable_name)
         result.extend(self.list_score_external_asset_importable_names(head=head))
         result.extend(self.list_score_internal_asset_importable_names(head=head))
         return result
