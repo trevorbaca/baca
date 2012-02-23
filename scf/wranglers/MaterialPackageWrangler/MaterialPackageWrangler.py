@@ -126,13 +126,13 @@ class MaterialPackageWrangler(PackageWrangler):
         assert material_package_maker_class_name is None or iotools.is_uppercamelcase_string(
             material_package_maker_class_name)
         assert isinstance(should_have_illustration, bool)
-        directory_name = self.package_importable_name_to_path_name(material_package_importable_name)
-        if os.path.exists(directory_name):
+        path_name = self.package_importable_name_to_path_name(material_package_importable_name)
+        if os.path.exists(path_name):
             line = 'package {!r} already exists.'.format(material_name)
             self.proceed(line, prompt=prompt)
             return False
-        os.mkdir(directory_name)
-        file(os.path.join(directory_name, '__init__.py'), 'w').write('')
+        os.mkdir(path_name)
+        file(os.path.join(path_name, '__init__.py'), 'w').write('')
         if material_package_maker_class_name is None: 
             material_package_proxy = baca.scf.proxies.MaterialPackageProxy(
                 material_package_importable_name, session=self.session)
@@ -144,7 +144,7 @@ class MaterialPackageWrangler(PackageWrangler):
         tags['should_have_illustration'] = should_have_illustration
         material_package_proxy.initializer_file_proxy.write_stub_to_disk(tags=tags)
         if material_package_maker_class_name is None:
-            file(os.path.join(directory_name, 'material_definition.py'), 'w').write('')
+            file(os.path.join(path_name, 'material_definition.py'), 'w').write('')
             is_data_only = not should_have_illustration
             material_package_proxy.material_definition_module_proxy.write_stub_to_disk(is_data_only, prompt=False)
         else:

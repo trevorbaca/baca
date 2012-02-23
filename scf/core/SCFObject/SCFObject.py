@@ -314,8 +314,8 @@ class SCFObject(object):
 
     def package_exists(self, package_importable_name):
         assert isinstance(package_importable_name, str)
-        directory_name = self.package_importable_name_to_path_name(package_importable_name)
-        return os.path.exists(directory_name)
+        path_name = self.package_importable_name_to_path_name(package_importable_name)
+        return os.path.exists(path_name)
 
     def package_importable_name_to_path_name(self, package_importable_name):
         if package_importable_name is None:

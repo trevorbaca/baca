@@ -218,12 +218,12 @@ class ScorePackageProxy(PackageProxy):
         result = True
         if self.short_name == 'recursif':
             return True
-        for directory_name in self.top_level_directory_names:
-            if not os.path.exists(directory_name):
+        for path_name in self.top_level_directory_names:
+            if not os.path.exists(path_name):
                 result = False
-                prompt = 'create {!r}? '.format(directory_name)
+                prompt = 'create {!r}? '.format(path_name)
                 if not is_interactive or self.confirm(prompt):
-                    os.mkdir(directory_name)
+                    os.mkdir(path_name)
         if not os.path.exists(self.initializer_file_name):
             result = False
             prompt = 'create {}? '.format(self.initializer_file_name)
