@@ -21,6 +21,10 @@ class InteractiveEditor(SCFObject):
     ### READ-ONLY PUBLIC ATTRIBUTES ###
     
     @property
+    def has_target(self):
+        return self.target is not None
+
+    @property
     def target_attribute_tokens(self):
         if hasattr(self, 'target_manifest'):
             return self.make_target_attribute_tokens_from_target_manifest()
