@@ -47,7 +47,8 @@ class MaterialPackageMakerWrangler(PackageWrangler):
 
     def list_score_external_asset_importable_names(self, head=None):
         result = PackageWrangler.list_score_external_asset_importable_names(self, head=head)
-        result.remove(self.base_class_name)
+        if self.base_class_name in result:
+            result.remove(self.base_class_name)
         return result
 
     def list_score_internal_asset_container_importable_names(self, head=None):

@@ -35,10 +35,8 @@ def test_MaterialPackageWrangler_read_only_attributes_04():
     '''
 
     assert wrangler.score_external_asset_container_importable_name == 'baca.materials'
-    assert wrangler.score_external_asset_container_initializer_file_name == \
-        '/Users/trevorbaca/Documents/other/baca/materials/__init__.py'
-    assert wrangler.score_external_asset_container_path_name == \
-        '/Users/trevorbaca/Documents/other/baca/materials'
+    assert wrangler.list_score_external_asset_container_path_names() == \
+        ['/Users/trevorbaca/Documents/other/baca/materials']
 
 
 def test_MaterialPackageWrangler_read_only_attributes_05():

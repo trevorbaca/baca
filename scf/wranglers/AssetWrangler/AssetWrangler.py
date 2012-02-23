@@ -77,14 +77,13 @@ class AssetWrangler(SCFObject):
     def score_external_asset_container_importable_name(self):
         return self._score_external_asset_container_importable_name
     
-    @property # TODO: demote
-    def score_external_asset_container_initializer_file_name(self):
-        return os.path.join(self.score_external_asset_container_path_name, '__init__.py')
-
-    @property # TODO: change to method
-    def score_external_asset_container_path_name(self):
-        return self.package_importable_name_to_path_name(
+    def list_score_external_asset_container_path_names(self, head=None):
+        result = []
+        path_name = self.package_importable_name_to_path_name(
             self.score_external_asset_container_importable_name)
+        if path_name:
+            result.append(path_name)
+        return result
 
     # TODO: list_score_external_asset_container_proxies
 
@@ -193,10 +192,13 @@ class AssetWrangler(SCFObject):
 
     def list_score_external_asset_path_names(self, head=None):
         result = []
-        if self.score_external_asset_container_path_name:
-            for name in os.listdir(self.score_external_asset_container_path_name):
+        #if self.score_external_asset_container_path_name:
+        for path_name in self.list_score_external_asset_container_path_names(head=head):
+            #for name in os.listdir(self.score_external_asset_container_path_name):
+            for name in os.listdir(path_name):
                 if name[0].isalpha():
-                    result.append(os.path.join(self.score_external_asset_container_path_name, name))
+                    #result.append(os.path.join(self.score_external_asset_container_path_name, name))
+                    result.append(os.path.join(path_name, name))
         return result
 
     def list_score_external_asset_proxies(self, head=None):

@@ -19,8 +19,8 @@ class ImportableAssetWrangler(AssetWrangler):
 
     def list_score_external_asset_importable_names(self, head=None):
         result = []
-        if self.score_external_asset_container_path_name:
-            for name in os.listdir(self.score_external_asset_container_path_name):
+        for path_name in self.list_score_external_asset_container_path_names(head=head):
+            for name in os.listdir(path_name):
                 if name[0].isalpha():
                     result.append(self.dot_join([self.score_external_asset_container_importable_name, name]))
         return result
