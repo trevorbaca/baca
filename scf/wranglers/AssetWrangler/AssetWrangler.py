@@ -1,5 +1,6 @@
 from abjad.tools import iotools
 from baca.scf.core.SCFObject import SCFObject
+from baca.scf.proxies.PackageProxy import PackageProxy
 import os
 
 
@@ -48,9 +49,15 @@ class AssetWrangler(SCFObject):
     def asset_class(self):
         self.print_implemented_on_child_classes()
 
+    @property
+    def asset_container_class(self):
+        return PackageProxy
+
     # current asset container #
 
-    # TODO: current_asset_container_human_readable_name
+    @property
+    def current_asset_container_human_readable_name(self):
+        return self.path_name_to_human_readable_base_name(self.current_asset_container_path_name)
 
     @property
     def current_asset_container_importable_name(self):
@@ -66,7 +73,9 @@ class AssetWrangler(SCFObject):
         return self.package_importable_name_to_path_name(
             self.current_asset_container_importable_name)
 
-    # TODO: current_asset_container_proxy
+    @property
+    def current_asset_container_proxy(self):
+        return self.asset_container_class(self.current_asset_container_importable_name)
 
     # infix #
 
@@ -76,9 +85,9 @@ class AssetWrangler(SCFObject):
 
     # temporary asset #
 
-    # TODO: temporary_asset_human_readable_name
-
-    # TODO: ImportableAssetWrangler.temporary_asset_importable_name
+    @property
+    def temporary_asset_human_readable_name(self):
+        return self.path_name_to_human_readable_base_name(self.temporary_asset_path_name)
 
     @property
     def temporary_asset_path_name(self):
@@ -88,7 +97,9 @@ class AssetWrangler(SCFObject):
     def temporary_asset_short_name(self):
         self.print_implemented_on_child_classes()
 
-    # TODO: temporary_asset_proxy
+    @property
+    def temporary_asset_proxy(self):
+        return self.asset_class(self.temporary_asset_importable_name)
 
     ### PUBLIC METHODS ###
     
@@ -119,7 +130,11 @@ class AssetWrangler(SCFObject):
 
     # asset containers (all) #
 
-    # TODO: list_asset_container_human_readable_names
+    def list_asset_container_human_readable_names(self, head=None):
+        result = []
+        result.extend(self.list_score_external_asset_container_human_readable_names(head=head))    
+        result.extend(self.list_score_internal_asset_container_human_readable_names(head=head))    
+        return result
 
     def list_asset_container_importable_names(self, head=None):
         result = [] 
@@ -129,11 +144,15 @@ class AssetWrangler(SCFObject):
 
     def list_asset_container_path_names(self, head=None):
         result = []
-        for package_importable_name in self.list_asset_container_importable_names(head=head):
-            result.append(self.package_importable_name_to_path_name(package_importable_name))
+        result.extend(self.list_score_external_asset_container_path_names(head=head))
+        result.extend(self.list_score_internal_asset_container_path_names(head=head))
         return result
 
-    # TODO: list_asset_container_proxies
+    def list_asset_container_proxies(self, head=None):
+        result = []
+        result.extend(self.list_score_external_asset_container_proxies(head=head))
+        result.extend(self.list_score_internal_asset_container_proxies(head=head))
+        return result
 
     # assets (all) #
 
@@ -159,7 +178,11 @@ class AssetWrangler(SCFObject):
 
     # score-external asset containers #
 
-    # TODO: list_score_external_asset_container_human_readable_names
+    def list_score_external_asset_container_human_readable_names(self, head=None):
+        result = []
+        for path_name in self.list_score_external_asset_container_path_names(head=head):
+            result.append(self.path_name_to_human_readable_base_name(path_name))
+        return result
 
     def list_score_external_asset_container_importable_names(self, head=None):
         result = []
@@ -174,6 +197,12 @@ class AssetWrangler(SCFObject):
         return result
 
     # TODO: list_score_external_asset_container_proxies
+    def list_score_external_asset_container_proxies(self, head=None):
+        result = []
+        for importable_name in self.list_score_external_asset_container_importable_names(head=head):
+            asset_container_proxy = self.asset_container_class(importable_name)
+            result.append(asset_container_proxy)
+        return result
 
     # score-external assets #
 
@@ -200,7 +229,11 @@ class AssetWrangler(SCFObject):
 
     # score-internal asset containers #
 
-    # TODO: list_score_internal_asset_container_human_readable_names
+    def list_score_internal_asset_container_human_readable_names(self, head=None):
+        result = []
+        for path_name in self.list_score_internal_asset_container_human_readable_names(head=head):
+            result.append(self.path_name_to_human_readable_base_name(path_name))
+        return result
 
     def list_score_internal_asset_container_importable_names(self, head=None):
         result = []
@@ -219,13 +252,20 @@ class AssetWrangler(SCFObject):
             result.append(self.package_importable_name_to_path_name(package_importable_name))
         return result            
 
-    # TODO: list_score_internal_asset_container_proxies
+    def list_score_internal_asset_container_proxies(self, head=None):
+        result = []
+        for importable_name in self.list_score_internal_asset_container_importable_names(head=head):
+            asset_container_proxy = self.asset_container_class(importable_name)
+            result.append(asset_container_proxy)
+        return result
 
     # score-internal assets #
 
-    # TODO: list_score_internal_asset_human_readable_names
-
-    # TODO: ImportableAssetWrangler.list_score_internal_asset_importable_names
+    def list_score_internal_asset_human_readable_names(self, head=None):
+        result = []
+        for path_name in self.list_score_internal_asset_path_names(head=head):
+            result.append(self.path_name_to_human_readable_base_name(path_name))
+        return result
 
     def list_score_internal_asset_path_names(self, head=None):
         result = []
@@ -235,7 +275,12 @@ class AssetWrangler(SCFObject):
                     result.append(os.path.join(path_name, name))
         return result
 
-    # TODO: list_score_internal_asset_proxies
+    def list_score_internal_asset_proxies(self, head=None):
+        result = []
+        for importable_name in self.list_score_internal_asset_importable_names(head=head):
+            asset_proxy = self.asset_class_name(importable_name)
+            result.append(asset_proxy)
+        return result
 
     # visible assets #
 
