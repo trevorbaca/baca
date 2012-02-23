@@ -5,9 +5,6 @@ import os
 
 class StylesheetFileProxy(FileProxy):
 
-    def __init__(self, path_name, session=None):
-        FileProxy.__init__(self, path_name, session=session)
-
     ### READ-ONLY PUBLIC ATTRIBUTES ###
 
     @property

@@ -5,8 +5,8 @@ import os
 
 class MusicSpecifierModuleProxy(ModuleProxy):
 
-    def __init__(self, module_importable_name, session=None):
-        ModuleProxy.__init__(self, module_importable_name, session=session)
+    def __init__(self, module_importable_name=None, session=None):
+        ModuleProxy.__init__(self, module_importable_name=module_importable_name, session=session)
         self._editor = MusicSpecifierEditor(session=self.session)
         self.music_specifier_lines = []
         #self.conditionally_make_file()
