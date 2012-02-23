@@ -154,7 +154,7 @@ class SCFObject(object):
         if not string:
             return string
         elif string[0].isupper():
-            return iotools.uppercamelcase_to_spaced_delimited_lowercase(string)
+            return iotools.uppercamelcase_to_space_delimited_lowercase(string)
         else:
             return string.replace('_', ' ')
 
