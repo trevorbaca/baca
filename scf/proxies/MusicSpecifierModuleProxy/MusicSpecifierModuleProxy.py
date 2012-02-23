@@ -6,16 +6,16 @@ class MusicSpecifierModuleProxy(ModuleProxy):
 
     def __init__(self, module_importable_name, session=None):
         ModuleProxy.__init__(self, module_importable_name, session=session)
-        self._music_specifier_editor = MusicSpecifierEditor(session=self.session)
+        self._editor = MusicSpecifierEditor(session=self.session)
         self.music_specifier_lines = []
         #self.conditionally_make_file()
-        self.parse() 
+        #self.parse() 
 
     ### READ-ONLY ATTRIBUTES ###
 
     @property
-    def music_specifier_editor(self):
-        return self._music_specifier_editor
+    def editor(self):
+        return self._editor
 
     @property
     def music_specifier_in_memory(self):
@@ -108,7 +108,7 @@ class MusicSpecifierModuleProxy(ModuleProxy):
             file_pointer.close()
             exec(file_contents_string)
             #return locals().get('music_specifier', None)
-            self._music_speciifer_in_memory = music_specifier
+            self._music_specifier_in_memory = music_specifier
 
     def run(self, user_input=None, clear=True, cache=False):
         self.assign_user_input(user_input=user_input)

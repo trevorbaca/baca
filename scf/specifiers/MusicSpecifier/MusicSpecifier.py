@@ -14,9 +14,4 @@ class MusicSpecifier(Specifier):
             performer_contribution_specifiers or PerformerContributionSpecifierList()
         self.tempo = tempo
 
-    ### OVERLOADS ###
-
-    def __repr__(self):
-        return '{}()'.format(type(self).__name__)
-
     ### READ-ONLY ATTRIBUTES ###

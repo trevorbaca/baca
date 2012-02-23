@@ -3,13 +3,13 @@ class Specifier(object):
     ### OVERLOADS ###
 
     def __repr__(self):
-        return '{}()'.format(type(self).__name__)
+        return '{}()'.format(self.class_name)
 
     ### READ-ONLY ATTRIBUTES ###
 
     @property
-    def variable_names(self):
-        return self.__init__.im_func.func_code.co_varnames[1:]
+    def class_name(self):
+        return type(self).__name__
 
     @property
     def format(self):
@@ -27,6 +27,14 @@ class Specifier(object):
                 result.extend(format_pieces)
         result.append('\t)')
         return result
+
+    @property
+    def human_readable_class_name(self):
+        return iotools.uppercamelcase_to_space_delimited_lowercase(self.class_name)
+
+    @property
+    def variable_names(self):
+        return self.__init__.im_func.func_code.co_varnames[1:]
 
     ### PUBLIC METHODS ###
 

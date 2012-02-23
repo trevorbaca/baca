@@ -16,7 +16,7 @@ class InteractiveEditor(SCFObject):
             summary = ''
         else:
             summary = 'target={!r}'.format(self.target)
-        return '{}({})'.format(type(self).__name__, summary)
+        return '{}({})'.format(self.class_name, summary)
 
     ### READ-ONLY PUBLIC ATTRIBUTES ###
     

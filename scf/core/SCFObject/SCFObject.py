@@ -43,6 +43,9 @@ class SCFObject(object):
         return 5
 
     @property
+    def human_readable_class_name(self): return self.change_string_to_human_readable_string(self.class_name)
+
+    @property
     def makers_directory_name(self):
         return os.path.join(self.scf_root_directory, 'makers')
 
