@@ -9,6 +9,7 @@ class MusicSpecifier(Specifier):
         performer_contribution_specifiers=None,
         tempo=None,
         ):
+        Specifier.__init__(self)
         self.music_specifier_name = music_specifier_name
         self.performer_contribution_specifiers = \
             performer_contribution_specifiers or PerformerContributionSpecifierList()

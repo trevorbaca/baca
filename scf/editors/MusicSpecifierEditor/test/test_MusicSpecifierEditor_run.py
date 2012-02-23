@@ -1,7 +1,9 @@
 import baca
 
 
-def test_MusicSpecifier_01():
+def test_MusicSpecifierEditor_run_01():
+    '''With target.
+    '''
 
     pcs_1 = baca.scf.specifiers.PerformerContributionSpecifier()
     pcs_1.articulation_specifier = 'foo'
@@ -18,8 +20,7 @@ def test_MusicSpecifier_01():
     ms.tempo = 90
     ms.performer_contribution_specifiers.extend([pcs_1, pcs_2])
 
-
-    '''
+    r'''
     MusicSpecifier(
         music_specifier_name='blue music',
         performer_contribution_specifiers=PerformerContributionSpecifierList(
@@ -38,4 +39,4 @@ def test_MusicSpecifier_01():
         )
     '''
 
-    "MusicSpecifier(\n\tmusic_specifier_name='blue music',\n\tperformer_contribution_specifiers=PerformerContributionSpecifierList(\n\t\tPerformerContributionSpecifier(\n\t\t\tarticulation_specifier='foo',\n\t\t\tclef_specifier='bar',\n\t\t\tdirective_specifier=['apple', 'banana', 'cherry'],\n\t\t\t),\n\t\tPerformerContributionSpecifier(\n\t\t\tarticulation_specifier='blee',\n\t\t\tclef_specifier='blah',\n\t\t\tdirective_specifier=['durian'],\n\t\t\t),\n\t\t),\n\ttempo=90,\n\t)"
+    editor = baca.scf.editors.MusicSpecifierEditor(target=ms)

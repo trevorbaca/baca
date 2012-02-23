@@ -19,6 +19,7 @@ class PerformerContributionSpecifier(Specifier):
         trill_specifier=None,
         troping_specifier=None,
         ):
+        Specifier.__init__(self)
         self.articulation_specifier = articulation_specifier
         self.clef_specifier = clef_specifier
         self.directive_specifier = directive_specifier
