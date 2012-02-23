@@ -28,31 +28,9 @@ class FileProxy(AssetProxy):
         except:
             return False
 
-    # TODO: move up to AssetProxy
-    @property
-    def parent_directory_name(self):
-        return os.path.dirname(self.path_name)
-
-#    @property
-#    def path_name(self):
-#        return self._path_name
-
     @property
     def sections(self):
         return ()
-
-    # TODO: move up to AssetProxy
-    @property
-    def short_name(self):
-        return self.path_name.split(os.path.sep)[-1]
-
-    # TODO: move up to AssetProxy
-    @property
-    def short_name_without_extension(self):
-        if '.' in self.short_name:
-            return self.short_name[:self.short_name.rdindex('.')]
-        else:
-            return self.short_name
 
     ### PUBLIC METHODS ###
 

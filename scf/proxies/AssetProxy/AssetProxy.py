@@ -33,8 +33,19 @@ class AssetProxy(SCFObject):
         return self._path_name
 
     @property
+    def parent_directory_name(self):
+        return os.path.dirname(self.path_name)
+
+    @property
     def short_name(self):
         return self.path_name.split(os.path.sep)[-1]
+
+    @property
+    def short_name_without_extension(self):
+        if '.' in self.short_name:
+            return self.short_name[:self.short_name.rdindex('.')]
+        else:
+            return self.short_name
 
     @property
     def svn_add_command(self):
