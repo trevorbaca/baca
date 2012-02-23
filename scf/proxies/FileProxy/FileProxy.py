@@ -6,10 +6,6 @@ import shutil
 # TODO: write all tests
 class FileProxy(AssetProxy):
     
-    # TODO: remove initializer in favor of AssetProxy initializer
-    def __init__(self, path_name=None, session=None):
-        AssetProxy.__init__(self, path_name=path_name, session=session)
-
     ### OVERLOADS ###
 
     def __repr__(self):
