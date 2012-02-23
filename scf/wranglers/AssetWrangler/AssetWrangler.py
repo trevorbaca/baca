@@ -337,12 +337,10 @@ class AssetWrangler(SCFObject):
         for asset_number in result:
             asset_index = asset_number - 1
             asset_path_name = argument_list[asset_index]
-            self.debug(asset_path_name)
             asset_proxy = self.get_asset_proxy(asset_path_name)
-            self.debug(asset_proxy)
             asset_proxy.remove()
             total_assets_removed += 1
-        self.proceed('{} asset(s) removed.'.format(total_assets_remove))
+        self.proceed('{} asset(s) removed.'.format(total_assets_removed))
         
     def run(self, cache=False, clear=True, head=None, user_input=None):
         self.assign_user_input(user_input=user_input)

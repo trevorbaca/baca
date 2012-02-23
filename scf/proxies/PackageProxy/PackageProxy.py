@@ -18,10 +18,7 @@ class PackageProxy(DirectoryProxy, ImportableAssetProxy):
     ### OVERLOADS ###
 
     def __repr__(self):
-        if self.importable_name is not None:
-            return '{}({!r})'.format(self.class_name, self.importable_name)
-        else:
-            return '{}()'.format(self.class_name)
+        ImportableAssetProxy.__repr__(self)
 
     ### READ-ONLY PUBLIC ATTRIBUTES ###
 

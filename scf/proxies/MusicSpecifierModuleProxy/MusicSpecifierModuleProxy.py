@@ -61,8 +61,8 @@ class MusicSpecifierModuleProxy(ModuleProxy):
         return menu
 
     def make_music_specifier_menu_tokens(self):
-        self.debug(self.editor.target)
-        self.debug(self.editor.target_attribute_tokens)
+        #self.debug(self.editor.target)
+        #self.debug(self.editor.target_attribute_tokens)
         return self.editor.target_attribute_tokens
 
     def parse(self):

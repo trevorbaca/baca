@@ -449,5 +449,11 @@ class SCFObject(object):
             return base_name[:base_name.rindex('.')]
         return base_name
 
+    def strip_py_extension(self, string):
+        if string.endswith('.py'):
+            return string[:-3]
+        else:
+            return string
+
     def where(self):
         return inspect.stack()[1]

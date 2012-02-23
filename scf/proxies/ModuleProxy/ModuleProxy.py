@@ -6,9 +6,15 @@ import os
 class ModuleProxy(ParsableFileProxy, ImportableAssetProxy):
 
     def __init__(self, module_importable_name=None, session=None):
+        module_importable_name = self.strip_py_extension(module_importable_name)
         path_name = self.module_importable_name_to_path_name(module_importable_name)
         ParsableFileProxy.__init__(self, path_name=path_name, session=session)
         ImportableAssetProxy.__init__(self, asset_full_name=path_name, session=self.session)
+
+    ### OVERLOADS ###
+
+    def __repr__(self):
+        return ImportableAssetProxy.__repr__(self)
 
     ### READ-ONLY ATTRIBUTES ###
 
