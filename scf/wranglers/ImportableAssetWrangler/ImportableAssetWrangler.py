@@ -17,6 +17,27 @@ class ImportableAssetWrangler(AssetWrangler):
 
     ### PUBLIC METHODS ###
 
+    def list_asset_importable_names(self, head=None):
+        result = []
+#        if head is None: head = ''
+#        result, asset_importable_names = [], []
+#        asset_importable_names.extend(self.list_score_external_asset_importable_names(head=head))
+#        asset_importable_names.extend(self.list_score_internal_asset_importable_names(head=head))
+#        for asset_importable_name in asset_importable_names:
+#            if asset_importable_name.startswith(head):
+#                result.append(asset_importable_name)
+        result.extend(self.list_score_external_asset_importable_names(head=head))
+        result.extend(self.list_score_internal_asset_importable_names(head=head))
+        return result
+
+    def list_asset_proxies(self, head=None):
+        result = []
+        for package_importable_name in self.list_asset_importable_names(head=head):
+            #self.debug(package_importable_name, 'pp')
+            asset_proxy = self.get_asset_proxy(package_importable_name)
+            result.append(asset_proxy)
+        return result
+
     def list_score_external_asset_importable_names(self, head=None):
         result = []
         for path_name in self.list_score_external_asset_container_path_names(head=head):
@@ -45,24 +66,6 @@ class ImportableAssetWrangler(AssetWrangler):
         result = []
         for asset_proxy in self.list_visible_asset_proxies(head=head):
             result.append(asset_proxy.importable_name)
-        return result
-
-    def list_asset_proxies(self, head=None):
-        result = []
-        for package_importable_name in self.list_asset_importable_names(head=head):
-            asset_proxy = self.get_asset_proxy(package_importable_name)
-            result.append(asset_proxy)
-        return result
-
-    def list_asset_importable_names(self, head=None):
-        if head is None: head = ''
-        result, asset_importable_names = [], []
-        asset_importable_names.extend(self.list_score_external_asset_importable_names(head=head))
-        asset_importable_names.extend(
-            self.list_score_internal_asset_importable_names(head=head))
-        for asset_importable_name in asset_importable_names:
-            if asset_importable_name.startswith(head):
-                result.append(asset_importable_name)
         return result
 
     def make_visible_asset_menu_tokens(self, head=None):

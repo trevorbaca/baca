@@ -1,15 +1,15 @@
 from baca.scf.proxies.MusicSpecifierModuleProxy import MusicSpecifierModuleProxy
-from baca.scf.wranglers.PackageWrangler import PackageWrangler
+from baca.scf.wranglers.ModuleWrangler import ModuleWrangler
 import os
 
 
-class MusicSpecifierModuleWrangler(PackageWrangler):
+class MusicSpecifierModuleWrangler(ModuleWrangler):
 
     def __init__(self, session=None):
-        PackageWrangler.__init__(self,
-            score_external_asset_container_importable_names= \
+        ModuleWrangler.__init__(self,
+            score_external_asset_container_importable_names=\
                 [self.score_external_specifiers_package_importable_name],
-            score_internal_asset_container_importable_name_infix= \
+            score_internal_asset_container_importable_name_infix=\
                 self.score_internal_specifiers_package_importable_name_infix,
             session=session)
 

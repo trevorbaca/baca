@@ -126,6 +126,7 @@ class AssetWrangler(SCFObject):
         return results
 
     def get_asset_proxy(self, asset_full_name):
+        #self.debug(asset_full_name)
         return self.asset_class(asset_full_name, session=self.session)
 
     # asset containers (all) #
@@ -185,11 +186,11 @@ class AssetWrangler(SCFObject):
         return result
 
     def list_score_external_asset_container_importable_names(self, head=None):
-        #result = []
-        #if self._score_external_asset_container_importable_name:
-        #    result.append(self._score_external_asset_container_importable_name)
-        #return result
-        return self._score_external_asset_container_importable_names[:]
+        result = []
+        for importable_name in self._score_external_asset_container_importable_names:
+            if head is None or importable_name.startswith(head):
+                result.append(importable_name)
+        return result
     
     def list_score_external_asset_container_path_names(self, head=None):
         result = []
@@ -197,7 +198,6 @@ class AssetWrangler(SCFObject):
             result.append(self.package_importable_name_to_path_name(importable_name))
         return result
 
-    # TODO: list_score_external_asset_container_proxies
     def list_score_external_asset_container_proxies(self, head=None):
         result = []
         for importable_name in self.list_score_external_asset_container_importable_names(head=head):
