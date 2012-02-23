@@ -47,7 +47,7 @@ class ScorePackageProxy(PackageProxy):
 
     @property
     def chunks_package_directory_name(self):
-        return os.path.join(self.directory_name, 'mus', 'chunks')
+        return os.path.join(self.path_name, 'mus', 'chunks')
 
     @property
     def chunks_package_importable_name(self):
@@ -63,7 +63,7 @@ class ScorePackageProxy(PackageProxy):
 
     @property
     def dist_pdf_directory_name(self):
-        return os.path.join(self.dist_proxy.directory_name, 'pdf')
+        return os.path.join(self.dist_proxy.path_name, 'pdf')
 
     @property
     def dist_proxy(self):
@@ -103,7 +103,7 @@ class ScorePackageProxy(PackageProxy):
 
     @property
     def materials_package_directory_name(self):
-        return os.path.join(self.directory_name, 'mus', 'materials')
+        return os.path.join(self.path_name, 'mus', 'materials')
 
     @property
     def materials_package_importable_name(self):
@@ -148,7 +148,7 @@ class ScorePackageProxy(PackageProxy):
 
     @property
     def top_level_directory_names(self):
-        return tuple([x.directory_name for x in self.top_level_directory_proxies])
+        return tuple([x.path_name for x in self.top_level_directory_proxies])
 
     @property
     def top_level_directory_proxies(self):
@@ -425,8 +425,8 @@ class ScorePackageProxy(PackageProxy):
         self.restore_breadcrumbs(cache=cache)
 
     def profile(self, prompt=True):
-        if not os.path.exists(self.directory_name):
-            raise OSError('directory {!r} does not exist.'.format(self.directory_name))
+        if not os.path.exists(self.path_name):
+            raise OSError('directory {!r} does not exist.'.format(self.path_name))
         if self.short_name == 'recursif':
             return
         lines = []

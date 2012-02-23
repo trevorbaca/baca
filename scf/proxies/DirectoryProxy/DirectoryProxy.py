@@ -9,7 +9,7 @@ class DirectoryProxy(AssetProxy):
 
     def __eq__(self, other):
         if isinstance(other, type(self)):
-            if self.directory_name == other.directory_name:
+            if self.path_name == other.path_name:
                 return True
         return False
 
@@ -17,17 +17,17 @@ class DirectoryProxy(AssetProxy):
         return not self == other
 
     def __repr__(self):
-        return '{}({!r})'.format(self.class_name, self.directory_name)
+        return '{}({!r})'.format(self.class_name, self.path_name)
 
     ### READ-ONLY PUBLIC ATTRIBUTES ###
 
     @property
     def directory_contents(self):
-        for file_name in os.listdir(self.directory_name):
+        for file_name in os.listdir(self.path_name):
             if file_name.endswith('.pyc'):
-                path_name = os.path.join(self.directory_name, file_name)
+                path_name = os.path.join(self.path_name, file_name)
                 os.remove(path_name)
-        return os.listdir(self.directory_name)
+        return os.listdir(self.path_name)
 
     @property
     def directory_name(self):
@@ -35,7 +35,7 @@ class DirectoryProxy(AssetProxy):
 
     @property
     def svn_add_command(self):
-        return 'cd {} && svn-add-all'.format(self.directory_name)
+        return 'cd {} && svn-add-all'.format(self.path_name)
     
     ### PUBLIC METHODS ###
 
@@ -45,10 +45,10 @@ class DirectoryProxy(AssetProxy):
         result = getter.run()
         if self.backtrack():
             return
-        self.directory_name = result
+        self.path_name = result
 
     def make_directory(self):
-        os.mkdir(self.directory_name)
+        os.mkdir(self.path_name)
 
     def print_directory_contents(self):
         self.display(self.directory_contents, capitalize_first_character=False)

@@ -6,7 +6,7 @@ def test_DirectoryProxy_read_only_attributes_01():
     '''
 
     directory_proxy = baca.scf.proxies.DirectoryProxy('/Users/trevorbaca/Documents/other/baca/scm')
-    assert directory_proxy.directory_name == '/Users/trevorbaca/Documents/other/baca/scm'
+    assert directory_proxy.path_name == '/Users/trevorbaca/Documents/other/baca/scm'
     assert directory_proxy.is_in_repository
 
 

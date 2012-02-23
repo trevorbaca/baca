@@ -8,7 +8,7 @@ def test_HomePackageProxy_01():
 
     hpp = baca.scf.proxies.HomePackageProxy()
     assert hpp.class_name == 'HomePackageProxy'
-    assert hpp.directory_name == '/Users/trevorbaca/Documents/other/baca'
+    assert hpp.path_name == '/Users/trevorbaca/Documents/other/baca'
     assert hpp.get_tag('foo') is None
     assert hpp.get_tags() == {}
     assert hpp.initializer_file_name == '/Users/trevorbaca/Documents/other/baca/__init__.py'

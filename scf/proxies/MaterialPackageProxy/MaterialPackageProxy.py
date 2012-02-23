@@ -185,7 +185,7 @@ class MaterialPackageProxy(PackageProxy):
     @property
     def illustration_builder_module_file_name(self):
         if self.should_have_illustration_builder_module:
-            return os.path.join(self.directory_name, 'illustration_builder.py')
+            return os.path.join(self.path_name, 'illustration_builder.py')
 
     @property
     def illustration_builder_module_importable_name(self):
@@ -203,7 +203,7 @@ class MaterialPackageProxy(PackageProxy):
     @property
     def illustration_ly_file_name(self):
         if self.should_have_illustration_ly:
-            return os.path.join(self.directory_name, 'illustration.ly')
+            return os.path.join(self.path_name, 'illustration.ly')
 
     @property
     def illustration_ly_file_proxy(self):
@@ -215,7 +215,7 @@ class MaterialPackageProxy(PackageProxy):
     @property
     def illustration_pdf_file_name(self):
         if self.should_have_illustration_pdf:
-            return os.path.join(self.directory_name, 'illustration.pdf')
+            return os.path.join(self.path_name, 'illustration.pdf')
 
     @property
     def illustration_pdf_file_proxy(self):
@@ -261,7 +261,7 @@ class MaterialPackageProxy(PackageProxy):
     @property
     def material_definition_module_file_name(self):
         if self.should_have_material_definition_module:
-            return os.path.join(self.directory_name, 'material_definition.py')
+            return os.path.join(self.path_name, 'material_definition.py')
 
     @property
     def material_definition_module_importable_name(self):
@@ -341,7 +341,7 @@ class MaterialPackageProxy(PackageProxy):
     @property
     def output_material_module_file_name(self): 
         if self.should_have_output_material_module:
-            return os.path.join(self.directory_name, 'output_material.py')
+            return os.path.join(self.path_name, 'output_material.py')
 
     @property
     def output_material_module_importable_name(self):
@@ -416,7 +416,7 @@ class MaterialPackageProxy(PackageProxy):
     @property
     def user_input_module_file_name(self): 
         if self.should_have_user_input_module:
-            return os.path.join(self.directory_name, 'user_input.py')
+            return os.path.join(self.path_name, 'user_input.py')
     
     @property
     def user_input_module_importable_name(self):
@@ -775,12 +775,12 @@ class MaterialPackageProxy(PackageProxy):
             helpers.globally_replace_in_file(self.parent_initializer_file_name, 
                 self.material_underscored_name, new_material_underscored_name)
             # rename package directory
-            new_directory_name = self.directory_name.replace(
+            new_directory_name = self.path_name.replace(
                 self.material_underscored_name, new_material_underscored_name)
-            command = 'svn mv {} {}'.format(self.directory_name, new_directory_name)
+            command = 'svn mv {} {}'.format(self.path_name, new_directory_name)
             os.system(command)
             # update package initializer
-            parent_directory_name = os.path.directory(self.directory_name)
+            parent_directory_name = os.path.directory(self.path_name)
             new_package_directory = os.path.join(parent_directory_name, new_material_underscored_name)
             new_initializer = os.path.join(new_package_directory, '__init__.py')
             helpers.globally_replace_in_file(

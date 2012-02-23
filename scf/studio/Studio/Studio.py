@@ -258,7 +258,7 @@ class Studio(SCFObject):
 
     def run_py_test_all(self, prompt=True):
         proc = subprocess.Popen(
-            'py.test {} {}'.format(self.directory_name, self.score_package_wrangler.directory_name), 
+            'py.test {} {}'.format(self.path_name, self.score_package_wrangler.path_name), 
             shell=True, stdout=subprocess.PIPE)
         lines = [line.strip() for line in proc.stdout.readlines()]
         if lines:

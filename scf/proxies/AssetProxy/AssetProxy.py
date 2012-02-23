@@ -53,7 +53,7 @@ class AssetProxy(SCFObject):
         return result
 
     def remove_nonversioned_asset(self):
-        line = '{} will be removed.\n'.format(self.directory_name)
+        line = '{} will be removed.\n'.format(self.path_name)
         self.display(line)
         getter = self.make_getter(where=self.where())
         getter.append_string("type 'remove' to proceed")
@@ -109,7 +109,7 @@ class AssetProxy(SCFObject):
         self.restore_breadcrumbs(cache=cache)
 
     def run_py_test(self, prompt=True):
-        proc = subprocess.Popen('py.test {}'.format(self.directory_name), shell=True, stdout=subprocess.PIPE)
+        proc = subprocess.Popen('py.test {}'.format(self.path_name), shell=True, stdout=subprocess.PIPE)
         lines = [line.strip() for line in proc.stdout.readlines()]
         if lines:
             self.display(lines)

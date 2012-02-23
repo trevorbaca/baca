@@ -56,8 +56,8 @@ class PackageProxy(DirectoryProxy, ImportableAssetProxy):
 
     @property
     def initializer_file_name(self):
-        if self.directory_name is not None:
-            return os.path.join(self.directory_name, '__init__.py')
+        if self.path_name is not None:
+            return os.path.join(self.path_name, '__init__.py')
 
     # TODO: write test
     @property
@@ -105,7 +105,7 @@ class PackageProxy(DirectoryProxy, ImportableAssetProxy):
 
     @property
     def tags_file_name(self):
-        return os.path.join(self.directory_name, 'tags.py')
+        return os.path.join(self.path_name, 'tags.py')
 
     @property
     def tags_file_proxy(self):
