@@ -6,10 +6,9 @@ import shutil
 # TODO: write all tests
 class FileProxy(AssetProxy):
     
-    def __init__(self, path_name, session=None):
-        assert isinstance(path_name, str), '{!r} is not a string.'.format(path_name)
-        AssetProxy.__init__(self, session=session)
-        self._path_name = path_name
+    # TODO: remove initializer in favor of AssetProxy initializer
+    def __init__(self, path_name=None, session=None):
+        AssetProxy.__init__(self, path_name=path_name, session=session)
 
     ### OVERLOADS ###
 

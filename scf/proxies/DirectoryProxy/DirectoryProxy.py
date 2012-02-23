@@ -5,10 +5,12 @@ import subprocess
 
 class DirectoryProxy(AssetProxy):
 
-    def __init__(self, directory_name, session=None):
-        assert isinstance(directory_name, (str, type(None)))
-        AssetProxy.__init__(self, session=session)
-        self._directory_name = directory_name
+    # TODO: remove initializer in favor of AssetProxy initializer
+    #def __init__(self, directory_name=None, session=None):
+    #    AssetProxy.__init__(self, session=session)
+    #    self._directory_name = directory_name
+    def __init__(self, directory_name=None, session=None):
+        AssetProxy.__init__(self, path_name=directory_name, session=session)
 
     ### OVERLOADS ###
 
@@ -36,7 +38,8 @@ class DirectoryProxy(AssetProxy):
 
     @property
     def directory_name(self):
-        return self._directory_name
+        #return self._directory_name
+        return self._path_name
 
     @property
     def is_in_repository(self):

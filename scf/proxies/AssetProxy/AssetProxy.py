@@ -5,6 +5,11 @@ import subprocess
 
 class AssetProxy(SCFObject):
 
+    def __init__(self, path_name=None, session=None):
+        assert isinstance(path_name, (str, type(None)))
+        SCFObject.__init__(self, session=session)
+        self._path_name = path_name
+
     ### READ-ONLY PUBLIC ATTRIBUTES ###
 
     @property
@@ -13,7 +18,7 @@ class AssetProxy(SCFObject):
         
     @property
     def path_name(self):
-        self.print_implemented_on_child_classes()
+        return self._path_name
 
     @property
     def short_name(self):

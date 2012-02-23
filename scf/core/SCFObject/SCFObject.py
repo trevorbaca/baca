@@ -141,6 +141,18 @@ class SCFObject(object):
 
     ### PUBLIC METHODS ###
 
+    def asset_full_name_to_importable_name(self, asset_full_name):
+        if self.is_path_name(asset_full_name):
+            return self.path_name_to_package_importable_name(asset_full_name)
+        else:
+            return asset_full_name
+
+    def asset_full_name_to_path_name(self, asset_full_name):
+        if self.is_path_name(asset_full_name):
+            return asset_full_name
+        else:
+            return self.package_importable_name_to_path_name(asset_full_name)
+
     def assign_user_input(self, user_input=None):
         if user_input is not None:
             self.session.user_input = user_input
