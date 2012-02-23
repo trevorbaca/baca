@@ -41,35 +41,19 @@ class MusicSpecifierModuleProxy(ModuleProxy):
 
     ### PUBLIC METHODS ###
 
-    def edit_music_specifier_at_number(self, number, include_newline=True):
-        number = int(number)
-        self.editor.edit_at_number(number)
-        
+    def edit(self):
+        self.editor.run()
+        self._music_specifier_in_memory = self.editor.target
+        self.write_music_specifier_to_disk(self.music_specifier_in_memory)
+
     def fix(self):
         self.print_not_implemented()
-
-    def handle_main_menu_result(self, result):
-        assert isinstance(result, str)
-        if mathtools.is_integer_equivalent_expr(result):
-            self.edit_music_specifier_at_number(result, include_newline=False)
-        else:
-            raise ValueError
 
     def load_music_specifier_into_memory(self):
         music_specifier = self.read_music_specifier_from_disk()
         if music_specifier is None:
             music_specifier = MusicSpecifier()
         self._music_specifier_in_memory = music_specifier
-
-    def make_main_menu(self):
-        menu, section = self.make_menu(where=self.where(), is_keyed=False, is_parenthetically_numbered=True)
-        section.tokens = self.make_music_specifier_menu_tokens()
-        return menu
-
-    def make_music_specifier_menu_tokens(self):
-        self.debug(self.editor.target)
-        self.debug(self.editor.target_attribute_tokens)
-        return self.editor.target_attribute_tokens
 
     def parse(self):
         is_parsable = True
@@ -119,8 +103,8 @@ class MusicSpecifierModuleProxy(ModuleProxy):
             music_specifier = locals().get('music_specifier', None)
             return music_specifier
 
-    #def write_music_specifier_to_disk(self, music_specifier_in_memory):
-    def write_music_specifier_to_disk(self):
+    def write_music_specifier_to_disk(self, music_specifier_in_memory):
+        self.parse()
         self.setup_statements[:] = self.conditionally_add_terminal_newlines(
             self.music_specifier_in_memory.music_specifier_module_import_statements)[:]
         self.user_input_wrapper_lines[:] = self.conditionally_add_terminal_newlines(

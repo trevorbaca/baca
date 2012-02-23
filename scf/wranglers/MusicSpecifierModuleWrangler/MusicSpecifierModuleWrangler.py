@@ -36,7 +36,8 @@ class MusicSpecifierModuleWrangler(ModuleWrangler):
             self.profile_visible_assets()
         else:
             package_proxy = self.get_asset_proxy(result)
-            package_proxy.run()
+            #package_proxy.run()
+            package_proxy.edit()
 
     def make_main_menu(self, head=None):
         menu, section = self.make_menu(where=self.where(), is_parenthetically_numbered=True)
