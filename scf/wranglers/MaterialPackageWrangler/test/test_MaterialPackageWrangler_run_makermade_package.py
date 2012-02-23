@@ -1,5 +1,5 @@
 from abjad.tools import notetools
-import baca
+import scf
 import py
 
 
@@ -7,14 +7,14 @@ def test_MaterialPackageWrangler_run_makermade_package_01():
     '''Make makermade package. Delete package.
     '''
     
-    studio = baca.scf.studio.Studio()
-    assert not studio.package_exists('baca.materials.testsargasso')
+    studio = scf.studio.Studio()
+    assert not studio.package_exists('materials.testsargasso')
 
     try:
         studio.run(user_input='m m sargasso testsargasso default q')
-        assert studio.package_exists('baca.materials.testsargasso')
-        mpp = baca.scf.makers.SargassoMeasureMaterialPackageMaker(
-            'baca.materials.testsargasso')
+        assert studio.package_exists('materials.testsargasso')
+        mpp = scf.makers.SargassoMeasureMaterialPackageMaker(
+            'materials.testsargasso')
         assert mpp.is_makermade
         assert mpp.directory_contents == ['__init__.py', 'user_input.py']
         assert mpp.has_initializer
@@ -25,20 +25,20 @@ def test_MaterialPackageWrangler_run_makermade_package_01():
         assert mpp.output_material is None
     finally:
         studio.run(user_input='m testsargasso del remove default q')
-        assert not studio.package_exists('baca.materials.testsargasso')
+        assert not studio.package_exists('materials.testsargasso')
 
 
 def test_MaterialPackageWrangler_run_makermade_package_02():
     '''Make score-resident makermade package. Delete package.
     '''
     
-    studio = baca.scf.studio.Studio()
+    studio = scf.studio.Studio()
     assert not studio.package_exists('betoerung.mus.materials.testsargasso')
 
     try:
         studio.run(user_input='betörung m m sargasso testsargasso default q')
         assert studio.package_exists('betoerung.mus.materials.testsargasso')
-        mpp = baca.scf.makers.SargassoMeasureMaterialPackageMaker(
+        mpp = scf.makers.SargassoMeasureMaterialPackageMaker(
             'betoerung.mus.materials.testsargasso')
         assert mpp.is_makermade
         assert mpp.directory_contents == ['__init__.py', 'user_input.py']
@@ -58,15 +58,15 @@ def test_MaterialPackageWrangler_run_makermade_package_02():
 #    Verify invalid initializer. Remove package.
 #    '''
 #
-#    studio = baca.scf.studio.Studio()
-#    assert not studio.package_exists('baca.materials.testsargasso')
+#    studio = scf.studio.Studio()
+#    assert not studio.package_exists('materials.testsargasso')
 #
 #    try:
 #        studio.run(user_input=
 #            'm m testsargasso default default '
 #            'testsargasso incanned canned_exception.py default q')
-#        assert studio.package_exists('baca.materials.testsargasso')
-#        mpp = baca.scf.makers.SargassoMeasureMaterialPackageMaker('baca.materials.testsargasso')
+#        assert studio.package_exists('materials.testsargasso')
+#        mpp = scf.makers.SargassoMeasureMaterialPackageMaker('materials.testsargasso')
 #        assert mpp.is_makermade and not mpp.is_data_only
 #        assert mpp.directory_contents == ['__init__.py', 'material_definition.py']
 #        assert not mpp.has_readable_initializer
@@ -80,7 +80,7 @@ def test_MaterialPackageWrangler_run_makermade_package_02():
 #        assert mpp.illustration is None
 #    finally:
 #        studio.run(user_input='m testsargasso del remove default q')
-#        assert not studio.package_exists('baca.materials.testsargasso')
+#        assert not studio.package_exists('materials.testsargasso')
 #
 #
 #def test_MaterialPackageWrangler_run_makermade_package_04():
@@ -88,16 +88,16 @@ def test_MaterialPackageWrangler_run_makermade_package_02():
 #    Verify initializer. Remove package.
 #    '''
 #
-#    studio = baca.scf.studio.Studio()
-#    assert not studio.package_exists('baca.materials.testsargasso')
+#    studio = scf.studio.Studio()
+#    assert not studio.package_exists('materials.testsargasso')
 #
 #    try:
 #        studio.run(user_input=
 #            'm m testsargasso default default '
 #            'testsargasso incanned canned_exception.py default '
 #            'inr yes yes default q')
-#        assert studio.package_exists('baca.materials.testsargasso')
-#        mpp = baca.scf.makers.SargassoMeasureMaterialPackageMaker('baca.materials.testsargasso')
+#        assert studio.package_exists('materials.testsargasso')
+#        mpp = scf.makers.SargassoMeasureMaterialPackageMaker('materials.testsargasso')
 #        assert mpp.is_makermade and not mpp.is_data_only
 #        assert mpp.directory_contents == ['__init__.py', 'material_definition.py']
 #        assert mpp.has_readable_initializer
@@ -110,7 +110,7 @@ def test_MaterialPackageWrangler_run_makermade_package_02():
 #        assert mpp.output_material is None
 #    finally:
 #        studio.run(user_input='m testsargasso del remove default q')
-#        assert not studio.package_exists('baca.materials.testsargasso')
+#        assert not studio.package_exists('materials.testsargasso')
 #
 #
 #def test_MaterialPackageWrangler_run_makermade_package_05():
@@ -118,16 +118,16 @@ def test_MaterialPackageWrangler_run_makermade_package_02():
 #    Delete package." 
 #    '''
 #
-#    studio = baca.scf.studio.Studio()
-#    assert not studio.package_exists('baca.materials.testsargasso')
+#    studio = scf.studio.Studio()
+#    assert not studio.package_exists('materials.testsargasso')
 #
 #    try:
 #        studio.run(user_input=
 #            'm m testsargasso default default '
 #            'testsargasso mdcanned canned_testsargasso_material_definition.py default '
 #            'omm default q')
-#        assert studio.package_exists('baca.materials.testsargasso')
-#        mpp = baca.scf.makers.SargassoMeasureMaterialPackageMaker('baca.materials.testsargasso')
+#        assert studio.package_exists('materials.testsargasso')
+#        mpp = scf.makers.SargassoMeasureMaterialPackageMaker('materials.testsargasso')
 #        assert mpp.is_makermade and not mpp.is_data_only
 #        assert mpp.directory_contents == ['__init__.py', 
 #            'illustration_builder.py', 'material_definition.py', 'output_material.py']
@@ -141,7 +141,7 @@ def test_MaterialPackageWrangler_run_makermade_package_02():
 #        assert mpp.output_material and notetools.all_are_notes(mpp.output_material)
 #    finally:
 #        studio.run(user_input='m testsargasso del remove default q')
-#        assert not studio.package_exists('baca.materials.testsargasso')
+#        assert not studio.package_exists('materials.testsargasso')
 #
 #
 #def test_MaterialPackageWrangler_run_makermade_package_06():
@@ -149,15 +149,15 @@ def test_MaterialPackageWrangler_run_makermade_package_02():
 #    Remove package.
 #    '''
 #
-#    studio = baca.scf.studio.Studio()
-#    assert not studio.package_exists('baca.materials.testsargasso')
+#    studio = scf.studio.Studio()
+#    assert not studio.package_exists('materials.testsargasso')
 #
 #    try:
 #        studio.run(user_input=
 #            'm m testsargasso default default '
 #            'testsargasso mddelete default q')
-#        assert studio.package_exists('baca.materials.testsargasso')
-#        mpp = baca.scf.makers.SargassoMeasureMaterialPackageMaker('baca.materials.testsargasso')
+#        assert studio.package_exists('materials.testsargasso')
+#        mpp = scf.makers.SargassoMeasureMaterialPackageMaker('materials.testsargasso')
 #        assert mpp.is_makermade and not mpp.is_data_only
 #        assert mpp.directory_contents == ['__init__.py']
 #        assert mpp.has_readable_initializer
@@ -170,7 +170,7 @@ def test_MaterialPackageWrangler_run_makermade_package_02():
 #        assert mpp.output_material is None
 #    finally:
 #        studio.run(user_input='m testsargasso del remove default q')
-#        assert not studio.package_exists('baca.materials.testsargasso')
+#        assert not studio.package_exists('materials.testsargasso')
 #
 #
 #def test_MaterialPackageWrangler_run_makermade_package_07():
@@ -178,15 +178,15 @@ def test_MaterialPackageWrangler_run_makermade_package_02():
 #    Delete package.
 #    '''
 #
-#    studio = baca.scf.studio.Studio()
-#    assert not studio.package_exists('baca.materials.testsargasso')
+#    studio = scf.studio.Studio()
+#    assert not studio.package_exists('materials.testsargasso')
 #
 #    try:
 #        studio.run(user_input=
 #            'm m testsargasso default default '
 #            'testsargasso mdstub default q')
-#        assert studio.package_exists('baca.materials.testsargasso')
-#        mpp = baca.scf.makers.SargassoMeasureMaterialPackageMaker('baca.materials.testsargasso')
+#        assert studio.package_exists('materials.testsargasso')
+#        mpp = scf.makers.SargassoMeasureMaterialPackageMaker('materials.testsargasso')
 #        assert mpp.is_makermade and not mpp.is_data_only
 #        assert mpp.directory_contents == ['__init__.py', 'material_definition.py']
 #        assert mpp.has_readable_initializer
@@ -199,7 +199,7 @@ def test_MaterialPackageWrangler_run_makermade_package_02():
 #        assert mpp.output_material is None
 #    finally:
 #        studio.run(user_input='m testsargasso del remove default q')
-#        assert not studio.package_exists('baca.materials.testsargasso')
+#        assert not studio.package_exists('materials.testsargasso')
 #
 #
 #def test_MaterialPackageWrangler_run_makermade_package_08():
@@ -207,8 +207,8 @@ def test_MaterialPackageWrangler_run_makermade_package_02():
 #    Remove package.
 #    '''
 #
-#    studio = baca.scf.studio.Studio()
-#    assert not studio.package_exists('baca.materials.testsargasso')
+#    studio = scf.studio.Studio()
+#    assert not studio.package_exists('materials.testsargasso')
 #
 #    try:
 #        studio.run(user_input=
@@ -216,8 +216,8 @@ def test_MaterialPackageWrangler_run_makermade_package_02():
 #            'testsargasso mdcanned canned_testsargasso_material_definition.py default '
 #            'omm default '
 #            'omdelete default q')
-#        assert studio.package_exists('baca.materials.testsargasso')
-#        mpp = baca.scf.makers.SargassoMeasureMaterialPackageMaker('baca.materials.testsargasso')
+#        assert studio.package_exists('materials.testsargasso')
+#        mpp = scf.makers.SargassoMeasureMaterialPackageMaker('materials.testsargasso')
 #        assert mpp.is_makermade and not mpp.is_data_only
 #        assert mpp.directory_contents == ['__init__.py', 'material_definition.py']
 #        assert mpp.has_readable_initializer
@@ -230,7 +230,7 @@ def test_MaterialPackageWrangler_run_makermade_package_02():
 #        assert mpp.output_material is None
 #    finally:
 #        studio.run(user_input='m testsargasso del remove default q')
-#        assert not studio.package_exists('baca.materials.testsargasso')
+#        assert not studio.package_exists('materials.testsargasso')
 #
 #
 #def test_MaterialPackageWrangler_run_makermade_package_09():
@@ -238,15 +238,15 @@ def test_MaterialPackageWrangler_run_makermade_package_02():
 #    Examine package state. Remove package.
 #    '''
 #
-#    studio = baca.scf.studio.Studio()
-#    assert not studio.package_exists('baca.materials.testsargasso')
+#    studio = scf.studio.Studio()
+#    assert not studio.package_exists('materials.testsargasso')
 #
 #    try:
 #        studio.run(user_input=
 #            'm m testsargasso default default '
 #            'testsargasso mdcanned canned_exception.py default q')
-#        assert studio.package_exists('baca.materials.testsargasso')
-#        mpp = baca.scf.makers.SargassoMeasureMaterialPackageMaker('baca.materials.testsargasso')
+#        assert studio.package_exists('materials.testsargasso')
+#        mpp = scf.makers.SargassoMeasureMaterialPackageMaker('materials.testsargasso')
 #        assert mpp.is_makermade and not mpp.is_data_only
 #        assert mpp.directory_contents == ['__init__.py', 'material_definition.py']
 #        assert mpp.has_readable_initializer
@@ -259,7 +259,7 @@ def test_MaterialPackageWrangler_run_makermade_package_02():
 #        assert mpp.output_material is None
 #    finally:
 #        studio.run(user_input='m testsargasso del remove default q')
-#        assert not studio.package_exists('baca.materials.testsargasso')
+#        assert not studio.package_exists('materials.testsargasso')
 #
 #
 #def test_MaterialPackageWrangler_run_makermade_package_10():
@@ -267,8 +267,8 @@ def test_MaterialPackageWrangler_run_makermade_package_02():
 #    Verify invalid output material module. Remove package.
 #    '''
 #
-#    studio = baca.scf.studio.Studio()
-#    assert not studio.package_exists('baca.materials.testsargasso')
+#    studio = scf.studio.Studio()
+#    assert not studio.package_exists('materials.testsargasso')
 #
 #    try:
 #        studio.run(user_input=
@@ -276,8 +276,8 @@ def test_MaterialPackageWrangler_run_makermade_package_02():
 #            'testsargasso mdcanned canned_testsargasso_material_definition.py default '
 #            'omm default '
 #            'omcanned canned_exception.py default q')
-#        assert studio.package_exists('baca.materials.testsargasso')
-#        mpp = baca.scf.makers.SargassoMeasureMaterialPackageMaker('baca.materials.testsargasso')
+#        assert studio.package_exists('materials.testsargasso')
+#        mpp = scf.makers.SargassoMeasureMaterialPackageMaker('materials.testsargasso')
 #        assert mpp.is_makermade and not mpp.is_data_only
 #        assert mpp.directory_contents == ['__init__.py',
 #            'illustration_builder.py', 'material_definition.py', 'output_material.py']
@@ -291,7 +291,7 @@ def test_MaterialPackageWrangler_run_makermade_package_02():
 #        assert mpp.output_material is None
 #    finally:
 #        studio.run(user_input='m testsargasso del remove default q')
-#        assert not studio.package_exists('baca.materials.testsargasso')
+#        assert not studio.package_exists('materials.testsargasso')
 #
 #
 #def test_MaterialPackageWrangler_run_makermade_package_11():
@@ -299,8 +299,8 @@ def test_MaterialPackageWrangler_run_makermade_package_02():
 #    Make output data. Make PDF. Remove package.
 #    '''
 #
-#    studio = baca.scf.studio.Studio()
-#    assert not studio.package_exists('baca.materials.testsargasso')
+#    studio = scf.studio.Studio()
+#    assert not studio.package_exists('materials.testsargasso')
 #
 #    try:
 #        studio.run(user_input=
@@ -309,8 +309,8 @@ def test_MaterialPackageWrangler_run_makermade_package_02():
 #            'omm default '
 #            'pdfm default '
 #            'q')
-#        assert studio.package_exists('baca.materials.testsargasso')
-#        mpp = baca.scf.makers.SargassoMeasureMaterialPackageMaker('baca.materials.testsargasso')
+#        assert studio.package_exists('materials.testsargasso')
+#        mpp = scf.makers.SargassoMeasureMaterialPackageMaker('materials.testsargasso')
 #        assert mpp.is_makermade and not mpp.is_data_only
 #        assert mpp.directory_contents == [
 #            '__init__.py', 'illustration.ly', 'illustration.pdf', 
@@ -327,4 +327,4 @@ def test_MaterialPackageWrangler_run_makermade_package_02():
 #        assert mpp.output_material and notetools.all_are_notes(mpp.output_material)
 #    finally:
 #        studio.run(user_input='m testsargasso del remove default q')
-#        assert not studio.package_exists('baca.materials.testsargasso')
+#        assert not studio.package_exists('materials.testsargasso')

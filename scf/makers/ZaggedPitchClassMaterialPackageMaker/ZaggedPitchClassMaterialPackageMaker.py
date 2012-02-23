@@ -1,39 +1,25 @@
 from abjad.tools import sequencetools
 from baca.music.make_zagged_pitch_classes import make_illustration_from_output_material
-from baca.scf.makers.MaterialPackageMaker import MaterialPackageMaker
-from baca.scf.editors.UserInputWrapper import UserInputWrapper
-from baca.scf.editors.InteractiveEditor import InteractiveEditor
+from scf.makers.MaterialPackageMaker import MaterialPackageMaker
+from scf.editors.InteractiveEditor import InteractiveEditor
 import baca
 
 
 class ZaggedPitchClassMaterialPackageMaker(MaterialPackageMaker):
 
-    def __init__(self, package_importable_name=None, session=None):
-        MaterialPackageMaker.__init__(
-            self, package_importable_name=package_importable_name, session=session)
-
-    ### PUBLIC CLASS ATTRIBUTES ###
+    ### CLASS ATTRIBUTES ###
 
     generic_output_name = 'zagged pitch-classes'
-
     illustration_maker = staticmethod(make_illustration_from_output_material)
-
     output_material_checker = staticmethod(lambda x: isinstance(x, sequencetools.CyclicTree))
-
     output_material_maker = staticmethod(baca.music.make_zagged_pitch_classes)
-
-    output_material_module_import_statements = [
-        'from abjad.tools.sequencetools.CyclicTree import CyclicTree',]
+    output_material_module_import_statements = ['from abjad.tools import sequencetools']
+    should_have_user_input_module = True
 
     user_input_demo_values = [
         ('pc_cells', [[0, 7, 2, 10], [9, 6, 1, 8], [5, 4, 2, 11, 10, 9]]),
         ('division_cells', [[[1], [1], [1], [1, 1]], [[1], [1], [1], [1, 1, 1], [1, 1, 1]]]),
         ('grouping_counts', [1, 1, 2, 3]),
-        ]
-
-    # TODO: user_input_module_import_statementes = []
-    user_input_module_import_statements = [
-        'from baca.scf.editors import UserInputWrapper',
         ]
 
     user_input_tests = [

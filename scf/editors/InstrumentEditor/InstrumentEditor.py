@@ -1,18 +1,14 @@
 from abjad.tools.instrumenttools._Instrument import _Instrument
 from abjad.tools import instrumenttools
-from baca.scf.editors.InteractiveEditor import InteractiveEditor
-from baca.scf import predicates
+from scf.editors.InteractiveEditor import InteractiveEditor
+from scf import predicates
 
 
 # TODO: eventually make transposition information editable
 # TODO: eventually make clef information editable
 class InstrumentEditor(InteractiveEditor):
 
-    ### READ-ONLY PUBLIC ATTRIBUTES ###
-
-    @property
-    def breadcrumb(self):
-        return self.target_name or 'instrument editor'
+    ### CLASS ATTRIBUTES ###
 
     target_attribute_tuples = (
         ('instrument_name', predicates.is_string, True, None, 'in'),
@@ -20,8 +16,10 @@ class InstrumentEditor(InteractiveEditor):
         ('short_instrument_name',  predicates.is_string, True, None, 'sn'),
         ('short_instrument_name_markup', predicates.is_markup, True, None, 'sm'),
         )
-            
+
     target_class = _Instrument
+
+    ### READ-ONLY PUBLIC ATTRIBUTES ###
 
     @property
     def target_name(self):
@@ -99,7 +97,7 @@ class InstrumentEditor(InteractiveEditor):
         
     def handle_main_menu_result(self, result):
         if result == 'cl':
-            self.print_not_implemented()
+            self.print_not_yet_implemented()
             #self.edit_clefs_interactively()
         elif result == 'in':
             self.edit_instrument_name_interactively()
@@ -117,7 +115,7 @@ class InstrumentEditor(InteractiveEditor):
             else:
                 self.session.display_pitch_ranges_with_numbered_pitches = True
         elif result == 'trans':
-            self.print_not_implemented()
+            self.print_not_yet_implemented()
             #self.edit_transposition_interactively()
 
     def make_main_menu(self):

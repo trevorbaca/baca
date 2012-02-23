@@ -1,14 +1,13 @@
 # -*- encoding: utf-8 -*-
 from abjad.tools import iotools
 from abjad.tools import mathtools
-from baca.scf.core.SCFObject import SCFObject
-from baca.scf.wranglers.ChunkPackageWrangler import ChunkPackageWrangler
-from baca.scf.proxies.HomePackageProxy import HomePackageProxy
-from baca.scf.wranglers.MaterialPackageMakerWrangler import MaterialPackageMakerWrangler
-from baca.scf.wranglers.MaterialPackageWrangler import MaterialPackageWrangler
-from baca.scf.wranglers.MusicSpecifierModuleWrangler import MusicSpecifierModuleWrangler
-from baca.scf.wranglers.ScorePackageWrangler import ScorePackageWrangler
-from baca.scf.wranglers.StylesheetFileWrangler import StylesheetFileWrangler
+from scf.core.SCFObject import SCFObject
+from scf.wranglers.ChunkPackageWrangler import ChunkPackageWrangler
+from scf.wranglers.MaterialPackageMakerWrangler import MaterialPackageMakerWrangler
+from scf.wranglers.MaterialPackageWrangler import MaterialPackageWrangler
+from scf.wranglers.MusicSpecifierModuleWrangler import MusicSpecifierModuleWrangler
+from scf.wranglers.ScorePackageWrangler import ScorePackageWrangler
+from scf.wranglers.StylesheetFileWrangler import StylesheetFileWrangler
 import subprocess
 
 
@@ -17,7 +16,6 @@ class Studio(SCFObject):
     def __init__(self, session=None):
         SCFObject.__init__(self, session=session)
         self._chunk_package_wrangler = ChunkPackageWrangler(session=self.session)
-        self._home_package_proxy = HomePackageProxy(session=self.session)
         self._material_package_maker_wrangler = MaterialPackageMakerWrangler(session=self.session)
         self._material_package_wrangler = MaterialPackageWrangler(session=self.session)
         self._music_specifier_module_wrangler = MusicSpecifierModuleWrangler(session=self.session)
@@ -35,10 +33,6 @@ class Studio(SCFObject):
         return self._chunk_package_wrangler
 
     @property
-    def home_package_proxy(self):
-        return self._home_package_proxy
-
-    @property
     def material_package_maker_wrangler(self):
         return self._material_package_maker_wrangler
 
@@ -51,12 +45,12 @@ class Studio(SCFObject):
         return self._music_specifier_module_wrangler
 
     @property
-    def score_status_string(self):
-        return '{} scores'.format(self.session.scores_to_show)
-
-    @property
     def score_package_wrangler(self):
         return self._score_package_wrangler
+
+    @property
+    def score_status_string(self):
+        return '{} scores'.format(self.session.scores_to_show)
 
     @property
     def stylesheet_file_wrangler(self):
@@ -115,10 +109,11 @@ class Studio(SCFObject):
         elif result == 'all':
             self.session.show_all_scores()
         elif result == 'k':
-            self.print_not_implemented()
+            self.print_not_yet_implemented()
         elif result == 'm':
             breadcrumb = self.pop_breadcrumb()
-            self.material_package_wrangler.run(head=self.home_package_importable_name)
+            self.material_package_wrangler.run(
+                head=self.score_external_materials_package_importable_name)
             self.push_breadcrumb(breadcrumb)
         elif result == 'new':
             breadcrumb = self.pop_breadcrumb()
@@ -137,29 +132,15 @@ class Studio(SCFObject):
         '''Return true to exit the svn menu.
         '''
         this_result = False
-        if result == 'add':
-            self.home_package_proxy.svn_add()
-        elif result == 'add_scores':
-            self.score_package_wrangler.svn_add()
-        elif result == 'ci':
-            self.home_package_proxy.svn_ci()
-            return True
-        elif result == 'ci_scores':
+        if result == 'ci':
             self.score_package_wrangler.svn_ci()
-        elif result == 'pytest':
-            self.home_package_proxy.run_py_test()
-        elif result == 'pytest_scores':
-            self.score_package_wrangler.run_py_test()
-        elif result == 'pytest_all':
-            self.run_py_test_all()
+        #elif result == 'pytest_scores':
+        #    self.score_package_wrangler.run_py_test()
+        #elif result == 'pytest_all':
+        #    self.run_py_test_all()
         elif result == 'st':
-            self.home_package_proxy.svn_st()
-        elif result == 'st_scores':
             self.score_package_wrangler.svn_st()
         elif result == 'up':
-            self.home_package_proxy.svn_up()
-            return True
-        elif result == 'up_scores':
             self.score_package_wrangler.svn_up()
             return True
         return this_result
@@ -184,20 +165,11 @@ class Studio(SCFObject):
         return menu
 
     def make_svn_menu(self):
-        menu, section = self.make_menu(where=self.where(), is_keyed=False)
-        section.append(('add', 'add'))
-        section.append(('ci', 'ci'))
-        section.append(('st', 'st'))
-        section.append(('up', 'up'))
-        section = menu.make_section(is_keyed=False)
-        section.append(('add_scores', 'add_scores'))
-        section.append(('ci_scores', 'ci_scores'))
-        section.append(('st_scores', 'st_scores'))
-        section.append(('up_scores', 'up_scores'))
-        section = menu.make_section(is_keyed=False)
-        section.append(('pytest', 'pytest'))
-        section.append(('pytest_scores', 'pytest_scores'))
-        section.append(('pytest_all', 'pytest_all'))
+        menu, section = self.make_menu(where=self.where())
+        section.append(('add', 'svn add scores'))
+        section.append(('ci', 'svn commit scores'))
+        section.append(('st', 'svn status scores'))
+        section.append(('up', 'svn update scores'))
         return menu
 
     def manage_svn(self, clear=True):
@@ -258,7 +230,7 @@ class Studio(SCFObject):
 
     def run_py_test_all(self, prompt=True):
         proc = subprocess.Popen(
-            'py.test {} {}'.format(self.directory_name, self.score_package_wrangler.directory_name), 
+            'py.test {} {}'.format(self.path_name, self.score_package_wrangler.path_name), 
             shell=True, stdout=subprocess.PIPE)
         lines = [line.strip() for line in proc.stdout.readlines()]
         if lines:

@@ -1,9 +1,9 @@
-import baca
+import scf
 
 
 def test_Session_properties_01():
 
-    session = baca.scf.core.Session()
+    session = scf.core.Session()
 
     assert     session.is_displayable
     assert     session.menu_header == ''

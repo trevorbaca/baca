@@ -1,5 +1,5 @@
-from baca.scf.proxies.ChunkPackageProxy import ChunkPackageProxy
-from baca.scf.wranglers.PackageWrangler import PackageWrangler
+from scf.proxies.ChunkPackageProxy import ChunkPackageProxy
+from scf.wranglers.PackageWrangler import PackageWrangler
 import os
 
 
@@ -16,15 +16,15 @@ class ChunkPackageWrangler(PackageWrangler):
     ### READ-ONLY PUBLIC ATTRIBUTES ###
 
     @property
+    def asset_class(self):
+        return ChunkPackageProxy
+
+    @property
     def breadcrumb(self):
         if self.session.is_in_score:
             return 'chunks'
         else:
             return 'sketches'
-
-    @property
-    def asset_class(self):
-        return ChunkPackageProxy
 
     ### PUBLIC METHODS ###
 

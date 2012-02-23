@@ -1,10 +1,14 @@
+from abc import ABCMeta
+from abc import abstractmethod
+from abc import abstractproperty
 from abjad.tools import iotools
-from baca.scf.core.SCFObject import SCFObject
-from baca.scf.proxies.PackageProxy import PackageProxy
+from scf.core.SCFObject import SCFObject
+from scf.proxies.PackageProxy import PackageProxy
 import os
 
 
 class AssetWrangler(SCFObject):
+    __metaclass__ = ABCMeta
 
     def __init__(self, 
         score_external_asset_container_importable_names=None, 
@@ -45,9 +49,17 @@ class AssetWrangler(SCFObject):
 
     # asset class #
 
-    @property
+    @abstractproperty
     def asset_class(self):
-        self.print_implemented_on_child_classes()
+        pass
+
+    @property
+    def asset_class_human_readable_name(self):
+        return self.change_string_to_human_readable_string(self.asset_class.__name__)
+
+    @property
+    def asset_class_plural_human_readable_name(self):
+        return self.pluralize_string(self.asset_class_human_readable_name)
 
     @property
     def asset_container_class(self):
@@ -94,12 +106,12 @@ class AssetWrangler(SCFObject):
         return os.path.join(self.current_asset_container_path_name, self.temporary_asset_short_name)
 
     @property
-    def temporary_asset_short_name(self):
-        self.print_implemented_on_child_classes()
-
-    @property
     def temporary_asset_proxy(self):
-        return self.asset_class(self.temporary_asset_importable_name)
+        return self.get_asset_proxy(self.temporary_asset_importable_name)
+
+    @abstractproperty
+    def temporary_asset_short_name(self):
+        pass
 
     ### PUBLIC METHODS ###
     
@@ -127,6 +139,10 @@ class AssetWrangler(SCFObject):
 
     def get_asset_proxy(self, asset_full_name):
         return self.asset_class(asset_full_name, session=self.session)
+
+    @abstractmethod
+    def handle_main_menu_result(self, result):
+        pass
 
     # asset containers (all) #
 
@@ -164,7 +180,7 @@ class AssetWrangler(SCFObject):
 
     def list_asset_path_names(self, head=None):
         result = []
-        if head in (None, self.home_package_importable_name):
+        if head in (None,) + self.score_external_package_importable_names:
             result.extend(self.list_score_external_asset_path_names(head=head))
         result.extend(self.list_score_internal_asset_path_names(head=head))
         return result
@@ -304,8 +320,25 @@ class AssetWrangler(SCFObject):
         asset_proxy = self.get_asset_proxy(asset_path_name)
         asset_proxy.write_stub_to_disk()
 
+    @abstractmethod
     def make_asset_interactively(self):
-        self.print_implemented_on_child_classes()
+        pass
+
+    def make_asset_selection_breadcrumb(self, infinitival_phrase=None):
+        if infinitival_phrase:
+            return 'select {} {}:'.format(self.asset_class.generic_class_name, infinitival_phrase)
+        else:
+            return 'select {}:'.format(self.asset_class.generic_class_name)
+
+    def make_asset_selection_menu(self, head=None):
+        menu, section = self.make_menu(where=self.where(), is_keyed=False, is_parenthetically_numbered=True)
+        section.tokens = self.make_visible_asset_menu_tokens(head=head)
+        section.return_value_attribute = 'key'
+        return menu
+
+    @abstractmethod
+    def make_main_menu(self):
+        pass
 
     def make_visible_asset_menu_tokens(self, head=None):
         keys = self.list_visible_asset_path_names(head=head)
@@ -316,6 +349,35 @@ class AssetWrangler(SCFObject):
         for asset_proxy in self.list_visible_asset_proxies():
             asset_proxy.profile()
 
+    # TODO: write test
+    def remove_assets_interactively(self, head=None):
+        getter = self.make_getter(where=self.where())
+        argument_list = self.list_visible_asset_path_names(head=head)
+        getter.append_argument_range(self.asset_class_plural_human_readable_name, argument_list)
+        result = getter.run()
+        if self.backtrack():
+            return
+        asset_indices = [asset_number - 1 for asset_number in result]
+        total_assets_removed = 0
+        for asset_number in result:
+            asset_index = asset_number - 1
+            asset_path_name = argument_list[asset_index]
+            asset_proxy = self.get_asset_proxy(asset_path_name)
+            asset_proxy.remove()
+            total_assets_removed += 1
+        self.proceed('{} asset(s) removed.'.format(total_assets_removed))
+
+    # TODO: write test
+    def rename_asset_interactively(self, head=None):
+        self.push_backtrack()
+        asset_importable_name = self.select_asset_importable_name_interactively(
+            head=head, infinitival_phrase='to rename')
+        self.pop_backtrack()
+        if self.backtrack():
+            return 
+        asset_proxy = self.get_asset_proxy(asset_importable_name)
+        asset_proxy.rename_interactively()
+        
     def run(self, cache=False, clear=True, head=None, user_input=None):
         self.assign_user_input(user_input=user_input)
         self.cache_breadcrumbs(cache=cache)
@@ -335,12 +397,30 @@ class AssetWrangler(SCFObject):
         self.pop_breadcrumb()
         self.restore_breadcrumbs(cache=cache)
 
-    def svn_add(self, prompt=True):
-        for asset_proxy in self.list_visible_asset_proxies():
-            asset_proxy.svn_add(prompt=False)
-        self.proceed(prompt=prompt)
+    def select_asset_importable_name_interactively(
+        self, clear=True, cache=False, head=None, infinitival_phrase=None, user_input=None):
+        self.cache_breadcrumbs(cache=cache)
+        while True:
+            self.push_breadcrumb(self.make_asset_selection_breadcrumb(infinitival_phrase=infinitival_phrase))
+            menu = self.make_asset_selection_menu(head=head)
+            result = menu.run(clear=clear)
+            if self.backtrack():
+                break
+            elif not result:
+                self.pop_breadcrumb()
+                continue
+            else:
+                break
+        self.pop_breadcrumb()
+        self.restore_breadcrumbs(cache=cache)
+        return result
 
-    def svn_ci(self, prompt=True):
+    def svn_add(self, is_interactive=True):
+        for asset_proxy in self.list_visible_asset_proxies():
+            asset_proxy.svn_add(is_interactive=False)
+        self.proceed(prompt=is_interactive)
+
+    def svn_ci(self, is_interactive=True):
         getter = self.make_getter(where=self.where())
         getter.append_string('commit message')
         commit_message = getter.run()
@@ -351,15 +431,15 @@ class AssetWrangler(SCFObject):
         if not self.confirm():
             return
         for asset_proxy in self.list_visible_asset_proxies():
-            asset_proxy.svn_ci(commit_message=commit_message, prompt=False)
-        self.proceed(prompt=prompt)
+            asset_proxy.svn_ci(commit_message=commit_message, is_interactive=False)
+        self.proceed(prompt=is_interactive)
 
-    def svn_st(self, prompt=True):
+    def svn_st(self, is_interactive=True):
         for asset_proxy in self.list_visible_asset_proxies():
-            asset_proxy.svn_st(prompt=False)
-        self.proceed(prompt=prompt)
+            asset_proxy.svn_st(is_interactive=False)
+        self.proceed(prompt=is_interactive)
 
-    def svn_up(self, prompt=True):
+    def svn_up(self, is_interactive=True):
         for asset_proxy in self.list_visible_asset_proxies():
-            asset_proxy.svn_up(prompt=False)
-        self.proceed(prompt=prompt)
+            asset_proxy.svn_up(is_interactive=False)
+        self.proceed(prompt=is_interactive)

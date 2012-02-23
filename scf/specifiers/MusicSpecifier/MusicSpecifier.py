@@ -1,5 +1,5 @@
-from baca.scf.specifiers.PerformerContributionSpecifierList import PerformerContributionSpecifierList
-from baca.scf.specifiers.Specifier import Specifier
+from scf.specifiers.PerformerContributionSpecifierList import PerformerContributionSpecifierList
+from scf.specifiers.Specifier import Specifier
 
 
 class MusicSpecifier(Specifier):
@@ -15,4 +15,17 @@ class MusicSpecifier(Specifier):
             performer_contribution_specifiers or PerformerContributionSpecifierList()
         self.tempo = tempo
 
+    ### CLASS ATTRIBUTES ATTRIBUTES ###
+
+    storage_module_import_statements = [
+        'from abjad import *',
+        'from abjad.tools import contexttools',
+        'from abjad.tools import durationtools',
+        'from scf import specifiers',
+        ]
+
     ### READ-ONLY ATTRIBUTES ###
+
+    @property
+    def one_line_menuing_summary(self):
+        return self.music_specifier_name or 'music specifier'

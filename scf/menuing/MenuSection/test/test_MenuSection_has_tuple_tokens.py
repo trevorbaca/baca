@@ -1,9 +1,9 @@
-import baca
+import scf
 
 
 def test_MenuSection_has_tuple_tokens_01():
 
-    menu = baca.scf.menuing.Menu()
+    menu = scf.menuing.Menu()
     section = menu.make_section()
     assert not section.has_tuple_tokens
 
@@ -13,6 +13,6 @@ def test_MenuSection_has_tuple_tokens_01():
 
     section  = menu.make_section()
     section.append(('add', 'first command'))
-    section.append(('del', 'second command'))
+    section.append(('rm', 'second command'))
     section.append(('mod', 'third command'))
     assert section.has_tuple_tokens

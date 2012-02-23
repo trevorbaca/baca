@@ -1,6 +1,6 @@
 from abjad.tools import iotools
 from abjad.tools import mathtools
-from baca.scf.menuing.MenuObject import MenuObject
+from scf.menuing.MenuObject import MenuObject
 
 
 class MenuSection(MenuObject):
@@ -40,7 +40,11 @@ class MenuSection(MenuObject):
 
     @property
     def has_existing_value_tuple_tokens(self):
-        return any([isinstance(x, tuple) and len(tuple) == 3 for x in self.tokens])
+        return any([isinstance(x, tuple) and len(x) == 3 for x in self.tokens])
+
+    @property
+    def has_prepopulated_return_value_tuple_tokens(self):
+        return any([isinstance(x, tuple) and len(x) == 4 for x in self.tokens])
 
     @property
     def has_string_tokens(self):
@@ -102,16 +106,22 @@ class MenuSection(MenuObject):
     @property
     def unpacked_menu_entries_optimized(self):
         result = []
+        total_empty_tokens = 0
         for i, token in enumerate(self.tokens):
+            if token == ():
+                total_empty_tokens += 1
+                continue
             number = key = body = None
             if self.is_numbered or self.is_parenthetically_numbered:
-                number = i + 1
+                number = i + 1 - total_empty_tokens
             if isinstance(token, str):
                 body = token
             elif isinstance(token, tuple) and len(token) == 2:
                 key, body = token
             elif isinstance(token, tuple) and len(token) == 3:
                 key, body, existing_value = token
+            elif isinstance(token, tuple) and len(token) == 4:
+                key, body, existing_value, prepopulated_return_value = token
             else:
                 raise ValueError
             assert body
@@ -131,6 +141,8 @@ class MenuSection(MenuObject):
                     return_value = body
             elif self.return_value_attribute == 'body':
                 return_value = body
+            elif self.return_value_attribute == 'prepopulated':
+                return_value = prepopulated_return_value
             else:
                 raise ValueError
             assert return_value is not None
@@ -162,7 +174,7 @@ class MenuSection(MenuObject):
         def fget(self):
             return self._return_value_attribute
         def fset(self, return_value_attribute):
-            assert return_value_attribute in ('body', 'key', 'number')
+            assert return_value_attribute in ('body', 'key', 'number', 'prepopulated')
             self._return_value_attribute = return_value_attribute
         return property(**locals())
 
@@ -275,8 +287,7 @@ class MenuSection(MenuObject):
     def is_token(self, expr):
         if isinstance(expr, str):
             return True
-        #elif isinstance(expr, tuple) and len(expr) == 2:
-        elif isinstance(expr, tuple) and len(expr) in (2, 3):
+        elif isinstance(expr, tuple) and len(expr) in (0, 2, 3, 4):
             return True
         return False
         
@@ -304,15 +315,19 @@ class MenuSection(MenuObject):
         menu_lines = []
         menu_lines.extend(self.make_title_lines())
         assert all([self.is_token(x) for x in self.tokens])
+        total_empty_tokens = 0
         for entry_index, token in enumerate(self.tokens):
-            #key, body = self.token_to_key_and_body(token)
-            key, body, existing_value = self.token_to_key_body_and_existing_value(token)
             menu_line = self.make_tab(self.indent_level) + ' '
+            if token == ():
+                menu_lines.append(menu_line)
+                total_empty_tokens += 1
+                continue
+            key, body, existing_value = self.token_to_key_body_and_existing_value(token)
             if self.is_parenthetically_numbered:
-                entry_number = entry_index + 1
+                entry_number = entry_index + 1 - total_empty_tokens
                 menu_line += '({}) '.format(str(entry_number))
             elif self.is_numbered:
-                entry_number = entry_index + 1
+                entry_number = entry_index + 1 - total_empty_tokens
                 menu_line += '{}: '.format(str(entry_number))
             if key and self.is_keyed:
                 if self.show_existing_values and existing_value:
@@ -340,7 +355,7 @@ class MenuSection(MenuObject):
         if isinstance(token, str):
             key, body = None, token
         elif isinstance(token, tuple):
-            key, body = token
+            key, body = token[:2]
         else:
             raise ValueError
         return key, body
@@ -352,6 +367,8 @@ class MenuSection(MenuObject):
             key, body, existing_value = token[0], token[1], None
         elif isinstance(token, tuple) and len(token) == 3:
             key, body, existing_value = token
+        elif isinstance(token, tuple) and len(token) == 4:
+            key, body, existing_value = token[:3]
         else:
             raise ValueError
         return key, body, existing_value
@@ -372,6 +389,8 @@ class MenuSection(MenuObject):
                 return token[1]
             elif self.return_value_attribute == 'number':
                 pass
+            elif self.return_value_attribute == 'prepopulated':
+                return token[3]
             else:
                 raise ValueError
         else:
@@ -379,7 +398,7 @@ class MenuSection(MenuObject):
 
     # TODO: replace self.token_to_key_and_body() and also
     #       replace self.token_to_menu_entry_return_value().
-    # TODO: unpack all menu entry tokens only once at menu runtime.
+    # TODO: unpack all menu entry tokens only once at runtime.
     def unpack_token(self, token):
         number = self.token_to_menu_entry_number(token)
         key, body = self.token_to_key_and_body(token)

@@ -1,16 +1,25 @@
-from baca.scf.editors.MusicSpecifierEditor import MusicSpecifierEditor
-from baca.scf.proxies.ModuleProxy import ModuleProxy
+from scf.editors.MusicSpecifierEditor import MusicSpecifierEditor
+from scf.proxies.ModuleProxy import ModuleProxy
+from scf.specifiers.MusicSpecifier import MusicSpecifier
 import os
 
 
 class MusicSpecifierModuleProxy(ModuleProxy):
 
-    def __init__(self, module_importable_name, session=None):
-        ModuleProxy.__init__(self, module_importable_name, session=session)
-        self._editor = MusicSpecifierEditor(session=self.session)
-        self.music_specifier_lines = []
-        #self.conditionally_make_file()
+    def __init__(self, module_importable_name=None, session=None):
+        ModuleProxy.__init__(self, module_importable_name=module_importable_name, session=session)
+        self.load_target_into_memory()
+        self._editor = self.editor_class(target=self.target_in_memory, session=self.session)
+        self.target_lines = []
+        #self.conditionally_make_empty_asset()
         #self.parse() 
+
+    ### CLASS ATTRIUBTES ###
+
+    editor_class = MusicSpecifierEditor
+    generic_class_name = 'music specifier'
+    target_class = MusicSpecifier
+    target_name_in_storage_module = 'music_specifier'
 
     ### READ-ONLY ATTRIBUTES ###
 
@@ -19,49 +28,30 @@ class MusicSpecifierModuleProxy(ModuleProxy):
         return self._editor
 
     @property
-    def music_specifier_in_memory(self):
-        if self._music_specifier_in_memory is not None:
-            return self._music_specifier_in_memory
-        self.read_music_specifier_from_disk()
-        return self._music_specifier_in_memory
-
-    @property
     def sections(self):
         return (
             (self.encoding_directives, False, 0),
             (self.docstring_lines, False, 1),
             (self.setup_statements, True, 2),
-            (self.music_specifier_lines, False, 0),
+            (self.target_lines, False, 0),
             )
+
+    @property
+    def target_in_memory(self):
+        return self._target_in_memory
 
     ### PUBLIC METHODS ###
 
-    # MusicSpecifierEditor must handle reading from disk and writing to disk
-    def edit_music_specifier_at_number(self, number, include_newline=True):
-        number = int(number)
-        self.editor.edit_at_number(number)
-        
+    def edit(self):
+        self.editor.run(breadcrumb=self.human_readable_name)
+        self._target_in_memory = self.editor.target
+        self.write_target_to_disk(self.target_in_memory)
+
     def fix(self):
-        self.print_not_implemented()
+        self.print_not_yet_implemented()
 
-    def handle_main_menu_result(self, result):
-        assert isinstance(result, str)
-        if result == 'rm':
-            self.remove()
-        elif mathtools.is_integer_equivalent_expr(result):
-            self.edit_music_specifier_at_number(result, include_newline=False)
-        else:
-            raise ValueError
-
-    def make_main_menu(self):
-        menu, section = self.make_menu(where=self.where(), is_keyed=False, is_parenthetically_numbered=True)
-        section.tokens = self.make_music_specifier_menu_tokens()
-        section = menu.make_section()
-        section.append(('rm', 'remove music specifier'))
-        return menu
-
-    def make_music_specifier_menu_tokens(self):
-        return self.editor.target_attribute_tokens
+    def load_target_into_memory(self):
+        self._target_in_memory = self.read_target_from_disk() or self.target_class()
 
     def parse(self):
         is_parsable = True
@@ -69,7 +59,7 @@ class MusicSpecifierModuleProxy(ModuleProxy):
         encoding_directives = []
         docstring_lines = []
         setup_statements = []
-        music_specifier_lines = []
+        target_lines = []
         current_section = None
         for line in output_material_module.readlines():
             if line == '\n':
@@ -91,30 +81,39 @@ class MusicSpecifierModuleProxy(ModuleProxy):
             elif current_section == 'setup':
                 setup_statements.append(line)
             elif current_section == 'music specifier':
-                user_input_wrapper_lines.append(line)
+                target_lines.append(line)
             else:
                 is_parsable = False
         output_material_module.close()
         self.encoding_directives = encoding_directives
         self.docstring_lines = docstring_lines
         self.setup_statements = setup_statements
-        self.music_specifier_lines = music_specifier_lines
+        self.target_lines = target_lines
         return is_parsable
 
-    def read_music_specifier_from_disk(self):
+    def preprend_target_name(self, target_format_pieces):
+        if target_format_pieces:
+            target_format_pieces[0] = '{} = {}'.format(
+                self.target_name_in_storage_module, target_format_pieces[0])
+        return target_format_pieces
+
+    def read_target_from_disk(self):
         self.unimport()
         if os.path.exists(self.path_name):
             file_pointer = open(self.path_name, 'r')
             file_contents_string = file_pointer.read()
             file_pointer.close()
             exec(file_contents_string)
-            #return locals().get('music_specifier', None)
-            self._music_specifier_in_memory = music_specifier
+            target = locals().get(self.target_name_in_storage_module, None)
+            return target
 
-    #def write_music_specifier_to_disk(self, music_specifier_in_memory):
-    def write_music_specifier_to_disk(self):
+    def write_stub_to_disk(self):
+        self.conditionally_make_empty_asset()
+
+    def write_target_to_disk(self, target_in_memory):
+        self.parse()
         self.setup_statements[:] = self.conditionally_add_terminal_newlines(
-            self.music_specifier_in_memory.music_specifier_module_import_statements)[:]
-        self.user_input_wrapper_lines[:] = self.conditionally_add_terminal_newlines(
-            self.music_specifier_in_memory.formatted_lines)
+            self.target_in_memory.storage_module_import_statements)[:]
+        self.target_lines[:] = self.conditionally_add_terminal_newlines(
+            self.preprend_target_name(self.target_in_memory.format_pieces))
         ModuleProxy.write_to_disk(self)

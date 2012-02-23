@@ -1,6 +1,6 @@
 from abjad.tools import iotools
-from baca.scf.wranglers.PackageWrangler import PackageWrangler
-from baca.scf.proxies.ScorePackageProxy import ScorePackageProxy
+from scf.wranglers.PackageWrangler import PackageWrangler
+from scf.proxies.ScorePackageProxy import ScorePackageProxy
 
 
 class ScorePackageWrangler(PackageWrangler):
@@ -12,6 +12,10 @@ class ScorePackageWrangler(PackageWrangler):
             session=session)
 
     ### READ-ONLY PUBLIC ATTRIBUTES ###
+
+    @property
+    def asset_class(self):
+        return ScorePackageProxy
 
     @property
     def breadcrumb(self):
@@ -28,12 +32,11 @@ class ScorePackageWrangler(PackageWrangler):
             result.append(score_package_proxy.title_with_year or '(untitled score)')
         return result
 
-    @property
-    def asset_class(self):
-        return ScorePackageProxy
-
     ### PUBLIC METHODS ###
 
+    def handle_main_menu_result(self):
+        self.print_not_yet_implemented()
+        
     def list_visible_asset_path_names(self, head=None):
         result = []
         for visible_asset_proxy in self.list_visible_asset_proxies(head=head):
@@ -53,14 +56,6 @@ class ScorePackageWrangler(PackageWrangler):
                 result.append(asset_proxy)
         return result
 
-    def make_visible_asset_menu_tokens(self, head=None):
-        keys = self.list_visible_asset_importable_names()
-        bodies = self.visible_score_titles_with_years
-        menuing_pairs = zip(keys, bodies)
-        tmp = iotools.strip_diacritics_from_binary_string
-        menuing_pairs.sort(lambda x, y: cmp(tmp(x[1]), tmp(y[1])))
-        return menuing_pairs
-
     def make_asset_interactively(self):
         getter = self.make_getter(where=self.where())
         getter.indent_level = 1
@@ -79,3 +74,14 @@ class ScorePackageWrangler(PackageWrangler):
         score_package_proxy = self.get_asset_proxy(score_package_short_name)
         score_package_proxy.add_tag('title', title)
         score_package_proxy.year_of_completion = year
+
+    def make_main_menu(self):
+        self.print_not_yet_implemented()
+
+    def make_visible_asset_menu_tokens(self, head=None):
+        keys = self.list_visible_asset_importable_names()
+        bodies = self.visible_score_titles_with_years
+        menuing_pairs = zip(keys, bodies)
+        tmp = iotools.strip_diacritics_from_binary_string
+        menuing_pairs.sort(lambda x, y: cmp(tmp(x[1]), tmp(y[1])))
+        return menuing_pairs

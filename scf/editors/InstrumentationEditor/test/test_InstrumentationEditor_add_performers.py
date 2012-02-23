@@ -1,14 +1,14 @@
 from abjad.tools.instrumenttools import *
 from abjad.tools.scoretools import InstrumentationSpecifier
 from abjad.tools.scoretools import Performer
-import baca
+import scf
 
 
 def test_InstrumentationEditor_add_performers_01():
     '''Quit, back, studio, score & junk all work.
     '''
 
-    studio = baca.scf.studio.Studio()
+    studio = scf.studio.Studio()
     studio.run(user_input='1 setup performers add q')
     assert studio.ts == (10,)
 
@@ -29,7 +29,7 @@ def test_InstrumentationEditor_add_performers_02():
     '''Add three performers.
     '''
 
-    editor = baca.scf.editors.InstrumentationEditor()
+    editor = scf.editors.InstrumentationEditor()
     editor.run(user_input='add acc default add bass default add bassoon default q')
     assert editor.target == InstrumentationSpecifier([
         Performer(name='accordionist', instruments=[Accordion()]), 
@@ -41,7 +41,7 @@ def test_InstrumentationEditor_add_performers_03():
     '''Range handling.
     '''
 
-    editor = baca.scf.editors.InstrumentationEditor()
+    editor = scf.editors.InstrumentationEditor()
     editor.run(user_input='add 1-3 default default default q')
     assert editor.target == InstrumentationSpecifier([
         Performer(name='accordionist', instruments=[Accordion()]), 

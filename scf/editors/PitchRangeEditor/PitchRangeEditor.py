@@ -1,15 +1,11 @@
 from abjad.tools import pitchtools
-from baca.scf.editors.InteractiveEditor import InteractiveEditor
-from baca.scf import predicates
+from scf.editors.InteractiveEditor import InteractiveEditor
+from scf import predicates
 
 
 class PitchRangeEditor(InteractiveEditor):
 
-    ### READ-ONLY PUBLIC ATTRIBUTES ###
-
-    @property
-    def breadcrumb(self):
-        return 'pitch range editor'
+    ### CLASS ATTRIBUTES ###
 
     target_attribute_tuples = (
         ('start_pitch', predicates.is_named_chromatic_pitch, False, None, 'sp', 'pitch_class_octave_label'),

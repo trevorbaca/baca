@@ -1,19 +1,19 @@
-from baca.scf.editors import UserInputWrapper
-import baca
+from scf.editors import UserInputWrapper
+import scf
 
 
 def test_ZaggedPitchClassMaterialPackageMaker_01():
     '''Emtpy wrapper.'''
 
-    studio = baca.scf.studio.Studio()
-    assert not studio.package_exists('baca.materials.testzagged')
+    studio = scf.studio.Studio()
+    assert not studio.package_exists('materials.testzagged')
     try:
         studio.run(user_input=
             'materials maker zagged testzagged default '
             'q'
             )
-        mpp = baca.scf.makers.ZaggedPitchClassMaterialPackageMaker(
-            'baca.materials.testzagged')
+        mpp = scf.makers.ZaggedPitchClassMaterialPackageMaker(
+            'materials.testzagged')
         assert mpp.directory_contents == ['__init__.py', 'user_input.py']
         user_input_wrapper = UserInputWrapper([
             ('pc_cells', None),
@@ -22,14 +22,14 @@ def test_ZaggedPitchClassMaterialPackageMaker_01():
         assert mpp.user_input_wrapper_in_memory == user_input_wrapper
     finally:
         studio.run(user_input='m testzagged del remove default q')
-        assert not studio.package_exists('baca.materials.testzagged')
+        assert not studio.package_exists('materials.testzagged')
 
 
 def test_ZaggedPitchClassMaterialPackageMaker_02():
     '''Populate wrapper.'''
 
-    studio = baca.scf.studio.Studio()
-    assert not studio.package_exists('baca.materials.testzagged')
+    studio = scf.studio.Studio()
+    assert not studio.package_exists('materials.testzagged')
     try:
         studio.run(user_input=
             'materials maker zagged testzagged default '
@@ -38,8 +38,8 @@ def test_ZaggedPitchClassMaterialPackageMaker_02():
             '[1, 1, 2, 3] '
             'q'
             )
-        mpp = baca.scf.makers.ZaggedPitchClassMaterialPackageMaker(
-            'baca.materials.testzagged')
+        mpp = scf.makers.ZaggedPitchClassMaterialPackageMaker(
+            'materials.testzagged')
         assert mpp.directory_contents == ['__init__.py', 'user_input.py']
         user_input_wrapper = UserInputWrapper([
             ('pc_cells', [[0, 7, 2, 10], [9, 6, 1, 8]]),
@@ -48,4 +48,4 @@ def test_ZaggedPitchClassMaterialPackageMaker_02():
         assert mpp.user_input_wrapper_in_memory == user_input_wrapper
     finally:
         studio.run(user_input='m testzagged del remove default q')
-        assert not studio.package_exists('baca.materials.testzagged')
+        assert not studio.package_exists('materials.testzagged')

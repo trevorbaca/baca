@@ -1,6 +1,6 @@
-import baca
+import scf
 
-studio = baca.scf.studio.Studio()
+studio = scf.studio.Studio()
 wrangler = studio.score_package_wrangler
 
 

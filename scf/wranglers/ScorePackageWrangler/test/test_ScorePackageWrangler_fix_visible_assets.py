@@ -1,9 +1,9 @@
-import baca
+import scf
 
 
 def test_ScorePackageWrangler_fix_visible_assets_01():
 
-    studio = baca.scf.studio.Studio()
+    studio = scf.studio.Studio()
     wrangler = studio.score_package_wrangler
     wrangler.session.show_all_scores()
 

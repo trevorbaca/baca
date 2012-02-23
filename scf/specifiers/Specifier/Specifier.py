@@ -1,4 +1,9 @@
+from abc import ABCMeta
+from abc import abstractproperty
+
+
 class Specifier(object):
+    __metaclass__ = ABCMeta
 
     def __init__(self):
         variable_names = self.__init__.im_func.func_code.co_varnames[1:]
@@ -39,7 +44,7 @@ class Specifier(object):
     @property
     def format_pieces(self):
         result = []
-        result.append('{}('.format(type(self).__name__))
+        result.append('{}('.format(self.importable_class_name))
         for variable_name in sorted(self.variable_names):
             variable_value = getattr(self, variable_name)
             if variable_value is not None:
@@ -54,8 +59,15 @@ class Specifier(object):
         return iotools.uppercamelcase_to_space_delimited_lowercase(self.class_name)
 
     @property
+    def importable_class_name(self):
+        return 'specifiers.{}'.format(self.class_name)
+
+    @abstractproperty
+    def one_line_menuing_summary(self):
+        pass
+
+    @property
     def variable_names(self):
-        #return self.__init__.im_func.func_code.co_varnames[1:]
         return self._variable_names
 
     ### PUBLIC METHODS ###
@@ -63,6 +75,8 @@ class Specifier(object):
     def get_format_pieces_of_expr(self, expr):
         if hasattr(expr, 'format_pieces'):
             return expr.format_pieces
+        elif hasattr(expr, '_repr_with_tools_package'):
+            return [expr._repr_with_tools_package]
         else:
             return [repr(expr)]
 

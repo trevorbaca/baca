@@ -1,4 +1,4 @@
-from baca.scf.editors.InteractiveEditor import InteractiveEditor
+from scf.editors.InteractiveEditor import InteractiveEditor
 
 
 class ParameterSpecifierEditor(InteractiveEditor):

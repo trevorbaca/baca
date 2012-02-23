@@ -1,9 +1,9 @@
-import baca
+import scf
 
 
 def test_Menu_allow_ascii_access_to_unicode_key_01():
 
-    studio = baca.scf.studio.Studio()
+    studio = scf.studio.Studio()
     studio.run(user_input='Čáry q')
     assert studio.ts == (4,)
 

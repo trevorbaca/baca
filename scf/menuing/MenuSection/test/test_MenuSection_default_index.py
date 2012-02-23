@@ -1,10 +1,10 @@
-import baca
+import scf
 import py
 
 
 def test_MenuSection_default_index_01():
 
-    menu = baca.scf.menuing.Menu()
+    menu = scf.menuing.Menu()
     menu.push_breadcrumb('location')
     section = menu.make_section()
     section.title = 'section'

@@ -1,14 +1,13 @@
 from abjad.tools import measuretools
 from abjad.tools import notetools
-import baca
-import py
+import scf
 
 
 def test_MaterialPackageProxy_read_only_attributes_01():
     '''Data-only package.
     '''
     
-    mpp = baca.scf.proxies.MaterialPackageProxy('baca.materials.red_numbers')
+    mpp = scf.proxies.MaterialPackageProxy('materials.red_numbers')
     assert     mpp.breadcrumb == 'red numbers'
     assert not mpp.has_illustration_builder_module
     assert not mpp.has_illustration_ly
@@ -36,7 +35,7 @@ def test_MaterialPackageProxy_read_only_attributes_01():
     assert     mpp.material_definition_module_file_name == \
         '/Users/trevorbaca/Documents/other/baca/materials/red_numbers/material_definition.py'
     assert     mpp.material_definition_module_importable_name == \
-        'baca.materials.red_numbers.material_definition' 
+        'materials.red_numbers.material_definition' 
     assert     mpp.material_definition_module_proxy is not None
     assert     mpp.material_package_directory == \
         '/Users/trevorbaca/Documents/other/baca/materials/red_numbers'
@@ -47,13 +46,13 @@ def test_MaterialPackageProxy_read_only_attributes_01():
     assert     mpp.material_underscored_name == 'red_numbers'
     assert     mpp.current_materials_directory_name == \
         '/Users/trevorbaca/Documents/other/baca/materials'
-    assert     mpp.current_materials_package_importable_name == 'baca.materials'
+    assert     mpp.current_materials_package_importable_name == 'materials'
     assert     mpp.output_material == [1, 2, 3, 4, 5]
     assert     mpp.output_material_module_body_lines == ['red_numbers = [1, 2, 3, 4, 5]']
     assert     mpp.output_material_module_file_name == \
         '/Users/trevorbaca/Documents/other/baca/materials/red_numbers/output_material.py'
     assert     mpp.output_material_module_importable_name == \
-        'baca.materials.red_numbers.output_material'
+        'materials.red_numbers.output_material'
     assert      mpp.output_material_module_proxy is not None
     assert not  mpp.should_have_illustration
     assert not  mpp.should_have_illustration_builder_module
@@ -73,7 +72,7 @@ def test_MaterialPackageProxy_read_only_attributes_02():
     '''Makermade material.
     '''
 
-    mpp = baca.scf.makers.SargassoMeasureMaterialPackageMaker('baca.materials.red_sargasso')
+    mpp = scf.makers.SargassoMeasureMaterialPackageMaker('materials.red_sargasso')
     assert     mpp.breadcrumb == 'red sargasso'
     assert not mpp.has_illustration_builder_module
     assert     mpp.has_illustration_ly
@@ -106,20 +105,20 @@ def test_MaterialPackageProxy_read_only_attributes_02():
     assert     mpp.material_definition_module_proxy is None
     assert     mpp.material_package_directory == \
         '/Users/trevorbaca/Documents/other/baca/materials/red_sargasso'
-    assert     mpp.material_package_maker is baca.scf.makers.SargassoMeasureMaterialPackageMaker
+    assert     mpp.material_package_maker is scf.makers.SargassoMeasureMaterialPackageMaker
     assert     mpp.material_package_maker_class_name == 'SargassoMeasureMaterialPackageMaker'
     assert     mpp.material_package_short_name == 'red_sargasso'
     assert     mpp.material_spaced_name == 'red sargasso'
     assert     mpp.material_underscored_name == 'red_sargasso'
     assert     mpp.current_materials_directory_name == \
         '/Users/trevorbaca/Documents/other/baca/materials'
-    assert     mpp.current_materials_package_importable_name == 'baca.materials'
+    assert     mpp.current_materials_package_importable_name == 'materials'
     assert     measuretools.all_are_measures(mpp.output_material)
     assert     mpp.output_material_module_body_lines is None
     assert     mpp.output_material_module_file_name == \
         '/Users/trevorbaca/Documents/other/baca/materials/red_sargasso/output_material.py'
     assert     mpp.output_material_module_importable_name == \
-        'baca.materials.red_sargasso.output_material'
+        'materials.red_sargasso.output_material'
     assert      mpp.output_material_module_proxy is not None
     assert      mpp.should_have_illustration
     assert not  mpp.should_have_illustration_builder_module
@@ -134,7 +133,7 @@ def test_MaterialPackageProxy_read_only_attributes_02():
     assert      mpp.user_input_module_file_name == \
         '/Users/trevorbaca/Documents/other/baca/materials/red_sargasso/user_input.py'
     assert      mpp.user_input_module_importable_name == \
-        'baca.materials.red_sargasso.user_input'
+        'materials.red_sargasso.user_input'
     assert      mpp.user_input_module_proxy is not None
 
 
@@ -142,7 +141,7 @@ def test_MaterialPackageProxy_read_only_attributes_03():
     '''Handmade material.
     '''
 
-    mpp = baca.scf.proxies.MaterialPackageProxy('baca.materials.red_notes')
+    mpp = scf.proxies.MaterialPackageProxy('materials.red_notes')
     assert     mpp.breadcrumb == 'red notes'
     assert     mpp.has_illustration_builder_module
     assert     mpp.has_illustration_ly
@@ -158,7 +157,7 @@ def test_MaterialPackageProxy_read_only_attributes_03():
     assert     mpp.illustration_builder_module_file_name == \
         '/Users/trevorbaca/Documents/other/baca/materials/red_notes/illustration_builder.py'
     assert     mpp.illustration_builder_module_importable_name == \
-        'baca.materials.red_notes.illustration_builder'
+        'materials.red_notes.illustration_builder'
     assert     mpp.illustration_builder_module_proxy is not None
     assert     mpp.illustration_ly_file_name == \
         '/Users/trevorbaca/Documents/other/baca/materials/red_notes/illustration.ly'
@@ -174,7 +173,7 @@ def test_MaterialPackageProxy_read_only_attributes_03():
     assert     mpp.material_definition_module_file_name == \
         '/Users/trevorbaca/Documents/other/baca/materials/red_notes/material_definition.py'
     assert     mpp.material_definition_module_importable_name == \
-        'baca.materials.red_notes.material_definition'
+        'materials.red_notes.material_definition'
     assert     mpp.material_definition_module_proxy is not None
     assert     mpp.material_package_directory == \
         '/Users/trevorbaca/Documents/other/baca/materials/red_notes'
@@ -185,13 +184,13 @@ def test_MaterialPackageProxy_read_only_attributes_03():
     assert     mpp.material_underscored_name == 'red_notes'
     assert     mpp.current_materials_directory_name == \
         '/Users/trevorbaca/Documents/other/baca/materials'
-    assert     mpp.current_materials_package_importable_name == 'baca.materials'
+    assert     mpp.current_materials_package_importable_name == 'materials'
     assert     notetools.all_are_notes(mpp.material_definition)
     assert     mpp.output_material_module_body_lines is not None
     assert     mpp.output_material_module_file_name == \
         '/Users/trevorbaca/Documents/other/baca/materials/red_notes/output_material.py'
     assert     mpp.output_material_module_importable_name == \
-        'baca.materials.red_notes.output_material'
+        'materials.red_notes.output_material'
     assert      mpp.output_material_module_proxy is not None
     assert      mpp.should_have_illustration
     assert      mpp.should_have_illustration_builder_module

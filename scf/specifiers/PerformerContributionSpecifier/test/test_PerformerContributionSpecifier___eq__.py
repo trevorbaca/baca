@@ -1,15 +1,15 @@
-import baca
+import scf
 
 
 def test_PerformerContributionSpecifier___eq___01():
 
-    specifier_1 = baca.scf.specifiers.PerformerContributionSpecifier()
+    specifier_1 = scf.specifiers.PerformerContributionSpecifier()
     specifier_1.articulation_specifier = 'foo'
 
-    specifier_2 = baca.scf.specifiers.PerformerContributionSpecifier()
+    specifier_2 = scf.specifiers.PerformerContributionSpecifier()
     specifier_2.articulation_specifier = 'foo'
 
-    specifier_3 = baca.scf.specifiers.PerformerContributionSpecifier()
+    specifier_3 = scf.specifiers.PerformerContributionSpecifier()
     specifier_3.articulation_specifier = 'foo'
     specifier_3.directive_specifier = ['apple', 'banana', 'cherry']
 

@@ -1,12 +1,16 @@
 from abjad.tools import iotools
-from baca.scf.proxies.PackageProxy import PackageProxy
-from baca.scf.wranglers.ImportableAssetWrangler import ImportableAssetWrangler
+from scf.proxies.PackageProxy import PackageProxy
+from scf.wranglers.ImportableAssetWrangler import ImportableAssetWrangler
 import os
 
 
 class PackageWrangler(ImportableAssetWrangler):
 
     ### READ-ONLY PUBLIC ATTRIBUTES ###
+
+    @property
+    def asset_class(self):
+        return PackageProxy
 
     @property
     def score_external_asset_proxies(self):
@@ -21,11 +25,10 @@ class PackageWrangler(ImportableAssetWrangler):
     def temporary_asset_short_name(self):
         return '__temporary_package'
     
-    @property
-    def asset_class(self):
-        return PackageProxy
-
     ### PUBLIC METHODS ###
+
+    def handle_main_menu_result(self, result):
+        self.print_not_yet_implemented()
 
     def make_asset(self, asset_short_name):
         assert iotools.is_underscore_delimited_lowercase_package_name(asset_short_name)
@@ -33,3 +36,9 @@ class PackageWrangler(ImportableAssetWrangler):
         os.mkdir(asset_path_name)
         package_proxy = self.get_asset_proxy(asset_short_name)
         package_proxy.fix(is_interactive=False)
+
+    def make_asset_interactively(self):
+        self.print_not_yet_implemented()
+
+    def make_main_menu(self):
+        self.print_not_yet_implemented()

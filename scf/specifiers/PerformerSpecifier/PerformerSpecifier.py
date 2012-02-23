@@ -1,6 +1,17 @@
-from baca.scf.specifiers.ParameterSpecifier import ParameterSpecifier
+from scf.specifiers.ParameterSpecifier import ParameterSpecifier
 
 
 class PerformerSpecifier(ParameterSpecifier):
 
-    pass
+    def __init__(self, performer=None):
+        ParameterSpecifier.__init__(self)
+        self.performer = performer
+
+    ### READ-ONLY ATTRIBUTES ###
+
+    @property
+    def one_line_menuing_summary(self):
+        try:
+            return self.performer.name
+        except AttributeError:
+            pass

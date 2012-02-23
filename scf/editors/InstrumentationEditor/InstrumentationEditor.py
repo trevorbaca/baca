@@ -1,28 +1,29 @@
 from abjad.tools import scoretools
 from abjad.tools import sequencetools
-from baca.scf.editors.InteractiveEditor import InteractiveEditor
-from baca.scf.editors.PerformerEditor import PerformerEditor
+from scf.editors.InteractiveEditor import InteractiveEditor
+from scf.editors.PerformerEditor import PerformerEditor
 
 
 class InstrumentationEditor(InteractiveEditor):
+
+    ### CLASS ATTRIBUTES ###
+
+    target_class = scoretools.InstrumentationSpecifier
+    target_item_class = scoretools.Performer
 
     ### READ-ONLY PUBLIC ATTRIBUTES ###
 
     @property
     def breadcrumb(self):
-        return 'performers'
+        return self.target_name or 'performers'
 
     @property
-    def summary_lines(self):
+    def target_summary_lines(self):
         result = []
         for performer in self.target.performers:
             performer_editor = PerformerEditor(session=self.session, target=performer)
-            result.extend(performer_editor.summary_lines)
+            result.extend(performer_editor.target_summary_lines)
         return result
-
-    target_class = scoretools.InstrumentationSpecifier
-
-    target_item_class = scoretools.Performer
 
     @property
     def target_items(self):
@@ -63,19 +64,6 @@ class InstrumentationEditor(InteractiveEditor):
                     continue
                 break
 
-    # TODO: abstract up to ListEditor.delete_items_interactively
-    def remove_performers_interactively(self):
-        getter = self.make_getter(where=self.where())
-        getter.append_argument_range('performers', self.summary_lines)
-        result = getter.run()
-        if self.backtrack():
-            return
-        performer_indices = [performer_number - 1 for performer_number in result]
-        performer_indices = list(reversed(sorted(set(performer_indices))))
-        performers = self.target.performers
-        performers = sequencetools.remove_sequence_elements_at_indices(performers, performer_indices)
-        self.target.performers[:] = performers
-
     def edit_performer_interactively(self, performer_number):
         try:
             performer_number = int(performer_number)
@@ -99,7 +87,7 @@ class InstrumentationEditor(InteractiveEditor):
             raise TypeError('result must be string.')
         if result == 'add':
             self.add_performers_interactively()
-        elif result == 'del':
+        elif result == 'rm':
             self.remove_performers_interactively()
         elif result == 'mv':
             self.move_performer_interactively()
@@ -108,12 +96,12 @@ class InstrumentationEditor(InteractiveEditor):
 
     def make_main_menu(self):
         menu, section = self.make_menu(where=self.where(), is_parenthetically_numbered=True)
-        section.tokens = self.summary_lines
+        section.tokens = self.target_summary_lines
         section.return_value_attribute = 'number'
         section = menu.make_section(is_keyed=False)
         section.append(('add', 'add performers'))
         if 0 < self.target.performer_count:
-            section.append(('del', 'delete performers'))
+            section.append(('rm', 'delete performers'))
         if 1 < self.target.performer_count:
             section.append(('mv', 'move performers'))
         return menu
@@ -130,6 +118,19 @@ class InstrumentationEditor(InteractiveEditor):
         performer = self.target.performers[old_index]
         self.target.performers.remove(performer)
         self.target.performers.insert(new_index, performer)
+
+    # TODO: abstract up to ListEditor.delete_items_interactively
+    def remove_performers_interactively(self):
+        getter = self.make_getter(where=self.where())
+        getter.append_argument_range('performers', self.target_summary_lines)
+        result = getter.run()
+        if self.backtrack():
+            return
+        performer_indices = [performer_number - 1 for performer_number in result]
+        performer_indices = list(reversed(sorted(set(performer_indices))))
+        performers = self.target.performers
+        performers = sequencetools.remove_sequence_elements_at_indices(performers, performer_indices)
+        self.target.performers[:] = performers
 
     def select_performer_names_interactively(self, clear=True, cache=False):
         from abjad.tools import scoretools

@@ -1,11 +1,11 @@
 # -*- encoding: utf-8 -*-
-import baca
+import scf
 
 
 def test_ScorePackageProxy_edit_title_interactively_01():
 
     try:
-        studio = baca.scf.studio.Studio()
+        studio = scf.studio.Studio()
         studio.run(user_input='betorung setup title Foo q')
         assert studio.ts == (9,)
         assert studio.transcript[-5][0] == 'Betörung (2012) - setup'

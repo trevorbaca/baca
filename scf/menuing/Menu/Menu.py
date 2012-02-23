@@ -1,7 +1,7 @@
 from abjad.tools import iotools
 from abjad.tools import mathtools
-from baca.scf.menuing.MenuSection import MenuSection
-from baca.scf.menuing.MenuSectionAggregator import MenuSectionAggregator
+from scf.menuing.MenuSection import MenuSection
+from scf.menuing.MenuSectionAggregator import MenuSectionAggregator
 
 
 class Menu(MenuSectionAggregator):
@@ -148,6 +148,7 @@ class Menu(MenuSectionAggregator):
                 body = iotools.strip_diacritics_from_binary_string(body).lower()
                 if  (mathtools.is_integer_equivalent_expr(user_input) and int(user_input) == number) or \
                     (user_input == key) or \
+                    (user_input == body) or \
                     (3 <= len(user_input) and body.startswith(user_input)):
                     return self.conditionally_enclose_in_list(return_value)
 
@@ -192,6 +193,17 @@ class Menu(MenuSectionAggregator):
             session=self.session, where=self.where)
         self.sections.append(section)
         return section
+
+    def return_value_to_location_pair(self, return_value):
+        for i, section in enumerate(self.sections):
+            if return_value in section.menu_entry_return_values:
+                return (i, section.menu_entry_return_values.index(return_value))
+
+    def return_value_to_next_return_value_in_section(self, return_value):
+        section_index, entry_index = self.return_value_to_location_pair(return_value)
+        section = self.sections[section_index]
+        entry_index = (entry_index + 1) % len(section)
+        return section.menu_entry_return_values[entry_index]
 
     def run(self, clear=True, user_input=None):
         self.assign_user_input(user_input=user_input)
@@ -239,9 +251,12 @@ class Menu(MenuSectionAggregator):
                     element = element.replace(' (default)', '')
                 cleaned_list.append(element)
             return cleaned_list
-        elif expr is not None:
+        #elif expr is not None:
+        elif isinstance(expr, str):
             if expr.endswith(' (default)'):
                 expr = expr.replace(' (default)', '')
+            return expr
+        else:
             return expr
 
     def user_enters_argument_range(self, user_input):

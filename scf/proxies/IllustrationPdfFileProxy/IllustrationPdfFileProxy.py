@@ -1,8 +1,14 @@
-from baca.scf.proxies.FileProxy import FileProxy
+from scf.proxies.FileProxy import FileProxy
 import os
 
 
 class IllustrationPdfFileProxy(FileProxy):
+
+    ### READ-ONLY ATTRIBUTES ###
+
+    @property
+    def extension(self):
+        return '.pdf'
 
     ### PUBLIC METHODS ###
 

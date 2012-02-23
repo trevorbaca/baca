@@ -11,7 +11,7 @@ def is_argument_range_string(expr):
     return pattern.match(expr) is not None
 
 def is_available_underscore_delimited_lowercase_package_name(expr):
-    from baca.scf.core.SCFObject import SCFObject
+    from scf.core.SCFObject import SCFObject
     if iotools.is_underscore_delimited_lowercase_package_name(expr):
         if 3 <= len(expr):
             scf_object = SCFObject()
@@ -22,7 +22,7 @@ def is_boolean(expr):
     return isinstance(expr, bool)
 
 def is_existing_package_name(expr):
-    from baca.scf.core.SCFObject import SCFObject
+    from scf.core.SCFObject import SCFObject
     scf_object = SCFObject()
     return scf_object.package_exists(expr)
 
@@ -67,7 +67,7 @@ def is_string_or_none(expr):
     return isinstance(expr, (str, type(None)))
 
 def is_readable_argument_range_string_for_argument_list(argument_range_string, argument_list):
-    from baca.scf.menuing.MenuSection import MenuSection
+    from scf.menuing.MenuSection import MenuSection
     if isinstance(argument_range_string, str):
         dummy_section = MenuSection()
         dummy_section.tokens = argument_list[:]
@@ -77,6 +77,7 @@ def is_readable_argument_range_string_for_argument_list(argument_range_string, a
 
 def is_tempo_token(expr):
     try:
+        exec('from abjad import *')
         command = 'tempo_mark = contexttools.TempoMark({})'.format(expr)
         exec(command)
         return isinstance(tempo_mark, contexttools.TempoMark)

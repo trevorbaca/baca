@@ -1,4 +1,4 @@
-from baca.scf.specifiers.Specifier import Specifier
+from scf.specifiers.Specifier import Specifier
 
 
 class PerformerContributionSpecifierList(Specifier, list):
@@ -20,11 +20,17 @@ class PerformerContributionSpecifierList(Specifier, list):
     @property
     def format_pieces(self):
         result = []
-        result.append('{}('.format(type(self).__name__))
+        result.append('{}(['.format(self.importable_class_name))
         for performer_contribution_specifier in self[:]:
             format_pieces = performer_contribution_specifier.format_pieces
             for format_piece in format_pieces[:-1]:
                 result.append('\t' + format_piece)
             result.append('\t' + format_pieces[-1] + ',')
-        result.append('\t)')
+        result.append('\t])')
         return result
+
+    @property
+    def one_line_menuing_summary(self):
+        pieces = [performer.performer_label for performer in self]
+        if pieces:
+            return ', '.join(pieces)

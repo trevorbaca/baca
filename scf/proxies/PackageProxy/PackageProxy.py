@@ -1,26 +1,24 @@
 from abjad.tools import iotools
-from baca.scf.proxies.DirectoryProxy import DirectoryProxy
-from baca.scf.proxies.InitializerFileProxy import InitializerFileProxy
-from baca.scf.helpers import safe_import
+from scf.proxies.DirectoryProxy import DirectoryProxy
+from scf.proxies.ImportableAssetProxy import ImportableAssetProxy
+from scf.proxies.InitializerFileProxy import InitializerFileProxy
+from scf.helpers import safe_import
 import os
 import sys
 
 
 # TODO: find way to add 'list package directory' user command, somehow
-class PackageProxy(DirectoryProxy):
+class PackageProxy(DirectoryProxy, ImportableAssetProxy):
 
     def __init__(self, package_importable_name=None, session=None):
-        directory_name = self.package_importable_name_to_path_name(package_importable_name)
-        DirectoryProxy.__init__(self, directory_name=directory_name, session=session)
-        self._importable_name = package_importable_name
+        path_name = self.package_importable_name_to_path_name(package_importable_name)
+        DirectoryProxy.__init__(self, path_name=path_name, session=session)
+        ImportableAssetProxy.__init__(self, asset_full_name=package_importable_name, session=self.session)
 
     ### OVERLOADS ###
 
     def __repr__(self):
-        if self.importable_name is not None:
-            return '{}({!r})'.format(self.class_name, self.importable_name)
-        else:
-            return '{}()'.format(self.class_name)
+        return ImportableAssetProxy.__repr__(self)
 
     ### READ-ONLY PUBLIC ATTRIBUTES ###
 
@@ -57,19 +55,19 @@ class PackageProxy(DirectoryProxy):
         return self.short_name.replace('_', ' ')
 
     @property
+    def imported_package(self):
+        return __import__(self.importable_name, fromlist=['*'])
+
+    @property
     def initializer_file_name(self):
-        if self.directory_name is not None:
-            return os.path.join(self.directory_name, '__init__.py')
+        if self.path_name is not None:
+            return os.path.join(self.path_name, '__init__.py')
 
     # TODO: write test
     @property
     def initializer_file_proxy(self):
         if self.has_initializer:
             return InitializerFileProxy(self.initializer_file_name, session=self.session)
-
-    @property
-    def importable_name(self):
-        return self._importable_name
 
     @property
     def package_root_name(self):
@@ -96,28 +94,23 @@ class PackageProxy(DirectoryProxy):
             if result:
                 return result
 
-    # TODO: write test; or remove?
     @property
-    def score(self):
-        import baca
-        if self.score_package_short_name is not None:
-            return baca.scf.proxies.ScorePackageProxy(self.score_package_short_name)
-
-    # TODO: write test; or remove?
-    @property
-    def score_package_short_name(self):
-        if not self.importable_name.startswith(self.home_package_importable_name):
-            return self.importable_name.split('.')[0]
-
+    def public_names(self):
+        result = []
+        imported_package_vars = vars(self.imported_package)
+        for key in sorted(imported_package_vars.keys()):
+            if not key.startswith('_'):
+                result.append(imported_package_vars[key])
+        return result
+        
     @property
     def tags_file_name(self):
-        return os.path.join(self.directory_name, 'tags.py')
+        return os.path.join(self.path_name, 'tags.py')
 
     @property
     def tags_file_proxy(self):
         if self.has_tags_file:
             return InitializerFileProxy(self.tags_file_name, session=self.session)
-
 
     ### PUBLIC METHODS ###
 
@@ -139,34 +132,6 @@ class PackageProxy(DirectoryProxy):
         if result:
             tag_name, tag_value = result
             self.add_tag(tag_name, tag_value)
-
-    def fix(self, is_interactive=True):
-        self.print_implemented_on_child_classes()
-        return True
-
-    def remove_initializer(self, prompt=True):
-        if self.has_initializer:
-            os.remove(self.initializer_file_name)
-            line = 'initializer deleted.'
-            self.proceed(line, prompt=prompt)
-
-    def remove_tag(self, tag_name):
-        tags = self.get_tags()
-        del(tags[tag_name])
-        if self.has_tags_file:
-            self.tags_file_proxy.write_tags_to_disk(tags)
-        else:
-            self.initializer_file_proxy.write_tags_to_disk(tags)
-
-    def remove_tag_interactively(self):
-        getter = self.make_getter(where=self.where())
-        getter.append_string('tag name')
-        result = getter.run()
-        if self.backtrack():
-            return
-        if result:
-            tag_name = result
-            self.remove_tag(tag_name)
 
     def get_tag(self, tag_name):
         tags = self.get_tags()
@@ -197,7 +162,7 @@ class PackageProxy(DirectoryProxy):
     def handle_tags_menu_result(self, result):
         if result == 'add':
             self.add_tag_interactively()
-        elif result == 'del':
+        elif result == 'rm':
             self.remove_tag_interactively()
         elif result == 'get':
             self.get_tag_interactively()
@@ -212,7 +177,7 @@ class PackageProxy(DirectoryProxy):
         section.tokens = self.formatted_tags
         section = menu.make_section()
         section.append(('add', 'add tag'))
-        section.append(('del', 'delete tag'))
+        section.append(('rm', 'delete tag'))
         section.append(('get', 'get tag'))
         return menu
 
@@ -231,9 +196,6 @@ class PackageProxy(DirectoryProxy):
         self.pop_breadcrumb()
         self.restore_breadcrumbs(cache=cache)
 
-    def profile(self):
-        self.print_implemented_on_child_classes()
-
     def read_tags_from_tags_file(self):
         from collections import OrderedDict
         if not os.path.exists(self.tags_file_name):
@@ -245,12 +207,30 @@ class PackageProxy(DirectoryProxy):
         result = locals().get('tags') or OrderedDict([])
         return result
 
-    def remove(self):
-        result = DirectoryProxy.remove(self)
+    def remove_initializer(self, is_interactive=True):
+        if self.has_initializer:
+            os.remove(self.initializer_file_name)
+            line = 'initializer deleted.'
+            self.proceed(line, prompt=is_interactive)
+
+    def remove_tag(self, tag_name):
+        tags = self.get_tags()
+        del(tags[tag_name])
+        if self.has_tags_file:
+            self.tags_file_proxy.write_tags_to_disk(tags)
+        else:
+            self.initializer_file_proxy.write_tags_to_disk(tags)
+
+    def remove_tag_interactively(self):
+        getter = self.make_getter(where=self.where())
+        getter.append_string('tag name')
+        result = getter.run()
+        if self.backtrack():
+            return
         if result:
-            line = 'package removed.'
-            self.proceed(line)
-        
+            tag_name = result
+            self.remove_tag(tag_name)
+
     def set_package_importable_name_interactively(self):
         getter = self.make_getter(where=self.where())
         geter.append_underscore_delimited_lowercase_package_name('package importable name')

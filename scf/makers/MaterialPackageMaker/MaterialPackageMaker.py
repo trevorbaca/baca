@@ -1,5 +1,5 @@
-from baca.scf.proxies.MaterialPackageProxy import MaterialPackageProxy
-from baca.scf.editors.UserInputWrapper import UserInputWrapper
+from scf.proxies.MaterialPackageProxy import MaterialPackageProxy
+from scf.editors.UserInputWrapper import UserInputWrapper
 import copy
 import os
 
@@ -13,17 +13,19 @@ class MaterialPackageMaker(MaterialPackageProxy):
     ### PRIVATE METHODS ###
 
     def _initialize_user_input_wrapper_in_memory(self):
-        import baca
+        import scf
+        if not self.should_have_user_input_module:
+            return
         user_input_module_importable_name = self.dot_join([self.importable_name, 'user_input'])
         user_input_module_file_name = self.module_importable_name_to_path_name(
             user_input_module_importable_name)
         if not os.path.exists(user_input_module_file_name):
             file(user_input_module_file_name, 'w').write('')
-        proxy = baca.scf.proxies.UserInputModuleProxy(user_input_module_importable_name, session=self.session)
+        proxy = scf.proxies.UserInputModuleProxy(user_input_module_importable_name, session=self.session)
         user_input_wrapper = proxy.read_user_input_wrapper_from_disk()
         if user_input_wrapper:
             user_input_wrapper._user_input_module_import_statements = \
-                self.user_input_module_import_statements[:]
+                getattr(self, 'user_input_module_import_statements', [])[:]
         else:
             user_input_wrapper = self.initialize_empty_user_input_wrapper()
         return user_input_wrapper
@@ -33,7 +35,11 @@ class MaterialPackageMaker(MaterialPackageProxy):
     @property
     def illustration(self):
         output_material = self.output_material_module_proxy.import_output_material_safely()
-        illustration = self.illustration_maker(output_material)
+        kwargs = {}
+        kwargs['title'] = self.human_readable_name 
+        if self.session.is_in_score:
+            kwargs['subtitle'] = '({})'.format(self.session.current_score_package_proxy.title)
+        illustration = self.illustration_maker(output_material, **kwargs)
         return illustration
 
     @property
@@ -61,7 +67,7 @@ class MaterialPackageMaker(MaterialPackageProxy):
         if len(self.user_input_wrapper_in_memory) < number:
             return
         index = number - 1
-        key, current_value = self.user_input_wrapper_in_memory.list_items[index]
+        key, current_value = self.user_input_wrapper_in_memory.list_items()[index]
         test_tuple = type(self).user_input_tests[index]
         test = test_tuple[1]
         if len(test_tuple) == 3:
@@ -90,7 +96,7 @@ class MaterialPackageMaker(MaterialPackageProxy):
     def initialize_empty_user_input_wrapper(self):
         user_input_wrapper = UserInputWrapper()
         user_input_wrapper._user_input_module_import_statements = \
-            self.user_input_module_import_statements[:]
+            getattr(self, 'user_input_module_import_statements', [])[:]
         for user_input_attribute_name in self.user_input_attribute_names:
             user_input_wrapper[user_input_attribute_name] = None
         return user_input_wrapper
@@ -121,7 +127,7 @@ class MaterialPackageMaker(MaterialPackageProxy):
         self.make_main_menu_section_for_output_material(menu, hidden_section)
 
     def make_output_material_from_user_input_wrapper_in_memory(self):
-        output_material = self.output_material_maker(*self.user_input_wrapper_in_memory.values)
+        output_material = self.output_material_maker(*self.user_input_wrapper_in_memory.list_values())
         assert type(self).output_material_checker(output_material)
         return output_material
 

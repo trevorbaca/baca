@@ -1,11 +1,11 @@
-import baca
+import scf
 
 
 def test_Menu_run_01():
     '''String token defaults.
     '''
 
-    menu = baca.scf.menuing.Menu()
+    menu = scf.menuing.Menu()
     menu.push_breadcrumb('location')
     section_1 = menu.make_section(is_keyed=True, is_hidden=False, is_numbered=False, is_ranged=False)
     section_1.title = 'section'
@@ -74,7 +74,7 @@ def test_Menu_run_02():
     '''Turning off keys does nothing to string tokens.
     '''
 
-    menu = baca.scf.menuing.Menu()
+    menu = scf.menuing.Menu()
     menu.push_breadcrumb('location')
     section_1 = menu.make_section(is_keyed=False, is_hidden=False, is_numbered=False, is_ranged=False)
     section_1.title = 'section'
@@ -116,7 +116,7 @@ def test_Menu_run_03():
     '''Hidding suppresses output.
     '''
 
-    menu = baca.scf.menuing.Menu()
+    menu = scf.menuing.Menu()
     menu.push_breadcrumb('location')
     section_1 = menu.make_section(is_keyed=True, is_hidden=True, is_numbered=False, is_ranged=False)
     section_1.title = 'section'
@@ -151,7 +151,7 @@ def test_Menu_run_04():
     '''Numbered string tokens.
     '''
 
-    menu = baca.scf.menuing.Menu()
+    menu = scf.menuing.Menu()
     menu.push_breadcrumb('location')
     section_1 = menu.make_section(is_keyed=True, is_hidden=False, is_numbered=True, is_ranged=False)
     section_1.title = 'section'
@@ -193,7 +193,7 @@ def test_Menu_run_05():
     '''Ranged string tokens.
     '''
 
-    menu = baca.scf.menuing.Menu()
+    menu = scf.menuing.Menu()
     menu.push_breadcrumb('location')
     section_1 = menu.make_section(is_keyed=True, is_hidden=False, is_numbered=False, is_ranged=True)
     section_1.title = 'section'
@@ -236,13 +236,13 @@ def test_Menu_run_06():
     '''Default tuple tokens.
     '''
 
-    menu = baca.scf.menuing.Menu()
+    menu = scf.menuing.Menu()
     menu.push_breadcrumb('location')
     section_1 = menu.make_section(is_keyed=True, is_hidden=False, is_numbered=False, is_ranged=False)
     section_1.title = 'section'
     section_1 = menu.make_section()
     section_1.append(('add', 'first command'))
-    section_1.append(('del', 'second command'))
+    section_1.append(('rm', 'second command'))
     section_1.append(('mod', 'third command'))
     result = menu.run(user_input='foo')
 
@@ -252,7 +252,7 @@ def test_Menu_run_06():
       '     Section',
       '',
       '     first command (add)',
-      '     second command (del)',
+      '     second command (rm)',
       '     third command (mod)',
       '']
     assert result is None
@@ -277,7 +277,7 @@ def test_Menu_run_06():
     assert result is None
 
     menu.session.reinitialize()
-    result = menu.run(user_input='add, mod-del')
+    result = menu.run(user_input='add, mod-rm')
     assert result is None
 
     menu.session.reinitialize()
@@ -316,7 +316,7 @@ def test_Menu_run_06():
     assert result is None
 
     menu.session.reinitialize()
-    result = menu.run(user_input='add, mod-del')
+    result = menu.run(user_input='add, mod-rm')
     assert result is None
 
     menu.session.reinitialize()
@@ -333,12 +333,12 @@ def test_Menu_run_07():
     NB: User can not match on keys but key returned from menu to calling code.
     '''
 
-    menu = baca.scf.menuing.Menu()
+    menu = scf.menuing.Menu()
     menu.push_breadcrumb('location')
     section_1 = menu.make_section(is_keyed=False, is_hidden=False, is_numbered=False, is_ranged=False)
     section_1.title = 'section'
     section_1.append(('add', 'first command'))
-    section_1.append(('del', 'second command'))
+    section_1.append(('rm', 'second command'))
     section_1.append(('mod', 'third command'))
     result = menu.run(user_input='foo')
 
@@ -374,7 +374,7 @@ def test_Menu_run_07():
     assert result is None
 
     menu.session.reinitialize()
-    result = menu.run(user_input='add, mod-del')
+    result = menu.run(user_input='add, mod-rm')
     assert result is None
 
     menu.session.reinitialize()
@@ -413,7 +413,7 @@ def test_Menu_run_07():
     assert result is None
 
     menu.session.reinitialize()
-    result = menu.run(user_input='add, mod-del')
+    result = menu.run(user_input='add, mod-rm')
     assert result is None
 
     menu.session.reinitialize()
@@ -429,12 +429,12 @@ def test_Menu_run_08():
     '''Hidding suppresses output.
     '''
 
-    menu = baca.scf.menuing.Menu()
+    menu = scf.menuing.Menu()
     menu.push_breadcrumb('location')
     section_1 = menu.make_section(is_keyed=True, is_hidden=True, is_numbered=False, is_ranged=False)
     section_1.title = 'section'
     section_1.append(('add', 'first command'))
-    section_1.append(('del', 'second command'))
+    section_1.append(('rm', 'second command'))
     section_1.append(('mod', 'third command'))
     result = menu.run(user_input='foo')
 
@@ -463,7 +463,7 @@ def test_Menu_run_08():
     assert result is None
 
     menu.session.reinitialize()
-    result = menu.run(user_input='add, mod-del')
+    result = menu.run(user_input='add, mod-rm')
     assert result is None
 
     menu.session.reinitialize()
@@ -502,7 +502,7 @@ def test_Menu_run_08():
     assert result is None
 
     menu.session.reinitialize()
-    result = menu.run(user_input='add, mod-del')
+    result = menu.run(user_input='add, mod-rm')
     assert result is None
 
     menu.session.reinitialize()
@@ -518,12 +518,12 @@ def test_Menu_run_09():
     '''Tuple tokens with numbering turned on.
     '''
 
-    menu = baca.scf.menuing.Menu()
+    menu = scf.menuing.Menu()
     menu.push_breadcrumb('location')
     section_1 = menu.make_section(is_keyed=True, is_hidden=False, is_numbered=True, is_ranged=False)
     section_1.title = 'section'
     section_1.append(('add', 'first command'))
-    section_1.append(('del', 'second command'))
+    section_1.append(('rm', 'second command'))
     section_1.append(('mod', 'third command'))
     result = menu.run(user_input='foo')
 
@@ -533,7 +533,7 @@ def test_Menu_run_09():
       '     Section',
       '',
       '     1: first command (add)',
-      '     2: second command (del)',
+      '     2: second command (rm)',
       '     3: third command (mod)',
       '']
     assert result is None
@@ -558,7 +558,7 @@ def test_Menu_run_09():
     assert result is None
 
     menu.session.reinitialize()
-    result = menu.run(user_input='add, mod-del')
+    result = menu.run(user_input='add, mod-rm')
     assert result is None
 
     menu.session.reinitialize()
@@ -597,7 +597,7 @@ def test_Menu_run_09():
     assert result is None
 
     menu.session.reinitialize()
-    result = menu.run(user_input='add, mod-del')
+    result = menu.run(user_input='add, mod-rm')
     assert result is None
 
     menu.session.reinitialize()
@@ -613,12 +613,12 @@ def test_Menu_run_10():
     '''Ranged tuple tokens.
     '''
 
-    menu = baca.scf.menuing.Menu()
+    menu = scf.menuing.Menu()
     menu.push_breadcrumb('location')
     section_1 = menu.make_section(is_keyed=True, is_hidden=False, is_numbered=False, is_ranged=True)
     section_1.title = 'section'
     section_1.append(('add', 'first command'))
-    section_1.append(('del', 'second command'))
+    section_1.append(('rm', 'second command'))
     section_1.append(('mod', 'third command'))
     result = menu.run(user_input='foo') 
 
@@ -628,7 +628,7 @@ def test_Menu_run_10():
       '     Section',
       '',
       '     first command (add)',
-      '     second command (del)',
+      '     second command (rm)',
       '     third command (mod)',
       '']
     assert result is None
@@ -653,16 +653,16 @@ def test_Menu_run_10():
     assert result is None
 
     menu.session.reinitialize()
-    result = menu.run(user_input='add, mod-del')
-    assert result == ['add', 'mod', 'del']
+    result = menu.run(user_input='add, mod-rm')
+    assert result == ['add', 'mod', 'rm']
 
     menu.session.reinitialize()
     result = menu.run(user_input='fir, thi-sec')
-    assert result == ['add', 'mod', 'del']
+    assert result == ['add', 'mod', 'rm']
 
     menu.session.reinitialize()
     result = menu.run(user_input='fir, mod-sec')
-    assert result == ['add', 'mod', 'del']
+    assert result == ['add', 'mod', 'rm']
 
     '''Bodies returned instead of keys.'''
     
@@ -693,7 +693,7 @@ def test_Menu_run_10():
     assert result is None
 
     menu.session.reinitialize()
-    result = menu.run(user_input='add, mod-del')
+    result = menu.run(user_input='add, mod-rm')
     assert result == ['first command', 'third command', 'second command']
 
     menu.session.reinitialize()

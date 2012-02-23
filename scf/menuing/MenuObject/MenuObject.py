@@ -1,6 +1,6 @@
 from abjad.tools import iotools
-from baca.scf.core.SCFObject.SCFObject import SCFObject
-from baca.scf import predicates
+from scf.core.SCFObject.SCFObject import SCFObject
+from scf import predicates
 import os, subprocess
 
 
@@ -89,7 +89,7 @@ class MenuObject(SCFObject):
         self.display(lines, capitalize_first_character=False)
 
     def make_default_hidden_section(self, session=None, where=None):
-        from baca.scf.menuing.MenuSection import MenuSection
+        from scf.menuing.MenuSection import MenuSection
         section = MenuSection(is_hidden=True, session=session, where=where)
         section.append(('b', 'back'))
         section.append(('exec', 'exec statement'))

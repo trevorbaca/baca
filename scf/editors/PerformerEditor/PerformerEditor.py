@@ -2,27 +2,24 @@ from abjad.tools import instrumenttools
 from abjad.tools import mathtools
 from abjad.tools import scoretools
 from abjad.tools import sequencetools
-from baca.scf.editors.InteractiveEditor import InteractiveEditor
-from baca.scf.editors.InstrumentEditor import InstrumentEditor
+from scf.editors.InteractiveEditor import InteractiveEditor
+from scf.editors.InstrumentEditor import InstrumentEditor
 
 
 class PerformerEditor(InteractiveEditor):
 
-    ### READ-ONLY PUBLIC ATTRIBUTES ###
+    ### CLASS ATTRIBUTES ###
 
-    @property
-    def breadcrumb(self):
-        if self.target is not None and self.target.name is not None:
-            return self.target.name
-        else:
-            return 'performer'
+    target_class = scoretools.Performer
+
+    ### READ-ONLY PUBLIC ATTRIBUTES ###
 
     @property
     def instrument_names(self):
         return [instrument.instrument_name for instrument in self.target.instruments]
 
     @property
-    def summary_lines(self):
+    def target_summary_lines(self):
         if not self.target.instruments:
             result = '{}: no instruments'.format(self.target.name)
         elif len(self.target.instruments) == 1 and self.target.name == \
@@ -34,7 +31,10 @@ class PerformerEditor(InteractiveEditor):
         result = [result]
         return result
 
-    target_class = scoretools.Performer
+    @property
+    def target_name(self):
+        if self.target:
+            return self.target.name
 
     ### PUBLIC METHODS ###
 
@@ -45,17 +45,6 @@ class PerformerEditor(InteractiveEditor):
             for instrument in instruments:
                 self.target.instruments.append(instrument)
 
-    def remove_instruments_interactively(self):
-        getter = self.make_getter(where=self.where())
-        getter.append_argument_range('instruments', self.instrument_names)
-        result = getter.run()
-        if self.backtrack():
-            return
-        instrument_indices = [x - 1 for x in result]
-        instruments = self.target.instruments
-        instruments = sequencetools.remove_sequence_elements_at_indices(instruments, instrument_indices)
-        self.target.instruments[:] = instruments
-    
     def edit_instrument_interactively(self, instrument_number):
         try:
             instrument_number = int(instrument_number)
@@ -87,7 +76,7 @@ class PerformerEditor(InteractiveEditor):
             raise TypeError('result must be string.')
         if result == 'add':
             self.add_instruments_interactively()
-        elif result == 'del':
+        elif result == 'rm':
             self.remove_instruments_interactively()
         elif result == 'mv':
             self.move_instrument_interactively()
@@ -105,7 +94,7 @@ class PerformerEditor(InteractiveEditor):
         section = menu.make_section(is_keyed=False)
         section.append(('add', 'add instruments'))
         if 0 < self.target.instrument_count:
-            section.append(('del', 'delete instruments'))
+            section.append(('rm', 'delete instruments'))
         if 1 < self.target.instrument_count:
             section.append(('mv', 'move instrument'))
         if self.target.name is None:
@@ -127,6 +116,17 @@ class PerformerEditor(InteractiveEditor):
         self.target.instruments.remove(instrument)
         self.target.instruments.insert(new_instrument_index, instrument)
 
+    def remove_instruments_interactively(self):
+        getter = self.make_getter(where=self.where())
+        getter.append_argument_range('instruments', self.instrument_names)
+        result = getter.run()
+        if self.backtrack():
+            return
+        instrument_indices = [x - 1 for x in result]
+        instruments = self.target.instruments
+        instruments = sequencetools.remove_sequence_elements_at_indices(instruments, instrument_indices)
+        self.target.instruments[:] = instruments
+    
     def set_initial_configuration_interactively(self, clear=True, cache=False):
         self.cache_breadcrumbs(cache=cache)
         self.conditionally_initialize_target()

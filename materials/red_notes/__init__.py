@@ -1,4 +1,4 @@
-from baca.scf.helpers import safe_import
+from scf.helpers import safe_import
 from collections import OrderedDict
 
 safe_import(globals(), 'output_material', 'red_notes')

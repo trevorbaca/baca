@@ -1,6 +1,6 @@
 from abjad.tools import iotools
-from baca.scf.proxies.ModuleProxy import ModuleProxy
-from baca.scf.wranglers.ImportableAssetWrangler import ImportableAssetWrangler
+from scf.proxies.ModuleProxy import ModuleProxy
+from scf.wranglers.ImportableAssetWrangler import ImportableAssetWrangler
 import os
 
 

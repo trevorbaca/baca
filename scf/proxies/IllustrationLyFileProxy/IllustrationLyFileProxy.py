@@ -1,6 +1,10 @@
-from baca.scf.proxies.FileProxy import FileProxy
+from scf.proxies.FileProxy import FileProxy
 
 
 class IllustrationLyFileProxy(FileProxy):
 
-    pass
+    ### READ-ONLY ATTRIBUTES ###
+
+    @property
+    def extension(self):
+        return '.ly'

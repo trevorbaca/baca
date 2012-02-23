@@ -1,4 +1,4 @@
-import baca
+import scf
 
 
 def test_MenuSection_menu_entry_keys_01():
@@ -6,7 +6,7 @@ def test_MenuSection_menu_entry_keys_01():
     True whether section is numbered or not.
     '''
 
-    menu = baca.scf.menuing.Menu()
+    menu = scf.menuing.Menu()
     menu.push_breadcrumb('location')
     section = menu.make_section()
     section.title = 'section'
@@ -14,7 +14,7 @@ def test_MenuSection_menu_entry_keys_01():
     assert not section.is_numbered
     assert section.menu_entry_keys == [None, None, None]
 
-    menu = baca.scf.menuing.Menu()
+    menu = scf.menuing.Menu()
     menu.push_breadcrumb('location')
     section = menu.make_section(is_numbered=True)
     section.title = 'section'
@@ -28,24 +28,24 @@ def test_MenuSection_menu_entry_keys_02():
     True whether section is numbered or not.
     '''
 
-    menu = baca.scf.menuing.Menu()
+    menu = scf.menuing.Menu()
     menu.push_breadcrumb('location')
     section = menu.make_section()
     section.title = 'section title'
     section.append(('add', 'add something'))
-    section.append(('del', 'delete something'))
+    section.append(('rm', 'delete something'))
     section.append(('mod', 'modify something'))
     assert not section.is_numbered
-    assert section.menu_entry_keys == ['add', 'del', 'mod']
+    assert section.menu_entry_keys == ['add', 'rm', 'mod']
     assert section.menu_entry_keys == [x[0] for x in section.tokens]
 
-    menu = baca.scf.menuing.Menu()
+    menu = scf.menuing.Menu()
     menu.push_breadcrumb('location')
     section = menu.make_section(is_numbered=True)
     section.title = 'section title'
     section.append(('add', 'add something'))
-    section.append(('del', 'delete something'))
+    section.append(('rm', 'delete something'))
     section.append(('mod', 'modify something'))
     assert section.is_numbered
-    assert section.menu_entry_keys == ['add', 'del', 'mod']
+    assert section.menu_entry_keys == ['add', 'rm', 'mod']
     assert section.menu_entry_keys == [x[0] for x in section.tokens]

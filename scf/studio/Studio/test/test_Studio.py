@@ -1,15 +1,14 @@
-import baca
+import scf
 
 
 def test_Studio_01():
     '''Attributes.
     '''
 
-    studio = baca.scf.studio.Studio()
+    studio = scf.studio.Studio()
 
     assert studio.class_name == 'Studio'
-    assert isinstance(studio.home_package_proxy, baca.scf.proxies.HomePackageProxy)
-    assert isinstance(studio.score_package_wrangler, baca.scf.wranglers.ScorePackageWrangler)
+    assert isinstance(studio.score_package_wrangler, scf.wranglers.ScorePackageWrangler)
     assert studio.source_file_name == \
         '/Users/trevorbaca/Documents/other/baca/scf/studio/Studio/Studio.py'
     assert studio.spaced_class_name == 'studio'
@@ -19,7 +18,7 @@ def test_Studio_02():
     '''Main menu.
     '''
 
-    studio = baca.scf.studio.Studio()
+    studio = scf.studio.Studio()
     studio.run(user_input='q')
     
     assert studio.transcript[-2] == \
@@ -45,7 +44,7 @@ def test_Studio_03():
     '''Main menu to score menu.
     '''
 
-    studio = baca.scf.studio.Studio()
+    studio = scf.studio.Studio()
     studio.run(user_input='1 q')
 
 #    assert studio.transcript[-2] == [
@@ -73,7 +72,7 @@ def test_Studio_04():
     '''Main menu. Mothballed scores only.
     '''
 
-    studio = baca.scf.studio.Studio()
+    studio = scf.studio.Studio()
     studio.run(user_input='mb q')
     
     assert studio.transcript[-2] == \
@@ -98,7 +97,7 @@ def test_Studio_05():
     '''Main menu to score menu to tags menu.
     '''
 
-    studio = baca.scf.studio.Studio()
+    studio = scf.studio.Studio()
     studio.run(user_input='1 tags q')
     assert studio.ts == (6,)
 
@@ -107,25 +106,16 @@ def test_Studio_06():
     '''Main menu to svn menu.
     '''
 
-    studio = baca.scf.studio.Studio()
+    studio = scf.studio.Studio()
     studio.run(user_input='svn q')
 
     assert studio.transcript[-2] == [
       'Studio - active scores - repository commands',
       '',
-      '     add',
-      '     ci',
-      '     st',
-      '     up',
-      '',
-      '     add_scores',
-      '     ci_scores',
-      '     st_scores',
-      '     up_scores',
-      '',
-      '     pytest',
-      '     pytest_scores',
-      '     pytest_all',
+      '     svn add scores (add)',
+      '     svn commit scores (ci)',
+      '     svn status scores (st)',
+      '     svn update scores (up)',
       '']
 
 
@@ -133,7 +123,7 @@ def test_Studio_07():
     '''Main menu header is the same even after state change to secondary menu.
     '''
 
-    studio = baca.scf.studio.Studio()
+    studio = scf.studio.Studio()
     studio.run(user_input='q')
     assert studio.transcript[-2][0] == 'Studio - active scores'
 
@@ -148,7 +138,7 @@ def test_Studio_08():
     '''Junk works.
     '''
 
-    studio = baca.scf.studio.Studio()
+    studio = scf.studio.Studio()
     studio.run(user_input='foo q')
     assert studio.ts == (4, (0, 2))
 
@@ -160,7 +150,7 @@ def test_Studio_09():
     '''Back is handled correctly.
     '''
 
-    studio = baca.scf.studio.Studio()
+    studio = scf.studio.Studio()
     studio.run(user_input='b q')
     assert studio.ts == (4, (0, 2))
 
@@ -169,7 +159,7 @@ def test_Studio_10():
     '''Exec works.
     '''
 
-    studio = baca.scf.studio.Studio()
+    studio = scf.studio.Studio()
     studio.run(user_input='exec 2**30 q')
 
     assert studio.transcript[1] == ['SCF> exec', '']
@@ -182,7 +172,7 @@ def test_Studio_11():
     '''Exec protects against senseless input.
     '''
 
-    studio = baca.scf.studio.Studio()
+    studio = scf.studio.Studio()
     studio.run(user_input='exec foo q')
 
     assert studio.transcript[1] == ['SCF> exec', '']
@@ -195,9 +185,8 @@ def test_Studio_12():
     '''Shared session.
     '''
 
-    studio = baca.scf.studio.Studio()
+    studio = scf.studio.Studio()
 
-    assert studio.session is studio.home_package_proxy.session
     assert studio.session is studio.score_package_wrangler.session
 
 
@@ -205,11 +194,11 @@ def test_Studio_13():
     '''Backtracking stu* shortcut.
     '''
 
-    studio = baca.scf.studio.Studio()
+    studio = scf.studio.Studio()
     studio.run(user_input='Mon perf studio q')
     ts_1 = studio.ts
 
-    studio = baca.scf.studio.Studio()
+    studio = scf.studio.Studio()
     studio.run(user_input='Mon perf stu q')
     ts_2 = studio.ts
     
@@ -220,11 +209,11 @@ def test_Studio_14():
     '''Backtracking sco* shortcut.
     '''
 
-    studio = baca.scf.studio.Studio()
+    studio = scf.studio.Studio()
     studio.run(user_input='Mon perf score q')
     ts_1 = studio.ts
 
-    studio = baca.scf.studio.Studio()
+    studio = scf.studio.Studio()
     studio.run(user_input='Mon perf sco q')
     ts_2 = studio.ts
     

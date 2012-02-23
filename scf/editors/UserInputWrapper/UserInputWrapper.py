@@ -3,6 +3,10 @@ import collections
 
 class UserInputWrapper(collections.OrderedDict):
     
+    def __init__(self, *arg):
+        collections.OrderedDict.__init__(self, *arg)
+        self._user_input_module_import_statements = []
+
     ### READ-ONLY PUBLIC ATTRIBUTES ###
 
     @property
@@ -21,14 +25,17 @@ class UserInputWrapper(collections.OrderedDict):
 
     @property
     def formatted_lines(self):
-        formatted_lines = []
-        formatted_lines.append('user_input_wrapper = {}(['.format(type(self).__name__))
-        items = self.list_items
-        for name, value in items[:-1]:
-            line = '\t({!r}, {!r}),'.format(name, value)
-            formatted_lines.append(line)
-        formatted_lines.append('\t({!r}, {!r})])'.format(items[-1][0], items[-1][1]))
-        return formatted_lines
+        result = []
+        items = self.list_items()
+        if not items:
+            result.append('user_input_wrapper = {}([])'.format(type(self).__name__))
+        else:
+            result.append('user_input_wrapper = {}(['.format(type(self).__name__))
+            for name, value in items[:-1]:
+                line = '\t({!r}, {}),'.format(name, self.get_repr_with_tools_package(value))
+                result.append(line)
+            result.append('\t({!r}, {})])'.format(items[-1][0], self.get_repr_with_tools_package(items[-1][1])))
+        return result
 
     @property
     def is_complete(self):
@@ -43,19 +50,26 @@ class UserInputWrapper(collections.OrderedDict):
         return not self.is_complete and not self.is_empty
 
     @property
-    def list_items(self):
-        return list(self.iteritems())
-
-    @property
     def user_input_module_import_statements(self):
-        return self._user_input_module_import_statements
-
-    @property
-    def values(self):
-        return list(self.itervalues())
+        result = ['from scf.editors import UserInputWrapper']
+        result.extend(self._user_input_module_import_statements)
+        result.sort()
+        return result
 
     ### PUBLIC METHODS ###
 
     def clear(self):
         for key in self:
             self[key] = None
+
+    def get_repr_with_tools_package(self, expr):
+        return getattr(expr, '_repr_with_tools_package', repr(expr))
+
+    def list_items(self):
+        return list(self.iteritems())
+
+    def list_keys(self):
+        return list(self.iterkeys())
+
+    def list_values(self):
+        return list(self.itervalues())

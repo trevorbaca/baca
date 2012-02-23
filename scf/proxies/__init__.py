@@ -6,10 +6,10 @@ from DistDirectoryProxy import DistDirectoryProxy
 from EtcDirectoryProxy import EtcDirectoryProxy
 from ExgDirectoryProxy import ExgDirectoryProxy
 from FileProxy import FileProxy
-from HomePackageProxy import HomePackageProxy
 from IllustrationBuilderModuleProxy import IllustrationBuilderModuleProxy
 from IllustrationLyFileProxy import IllustrationLyFileProxy
 from IllustrationPdfFileProxy import IllustrationPdfFileProxy
+from ImportableAssetProxy import ImportableAssetProxy
 from InitializerFileProxy import InitializerFileProxy
 from MaterialDefinitionModuleProxy import MaterialDefinitionModuleProxy
 from MaterialModuleProxy import MaterialModuleProxy

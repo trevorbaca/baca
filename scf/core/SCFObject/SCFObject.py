@@ -2,7 +2,7 @@ from abjad.tools import iotools
 from abjad.tools import markuptools
 from abjad.tools import mathtools
 from abjad.tools import pitchtools
-from baca.scf.core.Session import Session
+from scf.core.Session import Session
 import inspect
 import os
 import pprint
@@ -27,8 +27,8 @@ class SCFObject(object):
         return
 
     @property
-    def boilerplate_directory(self):
-        return os.path.join(self.scf_root_directory, 'boilerplate')
+    def boilerplate_directory_name(self):
+        return os.path.join(self.scf_package_path_name, 'boilerplate')
 
     @property
     def breadcrumb(self):
@@ -51,7 +51,7 @@ class SCFObject(object):
 
     @property
     def makers_directory_name(self):
-        return os.path.join(self.scf_root_directory, 'makers')
+        return os.path.join(self.scf_package_path_name, 'makers')
 
     @property
     def makers_package_importable_name(self):
@@ -59,11 +59,51 @@ class SCFObject(object):
 
     @property
     def scf_package_importable_name(self):
-        return self.dot_join([self.home_package_importable_name, 'scf'])
+        return os.path.basename(os.environ.get('SCFPATH'))
 
     @property
-    def scf_root_directory(self):
-        return self.package_importable_name_to_path_name(self.scf_package_importable_name)
+    def scf_package_path_name(self):
+        return os.environ.get('SCFPATH')
+
+    @property
+    def score_external_chunks_package_importable_name(self):
+        return os.path.basename(os.environ.get('SCFCHUNKSPATH'))
+
+    @property
+    def score_external_chunks_package_path_name(self):
+        return os.environ.get('SCFCHUNKSPATH')
+
+    @property
+    def score_external_materials_package_importable_name(self):
+        return os.path.basename(os.environ.get('SCFMATERIALSPATH'))
+
+    @property
+    def score_external_materials_package_path_name(self):
+        return os.environ.get('SCFMATERIALSPATH')
+
+    @property
+    def score_external_package_importable_names(self):
+        return (
+            self.score_external_chunks_package_importable_name,
+            self.score_external_materials_package_importable_name,
+            self.score_external_specifiers_package_importable_name,
+            )
+
+    @property
+    def score_external_package_path_names(self):
+        return (
+            self.score_external_chunks_package_path_name,
+            self.score_external_materials_package_path_name,
+            self.score_external_specifiers_package_path_name,
+            )
+
+    @property
+    def score_external_specifiers_package_importable_name(self):
+        return os.path.basename(os.environ.get('SCFSPECIFIERSPATH'))
+
+    @property
+    def score_external_specifiers_package_path_name(self):
+        return os.environ.get('SCFSPECIFIERSPATH')
 
     @property
     def score_internal_chunks_package_importable_name_infix(self):
@@ -86,10 +126,6 @@ class SCFObject(object):
         return self._session
 
     @property
-    def score_external_chunks_package_importable_name(self):
-        return self.dot_join([self.home_package_importable_name, 'sketches'])
-
-    @property
     def source_file_name(self):
         source_file_name = inspect.getfile(type(self))
         source_file_name = source_file_name.strip('c')
@@ -100,28 +136,8 @@ class SCFObject(object):
         return iotools.uppercamelcase_to_space_delimited_lowercase(self.class_name)
 
     @property
-    def studio_directory_name(self):
-        return self.package_importable_name_to_path_name(self.home_package_importable_name)
-
-    @property
-    def score_external_materials_package_importable_name(self):
-        return self.dot_join([self.home_package_importable_name, 'materials'])
-
-    @property
-    def score_external_specifiers_package_importable_name(self):
-        return self.dot_join([self.home_package_importable_name, 'specifiers'])
-
-    @property
-    def home_package_path_name(self):
-        return os.environ.get('BACA')
-
-    @property
-    def home_package_importable_name(self):
-        return 'baca'
-
-    @property
     def stylesheets_directory_name(self):
-        return os.path.join(self.scf_root_directory, 'stylesheets')
+        return os.path.join(self.scf_package_path_name, 'stylesheets')
 
     @property
     def stylesheets_package_importable_name(self):
@@ -141,6 +157,18 @@ class SCFObject(object):
 
     ### PUBLIC METHODS ###
 
+    def asset_full_name_to_importable_name(self, asset_full_name):
+        if self.is_path_name(asset_full_name):
+            return self.path_name_to_package_importable_name(asset_full_name)
+        else:
+            return asset_full_name
+
+    def asset_full_name_to_path_name(self, asset_full_name):
+        if self.is_path_name(asset_full_name):
+            return asset_full_name
+        else:
+            return self.package_importable_name_to_path_name(asset_full_name)
+
     def assign_user_input(self, user_input=None):
         if user_input is not None:
             self.session.user_input = user_input
@@ -153,8 +181,10 @@ class SCFObject(object):
             self.session.breadcrumb_cache_stack.append(self.session.breadcrumb_stack[:])
             self.session._breadcrumb_stack[:] = []
 
+    def change_expr_to_menu_token(self, expr):
+        return (None, self.get_one_line_menuing_summary(expr), None, expr)
+
     def change_string_to_human_readable_string(self, string):
-        assert isinstance(string, str)
         if not string:
             return string
         elif string[0].isupper():
@@ -188,9 +218,10 @@ class SCFObject(object):
             file_reference.write('')
             file_reference.close()
 
-    def confirm(self, prompt_string='ok', include_chevron=False):
+    def confirm(self, prompt_string='ok?', include_chevron=False):
         getter = self.make_getter(where=self.where())
         getter.append_yes_no_string(prompt_string)
+        getter.include_newlines = False
         result = getter.run(include_chevron=include_chevron)
         if self.backtrack():
             return
@@ -218,6 +249,28 @@ class SCFObject(object):
 
     def dot_join(self, expr):
         return '.'.join(expr)
+
+    def expr_to_parent_package_short_name(self, expr):
+        module_path = expr.__module__
+        parts = module_path.split('.')
+        for part in reversed(parts):
+            if not part == expr.__class__.__name__:
+                return part
+
+    def get_one_line_menuing_summary(self, expr):
+        if getattr(expr, 'one_line_menuing_summary', None):
+            return expr.one_line_menuing_summary
+        elif getattr(expr, '_one_line_menuing_summary', None):
+            return expr._one_line_menuing_summary
+        elif isinstance(expr, type(type)):
+            return expr.__name__
+        elif isinstance(expr, str):
+            return expr
+        else:
+            return repr(expr)
+
+    def get_repr_with_tools_package(self, expr):
+        return getattr(expr, '_repr_with_tools_package', repr(expr))
 
     def handle_raw_input(self, prompt, include_chevron=True, include_newline=True, prompt_character='>',
         capitalize_prompt=True):
@@ -260,6 +313,18 @@ class SCFObject(object):
         finally:
             readline.set_startup_hook()
 
+    def is_module_name(self, expr):
+        if isinstance(expr, str):
+            if os.path.sep not in expr:
+                return True
+        return False
+
+    def is_path_name(self, expr):
+        if isinstance(expr, str):
+            if os.path.sep in expr:
+                return True
+        return False
+
     def list_score_package_short_names(self, head=None):
         result = []
         for name in os.listdir(self.scores_directory_name):
@@ -271,13 +336,13 @@ class SCFObject(object):
         return result
 
     def make_getter(self, where=None):
-        import baca
-        return baca.scf.menuing.UserInputGetter(where=where, session=self.session)
+        import scf
+        return scf.menuing.UserInputGetter(where=where, session=self.session)
 
     def make_menu(self, is_hidden=False, is_internally_keyed=False, is_keyed=True, 
         is_numbered=False, is_parenthetically_numbered=False, is_ranged=False, where=None):
-        import baca
-        menu = baca.scf.menuing.Menu(where=where, session=self.session)
+        import scf
+        menu = scf.menuing.Menu(where=where, session=self.session)
         section = menu.make_section(
             is_hidden=is_hidden, is_internally_keyed=is_internally_keyed, is_keyed=is_keyed, 
             is_numbered=is_numbered, is_parenthetically_numbered=is_parenthetically_numbered, 
@@ -285,20 +350,30 @@ class SCFObject(object):
         return menu, section
 
     def module_importable_name_to_path_name(self, module_importable_name):
-        path_name = self.package_importable_name_to_path_name(module_importable_name) + '.py'
-        return path_name
+        if module_importable_name is not None:
+            path_name = self.package_importable_name_to_path_name(module_importable_name) + '.py'
+            return path_name
 
     def package_exists(self, package_importable_name):
         assert isinstance(package_importable_name, str)
-        directory_name = self.package_importable_name_to_path_name(package_importable_name)
-        return os.path.exists(directory_name)
+        path_name = self.package_importable_name_to_path_name(package_importable_name)
+        return os.path.exists(path_name)
 
     def package_importable_name_to_path_name(self, package_importable_name):
         if package_importable_name is None:
             return
         package_importable_name_parts = package_importable_name.split('.')
-        if package_importable_name_parts[0] == self.home_package_importable_name:
-            directory_parts = [os.environ.get('BACA')] + package_importable_name_parts[1:]
+        if package_importable_name_parts[0] == self.scf_package_importable_name:
+            directory_parts = [self.scf_package_path_name] + package_importable_name_parts[1:]
+        elif package_importable_name_parts[0] == self.score_external_materials_package_importable_name:
+            directory_parts = \
+                [self.score_external_materials_package_path_name] + package_importable_name_parts[1:]
+        elif package_importable_name_parts[0] == self.score_external_chunks_package_importable_name:
+            directory_parts = \
+                [self.score_external_chunks_package_path_name] + package_importable_name_parts[1:]
+        elif package_importable_name_parts[0] == self.score_external_specifiers_package_importable_name:
+            directory_parts = \
+                [self.score_external_chunks_package_path_name] + package_importable_name_parts[1:]
         else:
             directory_parts = [self.scores_directory_name] + package_importable_name_parts[:]
         directory = os.path.join(*directory_parts)
@@ -314,8 +389,16 @@ class SCFObject(object):
         if path_name is None:
             return
         path_name = path_name.rstrip(os.path.sep)
-        if path_name.startswith(self.home_package_path_name):
-            prefix_length = len(os.path.dirname(self.home_package_path_name)) + 1
+        if path_name.endswith('.py'):
+            path_name = path_name[:-3]
+        if path_name.startswith(self.scf_package_path_name):
+            prefix_length = len(os.path.dirname(self.scf_package_path_name)) + 1
+        elif path_name.startswith(self.score_external_materials_package_path_name):
+            prefix_length = len(os.path.dirname(self.score_external_materials_package_path_name)) + 1
+        elif path_name.startswith(self.score_external_chunks_package_path_name):
+            prefix_length = len(os.path.dirname(self.score_external_chunks_package_path_name)) + 1
+        elif path_name.startswith(self.score_external_specifiers_package_path_name):
+            prefix_length = len(os.path.dirname(self.score_external_specifiers_package_path_name)) + 1
         elif path_name.startswith(self.scores_directory_name):
             prefix_length = len(self.scores_directory_name) + 1
         else:
@@ -324,6 +407,14 @@ class SCFObject(object):
         package_importable_name = package_importable_name.replace(os.path.sep, '.')
         return package_importable_name
 
+    def pluralize_string(self, string):
+        if string.endswith('y'):
+            return string[:-1] + 'ies'
+        elif string.endswith(('s', 'sh', 'x', 'z')):
+            return string + 'es'
+        else:
+            return string + 's'
+        
     def pop_backtrack(self):
         return self.session.backtracking_stack.pop()
 
@@ -358,11 +449,7 @@ class SCFObject(object):
         self.session.user_input = user_input
         return user_response
 
-    def print_implemented_on_child_classes(self):
-        self.display(['method implemented on child classes.', ''])
-        self.proceed()
-
-    def print_not_implemented(self):
+    def print_not_yet_implemented(self):
         self.display(['not yet implemented', ''])
         self.proceed()
 
@@ -414,6 +501,12 @@ class SCFObject(object):
         if '.' in base_name:
             return base_name[:base_name.rindex('.')]
         return base_name
+
+    def strip_py_extension(self, string):
+        if isinstance(string, str) and string.endswith('.py'):
+            return string[:-3]
+        else:
+            return string
 
     def where(self):
         return inspect.stack()[1]

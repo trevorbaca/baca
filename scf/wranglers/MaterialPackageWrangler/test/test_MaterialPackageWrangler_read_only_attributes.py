@@ -1,6 +1,6 @@
-import baca
+import scf
 
-studio = baca.scf.studio.Studio()
+studio = scf.studio.Studio()
 wrangler = studio.material_package_wrangler
 assert not wrangler.session.is_in_score
 
@@ -16,7 +16,7 @@ def test_MaterialPackageWrangler_read_only_attributes_02():
     '''Asset containers (all).
     '''
 
-    assert 'baca.materials' in wrangler.list_asset_container_importable_names()
+    assert 'materials' in wrangler.list_asset_container_importable_names()
     assert 'aracilik.mus.materials' in wrangler.list_asset_container_importable_names()
     assert '/Users/trevorbaca/Documents/other/baca/materials' in wrangler.list_asset_container_path_names()
     assert '/Users/trevorbaca/Documents/scores/aracilik/mus/materials' in wrangler.list_asset_container_path_names()
@@ -26,7 +26,7 @@ def test_MaterialPackageWrangler_read_only_attributes_03():
     '''Current asset container.
     '''
 
-    assert wrangler.current_asset_container_importable_name == 'baca.materials'
+    assert wrangler.current_asset_container_importable_name == 'materials'
     assert wrangler.current_asset_container_path_name == '/Users/trevorbaca/Documents/other/baca/materials'
 
 
@@ -34,7 +34,7 @@ def test_MaterialPackageWrangler_read_only_attributes_04():
     '''Score-external asset container
     '''
 
-    assert wrangler.list_score_external_asset_container_importable_names() == ['baca.materials']
+    assert wrangler.list_score_external_asset_container_importable_names() == ['materials']
     assert wrangler.list_score_external_asset_container_path_names() == \
         ['/Users/trevorbaca/Documents/other/baca/materials']
 
@@ -44,7 +44,7 @@ def test_MaterialPackageWrangler_read_only_attributes_05():
     '''
 
     assert 'red notes' in wrangler.list_score_external_asset_human_readable_names()
-    assert 'baca.materials.red_notes' in wrangler.list_score_external_asset_importable_names()
+    assert 'materials.red_notes' in wrangler.list_score_external_asset_importable_names()
     assert '/Users/trevorbaca/Documents/other/baca/materials/red_notes' in \
         wrangler.list_score_external_asset_path_names()
 
@@ -60,7 +60,7 @@ def test_MaterialPackageWrangler_read_only_attributes_07():
     '''Temporary asset.
     '''
 
-    assert wrangler.temporary_asset_importable_name == 'baca.materials.__temporary_package'
+    assert wrangler.temporary_asset_importable_name == 'materials.__temporary_package'
     assert wrangler.temporary_asset_path_name == \
         '/Users/trevorbaca/Documents/other/baca/materials/__temporary_package'
     assert wrangler.temporary_asset_short_name == '__temporary_package'
@@ -70,7 +70,7 @@ def test_MaterialPackageWrangler_read_only_attributes_08():
     '''In-score wrangler.
     '''
 
-    studio = baca.scf.studio.Studio()
+    studio = scf.studio.Studio()
     wrangler = studio.material_package_wrangler
     wrangler.session.current_score_package_short_name = 'aracilik'
     assert wrangler.session.is_in_score

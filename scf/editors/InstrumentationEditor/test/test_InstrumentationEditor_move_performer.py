@@ -1,14 +1,14 @@
 from abjad.tools.instrumenttools import *
 from abjad.tools.scoretools import InstrumentationSpecifier
 from abjad.tools.scoretools import Performer
-import baca
+import scf
 
 
 def test_InstrumentationEditor_move_performer_01():
     '''Quit, back, studio, score & junk all work.
     '''
 
-    studio = baca.scf.studio.Studio()
+    studio = scf.studio.Studio()
     studio.run(user_input='1 setup perf move q')
     assert studio.ts == (9,)
 
@@ -29,7 +29,7 @@ def test_InstrumentationEditor_move_performer_02():
     '''Add three performers. Make two moves.
     '''
 
-    editor = baca.scf.editors.InstrumentationEditor()
+    editor = scf.editors.InstrumentationEditor()
     editor.run(user_input='add 1 1 add 2 1 add 3 1 move 1 2 move 2 3 q')
     assert editor.target == InstrumentationSpecifier([
         Performer(name='bassist', instruments=[Contrabass()]), 

@@ -1,11 +1,11 @@
-import baca
+import scf
 
 
 def test_InstrumentationEditor_round_trips_01():
     '''Round trip.
     '''
     
-    editor = baca.scf.editors.InstrumentationEditor()
+    editor = scf.editors.InstrumentationEditor()
     editor.run(user_input='add 1 1 add 2 1 move 1 2 del 2 q')
     transcript = editor.transcript
     entry_index = -1
@@ -140,11 +140,11 @@ def test_InstrumentationEditor_round_trips_01():
 
     entry_index = entry_index + 1
     assert transcript[entry_index] == \
-    ['Old number> 1', '']
+    ['Old number> 1']
 
     entry_index = entry_index + 1
     assert transcript[entry_index] == \
-    ['New number> 2', '']
+    ['New number> 2']
 
     entry_index = entry_index + 1
     assert transcript[entry_index] == \
@@ -164,7 +164,7 @@ def test_InstrumentationEditor_round_trips_01():
 
     entry_index = entry_index + 1
     assert transcript[entry_index] == \
-    ['Performers> 2', '']
+    ['Performers> 2']
 
     entry_index = entry_index + 1
     assert transcript[entry_index] == \

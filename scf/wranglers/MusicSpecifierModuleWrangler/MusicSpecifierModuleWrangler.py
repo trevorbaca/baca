@@ -1,5 +1,5 @@
-from baca.scf.proxies.MusicSpecifierModuleProxy import MusicSpecifierModuleProxy
-from baca.scf.wranglers.ModuleWrangler import ModuleWrangler
+from scf.proxies.MusicSpecifierModuleProxy import MusicSpecifierModuleProxy
+from scf.wranglers.ModuleWrangler import ModuleWrangler
 import os
 
 
@@ -16,35 +16,33 @@ class MusicSpecifierModuleWrangler(ModuleWrangler):
     ### READ-ONLY PUBLIC ATTRIBUTES ###
 
     @property
+    def asset_class(self):
+        return MusicSpecifierModuleProxy
+
+    @property
     def breadcrumb(self):
         return 'music specifiers'
 
     @property
-    def asset_class(self):
-        return MusicSpecifierModuleProxy
+    def temporary_asset_short_name(self):
+        return 'temporary_specifier_module.py'
 
     ### PUBLIC METHODS ###
 
     def handle_main_menu_result(self, result):
         if result == 'new':
             self.make_asset_interactively()
+        elif result == 'ren':
+            self.rename_asset_interactively()
+        elif result == 'rm':
+            self.remove_assets_interactively()
         elif result == 'missing':
             self.conditionally_make_asset_container_packages(is_interactive=True)
         elif result == 'profile':
             self.profile_visible_assets()
         else:
             package_proxy = self.get_asset_proxy(result)
-            package_proxy.run()
-
-    def make_main_menu(self, head=None):
-        menu, section = self.make_menu(where=self.where(), is_parenthetically_numbered=True)
-        section.tokens = self.make_visible_asset_menu_tokens(head=head)
-        section = menu.make_section()
-        section.append(('new', 'new music specifier'))
-        hidden_section = menu.make_section(is_hidden=True)
-        hidden_section.append(('missing', 'create missing packages'))
-        hidden_section.append(('profile', 'profile packages'))
-        return menu
+            package_proxy.edit()
 
     def make_asset_interactively(self):
         getter = self.make_getter()
@@ -54,6 +52,18 @@ class MusicSpecifierModuleWrangler(ModuleWrangler):
             return
         package_short_name = specifier_name.replace(' ', '_')
         self.make_asset(package_short_name)
+
+    def make_main_menu(self, head=None):
+        menu, section = self.make_menu(where=self.where(), is_keyed=False, is_parenthetically_numbered=True)
+        section.tokens = self.make_visible_asset_menu_tokens(head=head)
+        section = menu.make_section()
+        section.append(('new', 'new music specifier'))
+        section.append(('ren', 'rename music specifier'))
+        section.append(('rm', 'remove music specifiers'))
+        hidden_section = menu.make_section(is_hidden=True)
+        hidden_section.append(('missing', 'create missing packages'))
+        hidden_section.append(('profile', 'profile packages'))
+        return menu
 
     # TODO: write test
     def select_specifier_spaced_name_interactively(self, cache=False, clear=True, head=None):

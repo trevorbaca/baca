@@ -1,11 +1,11 @@
-from baca.scf.proxies.ModuleProxy import ModuleProxy
+from scf.proxies.ModuleProxy import ModuleProxy
 import os
 
 
 class UserInputModuleProxy(ModuleProxy):
 
-    def __init__(self, module_importable_name, session=None):
-        ModuleProxy.__init__(self, module_importable_name, session=session)
+    def __init__(self, module_importable_name=None, session=None):
+        ModuleProxy.__init__(self, module_importable_name=module_importable_name, session=session)
         self.user_input_wrapper_lines = []
         self.parse()
 
@@ -73,8 +73,11 @@ class UserInputModuleProxy(ModuleProxy):
             file_pointer = open(self.path_name, 'r')
             file_contents_string = file_pointer.read()
             file_pointer.close()
-            exec(file_contents_string)
-            return locals().get('user_input_wrapper', None)
+            try:
+                exec(file_contents_string)
+                return locals().get('user_input_wrapper', None)
+            except:
+                self.display('Error reading user input module.')
 
     def write_user_input_wrapper_to_disk(self, user_input_wrapper_in_memory):
         self.setup_statements[:] = self.conditionally_add_terminal_newlines(

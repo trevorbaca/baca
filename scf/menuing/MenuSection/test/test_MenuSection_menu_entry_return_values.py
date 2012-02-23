@@ -1,4 +1,4 @@
-import baca
+import scf
 
 
 def test_MenuSection_menu_entry_return_values_01():
@@ -6,7 +6,7 @@ def test_MenuSection_menu_entry_return_values_01():
     Always true, including for all four combinations of the two settings tested here.
     '''
 
-    menu = baca.scf.menuing.Menu()
+    menu = scf.menuing.Menu()
     menu.push_breadcrumb('location')
     section = menu.make_section(is_numbered=True)
     section.title = 'section'
@@ -16,7 +16,7 @@ def test_MenuSection_menu_entry_return_values_01():
     assert section.menu_entry_return_values == section.menu_entry_bodies
     assert section.menu_entry_return_values == section.tokens
 
-    menu = baca.scf.menuing.Menu()
+    menu = scf.menuing.Menu()
     menu.push_breadcrumb('location')
     section = menu.make_section()
     section.title = 'section'
@@ -26,7 +26,7 @@ def test_MenuSection_menu_entry_return_values_01():
     assert section.menu_entry_return_values == section.menu_entry_bodies
     assert section.menu_entry_return_values == section.tokens
 
-    menu = baca.scf.menuing.Menu()
+    menu = scf.menuing.Menu()
     menu.push_breadcrumb('location')
     section = menu.make_section(is_numbered=True)
     section.title = 'section'
@@ -37,7 +37,7 @@ def test_MenuSection_menu_entry_return_values_01():
     assert section.menu_entry_return_values == section.menu_entry_bodies
     assert section.menu_entry_return_values == section.tokens
 
-    menu = baca.scf.menuing.Menu()
+    menu = scf.menuing.Menu()
     menu.push_breadcrumb('location')
     section = menu.make_section()
     section.title = 'section'
@@ -55,48 +55,65 @@ def test_MenuSection_menu_entry_return_values_02():
     Note that section numbering plays no role in this.
     '''
 
-    menu = baca.scf.menuing.Menu()
+    menu = scf.menuing.Menu()
     menu.push_breadcrumb('location')
     section = menu.make_section(is_numbered=True)
     section.title = 'section'
     section.append(('add', 'add something'))
-    section.append(('del', 'delete something'))
+    section.append(('rm', 'delete something'))
     section.append(('mod', 'modify something'))
     assert section.is_numbered
-    assert section.menu_entry_return_values == ['add', 'del', 'mod']
+    assert section.menu_entry_return_values == ['add', 'rm', 'mod']
     assert section.menu_entry_return_values == section.menu_entry_keys
 
-    menu = baca.scf.menuing.Menu()
+    menu = scf.menuing.Menu()
     menu.push_breadcrumb('location')
     section = menu.make_section()
     section.title = 'section'
     section.append(('add', 'add something'))
-    section.append(('del', 'delete something'))
+    section.append(('rm', 'delete something'))
     section.append(('mod', 'modify something'))
     assert not section.is_numbered
-    assert section.menu_entry_return_values == ['add', 'del', 'mod']
+    assert section.menu_entry_return_values == ['add', 'rm', 'mod']
     assert section.menu_entry_return_values == section.menu_entry_keys
 
-    menu = baca.scf.menuing.Menu()
+    menu = scf.menuing.Menu()
     menu.push_breadcrumb('location')
     section = menu.make_section(is_numbered=True)
     section.title = 'section'
     section.append(('add', 'add something'))
-    section.append(('del', 'delete something'))
+    section.append(('rm', 'delete something'))
     section.append(('mod', 'modify something'))
     section.return_value_attribute = 'body'
     assert section.is_numbered
     assert section.menu_entry_return_values == ['add something', 'delete something', 'modify something']
     assert section.menu_entry_return_values == section.menu_entry_bodies
 
-    menu = baca.scf.menuing.Menu()
+    menu = scf.menuing.Menu()
     menu.push_breadcrumb('location')
     section = menu.make_section()
     section.title = 'section'
     section.append(('add', 'add something'))
-    section.append(('del', 'delete something'))
+    section.append(('rm', 'delete something'))
     section.append(('mod', 'modify something'))
     section.return_value_attribute = 'body'
     assert not section.is_numbered
     assert section.menu_entry_return_values == ['add something', 'delete something', 'modify something']
     assert section.menu_entry_return_values == section.menu_entry_bodies
+
+
+def test_MenuSection_menu_entry_return_values_03():
+    '''Length-4 tuples include prepopulated return values.
+    You must still set return_value_attribute to 'prepopulated'.
+    '''
+
+    menu = scf.menuing.Menu()
+    menu.push_breadcrumb('location')
+    section = menu.make_section()
+    section.title = 'section'
+    section.append(('add', 'add something', None, 'return value A'))
+    section.append(('rm', 'delete something', None, 'return value B'))
+    section.append(('mod', 'modify something', None, 'return value C'))
+    section.return_value_attribute = 'prepopulated'
+    assert not section.is_numbered
+    assert section.menu_entry_return_values == ['return value A', 'return value B', 'return value C']

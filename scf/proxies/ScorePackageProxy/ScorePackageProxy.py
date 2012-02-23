@@ -1,21 +1,28 @@
-from baca.scf.proxies.PackageProxy import PackageProxy
+from scf.proxies.PackageProxy import PackageProxy
 import os
 
 
 class ScorePackageProxy(PackageProxy):
 
-    def __init__(self, score_package_short_name, session=None):
-        import baca
+    def __init__(self, score_package_short_name=None, session=None):
+        import scf
         PackageProxy.__init__(self, score_package_short_name, session=session)
-        self._dist_proxy = baca.scf.proxies.DistDirectoryProxy(score_package_short_name, session=self.session)
-        self._etc_proxy = baca.scf.proxies.EtcDirectoryProxy(score_package_short_name, session=self.session)
-        self._exg_proxy = baca.scf.proxies.ExgDirectoryProxy(score_package_short_name, session=self.session)
-        self._mus_proxy = baca.scf.proxies.MusPackageProxy(score_package_short_name, session=self.session)
-        self._chunk_wrangler = baca.scf.wranglers.ChunkPackageWrangler(session=self.session)
-        self._material_package_wrangler = baca.scf.wranglers.MaterialPackageWrangler(session=self.session)
-        self._material_package_maker_wrangler = baca.scf.wranglers.MaterialPackageMakerWrangler(
+        self._dist_proxy = scf.proxies.DistDirectoryProxy(
+            score_package_short_name=score_package_short_name, session=self.session)
+        self._etc_proxy = scf.proxies.EtcDirectoryProxy(
+            score_package_short_name=score_package_short_name, session=self.session)
+        self._exg_proxy = scf.proxies.ExgDirectoryProxy(
+            score_package_short_name=score_package_short_name, session=self.session)
+        self._mus_proxy = scf.proxies.MusPackageProxy(
+            score_package_short_name=score_package_short_name, session=self.session)
+        self._chunk_wrangler = scf.wranglers.ChunkPackageWrangler(
             session=self.session)
-        self._music_specifier_module_wrangler = baca.scf.wranglers.MusicSpecifierModuleWrangler(session=self.session)
+        self._material_package_wrangler = scf.wranglers.MaterialPackageWrangler(
+            session=self.session)
+        self._material_package_maker_wrangler = scf.wranglers.MaterialPackageMakerWrangler(
+            session=self.session)
+        self._music_specifier_module_wrangler = scf.wranglers.MusicSpecifierModuleWrangler(
+            session=self.session)
 
     ### READ-ONLY PUBLIC ATTRIBUTES ###
 
@@ -40,7 +47,7 @@ class ScorePackageProxy(PackageProxy):
 
     @property
     def chunks_package_directory_name(self):
-        return os.path.join(self.directory_name, 'mus', 'chunks')
+        return os.path.join(self.path_name, 'mus', 'chunks')
 
     @property
     def chunks_package_importable_name(self):
@@ -56,7 +63,7 @@ class ScorePackageProxy(PackageProxy):
 
     @property
     def dist_pdf_directory_name(self):
-        return os.path.join(self.dist_proxy.directory_name, 'pdf')
+        return os.path.join(self.dist_proxy.path_name, 'pdf')
 
     @property
     def dist_proxy(self):
@@ -96,7 +103,7 @@ class ScorePackageProxy(PackageProxy):
 
     @property
     def materials_package_directory_name(self):
-        return os.path.join(self.directory_name, 'mus', 'materials')
+        return os.path.join(self.path_name, 'mus', 'materials')
 
     @property
     def materials_package_importable_name(self):
@@ -129,6 +136,13 @@ class ScorePackageProxy(PackageProxy):
             )
 
     @property
+    def tempo_inventory(self):
+        from abjad.tools import contexttools
+        for material_package_proxy in self.material_package_wrangler.list_asset_proxies(head=self.short_name):
+            if material_package_proxy.get_tag('output_material_class_name') == 'TempoMarkInventory':
+                return material_package_proxy.output_material
+
+    @property
     def title(self):
         return self.get_tag('title') or self.untitled_indicator
 
@@ -141,7 +155,7 @@ class ScorePackageProxy(PackageProxy):
 
     @property
     def top_level_directory_names(self):
-        return tuple([x.directory_name for x in self.top_level_directory_proxies])
+        return tuple([x.path_name for x in self.top_level_directory_proxies])
 
     @property
     def top_level_directory_proxies(self):
@@ -166,6 +180,28 @@ class ScorePackageProxy(PackageProxy):
             return self.add_tag('forces_tagline', forces_tagline)
         return property(**locals())
 
+    @property
+    def setup_value_menu_tokens(self):
+        result = []
+        if self.title:
+            result.append(('title', 'title: {!r}'.format(self.title)))
+        else:
+            result.append(('title', 'title:'))
+        if self.year_of_completion:
+            result.append(('year', 'year: {!r}'.format(self.year_of_completion)))
+        else:
+            result.append(('year', 'year:'))
+        if self.get_tag('instrumentation'):
+            result.append(('performers', 'performers: {}'.format(
+                self.get_tag('instrumentation').performer_name_string)))
+        else:
+            result.append(('performers', 'performers:'))
+        if self.forces_tagline:
+            result.append(('tagline', 'tagline: {!r}'.format(self.forces_tagline)))
+        else:
+            result.append(('tagline', 'tagline:'))
+        return result
+
     @apply
     def year_of_completion():
         def fget(self):
@@ -185,9 +221,9 @@ class ScorePackageProxy(PackageProxy):
         self.add_tag('forces_tagline', result)
 
     def edit_instrumentation_specifier_interactively(self):
-        import baca
+        import scf
         target = self.get_tag('instrumentation')
-        editor = baca.scf.editors.InstrumentationEditor(session=self.session, target=target)
+        editor = scf.editors.InstrumentationEditor(session=self.session, target=target)
         editor.run() # maybe check for backtracking after this?
         self.add_tag('instrumentation', editor.target)
 
@@ -211,12 +247,12 @@ class ScorePackageProxy(PackageProxy):
         result = True
         if self.short_name == 'recursif':
             return True
-        for directory_name in self.top_level_directory_names:
-            if not os.path.exists(directory_name):
+        for path_name in self.top_level_directory_names:
+            if not os.path.exists(path_name):
                 result = False
-                prompt = 'create {!r}? '.format(directory_name)
+                prompt = 'create {!r}? '.format(path_name)
                 if not is_interactive or self.confirm(prompt):
-                    os.mkdir(directory_name)
+                    os.mkdir(path_name)
         if not os.path.exists(self.initializer_file_name):
             result = False
             prompt = 'create {}? '.format(self.initializer_file_name)
@@ -282,7 +318,7 @@ class ScorePackageProxy(PackageProxy):
             self.chunk_wrangler.run(head=self.short_name)
         elif  result == 'm':
             self.material_package_wrangler.run(head=self.short_name)
-        elif result == 'ms':
+        elif result == 'f':
             self.music_specifier_module_wrangler.run()
         elif result == 's':
             self.manage_setup(cache=True)
@@ -301,73 +337,6 @@ class ScorePackageProxy(PackageProxy):
         else:
             raise ValueError
 
-    def handle_svn_menu_result(self, result):
-        if result == 'add':
-            self.svn_add()
-        elif result == 'ci':
-            self.svn_ci()
-            return True
-        elif result == 'st':
-            self.svn_st()
-
-    def make_main_menu(self):
-        menu, section = self.make_menu(where=self.where(), is_numbered=True)
-        section = menu.make_section()
-        section.append(('h', 'chunks'))
-        section.append(('m', 'materials'))
-        section.append(('ms', 'music specifiers'))
-        section.append(('s', 'setup'))
-        hidden_section = menu.make_section(is_hidden=True)
-        hidden_section.append(('fix', 'fix package structure'))
-        hidden_section.append(('ls', 'list directory contents'))
-        hidden_section.append(('profile', 'profile package structure'))
-        hidden_section.append(('removescore', 'remove score package'))
-        hidden_section.append(('svn', 'manage repository'))
-        hidden_section.append(('tags', 'manage tags'))
-        return menu
-
-    def make_asset_structure(self):
-        self.fix_score_package_directory_structure(is_interactive=False)
-
-    def make_score_interactively(self):
-        self.print_not_implemented()
-
-    @property
-    def setup_value_menu_tokens(self):
-        result = []
-        if self.title:
-            result.append(('title', 'title: {!r}'.format(self.title)))
-        else:
-            result.append(('title', 'title:'))
-        if self.year_of_completion:
-            result.append(('year', 'year: {!r}'.format(self.year_of_completion)))
-        else:
-            result.append(('year', 'year:'))
-        if self.get_tag('instrumentation'):
-            result.append(('performers', 'performers: {}'.format(
-                self.get_tag('instrumentation').performer_name_string)))
-        else:
-            result.append(('performers', 'performers:'))
-        if self.forces_tagline:
-            result.append(('tagline', 'tagline: {!r}'.format(self.forces_tagline)))
-        else:
-            result.append(('tagline', 'tagline:'))
-        return result
-        
-    def make_setup_menu(self):
-        setup_menu, section = self.make_menu(where=self.where(), 
-            is_parenthetically_numbered=True, is_keyed=False)
-        section.tokens = self.setup_value_menu_tokens 
-        section.return_value_attribute = 'key'
-        return setup_menu
-
-    def make_svn_menu(self):
-        menu, section = self.make_menu(where=self.where(), is_keyed=False)
-        section.append(('st', 'st'))
-        section.append(('add', 'add'))
-        section.append(('ci', 'ci'))
-        return menu
-
     def handle_setup_menu_result(self, result):
         assert isinstance(result, str)
         if result == 'title':
@@ -380,6 +349,54 @@ class ScorePackageProxy(PackageProxy):
             self.edit_instrumentation_specifier_interactively()
         else:
             raise ValueError()
+
+    def handle_svn_menu_result(self, result):
+        if result == 'add':
+            self.svn_add(is_interactive=True)
+        elif result == 'ci':
+            self.svn_ci(is_interactive=True)
+            return True
+        elif result == 'st':
+            self.svn_st(is_interactive=True)
+        else:
+            raise ValueError
+
+    def make_asset_structure(self):
+        self.fix_score_package_directory_structure(is_interactive=False)
+
+    def make_main_menu(self):
+        menu, section = self.make_menu(where=self.where(), is_numbered=True)
+        section = menu.make_section()
+        section.append(('h', 'chunks'))
+        section.append(('m', 'materials'))
+        section.append(('f', 'specifiers'))
+        section.append(('s', 'setup'))
+        hidden_section = menu.make_section(is_hidden=True)
+        hidden_section.append(('fix', 'fix package structure'))
+        hidden_section.append(('ls', 'list directory contents'))
+        hidden_section.append(('profile', 'profile package structure'))
+        hidden_section.append(('removescore', 'remove score package'))
+        hidden_section.append(('svn', 'manage repository'))
+        hidden_section.append(('tags', 'manage tags'))
+        return menu
+
+    def make_score_interactively(self):
+        self.print_not_yet_implemented()
+
+    def make_setup_menu(self):
+        setup_menu, section = self.make_menu(where=self.where(), 
+            is_parenthetically_numbered=True, is_keyed=False)
+        section.tokens = self.setup_value_menu_tokens 
+        section.return_value_attribute = 'key'
+        return setup_menu
+
+    def make_svn_menu(self):
+        menu, section = self.make_menu(where=self.where(), is_keyed=False)
+        section.return_value_attribute = 'key'
+        section.append(('st', 'st'))
+        section.append(('add', 'add'))
+        section.append(('ci', 'ci'))
+        return menu
 
     def manage_setup(self, clear=True, cache=False):
         self.cache_breadcrumbs(cache=cache)
@@ -418,8 +435,8 @@ class ScorePackageProxy(PackageProxy):
         self.restore_breadcrumbs(cache=cache)
 
     def profile(self, prompt=True):
-        if not os.path.exists(self.directory_name):
-            raise OSError('directory {!r} does not exist.'.format(self.directory_name))
+        if not os.path.exists(self.path_name):
+            raise OSError('directory {!r} does not exist.'.format(self.path_name))
         if self.short_name == 'recursif':
             return
         lines = []
