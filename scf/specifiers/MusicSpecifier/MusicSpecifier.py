@@ -16,3 +16,8 @@ class MusicSpecifier(Specifier):
         self.tempo = tempo
 
     ### READ-ONLY ATTRIBUTES ###
+
+    storage_module_import_statements = [
+        'from baca.scf.specifiers.MusicSpecifier import MusicSpecifier',
+        'from baca.scf.specifiers.PerformerContributionSpecifierList import PerformerContributionSpecifierList',
+        ]
