@@ -296,6 +296,11 @@ class SCFObject(object):
             directory_parts = [self.scores_directory_name] + package_importable_name_parts[:]
         directory = os.path.join(*directory_parts)
         return directory
+    
+    def path_name_to_human_readable_base_name(self, path_name):
+        path_name = path_name.rstrip(os.path.sep)
+        base_name = os.path.basename(path_name)
+        return self.change_string_to_human_readable_string(base_name)
 
     def path_name_to_package_importable_name(self, path_name):
         if path_name is None:

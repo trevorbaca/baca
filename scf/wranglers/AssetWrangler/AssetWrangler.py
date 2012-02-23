@@ -140,10 +140,7 @@ class AssetWrangler(SCFObject):
     def list_asset_human_readable_names(self, head=None):
         result = []
         for path_name in self.list_asset_path_names(head=head):
-            path_name = path_name.rstrip(os.path.sep)
-            base_name = os.path.basename(path_name)
-            human_readable_name = self.change_string_to_human_readable_string(base_name)
-            result.append(human_readable_name)
+            result.append(self.path_name_to_human_readable_base_name(path_name))
         return result
 
     def list_asset_path_names(self, head=None):
@@ -183,10 +180,7 @@ class AssetWrangler(SCFObject):
     def list_score_external_asset_human_readable_names(self, head=None):
         result = []
         for path_name in self.list_score_external_asset_path_names(head=head):
-            path_name = path_name.rstrip(os.path.sep)
-            base_name = os.path.basename(path_name)
-            human_readable_name = self.change_string_to_human_readable_string(base_name)
-            result.append(human_readable_name)
+            result.append(self.path_name_to_human_readable_base_name(path_name))
         return result
 
     def list_score_external_asset_path_names(self, head=None):
@@ -248,10 +242,7 @@ class AssetWrangler(SCFObject):
     def list_visible_asset_human_readable_names(self, head=None):
         result = []
         for path_name in self.list_visible_asset_path_names(head=head):
-            path_name = path_name.rstrip(os.path.sep)
-            base_name = os.path.basename(path_name)
-            human_readable_name = self.change_string_to_human_readable_string(base_name)
-            result.append(human_readable_name)
+            result.append(self.path_name_to_human_readable_base_name(path_name))
         return result
 
     def list_visible_asset_path_names(self, head=None):
