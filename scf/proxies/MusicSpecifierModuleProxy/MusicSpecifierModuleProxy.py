@@ -1,13 +1,17 @@
 from baca.scf.editors.MusicSpecifierEditor import MusicSpecifierEditor
 from baca.scf.proxies.ModuleProxy import ModuleProxy
+from baca.scf.specifiers.MusicSpecifier import MusicSpecifier
 import os
 
 
+# STRATEGY: Delegate all editing directly to MusicSpecifierEditor.
+#           Use this class only to read from disk and write to disk.
 class MusicSpecifierModuleProxy(ModuleProxy):
 
     def __init__(self, module_importable_name=None, session=None):
         ModuleProxy.__init__(self, module_importable_name=module_importable_name, session=session)
-        self._editor = MusicSpecifierEditor(session=self.session)
+        self.load_music_specifier_into_memory()
+        self._editor = self.editor_class(target=self.music_specifier_in_memory, session=self.session)
         self.music_specifier_lines = []
         #self.conditionally_make_file()
         #self.parse() 
@@ -19,10 +23,11 @@ class MusicSpecifierModuleProxy(ModuleProxy):
         return self._editor
 
     @property
+    def editor_class(self):
+        return MusicSpecifierEditor
+
+    @property
     def music_specifier_in_memory(self):
-        if self._music_specifier_in_memory is not None:
-            return self._music_specifier_in_memory
-        self.read_music_specifier_from_disk()
         return self._music_specifier_in_memory
 
     @property
@@ -35,11 +40,6 @@ class MusicSpecifierModuleProxy(ModuleProxy):
             )
 
     ### PUBLIC METHODS ###
-
-    # STRATEGY: get rid of removal from this class.
-    #           Move removal up to MusicSpecifierModuleWrangler instead.
-    #           Then delegate all editing directly to MusicSpecifierEditor.
-    #           Use this class only to read from disk and write to disk.
 
     def edit_music_specifier_at_number(self, number, include_newline=True):
         number = int(number)
@@ -55,14 +55,20 @@ class MusicSpecifierModuleProxy(ModuleProxy):
         else:
             raise ValueError
 
+    def load_music_specifier_into_memory(self):
+        music_specifier = self.read_music_specifier_from_disk()
+        if music_specifier is None:
+            music_specifier = MusicSpecifier()
+        self._music_specifier_in_memory = music_specifier
+
     def make_main_menu(self):
         menu, section = self.make_menu(where=self.where(), is_keyed=False, is_parenthetically_numbered=True)
         section.tokens = self.make_music_specifier_menu_tokens()
         return menu
 
     def make_music_specifier_menu_tokens(self):
-        #self.debug(self.editor.target)
-        #self.debug(self.editor.target_attribute_tokens)
+        self.debug(self.editor.target)
+        self.debug(self.editor.target_attribute_tokens)
         return self.editor.target_attribute_tokens
 
     def parse(self):
@@ -110,8 +116,8 @@ class MusicSpecifierModuleProxy(ModuleProxy):
             file_contents_string = file_pointer.read()
             file_pointer.close()
             exec(file_contents_string)
-            #return locals().get('music_specifier', None)
-            self._music_specifier_in_memory = music_specifier
+            music_specifier = locals().get('music_specifier', None)
+            return music_specifier
 
     #def write_music_specifier_to_disk(self, music_specifier_in_memory):
     def write_music_specifier_to_disk(self):
