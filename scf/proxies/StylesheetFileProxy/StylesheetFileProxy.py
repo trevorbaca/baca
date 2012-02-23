@@ -84,22 +84,3 @@ class StylesheetFileProxy(FileProxy):
         self.rename_file(new_path_name)
         line = 'stylesheet renamed.'
         self.proceed(line, prompt=prompt)
-
-    def run(self, user_input=None, clear=True, cache=False):
-        self.assign_user_input(user_input=user_input)
-        self.cache_breadcrumbs(cache=cache)
-        while True:
-            self.push_breadcrumb()
-            menu = self.make_main_menu()
-            result = menu.run(clear=clear)
-            if self.backtrack():
-                break
-            elif not result:
-                self.pop_breadcrumb()
-                continue
-            self.handle_main_menu_result(result)
-            if self.backtrack():
-                break
-            self.pop_breadcrumb()
-        self.pop_breadcrumb()
-        self.restore_breadcrumbs(cache=cache)
