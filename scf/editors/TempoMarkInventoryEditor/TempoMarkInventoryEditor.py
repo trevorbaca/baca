@@ -5,7 +5,6 @@ from baca.scf.editors.TempoMarkEditor import TempoMarkEditor
 from baca.scf.menuing.UserInputGetter import UserInputGetter
 
 
-# TODO: write run() test
 class TempoMarkInventoryEditor(ListEditor):
 
     target_class = contexttools.TempoMarkInventory
