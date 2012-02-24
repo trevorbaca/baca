@@ -315,6 +315,12 @@ class AssetWrangler(SCFObject):
     def make_asset_interactively(self):
         self.print_implemented_on_child_classes()
 
+    def make_asset_selection_menu(self, head=None):
+        menu, section = self.make_menu(where=self.where(), is_keyed=False, is_numbered=True)
+        section.tokens = self.make_visible_asset_menu_tokens(head=head)
+        section.return_value_attribute = 'key'
+        return menu
+
     def make_visible_asset_menu_tokens(self, head=None):
         keys = self.list_visible_asset_path_names(head=head)
         bodies = self.list_visible_asset_human_readable_names(head=head)
@@ -324,6 +330,16 @@ class AssetWrangler(SCFObject):
         for asset_proxy in self.list_visible_asset_proxies():
             asset_proxy.profile()
 
+    # TODO: write test
+    def rename_asset_interactively(self, head=None):
+        self.push_backtrack()
+        asset_importable_name = self.select_asset_importable_name_interactively(head=head)
+        self.pop_backtrack()
+        if self.backtrack():
+            return 
+        self.debug(asset_importable_name)
+        self.proceed(prompt=True)
+        
     # TODO: write test
     def remove_assets_interactively(self, head=None):
         getter = self.make_getter(where=self.where())
@@ -341,7 +357,25 @@ class AssetWrangler(SCFObject):
             asset_proxy.remove()
             total_assets_removed += 1
         self.proceed('{} asset(s) removed.'.format(total_assets_removed))
-        
+
+    def select_asset_importable_name_interactively(
+        self, clear=True, cache=False, head=None, user_input=None):
+        self.cache_breadcrumbs(cache=cache)
+        while True:
+            self.push_breadcrumb('select {}:'.format(self.asset_class_human_readable_name))
+            menu = self.make_asset_selection_menu(head=head)
+            result = menu.run(clear=clear)
+            if self.backtrack():
+                break
+            elif not result:
+                self.pop_breadcrumb()
+                continue
+            else:
+                break
+        self.pop_breadcrumb()
+        self.restore_breadcrumbs(cache=cache)
+        return result
+
     def run(self, cache=False, clear=True, head=None, user_input=None):
         self.assign_user_input(user_input=user_input)
         self.cache_breadcrumbs(cache=cache)

@@ -28,6 +28,8 @@ class MusicSpecifierModuleWrangler(ModuleWrangler):
     def handle_main_menu_result(self, result):
         if result == 'new':
             self.make_asset_interactively()
+        elif result == 'mv':
+            self.rename_asset_interactively()
         elif result == 'rm':
             self.remove_assets_interactively()
         elif result == 'missing':
@@ -36,14 +38,14 @@ class MusicSpecifierModuleWrangler(ModuleWrangler):
             self.profile_visible_assets()
         else:
             package_proxy = self.get_asset_proxy(result)
-            #package_proxy.run()
             package_proxy.edit()
 
     def make_main_menu(self, head=None):
-        menu, section = self.make_menu(where=self.where(), is_parenthetically_numbered=True)
+        menu, section = self.make_menu(where=self.where(), is_keyed=False, is_parenthetically_numbered=True)
         section.tokens = self.make_visible_asset_menu_tokens(head=head)
         section = menu.make_section()
         section.append(('new', 'new music specifier'))
+        section.append(('mv', 'rename music specifier'))
         section.append(('rm', 'remove music specifiers'))
         hidden_section = menu.make_section(is_hidden=True)
         hidden_section.append(('missing', 'create missing packages'))

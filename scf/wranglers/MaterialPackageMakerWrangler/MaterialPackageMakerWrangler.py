@@ -69,12 +69,6 @@ class MaterialPackageMakerWrangler(PackageWrangler):
         bodies = self.list_asset_human_readable_names(head=head)
         return zip(keys, bodies)
         
-    def make_class_selection_menu(self, head=None):
-        menu, section = self.make_menu(where=self.where(), is_keyed=False, is_numbered=True)
-        section.tokens = self.make_visible_asset_menu_tokens(head=head)
-        section.return_value_attribute = 'key'
-        return menu
-
     def make_main_menu(self, head=None):
         menu, section = self.make_menu(where=self.where(), is_numbered=True)
         section.tokens = self.list_asset_human_readable_names(head=head)
@@ -180,22 +174,3 @@ class MaterialPackageMakerWrangler(PackageWrangler):
         stylesheet_file_pointer = file(stylesheet_file_name, 'w')
         stylesheet_file_pointer.write(stylesheet.format)
         stylesheet_file_pointer.close()
-
-    # TODO: write test
-    def select_asset_importable_name_interactively(
-        self, clear=True, cache=False, head=None, user_input=None):
-        self.cache_breadcrumbs(cache=cache)
-        while True:
-            self.push_breadcrumb('select material proxy:')
-            menu = self.make_class_selection_menu(head=head)
-            result = menu.run(clear=clear)
-            if self.backtrack():
-                break
-            elif not result:
-                self.pop_breadcrumb()
-                continue 
-            else:
-                break
-        self.pop_breadcrumb()
-        self.restore_breadcrumbs(cache=cache)
-        return result
