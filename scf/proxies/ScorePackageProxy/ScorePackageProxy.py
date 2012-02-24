@@ -310,12 +310,12 @@ class ScorePackageProxy(PackageProxy):
 
     def handle_svn_menu_result(self, result):
         if result == 'add':
-            self.svn_add()
+            self.svn_add(is_interactive=True)
         elif result == 'ci':
-            self.svn_ci()
+            self.svn_ci(is_interactive=True)
             return True
         elif result == 'st':
-            self.svn_st()
+            self.svn_st(is_interactive=True)
         else:
             raise ValueError
 

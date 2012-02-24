@@ -361,12 +361,12 @@ class AssetWrangler(SCFObject):
         self.pop_breadcrumb()
         self.restore_breadcrumbs(cache=cache)
 
-    def svn_add(self, prompt=True):
+    def svn_add(self, is_interactive=True):
         for asset_proxy in self.list_visible_asset_proxies():
-            asset_proxy.svn_add(prompt=False)
-        self.proceed(prompt=prompt)
+            asset_proxy.svn_add(is_interactive=False)
+        self.proceed(prompt=is_interactive)
 
-    def svn_ci(self, prompt=True):
+    def svn_ci(self, is_interactive=True):
         getter = self.make_getter(where=self.where())
         getter.append_string('commit message')
         commit_message = getter.run()
@@ -377,15 +377,15 @@ class AssetWrangler(SCFObject):
         if not self.confirm():
             return
         for asset_proxy in self.list_visible_asset_proxies():
-            asset_proxy.svn_ci(commit_message=commit_message, prompt=False)
-        self.proceed(prompt=prompt)
+            asset_proxy.svn_ci(commit_message=commit_message, is_interactive=False)
+        self.proceed(prompt=is_interactive)
 
-    def svn_st(self, prompt=True):
+    def svn_st(self, is_interactive=True):
         for asset_proxy in self.list_visible_asset_proxies():
-            asset_proxy.svn_st(prompt=False)
-        self.proceed(prompt=prompt)
+            asset_proxy.svn_st(is_interactive=False)
+        self.proceed(prompt=is_interactive)
 
-    def svn_up(self, prompt=True):
+    def svn_up(self, is_interactive=True):
         for asset_proxy in self.list_visible_asset_proxies():
-            asset_proxy.svn_up(prompt=False)
-        self.proceed(prompt=prompt)
+            asset_proxy.svn_up(is_interactive=False)
+        self.proceed(prompt=is_interactive)

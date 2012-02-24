@@ -131,15 +131,15 @@ class AssetProxy(SCFObject):
         line = 'tests run.'
         self.proceed(line, prompt=prompt)
 
-    def svn_add(self, prompt=False):
+    def svn_add(self, is_interactive=False):
         self.display(self.path_name)
         proc = subprocess.Popen(self.svn_add_command, shell=True, stdout=subprocess.PIPE)
         lines = [line.strip() for line in proc.stdout.readlines()]
         lines.append('')
         self.display(lines)
-        self.proceed(prompt=prompt)
+        self.proceed(prompt=is_interactive)
 
-    def svn_ci(self, commit_message=None, prompt=True):
+    def svn_ci(self, commit_message=None, is_interactive=True):
         if commit_message is None:
             getter = self.make_getter(where=self.where())
             getter.append_string('commit message')
@@ -151,28 +151,30 @@ class AssetProxy(SCFObject):
             if not self.confirm():
                 return
         lines = []
-        lines.append('')
         lines.append(self.path_name)
         command = 'svn commit -m "{}" {}'.format(commit_message, self.path_name)
         proc = subprocess.Popen(command, shell=True, stdout=subprocess.PIPE)
         lines.extend([line.strip() for line in proc.stdout.readlines()])
+        lines.append('')
         self.display(lines)
-        self.proceed(prompt=prompt)
+        self.proceed(prompt=is_interactive)
 
-    def svn_st(self, prompt=True):
-        self.display(self.path_name)
+    def svn_st(self, is_interactive=True):
+        if is_interactive:
+            self.display(self.path_name)
         command = 'svn st -u {}'.format(self.path_name)
         proc = subprocess.Popen(command, shell=True, stdout=subprocess.PIPE)
         lines = [line.strip() for line in proc.stdout.readlines()]
         lines.append('')
         self.display(lines)
-        self.proceed(prompt=prompt)
+        self.proceed(prompt=is_interactive)
 
-    def svn_up(self, prompt=True):
-        self.display(self.path_name)
+    def svn_up(self, is_interactive=True):
+        if is_interactive:
+            self.display(self.path_name)
         command = 'svn up {}'.format(self.path_name)
         proc = subprocess.Popen(command, shell=True, stdout=subprocess.PIPE)
         lines = [line.strip() for line in proc.stdout.readlines()]
         lines.append('')
         self.display(lines)
-        self.proceed(prompt=prompt)
+        self.proceed(prompt=is_interactive)
