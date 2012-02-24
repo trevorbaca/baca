@@ -6,7 +6,7 @@ def test_TempoMarkEditor_run_01():
 
     editor = baca.scf.editors.TempoMarkEditor()
     editor.run(user_input='q')
-    assert editor.target == contexttools.TempoMark(Duration(1, 4), 60)
+    assert editor.target is None
 
 
 def test_TempoMarkEditor_run_02():

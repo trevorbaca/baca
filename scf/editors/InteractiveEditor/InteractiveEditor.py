@@ -8,6 +8,7 @@ class InteractiveEditor(SCFObject):
         if target is not None:
             assert isinstance(target, type(self.target_class()))
         self.target = target
+        self.initialize_attributes_in_memory()
 
     ### OVERLOADS ###
 
@@ -20,6 +21,10 @@ class InteractiveEditor(SCFObject):
 
     ### READ-ONLY PUBLIC ATTRIBUTES ###
     
+    @property
+    def attributes_in_memory(self):
+        return self._attributes_in_memory
+
     @property
     def has_target(self):
         return self.target is not None
@@ -46,12 +51,22 @@ class InteractiveEditor(SCFObject):
             i = i + 1
         return menu_key
 
+    def clean_up_attributes_in_memory(self):
+        if self.attributes_in_memory:
+            if self.target is None:
+                self.initialize_target_from_attributes_in_memory()
+            else:
+                raise ValueError('Target and in-memory attributes can not both exist.')
+
     def conditionally_initialize_target(self):
         self.target = self.target or self.target_class()
 
     def conditionally_set_target_attribute(self, attribute_name, attribute_value):
-        if not self.session.is_complete:
-            setattr(self.target, attribute_name, attribute_value)
+        if self.target:
+            if not self.session.is_complete:
+                setattr(self.target, attribute_name, attribute_value)
+        else:
+            self.attributes_in_memory[attribute_name] = attribute_value
 
     def handle_main_menu_result(self, result):
         attribute_name = self.target_manifest.menu_key_to_attribute_name(result)
@@ -67,6 +82,14 @@ class InteractiveEditor(SCFObject):
             else:
                 attribute_value = result
             self.conditionally_set_target_attribute(attribute_name, attribute_value)
+
+    def initialize_attributes_in_memory(self):
+        self._attributes_in_memory = {}
+
+    def initialize_target_from_attributes_in_memory(self):
+        target = self.target_class(**self.attributes_in_memory)
+        self.target = target
+        self.initialize_attributes_in_memory()
 
     def make_main_menu(self):
         is_keyed = self.target_manifest.is_keyed
@@ -97,17 +120,19 @@ class InteractiveEditor(SCFObject):
 
     def make_target_attribute_tokens_from_target_manifest(self):
         result = []
-        if self.target:
-            for attribute_detail in self.target_manifest.attribute_details:
-                menu_key = attribute_detail.menu_key
-                target_attribute_name = attribute_detail.name
-                menu_body = target_attribute_name.replace('_', ' ')
+        for attribute_detail in self.target_manifest.attribute_details:
+            menu_key = attribute_detail.menu_key
+            target_attribute_name = attribute_detail.name
+            menu_body = target_attribute_name.replace('_', ' ')
+            if self.target:
                 attribute_value = getattr(self.target, target_attribute_name)
-                if hasattr(attribute_value, '__len__') and not len(attribute_value):
-                    attribute_value = None
-                existing_value = repr(attribute_value)
-                token = (menu_key, menu_body, existing_value)
-                result.append(token)
+            else:
+                attribute_value = self.attributes_in_memory.get(target_attribute_name)
+            if hasattr(attribute_value, '__len__') and not len(attribute_value):
+                attribute_value = None
+            existing_value = repr(attribute_value)
+            token = (menu_key, menu_body, existing_value)
+            result.append(token)
         return result
 
     def menu_key_to_existing_value(self, menu_key):
@@ -140,3 +165,4 @@ class InteractiveEditor(SCFObject):
             self.pop_breadcrumb()
         self.pop_breadcrumb()
         self.restore_breadcrumbs(cache=cache)
+        self.clean_up_attributes_in_memory()

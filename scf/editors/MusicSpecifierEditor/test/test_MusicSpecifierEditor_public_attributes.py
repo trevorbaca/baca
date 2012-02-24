@@ -10,7 +10,10 @@ def test_MusicSpecifierEditor_public_attributes_01():
     assert editor.breadcrumb == 'music specifier editor'
     assert not editor.has_target
     assert editor.target is None
-    assert editor.target_attribute_tokens == [] 
+    assert editor.target_attribute_tokens == [
+        ('nm', 'music specifier name', 'None'), 
+        ('tp', 'tempo', 'None'), 
+        ('pc', 'performer contribution specifiers', 'None')]
     assert editor.target_name is None
 
 
