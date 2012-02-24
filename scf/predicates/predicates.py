@@ -77,6 +77,7 @@ def is_readable_argument_range_string_for_argument_list(argument_range_string, a
 
 def is_tempo_token(expr):
     try:
+        exec('from abjad import *')
         command = 'tempo_mark = contexttools.TempoMark({})'.format(expr)
         exec(command)
         return isinstance(tempo_mark, contexttools.TempoMark)

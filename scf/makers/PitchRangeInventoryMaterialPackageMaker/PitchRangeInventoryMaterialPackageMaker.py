@@ -10,22 +10,15 @@ class PitchRangeInventoryMaterialPackageMaker(MaterialPackageMaker):
         MaterialPackageMaker.__init__(self, 
             package_importable_name=package_importable_name, session=session)
 
-    ### PUBLIC CLASS ATTRIBUTES ###
+    ### CLASS ATTRIBUTES ###
 
     generic_output_name = 'pitch range inventory'
-
     illustration_maker = staticmethod(make_illustration_from_output_material)
-
     output_material_checker = staticmethod(lambda x: isinstance(x, pitchtools.PitchRangeInventory))
-
     output_material_editor = PitchRangeInventoryEditor
-
     output_material_maker = pitchtools.PitchRangeInventory
 
-    # TODO:
-    #output_material_module_import_statements = [
-    #    'from abjad.tools import pitchtools',
-    #    ]
+    # TODO: change to only 'from abjad.tools import pitchtools'
     output_material_module_import_statements = [
         'from abjad.tools.pitchtools.PitchRange import PitchRange',
         'from abjad.tools.pitchtools.PitchRangeInventory import PitchRangeInventory',
