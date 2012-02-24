@@ -316,6 +316,8 @@ class ScorePackageProxy(PackageProxy):
             return True
         elif result == 'st':
             self.svn_st()
+        else:
+            raise ValueError
 
     def make_main_menu(self):
         menu, section = self.make_menu(where=self.where(), is_numbered=True)
@@ -370,6 +372,7 @@ class ScorePackageProxy(PackageProxy):
 
     def make_svn_menu(self):
         menu, section = self.make_menu(where=self.where(), is_keyed=False)
+        section.return_value_attribute = 'key'
         section.append(('st', 'st'))
         section.append(('add', 'add'))
         section.append(('ci', 'ci'))

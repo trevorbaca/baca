@@ -148,6 +148,7 @@ class Menu(MenuSectionAggregator):
                 body = iotools.strip_diacritics_from_binary_string(body).lower()
                 if  (mathtools.is_integer_equivalent_expr(user_input) and int(user_input) == number) or \
                     (user_input == key) or \
+                    (user_input == body) or \
                     (3 <= len(user_input) and body.startswith(user_input)):
                     return self.conditionally_enclose_in_list(return_value)
 
