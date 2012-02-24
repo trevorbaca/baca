@@ -182,7 +182,7 @@ class UserInputGetter(MenuSectionAggregator):
     def append_underscore_delimited_lowercase_string(self, spaced_attribute_name, default=None):
         message = 'value for {!r} must be underscore-delimited lowercase string.'
         self.append_something(spaced_attribute_name, message, default=default)
-        self.tests.append(predicates.is_underscore_delimited_lowercase_string)
+        self.tests.append(iotools.is_underscore_delimited_lowercase_string)
 
     def append_yes_no_string(self, spaced_attribute_name, default=None, include_chevron=False):
         message = "value for '{}' must be 'y' or 'n'."

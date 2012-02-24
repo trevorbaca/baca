@@ -17,6 +17,7 @@ class MusicSpecifierModuleProxy(ModuleProxy):
     ### CLASS ATTRIUBTES ###
 
     editor_class = MusicSpecifierEditor
+    generic_class_name = 'music specifier'
     target_class = MusicSpecifier
     target_name_in_storage_module = 'music_specifier'
 

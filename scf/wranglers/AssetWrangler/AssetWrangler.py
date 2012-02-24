@@ -316,7 +316,7 @@ class AssetWrangler(SCFObject):
         self.print_implemented_on_child_classes()
 
     def make_asset_selection_menu(self, head=None):
-        menu, section = self.make_menu(where=self.where(), is_keyed=False, is_numbered=True)
+        menu, section = self.make_menu(where=self.where(), is_keyed=False, is_parenthetically_numbered=True)
         section.tokens = self.make_visible_asset_menu_tokens(head=head)
         section.return_value_attribute = 'key'
         return menu
@@ -337,8 +337,8 @@ class AssetWrangler(SCFObject):
         self.pop_backtrack()
         if self.backtrack():
             return 
-        self.debug(asset_importable_name)
-        self.proceed(prompt=True)
+        asset_proxy = self.get_asset_proxy(asset_importable_name)
+        asset_proxy.rename_interactively()
         
     # TODO: write test
     def remove_assets_interactively(self, head=None):
@@ -362,7 +362,7 @@ class AssetWrangler(SCFObject):
         self, clear=True, cache=False, head=None, user_input=None):
         self.cache_breadcrumbs(cache=cache)
         while True:
-            self.push_breadcrumb('select {}:'.format(self.asset_class_human_readable_name))
+            self.push_breadcrumb('select {}:'.format(self.asset_class.generic_class_name))
             menu = self.make_asset_selection_menu(head=head)
             result = menu.run(clear=clear)
             if self.backtrack():

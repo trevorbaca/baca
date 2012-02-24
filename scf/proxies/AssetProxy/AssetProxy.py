@@ -10,7 +10,15 @@ class AssetProxy(SCFObject):
         SCFObject.__init__(self, session=session)
         self._path_name = path_name
 
+    ### CLASS ATTRIBUTES ###
+
+    generic_class_name = 'asset'
+
     ### READ-ONLY PUBLIC ATTRIBUTES ###
+
+    @property
+    def plural_generic_class_name(self):
+        return self.pluralize_string(self.generic_class_name)
 
     @property
     def human_readable_name(self):
@@ -56,6 +64,48 @@ class AssetProxy(SCFObject):
     def fix(self):
         self.print_implemented_on_child_classes()
 
+    def rename(self, new_path_name, is_interactive=False):
+        if self.is_in_repository:
+            self.rename_versioned_asset(new_path_name, is_interactive=is_interactive)
+        else:
+            self.rename_nonversioned_asset(new_path_name, is_interactive=is_interactive)
+
+    def rename_interactively(self):
+        getter = self.make_getter(where=self.where())
+        getter.append_string('new file name')
+        result = getter.run()
+        if self.backtrack():
+            return
+        new_path_name = os.path.join(self.parent_directory_name, result)
+        self.display('new path name will be: "{}"\n'.format(new_path_name))
+        if not self.confirm():
+            return
+        self.rename(new_path_name, is_interactive=True)
+
+    # TODO: write test
+    def rename_nonversioned_asset(self, new_path_name, is_interactive=False):
+        command = 'mv {} {}'.format(self.path_name, new_path_name)
+        proc = subprocess.Popen(command, shell=True, stdout=subprocess.PIPE)
+        proc.stdout.readline()
+        if is_interactive:
+            lines = []
+            lines.append('renamed {}.'.format(self.path_name))
+            lines.append('')
+            self.display(lines)
+        self.proceed(prompt=is_interactive)
+
+    # TODO: write test
+    def rename_versioned_asset(self, new_path_name, is_interactive=False):
+        command = 'svn --force mv {} {}'.format(self.path_name, new_path_name)
+        proc = subprocess.Popen(command, shell=True, stdout=subprocess.PIPE)
+        proc.stdout.readline()
+        if is_interactive:
+            lines = []
+            lines.append('renamed {}.'.format(self.path_name))
+            lines.append('')
+            self.display(lines)
+        self.proceed(prompt=is_interactive)
+
     def remove(self, is_interactive=False):
         if self.is_in_repository:
             result = self.remove_versioned_asset(is_interactive=is_interactive)
@@ -97,7 +147,7 @@ class AssetProxy(SCFObject):
             proc.stdout.readline()
             if is_interactive:
                 lines = []
-                lines.append('Removed {}.\n'.format(self.path_name))
+                lines.append('removed {}.\n'.format(self.path_name))
                 lines.append('(Subversion will cause empty package to remain visible until next commit.)')
                 lines.append('')
                 self.display(lines)
