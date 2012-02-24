@@ -83,6 +83,10 @@ class UserInputGetter(MenuSectionAggregator):
     def append_duration(self, spaced_attribute_name, default=None):
         message = 'value for {!r} must be duration.'
         self.append_something(spaced_attribute_name, message, default=default)
+        execs = []
+        execs.append('from abjad import *')
+        execs.append('value = Duration({})')
+        self.execs[-1] = execs
         self.tests.append(durationtools.is_duration_token)
 
     def append_existing_package_name(self, spaced_attribute_name, default=None):
