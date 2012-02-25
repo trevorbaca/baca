@@ -1,9 +1,9 @@
-import baca
+import scf
 
 
 def test_MusicSpecifierEditor_run_01():
 
-    editor = baca.scf.editors.MusicSpecifierEditor()
+    editor = scf.editors.MusicSpecifierEditor()
     editor.run(user_input='1 blue~music q')
 
     r'''

@@ -1,5 +1,5 @@
 from abjad.tools import iotools
-from baca.scf.wranglers.PackageWrangler import PackageWrangler
+from scf.wranglers.PackageWrangler import PackageWrangler
 import collections
 import os
 
@@ -7,7 +7,7 @@ import os
 class MaterialPackageWrangler(PackageWrangler):
 
     def __init__(self, session=None):
-        from baca.scf.wranglers.MaterialPackageMakerWrangler import MaterialPackageMakerWrangler
+        from scf.wranglers.MaterialPackageMakerWrangler import MaterialPackageMakerWrangler
         PackageWrangler.__init__(self, 
             score_external_asset_container_importable_names= \
                 [self.score_external_materials_package_importable_name], 
@@ -121,7 +121,7 @@ class MaterialPackageWrangler(PackageWrangler):
     def make_material_package(self, material_package_importable_name, material_package_maker_class_name, 
         should_have_illustration, prompt=True):
         '''True on success.'''
-        import baca
+        import scf
         assert iotools.is_underscore_delimited_lowercase_package_name(material_package_importable_name)
         assert material_package_maker_class_name is None or iotools.is_uppercamelcase_string(
             material_package_maker_class_name)
@@ -134,10 +134,10 @@ class MaterialPackageWrangler(PackageWrangler):
         os.mkdir(path_name)
         file(os.path.join(path_name, '__init__.py'), 'w').write('')
         if material_package_maker_class_name is None: 
-            material_package_proxy = baca.scf.proxies.MaterialPackageProxy(
+            material_package_proxy = scf.proxies.MaterialPackageProxy(
                 material_package_importable_name, session=self.session)
         else:
-            command = 'material_package_proxy = baca.scf.makers.{}(material_package_importable_name, session=self.session)'.format(material_package_maker_class_name)
+            command = 'material_package_proxy = scf.makers.{}(material_package_importable_name, session=self.session)'.format(material_package_maker_class_name)
             exec(command)
         tags = collections.OrderedDict([])
         tags['material_package_maker_class_name'] = material_package_maker_class_name

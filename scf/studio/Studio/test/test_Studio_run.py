@@ -1,11 +1,11 @@
-import baca
+import scf
 
 
 def test_Studio_run_01():
     '''Running studio establishes new sesssion correctly.
     '''
 
-    studio = baca.scf.studio.Studio()
+    studio = scf.studio.Studio()
     old_session = studio.session
     assert studio.session is studio.home_package_proxy.session is studio.material_package_wrangler.session 
     

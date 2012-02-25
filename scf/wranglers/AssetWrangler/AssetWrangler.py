@@ -1,6 +1,6 @@
 from abjad.tools import iotools
-from baca.scf.core.SCFObject import SCFObject
-from baca.scf.proxies.PackageProxy import PackageProxy
+from scf.core.SCFObject import SCFObject
+from scf.proxies.PackageProxy import PackageProxy
 import os
 
 

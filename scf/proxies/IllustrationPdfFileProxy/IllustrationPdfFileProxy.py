@@ -1,4 +1,4 @@
-from baca.scf.proxies.FileProxy import FileProxy
+from scf.proxies.FileProxy import FileProxy
 import os
 
 

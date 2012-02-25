@@ -1,8 +1,8 @@
 from abjad.tools import contexttools
 from abjad.tools import durationtools
-from baca.scf.editors.InteractiveEditor import InteractiveEditor
-from baca.scf.editors.TargetManifest import TargetManifest
-from baca.scf import getters
+from scf.editors.InteractiveEditor import InteractiveEditor
+from scf.editors.TargetManifest import TargetManifest
+from scf import getters
 
 
 class TempoMarkEditor(InteractiveEditor):

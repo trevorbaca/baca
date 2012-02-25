@@ -1,11 +1,11 @@
-import baca
+import scf
 
 
 def test_PerformerEditor_base_states_01():
     '''Start-up, name, set name to none.
     '''
 
-    editor = baca.scf.editors.PerformerEditor()
+    editor = scf.editors.PerformerEditor()
     editor.run(user_input='name foo ren bar ren None q')
     transcript = editor.transcript
     entry_index = -1

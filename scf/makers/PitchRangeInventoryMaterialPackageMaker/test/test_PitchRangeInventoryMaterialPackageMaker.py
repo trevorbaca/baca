@@ -1,19 +1,19 @@
 from abjad.tools import pitchtools
-from baca.scf.editors import UserInputWrapper
-import baca
+from scf.editors import UserInputWrapper
+import scf
 
 
 def test_PitchRangeInventoryMaterialPackageMaker_01():
     '''Empty wrapper.'''
 
-    studio = baca.scf.studio.Studio()
+    studio = scf.studio.Studio()
     assert not studio.package_exists('baca.materials.testpir')
     try:
         studio.run(user_input=
             'materials maker pitch testpir default '
             'q'
             )
-        mpp = baca.scf.makers.PitchRangeInventoryMaterialPackageMaker(
+        mpp = scf.makers.PitchRangeInventoryMaterialPackageMaker(
             'baca.materials.testpir')
         # TODO: mpp.directory_contents == ['__init__.py']
         assert mpp.directory_contents == ['__init__.py', 'user_input.py']
@@ -27,7 +27,7 @@ def test_PitchRangeInventoryMaterialPackageMaker_01():
 def test_PitchRangeInventoryMaterialPackageMaker_02():
     '''Populate wrapper.'''
 
-    studio = baca.scf.studio.Studio()
+    studio = scf.studio.Studio()
     assert not studio.package_exists('baca.materials.testpir')
     try:
         studio.run(user_input=
@@ -36,7 +36,7 @@ def test_PitchRangeInventoryMaterialPackageMaker_02():
             'del 1 move 1 2 b default '
             'q'
             )
-        mpp = baca.scf.makers.PitchRangeInventoryMaterialPackageMaker(
+        mpp = scf.makers.PitchRangeInventoryMaterialPackageMaker(
             'baca.materials.testpir')
         # TODO: mpp.directory_contents == ['__init__.py', 'output_material.py']
         assert mpp.directory_contents == ['__init__.py', 'output_material.py', 'user_input.py']

@@ -1,8 +1,8 @@
 from abjad.tools import durationtools
 from abjad.tools import iotools
 from abjad.tools import pitchtools
-from baca.scf.menuing.MenuSectionAggregator import MenuSectionAggregator
-from baca.scf import predicates
+from scf.menuing.MenuSectionAggregator import MenuSectionAggregator
+from scf import predicates
 import types
 
 
@@ -347,7 +347,7 @@ class UserInputGetter(MenuSectionAggregator):
         return True
 
     def store_value_from_argument_list(self, user_response, argument_list):
-        from baca.scf.menuing.MenuSection import MenuSection
+        from scf.menuing.MenuSection import MenuSection
         dummy_section = MenuSection()
         dummy_section.tokens = argument_list[:]
         value = dummy_section.argument_range_string_to_numbers(user_response)

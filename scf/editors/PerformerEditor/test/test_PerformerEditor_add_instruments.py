@@ -1,4 +1,4 @@
-import baca
+import scf
 from abjad.tools.scoretools import Performer
 from abjad.tools.instrumenttools import *
 
@@ -7,7 +7,7 @@ def test_PerformerEditor_add_instruments_01():
     '''Quit, back, studio, score & junk all work.
     '''
 
-    studio = baca.scf.studio.Studio()
+    studio = scf.studio.Studio()
     studio.run(user_input='1 setup perf 1 add q')
     assert studio.ts == (12, (1, 7))
 
@@ -28,7 +28,7 @@ def test_PerformerEditor_add_instruments_02():
     '''Add two instruments.
     '''
 
-    editor = baca.scf.editors.PerformerEditor()
+    editor = scf.editors.PerformerEditor()
     editor.run(user_input='add 1 add 2 q')
     assert editor.target == Performer(instruments=[Accordion(), AltoFlute()])
 
@@ -37,6 +37,6 @@ def test_PerformerEditor_add_instruments_03():
     '''Range handling.
     '''
 
-    editor = baca.scf.editors.PerformerEditor()
+    editor = scf.editors.PerformerEditor()
     editor.run(user_input='add 1-2 q')
     assert editor.target == Performer(instruments=[Accordion(), AltoFlute()])

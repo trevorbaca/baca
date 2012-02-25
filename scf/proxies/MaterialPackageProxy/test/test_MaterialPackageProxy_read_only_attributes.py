@@ -1,6 +1,6 @@
 from abjad.tools import measuretools
 from abjad.tools import notetools
-import baca
+import scf
 import py
 
 
@@ -8,7 +8,7 @@ def test_MaterialPackageProxy_read_only_attributes_01():
     '''Data-only package.
     '''
     
-    mpp = baca.scf.proxies.MaterialPackageProxy('baca.materials.red_numbers')
+    mpp = scf.proxies.MaterialPackageProxy('baca.materials.red_numbers')
     assert     mpp.breadcrumb == 'red numbers'
     assert not mpp.has_illustration_builder_module
     assert not mpp.has_illustration_ly
@@ -73,7 +73,7 @@ def test_MaterialPackageProxy_read_only_attributes_02():
     '''Makermade material.
     '''
 
-    mpp = baca.scf.makers.SargassoMeasureMaterialPackageMaker('baca.materials.red_sargasso')
+    mpp = scf.makers.SargassoMeasureMaterialPackageMaker('baca.materials.red_sargasso')
     assert     mpp.breadcrumb == 'red sargasso'
     assert not mpp.has_illustration_builder_module
     assert     mpp.has_illustration_ly
@@ -106,7 +106,7 @@ def test_MaterialPackageProxy_read_only_attributes_02():
     assert     mpp.material_definition_module_proxy is None
     assert     mpp.material_package_directory == \
         '/Users/trevorbaca/Documents/other/baca/materials/red_sargasso'
-    assert     mpp.material_package_maker is baca.scf.makers.SargassoMeasureMaterialPackageMaker
+    assert     mpp.material_package_maker is scf.makers.SargassoMeasureMaterialPackageMaker
     assert     mpp.material_package_maker_class_name == 'SargassoMeasureMaterialPackageMaker'
     assert     mpp.material_package_short_name == 'red_sargasso'
     assert     mpp.material_spaced_name == 'red sargasso'
@@ -142,7 +142,7 @@ def test_MaterialPackageProxy_read_only_attributes_03():
     '''Handmade material.
     '''
 
-    mpp = baca.scf.proxies.MaterialPackageProxy('baca.materials.red_notes')
+    mpp = scf.proxies.MaterialPackageProxy('baca.materials.red_notes')
     assert     mpp.breadcrumb == 'red notes'
     assert     mpp.has_illustration_builder_module
     assert     mpp.has_illustration_ly

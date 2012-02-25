@@ -1,9 +1,9 @@
-import baca
+import scf
 
 
 def test_Menu_menu_entry_keys_01():
 
-    menu = baca.scf.menuing.Menu()
+    menu = scf.menuing.Menu()
     menu.push_breadcrumb('location')
     section_1 = menu.make_section()
     section_1.title = 'section'

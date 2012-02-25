@@ -1,5 +1,5 @@
-from baca.scf.proxies.ImportableAssetProxy import ImportableAssetProxy
-from baca.scf.proxies.ParsableFileProxy import ParsableFileProxy
+from scf.proxies.ImportableAssetProxy import ImportableAssetProxy
+from scf.proxies.ParsableFileProxy import ParsableFileProxy
 import os
 
 

@@ -1,7 +1,7 @@
 from abjad.tools import contexttools
-from baca.scf.makers.MaterialPackageMaker import MaterialPackageMaker
+from scf.makers.MaterialPackageMaker import MaterialPackageMaker
 from make_illustration_from_output_material import make_illustration_from_output_material
-from baca.scf.editors.TempoMarkInventoryEditor import TempoMarkInventoryEditor
+from scf.editors.TempoMarkInventoryEditor import TempoMarkInventoryEditor
 
 
 class TempoMarkInventoryMaterialPackageMaker(MaterialPackageMaker):
@@ -31,5 +31,5 @@ class TempoMarkInventoryMaterialPackageMaker(MaterialPackageMaker):
 
     # TODO: remove self.user_input_module_import_statements from editable maker
     user_input_module_import_statements = [
-        'from baca.scf.editors import UserInputWrapper',
+        'from scf.editors import UserInputWrapper',
         ]

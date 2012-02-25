@@ -1,9 +1,9 @@
-import baca
+import scf
 
 
 def test_ExgDirectoryProxy_01():
 
-    exg_proxy = baca.scf.proxies.ExgDirectoryProxy('manos')
+    exg_proxy = scf.proxies.ExgDirectoryProxy('manos')
 
     assert exg_proxy.path_name == '/Users/trevorbaca/Documents/scores/manos/exg'
     assert exg_proxy.is_in_repository

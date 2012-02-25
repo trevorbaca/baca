@@ -1,7 +1,7 @@
 from abjad.tools.instrumenttools._Instrument import _Instrument
 from abjad.tools import instrumenttools
-from baca.scf.editors.InteractiveEditor import InteractiveEditor
-from baca.scf import predicates
+from scf.editors.InteractiveEditor import InteractiveEditor
+from scf import predicates
 
 
 # TODO: eventually make transposition information editable

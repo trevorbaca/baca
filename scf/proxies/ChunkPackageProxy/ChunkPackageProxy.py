@@ -1,5 +1,5 @@
 from abjad.tools import iotools
-from baca.scf.proxies.PackageProxy import PackageProxy
+from scf.proxies.PackageProxy import PackageProxy
 
 
 class ChunkPackageProxy(PackageProxy):

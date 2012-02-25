@@ -1,5 +1,5 @@
-from baca.scf.proxies.MaterialModuleProxy import MaterialModuleProxy
-from baca.scf.helpers import safe_import
+from scf.proxies.MaterialModuleProxy import MaterialModuleProxy
+from scf.helpers import safe_import
 import os
 
 

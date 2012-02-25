@@ -1,5 +1,5 @@
-from baca.scf.specifiers.PerformerContributionSpecifierList import PerformerContributionSpecifierList
-from baca.scf.specifiers.Specifier import Specifier
+from scf.specifiers.PerformerContributionSpecifierList import PerformerContributionSpecifierList
+from scf.specifiers.Specifier import Specifier
 
 
 class MusicSpecifier(Specifier):
@@ -20,7 +20,7 @@ class MusicSpecifier(Specifier):
     storage_module_import_statements = [
         'from abjad import *',
         'from abjad.tools import contexttools',
-        'from baca.scf.specifiers.MusicSpecifier import MusicSpecifier',
-        'from baca.scf.specifiers.PerformerContributionSpecifier import PerformerContributionSpecifier',
-        'from baca.scf.specifiers.PerformerContributionSpecifierList import PerformerContributionSpecifierList',
+        'from scf.specifiers.MusicSpecifier import MusicSpecifier',
+        'from scf.specifiers.PerformerContributionSpecifier import PerformerContributionSpecifier',
+        'from scf.specifiers.PerformerContributionSpecifierList import PerformerContributionSpecifierList',
         ]

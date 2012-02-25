@@ -1,4 +1,4 @@
-import baca
+import scf
 import types
 
 
@@ -6,7 +6,7 @@ def test_HomePackageProxy_01():
     '''Attributes.
     '''
 
-    hpp = baca.scf.proxies.HomePackageProxy()
+    hpp = scf.proxies.HomePackageProxy()
     assert hpp.class_name == 'HomePackageProxy'
     assert hpp.path_name == '/Users/trevorbaca/Documents/other/baca'
     assert hpp.get_tag('foo') is None

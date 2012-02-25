@@ -1,5 +1,5 @@
-from baca.scf.proxies.BasicModuleProxy import BasicModuleProxy
-from baca.scf.helpers import safe_import
+from scf.proxies.BasicModuleProxy import BasicModuleProxy
+from scf.helpers import safe_import
 import os
 
 
@@ -32,12 +32,12 @@ class OutputMaterialModuleProxy(BasicModuleProxy):
             pass
 
     def remove(self, is_interactive=True):
-        import baca
-        parent_package_initializer_file_proxy = baca.scf.proxies.InitializerFileProxy(
+        import scf
+        parent_package_initializer_file_proxy = scf.proxies.InitializerFileProxy(
             self.parent_package_initializer_file_name)
         parent_package_initializer_file_proxy.remove_safe_import_statement(
             'output_material', self.material_underscored_name)
-        grandparent_package_initializer = baca.scf.proxies.InitializerFileProxy(
+        grandparent_package_initializer = scf.proxies.InitializerFileProxy(
             self.grandparent_package_initializer_file_name)
         grandparent_package_initializer.remove_safe_import_statement(
             self.material_underscored_name, self.material_underscored_name)

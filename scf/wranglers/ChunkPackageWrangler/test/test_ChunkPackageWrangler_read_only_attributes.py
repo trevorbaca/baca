@@ -1,9 +1,9 @@
-import baca
+import scf
 
 
 def test_ChunkPackageWrangler_read_only_attributes_01():
 
-    studio = baca.scf.studio.Studio()
+    studio = scf.studio.Studio()
     wrangler = studio.chunk_package_wrangler
     assert not wrangler.session.is_in_score
 
@@ -24,7 +24,7 @@ def test_ChunkPackageWrangler_read_only_attributes_01():
 
 def test_ChunkPackageWrangler_read_only_attributes_02():
 
-    studio = baca.scf.studio.Studio()
+    studio = scf.studio.Studio()
     wrangler = studio.chunk_package_wrangler
     wrangler.session.current_score_package_short_name = 'aracilik'
     assert wrangler.session.is_in_score

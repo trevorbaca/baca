@@ -1,7 +1,7 @@
 from abjad.tools import pitchtools
-from baca.scf.makers.MaterialPackageMaker import MaterialPackageMaker
+from scf.makers.MaterialPackageMaker import MaterialPackageMaker
 from make_illustration_from_output_material import make_illustration_from_output_material
-from baca.scf.editors.PitchRangeInventoryEditor import PitchRangeInventoryEditor
+from scf.editors.PitchRangeInventoryEditor import PitchRangeInventoryEditor
 
 
 class PitchRangeInventoryMaterialPackageMaker(MaterialPackageMaker):
@@ -30,5 +30,5 @@ class PitchRangeInventoryMaterialPackageMaker(MaterialPackageMaker):
 
     # TODO: remove self.user_input_module_import_statements from editable maker
     user_input_module_import_statements = [
-        'from baca.scf.editors import UserInputWrapper',
+        'from scf.editors import UserInputWrapper',
         ]

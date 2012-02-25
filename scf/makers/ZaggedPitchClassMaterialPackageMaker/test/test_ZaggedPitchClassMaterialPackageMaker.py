@@ -1,18 +1,18 @@
-from baca.scf.editors import UserInputWrapper
-import baca
+from scf.editors import UserInputWrapper
+import scf
 
 
 def test_ZaggedPitchClassMaterialPackageMaker_01():
     '''Emtpy wrapper.'''
 
-    studio = baca.scf.studio.Studio()
+    studio = scf.studio.Studio()
     assert not studio.package_exists('baca.materials.testzagged')
     try:
         studio.run(user_input=
             'materials maker zagged testzagged default '
             'q'
             )
-        mpp = baca.scf.makers.ZaggedPitchClassMaterialPackageMaker(
+        mpp = scf.makers.ZaggedPitchClassMaterialPackageMaker(
             'baca.materials.testzagged')
         assert mpp.directory_contents == ['__init__.py', 'user_input.py']
         user_input_wrapper = UserInputWrapper([
@@ -28,7 +28,7 @@ def test_ZaggedPitchClassMaterialPackageMaker_01():
 def test_ZaggedPitchClassMaterialPackageMaker_02():
     '''Populate wrapper.'''
 
-    studio = baca.scf.studio.Studio()
+    studio = scf.studio.Studio()
     assert not studio.package_exists('baca.materials.testzagged')
     try:
         studio.run(user_input=
@@ -38,7 +38,7 @@ def test_ZaggedPitchClassMaterialPackageMaker_02():
             '[1, 1, 2, 3] '
             'q'
             )
-        mpp = baca.scf.makers.ZaggedPitchClassMaterialPackageMaker(
+        mpp = scf.makers.ZaggedPitchClassMaterialPackageMaker(
             'baca.materials.testzagged')
         assert mpp.directory_contents == ['__init__.py', 'user_input.py']
         user_input_wrapper = UserInputWrapper([

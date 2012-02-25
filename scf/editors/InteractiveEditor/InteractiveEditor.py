@@ -1,4 +1,4 @@
-from baca.scf.core.SCFObject import SCFObject
+from scf.core.SCFObject import SCFObject
 
 
 class InteractiveEditor(SCFObject):

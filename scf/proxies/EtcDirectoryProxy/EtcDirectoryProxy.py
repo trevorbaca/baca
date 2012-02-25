@@ -1,4 +1,4 @@
-from baca.scf.proxies.DirectoryProxy import DirectoryProxy
+from scf.proxies.DirectoryProxy import DirectoryProxy
 import os
 
 

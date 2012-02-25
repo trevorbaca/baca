@@ -1,6 +1,6 @@
 from abjad.tools import markuptools
-from baca.scf.proxies.BasicModuleProxy import BasicModuleProxy
-from baca.scf.helpers import safe_import
+from scf.proxies.BasicModuleProxy import BasicModuleProxy
+from scf.helpers import safe_import
 
 
 class IllustrationBuilderModuleProxy(BasicModuleProxy):

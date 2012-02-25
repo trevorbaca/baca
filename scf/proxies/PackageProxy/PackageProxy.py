@@ -1,8 +1,8 @@
 from abjad.tools import iotools
-from baca.scf.proxies.DirectoryProxy import DirectoryProxy
-from baca.scf.proxies.ImportableAssetProxy import ImportableAssetProxy
-from baca.scf.proxies.InitializerFileProxy import InitializerFileProxy
-from baca.scf.helpers import safe_import
+from scf.proxies.DirectoryProxy import DirectoryProxy
+from scf.proxies.ImportableAssetProxy import ImportableAssetProxy
+from scf.proxies.InitializerFileProxy import InitializerFileProxy
+from scf.helpers import safe_import
 import os
 import sys
 
@@ -93,9 +93,9 @@ class PackageProxy(DirectoryProxy, ImportableAssetProxy):
     # TODO: write test; or remove?
     @property
     def score(self):
-        import baca
+        import scf
         if self.score_package_short_name is not None:
-            return baca.scf.proxies.ScorePackageProxy(self.score_package_short_name)
+            return scf.proxies.ScorePackageProxy(self.score_package_short_name)
 
     # TODO: write test; or remove?
     @property

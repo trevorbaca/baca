@@ -1,7 +1,7 @@
-from baca.scf.specifiers.PerformerContributionSpecifierList import PerformerContributionSpecifierList
-from baca.scf.specifiers.PerformerContributionSpecifier import PerformerContributionSpecifier
-from baca.scf.editors.ListEditor import ListEditor
-from baca.scf.editors.PerformerContributionSpecifierEditor import PerformerContributionSpecifierEditor
+from scf.specifiers.PerformerContributionSpecifierList import PerformerContributionSpecifierList
+from scf.specifiers.PerformerContributionSpecifier import PerformerContributionSpecifier
+from scf.editors.ListEditor import ListEditor
+from scf.editors.PerformerContributionSpecifierEditor import PerformerContributionSpecifierEditor
 
 
 class PerformerContributionSpecifierListEditor(ListEditor):

@@ -1,7 +1,7 @@
 from abjad.tools import iotools
 from abjad.tools import mathtools
-from baca.scf.menuing.MenuSection import MenuSection
-from baca.scf.menuing.MenuSectionAggregator import MenuSectionAggregator
+from scf.menuing.MenuSection import MenuSection
+from scf.menuing.MenuSectionAggregator import MenuSectionAggregator
 
 
 class Menu(MenuSectionAggregator):

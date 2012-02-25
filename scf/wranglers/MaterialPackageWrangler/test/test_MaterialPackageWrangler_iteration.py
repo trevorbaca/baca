@@ -1,6 +1,6 @@
-import baca
+import scf
 
-studio = baca.scf.studio.Studio()
+studio = scf.studio.Studio()
 wrangler = studio.material_package_wrangler
 assert not wrangler.session.is_in_score
 

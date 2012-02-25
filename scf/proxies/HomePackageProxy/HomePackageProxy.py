@@ -1,4 +1,4 @@
-from baca.scf.proxies.PackageProxy import PackageProxy
+from scf.proxies.PackageProxy import PackageProxy
 
 
 class HomePackageProxy(PackageProxy):

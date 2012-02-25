@@ -1,6 +1,6 @@
 from abjad.tools import iotools
-from baca.scf.wranglers.PackageWrangler import PackageWrangler
-from baca.scf.proxies.ScorePackageProxy import ScorePackageProxy
+from scf.wranglers.PackageWrangler import PackageWrangler
+from scf.proxies.ScorePackageProxy import ScorePackageProxy
 
 
 class ScorePackageWrangler(PackageWrangler):

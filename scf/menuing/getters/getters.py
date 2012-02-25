@@ -1,4 +1,4 @@
-from baca.scf.menuing.UserInputGetter import UserInputGetter
+from scf.menuing.UserInputGetter import UserInputGetter
 
 
 def get_duration(attribute_spaced_name, session=None, existing_value=None, allow_none=True):

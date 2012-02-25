@@ -1,12 +1,12 @@
 from abjad import *
-import baca
+import scf
 
 
 def test_InstrumentEditor_short_instrument_name_01():
     '''Quit, back & studio all work.
     '''
 
-    studio = baca.scf.studio.Studio()
+    studio = scf.studio.Studio()
     studio.run(user_input='1 setup perf 1 1 sn q')
     assert studio.ts == (13, (1, 7, 9))
 
@@ -21,7 +21,7 @@ def test_InstrumentEditor_short_instrument_name_02():
     '''String only.
     '''
 
-    studio = baca.scf.studio.Studio()
+    studio = scf.studio.Studio()
     studio.run(user_input='1 setup performers 1 1 sn -99 q')
     assert studio.ts == (15, (1, 7, 9))
 
@@ -31,13 +31,13 @@ def test_InstrumentEditor_short_instrument_name_03():
     Unless short instrument name markup is set explicitly.
     '''
 
-    editor = baca.scf.editors.InstrumentEditor()
+    editor = scf.editors.InstrumentEditor()
     editor.run(user_input="1 sn 'foo' q")
     instrument = editor.target
     assert instrument.short_instrument_name == 'foo'
     assert instrument.short_instrument_name_markup == markuptools.Markup('Foo')
 
-    editor = baca.scf.editors.InstrumentEditor()
+    editor = scf.editors.InstrumentEditor()
     editor.run(user_input="1 sm 'bar' sn 'foo' q")
     instrument = editor.target
     assert instrument.short_instrument_name == 'foo'

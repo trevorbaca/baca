@@ -1,6 +1,6 @@
-from baca.scf.editors.MusicSpecifierEditor import MusicSpecifierEditor
-from baca.scf.proxies.ModuleProxy import ModuleProxy
-from baca.scf.specifiers.MusicSpecifier import MusicSpecifier
+from scf.editors.MusicSpecifierEditor import MusicSpecifierEditor
+from scf.proxies.ModuleProxy import ModuleProxy
+from scf.specifiers.MusicSpecifier import MusicSpecifier
 import os
 
 

@@ -1,11 +1,11 @@
-import baca
+import scf
 
 
 def test_Menu_run_01():
     '''String token defaults.
     '''
 
-    menu = baca.scf.menuing.Menu()
+    menu = scf.menuing.Menu()
     menu.push_breadcrumb('location')
     section_1 = menu.make_section(is_keyed=True, is_hidden=False, is_numbered=False, is_ranged=False)
     section_1.title = 'section'
@@ -74,7 +74,7 @@ def test_Menu_run_02():
     '''Turning off keys does nothing to string tokens.
     '''
 
-    menu = baca.scf.menuing.Menu()
+    menu = scf.menuing.Menu()
     menu.push_breadcrumb('location')
     section_1 = menu.make_section(is_keyed=False, is_hidden=False, is_numbered=False, is_ranged=False)
     section_1.title = 'section'
@@ -116,7 +116,7 @@ def test_Menu_run_03():
     '''Hidding suppresses output.
     '''
 
-    menu = baca.scf.menuing.Menu()
+    menu = scf.menuing.Menu()
     menu.push_breadcrumb('location')
     section_1 = menu.make_section(is_keyed=True, is_hidden=True, is_numbered=False, is_ranged=False)
     section_1.title = 'section'
@@ -151,7 +151,7 @@ def test_Menu_run_04():
     '''Numbered string tokens.
     '''
 
-    menu = baca.scf.menuing.Menu()
+    menu = scf.menuing.Menu()
     menu.push_breadcrumb('location')
     section_1 = menu.make_section(is_keyed=True, is_hidden=False, is_numbered=True, is_ranged=False)
     section_1.title = 'section'
@@ -193,7 +193,7 @@ def test_Menu_run_05():
     '''Ranged string tokens.
     '''
 
-    menu = baca.scf.menuing.Menu()
+    menu = scf.menuing.Menu()
     menu.push_breadcrumb('location')
     section_1 = menu.make_section(is_keyed=True, is_hidden=False, is_numbered=False, is_ranged=True)
     section_1.title = 'section'
@@ -236,7 +236,7 @@ def test_Menu_run_06():
     '''Default tuple tokens.
     '''
 
-    menu = baca.scf.menuing.Menu()
+    menu = scf.menuing.Menu()
     menu.push_breadcrumb('location')
     section_1 = menu.make_section(is_keyed=True, is_hidden=False, is_numbered=False, is_ranged=False)
     section_1.title = 'section'
@@ -333,7 +333,7 @@ def test_Menu_run_07():
     NB: User can not match on keys but key returned from menu to calling code.
     '''
 
-    menu = baca.scf.menuing.Menu()
+    menu = scf.menuing.Menu()
     menu.push_breadcrumb('location')
     section_1 = menu.make_section(is_keyed=False, is_hidden=False, is_numbered=False, is_ranged=False)
     section_1.title = 'section'
@@ -429,7 +429,7 @@ def test_Menu_run_08():
     '''Hidding suppresses output.
     '''
 
-    menu = baca.scf.menuing.Menu()
+    menu = scf.menuing.Menu()
     menu.push_breadcrumb('location')
     section_1 = menu.make_section(is_keyed=True, is_hidden=True, is_numbered=False, is_ranged=False)
     section_1.title = 'section'
@@ -518,7 +518,7 @@ def test_Menu_run_09():
     '''Tuple tokens with numbering turned on.
     '''
 
-    menu = baca.scf.menuing.Menu()
+    menu = scf.menuing.Menu()
     menu.push_breadcrumb('location')
     section_1 = menu.make_section(is_keyed=True, is_hidden=False, is_numbered=True, is_ranged=False)
     section_1.title = 'section'
@@ -613,7 +613,7 @@ def test_Menu_run_10():
     '''Ranged tuple tokens.
     '''
 
-    menu = baca.scf.menuing.Menu()
+    menu = scf.menuing.Menu()
     menu.push_breadcrumb('location')
     section_1 = menu.make_section(is_keyed=True, is_hidden=False, is_numbered=False, is_ranged=True)
     section_1.title = 'section'

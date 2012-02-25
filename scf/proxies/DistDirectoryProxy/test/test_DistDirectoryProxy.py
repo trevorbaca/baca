@@ -1,9 +1,9 @@
-import baca
+import scf
 
 
 def test_DistDirectoryProxy_01():
 
-    dist_proxy = baca.scf.proxies.DistDirectoryProxy('manos')
+    dist_proxy = scf.proxies.DistDirectoryProxy('manos')
 
     assert dist_proxy.path_name == '/Users/trevorbaca/Documents/scores/manos/dist'
     assert dist_proxy.is_in_repository

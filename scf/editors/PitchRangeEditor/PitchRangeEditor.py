@@ -1,6 +1,6 @@
 from abjad.tools import pitchtools
-from baca.scf.editors.InteractiveEditor import InteractiveEditor
-from baca.scf import predicates
+from scf.editors.InteractiveEditor import InteractiveEditor
+from scf import predicates
 
 
 class PitchRangeEditor(InteractiveEditor):

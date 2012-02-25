@@ -1,4 +1,4 @@
-from baca.scf.proxies.ModuleProxy import ModuleProxy
+from scf.proxies.ModuleProxy import ModuleProxy
 
 
 class MaterialModuleProxy(ModuleProxy):

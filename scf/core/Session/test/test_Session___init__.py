@@ -1,11 +1,11 @@
-import baca
+import scf
 
 
 def test_Session___init___01():
     '''Attributes assigned at initialization time.
     '''
 
-    session = baca.scf.core.Session()
+    session = scf.core.Session()
 
     assert session.initial_user_input is None
     assert session.breadcrumb_stack == []

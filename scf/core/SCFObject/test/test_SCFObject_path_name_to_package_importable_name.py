@@ -1,6 +1,6 @@
-import baca
+import scf
 
-scf_object = baca.scf.core.SCFObject()
+scf_object = scf.core.SCFObject()
 
 
 def test_SCFObject_path_name_to_package_importable_name_01():

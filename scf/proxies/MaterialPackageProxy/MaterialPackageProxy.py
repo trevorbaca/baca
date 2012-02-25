@@ -1,18 +1,18 @@
 from abjad.tools import iotools
 from abjad.tools import markuptools
 from abjad.tools import mathtools
-from baca.scf.proxies.IllustrationBuilderModuleProxy import IllustrationBuilderModuleProxy
-from baca.scf.proxies.IllustrationLyFileProxy import IllustrationLyFileProxy
-from baca.scf.proxies.IllustrationPdfFileProxy import IllustrationPdfFileProxy
-from baca.scf.proxies.MaterialDefinitionModuleProxy import MaterialDefinitionModuleProxy
-from baca.scf.wranglers.MaterialPackageMakerWrangler import MaterialPackageMakerWrangler
-from baca.scf.proxies.OutputMaterialModuleProxy import OutputMaterialModuleProxy
-from baca.scf.proxies.PackageProxy import PackageProxy
-from baca.scf.proxies.StylesheetFileProxy import StylesheetFileProxy
-from baca.scf.wranglers.StylesheetFileWrangler import StylesheetFileWrangler
-from baca.scf.proxies.UserInputModuleProxy import UserInputModuleProxy
-from baca.scf.helpers import safe_import
-from baca.scf import helpers
+from scf.proxies.IllustrationBuilderModuleProxy import IllustrationBuilderModuleProxy
+from scf.proxies.IllustrationLyFileProxy import IllustrationLyFileProxy
+from scf.proxies.IllustrationPdfFileProxy import IllustrationPdfFileProxy
+from scf.proxies.MaterialDefinitionModuleProxy import MaterialDefinitionModuleProxy
+from scf.wranglers.MaterialPackageMakerWrangler import MaterialPackageMakerWrangler
+from scf.proxies.OutputMaterialModuleProxy import OutputMaterialModuleProxy
+from scf.proxies.PackageProxy import PackageProxy
+from scf.proxies.StylesheetFileProxy import StylesheetFileProxy
+from scf.wranglers.StylesheetFileWrangler import StylesheetFileWrangler
+from scf.proxies.UserInputModuleProxy import UserInputModuleProxy
+from scf.helpers import safe_import
+from scf import helpers
 import os
 
 

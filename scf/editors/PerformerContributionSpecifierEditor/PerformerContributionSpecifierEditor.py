@@ -1,20 +1,20 @@
-from baca.scf.editors.ArticulationSpecifierEditor import ArticulationSpecifierEditor
-from baca.scf.editors.ClefSpecifierEditor import ClefSpecifierEditor
-from baca.scf.editors.DirectiveSpecifierEditor import DirectiveSpecifierEditor
-from baca.scf.editors.DynamicSpecifierEditor import DynamicSpecifierEditor
-from baca.scf.editors.InstrumentSpecifierEditor import InstrumentSpecifierEditor
-from baca.scf.editors.NoteHeadSpecifierEditor import NoteHeadSpecifierEditor
-from baca.scf.editors.OverrideSpecifierEditor import OverrideSpecifierEditor
-from baca.scf.editors.PerformerSpecifierEditor import PerformerSpecifierEditor
-from baca.scf.editors.PitchClassSpecifierEditor import PitchClassSpecifierEditor
-from baca.scf.editors.RegistrationSpecifierEditor import RegistrationSpecifierEditor
-from baca.scf.editors.RhythmSpecifierEditor import RhythmSpecifierEditor
-from baca.scf.editors.StaffSpecifierEditor import StaffSpecifierEditor
-from baca.scf.editors.TrillSpecifierEditor import TrillSpecifierEditor
-from baca.scf.editors.TropingSpecifierEditor import TropingSpecifierEditor
-from baca.scf.editors.InteractiveEditor import InteractiveEditor
-from baca.scf.editors.TargetManifest import TargetManifest
-from baca.scf.specifiers.PerformerContributionSpecifier import PerformerContributionSpecifier
+from scf.editors.ArticulationSpecifierEditor import ArticulationSpecifierEditor
+from scf.editors.ClefSpecifierEditor import ClefSpecifierEditor
+from scf.editors.DirectiveSpecifierEditor import DirectiveSpecifierEditor
+from scf.editors.DynamicSpecifierEditor import DynamicSpecifierEditor
+from scf.editors.InstrumentSpecifierEditor import InstrumentSpecifierEditor
+from scf.editors.NoteHeadSpecifierEditor import NoteHeadSpecifierEditor
+from scf.editors.OverrideSpecifierEditor import OverrideSpecifierEditor
+from scf.editors.PerformerSpecifierEditor import PerformerSpecifierEditor
+from scf.editors.PitchClassSpecifierEditor import PitchClassSpecifierEditor
+from scf.editors.RegistrationSpecifierEditor import RegistrationSpecifierEditor
+from scf.editors.RhythmSpecifierEditor import RhythmSpecifierEditor
+from scf.editors.StaffSpecifierEditor import StaffSpecifierEditor
+from scf.editors.TrillSpecifierEditor import TrillSpecifierEditor
+from scf.editors.TropingSpecifierEditor import TropingSpecifierEditor
+from scf.editors.InteractiveEditor import InteractiveEditor
+from scf.editors.TargetManifest import TargetManifest
+from scf.specifiers.PerformerContributionSpecifier import PerformerContributionSpecifier
 
 
 class PerformerContributionSpecifierEditor(InteractiveEditor):

@@ -1,10 +1,10 @@
-from baca.scf.editors.InteractiveEditor import InteractiveEditor
-from baca.scf.editors.PerformerContributionSpecifierListEditor import PerformerContributionSpecifierListEditor
-from baca.scf.editors.TempoMarkEditor import TempoMarkEditor
-from baca.scf.specifiers.MusicSpecifier import MusicSpecifier
-from baca.scf.editors.TargetManifest import TargetManifest
-from baca.scf import getters
-from baca.scf import predicates
+from scf.editors.InteractiveEditor import InteractiveEditor
+from scf.editors.PerformerContributionSpecifierListEditor import PerformerContributionSpecifierListEditor
+from scf.editors.TempoMarkEditor import TempoMarkEditor
+from scf.specifiers.MusicSpecifier import MusicSpecifier
+from scf.editors.TargetManifest import TargetManifest
+from scf import getters
+from scf import predicates
 
 
 class MusicSpecifierEditor(InteractiveEditor):

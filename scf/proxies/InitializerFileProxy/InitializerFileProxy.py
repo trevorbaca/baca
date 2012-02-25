@@ -1,4 +1,4 @@
-from baca.scf.proxies.ParsableFileProxy import ParsableFileProxy
+from scf.proxies.ParsableFileProxy import ParsableFileProxy
 import collections
 import os
 
@@ -31,7 +31,7 @@ class InitializerFileProxy(ParsableFileProxy):
     ### PUBLIC METHODS ###
 
     def add_safe_import_statement(self, source_module_short_name, source_attribute_name):
-        safe_import_import_statement = 'from baca.scf.helpers import safe_import\n'
+        safe_import_import_statement = 'from scf.helpers import safe_import\n'
         if safe_import_import_statement not in self.setup_statements:
             self.setup_statements.append(safe_import_import_statement)
         safe_import_statement = 'safe_import(globals(), {!r}, {!r})\n'
@@ -126,7 +126,7 @@ class InitializerFileProxy(ParsableFileProxy):
         self.write_to_disk()
 
     def restore_interactively(self, prompt=True):
-        import baca
+        import scf
         getter = self.make_getter(where=self.where())
         getter.append_yes_no_string('handmade')
         result = getter.run()
@@ -141,7 +141,7 @@ class InitializerFileProxy(ParsableFileProxy):
                 return
             should_have_illustration = 'yes'.startswith(result.lower())
         else:
-            material_package_maker_wrangler = baca.scf.wranglers.MaterialPackageMakerWrangler(session=self.session)
+            material_package_maker_wrangler = scf.wranglers.MaterialPackageMakerWrangler(session=self.session)
             self.push_backtrack()
             material_package_maker_class_name = \
                 material_package_maker_wrangler.select_material_proxy_class_name_interactively(

@@ -1,5 +1,5 @@
-from baca.scf.proxies.MusicSpecifierModuleProxy import MusicSpecifierModuleProxy
-from baca.scf.wranglers.ModuleWrangler import ModuleWrangler
+from scf.proxies.MusicSpecifierModuleProxy import MusicSpecifierModuleProxy
+from scf.wranglers.ModuleWrangler import ModuleWrangler
 import os
 
 

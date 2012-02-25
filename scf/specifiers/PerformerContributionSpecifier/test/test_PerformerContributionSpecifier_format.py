@@ -1,9 +1,9 @@
-import baca
+import scf
 
 
 def test_PerformerContributionSpecifier_format_01():
 
-    specifier = baca.scf.specifiers.PerformerContributionSpecifier()
+    specifier = scf.specifiers.PerformerContributionSpecifier()
     specifier.articulation_specifier = 'foo'
     specifier.clef_specifier = 'bar'
     specifier.directive_specifier = ['apple', 'banana', 'cherry']

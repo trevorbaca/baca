@@ -1,12 +1,12 @@
 from abjad import *
-import baca
+import scf
 
 
 def test_PerformerEditor_run_01():
     '''Quit, back, studio and junk all work.
     '''
 
-    studio = baca.scf.studio.Studio()
+    studio = scf.studio.Studio()
     studio.run(user_input='1 setup performers 1 q')
     assert studio.ts == (10, (1, 7))
     

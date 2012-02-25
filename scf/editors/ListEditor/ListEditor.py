@@ -1,5 +1,5 @@
 from abjad.tools import sequencetools
-from baca.scf.editors.InteractiveEditor import InteractiveEditor
+from scf.editors.InteractiveEditor import InteractiveEditor
 
 
 class ListEditor(InteractiveEditor):

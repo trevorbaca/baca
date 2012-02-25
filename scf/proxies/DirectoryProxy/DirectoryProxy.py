@@ -1,4 +1,4 @@
-from baca.scf.proxies.AssetProxy import AssetProxy
+from scf.proxies.AssetProxy import AssetProxy
 import os
 import subprocess
 

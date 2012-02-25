@@ -1,6 +1,6 @@
 from abjad.tools import iotools
-from baca.scf.wranglers.PackageWrangler import PackageWrangler
-from baca.scf.proxies.StylesheetFileProxy import StylesheetFileProxy
+from scf.wranglers.PackageWrangler import PackageWrangler
+from scf.proxies.StylesheetFileProxy import StylesheetFileProxy
 import os
 
 

@@ -2,8 +2,8 @@ from abjad.tools import instrumenttools
 from abjad.tools import mathtools
 from abjad.tools import scoretools
 from abjad.tools import sequencetools
-from baca.scf.editors.InteractiveEditor import InteractiveEditor
-from baca.scf.editors.InstrumentEditor import InstrumentEditor
+from scf.editors.InteractiveEditor import InteractiveEditor
+from scf.editors.InstrumentEditor import InstrumentEditor
 
 
 class PerformerEditor(InteractiveEditor):

@@ -1,6 +1,6 @@
-import baca
+import scf
 
-studio = baca.scf.studio.Studio()
+studio = scf.studio.Studio()
 wrangler = studio.material_package_maker_wrangler
 
 
@@ -16,13 +16,13 @@ def test_MaterialPackageMakerWrangler_iteration_02():
 
 def test_MaterialPackageMakerWrangler_iteration_03():
 
-    assert 'baca.scf.makers.PitchRangeInventoryMaterialPackageMaker' in \
+    assert 'scf.makers.PitchRangeInventoryMaterialPackageMaker' in \
         wrangler.list_asset_importable_names()
     
 
 def test_MaterialPackageMakerWrangler_iteration_04():
 
-    assert ('baca.scf.makers.PitchRangeInventoryMaterialPackageMaker', 
+    assert ('scf.makers.PitchRangeInventoryMaterialPackageMaker', 
         'pitch range inventory material package maker') in wrangler.make_visible_asset_menu_tokens()
 
 

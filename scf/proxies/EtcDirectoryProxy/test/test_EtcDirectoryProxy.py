@@ -1,9 +1,9 @@
-import baca
+import scf
 
 
 def test_EtcDirectoryProxy_01():
 
-    etc_proxy = baca.scf.proxies.EtcDirectoryProxy('manos')
+    etc_proxy = scf.proxies.EtcDirectoryProxy('manos')
 
     assert etc_proxy.path_name == '/Users/trevorbaca/Documents/scores/manos/etc'
     assert etc_proxy.is_in_repository

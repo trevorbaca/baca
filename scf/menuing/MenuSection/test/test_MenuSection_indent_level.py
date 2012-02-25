@@ -1,9 +1,9 @@
-import baca
+import scf
 
 
 def test_MenuSection_indent_level_01():
 
-    menu = baca.scf.menuing.Menu()
+    menu = scf.menuing.Menu()
     menu.push_breadcrumb('location')
     section = menu.make_section()
     section.title = 'section'

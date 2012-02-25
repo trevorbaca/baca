@@ -1,17 +1,17 @@
-import baca
+import scf
 
 
 def test_MaterialPackageWrangler_run_data_only_package_01():
     '''Make data package. Delete package.
     '''
     
-    studio = baca.scf.studio.Studio()
+    studio = scf.studio.Studio()
     assert not studio.package_exists('baca.materials.testnumbers')
 
     try:
         studio.run(user_input='m d testnumbers default q')
         assert studio.package_exists('baca.materials.testnumbers')
-        mpp = baca.scf.proxies.MaterialPackageProxy('baca.materials.testnumbers')
+        mpp = scf.proxies.MaterialPackageProxy('baca.materials.testnumbers')
         assert mpp.is_data_only
         assert mpp.directory_contents == ['__init__.py', 'material_definition.py']
         assert mpp.has_readable_initializer
@@ -31,7 +31,7 @@ def test_MaterialPackageWrangler_run_data_only_package_02():
     Verify invalid initializer. Remove package.
     '''
 
-    studio = baca.scf.studio.Studio()
+    studio = scf.studio.Studio()
     assert not studio.package_exists('baca.materials.testnumbers')
 
     try:
@@ -39,7 +39,7 @@ def test_MaterialPackageWrangler_run_data_only_package_02():
             'm d testnumbers default '
             'testnumbers incanned canned_exception.py default q')
         assert studio.package_exists('baca.materials.testnumbers')
-        mpp = baca.scf.proxies.MaterialPackageProxy('baca.materials.testnumbers')
+        mpp = scf.proxies.MaterialPackageProxy('baca.materials.testnumbers')
         assert mpp.is_data_only
         assert mpp.directory_contents == ['__init__.py', 'material_definition.py']
         assert not mpp.has_readable_initializer
@@ -59,7 +59,7 @@ def test_MaterialPackageWrangler_run_data_only_package_03():
     Verify initializer. Remove package.
     '''
 
-    studio = baca.scf.studio.Studio()
+    studio = scf.studio.Studio()
     assert not studio.package_exists('baca.materials.testnumbers')
 
     try:
@@ -68,7 +68,7 @@ def test_MaterialPackageWrangler_run_data_only_package_03():
             'testnumbers incanned canned_exception.py default '
             'inr yes no default q')
         assert studio.package_exists('baca.materials.testnumbers')
-        mpp = baca.scf.proxies.MaterialPackageProxy('baca.materials.testnumbers')
+        mpp = scf.proxies.MaterialPackageProxy('baca.materials.testnumbers')
         assert mpp.is_data_only
         assert mpp.directory_contents == ['__init__.py', 'material_definition.py']
         assert mpp.has_readable_initializer
@@ -88,7 +88,7 @@ def test_MaterialPackageWrangler_run_data_only_package_04():
     Delete package." 
     '''
 
-    studio = baca.scf.studio.Studio()
+    studio = scf.studio.Studio()
     assert not studio.package_exists('baca.materials.testnumbers')
 
     try:
@@ -97,7 +97,7 @@ def test_MaterialPackageWrangler_run_data_only_package_04():
             'testnumbers mdcanned canned_testnumbers_material_definition.py default '
             'omm default q')
         assert studio.package_exists('baca.materials.testnumbers')
-        mpp = baca.scf.proxies.MaterialPackageProxy('baca.materials.testnumbers')
+        mpp = scf.proxies.MaterialPackageProxy('baca.materials.testnumbers')
         assert mpp.is_data_only
         assert mpp.directory_contents == ['__init__.py', 'material_definition.py', 'output_material.py']
         assert mpp.has_readable_initializer
@@ -117,7 +117,7 @@ def test_MaterialPackageWrangler_run_data_only_package_05():
     Remove package.
     '''
 
-    studio = baca.scf.studio.Studio()
+    studio = scf.studio.Studio()
     assert not studio.package_exists('baca.materials.testnumbers')
 
     try:
@@ -125,7 +125,7 @@ def test_MaterialPackageWrangler_run_data_only_package_05():
             'm d testnumbers default '
             'testnumbers mddelete remove default q')
         assert studio.package_exists('baca.materials.testnumbers')
-        mpp = baca.scf.proxies.MaterialPackageProxy('baca.materials.testnumbers')
+        mpp = scf.proxies.MaterialPackageProxy('baca.materials.testnumbers')
         assert mpp.is_data_only
         assert mpp.directory_contents == ['__init__.py']
         assert mpp.has_readable_initializer
@@ -145,7 +145,7 @@ def test_MaterialPackageWrangler_run_data_only_package_06():
     Delete package.
     '''
 
-    studio = baca.scf.studio.Studio()
+    studio = scf.studio.Studio()
     assert not studio.package_exists('baca.materials.testnumbers')
 
     try:
@@ -153,7 +153,7 @@ def test_MaterialPackageWrangler_run_data_only_package_06():
             'm d testnumbers default '
             'testnumbers mdstub default q')
         assert studio.package_exists('baca.materials.testnumbers')
-        mpp = baca.scf.proxies.MaterialPackageProxy('baca.materials.testnumbers')
+        mpp = scf.proxies.MaterialPackageProxy('baca.materials.testnumbers')
         assert mpp.is_data_only
         assert mpp.directory_contents == ['__init__.py', 'material_definition.py']
         assert mpp.has_readable_initializer
@@ -173,7 +173,7 @@ def test_MaterialPackageWrangler_run_data_only_package_07():
     Remove package.
     '''
 
-    studio = baca.scf.studio.Studio()
+    studio = scf.studio.Studio()
     assert not studio.package_exists('baca.materials.testnumbers')
 
     try:
@@ -183,7 +183,7 @@ def test_MaterialPackageWrangler_run_data_only_package_07():
             'omm default '
             'omdelete remove default q')
         assert studio.package_exists('baca.materials.testnumbers')
-        mpp = baca.scf.proxies.MaterialPackageProxy('baca.materials.testnumbers')
+        mpp = scf.proxies.MaterialPackageProxy('baca.materials.testnumbers')
         assert mpp.is_data_only
         assert mpp.directory_contents == ['__init__.py', 'material_definition.py']
         assert mpp.has_readable_initializer
@@ -203,7 +203,7 @@ def test_MaterialPackageWrangler_run_data_only_package_08():
     Examine package state. Remove package.
     '''
 
-    studio = baca.scf.studio.Studio()
+    studio = scf.studio.Studio()
     assert not studio.package_exists('baca.materials.testnumbers')
 
     try:
@@ -211,7 +211,7 @@ def test_MaterialPackageWrangler_run_data_only_package_08():
             'm d testnumbers default '
             'testnumbers mdcanned canned_testnumbers_material_definition_with_exception.py default q')
         assert studio.package_exists('baca.materials.testnumbers')
-        mpp = baca.scf.proxies.MaterialPackageProxy('baca.materials.testnumbers')
+        mpp = scf.proxies.MaterialPackageProxy('baca.materials.testnumbers')
         assert mpp.is_data_only
         assert mpp.directory_contents == ['__init__.py', 'material_definition.py']
         assert mpp.has_readable_initializer
@@ -231,7 +231,7 @@ def test_MaterialPackageWrangler_run_data_only_package_09():
     Verify invalid output material module. Remove package.
     '''
 
-    studio = baca.scf.studio.Studio()
+    studio = scf.studio.Studio()
     assert not studio.package_exists('baca.materials.testnumbers')
 
     try:
@@ -241,7 +241,7 @@ def test_MaterialPackageWrangler_run_data_only_package_09():
             'omm default '
             'omcanned canned_exception.py default q')
         assert studio.package_exists('baca.materials.testnumbers')
-        mpp = baca.scf.proxies.MaterialPackageProxy('baca.materials.testnumbers')
+        mpp = scf.proxies.MaterialPackageProxy('baca.materials.testnumbers')
         assert mpp.is_data_only
         assert mpp.directory_contents == ['__init__.py', 'material_definition.py', 'output_material.py']
         assert mpp.has_readable_initializer

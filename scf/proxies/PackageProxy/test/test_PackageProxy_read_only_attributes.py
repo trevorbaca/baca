@@ -1,11 +1,11 @@
-import baca
+import scf
 
 
 def test_PackageProxy_read_only_attributes_01():
     '''Stub package.
     '''
 
-    package_proxy = baca.scf.proxies.PackageProxy('baca.materials.red_sargasso')
+    package_proxy = scf.proxies.PackageProxy('baca.materials.red_sargasso')
     assert package_proxy.path_name == '/Users/trevorbaca/Documents/other/baca/materials/red_sargasso'
     assert package_proxy.get_tag('foo') is None
     assert package_proxy.initializer_file_name == \

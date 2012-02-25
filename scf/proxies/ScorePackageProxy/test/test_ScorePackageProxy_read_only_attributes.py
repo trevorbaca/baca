@@ -1,23 +1,23 @@
 # -*- encoding: utf-8 -*-
 from abjad.tools import instrumenttools
 from abjad.tools import scoretools
-import baca
+import scf
 
 
 def test_ScorePackageProxy_read_only_attributes_01():
     '''Read-only public attributes.
     '''
 
-    score_proxy = baca.scf.proxies.ScorePackageProxy('manos')
+    score_proxy = scf.proxies.ScorePackageProxy('manos')
 
 
-    assert isinstance(score_proxy.chunk_wrangler, baca.scf.wranglers.ChunkPackageWrangler)
-    assert isinstance(score_proxy.dist_proxy, baca.scf.proxies.DirectoryProxy)
-    assert isinstance(score_proxy.etc_proxy, baca.scf.proxies.DirectoryProxy)
-    assert isinstance(score_proxy.exg_proxy, baca.scf.proxies.DirectoryProxy)
-    assert isinstance(score_proxy.material_package_maker_wrangler, baca.scf.wranglers.MaterialPackageMakerWrangler)
-    assert isinstance(score_proxy.material_package_wrangler, baca.scf.wranglers.MaterialPackageWrangler)
-    assert isinstance(score_proxy.mus_proxy, baca.scf.proxies.MusPackageProxy)
+    assert isinstance(score_proxy.chunk_wrangler, scf.wranglers.ChunkPackageWrangler)
+    assert isinstance(score_proxy.dist_proxy, scf.proxies.DirectoryProxy)
+    assert isinstance(score_proxy.etc_proxy, scf.proxies.DirectoryProxy)
+    assert isinstance(score_proxy.exg_proxy, scf.proxies.DirectoryProxy)
+    assert isinstance(score_proxy.material_package_maker_wrangler, scf.wranglers.MaterialPackageMakerWrangler)
+    assert isinstance(score_proxy.material_package_wrangler, scf.wranglers.MaterialPackageWrangler)
+    assert isinstance(score_proxy.mus_proxy, scf.proxies.MusPackageProxy)
 
     assert score_proxy.has_correct_initializers
 
@@ -42,11 +42,11 @@ def test_ScorePackageProxy_read_only_attributes_01():
         '/Users/trevorbaca/Documents/scores/manos/mus/__init__.py',)
 
     assert score_proxy.score_package_wranglers == (
-        baca.scf.wranglers.ChunkPackageWrangler(),
-        baca.scf.wranglers.MaterialPackageWrangler())    
+        scf.wranglers.ChunkPackageWrangler(),
+        scf.wranglers.MaterialPackageWrangler())    
 
     assert score_proxy.top_level_directory_proxies == (
-        baca.scf.proxies.DistDirectoryProxy('manos'),
-        baca.scf.proxies.EtcDirectoryProxy('manos'),
-        baca.scf.proxies.ExgDirectoryProxy('manos'),
-        baca.scf.proxies.MusPackageProxy('manos'))
+        scf.proxies.DistDirectoryProxy('manos'),
+        scf.proxies.EtcDirectoryProxy('manos'),
+        scf.proxies.ExgDirectoryProxy('manos'),
+        scf.proxies.MusPackageProxy('manos'))

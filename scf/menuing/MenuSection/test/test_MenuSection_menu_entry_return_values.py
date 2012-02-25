@@ -1,4 +1,4 @@
-import baca
+import scf
 
 
 def test_MenuSection_menu_entry_return_values_01():
@@ -6,7 +6,7 @@ def test_MenuSection_menu_entry_return_values_01():
     Always true, including for all four combinations of the two settings tested here.
     '''
 
-    menu = baca.scf.menuing.Menu()
+    menu = scf.menuing.Menu()
     menu.push_breadcrumb('location')
     section = menu.make_section(is_numbered=True)
     section.title = 'section'
@@ -16,7 +16,7 @@ def test_MenuSection_menu_entry_return_values_01():
     assert section.menu_entry_return_values == section.menu_entry_bodies
     assert section.menu_entry_return_values == section.tokens
 
-    menu = baca.scf.menuing.Menu()
+    menu = scf.menuing.Menu()
     menu.push_breadcrumb('location')
     section = menu.make_section()
     section.title = 'section'
@@ -26,7 +26,7 @@ def test_MenuSection_menu_entry_return_values_01():
     assert section.menu_entry_return_values == section.menu_entry_bodies
     assert section.menu_entry_return_values == section.tokens
 
-    menu = baca.scf.menuing.Menu()
+    menu = scf.menuing.Menu()
     menu.push_breadcrumb('location')
     section = menu.make_section(is_numbered=True)
     section.title = 'section'
@@ -37,7 +37,7 @@ def test_MenuSection_menu_entry_return_values_01():
     assert section.menu_entry_return_values == section.menu_entry_bodies
     assert section.menu_entry_return_values == section.tokens
 
-    menu = baca.scf.menuing.Menu()
+    menu = scf.menuing.Menu()
     menu.push_breadcrumb('location')
     section = menu.make_section()
     section.title = 'section'
@@ -55,7 +55,7 @@ def test_MenuSection_menu_entry_return_values_02():
     Note that section numbering plays no role in this.
     '''
 
-    menu = baca.scf.menuing.Menu()
+    menu = scf.menuing.Menu()
     menu.push_breadcrumb('location')
     section = menu.make_section(is_numbered=True)
     section.title = 'section'
@@ -66,7 +66,7 @@ def test_MenuSection_menu_entry_return_values_02():
     assert section.menu_entry_return_values == ['add', 'rm', 'mod']
     assert section.menu_entry_return_values == section.menu_entry_keys
 
-    menu = baca.scf.menuing.Menu()
+    menu = scf.menuing.Menu()
     menu.push_breadcrumb('location')
     section = menu.make_section()
     section.title = 'section'
@@ -77,7 +77,7 @@ def test_MenuSection_menu_entry_return_values_02():
     assert section.menu_entry_return_values == ['add', 'rm', 'mod']
     assert section.menu_entry_return_values == section.menu_entry_keys
 
-    menu = baca.scf.menuing.Menu()
+    menu = scf.menuing.Menu()
     menu.push_breadcrumb('location')
     section = menu.make_section(is_numbered=True)
     section.title = 'section'
@@ -89,7 +89,7 @@ def test_MenuSection_menu_entry_return_values_02():
     assert section.menu_entry_return_values == ['add something', 'delete something', 'modify something']
     assert section.menu_entry_return_values == section.menu_entry_bodies
 
-    menu = baca.scf.menuing.Menu()
+    menu = scf.menuing.Menu()
     menu.push_breadcrumb('location')
     section = menu.make_section()
     section.title = 'section'

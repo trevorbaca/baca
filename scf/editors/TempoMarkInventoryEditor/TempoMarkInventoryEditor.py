@@ -1,8 +1,8 @@
 from abjad.tools import contexttools
-from baca.scf.editors.InteractiveEditor import InteractiveEditor
-from baca.scf.editors.ListEditor import ListEditor
-from baca.scf.editors.TempoMarkEditor import TempoMarkEditor
-from baca.scf.menuing.UserInputGetter import UserInputGetter
+from scf.editors.InteractiveEditor import InteractiveEditor
+from scf.editors.ListEditor import ListEditor
+from scf.editors.TempoMarkEditor import TempoMarkEditor
+from scf.menuing.UserInputGetter import UserInputGetter
 
 
 class TempoMarkInventoryEditor(ListEditor):

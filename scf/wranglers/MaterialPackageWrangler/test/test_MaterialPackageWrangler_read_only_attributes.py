@@ -1,6 +1,6 @@
-import baca
+import scf
 
-studio = baca.scf.studio.Studio()
+studio = scf.studio.Studio()
 wrangler = studio.material_package_wrangler
 assert not wrangler.session.is_in_score
 
@@ -70,7 +70,7 @@ def test_MaterialPackageWrangler_read_only_attributes_08():
     '''In-score wrangler.
     '''
 
-    studio = baca.scf.studio.Studio()
+    studio = scf.studio.Studio()
     wrangler = studio.material_package_wrangler
     wrangler.session.current_score_package_short_name = 'aracilik'
     assert wrangler.session.is_in_score

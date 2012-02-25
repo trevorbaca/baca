@@ -1,14 +1,14 @@
 # -*- encoding: utf-8 -*-
 from abjad.tools import iotools
 from abjad.tools import mathtools
-from baca.scf.core.SCFObject import SCFObject
-from baca.scf.wranglers.ChunkPackageWrangler import ChunkPackageWrangler
-from baca.scf.proxies.HomePackageProxy import HomePackageProxy
-from baca.scf.wranglers.MaterialPackageMakerWrangler import MaterialPackageMakerWrangler
-from baca.scf.wranglers.MaterialPackageWrangler import MaterialPackageWrangler
-from baca.scf.wranglers.MusicSpecifierModuleWrangler import MusicSpecifierModuleWrangler
-from baca.scf.wranglers.ScorePackageWrangler import ScorePackageWrangler
-from baca.scf.wranglers.StylesheetFileWrangler import StylesheetFileWrangler
+from scf.core.SCFObject import SCFObject
+from scf.wranglers.ChunkPackageWrangler import ChunkPackageWrangler
+from scf.proxies.HomePackageProxy import HomePackageProxy
+from scf.wranglers.MaterialPackageMakerWrangler import MaterialPackageMakerWrangler
+from scf.wranglers.MaterialPackageWrangler import MaterialPackageWrangler
+from scf.wranglers.MusicSpecifierModuleWrangler import MusicSpecifierModuleWrangler
+from scf.wranglers.ScorePackageWrangler import ScorePackageWrangler
+from scf.wranglers.StylesheetFileWrangler import StylesheetFileWrangler
 import subprocess
 
 

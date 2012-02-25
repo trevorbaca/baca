@@ -1,8 +1,8 @@
 from abjad.tools import pitchtools
-from baca.scf.editors.InteractiveEditor import InteractiveEditor
-from baca.scf.editors.ListEditor import ListEditor
-from baca.scf.editors.PitchRangeEditor import PitchRangeEditor
-from baca.scf.menuing.UserInputGetter import UserInputGetter
+from scf.editors.InteractiveEditor import InteractiveEditor
+from scf.editors.ListEditor import ListEditor
+from scf.editors.PitchRangeEditor import PitchRangeEditor
+from scf.menuing.UserInputGetter import UserInputGetter
 
 
 class PitchRangeInventoryEditor(ListEditor):

@@ -1,5 +1,5 @@
-from baca.scf.proxies.ChunkPackageProxy import ChunkPackageProxy
-from baca.scf.wranglers.PackageWrangler import PackageWrangler
+from scf.proxies.ChunkPackageProxy import ChunkPackageProxy
+from scf.wranglers.PackageWrangler import PackageWrangler
 import os
 
 

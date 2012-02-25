@@ -1,4 +1,4 @@
-from baca.scf.menuing.MenuObject import MenuObject
+from scf.menuing.MenuObject import MenuObject
 
 
 class MenuSectionAggregator(MenuObject):

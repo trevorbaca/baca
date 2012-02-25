@@ -1,4 +1,4 @@
-import baca
+import scf
 
 
 def test_MaterialPackageProxy_screenscrapes_01():
@@ -6,7 +6,7 @@ def test_MaterialPackageProxy_screenscrapes_01():
     '''
 
 
-    studio = baca.scf.studio.Studio()
+    studio = scf.studio.Studio()
     studio.run(user_input='all las m black q')
     
     assert studio.transcript[-2] == \
@@ -31,7 +31,7 @@ def test_MaterialPackageProxy_screenscrapes_02():
     '''Score material run independently.
     '''
 
-    material_proxy = baca.scf.proxies.MaterialPackageProxy('manos.mus.materials.black_pcs')
+    material_proxy = scf.proxies.MaterialPackageProxy('manos.mus.materials.black_pcs')
     material_proxy.run(user_input='q')
 
     assert material_proxy.transcript[-2] == \

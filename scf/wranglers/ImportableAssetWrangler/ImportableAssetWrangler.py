@@ -1,4 +1,4 @@
-from baca.scf.wranglers.AssetWrangler import AssetWrangler
+from scf.wranglers.AssetWrangler import AssetWrangler
 import os
 
 

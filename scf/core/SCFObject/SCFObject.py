@@ -2,7 +2,7 @@ from abjad.tools import iotools
 from abjad.tools import markuptools
 from abjad.tools import mathtools
 from abjad.tools import pitchtools
-from baca.scf.core.Session import Session
+from scf.core.Session import Session
 import inspect
 import os
 import pprint
@@ -59,8 +59,13 @@ class SCFObject(object):
 
     @property
     def scf_package_importable_name(self):
-        return self.dot_join([self.home_package_importable_name, 'scf'])
+        return 'scf'
 
+    @property
+    def scf_package_path_name(self):
+        return os.environ.get('SCF')
+
+    # TODO: replace with scf_package_path_name
     @property
     def scf_root_directory(self):
         return self.package_importable_name_to_path_name(self.scf_package_importable_name)
@@ -295,13 +300,13 @@ class SCFObject(object):
         return result
 
     def make_getter(self, where=None):
-        import baca
-        return baca.scf.menuing.UserInputGetter(where=where, session=self.session)
+        import scf
+        return scf.menuing.UserInputGetter(where=where, session=self.session)
 
     def make_menu(self, is_hidden=False, is_internally_keyed=False, is_keyed=True, 
         is_numbered=False, is_parenthetically_numbered=False, is_ranged=False, where=None):
-        import baca
-        menu = baca.scf.menuing.Menu(where=where, session=self.session)
+        import scf
+        menu = scf.menuing.Menu(where=where, session=self.session)
         section = menu.make_section(
             is_hidden=is_hidden, is_internally_keyed=is_internally_keyed, is_keyed=is_keyed, 
             is_numbered=is_numbered, is_parenthetically_numbered=is_parenthetically_numbered, 
@@ -321,7 +326,9 @@ class SCFObject(object):
         if package_importable_name is None:
             return
         package_importable_name_parts = package_importable_name.split('.')
-        if package_importable_name_parts[0] == self.home_package_importable_name:
+        if package_importable_name_parts[0] == 'scf':
+            directory_parts = [os.environ.get('SCF')] + package_importable_name_parts[1:]
+        elif package_importable_name_parts[0] == self.home_package_importable_name:
             directory_parts = [os.environ.get('BACA')] + package_importable_name_parts[1:]
         else:
             directory_parts = [self.scores_directory_name] + package_importable_name_parts[:]
@@ -340,7 +347,9 @@ class SCFObject(object):
         path_name = path_name.rstrip(os.path.sep)
         if path_name.endswith('.py'):
             path_name = path_name[:-3]
-        if path_name.startswith(self.home_package_path_name):
+        if path_name.startswith(self.scf_package_path_name):
+            prefix_length = len(os.path.dirname(self.scf_package_path_name)) + 1
+        elif path_name.startswith(self.home_package_path_name):
             prefix_length = len(os.path.dirname(self.home_package_path_name)) + 1
         elif path_name.startswith(self.scores_directory_name):
             prefix_length = len(self.scores_directory_name) + 1

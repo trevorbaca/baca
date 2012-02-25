@@ -1,27 +1,27 @@
-from baca.scf.proxies.PackageProxy import PackageProxy
+from scf.proxies.PackageProxy import PackageProxy
 import os
 
 
 class ScorePackageProxy(PackageProxy):
 
     def __init__(self, score_package_short_name=None, session=None):
-        import baca
+        import scf
         PackageProxy.__init__(self, score_package_short_name, session=session)
-        self._dist_proxy = baca.scf.proxies.DistDirectoryProxy(
+        self._dist_proxy = scf.proxies.DistDirectoryProxy(
             score_package_short_name=score_package_short_name, session=self.session)
-        self._etc_proxy = baca.scf.proxies.EtcDirectoryProxy(
+        self._etc_proxy = scf.proxies.EtcDirectoryProxy(
             score_package_short_name=score_package_short_name, session=self.session)
-        self._exg_proxy = baca.scf.proxies.ExgDirectoryProxy(
+        self._exg_proxy = scf.proxies.ExgDirectoryProxy(
             score_package_short_name=score_package_short_name, session=self.session)
-        self._mus_proxy = baca.scf.proxies.MusPackageProxy(
+        self._mus_proxy = scf.proxies.MusPackageProxy(
             score_package_short_name=score_package_short_name, session=self.session)
-        self._chunk_wrangler = baca.scf.wranglers.ChunkPackageWrangler(
+        self._chunk_wrangler = scf.wranglers.ChunkPackageWrangler(
             session=self.session)
-        self._material_package_wrangler = baca.scf.wranglers.MaterialPackageWrangler(
+        self._material_package_wrangler = scf.wranglers.MaterialPackageWrangler(
             session=self.session)
-        self._material_package_maker_wrangler = baca.scf.wranglers.MaterialPackageMakerWrangler(
+        self._material_package_maker_wrangler = scf.wranglers.MaterialPackageMakerWrangler(
             session=self.session)
-        self._music_specifier_module_wrangler = baca.scf.wranglers.MusicSpecifierModuleWrangler(
+        self._music_specifier_module_wrangler = scf.wranglers.MusicSpecifierModuleWrangler(
             session=self.session)
 
     ### READ-ONLY PUBLIC ATTRIBUTES ###
@@ -192,9 +192,9 @@ class ScorePackageProxy(PackageProxy):
         self.add_tag('forces_tagline', result)
 
     def edit_instrumentation_specifier_interactively(self):
-        import baca
+        import scf
         target = self.get_tag('instrumentation')
-        editor = baca.scf.editors.InstrumentationEditor(session=self.session, target=target)
+        editor = scf.editors.InstrumentationEditor(session=self.session, target=target)
         editor.run() # maybe check for backtracking after this?
         self.add_tag('instrumentation', editor.target)
 

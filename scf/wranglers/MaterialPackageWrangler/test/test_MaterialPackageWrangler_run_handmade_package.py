@@ -1,5 +1,5 @@
 from abjad.tools import notetools
-import baca
+import scf
 import py
 
 
@@ -7,13 +7,13 @@ def test_MaterialPackageWrangler_run_handmade_package_01():
     '''Make handmade package. Delete package.
     '''
     
-    studio = baca.scf.studio.Studio()
+    studio = scf.studio.Studio()
     assert not studio.package_exists('baca.materials.testnotes')
 
     try:
         studio.run(user_input='m h testnotes default default q')
         assert studio.package_exists('baca.materials.testnotes')
-        mpp = baca.scf.proxies.MaterialPackageProxy('baca.materials.testnotes')
+        mpp = scf.proxies.MaterialPackageProxy('baca.materials.testnotes')
         assert mpp.is_handmade and not mpp.is_data_only
         assert mpp.directory_contents == ['__init__.py', 'material_definition.py']
         assert mpp.has_readable_initializer
@@ -34,7 +34,7 @@ def test_MaterialPackageWrangler_run_handmade_package_02():
     Verify invalid initializer. Remove package.
     '''
 
-    studio = baca.scf.studio.Studio()
+    studio = scf.studio.Studio()
     assert not studio.package_exists('baca.materials.testnotes')
 
     try:
@@ -42,7 +42,7 @@ def test_MaterialPackageWrangler_run_handmade_package_02():
             'm h testnotes default default '
             'testnotes incanned canned_exception.py default q')
         assert studio.package_exists('baca.materials.testnotes')
-        mpp = baca.scf.proxies.MaterialPackageProxy('baca.materials.testnotes')
+        mpp = scf.proxies.MaterialPackageProxy('baca.materials.testnotes')
         assert mpp.directory_contents == ['__init__.py', 'material_definition.py']
         assert not mpp.has_readable_initializer
         assert mpp.has_readable_material_definition_module
@@ -63,7 +63,7 @@ def test_MaterialPackageWrangler_run_handmade_package_03():
     Verify initializer. Remove package.
     '''
 
-    studio = baca.scf.studio.Studio()
+    studio = scf.studio.Studio()
     assert not studio.package_exists('baca.materials.testnotes')
 
     try:
@@ -72,7 +72,7 @@ def test_MaterialPackageWrangler_run_handmade_package_03():
             'testnotes incanned canned_exception.py default '
             'inr yes yes default q')
         assert studio.package_exists('baca.materials.testnotes')
-        mpp = baca.scf.proxies.MaterialPackageProxy('baca.materials.testnotes')
+        mpp = scf.proxies.MaterialPackageProxy('baca.materials.testnotes')
         assert mpp.is_handmade and not mpp.is_data_only
         assert mpp.directory_contents == ['__init__.py', 'material_definition.py']
         assert mpp.has_readable_initializer
@@ -93,7 +93,7 @@ def test_MaterialPackageWrangler_run_handmade_package_04():
     Delete package." 
     '''
 
-    studio = baca.scf.studio.Studio()
+    studio = scf.studio.Studio()
     assert not studio.package_exists('baca.materials.testnotes')
 
     try:
@@ -102,7 +102,7 @@ def test_MaterialPackageWrangler_run_handmade_package_04():
             'testnotes mdcanned canned_testnotes_material_definition.py default '
             'omm default q')
         assert studio.package_exists('baca.materials.testnotes')
-        mpp = baca.scf.proxies.MaterialPackageProxy('baca.materials.testnotes')
+        mpp = scf.proxies.MaterialPackageProxy('baca.materials.testnotes')
         assert mpp.is_handmade and not mpp.is_data_only
         assert mpp.directory_contents == ['__init__.py', 
             'illustration_builder.py', 'material_definition.py', 'output_material.py']
@@ -124,7 +124,7 @@ def test_MaterialPackageWrangler_run_handmade_package_05():
     Remove package.
     '''
 
-    studio = baca.scf.studio.Studio()
+    studio = scf.studio.Studio()
     assert not studio.package_exists('baca.materials.testnotes')
 
     try:
@@ -132,7 +132,7 @@ def test_MaterialPackageWrangler_run_handmade_package_05():
             'm h testnotes default default '
             'testnotes mddelete remove default q')
         assert studio.package_exists('baca.materials.testnotes')
-        mpp = baca.scf.proxies.MaterialPackageProxy('baca.materials.testnotes')
+        mpp = scf.proxies.MaterialPackageProxy('baca.materials.testnotes')
         assert mpp.is_handmade and not mpp.is_data_only
         assert mpp.directory_contents == ['__init__.py']
         assert mpp.has_readable_initializer
@@ -153,7 +153,7 @@ def test_MaterialPackageWrangler_run_handmade_package_06():
     Delete package.
     '''
 
-    studio = baca.scf.studio.Studio()
+    studio = scf.studio.Studio()
     assert not studio.package_exists('baca.materials.testnotes')
 
     try:
@@ -161,7 +161,7 @@ def test_MaterialPackageWrangler_run_handmade_package_06():
             'm h testnotes default '
             'testnotes mdstub default q')
         assert studio.package_exists('baca.materials.testnotes')
-        mpp = baca.scf.proxies.MaterialPackageProxy('baca.materials.testnotes')
+        mpp = scf.proxies.MaterialPackageProxy('baca.materials.testnotes')
         assert mpp.is_handmade and not mpp.is_data_only
         assert mpp.directory_contents == ['__init__.py', 'material_definition.py']
         assert mpp.has_readable_initializer
@@ -182,7 +182,7 @@ def test_MaterialPackageWrangler_run_handmade_package_07():
     Remove package.
     '''
 
-    studio = baca.scf.studio.Studio()
+    studio = scf.studio.Studio()
     assert not studio.package_exists('baca.materials.testnotes')
 
     try:
@@ -192,7 +192,7 @@ def test_MaterialPackageWrangler_run_handmade_package_07():
             'omm default '
             'omdelete remove default q')
         assert studio.package_exists('baca.materials.testnotes')
-        mpp = baca.scf.proxies.MaterialPackageProxy('baca.materials.testnotes')
+        mpp = scf.proxies.MaterialPackageProxy('baca.materials.testnotes')
         assert mpp.is_handmade and not mpp.is_data_only
         assert mpp.directory_contents == ['__init__.py', 'material_definition.py']
         assert mpp.has_readable_initializer
@@ -213,7 +213,7 @@ def test_MaterialPackageWrangler_run_handmade_package_08():
     Examine package state. Remove package.
     '''
 
-    studio = baca.scf.studio.Studio()
+    studio = scf.studio.Studio()
     assert not studio.package_exists('baca.materials.testnotes')
 
     try:
@@ -221,7 +221,7 @@ def test_MaterialPackageWrangler_run_handmade_package_08():
             'm h testnotes default default '
             'testnotes mdcanned canned_exception.py default q')
         assert studio.package_exists('baca.materials.testnotes')
-        mpp = baca.scf.proxies.MaterialPackageProxy('baca.materials.testnotes')
+        mpp = scf.proxies.MaterialPackageProxy('baca.materials.testnotes')
         assert mpp.is_handmade and not mpp.is_data_only
         assert mpp.directory_contents == ['__init__.py', 'material_definition.py']
         assert mpp.has_readable_initializer
@@ -242,7 +242,7 @@ def test_MaterialPackageWrangler_run_handmade_package_09():
     Verify invalid output material module. Remove package.
     '''
 
-    studio = baca.scf.studio.Studio()
+    studio = scf.studio.Studio()
     assert not studio.package_exists('baca.materials.testnotes')
 
     try:
@@ -252,7 +252,7 @@ def test_MaterialPackageWrangler_run_handmade_package_09():
             'omm default '
             'omcanned canned_exception.py default q')
         assert studio.package_exists('baca.materials.testnotes')
-        mpp = baca.scf.proxies.MaterialPackageProxy('baca.materials.testnotes')
+        mpp = scf.proxies.MaterialPackageProxy('baca.materials.testnotes')
         assert mpp.is_handmade and not mpp.is_data_only
         assert mpp.directory_contents == ['__init__.py',
             'illustration_builder.py', 'material_definition.py', 'output_material.py']
@@ -274,7 +274,7 @@ def test_MaterialPackageWrangler_run_handmade_package_10():
     Make output data. Make PDF. Remove package.
     '''
 
-    studio = baca.scf.studio.Studio()
+    studio = scf.studio.Studio()
     assert not studio.package_exists('baca.materials.testnotes')
 
     try:
@@ -285,7 +285,7 @@ def test_MaterialPackageWrangler_run_handmade_package_10():
             'pdfm default '
             'q')
         assert studio.package_exists('baca.materials.testnotes')
-        mpp = baca.scf.proxies.MaterialPackageProxy('baca.materials.testnotes')
+        mpp = scf.proxies.MaterialPackageProxy('baca.materials.testnotes')
         assert mpp.is_handmade and not mpp.is_data_only
         assert mpp.directory_contents == [
             '__init__.py', 'illustration.ly', 'illustration.pdf', 

@@ -1,12 +1,12 @@
 # -*- encoding: utf-8 -*-
-import baca
+import scf
 
 
 def test_ScorePackageProxy_01():
     '''Main menu.
     '''
 
-    archipel = baca.scf.proxies.ScorePackageProxy('archipel')
+    archipel = scf.proxies.ScorePackageProxy('archipel')
     archipel.run(user_input='q')
 
     assert archipel.transcript[-2] == \
@@ -23,7 +23,7 @@ def test_ScorePackageProxy_02():
     '''Manage tags menu.
     '''
 
-    archipel = baca.scf.proxies.ScorePackageProxy('archipel')
+    archipel = scf.proxies.ScorePackageProxy('archipel')
     archipel.session.user_input = 'q'
     archipel.manage_tags()
     assert archipel.ts == (2,)
@@ -33,12 +33,12 @@ def test_ScorePackageProxy_03():
     '''Add and delete tag interactively.
     '''
 
-    archipel = baca.scf.proxies.ScorePackageProxy('archipel')
+    archipel = scf.proxies.ScorePackageProxy('archipel')
     archipel.session.user_input = 'add foo bar q'
     archipel.manage_tags()
     assert archipel.get_tag('foo') == 'bar'
 
-    archipel = baca.scf.proxies.ScorePackageProxy('archipel')
+    archipel = scf.proxies.ScorePackageProxy('archipel')
     archipel.session.user_input = 'del foo q'
     archipel.manage_tags()
     assert archipel.get_tag('foo') is None
@@ -48,7 +48,7 @@ def test_ScorePackageProxy_04():
     '''User 'studio' input results in return to studio main menu.
     '''
     
-    studio = baca.scf.studio.Studio()
+    studio = scf.studio.Studio()
     studio.run(user_input="l'arch studio q")
 
     assert studio.ts == (6, (0, 4))
@@ -61,7 +61,7 @@ def test_ScorePackageProxy_05():
     '''User 'studio' input terminates execution (when score not managed from studio).
     '''
 
-    archipel = baca.scf.proxies.ScorePackageProxy('archipel')
+    archipel = scf.proxies.ScorePackageProxy('archipel')
     archipel.run(user_input='studio')
 
     assert archipel.ts == (2,)
@@ -73,7 +73,7 @@ def test_ScorePackageProxy_06():
     '''User 'b' input returns to studio main menu.
     '''
 
-    studio = baca.scf.studio.Studio()
+    studio = scf.studio.Studio()
     studio.run(user_input="l'arch b q")
 
     assert studio.ts == (6, (0, 4))
@@ -86,7 +86,7 @@ def test_ScorePackageProxy_07():
     '''Shared session.
     '''
 
-    spp = baca.scf.proxies.ScorePackageProxy('archipel')
+    spp = scf.proxies.ScorePackageProxy('archipel')
 
     assert spp.session is spp.dist_proxy.session
     assert spp.session is spp.etc_proxy.session

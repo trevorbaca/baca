@@ -1,7 +1,7 @@
 from abjad.tools import iotools
 from abjad.tools import layouttools
 from abjad.tools import lilypondfiletools
-from baca.scf.wranglers.PackageWrangler import PackageWrangler
+from scf.wranglers.PackageWrangler import PackageWrangler
 import os
 
 
@@ -17,7 +17,7 @@ class MaterialPackageMakerWrangler(PackageWrangler):
 
     @property
     def base_class_name(self):
-        return self.dot_join(['baca.scf.makers', 'MaterialPackageMaker'])
+        return self.dot_join(['scf.makers', 'MaterialPackageMaker'])
 
     @property
     def breadcrumb(self):
@@ -26,12 +26,12 @@ class MaterialPackageMakerWrangler(PackageWrangler):
     ### PUBLIC METHODS ###
 
     def get_asset_proxy(self, package_importable_name):
-        from baca.scf.proxies.MaterialPackageProxy import MaterialPackageProxy
+        from scf.proxies.MaterialPackageProxy import MaterialPackageProxy
         material_package_proxy = MaterialPackageProxy(package_importable_name, session=self.session)
         material_package_maker_class_name = material_package_proxy.material_package_maker_class_name
         if material_package_maker_class_name is not None:
             material_package_maker_class = None
-            command = 'from baca.scf.makers import {} as material_package_maker_class'
+            command = 'from scf.makers import {} as material_package_maker_class'
             command = command.format(material_package_maker_class_name)
             exec(command)
             material_package_proxy = material_package_maker_class(
@@ -85,9 +85,9 @@ class MaterialPackageMakerWrangler(PackageWrangler):
         lines = []
         lines.append('from baca.music.foo import foo')
         lines.append('from baca.music.foo import make_illustration_from_output_material')
-        lines.append('from baca.scf.makers.MaterialPackageMaker import MaterialPackageMaker')
-        lines.append('from baca.scf.editors.UserInputWrapper import UserInputWrapper')
-        lines.append('import baca')
+        lines.append('from scf.makers.MaterialPackageMaker import MaterialPackageMaker')
+        lines.append('from scf.editors.UserInputWrapper import UserInputWrapper')
+        lines.append('import scf')
         lines.append('')
         lines.append('')
         lines.append('class {}(MaterialPackageMaker):'.format(package_short_name))
