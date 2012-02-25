@@ -140,8 +140,6 @@ class AssetProxy(SCFObject):
             result = self.rename_versioned_asset(new_path_name)
         else:
             result = self.rename_nonversioned_asset(new_path_name)
-        if result:
-            self._path_name = new_path_name
 
     def rename_interactively(self):
         getter = self.make_getter(where=self.where())
@@ -158,17 +156,17 @@ class AssetProxy(SCFObject):
         if self.rename(new_path_name):
             self.proceed('asset renamed.')
 
-    # TODO: write test
     def rename_nonversioned_asset(self, new_path_name):
         command = 'mv {} {}'.format(self.path_name, new_path_name)
         proc = subprocess.Popen(command, shell=True, stdout=subprocess.PIPE)
         proc.stdout.readline()
+        self._path_name = new_path_name
 
-    # TODO: write test
     def rename_versioned_asset(self, new_path_name):
         command = 'svn --force mv {} {}'.format(self.path_name, new_path_name)
         proc = subprocess.Popen(command, shell=True, stdout=subprocess.PIPE)
         proc.stdout.readline()
+        self._path_name = new_path_name
 
     def run(self, cache=False, clear=True, user_input=None):
         self.assign_user_input(user_input=user_input)

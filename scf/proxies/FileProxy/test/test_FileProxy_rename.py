@@ -43,14 +43,9 @@ def test_FileProxy_rename_02():
         assert file_proxy.is_versioned
         new_path_name = os.path.join(os.environ.get('SCF'), 'new_temporary_file.txt')
         file_proxy.rename(new_path_name)
-        # TODO: why doesn't the following assert work?
-        #assert not os.path.exists(path_name)
         assert os.path.exists(new_path_name)
-        file_proxy.remove()
+        assert file_proxy.path_name == new_path_name
     finally:
-        if os.path.exists(path_name):
-            os.remove(path_name)
-        if os.path.exists(new_path_name):
-            os.remove(new_path_name)
+        file_proxy.remove()
         assert not os.path.exists(path_name)
         assert not os.path.exists(new_path_name)
