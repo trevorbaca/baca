@@ -310,8 +310,9 @@ class SCFObject(object):
         return menu, section
 
     def module_importable_name_to_path_name(self, module_importable_name):
-        path_name = self.package_importable_name_to_path_name(module_importable_name) + '.py'
-        return path_name
+        if module_importable_name is not None:
+            path_name = self.package_importable_name_to_path_name(module_importable_name) + '.py'
+            return path_name
 
     def package_exists(self, package_importable_name):
         assert isinstance(package_importable_name, str)
@@ -455,7 +456,7 @@ class SCFObject(object):
         return base_name
 
     def strip_py_extension(self, string):
-        if string.endswith('.py'):
+        if isinstance(string, str) and string.endswith('.py'):
             return string[:-3]
         else:
             return string
