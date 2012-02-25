@@ -65,7 +65,6 @@ class ModuleProxy(ParsableFileProxy, ImportableAssetProxy):
         
     ### PUBLIC METHODS ###
     
-    # TODO: write test
     def human_readable_name_to_asset_short_name(self, human_readable_name):
         asset_short_name = ParsableFileProxy.human_readable_name_to_asset_short_name(
             self, human_readable_name)

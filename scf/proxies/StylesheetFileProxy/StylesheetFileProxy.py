@@ -63,11 +63,14 @@ class StylesheetFileProxy(FileProxy):
         section.append(('vi', 'vi stylesheet'))
         return menu
 
+    # TODO: remove in favor of AssetProxy.remove_interactively()
     def remove_stylesheet_interactively(self, prompt=True):
         self.remove()
         line = 'stylesheet deleted.'
         self.proceed(line, prompt=prompt)
 
+    # TODO: rename to rename_interactively() and subclass AssetProxy.rename_interactively()
+    # TODO: implement rename() to subclass AssetProxy.renam()
     def rename_stylesheet_interactively(self, prompt=True):
         getter = self.make_getter()
         getter.append_string('new file name')
@@ -78,6 +81,6 @@ class StylesheetFileProxy(FileProxy):
         if not new_short_name.endswith('.ly'):
             new_short_name = new_short_name + '.ly'
         new_path_name = os.path.join(self.parent_directory_name, new_short_name)
-        self.rename_file(new_path_name)
+        self.rename(new_path_name)
         line = 'stylesheet renamed.'
         self.proceed(line, prompt=prompt)

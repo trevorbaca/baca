@@ -64,6 +64,9 @@ class AssetProxy(SCFObject):
 
     ### PUBLIC METHODS ###
 
+    def conditionally_make_empty_asset(self, is_interactive=False):
+        self.print_implemented_on_child_classes()
+
     def fix(self):
         self.print_implemented_on_child_classes()
 

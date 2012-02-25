@@ -38,17 +38,19 @@ class FileProxy(AssetProxy):
         for section, is_sorted, blank_line_count  in self.sections:
             section[:] = []
 
-    def conditionally_make_file(self):
+    # TODO: write test
+    def conditionally_make_empty_asset(self, is_interactive=False):
         if not os.path.exists(self.path_name):
             file_reference = file(self.path_name, 'w')
             file_reference.write('')
             file_reference.close()
+        self.proceed(prompt=is_interactive)
         
-    # TODO: move up to AssetProxy.copy_asset()
+    # TODO: move up to AssetProxy.copy()
     def copy_file(self, new_path_name):
         shutil.copyfile(self.path_name, new_path_name)
 
-    # TODO: move up to AssetProxy.copy_asset_interactively()
+    # TODO: move up to AssetProxy.copy_interactively()
     def copy_file_interactively(self, prompt=True):
         getter = self.make_getter()
         getter.append_string('new file name')
@@ -81,11 +83,6 @@ class FileProxy(AssetProxy):
         file_reference.close()
         return False
 
-    # TODO: move up to AssetProxy
-    def rename_file(self, new_path_name):
-        os.rename(self.path_name, new_path_name)
-        self._path_name = new_path_name
-        
     def touch(self):
         os.system('touch {}'.format(self.path_name))
 
@@ -93,6 +90,7 @@ class FileProxy(AssetProxy):
         os.system('vi -R {}'.format(self.path_name))
 
     # TODO: write test
+    # TODO: rename to write_canned_asset_to_disk_interactively
     def write_canned_file_to_disk(self, prompt=True):
         getter = self.make_getter(where=self.where())
         getter.append_string('name of canned file')

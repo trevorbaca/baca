@@ -11,7 +11,7 @@ class MusicSpecifierModuleProxy(ModuleProxy):
         self.load_target_into_memory()
         self._editor = self.editor_class(target=self.target_in_memory, session=self.session)
         self.target_lines = []
-        #self.conditionally_make_file()
+        #self.conditionally_make_empty_asset()
         #self.parse() 
 
     ### CLASS ATTRIUBTES ###
