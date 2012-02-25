@@ -33,7 +33,10 @@ class FileProxy(AssetProxy):
             file_reference.write('')
             file_reference.close()
         self.proceed(prompt=is_interactive)
-        
+
+    def display_formatted_lines(self):
+        self.display(self.formatted_lines)
+
     def edit(self):
         os.system('vi + {}'.format(self.path_name))
 
@@ -46,19 +49,11 @@ class FileProxy(AssetProxy):
         file_reference.close()
         return False
 
-    def print_to_screen(self):
-        # TODO: reimplement with self.display()
-        print self.format
-
-    # TODO: move up to asset proxy
-    def touch(self):
-        os.system('touch {}'.format(self.path_name))
-
     def view(self):
         os.system('vi -R {}'.format(self.path_name))
 
     # TODO: write test
-    # TODO: rename to write_canned_asset_to_disk_interactively
+    # TODO: rename to write_boilerplate_to_disk_interactively
     def write_canned_file_to_disk(self, prompt=True):
         getter = self.make_getter(where=self.where())
         getter.append_string('name of canned file')

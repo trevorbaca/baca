@@ -140,11 +140,11 @@ def test_InstrumentationEditor_round_trips_01():
 
     entry_index = entry_index + 1
     assert transcript[entry_index] == \
-    ['Old number> 1', '']
+    ['Old number> 1']
 
     entry_index = entry_index + 1
     assert transcript[entry_index] == \
-    ['New number> 2', '']
+    ['New number> 2']
 
     entry_index = entry_index + 1
     assert transcript[entry_index] == \
@@ -164,7 +164,7 @@ def test_InstrumentationEditor_round_trips_01():
 
     entry_index = entry_index + 1
     assert transcript[entry_index] == \
-    ['Performers> 2', '']
+    ['Performers> 2']
 
     entry_index = entry_index + 1
     assert transcript[entry_index] == \

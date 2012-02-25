@@ -19,7 +19,8 @@ class UserInputGetter(MenuSectionAggregator):
         self._tests = []
         self.allow_none = False
         self.capitalize_prompts = True
-        self.include_newlines = True
+        #self.include_newlines = True
+        self.include_newlines = False
         self.indent_level = 0
         self.number_prompts = False
         self.prompt_character = '>'
@@ -178,6 +179,11 @@ class UserInputGetter(MenuSectionAggregator):
         message = 'value for {!r} must be underscore-delimited lowercase package name of length at least 3.'
         self.append_something(spaced_attribute_name, message, default=default)
         self.tests.append(predicates.is_underscore_delimited_lowercase_package_name)
+
+    def append_underscore_delimited_lowercase_file_name(self, spaced_attribute_name, default=None):
+        message = 'value for {!r} must be underscore-delimited lowercase file name.'
+        self.append_something(spaced_attribute_name, message, default=default)
+        self.tests.append(iotools.is_underscore_delimited_lowercase_file_name)
 
     def append_underscore_delimited_lowercase_file_name_with_extension(self, spaced_attribute_name, default=None):
         message = 'value for {!r} must be underscore-delimited lowercase file name with extension.'

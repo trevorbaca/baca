@@ -79,7 +79,6 @@ class AssetProxy(SCFObject):
     def copy(self, new_path_name):
         shutil.copyfile(self.path_name, new_path_name)
 
-    # TODO: write test
     def copy_interactively(self, user_input=None):
         self.assign_user_input(user_input=user_input)
         getter = self.make_getter()
@@ -87,9 +86,11 @@ class AssetProxy(SCFObject):
         result = getter.run()
         if self.backtrack():
             return
-        new_asset_short_name = result.lower()
-        new_asset_short_name = asset_short_name.replace(' ', '_')
+        new_asset_short_name = self.human_readable_name_to_asset_short_name(result)
         new_path_name = os.path.join(self.parent_directory_name, new_asset_short_name)
+        self.display('new path will be {}'.format(new_path_name))
+        if not self.confirm():
+            return
         self.copy(new_path_name)
         self.proceed('asset copied.')
 
@@ -267,3 +268,6 @@ class AssetProxy(SCFObject):
         lines.append('')
         self.display(lines)
         self.proceed(prompt=is_interactive)
+
+    def touch(self):
+        os.system('touch {}'.format(self.path_name))

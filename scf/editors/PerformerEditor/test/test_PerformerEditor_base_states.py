@@ -26,7 +26,7 @@ def test_PerformerEditor_base_states_01():
 
     entry_index = entry_index + 1
     assert transcript[entry_index] == \
-    ['Performer name> foo', '']
+    ['Performer name> foo']
 
     entry_index = entry_index + 1
     assert transcript[entry_index] == \
@@ -44,7 +44,7 @@ def test_PerformerEditor_base_states_01():
 
     entry_index = entry_index + 1
     assert transcript[entry_index] == \
-    ['New performer name> bar', '']
+    ['New performer name> bar']
 
     entry_index = entry_index + 1
     assert transcript[entry_index] == \
@@ -62,7 +62,7 @@ def test_PerformerEditor_base_states_01():
 
     entry_index = entry_index + 1
     assert transcript[entry_index] == \
-    ['New performer name> None', '']
+    ['New performer name> None']
 
     entry_index = entry_index + 1
     assert transcript[entry_index] == \
