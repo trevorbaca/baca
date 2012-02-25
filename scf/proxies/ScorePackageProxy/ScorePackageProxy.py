@@ -289,7 +289,7 @@ class ScorePackageProxy(PackageProxy):
             self.chunk_wrangler.run(head=self.short_name)
         elif  result == 'm':
             self.material_package_wrangler.run(head=self.short_name)
-        elif result == 'ms':
+        elif result == 'p':
             self.music_specifier_module_wrangler.run()
         elif result == 's':
             self.manage_setup(cache=True)
@@ -324,7 +324,7 @@ class ScorePackageProxy(PackageProxy):
         section = menu.make_section()
         section.append(('h', 'chunks'))
         section.append(('m', 'materials'))
-        section.append(('ms', 'music specifiers'))
+        section.append(('p', 'music specifiers'))
         section.append(('s', 'setup'))
         hidden_section = menu.make_section(is_hidden=True)
         hidden_section.append(('fix', 'fix package structure'))
