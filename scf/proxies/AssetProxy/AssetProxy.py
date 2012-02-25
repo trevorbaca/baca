@@ -273,18 +273,23 @@ class AssetProxy(SCFObject):
         os.system('touch {}'.format(self.path_name))
 
     # TODO: write test
-    def write_boilerplate_to_disk_interactively(self, prompt=True):
+    def write_boilerplate_asset_to_disk_interactively(self, user_input=None):
+        self.assign_user_input(user_input=user_input)
         getter = self.make_getter(where=self.where())
-        getter.append_string('name of canned file')
+        getter.append_underscore_delimited_lowercase_file_name('name of boilerplate asset')
         self.push_backtrack()
-        canned_file_name = getter.run()
+        boilerplate_asset_name = getter.run()
         self.pop_backtrack()
         if self.backtrack():
             return
-        if not os.path.exists(canned_file_name):
-            canned_file_name = os.path.join(self.boilerplate_directory, canned_file_name)
-        if not os.path.exists(canned_file_name):
-            self.proceed('canned file {!r} does not exist.'.format(canned_file_name), prompt=prompt)
+        if self.write_boilerplate_asset_to_disk(boilerplate_asset_name):
+            self.proceed('boilerplate asset copied.')
         else:
-            shutil.copyfile(canned_file_name, self.path_name)
-            self.proceed('canned file copied.', prompt=prompt)
+            self.proceed('boilerplate asset {!r} does not exist.'.format(boilerplate_asset_name))
+
+    def write_boilerplate_asset_to_disk(self, boilerplate_asset_name):
+        if not os.path.exists(boilerplate_asset_name):
+            boilerplate_asset_name = os.path.join(self.boilerplate_directory_name, boilerplate_asset_name)
+        if os.path.exists(boilerplate_asset_name):
+            shutil.copyfile(boilerplate_asset_name, self.path_name)
+            return True

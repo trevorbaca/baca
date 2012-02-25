@@ -519,7 +519,7 @@ class MaterialPackageProxy(PackageProxy):
         elif result == 'uimv':
             self.user_input_module_proxy.view()
         elif result == 'mdcanned':
-            self.material_definition_module_proxy.write_boilerplate_to_disk_interactively(prompt=True)
+            self.material_definition_module_proxy.write_boilerplate_asset_to_disk_interactively(prompt=True)
         elif result == 'mddelete':
             self.remove_material_definition_module(prompt=True)
         elif result == 'mde':
@@ -551,7 +551,7 @@ class MaterialPackageProxy(PackageProxy):
         elif result == 'omi':
             self.edit_output_material_interactively()
         elif result == 'omcanned':
-            self.output_material_module_proxy.write_boilerplate_to_disk_interactively(prompt=True)
+            self.output_material_module_proxy.write_boilerplate_asset_to_disk_interactively(prompt=True)
         elif result == 'omdelete':
             self.remove_output_material_module(prompt=True)
         elif result == 'omv':
@@ -577,7 +577,7 @@ class MaterialPackageProxy(PackageProxy):
         elif result == 'inv':
             self.initializer_file_proxy.view()
         elif result == 'incanned':
-            self.initializer_file_proxy.write_boilerplate_to_disk_interactively(prompt=True)
+            self.initializer_file_proxy.write_boilerplate_asset_to_disk_interactively(prompt=True)
         elif result == 'instub':
             self.initializer_file_proxy.write_stub_file_to_disk(prompt=True)
         elif result == 'ren':

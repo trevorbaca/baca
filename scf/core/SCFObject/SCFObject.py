@@ -27,7 +27,7 @@ class SCFObject(object):
         return
 
     @property
-    def boilerplate_directory(self):
+    def boilerplate_directory_name(self):
         return os.path.join(self.scf_package_path_name, 'boilerplate')
 
     @property
