@@ -6,6 +6,11 @@ from baca.scf.editors.PerformerEditor import PerformerEditor
 
 class InstrumentationEditor(InteractiveEditor):
 
+    ### CLASS ATTRIBUTES ###
+
+    target_class = scoretools.InstrumentationSpecifier
+    target_item_class = scoretools.Performer
+
     ### READ-ONLY PUBLIC ATTRIBUTES ###
 
     @property
@@ -19,10 +24,6 @@ class InstrumentationEditor(InteractiveEditor):
             performer_editor = PerformerEditor(session=self.session, target=performer)
             result.extend(performer_editor.summary_lines)
         return result
-
-    target_class = scoretools.InstrumentationSpecifier
-
-    target_item_class = scoretools.Performer
 
     @property
     def target_items(self):

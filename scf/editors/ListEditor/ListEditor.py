@@ -14,20 +14,34 @@ class ListEditor(InteractiveEditor):
     ### READ-ONLY PUBLIC ATTRIBUTES ###
 
     @property
+    def breadcrumb(self):
+        return list
+
+    @property
+    def summary_lines(self):
+        result = []
+        for target_item in self.target_items:
+            result.append(repr(target_item))
+        return result
+
+    @property
     def target_items(self):
         return self.target
 
     ### PUBLIC METHODS ###
 
     def add_target_item_interactively(self):
-        getter = self.make_getter(where=self.where())
-        self.target_item_getter_configuration_method(getter, self.target_item_identifier)
-        self.push_backtrack()
-        target_item_initialization_token = getter.run()
-        self.pop_backtrack()
-        if self.backtrack():
-            return
-        target_item = self.target_item_class(target_item_initialization_token)
+        if self.target_item_getter_configuration_method:
+            getter = self.make_getter(where=self.where())
+            self.target_item_getter_configuration_method(getter, self.target_item_identifier)
+            self.push_backtrack()
+            target_item_initialization_token = getter.run()
+            self.pop_backtrack()
+            if self.backtrack():
+                return
+            target_item = self.target_item_class(target_item_initialization_token)
+        else:
+            target_item = self.target_item_class()
         self.target_items.append(target_item)
 
     def edit_target_item_interactively(self, target_item_number):
@@ -58,7 +72,7 @@ class ListEditor(InteractiveEditor):
         menu, section = self.make_menu(where=self.where(), is_numbered=True)
         section.tokens = self.summary_lines
         section.return_value_attribute = 'number'
-        section = menu.make_section(is_keyed=False)
+        section = menu.make_section()
         section.append(('add', 'add {}'.format(self.target_item_identifier)))
         if 0 < len(self.target_items):
             section.append(('rm', 'delete {}'.format(self.target_items_identifier)))

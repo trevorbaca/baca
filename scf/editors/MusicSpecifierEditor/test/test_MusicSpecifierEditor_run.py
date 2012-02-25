@@ -9,9 +9,9 @@ def test_MusicSpecifierEditor_run_01():
     r'''
     MusicSpecifier(
         music_specifier_name='blue music',
-        performer_contribution_specifiers=PerformerContributionSpecifierList(
-            ),
+        performer_contribution_specifiers=PerformerContributionSpecifierList([
+            ]),
         )
     '''
 
-    assert editor.target.format == "MusicSpecifier(\n\tmusic_specifier_name='blue music',\n\tperformer_contribution_specifiers=PerformerContributionSpecifierList(\n\t\t),\n\t)"
+    assert editor.target.format == "MusicSpecifier(\n\tmusic_specifier_name='blue music',\n\tperformer_contribution_specifiers=PerformerContributionSpecifierList([\n\t\t]),\n\t)"

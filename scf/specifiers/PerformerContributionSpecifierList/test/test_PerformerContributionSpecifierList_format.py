@@ -16,7 +16,7 @@ def test_PerformerContributionSpecifierList_format_01():
     pcsl = baca.scf.specifiers.PerformerContributionSpecifierList([pcs_1, pcs_2])
 
     '''
-    PerformerContributionSpecifierList(
+    PerformerContributionSpecifierList([
         PerformerContributionSpecifier(
             articulation_specifier='foo',
             clef_specifier='bar',
@@ -27,7 +27,7 @@ def test_PerformerContributionSpecifierList_format_01():
             clef_specifier='blah',
             directive_specifier=['durian'],
             ),
-        )
+        ])
     '''
 
-    assert pcsl.format == "PerformerContributionSpecifierList(\n\tPerformerContributionSpecifier(\n\t\tarticulation_specifier='foo',\n\t\tclef_specifier='bar',\n\t\tdirective_specifier=['apple', 'banana', 'cherry'],\n\t\t),\n\tPerformerContributionSpecifier(\n\t\tarticulation_specifier='blee',\n\t\tclef_specifier='blah',\n\t\tdirective_specifier=['durian'],\n\t\t),\n\t)"
+    assert pcsl.format == "PerformerContributionSpecifierList([\n\tPerformerContributionSpecifier(\n\t\tarticulation_specifier='foo',\n\t\tclef_specifier='bar',\n\t\tdirective_specifier=['apple', 'banana', 'cherry'],\n\t\t),\n\tPerformerContributionSpecifier(\n\t\tarticulation_specifier='blee',\n\t\tclef_specifier='blah',\n\t\tdirective_specifier=['durian'],\n\t\t),\n\t])"

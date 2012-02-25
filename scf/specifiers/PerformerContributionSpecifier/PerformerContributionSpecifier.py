@@ -34,3 +34,11 @@ class PerformerContributionSpecifier(Specifier):
         self.staff_specifier = staff_specifier
         self.trill_specifier = trill_specifier
         self.troping_specifier=troping_specifier
+
+    ### OVERLOADS ###
+
+    def __repr__(self):
+        if self.performer_specifier:
+            return '{}({!r})'.format(self.class_name, self.performer_specifier)
+        else:
+            return '{}()'.format(self.class_name)

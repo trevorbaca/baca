@@ -7,7 +7,7 @@ from baca.scf.editors.PerformerContributionSpecifierEditor import PerformerContr
 class PerformerContributionSpecifierListEditor(ListEditor):
 
     target_class = PerformerContributionSpecifierList
-    #target_item_getter_configuration_method = None
+    target_item_getter_configuration_method = None
     target_item_class = PerformerContributionSpecifier
     target_item_editor_class = PerformerContributionSpecifierEditor
     target_item_identifier = 'performer contribution specifier'

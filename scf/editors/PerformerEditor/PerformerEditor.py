@@ -8,6 +8,10 @@ from baca.scf.editors.InstrumentEditor import InstrumentEditor
 
 class PerformerEditor(InteractiveEditor):
 
+    ### CLASS ATTRIBUTES ###
+
+    target_class = scoretools.Performer
+
     ### READ-ONLY PUBLIC ATTRIBUTES ###
 
     @property
@@ -33,8 +37,6 @@ class PerformerEditor(InteractiveEditor):
             result = '{}: {}'.format(self.target.name, instruments)
         result = [result]
         return result
-
-    target_class = scoretools.Performer
 
     ### PUBLIC METHODS ###
 

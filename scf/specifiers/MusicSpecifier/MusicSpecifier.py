@@ -21,5 +21,6 @@ class MusicSpecifier(Specifier):
         'from abjad import *',
         'from abjad.tools import contexttools',
         'from baca.scf.specifiers.MusicSpecifier import MusicSpecifier',
+        'from baca.scf.specifiers.PerformerContributionSpecifier import PerformerContributionSpecifier',
         'from baca.scf.specifiers.PerformerContributionSpecifierList import PerformerContributionSpecifierList',
         ]
