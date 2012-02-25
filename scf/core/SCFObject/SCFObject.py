@@ -359,10 +359,10 @@ class SCFObject(object):
     def pluralize_string(self, string):
         if string.endswith('y'):
             return string[:-1] + 'ies'
-        elif string.endswith('s', 'sh', 'x', 'z'):
+        elif string.endswith(('s', 'sh', 'x', 'z')):
             return string + 'es'
         else:
-            return string
+            return string + 's'
         
     def pop_backtrack(self):
         return self.session.backtracking_stack.pop()

@@ -27,13 +27,10 @@ class AssetProxy(SCFObject):
     ### READ-ONLY PUBLIC ATTRIBUTES ###
 
     @property
-    def plural_generic_class_name(self):
-        return self.pluralize_string(self.generic_class_name)
-
-    @property
     def human_readable_name(self):
         return self.short_name
 
+    # TODO: change to self.is_versioned
     @property
     def is_in_repository(self):
         if self.path_name is None:
@@ -47,27 +44,35 @@ class AssetProxy(SCFObject):
             return True
         
     @property
+    def parent_directory_name(self):
+        if self.path_name:
+            return os.path.dirname(self.path_name)
+
+    @property
     def path_name(self):
         return self._path_name
 
     @property
-    def parent_directory_name(self):
-        return os.path.dirname(self.path_name)
+    def plural_generic_class_name(self):
+        return self.pluralize_string(self.generic_class_name)
 
     @property
     def short_name(self):
-        return self.path_name.split(os.path.sep)[-1]
+        if self.path_name:
+            return self.path_name.split(os.path.sep)[-1]
 
     @property
     def short_name_without_extension(self):
-        if '.' in self.short_name:
-            return self.short_name[:self.short_name.rdindex('.')]
-        else:
-            return self.short_name
+        if self.short_name:
+            if '.' in self.short_name:
+                return self.short_name[:self.short_name.rdindex('.')]
+            else:
+                return self.short_name
 
     @property
     def svn_add_command(self):
-        return 'svn add {}'.format(self.path_name)
+        if self.path_name:
+            return 'svn add {}'.format(self.path_name)
 
     ### PUBLIC METHODS ###
 
@@ -100,50 +105,6 @@ class AssetProxy(SCFObject):
         asset_short_name = asset_short_name.replace(' ', '_')
         return asset_short_name
     
-    def rename(self, new_path_name, is_interactive=False):
-        if self.is_in_repository:
-            self.rename_versioned_asset(new_path_name, is_interactive=is_interactive)
-        else:
-            self.rename_nonversioned_asset(new_path_name, is_interactive=is_interactive)
-
-    def rename_interactively(self):
-        getter = self.make_getter(where=self.where())
-        getter.append_space_delimited_lowercase_string('new human-readable name')
-        getter.include_newlines = False
-        result = getter.run()
-        if self.backtrack():
-            return
-        asset_short_name = self.human_readable_name_to_asset_short_name(result)
-        new_path_name = os.path.join(self.parent_directory_name, asset_short_name)
-        self.display('new path name will be: "{}"\n'.format(new_path_name))
-        if not self.confirm():
-            return
-        self.rename(new_path_name, is_interactive=True)
-
-    # TODO: write test
-    def rename_nonversioned_asset(self, new_path_name, is_interactive=False):
-        command = 'mv {} {}'.format(self.path_name, new_path_name)
-        proc = subprocess.Popen(command, shell=True, stdout=subprocess.PIPE)
-        proc.stdout.readline()
-        if is_interactive:
-            lines = []
-            lines.append('renamed {}.'.format(self.path_name))
-            lines.append('')
-            self.display(lines)
-        self.proceed(prompt=is_interactive)
-
-    # TODO: write test
-    def rename_versioned_asset(self, new_path_name, is_interactive=False):
-        command = 'svn --force mv {} {}'.format(self.path_name, new_path_name)
-        proc = subprocess.Popen(command, shell=True, stdout=subprocess.PIPE)
-        proc.stdout.readline()
-        if is_interactive:
-            lines = []
-            lines.append('renamed {}.'.format(self.path_name))
-            lines.append('')
-            self.display(lines)
-        self.proceed(prompt=is_interactive)
-
     def remove(self, is_interactive=False):
         if self.is_in_repository:
             result = self.remove_versioned_asset(is_interactive=is_interactive)
@@ -192,6 +153,50 @@ class AssetProxy(SCFObject):
             return True
         return False
 
+    def rename(self, new_path_name, is_interactive=False):
+        if self.is_in_repository:
+            self.rename_versioned_asset(new_path_name, is_interactive=is_interactive)
+        else:
+            self.rename_nonversioned_asset(new_path_name, is_interactive=is_interactive)
+
+    def rename_interactively(self):
+        getter = self.make_getter(where=self.where())
+        getter.append_space_delimited_lowercase_string('new human-readable name')
+        getter.include_newlines = False
+        result = getter.run()
+        if self.backtrack():
+            return
+        asset_short_name = self.human_readable_name_to_asset_short_name(result)
+        new_path_name = os.path.join(self.parent_directory_name, asset_short_name)
+        self.display('new path name will be: "{}"\n'.format(new_path_name))
+        if not self.confirm():
+            return
+        self.rename(new_path_name, is_interactive=True)
+
+    # TODO: write test
+    def rename_nonversioned_asset(self, new_path_name, is_interactive=False):
+        command = 'mv {} {}'.format(self.path_name, new_path_name)
+        proc = subprocess.Popen(command, shell=True, stdout=subprocess.PIPE)
+        proc.stdout.readline()
+        if is_interactive:
+            lines = []
+            lines.append('renamed {}.'.format(self.path_name))
+            lines.append('')
+            self.display(lines)
+        self.proceed(prompt=is_interactive)
+
+    # TODO: write test
+    def rename_versioned_asset(self, new_path_name, is_interactive=False):
+        command = 'svn --force mv {} {}'.format(self.path_name, new_path_name)
+        proc = subprocess.Popen(command, shell=True, stdout=subprocess.PIPE)
+        proc.stdout.readline()
+        if is_interactive:
+            lines = []
+            lines.append('renamed {}.'.format(self.path_name))
+            lines.append('')
+            self.display(lines)
+        self.proceed(prompt=is_interactive)
+
     def run(self, cache=False, clear=True, user_input=None):
         self.assign_user_input(user_input=user_input)
         self.cache_breadcrumbs(cache=cache)
@@ -220,11 +225,13 @@ class AssetProxy(SCFObject):
         self.proceed(line, prompt=prompt)
 
     def svn_add(self, is_interactive=False):
-        self.display(self.path_name)
+        if is_interactive:
+            self.display(self.path_name)
         proc = subprocess.Popen(self.svn_add_command, shell=True, stdout=subprocess.PIPE)
         lines = [line.strip() for line in proc.stdout.readlines()]
         lines.append('')
-        self.display(lines)
+        if is_interactive:
+            self.display(lines)
         self.proceed(prompt=is_interactive)
 
     def svn_ci(self, commit_message=None, is_interactive=True):
@@ -270,6 +277,13 @@ class AssetProxy(SCFObject):
     def touch(self):
         os.system('touch {}'.format(self.path_name))
 
+    def write_boilerplate_asset_to_disk(self, boilerplate_asset_name):
+        if not os.path.exists(boilerplate_asset_name):
+            boilerplate_asset_name = os.path.join(self.boilerplate_directory_name, boilerplate_asset_name)
+        if os.path.exists(boilerplate_asset_name):
+            shutil.copyfile(boilerplate_asset_name, self.path_name)
+            return True
+
     def write_boilerplate_asset_to_disk_interactively(self, user_input=None):
         self.assign_user_input(user_input=user_input)
         getter = self.make_getter(where=self.where())
@@ -283,10 +297,3 @@ class AssetProxy(SCFObject):
             self.proceed('boilerplate asset copied.')
         else:
             self.proceed('boilerplate asset {!r} does not exist.'.format(boilerplate_asset_name))
-
-    def write_boilerplate_asset_to_disk(self, boilerplate_asset_name):
-        if not os.path.exists(boilerplate_asset_name):
-            boilerplate_asset_name = os.path.join(self.boilerplate_directory_name, boilerplate_asset_name)
-        if os.path.exists(boilerplate_asset_name):
-            shutil.copyfile(boilerplate_asset_name, self.path_name)
-            return True
