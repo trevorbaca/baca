@@ -51,21 +51,3 @@ class FileProxy(AssetProxy):
 
     def view(self):
         os.system('vi -R {}'.format(self.path_name))
-
-    # TODO: write test
-    # TODO: rename to write_boilerplate_to_disk_interactively
-    def write_canned_file_to_disk(self, prompt=True):
-        getter = self.make_getter(where=self.where())
-        getter.append_string('name of canned file')
-        self.push_backtrack()
-        canned_file_name = getter.run()
-        self.pop_backtrack()
-        if self.backtrack():
-            return
-        if not os.path.exists(canned_file_name):
-            canned_file_name = os.path.join(self.boilerplate_directory, canned_file_name)
-        if not os.path.exists(canned_file_name):
-            self.proceed('canned file {!r} does not exist.'.format(canned_file_name), prompt=prompt)
-        else:
-            shutil.copyfile(canned_file_name, self.path_name)
-            self.proceed('canned file copied.', prompt=prompt)
