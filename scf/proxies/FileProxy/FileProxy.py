@@ -6,37 +6,26 @@ import shutil
 # TODO: write all tests
 class FileProxy(AssetProxy):
     
-    ### OVERLOADS ###
-
-    def __repr__(self):
-        return '{}({!r})'.format(self.class_name, self.path_name)
-
     ### READ-ONLY PUBLIC ATTRIBUTES ###
 
     @property
     def file_lines(self):
-        file_pointer = file(self.path_name)
-        file_lines = file_pointer.readlines()
-        file_pointer.close()
-        return file_lines
+        result = []
+        if self.path_name:
+            file_pointer = file(self.path_name)
+            result.extend(file_pointer.readlines())
+            file_pointer.close()
+        return result
 
     @property
-    def is_exceptionless(self):
-        try:
-            self.execute_file_lines()
-            return True
-        except:
-            return False
+    def format(self):
+        return ''.join(self.formatted_lines)
 
     @property
-    def sections(self):
-        return ()
+    def formatted_lines(self):
+        return self.file_lines
 
     ### PUBLIC METHODS ###
-
-    def clear(self):
-        for section, is_sorted, blank_line_count  in self.sections:
-            section[:] = []
 
     # TODO: write test
     def conditionally_make_empty_asset(self, is_interactive=False):
@@ -65,12 +54,7 @@ class FileProxy(AssetProxy):
     def edit(self):
         os.system('vi + {}'.format(self.path_name))
 
-    def execute_file_lines(self):
-        file_pointer = open(self.path_name, 'r')
-        file_contents_string = file_pointer.read()
-        file_pointer.close()
-        exec(file_contents_string)
-
+    # TODO: move up to AssetProxy
     def fix(self):
         self.print_implemented_on_child_classes()
 
@@ -83,6 +67,11 @@ class FileProxy(AssetProxy):
         file_reference.close()
         return False
 
+    def print_to_screen(self):
+        # TODO: reimplement with self.display()
+        print self.format
+
+    # TODO: move up to asset proxy
     def touch(self):
         os.system('touch {}'.format(self.path_name))
 

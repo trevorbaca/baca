@@ -17,6 +17,14 @@ class AssetProxy(SCFObject):
         UserInputGetter.append_underscore_delimited_lowercase_file_name_with_extension
     generic_class_name = 'asset'
 
+    ### OVERLOADS ###
+
+    def __repr__(self):
+        if self.path_name:
+            return '{}({!r})'.format(self.class_name, self.path_name)
+        else:
+            return '{}()'.format(self.class_name)
+
     ### READ-ONLY PUBLIC ATTRIBUTES ###
 
     @property
