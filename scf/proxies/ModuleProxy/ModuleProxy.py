@@ -19,7 +19,7 @@ class ModuleProxy(ParsableFileProxy, ImportableAssetProxy):
 
     ### CLASS ATTRIBUTES ###
 
-    asset_short_name_getter_method = UserInputGetter.append_underscore_delimited_lowercase_string
+    generic_class_name = 'module'
 
     ### READ-ONLY ATTRIBUTES ###
 

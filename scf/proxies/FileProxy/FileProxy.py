@@ -1,11 +1,13 @@
 from scf.proxies.AssetProxy import AssetProxy
 import os
-import shutil
 
 
-# TODO: write all tests
 class FileProxy(AssetProxy):
     
+    ### CLASS ATTRIBUTES ###
+
+    generic_class_name = 'file'
+
     ### READ-ONLY PUBLIC ATTRIBUTES ###
 
     @property

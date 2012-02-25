@@ -14,8 +14,6 @@ class AssetProxy(SCFObject):
 
     ### CLASS ATTRIBUTES ###
 
-    asset_short_name_getter_method = \
-        UserInputGetter.append_underscore_delimited_lowercase_file_name_with_extension
     generic_class_name = 'asset'
 
     ### OVERLOADS ###
@@ -272,7 +270,6 @@ class AssetProxy(SCFObject):
     def touch(self):
         os.system('touch {}'.format(self.path_name))
 
-    # TODO: write test
     def write_boilerplate_asset_to_disk_interactively(self, user_input=None):
         self.assign_user_input(user_input=user_input)
         getter = self.make_getter(where=self.where())
