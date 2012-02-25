@@ -203,6 +203,7 @@ class SCFObject(object):
     def confirm(self, prompt_string='ok?', include_chevron=False):
         getter = self.make_getter(where=self.where())
         getter.append_yes_no_string(prompt_string)
+        getter.include_newlines = False
         result = getter.run(include_chevron=include_chevron)
         if self.backtrack():
             return

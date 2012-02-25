@@ -1,3 +1,4 @@
+from scf.menuing.UserInputGetter import UserInputGetter
 from scf.proxies.ImportableAssetProxy import ImportableAssetProxy
 from scf.proxies.ParsableFileProxy import ParsableFileProxy
 import os
@@ -15,6 +16,10 @@ class ModuleProxy(ParsableFileProxy, ImportableAssetProxy):
 
     def __repr__(self):
         return ImportableAssetProxy.__repr__(self)
+
+    ### CLASS ATTRIBUTES ###
+
+    asset_short_name_getter_method = UserInputGetter.append_underscore_delimited_lowercase_string
 
     ### READ-ONLY ATTRIBUTES ###
 
@@ -59,7 +64,14 @@ class ModuleProxy(ParsableFileProxy, ImportableAssetProxy):
         return '__temporary_module.py'
         
     ### PUBLIC METHODS ###
-
+    
+    # TODO: write test
+    def human_readable_name_to_asset_short_name(self, human_readable_name):
+        asset_short_name = ParsableFileProxy.human_readable_name_to_asset_short_name(
+            self, human_readable_name)
+        asset_short_name += '.py'
+        return asset_short_name
+    
     def run_abjad(self, prompt=True):
         os.system('abjad {}'.format(self.path_name))
         self.proceed('file executed', prompt=prompt)

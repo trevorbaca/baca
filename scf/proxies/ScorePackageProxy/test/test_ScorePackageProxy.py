@@ -14,7 +14,7 @@ def test_ScorePackageProxy_01():
       '',
       '     chunks (h)',
       '     materials (m)',
-      '     music specifiers (p)',
+      '     specifiers (p)',
       '     setup (s)',
       '']
 

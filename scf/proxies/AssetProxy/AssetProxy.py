@@ -1,4 +1,5 @@
 from scf.core.SCFObject import SCFObject
+from scf.menuing.UserInputGetter import UserInputGetter
 import os
 import subprocess
 
@@ -12,6 +13,8 @@ class AssetProxy(SCFObject):
 
     ### CLASS ATTRIBUTES ###
 
+    asset_short_name_getter_method = \
+        UserInputGetter.append_underscore_delimited_lowercase_file_name_with_extension
     generic_class_name = 'asset'
 
     ### READ-ONLY PUBLIC ATTRIBUTES ###
@@ -64,6 +67,11 @@ class AssetProxy(SCFObject):
     def fix(self):
         self.print_implemented_on_child_classes()
 
+    def human_readable_name_to_asset_short_name(self, human_readable_name):
+        asset_short_name = human_readable_name.lower()
+        asset_short_name = asset_short_name.replace(' ', '_')
+        return asset_short_name
+    
     def rename(self, new_path_name, is_interactive=False):
         if self.is_in_repository:
             self.rename_versioned_asset(new_path_name, is_interactive=is_interactive)
@@ -72,12 +80,13 @@ class AssetProxy(SCFObject):
 
     def rename_interactively(self):
         getter = self.make_getter(where=self.where())
-        getter.append_underscore_delimited_lowercase_file_name_with_extension('new file name')
+        getter.append_space_delimited_lowercase_string('new human-readable name')
         getter.include_newlines = False
         result = getter.run()
         if self.backtrack():
             return
-        new_path_name = os.path.join(self.parent_directory_name, result)
+        asset_short_name = self.human_readable_name_to_asset_short_name(result)
+        new_path_name = os.path.join(self.parent_directory_name, asset_short_name)
         self.display('new path name will be: "{}"\n'.format(new_path_name))
         if not self.confirm():
             return

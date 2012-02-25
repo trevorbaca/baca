@@ -324,7 +324,7 @@ class ScorePackageProxy(PackageProxy):
         section = menu.make_section()
         section.append(('h', 'chunks'))
         section.append(('m', 'materials'))
-        section.append(('p', 'music specifiers'))
+        section.append(('p', 'specifiers'))
         section.append(('s', 'setup'))
         hidden_section = menu.make_section(is_hidden=True)
         hidden_section.append(('fix', 'fix package structure'))
