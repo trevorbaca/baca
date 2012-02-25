@@ -73,6 +73,7 @@ class AssetProxy(SCFObject):
     def rename_interactively(self):
         getter = self.make_getter(where=self.where())
         getter.append_underscore_delimited_lowercase_file_name_with_extension('new file name')
+        getter.include_newlines = False
         result = getter.run()
         if self.backtrack():
             return
