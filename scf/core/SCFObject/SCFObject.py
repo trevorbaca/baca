@@ -28,7 +28,7 @@ class SCFObject(object):
 
     @property
     def boilerplate_directory(self):
-        return os.path.join(self.scf_root_directory, 'boilerplate')
+        return os.path.join(self.scf_package_path_name, 'boilerplate')
 
     @property
     def breadcrumb(self):
@@ -51,7 +51,7 @@ class SCFObject(object):
 
     @property
     def makers_directory_name(self):
-        return os.path.join(self.scf_root_directory, 'makers')
+        return os.path.join(self.scf_package_path_name, 'makers')
 
     @property
     def makers_package_importable_name(self):
@@ -64,11 +64,6 @@ class SCFObject(object):
     @property
     def scf_package_path_name(self):
         return os.environ.get('SCF')
-
-    # TODO: replace with scf_package_path_name
-    @property
-    def scf_root_directory(self):
-        return self.package_importable_name_to_path_name(self.scf_package_importable_name)
 
     @property
     def score_internal_chunks_package_importable_name_infix(self):
@@ -126,7 +121,7 @@ class SCFObject(object):
 
     @property
     def stylesheets_directory_name(self):
-        return os.path.join(self.scf_root_directory, 'stylesheets')
+        return os.path.join(self.scf_package_path_name, 'stylesheets')
 
     @property
     def stylesheets_package_importable_name(self):

@@ -13,7 +13,7 @@ def test_SCFObject_read_only_attributes_01():
         '/Users/trevorbaca/Documents/other/baca/scf/makers'
     assert scf_object.makers_package_importable_name == 'scf.makers'
     assert scf_object.scf_package_importable_name == 'scf'
-    assert scf_object.scf_root_directory == '/Users/trevorbaca/Documents/other/baca/scf'
+    assert scf_object.scf_package_path_name == '/Users/trevorbaca/Documents/other/baca/scf'
     assert isinstance(scf_object.session, scf.core.Session)
     assert scf_object.score_external_chunks_package_importable_name == 'baca.sketches'
     assert scf_object.source_file_name == '/Users/trevorbaca/Documents/other/baca/scf/core/SCFObject/SCFObject.py'
