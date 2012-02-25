@@ -24,7 +24,17 @@ def test_FileProxy_public_attributes_02():
     '''With path.
     '''
 
-    path_name = os.path.join(os.environ.get('SCF'), 'stylesheets', 'clean_letter_14.ly')
+    short_name = 'clean_letter_14.ly'
+    path_name = os.path.join(os.environ.get('SCF'), 'stylesheets', short_name)
     file_proxy = scf.proxies.FileProxy(path_name)
     
     assert file_proxy.file_lines
+    assert file_proxy.generic_class_name == 'file'
+    assert file_proxy.human_readable_name == short_name
+    assert file_proxy.is_versioned
+    assert file_proxy.parent_directory_name == file_proxy.stylesheets_directory_name
+    assert file_proxy.path_name == path_name
+    assert file_proxy.plural_generic_class_name == 'files'
+    assert file_proxy.short_name == short_name
+    assert file_proxy.short_name_without_extension == short_name[:-3]
+    assert file_proxy.svn_add_command == 'svn add {}'.format(file_proxy.path_name)

@@ -64,7 +64,7 @@ class AssetProxy(SCFObject):
     def short_name_without_extension(self):
         if self.short_name:
             if '.' in self.short_name:
-                return self.short_name[:self.short_name.rdindex('.')]
+                return self.short_name[:self.short_name.rindex('.')]
             else:
                 return self.short_name
 
@@ -104,59 +104,44 @@ class AssetProxy(SCFObject):
         asset_short_name = asset_short_name.replace(' ', '_')
         return asset_short_name
     
-    def remove(self, is_interactive=False):
+    def remove(self):
         if self.is_versioned:
-            result = self.remove_versioned_asset(is_interactive=is_interactive)
+            return self.remove_versioned_asset()
         else:
-            result = self.remove_nonversioned_asset(is_interactive=is_interactive)
-        return result
+            return self.remove_nonversioned_asset()
 
-    def remove_nonversioned_asset(self, is_interactive=False):
-        if is_interactive:
-            line = '{} will be removed.\n'.format(self.path_name)
-            self.display(line)
-            getter = self.make_getter(where=self.where())
-            getter.append_string("type 'remove' to proceed")
-            response = getter.run()
-            if self.backtrack():
-                return
-        if not is_interactive or response == 'remove':
-            command = 'rm -rf {}'.format(self.path_name)
-            proc = subprocess.Popen(command, shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
-            proc.stdout.readline()
-            if is_interactive:
-                line = 'removed {}.\n'.format(self.path_name)
-                self.display(line)
-            return True
-        return False
+    def remove_interactively(self, user_input=None):
+        self.assign_user_input(user_input=user_input)
+        self.display(['{} will be removed.'.format(self.path_name), ''])
+        getter = self.make_getter(where=self.where())
+        getter.append_string("type 'remove' to proceed")
+        result = getter.run()
+        if self.backtrack():
+            return
+        if not result == 'remove':
+            return
+        if self.remove():
+            self.proceed('{} removed.'.format(self.path_name))
+
+    def remove_nonversioned_asset(self):
+        command = 'rm -rf {}'.format(self.path_name)
+        proc = subprocess.Popen(command, shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
+        proc.stdout.readline()
+        return True
 
     def remove_versioned_asset(self, is_interactive=False):
-        if is_interactive:
-            line = '{} will be completely removed from the repository!\n'.format(self.path_name)
-            self.display(line)
-            getter = self.make_getter(where=self.where())
-            getter.append_string("type 'remove' to proceed")
-            response = getter.run()
-            if self.backtrack():
-                return
-        if not is_interactive or response == 'remove':
-            command = 'svn --force rm {}'.format(self.path_name)
-            proc = subprocess.Popen(command, shell=True, stdout=subprocess.PIPE)
-            proc.stdout.readline()
-            if is_interactive:
-                lines = []
-                lines.append('removed {}.\n'.format(self.path_name))
-                lines.append('(Subversion will cause empty package to remain visible until next commit.)')
-                lines.append('')
-                self.display(lines)
-            return True
-        return False
+        command = 'svn --force rm {}'.format(self.path_name)
+        proc = subprocess.Popen(command, shell=True, stdout=subprocess.PIPE)
+        proc.stdout.readline()
+        return True
 
-    def rename(self, new_path_name, is_interactive=False):
+    def rename(self, new_path_name):
         if self.is_versioned:
-            self.rename_versioned_asset(new_path_name, is_interactive=is_interactive)
+            result = self.rename_versioned_asset(new_path_name)
         else:
-            self.rename_nonversioned_asset(new_path_name, is_interactive=is_interactive)
+            result = self.rename_nonversioned_asset(new_path_name)
+        if result:
+            self._path_name = new_path_name
 
     def rename_interactively(self):
         getter = self.make_getter(where=self.where())
@@ -167,34 +152,23 @@ class AssetProxy(SCFObject):
             return
         asset_short_name = self.human_readable_name_to_asset_short_name(result)
         new_path_name = os.path.join(self.parent_directory_name, asset_short_name)
-        self.display('new path name will be: "{}"\n'.format(new_path_name))
+        self.display(['new path name will be: "{}"'.format(new_path_name), ''])
         if not self.confirm():
             return
-        self.rename(new_path_name, is_interactive=True)
+        if self.rename(new_path_name):
+            self.proceed('asset renamed.')
 
     # TODO: write test
-    def rename_nonversioned_asset(self, new_path_name, is_interactive=False):
+    def rename_nonversioned_asset(self, new_path_name):
         command = 'mv {} {}'.format(self.path_name, new_path_name)
         proc = subprocess.Popen(command, shell=True, stdout=subprocess.PIPE)
         proc.stdout.readline()
-        if is_interactive:
-            lines = []
-            lines.append('renamed {}.'.format(self.path_name))
-            lines.append('')
-            self.display(lines)
-        self.proceed(prompt=is_interactive)
 
     # TODO: write test
-    def rename_versioned_asset(self, new_path_name, is_interactive=False):
+    def rename_versioned_asset(self, new_path_name):
         command = 'svn --force mv {} {}'.format(self.path_name, new_path_name)
         proc = subprocess.Popen(command, shell=True, stdout=subprocess.PIPE)
         proc.stdout.readline()
-        if is_interactive:
-            lines = []
-            lines.append('renamed {}.'.format(self.path_name))
-            lines.append('')
-            self.display(lines)
-        self.proceed(prompt=is_interactive)
 
     def run(self, cache=False, clear=True, user_input=None):
         self.assign_user_input(user_input=user_input)

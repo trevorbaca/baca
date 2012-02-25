@@ -239,12 +239,6 @@ class PackageProxy(DirectoryProxy, ImportableAssetProxy):
         result = locals().get('tags') or OrderedDict([])
         return result
 
-    def remove(self, is_interactive=False):
-        result = DirectoryProxy.remove(self, is_interactive=is_interactive)
-        if result:
-            line = 'package removed.'
-            self.proceed(line, prompt=is_interactive)
-        
     def set_package_importable_name_interactively(self):
         getter = self.make_getter(where=self.where())
         geter.append_underscore_delimited_lowercase_package_name('package importable name')

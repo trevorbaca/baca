@@ -14,9 +14,10 @@ class FileProxy(AssetProxy):
     def file_lines(self):
         result = []
         if self.path_name:
-            file_pointer = file(self.path_name)
-            result.extend(file_pointer.readlines())
-            file_pointer.close()
+            if os.path.exists(self.path_name):
+                file_pointer = file(self.path_name)
+                result.extend(file_pointer.readlines())
+                file_pointer.close()
         return result
 
     @property

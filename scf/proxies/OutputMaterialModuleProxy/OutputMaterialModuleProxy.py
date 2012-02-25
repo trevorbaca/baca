@@ -31,7 +31,7 @@ class OutputMaterialModuleProxy(BasicModuleProxy):
         except:
             pass
 
-    def remove(self, is_interactive=True):
+    def remove(self):
         import scf
         parent_package_initializer_file_proxy = scf.proxies.InitializerFileProxy(
             self.parent_package_initializer_file_name)
@@ -41,4 +41,4 @@ class OutputMaterialModuleProxy(BasicModuleProxy):
             self.grandparent_package_initializer_file_name)
         grandparent_package_initializer.remove_safe_import_statement(
             self.material_underscored_name, self.material_underscored_name)
-        BasicModuleProxy.remove(self, is_interactive=is_interactive)
+        BasicModuleProxy.remove(self)
