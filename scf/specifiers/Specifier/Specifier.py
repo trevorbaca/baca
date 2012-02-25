@@ -39,7 +39,7 @@ class Specifier(object):
     @property
     def format_pieces(self):
         result = []
-        result.append('{}('.format(type(self).__name__))
+        result.append('{}('.format(self.importable_class_name))
         for variable_name in sorted(self.variable_names):
             variable_value = getattr(self, variable_name)
             if variable_value is not None:
@@ -52,6 +52,10 @@ class Specifier(object):
     @property
     def human_readable_class_name(self):
         return iotools.uppercamelcase_to_space_delimited_lowercase(self.class_name)
+
+    @property
+    def importable_class_name(self):
+        return 'specifiers.{}'.format(self.class_name)
 
     @property
     def variable_names(self):

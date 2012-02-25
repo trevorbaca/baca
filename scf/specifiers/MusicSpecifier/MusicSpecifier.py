@@ -20,7 +20,5 @@ class MusicSpecifier(Specifier):
     storage_module_import_statements = [
         'from abjad import *',
         'from abjad.tools import contexttools',
-        'from scf.specifiers.MusicSpecifier import MusicSpecifier',
-        'from scf.specifiers.PerformerContributionSpecifier import PerformerContributionSpecifier',
-        'from scf.specifiers.PerformerContributionSpecifierList import PerformerContributionSpecifierList',
+        'from scf import specifiers',
         ]

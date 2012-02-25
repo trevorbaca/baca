@@ -20,7 +20,7 @@ class PerformerContributionSpecifierList(Specifier, list):
     @property
     def format_pieces(self):
         result = []
-        result.append('{}(['.format(type(self).__name__))
+        result.append('{}(['.format(self.importable_class_name))
         for performer_contribution_specifier in self[:]:
             format_pieces = performer_contribution_specifier.format_pieces
             for format_piece in format_pieces[:-1]:

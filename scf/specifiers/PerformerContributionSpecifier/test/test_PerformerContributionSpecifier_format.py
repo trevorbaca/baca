@@ -9,11 +9,11 @@ def test_PerformerContributionSpecifier_format_01():
     specifier.directive_specifier = ['apple', 'banana', 'cherry']
 
     '''
-    PerformerContributionSpecifier(
+    specifiers.PerformerContributionSpecifier(
         articulation_specifier='foo',
         clef_specifier='bar',
         directive_specifier=['apple', 'banana', 'cherry'],
         )
     '''
 
-    assert specifier.format == "PerformerContributionSpecifier(\n\tarticulation_specifier='foo',\n\tclef_specifier='bar',\n\tdirective_specifier=['apple', 'banana', 'cherry'],\n\t)"
+    assert specifier.format == "specifiers.PerformerContributionSpecifier(\n\tarticulation_specifier='foo',\n\tclef_specifier='bar',\n\tdirective_specifier=['apple', 'banana', 'cherry'],\n\t)"
