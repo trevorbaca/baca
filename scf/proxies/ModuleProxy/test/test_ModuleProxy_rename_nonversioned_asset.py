@@ -14,7 +14,7 @@ def test_ModuleProxy_rename_nonversioned_asset_01():
     try:
         module_proxy.conditionally_make_empty_asset() 
         assert os.path.exists(path_name)
-        assert not module_proxy.is_in_repository
+        assert not module_proxy.is_versioned
         new_path_name = os.path.join(module_proxy.parent_directory_name, '__new_temporary_module')
         module_proxy.rename_nonversioned_asset(new_path_name)
         assert module_proxy.path_name == new_path_name

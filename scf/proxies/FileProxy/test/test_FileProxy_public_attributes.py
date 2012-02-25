@@ -11,7 +11,7 @@ def test_FileProxy_public_attributes_01():
     assert not file_proxy.file_lines
     assert file_proxy.generic_class_name == 'file'
     assert file_proxy.human_readable_name is None
-    assert not file_proxy.is_in_repository
+    assert not file_proxy.is_versioned
     assert file_proxy.parent_directory_name is None
     assert file_proxy.path_name is None
     assert file_proxy.plural_generic_class_name == 'files'

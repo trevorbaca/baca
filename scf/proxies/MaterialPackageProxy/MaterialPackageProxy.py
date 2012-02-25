@@ -770,7 +770,7 @@ class MaterialPackageProxy(PackageProxy):
         self.display(lines)
         if not self.confirm():
             return
-        if self.is_in_repository:
+        if self.is_versioned:
             # update parent initializer
             helpers.globally_replace_in_file(self.parent_initializer_file_name, 
                 self.material_underscored_name, new_material_underscored_name)

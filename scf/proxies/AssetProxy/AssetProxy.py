@@ -30,9 +30,8 @@ class AssetProxy(SCFObject):
     def human_readable_name(self):
         return self.short_name
 
-    # TODO: change to self.is_versioned
     @property
-    def is_in_repository(self):
+    def is_versioned(self):
         if self.path_name is None:
             return False
         command = 'svn st {}'.format(self.path_name)
@@ -106,7 +105,7 @@ class AssetProxy(SCFObject):
         return asset_short_name
     
     def remove(self, is_interactive=False):
-        if self.is_in_repository:
+        if self.is_versioned:
             result = self.remove_versioned_asset(is_interactive=is_interactive)
         else:
             result = self.remove_nonversioned_asset(is_interactive=is_interactive)
@@ -154,7 +153,7 @@ class AssetProxy(SCFObject):
         return False
 
     def rename(self, new_path_name, is_interactive=False):
-        if self.is_in_repository:
+        if self.is_versioned:
             self.rename_versioned_asset(new_path_name, is_interactive=is_interactive)
         else:
             self.rename_nonversioned_asset(new_path_name, is_interactive=is_interactive)

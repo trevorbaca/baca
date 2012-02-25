@@ -33,7 +33,7 @@ def test_FileProxy_remove_02():
         file_proxy.conditionally_make_empty_asset()
         assert os.path.exists(path_name)
         file_proxy.svn_add()
-        assert file_proxy.is_in_repository
+        assert file_proxy.is_versioned
         file_proxy.remove()
         assert not os.path.exists(path_name)
     finally:
