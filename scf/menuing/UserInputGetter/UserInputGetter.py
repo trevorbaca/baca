@@ -179,6 +179,11 @@ class UserInputGetter(MenuSectionAggregator):
         self.append_something(spaced_attribute_name, message, default=default)
         self.tests.append(predicates.is_underscore_delimited_lowercase_package_name)
 
+    def append_underscore_delimited_lowercase_file_name_with_extension(self, spaced_attribute_name, default=None):
+        message = 'value for {!r} must be underscore-delimited lowercase file name with extension.'
+        self.append_something(spaced_attribute_name, message, default=default)
+        self.tests.append(iotools.is_underscore_delimited_lowercase_file_name_with_extension)
+
     def append_underscore_delimited_lowercase_string(self, spaced_attribute_name, default=None):
         message = 'value for {!r} must be underscore-delimited lowercase string.'
         self.append_something(spaced_attribute_name, message, default=default)

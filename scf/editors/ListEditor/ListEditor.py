@@ -15,7 +15,7 @@ class ListEditor(InteractiveEditor):
 
     @property
     def breadcrumb(self):
-        return list
+        return 'list'
 
     @property
     def summary_lines(self):
@@ -45,7 +45,7 @@ class ListEditor(InteractiveEditor):
         self.target_items.append(target_item)
 
     def edit_target_item_interactively(self, target_item_number):
-        target_item = self.get_target_itme_from_target_item_number(target_item_number)
+        target_item = self.get_target_item_from_target_item_number(target_item_number)
         if target_item is not None:
             target_item_editor = self.target_item_editor_class(session=self.session, target=target_item)
             target_item_editor.run()
@@ -75,7 +75,7 @@ class ListEditor(InteractiveEditor):
         section = menu.make_section()
         section.append(('add', 'add {}'.format(self.target_item_identifier)))
         if 0 < len(self.target_items):
-            section.append(('rm', 'delete {}'.format(self.target_items_identifier)))
+            section.append(('rm', 'remove {}'.format(self.target_items_identifier)))
         if 1 < len(self.target_items):
             section.append(('mv', 'move {}'.format(self.target_items_identifier)))
         return menu

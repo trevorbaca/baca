@@ -315,6 +315,12 @@ class AssetWrangler(SCFObject):
     def make_asset_interactively(self):
         self.print_implemented_on_child_classes()
 
+    def make_asset_selection_breadcrumb(self, infinitival_phrase=None):
+        if infinitival_phrase:
+            return 'select {} {}:'.format(self.asset_class.generic_class_name, infinitival_phrase)
+        else:
+            return 'select {}:'.format(self.asset_class.generic_class_name)
+
     def make_asset_selection_menu(self, head=None):
         menu, section = self.make_menu(where=self.where(), is_keyed=False, is_parenthetically_numbered=True)
         section.tokens = self.make_visible_asset_menu_tokens(head=head)
@@ -333,7 +339,8 @@ class AssetWrangler(SCFObject):
     # TODO: write test
     def rename_asset_interactively(self, head=None):
         self.push_backtrack()
-        asset_importable_name = self.select_asset_importable_name_interactively(head=head)
+        asset_importable_name = self.select_asset_importable_name_interactively(
+            head=head, infinitival_phrase='to rename')
         self.pop_backtrack()
         if self.backtrack():
             return 
@@ -359,10 +366,10 @@ class AssetWrangler(SCFObject):
         self.proceed('{} asset(s) removed.'.format(total_assets_removed))
 
     def select_asset_importable_name_interactively(
-        self, clear=True, cache=False, head=None, user_input=None):
+        self, clear=True, cache=False, head=None, infinitival_phrase=None, user_input=None):
         self.cache_breadcrumbs(cache=cache)
         while True:
-            self.push_breadcrumb('select {}:'.format(self.asset_class.generic_class_name))
+            self.push_breadcrumb(self.make_asset_selection_breadcrumb(infinitival_phrase=infinitival_phrase))
             menu = self.make_asset_selection_menu(head=head)
             result = menu.run(clear=clear)
             if self.backtrack():

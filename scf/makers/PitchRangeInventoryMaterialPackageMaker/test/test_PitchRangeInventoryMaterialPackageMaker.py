@@ -33,7 +33,7 @@ def test_PitchRangeInventoryMaterialPackageMaker_02():
         studio.run(user_input=
             'materials maker pitch testpir default '
             'testpir omi add [A0, C8] add [C2, F#5] add [C2, G5] '
-            'del 1 move 1 2 b default '
+            'rm 1 move 1 2 b default '
             'q'
             )
         mpp = scf.makers.PitchRangeInventoryMaterialPackageMaker(
