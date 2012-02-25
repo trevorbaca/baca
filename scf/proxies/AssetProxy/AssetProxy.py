@@ -1,6 +1,7 @@
 from scf.core.SCFObject import SCFObject
 from scf.menuing.UserInputGetter import UserInputGetter
 import os
+import shutil
 import subprocess
 
 
@@ -74,6 +75,23 @@ class AssetProxy(SCFObject):
 
     def conditionally_make_empty_asset(self, is_interactive=False):
         self.print_implemented_on_child_classes()
+
+    def copy(self, new_path_name):
+        shutil.copyfile(self.path_name, new_path_name)
+
+    # TODO: write test
+    def copy_interactively(self, user_input=None):
+        self.assign_user_input(user_input=user_input)
+        getter = self.make_getter()
+        getter.append_underscore_delimited_lowercase_file_name('new human-readable name')
+        result = getter.run()
+        if self.backtrack():
+            return
+        new_asset_short_name = result.lower()
+        new_asset_short_name = asset_short_name.replace(' ', '_')
+        new_path_name = os.path.join(self.parent_directory_name, new_asset_short_name)
+        self.copy(new_path_name)
+        self.proceed('asset copied.')
 
     def fix(self):
         self.print_implemented_on_child_classes()

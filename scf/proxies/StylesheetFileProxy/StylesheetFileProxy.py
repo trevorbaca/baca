@@ -31,7 +31,8 @@ class StylesheetFileProxy(FileProxy):
         if not new_short_name.endswith('.ly'):
             new_short_name = new_short_name + '.ly'
         new_path_name = os.path.join(self.parent_directory_name, new_short_name)
-        self.copy_file(new_path_name)
+        #self.copy_file(new_path_name)
+        self.copy(new_path_name)
         line = 'file copied.'
         self.proceed(line, prompt=prompt)
 

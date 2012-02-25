@@ -27,7 +27,6 @@ class FileProxy(AssetProxy):
 
     ### PUBLIC METHODS ###
 
-    # TODO: write test
     def conditionally_make_empty_asset(self, is_interactive=False):
         if not os.path.exists(self.path_name):
             file_reference = file(self.path_name, 'w')
@@ -35,28 +34,8 @@ class FileProxy(AssetProxy):
             file_reference.close()
         self.proceed(prompt=is_interactive)
         
-    # TODO: move up to AssetProxy.copy()
-    def copy_file(self, new_path_name):
-        shutil.copyfile(self.path_name, new_path_name)
-
-    # TODO: move up to AssetProxy.copy_interactively()
-    def copy_file_interactively(self, prompt=True):
-        getter = self.make_getter()
-        getter.append_string('new file name')
-        new_short_name = getter.run()
-        if self.backtrack():
-            return
-        new_path_name = os.path.join(self.parent_directory_name, new_short_name)
-        self.copy_file(new_path_name)
-        line = 'file copied.'
-        self.proceed(line, prompt=prompt)
-
     def edit(self):
         os.system('vi + {}'.format(self.path_name))
-
-    # TODO: move up to AssetProxy
-    def fix(self):
-        self.print_implemented_on_child_classes()
 
     def has_line(self, line):
         file_reference = open(self.path_name, 'r')
