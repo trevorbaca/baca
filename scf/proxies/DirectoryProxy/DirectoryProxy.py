@@ -39,6 +39,9 @@ class DirectoryProxy(AssetProxy):
     
     ### PUBLIC METHODS ###
 
+    def conditionally_make_empty_asset(self, is_interactive=False):
+        self.print_not_yet_implemented()
+
     def get_directory_name_interactively(self):
         getter = self.make_getter(where=self.where())
         getter.append_string('directory name')

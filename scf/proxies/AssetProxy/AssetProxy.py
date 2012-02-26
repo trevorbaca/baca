@@ -1,3 +1,6 @@
+from abc import ABCMeta
+from abc import abstractmethod
+from abc import abstractproperty
 from scf.core.SCFObject import SCFObject
 from scf.menuing.UserInputGetter import UserInputGetter
 import os
@@ -6,6 +9,7 @@ import subprocess
 
 
 class AssetProxy(SCFObject):
+    __metaclass__ = ABCMeta
 
     def __init__(self, path_name=None, session=None):
         assert isinstance(path_name, (str, type(None)))
@@ -87,8 +91,9 @@ class AssetProxy(SCFObject):
 
     ### PUBLIC METHODS ###
 
+    @abstractmethod
     def conditionally_make_empty_asset(self, is_interactive=False):
-        self.print_implemented_on_child_classes()
+        pass
 
     def copy(self, new_path_name):
         shutil.copyfile(self.path_name, new_path_name)

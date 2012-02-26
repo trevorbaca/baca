@@ -69,7 +69,7 @@ class ListEditor(InteractiveEditor):
             self.edit_target_item_interactively(result)
 
     def make_main_menu(self):
-        menu, section = self.make_menu(where=self.where(), is_numbered=True)
+        menu, section = self.make_menu(where=self.where(), is_parenthetically_numbered=True)
         section.tokens = self.summary_lines
         section.return_value_attribute = 'number'
         section = menu.make_section()

@@ -1,3 +1,6 @@
+from abc import abstractproperty
+
+
 class Specifier(object):
 
     def __init__(self):
@@ -56,6 +59,10 @@ class Specifier(object):
     @property
     def importable_class_name(self):
         return 'specifiers.{}'.format(self.class_name)
+
+    @abstractproperty
+    def one_line_menuing_summary(self):
+        pass
 
     @property
     def variable_names(self):
