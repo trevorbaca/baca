@@ -182,7 +182,6 @@ class SCFObject(object):
             self.session._breadcrumb_stack[:] = []
 
     def change_string_to_human_readable_string(self, string):
-        assert isinstance(string, str)
         if not string:
             return string
         elif string[0].isupper():

@@ -46,7 +46,7 @@ def test_ModuleProxy_public_attributes_02():
     assert proxy.generic_class_name == 'module'
     assert proxy.grandparent_package_directory_name == proxy.score_external_materials_package_path_name
     assert proxy.grandparent_package_importable_name == proxy.score_external_materials_package_importable_name
-    assert proxy.human_readable_name == 'material_definition'
+    assert proxy.human_readable_name == 'material definition'
     assert proxy.is_versioned
     assert proxy.module_importable_name == module_importable_name
     assert proxy.module_short_name == 'material_definition'
