@@ -1,6 +1,4 @@
-from abjad.tools import iotools
 from scf.proxies.FileProxy import FileProxy
-import os
 
 
 class StylesheetFileProxy(FileProxy):
@@ -13,19 +11,15 @@ class StylesheetFileProxy(FileProxy):
 
     ### PUBLIC METHODS ###
 
-    # TODO: implement later
-    def audit_stylesheet(self):
-        self.print_not_yet_implemented()
-
     def fix(self):
         self.print_not_yet_implemented()
         
     def handle_main_menu_result(self, result):
         assert isinstance(result, str)
-        if result == 'audit':
-            self.audit_stylesheet()
-        elif result == 'cp':
+        if result == 'cp':
             self.copy_interactively()
+        elif result == 'pr':
+            self.profile()
         elif result == 'rm':
             self.remove_interactively()
             self.session.is_backtracking_locally = True
@@ -44,25 +38,12 @@ class StylesheetFileProxy(FileProxy):
 
     def make_main_menu(self):
         menu, section = self.make_menu(where=self.where)
-        section.append(('audit', 'audit stylesheet'))
         section.append(('cp', 'copy stylesheet'))
+        section.append(('pr', 'profile stylesheet'))
         section.append(('rm', 'delete stylesheet'))
         section.append(('ren', 'rename stylesheet'))
         section.append(('vi', 'vi stylesheet'))
         return menu
 
-    # TODO: rename to rename_interactively() and subclass AssetProxy.rename_interactively()
-    # TODO: implement rename() to subclass AssetProxy.renam()
-    def rename_stylesheet_interactively(self, prompt=True):
-        getter = self.make_getter()
-        getter.append_string('new file name')
-        new_short_name = getter.run()
-        if self.backtrack():
-            return
-        new_short_name = iotools.string_to_strict_directory_name(new_short_name)
-        if not new_short_name.endswith('.ly'):
-            new_short_name = new_short_name + '.ly'
-        new_path_name = os.path.join(self.parent_directory_name, new_short_name)
-        self.rename(new_path_name)
-        line = 'stylesheet renamed.'
-        self.proceed(line, prompt=prompt)
+    def profile(self):
+        self.print_not_yet_implemented()

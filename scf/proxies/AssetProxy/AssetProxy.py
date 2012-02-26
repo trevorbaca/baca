@@ -116,6 +116,9 @@ class AssetProxy(SCFObject):
         asset_short_name = asset_short_name.replace(' ', '_')
         return asset_short_name
     
+    def profile(self):
+        self.print_implemented_on_child_classes()
+
     def remove(self):
         if self.is_versioned:
             return self.remove_versioned_asset()
