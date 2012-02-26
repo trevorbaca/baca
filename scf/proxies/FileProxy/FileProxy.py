@@ -6,6 +6,7 @@ class FileProxy(AssetProxy):
     
     ### CLASS ATTRIBUTES ###
 
+    extension = 'implemented_on_child_classes'
     generic_class_name = 'file'
     temporary_asset_short_name = 'temporary_file.txt'
 

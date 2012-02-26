@@ -19,7 +19,9 @@ class ModuleProxy(ParsableFileProxy, ImportableAssetProxy):
 
     ### CLASS ATTRIBUTES ###
 
+    extension = '.py'
     generic_class_name = 'module'
+    temporary_asset_short_name = 'temporary_module.py'
 
     ### READ-ONLY ATTRIBUTES ###
 
@@ -59,10 +61,6 @@ class ModuleProxy(ParsableFileProxy, ImportableAssetProxy):
     def parent_package_initializer_file_name(self):
         return os.path.join(self.parent_package_directory_name, '__init__.py')
 
-    @property
-    def temporary_asset_short_name(self):
-        return '__temporary_module.py'
-        
     ### PUBLIC METHODS ###
     
     def human_readable_name_to_asset_short_name(self, human_readable_name):

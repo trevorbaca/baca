@@ -7,6 +7,7 @@ class StylesheetFileProxy(FileProxy):
 
     ### CLASS ATTRIBUTES ###
 
+    extension = '.ly'
     generic_class_name = 'stylesheet'
     temporary_asset_short_name = 'temporary_stylesheet.ly'
 
@@ -16,20 +17,20 @@ class StylesheetFileProxy(FileProxy):
     def audit_stylesheet(self):
         self.print_not_implemented()
 
-    def copy_stylesheet_interactively(self, prompt=True):
-        getter = self.make_getter()
-        getter.append_string('new file name')
-        new_short_name = getter.run()
-        if self.backtrack():
-            return
-        new_short_name = iotools.string_to_strict_directory_name(new_short_name)
-        if not new_short_name.endswith('.ly'):
-            new_short_name = new_short_name + '.ly'
-        new_path_name = os.path.join(self.parent_directory_name, new_short_name)
-        #self.copy_file(new_path_name)
-        self.copy(new_path_name)
-        line = 'file copied.'
-        self.proceed(line, prompt=prompt)
+#    def copy_stylesheet_interactively(self, prompt=True):
+#        getter = self.make_getter()
+#        getter.append_string('new file name')
+#        new_short_name = getter.run()
+#        if self.backtrack():
+#            return
+#        new_short_name = iotools.string_to_strict_directory_name(new_short_name)
+#        if not new_short_name.endswith('.ly'):
+#            new_short_name = new_short_name + '.ly'
+#        new_path_name = os.path.join(self.parent_directory_name, new_short_name)
+#        #self.copy_file(new_path_name)
+#        self.copy(new_path_name)
+#        line = 'file copied.'
+#        self.proceed(line, prompt=prompt)
 
     def fix(self):
         self.print_not_implemented()
@@ -49,6 +50,12 @@ class StylesheetFileProxy(FileProxy):
             self.edit()
         else:
             raise ValueError
+
+    def human_readable_name_to_asset_short_name(self, human_readable_name):
+        asset_short_name = FileProxy.human_readable_name_to_asset_short_name(self, human_readable_name)
+        if not asset_short_name.endswith(self.extension):
+            asset_short_name += self.extension
+        return asset_short_name
 
     def make_main_menu(self):
         menu, section = self.make_menu(where=self.where)

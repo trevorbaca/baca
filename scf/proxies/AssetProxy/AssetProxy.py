@@ -96,7 +96,7 @@ class AssetProxy(SCFObject):
     def copy_interactively(self, user_input=None):
         self.assign_user_input(user_input=user_input)
         getter = self.make_getter()
-        getter.append_underscore_delimited_lowercase_file_name('new human-readable name')
+        getter.append_underscore_delimited_lowercase_file_name('new name')
         result = getter.run()
         if self.backtrack():
             return
