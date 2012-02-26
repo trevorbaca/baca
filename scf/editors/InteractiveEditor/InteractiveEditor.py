@@ -81,10 +81,10 @@ class InteractiveEditor(SCFObject):
             self.attributes_in_memory[attribute_name] = attribute_value
 
     def get_one_line_menuing_summary(self, expr):
-        if hasattr(expr, '_one_line_menuing_summary'):
-            return expr._one_line_menuing_summary
-        elif hasattr(expr, 'one_line_menuing_summary'):
+        if getattr(expr, 'one_line_menuing_summary', None):   
             return expr.one_line_menuing_summary
+        elif getattr(expr, '_one_line_menuing_summary', None):
+            return expr._one_line_menuing_summary
         else:
             return repr(expr)
 

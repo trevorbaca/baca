@@ -63,8 +63,8 @@ class PerformerContributionSpecifier(Specifier):
 
     @property
     def performer_label(self):
-        if self.performer_specifier:
-            return repr(performer_specifier)
-        else:
+        try:
+            return self.performer_specifier.performer.name
+        except AttributeError:
             return 'unknown performer'
 
