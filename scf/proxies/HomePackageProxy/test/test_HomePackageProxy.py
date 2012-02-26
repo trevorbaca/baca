@@ -18,7 +18,6 @@ def test_HomePackageProxy_01():
     assert hpp.human_readable_name == 'baca'
     assert hpp.parent_initializer_file_name is None
     assert hpp.parent_package_importable_name is None
-    assert hpp.score is None
     assert hpp.source_file_name == \
         '/Users/trevorbaca/Documents/other/baca/scf/proxies/HomePackageProxy/HomePackageProxy.py'
     assert hpp.spaced_class_name == 'home package proxy'

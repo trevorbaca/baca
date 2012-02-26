@@ -17,11 +17,11 @@ def test_MaterialPackageWrangler_iteration_01():
 
 def test_MaterialPackageWrangler_iteration_02():
 
-    assert 'baca.materials.red_sargasso' in \
+    assert 'materials.red_sargasso' in \
         wrangler.list_asset_importable_names()
     assert 'manos.mus.materials.turquoise_pcs' in \
         wrangler.list_asset_importable_names()
-    assert 'baca.materials.red_sargasso' not in \
+    assert 'materials.red_sargasso' not in \
         wrangler.list_asset_importable_names(head='aracilik')
     assert 'manos.mus.materials.turquoise_pcs' not in \
         wrangler.list_asset_importable_names(head='aracilik')
@@ -102,11 +102,11 @@ def test_MaterialPackageWrangler_iteration_10():
 
 def test_MaterialPackageWrangler_iteration_11():
 
-    assert ('baca.materials.red_sargasso', 'red sargasso') in \
+    assert ('materials.red_sargasso', 'red sargasso') in \
         wrangler.make_visible_asset_menu_tokens()
     assert ('manos.mus.materials.turquoise_pcs', 'turquoise pcs') in \
         wrangler.make_visible_asset_menu_tokens()
-    assert ('baca.materials.red_sargasso', 'red sargasso') not in \
+    assert ('materials.red_sargasso', 'red sargasso') not in \
         wrangler.make_visible_asset_menu_tokens(head='aracilik')
     assert ('manos.mus.materials.turquoise_pcs', 'turquoise pcs') not in \
         wrangler.make_visible_asset_menu_tokens(head='aracilik')

@@ -18,7 +18,7 @@ class PackageProxy(DirectoryProxy, ImportableAssetProxy):
     ### OVERLOADS ###
 
     def __repr__(self):
-        ImportableAssetProxy.__repr__(self)
+        return ImportableAssetProxy.__repr__(self)
 
     ### READ-ONLY PUBLIC ATTRIBUTES ###
 
@@ -90,19 +90,6 @@ class PackageProxy(DirectoryProxy, ImportableAssetProxy):
             if result:
                 return result
 
-    # TODO: write test; or remove?
-    @property
-    def score(self):
-        import scf
-        if self.score_package_short_name is not None:
-            return scf.proxies.ScorePackageProxy(self.score_package_short_name)
-
-    # TODO: write test; or remove?
-    @property
-    def score_package_short_name(self):
-        if not self.importable_name.startswith(self.home_package_importable_name):
-            return self.importable_name.split('.')[0]
-
     @property
     def tags_file_name(self):
         return os.path.join(self.path_name, 'tags.py')
@@ -111,7 +98,6 @@ class PackageProxy(DirectoryProxy, ImportableAssetProxy):
     def tags_file_proxy(self):
         if self.has_tags_file:
             return InitializerFileProxy(self.tags_file_name, session=self.session)
-
 
     ### PUBLIC METHODS ###
 

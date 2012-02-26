@@ -172,7 +172,8 @@ class AssetWrangler(SCFObject):
 
     def list_asset_path_names(self, head=None):
         result = []
-        if head in (None, self.home_package_importable_name):
+        #if head in (None, self.home_package_importable_name):
+        if head in (None,) + self.score_external_package_importable_names:
             result.extend(self.list_score_external_asset_path_names(head=head))
         result.extend(self.list_score_internal_asset_path_names(head=head))
         return result

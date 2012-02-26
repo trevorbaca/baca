@@ -118,7 +118,8 @@ class Studio(SCFObject):
             self.print_not_yet_implemented()
         elif result == 'm':
             breadcrumb = self.pop_breadcrumb()
-            self.material_package_wrangler.run(head=self.home_package_importable_name)
+            self.material_package_wrangler.run(
+                head=self.score_external_materials_package_importable_name)
             self.push_breadcrumb(breadcrumb)
         elif result == 'new':
             breadcrumb = self.pop_breadcrumb()

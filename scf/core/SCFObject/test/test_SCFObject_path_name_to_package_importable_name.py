@@ -8,9 +8,9 @@ def test_SCFObject_path_name_to_package_importable_name_01():
     assert scf_object.path_name_to_package_importable_name(
         '/Users/trevorbaca/Documents/other/baca') == 'baca'
     assert scf_object.path_name_to_package_importable_name(
-        '/Users/trevorbaca/Documents/other/baca/materials') == 'baca.materials'
+        '/Users/trevorbaca/Documents/other/baca/materials') == 'materials'
     assert scf_object.path_name_to_package_importable_name(
-        '/Users/trevorbaca/Documents/other/baca/specifiers') == 'baca.specifiers'
+        '/Users/trevorbaca/Documents/other/baca/specifiers') == 'specifiers'
 
 
 def test_SCFObject_path_name_to_package_importable_name_02():
@@ -18,9 +18,9 @@ def test_SCFObject_path_name_to_package_importable_name_02():
     assert scf_object.path_name_to_package_importable_name(
         '/Users/trevorbaca/Documents/other/baca/') == 'baca'
     assert scf_object.path_name_to_package_importable_name(
-        '/Users/trevorbaca/Documents/other/baca/materials/') == 'baca.materials'
+        '/Users/trevorbaca/Documents/other/baca/materials/') == 'materials'
     assert scf_object.path_name_to_package_importable_name(
-        '/Users/trevorbaca/Documents/other/baca/specifiers/') == 'baca.specifiers'
+        '/Users/trevorbaca/Documents/other/baca/specifiers/') == 'specifiers'
 
 
 def test_SCFObject_path_name_to_package_importable_name_03():
