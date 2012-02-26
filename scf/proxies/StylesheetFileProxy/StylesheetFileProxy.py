@@ -13,24 +13,9 @@ class StylesheetFileProxy(FileProxy):
 
     ### PUBLIC METHODS ###
 
-    # TODO: implement
+    # TODO: implement later
     def audit_stylesheet(self):
         self.print_not_implemented()
-
-#    def copy_stylesheet_interactively(self, prompt=True):
-#        getter = self.make_getter()
-#        getter.append_string('new file name')
-#        new_short_name = getter.run()
-#        if self.backtrack():
-#            return
-#        new_short_name = iotools.string_to_strict_directory_name(new_short_name)
-#        if not new_short_name.endswith('.ly'):
-#            new_short_name = new_short_name + '.ly'
-#        new_path_name = os.path.join(self.parent_directory_name, new_short_name)
-#        #self.copy_file(new_path_name)
-#        self.copy(new_path_name)
-#        line = 'file copied.'
-#        self.proceed(line, prompt=prompt)
 
     def fix(self):
         self.print_not_implemented()
