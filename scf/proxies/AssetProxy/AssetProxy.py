@@ -27,6 +27,16 @@ class AssetProxy(SCFObject):
     ### READ-ONLY PUBLIC ATTRIBUTES ###
 
     @property
+    def breadcrumb(self):
+        return self.short_name or self.human_readable_class_name
+
+    @property
+    def exists(self):
+        if self.path_name:
+            return os.path.exists(self.path_name)
+        return False
+
+    @property
     def human_readable_name(self):
         return self.short_name
 

@@ -18,6 +18,7 @@ def test_FileProxy_public_attributes_01():
     assert file_proxy.short_name is None
     assert file_proxy.short_name_without_extension is None
     assert file_proxy.svn_add_command is None
+    assert file_proxy.temporary_asset_short_name == 'temporary_file.txt'
         
 
 def test_FileProxy_public_attributes_02():
@@ -38,3 +39,4 @@ def test_FileProxy_public_attributes_02():
     assert file_proxy.short_name == short_name
     assert file_proxy.short_name_without_extension == short_name[:-3]
     assert file_proxy.svn_add_command == 'svn add {}'.format(file_proxy.path_name)
+    assert file_proxy.temporary_asset_short_name == 'temporary_file.txt'

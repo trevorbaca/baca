@@ -5,15 +5,10 @@ import os
 
 class StylesheetFileProxy(FileProxy):
 
-    ### READ-ONLY PUBLIC ATTRIBUTES ###
+    ### CLASS ATTRIBUTES ###
 
-    @property
-    def breadcrumb(self):
-        return self.short_name
-
-    @property
-    def temporary_asset_short_name(self):
-        return '__temporary_stylesheet.ly'
+    generic_class_name = 'stylesheet'
+    temporary_asset_short_name = 'temporary_stylesheet.ly'
 
     ### PUBLIC METHODS ###
 

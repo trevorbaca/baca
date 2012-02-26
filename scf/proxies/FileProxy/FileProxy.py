@@ -7,6 +7,7 @@ class FileProxy(AssetProxy):
     ### CLASS ATTRIBUTES ###
 
     generic_class_name = 'file'
+    temporary_asset_short_name = 'temporary_file.txt'
 
     ### READ-ONLY PUBLIC ATTRIBUTES ###
 
