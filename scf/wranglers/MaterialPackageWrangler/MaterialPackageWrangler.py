@@ -65,6 +65,9 @@ class MaterialPackageWrangler(PackageWrangler):
             material_package_proxy = self.get_asset_proxy(result)
             material_package_proxy.run()
         
+    def make_asset_interactively(self):
+        return NotImplemented
+
     # TODO: write test
     def make_data_package_interactively(self):
         self.push_backtrack()

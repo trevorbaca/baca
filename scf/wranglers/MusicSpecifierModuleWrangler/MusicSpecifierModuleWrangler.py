@@ -23,6 +23,10 @@ class MusicSpecifierModuleWrangler(ModuleWrangler):
     def breadcrumb(self):
         return 'music specifiers'
 
+    @property
+    def temporary_asset_short_name(self):
+        return 'temporary_specifier_module.py'
+
     ### PUBLIC METHODS ###
 
     def handle_main_menu_result(self, result):

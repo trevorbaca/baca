@@ -424,10 +424,6 @@ class SCFObject(object):
         self.session.user_input = user_input
         return user_response
 
-    def print_implemented_on_child_classes(self):
-        self.display(['method implemented on child classes.', ''])
-        self.proceed()
-
     def print_not_yet_implemented(self):
         self.display(['not yet implemented', ''])
         self.proceed()

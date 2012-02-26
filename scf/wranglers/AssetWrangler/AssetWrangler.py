@@ -1,3 +1,6 @@
+from abc import ABCMeta
+from abc import abstractmethod
+from abc import abstractproperty
 from abjad.tools import iotools
 from scf.core.SCFObject import SCFObject
 from scf.proxies.PackageProxy import PackageProxy
@@ -5,6 +8,7 @@ import os
 
 
 class AssetWrangler(SCFObject):
+    __metaclass__ = ABCMeta
 
     def __init__(self, 
         score_external_asset_container_importable_names=None, 
@@ -45,9 +49,9 @@ class AssetWrangler(SCFObject):
 
     # asset class #
 
-    @property
+    @abstractproperty
     def asset_class(self):
-        self.print_implemented_on_child_classes()
+        pass
 
     @property
     def asset_class_human_readable_name(self):
@@ -101,9 +105,9 @@ class AssetWrangler(SCFObject):
     def temporary_asset_path_name(self):
         return os.path.join(self.current_asset_container_path_name, self.temporary_asset_short_name)
 
-    @property
+    @abstractproperty
     def temporary_asset_short_name(self):
-        self.print_implemented_on_child_classes()
+        pass
 
     @property
     def temporary_asset_proxy(self):
@@ -312,8 +316,9 @@ class AssetWrangler(SCFObject):
         asset_proxy = self.get_asset_proxy(asset_path_name)
         asset_proxy.write_stub_to_disk()
 
+    @abstractmethod
     def make_asset_interactively(self):
-        self.print_implemented_on_child_classes()
+        pass
 
     def make_asset_selection_breadcrumb(self, infinitival_phrase=None):
         if infinitival_phrase:

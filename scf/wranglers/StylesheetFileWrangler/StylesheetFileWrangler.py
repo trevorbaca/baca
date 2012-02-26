@@ -35,21 +35,14 @@ class StylesheetFileWrangler(PackageWrangler):
 
     def handle_main_menu_result(self, result):
         if result == 'new':
-            self.make_stylesheet_interactively()
+            self.make_asset_interactively()
         else:
             stylesheet_file_name = os.path.join(self.stylesheets_directory_name, result)  
             stylesheet_proxy = StylesheetFileProxy(stylesheet_file_name, session=self.session)
             stylesheet_proxy.run()
          
-    def make_main_menu(self):
-        menu, section = self.make_menu(where=self.where(), is_parenthetically_numbered=True)
-        section.tokens = self.stylesheet_file_names
-        section = menu.make_section()
-        section.append(('new', 'new stylesheet'))
-        return menu
-
     # TODO: write test
-    def make_stylesheet_interactively(self):
+    def make_asset_interactively(self):
         getter = self.make_getter(where=self.where())
         getter.append_string('stylesheet name')
         stylesheet_name = getter.run()
@@ -61,6 +54,13 @@ class StylesheetFileWrangler(PackageWrangler):
         stylesheet_file_name = os.path.join(self.stylesheets_directory_name, stylesheet_name)
         stylesheet_proxy = StylesheetFileProxy(stylesheet_file_name, session=self.session)
         stylesheet_proxy.edit()
+
+    def make_main_menu(self):
+        menu, section = self.make_menu(where=self.where(), is_parenthetically_numbered=True)
+        section.tokens = self.stylesheet_file_names
+        section = menu.make_section()
+        section.append(('new', 'new stylesheet'))
+        return menu
 
     # TODO: write test
     def select_stylesheet_file_name_interactively(self, clear=True, cache=False):

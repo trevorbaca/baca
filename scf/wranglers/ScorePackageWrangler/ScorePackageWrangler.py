@@ -53,14 +53,6 @@ class ScorePackageWrangler(PackageWrangler):
                 result.append(asset_proxy)
         return result
 
-    def make_visible_asset_menu_tokens(self, head=None):
-        keys = self.list_visible_asset_importable_names()
-        bodies = self.visible_score_titles_with_years
-        menuing_pairs = zip(keys, bodies)
-        tmp = iotools.strip_diacritics_from_binary_string
-        menuing_pairs.sort(lambda x, y: cmp(tmp(x[1]), tmp(y[1])))
-        return menuing_pairs
-
     def make_asset_interactively(self):
         getter = self.make_getter(where=self.where())
         getter.indent_level = 1
@@ -79,3 +71,11 @@ class ScorePackageWrangler(PackageWrangler):
         score_package_proxy = self.get_asset_proxy(score_package_short_name)
         score_package_proxy.add_tag('title', title)
         score_package_proxy.year_of_completion = year
+
+    def make_visible_asset_menu_tokens(self, head=None):
+        keys = self.list_visible_asset_importable_names()
+        bodies = self.visible_score_titles_with_years
+        menuing_pairs = zip(keys, bodies)
+        tmp = iotools.strip_diacritics_from_binary_string
+        menuing_pairs.sort(lambda x, y: cmp(tmp(x[1]), tmp(y[1])))
+        return menuing_pairs

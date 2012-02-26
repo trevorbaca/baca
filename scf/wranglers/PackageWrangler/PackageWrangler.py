@@ -33,3 +33,6 @@ class PackageWrangler(ImportableAssetWrangler):
         os.mkdir(asset_path_name)
         package_proxy = self.get_asset_proxy(asset_short_name)
         package_proxy.fix(is_interactive=False)
+
+    def make_asset_interactively(self):
+        self.print_not_yet_implemented()
