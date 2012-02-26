@@ -8,7 +8,6 @@ def test_Studio_01():
     studio = scf.studio.Studio()
 
     assert studio.class_name == 'Studio'
-    assert isinstance(studio.home_package_proxy, scf.proxies.HomePackageProxy)
     assert isinstance(studio.score_package_wrangler, scf.wranglers.ScorePackageWrangler)
     assert studio.source_file_name == \
         '/Users/trevorbaca/Documents/other/baca/scf/studio/Studio/Studio.py'
@@ -113,17 +112,11 @@ def test_Studio_06():
     assert studio.transcript[-2] == [
       'Studio - active scores - repository commands',
       '',
-      '     add',
-      '     ci',
-      '     st',
-      '     up',
-      '',
       '     add_scores',
       '     ci_scores',
       '     st_scores',
       '     up_scores',
       '',
-      '     pytest',
       '     pytest_scores',
       '     pytest_all',
       '']
@@ -197,7 +190,6 @@ def test_Studio_12():
 
     studio = scf.studio.Studio()
 
-    assert studio.session is studio.home_package_proxy.session
     assert studio.session is studio.score_package_wrangler.session
 
 

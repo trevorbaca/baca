@@ -3,7 +3,6 @@ from abjad.tools import iotools
 from abjad.tools import mathtools
 from scf.core.SCFObject import SCFObject
 from scf.wranglers.ChunkPackageWrangler import ChunkPackageWrangler
-from scf.proxies.HomePackageProxy import HomePackageProxy
 from scf.wranglers.MaterialPackageMakerWrangler import MaterialPackageMakerWrangler
 from scf.wranglers.MaterialPackageWrangler import MaterialPackageWrangler
 from scf.wranglers.MusicSpecifierModuleWrangler import MusicSpecifierModuleWrangler
@@ -17,7 +16,6 @@ class Studio(SCFObject):
     def __init__(self, session=None):
         SCFObject.__init__(self, session=session)
         self._chunk_package_wrangler = ChunkPackageWrangler(session=self.session)
-        self._home_package_proxy = HomePackageProxy(session=self.session)
         self._material_package_maker_wrangler = MaterialPackageMakerWrangler(session=self.session)
         self._material_package_wrangler = MaterialPackageWrangler(session=self.session)
         self._music_specifier_module_wrangler = MusicSpecifierModuleWrangler(session=self.session)
@@ -33,10 +31,6 @@ class Studio(SCFObject):
     @property
     def chunk_package_wrangler(self):
         return self._chunk_package_wrangler
-
-    @property
-    def home_package_proxy(self):
-        return self._home_package_proxy
 
     @property
     def material_package_maker_wrangler(self):
@@ -138,28 +132,14 @@ class Studio(SCFObject):
         '''Return true to exit the svn menu.
         '''
         this_result = False
-        if result == 'add':
-            self.home_package_proxy.svn_add()
-        elif result == 'add_scores':
-            self.score_package_wrangler.svn_add()
-        elif result == 'ci':
-            self.home_package_proxy.svn_ci()
-            return True
-        elif result == 'ci_scores':
+        if result == 'ci_scores':
             self.score_package_wrangler.svn_ci()
-        elif result == 'pytest':
-            self.home_package_proxy.run_py_test()
         elif result == 'pytest_scores':
             self.score_package_wrangler.run_py_test()
         elif result == 'pytest_all':
             self.run_py_test_all()
-        elif result == 'st':
-            self.home_package_proxy.svn_st()
         elif result == 'st_scores':
             self.score_package_wrangler.svn_st()
-        elif result == 'up':
-            self.home_package_proxy.svn_up()
-            return True
         elif result == 'up_scores':
             self.score_package_wrangler.svn_up()
             return True
@@ -186,17 +166,17 @@ class Studio(SCFObject):
 
     def make_svn_menu(self):
         menu, section = self.make_menu(where=self.where(), is_keyed=False)
-        section.append(('add', 'add'))
-        section.append(('ci', 'ci'))
-        section.append(('st', 'st'))
-        section.append(('up', 'up'))
+        #section.append(('add', 'add'))
+        #section.append(('ci', 'ci'))
+        #section.append(('st', 'st'))
+        #section.append(('up', 'up'))
         section = menu.make_section(is_keyed=False)
         section.append(('add_scores', 'add_scores'))
         section.append(('ci_scores', 'ci_scores'))
         section.append(('st_scores', 'st_scores'))
         section.append(('up_scores', 'up_scores'))
         section = menu.make_section(is_keyed=False)
-        section.append(('pytest', 'pytest'))
+        #section.append(('pytest', 'pytest'))
         section.append(('pytest_scores', 'pytest_scores'))
         section.append(('pytest_all', 'pytest_all'))
         return menu
