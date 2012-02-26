@@ -34,6 +34,9 @@ class ScorePackageWrangler(PackageWrangler):
 
     ### PUBLIC METHODS ###
 
+    def handle_main_menu_result(self):
+        self.print_not_yet_implemented()
+        
     def list_visible_asset_path_names(self, head=None):
         result = []
         for visible_asset_proxy in self.list_visible_asset_proxies(head=head):
@@ -71,6 +74,9 @@ class ScorePackageWrangler(PackageWrangler):
         score_package_proxy = self.get_asset_proxy(score_package_short_name)
         score_package_proxy.add_tag('title', title)
         score_package_proxy.year_of_completion = year
+
+    def make_main_menu(self):
+        self.print_not_yet_implemented()
 
     def make_visible_asset_menu_tokens(self, head=None):
         keys = self.list_visible_asset_importable_names()

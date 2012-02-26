@@ -1,3 +1,5 @@
+from scf.editors.InteractiveEditor import InteractiveEditor
+from scf.selectors.Selector import Selector
 import types
 
 
@@ -24,8 +26,11 @@ class AttributeDetail(object):
         if isinstance(self.editor_callable, types.FunctionType):
             editor = self.editor_callable(attribute_spaced_name, 
                 session=session, existing_value=existing_value, allow_none=self.allow_none)
-        elif isinstance(self.editor_callable, types.TypeType):
+        #elif isinstance(self.editor_callable, types.TypeType):
+        elif isinstance(self.editor_callable, InteractiveEditor):
             editor = self.editor_callable(session=session, target=existing_value)
+        elif isinstance(self.editor_callable, Selector):
+            editor = self.editor_callable(session=session) 
         else:
             raise ValueError
         return editor

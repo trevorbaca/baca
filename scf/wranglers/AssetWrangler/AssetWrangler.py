@@ -140,6 +140,10 @@ class AssetWrangler(SCFObject):
     def get_asset_proxy(self, asset_full_name):
         return self.asset_class(asset_full_name, session=self.session)
 
+    @abstractmethod
+    def handle_main_menu_result(self, result):
+        pass
+
     # asset containers (all) #
 
     def list_asset_container_human_readable_names(self, head=None):
@@ -331,6 +335,10 @@ class AssetWrangler(SCFObject):
         section.tokens = self.make_visible_asset_menu_tokens(head=head)
         section.return_value_attribute = 'key'
         return menu
+
+    @abstractmethod
+    def make_main_menu(self):
+        pass
 
     def make_visible_asset_menu_tokens(self, head=None):
         keys = self.list_visible_asset_path_names(head=head)

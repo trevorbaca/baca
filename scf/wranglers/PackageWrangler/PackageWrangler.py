@@ -27,6 +27,9 @@ class PackageWrangler(ImportableAssetWrangler):
 
     ### PUBLIC METHODS ###
 
+    def handle_main_menu_result(self, result):
+        self.print_not_yet_implemented()
+
     def make_asset(self, asset_short_name):
         assert iotools.is_underscore_delimited_lowercase_package_name(asset_short_name)
         asset_path_name = os.path.join(self.current_asset_container_path_name, asset_short_name)
@@ -35,4 +38,7 @@ class PackageWrangler(ImportableAssetWrangler):
         package_proxy.fix(is_interactive=False)
 
     def make_asset_interactively(self):
+        self.print_not_yet_implemented()
+
+    def make_main_menu(self):
         self.print_not_yet_implemented()

@@ -10,7 +10,7 @@ class PerformerSpecifierEditor(ParameterSpecifierEditor):
 
     target_class = PerformerSpecifier
     target_manifest = TargetManifest(PerformerSpecifier,
-        ('performer', 'pf', selectors.select_performer_interactively),
+        ('performer', 'pf', selectors.PerformerSelector)
         )
 
     ### READ-ONLY ATTRIBUTES ###
