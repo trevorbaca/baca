@@ -9,15 +9,25 @@ class Selector(SCFObject):
     def __init__(self, session=None):
         SCFObject.__init__(self, session=session) 
 
+    ### READ-ONLY ATTRIBUTES ###
+
+    @property
+    def breadcrumb(self):
+        if hasattr(self, 'target_human_readable_name'):
+            return 'select {}:'.format(self.target_human_readable_name)
+        else:
+            return 'select:'
+
     ### PUBLIC METHODS ###
 
     @abstractmethod
-    def handle_main_menu_result(self, result):
+    def make_menu_tokens(self, head=None):
         pass
 
-    @abstractmethod
-    def make_main_menu(self):
-        pass
+    def make_main_menu(self, head=None):
+        menu, section = self.make_menu(where=self.where(), is_parenthetically_numbered=True, is_keyed=False)
+        section.tokens = self.make_menu_tokens(head=head)
+        return menu
 
     def run(self, cache=False, clear=True, head=None, user_input=None):
         self.assign_user_input(user_input=user_input)
@@ -31,9 +41,9 @@ class Selector(SCFObject):
             elif not result:
                 self.pop_breadcrumb()
                 continue
-            self.handle_main_menu_result(result)
-            if self.backtrack():
+            else:
                 break
-            self.pop_breadcrumb()
         self.pop_breadcrumb()
         self.restore_breadcrumbs(cache=cache)
+        self.debug(result, 'result!')
+        return result
