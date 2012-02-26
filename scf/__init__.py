@@ -1,6 +1,6 @@
-from menuing import getters
 import editors
 import exceptions
+import getters
 import helpers
 import makers
 import menuing
