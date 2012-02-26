@@ -28,3 +28,9 @@ class PerformerContributionSpecifierList(Specifier, list):
             result.append('\t' + format_pieces[-1] + ',')
         result.append('\t])')
         return result
+
+    @property
+    def one_line_menuing_summary(self):
+        pieces = [performer.performer_label for performer in self]
+        if pieces:
+            return ', '.join(pieces)

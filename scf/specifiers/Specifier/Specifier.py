@@ -1,7 +1,9 @@
+from abc import ABCMeta
 from abc import abstractproperty
 
 
 class Specifier(object):
+    __metaclass__ = ABCMeta
 
     def __init__(self):
         variable_names = self.__init__.im_func.func_code.co_varnames[1:]

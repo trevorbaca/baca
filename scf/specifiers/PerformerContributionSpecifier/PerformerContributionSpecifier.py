@@ -42,3 +42,29 @@ class PerformerContributionSpecifier(Specifier):
             return '{}({!r})'.format(self.class_name, self.performer_specifier)
         else:
             return '{}()'.format(self.class_name)
+
+    ### READ-ONLY ATTRIBUTES ###
+
+    @property
+    def one_line_menuing_summary(self):
+        return '{}: {}'.format(self.performer_label, self.parameter_summary_string)
+
+    @property
+    def parameter_summary_string(self):
+        parameter_specifiers = []
+        for variable_name in self.variable_names:
+            variable_value = getattr(self, variable_name)
+            if variable_value:
+                parameter_specifiers.append(repr(variable_value))
+        if parameter_specifiers:
+            return ', '.join(parameter_specifiers)
+        else:
+            return 'no parameters specified'
+
+    @property
+    def performer_label(self):
+        if self.performer_specifier:
+            return repr(performer_specifier)
+        else:
+            return 'unknown performer'
+
