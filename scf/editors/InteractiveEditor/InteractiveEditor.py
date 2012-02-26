@@ -6,7 +6,7 @@ class InteractiveEditor(SCFObject):
     def __init__(self, session=None, target=None):
         SCFObject.__init__(self, session=session)
         if target is not None:
-            assert isinstance(target, type(self.target_class()))
+            assert isinstance(target, self.target_class)
         self.target = target
         self.initialize_attributes_in_memory()
 
@@ -126,6 +126,7 @@ class InteractiveEditor(SCFObject):
             if hasattr(attribute_value, '__len__') and not len(attribute_value):
                 attribute_value = None
             existing_value = self.get_one_line_menuing_summary(attribute_value)
+            #existing_value = repr(attribute_value)
             if 6 <= len(target_attribute_tuple):
                 display_attribute = target_attribute_tuple[5]
                 if display_attribute is not None:
@@ -147,6 +148,7 @@ class InteractiveEditor(SCFObject):
             if hasattr(attribute_value, '__len__') and not len(attribute_value):
                 attribute_value = None
             existing_value = self.get_one_line_menuing_summary(attribute_value)
+            #existing_value = repr(attribute_value)
             token = (menu_key, menu_body, existing_value)
             result.append(token)
         return result
