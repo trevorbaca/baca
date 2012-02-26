@@ -43,6 +43,10 @@ class MenuSection(MenuObject):
         return any([isinstance(x, tuple) and len(tuple) == 3 for x in self.tokens])
 
     @property
+    def has_prepopulated_return_value_tuple_token(self):
+        return any([isinstance(x, tuple) and len(tuple) == 4 for x in self.tokens])
+
+    @property
     def has_string_tokens(self):
         return any([isinstance(x, str) for x in self.tokens])
 
@@ -112,6 +116,8 @@ class MenuSection(MenuObject):
                 key, body = token
             elif isinstance(token, tuple) and len(token) == 3:
                 key, body, existing_value = token
+            elif isinstance(token, tuple) and len(token) == 4:
+                key, body, existing_value, prepopulated_return_value = token
             else:
                 raise ValueError
             assert body
@@ -131,6 +137,8 @@ class MenuSection(MenuObject):
                     return_value = body
             elif self.return_value_attribute == 'body':
                 return_value = body
+            elif self.return_value_attribute == 'prepopulated':
+                return_value = prepopulated_return_value
             else:
                 raise ValueError
             assert return_value is not None
@@ -162,7 +170,7 @@ class MenuSection(MenuObject):
         def fget(self):
             return self._return_value_attribute
         def fset(self, return_value_attribute):
-            assert return_value_attribute in ('body', 'key', 'number')
+            assert return_value_attribute in ('body', 'key', 'number', 'prepopulated')
             self._return_value_attribute = return_value_attribute
         return property(**locals())
 
@@ -276,7 +284,8 @@ class MenuSection(MenuObject):
         if isinstance(expr, str):
             return True
         #elif isinstance(expr, tuple) and len(expr) == 2:
-        elif isinstance(expr, tuple) and len(expr) in (2, 3):
+        #elif isinstance(expr, tuple) and len(expr) in (2, 3):
+        elif isinstance(expr, tuple) and 2 <= len(expr) <= 4:
             return True
         return False
         
@@ -340,7 +349,7 @@ class MenuSection(MenuObject):
         if isinstance(token, str):
             key, body = None, token
         elif isinstance(token, tuple):
-            key, body = token
+            key, body = token[:2]
         else:
             raise ValueError
         return key, body
@@ -352,6 +361,8 @@ class MenuSection(MenuObject):
             key, body, existing_value = token[0], token[1], None
         elif isinstance(token, tuple) and len(token) == 3:
             key, body, existing_value = token
+        elif isinstance(token, tuple) and len(token) == 4:
+            key, body, existing_value = token[:3]
         else:
             raise ValueError
         return key, body, existing_value
@@ -372,6 +383,8 @@ class MenuSection(MenuObject):
                 return token[1]
             elif self.return_value_attribute == 'number':
                 pass
+            elif self.return_value_attribute == 'prepopulated':
+                return token[3]
             else:
                 raise ValueError
         else:
@@ -379,7 +392,7 @@ class MenuSection(MenuObject):
 
     # TODO: replace self.token_to_key_and_body() and also
     #       replace self.token_to_menu_entry_return_value().
-    # TODO: unpack all menu entry tokens only once at menu runtime.
+    # TODO: unpack all menu entry tokens only once at runtime.
     def unpack_token(self, token):
         number = self.token_to_menu_entry_number(token)
         key, body = self.token_to_key_and_body(token)

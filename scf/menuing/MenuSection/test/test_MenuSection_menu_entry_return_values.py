@@ -100,3 +100,20 @@ def test_MenuSection_menu_entry_return_values_02():
     assert not section.is_numbered
     assert section.menu_entry_return_values == ['add something', 'delete something', 'modify something']
     assert section.menu_entry_return_values == section.menu_entry_bodies
+
+
+def test_MenuSection_menu_entry_return_values_03():
+    '''Length-4 tuples include prepopulated return values.
+    You must still set return_value_attribute to 'prepopulated'.
+    '''
+
+    menu = scf.menuing.Menu()
+    menu.push_breadcrumb('location')
+    section = menu.make_section()
+    section.title = 'section'
+    section.append(('add', 'add something', None, 'return value A'))
+    section.append(('rm', 'delete something', None, 'return value B'))
+    section.append(('mod', 'modify something', None, 'return value C'))
+    section.return_value_attribute = 'prepopulated'
+    assert not section.is_numbered
+    assert section.menu_entry_return_values == ['return value A', 'return value B', 'return value C']
