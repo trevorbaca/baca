@@ -5,9 +5,14 @@ class StylesheetFileProxy(FileProxy):
 
     ### CLASS ATTRIBUTES ###
 
-    extension = '.ly'
     generic_class_name = 'stylesheet'
     temporary_asset_short_name = 'temporary_stylesheet.ly'
+
+    ### READ-ONLY ATTRIBUTES ###
+
+    @property
+    def extension(self):
+        return '.ly'
 
     ### PUBLIC METHODS ###
 

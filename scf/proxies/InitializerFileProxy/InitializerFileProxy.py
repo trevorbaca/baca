@@ -14,6 +14,10 @@ class InitializerFileProxy(ParsableFileProxy):
     ### READ-ONLY PUBLIC ATTRIBUTES ##
 
     @property
+    def extension(self):
+        return '.py'
+
+    @property
     def is_readable(self):
         return self.is_parsable
 

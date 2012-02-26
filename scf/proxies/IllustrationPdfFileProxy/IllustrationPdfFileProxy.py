@@ -4,6 +4,12 @@ import os
 
 class IllustrationPdfFileProxy(FileProxy):
 
+    ### READ-ONLY ATTRIBUTES ###
+
+    @property
+    def extension(self):
+        return '.pdf'
+
     ### PUBLIC METHODS ###
 
     def view(self):

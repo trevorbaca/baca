@@ -120,10 +120,6 @@ class PackageProxy(DirectoryProxy, ImportableAssetProxy):
             tag_name, tag_value = result
             self.add_tag(tag_name, tag_value)
 
-    def fix(self, is_interactive=True):
-        self.print_implemented_on_child_classes()
-        return True
-
     def remove_initializer(self, is_interactive=True):
         if self.has_initializer:
             os.remove(self.initializer_file_name)
@@ -210,9 +206,6 @@ class PackageProxy(DirectoryProxy, ImportableAssetProxy):
             self.pop_breadcrumb()
         self.pop_breadcrumb()
         self.restore_breadcrumbs(cache=cache)
-
-    def profile(self):
-        self.print_implemented_on_child_classes()
 
     def read_tags_from_tags_file(self):
         from collections import OrderedDict
