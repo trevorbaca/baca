@@ -9,6 +9,8 @@ from scf import predicates
 
 class MusicSpecifierEditor(InteractiveEditor):
 
+    ### CLASS ATTRIBUTES ###
+
     target_class = MusicSpecifier
     target_manifest = TargetManifest(MusicSpecifier,
         ('music_specifier_name', 'nm', getters.get_string),
@@ -18,10 +20,6 @@ class MusicSpecifierEditor(InteractiveEditor):
 
     ### READ-ONLY PUBLIC ATTRIBUTES ###
 
-    @property
-    def breadcrumb(self):
-        return self.target_name or self.human_readable_class_name
-        
     @property
     def target_name(self):
         if self.target is not None:

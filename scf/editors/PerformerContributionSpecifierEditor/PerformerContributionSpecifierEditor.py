@@ -19,6 +19,8 @@ from scf.specifiers.PerformerContributionSpecifier import PerformerContributionS
 
 class PerformerContributionSpecifierEditor(InteractiveEditor):
 
+    ### CLASS ATTRIBUTES ###
+
     target_class = PerformerContributionSpecifier
     target_manifest = TargetManifest(PerformerContributionSpecifier,
         ('articulation_specifier', 'art', ArticulationSpecifierEditor),
@@ -38,10 +40,6 @@ class PerformerContributionSpecifierEditor(InteractiveEditor):
         )
 
     ### READ-ONLY PUBLIC ATTRIBUTES ###
-
-    @property
-    def breadcrumb(self):
-        return self.target_name or 'performer contribution specifier editor'
 
     @property
     def target_name(self):

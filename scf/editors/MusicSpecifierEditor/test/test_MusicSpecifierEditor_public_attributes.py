@@ -7,7 +7,7 @@ def test_MusicSpecifierEditor_public_attributes_01():
 
     editor = scf.editors.MusicSpecifierEditor()
 
-    assert editor.breadcrumb == 'music specifier editor'
+    assert editor.breadcrumb == 'music specifier'
     assert not editor.has_target
     assert editor.target is None
     assert editor.target_attribute_tokens == [

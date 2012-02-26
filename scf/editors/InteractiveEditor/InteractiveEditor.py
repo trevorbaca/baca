@@ -26,6 +26,10 @@ class InteractiveEditor(SCFObject):
         return self._attributes_in_memory
 
     @property
+    def breadcrumb(self):
+        return self.target_name or self.target_class_human_readable_name
+
+    @property
     def has_target(self):
         return self.target is not None
 
@@ -37,6 +41,10 @@ class InteractiveEditor(SCFObject):
             return self.make_target_attribute_tokens_from_target_attribute_tuples()
         else:
             raise ValueError
+
+    @property
+    def target_class_human_readable_name(self):
+        return self.change_string_to_human_readable_string(self.target_class.__name__)
 
     ### PUBLIC METHODS ###
 

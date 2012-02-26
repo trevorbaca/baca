@@ -107,6 +107,9 @@ class MusicSpecifierModuleProxy(ModuleProxy):
                 self.target_name_in_storage_module, target_format_pieces[0])
         return target_format_pieces
 
+    def write_stub_to_disk(self):
+        self.conditionally_make_empty_asset()
+
     def write_target_to_disk(self, target_in_memory):
         self.parse()
         self.setup_statements[:] = self.conditionally_add_terminal_newlines(
