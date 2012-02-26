@@ -34,6 +34,8 @@ class AssetProxy(SCFObject):
     def is_versioned(self):
         if self.path_name is None:
             return False
+        if not os.path.exists(self.path_name):
+            return False
         command = 'svn st {}'.format(self.path_name)
         proc = subprocess.Popen(command, shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
         first_line = proc.stdout.readline()
@@ -141,15 +143,16 @@ class AssetProxy(SCFObject):
         else:
             result = self.rename_nonversioned_asset(new_path_name)
 
-    def rename_interactively(self):
+    def rename_interactively(self, user_input=None):
+        self.assign_user_input(user_input=user_input)
         getter = self.make_getter(where=self.where())
-        getter.append_space_delimited_lowercase_string('new human-readable name')
+        getter.append_underscore_delimited_lowercase_file_name('new human-readable name')
         getter.include_newlines = False
         result = getter.run()
         if self.backtrack():
             return
-        asset_short_name = self.human_readable_name_to_asset_short_name(result)
-        new_path_name = os.path.join(self.parent_directory_name, asset_short_name)
+        #asset_short_name = self.human_readable_name_to_asset_short_name(result)
+        new_path_name = os.path.join(self.parent_directory_name, result)
         self.display(['new path name will be: "{}"'.format(new_path_name), ''])
         if not self.confirm():
             return
