@@ -7,14 +7,14 @@ def test_SargassoMeasureMaterialPackageMaker_01():
     '''Empty wrapper.'''
 
     studio = scf.studio.Studio()
-    assert not studio.package_exists('baca.materials.testsargasso')
+    assert not studio.package_exists('materials.testsargasso')
     try:
         studio.run(user_input=
             'materials maker sargasso testsargasso default '
             'q'
             )
         mpp = scf.makers.SargassoMeasureMaterialPackageMaker(
-            'baca.materials.testsargasso')
+            'materials.testsargasso')
         assert mpp.directory_contents == ['__init__.py', 'user_input.py']
         user_input_wrapper = UserInputWrapper([
             ('measure_denominator', None),
@@ -28,14 +28,14 @@ def test_SargassoMeasureMaterialPackageMaker_01():
         assert mpp.user_input_wrapper_in_memory == user_input_wrapper
     finally:
         studio.run(user_input='m testsargasso del remove default q')
-        assert not studio.package_exists('baca.materials.testsargasso')
+        assert not studio.package_exists('materials.testsargasso')
 
 
 def test_SargassoMeasureMaterialPackageMaker_02():
     '''Load demo values.'''
 
     studio = scf.studio.Studio()
-    assert not studio.package_exists('baca.materials.testsargasso')
+    assert not studio.package_exists('materials.testsargasso')
 
     try:
         studio.run(user_input=
@@ -44,7 +44,7 @@ def test_SargassoMeasureMaterialPackageMaker_02():
             'q'
             )
         mpp = scf.makers.SargassoMeasureMaterialPackageMaker(
-            'baca.materials.testsargasso')
+            'materials.testsargasso')
         assert mpp.directory_contents == ['__init__.py', 'user_input.py']
         user_input_wrapper = UserInputWrapper([
             ('measure_denominator', 4),
@@ -58,14 +58,14 @@ def test_SargassoMeasureMaterialPackageMaker_02():
         assert mpp.user_input_wrapper_in_memory == user_input_wrapper
     finally:
         studio.run(user_input='m testsargasso del remove default q')
-        assert not studio.package_exists('baca.materials.testsargasso')
+        assert not studio.package_exists('materials.testsargasso')
 
 
 def test_SargassoMeasureMaterialPackageMaker_03():
     '''Load demo values and then clear all.'''
 
     studio = scf.studio.Studio()
-    assert not studio.package_exists('baca.materials.testsargasso')
+    assert not studio.package_exists('materials.testsargasso')
     try:
         studio.run(user_input=
             'materials maker sargasso testsargasso default '
@@ -73,7 +73,7 @@ def test_SargassoMeasureMaterialPackageMaker_03():
             'q'
             )
         mpp = scf.makers.SargassoMeasureMaterialPackageMaker(
-            'baca.materials.testsargasso')
+            'materials.testsargasso')
         assert mpp.directory_contents == ['__init__.py', 'user_input.py']
         user_input_wrapper = UserInputWrapper([
             ('measure_denominator', None),
@@ -87,14 +87,14 @@ def test_SargassoMeasureMaterialPackageMaker_03():
         assert mpp.user_input_wrapper_in_memory == user_input_wrapper
     finally:
         studio.run(user_input='m testsargasso del remove default q')
-        assert not studio.package_exists('baca.materials.testsargasso')
+        assert not studio.package_exists('materials.testsargasso')
 
 
 def test_SargassoMeasureMaterialPackageMaker_04():
     '''Edit one value.'''
 
     studio = scf.studio.Studio()
-    assert not studio.package_exists('baca.materials.testsargasso')
+    assert not studio.package_exists('materials.testsargasso')
     try:
         studio.run(user_input=
             'materials maker sargasso testsargasso default '
@@ -102,7 +102,7 @@ def test_SargassoMeasureMaterialPackageMaker_04():
             'q'
             )
         mpp = scf.makers.SargassoMeasureMaterialPackageMaker(
-            'baca.materials.testsargasso')
+            'materials.testsargasso')
         assert mpp.directory_contents == ['__init__.py', 'user_input.py']
         user_input_wrapper = UserInputWrapper([
             ('measure_denominator', None),
@@ -116,14 +116,14 @@ def test_SargassoMeasureMaterialPackageMaker_04():
         assert mpp.user_input_wrapper_in_memory == user_input_wrapper
     finally:
         studio.run(user_input='m testsargasso del remove default q')
-        assert not studio.package_exists('baca.materials.testsargasso')
+        assert not studio.package_exists('materials.testsargasso')
 
 
 def test_SargassoMeasureMaterialPackageMaker_05():
     '''Populate wrapper.'''
 
     studio = scf.studio.Studio()
-    assert not studio.package_exists('baca.materials.testsargasso')
+    assert not studio.package_exists('materials.testsargasso')
     try:
         studio.run(user_input=
             'materials maker sargasso testsargasso default '
@@ -132,7 +132,7 @@ def test_SargassoMeasureMaterialPackageMaker_05():
             'q'
             )
         mpp = scf.makers.SargassoMeasureMaterialPackageMaker(
-            'baca.materials.testsargasso')
+            'materials.testsargasso')
         assert mpp.directory_contents == ['__init__.py', 'user_input.py']
         user_input_wrapper = UserInputWrapper([
             ('measure_denominator', 4),
@@ -146,14 +146,14 @@ def test_SargassoMeasureMaterialPackageMaker_05():
         assert mpp.user_input_wrapper_in_memory == user_input_wrapper
     finally:
         studio.run(user_input='m testsargasso del remove default q')
-        assert not studio.package_exists('baca.materials.testsargasso')
+        assert not studio.package_exists('materials.testsargasso')
 
 
 def test_SargassoMeasureMaterialPackageMaker_06():
     '''Partial poputation.'''
 
     studio = scf.studio.Studio()
-    assert not studio.package_exists('baca.materials.testsargasso')
+    assert not studio.package_exists('materials.testsargasso')
     try:
         studio.run(user_input=
             'materials maker sargasso testsargasso default '
@@ -162,7 +162,7 @@ def test_SargassoMeasureMaterialPackageMaker_06():
             'q'
             )
         mpp = scf.makers.SargassoMeasureMaterialPackageMaker(
-            'baca.materials.testsargasso')
+            'materials.testsargasso')
         assert mpp.directory_contents == ['__init__.py', 'user_input.py']
         user_input_wrapper = UserInputWrapper([
             ('measure_denominator', 4),
@@ -176,14 +176,14 @@ def test_SargassoMeasureMaterialPackageMaker_06():
         assert mpp.user_input_wrapper_in_memory == user_input_wrapper
     finally:
         studio.run(user_input='m testsargasso del remove default q')
-        assert not studio.package_exists('baca.materials.testsargasso')
+        assert not studio.package_exists('materials.testsargasso')
 
 
 def test_SargassoMeasureMaterialPackageMaker_07():
     '''Set some values to none.'''
 
     studio = scf.studio.Studio()
-    assert not studio.package_exists('baca.materials.testsargasso')
+    assert not studio.package_exists('materials.testsargasso')
     try:
         studio.run(user_input=
             'materials maker sargasso testsargasso default '
@@ -191,7 +191,7 @@ def test_SargassoMeasureMaterialPackageMaker_07():
             'q'
             )
         mpp = scf.makers.SargassoMeasureMaterialPackageMaker(
-            'baca.materials.testsargasso')
+            'materials.testsargasso')
         assert mpp.directory_contents == ['__init__.py', 'user_input.py']
         user_input_wrapper = UserInputWrapper([
             ('measure_denominator', 4),
@@ -205,4 +205,4 @@ def test_SargassoMeasureMaterialPackageMaker_07():
         assert mpp.user_input_wrapper_in_memory == user_input_wrapper
     finally:
         studio.run(user_input='m testsargasso del remove default q')
-        assert not studio.package_exists('baca.materials.testsargasso')
+        assert not studio.package_exists('materials.testsargasso')

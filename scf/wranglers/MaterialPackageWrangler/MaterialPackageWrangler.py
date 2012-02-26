@@ -158,7 +158,7 @@ class MaterialPackageWrangler(PackageWrangler):
         assert isinstance(package_root_name, str)
         result = []
         result.append(package_root_name)
-        if not package_root_name == self.home_package_importable_name:
+        if not package_root_name == self.score_external_materials_package_importable_name:
             result.append('mus')
         result.append('materials')
         result = self.dot_join(result)

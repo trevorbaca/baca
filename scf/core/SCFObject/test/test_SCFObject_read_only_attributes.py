@@ -18,9 +18,7 @@ def test_SCFObject_read_only_attributes_01():
     assert scf_object.score_external_chunks_package_importable_name == 'sketches'
     assert scf_object.source_file_name == '/Users/trevorbaca/Documents/other/baca/scf/core/SCFObject/SCFObject.py'
     assert scf_object.spaced_class_name == 's c f object'
-    assert scf_object.studio_directory_name == '/Users/trevorbaca/Documents/other/baca'
     assert scf_object.score_external_materials_package_importable_name == 'materials'
-    assert scf_object.home_package_importable_name == 'baca'
     assert scf_object.stylesheets_directory_name == '/Users/trevorbaca/Documents/other/baca/scf/stylesheets'
     assert scf_object.stylesheets_package_importable_name == 'scf.stylesheets'
     assert isinstance(scf_object.transcript, list)

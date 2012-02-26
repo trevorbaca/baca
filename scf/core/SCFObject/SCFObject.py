@@ -47,16 +47,6 @@ class SCFObject(object):
         return 5
 
     @property
-    def home_package_importable_name(self):
-        #return 'baca'
-        return os.path.basename(os.environ.get('SCFHOMEPACKAGEPATH'))
-
-    @property
-    def home_package_path_name(self):
-        #return os.environ.get('BACA')
-        return os.environ.get('SCFHOMEPACKAGEPATH')
-
-    @property
     def human_readable_class_name(self): return self.change_string_to_human_readable_string(self.class_name)
 
     @property
@@ -77,7 +67,6 @@ class SCFObject(object):
 
     @property
     def score_external_chunks_package_importable_name(self):
-        #return self.dot_join([self.home_package_importable_name, 'sketches'])
         return os.path.basename(os.environ.get('SCFCHUNKSPATH'))
 
     @property
@@ -86,7 +75,6 @@ class SCFObject(object):
 
     @property
     def score_external_materials_package_importable_name(self):
-        #return self.dot_join([self.home_package_importable_name, 'materials'])
         return os.path.basename(os.environ.get('SCFMATERIALSPATH'))
 
     @property
@@ -111,7 +99,6 @@ class SCFObject(object):
 
     @property
     def score_external_specifiers_package_importable_name(self):
-        #return self.dot_join([self.home_package_importable_name, 'specifiers'])
         return os.path.basename(os.environ.get('SCFSPECIFIERSPATH'))
 
     @property
@@ -147,10 +134,6 @@ class SCFObject(object):
     @property
     def spaced_class_name(self):
         return iotools.uppercamelcase_to_space_delimited_lowercase(self.class_name)
-
-    @property
-    def studio_directory_name(self):
-        return self.package_importable_name_to_path_name(self.home_package_importable_name)
 
     @property
     def stylesheets_directory_name(self):
@@ -367,9 +350,6 @@ class SCFObject(object):
         elif package_importable_name_parts[0] == self.score_external_specifiers_package_importable_name:
             directory_parts = \
                 [self.score_external_chunks_package_path_name] + package_importable_name_parts[1:]
-        # TODO: delete these two lines after phasing out 'baca' package
-        elif package_importable_name_parts[0] == self.home_package_importable_name:
-            directory_parts = [self.home_package_path_name] + package_importable_name_parts[1:]
         else:
             directory_parts = [self.scores_directory_name] + package_importable_name_parts[:]
         directory = os.path.join(*directory_parts)
@@ -397,9 +377,6 @@ class SCFObject(object):
             prefix_length = len(os.path.dirname(self.score_external_specifiers_package_path_name)) + 1
         elif path_name.startswith(self.scores_directory_name):
             prefix_length = len(self.scores_directory_name) + 1
-#        # TODO: remove these two lines after phasing out 'baca' package
-#        elif path_name.startswith(self.home_package_path_name):
-#            prefix_length = len(os.path.dirname(self.home_package_path_name)) + 1
         else:
             return
         package_importable_name = path_name[prefix_length:]

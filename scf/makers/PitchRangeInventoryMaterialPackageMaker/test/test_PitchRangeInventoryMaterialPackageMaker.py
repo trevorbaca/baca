@@ -7,28 +7,28 @@ def test_PitchRangeInventoryMaterialPackageMaker_01():
     '''Empty wrapper.'''
 
     studio = scf.studio.Studio()
-    assert not studio.package_exists('baca.materials.testpir')
+    assert not studio.package_exists('materials.testpir')
     try:
         studio.run(user_input=
             'materials maker pitch testpir default '
             'q'
             )
         mpp = scf.makers.PitchRangeInventoryMaterialPackageMaker(
-            'baca.materials.testpir')
+            'materials.testpir')
         # TODO: mpp.directory_contents == ['__init__.py']
         assert mpp.directory_contents == ['__init__.py', 'user_input.py']
         assert mpp.output_material is None
         assert mpp.user_input_wrapper_in_memory.is_empty
     finally:
         studio.run(user_input='m testpir del remove default q')
-        assert not studio.package_exists('baca.materials.testpir')
+        assert not studio.package_exists('materials.testpir')
 
 
 def test_PitchRangeInventoryMaterialPackageMaker_02():
     '''Populate wrapper.'''
 
     studio = scf.studio.Studio()
-    assert not studio.package_exists('baca.materials.testpir')
+    assert not studio.package_exists('materials.testpir')
     try:
         studio.run(user_input=
             'materials maker pitch testpir default '
@@ -37,7 +37,7 @@ def test_PitchRangeInventoryMaterialPackageMaker_02():
             'q'
             )
         mpp = scf.makers.PitchRangeInventoryMaterialPackageMaker(
-            'baca.materials.testpir')
+            'materials.testpir')
         # TODO: mpp.directory_contents == ['__init__.py', 'output_material.py']
         assert mpp.directory_contents == ['__init__.py', 'output_material.py', 'user_input.py']
         pitch_range_inventory = pitchtools.PitchRangeInventory([
@@ -46,4 +46,4 @@ def test_PitchRangeInventoryMaterialPackageMaker_02():
         assert mpp.user_input_wrapper_in_memory.is_empty
     finally:
         studio.run(user_input='m testpir del remove default q')
-        assert not studio.package_exists('baca.materials.testpir')
+        assert not studio.package_exists('materials.testpir')
