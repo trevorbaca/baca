@@ -397,9 +397,9 @@ class SCFObject(object):
             prefix_length = len(os.path.dirname(self.score_external_specifiers_package_path_name)) + 1
         elif path_name.startswith(self.scores_directory_name):
             prefix_length = len(self.scores_directory_name) + 1
-        # TODO: remove these two lines after phasing out 'baca' package
-        elif path_name.startswith(self.home_package_path_name):
-            prefix_length = len(os.path.dirname(self.home_package_path_name)) + 1
+#        # TODO: remove these two lines after phasing out 'baca' package
+#        elif path_name.startswith(self.home_package_path_name):
+#            prefix_length = len(os.path.dirname(self.home_package_path_name)) + 1
         else:
             return
         package_importable_name = path_name[prefix_length:]

@@ -13,7 +13,6 @@ def test_HomePackageProxy_01():
     assert hpp.get_tags() == {}
     assert hpp.initializer_file_name == '/Users/trevorbaca/Documents/other/baca/__init__.py'
     assert hpp.formatted_tags == []
-    assert hpp.importable_name == 'baca'
     assert hpp.short_name == 'baca'
     assert hpp.human_readable_name == 'baca'
     assert hpp.parent_initializer_file_name is None
