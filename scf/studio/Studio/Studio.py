@@ -132,15 +132,15 @@ class Studio(SCFObject):
         '''Return true to exit the svn menu.
         '''
         this_result = False
-        if result == 'ci_scores':
+        if result == 'ci':
             self.score_package_wrangler.svn_ci()
-        elif result == 'pytest_scores':
-            self.score_package_wrangler.run_py_test()
-        elif result == 'pytest_all':
-            self.run_py_test_all()
-        elif result == 'st_scores':
+        #elif result == 'pytest_scores':
+        #    self.score_package_wrangler.run_py_test()
+        #elif result == 'pytest_all':
+        #    self.run_py_test_all()
+        elif result == 'st':
             self.score_package_wrangler.svn_st()
-        elif result == 'up_scores':
+        elif result == 'up':
             self.score_package_wrangler.svn_up()
             return True
         return this_result
@@ -165,20 +165,11 @@ class Studio(SCFObject):
         return menu
 
     def make_svn_menu(self):
-        menu, section = self.make_menu(where=self.where(), is_keyed=False)
-        #section.append(('add', 'add'))
-        #section.append(('ci', 'ci'))
-        #section.append(('st', 'st'))
-        #section.append(('up', 'up'))
-        section = menu.make_section(is_keyed=False)
-        section.append(('add_scores', 'add_scores'))
-        section.append(('ci_scores', 'ci_scores'))
-        section.append(('st_scores', 'st_scores'))
-        section.append(('up_scores', 'up_scores'))
-        section = menu.make_section(is_keyed=False)
-        #section.append(('pytest', 'pytest'))
-        section.append(('pytest_scores', 'pytest_scores'))
-        section.append(('pytest_all', 'pytest_all'))
+        menu, section = self.make_menu(where=self.where())
+        section.append(('add', 'svn add scores'))
+        section.append(('ci', 'svn commit scores'))
+        section.append(('st', 'svn status scores'))
+        section.append(('up', 'svn update scores'))
         return menu
 
     def manage_svn(self, clear=True):

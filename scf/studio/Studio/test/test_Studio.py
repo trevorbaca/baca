@@ -112,13 +112,10 @@ def test_Studio_06():
     assert studio.transcript[-2] == [
       'Studio - active scores - repository commands',
       '',
-      '     add_scores',
-      '     ci_scores',
-      '     st_scores',
-      '     up_scores',
-      '',
-      '     pytest_scores',
-      '     pytest_all',
+      '     svn add scores (add)',
+      '     svn commit scores (ci)',
+      '     svn status scores (st)',
+      '     svn update scores (up)',
       '']
 
 
