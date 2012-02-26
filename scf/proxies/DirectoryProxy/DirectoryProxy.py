@@ -42,6 +42,9 @@ class DirectoryProxy(AssetProxy):
     def conditionally_make_empty_asset(self, is_interactive=False):
         self.print_not_yet_implemented()
 
+    def fix(self, is_interactive=False):
+        pass
+
     def get_directory_name_interactively(self):
         getter = self.make_getter(where=self.where())
         getter.append_string('directory name')
@@ -52,6 +55,9 @@ class DirectoryProxy(AssetProxy):
 
     def make_directory(self):
         os.mkdir(self.path_name)
+
+    def profile(self):
+        pass
 
     def print_directory_contents(self):
         self.display(self.directory_contents, capitalize_first_character=False)

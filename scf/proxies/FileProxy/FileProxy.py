@@ -45,6 +45,9 @@ class FileProxy(AssetProxy):
     def edit(self):
         os.system('vi + {}'.format(self.path_name))
 
+    def fix(self):
+        pass
+
     def has_line(self, line):
         file_reference = open(self.path_name, 'r')
         for file_line in file_reference.readlines():
@@ -53,6 +56,9 @@ class FileProxy(AssetProxy):
                 return True
         file_reference.close()
         return False
+
+    def profile(self):
+        pass
 
     def view(self):
         os.system('vi -R {}'.format(self.path_name))

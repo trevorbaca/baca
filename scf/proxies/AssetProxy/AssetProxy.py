@@ -113,16 +113,18 @@ class AssetProxy(SCFObject):
         self.copy(new_path_name)
         self.proceed('asset copied.')
 
+    @abstractmethod
     def fix(self):
-        self.print_implemented_on_child_classes()
+        pass
 
     def human_readable_name_to_asset_short_name(self, human_readable_name):
         asset_short_name = human_readable_name.lower()
         asset_short_name = asset_short_name.replace(' ', '_')
         return asset_short_name
     
+    @abstractmethod
     def profile(self):
-        self.print_implemented_on_child_classes()
+        pass
 
     def remove(self):
         if self.is_versioned:
@@ -169,7 +171,6 @@ class AssetProxy(SCFObject):
         result = getter.run()
         if self.backtrack():
             return
-        #asset_short_name = self.human_readable_name_to_asset_short_name(result)
         new_path_name = os.path.join(self.parent_directory_name, result)
         self.display(['new path name will be: "{}"'.format(new_path_name), ''])
         if not self.confirm():
