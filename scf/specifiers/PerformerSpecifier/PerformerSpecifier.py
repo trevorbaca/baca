@@ -3,4 +3,6 @@ from scf.specifiers.ParameterSpecifier import ParameterSpecifier
 
 class PerformerSpecifier(ParameterSpecifier):
 
-    pass
+    def __init__(self, performer=None):
+        Specifier.__init__(self)
+        self.performer = performer

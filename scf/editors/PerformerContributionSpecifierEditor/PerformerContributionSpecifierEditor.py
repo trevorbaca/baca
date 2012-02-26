@@ -43,7 +43,7 @@ class PerformerContributionSpecifierEditor(InteractiveEditor):
 
     @property
     def breadcrumb(self):
-        return self.target_name or 'performer contribution'
+        return self.target_name or 'unknown performer'
 
     @property
     def target_name(self):

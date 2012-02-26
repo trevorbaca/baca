@@ -6,6 +6,7 @@ import makers
 import menuing
 import predicates
 import proxies
+import selectors
 import specifiers
 import studio
 import wranglers
