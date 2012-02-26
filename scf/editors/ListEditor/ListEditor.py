@@ -21,7 +21,7 @@ class ListEditor(InteractiveEditor):
     def summary_lines(self):
         result = []
         for target_item in self.target_items:
-            result.append(repr(target_item))
+            result.append(self.get_one_line_menuing_summary(target_item))
         return result
 
     @property

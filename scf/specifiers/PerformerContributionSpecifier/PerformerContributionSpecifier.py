@@ -56,8 +56,10 @@ class PerformerContributionSpecifier(Specifier):
             variable_value = getattr(self, variable_name)
             if variable_value:
                 parameter_specifiers.append(repr(variable_value))
-        if parameter_specifiers:
-            return ', '.join(parameter_specifiers)
+        if len(parameter_specifiers) == 1:
+            return '1 parameter specified'
+        elif 1 < len(parameter_specifiers):
+            return '{} parameterspecified'.format(len(parameter_specifiers))
         else:
             return 'no parameters specified'
 

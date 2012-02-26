@@ -10,8 +10,8 @@ class PerformerContributionSpecifierListEditor(ListEditor):
     target_item_getter_configuration_method = None
     target_item_class = PerformerContributionSpecifier
     target_item_editor_class = PerformerContributionSpecifierEditor
-    target_item_identifier = 'performer contribution specifier'
-    target_items_identifier = 'performer contribution specifiers'
+    target_item_identifier = 'performer contribution'
+    target_items_identifier = 'performer contributions'
 
     ### READ-ONLY PUBLIC ATTRIBUTES ###
 
