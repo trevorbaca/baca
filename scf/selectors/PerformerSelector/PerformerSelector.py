@@ -22,6 +22,6 @@ class PerformerSelector(Selector):
             instrumentation = score_package_proxy.instrumentation
             if instrumentation:
                 for performer in instrumentation.performers:
-                    token = (repr(performer), repr(performer), performer)
+                    token = (None, repr(performer), None, performer)
                     tokens.append(token)
         return tokens

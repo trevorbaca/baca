@@ -40,11 +40,11 @@ class MenuSection(MenuObject):
 
     @property
     def has_existing_value_tuple_tokens(self):
-        return any([isinstance(x, tuple) and len(tuple) == 3 for x in self.tokens])
+        return any([isinstance(x, tuple) and len(x) == 3 for x in self.tokens])
 
     @property
-    def has_prepopulated_return_value_tuple_token(self):
-        return any([isinstance(x, tuple) and len(tuple) == 4 for x in self.tokens])
+    def has_prepopulated_return_value_tuple_tokens(self):
+        return any([isinstance(x, tuple) and len(x) == 4 for x in self.tokens])
 
     @property
     def has_string_tokens(self):

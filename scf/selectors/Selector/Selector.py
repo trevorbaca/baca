@@ -27,6 +27,8 @@ class Selector(SCFObject):
     def make_main_menu(self, head=None):
         menu, section = self.make_menu(where=self.where(), is_parenthetically_numbered=True, is_keyed=False)
         section.tokens = self.make_menu_tokens(head=head)
+        assert section.has_prepopulated_return_value_tuple_tokens
+        section.return_value_attribute = 'prepopulated'
         return menu
 
     def run(self, cache=False, clear=True, head=None, user_input=None):
@@ -45,5 +47,4 @@ class Selector(SCFObject):
                 break
         self.pop_breadcrumb()
         self.restore_breadcrumbs(cache=cache)
-        self.debug(result, 'result!')
         return result

@@ -240,9 +240,12 @@ class Menu(MenuSectionAggregator):
                     element = element.replace(' (default)', '')
                 cleaned_list.append(element)
             return cleaned_list
-        elif expr is not None:
+        #elif expr is not None:
+        elif isinstance(expr, str):
             if expr.endswith(' (default)'):
                 expr = expr.replace(' (default)', '')
+            return expr
+        else:
             return expr
 
     def user_enters_argument_range(self, user_input):
