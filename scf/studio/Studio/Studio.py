@@ -115,7 +115,7 @@ class Studio(SCFObject):
         elif result == 'all':
             self.session.show_all_scores()
         elif result == 'k':
-            self.print_not_implemented()
+            self.print_not_yet_implemented()
         elif result == 'm':
             breadcrumb = self.pop_breadcrumb()
             self.material_package_wrangler.run(head=self.home_package_importable_name)

@@ -402,7 +402,7 @@ class SCFObject(object):
         self.display(['method implemented on child classes.', ''])
         self.proceed()
 
-    def print_not_implemented(self):
+    def print_not_yet_implemented(self):
         self.display(['not yet implemented', ''])
         self.proceed()
 

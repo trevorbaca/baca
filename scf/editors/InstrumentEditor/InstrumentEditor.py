@@ -99,7 +99,7 @@ class InstrumentEditor(InteractiveEditor):
         
     def handle_main_menu_result(self, result):
         if result == 'cl':
-            self.print_not_implemented()
+            self.print_not_yet_implemented()
             #self.edit_clefs_interactively()
         elif result == 'in':
             self.edit_instrument_name_interactively()
@@ -117,7 +117,7 @@ class InstrumentEditor(InteractiveEditor):
             else:
                 self.session.display_pitch_ranges_with_numbered_pitches = True
         elif result == 'trans':
-            self.print_not_implemented()
+            self.print_not_yet_implemented()
             #self.edit_transposition_interactively()
 
     def make_main_menu(self):

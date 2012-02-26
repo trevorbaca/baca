@@ -15,10 +15,10 @@ class StylesheetFileProxy(FileProxy):
 
     # TODO: implement later
     def audit_stylesheet(self):
-        self.print_not_implemented()
+        self.print_not_yet_implemented()
 
     def fix(self):
-        self.print_not_implemented()
+        self.print_not_yet_implemented()
         
     def handle_main_menu_result(self, result):
         assert isinstance(result, str)

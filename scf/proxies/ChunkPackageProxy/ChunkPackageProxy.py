@@ -36,10 +36,10 @@ class ChunkPackageProxy(PackageProxy):
             self.initializer_file_proxy.view()
 
     def make_asset(self):
-        self.print_not_implemented()
+        self.print_not_yet_implemented()
 
     def make_asset_interactively(self, prompt=True):
-        self.print_not_implemented()
+        self.print_not_yet_implemented()
 
     def make_main_menu(self):
         menu, section = self.make_menu(where=self.where())
@@ -62,4 +62,4 @@ class ChunkPackageProxy(PackageProxy):
         self.proceed(line, prompt=prompt)
 
     def set_score_template_interactively(self):
-        self.print_not_implemented()
+        self.print_not_yet_implemented()
