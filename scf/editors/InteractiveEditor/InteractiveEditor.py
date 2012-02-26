@@ -68,6 +68,14 @@ class InteractiveEditor(SCFObject):
         else:
             self.attributes_in_memory[attribute_name] = attribute_value
 
+    def get_one_line_menuing_summary(self, expr):
+        if hasattr(expr, '_one_line_menuing_summary'):
+            return expr._one_line_menuing_summary
+        elif hasattr(expr, 'one_line_menuing_summary'):
+            return expr.one_line_menuing_summary
+        else:
+            return repr(expr)
+
     def handle_main_menu_result(self, result):
         attribute_name = self.target_manifest.menu_key_to_attribute_name(result)
         existing_value = self.menu_key_to_existing_value(result)
@@ -109,7 +117,7 @@ class InteractiveEditor(SCFObject):
             attribute_value = getattr(self.target, target_attribute_name) 
             if hasattr(attribute_value, '__len__') and not len(attribute_value):
                 attribute_value = None
-            existing_value = repr(attribute_value)
+            existing_value = self.get_one_line_menuing_summary(attribute_value)
             if 6 <= len(target_attribute_tuple):
                 display_attribute = target_attribute_tuple[5]
                 if display_attribute is not None:
@@ -130,7 +138,7 @@ class InteractiveEditor(SCFObject):
                 attribute_value = self.attributes_in_memory.get(target_attribute_name)
             if hasattr(attribute_value, '__len__') and not len(attribute_value):
                 attribute_value = None
-            existing_value = repr(attribute_value)
+            existing_value = self.get_one_line_menuing_summary(attribute_value)
             token = (menu_key, menu_body, existing_value)
             result.append(token)
         return result
