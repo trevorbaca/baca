@@ -11,5 +11,7 @@ class PerformerSpecifier(ParameterSpecifier):
 
     @property
     def one_line_menuing_summary(self):
-        if self.performer:
-            return self.performer.performer_name
+        try:
+            return self.performer.name
+        except AttributeError:
+            return

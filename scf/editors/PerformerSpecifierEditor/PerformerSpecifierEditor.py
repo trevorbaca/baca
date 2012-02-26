@@ -19,4 +19,4 @@ class PerformerSpecifierEditor(ParameterSpecifierEditor):
     def target_name(self):
         if self.target:
             if self.target.performer:
-                return self.target.performer.performer_name
+                return self.target.performer.name

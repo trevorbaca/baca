@@ -5,16 +5,22 @@ import types
 
 class AttributeDetail(object):
 
-    def __init__(self, name, menu_key, editor_callable, allow_none=True):
+    def __init__(self, *args, **kwargs):
+        if len(args) == 3:
+            name, menu_key, editor_callable = args
+            human_readable_name = name.replace('_', ' ')
+        elif len(args) == 4:
+            name, human_readable_name, menu_key, editor_callable = args
         self.name = name
+        self.human_readable_name = human_readable_name 
         self.menu_key = menu_key
         self.editor_callable = editor_callable
-        self.allow_none = allow_none
+        self.allow_none = kwargs.get('allow_none', True)
 
     ### OVERLOADS ###
 
     def __repr__(self):
-        parts = [repr(self.name), repr(self.menu_key), self.editor_callable.__name__]
+        parts = [repr(self.human_readable_name), repr(self.menu_key), self.editor_callable.__name__]
         if not self.allow_none:
             parts.append('allow_none=False')
         parts = ', '.join(parts)

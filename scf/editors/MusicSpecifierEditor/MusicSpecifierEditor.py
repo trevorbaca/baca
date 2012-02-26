@@ -15,7 +15,8 @@ class MusicSpecifierEditor(InteractiveEditor):
     target_manifest = TargetManifest(MusicSpecifier,
         ('music_specifier_name', 'nm', getters.get_string),
         ('tempo', 'tp', TempoMarkEditor),
-        ('performer_contribution_specifiers', 'pc', PerformerContributionSpecifierListEditor),
+        ('performer_contribution_specifiers', 'performer contributions', 'pc', 
+            PerformerContributionSpecifierListEditor),
         )
 
     ### READ-ONLY PUBLIC ATTRIBUTES ###

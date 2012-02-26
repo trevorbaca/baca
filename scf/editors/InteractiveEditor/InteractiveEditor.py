@@ -130,7 +130,6 @@ class InteractiveEditor(SCFObject):
             if hasattr(attribute_value, '__len__') and not len(attribute_value):
                 attribute_value = None
             existing_value = self.get_one_line_menuing_summary(attribute_value)
-            #existing_value = repr(attribute_value)
             if 6 <= len(target_attribute_tuple):
                 display_attribute = target_attribute_tuple[5]
                 if display_attribute is not None:
@@ -144,7 +143,7 @@ class InteractiveEditor(SCFObject):
         for attribute_detail in self.target_manifest.attribute_details:
             menu_key = attribute_detail.menu_key
             target_attribute_name = attribute_detail.name
-            menu_body = target_attribute_name.replace('_', ' ')
+            menu_body = attribute_detail.human_readable_name
             if self.target:
                 attribute_value = getattr(self.target, target_attribute_name)
             else:
@@ -152,7 +151,6 @@ class InteractiveEditor(SCFObject):
             if hasattr(attribute_value, '__len__') and not len(attribute_value):
                 attribute_value = None
             existing_value = self.get_one_line_menuing_summary(attribute_value)
-            #existing_value = repr(attribute_value)
             token = (menu_key, menu_body, existing_value)
             result.append(token)
         return result

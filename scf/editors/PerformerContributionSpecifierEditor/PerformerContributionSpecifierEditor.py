@@ -23,6 +23,7 @@ class PerformerContributionSpecifierEditor(InteractiveEditor):
 
     target_class = PerformerContributionSpecifier
     target_manifest = TargetManifest(PerformerContributionSpecifier,
+        ('performer_specifier', 'per', PerformerSpecifierEditor),
         ('articulation_specifier', 'art', ArticulationSpecifierEditor),
         ('clef_specifier', 'clf', ClefSpecifierEditor),
         ('directive_specifier', 'dir', DirectiveSpecifierEditor),
@@ -30,7 +31,6 @@ class PerformerContributionSpecifierEditor(InteractiveEditor):
         ('instrument_specifier', 'ins', InstrumentSpecifierEditor),
         ('note_head_specifier', 'nhd', NoteHeadSpecifierEditor),
         ('override_specifier', 'ovr', OverrideSpecifierEditor),
-        ('performer_specifier', 'per', PerformerSpecifierEditor),
         ('pitch_class_specifier', 'pcs', PitchClassSpecifierEditor),
         ('registration_specifier', 'reg', RegistrationSpecifierEditor),
         ('rhythm_specifier', 'rhy', RhythmSpecifierEditor),
@@ -47,8 +47,7 @@ class PerformerContributionSpecifierEditor(InteractiveEditor):
 
     @property
     def target_name(self):
-        if self.target is not None:
-            if self.target.performer_specifier is not None:
-                performer_name = self.target.performer_specifier.performer_name
-                if performer_name:
-                    return '{}'.format(performer_name)
+        try:
+            return self.target.performer_specifier.performer.name
+        except AttributeError:
+            return
