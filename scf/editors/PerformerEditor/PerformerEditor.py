@@ -15,13 +15,6 @@ class PerformerEditor(InteractiveEditor):
     ### READ-ONLY PUBLIC ATTRIBUTES ###
 
     @property
-    def breadcrumb(self):
-        if self.target is not None and self.target.name is not None:
-            return self.target.name
-        else:
-            return 'performer'
-
-    @property
     def instrument_names(self):
         return [instrument.instrument_name for instrument in self.target.instruments]
 
@@ -37,6 +30,11 @@ class PerformerEditor(InteractiveEditor):
             result = '{}: {}'.format(self.target.name, instruments)
         result = [result]
         return result
+
+    @property
+    def target_name(self):
+        if self.target:
+            return self.target.name
 
     ### PUBLIC METHODS ###
 

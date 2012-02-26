@@ -17,10 +17,6 @@ class TempoMarkInventoryEditor(ListEditor):
     ### READ-ONLY PUBLIC ATTRIBUTES ###
 
     @property
-    def breadcrumb(self):
-        return 'tempo mark inventory'
-
-    @property
     def summary_lines(self):
         result = []
         for tempo_mark in self.target:

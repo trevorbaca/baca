@@ -19,10 +19,6 @@ class PitchRangeInventoryEditor(ListEditor):
     ### READ-ONLY PUBLIC ATTRIBUTES ###
 
     @property
-    def breadcrumb(self):
-        return 'pitch-range inventory'
-
-    @property
     def summary_lines(self):
         result = []
         for pitch_range in self.target:

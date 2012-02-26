@@ -42,9 +42,13 @@ class PerformerContributionSpecifierEditor(InteractiveEditor):
     ### READ-ONLY PUBLIC ATTRIBUTES ###
 
     @property
+    def breadcrumb(self):
+        return self.target_name or 'performer contribution'
+
+    @property
     def target_name(self):
         if self.target is not None:
             if self.target.performer_specifier is not None:
                 performer_name = self.target.performer_specifier.performer_name
                 if performer_name:
-                    return '{} contribution'.format(performer_name)
+                    return '{}'.format(performer_name)

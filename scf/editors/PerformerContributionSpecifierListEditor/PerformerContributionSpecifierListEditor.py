@@ -17,4 +17,4 @@ class PerformerContributionSpecifierListEditor(ListEditor):
 
     @property
     def breadcrumb(self):
-        return 'performer contributions'
+        return self.target_name or 'performer contributions'

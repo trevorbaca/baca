@@ -46,6 +46,10 @@ class InteractiveEditor(SCFObject):
     def target_class_human_readable_name(self):
         return self.change_string_to_human_readable_string(self.target_class.__name__)
 
+    @property
+    def target_name(self):
+        pass
+
     ### PUBLIC METHODS ###
 
     def attribute_name_to_menu_key(self, attribute_name, menu_keys):

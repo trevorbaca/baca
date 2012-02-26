@@ -13,12 +13,6 @@ class TempoMarkEditor(InteractiveEditor):
         ('units_per_minute', 'm', getters.get_integer),
         )
 
-    ### READ-ONLY PUBLIC ATTRIBUTES ###
-
-    @property
-    def breadcrumb(self):
-        return 'tempo mark editor'
-
     ### PUBLIC METHODS ###
 
     def conditionally_initialize_target(self):

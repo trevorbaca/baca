@@ -8,11 +8,7 @@ from scf import predicates
 # TODO: eventually make clef information editable
 class InstrumentEditor(InteractiveEditor):
 
-    ### READ-ONLY PUBLIC ATTRIBUTES ###
-
-    @property
-    def breadcrumb(self):
-        return self.target_name or 'instrument editor'
+    ### CLASS ATTRIBUTES ###
 
     target_attribute_tuples = (
         ('instrument_name', predicates.is_string, True, None, 'in'),
@@ -20,8 +16,10 @@ class InstrumentEditor(InteractiveEditor):
         ('short_instrument_name',  predicates.is_string, True, None, 'sn'),
         ('short_instrument_name_markup', predicates.is_markup, True, None, 'sm'),
         )
-            
+
     target_class = _Instrument
+
+    ### READ-ONLY PUBLIC ATTRIBUTES ###
 
     @property
     def target_name(self):

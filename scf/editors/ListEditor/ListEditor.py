@@ -15,7 +15,7 @@ class ListEditor(InteractiveEditor):
 
     @property
     def breadcrumb(self):
-        return 'list'
+        return self.target_name or 'list'
 
     @property
     def summary_lines(self):
