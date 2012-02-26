@@ -2,7 +2,7 @@ import os
 import scf
 
 
-def test_FileProxy_remove_01():
+def test_FileProxy_remove_interactively_01():
     '''Nonversioned file.
     '''
 
@@ -21,7 +21,7 @@ def test_FileProxy_remove_01():
         assert not os.path.exists(path_name)
 
 
-def test_FileProxy_remove_02():
+def test_FileProxy_remove_interactively_02():
     '''Versioned file.
     '''
 

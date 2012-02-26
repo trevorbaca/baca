@@ -25,12 +25,12 @@ class StylesheetFileProxy(FileProxy):
         if result == 'audit':
             self.audit_stylesheet()
         elif result == 'cp':
-            self.copy_stylesheet_interactively()
+            self.copy_interactively()
         elif result == 'rm':
-            self.remove_stylesheet_interactively()
+            self.remove_interactively()
             self.session.is_backtracking_locally = True
         elif result == 'ren':
-            self.rename_stylesheet_interactively()
+            self.rename_interactively()
         elif result == 'vi':
             self.edit()
         else:
@@ -50,12 +50,6 @@ class StylesheetFileProxy(FileProxy):
         section.append(('ren', 'rename stylesheet'))
         section.append(('vi', 'vi stylesheet'))
         return menu
-
-    # TODO: remove in favor of AssetProxy.remove_interactively()
-    def remove_stylesheet_interactively(self, prompt=True):
-        self.remove()
-        line = 'stylesheet deleted.'
-        self.proceed(line, prompt=prompt)
 
     # TODO: rename to rename_interactively() and subclass AssetProxy.rename_interactively()
     # TODO: implement rename() to subclass AssetProxy.renam()
