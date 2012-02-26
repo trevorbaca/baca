@@ -27,15 +27,18 @@ class ModuleProxy(ParsableFileProxy, ImportableAssetProxy):
 
     @property
     def grandparent_package_directory_name(self):
-        return self.package_importable_name_to_path_name(self.grandparent_package_importable_name)
+        if self.module_importable_name:
+            return self.package_importable_name_to_path_name(self.grandparent_package_importable_name)
 
     @property
     def grandparent_package_importable_name(self):
-        return self.dot_join(self.module_importable_name.split('.')[:-2])
+        if self.module_importable_name:
+            return self.dot_join(self.module_importable_name.split('.')[:-2])
 
     @property
     def grandparent_package_initializer_file_name(self):
-        return os.path.join(self.grandparent_package_directory_name, '__init__.py')
+        if self.module_importable_name:
+            return os.path.join(self.grandparent_package_directory_name, '__init__.py')
 
     @property
     def human_readable_name(self):
@@ -47,19 +50,23 @@ class ModuleProxy(ParsableFileProxy, ImportableAssetProxy):
 
     @property
     def module_short_name(self):
-        return self.module_importable_name.split('.')[-1]
+        if self.module_importable_name:
+            return self.module_importable_name.split('.')[-1]
 
     @property
     def parent_package_directory_name(self):
-        return self.package_importable_name_to_path_name(self.parent_package_importable_name)
+        if self.module_importable_name:
+            return self.package_importable_name_to_path_name(self.parent_package_importable_name)
 
     @property
     def parent_package_importable_name(self):
-        return self.dot_join(self.module_importable_name.split('.')[:-1])
+        if self.module_importable_name:
+            return self.dot_join(self.module_importable_name.split('.')[:-1])
 
     @property
     def parent_package_initializer_file_name(self):
-        return os.path.join(self.parent_package_directory_name, '__init__.py')
+        if self.module_importable_name:
+            return os.path.join(self.parent_package_directory_name, '__init__.py')
 
     ### PUBLIC METHODS ###
     

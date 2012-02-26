@@ -63,7 +63,7 @@ class SCFObject(object):
 
     @property
     def scf_package_path_name(self):
-        return os.environ.get('SCF')
+        return os.environ.get('SCFPATH')
 
     @property
     def score_internal_chunks_package_importable_name_infix(self):
@@ -324,7 +324,7 @@ class SCFObject(object):
             return
         package_importable_name_parts = package_importable_name.split('.')
         if package_importable_name_parts[0] == 'scf':
-            directory_parts = [os.environ.get('SCF')] + package_importable_name_parts[1:]
+            directory_parts = [os.environ.get('SCFPATH')] + package_importable_name_parts[1:]
         elif package_importable_name_parts[0] == self.home_package_importable_name:
             directory_parts = [os.environ.get('BACA')] + package_importable_name_parts[1:]
         else:

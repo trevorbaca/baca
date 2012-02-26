@@ -6,7 +6,7 @@ def test_FileProxy_remove_01():
     '''Nonversioned file.
     '''
 
-    path_name = os.path.join(os.environ.get('SCF'), 'temporary_file.txt')
+    path_name = os.path.join(os.environ.get('SCFPATH'), 'temporary_file.txt')
     file_proxy = scf.proxies.FileProxy(path_name=path_name)
     assert not os.path.exists(path_name)
 
@@ -25,7 +25,7 @@ def test_FileProxy_remove_02():
     '''Versioned file.
     '''
 
-    path_name = os.path.join(os.environ.get('SCF'), 'temporary_file.txt')
+    path_name = os.path.join(os.environ.get('SCFPATH'), 'temporary_file.txt')
     file_proxy = scf.proxies.FileProxy(path_name=path_name)
     assert not os.path.exists(path_name)
 

@@ -6,7 +6,7 @@ def test_StylesheetFileProxy_remove_interactively_01():
     '''Nonversioned file.
     '''
 
-    path_name = os.path.join(os.environ.get('SCF'), 'stylesheets', 'test_stylesheet.ly')
+    path_name = os.path.join(os.environ.get('SCFPATH'), 'stylesheets', 'test_stylesheet.ly')
     proxy = scf.proxies.StylesheetFileProxy(path_name=path_name)
     assert not proxy.exists
 
@@ -26,7 +26,7 @@ def test_StylesheetFileProxy_remove_interactively_02():
     '''Versioned file.
     '''
 
-    path_name = os.path.join(os.environ.get('SCF'), 'stylesheets', 'temporary_stylesheet.ly')
+    path_name = os.path.join(os.environ.get('SCFPATH'), 'stylesheets', 'temporary_stylesheet.ly')
     proxy = scf.proxies.StylesheetFileProxy(path_name=path_name)
     assert not proxy.exists
 

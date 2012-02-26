@@ -4,7 +4,7 @@ import scf
 
 def test_FileProxy_write_boilerplate_asset_to_disk_interactively_01():
 
-    path_name = os.path.join(os.environ.get('SCF'), 'temporary_file.txt')
+    path_name = os.path.join(os.environ.get('SCFPATH'), 'temporary_file.txt')
     file_proxy = scf.proxies.FileProxy(path_name=path_name)
     assert not os.path.exists(path_name)
 
