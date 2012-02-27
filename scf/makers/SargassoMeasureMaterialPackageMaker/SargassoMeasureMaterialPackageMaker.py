@@ -71,6 +71,7 @@ class SargassoMeasureMaterialPackageMaker(MaterialPackageMaker):
         lines.append('{} = ['.format(self.material_underscored_name))
         for measure in output_material[:-1]:
             line = measuretools.measure_to_one_line_input_string(measure)
+            line = 'measuretools.' + line
             lines.append('\t{},'.format(line))
         line = measuretools.measure_to_one_line_input_string(output_material[-1])
         lines.append('\t{}]'.format(line))
