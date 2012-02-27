@@ -495,7 +495,6 @@ class MaterialPackageProxy(PackageProxy):
             output_material_module_body_lines = self.make_output_material_module_body_lines(
                 output_material_editor.target)
         else:
-            #line = '{} = {!r}'.format(self.material_underscored_name, output_material_editor.target)
             line = '{} = {}'.format(
                 self.material_underscored_name, 
                 getattr(output_material_editor.target, 

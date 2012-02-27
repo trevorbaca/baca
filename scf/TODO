@@ -1,5 +1,10 @@
 TODO
 
+0. Asset instantiation (tested on material proxy instantiation) really does take some time.
+   So optimize to make asset instantiation take much less time.
+   Possibly by removing all [safe_]imports() from the __init__.py files.
+   Best to run the profiler while doing this to avoid unnecessary tinkering.
+
 1. Do away with local stylesheets.
 
 2. Make user input getter defaults work like menu defaults;
