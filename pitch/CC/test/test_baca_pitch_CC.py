@@ -83,7 +83,7 @@ def test_baca_pitch_CC_07():
     }
     """
 
-    assert staff.format == "\\new Staff {\n\t<c d bf e' af' b' f'' g'' ef''' fs''' a''' cs''''>4 \\markup { 1-80 }\n\t<c d bf e' af' b' f'' g'' ef''' fs''' a''' cs''''>4 \\markup { 2-59 }\n\t<e b c' d' bf' ef'' af'' a'' cs''' f''' g''' fs''''>4 \\markup { 3-56 }\n\t<e c' d' bf' b' ef'' a'' cs''' af''' f'''' fs'''' g''''>4 \\markup { 4-60 }\n\t<c ef b cs' e' d'' fs'' g'' af'' bf'' f''' a'''>4 \\markup { 5-83 }\n\t<d g bf c' ef' f' b' cs'' e'' fs''' af''' a''''>4 \\markup { 6-65 }\n\t<d bf b c' f' g' ef'' fs'' af'' cs''' e''' a'''>4 \\markup { 7-79 }\n\t<c b d' g' bf' e'' f'' fs'' af'' a'' ef''' cs''''>4 \\markup { 8-94 }\n}"
+    assert staff.format == "\\new Staff {\n\t<c d bf e' af' b' f'' g'' ef''' fs''' a''' cs''''>4 - \\markup { 1-80 }\n\t<c d bf e' af' b' f'' g'' ef''' fs''' a''' cs''''>4 - \\markup { 2-59 }\n\t<e b c' d' bf' ef'' af'' a'' cs''' f''' g''' fs''''>4 - \\markup { 3-56 }\n\t<e c' d' bf' b' ef'' a'' cs''' af''' f'''' fs'''' g''''>4 - \\markup { 4-60 }\n\t<c ef b cs' e' d'' fs'' g'' af'' bf'' f''' a'''>4 - \\markup { 5-83 }\n\t<d g bf c' ef' f' b' cs'' e'' fs''' af''' a''''>4 - \\markup { 6-65 }\n\t<d bf b c' f' g' ef'' fs'' af'' cs''' e''' a'''>4 - \\markup { 7-79 }\n\t<c b d' g' bf' e'' f'' fs'' af'' a'' ef''' cs''''>4 - \\markup { 8-94 }\n}"
 
 
 def test_baca_pitch_CC_08():
@@ -110,4 +110,4 @@ def test_baca_pitch_CC_09():
     }
     """
 
-    assert staff.format == "\\new Staff {\n\t<c d bf e' af' b' f'' g'' ef''' fs''' a''' cs''''>4 \\markup { 1-80 }\n\t<e b c' d' bf' ef'' af'' a'' cs''' f''' g''' fs''''>4 \\markup { 2-75 }\n\t<e c' d' bf' b' ef'' a'' cs''' af''' f'''' fs'''' g''''>4 \\markup { 3-60 }\n\t<c ef b cs' e' d'' fs'' g'' af'' bf'' f''' a'''>4 \\markup { 4-73 }\n\t<d g bf c' ef' f' b' cs'' e'' fs''' af''' a''''>4 \\markup { 5-117 }\n\t<d bf b c' f' g' ef'' fs'' af'' cs''' e''' a'''>4 \\markup { 6-69 }\n\t<c b d' g' bf' e'' f'' fs'' af'' a'' ef''' cs''''>4 \\markup { 7-108 }\n\t<c d bf e' af' b' f'' g'' ef''' fs''' a''' cs''''>4 \\markup { 8-99 }\n}"
+    assert staff.format == "\\new Staff {\n\t<c d bf e' af' b' f'' g'' ef''' fs''' a''' cs''''>4 - \\markup { 1-80 }\n\t<e b c' d' bf' ef'' af'' a'' cs''' f''' g''' fs''''>4 - \\markup { 2-75 }\n\t<e c' d' bf' b' ef'' a'' cs''' af''' f'''' fs'''' g''''>4 - \\markup { 3-60 }\n\t<c ef b cs' e' d'' fs'' g'' af'' bf'' f''' a'''>4 - \\markup { 4-73 }\n\t<d g bf c' ef' f' b' cs'' e'' fs''' af''' a''''>4 - \\markup { 5-117 }\n\t<d bf b c' f' g' ef'' fs'' af'' cs''' e''' a'''>4 - \\markup { 6-69 }\n\t<c b d' g' bf' e'' f'' fs'' af'' a'' ef''' cs''''>4 - \\markup { 7-108 }\n\t<c d bf e' af' b' f'' g'' ef''' fs''' a''' cs''''>4 - \\markup { 8-99 }\n}"
