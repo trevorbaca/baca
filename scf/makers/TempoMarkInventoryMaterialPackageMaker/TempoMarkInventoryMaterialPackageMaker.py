@@ -20,9 +20,11 @@ class TempoMarkInventoryMaterialPackageMaker(MaterialPackageMaker):
     output_material_maker = contexttools.TempoMarkInventory
     
     # TODO: change to only 'from abjad.tools import contexttools'
+    # TODO: change to only 'from abjad.tools import durationtools'
     output_material_module_import_statements = [
         'from abjad.tools.contexttools.TempoMark import TempoMark',
         'from abjad.tools.contexttools.TempoMarkInventory import TempoMarkInventory',
+        'from abjad.tools.durationtools.Duration import Duration',
         ]
             
     user_input_demo_values = [

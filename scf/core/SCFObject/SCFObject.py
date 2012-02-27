@@ -247,6 +247,13 @@ class SCFObject(object):
     def dot_join(self, expr):
         return '.'.join(expr)
 
+    def expr_to_parent_package_short_name(self, expr):
+        module_path = expr.__module__
+        parts = module_path.split('.')
+        for part in reversed(parts):
+            if not part == expr.__class__.__name__:
+                return part
+
     def handle_raw_input(self, prompt, include_chevron=True, include_newline=True, prompt_character='>',
         capitalize_prompt=True):
         if capitalize_prompt:

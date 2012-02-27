@@ -136,6 +136,15 @@ class ScorePackageProxy(PackageProxy):
             )
 
     @property
+    def tempo_inventory(self):
+        from abjad.tools import contexttools
+        for material_package_proxy in self.material_package_wrangler:
+            if isinstance(
+                material_package_proxy.get_tag('output_material_class'), 
+                contexttools.TempoMarkInventory):
+                return material_package_proxy.output_material
+
+    @property
     def title(self):
         return self.get_tag('title') or self.untitled_indicator
 
