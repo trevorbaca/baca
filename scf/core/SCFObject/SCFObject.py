@@ -254,6 +254,14 @@ class SCFObject(object):
             if not part == expr.__class__.__name__:
                 return part
 
+    def get_one_line_menuing_summary(self, expr):
+        if getattr(expr, 'one_line_menuing_summary', None):
+            return expr.one_line_menuing_summary
+        elif getattr(expr, '_one_line_menuing_summary', None):
+            return expr._one_line_menuing_summary
+        else:
+            return repr(expr)
+
     def handle_raw_input(self, prompt, include_chevron=True, include_newline=True, prompt_character='>',
         capitalize_prompt=True):
         if capitalize_prompt:

@@ -80,14 +80,6 @@ class InteractiveEditor(SCFObject):
         else:
             self.attributes_in_memory[attribute_name] = attribute_value
 
-    def get_one_line_menuing_summary(self, expr):
-        if getattr(expr, 'one_line_menuing_summary', None):   
-            return expr.one_line_menuing_summary
-        elif getattr(expr, '_one_line_menuing_summary', None):
-            return expr._one_line_menuing_summary
-        else:
-            return repr(expr)
-
     def handle_main_menu_result(self, result):
         attribute_name = self.target_manifest.menu_key_to_attribute_name(result)
         existing_value = self.menu_key_to_existing_value(result)
