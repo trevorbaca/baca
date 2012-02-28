@@ -83,8 +83,9 @@ class InteractiveEditor(SCFObject):
     def handle_main_menu_result(self, result):
         attribute_name = self.target_manifest.menu_key_to_attribute_name(result)
         existing_value = self.menu_key_to_existing_value(result)
+        kwargs = self.menu_key_to_delegated_editor_kwargs(result)
         editor = self.target_manifest.menu_key_to_editor(
-            result, session=self.session, existing_value=existing_value)
+            result, session=self.session, existing_value=existing_value, **kwargs)
         if editor is not None:
             result = editor.run()
             if self.backtrack():
@@ -153,6 +154,9 @@ class InteractiveEditor(SCFObject):
     def menu_key_to_existing_value(self, menu_key):
         attribute_name = self.target_manifest.menu_key_to_attribute_name(menu_key)
         return getattr(self.target, attribute_name, None)
+
+    def menu_key_to_delegated_editor_kwargs(self, menu_key):
+        return {}
         
     def run(self, breadcrumb=None, cache=False, clear=True, user_input=None):
         self.assign_user_input(user_input=user_input)

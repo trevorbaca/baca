@@ -10,13 +10,14 @@ class PerformerSpecifierEditor(ParameterSpecifierEditor):
 
     target_class = PerformerSpecifier
     target_manifest = TargetManifest(PerformerSpecifier,
-        ('performer', 'pf', selectors.PerformerSelector)
+        ('performer', 'pf', selectors.PerformerSelector),
         )
 
     ### READ-ONLY ATTRIBUTES ###
 
     @property
     def target_name(self):
-        if self.target:
-            if self.target.performer:
-                return self.target.performer.name
+        try:
+            return self.target.performer.name
+        except AttributeError:
+            pass

@@ -24,7 +24,7 @@ class PerformerContributionSpecifierEditor(InteractiveEditor):
     target_class = PerformerContributionSpecifier
     target_manifest = TargetManifest(PerformerContributionSpecifier,
         ('performer_specifier', 'per', PerformerSpecifierEditor),
-        ('instrument_specifier', 'ins', InstrumentSpecifierEditor),
+        ('instrument_specifier', 'str', InstrumentSpecifierEditor),
         ('note_head_specifier', 'nhd', NoteHeadSpecifierEditor),
         (),
         ('pitch_class_specifier', 'pcs', PitchClassSpecifierEditor),
@@ -55,3 +55,15 @@ class PerformerContributionSpecifierEditor(InteractiveEditor):
             return self.target.performer_specifier.performer.name
         except AttributeError:
             return
+
+    ### PUBLIC METHODS ###
+
+    def menu_key_to_delegated_editor_kwargs(self, menu_key):
+        kwargs = {}
+        if menu_key == 'str':
+            try:
+                kwargs['instruments'] = \
+                    self.target.performer_specifier.performer.instruments[:]
+            except AttributeError:
+                pass
+        return kwargs

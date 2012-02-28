@@ -1,3 +1,4 @@
 from select_performer_interactively import select_performer_interactively
+from InstrumentSelector import InstrumentSelector
 from PerformerSelector import PerformerSelector
 from TempoMarkSelector import TempoMarkSelector

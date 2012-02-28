@@ -14,4 +14,4 @@ class PerformerSpecifier(ParameterSpecifier):
         try:
             return self.performer.name
         except AttributeError:
-            return
+            pass
