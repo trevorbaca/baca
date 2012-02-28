@@ -55,6 +55,10 @@ class PackageProxy(DirectoryProxy, ImportableAssetProxy):
         return self.short_name.replace('_', ' ')
 
     @property
+    def imported_package(self):
+        return __import__(self.importable_name, fromlist=['*'])
+
+    @property
     def initializer_file_name(self):
         if self.path_name is not None:
             return os.path.join(self.path_name, '__init__.py')
@@ -91,6 +95,15 @@ class PackageProxy(DirectoryProxy, ImportableAssetProxy):
                 return result
 
     @property
+    def public_names(self):
+        result = []
+        imported_package_vars = vars(self.imported_package)
+        for key in sorted(imported_package_vars.keys()):
+            if not key.startswith('_'):
+                result.append(imported_package_vars[key])
+        return result
+        
+    @property
     def tags_file_name(self):
         return os.path.join(self.path_name, 'tags.py')
 
@@ -119,30 +132,6 @@ class PackageProxy(DirectoryProxy, ImportableAssetProxy):
         if result:
             tag_name, tag_value = result
             self.add_tag(tag_name, tag_value)
-
-    def remove_initializer(self, is_interactive=True):
-        if self.has_initializer:
-            os.remove(self.initializer_file_name)
-            line = 'initializer deleted.'
-            self.proceed(line, prompt=is_interactive)
-
-    def remove_tag(self, tag_name):
-        tags = self.get_tags()
-        del(tags[tag_name])
-        if self.has_tags_file:
-            self.tags_file_proxy.write_tags_to_disk(tags)
-        else:
-            self.initializer_file_proxy.write_tags_to_disk(tags)
-
-    def remove_tag_interactively(self):
-        getter = self.make_getter(where=self.where())
-        getter.append_string('tag name')
-        result = getter.run()
-        if self.backtrack():
-            return
-        if result:
-            tag_name = result
-            self.remove_tag(tag_name)
 
     def get_tag(self, tag_name):
         tags = self.get_tags()
@@ -217,6 +206,30 @@ class PackageProxy(DirectoryProxy, ImportableAssetProxy):
         exec(file_contents_string)
         result = locals().get('tags') or OrderedDict([])
         return result
+
+    def remove_initializer(self, is_interactive=True):
+        if self.has_initializer:
+            os.remove(self.initializer_file_name)
+            line = 'initializer deleted.'
+            self.proceed(line, prompt=is_interactive)
+
+    def remove_tag(self, tag_name):
+        tags = self.get_tags()
+        del(tags[tag_name])
+        if self.has_tags_file:
+            self.tags_file_proxy.write_tags_to_disk(tags)
+        else:
+            self.initializer_file_proxy.write_tags_to_disk(tags)
+
+    def remove_tag_interactively(self):
+        getter = self.make_getter(where=self.where())
+        getter.append_string('tag name')
+        result = getter.run()
+        if self.backtrack():
+            return
+        if result:
+            tag_name = result
+            self.remove_tag(tag_name)
 
     def set_package_importable_name_interactively(self):
         getter = self.make_getter(where=self.where())

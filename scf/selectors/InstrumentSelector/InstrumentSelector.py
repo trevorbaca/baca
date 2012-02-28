@@ -16,7 +16,10 @@ class InstrumentSelector(Selector):
     @apply
     def items():
         def fget(self):
-            return self.instruments
+            if self._items:
+                return self._items
+            else:
+                return self.instruments
         def fset(self, items):
-            self._instruments = items
+            self._items = items
         return property(**locals())
