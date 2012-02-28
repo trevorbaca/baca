@@ -73,6 +73,13 @@ class Session(object):
         return self._complete_transcript
 
     @property
+    def current_score_package_proxy(self):
+        from scf.proxies.ScorePackageProxy import ScorePackageProxy
+        if self.is_in_score:
+            return ScorePackageProxy(
+                score_package_short_name=self.current_score_package_short_name, session=self)
+
+    @property
     def explicit_command_history(self):
         result = []
         for command in self.command_history:
