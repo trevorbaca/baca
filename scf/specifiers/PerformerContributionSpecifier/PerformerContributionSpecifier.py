@@ -59,7 +59,7 @@ class PerformerContributionSpecifier(Specifier):
         if len(parameter_specifiers) == 1:
             return '1 parameter specified'
         elif 1 < len(parameter_specifiers):
-            return '{} parameterspecified'.format(len(parameter_specifiers))
+            return '{} parameters specified'.format(len(parameter_specifiers))
         else:
             return 'no parameters specified'
 

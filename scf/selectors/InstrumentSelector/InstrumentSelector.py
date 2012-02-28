@@ -11,10 +11,12 @@ class InstrumentSelector(Selector):
 
     target_human_readable_name = 'instrument'
 
-    ### PUBLIC METHODS ###
+    ### READ / WRITE ATTRIBUTES ###
 
-    def make_menu_tokens(self, head=None):
-        tokens = []
-        for instrument in self.instruments:
-            tokens.append(self.change_expr_to_menu_token(instrument))
-        return tokens
+    @apply
+    def items():
+        def fget(self):
+            return self.instruments
+        def fset(self, items):
+            self._instruments = items
+        return property(**locals())

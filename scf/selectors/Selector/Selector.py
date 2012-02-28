@@ -16,7 +16,7 @@ class Selector(SCFObject):
         else:
             return 'select:'
 
-    ### READ-WRITE ATTRIBUTES ###
+    ### READ / WRITE ATTRIBUTES ###
 
     @apply
     def items():
