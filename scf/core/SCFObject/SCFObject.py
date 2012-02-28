@@ -181,6 +181,9 @@ class SCFObject(object):
             self.session.breadcrumb_cache_stack.append(self.session.breadcrumb_stack[:])
             self.session._breadcrumb_stack[:] = []
 
+    def change_expr_to_menu_token(self, expr):
+        return (None, self.get_one_line_menuing_summary(expr), None, expr)
+
     def change_string_to_human_readable_string(self, string):
         if not string:
             return string

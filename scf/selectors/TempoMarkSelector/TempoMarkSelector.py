@@ -19,6 +19,5 @@ class TempoMarkSelector(Selector):
             tempo_inventory = score_package_proxy.tempo_inventory
             if tempo_inventory:
                 for tempo_mark in tempo_inventory:
-                    token = (None, self.get_one_line_menuing_summary(tempo_mark), None, tempo_mark)
-                    tokens.append(token)
+                    tokens.append(self.change_expr_to_menu_token(tempo_mark))
             return tokens

@@ -16,6 +16,5 @@ class InstrumentSelector(Selector):
     def make_menu_tokens(self, head=None):
         tokens = []
         for instrument in self.instruments:
-            token = (None, self.get_one_line_menuing_summary(instrument), None, instrument)
-            tokens.append(token)
+            tokens.append(self.change_expr_to_menu_token(instrument))
         return tokens
