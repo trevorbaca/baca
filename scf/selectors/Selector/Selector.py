@@ -1,13 +1,11 @@
-from abc import ABCMeta
-from abc import abstractmethod
 from scf.core.SCFObject import SCFObject
 
 
 class Selector(SCFObject):
-    __metaclass__ = ABCMeta
 
-    def __init__(self, session=None):
+    def __init__(self, items=None, session=None):
         SCFObject.__init__(self, session=session) 
+        self.items = items or []
 
     ### READ-ONLY ATTRIBUTES ###
 
@@ -18,16 +16,24 @@ class Selector(SCFObject):
         else:
             return 'select:'
 
+    ### READ-WRITE ATTRIBUTES ###
+
+    @apply
+    def items():
+        def fget(self):
+            return self._items
+        def fset(self, items):
+            self._items = items
+        return property(**locals())
+
     ### PUBLIC METHODS ###
 
-    @abstractmethod
     def make_menu_tokens(self, head=None):
-        pass
+        return [self.change_expr_to_menu_token(item) for item in self.items]
 
     def make_main_menu(self, head=None):
         menu, section = self.make_menu(where=self.where(), is_parenthetically_numbered=True, is_keyed=False)
         section.tokens = self.make_menu_tokens(head=head)
-        assert section.has_prepopulated_return_value_tuple_tokens, self
         section.return_value_attribute = 'prepopulated'
         return menu
 
