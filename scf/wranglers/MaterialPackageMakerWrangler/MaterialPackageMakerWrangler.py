@@ -166,7 +166,7 @@ class MaterialPackageMakerWrangler(PackageWrangler):
         stylesheet.global_staff_size = 14
         stylesheet.layout_block.indent = 0
         stylesheet.layout_block.ragged_right = True
-        stylesheet.paper_block.makup_system_spacing = layouttools.make_spacing_vector(0, 0, 12, 0)
+        stylesheet.paper_block.markup_system_spacing = layouttools.make_spacing_vector(0, 0, 12, 0)
         stylesheet.paper_block.system_system_spacing = layouttools.make_spacing_vector(0, 0, 10, 0)
         stylesheet_file_name = os.path.join(
             self.list_score_external_asset_container_importable_names()[0], 

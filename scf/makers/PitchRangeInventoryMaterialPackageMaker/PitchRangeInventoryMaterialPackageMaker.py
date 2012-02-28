@@ -6,9 +6,9 @@ from scf.editors.PitchRangeInventoryEditor import PitchRangeInventoryEditor
 
 class PitchRangeInventoryMaterialPackageMaker(MaterialPackageMaker):
 
-    def __init__(self, package_importable_name=None, session=None):
-        MaterialPackageMaker.__init__(self, 
-            package_importable_name=package_importable_name, session=session)
+    #def __init__(self, package_importable_name=None, session=None):
+    #    MaterialPackageMaker.__init__(self, 
+    #        package_importable_name=package_importable_name, session=session)
 
     ### CLASS ATTRIBUTES ###
 

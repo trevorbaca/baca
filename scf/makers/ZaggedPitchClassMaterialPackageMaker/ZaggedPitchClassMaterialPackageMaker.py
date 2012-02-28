@@ -1,25 +1,22 @@
 from abjad.tools import sequencetools
 from baca.music.make_zagged_pitch_classes import make_illustration_from_output_material
 from scf.makers.MaterialPackageMaker import MaterialPackageMaker
-from scf.editors.UserInputWrapper import UserInputWrapper
+#from scf.editors.UserInputWrapper import UserInputWrapper
 from scf.editors.InteractiveEditor import InteractiveEditor
 import baca
 
 
 class ZaggedPitchClassMaterialPackageMaker(MaterialPackageMaker):
 
-    def __init__(self, package_importable_name=None, session=None):
-        MaterialPackageMaker.__init__(
-            self, package_importable_name=package_importable_name, session=session)
+    #def __init__(self, package_importable_name=None, session=None):
+    #    MaterialPackageMaker.__init__(
+    #        self, package_importable_name=package_importable_name, session=session)
 
-    ### PUBLIC CLASS ATTRIBUTES ###
+    ### CLASS ATTRIBUTES ###
 
     generic_output_name = 'zagged pitch-classes'
-
     illustration_maker = staticmethod(make_illustration_from_output_material)
-
     output_material_checker = staticmethod(lambda x: isinstance(x, sequencetools.CyclicTree))
-
     output_material_maker = staticmethod(baca.music.make_zagged_pitch_classes)
 
     output_material_module_import_statements = [
