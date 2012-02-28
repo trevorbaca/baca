@@ -12,6 +12,6 @@ class InstrumentSpecifier(ParameterSpecifier):
     @property
     def one_line_menuing_summary(self):
         try:
-            return self.instrument.name
+            return self.instrument.instrument_name
         except AttributeError:
             pass

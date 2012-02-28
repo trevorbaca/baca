@@ -1,4 +1,7 @@
+# -*- encoding: utf-8 -*-
+from abjad.tools import iotools
 from scf.core.Transcript import Transcript
+import os
 
 
 class Session(object):
@@ -21,6 +24,7 @@ class Session(object):
         self.is_navigating_to_next_score = False
         self.is_navigating_to_prev_score = False
         self.last_command_was_composite = False
+        self.menu_header_width = 100
         self.nonnumbered_menu_sections_are_hidden = False
         self.transcribe_next_command = True
         self.use_current_user_input_values_as_default = False
@@ -115,14 +119,11 @@ class Session(object):
 
     @property
     def menu_header(self):
-        if self.breadcrumb_stack:
-            return ' - '.join(self.breadcrumb_stack)
-        else:
-            return ''
+        return '\n'.join(self.format_breadcrumb_stack())
 
     @property
     def output_directory(self):
-        return '/Users/trevorbaca/.scf/output'
+        return os.environ.get('SCFOUTPUT')
 
     @property   
     def scores_to_show(self):
@@ -272,6 +273,22 @@ class Session(object):
     def clean_up(self):
         if self.dump_transcript:
             self.complete_transcript.write_to_disk(self.output_directory)
+
+    def format_breadcrumb_stack(self):
+        if not self.breadcrumb_stack:
+            return ''
+        result_lines = [self.breadcrumb_stack[0]]
+        hanging_indent_width = len(iotools.strip_diacritics_from_binary_string(
+            self.breadcrumb_stack[0]))
+        hanging_indent_width += len(' - ')
+        for breadcrumb in self.breadcrumb_stack[1:]:
+            candidate_line = result_lines[-1] + ' - ' + breadcrumb
+            if len(candidate_line) <= self.menu_header_width:
+                result_lines[-1] = candidate_line
+            else:
+                result_line = hanging_indent_width * ' ' + breadcrumb
+                result_lines.append(result_line)
+        return result_lines
 
     def reinitialize(self):
         type(self).__init__(self)
