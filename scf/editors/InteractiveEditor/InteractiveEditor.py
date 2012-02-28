@@ -133,6 +133,9 @@ class InteractiveEditor(SCFObject):
     def make_target_attribute_tokens_from_target_manifest(self):
         result = []
         for attribute_detail in self.target_manifest.attribute_details:
+            if attribute_detail.is_null:
+                result.append(())
+                continue
             menu_key = attribute_detail.menu_key
             target_attribute_name = attribute_detail.name
             menu_body = attribute_detail.human_readable_name

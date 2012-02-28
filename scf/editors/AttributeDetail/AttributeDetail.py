@@ -6,7 +6,11 @@ import types
 class AttributeDetail(object):
 
     def __init__(self, *args, **kwargs):
-        if len(args) == 3:
+        is_null = False
+        if len(args) == 0:
+            name = human_readable_name = menu_key = editor_callable = None
+            is_null = True
+        elif len(args) == 3:
             name, menu_key, editor_callable = args
             human_readable_name = name.replace('_', ' ')
         elif len(args) == 4:
@@ -16,6 +20,7 @@ class AttributeDetail(object):
         self.menu_key = menu_key
         self.editor_callable = editor_callable
         self.allow_none = kwargs.get('allow_none', True)
+        self.is_null = is_null
 
     ### OVERLOADS ###
 
