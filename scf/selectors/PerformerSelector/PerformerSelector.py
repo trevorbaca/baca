@@ -10,17 +10,27 @@ class PerformerSelector(Selector):
 
     target_human_readable_name = 'performer'
 
-    ### PUBLIC METHODS ###
+    ### READ-ONLY ATTRIBUTES ###
 
-    def make_menu_tokens(self, head=None):
-        from scf.proxies.ScorePackageProxy import ScorePackageProxy
-        tokens = []
-        if self.session.is_in_score:
-            score_package_proxy = ScorePackageProxy(
-                score_package_short_name=self.session.current_score_package_short_name,
-                session=self.session)
-            instrumentation = score_package_proxy.instrumentation
-            if instrumentation:
-                for performer in instrumentation.performers:
-                    tokens.append(self.change_expr_to_menu_token(performer))
-        return tokens
+    @property
+    def current_score_performers(self):
+        result = []
+        current_score_package_proxy = self.session.current_score_package_proxy
+        try:
+            result.extend(current_score_package_proxy.instrumentation.performers)
+        except AttributeError:
+            pass
+        return result
+
+    ### READ / WRITE ATTRIBUTES ###
+
+    @apply
+    def items():
+        def fget(self):
+            if self._items:
+                return self._items
+            else:
+                return self.current_score_performers
+        def fset(self, items):
+            self._items = list(items)
+        return property(**locals())
