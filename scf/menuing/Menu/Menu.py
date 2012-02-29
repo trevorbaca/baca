@@ -194,6 +194,17 @@ class Menu(MenuSectionAggregator):
         self.sections.append(section)
         return section
 
+    def return_value_to_location_pair(self, return_value):
+        for i, section in enumerate(self.sections):
+            if return_value in section.menu_entry_return_values:
+                return (i, section.menu_entry_return_values.index(return_value))
+
+    def return_value_to_next_return_value_in_section(self, return_value):
+        section_index, entry_index = self.return_value_to_location_pair(return_value)
+        section = self.sections[section_index]
+        entry_index = (entry_index + 1) % len(section)
+        return section.menu_entry_return_values[entry_index]
+
     def run(self, clear=True, user_input=None):
         self.assign_user_input(user_input=user_input)
         clear, hide_current_run = clear, False

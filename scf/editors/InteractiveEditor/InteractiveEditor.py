@@ -9,7 +9,8 @@ class InteractiveEditor(SCFObject):
             assert isinstance(target, self.target_class)
         self.target = target
         self.initialize_attributes_in_memory()
-
+        self.is_autoadvancing = False
+    
     ### OVERLOADS ###
 
     def __repr__(self):
@@ -89,6 +90,7 @@ class InteractiveEditor(SCFObject):
         if editor is not None:
             result = editor.run()
             if self.backtrack():
+                self.is_autoadvancing = False
                 return
             if hasattr(editor, 'target'):
                 attribute_value = editor.target
@@ -157,7 +159,7 @@ class InteractiveEditor(SCFObject):
         attribute_name = self.target_manifest.menu_key_to_attribute_name(menu_key)
         return getattr(self.target, attribute_name, None)
 
-    def run(self, breadcrumb=None, cache=False, clear=True, user_input=None):
+    def run(self, breadcrumb=None, cache=False, clear=True, is_autoadvancing=False, user_input=None):
         self.assign_user_input(user_input=user_input)
         self.cache_breadcrumbs(cache=cache)
         self.push_breadcrumb()
@@ -168,15 +170,25 @@ class InteractiveEditor(SCFObject):
         if self.backtrack():
             self.restore_breadcrumbs(cache=cache)
             return
+        self.is_autoadvancing = is_autoadvancing
+        result, entry_point = None, None
         while True:
             self.push_breadcrumb(breadcrumb=breadcrumb)
-            menu = self.make_main_menu()
-            result = menu.run(clear=clear)
-            if self.backtrack():
-                break
-            elif not result:
-                self.pop_breadcrumb()
-                continue
+            if result and self.is_autoadvancing:
+                entry_point = entry_point or result
+                result = menu.return_value_to_next_return_value_in_section(result)
+                if result == entry_point:
+                    self.is_autoadvancing = False
+                    self.pop_breadcrumb()
+                    continue
+            else:
+                menu = self.make_main_menu()
+                result = menu.run(clear=clear)
+                if self.backtrack():
+                    break
+                elif not result:
+                    self.pop_breadcrumb()
+                    continue
             self.handle_main_menu_result(result)
             if self.backtrack():
                 break
