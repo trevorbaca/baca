@@ -180,6 +180,28 @@ class ScorePackageProxy(PackageProxy):
             return self.add_tag('forces_tagline', forces_tagline)
         return property(**locals())
 
+    @property
+    def setup_value_menu_tokens(self):
+        result = []
+        if self.title:
+            result.append(('title', 'title: {!r}'.format(self.title)))
+        else:
+            result.append(('title', 'title:'))
+        if self.year_of_completion:
+            result.append(('year', 'year: {!r}'.format(self.year_of_completion)))
+        else:
+            result.append(('year', 'year:'))
+        if self.get_tag('instrumentation'):
+            result.append(('performers', 'performers: {}'.format(
+                self.get_tag('instrumentation').performer_name_string)))
+        else:
+            result.append(('performers', 'performers:'))
+        if self.forces_tagline:
+            result.append(('tagline', 'tagline: {!r}'.format(self.forces_tagline)))
+        else:
+            result.append(('tagline', 'tagline:'))
+        return result
+
     @apply
     def year_of_completion():
         def fget(self):
@@ -315,6 +337,19 @@ class ScorePackageProxy(PackageProxy):
         else:
             raise ValueError
 
+    def handle_setup_menu_result(self, result):
+        assert isinstance(result, str)
+        if result == 'title':
+            self.edit_title_interactively()
+        elif result == 'year':
+            self.edit_year_of_completion_interactively()
+        elif result == 'tagline':
+            self.edit_forces_tagline_interactively()
+        elif result == 'performers':
+            self.edit_instrumentation_specifier_interactively()
+        else:
+            raise ValueError()
+
     def handle_svn_menu_result(self, result):
         if result == 'add':
             self.svn_add(is_interactive=True)
@@ -325,6 +360,9 @@ class ScorePackageProxy(PackageProxy):
             self.svn_st(is_interactive=True)
         else:
             raise ValueError
+
+    def make_asset_structure(self):
+        self.fix_score_package_directory_structure(is_interactive=False)
 
     def make_main_menu(self):
         menu, section = self.make_menu(where=self.where(), is_numbered=True)
@@ -342,34 +380,9 @@ class ScorePackageProxy(PackageProxy):
         hidden_section.append(('tags', 'manage tags'))
         return menu
 
-    def make_asset_structure(self):
-        self.fix_score_package_directory_structure(is_interactive=False)
-
     def make_score_interactively(self):
         self.print_not_yet_implemented()
 
-    @property
-    def setup_value_menu_tokens(self):
-        result = []
-        if self.title:
-            result.append(('title', 'title: {!r}'.format(self.title)))
-        else:
-            result.append(('title', 'title:'))
-        if self.year_of_completion:
-            result.append(('year', 'year: {!r}'.format(self.year_of_completion)))
-        else:
-            result.append(('year', 'year:'))
-        if self.get_tag('instrumentation'):
-            result.append(('performers', 'performers: {}'.format(
-                self.get_tag('instrumentation').performer_name_string)))
-        else:
-            result.append(('performers', 'performers:'))
-        if self.forces_tagline:
-            result.append(('tagline', 'tagline: {!r}'.format(self.forces_tagline)))
-        else:
-            result.append(('tagline', 'tagline:'))
-        return result
-        
     def make_setup_menu(self):
         setup_menu, section = self.make_menu(where=self.where(), 
             is_parenthetically_numbered=True, is_keyed=False)
@@ -384,19 +397,6 @@ class ScorePackageProxy(PackageProxy):
         section.append(('add', 'add'))
         section.append(('ci', 'ci'))
         return menu
-
-    def handle_setup_menu_result(self, result):
-        assert isinstance(result, str)
-        if result == 'title':
-            self.edit_title_interactively()
-        elif result == 'year':
-            self.edit_year_of_completion_interactively()
-        elif result == 'tagline':
-            self.edit_forces_tagline_interactively()
-        elif result == 'performers':
-            self.edit_instrumentation_specifier_interactively()
-        else:
-            raise ValueError()
 
     def manage_setup(self, clear=True, cache=False):
         self.cache_breadcrumbs(cache=cache)

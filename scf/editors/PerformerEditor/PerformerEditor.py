@@ -45,17 +45,6 @@ class PerformerEditor(InteractiveEditor):
             for instrument in instruments:
                 self.target.instruments.append(instrument)
 
-    def remove_instruments_interactively(self):
-        getter = self.make_getter(where=self.where())
-        getter.append_argument_range('instruments', self.instrument_names)
-        result = getter.run()
-        if self.backtrack():
-            return
-        instrument_indices = [x - 1 for x in result]
-        instruments = self.target.instruments
-        instruments = sequencetools.remove_sequence_elements_at_indices(instruments, instrument_indices)
-        self.target.instruments[:] = instruments
-    
     def edit_instrument_interactively(self, instrument_number):
         try:
             instrument_number = int(instrument_number)
@@ -127,6 +116,17 @@ class PerformerEditor(InteractiveEditor):
         self.target.instruments.remove(instrument)
         self.target.instruments.insert(new_instrument_index, instrument)
 
+    def remove_instruments_interactively(self):
+        getter = self.make_getter(where=self.where())
+        getter.append_argument_range('instruments', self.instrument_names)
+        result = getter.run()
+        if self.backtrack():
+            return
+        instrument_indices = [x - 1 for x in result]
+        instruments = self.target.instruments
+        instruments = sequencetools.remove_sequence_elements_at_indices(instruments, instrument_indices)
+        self.target.instruments[:] = instruments
+    
     def set_initial_configuration_interactively(self, clear=True, cache=False):
         self.cache_breadcrumbs(cache=cache)
         self.conditionally_initialize_target()

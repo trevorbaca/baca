@@ -151,13 +151,13 @@ class InteractiveEditor(SCFObject):
             result.append(token)
         return result
 
+    def menu_key_to_delegated_editor_kwargs(self, menu_key):
+        return {}
+        
     def menu_key_to_existing_value(self, menu_key):
         attribute_name = self.target_manifest.menu_key_to_attribute_name(menu_key)
         return getattr(self.target, attribute_name, None)
 
-    def menu_key_to_delegated_editor_kwargs(self, menu_key):
-        return {}
-        
     def run(self, breadcrumb=None, cache=False, clear=True, user_input=None):
         self.assign_user_input(user_input=user_input)
         self.cache_breadcrumbs(cache=cache)

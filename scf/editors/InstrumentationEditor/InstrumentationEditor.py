@@ -64,19 +64,6 @@ class InstrumentationEditor(InteractiveEditor):
                     continue
                 break
 
-    # TODO: abstract up to ListEditor.delete_items_interactively
-    def remove_performers_interactively(self):
-        getter = self.make_getter(where=self.where())
-        getter.append_argument_range('performers', self.summary_lines)
-        result = getter.run()
-        if self.backtrack():
-            return
-        performer_indices = [performer_number - 1 for performer_number in result]
-        performer_indices = list(reversed(sorted(set(performer_indices))))
-        performers = self.target.performers
-        performers = sequencetools.remove_sequence_elements_at_indices(performers, performer_indices)
-        self.target.performers[:] = performers
-
     def edit_performer_interactively(self, performer_number):
         try:
             performer_number = int(performer_number)
@@ -131,6 +118,19 @@ class InstrumentationEditor(InteractiveEditor):
         performer = self.target.performers[old_index]
         self.target.performers.remove(performer)
         self.target.performers.insert(new_index, performer)
+
+    # TODO: abstract up to ListEditor.delete_items_interactively
+    def remove_performers_interactively(self):
+        getter = self.make_getter(where=self.where())
+        getter.append_argument_range('performers', self.summary_lines)
+        result = getter.run()
+        if self.backtrack():
+            return
+        performer_indices = [performer_number - 1 for performer_number in result]
+        performer_indices = list(reversed(sorted(set(performer_indices))))
+        performers = self.target.performers
+        performers = sequencetools.remove_sequence_elements_at_indices(performers, performer_indices)
+        self.target.performers[:] = performers
 
     def select_performer_names_interactively(self, clear=True, cache=False):
         from abjad.tools import scoretools

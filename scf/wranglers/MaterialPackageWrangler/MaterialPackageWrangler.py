@@ -29,6 +29,9 @@ class MaterialPackageWrangler(PackageWrangler):
 
     ### PUBLIC METHODS ###
 
+    def get_asset_proxy(self, package_importable_name):
+        return self.material_package_maker_wrangler.get_asset_proxy(package_importable_name)
+
     # TODO: write test
     def get_new_material_package_importable_name_interactively(self):
         while True:
@@ -47,9 +50,6 @@ class MaterialPackageWrangler(PackageWrangler):
                 self.display([line, ''])
             else:
                 return material_package_importable_name
-
-    def get_asset_proxy(self, package_importable_name):
-        return self.material_package_maker_wrangler.get_asset_proxy(package_importable_name)
 
     def handle_main_menu_result(self, result):
         if result == 'd':
@@ -89,6 +89,18 @@ class MaterialPackageWrangler(PackageWrangler):
         self.make_material_package(
             material_package_importable_name, material_package_maker_class_name, should_have_illustration)
 
+    def make_main_menu(self, head=None):
+        menu, section = self.make_menu(where=self.where(), is_numbered=True, is_keyed=False)
+        section.tokens = self.make_visible_asset_menu_tokens(head=head)
+        section = menu.make_section()
+        section.append(('d', 'data-only'))
+        section.append(('h', 'handmade'))
+        section.append(('m', 'maker-made'))
+        hidden_section = menu.make_section(is_hidden=True)
+        hidden_section.append(('missing', 'create missing packages'))
+        hidden_section.append(('profile', 'profile packages'))
+        return menu
+
     # TODO: write test
     def make_makermade_material_package_interactively(self):
         self.push_backtrack()
@@ -109,18 +121,6 @@ class MaterialPackageWrangler(PackageWrangler):
         self.debug((material_package_importable_name, material_package_maker_class_name))
         self.make_material_package(
             material_package_importable_name, material_package_maker_class_name, should_have_illustration)
-
-    def make_main_menu(self, head=None):
-        menu, section = self.make_menu(where=self.where(), is_numbered=True, is_keyed=False)
-        section.tokens = self.make_visible_asset_menu_tokens(head=head)
-        section = menu.make_section()
-        section.append(('d', 'data-only'))
-        section.append(('h', 'handmade'))
-        section.append(('m', 'maker-made'))
-        hidden_section = menu.make_section(is_hidden=True)
-        hidden_section.append(('missing', 'create missing packages'))
-        hidden_section.append(('profile', 'profile packages'))
-        return menu
 
     # TODO: write test
     def make_material_package(self, material_package_importable_name, material_package_maker_class_name, 

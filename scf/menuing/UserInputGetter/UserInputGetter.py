@@ -175,11 +175,6 @@ class UserInputGetter(MenuSectionAggregator):
         self.append_something(spaced_attribute_name, message, default=default)
         self.tests.append(predicates.is_tempo_token)
 
-    def append_underscore_delimited_lowercase_package_name(self, spaced_attribute_name, default=None):
-        message = 'value for {!r} must be underscore-delimited lowercase package name of length at least 3.'
-        self.append_something(spaced_attribute_name, message, default=default)
-        self.tests.append(predicates.is_underscore_delimited_lowercase_package_name)
-
     def append_underscore_delimited_lowercase_file_name(self, spaced_attribute_name, default=None):
         message = 'value for {!r} must be underscore-delimited lowercase file name.'
         self.append_something(spaced_attribute_name, message, default=default)
@@ -189,6 +184,11 @@ class UserInputGetter(MenuSectionAggregator):
         message = 'value for {!r} must be underscore-delimited lowercase file name with extension.'
         self.append_something(spaced_attribute_name, message, default=default)
         self.tests.append(iotools.is_underscore_delimited_lowercase_file_name_with_extension)
+
+    def append_underscore_delimited_lowercase_package_name(self, spaced_attribute_name, default=None):
+        message = 'value for {!r} must be underscore-delimited lowercase package name of length at least 3.'
+        self.append_something(spaced_attribute_name, message, default=default)
+        self.tests.append(predicates.is_underscore_delimited_lowercase_package_name)
 
     def append_underscore_delimited_lowercase_string(self, spaced_attribute_name, default=None):
         message = 'value for {!r} must be underscore-delimited lowercase string.'
@@ -228,17 +228,17 @@ class UserInputGetter(MenuSectionAggregator):
             lines.append('')
             self.display(lines)
 
-    def evaluate_test(self, test, argument):
-        if isinstance(test, types.TypeType):
-            return isinstance(argument, test)
-        else:
-            return test(argument)
-
     def display_title(self):
         title_lines = self.make_title_lines()
         if title_lines:
             self.display(title_lines)
         pass
+
+    def evaluate_test(self, test, argument):
+        if isinstance(test, types.TypeType):
+            return isinstance(argument, test)
+        else:
+            return test(argument)
 
     def get_value_from_direct_evaluation(self, user_response):
         try:

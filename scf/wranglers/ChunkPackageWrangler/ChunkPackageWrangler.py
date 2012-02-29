@@ -16,15 +16,15 @@ class ChunkPackageWrangler(PackageWrangler):
     ### READ-ONLY PUBLIC ATTRIBUTES ###
 
     @property
+    def asset_class(self):
+        return ChunkPackageProxy
+
+    @property
     def breadcrumb(self):
         if self.session.is_in_score:
             return 'chunks'
         else:
             return 'sketches'
-
-    @property
-    def asset_class(self):
-        return ChunkPackageProxy
 
     ### PUBLIC METHODS ###
 

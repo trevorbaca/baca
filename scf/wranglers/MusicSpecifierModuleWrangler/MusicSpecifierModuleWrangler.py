@@ -44,6 +44,15 @@ class MusicSpecifierModuleWrangler(ModuleWrangler):
             package_proxy = self.get_asset_proxy(result)
             package_proxy.edit()
 
+    def make_asset_interactively(self):
+        getter = self.make_getter()
+        getter.append_space_delimited_lowercase_string('music specifier name')
+        specifier_name = getter.run()
+        if self.backtrack():
+            return
+        package_short_name = specifier_name.replace(' ', '_')
+        self.make_asset(package_short_name)
+
     def make_main_menu(self, head=None):
         menu, section = self.make_menu(where=self.where(), is_keyed=False, is_parenthetically_numbered=True)
         section.tokens = self.make_visible_asset_menu_tokens(head=head)
@@ -55,15 +64,6 @@ class MusicSpecifierModuleWrangler(ModuleWrangler):
         hidden_section.append(('missing', 'create missing packages'))
         hidden_section.append(('profile', 'profile packages'))
         return menu
-
-    def make_asset_interactively(self):
-        getter = self.make_getter()
-        getter.append_space_delimited_lowercase_string('music specifier name')
-        specifier_name = getter.run()
-        if self.backtrack():
-            return
-        package_short_name = specifier_name.replace(' ', '_')
-        self.make_asset(package_short_name)
 
     # TODO: write test
     def select_specifier_spaced_name_interactively(self, cache=False, clear=True, head=None):

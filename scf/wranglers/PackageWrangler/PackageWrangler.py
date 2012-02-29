@@ -9,6 +9,10 @@ class PackageWrangler(ImportableAssetWrangler):
     ### READ-ONLY PUBLIC ATTRIBUTES ###
 
     @property
+    def asset_class(self):
+        return PackageProxy
+
+    @property
     def score_external_asset_proxies(self):
         result = []
         for asset_path_name in self.score_external_asset_path_names:
@@ -21,10 +25,6 @@ class PackageWrangler(ImportableAssetWrangler):
     def temporary_asset_short_name(self):
         return '__temporary_package'
     
-    @property
-    def asset_class(self):
-        return PackageProxy
-
     ### PUBLIC METHODS ###
 
     def handle_main_menu_result(self, result):

@@ -28,14 +28,14 @@ class Selector(SCFObject):
 
     ### PUBLIC METHODS ###
 
-    def make_menu_tokens(self, head=None):
-        return [self.change_expr_to_menu_token(item) for item in self.items]
-
     def make_main_menu(self, head=None):
         menu, section = self.make_menu(where=self.where(), is_parenthetically_numbered=True, is_keyed=False)
         section.tokens = self.make_menu_tokens(head=head)
         section.return_value_attribute = 'prepopulated'
         return menu
+
+    def make_menu_tokens(self, head=None):
+        return [self.change_expr_to_menu_token(item) for item in self.items]
 
     def run(self, cache=False, clear=True, head=None, user_input=None):
         self.assign_user_input(user_input=user_input)

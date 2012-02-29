@@ -15,6 +15,10 @@ class StylesheetFileWrangler(PackageWrangler):
     ### READ-ONLY PUBLIC ATTRIBUTES ###
 
     @property
+    def asset_class(self):
+        return StylesheetFileProxy
+
+    @property
     def breadcrumb(self):
         return 'stylesheets'
 
@@ -26,10 +30,6 @@ class StylesheetFileWrangler(PackageWrangler):
             if file_name.endswith('.ly'):
                 result.append(file_name)
         return result
-
-    @property
-    def asset_class(self):
-        return StylesheetFileProxy
 
     ### PUBLIC METHODS ###
 

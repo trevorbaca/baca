@@ -6,6 +6,10 @@ class MaterialModuleProxy(ModuleProxy):
     ### READ-ONLY ATTRIBUTES ###
 
     @property
+    def current_materials_package_importable_name(self):
+        return self.dot_join(self.parent_package_importable_name.split('.')[:-1])
+
+    @property
     def material_package_importable_name(self):
         return self.parent_package_importable_name
 
@@ -16,10 +20,6 @@ class MaterialModuleProxy(ModuleProxy):
     @property
     def material_underscored_name(self):
         return self.module_importable_name.split('.')[-2]
-
-    @property
-    def current_materials_package_importable_name(self):
-        return self.dot_join(self.parent_package_importable_name.split('.')[:-1])
 
     ### PUBLIC METHODS ###
 

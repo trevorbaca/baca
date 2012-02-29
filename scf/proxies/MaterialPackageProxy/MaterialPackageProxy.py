@@ -106,29 +106,6 @@ class MaterialPackageProxy(PackageProxy):
             return os.path.exists(self.output_material_module_file_name)
         return False
 
-    # TODO: impelement
-    @property
-    def has_stylesheet(self):
-        return False
-
-    @property
-    def has_user_input_module(self):
-        if self.should_have_user_input_module:
-            return os.path.exists(self.user_input_module_file_name)
-        return False
-
-    @property
-    def has_user_input_wrapper_on_disk(self):
-        if self.should_have_user_input_module:
-            return bool(self.user_input_module_proxy.read_user_input_wrapper_from_disk())
-        return False
-
-    @property
-    def has_user_input_wrapper_in_memory(self):
-        if self.should_have_user_input_module:
-            return bool(self.user_input_wrapper_in_memory)
-        return False
-
     @property
     def has_readable_illustration_builder_module(self):
         if self.has_illustration_builder_module:
@@ -159,6 +136,11 @@ class MaterialPackageProxy(PackageProxy):
             return self.user_input_module_proxy.is_readable
         return False
 
+    # TODO: impelement
+    @property
+    def has_stylesheet(self):
+        return False
+
     @property
     def has_user_finalized_illustration_builder_module(self):
         if self.has_readable_illustration_builder_module:
@@ -171,16 +153,27 @@ class MaterialPackageProxy(PackageProxy):
         return False
 
     @property
+    def has_user_input_module(self):
+        if self.should_have_user_input_module:
+            return os.path.exists(self.user_input_module_file_name)
+        return False
+
+    @property
+    def has_user_input_wrapper_in_memory(self):
+        if self.should_have_user_input_module:
+            return bool(self.user_input_wrapper_in_memory)
+        return False
+
+    @property
+    def has_user_input_wrapper_on_disk(self):
+        if self.should_have_user_input_module:
+            return bool(self.user_input_module_proxy.read_user_input_wrapper_from_disk())
+        return False
+
+    @property
     def illustration(self):
         if self.has_illustration_builder_module:
             return self.illustration_builder_module_proxy.import_illustration()
-
-    @property
-    def illustration_with_stylesheet(self):
-        illustration = self.illustration
-        if illustration and self.stylesheet_file_name_in_memory:
-            illustration.file_initial_user_includes.append(self.stylesheet_file_name_in_memory)
-        return illustration
 
     @property
     def illustration_builder_module_file_name(self):
@@ -223,6 +216,13 @@ class MaterialPackageProxy(PackageProxy):
             if not self.has_illustration_pdf:
                 file(self.illustration_pdf_file_name, 'w').write('')
             return IllustrationPdfFileProxy(self.illustration_pdf_file_name, session=self.session)
+
+    @property
+    def illustration_with_stylesheet(self):
+        illustration = self.illustration
+        if illustration and self.stylesheet_file_name_in_memory:
+            illustration.file_initial_user_includes.append(self.stylesheet_file_name_in_memory)
+        return illustration
 
     @property
     def initializer_has_output_material_safe_import_statement(self):
@@ -316,6 +316,11 @@ class MaterialPackageProxy(PackageProxy):
             return self.output_material_module_import_statements_and_output_material_module_body_lines[1]
 
     @property
+    def output_material_module_file_name(self): 
+        if self.should_have_output_material_module:
+            return os.path.join(self.path_name, 'output_material.py')
+
+    @property
     def output_material_module_import_statements_and_material_definition(self):
         if self.should_have_material_definition_module:
             tmp = self.material_definition_module_proxy
@@ -337,11 +342,6 @@ class MaterialPackageProxy(PackageProxy):
             line = '{} = {!r}'.format(self.material_underscored_name, output_material)
             output_material_module_body_lines = [line]
         return output_material_module_import_statements, output_material_module_body_lines
-
-    @property
-    def output_material_module_file_name(self): 
-        if self.should_have_output_material_module:
-            return os.path.join(self.path_name, 'output_material.py')
 
     @property
     def output_material_module_importable_name(self):
@@ -440,46 +440,6 @@ class MaterialPackageProxy(PackageProxy):
         parent_package = PackageProxy(self.parent_package_importable_name, session=self.session)
         parent_package.initializer_file_proxy.add_safe_import_statement(
             self.material_underscored_name, self.material_underscored_name)
-
-    def remove_illustration_builder_module(self, prompt=True):
-        self.remove_illustration_pdf(prompt=False)
-        if self.has_illustration_builder_module:
-            self.illustration_builder_module_proxy.remove()
-
-    def remove_illustration_ly(self, prompt=True):
-        if self.has_illustration_ly:
-            self.illustration_ly_file_proxy.remove()
-
-    def remove_illustration_pdf(self, prompt=True):
-        self.remove_illustration_ly(prompt=False)
-        if self.has_illustration_pdf:
-            self.illustration_pdf_file_proxy.remove()
-
-    def remove_material_definition_module(self, prompt=True):
-        self.remove_output_material_module(prompt=False)
-        self.remove_illustration_builder_module(prompt=False)
-        if self.has_material_definition_module:
-            self.material_definition_module_proxy.remove()
-
-    def remove_material_package(self):
-        self.remove()
-        self.session.is_backtracking_locally = True
-
-    def remove_output_material_module(self, prompt=True):
-        self.remove_illustration_builder_module(prompt=False)
-        if self.has_output_material_module:
-            self.output_material_module_proxy.remove()
-
-    # NOTE: not currently used
-    def remove_parent_initializer_pyc_file(self):
-        if self.has_parent_initializer:
-            parent_initializer_pyc_file_name = self.parent_initializer_file_name + 'c'
-            if os.path.exists(parent_initializer_pyc_file_name):
-                os.remove(parent_initializer_pyc_file_name)
-        
-    def remove_user_input_module(self, prompt=True):
-        if self.has_user_input_module:
-            self.user_input_module_proxy.remove()
 
     def edit_output_material_interactively(self):
         if not self.has_output_material_editor:
@@ -744,9 +704,29 @@ class MaterialPackageProxy(PackageProxy):
         self.remove_material_from_materials_initializer()
         PackageProxy.remove(self)
 
+    def remove_illustration_builder_module(self, prompt=True):
+        self.remove_illustration_pdf(prompt=False)
+        if self.has_illustration_builder_module:
+            self.illustration_builder_module_proxy.remove()
+
+    def remove_illustration_ly(self, prompt=True):
+        if self.has_illustration_ly:
+            self.illustration_ly_file_proxy.remove()
+
+    def remove_illustration_pdf(self, prompt=True):
+        self.remove_illustration_ly(prompt=False)
+        if self.has_illustration_pdf:
+            self.illustration_pdf_file_proxy.remove()
+
     def remove_interactively(self):
         self.remove_material_from_materials_initializer()
         PackageProxy.remove_interactively(self)
+
+    def remove_material_definition_module(self, prompt=True):
+        self.remove_output_material_module(prompt=False)
+        self.remove_illustration_builder_module(prompt=False)
+        if self.has_material_definition_module:
+            self.material_definition_module_proxy.remove()
 
     def remove_material_from_materials_initializer(self):
         import_statement = 'safe_import(globals(), {!r}, {!r})\n'
@@ -760,6 +740,26 @@ class MaterialPackageProxy(PackageProxy):
                 filtered_import_statements.append(safe_import_statement)
         parent_package_initializer_file_proxy.safe_import_statements[:] = filtered_import_statements
         parent_package_initializer_file_proxy.write_to_disk()
+
+    def remove_material_package(self):
+        self.remove()
+        self.session.is_backtracking_locally = True
+
+    def remove_output_material_module(self, prompt=True):
+        self.remove_illustration_builder_module(prompt=False)
+        if self.has_output_material_module:
+            self.output_material_module_proxy.remove()
+
+    # NOTE: not currently used
+    def remove_parent_initializer_pyc_file(self):
+        if self.has_parent_initializer:
+            parent_initializer_pyc_file_name = self.parent_initializer_file_name + 'c'
+            if os.path.exists(parent_initializer_pyc_file_name):
+                os.remove(parent_initializer_pyc_file_name)
+        
+    def remove_user_input_module(self, prompt=True):
+        if self.has_user_input_module:
+            self.user_input_module_proxy.remove()
 
     # TODO: port
     def rename_material_interactively(self):

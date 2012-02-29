@@ -28,10 +28,6 @@ class MusicSpecifierModuleProxy(ModuleProxy):
         return self._editor
 
     @property
-    def target_in_memory(self):
-        return self._target_in_memory
-
-    @property
     def sections(self):
         return (
             (self.encoding_directives, False, 0),
@@ -39,6 +35,10 @@ class MusicSpecifierModuleProxy(ModuleProxy):
             (self.setup_statements, True, 2),
             (self.target_lines, False, 0),
             )
+
+    @property
+    def target_in_memory(self):
+        return self._target_in_memory
 
     ### PUBLIC METHODS ###
 
@@ -91,6 +91,12 @@ class MusicSpecifierModuleProxy(ModuleProxy):
         self.target_lines = target_lines
         return is_parsable
 
+    def preprend_target_name(self, target_format_pieces):
+        if target_format_pieces:
+            target_format_pieces[0] = '{} = {}'.format(
+                self.target_name_in_storage_module, target_format_pieces[0])
+        return target_format_pieces
+
     def read_target_from_disk(self):
         self.unimport()
         if os.path.exists(self.path_name):
@@ -100,12 +106,6 @@ class MusicSpecifierModuleProxy(ModuleProxy):
             exec(file_contents_string)
             target = locals().get(self.target_name_in_storage_module, None)
             return target
-
-    def preprend_target_name(self, target_format_pieces):
-        if target_format_pieces:
-            target_format_pieces[0] = '{} = {}'.format(
-                self.target_name_in_storage_module, target_format_pieces[0])
-        return target_format_pieces
 
     def write_stub_to_disk(self):
         self.conditionally_make_empty_asset()

@@ -58,12 +58,12 @@ class SCFObject(object):
         return self.dot_join([self.scf_package_importable_name, 'makers'])
 
     @property
-    def scf_package_path_name(self):
-        return os.environ.get('SCFPATH')
-
-    @property
     def scf_package_importable_name(self):
         return os.path.basename(os.environ.get('SCFPATH'))
+
+    @property
+    def scf_package_path_name(self):
+        return os.environ.get('SCFPATH')
 
     @property
     def score_external_chunks_package_importable_name(self):

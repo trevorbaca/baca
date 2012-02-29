@@ -45,12 +45,12 @@ class Studio(SCFObject):
         return self._music_specifier_module_wrangler
 
     @property
-    def score_status_string(self):
-        return '{} scores'.format(self.session.scores_to_show)
-
-    @property
     def score_package_wrangler(self):
         return self._score_package_wrangler
+
+    @property
+    def score_status_string(self):
+        return '{} scores'.format(self.session.scores_to_show)
 
     @property
     def stylesheet_file_wrangler(self):

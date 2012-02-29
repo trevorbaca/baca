@@ -44,15 +44,6 @@ class MaterialPackageMakerWrangler(PackageWrangler):
         else:
             raise ValueError
 
-    def list_score_external_asset_importable_names(self, head=None):
-        result = PackageWrangler.list_score_external_asset_importable_names(self, head=head)
-        if self.base_class_name in result:
-            result.remove(self.base_class_name)
-        return result
-
-    def list_score_internal_asset_container_importable_names(self, head=None):
-        return []
-
     def list_asset_human_readable_names(self, head=None):
         result = []
         for path_name in self.list_asset_path_names(head=head):
@@ -64,17 +55,14 @@ class MaterialPackageMakerWrangler(PackageWrangler):
             result.append(human_readable_name)
         return result
 
-    def make_visible_asset_menu_tokens(self, head=None):
-        keys = self.list_asset_importable_names(head=head)
-        bodies = self.list_asset_human_readable_names(head=head)
-        return zip(keys, bodies)
-        
-    def make_main_menu(self, head=None):
-        menu, section = self.make_menu(where=self.where(), is_numbered=True)
-        section.tokens = self.list_asset_human_readable_names(head=head)
-        section = menu.make_section()
-        section.append(('new', 'new material package maker'))
-        return menu
+    def list_score_external_asset_importable_names(self, head=None):
+        result = PackageWrangler.list_score_external_asset_importable_names(self, head=head)
+        if self.base_class_name in result:
+            result.remove(self.base_class_name)
+        return result
+
+    def list_score_internal_asset_container_importable_names(self, head=None):
+        return []
 
     # TODO: implement MaterialPackageProxyClassFile object to model and customize these settings
     def make_asset_class_file(self, package_short_name, generic_output_name):
@@ -174,3 +162,15 @@ class MaterialPackageMakerWrangler(PackageWrangler):
         stylesheet_file_pointer = file(stylesheet_file_name, 'w')
         stylesheet_file_pointer.write(stylesheet.format)
         stylesheet_file_pointer.close()
+
+    def make_main_menu(self, head=None):
+        menu, section = self.make_menu(where=self.where(), is_numbered=True)
+        section.tokens = self.list_asset_human_readable_names(head=head)
+        section = menu.make_section()
+        section.append(('new', 'new material package maker'))
+        return menu
+
+    def make_visible_asset_menu_tokens(self, head=None):
+        keys = self.list_asset_importable_names(head=head)
+        bodies = self.list_asset_human_readable_names(head=head)
+        return zip(keys, bodies)

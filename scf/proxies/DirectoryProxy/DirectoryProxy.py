@@ -74,10 +74,10 @@ class DirectoryProxy(AssetProxy):
     def make_directory(self):
         os.mkdir(self.path_name)
 
-    def profile(self):
-        pass
-
     def print_directory_contents(self):
         self.display(self.directory_contents, capitalize_first_character=False)
         self.display('')
         self.session.hide_next_redraw = True
+
+    def profile(self):
+        pass
