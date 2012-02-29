@@ -15,7 +15,7 @@ class KaleidMaterialPackageMaker(MaterialPackageMaker):
     illustration_maker = staticmethod(make_illustration_from_output_material)
     output_material_checker = staticmethod(lambda x: isinstance(x, _RhytmicKaleid))
     output_material_editor = KaleidWizard
-    output_material_maker = 'need some type of wizard to choose kaleid type'
+    output_material_maker = KaleidWizard
 
     output_material_module_import_statements = [
         'from baca.rhythm.kaleids import *',

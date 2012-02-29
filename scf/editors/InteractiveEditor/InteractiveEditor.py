@@ -106,8 +106,7 @@ class InteractiveEditor(SCFObject):
 
     def make_main_menu(self):
         is_keyed = self.target_manifest.is_keyed
-        menu, section = self.make_menu(where=self.where(), 
-            is_parenthetically_numbered=True, is_keyed=is_keyed)
+        menu, section = self.make_menu(where=self.where(), is_parenthetically_numbered=True, is_keyed=is_keyed)
         section.tokens = self.target_attribute_tokens
         section.show_existing_values = True
         return menu

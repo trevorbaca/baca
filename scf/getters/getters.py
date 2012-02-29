@@ -13,6 +13,24 @@ def get_integer(attribute_spaced_name, session=None, existing_value=None, allow_
     getter.allow_none = allow_none
     return getter
 
+def get_integers(attribute_spaced_name, session=None, existing_value=None, allow_none=True):
+    getter = UserInputGetter(session=session)
+    getter.append_integers(attribute_spaced_name)
+    getter.allow_none = allow_none
+    return getter
+
+def get_nonzero_integers(attribute_spaced_name, session=None, existing_value=None, allow_none=True):
+    getter = UserInputGetter(session=session)
+    getter.append_nonzero_integers(attribute_spaced_name)
+    getter.allow_none = allow_none
+    return getter
+
+def get_positive_integer_power_of_two(attribute_spaced_name, session=None, existing_value=None, allow_none=True):
+    getter = UserInputGetter(session=session)
+    getter.append_positive_integer_power_of_two(attribute_spaced_name)
+    getter.allow_none = allow_none
+    return getter
+
 def get_string(attribute_spaced_name, session=None, existing_value=None, allow_none=True):
     getter = UserInputGetter(session=session)
     getter.append_string(attribute_spaced_name)

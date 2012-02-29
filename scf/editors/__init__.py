@@ -27,3 +27,5 @@ from TargetManifest import TargetManifest
 from TempoMarkEditor import TempoMarkEditor
 from TempoMarkInventoryEditor import TempoMarkInventoryEditor
 from UserInputWrapper import UserInputWrapper
+
+from PatternedTokensKaleidEditor import PatternedTokensKaleidEditor

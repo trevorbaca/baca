@@ -1,5 +1,6 @@
 from abjad.tools import durationtools
 from abjad.tools import iotools
+from abjad.tools import mathtools
 from abjad.tools import pitchtools
 from scf.menuing.MenuSectionAggregator import MenuSectionAggregator
 from scf import predicates
@@ -106,6 +107,11 @@ class UserInputGetter(MenuSectionAggregator):
         self.append_something(spaced_attribute_name, message, (start, stop), default=default)
         self.tests.append(self.make_is_integer_in_range(start, stop, allow_none=allow_none))
 
+    def append_integers(self, spaced_attribute_name, default=None):
+        message = 'value for {!r} must be integers.'
+        self.append_something(spaced_attribute_name, message, default=default)
+        self.tests.append(lambda x: all([predicates.is_integer(y) for y in x]))
+
     def append_markup(self, spaced_attribute_name, default=None):
         message = 'value for {!r} must be markup.'
         self.append_something(spaced_attribute_name, message, default=default)
@@ -128,6 +134,16 @@ class UserInputGetter(MenuSectionAggregator):
         execs.append('value = pitchtools.NamedChromaticPitch({})')
         self.execs[-1] = execs
         self.tests.append(predicates.is_named_chromatic_pitch)
+
+    def append_nonzero_integers(self, spaced_attribute_name, default=None):
+        message = 'value for {!r} must be nonzero integers.'
+        self.append_something(spaced_attribute_name, message, default=default)
+        self.tests.append(lambda x: all([isinstance(y, int) and not y == 0 for y in x]))
+
+    def append_positive_integer_power_of_two(self, spaced_attribute_name, default=None):
+        message = 'value for {!r} must be positive integer power of two.'
+        self.append_something(spaced_attribute_name, message, default=default)
+        self.tests.append(mathtools.is_positive_integer_power_of_two)
 
     def append_pitch_range(self, spaced_attribute_name, default=None):
         message = 'value for {!r} must be pitch range.'
