@@ -9,4 +9,5 @@ import proxies
 import selectors
 import specifiers
 import studio
+import wizards
 import wranglers

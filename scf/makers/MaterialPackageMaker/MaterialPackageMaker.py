@@ -159,6 +159,5 @@ class MaterialPackageMaker(MaterialPackageProxy):
 
     def write_stub_user_input_module_to_disk(self, prompt=True):
         empty_user_input_wrapper = self.initialize_empty_user_input_wrapper()
-        self.debug(empty_user_input_wrapper)
         self.user_input_module_proxy.write_user_input_wrapper_to_disk(empty_user_input_wrapper)
         self.proceed('stub user input module written to disk.', prompt=prompt)

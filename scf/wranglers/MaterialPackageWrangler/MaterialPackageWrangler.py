@@ -118,7 +118,6 @@ class MaterialPackageWrangler(PackageWrangler):
             return
         # TODO: set following attribute by editor automatically
         should_have_illustration = True
-        self.debug((material_package_importable_name, material_package_maker_class_name))
         self.make_material_package(
             material_package_importable_name, material_package_maker_class_name, should_have_illustration)
 
