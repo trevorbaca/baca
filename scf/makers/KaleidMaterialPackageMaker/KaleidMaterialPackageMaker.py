@@ -2,6 +2,7 @@ from make_illustration_from_output_material import make_illustration_from_output
 from scf.makers.MaterialPackageMaker import MaterialPackageMaker
 from scf.editors.UserInputWrapper import UserInputWrapper
 from scf.editors.InteractiveEditor import InteractiveEditor
+from scf.editors.get_kaleid_editor import get_kaleid_editor
 from scf.wizards.KaleidWizard import KaleidWizard
 from kaleids._RhythmicKaleid import _RhythmicKaleid
 import baca
@@ -14,8 +15,11 @@ class KaleidMaterialPackageMaker(MaterialPackageMaker):
     generic_output_name = 'kaleid'
     illustration_maker = staticmethod(make_illustration_from_output_material)
     output_material_checker = staticmethod(lambda x: isinstance(x, _RhytmicKaleid))
-    output_material_editor = KaleidWizard
+    output_material_editor = staticmethod(get_kaleid_editor)
+    #output_material_editor = KaleidWizard
     output_material_maker = KaleidWizard
+    # TODO: integrate wizard!
+    output_material_wizard = KaleidWizard
 
     output_material_module_import_statements = [
         'from kaleids import *',

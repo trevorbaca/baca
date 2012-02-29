@@ -131,8 +131,6 @@ class _PartForcedObjectWithPatternedTokens(_RhythmicKaleid):
         )
 
     kwargs = (
-        'pattern',
-        'denominator',
         'prolation_addenda',
         'lefts',
         'middles',

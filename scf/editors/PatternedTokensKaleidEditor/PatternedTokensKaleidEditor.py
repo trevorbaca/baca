@@ -6,6 +6,8 @@ import kaleids
 
 class PatternedTokensKaleidEditor(InteractiveEditor):
 
+    ### CLASS ATTRIBUTES ###
+
     is_autoadvancing = True
     target_class = kaleids.PatternedTokens
     target_manifest = TargetManifest(kaleids.PatternedTokens,
@@ -15,7 +17,16 @@ class PatternedTokensKaleidEditor(InteractiveEditor):
         ('secondary_divisions', 's', getters.get_integers),
         )
 
-    ### PUBLIC METHODS ###
+    ### READ-ONLY ATTRIBUTES ###
+
+    @property
+    def summary_lines(self):
+        result = []
+        if self.target:
+            result.extend(self._target._formatted_input_parameters)
+        return result
+
+    ### METHODS ###
 
     def conditionally_initialize_target(self):
         pass
