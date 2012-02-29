@@ -18,7 +18,7 @@ class KaleidMaterialPackageMaker(MaterialPackageMaker):
     output_material_maker = KaleidWizard
 
     output_material_module_import_statements = [
-        'from baca.rhythm.kaleids import *',
+        'from rhythm.kaleids import *',
         ]
 
     user_input_demo_values = [

@@ -22,17 +22,12 @@ class KaleidWizard(Wizard):
     def run(self, cache=False, clear=True, head=None, user_input=None):
         self.assign_user_input(user_input=user_input)
         self.cache_breadcrumbs(cache=cache)
-        while True:
-            self.push_breadcrumb()
-            selector = selectors.KaleidSelector(session=self.session)
-            kaleid_class_name = selector.run()
-            if self.backtrack():
-                break
-            self.debug(kaleid_class_name)
-            #kaleid_editor = self.get_kaleid_editor(kaleid_class_name) 
-            #kaleid = kaleid_editor.run()
-            break
+        self.push_breadcrumb()
+        selector = selectors.KaleidSelector(session=self.session)
+        kaleid_class_name = selector.run()
+        if not self.backtrack():
+            kaleid_editor = self.get_kaleid_editor(kaleid_class_name) 
+            kaleid_editor.run(is_autoadvancing=True)
+            self.target = kaleid_editor.target
         self.pop_breadcrumb() 
         self.restore_breadcrumbs(cache=cache) 
-        #return kaleid
-        #self.target = kaleid
