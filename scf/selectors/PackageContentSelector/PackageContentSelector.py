@@ -2,13 +2,12 @@ from scf.selectors.Selector import Selector
 import os
 
 
-class KaleidSelector(Selector):
+class PackageContentSelector(Selector):
 
     ### CLASS ATTRIBUTES ###
-    
-    asset_container_package_importable_names = ['rhythm.kaleids']
-    asset_container_path_names = [os.environ.get('KALEIDPATH')]
-    target_human_readable_name = 'kaleid'
+
+    asset_container_package_importable_names = []
+    target_human_readable_name = 'item'
 
     ### READ / WRITE ATTRIBUTES ###
 
