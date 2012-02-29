@@ -95,6 +95,31 @@ class _PartForcedObjectWithPatternedTokens(_RhythmicKaleid):
             tuplets = self._make_tuplets(secondary_duration_pairs, leaf_lists)
             return tuplets
 
+    def __eq__(self, other):
+        return all([
+            isinstance(other, type(self)),
+            self._pattern == other._pattern,
+            self._denominator == other._denominator,
+            self._prolation_addenda == other._prolation_addenda,
+            self._lefts == other._lefts,
+            self._middles == other._middles,
+            self._rights == other._rights,
+            self._left_lengths == other._left_lengths,
+            self._right_lengths == other._right_lengths,
+            self._secondary_divisions == other._secondary_divisions,
+            #self._pattern_helper == other._pattern_helper,
+            #self._prolation_addenda_helper == other._prolation_addenda_helper,
+            #self._lefts_helper == other._lefts_helper,
+            #self._middles_helper == other._middles_helper,
+            #self._rights_helper == other._rights_helper,
+            #self._left_lengths_helper == other._left_lengths_helper,
+            #self._right_lengths_helper == other._right_lengths_helper,
+            #self._secondary_divisons_helper == other._secondary_divisions_helper,
+            ])    
+
+    def __ne__(self, other):
+        return self == other
+
     ### PRIVATE METHODS ###
 
     def _force_token_part(self, token_part, indicator):

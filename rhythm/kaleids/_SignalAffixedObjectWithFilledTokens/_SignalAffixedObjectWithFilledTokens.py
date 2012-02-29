@@ -76,6 +76,18 @@ class _SignalAffixedObjectWithFilledTokens(_RhythmicKaleid):
             tuplets = self._make_tuplets(secondary_duration_pairs, leaf_lists)
             return tuplets
 
+    def __eq__(self, other):
+        return all([
+            isinstance(other, type(self)),
+            self._prefix_signal == other._prefix_signal,
+            self._prefix_lengths == other._prefix_lengths,
+            self._suffix_signal == other._suffix_signal,
+            self._suffix_lengths == other._suffix_lengths,
+            self._prolation_addenda == other._prolation_addenda,
+            self._denominator == other._denominator,
+            self._secondary_divisions == other._secondary_divisions,
+            ])
+
     ### PRIVATE METHODS ###
 
     def _make_numeric_map_part(self, numerator, prefix, suffix, is_note_filled = True):
