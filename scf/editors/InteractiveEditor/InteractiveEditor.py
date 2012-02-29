@@ -9,7 +9,6 @@ class InteractiveEditor(SCFObject):
             assert isinstance(target, self.target_class)
         self.target = target
         self.initialize_attributes_in_memory()
-        self.is_autoadvancing = False
     
     ### OVERLOADS ###
 
@@ -159,7 +158,7 @@ class InteractiveEditor(SCFObject):
         attribute_name = self.target_manifest.menu_key_to_attribute_name(menu_key)
         return getattr(self.target, attribute_name, None)
 
-    def run(self, breadcrumb=None, cache=False, clear=True, is_autoadvancing=False, user_input=None):
+    def run(self, breadcrumb=None, cache=False, clear=True, user_input=None):
         self.assign_user_input(user_input=user_input)
         self.cache_breadcrumbs(cache=cache)
         self.push_breadcrumb()
@@ -170,8 +169,7 @@ class InteractiveEditor(SCFObject):
         if self.backtrack():
             self.restore_breadcrumbs(cache=cache)
             return
-        self.is_autoadvancing = is_autoadvancing
-        result, entry_point = None, None
+        result, entry_point, self.is_autoadvancing = None, None, getattr(self, 'is_autoadvancing', False)
         while True:
             self.push_breadcrumb(breadcrumb=breadcrumb)
             if result and self.is_autoadvancing:
