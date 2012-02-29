@@ -1,3 +1,4 @@
+from make_illustration_from_output_material import make_illustration_from_output_material
 from scf.makers.MaterialPackageMaker import MaterialPackageMaker
 from scf.editors.UserInputWrapper import UserInputWrapper
 from scf.editors.InteractiveEditor import InteractiveEditor
@@ -20,4 +21,7 @@ class KaleidMaterialPackageMaker(MaterialPackageMaker):
         ]
 
     user_input_demo_values = [
+        ]
+
+    user_input_module_import_statements = [
         ]

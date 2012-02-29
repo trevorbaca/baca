@@ -61,7 +61,7 @@ class MaterialPackageMaker(MaterialPackageProxy):
         if len(self.user_input_wrapper_in_memory) < number:
             return
         index = number - 1
-        key, current_value = self.user_input_wrapper_in_memory.list_items[index]
+        key, current_value = self.user_input_wrapper_in_memory.list_items()[index]
         test_tuple = type(self).user_input_tests[index]
         test = test_tuple[1]
         if len(test_tuple) == 3:
@@ -159,5 +159,6 @@ class MaterialPackageMaker(MaterialPackageProxy):
 
     def write_stub_user_input_module_to_disk(self, prompt=True):
         empty_user_input_wrapper = self.initialize_empty_user_input_wrapper()
+        self.debug(empty_user_input_wrapper)
         self.user_input_module_proxy.write_user_input_wrapper_to_disk(empty_user_input_wrapper)
         self.proceed('stub user input module written to disk.', prompt=prompt)

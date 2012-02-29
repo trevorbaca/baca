@@ -3,6 +3,10 @@ import collections
 
 class UserInputWrapper(collections.OrderedDict):
     
+    def __init__(self, *arg):
+        collections.OrderedDict.__init__(self, *arg)
+        self._user_input_module_import_statements = []
+
     ### READ-ONLY PUBLIC ATTRIBUTES ###
 
     @property
@@ -23,7 +27,7 @@ class UserInputWrapper(collections.OrderedDict):
     def formatted_lines(self):
         formatted_lines = []
         formatted_lines.append('user_input_wrapper = {}(['.format(type(self).__name__))
-        items = self.list_items
+        items = self.list_items()
         for name, value in items[:-1]:
             line = '\t({!r}, {!r}),'.format(name, value)
             formatted_lines.append(line)
@@ -43,19 +47,20 @@ class UserInputWrapper(collections.OrderedDict):
         return not self.is_complete and not self.is_empty
 
     @property
-    def list_items(self):
-        return list(self.iteritems())
-
-    @property
     def user_input_module_import_statements(self):
         return self._user_input_module_import_statements
-
-    @property
-    def values(self):
-        return list(self.itervalues())
 
     ### PUBLIC METHODS ###
 
     def clear(self):
         for key in self:
             self[key] = None
+
+    def list_items(self):
+        return list(self.iteritems())
+
+    def list_keys(self):
+        return list(self.iterkeys())
+
+    def list_values(self):
+        return list(self.itervalues())

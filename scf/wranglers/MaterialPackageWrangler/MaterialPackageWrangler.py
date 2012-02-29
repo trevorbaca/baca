@@ -106,6 +106,7 @@ class MaterialPackageWrangler(PackageWrangler):
             return
         # TODO: set following attribute by editor automatically
         should_have_illustration = True
+        self.debug((material_package_importable_name, material_package_maker_class_name))
         self.make_material_package(
             material_package_importable_name, material_package_maker_class_name, should_have_illustration)
 
@@ -141,7 +142,9 @@ class MaterialPackageWrangler(PackageWrangler):
             material_package_proxy = scf.proxies.MaterialPackageProxy(
                 material_package_importable_name, session=self.session)
         else:
-            command = 'material_package_proxy = scf.makers.{}(material_package_importable_name, session=self.session)'.format(material_package_maker_class_name)
+            command = 'material_package_proxy = '
+            command += 'scf.makers.{}(material_package_importable_name, session=self.session)'
+            command = command.format(material_package_maker_class_name)
             exec(command)
         tags = collections.OrderedDict([])
         tags['material_package_maker_class_name'] = material_package_maker_class_name
@@ -150,7 +153,8 @@ class MaterialPackageWrangler(PackageWrangler):
         if material_package_maker_class_name is None:
             file(os.path.join(path_name, 'material_definition.py'), 'w').write('')
             is_data_only = not should_have_illustration
-            material_package_proxy.material_definition_module_proxy.write_stub_to_disk(is_data_only, prompt=False)
+            material_package_proxy.material_definition_module_proxy.write_stub_to_disk(
+                is_data_only, prompt=False)
         else:
             material_package_proxy.write_stub_user_input_module_to_disk(prompt=False)
         line = 'material package {!r} created.'.format(material_package_importable_name)

@@ -1,3 +1,4 @@
+from KaleidMaterialPackageMaker import KaleidMaterialPackageMaker
 from MaterialPackageMaker import MaterialPackageMaker
 from PitchRangeInventoryMaterialPackageMaker import PitchRangeInventoryMaterialPackageMaker
 from SargassoMeasureMaterialPackageMaker import SargassoMeasureMaterialPackageMaker
