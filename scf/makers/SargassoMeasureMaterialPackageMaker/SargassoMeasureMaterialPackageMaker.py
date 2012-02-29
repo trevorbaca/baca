@@ -57,7 +57,7 @@ class SargassoMeasureMaterialPackageMaker(MaterialPackageMaker):
         ('measures_are_shuffled', predicates.is_boolean),
         ]
 
-    ### READ-ONLY PUBLIC ATTRIBUTES ###
+    ### PUBLIC METHODS ###
 
     def make_output_material_module_body_lines(self, output_material):
         lines = []

@@ -28,3 +28,15 @@ class KaleidMaterialPackageMaker(MaterialPackageMaker):
     user_input_module_import_statements = [
         'from scf.editors.UserInputWrapper import UserInputWrapper',
         ]
+
+    ### PUBLIC METHODS ###
+
+    def make_output_material_module_body_lines(self, output_material):
+        lines = []
+        lines.append('{} = {}('.format(self.material_underscored_name, output_material._class_name))
+        for input_parameter in output_material._formatted_input_parameters[:-1]:
+            lines.append('\t{},'.format(input_parameter))
+        line = output_material._formatted_input_parameters[-1]
+        lines.append('\t{})'.format(line))
+        lines = [line + '\n' for line in lines]
+        return lines

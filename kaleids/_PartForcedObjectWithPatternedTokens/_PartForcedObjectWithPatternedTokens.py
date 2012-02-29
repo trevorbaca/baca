@@ -10,12 +10,12 @@ class _PartForcedObjectWithPatternedTokens(_RhythmicKaleid):
     '''Part-forced object with patterned tokens.
     '''
 
-    def __init__(self, pattern, denominator, prolation_addenda = None,
-        lefts = None, middles = None, rights = None, left_lengths = None, right_lengths = None,
-        secondary_divisions = None,
-        pattern_helper = None, prolation_addenda_helper = None,
-        lefts_helper = None, middles_helper = None, rights_helper = None,
-        left_lengths_helper = None, right_lengths_helper = None, secondary_divisions_helper = None):
+    def __init__(self, pattern, denominator, prolation_addenda=None,
+        lefts=None, middles=None, rights=None, left_lengths=None, right_lengths=None,
+        secondary_divisions=None,
+        pattern_helper=None, prolation_addenda_helper=None,
+        lefts_helper=None, middles_helper=None, rights_helper=None,
+        left_lengths_helper=None, right_lengths_helper=None, secondary_divisions_helper=None):
         _RhythmicKaleid.__init__(self)
         prolation_addenda = self._none_to_new_list(prolation_addenda)
         lefts = self._none_to_new_list(lefts)
@@ -119,6 +119,49 @@ class _PartForcedObjectWithPatternedTokens(_RhythmicKaleid):
 
     def __ne__(self, other):
         return self == other
+
+    def __repr__(self):
+        return '{}({})'.format(self._class_name, ', '.join(self._formatted_input_parameters))
+
+    ### CLASS ATTRIBUTES ###
+
+    args = (
+        'pattern', 
+        'denominator',
+        )
+
+    kwargs = (
+        'pattern',
+        'denominator',
+        'prolation_addenda',
+        'lefts',
+        'middles',
+        'rights',
+        'left_lengths',
+        'right_lengths',
+        'secondary_divisions',
+        #'pattern_helper',
+        #'prolation_addenda_helper',
+        #'lefts_helper',
+        #'middles_helper',
+        #'rights_helper',
+        #'left_lengths_helper',
+        #'right_lengths_helper',
+        #'secondary_divisons_helper',
+        )
+
+    ### PRIVATE ATTRIBUTES ###
+
+    @property
+    def _formatted_input_parameters(self):
+        result = []
+        for arg in self.args:
+            string = '{}'.format(getattr(self, '_' + arg))
+            result.append(string)
+        for kwarg in self.kwargs:
+            string = '{}={!r}'.format(kwarg, getattr(self, '_' + kwarg))
+            result.append(string)
+        return result
 
     ### PRIVATE METHODS ###
 
