@@ -11,18 +11,11 @@ import baca
 
 class SargassoMeasureMaterialPackageMaker(MaterialPackageMaker):
 
-    def __init__(self, package_importable_name=None, session=None):
-        MaterialPackageMaker.__init__(
-            self, package_importable_name=package_importable_name, session=session)
-
-    ### PUBLIC CLASS ATTRIBUTES ###
+    ### CLASS ATTRIBUTES ###
 
     generic_output_name = 'sargasso measures'
-
     illustration_maker = staticmethod(make_illustration_from_output_material)
-
     output_material_checker = staticmethod(measuretools.all_are_measures)
-            
     output_material_maker = staticmethod(baca.music.make_sargasso_measures)
 
     # TODO: 

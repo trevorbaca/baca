@@ -8,10 +8,6 @@ import baca
 
 class ZaggedPitchClassMaterialPackageMaker(MaterialPackageMaker):
 
-    #def __init__(self, package_importable_name=None, session=None):
-    #    MaterialPackageMaker.__init__(
-    #        self, package_importable_name=package_importable_name, session=session)
-
     ### CLASS ATTRIBUTES ###
 
     generic_output_name = 'zagged pitch-classes'
