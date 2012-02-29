@@ -25,14 +25,17 @@ class UserInputWrapper(collections.OrderedDict):
 
     @property
     def formatted_lines(self):
-        formatted_lines = []
-        formatted_lines.append('user_input_wrapper = {}(['.format(type(self).__name__))
+        result = []
         items = self.list_items()
-        for name, value in items[:-1]:
-            line = '\t({!r}, {!r}),'.format(name, value)
-            formatted_lines.append(line)
-        formatted_lines.append('\t({!r}, {!r})])'.format(items[-1][0], items[-1][1]))
-        return formatted_lines
+        if not items:
+            result.append('user_input_wrapper = {}([])'.format(type(self).__name__))
+        else:
+            result.append('user_input_wrapper = {}(['.format(type(self).__name__))
+            for name, value in items[:-1]:
+                line = '\t({!r}, {!r}),'.format(name, value)
+                result.append(line)
+            result.append('\t({!r}, {!r})])'.format(items[-1][0], items[-1][1]))
+        return result
 
     @property
     def is_complete(self):
