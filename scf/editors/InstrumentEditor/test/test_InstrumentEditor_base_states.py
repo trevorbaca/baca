@@ -12,9 +12,9 @@ def test_InstrumentEditor_base_states_01():
     assert editor.transcript[-2] == \
     ['Accordion',
       '',
-      "     (1) instrument name (in): 'accordion'",
+      "     (1) instrument name (in): accordion",
       "     (2) instrument name markup (im): Markup('Accordion')",
-      "     (3) short instrument name (sn): 'acc.'",
+      "     (3) short instrument name (sn): acc.",
       "     (4) short instrument name markup (sm): Markup('Acc.')",
       '',
       '     range: [E1, C8]',

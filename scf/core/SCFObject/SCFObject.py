@@ -264,6 +264,8 @@ class SCFObject(object):
             return expr._one_line_menuing_summary
         elif isinstance(expr, type(type)):
             return expr.__name__
+        elif isinstance(expr, str):
+            return expr
         else:
             return repr(expr)
 

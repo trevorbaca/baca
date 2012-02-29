@@ -1,8 +1,8 @@
-from scf.selectors.Selector import Selector
+from scf.selectors.DirectoryContentSelector import DirectoryContentSelector
 import os
 
 
-class PackageContentSelector(Selector):
+class PackageContentSelector(DirectoryContentSelector):
 
     ### CLASS ATTRIBUTES ###
 

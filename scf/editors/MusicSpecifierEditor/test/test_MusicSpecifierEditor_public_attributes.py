@@ -61,7 +61,7 @@ def test_MusicSpecifierEditor_public_attributes_02():
     assert editor.has_target
     assert editor.target is ms
     assert editor.target_attribute_tokens == [
-        ('nm', 'music specifier name', "'blue music'"), 
+        ('nm', 'music specifier name', 'blue music'), 
         ('tp', 'tempo', '90'), 
         ('pc', 'performer contributions', 'unknown performer, unknown performer')]
     assert editor.target_name == 'blue music'
