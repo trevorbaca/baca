@@ -1,4 +1,4 @@
-from baca.rhythm.kaleids.SignalAffixedNoteFilledTokens import SignalAffixedNoteFilledTokens
+from kaleids.SignalAffixedNoteFilledTokens import SignalAffixedNoteFilledTokens
 
 
 class NoteFilledTokens(SignalAffixedNoteFilledTokens):

@@ -2,7 +2,7 @@ from abjad.tools import durationtools
 from abjad.tools import leaftools
 from abjad.tools import mathtools
 from abjad.tools import sequencetools
-from baca.rhythm.kaleids._SignalAffixedChunkWithFilledTokens import _SignalAffixedChunkWithFilledTokens
+from kaleids._SignalAffixedChunkWithFilledTokens import _SignalAffixedChunkWithFilledTokens
 
 
 class SignalAffixedChunkWithRestFilledTokens(_SignalAffixedChunkWithFilledTokens):

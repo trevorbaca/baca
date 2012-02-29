@@ -1,4 +1,4 @@
-from baca.rhythm.kaleids.PartForcedPatternedTokens import PartForcedPatternedTokens
+from kaleids.PartForcedPatternedTokens import PartForcedPatternedTokens
 
 
 class PatternedTokens(PartForcedPatternedTokens):

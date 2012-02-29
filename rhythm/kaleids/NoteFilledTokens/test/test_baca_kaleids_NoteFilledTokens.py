@@ -1,6 +1,6 @@
 from abjad import *
 from abjad.tools import sequencetools
-from baca.rhythm.kaleids import *
+from kaleids import *
 
 
 def test_baca_kaleids_NoteFilledTokens_01():

@@ -1,4 +1,4 @@
-from baca.rhythm.kaleids.SignalAffixedRestFilledTokens import SignalAffixedRestFilledTokens
+from kaleids.SignalAffixedRestFilledTokens import SignalAffixedRestFilledTokens
 
 
 class RestFilledTokens(SignalAffixedRestFilledTokens):

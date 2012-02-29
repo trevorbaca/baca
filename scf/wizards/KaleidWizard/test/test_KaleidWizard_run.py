@@ -1,4 +1,4 @@
-from rhythm import kaleids
+import kaleids
 import scf
 
 

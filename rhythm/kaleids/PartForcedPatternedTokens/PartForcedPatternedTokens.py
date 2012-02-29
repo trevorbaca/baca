@@ -1,6 +1,6 @@
 from abjad.tools import mathtools
 from abjad.tools import sequencetools
-from baca.rhythm.kaleids._PartForcedObjectWithPatternedTokens import _PartForcedObjectWithPatternedTokens
+from kaleids._PartForcedObjectWithPatternedTokens import _PartForcedObjectWithPatternedTokens
 
 
 class PartForcedPatternedTokens(_PartForcedObjectWithPatternedTokens):

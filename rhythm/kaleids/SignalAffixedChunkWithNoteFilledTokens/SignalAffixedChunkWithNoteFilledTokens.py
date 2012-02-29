@@ -1,4 +1,4 @@
-from baca.rhythm.kaleids._SignalAffixedChunkWithFilledTokens import _SignalAffixedChunkWithFilledTokens
+from kaleids._SignalAffixedChunkWithFilledTokens import _SignalAffixedChunkWithFilledTokens
 
 
 class SignalAffixedChunkWithNoteFilledTokens(_SignalAffixedChunkWithFilledTokens):

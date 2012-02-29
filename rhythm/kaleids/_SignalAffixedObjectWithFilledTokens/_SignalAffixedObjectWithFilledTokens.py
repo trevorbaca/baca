@@ -2,7 +2,7 @@ from abjad.tools import durationtools
 from abjad.tools import leaftools
 from abjad.tools import mathtools
 from abjad.tools import sequencetools
-from baca.rhythm.kaleids._RhythmicKaleid import _RhythmicKaleid
+from kaleids._RhythmicKaleid import _RhythmicKaleid
 import types
 
 

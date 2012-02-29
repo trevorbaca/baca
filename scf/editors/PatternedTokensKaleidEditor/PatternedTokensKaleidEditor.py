@@ -1,7 +1,7 @@
 from scf.editors.InteractiveEditor import InteractiveEditor
 from scf.editors.TargetManifest import TargetManifest
 from scf import getters
-from rhythm import kaleids
+import kaleids
 
 
 class PatternedTokensKaleidEditor(InteractiveEditor):

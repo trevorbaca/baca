@@ -1,4 +1,3 @@
-from rhythm import kaleids
 import os
 import scf
 
