@@ -3,7 +3,7 @@ from scf.makers.MaterialPackageMaker import MaterialPackageMaker
 from scf.editors.UserInputWrapper import UserInputWrapper
 from scf.editors.InteractiveEditor import InteractiveEditor
 from scf.wizards.KaleidWizard import KaleidWizard
-from baca.rhythm.kaleids._RhythmicKaleid import _RhythmicKaleid
+from kaleids._RhythmicKaleid import _RhythmicKaleid
 import baca
 
 

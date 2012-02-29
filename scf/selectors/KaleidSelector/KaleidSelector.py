@@ -6,6 +6,6 @@ class KaleidSelector(DirectoryContentSelector):
 
     ### CLASS ATTRIBUTES ###
     
-    asset_container_package_importable_names = ['rhythm.kaleids']
+    asset_container_package_importable_names = ['kaleids']
     asset_container_path_names = [os.environ.get('KALEIDPATH')]
     target_human_readable_name = 'kaleid'
