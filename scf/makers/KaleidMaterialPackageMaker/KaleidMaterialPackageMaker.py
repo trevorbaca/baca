@@ -23,13 +23,6 @@ class KaleidMaterialPackageMaker(MaterialPackageMaker):
         ]
 
     should_have_user_input_module = False
-    user_input_demo_values = [
-        ]
-
-    # TODO: possibly remove?
-    user_input_module_import_statements = [
-        'from scf.editors.UserInputWrapper import UserInputWrapper',
-        ]
 
     ### PUBLIC METHODS ###
 
