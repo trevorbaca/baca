@@ -6,10 +6,6 @@ from scf.editors.PitchRangeInventoryEditor import PitchRangeInventoryEditor
 
 class PitchRangeInventoryMaterialPackageMaker(MaterialPackageMaker):
 
-    #def __init__(self, package_importable_name=None, session=None):
-    #    MaterialPackageMaker.__init__(self, 
-    #        package_importable_name=package_importable_name, session=session)
-
     ### CLASS ATTRIBUTES ###
 
     generic_output_name = 'pitch range inventory'
@@ -17,18 +13,17 @@ class PitchRangeInventoryMaterialPackageMaker(MaterialPackageMaker):
     output_material_checker = staticmethod(lambda x: isinstance(x, pitchtools.PitchRangeInventory))
     output_material_editor = PitchRangeInventoryEditor
     output_material_maker = pitchtools.PitchRangeInventory
+    output_material_module_import_statements = ['from abjad.tools import pitchtools' ]
 
-    # TODO: change to only 'from abjad.tools import pitchtools'
-    output_material_module_import_statements = [
-        'from abjad.tools.pitchtools.PitchRange import PitchRange',
-        'from abjad.tools.pitchtools.PitchRangeInventory import PitchRangeInventory',
-        ]
+    ### PUBLIC METHODS ###
 
-    user_input_demo_values = [
-        ('pitch_range_tokens', ['[A0, C8]', '[C3, F#5]']),
-        ]
-
-    # TODO: remove self.user_input_module_import_statements from editable maker
-    user_input_module_import_statements = [
-        'from scf.editors import UserInputWrapper',
-        ]
+    def make_output_material_module_body_lines(self, output_material):
+        lines = []
+        lines.append('{} = {}(['.format(
+            self.material_underscored_name, output_material._class_name_with_tools_package))
+        for item in output_material[:-1]:
+            lines.append('\t{},'.format(item._repr_with_tools_package))
+        item = output_material[-1]
+        lines.append('\t{}])'.format(item._repr_with_tools_package))
+        lines = [line + '\n' for line in lines]
+        return lines

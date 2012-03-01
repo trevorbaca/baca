@@ -39,9 +39,9 @@ class TempoMarkInventoryMaterialPackageMaker(MaterialPackageMaker):
         lines = []
         lines.append('{} = {}(['.format(
             self.material_underscored_name, output_material._class_name_with_tools_package))
-        for tempo_mark in output_material[:-1]:
-            lines.append('\t{},'.format(tempo_mark._repr_with_tools_package))
-        tempo_mark = output_material[-1]
-        lines.append('\t{}])'.format(tempo_mark._repr_with_tools_package))
+        for item in output_material[:-1]:
+            lines.append('\t{},'.format(item._repr_with_tools_package))
+        item = output_material[-1]
+        lines.append('\t{}])'.format(item._repr_with_tools_package))
         lines = [line + '\n' for line in lines]
         return lines
