@@ -10,7 +10,7 @@ class PartForcedPatternedTokens(_PartForcedObjectWithPatternedTokens):
     ### PRIVATE METHODS ###
 
     def _force_token_parts(self, tokens, quintuplet):
-        lefts, middles, rights, left_lengths, right_lengths = quintuplet
+        lefts, middles, rights, left_lengths, right_lengths=quintuplet
         lefts_index, rights_index = 0, 0
         forced_tokens = []
         for token_index, token in enumerate(tokens):

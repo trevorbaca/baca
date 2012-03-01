@@ -48,29 +48,29 @@ class _PartForcedObjectWithPatternedTokens(_RhythmicKaleid):
         assert isinstance(rights_helper, (types.FunctionType, types.MethodType))
         assert isinstance(left_lengths_helper, (types.FunctionType, types.MethodType))
         assert isinstance(right_lengths_helper, (types.FunctionType, types.MethodType))
-        self._pattern = pattern
-        self._denominator = denominator
-        self._prolation_addenda = prolation_addenda
-        self._lefts = lefts
-        self._middles = middles
-        self._rights = rights
-        self._left_lengths = left_lengths
-        self._right_lengths = right_lengths
-        self._secondary_divisions = secondary_divisions
-        self._pattern_helper = pattern_helper
-        self._prolation_addenda_helper = prolation_addenda_helper
-        self._lefts_helper = lefts_helper
-        self._middles_helper = middles_helper
-        self._rights_helper = rights_helper
-        self._left_lengths_helper = left_lengths_helper
-        self._right_lengths_helper = right_lengths_helper
-        self._secondary_divisions_helper = secondary_divisions_helper
-        self._repr_signals.append(self._pattern)
-        self._repr_signals.append(self._prolation_addenda)
-        self._repr_signals.append(self._lefts)
-        self._repr_signals.append(self._middles)
-        self._repr_signals.append(self._rights)
-        self._repr_signals.append(self._secondary_divisions)
+        self.pattern = pattern
+        self.denominator = denominator
+        self.prolation_addenda = prolation_addenda
+        self.lefts = lefts
+        self.middles = middles
+        self.rights = rights
+        self.left_lengths = left_lengths
+        self.right_lengths = right_lengths
+        self.secondary_divisions = secondary_divisions
+        self.pattern_helper = pattern_helper
+        self.prolation_addenda_helper = prolation_addenda_helper
+        self.lefts_helper = lefts_helper
+        self.middles_helper = middles_helper
+        self.rights_helper = rights_helper
+        self.left_lengths_helper = left_lengths_helper
+        self.right_lengths_helper = right_lengths_helper
+        self.secondary_divisions_helper = secondary_divisions_helper
+        self._repr_signals.append(self.pattern)
+        self._repr_signals.append(self.prolation_addenda)
+        self._repr_signals.append(self.lefts)
+        self._repr_signals.append(self.middles)
+        self._repr_signals.append(self.rights)
+        self._repr_signals.append(self.secondary_divisions)
 
     ### OVERLOADS ###
 
@@ -80,7 +80,7 @@ class _PartForcedObjectWithPatternedTokens(_RhythmicKaleid):
         pattern, prolation_addenda = octuplet[:2]
         secondary_divisions = octuplet[-1]
         signals = (pattern, prolation_addenda, secondary_divisions)
-        result = self._scale_signals(duration_pairs, self._denominator, signals)
+        result = self._scale_signals(duration_pairs, self.denominator, signals)
         duration_pairs, lcd, pattern, prolation_addenda, secondary_divisions = result
         secondary_duration_pairs = self._make_secondary_duration_pairs(
             duration_pairs, secondary_divisions)
@@ -97,23 +97,23 @@ class _PartForcedObjectWithPatternedTokens(_RhythmicKaleid):
 
     def __eq__(self, other):
         return isinstance(other, type(self)) and all([
-            self._pattern == other._pattern,
-            self._denominator == other._denominator,
-            self._prolation_addenda == other._prolation_addenda,
-            self._lefts == other._lefts,
-            self._middles == other._middles,
-            self._rights == other._rights,
-            self._left_lengths == other._left_lengths,
-            self._right_lengths == other._right_lengths,
-            self._secondary_divisions == other._secondary_divisions,
-            #self._pattern_helper == other._pattern_helper,
-            #self._prolation_addenda_helper == other._prolation_addenda_helper,
-            #self._lefts_helper == other._lefts_helper,
-            #self._middles_helper == other._middles_helper,
-            #self._rights_helper == other._rights_helper,
-            #self._left_lengths_helper == other._left_lengths_helper,
-            #self._right_lengths_helper == other._right_lengths_helper,
-            #self._secondary_divisons_helper == other._secondary_divisions_helper,
+            self.pattern == other.pattern,
+            self.denominator == other.denominator,
+            self.prolation_addenda == other.prolation_addenda,
+            self.lefts == other.lefts,
+            self.middles == other.middles,
+            self.rights == other.rights,
+            self.left_lengths == other.left_lengths,
+            self.right_lengths == other.right_lengths,
+            self.secondary_divisions == other.secondary_divisions,
+            #self.pattern_helper == other.pattern_helper,
+            #self.prolation_addenda_helper == other.prolation_addenda_helper,
+            #self.lefts_helper == other.lefts_helper,
+            #self.middles_helper == other.middles_helper,
+            #self.rights_helper == other.rights_helper,
+            #self.left_lengths_helper == other.left_lengths_helper,
+            #self.right_lengths_helper == other.right_lengths_helper,
+            #self.secondary_divisons_helper == other.secondary_divisions_helper,
             ])    
 
     def __ne__(self, other):
@@ -153,10 +153,10 @@ class _PartForcedObjectWithPatternedTokens(_RhythmicKaleid):
     def _formatted_input_parameters(self):
         result = []
         for arg in self.args:
-            string = '{}'.format(getattr(self, '_' + arg))
+            string = '{}'.format(getattr(self, arg))
             result.append(string)
         for kwarg in self.kwargs:
-            string = '{}={!r}'.format(kwarg, getattr(self, '_' + kwarg))
+            string = '{}={!r}'.format(kwarg, getattr(self, kwarg))
             result.append(string)
         return result
 
@@ -209,15 +209,15 @@ class _PartForcedObjectWithPatternedTokens(_RhythmicKaleid):
         return prolated_duration_pairs
 
     def _prepare_input(self, seeds):
-        pattern = sequencetools.CyclicTuple(self._pattern_helper(self._pattern, seeds))
-        prolation_addenda = self._prolation_addenda_helper(self._prolation_addenda, seeds)
+        pattern = sequencetools.CyclicTuple(self.pattern_helper(self.pattern, seeds))
+        prolation_addenda = self.prolation_addenda_helper(self.prolation_addenda, seeds)
         prolation_addenda = sequencetools.CyclicTuple(prolation_addenda)
-        lefts = sequencetools.CyclicTuple(self._lefts_helper(self._lefts, seeds))
-        middles = sequencetools.CyclicTuple(self._middles_helper(self._middles, seeds))
-        rights = sequencetools.CyclicTuple(self._rights_helper(self._rights, seeds))
-        left_lengths = sequencetools.CyclicTuple(self._left_lengths_helper(self._left_lengths, seeds))
-        right_lengths = sequencetools.CyclicTuple(self._right_lengths_helper(self._right_lengths, seeds))
-        secondary_divisions = self._secondary_divisions_helper(self._secondary_divisions, seeds)
+        lefts = sequencetools.CyclicTuple(self.lefts_helper(self.lefts, seeds))
+        middles = sequencetools.CyclicTuple(self.middles_helper(self.middles, seeds))
+        rights = sequencetools.CyclicTuple(self.rights_helper(self.rights, seeds))
+        left_lengths = sequencetools.CyclicTuple(self.left_lengths_helper(self.left_lengths, seeds))
+        right_lengths = sequencetools.CyclicTuple(self.right_lengths_helper(self.right_lengths, seeds))
+        secondary_divisions = self.secondary_divisions_helper(self.secondary_divisions, seeds)
         secondary_divisions = sequencetools.CyclicTuple(secondary_divisions)
         return pattern, prolation_addenda, \
             lefts, middles, rights, left_lengths, right_lengths, secondary_divisions

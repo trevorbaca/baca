@@ -20,6 +20,6 @@ class PatternedTokens(PartForcedPatternedTokens):
         'prolation_addenda',
         'secondary_divisions',
         #'pattern_helper',
-        #'prolation_aaddenda_helper',
+        #'prolation_addenda_helper',
         #'secondary_divisions_helper',
         )
