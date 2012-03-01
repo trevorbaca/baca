@@ -22,6 +22,7 @@ class KaleidMaterialPackageMaker(MaterialPackageMaker):
         'from kaleids import *',
         ]
 
+    should_have_user_input_module = False
     user_input_demo_values = [
         ]
 

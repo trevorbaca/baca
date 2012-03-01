@@ -26,6 +26,7 @@ class SargassoMeasureMaterialPackageMaker(MaterialPackageMaker):
         'from abjad.tools.measuretools.Measure import Measure',
         ]
 
+    should_have_user_input_module = True
     user_input_demo_values = [
         ('measure_denominator', 4),
         ('measure_numerator_talea', [2, 2, 2, 2, 1, 1, 4, 4]),

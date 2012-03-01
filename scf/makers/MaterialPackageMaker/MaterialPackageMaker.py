@@ -14,6 +14,8 @@ class MaterialPackageMaker(MaterialPackageProxy):
 
     def _initialize_user_input_wrapper_in_memory(self):
         import scf
+        if not self.should_have_user_input_module:
+            return
         user_input_module_importable_name = self.dot_join([self.importable_name, 'user_input'])
         user_input_module_file_name = self.module_importable_name_to_path_name(
             user_input_module_importable_name)

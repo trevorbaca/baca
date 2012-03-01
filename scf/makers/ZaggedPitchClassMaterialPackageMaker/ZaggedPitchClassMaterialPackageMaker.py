@@ -18,6 +18,7 @@ class ZaggedPitchClassMaterialPackageMaker(MaterialPackageMaker):
     output_material_module_import_statements = [
         'from abjad.tools.sequencetools.CyclicTree import CyclicTree',]
 
+    should_have_user_input_module = True
     user_input_demo_values = [
         ('pc_cells', [[0, 7, 2, 10], [9, 6, 1, 8], [5, 4, 2, 11, 10, 9]]),
         ('division_cells', [[[1], [1], [1], [1, 1]], [[1], [1], [1], [1, 1, 1], [1, 1, 1]]]),

@@ -14,8 +14,7 @@ def test_KaleidMaterialPackageMaker_01():
             'q '
             )
         mpp = scf.makers.KaleidMaterialPackageMaker('materials.testkaleid')
-        # TODO: ['__init__.py', 'output_material.py']
-        assert mpp.directory_contents == ['__init__.py', 'output_material.py', 'user_input.py']
+        assert mpp.directory_contents == ['__init__.py', 'output_material.py']
         kaleid = kaleids.PatternedTokens(
             [-1, 2, -3, 4],
             16,

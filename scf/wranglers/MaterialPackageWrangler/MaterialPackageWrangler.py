@@ -109,7 +109,7 @@ class MaterialPackageWrangler(PackageWrangler):
     def make_makermade_material_package_interactively(self):
         self.push_backtrack()
         result = self.material_package_maker_wrangler.select_asset_importable_name_interactively(
-            clear=False, cache=True)
+            cache=True, clear=False)
         self.pop_backtrack()
         if self.backtrack():
             return
@@ -120,10 +120,15 @@ class MaterialPackageWrangler(PackageWrangler):
         self.pop_backtrack()
         if self.backtrack():
             return
+        command = 'from scf.makers import {} as material_package_maker_class'.format(
+            material_package_maker_class_name)
+        exec(command)
+
         # TODO: set following attribute dynamically
         should_have_illustration = True
-        # TODO: set the following attribute dynamically
-        should_have_user_input_module = True
+
+        should_have_user_input_module = getattr(
+            material_package_maker_class, 'should_have_user_input_module', True)
         self.make_material_package(material_package_importable_name, 
             material_package_maker_class_name, 
             should_have_illustration, should_have_user_input_module)
@@ -163,8 +168,6 @@ class MaterialPackageWrangler(PackageWrangler):
             is_data_only = not should_have_illustration
             material_package_proxy.material_definition_module_proxy.write_stub_to_disk(
                 is_data_only, prompt=False)
-        #else:
-        #    material_package_proxy.write_stub_user_input_module_to_disk(prompt=False)
         if should_have_user_input_module:
             material_package_proxy.write_stub_user_input_module_to_disk(prompt=False)
         line = 'material package {!r} created.'.format(material_package_importable_name)

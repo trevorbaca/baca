@@ -23,6 +23,11 @@ class MaterialPackageProxy(PackageProxy):
         self._generic_output_name = None
         self.stylesheet_file_name_in_memory = None
 
+    ### CLASS ATTRIBUTES ###
+
+    should_have_illustration = True
+    should_have_user_input_module = False
+
     ### READ-ONLY PUBLIC ATTRIBUTES ###
 
     @property
@@ -396,12 +401,12 @@ class MaterialPackageProxy(PackageProxy):
     def should_have_stylesheet(self):
         return self.should_have_illustration
 
-    @property
-    def should_have_user_input_module(self):
-        tag = self.get_tag('should_have_user_input_module')
-        if tag is None:
-            return self.material_package_maker_class_name is not None
-        return tag
+    #@property
+    #def should_have_user_input_module(self):
+    #    tag = self.get_tag('should_have_user_input_module')
+    #    if tag is None:
+    #        return self.material_package_maker_class_name is not None
+    #    return tag
 
     @property
     def stylesheet_file_name_on_disk(self):
