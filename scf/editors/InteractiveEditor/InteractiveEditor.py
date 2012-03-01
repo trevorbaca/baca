@@ -34,6 +34,13 @@ class InteractiveEditor(SCFObject):
         return self.target is not None
 
     @property
+    def target_attribute_names(self):
+        result = []
+        if hasattr(self, 'target_manifest'):
+            result.extend(self.target_manifest.attribute_names)
+        return result
+
+    @property
     def target_attribute_tokens(self):
         if hasattr(self, 'target_manifest'):
             return self.make_target_attribute_tokens_from_target_manifest()
@@ -49,6 +56,16 @@ class InteractiveEditor(SCFObject):
     @property
     def target_name(self):
         pass
+
+    @property
+    def target_summary_lines(self):
+        result = []
+        if self.target:
+            for target_attribute_name in self.target_attribute_names:
+                name = self.change_string_to_human_readable_string(target_attribute_name)
+                value = self.get_one_line_menuing_summary(getattr(self.target, target_attribute_name))
+                result.append('{}: {}'.format(name, value))
+        return result
 
     ### PUBLIC METHODS ###
 

@@ -24,8 +24,7 @@ class PatternedTokensKaleidEditor(InteractiveEditor):
         if self.target:
             result.append(self.target._class_name)
             result.append('')
-            result.extend(self.target_args_to_target_summary_lines(self.target))
-            result.extend(self.target_kwargs_to_target_summary_lines(self.target))
+            result.extend(InteractiveEditor.target_summary_lines.fget(self))
         return result
 
     ### METHODS ###

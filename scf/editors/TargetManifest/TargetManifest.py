@@ -23,6 +23,27 @@ class TargetManifest(object):
         return self._attribute_details
 
     @property
+    def attribute_human_readable_names(self):
+        result = []
+        for attribute_detail in self.attribute_details:
+            result.append(attribute_detail.human_readable_name)
+        return result
+
+    @property
+    def attribute_menu_keys(self):
+        result = []
+        for attribute_detail in self.attribute_details:
+            result.append(attribute_detail.menu_key)
+        return result
+
+    @property
+    def attribute_names(self):
+        result = []
+        for attribute_detail in self.attribute_details:
+            result.append(attribute_detail.name)
+        return result
+
+    @property
     def format(self):
         return '\n'.join(self.format_pieces)
 
