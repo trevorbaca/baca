@@ -452,8 +452,8 @@ class MaterialPackageProxy(PackageProxy):
         if not self.has_output_material_editor:
             return
         output_material = self.output_material
-        if output_material is None and hasattr(self, 'output_material_wizard'):
-            output_material_handler_callable = self.output_material_wizard
+        if output_material is None and hasattr(self, 'output_material_creation_wizard'):
+            output_material_handler_callable = self.output_material_creation_wizard
         else:
             output_material_handler_callable = self.output_material_editor
         output_material_handler = output_material_handler_callable(
