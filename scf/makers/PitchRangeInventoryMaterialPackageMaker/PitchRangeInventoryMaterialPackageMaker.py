@@ -13,6 +13,7 @@ class PitchRangeInventoryMaterialPackageMaker(MaterialPackageMaker):
     output_material_checker = staticmethod(lambda x: isinstance(x, pitchtools.PitchRangeInventory))
     output_material_editor = PitchRangeInventoryEditor
     output_material_maker = pitchtools.PitchRangeInventory
+
     output_material_module_import_statements = ['from abjad.tools import pitchtools' ]
 
     ### PUBLIC METHODS ###
