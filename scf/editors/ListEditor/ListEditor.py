@@ -18,7 +18,7 @@ class ListEditor(InteractiveEditor):
         return self.target_name or 'list'
 
     @property
-    def summary_lines(self):
+    def target_summary_lines(self):
         result = []
         for target_item in self.target_items:
             result.append(self.get_one_line_menuing_summary(target_item))
@@ -70,7 +70,7 @@ class ListEditor(InteractiveEditor):
 
     def make_main_menu(self):
         menu, section = self.make_menu(where=self.where(), is_parenthetically_numbered=True)
-        section.tokens = self.summary_lines
+        section.tokens = self.target_summary_lines
         section.return_value_attribute = 'number'
         section = menu.make_section()
         section.append(('add', 'add {}'.format(self.target_item_identifier)))
@@ -95,7 +95,7 @@ class ListEditor(InteractiveEditor):
 
     def remove_target_items_interactively(self):
         getter = self.make_getter(where=self.where())
-        getter.append_argument_range(self.target_items_identifier, self.summary_lines)
+        getter.append_argument_range(self.target_items_identifier, self.target_summary_lines)
         argument_range = getter.run()
         if self.backtrack():
             return

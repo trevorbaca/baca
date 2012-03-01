@@ -17,7 +17,7 @@ class TempoMarkInventoryEditor(ListEditor):
     ### READ-ONLY PUBLIC ATTRIBUTES ###
 
     @property
-    def summary_lines(self):
+    def target_summary_lines(self):
         result = []
         for tempo_mark in self.target:
             result.append(repr(tempo_mark))

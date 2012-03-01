@@ -18,11 +18,11 @@ class InstrumentationEditor(InteractiveEditor):
         return self.target_name or 'performers'
 
     @property
-    def summary_lines(self):
+    def target_summary_lines(self):
         result = []
         for performer in self.target.performers:
             performer_editor = PerformerEditor(session=self.session, target=performer)
-            result.extend(performer_editor.summary_lines)
+            result.extend(performer_editor.target_summary_lines)
         return result
 
     @property
@@ -96,7 +96,7 @@ class InstrumentationEditor(InteractiveEditor):
 
     def make_main_menu(self):
         menu, section = self.make_menu(where=self.where(), is_parenthetically_numbered=True)
-        section.tokens = self.summary_lines
+        section.tokens = self.target_summary_lines
         section.return_value_attribute = 'number'
         section = menu.make_section(is_keyed=False)
         section.append(('add', 'add performers'))
@@ -122,7 +122,7 @@ class InstrumentationEditor(InteractiveEditor):
     # TODO: abstract up to ListEditor.delete_items_interactively
     def remove_performers_interactively(self):
         getter = self.make_getter(where=self.where())
-        getter.append_argument_range('performers', self.summary_lines)
+        getter.append_argument_range('performers', self.target_summary_lines)
         result = getter.run()
         if self.backtrack():
             return

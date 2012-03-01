@@ -195,7 +195,7 @@ class InteractiveEditor(SCFObject):
         self.restore_breadcrumbs(cache=cache)
         self.clean_up_attributes_in_memory()
 
-    def target_args_to_summary_lines(self, target):
+    def target_args_to_target_summary_lines(self, target):
         result = []
         for arg in getattr(target, 'args', []):
             name = self.change_string_to_human_readable_string(arg)
@@ -203,7 +203,7 @@ class InteractiveEditor(SCFObject):
             result.append('{}: {}'.format(name, value))
         return result
 
-    def target_kwargs_to_summary_lines(self, target):
+    def target_kwargs_to_target_summary_lines(self, target):
         result = []
         for kwarg in getattr(target, 'kwargs', []):
             name = self.change_string_to_human_readable_string(kwarg)

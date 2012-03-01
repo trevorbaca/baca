@@ -19,13 +19,13 @@ class PatternedTokensKaleidEditor(InteractiveEditor):
     ### READ-ONLY ATTRIBUTES ###
 
     @property
-    def summary_lines(self):
+    def target_summary_lines(self):
         result = []
         if self.target:
             result.append(self.target._class_name)
             result.append('')
-            result.extend(self.target_args_to_summary_lines(self.target))
-            result.extend(self.target_kwargs_to_summary_lines(self.target))
+            result.extend(self.target_args_to_target_summary_lines(self.target))
+            result.extend(self.target_kwargs_to_target_summary_lines(self.target))
         return result
 
     ### METHODS ###

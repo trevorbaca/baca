@@ -19,7 +19,7 @@ class PitchRangeInventoryEditor(ListEditor):
     ### READ-ONLY PUBLIC ATTRIBUTES ###
 
     @property
-    def summary_lines(self):
+    def target_summary_lines(self):
         result = []
         for pitch_range in self.target:
             result.append(repr(pitch_range))

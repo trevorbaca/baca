@@ -19,7 +19,7 @@ class PerformerEditor(InteractiveEditor):
         return [instrument.instrument_name for instrument in self.target.instruments]
 
     @property
-    def summary_lines(self):
+    def target_summary_lines(self):
         if not self.target.instruments:
             result = '{}: no instruments'.format(self.target.name)
         elif len(self.target.instruments) == 1 and self.target.name == \

@@ -671,9 +671,9 @@ class MaterialPackageProxy(PackageProxy):
                 if self.has_output_material:
                     output_material_editor = self.output_material_editor(
                         target=self.output_material, session=self.session)
-                    summary_lines = output_material_editor.summary_lines
-                    if summary_lines:
-                        section.title = summary_lines
+                    target_summary_lines = output_material_editor.target_summary_lines
+                    if target_summary_lines:
+                        section.title = target_summary_lines
                 section.append(('omi', 'output material - interact'))
                 has_output_material_section = True
             if self.has_output_material_module:
