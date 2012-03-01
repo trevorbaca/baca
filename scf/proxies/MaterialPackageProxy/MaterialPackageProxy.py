@@ -398,7 +398,10 @@ class MaterialPackageProxy(PackageProxy):
 
     @property
     def should_have_user_input_module(self):
-        return self.material_package_maker_class_name is not None
+        tag = self.get_tag('should_have_user_input_module')
+        if tag is None:
+            return self.material_package_maker_class_name is not None
+        return tag
 
     @property
     def stylesheet_file_name_on_disk(self):

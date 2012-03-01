@@ -78,16 +78,20 @@ class MaterialPackageWrangler(PackageWrangler):
             return
         material_package_maker_class_name = None
         should_have_illustration = False
-        self.make_material_package(
-            material_package_importable_name, material_package_maker_class_name, should_have_illustration)
+        should_have_user_input_module = False
+        self.make_material_package(material_package_importable_name, 
+            material_package_maker_class_name, 
+            should_have_illustration, should_have_user_input_module)
 
     # TODO: write test
     def make_handmade_material_package_interactively(self):
         material_package_importable_name = self.get_new_material_package_importable_name_interactively()
         material_package_maker_class_name = None
         should_have_illustration = True
-        self.make_material_package(
-            material_package_importable_name, material_package_maker_class_name, should_have_illustration)
+        should_have_user_input_module = False
+        self.make_material_package(material_package_importable_name, 
+            material_package_maker_class_name, 
+            should_have_illustration, should_have_user_input_module)
 
     def make_main_menu(self, head=None):
         menu, section = self.make_menu(where=self.where(), is_numbered=True, is_keyed=False)
@@ -116,20 +120,24 @@ class MaterialPackageWrangler(PackageWrangler):
         self.pop_backtrack()
         if self.backtrack():
             return
-        # TODO: set following attribute by editor automatically
+        # TODO: set following attribute dynamically
         should_have_illustration = True
-        self.make_material_package(
-            material_package_importable_name, material_package_maker_class_name, should_have_illustration)
+        # TODO: set the following attribute dynamically
+        should_have_user_input_module = True
+        self.make_material_package(material_package_importable_name, 
+            material_package_maker_class_name, 
+            should_have_illustration, should_have_user_input_module)
 
     # TODO: write test
     def make_material_package(self, material_package_importable_name, material_package_maker_class_name, 
-        should_have_illustration, prompt=True):
+        should_have_illustration, should_have_user_input_module, prompt=True):
         '''True on success.'''
         import scf
         assert iotools.is_underscore_delimited_lowercase_package_name(material_package_importable_name)
         assert material_package_maker_class_name is None or iotools.is_uppercamelcase_string(
             material_package_maker_class_name)
         assert isinstance(should_have_illustration, bool)
+        assert isinstance(should_have_user_input_module, bool)
         path_name = self.package_importable_name_to_path_name(material_package_importable_name)
         if os.path.exists(path_name):
             line = 'package {!r} already exists.'.format(material_name)
@@ -148,13 +156,16 @@ class MaterialPackageWrangler(PackageWrangler):
         tags = collections.OrderedDict([])
         tags['material_package_maker_class_name'] = material_package_maker_class_name
         tags['should_have_illustration'] = should_have_illustration
+        tags['should_have_user_input_module'] = should_have_user_input_module
         material_package_proxy.initializer_file_proxy.write_stub_to_disk(tags=tags)
         if material_package_maker_class_name is None:
             file(os.path.join(path_name, 'material_definition.py'), 'w').write('')
             is_data_only = not should_have_illustration
             material_package_proxy.material_definition_module_proxy.write_stub_to_disk(
                 is_data_only, prompt=False)
-        else:
+        #else:
+        #    material_package_proxy.write_stub_user_input_module_to_disk(prompt=False)
+        if should_have_user_input_module:
             material_package_proxy.write_stub_user_input_module_to_disk(prompt=False)
         line = 'material package {!r} created.'.format(material_package_importable_name)
         self.proceed(line, prompt=prompt)
