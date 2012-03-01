@@ -8,7 +8,6 @@ class PatternedTokensKaleidEditor(InteractiveEditor):
 
     ### CLASS ATTRIBUTES ###
 
-    is_autoadvancing = True
     target_class = kaleids.PatternedTokens
     target_manifest = TargetManifest(kaleids.PatternedTokens,
         ('pattern', 'p', getters.get_nonzero_integers),
