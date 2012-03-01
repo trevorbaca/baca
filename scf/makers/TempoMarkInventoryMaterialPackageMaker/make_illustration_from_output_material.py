@@ -3,7 +3,7 @@ from abjad.tools import layouttools
 import copy
 
 
-def make_illustration_from_output_material(tempo_mark_inventory):
+def make_illustration_from_output_material(tempo_mark_inventory, **kwargs):
 
     notes = []
     for tempo_mark in tempo_mark_inventory:

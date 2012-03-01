@@ -20,7 +20,7 @@ def make_zagged_pitch_classes(pc_cells, division_cells, grouping_counts):
     return material
 
 
-def make_illustration_from_output_material(material):
+def make_illustration_from_output_material(material, **kwargs):
     pcs = list(material.iterate_payload())
     leaves = leaftools.make_leaves(pcs, [Duration(1, 8)])
     voice = Voice(leaves)

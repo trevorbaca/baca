@@ -35,7 +35,11 @@ class MaterialPackageMaker(MaterialPackageProxy):
     @property
     def illustration(self):
         output_material = self.output_material_module_proxy.import_output_material_safely()
-        illustration = self.illustration_maker(output_material)
+        kwargs = {}
+        kwargs['title'] = self.human_readable_name 
+        if self.session.is_in_score:
+            kwargs['subtitle'] = '({})'.format(score_title = self.session.current_score_package_proxy.title)
+        illustration = self.illustration_maker(output_material, **kwargs)
         return illustration
 
     @property

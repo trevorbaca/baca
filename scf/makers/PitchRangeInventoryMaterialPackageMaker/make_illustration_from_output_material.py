@@ -2,7 +2,7 @@ from abjad import *
 from abjad.tools import skiptools
 
 
-def make_illustration_from_output_material(pitch_range_inventory):
+def make_illustration_from_output_material(pitch_range_inventory, **kwargs):
 
     chords = []
     for pitch_range in pitch_range_inventory:

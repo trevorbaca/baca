@@ -1,11 +1,8 @@
 from make_illustration_from_output_material import make_illustration_from_output_material
-from scf.makers.MaterialPackageMaker import MaterialPackageMaker
-from scf.editors.UserInputWrapper import UserInputWrapper
-from scf.editors.InteractiveEditor import InteractiveEditor
 from scf.editors.get_kaleid_editor import get_kaleid_editor
+from scf.makers.MaterialPackageMaker import MaterialPackageMaker
 from scf.wizards.KaleidWizard import KaleidWizard
 from kaleids._RhythmicKaleid import _RhythmicKaleid
-import baca
 
 
 class KaleidMaterialPackageMaker(MaterialPackageMaker):

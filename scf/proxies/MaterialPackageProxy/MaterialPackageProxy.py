@@ -855,17 +855,17 @@ class MaterialPackageProxy(PackageProxy):
         illustration = self.illustration_with_stylesheet
         iotools.write_expr_to_pdf(illustration, self.illustration_pdf_file_name, print_status=False)
         iotools.write_expr_to_ly(illustration, self.illustration_ly_file_name, print_status=False)
-        self.proceed(['PDF and LilyPond file written to disk.'], prompt=prompt)
+        self.proceed('PDF and LilyPond file written to disk.', prompt=prompt)
 
     def write_illustration_ly_to_disk(self, prompt=True):
         illustration = self.illustration_with_stylesheet
         iotools.write_expr_to_ly(illustration, self.illustration_ly_file_name, print_status=False)
-        self.proceed(['LilyPond file written to disk.'], prompt=prompt)
+        self.proceed('LilyPond file written to disk.', prompt=prompt)
 
     def write_illustration_pdf_to_disk(self, prompt=True):
         illustration = self.illustration_with_stylesheet
         iotools.write_expr_to_pdf(illustration, self.illustration_pdf_file_name, print_status=False)
-        self.proceed(['PDF written to disk.'], prompt=prompt)
+        self.proceed('PDF written to disk.', prompt=prompt)
 
     def write_output_material_to_disk(self, output_material_module_import_statements=None, 
         output_material_module_body_lines=None, prompt=True):
