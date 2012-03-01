@@ -150,7 +150,7 @@ def test_SargassoMeasureMaterialPackageMaker_05():
 
 
 def test_SargassoMeasureMaterialPackageMaker_06():
-    '''Partial poputation.'''
+    '''Partial population.'''
 
     studio = scf.studio.Studio()
     assert not studio.package_exists('materials.testsargasso')

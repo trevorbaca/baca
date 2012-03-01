@@ -169,7 +169,6 @@ class InteractiveEditor(SCFObject):
         if self.backtrack():
             self.restore_breadcrumbs(cache=cache)
             return
-        #result, entry_point, self.is_autoadvancing = None, None, getattr(self, 'is_autoadvancing', False)
         result, entry_point, self.is_autoadvancing = None, None, is_autoadvancing
         while True:
             self.push_breadcrumb(breadcrumb=breadcrumb)
