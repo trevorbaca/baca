@@ -123,12 +123,9 @@ class MaterialPackageWrangler(PackageWrangler):
         command = 'from scf.makers import {} as material_package_maker_class'.format(
             material_package_maker_class_name)
         exec(command)
-
-        # TODO: set following attribute dynamically
-        should_have_illustration = True
-
         should_have_user_input_module = getattr(
             material_package_maker_class, 'should_have_user_input_module', True)
+        should_have_illustration = hasattr(material_package_maker_class, 'illustration_maker')
         self.make_material_package(material_package_importable_name, 
             material_package_maker_class_name, 
             should_have_illustration, should_have_user_input_module)

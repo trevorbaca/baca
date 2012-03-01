@@ -25,7 +25,6 @@ class MaterialPackageProxy(PackageProxy):
 
     ### CLASS ATTRIBUTES ###
 
-    should_have_illustration = True
     should_have_user_input_module = False
 
     ### READ-ONLY PUBLIC ATTRIBUTES ###
