@@ -16,9 +16,6 @@ class KaleidMaterialPackageMaker(MaterialPackageMaker):
     illustration_maker = staticmethod(make_illustration_from_output_material)
     output_material_checker = staticmethod(lambda x: isinstance(x, _RhytmicKaleid))
     output_material_editor = staticmethod(get_kaleid_editor)
-    #output_material_editor = KaleidWizard
-    output_material_maker = KaleidWizard
-    # TODO: integrate wizard!
     output_material_wizard = KaleidWizard
 
     output_material_module_import_statements = [

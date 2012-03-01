@@ -96,8 +96,7 @@ class _PartForcedObjectWithPatternedTokens(_RhythmicKaleid):
             return tuplets
 
     def __eq__(self, other):
-        return all([
-            isinstance(other, type(self)),
+        return isinstance(other, type(self)) and all([
             self._pattern == other._pattern,
             self._denominator == other._denominator,
             self._prolation_addenda == other._prolation_addenda,

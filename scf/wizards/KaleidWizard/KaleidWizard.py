@@ -12,11 +12,11 @@ class KaleidWizard(Wizard):
 
     ### PUBLIC METHODS ###
 
-    def get_kaleid_editor(self, kaleid_class_name):
+    def get_kaleid_editor(self, kaleid_class_name, target=None):
         wizard_class_name = '{}KaleidEditor'.format(kaleid_class_name)
         command = 'from scf.editors import {} as kaleid_editor_class'.format(wizard_class_name)
         exec(command)
-        kaleid_editor = kaleid_editor_class(session=self.session)
+        kaleid_editor = kaleid_editor_class(session=self.session, target=target)
         return kaleid_editor
 
     def run(self, cache=False, clear=True, head=None, user_input=None):

@@ -444,22 +444,26 @@ class MaterialPackageProxy(PackageProxy):
     def edit_output_material_interactively(self):
         if not self.has_output_material_editor:
             return
-        if self.has_output_material:
-            target = self.output_material
+        output_material = self.output_material
+        if output_material is None and hasattr(self, 'output_material_wizard'):
+            output_material_handler_callable = self.output_material_wizard
         else:
-            target = None
-        output_material_editor = self.output_material_editor(target=target, session=self.session)
-        output_material_editor.run()
+            output_material_handler_callable = self.output_material_editor
+        output_material_handler = output_material_handler_callable(
+            target=output_material, session=self.session)
+        output_material_handler.run()
+        if self.backtrack():
+            return
         output_material_module_import_statements = self.output_material_module_import_statements
         if hasattr(self, 'make_output_material_module_body_lines'):
             output_material_module_body_lines = self.make_output_material_module_body_lines(
-                output_material_editor.target)
+                output_material_handler.target)
         else:
             line = '{} = {}'.format(
                 self.material_underscored_name, 
-                getattr(output_material_editor.target, 
+                getattr(output_material_handler.target, 
                     '_repr_with_tools_package', 
-                    repr(output_material_editor.target)))
+                    repr(output_material_handler.target)))
             output_material_module_body_lines = [line]
         self.write_output_material_to_disk(
             output_material_module_import_statements=output_material_module_import_statements,

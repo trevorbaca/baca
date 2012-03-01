@@ -23,7 +23,7 @@ class PatternedTokensKaleidEditor(InteractiveEditor):
     def summary_lines(self):
         result = []
         if self.target:
-            result.extend(self._target._formatted_input_parameters)
+            result.extend(self.target._formatted_input_parameters)
         return result
 
     ### METHODS ###
