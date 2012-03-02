@@ -3,9 +3,9 @@ from abjad.tools import mathtools
 from abjad.tools import measuretools
 from abjad.tools import sequencetools
 from baca.music.make_sargasso_measures import make_illustration_from_output_material
-from scf.makers.MaterialPackageMaker import MaterialPackageMaker
-from scf.editors.UserInputWrapper import UserInputWrapper
 from scf import predicates
+from scf.editors.UserInputWrapper import UserInputWrapper
+from scf.makers.MaterialPackageMaker import MaterialPackageMaker
 import baca
 
 
@@ -31,14 +31,7 @@ class SargassoMeasureMaterialPackageMaker(MaterialPackageMaker):
         ('measures_are_shuffled', True),
         ]
 
-    # TODO:
-    #user_input_module_import_statements = [
-    #    'from abjad.tools import durationtools',
-    #]
-    user_input_module_import_statements = [
-        'from abjad.tools.durationtools import Duration',
-        'from scf.editors import UserInputWrapper',
-        ]
+    user_input_module_import_statements = ['from abjad.tools import durationtools']
 
     user_input_tests = [
         ('measure_denominator', mathtools.is_positive_integer_power_of_two),

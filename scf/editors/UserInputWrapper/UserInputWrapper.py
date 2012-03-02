@@ -32,9 +32,9 @@ class UserInputWrapper(collections.OrderedDict):
         else:
             result.append('user_input_wrapper = {}(['.format(type(self).__name__))
             for name, value in items[:-1]:
-                line = '\t({!r}, {!r}),'.format(name, value)
+                line = '\t({!r}, {}),'.format(name, self.get_repr_with_tools_package(value))
                 result.append(line)
-            result.append('\t({!r}, {!r})])'.format(items[-1][0], items[-1][1]))
+            result.append('\t({!r}, {})])'.format(items[-1][0], self.get_repr_with_tools_package(items[-1][1])))
         return result
 
     @property
@@ -51,13 +51,19 @@ class UserInputWrapper(collections.OrderedDict):
 
     @property
     def user_input_module_import_statements(self):
-        return self._user_input_module_import_statements
+        result = ['from scf.editors import UserInputWrapper']
+        result.extend(self._user_input_module_import_statements)
+        result.sort()
+        return result
 
     ### PUBLIC METHODS ###
 
     def clear(self):
         for key in self:
             self[key] = None
+
+    def get_repr_with_tools_package(self, expr):
+        return getattr(expr, '_repr_with_tools_package', repr(expr))
 
     def list_items(self):
         return list(self.iteritems())

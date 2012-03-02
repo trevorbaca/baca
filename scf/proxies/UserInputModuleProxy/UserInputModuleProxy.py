@@ -73,8 +73,11 @@ class UserInputModuleProxy(ModuleProxy):
             file_pointer = open(self.path_name, 'r')
             file_contents_string = file_pointer.read()
             file_pointer.close()
-            exec(file_contents_string)
-            return locals().get('user_input_wrapper', None)
+            try:
+                exec(file_contents_string)
+                return locals().get('user_input_wrapper', None)
+            except:
+                self.display('Error reading user input module.')
 
     def write_user_input_wrapper_to_disk(self, user_input_wrapper_in_memory):
         self.setup_statements[:] = self.conditionally_add_terminal_newlines(

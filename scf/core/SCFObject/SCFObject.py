@@ -269,6 +269,9 @@ class SCFObject(object):
         else:
             return repr(expr)
 
+    def get_repr_with_tools_package(self, expr):
+        return getattr(expr, '_repr_with_tools_package', repr(expr))
+
     def handle_raw_input(self, prompt, include_chevron=True, include_newline=True, prompt_character='>',
         capitalize_prompt=True):
         if capitalize_prompt:
