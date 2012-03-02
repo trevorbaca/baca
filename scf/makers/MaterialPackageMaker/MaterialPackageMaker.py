@@ -25,7 +25,7 @@ class MaterialPackageMaker(MaterialPackageProxy):
         user_input_wrapper = proxy.read_user_input_wrapper_from_disk()
         if user_input_wrapper:
             user_input_wrapper._user_input_module_import_statements = \
-                self.user_input_module_import_statements[:]
+                getattr(self, 'user_input_module_import_statements', [])[:]
         else:
             user_input_wrapper = self.initialize_empty_user_input_wrapper()
         return user_input_wrapper
@@ -96,7 +96,7 @@ class MaterialPackageMaker(MaterialPackageProxy):
     def initialize_empty_user_input_wrapper(self):
         user_input_wrapper = UserInputWrapper()
         user_input_wrapper._user_input_module_import_statements = \
-            self.user_input_module_import_statements[:]
+            getattr(self, 'user_input_module_import_statements', [])[:]
         for user_input_attribute_name in self.user_input_attribute_names:
             user_input_wrapper[user_input_attribute_name] = None
         return user_input_wrapper
