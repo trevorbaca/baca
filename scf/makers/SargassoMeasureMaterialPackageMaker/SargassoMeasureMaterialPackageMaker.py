@@ -17,16 +17,9 @@ class SargassoMeasureMaterialPackageMaker(MaterialPackageMaker):
     illustration_maker = staticmethod(make_illustration_from_output_material)
     output_material_checker = staticmethod(measuretools.all_are_measures)
     output_material_maker = staticmethod(baca.music.make_sargasso_measures)
-
-    # TODO: 
-    #output_material_module_import_statements = [
-    #    'from abjad.tools import measuretools',
-    #]
-    output_material_module_import_statements = [
-        'from abjad.tools.measuretools.Measure import Measure',
-        ]
-
+    output_material_module_import_statements = ['from abjad.tools import measuretools']
     should_have_user_input_module = True
+
     user_input_demo_values = [
         ('measure_denominator', 4),
         ('measure_numerator_talea', [2, 2, 2, 2, 1, 1, 4, 4]),
@@ -68,6 +61,6 @@ class SargassoMeasureMaterialPackageMaker(MaterialPackageMaker):
             line = 'measuretools.' + line
             lines.append('\t{},'.format(line))
         line = measuretools.measure_to_one_line_input_string(output_material[-1])
-        lines.append('\t{}]'.format(line))
+        lines.append('\tmeasuretools.{}]'.format(line))
         lines = [line + '\n' for line in lines]
         return lines

@@ -127,7 +127,7 @@ class MaterialPackageMaker(MaterialPackageProxy):
         self.make_main_menu_section_for_output_material(menu, hidden_section)
 
     def make_output_material_from_user_input_wrapper_in_memory(self):
-        output_material = self.output_material_maker(*self.user_input_wrapper_in_memory.values)
+        output_material = self.output_material_maker(*self.user_input_wrapper_in_memory.list_values())
         assert type(self).output_material_checker(output_material)
         return output_material
 
