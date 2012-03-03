@@ -29,4 +29,5 @@ from TempoMarkInventoryEditor import TempoMarkInventoryEditor
 from UserInputWrapper import UserInputWrapper
 
 from KaleidEditor import KaleidEditor
+from PartForcedPatternedTokensKaleidEditor import PartForcedPatternedTokensKaleidEditor
 from PatternedTokensKaleidEditor import PatternedTokensKaleidEditor

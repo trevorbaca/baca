@@ -38,7 +38,7 @@ class MaterialPackageMaker(MaterialPackageProxy):
         kwargs = {}
         kwargs['title'] = self.human_readable_name 
         if self.session.is_in_score:
-            kwargs['subtitle'] = '({})'.format(score_title = self.session.current_score_package_proxy.title)
+            kwargs['subtitle'] = '({})'.format(self.session.current_score_package_proxy.title)
         illustration = self.illustration_maker(output_material, **kwargs)
         return illustration
 

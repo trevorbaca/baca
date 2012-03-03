@@ -145,6 +145,11 @@ class UserInputGetter(MenuSectionAggregator):
         self.append_something(spaced_attribute_name, message, default=default)
         self.tests.append(mathtools.is_positive_integer_power_of_two)
 
+    def append_positive_integers(self, spaced_attribute_name, default=None):
+        message = 'value for {!r} must be positive integers.'
+        self.append_something(spaced_attribute_name, message, default=default)
+        self.tests.append(lambda expr: all([mathtools.is_positive_integer(x) for x in expr]))
+
     def append_pitch_range(self, spaced_attribute_name, default=None):
         message = 'value for {!r} must be pitch range.'
         self.append_something(spaced_attribute_name, message, default=default)
