@@ -41,6 +41,20 @@ class InteractiveEditor(SCFObject):
         return result
 
     @property
+    def target_keyword_attribute_names(self):
+        result = []
+        if hasattr(self, 'target_manifest'):
+            result.extend(self.target_manifest.keyword_attribute_names)
+        return result
+
+    @property
+    def target_mandatory_attribute_names(self):
+        result = []
+        if hasattr(self, 'target_manifest'):
+            result.extend(self.target_manifest.mandatory_attribute_names)
+        return result
+
+    @property
     def target_attribute_tokens(self):
         if hasattr(self, 'target_manifest'):
             return self.make_target_attribute_tokens_from_target_manifest()

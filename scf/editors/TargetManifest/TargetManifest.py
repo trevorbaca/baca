@@ -56,6 +56,22 @@ class TargetManifest(object):
         result.append('\t)') 
         return result
 
+    @property
+    def keyword_attribute_names(self):
+        result = []
+        for attribute_detail in self.attribute_details:
+            if not attribute_detail.is_mandatory:
+                result.append(attribute_detail.name)
+        return result
+
+    @property
+    def mandatory_attribute_names(self):
+        result = []
+        for attribute_detail in self.attribute_details:
+            if attribute_detail.is_mandatory:
+                result.append(attribute_detail.name)
+        return result
+
     ### PUBLIC METHODS ###
 
     def menu_key_to_attribute_detail(self, menu_key):
