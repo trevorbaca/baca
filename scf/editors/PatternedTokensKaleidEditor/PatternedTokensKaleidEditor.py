@@ -1,10 +1,10 @@
-from scf.editors.InteractiveEditor import InteractiveEditor
+from scf.editors.KaleidEditor import KaleidEditor
 from scf.editors.TargetManifest import TargetManifest
 from scf import getters
 import kaleids
 
 
-class PatternedTokensKaleidEditor(InteractiveEditor):
+class PatternedTokensKaleidEditor(KaleidEditor):
 
     ### CLASS ATTRIBUTES ###
 
@@ -16,21 +16,7 @@ class PatternedTokensKaleidEditor(InteractiveEditor):
         ('secondary_divisions', 's', getters.get_integers),
         )
 
-    ### READ-ONLY ATTRIBUTES ###
-
-    @property
-    def target_summary_lines(self):
-        result = []
-        if self.target:
-            result.append(self.target._class_name)
-            result.append('')
-            result.extend(InteractiveEditor.target_summary_lines.fget(self))
-        return result
-
-    ### METHODS ###
-
-    def conditionally_initialize_target(self):
-        pass
+    ### PUBLIC METHODS ###
 
     def initialize_target_from_attributes_in_memory(self):
         args, kwargs = [], {}
