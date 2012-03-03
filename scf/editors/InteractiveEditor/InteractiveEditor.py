@@ -132,9 +132,17 @@ class InteractiveEditor(SCFObject):
         self._attributes_in_memory = {}
 
     def initialize_target_from_attributes_in_memory(self):
-        target = self.target_class(**self.attributes_in_memory)
-        self.target = target
-        self.initialize_attributes_in_memory()
+        args, kwargs = [], {}
+        for attribute_name in self.target_mandatory_attribute_names:
+            if attribute_name in self.attributes_in_memory:
+                args.append(self.attributes_in_memory.get(attribute_name))
+        for attribute_name in self.target_keyword_attribute_names:
+            if attribute_name in self.attributes_in_memory:
+                kwargs[attribute_name] = self.attributes_in_memory.get(attribute_name)
+        try:
+            self.target = self.target_class(*args, **kwargs)
+        except TypeError:
+            pass
 
     def make_main_menu(self):
         is_keyed = self.target_manifest.is_keyed
