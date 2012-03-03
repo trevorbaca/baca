@@ -132,7 +132,7 @@ class MaterialPackageWrangler(PackageWrangler):
 
     # TODO: write test
     def make_material_package(self, material_package_importable_name, material_package_maker_class_name, 
-        should_have_illustration, should_have_user_input_module, prompt=True):
+        should_have_illustration, should_have_user_input_module, prompt=False):
         '''True on success.'''
         import scf
         assert iotools.is_underscore_delimited_lowercase_package_name(material_package_importable_name)
