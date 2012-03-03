@@ -8,7 +8,7 @@ class KaleidWizard(Wizard):
 
     @property
     def breadcrumb(self):
-        return 'kaleid wizard'
+        return 'kaleid creation wizard'
 
     ### PUBLIC METHODS ###
 
