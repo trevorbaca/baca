@@ -12,7 +12,8 @@ class AttributeDetail(object):
             is_null = True
         elif len(args) == 3:
             name, menu_key, editor_callable = args
-            human_readable_name = name.replace('_', ' ')
+            #human_readable_name = name.replace('_', ' ')
+            human_readable_name = None
             is_mandatory = True
         elif len(args) == 4:
             name, human_readable_name, menu_key, editor_callable = args
@@ -21,7 +22,8 @@ class AttributeDetail(object):
             name, human_readable_name, menu_key, editor_callable, is_mandatory = args
         else:
             raise ValueError('can not parse attribute detail {!r}.'.format(args)) 
-        human_readable_name = human_readable_name or name
+        if not human_readable_name and name:
+            human_readable_name = name.replace('_', ' ')
         self.name = name
         self.human_readable_name = human_readable_name 
         self.menu_key = menu_key

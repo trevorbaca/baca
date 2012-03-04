@@ -11,10 +11,10 @@ class _SignalAffixedObjectWithFilledTokens(_RhythmicKaleid):
     '''
 
     def __init__(self, prefix_signal, prefix_lengths, suffix_signal, suffix_lengths, denominator,
-        prolation_addenda = None, secondary_divisions = None,
-        prefix_signal_helper = None, prefix_lengths_helper = None,
-        suffix_signal_helper = None, suffix_lengths_helper = None,
-        prolation_addenda_helper = None, secondary_divisions_helper = None):
+        prolation_addenda=None, secondary_divisions=None,
+        prefix_signal_helper=None, prefix_lengths_helper=None,
+        suffix_signal_helper=None, suffix_lengths_helper=None,
+        prolation_addenda_helper=None, secondary_divisions_helper=None):
         _RhythmicKaleid.__init__(self)
         prolation_addenda = self._none_to_new_list(prolation_addenda)
         secondary_divisions = self._none_to_new_list(secondary_divisions)

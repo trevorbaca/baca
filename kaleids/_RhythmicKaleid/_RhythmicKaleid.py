@@ -31,6 +31,17 @@ class _RhythmicKaleid(object):
         return '{}.{}'.format(self._tools_package, self._class_name)
 
     @property
+    def _formatted_input_parameters(self):
+        result = []
+        for arg in self.args:
+            string = '{}'.format(getattr(self, arg))
+            result.append(string)
+        for kwarg in self.kwargs:
+            string = '{}={!r}'.format(kwarg, getattr(self, kwarg))
+            result.append(string)
+        return result
+
+    @property
     def _tools_package(self):
         for part in reversed(self.__module__.split('.')):
             if not part == self._class_name:
