@@ -7,6 +7,18 @@ class TempoMarkSelector(Selector):
     
     target_human_readable_name = 'tempo'
 
+    ### READ-ONLY ATTRIBUTES ###
+
+    @property
+    def current_score_tempo_marks(self):
+        result = []
+        current_score_package_proxy = self.session.current_score_package_proxy
+        try:
+            result.extend(current_score_package_proxy.tempo_inventory)
+        except AttributeError:
+            pass
+        return result
+
     ### READ / WRITE ATTRIBUTES ###
 
     @apply
@@ -19,15 +31,3 @@ class TempoMarkSelector(Selector):
         def fset(self, items):
             self._items = list(items)
         return property(**locals())
-
-    ### PUBLIC ATTRIBUTES ###
-
-    @property
-    def current_score_tempo_marks(self):
-        result = []
-        current_score_package_proxy = self.session.current_score_package_proxy
-        try:
-            result.extend(current_score_package_proxy.tempo_inventory)
-        except AttributeError:
-            pass
-        return result
