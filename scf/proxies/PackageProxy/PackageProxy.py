@@ -120,12 +120,7 @@ class PackageProxy(DirectoryProxy, ImportableAssetProxy):
     def add_tag(self, tag_name, tag_value):
         tags = self.get_tags()
         tags[tag_name] = tag_value
-        #if self.has_tags_file:
-        #    self.tags_file_proxy.write_tags_to_disk(tags)
-        #else:
-        #    self.initializer_file_proxy.write_tags_to_disk(tags)
         self.tags_file_proxy.write_tags_to_disk(tags)
-        #self.initializer_file_proxy.write_tags_to_disk(tags)
 
     def add_tag_interactively(self):
         getter = self.make_getter(where=self.where())
@@ -221,10 +216,7 @@ class PackageProxy(DirectoryProxy, ImportableAssetProxy):
     def remove_tag(self, tag_name):
         tags = self.get_tags()
         del(tags[tag_name])
-        if self.has_tags_file:
-            self.tags_file_proxy.write_tags_to_disk(tags)
-        else:
-            self.initializer_file_proxy.write_tags_to_disk(tags)
+        self.tags_file_proxy.write_tags_to_disk(tags)
 
     def remove_tag_interactively(self):
         getter = self.make_getter(where=self.where())

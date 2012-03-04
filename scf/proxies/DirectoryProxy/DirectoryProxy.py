@@ -23,11 +23,15 @@ class DirectoryProxy(AssetProxy):
 
     @property
     def directory_contents(self):
+        result = []
         for file_name in os.listdir(self.path_name):
             if file_name.endswith('.pyc'):
                 path_name = os.path.join(self.path_name, file_name)
                 os.remove(path_name)
-        return os.listdir(self.path_name)
+        for name in os.listdir(self.path_name):
+            if not name.startswith('.'):
+                result.append(name)
+        return result
 
     @property
     def directory_name(self):
