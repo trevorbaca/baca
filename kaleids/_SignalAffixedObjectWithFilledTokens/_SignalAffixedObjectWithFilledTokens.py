@@ -10,6 +10,25 @@ class _SignalAffixedObjectWithFilledTokens(_RhythmicKaleid):
     '''Signal-affixed object with filled tokens.
     '''
 
+    ### CLASS ATTRIBUTES ###
+
+    args = (
+        'prefix_signal',
+        'prefix_lengths',
+        'suffix_signal',
+        'suffix_lengths',
+        'denominator',
+        )
+
+    kwargs = (
+        #prefix_signal_helper,
+        #prefix_lengths_helper,
+        #suffix_signal_helper,
+        #suffix_lengths_helper,
+        #prolation_addenda_helper,
+        #secondary_divisions_helper,
+        )
+
     def __init__(self, prefix_signal, prefix_lengths, suffix_signal, suffix_lengths, denominator,
         prolation_addenda=None, secondary_divisions=None,
         prefix_signal_helper=None, prefix_lengths_helper=None,
@@ -37,22 +56,22 @@ class _SignalAffixedObjectWithFilledTokens(_RhythmicKaleid):
         assert isinstance(suffix_lengths_helper, (types.FunctionType, types.MethodType))
         assert isinstance(prolation_addenda_helper, (types.FunctionType, types.MethodType))
         assert isinstance(secondary_divisions_helper, (types.FunctionType, types.MethodType))
-        self._prefix_signal = prefix_signal
-        self._prefix_lengths = prefix_lengths
-        self._suffix_signal = suffix_signal
-        self._suffix_lengths = suffix_lengths
-        self._prolation_addenda = prolation_addenda
-        self._denominator = denominator
-        self._secondary_divisions = secondary_divisions
-        self._prefix_signal_helper = self._none_to_trivial_helper(prefix_signal_helper)
-        self._prefix_lengths_helper = self._none_to_trivial_helper(prefix_lengths_helper)
-        self._suffix_signal_helper = self._none_to_trivial_helper(suffix_signal_helper)
-        self._suffix_lengths_helper = self._none_to_trivial_helper(suffix_lengths_helper)
-        self._prolation_addenda_helper = self._none_to_trivial_helper(prolation_addenda_helper)
-        self._secondary_divisions_helper = self._none_to_trivial_helper(secondary_divisions_helper)
-        self._repr_signals.append(self._prefix_signal)
-        self._repr_signals.append(self._suffix_signal)
-        self._repr_signals.append(self._secondary_divisions)
+        self.prefix_signal = prefix_signal
+        self.prefix_lengths = prefix_lengths
+        self.suffix_signal = suffix_signal
+        self.suffix_lengths = suffix_lengths
+        self.prolation_addenda = prolation_addenda
+        self.denominator = denominator
+        self.secondary_divisions = secondary_divisions
+        self.prefix_signal_helper = self._none_to_trivial_helper(prefix_signal_helper)
+        self.prefix_lengths_helper = self._none_to_trivial_helper(prefix_lengths_helper)
+        self.suffix_signal_helper = self._none_to_trivial_helper(suffix_signal_helper)
+        self.suffix_lengths_helper = self._none_to_trivial_helper(suffix_lengths_helper)
+        self.prolation_addenda_helper = self._none_to_trivial_helper(prolation_addenda_helper)
+        self.secondary_divisions_helper = self._none_to_trivial_helper(secondary_divisions_helper)
+        self._repr_signals.append(self.prefix_signal)
+        self._repr_signals.append(self.suffix_signal)
+        self._repr_signals.append(self.secondary_divisions)
 
     ### OVERLOADS ###
 
@@ -62,7 +81,7 @@ class _SignalAffixedObjectWithFilledTokens(_RhythmicKaleid):
         prefix_signal, prefix_lengths, suffix_signal, suffix_lengths = result[:-2]
         prolation_addenda, secondary_divisions = result[-2:]
         signals = (prefix_signal, suffix_signal, prolation_addenda, secondary_divisions)
-        result = self._scale_signals(duration_pairs, self._denominator, signals)
+        result = self._scale_signals(duration_pairs, self.denominator, signals)
         duration_pairs, lcd, prefix_signal, suffix_signal = result[:-2]
         prolation_addenda, secondary_divisions = result[-2:]
         secondary_duration_pairs = self._make_secondary_duration_pairs(
@@ -70,7 +89,7 @@ class _SignalAffixedObjectWithFilledTokens(_RhythmicKaleid):
         numeric_map = self._make_numeric_map(secondary_duration_pairs,
             prefix_signal, prefix_lengths, suffix_signal, suffix_lengths, prolation_addenda)
         leaf_lists = self._numeric_map_and_denominator_to_leaf_lists(numeric_map, lcd)
-        if not self._prolation_addenda:
+        if not self.prolation_addenda:
             return leaf_lists
         else:
             tuplets = self._make_tuplets(secondary_duration_pairs, leaf_lists)
@@ -79,18 +98,18 @@ class _SignalAffixedObjectWithFilledTokens(_RhythmicKaleid):
     def __eq__(self, other):
         return all([
             isinstance(other, type(self)),
-            self._prefix_signal == other._prefix_signal,
-            self._prefix_lengths == other._prefix_lengths,
-            self._suffix_signal == other._suffix_signal,
-            self._suffix_lengths == other._suffix_lengths,
-            self._prolation_addenda == other._prolation_addenda,
-            self._denominator == other._denominator,
-            self._secondary_divisions == other._secondary_divisions,
+            self.prefix_signal == other.prefix_signal,
+            self.prefix_lengths == other.prefix_lengths,
+            self.suffix_signal == other.suffix_signal,
+            self.suffix_lengths == other.suffix_lengths,
+            self.prolation_addenda == other.prolation_addenda,
+            self.denominator == other.denominator,
+            self.secondary_divisions == other.secondary_divisions,
             ])
 
     ### PRIVATE METHODS ###
 
-    def _make_numeric_map_part(self, numerator, prefix, suffix, is_note_filled = True):
+    def _make_numeric_map_part(self, numerator, prefix, suffix, is_note_filled=True):
         prefix_weight = mathtools.weight(prefix)
         suffix_weight = mathtools.weight(suffix)
         middle = numerator - prefix_weight - suffix_weight
@@ -115,12 +134,12 @@ class _SignalAffixedObjectWithFilledTokens(_RhythmicKaleid):
         return leaf_lists
 
     def _prepare_input(self, seeds):
-        prefix_signal = self._prefix_signal_helper(self._prefix_signal, seeds)
-        prefix_lengths = self._prefix_lengths_helper(self._prefix_lengths, seeds)
-        suffix_signal = self._suffix_signal_helper(self._suffix_signal, seeds)
-        suffix_lengths = self._suffix_lengths_helper(self._suffix_lengths, seeds)
-        prolation_addenda = self._prolation_addenda_helper(self._prolation_addenda, seeds)
-        secondary_divisions = self._secondary_divisions_helper(self._secondary_divisions, seeds)
+        prefix_signal = self.prefix_signal_helper(self.prefix_signal, seeds)
+        prefix_lengths = self.prefix_lengths_helper(self.prefix_lengths, seeds)
+        suffix_signal = self.suffix_signal_helper(self.suffix_signal, seeds)
+        suffix_lengths = self.suffix_lengths_helper(self.suffix_lengths, seeds)
+        prolation_addenda = self.prolation_addenda_helper(self.prolation_addenda, seeds)
+        secondary_divisions = self.secondary_divisions_helper(self.secondary_divisions, seeds)
         prefix_signal = sequencetools.CyclicTuple(prefix_signal)
         suffix_signal = sequencetools.CyclicTuple(suffix_signal)
         prefix_lengths = sequencetools.CyclicTuple(prefix_lengths)
