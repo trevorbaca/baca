@@ -135,6 +135,11 @@ class UserInputGetter(MenuSectionAggregator):
         self.execs[-1] = execs
         self.tests.append(predicates.is_named_chromatic_pitch)
 
+    def append_nonnegative_integers(self, spaced_attribute_name, default=None):
+        message = 'value for {!r} must be nonnegative integers.'
+        self.append_something(spaced_attribute_name, message, default=default)
+        self.tests.append(lambda x: all([isinstance(y, int) and 0 <= y for y in x]))
+
     def append_nonzero_integers(self, spaced_attribute_name, default=None):
         message = 'value for {!r} must be nonzero integers.'
         self.append_something(spaced_attribute_name, message, default=default)

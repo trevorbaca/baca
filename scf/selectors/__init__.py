@@ -1,6 +1,6 @@
 from DirectoryContentSelector import DirectoryContentSelector
 from InstrumentSelector import InstrumentSelector
-from KaleidSelector import KaleidSelector
+from KaleidClassSelector import KaleidClassSelector
 from PackageContentSelector import PackageContentSelector
 from PerformerSelector import PerformerSelector
 from Selector import Selector

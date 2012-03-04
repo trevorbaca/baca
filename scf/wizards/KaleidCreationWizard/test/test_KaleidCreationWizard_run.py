@@ -2,9 +2,9 @@ import kaleids
 import scf
 
 
-def test_KaleidWizard_run_01():
+def test_KaleidCreationWizard_run_01():
 
-    wizard = scf.wizards.KaleidWizard()
+    wizard = scf.wizards.KaleidCreationWizard()
     wizard.run(user_input='patternedtokens 1 [-1, 2, -3, 4] 16 [2, 3] [6] b')
 
     kaleid = kaleids.PatternedTokens([-1, 2, -3, 4], 16,

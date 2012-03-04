@@ -7,6 +7,11 @@ class NoteFilledTokens(SignalAffixedNoteFilledTokens):
     See the test file for examples.
     '''
 
+    ### CLASS ATTRIBUTES ###
+
+    args = ()
+    kwargs = ()
+
     def __init__(self):
         SignalAffixedNoteFilledTokens.__init__(self, [], [0], [], [0], 1)
 

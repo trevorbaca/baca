@@ -19,6 +19,12 @@ def get_integers(attribute_spaced_name, session=None, existing_value=None, allow
     getter.allow_none = allow_none
     return getter
 
+def get_nonnegative_integers(attribute_spaced_name, session=None, existing_value=None, allow_none=True):
+    getter = UserInputGetter(session=session)
+    getter.append_nonnegative_integers(attribute_spaced_name)
+    getter.allow_none = allow_none
+    return getter
+
 def get_nonzero_integers(attribute_spaced_name, session=None, existing_value=None, allow_none=True):
     getter = UserInputGetter(session=session)
     getter.append_nonzero_integers(attribute_spaced_name)

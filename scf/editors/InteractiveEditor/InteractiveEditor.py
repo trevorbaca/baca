@@ -95,11 +95,12 @@ class InteractiveEditor(SCFObject):
         return menu_key
 
     def clean_up_attributes_in_memory(self):
-        if self.attributes_in_memory:
-            if self.target is None:
+        if self.target is None:
+            try:
                 self.initialize_target_from_attributes_in_memory()
-            else:
-                raise ValueError('Target and in-memory attributes can not both exist.')
+            except ValueError:
+                pass
+        self.initialize_attributes_in_memory()
 
     def conditionally_initialize_target(self):
         self.target = self.target or self.target_class()

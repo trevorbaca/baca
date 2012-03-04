@@ -10,7 +10,7 @@ class RhythmSpecifierEditor(ParameterSpecifierEditor):
 
     target_class = RhythmSpecifier
     target_manifest = TargetManifest(RhythmSpecifier,
-        ('kaleid', 'kl', selectors.KaleidSelector),
+        ('kaleid', 'kl', selectors.KaleidClassSelector),
         )
 
     ### READ-ONLY ATTRIBUTES ###

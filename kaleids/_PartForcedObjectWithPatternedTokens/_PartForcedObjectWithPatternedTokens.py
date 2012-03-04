@@ -147,19 +147,6 @@ class _PartForcedObjectWithPatternedTokens(_RhythmicKaleid):
         #'secondary_divisons_helper',
         )
 
-    ### PRIVATE ATTRIBUTES ###
-
-    @property
-    def _formatted_input_parameters(self):
-        result = []
-        for arg in self.args:
-            string = '{}'.format(getattr(self, arg))
-            result.append(string)
-        for kwarg in self.kwargs:
-            string = '{}={!r}'.format(kwarg, getattr(self, kwarg))
-            result.append(string)
-        return result
-
     ### PRIVATE METHODS ###
 
     def _force_token_part(self, token_part, indicator):
