@@ -21,12 +21,19 @@ class Selector(SCFObject):
     @apply
     def items():
         def fget(self):
-            return self._items
+            if self._items:
+                return self._items
+            else:
+                return self.list_target_items()
         def fset(self, items):
             self._items = items
         return property(**locals())
 
     ### PUBLIC METHODS ###
+
+    def list_target_items(self):
+        result = []
+        return result
 
     def make_main_menu(self, head=None):
         menu, section = self.make_menu(where=self.where(), is_parenthetically_numbered=True, is_keyed=False)
