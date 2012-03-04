@@ -7,7 +7,6 @@ import os
 import sys
 
 
-# TODO: find way to add 'list package directory' user command, somehow
 class PackageProxy(DirectoryProxy, ImportableAssetProxy):
 
     def __init__(self, package_importable_name=None, session=None):

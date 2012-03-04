@@ -325,6 +325,23 @@ class SCFObject(object):
                 return True
         return False
 
+    def list_public_directory_path_names_in_subtree(self, subtree_path_name):
+        result = []
+        for subtree_path_name, directory_names, file_names in os.walk(subtree_path_name):
+            if '.svn' not in subtree_path_name:
+                for directory_name in directory_names:
+                    if '.svn' not in directory_name:
+                        if directory_name[0].isalpha():
+                            result.append(os.path.join(subtree_path_name, directory_name))
+        return result
+
+    def list_public_package_path_names_in_subtree(self, subtree_path_name):
+        result = []
+        for directory_path_name in self.list_public_directory_path_names_in_subtree(subtree_path_name):
+            if '__init__.py' in os.listdir(directory_path_name):
+                result.append(directory_path_name)
+        return result
+
     def list_score_package_short_names(self, head=None):
         result = []
         for name in os.listdir(self.scores_directory_name):
