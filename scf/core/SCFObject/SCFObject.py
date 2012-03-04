@@ -275,15 +275,12 @@ class SCFObject(object):
     def get_tag_from_path_name(self, path_name, tag_name):
         tags_file_name = os.path.join(path_name, 'tags.py')
         if os.path.isfile(tags_file_name):
-            self.debug('foo')
             tags_file = open(tags_file_name, 'r')
-            tags_file_lines = ''.join(tags_file.readlines())
+            tags_file_string = tags_file.read()
             tags_file.close()
-            try:
-                exec(tags_file_lines)
-                return locals()[tag_name]
-            except:
-                pass
+            exec(tags_file_string)
+            result = locals().get('tags') or OrderedDict([])
+            return result[tag_name]
 
     def handle_raw_input(self, prompt, include_chevron=True, include_newline=True, prompt_character='>',
         capitalize_prompt=True):
