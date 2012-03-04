@@ -105,7 +105,7 @@ def test_MaterialPackageWrangler_run_handmade_package_04():
         mpp = scf.proxies.MaterialPackageProxy('materials.testnotes')
         assert mpp.is_handmade and not mpp.is_data_only
         assert mpp.directory_contents == ['__init__.py', 
-            'illustration_builder.py', 'material_definition.py', 'output_material.py']
+            'illustration_builder.py', 'material_definition.py', 'output_material.py', 'tags.py']
         assert mpp.has_readable_initializer
         assert mpp.has_user_finalized_material_definition_module
         assert mpp.has_readable_output_material_module
@@ -194,7 +194,7 @@ def test_MaterialPackageWrangler_run_handmade_package_07():
         assert studio.package_exists('materials.testnotes')
         mpp = scf.proxies.MaterialPackageProxy('materials.testnotes')
         assert mpp.is_handmade and not mpp.is_data_only
-        assert mpp.directory_contents == ['__init__.py', 'material_definition.py']
+        assert mpp.directory_contents == ['__init__.py', 'material_definition.py', 'tags.py']
         assert mpp.has_readable_initializer
         assert mpp.has_user_finalized_material_definition_module
         assert not mpp.has_output_material_module 
@@ -255,7 +255,7 @@ def test_MaterialPackageWrangler_run_handmade_package_09():
         mpp = scf.proxies.MaterialPackageProxy('materials.testnotes')
         assert mpp.is_handmade and not mpp.is_data_only
         assert mpp.directory_contents == ['__init__.py',
-            'illustration_builder.py', 'material_definition.py', 'output_material.py']
+            'illustration_builder.py', 'material_definition.py', 'output_material.py', 'tags.py']
         assert mpp.has_readable_initializer
         assert mpp.has_user_finalized_material_definition_module
         assert not mpp.has_readable_output_material_module
@@ -289,7 +289,7 @@ def test_MaterialPackageWrangler_run_handmade_package_10():
         assert mpp.is_handmade and not mpp.is_data_only
         assert mpp.directory_contents == [
             '__init__.py', 'illustration.ly', 'illustration.pdf', 
-            'illustration_builder.py', 'material_definition.py', 'output_material.py']
+            'illustration_builder.py', 'material_definition.py', 'output_material.py', 'tags.py']
         assert mpp.has_readable_initializer        
         assert mpp.has_user_finalized_material_definition_module
         assert mpp.has_readable_output_material_module

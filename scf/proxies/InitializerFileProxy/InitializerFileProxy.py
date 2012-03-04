@@ -169,6 +169,9 @@ class InitializerFileProxy(ParsableFileProxy):
 
     def write_tags_to_disk(self, tags):
         self.parse()
+        #ordered_dict_import_statement = 'from collections import OrderedDict\n'
+        #if ordered_dict_import_statement not in self.setup_statements:
+        #    self.setup_statements.append(ordered_dict_import_statement)
         tag_lines = self.make_tag_lines(tags)
         self.tag_lines = tag_lines[:]
         self.write_to_disk()

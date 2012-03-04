@@ -36,7 +36,7 @@ def test_PitchRangeInventoryMaterialPackageMaker_02():
             )
         mpp = scf.makers.PitchRangeInventoryMaterialPackageMaker(
             'materials.testpir')
-        assert mpp.directory_contents == ['__init__.py', 'output_material.py']
+        assert mpp.directory_contents == ['__init__.py', 'output_material.py', 'tags.py']
         pitch_range_inventory = pitchtools.PitchRangeInventory([
             pitchtools.PitchRange('[C2, G5]'), pitchtools.PitchRange('[C2, F#5]')])
         assert mpp.output_material == pitch_range_inventory

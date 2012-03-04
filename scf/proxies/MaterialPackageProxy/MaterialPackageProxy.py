@@ -879,9 +879,15 @@ class MaterialPackageProxy(PackageProxy):
         output_material_module_proxy.write_to_disk()
         self.add_material_to_materials_initializer()
         self.add_material_to_material_initializer()
+        self.write_tags_to_disk()
         self.proceed('output material written to disk.', prompt=prompt)
 
     def write_stub_material_definition_module_to_disk(self):
         if self.should_have_material_definition_module:
             file(self.material_definition_module_file_name, 'w').write('')
             self.material_definition_module_proxy.write_stub_to_disk(self.is_data_only, prompt=True)
+
+    def write_tags_to_disk(self):
+        self.add_tag('is_material_package', True)
+        if hasattr(self, 'generic_output_name'):
+            self.add_tag('generic_output_name', self.generic_output_name)

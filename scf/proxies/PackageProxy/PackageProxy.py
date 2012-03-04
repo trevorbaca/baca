@@ -108,7 +108,11 @@ class PackageProxy(DirectoryProxy, ImportableAssetProxy):
 
     @property
     def tags_file_proxy(self):
-        if self.has_tags_file:
+        if not self.has_tags_file:
+            tags_file = open(self.tags_file_name, 'w')
+            tags_file.write('')
+            tags_file.close()
+        if True:
             return InitializerFileProxy(self.tags_file_name, session=self.session)
 
     ### PUBLIC METHODS ###
@@ -116,10 +120,12 @@ class PackageProxy(DirectoryProxy, ImportableAssetProxy):
     def add_tag(self, tag_name, tag_value):
         tags = self.get_tags()
         tags[tag_name] = tag_value
-        if self.has_tags_file:
-            self.tags_file_proxy.write_tags_to_disk(tags)
-        else:
-            self.initializer_file_proxy.write_tags_to_disk(tags)
+        #if self.has_tags_file:
+        #    self.tags_file_proxy.write_tags_to_disk(tags)
+        #else:
+        #    self.initializer_file_proxy.write_tags_to_disk(tags)
+        self.tags_file_proxy.write_tags_to_disk(tags)
+        #self.initializer_file_proxy.write_tags_to_disk(tags)
 
     def add_tag_interactively(self):
         getter = self.make_getter(where=self.where())

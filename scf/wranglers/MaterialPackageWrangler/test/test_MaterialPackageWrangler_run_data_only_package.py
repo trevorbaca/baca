@@ -99,7 +99,8 @@ def test_MaterialPackageWrangler_run_data_only_package_04():
         assert studio.package_exists('materials.testnumbers')
         mpp = scf.proxies.MaterialPackageProxy('materials.testnumbers')
         assert mpp.is_data_only
-        assert mpp.directory_contents == ['__init__.py', 'material_definition.py', 'output_material.py']
+        assert mpp.directory_contents == [
+            '__init__.py', 'material_definition.py', 'output_material.py', 'tags.py']
         assert mpp.has_readable_initializer
         assert mpp.has_user_finalized_material_definition_module
         assert mpp.has_readable_output_material_module
@@ -185,7 +186,7 @@ def test_MaterialPackageWrangler_run_data_only_package_07():
         assert studio.package_exists('materials.testnumbers')
         mpp = scf.proxies.MaterialPackageProxy('materials.testnumbers')
         assert mpp.is_data_only
-        assert mpp.directory_contents == ['__init__.py', 'material_definition.py']
+        assert mpp.directory_contents == ['__init__.py', 'material_definition.py', 'tags.py']
         assert mpp.has_readable_initializer
         assert mpp.has_user_finalized_material_definition_module
         assert not mpp.has_output_material_module
@@ -243,7 +244,8 @@ def test_MaterialPackageWrangler_run_data_only_package_09():
         assert studio.package_exists('materials.testnumbers')
         mpp = scf.proxies.MaterialPackageProxy('materials.testnumbers')
         assert mpp.is_data_only
-        assert mpp.directory_contents == ['__init__.py', 'material_definition.py', 'output_material.py']
+        assert mpp.directory_contents == [
+            '__init__.py', 'material_definition.py', 'output_material.py', 'tags.py']
         assert mpp.has_readable_initializer
         assert mpp.has_user_finalized_material_definition_module
         assert not mpp.has_readable_output_material_module

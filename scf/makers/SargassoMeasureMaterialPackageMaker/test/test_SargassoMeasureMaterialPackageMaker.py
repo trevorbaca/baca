@@ -220,7 +220,7 @@ def test_SargassoMeasureMaterialPackageMaker_08():
             'q'
             )
         mpp = scf.makers.SargassoMeasureMaterialPackageMaker('materials.testsargasso')
-        assert mpp.directory_contents == ['__init__.py', 'output_material.py', 'user_input.py']
+        assert mpp.directory_contents == ['__init__.py', 'output_material.py', 'tags.py', 'user_input.py']
         measures = [
             measuretools.Measure((4, 16), "c'16 c'16 c'8"),
             measuretools.Measure((2, 10), "c'8 c'8"),
