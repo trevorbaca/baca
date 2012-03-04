@@ -2,7 +2,7 @@ from scf.selectors.DirectoryContentSelector import DirectoryContentSelector
 import os
 
 
-class KaleidSelector(DirectoryContentSelector):
+class KaleidClassSelector(DirectoryContentSelector):
 
     ### CLASS ATTRIBUTES ###
     

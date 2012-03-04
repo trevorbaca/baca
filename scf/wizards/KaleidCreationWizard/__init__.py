@@ -1,2 +1,1 @@
 from KaleidCreationWizard import KaleidCreationWizard
-from Wizard import Wizard

@@ -1,1 +1,0 @@
-from KaleidSelector import KaleidSelector

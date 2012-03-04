@@ -2,7 +2,7 @@ from scf.wizards.Wizard import Wizard
 from scf import selectors
 
 
-class KaleidWizard(Wizard):
+class KaleidCreationWizard(Wizard):
 
     ### READ-ONLY ATTRIBUTES ###
 
@@ -23,7 +23,7 @@ class KaleidWizard(Wizard):
         self.assign_user_input(user_input=user_input)
         self.cache_breadcrumbs(cache=cache)
         self.push_breadcrumb()
-        selector = selectors.KaleidSelector(session=self.session)
+        selector = selectors.KaleidClassSelector(session=self.session)
         kaleid_class_name = selector.run()
         if not self.backtrack():
             kaleid_editor = self.get_kaleid_editor(kaleid_class_name) 
