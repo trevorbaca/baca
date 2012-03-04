@@ -467,11 +467,7 @@ class MaterialPackageProxy(PackageProxy):
             output_material_module_body_lines = self.make_output_material_module_body_lines(
                 output_material_handler.target)
         else:
-            line = '{} = {}'.format(
-                self.material_underscored_name, 
-                #getattr(output_material_handler.target, 
-                #    '_repr_with_tools_package', 
-                #    repr(output_material_handler.target)))
+            line = '{} = {}'.format(self.material_underscored_name, 
                 self.get_repr_with_tools_package(self.target))
             output_material_module_body_lines = [line]
         self.write_output_material_to_disk(

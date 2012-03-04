@@ -7,6 +7,11 @@ class RestFilledTokens(SignalAffixedRestFilledTokens):
     See the test file for examples.
     '''
 
+    ### CLASS ATTRIBUTES ###
+
+    args = ()
+    kwargs = ()
+
     def __init__(self):
         SignalAffixedRestFilledTokens.__init__(self, [], [0], [], [0], 1)
 

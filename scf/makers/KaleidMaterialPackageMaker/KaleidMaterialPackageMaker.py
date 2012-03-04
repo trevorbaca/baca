@@ -20,11 +20,16 @@ class KaleidMaterialPackageMaker(MaterialPackageMaker):
 
     def make_output_material_module_body_lines(self, output_material):
         lines = []
-        lines.append('{} = {}('.format(
-            self.material_underscored_name, output_material._class_name_with_tools_package))
-        for item in output_material._formatted_input_parameters[:-1]:
-            lines.append('\t{},'.format(item))
-        item = output_material._formatted_input_parameters[-1]
-        lines.append('\t{})'.format(item))
+        formatted_input_parameters = output_material._formatted_input_parameters
+        if formatted_input_parameters:
+            lines.append('{} = {}('.format(
+                self.material_underscored_name, output_material._class_name_with_tools_package))
+            for item in output_material._formatted_input_parameters[:-1]:
+                lines.append('\t{},'.format(item))
+            item = output_material._formatted_input_parameters[-1]
+            lines.append('\t{})'.format(item))
+        else:
+            lines.append('{} = {}()'.format(
+                self.material_underscored_name, output_material._class_name_with_tools_package))
         lines = [line + '\n' for line in lines]
         return lines
