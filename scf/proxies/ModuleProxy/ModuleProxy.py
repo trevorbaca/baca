@@ -12,7 +12,7 @@ class ModuleProxy(ParsableFileProxy, ImportableAssetProxy):
         ParsableFileProxy.__init__(self, path_name=path_name, session=session)
         ImportableAssetProxy.__init__(self, asset_full_name=path_name, session=self.session)
 
-    ### OVERLOADS ###
+    ### SPECIAL METHODS ###
 
     def __repr__(self):
         return ImportableAssetProxy.__repr__(self)
@@ -23,7 +23,7 @@ class ModuleProxy(ParsableFileProxy, ImportableAssetProxy):
     generic_class_name = 'module'
     temporary_asset_short_name = 'temporary_module.py'
 
-    ### READ-ONLY ATTRIBUTES ###
+    ### READ-ONLY PROPERTIES ###
 
     @property
     def grandparent_package_directory_name(self):
@@ -79,11 +79,11 @@ class ModuleProxy(ParsableFileProxy, ImportableAssetProxy):
     
     def run_abjad(self, prompt=True):
         os.system('abjad {}'.format(self.path_name))
-        self.proceed('file executed', prompt=prompt)
+        self.proceed('file executed', is_interactive=prompt)
 
     def run_python(self, prompt=True):
         os.system('python {}'.format(self.path_name))
-        self.proceed('file executed.', prompt=prompt)
+        self.proceed('file executed.', is_interactive=prompt)
 
     def unimport(self):
         self.remove_package_importable_name_from_sys_modules(self.module_importable_name)

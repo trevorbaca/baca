@@ -8,7 +8,7 @@ class BasicModuleProxy(MaterialModuleProxy):
         self.body_lines = []
         self.parse()
 
-    ### READ-ONLY PUBLIC ATTRIBUTES ###
+    ### READ-ONLY PUBLIC PROPERTIES ###
 
     @property
     def sections(self):

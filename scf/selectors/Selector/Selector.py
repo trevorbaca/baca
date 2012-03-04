@@ -3,33 +3,52 @@ from scf.core.SCFObject import SCFObject
 
 class Selector(SCFObject):
 
-    def __init__(self, items=None, session=None):
+    def __init__(self, is_keyed=False, is_numbered=False, 
+        is_parenthetically_numbered=True, is_ranged=False, items=None, session=None):
         SCFObject.__init__(self, session=session) 
+        self.is_keyed = is_keyed
+        self.is_numbered = is_numbered
+        self.is_parenthetically_numbered = is_parenthetically_numbered
+        self.is_ranged = is_ranged
         self.items = items or []
 
-    ### READ-ONLY ATTRIBUTES ###
+    ### READ-ONLY PROPERTIES ###
 
     @property
     def breadcrumb(self):
-        if hasattr(self, 'target_human_readable_name'):
+        if getattr(self, 'explicit_breadcrumb', None):
+            return self.explicit_breadcrumb    
+        elif hasattr(self, 'target_human_readable_name'):
             return 'select {}:'.format(self.target_human_readable_name)
         else:
             return 'select:'
 
-    ### READ / WRITE ATTRIBUTES ###
+    ### READ / WRITE PROPERTIES ###
 
     @apply
     def items():
         def fget(self):
-            return self._items
+            if self._items:
+                return self._items
+            else:
+                return self.list_items()
         def fset(self, items):
             self._items = items
         return property(**locals())
 
     ### PUBLIC METHODS ###
 
+    def list_items(self):
+        result = []
+        return result
+
     def make_main_menu(self, head=None):
-        menu, section = self.make_menu(where=self.where(), is_parenthetically_numbered=True, is_keyed=False)
+        menu, section = self.make_menu(where=self.where(), 
+            is_keyed=self.is_keyed,
+            is_numbered=self.is_numbered,
+            is_parenthetically_numbered=self.is_parenthetically_numbered,
+            is_ranged=self.is_ranged,
+            )
         section.tokens = self.make_menu_tokens(head=head)
         section.return_value_attribute = 'prepopulated'
         return menu

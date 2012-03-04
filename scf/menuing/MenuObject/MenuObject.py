@@ -14,7 +14,7 @@ class MenuObject(SCFObject):
         self.where = where
         self.title = title
 
-    ### READ / WRITE PUBLIC ATTRIBUTES ###
+    ### READ / WRITE PUBLIC PROPERTIES ###
 
     @apply
     def prompt_default():

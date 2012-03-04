@@ -5,11 +5,11 @@ from abjad.tools import sequencetools
 from baca.music.make_sargasso_measures import make_illustration_from_output_material
 from scf import predicates
 from scf.editors.UserInputWrapper import UserInputWrapper
-from scf.makers.MaterialPackageMaker import MaterialPackageMaker
+from scf.makers.FunctionInputMaterialPackageMaker import FunctionInputMaterialPackageMaker
 import baca
 
 
-class SargassoMeasureMaterialPackageMaker(MaterialPackageMaker):
+class SargassoMeasureMaterialPackageMaker(FunctionInputMaterialPackageMaker):
 
     ### CLASS ATTRIBUTES ###
 
@@ -18,7 +18,6 @@ class SargassoMeasureMaterialPackageMaker(MaterialPackageMaker):
     output_material_checker = staticmethod(measuretools.all_are_measures)
     output_material_maker = staticmethod(baca.music.make_sargasso_measures)
     output_material_module_import_statements = ['from abjad.tools import measuretools']
-    should_have_user_input_module = True
 
     user_input_demo_values = [
         ('measure_denominator', 4),

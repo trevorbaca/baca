@@ -20,7 +20,7 @@ class Constellation(object):
         self._chord_duration = Fraction(1, 4)
         self._chords = []
 
-    ### OVERLOADS ###
+    ### SPECIAL METHODS ###
 
     def __contains__(self, chord):
 #      for pnl in self._pitch_number_lists:
@@ -38,7 +38,7 @@ class Constellation(object):
     def __repr__(self):
         return '%s(%s)' % (type(self).__name__, len(self))
 
-    ### PRIVATE ATTRIBUTES ###
+    ### PRIVATE PROPERTIES ###
 
     @property
     def _color_map(self):
@@ -120,7 +120,7 @@ class Constellation(object):
         lilypond_file, score = self._make_lilypond_file_and_score_from_chords(chords)
         iotools.show(lilypond_file)
 
-    ### READ-ONLY PUBLIC ATTRIBUTES ###
+    ### READ-ONLY PUBLIC PROPERTIES ###
 
     @property
     def constellation_number(self):

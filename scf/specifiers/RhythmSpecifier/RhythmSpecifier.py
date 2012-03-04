@@ -3,15 +3,14 @@ from scf.specifiers.ParameterSpecifier import ParameterSpecifier
 
 class RhythmSpecifier(ParameterSpecifier):
 
-    def __init__(self, kaleid=None):
-        ParameterSpecifier.__init__(self)
-        self.kaleid = kaleid
+    ### INITIALIZER ###
 
-    ### READ-ONLY ATTRIBUTES ###
+    def __init__(self, description=None, kaleid_package_importable_name=None, name=None):
+        ParameterSpecifier.__init__(self, description=description, name=name)
+        self.kaleid_package_importable_name = kaleid_package_importable_name
+
+    ### READ-ONLY PROPERTIES ###
     
     @property
     def one_line_menuing_summary(self):
-        try:
-            return self.kaleid.kaleid_name
-        except AttributeError:
-            pass
+        return self.name or self.kaleid_package_importable_name

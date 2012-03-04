@@ -12,7 +12,7 @@ class ReiteratedDynamic(_DynamicsSpecifier):
         _DynamicsSpecifier.__init__(self, minimum_prolated_duration = minimum_prolated_duration)
         self.dynamic_name = dynamic_name
 
-    ### OVERLOADS ###
+    ### SPECIAL METHODS ###
 
     def __call__(self, dynamic_name):
         new = type(self)()
@@ -20,7 +20,7 @@ class ReiteratedDynamic(_DynamicsSpecifier):
         new.minimum_prolated_duration = self.minimum_prolated_duration
         return new
 
-    ### READ / WRITE PUBLIC ATTRIBUTES ###
+    ### READ / WRITE PUBLIC PROPERTIES ###
 
     @apply
     def dynamic_name():

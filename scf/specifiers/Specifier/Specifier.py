@@ -3,13 +3,20 @@ from abc import abstractproperty
 
 
 class Specifier(object):
+    
+    ### CLASS ATTRIBUTES ###
+
     __metaclass__ = ABCMeta
 
-    def __init__(self):
+    ### INITIALIZER ###
+
+    def __init__(self, description=None, name=None):
         variable_names = self.__init__.im_func.func_code.co_varnames[1:]
         self._variable_names = variable_names
+        self.description = description
+        self.name = name
 
-    ### OVERLOADS ###
+    ### SPECIAL METHODS ###
 
     def __eq__(self, other):
         if self is other:
@@ -31,7 +38,7 @@ class Specifier(object):
         else:
             return '{}()'.format(self.class_name)
 
-    ### READ-ONLY ATTRIBUTES ###
+    ### READ-ONLY PROPERTIES ###
 
     @property
     def class_name(self):
@@ -75,8 +82,8 @@ class Specifier(object):
     def get_format_pieces_of_expr(self, expr):
         if hasattr(expr, 'format_pieces'):
             return expr.format_pieces
-        elif hasattr(expr, '_repr_with_tools_package'):
-            return [expr._repr_with_tools_package]
+        elif hasattr(expr, '_tools_package_qualified_repr'):
+            return [expr._tools_package_qualified_repr]
         else:
             return [repr(expr)]
 

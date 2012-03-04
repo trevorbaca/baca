@@ -8,7 +8,6 @@ class SignalAffixedChunkWithNoteFilledTokensKaleidEditor(KaleidEditor):
 
     ### CLASS ATTRIBUTES ###
 
-    target_class = kaleids.SignalAffixedChunkWithNoteFilledTokens
     target_manifest = TargetManifest(kaleids.SignalAffixedChunkWithNoteFilledTokens,
         ('prefix_signal', None, 'ps', getters.get_nonzero_integers, True),
         ('prefix_lengths', None, 'pl', getters.get_nonnegative_integers, True),

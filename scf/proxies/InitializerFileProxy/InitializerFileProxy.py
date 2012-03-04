@@ -11,7 +11,7 @@ class InitializerFileProxy(ParsableFileProxy):
         self.tag_lines = []
         self.parse()
 
-    ### READ-ONLY PUBLIC ATTRIBUTES ##
+    ### READ-ONLY PUBLIC PROPERTIES ##
 
     @property
     def extension(self):
@@ -50,6 +50,7 @@ class InitializerFileProxy(ParsableFileProxy):
         safe_import_line = safe_import_line.format(source_module_short_name, source_module_attribute_name)
         return self.has_line(safe_import_line)
 
+    # TODO: move to TagsFileProxy
     def make_tag_lines(self, tags):
         if tags:
             lines = []
@@ -60,7 +61,7 @@ class InitializerFileProxy(ParsableFileProxy):
                     value = '\n    '.join(repr_lines)
                     lines.append('({}, {})'.format(key, value))
                 else:
-                    value = getattr(value, '_repr_with_tools_package', repr(value))
+                    value = getattr(value, '_tools_package_qualified_repr', repr(value))
                     lines.append('({}, {})'.format(key, value))
             lines = ',\n    '.join(lines)
             result = 'tags = OrderedDict([\n    {}])'.format(lines)
@@ -72,6 +73,8 @@ class InitializerFileProxy(ParsableFileProxy):
         is_parsable = True
         if initializer_file_name is None:
             initializer_file_name = self.path_name
+        if not os.path.exists(initializer_file_name):
+            return
         initializer = file(initializer_file_name, 'r')
         encoding_directives = []
         docstring_lines = []
@@ -129,6 +132,7 @@ class InitializerFileProxy(ParsableFileProxy):
         self.safe_import_statements[:] = safe_import_statements
         self.write_to_disk()
 
+    # TODO: move to TagsFileProxy
     def restore_interactively(self, prompt=True):
         import scf
         getter = self.make_getter(where=self.where())
@@ -157,18 +161,20 @@ class InitializerFileProxy(ParsableFileProxy):
         tags = collections.OrderedDict([])
         tags['should_have_illustration'] = should_have_illustration
         tags['material_package_maker_class_name'] = material_package_maker_class_name
-        self.write_stub_to_disk(tags=tags)
-        self.proceed('initializer restored.', prompt=prompt)
+        self.write_stub_to_disk()
+        self.proceed('initializer restored.', is_interactive=prompt)
 
-    def write_stub_to_disk(self, tags=None):
+    # TODO: duplicate in TagsFileProxy
+    def write_stub_to_disk(self):
         self.clear()
-        self.setup_statements.append('from collections import OrderedDict\n')
-        tag_lines = self.make_tag_lines(tags)
-        self.tag_lines.extend(tag_lines[:])
         self.write_to_disk()
 
+    # TODO: move to TagsFileProxy
     def write_tags_to_disk(self, tags):
         self.parse()
+        ordered_dict_import_statement = 'from collections import OrderedDict\n'
+        if ordered_dict_import_statement not in self.setup_statements:
+            self.setup_statements.append(ordered_dict_import_statement)
         tag_lines = self.make_tag_lines(tags)
         self.tag_lines = tag_lines[:]
         self.write_to_disk()

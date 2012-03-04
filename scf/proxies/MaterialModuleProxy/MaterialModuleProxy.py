@@ -3,11 +3,7 @@ from scf.proxies.ModuleProxy import ModuleProxy
 
 class MaterialModuleProxy(ModuleProxy):
 
-    ### READ-ONLY ATTRIBUTES ###
-
-    @property
-    def current_materials_package_importable_name(self):
-        return self.dot_join(self.parent_package_importable_name.split('.')[:-1])
+    ### READ-ONLY PROPERTIES ###
 
     @property
     def material_package_importable_name(self):
@@ -27,4 +23,5 @@ class MaterialModuleProxy(ModuleProxy):
         self.remove_package_importable_name_from_sys_modules(self.material_package_importable_name)
 
     def unimport_materials_package(self):
-        self.remove_package_importable_name_from_sys_modules(self.current_materials_package_importable_name)
+        self.remove_package_importable_name_from_sys_modules(
+            self.session.current_materials_package_importable_name)

@@ -1,11 +1,14 @@
 # -*- encoding: utf-8 -*-
 from abjad.tools import iotools
+from scf.core.SCFObject import SCFObject
 from scf.core.Transcript import Transcript
 import os
 
 
-class Session(object):
+class Session(SCFObject):
     
+    ### INITIALIZER ###
+
     def __init__(self, user_input=None):
         self._backtracking_stack = []
         self._breadcrumb_cache_stack = []
@@ -32,7 +35,7 @@ class Session(object):
         self.user_specified_quit = False
         self.show_active_scores()
 
-    ### OVERLOADS ###
+    ### SPECIAL METHODS ###
 
     def __repr__(self):
         summary = []
@@ -43,10 +46,7 @@ class Session(object):
         summary = ', '.join(summary)
         return '{}({})'.format(type(self).__name__, summary)
 
-    def __str__(self):
-        return '\n'.join(self.formatted_attributes)
-
-    ### READ-ONLY PUBLIC ATTRIBUTES ###
+    ### READ-ONLY PUBLIC PROPERTIES ###
 
     @property
     def backtracking_stack(self):
@@ -73,11 +73,61 @@ class Session(object):
         return self._complete_transcript
 
     @property
+    def current_chunks_package_importable_name(self):
+        if self.is_in_score:
+            return self.dot_join([
+                self.current_score_package_short_name, 
+                self.score_internal_chunks_package_importable_name_infix])
+        else:
+            return self.score_external_chunks_package_importable_name
+
+    @property
+    def current_chunks_package_path_name(self):
+        return self.package_importable_name_to_path_name(
+            self.current_chunks_package_importable_name)
+
+    @property
+    def current_materials_package_importable_name(self):
+        if self.is_in_score:
+            return self.dot_join([
+                self.current_score_package_short_name, 
+                self.score_internal_materials_package_importable_name_infix])
+        else:
+            return self.score_external_materials_package_importable_name
+
+    @property
+    def current_materials_package_path_name(self):
+        return self.package_importable_name_to_path_name(
+            self.current_materials_package_importable_name)
+
+    @property
     def current_score_package_proxy(self):
         from scf.proxies.ScorePackageProxy import ScorePackageProxy
         if self.is_in_score:
             return ScorePackageProxy(
                 score_package_short_name=self.current_score_package_short_name, session=self)
+    
+    @property
+    def current_score_path_name(self):
+        if self.is_in_score:
+            return self.package_importable_name_to_path_name(
+                self.current_score_package_short_name)
+
+    @property
+    def current_specifiers_package_importable_name(self):
+        if self.is_in_score:
+            return self.dot_join([
+                self.current_score_package_short_name,
+                self.score_internal_specifiers_package_importable_name_infix])
+        else:
+            return self.score_external_specifiers_package_importable_name
+
+    @property
+    def current_specifiers_package_path_name(self):
+        if self.is_in_score:
+            return os.path.join(self.current_score_path_name, 'mus', 'specifiers')
+        else:
+            return self.score_external_specifiers_package_path_name
 
     @property
     def explicit_command_history(self):
@@ -87,15 +137,6 @@ class Session(object):
                 result.append('default')
             else:
                 result.append(command)
-        return result
-
-    @property
-    def formatted_attributes(self):
-        result = []
-        result.append('initial_user_input: {!r}'.format(self.initial_user_input))
-        result.append('breadcrumbs: {!r}'.format(self.breadcrumb_stack))
-        result.append('scores_to_show: {!r}'.format(self.scores_to_show))
-        result.append('user_input: {!r}'.format(self.user_input))
         return result
 
     @property
@@ -128,6 +169,7 @@ class Session(object):
     def menu_header(self):
         return '\n'.join(self.format_breadcrumb_stack())
 
+    # TODO: rename to self.scf_output_directory
     @property
     def output_directory(self):
         return os.environ.get('SCFOUTPUT')
@@ -139,6 +181,15 @@ class Session(object):
     @property
     def session_once_had_user_input(self):
         return self._session_once_had_user_input
+
+    @property
+    def testable_command_history_string(self):
+        result = []
+        for part in self.explicit_command_history:
+            if ' ' in part and ',' not in part:
+                part = part.replace(' ', '~')
+            result.append(part)
+        return ' '.join(result)
 
     @apply
     def transcribe_next_command():
@@ -160,7 +211,7 @@ class Session(object):
                 return True
         return False
 
-    ### READ / WRITE PUBLIC ATTRIBUTES ###
+    ### READ / WRITE PUBLIC PROPERTIES ###
 
     @apply
     def current_score_package_short_name():

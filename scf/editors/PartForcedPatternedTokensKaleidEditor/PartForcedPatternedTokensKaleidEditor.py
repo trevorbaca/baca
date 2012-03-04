@@ -8,7 +8,6 @@ class PartForcedPatternedTokensKaleidEditor(KaleidEditor):
 
 	### CLASS ATTRIBTUES ###
 
-    target_class = kaleids.PartForcedPatternedTokens
     target_manifest = TargetManifest(kaleids.PartForcedPatternedTokens,
         ('pattern', None, 'pa', getters.get_nonzero_integers, True),
         ('denominator', None, 'de', getters.get_positive_integer_power_of_two, True),

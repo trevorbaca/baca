@@ -24,7 +24,7 @@ class ReiteratedArticulation(_ArticulationsSpecifier):
             articulation_list = [articulation_list]
         self.articulation_list = articulation_list
 
-    ### OVERLOADS ###
+    ### SPECIAL METHODS ###
 
     def __call__(self, articulation_list):
         new = type(self)()
@@ -34,7 +34,7 @@ class ReiteratedArticulation(_ArticulationsSpecifier):
     def __repr__(self):
         return '%s(%s)' % (type(self).__name__, self.articulation_list)
 
-    ### READ / WRITE PUBLIC ATTRIBUTES ###
+    ### READ / WRITE PUBLIC PROPERTIES ###
 
     @apply
     def articulation_list():

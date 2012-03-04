@@ -15,7 +15,7 @@ class MusicSpecifier(Specifier):
             performer_contribution_specifiers or PerformerContributionSpecifierList()
         self.tempo = tempo
 
-    ### CLASS ATTRIBUTES ATTRIBUTES ###
+    ### CLASS ATTRIBUTES ###
 
     storage_module_import_statements = [
         'from abjad import *',
@@ -24,7 +24,7 @@ class MusicSpecifier(Specifier):
         'from scf import specifiers',
         ]
 
-    ### READ-ONLY ATTRIBUTES ###
+    ### READ-ONLY PROPERTIES ###
 
     @property
     def one_line_menuing_summary(self):

@@ -21,7 +21,7 @@ class MusicSpecifierModuleProxy(ModuleProxy):
     target_class = MusicSpecifier
     target_name_in_storage_module = 'music_specifier'
 
-    ### READ-ONLY ATTRIBUTES ###
+    ### READ-ONLY PROPERTIES ###
 
     @property
     def editor(self):

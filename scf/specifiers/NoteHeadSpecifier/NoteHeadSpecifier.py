@@ -3,4 +3,14 @@ from scf.specifiers.ParameterSpecifier import ParameterSpecifier
 
 class NoteHeadSpecifier(ParameterSpecifier):
 
-    pass
+    ### INITIALIZER ###
+
+    def __init__(self, description=None, note_head_handler_name=None, name=None):
+        ParameterSpecifier.__init__(self, description=description, name=name)
+        self.note_head_handler_name = note_head_handler_name
+
+    ### READ-ONLY PROPERITES ###
+    
+    @property
+    def one_line_menuing_summary(self):
+        return self.name or self.note_head_handler_name

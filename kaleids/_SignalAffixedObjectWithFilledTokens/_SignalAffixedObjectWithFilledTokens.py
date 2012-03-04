@@ -73,7 +73,7 @@ class _SignalAffixedObjectWithFilledTokens(_RhythmicKaleid):
         self._repr_signals.append(self.suffix_signal)
         self._repr_signals.append(self.secondary_divisions)
 
-    ### OVERLOADS ###
+    ### SPECIAL METHODS ###
 
     def __call__(self, duration_tokens, seeds = None):
         duration_pairs, seeds = _RhythmicKaleid.__call__(self, duration_tokens, seeds)

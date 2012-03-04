@@ -7,7 +7,7 @@ class PerformerContributionSpecifierList(Specifier, list):
         Specifier.__init__(self)
         list.__init__(self, *args)
 
-    ### OVERLOADS ###
+    ### SPECIAL METHODS ###
     
     def __eq__(self, other):
         return list.__eq__(self, other)
@@ -15,7 +15,7 @@ class PerformerContributionSpecifierList(Specifier, list):
     def __repr__(self):
         return '{}({})'.format(self.class_name, len(self))
 
-    ### READ-ONLY ATTRIBUTES ###
+    ### READ-ONLY PROPERTIES ###
 
     @property
     def format_pieces(self):

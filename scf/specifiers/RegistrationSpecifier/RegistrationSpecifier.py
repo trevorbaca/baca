@@ -3,5 +3,14 @@ from scf.specifiers.ParameterSpecifier import ParameterSpecifier
 
 class RegistrationSpecifier(ParameterSpecifier):
 
-    pass
+    ### INITIALIZER ###
 
+    def __init__(self, description=None, registration_handler_name=None, name=None):
+        ParameterSpecifier.__init__(self, description=description, name=name)
+        self.registration_handler_name = registration_handler_name
+
+    ### READ-ONLY PROPERTIES ###
+
+    @property
+    def one_line_menuing_summary(self):
+        return self.name or self.registration_handler_name

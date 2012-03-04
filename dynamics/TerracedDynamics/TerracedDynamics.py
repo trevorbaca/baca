@@ -15,7 +15,7 @@ class TerracedDynamics(_DynamicsSpecifier):
             dynamics = []
         self.dynamics = dynamics
 
-    ### OVERLOADS ###
+    ### SPECIAL METHODS ###
 
     def __call__(self, dynamics):
         new = type(self)()
@@ -23,7 +23,7 @@ class TerracedDynamics(_DynamicsSpecifier):
         new.minimum_prolated_duration = self.minimum_prolated_duration
         return new
 
-    ### READ / WRITE PUBLIC ATTRIBUTES ###
+    ### READ / WRITE PUBLIC PROPERTIES ###
 
     @apply
     def dynamics():

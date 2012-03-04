@@ -6,7 +6,7 @@ import os
 
 class FileWrangler(AssetWrangler):
 
-    ### READ-ONLY PUBLIC ATTRIBUTES ###
+    ### READ-ONLY PUBLIC PROPERTIES ###
 
     @property
     def asset_class(self):

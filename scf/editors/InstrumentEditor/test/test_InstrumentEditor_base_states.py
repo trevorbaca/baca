@@ -16,9 +16,8 @@ def test_InstrumentEditor_base_states_01():
       "     (2) instrument name markup (im): Markup('Accordion')",
       "     (3) short instrument name (sn): acc.",
       "     (4) short instrument name markup (sm): Markup('Acc.')",
-      '',
-      '     range: [E1, C8]',
-      '     clefs: treble, bass',
+      '     (5) range (rg): [E1, C8]',
+      '     (6) clefs (cf): treble, bass',
       '']
 
 

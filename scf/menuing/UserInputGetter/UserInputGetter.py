@@ -27,12 +27,12 @@ class UserInputGetter(MenuSectionAggregator):
         self.prompt_character = '>'
         self.title = None
 
-    ### OVERLOADS ###
+    ### SPECIAL METHODS ###
 
     def __repr__(self):
         return '{}({})'.format(type(self).__name__, len(self.prompts))
 
-    ### READ-ONLY PUBLIC ATTRIBUTES ###
+    ### READ-ONLY PUBLIC PROPERTIES ###
 
     @property
     def argument_lists(self):
@@ -82,6 +82,16 @@ class UserInputGetter(MenuSectionAggregator):
         self.append_something(spaced_attribute_name, message, default=default)
         self.tests.append(predicates.is_boolean)
 
+    def append_clef(self, spaced_attribute_name, default=None):
+        message = 'value for {!r} must successfully initialize clef mark.'
+        self.append_something(spaced_attribute_name, message, default=default)
+        self.tests.append(predicates.is_clef_token)
+
+    def append_constellation_circuit_id_pair(self, spaced_attribute_name, default=None):
+        message = 'value for {!r} must be valid constellation circuit id pair.'
+        self.append_something(spaced_attribute_name, message, default=default)
+        self.tests.append(predicates.is_constellation_circuit_id_pair)
+
     def append_duration(self, spaced_attribute_name, default=None):
         message = 'value for {!r} must be duration.'
         self.append_something(spaced_attribute_name, message, default=default)
@@ -95,6 +105,11 @@ class UserInputGetter(MenuSectionAggregator):
         message = 'value for {!r} must be existing package name.'
         self.append_something(spaced_attribute_name, message, default=default)
         self.tests.append(predicates.is_existing_package_name)
+
+    def append_expr(self, spaced_attribute_name, default=None):
+        message = 'value for {!r} may be anything.'
+        self.append_something(spaced_attribute_name, message, default=default)
+        self.tests.append(lambda expr: True)
 
     def append_integer(self, spaced_attribute_name, default=None):
         message = 'value for {!r} must be integer.'
@@ -196,6 +211,7 @@ class UserInputGetter(MenuSectionAggregator):
         self.append_something(spaced_attribute_name, message, default=default)
         self.tests.append(pitchtools.is_symbolic_pitch_range_string)
 
+    # TODO: fix bug to make (Duration(1, 4), 72) work
     def append_tempo(self, spaced_attribute_name, default=None):
         message = 'value for {!r} must successfully initialize tempo mark.'
         self.append_something(spaced_attribute_name, message, default=default)

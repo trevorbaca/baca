@@ -11,15 +11,7 @@ class InstrumentSelector(Selector):
 
     target_human_readable_name = 'instrument'
 
-    ### READ / WRITE ATTRIBUTES ###
+    ### PUBLIC METHODS ###
 
-    @apply
-    def items():
-        def fget(self):
-            if self._items:
-                return self._items
-            else:
-                return self.instruments
-        def fset(self, items):
-            self._items = items
-        return property(**locals())
+    def list_items(self):
+        return self.instruments[:]

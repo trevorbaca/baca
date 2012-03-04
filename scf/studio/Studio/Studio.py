@@ -8,6 +8,7 @@ from scf.wranglers.MaterialPackageWrangler import MaterialPackageWrangler
 from scf.wranglers.MusicSpecifierModuleWrangler import MusicSpecifierModuleWrangler
 from scf.wranglers.ScorePackageWrangler import ScorePackageWrangler
 from scf.wranglers.StylesheetFileWrangler import StylesheetFileWrangler
+import os
 import subprocess
 
 
@@ -22,7 +23,7 @@ class Studio(SCFObject):
         self._score_package_wrangler = ScorePackageWrangler(session=self.session)
         self._stylesheet_file_wrangler = StylesheetFileWrangler(session=self.session)
 
-    ### READ-ONLY PUBLIC ATTRIBUTES ###
+    ### READ-ONLY PUBLIC PROPERTIES ###
 
     @property
     def breadcrumb(self):
@@ -69,7 +70,7 @@ class Studio(SCFObject):
         self.session.current_score_package_name = None
 
     def get_next_score_package_short_name(self):
-        score_package_short_names = self.score_package_wrangler.list_visible_asset_human_readable_names()
+        score_package_short_names = self.score_package_wrangler.list_visible_asset_short_names()
         if self.session.current_score_package_short_name is None:
             return score_package_short_names[0]
         index = score_package_short_names.index(self.session.current_score_package_short_name)
@@ -94,7 +95,7 @@ class Studio(SCFObject):
                 return package_root_name
 
     def get_prev_score_package_short_name(self):
-        score_package_short_names = self.score_package_wrangler.list_visible_asset_human_readable_names()
+        score_package_short_names = self.score_package_wrangler.list_visible_asset_short_names()
         if self.session.current_score_package_short_name is None:
             return score_package_short_names[-1]
         index = score_package_short_names.index(self.session.current_score_package_short_name)
@@ -125,19 +126,17 @@ class Studio(SCFObject):
             self.manage_svn()
         elif result == 'profile':
             self.score_package_wrangler.profile_visible_assets()
-        elif result in self.score_package_wrangler.list_visible_asset_human_readable_names():
+        elif result in self.score_package_wrangler.list_visible_asset_short_names():
             self.edit_score_interactively(result)
     
     def handle_svn_menu_result(self, result):
         '''Return true to exit the svn menu.
         '''
         this_result = False
-        if result == 'ci':
+        if result == 'add':
+            self.score_package_wrangler.svn_add()
+        elif result == 'ci':
             self.score_package_wrangler.svn_ci()
-        #elif result == 'pytest_scores':
-        #    self.score_package_wrangler.run_py_test()
-        #elif result == 'pytest_all':
-        #    self.run_py_test_all()
         elif result == 'st':
             self.score_package_wrangler.svn_st()
         elif result == 'up':
@@ -236,4 +235,4 @@ class Studio(SCFObject):
         if lines:
             self.display(lines, capitalize_first_character=False)
         line = 'tests complete.'
-        self.proceed(line, prompt=prompt)
+        self.proceed(line, is_interactive=prompt)

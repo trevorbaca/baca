@@ -10,7 +10,7 @@ class Transcript(object):
         self._entries = []
         self._start_time = self.current_time
 
-    ### READ-ONLY PUBLIC ATTRIBUTES ###
+    ### READ-ONLY PUBLIC PROPERTIES ###
 
     @property
     def current_time(self):

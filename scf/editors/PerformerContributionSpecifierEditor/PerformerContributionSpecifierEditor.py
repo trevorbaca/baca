@@ -1,3 +1,4 @@
+from scf import specifiers
 from scf.editors.ArticulationSpecifierEditor import ArticulationSpecifierEditor
 from scf.editors.ClefSpecifierEditor import ClefSpecifierEditor
 from scf.editors.DirectiveSpecifierEditor import DirectiveSpecifierEditor
@@ -14,15 +15,13 @@ from scf.editors.TrillSpecifierEditor import TrillSpecifierEditor
 from scf.editors.TropingSpecifierEditor import TropingSpecifierEditor
 from scf.editors.InteractiveEditor import InteractiveEditor
 from scf.editors.TargetManifest import TargetManifest
-from scf.specifiers.PerformerContributionSpecifier import PerformerContributionSpecifier
 
 
 class PerformerContributionSpecifierEditor(InteractiveEditor):
 
     ### CLASS ATTRIBUTES ###
 
-    target_class = PerformerContributionSpecifier
-    target_manifest = TargetManifest(PerformerContributionSpecifier,
+    target_manifest = TargetManifest(specifiers.PerformerContributionSpecifier,
         ('performer_specifier', 'per', PerformerSpecifierEditor),
         ('instrument_specifier', 'str', InstrumentSpecifierEditor),
         (),
@@ -44,7 +43,7 @@ class PerformerContributionSpecifierEditor(InteractiveEditor):
         #('clef_specifier', 'clf', ClefSpecifierEditor),
         )
 
-    ### READ-ONLY PUBLIC ATTRIBUTES ###
+    ### READ-ONLY PUBLIC PROPERTIES ###
 
     @property
     def breadcrumb(self):

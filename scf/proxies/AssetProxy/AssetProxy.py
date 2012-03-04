@@ -20,7 +20,7 @@ class AssetProxy(SCFObject):
 
     generic_class_name = 'asset'
 
-    ### OVERLOADS ###
+    ### SPECIAL METHODS ###
 
     def __repr__(self):
         if self.path_name:
@@ -28,7 +28,7 @@ class AssetProxy(SCFObject):
         else:
             return '{}()'.format(self.class_name)
 
-    ### READ-ONLY PUBLIC ATTRIBUTES ###
+    ### READ-ONLY PUBLIC PROPERTIES ###
 
     @property
     def breadcrumb(self):
@@ -215,7 +215,7 @@ class AssetProxy(SCFObject):
         if lines:
             self.display(lines)
         line = 'tests run.'
-        self.proceed(line, prompt=prompt)
+        self.proceed(line, is_interactive=prompt)
 
     def svn_add(self, is_interactive=False):
         if is_interactive:
@@ -225,7 +225,7 @@ class AssetProxy(SCFObject):
         lines.append('')
         if is_interactive:
             self.display(lines)
-        self.proceed(prompt=is_interactive)
+        self.proceed(is_interactive=is_interactive)
 
     def svn_ci(self, commit_message=None, is_interactive=True):
         if commit_message is None:
@@ -245,7 +245,7 @@ class AssetProxy(SCFObject):
         lines.extend([line.strip() for line in proc.stdout.readlines()])
         lines.append('')
         self.display(lines)
-        self.proceed(prompt=is_interactive)
+        self.proceed(is_interactive=is_interactive)
 
     def svn_st(self, is_interactive=True):
         if is_interactive:
@@ -255,7 +255,7 @@ class AssetProxy(SCFObject):
         lines = [line.strip() for line in proc.stdout.readlines()]
         lines.append('')
         self.display(lines)
-        self.proceed(prompt=is_interactive)
+        self.proceed(is_interactive=is_interactive)
 
     def svn_up(self, is_interactive=True):
         if is_interactive:
@@ -265,7 +265,7 @@ class AssetProxy(SCFObject):
         lines = [line.strip() for line in proc.stdout.readlines()]
         lines.append('')
         self.display(lines)
-        self.proceed(prompt=is_interactive)
+        self.proceed(is_interactive=is_interactive)
 
     def touch(self):
         os.system('touch {}'.format(self.path_name))

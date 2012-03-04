@@ -13,7 +13,7 @@ class ChunkPackageWrangler(PackageWrangler):
                 self.score_internal_chunks_package_importable_name_infix,
             session=session)
 
-    ### READ-ONLY PUBLIC ATTRIBUTES ###
+    ### READ-ONLY PUBLIC PROPERTIES ###
 
     @property
     def asset_class(self):

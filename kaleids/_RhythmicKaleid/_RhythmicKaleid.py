@@ -10,7 +10,7 @@ class _RhythmicKaleid(object):
     def __init__(self):
         self._repr_signals = []
 
-    ### OVERLOADS ###
+    ### SPECIAL METHODS ###
 
     def __call__(self, duration_tokens, seeds = None):
         duration_pairs = durationtools.duration_tokens_to_duration_pairs(duration_tokens)
@@ -20,14 +20,14 @@ class _RhythmicKaleid(object):
     def __repr__(self):
         return '{}()'.format(self._class_name)
 
-    ### PRIVATE ATTRIBUTES ###
+    ### PRIVATE PROPERTIES ###
 
     @property
     def _class_name(self):
         return type(self).__name__
 
     @property
-    def _class_name_with_tools_package(self):
+    def _tools_package_qualified_class_name(self):
         return '{}.{}'.format(self._tools_package, self._class_name)
 
     @property

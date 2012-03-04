@@ -8,7 +8,7 @@ class InstrumentAttributeApplicationSpecifier(object):
         self.proportions = proportions
         self.tokens = tokens
 
-    ### READ / WRITE PUBLIC ATTRIBUTES ###
+    ### READ / WRITE PUBLIC PROPERTIES ###
 
     @apply
     def proportions():

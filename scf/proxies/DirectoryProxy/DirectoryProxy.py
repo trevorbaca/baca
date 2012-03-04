@@ -5,7 +5,7 @@ import subprocess
 
 class DirectoryProxy(AssetProxy):
 
-    ### OVERLOADS ###
+    ### SPECIAL METHODS ###
 
     def __eq__(self, other):
         if isinstance(other, type(self)):
@@ -19,15 +19,19 @@ class DirectoryProxy(AssetProxy):
     def __repr__(self):
         return '{}({!r})'.format(self.class_name, self.path_name)
 
-    ### READ-ONLY PUBLIC ATTRIBUTES ###
+    ### READ-ONLY PUBLIC PROPERTIES ###
 
     @property
     def directory_contents(self):
+        result = []
         for file_name in os.listdir(self.path_name):
             if file_name.endswith('.pyc'):
                 path_name = os.path.join(self.path_name, file_name)
                 os.remove(path_name)
-        return os.listdir(self.path_name)
+        for name in os.listdir(self.path_name):
+            if not name.startswith('.'):
+                result.append(name)
+        return result
 
     @property
     def directory_name(self):

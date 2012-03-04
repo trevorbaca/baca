@@ -8,7 +8,6 @@ class PartForcedChunkWithPatternedTokensKaleidEditor(KaleidEditor):
 
     ### CLASS ATTRIBUTES ###
 
-    target_class = kaleids.PartForcedChunkWithPatternedTokens
     target_manifest = TargetManifest(kaleids.PartForcedChunkWithPatternedTokens,
         ('pattern', None, 'pa', getters.get_nonzero_integers, True),
         ('denominator', None, 'de', getters.get_positive_integer_power_of_two, True),

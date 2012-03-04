@@ -10,7 +10,7 @@ class ParsableFileProxy(FileProxy):
         self.setup_statements = []
         self.teardown_statements = []
 
-    ### READ-ONLY PUBLIC ATTRIBUTES ###
+    ### READ-ONLY PUBLIC PROPERTIES ###
 
     @property
     def formatted_lines(self):

@@ -1,8 +1,4 @@
 from abjad import *
-#from abjad.tools import contexttools
-#from abjad.tools import iotools
-#from abjad.tools import markuptools
-#from abjad.tools import pitchtools
 import re
 
 
@@ -20,6 +16,24 @@ def is_available_underscore_delimited_lowercase_package_name(expr):
 
 def is_boolean(expr):
     return isinstance(expr, bool)
+
+def is_class_name_or_none(expr):
+    return expr is None or iotools.is_uppercamelcase_string(expr)
+
+def is_clef_token(expr):
+    try:
+        result = contexttools.ClefMark(expr)
+        return isinstance(result, contexttools.ClefMark)
+    except:
+        return False
+
+def is_constellation_circuit_id_pair(expr):
+    import baca
+    try:
+        baca.pitch.CC.get(*expr)
+        return True
+    except:
+        return False
 
 def is_existing_package_name(expr):
     from scf.core.SCFObject import SCFObject

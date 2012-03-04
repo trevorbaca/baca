@@ -12,8 +12,8 @@ class KaleidMaterialPackageMaker(MaterialPackageMaker):
     generic_output_name = 'kaleid'
     illustration_maker = staticmethod(make_illustration_from_output_material)
     output_material_checker = staticmethod(lambda x: isinstance(x, _RhytmicKaleid))
-    output_material_creation_wizard = KaleidCreationWizard
     output_material_editor = staticmethod(get_kaleid_editor)
+    output_material_maker = KaleidCreationWizard
     output_material_module_import_statements = ['import kaleids']
 
     ### PUBLIC METHODS ###
@@ -23,13 +23,13 @@ class KaleidMaterialPackageMaker(MaterialPackageMaker):
         formatted_input_parameters = output_material._formatted_input_parameters
         if formatted_input_parameters:
             lines.append('{} = {}('.format(
-                self.material_underscored_name, output_material._class_name_with_tools_package))
+                self.material_underscored_name, output_material._tools_package_qualified_class_name))
             for item in output_material._formatted_input_parameters[:-1]:
                 lines.append('\t{},'.format(item))
             item = output_material._formatted_input_parameters[-1]
             lines.append('\t{})'.format(item))
         else:
             lines.append('{} = {}()'.format(
-                self.material_underscored_name, output_material._class_name_with_tools_package))
+                self.material_underscored_name, output_material._tools_package_qualified_class_name))
         lines = [line + '\n' for line in lines]
         return lines

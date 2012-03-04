@@ -2,7 +2,6 @@ from abjad.tools import iotools
 from abjad.tools import markuptools
 from abjad.tools import mathtools
 from abjad.tools import pitchtools
-from scf.core.Session import Session
 import inspect
 import os
 import pprint
@@ -13,14 +12,15 @@ import sys
 class SCFObject(object):
     
     def __init__(self, session=None):
+        from scf.core.Session import Session
         self._session = session or Session()
 
-    ### OVERLOADS ###
+    ### SPECIAL METHODS ###
 
     def __repr__(self):
         return '{}()'.format(self.class_name)
 
-    ### READ-ONLY PUBLIC ATTRIBUTES ###
+    ### READ-ONLY PUBLIC PROPERTIES ###
 
     @property
     def backtracking_source(self):
@@ -269,8 +269,18 @@ class SCFObject(object):
         else:
             return repr(expr)
 
-    def get_repr_with_tools_package(self, expr):
-        return getattr(expr, '_repr_with_tools_package', repr(expr))
+    def get_tools_package_qualified_repr(self, expr):
+        return getattr(expr, '_tools_package_qualified_repr', repr(expr))
+
+    def get_tag_from_path_name(self, path_name, tag_name):
+        tags_file_name = os.path.join(path_name, 'tags.py')
+        if os.path.isfile(tags_file_name):
+            tags_file = open(tags_file_name, 'r')
+            tags_file_string = tags_file.read()
+            tags_file.close()
+            exec(tags_file_string)
+            result = locals().get('tags') or OrderedDict([])
+            return result.get(tag_name)
 
     def handle_raw_input(self, prompt, include_chevron=True, include_newline=True, prompt_character='>',
         capitalize_prompt=True):
@@ -325,6 +335,23 @@ class SCFObject(object):
                 return True
         return False
 
+    def list_public_directory_path_names_in_subtree(self, subtree_path_name):
+        result = []
+        for subtree_path_name, directory_names, file_names in os.walk(subtree_path_name):
+            if '.svn' not in subtree_path_name:
+                for directory_name in directory_names:
+                    if '.svn' not in directory_name:
+                        if directory_name[0].isalpha():
+                            result.append(os.path.join(subtree_path_name, directory_name))
+        return result
+
+    def list_public_package_path_names_in_subtree(self, subtree_path_name):
+        result = []
+        for directory_path_name in self.list_public_directory_path_names_in_subtree(subtree_path_name):
+            if '__init__.py' in os.listdir(directory_path_name):
+                result.append(directory_path_name)
+        return result
+
     def list_score_package_short_names(self, head=None):
         result = []
         for name in os.listdir(self.scores_directory_name):
@@ -359,6 +386,7 @@ class SCFObject(object):
         path_name = self.package_importable_name_to_path_name(package_importable_name)
         return os.path.exists(path_name)
 
+    # TODO: make this works: self.package_importable_name_to_path_name('sketches')
     def package_importable_name_to_path_name(self, package_importable_name):
         if package_importable_name is None:
             return
@@ -453,9 +481,9 @@ class SCFObject(object):
         self.display(['not yet implemented', ''])
         self.proceed()
 
-    def proceed(self, lines=None, prompt=True):
+    def proceed(self, lines=None, is_interactive=True):
         assert isinstance(lines, (tuple, list, str, type(None)))
-        if not prompt:
+        if not is_interactive:
             return
         if isinstance(lines, str):
             lines = [lines]

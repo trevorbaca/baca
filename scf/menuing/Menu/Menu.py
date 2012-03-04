@@ -11,12 +11,12 @@ class Menu(MenuSectionAggregator):
         self.sections.append(self.make_default_hidden_section(session=session, where=where))
         self.explicit_title = None
 
-    ### OVERLOADS ###
+    ### SPECIAL METHODS ###
 
     def __len__(self):
         return len(self.sections)
 
-    ### READ-ONLY PUBLIC ATTRIBUTES ###
+    ### READ-ONLY PUBLIC PROPERTIES ###
 
     @property
     def default_value(self):
@@ -43,6 +43,12 @@ class Menu(MenuSectionAggregator):
     @property
     def has_ranged_section(self):
         return any([section.is_ranged for section in self.sections])
+
+    @property
+    def hidden_section(self):
+        for section in self.sections:
+            if section.is_hidden:
+                return section
 
     @property
     def menu_entry_bodies(self):
@@ -123,7 +129,7 @@ class Menu(MenuSectionAggregator):
             result.extend(section.unpacked_menu_entries_optimized)
         return result
 
-    ### READ / WRITE PUBLIC ATTRIBUTES ###
+    ### READ / WRITE PUBLIC PROPERTIES ###
 
     @apply
     def explicit_title():
@@ -236,6 +242,8 @@ class Menu(MenuSectionAggregator):
                 self.session.transcribe_next_command = False
             if isinstance(self.session.user_input, str) and rest:
                 self.session.user_input = rest + ' ' + self.session.user_input
+            elif isinstance(self.session.user_input, str) and not rest:
+                self.session.user_input = self.session.user_input
             else:
                 self.session.user_input = rest
         else:

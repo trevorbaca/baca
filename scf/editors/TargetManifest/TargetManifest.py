@@ -9,14 +9,15 @@ class TargetManifest(object):
         for attribute_detail in attribute_details:
             self.attribute_details.append(AttributeDetail(*attribute_detail))
         self.is_keyed = kwargs.get('is_keyed', False)
+        self.target_name_attribute = kwargs.get('target_name_attribute')
 
-    ### OVERLOADS ###
+    ### SPECIAL METHODS ###
 
     def __repr__(self):
         parts = ', '.join([str(x) for x in self.attribute_details])
         return '{}({}, {})'.format(type(self).__name__, self.target_class.__name__, parts)
 
-    ### READ-ONLY ATTRIBUTES ###
+    ### READ-ONLY PROPERTIES ###
 
     @property
     def attribute_details(self):

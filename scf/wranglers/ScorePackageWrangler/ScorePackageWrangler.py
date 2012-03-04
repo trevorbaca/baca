@@ -1,6 +1,7 @@
 from abjad.tools import iotools
 from scf.wranglers.PackageWrangler import PackageWrangler
 from scf.proxies.ScorePackageProxy import ScorePackageProxy
+import os
 
 
 class ScorePackageWrangler(PackageWrangler):
@@ -11,7 +12,7 @@ class ScorePackageWrangler(PackageWrangler):
             score_internal_asset_container_importable_name_infix=None,
             session=session)
 
-    ### READ-ONLY PUBLIC ATTRIBUTES ###
+    ### READ-ONLY PUBLIC PROPERTIES ###
 
     @property
     def asset_class(self):
@@ -54,6 +55,12 @@ class ScorePackageWrangler(PackageWrangler):
                 result.append(asset_proxy)
             elif scores_to_show == 'mothballed' and is_mothballed:
                 result.append(asset_proxy)
+        return result
+
+    def list_visible_asset_short_names(self, head=None):
+        result = []
+        for path_name in self.list_visible_asset_path_names(head=head):
+            result.append(os.path.basename(path_name))
         return result
 
     def make_asset_interactively(self):

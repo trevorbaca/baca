@@ -9,7 +9,7 @@ class FileProxy(AssetProxy):
     generic_class_name = 'file'
     temporary_asset_short_name = 'temporary_file.txt'
 
-    ### READ-ONLY PUBLIC ATTRIBUTES ###
+    ### READ-ONLY PUBLIC PROPERTIES ###
 
     @property
     def extension(self):
@@ -40,7 +40,7 @@ class FileProxy(AssetProxy):
             file_reference = file(self.path_name, 'w')
             file_reference.write('')
             file_reference.close()
-        self.proceed(prompt=is_interactive)
+        self.proceed(is_interactive=is_interactive)
 
     def display_formatted_lines(self):
         self.display(self.formatted_lines)

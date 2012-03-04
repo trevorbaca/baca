@@ -9,12 +9,12 @@ class _DynamicsSpecifier(object):
     def __init__(self, minimum_prolated_duration = None):
         self.minimum_prolated_duration = minimum_prolated_duration
 
-    ### OVERLOADS ###
+    ### SPECIAL METHODS ###
 
     def __repr__(self):
         return '%s()' % (type(self).__name__)
 
-    ### READ / WRITE PUBLIC ATTRIBUTES ###
+    ### READ / WRITE PUBLIC PROPERTIES ###
 
     @apply
     def minimum_prolated_duration():

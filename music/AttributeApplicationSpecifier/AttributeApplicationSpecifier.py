@@ -16,7 +16,7 @@ class AttributeApplicationSpecifier(object):
         self.default = InstrumentAttributeApplicationSpecifier(self.proportions)
         self._init_instrument_attribute_application_specifiers()
 
-    ### OVERLOADS ###
+    ### SPECIAL METHODS ###
 
     ### PRIVATE METHODS ###
 

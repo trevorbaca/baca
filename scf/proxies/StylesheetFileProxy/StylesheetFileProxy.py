@@ -8,7 +8,7 @@ class StylesheetFileProxy(FileProxy):
     generic_class_name = 'stylesheet'
     temporary_asset_short_name = 'temporary_stylesheet.ly'
 
-    ### READ-ONLY ATTRIBUTES ###
+    ### READ-ONLY PROPERTIES ###
 
     @property
     def extension(self):

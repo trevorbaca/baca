@@ -9,7 +9,7 @@ class UserInputModuleProxy(ModuleProxy):
         self.user_input_wrapper_lines = []
         self.parse()
 
-    ### READ-ONLY PUBLIC ATTRIBUTES ###
+    ### READ-ONLY PUBLIC PROPERTIES ###
 
     @property
     def has_complete_user_input_wrapper_on_disk(self):

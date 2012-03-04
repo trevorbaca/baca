@@ -8,7 +8,6 @@ class SignalAffixedNoteFilledTokensKaleidEditor(KaleidEditor):
 
     ### CLASS ATTRIBUTES ###
 
-    target_class = kaleids.SignalAffixedNoteFilledTokens
     target_manifest = TargetManifest(kaleids.SignalAffixedNoteFilledTokens,
         ('prefix_signal', None, 'ps', getters.get_nonzero_integers, True),
         ('prefix_lengths', None, 'pl', getters.get_nonnegative_integers, True),

@@ -7,7 +7,6 @@ import os
 import sys
 
 
-# TODO: find way to add 'list package directory' user command, somehow
 class PackageProxy(DirectoryProxy, ImportableAssetProxy):
 
     def __init__(self, package_importable_name=None, session=None):
@@ -15,12 +14,12 @@ class PackageProxy(DirectoryProxy, ImportableAssetProxy):
         DirectoryProxy.__init__(self, path_name=path_name, session=session)
         ImportableAssetProxy.__init__(self, asset_full_name=package_importable_name, session=self.session)
 
-    ### OVERLOADS ###
+    ### SPECIAL METHODS ###
 
     def __repr__(self):
         return ImportableAssetProxy.__repr__(self)
 
-    ### READ-ONLY PUBLIC ATTRIBUTES ###
+    ### READ-ONLY PUBLIC PROPERTIES ###
 
     @property
     def directory_name(self):
@@ -66,8 +65,7 @@ class PackageProxy(DirectoryProxy, ImportableAssetProxy):
     # TODO: write test
     @property
     def initializer_file_proxy(self):
-        if self.has_initializer:
-            return InitializerFileProxy(self.initializer_file_name, session=self.session)
+        return InitializerFileProxy(self.initializer_file_name, session=self.session)
 
     @property
     def package_root_name(self):
@@ -109,7 +107,11 @@ class PackageProxy(DirectoryProxy, ImportableAssetProxy):
 
     @property
     def tags_file_proxy(self):
-        if self.has_tags_file:
+        if not self.has_tags_file:
+            tags_file = open(self.tags_file_name, 'w')
+            tags_file.write('')
+            tags_file.close()
+        if True:
             return InitializerFileProxy(self.tags_file_name, session=self.session)
 
     ### PUBLIC METHODS ###
@@ -117,15 +119,12 @@ class PackageProxy(DirectoryProxy, ImportableAssetProxy):
     def add_tag(self, tag_name, tag_value):
         tags = self.get_tags()
         tags[tag_name] = tag_value
-        if self.has_tags_file:
-            self.tags_file_proxy.write_tags_to_disk(tags)
-        else:
-            self.initializer_file_proxy.write_tags_to_disk(tags)
+        self.tags_file_proxy.write_tags_to_disk(tags)
 
     def add_tag_interactively(self):
         getter = self.make_getter(where=self.where())
         getter.append_string('tag name')
-        getter.append_string('tag value')
+        getter.append_expr('tag value')
         result = getter.run()
         if self.backtrack():
             return
@@ -149,14 +148,13 @@ class PackageProxy(DirectoryProxy, ImportableAssetProxy):
         self.proceed(line)
 
     def get_tags(self):
-        import collections
-        tags = self.read_tags_from_tags_file()
-        if tags is None:
-            tags = safe_import(locals(), self.short_name, 'tags', 
-                source_parent_package_importable_name=self.parent_package_importable_name)
-        if tags is None:
-            tags = collections.OrderedDict([])
-        #tags = self.read_tags_from_disk() or collections.OrderedDict([])
+        from collections import OrderedDict
+        self.tags_file_proxy.conditionally_make_empty_asset()
+        file_pointer = open(self.tags_file_name, 'r')
+        file_contents_string = file_pointer.read()
+        file_pointer.close()
+        exec(file_contents_string)
+        tags = locals().get('tags') or OrderedDict([])
         return tags
 
     def handle_tags_menu_result(self, result):
@@ -196,30 +194,16 @@ class PackageProxy(DirectoryProxy, ImportableAssetProxy):
         self.pop_breadcrumb()
         self.restore_breadcrumbs(cache=cache)
 
-    def read_tags_from_tags_file(self):
-        from collections import OrderedDict
-        if not os.path.exists(self.tags_file_name):
-            return
-        file_pointer = open(self.tags_file_name, 'r')
-        file_contents_string = file_pointer.read()
-        file_pointer.close()
-        exec(file_contents_string)
-        result = locals().get('tags') or OrderedDict([])
-        return result
-
     def remove_initializer(self, is_interactive=True):
         if self.has_initializer:
             os.remove(self.initializer_file_name)
             line = 'initializer deleted.'
-            self.proceed(line, prompt=is_interactive)
+            self.proceed(line, is_interactive=is_interactive)
 
     def remove_tag(self, tag_name):
         tags = self.get_tags()
         del(tags[tag_name])
-        if self.has_tags_file:
-            self.tags_file_proxy.write_tags_to_disk(tags)
-        else:
-            self.initializer_file_proxy.write_tags_to_disk(tags)
+        self.tags_file_proxy.write_tags_to_disk(tags)
 
     def remove_tag_interactively(self):
         getter = self.make_getter(where=self.where())

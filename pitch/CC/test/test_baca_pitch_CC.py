@@ -25,7 +25,7 @@ def test_baca_pitch_CC_02():
     assert len(baca.pitch.CC) == 8
 
 
-## TEST PRIVATE ATTRIBUTES ##
+## TEST PRIVATE PROPERTIES ##
 
 def test_baca_pitch_CC_03():
     '''Test generator numbers.'''
@@ -63,7 +63,7 @@ def test_baca_pitch_CCa06():
     assert baca.pitch.CC.get(1, 4) is baca.pitch.CC[0][3]
 
 
-## TEST PUBLIC ATTRIBUTES ##
+## TEST PUBLIC PROPERTIES ##
 
 def test_baca_pitch_CC_07():
     '''Test generators.'''

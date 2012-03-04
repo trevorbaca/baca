@@ -3,7 +3,7 @@ from scf.proxies.FileProxy import FileProxy
 
 class IllustrationLyFileProxy(FileProxy):
 
-    ### READ-ONLY ATTRIBUTES ###
+    ### READ-ONLY PROPERTIES ###
 
     @property
     def extension(self):

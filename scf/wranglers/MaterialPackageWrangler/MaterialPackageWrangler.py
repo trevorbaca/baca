@@ -1,4 +1,5 @@
 from abjad.tools import iotools
+from scf import predicates
 from scf.wranglers.PackageWrangler import PackageWrangler
 import collections
 import os
@@ -17,7 +18,7 @@ class MaterialPackageWrangler(PackageWrangler):
             session=session)
         self._material_package_maker_wrangler = MaterialPackageMakerWrangler(session=self.session)
 
-    ### READ-ONLY PUBLIC ATTRIBUTES ###
+    ### READ-ONLY PUBLIC PROPERTIES ###
 
     @property
     def breadcrumb(self):
@@ -32,8 +33,21 @@ class MaterialPackageWrangler(PackageWrangler):
     def get_asset_proxy(self, package_importable_name):
         return self.material_package_maker_wrangler.get_asset_proxy(package_importable_name)
 
-    # TODO: write test
-    def get_new_material_package_importable_name_interactively(self):
+    def get_appropriate_material_package_proxy(self, 
+        material_package_maker_class_name, material_package_importable_name):
+        import scf
+        if material_package_maker_class_name is None: 
+            material_package_proxy = scf.proxies.MaterialPackageProxy(
+                material_package_importable_name, session=self.session)
+        else:
+            command = 'material_package_proxy = '
+            command += 'scf.makers.{}(material_package_importable_name, session=self.session)'
+            command = command.format(material_package_maker_class_name)
+            exec(command)
+        return material_package_proxy
+
+    def get_available_material_package_importable_name_interactively(self, user_input=None):
+        self.assign_user_input(user_input=user_input)
         while True:
             getter = self.make_getter(where=self.where())
             getter.append_space_delimited_lowercase_string('material name')
@@ -54,6 +68,8 @@ class MaterialPackageWrangler(PackageWrangler):
     def handle_main_menu_result(self, result):
         if result == 'd':
             self.make_data_package_interactively()
+        elif result == 's':
+            self.make_numeric_sequence_package_interactively()
         elif result == 'h':
             self.make_handmade_material_package_interactively()
         elif result == 'm':
@@ -69,29 +85,37 @@ class MaterialPackageWrangler(PackageWrangler):
     def make_asset_interactively(self):
         return NotImplemented
 
-    # TODO: write test
-    def make_data_package_interactively(self):
+    def make_data_package(self, material_package_importable_name, tags=None):
+        tags = tags or {}
+        tags['material_package_maker_class_name'] = None
+        tags['should_have_illustration'] = False
+        tags['should_have_user_input_module'] = False
+        self.make_material_package(material_package_importable_name, tags=tags)
+
+    def make_data_package_interactively(self, tags=None, user_input=None):
+        self.assign_user_input(user_input=user_input)
         self.push_backtrack()
-        material_package_importable_name = self.get_new_material_package_importable_name_interactively()
+        material_package_importable_name = self.get_available_material_package_importable_name_interactively()
         self.pop_backtrack()
         if self.backtrack():
             return
-        material_package_maker_class_name = None
-        should_have_illustration = False
-        should_have_user_input_module = False
-        self.make_material_package(material_package_importable_name, 
-            material_package_maker_class_name, 
-            should_have_illustration, should_have_user_input_module)
+        self.make_data_package(material_package_importable_name, tags=tags)
 
-    # TODO: write test
-    def make_handmade_material_package_interactively(self):
-        material_package_importable_name = self.get_new_material_package_importable_name_interactively()
-        material_package_maker_class_name = None
-        should_have_illustration = True
-        should_have_user_input_module = False
-        self.make_material_package(material_package_importable_name, 
-            material_package_maker_class_name, 
-            should_have_illustration, should_have_user_input_module)
+    def make_handmade_material_package(self, material_package_importable_name, tags=None):
+        tags = tags or {}
+        tags['material_package_maker_class_name'] = None
+        tags['should_have_illustration'] = True
+        tags['should_have_user_input_module'] = False
+        self.make_material_package(material_package_importable_name, tags=tags)
+
+    def make_handmade_material_package_interactively(self, user_input=None):
+        self.assign_user_input(user_input=user_input)
+        self.push_backtrack()
+        material_package_importable_name = self.get_available_material_package_importable_name_interactively()
+        self.pop_backtrack()
+        if self.backtrack():
+            return
+        self.make_handmade_material_package(material_package_importable_name)
 
     def make_main_menu(self, head=None):
         menu, section = self.make_menu(where=self.where(), is_numbered=True, is_keyed=False)
@@ -101,12 +125,27 @@ class MaterialPackageWrangler(PackageWrangler):
         section.append(('h', 'handmade'))
         section.append(('m', 'maker-made'))
         hidden_section = menu.make_section(is_hidden=True)
+        hidden_section.append(('s', 'create numeric sequence'))
         hidden_section.append(('missing', 'create missing packages'))
         hidden_section.append(('profile', 'profile packages'))
         return menu
 
-    # TODO: write test
-    def make_makermade_material_package_interactively(self):
+    def make_makermade_material_package(self, 
+        material_package_importable_name, material_package_maker_class_name, tags=None):
+        tags = tags or {}
+        command = 'from scf.makers import {} as material_package_maker_class'.format(
+            material_package_maker_class_name)
+        exec(command)
+        should_have_user_input_module = getattr(
+            material_package_maker_class, 'should_have_user_input_module', True)
+        should_have_illustration = hasattr(material_package_maker_class, 'illustration_maker')
+        tags['material_package_maker_class_name'] = material_package_maker_class_name
+        tags['should_have_illustration'] = should_have_illustration
+        tags['should_have_user_input_module'] = should_have_user_input_module
+        self.make_material_package(material_package_importable_name, tags=tags)
+
+    def make_makermade_material_package_interactively(self, user_input=None):
+        self.assign_user_input(user_input=user_input)
         self.push_backtrack()
         result = self.material_package_maker_wrangler.select_asset_importable_name_interactively(
             cache=True, clear=False)
@@ -116,68 +155,33 @@ class MaterialPackageWrangler(PackageWrangler):
         material_package_maker_importable_name = result
         material_package_maker_class_name = material_package_maker_importable_name.split('.')[-1]
         self.push_backtrack()
-        material_package_importable_name = self.get_new_material_package_importable_name_interactively()
+        material_package_importable_name = self.get_available_material_package_importable_name_interactively()
         self.pop_backtrack()
         if self.backtrack():
             return
-        command = 'from scf.makers import {} as material_package_maker_class'.format(
-            material_package_maker_class_name)
-        exec(command)
-        should_have_user_input_module = getattr(
-            material_package_maker_class, 'should_have_user_input_module', True)
-        should_have_illustration = hasattr(material_package_maker_class, 'illustration_maker')
-        self.make_material_package(material_package_importable_name, 
-            material_package_maker_class_name, 
-            should_have_illustration, should_have_user_input_module)
+        self.make_makermade_material_package(
+            material_package_importable_name, material_package_maker_class_name)
 
-    # TODO: write test
-    def make_material_package(self, material_package_importable_name, material_package_maker_class_name, 
-        should_have_illustration, should_have_user_input_module, prompt=False):
-        '''True on success.'''
-        import scf
-        assert iotools.is_underscore_delimited_lowercase_package_name(material_package_importable_name)
-        assert material_package_maker_class_name is None or iotools.is_uppercamelcase_string(
-            material_package_maker_class_name)
-        assert isinstance(should_have_illustration, bool)
-        assert isinstance(should_have_user_input_module, bool)
+    def make_material_package(self, material_package_importable_name, is_interactive=False, tags=None):
+        tags = collections.OrderedDict(tags or {})
+        tags['is_material_package'] = True
         path_name = self.package_importable_name_to_path_name(material_package_importable_name)
-        if os.path.exists(path_name):
-            line = 'package {!r} already exists.'.format(material_name)
-            self.proceed(line, prompt=prompt)
-            return False
+        assert not os.path.exists(path_name)
         os.mkdir(path_name)
-        file(os.path.join(path_name, '__init__.py'), 'w').write('')
-        if material_package_maker_class_name is None: 
-            material_package_proxy = scf.proxies.MaterialPackageProxy(
-                material_package_importable_name, session=self.session)
-        else:
-            command = 'material_package_proxy = '
-            command += 'scf.makers.{}(material_package_importable_name, session=self.session)'
-            command = command.format(material_package_maker_class_name)
-            exec(command)
-        tags = collections.OrderedDict([])
-        tags['material_package_maker_class_name'] = material_package_maker_class_name
-        tags['should_have_illustration'] = should_have_illustration
-        tags['should_have_user_input_module'] = should_have_user_input_module
-        material_package_proxy.initializer_file_proxy.write_stub_to_disk(tags=tags)
-        if material_package_maker_class_name is None:
-            file(os.path.join(path_name, 'material_definition.py'), 'w').write('')
-            is_data_only = not should_have_illustration
-            material_package_proxy.material_definition_module_proxy.write_stub_to_disk(
-                is_data_only, prompt=False)
-        if should_have_user_input_module:
-            material_package_proxy.write_stub_user_input_module_to_disk(prompt=False)
+        material_package_maker_class_name = tags.get('material_package_maker_class_name')
+        pair = (material_package_maker_class_name, material_package_importable_name)
+        material_package_proxy = self.get_appropriate_material_package_proxy(*pair)
+        material_package_proxy.initializer_file_proxy.write_stub_to_disk()
+        material_package_proxy.tags_file_proxy.write_tags_to_disk(tags)
+        material_package_proxy.conditionally_write_stub_material_definition_module_to_disk()
+        material_package_proxy.conditionally_write_stub_user_input_module_to_disk()
         line = 'material package {!r} created.'.format(material_package_importable_name)
-        self.proceed(line, prompt=prompt)
-        return True
+        self.proceed(line, is_interactive=is_interactive)
 
-    # TODO: write tests
-    def package_root_name_to_materials_package_importable_name(self, package_root_name):
-        assert isinstance(package_root_name, str)
-        result = []
-        result.append(package_root_name)
-        if not package_root_name == self.score_external_materials_package_importable_name:
-            result.append('mus')
-        result.append('materials')
-        result = self.dot_join(result)
-        return result
+    def make_numeric_sequence_package(self, package_importable_name):
+        tags = {'is_numeric_sequence': True}
+        self.make_data_package(package_importable_name, tags=tags)
+        
+    def make_numeric_sequence_package_interactively(self, user_input=None):
+        tags = {'is_numeric_sequence': True}
+        self.make_data_package_interactively(tags=tags, user_input=user_input)

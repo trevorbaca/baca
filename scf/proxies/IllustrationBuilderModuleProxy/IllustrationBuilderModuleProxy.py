@@ -5,7 +5,7 @@ from scf.helpers import safe_import
 
 class IllustrationBuilderModuleProxy(BasicModuleProxy):
 
-    ### READ-ONLY PUBLIC ATTRIBUTES ###
+    ### READ-ONLY PUBLIC PROPERTIES ###
 
     @property
     def illustration_ly_file_name(self):
@@ -42,4 +42,4 @@ class IllustrationBuilderModuleProxy(BasicModuleProxy):
         self.body_lines.append(line)
         self.body_lines.append('illustration = lilypondfiletools.make_basic_lilypond_file(score)\n')
         self.write_to_disk()
-        self.proceed('stub illustration builder written to disk.', prompt=prompt)
+        self.proceed('stub illustration builder written to disk.', is_interactive=prompt)

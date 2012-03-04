@@ -7,7 +7,7 @@ class ImportableAssetProxy(AssetProxy):
         path_name = self.asset_full_name_to_path_name(asset_full_name)
         AssetProxy.__init__(self, path_name=path_name, session=session)   
 
-    ### OVERLOADS ###
+    ### SPECIAL METHODS ###
 
     def __repr__(self):
         if self.importable_name is not None:
@@ -15,7 +15,7 @@ class ImportableAssetProxy(AssetProxy):
         else:
             return '{}()'.format(self.class_name)
 
-    ### READ-ONLY ATTRIBUTES ###
+    ### READ-ONLY PROPERTIES ###
 
     @property
     def importable_name(self):

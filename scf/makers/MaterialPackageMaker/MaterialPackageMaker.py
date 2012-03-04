@@ -6,6 +6,17 @@ import os
 
 class MaterialPackageMaker(MaterialPackageProxy):
 
+    ### CLASS ATTRIBUTES ###
+
+    generic_output_name = None
+    illustration_maker = None
+    output_material_checker = None
+    output_material_editor = None
+    output_material_maker = None
+    output_material_module_import_statements = []
+
+    ### INITIALIZER ###
+    
     def __init__(self, package_importable_name=None, session=None):
         MaterialPackageProxy.__init__(self, package_importable_name=package_importable_name, session=session)
         self._user_input_wrapper_in_memory = self._initialize_user_input_wrapper_in_memory()
@@ -30,7 +41,7 @@ class MaterialPackageMaker(MaterialPackageProxy):
             user_input_wrapper = self.initialize_empty_user_input_wrapper()
         return user_input_wrapper
 
-    ### READ-ONLY PUBLIC ATTRIBUTES ###
+    ### READ-ONLY PUBLIC PROPERTIES ###
 
     @property
     def illustration(self):
@@ -58,7 +69,7 @@ class MaterialPackageMaker(MaterialPackageProxy):
         else:
             self.user_input_wrapper_in_memory.clear()
             self.user_input_module_proxy.write_user_input_wrapper_to_disk(self.user_input_wrapper_in_memory)
-            self.proceed('user input wrapper cleared and written to disk.', prompt=prompt)
+            self.proceed('user input wrapper cleared and written to disk.', is_interactive=prompt)
 
     def edit_user_input_wrapper_at_number(self, number, include_newline=True):
         number = int(number)
@@ -106,7 +117,7 @@ class MaterialPackageMaker(MaterialPackageProxy):
         for key, value in user_input_demo_values:
             self.user_input_wrapper_in_memory[key] = value
         self.user_input_module_proxy.write_user_input_wrapper_to_disk(self.user_input_wrapper_in_memory)
-        self.proceed('demo values loaded and written to disk.', prompt=prompt)
+        self.proceed('demo values loaded and written to disk.', is_interactive=prompt)
 
     def make_main_menu_section_for_user_input_module(self, main_menu, hidden_section):
         section = main_menu.make_section(is_parenthetically_numbered=True)
@@ -161,9 +172,9 @@ class MaterialPackageMaker(MaterialPackageProxy):
             lines.append(line)
         lines.append('')
         self.display(lines)
-        self.proceed(prompt=prompt)
+        self.proceed(is_interactive=prompt)
 
-    def write_stub_user_input_module_to_disk(self, prompt=True):
+    def write_stub_user_input_module_to_disk(self, is_interactive=False):
         empty_user_input_wrapper = self.initialize_empty_user_input_wrapper()
         self.user_input_module_proxy.write_user_input_wrapper_to_disk(empty_user_input_wrapper)
-        self.proceed('stub user input module written to disk.', prompt=prompt)
+        self.proceed('stub user input module written to disk.', is_interactive=is_interactive)
