@@ -54,6 +54,8 @@ class MaterialPackageWrangler(PackageWrangler):
     def handle_main_menu_result(self, result):
         if result == 'd':
             self.make_data_package_interactively()
+        elif result == 's':
+            self.make_numeric_sequence_package_interactively()
         elif result == 'h':
             self.make_handmade_material_package_interactively()
         elif result == 'm':
@@ -98,6 +100,7 @@ class MaterialPackageWrangler(PackageWrangler):
         section.tokens = self.make_visible_asset_menu_tokens(head=head)
         section = menu.make_section()
         section.append(('d', 'data-only'))
+        section.append(('s', 'numeric sequence'))
         section.append(('h', 'handmade'))
         section.append(('m', 'maker-made'))
         hidden_section = menu.make_section(is_hidden=True)
@@ -133,7 +136,6 @@ class MaterialPackageWrangler(PackageWrangler):
     # TODO: write test
     def make_material_package(self, material_package_importable_name, material_package_maker_class_name, 
         should_have_illustration, should_have_user_input_module, prompt=False):
-        '''True on success.'''
         import scf
         assert iotools.is_underscore_delimited_lowercase_package_name(material_package_importable_name)
         assert material_package_maker_class_name is None or iotools.is_uppercamelcase_string(
@@ -144,7 +146,7 @@ class MaterialPackageWrangler(PackageWrangler):
         if os.path.exists(path_name):
             line = 'package {!r} already exists.'.format(material_name)
             self.proceed(line, prompt=prompt)
-            return False
+            return
         os.mkdir(path_name)
         file(os.path.join(path_name, '__init__.py'), 'w').write('')
         if material_package_maker_class_name is None: 
@@ -169,7 +171,6 @@ class MaterialPackageWrangler(PackageWrangler):
             material_package_proxy.write_stub_user_input_module_to_disk(prompt=False)
         line = 'material package {!r} created.'.format(material_package_importable_name)
         self.proceed(line, prompt=prompt)
-        return True
 
     # TODO: write tests
     def package_root_name_to_materials_package_importable_name(self, package_root_name):
