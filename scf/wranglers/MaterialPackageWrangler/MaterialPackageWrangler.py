@@ -32,8 +32,21 @@ class MaterialPackageWrangler(PackageWrangler):
     def get_asset_proxy(self, package_importable_name):
         return self.material_package_maker_wrangler.get_asset_proxy(package_importable_name)
 
-    # TODO: write test
-    def get_new_material_package_importable_name_interactively(self):
+    def get_appropriate_material_package_proxy(self, 
+        material_package_maker_class_name, material_package_importable_name):
+        import scf
+        if material_package_maker_class_name is None: 
+            material_package_proxy = scf.proxies.MaterialPackageProxy(
+                material_package_importable_name, session=self.session)
+        else:
+            command = 'material_package_proxy = '
+            command += 'scf.makers.{}(material_package_importable_name, session=self.session)'
+            command = command.format(material_package_maker_class_name)
+            exec(command)
+        return material_package_proxy
+
+    def get_available_material_package_importable_name_interactively(self, user_input=None):
+        self.assign_user_input(user_input=user_input)
         while True:
             getter = self.make_getter(where=self.where())
             getter.append_space_delimited_lowercase_string('material name')
@@ -50,19 +63,6 @@ class MaterialPackageWrangler(PackageWrangler):
                 self.display([line, ''])
             else:
                 return material_package_importable_name
-
-    def get_appropriate_material_package_proxy(self, 
-        material_package_maker_class_name, material_package_importable_name):
-        import scf
-        if material_package_maker_class_name is None: 
-            material_package_proxy = scf.proxies.MaterialPackageProxy(
-                material_package_importable_name, session=self.session)
-        else:
-            command = 'material_package_proxy = '
-            command += 'scf.makers.{}(material_package_importable_name, session=self.session)'
-            command = command.format(material_package_maker_class_name)
-            exec(command)
-        return material_package_proxy
 
     def handle_main_menu_result(self, result):
         if result == 'd':
@@ -98,7 +98,7 @@ class MaterialPackageWrangler(PackageWrangler):
     # TODO: write test
     def make_data_package_interactively(self, tags=None):
         self.push_backtrack()
-        material_package_importable_name = self.get_new_material_package_importable_name_interactively()
+        material_package_importable_name = self.get_available_material_package_importable_name_interactively()
         self.pop_backtrack()
         if self.backtrack():
             return
@@ -118,7 +118,7 @@ class MaterialPackageWrangler(PackageWrangler):
     # TODO: write test
     def make_handmade_material_package_interactively(self):
         self.push_backtrack()
-        material_package_importable_name = self.get_new_material_package_importable_name_interactively()
+        material_package_importable_name = self.get_available_material_package_importable_name_interactively()
         self.pop_backtrack()
         if self.backtrack():
             return
@@ -163,7 +163,7 @@ class MaterialPackageWrangler(PackageWrangler):
         material_package_maker_importable_name = result
         material_package_maker_class_name = material_package_maker_importable_name.split('.')[-1]
         self.push_backtrack()
-        material_package_importable_name = self.get_new_material_package_importable_name_interactively()
+        material_package_importable_name = self.get_available_material_package_importable_name_interactively()
         self.pop_backtrack()
         if self.backtrack():
             return
