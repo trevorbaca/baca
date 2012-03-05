@@ -203,14 +203,3 @@ class MaterialPackageWrangler(PackageWrangler):
             material_package_proxy.write_stub_user_input_module_to_disk(prompt=False)
         line = 'material package {!r} created.'.format(material_package_importable_name)
         self.proceed(line, is_interactive=is_interactive)
-
-    # TODO: write tests
-    def package_root_name_to_materials_package_importable_name(self, package_root_name):
-        assert isinstance(package_root_name, str)
-        result = []
-        result.append(package_root_name)
-        if not package_root_name == self.score_external_materials_package_importable_name:
-            result.append('mus')
-        result.append('materials')
-        result = self.dot_join(result)
-        return result
