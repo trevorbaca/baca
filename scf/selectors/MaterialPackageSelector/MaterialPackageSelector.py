@@ -23,3 +23,6 @@ class MaterialPackageSelector(Selector):
                     self.generic_output_name:
                     result.append(package_path_name)
         return result
+
+    def list_target_items(self):
+        return self.list_material_package_path_names_in_current_score()
