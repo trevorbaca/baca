@@ -85,7 +85,6 @@ class MaterialPackageWrangler(PackageWrangler):
     def make_asset_interactively(self):
         return NotImplemented
 
-    # TODO: write test
     def make_data_package(self, material_package_importable_name, tags=None):
         material_package_maker_class_name = None
         should_have_illustration = False
@@ -96,8 +95,8 @@ class MaterialPackageWrangler(PackageWrangler):
             should_have_user_input_module,
             tags=tags)
 
-    # TODO: write test
-    def make_data_package_interactively(self, tags=None):
+    def make_data_package_interactively(self, user_input=None):
+        self.assign_user_input(user_input=user_input)
         self.push_backtrack()
         material_package_importable_name = self.get_available_material_package_importable_name_interactively()
         self.pop_backtrack()
@@ -178,14 +177,14 @@ class MaterialPackageWrangler(PackageWrangler):
         assert predicates.is_class_name_or_none(material_package_maker_class_name)
         assert isinstance(should_have_illustration, bool)
         assert isinstance(should_have_user_input_module, bool)
-        tags = tags or {}
         path_name = self.package_importable_name_to_path_name(material_package_importable_name)
         assert not os.path.exists(path_name)
         os.mkdir(path_name)
         file(os.path.join(path_name, '__init__.py'), 'w').write('')
         material_package_proxy = self.get_appropriate_material_package_proxy(
             material_package_maker_class_name, material_package_importable_name)
-        tags = collections.OrderedDict([])
+        tags = tags or {}
+        tags = collections.OrderedDict(tags)
         tags['material_package_maker_class_name'] = material_package_maker_class_name
         tags['should_have_illustration'] = should_have_illustration
         tags['should_have_user_input_module'] = should_have_user_input_module
