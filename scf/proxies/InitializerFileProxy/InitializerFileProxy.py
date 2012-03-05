@@ -50,6 +50,7 @@ class InitializerFileProxy(ParsableFileProxy):
         safe_import_line = safe_import_line.format(source_module_short_name, source_module_attribute_name)
         return self.has_line(safe_import_line)
 
+    # TODO: move to TagsFileProxy
     def make_tag_lines(self, tags):
         if tags:
             lines = []
@@ -129,6 +130,7 @@ class InitializerFileProxy(ParsableFileProxy):
         self.safe_import_statements[:] = safe_import_statements
         self.write_to_disk()
 
+    # TODO: move to TagsFileProxy
     def restore_interactively(self, prompt=True):
         import scf
         getter = self.make_getter(where=self.where())
@@ -157,16 +159,15 @@ class InitializerFileProxy(ParsableFileProxy):
         tags = collections.OrderedDict([])
         tags['should_have_illustration'] = should_have_illustration
         tags['material_package_maker_class_name'] = material_package_maker_class_name
-        self.write_stub_to_disk(tags=tags)
+        self.write_stub_to_disk()
         self.proceed('initializer restored.', is_interactive=prompt)
 
-    def write_stub_to_disk(self, tags=None):
+    # TODO: duplicate in TagsFileProxy
+    def write_stub_to_disk(self):
         self.clear()
-        self.setup_statements.append('from collections import OrderedDict\n')
-        tag_lines = self.make_tag_lines(tags)
-        self.tag_lines.extend(tag_lines[:])
         self.write_to_disk()
 
+    # TODO: move to TagsFileProxy
     def write_tags_to_disk(self, tags):
         self.parse()
         ordered_dict_import_statement = 'from collections import OrderedDict\n'

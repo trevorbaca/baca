@@ -150,6 +150,7 @@ class PackageProxy(DirectoryProxy, ImportableAssetProxy):
 
     def get_tags(self):
         import collections
+        # TODO: deprecate following 6 lines in favor of commented-out line below
         tags = self.read_tags_from_tags_file()
         if tags is None:
             tags = safe_import(locals(), self.short_name, 'tags', 
@@ -198,6 +199,7 @@ class PackageProxy(DirectoryProxy, ImportableAssetProxy):
 
     def read_tags_from_tags_file(self):
         from collections import OrderedDict
+        # TODO: change to self.tags_file_proxy.conditionally_make_empty_asset()
         if not os.path.exists(self.tags_file_name):
             return
         file_pointer = open(self.tags_file_name, 'r')
