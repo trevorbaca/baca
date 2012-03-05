@@ -1,4 +1,5 @@
 from abjad.tools import iotools
+from scf import predicates
 from scf.wranglers.PackageWrangler import PackageWrangler
 import collections
 import os
@@ -173,18 +174,13 @@ class MaterialPackageWrangler(PackageWrangler):
     # TODO: write test
     def make_material_package(self, material_package_importable_name, material_package_maker_class_name, 
         should_have_illustration, should_have_user_input_module, is_interactive=False, tags=None):
-        import scf
         assert iotools.is_underscore_delimited_lowercase_package_name(material_package_importable_name)
-        assert material_package_maker_class_name is None or iotools.is_uppercamelcase_string(
-            material_package_maker_class_name)
+        assert predicates.is_class_name_or_none(material_package_maker_class_name)
         assert isinstance(should_have_illustration, bool)
         assert isinstance(should_have_user_input_module, bool)
         tags = tags or {}
         path_name = self.package_importable_name_to_path_name(material_package_importable_name)
-        if os.path.exists(path_name):
-            line = 'package {!r} already exists.'.format(material_name)
-            self.proceed(line, is_interactive=is_interactive)
-            return
+        assert not os.path.exists(path_name)
         os.mkdir(path_name)
         file(os.path.join(path_name, '__init__.py'), 'w').write('')
         material_package_proxy = self.get_appropriate_material_package_proxy(
