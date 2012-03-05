@@ -158,7 +158,7 @@ class InitializerFileProxy(ParsableFileProxy):
         tags['should_have_illustration'] = should_have_illustration
         tags['material_package_maker_class_name'] = material_package_maker_class_name
         self.write_stub_to_disk(tags=tags)
-        self.proceed('initializer restored.', prompt=prompt)
+        self.proceed('initializer restored.', is_interactive=prompt)
 
     def write_stub_to_disk(self, tags=None):
         self.clear()

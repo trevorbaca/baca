@@ -480,9 +480,9 @@ class SCFObject(object):
         self.display(['not yet implemented', ''])
         self.proceed()
 
-    def proceed(self, lines=None, prompt=True):
+    def proceed(self, lines=None, is_interactive=True):
         assert isinstance(lines, (tuple, list, str, type(None)))
-        if not prompt:
+        if not is_interactive:
             return
         if isinstance(lines, str):
             lines = [lines]

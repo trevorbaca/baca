@@ -135,7 +135,7 @@ class MaterialPackageWrangler(PackageWrangler):
 
     # TODO: write test
     def make_material_package(self, material_package_importable_name, material_package_maker_class_name, 
-        should_have_illustration, should_have_user_input_module, prompt=False):
+        should_have_illustration, should_have_user_input_module, is_interactive=False):
         import scf
         assert iotools.is_underscore_delimited_lowercase_package_name(material_package_importable_name)
         assert material_package_maker_class_name is None or iotools.is_uppercamelcase_string(
@@ -145,7 +145,7 @@ class MaterialPackageWrangler(PackageWrangler):
         path_name = self.package_importable_name_to_path_name(material_package_importable_name)
         if os.path.exists(path_name):
             line = 'package {!r} already exists.'.format(material_name)
-            self.proceed(line, prompt=prompt)
+            self.proceed(line, is_interactive=is_interactive)
             return
         os.mkdir(path_name)
         file(os.path.join(path_name, '__init__.py'), 'w').write('')
@@ -170,7 +170,7 @@ class MaterialPackageWrangler(PackageWrangler):
         if should_have_user_input_module:
             material_package_proxy.write_stub_user_input_module_to_disk(prompt=False)
         line = 'material package {!r} created.'.format(material_package_importable_name)
-        self.proceed(line, prompt=prompt)
+        self.proceed(line, is_interactive=is_interactive)
 
     # TODO: write tests
     def package_root_name_to_materials_package_importable_name(self, package_root_name):

@@ -79,11 +79,11 @@ class ModuleProxy(ParsableFileProxy, ImportableAssetProxy):
     
     def run_abjad(self, prompt=True):
         os.system('abjad {}'.format(self.path_name))
-        self.proceed('file executed', prompt=prompt)
+        self.proceed('file executed', is_interactive=prompt)
 
     def run_python(self, prompt=True):
         os.system('python {}'.format(self.path_name))
-        self.proceed('file executed.', prompt=prompt)
+        self.proceed('file executed.', is_interactive=prompt)
 
     def unimport(self):
         self.remove_package_importable_name_from_sys_modules(self.module_importable_name)

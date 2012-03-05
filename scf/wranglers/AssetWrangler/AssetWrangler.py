@@ -118,7 +118,7 @@ class AssetWrangler(SCFObject):
     def conditionally_make_asset_container_packages(self, is_interactive=False):
         self.conditionally_make_score_external_asset_container_package()
         self.conditionally_make_score_internal_asset_container_packages()
-        self.proceed('missing packages created.', prompt=is_interactive)
+        self.proceed('missing packages created.', is_interactive=is_interactive)
 
     def conditionally_make_score_external_asset_container_package(self):
         for importable_name in self.list_score_external_asset_container_importable_names():
@@ -418,7 +418,7 @@ class AssetWrangler(SCFObject):
     def svn_add(self, is_interactive=True):
         for asset_proxy in self.list_visible_asset_proxies():
             asset_proxy.svn_add(is_interactive=False)
-        self.proceed(prompt=is_interactive)
+        self.proceed(is_interactive=is_interactive)
 
     def svn_ci(self, is_interactive=True):
         getter = self.make_getter(where=self.where())
@@ -432,14 +432,14 @@ class AssetWrangler(SCFObject):
             return
         for asset_proxy in self.list_visible_asset_proxies():
             asset_proxy.svn_ci(commit_message=commit_message, is_interactive=False)
-        self.proceed(prompt=is_interactive)
+        self.proceed(is_interactive=is_interactive)
 
     def svn_st(self, is_interactive=True):
         for asset_proxy in self.list_visible_asset_proxies():
             asset_proxy.svn_st(is_interactive=False)
-        self.proceed(prompt=is_interactive)
+        self.proceed(is_interactive=is_interactive)
 
     def svn_up(self, is_interactive=True):
         for asset_proxy in self.list_visible_asset_proxies():
             asset_proxy.svn_up(is_interactive=False)
-        self.proceed(prompt=is_interactive)
+        self.proceed(is_interactive=is_interactive)

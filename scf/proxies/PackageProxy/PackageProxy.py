@@ -211,7 +211,7 @@ class PackageProxy(DirectoryProxy, ImportableAssetProxy):
         if self.has_initializer:
             os.remove(self.initializer_file_name)
             line = 'initializer deleted.'
-            self.proceed(line, prompt=is_interactive)
+            self.proceed(line, is_interactive=is_interactive)
 
     def remove_tag(self, tag_name):
         tags = self.get_tags()

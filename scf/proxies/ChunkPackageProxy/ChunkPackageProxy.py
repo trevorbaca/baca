@@ -59,7 +59,7 @@ class ChunkPackageProxy(PackageProxy):
         chunk_proxy = ChunkPackageProxy(package_importable_name)
         chunk_proxy.make_asset()
         line = 'chunk spaced name set.'
-        self.proceed(line, prompt=prompt)
+        self.proceed(line, is_interactive=prompt)
 
     def set_score_template_interactively(self):
         self.print_not_yet_implemented()

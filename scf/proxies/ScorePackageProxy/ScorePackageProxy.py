@@ -309,7 +309,7 @@ class ScorePackageProxy(PackageProxy):
         if not os.path.exists(self.chunks_package_initializer_file_name):
             result = False
             file(self.chunks_package_initializer_file_name, 'w').write('')
-        self.proceed('packaged structure fixed.', prompt=is_interactive)
+        self.proceed('packaged structure fixed.', is_interactive=is_interactive)
         return result
 
     def handle_main_menu_result(self, result):
@@ -446,7 +446,7 @@ class ScorePackageProxy(PackageProxy):
             lines.append('{} {}'.format(initializer.ljust(80), os.path.exists(initializer)))
         lines.append('')
         self.display(lines)
-        self.proceed(prompt=prompt)
+        self.proceed(is_interactive=prompt)
 
     def remove_interactively(self):
         line = 'WARNING! Score package {!r} will be completely removed.'.format(self.importable_name)
