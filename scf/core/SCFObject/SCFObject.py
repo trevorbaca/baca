@@ -280,7 +280,7 @@ class SCFObject(object):
             tags_file.close()
             exec(tags_file_string)
             result = locals().get('tags') or OrderedDict([])
-            return result[tag_name]
+            return result.get(tag_name)
 
     def handle_raw_input(self, prompt, include_chevron=True, include_newline=True, prompt_character='>',
         capitalize_prompt=True):

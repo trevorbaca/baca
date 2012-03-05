@@ -125,7 +125,7 @@ class PackageProxy(DirectoryProxy, ImportableAssetProxy):
     def add_tag_interactively(self):
         getter = self.make_getter(where=self.where())
         getter.append_string('tag name')
-        getter.append_string('tag value')
+        getter.append_expr('tag value')
         result = getter.run()
         if self.backtrack():
             return

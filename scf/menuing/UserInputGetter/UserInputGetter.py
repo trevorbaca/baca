@@ -96,6 +96,11 @@ class UserInputGetter(MenuSectionAggregator):
         self.append_something(spaced_attribute_name, message, default=default)
         self.tests.append(predicates.is_existing_package_name)
 
+    def append_expr(self, spaced_attribute_name, default=None):
+        message = 'value for {!r} may be anything.'
+        self.append_something(spaced_attribute_name, message, default=default)
+        self.tests.append(lambda expr: True)
+
     def append_integer(self, spaced_attribute_name, default=None):
         message = 'value for {!r} must be integer.'
         self.append_something(spaced_attribute_name, message, default=default)
