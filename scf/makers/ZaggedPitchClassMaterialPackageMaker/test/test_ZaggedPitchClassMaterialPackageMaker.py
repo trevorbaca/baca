@@ -14,7 +14,7 @@ def test_ZaggedPitchClassMaterialPackageMaker_01():
             )
         mpp = scf.makers.ZaggedPitchClassMaterialPackageMaker(
             'materials.testzagged')
-        assert mpp.directory_contents == ['__init__.py', 'user_input.py']
+        assert mpp.directory_contents == ['__init__.py', 'tags.py', 'user_input.py']
         user_input_wrapper = UserInputWrapper([
             ('pc_cells', None),
             ('division_cells', None),
@@ -40,7 +40,7 @@ def test_ZaggedPitchClassMaterialPackageMaker_02():
             )
         mpp = scf.makers.ZaggedPitchClassMaterialPackageMaker(
             'materials.testzagged')
-        assert mpp.directory_contents == ['__init__.py', 'user_input.py']
+        assert mpp.directory_contents == ['__init__.py', 'tags.py', 'user_input.py']
         user_input_wrapper = UserInputWrapper([
             ('pc_cells', [[0, 7, 2, 10], [9, 6, 1, 8]]),
             ('division_cells', [[[1], [1], [1], [1, 1, 1]]]),

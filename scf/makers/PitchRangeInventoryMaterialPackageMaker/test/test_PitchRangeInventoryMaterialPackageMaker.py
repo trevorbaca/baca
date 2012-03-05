@@ -15,7 +15,7 @@ def test_PitchRangeInventoryMaterialPackageMaker_01():
             )
         mpp = scf.makers.PitchRangeInventoryMaterialPackageMaker(
             'materials.testpir')
-        assert mpp.directory_contents == ['__init__.py']
+        assert mpp.directory_contents == ['__init__.py', 'tags.py']
         assert mpp.output_material is None
     finally:
         studio.run(user_input='m testpir del remove default q')

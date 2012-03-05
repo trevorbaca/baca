@@ -12,7 +12,7 @@ def test_MaterialPackageWrangler_make_data_package_01():
         assert wrangler.package_exists('materials.testnumbers')
         mpp = scf.proxies.MaterialPackageProxy('materials.testnumbers')
         assert mpp.is_data_only
-        assert mpp.directory_contents == ['__init__.py', 'material_definition.py']
+        assert mpp.directory_contents == ['__init__.py', 'material_definition.py', 'tags.py']
         assert mpp.has_readable_initializer
         assert mpp.has_readable_material_definition_module
         assert not mpp.has_output_material_module
@@ -44,7 +44,7 @@ def test_MaterialPackageWrangler_make_data_package_03():
         assert wrangler.package_exists('materials.testnumbers')
         mpp = scf.proxies.MaterialPackageProxy('materials.testnumbers')
         assert mpp.is_data_only
-        assert mpp.directory_contents == ['__init__.py', 'material_definition.py']
+        assert mpp.directory_contents == ['__init__.py', 'material_definition.py', 'tags.py']
         assert mpp.has_readable_initializer
         assert mpp.has_readable_material_definition_module
         assert not mpp.has_output_material_module
@@ -60,20 +60,17 @@ def test_MaterialPackageWrangler_make_data_package_03():
 def test_MaterialPackageWrangler_make_data_package_04():
     '''With custom tags.
     '''
-    py.test.skip('make work by using explicit tags.py file.')
 
     wrangler = scf.wranglers.MaterialPackageWrangler()
     assert not wrangler.package_exists('materials.testnumbers')
 
-    #try:
-    if True:
+    try:
         wrangler.make_data_package('materials.testnumbers', tags={'color': 'red', 'is_colored': True})
         assert wrangler.package_exists('materials.testnumbers')
         mpp = scf.proxies.MaterialPackageProxy('materials.testnumbers')
         print mpp.get_tags()
         assert mpp.get_tag('color') == 'red'
         assert mpp.get_tag('is_colored')
-    #finally:
-    if True:
+    finally:
         mpp.remove()
         assert not wrangler.package_exists('materials.testnumbers')

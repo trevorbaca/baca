@@ -16,7 +16,7 @@ def test_MaterialPackageWrangler_run_makermade_package_01():
         mpp = scf.makers.SargassoMeasureMaterialPackageMaker(
             'materials.testsargasso')
         assert mpp.is_makermade
-        assert mpp.directory_contents == ['__init__.py', 'user_input.py']
+        assert mpp.directory_contents == ['__init__.py', 'tags.py', 'user_input.py']
         assert mpp.has_initializer
         assert not mpp.has_output_material_module 
         assert mpp.has_user_input_module
@@ -41,7 +41,7 @@ def test_MaterialPackageWrangler_run_makermade_package_02():
         mpp = scf.makers.SargassoMeasureMaterialPackageMaker(
             'betoerung.mus.materials.testsargasso')
         assert mpp.is_makermade
-        assert mpp.directory_contents == ['__init__.py', 'user_input.py']
+        assert mpp.directory_contents == ['__init__.py', 'tags.py', 'user_input.py']
         assert mpp.has_initializer
         assert not mpp.has_output_material_module 
         assert mpp.has_user_input_module

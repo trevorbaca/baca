@@ -188,7 +188,9 @@ class MaterialPackageWrangler(PackageWrangler):
         tags['material_package_maker_class_name'] = material_package_maker_class_name
         tags['should_have_illustration'] = should_have_illustration
         tags['should_have_user_input_module'] = should_have_user_input_module
-        material_package_proxy.initializer_file_proxy.write_stub_to_disk(tags=tags)
+        #material_package_proxy.initializer_file_proxy.write_stub_to_disk(tags=tags)
+        material_package_proxy.initializer_file_proxy.write_stub_to_disk()
+        material_package_proxy.tags_file_proxy.write_tags_to_disk(tags)
         if material_package_maker_class_name is None:
             file(os.path.join(path_name, 'material_definition.py'), 'w').write('')
             is_data_only = not should_have_illustration

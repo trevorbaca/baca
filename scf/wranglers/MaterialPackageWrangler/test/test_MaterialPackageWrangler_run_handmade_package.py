@@ -15,7 +15,7 @@ def test_MaterialPackageWrangler_run_handmade_package_01():
         assert studio.package_exists('materials.testnotes')
         mpp = scf.proxies.MaterialPackageProxy('materials.testnotes')
         assert mpp.is_handmade and not mpp.is_data_only
-        assert mpp.directory_contents == ['__init__.py', 'material_definition.py']
+        assert mpp.directory_contents == ['__init__.py', 'material_definition.py', 'tags.py']
         assert mpp.has_readable_initializer
         assert mpp.has_readable_material_definition_module
         assert not mpp.has_output_material_module 
@@ -43,7 +43,7 @@ def test_MaterialPackageWrangler_run_handmade_package_02():
             'testnotes incanned canned_exception.py default q')
         assert studio.package_exists('materials.testnotes')
         mpp = scf.proxies.MaterialPackageProxy('materials.testnotes')
-        assert mpp.directory_contents == ['__init__.py', 'material_definition.py']
+        assert mpp.directory_contents == ['__init__.py', 'material_definition.py', 'tags.py']
         assert not mpp.has_readable_initializer
         assert mpp.has_readable_material_definition_module
         assert not mpp.has_output_material_module
@@ -74,7 +74,7 @@ def test_MaterialPackageWrangler_run_handmade_package_03():
         assert studio.package_exists('materials.testnotes')
         mpp = scf.proxies.MaterialPackageProxy('materials.testnotes')
         assert mpp.is_handmade and not mpp.is_data_only
-        assert mpp.directory_contents == ['__init__.py', 'material_definition.py']
+        assert mpp.directory_contents == ['__init__.py', 'material_definition.py', 'tags.py']
         assert mpp.has_readable_initializer
         assert mpp.has_readable_material_definition_module
         assert not mpp.has_output_material_module 
@@ -134,7 +134,7 @@ def test_MaterialPackageWrangler_run_handmade_package_05():
         assert studio.package_exists('materials.testnotes')
         mpp = scf.proxies.MaterialPackageProxy('materials.testnotes')
         assert mpp.is_handmade and not mpp.is_data_only
-        assert mpp.directory_contents == ['__init__.py']
+        assert mpp.directory_contents == ['__init__.py', 'tags.py']
         assert mpp.has_readable_initializer
         assert not mpp.has_material_definition_module
         assert not mpp.has_output_material_module
@@ -163,7 +163,7 @@ def test_MaterialPackageWrangler_run_handmade_package_06():
         assert studio.package_exists('materials.testnotes')
         mpp = scf.proxies.MaterialPackageProxy('materials.testnotes')
         assert mpp.is_handmade and not mpp.is_data_only
-        assert mpp.directory_contents == ['__init__.py', 'material_definition.py']
+        assert mpp.directory_contents == ['__init__.py', 'material_definition.py', 'tags.py']
         assert mpp.has_readable_initializer
         assert mpp.has_readable_material_definition_module
         assert not mpp.has_output_material_module 
@@ -223,7 +223,7 @@ def test_MaterialPackageWrangler_run_handmade_package_08():
         assert studio.package_exists('materials.testnotes')
         mpp = scf.proxies.MaterialPackageProxy('materials.testnotes')
         assert mpp.is_handmade and not mpp.is_data_only
-        assert mpp.directory_contents == ['__init__.py', 'material_definition.py']
+        assert mpp.directory_contents == ['__init__.py', 'material_definition.py', 'tags.py']
         assert mpp.has_readable_initializer
         assert not mpp.has_readable_material_definition_module
         assert not mpp.has_output_material_module
