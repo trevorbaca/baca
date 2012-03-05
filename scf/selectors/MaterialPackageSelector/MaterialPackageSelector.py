@@ -1,4 +1,5 @@
 from scf.selectors.Selector import Selector
+import os
 
 
 class MaterialPackageSelector(Selector):
@@ -25,4 +26,8 @@ class MaterialPackageSelector(Selector):
         return result
 
     def list_target_items(self):
-        return self.list_material_package_path_names_in_current_score()
+        result = []
+        for path_name in self.list_material_package_path_names_in_current_score():
+            package_importable_name = self.path_name_to_package_importable_name(path_name)
+            result.append(package_importable_name)
+        return result

@@ -8,6 +8,7 @@ class Specifier(object):
     def __init__(self):
         variable_names = self.__init__.im_func.func_code.co_varnames[1:]
         self._variable_names = variable_names
+        self.description = None
 
     ### OVERLOADS ###
 
