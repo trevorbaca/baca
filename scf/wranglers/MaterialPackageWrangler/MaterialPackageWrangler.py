@@ -187,7 +187,6 @@ class MaterialPackageWrangler(PackageWrangler):
         material_package_proxy.initializer_file_proxy.write_stub_to_disk()
         material_package_proxy.tags_file_proxy.write_tags_to_disk(tags)
         if material_package_maker_class_name is None:
-            file(os.path.join(path_name, 'material_definition.py'), 'w').write('')
             is_data_only = not should_have_illustration
             material_package_proxy.material_definition_module_proxy.write_stub_to_disk(
                 is_data_only, prompt=False)

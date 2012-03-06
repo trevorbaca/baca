@@ -275,9 +275,8 @@ class MaterialPackageProxy(PackageProxy):
     @property
     def material_definition_module_proxy(self):
         if self.should_have_material_definition_module:
-            if self.has_material_definition_module:
-                return MaterialDefinitionModuleProxy(
-                    self.material_definition_module_importable_name, session=self.session)
+            return MaterialDefinitionModuleProxy(
+                self.material_definition_module_importable_name, session=self.session)
 
     @property
     def material_package_directory(self):
