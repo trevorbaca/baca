@@ -5,5 +5,5 @@ class KaleidPackageSelector(MaterialPackageSelector):
 
     ### CLASS ATTRIBUTES ###
 
-    target_human_readable_name = 'kaleid'
     generic_output_name = 'kaleid'
+    target_human_readable_name = 'kaleid'

@@ -1,2 +1,3 @@
 from KaleidCreationWizard import KaleidCreationWizard
+from PitchClassTransformCreationWizard import PitchClassTransformCreationWizard
 from Wizard import Wizard
