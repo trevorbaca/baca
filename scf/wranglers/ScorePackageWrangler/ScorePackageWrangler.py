@@ -1,6 +1,7 @@
 from abjad.tools import iotools
 from scf.wranglers.PackageWrangler import PackageWrangler
 from scf.proxies.ScorePackageProxy import ScorePackageProxy
+import os
 
 
 class ScorePackageWrangler(PackageWrangler):
@@ -54,6 +55,12 @@ class ScorePackageWrangler(PackageWrangler):
                 result.append(asset_proxy)
             elif scores_to_show == 'mothballed' and is_mothballed:
                 result.append(asset_proxy)
+        return result
+
+    def list_visible_asset_short_names(self, head=None):
+        result = []
+        for path_name in self.list_visible_asset_path_names(head=head):
+            result.append(os.path.basename(path_name))
         return result
 
     def make_asset_interactively(self):

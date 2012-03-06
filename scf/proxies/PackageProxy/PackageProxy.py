@@ -200,8 +200,9 @@ class PackageProxy(DirectoryProxy, ImportableAssetProxy):
     def read_tags_from_tags_file(self):
         from collections import OrderedDict
         # TODO: change to self.tags_file_proxy.conditionally_make_empty_asset()
-        if not os.path.exists(self.tags_file_name):
-            return
+        #if not os.path.exists(self.tags_file_name):
+        #    return
+        self.tags_file_proxy.conditionally_make_empty_asset()
         file_pointer = open(self.tags_file_name, 'r')
         file_contents_string = file_pointer.read()
         file_pointer.close()
