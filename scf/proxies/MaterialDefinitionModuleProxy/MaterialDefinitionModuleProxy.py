@@ -117,9 +117,9 @@ class MaterialDefinitionModuleProxy(MaterialModuleProxy):
         self.body_lines.append('{} = None'.format(self.material_underscored_name))
         self.write_to_disk()
 
-    def write_stub_to_disk(self, is_data_only, prompt=True):
+    def write_stub_to_disk(self, is_data_only, is_interactive=True):
         if is_data_only:
             self.write_stub_data_material_definition_to_disk()
         else:
             self.write_stub_music_material_definition_to_disk()
-        self.proceed('stub material definitiion written to disk.', is_interactive=prompt)
+        self.proceed('stub material definitiion written to disk.', is_interactive=is_interactive)

@@ -448,6 +448,12 @@ class MaterialPackageProxy(PackageProxy):
         parent_package.initializer_file_proxy.add_safe_import_statement(
             self.material_underscored_name, self.material_underscored_name)
 
+    def conditionally_write_stub_material_definition_module_to_disk(self, is_interactive=False):
+        if not self.get_tag('material_package_maker_class_name'):
+            is_data_only = not self.get_tag('should_have_illustration')
+            self.material_definition_module_proxy.write_stub_to_disk(
+                is_data_only, is_interactive=is_interactive)
+
     def conditionally_write_stub_user_input_module_to_disk(self, is_interactive=False):
         if self.should_have_user_input_module:
             self.write_stub_user_input_module_to_disk(is_interactive=is_interactive)
@@ -888,7 +894,7 @@ class MaterialPackageProxy(PackageProxy):
     def write_stub_material_definition_module_to_disk(self):
         if self.should_have_material_definition_module:
             file(self.material_definition_module_file_name, 'w').write('')
-            self.material_definition_module_proxy.write_stub_to_disk(self.is_data_only, prompt=True)
+            self.material_definition_module_proxy.write_stub_to_disk(self.is_data_only, is_interactive=True)
 
     def write_tags_to_disk(self):
         self.add_tag('is_material_package', True)

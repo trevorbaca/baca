@@ -177,19 +177,15 @@ class MaterialPackageWrangler(PackageWrangler):
         path_name = self.package_importable_name_to_path_name(material_package_importable_name)
         assert not os.path.exists(path_name)
         os.mkdir(path_name)
-        material_package_proxy = self.get_appropriate_material_package_proxy(
-            material_package_maker_class_name, material_package_importable_name)
-        tags = tags or {}
-        tags = collections.OrderedDict(tags)
+        pair = (material_package_maker_class_name, material_package_importable_name)
+        material_package_proxy = self.get_appropriate_material_package_proxy(*pair)
+        tags = collections.OrderedDict(tags or {})
         tags['material_package_maker_class_name'] = material_package_maker_class_name
         tags['should_have_illustration'] = should_have_illustration
         tags['should_have_user_input_module'] = should_have_user_input_module
         material_package_proxy.initializer_file_proxy.write_stub_to_disk()
         material_package_proxy.tags_file_proxy.write_tags_to_disk(tags)
-        if not material_package_maker_class_name:
-            is_data_only = not should_have_illustration
-            helper_proxy = material_package_proxy.material_definition_module_proxy
-            helper_proxy.write_stub_to_disk(is_data_only, prompt=False)
+        material_package_proxy.conditionally_write_stub_material_definition_module_to_disk()
         material_package_proxy.conditionally_write_stub_user_input_module_to_disk()
         line = 'material package {!r} created.'.format(material_package_importable_name)
         self.proceed(line, is_interactive=is_interactive)
