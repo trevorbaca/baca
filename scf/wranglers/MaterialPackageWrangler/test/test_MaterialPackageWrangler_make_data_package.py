@@ -58,7 +58,8 @@ def test_MaterialPackageWrangler_make_data_package_04():
     assert not wrangler.package_exists('materials.testnumbers')
 
     try:
-        wrangler.make_data_package('materials.testnumbers', tags={'color': 'red', 'is_colored': True})
+        tags = {'color': 'red', 'is_colored': True}
+        wrangler.make_data_package('materials.testnumbers', tags=tags)
         assert wrangler.package_exists('materials.testnumbers')
         mpp = scf.proxies.MaterialPackageProxy('materials.testnumbers')
         assert mpp.get_tag('color') == 'red'

@@ -136,7 +136,6 @@ class MaterialPackageWrangler(PackageWrangler):
         hidden_section.append(('profile', 'profile packages'))
         return menu
 
-    # TODO: write test
     def make_makermade_material_package(self, 
         material_package_importable_name, material_package_maker_class_name, tags=None):
         command = 'from scf.makers import {} as material_package_maker_class'.format(
@@ -151,8 +150,8 @@ class MaterialPackageWrangler(PackageWrangler):
             should_have_user_input_module,
             tags=tags)
 
-    # TODO: write test
-    def make_makermade_material_package_interactively(self):
+    def make_makermade_material_package_interactively(self, user_input=None):
+        self.assign_user_input(user_input=user_input)
         self.push_backtrack()
         result = self.material_package_maker_wrangler.select_asset_importable_name_interactively(
             cache=True, clear=False)
@@ -169,7 +168,6 @@ class MaterialPackageWrangler(PackageWrangler):
         self.make_makermade_material_package(
             material_package_importable_name, material_package_maker_class_name)
 
-    # TODO: write test
     def make_material_package(self, material_package_importable_name, material_package_maker_class_name, 
         should_have_illustration, should_have_user_input_module, is_interactive=False, tags=None):
         assert iotools.is_underscore_delimited_lowercase_package_name(material_package_importable_name)
