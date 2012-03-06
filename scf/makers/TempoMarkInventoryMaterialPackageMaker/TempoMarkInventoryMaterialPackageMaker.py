@@ -21,6 +21,7 @@ class TempoMarkInventoryMaterialPackageMaker(MaterialPackageMaker):
             
     ### PUBLIC METHODS ###
 
+    # TODO: abstract up to InventoryMaterialPackageMaker
     def make_output_material_module_body_lines(self, output_material):
         lines = []
         lines.append('{} = {}(['.format(

@@ -7,6 +7,8 @@ from scf import getters
 
 class TempoMarkEditor(InteractiveEditor):
 
+    ### CLASS ATTRIBUTES ###
+
     target_class = contexttools.TempoMark
     target_manifest = TargetManifest(contexttools.TempoMark,
         ('duration', 'd', getters.get_duration),
@@ -17,7 +19,8 @@ class TempoMarkEditor(InteractiveEditor):
 
     def conditionally_initialize_target(self):
         # TODO: pass only
-        self.target = self.target
+        #self.target = self.target
+        pass
 
     def initialize_target_from_attributes_in_memory(self):
         initializer_token = []

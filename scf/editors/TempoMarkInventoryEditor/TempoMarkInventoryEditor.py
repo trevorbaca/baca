@@ -1,11 +1,12 @@
 from abjad.tools import contexttools
-from scf.editors.InteractiveEditor import InteractiveEditor
 from scf.editors.ListEditor import ListEditor
 from scf.editors.TempoMarkEditor import TempoMarkEditor
 from scf.menuing.UserInputGetter import UserInputGetter
 
 
 class TempoMarkInventoryEditor(ListEditor):
+
+    ### CLASS ATTRIBUTES ###
 
     target_class = contexttools.TempoMarkInventory
     target_item_getter_configuration_method = UserInputGetter.append_tempo
@@ -19,6 +20,6 @@ class TempoMarkInventoryEditor(ListEditor):
     @property
     def target_summary_lines(self):
         result = []
-        for tempo_mark in self.target:
-            result.append(repr(tempo_mark))
+        for item in self.target:
+            result.append(repr(item))
         return result
