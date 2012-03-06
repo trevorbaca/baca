@@ -104,7 +104,6 @@ class MaterialPackageWrangler(PackageWrangler):
             return
         self.make_data_package(material_package_importable_name)
 
-    # TODO: write test
     def make_handmade_material_package(self, material_package_importable_name, tags=None):
         material_package_maker_class_name = None
         should_have_illustration = True
@@ -115,8 +114,8 @@ class MaterialPackageWrangler(PackageWrangler):
             should_have_user_input_module,
             tags=tags)
 
-    # TODO: write test
-    def make_handmade_material_package_interactively(self):
+    def make_handmade_material_package_interactively(self, user_input=None):
+        self.assign_user_input(user_input=user_input)
         self.push_backtrack()
         material_package_importable_name = self.get_available_material_package_importable_name_interactively()
         self.pop_backtrack()

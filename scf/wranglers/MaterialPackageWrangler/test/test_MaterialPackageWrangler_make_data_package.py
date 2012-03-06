@@ -45,13 +45,6 @@ def test_MaterialPackageWrangler_make_data_package_03():
         mpp = scf.proxies.MaterialPackageProxy('materials.testnumbers')
         assert mpp.is_data_only
         assert mpp.directory_contents == ['__init__.py', 'material_definition.py', 'tags.py']
-        assert mpp.has_readable_initializer
-        assert mpp.has_readable_material_definition_module
-        assert not mpp.has_output_material_module
-        assert not mpp.initializer_has_output_material_safe_import_statement
-        assert not mpp.parent_initializer_has_output_material_safe_import_statement
-        assert mpp.material_definition is None
-        assert mpp.output_material is None
     finally:
         mpp.remove()
         assert not wrangler.package_exists('materials.testnumbers')
@@ -68,7 +61,6 @@ def test_MaterialPackageWrangler_make_data_package_04():
         wrangler.make_data_package('materials.testnumbers', tags={'color': 'red', 'is_colored': True})
         assert wrangler.package_exists('materials.testnumbers')
         mpp = scf.proxies.MaterialPackageProxy('materials.testnumbers')
-        print mpp.get_tags()
         assert mpp.get_tag('color') == 'red'
         assert mpp.get_tag('is_colored')
     finally:
