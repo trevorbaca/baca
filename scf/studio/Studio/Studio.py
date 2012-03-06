@@ -133,12 +133,10 @@ class Studio(SCFObject):
         '''Return true to exit the svn menu.
         '''
         this_result = False
-        if result == 'ci':
+        if result == 'add':
+            self.score_package_wrangler.svn_add()
+        elif result == 'ci':
             self.score_package_wrangler.svn_ci()
-        #elif result == 'pytest_scores':
-        #    self.score_package_wrangler.run_py_test()
-        #elif result == 'pytest_all':
-        #    self.run_py_test_all()
         elif result == 'st':
             self.score_package_wrangler.svn_st()
         elif result == 'up':
