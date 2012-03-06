@@ -16,7 +16,7 @@ class OctaveTranspositionMappingComponentEditor(InteractiveEditor):
 
     ### PUBLIC METHODS ##
 
-    def conditionally_initializer_target(self):
+    def conditionally_initialize_target(self):
         pass
 
     def initialize_target_from_attributes_in_memory(self):
