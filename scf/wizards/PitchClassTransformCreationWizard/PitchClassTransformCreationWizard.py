@@ -12,61 +12,62 @@ class PitchClassTransformCreationWizard(Wizard):
 
     ### PUBLIC METHODS ###
 
-    def get_explicit_breadcrumb(self, transform_indicator_pairs):
-        if transform_indicator_pairs:
+    def get_explicit_breadcrumb(self, function_application_pairs):
+        if function_application_pairs:
             return 'append pitch-class transform:'
 
-    def get_pitch_class_transform_argument(self, pitch_class_transform_name):
-        if pitch_class_transform_name in ('transpose', 'multiply'):
+    def get_function_arguments(self, function_name):
+        arguments = []
+        if function_name in ('transpose', 'multiply'):
             getter = self.make_getter(where=self.where())
             getter.append_integer_in_range('index', start=0, stop=11)
             result = getter.run()
             if self.backtrack():
                 return
-            return result
-        elif pitch_class_transform_name in ('invert'):
-            return 'None'
+            arguments.append(result)
+        elif function_name in ('invert'):
+            pass
         else:
-            raise ValueError(pitch_class_transform_name)
+            raise ValueError(function_name)
+        return tuple(arguments)
 
     def run(self, cache=False, clear=True, head=None, user_input=None):
         self.assign_user_input(user_input=user_input)
         self.cache_breadcrumbs(cache=cache)
-        transform_indicator_pairs = []
+        function_application_pairs = []
         while True:
-            breadcrumb = self.transform_indicator_pairs_to_breadcrumb(transform_indicator_pairs)
+            breadcrumb = self.function_application_pairs_to_breadcrumb(function_application_pairs)
             self.push_breadcrumb(breadcrumb=breadcrumb)
             selector = selectors.PitchClassTransformSelector(session=self.session)
-            selector.explicit_breadcrumb = self.get_explicit_breadcrumb(transform_indicator_pairs)
+            selector.explicit_breadcrumb = self.get_explicit_breadcrumb(function_application_pairs)
             self.push_backtrack()
-            pitch_class_transform_name = selector.run(clear=clear)
+            function_name = selector.run(clear=clear)
             self.pop_backtrack()
             if self.backtrack():
                 break
-            elif not pitch_class_transform_name:
+            elif not function_name:
                 self.pop_breadcrumb()
                 continue
-            pitch_class_transform_argument = self.get_pitch_class_transform_argument(
-                pitch_class_transform_name)
+            function_arguments = self.get_function_arguments(function_name)
             if self.backtrack():
                 break
-            elif not pitch_class_transform_argument:
+            elif function_arguments is None:
                 self.pop_breadcrumb()
                 continue
-            pair = (pitch_class_transform_name, pitch_class_transform_argument)
-            transform_indicator_pairs.append(pair)
+            pair = (function_name, function_arguments)
+            function_application_pairs.append(pair)
             self.pop_breadcrumb()
         self.pop_breadcrumb()
         self.restore_breadcrumbs(cache=cache)
-        return transform_indicator_pairs
+        return function_application_pairs
 
-    def transform_indicator_pairs_to_breadcrumb(self, transform_indicator_pairs):
-        if transform_indicator_pairs:
+    def function_application_pairs_to_breadcrumb(self, function_application_pairs):
+        if function_application_pairs:
             result = []
-            for transform_name, transform_argument in transform_indicator_pairs:
-                string = transform_name[0].upper()
+            for function_name, function_arguments in function_application_pairs:
+                string = function_name[0].upper()
                 if string in ('T', 'M'):
-                    string = string + str(transform_argument)
+                    string = string + str(function_arguments[0])
                 result.append(string)
             result = ''.join(result)
             return '{} - {}'.format(self.breadcrumb, result)

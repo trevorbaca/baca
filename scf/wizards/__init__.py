@@ -1,3 +1,4 @@
 from KaleidCreationWizard import KaleidCreationWizard
 from PitchClassTransformCreationWizard import PitchClassTransformCreationWizard
+from ReservoirStartHelperCreationWizard import ReservoirStartHelperCreationWizard
 from Wizard import Wizard

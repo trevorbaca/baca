@@ -5,7 +5,6 @@ class PitchClassTransformSelector(Selector):
 
     ### CLASS ATTRIBUTES ###
 
-    tags_to_match = ('is_pitch_class_transform', )
     target_human_readable_name = 'pitch-class transform'
 
     ### PUBLIC METHODS ###

@@ -11,9 +11,10 @@ class RhythmSpecifierEditor(ParameterSpecifierEditor):
 
     target_class = RhythmSpecifier
     target_manifest = TargetManifest(RhythmSpecifier,
-        ('kaleid_package_importable_name', 'kaleid', 'kl', selectors.KaleidPackageSelector),
-        ('description', 'ds', getters.get_string),
         ('name', 'nm', getters.get_string),
+        ('description', 'ds', getters.get_string),
+        (),
+        ('kaleid_package_importable_name', 'kaleid', 'kl', selectors.KaleidPackageSelector),
         )
 
     ### READ-ONLY ATTRIBUTES ###

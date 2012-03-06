@@ -19,10 +19,10 @@ def test_PitchClassTransformCreationWizard_run_02():
     assert wizard.run(user_input='transpose b q') == []
 
     wizard = scf.wizards.PitchClassTransformCreationWizard()
-    assert wizard.run(user_input='invert q') == [('invert', 'None')]
+    assert wizard.run(user_input='invert q') == [('invert', ())]
 
     wizard = scf.wizards.PitchClassTransformCreationWizard()
-    assert wizard.run(user_input='invert b') == [('invert', 'None')]
+    assert wizard.run(user_input='invert b') == [('invert', ())]
 
     wizard = scf.wizards.PitchClassTransformCreationWizard()
     assert wizard.run(user_input='multiply q') == []
@@ -34,15 +34,15 @@ def test_PitchClassTransformCreationWizard_run_02():
 def test_PitchClassTransformCreationWizard_run_03():
 
     wizard = scf.wizards.PitchClassTransformCreationWizard()
-    assert wizard.run(user_input='transpose 1 q') == [('transpose', 1)]
+    assert wizard.run(user_input='transpose 1 q') == [('transpose', (1,))]
 
     wizard = scf.wizards.PitchClassTransformCreationWizard()
-    assert wizard.run(user_input='multiply 5 q') == [('multiply', 5)]
+    assert wizard.run(user_input='multiply 5 q') == [('multiply', (5,))]
 
     wizard = scf.wizards.PitchClassTransformCreationWizard()
     assert wizard.run(user_input='transpose 1 multiply 5 q') == [
-        ('transpose', 1), ('multiply', 5)]
+        ('transpose', (1,)), ('multiply', (5,))]
 
     wizard = scf.wizards.PitchClassTransformCreationWizard()
     assert wizard.run(user_input='transpose 1 invert multiply 5 q') == [
-        ('transpose', 1), ('invert', 'None'), ('multiply', 5)]
+        ('transpose', (1,)), ('invert', ()), ('multiply', (5,))]
