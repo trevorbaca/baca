@@ -149,15 +149,13 @@ class PackageProxy(DirectoryProxy, ImportableAssetProxy):
         self.proceed(line)
 
     def get_tags(self):
-        import collections
-        # TODO: deprecate following 6 lines in favor of commented-out line below
-        tags = self.read_tags_from_tags_file()
-        if tags is None:
-            tags = safe_import(locals(), self.short_name, 'tags', 
-                source_parent_package_importable_name=self.parent_package_importable_name)
-        if tags is None:
-            tags = collections.OrderedDict([])
-        #tags = self.read_tags_from_disk() or collections.OrderedDict([])
+        from collections import OrderedDict
+        self.tags_file_proxy.conditionally_make_empty_asset()
+        file_pointer = open(self.tags_file_name, 'r')
+        file_contents_string = file_pointer.read()
+        file_pointer.close()
+        exec(file_contents_string)
+        tags = locals().get('tags') or OrderedDict([])
         return tags
 
     def handle_tags_menu_result(self, result):
@@ -196,19 +194,6 @@ class PackageProxy(DirectoryProxy, ImportableAssetProxy):
             self.pop_breadcrumb()
         self.pop_breadcrumb()
         self.restore_breadcrumbs(cache=cache)
-
-    def read_tags_from_tags_file(self):
-        from collections import OrderedDict
-        # TODO: change to self.tags_file_proxy.conditionally_make_empty_asset()
-        #if not os.path.exists(self.tags_file_name):
-        #    return
-        self.tags_file_proxy.conditionally_make_empty_asset()
-        file_pointer = open(self.tags_file_name, 'r')
-        file_contents_string = file_pointer.read()
-        file_pointer.close()
-        exec(file_contents_string)
-        result = locals().get('tags') or OrderedDict([])
-        return result
 
     def remove_initializer(self, is_interactive=True):
         if self.has_initializer:
