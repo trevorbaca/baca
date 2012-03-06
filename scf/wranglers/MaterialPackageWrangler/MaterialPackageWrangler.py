@@ -177,7 +177,6 @@ class MaterialPackageWrangler(PackageWrangler):
         path_name = self.package_importable_name_to_path_name(material_package_importable_name)
         assert not os.path.exists(path_name)
         os.mkdir(path_name)
-        file(os.path.join(path_name, '__init__.py'), 'w').write('')
         material_package_proxy = self.get_appropriate_material_package_proxy(
             material_package_maker_class_name, material_package_importable_name)
         tags = tags or {}

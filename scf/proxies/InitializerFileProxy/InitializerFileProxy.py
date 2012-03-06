@@ -73,6 +73,8 @@ class InitializerFileProxy(ParsableFileProxy):
         is_parsable = True
         if initializer_file_name is None:
             initializer_file_name = self.path_name
+        if not os.path.exists(initializer_file_name):
+            return
         initializer = file(initializer_file_name, 'r')
         encoding_directives = []
         docstring_lines = []
