@@ -12,6 +12,6 @@ class ReservoirStartHelperSelector(Selector):
     def list_target_items(self):
         result = []
         result.append('start at index 0')
-        result.append('start an index n')
+        result.append('start at index n')
         result.append('start at next unused index')
         return result

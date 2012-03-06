@@ -12,6 +12,19 @@ class PitchClassTransformCreationWizard(Wizard):
 
     ### PUBLIC METHODS ###
 
+    def function_application_pairs_to_breadcrumb(self, function_application_pairs):
+        if function_application_pairs:
+            result = []
+            for function_name, function_arguments in function_application_pairs:
+                string = function_name[0].upper()
+                if string in ('T', 'M'):
+                    string = string + str(function_arguments[0])
+                result.append(string)
+            result = ''.join(result)
+            return '{} - {}'.format(self.breadcrumb, result)
+        else:
+            return self.breadcrumb
+
     def get_explicit_breadcrumb(self, function_application_pairs):
         if function_application_pairs:
             return 'append pitch-class transform:'
@@ -25,10 +38,6 @@ class PitchClassTransformCreationWizard(Wizard):
             if self.backtrack():
                 return
             arguments.append(result)
-        elif function_name in ('invert'):
-            pass
-        else:
-            raise ValueError(function_name)
         return tuple(arguments)
 
     def run(self, cache=False, clear=True, head=None, user_input=None):
@@ -54,22 +63,8 @@ class PitchClassTransformCreationWizard(Wizard):
             elif function_arguments is None:
                 self.pop_breadcrumb()
                 continue
-            pair = (function_name, function_arguments)
-            function_application_pairs.append(pair)
+            function_application_pairs.append((function_name, function_arguments))
             self.pop_breadcrumb()
         self.pop_breadcrumb()
         self.restore_breadcrumbs(cache=cache)
         return function_application_pairs
-
-    def function_application_pairs_to_breadcrumb(self, function_application_pairs):
-        if function_application_pairs:
-            result = []
-            for function_name, function_arguments in function_application_pairs:
-                string = function_name[0].upper()
-                if string in ('T', 'M'):
-                    string = string + str(function_arguments[0])
-                result.append(string)
-            result = ''.join(result)
-            return '{} - {}'.format(self.breadcrumb, result)
-        else:
-            return self.breadcrumb
