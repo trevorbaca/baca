@@ -186,11 +186,10 @@ class MaterialPackageWrangler(PackageWrangler):
         tags['should_have_user_input_module'] = should_have_user_input_module
         material_package_proxy.initializer_file_proxy.write_stub_to_disk()
         material_package_proxy.tags_file_proxy.write_tags_to_disk(tags)
-        if material_package_maker_class_name is None:
+        if not material_package_maker_class_name:
             is_data_only = not should_have_illustration
-            material_package_proxy.material_definition_module_proxy.write_stub_to_disk(
-                is_data_only, prompt=False)
-        if should_have_user_input_module:
-            material_package_proxy.write_stub_user_input_module_to_disk(prompt=False)
+            helper_proxy = material_package_proxy.material_definition_module_proxy
+            helper_proxy.write_stub_to_disk(is_data_only, prompt=False)
+        material_package_proxy.conditionally_write_stub_user_input_module_to_disk()
         line = 'material package {!r} created.'.format(material_package_importable_name)
         self.proceed(line, is_interactive=is_interactive)

@@ -448,6 +448,10 @@ class MaterialPackageProxy(PackageProxy):
         parent_package.initializer_file_proxy.add_safe_import_statement(
             self.material_underscored_name, self.material_underscored_name)
 
+    def conditionally_write_stub_user_input_module_to_disk(self, is_interactive=False):
+        if self.should_have_user_input_module:
+            self.write_stub_user_input_module_to_disk(is_interactive=is_interactive)
+
     def edit_output_material_interactively(self):
         if not self.has_output_material_editor:
             return
