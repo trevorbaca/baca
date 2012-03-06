@@ -11,7 +11,9 @@ class Selector(SCFObject):
 
     @property
     def breadcrumb(self):
-        if hasattr(self, 'target_human_readable_name'):
+        if getattr(self, 'explicit_breadcrumb', None):
+            return self.explicit_breadcrumb    
+        elif hasattr(self, 'target_human_readable_name'):
             return 'select {}:'.format(self.target_human_readable_name)
         else:
             return 'select:'
