@@ -86,14 +86,11 @@ class MaterialPackageWrangler(PackageWrangler):
         return NotImplemented
 
     def make_data_package(self, material_package_importable_name, tags=None):
-        material_package_maker_class_name = None
-        should_have_illustration = False
-        should_have_user_input_module = False
-        self.make_material_package(material_package_importable_name, 
-            material_package_maker_class_name, 
-            should_have_illustration, 
-            should_have_user_input_module,
-            tags=tags)
+        tags = tags or {}
+        tags['material_package_maker_class_name'] = None
+        tags['should_have_illustration'] = False
+        tags['should_have_user_input_module'] = False
+        self.make_material_package(material_package_importable_name, tags=tags)
 
     def make_data_package_interactively(self, user_input=None):
         self.assign_user_input(user_input=user_input)
@@ -105,14 +102,11 @@ class MaterialPackageWrangler(PackageWrangler):
         self.make_data_package(material_package_importable_name)
 
     def make_handmade_material_package(self, material_package_importable_name, tags=None):
-        material_package_maker_class_name = None
-        should_have_illustration = True
-        should_have_user_input_module = False
-        self.make_material_package(material_package_importable_name, 
-            material_package_maker_class_name, 
-            should_have_illustration, 
-            should_have_user_input_module,
-            tags=tags)
+        tags = tags or {}
+        tags['material_package_maker_class_name'] = None
+        tags['should_have_illustration'] = True
+        tags['should_have_user_input_module'] = False
+        self.make_material_package(material_package_importable_name, tags=tags)
 
     def make_handmade_material_package_interactively(self, user_input=None):
         self.assign_user_input(user_input=user_input)
@@ -138,17 +132,17 @@ class MaterialPackageWrangler(PackageWrangler):
 
     def make_makermade_material_package(self, 
         material_package_importable_name, material_package_maker_class_name, tags=None):
+        tags = tags or {}
         command = 'from scf.makers import {} as material_package_maker_class'.format(
             material_package_maker_class_name)
         exec(command)
         should_have_user_input_module = getattr(
             material_package_maker_class, 'should_have_user_input_module', True)
         should_have_illustration = hasattr(material_package_maker_class, 'illustration_maker')
-        self.make_material_package(material_package_importable_name, 
-            material_package_maker_class_name, 
-            should_have_illustration, 
-            should_have_user_input_module,
-            tags=tags)
+        tags['material_package_maker_class_name'] = material_package_maker_class_name
+        tags['should_have_illustration'] = should_have_illustration
+        tags['should_have_user_input_module'] = should_have_user_input_module
+        self.make_material_package(material_package_importable_name, tags=tags)
 
     def make_makermade_material_package_interactively(self, user_input=None):
         self.assign_user_input(user_input=user_input)
@@ -168,21 +162,14 @@ class MaterialPackageWrangler(PackageWrangler):
         self.make_makermade_material_package(
             material_package_importable_name, material_package_maker_class_name)
 
-    def make_material_package(self, material_package_importable_name, material_package_maker_class_name, 
-        should_have_illustration, should_have_user_input_module, is_interactive=False, tags=None):
-        assert iotools.is_underscore_delimited_lowercase_package_name(material_package_importable_name)
-        assert predicates.is_class_name_or_none(material_package_maker_class_name)
-        assert isinstance(should_have_illustration, bool)
-        assert isinstance(should_have_user_input_module, bool)
+    def make_material_package(self, material_package_importable_name, is_interactive=False, tags=None):
+        tags = collections.OrderedDict(tags or {})
         path_name = self.package_importable_name_to_path_name(material_package_importable_name)
         assert not os.path.exists(path_name)
         os.mkdir(path_name)
+        material_package_maker_class_name = tags.get('material_package_maker_class_name')
         pair = (material_package_maker_class_name, material_package_importable_name)
         material_package_proxy = self.get_appropriate_material_package_proxy(*pair)
-        tags = collections.OrderedDict(tags or {})
-        tags['material_package_maker_class_name'] = material_package_maker_class_name
-        tags['should_have_illustration'] = should_have_illustration
-        tags['should_have_user_input_module'] = should_have_user_input_module
         material_package_proxy.initializer_file_proxy.write_stub_to_disk()
         material_package_proxy.tags_file_proxy.write_tags_to_disk(tags)
         material_package_proxy.conditionally_write_stub_material_definition_module_to_disk()
