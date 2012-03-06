@@ -92,14 +92,14 @@ class MaterialPackageWrangler(PackageWrangler):
         tags['should_have_user_input_module'] = False
         self.make_material_package(material_package_importable_name, tags=tags)
 
-    def make_data_package_interactively(self, user_input=None):
+    def make_data_package_interactively(self, tags=None, user_input=None):
         self.assign_user_input(user_input=user_input)
         self.push_backtrack()
         material_package_importable_name = self.get_available_material_package_importable_name_interactively()
         self.pop_backtrack()
         if self.backtrack():
             return
-        self.make_data_package(material_package_importable_name)
+        self.make_data_package(material_package_importable_name, tags=tags)
 
     def make_handmade_material_package(self, material_package_importable_name, tags=None):
         tags = tags or {}
@@ -122,10 +122,10 @@ class MaterialPackageWrangler(PackageWrangler):
         section.tokens = self.make_visible_asset_menu_tokens(head=head)
         section = menu.make_section()
         section.append(('d', 'data-only'))
-        section.append(('s', 'numeric sequence'))
         section.append(('h', 'handmade'))
         section.append(('m', 'maker-made'))
         hidden_section = menu.make_section(is_hidden=True)
+        hidden_section.append(('s', 'create numeric sequence'))
         hidden_section.append(('missing', 'create missing packages'))
         hidden_section.append(('profile', 'profile packages'))
         return menu
@@ -164,6 +164,7 @@ class MaterialPackageWrangler(PackageWrangler):
 
     def make_material_package(self, material_package_importable_name, is_interactive=False, tags=None):
         tags = collections.OrderedDict(tags or {})
+        tags['is_material_package'] = True
         path_name = self.package_importable_name_to_path_name(material_package_importable_name)
         assert not os.path.exists(path_name)
         os.mkdir(path_name)
@@ -176,3 +177,11 @@ class MaterialPackageWrangler(PackageWrangler):
         material_package_proxy.conditionally_write_stub_user_input_module_to_disk()
         line = 'material package {!r} created.'.format(material_package_importable_name)
         self.proceed(line, is_interactive=is_interactive)
+
+    def make_numeric_sequence_package(self, package_importable_name):
+        tags = {'is_numeric_sequence': True}
+        self.make_data_package(package_importable_name, tags=tags)
+        
+    def make_numeric_sequence_package_interactively(self, user_input=None):
+        tags = {'is_numeric_sequence': True}
+        self.make_data_package_interactively(tags=tags, user_input=user_input)
