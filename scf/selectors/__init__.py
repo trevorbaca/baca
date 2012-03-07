@@ -1,5 +1,6 @@
 from DirectoryContentSelector import DirectoryContentSelector
 from InstrumentSelector import InstrumentSelector
+from InstrumentToolsUntunedPercussionNameSelector import InstrumentToolsUntunedPercussionNameSelector
 from KaleidClassSelector import KaleidClassSelector
 from KaleidPackageSelector import KaleidPackageSelector
 from MaterialPackageSelector import MaterialPackageSelector
