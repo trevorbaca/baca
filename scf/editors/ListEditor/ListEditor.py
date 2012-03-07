@@ -7,7 +7,9 @@ class ListEditor(InteractiveEditor):
     ### READ-ONLY ATTRIBUTES ###
 
     target_item_class = None
+    target_item_creator_class = None
     target_item_editor_class = None
+    target_item_getter_configuration_method = None
     target_item_identifier = 'element'
     target_items_identifier = 'elements'
 
@@ -31,7 +33,15 @@ class ListEditor(InteractiveEditor):
     ### PUBLIC METHODS ###
 
     def add_target_item_interactively(self):
-        if self.target_item_getter_configuration_method:
+        if self.target_item_creator_class:
+            target_item_creator = self.target_item_creator_class(session=self.session)
+            self.push_backtrack()
+            target_item_creator.run()
+            self.pop_backtrack()
+            if self.backtrack():
+                return
+            target_item = target_item_creator.target
+        elif self.target_item_getter_configuration_method:
             getter = self.make_getter(where=self.where())
             self.target_item_getter_configuration_method(getter, self.target_item_identifier)
             self.push_backtrack()
@@ -42,7 +52,9 @@ class ListEditor(InteractiveEditor):
             target_item = self.target_item_class(target_item_initialization_token)
         else:
             target_item = self.target_item_class()
-        self.target_items.append(target_item)
+        #if target_item:
+        if True:
+            self.target_items.append(target_item)
 
     def edit_target_item_interactively(self, target_item_number):
         target_item = self.get_target_item_from_target_item_number(target_item_number)

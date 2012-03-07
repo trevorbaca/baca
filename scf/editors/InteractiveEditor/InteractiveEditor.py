@@ -150,6 +150,8 @@ class InteractiveEditor(SCFObject):
         menu, section = self.make_menu(where=self.where(), is_parenthetically_numbered=True, is_keyed=is_keyed)
         section.tokens = self.target_attribute_tokens
         section.show_existing_values = True
+        hidden_section = menu.make_section(is_hidden=True)
+        hidden_section.append(('done', 'done'))
         return menu
 
     def make_target_attribute_tokens_from_target_attribute_tuples(self):
@@ -227,6 +229,8 @@ class InteractiveEditor(SCFObject):
                 elif not result:
                     self.pop_breadcrumb()
                     continue
+            if result == 'done':
+                break
             self.handle_main_menu_result(result)
             if self.backtrack():
                 break

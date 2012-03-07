@@ -9,9 +9,14 @@ class OctaveTranspositionMappingEditor(ListEditor):
     ### CLASS ATTRIBUTES ###
 
     target_class = pitchtools.OctaveTranspositionMapping
-    #target_item_getter_configuration_method = OctaveTranspositionMappingComponentEditor.run
     target_item_class = pitchtools.OctaveTranspositionMappingComponent
+    target_item_creator_class = OctaveTranspositionMappingComponentEditor
     target_item_editor_class = OctaveTranspositionMappingComponentEditor
     target_item_identifier = 'octave transposition mapping component'
     target_item_identifier = 'octave transposition mapping components'
     
+    ### READ-ONLY ATTRIBUTES ###
+
+    @property
+    def breadcrumb(self):
+        return 'octave transposition mapping editor'
