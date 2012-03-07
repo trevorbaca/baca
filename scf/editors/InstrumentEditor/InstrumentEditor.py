@@ -4,6 +4,7 @@ from scf.editors.ClefMarkInventoryEditor import ClefMarkInventoryEditor
 from scf.editors.InteractiveEditor import InteractiveEditor
 from scf.editors.TargetManifest import TargetManifest
 from scf import getters
+from scf import selectors
 
 
 class InstrumentEditor(InteractiveEditor):
@@ -38,26 +39,6 @@ class InstrumentEditor(InteractiveEditor):
             else:
                 self.target = None
     
-    # TODO: encapsulate in selector
-    def get_untuned_percussion_name_interactively(self, clear=True, cache=False):
-        self.cache_breadcrumbs(cache=cache)
-        while True:
-            self.push_breadcrumb('untuned percussion')
-            menu, section = self.make_menu(where=self.where(), is_numbered=True)
-            section.tokens = instrumenttools.UntunedPercussion.known_untuned_percussion
-            result = menu.run(clear=clear)
-            if self.backtrack():
-                self.pop_breadcrumb()
-                self.restore_breadcrumbs(cache=cache)
-                return
-            elif not result:
-                self.pop_breadcrumb()
-                continue
-            else:
-                self.pop_breadcrumb()
-                self.restore_breadcrumbs(cache=cache)
-                return result
-        
     def handle_main_menu_result(self, result):
         if result == 'tprd':
             if self.session.display_pitch_ranges_with_numbered_pitches:
@@ -101,8 +82,9 @@ class InstrumentEditor(InteractiveEditor):
             command = 'instrument = instrumenttools.{}()'.format(instrument_name)
             exec(command)
             if isinstance(instrument, instrumenttools.UntunedPercussion):
+                selector = selectors.InstrumentToolsUntunedPercussionNameSelector(session=self.session)
                 self.push_backtrack()
-                instrument_name = self.get_untuned_percussion_name_interactively()
+                instrument_name = selector.run()
                 self.pop_backtrack()
                 if self.backtrack():
                     continue
