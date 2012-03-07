@@ -101,7 +101,13 @@ class InteractiveEditor(SCFObject):
         self.initialize_attributes_in_memory()
 
     def conditionally_initialize_target(self):
-        self.target = self.target or self.target_class()
+        #self.target = self.target or self.target_class()
+        if self.target:
+            return
+        try:
+            self.target = self.target_class()
+        except:
+            pass
 
     def conditionally_set_target_attribute(self, attribute_name, attribute_value):
         if self.target:

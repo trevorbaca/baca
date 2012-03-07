@@ -12,9 +12,3 @@ class ClefMarkEditor(InteractiveEditor):
     target_manifest = TargetManifest(contexttools.ClefMark,
         ('clef_name', 'nm', getters.get_string),
         )        
-
-    ### PUBLIC METHODS ###
-
-    # TODO: redefine on base class
-    def conditionally_initialize_target(self):
-        pass

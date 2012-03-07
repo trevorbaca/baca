@@ -14,9 +14,3 @@ class TempoMarkEditor(InteractiveEditor):
         ('duration', 'd', getters.get_duration),
         ('units_per_minute', 'm', getters.get_integer),
         )
-
-    ### PUBLIC METHODS ###
-
-    # TODO: redefine on base class
-    def conditionally_initialize_target(self):
-        pass

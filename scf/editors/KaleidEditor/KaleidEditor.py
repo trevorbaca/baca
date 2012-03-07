@@ -13,8 +13,3 @@ class KaleidEditor(InteractiveEditor):
             result.append('')
             result.extend(InteractiveEditor.target_summary_lines.fget(self))
         return result
-
-    ### PUBLIC METHODS ###
-
-    def conditionally_initialize_target(self):
-        pass

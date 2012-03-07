@@ -16,9 +16,7 @@ class OctaveTranspositionMappingComponentEditor(InteractiveEditor):
 
     ### PUBLIC METHODS ##
 
-    def conditionally_initialize_target(self):
-        pass
-
+    # TODO: replace with call to base class method
     def initialize_target_from_attributes_in_memory(self):
         initializer_token = []
         for attribute_name in ('source_pitch_range', 'target_octave_start_pitch'):
