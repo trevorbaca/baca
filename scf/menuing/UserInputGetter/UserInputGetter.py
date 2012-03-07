@@ -82,6 +82,11 @@ class UserInputGetter(MenuSectionAggregator):
         self.append_something(spaced_attribute_name, message, default=default)
         self.tests.append(predicates.is_boolean)
 
+    def append_clef(self, spaced_attribute_name, default=None):
+        message = 'value for {!r} must successfully initialize clef mark.'
+        self.append_something(spaced_attribute_name, message, default=default)
+        self.tests.append(predicates.is_clef_token)
+
     def append_duration(self, spaced_attribute_name, default=None):
         message = 'value for {!r} must be duration.'
         self.append_something(spaced_attribute_name, message, default=default)

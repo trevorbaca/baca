@@ -17,9 +17,11 @@ class TempoMarkEditor(InteractiveEditor):
 
     ### PUBLIC METHODS ###
 
+    # TODO: redefine on base class
     def conditionally_initialize_target(self):
         pass
 
+    # TODO: generalize on base class ... or maybe already is generalized on base class?
     def initialize_target_from_attributes_in_memory(self):
         initializer_token = []
         for attribute_name in ('textual_description', 'duration', 'units_per_minute'):

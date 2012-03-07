@@ -20,6 +20,13 @@ def is_boolean(expr):
 def is_class_name_or_none(expr):
     return expr is None or iotools.is_uppercamelcase_string(expr)
 
+def is_clef_token(expr):
+    try:
+        result = contexttools.ClefMark(expr)
+        return isinstance(result, contexttools.ClefMark)
+    except:
+        return False
+
 def is_existing_package_name(expr):
     from scf.core.SCFObject import SCFObject
     scf_object = SCFObject()

@@ -45,6 +45,12 @@ class Menu(MenuSectionAggregator):
         return any([section.is_ranged for section in self.sections])
 
     @property
+    def hidden_section(self):
+        for section in self.sections:
+            if section.is_hidden:
+                return section
+
+    @property
     def menu_entry_bodies(self):
         result = []
         for section in self.sections:

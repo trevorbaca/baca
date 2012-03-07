@@ -1,8 +1,9 @@
 from abjad.tools.instrumenttools._Instrument import _Instrument
 from abjad.tools import instrumenttools
+from scf.editors.ClefMarkInventoryEditor import ClefMarkInventoryEditor
 from scf.editors.InteractiveEditor import InteractiveEditor
 from scf.editors.TargetManifest import TargetManifest
-from scf import predicates
+from scf import getters
 
 
 class InstrumentEditor(InteractiveEditor):
@@ -11,10 +12,13 @@ class InstrumentEditor(InteractiveEditor):
 
     target_class = _Instrument
     target_manifest = TargetManifest(_Instrument,
-        ('instrument_name', 'in', predicates.is_string),
-        ('instrument_name_markup', 'im', predicates.is_markup),
-        ('short_instrument_name',  'sn', predicates.is_string),
-        ('short_instrument_name_markup', 'sm', predicates.is_markup),
+        ('instrument_name', 'in', getters.get_string),
+        ('instrument_name_markup', 'im', getters.get_markup),
+        ('short_instrument_name',  'sn', getters.get_string),
+        ('short_instrument_name_markup', 'sm', getters.get_markup),
+        ('pitch_range', 'range', 'rg', getters.get_symbolic_pitch_range_string),
+        ('all_clefs', 'clefs', 'cf', ClefMarkInventoryEditor),
+        is_keyed=True, 
         )
 
     ### READ-ONLY PUBLIC ATTRIBUTES ###
@@ -99,53 +103,68 @@ class InstrumentEditor(InteractiveEditor):
                 self.restore_breadcrumbs(cache=cache)
                 return result
         
-    # TODO: use baseclass method
+#    # TODO: use baseclass method
+#    def handle_main_menu_result(self, result):
+#        if result == 'cl':
+#            self.print_not_yet_implemented()
+#        elif result == 'in':
+#            self.edit_instrument_name_interactively()
+#        elif result == 'im':
+#            self.edit_instrument_name_markup_interactively()
+#        elif result == 'pr':
+#            self.edit_pitch_range_interactively()
+#        elif result == 'sn':
+#            self.edit_short_instrument_name_interactively()
+#        elif result == 'sm':
+#            self.edit_short_instrument_name_markup_interactively()
+#        elif result == 'tprd':
+#            if self.session.display_pitch_ranges_with_numbered_pitches:
+#                self.session.display_pitch_ranges_with_numbered_pitches = False
+#            else:
+#                self.session.display_pitch_ranges_with_numbered_pitches = True
+#        elif result == 'trans':
+#            self.print_not_yet_implemented()
+
     def handle_main_menu_result(self, result):
-        if result == 'cl':
-            self.print_not_yet_implemented()
-        elif result == 'in':
-            self.edit_instrument_name_interactively()
-        elif result == 'im':
-            self.edit_instrument_name_markup_interactively()
-        elif result == 'pr':
-            self.edit_pitch_range_interactively()
-        elif result == 'sn':
-            self.edit_short_instrument_name_interactively()
-        elif result == 'sm':
-            self.edit_short_instrument_name_markup_interactively()
-        elif result == 'tprd':
+        if result == 'tprd':
             if self.session.display_pitch_ranges_with_numbered_pitches:
                 self.session.display_pitch_ranges_with_numbered_pitches = False
             else:
                 self.session.display_pitch_ranges_with_numbered_pitches = True
-        elif result == 'trans':
-            self.print_not_yet_implemented()
-
-    # TODO: use baseclass method
-    def make_main_menu(self):
-        menu, section = self.make_menu(where=self.where(), is_parenthetically_numbered=True, is_keyed=True)
-        section.tokens = self.target_attribute_tokens
-        section.show_existing_values = True
-        section = menu.make_section(is_keyed=False)
-        if self.session.display_pitch_ranges_with_numbered_pitches:
-            pitch_range_repr = self.target.pitch_range.one_line_numbered_chromatic_pitch_repr
         else:
-            pitch_range_repr = self.target.pitch_range.one_line_named_chromatic_pitch_repr
-        line = 'range: {}'.format(pitch_range_repr)
-        section.append(('pr', line))
-        clefs = [clef.clef_name for clef in self.target.all_clefs]
-        clefs = ', '.join(clefs)
-        line = 'clefs: {}'.format(clefs)
-        section.append(('cl', line))
-        if self.target.is_transposing:
-            line = 'sounding pitch of fingered middle C: {}'
-            line = line.format(self.target.sounding_pitch_of_fingered_middle_c.pitch_class_octave_label)
-            section.append(('sp', line))
-            line = 'interval of transposition: {}'
-            line = line.format(self.target.interval_of_transposition)
-            section.append(('int', line))
-        section = menu.make_section(is_hidden=True)
-        section.append(('tprd', 'toggle pitch range display'))
+            InteractiveEditor.handle_main_menu_result(self, result)
+
+#    # TODO: use baseclass method
+#    def make_main_menu(self):
+#        menu, section = self.make_menu(where=self.where(), is_parenthetically_numbered=True, is_keyed=True)
+#        section.tokens = self.target_attribute_tokens
+#        section.show_existing_values = True
+#        section = menu.make_section(is_keyed=False)
+#        if self.session.display_pitch_ranges_with_numbered_pitches:
+#            pitch_range_repr = self.target.pitch_range.one_line_numbered_chromatic_pitch_repr
+#        else:
+#            pitch_range_repr = self.target.pitch_range.one_line_named_chromatic_pitch_repr
+#        line = 'range: {}'.format(pitch_range_repr)
+#        section.append(('pr', line))
+#        clefs = [clef.clef_name for clef in self.target.all_clefs]
+#        clefs = ', '.join(clefs)
+#        line = 'clefs: {}'.format(clefs)
+#        section.append(('cl', line))
+#        if self.target.is_transposing:
+#            line = 'sounding pitch of fingered middle C: {}'
+#            line = line.format(self.target.sounding_pitch_of_fingered_middle_c.pitch_class_octave_label)
+#            section.append(('sp', line))
+#            line = 'interval of transposition: {}'
+#            line = line.format(self.target.interval_of_transposition)
+#            section.append(('int', line))
+#        section = menu.make_section(is_hidden=True)
+#        section.append(('tprd', 'toggle pitch range display'))
+#        return menu
+
+    def make_main_menu(self):
+        menu = InteractiveEditor.make_main_menu(self)
+        hidden_section = menu.hidden_section
+        hidden_section.append(('tprd', 'toggle pitch range display'))
         return menu
 
     # TODO: encapsulate in selector

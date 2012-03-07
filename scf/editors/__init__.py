@@ -1,3 +1,26 @@
+### OBJECT EDITORS ###
+
+from ClefMarkEditor import ClefMarkEditor
+from ClefMarkInventoryEditor import ClefMarkInventoryEditor
+from InstrumentEditor import InstrumentEditor
+from InstrumentationEditor import InstrumentationEditor
+from InteractiveEditor import InteractiveEditor
+from ListEditor import ListEditor
+from MusicSpecifierEditor import MusicSpecifierEditor
+from OctaveTranspositionMappingComponentEditor import OctaveTranspositionMappingComponentEditor
+from OctaveTranspositionMappingEditor import OctaveTranspositionMappingEditor
+from OctaveTranspositionMappingInventoryEditor import OctaveTranspositionMappingInventoryEditor
+from PerformerContributionSpecifierEditor import PerformerContributionSpecifierEditor
+from PerformerContributionSpecifierListEditor import PerformerContributionSpecifierListEditor
+from PerformerEditor import PerformerEditor
+from PitchRangeEditor import PitchRangeEditor
+from PitchRangeInventoryEditor import PitchRangeInventoryEditor
+from TempoMarkEditor import TempoMarkEditor
+from TempoMarkInventoryEditor import TempoMarkInventoryEditor
+
+
+### SPECIFIER EDITORS ###
+
 from ArticulationSpecifierEditor import ArticulationSpecifierEditor
 from ClefSpecifierEditor import ClefSpecifierEditor
 from DirectiveSpecifierEditor import DirectiveSpecifierEditor
@@ -13,23 +36,8 @@ from StaffSpecifierEditor import StaffSpecifierEditor
 from TrillSpecifierEditor import TrillSpecifierEditor
 from TropingSpecifierEditor import TropingSpecifierEditor
 
-from InstrumentEditor import InstrumentEditor
-from InstrumentationEditor import InstrumentationEditor
-from InteractiveEditor import InteractiveEditor
-from ListEditor import ListEditor
-from MusicSpecifierEditor import MusicSpecifierEditor
-from OctaveTranspositionMappingComponentEditor import OctaveTranspositionMappingComponentEditor
-from OctaveTranspositionMappingEditor import OctaveTranspositionMappingEditor
-from OctaveTranspositionMappingInventoryEditor import OctaveTranspositionMappingInventoryEditor
-from PerformerContributionSpecifierEditor import PerformerContributionSpecifierEditor
-from PerformerContributionSpecifierListEditor import PerformerContributionSpecifierListEditor
-from PerformerEditor import PerformerEditor
-from PitchRangeEditor import PitchRangeEditor
-from PitchRangeInventoryEditor import PitchRangeInventoryEditor
-from TargetManifest import TargetManifest
-from TempoMarkEditor import TempoMarkEditor
-from TempoMarkInventoryEditor import TempoMarkInventoryEditor
-from UserInputWrapper import UserInputWrapper
+
+### KALEID EDITORS ###
 
 from KaleidEditor import KaleidEditor
 from NoteFilledTokensKaleidEditor import NoteFilledTokensKaleidEditor
@@ -41,3 +49,9 @@ from SignalAffixedChunkWithNoteFilledTokensKaleidEditor import SignalAffixedChun
 from SignalAffixedChunkWithRestFilledTokensKaleidEditor import SignalAffixedChunkWithRestFilledTokensKaleidEditor
 from SignalAffixedNoteFilledTokensKaleidEditor import SignalAffixedNoteFilledTokensKaleidEditor
 from SignalAffixedRestFilledTokensKaleidEditor import SignalAffixedRestFilledTokensKaleidEditor
+
+
+### NONEDITOR CLASSES ###
+
+from TargetManifest import TargetManifest
+from UserInputWrapper import UserInputWrapper
