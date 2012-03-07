@@ -14,7 +14,6 @@ class PitchRangeInventoryEditor(ListEditor):
     target_item_class = pitchtools.PitchRange
     target_item_editor_class = PitchRangeEditor
     target_item_identifier = 'pitch range'
-    target_items_identifier = 'pitch ranges'
 
     ### READ-ONLY PUBLIC ATTRIBUTES ###
 

@@ -11,13 +11,23 @@ class ListEditor(InteractiveEditor):
     target_item_editor_class = None
     target_item_getter_configuration_method = None
     target_item_identifier = 'element'
-    target_items_identifier = 'elements'
 
     ### READ-ONLY PUBLIC ATTRIBUTES ###
 
     @property
     def breadcrumb(self):
-        return self.target_name or 'list'
+        return self.target_name or self.target_class_human_readable_name
+
+    @property
+    def target_items(self):
+        return self.target
+
+    @property
+    def target_items_identifier(self):
+        if hasattr(self, '_target_items_identifier'):
+            return self._target_items_identifer
+        else:
+            return self.pluralize_string(self.target_item_identifier)
 
     @property
     def target_summary_lines(self):
@@ -25,10 +35,6 @@ class ListEditor(InteractiveEditor):
         for target_item in self.target_items:
             result.append(self.get_one_line_menuing_summary(target_item))
         return result
-
-    @property
-    def target_items(self):
-        return self.target
 
     ### PUBLIC METHODS ###
 
@@ -84,11 +90,11 @@ class ListEditor(InteractiveEditor):
         section.tokens = self.target_summary_lines
         section.return_value_attribute = 'number'
         section = menu.make_section()
-        section.append(('add', 'add {}'.format(self.target_item_identifier)))
+        section.append(('add', 'add elements'))
         if 0 < len(self.target_items):
-            section.append(('rm', 'remove {}'.format(self.target_items_identifier)))
+            section.append(('rm', 'remove elements'))
         if 1 < len(self.target_items):
-            section.append(('mv', 'move {}'.format(self.target_items_identifier)))
+            section.append(('mv', 'move elements'))
         hidden_section = menu.make_section(is_hidden=True)
         hidden_section.append(('done', 'done'))
         return menu

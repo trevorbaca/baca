@@ -13,7 +13,6 @@ class TempoMarkInventoryEditor(ListEditor):
     target_item_class = contexttools.TempoMark
     target_item_editor_class = TempoMarkEditor
     target_item_identifier = 'tempo mark'
-    target_items_identifier = 'tempo marks'
 
     ### READ-ONLY PUBLIC ATTRIBUTES ###
 

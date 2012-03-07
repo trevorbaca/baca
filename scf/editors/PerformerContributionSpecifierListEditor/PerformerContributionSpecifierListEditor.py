@@ -11,10 +11,3 @@ class PerformerContributionSpecifierListEditor(ListEditor):
     target_item_class = PerformerContributionSpecifier
     target_item_editor_class = PerformerContributionSpecifierEditor
     target_item_identifier = 'performer contribution'
-    target_items_identifier = 'performer contributions'
-
-    ### READ-ONLY PUBLIC ATTRIBUTES ###
-
-    @property
-    def breadcrumb(self):
-        return self.target_name or 'performer contributions'
