@@ -52,8 +52,7 @@ class ListEditor(InteractiveEditor):
             target_item = self.target_item_class(target_item_initialization_token)
         else:
             target_item = self.target_item_class()
-        #if target_item:
-        if True:
+        if target_item:
             self.target_items.append(target_item)
 
     def edit_target_item_interactively(self, target_item_number):
@@ -90,6 +89,8 @@ class ListEditor(InteractiveEditor):
             section.append(('rm', 'remove {}'.format(self.target_items_identifier)))
         if 1 < len(self.target_items):
             section.append(('mv', 'move {}'.format(self.target_items_identifier)))
+        hidden_section = menu.make_section(is_hidden=True)
+        hidden_section.append(('done', 'done'))
         return menu
 
     def move_target_item_interactively(self):
