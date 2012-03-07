@@ -146,7 +146,7 @@ class InteractiveEditor(SCFObject):
                 kwargs[attribute_name] = self.attributes_in_memory.get(attribute_name)
         try:
             self.target = self.target_class(*args, **kwargs)
-        except TypeError:
+        except:
             pass
 
     def make_main_menu(self):
