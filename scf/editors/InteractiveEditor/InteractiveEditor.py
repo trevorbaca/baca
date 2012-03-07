@@ -58,6 +58,7 @@ class InteractiveEditor(SCFObject):
     def target_attribute_tokens(self):
         if hasattr(self, 'target_manifest'):
             return self.make_target_attribute_tokens_from_target_manifest()
+        # TODO: deprecate
         elif hasattr(self, 'target_attribute_tuples'):
             return self.make_target_attribute_tokens_from_target_attribute_tuples()
         else:
@@ -150,11 +151,11 @@ class InteractiveEditor(SCFObject):
         menu, section = self.make_menu(where=self.where(), is_parenthetically_numbered=True, is_keyed=is_keyed)
         section.tokens = self.target_attribute_tokens
         section.show_existing_values = True
-        #hidden_section = menu.make_section(is_hidden=True)
         hidden_section = menu.hidden_section
         hidden_section.append(('done', 'done'))
         return menu
 
+    # TODO: deprecate
     def make_target_attribute_tokens_from_target_attribute_tuples(self):
         result, menu_keys, display_attribute = [], [], None
         for target_attribute_tuple in self.target_attribute_tuples:
