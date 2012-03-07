@@ -58,9 +58,6 @@ class InteractiveEditor(SCFObject):
     def target_attribute_tokens(self):
         if hasattr(self, 'target_manifest'):
             return self.make_target_attribute_tokens_from_target_manifest()
-        # TODO: deprecate
-        elif hasattr(self, 'target_attribute_tuples'):
-            return self.make_target_attribute_tokens_from_target_attribute_tuples()
         else:
             raise ValueError
 
@@ -154,26 +151,6 @@ class InteractiveEditor(SCFObject):
         hidden_section = menu.hidden_section
         hidden_section.append(('done', 'done'))
         return menu
-
-    # TODO: deprecate
-    def make_target_attribute_tokens_from_target_attribute_tuples(self):
-        result, menu_keys, display_attribute = [], [], None
-        for target_attribute_tuple in self.target_attribute_tuples:
-            target_attribute_name, predicate, is_read_write, default, menu_key = target_attribute_tuple[:5]
-            assert menu_key not in menu_keys
-            menu_keys.append(menu_key)
-            menu_body = target_attribute_name.replace('_', ' ')
-            attribute_value = getattr(self.target, target_attribute_name) 
-            if hasattr(attribute_value, '__len__') and not len(attribute_value):
-                attribute_value = None
-            existing_value = self.get_one_line_menuing_summary(attribute_value)
-            if 6 <= len(target_attribute_tuple):
-                display_attribute = target_attribute_tuple[5]
-                if display_attribute is not None:
-                    existing_value = getattr(attribute_value, display_attribute)
-            token = (menu_key, menu_body, existing_value)
-            result.append(token)
-        return result
 
     def make_target_attribute_tokens_from_target_manifest(self):
         result = []
