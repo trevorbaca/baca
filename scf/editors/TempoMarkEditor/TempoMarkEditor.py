@@ -18,8 +18,6 @@ class TempoMarkEditor(InteractiveEditor):
     ### PUBLIC METHODS ###
 
     def conditionally_initialize_target(self):
-        # TODO: pass only
-        #self.target = self.target
         pass
 
     def initialize_target_from_attributes_in_memory(self):

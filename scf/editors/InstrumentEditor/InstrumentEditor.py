@@ -1,23 +1,21 @@
 from abjad.tools.instrumenttools._Instrument import _Instrument
 from abjad.tools import instrumenttools
 from scf.editors.InteractiveEditor import InteractiveEditor
+from scf.editors.TargetManifest import TargetManifest
 from scf import predicates
 
 
-# TODO: eventually make transposition information editable
-# TODO: eventually make clef information editable
 class InstrumentEditor(InteractiveEditor):
 
     ### CLASS ATTRIBUTES ###
 
-    target_attribute_tuples = (
-        ('instrument_name', predicates.is_string, True, None, 'in'),
-        ('instrument_name_markup', predicates.is_markup, True, None, 'im'),
-        ('short_instrument_name',  predicates.is_string, True, None, 'sn'),
-        ('short_instrument_name_markup', predicates.is_markup, True, None, 'sm'),
-        )
-
     target_class = _Instrument
+    target_manifest = TargetManifest(_Instrument,
+        ('instrument_name', 'in', predicates.is_string),
+        ('instrument_name_markup', 'im', predicates.is_markup),
+        ('short_instrument_name',  'sn', predicates.is_string),
+        ('short_instrument_name_markup', 'sm', predicates.is_markup),
+        )
 
     ### READ-ONLY PUBLIC ATTRIBUTES ###
 
@@ -36,6 +34,7 @@ class InstrumentEditor(InteractiveEditor):
             else:
                 self.target = None
     
+    # TODO: remove in favor of target manifest
     def edit_instrument_name_interactively(self):
         getter = self.make_getter(where=self.where())
         getter.append_string('instrument name')
@@ -44,6 +43,7 @@ class InstrumentEditor(InteractiveEditor):
             return
         self.conditionally_set_target_attribute('instrument_name', result)
 
+    # TODO: remove in favor of target manifest
     def edit_instrument_name_markup_interactively(self):
         getter = self.make_getter(where=self.where())
         getter.append_markup('instrument name markup')
@@ -52,6 +52,7 @@ class InstrumentEditor(InteractiveEditor):
             return
         self.conditionally_set_target_attribute('instrument_name_markup', result)
 
+    # TODO: remove in favor of target manifest
     def edit_pitch_range_interactively(self):
         getter = self.make_getter(where=self.where())
         getter.append_pitch_range('pitch range')
@@ -60,6 +61,7 @@ class InstrumentEditor(InteractiveEditor):
             return
         self.conditionally_set_target_attribute('pitch_range', result)
         
+    # TODO: remove in favor of target manifest
     def edit_short_instrument_name_interactively(self):
         getter = self.make_getter(where=self.where())
         getter.append_string('short instrument name')
@@ -68,6 +70,7 @@ class InstrumentEditor(InteractiveEditor):
             return
         self.conditionally_set_target_attribute('short_instrument_name', result)
 
+    # TODO: remove in favor of target manifest
     def edit_short_instrument_name_markup_interactively(self):
         getter = self.make_getter(where=self.where())
         getter.append_markup('short instrument name markup')
@@ -76,6 +79,7 @@ class InstrumentEditor(InteractiveEditor):
             return
         self.conditionally_set_target_attribute('short_instrument_name_markup', result)
         
+    # TODO: encapsulate in selector
     def get_untuned_percussion_name_interactively(self, clear=True, cache=False):
         self.cache_breadcrumbs(cache=cache)
         while True:
@@ -95,10 +99,10 @@ class InstrumentEditor(InteractiveEditor):
                 self.restore_breadcrumbs(cache=cache)
                 return result
         
+    # TODO: use baseclass method
     def handle_main_menu_result(self, result):
         if result == 'cl':
             self.print_not_yet_implemented()
-            #self.edit_clefs_interactively()
         elif result == 'in':
             self.edit_instrument_name_interactively()
         elif result == 'im':
@@ -116,8 +120,8 @@ class InstrumentEditor(InteractiveEditor):
                 self.session.display_pitch_ranges_with_numbered_pitches = True
         elif result == 'trans':
             self.print_not_yet_implemented()
-            #self.edit_transposition_interactively()
 
+    # TODO: use baseclass method
     def make_main_menu(self):
         menu, section = self.make_menu(where=self.where(), is_parenthetically_numbered=True, is_keyed=True)
         section.tokens = self.target_attribute_tokens
@@ -144,6 +148,7 @@ class InstrumentEditor(InteractiveEditor):
         section.append(('tprd', 'toggle pitch range display'))
         return menu
 
+    # TODO: encapsulate in selector
     def select_instruments_from_instrumenttools_interactively(self, clear=True, cache=False):
         '''Return list of instruments or none.'''
         from abjad.tools import instrumenttools
