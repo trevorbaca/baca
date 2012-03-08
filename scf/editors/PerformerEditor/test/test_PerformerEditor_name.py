@@ -7,13 +7,13 @@ def test_PerformerEditor_rename_performer_01():
     '''
 
     studio = scf.studio.Studio()
-    studio.run(user_input='1 setup performers 1 ren q')
+    studio.run(user_input='1 setup performers 1 name q')
     assert studio.ts == (11, (1, 7))
 
-    studio.run(user_input='1 setup performers 1 ren b q')
+    studio.run(user_input='1 setup performers 1 name b q')
     assert studio.ts == (13, (1, 7), (8, 11))
 
-    studio.run(user_input='1 setup performers 1 ren studio q')
+    studio.run(user_input='1 setup performers 1 name studio q')
     assert studio.ts == (13, (0, 11), (1, 7))
 
 
@@ -22,7 +22,7 @@ def test_PerformerEditor_rename_performer_02():
     '''
 
     studio = scf.studio.Studio()
-    studio.run(user_input='1 setup performers 1 ren -99 q')
+    studio.run(user_input='1 setup performers 1 name -99 q')
     assert studio.ts == (13, (1, 7))
 
 
@@ -31,5 +31,5 @@ def test_PerformerEditor_rename_performer_03():
     '''
 
     editor = scf.editors.PerformerEditor()
-    editor.run(user_input='name foo ren bar q')
+    editor.run(user_input='name foo name bar q')
     assert editor.target == scoretools.Performer(name='bar')
