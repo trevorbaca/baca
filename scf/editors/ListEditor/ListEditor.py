@@ -41,8 +41,7 @@ class ListEditor(InteractiveEditor):
 
     ### PUBLIC METHODS ###
 
-    # TODO: change name to self.add_target_items_interactively()
-    def add_target_item_interactively(self):
+    def add_target_items_interactively(self):
         if self.target_item_creator_class:
             target_item_creator = self.target_item_creator_class(
                 session=self.session, **self.target_item_creator_class_kwargs)
@@ -60,10 +59,8 @@ class ListEditor(InteractiveEditor):
             self.pop_backtrack()
             if self.backtrack():
                 return
-            #target_item = self.target_item_class(target_item_initialization_token)
             result = self.target_item_class(target_item_initialization_token)
         else:
-            #target_item = self.target_item_class()
             result = self.target_item_class()
         if result is None:
             result = []
@@ -71,8 +68,6 @@ class ListEditor(InteractiveEditor):
             target_items = result
         else:
             target_items = [result]
-        #if target_item:
-        #    self.target_items.append(target_item)
         self.target_items.extend(target_items)
 
     def edit_target_item_interactively(self, target_item_number):
@@ -91,7 +86,7 @@ class ListEditor(InteractiveEditor):
         if not isinstance(result, str):
             raise TypeError('result must be string.')
         if result == 'add':
-            self.add_target_item_interactively()
+            self.add_target_items_interactively()
         elif result == 'rm':
             self.remove_target_items_interactively()
         elif result == 'mv':
