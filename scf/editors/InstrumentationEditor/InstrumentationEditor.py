@@ -1,6 +1,7 @@
 from abjad.tools import scoretools
 from abjad.tools import sequencetools
 from scf import getters
+from scf import selectors
 from scf.editors.InteractiveEditor import InteractiveEditor
 from scf.editors.PerformerEditor import PerformerEditor
 from scf.editors.TargetManifest import TargetManifest
@@ -43,7 +44,8 @@ class InstrumentationEditor(InteractiveEditor):
             if self.backtrack():
                 return
             self.push_backtrack()
-            performer_names = self.select_performer_names_interactively()
+            selector = selectors.ScoreToolsPerformerNameSelector(session=self.session, is_ranged=True)
+            performer_names = selector.run()
             self.pop_backtrack()
             if self.backtrack():
                 return
@@ -140,30 +142,3 @@ class InstrumentationEditor(InteractiveEditor):
         performers = self.target.performers
         performers = sequencetools.remove_sequence_elements_at_indices(performers, performer_indices)
         self.target.performers[:] = performers
-
-    # TODO: abstract out to selector
-    def select_performer_names_interactively(self, clear=True, cache=False):
-        from abjad.tools import scoretools
-        self.cache_breadcrumbs(cache=cache)
-        menu, section = self.make_menu(where=self.where(), is_numbered=True, is_ranged=True)
-        performer_names, performer_abbreviations = [], []
-        performer_pairs = scoretools.list_primary_performer_names()
-        performer_pairs = [(x[1].split()[-1].strip('.'), x[0]) for x in performer_pairs]
-        performer_pairs.append(('perc', 'percussionist'))
-        performer_pairs.sort(lambda x, y: cmp(x[1], y[1]))
-        section.tokens = performer_pairs
-        section.return_value_attribute = 'body'
-        while True:
-            self.push_breadcrumb('add performers')
-            result = menu.run(clear=clear)
-            if self.backtrack():
-                self.pop_breadcrumb()
-                self.restore_breadcrumbs(cache=cache)
-                return
-            elif not result:
-                self.pop_breadcrumb()
-                continue
-            else:
-                self.pop_breadcrumb()
-                self.restore_breadcrumbs(cache=cache)
-                return result
