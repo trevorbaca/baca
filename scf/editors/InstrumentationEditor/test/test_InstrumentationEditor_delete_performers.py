@@ -9,19 +9,19 @@ def test_InstrumentationEditor_delete_performers_01():
     '''
 
     studio = scf.studio.Studio()
-    studio.run(user_input='1 setup performers del q')
+    studio.run(user_input='1 setup performers rm q')
     assert studio.ts == (9,)
 
-    studio.run(user_input='1 setup performers del b q')
+    studio.run(user_input='1 setup performers rm b q')
     assert studio.ts == (11, (6, 9))
 
-    studio.run(user_input='1 setup performers del studio q')
+    studio.run(user_input='1 setup performers rm studio q')
     assert studio.ts == (11, (0, 9))
 
-    studio.run(user_input='1 setup performers del score q')
+    studio.run(user_input='1 setup performers rm score q')
     assert studio.ts == (11, (2, 9))
 
-    studio.run(user_input='1 setup performers del foo q')
+    studio.run(user_input='1 setup performers rm foo q')
     assert studio.ts == (11,)
 
 
@@ -30,7 +30,7 @@ def test_InstrumentationEditor_delete_performers_02():
     '''
 
     editor = scf.editors.InstrumentationEditor()
-    editor.run(user_input='add acc default add bass default add bassoon default del 3 del 2 q')
+    editor.run(user_input='add acc default add bass default add bassoon default rm 3 rm 2 q')
     assert editor.target == InstrumentationSpecifier([Performer('accordionist', instruments=[Accordion()])])
 
 
@@ -39,5 +39,5 @@ def test_InstrumentationEditor_delete_performers_03():
     '''
 
     editor = scf.editors.InstrumentationEditor()
-    editor.run(user_input='add 1-3 default default default del 3-2 q')
+    editor.run(user_input='add 1-3 default default default rm 3-2 q')
     assert editor.target == InstrumentationSpecifier([Performer('accordionist', instruments=[Accordion()])])

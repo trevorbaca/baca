@@ -9,6 +9,7 @@ class ListEditor(InteractiveEditor):
 
     target_item_class = None
     target_item_creator_class = None
+    target_item_creator_class_kwargs = {}
     target_item_editor_class = None
     target_item_getter_configuration_method = None
     target_item_identifier = 'element'
@@ -40,15 +41,17 @@ class ListEditor(InteractiveEditor):
 
     ### PUBLIC METHODS ###
 
+    # TODO: change name to self.add_target_items_interactively()
     def add_target_item_interactively(self):
         if self.target_item_creator_class:
-            target_item_creator = self.target_item_creator_class(session=self.session)
+            target_item_creator = self.target_item_creator_class(
+                session=self.session, **self.target_item_creator_class_kwargs)
             self.push_backtrack()
-            target_item_creator.run()
+            result = target_item_creator.run()
             self.pop_backtrack()
             if self.backtrack():
                 return
-            target_item = target_item_creator.target
+            result = result or target_item_creator.target
         elif self.target_item_getter_configuration_method:
             getter = self.make_getter(where=self.where())
             self.target_item_getter_configuration_method(getter, self.target_item_identifier)
@@ -57,11 +60,20 @@ class ListEditor(InteractiveEditor):
             self.pop_backtrack()
             if self.backtrack():
                 return
-            target_item = self.target_item_class(target_item_initialization_token)
+            #target_item = self.target_item_class(target_item_initialization_token)
+            result = self.target_item_class(target_item_initialization_token)
         else:
-            target_item = self.target_item_class()
-        if target_item:
-            self.target_items.append(target_item)
+            #target_item = self.target_item_class()
+            result = self.target_item_class()
+        if result is None:
+            result = []
+        if isinstance(result, list):
+            target_items = result
+        else:
+            target_items = [result]
+        #if target_item:
+        #    self.target_items.append(target_item)
+        self.target_items.extend(target_items)
 
     def edit_target_item_interactively(self, target_item_number):
         target_item = self.get_target_item_from_target_item_number(target_item_number)
