@@ -35,7 +35,8 @@ class InstrumentEditor(InteractiveEditor):
     def conditionally_initialize_target(self):
         if self.target is None:
             self.push_backtrack()
-            instruments = self.select_instruments_from_instrumenttools_interactively()
+            wizard = wizards.InstrumentCreationWizard(is_ranged=True, session=self.session)
+            instruments = wizard.run()
             self.pop_backtrack()
             if self.backtrack():
                 return
@@ -58,50 +59,3 @@ class InstrumentEditor(InteractiveEditor):
         hidden_section = menu.hidden_section
         hidden_section.append(('tprd', 'toggle pitch range display'))
         return menu
-
-    def select_instruments_from_instrumenttools_interactively(self, clear=True, cache=False):
-        wizard = wizards.InstrumentCreationWizard(is_ranged=True, session=self.session)
-        self.push_backtrack()
-        result = wizard.run()
-        self.pop_backtrack()
-        if self.backtrack():
-            return
-        return result
-
-#    def select_instruments_from_instrumenttools_interactively(self, clear=True, cache=False):
-#        '''Return list of instruments or none.'''
-#        from abjad.tools import instrumenttools
-#        self.cache_breadcrumbs(cache=cache)
-#        menu, section = self.make_menu(where=self.where(), is_numbered=True, is_ranged=True)
-#        section.tokens = instrumenttools.list_instrument_names()
-#        while True:
-#            self.push_breadcrumb('select instrument')
-#            result = menu.run(clear=clear)
-#            if self.backtrack():
-#                self.pop_breadcrumb()
-#                self.restore_breadcrumbs(cache=cache)
-#                return    
-#            elif not result:
-#                self.pop_breadcrumb()
-#                continue
-#            else:
-#                self.pop_breadcrumb()
-#                break
-#        instrument_names = result
-#        this_result = []
-#        for instrument_name in instrument_names:
-#            instrument_name = instrument_name.title()
-#            instrument_name = instrument_name.replace(' ', '')
-#            command = 'instrument = instrumenttools.{}()'.format(instrument_name)
-#            exec(command)
-#            if isinstance(instrument, instrumenttools.UntunedPercussion):
-#                selector = selectors.InstrumentToolsUntunedPercussionNameSelector(session=self.session)
-#                self.push_backtrack()
-#                instrument_name = selector.run()
-#                self.pop_backtrack()
-#                if self.backtrack():
-#                    continue
-#                instrument.instrument_name = instrument_name
-#            this_result.append(instrument)
-#        self.restore_breadcrumbs(cache=cache)
-#        return this_result

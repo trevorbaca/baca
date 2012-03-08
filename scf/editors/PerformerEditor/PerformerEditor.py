@@ -4,6 +4,7 @@ from abjad.tools import scoretools
 from abjad.tools import sequencetools
 from scf.editors.InteractiveEditor import InteractiveEditor
 from scf.editors.InstrumentEditor import InstrumentEditor
+from scf import wizards
 
 
 class PerformerEditor(InteractiveEditor):
@@ -39,8 +40,12 @@ class PerformerEditor(InteractiveEditor):
     ### PUBLIC METHODS ###
 
     def add_instruments_interactively(self):
-        editor = InstrumentEditor(session=self.session)
-        instruments = editor.select_instruments_from_instrumenttools_interactively()
+        self.push_backtrack()
+        wizard = wizards.InstrumentCreationWizard(session=self.session, is_ranged=True)
+        instruments = wizard.run()
+        self.pop_backtrack()
+        if self.backtrack():
+            return
         if instruments is not None:
             for instrument in instruments:
                 self.target.instruments.append(instrument)
@@ -151,8 +156,12 @@ class PerformerEditor(InteractiveEditor):
             elif result == 'none':
                 break
             elif result == 'other':
-                editor = InstrumentEditor(session=self.session)
-                instruments = editor.select_instruments_from_instrumenttools_interactively()
+                self.push_backtrack()
+                wizard = wizards.InstrumentCreationWizard(session=self.session, is_ranged=True)
+                instruments = wizard.run()
+                self.pop_backtrack()
+                if self.backtrack():
+                    break
                 if instruments is not None:
                     for instrument in instruments:
                         self.target.instruments.append(instrument)
