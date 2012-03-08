@@ -54,7 +54,7 @@ class InstrumentEditor(InteractiveEditor):
         hidden_section.append(('tprd', 'toggle pitch range display'))
         return menu
 
-    # TODO: encapsulate in selector
+    # TODO: replace with instrument creation wizard
     def select_instruments_from_instrumenttools_interactively(self, clear=True, cache=False):
         '''Return list of instruments or none.'''
         from abjad.tools import instrumenttools
