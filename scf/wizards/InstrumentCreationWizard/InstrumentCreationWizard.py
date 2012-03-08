@@ -40,8 +40,12 @@ class InstrumentCreationWizard(Wizard):
         self.push_breadcrumb()
         selector = selectors.InstrumentToolsInstrumentNameSelector(
             session=self.session, is_ranged=self.is_ranged)
+        self.push_backtrack()
         result = selector.run()
+        self.pop_backtrack()
         if self.backtrack():
+            self.pop_breadcrumb()
+            self.restore_breadcrumbs(cache=cache)
             return
         if isinstance(result, list):
             instrument_names = result
