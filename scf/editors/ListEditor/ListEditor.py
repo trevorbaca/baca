@@ -1,3 +1,4 @@
+from abjad.tools import mathtools
 from abjad.tools import sequencetools
 from scf.editors.InteractiveEditor import InteractiveEditor
 
@@ -11,6 +12,7 @@ class ListEditor(InteractiveEditor):
     target_item_editor_class = None
     target_item_getter_configuration_method = None
     target_item_identifier = 'element'
+    target_manifest = None
 
     ### READ-ONLY PUBLIC ATTRIBUTES ###
 
@@ -82,19 +84,25 @@ class ListEditor(InteractiveEditor):
             self.remove_target_items_interactively()
         elif result == 'mv':
             self.move_target_item_interactively()
-        else:
+        elif mathtools.is_integer_equivalent_expr(result):
             self.edit_target_item_interactively(result)
+        else:
+            InteractiveEditor.handle_main_menu_result(self, result)
 
     def make_main_menu(self):
-        menu, section = self.make_menu(where=self.where(), is_parenthetically_numbered=True)
-        section.tokens = self.target_summary_lines
-        section.return_value_attribute = 'number'
-        section = menu.make_section()
-        section.append(('add', 'add elements'))
+        menu, attribute_management_section = self.make_menu(where=self.where(), 
+            is_keyed=getattr(self.target_manifest, 'is_keyed', False))
+        attribute_management_section.tokens = self.target_attribute_tokens
+        attribute_management_section.show_existing_values = True
+        item_management_section = menu.make_section(is_parenthetically_numbered=True)
+        item_management_section.tokens = self.target_summary_lines
+        item_management_section.return_value_attribute = 'number'
+        command_section = menu.make_section()
+        command_section.append(('add', 'add elements'))
         if 0 < len(self.target_items):
-            section.append(('rm', 'remove elements'))
+            command_section.append(('rm', 'remove elements'))
         if 1 < len(self.target_items):
-            section.append(('mv', 'move elements'))
+            command_section.append(('mv', 'move elements'))
         hidden_section = menu.make_section(is_hidden=True)
         hidden_section.append(('done', 'done'))
         return menu

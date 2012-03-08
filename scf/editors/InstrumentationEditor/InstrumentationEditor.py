@@ -1,15 +1,20 @@
 from abjad.tools import scoretools
 from abjad.tools import sequencetools
+from scf import getters
 from scf.editors.InteractiveEditor import InteractiveEditor
 from scf.editors.PerformerEditor import PerformerEditor
+from scf.editors.TargetManifest import TargetManifest
 
 
+# TODO: inherit from ListEditor and streamline everything
 class InstrumentationEditor(InteractiveEditor):
 
     ### CLASS ATTRIBUTES ###
 
     target_class = scoretools.InstrumentationSpecifier
     target_item_class = scoretools.Performer
+    target_manifest = TargetManifest(scoretools.InstrumentationSpecifier,
+        )
 
     ### READ-ONLY PUBLIC ATTRIBUTES ###
 

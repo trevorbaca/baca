@@ -3,12 +3,16 @@ from scf.core.SCFObject import SCFObject
 
 class InteractiveEditor(SCFObject):
     
+    ### INITIALIZER ###
+
     def __init__(self, session=None, target=None):
         SCFObject.__init__(self, session=session)
         if target is not None:
             assert isinstance(target, self.target_class)
         self.target = target
         self.initialize_attributes_in_memory()
+        if not hasattr(self, 'target_manifest'):
+            raise Exception
     
     ### OVERLOADS ###
 
@@ -67,12 +71,14 @@ class InteractiveEditor(SCFObject):
 
     @property
     def target_name(self):
-        pass
+        target_name_attribute = self.target_manifest.target_name_attribute
+        if target_name_attribute:
+            return getattr(self.target, self.target_manifest.target_name_attribute, None)
 
     @property
     def target_summary_lines(self):
         result = []
-        if self.target:
+        if self.target is not None:
             for target_attribute_name in self.target_attribute_names:
                 name = self.change_string_to_human_readable_string(target_attribute_name)
                 value = self.get_one_line_menuing_summary(getattr(self.target, target_attribute_name))
@@ -101,8 +107,7 @@ class InteractiveEditor(SCFObject):
         self.initialize_attributes_in_memory()
 
     def conditionally_initialize_target(self):
-        #self.target = self.target or self.target_class()
-        if self.target:
+        if self.target is not None:
             return
         try:
             self.target = self.target_class()
@@ -110,7 +115,7 @@ class InteractiveEditor(SCFObject):
             pass
 
     def conditionally_set_target_attribute(self, attribute_name, attribute_value):
-        if self.target:
+        if self.target is not None:
             if not self.session.is_complete:
                 setattr(self.target, attribute_name, attribute_value)
         else:
@@ -150,8 +155,8 @@ class InteractiveEditor(SCFObject):
             pass
 
     def make_main_menu(self):
-        is_keyed = self.target_manifest.is_keyed
-        menu, section = self.make_menu(where=self.where(), is_parenthetically_numbered=True, is_keyed=is_keyed)
+        menu, section = self.make_menu(where=self.where(), 
+            is_keyed=self.target_manifest.is_keyed, is_parenthetically_numbered=True)
         section.tokens = self.target_attribute_tokens
         section.show_existing_values = True
         hidden_section = menu.hidden_section
@@ -167,7 +172,7 @@ class InteractiveEditor(SCFObject):
             menu_key = attribute_detail.menu_key
             target_attribute_name = attribute_detail.name
             menu_body = attribute_detail.human_readable_name
-            if self.target:
+            if self.target is not None:
                 attribute_value = getattr(self.target, target_attribute_name)
             else:
                 attribute_value = self.attributes_in_memory.get(target_attribute_name)

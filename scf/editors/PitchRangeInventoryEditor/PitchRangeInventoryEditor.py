@@ -2,6 +2,7 @@ from abjad.tools import pitchtools
 from scf.editors.InteractiveEditor import InteractiveEditor
 from scf.editors.ListEditor import ListEditor
 from scf.editors.PitchRangeEditor import PitchRangeEditor
+from scf.editors.TargetManifest import TargetManifest
 from scf.menuing.UserInputGetter import UserInputGetter
 
 
@@ -14,6 +15,9 @@ class PitchRangeInventoryEditor(ListEditor):
     target_item_class = pitchtools.PitchRange
     target_item_editor_class = PitchRangeEditor
     target_item_identifier = 'pitch range'
+    target_manifest = TargetManifest(pitchtools.PitchRangeInventory,
+        target_name_attribute='inventory_name',
+        )
 
     ### READ-ONLY PUBLIC ATTRIBUTES ###
 

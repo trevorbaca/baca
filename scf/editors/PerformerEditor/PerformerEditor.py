@@ -2,17 +2,22 @@ from abjad.tools import instrumenttools
 from abjad.tools import mathtools
 from abjad.tools import scoretools
 from abjad.tools import sequencetools
+from scf import getters
+from scf import wizards
 from scf.editors.InteractiveEditor import InteractiveEditor
 from scf.editors.InstrumentEditor import InstrumentEditor
-from scf import wizards
+from scf.editors.TargetManifest import TargetManifest
 
 
+# TODO: inherit from ListEditor; extend list editor to allow for (performer) name
 class PerformerEditor(InteractiveEditor):
 
     ### CLASS ATTRIBUTES ###
 
     target_class = scoretools.Performer
-
+    target_manifest = TargetManifest(scoretools.Performer,
+        )
+    
     ### READ-ONLY PUBLIC ATTRIBUTES ###
 
     @property
