@@ -57,16 +57,12 @@ class Selector(SCFObject):
         return [self.change_expr_to_menu_token(item) for item in self.items]
 
     def run(self, cache=False, clear=True, head=None, user_input=None):
-        self.debug(self.session.user_input, 'start selector')
         self.assign_user_input(user_input=user_input)
-        self.debug(self.session.user_input, 'assigned selector input')
         self.cache_breadcrumbs(cache=cache)
         while True:
             self.push_breadcrumb()
             menu = self.make_main_menu(head=head)
-            self.debug(self.session.user_input, 'going to run selector menu')
             result = menu.run(clear=clear)
-            self.debug(self.session.user_input, 'ran selector menu')
             if self.backtrack():
                 break
             elif not result:
@@ -76,5 +72,4 @@ class Selector(SCFObject):
                 break
         self.pop_breadcrumb()
         self.restore_breadcrumbs(cache=cache)
-        self.debug(self.session.user_input, 'exit selector')
         return result

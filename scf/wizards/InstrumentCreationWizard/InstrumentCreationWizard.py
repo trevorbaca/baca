@@ -36,7 +36,6 @@ class InstrumentCreationWizard(Wizard):
 
     def run(self, cache=False, clear=True, head=None, user_input=None):
         self.assign_user_input(user_input=user_input)
-        self.debug(self.session.user_input, 'run wizard')
         self.cache_breadcrumbs(cache=cache)
         self.push_breadcrumb()
         selector = selectors.InstrumentToolsInstrumentNameSelector(
