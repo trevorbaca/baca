@@ -35,7 +35,7 @@ class InstrumentationEditor(InteractiveEditor):
 
     ### PUBLIC METHODS ###
 
-    # performer creation and config can probably be combined in performer editor
+    # TODO: abstract out to wizard
     def add_performers_interactively(self):
         from abjad.tools import scoretools
         try_again = False
@@ -68,6 +68,7 @@ class InstrumentationEditor(InteractiveEditor):
                     continue
                 break
 
+    # TODO: replace with list editor
     def edit_performer_interactively(self, performer_number):
         try:
             performer_number = int(performer_number)
@@ -77,6 +78,7 @@ class InstrumentationEditor(InteractiveEditor):
         performer_editor = PerformerEditor(session=self.session, target=performer)
         performer_editor.run()
 
+    # TODO: replace with list editor
     def get_performer_from_performer_number(self, performer_number):
         assert isinstance(performer_number, int)
         performer_index = performer_number - 1
@@ -86,6 +88,7 @@ class InstrumentationEditor(InteractiveEditor):
             performer = None
         return performer
 
+    # TODO: replace with list editor
     def handle_main_menu_result(self, result):
         if not isinstance(result, str):
             raise TypeError('result must be string.')
@@ -98,6 +101,7 @@ class InstrumentationEditor(InteractiveEditor):
         else:
             self.edit_performer_interactively(result)
 
+    # TODO: replace with list editor
     def make_main_menu(self):
         menu, section = self.make_menu(where=self.where(), is_parenthetically_numbered=True)
         section.tokens = self.target_summary_lines
@@ -110,6 +114,7 @@ class InstrumentationEditor(InteractiveEditor):
             section.append(('mv', 'move performers'))
         return menu
 
+    # TODO: replace with list editor
     def move_performer_interactively(self):
         getter = self.make_getter(where=self.where())
         getter.append_integer_in_range('old number', 1, self.target.performer_count)
@@ -123,7 +128,7 @@ class InstrumentationEditor(InteractiveEditor):
         self.target.performers.remove(performer)
         self.target.performers.insert(new_index, performer)
 
-    # TODO: abstract up to ListEditor.delete_items_interactively
+    # TODO: replace with list editor
     def remove_performers_interactively(self):
         getter = self.make_getter(where=self.where())
         getter.append_argument_range('performers', self.target_summary_lines)
@@ -136,6 +141,7 @@ class InstrumentationEditor(InteractiveEditor):
         performers = sequencetools.remove_sequence_elements_at_indices(performers, performer_indices)
         self.target.performers[:] = performers
 
+    # TODO: abstract out to selector
     def select_performer_names_interactively(self, clear=True, cache=False):
         from abjad.tools import scoretools
         self.cache_breadcrumbs(cache=cache)
