@@ -10,7 +10,6 @@ class PitchClassSpecifierEditor(ParameterSpecifierEditor):
 
     ### CLASS ATTRIBUTES ###
 
-    target_class = PitchClassSpecifier
     target_manifest = TargetManifest(PitchClassSpecifier,
         ('name', 'nm', getters.get_string),
         ('description', 'ds', getters.get_string),

@@ -9,7 +9,6 @@ class RhythmSpecifierEditor(ParameterSpecifierEditor):
 
     ### CLASS ATTRIBUTES ###
 
-    target_class = RhythmSpecifier
     target_manifest = TargetManifest(RhythmSpecifier,
         ('name', 'nm', getters.get_string),
         ('description', 'ds', getters.get_string),

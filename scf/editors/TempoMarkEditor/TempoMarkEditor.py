@@ -9,7 +9,6 @@ class TempoMarkEditor(InteractiveEditor):
 
     ### CLASS ATTRIBUTES ###
 
-    target_class = contexttools.TempoMark
     target_manifest = TargetManifest(contexttools.TempoMark,
         ('duration', 'd', getters.get_duration),
         ('units_per_minute', 'm', getters.get_integer),

@@ -10,7 +10,6 @@ class PitchRangeInventoryEditor(ListEditor):
 
     ### CLASS ATTRIBUTES ###
 
-    target_class = pitchtools.PitchRangeInventory
     target_item_getter_configuration_method = UserInputGetter.append_symbolic_pitch_range_string
     target_item_class = pitchtools.PitchRange
     target_item_editor_class = PitchRangeEditor

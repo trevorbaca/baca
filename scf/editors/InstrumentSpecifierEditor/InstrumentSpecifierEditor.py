@@ -1,7 +1,7 @@
+from scf import selectors
+from scf import specifiers
 from scf.editors.ParameterSpecifierEditor import ParameterSpecifierEditor
 from scf.editors.TargetManifest import TargetManifest
-from scf.specifiers.InstrumentSpecifier import InstrumentSpecifier
-from scf import selectors
 
 
 class InstrumentSpecifierEditor(ParameterSpecifierEditor):
@@ -12,8 +12,7 @@ class InstrumentSpecifierEditor(ParameterSpecifierEditor):
 
     ### CLASS ATTRIBUTES ###
 
-    target_class = InstrumentSpecifier
-    target_manifest = TargetManifest(InstrumentSpecifier,
+    target_manifest = TargetManifest(specifiers.InstrumentSpecifier,
         ('instrument', 'st', selectors.InstrumentSelector),
         )
 

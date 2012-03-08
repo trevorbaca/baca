@@ -11,7 +11,6 @@ class InstrumentationEditor(InteractiveEditor):
 
     ### CLASS ATTRIBUTES ###
 
-    target_class = scoretools.InstrumentationSpecifier
     target_item_class = scoretools.Performer
     target_manifest = TargetManifest(scoretools.InstrumentationSpecifier,
         )

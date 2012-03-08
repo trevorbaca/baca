@@ -45,6 +45,10 @@ class InteractiveEditor(SCFObject):
         return result
 
     @property
+    def target_class(self):
+        return self.target_manifest.target_class
+
+    @property
     def target_keyword_attribute_names(self):
         result = []
         if hasattr(self, 'target_manifest'):

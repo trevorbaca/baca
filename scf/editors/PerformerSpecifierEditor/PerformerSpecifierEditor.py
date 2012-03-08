@@ -8,7 +8,6 @@ class PerformerSpecifierEditor(ParameterSpecifierEditor):
 
     ### CLASS ATTRIBUTES ###
 
-    target_class = PerformerSpecifier
     target_manifest = TargetManifest(PerformerSpecifier,
         ('performer', 'pf', selectors.PerformerSelector),
         )

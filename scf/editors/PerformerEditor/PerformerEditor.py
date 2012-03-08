@@ -14,7 +14,6 @@ class PerformerEditor(InteractiveEditor):
 
     ### CLASS ATTRIBUTES ###
 
-    target_class = scoretools.Performer
     target_manifest = TargetManifest(scoretools.Performer,
         )
     

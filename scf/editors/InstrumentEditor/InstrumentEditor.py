@@ -1,18 +1,17 @@
+from scf import getters
+from scf import selectors
+from scf import wizards
 from abjad.tools.instrumenttools._Instrument import _Instrument
 from abjad.tools import instrumenttools
 from scf.editors.ClefMarkInventoryEditor import ClefMarkInventoryEditor
 from scf.editors.InteractiveEditor import InteractiveEditor
 from scf.editors.TargetManifest import TargetManifest
-from scf import getters
-from scf import selectors
-from scf import wizards
 
 
 class InstrumentEditor(InteractiveEditor):
 
     ### CLASS ATTRIBUTES ###
 
-    target_class = _Instrument
     target_manifest = TargetManifest(_Instrument,
         ('instrument_name', 'in', getters.get_string),
         ('instrument_name_markup', 'im', getters.get_markup),

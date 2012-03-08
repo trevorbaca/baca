@@ -10,7 +10,6 @@ class TempoMarkInventoryEditor(ListEditor):
 
     ### CLASS ATTRIBUTES ###
 
-    target_class = contexttools.TempoMarkInventory
     target_item_getter_configuration_method = UserInputGetter.append_tempo
     target_item_class = contexttools.TempoMark
     target_item_editor_class = TempoMarkEditor

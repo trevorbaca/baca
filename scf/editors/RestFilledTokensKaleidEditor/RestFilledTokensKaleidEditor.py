@@ -8,6 +8,5 @@ class RestFilledTokensKaleidEditor(KaleidEditor):
 
     ### CLASS ATTRIBUTES ###
 
-    target_class = kaleids.RestFilledTokens
     target_manifest = TargetManifest(kaleids.RestFilledTokens,
         )
