@@ -161,8 +161,11 @@ class Menu(MenuSectionAggregator):
     def conditionally_display_menu(self):
         self.conditionally_clear_terminal()
         self.display(self.menu_lines, capitalize_first_character=False)
+        self.debug(self.session.user_input, 'A')
         user_response = self.handle_raw_input_with_default('SCF', default=self.prompt_default)
+        self.debug(self.session.user_input, 'B')
         user_input = self.split_multipart_user_response(user_response)
+        self.debug(self.session.user_input, 'C')
         directive = self.change_user_input_to_directive(user_input)
         directive = self.strip_default_indicators_from_strings(directive)
         self.session.hide_next_redraw = False
@@ -213,6 +216,7 @@ class Menu(MenuSectionAggregator):
 
     def run(self, clear=True, user_input=None):
         self.assign_user_input(user_input=user_input)
+        self.debug(self.session.user_input, 'assigned menu input')
         clear, hide_current_run = clear, False
         while True:
             self.should_clear_terminal, self.hide_current_run = clear, hide_current_run
@@ -224,6 +228,7 @@ class Menu(MenuSectionAggregator):
                 clear, hide_current_run = True, False
             else:
                 break
+        self.debug(self.session.user_input, 'ran menu')
         return result
 
     def split_multipart_user_response(self, user_response):
@@ -240,8 +245,11 @@ class Menu(MenuSectionAggregator):
             rest = ' '.join(rest_parts)
             if rest:
                 self.session.transcribe_next_command = False
+            self.debug(rest, 'rest')
             if isinstance(self.session.user_input, str) and rest:
                 self.session.user_input = rest + ' ' + self.session.user_input
+            elif isinstance(self.session.user_input, str) and not rest:
+                self.session.user_input = self.session.user_input
             else:
                 self.session.user_input = rest
         else:
