@@ -2,6 +2,7 @@ from abjad.tools import scoretools
 from abjad.tools import sequencetools
 from scf import getters
 from scf import selectors
+from scf import wizards
 from scf.editors.InteractiveEditor import InteractiveEditor
 from scf.editors.PerformerEditor import PerformerEditor
 from scf.editors.TargetManifest import TargetManifest
@@ -36,39 +37,12 @@ class InstrumentationEditor(InteractiveEditor):
 
     ### PUBLIC METHODS ###
 
-    # TODO: abstract out to wizard
     def add_performers_interactively(self):
-        from abjad.tools import scoretools
-        try_again = False
-        while True:
-            if self.backtrack():
-                return
-            self.push_backtrack()
-            selector = selectors.ScoreToolsPerformerNameSelector(session=self.session, is_ranged=True)
-            performer_names = selector.run()
-            self.pop_backtrack()
-            if self.backtrack():
-                return
-            elif performer_names:
-                performers = []
-                for performer_name in performer_names:
-                    performer = scoretools.Performer(performer_name)
-                    performer_editor = PerformerEditor(session=self.session, target=performer)
-                    self.push_breadcrumb('add performers')
-                    self.push_backtrack()
-                    performer_editor.set_initial_configuration_interactively()
-                    self.pop_backtrack()
-                    self.pop_breadcrumb()
-                    if self.backtrack():
-                        performers = []
-                        try_again = True
-                        break
-                    performers.append(performer)
-                for performer in performers:
-                    self.target.performers.append(performer)
-                if try_again:
-                    continue
-                break
+        wizard = wizards.PerformerCreationWizard(session=self.session, is_ranged=True)
+        performers = wizard.run()
+        if self.backtrack():
+            return
+        self.target.performers.extend(performers)
 
     # TODO: replace with list editor
     def edit_performer_interactively(self, performer_number):

@@ -139,7 +139,7 @@ class PerformerEditor(InteractiveEditor):
     def set_initial_configuration_interactively(self, clear=True, cache=False):
         self.cache_breadcrumbs(cache=cache)
         self.conditionally_initialize_target()
-        menu = self.set_initial_configuration_menu()
+        menu = self.make_initial_configuration_menu()
         while True:
             self.push_breadcrumb(self.target.name)
             result = menu.run(clear=clear)
@@ -176,7 +176,7 @@ class PerformerEditor(InteractiveEditor):
         self.pop_breadcrumb()
         self.restore_breadcrumbs(cache=cache)
 
-    def set_initial_configuration_menu(self):
+    def make_initial_configuration_menu(self):
         menu, section = self.make_menu(where=self.where(), is_numbered=True, is_ranged=True) 
         section.title = 'select instruments'
         likely_instruments = self.target.likely_instruments_based_on_performer_name
