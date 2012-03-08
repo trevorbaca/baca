@@ -25,13 +25,5 @@ class InstrumentationEditor(ListEditor):
         return self.target_name or 'performers'
 
     @property
-    def target_summary_lines(self):
-        result = []
-        for performer in self.target.performers:
-            performer_editor = PerformerEditor(session=self.session, target=performer)
-            result.extend(performer_editor.target_summary_lines)
-        return result
-
-    @property
     def target_items(self):
         return self.target.performers
