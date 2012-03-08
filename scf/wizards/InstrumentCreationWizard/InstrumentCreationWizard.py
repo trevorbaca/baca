@@ -1,6 +1,6 @@
 from abjad.tools import instrumenttools
-from scf.wizards.Wizard import Wizard
 from scf import selectors
+from scf.wizards.Wizard import Wizard
 
 
 class InstrumentCreationWizard(Wizard):
@@ -38,8 +38,8 @@ class InstrumentCreationWizard(Wizard):
         self.assign_user_input(user_input=user_input)
         self.cache_breadcrumbs(cache=cache)
         self.push_breadcrumb()
-        selector = selectors.InstrumentToolsInstrumentNameSelector(
-            session=self.session, is_ranged=self.is_ranged)
+        kwargs = {'session': self.session, 'is_ranged': self.is_ranged}
+        selector = selectors.InstrumentToolsInstrumentNameSelector(**kwargs)
         self.push_backtrack()
         result = selector.run()
         self.pop_backtrack()
