@@ -206,6 +206,7 @@ class UserInputGetter(MenuSectionAggregator):
         self.append_something(spaced_attribute_name, message, default=default)
         self.tests.append(pitchtools.is_symbolic_pitch_range_string)
 
+    # TODO: fix bug to make (Duration(1, 4), 72) work
     def append_tempo(self, spaced_attribute_name, default=None):
         message = 'value for {!r} must successfully initialize tempo mark.'
         self.append_something(spaced_attribute_name, message, default=default)
