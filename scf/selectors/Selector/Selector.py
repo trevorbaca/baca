@@ -3,8 +3,13 @@ from scf.core.SCFObject import SCFObject
 
 class Selector(SCFObject):
 
-    def __init__(self, items=None, session=None):
+    def __init__(self, is_keyed=False, is_numbered=False, 
+        is_parenthetically_numbered=True, is_ranged=False, items=None, session=None):
         SCFObject.__init__(self, session=session) 
+        self.is_keyed = is_keyed
+        self.is_numbered = is_numbered
+        self.is_parenthetically_numbered = is_parenthetically_numbered
+        self.is_ranged = is_ranged
         self.items = items or []
 
     ### READ-ONLY ATTRIBUTES ###
@@ -38,7 +43,12 @@ class Selector(SCFObject):
         return result
 
     def make_main_menu(self, head=None):
-        menu, section = self.make_menu(where=self.where(), is_parenthetically_numbered=True, is_keyed=False)
+        menu, section = self.make_menu(where=self.where(), 
+            is_keyed=self.is_keyed,
+            is_numbered=self.is_numbered,
+            is_parenthetically_numbered=self.is_parenthetically_numbered,
+            is_ranged=self.is_ranged,
+            )
         section.tokens = self.make_menu_tokens(head=head)
         section.return_value_attribute = 'prepopulated'
         return menu
