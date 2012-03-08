@@ -2,7 +2,7 @@ import scf
 from abjad import *
 
 
-def test_PerformerEditor_rename_performer_01():
+def test_PerformerEditor_name_01():
     '''Quit, back and studio all work.
     '''
 
@@ -17,7 +17,7 @@ def test_PerformerEditor_rename_performer_01():
     assert studio.ts == (13, (0, 11), (1, 7))
 
 
-def test_PerformerEditor_rename_performer_02():
+def test_PerformerEditor_name_02():
     '''String input only.
     '''
 
@@ -26,7 +26,7 @@ def test_PerformerEditor_rename_performer_02():
     assert studio.ts == (13, (1, 7))
 
 
-def test_PerformerEditor_rename_performer_03():
+def test_PerformerEditor_name_03():
     '''Create, name and rename performer.
     '''
 

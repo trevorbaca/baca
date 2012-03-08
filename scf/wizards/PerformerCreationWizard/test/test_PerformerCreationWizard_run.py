@@ -26,6 +26,37 @@ def test_PerformerCreationWizard_run_03():
     '''
 
     wizard = scf.wizards.PerformerCreationWizard(is_ranged=True)
-    assert wizard.run(user_input='vn, va 1 1') == [
+    assert wizard.run(user_input='vn, va default default') == [
         scoretools.Performer(name='violinist', instruments=[instrumenttools.Violin()]),
         scoretools.Performer(name='violist', instruments=[instrumenttools.Viola()])]
+
+
+def test_PerformerCreationWizard_run_04():
+    '''Skipping instruments.
+    '''
+
+    wizard = scf.wizards.PerformerCreationWizard(is_ranged=True)
+    assert wizard.run(user_input='vn, va skip skip') == [
+        scoretools.Performer(name='violinist'),
+        scoretools.Performer(name='violist')]
+
+
+def test_PerformerCreationWizard_run_05():
+    '''More instruments.
+    '''
+
+    wizard = scf.wizards.PerformerCreationWizard(is_ranged=True)
+    assert wizard.run(user_input='vn, va skip more xyl') == [
+        scoretools.Performer(name='violinist'),
+        scoretools.Performer(name='violist', instruments=[instrumenttools.Xylophone()])]
+
+
+def test_PerformerCreationWizard_run_06():
+    '''Auxiliary percussion.
+    '''
+
+    wizard = scf.wizards.PerformerCreationWizard(is_ranged=True)
+    caxixi = instrumenttools.UntunedPercussion()
+    caxixi.instrument_name = 'caxixi'
+    assert wizard.run(user_input='vn more untuned cax') == [
+        scoretools.Performer(name='violinist', instruments=[caxixi])]
