@@ -25,3 +25,14 @@ def test_OctaveTranspositionMappingEditor_run_02():
             inventory_name='piccolo second octave')
 
     assert editor.target == mapping
+
+
+def test_OctaveTranspositionMappingEditor_run_03():
+    '''Name only.
+    '''
+
+    editor = scf.editors.OctaveTranspositionMappingEditor()
+    editor.run(user_input='name piccolo~second~octave done')
+
+    mapping = pitchtools.OctaveTranspositionMapping(inventory_name='piccolo second octave')
+    assert editor.target == mapping

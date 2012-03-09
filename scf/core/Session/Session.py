@@ -140,6 +140,15 @@ class Session(object):
     def session_once_had_user_input(self):
         return self._session_once_had_user_input
 
+    @property
+    def testable_command_history_string(self):
+        result = []
+        for part in self.explicit_command_history:
+            if ' ' in part and ',' not in part:
+                part = part.replace(' ', '~')
+            result.append(part)
+        return ' '.join(result)
+
     @apply
     def transcribe_next_command():
         def fget(self):
