@@ -623,6 +623,7 @@ class MaterialPackageProxy(PackageProxy):
 
     def make_main_menu_section_for_illustration_pdf(self, main_menu, hidden_section):
         has_illustration_pdf_section = False
+        self.debug(self.has_output_material)
         if self.has_output_material:
             if self.has_illustration_builder_module or self.has_material_package_maker:
                 section = main_menu.make_section()

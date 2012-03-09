@@ -27,7 +27,7 @@ class _RhythmicKaleid(object):
         return type(self).__name__
 
     @property
-    def _class_name_with_tools_package(self):
+    def _fully_qualified_class_name(self):
         return '{}.{}'.format(self._tools_package, self._class_name)
 
     @property
