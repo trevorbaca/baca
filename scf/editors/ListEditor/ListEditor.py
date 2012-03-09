@@ -64,7 +64,7 @@ class ListEditor(InteractiveEditor):
             result = self.target_item_class()
         if result is None:
             result = []
-        if isinstance(result, list):
+        if result.__class__.__name__ == 'list':
             target_items = result
         else:
             target_items = [result]
