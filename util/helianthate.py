@@ -1,4 +1,4 @@
-from abjad.tools.componenttools._Component import _Component
+from abjad.tools.componenttools.Component import Component
 from abjad.tools import sequencetools
 from baca.util.rotate_nested import rotate_nested
 
@@ -21,7 +21,7 @@ def helianthate(l, outer, inner):
         [3, 1, 2], [7, 8, 6], [2, 3, 1], [5, 4]]
     '''
 
-    if not all([not isinstance(x, _Component) for x in l]):
+    if not all([not isinstance(x, Component) for x in l]):
         raise TypeError('function not defined from score components.')
 
     start = l[:]

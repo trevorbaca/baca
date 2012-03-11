@@ -4,7 +4,7 @@
 from abjad.tools.measuretools import Measure
 from abjad.tools.notetools.Note import Note
 from abjad.tools.voicetools.Voice import Voice
-from abjad.tools.leaftools._Leaf import _Leaf
+from abjad.tools.leaftools.Leaf import Leaf
 from abjad.tools import componenttools
 from abjad.tools import leaftools
 from abjad.tools import mathtools
@@ -132,7 +132,7 @@ def effectiveDurations(m):
     >>> effectiveDurations(t.leaves)
     [DURATION 1/24, DURATION 1/24, DURATION 1/24]
     '''
-    #return [l.duration.prolated for l in instances(m, '_Leaf')]
+    #return [l.duration.prolated for l in instances(m, 'Leaf')]
     #return [l.duration.prolated for l in list(iterate.leaves_forward_in(m))]
     #return [l.duration.prolated for l in list(leaftools.iterate_leaves_forward_in_expr(m))]
     return [l.prolated_duration for l in list(leaftools.iterate_leaves_forward_in_expr(m))]
@@ -240,9 +240,9 @@ def trill(l, p = False, indices = 'all', d = Fraction(0)):
     '''
 
     if indices == 'all':
-        indices = range(len(instances(l, '_Leaf')))
+        indices = range(len(instances(l, 'Leaf')))
 
-    for i, element in enumerate(instances(l, '_Leaf')):
+    for i, element in enumerate(instances(l, 'Leaf')):
         #if (i - 1) in indices:
         #  element.after.append(r'\stopTrillSpan')
         if hasattr(element, 'scaledDuration'):
@@ -259,7 +259,7 @@ def trill(l, p = False, indices = 'all', d = Fraction(0)):
 
 
 def grace(l,
-    k = '_Leaf', indices = 'all',
+    k = 'Leaf', indices = 'all',
     m = 'Note', dm = (0, 1), check = True,
     s = [[Note(0, (1, 16))]], cyclic = True):
     '''
@@ -323,7 +323,7 @@ def color(l, p):
 
 
 def untrill(l):
-    for element in instances(l, '_Leaf'):
+    for element in instances(l, 'Leaf'):
         if hasattr(element, 'trill'):
             delattr(element, 'trill')
 
@@ -332,7 +332,7 @@ def ungrace(l, keep = 'first', length = 1):
     '''
     '''
 
-    for element in instances(l, '_Leaf'):
+    for element in instances(l, 'Leaf'):
         if hasattr(element, 'grace'):
             if keep == 'first':
                 element.grace = element.grace[:length]
@@ -395,7 +395,7 @@ class Subdivide(object):
         self.positions = positions
         self.position = -1
     def visit(self, node):
-        if isinstance(node, _Leaf):
+        if isinstance(node, Leaf):
             self.position += 1
             n = self.positions[self.position]
             if n > 0:
@@ -703,7 +703,7 @@ def rippleVoices(m, s):
             if spec.has_key(i):
                 length, reps = spec[i]
                 source = v.copy(i, i + length - 1)
-                leaves = instances(source, '_Leaf')
+                leaves = instances(source, 'Leaf')
                 left, right = leaves[0], leaves[-1]
                 #left.spanners.fractureLeft()
                 #right.spanners.fractureRight()
@@ -742,12 +742,12 @@ def setLeafStartTimes(expr, offset = Fraction(0)):
     '''
 
     cur = Fraction(*offset.pair)
-    for l in instances(expr, '_Leaf'):
+    for l in instances(expr, 'Leaf'):
         l.start = cur
         cur += l.duration.prolated
 
 
-def rankLeavesTimewise(exprList, name = '_Leaf'):
+def rankLeavesTimewise(exprList, name = 'Leaf'):
     '''
     Sets 'timewise' attribute on each of the leaves in the expr in exprList.
 
@@ -1051,7 +1051,7 @@ def clearAllArticulations(leaves, start = 0, stop = None):
     if isinstance(stop, int):
         stop += 1
 
-    for l in instances(leaves[start : stop], '_Leaf'):
+    for l in instances(leaves[start : stop], 'Leaf'):
         l.articulations = []
 
 
@@ -1091,7 +1091,7 @@ def appendArticulations(voice, articulations, *args, **kwargs):
 
 def clear_dynamics(expr):
     '''Clear both dynamics and hairpins from leaves in expr.'''
-    for l in instances(expr, '_Leaf'):
+    for l in instances(expr, 'Leaf'):
         l.dynamics = None
         l.dynamics.unspan()
 
