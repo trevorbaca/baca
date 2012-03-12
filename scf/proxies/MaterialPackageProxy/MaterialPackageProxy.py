@@ -463,7 +463,10 @@ class MaterialPackageProxy(PackageProxy):
         if not self.has_output_material_editor:
             return
         output_material = self.output_material
-        if output_material is None and issubclass(self.output_material_maker, wizards.Wizard):
+        if not hasattr(self, 'output_material_maker'):
+            output_material_handler_callable = self.output_material_editor
+        elif output_material is None and self.output_material_maker and \
+            issubclass(self.output_material_maker, wizards.Wizard):
             output_material_handler_callable = self.output_material_maker
         else:
             output_material_handler_callable = self.output_material_editor

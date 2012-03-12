@@ -1,19 +1,22 @@
 from abjad.tools import mathtools
 from abjad.tools import sequencetools
+from scf import menuing
 from scf.editors.InteractiveEditor import InteractiveEditor
+from scf.editors.TargetManifest import TargetManifest
 
 
 class ListEditor(InteractiveEditor):
 
     ### READ-ONLY ATTRIBUTES ###
 
+    # TODO: change target_item_* to just item_*
     target_item_class = None
     target_item_creator_class = None
     target_item_creator_class_kwargs = {}
     target_item_editor_class = None
-    target_item_getter_configuration_method = None
+    target_item_getter_configuration_method = menuing.UserInputGetter.append_expr
     target_item_identifier = 'element'
-    target_manifest = None
+    target_manifest = TargetManifest(list,)
 
     ### READ-ONLY PUBLIC ATTRIBUTES ###
 
@@ -59,7 +62,10 @@ class ListEditor(InteractiveEditor):
             self.pop_backtrack()
             if self.backtrack():
                 return
-            result = self.target_item_class(target_item_initialization_token)
+            if self.target_item_class:
+                result = self.target_item_class(target_item_initialization_token)
+            else:
+                result = target_item_initialization_token
         else:
             result = self.target_item_class()
         if result is None:
