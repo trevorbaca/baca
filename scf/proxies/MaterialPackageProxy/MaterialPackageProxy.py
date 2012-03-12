@@ -103,7 +103,7 @@ class MaterialPackageProxy(PackageProxy):
 
     @property
     def has_output_material_editor(self):
-        return hasattr(self, 'output_material_editor')
+        return bool(getattr(self, 'output_material_editor', None))
 
     @property
     def has_output_material_module(self):

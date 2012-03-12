@@ -8,12 +8,11 @@ class MaterialPackageMaker(MaterialPackageProxy):
 
     ### CLASS ATTRIBUTES ###
 
-    # TODO: add these without breaking function input makers
-    #generic_output_name = None
-    #illustration_maker = None
-    #output_material_checker = None
-    #output_material_editor = None
-    #output_material_maker = None
+    generic_output_name = None
+    illustration_maker = None
+    output_material_checker = None
+    output_material_editor = None
+    output_material_maker = None
     output_material_module_import_statements = []
 
     ### INITIALIZER ###
