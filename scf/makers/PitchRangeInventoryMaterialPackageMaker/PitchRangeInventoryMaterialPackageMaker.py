@@ -1,10 +1,10 @@
 from abjad.tools import pitchtools
 from make_illustration_from_output_material import make_illustration_from_output_material
-from scf.makers.MaterialPackageMaker import MaterialPackageMaker
+from scf.makers.InventoryMaterialPackageMaker import InventoryMaterialPackageMaker
 from scf.editors.PitchRangeInventoryEditor import PitchRangeInventoryEditor
 
 
-class PitchRangeInventoryMaterialPackageMaker(MaterialPackageMaker):
+class PitchRangeInventoryMaterialPackageMaker(InventoryMaterialPackageMaker):
 
     ### CLASS ATTRIBUTES ###
 
@@ -14,13 +14,3 @@ class PitchRangeInventoryMaterialPackageMaker(MaterialPackageMaker):
     output_material_editor = PitchRangeInventoryEditor
     output_material_maker = pitchtools.PitchRangeInventory
     output_material_module_import_statements = ['from abjad.tools import pitchtools' ]
-
-    ### PUBLIC METHODS ###
-
-    # TODO: abstract up to InventoryMaterialPackageMaker
-    def make_output_material_module_body_lines(self, output_material):
-        lines = []
-        lines = output_material._tools_package_qualified_repr_pieces
-        lines[0] = '{} = {}'.format(self.material_underscored_name, lines[0])
-        lines = [line + '\n' for line in lines]
-        return lines
