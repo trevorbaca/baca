@@ -3,7 +3,7 @@ from abjad.tools import sequencetools
 import os
 
 
-def make_illustration_from_output_material(kaleid, **kwargs):
+def make_illustration_from_output_material(output_material, **kwargs):
 
     meter_tokens = [
         (2, 8), (3, 8), (4, 8), (5, 8), 
@@ -11,7 +11,7 @@ def make_illustration_from_output_material(kaleid, **kwargs):
         (2, 4), (2, 4), (2, 4), (2, 4),
         ]
 
-    music = kaleid(meter_tokens)
+    music = output_material(meter_tokens)
     music = sequencetools.flatten_sequence(music)
     measures = measuretools.make_measures_with_full_measure_spacer_skips(meter_tokens)
     staff = stafftools.RhythmicStaff(measures)

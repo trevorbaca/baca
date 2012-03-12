@@ -87,6 +87,11 @@ class UserInputGetter(MenuSectionAggregator):
         self.append_something(spaced_attribute_name, message, default=default)
         self.tests.append(predicates.is_clef_token)
 
+    def append_constellation_circuit_id_pair(self, spaced_attribute_name, default=None):
+        message = 'value for {!r} must be valid constellation circuit id pair.'
+        self.append_something(spaced_attribute_name, message, default=default)
+        self.tests.append(predicates.is_constellation_circuit_id_pair)
+
     def append_duration(self, spaced_attribute_name, default=None):
         message = 'value for {!r} must be duration.'
         self.append_something(spaced_attribute_name, message, default=default)
