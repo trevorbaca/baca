@@ -269,8 +269,8 @@ class SCFObject(object):
         else:
             return repr(expr)
 
-    def get_repr_with_tools_package(self, expr):
-        return getattr(expr, '_repr_with_tools_package', repr(expr))
+    def get_tools_package_qualified_repr(self, expr):
+        return getattr(expr, '_tools_package_qualified_repr', repr(expr))
 
     def get_tag_from_path_name(self, path_name, tag_name):
         tags_file_name = os.path.join(path_name, 'tags.py')

@@ -343,7 +343,7 @@ class MaterialPackageProxy(PackageProxy):
             output_material_module_body_lines = self.make_output_material_module_body_lines(output_material)
         else:
             line = '{} = {}'.format(
-                self.material_underscored_name, self.get_repr_with_tools_package(output_material))
+                self.material_underscored_name, self.get_tools_package_qualified_repr(output_material))
             output_material_module_body_lines = [line]
         return output_material_module_import_statements, output_material_module_body_lines
 
@@ -477,7 +477,7 @@ class MaterialPackageProxy(PackageProxy):
                 output_material_handler.target)
         else:
             line = '{} = {}'.format(self.material_underscored_name, 
-                self.get_repr_with_tools_package(self.target))
+                self.get_tools_package_qualified_repr(self.target))
             output_material_module_body_lines = [line]
         self.write_output_material_to_disk(
             output_material_module_import_statements=output_material_module_import_statements,

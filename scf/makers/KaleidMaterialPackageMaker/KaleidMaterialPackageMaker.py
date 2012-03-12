@@ -23,13 +23,13 @@ class KaleidMaterialPackageMaker(MaterialPackageMaker):
         formatted_input_parameters = output_material._formatted_input_parameters
         if formatted_input_parameters:
             lines.append('{} = {}('.format(
-                self.material_underscored_name, output_material._fully_qualified_class_name))
+                self.material_underscored_name, output_material._tools_package_qualified_class_name))
             for item in output_material._formatted_input_parameters[:-1]:
                 lines.append('\t{},'.format(item))
             item = output_material._formatted_input_parameters[-1]
             lines.append('\t{})'.format(item))
         else:
             lines.append('{} = {}()'.format(
-                self.material_underscored_name, output_material._fully_qualified_class_name))
+                self.material_underscored_name, output_material._tools_package_qualified_class_name))
         lines = [line + '\n' for line in lines]
         return lines

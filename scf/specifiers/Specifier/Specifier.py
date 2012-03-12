@@ -76,8 +76,8 @@ class Specifier(object):
     def get_format_pieces_of_expr(self, expr):
         if hasattr(expr, 'format_pieces'):
             return expr.format_pieces
-        elif hasattr(expr, '_repr_with_tools_package'):
-            return [expr._repr_with_tools_package]
+        elif hasattr(expr, '_tools_package_qualified_repr'):
+            return [expr._tools_package_qualified_repr]
         else:
             return [repr(expr)]
 

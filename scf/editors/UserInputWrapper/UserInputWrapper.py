@@ -32,9 +32,9 @@ class UserInputWrapper(collections.OrderedDict):
         else:
             result.append('user_input_wrapper = {}(['.format(type(self).__name__))
             for name, value in items[:-1]:
-                line = '\t({!r}, {}),'.format(name, self.get_repr_with_tools_package(value))
+                line = '\t({!r}, {}),'.format(name, self.get_tools_package_qualified_repr(value))
                 result.append(line)
-            result.append('\t({!r}, {})])'.format(items[-1][0], self.get_repr_with_tools_package(items[-1][1])))
+            result.append('\t({!r}, {})])'.format(items[-1][0], self.get_tools_package_qualified_repr(items[-1][1])))
         return result
 
     @property
@@ -62,8 +62,8 @@ class UserInputWrapper(collections.OrderedDict):
         for key in self:
             self[key] = None
 
-    def get_repr_with_tools_package(self, expr):
-        return getattr(expr, '_repr_with_tools_package', repr(expr))
+    def get_tools_package_qualified_repr(self, expr):
+        return getattr(expr, '_tools_package_qualified_repr', repr(expr))
 
     def list_items(self):
         return list(self.iteritems())

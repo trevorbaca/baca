@@ -20,11 +20,7 @@ class PitchRangeInventoryMaterialPackageMaker(MaterialPackageMaker):
     # TODO: abstract up to InventoryMaterialPackageMaker
     def make_output_material_module_body_lines(self, output_material):
         lines = []
-        lines.append('{} = {}(['.format(
-            self.material_underscored_name, output_material._fully_qualified_class_name))
-        for item in output_material[:-1]:
-            lines.append('\t{},'.format(self.get_repr_with_tools_package(item)))
-        item = output_material[-1]
-        lines.append('\t{}])'.format(self.get_repr_with_tools_package(item)))
+        lines = output_material._tools_package_qualified_repr_pieces
+        lines[0] = '{} = {}'.format(self.material_underscored_name, lines[0])
         lines = [line + '\n' for line in lines]
         return lines

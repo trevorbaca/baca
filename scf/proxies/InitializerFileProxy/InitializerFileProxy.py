@@ -61,7 +61,7 @@ class InitializerFileProxy(ParsableFileProxy):
                     value = '\n    '.join(repr_lines)
                     lines.append('({}, {})'.format(key, value))
                 else:
-                    value = getattr(value, '_repr_with_tools_package', repr(value))
+                    value = getattr(value, '_tools_package_qualified_repr', repr(value))
                     lines.append('({}, {})'.format(key, value))
             lines = ',\n    '.join(lines)
             result = 'tags = OrderedDict([\n    {}])'.format(lines)
