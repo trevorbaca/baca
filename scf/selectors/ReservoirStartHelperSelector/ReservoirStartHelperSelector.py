@@ -9,7 +9,7 @@ class ReservoirStartHelperSelector(Selector):
 
     ### PUBLIC METHODS ###
 
-    def list_target_items(self):
+    def list_items(self):
         result = []
         result.append('start at index 0')
         result.append('start at index n')

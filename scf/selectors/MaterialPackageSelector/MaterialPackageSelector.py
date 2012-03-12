@@ -25,7 +25,7 @@ class MaterialPackageSelector(Selector):
                     result.append(package_path_name)
         return result
 
-    def list_target_items(self):
+    def list_items(self):
         result = []
         for path_name in self.list_material_package_path_names_in_current_score():
             package_importable_name = self.path_name_to_package_importable_name(path_name)

@@ -6,9 +6,9 @@ from scf.editors.TargetManifest import TargetManifest
 
 class PerformerContributionSpecifierListEditor(ListEditor):
 
-    target_item_getter_configuration_method = None
-    target_item_class = specifiers.PerformerContributionSpecifier
-    target_item_editor_class = PerformerContributionSpecifierEditor
-    target_item_identifier = 'performer contribution'
+    item_getter_configuration_method = None
+    item_class = specifiers.PerformerContributionSpecifier
+    item_editor_class = PerformerContributionSpecifierEditor
+    item_identifier = 'performer contribution'
     target_manifest = TargetManifest(specifiers.PerformerContributionSpecifierList,
         )

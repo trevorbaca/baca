@@ -11,7 +11,7 @@ class DirectoryContentSelector(Selector):
 
     ### PUBLIC METHODS ###
 
-    def list_target_items(self):
+    def list_items(self):
         from scf.proxies.DirectoryProxy import DirectoryProxy
         result = []
         for path_name in self.asset_container_path_names:

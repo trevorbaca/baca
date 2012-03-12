@@ -10,5 +10,5 @@ class InstrumentToolsInstrumentNameSelector(Selector):
 
     ### PUBLIC METHODS ###
 
-    def list_target_items(self):
+    def list_items(self):
         return instrumenttools.list_instrument_names()

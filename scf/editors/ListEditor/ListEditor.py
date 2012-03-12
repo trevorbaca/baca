@@ -9,13 +9,13 @@ class ListEditor(InteractiveEditor):
 
     ### READ-ONLY ATTRIBUTES ###
 
-    # TODO: change target_item_* to just item_*
-    target_item_class = None
-    target_item_creator_class = None
-    target_item_creator_class_kwargs = {}
-    target_item_editor_class = None
-    target_item_getter_configuration_method = menuing.UserInputGetter.append_expr
-    target_item_identifier = 'element'
+    # TODO: change item_* to just item_*
+    item_class = None
+    item_creator_class = None
+    item_creator_class_kwargs = {}
+    item_editor_class = None
+    item_getter_configuration_method = menuing.UserInputGetter.append_expr
+    item_identifier = 'element'
     target_manifest = TargetManifest(list,)
 
     ### READ-ONLY PUBLIC ATTRIBUTES ###
@@ -25,66 +25,66 @@ class ListEditor(InteractiveEditor):
         return self.target_name or self.target_class_human_readable_name
 
     @property
-    def target_items(self):
+    def items(self):
         return self.target
 
     @property
-    def target_items_identifier(self):
-        if hasattr(self, '_target_items_identifier'):
-            return self._target_items_identifer
+    def items_identifier(self):
+        if hasattr(self, '_items_identifier'):
+            return self._items_identifer
         else:
-            return self.pluralize_string(self.target_item_identifier)
+            return self.pluralize_string(self.item_identifier)
 
     @property
     def target_summary_lines(self):
         result = []
-        for target_item in self.target_items:
-            result.append(self.get_one_line_menuing_summary(target_item))
+        for item in self.items:
+            result.append(self.get_one_line_menuing_summary(item))
         return result
 
     ### PUBLIC METHODS ###
 
-    def add_target_items_interactively(self):
-        if self.target_item_creator_class:
-            target_item_creator = self.target_item_creator_class(
-                session=self.session, **self.target_item_creator_class_kwargs)
+    def add_items_interactively(self):
+        if self.item_creator_class:
+            item_creator = self.item_creator_class(
+                session=self.session, **self.item_creator_class_kwargs)
             self.push_backtrack()
-            result = target_item_creator.run()
+            result = item_creator.run()
             self.pop_backtrack()
             if self.backtrack():
                 return
-            result = result or target_item_creator.target
-        elif self.target_item_getter_configuration_method:
+            result = result or item_creator.target
+        elif self.item_getter_configuration_method:
             getter = self.make_getter(where=self.where())
-            self.target_item_getter_configuration_method(getter, self.target_item_identifier)
+            self.item_getter_configuration_method(getter, self.item_identifier)
             self.push_backtrack()
-            target_item_initialization_token = getter.run()
+            item_initialization_token = getter.run()
             self.pop_backtrack()
             if self.backtrack():
                 return
-            if self.target_item_class:
-                result = self.target_item_class(target_item_initialization_token)
+            if self.item_class:
+                result = self.item_class(item_initialization_token)
             else:
-                result = target_item_initialization_token
+                result = item_initialization_token
         else:
-            result = self.target_item_class()
+            result = self.item_class()
         if result is None:
             result = []
         if result.__class__.__name__ == 'list':
-            target_items = result
+            items = result
         else:
-            target_items = [result]
-        self.target_items.extend(target_items)
+            items = [result]
+        self.items.extend(items)
 
-    def edit_target_item_interactively(self, target_item_number):
-        target_item = self.get_target_item_from_target_item_number(target_item_number)
-        if target_item is not None:
-            target_item_editor = self.target_item_editor_class(session=self.session, target=target_item)
-            target_item_editor.run()
+    def edit_item_interactively(self, item_number):
+        item = self.get_item_from_item_number(item_number)
+        if item is not None:
+            item_editor = self.item_editor_class(session=self.session, target=item)
+            item_editor.run()
 
-    def get_target_item_from_target_item_number(self, target_item_number):
+    def get_item_from_item_number(self, item_number):
         try:
-            return self.target_items[int(target_item_number) - 1]
+            return self.items[int(item_number) - 1]
         except:
             pass
 
@@ -92,13 +92,13 @@ class ListEditor(InteractiveEditor):
         if not isinstance(result, str):
             raise TypeError('result must be string.')
         if result == 'add':
-            self.add_target_items_interactively()
+            self.add_items_interactively()
         elif result == 'rm':
-            self.remove_target_items_interactively()
+            self.remove_items_interactively()
         elif result == 'mv':
-            self.move_target_item_interactively()
+            self.move_item_interactively()
         elif mathtools.is_integer_equivalent_expr(result):
-            self.edit_target_item_interactively(result)
+            self.edit_item_interactively(result)
         else:
             InteractiveEditor.handle_main_menu_result(self, result)
 
@@ -112,35 +112,35 @@ class ListEditor(InteractiveEditor):
         item_management_section.return_value_attribute = 'number'
         command_section = menu.make_section()
         command_section.append(('add', 'add elements'))
-        if 0 < len(self.target_items):
+        if 0 < len(self.items):
             command_section.append(('rm', 'remove elements'))
-        if 1 < len(self.target_items):
+        if 1 < len(self.items):
             command_section.append(('mv', 'move elements'))
         hidden_section = menu.make_section(is_hidden=True)
         hidden_section.append(('done', 'done'))
         return menu
 
-    def move_target_item_interactively(self):
+    def move_item_interactively(self):
         getter = self.make_getter(where=self.where())
-        getter.append_integer_in_range('old number', 1, len(self.target_items))
-        getter.append_integer_in_range('new number', 1, len(self.target_items))
+        getter.append_integer_in_range('old number', 1, len(self.items))
+        getter.append_integer_in_range('new number', 1, len(self.items))
         result = getter.run()
         if self.backtrack():
             return
         old_number, new_number = result
         old_index, new_index = old_number - 1, new_number - 1
-        target_item = self.target_items[old_index]
-        self.target_items.remove(target_item)
-        self.target_items.insert(new_index, target_item)
+        item = self.items[old_index]
+        self.items.remove(item)
+        self.items.insert(new_index, item)
 
-    def remove_target_items_interactively(self):
+    def remove_items_interactively(self):
         getter = self.make_getter(where=self.where())
-        getter.append_argument_range(self.target_items_identifier, self.target_summary_lines)
+        getter.append_argument_range(self.items_identifier, self.target_summary_lines)
         argument_range = getter.run()
         if self.backtrack():
             return
         indices = [argument_number - 1 for argument_number in argument_range]
         indices = list(reversed(sorted(set(indices))))
-        target_items = self.target_items[:]
-        target_items = sequencetools.remove_sequence_elements_at_indices(target_items, indices)
-        self.target_items[:] = target_items
+        items = self.items[:]
+        items = sequencetools.remove_sequence_elements_at_indices(items, indices)
+        self.items[:] = items

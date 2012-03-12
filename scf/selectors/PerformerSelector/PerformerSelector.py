@@ -12,7 +12,7 @@ class PerformerSelector(Selector):
 
     ### PUBLIC METHODS ###
 
-    def list_target_items(self):
+    def list_items(self):
         result = []
         current_score_package_proxy = self.session.current_score_package_proxy
         try:

@@ -10,5 +10,5 @@ class InstrumentToolsUntunedPercussionNameSelector(Selector):
 
     ### PUBLIC METHODS ###
 
-    def list_target_items(self):
+    def list_items(self):
         return instrumenttools.UntunedPercussion.known_untuned_percussion[:]

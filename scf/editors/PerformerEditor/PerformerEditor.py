@@ -12,11 +12,11 @@ class PerformerEditor(ListEditor):
 
     ### CLASS ATTRIBUTES ###
 
-    target_item_class = _Instrument
-    target_item_creator_class = wizards.InstrumentCreationWizard
-    target_item_creator_class_kwargs = {'is_ranged': True}
-    target_item_editor_class = InstrumentEditor
-    target_item_identifier = 'instrument'
+    item_class = _Instrument
+    item_creator_class = wizards.InstrumentCreationWizard
+    item_creator_class_kwargs = {'is_ranged': True}
+    item_editor_class = InstrumentEditor
+    item_identifier = 'instrument'
     target_manifest = TargetManifest(scoretools.Performer,
         ('name', 'nm', getters.get_string),
         target_attribute_name='name',
@@ -25,5 +25,5 @@ class PerformerEditor(ListEditor):
     ### READ-ONLY PUBLIC ATTRIBUTES ###
 
     @property
-    def target_items(self):
+    def items(self):
         return self.target.instruments 

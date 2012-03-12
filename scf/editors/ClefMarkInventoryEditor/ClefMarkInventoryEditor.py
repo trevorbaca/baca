@@ -10,10 +10,10 @@ class ClefMarkInventoryEditor(ListEditor):
 
     ### CLASS ATTRIBUTES ###
 
-    target_item_class = contexttools.ClefMark
-    target_item_editor_class = ClefMarkEditor
-    target_item_getter_configuration_method = menuing.UserInputGetter.append_clef
-    target_item_identifier = 'clef mark'
+    item_class = contexttools.ClefMark
+    item_editor_class = ClefMarkEditor
+    item_getter_configuration_method = menuing.UserInputGetter.append_clef
+    item_identifier = 'clef mark'
     target_manifest = TargetManifest(contexttools.ClefMarkInventory,
         target_name_attribute='inventory_name',
         )

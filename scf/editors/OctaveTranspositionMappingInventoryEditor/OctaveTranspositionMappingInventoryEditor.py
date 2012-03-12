@@ -9,10 +9,10 @@ class OctaveTranspositionMappingInventoryEditor(ListEditor):
 
     ### CLASS ATTRIBUTES ###
 
-    target_item_class = pitchtools.OctaveTranspositionMapping
-    target_item_creator_class = OctaveTranspositionMappingEditor
-    target_item_editor_class = OctaveTranspositionMappingEditor
-    target_item_identifier = 'octave transposition mapping'
+    item_class = pitchtools.OctaveTranspositionMapping
+    item_creator_class = OctaveTranspositionMappingEditor
+    item_editor_class = OctaveTranspositionMappingEditor
+    item_identifier = 'octave transposition mapping'
     target_manifest = TargetManifest(pitchtools.OctaveTranspositionMappingInventory,
         ('inventory_name', 'name', 'nm', getters.get_string),
         target_attribute_name='inventory_name',

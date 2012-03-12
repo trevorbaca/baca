@@ -31,14 +31,14 @@ class Selector(SCFObject):
             if self._items:
                 return self._items
             else:
-                return self.list_target_items()
+                return self.list_items()
         def fset(self, items):
             self._items = items
         return property(**locals())
 
     ### PUBLIC METHODS ###
 
-    def list_target_items(self):
+    def list_items(self):
         result = []
         return result
 

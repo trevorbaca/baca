@@ -9,7 +9,7 @@ class PitchClassTransformSelector(Selector):
 
     ### PUBLIC METHODS ###
 
-    def list_target_items(self):
+    def list_items(self):
         result = []
         result.append('transpose')
         result.append('invert')
