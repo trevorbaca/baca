@@ -12,8 +12,8 @@ class KaleidMaterialPackageMaker(MaterialPackageMaker):
     generic_output_name = 'kaleid'
     illustration_maker = staticmethod(make_illustration_from_output_material)
     output_material_checker = staticmethod(lambda x: isinstance(x, _RhytmicKaleid))
-    output_material_creation_wizard = KaleidCreationWizard
     output_material_editor = staticmethod(get_kaleid_editor)
+    output_material_maker = KaleidCreationWizard
     output_material_module_import_statements = ['import kaleids']
 
     ### PUBLIC METHODS ###

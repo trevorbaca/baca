@@ -1,6 +1,8 @@
 from abjad.tools import iotools
 from abjad.tools import markuptools
 from abjad.tools import mathtools
+from scf import helpers
+from scf import wizards
 from scf.proxies.IllustrationBuilderModuleProxy import IllustrationBuilderModuleProxy
 from scf.proxies.IllustrationLyFileProxy import IllustrationLyFileProxy
 from scf.proxies.IllustrationPdfFileProxy import IllustrationPdfFileProxy
@@ -12,7 +14,6 @@ from scf.proxies.StylesheetFileProxy import StylesheetFileProxy
 from scf.wranglers.StylesheetFileWrangler import StylesheetFileWrangler
 from scf.proxies.UserInputModuleProxy import UserInputModuleProxy
 from scf.helpers import safe_import
-from scf import helpers
 import os
 
 
@@ -462,8 +463,8 @@ class MaterialPackageProxy(PackageProxy):
         if not self.has_output_material_editor:
             return
         output_material = self.output_material
-        if output_material is None and hasattr(self, 'output_material_creation_wizard'):
-            output_material_handler_callable = self.output_material_creation_wizard
+        if output_material is None and issubclass(self.output_material_maker, wizards.Wizard):
+            output_material_handler_callable = self.output_material_maker
         else:
             output_material_handler_callable = self.output_material_editor
         output_material_handler = output_material_handler_callable(
