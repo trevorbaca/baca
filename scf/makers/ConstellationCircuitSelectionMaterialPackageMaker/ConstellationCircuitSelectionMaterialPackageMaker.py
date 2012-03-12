@@ -1,0 +1,7 @@
+from scf.makers.MaterialPackageMaker import MaterialPackageMaker
+from make_illustration_from_output_material import make_illustration_from_output_material
+
+
+class ConstellationCircuitSelectionMaterialPackageMaker(MaterialPackageMaker):
+
+	pass
