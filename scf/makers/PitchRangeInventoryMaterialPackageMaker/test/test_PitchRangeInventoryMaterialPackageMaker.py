@@ -1,10 +1,10 @@
 from abjad.tools import pitchtools
-from scf.editors import UserInputWrapper
 import scf
 
 
 def test_PitchRangeInventoryMaterialPackageMaker_01():
-    '''Empty wrapper.'''
+    '''Stub material package.
+    '''
 
     studio = scf.studio.Studio()
     assert not studio.package_exists('materials.testpir')
@@ -13,8 +13,7 @@ def test_PitchRangeInventoryMaterialPackageMaker_01():
             'materials maker pitch testpir default '
             'q'
             )
-        mpp = scf.makers.PitchRangeInventoryMaterialPackageMaker(
-            'materials.testpir')
+        mpp = scf.makers.PitchRangeInventoryMaterialPackageMaker('materials.testpir')
         assert mpp.directory_contents == ['__init__.py', 'tags.py']
         assert mpp.output_material is None
     finally:
@@ -23,7 +22,8 @@ def test_PitchRangeInventoryMaterialPackageMaker_01():
 
 
 def test_PitchRangeInventoryMaterialPackageMaker_02():
-    '''Populate wrapper.'''
+    '''Populate output material module.
+    '''
 
     studio = scf.studio.Studio()
     assert not studio.package_exists('materials.testpir')
