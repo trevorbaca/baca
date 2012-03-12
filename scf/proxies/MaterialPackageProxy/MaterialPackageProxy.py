@@ -481,7 +481,7 @@ class MaterialPackageProxy(PackageProxy):
                 output_material_handler.target)
         else:
             line = '{} = {}'.format(self.material_underscored_name, 
-                self.get_tools_package_qualified_repr(self.target))
+                self.get_tools_package_qualified_repr(output_material_handler.target))
             output_material_module_body_lines = [line]
         self.write_output_material_to_disk(
             output_material_module_import_statements=output_material_module_import_statements,
@@ -628,7 +628,8 @@ class MaterialPackageProxy(PackageProxy):
     def make_main_menu_section_for_illustration_pdf(self, main_menu, hidden_section):
         has_illustration_pdf_section = False
         if self.has_output_material:
-            if self.has_illustration_builder_module or self.has_material_package_maker:
+            if self.has_illustration_builder_module or \
+                (self.has_material_package_maker and getattr(self, 'illustration_maker', None)):
                 section = main_menu.make_section()
                 has_illustration_pdf_section = True
                 section.append(('pdfm', 'output pdf - make'))
@@ -883,7 +884,8 @@ class MaterialPackageProxy(PackageProxy):
         self.remove_material_from_materials_initializer()
         self.overwrite_output_material_module()
         output_material_module_proxy = self.output_material_module_proxy
-        if not output_material_module_import_statements or not output_material_module_body_lines:
+        if output_material_module_import_statements is None or \
+            output_material_module_body_lines is None:
             pair = self.output_material_module_import_statements_and_output_material_module_body_lines
             output_material_module_import_statements, output_material_module_body_lines = pair
         output_material_module_import_statements = [x + '\n' for x in output_material_module_import_statements]
