@@ -2,6 +2,8 @@
 
 from ClefMarkEditor import ClefMarkEditor
 from ClefMarkInventoryEditor import ClefMarkInventoryEditor
+#from ConstellationCircuitSelectionEditor import ConstellationCircuitSelectionEditor
+from ConstellationCircuitSelectionEditor import ConstellationCircuitSelectionEditor
 from InstrumentEditor import InstrumentEditor
 from InstrumentationEditor import InstrumentationEditor
 from InteractiveEditor import InteractiveEditor
