@@ -8,4 +8,4 @@ class KaleidClassNameSelector(HandlerClassNameSelector):
     
     asset_container_package_importable_names = ['kaleids']
     asset_container_path_names = [os.environ.get('KALEIDPATH')]
-    target_human_readable_name = 'kaleid class'
+    target_human_readable_name = 'kaleid class name'
