@@ -23,7 +23,7 @@ class Studio(SCFObject):
         self._score_package_wrangler = ScorePackageWrangler(session=self.session)
         self._stylesheet_file_wrangler = StylesheetFileWrangler(session=self.session)
 
-    ### READ-ONLY PUBLIC ATTRIBUTES ###
+    ### READ-ONLY PUBLIC PROPERTIES ###
 
     @property
     def breadcrumb(self):

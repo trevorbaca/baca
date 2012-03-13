@@ -8,13 +8,13 @@ class ChunkPackageProxy(PackageProxy):
         PackageProxy.__init__(self, package_importable_name=package_importable_name, session=session)
         self.score_template = score_template
 
-    ### READ-ONLY PUBLIC ATTRIBUTES ###
+    ### READ-ONLY PUBLIC PROPERTIES ###
     
     @property
     def breadcrumb(self):
         return self.human_readable_name
 
-    ### READ / WRITE PUBLIC ATTRIBUTES ###
+    ### READ / WRITE PUBLIC PROPERTIES ###
 
     @apply
     def score_template():

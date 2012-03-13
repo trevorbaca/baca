@@ -12,7 +12,7 @@ class StylesheetFileWrangler(PackageWrangler):
             score_internal_asset_container_importable_name_infix=None,
             session=session)
 
-    ### READ-ONLY PUBLIC ATTRIBUTES ###
+    ### READ-ONLY PUBLIC PROPERTIES ###
 
     @property
     def asset_class(self):

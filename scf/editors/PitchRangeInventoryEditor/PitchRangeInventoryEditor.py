@@ -18,7 +18,7 @@ class PitchRangeInventoryEditor(ListEditor):
         target_name_attribute='inventory_name',
         )
 
-    ### READ-ONLY PUBLIC ATTRIBUTES ###
+    ### READ-ONLY PUBLIC PROPERTIES ###
 
     @property
     def target_summary_lines(self):

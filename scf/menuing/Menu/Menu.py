@@ -16,7 +16,7 @@ class Menu(MenuSectionAggregator):
     def __len__(self):
         return len(self.sections)
 
-    ### READ-ONLY PUBLIC ATTRIBUTES ###
+    ### READ-ONLY PUBLIC PROPERTIES ###
 
     @property
     def default_value(self):
@@ -129,7 +129,7 @@ class Menu(MenuSectionAggregator):
             result.extend(section.unpacked_menu_entries_optimized)
         return result
 
-    ### READ / WRITE PUBLIC ATTRIBUTES ###
+    ### READ / WRITE PUBLIC PROPERTIES ###
 
     @apply
     def explicit_title():

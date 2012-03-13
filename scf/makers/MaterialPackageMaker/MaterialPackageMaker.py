@@ -41,7 +41,7 @@ class MaterialPackageMaker(MaterialPackageProxy):
             user_input_wrapper = self.initialize_empty_user_input_wrapper()
         return user_input_wrapper
 
-    ### READ-ONLY PUBLIC ATTRIBUTES ###
+    ### READ-ONLY PUBLIC PROPERTIES ###
 
     @property
     def illustration(self):

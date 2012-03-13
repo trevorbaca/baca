@@ -19,7 +19,7 @@ class PackageProxy(DirectoryProxy, ImportableAssetProxy):
     def __repr__(self):
         return ImportableAssetProxy.__repr__(self)
 
-    ### READ-ONLY PUBLIC ATTRIBUTES ###
+    ### READ-ONLY PUBLIC PROPERTIES ###
 
     @property
     def directory_name(self):

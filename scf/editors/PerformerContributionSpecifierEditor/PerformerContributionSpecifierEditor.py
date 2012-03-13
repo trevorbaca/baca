@@ -43,7 +43,7 @@ class PerformerContributionSpecifierEditor(InteractiveEditor):
         #('clef_specifier', 'clf', ClefSpecifierEditor),
         )
 
-    ### READ-ONLY PUBLIC ATTRIBUTES ###
+    ### READ-ONLY PUBLIC PROPERTIES ###
 
     @property
     def breadcrumb(self):

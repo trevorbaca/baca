@@ -20,7 +20,7 @@ class _RhythmicKaleid(object):
     def __repr__(self):
         return '{}()'.format(self._class_name)
 
-    ### PRIVATE ATTRIBUTES ###
+    ### PRIVATE PROPERTIES ###
 
     @property
     def _class_name(self):

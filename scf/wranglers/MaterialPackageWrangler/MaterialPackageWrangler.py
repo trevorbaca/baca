@@ -18,7 +18,7 @@ class MaterialPackageWrangler(PackageWrangler):
             session=session)
         self._material_package_maker_wrangler = MaterialPackageMakerWrangler(session=self.session)
 
-    ### READ-ONLY PUBLIC ATTRIBUTES ###
+    ### READ-ONLY PUBLIC PROPERTIES ###
 
     @property
     def breadcrumb(self):

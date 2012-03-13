@@ -13,7 +13,7 @@ class MaterialPackageMakerWrangler(PackageWrangler):
             score_internal_asset_container_importable_name_infix=None,
             session=session)
 
-    ### READ-ONLY PUBLIC ATTRIBUTES ###
+    ### READ-ONLY PUBLIC PROPERTIES ###
 
     @property
     def base_class_name(self):
@@ -84,7 +84,7 @@ class MaterialPackageMakerWrangler(PackageWrangler):
         lines.append('        MaterialPackageMaker.__init__(')
         lines.append('            self, package_importable_name=package_importable_name, session=seession')
         lines.append('')
-        lines.append('    ### READ-ONLY PUBLIC ATTRIBUTES ###')
+        lines.append('    ### READ-ONLY PUBLIC PROPERTIES ###')
         lines.append('')
         lines.append('    generic_output_name = {!r}'.format(generic_output_name))
         lines.append('')

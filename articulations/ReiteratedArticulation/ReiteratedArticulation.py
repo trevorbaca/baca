@@ -34,7 +34,7 @@ class ReiteratedArticulation(_ArticulationsSpecifier):
     def __repr__(self):
         return '%s(%s)' % (type(self).__name__, self.articulation_list)
 
-    ### READ / WRITE PUBLIC ATTRIBUTES ###
+    ### READ / WRITE PUBLIC PROPERTIES ###
 
     @apply
     def articulation_list():

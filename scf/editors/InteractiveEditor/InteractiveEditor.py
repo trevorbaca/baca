@@ -23,7 +23,7 @@ class InteractiveEditor(SCFObject):
             summary = 'target={!r}'.format(self.target)
         return '{}({})'.format(self.class_name, summary)
 
-    ### READ-ONLY PUBLIC ATTRIBUTES ###
+    ### READ-ONLY PUBLIC PROPERTIES ###
     
     @property
     def attributes_in_memory(self):

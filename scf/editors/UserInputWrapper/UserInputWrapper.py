@@ -7,7 +7,7 @@ class UserInputWrapper(collections.OrderedDict):
         collections.OrderedDict.__init__(self, *arg)
         self._user_input_module_import_statements = []
 
-    ### READ-ONLY PUBLIC ATTRIBUTES ###
+    ### READ-ONLY PUBLIC PROPERTIES ###
 
     @property
     def editable_lines(self):

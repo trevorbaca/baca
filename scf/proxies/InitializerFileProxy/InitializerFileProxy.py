@@ -11,7 +11,7 @@ class InitializerFileProxy(ParsableFileProxy):
         self.tag_lines = []
         self.parse()
 
-    ### READ-ONLY PUBLIC ATTRIBUTES ##
+    ### READ-ONLY PUBLIC PROPERTIES ##
 
     @property
     def extension(self):

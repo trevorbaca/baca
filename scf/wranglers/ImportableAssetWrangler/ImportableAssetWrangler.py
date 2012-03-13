@@ -4,7 +4,7 @@ import os
 
 class ImportableAssetWrangler(AssetWrangler):
 
-    ### READ-ONLY PUBLIC ATTRIBUTES ###
+    ### READ-ONLY PUBLIC PROPERTIES ###
 
     @property
     def temporary_asset_importable_name(self):

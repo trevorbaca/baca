@@ -6,7 +6,7 @@ import os
 
 class ModuleWrangler(ImportableAssetWrangler):
 
-    ### READ-ONLY PUBLIC ATTRIBUTES ###
+    ### READ-ONLY PUBLIC PROPERTIES ###
 
     @property
     def asset_class(self):

@@ -27,7 +27,7 @@ class MenuSection(MenuObject):
     def __len__(self):
         return len(self.tokens)
 
-    ### READ-ONLY PUBLIC ATTRIBUTES ###
+    ### READ-ONLY PUBLIC PROPERTIES ###
 
     @property
     def default_value(self):
@@ -152,7 +152,7 @@ class MenuSection(MenuObject):
             result.append(unpacked_entry)
         return result
 
-    ### READ / WRITE PUBLIC ATTRIBUTES ###
+    ### READ / WRITE PUBLIC PROPERTIES ###
 
     @apply
     def default_index():

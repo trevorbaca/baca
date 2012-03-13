@@ -22,7 +22,7 @@ class PerformerEditor(ListEditor):
         target_attribute_name='name',
         )
     
-    ### READ-ONLY PUBLIC ATTRIBUTES ###
+    ### READ-ONLY PUBLIC PROPERTIES ###
 
     @property
     def items(self):

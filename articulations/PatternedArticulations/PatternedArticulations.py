@@ -29,7 +29,7 @@ class PatternedArticulations(_ArticulationsSpecifier):
         new.articulation_lists = articulation_lists
         return new
 
-    ### READ / WRITE PUBLIC ATTRIBUTES ###
+    ### READ / WRITE PUBLIC PROPERTIES ###
 
     @apply
     def articulation_lists():

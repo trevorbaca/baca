@@ -46,7 +46,7 @@ class Session(object):
     def __str__(self):
         return '\n'.join(self.formatted_attributes)
 
-    ### READ-ONLY PUBLIC ATTRIBUTES ###
+    ### READ-ONLY PUBLIC PROPERTIES ###
 
     @property
     def backtracking_stack(self):
@@ -169,7 +169,7 @@ class Session(object):
                 return True
         return False
 
-    ### READ / WRITE PUBLIC ATTRIBUTES ###
+    ### READ / WRITE PUBLIC PROPERTIES ###
 
     @apply
     def current_score_package_short_name():

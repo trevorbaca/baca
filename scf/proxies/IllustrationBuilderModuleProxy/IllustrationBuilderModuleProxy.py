@@ -5,7 +5,7 @@ from scf.helpers import safe_import
 
 class IllustrationBuilderModuleProxy(BasicModuleProxy):
 
-    ### READ-ONLY PUBLIC ATTRIBUTES ###
+    ### READ-ONLY PUBLIC PROPERTIES ###
 
     @property
     def illustration_ly_file_name(self):

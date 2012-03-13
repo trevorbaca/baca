@@ -22,7 +22,7 @@ class InstrumentEditor(InteractiveEditor):
         is_keyed=True, 
         )
 
-    ### READ-ONLY PUBLIC ATTRIBUTES ###
+    ### READ-ONLY PUBLIC PROPERTIES ###
 
     @property
     def target_name(self):

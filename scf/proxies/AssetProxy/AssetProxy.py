@@ -28,7 +28,7 @@ class AssetProxy(SCFObject):
         else:
             return '{}()'.format(self.class_name)
 
-    ### READ-ONLY PUBLIC ATTRIBUTES ###
+    ### READ-ONLY PUBLIC PROPERTIES ###
 
     @property
     def breadcrumb(self):

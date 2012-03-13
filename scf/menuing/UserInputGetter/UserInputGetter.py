@@ -32,7 +32,7 @@ class UserInputGetter(MenuSectionAggregator):
     def __repr__(self):
         return '{}({})'.format(type(self).__name__, len(self.prompts))
 
-    ### READ-ONLY PUBLIC ATTRIBUTES ###
+    ### READ-ONLY PUBLIC PROPERTIES ###
 
     @property
     def argument_lists(self):

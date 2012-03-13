@@ -20,7 +20,7 @@ class ReiteratedDynamic(_DynamicsSpecifier):
         new.minimum_prolated_duration = self.minimum_prolated_duration
         return new
 
-    ### READ / WRITE PUBLIC ATTRIBUTES ###
+    ### READ / WRITE PUBLIC PROPERTIES ###
 
     @apply
     def dynamic_name():

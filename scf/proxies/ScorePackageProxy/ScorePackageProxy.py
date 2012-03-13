@@ -24,7 +24,7 @@ class ScorePackageProxy(PackageProxy):
         self._music_specifier_module_wrangler = scf.wranglers.MusicSpecifierModuleWrangler(
             session=self.session)
 
-    ### READ-ONLY PUBLIC ATTRIBUTES ###
+    ### READ-ONLY PUBLIC PROPERTIES ###
 
     @property
     def annotated_title(self):
@@ -170,7 +170,7 @@ class ScorePackageProxy(PackageProxy):
     def untitled_indicator(self):
         return '(untitled score)'
         
-    ### READ / WRITE PUBLIC ATTRIBUTES ###
+    ### READ / WRITE PUBLIC PROPERTIES ###
 
     @apply
     def forces_tagline():

@@ -19,7 +19,7 @@ class DirectoryProxy(AssetProxy):
     def __repr__(self):
         return '{}({!r})'.format(self.class_name, self.path_name)
 
-    ### READ-ONLY PUBLIC ATTRIBUTES ###
+    ### READ-ONLY PUBLIC PROPERTIES ###
 
     @property
     def directory_contents(self):

@@ -20,7 +20,7 @@ class SCFObject(object):
     def __repr__(self):
         return '{}()'.format(self.class_name)
 
-    ### READ-ONLY PUBLIC ATTRIBUTES ###
+    ### READ-ONLY PUBLIC PROPERTIES ###
 
     @property
     def backtracking_source(self):

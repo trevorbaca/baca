@@ -18,7 +18,7 @@ class InstrumentationEditor(ListEditor):
     target_manifest = TargetManifest(scoretools.InstrumentationSpecifier,
         )
 
-    ### READ-ONLY PUBLIC ATTRIBUTES ###
+    ### READ-ONLY PUBLIC PROPERTIES ###
 
     @property
     def breadcrumb(self):

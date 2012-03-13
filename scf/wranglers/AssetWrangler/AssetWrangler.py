@@ -45,7 +45,7 @@ class AssetWrangler(SCFObject):
         parts = ', '.join([repr(part) for part in parts])
         return '{}({})'.format(self.class_name, parts)
 
-    ### READ-ONLY PUBLIC ATTRIBUTES ###
+    ### READ-ONLY PUBLIC PROPERTIES ###
 
     # asset class #
 

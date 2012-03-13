@@ -18,7 +18,7 @@ class MusicSpecifierEditor(InteractiveEditor):
             PerformerContributionSpecifierListEditor),
         )
 
-    ### READ-ONLY PUBLIC ATTRIBUTES ###
+    ### READ-ONLY PUBLIC PROPERTIES ###
 
     @property
     def target_name(self):

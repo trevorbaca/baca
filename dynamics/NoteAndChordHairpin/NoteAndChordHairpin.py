@@ -22,7 +22,7 @@ class NoteAndChordHairpin(_DynamicsSpecifier):
         new = type(self)(hairpin_token = hairpin_token)
         return new
 
-    ### READ / WRITE PUBLIC ATTRIBUTES ###
+    ### READ / WRITE PUBLIC PROPERTIES ###
 
     @apply
     def hairpin_token():
