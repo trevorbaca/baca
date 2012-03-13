@@ -2,7 +2,6 @@ from abjad.tools import iotools
 from abjad.tools import markuptools
 from abjad.tools import mathtools
 from abjad.tools import pitchtools
-from scf.core.Session import Session
 import inspect
 import os
 import pprint
@@ -13,6 +12,7 @@ import sys
 class SCFObject(object):
     
     def __init__(self, session=None):
+        from scf.core.Session import Session
         self._session = session or Session()
 
     ### SPECIAL METHODS ###

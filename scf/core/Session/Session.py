@@ -1,10 +1,11 @@
 # -*- encoding: utf-8 -*-
 from abjad.tools import iotools
+from scf.core.SCFObject import SCFObject
 from scf.core.Transcript import Transcript
 import os
 
 
-class Session(object):
+class Session(SCFObject):
     
     ### INITIALIZER ###
 
@@ -73,6 +74,13 @@ class Session(object):
     @property
     def complete_transcript(self):
         return self._complete_transcript
+
+    @property
+    def current_materials_package_importable_name(self):
+        if self.is_in_score:
+            return self.dot_join([self.current_score_package_short_name, 'mus', 'materials'])        
+        else:
+            return self.score_external_materials_package_importable_name
 
     @property
     def current_score_package_proxy(self):

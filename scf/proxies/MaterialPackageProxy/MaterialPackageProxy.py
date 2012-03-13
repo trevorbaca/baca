@@ -19,14 +19,16 @@ import os
 
 class MaterialPackageProxy(PackageProxy):
 
+    ### CLASS ATTRIBUTES ###
+
+    should_have_user_input_module = False
+
+    ### INTIALIZER ###
+
     def __init__(self, package_importable_name=None, session=None):
         PackageProxy.__init__(self, package_importable_name=package_importable_name, session=session)
         self._generic_output_name = None
         self.stylesheet_file_name_in_memory = None
-
-    ### CLASS ATTRIBUTES ###
-
-    should_have_user_input_module = False
 
     ### READ-ONLY PUBLIC PROPERTIES ###
 
