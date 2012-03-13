@@ -3,7 +3,7 @@ from abjad.tools import pitchtools
 from fractions import Fraction
 
 
-class _ArticulationsSpecifier(object):
+class ArticulationHandler(object):
     '''Articulations specifier.
     '''
 

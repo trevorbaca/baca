@@ -1,10 +1,18 @@
+from abc import ABCMeta
 from abjad.tools import durationtools
 from fractions import Fraction
 
 
 class DynamicHandler(object):
-    '''Dynamics specifier.
+    '''Dynamics handler.
     '''
+
+    ### CLASS ATTRIBUTES ###
+
+    __metaclass__ = ABCMeta
+
+
+    ### INITIALIZER ###
 
     def __init__(self, minimum_prolated_duration = None):
         self.minimum_prolated_duration = minimum_prolated_duration
