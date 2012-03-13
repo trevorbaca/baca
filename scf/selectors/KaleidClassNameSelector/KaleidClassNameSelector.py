@@ -1,8 +1,8 @@
-from scf.selectors.DirectoryContentSelector import DirectoryContentSelector
+from scf.selectors.HandlerClassNameSelector import HandlerClassNameSelector
 import os
 
 
-class KaleidClassNameSelector(DirectoryContentSelector):
+class KaleidClassNameSelector(HandlerClassNameSelector):
 
     ### CLASS ATTRIBUTES ###
     
