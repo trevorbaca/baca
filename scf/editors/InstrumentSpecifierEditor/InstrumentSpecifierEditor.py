@@ -16,7 +16,7 @@ class InstrumentSpecifierEditor(ParameterSpecifierEditor):
         ('instrument', 'st', selectors.InstrumentSelector),
         )
 
-    ### READ-ONLY ATTRIBUTES ###
+    ### READ-ONLY PROPERTIES ###
 
     @property
     def target_name(self):

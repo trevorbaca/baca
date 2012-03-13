@@ -9,7 +9,7 @@ class RhythmSpecifier(ParameterSpecifier):
         ParameterSpecifier.__init__(self, description=description, name=name)
         self.kaleid_package_importable_name = kaleid_package_importable_name
 
-    ### READ-ONLY ATTRIBUTES ###
+    ### READ-ONLY PROPERTIES ###
     
     @property
     def one_line_menuing_summary(self):

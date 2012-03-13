@@ -19,7 +19,7 @@ class PitchClassSpecifierEditor(ParameterSpecifierEditor):
         ('reservoir_start_helper', 'hp', wizards.ReservoirStartHelperCreationWizard),
         )
 
-    ### READ-ONLY ATTRIBUTES ###
+    ### READ-ONLY PROPERTIES ###
 
     @property
     def target_name(self):

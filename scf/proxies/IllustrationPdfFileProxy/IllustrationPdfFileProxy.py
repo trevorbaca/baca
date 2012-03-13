@@ -4,7 +4,7 @@ import os
 
 class IllustrationPdfFileProxy(FileProxy):
 
-    ### READ-ONLY ATTRIBUTES ###
+    ### READ-ONLY PROPERTIES ###
 
     @property
     def extension(self):

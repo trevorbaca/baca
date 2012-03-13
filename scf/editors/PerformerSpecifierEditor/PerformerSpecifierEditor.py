@@ -12,7 +12,7 @@ class PerformerSpecifierEditor(ParameterSpecifierEditor):
         ('performer', 'pf', selectors.PerformerSelector),
         )
 
-    ### READ-ONLY ATTRIBUTES ###
+    ### READ-ONLY PROPERTIES ###
 
     @property
     def target_name(self):

@@ -9,7 +9,7 @@ class InstrumentCreationWizard(Wizard):
         Wizard.__init__(self, session=session, target=target)
         self.is_ranged = is_ranged
         
-    ### READ-ONLY ATTRIBUTES ###
+    ### READ-ONLY PROPERTIES ###
 
     @property
     def breadcrumb(self):

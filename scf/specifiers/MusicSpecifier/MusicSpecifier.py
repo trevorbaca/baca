@@ -24,7 +24,7 @@ class MusicSpecifier(Specifier):
         'from scf import specifiers',
         ]
 
-    ### READ-ONLY ATTRIBUTES ###
+    ### READ-ONLY PROPERTIES ###
 
     @property
     def one_line_menuing_summary(self):

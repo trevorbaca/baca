@@ -1,3 +1,4 @@
+from DynamicHandlerCreationWizard import DynamicHandlerCreationWizard
 from InstrumentCreationWizard import InstrumentCreationWizard
 from KaleidCreationWizard import KaleidCreationWizard
 from PerformerCreationWizard import PerformerCreationWizard

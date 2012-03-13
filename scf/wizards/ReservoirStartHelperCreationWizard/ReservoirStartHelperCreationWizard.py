@@ -4,7 +4,7 @@ from scf import selectors
 
 class ReservoirStartHelperCreationWizard(Wizard):
 
-    ### READ-ONLY ATTRIBUTES ###
+    ### READ-ONLY PROPERTIES ###
 
     @property
     def breadcrumb(self):

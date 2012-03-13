@@ -7,7 +7,7 @@ class InstrumentSpecifier(ParameterSpecifier):
         ParameterSpecifier.__init__(self, description=description, name=name)
         self.instrument = instrument
 
-    ### READ-ONLY ATTRIBUTES ###
+    ### READ-ONLY PROPERTIES ###
 
     @property
     def one_line_menuing_summary(self):

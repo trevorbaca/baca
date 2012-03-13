@@ -4,7 +4,7 @@ from scf import selectors
 
 class PitchClassTransformCreationWizard(Wizard):
 
-    ### READ-ONLY ATTRIBUTES ###
+    ### READ-ONLY PROPERTIES ###
 
     @property
     def breadcrumb(self):

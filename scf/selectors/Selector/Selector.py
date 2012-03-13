@@ -12,7 +12,7 @@ class Selector(SCFObject):
         self.is_ranged = is_ranged
         self.items = items or []
 
-    ### READ-ONLY ATTRIBUTES ###
+    ### READ-ONLY PROPERTIES ###
 
     @property
     def breadcrumb(self):
@@ -23,7 +23,7 @@ class Selector(SCFObject):
         else:
             return 'select:'
 
-    ### READ / WRITE ATTRIBUTES ###
+    ### READ / WRITE PROPERTIES ###
 
     @apply
     def items():

@@ -23,7 +23,7 @@ class ModuleProxy(ParsableFileProxy, ImportableAssetProxy):
     generic_class_name = 'module'
     temporary_asset_short_name = 'temporary_module.py'
 
-    ### READ-ONLY ATTRIBUTES ###
+    ### READ-ONLY PROPERTIES ###
 
     @property
     def grandparent_package_directory_name(self):

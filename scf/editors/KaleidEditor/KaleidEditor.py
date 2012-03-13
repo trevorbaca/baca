@@ -3,7 +3,7 @@ from scf.editors.InteractiveEditor import InteractiveEditor
 
 class KaleidEditor(InteractiveEditor):
     
-    ### READ-ONLY ATTRIBUTES ###
+    ### READ-ONLY PROPERTIES ###
 
     @property
     def target_summary_lines(self):

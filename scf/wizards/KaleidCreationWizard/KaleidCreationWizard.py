@@ -1,10 +1,10 @@
-from scf.wizards.Wizard import Wizard
 from scf import selectors
+from scf.wizards.Wizard import Wizard
 
 
 class KaleidCreationWizard(Wizard):
 
-    ### READ-ONLY ATTRIBUTES ###
+    ### READ-ONLY PROPERTIES ###
 
     @property
     def breadcrumb(self):

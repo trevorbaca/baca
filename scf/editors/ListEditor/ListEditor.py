@@ -7,7 +7,7 @@ from scf.editors.TargetManifest import TargetManifest
 
 class ListEditor(InteractiveEditor):
 
-    ### READ-ONLY ATTRIBUTES ###
+    ### READ-ONLY PROPERTIES ###
 
     # TODO: change item_* to just item_*
     item_class = None

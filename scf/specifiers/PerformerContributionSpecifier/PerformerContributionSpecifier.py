@@ -45,7 +45,7 @@ class PerformerContributionSpecifier(Specifier):
         else:
             return '{}()'.format(self.class_name)
 
-    ### READ-ONLY ATTRIBUTES ###
+    ### READ-ONLY PROPERTIES ###
 
     @property
     def one_line_menuing_summary(self):

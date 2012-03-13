@@ -7,7 +7,7 @@ class MenuSectionAggregator(MenuObject):
         MenuObject.__init__(self, session=session, where=where)
         self._sections = []
 
-    ### READ-ONLY ATTRIBUTES ###
+    ### READ-ONLY PROPERTIES ###
 
     @property
     def sections(self):

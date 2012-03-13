@@ -15,7 +15,7 @@ class ImportableAssetProxy(AssetProxy):
         else:
             return '{}()'.format(self.class_name)
 
-    ### READ-ONLY ATTRIBUTES ###
+    ### READ-ONLY PROPERTIES ###
 
     @property
     def importable_name(self):

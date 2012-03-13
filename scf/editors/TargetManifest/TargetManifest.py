@@ -17,7 +17,7 @@ class TargetManifest(object):
         parts = ', '.join([str(x) for x in self.attribute_details])
         return '{}({}, {})'.format(type(self).__name__, self.target_class.__name__, parts)
 
-    ### READ-ONLY ATTRIBUTES ###
+    ### READ-ONLY PROPERTIES ###
 
     @property
     def attribute_details(self):

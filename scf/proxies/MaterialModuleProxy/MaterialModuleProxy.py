@@ -3,7 +3,7 @@ from scf.proxies.ModuleProxy import ModuleProxy
 
 class MaterialModuleProxy(ModuleProxy):
 
-    ### READ-ONLY ATTRIBUTES ###
+    ### READ-ONLY PROPERTIES ###
 
     @property
     def material_package_importable_name(self):
