@@ -5,7 +5,7 @@ from abjad.tools import leaftools
 from abjad.tools import marktools
 from abjad.tools import sequencetools
 from abjad.tools import spannertools
-from baca.dynamics._DynamicsSpecifier._DynamicsSpecifier import _DynamicsSpecifier
+from baca.handlers.dynamics._DynamicsSpecifier._DynamicsSpecifier import _DynamicsSpecifier
 
 
 class NoteAndChordHairpin(_DynamicsSpecifier):
