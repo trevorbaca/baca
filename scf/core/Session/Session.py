@@ -76,11 +76,32 @@ class Session(SCFObject):
         return self._complete_transcript
 
     @property
+    def current_chunks_package_importable_name(self):
+        if self.is_in_score:
+            return self.dot_join([
+                self.current_score_package_short_name, 
+                self.score_internal_chunks_package_importable_name_infix])
+        else:
+            return self.score_external_chunks_package_importable_name
+
+    @property
+    def current_chunks_package_path_name(self):
+        return self.package_importable_name_to_path_name(
+            self.current_chunks_package_importable_name)
+
+    @property
     def current_materials_package_importable_name(self):
         if self.is_in_score:
-            return self.dot_join([self.current_score_package_short_name, 'mus', 'materials'])        
+            return self.dot_join([
+                self.current_score_package_short_name, 
+                self.score_internal_materials_package_importable_name_infix])
         else:
             return self.score_external_materials_package_importable_name
+
+    @property
+    def current_materials_package_path_name(self):
+        return self.package_importable_name_to_path_name(
+            self.current_materials_package_importable_name)
 
     @property
     def current_score_package_proxy(self):
@@ -88,6 +109,28 @@ class Session(SCFObject):
         if self.is_in_score:
             return ScorePackageProxy(
                 score_package_short_name=self.current_score_package_short_name, session=self)
+    
+    @property
+    def current_score_path_name(self):
+        if self.is_in_score:
+            return self.package_importable_name_to_path_name(
+                self.current_score_package_short_name)
+
+    @property
+    def current_specifiers_package_importable_name(self):
+        if self.is_in_score:
+            return self.dot_join([
+                self.current_score_package_short_name,
+                self.score_internal_specifiers_package_importable_name_infix])
+        else:
+            return self.score_external_specifiers_package_importable_name
+
+    @property
+    def current_specifiers_package_path_name(self):
+        if self.is_in_score:
+            return os.path.join(self.current_score_path_name, 'mus', 'specifiers')
+        else:
+            return self.score_external_specifiers_package_path_name
 
     @property
     def explicit_command_history(self):
@@ -99,6 +142,7 @@ class Session(SCFObject):
                 result.append(command)
         return result
 
+    # TODO: remove
     @property
     def formatted_attributes(self):
         result = []
@@ -138,6 +182,7 @@ class Session(SCFObject):
     def menu_header(self):
         return '\n'.join(self.format_breadcrumb_stack())
 
+    # TODO: rename to self.scf_output_directory
     @property
     def output_directory(self):
         return os.environ.get('SCFOUTPUT')

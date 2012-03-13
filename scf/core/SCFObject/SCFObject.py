@@ -386,6 +386,7 @@ class SCFObject(object):
         path_name = self.package_importable_name_to_path_name(package_importable_name)
         return os.path.exists(path_name)
 
+    # TODO: make this works: self.package_importable_name_to_path_name('sketches')
     def package_importable_name_to_path_name(self, package_importable_name):
         if package_importable_name is None:
             return
