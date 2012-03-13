@@ -5,15 +5,15 @@ from abjad.tools import leaftools
 from abjad.tools import marktools
 from abjad.tools import sequencetools
 from abjad.tools import spannertools
-from baca.handlers.dynamics._DynamicsSpecifier._DynamicsSpecifier import _DynamicsSpecifier
+from baca.handlers.dynamics.DynamicHandler.DynamicHandler import DynamicHandler
 
 
-class NoteAndChordHairpin(_DynamicsSpecifier):
+class NoteAndChordHairpin(DynamicHandler):
     '''Note and chord hairpin.
     '''
 
     def __init__(self, hairpin_token = None, minimum_prolated_duration = None):
-        _DynamicsSpecifier.__init__(self, minimum_prolated_duration = minimum_prolated_duration)
+        DynamicHandler.__init__(self, minimum_prolated_duration = minimum_prolated_duration)
         self.hairpin_token = hairpin_token
 
     ### SPECIAL METHODS ###

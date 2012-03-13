@@ -2,7 +2,7 @@ from abjad.tools import durationtools
 from fractions import Fraction
 
 
-class _DynamicsSpecifier(object):
+class DynamicHandler(object):
     '''Dynamics specifier.
     '''
 

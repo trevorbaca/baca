@@ -1,15 +1,15 @@
 from abjad.tools import contexttools
 from abjad.tools import leaftools
 from abjad.tools import marktools
-from baca.handlers.dynamics._DynamicsSpecifier._DynamicsSpecifier import _DynamicsSpecifier
+from baca.handlers.dynamics.DynamicHandler.DynamicHandler import DynamicHandler
 
 
-class ReiteratedDynamic(_DynamicsSpecifier):
+class ReiteratedDynamic(DynamicHandler):
     '''Reiterated dynamic.
     '''
 
     def __init__(self, dynamic_name = None, minimum_prolated_duration = None):
-        _DynamicsSpecifier.__init__(self, minimum_prolated_duration = minimum_prolated_duration)
+        DynamicHandler.__init__(self, minimum_prolated_duration = minimum_prolated_duration)
         self.dynamic_name = dynamic_name
 
     ### SPECIAL METHODS ###
