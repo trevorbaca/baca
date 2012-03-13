@@ -2,7 +2,7 @@ from make_illustration_from_output_material import make_illustration_from_output
 from scf.editors.get_kaleid_editor import get_kaleid_editor
 from scf.makers.MaterialPackageMaker import MaterialPackageMaker
 from scf.wizards.KaleidCreationWizard import KaleidCreationWizard
-from kaleids._RhythmicKaleid import _RhythmicKaleid
+from handlers.kaleids._RhythmicKaleid import _RhythmicKaleid
 
 
 class KaleidMaterialPackageMaker(MaterialPackageMaker):
@@ -14,22 +14,4 @@ class KaleidMaterialPackageMaker(MaterialPackageMaker):
     output_material_checker = staticmethod(lambda x: isinstance(x, _RhytmicKaleid))
     output_material_editor = staticmethod(get_kaleid_editor)
     output_material_maker = KaleidCreationWizard
-    output_material_module_import_statements = ['import kaleids']
-
-    ### PUBLIC METHODS ###
-
-    def make_output_material_module_body_lines(self, output_material):
-        lines = []
-        formatted_input_parameters = output_material._formatted_input_parameters
-        if formatted_input_parameters:
-            lines.append('{} = {}('.format(
-                self.material_underscored_name, output_material._tools_package_qualified_class_name))
-            for item in output_material._formatted_input_parameters[:-1]:
-                lines.append('\t{},'.format(item))
-            item = output_material._formatted_input_parameters[-1]
-            lines.append('\t{})'.format(item))
-        else:
-            lines.append('{} = {}()'.format(
-                self.material_underscored_name, output_material._tools_package_qualified_class_name))
-        lines = [line + '\n' for line in lines]
-        return lines
+    output_material_module_import_statements = ['import handlers']

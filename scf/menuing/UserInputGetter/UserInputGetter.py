@@ -20,7 +20,6 @@ class UserInputGetter(MenuSectionAggregator):
         self._tests = []
         self.allow_none = False
         self.capitalize_prompts = True
-        #self.include_newlines = True
         self.include_newlines = False
         self.indent_level = 0
         self.number_prompts = False
@@ -71,6 +70,16 @@ class UserInputGetter(MenuSectionAggregator):
         test = lambda expr: predicates.is_readable_argument_range_string_for_argument_list(expr, argument_list)
         self.tests.append(test)
 
+    def append_articulation(self, spaced_attribute_name, default=None):
+        message = 'value for {!r} must successfully initialize articulation.'
+        self.append_something(spaced_attribute_name, message, default=default)
+        self.tests.append(predicates.is_articulation_token)
+
+    def append_articulations(self, spaced_attribute_name, default=None):
+        message = 'value for {!r} must successfully initialize articulations.'
+        self.append_something(spaced_attribute_name, message, default=default)
+        self.tests.append(predicates.are_articulation_tokens)
+
     def append_available_underscore_delimited_lowercase_package_name(self, spaced_attribute_name, default=None):
         message = \
             'value for {!r} must be available underscore-delimited lowercase package name of length at least 3.'
@@ -101,6 +110,16 @@ class UserInputGetter(MenuSectionAggregator):
         self.execs[-1] = execs
         self.tests.append(durationtools.is_duration_token)
 
+    def append_dynamic(self, spaced_attribute_name, default=None):
+        message = 'value for {!r} must successfully initialize dynamic mark.'
+        self.append_something(spaced_attribute_name, message, default=default)
+        self.tests.append(predicates.is_dynamic_token)
+
+    def append_dynamics(self, spaced_attribute_name, default=None):
+        message = 'value for {!r} must be list of dynamic mark initializers.'
+        self.append_something(spaced_attribute_name, message, default=default)
+        self.tests.append(predicates.are_dynamic_tokens)
+
     def append_existing_package_name(self, spaced_attribute_name, default=None):
         message = 'value for {!r} must be existing package name.'
         self.append_something(spaced_attribute_name, message, default=default)
@@ -110,6 +129,16 @@ class UserInputGetter(MenuSectionAggregator):
         message = 'value for {!r} may be anything.'
         self.append_something(spaced_attribute_name, message, default=default)
         self.tests.append(lambda expr: True)
+
+    def append_hairpin_token(self, spaced_attribute_name, default=None):
+        message = 'value for {!r} must be hairpin token.'
+        self.append_something(spaced_attribute_name, message, default=default)
+        self.tests.append(predicates.is_hairpin_token)
+
+    def append_hairpin_tokens(self, spaced_attribute_name, default=None):
+        message = 'value for {!r} must be hairpin tokens.'
+        self.append_something(spaced_attribute_name, message, default=default)
+        self.tests.append(predicates.are_hairpin_tokens)
 
     def append_integer(self, spaced_attribute_name, default=None):
         message = 'value for {!r} must be integer.'
@@ -126,6 +155,16 @@ class UserInputGetter(MenuSectionAggregator):
         message = 'value for {!r} must be integers.'
         self.append_something(spaced_attribute_name, message, default=default)
         self.tests.append(lambda x: all([predicates.is_integer(y) for y in x]))
+
+    def append_list(self, spaced_attribute_name, default=None):
+        message = 'value for {!r} must be list.'
+        self.append_something(spaced_attribute_name, message, default=default)
+        self.tests.append(predicates.is_list)
+
+    def append_lists(self, spaced_attribute_name, default=None):
+        message = 'value for {!r} must be lists.'
+        self.append_something(spaced_attribute_name, message, default=default)
+        self.tests.append(predicates.are_lists)
 
     def append_markup(self, spaced_attribute_name, default=None):
         message = 'value for {!r} must be markup.'
@@ -205,6 +244,11 @@ class UserInputGetter(MenuSectionAggregator):
         message = 'value for {!r} must be string or none.'
         self.append_something(spaced_attribute_name, message, default=default)
         self.tests.append(predicates.is_string_or_none)
+
+    def append_strings(self, spaced_attribute_name, default=None):
+        message = 'value for {!r} must be strings.'
+        self.append_something(spaced_attribute_name, message, default=default)
+        self.tests.append(predicates.are_strings)
 
     def append_symbolic_pitch_range_string(self, spaced_attribute_name, default=None):
         message = 'value for {!r} must be symbolic pitch range string. Ex: [A0, C8].'

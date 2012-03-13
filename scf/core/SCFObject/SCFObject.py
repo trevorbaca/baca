@@ -2,11 +2,13 @@ from abjad.tools import iotools
 from abjad.tools import markuptools
 from abjad.tools import mathtools
 from abjad.tools import pitchtools
+import abc
 import inspect
 import os
 import pprint
 import readline
 import sys
+import types
 
 
 class SCFObject(object):
@@ -258,7 +260,9 @@ class SCFObject(object):
                 return part
 
     def get_one_line_menuing_summary(self, expr):
-        if getattr(expr, 'one_line_menuing_summary', None):
+        if isinstance(expr, (types.ClassType, abc.ABCMeta)):
+            return expr.__name__
+        elif getattr(expr, 'one_line_menuing_summary', None):
             return expr.one_line_menuing_summary
         elif getattr(expr, '_one_line_menuing_summary', None):
             return expr._one_line_menuing_summary

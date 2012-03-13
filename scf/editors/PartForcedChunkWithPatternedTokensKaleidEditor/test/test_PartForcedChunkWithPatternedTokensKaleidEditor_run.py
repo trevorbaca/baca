@@ -1,4 +1,4 @@
-import kaleids
+import handlers
 import scf
 
 
@@ -7,7 +7,7 @@ def test_PartForcedChunkWithPatternedTokensKaleidEditor_run_01():
     editor = scf.editors.PartForcedChunkWithPatternedTokensKaleidEditor()
     editor.run(user_input='1 [1] 16 [2] [0] [-1] [0] [1] [1] q', is_autoadvancing=True)
 
-    kaleid = kaleids.PartForcedChunkWithPatternedTokens([1], 16,
+    kaleid = handlers.kaleids.PartForcedChunkWithPatternedTokens([1], 16,
         prolation_addenda=[2],
         lefts=[0],
         middles=[-1],

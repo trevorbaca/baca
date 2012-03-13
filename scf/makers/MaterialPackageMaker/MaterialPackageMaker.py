@@ -142,6 +142,15 @@ class MaterialPackageMaker(MaterialPackageProxy):
         assert type(self).output_material_checker(output_material)
         return output_material
 
+    def make_output_material_module_body_lines(self, output_material):
+        if hasattr(output_material, '_tools_package_qualified_repr_pieces'):
+            lines = output_material._tools_package_qualified_repr_pieces
+        else:
+            lines = [repr(output_material)]
+        lines[0] = '{} = {}'.format(self.material_underscored_name, lines[0])
+        lines = [line + '\n' for line in lines]
+        return lines
+
     def populate_user_input_wrapper(self, prompt=True):
         total_elements = len(self.user_input_wrapper_in_memory)
         getter = self.make_getter(where=self.where())

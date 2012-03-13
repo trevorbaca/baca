@@ -1,0 +1,3 @@
+from ArticulationHandler import ArticulationHandler
+from PatternedArticulationsHandler import PatternedArticulationsHandler
+from ReiteratedArticulationHandler import ReiteratedArticulationHandler
