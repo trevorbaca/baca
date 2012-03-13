@@ -11,7 +11,7 @@ class Menu(MenuSectionAggregator):
         self.sections.append(self.make_default_hidden_section(session=session, where=where))
         self.explicit_title = None
 
-    ### OVERLOADS ###
+    ### SPECIAL METHODS ###
 
     def __len__(self):
         return len(self.sections)

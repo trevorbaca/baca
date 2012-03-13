@@ -20,7 +20,7 @@ class AssetProxy(SCFObject):
 
     generic_class_name = 'asset'
 
-    ### OVERLOADS ###
+    ### SPECIAL METHODS ###
 
     def __repr__(self):
         if self.path_name:

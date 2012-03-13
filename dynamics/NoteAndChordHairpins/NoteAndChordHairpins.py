@@ -21,7 +21,7 @@ class NoteAndChordHairpins(_DynamicsSpecifier):
                 raise ValueError('not hairpin token: %s' % str(hairpin_token))
         self.hairpin_tokens = hairpin_tokens
 
-    ### OVERLOADS ###
+    ### SPECIAL METHODS ###
 
     def __call__(self):
         raise NotImplementedError

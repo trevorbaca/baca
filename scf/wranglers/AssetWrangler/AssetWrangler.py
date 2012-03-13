@@ -26,7 +26,7 @@ class AssetWrangler(SCFObject):
         self._score_internal_asset_container_importable_name_infix = \
             score_internal_asset_container_importable_name_infix
 
-    ### OVERLOADS ###
+    ### SPECIAL METHODS ###
 
     def __eq__(self, other):
         if isinstance(other, type(self)):

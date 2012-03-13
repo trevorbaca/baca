@@ -14,7 +14,7 @@ class ConstellationCircuit(object):
         self._pitch_range = pitch_range
         self._constellate_partitioned_generator_pnls()
 
-    ### OVERLOADS ###
+    ### SPECIAL METHODS ###
 
     def __getitem__(self, i):
         return self._constellations[i]

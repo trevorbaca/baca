@@ -27,7 +27,7 @@ class UserInputGetter(MenuSectionAggregator):
         self.prompt_character = '>'
         self.title = None
 
-    ### OVERLOADS ###
+    ### SPECIAL METHODS ###
 
     def __repr__(self):
         return '{}({})'.format(type(self).__name__, len(self.prompts))

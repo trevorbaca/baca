@@ -37,7 +37,7 @@ class PerformerContributionSpecifier(Specifier):
         self.trill_specifier = trill_specifier
         self.troping_specifier=troping_specifier
 
-    ### OVERLOADS ###
+    ### SPECIAL METHODS ###
 
     def __repr__(self):
         if self.performer_specifier:

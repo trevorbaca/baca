@@ -5,7 +5,7 @@ import subprocess
 
 class DirectoryProxy(AssetProxy):
 
-    ### OVERLOADS ###
+    ### SPECIAL METHODS ###
 
     def __eq__(self, other):
         if isinstance(other, type(self)):

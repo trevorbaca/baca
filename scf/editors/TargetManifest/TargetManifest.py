@@ -11,7 +11,7 @@ class TargetManifest(object):
         self.is_keyed = kwargs.get('is_keyed', False)
         self.target_name_attribute = kwargs.get('target_name_attribute')
 
-    ### OVERLOADS ###
+    ### SPECIAL METHODS ###
 
     def __repr__(self):
         parts = ', '.join([str(x) for x in self.attribute_details])

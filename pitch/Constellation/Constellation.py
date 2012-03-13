@@ -20,7 +20,7 @@ class Constellation(object):
         self._chord_duration = Fraction(1, 4)
         self._chords = []
 
-    ### OVERLOADS ###
+    ### SPECIAL METHODS ###
 
     def __contains__(self, chord):
 #      for pnl in self._pitch_number_lists:

@@ -15,7 +15,7 @@ class SCFObject(object):
     def __init__(self, session=None):
         self._session = session or Session()
 
-    ### OVERLOADS ###
+    ### SPECIAL METHODS ###
 
     def __repr__(self):
         return '{}()'.format(self.class_name)

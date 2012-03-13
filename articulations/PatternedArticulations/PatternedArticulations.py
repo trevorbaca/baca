@@ -22,7 +22,7 @@ class PatternedArticulations(_ArticulationsSpecifier):
             articulation_lists = []
         self.articulation_lists = articulation_lists
 
-    ### OVERLOADS ###
+    ### SPECIAL METHODS ###
 
     def __call__(self, articulation_lists):
         new = type(self)()

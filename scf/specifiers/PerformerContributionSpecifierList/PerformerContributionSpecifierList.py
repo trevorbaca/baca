@@ -7,7 +7,7 @@ class PerformerContributionSpecifierList(Specifier, list):
         Specifier.__init__(self)
         list.__init__(self, *args)
 
-    ### OVERLOADS ###
+    ### SPECIAL METHODS ###
     
     def __eq__(self, other):
         return list.__eq__(self, other)

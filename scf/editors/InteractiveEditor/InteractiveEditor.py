@@ -14,7 +14,7 @@ class InteractiveEditor(SCFObject):
         if not hasattr(self, 'target_manifest'):
             raise Exception(self)
     
-    ### OVERLOADS ###
+    ### SPECIAL METHODS ###
 
     def __repr__(self):
         if self.target is None:

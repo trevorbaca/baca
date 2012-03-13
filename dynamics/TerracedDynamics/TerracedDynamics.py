@@ -15,7 +15,7 @@ class TerracedDynamics(_DynamicsSpecifier):
             dynamics = []
         self.dynamics = dynamics
 
-    ### OVERLOADS ###
+    ### SPECIAL METHODS ###
 
     def __call__(self, dynamics):
         new = type(self)()

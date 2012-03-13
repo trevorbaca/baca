@@ -32,7 +32,7 @@ class AttributeDetail(object):
         self.allow_none = kwargs.get('allow_none', True)
         self.is_null = is_null
 
-    ### OVERLOADS ###
+    ### SPECIAL METHODS ###
 
     def __repr__(self):
         parts = [repr(self.human_readable_name), repr(self.menu_key), self.editor_callable.__name__]

@@ -14,7 +14,7 @@ class PackageProxy(DirectoryProxy, ImportableAssetProxy):
         DirectoryProxy.__init__(self, path_name=path_name, session=session)
         ImportableAssetProxy.__init__(self, asset_full_name=package_importable_name, session=self.session)
 
-    ### OVERLOADS ###
+    ### SPECIAL METHODS ###
 
     def __repr__(self):
         return ImportableAssetProxy.__repr__(self)

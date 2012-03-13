@@ -10,7 +10,7 @@ class _RhythmicKaleid(object):
     def __init__(self):
         self._repr_signals = []
 
-    ### OVERLOADS ###
+    ### SPECIAL METHODS ###
 
     def __call__(self, duration_tokens, seeds = None):
         duration_pairs = durationtools.duration_tokens_to_duration_pairs(duration_tokens)

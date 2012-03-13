@@ -21,7 +21,7 @@ class MenuSection(MenuObject):
         self.show_existing_values = False
         self.tokens = None
 
-    ### OVERLOADS ###
+    ### SPECIAL METHODS ###
 
     # TODO: write test
     def __len__(self):

@@ -6,6 +6,8 @@ import os
 
 class Session(object):
     
+    ### INITIALIZER ###
+
     def __init__(self, user_input=None):
         self._backtracking_stack = []
         self._breadcrumb_cache_stack = []
@@ -32,7 +34,7 @@ class Session(object):
         self.user_specified_quit = False
         self.show_active_scores()
 
-    ### OVERLOADS ###
+    ### SPECIAL METHODS ###
 
     def __repr__(self):
         summary = []

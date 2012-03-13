@@ -16,7 +16,7 @@ class Specifier(object):
         self.description = description
         self.name = name
 
-    ### OVERLOADS ###
+    ### SPECIAL METHODS ###
 
     def __eq__(self, other):
         if self is other:

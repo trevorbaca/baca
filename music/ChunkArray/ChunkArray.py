@@ -11,7 +11,7 @@ class ChunkArray(list):
         list.__init__(self, args)
         self._update_chunk_pointers()
 
-    ### OVERLOADS ###
+    ### SPECIAL METHODS ###
 
     def __delitem__(self, i):
         self[i].prev_chunk, self[i].next_chunk = None, None
