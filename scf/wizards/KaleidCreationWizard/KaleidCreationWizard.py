@@ -1,10 +1,10 @@
 from scf import selectors
-from scf.wizards.Wizard import Wizard
+from scf.wizards.HandlerCreationWizard import HandlerCreationWizard
 
 
-class KaleidCreationWizard(Wizard):
+class KaleidCreationWizard(HandlerCreationWizard):
 
-    ### READ-ONLY PROPERTIES ###
+    ### READ-ONLY PUBLIC PROPERTIES ###
 
     @property
     def breadcrumb(self):
@@ -12,7 +12,7 @@ class KaleidCreationWizard(Wizard):
 
     ### PUBLIC METHODS ###
 
-    def get_kaleid_editor(self, kaleid_class_name, target=None):
+    def get_handler_editor(self, kaleid_class_name, target=None):
         wizard_class_name = '{}KaleidEditor'.format(kaleid_class_name)
         command = 'from scf.editors import {} as kaleid_editor_class'.format(wizard_class_name)
         exec(command)
@@ -26,7 +26,7 @@ class KaleidCreationWizard(Wizard):
         selector = selectors.KaleidClassSelector(session=self.session)
         kaleid_class_name = selector.run()
         if not self.backtrack():
-            kaleid_editor = self.get_kaleid_editor(kaleid_class_name) 
+            kaleid_editor = self.get_handler_editor(kaleid_class_name) 
             kaleid_editor.run(is_autoadvancing=True)
             self.target = kaleid_editor.target
         self.pop_breadcrumb() 

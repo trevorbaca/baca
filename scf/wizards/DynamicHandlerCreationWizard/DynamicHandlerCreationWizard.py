@@ -1,7 +1,16 @@
 from scf import selectors
-from scf.wizards.Wizard import Wizard
+from scf.wizards.HandlerCreationWizard import HandlerCreationWizard
 
 
-class DynamicHandlerCreationWizard(Wizard):
+class DynamicHandlerCreationWizard(HandlerCreationWizard):
 
-	pass
+    ### READ-ONLY PUBLIC PROPERTIES ###
+
+    @property
+    def breadcrumb(self):
+        return 'dynamic handler creation wizard'
+
+    ### PUBLIC METHODS ###
+
+    def get_handler_editor(self):
+        pass
