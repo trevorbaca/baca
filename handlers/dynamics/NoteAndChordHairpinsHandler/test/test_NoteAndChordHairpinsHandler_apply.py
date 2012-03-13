@@ -5,7 +5,7 @@ import baca
 def test_NoteAndChordHairpinsHandler_apply_01():
 
 
-    hairpins = baca.handlers.dynamics.NoteAndChordHairpinsHandler()
+    hairpins = handlers.dynamics.NoteAndChordHairpinsHandler()
     hairpins.hairpin_tokens.append(('p', '<', 'f'))
     hairpins.hairpin_tokens.append(('p', '<', 'f'))
     hairpins.hairpin_tokens.append(('pp', '<', 'p'))

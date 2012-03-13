@@ -4,7 +4,7 @@ import baca
 
 def test_NoteAndChordHairpinHandler_apply_01():
 
-    hairpin = baca.handlers.dynamics.NoteAndChordHairpinHandler(('p', '<', 'f'))
+    hairpin = handlers.dynamics.NoteAndChordHairpinHandler(('p', '<', 'f'))
     staff = Staff("r4 c'8 d'8 r4 e'8 r8")
     hairpin.apply(staff)
 

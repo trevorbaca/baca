@@ -4,7 +4,7 @@ import baca
 
 def test_PatternedArticulationsHandler_apply_01():
 
-    pattern = baca.handlers.articulations.PatternedArticulationsHandler([['>', '-'], ['.']])
+    pattern = handlers.articulations.PatternedArticulationsHandler([['>', '-'], ['.']])
     staff = Staff("c'8 d'8 r8 e'8 f'8 r8 g'8 r8")
     pattern.apply(staff)
 
