@@ -2,7 +2,6 @@
 
 from ClefMarkEditor import ClefMarkEditor
 from ClefMarkInventoryEditor import ClefMarkInventoryEditor
-#from ConstellationCircuitSelectionEditor import ConstellationCircuitSelectionEditor
 from ConstellationCircuitSelectionEditor import ConstellationCircuitSelectionEditor
 from InstrumentEditor import InstrumentEditor
 from InstrumentationEditor import InstrumentationEditor
@@ -51,6 +50,15 @@ from SignalAffixedChunkWithNoteFilledTokensKaleidEditor import SignalAffixedChun
 from SignalAffixedChunkWithRestFilledTokensKaleidEditor import SignalAffixedChunkWithRestFilledTokensKaleidEditor
 from SignalAffixedNoteFilledTokensKaleidEditor import SignalAffixedNoteFilledTokensKaleidEditor
 from SignalAffixedRestFilledTokensKaleidEditor import SignalAffixedRestFilledTokensKaleidEditor
+
+
+### DYNAMIC HANDLER EDITORS ###
+
+from DynamicHandlerEditor import DynamicHandlerEditor
+from NoteAndChordHairpinHandlerEditor import NoteAndChordHairpinHandlerEditor
+from NoteAndChordHairpinsHandlerEditor import NoteAndChordHairpinsHandlerEditor
+from ReiteratedDynamicHandlerEditor import ReiteratedDynamicHandlerEditor
+from TerracedDynamicsHandlerEditor import TerracedDynamicsHandlerEditor
 
 
 ### NONEDITOR CLASSES ###
