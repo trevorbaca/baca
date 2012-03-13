@@ -3,5 +3,14 @@ from scf.specifiers.ParameterSpecifier import ParameterSpecifier
 
 class ClefSpecifier(ParameterSpecifier):
 
-    pass
+    ### INITIALIZER ###
 
+    def __init__(self, description=None, clef_name=None, name=None):
+        ParameterSpecifier.__init__(self, description=description, name=name)
+        self.clef_name = clef_name
+
+    ### READ-ONLY PROPERTIES ###
+
+    @property
+    def one_line_menuing_summary(self):
+        return self.name or self.clef_name

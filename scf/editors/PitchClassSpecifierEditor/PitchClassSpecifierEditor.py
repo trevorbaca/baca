@@ -1,9 +1,9 @@
-from scf.editors.ParameterSpecifierEditor import ParameterSpecifierEditor
-from scf.editors.TargetManifest import TargetManifest
-from scf.specifiers.PitchClassSpecifier import PitchClassSpecifier
 from scf import getters
 from scf import selectors
 from scf import wizards
+from scf.editors.ParameterSpecifierEditor import ParameterSpecifierEditor
+from scf.editors.TargetManifest import TargetManifest
+from scf.specifiers.PitchClassSpecifier import PitchClassSpecifier
 
 
 class PitchClassSpecifierEditor(ParameterSpecifierEditor):

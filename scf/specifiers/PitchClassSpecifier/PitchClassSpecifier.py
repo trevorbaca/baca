@@ -10,14 +10,12 @@ class PitchClassSpecifier(ParameterSpecifier):
         pitch_class_reservoir_helper=None,
         pitch_class_transform=None
         ):
-        ParameterSpecifier.__init__(self)
-        self.description = description
-        self.name = name
+        ParameterSpecifier.__init__(self, description=description, name=name)
         self.pitch_class_reservoir = pitch_class_reservoir
         self.pitch_class_reservoir_helper = pitch_class_reservoir_helper
         self.pitch_class_transform = pitch_class_transform
 
-    ### READ-ONLY ATTRIBUTES ###
+    ### READ-ONLY PROPERTIES ###
 
     @property
     def one_line_menuing_summary(self):

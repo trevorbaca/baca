@@ -4,6 +4,8 @@ from scf.specifiers.Specifier import Specifier
 class PerformerContributionSpecifier(Specifier):
 
     def __init__(self,
+        name=None,
+        description=None,
         articulation_specifier=None,
         clef_specifier=None,
         directive_specifier=None,
@@ -19,7 +21,7 @@ class PerformerContributionSpecifier(Specifier):
         trill_specifier=None,
         troping_specifier=None,
         ):
-        Specifier.__init__(self)
+        Specifier.__init__(self, description=description, name=name)
         self.articulation_specifier = articulation_specifier
         self.clef_specifier = clef_specifier
         self.directive_specifier = directive_specifier
@@ -69,4 +71,3 @@ class PerformerContributionSpecifier(Specifier):
             return self.performer_specifier.performer.name
         except AttributeError:
             return 'unknown performer'
-

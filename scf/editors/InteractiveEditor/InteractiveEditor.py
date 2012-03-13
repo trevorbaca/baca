@@ -12,7 +12,7 @@ class InteractiveEditor(SCFObject):
         self.target = target
         self.initialize_attributes_in_memory()
         if not hasattr(self, 'target_manifest'):
-            raise Exception
+            raise Exception(self)
     
     ### OVERLOADS ###
 

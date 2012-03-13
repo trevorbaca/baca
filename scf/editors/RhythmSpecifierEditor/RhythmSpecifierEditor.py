@@ -1,8 +1,8 @@
+from scf import getters
+from scf import selectors
 from scf.editors.ParameterSpecifierEditor import ParameterSpecifierEditor
 from scf.editors.TargetManifest import TargetManifest
 from scf.specifiers.RhythmSpecifier import RhythmSpecifier
-from scf import getters
-from scf import selectors
 
 
 class RhythmSpecifierEditor(ParameterSpecifierEditor):
@@ -15,9 +15,3 @@ class RhythmSpecifierEditor(ParameterSpecifierEditor):
         (),
         ('kaleid_package_importable_name', 'kaleid', 'kl', selectors.KaleidPackageSelector),
         )
-
-    ### READ-ONLY ATTRIBUTES ###
-
-    @property
-    def target_name(self):
-        return self.target.one_line_menuing_summary

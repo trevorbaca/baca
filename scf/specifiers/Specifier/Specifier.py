@@ -3,12 +3,18 @@ from abc import abstractproperty
 
 
 class Specifier(object):
+    
+    ### CLASS ATTRIBUTES ###
+
     __metaclass__ = ABCMeta
 
-    def __init__(self):
+    ### INITIALIZER ###
+
+    def __init__(self, description=None, name=None):
         variable_names = self.__init__.im_func.func_code.co_varnames[1:]
         self._variable_names = variable_names
-        self.description = None
+        self.description = description
+        self.name = name
 
     ### OVERLOADS ###
 
@@ -32,7 +38,7 @@ class Specifier(object):
         else:
             return '{}()'.format(self.class_name)
 
-    ### READ-ONLY ATTRIBUTES ###
+    ### READ-ONLY PROPERTIES ###
 
     @property
     def class_name(self):

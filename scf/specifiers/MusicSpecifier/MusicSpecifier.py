@@ -15,7 +15,7 @@ class MusicSpecifier(Specifier):
             performer_contribution_specifiers or PerformerContributionSpecifierList()
         self.tempo = tempo
 
-    ### CLASS ATTRIBUTES ATTRIBUTES ###
+    ### CLASS ATTRIBUTES ###
 
     storage_module_import_statements = [
         'from abjad import *',
