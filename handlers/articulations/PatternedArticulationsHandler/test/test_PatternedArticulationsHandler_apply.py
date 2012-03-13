@@ -1,5 +1,5 @@
 from abjad import *
-import baca
+import handlers
 
 
 def test_PatternedArticulationsHandler_apply_01():
