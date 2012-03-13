@@ -37,14 +37,6 @@ class MaterialPackageProxy(PackageProxy):
         return self.human_readable_name
 
     @property
-    def current_materials_directory_name(self):
-        return self.package_importable_name_to_path_name(self.current_materials_package_importable_name)
-
-    @property
-    def current_materials_package_importable_name(self):
-        return self.dot_join(self.importable_name.split('.')[:-1])
-
-    @property
     def has_complete_user_input_wrapper_in_memory(self):
         if self.has_user_input_wrapper_in_memory:
             return self.user_input_wrapper_in_memory.is_complete
@@ -283,9 +275,10 @@ class MaterialPackageProxy(PackageProxy):
 
     @property
     def material_package_directory(self):
-        if self.current_materials_directory_name:
+        if self.session.current_materials_package_path_name:
             if self.material_package_short_name:
-                return os.path.join(self.current_materials_directory_name, self.material_package_short_name)
+                return os.path.join(
+                    self.session.current_materials_package_path_name, self.material_package_short_name)
 
     @property
     def material_package_maker(self):
@@ -402,13 +395,6 @@ class MaterialPackageProxy(PackageProxy):
     @property
     def should_have_stylesheet(self):
         return self.should_have_illustration
-
-    #@property
-    #def should_have_user_input_module(self):
-    #    tag = self.get_tag('should_have_user_input_module')
-    #    if tag is None:
-    #        return self.material_package_maker_class_name is not None
-    #    return tag
 
     @property
     def stylesheet_file_name_on_disk(self):

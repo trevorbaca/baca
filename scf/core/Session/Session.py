@@ -46,9 +46,6 @@ class Session(SCFObject):
         summary = ', '.join(summary)
         return '{}({})'.format(type(self).__name__, summary)
 
-    def __str__(self):
-        return '\n'.join(self.formatted_attributes)
-
     ### READ-ONLY PUBLIC PROPERTIES ###
 
     @property
@@ -140,16 +137,6 @@ class Session(SCFObject):
                 result.append('default')
             else:
                 result.append(command)
-        return result
-
-    # TODO: remove
-    @property
-    def formatted_attributes(self):
-        result = []
-        result.append('initial_user_input: {!r}'.format(self.initial_user_input))
-        result.append('breadcrumbs: {!r}'.format(self.breadcrumb_stack))
-        result.append('scores_to_show: {!r}'.format(self.scores_to_show))
-        result.append('user_input: {!r}'.format(self.user_input))
         return result
 
     @property
