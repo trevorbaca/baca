@@ -3,14 +3,14 @@ from abjad.tools.notetools.Note import Note
 from abjad.tools import leaftools
 from abjad.tools import marktools
 from abjad.tools import sequencetools
-from baca.articulations._ArticulationsSpecifier._ArticulationsSpecifier import _ArticulationsSpecifier
+from baca.handlers.articulations._ArticulationsSpecifier._ArticulationsSpecifier import _ArticulationsSpecifier
 
 
-class PatternedArticulations(_ArticulationsSpecifier):
+class ReiteratedArticulation(_ArticulationsSpecifier):
     '''Patterned articulations.
     '''
 
-    def __init__(self, articulation_lists = None,
+    def __init__(self, articulation_list = None,
         minimum_prolated_duration = None, maximum_prolated_duration = None,
         minimum_written_pitch = None, maximum_written_pitch = None):
         _ArticulationsSpecifier.__init__(self,
@@ -18,40 +18,47 @@ class PatternedArticulations(_ArticulationsSpecifier):
             maximum_prolated_duration = maximum_prolated_duration,
             minimum_written_pitch = minimum_written_pitch,
             maximum_written_pitch = maximum_written_pitch)
-        if articulation_lists is None:
-            articulation_lists = []
-        self.articulation_lists = articulation_lists
+        if articulation_list is None:
+            articulation_list = []
+        if isinstance(articulation_list, str):
+            articulation_list = [articulation_list]
+        self.articulation_list = articulation_list
 
     ### SPECIAL METHODS ###
 
-    def __call__(self, articulation_lists):
+    def __call__(self, articulation_list):
         new = type(self)()
-        new.articulation_lists = articulation_lists
+        new.articulation_list = articulation_list
         return new
+
+    def __repr__(self):
+        return '%s(%s)' % (type(self).__name__, self.articulation_list)
 
     ### READ / WRITE PUBLIC PROPERTIES ###
 
     @apply
-    def articulation_lists():
+    def articulation_list():
         def fget(self):
-            return self._articulation_lists
-        def fset(self, articulation_lists):
-            if all([isinstance(x, (tuple, list)) for x in articulation_lists]):
-                self._articulation_lists = articulation_lists
+            return self._articulation_list
+        def fset(self, articulation_list):
+            if isinstance(articulation_list, list):
+                if all([isinstance(x, str) for x in articulation_list]):
+                    self._articulation_list = articulation_list
+            elif isinstance(articulation_list, str):
+                self._articulation_list = [articulation_list]
             else:
-                raise TypeError(articulation_lists)
+                raise TypeError(articulation_list)
         return property(**locals())
 
     ### PUBLIC METHODS ###
 
     def apply(self, expr, offset = 0, skip_first = 0, skip_last = 0):
-        articulation_lists = sequencetools.CyclicList(self.articulation_lists)
+        articulation_list = sequencetools.CyclicList(self.articulation_list)
         notes_and_chords = list(leaftools.iterate_notes_and_chords_forward_in_expr(expr))
         notes_and_chords = notes_and_chords[skip_first:]
         if skip_last:
             notes_and_chords = notes_and_chords[:-skip_last]
         for i, note_or_chord in enumerate(notes_and_chords):
-            articulation_list = articulation_lists[offset+i]
             if self.minimum_prolated_duration is not None:
                 if note_or_chord.duration.prolated < self.minimum_prolated_duration:
                     continue
@@ -72,5 +79,6 @@ class PatternedArticulations(_ArticulationsSpecifier):
                     maximum_written_pitch = note_or_chord.pitches[-1]
                 if self.maximum_written_pitch < maximum_written_pitch:
                     continue
-            marktools.attach_articulations_to_notes_and_chords_in_expr(note_or_chord, articulation_list)
+            marktools.attach_articulations_to_notes_and_chords_in_expr(
+                note_or_chord, self.articulation_list)
         return expr
