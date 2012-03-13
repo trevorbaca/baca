@@ -1,3 +1,4 @@
+from abc import ABCMeta
 from abjad.tools import durationtools
 from abjad.tools import pitchtools
 from fractions import Fraction
@@ -6,6 +7,12 @@ from fractions import Fraction
 class ArticulationHandler(object):
     '''Articulations specifier.
     '''
+
+    ### CLASS ATTRIBUTES ##
+
+    __metaclass__ = ABCMeta
+
+    ### INITIALIZER ###
 
     def __init__(self, minimum_prolated_duration = None, maximum_prolated_duration = None,
         minimum_written_pitch = None, maximum_written_pitch = None):
