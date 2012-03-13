@@ -6,7 +6,7 @@ from abjad.tools import sequencetools
 from baca.handlers.articulations.ArticulationHandler.ArticulationHandler import ArticulationHandler
 
 
-class ReiteratedArticulation(ArticulationHandler):
+class ReiteratedArticulationHandler(ArticulationHandler):
     '''Patterned articulations.
     '''
 

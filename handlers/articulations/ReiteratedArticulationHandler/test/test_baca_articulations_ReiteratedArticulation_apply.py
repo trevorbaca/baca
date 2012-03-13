@@ -2,9 +2,9 @@ from abjad import *
 import baca
 
 
-def test_baca_articulations_ReiteratedArticulation_apply_01():
+def test_baca_articulations_ReiteratedArticulationHandler_apply_01():
 
-    reiterated_articulation = baca.handlers.articulations.ReiteratedArticulation(['^', '.'])
+    reiterated_articulation = baca.handlers.articulations.ReiteratedArticulationHandler(['^', '.'])
     staff = Staff("c'8 d'8 r8 e'8 f'8 r8 g'8 r8")
     reiterated_articulation.apply(staff)
 
@@ -24,9 +24,9 @@ def test_baca_articulations_ReiteratedArticulation_apply_01():
     assert staff.format == "\\new Staff {\n\tc'8 -\\marcato -\\staccato\n\td'8 -\\marcato -\\staccato\n\tr8\n\te'8 -\\marcato -\\staccato\n\tf'8 -\\marcato -\\staccato\n\tr8\n\tg'8 -\\marcato -\\staccato\n\tr8\n}"
 
 
-def test_baca_articulations_ReiteratedArticulation_apply_02():
+def test_baca_articulations_ReiteratedArticulationHandler_apply_02():
 
-    reiterated_articulation = baca.handlers.articulations.ReiteratedArticulation('.')
+    reiterated_articulation = baca.handlers.articulations.ReiteratedArticulationHandler('.')
     staff = Staff("c'8 d'8 r8 e'8 f'8 r8 g'8 r8")
     reiterated_articulation.apply(staff)
 

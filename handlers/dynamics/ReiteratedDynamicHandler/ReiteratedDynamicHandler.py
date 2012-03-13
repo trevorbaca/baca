@@ -4,7 +4,7 @@ from abjad.tools import marktools
 from baca.handlers.dynamics.DynamicHandler.DynamicHandler import DynamicHandler
 
 
-class ReiteratedDynamic(DynamicHandler):
+class ReiteratedDynamicHandler(DynamicHandler):
     '''Reiterated dynamic.
     '''
 

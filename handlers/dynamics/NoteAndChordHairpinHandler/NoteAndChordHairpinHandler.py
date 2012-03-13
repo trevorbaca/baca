@@ -8,7 +8,7 @@ from abjad.tools import spannertools
 from baca.handlers.dynamics.DynamicHandler.DynamicHandler import DynamicHandler
 
 
-class NoteAndChordHairpin(DynamicHandler):
+class NoteAndChordHairpinHandler(DynamicHandler):
     '''Note and chord hairpin.
     '''
 

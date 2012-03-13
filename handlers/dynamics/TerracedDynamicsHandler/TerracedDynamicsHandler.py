@@ -5,7 +5,7 @@ from abjad.tools import sequencetools
 from baca.handlers.dynamics.DynamicHandler.DynamicHandler import DynamicHandler
 
 
-class TerracedDynamics(DynamicHandler):
+class TerracedDynamicsHandler(DynamicHandler):
     '''Terraced dynamics.
     '''
 
