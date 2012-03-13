@@ -12,8 +12,8 @@ class NoteAndChordHairpinHandler(DynamicHandler):
     '''Note and chord hairpin.
     '''
 
-    def __init__(self, hairpin_token = None, minimum_prolated_duration = None):
-        DynamicHandler.__init__(self, minimum_prolated_duration = minimum_prolated_duration)
+    def __init__(self, hairpin_token=None, minimum_prolated_duration=None):
+        DynamicHandler.__init__(self, minimum_prolated_duration=minimum_prolated_duration)
         self.hairpin_token = hairpin_token
 
     ### SPECIAL METHODS ###

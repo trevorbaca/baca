@@ -7,6 +7,30 @@ def get_duration(attribute_spaced_name, session=None, existing_value=None, allow
     getter.allow_none = allow_none
     return getter
 
+def get_dynamic(attribute_spaced_name, session=None, existing_value=None, allow_none=True):
+    getter = UserInputGetter(session=session)
+    getter.append_dynamic(attribute_spaced_name)
+    getter.allow_none = allow_none
+    return getter
+
+def get_dynamics(attribute_spaced_name, session=None, existing_value=None, allow_none=True):
+    getter = UserInputGetter(session=session)
+    getter.append_dynamics(attribute_spaced_name)
+    getter.allow_none = allow_none
+    return getter
+
+def get_hairpin_token(attribute_spaced_name, session=None, existing_value=None, allow_none=True):
+    getter = UserInputGetter(session=session)
+    getter.append_hairpin_token(attribute_spaced_name)
+    getter.allow_none = allow_none
+    return getter
+
+def get_hairpin_tokens(attribute_spaced_name, session=None, existing_value=None, allow_none=True):
+    getter = UserInputGetter(session=session)
+    getter.append_hairpin_tokens(attribute_spaced_name)
+    getter.allow_none = allow_none
+    return getter
+
 def get_integer(attribute_spaced_name, session=None, existing_value=None, allow_none=True):
     getter = UserInputGetter(session=session)
     getter.append_integer(attribute_spaced_name)

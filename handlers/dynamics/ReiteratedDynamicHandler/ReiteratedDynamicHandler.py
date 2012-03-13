@@ -8,8 +8,8 @@ class ReiteratedDynamicHandler(DynamicHandler):
     '''Reiterated dynamic.
     '''
 
-    def __init__(self, dynamic_name = None, minimum_prolated_duration = None):
-        DynamicHandler.__init__(self, minimum_prolated_duration = minimum_prolated_duration)
+    def __init__(self, dynamic_name=None, minimum_prolated_duration=None):
+        DynamicHandler.__init__(self, minimum_prolated_duration=minimum_prolated_duration)
         self.dynamic_name = dynamic_name
 
     ### SPECIAL METHODS ###

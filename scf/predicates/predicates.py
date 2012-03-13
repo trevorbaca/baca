@@ -35,10 +35,21 @@ def is_constellation_circuit_id_pair(expr):
     except:
         return False
 
+def is_dynamic_token(expr):
+    try:
+        result = contexttools.DynamicMark(expr)
+        return isinstance(result, contexttools.DynamicMark)
+    except:
+        return False
+
 def is_existing_package_name(expr):
     from scf.core.SCFObject import SCFObject
     scf_object = SCFObject()
     return scf_object.package_exists(expr)
+
+def is_hairpin_token(expr):
+    import handlers
+    return handlers.dynamics.DynamicHandler.is_hairpin_token(expr)
 
 def is_integer(expr):
     return isinstance(expr, int)
@@ -103,3 +114,11 @@ def is_underscore_delimited_lowercase_package_name(expr):
 
 def is_yes_no_string(expr):
     return 'yes'.startswith(expr.lower()) or 'no'.startswith(expr.lower())
+
+def are_dynamic_tokens(expr):
+    if isinstance(expr, (tuple, list)):
+        return all([is_dynamic_token(x) for x in expr])
+
+def are_hairpin_tokens(expr):
+    if isinstance(expr, (tuple, list)):
+        return all([is_hairpin_token(x) for x in expr])

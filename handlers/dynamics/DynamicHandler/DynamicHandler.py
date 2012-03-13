@@ -14,7 +14,7 @@ class DynamicHandler(object):
 
     ### INITIALIZER ###
 
-    def __init__(self, minimum_prolated_duration = None):
+    def __init__(self, minimum_prolated_duration=None):
         self.minimum_prolated_duration = minimum_prolated_duration
 
     ### SPECIAL METHODS ###
