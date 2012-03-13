@@ -1,12 +1,12 @@
 from scf.editors.KaleidEditor import KaleidEditor
 from scf.editors.TargetManifest import TargetManifest
 from scf import getters
-import kaleids
+import handlers
 
 
 class RestFilledTokensKaleidEditor(KaleidEditor):
 
     ### CLASS ATTRIBUTES ###
 
-    target_manifest = TargetManifest(kaleids.RestFilledTokens,
+    target_manifest = TargetManifest(handlers.kaleids.RestFilledTokens,
         )

@@ -1,4 +1,4 @@
-from kaleids._SignalAffixedFilledTokens import _SignalAffixedFilledTokens
+from handlers.kaleids._SignalAffixedFilledTokens import _SignalAffixedFilledTokens
 
 
 class SignalAffixedNoteFilledTokens(_SignalAffixedFilledTokens):

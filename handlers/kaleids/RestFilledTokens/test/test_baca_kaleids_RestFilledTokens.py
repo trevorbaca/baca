@@ -1,6 +1,6 @@
 from abjad import *
 from abjad.tools import sequencetools
-from kaleids import *
+from handlers.kaleids import *
 
 
 def test_baca_kaleids_RestFilledTokens_01():

@@ -1,3 +1,5 @@
-from abjad.tools.importtools._import_structured_package import _import_structured_package
-
-_import_structured_package(__path__[0], globals(), 'dynamics')
+from DynamicHandler import DynamicHandler
+from NoteAndChordHairpinHandler import NoteAndChordHairpinHandler
+from NoteAndChordHairpinsHandler import NoteAndChordHairpinsHandler
+from ReiteratedDynamicHandler import ReiteratedDynamicHandler
+from TerracedDynamicsHandler import TerracedDynamicsHandler

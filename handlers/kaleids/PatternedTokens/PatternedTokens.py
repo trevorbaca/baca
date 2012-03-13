@@ -1,4 +1,4 @@
-from kaleids.PartForcedPatternedTokens import PartForcedPatternedTokens
+from handlers.kaleids.PartForcedPatternedTokens import PartForcedPatternedTokens
 
 
 class PatternedTokens(PartForcedPatternedTokens):

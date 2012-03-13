@@ -1,7 +1,7 @@
 import scf
 
 
-def test_KaleidClassNameSelector_run_01():
+def test_KaleidClassSelector_run_01():
 
     selector = scf.selectors.KaleidClassNameSelector()
 

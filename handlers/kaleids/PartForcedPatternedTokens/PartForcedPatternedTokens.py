@@ -1,6 +1,6 @@
 from abjad.tools import mathtools
 from abjad.tools import sequencetools
-from kaleids._PartForcedObjectWithPatternedTokens import _PartForcedObjectWithPatternedTokens
+from handlers.kaleids._PartForcedObjectWithPatternedTokens import _PartForcedObjectWithPatternedTokens
 
 
 class PartForcedPatternedTokens(_PartForcedObjectWithPatternedTokens):

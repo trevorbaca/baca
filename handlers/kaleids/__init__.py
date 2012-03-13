@@ -1,3 +1,9 @@
-from abjad.tools.importtools._import_structured_package import _import_structured_package
-
-_import_structured_package(__path__[0], globals(), 'kaleids')
+from NoteFilledTokens import NoteFilledTokens
+from PartForcedChunkWithPatternedTokens import PartForcedChunkWithPatternedTokens
+from PartForcedPatternedTokens import PartForcedPatternedTokens
+from PatternedTokens import PatternedTokens
+from RestFilledTokens import RestFilledTokens
+from SignalAffixedChunkWithNoteFilledTokens import SignalAffixedChunkWithNoteFilledTokens
+from SignalAffixedChunkWithRestFilledTokens import SignalAffixedChunkWithRestFilledTokens
+from SignalAffixedNoteFilledTokens import SignalAffixedNoteFilledTokens
+from SignalAffixedRestFilledTokens import SignalAffixedRestFilledTokens

@@ -1,4 +1,4 @@
-from kaleids.SignalAffixedRestFilledTokens import SignalAffixedRestFilledTokens
+from handlers.kaleids.SignalAffixedRestFilledTokens import SignalAffixedRestFilledTokens
 
 
 class RestFilledTokens(SignalAffixedRestFilledTokens):

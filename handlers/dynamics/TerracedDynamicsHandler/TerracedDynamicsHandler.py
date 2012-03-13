@@ -2,7 +2,7 @@ from abjad.tools import contexttools
 from abjad.tools import leaftools
 from abjad.tools import marktools
 from abjad.tools import sequencetools
-from baca.handlers.dynamics.DynamicHandler.DynamicHandler import DynamicHandler
+from baca.handlers.dynamics.DynamicHandler import DynamicHandler
 
 
 class TerracedDynamicsHandler(DynamicHandler):

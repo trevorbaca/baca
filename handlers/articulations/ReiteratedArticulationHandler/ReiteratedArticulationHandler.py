@@ -3,7 +3,7 @@ from abjad.tools.notetools.Note import Note
 from abjad.tools import leaftools
 from abjad.tools import marktools
 from abjad.tools import sequencetools
-from baca.handlers.articulations.ArticulationHandler.ArticulationHandler import ArticulationHandler
+from baca.handlers.articulations.ArticulationHandler import ArticulationHandler
 
 
 class ReiteratedArticulationHandler(ArticulationHandler):
