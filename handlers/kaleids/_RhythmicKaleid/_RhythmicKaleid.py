@@ -1,51 +1,54 @@
-from abjad.tools.notetools.Note import Note
+from abc import ABCMeta
 from abjad.tools import durationtools
 from abjad.tools import sequencetools
 from abjad.tools import tuplettools
-import copy
+from handlers.Handler import Handler
 
 
-class _RhythmicKaleid(object):
+class _RhythmicKaleid(Handler):
+
+    ### CLASS ATTRIBUTES ###
+
+    __metaclass__ = ABCMeta
+
+    ### INITIALIZER ###
 
     def __init__(self):
         self._repr_signals = []
 
     ### SPECIAL METHODS ###
 
-    def __call__(self, duration_tokens, seeds = None):
+    def __call__(self, duration_tokens, seeds=None):
         duration_pairs = durationtools.duration_tokens_to_duration_pairs(duration_tokens)
         seeds = self._none_to_new_list(seeds)
         return duration_pairs, seeds
 
-    def __repr__(self):
-        return '{}()'.format(self._class_name)
+#    def __repr__(self):
+#        return '{}()'.format(self._class_name)
 
     ### PRIVATE PROPERTIES ###
 
-    @property
-    def _class_name(self):
-        return type(self).__name__
-
-    @property
-    def _tools_package_qualified_class_name(self):
-        return '{}.{}'.format(self._tools_package, self._class_name)
-
-    @property
-    def _formatted_input_parameters(self):
-        result = []
-        for arg in self.args:
-            string = '{}'.format(getattr(self, arg))
-            result.append(string)
-        for kwarg in self.kwargs:
-            string = '{}={!r}'.format(kwarg, getattr(self, kwarg))
-            result.append(string)
-        return result
+#    @property
+#    def _class_name(self):
+#        return type(self).__name__
+#
+#    @property
+#    def _tools_package_qualified_class_name(self):
+#        return '{}.{}'.format(self._tools_package, self._class_name)
+#
+#    @property
+#    def _formatted_input_parameters(self):
+#        result = []
+#        for arg in self.args:
+#            string = '{}'.format(getattr(self, arg))
+#            result.append(string)
+#        for kwarg in self.kwargs:
+#            string = '{}={!r}'.format(kwarg, getattr(self, kwarg))
+#            result.append(string)
+#        return result
 
     @property
     def _tools_package(self):
-        #for part in reversed(self.__module__.split('.')):
-        #    if not part == self._class_name:
-        #        return part
         return 'handlers.kaleids'
 
     ### PRIVATE METHODS ###

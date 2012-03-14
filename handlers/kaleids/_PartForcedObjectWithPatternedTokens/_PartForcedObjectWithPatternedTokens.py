@@ -119,8 +119,8 @@ class _PartForcedObjectWithPatternedTokens(_RhythmicKaleid):
     def __ne__(self, other):
         return self == other
 
-    def __repr__(self):
-        return '{}({})'.format(self._class_name, ', '.join(self._formatted_input_parameters))
+#    def __repr__(self):
+#        return '{}({})'.format(self._class_name, ', '.join(self._formatted_input_parameters))
 
     ### CLASS ATTRIBUTES ###
 

@@ -15,21 +15,3 @@ class KaleidMaterialPackageMaker(MaterialPackageMaker):
     output_material_editor = staticmethod(get_kaleid_editor)
     output_material_maker = KaleidCreationWizard
     output_material_module_import_statements = ['import handlers']
-
-    ### PUBLIC METHODS ###
-
-    def make_output_material_module_body_lines(self, output_material):
-        lines = []
-        formatted_input_parameters = output_material._formatted_input_parameters
-        if formatted_input_parameters:
-            lines.append('{} = {}('.format(
-                self.material_underscored_name, output_material._tools_package_qualified_class_name))
-            for item in output_material._formatted_input_parameters[:-1]:
-                lines.append('\t{},'.format(item))
-            item = output_material._formatted_input_parameters[-1]
-            lines.append('\t{})'.format(item))
-        else:
-            lines.append('{} = {}()'.format(
-                self.material_underscored_name, output_material._tools_package_qualified_class_name))
-        lines = [line + '\n' for line in lines]
-        return lines
