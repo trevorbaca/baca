@@ -27,7 +27,7 @@ class NoteAndChordHairpinHandler(DynamicHandler):
         def fset(self, hairpin_token):
             if hairpin_token is None:
                 self._hairpin_token = hairpin_token
-            elif self.is_hairpin_token(hairpin_token):
+            elif spannertools.HairpinSpanner.is_hairpin_token(hairpin_token):
                 self._hairpin_token = hairpin_token
             else:
                 raise TypeError(hairpin_token)

@@ -48,8 +48,7 @@ def is_existing_package_name(expr):
     return scf_object.package_exists(expr)
 
 def is_hairpin_token(expr):
-    import handlers
-    return handlers.dynamics.DynamicHandler.is_hairpin_token(expr)
+    return spannertools.HairpinSpanner.is_hairpin_token(expr)
 
 def is_integer(expr):
     return isinstance(expr, int)
