@@ -6,6 +6,6 @@ class DynamicHandlerClassNameSelector(HandlerClassNameSelector):
 
     ### CLASS ATTRIBUTES ###
 
-    asset_container_package_importable_names = ['dynamics']
-    asset_container_path_names = [os.environ.get('DYNAMICHANDLERSPATH')]
+    asset_container_package_importable_names = ['handlers.dynamics']
+    asset_container_path_names = [os.path.join(os.environ.get('HANDLERS'), 'dynamics')]
     target_human_readable_name = 'dynamic handler class name'
