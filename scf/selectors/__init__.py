@@ -1,3 +1,4 @@
+from ArticulationHandlerClassNameSelector import ArticulationHandlerClassNameSelector
 from ArticulationHandlerSelector import ArticulationHandlerSelector
 from DirectiveHandlerSelector import DirectiveHandlerSelector
 from DirectoryContentSelector import DirectoryContentSelector
