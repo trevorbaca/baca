@@ -63,6 +63,9 @@ def is_integer(expr):
 def is_integer_or_none(expr):
     return expr is None or is_integer(expr)
 
+def is_list(expr):
+    return isinstance(expr, list)
+
 def is_markup(expr):
     return isinstance(expr, markuptools.Markup)
 
@@ -132,6 +135,10 @@ def are_dynamic_tokens(expr):
 def are_hairpin_tokens(expr):
     if isinstance(expr, (tuple, list)):
         return all([is_hairpin_token(x) for x in expr])
+
+def are_lists(expr):
+    if isinstance(expr, (tuple, list)):
+        return all([is_list(x) for x in expr])
 
 def are_strings(expr):
     if isinstance(expr, (tuple, list)):

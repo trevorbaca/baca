@@ -1,23 +1,23 @@
-from abjad.tools.chordtools import Chord
-from abjad.tools.notetools.Note import Note
 from abjad.tools import leaftools
 from abjad.tools import marktools
 from abjad.tools import sequencetools
+from abjad.tools.notetools.Note import Note
 from handlers.articulations.ArticulationHandler import ArticulationHandler
 
 
 class PatternedArticulationsHandler(ArticulationHandler):
-    '''Patterned articulations.
-    '''
 
-    def __init__(self, articulation_lists = None,
-        minimum_prolated_duration = None, maximum_prolated_duration = None,
-        minimum_written_pitch = None, maximum_written_pitch = None):
+    def __init__(self, 
+        articulation_lists=None,
+        minimum_prolated_duration=None, 
+        maximum_prolated_duration=None,
+        minimum_written_pitch=None, 
+        maximum_written_pitch=None):
         ArticulationHandler.__init__(self,
-            minimum_prolated_duration = minimum_prolated_duration,
-            maximum_prolated_duration = maximum_prolated_duration,
-            minimum_written_pitch = minimum_written_pitch,
-            maximum_written_pitch = maximum_written_pitch)
+            minimum_prolated_duration=minimum_prolated_duration,
+            maximum_prolated_duration=maximum_prolated_duration,
+            minimum_written_pitch=minimum_written_pitch,
+            maximum_written_pitch=maximum_written_pitch)
         if articulation_lists is None:
             articulation_lists = []
         self.articulation_lists = articulation_lists

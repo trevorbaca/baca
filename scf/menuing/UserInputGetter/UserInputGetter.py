@@ -156,6 +156,16 @@ class UserInputGetter(MenuSectionAggregator):
         self.append_something(spaced_attribute_name, message, default=default)
         self.tests.append(lambda x: all([predicates.is_integer(y) for y in x]))
 
+    def append_list(self, spaced_attribute_name, default=None):
+        message = 'value for {!r} must be list.'
+        self.append_something(spaced_attribute_name, message, default=default)
+        self.tests.append(predicates.is_list)
+
+    def append_lists(self, spaced_attribute_name, default=None):
+        message = 'value for {!r} must be lists.'
+        self.append_something(spaced_attribute_name, message, default=default)
+        self.tests.append(predicates.are_lists)
+
     def append_markup(self, spaced_attribute_name, default=None):
         message = 'value for {!r} must be markup.'
         self.append_something(spaced_attribute_name, message, default=default)
