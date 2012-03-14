@@ -43,9 +43,10 @@ class _RhythmicKaleid(object):
 
     @property
     def _tools_package(self):
-        for part in reversed(self.__module__.split('.')):
-            if not part == self._class_name:
-                return part
+        #for part in reversed(self.__module__.split('.')):
+        #    if not part == self._class_name:
+        #        return part
+        return 'handlers.kaleids'
 
     ### PRIVATE METHODS ###
 
