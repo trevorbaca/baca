@@ -61,6 +61,13 @@ from ReiteratedDynamicHandlerEditor import ReiteratedDynamicHandlerEditor
 from TerracedDynamicsHandlerEditor import TerracedDynamicsHandlerEditor
 
 
+### ARTICULATION HANDLER EDITORS ###
+
+from ArticulationHandlerEditor import ArticulationHandlerEditor
+from PatternedArticulationsHandlerEditor import PatternedArticulationsHandlerEditor
+from ReiteratedArticulationHandlerEditor import ReiteratedArticulationHandlerEditor
+
+
 ### NONEDITOR CLASSES ###
 
 from TargetManifest import TargetManifest

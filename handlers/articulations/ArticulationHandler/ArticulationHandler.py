@@ -2,11 +2,10 @@ from abc import ABCMeta
 from abjad.tools import durationtools
 from abjad.tools import pitchtools
 from fractions import Fraction
+from handlers.Handler import Handler
 
 
-class ArticulationHandler(object):
-    '''Articulations specifier.
-    '''
+class ArticulationHandler(Handler):
 
     ### CLASS ATTRIBUTES ##
 
@@ -14,8 +13,11 @@ class ArticulationHandler(object):
 
     ### INITIALIZER ###
 
-    def __init__(self, minimum_prolated_duration = None, maximum_prolated_duration = None,
-        minimum_written_pitch = None, maximum_written_pitch = None):
+    def __init__(self, 
+        minimum_prolated_duration=None, 
+        maximum_prolated_duration=None,
+        minimum_written_pitch=None, 
+        maximum_written_pitch=None):
         if minimum_prolated_duration is None:
             self.minimum_prolated_duration = minimum_prolated_duration
         else:
@@ -35,7 +37,8 @@ class ArticulationHandler(object):
         else:
             self.maximum_written_pitch = pitchtools.NamedChromaticPitch(maximum_written_pitch)
 
-    ### SPECIAL METHODS ###
+    ### PRIVATE READ-ONLY ATTRIBUTES ###
 
-    def __repr__(self):
-        return '%s()' % type(self).__name__
+    @property
+    def _tools_package(self):
+        return 'handlers.articulations'
