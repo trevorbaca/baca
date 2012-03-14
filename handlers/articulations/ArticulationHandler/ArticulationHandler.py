@@ -1,4 +1,5 @@
 from abc import ABCMeta
+from abc import abstractmethod
 from abjad.tools import durationtools
 from abjad.tools import pitchtools
 from fractions import Fraction
@@ -13,6 +14,7 @@ class ArticulationHandler(Handler):
 
     ### INITIALIZER ###
 
+    @abstractmethod
     def __init__(self, 
         minimum_prolated_duration=None, 
         maximum_prolated_duration=None,

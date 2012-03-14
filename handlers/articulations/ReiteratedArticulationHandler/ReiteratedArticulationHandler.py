@@ -31,9 +31,6 @@ class ReiteratedArticulationHandler(ArticulationHandler):
         new.articulation_list = articulation_list
         return new
 
-    def __repr__(self):
-        return '%s(%s)' % (type(self).__name__, self.articulation_list)
-
     ### READ / WRITE PUBLIC PROPERTIES ###
 
     @apply

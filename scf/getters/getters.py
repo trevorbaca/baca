@@ -1,6 +1,18 @@
 from scf.menuing.UserInputGetter import UserInputGetter
 
 
+def get_articulation(attribute_spaced_name, session=None, existing_value=None, allow_none=True):
+    getter = UserInputGetter(session=session)
+    getter.append_articulation(attribute_spaced_name)
+    getter.allow_none = allow_none
+    return getter
+
+def get_articulations(attribute_spaced_name, session=None, existing_value=None, allow_none=True):
+    getter = UserInputGetter(session=session)
+    getter.append_articulations(attribute_spaced_name)
+    getter.allow_none = allow_none
+    return getter
+
 def get_duration(attribute_spaced_name, session=None, existing_value=None, allow_none=True):
     getter = UserInputGetter(session=session)
     getter.append_duration(attribute_spaced_name)
@@ -49,6 +61,12 @@ def get_markup(attribute_spaced_name, session=None, existing_value=None, allow_n
     getter.allow_none = allow_none
     return getter
 
+def get_named_chromatic_pitch(attribute_spaced_name, session=None, existing_value=None, allow_none=True):
+    getter = UserInputGetter(session=session)
+    getter.append_named_chromatic_pitch(attribute_spaced_name)
+    getter.allow_none = allow_none
+    return getter
+
 def get_nonnegative_integers(attribute_spaced_name, session=None, existing_value=None, allow_none=True):
     getter = UserInputGetter(session=session)
     getter.append_nonnegative_integers(attribute_spaced_name)
@@ -76,6 +94,12 @@ def get_positive_integers(attribute_spaced_name, session=None, existing_value=No
 def get_string(attribute_spaced_name, session=None, existing_value=None, allow_none=True):
     getter = UserInputGetter(session=session)
     getter.append_string(attribute_spaced_name)
+    getter.allow_none = allow_none
+    return getter
+
+def get_strings(attribute_spaced_name, session=None, existing_value=None, allow_none=True):
+    getter = UserInputGetter(session=session)
+    getter.append_strings(attribute_spaced_name)
     getter.allow_none = allow_none
     return getter
 

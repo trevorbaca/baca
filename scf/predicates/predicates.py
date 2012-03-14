@@ -6,6 +6,13 @@ def is_argument_range_string(expr):
     pattern = re.compile('^(\w+( *- *\w+)?)(, *\w+( *- *\w+)?)*$')
     return pattern.match(expr) is not None
 
+def is_articulation_token(expr):
+    try:
+        result = marktools.Articulation(expr)
+        return isinstance(result, marktools.Articulation)
+    except:
+        return False
+
 def is_available_underscore_delimited_lowercase_package_name(expr):
     from scf.core.SCFObject import SCFObject
     if iotools.is_underscore_delimited_lowercase_package_name(expr):
@@ -114,6 +121,10 @@ def is_underscore_delimited_lowercase_package_name(expr):
 def is_yes_no_string(expr):
     return 'yes'.startswith(expr.lower()) or 'no'.startswith(expr.lower())
 
+def are_articulation_tokens(expr):
+    if isinstance(expr, (tuple, list)):
+        return all([is_articulation_token(x) for x in expr])
+
 def are_dynamic_tokens(expr):
     if isinstance(expr, (tuple, list)):
         return all([is_dynamic_token(x) for x in expr])
@@ -121,3 +132,7 @@ def are_dynamic_tokens(expr):
 def are_hairpin_tokens(expr):
     if isinstance(expr, (tuple, list)):
         return all([is_hairpin_token(x) for x in expr])
+
+def are_strings(expr):
+    if isinstance(expr, (tuple, list)):
+        return all([is_string(x) for x in expr])

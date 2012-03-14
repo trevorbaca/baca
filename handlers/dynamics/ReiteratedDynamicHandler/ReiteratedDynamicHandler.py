@@ -5,8 +5,8 @@ from handlers.dynamics.DynamicHandler import DynamicHandler
 
 
 class ReiteratedDynamicHandler(DynamicHandler):
-    '''Reiterated dynamic.
-    '''
+
+    ### INITIALIZER ###
 
     def __init__(self, dynamic_name=None, minimum_prolated_duration=None):
         DynamicHandler.__init__(self, minimum_prolated_duration=minimum_prolated_duration)

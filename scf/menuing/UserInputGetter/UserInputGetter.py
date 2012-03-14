@@ -20,7 +20,6 @@ class UserInputGetter(MenuSectionAggregator):
         self._tests = []
         self.allow_none = False
         self.capitalize_prompts = True
-        #self.include_newlines = True
         self.include_newlines = False
         self.indent_level = 0
         self.number_prompts = False
@@ -70,6 +69,16 @@ class UserInputGetter(MenuSectionAggregator):
         self.argument_lists[-1] = argument_list
         test = lambda expr: predicates.is_readable_argument_range_string_for_argument_list(expr, argument_list)
         self.tests.append(test)
+
+    def append_articulation(self, spaced_attribute_name, default=None):
+        message = 'value for {!r} must successfully initialize articulation.'
+        self.append_something(spaced_attribute_name, message, default=default)
+        self.tests.append(predicates.is_articulation_token)
+
+    def append_articulations(self, spaced_attribute_name, default=None):
+        message = 'value for {!r} must successfully initialize articulations.'
+        self.append_something(spaced_attribute_name, message, default=default)
+        self.tests.append(predicates.are_articulation_tokens)
 
     def append_available_underscore_delimited_lowercase_package_name(self, spaced_attribute_name, default=None):
         message = \
@@ -225,6 +234,11 @@ class UserInputGetter(MenuSectionAggregator):
         message = 'value for {!r} must be string or none.'
         self.append_something(spaced_attribute_name, message, default=default)
         self.tests.append(predicates.is_string_or_none)
+
+    def append_strings(self, spaced_attribute_name, default=None):
+        message = 'value for {!r} must be strings.'
+        self.append_something(spaced_attribute_name, message, default=default)
+        self.tests.append(predicates.are_strings)
 
     def append_symbolic_pitch_range_string(self, spaced_attribute_name, default=None):
         message = 'value for {!r} must be symbolic pitch range string. Ex: [A0, C8].'
