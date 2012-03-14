@@ -9,8 +9,6 @@ from handlers.dynamics.DynamicHandler import DynamicHandler
 
 
 class NoteAndChordHairpinsHandler(DynamicHandler):
-    '''Note and chord hairpins.
-    '''
 
     def __init__(self, hairpin_tokens=None, minimum_prolated_duration=None):
         DynamicHandler.__init__(self, minimum_prolated_duration=minimum_prolated_duration)

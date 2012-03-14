@@ -1,5 +1,3 @@
-from abjad.tools.chordtools import Chord
-from abjad.tools.notetools.Note import Note
 from abjad.tools import componenttools
 from abjad.tools import leaftools
 from abjad.tools import marktools
@@ -9,8 +7,6 @@ from handlers.dynamics.DynamicHandler import DynamicHandler
 
 
 class NoteAndChordHairpinHandler(DynamicHandler):
-    '''Note and chord hairpin.
-    '''
 
     def __init__(self, hairpin_token=None, minimum_prolated_duration=None):
         DynamicHandler.__init__(self, minimum_prolated_duration=minimum_prolated_duration)
@@ -18,8 +14,8 @@ class NoteAndChordHairpinHandler(DynamicHandler):
 
     ### SPECIAL METHODS ###
 
-    def __call__(self, hairpin_token = None):
-        new = type(self)(hairpin_token = hairpin_token)
+    def __call__(self, hairpin_token=None):
+        new = type(self)(hairpin_token=hairpin_token)
         return new
 
     ### READ / WRITE PUBLIC PROPERTIES ###
@@ -39,7 +35,7 @@ class NoteAndChordHairpinHandler(DynamicHandler):
 
     ### PUBLIC METHODS ###
 
-    def apply(self, expr, offset = 0):
+    def apply(self, expr, offset=0):
         leaves = list(leaftools.iterate_leaves_forward_in_expr(expr))
         leaves = leaftools.remove_outer_rests_from_sequence(leaves)
         group = leaves
