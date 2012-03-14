@@ -7,7 +7,7 @@ class DynamicHandlerCreationWizard(HandlerCreationWizard):
     ### CLASS ATTRIBUTES ###
 
     handler_class_name_selector = selectors.DynamicHandlerClassNameSelector
-    handler_editor_class_name_suffix = 'DynamicHandlerEditor'
+    handler_editor_class_name_suffix = 'Editor'
 
     ### READ-ONLY PUBLIC PROPERTIES ###
 
