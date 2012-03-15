@@ -62,11 +62,7 @@ class Studio(SCFObject):
     def edit_score_interactively(self, score_package_importable_name):
         score_package_proxy = self.score_package_wrangler.get_asset_proxy(score_package_importable_name)
         score_package_proxy.session.current_score_package_short_name = score_package_importable_name
-        # TODO: use cache keyword
-        breadcrumbs = self.breadcrumb_stack[:]
-        self.session._breadcrumb_stack = []
-        score_package_proxy.run()
-        self.session._breadcrumb_stack = breadcrumbs
+        score_package_proxy.run(cache=True)
         self.session.current_score_package_name = None
 
     def get_next_score_package_short_name(self):
