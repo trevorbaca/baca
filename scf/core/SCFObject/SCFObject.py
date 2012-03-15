@@ -173,7 +173,10 @@ class SCFObject(object):
 
     def assign_user_input(self, user_input=None):
         if user_input is not None:
-            self.session.user_input = user_input
+            if self.session.user_input:
+                self.session.user_input = user_input + ' ' + self.session.user_input
+            else:
+                self.session.user_input = user_input
 
     def backtrack(self, source=None):
         return self.session.backtrack(source=source)
