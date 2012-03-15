@@ -298,7 +298,6 @@ class UserInputGetter(MenuSectionAggregator):
         execs = self.execs[self.prompt_index]
         assert isinstance(execs, list)
         if execs:
-            #self.debug(user_response, 'user response')
             value = self.get_value_from_execs(user_response, execs)
             if value is None and not user_response == 'None':
                 return '!!!'
@@ -430,14 +429,17 @@ class UserInputGetter(MenuSectionAggregator):
 
     def store_value(self, user_response):
         assert isinstance(user_response, str)
-        if self.try_to_store_value_from_argument_list(user_response):
-            return True
-        value = self.change_user_response_to_value(user_response)
-        if value == '!!!':
-            return False
-        if not self.apply_tests_to_value(value):
-            self.conditionally_display_help()
-            return False
+        if self.allow_none and user_response in ('', 'None'): 
+            value = None
+        else:
+            if self.try_to_store_value_from_argument_list(user_response):
+                return True
+            value = self.change_user_response_to_value(user_response)
+            if value == '!!!':
+                return False
+            if not self.apply_tests_to_value(value):
+                self.conditionally_display_help()
+                return False
         self.values.append(value)
         self.prompt_index = self.prompt_index + 1
         return True
@@ -453,8 +455,6 @@ class UserInputGetter(MenuSectionAggregator):
     def try_to_store_value_from_argument_list(self, user_response):
         input_test = self.tests[self.prompt_index]
         argument_list = self.argument_lists[self.prompt_index]
-        # TODO: maybe the second line here is smarter; need to run tests to find out
-        #if argument_list and self.evaluate_test(input_test, user_response):
         if argument_list and self.apply_tests_to_value(user_response):
             self.store_value_from_argument_list(user_response, argument_list)
             return True
