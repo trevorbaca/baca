@@ -9,16 +9,18 @@ import subprocess
 
 
 class AssetProxy(SCFObject):
+
+    ### CLASS ATTRIBUTES ###
+
     __metaclass__ = ABCMeta
+    generic_class_name = 'asset'
+
+    ### INITIALIZER ###
 
     def __init__(self, path_name=None, session=None):
         assert isinstance(path_name, (str, type(None)))
         SCFObject.__init__(self, session=session)
         self._path_name = path_name
-
-    ### CLASS ATTRIBUTES ###
-
-    generic_class_name = 'asset'
 
     ### SPECIAL METHODS ###
 
