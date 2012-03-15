@@ -1,3 +1,4 @@
+from ArticulationHandlerMaterialPackageMaker import ArticulationHandlerMaterialPackageMaker
 from ConstellationCircuitSelectionMaterialPackageMaker import \
     ConstellationCircuitSelectionMaterialPackageMaker
 from DynamicHandlerMaterialPackageMaker import DynamicHandlerMaterialPackageMaker

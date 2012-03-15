@@ -15,9 +15,9 @@ class MaterialPackageMakerWrangler(PackageWrangler):
 
     ### READ-ONLY PUBLIC PROPERTIES ###
 
-    @property
-    def base_class_name(self):
-        return self.dot_join(['scf.makers', 'MaterialPackageMaker'])
+    #@property
+    #def base_class_name(self):
+    #    return self.dot_join(['scf.makers', 'MaterialPackageMaker'])
 
     @property
     def breadcrumb(self):
@@ -25,12 +25,16 @@ class MaterialPackageMakerWrangler(PackageWrangler):
 
     # TODO: derive programmatically
     @property
-    def noninstantiable_class_names(self):
+    def forbidden_class_names(self):
         return (
             'FunctionInputMaterialPackageMaker',
             'InventoryMaterialPackageMaker',
             'MaterialPackageMaker',
             )
+
+    @property
+    def forbidden_package_importable_names(self):
+        return ['scf.makers.' + class_name for class_name in self.forbidden_class_names]
 
     ### PUBLIC METHODS ###
 
@@ -58,7 +62,7 @@ class MaterialPackageMakerWrangler(PackageWrangler):
         for path_name in self.list_asset_path_names(head=head):
             path_name = path_name.rstrip(os.path.sep)
             base_name = os.path.basename(path_name)
-            if base_name in self.noninstantiable_class_names:
+            if base_name in self.forbidden_class_names:
                 continue
             human_readable_name = iotools.uppercamelcase_to_space_delimited_lowercase(base_name)
             result.append(human_readable_name)
@@ -66,8 +70,11 @@ class MaterialPackageMakerWrangler(PackageWrangler):
 
     def list_score_external_asset_importable_names(self, head=None):
         result = PackageWrangler.list_score_external_asset_importable_names(self, head=head)
-        if self.base_class_name in result:
-            result.remove(self.base_class_name)
+        #if self.base_class_name in result:
+        #    result.remove(self.base_class_name)
+        for forbidden_package_importable_name in self.forbidden_package_importable_names:
+            if forbidden_package_importable_name in result:
+                result.remove(forbidden_package_importable_name)
         return result
 
     def list_score_internal_asset_container_importable_names(self, head=None):
