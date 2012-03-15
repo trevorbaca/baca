@@ -2,7 +2,6 @@ from abc import ABCMeta
 from abc import abstractmethod
 from abjad.tools import durationtools
 from abjad.tools import pitchtools
-from fractions import Fraction
 from handlers.Handler import Handler
 
 
@@ -23,12 +22,12 @@ class ArticulationHandler(Handler):
         if minimum_prolated_duration is None:
             self.minimum_prolated_duration = minimum_prolated_duration
         else:
-            self.minimum_prolated_duration = Fraction(
+            self.minimum_prolated_duration = durationtools.Duration(
                 *durationtools.duration_token_to_duration_pair(minimum_prolated_duration))
         if maximum_prolated_duration is None:
             self.maximum_prolated_duration = maximum_prolated_duration
         else:
-            self.maximum_prolated_duration = Fraction(
+            self.maximum_prolated_duration = durationtools.Duration(
                 *durationtools.duration_token_to_duration_pair(maximum_prolated_duration))
         if minimum_written_pitch is None:
             self.minimum_written_pitch = minimum_written_pitch
