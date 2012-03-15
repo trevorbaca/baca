@@ -378,8 +378,9 @@ class AssetWrangler(SCFObject):
         asset_proxy = self.get_asset_proxy(asset_importable_name)
         asset_proxy.rename_interactively()
         
-    def run(self, cache=False, clear=True, head=None, user_input=None):
+    def run(self, cache=False, clear=True, head=None, rollback=None, user_input=None):
         self.assign_user_input(user_input=user_input)
+        breadcrumb = self.pop_breadcrumb(rollback=rollback)
         self.cache_breadcrumbs(cache=cache)
         while True:
             self.push_breadcrumb()
@@ -395,6 +396,7 @@ class AssetWrangler(SCFObject):
                 break
             self.pop_breadcrumb()
         self.pop_breadcrumb()
+        self.push_breadcrumb(breadcrumb=breadcrumb, rollback=rollback)
         self.restore_breadcrumbs(cache=cache)
 
     def select_asset_importable_name_interactively(

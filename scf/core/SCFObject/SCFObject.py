@@ -450,8 +450,9 @@ class SCFObject(object):
     def pop_backtrack(self):
         return self.session.backtracking_stack.pop()
 
-    def pop_breadcrumb(self):
-        return self.breadcrumb_stack.pop()
+    def pop_breadcrumb(self, rollback=True):
+        if rollback:
+            return self.breadcrumb_stack.pop()
 
     def pop_next_user_response_from_user_input(self):
         self.session.last_command_was_composite = False
@@ -513,11 +514,12 @@ class SCFObject(object):
         else:
             self.session.backtracking_stack.append(0)
 
-    def push_breadcrumb(self, breadcrumb=None):
-        if breadcrumb is not None:
-            self.breadcrumb_stack.append(breadcrumb)
-        else:
-            self.breadcrumb_stack.append(self.breadcrumb)
+    def push_breadcrumb(self, breadcrumb=None, rollback=True):
+        if rollback:
+            if breadcrumb is not None:
+                self.breadcrumb_stack.append(breadcrumb)
+            else:
+                self.breadcrumb_stack.append(self.breadcrumb)
 
     def remove_package_importable_name_from_sys_modules(self, package_importable_name):
         '''Total hack. But works.'''
