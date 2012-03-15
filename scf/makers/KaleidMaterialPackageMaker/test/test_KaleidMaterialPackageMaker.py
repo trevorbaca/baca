@@ -10,7 +10,7 @@ def test_KaleidMaterialPackageMaker_01():
         studio.run(user_input=
             'materials maker kaleid testkaleid default '
             'testkaleid omi patternedtokens '
-            'pattern [-1, 2, -3, 4] 16 [2, 3] [6] b default '
+            '[-1, 2, -3, 4] 16 [2, 3] [6] b default '
             'q '
             )
         mpp = scf.makers.KaleidMaterialPackageMaker('materials.testkaleid')

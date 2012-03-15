@@ -26,7 +26,7 @@ class HandlerCreationWizard(Wizard):
         handler_class_name = selector.run()
         if not self.backtrack():
             handler_editor = self.get_handler_editor(handler_class_name)
-            handler_editor.run(is_autoadvancing=True)
+            handler_editor.run(is_autoadvancing=True, is_autostarting=True)
             self.target = handler_editor.target
         self.pop_breadcrumb()
         self.restore_breadcrumbs(cache=cache)

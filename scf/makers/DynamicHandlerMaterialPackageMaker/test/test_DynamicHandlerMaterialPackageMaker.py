@@ -11,7 +11,7 @@ def test_DynamicHandlerMaterialPackageMaker_01():
         studio.run(user_input=
             'materials maker dynamic testdynamichandler default '
             'testdynamichandler omi reiterated '
-            'dynamic f (1, 16) done default '
+            'f (1, 16) done default '
             'q '
             )
         mpp = scf.makers.DynamicHandlerMaterialPackageMaker('materials.testdynamichandler')
