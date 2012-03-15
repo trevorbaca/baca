@@ -1,3 +1,4 @@
+from ArticulationHandlerCreationWizard import ArticulationHandlerCreationWizard
 from DynamicHandlerCreationWizard import DynamicHandlerCreationWizard
 from HandlerCreationWizard import HandlerCreationWizard
 from InstrumentCreationWizard import InstrumentCreationWizard

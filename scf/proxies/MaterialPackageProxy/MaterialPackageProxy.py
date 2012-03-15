@@ -772,16 +772,14 @@ class MaterialPackageProxy(PackageProxy):
         if self.has_user_input_module:
             self.user_input_module_proxy.remove()
 
-    # TODO: port
     def rename_material_interactively(self):
         line = 'current material name: {}'.format(self.material_underscored_name)
         self.display(line)
         getter = self.make_getter(where=self.where())
-        getter.append_string('new material name')
-        new_material_spaced_name = getter.run()
+        getter.append_underscore_delimited_lowercase_package_name('new material name')
+        new_material_underscored_name = getter.run()
         if self.backtrack():
             return
-        new_material_underscored_name = new_material_spaced_name.replace(' ', '_')
         lines = []
         lines.append('current material name: {}'.format(self.material_underscored_name))
         lines.append('new material name:     {}'.format(new_material_underscored_name))
@@ -790,28 +788,17 @@ class MaterialPackageProxy(PackageProxy):
         if not self.confirm():
             return
         if self.is_versioned:
-            # update parent initializer
-            helpers.globally_replace_in_file(self.parent_initializer_file_name, 
-                self.material_underscored_name, new_material_underscored_name)
             # rename package directory
             new_directory_name = self.path_name.replace(
                 self.material_underscored_name, new_material_underscored_name)
             command = 'svn mv {} {}'.format(self.path_name, new_directory_name)
             os.system(command)
             # update package initializer
-            parent_directory_name = os.path.directory(self.path_name)
+            parent_directory_name = os.path.dirname(self.path_name)
             new_package_directory = os.path.join(parent_directory_name, new_material_underscored_name)
             new_initializer = os.path.join(new_package_directory, '__init__.py')
             helpers.globally_replace_in_file(
                 new_initializer, self.material_underscored_name, new_material_underscored_name)
-            # rename files in package
-            for old_file_name in os.listdir(new_package_directory):
-                if not old_file_name.startswith(('.', '_')):
-                    old_directory_name = os.path.join(new_package_directory, old_file_name)
-                    new_directory_name = old_directory_name.replace(
-                        self.material_underscored_name, new_material_underscored_name)
-                    command = 'svn mv {} {}'.format(old_directory_name, new_directory_name)
-                    os.system(command)
             # rename output material
             new_output_material = os.path.join(new_package_directory, 'output_material.py')
             helpers.globally_replace_in_file(
@@ -822,6 +809,8 @@ class MaterialPackageProxy(PackageProxy):
             commit_message = commit_message.replace('_', ' ')
             command = 'svn commit -m "{}" {}'.format(commit_message, self.parent_directory_name)
             os.system(command)
+            # update path name to reflect change
+            self._path_name = new_package_directory
         else:
             raise NotImplementedError('commit to repository and then rename.')
 

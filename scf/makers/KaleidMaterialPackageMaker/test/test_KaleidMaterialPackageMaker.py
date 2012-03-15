@@ -15,12 +15,12 @@ def test_KaleidMaterialPackageMaker_01():
             )
         mpp = scf.makers.KaleidMaterialPackageMaker('materials.testkaleid')
         assert mpp.directory_contents == ['__init__.py', 'output_material.py', 'tags.py']
-        kaleid = handlers.kaleids.PatternedTokens(
+        handler = handlers.kaleids.PatternedTokens(
             [-1, 2, -3, 4],
             16,
             prolation_addenda=[2, 3],
             secondary_divisions=[6])
-        assert mpp.output_material == kaleid
+        assert mpp.output_material == handler
     finally:
         studio.run(user_input='m testkaleid del remove default q')
         assert not studio.package_exists('materials.testkaleid')
