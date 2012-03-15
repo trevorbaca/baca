@@ -45,8 +45,19 @@ class InteractiveEditor(SCFObject):
         return result
 
     @property
+    def target_attribute_tokens(self):
+        if hasattr(self, 'target_manifest'):
+            return self.make_target_attribute_tokens_from_target_manifest()
+        else:
+            raise ValueError
+
+    @property
     def target_class(self):
         return self.target_manifest.target_class
+
+    @property
+    def target_class_human_readable_name(self):
+        return self.change_string_to_human_readable_string(self.target_class.__name__)
 
     @property
     def target_keyword_attribute_names(self):
@@ -55,23 +66,27 @@ class InteractiveEditor(SCFObject):
             result.extend(self.target_manifest.keyword_attribute_names)
         return result
 
+    # TODO: deprecate and use two more specific labels instead
+#    @property
+#    def target_mandatory_attribute_names(self):
+#        result = []
+#        if hasattr(self, 'target_manifest'):
+#            result.extend(self.target_manifest.mandatory_attribute_names)
+#        return result
+
     @property
-    def target_mandatory_attribute_names(self):
+    def target_mandatory_initializer_argument_names(self):
         result = []
         if hasattr(self, 'target_manifest'):
-            result.extend(self.target_manifest.mandatory_attribute_names)
+            result.extend(self.target_manifest.mandatory_initializer_argument_names)
         return result
 
     @property
-    def target_attribute_tokens(self):
+    def target_mandatory_initializer_retrievable_attribute_names(self):
+        result = []
         if hasattr(self, 'target_manifest'):
-            return self.make_target_attribute_tokens_from_target_manifest()
-        else:
-            raise ValueError
-
-    @property
-    def target_class_human_readable_name(self):
-        return self.change_string_to_human_readable_string(self.target_class.__name__)
+            result.extend(self.target_manifest.mandatory_initializer_retrievable_attribute_names)
+        return result
 
     @property
     def target_name(self):
@@ -103,12 +118,16 @@ class InteractiveEditor(SCFObject):
         return menu_key
 
     def clean_up_attributes_in_memory(self):
+        #self.debug('cleaning up!')
         if self.target is None:
             try:
                 self.initialize_target_from_attributes_in_memory()
             except ValueError:
                 pass
         self.initialize_attributes_in_memory()
+        #self.debug(self.target)
+        #self.debug(self.attributes_in_memory)
+        #self.debug('')
 
     def conditionally_initialize_target(self):
         if self.target is not None:
@@ -119,11 +138,39 @@ class InteractiveEditor(SCFObject):
             pass
 
     def conditionally_set_target_attribute(self, attribute_name, attribute_value):
+        #self.debug((attribute_name, attribute_value))
+        #self.debug(self.target, 'target')
+        #self.debug(self.attributes_in_memory, 'attrs')
         if self.target is not None:
             if not self.session.is_complete:
-                setattr(self.target, attribute_name, attribute_value)
+                # if the attribute is read / write
+                try:
+                    setattr(self.target, attribute_name, attribute_value)
+                # elif the attribute is read-only
+                except AttributeError:
+                    self.copy_target_attributes_to_memory()
+                    self.attributes_in_memory[attribute_name] = attribute_value
         else:
             self.attributes_in_memory[attribute_name] = attribute_value
+        #self.debug(self.target, 'target')
+        #self.debug(self.attributes_in_memory, 'attrs')
+        #self.debug('')
+
+    def copy_target_attributes_to_memory(self):
+        self.initialize_attributes_in_memory()
+        #for attribute_name in self.target_mandatory_attribute_names:
+        for attribute_name in self.target_mandatory_initializer_retrievable_attribute_names:
+            attribute_value = getattr(self.target, attribute_name, None)
+            if attribute_value is not None:
+                attribute_name = \
+                    self.target_manifest.change_retrievable_attribute_name_to_initializer_argument_name(
+                    attribute_name)
+                self.attributes_in_memory[attribute_name] = attribute_value
+        for attribute_name in self.target_keyword_attribute_names:
+            attribute_value = getattr(self.target, attribute_name, None)
+            if attribute_value is not None:
+                self.attributes_in_memory[attribute_name] = attribute_value
+        self.target = None
 
     def handle_main_menu_result(self, result):
         attribute_name = self.target_manifest.menu_key_to_attribute_name(result)
@@ -147,7 +194,8 @@ class InteractiveEditor(SCFObject):
 
     def initialize_target_from_attributes_in_memory(self):
         args, kwargs = [], {}
-        for attribute_name in self.target_mandatory_attribute_names:
+        #for attribute_name in self.target_mandatory_attribute_names:
+        for attribute_name in self.target_mandatory_initializer_argument_names:
             if attribute_name in self.attributes_in_memory:
                 args.append(self.attributes_in_memory.get(attribute_name))
         for attribute_name in self.target_keyword_attribute_names:
@@ -174,12 +222,15 @@ class InteractiveEditor(SCFObject):
                 result.append(())
                 continue
             menu_key = attribute_detail.menu_key
-            target_attribute_name = attribute_detail.name
             menu_body = attribute_detail.human_readable_name
             if self.target is not None:
-                attribute_value = getattr(self.target, target_attribute_name)
+                attribute_value = getattr(self.target, attribute_detail.retrievable_name, None)
+                if attribute_value is None:
+                    attribute_value = getattr(self.target, attribute_detail.name, None)
             else:
-                attribute_value = self.attributes_in_memory.get(target_attribute_name)
+                attribute_value = self.attributes_in_memory.get(attribute_detail.retrievable_name)
+                if attribute_value is None:
+                    attribute_value = self.attributes_in_memory.get(attribute_detail.name)
             if hasattr(attribute_value, '__len__') and not len(attribute_value):
                 attribute_value = None
             existing_value = self.get_one_line_menuing_summary(attribute_value)
@@ -194,7 +245,8 @@ class InteractiveEditor(SCFObject):
         attribute_name = self.target_manifest.menu_key_to_attribute_name(menu_key)
         return getattr(self.target, attribute_name, None)
 
-    def run(self, breadcrumb=None, cache=False, clear=True, is_autoadvancing=False, user_input=None):
+    def run(self, breadcrumb=None, cache=False, clear=True, is_autoadding=False,
+        is_autoadvancing=False, is_autostarting=False, user_input=None):
         self.assign_user_input(user_input=user_input)
         self.cache_breadcrumbs(cache=cache)
         self.push_breadcrumb()
@@ -205,10 +257,22 @@ class InteractiveEditor(SCFObject):
         if self.backtrack():
             self.restore_breadcrumbs(cache=cache)
             return
-        result, entry_point, self.is_autoadvancing = None, None, is_autoadvancing
+        result, entry_point, self.is_autoadvancing, is_first_pass = None, None, is_autoadvancing, True
+        if is_autoadding:
+            self.session.is_autoadding = True
         while True:
             self.push_breadcrumb(breadcrumb=breadcrumb)
-            if result and self.is_autoadvancing:
+            if self.session.is_autoadding:
+                menu = self.make_main_menu()
+                result = 'add'
+                menu.run(clear=clear, flamingo_input=result)
+                is_first_pass = False
+            elif is_first_pass and is_autostarting:
+                menu = self.make_main_menu()
+                result = menu.first_nonhidden_return_value_in_menu
+                menu.run(clear=clear, flamingo_input=result)
+                is_first_pass = False
+            elif result and self.is_autoadvancing:
                 entry_point = entry_point or result
                 result = menu.return_value_to_next_return_value_in_section(result)
                 if result == entry_point:
@@ -229,6 +293,7 @@ class InteractiveEditor(SCFObject):
             if self.backtrack():
                 break
             self.pop_breadcrumb()
+        self.session.is_autoadding = False
         self.pop_breadcrumb()
         self.restore_breadcrumbs(cache=cache)
         self.clean_up_attributes_in_memory()

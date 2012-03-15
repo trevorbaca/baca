@@ -1,14 +1,9 @@
-from scf.selectors.Selector import Selector
+from scf.selectors.MaterialPackageSelector import MaterialPackageSelector
 
 
-class ArticulationHandlerSelector(Selector):
+class ArticulationHandlerSelector(MaterialPackageSelector):
 
     ### CLASS ATTRIBUTES ###
 
+    generic_output_name = 'articulation handler'
     target_human_readable_name = 'articulation handler'
-
-    ### PUBLIC METHODS ###
-
-    def list_items(self):
-        result = []
-        return result 

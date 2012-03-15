@@ -11,9 +11,8 @@ def test_MusicSpecifierEditor_public_attributes_01():
     assert not editor.has_target
     assert editor.target is None
     assert editor.target_attribute_tokens == [
-        ('nm', 'music specifier name', 'None'), 
-        ('tp', 'tempo', 'None'), 
-        ('pc', 'performer contributions', 'None')]
+        #('nm', 'name', 'None'), 
+        ]
     assert editor.target_name is None
 
 
@@ -21,47 +20,40 @@ def test_MusicSpecifierEditor_public_attributes_02():
     '''With target.
     '''
 
-    pcs_1 = scf.specifiers.PerformerContributionSpecifier()
-    pcs_1.articulation_specifier = 'foo'
-    pcs_1.clef_specifier = 'bar'
-    pcs_1.directive_specifier = ['apple', 'banana', 'cherry']
+    mcs_1 = scf.specifiers.MusicContributionSpecifier([])
+    mcs_1.articulation_specifier = 'foo'
+    mcs_1.clef_specifier = 'bar'
+    mcs_1.directive_specifier = ['apple', 'banana', 'cherry']
 
-    pcs_2 = scf.specifiers.PerformerContributionSpecifier()
-    pcs_2.articulation_specifier = 'blee'
-    pcs_2.clef_specifier = 'blah'
-    pcs_2.directive_specifier = ['durian']
+    mcs_2 = scf.specifiers.MusicContributionSpecifier([])
+    mcs_2.articulation_specifier = 'blee'
+    mcs_2.clef_specifier = 'blah'
+    mcs_2.directive_specifier = ['durian']
 
-    ms = scf.specifiers.MusicSpecifier()
-    ms.music_specifier_name = 'blue music'
-    ms.tempo = 90
-    ms.performer_contribution_specifiers.extend([pcs_1, pcs_2])
+    ms = scf.specifiers.MusicSpecifier([])
+    ms.extend([mcs_1, mcs_2])
 
     r'''
-    MusicSpecifier(
-        music_specifier_name='blue music',
-        performer_contribution_specifiers=PerformerContributionSpecifierList(
-            PerformerContributionSpecifier(
-                articulation_specifier='foo',
-                clef_specifier='bar',
-                directive_specifier=['apple', 'banana', 'cherry'],
-                ),
-            PerformerContributionSpecifier(
-                articulation_specifier='blee',
-                clef_specifier='blah',
-                directive_specifier=['durian'],
-                ),
+    specifiers.MusicSpecifier([
+        specifiers.MusicContributionSpecifier(
+            articulation_specifier='foo',
+            clef_specifier='bar',
+            directive_specifier=['apple', 'banana', 'cherry']
             ),
-        tempo=90,
+        specifiers.MusicContributionSpecifier(
+            articulation_specifier='blee',
+            clef_specifier='blah',
+            directive_specifier=['durian']
+            )
+        ],
         )
     '''
 
     editor = scf.editors.MusicSpecifierEditor(target=ms)
 
-    assert editor.breadcrumb == 'blue music'
+    assert editor.breadcrumb == 'music specifier'
     assert editor.has_target
     assert editor.target is ms
     assert editor.target_attribute_tokens == [
-        ('nm', 'music specifier name', 'blue music'), 
-        ('tp', 'tempo', '90'), 
-        ('pc', 'performer contributions', 'unknown performer, unknown performer')]
-    assert editor.target_name == 'blue music'
+        ]
+    assert editor.target_name is None

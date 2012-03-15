@@ -1,26 +1,19 @@
 from scf import getters
-from scf import predicates
-from scf.editors.InteractiveEditor import InteractiveEditor
-from scf.editors.PerformerContributionSpecifierListEditor import PerformerContributionSpecifierListEditor
+from scf import specifiers
+from scf.editors.ObjectInventoryEditor import ObjectInventoryEditor
+from scf.editors.MusicContributionSpecifierEditor import MusicContributionSpecifierEditor
 from scf.editors.TargetManifest import TargetManifest
-from scf.selectors.TempoMarkSelector import TempoMarkSelector
-from scf.specifiers.MusicSpecifier import MusicSpecifier
 
 
-class MusicSpecifierEditor(InteractiveEditor):
+class MusicSpecifierEditor(ObjectInventoryEditor):
 
     ### CLASS ATTRIBUTES ###
 
-    target_manifest = TargetManifest(MusicSpecifier,
-        ('music_specifier_name', 'nm', getters.get_string),
-        ('tempo', 'tp', TempoMarkSelector),
-        ('performer_contribution_specifiers', 'performer contributions', 'pc', 
-            PerformerContributionSpecifierListEditor),
+    item_class = specifiers.MusicContributionSpecifier
+    item_creator_class = MusicContributionSpecifierEditor
+    item_editor_class = MusicContributionSpecifierEditor
+    item_identifier = 'music contribution'
+    target_manifest = TargetManifest(specifiers.MusicSpecifier,
+        #('inventory_name', 'name', 'nm', getters.get_string, False),
+        #target_attribute_name='inventory_name',
         )
-
-    ### READ-ONLY PUBLIC PROPERTIES ###
-
-    @property
-    def target_name(self):
-        if self.target is not None:
-            return self.target.music_specifier_name

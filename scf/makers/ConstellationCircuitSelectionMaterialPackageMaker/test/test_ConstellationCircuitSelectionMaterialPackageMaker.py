@@ -7,8 +7,8 @@ def test_ConstellationCircuitSelectionMaterialPackageMaker_01():
     assert not studio.package_exists('materials.testconst')
     try:
         studio.run(user_input=
-            'materials maker constellation testconst default '
-            "testconst omi add (1, 18) add (2, 48) done default q "
+            'materials maker constellation testconst '
+            "(1, 18) (2, 48) done b default q "
             )
         mpp = scf.makers.ListMaterialPackageMaker('materials.testconst')
         assert mpp.directory_contents == ['__init__.py', 'output_material.py', 'tags.py']

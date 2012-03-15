@@ -1,6 +1,5 @@
 from abjad import *
 from abjad.tools import layouttools
-import copy
 
 
 def make_illustration_from_output_material(tempo_mark_inventory, **kwargs):

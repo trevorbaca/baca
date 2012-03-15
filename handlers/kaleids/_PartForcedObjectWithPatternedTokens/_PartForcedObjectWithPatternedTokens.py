@@ -74,7 +74,7 @@ class _PartForcedObjectWithPatternedTokens(_RhythmicKaleid):
 
     ### SPECIAL METHODS ###
 
-    def __call__(self, duration_tokens, seeds = None):
+    def __call__(self, duration_tokens, seeds=None):
         duration_pairs, seeds = _RhythmicKaleid.__call__(self, duration_tokens, seeds)
         octuplet = self._prepare_input(seeds)
         pattern, prolation_addenda = octuplet[:2]
@@ -118,9 +118,6 @@ class _PartForcedObjectWithPatternedTokens(_RhythmicKaleid):
 
     def __ne__(self, other):
         return self == other
-
-#    def __repr__(self):
-#        return '{}({})'.format(self._class_name, ', '.join(self._formatted_input_parameters))
 
     ### CLASS ATTRIBUTES ###
 

@@ -1,12 +1,12 @@
 from abjad.tools import contexttools
 from scf import menuing
 from scf.editors.ClefMarkEditor import ClefMarkEditor
-from scf.editors.ListEditor import ListEditor
+from scf.editors.ObjectInventoryEditor import ObjectInventoryEditor
 from scf.editors.TargetManifest import TargetManifest
 from scf.editors.TempoMarkEditor import TempoMarkEditor
 
 
-class ClefMarkInventoryEditor(ListEditor):
+class ClefMarkInventoryEditor(ObjectInventoryEditor):
 
     ### CLASS ATTRIBUTES ###
 

@@ -22,6 +22,12 @@ class SCFObject(object):
     def __repr__(self):
         return '{}()'.format(self.class_name)
 
+    ### PRIVATE READ-ONLY PROPERTIES ###
+
+    @property
+    def _tcsh(self):
+        return self.session.testable_command_history_string
+
     ### READ-ONLY PUBLIC PROPERTIES ###
 
     @property
@@ -43,6 +49,14 @@ class SCFObject(object):
     @property
     def class_name(self):
         return type(self).__name__
+
+    @property
+    def editors_package_importable_name(self):
+        return self.dot_join(['scf', 'editors'])
+
+    @property
+    def editors_package_path_name(self):
+        return os.path.join(os.environ.get('SCFPATH'), 'editors')
 
     @property
     def help_item_width(self):
@@ -138,6 +152,14 @@ class SCFObject(object):
         return iotools.uppercamelcase_to_space_delimited_lowercase(self.class_name)
 
     @property
+    def specifier_classes_package_importable_name(self):
+        return self.dot_join(['scf', 'specifiers'])
+
+    @property
+    def specifier_classes_package_path_name(self):
+        return os.path.join(os.environ.get('SCFPATH'), 'specifiers')
+
+    @property
     def stylesheets_directory_name(self):
         return os.path.join(self.scf_package_path_name, 'stylesheets')
 
@@ -173,7 +195,10 @@ class SCFObject(object):
 
     def assign_user_input(self, user_input=None):
         if user_input is not None:
-            self.session.user_input = user_input
+            if self.session.user_input:
+                self.session.user_input = user_input + ' ' + self.session.user_input
+            else:
+                self.session.user_input = user_input
 
     def backtrack(self, source=None):
         return self.session.backtrack(source=source)
@@ -390,7 +415,6 @@ class SCFObject(object):
         path_name = self.package_importable_name_to_path_name(package_importable_name)
         return os.path.exists(path_name)
 
-    # TODO: make this works: self.package_importable_name_to_path_name('sketches')
     def package_importable_name_to_path_name(self, package_importable_name):
         if package_importable_name is None:
             return
@@ -405,7 +429,7 @@ class SCFObject(object):
                 [self.score_external_chunks_package_path_name] + package_importable_name_parts[1:]
         elif package_importable_name_parts[0] == self.score_external_specifiers_package_importable_name:
             directory_parts = \
-                [self.score_external_chunks_package_path_name] + package_importable_name_parts[1:]
+                [self.score_external_specifiers_package_path_name] + package_importable_name_parts[1:]
         else:
             directory_parts = [self.scores_directory_name] + package_importable_name_parts[:]
         directory = os.path.join(*directory_parts)
@@ -450,8 +474,9 @@ class SCFObject(object):
     def pop_backtrack(self):
         return self.session.backtracking_stack.pop()
 
-    def pop_breadcrumb(self):
-        return self.breadcrumb_stack.pop()
+    def pop_breadcrumb(self, rollback=True):
+        if rollback:
+            return self.breadcrumb_stack.pop()
 
     def pop_next_user_response_from_user_input(self):
         self.session.last_command_was_composite = False
@@ -513,11 +538,12 @@ class SCFObject(object):
         else:
             self.session.backtracking_stack.append(0)
 
-    def push_breadcrumb(self, breadcrumb=None):
-        if breadcrumb is not None:
-            self.breadcrumb_stack.append(breadcrumb)
-        else:
-            self.breadcrumb_stack.append(self.breadcrumb)
+    def push_breadcrumb(self, breadcrumb=None, rollback=True):
+        if rollback:
+            if breadcrumb is not None:
+                self.breadcrumb_stack.append(breadcrumb)
+            else:
+                self.breadcrumb_stack.append(self.breadcrumb)
 
     def remove_package_importable_name_from_sys_modules(self, package_importable_name):
         '''Total hack. But works.'''

@@ -11,7 +11,7 @@ def test_ArticulationHandlerMaterialPackageMaker_01():
         studio.run(user_input=
             'materials maker articulation testarticulationhandler default '
             'testarticulationhandler omi reiterated '
-            "articulation ['^', '.'] (1, 64) (1, 4) c c'''' done default "
+            "['^', '.'] (1, 64) (1, 4) c c'''' done default "
             'q '
             )
         mpp = scf.makers.ArticulationHandlerMaterialPackageMaker('materials.testarticulationhandler')

@@ -814,6 +814,9 @@ class MaterialPackageProxy(PackageProxy):
         else:
             raise NotImplementedError('commit to repository and then rename.')
 
+    def run_first_time(self):
+        self.run(user_input='omi')
+
     def select_material_package_maker_interactively(self, prompt=True):
         material_proxy_wrangler = MaterialPackageMakerWrangler(session=self.session)
         self.push_backtrack()

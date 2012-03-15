@@ -211,6 +211,9 @@ class AssetProxy(SCFObject):
         self.pop_breadcrumb()
         self.restore_breadcrumbs(cache=cache)
 
+    def run_first_time(self, **kwargs):
+        self.run(**kwargs)
+
     def run_py_test(self, prompt=True):
         proc = subprocess.Popen('py.test {}'.format(self.path_name), shell=True, stdout=subprocess.PIPE)
         lines = [line.strip() for line in proc.stdout.readlines()]

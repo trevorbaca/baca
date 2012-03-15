@@ -1,11 +1,11 @@
 from abjad.tools import pitchtools
 from scf import getters
-from scf.editors.ListEditor import ListEditor
+from scf.editors.ObjectInventoryEditor import ObjectInventoryEditor
 from scf.editors.OctaveTranspositionMappingComponentEditor import OctaveTranspositionMappingComponentEditor
 from scf.editors.TargetManifest import TargetManifest
 
 
-class OctaveTranspositionMappingEditor(ListEditor):
+class OctaveTranspositionMappingEditor(ObjectInventoryEditor):
 
     ### CLASS ATTRIBUTES ###
 

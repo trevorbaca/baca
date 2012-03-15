@@ -135,4 +135,5 @@ class PerformerCreationWizard(Wizard):
             raise ValueError
         self.pop_breadcrumb()
         self.restore_breadcrumbs(cache=cache)
-        return final_result
+        self.target = final_result
+        return self.target

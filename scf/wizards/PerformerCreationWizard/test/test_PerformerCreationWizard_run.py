@@ -56,7 +56,6 @@ def test_PerformerCreationWizard_run_06():
     '''
 
     wizard = scf.wizards.PerformerCreationWizard(is_ranged=True)
-    caxixi = instrumenttools.UntunedPercussion()
-    caxixi.instrument_name = 'caxixi'
-    assert wizard.run(user_input='vn more untuned cax') == [
-        scoretools.Performer(name='violinist', instruments=[caxixi])]
+    caxixi = instrumenttools.UntunedPercussion(instrument_name='caxixi', short_instrument_name='caxixi')
+    wizard.run(user_input='vn more untuned cax')
+    assert wizard.target == [scoretools.Performer(name='violinist', instruments=[caxixi])]

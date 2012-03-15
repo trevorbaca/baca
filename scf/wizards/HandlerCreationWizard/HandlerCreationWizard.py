@@ -11,6 +11,7 @@ class HandlerCreationWizard(Wizard):
 
     ### PUBLIC METHODS ###
 
+    # TODO: abstract up to Wizard?
     def get_handler_editor(self, handler_class_name, target=None):
         handler_editor_class_name = handler_class_name + self.handler_editor_class_name_suffix
         command = 'from scf.editors import {} as handler_editor_class'.format(handler_editor_class_name)
@@ -26,7 +27,7 @@ class HandlerCreationWizard(Wizard):
         handler_class_name = selector.run()
         if not self.backtrack():
             handler_editor = self.get_handler_editor(handler_class_name)
-            handler_editor.run(is_autoadvancing=True)
+            handler_editor.run(is_autoadvancing=True, is_autostarting=True)
             self.target = handler_editor.target
         self.pop_breadcrumb()
         self.restore_breadcrumbs(cache=cache)

@@ -3,10 +3,10 @@ import handlers
 import scf
 
 
-def test_ArticulationHandlerCreationWizard_run_01():
+def test_ArticulationHandlerCreationWziard_run_01():
 
     wizard = scf.wizards.ArticulationHandlerCreationWizard()
-    wizard.run(user_input="reit artic ['^', '.'] (1, 64) (1, 4) c c'''' done")
+    wizard.run(user_input="reit ['^', '.'] (1, 64) (1, 4) c c'''' done")
 
     handler = handlers.articulations.ReiteratedArticulationHandler(
         articulation_list=['^', '.'],

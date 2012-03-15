@@ -4,7 +4,6 @@ from scf.editors.TargetManifest import TargetManifest
 import handlers
 
 
-
 class ReiteratedArticulationHandlerEditor(ArticulationHandlerEditor):
 
     ### CLASS ATTRIBUTES ###

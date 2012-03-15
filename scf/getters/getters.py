@@ -13,6 +13,12 @@ def get_articulations(attribute_spaced_name, session=None, existing_value=None, 
     getter.allow_none = allow_none
     return getter
 
+def get_direction_string(attribute_spaced_name, session=None, existing_value=None, allow_none=True):
+    getter = UserInputGetter(session=session)
+    getter.append_direction_string(attribute_spaced_name)
+    getter.allow_none = allow_none
+    return getter
+
 def get_duration(attribute_spaced_name, session=None, existing_value=None, allow_none=True):
     getter = UserInputGetter(session=session)
     getter.append_duration(attribute_spaced_name)
@@ -64,6 +70,12 @@ def get_lists(attribute_spaced_name, session=None, existing_value=None, allow_no
 def get_markup(attribute_spaced_name, session=None, existing_value=None, allow_none=True):
     getter = UserInputGetter(session=session)
     getter.append_markup(attribute_spaced_name)
+    getter.allow_none = allow_none
+    return getter
+
+def get_markup_style_string(attribute_spaced_name, session=None, existing_value=None, allow_none=True):
+    getter = UserInputGetter(session=session)
+    getter.append_markup_style_string(attribute_spaced_name)
     getter.allow_none = allow_none
     return getter
 

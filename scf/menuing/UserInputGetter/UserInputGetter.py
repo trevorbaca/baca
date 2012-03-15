@@ -101,6 +101,11 @@ class UserInputGetter(MenuSectionAggregator):
         self.append_something(spaced_attribute_name, message, default=default)
         self.tests.append(predicates.is_constellation_circuit_id_pair)
 
+    def append_direction_string(self, spaced_attribute_name, default=None):
+        message = "value for {!r} must be 'up or 'down'."
+        self.append_something(spaced_attribute_name, message, default=default)
+        self.tests.append(predicates.is_direction_string)
+        
     def append_duration(self, spaced_attribute_name, default=None):
         message = 'value for {!r} must be duration.'
         self.append_something(spaced_attribute_name, message, default=default)
@@ -175,6 +180,11 @@ class UserInputGetter(MenuSectionAggregator):
         self.execs[-1] = execs
         self.tests.append(predicates.is_markup)
 
+    def append_markup_style_string(self, spaced_attribute_name, default=None):
+        message = "value for {!r} must be 'backslash or 'scheme'."
+        self.append_something(spaced_attribute_name, message, default=default)
+        self.tests.append(predicates.is_markup_style_string)
+        
     def append_material_package_maker_class_name(self, spaced_attribute_name, default=None):
         message = 'value for {!r} must be uppercamelcase string ending in -Maker.'
         self.append_something(spaced_attribute_name, message, default=default)
@@ -299,8 +309,6 @@ class UserInputGetter(MenuSectionAggregator):
         assert isinstance(execs, list)
         if execs:
             value = self.get_value_from_execs(user_response, execs)
-            #if not value:
-            #if value is None:
             if value is None and not user_response == 'None':
                 return '!!!'
         else:
@@ -344,7 +352,7 @@ class UserInputGetter(MenuSectionAggregator):
                     exec(command)
                 except:
                     self.conditionally_display_help()
-                    return False
+                    return '!!!'
         return value
 
     def indent_and_number_prompt(self, prompt):
@@ -431,14 +439,17 @@ class UserInputGetter(MenuSectionAggregator):
 
     def store_value(self, user_response):
         assert isinstance(user_response, str)
-        if self.try_to_store_value_from_argument_list(user_response):
-            return True
-        value = self.change_user_response_to_value(user_response)
-        if value == '!!!':
-            return False
-        if not self.apply_tests_to_value(value):
-            self.conditionally_display_help()
-            return False
+        if self.allow_none and user_response in ('', 'None'): 
+            value = None
+        else:
+            if self.try_to_store_value_from_argument_list(user_response):
+                return True
+            value = self.change_user_response_to_value(user_response)
+            if value == '!!!':
+                return False
+            if not self.apply_tests_to_value(value):
+                self.conditionally_display_help()
+                return False
         self.values.append(value)
         self.prompt_index = self.prompt_index + 1
         return True
@@ -454,7 +465,7 @@ class UserInputGetter(MenuSectionAggregator):
     def try_to_store_value_from_argument_list(self, user_response):
         input_test = self.tests[self.prompt_index]
         argument_list = self.argument_lists[self.prompt_index]
-        if argument_list and self.evaluate_test(input_test, user_response):
+        if argument_list and self.apply_tests_to_value(user_response):
             self.store_value_from_argument_list(user_response, argument_list)
             return True
         else:

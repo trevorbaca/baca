@@ -62,11 +62,7 @@ class Studio(SCFObject):
     def edit_score_interactively(self, score_package_importable_name):
         score_package_proxy = self.score_package_wrangler.get_asset_proxy(score_package_importable_name)
         score_package_proxy.session.current_score_package_short_name = score_package_importable_name
-        # TODO: use cache keyword
-        breadcrumbs = self.breadcrumb_stack[:]
-        self.session._breadcrumb_stack = []
-        score_package_proxy.run()
-        self.session._breadcrumb_stack = breadcrumbs
+        score_package_proxy.run(cache=True)
         self.session.current_score_package_name = None
 
     def get_next_score_package_short_name(self):
@@ -76,23 +72,6 @@ class Studio(SCFObject):
         index = score_package_short_names.index(self.session.current_score_package_short_name)
         next_index = (index + 1) % len(score_package_short_names)
         return score_package_short_names[next_index]
-
-    # TODO: write test
-    def get_package_root_name_interactively(self, clear=True, cache=False):
-        self.cache_breadcrumbs(cache=cache)
-        while True:
-            menu = self.make_score_selection_menu()
-            last_section = menu.sections[-1]
-            last_section.tokens.insert(0, ('baca', 'global (default)'))
-            last_section.default_index = 0
-            menu.explicit_title = 'select location:'
-            package_root_name = menu.run(clear=clear)
-            if self.backtrack():
-                self.restore_breadcrumbs(cache=cache)
-                return
-            if package_root_name:
-                self.restore_breadcrumbs(cache=cache)
-                return package_root_name
 
     def get_prev_score_package_short_name(self):
         score_package_short_names = self.score_package_wrangler.list_visible_asset_short_names()
@@ -109,17 +88,16 @@ class Studio(SCFObject):
             self.session.show_active_scores()
         elif result == 'all':
             self.session.show_all_scores()
+        elif result == 'm':
+            self.material_package_wrangler.run(
+                rollback=True, head=self.score_external_materials_package_importable_name)
+        elif result == 'f':
+            self.music_specifier_module_wrangler.run(
+                rollback=True, head=self.score_external_specifiers_package_importable_name)
         elif result == 'k':
             self.print_not_yet_implemented()
-        elif result == 'm':
-            breadcrumb = self.pop_breadcrumb()
-            self.material_package_wrangler.run(
-                head=self.score_external_materials_package_importable_name)
-            self.push_breadcrumb(breadcrumb)
         elif result == 'new':
-            breadcrumb = self.pop_breadcrumb()
-            self.score_package_wrangler.make_asset_interactively()
-            self.push_breadcrumb(breadcrumb)
+            self.score_package_wrangler.make_asset_interactively(rollback=True)
         elif result == 'mb':
             self.session.show_mothballed_scores()
         elif result == 'svn':
@@ -148,6 +126,7 @@ class Studio(SCFObject):
         menu = self.make_score_selection_menu()
         section = menu.make_section()
         section.append(('m', 'materials'))
+        section.append(('f', 'specifiers'))
         section.append(('k', 'sketches'))
         section.append(('new', 'new score'))
         hidden_section = menu.make_section(is_hidden=True)

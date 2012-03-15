@@ -65,8 +65,25 @@ class TargetManifest(object):
                 result.append(attribute_detail.name)
         return result
 
+    # TODO: deprecate and use two more specifier labels instead
+#    @property
+#    def mandatory_attribute_names(self):
+#        result = []
+#        for attribute_detail in self.attribute_details:
+#            if attribute_detail.is_mandatory:
+#                result.append(attribute_detail.name)
+#        return result
+
     @property
-    def mandatory_attribute_names(self):
+    def mandatory_initializer_retrievable_attribute_names(self):
+        result = []
+        for attribute_detail in self.attribute_details:
+            if attribute_detail.is_mandatory:
+                result.append(attribute_detail.retrievable_name)
+        return result
+
+    @property
+    def mandatory_initializer_argument_names(self):
         result = []
         for attribute_detail in self.attribute_details:
             if attribute_detail.is_mandatory:
@@ -74,6 +91,18 @@ class TargetManifest(object):
         return result
 
     ### PUBLIC METHODS ###
+
+    def change_initializer_argument_name_to_retrievable_attribute_name(self, initializer_argument_name):
+        for attribute_detail in self.attribute_details:
+            if attribute_detail.name == initializer_argument_name:
+                return attribute_detail.retrievable_name
+        raise ValueError
+
+    def change_retrievable_attribute_name_to_initializer_argument_name(self, retrievable_attribute_name):
+        for attribute_detail in self.attribute_details:
+            if attribute_detail.retrievable_name == retrievable_attribute_name:
+                return attribute_detail.name
+        raise ValueError
 
     def menu_key_to_attribute_detail(self, menu_key):
         for attribute_detail in self.attribute_details:

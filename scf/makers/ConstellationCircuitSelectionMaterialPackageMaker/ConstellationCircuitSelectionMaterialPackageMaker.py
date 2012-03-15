@@ -11,3 +11,10 @@ class ConstellationCircuitSelectionMaterialPackageMaker(MaterialPackageMaker):
     illustration_maker = staticmethod(make_illustration_from_output_material)
     output_material_checker = staticmethod(lambda x: isinstance(x, list))
     output_material_editor = ConstellationCircuitSelectionEditor
+
+    ### PUBLIC METHODS ###
+
+    def run_first_time(self):
+        self.session.is_autoadding = True
+        self.run(user_input='omi')
+        self.session.is_autoadding = False

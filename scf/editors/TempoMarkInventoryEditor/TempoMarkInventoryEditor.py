@@ -1,12 +1,12 @@
 from abjad.tools import contexttools
 from scf import getters
-from scf.editors.ListEditor import ListEditor
+from scf.editors.ObjectInventoryEditor import ObjectInventoryEditor
 from scf.editors.TargetManifest import TargetManifest
 from scf.editors.TempoMarkEditor import TempoMarkEditor
 from scf.menuing.UserInputGetter import UserInputGetter
 
 
-class TempoMarkInventoryEditor(ListEditor):
+class TempoMarkInventoryEditor(ObjectInventoryEditor):
 
     ### CLASS ATTRIBUTES ###
 
@@ -21,6 +21,7 @@ class TempoMarkInventoryEditor(ListEditor):
 
     ### READ-ONLY PUBLIC PROPERTIES ###
 
+    # TODO: abstract up to ObjectInventoryEditor?
     @property
     def target_summary_lines(self):
         result = []

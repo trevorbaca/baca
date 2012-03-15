@@ -25,6 +25,13 @@ class Menu(MenuSectionAggregator):
                 return section.default_value
 
     @property
+    def first_nonhidden_return_value_in_menu(self):
+        for section in self.sections:
+            if not section.is_hidden:
+                if section.menu_entry_return_values:
+                    return section.menu_entry_return_values[0]
+
+    @property
     def has_default_valued_section(self):
         return any([section.has_default_value for section in self.sections])
 
@@ -158,9 +165,11 @@ class Menu(MenuSectionAggregator):
                     (3 <= len(user_input) and body.startswith(user_input)):
                     return self.conditionally_enclose_in_list(return_value)
 
-    def conditionally_display_menu(self):
+    def conditionally_display_menu(self, flamingo_input=None):
         self.conditionally_clear_terminal()
         self.display(self.menu_lines, capitalize_first_character=False)
+        if flamingo_input is not None:
+            return flamingo_input
         user_response = self.handle_raw_input_with_default('SCF', default=self.prompt_default)
         user_input = self.split_multipart_user_response(user_response)
         directive = self.change_user_input_to_directive(user_input)
@@ -211,13 +220,13 @@ class Menu(MenuSectionAggregator):
         entry_index = (entry_index + 1) % len(section)
         return section.menu_entry_return_values[entry_index]
 
-    def run(self, clear=True, user_input=None):
+    def run(self, clear=True, flamingo_input=None, user_input=None):
         self.assign_user_input(user_input=user_input)
         clear, hide_current_run = clear, False
         while True:
             self.should_clear_terminal, self.hide_current_run = clear, hide_current_run
             clear, hide_current_run = False, True
-            result = self.conditionally_display_menu()
+            result = self.conditionally_display_menu(flamingo_input=flamingo_input)
             if self.session.is_complete:
                 break
             elif result == 'r':

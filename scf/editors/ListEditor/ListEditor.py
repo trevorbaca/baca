@@ -9,7 +9,6 @@ class ListEditor(InteractiveEditor):
 
     ### READ-ONLY PROPERTIES ###
 
-    # TODO: change item_* to just item_*
     item_class = None
     item_creator_class = None
     item_creator_class_kwargs = {}
@@ -18,7 +17,7 @@ class ListEditor(InteractiveEditor):
     item_identifier = 'element'
     target_manifest = TargetManifest(list,)
 
-    ### READ-ONLY PUBLIC PROPERTIES ###
+    ### PUBLIC READ-ONLY PROPERTIES ###
 
     @property
     def breadcrumb(self):
@@ -53,6 +52,9 @@ class ListEditor(InteractiveEditor):
             self.pop_backtrack()
             if self.backtrack():
                 return
+            if result == 'done':
+                self.session.is_autoadding = False
+                return
             result = result or item_creator.target
         elif self.item_getter_configuration_method:
             getter = self.make_getter(where=self.where())
@@ -61,6 +63,9 @@ class ListEditor(InteractiveEditor):
             item_initialization_token = getter.run()
             self.pop_backtrack()
             if self.backtrack():
+                return
+            if item_initialization_token == 'done':
+                self.session.is_autoadding = False
                 return
             if self.item_class:
                 result = self.item_class(item_initialization_token)
@@ -76,11 +81,19 @@ class ListEditor(InteractiveEditor):
             items = [result]
         self.items.extend(items)
 
+    def conditionally_initialize_target(self):
+        if self.target is not None:
+            return
+        else:
+            self.target = self.target_class([])
+
     def edit_item_interactively(self, item_number):
         item = self.get_item_from_item_number(item_number)
         if item is not None:
             item_editor = self.item_editor_class(session=self.session, target=item)
             item_editor.run()
+            item_index = int(item_number) - 1
+            self.items[item_index] = item_editor.target
 
     def get_item_from_item_number(self, item_number):
         try:

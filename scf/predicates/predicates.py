@@ -42,6 +42,9 @@ def is_constellation_circuit_id_pair(expr):
     except:
         return False
 
+def is_direction_string(expr):
+    return expr in ('up', 'down')
+
 def is_dynamic_token(expr):
     try:
         result = contexttools.DynamicMark(expr)
@@ -68,6 +71,9 @@ def is_list(expr):
 
 def is_markup(expr):
     return isinstance(expr, markuptools.Markup)
+
+def is_markup_style_string(expr):
+    return expr in ('backslash', 'scheme')
 
 def is_markup_token(expr):
     try:

@@ -12,7 +12,7 @@ os.mkdir(class_package_test_path_name)
 
 initializer_file_name = os.path.join(class_package_path_name, '__init__.py')
 initializer = open(initializer_file_name, 'w')
-initializer.write('from  {0} import {0}\n'.format(class_name))
+initializer.write('from {0} import {0}\n'.format(class_name))
 initializer.close()
 
 class_file_name = os.path.join(class_package_path_name, '{}.py'.format(class_name))

@@ -21,6 +21,7 @@ class Session(SCFObject):
         self.dump_transcript = False
         self.hide_next_redraw = False
         self.initial_user_input = user_input
+        self.is_autoadding = False
         self.is_backtracking_locally = False
         self.is_backtracking_to_score = False
         self.is_backtracking_to_studio = False
@@ -238,6 +239,15 @@ class Session(SCFObject):
         def fset(self, hide_next_redraw):
             assert isinstance(hide_next_redraw, bool)
             self._hide_next_redraw = hide_next_redraw
+        return property(**locals())
+
+    @apply
+    def is_autoadding():
+        def fget(self):
+            return self._is_autoadding
+        def fset(self, is_autoadding):
+            assert isinstance(is_autoadding, bool)
+            self._is_autoadding = is_autoadding
         return property(**locals())
 
     @apply

@@ -15,10 +15,6 @@ class MaterialPackageMakerWrangler(PackageWrangler):
 
     ### READ-ONLY PUBLIC PROPERTIES ###
 
-    #@property
-    #def base_class_name(self):
-    #    return self.dot_join(['scf.makers', 'MaterialPackageMaker'])
-
     @property
     def breadcrumb(self):
         return 'material package makers'

@@ -30,11 +30,11 @@ def test_InstrumentationEditor_add_performers_02():
     '''
 
     editor = scf.editors.InstrumentationEditor()
-    editor.run(user_input='add acc default add bass default add bassoon default q')
+    editor.run(user_input='add accordionist default add bassoonist default add cellist default q')
     assert editor.target == InstrumentationSpecifier([
         Performer(name='accordionist', instruments=[Accordion()]), 
-        Performer(name='bassist', instruments=[Contrabass()]), 
-        Performer(name='bassoonist', instruments=[Bassoon()])])
+        Performer(name='bassoonist', instruments=[Bassoon()]), 
+        Performer(name='cellist', instruments=[Cello()])])
 
 
 def test_InstrumentationEditor_add_performers_03():
@@ -45,5 +45,5 @@ def test_InstrumentationEditor_add_performers_03():
     editor.run(user_input='add 1-3 default default default q')
     assert editor.target == InstrumentationSpecifier([
         Performer(name='accordionist', instruments=[Accordion()]), 
-        Performer(name='bassist', instruments=[Contrabass()]), 
-        Performer(name='bassoonist', instruments=[Bassoon()])])
+        Performer(name='baritone', instruments=[BaritoneVoice()]), 
+        Performer(name='bass', instruments=[BassVoice()])])

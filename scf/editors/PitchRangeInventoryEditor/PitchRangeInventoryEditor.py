@@ -1,12 +1,12 @@
 from abjad.tools import pitchtools
 from scf.editors.InteractiveEditor import InteractiveEditor
-from scf.editors.ListEditor import ListEditor
+from scf.editors.ObjectInventoryEditor import ObjectInventoryEditor
 from scf.editors.PitchRangeEditor import PitchRangeEditor
 from scf.editors.TargetManifest import TargetManifest
 from scf.menuing.UserInputGetter import UserInputGetter
 
 
-class PitchRangeInventoryEditor(ListEditor):
+class PitchRangeInventoryEditor(ObjectInventoryEditor):
 
     ### CLASS ATTRIBUTES ###
 

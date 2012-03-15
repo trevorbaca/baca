@@ -4,11 +4,13 @@ from abc import abstractproperty
 from scf.core.SCFObject import SCFObject
 
 
+# TODO: extend repr to show target, if any
 class Wizard(SCFObject):
 
     ### CLASS ATTRIBUTES ###
 
     __metaclass__ = ABCMeta
+    target_editor_class_name_suffix = 'Editor'
 
     ### INITIALIZER ###
 

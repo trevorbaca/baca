@@ -6,13 +6,28 @@ import scf
 def test_ReiteratedArticulationHandlerEditor_run_01():
 
     editor = scf.editors.ReiteratedArticulationHandlerEditor()
-    editor.run(user_input="1 ['.', '^'] (1, 16) (1, 8) cs'' c''' done", is_autoadvancing=True)
+    editor.run(user_input="['.', '^'] (1, 16) (1, 8) cs'' c''' done", 
+        is_autoadvancing=True, is_autostarting=True)
 
     handler = handlers.articulations.ReiteratedArticulationHandler(
         articulation_list=['.', '^'], 
         minimum_prolated_duration=Duration(1, 16), 
         maximum_prolated_duration=Duration(1, 8), 
         minimum_written_pitch=pitchtools.NamedChromaticPitch("cs''"), 
-        maximum_written_pitch=pitchtools.NamedChromaticPitch("c'''"))
+        maximum_written_pitch=pitchtools.NamedChromaticPitch("c'''"),
+        )
+    
+    assert editor.target == handler
+
+
+def test_ReiteratedArticulationHandlerEditor_run_02():
+
+    editor = scf.editors.ReiteratedArticulationHandlerEditor()
+    editor.run(user_input="['.', '^'] None None None None done", 
+        is_autoadvancing=True, is_autostarting=True)
+
+    handler = handlers.articulations.ReiteratedArticulationHandler(
+        articulation_list=['.', '^'], 
+        )
     
     assert editor.target == handler

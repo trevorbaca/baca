@@ -1,41 +1,86 @@
+from scf import specifiers
 import scf
 
 
 def test_MusicSpecifier_format_01():
+    '''Empty. No keywords.
+    '''
 
-    pcs_1 = scf.specifiers.PerformerContributionSpecifier()
-    pcs_1.articulation_specifier = 'foo'
-    pcs_1.clef_specifier = 'bar'
-    pcs_1.directive_specifier = ['apple', 'banana', 'cherry']
+    specifier = scf.specifiers.MusicSpecifier([])
 
-    pcs_2 = scf.specifiers.PerformerContributionSpecifier()
-    pcs_2.articulation_specifier = 'blee'
-    pcs_2.clef_specifier = 'blah'
-    pcs_2.directive_specifier = ['durian']
+    assert repr(specifier) == 'MusicSpecifier([])'
+    assert specifier._storage_format == 'specifiers.MusicSpecifier([])'
 
-    ms = scf.specifiers.MusicSpecifier()
-    ms.music_specifier_name = 'blue music'
-    ms.tempo = 90
-    ms.performer_contribution_specifiers.extend([pcs_1, pcs_2])
 
+def test_MusicSpecifier_format_02():
+    '''Empty. With keywords.
+    '''
+
+    specifier = scf.specifiers.MusicSpecifier([], name='foo')
+
+    assert repr(specifier) == "MusicSpecifier([], name='foo')"
+    assert specifier._storage_format == "specifiers.MusicSpecifier([],\n\tname='foo'\n\t)"
+
+    
+def test_MusicSpecifier_format_03():
+    '''Populated. Without keywords.
+    '''
+
+    mcs_1 = scf.specifiers.MusicContributionSpecifier([])
+    mcs_1.append(specifiers.ArticulationSpecifier(articulation_handler_name='foo articulations'))
+
+    mcs_2 = scf.specifiers.MusicContributionSpecifier([])
+    mcs_2.append(specifiers.ArticulationSpecifier(articulation_handler_name='bar articulations'))
+
+    ms = scf.specifiers.MusicSpecifier([mcs_1, mcs_2])
 
     '''
-    MusicSpecifier(
-        music_specifier_name='blue music',
-        performer_contribution_specifiers=PerformerContributionSpecifierList(
-            PerformerContributionSpecifier(
-                articulation_specifier='foo',
-                clef_specifier='bar',
-                directive_specifier=['apple', 'banana', 'cherry'],
-                ),
-            PerformerContributionSpecifier(
-                articulation_specifier='blee',
-                clef_specifier='blah',
-                directive_specifier=['durian'],
-                ),
-            ),
-        tempo=90,
+    specifiers.MusicSpecifier([
+        specifiers.MusicContributionSpecifier([
+            specifiers.ArticulationSpecifier(
+                articulation_handler_name='foo articulations'
+                )
+            ]),
+        specifiers.MusicContributionSpecifier([
+            specifiers.ArticulationSpecifier(
+                articulation_handler_name='bar articulations'
+                )
+            ])
+        ])
+    '''
+
+    assert ms.format == "specifiers.MusicSpecifier([\n\tspecifiers.MusicContributionSpecifier([\n\t\tspecifiers.ArticulationSpecifier(\n\t\t\tarticulation_handler_name='foo articulations'\n\t\t\t)\n\t\t]),\n\tspecifiers.MusicContributionSpecifier([\n\t\tspecifiers.ArticulationSpecifier(\n\t\t\tarticulation_handler_name='bar articulations'\n\t\t\t)\n\t\t])\n\t])"
+
+
+def test_MusicSpecifier_format_04():
+    '''Populated. With keywords.
+    '''
+
+    mcs_1 = scf.specifiers.MusicContributionSpecifier([])
+    mcs_1.append(specifiers.ArticulationSpecifier(articulation_handler_name='foo articulations'))
+
+    mcs_2 = scf.specifiers.MusicContributionSpecifier([])
+    mcs_2.append(specifiers.ArticulationSpecifier(articulation_handler_name='bar articulations'))
+
+    ms = scf.specifiers.MusicSpecifier([mcs_1, mcs_2], name='blue music')
+
+    '''
+    specifiers.MusicSpecifier([
+        specifiers.MusicContributionSpecifier([
+            specifiers.ArticulationSpecifier(
+                articulation_handler_name='foo articulations'
+                )
+            ]),
+        specifiers.MusicContributionSpecifier([
+            specifiers.ArticulationSpecifier(
+                articulation_handler_name='bar articulations'
+                )
+            ])
+        ],
+        name='blue music'
         )
     '''
+    
+    assert repr(ms) == "MusicSpecifier([MusicContributionSpecifier([ArticulationSpecifier(articulation_handler_name='foo articulations')]), MusicContributionSpecifier([ArticulationSpecifier(articulation_handler_name='bar articulations')])], name='blue music')"
 
-    "MusicSpecifier(\n\tmusic_specifier_name='blue music',\n\tperformer_contribution_specifiers=PerformerContributionSpecifierList(\n\t\tPerformerContributionSpecifier(\n\t\t\tarticulation_specifier='foo',\n\t\t\tclef_specifier='bar',\n\t\t\tdirective_specifier=['apple', 'banana', 'cherry'],\n\t\t\t),\n\t\tPerformerContributionSpecifier(\n\t\t\tarticulation_specifier='blee',\n\t\t\tclef_specifier='blah',\n\t\t\tdirective_specifier=['durian'],\n\t\t\t),\n\t\t),\n\ttempo=90,\n\t)"
+    assert ms._storage_format == "specifiers.MusicSpecifier([\n\tspecifiers.MusicContributionSpecifier([\n\t\tspecifiers.ArticulationSpecifier(\n\t\t\tarticulation_handler_name='foo articulations'\n\t\t\t)\n\t\t]),\n\tspecifiers.MusicContributionSpecifier([\n\t\tspecifiers.ArticulationSpecifier(\n\t\t\tarticulation_handler_name='bar articulations'\n\t\t\t)\n\t\t])\n\t],\n\tname='blue music'\n\t)"
