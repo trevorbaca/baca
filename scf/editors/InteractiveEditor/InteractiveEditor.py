@@ -194,7 +194,8 @@ class InteractiveEditor(SCFObject):
         attribute_name = self.target_manifest.menu_key_to_attribute_name(menu_key)
         return getattr(self.target, attribute_name, None)
 
-    def run(self, breadcrumb=None, cache=False, clear=True, is_autoadvancing=False, user_input=None):
+    def run(self, breadcrumb=None, cache=False, clear=True, is_autoadvancing=False, 
+        is_autostarting=False, user_input=None):
         self.assign_user_input(user_input=user_input)
         self.cache_breadcrumbs(cache=cache)
         self.push_breadcrumb()
@@ -205,10 +206,15 @@ class InteractiveEditor(SCFObject):
         if self.backtrack():
             self.restore_breadcrumbs(cache=cache)
             return
-        result, entry_point, self.is_autoadvancing = None, None, is_autoadvancing
+        result, entry_point, self.is_autoadvancing, is_first_pass = None, None, is_autoadvancing, True
         while True:
             self.push_breadcrumb(breadcrumb=breadcrumb)
-            if result and self.is_autoadvancing:
+            if is_first_pass and is_autostarting:
+                menu = self.make_main_menu()
+                result = menu.first_nonhidden_return_value_in_menu
+                menu.run(clear=clear, flamingo_input=result)
+                is_first_pass = False
+            elif result and self.is_autoadvancing:
                 entry_point = entry_point or result
                 result = menu.return_value_to_next_return_value_in_section(result)
                 if result == entry_point:
