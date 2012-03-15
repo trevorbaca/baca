@@ -298,9 +298,8 @@ class UserInputGetter(MenuSectionAggregator):
         execs = self.execs[self.prompt_index]
         assert isinstance(execs, list)
         if execs:
+            #self.debug(user_response, 'user response')
             value = self.get_value_from_execs(user_response, execs)
-            #if not value:
-            #if value is None:
             if value is None and not user_response == 'None':
                 return '!!!'
         else:
@@ -344,7 +343,7 @@ class UserInputGetter(MenuSectionAggregator):
                     exec(command)
                 except:
                     self.conditionally_display_help()
-                    return False
+                    return '!!!'
         return value
 
     def indent_and_number_prompt(self, prompt):
@@ -454,7 +453,9 @@ class UserInputGetter(MenuSectionAggregator):
     def try_to_store_value_from_argument_list(self, user_response):
         input_test = self.tests[self.prompt_index]
         argument_list = self.argument_lists[self.prompt_index]
-        if argument_list and self.evaluate_test(input_test, user_response):
+        # TODO: maybe the second line here is smarter; need to run tests to find out
+        #if argument_list and self.evaluate_test(input_test, user_response):
+        if argument_list and self.apply_tests_to_value(user_response):
             self.store_value_from_argument_list(user_response, argument_list)
             return True
         else:
