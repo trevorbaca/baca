@@ -23,6 +23,15 @@ class MaterialPackageMakerWrangler(PackageWrangler):
     def breadcrumb(self):
         return 'material package makers'
 
+    # TODO: derive programmatically
+    @property
+    def noninstantiable_class_names(self):
+        return (
+            'FunctionInputMaterialPackageMaker',
+            'InventoryMaterialPackageMaker',
+            'MaterialPackageMaker',
+            )
+
     ### PUBLIC METHODS ###
 
     def get_asset_proxy(self, package_importable_name):
@@ -49,7 +58,7 @@ class MaterialPackageMakerWrangler(PackageWrangler):
         for path_name in self.list_asset_path_names(head=head):
             path_name = path_name.rstrip(os.path.sep)
             base_name = os.path.basename(path_name)
-            if base_name == 'MaterialPackageMaker':
+            if base_name in self.noninstantiable_class_names:
                 continue
             human_readable_name = iotools.uppercamelcase_to_space_delimited_lowercase(base_name)
             result.append(human_readable_name)
