@@ -7,8 +7,8 @@ def test_ListMaterialPackageMaker_01():
     assert not studio.package_exists('materials.testlist')
     try:
         studio.run(user_input=
-            'materials maker list testlist default '
-            "testlist omi add 17 add 'foo' done default q "
+            'materials maker list testlist '
+            "17 foo done b default q "
             )
         mpp = scf.makers.ListMaterialPackageMaker('materials.testlist')
         assert mpp.directory_contents == ['__init__.py', 'output_material.py', 'tags.py']

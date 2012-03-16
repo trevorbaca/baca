@@ -163,7 +163,7 @@ class MaterialPackageWrangler(PackageWrangler):
             material_package_importable_name, material_package_maker_class_name)
         proxy = self.get_appropriate_material_package_proxy(
             material_package_maker_class_name, material_package_importable_name)
-        proxy.run(user_input='omi')
+        proxy.run_first_time()
 
     def make_material_package(self, material_package_importable_name, is_interactive=False, tags=None):
         tags = collections.OrderedDict(tags or {})

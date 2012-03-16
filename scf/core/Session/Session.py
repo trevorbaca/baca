@@ -21,6 +21,7 @@ class Session(SCFObject):
         self.dump_transcript = False
         self.hide_next_redraw = False
         self.initial_user_input = user_input
+        self.is_autoadding = False
         self.is_backtracking_locally = False
         self.is_backtracking_to_score = False
         self.is_backtracking_to_studio = False
