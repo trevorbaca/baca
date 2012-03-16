@@ -1,7 +1,7 @@
 from abjad.tools.measuretools.Measure import Measure
 
 
-green_sargasso_measures = [
+red_sargasso_measures = [
 	Measure((4, 16), "c'16 c'16 c'8"),
 	Measure((2, 10), "c'8 c'8"),
 	Measure((3, 20), "c'8 c'16"),
