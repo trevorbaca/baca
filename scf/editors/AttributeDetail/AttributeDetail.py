@@ -1,5 +1,6 @@
 from scf.editors.InteractiveEditor import InteractiveEditor
 from scf.selectors.Selector import Selector
+from scf.wizards.Wizard import Wizard
 import types
 
 
@@ -51,6 +52,8 @@ class AttributeDetail(object):
             editor = self.editor_callable(session=session, target=existing_value, **kwargs)
         elif issubclass(self.editor_callable, Selector):
             editor = self.editor_callable(session=session, **kwargs) 
+        elif issubclass(self.editor_callable, Wizard):
+            editor = self.editor_callable(session=session, target=existing_value, **kwargs)
         else:
             raise ValueError('what is {!r}?'.format(self.editor_callable))
         return editor

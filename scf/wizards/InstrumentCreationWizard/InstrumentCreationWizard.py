@@ -9,7 +9,7 @@ class InstrumentCreationWizard(Wizard):
         Wizard.__init__(self, session=session, target=target)
         self.is_ranged = is_ranged
         
-    ### READ-ONLY PROPERTIES ###
+    ### PUBLIC READ-ONLY PROPERTIES ###
 
     @property
     def breadcrumb(self):
@@ -33,6 +33,7 @@ class InstrumentCreationWizard(Wizard):
             if self.backtrack():
                 return
             instrument.instrument_name = instrument_name
+            instrument.short_instrument_name = instrument_name
 
     def run(self, cache=False, clear=True, head=None, user_input=None):
         self.assign_user_input(user_input=user_input)
@@ -62,4 +63,5 @@ class InstrumentCreationWizard(Wizard):
             result = instruments[0]
         self.pop_breadcrumb()
         self.restore_breadcrumbs(cache=cache)
-        return result
+        self.target = result
+        return self.target

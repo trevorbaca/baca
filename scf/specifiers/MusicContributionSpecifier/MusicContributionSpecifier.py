@@ -1,7 +1,7 @@
 from scf.specifiers.Specifier import Specifier
 
 
-class PerformerContributionSpecifier(Specifier):
+class MusicContributionSpecifier(Specifier):
 
     def __init__(self,
         name=None,
@@ -41,21 +41,4 @@ class PerformerContributionSpecifier(Specifier):
 
     @property
     def one_line_menuing_summary(self):
-        return '{}: {}'.format(self.performer_label, self.parameter_summary_string)
-
-    @property
-    def parameter_summary_string(self):
-        parameter_count = len(self._keyword_argument_name_value_strings)
-        if parameter_count == 1:
-            return '1 parameter specified'
-        elif 1 < parameter_count:
-            return '{} parameters specified'.format(parameter_count)
-        else:
-            return 'no parameters specified'
-
-    @property
-    def performer_label(self):
-        try:
-            return self.performer_specifier.performer.name
-        except AttributeError:
-            return 'unknown performer'
+        return self.name or 'unknown contribution'

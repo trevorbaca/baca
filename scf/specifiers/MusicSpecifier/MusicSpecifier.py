@@ -1,19 +1,9 @@
-from scf.specifiers.PerformerContributionSpecifierInventory import PerformerContributionSpecifierInventory
+from abjad.tools.datastructuretools.ObjectInventory import ObjectInventory
+from scf.specifiers.MusicContributionSpecifier import MusicContributionSpecifier
 from scf.specifiers.Specifier import Specifier
 
 
-class MusicSpecifier(Specifier):
-
-    def __init__(self, 
-        music_specifier_name=None, 
-        performer_contribution_specifiers=None,
-        tempo=None,
-        ):
-        Specifier.__init__(self)
-        self.music_specifier_name = music_specifier_name
-        self.performer_contribution_specifiers = \
-            performer_contribution_specifiers or PerformerContributionSpecifierInventory()
-        self.tempo = tempo
+class MusicSpecifier(Specifier, ObjectInventory):
 
     ### CLASS ATTRIBUTES ###
 
@@ -24,7 +14,20 @@ class MusicSpecifier(Specifier):
         'from scf import specifiers',
         ]
 
-    ### READ-ONLY PROPERTIES ###
+    ### INITIALIZER ### 
+
+    def __init__(self, *args, **kwargs):
+        Specifier.__init__(self)
+        ObjectInventory.__init__(self, *args)
+        self.music_specifier_name = kwargs.get('music_specifier_name', None)
+
+    ### PRIVATE READ-ONLY PROPERTIES ###
+
+    @property
+    def _item_class(self):
+        return MusicContributionSpecifer
+    
+    ### PUBLIC READ-ONLY PROPERTIES ###
 
     @property
     def one_line_menuing_summary(self):

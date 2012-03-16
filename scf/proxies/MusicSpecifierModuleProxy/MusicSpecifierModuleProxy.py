@@ -91,7 +91,7 @@ class MusicSpecifierModuleProxy(ModuleProxy):
         self.target_lines = target_lines
         return is_parsable
 
-    def preprend_target_name(self, target_format_pieces):
+    def prepend_target_name(self, target_format_pieces):
         if target_format_pieces:
             target_format_pieces[0] = '{} = {}'.format(
                 self.target_name_in_storage_module, target_format_pieces[0])
@@ -115,5 +115,6 @@ class MusicSpecifierModuleProxy(ModuleProxy):
         self.setup_statements[:] = self.conditionally_add_terminal_newlines(
             self.target_in_memory.storage_module_import_statements)[:]
         self.target_lines[:] = self.conditionally_add_terminal_newlines(
-            self.preprend_target_name(self.target_in_memory.format_pieces))
+            self.prepend_target_name(   
+                self.target_in_memory._get_tools_package_qualified_repr_pieces(is_indented=True)))
         ModuleProxy.write_to_disk(self)

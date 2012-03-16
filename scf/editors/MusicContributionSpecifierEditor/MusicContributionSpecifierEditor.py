@@ -1,3 +1,4 @@
+from scf import getters
 from scf import specifiers
 from scf.editors.ArticulationSpecifierEditor import ArticulationSpecifierEditor
 from scf.editors.ClefSpecifierEditor import ClefSpecifierEditor
@@ -17,11 +18,14 @@ from scf.editors.InteractiveEditor import InteractiveEditor
 from scf.editors.TargetManifest import TargetManifest
 
 
-class PerformerContributionSpecifierEditor(InteractiveEditor):
+class MusicContributionSpecifierEditor(InteractiveEditor):
 
     ### CLASS ATTRIBUTES ###
 
-    target_manifest = TargetManifest(specifiers.PerformerContributionSpecifier,
+    target_manifest = TargetManifest(specifiers.MusicContributionSpecifier,
+        ('name', 'nm', getters.get_string),
+        ('description', 'ds', getters.get_string),
+        (),
         ('performer_specifier', 'per', PerformerSpecifierEditor),
         ('instrument_specifier', 'str', InstrumentSpecifierEditor),
         (),
@@ -43,18 +47,13 @@ class PerformerContributionSpecifierEditor(InteractiveEditor):
         #('clef_specifier', 'clf', ClefSpecifierEditor),
         )
 
-    ### READ-ONLY PUBLIC PROPERTIES ###
+    ### PUBLIC READ-ONLY PROPERTIES ###
 
     @property
     def breadcrumb(self):
-        return self.target_name or 'unknown performer'
-
-    @property
-    def target_name(self):
-        try:
-            return self.target.performer_specifier.performer.name
-        except AttributeError:
-            return
+        if self.target:
+            return self.target.one_line_menuing_summary
+        return 'unknown contribution'
 
     ### PUBLIC METHODS ###
 

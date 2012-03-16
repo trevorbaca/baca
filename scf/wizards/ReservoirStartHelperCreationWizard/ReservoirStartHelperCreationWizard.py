@@ -48,4 +48,5 @@ class ReservoirStartHelperCreationWizard(Wizard):
             break
         self.pop_breadcrumb()
         self.restore_breadcrumbs(cache=cache)
-        return function_application_pairs
+        self.target = function_application_pairs
+        return self.target
