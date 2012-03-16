@@ -18,24 +18,23 @@ def test_MusicSpecifier_format_01():
     ms.tempo = 90
     ms.performer_contribution_specifiers.extend([pcs_1, pcs_2])
 
-
     '''
-    MusicSpecifier(
+    specifiers.MusicSpecifier(
         music_specifier_name='blue music',
-        performer_contribution_specifiers=PerformerContributionSpecifierInventory(
-            PerformerContributionSpecifier(
+        performer_contribution_specifiers=specifiers.PerformerContributionSpecifierInventory([
+            specifiers.PerformerContributionSpecifier(
                 articulation_specifier='foo',
                 clef_specifier='bar',
-                directive_specifier=['apple', 'banana', 'cherry'],
+                directive_specifier=['apple', 'banana', 'cherry']
                 ),
-            PerformerContributionSpecifier(
+            specifiers.PerformerContributionSpecifier(
                 articulation_specifier='blee',
                 clef_specifier='blah',
-                directive_specifier=['durian'],
-                ),
-            ),
-        tempo=90,
+                directive_specifier=['durian']
+                )
+            ]),
+        tempo=90
         )
     '''
 
-    "MusicSpecifier(\n\tmusic_specifier_name='blue music',\n\tperformer_contribution_specifiers=PerformerContributionSpecifierInventory(\n\t\tPerformerContributionSpecifier(\n\t\t\tarticulation_specifier='foo',\n\t\t\tclef_specifier='bar',\n\t\t\tdirective_specifier=['apple', 'banana', 'cherry'],\n\t\t\t),\n\t\tPerformerContributionSpecifier(\n\t\t\tarticulation_specifier='blee',\n\t\t\tclef_specifier='blah',\n\t\t\tdirective_specifier=['durian'],\n\t\t\t),\n\t\t),\n\ttempo=90,\n\t)"
+    assert ms.format == "specifiers.MusicSpecifier(\n\tmusic_specifier_name='blue music',\n\tperformer_contribution_specifiers=specifiers.PerformerContributionSpecifierInventory([\n\t\tspecifiers.PerformerContributionSpecifier(\n\t\t\tarticulation_specifier='foo',\n\t\t\tclef_specifier='bar',\n\t\t\tdirective_specifier=['apple', 'banana', 'cherry']\n\t\t\t),\n\t\tspecifiers.PerformerContributionSpecifier(\n\t\t\tarticulation_specifier='blee',\n\t\t\tclef_specifier='blah',\n\t\t\tdirective_specifier=['durian']\n\t\t\t)\n\t\t]),\n\ttempo=90\n\t)"

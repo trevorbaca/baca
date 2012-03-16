@@ -12,8 +12,14 @@ def test_PerformerContributionSpecifier_format_01():
     specifiers.PerformerContributionSpecifier(
         articulation_specifier='foo',
         clef_specifier='bar',
-        directive_specifier=['apple', 'banana', 'cherry'],
+        directive_specifier=['apple', 'banana', 'cherry']
         )
     '''
 
-    assert specifier.format == "specifiers.PerformerContributionSpecifier(\n\tarticulation_specifier='foo',\n\tclef_specifier='bar',\n\tdirective_specifier=['apple', 'banana', 'cherry'],\n\t)"
+    assert specifier.format == "specifiers.PerformerContributionSpecifier(\n\tarticulation_specifier='foo',\n\tclef_specifier='bar',\n\tdirective_specifier=['apple', 'banana', 'cherry']\n\t)"
+
+
+def test_PerformerContributionSpecifier_format_02():
+
+    specifier = scf.specifiers.PerformerContributionSpecifier()
+    assert specifier.format == 'specifiers.PerformerContributionSpecifier()'

@@ -37,15 +37,7 @@ class PerformerContributionSpecifier(Specifier):
         self.trill_specifier = trill_specifier
         self.troping_specifier=troping_specifier
 
-    ### SPECIAL METHODS ###
-
-    def __repr__(self):
-        if self.performer_specifier:
-            return '{}({!r})'.format(self.class_name, self.performer_specifier)
-        else:
-            return '{}()'.format(self.class_name)
-
-    ### READ-ONLY PROPERTIES ###
+    ### PUBLIC READ-ONLY PROPERTIES ###
 
     @property
     def one_line_menuing_summary(self):
@@ -53,15 +45,11 @@ class PerformerContributionSpecifier(Specifier):
 
     @property
     def parameter_summary_string(self):
-        parameter_specifiers = []
-        for variable_name in self.variable_names:
-            variable_value = getattr(self, variable_name)
-            if variable_value:
-                parameter_specifiers.append(repr(variable_value))
-        if len(parameter_specifiers) == 1:
+        parameter_count = len(self._keyword_argument_name_value_strings)
+        if parameter_count == 1:
             return '1 parameter specified'
-        elif 1 < len(parameter_specifiers):
-            return '{} parameters specified'.format(len(parameter_specifiers))
+        elif 1 < parameter_count:
+            return '{} parameters specified'.format(parameter_count)
         else:
             return 'no parameters specified'
 

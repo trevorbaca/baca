@@ -14,4 +14,4 @@ def test_MusicSpecifierEditor_run_01():
         )
     '''
 
-    assert editor.target.format == "specifiers.MusicSpecifier(\n\tmusic_specifier_name='blue music',\n\tperformer_contribution_specifiers=specifiers.PerformerContributionSpecifierInventory([\n\t\t]),\n\t)"
+    assert editor.target.format == "specifiers.MusicSpecifier(\n\tmusic_specifier_name='blue music',\n\tperformer_contribution_specifiers=specifiers.PerformerContributionSpecifierInventory([])\n\t)"

@@ -1,33 +1,14 @@
+from abjad.tools.datastructuretools.ObjectInventory import ObjectInventory
 from scf.specifiers.Specifier import Specifier
 
 
-class PerformerContributionSpecifierInventory(Specifier, list):
+class PerformerContributionSpecifierInventory(Specifier, ObjectInventory):
     
     def __init__(self, *args):
         Specifier.__init__(self)
-        list.__init__(self, *args)
+        ObjectInventory.__init__(self, *args)
 
-    ### SPECIAL METHODS ###
-    
-    def __eq__(self, other):
-        return list.__eq__(self, other)
-
-    def __repr__(self):
-        return '{}({})'.format(self.class_name, len(self))
-
-    ### READ-ONLY PROPERTIES ###
-
-    @property
-    def format_pieces(self):
-        result = []
-        result.append('{}(['.format(self.importable_class_name))
-        for performer_contribution_specifier in self[:]:
-            format_pieces = performer_contribution_specifier.format_pieces
-            for format_piece in format_pieces[:-1]:
-                result.append('\t' + format_piece)
-            result.append('\t' + format_pieces[-1] + ',')
-        result.append('\t])')
-        return result
+    ### PUBLIC READ-ONLY PROPERTIES ###
 
     @property
     def one_line_menuing_summary(self):
