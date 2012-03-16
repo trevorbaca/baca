@@ -241,6 +241,15 @@ class Session(SCFObject):
         return property(**locals())
 
     @apply
+    def is_autoadding():
+        def fget(self):
+            return self._is_autoadding
+        def fset(self, is_autoadding):
+            assert isinstance(is_autoadding, bool)
+            self._is_autoadding = is_autoadding
+        return property(**locals())
+
+    @apply
     def is_backtracking_locally():
         def fget(self):
             return self._is_backtracking_locally

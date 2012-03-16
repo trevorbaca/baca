@@ -30,7 +30,7 @@ def test_MaterialPackageWrangler_make_makermade_material_package_02():
     wrangler = scf.wranglers.MaterialPackageWrangler()
     assert wrangler.package_exists('materials.red_numbers')
     assert py.test.raises(Exception, 
-        "wrangler.make_makermade_material_package('materials.red_sargasso', "
+        "wrangler.make_makermade_material_package('materials.red_sargasso_measures', "
         "'SargassoMeasureMaterialPackageMaker')")
 
 
