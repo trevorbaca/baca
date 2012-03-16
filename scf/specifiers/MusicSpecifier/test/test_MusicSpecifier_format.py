@@ -22,7 +22,7 @@ def test_MusicSpecifier_format_01():
     '''
     MusicSpecifier(
         music_specifier_name='blue music',
-        performer_contribution_specifiers=PerformerContributionSpecifierList(
+        performer_contribution_specifiers=PerformerContributionSpecifierInventory(
             PerformerContributionSpecifier(
                 articulation_specifier='foo',
                 clef_specifier='bar',
@@ -38,4 +38,4 @@ def test_MusicSpecifier_format_01():
         )
     '''
 
-    "MusicSpecifier(\n\tmusic_specifier_name='blue music',\n\tperformer_contribution_specifiers=PerformerContributionSpecifierList(\n\t\tPerformerContributionSpecifier(\n\t\t\tarticulation_specifier='foo',\n\t\t\tclef_specifier='bar',\n\t\t\tdirective_specifier=['apple', 'banana', 'cherry'],\n\t\t\t),\n\t\tPerformerContributionSpecifier(\n\t\t\tarticulation_specifier='blee',\n\t\t\tclef_specifier='blah',\n\t\t\tdirective_specifier=['durian'],\n\t\t\t),\n\t\t),\n\ttempo=90,\n\t)"
+    "MusicSpecifier(\n\tmusic_specifier_name='blue music',\n\tperformer_contribution_specifiers=PerformerContributionSpecifierInventory(\n\t\tPerformerContributionSpecifier(\n\t\t\tarticulation_specifier='foo',\n\t\t\tclef_specifier='bar',\n\t\t\tdirective_specifier=['apple', 'banana', 'cherry'],\n\t\t\t),\n\t\tPerformerContributionSpecifier(\n\t\t\tarticulation_specifier='blee',\n\t\t\tclef_specifier='blah',\n\t\t\tdirective_specifier=['durian'],\n\t\t\t),\n\t\t),\n\ttempo=90,\n\t)"

@@ -1,7 +1,7 @@
 import scf
 
 
-def test_PerformerContributionSpecifierList___eq___01():
+def test_PerformerContributionSpecifierInventory___eq___01():
 
     pcs_1 = scf.specifiers.PerformerContributionSpecifier()
     pcs_1.articulation_specifier = 'foo'
@@ -13,9 +13,9 @@ def test_PerformerContributionSpecifierList___eq___01():
     pcs_2.clef_specifier = 'blah'
     pcs_2.directive_specifier = ['durian']
 
-    pcsl_1 = scf.specifiers.PerformerContributionSpecifierList([pcs_1, pcs_2])
-    pcsl_2 = scf.specifiers.PerformerContributionSpecifierList([pcs_1, pcs_2])
-    pcsl_3 = scf.specifiers.PerformerContributionSpecifierList()
+    pcsl_1 = scf.specifiers.PerformerContributionSpecifierInventory([pcs_1, pcs_2])
+    pcsl_2 = scf.specifiers.PerformerContributionSpecifierInventory([pcs_1, pcs_2])
+    pcsl_3 = scf.specifiers.PerformerContributionSpecifierInventory()
 
     assert pcsl_1 == pcsl_1
     assert pcsl_1 == pcsl_2

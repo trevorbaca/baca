@@ -1,7 +1,7 @@
 import scf
 
 
-def test_PerformerContributionSpecifierList_format_01():
+def test_PerformerContributionSpecifierInventory_format_01():
 
     pcs_1 = scf.specifiers.PerformerContributionSpecifier()
     pcs_1.articulation_specifier = 'foo'
@@ -13,10 +13,10 @@ def test_PerformerContributionSpecifierList_format_01():
     pcs_2.clef_specifier = 'blah'
     pcs_2.directive_specifier = ['durian']
 
-    pcsl = scf.specifiers.PerformerContributionSpecifierList([pcs_1, pcs_2])
+    pcsl = scf.specifiers.PerformerContributionSpecifierInventory([pcs_1, pcs_2])
 
     '''
-    specifiers.PerformerContributionSpecifierList([
+    specifiers.PerformerContributionSpecifierInventory([
         specifiers.PerformerContributionSpecifier(
             articulation_specifier='foo',
             clef_specifier='bar',
@@ -30,4 +30,4 @@ def test_PerformerContributionSpecifierList_format_01():
         ])
     '''
 
-    assert pcsl.format == "specifiers.PerformerContributionSpecifierList([\n\tspecifiers.PerformerContributionSpecifier(\n\t\tarticulation_specifier='foo',\n\t\tclef_specifier='bar',\n\t\tdirective_specifier=['apple', 'banana', 'cherry'],\n\t\t),\n\tspecifiers.PerformerContributionSpecifier(\n\t\tarticulation_specifier='blee',\n\t\tclef_specifier='blah',\n\t\tdirective_specifier=['durian'],\n\t\t),\n\t])"
+    assert pcsl.format == "specifiers.PerformerContributionSpecifierInventory([\n\tspecifiers.PerformerContributionSpecifier(\n\t\tarticulation_specifier='foo',\n\t\tclef_specifier='bar',\n\t\tdirective_specifier=['apple', 'banana', 'cherry'],\n\t\t),\n\tspecifiers.PerformerContributionSpecifier(\n\t\tarticulation_specifier='blee',\n\t\tclef_specifier='blah',\n\t\tdirective_specifier=['durian'],\n\t\t),\n\t])"

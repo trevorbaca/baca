@@ -4,11 +4,11 @@ from scf.editors.PerformerContributionSpecifierEditor import PerformerContributi
 from scf.editors.TargetManifest import TargetManifest
 
 
-class PerformerContributionSpecifierListEditor(ListEditor):
+class PerformerContributionSpecifierInventoryEditor(ListEditor):
 
     item_getter_configuration_method = None
     item_class = specifiers.PerformerContributionSpecifier
     item_editor_class = PerformerContributionSpecifierEditor
     item_identifier = 'performer contribution'
-    target_manifest = TargetManifest(specifiers.PerformerContributionSpecifierList,
+    target_manifest = TargetManifest(specifiers.PerformerContributionSpecifierInventory,
         )

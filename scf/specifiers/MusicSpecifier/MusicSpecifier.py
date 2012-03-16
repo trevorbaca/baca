@@ -1,4 +1,4 @@
-from scf.specifiers.PerformerContributionSpecifierList import PerformerContributionSpecifierList
+from scf.specifiers.PerformerContributionSpecifierInventory import PerformerContributionSpecifierInventory
 from scf.specifiers.Specifier import Specifier
 
 
@@ -12,7 +12,7 @@ class MusicSpecifier(Specifier):
         Specifier.__init__(self)
         self.music_specifier_name = music_specifier_name
         self.performer_contribution_specifiers = \
-            performer_contribution_specifiers or PerformerContributionSpecifierList()
+            performer_contribution_specifiers or PerformerContributionSpecifierInventory()
         self.tempo = tempo
 
     ### CLASS ATTRIBUTES ###

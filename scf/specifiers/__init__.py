@@ -14,4 +14,4 @@ from TrillSpecifier import TrillSpecifier
 from TropingSpecifier import TropingSpecifier
 from MusicSpecifier import MusicSpecifier
 from PerformerContributionSpecifier import PerformerContributionSpecifier
-from PerformerContributionSpecifierList import PerformerContributionSpecifierList
+from PerformerContributionSpecifierInventory import PerformerContributionSpecifierInventory

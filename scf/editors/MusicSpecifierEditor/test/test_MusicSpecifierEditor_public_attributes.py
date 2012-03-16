@@ -39,7 +39,7 @@ def test_MusicSpecifierEditor_public_attributes_02():
     r'''
     MusicSpecifier(
         music_specifier_name='blue music',
-        performer_contribution_specifiers=PerformerContributionSpecifierList(
+        performer_contribution_specifiers=PerformerContributionSpecifierInventory(
             PerformerContributionSpecifier(
                 articulation_specifier='foo',
                 clef_specifier='bar',

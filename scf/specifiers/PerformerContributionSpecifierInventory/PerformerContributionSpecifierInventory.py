@@ -1,7 +1,7 @@
 from scf.specifiers.Specifier import Specifier
 
 
-class PerformerContributionSpecifierList(Specifier, list):
+class PerformerContributionSpecifierInventory(Specifier, list):
     
     def __init__(self, *args):
         Specifier.__init__(self)
