@@ -26,6 +26,18 @@ class Specifier(AbjadObject):
                     return True
         return False
 
+#    ### PRIVATE READ-ONLY PROPERTIES ###
+#
+#    @property
+#    def _keyword_argument_names(self):
+#        '''Defined by hand so that this tuple is inheritable by subclasses. 
+#        Is there a way to derive this programmatically *and* be inheritable by subclasses?
+#        '''
+#        return tuple(sorted([
+#            'description',
+#            'name',
+#            ]))
+
     ### PUBLIC READ-ONLY PROPERTIES ###
 
     @property

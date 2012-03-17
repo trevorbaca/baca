@@ -2,6 +2,28 @@ import scf
 
 
 def test_MusicSpecifier_format_01():
+    '''Empty. No keywords.
+    '''
+
+    specifier = scf.specifiers.MusicSpecifier([])
+
+    assert repr(specifier) == 'MusicSpecifier([])'
+    assert specifier._storage_format == 'specifiers.MusicSpecifier([])'
+
+
+def test_MusicSpecifier_format_02():
+    '''Empty. With keywords.
+    '''
+
+    specifier = scf.specifiers.MusicSpecifier([], name='foo')
+
+    assert repr(specifier) == "MusicSpecifier([], name='foo')"
+    assert specifier._storage_format == "specifiers.MusicSpecifier([],\n\tname='foo'\n\t)"
+
+    
+def test_MusicSpecifier_format_03():
+    '''Populated. Without keywords.
+    '''
 
     pcs_1 = scf.specifiers.MusicContributionSpecifier()
     pcs_1.articulation_specifier = 'foo'
@@ -14,12 +36,10 @@ def test_MusicSpecifier_format_01():
     pcs_2.directive_specifier = ['durian']
 
     ms = scf.specifiers.MusicSpecifier()
-    ms.music_specifier_name = 'blue music'
-    ms.performer_contribution_specifiers.extend([pcs_1, pcs_2])
+    ms.extend([pcs_1, pcs_2])
 
     '''
     specifiers.MusicSpecifier(
-        music_specifier_name='blue music',
         performer_contribution_specifiers=specifiers.MusicContributionSpecifierInventory([
             specifiers.MusicContributionSpecifier(
                 articulation_specifier='foo',
@@ -35,4 +55,46 @@ def test_MusicSpecifier_format_01():
         )
     '''
 
-    assert ms.format == "specifiers.MusicSpecifier(\n\tmusic_specifier_name='blue music',\n\tperformer_contribution_specifiers=specifiers.MusicContributionSpecifierInventory([\n\t\tspecifiers.MusicContributionSpecifier(\n\t\t\tarticulation_specifier='foo',\n\t\t\tclef_specifier='bar',\n\t\t\tdirective_specifier=['apple', 'banana', 'cherry']\n\t\t\t),\n\t\tspecifiers.MusicContributionSpecifier(\n\t\t\tarticulation_specifier='blee',\n\t\t\tclef_specifier='blah',\n\t\t\tdirective_specifier=['durian']\n\t\t\t)\n\t\t])\n\t)"
+    assert ms.format == "specifiers.MusicSpecifier([\n\tspecifiers.MusicContributionSpecifier(\n\t\tarticulation_specifier='foo',\n\t\tclef_specifier='bar',\n\t\tdirective_specifier=['apple', 'banana', 'cherry']\n\t\t),\n\tspecifiers.MusicContributionSpecifier(\n\t\tarticulation_specifier='blee',\n\t\tclef_specifier='blah',\n\t\tdirective_specifier=['durian']\n\t\t)\n\t])"
+
+
+def test_MusicSpecifier_format_04():
+    '''Populated. With keywords.
+    '''
+
+    pcs_1 = scf.specifiers.MusicContributionSpecifier()
+    pcs_1.articulation_specifier = 'foo'
+    pcs_1.clef_specifier = 'bar'
+    pcs_1.directive_specifier = ['apple', 'banana', 'cherry']
+
+    pcs_2 = scf.specifiers.MusicContributionSpecifier()
+    pcs_2.articulation_specifier = 'blee'
+    pcs_2.clef_specifier = 'blah'
+    pcs_2.directive_specifier = ['durian']
+
+    ms = scf.specifiers.MusicSpecifier()
+    ms.extend([pcs_1, pcs_2])
+
+    ms.name = 'blue music'
+
+    '''
+    specifiers.MusicSpecifier(
+        performer_contribution_specifiers=specifiers.MusicContributionSpecifierInventory([
+            specifiers.MusicContributionSpecifier(
+                articulation_specifier='foo',
+                clef_specifier='bar',
+                directive_specifier=['apple', 'banana', 'cherry']
+                ),
+            specifiers.MusicContributionSpecifier(
+                articulation_specifier='blee',
+                clef_specifier='blah',
+                directive_specifier=['durian']
+                )
+            ],
+            name='blue music'
+        )
+    '''
+    
+    assert repr(ms) == "MusicSpecifier([MusicContributionSpecifier(articulation_specifier='foo', clef_specifier='bar', directive_specifier=['apple', 'banana', 'cherry']), MusicContributionSpecifier(articulation_specifier='blee', clef_specifier='blah', directive_specifier=['durian'])], name='blue music')"
+
+    assert ms._storage_format == "specifiers.MusicSpecifier([\n\tspecifiers.MusicContributionSpecifier(\n\t\tarticulation_specifier='foo',\n\t\tclef_specifier='bar',\n\t\tdirective_specifier=['apple', 'banana', 'cherry']\n\t\t),\n\tspecifiers.MusicContributionSpecifier(\n\t\tarticulation_specifier='blee',\n\t\tclef_specifier='blah',\n\t\tdirective_specifier=['durian']\n\t\t)\n\t],\n\tname='blue music'\n\t)"

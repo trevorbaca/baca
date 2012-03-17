@@ -17,11 +17,20 @@ class MusicSpecifier(Specifier, ObjectInventory):
     ### INITIALIZER ### 
 
     def __init__(self, *args, **kwargs):
-        Specifier.__init__(self)
         ObjectInventory.__init__(self, *args)
-        self.music_specifier_name = kwargs.get('music_specifier_name', None)
+        Specifier.__init__(self, **kwargs)
 
     ### PRIVATE READ-ONLY PROPERTIES ###
+
+    @property
+    def _keyword_argument_names(self):
+        '''Is there a way to do this programmatically?
+        '''
+        return tuple(sorted([
+            'description',
+            'inventory_name',
+            'name',
+            ]))
 
     @property
     def _item_class(self):

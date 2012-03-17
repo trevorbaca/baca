@@ -13,7 +13,6 @@ class AttributeDetail(object):
             is_null = True
         elif len(args) == 3:
             name, menu_key, editor_callable = args
-            #human_readable_name = name.replace('_', ' ')
             human_readable_name = None
             is_mandatory = True
         elif len(args) == 4:

@@ -16,7 +16,7 @@ def test_MusicSpecifier___eq___01():
     ms_1 = scf.specifiers.MusicSpecifier()
     ms_1.music_specifier_name = 'blue music'
     ms_1.tempo = 90
-    ms_1.performer_contribution_specifiers.extend([pcs_1, pcs_2])
+    ms_1.extend([pcs_1, pcs_2])
 
     pcs_3 = scf.specifiers.MusicContributionSpecifier()
     pcs_3.articulation_specifier = 'foo'
@@ -31,7 +31,7 @@ def test_MusicSpecifier___eq___01():
     ms_2 = scf.specifiers.MusicSpecifier()
     ms_2.music_specifier_name = 'blue music'
     ms_2.tempo = 90
-    ms_2.performer_contribution_specifiers.extend([pcs_3, pcs_4])
+    ms_2.extend([pcs_3, pcs_4])
 
     ms_3 = scf.specifiers.MusicSpecifier()
 
