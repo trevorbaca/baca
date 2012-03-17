@@ -1,11 +1,10 @@
 TODO
 
-0. Asset instantiation (tested on material proxy instantiation) really does take some time.
+1. Asset instantiation (tested on material proxy instantiation) really does take some time.
    So optimize to make asset instantiation take much less time.
    Possibly by removing all [safe_]imports() from the __init__.py files.
    Best to run the profiler while doing this to avoid unnecessary tinkering.
-
-1. Do away with local stylesheets.
+   Also unnecessarily interpreting output_materia.py modules should be elimiated.
 
 2. Make user input getter defaults work like menu defaults;
     Implement default_value on user input getter.
@@ -14,11 +13,11 @@ TODO
 
 4. Define range inventories for all scores.
 
-5. Implement material move and rename methods.
+5. Implement material methods to move material packages from one location to another.
 
 6. Find a way to include tags management in hidden menu of every package proxy.
 
-7. Figure out why 'red' isn't good enough to select 'red_pcs', maybe redraw-related.
+7. Change 'redraw' to work only on 'r' and 're'.
 
 8. Port output change awareness.
 
@@ -38,4 +37,4 @@ TODO
 
 16. Find a way to dynamically present (default) indicator to default menu entries.
 
-17. Consider keyword backtracking protocol to replace two-line backtracking protocol.
+17. Consider keyword backtracking protocol to replace self.push_backtrack() / self.pop_backtrack().
