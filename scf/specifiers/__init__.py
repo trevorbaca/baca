@@ -9,6 +9,7 @@ from PerformerSpecifier import PerformerSpecifier
 from PitchClassSpecifier import PitchClassSpecifier
 from RegistrationSpecifier import RegistrationSpecifier
 from RhythmSpecifier import RhythmSpecifier
+from Specifier import Specifier
 from StaffSpecifier import StaffSpecifier
 from TrillSpecifier import TrillSpecifier
 from TropingSpecifier import TropingSpecifier

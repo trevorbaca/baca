@@ -26,12 +26,6 @@ class Specifier(AbjadObject):
                     return True
         return False
 
-    ### PRIVATE READ-ONLY PROPERTIES ###
-
-    @property
-    def _z(self):
-        return self._tools_package_qualified_indented_repr
-
     ### PUBLIC READ-ONLY PROPERTIES ###
 
     @property
