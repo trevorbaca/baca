@@ -51,7 +51,9 @@ class MusicSpecifierModuleWrangler(ModuleWrangler):
         if self.backtrack():
             return
         package_short_name = specifier_name.replace(' ', '_')
+        self.debug(package_short_name)
         self.make_asset(package_short_name)
+        self.debug('foo')
 
     def make_main_menu(self, head=None):
         menu, section = self.make_menu(where=self.where(), is_keyed=False, is_parenthetically_numbered=True)
