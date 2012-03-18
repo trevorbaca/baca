@@ -14,6 +14,6 @@ class MusicSpecifierEditor(ObjectInventoryEditor):
     item_editor_class = MusicContributionSpecifierEditor
     item_identifier = 'performer contribution'
     target_manifest = TargetManifest(specifiers.MusicSpecifier,
-        ('inventory_name', 'name', 'nm', getters.get_string, False),
-        target_attribute_name='inventory_name',
+        #('inventory_name', 'name', 'nm', getters.get_string, False),
+        #target_attribute_name='inventory_name',
         )

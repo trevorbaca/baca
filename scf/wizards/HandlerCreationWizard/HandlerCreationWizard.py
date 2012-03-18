@@ -11,6 +11,7 @@ class HandlerCreationWizard(Wizard):
 
     ### PUBLIC METHODS ###
 
+    # TODO: abstract up to Wizard?
     def get_handler_editor(self, handler_class_name, target=None):
         handler_editor_class_name = handler_class_name + self.handler_editor_class_name_suffix
         command = 'from scf.editors import {} as handler_editor_class'.format(handler_editor_class_name)

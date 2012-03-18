@@ -5,6 +5,8 @@ from scf.wizards.Wizard import Wizard
 
 class InstrumentCreationWizard(Wizard):
 
+    ### INITIALIZER ###
+
     def __init__(self, is_ranged=False, session=None, target=None):
         Wizard.__init__(self, session=session, target=target)
         self.is_ranged = is_ranged

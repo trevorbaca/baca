@@ -11,6 +11,13 @@ music_specifier = specifiers.MusicSpecifier([
 		instrument_specifier=specifiers.InstrumentSpecifier(
 			instrument=instrumenttools.Violin()
 			)
+		),
+	specifiers.MusicContributionSpecifier(
+		name='black cello pizzicati',
+		description='midrange cello pizzicati',
+		instrument_specifier=specifiers.InstrumentSpecifier(
+			instrument=instrumenttools.Cello()
+			)
 		)
 	],
 	inventory_name='black music'
