@@ -40,5 +40,7 @@ class ParameterSpecifierCreationWizard(Wizard):
             self.pop_breadcrumb()
             self.restore_breadcrumbs(cache=cache)
             return
+        self.pop_breadcrumb()
+        self.restore_breadcrumbs(cache=cache)
         self.target = target_editor.target
         return self.target

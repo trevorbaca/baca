@@ -12,6 +12,7 @@ class ParameterSpecifierClassNameSelector(Selector):
             'MusicSpecifier',
             'MusicContributionSpecifier',
             'ParameterSpecifier',
+            'Specifier',
             )
         for name in os.listdir(self.specifier_classes_package_path_name):
             if name.endswith('Specifier'):

@@ -11,4 +11,5 @@ class InstrumentSpecifier(ParameterSpecifier):
 
     @property
     def one_line_menuing_summary(self):
-        return self.name or self.instrument.instrument_name
+        value = self.name or self.instrument.instrument_name
+        return 'instrument: {}'.format(value)
