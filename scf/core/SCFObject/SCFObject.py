@@ -419,7 +419,6 @@ class SCFObject(object):
         base_name = self.strip_extension_from_base_name(base_name)
         return self.change_string_to_human_readable_string(base_name)
 
-    # TODO: make this work: self.path_name_to_package_importable_name(os.environ.get('SCFCHUNKSPATH'))
     def path_name_to_package_importable_name(self, path_name):
         if path_name is None:
             return
