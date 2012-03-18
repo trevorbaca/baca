@@ -2,98 +2,15 @@ import scf
 
 
 def test_Studio_01():
-    '''Attributes.
-    '''
-
-    studio = scf.studio.Studio()
-
-    assert studio.class_name == 'Studio'
-    assert isinstance(studio.score_package_wrangler, scf.wranglers.ScorePackageWrangler)
-    assert studio.source_file_name == \
-        '/Users/trevorbaca/Documents/other/baca/scf/studio/Studio/Studio.py'
-    assert studio.spaced_class_name == 'studio'
-
-
-def test_Studio_02():
-    '''Main menu.
-    '''
-
-    studio = scf.studio.Studio()
-    studio.run(user_input='q')
-    
-    assert studio.transcript[-2] == \
-    ['Studio - active scores',
-     '',
-     '     1: Betörung (2012)',
-     '     2: Čáry (2006)',
-     "     3: L'archipel du corps (2011)",
-     "     4: L'imaginare (2010)",
-     '     5: Lidércfény (2008)',
-     '     6: Mon seul désir (2009)',
-     '     7: Poème récursif (2005)',
-     '     8: Red Shift Hijinks (2005)',
-     '     9: Sekka (2007)',
-     '',
-     '     materials (m)',
-     '     sketches (k)',
-     '     new score (new)',
-     '']
-
-
-def test_Studio_03():
-    '''Main menu to score menu.
-    '''
-
-    studio = scf.studio.Studio()
-    studio.run(user_input='1 q')
-
-#    assert studio.transcript[-2] == [
-#     "L'archipel du corps (2011)",
-#     '',
-#     '     Chunks',
-#     '',
-#     '     [create chunk] (ch)',
-#     '',
-#     '     Materials',
-#     '',
-#     '     create interactive material (mi)',
-#     '     create static material (ms)',
-#     '',
-#     '     Setup',
-#     '',
-#     '     forces tagline (ft)',
-#     '     performers (pf)',
-#     '     title (tl)',
-#     '     year of completion (yr)',
-#     '']
-
-
-def test_Studio_04():
-    '''Main menu. Mothballed scores only.
+    '''Main menu to mothballed scores.
     '''
 
     studio = scf.studio.Studio()
     studio.run(user_input='mb q')
-    
-    assert studio.transcript[-2] == \
-    ['Studio - mothballed scores',
-     '',
-     '     1: Arac\xc4\xb1l\xc4\xb1k',
-     '     2: Chrysanthemums (1995)',
-     '     3: Jivan Mukti',
-     '     4: Las manos mágicas',
-     '     5: Manifolds',
-     '     6: Tack (1996)',
-     '     7: Territoires',
-     '     8: Zeit (1998)',
-     '',
-     '     materials (m)',
-     '     sketches (k)',
-     '     new score (new)',
-     '']
+    studio.ts == (4,)
 
 
-def test_Studio_05():
+def test_Studio_02():
     '''Main menu to score menu to tags menu.
     '''
 
@@ -102,24 +19,16 @@ def test_Studio_05():
     assert studio.ts == (6,)
 
 
-def test_Studio_06():
+def test_Studio_03():
     '''Main menu to svn menu.
     '''
 
     studio = scf.studio.Studio()
     studio.run(user_input='svn q')
-
-    assert studio.transcript[-2] == [
-      'Studio - active scores - repository commands',
-      '',
-      '     svn add scores (add)',
-      '     svn commit scores (ci)',
-      '     svn status scores (st)',
-      '     svn update scores (up)',
-      '']
+    assert studio.ts == (4,)
 
 
-def test_Studio_07():
+def test_Studio_04():
     '''Main menu header is the same even after state change to secondary menu.
     '''
 
@@ -134,7 +43,7 @@ def test_Studio_07():
     assert studio.transcript[-2][0] == 'Studio - active scores'
 
 
-def test_Studio_08():
+def test_Studio_05():
     '''Junk works.
     '''
 
@@ -146,7 +55,7 @@ def test_Studio_08():
     assert studio.ts == (6, (0, 2, 4))
 
 
-def test_Studio_09():
+def test_Studio_06():
     '''Back is handled correctly.
     '''
 
@@ -155,7 +64,7 @@ def test_Studio_09():
     assert studio.ts == (4, (0, 2))
 
 
-def test_Studio_10():
+def test_Studio_07():
     '''Exec works.
     '''
 
@@ -168,7 +77,7 @@ def test_Studio_10():
     assert studio.transcript[4] == ['SCF> q', '']
 
 
-def test_Studio_11():
+def test_Studio_08():
     '''Exec protects against senseless input.
     '''
 
@@ -181,7 +90,7 @@ def test_Studio_11():
     assert studio.transcript[4] == ['SCF> q', '']
 
 
-def test_Studio_12():
+def test_Studio_09():
     '''Shared session.
     '''
 
@@ -190,7 +99,7 @@ def test_Studio_12():
     assert studio.session is studio.score_package_wrangler.session
 
 
-def test_Studio_13():
+def test_Studio_10():
     '''Backtracking stu* shortcut.
     '''
 
@@ -205,7 +114,7 @@ def test_Studio_13():
     assert ts_1 == ts_2
 
 
-def test_Studio_14():
+def test_Studio_11():
     '''Backtracking sco* shortcut.
     '''
 

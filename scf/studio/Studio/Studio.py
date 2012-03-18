@@ -88,11 +88,14 @@ class Studio(SCFObject):
             self.session.show_active_scores()
         elif result == 'all':
             self.session.show_all_scores()
-        elif result == 'k':
-            self.print_not_yet_implemented()
         elif result == 'm':
             self.material_package_wrangler.run(
                 rollback=True, head=self.score_external_materials_package_importable_name)
+        elif result == 'f':
+            self.music_specifier_module_wrangler.run(
+                rollback=True, head=self.score_external_materials_package_importable_name)
+        elif result == 'k':
+            self.print_not_yet_implemented()
         elif result == 'new':
             self.score_package_wrangler.make_asset_interactively(rollback=True)
         elif result == 'mb':
@@ -123,6 +126,7 @@ class Studio(SCFObject):
         menu = self.make_score_selection_menu()
         section = menu.make_section()
         section.append(('m', 'materials'))
+        section.append(('f', 'specifiers'))
         section.append(('k', 'sketches'))
         section.append(('new', 'new score'))
         hidden_section = menu.make_section(is_hidden=True)
