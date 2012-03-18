@@ -12,27 +12,33 @@ class ParameterSpecifierCreationWizard(Wizard):
 
     ### PUBLIC METHODS ###
 
+    # TODO: maybe abstract up to Wizard?
+    def get_target_editor(self, target_class_name, target=None):
+        target_editor_class_name = target_class_name + self.target_editor_class_name_suffix
+        command = 'from scf.editors import {} as target_editor_class'.format(target_editor_class_name)
+        exec(command)
+        target_editor = target_editor_class(session=self.session, target=target)
+        return target_editor
+
     def run(self, cache=False, clear=True, head=None, user_input=None):
         self.assign_user_input(user_input=user_input)
         self.cache_breadcrumbs(cache=cache)
         self.push_breadcrumb()
-        selector = selectors.ParameterEditorClassNameSelector(session=self.session)
+        selector = selectors.ParameterSpecifierClassNameSelector(session=self.session)
         self.push_backtrack()
-        editor_class_name = selector.run()
+        target_class_name = selector.run()
         self.pop_backtrack()
         if self.backtrack():
             self.pop_breadcrumb()
             self.restore_breadcrumbs(cache=cache)
             return
-        command = 'from scf.editors import {} as editor_class'.format(editor_class_name)
-        exec(command)
-        editor = editor_class(session=self.session)
+        target_editor = self.get_target_editor(target_class_name)
         self.push_backtrack()
-        editor.run()
+        target_editor.run()
         self.pop_backtrack()
         if self.backtrack():
             self.pop_breadcrumb()
             self.restore_breadcrumbs(cache=cache)
             return
-        self.target = editor.target
+        self.target = target_editor.target
         return self.target

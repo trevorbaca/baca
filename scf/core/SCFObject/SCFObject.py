@@ -45,6 +45,14 @@ class SCFObject(object):
         return type(self).__name__
 
     @property
+    def editors_package_importable_name(self):
+        return self.dot_join(['scf', 'editors'])
+
+    @property
+    def editors_package_path_name(self):
+        return os.path.join(os.environ.get('SCFPATH'), 'editors')
+
+    @property
     def help_item_width(self):
         return 5
 
@@ -136,6 +144,14 @@ class SCFObject(object):
     @property
     def spaced_class_name(self):
         return iotools.uppercamelcase_to_space_delimited_lowercase(self.class_name)
+
+    @property
+    def specifier_classes_package_importable_name(self):
+        return self.dot_join(['scf', 'specifiers'])
+
+    @property
+    def specifier_classes_package_path_name(self):
+        return os.path.join(os.environ.get('SCFPATH'), 'specifiers')
 
     @property
     def stylesheets_directory_name(self):
