@@ -17,8 +17,8 @@ class MusicSpecifier(Specifier, ObjectInventory):
     ### INITIALIZER ### 
 
     def __init__(self, *args, **kwargs):
-        ObjectInventory.__init__(self, *args)
-        Specifier.__init__(self, **kwargs)
+        ObjectInventory.__init__(self, *args, **kwargs)
+        Specifier.__init__(self)
 
     ### PRIVATE READ-ONLY PROPERTIES ###
 

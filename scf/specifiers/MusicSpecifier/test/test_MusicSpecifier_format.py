@@ -15,10 +15,10 @@ def test_MusicSpecifier_format_02():
     '''Empty. With keywords.
     '''
 
-    specifier = scf.specifiers.MusicSpecifier([], name='foo')
+    specifier = scf.specifiers.MusicSpecifier([], inventory_name='foo')
 
-    assert repr(specifier) == "MusicSpecifier([], name='foo')"
-    assert specifier._storage_format == "specifiers.MusicSpecifier([],\n\tname='foo'\n\t)"
+    assert repr(specifier) == "MusicSpecifier([], inventory_name='foo')"
+    assert specifier._storage_format == "specifiers.MusicSpecifier([],\n\tinventory_name='foo'\n\t)"
 
     
 def test_MusicSpecifier_format_03():
