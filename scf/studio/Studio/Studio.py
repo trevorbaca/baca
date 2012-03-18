@@ -93,7 +93,7 @@ class Studio(SCFObject):
                 rollback=True, head=self.score_external_materials_package_importable_name)
         elif result == 'f':
             self.music_specifier_module_wrangler.run(
-                rollback=True, head=self.score_external_materials_package_importable_name)
+                rollback=True, head=self.score_external_specifiers_package_importable_name)
         elif result == 'k':
             self.print_not_yet_implemented()
         elif result == 'new':
