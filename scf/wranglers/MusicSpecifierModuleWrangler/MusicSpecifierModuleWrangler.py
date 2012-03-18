@@ -66,22 +66,3 @@ class MusicSpecifierModuleWrangler(ModuleWrangler):
         hidden_section.append(('missing', 'create missing packages'))
         hidden_section.append(('profile', 'profile packages'))
         return menu
-
-    # TODO: write test
-    def select_specifier_spaced_name_interactively(self, cache=False, clear=True, head=None):
-        self.cache_breadcrumbs(cache=cache)
-        menu, section = self.make_menu(where=self.where(), is_parenthetically_numbered=True)
-        section.tokens = self.make_visible_asset_menu_tokens(head=head)
-        while True:
-            self.push_breadcrumb('select music specifier')
-            result = menu.run(clear=clear)
-            if self.backtrack():
-                break
-            elif not result:
-                self.pop_breadcrumb()
-                continue
-            else:
-                break
-        self.pop_breadcrumb()
-        self.restore_breadcrumbs(cache=cache)
-        return result
