@@ -14,13 +14,14 @@ class MusicSpecifierEditor(ListEditor):
     item_editor_class = MusicContributionSpecifierEditor
     item_identifier = 'performer contribution'
     target_manifest = TargetManifest(specifiers.MusicSpecifier,
-        ('music_specifier_name', 'nm', getters.get_string),
-        target_attribute_name='music_specifier_name',
+        ('inventory_name', 'name', 'nm', getters.get_string, False),
+        target_attribute_name='inventory_name',
         )
 
     ### PUBLIC READ-ONLY PROPERTIES ###
 
+    # TODO: abstract up to ObjectInventoryEditor
     @property
     def target_name(self):
         if self.target is not None:
-            return self.target.music_specifier_name
+            return self.target.inventory_name

@@ -15,7 +15,9 @@ def test_InstrumentSelectionWizard_run_02():
 
     wizard = scf.wizards.InstrumentSelectionWizard()
     wizard.session.current_score_package_short_name = 'betoerung'
-    whistle = instrumenttools.UntunedPercussion()
-    whistle.instrument_name = 'whistle'
-
-    assert wizard.run(user_input='other untuned whis') == whistle
+    whistle = instrumenttools.UntunedPercussion(
+        instrument_name='whistle',
+        short_instrument_name='whistle',
+        )
+    wizard.run(user_input='other untuned whis')
+    assert wizard.target == whistle

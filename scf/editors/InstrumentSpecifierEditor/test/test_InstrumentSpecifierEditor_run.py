@@ -41,18 +41,10 @@ def test_InstrumentSpecifierEditor_run_02():
     specifiers.InstrumentSpecifier(
         instrument=instrumenttools.UntunedPercussion(
             instrument_name='rattle',
-            instrument_name_markup=markuptools.Markup(
-                'Rattle',
-                style_string='backslash'
-                ),
-            short_instrument_name='rattle',
-            short_instrument_name_markup=markuptools.Markup(
-                'Rattle',
-                style_string='backslash'
-                )
+            short_instrument_name='rattle'
             ),
         name='foo'
         )
     '''
 
-    assert editor.target.format == "specifiers.InstrumentSpecifier(\n\tinstrument=instrumenttools.UntunedPercussion(\n\t\tinstrument_name='rattle',\n\t\tinstrument_name_markup=markuptools.Markup(\n\t\t\t'Rattle',\n\t\t\tstyle_string='backslash'\n\t\t\t),\n\t\tshort_instrument_name='rattle',\n\t\tshort_instrument_name_markup=markuptools.Markup(\n\t\t\t'Rattle',\n\t\t\tstyle_string='backslash'\n\t\t\t)\n\t\t),\n\tname='foo'\n\t)"
+    assert editor.target.format == "specifiers.InstrumentSpecifier(\n\tinstrument=instrumenttools.UntunedPercussion(\n\t\tinstrument_name='rattle',\n\t\tshort_instrument_name='rattle'\n\t\t),\n\tname='foo'\n\t)"
