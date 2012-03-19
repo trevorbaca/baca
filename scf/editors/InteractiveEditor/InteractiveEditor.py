@@ -119,6 +119,8 @@ class InteractiveEditor(SCFObject):
             pass
 
     def conditionally_set_target_attribute(self, attribute_name, attribute_value):
+        self.debug(self.target, 'target')
+        self.debug(self.attributes_in_memory, 'attrs')
         if self.target is not None:
             if not self.session.is_complete:
                 # if the attribute is read / write
@@ -130,6 +132,9 @@ class InteractiveEditor(SCFObject):
                     self.attributes_in_memory[attribute_name] = attribute_value
         else:
             self.attributes_in_memory[attribute_name] = attribute_value
+        self.debug(self.target, 'target')
+        self.debug(self.attributes_in_memory, 'attrs')
+        self.debug('')
 
     def copy_target_attributes_to_memory(self):
         self.initialize_attributes_in_memory()

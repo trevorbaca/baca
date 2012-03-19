@@ -70,12 +70,23 @@ class TargetManifest(object):
         result = []
         for attribute_detail in self.attribute_details:
             if attribute_detail.is_mandatory:
-                # TODO: use the commented-out line below
+                # TODO: maybe use the commented-out line below?
                 result.append(attribute_detail.name)
-                #result.append(attribute_detail.retrievable_name)
         return result
 
     ### PUBLIC METHODS ###
+
+    def change_initializer_argument_name_to_retrievable_attribute_name(self, initializer_argument_name):
+        for attribute_detail in self.attribute_details:
+            if attribute_detail.name == initializer_argument_name:
+                return attribute_detail.retrievable_name
+        raise ValueError
+
+    def change_retrievable_attribute_name_to_initializer_argument_name(self, retrievable_attribute_name):
+        for attribute_detail in self.attribute_details:
+            if attribute_detail.retrievable_name == retrievable_attribute_name:
+                return attribute_detail.name
+        raise ValueError
 
     def menu_key_to_attribute_detail(self, menu_key):
         for attribute_detail in self.attribute_details:
