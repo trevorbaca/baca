@@ -17,7 +17,7 @@ class ListEditor(InteractiveEditor):
     item_identifier = 'element'
     target_manifest = TargetManifest(list,)
 
-    ### READ-ONLY PUBLIC PROPERTIES ###
+    ### PUBLIC READ-ONLY PROPERTIES ###
 
     @property
     def breadcrumb(self):
@@ -80,6 +80,12 @@ class ListEditor(InteractiveEditor):
         else:
             items = [result]
         self.items.extend(items)
+
+    def conditionally_initialize_target(self):
+        if self.target is not None:
+            return
+        else:
+            self.target = self.target_class([])
 
     def edit_item_interactively(self, item_number):
         item = self.get_item_from_item_number(item_number)

@@ -27,3 +27,11 @@ class PerformerEditor(ListEditor):
     @property
     def items(self):
         return self.target.instruments 
+
+    ### PUBLIC METHODS ###
+
+    def conditionally_initialize_target(self):
+        if self.target is not None:
+            return
+        else:
+            self.target = self.target_class()

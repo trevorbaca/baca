@@ -30,13 +30,6 @@ class MusicContributionSpecifierEditor(ObjectInventoryEditor):
 
     ### PUBLIC METHODS ###
 
-    # TODO: abstract up to ListEditor after all tests pass
-    def conditionally_initialize_target(self):
-        if self.target is not None:
-            return
-        else:
-            self.target = self.target_class([])
-
     def menu_key_to_delegated_editor_kwargs(self, menu_key):
         kwargs = {}
         if menu_key == 'str':
