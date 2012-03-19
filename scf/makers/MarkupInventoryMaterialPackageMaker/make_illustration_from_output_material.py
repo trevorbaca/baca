@@ -1,14 +1,15 @@
 from abjad import *
 from abjad.tools import layouttools
+import copy
 
 
-def make_illustration_from_output_material(tempo_mark_inventory, **kwargs):
+def make_illustration_from_output_material(markup_inventory, **kwargs):
 
     notes = []
-    for tempo_mark in tempo_mark_inventory:
+    for markup in markup_inventory:
         note = Note("c'4")
-        tempo_mark = contexttools.TempoMark(tempo_mark, target_context=Staff)
-        tempo_mark(note)
+        markup_copy = markuptools.Markup(markup)
+        markup_copy(note)
         notes.append(note)
 
     staff = stafftools.RhythmicStaff(notes)

@@ -7,12 +7,12 @@ from InstrumentEditor import InstrumentEditor
 from InstrumentationEditor import InstrumentationEditor
 from InteractiveEditor import InteractiveEditor
 from ListEditor import ListEditor
-from MusicSpecifierEditor import MusicSpecifierEditor
+from MarkupEditor import MarkupEditor
+from MarkupInventoryEditor import MarkupInventoryEditor
 from ObjectInventoryEditor import ObjectInventoryEditor
 from OctaveTranspositionMappingComponentEditor import OctaveTranspositionMappingComponentEditor
 from OctaveTranspositionMappingEditor import OctaveTranspositionMappingEditor
 from OctaveTranspositionMappingInventoryEditor import OctaveTranspositionMappingInventoryEditor
-from MusicContributionSpecifierEditor import MusicContributionSpecifierEditor
 from PerformerEditor import PerformerEditor
 from PitchRangeEditor import PitchRangeEditor
 from PitchRangeInventoryEditor import PitchRangeInventoryEditor
@@ -36,6 +36,8 @@ from RhythmSpecifierEditor import RhythmSpecifierEditor
 from StaffSpecifierEditor import StaffSpecifierEditor
 from TrillSpecifierEditor import TrillSpecifierEditor
 from TropingSpecifierEditor import TropingSpecifierEditor
+from MusicSpecifierEditor import MusicSpecifierEditor
+from MusicContributionSpecifierEditor import MusicContributionSpecifierEditor
 
 
 ### KALEID EDITORS ###
