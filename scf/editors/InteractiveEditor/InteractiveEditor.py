@@ -118,12 +118,16 @@ class InteractiveEditor(SCFObject):
         return menu_key
 
     def clean_up_attributes_in_memory(self):
+        #self.debug('cleaning up!')
         if self.target is None:
             try:
                 self.initialize_target_from_attributes_in_memory()
             except ValueError:
                 pass
         self.initialize_attributes_in_memory()
+        #self.debug(self.target)
+        #self.debug(self.attributes_in_memory)
+        #self.debug('')
 
     def conditionally_initialize_target(self):
         if self.target is not None:
@@ -134,9 +138,9 @@ class InteractiveEditor(SCFObject):
             pass
 
     def conditionally_set_target_attribute(self, attribute_name, attribute_value):
-        self.debug((attribute_name, attribute_value))
-        self.debug(self.target, 'target')
-        self.debug(self.attributes_in_memory, 'attrs')
+        #self.debug((attribute_name, attribute_value))
+        #self.debug(self.target, 'target')
+        #self.debug(self.attributes_in_memory, 'attrs')
         if self.target is not None:
             if not self.session.is_complete:
                 # if the attribute is read / write
@@ -148,9 +152,9 @@ class InteractiveEditor(SCFObject):
                     self.attributes_in_memory[attribute_name] = attribute_value
         else:
             self.attributes_in_memory[attribute_name] = attribute_value
-        self.debug(self.target, 'target')
-        self.debug(self.attributes_in_memory, 'attrs')
-        self.debug('')
+        #self.debug(self.target, 'target')
+        #self.debug(self.attributes_in_memory, 'attrs')
+        #self.debug('')
 
     def copy_target_attributes_to_memory(self):
         self.initialize_attributes_in_memory()

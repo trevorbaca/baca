@@ -92,6 +92,8 @@ class ListEditor(InteractiveEditor):
         if item is not None:
             item_editor = self.item_editor_class(session=self.session, target=item)
             item_editor.run()
+            item_index = int(item_number) - 1
+            self.items[item_index] = item_editor.target
 
     def get_item_from_item_number(self, item_number):
         try:
