@@ -1,32 +1,39 @@
+from scf import specifiers
 import scf
 
 
 def test_MusicContributionSpecifier_format_01():
-    '''(Empty.) No keywords.
+    '''Empty.
     '''
 
-    specifier = scf.specifiers.MusicContributionSpecifier()
-    assert repr(specifier) == 'MusicContributionSpecifier()'
-    assert specifier._storage_format == 'specifiers.MusicContributionSpecifier()'
+    specifier = scf.specifiers.MusicContributionSpecifier([])
+    assert repr(specifier) == 'MusicContributionSpecifier([])'
+    assert specifier._storage_format == 'specifiers.MusicContributionSpecifier([])'
 
 
 def test_MusicContributionSpecifier_format_02():
-    '''(Empty.) With keywords.
+    '''Populated.
     '''
 
-    specifier = scf.specifiers.MusicContributionSpecifier()
-    specifier.articulation_specifier = 'foo'
-    specifier.clef_specifier = 'bar'
-    specifier.directive_specifier = ['apple', 'banana', 'cherry']
+    specifier = scf.specifiers.MusicContributionSpecifier([])
+    specifier.append(specifiers.ArticulationSpecifier(articulation_handler_name='foo articulations'))
+    specifier.append(specifiers.ClefSpecifier(clef_name='treble'))
+    specifier.append(specifiers.DirectiveSpecifier(directive_handler_name='foo directives'))
 
     '''
-    specifiers.MusicContributionSpecifier(
-        articulation_specifier='foo',
-        clef_specifier='bar',
-        directive_specifier=['apple', 'banana', 'cherry']
-        )
+    specifiers.MusicContributionSpecifier([
+        specifiers.ArticulationSpecifier(
+            articulation_handler_name='foo articulations'
+            ),
+        specifiers.ClefSpecifier(
+            clef_name='treble'
+            ),
+        specifiers.DirectiveSpecifier(
+            directive_handler_name='foo directives'
+            )
+        ])
     '''
 
-    assert repr(specifier) == "MusicContributionSpecifier(articulation_specifier='foo', clef_specifier='bar', directive_specifier=['apple', 'banana', 'cherry'])"
+    assert repr(specifier) == "MusicContributionSpecifier([ArticulationSpecifier(articulation_handler_name='foo articulations'), ClefSpecifier(clef_name='treble'), DirectiveSpecifier(directive_handler_name='foo directives')])"
 
-    assert specifier._storage_format == "specifiers.MusicContributionSpecifier(\n\tarticulation_specifier='foo',\n\tclef_specifier='bar',\n\tdirective_specifier=['apple', 'banana', 'cherry']\n\t)"
+    assert specifier._storage_format == "specifiers.MusicContributionSpecifier([\n\tspecifiers.ArticulationSpecifier(\n\t\tarticulation_handler_name='foo articulations'\n\t\t),\n\tspecifiers.ClefSpecifier(\n\t\tclef_name='treble'\n\t\t),\n\tspecifiers.DirectiveSpecifier(\n\t\tdirective_handler_name='foo directives'\n\t\t)\n\t])"

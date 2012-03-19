@@ -17,3 +17,12 @@ class MusicSpecifierEditor(ObjectInventoryEditor):
         #('inventory_name', 'name', 'nm', getters.get_string, False),
         #target_attribute_name='inventory_name',
         )
+
+    ### PUBLIC METHODS ###
+
+    # TODO: abstract up to ListEditor after all tests pass
+    def conditionally_initialize_target(self):
+        if self.target is not None:
+            return
+        else:
+            self.target = self.target_class([])

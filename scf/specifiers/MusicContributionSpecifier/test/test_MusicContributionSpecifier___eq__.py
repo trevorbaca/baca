@@ -1,17 +1,16 @@
+from scf import specifiers
 import scf
 
 
 def test_MusicContributionSpecifier___eq___01():
 
-    specifier_1 = scf.specifiers.MusicContributionSpecifier()
-    specifier_1.articulation_specifier = 'foo'
+    specifier_1 = scf.specifiers.MusicContributionSpecifier([])
+    specifier_1.append(specifiers.ArticulationSpecifier(articulation_handler_name='foo'))
 
-    specifier_2 = scf.specifiers.MusicContributionSpecifier()
-    specifier_2.articulation_specifier = 'foo'
+    specifier_2 = scf.specifiers.MusicContributionSpecifier([])
+    specifier_2.append(specifiers.ArticulationSpecifier(articulation_handler_name='foo'))
 
-    specifier_3 = scf.specifiers.MusicContributionSpecifier()
-    specifier_3.articulation_specifier = 'foo'
-    specifier_3.directive_specifier = ['apple', 'banana', 'cherry']
+    specifier_3 = scf.specifiers.MusicContributionSpecifier([])
 
     assert specifier_1 == specifier_1
     assert specifier_1 == specifier_2
