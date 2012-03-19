@@ -70,7 +70,9 @@ class TargetManifest(object):
         result = []
         for attribute_detail in self.attribute_details:
             if attribute_detail.is_mandatory:
+                # TODO: use the commented-out line below
                 result.append(attribute_detail.name)
+                #result.append(attribute_detail.retrievable_name)
         return result
 
     ### PUBLIC METHODS ###

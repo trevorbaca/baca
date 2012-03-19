@@ -130,7 +130,10 @@ class InteractiveEditor(SCFObject):
 #                    self.copy_target_attributes_to_memory()
 #                    self.attributes_in_memory[attribute_name] = attribute_value
         else:
+            self.debug(self.attributes_in_memory)
             self.attributes_in_memory[attribute_name] = attribute_value
+            self.debug(self.attributes_in_memory)
+            self.debug('')
 
     def handle_main_menu_result(self, result):
         attribute_name = self.target_manifest.menu_key_to_attribute_name(result)
@@ -162,6 +165,7 @@ class InteractiveEditor(SCFObject):
             attribute_value = getattr(self.target, attribute_name, None)
             if attribute_value is not None:
                 self.attributes_in_memory[attribute_name] = attribute_value
+        self.target = None
 
     def initialize_target_from_attributes_in_memory(self):
         args, kwargs = [], {}
@@ -192,12 +196,15 @@ class InteractiveEditor(SCFObject):
                 result.append(())
                 continue
             menu_key = attribute_detail.menu_key
-            target_attribute_name = attribute_detail.retrievable_name
             menu_body = attribute_detail.human_readable_name
             if self.target is not None:
-                attribute_value = getattr(self.target, target_attribute_name)
+                attribute_value = getattr(self.target, attribute_detail.retrievable_name, None)
+                if attribute_value is None:
+                    attribute_value = getattr(self.target, attribute_detail.name, None)
             else:
-                attribute_value = self.attributes_in_memory.get(target_attribute_name)
+                attribute_value = self.attributes_in_memory.get(attribute_detail.retrievable_name)
+                if attribute_value is None:
+                    attribute_value = self.attributes_in_memory.get(attribute_detail.name)
             if hasattr(attribute_value, '__len__') and not len(attribute_value):
                 attribute_value = None
             existing_value = self.get_one_line_menuing_summary(attribute_value)
