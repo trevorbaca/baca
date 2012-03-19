@@ -12,3 +12,25 @@ def test_MarkupInventoryEditor_run_01():
         ])
 
     assert editor.target == inventory
+
+
+def test_MarkupInventoryEditor_run_02():
+
+    editor = scf.editors.MarkupInventoryEditor()
+    editor.run(user_input="name test~inventory add arg r'\\italic~{~serenamente~possibile~}' direction up name serenamente done add arg r'\\italic~{~presto~}' name presto done done")
+
+    inventory = markuptools.MarkupInventory([
+        markuptools.Markup(
+            '\\italic { serenamente possibile }',
+            direction='^',
+            markup_name='serenamente'
+            ),
+        markuptools.Markup(
+            '\\italic { presto }',
+            markup_name='presto'
+            )
+        ],
+        inventory_name='test inventory'
+        )
+
+    assert editor.target == inventory
