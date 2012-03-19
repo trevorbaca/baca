@@ -174,7 +174,7 @@ class InteractiveEditor(SCFObject):
                 result.append(())
                 continue
             menu_key = attribute_detail.menu_key
-            target_attribute_name = attribute_detail.name
+            target_attribute_name = attribute_detail.retrievable_name
             menu_body = attribute_detail.human_readable_name
             if self.target is not None:
                 attribute_value = getattr(self.target, target_attribute_name)

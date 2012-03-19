@@ -1,4 +1,5 @@
 from abjad import *
+import py
 import scf
 
 
@@ -18,3 +19,13 @@ def test_MarkupEditor_run_02():
     markup = markuptools.Markup('foo text')
 
     assert editor.target == markup
+
+
+def test_MarkupEditor_run_03():
+    py.test.skip('make this work.')
+
+    markup = markuptools.Markup('foo bar', markup_name='foo')
+    editor = scf.editors.MarkupEditor(target=markup)
+    editor.run(user_input='name bar direction up done')
+
+    assert editor.target == markuptools.Markup('foo bar', direction='up', markup_name='bar')

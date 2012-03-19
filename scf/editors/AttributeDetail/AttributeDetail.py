@@ -9,22 +9,28 @@ class AttributeDetail(object):
     def __init__(self, *args, **kwargs):
         is_null = False
         if len(args) == 0:
-            name = human_readable_name = menu_key = editor_callable = is_mandatory = None
+            name = retrievable_name = human_readable_name = menu_key = editor_callable = is_mandatory = None
             is_null = True
         elif len(args) == 3:
             name, menu_key, editor_callable = args
             human_readable_name = None
             is_mandatory = True
+            retrievable_name = name
         elif len(args) == 4:
             name, human_readable_name, menu_key, editor_callable = args
             is_mandatory = True
+            retrievable_name = name
         elif len(args) == 5:
             name, human_readable_name, menu_key, editor_callable, is_mandatory = args
+            retrievable_name = name
+        elif len(args) == 6:
+            name, retrievable_name, human_readable_name, menu_key, editor_callable, is_mandatory = args
         else:
             raise ValueError('can not parse attribute detail {!r}.'.format(args)) 
         if not human_readable_name and name:
             human_readable_name = name.replace('_', ' ')
         self.name = name
+        self.retrievable_name = retrievable_name
         self.human_readable_name = human_readable_name 
         self.menu_key = menu_key
         self.editor_callable = editor_callable
