@@ -121,19 +121,27 @@ class InteractiveEditor(SCFObject):
     def conditionally_set_target_attribute(self, attribute_name, attribute_value):
         if self.target is not None:
             if not self.session.is_complete:
-                #self.debug(self.target)
-                #self.debug(self.attributes_in_memory)
-                setattr(self.target, attribute_name, attribute_value)
-#                try:
-#                    setattr(self.target, attribute_name, attribute_value)
-#                except AttributeError:
-#                    self.copy_target_attributes_to_memory()
-#                    self.attributes_in_memory[attribute_name] = attribute_value
+                # if the attribute is read / write
+                try:
+                    setattr(self.target, attribute_name, attribute_value)
+                # elif the attribute is read-only
+                except AttributeError:
+                    self.copy_target_attributes_to_memory()
+                    self.attributes_in_memory[attribute_name] = attribute_value
         else:
-            self.debug(self.attributes_in_memory)
             self.attributes_in_memory[attribute_name] = attribute_value
-            self.debug(self.attributes_in_memory)
-            self.debug('')
+
+    def copy_target_attributes_to_memory(self):
+        self.initialize_attributes_in_memory()
+        for attribute_name in self.target_mandatory_attribute_names:
+            attribute_value = getattr(self.target, attribute_name, None)
+            if attribute_value is not None:
+                self.attributes_in_memory[attribute_name] = attribute_value
+        for attribute_name in self.target_keyword_attribute_names:
+            attribute_value = getattr(self.target, attribute_name, None)
+            if attribute_value is not None:
+                self.attributes_in_memory[attribute_name] = attribute_value
+        self.target = None
 
     def handle_main_menu_result(self, result):
         attribute_name = self.target_manifest.menu_key_to_attribute_name(result)
@@ -154,18 +162,6 @@ class InteractiveEditor(SCFObject):
 
     def initialize_attributes_in_memory(self):
         self._attributes_in_memory = {}
-
-    def copy_target_attributes_to_memory(self):
-        self.initialize_attributes_in_memory()
-        for attribute_name in self.target_mandatory_attribute_names:
-            attribute_value = getattr(self.target, attribute_name, None)
-            if attribute_value is not None:
-                self.attributes_in_memory[attribute_name] = attribute_value
-        for attribute_name in self.target_keyword_attribute_names:
-            attribute_value = getattr(self.target, attribute_name, None)
-            if attribute_value is not None:
-                self.attributes_in_memory[attribute_name] = attribute_value
-        self.target = None
 
     def initialize_target_from_attributes_in_memory(self):
         args, kwargs = [], {}
