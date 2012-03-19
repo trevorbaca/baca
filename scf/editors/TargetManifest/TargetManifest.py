@@ -65,12 +65,28 @@ class TargetManifest(object):
                 result.append(attribute_detail.name)
         return result
 
+    # TODO: deprecate and use two more specifier labels instead
+#    @property
+#    def mandatory_attribute_names(self):
+#        result = []
+#        for attribute_detail in self.attribute_details:
+#            if attribute_detail.is_mandatory:
+#                result.append(attribute_detail.name)
+#        return result
+
     @property
-    def mandatory_attribute_names(self):
+    def mandatory_initializer_retrievable_attribute_names(self):
         result = []
         for attribute_detail in self.attribute_details:
             if attribute_detail.is_mandatory:
-                # TODO: maybe use the commented-out line below?
+                result.append(attribute_detail.retrievable_name)
+        return result
+
+    @property
+    def mandatory_initializer_argument_names(self):
+        result = []
+        for attribute_detail in self.attribute_details:
+            if attribute_detail.is_mandatory:
                 result.append(attribute_detail.name)
         return result
 

@@ -45,8 +45,19 @@ class InteractiveEditor(SCFObject):
         return result
 
     @property
+    def target_attribute_tokens(self):
+        if hasattr(self, 'target_manifest'):
+            return self.make_target_attribute_tokens_from_target_manifest()
+        else:
+            raise ValueError
+
+    @property
     def target_class(self):
         return self.target_manifest.target_class
+
+    @property
+    def target_class_human_readable_name(self):
+        return self.change_string_to_human_readable_string(self.target_class.__name__)
 
     @property
     def target_keyword_attribute_names(self):
@@ -55,23 +66,27 @@ class InteractiveEditor(SCFObject):
             result.extend(self.target_manifest.keyword_attribute_names)
         return result
 
+    # TODO: deprecate and use two more specific labels instead
+#    @property
+#    def target_mandatory_attribute_names(self):
+#        result = []
+#        if hasattr(self, 'target_manifest'):
+#            result.extend(self.target_manifest.mandatory_attribute_names)
+#        return result
+
     @property
-    def target_mandatory_attribute_names(self):
+    def target_mandatory_initializer_argument_names(self):
         result = []
         if hasattr(self, 'target_manifest'):
-            result.extend(self.target_manifest.mandatory_attribute_names)
+            result.extend(self.target_manifest.mandatory_initializer_argument_names)
         return result
 
     @property
-    def target_attribute_tokens(self):
+    def target_mandatory_initializer_retrievable_attribute_names(self):
+        result = []
         if hasattr(self, 'target_manifest'):
-            return self.make_target_attribute_tokens_from_target_manifest()
-        else:
-            raise ValueError
-
-    @property
-    def target_class_human_readable_name(self):
-        return self.change_string_to_human_readable_string(self.target_class.__name__)
+            result.extend(self.target_manifest.mandatory_initializer_retrievable_attribute_names)
+        return result
 
     @property
     def target_name(self):
@@ -119,6 +134,7 @@ class InteractiveEditor(SCFObject):
             pass
 
     def conditionally_set_target_attribute(self, attribute_name, attribute_value):
+        self.debug((attribute_name, attribute_value))
         self.debug(self.target, 'target')
         self.debug(self.attributes_in_memory, 'attrs')
         if self.target is not None:
@@ -138,9 +154,13 @@ class InteractiveEditor(SCFObject):
 
     def copy_target_attributes_to_memory(self):
         self.initialize_attributes_in_memory()
-        for attribute_name in self.target_mandatory_attribute_names:
+        #for attribute_name in self.target_mandatory_attribute_names:
+        for attribute_name in self.target_mandatory_initializer_retrievable_attribute_names:
             attribute_value = getattr(self.target, attribute_name, None)
             if attribute_value is not None:
+                attribute_name = \
+                    self.target_manifest.change_retrievable_attribute_name_to_initializer_argument_name(
+                    attribute_name)
                 self.attributes_in_memory[attribute_name] = attribute_value
         for attribute_name in self.target_keyword_attribute_names:
             attribute_value = getattr(self.target, attribute_name, None)
@@ -170,7 +190,8 @@ class InteractiveEditor(SCFObject):
 
     def initialize_target_from_attributes_in_memory(self):
         args, kwargs = [], {}
-        for attribute_name in self.target_mandatory_attribute_names:
+        #for attribute_name in self.target_mandatory_attribute_names:
+        for attribute_name in self.target_mandatory_initializer_argument_names:
             if attribute_name in self.attributes_in_memory:
                 args.append(self.attributes_in_memory.get(attribute_name))
         for attribute_name in self.target_keyword_attribute_names:
