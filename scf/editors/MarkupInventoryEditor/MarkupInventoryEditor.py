@@ -12,8 +12,8 @@ class MarkupInventoryEditor(ObjectInventoryEditor):
     ### CLASS ATTRIBUTES ###
 
     item_class = markuptools.Markup
+    item_creator_class = MarkupEditor
     item_editor_class = MarkupEditor
-    item_getter_configuration_method = UserInputGetter.append_markup
     item_identifier = 'markup'
     target_manifest = TargetManifest(markuptools.MarkupInventory,
         ('inventory_name', 'name', 'nm', getters.get_string),
@@ -27,5 +27,6 @@ class MarkupInventoryEditor(ObjectInventoryEditor):
     def target_summary_lines(self):
         result = []
         for item in self.target:
-            result.append(repr(item))
+            label = item.markup_name or 'anonymous'
+            result.append('{}: {}'.format(label, item.format))
         return result
