@@ -22,6 +22,12 @@ class SCFObject(object):
     def __repr__(self):
         return '{}()'.format(self.class_name)
 
+    ### PRIVATE READ-ONLY PROPERTIES ###
+
+    @property
+    def _tcsh(self):
+        return self.session.testable_command_history_string
+
     ### READ-ONLY PUBLIC PROPERTIES ###
 
     @property
