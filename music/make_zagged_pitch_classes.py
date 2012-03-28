@@ -1,6 +1,7 @@
 from abjad import *
 from abjad.tools import sequencetools
 import baca
+import os
 
 
 def make_zagged_pitch_classes(pc_cells, division_cells, grouping_counts):
@@ -27,6 +28,10 @@ def make_illustration_from_output_material(material, **kwargs):
     staff = Staff([voice])
     score = Score([staff])
     illustration = lilypondfiletools.make_basic_lilypond_file(score)
+
+    stylesheet = os.path.join(os.environ.get('SCFPATH'), 'stylesheets', 'rhythm_letter_16.ly')
+    illustration.file_initial_user_includes.append(stylesheet)
+    
     voice.engraver_consists.add('Horizontal_bracket_engraver')
     for level in (1, 2):
         level_sizes = []
@@ -46,4 +51,18 @@ def make_illustration_from_output_material(material, **kwargs):
                 cur_group += 1
     bar_line = scoretools.add_double_bar_to_end_of_score(score)
     spanner = spannertools.Spanner(voice.leaves)
+
+    score.override.bar_line.stencil = False
+    score.override.flag.stencil = False
+    score.override.stem.stencil = False
+    score.override.text_script.staff_padding = 3
+    score.override.time_signature.stencil = False
+
+    if 'title' in kwargs:
+        illustration.header_block.title = markuptools.Markup(kwargs.get('title'))
+    if 'subtitle' in kwargs:
+        illustration.header_block.subtitle = markuptools.Markup(kwargs.get('subtitle'))
+
+    contexttools.set_accidental_style_on_sequential_contexts_in_expr(score, 'forget')
+
     return illustration
