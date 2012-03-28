@@ -23,6 +23,7 @@ def make_illustration_from_output_material(output_material, **kwargs):
     scoretools.add_double_bar_to_end_of_score(score)
 
     score.override.bar_line.transparent = True
+    score.override.rest.transparent = True
     score.override.span_bar.transparent = True
     score.override.time_signature.stencil = False
     score.set.proportional_notation_duration = schemetools.SchemeMoment(1, 4)
