@@ -36,8 +36,8 @@ class MusicSpecifier(Specifier, ObjectInventory):
     def _item_class(self):
         return MusicContributionSpecifer
     
-    ### PUBLIC READ-ONLY PROPERTIES ###
-
     @property
-    def one_line_menuing_summary(self):
+    def _one_line_menuing_summary(self):
         return self.music_specifier_name or 'music specifier'
+
+    ### PUBLIC READ-ONLY PROPERTIES ###

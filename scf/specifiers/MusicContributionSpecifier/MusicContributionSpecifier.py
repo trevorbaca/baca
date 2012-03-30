@@ -1,5 +1,6 @@
 from abjad.tools.datastructuretools.ObjectInventory import ObjectInventory
 from scf.specifiers.Specifier import Specifier
+from scf.specifiers.ArticulationSpecifier import ArticulationSpecifier
 
 
 class MusicContributionSpecifier(Specifier, ObjectInventory):
@@ -7,10 +8,21 @@ class MusicContributionSpecifier(Specifier, ObjectInventory):
     def __init__(self, parameter_specifiers, description=None, name=None):
         ObjectInventory.__init__(self, parameter_specifiers)
         Specifier.__init__(self, description=description, name=name)
+        self._articulations = ArticulationSpecifier
+
+    ### PIVATE READ-ONLY PROPERTIES ###
+
+    @property
+    def _one_line_menuing_summary(self):
+        value = self.name or 'unknown contribution'
+        return 'contribution: {}'.format(value)
 
     ### PUBLIC READ-ONLY PROPERTIES ###
 
     @property
-    def one_line_menuing_summary(self):
-        value = self.name or 'unknown contribution'
-        return 'contribution: {}'.format(value)
+    def articulations(self):
+        return self._articulations
+
+    @property
+    def directives(self):
+        return self._directives
