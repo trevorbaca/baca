@@ -11,6 +11,7 @@ from RegistrationSpecifier import RegistrationSpecifier
 from RhythmSpecifier import RhythmSpecifier
 from Specifier import Specifier
 from StaffSpecifier import StaffSpecifier
+from TempoSpecifier import TempoSpecifier
 from TrillSpecifier import TrillSpecifier
 from TropingSpecifier import TropingSpecifier
 from MusicSpecifier import MusicSpecifier

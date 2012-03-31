@@ -50,6 +50,5 @@ class Specifier(AbjadObject):
     def human_readable_class_name(self):
         return iotools.uppercamelcase_to_space_delimited_lowercase(self.class_name)
 
-    @abstractproperty
     def one_line_menuing_summary(self):
         pass
