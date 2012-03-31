@@ -5,9 +5,9 @@ from scf.specifiers.ArticulationSpecifier import ArticulationSpecifier
 
 class MusicContributionSpecifier(Specifier, ObjectInventory):
 
-    def __init__(self, parameter_specifiers, description=None, name=None):
+    def __init__(self, parameter_specifiers, description=None, name=None, source=None):
         ObjectInventory.__init__(self, parameter_specifiers)
-        Specifier.__init__(self, description=description, name=name)
+        Specifier.__init__(self, description=description, name=name, source=source)
         self._articulations = ArticulationSpecifier
 
     ### PIVATE READ-ONLY PROPERTIES ###

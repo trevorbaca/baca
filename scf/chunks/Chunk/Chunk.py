@@ -1,6 +1,9 @@
-from scf.core.SCFObject import SCFObject
+from abjad.tools.abctools.AbjadObject import AbjadObject
 
 
-class Chunk(SCFObject):
+class Chunk(AbjadObject):
 
-	pass
+    ### INITIALIZER ###
+
+    def __init__(self):
+        self._tempo = TempoSpecifier()

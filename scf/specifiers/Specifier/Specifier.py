@@ -12,9 +12,10 @@ class Specifier(AbjadObject):
 
     ### INITIALIZER ###
 
-    def __init__(self, description=None, name=None):
+    def __init__(self, description=None, name=None, source=None):
         self.description = description
         self.name = name
+        self.source = source
 
     ### SPECIAL METHODS ###
 
