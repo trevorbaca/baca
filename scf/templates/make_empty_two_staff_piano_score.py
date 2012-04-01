@@ -1,8 +1,8 @@
 from abjad import *
 
 
-def make_two_staff_piano_score():
-    '''Borrowed from Abjad.
+def make_empty_two_staff_piano_score():
+    '''Duplicates Abjad implementation.
     '''
 
     # make treble staff

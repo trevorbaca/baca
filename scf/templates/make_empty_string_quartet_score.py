@@ -1,7 +1,7 @@
 from abjad import *
 
 
-def make_string_quartet_score():
+def make_empty_string_quartet_score():
     
     # make first violin staff
     first_violin_staff = Staff(name='violin 1')
