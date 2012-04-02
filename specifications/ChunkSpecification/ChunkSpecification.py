@@ -56,23 +56,9 @@ class ChunkSpecification(object):
 
     ### PUBLIC METHODS ###
 
-    def append_chunk_directive(self, handler):
+    def set_chunk_directive(self, handler):
         selection = Selection(['Score'])
         directive = Directive(selection, handler)
-        self.directives.append(directive)
-
-    def append_voice_directive(self, voice_name, handler, seed=None):
-        selection = Selection([voice_name])
-        directive = Directive(selection, handler, seed=seed)
-        self.directives.append(directive)
-
-    def append_voice_directive_for_notes_and_chords(self, voice_name, n, handler, seed=None):
-        selection = Selection([])
-        if 0 < n:
-            selection.append_note_or_chord_constituent(voice_name, stop=n)
-        else:
-            selection.append_note_or_chord_constituent(voice_name, start=-n)
-        directive = Directive(selection, handler, seed=seed)
         self.directives.append(directive)
 
     def set_chunk_duration_in_seconds(self, duration_in_seconds):
@@ -119,6 +105,22 @@ class ChunkSpecification(object):
 
     def set_chunk_written_duration(self, written_duration):
         self.duration = DurationSpecification(written_duration, is_written=True)
+
+    def set_voice_directive(self, voice_name, handler, seed=None):
+        selection = Selection([voice_name])
+        directive = Directive(selection, handler, seed=seed)
+        self.directives.append(directive)
+
+    def set_voice_directive_for_notes_and_chords(self, voice_name, handler, n=None, seed=None):
+        selection = Selection([])
+        if n is None:
+            selection.append_note_and_chord_constituent(voice_name)
+        elif 0 < n:
+            selection.append_note_and_chord_constituent(voice_name, stop=n)
+        else:
+            selection.append_note_and_chord_constituent(voice_name, start=-n)
+        directive = Directive(selection, handler, seed=seed)
+        self.directives.append(directive)
 
     def set_voice_rhythm(self, voice_name, division_handler, rhythm_handler, seed=None):
         selection = Selection([voice_name])
