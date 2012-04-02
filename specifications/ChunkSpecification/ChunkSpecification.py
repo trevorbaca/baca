@@ -56,68 +56,72 @@ class ChunkSpecification(object):
 
     ### PUBLIC METHODS ###
 
-#    def append_directive(self):
-#        directive = Directive(chunk_name=self.name)
-#        self.directives.append(directive)
-#        return directive
-
-    def request_time_signatures(self, server, n, position=None):
-        self.time_signatures = StatalServerRequest(server, n, level=-1, position=position) 
-
-    def request_time_signatures_from_next_n_complete_nodes_at_level(self, server, n, level, position=None):
-        self.time_signatures = StatalServerRequest(server, n, complete=True, level=level, position=position)
-
-    def request_time_signatures_from_next_n_nodes_at_level(self, server, n, level, position=None):
-        self.time_signatures = StatalServerRequest(server, n, complete=False, level=level, position=position)
-
-    def request_time_signatures_not_less_than_duration_in_seconds(self, server, duration_in_seconds):
-        self.time_signatures = DurationStatalServerRequest(server, duration_in_seconds, criterion='not less')
-
-    def request_time_signatures_not_less_than_written_duration(self, server, written_duration):
-        self.time_signatures = DuratedStatalServerRequest(server, written_duration, criterion='not less')
-
-    def request_time_signatures_not_more_than_duration_in_seconds(self, server, duration_in_seconds):
-        self.time_signatures = DurationStatalServerRequest(server, duration_in_seconds, criterion='not more')
-
-    def request_time_signatures_not_more_than_written_duration(self, server, written_duration):
-        self.time_signatures = DuratedStatalServerRequest(server, written_duration, criterion='not more')
-    
-    def set_chords_for_voice(self, voice_name, chord_handler):
-        selection = Selection([voice_name])
-        directive = Directive(selection, chord_handler)
-        self.directives.append(directive)
-
-    def set_dynamics_for_voice(self, voice_name, dynamic_handler):
-        selection = Selection([voice_name])
-        directive = Directive(selection, dynamic_handler)
-        self.directives.append(directive)
-
-    def set_timewise_pitch_classes(self, pitch_class_server):
-        selection = Selection(['chunk'])
-        handler = TimewisePitchClassHandler(pitch_class_server)
+    def append_chunk_directive(self, handler):
+        selection = Selection(['Score'])
         directive = Directive(selection, handler)
         self.directives.append(directive)
 
-    def set_rhythm_for_voice(self, voice_name, division_handler, rhythm_handler):
+    def append_voice_directive(self, voice_name, handler, seed=None):
         selection = Selection([voice_name])
-        composite_rhythm_handler = CompositeRhythmHandler(division_handler, rhythm_handler)
-        directive = Directive(selection, composite_rhythm_handler)
+        directive = Directive(selection, handler, seed=seed)
         self.directives.append(directive)
 
-    def set_time_signatures(self, time_signatures):
-        self.time_signatures = time_signatures
+    def append_voice_directive_for_notes_and_chords(self, voice_name, n, handler, seed=None):
+        selection = Selection([])
+        if 0 < n:
+            selection.append_note_or_chord_constituent(voice_name, stop=n)
+        else:
+            selection.append_note_or_chord_constituent(voice_name, start=-n)
+        directive = Directive(selection, handler, seed=seed)
+        self.directives.append(directive)
 
-    def set_duration_in_seconds(self, duration_in_seconds):
+    def set_chunk_duration_in_seconds(self, duration_in_seconds):
         self.duration = DurationSpecification(duration_in_seconds, is_written=False)
 
-    def set_score_template(self, score_template):
+    def set_chunk_pitch_classes_timewise(self, pitch_class_server, seed=None):
+        selection = Selection(['chunk'])
+        handler = TimewisePitchClassHandler(pitch_class_server)
+        directive = Directive(selection, handler, seed=seed)
+        self.directives.append(directive)
+
+    def set_chunk_score_template(self, score_template):
         self.score_template = score_template
 
-    def set_tempo(self, tempo):
+    def set_chunk_tempo(self, tempo):
         self.tempo = tempo
 
-    def set_tempo_relative_to_chunk(self, chunk_name):
+    def set_chunk_tempo_relative_to_chunk(self, chunk_name):
         self.tempo = RelativeReference(chunk_name, 'tempo')
 
-    def set_written_duration(self, written_duration):
+    def set_chunk_time_signatures(self, time_signatures):
+        self.time_signatures = time_signatures
+
+    def set_chunk_time_signatures_from_count(self, server, n, position=None):
+        self.time_signatures = StatalServerRequest(server, n, level=-1, position=position) 
+
+    def set_chunk_time_signatures_from_next_n_complete_nodes_at_level(self, server, n, level, position=None):
+        self.time_signatures = StatalServerRequest(server, n, complete=True, level=level, position=position)
+
+    def set_chunk_time_signatures_from_next_n_nodes_at_level(self, server, n, level, position=None):
+        self.time_signatures = StatalServerRequest(server, n, complete=False, level=level, position=position)
+
+    def set_chunk_time_signatures_not_less_than_duration_in_seconds(self, server, duration_in_seconds):
+        self.time_signatures = DurationStatalServerRequest(server, duration_in_seconds, criterion='not less')
+
+    def set_chunk_time_signatures_not_less_than_written_duration(self, server, written_duration):
+        self.time_signatures = DuratedStatalServerRequest(server, written_duration, criterion='not less')
+
+    def set_chunk_time_signatures_not_more_than_duration_in_seconds(self, server, duration_in_seconds):
+        self.time_signatures = DurationStatalServerRequest(server, duration_in_seconds, criterion='not more')
+
+    def set_chunk_time_signatures_not_more_than_written_duration(self, server, written_duration):
+        self.time_signatures = DuratedStatalServerRequest(server, written_duration, criterion='not more')
+
+    def set_chunk_written_duration(self, written_duration):
         self.duration = DurationSpecification(written_duration, is_written=True)
+
+    def set_voice_rhythm(self, voice_name, division_handler, rhythm_handler, seed=None):
+        selection = Selection([voice_name])
+        composite_rhythm_handler = CompositeRhythmHandler(division_handler, rhythm_handler)
+        directive = Directive(selection, composite_rhythm_handler, seed=seed)
+        self.directives.append(directive)
