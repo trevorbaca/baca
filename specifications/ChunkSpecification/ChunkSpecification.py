@@ -1,3 +1,4 @@
+from baca.handlers.composites.CompositeRhythmHandler import CompositeRhythmHandler
 from baca.specifications.Directive import Directive
 from baca.specifications.DuratedStatalServerRequest import DuratedStatalServerRequest
 from baca.specifications.DurationSpecification import DurationSpecification
@@ -78,6 +79,17 @@ class ChunkSpecification(object):
 
     def request_time_signatures_not_more_than_written_duration(self, server, written_duration):
         self.time_signatures = DuratedStatalServerRequest(server, written_duration, criterion='not more')
+    
+    def set_chords_for_voice(self, voice_name, chord_handler):
+        selection = Selection(voice_name)
+        directive = Directive(selection, chord_handler)
+        self.append_directive(directive)
+
+    def set_rhythm_for_voice(self, voice_name, division_handler, rhythm_handler):
+        selection = Selection(voice_name)
+        composite_rhythm_handler = CompositeRhythmHandler(division_handler, rhythm_handler)
+        directive = Directive(selection, composite_rhythm_handler)
+        self.append_directive(directive)
 
     def set_time_signatures(self, time_signatures):
         self.time_signatures = time_signatures

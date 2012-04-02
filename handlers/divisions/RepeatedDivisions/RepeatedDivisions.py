@@ -10,12 +10,11 @@ class RepeatedDivisions(DivisionHandler):
         self.divisions = sequencetools.CyclicTuple(divisions)
         self.remainder = remainder
 
-    ### PUBLIC METHODS ###
+    ### SPECIAL METHODS ###
 
-    def apply(self, time_signatures):
+    def __call__(self, time_signatures):
         result = []
         total_duration = sum([durationtools.Duration(x) for x in time_signatures])
         for division in self.divisions:
             if sum(result) < total_duration:
-                # TODO: finish implementation
                 pass

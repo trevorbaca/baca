@@ -5,5 +5,6 @@ from DuratedStatalServer import DuratedStatalServer
 from DuratedStatalServerRequest import DuratedStatalServerRequest
 from RelativeReference import RelativeReference
 from Selection import Selection
+from SpecificationInterpreter import SpecificationInterpreter
 from StatalServer import StatalServer
 from StatalServerRequest import StatalServerRequest

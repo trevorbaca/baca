@@ -5,11 +5,9 @@ class Directive(object):
 
     ### INITIALIZER ###
 
-    def __init__(self, chunk_name=None):
-        self.chunk_name = chunk_name
-        self.divion_handler = None
-        self.selection = None
-        self.rhythm_handler = None
+    def __init__(self, selection, handler):
+        self.selection = selection
+        self.handler = handler
 
     ### PUBLIC METHODS ###
 
