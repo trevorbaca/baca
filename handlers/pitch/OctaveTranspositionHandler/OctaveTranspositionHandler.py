@@ -1,3 +1,4 @@
+from abjad.tools import leaftools
 from abjad.tools import pitchtools
 from handlers.pitch.PitchHandler import PitchHandler
 
@@ -12,6 +13,15 @@ class OctaveTranspositionHandler(PitchHandler):
 
     ### SPECIAL METHODS ###
 
-    # TODO: implement based on L'archipel register_pitches.py
     def __call__(self, expr):
-        pass   
+        for leaf in leaftools.iterate_leaves_forward_in_expr(expr):
+            if isinstance(leaf, Note):
+                n = leaf.pitch.chromatic_pitch_number
+                n = pitchtools.transpose_chromatic_pitch_number_by_octave_transposition_mapping(
+                    n, self.octave_transposition_mapping)
+                leaf.pitch = n
+            elif isinstance(leaf, Chord):
+                nn = [nh.pitch.chromatic_pitch_number for nh in leaf]
+                nn = [pitchtools.transpose_chromatic_pitch_number_by_octave_transposition_mapping(
+                    n, self.octave_transposition_mapping) for n in nn]
+                leaf.pitches = nn
