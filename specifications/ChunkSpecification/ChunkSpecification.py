@@ -1,8 +1,10 @@
 from baca.handlers.composites.CompositeRhythmHandler import CompositeRhythmHandler
+from baca.handlers.pitch.TimewisePitchClassHandler import TimewisePitchClassHandler
 from baca.specifications.Directive import Directive
 from baca.specifications.DuratedStatalServerRequest import DuratedStatalServerRequest
 from baca.specifications.DurationSpecification import DurationSpecification
 from baca.specifications.RelativeReference import RelativeReference
+from baca.specifications.Selection import Selection
 from baca.specifications.StatalServerRequest import StatalServerRequest
 
 
@@ -54,10 +56,10 @@ class ChunkSpecification(object):
 
     ### PUBLIC METHODS ###
 
-    def append_directive(self):
-        directive = Directive(chunk_name=self.name)
-        self.directives.append(directive)
-        return directive
+#    def append_directive(self):
+#        directive = Directive(chunk_name=self.name)
+#        self.directives.append(directive)
+#        return directive
 
     def request_time_signatures(self, server, n, position=None):
         self.time_signatures = StatalServerRequest(server, n, level=-1, position=position) 
@@ -81,15 +83,26 @@ class ChunkSpecification(object):
         self.time_signatures = DuratedStatalServerRequest(server, written_duration, criterion='not more')
     
     def set_chords_for_voice(self, voice_name, chord_handler):
-        selection = Selection(voice_name)
+        selection = Selection([voice_name])
         directive = Directive(selection, chord_handler)
-        self.append_directive(directive)
+        self.directives.append(directive)
+
+    def set_dynamics_for_voice(self, voice_name, dynamic_handler):
+        selection = Selection([voice_name])
+        directive = Directive(selection, dynamic_handler)
+        self.directives.append(directive)
+
+    def set_timewise_pitch_classes(self, pitch_class_server):
+        selection = Selection(['chunk'])
+        handler = TimewisePitchClassHandler(pitch_class_server)
+        directive = Directive(selection, handler)
+        self.directives.append(directive)
 
     def set_rhythm_for_voice(self, voice_name, division_handler, rhythm_handler):
-        selection = Selection(voice_name)
+        selection = Selection([voice_name])
         composite_rhythm_handler = CompositeRhythmHandler(division_handler, rhythm_handler)
         directive = Directive(selection, composite_rhythm_handler)
-        self.append_directive(directive)
+        self.directives.append(directive)
 
     def set_time_signatures(self, time_signatures):
         self.time_signatures = time_signatures

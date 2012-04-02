@@ -1,2 +1,3 @@
 from DiatonicClusterHandler import DiatonicClusterHandler
 from PitchHandler import PitchHandler
+from TimewisePitchClassHandler import TimewisePitchClassHandler

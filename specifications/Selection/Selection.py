@@ -2,8 +2,8 @@ class Selection(object):
 
     ### INITIALIZER ###
 
-    def __init__(self):
-        self.constituents = []
+    def __init__(self, constituents=None):
+        self.constituents = constituents or []
 
     ### PUBLIC METHODS ###
 

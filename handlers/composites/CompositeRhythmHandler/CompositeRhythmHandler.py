@@ -5,9 +5,9 @@ class CompositeRhythmHandler(Handler):
 
     ### INITIALIZER ###
 
-    def __init__(self, division_handler, rhyhthm_handler):
+    def __init__(self, division_handler, rhythm_handler):
         self.division_handler = division_handler
-        self.rhythm_handler = rhyhtm_handler
+        self.rhythm_handler = rhythm_handler
 
     ### SPECIAL METHODS ###
 

@@ -22,9 +22,3 @@ class DivisionHandler(Handler):
     @property
     def _tools_package(self):
         return 'handlers.divisions'
-
-    ### PUBLIC METHODS ###
-
-    @abstractmethod
-    def apply(self):
-        pass
