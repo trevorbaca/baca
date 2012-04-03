@@ -7,6 +7,5 @@ from RelativeReference import RelativeReference
 from ScoreSpecification import ScoreSpecification
 from ScoreSegmentSpecification import ScoreSegmentSpecification
 from Selection import Selection
-from SpecificationInterpreter import SpecificationInterpreter
 from StatalServer import StatalServer
 from StatalServerRequest import StatalServerRequest
