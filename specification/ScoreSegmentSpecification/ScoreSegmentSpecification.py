@@ -3,7 +3,6 @@ from baca.handlers.pitch.TimewisePitchClassHandler import TimewisePitchClassHand
 from baca.specification.Directive import Directive
 from baca.specification.DuratedStatalServerRequest import DuratedStatalServerRequest
 from baca.specification.DurationSpecification import DurationSpecification
-from baca.specification.ParameterEnumeration import ParameterEnumeration
 from baca.specification.RelativeReference import RelativeReference
 from baca.specification.Selection import Selection
 from baca.specification.StatalServerRequest import StatalServerRequest
@@ -12,143 +11,201 @@ from baca.specification.StatalServerRequest import StatalServerRequest
 class ScoreSegmentSpecification(object):
 
     ### CLASS ATTRIBUTES ###
-    
-    attribute_names = (
-        'duration_in_seconds',
-        'name',
-        'score_template',
-        'tempo',
-        'time_signatures',
-        'written_duration',
-        )
 
-    parameters = ParameterEnumeration()
+    class Attrs(object):
+        aggregate = 'aggregate'
+        articulations = 'articulations'
+        duration_in_seconds = 'duration_in_seconds'
+        chords = 'chords'
+        dynamics = 'dynamics'
+        marks = 'marks'
+        markup = 'markup'
+        pitch = 'pitch'
+        pitch_classes = 'pitch_classes'
+        register = 'register'
+        rhythm = 'rhythm'
+        tempo = 'tempo'
+        time_signatures = 'time_signatures'
+        transform = 'transform'
+        written_duration = 'written_duration'
+
+    attrs = Attrs()
 
     ### INITIALIZER ###
 
-    def __init__(self,
-        directives=None,
-        duration=None,
-        time_signatures=None,
-        name=None,
-        score_template=None,
-        tempo=None,
-        ):
+    def __init__(self, directives=None, name=None, score_template=None):
         self.directives = directives or []
-        self.duration = duration
-        self.time_signatures = time_signatures
         self.name = name
         self.score_template = score_template
-        self.tempo = tempo
+
+    ### SPECIAL METHODS ###
+
+    def __len__(self):
+        return len(self.directives)
+
+    def __repr__(self):
+        return '{}({!r})'.format(type(self).__name__, self.name)
 
     ### READ-ONLY PUBLIC ATTRIBUTES ###
 
     @property
-    def has_relative_references(self):
-        return not self.relative_references
+    def has_relative_directives(self):
+        return not self.relative_directives
 
     @property
-    def relative_references(self):
+    def relative_directives(self):
         result = []
-        for attribute_name in self.attribute_names:
-            directive = getattr(self, attribute_name)
+        for directive in self.directives:
             if directive.is_relative:
                 result.append(directive)
         return result
 
     ### PUBLIC METHODS ###
 
-    def select(self, chunk_name=None, context_name=None, criterion=None, start=None, stop=None):
-        chunk_name = chunk_name or self.name
+    def select(self, score_segment_name=None, context_name=None, 
+        criterion=None, selection_token=None, start=None, stop=None):
+        #if selection_token is not None:
+        #    raise NotImplementedError
+        score_segment_name = score_segment_name or self.name
         selection = Selection(
-            chunk_name=chunk_name, context_name=context_name,
+            score_segment_name=score_segment_name, context_name=context_name,
             criterion=criterion, start=start, stop=stop)
         return selection
 
-    def set_all_voice_directives_relative_to(self, target_voice_name, source_selection_token):
-        target_selection = Selection(context_name=target_voice_name)
+    def set_all_voice_directives_relative_to(self, voice_name, source_selection_token):
+        target_selection = Selection(context_name=voice_name)
         source_selection = Selection(source_selection_token)
         directive = Directive(target_selection, 'everything', source_selection)
         self.directives.append(directive)
 
-    def set_segment_directive(self, handler):
-        selection = Selection(['Score'])
-        directive = Directive(selection, handler)
+    def set_segment_aggregate(self, aggregate):
+        target_selection = self.select()
+        directive = Directive(target_selection, self.attrs.aggregate, aggregate)
+        self.directives.append(directive)
+
+    def set_segment_aggregate_to_aggregate_at_position(self, server, position):
+        target_selection = self.select()
+        handler = StatalServerRequest(server, position=position)
+        directive = Directive(target_selection, self.attrs.aggregate, handler)
+        self.directives.append(directive)
+
+    def set_segment_aggregate_to_next_aggregate(self, server):
+        target_selection = self.select()
+        handler = StatalServerRequest(server, 1, level=-1)
+        directive = Directive(target_selection, self.attrs.aggregate, handler)
         self.directives.append(directive)
 
     def set_segment_duration_in_seconds(self, duration_in_seconds):
-        self.duration = DurationSpecification(duration_in_seconds, is_written=False)
+        target_selection = self.select()
+        directive = Directive(target_selection, self.attrs.duration_in_seconds, duration_in_seconds)
+        self.directives.append(directive)
+
+    def set_segment_pitch_class_transform(self, transform):
+        target_selection = self.select()
+        directive = Directive(target_selection, self.attrs.transform, transform)
+        self.directives.append(directive)
 
     def set_segment_pitch_classes_timewise(self, pitch_class_server, seed=None):
-        selection = Selection(['segment'])
+        target_selection = self.select()
         handler = TimewisePitchClassHandler(pitch_class_server)
-        directive = Directive(selection, handler, seed=seed)
+        directive = Directive(target_selection, self.attrs.pitch_classes, handler, seed=seed)
         self.directives.append(directive)
-
-    def set_segment_score_template(self, score_template):
-        self.score_template = score_template
 
     def set_segment_tempo(self, tempo):
-        self.tempo = tempo
-
-    def set_segment_tempo_relative_to_segment(self, source_segment_name):
-        source_selection = Selection(segment_name=source_segment_name)
-        self.tempo = RelativeReference(source_selection, 'tempo')
-
-    def set_segment_time_signatures(self, time_signatures):
-        self.time_signatures = time_signatures
-
-    def set_segment_time_signatures_from_count(self, server, n, position=None):
-        self.time_signatures = StatalServerRequest(server, n, level=-1, position=position) 
-
-    def set_segment_time_signatures_from_next_n_complete_nodes_at_level(self, server, n, level, position=None):
-        self.time_signatures = StatalServerRequest(server, n, complete=True, level=level, position=position)
-
-    def set_segment_time_signatures_from_next_n_nodes_at_level(self, server, n, level, position=None):
-        self.time_signatures = StatalServerRequest(server, n, complete=False, level=level, position=position)
-
-    def set_segment_time_signatures_not_less_than_duration_in_seconds(self, server, duration_in_seconds):
-        self.time_signatures = DurationStatalServerRequest(server, duration_in_seconds, criterion='not less')
-
-    def set_segment_time_signatures_not_less_than_written_duration(self, server, written_duration):
-        self.time_signatures = DuratedStatalServerRequest(server, written_duration, criterion='not less')
-
-    def set_segment_time_signatures_not_more_than_duration_in_seconds(self, server, duration_in_seconds):
-        self.time_signatures = DurationStatalServerRequest(server, duration_in_seconds, criterion='not more')
-
-    def set_segment_time_signatures_not_more_than_written_duration(self, server, written_duration):
-        self.time_signatures = DuratedStatalServerRequest(server, written_duration, criterion='not more')
-
-    def set_segment_written_duration(self, written_duration):
-        self.duration = DurationSpecification(written_duration, is_written=True)
-
-    def set_voice_directive(self, voice_name, handler, seed=None):
-        selection = Selection([voice_name])
-        directive = Directive(selection, handler, seed=seed)
+        target_selection = self.select()
+        directive = Directive(target_selection, self.attrs.tempo, tempo)
         self.directives.append(directive)
 
-    def set_voice_directive_for_notes_and_chords(self, voice_name, handler, n=None, seed=None):
-        selection = Selection([])
-        if n is None:
-            selection.append_note_and_chord_constituent(voice_name)
-        elif 0 < n:
-            selection.append_note_and_chord_constituent(voice_name, stop=n)
-        else:
-            selection.append_note_and_chord_constituent(voice_name, start=-n)
-        directive = Directive(selection, handler, seed=seed)
+    def set_segment_tempo_relative_to_segment(self, source_segment_name):
+        target_selection = self.select()
+        source_selection = Selection(score_segment_name=source_segment_name)
+        directive = Directive(target_selection, self.attrs.tempo, source_selection)
+        self.directives.append(directive)
+
+    def set_segment_time_signatures(self, time_signatures):
+        target_selection = self.select()
+        directive = Directive(target_selection, self.attrs.time_signatures, time_signatures)
+        self.directives.append(directive)
+
+    def set_segment_time_signatures_from_count(self, server, n, position=None):
+        target_selection = self.select()
+        handler = StatalServerRequest(server, n, level=-1, position=position) 
+        directive = Directive(target_selection, self.attrs.time_signatures, handler)
+
+    def set_segment_time_signatures_from_next_n_complete_nodes_at_level(self, server, n, level, position=None):
+        target_selection = self.select()
+        handler = StatalServerRequest(server, n, complete=True, level=level, position=position)
+        directive = Directive(target_selection, self.attrs.time_signatures, handler)
+
+    def set_segment_time_signatures_from_next_n_nodes_at_level(self, server, n, level, position=None):
+        target_selection = self.select()
+        handler = StatalServerRequest(server, n, complete=False, level=level, position=position)
+        directive = Directive(target_selection, self.attrs.time_signatures, handler)
+
+    def set_segment_time_signatures_not_less_than_duration_in_seconds(self, server, duration_in_seconds):
+        target_selection = self.select()
+        handler = DurationStatalServerRequest(server, duration_in_seconds, criterion='not less')
+        directive = Directive(target_selection, self.attrs.time_signatures, handler)
+
+    def set_segment_time_signatures_not_less_than_written_duration(self, server, written_duration):
+        target_selection = self.select()
+        handler = DuratedStatalServerRequest(server, written_duration, criterion='not less')
+        directive = Directive(target_selection, self.attrs.time_signatures, handler)
+
+    def set_segment_time_signatures_not_more_than_duration_in_seconds(self, server, duration_in_seconds):
+        target_selection = self.select()
+        handler = DurationStatalServerRequest(server, duration_in_seconds, criterion='not more')
+        directive = Directive(target_selection, self.attrs.time_signatures, handler)
+
+    def set_segment_time_signatures_not_more_than_written_duration(self, server, written_duration):
+        target_selection = self.select()
+        handler = DuratedStatalServerRequest(server, written_duration, criterion='not more')
+        directive = Directive(target_selection, self.attrs.time_signatures, handler)
+
+    def set_segment_written_duration(self, written_duration):
+        target_selection = self.select()
+        directive = Directive(target_selection, self.attrs.written_duration, written_duration)
+        self.directives.append(directive)
+
+    def set_voice_articulations(self, voice_name, handler, seed=None):
+        target_selection = self.select(context_name=voice_name)
+        directive = Directive(target_selection, self.attrs.articulations, handler, seed=seed)
+        self.directives.append(directive)
+
+    def set_voice_chords(self, voice_name, handler, seed=None):
+        target_selection = self.select(context_name=voice_name)
+        directive = Directive(target_selection, self.attrs.chords, handler, seed=seed)
         self.directives.append(directive)
 
     def set_voice_dynamics(self, voice_name, handler, seed=None):
         target_selection = self.select(context_name=voice_name)
-        directive = Directive(target_selection, self.parameters.dynamics, handler, seed=seed)
-
-    def set_voice_dynamics_relative_to(self, voice_name, selection_token):
-        source, target = Selection(selection_token), Selection([voice_name])
-        directive = Directive(target, self.parameters.dynamics, source)
+        directive = Directive(target_selection, self.attrs.dynamics, handler, seed=seed)
         self.directives.append(directive)
 
-    def set_voice_rhythm(self, voice_name, division_handler, rhythm_handler, seed=None):
-        selection = Selection([voice_name])
-        composite_rhythm_handler = CompositeRhythmHandler(division_handler, rhythm_handler)
-        directive = Directive(selection, composite_rhythm_handler, seed=seed)
+    def set_voice_dynamics_relative_to(self, voice_name, source_selection_token):
+        target_selection = self.select(context_name=voice_name)
+        source_selection = self.select(selection_token=source_selection_token)
+        directive = Directive(target_selection, self.attrs.dynamics, source_selection)
+        self.directives.append(directive)
+
+    def set_voice_marks(self, voice_name, handler, seed=None):
+        target_selection = self.select(context_name=voice_name)
+        directive = Directive(target_selection, self.attrs.marks, handler, seed=seed)
+        self.directives.append(directive)
+
+    def set_voice_markup(self, voice_name, handler, seed=None, **kwargs):
+        target_selection = self.select(context_name=voice_name, **kwargs)
+        directive = Directive(target_selection, handler, handler, seed=seed)
+        self.directives.append(directive) 
+
+    def set_voice_register(self, voice_name, handler, seed=None, **kwargs):
+        target_selection = self.select(context_name=voice_name, **kwargs)
+        directive = Directive(target_selection, self.attrs.register, handler, seed=seed)
+        self.directives.append(directive)
+
+    def set_voice_rhythm(self, voice_name, handler_token, seed=None):
+        target_selection = self.select(context_name=voice_name)
+        division_handler, rhythm_handler = handler_token
+        handler = CompositeRhythmHandler(division_handler, rhythm_handler)
+        directive = Directive(target_selection, self.attrs.rhythm, handler, seed=seed)
         self.directives.append(directive)
