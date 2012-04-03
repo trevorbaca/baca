@@ -1,10 +1,7 @@
-
-
-
 class RelativeReference(object):
 
-    ### INIITIALIZER ###
+    ### INITIALIZER ###
 
-    def __init__(self, chunk_name, attribute_name):
-        self.chunk_name = chunk_name
+    def __init__(self, source_selection, attribute_name):
+        self.source_selection = source_selection
         self.attribute_name = attribute_name
