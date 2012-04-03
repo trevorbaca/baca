@@ -1,4 +1,4 @@
-from baca.specifications.Selection import Selection
+from baca.specification.Selection import Selection
 
 
 class Directive(object):

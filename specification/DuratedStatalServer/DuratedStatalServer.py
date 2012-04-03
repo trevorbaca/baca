@@ -1,5 +1,5 @@
-from baca.specifications.DuratedStatalServerRequest import DuratedStatalServerRequest
-from baca.specifications.StatalServer import StatalServer
+from baca.specification.DuratedStatalServerRequest import DuratedStatalServerRequest
+from baca.specification.StatalServer import StatalServer
 
 
 # TODO: implement & write tests

@@ -1,4 +1,4 @@
-from baca.specifications.ChunkSpecification import ChunkSpecification
+from baca.specification.ScoreSegmentSpecification import ScoreSegmentSpecification
 
 
 class ScoreSpecification(object):
@@ -6,7 +6,7 @@ class ScoreSpecification(object):
    ### INITIALIZER ###
 
     def __init__(self, segment_specification_class=None, segments=None):
-        self.segment_specification_class = segment_specification_class or ChunkSpecification
+        self.segment_specification_class = segment_specification_class or ScoreSegmentSpecification
         self.segments = segments or []
 
     ### SPECIAL METHODS ###

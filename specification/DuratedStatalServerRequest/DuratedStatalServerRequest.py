@@ -1,4 +1,4 @@
-from baca.specifications.StatalServerRequest import StatalServerRequest
+from baca.specification.StatalServerRequest import StatalServerRequest
 
 
 class DuratedStatalServerRequest(StatalServerRequest):

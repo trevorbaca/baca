@@ -1,4 +1,4 @@
-from baca.specifications.Constituent import Constituent
+from baca.specification.Constituent import Constituent
 
 
 class Selection(object):
@@ -17,9 +17,9 @@ class Selection(object):
     ### PUBLIC METHODS ###
 
     def append_constituent(self, 
-        chunk_name=None, context_name=None, criterion=criterion, start=None, stop=None):
+        chunk_name=None, context_name=None, criterion=None, start=None, stop=None):
         constituent = Constitutent(
-            chunk_name=None, context_name=None, criterion=criterion, start=None, stop=None):
+            chunk_name=None, context_name=None, criterion=criterion, start=None, stop=None)
         self.constituents.append(constituent)
 
     def append_note_and_chord_constituent(self, 

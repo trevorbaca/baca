@@ -1,15 +1,15 @@
 from baca.handlers.composites.CompositeRhythmHandler import CompositeRhythmHandler
 from baca.handlers.pitch.TimewisePitchClassHandler import TimewisePitchClassHandler
-from baca.specifications.Directive import Directive
-from baca.specifications.DuratedStatalServerRequest import DuratedStatalServerRequest
-from baca.specifications.DurationSpecification import DurationSpecification
-from baca.specifications.ParameterEnumeration import ParameterEnumeration
-from baca.specifications.RelativeReference import RelativeReference
-from baca.specifications.Selection import Selection
-from baca.specifications.StatalServerRequest import StatalServerRequest
+from baca.specification.Directive import Directive
+from baca.specification.DuratedStatalServerRequest import DuratedStatalServerRequest
+from baca.specification.DurationSpecification import DurationSpecification
+from baca.specification.ParameterEnumeration import ParameterEnumeration
+from baca.specification.RelativeReference import RelativeReference
+from baca.specification.Selection import Selection
+from baca.specification.StatalServerRequest import StatalServerRequest
 
 
-class ChunkSpecification(object):
+class ScoreSegmentSpecification(object):
 
     ### CLASS ATTRIBUTES ###
     
