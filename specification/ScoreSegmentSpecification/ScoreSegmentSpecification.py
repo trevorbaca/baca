@@ -37,6 +37,7 @@ class ScoreSegmentSpecification(object):
         self.directives = directives or []
         self.name = name
         self.score_template = score_template
+        self.is_pending = True
 
     ### SPECIAL METHODS ###
 
@@ -68,14 +69,19 @@ class ScoreSegmentSpecification(object):
 
     ### PUBLIC METHODS ###
 
-    # TODO: implement
-    def get_directive(self, target_selection=None, attribute_name=None, source=None):
-        pass
+    def get_directives(self, target_selection=None, attribute_name=None):
+        result = []
+        for directive in self.directives:
+            if target_selection is None or directive.target_selection == target_selection:
+                if attribute_name is None or directive.attribute_name == attribute_name:
+                    result.append(directive)
+        return result
+
+    def instantiate_score(self):
+        self.score = self.score_template()
 
     def select(self, context_name=None, criterion=None, selection_token=None, 
         score_segment_name=None, start=None, stop=None):
-        #if selection_token is not None:
-        #    raise NotImplementedError
         score_segment_name = score_segment_name or self.name
         selection = Selection(
             score_segment_name=score_segment_name, context_name=context_name,

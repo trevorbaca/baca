@@ -1,20 +1,9 @@
 from baca.specification.ScoreSegmentSpecification import ScoreSegmentSpecification
+from baca.specification.Selection import Selection
+from baca.specification.InterpretationSettings import InterpretationSettings
 
 
 class ScoreSpecification(object):
-
-    class InterpretationValues(object):
-
-        def __init__(self):
-            self.aggregate = None
-            self.articulations = None
-            self.dynamics = None
-            self.pitch_classes = None
-            self.register = None
-            self.tempo = None
-            self.transform = None
-
-    current = InterpretationValues()
 
     ### INITIALIZER ###
 
@@ -51,16 +40,27 @@ class ScoreSpecification(object):
         self.segments.append(segment)
         return segment
 
-    # TODO: implement
     def interpret_segment(self, segment):
-        pass
+        segment.instantiate_score()
+        self.interpret_segment_tempo(segment)
+        raise Exception
 
-    # TODO: implement
-    def interpret_segments(self, segments=None):
-        segments = segments or self[:]
-        for segment in segments:
-            pass
+    def interpret_segment_tempo(self, segment):
+        selection = segment.select()
+        directives = segment.get_directives(target_selection=selection, attribute_name=segment.attrs.tempo)
+        assert 1 <= len(directives)
+        for directive in directives:
+            setting = self.resolve_source(directive.source)
+            self.settings.tempo.store_value(setting, directive.is_persistent) 
 
-    # TODO: implement
-    def make_score(self):
-        pass
+    def interpret_segments(self):
+        self.settings = InterpretationSettings()
+        while any([segment.is_pending for segment in self.segments]):
+            for segment in self.segments:
+                self.interpret_segment(segment)
+
+    def resolve_source(self, source):
+        if isinstance(source, Selection):
+            raise NotImplementedError(repr(source))
+        else:
+            return source

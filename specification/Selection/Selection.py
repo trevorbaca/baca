@@ -1,4 +1,7 @@
-class Selection(object):
+from abjad.tools.abctools.AbjadObject import AbjadObject
+
+
+class Selection(AbjadObject):
 
     ### INITIALIZER ###
 
@@ -11,12 +14,15 @@ class Selection(object):
 
     ### SPECIAL METHODS ###
 
-    def __repr__(self):
-        result = []
-        keyword_argument_names = ('context_name', 'criterion', 'score_segment_name', 'start', 'stop')
-        for keyword_argument_name in keyword_argument_names:
-            value = getattr(self, keyword_argument_name)
-            if value is not None:
-                result.append('{}={!r}'.format(keyword_argument_name, value))
-        result = ', '.join(result)
-        return '{}({})'.format(type(self).__name__, result)
+    def __eq__(self, expr):
+        if not isinstance(expr, type(self)):
+            return False
+        if not self._mandatory_argument_values == expr._mandatory_argument_values:
+            return False
+        for keyword_argument_name in self._keyword_argument_names:
+            if not getattr(self, keyword_argument_name) == getattr(expr, keyword_argument_name):
+                return False
+        return True
+
+    def __ne__(self, expr):
+        return not self == expr
