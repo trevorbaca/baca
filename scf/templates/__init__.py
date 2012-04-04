@@ -1,2 +1,2 @@
-from make_empty_string_quartet_score import make_empty_string_quartet_score
-from make_empty_two_staff_piano_score import make_empty_two_staff_piano_score
+from StringQuartetScoreTemplate import StringQuartetScoreTemplate
+from TwoStaffPianoScoreTemplate import TwoStaffPianoScoreTemplate

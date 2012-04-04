@@ -1,9 +1,10 @@
 import scf
 
 
-def test_make_empty_two_staff_piano_score_01():
+def test_TwoStaffPianoScoreTemplate___call___01():
 
-    score = scf.templates.make_empty_two_staff_piano_score()
+    template = scf.templates.TwoStaffPianoScoreTemplate()
+    score = template()
 
     r'''
     \new Score <<

@@ -1,9 +1,10 @@
 import scf
 
 
-def test_make_empty_string_quartet_score_01():
+def test_StringQuartetScoreTemplate___call___01():
 
-    score = scf.templates.make_empty_string_quartet_score()
+    template = scf.templates.StringQuartetScoreTemplate()
+    score = template()
 
     r'''
     \new Score <<

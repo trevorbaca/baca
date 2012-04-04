@@ -5,7 +5,8 @@ class ScoreSpecification(object):
 
     ### INITIALIZER ###
 
-    def __init__(self, score_segment_specification_class=None, segments=None):
+    def __init__(self, default_score_template=None, score_segment_specification_class=None, segments=None):
+        self.default_score_template = default_score_template
         self.score_segment_specification_class = score_segment_specification_class or ScoreSegmentSpecification
         self.segments = segments or []
 
@@ -42,3 +43,7 @@ class ScoreSpecification(object):
         segments = segments or self[:]
         for segment in segments:
             pass
+
+    # TODO: implement
+    def make_score(self):
+        pass
