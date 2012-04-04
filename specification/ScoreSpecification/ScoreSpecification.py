@@ -1,5 +1,6 @@
 from baca.specification.ScoreSegmentSpecification import ScoreSegmentSpecification
 from baca.specification.Selection import Selection
+from baca.specification.StatalServerRequest import StatalServerRequest
 from baca.specification.InterpretationSettings import InterpretationSettings
 
 
@@ -43,15 +44,26 @@ class ScoreSpecification(object):
     def interpret_segment(self, segment):
         segment.instantiate_score()
         self.interpret_segment_tempo(segment)
+        self.interpret_segment_time_signatures(segment)
         raise Exception
 
     def interpret_segment_tempo(self, segment):
         selection = segment.select()
-        directives = segment.get_directives(target_selection=selection, attribute_name=segment.attrs.tempo)
+        directives = segment.get_directives(
+            target_selection=selection, attribute_name=segment.attrs.tempo)
         assert 1 <= len(directives)
         for directive in directives:
             setting = self.resolve_source(directive.source)
             self.settings.tempo.store_value(setting, directive.is_persistent) 
+
+    def interpret_segment_time_signatures(self, segment):
+        selection = segment.select()
+        directives = segment.get_directives(
+            target_selection=selection, attribute_name=segment.attrs.time_signatures)
+        assert 1 <= len(directives)
+        for directive in directives:
+            setting = self.resolve_source(directive.source)
+            self.settings.time_signatures.store_value(setting, directive.is_persistent)
 
     def interpret_segments(self):
         self.settings = InterpretationSettings()
@@ -62,5 +74,7 @@ class ScoreSpecification(object):
     def resolve_source(self, source):
         if isinstance(source, Selection):
             raise NotImplementedError(repr(source))
+        elif isinstance(source, StatalServerRequest):
+            return source()
         else:
             return source

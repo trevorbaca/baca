@@ -2,7 +2,6 @@ from baca.handlers.composites.CompositeRhythmHandler import CompositeRhythmHandl
 from baca.handlers.pitch.TimewisePitchClassHandler import TimewisePitchClassHandler
 from baca.specification.Directive import Directive
 from baca.specification.DuratedStatalServerRequest import DuratedStatalServerRequest
-from baca.specification.DurationSpecification import DurationSpecification
 from baca.specification.RelativeReference import RelativeReference
 from baca.specification.Selection import Selection
 from baca.specification.StatalServerRequest import StatalServerRequest
@@ -163,7 +162,7 @@ class ScoreSegmentSpecification(object):
 
     def set_segment_time_signatures_not_less_than_duration_in_seconds(self, server, duration_in_seconds):
         target_selection = self.select()
-        handler = DurationStatalServerRequest(server, duration_in_seconds, criterion='not less')
+        handler = DuratedStatalServerRequest(server, duration_in_seconds, criterion='not less')
         directive = Directive(target_selection, self.attrs.time_signatures, handler)
         self.directives.append(directive)
 
@@ -175,7 +174,7 @@ class ScoreSegmentSpecification(object):
 
     def set_segment_time_signatures_not_more_than_duration_in_seconds(self, server, duration_in_seconds):
         target_selection = self.select()
-        handler = DurationStatalServerRequest(server, duration_in_seconds, criterion='not more')
+        handler = DuratedStatalServerRequest(server, duration_in_seconds, criterion='not more')
         directive = Directive(target_selection, self.attrs.time_signatures, handler)
         self.directives.append(directive)
 

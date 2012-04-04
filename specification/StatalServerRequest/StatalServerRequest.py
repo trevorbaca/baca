@@ -1,4 +1,7 @@
-class StatalServerRequest(object):
+from abjad.tools.abctools.AbjadObject import AbjadObject
+
+
+class StatalServerRequest(AbjadObject):
 
     ### INITIALIZER ###
     
@@ -11,12 +14,5 @@ class StatalServerRequest(object):
 
     ### SPECIAL METHODS ###
 
-    def __repr__(self):
-        result = [repr(self.server)]
-        kwargs = ('complete', 'level', 'n', 'position')
-        for kwarg in kwargs:
-            value = getattr(self, kwarg)
-            if value is not None:
-                result.append('{}={!r}'.format(kwarg, value))
-        result = ', '.join(result)
-        return '{}({})'.format(type(self).__name__, result)
+    def __call__(self):
+        return self.server(self)

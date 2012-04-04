@@ -7,13 +7,14 @@ class InterpretationSettings(AbjadObject):
     ### INITIALIZER ###
 
     def __init__(self, aggregate=None, articulations=None, dynamics=None,
-        pitch_classes=None, register=None, tempo=None, transform=None):
+        pitch_classes=None, register=None, tempo=None, time_signatures=None, transform=None):
         self.aggregate = aggregate or InterpretationSetting()
         self.articulations = articulations or InterpretationSetting()
         self.dynamics = dynamics or InterpretationSetting()
         self.pitch_classes = pitch_classes or InterpretationSetting()
         self.register = register or InterpretationSetting()
         self.tempo = tempo or InterpretationSetting()
+        self.time_signatures = time_signatures or InterpretationSetting()
         self.transform = transform or InterpretationSetting()
 
     ### PUBLIC METHODS ###
