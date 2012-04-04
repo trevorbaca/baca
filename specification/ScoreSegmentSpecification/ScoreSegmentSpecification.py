@@ -40,6 +40,12 @@ class ScoreSegmentSpecification(object):
 
     ### SPECIAL METHODS ###
 
+    def __getitem__(self, arg):
+        return self.directives.__getitem__(arg)
+
+    def __getslice__(self, start, stop):
+        return self.directives.__getslice__(start, stop)
+
     def __len__(self):
         return len(self.directives)
 
@@ -50,7 +56,7 @@ class ScoreSegmentSpecification(object):
 
     @property
     def has_relative_directives(self):
-        return not self.relative_directives
+        return bool(self.relative_directives)
 
     @property
     def relative_directives(self):
@@ -91,7 +97,7 @@ class ScoreSegmentSpecification(object):
 
     def set_segment_aggregate_to_next_aggregate(self, server):
         target_selection = self.select()
-        handler = StatalServerRequest(server, 1, level=-1)
+        handler = StatalServerRequest(server, n=1, level=-1)
         directive = Directive(target_selection, self.attrs.aggregate, handler)
         self.directives.append(directive)
 
@@ -129,17 +135,17 @@ class ScoreSegmentSpecification(object):
 
     def set_segment_time_signatures_from_count(self, server, n, position=None):
         target_selection = self.select()
-        handler = StatalServerRequest(server, n, level=-1, position=position) 
+        handler = StatalServerRequest(server, n=1, level=-1, position=position) 
         directive = Directive(target_selection, self.attrs.time_signatures, handler)
 
     def set_segment_time_signatures_from_next_n_complete_nodes_at_level(self, server, n, level, position=None):
         target_selection = self.select()
-        handler = StatalServerRequest(server, n, complete=True, level=level, position=position)
+        handler = StatalServerRequest(server, n=1, complete=True, level=level, position=position)
         directive = Directive(target_selection, self.attrs.time_signatures, handler)
 
     def set_segment_time_signatures_from_next_n_nodes_at_level(self, server, n, level, position=None):
         target_selection = self.select()
-        handler = StatalServerRequest(server, n, complete=False, level=level, position=position)
+        handler = StatalServerRequest(server, n=1, complete=False, level=level, position=position)
         directive = Directive(target_selection, self.attrs.time_signatures, handler)
 
     def set_segment_time_signatures_not_less_than_duration_in_seconds(self, server, duration_in_seconds):

@@ -18,3 +18,6 @@ class StatalServer(object):
                 request.n, request.level)
         self.last_result = result
         return result
+
+    def __repr__(self):
+        return '{}({!r})'.format(type(self).__name__, self.cyclic_tree)
