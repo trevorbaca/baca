@@ -68,8 +68,12 @@ class ScoreSegmentSpecification(object):
 
     ### PUBLIC METHODS ###
 
-    def select(self, score_segment_name=None, context_name=None, 
-        criterion=None, selection_token=None, start=None, stop=None):
+    # TODO: implement
+    def get_directive(self, target_selection=None, attribute_name=None, source=None):
+        pass
+
+    def select(self, context_name=None, criterion=None, selection_token=None, 
+        score_segment_name=None, start=None, stop=None):
         #if selection_token is not None:
         #    raise NotImplementedError
         score_segment_name = score_segment_name or self.name
@@ -137,36 +141,43 @@ class ScoreSegmentSpecification(object):
         target_selection = self.select()
         handler = StatalServerRequest(server, n=1, level=-1, position=position) 
         directive = Directive(target_selection, self.attrs.time_signatures, handler)
+        self.directives.append(directive)
 
     def set_segment_time_signatures_from_next_n_complete_nodes_at_level(self, server, n, level, position=None):
         target_selection = self.select()
         handler = StatalServerRequest(server, n=1, complete=True, level=level, position=position)
         directive = Directive(target_selection, self.attrs.time_signatures, handler)
+        self.directives.append(directive)
 
     def set_segment_time_signatures_from_next_n_nodes_at_level(self, server, n, level, position=None):
         target_selection = self.select()
         handler = StatalServerRequest(server, n=1, complete=False, level=level, position=position)
         directive = Directive(target_selection, self.attrs.time_signatures, handler)
+        self.directives.append(directive)
 
     def set_segment_time_signatures_not_less_than_duration_in_seconds(self, server, duration_in_seconds):
         target_selection = self.select()
         handler = DurationStatalServerRequest(server, duration_in_seconds, criterion='not less')
         directive = Directive(target_selection, self.attrs.time_signatures, handler)
+        self.directives.append(directive)
 
     def set_segment_time_signatures_not_less_than_written_duration(self, server, written_duration):
         target_selection = self.select()
         handler = DuratedStatalServerRequest(server, written_duration, criterion='not less')
         directive = Directive(target_selection, self.attrs.time_signatures, handler)
+        self.directives.append(directive)
 
     def set_segment_time_signatures_not_more_than_duration_in_seconds(self, server, duration_in_seconds):
         target_selection = self.select()
         handler = DurationStatalServerRequest(server, duration_in_seconds, criterion='not more')
         directive = Directive(target_selection, self.attrs.time_signatures, handler)
+        self.directives.append(directive)
 
     def set_segment_time_signatures_not_more_than_written_duration(self, server, written_duration):
         target_selection = self.select()
         handler = DuratedStatalServerRequest(server, written_duration, criterion='not more')
         directive = Directive(target_selection, self.attrs.time_signatures, handler)
+        self.directives.append(directive)
 
     def set_segment_written_duration(self, written_duration):
         target_selection = self.select()

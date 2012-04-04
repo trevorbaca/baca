@@ -2,7 +2,6 @@ from Constituent import Constituent
 from DurationSpecification import DurationSpecification
 from DuratedStatalServer import DuratedStatalServer
 from DuratedStatalServerRequest import DuratedStatalServerRequest
-from ParameterEnumeration import ParameterEnumeration
 from RelativeReference import RelativeReference
 from ScoreSpecification import ScoreSpecification
 from ScoreSegmentSpecification import ScoreSegmentSpecification

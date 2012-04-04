@@ -3,6 +3,19 @@ from baca.specification.ScoreSegmentSpecification import ScoreSegmentSpecificati
 
 class ScoreSpecification(object):
 
+    class InterpretationValues(object):
+
+        def __init__(self):
+            self.aggregate = None
+            self.articulations = None
+            self.dynamics = None
+            self.pitch_classes = None
+            self.register = None
+            self.tempo = None
+            self.transform = None
+
+    current = InterpretationValues()
+
     ### INITIALIZER ###
 
     def __init__(self, default_score_template=None, score_segment_specification_class=None, segments=None):
@@ -37,6 +50,10 @@ class ScoreSpecification(object):
         segment = self.score_segment_specification_class(name=name)     
         self.segments.append(segment)
         return segment
+
+    # TODO: implement
+    def interpret_segment(self, segment):
+        pass
 
     # TODO: implement
     def interpret_segments(self, segments=None):

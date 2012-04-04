@@ -1,40 +1,22 @@
-from baca.specification.Constituent import Constituent
-
-
 class Selection(object):
 
     ### INITIALIZER ###
 
-    def __init__(self, 
-        constituents=None, context_name=None, criterion=None, 
-        score_segment_name=None, start=None, stop=None):
-        self.constituents = constituents or []
-        if any([score_segment_name, context_name, criterion, start, stop]):
-            self.append_constituent(
-                score_segment_name=score_segment_name, context_name=context_name,
-                criterion=criterion, start=start, stop=stop)
+    def __init__(self, context_name=None, criterion=None, score_segment_name=None, start=None, stop=None):
+        self.score_segment_name = score_segment_name
+        self.context_name = context_name
+        self.criterion = criterion
+        self.start = start
+        self.stop = stop
 
     ### SPECIAL METHODS ###
 
-    def __getitem__(self, arg):
-        return self.constituents.__getitem__(arg)
-
-    def __getslice__(self, start, stop):
-        return self.constituents.__getslice__(start, stop)
-
     def __repr__(self):
-        return '{}({!r}'.format(type(self).__name__, self.constituents)
-
-    ### PUBLIC METHODS ###
-
-    def append_constituent(self, 
-        context_name=None, criterion=None, score_segment_name=None, start=None, stop=None):
-        constituent = Constituent(context_name=context_name, criterion=criterion, 
-            score_segment_name=score_segment_name, start=start, stop=stop)
-        self.constituents.append(constituent)
-
-    def append_note_and_chord_constituent(self, 
-        score_segment_name=None, context_name=None, start=None, stop=None):
-        constituent = Constituent(score_segment_name=score_segment_name, context_name=context_name, 
-            criterion='note and chord', start=start, stop=stop)
-        self.constituents.append(constituent)
+        result = []
+        keyword_argument_names = ('context_name', 'criterion', 'score_segment_name', 'start', 'stop')
+        for keyword_argument_name in keyword_argument_names:
+            value = getattr(self, keyword_argument_name)
+            if value is not None:
+                result.append('{}={!r}'.format(keyword_argument_name, value))
+        result = ', '.join(result)
+        return '{}({})'.format(type(self).__name__, result)
