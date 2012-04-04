@@ -5,12 +5,10 @@ class StatalServerRequest(AbjadObject):
 
     ### INITIALIZER ###
     
-    def __init__(self, server, complete=False, level=None, n=None, position=None):
+    def __init__(self, server, count=None, index=None):
         self.server = server
-        self.n = n
-        self.complete = complete
-        self.level = level
-        self.position = position
+        self.count = count
+        self.index = index
 
     ### SPECIAL METHODS ###
 

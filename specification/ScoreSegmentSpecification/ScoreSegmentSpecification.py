@@ -98,15 +98,15 @@ class ScoreSegmentSpecification(object):
         directive = Directive(target_selection, self.attrs.aggregate, aggregate)
         self.directives.append(directive)
 
-    def set_segment_aggregate_to_aggregate_at_position(self, server, position):
+    def set_segment_aggregate_to_aggregate_at_index(self, server, index):
         target_selection = self.select()
-        handler = StatalServerRequest(server, position=position)
+        handler = StatalServerRequest(server, index=index)
         directive = Directive(target_selection, self.attrs.aggregate, handler)
         self.directives.append(directive)
 
     def set_segment_aggregate_to_next_aggregate(self, server):
         target_selection = self.select()
-        handler = StatalServerRequest(server, n=1, level=-1)
+        handler = StatalServerRequest(server, count=1)
         directive = Directive(target_selection, self.attrs.aggregate, handler)
         self.directives.append(directive)
 
@@ -142,21 +142,9 @@ class ScoreSegmentSpecification(object):
         directive = Directive(target_selection, self.attrs.time_signatures, time_signatures)
         self.directives.append(directive)
 
-    def set_segment_time_signatures_from_count(self, server, n, position=None):
+    def set_segment_time_signatures_from_count(self, server, count, position=None):
         target_selection = self.select()
-        handler = StatalServerRequest(server, n=n, level=-1, position=position) 
-        directive = Directive(target_selection, self.attrs.time_signatures, handler)
-        self.directives.append(directive)
-
-    def set_segment_time_signatures_from_next_n_complete_nodes_at_level(self, server, n, level, position=None):
-        target_selection = self.select()
-        handler = StatalServerRequest(server, n=1, complete=True, level=level, position=position)
-        directive = Directive(target_selection, self.attrs.time_signatures, handler)
-        self.directives.append(directive)
-
-    def set_segment_time_signatures_from_next_n_nodes_at_level(self, server, n, level, position=None):
-        target_selection = self.select()
-        handler = StatalServerRequest(server, n=1, complete=False, level=level, position=position)
+        handler = StatalServerRequest(server, count=count)
         directive = Directive(target_selection, self.attrs.time_signatures, handler)
         self.directives.append(directive)
 

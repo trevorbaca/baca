@@ -1,3 +1,4 @@
+from abjad.tools import sequencetools
 from abjad.tools.abctools.AbjadObject import AbjadObject
 
 
@@ -5,19 +6,21 @@ class StatalServer(AbjadObject):
 
     ### INITIALIZER ###
 
-    def __init__(self, cyclic_tree):
-        self.cyclic_tree = cyclic_tree
-        self.last_nodes = [cyclic_tree]
+    def __init__(self, iterable):
+        self.iterable = sequencetools.CyclicTuple(iterable)
+        self.next_index = 0
 
     ### SPECIAL METHODS ###
 
     def __call__(self, request):
-        if request.complete:
-            last_nodes = self.last_node.get_next_n_complete_nodes_at_level(request.n, request.level)
-        else:
-            last_nodes = self.last_node.get_next_n_nodes_at_level(request.n, request.level)
-        self.last_nodes = last_nodes
-        result = [node.payload for node in self.last_nodes]
+        result = []
+        assert not (request.count is not None and request.index is not None)
+        if request.count is not None:
+            for x in range(request.count):
+                result.append(self.iterable[self.next_index])
+                self.next_index += 1
+        elif request.index is not None:
+            result.append(self.iterable[request.index])
         return result
 
     ### READ-ONLY PUBLIC ATTRIBUTES ###

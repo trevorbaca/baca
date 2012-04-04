@@ -43,27 +43,17 @@ class ScoreSpecification(object):
 
     def interpret_segment(self, segment):
         segment.instantiate_score()
-        self.interpret_segment_tempo(segment)
-        self.interpret_segment_time_signatures(segment)
+        self.interpret_segment_attribute(segment, 'tempo')
+        self.interpret_segment_attribute(segment, 'time_signatures')
+        self.interpret_segment_attribute(segment, 'aggregate')
         raise Exception
 
-    def interpret_segment_tempo(self, segment):
+    def interpret_segment_attribute(self, segment, attribute_name):
         selection = segment.select()
-        directives = segment.get_directives(
-            target_selection=selection, attribute_name=segment.attrs.tempo)
+        directives = segment.get_directives(target_selection=selection, attribute_name=attribute_name)
         assert 1 <= len(directives)
         for directive in directives:
-            setting = self.resolve_source(directive.source)
-            self.settings.tempo.store_value(setting, directive.is_persistent) 
-
-    def interpret_segment_time_signatures(self, segment):
-        selection = segment.select()
-        directives = segment.get_directives(
-            target_selection=selection, attribute_name=segment.attrs.time_signatures)
-        assert 1 <= len(directives)
-        for directive in directives:
-            setting = self.resolve_source(directive.source)
-            self.settings.time_signatures.store_value(setting, directive.is_persistent)
+            self.resolve_source_and_store_value(directive, attribute_name) 
 
     def interpret_segments(self):
         self.settings = InterpretationSettings()
@@ -78,3 +68,8 @@ class ScoreSpecification(object):
             return source()
         else:
             return source
+
+    def resolve_source_and_store_value(self, directive, attribute_name):
+        value = self.resolve_source(directive.source)
+        setting = getattr(self.settings, attribute_name)
+        setting.store_value(value, directive.is_persistent)
