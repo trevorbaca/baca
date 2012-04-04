@@ -144,7 +144,7 @@ class ScoreSegmentSpecification(object):
 
     def set_segment_time_signatures_from_count(self, server, n, position=None):
         target_selection = self.select()
-        handler = StatalServerRequest(server, n=1, level=-1, position=position) 
+        handler = StatalServerRequest(server, n=n, level=-1, position=position) 
         directive = Directive(target_selection, self.attrs.time_signatures, handler)
         self.directives.append(directive)
 

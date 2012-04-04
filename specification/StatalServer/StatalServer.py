@@ -7,16 +7,21 @@ class StatalServer(AbjadObject):
 
     def __init__(self, cyclic_tree):
         self.cyclic_tree = cyclic_tree
-        self.last_result = cyclic_tree
+        self.last_nodes = [cyclic_tree]
 
     ### SPECIAL METHODS ###
 
     def __call__(self, request):
         if request.complete:
-            result = self.last_result.get_next_n_complete_nodes_at_level(
-                request.n, request.level)
+            last_nodes = self.last_node.get_next_n_complete_nodes_at_level(request.n, request.level)
         else:
-            result = self.last_result.get_next_n_nodes_at_level(
-                request.n, request.level)
-        self.last_result = result
+            last_nodes = self.last_node.get_next_n_nodes_at_level(request.n, request.level)
+        self.last_nodes = last_nodes
+        result = [node.payload for node in self.last_nodes]
         return result
+
+    ### READ-ONLY PUBLIC ATTRIBUTES ###
+
+    @property
+    def last_node(self):
+        return self.last_nodes[-1]

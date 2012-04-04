@@ -2,7 +2,6 @@ from baca.specification.DuratedStatalServerRequest import DuratedStatalServerReq
 from baca.specification.StatalServer import StatalServer
 
 
-# TODO: implement & write tests
 class DuratedStatalServer(StatalServer):
 
     ### SPECIAL METHODS ###
@@ -11,4 +10,4 @@ class DuratedStatalServer(StatalServer):
         if isinstance(request, DuratedStatalServerRequest):
             raise NotImplementedError
         else:
-            return StatalServer(request)
+            return StatalServer.__call__(self, request)
