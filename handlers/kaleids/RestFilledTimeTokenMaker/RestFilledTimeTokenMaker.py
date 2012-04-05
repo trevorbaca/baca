@@ -1,4 +1,4 @@
-from handlers.kaleids.TokenIncisedRestFilledTimeTokenMaker import TokenIncisedRestFilledTimeTokenMaker
+from abjad.tools.timetokentools.TokenIncisedRestFilledTimeTokenMaker import TokenIncisedRestFilledTimeTokenMaker
 
 
 class RestFilledTimeTokenMaker(TokenIncisedRestFilledTimeTokenMaker):
