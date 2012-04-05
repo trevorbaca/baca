@@ -1,7 +1,7 @@
-from handlers.kaleids._SignalAffixedFilledTokens import _SignalAffixedFilledTokens
+from handlers.kaleids.TokenIncisedTimeTokenMaker import TokenIncisedTimeTokenMaker
 
 
-class TokenIncisedNoteFilledTimeTokenMaker(_SignalAffixedFilledTokens):
+class TokenIncisedNoteFilledTimeTokenMaker(TokenIncisedTimeTokenMaker):
     '''Signal-affixed note-filled tokens.
     '''
 
