@@ -1,6 +1,6 @@
 from abjad.tools import mathtools
 from abjad.tools import sequencetools
-from handlers.kaleids.BurnishedTimeTokenMaker import BurnishedTimeTokenMaker
+from abjad.tools.timetokentools.BurnishedTimeTokenMaker import BurnishedTimeTokenMaker
 
 
 class OutputBurnishedSignalFilledTimeTokenMaker(BurnishedTimeTokenMaker):
