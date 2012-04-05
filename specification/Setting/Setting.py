@@ -1,12 +1,14 @@
 from abjad.tools.abctools.AbjadObject import AbjadObject
 
 
-class InterpretationSetting(AbjadObject):
+class Setting(AbjadObject):
 
     ### INITIALIZER ###
 
-    def __init__(self, persistent=None, temporary=None):
+    def __init__(self, context_name, persistent=None, scope=None, temporary=None):
+        self.context_name = context_name
         self.persistent = persistent
+        self.scope = scope
         self.temporary = temporary
 
     ### PUBLIC METHODS ###

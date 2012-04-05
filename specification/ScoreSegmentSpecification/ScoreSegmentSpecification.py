@@ -76,8 +76,8 @@ class ScoreSegmentSpecification(object):
                     result.append(directive)
         return result
 
-    def instantiate_score(self):
-        self.score = self.score_template()
+#    def instantiate_score(self):
+#        self.score = self.score_template()
 
     def select(self, context_name=None, criterion=None, selection_token=None, 
         score_segment_name=None, start=None, stop=None):

@@ -1,15 +1,15 @@
 from baca.specification.ScoreSegmentSpecification import ScoreSegmentSpecification
 from baca.specification.Selection import Selection
 from baca.specification.StatalServerRequest import StatalServerRequest
-from baca.specification.InterpretationSettings import InterpretationSettings
+from baca.specification.SettingReservoirs import SettingReservoirs
 
 
 class ScoreSpecification(object):
 
     ### INITIALIZER ###
 
-    def __init__(self, default_score_template=None, score_segment_specification_class=None, segments=None):
-        self.default_score_template = default_score_template
+    def __init__(self, score_template, score_segment_specification_class=None, segments=None):
+        self.score_template = score_template
         self.score_segment_specification_class = score_segment_specification_class or ScoreSegmentSpecification
         self.segments = segments or []
 
@@ -42,34 +42,30 @@ class ScoreSpecification(object):
         return segment
 
     def interpret_segment(self, segment):
-        segment.instantiate_score()
-        self.interpret_segment_attribute(segment, 'tempo')
-        self.interpret_segment_attribute(segment, 'time_signatures')
-        self.interpret_segment_attribute(segment, 'aggregate')
+#        self.interpret_segment_attribute_directives(segment, 'tempo')
+#        self.interpret_segment_attribute_directives(segment, 'time_signatures')
+#        self.interpret_segment_attribute_directives(segment, 'aggregate')
+#        self.interpret_segment_attribute_directives(segment, 'pitch_classes')
+#        self.interpret_segment_attribute_directives(segment, 'transform')
         raise Exception
 
-    def interpret_segment_attribute(self, segment, attribute_name):
-        selection = segment.select()
-        directives = segment.get_directives(target_selection=selection, attribute_name=attribute_name)
-        assert 1 <= len(directives)
+    def interpret_segment_attribute_directives(self, segment, attribute_name):
+        directives = segment.get_directives(attribute_name=attribute_name)
+        reservoir = getattr(self.reservoirs, attribute_name)
         for directive in directives:
-            self.resolve_source_and_store_value(directive, attribute_name) 
+            source_value = self.resolve_directive_source_value(directive.source)
+            reservoir.store_settings(directive.target_selection, source_value, directive.is_persistent)
 
     def interpret_segments(self):
-        self.settings = InterpretationSettings()
+        self.reservoirs = SettingReservoirs(self.score_template())
         while any([segment.is_pending for segment in self.segments]):
             for segment in self.segments:
                 self.interpret_segment(segment)
 
-    def resolve_source(self, source):
-        if isinstance(source, Selection):
-            raise NotImplementedError(repr(source))
-        elif isinstance(source, StatalServerRequest):
-            return source()
+    def resolve_directive_source_value(self, directive_source):
+        if isinstance(directive_source, Selection):
+            raise NotImplementedError(repr(directive_source))
+        elif isinstance(directive_source, StatalServerRequest):
+            return directive_source()
         else:
-            return source
-
-    def resolve_source_and_store_value(self, directive, attribute_name):
-        value = self.resolve_source(directive.source)
-        setting = getattr(self.settings, attribute_name)
-        setting.store_value(value, directive.is_persistent)
+            return directive_source
