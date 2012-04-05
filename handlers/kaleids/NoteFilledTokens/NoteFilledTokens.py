@@ -1,7 +1,7 @@
-from handlers.kaleids.SignalAffixedNoteFilledTokens import SignalAffixedNoteFilledTokens
+from handlers.kaleids.TokenIncisedNoteFilledTimeTokenMaker import TokenIncisedNoteFilledTimeTokenMaker
 
 
-class NoteFilledTokens(SignalAffixedNoteFilledTokens):
+class NoteFilledTokens(TokenIncisedNoteFilledTimeTokenMaker):
     '''Note-filled tokens.
 
     See the test file for examples.
@@ -13,7 +13,7 @@ class NoteFilledTokens(SignalAffixedNoteFilledTokens):
     kwargs = ()
 
     def __init__(self):
-        SignalAffixedNoteFilledTokens.__init__(self, [], [0], [], [0], 1)
+        TokenIncisedNoteFilledTimeTokenMaker.__init__(self, [], [0], [], [0], 1)
 
     ### SPECIAL METHODS ###
 

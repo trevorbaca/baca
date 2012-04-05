@@ -1,7 +1,7 @@
-from handlers.kaleids.SignalAffixedRestFilledTokens import SignalAffixedRestFilledTokens
+from handlers.kaleids.TokenIncisedRestFilledTimeTokenMaker import TokenIncisedRestFilledTimeTokenMaker
 
 
-class RestFilledTokens(SignalAffixedRestFilledTokens):
+class RestFilledTokens(TokenIncisedRestFilledTimeTokenMaker):
     '''Rest-filled tokens.
 
     See the test file for examples.
@@ -13,7 +13,7 @@ class RestFilledTokens(SignalAffixedRestFilledTokens):
     kwargs = ()
 
     def __init__(self):
-        SignalAffixedRestFilledTokens.__init__(self, [], [0], [], [0], 1)
+        TokenIncisedRestFilledTimeTokenMaker.__init__(self, [], [0], [], [0], 1)
 
     ### SPECIAL METHODS ###
 

@@ -4,11 +4,11 @@ from scf import getters
 import handlers
 
 
-class SignalAffixedChunkWithRestFilledTokensKaleidEditor(KaleidEditor):
+class OutputIncisedRestFilledTimeTokenMakerKaleidEditor(KaleidEditor):
 
     ### CLASS ATTRIBUTES ###
 
-    target_manifest = TargetManifest(handlers.kaleids.SignalAffixedChunkWithRestFilledTokens,
+    target_manifest = TargetManifest(handlers.kaleids.OutputIncisedRestFilledTimeTokenMaker,
         ('prefix_signal', None, 'ps', getters.get_nonzero_integers, True),
         ('prefix_lengths', None, 'pl', getters.get_nonnegative_integers, True),
         ('suffix_signal', None, 'ss', getters.get_nonzero_integers, True),
