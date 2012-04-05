@@ -8,10 +8,13 @@ class ScoreSpecification(object):
 
     ### INITIALIZER ###
 
-    def __init__(self, score_template, score_segment_specification_class=None, segments=None):
+    def __init__(self, score_template, context_name_abbreviations=None, 
+        score_segment_specification_class=None, segments=None):
+        self.context_name_abbreviations = context_name_abbreviations or {}
         self.score_template = score_template
         self.score_segment_specification_class = score_segment_specification_class or ScoreSegmentSpecification
         self.segments = segments or []
+        self.initialize_context_name_abbreviations()
 
     ### SPECIAL METHODS ###
 
@@ -40,6 +43,10 @@ class ScoreSpecification(object):
         segment = self.score_segment_specification_class(name=name)     
         self.segments.append(segment)
         return segment
+
+    def initialize_context_name_abbreviations(self):
+        for context_name_abbreviation, context_name in self.context_name_abbreviations.iteritems():
+            setattr(self, context_name_abbreviation, context_name)
 
     def interpret_segment(self, segment):
 #        self.interpret_segment_attribute_directives(segment, 'tempo')

@@ -1,2 +1,3 @@
+from ScoreTemplate import ScoreTemplate
 from StringQuartetScoreTemplate import StringQuartetScoreTemplate
 from TwoStaffPianoScoreTemplate import TwoStaffPianoScoreTemplate

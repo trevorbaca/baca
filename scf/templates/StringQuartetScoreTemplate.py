@@ -1,38 +1,56 @@
-from abjad import *
+from abjad.tools import contexttools
+from abjad.tools import scoretools
+from abjad.tools import stafftools
+from abjad.tools import voicetools
+from scf.templates.ScoreTemplate import ScoreTemplate
 
 
-class StringQuartetScoreTemplate(object):
+class StringQuartetScoreTemplate(ScoreTemplate):
     
+    ### INITIALIZER ###
+
+    def __init__(self):
+        pass
+
     ### SPECIAL METHODS ###
 
     def __call__(self):
 
-        # make first violin staff
-        first_violin_staff = Staff(name='violin 1')
+        # make first violin voice and staff
+        first_violin_voice = voicetools.Voice(name='First Violin Voice')
+        first_violin_staff = stafftools.Staff([first_violin_voice], name='First Violin Staff')
         contexttools.ClefMark('treble')(first_violin_staff)
 
-        # make second violin staff
-        second_violin_staff = Staff(name='violin 2')
+        # make second violin voice and staff
+        second_violin_voice = voicetools.Voice(name='Second Violin Voice')
+        second_violin_staff = stafftools.Staff(name='Second Violin Voice')
         contexttools.ClefMark('treble')(second_violin_staff)
 
-        # make viola staff
-        viola_staff = Staff(name='viola')
+        # make viola voice and staff
+        viola_voice = voicetools.Voice(name='Viola Voice')
+        viola_staff = stafftools.Staff(name='Viola Staff')
         contexttools.ClefMark('alto')(viola_staff)
 
-        # make cello staff
-        cello_staff = Staff(name='cello')
+        # make cello voice and staff
+        cello_voice = voicetools.Voice(name='Cello Voice')
+        cello_staff = stafftools.Staff(name='Cello Staff')
         contexttools.ClefMark('bass')(cello_staff)
 
-        # make staff group
-        staff_group = scoretools.StaffGroup([
+        # make string quartet staff group
+        string_quartet_staff_group = scoretools.StaffGroup([
             first_violin_staff, 
             second_violin_staff,
             viola_staff,
             cello_staff,
-            ])
+            ],
+            name='String Quartet Staff Group',
+            )
 
-        # make score
-        score = Score([staff_group])
+        # make string quartet score
+        string_quartet_score = scoretools.Score(
+            [string_quartet_staff_group], 
+            name='String Quartet Score',
+            )
 
-        # return score
-        return score
+        # return string quartet score
+        return string_quartet_score

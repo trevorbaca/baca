@@ -7,22 +7,24 @@ def test_StringQuartetScoreTemplate___call___01():
     score = template()
 
     r'''
-    \new Score <<
-        \new StaffGroup <<
-            \context Staff = "violin 1" {
+    \context Score = "String Quartet Score" <<
+        \context StaffGroup = "String Quartet Staff Group" <<
+            \context Staff = "First Violin Staff" {
+                \clef "treble"
+                \context Voice = "First Violin Voice" {
+                }
+            }
+            \context Staff = "Second Violin Voice" {
                 \clef "treble"
             }
-            \context Staff = "violin 2" {
-                \clef "treble"
-            }
-            \context Staff = "viola" {
+            \context Staff = "Viola Staff" {
                 \clef "alto"
             }
-            \context Staff = "cello" {
+            \context Staff = "Cello Staff" {
                 \clef "bass"
             }
         >>
     >>
     '''
 
-    assert score.format == '\\new Score <<\n\t\\new StaffGroup <<\n\t\t\\context Staff = "violin 1" {\n\t\t\t\\clef "treble"\n\t\t}\n\t\t\\context Staff = "violin 2" {\n\t\t\t\\clef "treble"\n\t\t}\n\t\t\\context Staff = "viola" {\n\t\t\t\\clef "alto"\n\t\t}\n\t\t\\context Staff = "cello" {\n\t\t\t\\clef "bass"\n\t\t}\n\t>>\n>>'
+    assert score.format == '\\context Score = "String Quartet Score" <<\n\t\\context StaffGroup = "String Quartet Staff Group" <<\n\t\t\\context Staff = "First Violin Staff" {\n\t\t\t\\clef "treble"\n\t\t\t\\context Voice = "First Violin Voice" {\n\t\t\t}\n\t\t}\n\t\t\\context Staff = "Second Violin Voice" {\n\t\t\t\\clef "treble"\n\t\t}\n\t\t\\context Staff = "Viola Staff" {\n\t\t\t\\clef "alto"\n\t\t}\n\t\t\\context Staff = "Cello Staff" {\n\t\t\t\\clef "bass"\n\t\t}\n\t>>\n>>'

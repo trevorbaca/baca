@@ -1,1 +1,1 @@
-from  InterpretationSetting import InterpretationSetting
+from Setting import Setting
