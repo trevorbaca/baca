@@ -1,1 +1,0 @@
-from PatternedTokensKaleidEditor import PatternedTokensKaleidEditor
