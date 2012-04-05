@@ -2,7 +2,7 @@ from make_illustration_from_output_material import make_illustration_from_output
 from scf.editors.get_kaleid_editor import get_kaleid_editor
 from scf.makers.MaterialPackageMaker import MaterialPackageMaker
 from scf.wizards.KaleidCreationWizard import KaleidCreationWizard
-from handlers.kaleids.TimeTokenMaker import TimeTokenMaker
+from abjad.tools.timetokentools.TimeTokenMaker import TimeTokenMaker
 
 
 class KaleidMaterialPackageMaker(MaterialPackageMaker):
