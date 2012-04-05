@@ -1,7 +1,7 @@
-from handlers.kaleids.PartForcedPatternedTokens import PartForcedPatternedTokens
+from handlers.kaleids.TokenBurnishedSignalFilledTimeTokenMaker import TokenBurnishedSignalFilledTimeTokenMaker
 
 
-class PatternedTokens(PartForcedPatternedTokens):
+class SignalFilledTimeTokenMaker(TokenBurnishedSignalFilledTimeTokenMaker):
     '''Pattern-filled tokens.
     '''
 
@@ -9,7 +9,7 @@ class PatternedTokens(PartForcedPatternedTokens):
         pattern_helper=None, prolation_addenda_helper=None, secondary_divisions_helper=None):
         lefts, middles, rights = [0], [0], [0]
         left_lengths, right_lengths = [0], [0]
-        PartForcedPatternedTokens.__init__(self, pattern, denominator, prolation_addenda,
+        TokenBurnishedSignalFilledTimeTokenMaker.__init__(self, pattern, denominator, prolation_addenda,
             lefts, middles, rights, left_lengths, right_lengths, secondary_divisions,
             pattern_helper=pattern_helper, prolation_addenda_helper=prolation_addenda_helper,
             secondary_divisions_helper=secondary_divisions_helper)

@@ -1,7 +1,7 @@
 from handlers.kaleids.TokenIncisedRestFilledTimeTokenMaker import TokenIncisedRestFilledTimeTokenMaker
 
 
-class RestFilledTokens(TokenIncisedRestFilledTimeTokenMaker):
+class RestFilledTimeTokenMaker(TokenIncisedRestFilledTimeTokenMaker):
     '''Rest-filled tokens.
 
     See the test file for examples.

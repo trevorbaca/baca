@@ -3,7 +3,7 @@ from abjad.tools import sequencetools
 from handlers.kaleids.BurnishedTimeTokenMakers import BurnishedTimeTokenMakers
 
 
-class PartForcedChunkWithPatternedTokens(BurnishedTimeTokenMakers):
+class OutputBurnishedSignalFilledTimeTokenMaker(BurnishedTimeTokenMakers):
     '''Part-forced chunk with pattern-filled tokens.
     '''
 

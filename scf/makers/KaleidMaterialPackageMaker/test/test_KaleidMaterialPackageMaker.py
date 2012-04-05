@@ -15,7 +15,7 @@ def test_KaleidMaterialPackageMaker_01():
             )
         mpp = scf.makers.KaleidMaterialPackageMaker('materials.testkaleid')
         assert mpp.directory_contents == ['__init__.py', 'output_material.py', 'tags.py']
-        handler = handlers.kaleids.PatternedTokens(
+        handler = handlers.kaleids.SignalFilledTimeTokenMaker(
             [-1, 2, -3, 4],
             16,
             prolation_addenda=[2, 3],

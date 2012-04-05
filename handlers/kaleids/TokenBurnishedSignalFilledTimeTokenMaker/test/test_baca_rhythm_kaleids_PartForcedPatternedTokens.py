@@ -3,12 +3,12 @@ from abjad.tools import sequencetools
 from handlers.kaleids import *
 
 
-def test_baca_rhythm_kaleids_PartForcedPatternedTokens_01():
+def test_baca_rhythm_kaleids_TokenBurnishedSignalFilledTimeTokenMaker_01():
 
     pattern, denominator, prolation_addenda = [1, 1, 2, 4], 32, [0]
     lefts, middles, rights = [-1], [0], [-1]
     left_lengths, right_lengths = [2], [1]
-    kaleid = PartForcedPatternedTokens(pattern, denominator, prolation_addenda,
+    kaleid = TokenBurnishedSignalFilledTimeTokenMaker(pattern, denominator, prolation_addenda,
         lefts, middles, rights, left_lengths, right_lengths)
 
     duration_tokens = [(5, 16), (6, 16)]
@@ -48,12 +48,12 @@ def test_baca_rhythm_kaleids_PartForcedPatternedTokens_01():
     assert staff.format == "\\new Staff {\n\t{\n\t\t\\time 5/16\n\t\t{\n\t\t\tr32\n\t\t\tr32\n\t\t\tc'16\n\t\t\tc'8\n\t\t\tc'32\n\t\t\tr32\n\t\t}\n\t}\n\t{\n\t\t\\time 6/16\n\t\t{\n\t\t\tr16\n\t\t\tr8\n\t\t\tc'32\n\t\t\tc'32\n\t\t\tc'16\n\t\t\tr16\n\t\t}\n\t}\n}"
 
 
-def test_baca_rhythm_kaleids_PartForcedPatternedTokens_02():
+def test_baca_rhythm_kaleids_TokenBurnishedSignalFilledTimeTokenMaker_02():
 
     pattern, denominator, prolation_addenda = [1, 1, 2, 4], 32, [0]
     lefts, middles, rights = [0], [-1], [0]
     left_lengths, right_lengths = [2], [1]
-    kaleid = PartForcedPatternedTokens(pattern, denominator, prolation_addenda,
+    kaleid = TokenBurnishedSignalFilledTimeTokenMaker(pattern, denominator, prolation_addenda,
         lefts, middles, rights, left_lengths, right_lengths)
     duration_tokens = [(5, 16), (6, 16)]
     music = kaleid(duration_tokens)
@@ -92,12 +92,12 @@ def test_baca_rhythm_kaleids_PartForcedPatternedTokens_02():
     assert staff.format == "\\new Staff {\n\t{\n\t\t\\time 5/16\n\t\t{\n\t\t\tc'32\n\t\t\tc'32\n\t\t\tr16\n\t\t\tr8\n\t\t\tr32\n\t\t\tc'32\n\t\t}\n\t}\n\t{\n\t\t\\time 6/16\n\t\t{\n\t\t\tc'16\n\t\t\tc'8\n\t\t\tr32\n\t\t\tr32\n\t\t\tr16\n\t\t\tc'16\n\t\t}\n\t}\n}"
 
 
-def test_baca_rhythm_kaleids_PartForcedPatternedTokens_03():
+def test_baca_rhythm_kaleids_TokenBurnishedSignalFilledTimeTokenMaker_03():
 
     pattern, denominator, prolation_addenda = [1, 1, 2, 4], 32, [3]
     lefts, middles, rights = [0], [-1], [0]
     left_lengths, right_lengths = [2], [1]
-    kaleid = PartForcedPatternedTokens(pattern, denominator, prolation_addenda,
+    kaleid = TokenBurnishedSignalFilledTimeTokenMaker(pattern, denominator, prolation_addenda,
         lefts, middles, rights, left_lengths, right_lengths)
     duration_tokens = [(5, 16), (6, 16)]
     music = kaleid(duration_tokens)
@@ -140,12 +140,12 @@ def test_baca_rhythm_kaleids_PartForcedPatternedTokens_03():
     assert staff.format == "\\new Staff {\n\t{\n\t\t\\time 5/16\n\t\t\\fraction \\times 10/13 {\n\t\t\tc'32\n\t\t\tc'32\n\t\t\tr16\n\t\t\tr8\n\t\t\tr32\n\t\t\tr32\n\t\t\tr16\n\t\t\tc'32\n\t\t}\n\t}\n\t{\n\t\t\\time 6/16\n\t\t\\times 4/5 {\n\t\t\tc'16.\n\t\t\tc'32\n\t\t\tr32\n\t\t\tr16\n\t\t\tr8\n\t\t\tr32\n\t\t\tr32\n\t\t\tc'16\n\t\t}\n\t}\n}"
 
 
-def test_baca_rhythm_kaleids_PartForcedPatternedTokens_04():
+def test_baca_rhythm_kaleids_TokenBurnishedSignalFilledTimeTokenMaker_04():
 
     pattern, denominator, prolation_addenda = [1, 1, 2, 4], 32, [0, 3]
     lefts, middles, rights = [-1], [0], [-1]
     left_lengths, right_lengths = [1], [1]
-    kaleid = PartForcedPatternedTokens(pattern, denominator, prolation_addenda,
+    kaleid = TokenBurnishedSignalFilledTimeTokenMaker(pattern, denominator, prolation_addenda,
         lefts, middles, rights, left_lengths, right_lengths)
     duration_tokens = [(5, 16), (6, 16)]
     music = kaleid(duration_tokens)
@@ -185,13 +185,13 @@ def test_baca_rhythm_kaleids_PartForcedPatternedTokens_04():
     assert staff.format == "\\new Staff {\n\t{\n\t\t\\time 5/16\n\t\t{\n\t\t\tr32\n\t\t\tc'32\n\t\t\tc'16\n\t\t\tc'8\n\t\t\tc'32\n\t\t\tr32\n\t\t}\n\t}\n\t{\n\t\t\\time 6/16\n\t\t\\times 4/5 {\n\t\t\tr16\n\t\t\tc'8\n\t\t\tc'32\n\t\t\tc'32\n\t\t\tc'16\n\t\t\tc'8\n\t\t\tr32\n\t\t}\n\t}\n}"
 
 
-def test_baca_rhythm_kaleids_PartForcedPatternedTokens_05():
+def test_baca_rhythm_kaleids_TokenBurnishedSignalFilledTimeTokenMaker_05():
 
     pattern, denominator, prolation_addenda = [1, 1, 2, 4], 32, [0, 3]
     lefts, middles, rights = [-1], [0], [-1]
     left_lengths, right_lengths = [1], [1]
     secondary_divisions = [14]
-    kaleid = PartForcedPatternedTokens(pattern, denominator, prolation_addenda,
+    kaleid = TokenBurnishedSignalFilledTimeTokenMaker(pattern, denominator, prolation_addenda,
         lefts, middles, rights, left_lengths, right_lengths, secondary_divisions)
 
     duration_tokens = [(5, 16), (6, 16)]

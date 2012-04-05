@@ -1,7 +1,7 @@
 from handlers.kaleids.TokenIncisedNoteFilledTimeTokenMaker import TokenIncisedNoteFilledTimeTokenMaker
 
 
-class NoteFilledTokens(TokenIncisedNoteFilledTimeTokenMaker):
+class NoteFilledTimeTokenMaker(TokenIncisedNoteFilledTimeTokenMaker):
     '''Note-filled tokens.
 
     See the test file for examples.

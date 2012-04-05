@@ -1,14 +1,14 @@
 import handlers
 
 
-def test_PatternedTokens___eq___01():
+def test_SignalFilledTimeTokenMaker___eq___01():
 
-    kaleid_1 = handlers.kaleids.PatternedTokens([-1, 2, -3, 4], 16,
+    kaleid_1 = handlers.kaleids.SignalFilledTimeTokenMaker([-1, 2, -3, 4], 16,
         prolation_addenda=[2, 3],
         secondary_divisions=[6],
         )
 
-    kaleid_2 = handlers.kaleids.PatternedTokens([-1, 2, -3, 4], 16,
+    kaleid_2 = handlers.kaleids.SignalFilledTimeTokenMaker([-1, 2, -3, 4], 16,
         prolation_addenda=[2, 3],
         secondary_divisions=[6],
         )

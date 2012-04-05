@@ -4,9 +4,9 @@ from scf import getters
 import handlers
 
 
-class RestFilledTokensKaleidEditor(KaleidEditor):
+class RestFilledTimeTokenMakerKaleidEditor(KaleidEditor):
 
     ### CLASS ATTRIBUTES ###
 
-    target_manifest = TargetManifest(handlers.kaleids.RestFilledTokens,
+    target_manifest = TargetManifest(handlers.kaleids.RestFilledTimeTokenMaker,
         )

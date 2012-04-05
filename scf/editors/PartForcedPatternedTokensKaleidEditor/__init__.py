@@ -1,1 +1,1 @@
-from  PartForcedPatternedTokensKaleidEditor import PartForcedPatternedTokensKaleidEditor
+from  TokenBurnishedSignalFilledTimeTokenMakerKaleidEditor import TokenBurnishedSignalFilledTimeTokenMakerKaleidEditor

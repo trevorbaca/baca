@@ -2,12 +2,12 @@ import handlers
 import scf
 
 
-def test_PartForcedPatternedTokensKaleidEditor_run_01():
+def test_TokenBurnishedSignalFilledTimeTokenMakerKaleidEditor_run_01():
 
-    editor = scf.editors.PartForcedPatternedTokensKaleidEditor()
+    editor = scf.editors.TokenBurnishedSignalFilledTimeTokenMakerKaleidEditor()
     editor.run(user_input='1 [1, 1, 2, 4] 32 [0] [-1] [0] [-1] [2] [1] q', is_autoadvancing=True)
     
-    kaleid = handlers.kaleids.PartForcedPatternedTokens(
+    kaleid = handlers.kaleids.TokenBurnishedSignalFilledTimeTokenMaker(
         [1, 1, 2, 4],
         32,
         prolation_addenda=[0],

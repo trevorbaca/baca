@@ -4,11 +4,11 @@ from scf import getters
 import handlers 
 
 
-class PartForcedPatternedTokensKaleidEditor(KaleidEditor):
+class TokenBurnishedSignalFilledTimeTokenMakerKaleidEditor(KaleidEditor):
 
 	### CLASS ATTRIBTUES ###
 
-    target_manifest = TargetManifest(handlers.kaleids.PartForcedPatternedTokens,
+    target_manifest = TargetManifest(handlers.kaleids.TokenBurnishedSignalFilledTimeTokenMaker,
         ('pattern', None, 'pa', getters.get_nonzero_integers, True),
         ('denominator', None, 'de', getters.get_positive_integer_power_of_two, True),
         ('prolation_addenda', None, 'ad', getters.get_integers, False),

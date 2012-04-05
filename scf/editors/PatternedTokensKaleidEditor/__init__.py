@@ -1,1 +1,1 @@
-from PatternedTokensKaleidEditor import PatternedTokensKaleidEditor
+from SignalFilledTimeTokenMakerKaleidEditor import SignalFilledTimeTokenMakerKaleidEditor

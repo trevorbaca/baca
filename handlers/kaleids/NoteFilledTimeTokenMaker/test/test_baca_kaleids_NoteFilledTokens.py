@@ -3,9 +3,9 @@ from abjad.tools import sequencetools
 from handlers.kaleids import *
 
 
-def test_baca_kaleids_NoteFilledTokens_01():
+def test_baca_kaleids_NoteFilledTimeTokenMaker_01():
 
-    kaleid = NoteFilledTokens()
+    kaleid = NoteFilledTimeTokenMaker()
 
     duration_tokens = [(5, 16), (3, 8)]
     leaf_lists = kaleid(duration_tokens)
