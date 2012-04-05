@@ -1,9 +1,9 @@
 from abjad.tools import mathtools
 from abjad.tools import sequencetools
-from handlers.kaleids.BurnishedTimeTokenMakers import BurnishedTimeTokenMakers
+from handlers.kaleids.BurnishedTimeTokenMaker import BurnishedTimeTokenMaker
 
 
-class TokenBurnishedSignalFilledTimeTokenMaker(BurnishedTimeTokenMakers):
+class TokenBurnishedSignalFilledTimeTokenMaker(BurnishedTimeTokenMaker):
     '''Part-forced pattern-filled tokens.
     '''
 

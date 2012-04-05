@@ -6,7 +6,7 @@ from handlers.kaleids.TimeTokenMaker import TimeTokenMaker
 import types
 
 
-class BurnishedTimeTokenMakers(TimeTokenMaker):
+class BurnishedTimeTokenMaker(TimeTokenMaker):
     '''Part-forced object with patterned tokens.
     '''
 
