@@ -1,3 +1,4 @@
+from abjad.tools import scoretemplatetools
 from baca.specification.ScoreSpecification import ScoreSpecification
 from library import *
 import baca
@@ -8,7 +9,7 @@ import scf
 def test_ScoreSpecification_interpret_segments_01():
     py.test.skip('finish')
 
-    score_template = scf.templates.StringQuartetScoreTemplate
+    score_template = scoretemplatetools.StringQuartetScoreTemplate
     score = ScoreSpecification(score_template)
 
     context_name_abbreviations = {}

@@ -10,6 +10,5 @@ import proxies
 import selectors
 import specifiers
 import studio
-import templates
 import wizards
 import wranglers
