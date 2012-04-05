@@ -9,7 +9,7 @@ def test_KaleidMaterialPackageMaker_01():
     try:
         studio.run(user_input=
             'materials maker kaleid testkaleid default '
-            'testkaleid omi patternedtokens '
+            'testkaleid omi signalfilledtimetokenmaker '
             '[-1, 2, -3, 4] 16 [2, 3] [6] b default '
             'q '
             )
