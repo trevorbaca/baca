@@ -1,4 +1,4 @@
-from handlers.kaleids.TokenBurnishedSignalFilledTimeTokenMaker import TokenBurnishedSignalFilledTimeTokenMaker
+from abjad.tools.timetokentools.TokenBurnishedSignalFilledTimeTokenMaker import TokenBurnishedSignalFilledTimeTokenMaker
 
 
 class SignalFilledTimeTokenMaker(TokenBurnishedSignalFilledTimeTokenMaker):
