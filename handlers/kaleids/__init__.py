@@ -1,3 +1,2 @@
-from SignalFilledTimeTokenMaker import SignalFilledTimeTokenMaker
 from OutputIncisedNoteFilledTimeTokenMaker import OutputIncisedNoteFilledTimeTokenMaker
 from OutputIncisedRestFilledTimeTokenMaker import OutputIncisedRestFilledTimeTokenMaker
