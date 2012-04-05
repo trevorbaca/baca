@@ -1,14 +1,14 @@
+from abjad.tools import timetokentools
 from scf.editors.KaleidEditor import KaleidEditor
 from scf.editors.TargetManifest import TargetManifest
 from scf import getters
-import handlers
 
 
 class OutputIncisedRestFilledTimeTokenMakerEditor(KaleidEditor):
 
     ### CLASS ATTRIBUTES ###
 
-    target_manifest = TargetManifest(handlers.kaleids.OutputIncisedRestFilledTimeTokenMaker,
+    target_manifest = TargetManifest(timetokentools.OutputIncisedRestFilledTimeTokenMaker,
         ('prefix_signal', None, 'ps', getters.get_nonzero_integers, True),
         ('prefix_lengths', None, 'pl', getters.get_nonnegative_integers, True),
         ('suffix_signal', None, 'ss', getters.get_nonzero_integers, True),
