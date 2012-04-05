@@ -2,7 +2,7 @@ from abjad.tools import durationtools
 from abjad.tools import leaftools
 from abjad.tools import mathtools
 from abjad.tools import sequencetools
-from handlers.kaleids.TimeTokenMaker import TimeTokenMaker
+from abjad.tools.timetokentools.TimeTokenMaker import TimeTokenMaker
 import types
 
 
