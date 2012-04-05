@@ -7,7 +7,7 @@ class KaleidCreationWizard(HandlerCreationWizard):
     ### CLASS ATTRIBUTES ###
 
     handler_class_name_selector = selectors.KaleidClassNameSelector
-    handler_editor_class_name_suffix = 'KaleidEditor'
+    handler_editor_class_name_suffix = 'Editor'
 
     ### READ-ONLY PUBLIC PROPERTIES ###
 
