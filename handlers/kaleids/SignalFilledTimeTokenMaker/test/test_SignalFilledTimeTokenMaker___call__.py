@@ -3,7 +3,7 @@ from abjad.tools import sequencetools
 from handlers.kaleids import *
 
 
-def test_baca_rhythm_kaleids_SignalFilledTimeTokenMaker_01():
+def test_SignalFilledTimeTokenMaker___call___01():
 
     pattern, denominator, prolation_addenda = [-1, 4, -2, 3], 16, [3, 4]
     kaleid = SignalFilledTimeTokenMaker(pattern, denominator, prolation_addenda)
@@ -42,7 +42,7 @@ def test_baca_rhythm_kaleids_SignalFilledTimeTokenMaker_01():
     assert staff.format == "\\new Staff {\n\t{\n\t\t\\time 2/8\n\t\t\\times 4/7 {\n\t\t\tr16\n\t\t\tc'4\n\t\t\tr8\n\t\t}\n\t}\n\t{\n\t\t\\time 5/8\n\t\t\\fraction \\times 5/7 {\n\t\t\tc'8.\n\t\t\tr16\n\t\t\tc'4\n\t\t\tr8\n\t\t\tc'8.\n\t\t\tr16\n\t\t}\n\t}\n}"
 
 
-def test_baca_rhythm_kaleids_SignalFilledTimeTokenMaker_02():
+def test_SignalFilledTimeTokenMaker___call___02():
 
     pattern, denominator, prolation_addenda = [-1, 4, -2, 3], 16, [3, 4]
     secondary_divisions = [6]

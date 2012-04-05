@@ -3,7 +3,7 @@ from abjad.tools import sequencetools
 from handlers.kaleids import *
 
 
-def test_baca_rhythm_kaleids_TokenBurnishedSignalFilledTimeTokenMaker_01():
+def test_TokenBurnishedSignalFilledTimeTokenMaker___call___01():
 
     pattern, denominator, prolation_addenda = [1, 1, 2, 4], 32, [0]
     lefts, middles, rights = [-1], [0], [-1]
@@ -48,7 +48,7 @@ def test_baca_rhythm_kaleids_TokenBurnishedSignalFilledTimeTokenMaker_01():
     assert staff.format == "\\new Staff {\n\t{\n\t\t\\time 5/16\n\t\t{\n\t\t\tr32\n\t\t\tr32\n\t\t\tc'16\n\t\t\tc'8\n\t\t\tc'32\n\t\t\tr32\n\t\t}\n\t}\n\t{\n\t\t\\time 6/16\n\t\t{\n\t\t\tr16\n\t\t\tr8\n\t\t\tc'32\n\t\t\tc'32\n\t\t\tc'16\n\t\t\tr16\n\t\t}\n\t}\n}"
 
 
-def test_baca_rhythm_kaleids_TokenBurnishedSignalFilledTimeTokenMaker_02():
+def test_TokenBurnishedSignalFilledTimeTokenMaker___call___02():
 
     pattern, denominator, prolation_addenda = [1, 1, 2, 4], 32, [0]
     lefts, middles, rights = [0], [-1], [0]
@@ -92,7 +92,7 @@ def test_baca_rhythm_kaleids_TokenBurnishedSignalFilledTimeTokenMaker_02():
     assert staff.format == "\\new Staff {\n\t{\n\t\t\\time 5/16\n\t\t{\n\t\t\tc'32\n\t\t\tc'32\n\t\t\tr16\n\t\t\tr8\n\t\t\tr32\n\t\t\tc'32\n\t\t}\n\t}\n\t{\n\t\t\\time 6/16\n\t\t{\n\t\t\tc'16\n\t\t\tc'8\n\t\t\tr32\n\t\t\tr32\n\t\t\tr16\n\t\t\tc'16\n\t\t}\n\t}\n}"
 
 
-def test_baca_rhythm_kaleids_TokenBurnishedSignalFilledTimeTokenMaker_03():
+def test_TokenBurnishedSignalFilledTimeTokenMaker___call___03():
 
     pattern, denominator, prolation_addenda = [1, 1, 2, 4], 32, [3]
     lefts, middles, rights = [0], [-1], [0]
@@ -140,7 +140,7 @@ def test_baca_rhythm_kaleids_TokenBurnishedSignalFilledTimeTokenMaker_03():
     assert staff.format == "\\new Staff {\n\t{\n\t\t\\time 5/16\n\t\t\\fraction \\times 10/13 {\n\t\t\tc'32\n\t\t\tc'32\n\t\t\tr16\n\t\t\tr8\n\t\t\tr32\n\t\t\tr32\n\t\t\tr16\n\t\t\tc'32\n\t\t}\n\t}\n\t{\n\t\t\\time 6/16\n\t\t\\times 4/5 {\n\t\t\tc'16.\n\t\t\tc'32\n\t\t\tr32\n\t\t\tr16\n\t\t\tr8\n\t\t\tr32\n\t\t\tr32\n\t\t\tc'16\n\t\t}\n\t}\n}"
 
 
-def test_baca_rhythm_kaleids_TokenBurnishedSignalFilledTimeTokenMaker_04():
+def test_TokenBurnishedSignalFilledTimeTokenMaker___call___04():
 
     pattern, denominator, prolation_addenda = [1, 1, 2, 4], 32, [0, 3]
     lefts, middles, rights = [-1], [0], [-1]
@@ -185,7 +185,7 @@ def test_baca_rhythm_kaleids_TokenBurnishedSignalFilledTimeTokenMaker_04():
     assert staff.format == "\\new Staff {\n\t{\n\t\t\\time 5/16\n\t\t{\n\t\t\tr32\n\t\t\tc'32\n\t\t\tc'16\n\t\t\tc'8\n\t\t\tc'32\n\t\t\tr32\n\t\t}\n\t}\n\t{\n\t\t\\time 6/16\n\t\t\\times 4/5 {\n\t\t\tr16\n\t\t\tc'8\n\t\t\tc'32\n\t\t\tc'32\n\t\t\tc'16\n\t\t\tc'8\n\t\t\tr32\n\t\t}\n\t}\n}"
 
 
-def test_baca_rhythm_kaleids_TokenBurnishedSignalFilledTimeTokenMaker_05():
+def test_TokenBurnishedSignalFilledTimeTokenMaker___call___05():
 
     pattern, denominator, prolation_addenda = [1, 1, 2, 4], 32, [0, 3]
     lefts, middles, rights = [-1], [0], [-1]

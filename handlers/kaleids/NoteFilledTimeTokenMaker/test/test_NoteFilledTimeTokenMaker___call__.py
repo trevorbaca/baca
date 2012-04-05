@@ -3,7 +3,7 @@ from abjad.tools import sequencetools
 from handlers.kaleids import *
 
 
-def test_baca_kaleids_NoteFilledTimeTokenMaker_01():
+def test_NoteFilledTimeTokenMaker___call___01():
 
     kaleid = NoteFilledTimeTokenMaker()
 
