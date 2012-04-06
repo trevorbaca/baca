@@ -11,7 +11,7 @@ class Selection(AbjadObject):
         assert isinstance(context_names, (list, type(None)))
         assert isinstance(scope, (Scope, type(None)))
         self.segment_name = segment_name
-        self.context_names = context_names or []
+        self.context_names = context_names
         self.scope = scope
 
     ### SPECIAL METHODS ###

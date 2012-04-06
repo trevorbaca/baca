@@ -75,6 +75,11 @@ class SegmentSpecification(AbjadObject):
         except:
             return False
 
+    def annotate_source(self, source, seed=None):
+        if seed is not None:
+            source = StatalServerRequest(source, seed=seed)
+        return source
+
     def get_directives(self, target_selection=None, attribute_name=None):
         result = []
         for directive in self.directives:
@@ -105,7 +110,7 @@ class SegmentSpecification(AbjadObject):
         elif self.all_are_context_names(context_token):
             context_names = context_token
         elif isinstance(context_token, type(self)):
-            context_names = []
+            context_names = None
         else:
             raise ValueError('invalid context token: {!r}'.format(context_token))
         return context_names
@@ -175,80 +180,99 @@ class SegmentSpecification(AbjadObject):
 
     def set_articulations(self, target_token, source, persistent=True, seed=None):
         target_selection = self.parse_selection_token(target_token)
-        directive = Directive(target_selection, self.attrs.articulations, source, seed=seed)
+        source = self.annotate_source(source, seed=seed)
+        directive = Directive(target_selection, self.attrs.articulations, source)
         directive.persistent = persistent
         self.directives.append(directive)
 
     def set_chords(self, target_token, source, persistent=True, seed=None):
         target_selection = self.parse_selection_token(target_token)
-        directive = Directive(target_selection, self.attrs.chords, source, seed=seed)
+        source = self.annotate_source(source, seed=seed)
+        directive = Directive(target_selection, self.attrs.chords, source)
         directive.persistent = persistent
         self.directives.append(directive)
 
     def set_divisions(self, target_token, source, persistent=True, seed=None):
         target_selection = self.parse_selection_token(target_token)
-        directive = Directive(target_selection, self.attrs.divisions, source, seed=seed)
+        source = self.annotate_source(source, seed=seed)
+        directive = Directive(target_selection, self.attrs.divisions, source)
         directive.persistent = persistent
         self.directives.append(directive)
 
-    def set_duration_in_seconds(self, target_token, duration_in_seconds, persistent=True):
+    def set_duration_in_seconds(self, target_token, source, persistent=True, seed=None):
         target_selection = self.parse_selection_token(target_token)
-        directive = Directive(target_selection, self.attrs.duration_in_seconds, duration_in_seconds)
+        source = self.annotate_source(source, seed=seed)
+        directive = Directive(target_selection, self.attrs.duration_in_seconds, source)
         directive.persistent = persistent
         self.directives.append(directive)
 
     def set_dynamics(self, target_token, source, persistent=True, seed=None):
         target_selection = self.parse_selection_token(target_token)
-        directive = Directive(target_selection, self.attrs.dynamics, source, seed=seed)
+        source = self.annotate_source(source, seed=seed)
+        directive = Directive(target_selection, self.attrs.dynamics, source)
         directive.persistent = persistent
         self.directives.append(directive)
 
     def set_marks(self, target_token, source, persistent=True, seed=None):
         target_selection = self.parse_selection_token(target_token)
-        directive = Directive(target_selection, self.attrs.marks, source, seed=seed)
+        source = self.annotate_source(source, seed=seed)
+        directive = Directive(target_selection, self.attrs.marks, source)
         directive.persistent = persistent
         self.directives.append(directive)
 
     def set_markup(self, target_token, source, persistent=True, seed=None):
         target_selection = self.parse_selection_token(target_token)
-        directive = Directive(target_selection, source, self.attrs.markup, seed=seed)
+        source = self.annotate_source(source, seed=seed)
+        directive = Directive(target_selection, self.attrs.markup, source)
         directive.persistent = persistent
         self.directives.append(directive) 
 
-    def set_pitch_class_transform(self, target_token, transform, persistent=True):
+    def set_pitch_class_transform(self, target_token, source, persistent=True, seed=None):
         target_selection = self.parse_selection_token(target_token)
-        directive = Directive(target_selection, self.attrs.transform, transform)
+        source = self.annotate_source(source, seed=seed)
+        directive = Directive(target_selection, self.attrs.transform, source)
         directive.persistent = persistent
         self.directives.append(directive)
 
-    def set_pitch_classes_timewise(self, target_token, pitch_class_server, persistent=True, seed=None):
+    def set_pitch_classes(self, target_token, source, persistent=True, seed=None):
         target_selection = self.parse_selection_token(target_token)
-        source = TimewisePitchClassHandler(pitch_class_server)
-        directive = Directive(target_selection, self.attrs.pitch_classes, source, seed=seed)
+        source = self.annotate_source(source, seed=seed)
+        directive = Directive(target_selection, self.attrs.pitch_classes, source)
+        directive.persistent = persistent
+        self.directives.append(directive)
+
+    def set_pitch_class_application(self, target_token, source, persistent=True, seed=None):
+        target_selection = self.parse_selection_token(target_token)
+        source = self.annotate_source(source, seed=seed)
+        directive = Directive(target_selection, self.attrs.pitch_class_application, source)
         directive.persistent = persistent
         self.directives.append(directive)
 
     def set_register(self, target_token, source, persistent=True, seed=None):
         target_selection = self.parse_selection_token(target_token)
-        directive = Directive(target_selection, self.attrs.register, source, seed=seed)
+        source = self.annotate_source(source, seed=seed)
+        directive = Directive(target_selection, self.attrs.register, source)
         directive.persistent = persistent
         self.directives.append(directive)
 
     def set_rhythm(self, target_token, source, persistent=True, seed=None):
         target_selection = self.parse_selection_token(target_token)
-        directive = Directive(target_selection, self.attrs.rhythm, source, seed=seed)
+        source = self.annotate_source(source, seed=seed)
+        directive = Directive(target_selection, self.attrs.rhythm, source)
         directive.persistent = persistent
         self.directives.append(directive)
 
-    def set_tempo(self, target_token, source, persistent=True):
+    def set_tempo(self, target_token, source, persistent=True, seed=None):
         target_selection = self.parse_selection_token(target_token)
+        source = self.annotate_source(source, seed=seed)
         directive = Directive(target_selection, self.attrs.tempo, source)
         directive.persistent = persistent
         self.directives.append(directive)
 
-    def set_time_signatures(self, target_token, time_signatures, persistent=True):
+    def set_time_signatures(self, target_token, source, persistent=True, seed=None):
         target_selection = self.parse_selection_token(target_token)
-        directive = Directive(target_selection, self.attrs.time_signatures, time_signatures)
+        source = self.annotate_source(source, seed=seed)
+        directive = Directive(target_selection, self.attrs.time_signatures, source)
         directive.persistent = persistent
         self.directives.append(directive)
 
@@ -259,8 +283,9 @@ class SegmentSpecification(AbjadObject):
         directive.persistent = persistent
         self.directives.append(directive)
 
-    def set_written_duration(self, target_token, written_duration, persistent=True):
+    def set_written_duration(self, target_token, source, persistent=True, seed=None):
         target_selection = self.parse_selection_token(target_token)
-        directive = Directive(target_selection, self.attrs.written_duration, written_duration)
+        source = self.annotate_source(source, seed=seed)
+        directive = Directive(target_selection, self.attrs.written_duration, source)
         directive.persistent = persistent
         self.directives.append(directive)

@@ -9,6 +9,7 @@ class AttributeNameEnumeration(object):
     marks = 'marks'
     markup = 'markup'
     pitch = 'pitch'
+    pitch_class_application = 'pitch_class_application'
     pitch_classes = 'pitch_classes'
     register = 'register'
     rhythm = 'rhythm'

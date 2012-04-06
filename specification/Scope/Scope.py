@@ -18,6 +18,7 @@ class Scope(AbjadObject):
         assert isinstance(stop, (int, type(None)))
         assert self.are_concordant_input_values(part, start, stop)
         self.criterion = criterion
+        self.part = part
         self.start = start
         self.stop = stop
 

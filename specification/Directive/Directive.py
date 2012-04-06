@@ -6,12 +6,11 @@ class Directive(AbjadObject):
 
     ### INITIALIZER ###
 
-    def __init__(self, target_selection, attribute_name, source, persistent=True, seed=None):
+    def __init__(self, target_selection, attribute_name, source, persistent=True):
         self.target_selection = target_selection
         self.attribute_name = attribute_name
         self.source = source
         self.persistent = persistent
-        self.seed = seed
 
     ### READ-ONLY PUBLIC PROPERTIES ###
 
