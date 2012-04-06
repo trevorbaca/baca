@@ -6,7 +6,7 @@ def test_TimeTokenMakerPackageSelector_list_current_material_package_path_names_
 
     selector = scf.selectors.TimeTokenMakerPackageSelector()
     selector.session._current_score_package_short_name = 'betoerung'
-    speckled_kaleid_path_name = os.path.join(
-        os.environ.get('SCORES'), 'betoerung', 'mus', 'materials', 'speckled_kaleid')
+    speckled_time_token_maker_path_name = os.path.join(
+        os.environ.get('SCORES'), 'betoerung', 'mus', 'materials', 'speckled_time_token_maker')
 
-    assert speckled_kaleid_path_name in selector.list_current_material_package_path_names()
+    assert speckled_time_token_maker_path_name in selector.list_current_material_package_path_names()

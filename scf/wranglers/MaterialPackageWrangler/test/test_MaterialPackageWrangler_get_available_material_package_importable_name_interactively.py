@@ -20,7 +20,7 @@ def test_MaterialPackageWrangler_get_available_material_package_importable_name_
     result = wrangler.get_available_material_package_importable_name_interactively(user_input='foo')
     assert result == 'betoerung.mus.materials.foo'
 
-    result = wrangler.get_available_material_package_importable_name_interactively(user_input='speckled~kaleid q')
+    result = wrangler.get_available_material_package_importable_name_interactively(user_input='speckled~time~token~maker q')
     assert result is None
 
 
