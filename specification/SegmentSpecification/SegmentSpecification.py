@@ -18,10 +18,11 @@ class SegmentSpecification(AbjadObject):
 
     ### INITIALIZER ###
 
-    def __init__(self, score_template, directives=None, name=None):
+    def __init__(self, score_template, directives=None, name=None, settings=None):
         self.score_template = score_template
         self.directives = directives or []
         self.name = name
+        self.settings = settings or []
 
     ### SPECIAL METHODS ###
 
@@ -91,6 +92,15 @@ class SegmentSpecification(AbjadObject):
                 if attribute_name is None or directive.attribute_name == attribute_name:
                     result.append(directive)
         return result
+
+    def get_settings(self, context_name=None, attribute_name=None, persistent=None):
+        settings = []
+        for setting in self.settings:
+            if ((context_name is None or setting.context_name == context_name) and
+                (attribute_name is None or setting.attribute_name == attribute_name) and
+                (persistent is None or setting.persistent == persistent)):
+                settings.append(setting)
+        return settings
 
     def initialize_context_names(self):
         if self.score is not None:
@@ -234,7 +244,6 @@ class SegmentSpecification(AbjadObject):
         self.set_attribute(attribute_name, target_token, source, count=count, persistent=persistent, offset=offset)
 
     def unpack_settings(self):
-        settings = []
         for directive in self.directives:
-            settings.extend(directive.unpack_settings())
-        return settings
+            self.settings.extend(directive.unpack_settings())
+        return self.settings
