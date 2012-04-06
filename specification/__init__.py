@@ -1,5 +1,3 @@
-from DuratedStatalServer import DuratedStatalServer
-from DuratedStatalServerRequest import DuratedStatalServerRequest
 from HandlerRequest import HandlerRequest
 from ScoreSpecification import ScoreSpecification
 from SegmentSpecification import SegmentSpecification

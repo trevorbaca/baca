@@ -6,7 +6,6 @@ from abjad.tools.scoretemplatetools.ScoreTemplate import ScoreTemplate
 from baca.handlers.composites.CompositeRhythmHandler import CompositeRhythmHandler
 from baca.handlers.pitch.TimewisePitchClassHandler import TimewisePitchClassHandler
 from baca.specification.Directive import Directive
-from baca.specification.DuratedStatalServerRequest import DuratedStatalServerRequest
 from baca.specification.HandlerRequest import HandlerRequest
 from baca.specification.Scope import Scope
 from baca.specification.Selection import Selection
