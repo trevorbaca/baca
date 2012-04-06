@@ -104,6 +104,8 @@ class SegmentSpecification(AbjadObject):
             context_names = [context_token]
         elif self.all_are_context_names(context_token):
             context_names = context_token
+        elif isinstance(context_token, type(self)):
+            context_names = []
         else:
             raise ValueError('invalid context token: {!r}'.format(context_token))
         return context_names
@@ -133,13 +135,12 @@ class SegmentSpecification(AbjadObject):
         criterion = 'divisions'
         context_names = self.parse_context_token(context_token)
         temporal_scope = TemporalScope(criterion=criterion, part=part, start=start, stop=stop)
-        selection = self.select_by_count(context_names=context_names, temporal_scope=temporal_scope)
+        selection = self.select_by_count(context_names=context_names, segment_name=segment_name, scope=scope)
         return selection
 
-    #def select_measures_by_count(self, context_token, part=None, start=None, stop=None):
-    def select_measures_by_count(self, target_token, part=None, start=None, stop=None):
+    def select_measures_by_count(self, context_token=None, part=None, segment_name=None, start=None, stop=None):
         criterion = 'measures'
-        #context_names = self.parse_context_token(context_token)
+        context_names = self.parse_context_token(context_token)
         temporal_scope = TemporalScope(criterion=criterion, part=part, start=start, stop=stop)
         selection = self.select_by_count(context_names=context_names, temporal_scope=temporal_scope)
         return selection

@@ -6,11 +6,11 @@ class Selection(AbjadObject):
 
     ### INITIALIZER ###
 
-    def __init__(self, score_segment_name, context_names=None, temporal_scope=None):
-        assert isinstance(score_segment_name, str)
+    def __init__(self, segment_name, context_names=None, temporal_scope=None):
+        assert isinstance(segment_name, str)
         assert isinstance(context_names, (list, type(None)))
         assert isinstance(temporal_scope, (TemporalScope, type(None)))
-        self.score_segment_name = score_segment_name
+        self.segment_name = segment_name
         self.context_names = context_names or []
         self.temporal_scope = temporal_scope
 
