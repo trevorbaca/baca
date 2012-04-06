@@ -9,7 +9,7 @@ class TimeTokenMakerMaterialPackageMaker(MaterialPackageMaker):
 
     ### CLASS ATTRIBUTES ###
 
-    generic_output_name = 'kaleid'
+    generic_output_name = 'time-token maker'
     illustration_maker = staticmethod(make_illustration_from_output_material)
     output_material_checker = staticmethod(lambda x: isinstance(x, TimeTokenMaker))
     output_material_editor = staticmethod(get_time_token_maker_editor)
