@@ -12,7 +12,7 @@ def test_TempoMarkInventoryMaterialPackageMaker_01():
             'testtempoinventory omi add ((1, 4), 60) add ((1, 4), 90) b default '
             'q '
             )
-        mpp = scf.makers.KaleidMaterialPackageMaker('materials.testtempoinventory')
+        mpp = scf.makers.TempoMarkInventoryMaterialPackageMaker('materials.testtempoinventory')
         assert mpp.directory_contents == ['__init__.py', 'output_material.py', 'tags.py']
         inventory = contexttools.TempoMarkInventory([((1, 4), 60), ((1, 4), 90)])
         assert mpp.output_material == inventory

@@ -2,18 +2,18 @@ from abjad.tools import timetokentools
 import scf
 
 
-def test_KaleidMaterialPackageMaker_01():
+def test_TimeTokenMakerMaterialPackageMaker_01():
 
     studio = scf.studio.Studio()
     assert not studio.package_exists('materials.testtimetokenmaker')
     try:
         studio.run(user_input=
-            'materials maker timetokenmaker testtimetokenmaker default '
+            'materials maker time testtimetokenmaker default '
             'testtimetokenmaker omi signalfilledtimetokenmaker '
             '[-1, 2, -3, 4] 16 [2, 3] [6] b default '
             'q '
             )
-        mpp = scf.makers.KaleidMaterialPackageMaker('materials.testtimetokenmaker')
+        mpp = scf.makers.TimeTokenMakerMaterialPackageMaker('materials.testtimetokenmaker')
         assert mpp.directory_contents == ['__init__.py', 'output_material.py', 'tags.py']
         maker = timetokentools.SignalFilledTimeTokenMaker(
             [-1, 2, -3, 4],
