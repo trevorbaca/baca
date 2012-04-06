@@ -13,5 +13,5 @@ class RhythmSpecifierEditor(ParameterSpecifierEditor):
         ('name', 'nm', getters.get_string),
         ('description', 'ds', getters.get_string),
         (),
-        ('kaleid_package_importable_name', 'kaleid', 'kl', selectors.KaleidPackageSelector),
+        ('kaleid_package_importable_name', 'kaleid', 'kl', selectors.TimeTokenMakerPackageSelector),
         )

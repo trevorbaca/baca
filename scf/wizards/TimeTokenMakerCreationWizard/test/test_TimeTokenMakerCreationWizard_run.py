@@ -1,4 +1,4 @@
-import handlers
+from abjad.tools import timetokentools
 import scf
 
 
@@ -7,11 +7,11 @@ def test_TimeTokenMakerCreationWizard_run_01():
     wizard = scf.wizards.TimeTokenMakerCreationWizard()
     wizard.run(user_input='signalfilledtimetokenmaker [-1, 2, -3, 4] 16 [2, 3] [6] b')
 
-    handler = handlers.kaleids.SignalFilledTimeTokenMaker(
+    maker = timetokentools.SignalFilledTimeTokenMaker(
         [-1, 2, -3, 4], 
         16,
         prolation_addenda=[2, 3],
         secondary_divisions=[6],
         )
 
-    assert wizard.target == handler
+    assert wizard.target == maker

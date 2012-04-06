@@ -2,7 +2,7 @@ from scf.selectors.HandlerClassNameSelector import HandlerClassNameSelector
 import os
 
 
-class KaleidClassNameSelector(HandlerClassNameSelector):
+class TimeTokenMakerClassNameSelector(HandlerClassNameSelector):
 
     ### CLASS ATTRIBUTES ###
     

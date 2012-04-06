@@ -1,7 +1,7 @@
 from scf.selectors.MaterialPackageSelector import MaterialPackageSelector
 
 
-class KaleidPackageSelector(MaterialPackageSelector):
+class TimeTokenMakerPackageSelector(MaterialPackageSelector):
 
     ### CLASS ATTRIBUTES ###
 
