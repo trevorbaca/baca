@@ -7,7 +7,7 @@ from baca.specification.Selection import Selection
 from baca.specification.StatalServerRequest import StatalServerRequest
 
 
-class ScoreSegmentSpecification(object):
+class SegmentSpecification(object):
 
     ### CLASS ATTRIBUTES ###
 

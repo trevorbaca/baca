@@ -1,4 +1,4 @@
-from baca.specification.ScoreSegmentSpecification import ScoreSegmentSpecification
+from baca.specification.SegmentSpecification import SegmentSpecification
 from baca.specification.Selection import Selection
 from baca.specification.StatalServerRequest import StatalServerRequest
 from baca.specification.SettingReservoirs import SettingReservoirs
@@ -12,7 +12,7 @@ class ScoreSpecification(object):
         score_segment_specification_class=None, segments=None):
         self.context_name_abbreviations = context_name_abbreviations or {}
         self.score_template = score_template
-        self.score_segment_specification_class = score_segment_specification_class or ScoreSegmentSpecification
+        self.score_segment_specification_class = score_segment_specification_class or SegmentSpecification
         self.segments = segments or []
         self.initialize_context_name_abbreviations()
 
