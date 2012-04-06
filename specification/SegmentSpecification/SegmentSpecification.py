@@ -8,9 +8,9 @@ from baca.handlers.pitch.TimewisePitchClassHandler import TimewisePitchClassHand
 from baca.specification.AttributeNameEnumeration import AttributeNameEnumeration
 from baca.specification.Directive import Directive
 from baca.specification.DuratedStatalServerRequest import DuratedStatalServerRequest
+from baca.specification.Scope import Scope
 from baca.specification.Selection import Selection
 from baca.specification.StatalServerRequest import StatalServerRequest
-from baca.specification.Scope import Scope
 
 
 class SegmentSpecification(AbjadObject):
@@ -120,7 +120,7 @@ class SegmentSpecification(AbjadObject):
         elif self.all_are_context_names(selection_token):
             selection = self.select_by_count(context_names=selection_token)
         else:
-            raise ValueError('what is {!r}?'.format(selection_token))
+            raise ValueError('invalid selection token: {!r}.'.format(selection_token))
         return selection
 
     def select_by_count(self, context_names=None, segment_name=None, scope=None):
@@ -131,7 +131,7 @@ class SegmentSpecification(AbjadObject):
         selection = Selection(segment_name, context_names=context_names, scope=scope)
         return selection
 
-    def select_divisions_by_count(self, context_token, part=None, start=None, stop=None):
+    def select_divisions_by_count(self, context_token=None, part=None, segment_name=None, start=None, stop=None):
         criterion = 'divisions'
         context_names = self.parse_context_token(context_token)
         scope = Scope(criterion=criterion, part=part, start=start, stop=stop)
@@ -142,10 +142,11 @@ class SegmentSpecification(AbjadObject):
         criterion = 'measures'
         context_names = self.parse_context_token(context_token)
         scope = Scope(criterion=criterion, part=part, start=start, stop=stop)
-        selection = self.select_by_count(context_names=context_names, scope=scope)
+        selection = self.select_by_count(context_names=context_names, segment_name=segment_name, scope=scope)
         return selection
     
-    def select_notes_and_chords_by_count(self, context_token, part=None, start=None, stop=None):
+    def select_notes_and_chords_by_count(self, 
+        context_token=None, part=None, segment_name=None, start=None, stop=None):
         criterion = (chordtools.Chord, notetools.Note)
         context_names = self.parse_context_token(context_token)
         scope = Scope(criterion=criterion, part=part, start=start, stop=stop)
@@ -233,10 +234,8 @@ class SegmentSpecification(AbjadObject):
         directive.persistent = persistent
         self.directives.append(directive)
 
-    def set_rhythm(self, target_token, source_token, persistent=True, seed=None):
+    def set_rhythm(self, target_token, source, persistent=True, seed=None):
         target_selection = self.parse_selection_token(target_token)
-        division_source, rhythm_source = source_token
-        source = CompositeRhythmHandler(division_source, rhythm_source)
         directive = Directive(target_selection, self.attrs.rhythm, source, seed=seed)
         directive.persistent = persistent
         self.directives.append(directive)

@@ -5,6 +5,10 @@ from abjad.tools import mathtools
 
 class Scope(AbjadObject):
 
+    ### CLASS ATTRIBUTES ###
+
+    criteria_strings = ('divisions', 'measures',)
+
     ### INITIALIZER ###
 
     def __init__(self, criterion=None, part=None, start=None, stop=None):
@@ -35,6 +39,8 @@ class Scope(AbjadObject):
         if expr is None:
             return True
         elif self.all_are_component_subclasses(expr):
+            return True
+        elif expr in self.criteria_strings:
             return True
         else:
             raise ValueError('invalid temporal scope criterion: {!r}'.format(expr))
