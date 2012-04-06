@@ -5,19 +5,15 @@ from abjad.tools.abctools.AbjadObject import AbjadObject
 from abjad.tools.scoretemplatetools.ScoreTemplate import ScoreTemplate
 from baca.handlers.composites.CompositeRhythmHandler import CompositeRhythmHandler
 from baca.handlers.pitch.TimewisePitchClassHandler import TimewisePitchClassHandler
-from baca.specification.AttributeNameEnumeration import AttributeNameEnumeration
 from baca.specification.Directive import Directive
 from baca.specification.DuratedStatalServerRequest import DuratedStatalServerRequest
 from baca.specification.Scope import Scope
 from baca.specification.Selection import Selection
+from baca.specification.StatalServer import StatalServer
 from baca.specification.StatalServerRequest import StatalServerRequest
 
 
 class SegmentSpecification(AbjadObject):
-
-    ### CLASS ATTRIBUTES ###
-
-    attrs = AttributeNameEnumeration()
 
     ### INITIALIZER ###
 
@@ -75,9 +71,9 @@ class SegmentSpecification(AbjadObject):
         except:
             return False
 
-    def annotate_source(self, source, seed=None):
-        if seed is not None:
-            source = StatalServerRequest(source, seed=seed)
+    def annotate_source(self, source, count=None, seed=None):
+        if isinstance(source, StatalServer):
+            source = StatalServerRequest(source, count=count, seed=seed)
         return source
 
     def get_directives(self, target_selection=None, attribute_name=None):
@@ -158,134 +154,74 @@ class SegmentSpecification(AbjadObject):
         selection = self.select_by_count(context_names=context_names, scope=scope)
         return selection
 
-    def set_aggregate(self, target_token, aggregate, persistent=True):
-        target_selection = self.parse_selection_token(target_token)
-        directive = Directive(target_selection, self.attrs.aggregate, aggregate)
-        directive.persistent = persistent
-        self.directives.append(directive)
-
-    def set_aggregate_to_aggregate_at_index(self, target_token, server, index, persistent=True):
-        target_selection = self.parse_selection_token(target_token)
-        source = StatalServerRequest(server, index=index)
-        directive = Directive(target_selection, self.attrs.aggregate, source)
-        directive.persistent = persistent
-        self.directives.append(directive)
-
-    def set_aggregate_to_next_aggregate(self, target_token, server, persistent=True):
-        target_selection = self.parse_selection_token(target_token)
-        source = StatalServerRequest(server, count=1)
-        directive = Directive(target_selection, self.attrs.aggregate, source)
-        directive.persistent = persistent
-        self.directives.append(directive)
+    def set_aggregate(self, target_token, source, count=None, persistent=True, seed=None):
+        attribute_name = 'aggregate'
+        self.set_attribute(attribute_name, target_token, source, count=count, persistent=persistent, seed=seed)
 
     def set_articulations(self, target_token, source, persistent=True, seed=None):
+        attribute_name = 'articulations'
+        self.set_attribute(attribute_name, target_token, source, persistent=persistent, seed=seed)
+
+    def set_attribute(self, attribute_name, target_token, source, count=None, persistent=True, seed=None):
+        assert isinstance(attribute_name, str)
+        assert isinstance(persistent, type(True))
         target_selection = self.parse_selection_token(target_token)
-        source = self.annotate_source(source, seed=seed)
-        directive = Directive(target_selection, self.attrs.articulations, source)
-        directive.persistent = persistent
+        source = self.annotate_source(source, count=count, seed=seed)
+        directive = Directive(target_selection, attribute_name, source, persistent=persistent)
         self.directives.append(directive)
 
-    def set_chords(self, target_token, source, persistent=True, seed=None):
-        target_selection = self.parse_selection_token(target_token)
-        source = self.annotate_source(source, seed=seed)
-        directive = Directive(target_selection, self.attrs.chords, source)
-        directive.persistent = persistent
-        self.directives.append(directive)
+    def set_chord_treatment(self, target_token, source, persistent=True, seed=None):
+        attribute_name = 'chord_treatment'
+        self.set_attribute(attribute_name, target_token, source, persistent=persistent, seed=seed)
 
-    def set_divisions(self, target_token, source, persistent=True, seed=None):
-        target_selection = self.parse_selection_token(target_token)
-        source = self.annotate_source(source, seed=seed)
-        directive = Directive(target_selection, self.attrs.divisions, source)
-        directive.persistent = persistent
-        self.directives.append(directive)
+    def set_divisions(self, target_token, source, count=None, persistent=True, seed=None):
+        attribute_name = 'divisions'
+        self.set_attribute(attribute_name, target_token, source, count=count, persistent=persistent, seed=seed)
 
     def set_duration_in_seconds(self, target_token, source, persistent=True, seed=None):
-        target_selection = self.parse_selection_token(target_token)
-        source = self.annotate_source(source, seed=seed)
-        directive = Directive(target_selection, self.attrs.duration_in_seconds, source)
-        directive.persistent = persistent
-        self.directives.append(directive)
+        attribute_name = 'duration_in_seconds'
+        self.set_attribute(attribute_name, target_token, source, persistent=persistent, seed=seed)
 
     def set_dynamics(self, target_token, source, persistent=True, seed=None):
-        target_selection = self.parse_selection_token(target_token)
-        source = self.annotate_source(source, seed=seed)
-        directive = Directive(target_selection, self.attrs.dynamics, source)
-        directive.persistent = persistent
-        self.directives.append(directive)
+        attribute_name = 'dynamcis'
+        self.set_attribute(attribute_name, target_token, source, persistent=persistent, seed=seed)
 
     def set_marks(self, target_token, source, persistent=True, seed=None):
-        target_selection = self.parse_selection_token(target_token)
-        source = self.annotate_source(source, seed=seed)
-        directive = Directive(target_selection, self.attrs.marks, source)
-        directive.persistent = persistent
-        self.directives.append(directive)
+        attribute_name = 'marks'
+        self.set_attribute(attribute_name, target_token, source, persistent=persistent, seed=seed)
 
     def set_markup(self, target_token, source, persistent=True, seed=None):
-        target_selection = self.parse_selection_token(target_token)
-        source = self.annotate_source(source, seed=seed)
-        directive = Directive(target_selection, self.attrs.markup, source)
-        directive.persistent = persistent
-        self.directives.append(directive) 
-
-    def set_pitch_class_transform(self, target_token, source, persistent=True, seed=None):
-        target_selection = self.parse_selection_token(target_token)
-        source = self.annotate_source(source, seed=seed)
-        directive = Directive(target_selection, self.attrs.transform, source)
-        directive.persistent = persistent
-        self.directives.append(directive)
+        attribute_name = 'markup'
+        self.set_attribute(attribute_name, target_token, source, persistent=persistent, seed=seed)
 
     def set_pitch_classes(self, target_token, source, persistent=True, seed=None):
-        target_selection = self.parse_selection_token(target_token)
-        source = self.annotate_source(source, seed=seed)
-        directive = Directive(target_selection, self.attrs.pitch_classes, source)
-        directive.persistent = persistent
-        self.directives.append(directive)
+        attribute_name = 'pitch_classes'
+        self.set_attribute(attribute_name, target_token, source, persistent=persistent, seed=seed)
 
     def set_pitch_class_application(self, target_token, source, persistent=True, seed=None):
-        target_selection = self.parse_selection_token(target_token)
-        source = self.annotate_source(source, seed=seed)
-        directive = Directive(target_selection, self.attrs.pitch_class_application, source)
-        directive.persistent = persistent
-        self.directives.append(directive)
+        attribute_name = 'pitch_class_application'
+        self.set_attribute(attribute_name, target_token, source, persistent=persistent, seed=seed)
+
+    def set_pitch_class_transform(self, target_token, source, persistent=True, seed=None):
+        attribute_name = 'pitch_class_transform'
+        self.set_attribute(attribute_name, target_token, source, persistent=persistent, seed=seed)
 
     def set_register(self, target_token, source, persistent=True, seed=None):
-        target_selection = self.parse_selection_token(target_token)
-        source = self.annotate_source(source, seed=seed)
-        directive = Directive(target_selection, self.attrs.register, source)
-        directive.persistent = persistent
-        self.directives.append(directive)
+        attribute_name = 'register'
+        self.set_attribute(attribute_name, target_token, source, persistent=persistent, seed=seed)
 
     def set_rhythm(self, target_token, source, persistent=True, seed=None):
-        target_selection = self.parse_selection_token(target_token)
-        source = self.annotate_source(source, seed=seed)
-        directive = Directive(target_selection, self.attrs.rhythm, source)
-        directive.persistent = persistent
-        self.directives.append(directive)
+        attribute_name = 'rhythm'
+        self.set_attribute(attribute_name, target_token, source, persistent=persistent, seed=seed)
 
     def set_tempo(self, target_token, source, persistent=True, seed=None):
-        target_selection = self.parse_selection_token(target_token)
-        source = self.annotate_source(source, seed=seed)
-        directive = Directive(target_selection, self.attrs.tempo, source)
-        directive.persistent = persistent
-        self.directives.append(directive)
+        attribute_name = 'tempo'
+        self.set_attribute(attribute_name, target_token, source, persistent=persistent, seed=seed)
 
-    def set_time_signatures(self, target_token, source, persistent=True, seed=None):
-        target_selection = self.parse_selection_token(target_token)
-        source = self.annotate_source(source, seed=seed)
-        directive = Directive(target_selection, self.attrs.time_signatures, source)
-        directive.persistent = persistent
-        self.directives.append(directive)
-
-    def set_time_signatures_from_count(self, target_token, server, count, persistent=True):
-        target_selection = self.parse_selection_token(target_token)
-        source = StatalServerRequest(server, count=count)
-        directive = Directive(target_selection, self.attrs.time_signatures, source)
-        directive.persistent = persistent
-        self.directives.append(directive)
+    def set_time_signatures(self, target_token, source, count=None, persistent=True, seed=None):
+        attribute_name = 'time_signatures'
+        self.set_attribute(attribute_name, target_token, source, count=count, persistent=persistent, seed=seed)
 
     def set_written_duration(self, target_token, source, persistent=True, seed=None):
-        target_selection = self.parse_selection_token(target_token)
-        source = self.annotate_source(source, seed=seed)
-        directive = Directive(target_selection, self.attrs.written_duration, source)
-        directive.persistent = persistent
-        self.directives.append(directive)
+        attribute_name = 'written_duration'
+        self.set_attribute(attribute_name, target_token, source, persistent=persistent, seed=seed)
