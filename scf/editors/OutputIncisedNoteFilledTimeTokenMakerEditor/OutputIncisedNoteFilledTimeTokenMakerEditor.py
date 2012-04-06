@@ -1,10 +1,10 @@
 from abjad.tools import timetokentools
-from scf.editors.KaleidEditor import KaleidEditor
+from scf.editors.TimeTokenMakerEditor import TimeTokenMakerEditor
 from scf.editors.TargetManifest import TargetManifest
 from scf import getters
 
 
-class OutputIncisedNoteFilledTimeTokenMakerEditor(KaleidEditor):
+class OutputIncisedNoteFilledTimeTokenMakerEditor(TimeTokenMakerEditor):
 
     ### CLASS ATTRIBUTES ###
 

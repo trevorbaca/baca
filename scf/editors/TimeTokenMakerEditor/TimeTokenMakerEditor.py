@@ -1,7 +1,7 @@
 from scf.editors.InteractiveEditor import InteractiveEditor
 
 
-class KaleidEditor(InteractiveEditor):
+class TimeTokenMakerEditor(InteractiveEditor):
     
     ### READ-ONLY PROPERTIES ###
 
