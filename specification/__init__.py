@@ -1,3 +1,4 @@
+from AttributeNameEnumeration import AttributeNameEnumeration
 from DuratedStatalServer import DuratedStatalServer
 from DuratedStatalServerRequest import DuratedStatalServerRequest
 from ScoreSpecification import ScoreSpecification
