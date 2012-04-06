@@ -74,10 +74,12 @@ class SegmentSpecification(AbjadObject):
 
     def annotate_source(self, source, count=None, offset=None):
         if isinstance(source, StatalServer):
-            source = StatalServerRequest(source, count=count, offset=offset)
+            if count is not None or offset is not None:
+                source = StatalServerRequest(source, count=count, offset=offset)
         elif isinstance(source, Handler):
-            assert count is None
-            source = HandlerRequest(source, offset=offset)
+            if offset is not None:
+                assert count is None
+                source = HandlerRequest(source, offset=offset)
         elif count is not None or offset is not None:
             raise ValueError("'count' or 'offset' set on nonstatal source: {!r}.".format(source))
         return source
