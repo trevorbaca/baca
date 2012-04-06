@@ -7,10 +7,12 @@ from baca.handlers.composites.CompositeRhythmHandler import CompositeRhythmHandl
 from baca.handlers.pitch.TimewisePitchClassHandler import TimewisePitchClassHandler
 from baca.specification.Directive import Directive
 from baca.specification.DuratedStatalServerRequest import DuratedStatalServerRequest
+from baca.specification.HandlerRequest import HandlerRequest
 from baca.specification.Scope import Scope
 from baca.specification.Selection import Selection
 from baca.specification.StatalServer import StatalServer
 from baca.specification.StatalServerRequest import StatalServerRequest
+from handlers.Handler import Handler
 
 
 class SegmentSpecification(AbjadObject):
@@ -74,6 +76,11 @@ class SegmentSpecification(AbjadObject):
     def annotate_source(self, source, count=None, seed=None):
         if isinstance(source, StatalServer):
             source = StatalServerRequest(source, count=count, seed=seed)
+        elif isinstance(source, Handler):
+            assert count is None
+            source = HandlerRequest(source, offset=seed)
+        elif count is not None or seed is not None:
+            raise ValueError("'count' or 'seed' set on nonstatal source: {!r}.".format(source))
         return source
 
     def get_directives(self, target_selection=None, attribute_name=None):
@@ -115,16 +122,16 @@ class SegmentSpecification(AbjadObject):
         if isinstance(selection_token, Selection):
             selection = selection_token
         elif isinstance(selection_token, type(self)):
-            selection = self.select_by_count()
+            selection = self.select()
         elif selection_token in self.context_names:
-            selection = self.select_by_count(context_names=[selection_token])
+            selection = self.select(context_names=[selection_token])
         elif self.all_are_context_names(selection_token):
-            selection = self.select_by_count(context_names=selection_token)
+            selection = self.select(context_names=selection_token)
         else:
             raise ValueError('invalid selection token: {!r}.'.format(selection_token))
         return selection
 
-    def select_by_count(self, context_names=None, segment_name=None, scope=None):
+    def select(self, context_names=None, segment_name=None, scope=None):
         assert context_names is None or self.all_are_context_names(context_names)
         assert isinstance(segment_name, (str, type(None)))
         assert isinstance(scope, (Scope, type(None)))
@@ -132,35 +139,34 @@ class SegmentSpecification(AbjadObject):
         selection = Selection(segment_name, context_names=context_names, scope=scope)
         return selection
 
-    def select_divisions_by_count(self, context_token=None, part=None, segment_name=None, start=None, stop=None):
+    def select_divisions(self, context_token=None, part=None, segment_name=None, start=None, stop=None):
         criterion = 'divisions'
         context_names = self.parse_context_token(context_token)
         scope = Scope(criterion=criterion, part=part, start=start, stop=stop)
-        selection = self.select_by_count(context_names=context_names, segment_name=segment_name, scope=scope)
+        selection = self.select(context_names=context_names, segment_name=segment_name, scope=scope)
         return selection
 
-    def select_measures_by_count(self, context_token=None, part=None, segment_name=None, start=None, stop=None):
+    def select_measures(self, context_token=None, part=None, segment_name=None, start=None, stop=None):
         criterion = 'measures'
         context_names = self.parse_context_token(context_token)
         scope = Scope(criterion=criterion, part=part, start=start, stop=stop)
-        selection = self.select_by_count(context_names=context_names, segment_name=segment_name, scope=scope)
+        selection = self.select(context_names=context_names, segment_name=segment_name, scope=scope)
         return selection
     
-    def select_notes_and_chords_by_count(self, 
-        context_token=None, part=None, segment_name=None, start=None, stop=None):
+    def select_notes_and_chords(self, context_token=None, part=None, segment_name=None, start=None, stop=None):
         criterion = (chordtools.Chord, notetools.Note)
         context_names = self.parse_context_token(context_token)
         scope = Scope(criterion=criterion, part=part, start=start, stop=stop)
-        selection = self.select_by_count(context_names=context_names, scope=scope)
+        selection = self.select(context_names=context_names, scope=scope)
         return selection
 
     def set_aggregate(self, target_token, source, count=None, persistent=True, seed=None):
         attribute_name = 'aggregate'
         self.set_attribute(attribute_name, target_token, source, count=count, persistent=persistent, seed=seed)
 
-    def set_articulations(self, target_token, source, persistent=True, seed=None):
+    def set_articulations(self, target_token, source, count=None, persistent=True, seed=None):
         attribute_name = 'articulations'
-        self.set_attribute(attribute_name, target_token, source, persistent=persistent, seed=seed)
+        self.set_attribute(attribute_name, target_token, source, count=count, persistent=persistent, seed=seed)
 
     def set_attribute(self, attribute_name, target_token, source, count=None, persistent=True, seed=None):
         assert isinstance(attribute_name, str)
@@ -170,58 +176,58 @@ class SegmentSpecification(AbjadObject):
         directive = Directive(target_selection, attribute_name, source, persistent=persistent)
         self.directives.append(directive)
 
-    def set_chord_treatment(self, target_token, source, persistent=True, seed=None):
+    def set_chord_treatment(self, target_token, source, count=None, persistent=True, seed=None):
         attribute_name = 'chord_treatment'
-        self.set_attribute(attribute_name, target_token, source, persistent=persistent, seed=seed)
+        self.set_attribute(attribute_name, target_token, source, count=count, persistent=persistent, seed=seed)
 
     def set_divisions(self, target_token, source, count=None, persistent=True, seed=None):
         attribute_name = 'divisions'
         self.set_attribute(attribute_name, target_token, source, count=count, persistent=persistent, seed=seed)
 
-    def set_duration_in_seconds(self, target_token, source, persistent=True, seed=None):
+    def set_duration_in_seconds(self, target_token, source, count=None, persistent=True, seed=None):
         attribute_name = 'duration_in_seconds'
-        self.set_attribute(attribute_name, target_token, source, persistent=persistent, seed=seed)
+        self.set_attribute(attribute_name, target_token, source, count=count, persistent=persistent, seed=seed)
 
-    def set_dynamics(self, target_token, source, persistent=True, seed=None):
+    def set_dynamics(self, target_token, source, count=None, persistent=True, seed=None):
         attribute_name = 'dynamcis'
-        self.set_attribute(attribute_name, target_token, source, persistent=persistent, seed=seed)
+        self.set_attribute(attribute_name, target_token, source, count=count, persistent=persistent, seed=seed)
 
-    def set_marks(self, target_token, source, persistent=True, seed=None):
+    def set_marks(self, target_token, source, count=None, persistent=True, seed=None):
         attribute_name = 'marks'
-        self.set_attribute(attribute_name, target_token, source, persistent=persistent, seed=seed)
+        self.set_attribute(attribute_name, target_token, source, count=count, persistent=persistent, seed=seed)
 
-    def set_markup(self, target_token, source, persistent=True, seed=None):
+    def set_markup(self, target_token, source, count=None, persistent=True, seed=None):
         attribute_name = 'markup'
-        self.set_attribute(attribute_name, target_token, source, persistent=persistent, seed=seed)
+        self.set_attribute(attribute_name, target_token, source, count=count, persistent=persistent, seed=seed)
 
-    def set_pitch_classes(self, target_token, source, persistent=True, seed=None):
+    def set_pitch_classes(self, target_token, source, count=None, persistent=True, seed=None):
         attribute_name = 'pitch_classes'
-        self.set_attribute(attribute_name, target_token, source, persistent=persistent, seed=seed)
+        self.set_attribute(attribute_name, target_token, source, count=count, persistent=persistent, seed=seed)
 
-    def set_pitch_class_application(self, target_token, source, persistent=True, seed=None):
+    def set_pitch_class_application(self, target_token, source, count=None, persistent=True, seed=None):
         attribute_name = 'pitch_class_application'
-        self.set_attribute(attribute_name, target_token, source, persistent=persistent, seed=seed)
+        self.set_attribute(attribute_name, target_token, source, count=count, persistent=persistent, seed=seed)
 
-    def set_pitch_class_transform(self, target_token, source, persistent=True, seed=None):
+    def set_pitch_class_transform(self, target_token, source, count=None, persistent=True, seed=None):
         attribute_name = 'pitch_class_transform'
-        self.set_attribute(attribute_name, target_token, source, persistent=persistent, seed=seed)
+        self.set_attribute(attribute_name, target_token, source, count=count, persistent=persistent, seed=seed)
 
-    def set_register(self, target_token, source, persistent=True, seed=None):
+    def set_register(self, target_token, source, count=None, persistent=True, seed=None):
         attribute_name = 'register'
-        self.set_attribute(attribute_name, target_token, source, persistent=persistent, seed=seed)
+        self.set_attribute(attribute_name, target_token, source, count=count, persistent=persistent, seed=seed)
 
-    def set_rhythm(self, target_token, source, persistent=True, seed=None):
+    def set_rhythm(self, target_token, source, count=None, persistent=True, seed=None):
         attribute_name = 'rhythm'
-        self.set_attribute(attribute_name, target_token, source, persistent=persistent, seed=seed)
+        self.set_attribute(attribute_name, target_token, source, count=count, persistent=persistent, seed=seed)
 
-    def set_tempo(self, target_token, source, persistent=True, seed=None):
+    def set_tempo(self, target_token, source, count=None, persistent=True, seed=None):
         attribute_name = 'tempo'
-        self.set_attribute(attribute_name, target_token, source, persistent=persistent, seed=seed)
+        self.set_attribute(attribute_name, target_token, source, count=count, persistent=persistent, seed=seed)
 
     def set_time_signatures(self, target_token, source, count=None, persistent=True, seed=None):
         attribute_name = 'time_signatures'
         self.set_attribute(attribute_name, target_token, source, count=count, persistent=persistent, seed=seed)
 
-    def set_written_duration(self, target_token, source, persistent=True, seed=None):
+    def set_written_duration(self, target_token, source, count=None, persistent=True, seed=None):
         attribute_name = 'written_duration'
-        self.set_attribute(attribute_name, target_token, source, persistent=persistent, seed=seed)
+        self.set_attribute(attribute_name, target_token, source, count=count, persistent=persistent, seed=seed)

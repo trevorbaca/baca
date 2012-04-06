@@ -40,7 +40,7 @@ class TerracedDynamicsHandler(DynamicHandler):
 
     ### PUBLIC METHODS ###
 
-    def apply(self, expr, offset = 0):
+    def apply(self, expr, offset=0):
         dynamics = sequencetools.CyclicList(self.dynamics)
         for i, note_or_chord in enumerate(leaftools.iterate_notes_and_chords_forward_in_expr(expr)):
             dynamic_name = dynamics[offset+i]
