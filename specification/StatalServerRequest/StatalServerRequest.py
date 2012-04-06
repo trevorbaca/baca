@@ -6,12 +6,11 @@ class StatalServerRequest(AbjadObject):
 
     ### INITIALIZER ###
     
-    #def __init__(self, server, count=None, offset=None):
-    def __init__(self, server, count=None, seed=None):
+    def __init__(self, server, count=None, offset=None):
         assert isinstance(server, StatalServer)
         self.server = server
         self.count = count
-        self.seed = seed
+        self.offset = offset
 
     ### SPECIAL METHODS ###
 
