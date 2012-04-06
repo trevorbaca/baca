@@ -9,10 +9,10 @@ class ScoreSpecification(object):
     ### INITIALIZER ###
 
     def __init__(self, score_template, context_name_abbreviations=None, 
-        score_segment_specification_class=None, segments=None):
+        segment_specification_class=None, segments=None):
         self.context_name_abbreviations = context_name_abbreviations or {}
         self.score_template = score_template
-        self.score_segment_specification_class = score_segment_specification_class or SegmentSpecification
+        self.segment_specification_class = segment_specification_class or SegmentSpecification
         self.segments = segments or []
         self.initialize_context_name_abbreviations()
 
@@ -40,7 +40,7 @@ class ScoreSpecification(object):
     ### PUBLIC METHODS ###
     
     def append_segment(self, name=None):
-        segment = self.score_segment_specification_class(name=name)     
+        segment = self.segment_specification_class(self.score_template(), name=name)     
         self.segments.append(segment)
         return segment
 

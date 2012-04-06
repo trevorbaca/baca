@@ -1,15 +1,18 @@
 from abjad.tools.abctools.AbjadObject import AbjadObject
+from baca.specification.TemporalScope import TemporalScope
 
 
 class Selection(AbjadObject):
 
     ### INITIALIZER ###
 
-    #def __init__(self, context_name=None, criterion=None, score_segment_name=None, start=None, stop=None):
-    def __init__(self, score_segment_name, context_name, scope=None):
+    def __init__(self, score_segment_name, context_names=None, temporal_scope=None):
+        assert isinstance(score_segment_name, str)
+        assert isinstance(context_names, (list, type(None)))
+        assert isinstance(temporal_scope, (TemporalScope, type(None)))
         self.score_segment_name = score_segment_name
-        self.context_name = context_name
-        self.scope = scope
+        self.context_names = context_names or []
+        self.temporal_scope = temporal_scope
 
     ### SPECIAL METHODS ###
 
