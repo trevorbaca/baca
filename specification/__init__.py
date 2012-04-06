@@ -1,6 +1,5 @@
 from DuratedStatalServer import DuratedStatalServer
 from DuratedStatalServerRequest import DuratedStatalServerRequest
-from RelativeReference import RelativeReference
 from ScoreSpecification import ScoreSpecification
 from SegmentSpecification import SegmentSpecification
 from Selection import Selection

@@ -2,7 +2,6 @@ from baca.handlers.composites.CompositeRhythmHandler import CompositeRhythmHandl
 from baca.handlers.pitch.TimewisePitchClassHandler import TimewisePitchClassHandler
 from baca.specification.Directive import Directive
 from baca.specification.DuratedStatalServerRequest import DuratedStatalServerRequest
-from baca.specification.RelativeReference import RelativeReference
 from baca.specification.Selection import Selection
 from baca.specification.StatalServerRequest import StatalServerRequest
 
