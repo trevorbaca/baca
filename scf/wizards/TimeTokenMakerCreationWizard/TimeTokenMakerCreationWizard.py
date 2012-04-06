@@ -2,7 +2,7 @@ from scf import selectors
 from scf.wizards.HandlerCreationWizard import HandlerCreationWizard
 
 
-class KaleidCreationWizard(HandlerCreationWizard):
+class TimeTokenMakerCreationWizard(HandlerCreationWizard):
 
     ### CLASS ATTRIBUTES ###
 
