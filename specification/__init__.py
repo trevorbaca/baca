@@ -9,4 +9,4 @@ from SettingReservoir import SettingReservoir
 from SettingReservoirs import SettingReservoirs
 from StatalServer import StatalServer
 from StatalServerRequest import StatalServerRequest
-from TemporalScope import TemporalScope
+from Scope import Scope

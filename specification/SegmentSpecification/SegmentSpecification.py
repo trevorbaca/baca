@@ -10,7 +10,7 @@ from baca.specification.Directive import Directive
 from baca.specification.DuratedStatalServerRequest import DuratedStatalServerRequest
 from baca.specification.Selection import Selection
 from baca.specification.StatalServerRequest import StatalServerRequest
-from baca.specification.TemporalScope import TemporalScope
+from baca.specification.Scope import Scope
 
 
 class SegmentSpecification(AbjadObject):
@@ -123,33 +123,33 @@ class SegmentSpecification(AbjadObject):
             raise ValueError('what is {!r}?'.format(selection_token))
         return selection
 
-    def select_by_count(self, context_names=None, segment_name=None, temporal_scope=None):
+    def select_by_count(self, context_names=None, segment_name=None, scope=None):
         assert context_names is None or self.all_are_context_names(context_names)
         assert isinstance(segment_name, (str, type(None)))
-        assert isinstance(temporal_scope, (TemporalScope, type(None)))
+        assert isinstance(scope, (Scope, type(None)))
         segment_name = segment_name or self.name
-        selection = Selection(segment_name, context_names=context_names, temporal_scope=temporal_scope)
+        selection = Selection(segment_name, context_names=context_names, scope=scope)
         return selection
 
     def select_divisions_by_count(self, context_token, part=None, start=None, stop=None):
         criterion = 'divisions'
         context_names = self.parse_context_token(context_token)
-        temporal_scope = TemporalScope(criterion=criterion, part=part, start=start, stop=stop)
+        scope = Scope(criterion=criterion, part=part, start=start, stop=stop)
         selection = self.select_by_count(context_names=context_names, segment_name=segment_name, scope=scope)
         return selection
 
     def select_measures_by_count(self, context_token=None, part=None, segment_name=None, start=None, stop=None):
         criterion = 'measures'
         context_names = self.parse_context_token(context_token)
-        temporal_scope = TemporalScope(criterion=criterion, part=part, start=start, stop=stop)
-        selection = self.select_by_count(context_names=context_names, temporal_scope=temporal_scope)
+        scope = Scope(criterion=criterion, part=part, start=start, stop=stop)
+        selection = self.select_by_count(context_names=context_names, scope=scope)
         return selection
     
     def select_notes_and_chords_by_count(self, context_token, part=None, start=None, stop=None):
         criterion = (chordtools.Chord, notetools.Note)
         context_names = self.parse_context_token(context_token)
-        temporal_scope = TemporalScope(criterion=criterion, part=part, start=start, stop=stop)
-        selection = self.select_by_count(context_names=context_names, temporal_scope=temporal_scope)
+        scope = Scope(criterion=criterion, part=part, start=start, stop=stop)
+        selection = self.select_by_count(context_names=context_names, scope=scope)
         return selection
 
     def set_aggregate(self, target_token, aggregate, persistent=True):

@@ -3,7 +3,7 @@ from abjad.tools import componenttools
 from abjad.tools import mathtools
 
 
-class TemporalScope(AbjadObject):
+class Scope(AbjadObject):
 
     ### INITIALIZER ###
 
