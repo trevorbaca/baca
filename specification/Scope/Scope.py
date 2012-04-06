@@ -11,7 +11,7 @@ class Scope(AbjadObject):
 
     ### INITIALIZER ###
 
-    def __init__(self, criterion=None, part=None, start=None, stop=None):
+    def __init__(self, criterion, part=None, start=None, stop=None):
         assert self.is_valid_criterion(criterion)
         assert self.is_valid_part_token(part)
         assert isinstance(start, (int, type(None)))

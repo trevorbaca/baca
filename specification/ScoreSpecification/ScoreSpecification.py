@@ -1,19 +1,21 @@
+from abjad.tools.abctools.AbjadObject import AbjadObject
 from baca.specification.SegmentSpecification import SegmentSpecification
 from baca.specification.Selection import Selection
 from baca.specification.StatalServerRequest import StatalServerRequest
 from baca.specification.SettingReservoirs import SettingReservoirs
 
 
-class ScoreSpecification(object):
+class ScoreSpecification(AbjadObject):
 
     ### INITIALIZER ###
 
     def __init__(self, score_template, context_name_abbreviations=None, 
-        segment_specification_class=None, segments=None):
+        segment_specification_class=None, segments=None, settings=None):
         self.context_name_abbreviations = context_name_abbreviations or {}
         self.score_template = score_template
         self.segment_specification_class = segment_specification_class or SegmentSpecification
         self.segments = segments or []
+        self.settings = settings or []
         self.initialize_context_name_abbreviations()
 
     ### SPECIAL METHODS ###
@@ -44,17 +46,19 @@ class ScoreSpecification(object):
         self.segments.append(segment)
         return segment
 
+    def get_settings(self, segment_name=None, context_name=None, attribute_name=None, persistent=None):
+        settings = []
+        for setting in self.settings:
+            if ((segment_name is None or setting.segment_name == segment_name) and 
+                (context_name is None or setting.context_name == context_name) and
+                (attribute_name is None or setting.attribute_name == attribute_name) and
+                (persistent is None or setting.persistent == persistent)):
+                settings.append(setting)
+        return settings
+
     def initialize_context_name_abbreviations(self):
         for context_name_abbreviation, context_name in self.context_name_abbreviations.iteritems():
             setattr(self, context_name_abbreviation, context_name)
-
-    def interpret_segment(self, segment):
-#        self.interpret_segment_attribute_directives(segment, 'tempo')
-#        self.interpret_segment_attribute_directives(segment, 'time_signatures')
-#        self.interpret_segment_attribute_directives(segment, 'aggregate')
-#        self.interpret_segment_attribute_directives(segment, 'pitch_classes')
-#        self.interpret_segment_attribute_directives(segment, 'transform')
-        raise Exception
 
     def interpret_segment_attribute_directives(self, segment, attribute_name):
         directives = segment.get_directives(attribute_name=attribute_name)
@@ -63,12 +67,6 @@ class ScoreSpecification(object):
             source_value = self.resolve_directive_source_value(directive.source)
             reservoir.store_settings(directive.target_selection, source_value, directive.is_persistent)
 
-    def interpret_segments(self):
-        self.reservoirs = SettingReservoirs(self.score_template())
-        while any([segment.is_pending for segment in self.segments]):
-            for segment in self.segments:
-                self.interpret_segment(segment)
-
     def resolve_directive_source_value(self, directive_source):
         if isinstance(directive_source, Selection):
             raise NotImplementedError(repr(directive_source))
@@ -76,3 +74,7 @@ class ScoreSpecification(object):
             return directive_source()
         else:
             return directive_source
+
+    def unpack_settings(self):
+        for segment in self.segments:
+            self.settings.extend(segment.unpack_settings())

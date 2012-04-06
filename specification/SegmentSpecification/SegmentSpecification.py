@@ -190,7 +190,7 @@ class SegmentSpecification(AbjadObject):
         self.set_attribute(attribute_name, target_token, source, count=count, persistent=persistent, offset=offset)
 
     def set_dynamics(self, target_token, source, count=None, persistent=True, offset=None):
-        attribute_name = 'dynamcis'
+        attribute_name = 'dynamics'
         self.set_attribute(attribute_name, target_token, source, count=count, persistent=persistent, offset=offset)
 
     def set_marks(self, target_token, source, count=None, persistent=True, offset=None):
@@ -232,3 +232,9 @@ class SegmentSpecification(AbjadObject):
     def set_written_duration(self, target_token, source, count=None, persistent=True, offset=None):
         attribute_name = 'written_duration'
         self.set_attribute(attribute_name, target_token, source, count=count, persistent=persistent, offset=offset)
+
+    def unpack_settings(self):
+        settings = []
+        for directive in self.directives:
+            settings.extend(directive.unpack_settings())
+        return settings
