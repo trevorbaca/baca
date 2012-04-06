@@ -1,7 +1,7 @@
 from abjad.tools.abctools.AbjadObject import AbjadObject
 
 
-class Scope(AbjadObject):
+class TemporalScope(AbjadObject):
 
     ### INITIALIZER ###
 
