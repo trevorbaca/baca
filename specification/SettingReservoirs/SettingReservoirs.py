@@ -4,6 +4,7 @@ from baca.specification.SettingReservoir import SettingReservoir
 import collections
 
 
+# TODO: check the extra level of hierarhcy and then remove?
 class SettingReservoirs(AbjadObject):
 
     ### INITIALIZER ###

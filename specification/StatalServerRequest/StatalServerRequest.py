@@ -1,14 +1,16 @@
 from abjad.tools.abctools.AbjadObject import AbjadObject
+from baca.specification.StatalServer import StatalServer
 
 
 class StatalServerRequest(AbjadObject):
 
     ### INITIALIZER ###
     
-    def __init__(self, server, count=None, index=None):
+    def __init__(self, server, count=None, offset=None):
+        assert isinstance(server, StatalServer)
         self.server = server
         self.count = count
-        self.index = index
+        self.offset = offset
 
     ### SPECIAL METHODS ###
 

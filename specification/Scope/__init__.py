@@ -1,1 +1,1 @@
-from  Scope import Scope
+from Scope import Scope

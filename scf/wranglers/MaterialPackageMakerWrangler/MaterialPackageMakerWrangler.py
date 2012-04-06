@@ -1,4 +1,4 @@
-from abjad.tools import iotools
+from abjad.tools import stringtools
 from abjad.tools import layouttools
 from abjad.tools import lilypondfiletools
 from scf.wranglers.PackageWrangler import PackageWrangler
@@ -60,7 +60,7 @@ class MaterialPackageMakerWrangler(PackageWrangler):
             base_name = os.path.basename(path_name)
             if base_name in self.forbidden_class_names:
                 continue
-            human_readable_name = iotools.uppercamelcase_to_space_delimited_lowercase(base_name)
+            human_readable_name = stringtools.uppercamelcase_to_space_delimited_lowercase(base_name)
             result.append(human_readable_name)
         return result
 
@@ -134,10 +134,10 @@ class MaterialPackageMakerWrangler(PackageWrangler):
             self.list_score_external_asset_container_importable_names()[0], 
             package_short_name, '__init__.py')
         initializer = file(initializer_file_name, 'w')
-        line = 'from abjad.tools.importtools._import_structured_package import _import_structured_package\n'
+        line = 'from abjad.tools import importtools\n'
         initializer.write(line)
         initializer.write('\n')
-        initializer.write("_import_structured_package(__path__[0], globals(), 'baca')\n")
+        initializer.write("importtools.import_structured_package(__path__[0], globals(), 'baca')\n")
         initializer.close() 
 
     def make_asset_interactively(self):

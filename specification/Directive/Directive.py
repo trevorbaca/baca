@@ -1,24 +1,33 @@
 from abjad.tools.abctools.AbjadObject import AbjadObject
 from baca.specification.Selection import Selection
+from baca.specification.Setting import Setting
 
 
 class Directive(AbjadObject):
 
     ### INITIALIZER ###
 
-    def __init__(self, target_selection, attribute_name, source, is_persistent=True, seed=None):
+    def __init__(self, target_selection, attribute_name, source, persistent=True, truncate=False):
         self.target_selection = target_selection
         self.attribute_name = attribute_name
         self.source = source
-        self.is_persistent = is_persistent
-        self.seed = seed
+        self.persistent = persistent
+        self.truncate = truncate
 
-    ### READ-ONLY PUBLIC PROPERTIES ###
+    ### PUBLIC METHODS ###
 
-    @property
-    def is_absolute(self):
-        return not self.is_relative
+    def make_setting_with_context_name(self, context_name):
+        args = []
+        args.extend([self.target_selection.segment_name, context_name, self.target_selection.scope])
+        args.extend([self.attribute_name, self.source, self.persistent, self.truncate])
+        return Setting(*args)
 
-    @property
-    def is_relative(self):
-        return isinstance(self.source, Selection)
+    def unpack(self):
+        assert isinstance(self.target_selection.context_names, (list, type(None)))
+        settings = []
+        if self.target_selection.context_names in (None, []):
+            settings.append(self.make_setting_with_context_name(None))
+        else:
+            for context_name in self.target_selection.context_names:
+                settings.append(self.make_setting_with_context_name(context_name))
+        return settings

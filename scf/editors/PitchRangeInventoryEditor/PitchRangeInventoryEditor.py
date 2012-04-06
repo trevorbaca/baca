@@ -15,7 +15,7 @@ class PitchRangeInventoryEditor(ObjectInventoryEditor):
     item_editor_class = PitchRangeEditor
     item_identifier = 'pitch range'
     target_manifest = TargetManifest(pitchtools.PitchRangeInventory,
-        target_name_attribute='inventory_name',
+        target_name_attribute='name',
         )
 
     ### READ-ONLY PUBLIC PROPERTIES ###

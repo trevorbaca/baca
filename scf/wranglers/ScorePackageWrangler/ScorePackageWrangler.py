@@ -1,4 +1,4 @@
-from abjad.tools import iotools
+from abjad.tools import stringtools
 from scf.wranglers.PackageWrangler import PackageWrangler
 from scf.proxies.ScorePackageProxy import ScorePackageProxy
 import os
@@ -91,6 +91,6 @@ class ScorePackageWrangler(PackageWrangler):
         keys = self.list_visible_asset_importable_names()
         bodies = self.visible_score_titles_with_years
         menuing_pairs = zip(keys, bodies)
-        tmp = iotools.strip_diacritics_from_binary_string
+        tmp = stringtools.strip_diacritics_from_binary_string
         menuing_pairs.sort(lambda x, y: cmp(tmp(x[1]), tmp(y[1])))
         return menuing_pairs

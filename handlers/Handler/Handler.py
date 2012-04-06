@@ -28,5 +28,5 @@ class Handler(abctools.AbjadObject):
     ### READ-ONLY PRIVATE PROPERTIES ###
 
     @abstractproperty
-    def _tools_package(self):
+    def _tools_package_name(self):
         pass

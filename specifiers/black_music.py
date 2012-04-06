@@ -20,5 +20,5 @@ music_specifier = specifiers.MusicSpecifier([
 			)
 		)
 	],
-	inventory_name='black music'
+	name='black music'
 	)

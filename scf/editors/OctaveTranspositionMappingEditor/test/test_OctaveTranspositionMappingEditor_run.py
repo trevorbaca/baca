@@ -22,7 +22,7 @@ def test_OctaveTranspositionMappingEditor_run_02():
 
     mapping = pitchtools.OctaveTranspositionMapping(
             [('[A0, F#4]', 22), ('(F#4, C8]', 26)], 
-            inventory_name='piccolo second octave')
+            name='piccolo second octave')
 
     assert editor.target == mapping
 
@@ -34,5 +34,5 @@ def test_OctaveTranspositionMappingEditor_run_03():
     editor = scf.editors.OctaveTranspositionMappingEditor()
     editor.run(user_input='name piccolo~second~octave done')
 
-    mapping = pitchtools.OctaveTranspositionMapping(inventory_name='piccolo second octave')
+    mapping = pitchtools.OctaveTranspositionMapping(name='piccolo second octave')
     assert editor.target == mapping

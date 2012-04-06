@@ -2,6 +2,7 @@ from abjad.tools import durationtools
 from abjad.tools import iotools
 from abjad.tools import mathtools
 from abjad.tools import pitchtools
+from abjad.tools import stringtools
 from scf.menuing.MenuSectionAggregator import MenuSectionAggregator
 from scf import predicates
 import types
@@ -180,15 +181,10 @@ class UserInputGetter(MenuSectionAggregator):
         self.execs[-1] = execs
         self.tests.append(predicates.is_markup)
 
-    def append_markup_style_string(self, spaced_attribute_name, default=None):
-        message = "value for {!r} must be 'backslash or 'scheme'."
-        self.append_something(spaced_attribute_name, message, default=default)
-        self.tests.append(predicates.is_markup_style_string)
-        
     def append_material_package_maker_class_name(self, spaced_attribute_name, default=None):
         message = 'value for {!r} must be uppercamelcase string ending in -Maker.'
         self.append_something(spaced_attribute_name, message, default=default)
-        self.tests.append(lambda x: iotools.is_uppercamelcase_string(x) and x.endswith('Maker'))
+        self.tests.append(lambda x: stringtools.is_uppercamelcase_string(x) and x.endswith('Maker'))
 
     def append_named_chromatic_pitch(self, spaced_attribute_name, default=None):
         message = 'value for {!r} must be named chromatic pitch.'
@@ -243,7 +239,7 @@ class UserInputGetter(MenuSectionAggregator):
     def append_space_delimited_lowercase_string(self, spaced_attribute_name, default=None):
         message = 'value for {!r} must be space-delimited lowercase string.'
         self.append_something(spaced_attribute_name, message, default=default)
-        self.tests.append(iotools.is_space_delimited_lowercase_string)
+        self.tests.append(stringtools.is_space_delimited_lowercase_string)
 
     def append_string(self, spaced_attribute_name, default=None):
         message = 'value for {!r} must be string.'
@@ -274,12 +270,12 @@ class UserInputGetter(MenuSectionAggregator):
     def append_underscore_delimited_lowercase_file_name(self, spaced_attribute_name, default=None):
         message = 'value for {!r} must be underscore-delimited lowercase file name.'
         self.append_something(spaced_attribute_name, message, default=default)
-        self.tests.append(iotools.is_underscore_delimited_lowercase_file_name)
+        self.tests.append(stringtools.is_underscore_delimited_lowercase_file_name)
 
     def append_underscore_delimited_lowercase_file_name_with_extension(self, spaced_attribute_name, default=None):
         message = 'value for {!r} must be underscore-delimited lowercase file name with extension.'
         self.append_something(spaced_attribute_name, message, default=default)
-        self.tests.append(iotools.is_underscore_delimited_lowercase_file_name_with_extension)
+        self.tests.append(stringtools.is_underscore_delimited_lowercase_file_name_with_extension)
 
     def append_underscore_delimited_lowercase_package_name(self, spaced_attribute_name, default=None):
         message = 'value for {!r} must be underscore-delimited lowercase package name of length at least 3.'
@@ -289,7 +285,7 @@ class UserInputGetter(MenuSectionAggregator):
     def append_underscore_delimited_lowercase_string(self, spaced_attribute_name, default=None):
         message = 'value for {!r} must be underscore-delimited lowercase string.'
         self.append_something(spaced_attribute_name, message, default=default)
-        self.tests.append(iotools.is_underscore_delimited_lowercase_string)
+        self.tests.append(stringtools.is_underscore_delimited_lowercase_string)
 
     def append_yes_no_string(self, spaced_attribute_name, default=None, include_chevron=False):
         message = "value for '{}' must be 'y' or 'n'."
@@ -368,7 +364,7 @@ class UserInputGetter(MenuSectionAggregator):
     def load_prompt(self):
         prompt = self.prompts[self.prompt_index]
         if self.capitalize_prompts:
-            prompt = iotools.capitalize_string_start(prompt)
+            prompt = stringtools.capitalize_string_start(prompt)
         self.menu_lines.append(prompt)
 
     def move_to_prev_prompt(self):

@@ -8,4 +8,4 @@ class ObjectInventoryEditor(ListEditor):
     @property
     def target_name(self):
         if self.target is not None:
-            return self.target.inventory_name
+            return self.target.name

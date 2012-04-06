@@ -1,8 +1,10 @@
 from abjad.tools import sequencetools
-from baca.handlers.dynamics import *
-from fractions import Fraction
 import baca
 __all__ = []
+
+
+accents = baca.handlers.articulations.ReiteratedArticulationHandler(['accent'])
+__all__.append('accents')
 
 
 pattern = [['upbow', 'upbow', 'downbow'], ['upbow', 'upbow', 'downbow', 'downbow']]
@@ -11,3 +13,7 @@ pattern = sequencetools.flatten_sequence(pattern)
 pattern = [[x] for x in pattern]
 serration_bow_strokes = baca.handlers.articulations.PatternedArticulationsHandler(pattern)
 __all__.append('serration_bow_strokes')
+
+
+stem_tremolo_32 = baca.handlers.articulations.StemTremoloHandler([32])
+__all__.append('stem_tremolo_32')

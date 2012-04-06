@@ -2,6 +2,7 @@ from abjad.tools import iotools
 from abjad.tools import markuptools
 from abjad.tools import mathtools
 from abjad.tools import pitchtools
+from abjad.tools import stringtools
 import abc
 import inspect
 import os
@@ -149,7 +150,7 @@ class SCFObject(object):
 
     @property
     def spaced_class_name(self):
-        return iotools.uppercamelcase_to_space_delimited_lowercase(self.class_name)
+        return stringtools.uppercamelcase_to_space_delimited_lowercase(self.class_name)
 
     @property
     def specifier_classes_package_importable_name(self):
@@ -215,7 +216,7 @@ class SCFObject(object):
         if not string:
             return string
         elif string[0].isupper():
-            return iotools.uppercamelcase_to_space_delimited_lowercase(string)
+            return stringtools.uppercamelcase_to_space_delimited_lowercase(string)
         else:
             return string.replace('_', ' ')
 
@@ -266,7 +267,7 @@ class SCFObject(object):
             lines = [lines]
         if not self.session.hide_next_redraw:
             if capitalize_first_character:
-                lines = [iotools.capitalize_string_start(line) for line in lines]
+                lines = [stringtools.capitalize_string_start(line) for line in lines]
             if lines:
                 if self.session.transcribe_next_command:
                     self.session.complete_transcript.append_lines(lines)
@@ -314,7 +315,7 @@ class SCFObject(object):
     def handle_raw_input(self, prompt, include_chevron=True, include_newline=True, prompt_character='>',
         capitalize_prompt=True):
         if capitalize_prompt:
-            prompt = iotools.capitalize_string_start(prompt)
+            prompt = stringtools.capitalize_string_start(prompt)
         if include_chevron:
             prompt = prompt + prompt_character + ' '
         else:

@@ -28,7 +28,6 @@ class MusicSpecifier(Specifier, ObjectInventory):
         '''
         return tuple(sorted([
             'description',
-            'inventory_name',
             'name',
             ]))
 

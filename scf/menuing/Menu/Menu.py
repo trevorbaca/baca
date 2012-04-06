@@ -1,5 +1,6 @@
 from abjad.tools import iotools
 from abjad.tools import mathtools
+from abjad.tools import stringtools
 from scf.menuing.MenuSection import MenuSection
 from scf.menuing.MenuSectionAggregator import MenuSectionAggregator
 
@@ -93,7 +94,7 @@ class Menu(MenuSectionAggregator):
                 title = self.explicit_title
             else:
                 title = self.session.menu_header
-            menu_lines.append(iotools.capitalize_string_start(title))
+            menu_lines.append(stringtools.capitalize_string_start(title))
             menu_lines.append('')
         return menu_lines
 
@@ -150,7 +151,7 @@ class Menu(MenuSectionAggregator):
     ### PUBLIC METHODS ###
 
     def change_user_input_to_directive(self, user_input):
-        user_input = iotools.strip_diacritics_from_binary_string(user_input)
+        user_input = stringtools.strip_diacritics_from_binary_string(user_input)
         user_input = user_input.lower()
         if self.user_enters_nothing(user_input) and self.default_value:
             return self.conditionally_enclose_in_list(self.default_value)
@@ -158,7 +159,7 @@ class Menu(MenuSectionAggregator):
             return self.handle_argument_range_user_input(user_input)
         else:
             for number, key, body, return_value, section in self.unpacked_menu_entries:
-                body = iotools.strip_diacritics_from_binary_string(body).lower()
+                body = stringtools.strip_diacritics_from_binary_string(body).lower()
                 if  (mathtools.is_integer_equivalent_expr(user_input) and int(user_input) == number) or \
                     (user_input == key) or \
                     (user_input == body) or \

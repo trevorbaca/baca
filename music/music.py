@@ -5,6 +5,7 @@ from abjad.tools.measuretools import Measure
 from abjad.tools.notetools.Note import Note
 from abjad.tools.voicetools.Voice import Voice
 from abjad.tools.leaftools.Leaf import Leaf
+from abjad.tools import beamtools
 from abjad.tools import componenttools
 from abjad.tools import leaftools
 from abjad.tools import mathtools
@@ -516,7 +517,7 @@ def stellate(k, s, t, d, b, span ='from duration', rests = True):
         #ComplexBeam(sublist, durations, span = span)
         #BeamComplex(sublist, durations, span = span)
         #BeamComplexDurated(sublist, durations, span = span)
-        spannertools.DuratedComplexBeamSpanner(sublist, durations, span = span)
+        beamtools.DuratedComplexBeamSpanner(sublist, durations, span = span)
         i += 1
     dummy_container[:] = []
     tuplets = sequencetools.flatten(tuplets)
@@ -595,7 +596,7 @@ def coruscate(n, s, t, z, d, rests = True):
         #ComplexBeam(element, [element.duration.pair])
         #BeamComplex(element, [element.duration.pair])
         #BeamComplexDurated(element.leaves, [element.duration.prolated])
-        spannertools.DuratedComplexBeamSpanner(element.leaves, [element.prolated_duration])
+        beamtools.DuratedComplexBeamSpanner(element.leaves, [element.prolated_duration])
 
     return result
 

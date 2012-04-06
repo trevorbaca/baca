@@ -4,14 +4,12 @@ from abjad.tools import markuptools
 red_directives = markuptools.MarkupInventory([
 	markuptools.Markup(
 		'\\bold { staccatissimo luminoso }',
-		markup_name='staccatissimo',
-		style_string='backslash'
+		markup_name='staccatissimo'
 		),
 	markuptools.Markup(
 		'\\italic { serenamente }',
-		markup_name='serenamente',
-		style_string='backslash'
+		markup_name='serenamente'
 		)
 	],
-	inventory_name='red directives'
+	name='red directives'
 	)

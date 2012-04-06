@@ -1,4 +1,4 @@
-from abjad.tools import iotools
+from abjad.tools import stringtools
 from scf.proxies.PackageProxy import PackageProxy
 from scf.wranglers.ImportableAssetWrangler import ImportableAssetWrangler
 import os
@@ -31,7 +31,7 @@ class PackageWrangler(ImportableAssetWrangler):
         self.print_not_yet_implemented()
 
     def make_asset(self, asset_short_name):
-        assert iotools.is_underscore_delimited_lowercase_package_name(asset_short_name)
+        assert stringtools.is_underscore_delimited_lowercase_package_name(asset_short_name)
         asset_path_name = os.path.join(self.current_asset_container_path_name, asset_short_name)
         os.mkdir(asset_path_name)
         package_proxy = self.get_asset_proxy(asset_short_name)
