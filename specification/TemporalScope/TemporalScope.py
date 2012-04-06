@@ -1,15 +1,18 @@
 from abjad.tools.abctools.AbjadObject import AbjadObject
 from abjad.tools import componenttools
+from abjad.tools import mathtools
 
 
 class TemporalScope(AbjadObject):
 
     ### INITIALIZER ###
 
-    def __init__(self, criterion=None, start=None, stop=None):
+    def __init__(self, criterion=None, part=None, start=None, stop=None):
         assert self.is_valid_criterion(criterion)
+        assert self.is_valid_part_token(part)
         assert isinstance(start, (int, type(None)))
         assert isinstance(stop, (int, type(None)))
+        assert self.are_concordant_input_values(part, start, stop)
         self.criterion = criterion
         self.start = start
         self.stop = stop
@@ -22,10 +25,25 @@ class TemporalScope(AbjadObject):
         except:
             return False
 
-    def is_valid_criterion(self, criterion):
-        if criterion is None:
+    def are_concordant_input_values(self, part, start, stop):
+        if part is not None:
+            if start is not None or stop is not None:
+                return False
+        return True
+        
+    def is_valid_criterion(self, expr):
+        if expr is None:
             return True
-        elif self.all_are_component_subclasses(criterion):
+        elif self.all_are_component_subclasses(expr):
             return True
         else:
-            raise ValueError('invalid temporal scope criterion: {!r}'.format(criterion))
+            raise ValueError('invalid temporal scope criterion: {!r}'.format(expr))
+
+    def is_valid_part_token(self, expr):
+        if expr is None:
+            return True
+        elif isinstance(expr, (tuple, list)) and len(expr) == 2:
+            if all([mathtools.is_integer_equivalent_number(x) for x in expr[0]]):
+                if mathtools.is_integer_equivalent_number(expr[1]):
+                    return True
+        return False

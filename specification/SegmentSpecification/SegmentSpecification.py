@@ -112,25 +112,43 @@ class SegmentSpecification(AbjadObject):
         if isinstance(selection_token, Selection):
             selection = selection_token
         elif isinstance(selection_token, type(self)):
-            selection = self.select()
+            selection = self.select_by_count()
         elif selection_token in self.context_names:
-            selection = self.select(context_names=[selection_token])
+            selection = self.select_by_count(context_names=[selection_token])
         elif self.all_are_context_names(selection_token):
-            selection = self.select(context_names=selection_token)
+            selection = self.select_by_count(context_names=selection_token)
         else:
             raise ValueError('what is {!r}?'.format(selection_token))
         return selection
 
-    def select(self, context_names=None, criterion=None, segment_name=None, start=None, stop=None):
+    def select_by_count(self, context_names=None, segment_name=None, temporal_scope=None):
+        assert context_names is None or self.all_are_context_names(context_names)
+        assert isinstance(segment_name, (str, type(None)))
+        assert isinstance(temporal_scope, (TemporalScope, type(None)))
         segment_name = segment_name or self.name
-        temporal_scope = TemporalScope(criterion=criterion, start=start, stop=stop)
         selection = Selection(segment_name, context_names=context_names, temporal_scope=temporal_scope)
         return selection
 
-    def select_notes_and_chords(self, context_token, start=None, stop=None):
+    def select_divisions_by_count(self, context_token, part=None, start=None, stop=None):
+        criterion = 'divisions'
+        context_names = self.parse_context_token(context_token)
+        temporal_scope = TemporalScope(criterion=criterion, part=part, start=start, stop=stop)
+        selection = self.select_by_count(context_names=context_names, temporal_scope=temporal_scope)
+        return selection
+
+    #def select_measures_by_count(self, context_token, part=None, start=None, stop=None):
+    def select_measures_by_count(self, target_token, part=None, start=None, stop=None):
+        criterion = 'measures'
+        #context_names = self.parse_context_token(context_token)
+        temporal_scope = TemporalScope(criterion=criterion, part=part, start=start, stop=stop)
+        selection = self.select_by_count(context_names=context_names, temporal_scope=temporal_scope)
+        return selection
+    
+    def select_notes_and_chords_by_count(self, context_token, part=None, start=None, stop=None):
         criterion = (chordtools.Chord, notetools.Note)
         context_names = self.parse_context_token(context_token)
-        selection = self.select(context_names=context_names, criterion=criterion, start=start, stop=stop)
+        temporal_scope = TemporalScope(criterion=criterion, part=part, start=start, stop=stop)
+        selection = self.select_by_count(context_names=context_names, temporal_scope=temporal_scope)
         return selection
 
     def set_aggregate(self, target_token, aggregate, persistent=True):
@@ -162,7 +180,13 @@ class SegmentSpecification(AbjadObject):
     def set_chords(self, target_token, source, persistent=True, seed=None):
         target_selection = self.parse_selection_token(target_token)
         directive = Directive(target_selection, self.attrs.chords, source, seed=seed)
-        directive.persiste = persistent
+        directive.persistent = persistent
+        self.directives.append(directive)
+
+    def set_divisions(self, target_token, source, persistent=True, seed=None):
+        target_selection = self.parse_selection_token(target_token)
+        directive = Directive(target_selection, self.attrs.divisions, source, seed=seed)
+        directive.persistent = persistent
         self.directives.append(directive)
 
     def set_duration_in_seconds(self, target_token, duration_in_seconds, persistent=True):

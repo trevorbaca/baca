@@ -4,6 +4,7 @@ class AttributeNameEnumeration(object):
     articulations = 'articulations'
     duration_in_seconds = 'duration_in_seconds'
     chords = 'chords'
+    divisions = 'divisions'
     dynamics = 'dynamics'
     marks = 'marks'
     markup = 'markup'
