@@ -103,9 +103,7 @@ class ScoreSpecification(AbjadObject):
             assert setting.context_name is None
             assert setting.scope is None
             value = self.resolve_source(setting.source)
-            self.reservoirs.time_signatures.
-                
-        
+            #self.reservoirs.time_signatures.
 
     def unpack_settings(self):
         for segment in self.segments:
