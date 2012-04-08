@@ -126,3 +126,82 @@ and that the second half is to be selected; then specify a dynamic handler
 that applies haipins to runs of notes and chords in the selection.
 Example: specify that the last note or chord in the percussion voice is to be selected;
 then specify an articulation handler that applies a marcato to any note or chord selected.)
+
+*Division specification.* Division specification admits a great variety of configuration
+than time signature specification. Division specifications are structured the same way
+as every other type of specification: that is, as the pair of a target token
+together with a source. Further, division specification target tokens take the same form 
+as every type of target token: that is, as the triple of a segment name, a list of zero
+or more context names, and an optional (horizontal) scope that acts as type of filter
+on all contexts implicated in the selection. Two areas of this model of division specification
+require elaboration. The first of these relates to the logical limits attaching to the targets
+of division specification. The second must detail the number and type of sources that
+division specification admits.
+
+*Targets of division specification.* Suppose segment T comprises time signatures 
+[(2, 8), (2, 8), (2, 8)], with total duration (6, 8). The act of specifying divisions
+for any of the contexts in T is equivalent to partitioning the (6, 8) of total time
+any of the contexts in T consumes. The simplest case obtains in any manifest list of
+durations. It is possible, for example, the specify the divisions of the violin 1 voice
+in T manifestly equal to the durations [(3, 8), (3, 8)]; such a setting applies to the
+entire duration of the violin 1 voice in T and implies a target selection equal to
+the entirety of the violin 1 voice in T. It is more likely to specify the divisions of
+the violin 1 voice in T in terms of a callable. (We define a callable equal to any function,
+method or callable class with signature that allows, at minimum, for the input of a list of 
+durations.) It is, therefore, possible to set the divisions of the violin 1
+voice in T equal to the output of callable foo(). In the case that the entirety of the
+duration of the violin 1 voice in T is set equal to the output of callable foo(), the
+duration list [(2, 8), (2, 8), (2, 8)] will be passed as input to foo(). It is also possible
+to set the divisions of only the first two measures of the violin 1 voice in T equal to
+the output of foo() while setting the divisions of the last measure of the violin 1 voice in T
+equal to the output bar(); in this case, the duration list [(2, 8), (2, 8)] will be 
+passed as input to foo() and the duration list [(2, 8)] will be passed as input to bar().
+It is also possible to specify the divisions of duration-partitioned parts of the violin 1
+voice in T without reference to the time signatures of T at all. For example, it is possible
+to set the divisions of the first [(3, 8)] of the violin 1 voice in T equal to the output of foo()
+and the divisions of the last [(3, 8)] of the of the violin 1 voice in T equal to the output of bar(),
+in which case the duration list [(3, 8)] will be passed as input to foo() and the duration
+list [(3, 8)] will be passed as input to bar(). It is further possible to set the divisions of
+the first [(3, 16), (3, 16)] of the violin 1 voice in T equal to the output of foo() and the
+divisions of the last [(1, 8), (1, 8), (1, 8)] of the violin 1 voice in T equal to the output
+of bar(), in which case the duration list [(3, 16), (3, 16)] will be passed as input to foo()
+and the duration list [(1, 8), (1, 8), (1, 8)] will be passed as input to bar().
+
+Division specifications must not apply cumulatively for any given context in T. That is, there 
+must not be more than one division specification for the violin 1 voice in T. Division
+specification Tn for the violin 1 voice in T may specify as complex partitioned target of
+the duration of the violin 1 voice in T as desired; but Tn must then specify sources
+(in the form of either manifest values or callables) for each of the parts in the target
+selection of Tn. The specification interface might look like this:
+
+selection = segment.select_measures(segment, part=[1, 1, 1])
+selection[0](foo)
+selection[1](bar)
+selection[2](foo)
+segment.set_divisions(selection)
+
+Or the specification interface might allow for simple setting cascades like this:
+
+selection = segment.select_measures(segment, part=[1, 1, 1])
+selection(foo)
+selection[1](bar)
+segment.set_divisions(selection)
+
+We have so far allowed for division specification sources set equal to manifest values or to
+callables. We have not allow for division specification sources set equal to requests 
+against statal servers; divisions specification sources set equal to statal server requests
+seem less likely and a good candidate for omission in this round of implementation.
+
+A third case arises in the possibility of settting a division specification source
+equal to a callable specified elsewhere in the score.
+
+A fourth case arises in the possibility of setting a division specification source
+equal to a (potentially indefinitely long) series of actual divisions read (forward or
+backward) from any other division elsewhere in the score.
+
+A fifth case arises in the possibility of setting a division specification source to
+a finite series of divisions (to be read cyclically either forward or backward) from any
+other context elsewhere in the score.
+
+We leave the current implementation confined to these five different possibilities
+for the value of divisions specification sources.
