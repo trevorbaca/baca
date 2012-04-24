@@ -1,7 +1,8 @@
 from abjad.tools import iotools
 from scf.core.SCFObject.SCFObject import SCFObject
 from scf import predicates
-import os, subprocess
+import os
+import subprocess
 
 
 class MenuObject(SCFObject):
