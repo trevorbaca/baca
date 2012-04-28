@@ -4,7 +4,7 @@ import scf
 
 class ConcreteSpecifier(Specifier):
     @property
-    def _tools_package(self):
+    def _tools_package_name(self):
         return 'specialtools'
     @property
     def one_line_menuing_summary(self):
