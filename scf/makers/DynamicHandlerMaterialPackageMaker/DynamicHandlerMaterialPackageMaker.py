@@ -14,5 +14,5 @@ class DynamicHandlerMaterialPackageMaker(MaterialPackageMaker):
     output_material_maker = DynamicHandlerCreationWizard 
     output_material_module_import_statements = [
         'from abjad.tools import durationtools',
-        'import handlers',
+        'from handlers import dynamics',
         ] 
