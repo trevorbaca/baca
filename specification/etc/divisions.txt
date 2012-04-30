@@ -27,7 +27,7 @@ Right-initiated application would produce division lists [(2, 8), (2, 8)+], [+(1
 (3, 8), (3, 8), (2, 8)+], [+(1, 8), (3, 8), (3, 8), (3, 8), (2, 8)+] and [+(1, 8), (3, 8)] 
 instead.
 
-Both left- and right-initiated application yields divisions equal to the durations Duration(4, 8),
+Both left- and right-initiated application yield divisions equal to the durations Duration(4, 8),
 Duration(9, 8), Duration(12, 8), Duration(4, 8) of the time signature lists of the segments in S.
 
 We choose to implement left-initiated application in the current version of the system 
@@ -44,20 +44,19 @@ divisions of each segment modeled explicitly.
                                     * * *
 
 Example 2. Suppose string quartet score S is specified exactly as above. Then specify that
-the violin 1 and viola voices of only T2 are override any division specification made at
+the violin 1 and viola voices of only T2 override any division specification made at
 higher context levels in S and are instead set to equal the total duration of T2 taken
-as a single time-divisions. How should this be specified? How will it interpret?
+as a single time-division. How should this be specified? How will it interpret?
 
-Perhaps with the addition of only T2.([T2.vn2, T2.va], total_segment_duration).
+Perhaps with the addition of only T2.set_divisions([T2.vn2, T2.va], total_segment_duration).
 
 This regime requires that each of the duration specifications in S be processed sequentially,
 with the output of each operation attached to all relevant contexts in S after each step.
-Then what is effectively going on is the reading of lines of code in sequence, as though
-from an Abjad input file.
+This is effectively the same as reading lines of code in sequence.
 
                                     * * *
 
-*Division specification.* Division specification admits a great variety of configuration
+*Division specification.* Division specification admits a greater variety of configuration
 than time signature specification. Division specifications are structured the same way
 as every other type of specification: that is, as the pair of a target token
 together with a source. Further, division specification target tokens take the same form 
@@ -69,7 +68,7 @@ of division specification. The second must detail the number and type of sources
 division specification admits.
 
 *Targets of division specification.* Suppose segment T comprises time signatures 
-[(2, 8), (2, 8), (2, 8)], with total duration (6, 8). The act of specifying divisions
+[(2, 8), (2, 8), (2, 8)], with total duration Duration(6, 8). The act of specifying divisions
 for any of the contexts in T is equivalent to partitioning the (6, 8) of total time
 any of the contexts in T consumes. The simplest case obtains in any manifest list of
 durations. It is possible, for example, the specify the divisions of the violin 1 voice
@@ -81,25 +80,25 @@ method or callable class with signature that allows, at minimum, for the input o
 durations.) It is, therefore, possible to set the divisions of the violin 1
 voice in T equal to the output of callable foo(). In the case that the entirety of the
 duration of the violin 1 voice in T is set equal to the output of callable foo(), the
-duration list [(2, 8), (2, 8), (2, 8)] will be passed as input to foo(). It is also possible
+time token list [(2, 8), (2, 8), (2, 8)] will be passed as input to foo(). It is also possible
 to set the divisions of only the first two measures of the violin 1 voice in T equal to
 the output of foo() while setting the divisions of the last measure of the violin 1 voice in T
-equal to the output bar(); in this case, the duration list [(2, 8), (2, 8)] will be 
-passed as input to foo() and the duration list [(2, 8)] will be passed as input to bar().
+equal to the output bar(); in this case, the time token list [(2, 8), (2, 8)] will be 
+passed as input to foo() and the time token list [(2, 8)] will be passed as input to bar().
 It is also possible to specify the divisions of duration-partitioned parts of the violin 1
 voice in T without reference to the time signatures of T at all. For example, it is possible
 to set the divisions of the first [(3, 8)] of the violin 1 voice in T equal to the output of foo()
 and the divisions of the last [(3, 8)] of the of the violin 1 voice in T equal to the output of bar(),
-in which case the duration list [(3, 8)] will be passed as input to foo() and the duration
+in which case the time token list [(3, 8)] will be passed as input to foo() and the duration
 list [(3, 8)] will be passed as input to bar(). It is further possible to set the divisions of
 the first [(3, 16), (3, 16)] of the violin 1 voice in T equal to the output of foo() and the
 divisions of the last [(1, 8), (1, 8), (1, 8)] of the violin 1 voice in T equal to the output
-of bar(), in which case the duration list [(3, 16), (3, 16)] will be passed as input to foo()
-and the duration list [(1, 8), (1, 8), (1, 8)] will be passed as input to bar().
+of bar(), in which case the time token list [(3, 16), (3, 16)] will be passed as input to foo()
+and the time token list [(1, 8), (1, 8), (1, 8)] will be passed as input to bar().
 
 Division specifications may apply cumulatively for any given context in T. That is, there 
 must not be more than one division specification for the violin 1 voice in T. Division
-specification Tn for the violin 1 voice in T may specify as complex partitioned target of
+specification Tn for the violin 1 voice in T may specify as complex a partitioned target of
 the duration of the violin 1 voice in T as desired; but Tn must then specify sources
 (in the form of either manifest values or callables) for each of the parts in the target
 selection of Tn. The specification interface might look like this:
@@ -118,9 +117,8 @@ selection[1](bar)
 segment.set_divisions(selection)
 
 We have so far allowed for division specification sources set equal to manifest values or to
-callables. We have not allow for division specification sources set equal to requests 
-against statal servers; divisions specification sources set equal to statal server requests
-seem less likely and a good candidate for omission in this round of implementation.
+callables. We have not yet discussed division specification sources set equal to requests 
+against statal servers. We will do this at some point for this round of implementation.
 
 A third case arises in the possibility of settting a division specification source
 equal to a callable specified elsewhere in the score.
@@ -134,4 +132,4 @@ a finite series of divisions (to be read cyclically either forward or backward) 
 other context elsewhere in the score.
 
 We leave the current implementation confined to these five different possibilities
-for the value of divisions specification sources.
+for the value of division specification sources.

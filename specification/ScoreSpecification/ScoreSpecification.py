@@ -10,14 +10,13 @@ class ScoreSpecification(AbjadObject):
 
     ### INITIALIZER ###
 
-    def __init__(self, score_template, context_name_abbreviations=None, 
-        segment_specification_class=None, segments=None, settings=None):
-        self.context_name_abbreviations = context_name_abbreviations or {}
+    def __init__(self, score_template, segment_specification_class=None, segments=None, settings=None):
+        self._context_name_abbreviations
         self.score_template = score_template
         self.segment_specification_class = segment_specification_class or SegmentSpecification
         self.segments = segments or []
         self.settings = settings or []
-        self.initialize_context_name_abbreviations()
+        self.context_name_abbreviations = getattr(self.score_template, 'voice_abbreviations', {})
         self.initialize_contexts()
 
     ### SPECIAL METHODS ###
@@ -40,6 +39,18 @@ class ScoreSpecification(AbjadObject):
 
     def __repr__(self):
         return '{}({!r})'.format(type(self).__name__, self.segments)
+
+    ### READ / WRITE PUBLIC PROPERTIES ###
+
+    @apply
+    def context_name_abbreviations():
+        def fget(self):
+            return self._context_name_abbreviations
+        def fset(self, context_name_abbreviations):
+            assert isinstance(context_name_abbreviations, dict)
+            self._context_name_abbreviations = context_name_abbreviations
+            self.initialize_context_name_abbreviations()
+        return property(**locals())
 
     ### PUBLIC METHODS ###
     
@@ -105,6 +116,9 @@ class ScoreSpecification(AbjadObject):
             assert setting.scope is None
             value = self.resolve_source(setting.source)
             #self.reservoirs.time_signatures.
+
+    def select(self, segment_name, context_names=None, scope=None):
+        return Selection(segment_name, context_names=context_names, scope=scope)
 
     def unpack_settings(self):
         for segment in self.segments:
