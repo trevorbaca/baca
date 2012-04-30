@@ -41,5 +41,5 @@ class ArticulationHandler(Handler):
     ### PRIVATE READ-ONLY ATTRIBUTES ###
 
     @property
-    def _tools_package(self):
+    def _tools_package_name(self):
         return 'handlers.articulations'

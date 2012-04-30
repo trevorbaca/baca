@@ -6,5 +6,5 @@ class PitchHandler(Handler):
     ### READ-ONLY PRIVATE PROPERTIES ###
 
     @property
-    def _tools_package(self):
+    def _tools_package_name(self):
         return 'handlers.pitch'
