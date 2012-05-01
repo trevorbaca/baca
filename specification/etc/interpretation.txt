@@ -102,7 +102,7 @@ if T1, T2, T3 make no cursor-relative reads against PCS) then T4 may cursor-read
 (13) What if T4 contains a pitch-class setting made relative to a selection elsewhere in S?
 In this case we allow a single lookup. What will pitch-class setting N in T4 look like
 if N specifies pitch-class information to be taken from elsewhere in S? N will specify
-the a 'start component' somewhere in S together with the combination of a list of one or
+a 'start component' somewhere in S together with the combination of a list of one or
 more source context names from which to read, together with an optional read direction.
 For example, N might specify to timewise forward-read pitch-classes in the violin voice
 and cello voice of T2, starting from pitch-carrier 0 the violin voice of T2.
@@ -110,7 +110,7 @@ Or, N might specify to backward-read pitch-classes in the horn voice of T1, star
 from the last pitch-carrier in T1. When such a situation obtains we may say that N
 provides 'score-relative' specification of pitch-classes in T4.
 
-(14) Setting are either manifest, server-positioned, cursor-relative or score-relative.
+(14) Settings are either manifest, server-positioned, cursor-relative or score-relative.
 
                                              * * *
 
@@ -126,11 +126,11 @@ the segments that precede T1 contain a setting that specifies a cursor-relative 
 TSS1. Since there are no segments that precede T1 in S, this step is trivial and we find
 that TSS1 is in the correct state to be read here in T1. We return to N1 and examine the
 count argument given in the statal server request specified as the source of N1. Suppose
-that the statal server requested specified as the source of N1 specifies a count of 10
+that the statal server specified as the source of N1 specifies a count of 10
 time signatures. Since TSS1 is in the correct state to be read in N1, we call the statal
 server request against TSS1 and receive a reference to the 10 time signatures TSS1 returns.
 We now set these 10 time signatures as the time signatures of T1. This determines the
-total (relative) duration of T1. To complete the time interpretation of T1 we must now
+total (relative) duration of T1. To complete the time signature interpretation of T1 we must now
 mark N1 as complete so that segments T2, T3, T4 will be able to determine that the statal
 server request N1 contains has been made. So we mark N1 as complete. Then we must reexamine
 N1 and find out whether or not N1 is marked persistent. If N1 is not marked persistent we
@@ -149,7 +149,7 @@ number of time signatures to be taken either forward or backward from the curren
 or future segments may reset the current offset in TSS1 (and accept the next 10 or previous 10
 time signatures in TSS1 from this new offset in TSS1); or future segments may reset
 the current offset in TSS1 and specify a totally new number time signatures from TSS1, either
-forward or backward. In other words, after interpreting making the cursor-relative read
+forward or backward. In other words, after interpreting the cursor-relative read
 for 10 time signatures against TSS1 specified in N1, the setting reservoir will contain
 a segment-level entry for time signature-determination set equal to offset 10 of TSS1 in
 the forward direction. Future segments may specify the reuse of all, some or none of the 
@@ -170,7 +170,7 @@ have been determined. We find that the time signatures of T3 have not been deter
 and so we ask what time signature settings exist for T3. Suppose we find that no time
 signature settings exist in T3. We check the setting reservoir to see if any segment-level
 time signature setting persists. (The setting reservoir implements a get_settings() method.)
-We find that the setting reservoir contains a segment-level setting that set time signatures
+We find that the setting reservoir contains a segment-level setting that sets time signatures
 equal to a statal server call of the next 10 time signatures from TSS1 in the forward direction.
 Because we have no setting in T3 to specify otherwise (nor to augment the time signature setting
 retrieved from the persistent settings reservoir) we consider replaying the time signature setting
@@ -178,8 +178,8 @@ retrieved from the persistent settings reservoir exactly. In order to do this we
 to see whether the time signature setting retrieved from the persistent settings reservoir is
 in the right state to be called. We do this by examining the segments T1, T2 prior to T3
 and checking to see whether T1, T2 contain *pending* settings that specify cursor-relative
-calls against TSS1. We iterate the settings of T1, T2 and find that no *pending* settings
-that specify cursor-relative calls against TSS1 exist. This means that our cursor against TSS1
+calls against TSS1. We iterate the settings of T1, T2 and find no *pending* settings
+that specify cursor-relative calls against TSS1. This means that our cursor against TSS1
 is in the right state to be called in T3. We call our cursor against TSS1 and receive the
 next 10 time signatures from TSS1. We set these as the time signatures of T3 and we leave
 this statal server request specifying the next 10 forward time signatures from TSS1 in
@@ -198,14 +198,15 @@ of T4. We then reexamine the source of N3 to see whether the interpretation of N
 If we find that the interpretation of N3 should not persist then we are done; on the other hand, 
 if we find that the interpretation of N3 should persist then we must modify the segment-level
 time signature setting in the persistent setting reservoir and update that setting to reflect
-offset 22 or TSS1 read 2 time signatures at a time in the forward direction.
+offset 22 of TSS1 read 2 time signatures at a time in the forward direction.
 
 T2 remains in the list of time signature-uninterpreted segments. So interpretation advances
 from T4 to T2, passing over T1. We begin to interpret the time signatures for T2 anew.
 We find that T2 contains setting N2 that specifies time signatures score-relative to T4.
 We check and find that T4 has been time signature-interpreted. So we copy T4's 2 time 
 signatures to T2. We reexamine N2 to find whether N2 is marked persistent.
-(Note that it is an open question whether or not score-relative settings may be marked persistent.)
+(Note that it is an open question whether or not score-relative settings may be marked persistent.
+In fact we provisionally declare that score-relative settings may not persist.)
 Here we will suppose that N2 is not marked persistent. This means that we do not need to
 adjust the setting reservoir. We remove T2 from the list of time signature-uninterpreted segments.
 
@@ -217,7 +218,7 @@ The time signature interpretation of S is now complete.
 
 Example 2. Suppose S equals T1, T2, T3, T4, T5, T6.
 
-Interpretation begin. We add T1, ..., T6 to the list of time signature-uninterpreted segments in S.
+Interpretation begins. We add T1, ..., T6 to the list of time signature-uninterpreted segments in S.
 
 Interpretation advances to the first segment, T1, in the list of time signature-uninterpreted
 segments in S. We find that T1 contains setting T1n1 that sets the time signatures of T1
