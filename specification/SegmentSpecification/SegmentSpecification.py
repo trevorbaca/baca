@@ -19,10 +19,12 @@ class SegmentSpecification(AbjadObject):
     ### INITIALIZER ###
 
     def __init__(self, score_template, directives=None, name=None, settings=None):
+        self._context_name_abbreviations = {}
         self.score_template = score_template
         self.directives = directives or []
         self.name = name
         self.settings = settings or []
+        self.context_name_abbreviations = getattr(self.score_template, 'context_name_abbreviations', {})
 
     ### SPECIAL METHODS ###
 
@@ -53,6 +55,16 @@ class SegmentSpecification(AbjadObject):
         return result
 
     ### READ / WRITE PUBLIC ATTRIBUTES ###
+
+    @apply
+    def context_name_abbreviations():
+        def fget(self):
+            return self._context_name_abbreviations
+        def fset(self, context_name_abbreviations):
+            assert isinstance(context_name_abbreviations, dict)
+            self._context_name_abbreviations = context_name_abbreviations
+            self.initialize_context_name_abbreviations()
+        return property(**locals())
 
     @apply
     def score_template():
@@ -101,6 +113,10 @@ class SegmentSpecification(AbjadObject):
                 (persistent is None or setting.persistent == persistent)):
                 settings.append(setting)
         return settings
+
+    def initialize_context_name_abbreviations(self):
+        for context_name_abbreviation, context_name in self.context_name_abbreviations.iteritems():
+            setattr(self, context_name_abbreviation, context_name)
 
     def initialize_context_names(self):
         if self.score is not None:

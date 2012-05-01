@@ -11,12 +11,10 @@ class ScoreSpecification(AbjadObject):
     ### INITIALIZER ###
 
     def __init__(self, score_template, segment_specification_class=None, segments=None, settings=None):
-        self._context_name_abbreviations
         self.score_template = score_template
         self.segment_specification_class = segment_specification_class or SegmentSpecification
         self.segments = segments or []
         self.settings = settings or []
-        self.context_name_abbreviations = getattr(self.score_template, 'voice_abbreviations', {})
         self.initialize_contexts()
 
     ### SPECIAL METHODS ###
@@ -40,18 +38,6 @@ class ScoreSpecification(AbjadObject):
     def __repr__(self):
         return '{}({!r})'.format(type(self).__name__, self.segments)
 
-    ### READ / WRITE PUBLIC PROPERTIES ###
-
-    @apply
-    def context_name_abbreviations():
-        def fget(self):
-            return self._context_name_abbreviations
-        def fset(self, context_name_abbreviations):
-            assert isinstance(context_name_abbreviations, dict)
-            self._context_name_abbreviations = context_name_abbreviations
-            self.initialize_context_name_abbreviations()
-        return property(**locals())
-
     ### PUBLIC METHODS ###
     
     def append_segment(self, name=None):
@@ -68,10 +54,6 @@ class ScoreSpecification(AbjadObject):
                 (persistent is None or setting.persistent == persistent)):
                 settings.append(setting)
         return settings
-
-    def initialize_context_name_abbreviations(self):
-        for context_name_abbreviation, context_name in self.context_name_abbreviations.iteritems():
-            setattr(self, context_name_abbreviation, context_name)
 
     def initialize_contexts(self):
         self.contexts = {}
