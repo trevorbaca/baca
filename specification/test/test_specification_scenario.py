@@ -1,6 +1,7 @@
 from abjad.tools import scoretemplatetools
 from specification import ScoreSpecification
 import baca.library as library
+import py
 
 
 def test_specification_scenario_01():
@@ -15,6 +16,7 @@ def test_specification_scenario_01():
     Set T2 time signatures equal to the last 2 time signatures of T1.
     Let all other T1 specifications continue to T2.
     '''
+    py.test.skip()
     
     score = ScoreSpecification(scoretemplatetools.StringQuartetScoreTemplate)
 

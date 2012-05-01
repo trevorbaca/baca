@@ -1,128 +1,53 @@
-*Chunk specification.* Define chunk specification H equal to the 4-tuple (S, T, D, P),
+*Score specification.* Score specification proceeds as a process of successive segment specification.
+Score specification R equals the ordered list of zero or more segment specifications.
+The time ordered of segment specifications in R is taken equal to score order.
+
+*Segment specification.* Define segment specification H equal to the 4-tuple (S, T, D, P),
 with score template S, tempo specification T, duration specification D, 
 and unordered set of zero or more population specifications P. 
 
-*Score template.* Define score template S equal to any prebuilt empty voiced score S.
+*Segment score template.* Define score template S equal to any prebuilt empty voiced score S.
 
-*Tempo specification.* Define tempo specification T equal to any absolute 
+*Segment tempo.* Define tempo specification T equal to any absolute 
 or relative tempo specification. Tempo specification T is optional.
-The system currently affords relative tempo specification only with reference to another chunk exactly.
+The system currently affords relative tempo specification only with reference to another segment exactly.
 (All sorts of other relative tempo specification scenarios are possible. We leave these for later.)
 
-*Duration specification.* Define duration specification D equal to any written duration,
+*Segment duration.* Define duration specification D equal to any written duration,
 any duration in seconds or any meter specification M. Tempo must be resolvable where
 D equals a duration in seconds.
 
-*Meter specification.* Define meter specification M equal to an ordered list of one or more meters.
-The system currently models meter specification as an (optional) chunk attribute.
+*Segment time signatures.* Define meter specification M equal to an ordered list of one or more meters.
+The system currently models meter specification as an (optional) segment attribute.
 Eventually, the system will also model meter specification as a staff group and staff attribute.
-This is implies the following: first, chunks may be unmetered.
-Second, the system models measures as 'backgrounding' notes, rests, chords and tuplets 
-rather than containing notes, rests, chords and tuplets.
-Third, the contents of metered chunks is expected to match the sum of chunk meters.
-Fourth, the metering of staff chunks will eventually be allowed to differ.
-Fifth, metering will eventually 'cascade' down the score hierarchy similarly 
-to typographic attributes and other settings.
-Metering may be specified absolutely, relatively or with reference to a stateful server.
-All cases of relative metering specification are based on reference to the metering of another chunk.
-The current implementation of the system affords relative meter specification of chunk H
-as equal to meters i through j of chunk K, allowing for positive, negative and empty values of i, j.
-(Many variations are possible but all are left for later implementation.)
+This implies the following: first, segments may be unmetered.
+Second, the system models measures as 'backgrounding' notes, rests, chords, tuplets 
+rather than containing notes, rests, chords, tuplets.
+Third, the contents of metered segments is expected to match the sum of segment meters.
+Fourth, the metering of staff segments will eventually be allowed to differ.
+Fifth, metering will eventually 'cascade' down the score hierarchy similarly to typographic attributes.
+Metering may be specified absolutely, relatively or with reference to a statal server.
+All cases of relative metering specification are based on reference to the metering of another segment.
+The current implementation of the system affords relative meter specification of segment H
+as equal to meters i through j of segment K, allowing for positive, negative and empty values of i, j.
 Statal meter specification assumes a hierarchical statal server that is duration-aware.
-(Many variations are possible but only next-durative values will implement now.)
+(Many other variations are left for later implementation.)
 
-*Population specifications.* Define population specification p equal the pair (s, h),
-with selection s and handler h.
+*Settings.* Define setting t equal the 6-tuple (σ, ν, κ, n, s, p) with segment name σ,
+context name ν, scope κ, attribute name n, source s, and persistence indicator p.
+This is equivalent to context selection ξ equal to (σ, ν, κ), defined below, together
+with three further values n, s, p.
 
-                                    * * *
+*Directives.* Define directive d equal to the 4-tuple (τ, n, s, p) with target selection τ,
+attribute name n, source s, and persistence indicator p.
 
-*Interpretation.* Interpretation follows specification.
-Chunk interpretation comprises two parts.
-Part one creates an in-memory list of chunks and an in-memory list of relative references.
-Part two resolves relative references and alerts on cyclic references.
-Chunk interpretation returns a list of raw chunks and a list of interpreted chunks.
-Any chunk specification may be interpreted singly or in score-sequence.
-Chunk specifications interpreted singly may not be able to resolve relative references.
-(Relative references are defined as specifications given in terms of other specifications.)
-Raw chunks may or may not notate; interpreted chunks always notate completely.
-The purpose of interpretation is to make all chunks notatable.
+*Selections.* Define selection λ equal to the triple (σ, N, κ) with segment name σ,
+context names N = {ν0, ..., νn}, and scope κ. Note that N is defined equal to a list
+of zero or more elements. This means that selections function as a type of bundle
+that can be unpacked. Note too that where n = 0 we say that λ is empty. Intuitively λ
+represents a filtered rectangle of a single score segment.
 
-                                    * * *
-
-*Selections.* We define a selection equal to an ordered list of zero or more component selections.
-We define a component selection equal to the triple of a score component together with
-a start indicator and a stop indicator. We say that start and stop indicators are both types
-of time indicator and we define the notion of a time indicator with respect to component t.
-Consider the score s that houses t. We say that a time indicator is the start time or stop time
-of any component in s (including t itself) or else any offset value or absolute time value
-within the duration of s. Zero and positive infinity are both valid time indicators, 
-although negative numbers are not.
-
-*Selection iteration.* The component selections that comprise any given selection are always ordered.
-But this order requirement says nothing about the order in which the sum total of components
-contained in the selection is to be iterated. This is by design: any iterator may be used to
-iterate the components of any selection.
-
-*Partitioning time.* There appears to be a closed but tricky set of time partition functions.
-(1.0) as an unrounded proportion of chunk duration; 
-(1.1a) as a proportion of chunk duration rounded to the start of the current measure;
-(1.1b) as a proportion of chunk duration rounded to the stop of the current measure;
-(1.2a) as a proportion of chunk duration rounded to the start of the current leaf;
-(1.2b) as a proportion of chunk duration rounded to the stop of the current leaf;
-(2.0) as an unrounded amount of absolute time;
-(2.1a) as an amount of absolute time rounded to the start of the current measure;
-(2.1b) as an amount of absolute time rounded to the stop of the current measure;
-(2.2a) as an amount of absolute time rounded to the start of the current leaf;
-(2.2b) as an amount of absolute time rounded to the stop of the current leaf.
-Constraints apply to these divisional methods:
-measures of absolute time enter availability only after tempo specification;
-measure-rounding enters availability only after measure determination;
-leaf-rounding enters availability only after leaf determination.
-
-*Hierarchical statal servers.* Valid requests to a hierarchical statal server include:
-(1) get node at position; (2) get next n nodes at level; (3) get next n complete nodes at level.
-
-                                    * * *
-
-*Rhythm-first specification.* We create rhythm specification ρ of voice v in chunk h.
-Partition the duration of v into n time-parts, with 1 <= n, according to any of the
-time partitioning functions detailed above; call n the 'part-length' of ρ.
-Decide whether time-part 0 continues the last time-part of the previous chunk;
-decide whether time-part n - 1 extends beyond the bondary of the current chunk;
-where the first condition obtains, we refer to ρ as left-inapplicable (otherwise left-applicable);
-where the second condition obtains, we refer to ρ as right-inapplicable (otherwise right-applicable);
-where ρ is both left- and right-inapplicable and the part-length of ρ == 1, we call ρ inapplicable.
-Collect the m applicable time-parts in ρ, with m <= n;  call m the 'applicable part-length' of ρ.
-For each applicable time-parts p in ρ, specify the rhythmic divisions of p and then the rhythms of p.
-Rhythmic divisions are always specified by the combination of a rhythmic division handler
-together with one (or rarely more) input parameters passed to the rhythmic division handler.
-(A straightforward example is a rhythmic division handler that divides the duration of p
-into consecutive eighth notes, with any fractional duration positioned at the end of p.)
-Rhythms are always specified by the combination of a rhythm handler together with zero
-or more input parameters passed to the rhythm handler. (An example is a rhythm handler 
-that fills the rhythmic divisions of p with exactly 5 attack points.)
-To summarize: rhythm specification of v is complete after the specification of a 
-division handler / rhythm handler pair for each applicable part in any time-partition of v.
-
-*Pitch-first specification.* Pitch-class material may be specified absolutely, relatively
-or with reference to a stateful server.
-Absolute pitch-class specification provides some pitch-class structure explicitly; 
-this may be a list of zero or more pitch-classes or else a more complex aggregate of pitch-classes.
-Relative pitch-class specification works with reference to a selection; see the section of selections.
-Statal specification of pitch-classes proceeds with the help of a pitch-class server.
-All pitch-class servers are taken to be cyclic trees. So the valid things that can
-be requested of a pitch-class server are all those things that can be requested 
-of a hierarchical statal server; see the section on hierarchical statal servers.
-    
-*Voice-local specification: secondary parameters.*
-The user may specify an arbitrary number of secondary parameters.
-Thes include articulation, dynamics and various types of spanner.
-The specification of secondary parameters proceeds according to the specification
-of a selection followed by the specification of a handler (sometimes with handler input).
-(Example: specify that the entire chunk be selected; then specify an articulation handler 
-that applies a staccato dot to every note iterated in depth-first order.
-Example: specify that the duration of the violin voice is to be partitioned into halves
-and that the second half is to be selected; then specify a dynamic handler 
-that applies haipins to runs of notes and chords in the selection.
-Example: specify that the last note or chord in the percussion voice is to be selected;
-then specify an articulation handler that applies a marcato to any note or chord selected.)
+*Context selections.* Define context selection ξ equal to the triple (σ, ν, κ) with
+segment name σ, context name ν, and scope κ. Intuitively ξ equals a filtered horizontal
+layer of music in a single segment of score. The compositing of zero or more context
+selections all in the same segment gives selection λ as defined above.
