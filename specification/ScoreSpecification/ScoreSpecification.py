@@ -27,8 +27,8 @@ class ScoreSpecification(AbjadObject):
             for segment in self.segments:
                 if segment.name == arg:
                     return segment
-                else:
-                    raise KeyError
+            else:
+                raise KeyError(repr(arg))
 
     def __getslice__(self, start, stop):
         return self.segments.__getslice__(start, stop)
@@ -64,7 +64,8 @@ class ScoreSpecification(AbjadObject):
             self.contexts[context.name] = {}
 
     def interpret_segment(self, segment):
-        time_signatures = self.resolve_attribute(segment.name, None, None, 'time_signatures')
+        time_signatures = self.resolve_attribute(segment.name, 'time_signatures')
+        print time_signatures
 
     def interpret_segment_attribute_directives(self, segment, attribute_name):
         directives = segment.get_directives(attribute_name=attribute_name)
@@ -78,9 +79,16 @@ class ScoreSpecification(AbjadObject):
         for segment in self.segments:
             self.interpret_segment(segment)
 
-    def resolve_attribute(self, segment_name, context_name, scope, attribute_name):
+    def resolve_attribute(self, segment_name, attribute_name, context_name=None, scope=None):
         segment = self[segment_name]
-        settings = segment.get_settings(context_name=context_name, scope=scope, attribute_name=attribute_name)
+        # TODO: implement segment.get_setting() to insist on a single setting returned
+        settings = segment.get_settings(attribute_name=attribute_name, context_name=context_name, scope=scope)
+        if not settings:
+            raise Exception('no settings for {!r} found in segment {!r}.'.format(attribute_name, segment_name))
+        elif 1 < len(settings):
+            raise Exception('multiple settings for {!r} found in segment {!r}.'.format(attribute_name, segment_name))
+        assert len(settings) == 1
+        return settings[0]
         
     def resolve_directive_source_value(self, directive_source):
         if isinstance(directive_source, Selection):

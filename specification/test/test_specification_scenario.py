@@ -31,4 +31,6 @@ def test_specification_scenario_01():
     segment.set_rhythm(lower, library.note_filled_tokens)
 
     segment = score.append_segment(name='T2')
-    segment.set_time_signatures(segment, score.select('T1').time_signatures[-2:])
+    segment.set_time_signatures(segment, score.retrieve('T1', 'time_signatures'), offset=-2, count=2)
+
+    score.interpret_segments()

@@ -110,10 +110,13 @@ class SegmentSpecification(AbjadObject):
                     result.append(directive)
         return result
 
-    def get_settings(self, context_name=None, attribute_name=None, persistent=None):
+    # TODO: implement self.get_setting()
+
+    def get_settings(self, attribute_name=None, context_name=None, persistent=None, scope=None):
         settings = []
         for setting in self.settings:
             if ((context_name is None or setting.context_name == context_name) and
+                (scope is None or setting.scope == scope) and
                 (attribute_name is None or setting.attribute_name == attribute_name) and
                 (persistent is None or setting.persistent == persistent)):
                 settings.append(setting)
