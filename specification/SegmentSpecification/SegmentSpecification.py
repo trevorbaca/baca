@@ -5,6 +5,8 @@ from abjad.tools.abctools.AbjadObject import AbjadObject
 from abjad.tools.scoretemplatetools.ScoreTemplate import ScoreTemplate
 from baca.handlers.composites.CompositeRhythmHandler import CompositeRhythmHandler
 from baca.handlers.pitch.TimewisePitchClassHandler import TimewisePitchClassHandler
+from baca.specification.AttributeRetrievalIndicator import AttributeRetrievalIndicator
+from baca.specification.AttributeRetrievalRequest import AttributeRetrievalRequest
 from baca.specification.Directive import Directive
 from baca.specification.HandlerRequest import HandlerRequest
 from baca.specification.Scope import Scope
@@ -93,6 +95,9 @@ class SegmentSpecification(AbjadObject):
             if offset is not None:
                 assert count is None
                 source = HandlerRequest(source, offset=offset)
+        elif isinstance(source, AttributeRetrievalIndicator):
+            if count is not None or offset is not None:
+                source = AttributeRetrievalRequest(source, count=count, offset=offset)
         elif count is not None or offset is not None:
             raise ValueError("'count' or 'offset' set on nonstatal source: {!r}.".format(source))
         return source

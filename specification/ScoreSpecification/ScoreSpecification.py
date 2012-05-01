@@ -1,5 +1,6 @@
 from abjad.tools import contexttools
 from abjad.tools.abctools.AbjadObject import AbjadObject
+from baca.specification.AttributeRetrievalIndicator import AttributeRetrievalIndicator
 from baca.specification.SegmentSpecification import SegmentSpecification
 from baca.specification.Selection import Selection
 from baca.specification.StatalServerRequest import StatalServerRequest
@@ -98,6 +99,10 @@ class ScoreSpecification(AbjadObject):
             assert setting.scope is None
             value = self.resolve_source(setting.source)
             #self.reservoirs.time_signatures.
+
+    def retrieve(self, segment_name, attribute_name, context_names=None, scope=None):
+        selection = self.select(segment_name, context_names=context_names, scope=scope)
+        return AttributeRetrievalIndicator(selection, attribute_name)
 
     def select(self, segment_name, context_names=None, scope=None):
         return Selection(segment_name, context_names=context_names, scope=scope)

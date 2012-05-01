@@ -1,3 +1,5 @@
+from AttributeRetrievalIndicator import AttributeRetrievalIndicator
+from AttributeRetrievalRequest import AttributeRetrievalRequest
 from Directive import Directive
 from HandlerRequest import HandlerRequest
 from MomentIndicator import MomentIndicator
