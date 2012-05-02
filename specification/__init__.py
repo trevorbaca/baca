@@ -1,5 +1,7 @@
 from AttributeRetrievalIndicator import AttributeRetrievalIndicator
 from AttributeRetrievalRequest import AttributeRetrievalRequest
+from ContextProxy import ContextProxy
+from ContextTree import ContextTree
 from Directive import Directive
 from HandlerRequest import HandlerRequest
 from MomentIndicator import MomentIndicator

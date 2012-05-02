@@ -6,6 +6,7 @@ from baca.handlers.composites.CompositeRhythmHandler import CompositeRhythmHandl
 from baca.handlers.pitch.TimewisePitchClassHandler import TimewisePitchClassHandler
 from baca.specification.AttributeRetrievalIndicator import AttributeRetrievalIndicator
 from baca.specification.AttributeRetrievalRequest import AttributeRetrievalRequest
+from baca.specification.ContextTree import ContextTree
 from baca.specification.Directive import Directive
 from baca.specification.HandlerRequest import HandlerRequest
 from baca.specification.Scope import Scope
@@ -22,13 +23,9 @@ class SegmentSpecification(Specification):
 
     def __init__(self, score_template, directives=None, name=None, settings=None):
         Specification.__init__(self, settings=settings)
-        self._context_name_abbreviations = {}
         self.score_template = score_template
         self.directives = directives or []
         self.name = name
-        self.context_name_abbreviations = getattr(self.score_template, 'context_name_abbreviations', {})
-        # TODO
-        #self.contexts = {} # TODO: implement ContextTree class
 
     ### SPECIAL METHODS ###
 
@@ -47,6 +44,10 @@ class SegmentSpecification(Specification):
     ### READ-ONLY PUBLIC ATTRIBUTES ###
 
     @property
+    def contexts(self):
+        return getattr(self, '_contexts', None)
+
+    @property
     def has_relative_directives(self):
         return bool(self.relative_directives)
 
@@ -58,22 +59,7 @@ class SegmentSpecification(Specification):
                 result.append(directive)
         return result
 
-    # TODO: implement
-    @property
-    def score_context_name(self):
-        raise NotImplementedError
-
     ### READ / WRITE PUBLIC ATTRIBUTES ###
-
-    @apply
-    def context_name_abbreviations():
-        def fget(self):
-            return self._context_name_abbreviations
-        def fset(self, context_name_abbreviations):
-            assert isinstance(context_name_abbreviations, dict)
-            self._context_name_abbreviations = context_name_abbreviations
-            self.initialize_context_name_abbreviations()
-        return property(**locals())
 
     @apply
     def score_template():
@@ -82,17 +68,11 @@ class SegmentSpecification(Specification):
         def fset(self, score_template):
             assert isinstance(score_template, (ScoreTemplate, type(None)))
             self._score_template = score_template
-            self.initialize_score()
-            self.initialize_context_names()
+            self._contexts = ContextTree(self.score_template())
+            self.initialize_context_name_abbreviations()
         return property(**locals())
 
     ### PUBLIC METHODS ###
-
-    def all_are_context_names(self, expr):
-        try:
-            return all([x in self.context_names for x in expr])
-        except:
-            return False
 
     def annotate_source(self, source, count=None, offset=None):
         if isinstance(source, StatalServer):
@@ -124,29 +104,14 @@ class SegmentSpecification(Specification):
         return Specification.get_settings(self, segment_name=self.name, **kwargs)
     
     def initialize_context_name_abbreviations(self):
+        self.context_name_abbreviations = getattr(self.score_template, 'context_name_abbreviations', {})
         for context_name_abbreviation, context_name in self.context_name_abbreviations.iteritems():
             setattr(self, context_name_abbreviation, context_name)
-
-    def initialize_context_names(self):
-        if self.score is not None:
-            self.context_names = []
-            for context in contexttools.iterate_contexts_forward_in_expr(self.score):
-                assert context.context_name is not None
-                self.context_names.append(context.name)
-                self.context_names.sort()
-        else:
-            self.context_names = []
-
-    def initialize_score(self):
-        if self.score_template is not None:
-            self.score = self.score_template()
-        else:
-            self.score = None
 
     def parse_context_token(self, context_token):
         if context_token in self.context_names:
             context_names = [context_token]
-        elif self.all_are_context_names(context_token):
+        elif self.contexts.all_are_context_names(context_token):
             context_names = context_token
         elif isinstance(context_token, type(self)):
             context_names = None
@@ -159,16 +124,16 @@ class SegmentSpecification(Specification):
             selection = selection_token
         elif isinstance(selection_token, type(self)):
             selection = self.select()
-        elif selection_token in self.context_names:
+        elif isinstance(selection_token, str) and selection_token in self.contexts:
             selection = self.select(context_names=[selection_token])
-        elif self.all_are_context_names(selection_token):
+        elif self.contexts.all_are_context_names(selection_token):
             selection = self.select(context_names=selection_token)
         else:
             raise ValueError('invalid selection token: {!r}.'.format(selection_token))
         return selection
 
     def select(self, context_names=None, segment_name=None, scope=None):
-        assert context_names is None or self.all_are_context_names(context_names)
+        assert context_names is None or self.contexts.all_are_context_names(context_names)
         assert isinstance(segment_name, (str, type(None)))
         assert isinstance(scope, (Scope, type(None)))
         segment_name = segment_name or self.name

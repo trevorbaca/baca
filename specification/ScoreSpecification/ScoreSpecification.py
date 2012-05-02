@@ -118,10 +118,12 @@ class ScoreSpecification(Specification):
 
     def store_setting_in_context_tree(self, setting):
         segment = self[setting.segment_name]
-        context_name = setting.context_name or segment.score_context_name
-        setting_value = self.resolve_setting_source(setting.source)
-        print setting_value
-        scoped_value = (setting_value, setting.scope) # TODO: implement ScopeValue class
+        self._debug(segment)
+        context_name = setting.context_name or segment.contexts.score_name
+        value = self.resolve_setting_source(setting.source)
+        print value
+        scoped_value = (value, setting.scope) # TODO: implement ScopeValue class
+        print scoped_value
         segment.contexts[context_name][setting.attribute_name] = scoped_value
 
     def unpack_directives(self):
