@@ -1,7 +1,6 @@
 from abjad.tools import chordtools
 from abjad.tools import contexttools
 from abjad.tools import notetools
-from abjad.tools.abctools.AbjadObject import AbjadObject
 from abjad.tools.scoretemplatetools.ScoreTemplate import ScoreTemplate
 from baca.handlers.composites.CompositeRhythmHandler import CompositeRhythmHandler
 from baca.handlers.pitch.TimewisePitchClassHandler import TimewisePitchClassHandler
@@ -10,22 +9,23 @@ from baca.specification.AttributeRetrievalRequest import AttributeRetrievalReque
 from baca.specification.Directive import Directive
 from baca.specification.HandlerRequest import HandlerRequest
 from baca.specification.Scope import Scope
+from baca.specification.Specification import Specification
 from baca.specification.Selection import Selection
 from baca.specification.StatalServer import StatalServer
 from baca.specification.StatalServerRequest import StatalServerRequest
 from handlers.Handler import Handler
 
 
-class SegmentSpecification(AbjadObject):
+class SegmentSpecification(Specification):
 
     ### INITIALIZER ###
 
     def __init__(self, score_template, directives=None, name=None, settings=None):
+        Specification.__init__(self, settings=settings)
         self._context_name_abbreviations = {}
         self.score_template = score_template
         self.directives = directives or []
         self.name = name
-        self.settings = settings or []
         self.context_name_abbreviations = getattr(self.score_template, 'context_name_abbreviations', {})
 
     ### SPECIAL METHODS ###
@@ -110,17 +110,17 @@ class SegmentSpecification(AbjadObject):
                     result.append(directive)
         return result
 
-    # TODO: implement self.get_setting()
-
-    def get_settings(self, attribute_name=None, context_name=None, persistent=None, scope=None):
-        settings = []
-        for setting in self.settings:
-            if ((context_name is None or setting.context_name == context_name) and
-                (scope is None or setting.scope == scope) and
-                (attribute_name is None or setting.attribute_name == attribute_name) and
-                (persistent is None or setting.persistent == persistent)):
-                settings.append(setting)
-        return settings
+#    # TODO: implement self.get_setting()
+#
+#    def get_settings(self, attribute_name=None, context_name=None, persistent=None, scope=None):
+#        settings = []
+#        for setting in self.settings:
+#            if ((context_name is None or setting.context_name == context_name) and
+#                (scope is None or setting.scope == scope) and
+#                (attribute_name is None or setting.attribute_name == attribute_name) and
+#                (persistent is None or setting.persistent == persistent)):
+#                settings.append(setting)
+#        return settings
 
     def initialize_context_name_abbreviations(self):
         for context_name_abbreviation, context_name in self.context_name_abbreviations.iteritems():

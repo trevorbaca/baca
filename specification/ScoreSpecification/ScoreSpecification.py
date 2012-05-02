@@ -1,21 +1,21 @@
 from abjad.tools import contexttools
-from abjad.tools.abctools.AbjadObject import AbjadObject
 from baca.specification.AttributeRetrievalIndicator import AttributeRetrievalIndicator
 from baca.specification.SegmentSpecification import SegmentSpecification
 from baca.specification.Selection import Selection
+from baca.specification.Specification import Specification
 from baca.specification.StatalServerRequest import StatalServerRequest
 from baca.specification.SettingReservoirs import SettingReservoirs
 
 
-class ScoreSpecification(AbjadObject):
+class ScoreSpecification(Specification):
 
     ### INITIALIZER ###
 
     def __init__(self, score_template, segment_specification_class=None, segments=None, settings=None):
+        Specification.__init__(self, settings=settings)
         self.score_template = score_template
         self.segment_specification_class = segment_specification_class or SegmentSpecification
         self.segments = segments or []
-        self.settings = settings or []
         self.initialize_contexts()
 
     ### SPECIAL METHODS ###
@@ -46,16 +46,6 @@ class ScoreSpecification(AbjadObject):
         self.segments.append(segment)
         return segment
 
-    def get_settings(self, segment_name=None, context_name=None, attribute_name=None, persistent=None):
-        settings = []
-        for setting in self.settings:
-            if ((segment_name is None or setting.segment_name == segment_name) and 
-                (context_name is None or setting.context_name == context_name) and
-                (attribute_name is None or setting.attribute_name == attribute_name) and
-                (persistent is None or setting.persistent == persistent)):
-                settings.append(setting)
-        return settings
-
     def initialize_contexts(self):
         self.contexts = {}
         score = self.score_template()
@@ -63,8 +53,31 @@ class ScoreSpecification(AbjadObject):
             assert context.name is not None
             self.contexts[context.name] = {}
 
+    def interpret_additional_segment_parameters(self, segment):
+        pass
+
     def interpret_segment(self, segment):
-        time_signatures = self.resolve_attribute(segment.name, 'time_signatures')
+        self.interpret_segment_time_signatures(segment)
+        self.interpret_segment_rhythmic_divisions(segment)
+        self.interpret_segment_rhythms(segment)
+        self.interpret_segment_pitch_classes(segment)
+        self.interpret_segment_registration(segment)
+        self.interpret_additional_segment_parameters(segment)
+
+    def interpret_segment_pitch_classes(self, segment):
+        pass
+
+    def interpret_segment_registration(self, segment):
+        pass
+
+    def interpret_segment_rhythmic_divisions(self, segment):
+        pass
+
+    def interpret_segment_rhythms(self, segment):
+        pass
+
+    def interpret_segment_time_signatures(self, segment):
+        time_signatures = self.resolve_attribute(segment, 'time_signatures')
         print time_signatures
 
     def interpret_segment_attribute_directives(self, segment, attribute_name):
@@ -79,16 +92,12 @@ class ScoreSpecification(AbjadObject):
         for segment in self.segments:
             self.interpret_segment(segment)
 
-    def resolve_attribute(self, segment_name, attribute_name, context_name=None, scope=None):
-        segment = self[segment_name]
-        # TODO: implement segment.get_setting() to insist on a single setting returned
-        settings = segment.get_settings(attribute_name=attribute_name, context_name=context_name, scope=scope)
+    def resolve_attribute(self, segment, attribute_name, **kwargs):
+        settings = segment.get_settings(attribute_name=attribute_name, **kwargs)
         if not settings:
-            raise Exception('no settings for {!r} found in segment {!r}.'.format(attribute_name, segment_name))
-        elif 1 < len(settings):
-            raise Exception('multiple settings for {!r} found in segment {!r}.'.format(attribute_name, segment_name))
-        assert len(settings) == 1
-        return settings[0]
+            #self.
+            pass
+        return settings
         
     def resolve_directive_source_value(self, directive_source):
         if isinstance(directive_source, Selection):
