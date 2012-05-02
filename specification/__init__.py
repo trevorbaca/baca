@@ -5,6 +5,7 @@ from ContextTree import ContextTree
 from Directive import Directive
 from HandlerRequest import HandlerRequest
 from MomentIndicator import MomentIndicator
+from ScopedValue import ScopedValue
 from ScoreSpecification import ScoreSpecification
 from SegmentSpecification import SegmentSpecification
 from Selection import Selection
