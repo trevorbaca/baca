@@ -4,7 +4,7 @@ from baca.specification.SegmentSpecification import SegmentSpecification
 from baca.specification.Selection import Selection
 from baca.specification.Specification import Specification
 from baca.specification.StatalServerRequest import StatalServerRequest
-from baca.specification.SettingReservoirs import SettingReservoirs
+from baca.specification.SettingReservoir import SettingReservoir
 
 
 class ScoreSpecification(Specification):
@@ -16,6 +16,7 @@ class ScoreSpecification(Specification):
         self.score_template = score_template
         self.segment_specification_class = segment_specification_class or SegmentSpecification
         self.segments = segments or []
+        self.persistent_settings = SettingReservoir()
         self.initialize_contexts()
 
     ### SPECIAL METHODS ###
@@ -77,45 +78,27 @@ class ScoreSpecification(Specification):
         pass
 
     def interpret_segment_time_signatures(self, segment):
-        time_signatures = self.resolve_attribute(segment, 'time_signatures')
-        print time_signatures
-
-    def interpret_segment_attribute_directives(self, segment, attribute_name):
-        directives = segment.get_directives(attribute_name=attribute_name)
-        reservoir = getattr(self.reservoirs, attribute_name)
-        for directive in directives:
-            source_value = self.resolve_directive_source_value(directive.source)
-            reservoir.store_settings(directive.target_selection, source_value, directive.is_persistent)
+        settings = segment.get_settings(attribute_name='time_signatures')
+        if not settings:
+            settings = self.persistent_settings.get_settings(attribute_name='time_signatures')
+        assert len(settings) == 1
+        setting = settings[0]
+        assert setting.context_name is None
+        assert setting.scope is None
+        self.store_setting(setting)
 
     def interpret_segments(self):
-        self.unpack_settings()
+        self.unpack_directives()
         for segment in self.segments:
             self.interpret_segment(segment)
 
-    def resolve_attribute(self, segment, attribute_name, **kwargs):
-        settings = segment.get_settings(attribute_name=attribute_name, **kwargs)
-        if not settings:
-            #self.
-            pass
-        return settings
-        
-    def resolve_directive_source_value(self, directive_source):
-        if isinstance(directive_source, Selection):
-            raise NotImplementedError(repr(directive_source))
-        elif isinstance(directive_source, StatalServerRequest):
-            return directive_source()
+    def resolve_setting_source(self, setting_source):
+        if isinstance(setting_source, Selection):
+            raise NotImplementedError(repr(setting_source))
+        elif isinstance(setting_source, StatalServerRequest):
+            return setting_source()
         else:
-            return directive_source
-
-    def resolve_segment_time_signatures(self, segment):
-        settings = segment.get_settings(attribute_name='time_signatures')
-        if settings:
-            assert len(settings) == 1
-            setting = settings[0]
-            assert setting.context_name is None
-            assert setting.scope is None
-            value = self.resolve_source(setting.source)
-            #self.reservoirs.time_signatures.
+            return setting_source
 
     def retrieve(self, segment_name, attribute_name, context_names=None, scope=None):
         selection = self.select(segment_name, context_names=context_names, scope=scope)
@@ -124,6 +107,23 @@ class ScoreSpecification(Specification):
     def select(self, segment_name, context_names=None, scope=None):
         return Selection(segment_name, context_names=context_names, scope=scope)
 
-    def unpack_settings(self):
+    def store_persistent_setting(self, setting):
+        if not setting.persistent:
+            return
+        raise NotImplementedError
+
+    def store_setting(self, setting):
+        self.store_setting_in_context_tree(setting)
+        self.store_persistent_setting(setting)
+
+    def store_setting_in_context_tree(self, setting):
+        segment = self[setting.segment_name]
+        context_name = setting.context_name or segment.score_context_name
+        setting_value = self.resolve_setting_source(setting.source)
+        print setting_value
+        scoped_value = (setting_value, setting.scope) # TODO: implement ScopeValue class
+        segment.contexts[context_name][setting.attribute_name] = scoped_value
+
+    def unpack_directives(self):
         for segment in self.segments:
-            self.settings.extend(segment.unpack_settings())
+            self.settings.extend(segment.unpack_directives())

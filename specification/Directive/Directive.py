@@ -21,7 +21,7 @@ class Directive(AbjadObject):
         args.extend([self.attribute_name, self.source, self.persistent])
         return Setting(*args)
 
-    def unpack_settings(self):
+    def unpack(self):
         assert isinstance(self.target_selection.context_names, (list, type(None)))
         settings = []
         if self.target_selection.context_names in (None, []):

@@ -27,6 +27,8 @@ class SegmentSpecification(Specification):
         self.directives = directives or []
         self.name = name
         self.context_name_abbreviations = getattr(self.score_template, 'context_name_abbreviations', {})
+        # TODO
+        #self.contexts = {} # TODO: implement ContextTree class
 
     ### SPECIAL METHODS ###
 
@@ -55,6 +57,11 @@ class SegmentSpecification(Specification):
             if directive.is_relative:
                 result.append(directive)
         return result
+
+    # TODO: implement
+    @property
+    def score_context_name(self):
+        raise NotImplementedError
 
     ### READ / WRITE PUBLIC ATTRIBUTES ###
 
@@ -110,18 +117,12 @@ class SegmentSpecification(Specification):
                     result.append(directive)
         return result
 
-#    # TODO: implement self.get_setting()
-#
-#    def get_settings(self, attribute_name=None, context_name=None, persistent=None, scope=None):
-#        settings = []
-#        for setting in self.settings:
-#            if ((context_name is None or setting.context_name == context_name) and
-#                (scope is None or setting.scope == scope) and
-#                (attribute_name is None or setting.attribute_name == attribute_name) and
-#                (persistent is None or setting.persistent == persistent)):
-#                settings.append(setting)
-#        return settings
+    def get_setting(self, **kwargs):
+        return Specification.get_setting(self, segment_name=self.name, **kwargs)
 
+    def get_settings(self, **kwargs):
+        return Specification.get_settings(self, segment_name=self.name, **kwargs)
+    
     def initialize_context_name_abbreviations(self):
         for context_name_abbreviation, context_name in self.context_name_abbreviations.iteritems():
             setattr(self, context_name_abbreviation, context_name)
@@ -267,7 +268,7 @@ class SegmentSpecification(Specification):
         attribute_name = 'written_duration'
         self.set_attribute(attribute_name, target_token, source, count=count, persistent=persistent, offset=offset)
 
-    def unpack_settings(self):
+    def unpack_directives(self):
         for directive in self.directives:
-            self.settings.extend(directive.unpack_settings())
+            self.settings.extend(directive.unpack())
         return self.settings
