@@ -37,6 +37,16 @@ class ContextTree(AbjadObject, OrderedDict):
         except:
             return False
 
+    def get_values(self, attribute_name=None, context_name=None, scope=None):
+        if context_name is None:
+            context_proxies = list(self.itervalues())
+        else:
+            context_proxies = [self[context_name]]
+        values = []
+        for context_proxy in context_proxies:
+            values.extend(context_proxy.get_values(attribute_name=attribute_name, scope=scope))
+        return values 
+
     def initialize_context_proxies(self):
         context_names = []
         if self.score is not None:
@@ -45,3 +55,9 @@ class ContextTree(AbjadObject, OrderedDict):
                 context_names.append(context.name)
         for context_name in sorted(context_names):
             self[context_name] = ContextProxy()
+
+    def show(self):
+        for context_name in self:
+            print context_name
+            for setting_name in self[context_name]:
+                print '\t{}: {}'.format(setting_name, self[context_name][setting_name])

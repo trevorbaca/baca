@@ -44,8 +44,8 @@ class SegmentSpecification(Specification):
     ### READ-ONLY PUBLIC ATTRIBUTES ###
 
     @property
-    def contexts(self):
-        return getattr(self, '_contexts', None)
+    def context_tree(self):
+        return getattr(self, '_context_tree', None)
 
     @property
     def has_relative_directives(self):
@@ -68,7 +68,7 @@ class SegmentSpecification(Specification):
         def fset(self, score_template):
             assert isinstance(score_template, (ScoreTemplate, type(None)))
             self._score_template = score_template
-            self._contexts = ContextTree(self.score_template())
+            self._context_tree = ContextTree(self.score_template())
             self.initialize_context_name_abbreviations()
         return property(**locals())
 
@@ -111,7 +111,7 @@ class SegmentSpecification(Specification):
     def parse_context_token(self, context_token):
         if context_token in self.context_names:
             context_names = [context_token]
-        elif self.contexts.all_are_context_names(context_token):
+        elif self.context_tree.all_are_context_names(context_token):
             context_names = context_token
         elif isinstance(context_token, type(self)):
             context_names = None
@@ -124,16 +124,16 @@ class SegmentSpecification(Specification):
             selection = selection_token
         elif isinstance(selection_token, type(self)):
             selection = self.select()
-        elif isinstance(selection_token, str) and selection_token in self.contexts:
+        elif isinstance(selection_token, str) and selection_token in self.context_tree:
             selection = self.select(context_names=[selection_token])
-        elif self.contexts.all_are_context_names(selection_token):
+        elif self.context_tree.all_are_context_names(selection_token):
             selection = self.select(context_names=selection_token)
         else:
             raise ValueError('invalid selection token: {!r}.'.format(selection_token))
         return selection
 
     def select(self, context_names=None, segment_name=None, scope=None):
-        assert context_names is None or self.contexts.all_are_context_names(context_names)
+        assert context_names is None or self.context_tree.all_are_context_names(context_names)
         assert isinstance(segment_name, (str, type(None)))
         assert isinstance(scope, (Scope, type(None)))
         segment_name = segment_name or self.name
