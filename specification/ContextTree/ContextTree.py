@@ -60,4 +60,4 @@ class ContextTree(AbjadObject, OrderedDict):
         for context_name in self:
             print context_name
             for setting_name in self[context_name]:
-                print '\t{}: {}'.format(setting_name, self[context_name][setting_name])
+                print '\t{}'.format(self[context_name][setting_name]._one_line_format)

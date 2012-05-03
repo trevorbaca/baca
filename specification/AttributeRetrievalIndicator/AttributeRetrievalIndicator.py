@@ -11,3 +11,8 @@ class AttributeRetrievalIndicator(AbjadObject):
         assert isinstance(attribute_name, str)
         self.selection = selection
         self.attribute_name = attribute_name
+
+    ### SPECIAL METHODS ###
+
+    def __str__(self):
+        return '({}, {})'.format(self.selection, self.attribute_name)

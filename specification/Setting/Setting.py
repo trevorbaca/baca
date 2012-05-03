@@ -20,6 +20,39 @@ class Setting(AbjadObject):
         self.source = source
         self.persistent = persistent
 
+    ### READ-ONLY PRIVATE PROPERTIES ###
+
+    @property
+    def _one_line_format(self):
+        body = [
+            self._one_line_target_format,
+            self._get_one_line_source_format(self.source),
+            ]
+        if not self.persistent:
+            body.append(self.persistent)
+        body = ', '.join([str(x) for x in body])
+        return '{}: {}'.format(self.attribute_name, body)
+
+    @property
+    def _one_line_target_format(self):
+        body = []
+        for attribute_name in ('segment_name', 'context_name', 'scope'):
+            attribute_value = getattr(self, attribute_name, None)
+            if attribute_value is not None:
+                body.append(attribute_value)
+        body = ', '.join(body)
+        return '({})'.format(body)
+
+    ### PRIVATE METHODS ###
+
+    def _get_one_line_source_format(self, source):
+        if hasattr(source, '_one_line_format'):
+            return source._one_line_format
+        elif hasattr(source, 'name'):
+            return source.name
+        else:
+            return str(source)
+
     ### READ-ONLY PUBLIC PROPERTIES ###
 
     @property

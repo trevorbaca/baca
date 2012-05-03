@@ -18,7 +18,7 @@ def test_specification_scenario_01():
     '''
     py.test.skip()
     
-    score = ScoreSpecification(scoretemplatetools.StringQuartetScoreTemplate)
+    score = ScoreSpecification(scoretemplatetools.StringQuartetScoreTemplate())
 
     segment = score.append_segment(name='T1') 
     segment.set_time_signatures(segment, [(3, 8), (3, 8), (2, 8), (2, 8)])
@@ -33,4 +33,4 @@ def test_specification_scenario_01():
     segment = score.append_segment(name='T2')
     segment.set_time_signatures(segment, score.retrieve('T1', 'time_signatures'), offset=-2, count=2)
 
-    score.interpret_segments()
+    score.interpret()

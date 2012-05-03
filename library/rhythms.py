@@ -6,11 +6,13 @@ __all__ = []
 
 
 note_filled_tokens = timetokentools.NoteFilledTimeTokenMaker()
-__all__.append('note_filled_tokens')
+note_filled_tokens.name = 'note_filled_tokens'
+__all__.append(note_filled_tokens.name)
 
 
 rest_filled_tokens = timetokentools.RestFilledTimeTokenMaker()
-__all__.append('rest_filled_tokens')
+rest_filled_tokens.name = 'rest_filled_tokens'
+__all__.append(rest_filled_tokens.name)
 
 
 pattern, denominator, prolation_addenda  = [1], 64, []
@@ -20,7 +22,8 @@ sixty_fourths = timetokentools.OutputBurnishedSignalFilledTimeTokenMaker(
    pattern, denominator, prolation_addenda,
    lefts, middles, rights,
    left_lengths, right_lengths)
-__all__.append('sixty_fourths')
+sixty_fourths.name = 'sixty_fourths'
+__all__.append(sixty_fourths.name)
 
 
 pattern, denominator, prolation_addenda  = [1], 32, []
@@ -30,4 +33,5 @@ thirty_seconds = timetokentools.OutputBurnishedSignalFilledTimeTokenMaker(
    pattern, denominator, prolation_addenda,
    lefts, middles, rights,
    left_lengths, right_lengths)
-__all__.append('thirty_seconds')
+thirty_seconds.name = 'thirty_seconds'
+__all__.append(thirty_seconds.name)

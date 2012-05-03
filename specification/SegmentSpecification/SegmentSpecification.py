@@ -108,6 +108,10 @@ class SegmentSpecification(Specification):
         for context_name_abbreviation, context_name in self.context_name_abbreviations.iteritems():
             setattr(self, context_name_abbreviation, context_name)
 
+    def notate(self):
+        score_object = self.score_template()
+        return score_object
+
     def parse_context_token(self, context_token):
         if context_token in self.context_names:
             context_names = [context_token]

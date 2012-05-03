@@ -53,7 +53,7 @@ class ScoreSpecification(Specification):
         self.unpack_directives()
         self.interpret_segment_time_signatures()
         self.interpret_segment_divisions()
-        self.interpret_segment_rhythms()
+        self.interpret_segment_rhythm()
         self.interpret_segment_pitch_classes()
         self.interpret_segment_registration()
         self.interpret_additional_segment_parameters()
@@ -77,9 +77,12 @@ class ScoreSpecification(Specification):
         for segment in self.segments:
             pass
 
-    def interpret_segment_rhythms(self):
+    def interpret_segment_rhythm(self):
         for segment in self.segments:
-            pass
+            settings = segment.get_settings(attribute_name='rhythm')
+            if not settings:
+                settings = self.context_tree.get_values(attribute_name='rhythm')
+            self.store_settings(settings)
 
     def interpret_segment_time_signatures(self):
         for segment in self.segments:
@@ -91,6 +94,13 @@ class ScoreSpecification(Specification):
             assert setting.context_name is None
             assert setting.scope is None
             self.store_setting(setting)
+
+    def notate(self):
+        segment_score_objects = []
+        self.interpret()
+        for segment in self:
+            segment_score_objects.append(segment.notate())
+        return segment_score_objects
 
     def resolve_setting(self, setting):
         resolved_setting = copy.deepcopy(setting)

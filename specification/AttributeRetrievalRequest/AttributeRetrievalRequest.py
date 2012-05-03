@@ -16,3 +16,16 @@ class AttributeRetrievalRequest(AbjadObject):
 
     def __call__(self):
         raise NotImplementedError
+
+    ### READ-ONLY PRIVATE PROPERTIES ###
+
+    @property
+    def _one_line_format(self):
+        body = []
+        for attribute_name in ('segment_name', 'context_name', 'scope'):
+            attribute_value = getattr(self.attribute_retrieval_indicator.selection, attribute_name, None)
+            if attribute_value is not None:
+                body.append(attribute_value)
+        body.append(self.attribute_retrieval_indicator.attribute_name)
+        body = ', '.join(body)
+        return '({}, count={}, offset={})'.format(body, self.count, self.offset)
