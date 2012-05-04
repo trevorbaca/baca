@@ -24,6 +24,10 @@ class ContextTree(AbjadObject, OrderedDict):
     ### READ-ONLY PUBLIC PROPERTIES ###
 
     @property
+    def score_context_proxy(self):
+        return self[self.score_name]
+
+    @property
     def score_name(self):
         for context in contexttools.iterate_contexts_forward_in_expr(self.score):
             if isinstance(context, scoretools.Score):

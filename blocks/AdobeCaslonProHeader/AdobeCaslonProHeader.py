@@ -10,20 +10,9 @@ class AdobeCaslonProHeader(HeaderBlock):
     def __init__(self, composer=None, title=None):
         HeaderBlock.__init__(self)
         if composer is not None:
-            self.composer = markuptools.Markup(r'''
-                \override #'(font-name . "Times")
-                \hspace #0 \raise #-40
-                \fontsize #3 "%s"
-                \hspace #15''' % composer)
+            self.composer = markuptools.make_vertically_adjusted_composer_markup(composer,
+                font_name='Times', font_size=3, space_above=20, space_right=0)
         self.tagline = markuptools.Markup('""')
         if title is not None:
-            self.title = markuptools.Markup(r'''\column {
-                    \center-align {
-                        \override #'(font-name . "Adobe Caslon Pro Bold")
-                        \fontsize #18 {
-                            " "   " "   " "   " "   " "
-                            \line { %s } 
-                            " "   " "   " "
-                        }
-                    }
-                }''' % title)
+            self.title = markuptools.make_centered_title_markup(title,
+                font_name='Adobe Caslon Pro Bold', font_size=18)

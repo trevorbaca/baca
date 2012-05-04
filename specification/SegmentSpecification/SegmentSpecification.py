@@ -1,5 +1,6 @@
 from abjad.tools import chordtools
 from abjad.tools import contexttools
+from abjad.tools import measuretools
 from abjad.tools import notetools
 from abjad.tools.scoretemplatetools.ScoreTemplate import ScoreTemplate
 from baca.handlers.composites.CompositeRhythmHandler import CompositeRhythmHandler
@@ -59,6 +60,10 @@ class SegmentSpecification(Specification):
                 result.append(directive)
         return result
 
+    @property
+    def time_signatures(self):
+        return self.context_tree.score_context_proxy.get_value(attribute_name='time_signatures')
+
     ### READ / WRITE PUBLIC ATTRIBUTES ###
 
     @apply
@@ -108,9 +113,18 @@ class SegmentSpecification(Specification):
         for context_name_abbreviation, context_name in self.context_name_abbreviations.iteritems():
             setattr(self, context_name_abbreviation, context_name)
 
+    def make_time_signatures(self, score):
+        time_signatures = self.time_signatures.source
+        measures = measuretools.make_measures_with_full_measure_spacer_skips(time_signatures)
+        context = contexttools.Context(name='MeterVoice', context_name='TimeSignatureContext')
+        context.extend(measures)
+        score.insert(0, context)
+
     def notate(self):
-        score_object = self.score_template()
-        return score_object
+        score = self.score_template()
+        self.make_time_signatures(score)
+        
+        return score
 
     def parse_context_token(self, context_token):
         if context_token in self.context_names:
