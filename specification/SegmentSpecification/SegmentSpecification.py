@@ -93,8 +93,12 @@ class SegmentSpecification(Specification):
         print divisions
 
     def get_divisions_for_voice_name(self, voice_name):
-        original_divisions = self.get_value('divisions', voice_name)
-       
+        divisions = self.get_value('divisions', voice_name)
+        # TODO: repeat divisions to duration of segment
+        # TODO: implement sequencetools.Pair to work with sequencetools.repeat_sequence_to_weight_exactly().
+        #divisions = [sequencetools.Pair(*division) for division in divisions]
+        #divisions = sequencetools.repeat_sequence_to_weight_exactly(divisions)
+        #divisions = [tuple(division) for division in divisions]
         return divisions
 
     def add_rhythms_to_voices(self):
