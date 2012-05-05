@@ -16,20 +16,20 @@ class ContextProxy(AbjadObject, OrderedDict):
 
     ### PUBLIC METHODS ###
 
-    def get_value(self, attribute_name=None, scope=None):
-        values = self.get_values(attribute_name=attribute_name, scope=scope)
-        if not values:
-            raise Exception('no values for {!r} found.'.format(attribute_name))
-        elif 1 < len(values):
-            raise Exception('multiple values for {!r} found.'.format(attribute_name))
-        assert len(values) == 1
-        return values[0]
+    def get_setting(self, attribute_name=None, scope=None):
+        settings = self.get_settings(attribute_name=attribute_name, scope=scope)
+        if not settings:
+            raise Exception('no settings for {!r} found.'.format(attribute_name))
+        elif 1 < len(settings):
+            raise Exception('multiple settings for {!r} found.'.format(attribute_name))
+        assert len(settings) == 1
+        return settings[0]
 
-    def get_values(self, attribute_name=None, scope=None):
-        values = []
-        for key, value in self.iteritems():
+    def get_settings(self, attribute_name=None, scope=None):
+        settings = []
+        for key, setting in self.iteritems():
             if ((attribute_name is None or key == attribute_name) and
-                (scope is None or value.scope == scope)
+                (scope is None or setting.scope == scope)
                 ):
-                values.append(value)
-        return values
+                settings.append(setting)
+        return settings

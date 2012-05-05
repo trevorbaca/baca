@@ -1,5 +1,7 @@
 from abjad.tools import contexttools
+from abjad.tools import sequencetools
 from baca.specification.AttributeRetrievalIndicator import AttributeRetrievalIndicator
+from baca.specification.AttributeRetrievalRequest import AttributeRetrievalRequest
 from baca.specification.ContextTree import ContextTree
 from baca.specification.ScopedValue import ScopedValue
 from baca.specification.SegmentSpecification import SegmentSpecification
@@ -49,6 +51,12 @@ class ScoreSpecification(Specification):
         self.segments.append(segment)
         return segment
 
+    def change_attribute_retrieval_indicator_to_setting(self, indicator):
+        segment = self[indicator.segment_name]
+        context_proxy = segment.context_tree[indicator.context_name]
+        setting = context_proxy.get_setting(attribute_name=indicator.attribute_name, scope=indicator.scope)
+        return setting
+
     def interpret(self):
         self.unpack_directives()
         self.interpret_segment_time_signatures()
@@ -66,7 +74,7 @@ class ScoreSpecification(Specification):
         for segment in self.segments:
             settings = segment.get_settings(attribute_name='divisions')
             if not settings:
-                settings = self.context_tree.get_values(attribute_name='divisions')
+                settings = self.context_tree.get_settings(attribute_name='divisions')
             self.store_settings(settings)
 
     def interpret_segment_pitch_classes(self):
@@ -81,14 +89,14 @@ class ScoreSpecification(Specification):
         for segment in self.segments:
             settings = segment.get_settings(attribute_name='rhythm')
             if not settings:
-                settings = self.context_tree.get_values(attribute_name='rhythm')
+                settings = self.context_tree.get_settings(attribute_name='rhythm')
             self.store_settings(settings)
 
     def interpret_segment_time_signatures(self):
         for segment in self.segments:
             settings = segment.get_settings(attribute_name='time_signatures')
             if not settings:
-                settings = self.context_tree.get_values(attribute_name='time_signatures')
+                settings = self.context_tree.get_settings(attribute_name='time_signatures')
             assert len(settings) == 1
             setting = settings[0]
             assert setting.context_name is None
@@ -102,23 +110,42 @@ class ScoreSpecification(Specification):
             segment_score_objects.append(segment.notate())
         return segment_score_objects
 
+    def resolve_attribute_retrieval_request(self, request):
+        setting = self.change_attribute_retrieval_indicator_to_setting(request.indicator)
+        value = setting.value
+        assert value is not None
+        if request.offset is not None or request.count is not None:
+            original_value_type = type(value)
+            offset = request.offset or 0
+            count = request.count or 0
+            value = sequencetools.CyclicTuple(value)
+            if offset < 0:
+                offset = len(value) - -offset
+            self._debug((value, offset, count))
+            result = value[offset:offset+count]
+            result = original_value_type(result)
+        else:
+            result = value
+        return result
+
     def resolve_setting(self, setting):
         resolved_setting = copy.deepcopy(setting)
-        resolved_source = self.resolve_setting_source(setting)
-        resolved_setting.source = resolved_source
+        value = self.resolve_setting_source(setting)
+        resolved_setting.value = value
         return resolved_setting
 
     def resolve_setting_source(self, setting):
-        if isinstance(setting.source, Selection):
-            raise NotImplementedError(repr(setting.source))
+        if isinstance(setting.source, AttributeRetrievalRequest):
+            return self.resolve_attribute_retrieval_request(setting.source)
         elif isinstance(setting.source, StatalServerRequest):
             return setting.source()
         else:
             return setting.source
 
-    def retrieve(self, segment_name, attribute_name, context_names=None, scope=None):
-        selection = self.select(segment_name, context_names=context_names, scope=scope)
-        return AttributeRetrievalIndicator(selection, attribute_name)
+    def retrieve(self, attribute_name, segment_name, context_name=None, scope=None):
+        indicator = AttributeRetrievalIndicator(
+            attribute_name, segment_name, context_name=context_name, scope=scope)
+        return indicator
 
     def select(self, segment_name, context_names=None, scope=None):
         return Selection(segment_name, context_names=context_names, scope=scope)
@@ -126,8 +153,6 @@ class ScoreSpecification(Specification):
     def store_setting(self, setting):
         segment = self[setting.segment_name]
         context_name = setting.context_name or segment.context_tree.score_name
-        #value = self.resolve_setting_source(setting.source)
-        #scoped_value = ScopedValue(value, setting.scope)
         resolved_setting = self.resolve_setting(setting)
         segment.context_tree[context_name][setting.attribute_name] = resolved_setting
         if setting.persistent:

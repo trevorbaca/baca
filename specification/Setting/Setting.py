@@ -7,7 +7,7 @@ class Setting(AbjadObject):
 
     ### INITIALIZER ###
 
-    def __init__(self, segment_name, context_name, scope, attribute_name, source, persistent):
+    def __init__(self, segment_name, context_name, scope, attribute_name, source, persistent, value=None):
         assert isinstance(segment_name, str) 
         assert isinstance(context_name, (str, type(None)))
         assert isinstance(attribute_name, str)
@@ -19,6 +19,7 @@ class Setting(AbjadObject):
         self.attribute_name = attribute_name
         self.source = source
         self.persistent = persistent
+        self.value = None
 
     ### READ-ONLY PRIVATE PROPERTIES ###
 

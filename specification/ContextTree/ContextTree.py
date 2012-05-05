@@ -17,6 +17,12 @@ class ContextTree(AbjadObject, OrderedDict):
 
     ### SPECIAL METHODS ###
 
+    def __getitem__(self, expr):
+        if expr is None:
+            return OrderedDict.__getitem__(self, self.score_name)
+        else:
+            return OrderedDict.__getitem__(self, expr)
+            
     def __repr__(self):
         contents = ', '.join([repr(x) for x in self])
         return '{}([{}])'.format(self._class_name, contents)
@@ -41,15 +47,15 @@ class ContextTree(AbjadObject, OrderedDict):
         except:
             return False
 
-    def get_values(self, attribute_name=None, context_name=None, scope=None):
+    def get_settings(self, attribute_name=None, context_name=None, scope=None):
         if context_name is None:
             context_proxies = list(self.itervalues())
         else:
             context_proxies = [self[context_name]]
-        values = []
+        settings = []
         for context_proxy in context_proxies:
-            values.extend(context_proxy.get_values(attribute_name=attribute_name, scope=scope))
-        return values 
+            settings.extend(context_proxy.get_settings(attribute_name=attribute_name, scope=scope))
+        return settings 
 
     def initialize_context_proxies(self):
         context_names = []

@@ -62,7 +62,9 @@ class SegmentSpecification(Specification):
 
     @property
     def time_signatures(self):
-        return self.context_tree.score_context_proxy.get_value(attribute_name='time_signatures')
+        setting = self.context_tree.score_context_proxy.get_setting(attribute_name='time_signatures')
+        assert setting.value is not None
+        return setting.value
 
     ### READ / WRITE PUBLIC ATTRIBUTES ###
 
@@ -114,7 +116,7 @@ class SegmentSpecification(Specification):
             setattr(self, context_name_abbreviation, context_name)
 
     def make_time_signatures(self, score):
-        time_signatures = self.time_signatures.source
+        time_signatures = self.time_signatures
         measures = measuretools.make_measures_with_full_measure_spacer_skips(time_signatures)
         context = contexttools.Context(name='MeterVoice', context_name='TimeSignatureContext')
         context.extend(measures)
