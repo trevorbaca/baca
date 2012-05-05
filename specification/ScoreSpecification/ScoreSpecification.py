@@ -121,7 +121,6 @@ class ScoreSpecification(Specification):
             value = sequencetools.CyclicTuple(value)
             if offset < 0:
                 offset = len(value) - -offset
-            self._debug((value, offset, count))
             result = value[offset:offset+count]
             result = original_value_type(result)
         else:

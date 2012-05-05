@@ -29,6 +29,8 @@ class Setting(AbjadObject):
             self._one_line_target_format,
             self._get_one_line_source_format(self.source),
             ]
+        if self.value is not None:
+            body.append(self._get_one_line_source_format(self.value))
         if not self.persistent:
             body.append(self.persistent)
         body = ', '.join([str(x) for x in body])

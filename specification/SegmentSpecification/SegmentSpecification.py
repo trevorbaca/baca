@@ -1,7 +1,10 @@
 from abjad.tools import chordtools
+from abjad.tools import componenttools
 from abjad.tools import contexttools
+from abjad.tools import durationtools
 from abjad.tools import measuretools
 from abjad.tools import notetools
+from abjad.tools import voicetools
 from abjad.tools.scoretemplatetools.ScoreTemplate import ScoreTemplate
 from baca.handlers.composites.CompositeRhythmHandler import CompositeRhythmHandler
 from baca.handlers.pitch.TimewisePitchClassHandler import TimewisePitchClassHandler
@@ -49,6 +52,10 @@ class SegmentSpecification(Specification):
         return getattr(self, '_context_tree', None)
 
     @property
+    def duration(self):
+        sum([durationtools.Duration(x) for x in self.time_signatures])        
+
+    @property
     def has_relative_directives(self):
         return bool(self.relative_directives)
 
@@ -81,6 +88,27 @@ class SegmentSpecification(Specification):
 
     ### PUBLIC METHODS ###
 
+    def make_rhythm_for_voice_name(self, voice_name):
+        divisions = self.get_divisions_for_voice_name(voice_name)
+        print divisions
+
+    def get_divisions_for_voice_name(self, voice_name):
+        original_divisions = self.get_value('divisions', voice_name)
+       
+        return divisions
+
+    def add_rhythms_to_voices(self):
+        for voice in voicetools.iterate_voices_forward_in_expr(self.score):
+            rhythm = self.make_rhythm_for_voice_name(voice.name)
+            voice.extend(rhythm)
+
+    def add_time_signatures(self):
+        time_signatures = self.time_signatures
+        measures = measuretools.make_measures_with_full_measure_spacer_skips(time_signatures)
+        context = contexttools.Context(name='TimeSignatureContext', context_name='TimeSignatureContext')
+        context.extend(measures)
+        self.score.insert(0, context)
+
     def annotate_source(self, source, count=None, offset=None):
         if isinstance(source, StatalServer):
             if count is not None or offset is not None:
@@ -109,23 +137,32 @@ class SegmentSpecification(Specification):
 
     def get_settings(self, **kwargs):
         return Specification.get_settings(self, segment_name=self.name, **kwargs)
+
+    def get_value(self, attribute_name, context_name, scope=None):
+        '''Always from context tree.'''
+        context = componenttools.get_first_component_in_expr_with_name(self.score, context_name)
+        for component in componenttools.get_improper_parentage_of_component(context):
+            context_proxy = self.context_tree[component.name]
+            settings = context_proxy.get_settings(attribute_name=attribute_name, scope=scope)
+            if not settings:
+                continue
+            elif 2 <= len(settings):
+                raise Exception('multiple {!r} settings found.'.format(attribute_name))
+            else:
+                assert len(settings) == 1
+                setting = settings[0]
+                assert setting.value is not None
+                return setting.value
     
     def initialize_context_name_abbreviations(self):
         self.context_name_abbreviations = getattr(self.score_template, 'context_name_abbreviations', {})
         for context_name_abbreviation, context_name in self.context_name_abbreviations.iteritems():
             setattr(self, context_name_abbreviation, context_name)
 
-    def make_time_signatures(self, score):
-        time_signatures = self.time_signatures
-        measures = measuretools.make_measures_with_full_measure_spacer_skips(time_signatures)
-        context = contexttools.Context(name='MeterVoice', context_name='TimeSignatureContext')
-        context.extend(measures)
-        score.insert(0, context)
-
     def notate(self):
-        score = self.score_template()
-        self.make_time_signatures(score)
-        
+        self.score = self.score_template()
+        self.add_time_signatures()
+        self.add_rhythms_to_voices()
         return score
 
     def parse_context_token(self, context_token):
