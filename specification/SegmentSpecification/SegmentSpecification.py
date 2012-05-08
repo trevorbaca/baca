@@ -2,8 +2,10 @@ from abjad.tools import chordtools
 from abjad.tools import componenttools
 from abjad.tools import contexttools
 from abjad.tools import durationtools
+from abjad.tools import mathtools
 from abjad.tools import measuretools
 from abjad.tools import notetools
+from abjad.tools import sequencetools
 from abjad.tools import voicetools
 from abjad.tools.scoretemplatetools.ScoreTemplate import ScoreTemplate
 from baca.handlers.composites.CompositeRhythmHandler import CompositeRhythmHandler
@@ -19,6 +21,7 @@ from baca.specification.Selection import Selection
 from baca.specification.StatalServer import StatalServer
 from baca.specification.StatalServerRequest import StatalServerRequest
 from handlers.Handler import Handler
+import fractions
 
 
 class SegmentSpecification(Specification):
@@ -53,7 +56,7 @@ class SegmentSpecification(Specification):
 
     @property
     def duration(self):
-        sum([durationtools.Duration(x) for x in self.time_signatures])        
+        return sum([durationtools.Duration(x) for x in self.time_signatures])        
 
     @property
     def has_relative_directives(self):
@@ -89,16 +92,23 @@ class SegmentSpecification(Specification):
     ### PUBLIC METHODS ###
 
     def make_rhythm_for_voice_name(self, voice_name):
-        divisions = self.get_divisions_for_voice_name(voice_name)
-        print divisions
+        divisions = self.make_divisions_for_voice_name(voice_name)
 
-    def get_divisions_for_voice_name(self, voice_name):
+    def make_divisions_for_voice_name(self, voice_name):
         divisions = self.get_value('divisions', voice_name)
-        # TODO: repeat divisions to duration of segment
-        # TODO: implement sequencetools.Pair to work with sequencetools.repeat_sequence_to_weight_exactly().
-        #divisions = [sequencetools.Pair(*division) for division in divisions]
-        #divisions = sequencetools.repeat_sequence_to_weight_exactly(divisions)
-        #divisions = [tuple(division) for division in divisions]
+        divisions = [mathtools.NonreducedFraction(*x) for x in divisions]
+        self._debug(self.duration) 
+        duration = mathtools.NonreducedFraction(self.duration)
+        self._debug(duration) 
+        duration = mathtools.NonreducedFraction(20, 16)  # <== this works, so generalize
+        divisions = sequencetools.repeat_sequence_to_weight_exactly(divisions, duration)
+        # TODO: this is wrong
+        #[(3, 16), (3, 16), (3, 16), (3, 16), (3, 16), (3, 16), (1, 8)]   # <== note (1, 8)
+        # this is right:
+        #[(3, 16), (3, 16), (3, 16), (3, 16), (3, 16), (3, 16), (2, 16)]  # <== note (2, 16)
+        self._debug(divisions)
+        divisions = [x.pair for x in divisions]
+        self._debug(divisions)
         return divisions
 
     def add_rhythms_to_voices(self):
