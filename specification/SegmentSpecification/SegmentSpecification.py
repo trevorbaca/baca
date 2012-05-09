@@ -93,22 +93,13 @@ class SegmentSpecification(Specification):
 
     def make_rhythm_for_voice_name(self, voice_name):
         divisions = self.make_divisions_for_voice_name(voice_name)
+        self._debug(divisions)
 
     def make_divisions_for_voice_name(self, voice_name):
         divisions = self.get_value('divisions', voice_name)
         divisions = [mathtools.NonreducedFraction(*x) for x in divisions]
-        self._debug(self.duration) 
-        duration = mathtools.NonreducedFraction(self.duration)
-        self._debug(duration) 
-        duration = mathtools.NonreducedFraction(20, 16)  # <== this works, so generalize
-        divisions = sequencetools.repeat_sequence_to_weight_exactly(divisions, duration)
-        # TODO: this is wrong
-        #[(3, 16), (3, 16), (3, 16), (3, 16), (3, 16), (3, 16), (1, 8)]   # <== note (1, 8)
-        # this is right:
-        #[(3, 16), (3, 16), (3, 16), (3, 16), (3, 16), (3, 16), (2, 16)]  # <== note (2, 16)
-        self._debug(divisions)
+        divisions = sequencetools.repeat_sequence_to_weight_exactly(divisions, self.duration)
         divisions = [x.pair for x in divisions]
-        self._debug(divisions)
         return divisions
 
     def add_rhythms_to_voices(self):
