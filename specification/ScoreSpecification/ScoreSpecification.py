@@ -141,6 +141,7 @@ class ScoreSpecification(Specification):
         else:
             return setting.source
 
+    # TODO: eventually check attribute_name against enumeration of know attribute names and error
     def retrieve(self, attribute_name, segment_name, context_name=None, scope=None):
         indicator = AttributeRetrievalIndicator(
             attribute_name, segment_name, context_name=context_name, scope=scope)

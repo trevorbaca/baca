@@ -1,11 +1,14 @@
 from abjad.tools import chordtools
 from abjad.tools import componenttools
+from abjad.tools import containertools
 from abjad.tools import contexttools
 from abjad.tools import durationtools
 from abjad.tools import mathtools
+from abjad.tools import marktools
 from abjad.tools import measuretools
 from abjad.tools import notetools
 from abjad.tools import sequencetools
+from abjad.tools import timetokentools
 from abjad.tools import voicetools
 from abjad.tools.scoretemplatetools.ScoreTemplate import ScoreTemplate
 from baca.handlers.composites.CompositeRhythmHandler import CompositeRhythmHandler
@@ -21,6 +24,7 @@ from baca.specification.Selection import Selection
 from baca.specification.StatalServer import StatalServer
 from baca.specification.StatalServerRequest import StatalServerRequest
 from handlers.Handler import Handler
+import baca.library as library
 import fractions
 
 
@@ -33,6 +37,7 @@ class SegmentSpecification(Specification):
         self.score_template = score_template
         self.directives = directives or []
         self.name = name
+        self.score = self.score_template()
 
     ### SPECIAL METHODS ###
 
@@ -91,21 +96,10 @@ class SegmentSpecification(Specification):
 
     ### PUBLIC METHODS ###
 
-    def make_rhythm_for_voice_name(self, voice_name):
-        divisions = self.make_divisions_for_voice_name(voice_name)
-        self._debug(divisions)
-
-    def make_divisions_for_voice_name(self, voice_name):
-        divisions = self.get_value('divisions', voice_name)
-        divisions = [mathtools.NonreducedFraction(*x) for x in divisions]
-        divisions = sequencetools.repeat_sequence_to_weight_exactly(divisions, self.duration)
-        divisions = [x.pair for x in divisions]
-        return divisions
-
     def add_rhythms_to_voices(self):
         for voice in voicetools.iterate_voices_forward_in_expr(self.score):
-            rhythm = self.make_rhythm_for_voice_name(voice.name)
-            voice.extend(rhythm)
+            self.make_divisions_for_voice(voice)
+            self.make_rhythm_for_voice(voice)
 
     def add_time_signatures(self):
         time_signatures = self.time_signatures
@@ -137,6 +131,24 @@ class SegmentSpecification(Specification):
                     result.append(directive)
         return result
 
+    def get_divisions(self, context_name, scope=None):
+        '''Default to time signatures if explicit divisions are not found.
+        '''
+        value = self.get_value('divisions', context_name, scope=scope)
+        if value is None:
+            return self.get_value('time_signatures', context_name, scope=scope)
+        else:
+            return value
+
+    def get_rhythm(self, context_name, scope=None):
+        '''Default to rest-filled tokens if explicit rhythm not found.
+        '''
+        value = self.get_value('rhythm', context_name, scope=scope)
+        if value is None:
+            return library.rest_filled_tokens
+        else:
+            return value
+
     def get_setting(self, **kwargs):
         return Specification.get_setting(self, segment_name=self.name, **kwargs)
 
@@ -144,7 +156,8 @@ class SegmentSpecification(Specification):
         return Specification.get_settings(self, segment_name=self.name, **kwargs)
 
     def get_value(self, attribute_name, context_name, scope=None):
-        '''Always from context tree.'''
+        '''Always from context tree.
+        '''
         context = componenttools.get_first_component_in_expr_with_name(self.score, context_name)
         for component in componenttools.get_improper_parentage_of_component(context):
             context_proxy = self.context_tree[component.name]
@@ -164,11 +177,25 @@ class SegmentSpecification(Specification):
         for context_name_abbreviation, context_name in self.context_name_abbreviations.iteritems():
             setattr(self, context_name_abbreviation, context_name)
 
+    def make_divisions_for_voice(self, voice):
+        divisions = self.get_divisions(voice.name)
+        divisions = [mathtools.NonreducedFraction(*x) for x in divisions]
+        divisions = sequencetools.repeat_sequence_to_weight_exactly(divisions, self.duration)
+        divisions = [x.pair for x in divisions]
+        marktools.Annotation('divisions', divisions)(voice)
+
+    def make_rhythm_for_voice(self, voice):
+        divisions = marktools.get_value_of_annotation_attached_to_component(voice, 'divisions')
+        maker = self.get_rhythm(voice.name)
+        assert isinstance(maker, timetokentools.TimeTokenMaker)
+        leaf_lists = maker(divisions)
+        containers = [containertools.Container(x) for x in leaf_lists]
+        voice.extend(containers)
+
     def notate(self):
-        self.score = self.score_template()
         self.add_time_signatures()
         self.add_rhythms_to_voices()
-        return score
+        return self.score
 
     def parse_context_token(self, context_token):
         if context_token in self.context_names:

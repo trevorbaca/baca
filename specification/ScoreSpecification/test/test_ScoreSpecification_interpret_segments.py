@@ -7,7 +7,7 @@ import scf
 
 
 def test_ScoreSpecification_interpret_segments_01():
-    py.test.skip('finish')
+    py.test.skip('still working on this one ...')
 
     score_template = scoretemplatetools.StringQuartetScoreTemplate
     score = ScoreSpecification(score_template)

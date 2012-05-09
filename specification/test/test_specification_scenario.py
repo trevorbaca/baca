@@ -2,7 +2,7 @@ from abjad.tools import scoretemplatetools
 from specification import ScoreSpecification
 import baca.library as library
 import py
-py.test.skip('skip when checked in during implementation.')
+#py.test.skip('skip when checked in during implementation.')
 
 
 def test_specification_scenario_01():
