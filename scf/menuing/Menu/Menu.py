@@ -1,5 +1,6 @@
 from abjad.tools import iotools
 from abjad.tools import mathtools
+from abjad.tools import stringtools
 from scf.menuing.MenuSection import MenuSection
 from scf.menuing.MenuSectionAggregator import MenuSectionAggregator
 
@@ -93,7 +94,7 @@ class Menu(MenuSectionAggregator):
                 title = self.explicit_title
             else:
                 title = self.session.menu_header
-            menu_lines.append(iotools.capitalize_string_start(title))
+            menu_lines.append(stringtools.capitalize_string_start(title))
             menu_lines.append('')
         return menu_lines
 

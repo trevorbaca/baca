@@ -2,6 +2,7 @@ from abjad.tools import durationtools
 from abjad.tools import iotools
 from abjad.tools import mathtools
 from abjad.tools import pitchtools
+from abjad.tools import stringtools
 from scf.menuing.MenuSectionAggregator import MenuSectionAggregator
 from scf import predicates
 import types
@@ -368,7 +369,7 @@ class UserInputGetter(MenuSectionAggregator):
     def load_prompt(self):
         prompt = self.prompts[self.prompt_index]
         if self.capitalize_prompts:
-            prompt = iotools.capitalize_string_start(prompt)
+            prompt = stringtools.capitalize_string_start(prompt)
         self.menu_lines.append(prompt)
 
     def move_to_prev_prompt(self):

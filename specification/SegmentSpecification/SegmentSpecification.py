@@ -24,7 +24,6 @@ from baca.specification.Selection import Selection
 from baca.specification.StatalServer import StatalServer
 from baca.specification.StatalServerRequest import StatalServerRequest
 from handlers.Handler import Handler
-import baca.library as library
 import fractions
 
 
@@ -143,6 +142,7 @@ class SegmentSpecification(Specification):
     def get_rhythm(self, context_name, scope=None):
         '''Default to rest-filled tokens if explicit rhythm not found.
         '''
+        import baca.library as library
         value = self.get_value('rhythm', context_name, scope=scope)
         if value is None:
             return library.rest_filled_tokens

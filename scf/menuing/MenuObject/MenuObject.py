@@ -1,4 +1,4 @@
-from abjad.tools import iotools
+from abjad.tools import stringtools
 from scf.core.SCFObject.SCFObject import SCFObject
 from scf import predicates
 import os
@@ -119,7 +119,7 @@ class MenuObject(SCFObject):
     def make_title_lines(self):
         menu_lines = []
         if isinstance(self.title, str):
-            title_lines = [iotools.capitalize_string_start(self.title)]
+            title_lines = [stringtools.capitalize_string_start(self.title)]
         elif isinstance(self.title, list):
             title_lines = self.title
         else:
