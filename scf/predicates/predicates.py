@@ -15,7 +15,7 @@ def is_articulation_token(expr):
 
 def is_available_underscore_delimited_lowercase_package_name(expr):
     from scf.core.SCFObject import SCFObject
-    if iotools.is_underscore_delimited_lowercase_package_name(expr):
+    if stringtools.is_underscore_delimited_lowercase_package_name(expr):
         if 3 <= len(expr):
             scf_object = SCFObject()
             return not scf_object.package_exists(expr)
@@ -25,7 +25,7 @@ def is_boolean(expr):
     return isinstance(expr, bool)
 
 def is_class_name_or_none(expr):
-    return expr is None or iotools.is_uppercamelcase_string(expr)
+    return expr is None or stringtools.is_uppercamelcase_string(expr)
 
 def is_clef_token(expr):
     try:
@@ -125,7 +125,7 @@ def is_tempo_token(expr):
         return False
 
 def is_underscore_delimited_lowercase_package_name(expr):
-    return iotools.is_underscore_delimited_lowercase_package_name(expr) and 3 <= len(expr)
+    return stringtools.is_underscore_delimited_lowercase_package_name(expr) and 3 <= len(expr)
 
 def is_yes_no_string(expr):
     return 'yes'.startswith(expr.lower()) or 'no'.startswith(expr.lower())

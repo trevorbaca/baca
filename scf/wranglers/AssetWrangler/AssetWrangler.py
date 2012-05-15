@@ -1,7 +1,7 @@
 from abc import ABCMeta
 from abc import abstractmethod
 from abc import abstractproperty
-from abjad.tools import iotools
+from abjad.tools import stringtools
 from scf.core.SCFObject import SCFObject
 from scf.proxies.PackageProxy import PackageProxy
 import os
@@ -16,10 +16,10 @@ class AssetWrangler(SCFObject):
         session=None):
         SCFObject.__init__(self, session=session)
         if score_external_asset_container_importable_names:
-            assert all([iotools.is_underscore_delimited_lowercase_package_name(x)
+            assert all([stringtools.is_underscore_delimited_lowercase_package_name(x)
                 for x in score_external_asset_container_importable_names])
         if score_internal_asset_container_importable_name_infix:
-            assert iotools.is_underscore_delimited_lowercase_package_name(
+            assert stringtools.is_underscore_delimited_lowercase_package_name(
                 score_internal_asset_container_importable_name_infix)
         self._score_external_asset_container_importable_names = \
             score_external_asset_container_importable_names or []
@@ -315,7 +315,7 @@ class AssetWrangler(SCFObject):
     # other #
 
     def make_asset(self, asset_short_name):
-        assert iotools.is_underscore_delimited_lowercase_string(asset_short_name)
+        assert stringtools.is_underscore_delimited_lowercase_string(asset_short_name)
         asset_path_name = os.path.join(self.current_asset_container_path_name, asset_short_name)
         asset_proxy = self.get_asset_proxy(asset_path_name)
         asset_proxy.write_stub_to_disk()
