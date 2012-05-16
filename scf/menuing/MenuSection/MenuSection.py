@@ -1,4 +1,4 @@
-from abjad.tools import iotools
+from abjad.tools import stringtools
 from abjad.tools import mathtools
 from scf.menuing.MenuObject import MenuObject
 
@@ -271,7 +271,7 @@ class MenuSection(MenuObject):
     def argument_string_to_number_optimized(self, argument_string):
         for entry_index, unpacked_entry in enumerate(self.unpacked_menu_entries):
             number, key, body, return_value, section = unpacked_entry
-            body = iotools.strip_diacritics_from_binary_string(body).lower()
+            body = stringtools.strip_diacritics_from_binary_string(body).lower()
             if  (mathtools.is_integer_equivalent_expr(argument_string) and int(argument_string) == number) or \
                 (argument_string == key) or \
                 (3 <= len(argument_string) and body.startswith(argument_string)):

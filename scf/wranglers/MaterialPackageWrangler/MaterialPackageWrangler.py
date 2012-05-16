@@ -1,4 +1,4 @@
-from abjad.tools import iotools
+from abjad.tools import stringtools
 from scf import predicates
 from scf.wranglers.PackageWrangler import PackageWrangler
 import collections
@@ -56,7 +56,7 @@ class MaterialPackageWrangler(PackageWrangler):
             self.pop_backtrack()
             if self.backtrack():
                 return
-            material_package_short_name = iotools.string_to_strict_directory_name(material_name)
+            material_package_short_name = stringtools.string_to_strict_directory_name(material_name)
             material_package_importable_name = self.dot_join([
                 self.current_asset_container_importable_name, material_package_short_name])
             if self.package_exists(material_package_importable_name):

@@ -1,5 +1,5 @@
 # -*- encoding: utf-8 -*-
-from abjad.tools import iotools
+from abjad.tools import stringtools
 from scf.core.SCFObject import SCFObject
 from scf.core.Transcript import Transcript
 import os
@@ -346,7 +346,7 @@ class Session(SCFObject):
         if not self.breadcrumb_stack:
             return ''
         result_lines = [self.breadcrumb_stack[0]]
-        hanging_indent_width = len(iotools.strip_diacritics_from_binary_string(
+        hanging_indent_width = len(stringtools.strip_diacritics_from_binary_string(
             self.breadcrumb_stack[0]))
         hanging_indent_width += len(' - ')
         for breadcrumb in self.breadcrumb_stack[1:]:

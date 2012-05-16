@@ -150,7 +150,7 @@ class SCFObject(object):
 
     @property
     def spaced_class_name(self):
-        return iotools.uppercamelcase_to_space_delimited_lowercase(self.class_name)
+        return stringtools.uppercamelcase_to_space_delimited_lowercase(self.class_name)
 
     @property
     def specifier_classes_package_importable_name(self):
@@ -216,7 +216,7 @@ class SCFObject(object):
         if not string:
             return string
         elif string[0].isupper():
-            return iotools.uppercamelcase_to_space_delimited_lowercase(string)
+            return stringtools.uppercamelcase_to_space_delimited_lowercase(string)
         else:
             return string.replace('_', ' ')
 

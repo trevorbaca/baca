@@ -1,4 +1,4 @@
-from abjad.tools import iotools
+from abjad.tools import stringtools
 from abjad.tools import layouttools
 from abjad.tools import lilypondfiletools
 from scf.wranglers.PackageWrangler import PackageWrangler
@@ -60,7 +60,7 @@ class MaterialPackageMakerWrangler(PackageWrangler):
             base_name = os.path.basename(path_name)
             if base_name in self.forbidden_class_names:
                 continue
-            human_readable_name = iotools.uppercamelcase_to_space_delimited_lowercase(base_name)
+            human_readable_name = stringtools.uppercamelcase_to_space_delimited_lowercase(base_name)
             result.append(human_readable_name)
         return result
 
