@@ -14,6 +14,6 @@ class OctaveTranspositionMappingInventoryEditor(ObjectInventoryEditor):
     item_editor_class = OctaveTranspositionMappingEditor
     item_identifier = 'octave transposition mapping'
     target_manifest = TargetManifest(pitchtools.OctaveTranspositionMappingInventory,
-        ('inventory_name', 'name', 'nm', getters.get_string),
-        target_attribute_name='inventory_name',
+        ('name', 'name', 'nm', getters.get_string),
+        target_attribute_name='name',
         )

@@ -16,7 +16,7 @@ class MarkupInventoryEditor(ObjectInventoryEditor):
     item_editor_class = MarkupEditor
     item_identifier = 'markup'
     target_manifest = TargetManifest(markuptools.MarkupInventory,
-        ('inventory_name', 'name', 'nm', getters.get_string),
+        ('name', 'name', 'nm', getters.get_string),
         target_name_attribute='inventory name',
         )
 

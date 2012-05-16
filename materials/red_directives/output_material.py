@@ -13,5 +13,5 @@ red_directives = markuptools.MarkupInventory([
 		style_string='backslash'
 		)
 	],
-	inventory_name='red directives'
+	name='red directives'
 	)
