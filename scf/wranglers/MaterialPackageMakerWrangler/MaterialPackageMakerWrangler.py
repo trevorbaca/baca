@@ -134,10 +134,10 @@ class MaterialPackageMakerWrangler(PackageWrangler):
             self.list_score_external_asset_container_importable_names()[0], 
             package_short_name, '__init__.py')
         initializer = file(initializer_file_name, 'w')
-        line = 'from abjad.tools.importtools._import_structured_package import _import_structured_package\n'
+        line = 'from abjad.tools import importtools\n'
         initializer.write(line)
         initializer.write('\n')
-        initializer.write("_import_structured_package(__path__[0], globals(), 'baca')\n")
+        initializer.write("importtools.import_structured_package(__path__[0], globals(), 'baca')\n")
         initializer.close() 
 
     def make_asset_interactively(self):
