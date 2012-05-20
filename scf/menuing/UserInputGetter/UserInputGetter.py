@@ -181,11 +181,6 @@ class UserInputGetter(MenuSectionAggregator):
         self.execs[-1] = execs
         self.tests.append(predicates.is_markup)
 
-    def append_markup_style_string(self, spaced_attribute_name, default=None):
-        message = "value for {!r} must be 'backslash or 'scheme'."
-        self.append_something(spaced_attribute_name, message, default=default)
-        self.tests.append(predicates.is_markup_style_string)
-        
     def append_material_package_maker_class_name(self, spaced_attribute_name, default=None):
         message = 'value for {!r} must be uppercamelcase string ending in -Maker.'
         self.append_something(spaced_attribute_name, message, default=default)

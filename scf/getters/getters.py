@@ -73,12 +73,6 @@ def get_markup(attribute_spaced_name, session=None, existing_value=None, allow_n
     getter.allow_none = allow_none
     return getter
 
-def get_markup_style_string(attribute_spaced_name, session=None, existing_value=None, allow_none=True):
-    getter = UserInputGetter(session=session)
-    getter.append_markup_style_string(attribute_spaced_name)
-    getter.allow_none = allow_none
-    return getter
-
 def get_named_chromatic_pitch(attribute_spaced_name, session=None, existing_value=None, allow_none=True):
     getter = UserInputGetter(session=session)
     getter.append_named_chromatic_pitch(attribute_spaced_name)

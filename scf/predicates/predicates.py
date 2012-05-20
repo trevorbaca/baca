@@ -72,9 +72,6 @@ def is_list(expr):
 def is_markup(expr):
     return isinstance(expr, markuptools.Markup)
 
-def is_markup_style_string(expr):
-    return expr in ('backslash', 'scheme')
-
 def is_markup_token(expr):
     try:
         result = markuptools.Markup(expr)
