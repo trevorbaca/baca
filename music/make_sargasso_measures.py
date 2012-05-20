@@ -1,6 +1,8 @@
 from abjad import *
+from abjad.tools import beamtools
 from abjad.tools import durationtools
 from abjad.tools import mathtools
+from abjad.tools import measuretools
 from abjad.tools import sequencetools
 import fractions
 
@@ -147,6 +149,6 @@ def make_illustration_from_output_material(measures, **kwargs):
     illustration = lilypondfiletools.make_basic_lilypond_file(score)
     illustration.file_initial_system_comments = []
     illustration.file_initial_system_includes = []
-    measuretools.apply_beam_spanners_to_measures_in_expr(score)
+    beamtools.apply_beam_spanners_to_measures_in_expr(score)
     scoretools.add_double_bar_to_end_of_score(score)
     return illustration
