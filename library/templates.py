@@ -42,6 +42,11 @@ def make_baca_letter_layout(music=None):
     context_block.context_name = 'Staff'
     context_block.engraver_removals.append('Time_signature_engraver')
 
+    context_block = lilypondfiletools.ContextBlock()
+    lilypond_file.layout_block.context_blocks.append(context_block)
+    context_block.context_name = 'RhythmicStaff'
+    context_block.engraver_removals.append('Time_signature_engraver')
+
     return lilypond_file
 
 

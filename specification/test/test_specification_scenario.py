@@ -1,8 +1,6 @@
 from abjad.tools import scoretemplatetools
 from specification import ScoreSpecification
 import baca.library as library
-import py
-#py.test.skip('skip when checked in during implementation.')
 
 
 def test_specification_scenario_01():
@@ -18,16 +16,16 @@ def test_specification_scenario_01():
     Let all other T1 specifications continue to T2.
     '''
     
-    score = ScoreSpecification(scoretemplatetools.StringQuartetScoreTemplate())
+    score = ScoreSpecification(scoretemplatetools.GroupedRhythmicStavesScoreTemplate(n=4))
 
-    segment = score.append_segment(name='T1') 
+    segment = score.append_segment(name='T1')
     segment.set_time_signatures(segment, [(3, 8), (3, 8), (2, 8), (2, 8)])
 
-    violins = [segment.vn1, segment.vn2]
+    violins = [segment.v1, segment.v2]
     segment.set_divisions(violins, [(3, 16)])
     segment.set_rhythm(violins, library.thirty_seconds)
 
-    lower = [segment.va, segment.vc]
+    lower = [segment.v3, segment.v4]
     segment.set_rhythm(lower, library.note_filled_tokens)
 
     segment = score.append_segment(name='T2')
@@ -37,3 +35,8 @@ def test_specification_scenario_01():
 
     assert score['T1'].time_signatures == [(3, 8), (3, 8), (2, 8), (2, 8)]
     assert score['T2'].time_signatures == [(2, 8), (2, 8)]
+
+#    lilypond_file = library.make_baca_letter_layout(segments[0])
+#    lilypond_file.header_block.title = markuptools.make_centered_title_markup('Quartetto', font_size=12)
+#    lilypond_file.layout_block.score.set.proportionalNotationDuration = schemetools.SchemeMoment((1, 48))
+#    show(lilypond_file)
