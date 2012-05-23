@@ -135,6 +135,7 @@ class SegmentSpecification(Specification):
         '''Default to time signatures if explicit divisions are not found.
         '''
         value = self.get_value('divisions', context_name, scope=scope)
+        #self._debug((context_name, value), 'context_name, value')
         if value is None:
             return self.get_value('time_signatures', context_name, scope=scope)
         else:
@@ -165,13 +166,12 @@ class SegmentSpecification(Specification):
             settings = context_proxy.get_settings(attribute_name=attribute_name, scope=scope)
             if not settings:
                 continue
-            elif 2 <= len(settings):
-                raise Exception('multiple {!r} settings found.'.format(attribute_name))
-            else:
-                assert len(settings) == 1
+            elif len(settings) == 1:
                 setting = settings[0]
                 assert setting.value is not None
                 return setting.value
+            else:
+                raise Exception('multiple {!r} settings found.'.format(attribute_name))
     
     def initialize_context_name_abbreviations(self):
         self.context_name_abbreviations = getattr(self.score_template, 'context_name_abbreviations', {})
@@ -180,6 +180,7 @@ class SegmentSpecification(Specification):
 
     def make_divisions_for_voice(self, voice):
         divisions = self.get_divisions(voice.name)
+        #self._debug(divisions, 'divisions')
         divisions = [mathtools.NonreducedFraction(*x) for x in divisions]
         divisions = sequencetools.repeat_sequence_to_weight_exactly(divisions, self.duration)
         divisions = [x.pair for x in divisions]

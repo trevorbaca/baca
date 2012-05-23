@@ -1,9 +1,17 @@
 from abjad.tools.abctools.AbjadObject import AbjadObject
 from baca.specification.Scope import Scope
 from baca.specification.Selection import Selection
+import copy
 
 
 class Setting(AbjadObject):
+
+    ### CLASS ATTRIBUTES ###
+
+    initializer_attribute_names = (
+        'segment_name', 'context_name', 'scope', 'attribute_name', 'source', 
+        'persistent', 'value',
+        )
 
     ### INITIALIZER ###
 
@@ -65,3 +73,13 @@ class Setting(AbjadObject):
     @property
     def is_relative(self):
         return isinstance(self.source, Selection)
+
+    ### PUBLIC METHODS ###
+
+    def copy(self, segment_name=None, context_name=None, scope=None, attribute_name=None, 
+        source=None, persistent=None, value=None):
+        new = copy.deepcopy(self)
+        for name in self.initializer_attribute_names:
+            if locals()[name] is not None:
+                setattr(new, name, locals()[name])
+        return new

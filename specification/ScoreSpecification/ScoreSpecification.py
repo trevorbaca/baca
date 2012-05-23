@@ -74,7 +74,11 @@ class ScoreSpecification(Specification):
         for segment in self.segments:
             settings = segment.get_settings(attribute_name='divisions')
             if not settings:
-                settings = self.context_tree.get_settings(attribute_name='divisions')
+                settings = []
+                existing_settings = self.context_tree.get_settings(attribute_name='divisions')
+                for existing_setting in existing_settings:
+                    setting = existing_setting.copy(segment_name=segment.name)
+                    settings.append(setting)
             self.store_settings(settings)
 
     def interpret_segment_pitch_classes(self):
