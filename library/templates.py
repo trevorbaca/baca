@@ -27,7 +27,6 @@ def make_baca_letter_layout(music=None):
     context_block.override.spacing_spanner.strict_grace_spacing = True
     context_block.override.spacing_spanner.strict_note_spacing = True
     context_block.override.spacing_spanner.uniform_stretching = True
-    context_block.override.time_signature.color = 'blue'
     context_block.override.tuplet_bracket.bracket_visibility = True
     context_block.override.tuplet_bracket.padding = 2
     context_block.override.tuplet_bracket.springs_and_rods = schemetools.Scheme(
