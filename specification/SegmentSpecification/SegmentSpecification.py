@@ -1,3 +1,4 @@
+from abjad.tools import beamtools
 from abjad.tools import chordtools
 from abjad.tools import componenttools
 from abjad.tools import containertools
@@ -191,6 +192,9 @@ class SegmentSpecification(Specification):
         leaf_lists = maker(divisions)
         containers = [containertools.Container(x) for x in leaf_lists]
         voice.extend(containers)
+        if getattr(maker, 'beam', False):
+            durations = [x.preprolated_duration for x in containers]
+            beamtools.DuratedComplexBeamSpanner(containers, durations=durations, span=1)
 
     def notate(self):
         self.add_time_signatures()

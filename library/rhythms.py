@@ -27,11 +27,13 @@ __all__.append(sixty_fourths.name)
 
 
 pattern, denominator, prolation_addenda  = [1], 32, []
-lefts, middles, rights = [-1], [0], [-1]
+#lefts, middles, rights = [-1], [0], [-1]
+lefts, middles, rights = [0], [0], [0]
 left_lengths, right_lengths = [1], [2]
 thirty_seconds = timetokentools.OutputBurnishedSignalFilledTimeTokenMaker(
    pattern, denominator, prolation_addenda,
    lefts, middles, rights,
    left_lengths, right_lengths)
+thirty_seconds.beam = True
 thirty_seconds.name = 'thirty_seconds'
 __all__.append(thirty_seconds.name)
