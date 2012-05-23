@@ -5,6 +5,7 @@ from markups import *
 from pitch import *
 from registers import *
 from rhythms import *
+from templates import *
 __all__ = []
 
 
@@ -15,3 +16,4 @@ __all__.extend(markups.__all__)
 __all__.extend(pitch.__all__)
 __all__.extend(registers.__all__)
 __all__.extend(rhythms.__all__)
+__all__.extend(templates.__all__)
