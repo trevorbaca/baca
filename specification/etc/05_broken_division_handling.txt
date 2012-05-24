@@ -1,0 +1,23 @@
+(1) How are broken divisions to be handled?
+
+(2) Maybe the first thing to notice is that broken divisions are a type of byproduct
+arising during interpretation. Composers specify only complete divisions. But differences
+between the pattern of divisions within a segment and the duration of the segment
+may give rise to broken divisions.
+
+(3) It is the voices within any given segment that may be the bearers of broken divisions
+because it is the voices within any given segment that bear divisions, no matter what their type.
+
+(4) Divisions may be left-broken, or right-broken, or both left- and right-broken,
+or neither left- nor right-broken.
+
+(5) We can say that one of the things that happens during interpretation is broken duration discovery.
+
+(6) Consider division d. In the case that d is right-broken but not left-broken, 
+the duration of d equals the sum m + n, with m and n equal to the 'segment duration' 
+of d and the 'right overhang duration' of d, respectively.
+In the case the d is left-broken but not right-broken, the duration of d 
+
+(7) Discovery is unproblematic: calculate the divisions for whatever voice is current under iteration,
+notice whether the rightmost division is right-broken, and note the fact somewhere in the context tree
+if the voice contains a right-broken division. 
