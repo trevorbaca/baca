@@ -1,56 +1,135 @@
-(1) How are broken divisions to be handled?
+(1) How are open divisions to be handled?
 
-(2) Maybe the first thing to notice is that broken divisions are a type of byproduct
+(2) Maybe the first thing to notice is that open divisions are a type of byproduct
 arising during interpretation. Composers specify only complete divisions. But differences
 between the pattern of divisions within a segment and the duration of the segment
-may give rise to broken divisions.
+may give rise to open divisions.
 
-(3) It is the voices within any given segment that may be the bearers of broken divisions
+(3) It is the voices within any given segment that may be the bearers of open divisions
 because it is the voices within any given segment that bear divisions, no matter what their type.
 
-(4) Divisions may be left-broken, or right-broken, or both left- and right-broken,
-or neither left- nor right-broken.
+(4) Divisions may be left-open, or right-open, or both left- and right-open,
+or neither left- nor right-open.
 
-(5) We can say that one of the things that happens during interpretation is broken duration discovery.
+(5) We can say that one of the things that happens during interpretation is open duration discovery.
 
-(6) Consider division d. In the case that d is right-broken but not left-broken, 
+(6) Consider division d. In the case that d is right-open but not left-open, 
 the duration of d equals the sum m + n, with m and n equal to the 'segment duration' 
 of d and the 'right overhang duration' of d, respectively.
-In the case the d is left-broken but not right-broken, the duration of d equals the sum l + m,
+In the case the d is left-open but not right-open, the duration of d equals the sum l + m,
 with l and m equal to the left overhang duration of d and the segment duration of d, respectively.
-In the case that d is both left-broken and right-broken, the duration of d equals
+In the case that d is both left-open and right-open, the duration of d equals
 the sum l + m + n, with l + n together equalling the 'total overhang duration of d.
-And in the case that d is neither left-broken nor right-broken, the duration of d equals m.
+And in the case that d is neither left-open nor right-open, the duration of d equals m.
 
-(7) Notice that the right overhang duration of right-broken division d in segment Tn 
-will exactly equal the segment duration of left-broken divions e in segment Tn+1.
+(7) Notice that the right overhang duration of right-open division d in segment Tn 
+will exactly equal the segment duration of left-open divions e in segment Tn+1.
 That is, the right overhang duration of d in Tn acts as a type of offset in Tn+1.
 How does the right overhang duration of d in Tn act as a type of offset in Tn+1?
 By offseting the amount of musical time before which divisions in the corresponding
 voice in Tn+1 will begin to calculate.
 
 (8) Discovery is unproblematic: calculate the divisions for whatever voice is current under iteration,
-notice whether the rightmost division is right-broken. If so, interpretation has discovered
-a broken division.
+notice whether the rightmost division is right-open. If so, interpretation has discovered
+a open division.
 
-(9) Then there's the issue of what to record once a broken division has been discovered.
+(9) Then there's the issue of what to record once a open division has been discovered.
 There is also a companion question as to where such information should be recorded.
-A reasonable first guess says that the right overhang duration of the broken duration
+A reasonable first guess says that the right overhang duration of the open duration
 needs to be recorded somewhere in the context tree. This is important because otherwise
 division calculate can not proceed correctly once interpretation advances from Tn to Tn+1.
 
-(10) Does other information need to be recorded upon broken division discovery? Yes.
-Interpretation needs to record that d is right-broken. Three options present themselves here.
-Either, (a) division d itself may bear some type of is-broken indicator. Or, (b), interpretation may add
-an is-right-broken indicator to the generative setting that specified the creation of the
+(10) Does other information need to be recorded upon open division discovery? Yes.
+Interpretation needs to record that d is right-open. Three options present themselves here.
+Either, (a) division d itself may bear some type of is-open indicator. Or, (b), interpretation may add
+an is-right-open indicator to the generative setting that specified the creation of the
 divisions in the first place. Or, (c), interpretation may maintain some type of mapping
-data structure that models just such information about broken and nonbroken divisions.
+data structure that models just such information about open and nonopen divisions.
 Option (c) seems less good. Maybe it makes sense to proceed with both options (a) and (b) 
 since the two are not mutually exclusive.
 
-(11) What is the importance of recording the is-broken status of every duration in Tn?
+(11) What is the importance of recording the is-open status of every duration in Tn?
 This matters for the interpretaive passes that follow division determination.
 Chief among these is rhythm creation. When notating Tn in isolation, interpretation 
-must know which divisions in Tn are broken and which are nonbroken. Likewise, when notating
+must know which divisions in Tn are open and which are nonopen. Likewise, when notating
 Tn together with Tn+1, interpretation must know which divisions in both Tn and Tn+1
-are broken and which are nonbroken.
+are open and which are nonopen.
+
+                                               * * *
+
+(0) The chain of thought above lead to the importance of considering what we might term
+the 'frame of notation'. Denote by F(Ti, ...) the frame of notation of segments Ti, ...
+all contiguous in the same score. The frame of notation is notionally a single method
+call to notate zero or more score-contiguous segments.
+frame of interpretation or 
+
+(1) Much has already been written on the different ways that 'source resolution' must
+happen during the process of interpretation. What remains to be worked out here is something 
+similar in relation to the laying out of divisions.
+
+(2) The following discussion simplifies when we return to the four-step interpretation model 
+proposed earlier.
+
+(*) That is (1.) time signatures for every segment; (2.) divisions for every voice in 
+every segment; (3.) rhythmic events for every division in every voice in every segment;
+(4.) everything else.
+
+(3.) I think there's a reason that thinking about this model seems to always result in a
+two-way speficiation / interpretation split rather than in a three- or four-way split, or
+in some other type of split. Namely, it's clear that specification is work assigned to the
+composer whereas interpretation is work carried out by the interpreter.
+
+(4.) The question that keeps returning is whether it's possible to split the process
+of interpretation into two or more (possibly configurable) subprocesses, or not.
+Intuition leans towards no.
+
+(5.) In fact, there seem to be a pair of constraints I'm working towards here.
+We can get to the first of these constraints by asking the folowing question:
+Will any of the four successive 'waves' of interpretation be interruptible?
+
+(6.) Consider the case of interpreting time signatures for every segment.
+The unmarked case starts at the first segment in the score and then makes
+as many left-to-right passes through the uninterpreted segments in the score
+as required. A marked case asks for the interpretation of an arbitrary segment
+taken in isolation. And the correct observation seems to be that there's no 
+no guarantee of interpretability of the time signature content of any segment
+taken in isolation. The reason for this limitation is clear: the composer's
+choices are free to move from segment to segment and selection to selection during
+specification. So the collection of settings that appear after directives are unpacked
+and that relate to the specification of time signatures for an arbitrary segment
+may reference any arbitrary number of other segments (or, indeed, statal sources). 
+But also important to note is that in some special cases, it may indeed be possible
+to interpret the time signature content of a segment taken in isolation. It's just
+that there can be no guarantee of the interpretability of the time signature content
+of any given segment taken in isolation.
+
+(7.) On the other hand, once the time signature wave of interpretation completes,
+the time signature content of every segment in score is known. (We might also ask here
+whether it is just that the time signature content of every segment in score is known
+or, indeed, whether what holds is in fact the stronger case of the time signature objects
+of every segment having been instantiated and stored. It is not clear that there is any
+obvious reason to prefer the one case over the other. And this is probably so because
+the numeric representation of time signatures differs very little from time signatures
+stored and represented as a collection of objects. More will be at stake in this
+known-versus-instantiated question when we consider the rhythm wave of interpretation.)
+
+(8.) Returning to a higher level, we find ourselves still working out the interruptibility
+of any of the four high-level waves of interpretation. And just above we considered two
+things that act as bounds of interruptibility: interpretation of any segment in isolation
+(on the one hand) and the complete interpretation of all segments (on the other).
+But what about the interruptiblity of time signature interpretation?
+
+(9.) It seems clear that time signature interpretation can halt or be halted at very
+many points along the way. But it seems equally clear that in general nothing
+can be said about the results of interpretation when time signature interpretation
+halts at any arbitrary point. That is, feel free to halt time signature interpreation
+whenever or wherever you want. But when you do you're not guaranteed to know anything
+in particular about any particular segment.
+
+
+* * *
+
+TODO: work out *containment* as it relates to segment voices containing divisions. Ragged right.
+Divisions owned by the segment in which they *start*. Need for a model of absence in segments.
+Places (always start at the left edge) of a segment in which the segment voice contains
+no division.
