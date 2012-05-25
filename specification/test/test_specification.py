@@ -69,7 +69,7 @@ def test_specification_01():
     assert score['T2'].time_signatures == [(2, 8), (2, 8)]
 
     current_function_name = introspectiontools.get_current_function_name()
-    manage_output(segments, current_function_name, cache_pdfs=True)
+    manage_output(segments, current_function_name, cache_pdfs=False)
 
     assert segments[0].format == read_segment_ly_file(current_function_name, 0)
     # TODO: make T2 work and then uncomment

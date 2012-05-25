@@ -16,8 +16,41 @@ or neither left- nor right-broken.
 (6) Consider division d. In the case that d is right-broken but not left-broken, 
 the duration of d equals the sum m + n, with m and n equal to the 'segment duration' 
 of d and the 'right overhang duration' of d, respectively.
-In the case the d is left-broken but not right-broken, the duration of d 
+In the case the d is left-broken but not right-broken, the duration of d equals the sum l + m,
+with l and m equal to the left overhang duration of d and the segment duration of d, respectively.
+In the case that d is both left-broken and right-broken, the duration of d equals
+the sum l + m + n, with l + n together equalling the 'total overhang duration of d.
+And in the case that d is neither left-broken nor right-broken, the duration of d equals m.
 
-(7) Discovery is unproblematic: calculate the divisions for whatever voice is current under iteration,
-notice whether the rightmost division is right-broken, and note the fact somewhere in the context tree
-if the voice contains a right-broken division. 
+(7) Notice that the right overhang duration of right-broken division d in segment Tn 
+will exactly equal the segment duration of left-broken divions e in segment Tn+1.
+That is, the right overhang duration of d in Tn acts as a type of offset in Tn+1.
+How does the right overhang duration of d in Tn act as a type of offset in Tn+1?
+By offseting the amount of musical time before which divisions in the corresponding
+voice in Tn+1 will begin to calculate.
+
+(8) Discovery is unproblematic: calculate the divisions for whatever voice is current under iteration,
+notice whether the rightmost division is right-broken. If so, interpretation has discovered
+a broken division.
+
+(9) Then there's the issue of what to record once a broken division has been discovered.
+There is also a companion question as to where such information should be recorded.
+A reasonable first guess says that the right overhang duration of the broken duration
+needs to be recorded somewhere in the context tree. This is important because otherwise
+division calculate can not proceed correctly once interpretation advances from Tn to Tn+1.
+
+(10) Does other information need to be recorded upon broken division discovery? Yes.
+Interpretation needs to record that d is right-broken. Three options present themselves here.
+Either, (a) division d itself may bear some type of is-broken indicator. Or, (b), interpretation may add
+an is-right-broken indicator to the generative setting that specified the creation of the
+divisions in the first place. Or, (c), interpretation may maintain some type of mapping
+data structure that models just such information about broken and nonbroken divisions.
+Option (c) seems less good. Maybe it makes sense to proceed with both options (a) and (b) 
+since the two are not mutually exclusive.
+
+(11) What is the importance of recording the is-broken status of every duration in Tn?
+This matters for the interpretaive passes that follow division determination.
+Chief among these is rhythm creation. When notating Tn in isolation, interpretation 
+must know which divisions in Tn are broken and which are nonbroken. Likewise, when notating
+Tn together with Tn+1, interpretation must know which divisions in both Tn and Tn+1
+are broken and which are nonbroken.
