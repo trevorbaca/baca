@@ -1,17 +1,4 @@
-from abjad.tools import beamtools
-from abjad.tools import chordtools
-from abjad.tools import componenttools
-from abjad.tools import containertools
-from abjad.tools import contexttools
-from abjad.tools import durationtools
-from abjad.tools import mathtools
-from abjad.tools import marktools
-from abjad.tools import measuretools
-from abjad.tools import notetools
-from abjad.tools import sequencetools
-from abjad.tools import timetokentools
-from abjad.tools import voicetools
-from abjad.tools.scoretemplatetools.ScoreTemplate import ScoreTemplate
+from abjad.tools import *
 from baca.handlers.composites.CompositeRhythmHandler import CompositeRhythmHandler
 from baca.handlers.pitch.TimewisePitchClassHandler import TimewisePitchClassHandler
 from baca.specification.AttributeRetrievalIndicator import AttributeRetrievalIndicator
@@ -88,7 +75,7 @@ class SegmentSpecification(Specification):
         def fget(self):
             return self._score_template
         def fset(self, score_template):
-            assert isinstance(score_template, (ScoreTemplate, type(None)))
+            assert isinstance(score_template, (scoretemplatetools.ScoreTemplate, type(None)))
             self._score_template = score_template
             self._context_tree = ContextTree(self.score_template())
             self.initialize_context_name_abbreviations()
@@ -126,11 +113,12 @@ class SegmentSpecification(Specification):
         return result
 
     def get_divisions_value(self, context_name, scope=None):
-        '''Default to time signatures if explicit divisions are not found.
+        '''Return value found in context tree or else default to segment time signatures.
         '''
-        value = self.get_value('divisions', context_name, scope=scope)
-        #self._debug((context_name, value), 'context_name, value')
-        return value or self.get_value('time_signatures', context_name, scope=scope)
+        value, fresh = self.get_value('divisions', context_name, scope=scope)
+        if value is not None:
+            return value, fresh
+        return self.get_value('time_signatures', context_name, scope=scope)
 
     def get_rhythm(self, context_name, scope=None):
         '''Default to rest-filled tokens if explicit rhythm not found.
@@ -160,22 +148,15 @@ class SegmentSpecification(Specification):
             elif len(settings) == 1:
                 setting = settings[0]
                 assert setting.value is not None
-                return setting.value
+                return setting.value, setting.fresh
             else:
                 raise Exception('multiple {!r} settings found.'.format(attribute_name))
+        return None, None
     
     def initialize_context_name_abbreviations(self):
         self.context_name_abbreviations = getattr(self.score_template, 'context_name_abbreviations', {})
         for context_name_abbreviation, context_name in self.context_name_abbreviations.iteritems():
             setattr(self, context_name_abbreviation, context_name)
-
-    def make_divisions_for_voice(self, voice):
-        value = self.get_divisions_value(voice.name)
-        #self._debug(divisions, 'divisions')
-        divisions = [mathtools.NonreducedFraction(*x) for x in value]
-        divisions = sequencetools.repeat_sequence_to_weight_exactly(divisions, self.duration)
-        divisions = [x.pair for x in divisions]
-        marktools.Annotation('divisions', divisions)(voice)
 
     def make_rhythm_for_voice(self, voice):
         divisions = marktools.get_value_of_annotation_attached_to_component(voice, 'divisions')

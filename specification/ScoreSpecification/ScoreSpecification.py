@@ -1,6 +1,4 @@
-from abjad.tools import contexttools
-from abjad.tools import sequencetools
-from abjad.tools import voicetools
+from abjad.tools import *
 from baca.specification.AttributeRetrievalIndicator import AttributeRetrievalIndicator
 from baca.specification.AttributeRetrievalRequest import AttributeRetrievalRequest
 from baca.specification.ContextTree import ContextTree
@@ -10,8 +8,12 @@ from baca.specification.Selection import Selection
 from baca.specification.Specification import Specification
 from baca.specification.StatalServerRequest import StatalServerRequest
 from baca.specification.SettingReservoir import SettingReservoir
+import collections
 import copy
 
+
+Token = collections.namedtuple('Token', ['value', 'duration'])
+VerboseToken = collections.namedtuple('VerboseToken', ['value', 'fresh', 'duration'])
 
 class ScoreSpecification(Specification):
 
@@ -49,15 +51,15 @@ class ScoreSpecification(Specification):
 
     def add_divisions(self):
         for voice in voicetools.iterate_voices_forward_in_expr(self.score):
-            mapping = []
-            for segment in self.segments:
-                value = segment.get_divisions_value(voice.name)
-                mapping.append((value, segment.duration))
-            print mapping
+            divisions = self.make_divisions_for_voice(voice)
+            print divisions
+            marktools.Annotation('divisions', divisions)(voice)
 
     def add_rhythms(self):
-        for segment in self.segments:
-            segment.add_rhythm(self.score)
+        for voice in voicetools.iterate_voices_forward_in_expr(self.score):
+            rhythms = self.make_rhythms_for_voice(voice)
+            print rhythms
+            voice.extend(rhythms)
 
     def add_time_signatures(self):
         for segment in self.segments:
@@ -76,6 +78,11 @@ class ScoreSpecification(Specification):
 
     def apply_additional_segment_parameters(self):
         pass 
+
+    def calculate_segment_offset_pairs(self):
+        segment_durations = [segment.duration for segment in self]
+        assert sequencetools.all_are_numbers(segment_durations)
+        self.segment_offset_pairs = mathtools.cumulative_sums_zero_pairwise(segment_durations)
     
     def change_attribute_retrieval_indicator_to_setting(self, indicator):
         segment = self[indicator.segment_name]
@@ -93,6 +100,7 @@ class ScoreSpecification(Specification):
         self.unpack_directives()
         self.interpret_segment_time_signatures()
         self.add_time_signatures()
+        self.calculate_segment_offset_pairs()
         self.interpret_segment_divisions()
         self.add_divisions()
         self.interpret_segment_rhythms()
@@ -116,7 +124,7 @@ class ScoreSpecification(Specification):
                 settings = []
                 existing_settings = self.context_tree.get_settings(attribute_name='divisions')
                 for existing_setting in existing_settings:
-                    setting = existing_setting.copy(segment_name=segment.name)
+                    setting = existing_setting.copy(segment_name=segment.name, fresh=False)
                     settings.append(setting)
             self.store_settings(settings)
 
@@ -145,6 +153,39 @@ class ScoreSpecification(Specification):
             assert setting.context_name is None
             assert setting.scope is None
             self.store_setting(setting)
+
+    def make_divisions_for_voice(self, voice):
+        mapping = []
+        for segment in self.segments:
+            value, fresh = segment.get_divisions_value(voice.name)
+            mapping.append(VerboseToken(value, fresh, segment.duration))
+        mapping = self.massage_divisions_mapping(mapping)
+        divisions = self.make_divisions_from_mapping(mapping)
+        return divisions
+
+    def make_divisions_from_mapping(self, mapping):
+        result = []
+        for token in mapping:
+            divisions = [mathtools.NonreducedFraction(*x) for x in token.value]
+            divisions = sequencetools.repeat_sequence_to_weight_exactly(divisions, token.duration)
+            divisions = [x.pair for x in divisions]
+            result.extend(divisions)
+        return result
+
+    def massage_divisions_mapping(self, mapping):
+        if not mapping:
+            return
+        result = []
+        assert mapping[0].fresh
+        for verbose_token in mapping:
+            if verbose_token.fresh:
+                result.append(Token(verbose_token.value, verbose_token.duration))
+            else:
+                last_token = result[-1]
+                assert verbose_token.value == last_token.value
+                new_token = Token(last_token.value, last_token.duration + verbose_token.duration)
+                result[-1] = new_token
+        return result
 
     def resolve_attribute_retrieval_request(self, request):
         setting = self.change_attribute_retrieval_indicator_to_setting(request.indicator)
