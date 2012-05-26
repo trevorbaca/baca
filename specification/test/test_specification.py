@@ -46,6 +46,8 @@ def test_specification_01():
 
     Set T2 time signatures equal to the last 2 time signatures of T1.
     Let all other T1 specifications continue to T2.
+
+    Tests for spanning divisions in 1 & 2.
     '''
     
     score = ScoreSpecification(scoretemplatetools.GroupedRhythmicStavesScoreTemplate(n=4))
@@ -78,6 +80,8 @@ def test_specification_01():
 
 def test_specification_02():
     '''As above with different divisions.
+    
+    Tests for spanning divisions in 1 & 2 and also in 3 & 4.
     '''
     
     score = ScoreSpecification(scoretemplatetools.GroupedRhythmicStavesScoreTemplate(n=4))

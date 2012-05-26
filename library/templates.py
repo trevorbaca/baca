@@ -4,7 +4,7 @@ from abjad.tools import schemetools
 __all__ = []
 
 
-def make_baca_letter_layout(music=None):
+def apply_baca_letter_layout(music=None):
     lilypond_file = lilypondfiletools.make_basic_lilypond_file(music=music)
 
     lilypond_file.default_paper_size = 'letter', 'portrait'
@@ -49,4 +49,4 @@ def make_baca_letter_layout(music=None):
     return lilypond_file
 
 
-__all__.append('make_baca_letter_layout')
+__all__.append('apply_baca_letter_layout')

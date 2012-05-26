@@ -42,29 +42,62 @@ class ScoreSpecification(Specification):
         return len(self.segments)
 
     def __repr__(self):
-        return '{}({!r})'.format(type(self).__name__, self.segments)
+        return '{}({!r})'.format(self._class_name, self.segments)
 
     ### PUBLIC METHODS ###
-    
+
+    def add_segment_time_signatures(self):
+        for segment in self.segments:
+            segment.add_time_signatures(self.score)
+
+    def add_segment_divisions(self):
+        pass
+
+    def add_segment_rhythms(self):
+        pass
+
     def append_segment(self, name=None):
         segment = self.segment_specification_class(self.score_template, name=name)     
         self.segments.append(segment)
         return segment
 
+    def apply_segment_pitch_classes(self):
+        pass
+
+    def apply_segment_registration(self):
+        pass
+
+    def apply_additional_segment_parameters(self):
+        pass 
+    
     def change_attribute_retrieval_indicator_to_setting(self, indicator):
         segment = self[indicator.segment_name]
         context_proxy = segment.context_tree[indicator.context_name]
         setting = context_proxy.get_setting(attribute_name=indicator.attribute_name, scope=indicator.scope)
         return setting
 
+    def instantiate_score(self):
+        self.score = self.score_template()
+        context = contexttools.Context(name='TimeSignatureContext', context_name='TimeSignatureContext')
+        self.score.insert(0, context)
+        self.score.time_signature_context = context
+        
     def interpret(self):
+        self.instantiate_score()
         self.unpack_directives()
         self.interpret_segment_time_signatures()
+        self.add_segment_time_signatures()
         self.interpret_segment_divisions()
-        self.interpret_segment_rhythm()
+        self.add_segment_divisions()
+        self.interpret_segment_rhythms()
+        self.add_segment_rhythms()
         self.interpret_segment_pitch_classes()
+        self.apply_segment_pitch_classes()
         self.interpret_segment_registration()
+        self.apply_segment_registration()
         self.interpret_additional_segment_parameters()
+        self.apply_additional_segment_parameters()
+        return self.score
 
     def interpret_additional_segment_parameters(self):
         for segment in self.segments:
@@ -89,7 +122,7 @@ class ScoreSpecification(Specification):
         for segment in self.segments:
             pass
 
-    def interpret_segment_rhythm(self):
+    def interpret_segment_rhythms(self):
         for segment in self.segments:
             settings = segment.get_settings(attribute_name='rhythm')
             if not settings:
@@ -106,13 +139,6 @@ class ScoreSpecification(Specification):
             assert setting.context_name is None
             assert setting.scope is None
             self.store_setting(setting)
-
-    def notate(self):
-        segment_score_objects = []
-        self.interpret()
-        for segment in self:
-            segment_score_objects.append(segment.notate())
-        return segment_score_objects
 
     def resolve_attribute_retrieval_request(self, request):
         setting = self.change_attribute_retrieval_indicator_to_setting(request.indicator)
@@ -145,7 +171,7 @@ class ScoreSpecification(Specification):
         else:
             return setting.source
 
-    # TODO: eventually check attribute_name against enumeration of know attribute names and error
+    # TODO: eventually check attribute_name against enumeration of known attribute names and error
     def retrieve(self, attribute_name, segment_name, context_name=None, scope=None):
         indicator = AttributeRetrievalIndicator(
             attribute_name, segment_name, context_name=context_name, scope=scope)

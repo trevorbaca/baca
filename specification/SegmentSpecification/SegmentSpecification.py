@@ -32,12 +32,13 @@ class SegmentSpecification(Specification):
 
     ### INITIALIZER ###
 
-    def __init__(self, score_template, directives=None, name=None, settings=None):
+    #def __init__(self, score_template, directives=None, name=None, settings=None):
+    def __init__(self, directives=None, name=None, settings=None):
         Specification.__init__(self, settings=settings)
-        self.score_template = score_template
+        #self.score_template = score_template
         self.directives = directives or []
         self.name = name
-        self.score = self.score_template()
+        #self.score = self.score_template()
 
     ### SPECIAL METHODS ###
 
@@ -101,12 +102,10 @@ class SegmentSpecification(Specification):
             self.make_divisions_for_voice(voice)
             self.make_rhythm_for_voice(voice)
 
-    def add_time_signatures(self):
+    def add_time_signatures(self, score):
         time_signatures = self.time_signatures
         measures = measuretools.make_measures_with_full_measure_spacer_skips(time_signatures)
-        context = contexttools.Context(name='TimeSignatureContext', context_name='TimeSignatureContext')
-        context.extend(measures)
-        self.score.insert(0, context)
+        score.time_signature_context.extend(measures)
 
     def annotate_source(self, source, count=None, offset=None):
         if isinstance(source, StatalServer):
