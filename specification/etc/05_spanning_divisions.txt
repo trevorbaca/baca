@@ -1,59 +1,59 @@
-(1) How are open divisions to be handled?
+(1) How are spanning divisions to be handled?
 
-(2) Maybe the first thing to notice is that open divisions are a type of byproduct
+(2) Maybe the first thing to notice is that spanning divisions are a type of byproduct
 arising during interpretation. Composers specify only complete divisions. But differences
-between the pattern of divisions within a segment and the duration of the segment
-may give rise to open divisions.
+between the pattern of divisions within a segment and the durations of adjacent segments
+may give rise to spanning divisions.
 
-(3) It is the voices within any given segment that may be the bearers of open divisions
+(3) It is the voices within any given segment that may be the bearers of spanning divisions
 because it is the voices within any given segment that bear divisions, no matter what their type.
 
-(4) Divisions may be left-open, or right-open, or both left- and right-open,
-or neither left- nor right-open.
+(4) Divisions may be left-spanning, or right-spanning, or both left- and right-spanning,
+or neither left- nor right-spanning.
 
-(5) We can say that one of the things that happens during interpretation is open duration discovery.
+(5) We can say that one of the things that happens during interpretation is spanning duration discovery.
 
-(6) Consider division d. In the case that d is right-open but not left-open, 
+(6) Consider division d. In the case that d is right-spanning but not left-spanning, 
 the duration of d equals the sum m + n, with m and n equal to the 'segment duration' 
 of d and the 'right overhang duration' of d, respectively.
-In the case the d is left-open but not right-open, the duration of d equals the sum l + m,
+In the case the d is left-spanning but not right-spanning, the duration of d equals the sum l + m,
 with l and m equal to the left overhang duration of d and the segment duration of d, respectively.
-In the case that d is both left-open and right-open, the duration of d equals
+In the case that d is both left-spanning and right-spanning, the duration of d equals
 the sum l + m + n, with l + n together equalling the 'total overhang duration of d.
-And in the case that d is neither left-open nor right-open, the duration of d equals m.
+And in the case that d is neither left-spanning nor right-spanning, the duration of d equals m.
 
-(7) Notice that the right overhang duration of right-open division d in segment Tn 
-will exactly equal the segment duration of left-open divions e in segment Tn+1.
+(7) Notice that the right overhang duration of right-spanning division d in segment Tn 
+will exactly equal the segment duration of left-spanning divions e in segment Tn+1.
 That is, the right overhang duration of d in Tn acts as a type of offset in Tn+1.
 How does the right overhang duration of d in Tn act as a type of offset in Tn+1?
 By offseting the amount of musical time before which divisions in the corresponding
 voice in Tn+1 will begin to calculate.
 
 (8) Discovery is unproblematic: calculate the divisions for whatever voice is current under iteration,
-notice whether the rightmost division is right-open. If so, interpretation has discovered
-a open division.
+notice whether the rightmost division is right-spanning. If so, interpretation has discovered
+a spanning division.
 
-(9) Then there's the issue of what to record once a open division has been discovered.
+(9) Then there's the issue of what to record once a spanning division has been discovered.
 There is also a companion question as to where such information should be recorded.
-A reasonable first guess says that the right overhang duration of the open duration
+A reasonable first guess says that the right overhang duration of the spanning duration
 needs to be recorded somewhere in the context tree. This is important because otherwise
 division calculate can not proceed correctly once interpretation advances from Tn to Tn+1.
 
-(10) Does other information need to be recorded upon open division discovery? Yes.
-Interpretation needs to record that d is right-open. Three options present themselves here.
-Either, (a) division d itself may bear some type of is-open indicator. Or, (b), interpretation may add
-an is-right-open indicator to the generative setting that specified the creation of the
+(10) Does other information need to be recorded upon spanning division discovery? Yes.
+Interpretation needs to record that d is right-spanning. Three options present themselves here.
+Either, (a) division d itself may bear some type of is-spanning indicator. Or, (b), interpretation may add
+an is-right-spanning indicator to the generative setting that specified the creation of the
 divisions in the first place. Or, (c), interpretation may maintain some type of mapping
-data structure that models just such information about open and nonopen divisions.
+data structure that models just such information about spanning and nonspanning divisions.
 Option (c) seems less good. Maybe it makes sense to proceed with both options (a) and (b) 
 since the two are not mutually exclusive.
 
-(11) What is the importance of recording the is-open status of every duration in Tn?
+(11) What is the importance of recording the is-spanning status of every duration in Tn?
 This matters for the interpretaive passes that follow division determination.
 Chief among these is rhythm creation. When notating Tn in isolation, interpretation 
-must know which divisions in Tn are open and which are nonopen. Likewise, when notating
+must know which divisions in Tn are spanning and which are nonspanning. Likewise, when notating
 Tn together with Tn+1, interpretation must know which divisions in both Tn and Tn+1
-are open and which are nonopen.
+are spanning and which are nonspanning.
 
                                                * * *
 
@@ -126,7 +126,7 @@ halts at any arbitrary point. That is, feel free to halt time signature interpre
 wherever you want. But when you do you're not guaranteed to know anything in particular.
 
 
-* * *
+                                               * * *
 
 TODO: work out *containment* as it relates to segment voices containing divisions. Ragged right.
 Divisions owned by the segment in which they *start*. Need for a model of absence in segments.
@@ -161,23 +161,24 @@ up must be named the same.) And the limitation is that for any given staff group
 chunk, all voices in the chunk must be of equal duration. That is *LilyPond allows
 no incomplete divisions across successive staff group chunks.*
 
-* * *
+                                               * * *
 
 It's almost like there are two conflicting goals here. The first is the ability iteratively
-to rework a single segment of score, without having to render material before or after the segment.
-The second is the ability to have potentially many divisions that span two or more sections.
-It's not clear to what extent these goals conflict. Answering this question will be one of the
-results of the current research.
+to rework a single segment in isolation. The second is the ability to have potentially many 
+spanning divisions. It's not clear to what extent these goals conflict.
 
 Maybe we should relax the goal of being able to iteratively rework a single segment in isolation.
-Why? Because test files provide all alternative to that type of work. Compare this to the goal
-of potentially many spanning divisions. There is simply no substitute for this sort of
-thing beyond explicit modeling.
+Why? Because test files provide an alternative to that type of work. Compare this to the goal
+of allowing for potentially many spanning divisions. There is no substitute for this beyond 
+explicit modeling.
 
 So the direction this is going is toward an interpretive process that really does build up
-a single huge single comprising voices that run the entire duration of the score.
+a single huge score omprising voices that run the entire duration of the score.
 
-That's fine. That just means one of two things. Either that sections destined for extensive
-iterative rework will have to be moved over into test files by hand. Or else that spanning
-divisions will have to be added into the full score somewhat later in the compositional
-process in order to be able to rerender the entire score in less time. Perhaps both.
+This means three things. First, sections requiring extensive rework will have to be moved
+into test files as a type of staging during the compositional process. Second, all statal
+sources everywhere in the system will have to implement an interface to allow interrogation
+of state. This is how we will know 'where statal servers are' when it comes time to excise
+a segment and stage it for iterative rework. Third, we will probably develop a secondary
+compositional technique of temporarily cauterizing spanning divisions to allow the excision
+of segments.
