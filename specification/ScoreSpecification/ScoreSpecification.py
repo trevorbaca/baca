@@ -1,5 +1,6 @@
 from abjad.tools import contexttools
 from abjad.tools import sequencetools
+from abjad.tools import voicetools
 from baca.specification.AttributeRetrievalIndicator import AttributeRetrievalIndicator
 from baca.specification.AttributeRetrievalRequest import AttributeRetrievalRequest
 from baca.specification.ContextTree import ContextTree
@@ -46,15 +47,21 @@ class ScoreSpecification(Specification):
 
     ### PUBLIC METHODS ###
 
-    def add_segment_time_signatures(self):
+    def add_divisions(self):
+        for voice in voicetools.iterate_voices_forward_in_expr(self.score):
+            mapping = []
+            for segment in self.segments:
+                value = segment.get_divisions_value(voice.name)
+                mapping.append((value, segment.duration))
+            print mapping
+
+    def add_rhythms(self):
+        for segment in self.segments:
+            segment.add_rhythm(self.score)
+
+    def add_time_signatures(self):
         for segment in self.segments:
             segment.add_time_signatures(self.score)
-
-    def add_segment_divisions(self):
-        pass
-
-    def add_segment_rhythms(self):
-        pass
 
     def append_segment(self, name=None):
         segment = self.segment_specification_class(self.score_template, name=name)     
@@ -80,17 +87,16 @@ class ScoreSpecification(Specification):
         self.score = self.score_template()
         context = contexttools.Context(name='TimeSignatureContext', context_name='TimeSignatureContext')
         self.score.insert(0, context)
-        self.score.time_signature_context = context
         
     def interpret(self):
         self.instantiate_score()
         self.unpack_directives()
         self.interpret_segment_time_signatures()
-        self.add_segment_time_signatures()
+        self.add_time_signatures()
         self.interpret_segment_divisions()
-        self.add_segment_divisions()
+        self.add_divisions()
         self.interpret_segment_rhythms()
-        self.add_segment_rhythms()
+        self.add_rhythms()
         self.interpret_segment_pitch_classes()
         self.apply_segment_pitch_classes()
         self.interpret_segment_registration()

@@ -32,13 +32,12 @@ class SegmentSpecification(Specification):
 
     ### INITIALIZER ###
 
-    #def __init__(self, score_template, directives=None, name=None, settings=None):
-    def __init__(self, directives=None, name=None, settings=None):
+    def __init__(self, score_template, directives=None, name=None, settings=None):
         Specification.__init__(self, settings=settings)
-        #self.score_template = score_template
+        self.score_template = score_template
+        self.score_model = self.score_template()
         self.directives = directives or []
         self.name = name
-        #self.score = self.score_template()
 
     ### SPECIAL METHODS ###
 
@@ -97,15 +96,11 @@ class SegmentSpecification(Specification):
 
     ### PUBLIC METHODS ###
 
-    def add_rhythms_to_voices(self):
-        for voice in voicetools.iterate_voices_forward_in_expr(self.score):
-            self.make_divisions_for_voice(voice)
-            self.make_rhythm_for_voice(voice)
-
     def add_time_signatures(self, score):
         time_signatures = self.time_signatures
         measures = measuretools.make_measures_with_full_measure_spacer_skips(time_signatures)
-        score.time_signature_context.extend(measures)
+        context = componenttools.get_first_component_in_expr_with_name(score, 'TimeSignatureContext')
+        context.extend(measures)
 
     def annotate_source(self, source, count=None, offset=None):
         if isinstance(source, StatalServer):
@@ -130,15 +125,12 @@ class SegmentSpecification(Specification):
                     result.append(directive)
         return result
 
-    def get_divisions(self, context_name, scope=None):
+    def get_divisions_value(self, context_name, scope=None):
         '''Default to time signatures if explicit divisions are not found.
         '''
         value = self.get_value('divisions', context_name, scope=scope)
         #self._debug((context_name, value), 'context_name, value')
-        if value is None:
-            return self.get_value('time_signatures', context_name, scope=scope)
-        else:
-            return value
+        return value or self.get_value('time_signatures', context_name, scope=scope)
 
     def get_rhythm(self, context_name, scope=None):
         '''Default to rest-filled tokens if explicit rhythm not found.
@@ -159,7 +151,7 @@ class SegmentSpecification(Specification):
     def get_value(self, attribute_name, context_name, scope=None):
         '''Always from context tree.
         '''
-        context = componenttools.get_first_component_in_expr_with_name(self.score, context_name)
+        context = componenttools.get_first_component_in_expr_with_name(self.score_model, context_name)
         for component in componenttools.get_improper_parentage_of_component(context):
             context_proxy = self.context_tree[component.name]
             settings = context_proxy.get_settings(attribute_name=attribute_name, scope=scope)
@@ -178,9 +170,9 @@ class SegmentSpecification(Specification):
             setattr(self, context_name_abbreviation, context_name)
 
     def make_divisions_for_voice(self, voice):
-        divisions = self.get_divisions(voice.name)
+        value = self.get_divisions_value(voice.name)
         #self._debug(divisions, 'divisions')
-        divisions = [mathtools.NonreducedFraction(*x) for x in divisions]
+        divisions = [mathtools.NonreducedFraction(*x) for x in value]
         divisions = sequencetools.repeat_sequence_to_weight_exactly(divisions, self.duration)
         divisions = [x.pair for x in divisions]
         marktools.Annotation('divisions', divisions)(voice)
@@ -195,11 +187,6 @@ class SegmentSpecification(Specification):
         if getattr(maker, 'beam', False):
             durations = [x.preprolated_duration for x in containers]
             beamtools.DuratedComplexBeamSpanner(containers, durations=durations, span=1)
-
-    def notate(self):
-        self.add_time_signatures()
-        self.add_rhythms_to_voices()
-        return self.score
 
     def parse_context_token(self, context_token):
         if context_token in self.context_names:
