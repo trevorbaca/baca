@@ -14,6 +14,7 @@ import copy
 
 Token = collections.namedtuple('Token', ['value', 'duration'])
 VerboseToken = collections.namedtuple('VerboseToken', ['value', 'fresh', 'duration'])
+RhythmToken = collections.namedtuple('RhythmToken', ['value', 'fresh'])
 
 class ScoreSpecification(Specification):
 
@@ -171,6 +172,15 @@ class ScoreSpecification(Specification):
             divisions = [x.pair for x in divisions]
             result.extend(divisions)
         return result
+
+    def make_rhythms_for_voice(self, voice):
+        mapping = []
+        for segment in self.segments:
+            value, fresh = segment.get_rhythm_value(voice.name)
+            mapping.append(RhythmToken(value, fresh))
+        print mapping
+        rhythms = self.make_rhythms_from_mapping(mapping)
+        return rhythms
 
     def massage_divisions_mapping(self, mapping):
         if not mapping:

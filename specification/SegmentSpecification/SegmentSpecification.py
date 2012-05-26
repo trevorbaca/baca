@@ -120,15 +120,14 @@ class SegmentSpecification(Specification):
             return value, fresh
         return self.get_value('time_signatures', context_name, scope=scope)
 
-    def get_rhythm(self, context_name, scope=None):
+    def get_rhythm_value(self, context_name, scope=None):
         '''Default to rest-filled tokens if explicit rhythm not found.
         '''
         import baca.library as library
-        value = self.get_value('rhythm', context_name, scope=scope)
-        if value is None:
-            return library.rest_filled_tokens
-        else:
-            return value
+        value, fresh = self.get_value('rhythm', context_name, scope=scope)
+        if value is not None:
+            return value, fresh
+        return library.rest_filled_tokens, True
 
     def get_setting(self, **kwargs):
         return Specification.get_setting(self, segment_name=self.name, **kwargs)
