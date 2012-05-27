@@ -3,6 +3,8 @@ from specification import ScoreSpecification
 import baca.library as library
 import inspect
 import os
+import py
+py.test.skip('working on this one')
 
 
 def manage_output(segments, test_function_name, render_pdfs=False, cache_pdfs=False, cache_lys=False):
