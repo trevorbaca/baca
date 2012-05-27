@@ -83,7 +83,9 @@ class ScoreSpecification(Specification):
     def calculate_segment_offset_pairs(self):
         segment_durations = [segment.duration for segment in self]
         assert sequencetools.all_are_numbers(segment_durations)
-        self.segment_offset_pairs = mathtools.cumulative_sums_zero_pairwise(segment_durations)
+        self.segment_durations = segment_durations
+        self.score_duration = sum(self.segment_durations)
+        self.segment_offset_pairs = mathtools.cumulative_sums_zero_pairwise(self.segment_durations)
     
     def change_attribute_retrieval_indicator_to_setting(self, indicator):
         segment = self[indicator.segment_name]
@@ -141,7 +143,11 @@ class ScoreSpecification(Specification):
         for segment in self.segments:
             settings = segment.get_settings(attribute_name='rhythm')
             if not settings:
-                settings = self.context_tree.get_settings(attribute_name='rhythm')
+                settings = []
+                existing_settings = self.context_tree.get_settings(attribute_name='rhythm')
+                for existing_setting in existing_settings:
+                    setting = existing_setting.copy(segment_name=segment.name, fresh=False)
+                    settings.append(setting)
             self.store_settings(settings)
 
     def interpret_segment_time_signatures(self):
@@ -179,8 +185,19 @@ class ScoreSpecification(Specification):
             value, fresh = segment.get_rhythm_value(voice.name)
             mapping.append(RhythmToken(value, fresh))
         print mapping
-        rhythms = self.make_rhythms_from_mapping(mapping)
-        return rhythms
+        result = []
+        parts = self.partition_voice_divisions_by_segment_durations(voice)
+        print parts
+        # TODO: work here
+        for token, part in zip(mapping, parts):
+            pass
+
+    def partition_voice_divisions_by_segment_durations(self, voice):
+        divisions = marktools.get_value_of_annotation_attached_to_component(voice, 'divisions')
+        divisions = [mathtools.NonreducedFraction(x) for x in divisions] 
+        assert sum(divisions) == self.score_duration
+        parts = sequencetools.partition_sequence_by_backgrounded_weights(divisions, self.segment_durations)
+        return parts
 
     def massage_divisions_mapping(self, mapping):
         if not mapping:
