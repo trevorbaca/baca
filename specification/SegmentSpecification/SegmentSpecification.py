@@ -157,17 +157,6 @@ class SegmentSpecification(Specification):
         for context_name_abbreviation, context_name in self.context_name_abbreviations.iteritems():
             setattr(self, context_name_abbreviation, context_name)
 
-    def make_rhythm_for_voice(self, voice):
-        divisions = marktools.get_value_of_annotation_attached_to_component(voice, 'divisions')
-        maker = self.get_rhythm(voice.name)
-        assert isinstance(maker, timetokentools.TimeTokenMaker)
-        leaf_lists = maker(divisions)
-        containers = [containertools.Container(x) for x in leaf_lists]
-        voice.extend(containers)
-        if getattr(maker, 'beam', False):
-            durations = [x.preprolated_duration for x in containers]
-            beamtools.DuratedComplexBeamSpanner(containers, durations=durations, span=1)
-
     def parse_context_token(self, context_token):
         if context_token in self.context_names:
             context_names = [context_token]
