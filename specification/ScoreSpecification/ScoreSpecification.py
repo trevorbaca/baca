@@ -1,5 +1,4 @@
 from abjad.tools import *
-from baca.specification.AttributeRetrievalIndicator import AttributeRetrievalIndicator
 from baca.specification.AttributeRetrievalRequest import AttributeRetrievalRequest
 from baca.specification.ContextTree import ContextTree
 from baca.specification.ScopedValue import ScopedValue
@@ -178,11 +177,14 @@ class ScoreSpecification(Specification):
 
     def make_divisions_for_voice(self, voice):
         mapping = []
+        self._debug('')
+        self._debug(voice)
         for segment in self.segments:
             value, fresh = segment.get_divisions_value(voice.name)
             mapping.append(VerboseToken(value, fresh, segment.duration))
         mapping = self.massage_divisions_mapping(mapping)
         divisions = self.make_divisions_from_mapping(mapping)
+        self._debug(divisions)
         return divisions
 
     def make_divisions_from_mapping(self, mapping):
@@ -230,10 +232,16 @@ class ScoreSpecification(Specification):
         parts = sequencetools.partition_sequence_by_backgrounded_weights(divisions, self.segment_durations)
         return parts
 
+    # TODO: ok to implement callback on attribute retrieval request;
+    #       but what's really needed is callback on value retrieval request.
     def resolve_attribute_retrieval_request(self, request):
         setting = self.change_attribute_retrieval_indicator_to_setting(request.indicator)
         value = setting.value
-        assert value is not None
+        assert value is not None, repr(value)
+        if request.callback is not None:
+            #self._debug(value, 'value before callback')
+            value = request.callback(value)
+            #self._debug(value, 'value after callback')
         if request.offset is not None or request.count is not None:
             original_value_type = type(value)
             offset = request.offset or 0
@@ -260,12 +268,6 @@ class ScoreSpecification(Specification):
             return setting.source()
         else:
             return setting.source
-
-    # TODO: eventually check attribute_name against enumeration of known attribute names and error
-    def retrieve(self, attribute_name, segment_name, context_name=None, scope=None):
-        indicator = AttributeRetrievalIndicator(
-            attribute_name, segment_name, context_name=context_name, scope=scope)
-        return indicator
 
     def select(self, segment_name, context_names=None, scope=None):
         return Selection(segment_name, context_names=context_names, scope=scope)

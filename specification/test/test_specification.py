@@ -5,8 +5,8 @@ import inspect
 import os
 
 
-def manage_output(score, test_function_name, render_pdf=False, cache_pdf=False, cache_ly=False):
-    if not any([render_pdf, cache_pdf, cache_ly]):
+def manage_output(score, test_function_name, cache_ly=False, cache_pdf=False, render_pdf=False):
+    if not any([cache_ly, cache_pdf, render_pdf]):
         return
     lilypond_file = library.apply_baca_letter_layout(score)
     test_number = int(test_function_name.split('_')[-1])
@@ -103,5 +103,48 @@ def test_specification_02():
 
     current_function_name = introspectiontools.get_current_function_name()
     manage_output(score, current_function_name)
+
+    assert score.format == read_score_ly_file(current_function_name)
+
+
+def test_specification_03():
+    '''Score with 4 staves with 1 voice each.
+    T1 divisions truncated in F1 and then rotated in F2, F3, F4.
+    '''
+
+    specification = ScoreSpecification(scoretemplatetools.GroupedRhythmicStavesScoreTemplate(n=4))
+
+    segment = specification.append_segment('T1')
+    segment.set_time_signatures(segment, [(4, 8), (3, 8)])
+    
+    segment.set_divisions(segment.v1, [(3, 16)])
+
+    # TODO:
+    #source = segment.retrieve('divisions', context_name=segment.v1) 
+    source = segment.retrieve_resolved_value('divisions', context_name=segment.v1) 
+    segment.set_divisions_rotated_by_count(segment.v2, source, -1)
+    segment.set_divisions_rotated_by_count(segment.v3, source, -2)
+    segment.set_divisions_rotated_by_count(segment.v4, source, -3)
+
+    segment.set_rhythm(segment, library.thirty_seconds)
+
+    score = specification.interpret()
+
+    assert specification['T1'].time_signatures = [(4, 8), (3, 8)]
+
+    divisions = specification['T1'].get_divisions_value(specification.v1)
+    assert divisions == [(3, 16), (3, 16), (3, 16), (3, 16), (2, 16)]
+
+    divisions = specification['T1'].get_divisions_value(specification.v2)
+    assert divisions == [(3, 16), (3, 16), (3, 16), (2, 16), (3, 16)]
+
+    divisions = specification['T1'].get_divisions_value(specification.v3)
+    assert divisions == [(3, 16), (3, 16), (2, 16), (3, 16), (3, 16)]
+
+    divisions = specification['T1'].get_divisions_value(specification.v4)
+    assert divisions == [(3, 16), (2, 16), (3, 16), (3, 16), (3, 16)]
+
+    current_function_name = introspectiontools.get_current_function_name()
+    manage_output(score, current_function_name, cache_ly=True, cache_pdf=True, render_pdf=True)
 
     assert score.format == read_score_ly_file(current_function_name)

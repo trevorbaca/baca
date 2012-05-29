@@ -6,9 +6,10 @@ class AttributeRetrievalRequest(AbjadObject):
 
     ### INITIALIZER ###
 
-    def __init__(self, indicator, count=None, offset=None):
+    def __init__(self, indicator, callback=None, count=None, offset=None):
         assert isinstance(indicator, AttributeRetrievalIndicator)
         self.indicator = indicator
+        self.callback = callback
         self.count = count
         self.offset = offset
 

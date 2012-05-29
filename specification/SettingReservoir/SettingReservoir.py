@@ -1,7 +1,12 @@
 from abjad.tools.abctools.AbjadObject import AbjadObject
+from baca.specification.AttributeNameEnumeration import AttributeNameEnumeration
 
 
 class SettingReservoir(AbjadObject):
+
+    ### CLASS ATTRIBUTES ###
+
+    attribute_names = AttributeNameEnumeration()
 
     ### INITIALIZER ###
 
@@ -25,6 +30,7 @@ class SettingReservoir(AbjadObject):
 
     def get_settings(self, 
         attribute_name=None, context_name=None, persistent=None, scope=None, segment_name=None):
+        assert attribute_name in self.attribute_names, repr(attribute_name)
         settings = []
         for setting in self.settings:
             if (

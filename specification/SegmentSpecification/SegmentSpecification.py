@@ -1,8 +1,10 @@
 from abjad.tools import *
 from baca.handlers.composites.CompositeRhythmHandler import CompositeRhythmHandler
 from baca.handlers.pitch.TimewisePitchClassHandler import TimewisePitchClassHandler
+from baca.specification.AttributeNameEnumeration import AttributeNameEnumeration
 from baca.specification.AttributeRetrievalIndicator import AttributeRetrievalIndicator
 from baca.specification.AttributeRetrievalRequest import AttributeRetrievalRequest
+from baca.specification.Callback import Callback
 from baca.specification.ContextTree import ContextTree
 from baca.specification.Directive import Directive
 from baca.specification.HandlerRequest import HandlerRequest
@@ -25,6 +27,7 @@ class SegmentSpecification(Specification):
         self.score_model = self.score_template()
         self.directives = directives or []
         self.name = name
+        self.attribute_names = AttributeNameEnumeration()
 
     ### SPECIAL METHODS ###
 
@@ -89,7 +92,10 @@ class SegmentSpecification(Specification):
         context = componenttools.get_first_component_in_expr_with_name(score, 'TimeSignatureContext')
         context.extend(measures)
 
-    def annotate_source(self, source, count=None, offset=None):
+    def annotate_source(self, source, callback=None, count=None, offset=None):
+        assert isinstance(callback, (Callback, type(None))), callback
+        assert isinstance(count, (int, type(None))), count
+        assert isinstance(offset, (int, type(None))), offset
         if isinstance(source, StatalServer):
             if count is not None or offset is not None:
                 source = StatalServerRequest(source, count=count, offset=offset)
@@ -98,10 +104,10 @@ class SegmentSpecification(Specification):
                 assert count is None
                 source = HandlerRequest(source, offset=offset)
         elif isinstance(source, AttributeRetrievalIndicator):
-            if count is not None or offset is not None:
-                source = AttributeRetrievalRequest(source, count=count, offset=offset)
-        elif count is not None or offset is not None:
-            raise ValueError("'count' or 'offset' set on nonstatal source: {!r}.".format(source))
+            if any([x is not None for x in (callback, count, offset)]):
+                source = AttributeRetrievalRequest(source, callback=callback, count=count, offset=offset)
+        elif any([x is not None for x in (callback, count, offset)]):
+            raise ValueError("'callback', 'count' or 'offset' set on nonstatal source: {!r}.".format(source))
         return source
 
     def get_directives(self, target_selection=None, attribute_name=None):
@@ -115,43 +121,51 @@ class SegmentSpecification(Specification):
     def get_divisions_value(self, context_name, scope=None):
         '''Return value found in context tree or else default to segment time signatures.
         '''
-        value, fresh = self.get_value('divisions', context_name, scope=scope)
+        value, fresh = self.get_resolved_value('divisions', context_name, scope=scope)
         if value is not None:
             return value, fresh
-        return self.get_value('time_signatures', context_name, scope=scope)
+        return self.get_resolved_value('time_signatures', context_name, scope=scope)
 
-    def get_rhythm_value(self, context_name, scope=None):
-        '''Default to rest-filled tokens if explicit rhythm not found.
+    def get_resolved_value(self, attribute_name, context_name, scope=None):
+        '''Return value from resolved setting because context proxy stores resolved settings.
         '''
-        import baca.library as library
-        value, fresh = self.get_value('rhythm', context_name, scope=scope)
-        if value is not None:
-            return value, fresh
-        return library.rest_filled_tokens, True
-
-    def get_setting(self, **kwargs):
-        return Specification.get_setting(self, segment_name=self.name, **kwargs)
-
-    def get_settings(self, **kwargs):
-        return Specification.get_settings(self, segment_name=self.name, **kwargs)
-
-    def get_value(self, attribute_name, context_name, scope=None):
-        '''Always from context tree.
-        '''
+        #self._debug((attribute_name, context_name))
         context = componenttools.get_first_component_in_expr_with_name(self.score_model, context_name)
         for component in componenttools.get_improper_parentage_of_component(context):
+            #self._debug(component)
             context_proxy = self.context_tree[component.name]
             settings = context_proxy.get_settings(attribute_name=attribute_name, scope=scope)
+            #self._debug(settings, 'settings')
             if not settings:
                 continue
             elif len(settings) == 1:
                 setting = settings[0]
+                self._debug(setting)
                 assert setting.value is not None
                 return setting.value, setting.fresh
             else:
                 raise Exception('multiple {!r} settings found.'.format(attribute_name))
         return None, None
     
+    def get_rhythm_value(self, context_name, scope=None):
+        '''Default to rest-filled tokens if explicit rhythm not found.
+        '''
+        import baca.library as library
+        value, fresh = self.get_resolved_value('rhythm', context_name, scope=scope)
+        if value is not None:
+            return value, fresh
+        return library.rest_filled_tokens, True
+
+    def get_setting(self, **kwargs):
+        '''Return unresolved setting.
+        '''
+        return Specification.get_setting(self, segment_name=self.name, **kwargs)
+
+    def get_settings(self, **kwargs):
+        '''Return unresolved setting.
+        '''
+        return Specification.get_settings(self, segment_name=self.name, **kwargs)
+
     def initialize_context_name_abbreviations(self):
         self.context_name_abbreviations = getattr(self.score_template, 'context_name_abbreviations', {})
         for context_name_abbreviation, context_name in self.context_name_abbreviations.iteritems():
@@ -180,6 +194,13 @@ class SegmentSpecification(Specification):
         else:
             raise ValueError('invalid selection token: {!r}.'.format(selection_token))
         return selection
+
+    def retrieve(self, attribute_name, **kwargs):
+        return Specification.retrieve(self, attribute_name, self.name, **kwargs)
+
+    # TODO: work here
+    def retrieve_resolved_value(self, attribute_name, **kwargs):
+        return Specification.retrieve_resolved_value(self, attribute_name, self.name, **kwargs)
 
     def select(self, context_names=None, segment_name=None, scope=None):
         assert context_names is None or self.context_tree.all_are_context_names(context_names)
@@ -212,75 +233,102 @@ class SegmentSpecification(Specification):
 
     def set_aggregate(self, target_token, source, count=None, persistent=True, offset=None):
         attribute_name = 'aggregate'
-        self.set_attribute(attribute_name, target_token, source, count=count, persistent=persistent, offset=offset)
+        return self.set_attribute(attribute_name, target_token, source, 
+            count=count, persistent=persistent, offset=offset)
 
     def set_articulations(self, target_token, source, count=None, persistent=True, offset=None):
         attribute_name = 'articulations'
-        self.set_attribute(attribute_name, target_token, source, count=count, persistent=persistent, offset=offset)
+        return self.set_attribute(attribute_name, target_token, source, 
+            count=count, persistent=persistent, offset=offset)
 
-    def set_attribute(self, attribute_name, target_token, source, count=None, persistent=True, offset=None):
-        assert isinstance(attribute_name, str)
-        assert isinstance(persistent, type(True))
+    def set_attribute(self, attribute_name, target_token, source, 
+        callback=None, count=None, persistent=True, offset=None):
+        assert attribute_name in self.attribute_names, attribute_name
+        assert isinstance(persistent, type(True)), persistent
         target_selection = self.parse_selection_token(target_token)
-        source = self.annotate_source(source, count=count, offset=offset)
+        source = self.annotate_source(source, callback=callback, count=count, offset=offset)
         directive = Directive(target_selection, attribute_name, source, persistent=persistent)
         self.directives.append(directive)
+        return directive
 
     def set_chord_treatment(self, target_token, source, count=None, persistent=True, offset=None):
         attribute_name = 'chord_treatment'
-        self.set_attribute(attribute_name, target_token, source, count=count, persistent=persistent, offset=offset)
+        return self.set_attribute(attribute_name, target_token, source, 
+            count=count, persistent=persistent, offset=offset)
 
-    def set_divisions(self, target_token, source, count=None, persistent=True, offset=None):
+    def set_divisions(self, target_token, source, callback=None, count=None, persistent=True, offset=None):
         attribute_name = 'divisions'
-        self.set_attribute(attribute_name, target_token, source, count=count, persistent=persistent, offset=offset)
+        return self.set_attribute(attribute_name, target_token, source, 
+            callback=callback, count=count, persistent=persistent, offset=offset)
+
+    def set_divisions_rotated_by_count(self, target_token, source, n, count=None, offset=None, persistent=True):
+        assert isinstance(n, int)
+        string = 'lambda x: sequencetools.rotate_sequence(x, {})'.format(n)
+        callback = Callback(eval(string), string)
+        #self._debug(callback, 'callback')
+        #self._debug(source, 'source')
+        return self.set_divisions(target_token, source, 
+            callback=callback, count=count, offset=offset, persistent=persistent)
 
     def set_duration_in_seconds(self, target_token, source, count=None, persistent=True, offset=None):
         attribute_name = 'duration_in_seconds'
-        self.set_attribute(attribute_name, target_token, source, count=count, persistent=persistent, offset=offset)
+        return self.set_attribute(attribute_name, target_token, source, 
+            count=count, persistent=persistent, offset=offset)
 
     def set_dynamics(self, target_token, source, count=None, persistent=True, offset=None):
         attribute_name = 'dynamics'
-        self.set_attribute(attribute_name, target_token, source, count=count, persistent=persistent, offset=offset)
+        return self.set_attribute(attribute_name, target_token, source, 
+            count=count, persistent=persistent, offset=offset)
 
     def set_marks(self, target_token, source, count=None, persistent=True, offset=None):
         attribute_name = 'marks'
-        self.set_attribute(attribute_name, target_token, source, count=count, persistent=persistent, offset=offset)
+        return self.set_attribute(attribute_name, target_token, source, 
+            count=count, persistent=persistent, offset=offset)
 
     def set_markup(self, target_token, source, count=None, persistent=True, offset=None):
         attribute_name = 'markup'
-        self.set_attribute(attribute_name, target_token, source, count=count, persistent=persistent, offset=offset)
+        return self.set_attribute(attribute_name, target_token, source, 
+            count=count, persistent=persistent, offset=offset)
 
     def set_pitch_classes(self, target_token, source, count=None, persistent=True, offset=None):
         attribute_name = 'pitch_classes'
-        self.set_attribute(attribute_name, target_token, source, count=count, persistent=persistent, offset=offset)
+        return self.set_attribute(attribute_name, target_token, source, 
+            count=count, persistent=persistent, offset=offset)
 
     def set_pitch_class_application(self, target_token, source, count=None, persistent=True, offset=None):
         attribute_name = 'pitch_class_application'
-        self.set_attribute(attribute_name, target_token, source, count=count, persistent=persistent, offset=offset)
+        return self.set_attribute(attribute_name, target_token, source, 
+            count=count, persistent=persistent, offset=offset)
 
     def set_pitch_class_transform(self, target_token, source, count=None, persistent=True, offset=None):
         attribute_name = 'pitch_class_transform'
-        self.set_attribute(attribute_name, target_token, source, count=count, persistent=persistent, offset=offset)
+        return self.set_attribute(attribute_name, target_token, source, 
+            count=count, persistent=persistent, offset=offset)
 
     def set_register(self, target_token, source, count=None, persistent=True, offset=None):
         attribute_name = 'register'
-        self.set_attribute(attribute_name, target_token, source, count=count, persistent=persistent, offset=offset)
+        return self.set_attribute(attribute_name, target_token, source, 
+            count=count, persistent=persistent, offset=offset)
 
     def set_rhythm(self, target_token, source, count=None, persistent=True, offset=None):
         attribute_name = 'rhythm'
-        self.set_attribute(attribute_name, target_token, source, count=count, persistent=persistent, offset=offset)
+        return self.set_attribute(attribute_name, target_token, source, 
+            count=count, persistent=persistent, offset=offset)
 
     def set_tempo(self, target_token, source, count=None, persistent=True, offset=None):
         attribute_name = 'tempo'
-        self.set_attribute(attribute_name, target_token, source, count=count, persistent=persistent, offset=offset)
+        return self.set_attribute(attribute_name, target_token, source, 
+            count=count, persistent=persistent, offset=offset)
 
     def set_time_signatures(self, target_token, source, count=None, persistent=True, offset=None):
         attribute_name = 'time_signatures'
-        self.set_attribute(attribute_name, target_token, source, count=count, persistent=persistent, offset=offset)
+        return self.set_attribute(attribute_name, target_token, source, 
+            count=count, persistent=persistent, offset=offset)
 
     def set_written_duration(self, target_token, source, count=None, persistent=True, offset=None):
         attribute_name = 'written_duration'
-        self.set_attribute(attribute_name, target_token, source, count=count, persistent=persistent, offset=offset)
+        return self.set_attribute(attribute_name, target_token, source, 
+            count=count, persistent=persistent, offset=offset)
 
     def unpack_directives(self):
         for directive in self.directives:
