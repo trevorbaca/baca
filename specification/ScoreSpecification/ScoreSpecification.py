@@ -111,15 +111,16 @@ class ScoreSpecification(Specification):
     def handle_divisions_retrieval_request(self, request):
         voice = componenttools.get_first_component_in_expr_with_name(self.score, request.voice_name)
         assert isinstance(voice, voicetools.Voice), voice
-        print ''
-        print voice
         divisions = marktools.get_value_of_annotation_attached_to_component(voice, 'divisions')
-        print divisions
         assert isinstance(divisions, list), divisions
         start_offset, stop_offset = self.segment_name_to_offsets(request.start_segment_name, n=request.n)
-        print start_offset, stop_offset
-        # TODO: work here and just implement this sequencetools function
-        divisions = sequencetools.mask_sequence(divisions, start_offset, stop_offset)
+        total_amount = stop_offset - start_offset
+        divisions = [mathtools.NonreducedFraction(x) for x in divisions]
+        divisions = sequencetools.split_sequence_once_by_weights_with_overhang(divisions, [0, total_amount])
+        divisions = divisions[1]
+        if request.callback is not None:
+            divisions = request.callback(divisions)
+        divisions = self.apply_offset_and_count(request, divisions)
         return divisions
 
     def request_divisions(self, voice_name, start_segment_name, n=1):
@@ -214,9 +215,9 @@ class ScoreSpecification(Specification):
         for segment in self.segments:
             value, fresh = segment.get_divisions_value(voice.name)
             if isinstance(value, DivisionsRetrievalRequest):
-                print 'ZEBRA!'
                 value = self.handle_divisions_retrieval_request(value)
             mapping.append(VerboseToken(value, fresh, segment.duration))
+        print ''
         self._debug(mapping, 'mapping')
         mapping = self.massage_divisions_mapping(mapping)
         divisions = self.make_divisions_from_mapping(mapping)
@@ -226,7 +227,7 @@ class ScoreSpecification(Specification):
     def make_divisions_from_mapping(self, mapping):
         result = []
         for token in mapping:
-            divisions = [mathtools.NonreducedFraction(*x) for x in token.value]
+            divisions = [mathtools.NonreducedFraction(x) for x in token.value]
             divisions = sequencetools.repeat_sequence_to_weight_exactly(divisions, token.duration)
             divisions = [x.pair for x in divisions]
             result.extend(divisions)
@@ -269,7 +270,7 @@ class ScoreSpecification(Specification):
         return parts
 
     # TODO: ok to implement callback on attribute retrieval request;
-    #       but what's really needed is callback on value retrieval request.
+    #       but what's really needed is callback on actual objects (like divisions)
     def resolve_attribute_retrieval_request(self, request):
         setting = self.change_attribute_retrieval_indicator_to_setting(request.indicator)
         value = setting.value
@@ -278,6 +279,10 @@ class ScoreSpecification(Specification):
             #self._debug(value, 'value before callback')
             value = request.callback(value)
             #self._debug(value, 'value after callback')
+        result = self.apply_offset_and_count(request, value)
+        return result
+
+    def apply_offset_and_count(self, request, value):
         if request.offset is not None or request.count is not None:
             original_value_type = type(value)
             offset = request.offset or 0
@@ -287,9 +292,9 @@ class ScoreSpecification(Specification):
                 offset = len(value) - -offset
             result = value[offset:offset+count]
             result = original_value_type(result)
+            return result
         else:
-            result = value
-        return result
+            return value
 
     def resolve_setting(self, setting):
         resolved_setting = copy.deepcopy(setting)
