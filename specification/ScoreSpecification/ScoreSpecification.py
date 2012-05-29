@@ -1,6 +1,7 @@
 from abjad.tools import *
 from baca.specification.AttributeRetrievalRequest import AttributeRetrievalRequest
 from baca.specification.ContextTree import ContextTree
+from baca.specification.DivisionsRetrievalRequest import DivisionsRetrievalRequest
 from baca.specification.ScopedValue import ScopedValue
 from baca.specification.SegmentSpecification import SegmentSpecification
 from baca.specification.Selection import Selection
@@ -107,6 +108,37 @@ class ScoreSpecification(Specification):
         setting = context_proxy.get_setting(attribute_name=indicator.attribute_name, scope=indicator.scope)
         return setting
 
+    def handle_divisions_retrieval_request(self, request):
+        voice = componenttools.get_first_component_in_expr_with_name(self.score, request.voice_name)
+        assert isinstance(voice, voicetools.Voice), voice
+        print ''
+        print voice
+        divisions = marktools.get_value_of_annotation_attached_to_component(voice, 'divisions')
+        print divisions
+        assert isinstance(divisions, list), divisions
+        start_offset, stop_offset = self.segment_name_to_offsets(request.start_segment_name, n=request.n)
+        print start_offset, stop_offset
+        # TODO: work here and just implement this sequencetools function
+        divisions = sequencetools.mask_sequence(divisions, start_offset, stop_offset)
+        return divisions
+
+    def request_divisions(self, voice_name, start_segment_name, n=1):
+        return DivisionsRetrievalRequest(voice_name, start_segment_name, n=n)
+
+    def segment_name_to_offsets(self, segment_name, n=1):
+        start_segment_index = self.segment_name_to_index(segment_name)        
+        stop_segment_index = start_segment_index + n - 1
+        start_offset_pair = self.segment_offset_pairs[start_segment_index]
+        stop_offset_pair = self.segment_offset_pairs[stop_segment_index]
+        return start_offset_pair[0], stop_offset_pair[1]
+
+    def segment_name_to_index(self, segment_name):
+        segment = self[segment_name]
+        return self.index(segment)
+
+    def index(self, segment):
+        return self.segments.index(segment)
+
     def instantiate_score(self):
         self.score = self.score_template()
         context = contexttools.Context(name='TimeSignatureContext', context_name='TimeSignatureContext')
@@ -181,7 +213,11 @@ class ScoreSpecification(Specification):
         self._debug(voice)
         for segment in self.segments:
             value, fresh = segment.get_divisions_value(voice.name)
+            if isinstance(value, DivisionsRetrievalRequest):
+                print 'ZEBRA!'
+                value = self.handle_divisions_retrieval_request(value)
             mapping.append(VerboseToken(value, fresh, segment.duration))
+        self._debug(mapping, 'mapping')
         mapping = self.massage_divisions_mapping(mapping)
         divisions = self.make_divisions_from_mapping(mapping)
         self._debug(divisions)

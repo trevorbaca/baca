@@ -13,3 +13,6 @@ class Callback(AbjadObject):
 
     def __call__(self, expr):
         return self.callback(expr)
+
+    def __repr__(self):
+        return '{}({!r})'.format(self._class_name, self.string)

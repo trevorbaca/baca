@@ -10,19 +10,19 @@ class Setting(AbjadObject):
 
     initializer_attribute_names = (
         'segment_name', 'context_name', 'scope', 'attribute_name', 'source', 
-        'persistent', 'fresh', 'value',
+        'persistent', 'fresh', 'payload', 'value',
         )
 
     ### INITIALIZER ###
 
     def __init__(self, segment_name, context_name, scope, attribute_name, source, persistent, 
-        fresh=True, value=None):
-        assert isinstance(segment_name, str) 
-        assert isinstance(context_name, (str, type(None)))
-        assert isinstance(attribute_name, str)
-        assert isinstance(persistent, bool)
-        assert isinstance(scope, (Scope, type(None)))
-        assert isinstance(fresh, type(True))
+        fresh=True, payload=None, value=None):
+        assert isinstance(segment_name, str), segment_name
+        assert isinstance(context_name, (str, type(None))), context_name
+        assert isinstance(attribute_name, str), attribute_name
+        assert isinstance(persistent, bool), persistent
+        assert isinstance(scope, (Scope, type(None))), scope
+        assert isinstance(fresh, type(True)), fresh
         self.segment_name = segment_name
         self.context_name = context_name
         self.scope = scope
@@ -30,6 +30,7 @@ class Setting(AbjadObject):
         self.source = source
         self.persistent = persistent
         self.fresh = fresh
+        self.payload = payload
         self.value = value
 
     ### READ-ONLY PRIVATE PROPERTIES ###
@@ -80,7 +81,7 @@ class Setting(AbjadObject):
     ### PUBLIC METHODS ###
 
     def copy(self, segment_name=None, context_name=None, scope=None, attribute_name=None, 
-        source=None, persistent=None, fresh=None, value=None):
+        source=None, persistent=None, fresh=None, payload=None, value=None):
         new = copy.deepcopy(self)
         for name in self.initializer_attribute_names:
             if locals()[name] is not None:

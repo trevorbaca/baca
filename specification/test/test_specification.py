@@ -121,7 +121,8 @@ def test_specification_03():
 
     # TODO:
     #source = segment.retrieve('divisions', context_name=segment.v1) 
-    source = segment.retrieve_resolved_value('divisions', context_name=segment.v1) 
+    #source = segment.retrieve_resolved_value('divisions', context_name=segment.v1) 
+    source = specification.request_divisions(segment.v1, specification['T1'], n=1) 
     segment.set_divisions_rotated_by_count(segment.v2, source, -1)
     segment.set_divisions_rotated_by_count(segment.v3, source, -2)
     segment.set_divisions_rotated_by_count(segment.v4, source, -3)

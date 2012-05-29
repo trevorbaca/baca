@@ -7,6 +7,7 @@ from baca.specification.AttributeRetrievalRequest import AttributeRetrievalReque
 from baca.specification.Callback import Callback
 from baca.specification.ContextTree import ContextTree
 from baca.specification.Directive import Directive
+from baca.specification.DivisionsRetrievalRequest import DivisionsRetrievalRequest
 from baca.specification.HandlerRequest import HandlerRequest
 from baca.specification.Scope import Scope
 from baca.specification.Specification import Specification
@@ -14,6 +15,7 @@ from baca.specification.Selection import Selection
 from baca.specification.StatalServer import StatalServer
 from baca.specification.StatalServerRequest import StatalServerRequest
 from handlers.Handler import Handler
+import copy
 import fractions
 
 
@@ -103,9 +105,13 @@ class SegmentSpecification(Specification):
             if offset is not None:
                 assert count is None
                 source = HandlerRequest(source, offset=offset)
-        elif isinstance(source, AttributeRetrievalIndicator):
+        elif isinstance(source, (AttributeRetrievalIndicator, DivisionsRetrievalRequest)):
             if any([x is not None for x in (callback, count, offset)]):
-                source = AttributeRetrievalRequest(source, callback=callback, count=count, offset=offset)
+                #source = AttributeRetrievalRequest(source, callback=callback, count=count, offset=offset)
+                source = copy.copy(source)
+                source.callback = callback
+                source.count = count
+                source.offset = offset
         elif any([x is not None for x in (callback, count, offset)]):
             raise ValueError("'callback', 'count' or 'offset' set on nonstatal source: {!r}.".format(source))
         return source
@@ -140,7 +146,7 @@ class SegmentSpecification(Specification):
                 continue
             elif len(settings) == 1:
                 setting = settings[0]
-                self._debug(setting)
+                self._debug(setting, 'setting with resolved value')
                 assert setting.value is not None
                 return setting.value, setting.fresh
             else:
@@ -265,7 +271,6 @@ class SegmentSpecification(Specification):
         assert isinstance(n, int)
         string = 'lambda x: sequencetools.rotate_sequence(x, {})'.format(n)
         callback = Callback(eval(string), string)
-        #self._debug(callback, 'callback')
         #self._debug(source, 'source')
         return self.set_divisions(target_token, source, 
             callback=callback, count=count, offset=offset, persistent=persistent)
