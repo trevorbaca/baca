@@ -1,7 +1,6 @@
 from abjad.tools.abctools.AbjadObject import AbjadObject
 from baca.specification.Scope import Scope
 from baca.specification.Selection import Selection
-import copy
 
 
 class Setting(AbjadObject):
@@ -9,14 +8,13 @@ class Setting(AbjadObject):
     ### CLASS ATTRIBUTES ###
 
     initializer_attribute_names = (
-        'segment_name', 'context_name', 'scope', 'attribute_name', 'source', 
-        'persistent', 'fresh', 'value',
+        'segment_name', 'context_name', 'scope', 'attribute_name', 'source', 'persistent', 
+        'fresh',
         )
 
     ### INITIALIZER ###
 
-    def __init__(self, segment_name, context_name, scope, attribute_name, source, persistent, 
-        fresh=True, value=None):
+    def __init__(self, segment_name, context_name, scope, attribute_name, source, persistent, fresh=True):
         assert isinstance(segment_name, str), segment_name
         assert isinstance(context_name, (str, type(None))), context_name
         assert isinstance(attribute_name, str), attribute_name
@@ -30,7 +28,6 @@ class Setting(AbjadObject):
         self.source = source
         self.persistent = persistent
         self.fresh = fresh
-        self.value = value
 
     ### READ-ONLY PRIVATE PROPERTIES ###
 
@@ -40,8 +37,6 @@ class Setting(AbjadObject):
             self._one_line_target_format,
             self._get_one_line_source_format(self.source),
             ]
-        if self.value is not None:
-            body.append(self._get_one_line_source_format(self.value))
         if not self.persistent:
             body.append(self.persistent)
         body = ', '.join([str(x) for x in body])
@@ -76,13 +71,3 @@ class Setting(AbjadObject):
     @property
     def is_relative(self):
         return isinstance(self.source, Selection)
-
-    ### PUBLIC METHODS ###
-
-    def copy(self, segment_name=None, context_name=None, scope=None, attribute_name=None, 
-        source=None, persistent=None, fresh=None, value=None):
-        new = copy.deepcopy(self)
-        for name in self.initializer_attribute_names:
-            if locals()[name] is not None:
-                setattr(new, name, locals()[name])
-        return new

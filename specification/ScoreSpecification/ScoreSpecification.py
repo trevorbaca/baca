@@ -2,6 +2,7 @@ from abjad.tools import *
 from baca.specification.AttributeRetrievalRequest import AttributeRetrievalRequest
 from baca.specification.ContextTree import ContextTree
 from baca.specification.DivisionRetrievalRequest import DivisionRetrievalRequest
+from baca.specification.ResolvedSetting import ResolvedSetting
 from baca.specification.ScopedValue import ScopedValue
 from baca.specification.SegmentSpecification import SegmentSpecification
 from baca.specification.Selection import Selection
@@ -174,7 +175,9 @@ class ScoreSpecification(Specification):
                 settings = []
                 existing_settings = self.context_tree.get_settings(attribute_name='divisions')
                 for existing_setting in existing_settings:
-                    setting = existing_setting.copy(segment_name=segment.name, fresh=False)
+                    setting = copy.deepcopy(existing_setting)
+                    setting.segment_name = segment.name
+                    setting.fresh = False
                     settings.append(setting)
             self.store_settings(settings)
 
@@ -193,7 +196,9 @@ class ScoreSpecification(Specification):
                 settings = []
                 existing_settings = self.context_tree.get_settings(attribute_name='rhythm')
                 for existing_setting in existing_settings:
-                    setting = existing_setting.copy(segment_name=segment.name, fresh=False)
+                    setting = copy.deepcopy(existing_setting)
+                    setting.segment_name = segment.name
+                    setting.fresh = False
                     settings.append(setting)
             self.store_settings(settings)
 
@@ -236,9 +241,10 @@ class ScoreSpecification(Specification):
         return result
 
     def make_resolved_setting(self, setting):
-        resolved_setting = copy.deepcopy(setting)
         value = self.resolve_setting_source(setting)
-        resolved_setting.value = value
+        arguments = setting._mandatory_argument_values + (value, )
+        resolved_setting = ResolvedSetting(*arguments)
+        resolved_setting.fresh = setting.fresh
         return resolved_setting
 
     def massage_divisions_mapping(self, mapping):
@@ -280,8 +286,6 @@ class ScoreSpecification(Specification):
     def request_divisions(self, voice_name, start_segment_name, n=1):
         return DivisionRetrievalRequest(voice_name, start_segment_name, n=n)
 
-    # TODO: ok to implement callback on attribute retrieval request;
-    #       but what's really needed is callback on actual objects (like divisions)
     def resolve_attribute_retrieval_request(self, request):
         setting = self.change_attribute_retrieval_indicator_to_setting(request.indicator)
         value = setting.value
@@ -292,6 +296,14 @@ class ScoreSpecification(Specification):
             #self._debug(value, 'value after callback')
         result = self.apply_offset_and_count(request, value)
         return result
+
+    def resolve_setting_source(self, setting):
+        if isinstance(setting.source, AttributeRetrievalRequest):
+            return self.resolve_attribute_retrieval_request(setting.source)
+        elif isinstance(setting.source, StatalServerRequest):
+            return setting.source()
+        else:
+            return setting.source
 
     def segment_name_to_index(self, segment_name):
         segment = self[segment_name]
@@ -304,14 +316,6 @@ class ScoreSpecification(Specification):
         stop_offset_pair = self.segment_offset_pairs[stop_segment_index]
         return start_offset_pair[0], stop_offset_pair[1]
 
-    def resolve_setting_source(self, setting):
-        if isinstance(setting.source, AttributeRetrievalRequest):
-            return self.resolve_attribute_retrieval_request(setting.source)
-        elif isinstance(setting.source, StatalServerRequest):
-            return setting.source()
-        else:
-            return setting.source
-
     def select(self, segment_name, context_names=None, scope=None):
         return Selection(segment_name, context_names=context_names, scope=scope)
 
@@ -320,15 +324,10 @@ class ScoreSpecification(Specification):
         Store setting in SEGMENT context tree.
         If persistent, store setting in SCORE context tree.
         '''
-        #self._debug(setting, 'setting')
         resolved_setting = self.make_resolved_setting(setting)
-        #self._debug(resolved_setting, 'resolved setting')
         assert resolved_setting.value is not None, resolved_setting
         segment = self[resolved_setting.segment_name]
-        #self._debug(segment, 'seg')
         context_name = resolved_setting.context_name or segment.context_tree.score_name
-        #self._debug(context_name, 'xn')
-        #print ''
         attribute_name = resolved_setting.attribute_name
         if resolved_setting.attribute_name in segment.context_tree[context_name]:
             message = '{!r} context {!r} already contains {!r} setting.'
