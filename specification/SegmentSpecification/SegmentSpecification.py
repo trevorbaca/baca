@@ -30,11 +30,15 @@ class SegmentSpecification(Specification):
         self.directives = directives or []
         self.name = name
         self.attribute_names = AttributeNameEnumeration()
+        self.payload = ContextTree(self.score_template())
 
     ### SPECIAL METHODS ###
 
     def __getitem__(self, arg):
-        return self.directives.__getitem__(arg)
+        if isinstance(arg, int):
+            return self.directives.__getitem__(arg)
+        else:
+            return self.payload.__getitem__(arg)
 
     def __getslice__(self, start, stop):
         return self.directives.__getslice__(start, stop)
@@ -70,26 +74,15 @@ class SegmentSpecification(Specification):
     @property
     def time_signatures(self):
         setting = self.context_tree.score_context_proxy.get_setting(attribute_name='time_signatures')
+        self._debug(setting, 'setting')
         assert setting.value is not None
         return setting.value
-
-    ### READ / WRITE PUBLIC ATTRIBUTES ###
-
-    @apply
-    def score_template():
-        def fget(self):
-            return self._score_template
-        def fset(self, score_template):
-            assert isinstance(score_template, (scoretemplatetools.ScoreTemplate, type(None)))
-            self._score_template = score_template
-            self._context_tree = ContextTree(self.score_template())
-            self.initialize_context_name_abbreviations()
-        return property(**locals())
 
     ### PUBLIC METHODS ###
 
     def add_time_signatures(self, score):
         time_signatures = self.time_signatures
+        self._debug(time_signatures, 'ts')
         measures = measuretools.make_measures_with_full_measure_spacer_skips(time_signatures)
         context = componenttools.get_first_component_in_expr_with_name(score, 'TimeSignatureContext')
         context.extend(measures)
@@ -124,7 +117,7 @@ class SegmentSpecification(Specification):
                     result.append(directive)
         return result
 
-    def get_divisions_value(self, context_name, scope=None):
+    def get_divisions_value_with_fresh(self, context_name, scope=None):
         '''Return value found in context tree or else default to segment time signatures.
         '''
         value, fresh = self.get_resolved_value('divisions', context_name, scope=scope)
@@ -146,7 +139,6 @@ class SegmentSpecification(Specification):
                 continue
             elif len(settings) == 1:
                 setting = settings[0]
-                self._debug(setting, 'setting with resolved value')
                 assert setting.value is not None
                 return setting.value, setting.fresh
             else:
@@ -171,11 +163,6 @@ class SegmentSpecification(Specification):
         '''Return unresolved setting.
         '''
         return Specification.get_settings(self, segment_name=self.name, **kwargs)
-
-    def initialize_context_name_abbreviations(self):
-        self.context_name_abbreviations = getattr(self.score_template, 'context_name_abbreviations', {})
-        for context_name_abbreviation, context_name in self.context_name_abbreviations.iteritems():
-            setattr(self, context_name_abbreviation, context_name)
 
     def parse_context_token(self, context_token):
         if context_token in self.context_names:
@@ -204,7 +191,6 @@ class SegmentSpecification(Specification):
     def retrieve(self, attribute_name, **kwargs):
         return Specification.retrieve(self, attribute_name, self.name, **kwargs)
 
-    # TODO: work here
     def retrieve_resolved_value(self, attribute_name, **kwargs):
         return Specification.retrieve_resolved_value(self, attribute_name, self.name, **kwargs)
 

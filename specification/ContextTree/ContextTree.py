@@ -10,7 +10,7 @@ class ContextTree(AbjadObject, OrderedDict):
     ### INITIALIZER ###
 
     def __init__(self, score):
-        assert isinstance(score, scoretools.Score)
+        assert isinstance(score, scoretools.Score), score
         OrderedDict.__init__(self)
         self.score = score
         self.initialize_context_proxies()
@@ -61,7 +61,7 @@ class ContextTree(AbjadObject, OrderedDict):
         context_names = []
         if self.score is not None:
             for context in contexttools.iterate_contexts_forward_in_expr(self.score):
-                assert context.context_name is not None
+                assert context.context_name is not None, context.name_name
                 context_names.append(context.name)
         for context_name in sorted(context_names):
             self[context_name] = ContextProxy()

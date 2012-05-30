@@ -86,14 +86,28 @@ class ScoreSpecification(Specification):
         self.segments.append(segment)
         return segment
 
+    def apply_additional_segment_parameters(self):
+        pass 
+
+    def apply_offset_and_count(self, request, value):
+        if request.offset is not None or request.count is not None:
+            original_value_type = type(value)
+            offset = request.offset or 0
+            count = request.count or 0
+            value = sequencetools.CyclicTuple(value)
+            if offset < 0:
+                offset = len(value) - -offset
+            result = value[offset:offset+count]
+            result = original_value_type(result)
+            return result
+        else:
+            return value
+
     def apply_segment_pitch_classes(self):
         pass
 
     def apply_segment_registration(self):
         pass
-
-    def apply_additional_segment_parameters(self):
-        pass 
 
     def calculate_segment_offset_pairs(self):
         segment_durations = [segment.duration for segment in self]
@@ -122,20 +136,6 @@ class ScoreSpecification(Specification):
             divisions = request.callback(divisions)
         divisions = self.apply_offset_and_count(request, divisions)
         return divisions
-
-    def request_divisions(self, voice_name, start_segment_name, n=1):
-        return DivisionsRetrievalRequest(voice_name, start_segment_name, n=n)
-
-    def segment_name_to_offsets(self, segment_name, n=1):
-        start_segment_index = self.segment_name_to_index(segment_name)        
-        stop_segment_index = start_segment_index + n - 1
-        start_offset_pair = self.segment_offset_pairs[start_segment_index]
-        stop_offset_pair = self.segment_offset_pairs[stop_segment_index]
-        return start_offset_pair[0], stop_offset_pair[1]
-
-    def segment_name_to_index(self, segment_name):
-        segment = self[segment_name]
-        return self.index(segment)
 
     def index(self, segment):
         return self.segments.index(segment)
@@ -210,18 +210,15 @@ class ScoreSpecification(Specification):
 
     def make_divisions_for_voice(self, voice):
         mapping = []
-        self._debug('')
-        self._debug(voice)
         for segment in self.segments:
-            value, fresh = segment.get_divisions_value(voice.name)
+            value, fresh = segment.get_divisions_value_with_fresh(voice.name)
             if isinstance(value, DivisionsRetrievalRequest):
                 value = self.handle_divisions_retrieval_request(value)
             mapping.append(VerboseToken(value, fresh, segment.duration))
-        print ''
-        self._debug(mapping, 'mapping')
         mapping = self.massage_divisions_mapping(mapping)
         divisions = self.make_divisions_from_mapping(mapping)
         self._debug(divisions)
+        segment.payload[voice.name]['divisions'] = divisions
         return divisions
 
     def make_divisions_from_mapping(self, mapping):
@@ -269,6 +266,9 @@ class ScoreSpecification(Specification):
         parts = sequencetools.partition_sequence_by_backgrounded_weights(divisions, self.segment_durations)
         return parts
 
+    def request_divisions(self, voice_name, start_segment_name, n=1):
+        return DivisionsRetrievalRequest(voice_name, start_segment_name, n=n)
+
     # TODO: ok to implement callback on attribute retrieval request;
     #       but what's really needed is callback on actual objects (like divisions)
     def resolve_attribute_retrieval_request(self, request):
@@ -282,19 +282,16 @@ class ScoreSpecification(Specification):
         result = self.apply_offset_and_count(request, value)
         return result
 
-    def apply_offset_and_count(self, request, value):
-        if request.offset is not None or request.count is not None:
-            original_value_type = type(value)
-            offset = request.offset or 0
-            count = request.count or 0
-            value = sequencetools.CyclicTuple(value)
-            if offset < 0:
-                offset = len(value) - -offset
-            result = value[offset:offset+count]
-            result = original_value_type(result)
-            return result
-        else:
-            return value
+    def segment_name_to_index(self, segment_name):
+        segment = self[segment_name]
+        return self.index(segment)
+
+    def segment_name_to_offsets(self, segment_name, n=1):
+        start_segment_index = self.segment_name_to_index(segment_name)        
+        stop_segment_index = start_segment_index + n - 1
+        start_offset_pair = self.segment_offset_pairs[start_segment_index]
+        stop_offset_pair = self.segment_offset_pairs[stop_segment_index]
+        return start_offset_pair[0], stop_offset_pair[1]
 
     def resolve_setting(self, setting):
         resolved_setting = copy.deepcopy(setting)
