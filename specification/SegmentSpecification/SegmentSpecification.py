@@ -74,15 +74,15 @@ class SegmentSpecification(Specification):
     @property
     def time_signatures(self):
         setting = self.context_tree.score_context_proxy.get_setting(attribute_name='time_signatures')
-        self._debug(setting, 'setting')
-        assert setting.value is not None
+        #self._debug(setting, 'setting')
+        assert isinstance(setting.value, list), setting.value
         return setting.value
 
     ### PUBLIC METHODS ###
 
     def add_time_signatures(self, score):
         time_signatures = self.time_signatures
-        self._debug(time_signatures, 'ts')
+        #self._debug(time_signatures, 'ts')
         measures = measuretools.make_measures_with_full_measure_spacer_skips(time_signatures)
         context = componenttools.get_first_component_in_expr_with_name(score, 'TimeSignatureContext')
         context.extend(measures)
@@ -98,9 +98,11 @@ class SegmentSpecification(Specification):
             if offset is not None:
                 assert count is None
                 source = HandlerRequest(source, offset=offset)
-        elif isinstance(source, (AttributeRetrievalIndicator, DivisionsRetrievalRequest)):
+        elif isinstance(source, AttributeRetrievalIndicator):
             if any([x is not None for x in (callback, count, offset)]):
-                #source = AttributeRetrievalRequest(source, callback=callback, count=count, offset=offset)
+                source = AttributeRetrievalRequest(source, callback=callback, count=count, offset=offset)
+        elif isinstance(source, DivisionsRetrievalRequest):
+            if any([x is not None for x in (callback, count, offset)]):
                 source = copy.copy(source)
                 source.callback = callback
                 source.count = count

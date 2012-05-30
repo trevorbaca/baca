@@ -36,6 +36,8 @@ class Specification(SettingReservoir):
         self.context_name_abbreviations = getattr(self.score_template, 'context_name_abbreviations', {})
         for context_name_abbreviation, context_name in self.context_name_abbreviations.iteritems():
             setattr(self, context_name_abbreviation, context_name)
+        score = self.score_template()
+        self.score_name = score.name
 
     def retrieve(self, attribute_name, segment_name, context_name=None, scope=None):
         return AttributeRetrievalIndicator(attribute_name, segment_name, context_name=context_name, scope=scope)

@@ -198,7 +198,12 @@ class ScoreSpecification(Specification):
             self.store_settings(settings)
 
     def interpret_segment_time_signatures(self):
+        '''Check each segment for an explicit time signature setting.
+        If none, check SCORE context tree for current time signature setting.
+        A time signature setting must be found: store it.
+        '''
         for segment in self.segments:
+            self._debug(segment, 'seg')
             settings = segment.get_settings(attribute_name='time_signatures')
             if not settings:
                 settings = self.context_tree.get_settings(attribute_name='time_signatures')
@@ -217,7 +222,7 @@ class ScoreSpecification(Specification):
             mapping.append(VerboseToken(value, fresh, segment.duration))
         mapping = self.massage_divisions_mapping(mapping)
         divisions = self.make_divisions_from_mapping(mapping)
-        self._debug(divisions)
+        #self._debug(divisions)
         segment.payload[voice.name]['divisions'] = divisions
         return divisions
 
@@ -229,6 +234,12 @@ class ScoreSpecification(Specification):
             divisions = [x.pair for x in divisions]
             result.extend(divisions)
         return result
+
+    def make_resolved_setting(self, setting):
+        resolved_setting = copy.deepcopy(setting)
+        value = self.resolve_setting_source(setting)
+        resolved_setting.value = value
+        return resolved_setting
 
     def massage_divisions_mapping(self, mapping):
         if not mapping:
@@ -293,12 +304,6 @@ class ScoreSpecification(Specification):
         stop_offset_pair = self.segment_offset_pairs[stop_segment_index]
         return start_offset_pair[0], stop_offset_pair[1]
 
-    def resolve_setting(self, setting):
-        resolved_setting = copy.deepcopy(setting)
-        value = self.resolve_setting_source(setting)
-        resolved_setting.value = value
-        return resolved_setting
-
     def resolve_setting_source(self, setting):
         if isinstance(setting.source, AttributeRetrievalRequest):
             return self.resolve_attribute_retrieval_request(setting.source)
@@ -311,11 +316,26 @@ class ScoreSpecification(Specification):
         return Selection(segment_name, context_names=context_names, scope=scope)
 
     def store_setting(self, setting):
-        segment = self[setting.segment_name]
-        context_name = setting.context_name or segment.context_tree.score_name
-        resolved_setting = self.resolve_setting(setting)
-        segment.context_tree[context_name][setting.attribute_name] = resolved_setting
-        if setting.persistent:
+        '''Find the segment specified by setting.
+        Store setting in SEGMENT context tree.
+        If persistent, store setting in SCORE context tree.
+        '''
+        #self._debug(setting, 'setting')
+        resolved_setting = self.make_resolved_setting(setting)
+        #self._debug(resolved_setting, 'resolved setting')
+        assert resolved_setting.value is not None, resolved_setting
+        segment = self[resolved_setting.segment_name]
+        #self._debug(segment, 'seg')
+        context_name = resolved_setting.context_name or segment.context_tree.score_name
+        #self._debug(context_name, 'xn')
+        #print ''
+        attribute_name = resolved_setting.attribute_name
+        if resolved_setting.attribute_name in segment.context_tree[context_name]:
+            message = '{!r} context {!r} already contains {!r} setting.'
+            message = message.format(resolved_setting.segment_name, context_name, resolved_setting.attribute_name)
+            raise Exception(message)
+        segment.context_tree[context_name][resolved_setting.attribute_name] = resolved_setting
+        if resolved_setting.persistent:
             self.context_tree[context_name][setting.attribute_name] = resolved_setting
 
     def store_settings(self, settings):
