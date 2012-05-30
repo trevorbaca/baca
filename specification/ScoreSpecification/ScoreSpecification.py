@@ -27,6 +27,7 @@ class ScoreSpecification(Specification):
         self.segment_specification_class = segment_specification_class or SegmentSpecification
         self.segments = segments or []
         self.context_tree = ContextTree(self.score_template()) 
+        self.payload = ContextTree(self.score_template())
 
     ### SPECIAL METHODS ###
 
@@ -53,8 +54,13 @@ class ScoreSpecification(Specification):
 
     def add_divisions(self):
         for voice in voicetools.iterate_voices_forward_in_expr(self.score):
-            divisions = self.make_divisions_for_voice(voice)
+            divisions = self.make_divisions_for_voice_scorewide(voice)
             marktools.Annotation('divisions', divisions)(voice)
+            segment_division_lists = self.make_annotated_segment_division_lists(voice)
+            assert len(self.segments) == len(segment_division_lists)
+            for segment, segment_division_list in zip(self.segments, segment_division_lists):
+                segment.payload[voice.name]['divisions'] = segment_division_list
+                segment.payload[voice.name]['pairs'] = [x.pair for x in segment_division_list]
 
     def add_rhythms(self):
         for voice in voicetools.iterate_voices_forward_in_expr(self.score):
@@ -109,6 +115,12 @@ class ScoreSpecification(Specification):
 
     def apply_segment_registration(self):
         pass
+
+    def make_annotated_segment_division_lists(self, voice):
+        divisions = marktools.get_value_of_annotation_attached_to_component(voice, 'divisions') 
+        divisions = [mathtools.NonreducedFraction(x) for x in divisions]
+        lists = sequencetools.split_sequence_once_by_weights_with_overhang(divisions, self.segment_durations)
+        return lists
 
     def calculate_segment_offset_pairs(self):
         segment_durations = [segment.duration for segment in self]
@@ -208,7 +220,7 @@ class ScoreSpecification(Specification):
         A time signature setting must be found: store it.
         '''
         for segment in self.segments:
-            self._debug(segment, 'seg')
+            #self._debug(segment, 'seg')
             settings = segment.get_settings(attribute_name='time_signatures')
             if settings:
                 assert len(settings) == 1
@@ -220,12 +232,15 @@ class ScoreSpecification(Specification):
                 # TODO: implement helper on some class somewhere to do just these two lines
                 setting = copy.deepcopy(setting)
                 setting.segment_name = segment.name
-            self._debug(setting)
+            #self._debug(setting)
             assert setting.context_name is None
             assert setting.scope is None
             self.store_setting(setting)
 
-    def make_divisions_for_voice(self, voice):
+    def make_divisions_for_voice_scorewide(self, voice):
+        '''Called only once for each voice in score.
+        Make divisions For the entire voice scorewide.
+        '''
         mapping = []
         for segment in self.segments:
             value, fresh = segment.get_divisions_value_with_fresh(voice.name)
@@ -234,8 +249,9 @@ class ScoreSpecification(Specification):
             mapping.append(VerboseToken(value, fresh, segment.duration))
         mapping = self.massage_divisions_mapping(mapping)
         divisions = self.make_divisions_from_mapping(mapping)
-        #self._debug(divisions)
-        segment.payload[voice.name]['divisions'] = divisions
+        self._debug(divisions, 'divisions')
+        #segment.payload[voice.name]['divisions'] = divisions[:]
+        self.payload[voice.name]['divisions'] = divisions[:]
         return divisions
 
     def make_divisions_from_mapping(self, mapping):
