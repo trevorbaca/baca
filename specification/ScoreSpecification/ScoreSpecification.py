@@ -241,6 +241,8 @@ class ScoreSpecification(Specification):
         return result
 
     def make_resolved_setting(self, setting):
+        if isinstance(setting, ResolvedSetting):
+            return setting
         value = self.resolve_setting_source(setting)
         arguments = setting._mandatory_argument_values + (value, )
         resolved_setting = ResolvedSetting(*arguments)
@@ -320,17 +322,16 @@ class ScoreSpecification(Specification):
         return Selection(segment_name, context_names=context_names, scope=scope)
 
     def store_setting(self, setting):
-        '''Find the segment specified by setting.
-        Store setting in SEGMENT context tree.
-        If persistent, store setting in SCORE context tree.
+        '''Resolve setting and find segment specified by setting.
+        Store setting in SEGMENT context tree and, if persistent, in SCORE context tree, too.
         '''
         resolved_setting = self.make_resolved_setting(setting)
-        assert resolved_setting.value is not None, resolved_setting
+        assert isinstance(resolved_setting, ResolvedSetting), resolved_setting
         segment = self[resolved_setting.segment_name]
         context_name = resolved_setting.context_name or segment.context_tree.score_name
         attribute_name = resolved_setting.attribute_name
         if resolved_setting.attribute_name in segment.context_tree[context_name]:
-            message = '{!r} context {!r} already contains {!r} setting.'
+            message = '{!r} {!r} already contains {!r} setting.'
             message = message.format(resolved_setting.segment_name, context_name, resolved_setting.attribute_name)
             raise Exception(message)
         segment.context_tree[context_name][resolved_setting.attribute_name] = resolved_setting

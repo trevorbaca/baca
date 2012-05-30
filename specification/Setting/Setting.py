@@ -5,13 +5,6 @@ from baca.specification.Selection import Selection
 
 class Setting(AbjadObject):
 
-    ### CLASS ATTRIBUTES ###
-
-    initializer_attribute_names = (
-        'segment_name', 'context_name', 'scope', 'attribute_name', 'source', 'persistent', 
-        'fresh',
-        )
-
     ### INITIALIZER ###
 
     def __init__(self, segment_name, context_name, scope, attribute_name, source, persistent, fresh=True):
