@@ -8,7 +8,6 @@ from Directive import Directive
 from DivisionsRetrievalRequest import DivisionsRetrievalRequest
 from HandlerRequest import HandlerRequest
 from MomentIndicator import MomentIndicator
-from PayloadRetrievalRequest import PayloadRetrievalRequest
 from ScopedValue import ScopedValue
 from ScoreSpecification import ScoreSpecification
 from SegmentSpecification import SegmentSpecification
