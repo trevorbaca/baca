@@ -2,7 +2,7 @@ from abjad.tools.abctools.AbjadObject import AbjadObject
 from baca.specification.Callback import Callback
 
 
-class DivisionsRetrievalRequest(AbjadObject):
+class DivisionRetrievalRequest(AbjadObject):
 
     ### INITIALIZER ###
 

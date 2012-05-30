@@ -1,7 +1,5 @@
 1. refactor interpret() n * O(n) traversal to O(n) with first-pass sort.
 
-2. rename DivisionsRetrievalRequest to DivisionRetrievalRequest.
+2. implement new ResolvedSetting class to model state transition from setting to resolved setting.
 
-3. implement new ResolvedSetting class to model state transition from setting to resolved setting.
-
-4. implement RetrievalRequest as base class for different retrieval requests classes.
+3. implement RetrievalRequest as base class for different retrieval requests classes.

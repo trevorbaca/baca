@@ -5,7 +5,7 @@ from Callback import Callback
 from ContextProxy import ContextProxy
 from ContextTree import ContextTree
 from Directive import Directive
-from DivisionsRetrievalRequest import DivisionsRetrievalRequest
+from DivisionRetrievalRequest import DivisionRetrievalRequest
 from HandlerRequest import HandlerRequest
 from MomentIndicator import MomentIndicator
 from ScopedValue import ScopedValue

@@ -1,7 +1,7 @@
 from abjad.tools import *
 from baca.specification.AttributeRetrievalRequest import AttributeRetrievalRequest
 from baca.specification.ContextTree import ContextTree
-from baca.specification.DivisionsRetrievalRequest import DivisionsRetrievalRequest
+from baca.specification.DivisionRetrievalRequest import DivisionRetrievalRequest
 from baca.specification.ScopedValue import ScopedValue
 from baca.specification.SegmentSpecification import SegmentSpecification
 from baca.specification.Selection import Selection
@@ -217,7 +217,7 @@ class ScoreSpecification(Specification):
         mapping = []
         for segment in self.segments:
             value, fresh = segment.get_divisions_value_with_fresh(voice.name)
-            if isinstance(value, DivisionsRetrievalRequest):
+            if isinstance(value, DivisionRetrievalRequest):
                 value = self.handle_divisions_retrieval_request(value)
             mapping.append(VerboseToken(value, fresh, segment.duration))
         mapping = self.massage_divisions_mapping(mapping)
@@ -278,7 +278,7 @@ class ScoreSpecification(Specification):
         return parts
 
     def request_divisions(self, voice_name, start_segment_name, n=1):
-        return DivisionsRetrievalRequest(voice_name, start_segment_name, n=n)
+        return DivisionRetrievalRequest(voice_name, start_segment_name, n=n)
 
     # TODO: ok to implement callback on attribute retrieval request;
     #       but what's really needed is callback on actual objects (like divisions)

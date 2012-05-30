@@ -7,7 +7,7 @@ from baca.specification.AttributeRetrievalRequest import AttributeRetrievalReque
 from baca.specification.Callback import Callback
 from baca.specification.ContextTree import ContextTree
 from baca.specification.Directive import Directive
-from baca.specification.DivisionsRetrievalRequest import DivisionsRetrievalRequest
+from baca.specification.DivisionRetrievalRequest import DivisionRetrievalRequest
 from baca.specification.HandlerRequest import HandlerRequest
 from baca.specification.Scope import Scope
 from baca.specification.Specification import Specification
@@ -101,7 +101,7 @@ class SegmentSpecification(Specification):
         elif isinstance(source, AttributeRetrievalIndicator):
             if any([x is not None for x in (callback, count, offset)]):
                 source = AttributeRetrievalRequest(source, callback=callback, count=count, offset=offset)
-        elif isinstance(source, DivisionsRetrievalRequest):
+        elif isinstance(source, DivisionRetrievalRequest):
             if any([x is not None for x in (callback, count, offset)]):
                 source = copy.copy(source)
                 source.callback = callback
