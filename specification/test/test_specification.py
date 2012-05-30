@@ -141,17 +141,19 @@ def test_specification_03():
     assert score.format == read_score_ly_file(current_function_name)
 
 
+# TODO: break the span beam between segments!
+#       that's all that remains to do for this test.
 def test_specification_04():
     '''As above with T2 equal to T1 and a hard break between.
     '''
-    py.test.skip('working on this one.')
+    #py.test.skip('working on this one.')
 
     specification = ScoreSpecification(scoretemplatetools.GroupedRhythmicStavesScoreTemplate(n=4))
 
     segment = specification.append_segment('T1')
     segment.set_time_signatures(segment, [(4, 8), (3, 8)])
     
-    segment.set_divisions(segment.v1, [(3, 16)])
+    segment.set_divisions(segment.v1, [(3, 16)], truncate=True)
 
     source = specification.request_divisions(segment.v1, 'T1', n=1) 
     segment.set_divisions_rotated_by_count(segment.v2, source, -1)

@@ -7,12 +7,14 @@ class Setting(AbjadObject):
 
     ### INITIALIZER ###
 
-    def __init__(self, segment_name, context_name, scope, attribute_name, source, persistent, fresh=True):
+    def __init__(self, segment_name, context_name, scope, attribute_name, source, persistent, truncate, 
+        fresh=True):
         assert isinstance(segment_name, str), segment_name
         assert isinstance(context_name, (str, type(None))), context_name
+        assert isinstance(scope, (Scope, type(None))), scope
         assert isinstance(attribute_name, str), attribute_name
         assert isinstance(persistent, bool), persistent
-        assert isinstance(scope, (Scope, type(None))), scope
+        assert isinstance(truncate, bool), truncate
         assert isinstance(fresh, type(True)), fresh
         self.segment_name = segment_name
         self.context_name = context_name
@@ -20,6 +22,7 @@ class Setting(AbjadObject):
         self.attribute_name = attribute_name
         self.source = source
         self.persistent = persistent
+        self.truncate = truncate
         self.fresh = fresh
 
     ### READ-ONLY PRIVATE PROPERTIES ###

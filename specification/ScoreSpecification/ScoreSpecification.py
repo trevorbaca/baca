@@ -14,7 +14,8 @@ import copy
 
 
 Token = collections.namedtuple('Token', ['value', 'duration'])
-VerboseToken = collections.namedtuple('VerboseToken', ['value', 'fresh', 'duration'])
+SegmentDivisionToken = collections.namedtuple(
+    'SegmentDivisionToken', ['value', 'fresh', 'truncate', 'duration'])
 RhythmToken = collections.namedtuple('RhythmToken', ['value', 'fresh'])
 
 class ScoreSpecification(Specification):
@@ -239,18 +240,19 @@ class ScoreSpecification(Specification):
 
     def make_divisions_for_voice_scorewide(self, voice):
         '''Called only once for each voice in score.
-        Make divisions For the entire voice scorewide.
+        Make divisions for entire voice scorewide.
         '''
         mapping = []
         for segment in self.segments:
-            value, fresh = segment.get_divisions_value_with_fresh(voice.name)
+            value, fresh, truncate = segment.get_divisions_value_with_fresh_and_truncate(voice.name)
+            self._debug((value, truncate), 'value & truncate')
             if isinstance(value, DivisionRetrievalRequest):
                 value = self.handle_divisions_retrieval_request(value)
-            mapping.append(VerboseToken(value, fresh, segment.duration))
+            mapping.append(SegmentDivisionToken(value, fresh, truncate, segment.duration))
         mapping = self.massage_divisions_mapping(mapping)
         divisions = self.make_divisions_from_mapping(mapping)
         self._debug(divisions, 'divisions')
-        #segment.payload[voice.name]['divisions'] = divisions[:]
+        print ''
         self.payload[voice.name]['divisions'] = divisions[:]
         return divisions
 
@@ -276,13 +278,13 @@ class ScoreSpecification(Specification):
             return
         result = []
         assert mapping[0].fresh
-        for verbose_token in mapping:
-            if verbose_token.fresh:
-                result.append(Token(verbose_token.value, verbose_token.duration))
+        for division_token in mapping:
+            if division_token.fresh or division_token.truncate:
+                result.append(Token(division_token.value, division_token.duration))
             else:
                 last_token = result[-1]
-                assert verbose_token.value == last_token.value
-                new_token = Token(last_token.value, last_token.duration + verbose_token.duration)
+                assert division_token.value == last_token.value
+                new_token = Token(last_token.value, last_token.duration + division_token.duration)
                 result[-1] = new_token
         return result
 

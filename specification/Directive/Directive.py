@@ -7,18 +7,19 @@ class Directive(AbjadObject):
 
     ### INITIALIZER ###
 
-    def __init__(self, target_selection, attribute_name, source, persistent=True):
+    def __init__(self, target_selection, attribute_name, source, persistent=True, truncate=False):
         self.target_selection = target_selection
         self.attribute_name = attribute_name
         self.source = source
         self.persistent = persistent
+        self.truncate = truncate
 
     ### PUBLIC METHODS ###
 
     def make_setting_with_context_name(self, context_name):
         args = []
         args.extend([self.target_selection.segment_name, context_name, self.target_selection.scope])
-        args.extend([self.attribute_name, self.source, self.persistent])
+        args.extend([self.attribute_name, self.source, self.persistent, self.truncate])
         return Setting(*args)
 
     def unpack(self):
