@@ -210,10 +210,17 @@ class ScoreSpecification(Specification):
         for segment in self.segments:
             self._debug(segment, 'seg')
             settings = segment.get_settings(attribute_name='time_signatures')
-            if not settings:
+            if settings:
+                assert len(settings) == 1
+                setting = settings[0]
+            else:
                 settings = self.context_tree.get_settings(attribute_name='time_signatures')
-            assert len(settings) == 1
-            setting = settings[0]
+                assert len(settings) == 1
+                setting = settings[0]
+                # TODO: implement helper on some class somewhere to do just these two lines
+                setting = copy.deepcopy(setting)
+                setting.segment_name = segment.name
+            self._debug(setting)
             assert setting.context_name is None
             assert setting.scope is None
             self.store_setting(setting)
@@ -241,8 +248,7 @@ class ScoreSpecification(Specification):
         return result
 
     def make_resolved_setting(self, setting):
-        if isinstance(setting, ResolvedSetting):
-            return setting
+        if isinstance(setting, ResolvedSetting): return setting
         value = self.resolve_setting_source(setting)
         arguments = setting._mandatory_argument_values + (value, )
         resolved_setting = ResolvedSetting(*arguments)
