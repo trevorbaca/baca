@@ -1,6 +1,6 @@
-from abjad.tools.abctools.AbjadObject import AbjadObject
 from abjad.tools import componenttools
 from abjad.tools import mathtools
+from abjad.tools.abctools.AbjadObject import AbjadObject
 
 
 class Scope(AbjadObject):
