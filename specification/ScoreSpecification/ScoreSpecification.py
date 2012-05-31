@@ -63,6 +63,8 @@ class ScoreSpecification(Specification):
         divisions = self.make_divisions_for_voice_scorewide(voice)
         marktools.Annotation('divisions', divisions)(voice)
         segment_division_lists = self.make_segment_division_lists(voice)
+        for x in segment_division_lists: print x
+        print ''
         assert len(self.segments) == len(segment_division_lists)
         for segment, segment_division_list in zip(self.segments, segment_division_lists):
             segment.payload[voice.name]['divisions'] = segment_division_list
@@ -72,13 +74,20 @@ class ScoreSpecification(Specification):
         for voice in voicetools.iterate_voices_forward_in_expr(self.score):
             self.add_rhythms_to_voice(voice)
 
+    # TODO: work here and change the way the rhythm mapping is massaged
+    #       so that the only time segments are beamed together is when
+    #       facing ends of adjacent segment division lists are open
     def add_rhythms_to_voice(self, voice):
         mapping = []
         for segment in self.segments:
             value, fresh = segment.get_rhythm_value(voice.name)
             mapping.append(RhythmToken(value, fresh))
         result = []
+        # TODO: can not rely on lists of nonreduced fractions; use division lists here instead
         parts = self.partition_voice_divisions_by_segment_durations(voice)
+        for part in parts: print part
+        print ''
+        print ''
         mapping, parts = self.massage_rhythm_mapping_and_parts(mapping, parts)
         for token, part in zip(mapping, parts):
             maker = token.value
