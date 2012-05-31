@@ -9,17 +9,37 @@ class Division(NonreducedFraction):
 
     ### INITIALIZER ###
 
-    def __new__(self, pair, is_left_closed=True, is_right_closed=True):
+    def __new__(self, pair, is_left_closed=None, is_right_closed=None):
         self = NonreducedFraction.__new__(self, pair)
+        if is_left_closed is None:
+            is_left_closed = getattr(pair, 'is_left_closed', True)
+        if is_right_closed is None:
+            is_right_closed = getattr(pair, 'is_right_closed', True)
         self.is_left_closed = is_left_closed
         self.is_right_closed = is_right_closed
         return self
 
-    ### READ-ONLY PRIVATE PROPERTIES ###
+    ### SPECIAL METHODS ###
 
-    @property
-    def _mandatory_argument_values(self):
-        return (self.pair, )
+    def __eq__(self, expr):
+        if not isinstance(expr, type(self)):
+            return False
+        if not self.pair == expr.pair:
+            return False
+        if not self.is_left_closed == expr.is_left_closed:
+            return False
+        if not self.is_right_closed == expr.is_right_closed:
+            return False
+        return True
+
+    def __repr__(self):
+        contents = [repr(self.pair)]
+        if not self.is_left_closed:
+            contents.append('is_left_closed=False')
+        if not self.is_right_closed:
+            contents.append('is_right_closed=False')
+        contents = ', '.join(contents)
+        return '{}({})'.format(self._class_name, contents)
 
     ### READ-ONLY PUBLIC PROPERTIES ###
 

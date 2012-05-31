@@ -6,6 +6,7 @@ from ContextProxy import ContextProxy
 from ContextTree import ContextTree
 from Directive import Directive
 from Division import Division
+from DivisionList import DivisionList
 from DivisionRetrievalRequest import DivisionRetrievalRequest
 from HandlerRequest import HandlerRequest
 from MomentIndicator import MomentIndicator
