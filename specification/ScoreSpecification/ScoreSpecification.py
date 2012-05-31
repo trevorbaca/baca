@@ -1,6 +1,8 @@
 from abjad.tools import *
 from baca.specification.AttributeRetrievalRequest import AttributeRetrievalRequest
 from baca.specification.ContextTree import ContextTree
+from baca.specification.Division import Division
+from baca.specification.DivisionList import DivisionList
 from baca.specification.DivisionRetrievalRequest import DivisionRetrievalRequest
 from baca.specification.ResolvedSetting import ResolvedSetting
 from baca.specification.ScopedValue import ScopedValue
@@ -55,13 +57,16 @@ class ScoreSpecification(Specification):
 
     def add_divisions(self):
         for voice in voicetools.iterate_voices_forward_in_expr(self.score):
-            divisions = self.make_divisions_for_voice_scorewide(voice)
-            marktools.Annotation('divisions', divisions)(voice)
-            segment_division_lists = self.make_annotated_segment_division_lists(voice)
-            assert len(self.segments) == len(segment_division_lists)
-            for segment, segment_division_list in zip(self.segments, segment_division_lists):
-                segment.payload[voice.name]['divisions'] = segment_division_list
-                segment.payload[voice.name]['pairs'] = [x.pair for x in segment_division_list]
+            self.add_divisions_to_voice(voice)
+
+    def add_divisions_to_voice(self, voice):
+        divisions = self.make_divisions_for_voice_scorewide(voice)
+        marktools.Annotation('divisions', divisions)(voice)
+        segment_division_lists = self.make_segment_division_lists(voice)
+        assert len(self.segments) == len(segment_division_lists)
+        for segment, segment_division_list in zip(self.segments, segment_division_lists):
+            segment.payload[voice.name]['divisions'] = segment_division_list
+            segment.payload[voice.name]['pairs'] = [x.pair for x in segment_division_list]
 
     def add_rhythms(self):
         for voice in voicetools.iterate_voices_forward_in_expr(self.score):
@@ -116,12 +121,6 @@ class ScoreSpecification(Specification):
 
     def apply_segment_registration(self):
         pass
-
-    def make_annotated_segment_division_lists(self, voice):
-        divisions = marktools.get_value_of_annotation_attached_to_component(voice, 'divisions') 
-        divisions = [mathtools.NonreducedFraction(x) for x in divisions]
-        lists = sequencetools.split_sequence_once_by_weights_with_overhang(divisions, self.segment_durations)
-        return lists
 
     def calculate_segment_offset_pairs(self):
         segment_durations = [segment.duration for segment in self]
@@ -245,14 +244,13 @@ class ScoreSpecification(Specification):
         mapping = []
         for segment in self.segments:
             value, fresh, truncate = segment.get_divisions_value_with_fresh_and_truncate(voice.name)
-            self._debug((value, truncate), 'value & truncate')
+            #self._debug((value, truncate), 'value & truncate')
             if isinstance(value, DivisionRetrievalRequest):
                 value = self.handle_divisions_retrieval_request(value)
             mapping.append(SegmentDivisionToken(value, fresh, truncate, segment.duration))
         mapping = self.massage_divisions_mapping(mapping)
         divisions = self.make_divisions_from_mapping(mapping)
-        self._debug(divisions, 'divisions')
-        print ''
+        #self._debug(divisions, 'divisions')
         self.payload[voice.name]['divisions'] = divisions[:]
         return divisions
 
@@ -272,6 +270,35 @@ class ScoreSpecification(Specification):
         resolved_setting = ResolvedSetting(*arguments)
         resolved_setting.fresh = setting.fresh
         return resolved_setting
+
+    def make_segment_division_lists(self, voice):
+        division_lists = []
+        divisions = marktools.get_value_of_annotation_attached_to_component(voice, 'divisions') 
+        divisions = [mathtools.NonreducedFraction(x) for x in divisions]
+        shards = sequencetools.split_sequence_once_by_weights_with_overhang(divisions, self.segment_durations)
+        divisions = [Division(x) for x in divisions]
+        for i, shard in enumerate(shards[:]):
+            shards[i] = [Division(x) for x in shard]
+        #self._debug(divisions, 'divs')
+        #self._debug(shards, 'shards')
+        #self._debug(self.segment_durations)
+        reconstructed_divisions = []
+        glue_next_division = False
+        for i, shard in enumerate(shards):
+            division_list = DivisionList(shard)
+            if glue_next_division:
+                division_list[0].is_left_open = True
+                reconstructed_divisions[-1] = divisions[len(reconstructed_divisions) - 1]
+                reconstructed_divisions.extend(shard[1:])
+                glue_next_division = False
+            else:
+                reconstructed_divisions.extend(shard)
+            assert reconstructed_divisions[:-1] == divisions[:len(reconstructed_divisions) - 1]
+            if not reconstructed_divisions[-1] == divisions[len(reconstructed_divisions) - 1]:
+                division_list[-1].is_right_open = True
+                glue_next_division = True
+            division_lists.append(division_list)
+        return division_lists
 
     def massage_divisions_mapping(self, mapping):
         if not mapping:
