@@ -9,14 +9,14 @@ class Division(NonreducedFraction):
 
     ### INITIALIZER ###
 
-    def __new__(self, pair, is_left_closed=None, is_right_closed=None):
+    def __new__(self, pair, is_left_open=None, is_right_open=None):
         self = NonreducedFraction.__new__(self, pair)
-        if is_left_closed is None:
-            is_left_closed = getattr(pair, 'is_left_closed', True)
-        if is_right_closed is None:
-            is_right_closed = getattr(pair, 'is_right_closed', True)
-        self.is_left_closed = is_left_closed
-        self.is_right_closed = is_right_closed
+        if is_left_open is None:
+            is_left_open = getattr(pair, 'is_left_open', False)
+        if is_right_open is None:
+            is_right_open = getattr(pair, 'is_right_open', False)
+        self.is_left_open = is_left_open
+        self.is_right_open = is_right_open
         return self
 
     ### SPECIAL METHODS ###
@@ -34,10 +34,10 @@ class Division(NonreducedFraction):
 
     def __repr__(self):
         contents = [repr(self.pair)]
-        if not self.is_left_closed:
-            contents.append('is_left_closed=False')
-        if not self.is_right_closed:
-            contents.append('is_right_closed=False')
+        if self.is_left_open:
+            contents.append('is_left_open=True')
+        if self.is_right_open:
+            contents.append('is_right_open=True')
         contents = ', '.join(contents)
         return '{}({})'.format(self._class_name, contents)
 

@@ -13,6 +13,16 @@ class DivisionList(AbjadObject):
 
     ### SPECIAL METHODS ###
 
+    def __add__(self, expr):
+        assert isinstance(expr, type(self)), expr
+        assert self.is_right_open, self
+        assert expr.is_left_open, expr
+        divisions = []
+        divisions.extend(self[:-1])
+        divisions.append(self[-1] + expr[0])
+        divisions.extend(expr[1:])
+        return type(self)(divisions, is_left_open=self.is_left_open, is_right_open=expr.is_right_open)
+
     def __getitem__(self, expr):
         return self.divisions.__getitem__(expr)
 

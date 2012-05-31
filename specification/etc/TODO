@@ -2,4 +2,5 @@
 
 2. implement RetrievalRequest as base class for different retrieval requests classes.
 
-3. extend ContextProxy to store *resolved* settings only.
+3. extend ContextProxy to store *resolved* settings only ... only this won't do for the payload context proxies;
+   so maybe subclass ContextProxy to ResolvedSettingContextProxy?

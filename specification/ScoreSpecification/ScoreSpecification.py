@@ -63,33 +63,57 @@ class ScoreSpecification(Specification):
         divisions = self.make_divisions_for_voice_scorewide(voice)
         marktools.Annotation('divisions', divisions)(voice)
         segment_division_lists = self.make_segment_division_lists(voice)
-        for x in segment_division_lists: print x
-        print ''
+        #for x in segment_division_lists: print x
+        #print ''
         assert len(self.segments) == len(segment_division_lists)
         for segment, segment_division_list in zip(self.segments, segment_division_lists):
-            segment.payload[voice.name]['divisions'] = segment_division_list
+            segment.payload[voice.name]['division_list'] = segment_division_list
             segment.payload[voice.name]['pairs'] = [x.pair for x in segment_division_list]
 
     def add_rhythms(self):
         for voice in voicetools.iterate_voices_forward_in_expr(self.score):
             self.add_rhythms_to_voice(voice)
 
-    # TODO: work here and change the way the rhythm mapping is massaged
-    #       so that the only time segments are beamed together is when
-    #       facing ends of adjacent segment division lists are open
-    def add_rhythms_to_voice(self, voice):
-        mapping = []
+    def get_division_lists_for_all_segments_in_voice(self, voice):
+        division_lists = []
+        for segment in self.segments:
+            division_list = segment.payload[voice.name]['division_list']
+            division_lists.append(division_list)
+        return division_lists
+
+    # incompletely implemented because not sure we need this
+#    def get_glued_division_lists_for_voice(self, voice):
+#        result = []
+#        division_lists = self.get_division_lists_for_all_segments_in_voice(voice)
+#        assert division_lists[0].is_left_closed
+#        result.append(division_lists[0])
+        
+    def get_rhythm_tokens_for_all_segments_in_voice(self, voice):
+        rhythm_tokens = []
         for segment in self.segments:
             value, fresh = segment.get_rhythm_value(voice.name)
-            mapping.append(RhythmToken(value, fresh))
+            rhythm_tokens.append(RhythmToken(value, fresh))
+        return rhythm_tokens
+
+    # TODO: resume work here and get the best out of both the partition and division getter functions
+    def add_rhythms_to_voice(self, voice):
         result = []
-        # TODO: can not rely on lists of nonreduced fractions; use division lists here instead
+        rhythm_tokens = self.get_rhythm_tokens_for_all_segments_in_voice(voice)
         parts = self.partition_voice_divisions_by_segment_durations(voice)
-        for part in parts: print part
+        #parts = division_lists = self.get_division_lists_for_all_segments_in_voice(voice)
+        for x in rhythm_tokens: print x
+        print 'x'
+        for x in parts: print x
+        print 'y' 
+        assert len(rhythm_tokens) == len(parts)
+        rhythm_tokens, parts = self.massage_rhythm_tokens_and_parts(rhythm_tokens, parts)
+        assert len(rhythm_tokens) == len(parts)
+        for x in rhythm_tokens: print x
+        print 'z'
+        for x in parts: print x
+        print '-' 
         print ''
-        print ''
-        mapping, parts = self.massage_rhythm_mapping_and_parts(mapping, parts)
-        for token, part in zip(mapping, parts):
+        for token, part in zip(rhythm_tokens, parts):
             maker = token.value
             assert isinstance(maker, timetokentools.TimeTokenMaker)
             leaf_lists = maker(part)
@@ -288,9 +312,6 @@ class ScoreSpecification(Specification):
         divisions = [Division(x) for x in divisions]
         for i, shard in enumerate(shards[:]):
             shards[i] = [Division(x) for x in shard]
-        #self._debug(divisions, 'divs')
-        #self._debug(shards, 'shards')
-        #self._debug(self.segment_durations)
         reconstructed_divisions = []
         glue_next_division = False
         for i, shard in enumerate(shards):
@@ -324,19 +345,17 @@ class ScoreSpecification(Specification):
                 result[-1] = new_token
         return result
 
-    def massage_rhythm_mapping_and_parts(self, mapping, parts):
-        if not mapping:
-            return
-        assert len(mapping) == len(parts)
-        assert mapping[0].fresh
-        new_mapping, new_parts = [mapping[0]], [parts[0][:]]
-        for token, part in zip(mapping[1:], parts[1:]):
-            if token.value == new_mapping[-1].value and not token.fresh:
+    def massage_rhythm_tokens_and_parts(self, rhythm_tokens, parts):
+        assert len(rhythm_tokens) == len(parts)
+        assert rhythm_tokens[0].fresh
+        new_rhythm_tokens, new_parts = [rhythm_tokens[0]], [parts[0][:]]
+        for rhythm_token, part in zip(rhythm_tokens[1:], parts[1:]):
+            if rhythm_token.value == new_rhythm_tokens[-1].value and not rhythm_token.fresh:
                 new_parts[-1].extend(part)
             else:
-                new_mapping.append(token)
+                new_rhythm_tokens.append(rhythm_token)
                 new_parts.append(part[:])
-        return new_mapping, new_parts
+        return new_rhythm_tokens, new_parts
 
     def partition_voice_divisions_by_segment_durations(self, voice):
         divisions = marktools.get_value_of_annotation_attached_to_component(voice, 'divisions')
