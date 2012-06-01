@@ -33,13 +33,22 @@ class Division(NonreducedFraction):
         return True
 
     def __repr__(self):
-        contents = [repr(self.pair)]
+#        contents = [repr(self.pair)]
+#        if self.is_left_open:
+#            contents.append('is_left_open=True')
+#        if self.is_right_open:
+#            contents.append('is_right_open=True')
+#        contents = ', '.join(contents)
+#        return '{}({})'.format(self._class_name, contents)
         if self.is_left_open:
-            contents.append('is_left_open=True')
+            left_symbol = '(('
+        else:
+            left_symbol = '('
         if self.is_right_open:
-            contents.append('is_right_open=True')
-        contents = ', '.join(contents)
-        return '{}({})'.format(self._class_name, contents)
+            right_symbol = '))'
+        else:
+            right_symbol = ')'
+        return 'D{}{}, {}{}'.format(left_symbol, self.numerator, self.denominator, right_symbol)
 
     ### READ-ONLY PUBLIC PROPERTIES ###
 

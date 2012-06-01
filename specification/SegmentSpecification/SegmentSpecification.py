@@ -121,13 +121,19 @@ class SegmentSpecification(Specification):
     def get_divisions_value_with_fresh_and_truncate(self, context_name, scope=None):
         '''Return value found in context tree or else default to segment time signatures.
         '''
-        value, fresh, truncate = self.get_resolved_value_with_fresh( 'divisions', context_name, 
+        value, fresh, truncate = self.get_resolved_value_with_fresh('divisions', context_name, 
             include_truncate=True, scope=scope)
         if value is None:
             value, fresh = self.get_resolved_value_with_fresh('time_signatures', context_name, 
             scope=scope)
             truncate = False
         return value, fresh, truncate
+
+#    # this function will eventually replace get_divisions_value_with_fresh_and_truncate
+#    def get_divisions_resolved_setting(self, context_name, scope=None):
+#        '''Return resolved divisions setting or else default to resolve time signature setting.
+#        '''
+#        pass
 
     def get_resolved_value_with_fresh(self, attribute_name, context_name, include_truncate=False, scope=None):
         '''Return value from resolved setting because context proxy stores resolved settings.
