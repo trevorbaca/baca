@@ -21,9 +21,11 @@ def apply_baca_letter_layout(music=None):
 
     context_block = lilypondfiletools.ContextBlock()
     lilypond_file.layout_block.context_blocks.append(context_block)
-    lilypond_file.layout_block.score = context_block
+    lilypond_file.score = context_block
     context_block.context_name = 'Score'
     context_block.accepts.append('TimeSignatureContext')
+    context_block.engraver_removals.append('Bar_number_engraver')
+    context_block.override.beam.breakable = True
     context_block.override.spacing_spanner.strict_grace_spacing = True
     context_block.override.spacing_spanner.strict_note_spacing = True
     context_block.override.spacing_spanner.uniform_stretching = True

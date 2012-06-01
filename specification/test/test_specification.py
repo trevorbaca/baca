@@ -12,7 +12,7 @@ def manage_output(score, test_function_name, cache_ly=False, cache_pdf=False, go
     test_number = int(test_function_name.split('_')[-1])
     title = 'specification {}'.format(test_number)
     lilypond_file.header_block.title = markuptools.make_centered_title_markup(title, font_size=6)
-    lilypond_file.layout_block.score.set.proportionalNotationDuration = schemetools.SchemeMoment((1, 48))
+    lilypond_file.score.set.proportionalNotationDuration = schemetools.SchemeMoment((1, 48))
     parent_directory_name = os.path.dirname(__file__)
     if render_pdf:
         iotools.show(lilypond_file)
@@ -178,3 +178,20 @@ def test_specification_04():
     manage_output(score, current_function_name)
 
     assert score.format == read_score_ly_file(current_function_name)
+
+
+def test_specification_05():
+    '''Single division will interpret in repetition to end of segment and will truncate.
+    '''
+
+    specification = ScoreSpecification(scoretemplatetools.GroupedRhythmicStavesScoreTemplate(1))
+
+    segment = specification.append_segment('T1')
+    segment.set_time_signatures(segment, [(4, 8), (3, 8)])
+    segment.set_divisions(segment.v1, [(3, 16)])
+    segment.set_rhythm(segment, library.thirty_seconds)
+
+    score = specification.interpret()
+
+    current_function_name = introspectiontools.get_current_function_name()
+    manage_output(score, current_function_name)
