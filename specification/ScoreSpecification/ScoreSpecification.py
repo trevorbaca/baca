@@ -15,9 +15,10 @@ import collections
 import copy
 
 
-Token = collections.namedtuple('Token', ['value', 'duration'])
 SegmentDivisionToken = collections.namedtuple(
     'SegmentDivisionToken', ['value', 'fresh', 'truncate', 'duration'])
+RegionDivisionToken = collections.namedtuple(
+    'RegionDivisionToken', ['value', 'fresh', 'truncate', 'duration'])
 RhythmToken = collections.namedtuple('RhythmToken', ['value', 'fresh'])
 
 class ScoreSpecification(Specification):
@@ -66,12 +67,10 @@ class ScoreSpecification(Specification):
         segment_division_lists = self.make_segment_division_lists_for_voice(voice)
         self.add_segment_division_list_to_segment_payloads_for_voice(voice, segment_division_lists)
 
-    def add_rhythm_to_voice_for_part(self, voice, rhythm_token, part):
-    #def add_rhythm_to_voice_for_segment_start_divisions(self, voice, rhythm_token, start_division_list):
+    def add_rhythm_to_voice_for_segment_region_divisions(self, voice, rhythm_token, region_division_list):
         maker = rhythm_token.value
         assert isinstance(maker, timetokentools.TimeTokenMaker)
-        leaf_lists = maker(part)
-        #leaf_lists = maker(start_division_list.pairs)
+        leaf_lists = maker(region_division_list.pairs)
         containers = [containertools.Container(x) for x in leaf_lists]
         voice.extend(containers)
         if getattr(maker, 'beam', False):
@@ -82,24 +81,11 @@ class ScoreSpecification(Specification):
         for voice in voicetools.iterate_voices_forward_in_expr(self.score):
             self.add_rhythms_to_voice(voice)
 
-    # TODO: resume work here and get the best out of both the partition and division getter functions
     def add_rhythms_to_voice(self, voice):
-        print voice.name
         rhythm_tokens = self.get_rhythm_tokens_for_all_segments_in_voice(voice)
-        print rhythm_tokens
-        start_division_lists = self.get_start_division_lists_for_voice(voice)
-        print start_division_lists, 'SDLs'
-        #region_division_lists = self.payload[voice.name]['region_division_lists']
-        #print region_division_lists, 'RDLs'
-        assert len(rhythm_tokens) == len(start_division_lists)
-        rhythm_tokens, parts = self.glue_rhythm_tokens_and_start_division_lists(
-            rhythm_tokens, start_division_lists)
-        assert len(rhythm_tokens) == len(parts)
-        for rhythm_token, part in zip(rhythm_tokens, parts):
-            self.add_rhythm_to_voice_for_part(voice, rhythm_token, part)
-        #for rhythm_token, start_division_list in zip(rhythm_tokens, start_division_lists):
-        #    self.add_rhythm_to_voice_for_segment_start_divisions(voice, rhythm_token, start_division_list)
-        print ''
+        region_division_lists = self.payload[voice.name]['region_division_lists']
+        for rhythm_token, region_division_list in zip(rhythm_tokens, region_division_lists):
+            self.add_rhythm_to_voice_for_segment_region_divisions(voice, rhythm_token, region_division_list)
 
     def add_segment_division_list_to_segment_payloads_for_voice(self, voice, segment_division_lists):
         assert len(self.segments) == len(segment_division_lists)
@@ -152,6 +138,30 @@ class ScoreSpecification(Specification):
         setting = context_proxy.get_setting(attribute_name=indicator.attribute_name, scope=indicator.scope)
         return setting
 
+    def change_segment_division_tokens_to_region_division_tokens(self, segment_division_tokens):
+        region_division_tokens = []
+        assert segment_division_tokens[0].fresh
+        for segment_division_token in segment_division_tokens:
+            if segment_division_token.fresh or segment_division_token.truncate:
+                #value, duration = segment_division_token.value, segment_division_token.duration
+                #region_division_token = RegionDivisionToken(value, duration)
+                region_division_token = RegionDivisionToken(*segment_division_token)
+                region_division_tokens.append(region_division_token)
+            else:
+                last_region_division_token = region_division_tokens[-1]
+                assert last_region_division_token.value == segment_division_token.value
+                if last_region_division_token.truncate:
+                    region_division_token = RegionDivisionToken(*segment_division_token)
+                    region_division_tokens.append(region_division_token)
+                else:
+                    value = last_region_division_token.value
+                    duration = last_region_division_token.duration + segment_division_token.duration
+                    fresh = last_region_division_token.fresh
+                    truncate = segment_division_token.truncate
+                    region_division_token = RegionDivisionToken(value, fresh, truncate, duration)
+                    region_division_tokens[-1] = region_division_token
+        return region_division_tokens
+
     def get_rhythm_tokens_for_all_segments_in_voice(self, voice):
         rhythm_tokens = []
         for segment in self.segments:
@@ -192,21 +202,6 @@ class ScoreSpecification(Specification):
                 glued_rhythm_tokens.append(rhythm_token)
                 new_parts.append(start_division_list[:])
         return glued_rhythm_tokens, new_parts
-
-    def glue_segment_division_tokens(self, division_tokens):
-        if not division_tokens:
-            return
-        result = []
-        assert division_tokens[0].fresh
-        for division_token in division_tokens:
-            if division_token.fresh or division_token.truncate:
-                result.append(Token(division_token.value, division_token.duration))
-            else:
-                last_token = result[-1]
-                assert division_token.value == last_token.value
-                new_token = Token(last_token.value, last_token.duration + division_token.duration)
-                result[-1] = new_token
-        return result
 
     def handle_divisions_retrieval_request(self, request):
         voice = componenttools.get_first_component_in_expr_with_name(self.score, request.voice_name)
@@ -297,7 +292,6 @@ class ScoreSpecification(Specification):
         A time signature setting must be found: store it.
         '''
         for segment in self.segments:
-            #self._debug(segment, 'seg')
             settings = segment.get_settings(attribute_name='time_signatures')
             if settings:
                 assert len(settings) == 1
@@ -309,27 +303,23 @@ class ScoreSpecification(Specification):
                 # TODO: implement helper on some class somewhere to do just these two lines
                 setting = copy.deepcopy(setting)
                 setting.segment_name = segment.name
-            #self._debug(setting)
             assert setting.context_name is None
             assert setting.scope is None
             self.store_setting(setting)
 
-    # return type here should also modeled with an explicit list-of-division-lists class.
     def make_region_division_lists_for_voice(self, voice):
         '''Called only once for each voice in score.
         Make one division list for each region in voice.
         '''
         segment_division_tokens = self.get_segment_division_tokens_for_voice(voice)
-        region_division_tokens = self.glue_segment_division_tokens(segment_division_tokens)
+        region_division_tokens = self.change_segment_division_tokens_to_region_division_tokens(
+            segment_division_tokens)
         region_division_lists = self.make_region_division_lists_from_region_division_tokens(region_division_tokens)
         self.payload[voice.name]['region_division_lists'] = region_division_lists[:]
         return region_division_lists
 
     def make_region_division_lists_from_region_division_tokens(self, region_division_tokens):
-        '''Return nested list of depth 2.
-        Outer list is merely a shell.
-        Each inner list contains division tokens.
-        Each inner list represents exactly 1 "division region" in voice.
+        '''Return list of division lists.
         '''
         region_division_lists = []
         for region_division_token in region_division_tokens:
@@ -337,8 +327,9 @@ class ScoreSpecification(Specification):
             divisions = sequencetools.repeat_sequence_to_weight_exactly(divisions, region_division_token.duration)
             divisions = [x.pair for x in divisions]
             divisions = [Division(x) for x in divisions]
-            #region_division_lists.append(divisions)
             region_division_list = DivisionList(divisions)
+            region_division_list.fresh = region_division_token.fresh
+            region_division_list.truncate = region_division_token.truncate
             region_division_lists.append(region_division_list)
         return region_division_lists
 

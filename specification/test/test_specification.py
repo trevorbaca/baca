@@ -3,7 +3,6 @@ from specification import ScoreSpecification
 import baca.library as library
 import inspect
 import os
-import py
 
 
 def manage_output(score, test_function_name, cache_ly=False, cache_pdf=False, go=False, render_pdf=False):
@@ -141,12 +140,9 @@ def test_specification_03():
     assert score.format == read_score_ly_file(current_function_name)
 
 
-# TODO: break the span beam between segments!
-#       that's all that remains to do for this test.
 def test_specification_04():
     '''As above with T2 equal to T1 and a hard break between.
     '''
-    #py.test.skip('working on this one.')
 
     specification = ScoreSpecification(scoretemplatetools.GroupedRhythmicStavesScoreTemplate(n=4))
 
@@ -178,7 +174,7 @@ def test_specification_04():
     assert specification['T2']['Voice 3']['segment_pairs'] == specification['T1']['Voice 3']['segment_pairs']
     assert specification['T2']['Voice 4']['segment_pairs'] == specification['T1']['Voice 4']['segment_pairs']
 
-#    current_function_name = introspectiontools.get_current_function_name()
-#    manage_output(score, current_function_name)
-#
-#    assert score.format == read_score_ly_file(current_function_name)
+    current_function_name = introspectiontools.get_current_function_name()
+    manage_output(score, current_function_name)
+
+    assert score.format == read_score_ly_file(current_function_name)
