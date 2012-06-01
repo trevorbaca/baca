@@ -130,10 +130,10 @@ def test_specification_03():
 
     assert specification['T1'].time_signatures == [(4, 8), (3, 8)]
 
-    assert specification['T1']['Voice 1']['pairs'] == [(3, 16), (3, 16), (3, 16), (3, 16), (2, 16)]
-    assert specification['T1']['Voice 2']['pairs'] == [(3, 16), (3, 16), (3, 16), (2, 16), (3, 16)]
-    assert specification['T1']['Voice 3']['pairs'] == [(3, 16), (3, 16), (2, 16), (3, 16), (3, 16)]
-    assert specification['T1']['Voice 4']['pairs'] == [(3, 16), (2, 16), (3, 16), (3, 16), (3, 16)]
+    assert specification['T1']['Voice 1']['segment_pairs'] == [(3, 16), (3, 16), (3, 16), (3, 16), (2, 16)]
+    assert specification['T1']['Voice 2']['segment_pairs'] == [(3, 16), (3, 16), (3, 16), (2, 16), (3, 16)]
+    assert specification['T1']['Voice 3']['segment_pairs'] == [(3, 16), (3, 16), (2, 16), (3, 16), (3, 16)]
+    assert specification['T1']['Voice 4']['segment_pairs'] == [(3, 16), (2, 16), (3, 16), (3, 16), (3, 16)]
 
     current_function_name = introspectiontools.get_current_function_name()
     manage_output(score, current_function_name)
@@ -168,15 +168,15 @@ def test_specification_04():
 
     assert specification['T1'].time_signatures == [(4, 8), (3, 8)]
 
-    assert specification['T1']['Voice 1']['pairs'] == [(3, 16), (3, 16), (3, 16), (3, 16), (2, 16)]
-    assert specification['T1']['Voice 2']['pairs'] == [(3, 16), (3, 16), (3, 16), (2, 16), (3, 16)]
-    assert specification['T1']['Voice 3']['pairs'] == [(3, 16), (3, 16), (2, 16), (3, 16), (3, 16)]
-    assert specification['T1']['Voice 4']['pairs'] == [(3, 16), (2, 16), (3, 16), (3, 16), (3, 16)]
+    assert specification['T1']['Voice 1']['segment_pairs'] == [(3, 16), (3, 16), (3, 16), (3, 16), (2, 16)]
+    assert specification['T1']['Voice 2']['segment_pairs'] == [(3, 16), (3, 16), (3, 16), (2, 16), (3, 16)]
+    assert specification['T1']['Voice 3']['segment_pairs'] == [(3, 16), (3, 16), (2, 16), (3, 16), (3, 16)]
+    assert specification['T1']['Voice 4']['segment_pairs'] == [(3, 16), (2, 16), (3, 16), (3, 16), (3, 16)]
 
-    assert specification['T2']['Voice 1']['pairs'] == specification['T1']['Voice 1']['pairs']
-    assert specification['T2']['Voice 2']['pairs'] == specification['T1']['Voice 2']['pairs']
-    assert specification['T2']['Voice 3']['pairs'] == specification['T1']['Voice 3']['pairs']
-    assert specification['T2']['Voice 4']['pairs'] == specification['T1']['Voice 4']['pairs']
+    assert specification['T2']['Voice 1']['segment_pairs'] == specification['T1']['Voice 1']['segment_pairs']
+    assert specification['T2']['Voice 2']['segment_pairs'] == specification['T1']['Voice 2']['segment_pairs']
+    assert specification['T2']['Voice 3']['segment_pairs'] == specification['T1']['Voice 3']['segment_pairs']
+    assert specification['T2']['Voice 4']['segment_pairs'] == specification['T1']['Voice 4']['segment_pairs']
 
 #    current_function_name = introspectiontools.get_current_function_name()
 #    manage_output(score, current_function_name)

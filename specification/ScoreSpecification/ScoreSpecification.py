@@ -59,39 +59,27 @@ class ScoreSpecification(Specification):
         for voice in voicetools.iterate_voices_forward_in_expr(self.score):
             self.add_divisions_to_voice(voice)
 
+    # TODO: eliminate annotation and use payload context tree instead
     def add_divisions_to_voice(self, voice):
         print voice.name
-        #divisions = self.make_divisions_for_voice_scorewide(voice)
-        division_region_lists = self.make_division_region_lists_for_voice_scorewide(voice)
-        print division_region_lists
+        region_division_lists = self.make_region_division_lists_for_voice(voice)
+        print region_division_lists, 'RDLs'
+        marktools.Annotation('region_division_lists', region_division_lists)(voice)
+        segment_division_lists = self.make_segment_division_lists_for_voice(voice)
+        print segment_division_lists
         print ''
-        marktools.Annotation('division_region_lists', division_region_lists)(voice)
-        segment_division_lists = self.make_segment_division_lists(voice)
-        #for x in segment_division_lists: print x
-        #print ''
+        self.add_segment_division_list_to_segment_payloads_for_voice(voice, segment_division_lists)
+
+    def add_segment_division_list_to_segment_payloads_for_voice(self, voice, segment_division_lists):
         assert len(self.segments) == len(segment_division_lists)
         for segment, segment_division_list in zip(self.segments, segment_division_lists):
-            segment.payload[voice.name]['division_list'] = segment_division_list
-            segment.payload[voice.name]['pairs'] = [x.pair for x in segment_division_list]
+            segment.payload[voice.name]['segment_division_list'] = segment_division_list
+            segment.payload[voice.name]['segment_pairs'] = [x.pair for x in segment_division_list]
 
     def add_rhythms(self):
         for voice in voicetools.iterate_voices_forward_in_expr(self.score):
             self.add_rhythms_to_voice(voice)
 
-    def get_division_lists_for_all_segments_in_voice(self, voice):
-        division_lists = []
-        for segment in self.segments:
-            division_list = segment.payload[voice.name]['division_list']
-            division_lists.append(division_list)
-        return division_lists
-
-    # incompletely implemented because not sure we need this
-#    def get_glued_division_lists_for_voice(self, voice):
-#        result = []
-#        division_lists = self.get_division_lists_for_all_segments_in_voice(voice)
-#        assert division_lists[0].is_left_closed
-#        result.append(division_lists[0])
-        
     def get_rhythm_tokens_for_all_segments_in_voice(self, voice):
         rhythm_tokens = []
         for segment in self.segments:
@@ -104,23 +92,9 @@ class ScoreSpecification(Specification):
         result = []
         rhythm_tokens = self.get_rhythm_tokens_for_all_segments_in_voice(voice)
         parts = self.partition_voice_divisions_by_segment_durations(voice)
-        #parts = division_lists = self.get_division_lists_for_all_segments_in_voice(voice)
-
-#        for x in rhythm_tokens: print x
-#        print 'x'
-#        for x in parts: print x
-#        print 'y' 
-
         assert len(rhythm_tokens) == len(parts)
         rhythm_tokens, parts = self.massage_rhythm_tokens_and_parts(rhythm_tokens, parts)
         assert len(rhythm_tokens) == len(parts)
-
-#        for x in rhythm_tokens: print x
-#        print 'z'
-#        for x in parts: print x
-#        print '-' 
-#        print ''
-
         for rhythm_token, part in zip(rhythm_tokens, parts):
             self.add_rhythm_to_voice_for_part(voice, rhythm_token, part)
 
@@ -182,8 +156,11 @@ class ScoreSpecification(Specification):
     def handle_divisions_retrieval_request(self, request):
         voice = componenttools.get_first_component_in_expr_with_name(self.score, request.voice_name)
         assert isinstance(voice, voicetools.Voice), voice
-        divisions = marktools.get_value_of_annotation_attached_to_component(voice, 'division_region_lists')
-        divisions = sequencetools.flatten_sequence(divisions)
+        region_division_lists = marktools.get_value_of_annotation_attached_to_component(
+            voice, 'region_division_lists')
+        divisions = []
+        for region_division_list in region_division_lists:
+            divisions.extend(region_division_list)
         assert isinstance(divisions, list), divisions
         start_offset, stop_offset = self.segment_name_to_offsets(request.start_segment_name, n=request.n)
         total_amount = stop_offset - start_offset
@@ -282,41 +259,49 @@ class ScoreSpecification(Specification):
             assert setting.scope is None
             self.store_setting(setting)
 
-    # function returns only a flat list of pairs for the entire duration of score;
-    # return value here should be nested to show glued-together blocks of divisions;
     # return type here should also modeled with an explicit list-of-division-lists class.
-    #def make_divisions_for_voice_scorewide(self, voice):
-    def make_division_region_lists_for_voice_scorewide(self, voice):
+    def make_region_division_lists_for_voice(self, voice):
         '''Called only once for each voice in score.
-        Make divisions for entire voice scorewide.
+        Make one division list for each region in voice.
         '''
-        division_tokens = []
+        segment_division_tokens = self.get_segment_division_tokens_for_voice(voice)
+        print segment_division_tokens, 'SEGMENTS', len(segment_division_tokens)
+        region_division_tokens = self.glue_segment_division_tokens(segment_division_tokens)
+        print region_division_tokens, 'REGIONS', len(region_division_tokens)
+        region_division_lists = self.make_region_division_lists_from_region_division_tokens(region_division_tokens)
+        self.payload[voice.name]['region_division_lists'] = region_division_lists[:]
+        return region_division_lists
+
+    def get_segment_division_tokens_for_voice(self, voice):
+        segment_division_tokens = []
         for segment in self.segments:
             value, fresh, truncate = segment.get_divisions_value_with_fresh_and_truncate(voice.name)
-            #self._debug((value, truncate), 'value & truncate')
-            if isinstance(value, DivisionRetrievalRequest):
-                value = self.handle_divisions_retrieval_request(value)
-            division_tokens.append(SegmentDivisionToken(value, fresh, truncate, segment.duration))
-        print division_tokens, 'tokens'
-        division_tokens = self.massage_division_tokens(division_tokens)
-        division_region_lists = self.make_division_region_lists_from_division_tokens(division_tokens)
-        self.payload[voice.name]['division_region_lists'] = division_region_lists[:]
-        return division_region_lists
+            value = self.process_divisions_value(value)
+            segment_division_tokens.append(SegmentDivisionToken(value, fresh, truncate, segment.duration))
+        return segment_division_tokens
 
-    def make_division_region_lists_from_division_tokens(self, division_tokens):
+    def process_divisions_value(self, divisions_value):
+        if isinstance(divisions_value, DivisionRetrievalRequest):
+            return self.handle_divisions_retrieval_request(divisions_value)
+        else:
+            return divisions_value
+        
+    def make_region_division_lists_from_region_division_tokens(self, region_division_tokens):
         '''Return nested list of depth 2.
         Outer list is merely a shell.
         Each inner list contains division tokens.
         Each inner list represents exactly 1 "division region" in voice.
         '''
-        division_region_lists = []
-        for division_token in division_tokens:
-            divisions = [mathtools.NonreducedFraction(x) for x in division_token.value]
-            divisions = sequencetools.repeat_sequence_to_weight_exactly(divisions, division_token.duration)
+        region_division_lists = []
+        for region_division_token in region_division_tokens:
+            divisions = [mathtools.NonreducedFraction(x) for x in region_division_token.value]
+            divisions = sequencetools.repeat_sequence_to_weight_exactly(divisions, region_division_token.duration)
             divisions = [x.pair for x in divisions]
             divisions = [Division(x) for x in divisions]
-            division_region_lists.append(divisions)
-        return division_region_lists
+            #region_division_lists.append(divisions)
+            region_division_list = DivisionList(divisions)
+            region_division_lists.append(region_division_list)
+        return region_division_lists
 
     def make_resolved_setting(self, setting):
         if isinstance(setting, ResolvedSetting): return setting
@@ -326,10 +311,13 @@ class ScoreSpecification(Specification):
         resolved_setting.fresh = setting.fresh
         return resolved_setting
 
-    def make_segment_division_lists(self, voice):
-        division_lists = []
-        divisions = marktools.get_value_of_annotation_attached_to_component(voice, 'division_region_lists') 
-        divisions = sequencetools.flatten_sequence(divisions)
+    def make_segment_division_lists_for_voice(self, voice):
+        segment_division_lists = []
+        region_division_lists = marktools.get_value_of_annotation_attached_to_component(
+            voice, 'region_division_lists') 
+        divisions = []
+        for region_division_list in region_division_lists:
+            divisions.extend(region_division_list)
         divisions = [mathtools.NonreducedFraction(x) for x in divisions]
         shards = sequencetools.split_sequence_once_by_weights_with_overhang(divisions, self.segment_durations)
         divisions = [Division(x) for x in divisions]
@@ -350,10 +338,10 @@ class ScoreSpecification(Specification):
             if not reconstructed_divisions[-1] == divisions[len(reconstructed_divisions) - 1]:
                 division_list[-1].is_right_open = True
                 glue_next_division = True
-            division_lists.append(division_list)
-        return division_lists
+            segment_division_lists.append(division_list)
+        return segment_division_lists
 
-    def massage_division_tokens(self, division_tokens):
+    def glue_segment_division_tokens(self, division_tokens):
         if not division_tokens:
             return
         result = []
@@ -381,8 +369,11 @@ class ScoreSpecification(Specification):
         return new_rhythm_tokens, new_parts
 
     def partition_voice_divisions_by_segment_durations(self, voice):
-        divisions = marktools.get_value_of_annotation_attached_to_component(voice, 'division_region_lists')
-        divisions = sequencetools.flatten_sequence(divisions)
+        region_division_lists = marktools.get_value_of_annotation_attached_to_component(
+            voice, 'region_division_lists')
+        divisions = []
+        for region_division_list in region_division_lists:
+            divisions.extend(region_division_list)
         divisions = [mathtools.NonreducedFraction(x) for x in divisions] 
         assert sum(divisions) == self.score_duration
         parts = sequencetools.partition_sequence_by_backgrounded_weights(divisions, self.segment_durations)
