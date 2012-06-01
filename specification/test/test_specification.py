@@ -181,7 +181,8 @@ def test_specification_04():
 
 
 def test_specification_05():
-    '''Single division will interpret in repetition to end of segment and will truncate.
+    '''Single division will interpret in repetition over single segment.
+    Division will truncate at end of score.
     '''
 
     specification = ScoreSpecification(scoretemplatetools.GroupedRhythmicStavesScoreTemplate(1))
@@ -195,3 +196,51 @@ def test_specification_05():
 
     current_function_name = introspectiontools.get_current_function_name()
     manage_output(score, current_function_name)
+
+    assert score.format == read_score_ly_file(current_function_name)
+
+
+def test_specification_06():
+    '''Single division will interpret in repetition over two segments.
+    Division will not truncate at segment boundary.
+    Division will truncate at end of score.
+    '''
+
+    specification = ScoreSpecification(scoretemplatetools.GroupedRhythmicStavesScoreTemplate(1))
+
+    segment = specification.append_segment('T1')
+    segment.set_time_signatures(segment, [(4, 8), (3, 8)])
+    segment.set_divisions(segment.v1, [(3, 16)])
+    segment.set_rhythm(segment, library.thirty_seconds)
+
+    segment = specification.append_segment('T2')
+
+    score = specification.interpret()
+
+    current_function_name = introspectiontools.get_current_function_name()
+    manage_output(score, current_function_name)
+
+    assert score.format == read_score_ly_file(current_function_name)
+
+
+def test_specification_07():
+    '''Single division will interpret in repetition over two segments.
+    Division will truncate at segment boundary because of truncate keyword.
+    Division will also truncate at end of score.
+    '''
+
+    specification = ScoreSpecification(scoretemplatetools.GroupedRhythmicStavesScoreTemplate(1))
+
+    segment = specification.append_segment('T1')
+    segment.set_time_signatures(segment, [(4, 8), (3, 8)])
+    segment.set_divisions(segment.v1, [(3, 16)], truncate=True)
+    segment.set_rhythm(segment, library.thirty_seconds)
+
+    segment = specification.append_segment('T2')
+
+    score = specification.interpret()
+
+    current_function_name = introspectiontools.get_current_function_name()
+    manage_output(score, current_function_name)
+
+    assert score.format == read_score_ly_file(current_function_name)
