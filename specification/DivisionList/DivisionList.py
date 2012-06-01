@@ -74,3 +74,7 @@ class DivisionList(AbjadObject):
         if 1 < len(self) and self[-1].is_left_open:
             return False
         return True
+
+    @property
+    def pairs(self):
+        return [division.pair for division in self]
