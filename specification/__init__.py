@@ -3,7 +3,7 @@ from AttributeRetrievalIndicator import AttributeRetrievalIndicator
 from AttributeRetrievalRequest import AttributeRetrievalRequest
 from Callback import Callback
 from ContextProxy import ContextProxy
-from ContextTree import ContextTree
+from ContextDictionary import ContextDictionary
 from Directive import Directive
 from Division import Division
 from DivisionList import DivisionList

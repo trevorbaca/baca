@@ -1,6 +1,6 @@
 from abjad.tools import *
 from baca.specification.AttributeRetrievalRequest import AttributeRetrievalRequest
-from baca.specification.ContextTree import ContextTree
+from baca.specification.ContextDictionary import ContextDictionary
 from baca.specification.Division import Division
 from baca.specification.DivisionList import DivisionList
 from baca.specification.DivisionRetrievalRequest import DivisionRetrievalRequest
@@ -29,7 +29,7 @@ class ScoreSpecification(Specification):
         Specification.__init__(self, score_template, settings=settings)
         self.segment_specification_class = segment_specification_class or SegmentSpecification
         self.segments = segments or []
-        self.payload = ContextTree(self.score_template())
+        self.payload = ContextDictionary(self.score_template())
 
     ### SPECIAL METHODS ###
 
@@ -132,7 +132,7 @@ class ScoreSpecification(Specification):
     
     def change_attribute_retrieval_indicator_to_setting(self, indicator):
         segment = self[indicator.segment_name]
-        context_proxy = segment.context_tree[indicator.context_name]
+        context_proxy = segment.context_dictionary[indicator.context_name]
         setting = context_proxy.get_setting(attribute_name=indicator.attribute_name, scope=indicator.scope)
         return setting
 
@@ -255,7 +255,7 @@ class ScoreSpecification(Specification):
             settings = segment.get_settings(attribute_name='divisions')
             if not settings:
                 settings = []
-                existing_settings = self.context_tree.get_settings(attribute_name='divisions')
+                existing_settings = self.context_dictionary.get_settings(attribute_name='divisions')
                 for existing_setting in existing_settings:
                     setting = copy.deepcopy(existing_setting)
                     setting.segment_name = segment.name
@@ -276,7 +276,7 @@ class ScoreSpecification(Specification):
             settings = segment.get_settings(attribute_name='rhythm')
             if not settings:
                 settings = []
-                existing_settings = self.context_tree.get_settings(attribute_name='rhythm')
+                existing_settings = self.context_dictionary.get_settings(attribute_name='rhythm')
                 for existing_setting in existing_settings:
                     setting = copy.deepcopy(existing_setting)
                     setting.segment_name = segment.name
@@ -295,7 +295,7 @@ class ScoreSpecification(Specification):
                 assert len(settings) == 1
                 setting = settings[0]
             else:
-                settings = self.context_tree.get_settings(attribute_name='time_signatures')
+                settings = self.context_dictionary.get_settings(attribute_name='time_signatures')
                 assert len(settings) == 1
                 setting = settings[0]
                 # TODO: implement helper on some class somewhere to do just these two lines
@@ -418,15 +418,15 @@ class ScoreSpecification(Specification):
         resolved_setting = self.make_resolved_setting(setting)
         assert isinstance(resolved_setting, ResolvedSetting), resolved_setting
         segment = self[resolved_setting.segment_name]
-        context_name = resolved_setting.context_name or segment.context_tree.score_name
+        context_name = resolved_setting.context_name or segment.context_dictionary.score_name
         attribute_name = resolved_setting.attribute_name
-        if resolved_setting.attribute_name in segment.context_tree[context_name]:
+        if resolved_setting.attribute_name in segment.context_dictionary[context_name]:
             message = '{!r} {!r} already contains {!r} setting.'
             message = message.format(resolved_setting.segment_name, context_name, resolved_setting.attribute_name)
             raise Exception(message)
-        segment.context_tree[context_name][resolved_setting.attribute_name] = resolved_setting
+        segment.context_dictionary[context_name][resolved_setting.attribute_name] = resolved_setting
         if resolved_setting.persistent:
-            self.context_tree[context_name][setting.attribute_name] = resolved_setting
+            self.context_dictionary[context_name][setting.attribute_name] = resolved_setting
 
     def store_settings(self, settings):
         for setting in settings:

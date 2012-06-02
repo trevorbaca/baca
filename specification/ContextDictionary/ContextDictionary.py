@@ -5,7 +5,7 @@ from baca.specification.ContextProxy import ContextProxy
 from collections import OrderedDict
 
 
-class ContextTree(AbjadObject, OrderedDict):
+class ContextDictionary(AbjadObject, OrderedDict):
 
     ### INITIALIZER ###
 

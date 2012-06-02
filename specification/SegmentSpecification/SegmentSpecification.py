@@ -4,7 +4,7 @@ from baca.handlers.pitch.TimewisePitchClassHandler import TimewisePitchClassHand
 from baca.specification.AttributeRetrievalIndicator import AttributeRetrievalIndicator
 from baca.specification.AttributeRetrievalRequest import AttributeRetrievalRequest
 from baca.specification.Callback import Callback
-from baca.specification.ContextTree import ContextTree
+from baca.specification.ContextDictionary import ContextDictionary
 from baca.specification.Directive import Directive
 from baca.specification.DivisionRetrievalRequest import DivisionRetrievalRequest
 from baca.specification.HandlerRequest import HandlerRequest
@@ -30,7 +30,7 @@ class SegmentSpecification(Specification):
         self._score_model = self.score_template()
         self._name = name
         self.directives = directives or []
-        self.payload = ContextTree(self.score_template())
+        self.payload = ContextDictionary(self.score_template())
 
     ### SPECIAL METHODS ###
 
@@ -83,7 +83,7 @@ class SegmentSpecification(Specification):
 
     @property
     def time_signatures(self):
-        setting = self.context_tree.score_context_proxy.get_setting(attribute_name='time_signatures')
+        setting = self.context_dictionary.score_context_proxy.get_setting(attribute_name='time_signatures')
         assert isinstance(setting.value, list), setting.value
         return setting.value
 
@@ -151,7 +151,7 @@ class SegmentSpecification(Specification):
         context = componenttools.get_first_component_in_expr_with_name(self.score_model, context_name)
         for component in componenttools.get_improper_parentage_of_component(context):
             #self._debug(component)
-            context_proxy = self.context_tree[component.name]
+            context_proxy = self.context_dictionary[component.name]
             settings = context_proxy.get_settings(attribute_name=attribute_name, scope=scope)
             #self._debug(settings, 'settings')
             if not settings:
@@ -192,7 +192,7 @@ class SegmentSpecification(Specification):
     def parse_context_token(self, context_token):
         if context_token in self.context_names:
             context_names = [context_token]
-        elif self.context_tree.all_are_context_names(context_token):
+        elif self.context_dictionary.all_are_context_names(context_token):
             context_names = context_token
         elif isinstance(context_token, type(self)):
             context_names = None
@@ -205,9 +205,9 @@ class SegmentSpecification(Specification):
             selection = selection_token
         elif isinstance(selection_token, type(self)):
             selection = self.select()
-        elif isinstance(selection_token, str) and selection_token in self.context_tree:
+        elif isinstance(selection_token, str) and selection_token in self.context_dictionary:
             selection = self.select(context_names=[selection_token])
-        elif self.context_tree.all_are_context_names(selection_token):
+        elif self.context_dictionary.all_are_context_names(selection_token):
             selection = self.select(context_names=selection_token)
         else:
             raise ValueError('invalid selection token: {!r}.'.format(selection_token))
@@ -220,7 +220,7 @@ class SegmentSpecification(Specification):
         return Specification.retrieve_resolved_value(self, attribute_name, self.name, **kwargs)
 
     def select(self, context_names=None, segment_name=None, scope=None):
-        assert context_names is None or self.context_tree.all_are_context_names(context_names)
+        assert context_names is None or self.context_dictionary.all_are_context_names(context_names)
         assert isinstance(segment_name, (str, type(None)))
         assert isinstance(scope, (Scope, type(None)))
         segment_name = segment_name or self.name

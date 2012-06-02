@@ -1,6 +1,6 @@
 from abjad.tools import *
 from baca.specification.AttributeRetrievalIndicator import AttributeRetrievalIndicator
-from baca.specification.ContextTree import ContextTree
+from baca.specification.ContextDictionary import ContextDictionary
 from baca.specification.SettingReservoir import SettingReservoir
 from baca.specification.ValueRetrievalIndicator import ValueRetrievalIndicator
 
@@ -12,7 +12,7 @@ class Specification(SettingReservoir):
     def __init__(self, score_template, settings=None):
         SettingReservoir.__init__(self, settings=settings)
         self._score_template = score_template
-        self._context_tree = ContextTree(self.score_template())
+        self._context_dictionary = ContextDictionary(self.score_template())
         self._initialize_context_name_abbreviations()
 
     ### PRIVATE METHODS ###
@@ -27,8 +27,8 @@ class Specification(SettingReservoir):
     ### READ-ONLY PUBLIC PROPERTIES ###
 
     @property
-    def context_tree(self):
-        return self._context_tree
+    def context_dictionary(self):
+        return self._context_dictionary
 
     @property
     def score_template(self):
