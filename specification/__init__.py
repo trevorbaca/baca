@@ -5,6 +5,7 @@ from Callback import Callback
 from ContextProxy import ContextProxy
 from ContextDictionary import ContextDictionary
 from Directive import Directive
+from DirectiveInventory import DirectiveInventory
 from Division import Division
 from DivisionList import DivisionList
 from DivisionRetrievalRequest import DivisionRetrievalRequest

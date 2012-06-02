@@ -5,6 +5,7 @@ from baca.specification.AttributeRetrievalIndicator import AttributeRetrievalInd
 from baca.specification.AttributeRetrievalRequest import AttributeRetrievalRequest
 from baca.specification.Callback import Callback
 from baca.specification.Directive import Directive
+from baca.specification.DirectiveInventory import DirectiveInventory
 from baca.specification.DivisionRetrievalRequest import DivisionRetrievalRequest
 from baca.specification.HandlerRequest import HandlerRequest
 from baca.specification.Scope import Scope
@@ -25,7 +26,7 @@ class SegmentSpecification(Specification):
         Specification.__init__(self, score_template)
         self._score_model = self.score_template()
         self._name = name
-        self._directives = []
+        self._directives = DirectiveInventory()
 
     ### SPECIAL METHODS ###
 
