@@ -13,6 +13,7 @@ from MomentIndicator import MomentIndicator
 from ResolvedSetting import ResolvedSetting
 from ScopedValue import ScopedValue
 from ScoreSpecification import ScoreSpecification
+from SegmentInventory import SegmentInventory
 from SegmentSpecification import SegmentSpecification
 from Selection import Selection
 from Setting import Setting

@@ -6,6 +6,7 @@ from baca.specification.DivisionList import DivisionList
 from baca.specification.DivisionRetrievalRequest import DivisionRetrievalRequest
 from baca.specification.ResolvedSetting import ResolvedSetting
 from baca.specification.ScopedValue import ScopedValue
+from baca.specification.SegmentInventory import SegmentInventory
 from baca.specification.SegmentSpecification import SegmentSpecification
 from baca.specification.Selection import Selection
 from baca.specification.Specification import Specification
@@ -28,29 +29,19 @@ class ScoreSpecification(Specification):
     def __init__(self, score_template, segment_specification_class=None, segments=None, settings=None):
         Specification.__init__(self, score_template, settings=settings)
         self.segment_specification_class = segment_specification_class or SegmentSpecification
-        self.segments = segments or []
+        self._segments = SegmentInventory()
         self.payload = ContextDictionary(self.score_template())
 
     ### SPECIAL METHODS ###
 
-    def __getitem__(self, arg):
-        if isinstance(arg, int):
-            return self.segments[arg]
-        elif isinstance(arg, str):
-            for segment in self.segments:
-                if segment.name == arg:
-                    return segment
-            else:
-                raise KeyError(repr(arg))
-
-    def __getslice__(self, start, stop):
-        return self.segments.__getslice__(start, stop)
-
-    def __len__(self):
-        return len(self.segments)
-
     def __repr__(self):
         return '{}({!r})'.format(self._class_name, self.segments)
+
+    ### READ-ONLY PUBLIC PROPERTIES ###
+
+    @property
+    def segments(self):
+        return self._segments
 
     ### PUBLIC METHODS ###
 
@@ -124,14 +115,14 @@ class ScoreSpecification(Specification):
         pass
 
     def calculate_segment_offset_pairs(self):
-        segment_durations = [segment.duration for segment in self]
+        segment_durations = [segment.duration for segment in self.segments]
         assert sequencetools.all_are_numbers(segment_durations)
         self.segment_durations = segment_durations
         self.score_duration = sum(self.segment_durations)
         self.segment_offset_pairs = mathtools.cumulative_sums_zero_pairwise(self.segment_durations)
     
     def change_attribute_retrieval_indicator_to_setting(self, indicator):
-        segment = self[indicator.segment_name]
+        segment = self.segments[indicator.segment_name]
         context_proxy = segment.context_dictionary[indicator.context_name]
         setting = context_proxy.get_setting(attribute_name=indicator.attribute_name, scope=indicator.scope)
         return setting
@@ -398,7 +389,7 @@ class ScoreSpecification(Specification):
             return setting.source
 
     def segment_name_to_index(self, segment_name):
-        segment = self[segment_name]
+        segment = self.segments[segment_name]
         return self.index(segment)
 
     def segment_name_to_offsets(self, segment_name, n=1):
@@ -417,7 +408,7 @@ class ScoreSpecification(Specification):
         '''
         resolved_setting = self.make_resolved_setting(setting)
         assert isinstance(resolved_setting, ResolvedSetting), resolved_setting
-        segment = self[resolved_setting.segment_name]
+        segment = self.segments[resolved_setting.segment_name]
         context_name = resolved_setting.context_name or segment.context_dictionary.score_name
         attribute_name = resolved_setting.attribute_name
         if resolved_setting.attribute_name in segment.context_dictionary[context_name]:
