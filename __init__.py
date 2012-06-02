@@ -4,5 +4,4 @@ import music
 import pitch
 import rhythm
 import scf
-import specification
 import util
