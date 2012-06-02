@@ -1,4 +1,7 @@
-class AttributeNameEnumeration(dict):
+from collections import OrderedDict
+
+
+class AttributeNameEnumeration(OrderedDict):
 
     ### CLASS ATTIRBUTES ###
 
@@ -13,5 +16,6 @@ class AttributeNameEnumeration(dict):
     ### INITIALIZER ###
 
     def __init__(self):
+        OrderedDict.__init__(self)
         for i, attribute_name in enumerate(sorted(self.attribute_names)):
             self[attribute_name] = i
