@@ -13,6 +13,7 @@ from baca.specification.Specification import Specification
 from baca.specification.Selection import Selection
 from baca.specification.StatalServer import StatalServer
 from baca.specification.StatalServerRequest import StatalServerRequest
+from baca.specification.exceptions import *
 from handlers.Handler import Handler
 import copy
 
@@ -47,7 +48,8 @@ class SegmentSpecification(Specification):
 
     @property
     def duration(self):
-        return sum([durationtools.Duration(x) for x in self.time_signatures])        
+        if self.time_signatures is not None:
+            return sum([durationtools.Duration(x) for x in self.time_signatures])        
 
     @property
     def has_relative_directives(self):
@@ -71,7 +73,10 @@ class SegmentSpecification(Specification):
 
     @property
     def time_signatures(self):
-        setting = self.context_dictionary.score_context_proxy.get_setting(attribute_name='time_signatures')
+        try:
+            setting = self.context_dictionary.score_context_proxy.get_setting(attribute_name='time_signatures')
+        except MissingSettingError:
+            return None
         assert isinstance(setting.value, list), setting.value
         return setting.value
 

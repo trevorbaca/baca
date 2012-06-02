@@ -1,7 +1,14 @@
 from abjad.tools.abctools.AbjadObject import AbjadObject
+from baca.specification.exceptions import *
 from collections import OrderedDict
 
 
+# TODO: why does this class extend OrderedDict instead of list?
+
+# TODO: strip the setting getters from this class;
+#       name the stripped down class something like ValueInventory;
+#       have this class inherit from ValueInventory;
+#       rename this class SettingInventory ... but that already exists!
 class ContextProxy(AbjadObject, OrderedDict):
 
     ### INITIALIZER ###
@@ -19,9 +26,9 @@ class ContextProxy(AbjadObject, OrderedDict):
     def get_setting(self, attribute_name=None, scope=None):
         settings = self.get_settings(attribute_name=attribute_name, scope=scope)
         if not settings:
-            raise Exception('no settings for {!r} found.'.format(attribute_name))
+            raise MissingSettingError('no settings for {!r} found.'.format(attribute_name))
         elif 1 < len(settings):
-            raise Exception('multiple settings for {!r} found.'.format(attribute_name))
+            raise ExtraSettingError('multiple settings for {!r} found.'.format(attribute_name))
         assert len(settings) == 1
         return settings[0]
 
