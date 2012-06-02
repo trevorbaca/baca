@@ -1,6 +1,6 @@
-from abjad.tools.abctools.AbjadObject import AbjadObject
 from abjad.tools import contexttools
 from abjad.tools import scoretools
+from abjad.tools.abctools.AbjadObject import AbjadObject
 from baca.specification.ContextProxy import ContextProxy
 from collections import OrderedDict
 
@@ -12,8 +12,8 @@ class ContextTree(AbjadObject, OrderedDict):
     def __init__(self, score):
         assert isinstance(score, scoretools.Score), score
         OrderedDict.__init__(self)
-        self.score = score
-        self.initialize_context_proxies()
+        self._score = score
+        self._initialize_context_proxies()
 
     ### SPECIAL METHODS ###
 
@@ -27,7 +27,22 @@ class ContextTree(AbjadObject, OrderedDict):
         contents = ', '.join([repr(x) for x in self])
         return '{}([{}])'.format(self._class_name, contents)
 
+    ### PRIVATE METHODS ###
+
+    def _initialize_context_proxies(self):
+        context_names = []
+        if self.score is not None:
+            for context in contexttools.iterate_contexts_forward_in_expr(self.score):
+                assert context.context_name is not None, context.name_name
+                context_names.append(context.name)
+        for context_name in sorted(context_names):
+            self[context_name] = ContextProxy()
+
     ### READ-ONLY PUBLIC PROPERTIES ###
+
+    @property
+    def score(self):
+        return self._score
 
     @property
     def score_context_proxy(self):
@@ -56,15 +71,6 @@ class ContextTree(AbjadObject, OrderedDict):
         for context_proxy in context_proxies:
             settings.extend(context_proxy.get_settings(attribute_name=attribute_name, scope=scope))
         return settings 
-
-    def initialize_context_proxies(self):
-        context_names = []
-        if self.score is not None:
-            for context in contexttools.iterate_contexts_forward_in_expr(self.score):
-                assert context.context_name is not None, context.name_name
-                context_names.append(context.name)
-        for context_name in sorted(context_names):
-            self[context_name] = ContextProxy()
 
     def show(self):
         for context_name in self:
