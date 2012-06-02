@@ -26,11 +26,9 @@ class ScoreSpecification(Specification):
     ### INITIALIZER ###
 
     def __init__(self, score_template, segment_specification_class=None, segments=None, settings=None):
-        Specification.__init__(self, settings=settings)
-        self.score_template = score_template
+        Specification.__init__(self, score_template, settings=settings)
         self.segment_specification_class = segment_specification_class or SegmentSpecification
         self.segments = segments or []
-        self.context_tree = ContextTree(self.score_template()) 
         self.payload = ContextTree(self.score_template())
 
     ### SPECIAL METHODS ###
@@ -98,7 +96,7 @@ class ScoreSpecification(Specification):
             segment.add_time_signatures(self.score)
 
     def append_segment(self, name=None):
-        segment = self.segment_specification_class(self.score_template, name=name)     
+        segment = self.segment_specification_class(self.score_template, name)
         self.segments.append(segment)
         return segment
 

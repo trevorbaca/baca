@@ -1,7 +1,6 @@
 from abjad.tools import *
 from baca.handlers.composites.CompositeRhythmHandler import CompositeRhythmHandler
 from baca.handlers.pitch.TimewisePitchClassHandler import TimewisePitchClassHandler
-from baca.specification.AttributeNameEnumeration import AttributeNameEnumeration
 from baca.specification.AttributeRetrievalIndicator import AttributeRetrievalIndicator
 from baca.specification.AttributeRetrievalRequest import AttributeRetrievalRequest
 from baca.specification.Callback import Callback
@@ -23,13 +22,14 @@ class SegmentSpecification(Specification):
 
     ### INITIALIZER ###
 
-    def __init__(self, score_template, directives=None, name=None, settings=None):
-        Specification.__init__(self, settings=settings)
-        self.score_template = score_template
-        self.score_model = self.score_template()
+    # store settings?
+    # type- and form-check settings?
+    def __init__(self, score_template, name, directives=None, settings=None):
+        assert isinstance(name, str), name
+        Specification.__init__(self, score_template, settings=settings)
+        self._score_model = self.score_template()
+        self._name = name
         self.directives = directives or []
-        self.name = name
-        self.attribute_names = AttributeNameEnumeration()
         self.payload = ContextTree(self.score_template())
 
     ### SPECIAL METHODS ###
@@ -47,13 +47,15 @@ class SegmentSpecification(Specification):
         return len(self.directives)
 
     def __repr__(self):
-        return '{}({!r})'.format(type(self).__name__, self.name)
+        if self.name is not None:
+            return '{}({!r})'.format(self._class_name, self.name)
+        return '{}()'.format(self._class_name)
 
     ### READ-ONLY PUBLIC ATTRIBUTES ###
 
     @property
-    def context_tree(self):
-        return getattr(self, '_context_tree', None)
+    def attribute_name(self):
+        return self._attribute_names
 
     @property
     def duration(self):
@@ -64,6 +66,10 @@ class SegmentSpecification(Specification):
         return bool(self.relative_directives)
 
     @property
+    def name(self):
+        return self._name
+
+    @property
     def relative_directives(self):
         result = []
         for directive in self.directives:
@@ -72,9 +78,12 @@ class SegmentSpecification(Specification):
         return result
 
     @property
+    def score_model(self):
+        return self._score_model
+
+    @property
     def time_signatures(self):
         setting = self.context_tree.score_context_proxy.get_setting(attribute_name='time_signatures')
-        #self._debug(setting, 'setting')
         assert isinstance(setting.value, list), setting.value
         return setting.value
 

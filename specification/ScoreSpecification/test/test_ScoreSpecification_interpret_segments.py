@@ -1,26 +1,16 @@
-from abjad.tools import scoretemplatetools
+from abjad.tools import *
 from baca.specification.ScoreSpecification import ScoreSpecification
 from library import *
 import baca
 import py
-import scf
 
 
 def test_ScoreSpecification_interpret_segments_01():
     py.test.skip('still working on this one ...')
 
-    score_template = scoretemplatetools.StringQuartetScoreTemplate
-    score = ScoreSpecification(score_template)
+    specification = ScoreSpecification(scoretemplatetools.StringQuartetScoreTemplate)
 
-    context_name_abbreviations = {}
-    context_name_abbreviations['vn1'] = 'First Violin Voice'
-    context_name_abbreviations['vn2'] = 'Second Violin Voice'
-    context_name_abbreviations['va'] = 'Viola Voice'
-    context_name_abbreviations['vc'] = 'Cello Voice'
-    score.context_name_abbreviations = context_name_abbreviations
-    score.initialize_context_name_abbreviations()
-
-    segment = score.append_segment(name='A')
+    segment = specification.append_segment(name='A')
     segment.set_tempo(segment, 108)
     segment.set_time_signatures(segment, [(2, 8), (2, 8), (3, 8), (2, 8), (3, 8)])
     segment.set_aggregate(segment, baca.pitch.CC[0][0])

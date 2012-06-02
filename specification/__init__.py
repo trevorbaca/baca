@@ -17,7 +17,7 @@ from SegmentSpecification import SegmentSpecification
 from Selection import Selection
 from Setting import Setting
 from SettingReservoir import SettingReservoir
-from SettingReservoirs import SettingReservoirs
+#from SettingReservoirs import SettingReservoirs
 from Specification import Specification
 from StatalServer import StatalServer
 from StatalServerRequest import StatalServerRequest
