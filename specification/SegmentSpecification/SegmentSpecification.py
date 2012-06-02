@@ -14,7 +14,6 @@ from baca.specification.StatalServer import StatalServer
 from baca.specification.StatalServerRequest import StatalServerRequest
 from handlers.Handler import Handler
 import copy
-import fractions
 
 
 class SegmentSpecification(Specification):
@@ -30,28 +29,10 @@ class SegmentSpecification(Specification):
 
     ### SPECIAL METHODS ###
 
-    def __getitem__(self, arg):
-        if isinstance(arg, int):
-            return self.directives.__getitem__(arg)
-        else:
-            return self.payload.__getitem__(arg)
-
-    def __getslice__(self, start, stop):
-        return self.directives.__getslice__(start, stop)
-
-    def __len__(self):
-        return len(self.directives)
-
     def __repr__(self):
-        if self.name is not None:
-            return '{}({!r})'.format(self._class_name, self.name)
-        return '{}()'.format(self._class_name)
+        return '{}({!r})'.format(self._class_name, self.name)
 
     ### READ-ONLY PUBLIC ATTRIBUTES ###
-
-    @property
-    def attribute_name(self):
-        return self._attribute_names
 
     @property
     def directives(self):
