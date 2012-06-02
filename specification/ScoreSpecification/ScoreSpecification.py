@@ -1,6 +1,5 @@
 from abjad.tools import *
 from baca.specification.AttributeRetrievalRequest import AttributeRetrievalRequest
-from baca.specification.ContextDictionary import ContextDictionary
 from baca.specification.Division import Division
 from baca.specification.DivisionList import DivisionList
 from baca.specification.DivisionRetrievalRequest import DivisionRetrievalRequest
@@ -26,11 +25,10 @@ class ScoreSpecification(Specification):
 
     ### INITIALIZER ###
 
-    def __init__(self, score_template, segment_specification_class=None, segments=None, settings=None):
-        Specification.__init__(self, score_template, settings=settings)
-        self.segment_specification_class = segment_specification_class or SegmentSpecification
+    def __init__(self, score_template):
+        Specification.__init__(self, score_template)
         self._segments = SegmentInventory()
-        self.payload = ContextDictionary(self.score_template())
+        self._segment_specification_class = SegmentSpecification
 
     ### SPECIAL METHODS ###
 
@@ -38,6 +36,10 @@ class ScoreSpecification(Specification):
         return '{}({!r})'.format(self._class_name, self.segments)
 
     ### READ-ONLY PUBLIC PROPERTIES ###
+
+    @property
+    def segment_specification_class(self):
+        return self._segment_specification_class
 
     @property
     def segments(self):

@@ -9,11 +9,12 @@ class Specification(SettingReservoir):
 
     ### INITIALIZER ###
 
-    def __init__(self, score_template, settings=None):
-        SettingReservoir.__init__(self, settings=settings)
+    def __init__(self, score_template):
+        SettingReservoir.__init__(self)
         self._score_template = score_template
         self._context_dictionary = ContextDictionary(self.score_template())
         self._initialize_context_name_abbreviations()
+        self._payload = ContextDictionary(self.score_template())
 
     ### PRIVATE METHODS ###
 
@@ -22,13 +23,21 @@ class Specification(SettingReservoir):
         for context_name_abbreviation, context_name in self.context_name_abbreviations.iteritems():
             setattr(self, context_name_abbreviation, context_name)
         score = self.score_template()
-        self.score_name = score.name
+        self._score_name = score.name
 
     ### READ-ONLY PUBLIC PROPERTIES ###
 
     @property
     def context_dictionary(self):
         return self._context_dictionary
+
+    @property
+    def payload(self):
+        return self._payload
+
+    @property
+    def score_name(self):
+        return self._score_name
 
     @property
     def score_template(self):

@@ -10,8 +10,14 @@ class SettingReservoir(AbjadObject):
 
     ### INITIALIZER ###
 
-    def __init__(self, settings=None):
-        self.settings = settings or []
+    def __init__(self):
+        self._settings = []
+
+    ### READ-ONLY PUBLIC PROPERTIES ###
+
+    @property
+    def settings(self):
+        return self._settings
 
     ### PUBLIC METHODS ###
 

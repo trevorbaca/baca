@@ -4,7 +4,6 @@ from baca.handlers.pitch.TimewisePitchClassHandler import TimewisePitchClassHand
 from baca.specification.AttributeRetrievalIndicator import AttributeRetrievalIndicator
 from baca.specification.AttributeRetrievalRequest import AttributeRetrievalRequest
 from baca.specification.Callback import Callback
-from baca.specification.ContextDictionary import ContextDictionary
 from baca.specification.Directive import Directive
 from baca.specification.DivisionRetrievalRequest import DivisionRetrievalRequest
 from baca.specification.HandlerRequest import HandlerRequest
@@ -22,15 +21,12 @@ class SegmentSpecification(Specification):
 
     ### INITIALIZER ###
 
-    # store settings?
-    # type- and form-check settings?
-    def __init__(self, score_template, name, directives=None, settings=None):
+    def __init__(self, score_template, name):
         assert isinstance(name, str), name
-        Specification.__init__(self, score_template, settings=settings)
+        Specification.__init__(self, score_template)
         self._score_model = self.score_template()
         self._name = name
-        self.directives = directives or []
-        self.payload = ContextDictionary(self.score_template())
+        self._directives = []
 
     ### SPECIAL METHODS ###
 
@@ -56,6 +52,10 @@ class SegmentSpecification(Specification):
     @property
     def attribute_name(self):
         return self._attribute_names
+
+    @property
+    def directives(self):
+        return self._directives
 
     @property
     def duration(self):
