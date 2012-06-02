@@ -1,16 +1,16 @@
 from abjad.tools import *
 from baca.specification.AttributeRetrievalIndicator import AttributeRetrievalIndicator
 from baca.specification.ContextDictionary import ContextDictionary
-from baca.specification.SettingReservoir import SettingReservoir
+from baca.specification.SettingInventory import SettingInventory
 from baca.specification.ValueRetrievalIndicator import ValueRetrievalIndicator
 
 
-class Specification(SettingReservoir):
+class Specification(SettingInventory):
 
     ### INITIALIZER ###
 
     def __init__(self, score_template):
-        SettingReservoir.__init__(self)
+        SettingInventory.__init__(self)
         self._score_template = score_template
         self._context_dictionary = ContextDictionary(self.score_template())
         self._initialize_context_name_abbreviations()

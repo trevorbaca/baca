@@ -2,7 +2,7 @@ from abjad.tools.abctools.AbjadObject import AbjadObject
 from baca.specification.AttributeNameEnumeration import AttributeNameEnumeration
 
 
-class SettingReservoir(AbjadObject):
+class SettingInventory(AbjadObject):
 
     ### CLASS ATTRIBUTES ###
 

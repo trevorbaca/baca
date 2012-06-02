@@ -10,7 +10,7 @@ from baca.specification.SegmentSpecification import SegmentSpecification
 from baca.specification.Selection import Selection
 from baca.specification.Specification import Specification
 from baca.specification.StatalServerRequest import StatalServerRequest
-from baca.specification.SettingReservoir import SettingReservoir
+from baca.specification.SettingInventory import SettingInventory
 import collections
 import copy
 

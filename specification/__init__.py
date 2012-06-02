@@ -17,7 +17,7 @@ from SegmentInventory import SegmentInventory
 from SegmentSpecification import SegmentSpecification
 from Selection import Selection
 from Setting import Setting
-from SettingReservoir import SettingReservoir
+from SettingInventory import SettingInventory
 from Specification import Specification
 from StatalServer import StatalServer
 from StatalServerRequest import StatalServerRequest
