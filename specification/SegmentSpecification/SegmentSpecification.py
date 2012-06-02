@@ -29,6 +29,12 @@ class SegmentSpecification(Specification):
 
     ### SPECIAL METHODS ###
 
+    def __getitem__(self, expr):
+        if isinstance(expr, int):
+            return self.directives.__getitem__(expr)
+        else:
+            return self.payload.__getitem__(expr) 
+        
     def __repr__(self):
         return '{}({!r})'.format(self._class_name, self.name)
 

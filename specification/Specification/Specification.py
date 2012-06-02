@@ -16,11 +16,6 @@ class Specification(SettingReservoir):
         self._initialize_context_name_abbreviations()
         self._payload = ContextDictionary(self.score_template())
 
-    ### SPECIAL METHODS ###
-    
-    def __getitem__(self, expr):
-        return self.payload.__getitem__(expr)
-
     ### PRIVATE METHODS ###
 
     def _initialize_context_name_abbreviations(self):

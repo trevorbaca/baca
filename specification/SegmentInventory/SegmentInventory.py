@@ -12,7 +12,7 @@ class SegmentInventory(AbjadObject, list):
 
     def __getitem__(self, arg):
         if isinstance(arg, int):
-            return list.__getitem__(arg)
+            return list.__getitem__(self, arg)
         elif isinstance(arg, str):
             for segment in self:
                 if segment.name == arg:
