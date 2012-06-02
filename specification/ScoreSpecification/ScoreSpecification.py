@@ -89,9 +89,20 @@ class ScoreSpecification(Specification):
             segment.add_time_signatures(self.score)
 
     def append_segment(self, name=None):
+        name = name or str(self.find_first_unused_segment_number())
         segment = self.segment_specification_class(self.score_template, name)
         self.segments.append(segment)
         return segment
+
+    def find_first_unused_segment_number(self):
+        candidate_segment_number = 1
+        while True:
+            for segment in self.segments:
+                if segment.name == str(candidate_segment_number):
+                    candidate_segment_number += 1
+                    break
+            else:
+                return candidate_segment_number
 
     def apply_additional_segment_parameters(self):
         pass 

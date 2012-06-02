@@ -19,3 +19,6 @@ class SegmentInventory(AbjadObject, list):
                     return segment
             else:
                 raise KeyError(repr(arg))
+
+    def __repr__(self):
+        return '{}({})'.format(self._class_name, list.__repr__(self))
