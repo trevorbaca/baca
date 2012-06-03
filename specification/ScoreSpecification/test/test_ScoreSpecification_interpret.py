@@ -5,7 +5,7 @@ import baca
 import py
 
 
-def test_ScoreSpecification_interpret_segments_01():
+def test_ScoreSpecification_interpret_01():
     py.test.skip('still working on this one ...')
 
     specification = ScoreSpecification(scoretemplatetools.StringQuartetScoreTemplate)

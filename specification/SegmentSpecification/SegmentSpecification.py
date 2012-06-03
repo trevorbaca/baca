@@ -1,4 +1,5 @@
 from abjad.tools import *
+from baca.specification.exceptions import *
 from baca.handlers.composites.CompositeRhythmHandler import CompositeRhythmHandler
 from baca.handlers.pitch.TimewisePitchClassHandler import TimewisePitchClassHandler
 from baca.specification.AttributeRetrievalIndicator import AttributeRetrievalIndicator
@@ -13,7 +14,6 @@ from baca.specification.Specification import Specification
 from baca.specification.Selection import Selection
 from baca.specification.StatalServer import StatalServer
 from baca.specification.StatalServerRequest import StatalServerRequest
-from baca.specification.exceptions import *
 from handlers.Handler import Handler
 import copy
 

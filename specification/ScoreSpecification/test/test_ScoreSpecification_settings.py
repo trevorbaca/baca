@@ -7,8 +7,14 @@ def test_ScoreSpecification_settings_01():
     specification = ScoreSpecification(scoretemplatetools.GroupedRhythmicStavesScoreTemplate(1))
     assert not specification.settings
 
+    segment = specification.append_segment()
+    assert not specification.settings
+    assert not segment.settings
 
-def test_ScoreSpecification_settings_02():
+    segment.set_time_signatures(segment, [(4, 8), (3, 8)])
+    assert not specification.settings
+    assert not segment.settings
 
-    specification = ScoreSpecification(scoretemplatetools.GroupedRhythmicStavesScoreTemplate(1))
-    specification.append_segment('1')
+    score = specification.interpret()
+    assert len(specification.settings) == 1
+    assert len(segment.settings) == 1
