@@ -36,7 +36,7 @@ class ScoreSpecification(Specification):
         if isinstance(expr, int):
             return self.segments.__getitem__(expr)
         else:
-            return self.context_payload.__getitem__(expr)
+            return self.payload_context_dictionary.__getitem__(expr)
 
     def __repr__(self):
         return '{}({!r})'.format(self._class_name, self.segments)
@@ -63,9 +63,9 @@ class ScoreSpecification(Specification):
 
     def add_divisions_to_voice(self, voice):
         region_division_lists = self.make_region_division_lists_for_voice(voice)
-        self.context_payload[voice.name]['region_division_lists'] = region_division_lists 
+        self.payload_context_dictionary[voice.name]['region_division_lists'] = region_division_lists 
         segment_division_lists = self.make_segment_division_lists_for_voice(voice)
-        self.add_segment_division_list_to_segment_context_payloads_for_voice(voice, segment_division_lists)
+        self.add_segment_division_list_to_segment_payload_context_dictionarys_for_voice(voice, segment_division_lists)
 
     def add_rhythm_to_voice_for_segment_region_divisions(self, voice, rhythm_token, region_division_list):
         maker = rhythm_token.value
@@ -83,15 +83,15 @@ class ScoreSpecification(Specification):
 
     def add_rhythms_to_voice(self, voice):
         rhythm_tokens = self.get_rhythm_tokens_for_all_segments_in_voice(voice)
-        region_division_lists = self.context_payload[voice.name]['region_division_lists']
+        region_division_lists = self.payload_context_dictionary[voice.name]['region_division_lists']
         for rhythm_token, region_division_list in zip(rhythm_tokens, region_division_lists):
             self.add_rhythm_to_voice_for_segment_region_divisions(voice, rhythm_token, region_division_list)
 
-    def add_segment_division_list_to_segment_context_payloads_for_voice(self, voice, segment_division_lists):
+    def add_segment_division_list_to_segment_payload_context_dictionarys_for_voice(self, voice, segment_division_lists):
         assert len(self.segments) == len(segment_division_lists)
         for segment, segment_division_list in zip(self.segments, segment_division_lists):
-            segment.context_payload[voice.name]['segment_division_list'] = segment_division_list
-            segment.context_payload[voice.name]['segment_pairs'] = [x.pair for x in segment_division_list]
+            segment.payload_context_dictionary[voice.name]['segment_division_list'] = segment_division_list
+            segment.payload_context_dictionary[voice.name]['segment_pairs'] = [x.pair for x in segment_division_list]
 
     def add_time_signatures(self):
         for segment in self.segments:
@@ -190,7 +190,7 @@ class ScoreSpecification(Specification):
         return segment_division_tokens
 
     def get_start_division_lists_for_voice(self, voice):
-        region_division_lists = self.context_payload[voice.name]['region_division_lists']
+        region_division_lists = self.payload_context_dictionary[voice.name]['region_division_lists']
         divisions = []
         for region_division_list in region_division_lists:
             divisions.extend(region_division_list)
@@ -217,7 +217,7 @@ class ScoreSpecification(Specification):
     def handle_divisions_retrieval_request(self, request):
         voice = componenttools.get_first_component_in_expr_with_name(self.score, request.voice_name)
         assert isinstance(voice, voicetools.Voice), voice
-        region_division_lists = self.context_payload[voice.name]['region_division_lists']
+        region_division_lists = self.payload_context_dictionary[voice.name]['region_division_lists']
         divisions = []
         for region_division_list in region_division_lists:
             divisions.extend(region_division_list)
@@ -325,7 +325,7 @@ class ScoreSpecification(Specification):
         region_division_tokens = self.change_segment_division_tokens_to_region_division_tokens(
             segment_division_tokens)
         region_division_lists = self.make_region_division_lists_from_region_division_tokens(region_division_tokens)
-        self.context_payload[voice.name]['region_division_lists'] = region_division_lists[:]
+        self.payload_context_dictionary[voice.name]['region_division_lists'] = region_division_lists[:]
         return region_division_lists
 
     def make_region_division_lists_from_region_division_tokens(self, region_division_tokens):
@@ -353,7 +353,7 @@ class ScoreSpecification(Specification):
 
     def make_segment_division_lists_for_voice(self, voice):
         segment_division_lists = []
-        region_division_lists = self.context_payload[voice.name]['region_division_lists']
+        region_division_lists = self.payload_context_dictionary[voice.name]['region_division_lists']
         divisions = []
         for region_division_list in region_division_lists:
             divisions.extend(region_division_list)
