@@ -1,20 +1,26 @@
 from abjad.tools import *
+from abjad.tools.abctools.AbjadObject import AbjadObject
+from baca.specification.AttributeNameEnumeration import AttributeNameEnumeration
 from baca.specification.AttributeRetrievalIndicator import AttributeRetrievalIndicator
 from baca.specification.ContextDictionary import ContextDictionary
 from baca.specification.SettingInventory import SettingInventory
 from baca.specification.ValueRetrievalIndicator import ValueRetrievalIndicator
 
 
-class Specification(SettingInventory):
+class Specification(AbjadObject):
+
+    ### CLASS ATTRIBUTES ###
+
+    attribute_names = AttributeNameEnumeration()
 
     ### INITIALIZER ###
 
     def __init__(self, score_template):
-        SettingInventory.__init__(self)
         self._score_template = score_template
         self._context_dictionary = ContextDictionary(self.score_template())
         self._initialize_context_name_abbreviations()
         self._payload = ContextDictionary(self.score_template())
+        self._settings = SettingInventory()
 
     ### PRIVATE METHODS ###
 
@@ -42,6 +48,10 @@ class Specification(SettingInventory):
     @property
     def score_template(self):
         return self._score_template
+
+    @property
+    def settings(self):
+        return self._settings
 
     ### PUBLIC METHODS ###
 

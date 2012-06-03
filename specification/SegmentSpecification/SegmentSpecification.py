@@ -175,12 +175,12 @@ class SegmentSpecification(Specification):
     def get_setting(self, **kwargs):
         '''Return unresolved setting.
         '''
-        return Specification.get_setting(self, segment_name=self.name, **kwargs)
+        return self.settings.get_setting(segment_name=self.name, **kwargs)
 
     def get_settings(self, **kwargs):
         '''Return unresolved setting.
         '''
-        return Specification.get_settings(self, segment_name=self.name, **kwargs)
+        return self.settings.get_settings(segment_name=self.name, **kwargs)
 
     def parse_context_token(self, context_token):
         if context_token in self.context_names:

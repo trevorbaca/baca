@@ -2,7 +2,7 @@ from abjad.tools.abctools.AbjadObject import AbjadObject
 from baca.specification.AttributeNameEnumeration import AttributeNameEnumeration
 
 
-class SettingInventory(AbjadObject):
+class SettingInventory(AbjadObject, list):
 
     ### CLASS ATTRIBUTES ###
 
@@ -11,13 +11,7 @@ class SettingInventory(AbjadObject):
     ### INITIALIZER ###
 
     def __init__(self):
-        self._settings = []
-
-    ### READ-ONLY PUBLIC PROPERTIES ###
-
-    @property
-    def settings(self):
-        return self._settings
+        list.__init__(self)
 
     ### PUBLIC METHODS ###
 
@@ -38,7 +32,7 @@ class SettingInventory(AbjadObject):
         attribute_name=None, context_name=None, persistent=None, scope=None, segment_name=None):
         assert attribute_name in self.attribute_names, repr(attribute_name)
         settings = []
-        for setting in self.settings:
+        for setting in self:
             if (
                 (attribute_name is None or setting.attribute_name == attribute_name) and
                 (context_name is None or setting.context_name == context_name) and
