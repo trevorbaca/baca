@@ -61,10 +61,9 @@ class ScoreSpecification(Specification):
         for voice in voicetools.iterate_voices_forward_in_expr(self.score):
             self.add_divisions_to_voice(voice)
 
-    # TODO: eliminate annotation and use context_payload instead
     def add_divisions_to_voice(self, voice):
         region_division_lists = self.make_region_division_lists_for_voice(voice)
-        marktools.Annotation('region_division_lists', region_division_lists)(voice)
+        self.context_payload[voice.name]['region_division_lists'] = region_division_lists 
         segment_division_lists = self.make_segment_division_lists_for_voice(voice)
         self.add_segment_division_list_to_segment_context_payloads_for_voice(voice, segment_division_lists)
 
@@ -191,8 +190,7 @@ class ScoreSpecification(Specification):
         return segment_division_tokens
 
     def get_start_division_lists_for_voice(self, voice):
-        region_division_lists = marktools.get_value_of_annotation_attached_to_component(
-            voice, 'region_division_lists')
+        region_division_lists = self.context_payload[voice.name]['region_division_lists']
         divisions = []
         for region_division_list in region_division_lists:
             divisions.extend(region_division_list)
@@ -219,8 +217,7 @@ class ScoreSpecification(Specification):
     def handle_divisions_retrieval_request(self, request):
         voice = componenttools.get_first_component_in_expr_with_name(self.score, request.voice_name)
         assert isinstance(voice, voicetools.Voice), voice
-        region_division_lists = marktools.get_value_of_annotation_attached_to_component(
-            voice, 'region_division_lists')
+        region_division_lists = self.context_payload[voice.name]['region_division_lists']
         divisions = []
         for region_division_list in region_division_lists:
             divisions.extend(region_division_list)
@@ -356,8 +353,7 @@ class ScoreSpecification(Specification):
 
     def make_segment_division_lists_for_voice(self, voice):
         segment_division_lists = []
-        region_division_lists = marktools.get_value_of_annotation_attached_to_component(
-            voice, 'region_division_lists') 
+        region_division_lists = self.context_payload[voice.name]['region_division_lists']
         divisions = []
         for region_division_list in region_division_lists:
             divisions.extend(region_division_list)
