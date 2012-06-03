@@ -44,6 +44,10 @@ class ScoreSpecification(Specification):
     ### READ-ONLY PUBLIC PROPERTIES ###
 
     @property
+    def segment_names(self):
+        return [segment.name for segment in self.segments]
+
+    @property
     def segment_specification_class(self):
         return self._segment_specification_class
 
@@ -96,6 +100,7 @@ class ScoreSpecification(Specification):
 
     def append_segment(self, name=None):
         name = name or str(self.find_first_unused_segment_number())
+        assert name not in self.segment_names, repr(name)
         segment = self.segment_specification_class(self.score_template, name)
         self.segments.append(segment)
         return segment
