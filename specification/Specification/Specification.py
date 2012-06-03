@@ -19,7 +19,7 @@ class Specification(AbjadObject):
         self._score_template = score_template
         self._context_resolved_settings = ContextDictionary(self.score_template())
         self._initialize_context_name_abbreviations()
-        self._payload = ContextDictionary(self.score_template())
+        self._context_payload = ContextDictionary(self.score_template())
         self._settings = SettingInventory()
 
     ### PRIVATE METHODS ###
@@ -38,8 +38,8 @@ class Specification(AbjadObject):
         return self._context_resolved_settings
 
     @property
-    def payload(self):
-        return self._payload
+    def context_payload(self):
+        return self._context_payload
 
     @property
     def score_name(self):

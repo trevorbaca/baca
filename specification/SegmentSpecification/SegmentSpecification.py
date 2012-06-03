@@ -35,7 +35,7 @@ class SegmentSpecification(Specification):
         if isinstance(expr, int):
             return self.directives.__getitem__(expr)
         else:
-            return self.payload.__getitem__(expr) 
+            return self.context_payload.__getitem__(expr) 
         
     def __repr__(self):
         return '{}({!r})'.format(self._class_name, self.name)
