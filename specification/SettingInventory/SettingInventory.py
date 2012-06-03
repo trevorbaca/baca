@@ -1,23 +1,13 @@
-from abjad.tools.abctools.AbjadObject import AbjadObject
-#from abjad.tools.datastructuretools.ObjectInventory import ObjectInventory
+from abjad.tools.datastructuretools.ObjectInventory import ObjectInventory
 from baca.specification.AttributeNameEnumeration import AttributeNameEnumeration
 from baca.specification.Setting import Setting
 
 
-class SettingInventory(AbjadObject, list):
-#class SettingInventory(ObjectInventory):
+class SettingInventory(ObjectInventory):
 
     ### CLASS ATTRIBUTES ###
 
     attribute_names = AttributeNameEnumeration()
-
-    ### INITIALIZER ###
-
-    def __init__(self):
-        list.__init__(self)
-
-    def __repr__(self):
-        return '{}({})'.format(self._class_name, list.__repr__(self))
 
     ### PRIVATE READ-ONLY PROPERTIES ###
 

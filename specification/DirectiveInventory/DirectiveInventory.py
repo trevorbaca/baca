@@ -1,17 +1,16 @@
-from abjad.tools.abctools.AbjadObject import AbjadObject
+from abjad.tools.datastructuretools.ObjectInventory import ObjectInventory
 from baca.specification.AttributeNameEnumeration import AttributeNameEnumeration
+from baca.specification.Directive import Directive
 
 
-class DirectiveInventory(AbjadObject, list):
+class DirectiveInventory(ObjectInventory):
 
     ### CLASS ATTRIBUTES ###
 
     attribute_names = AttributeNameEnumeration()
 
-    ### INITIALIZER ###
+    ### READ-ONLY PRIVATE PROPERTIES ###
 
-    def __init__(self):
-        list.__init__(self)
-
-    def __repr__(self):
-        return '{}({})'.format(self._class_name, list.__repr__(self))
+    @property
+    def _item_callable(self):
+        return Directive

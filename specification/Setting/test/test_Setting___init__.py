@@ -13,7 +13,7 @@ def test_Setting___init___02():
     '''Initialize from other setting.
     '''
 
-    setting_1 = Setting('1', 'Voice 1', None, 'time_signatures', [(4, 8), (3, 8)], True, True)
+    setting_1 = Setting('1', 'Voice 1', None, 'time_signatures', [(4, 8), (3, 8)], True, True, fresh=False)
     setting_2 = Setting(setting_1)
     
     assert isinstance(setting_1, Setting)

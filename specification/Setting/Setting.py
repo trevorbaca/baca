@@ -8,16 +8,11 @@ class Setting(AbjadObject):
     ### INITIALIZER ###
 
     def __init__(self, *args, **kwargs):
-        values = self._get_mandatory_argument_values(*args)
-        segment_name, context_name, scope, attribute_name, source, persistent, truncate = values
-        fresh = kwargs.get('fresh', True)
-        assert isinstance(segment_name, str), segment_name
-        assert isinstance(context_name, (str, type(None))), context_name
-        assert isinstance(scope, (Scope, type(None))), scope
-        assert isinstance(attribute_name, str), attribute_name
-        assert isinstance(persistent, bool), persistent
-        assert isinstance(truncate, bool), truncate
-        assert isinstance(fresh, type(True)), fresh
+        mandatory_argument_values, keyword_argument_values = self._get_input_argument_values(*args, **kwargs)
+        self._check_input_arguments(mandatory_argument_values, keyword_argument_values)
+        segment_name, context_name, scope, attribute_name, source, persistent, truncate = \
+            mandatory_argument_values
+        fresh = keyword_argument_values[0]
         self.segment_name = segment_name
         self.context_name = context_name
         self.scope = scope
@@ -79,13 +74,31 @@ class Setting(AbjadObject):
 
     ### PRIVATE METHODS ###
 
-    def _get_mandatory_argument_values(self, *args):
+    def _check_input_arguments(self, mandatory_argument_values, keyword_argument_values):
+        segment_name, context_name, scope, attribute_name, source, persistent, truncate = \
+            mandatory_argument_values
+        fresh = keyword_argument_values[0]
+        assert isinstance(segment_name, str), repr(segment_name)
+        assert isinstance(context_name, (str, type(None))), repr(context_name)
+        assert isinstance(scope, (Scope, type(None))), repr(scope)
+        assert isinstance(attribute_name, str), repr(attribute_name)
+        assert isinstance(persistent, bool), repr(persistent)
+        assert isinstance(truncate, bool), repr(truncate)
+        assert isinstance(fresh, type(True)), repr(fresh)
+
+    def _get_input_argument_values(self, *args, **kwargs):
         if len(args) == 1:
             assert isinstance(args[0], type(self)), repr(args[0])
-            return args[0]._mandatory_argument_values
+            mandatory_argument_values = args[0]._mandatory_argument_values
+            keyword_argument_values = args[0]._keyword_argument_values
+            if kwargs.get('fresh') is not None:
+                keyword_argment_values[0] = kwargs.get('fresh')
         else:
             assert len(args) == 7, repr(args)
-            return args
+            mandatory_argument_values = args
+            keyword_argument_values = []
+            keyword_argument_values.append(kwargs.get('fresh', True))
+        return mandatory_argument_values, keyword_argument_values
 
     def _get_one_line_source_format(self, source):
         if hasattr(source, '_one_line_format'):
