@@ -113,5 +113,5 @@ class Setting(AbjadObject):
     def copy_to_segment(self, segment_name):
         assert isinstance(segment_name, str), repr(segment_name)
         new = copy.deepcopy(self)
-        new.name = segment_name
+        new.segment_name = segment_name
         return new

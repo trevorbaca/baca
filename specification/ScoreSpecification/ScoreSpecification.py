@@ -315,10 +315,7 @@ class ScoreSpecification(Specification):
                 settings = self.resolved_settings_context_dictionary.get_settings(attribute_name='time_signatures')
                 assert len(settings) == 1
                 setting = settings[0]
-                # TODO: implement helper on some class somewhere to do just these two lines
-                setting = copy.deepcopy(setting)
-                setting.segment_name = segment.name
-                #setting = setting.copy_to_segment(segment.name)
+                setting = setting.copy_to_segment(segment.name)
             assert setting.context_name is None
             assert setting.scope is None
             self.store_setting(setting)
