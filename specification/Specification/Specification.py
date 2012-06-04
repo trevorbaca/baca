@@ -17,7 +17,7 @@ class Specification(AbjadObject):
 
     def __init__(self, score_template):
         self._score_template = score_template
-        self._context_resolved_settings = ContextDictionary(self.score_template())
+        self._resolved_settings_context_dictionary = ContextDictionary(self.score_template())
         self._initialize_context_name_abbreviations()
         self._payload_context_dictionary = ContextDictionary(self.score_template())
         self._settings = SettingInventory()
@@ -34,8 +34,8 @@ class Specification(AbjadObject):
     ### READ-ONLY PUBLIC PROPERTIES ###
 
     @property
-    def context_resolved_settings(self):
-        return self._context_resolved_settings
+    def resolved_settings_context_dictionary(self):
+        return self._resolved_settings_context_dictionary
 
     @property
     def payload_context_dictionary(self):
