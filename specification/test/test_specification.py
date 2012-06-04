@@ -1,35 +1,8 @@
 from abjad.tools import *
+from helpers import read_test_output
+from helpers import write_test_output
 from specification import ScoreSpecification
 import baca.library as library
-import inspect
-import os
-
-
-def manage_output(score, test_function_name, cache_ly=False, cache_pdf=False, go=False, render_pdf=False):
-    if go: cache_ly = cache_pdf = render_pdf = True
-    if not any([cache_ly, cache_pdf, render_pdf]): return
-    lilypond_file = library.apply_baca_letter_layout(score)
-    test_number = int(test_function_name.split('_')[-1])
-    title = 'specification {}'.format(test_number)
-    lilypond_file.header_block.title = markuptools.make_centered_title_markup(title, font_size=6)
-    lilypond_file.score.set.proportionalNotationDuration = schemetools.SchemeMoment((1, 48))
-    parent_directory_name = os.path.dirname(__file__)
-    if render_pdf:
-        iotools.show(lilypond_file)
-    if cache_pdf:
-        file_name = '{}.pdf'.format(test_function_name)
-        pdf_path_name = os.path.join(parent_directory_name, file_name)
-        iotools.write_expr_to_pdf(lilypond_file, pdf_path_name)
-    if cache_ly:
-        file_name = '{}.ly'.format(test_function_name)
-        ly_path_name = os.path.join(parent_directory_name, file_name)
-        file(ly_path_name, 'w').write(score.format)
-
-def read_score_ly_file(current_function_name):
-    segment_ly_file_name = '{}.ly'.format(current_function_name)
-    directory_name = os.path.dirname(__file__)
-    segment_ly_path_name = os.path.join(directory_name, segment_ly_file_name)
-    return file(segment_ly_path_name, 'r').read()
 
 
 def test_specification_01():
@@ -68,9 +41,9 @@ def test_specification_01():
     assert specification.segments['T2'].time_signatures == [(2, 8), (2, 8)]
 
     current_function_name = introspectiontools.get_current_function_name()
-    manage_output(score, current_function_name)
+    write_test_output(score, __file__, current_function_name)
 
-    assert score.format == read_score_ly_file(current_function_name)
+    assert score.format == read_test_output(__file__, current_function_name)
 
 
 def test_specification_02():
@@ -101,9 +74,9 @@ def test_specification_02():
     assert specification.segments['T2'].time_signatures == [(2, 8), (2, 8)]
 
     current_function_name = introspectiontools.get_current_function_name()
-    manage_output(score, current_function_name)
+    write_test_output(score, __file__, current_function_name)
 
-    assert score.format == read_score_ly_file(current_function_name)
+    assert score.format == read_test_output(__file__, current_function_name)
 
 
 def test_specification_03():
@@ -139,9 +112,9 @@ def test_specification_03():
         [(3, 16), (2, 16), (3, 16), (3, 16), (3, 16)]
 
     current_function_name = introspectiontools.get_current_function_name()
-    manage_output(score, current_function_name)
+    write_test_output(score, __file__, current_function_name)
 
-    assert score.format == read_score_ly_file(current_function_name)
+    assert score.format == read_test_output(__file__, current_function_name)
 
 
 def test_specification_04():
@@ -187,9 +160,9 @@ def test_specification_04():
         specification.segments['T1']['Voice 4']['segment_pairs']
 
     current_function_name = introspectiontools.get_current_function_name()
-    manage_output(score, current_function_name)
+    write_test_output(score, __file__, current_function_name)
 
-    assert score.format == read_score_ly_file(current_function_name)
+    assert score.format == read_test_output(__file__, current_function_name)
 
 
 def test_specification_05():
@@ -207,9 +180,9 @@ def test_specification_05():
     score = specification.interpret()
 
     current_function_name = introspectiontools.get_current_function_name()
-    manage_output(score, current_function_name)
+    write_test_output(score, __file__, current_function_name)
 
-    assert score.format == read_score_ly_file(current_function_name)
+    assert score.format == read_test_output(__file__, current_function_name)
 
 
 def test_specification_06():
@@ -230,9 +203,9 @@ def test_specification_06():
     score = specification.interpret()
 
     current_function_name = introspectiontools.get_current_function_name()
-    manage_output(score, current_function_name)
+    write_test_output(score, __file__, current_function_name)
 
-    assert score.format == read_score_ly_file(current_function_name)
+    assert score.format == read_test_output(__file__, current_function_name)
 
 
 def test_specification_07():
@@ -253,6 +226,6 @@ def test_specification_07():
     score = specification.interpret()
 
     current_function_name = introspectiontools.get_current_function_name()
-    manage_output(score, current_function_name)
+    write_test_output(score, __file__, current_function_name)
 
-    assert score.format == read_score_ly_file(current_function_name)
+    assert score.format == read_test_output(__file__, current_function_name)
