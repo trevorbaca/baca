@@ -9,6 +9,7 @@ from baca.specification.Directive import Directive
 from baca.specification.DirectiveInventory import DirectiveInventory
 from baca.specification.DivisionRetrievalRequest import DivisionRetrievalRequest
 from baca.specification.HandlerRequest import HandlerRequest
+from baca.specification.ResolvedSetting import ResolvedSetting
 from baca.specification.Scope import Scope
 from baca.specification.Specification import Specification
 from baca.specification.Selection import Selection
@@ -120,12 +121,6 @@ class SegmentSpecification(Specification):
             truncate = False
         return value, fresh, truncate
 
-#    # this function will eventually replace get_divisions_value_with_fresh_and_truncate
-#    def get_divisions_resolved_setting(self, context_name, scope=None):
-#        '''Return resolved divisions setting or else default to resolve time signature setting.
-#        '''
-#        pass
-
     def get_resolved_value_with_fresh(self, attribute_name, context_name, include_truncate=False, scope=None):
         '''Return value from resolved setting because context proxy stores resolved settings.
         '''
@@ -140,7 +135,7 @@ class SegmentSpecification(Specification):
                 continue
             elif len(settings) == 1:
                 setting = settings[0]
-                assert setting.value is not None # TODO: change to isinstance(setting, ResolvedSetting)
+                assert isinstance(setting, ResolvedSetting)
                 if include_truncate:
                     return setting.value, setting.fresh, setting.truncate
                 else:
@@ -161,11 +156,13 @@ class SegmentSpecification(Specification):
             return value, fresh
         return library.rest_filled_tokens, True
 
+    # TODO: remove this and just call sefl.settings.get_setting() directly
     def get_setting(self, **kwargs):
         '''Return unresolved setting.
         '''
         return self.settings.get_setting(segment_name=self.name, **kwargs)
 
+    # TODO: remove this and just call self.settings.get_settings() directly
     def get_settings(self, **kwargs):
         '''Return unresolved setting.
         '''
@@ -195,6 +192,7 @@ class SegmentSpecification(Specification):
             raise ValueError('invalid selection token: {!r}.'.format(selection_token))
         return selection
 
+    # TODO: rename to something more explicit
     def retrieve(self, attribute_name, **kwargs):
         return Specification.retrieve(self, attribute_name, self.name, **kwargs)
 
@@ -202,7 +200,8 @@ class SegmentSpecification(Specification):
         return Specification.retrieve_resolved_value(self, attribute_name, self.name, **kwargs)
 
     def select(self, context_names=None, segment_name=None, scope=None):
-        assert context_names is None or self.resolved_settings_context_dictionary.all_are_context_names(context_names)
+        assert context_names is None or self.resolved_settings_context_dictionary.all_are_context_names(
+            context_names)
         assert isinstance(segment_name, (str, type(None)))
         assert isinstance(scope, (Scope, type(None)))
         segment_name = segment_name or self.name
