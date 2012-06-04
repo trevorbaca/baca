@@ -5,7 +5,7 @@ from specification import ScoreSpecification
 import baca.library as library
 
 
-def test_specification_01():
+def test_quartet_01():
     '''Create 4-staff score S with sections T1, T2.
     Set T1 time signatures equal to [(3, 8), (3, 8), (2, 8), (2, 8)].
     Set T1 1 & 2 divisions equal to a repeating pattern of [(3, 16)].
@@ -46,7 +46,7 @@ def test_specification_01():
     assert score.format == read_test_output(__file__, current_function_name)
 
 
-def test_specification_02():
+def test_quartet_02():
     '''As above with different divisions.
     
     Tests for spanning divisions in 1 & 2 and also in 3 & 4.
@@ -79,7 +79,7 @@ def test_specification_02():
     assert score.format == read_test_output(__file__, current_function_name)
 
 
-def test_specification_03():
+def test_quartet_03():
     '''Score with 4 one-voice staves.
     F1 divisions truncated in F1. F2, F3, F4 divisions rotated.
     '''
@@ -117,7 +117,7 @@ def test_specification_03():
     assert score.format == read_test_output(__file__, current_function_name)
 
 
-def test_specification_04():
+def test_quartet_04():
     '''As above with T2 equal to T1 and a hard break between.
     '''
 
