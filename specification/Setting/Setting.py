@@ -1,6 +1,5 @@
 from abjad.tools.abctools.AbjadObject import AbjadObject
 from baca.specification.Scope import Scope
-from baca.specification.Selection import Selection
 
 
 class Setting(AbjadObject):
@@ -107,13 +106,3 @@ class Setting(AbjadObject):
             return source.name
         else:
             return str(source)
-
-    ### READ-ONLY PUBLIC PROPERTIES ###
-
-    @property
-    def is_absolute(self):
-        return not self.is_relative
-
-    @property
-    def is_relative(self):
-        return isinstance(self.source, Selection)

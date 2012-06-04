@@ -1,7 +1,5 @@
-1. refactor interpret() n * O(n) traversal to O(n) with first-pass sort.
+1. Make Setting inherit from Directive. Or vice versa. Or make both inherit from an ABC.
 
-2. implement RetrievalRequest as base class for different retrieval requests classes.
+2. Implement RetrievalRequest as base class for different retrieval requests classes.
 
-3. extend ContextProxy to store *resolved* settings only ... 
-   only this won't do for the context payload context proxies;
-   so maybe subclass ContextProxy to ResolvedSettingContextProxy?
+3. Refactor interpret() n * O(n) traversal to O(n) with first-pass sort.

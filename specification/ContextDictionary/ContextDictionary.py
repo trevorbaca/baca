@@ -2,6 +2,7 @@ from abjad.tools import contexttools
 from abjad.tools import scoretools
 from abjad.tools.abctools.AbjadObject import AbjadObject
 from baca.specification.ContextProxy import ContextProxy
+from baca.specification.ResolvedSetting import ResolvedSetting
 from collections import OrderedDict
 
 
@@ -10,7 +11,7 @@ class ContextDictionary(AbjadObject, OrderedDict):
     ### INITIALIZER ###
 
     def __init__(self, score):
-        assert isinstance(score, scoretools.Score), score
+        assert isinstance(score, scoretools.Score), repr(score)
         OrderedDict.__init__(self)
         self._score = score
         self._initialize_context_proxies()
@@ -76,4 +77,8 @@ class ContextDictionary(AbjadObject, OrderedDict):
         for context_name in self:
             print context_name
             for setting_name in self[context_name]:
-                print '\t{}'.format(self[context_name][setting_name]._one_line_format)
+                item = self[context_name][setting_name]
+                if isinstance(item, ResolvedSetting):
+                    print '\t{}'.format(self[context_name][setting_name])
+                else:
+                    print '\t{}: {}'.format(setting_name, self[context_name][setting_name])

@@ -52,20 +52,8 @@ class SegmentSpecification(Specification):
             return sum([durationtools.Duration(x) for x in self.time_signatures])        
 
     @property
-    def has_relative_directives(self):
-        return bool(self.relative_directives)
-
-    @property
     def name(self):
         return self._name
-
-    @property
-    def relative_directives(self):
-        result = []
-        for directive in self.directives:
-            if directive.is_relative:
-                result.append(directive)
-        return result
 
     @property
     def score_model(self):
@@ -74,7 +62,8 @@ class SegmentSpecification(Specification):
     @property
     def time_signatures(self):
         try:
-            setting = self.resolved_settings_context_dictionary.score_context_proxy.get_setting(attribute_name='time_signatures')
+            setting = self.resolved_settings_context_dictionary.score_context_proxy.get_setting(
+                attribute_name='time_signatures')
         except MissingSettingError:
             return None
         assert isinstance(setting.value, list), setting.value
