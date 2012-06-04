@@ -16,8 +16,9 @@ def write_test_output(score, full_file_name, test_function_name,
     if not any([cache_ly, cache_pdf, render_pdf]): return
     lilypond_file = library.apply_baca_letter_layout(score)
     parts = test_function_name.split('_')
-    genre, test_number = parts[-2], int(parts[-1])
-    title = '{} {}'.format(genre, test_number)
+    test_number = int(parts[-1])
+    title_words = ' '.join(parts[1:-1])
+    title = '{} {}'.format(title_words, test_number)
     lilypond_file.header_block.title = markuptools.make_centered_title_markup(title, font_size=6)
     lilypond_file.score.set.proportionalNotationDuration = schemetools.SchemeMoment((1, 48))
     parent_directory_name = os.path.dirname(full_file_name)

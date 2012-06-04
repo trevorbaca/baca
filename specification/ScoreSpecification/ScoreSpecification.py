@@ -300,9 +300,11 @@ class ScoreSpecification(Specification):
             self.store_settings(settings)
 
     def interpret_segment_time_signatures(self):
-        '''Check each segment for an explicit time signature setting.
-        If none, check SCORE context tree for current time signature setting.
-        A time signature setting must be found: store it.
+        '''For each segment:
+        Check segment for an explicit time signature setting.
+        If none, check SCORE resolved settings context dictionary for current time signature setting.
+        Halt interpretation if no time signature setting is found.
+        Otherwise store time signature setting.
         '''
         for segment in self.segments:
             settings = segment.get_settings(attribute_name='time_signatures')
@@ -316,6 +318,7 @@ class ScoreSpecification(Specification):
                 # TODO: implement helper on some class somewhere to do just these two lines
                 setting = copy.deepcopy(setting)
                 setting.segment_name = segment.name
+                #setting = setting.copy_to_segment(segment.name)
             assert setting.context_name is None
             assert setting.scope is None
             self.store_setting(setting)

@@ -1,5 +1,6 @@
 from abjad.tools.abctools.AbjadObject import AbjadObject
 from baca.specification.Scope import Scope
+import copy
 
 
 class Setting(AbjadObject):
@@ -106,3 +107,11 @@ class Setting(AbjadObject):
             return source.name
         else:
             return str(source)
+
+    ### PUBLIC METHODS ###
+
+    def copy_to_segment(self, segment_name):
+        assert isinstance(segment_name, str), repr(segment_name)
+        new = copy.deepcopy(self)
+        new.name = segment_name
+        return new
