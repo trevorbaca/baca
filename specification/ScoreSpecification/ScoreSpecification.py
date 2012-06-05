@@ -312,8 +312,8 @@ class ScoreSpecification(Specification):
                 assert len(settings) == 1
                 setting = settings[0]
             else:
-                settings = self.resolved_settings_context_dictionary.get_setting(attribute_name='time_signatures')
-                #assert len(settings) == 1
+                settings = self.resolved_settings_context_dictionary.get_settings(attribute_name='time_signatures')
+                assert len(settings) == 1
                 setting = settings[0]
                 setting = setting.copy_to_segment(segment.name)
             assert setting.context_name is None
