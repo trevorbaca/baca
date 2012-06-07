@@ -1,1 +1,0 @@
-from ValueRetrievalIndicator import ValueRetrievalIndicator

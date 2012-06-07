@@ -1,6 +1,0 @@
-from baca.specificationtools.AttributeRetrievalIndicator import AttributeRetrievalIndicator
-
-
-class ValueRetrievalIndicator(AttributeRetrievalIndicator):
-
-	pass
