@@ -1,1 +1,1 @@
-py.test -x $BACA $SCORES $ABJAD
+py.test -x $BACA $SCORES $ABJAD $EXPERIMENTAL
