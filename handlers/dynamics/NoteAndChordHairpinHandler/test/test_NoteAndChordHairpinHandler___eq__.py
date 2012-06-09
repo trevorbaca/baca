@@ -1,18 +1,18 @@
 from abjad import *
-import handlers
+import handlertools
 
 
 def test_NoteAndChordHairpinHandler___eq___01():
 
-    handler_1 = handlers.dynamics.NoteAndChordHairpinHandler(
+    handler_1 = handlertools.dynamics.NoteAndChordHairpinHandler(
         hairpin_token=('p', '<', 'f'),
         minimum_prolated_duration=Duration(1, 8))
 
-    handler_2 = handlers.dynamics.NoteAndChordHairpinHandler(
+    handler_2 = handlertools.dynamics.NoteAndChordHairpinHandler(
         hairpin_token=('p', '<', 'f'),
         minimum_prolated_duration=Duration(1, 8))
 
-    handler_3 = handlers.dynamics.NoteAndChordHairpinHandler(
+    handler_3 = handlertools.dynamics.NoteAndChordHairpinHandler(
         hairpin_token=('pp', '<', 'p'),
         minimum_prolated_duration=Duration(1, 8))
 

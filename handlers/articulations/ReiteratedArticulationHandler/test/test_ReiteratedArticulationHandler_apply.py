@@ -1,10 +1,10 @@
 from abjad import *
-import handlers
+import handlertools
 
 
 def test_ReiteratedArticulationHandler_apply_01():
 
-    reiterated_articulation = handlers.articulations.ReiteratedArticulationHandler(['^', '.'])
+    reiterated_articulation = handlertools.articulations.ReiteratedArticulationHandler(['^', '.'])
     staff = Staff("c'8 d'8 r8 e'8 f'8 r8 g'8 r8")
     reiterated_articulation.apply(staff)
 
@@ -26,7 +26,7 @@ def test_ReiteratedArticulationHandler_apply_01():
 
 def test_ReiteratedArticulationHandler_apply_02():
 
-    reiterated_articulation = handlers.articulations.ReiteratedArticulationHandler('.')
+    reiterated_articulation = handlertools.articulations.ReiteratedArticulationHandler('.')
     staff = Staff("c'8 d'8 r8 e'8 f'8 r8 g'8 r8")
     reiterated_articulation.apply(staff)
 

@@ -1,11 +1,11 @@
 from abjad import *
-import handlers
+import handlertools
 
 
 def test_NoteAndChordHairpinsHandler_apply_01():
 
 
-    hairpins = handlers.dynamics.NoteAndChordHairpinsHandler()
+    hairpins = handlertools.dynamics.NoteAndChordHairpinsHandler()
     hairpins.hairpin_tokens.append(('p', '<', 'f'))
     hairpins.hairpin_tokens.append(('p', '<', 'f'))
     hairpins.hairpin_tokens.append(('pp', '<', 'p'))

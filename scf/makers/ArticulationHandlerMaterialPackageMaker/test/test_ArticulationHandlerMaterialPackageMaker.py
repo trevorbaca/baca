@@ -1,5 +1,5 @@
 from abjad import *
-import handlers
+import handlertools
 import scf
 
 
@@ -16,7 +16,7 @@ def test_ArticulationHandlerMaterialPackageMaker_01():
             )
         mpp = scf.makers.ArticulationHandlerMaterialPackageMaker('materials.testarticulationhandler')
         assert mpp.directory_contents == ['__init__.py', 'output_material.py', 'tags.py']
-        handler = handlers.articulations.ReiteratedArticulationHandler(
+        handler = handlertools.articulations.ReiteratedArticulationHandler(
             articulation_list=['^', '.'],
             minimum_prolated_duration=Duration(1, 64),
             maximum_prolated_duration=Duration(1, 4),

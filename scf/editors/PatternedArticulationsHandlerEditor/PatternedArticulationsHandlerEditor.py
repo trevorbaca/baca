@@ -1,14 +1,14 @@
 from scf import getters
 from scf.editors.ArticulationHandlerEditor import ArticulationHandlerEditor
 from scf.editors.TargetManifest import TargetManifest
-import handlers
+import handlertools
 
 
 class PatternedArticulationsHandlerEditor(ArticulationHandlerEditor):
 
     ### CLASS ATTRIBUTES ###
 
-    target_manifest = TargetManifest(handlers.articulations.PatternedArticulationsHandler,
+    target_manifest = TargetManifest(handlertools.articulations.PatternedArticulationsHandler,
         ('articulation_lists', None, 'al', getters.get_lists, False),
         ('minimum_prolated_duration', None, 'nd', getters.get_duration, False),
         ('maximum_prolated_duration', None, 'xd', getters.get_duration, False),

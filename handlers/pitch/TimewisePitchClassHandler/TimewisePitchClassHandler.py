@@ -1,5 +1,5 @@
 from abjad.tools import componenttools
-from handlers.pitch.PitchHandler import PitchHandler
+from handlertools.pitch.PitchHandler import PitchHandler
 
 
 class TimewisePitchClassHandler(PitchHandler):

@@ -1,10 +1,10 @@
 from abjad import *
-import handlers
+import handlertools
 
 
 def test_TerracedDynamicsHandler___call___01():
 
-    terraces = handlers.dynamics.TerracedDynamicsHandler()
+    terraces = handlertools.dynamics.TerracedDynamicsHandler()
     staff = Staff("c'8 d'8 r8 e'8 f'8 r8 g'8 r8 a'32 b'32 r8. c''8 d''8" )
     terraces(['p', 'f']).apply(staff)
 

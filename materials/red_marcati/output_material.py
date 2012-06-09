@@ -1,9 +1,9 @@
 from abjad.tools import durationtools
 from abjad.tools import pitchtools
-import handlers
+import handlertools
 
 
-red_marcati = handlers.articulations.ReiteratedArticulationHandler(
+red_marcati = handlertools.articulations.ReiteratedArticulationHandler(
 	articulation_list=['^', '.'],
 	minimum_prolated_duration=durationtools.Duration(
 		1,

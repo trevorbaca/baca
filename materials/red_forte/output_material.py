@@ -1,8 +1,8 @@
 from abjad.tools import durationtools
-import handlers
+import handlertools
 
 
-red_forte = handlers.dynamics.ReiteratedDynamicHandler(
+red_forte = handlertools.dynamics.ReiteratedDynamicHandler(
 	dynamic_name='f',
 	minimum_prolated_duration=durationtools.Duration(
 		1,

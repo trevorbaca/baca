@@ -2,7 +2,7 @@ from abc import ABCMeta
 from abc import abstractmethod
 from abjad.tools import durationtools
 from fractions import Fraction
-from handlers.Handler import Handler
+from handlertools.Handler import Handler
 
 
 class DynamicHandler(Handler):
@@ -21,7 +21,7 @@ class DynamicHandler(Handler):
 
     @property
     def _tools_package_name(self):
-        return 'handlers.dynamics'
+        return 'handlertools.dynamics'
 
     ### READ / WRITE PUBLIC PROPERTIES ###
 

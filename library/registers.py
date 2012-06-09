@@ -1,4 +1,4 @@
-from handlers.pitch.OctaveTranspositionHandler import OctaveTranspositionHandler as handler
+from handlertools.pitch.OctaveTranspositionHandler import OctaveTranspositionHandler as handler
 __all__ = []
 
 

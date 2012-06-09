@@ -1,5 +1,5 @@
 from abjad import *
-import handlers
+import handlertools
 import scf
 
 
@@ -8,7 +8,7 @@ def test_ArticulationHandlerCreationWziard_run_01():
     wizard = scf.wizards.ArticulationHandlerCreationWizard()
     wizard.run(user_input="reit ['^', '.'] (1, 64) (1, 4) c c'''' done")
 
-    handler = handlers.articulations.ReiteratedArticulationHandler(
+    handler = handlertools.articulations.ReiteratedArticulationHandler(
         articulation_list=['^', '.'],
         minimum_prolated_duration=Duration(1, 64),
         maximum_prolated_duration=Duration(1, 4),
