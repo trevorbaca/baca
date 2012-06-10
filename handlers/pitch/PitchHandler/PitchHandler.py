@@ -1,4 +1,4 @@
-from handlers.Handler import Handler
+from handlertools.Handler import Handler
 
 
 class PitchHandler(Handler):
@@ -7,4 +7,4 @@ class PitchHandler(Handler):
 
     @property
     def _tools_package_name(self):
-        return 'handlers.pitch'
+        return 'handlertools.pitch'

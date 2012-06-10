@@ -1,5 +1,5 @@
 from abjad import *
-import handlers
+import handlertools
 import scf
 
 
@@ -16,7 +16,7 @@ def test_DynamicHandlerMaterialPackageMaker_01():
             )
         mpp = scf.makers.DynamicHandlerMaterialPackageMaker('materials.testdynamichandler')
         assert mpp.directory_contents == ['__init__.py', 'output_material.py', 'tags.py']
-        handler = handlers.dynamics.ReiteratedDynamicHandler(
+        handler = handlertools.dynamics.ReiteratedDynamicHandler(
             dynamic_name='f',
             minimum_prolated_duration=Duration(1, 16),
             )

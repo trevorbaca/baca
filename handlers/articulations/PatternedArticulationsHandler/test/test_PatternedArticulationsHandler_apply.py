@@ -1,10 +1,10 @@
 from abjad import *
-import handlers
+import handlertools
 
 
 def test_PatternedArticulationsHandler_apply_01():
 
-    pattern = handlers.articulations.PatternedArticulationsHandler([['>', '-'], ['.']])
+    pattern = handlertools.articulations.PatternedArticulationsHandler([['>', '-'], ['.']])
     staff = Staff("c'8 d'8 r8 e'8 f'8 r8 g'8 r8")
     pattern.apply(staff)
 
