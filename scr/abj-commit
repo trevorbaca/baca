@@ -1,2 +1,2 @@
-svn commit -F /Users/trevorbaca/Documents/other/baca/tmp/abjad_commit.txt
+svn commit -F $BACA/tmp/abjad_commit.txt
 abj-update
