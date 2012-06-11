@@ -4,23 +4,19 @@ import os
 
 os.system('clear')
 
-dirs = (
-   '/Users/trevorbaca/Documents/abjad',
-   '/Users/trevorbaca/Documents/friends',
-   '/Users/trevorbaca/Documents/harvard',)
+environment_variables = (
+   'ABJADROOT',
+   'BACA',
+   'FRIENDS',
+   'HARVARD',
+   'MISCELLANEOUS',
+   )
 
-for dir in dirs:
-   name = dir.split('/')[-1]
-   print '%s ...' % name
-   os.system('svn st -u %s' % dir)
-   print ''
-
-others = os.listdir(os.getenv('OTHER'))
-others = [x for x in others if not x.startswith('.')]
-for other in others:
-   print '%s ...' % other
-   repository = os.path.join(os.getenv('OTHER'), other)
-   os.system('svn st -u %s' % repository)
+for environment_variable in environment_variables:
+   path_name = os.environ.get(environment_variable)
+   directory_name = path_name.split(os.path.sep)[-1]
+   print '%s ...' % directory_name
+   os.system('svn st -u %s' % path_name)
    print ''
 
 scores = os.listdir(os.getenv('SCORES'))
