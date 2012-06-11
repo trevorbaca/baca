@@ -1,3 +1,3 @@
-vi ~/Documents/other/baca/tmp/abjad_tmp_2.py
-abj ~/Documents/other/baca/tmp/abjad_tmp_2.py
+vi $BACA/tmp/abjad_tmp_2.py
+abj $BACA/tmp/abjad_tmp_2.py
 

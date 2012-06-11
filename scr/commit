@@ -1,4 +1,4 @@
 # same as abj-commit but without the time-consuming abj-update at end
 
-svn commit -F /Users/trevorbaca/Documents/other/baca/tmp/abjad_commit.txt
+svn commit -F $BACA/tmp/abjad_commit.txt
 svn up
