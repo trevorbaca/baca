@@ -1,2 +1,2 @@
-vi ~/Documents/other/baca/tmp/abjad_tmp.py
-clear && abj ~/Documents/other/baca/tmp/abjad_tmp.py
+vi $BACA/tmp/abjad_tmp.py
+clear && abj $BACA/tmp/abjad_tmp.py

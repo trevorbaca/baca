@@ -241,7 +241,7 @@ def test_SargassoMeasureMaterialPackageMaker_08():
             measuretools.Measure((6, 20), "c'4 c'16 c'16"),
             measuretools.Measure((2, 20), "c'16 c'16"),
             measuretools.Measure((9, 19), "c'16 c'4 c'16 c'16 c'8")]
-        assert Staff(mpp.output_material).format == Staff(measures).format
+        assert Staff(mpp.output_material).lilypond_format == Staff(measures).lilypond_format
     finally:
         studio.run(user_input='m testsargasso del remove default q')
         assert not studio.package_exists('materials.testsargasso')

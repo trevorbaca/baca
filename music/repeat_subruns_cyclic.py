@@ -2,16 +2,19 @@ from abjad.tools.notetools.Note import Note
 from abjad.tools import componenttools
 
 
-## TODO: Rename to repeat_subruns_to_count() to match Abjad sequencetools. ##
-
+# TODO: Rename to repeat_subruns_to_count() to match Abjad sequencetools.
 def repeat_subruns_cyclic(notes, pairs, history = False):
     '''Repeat components according to pairs.
 
+    >>> from baca import music
+
     >>> l = [Note(n, (1, 4)) for n in [0, 2, 4, 5, 7, 9, 11]]
     >>> music.repeat_subruns_cyclic(l, [(0, 4, 1), (2, 4, 1)])
+
     >>> l
-    [c'4, d'4, e'4, f'4, c'4, d'4, e'4, f'4,
-    g'4, a'4, e'4, f'4, g'4, a'4, b'4]
+    [Note("c'4"), Note("d'4"), Note("e'4"), Note("f'4"), Note("c'4"), Note("d'4"), Note("e'4"), Note("f'4"), Note("g'4"), Note("a'4"), Note("e'4"), Note("f'4"), Note("g'4"), Note("a'4"), Note("b'4")]
+
+    Return list of components.
     '''
 
     assert all([isinstance(x, Note) for x in notes])
