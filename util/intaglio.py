@@ -41,7 +41,7 @@ def intaglio(l, s, t = 1):
     result = []
 
     result = sequencetools.repeat_sequence_to_weight_exactly(s, sum(l))
-    result = sequencetools.split_sequence_once_by_weights_with_overhang(result, l)
+    result = sequencetools.split_sequence_by_weights(result, l, cyclic=False, overhang=True)
 
     for i, sublist in enumerate(result):
         if mathtools.weight(sublist) <= t:

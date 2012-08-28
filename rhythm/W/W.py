@@ -7,6 +7,8 @@ class W(sequencetools.Matrix):
 
         abjad> baca.rhythm.W((10, 8), (3, 3, 6, 10), 3)
         W(3x22)
+
+    Return W-rhythm object.
     '''
 
     def __init__(self, measure_numerators, talea, n_voices):
@@ -27,13 +29,15 @@ class W(sequencetools.Matrix):
         all_measure_weights = sequencetools.repeat_sequence_to_weight_exactly(part_measure_weights, lcm)
         all_measure_divisions = sequencetools.repeat_sequence_to_weight_exactly(talea, lcm)
         args = (all_measure_weights, all_measure_divisions)
-        all_measure_divisions = sequencetools.split_sequence_once_by_weights_with_overhang(*args)
+        all_measure_divisions = sequencetools.split_sequence_by_weights(
+            *args, cyclic=False, overhang=True)
         all_measure_divisions = sequencetools.flatten_sequence(all_measure_divisions)
         args = (all_measure_divisions, all_measure_weights)
-        tmp = sequencetools.partition_sequence_once_by_weights_exactly_with_overhang
-        all_measure_divisions = tmp(all_measure_divisions, all_measure_weights)
+        all_measure_divisions = sequencetools.partition_sequence_by_weights_exactly(
+            all_measure_divisions, all_measure_weights, cyclic=False, overhang=True)
         args = (all_measure_divisions, [n_voices])
-        all_measure_divisions = sequencetools.partition_sequence_cyclically_by_counts_with_overhang(*args)
+        all_measure_divisions = sequencetools.partition_sequence_by_counts(
+            *args, cyclic=True, overhang=True)
         return all_measure_divisions
 
     ### READ-ONLY PUBLIC PROPERTIES ###

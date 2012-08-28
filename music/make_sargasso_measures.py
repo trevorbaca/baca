@@ -1,10 +1,10 @@
+import fractions
 from abjad import *
 from abjad.tools import beamtools
 from abjad.tools import durationtools
 from abjad.tools import mathtools
 from abjad.tools import measuretools
 from abjad.tools import sequencetools
-import fractions
 
 
 def make_sargasso_measures(measure_denominator, measure_numerator_talea,
@@ -42,8 +42,8 @@ def make_sargasso_measures(measure_denominator, measure_numerator_talea,
     multiplied_measure_numerators = [multiplier * x for x in measure_numerators]
     #print multiplied_measure_numerators
 
-    measure_divisions_by_measure = sequencetools.split_sequence_cyclically_by_weights_with_overhang(
-        measure_divisions, multiplied_measure_numerators)
+    measure_divisions_by_measure = sequencetools.split_sequence_by_weights(
+        measure_divisions, multiplied_measure_numerators, cyclic=True, overhang=True)
     #print measure_divisions_by_measure
 
     meter_multipliers = [fractions.Fraction(1) for x in measure_divisions_by_measure]
@@ -70,8 +70,8 @@ def make_sargasso_measures(measure_denominator, measure_numerator_talea,
             measure_division_talea, sum(prolated_measure_numerators))
         #print measure_divisions
 
-        measure_divisions_by_measure = sequencetools.split_sequence_cyclically_by_weights_with_overhang(
-            measure_divisions, prolated_measure_numerators)
+        measure_divisions_by_measure = sequencetools.split_sequence_by_weights(
+            measure_divisions, prolated_measure_numerators, cyclic=True, overhang=True)
         #print measure_divisions_by_measure
 
     measure_tokens = zip(meter_multipliers, measure_divisions_by_measure)
