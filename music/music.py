@@ -5,26 +5,11 @@ import copy
 import fractions
 import math
 import re
-from abjad.tools import beamtools
-from abjad.tools import chordtools
-from abjad.tools import componenttools
-from abjad.tools import durationtools
-from abjad.tools import leaftools
-from abjad.tools import markuptools
-from abjad.tools import mathtools
-from abjad.tools import measuretools
-from abjad.tools import notetools
-from abjad.tools import resttools
-from abjad.tools import sequencetools
-from abjad.tools import skiptools
-from abjad.tools import spannertools
-from abjad.tools import tietools
-from abjad.tools import tuplettools
-from abjad.tools import voicetools
+from abjad.tools import *
 from baca import util
 
 
-def splitPitches(pitches, split = -1):
+def splitPitches(pitches, split=-1):
     '''Split list of probably aggregates into treble and bass.
     '''
 
@@ -313,7 +298,7 @@ def untrill(l):
             delattr(element, 'trill')
 
 
-def ungrace(l, keep = 'first', length = 1):
+def ungrace(l, keep='first', length=1):
 
     for element in instances(l, 'Leaf'):
         if hasattr(element, 'grace'):
@@ -323,7 +308,7 @@ def ungrace(l, keep = 'first', length = 1):
                 element.grace = element.grace[-length:]
 
 
-def breaks(signatures, durations, pages, verticals, staves = None):
+def breaks(signatures, durations, pages, verticals, staves=None):
 
     if staves != None:
         staves = ' '.join([str(x) for x in staves])
@@ -499,7 +484,7 @@ def stellate(k, s, t, d, b, span='from duration', rests=True):
     return tuplets
 
 
-def coruscate(n, s, t, z, d, rests = True):
+def coruscate(n, s, t, z, d, rests=True):
     '''Coruscate signal n;
     return list of fixed-duration tuplets.
 
@@ -686,7 +671,7 @@ def rippleVoices(m, s):
                 v[i : i + 1] = new
 
 
-def copyMusicList(ll, i = None, j = None):
+def copyMusicList(ll, i=None, j=None):
     '''Truly smart copy from i up to and including j;
     fracture external and preserve internal spanners;
     return new list.
@@ -706,14 +691,14 @@ def copyMusicList(ll, i = None, j = None):
     return result
 
 
-def setLeafStartTimes(expr, offset = fractions.Fraction(0)):
+def setLeafStartTimes(expr, offset=fractions.Fraction(0)):
     cur = fractions.Fraction(*offset.pair)
     for l in instances(expr, 'Leaf'):
         l.start = cur
         cur += l.duration.prolated
 
 
-def rankLeavesTimewise(exprList, name = 'Leaf'):
+def rankLeavesTimewise(exprList, name='Leaf'):
     '''Sets 'timewise' attribute on each of the leaves in the expr in exprList.
 
     Can be list of Voices, list of Staves, list of anything with leaves;
@@ -845,7 +830,7 @@ def setPitch(l, spec=0):
         l.pitches = [p + transposition for p in pp]
 
 
-def setPitchIterator(voice, start, stop, spec = 0):
+def setPitchIterator(voice, start, stop, spec=0):
     leaves = voice.leaves
     for l in leaves[start : stop + 1]:
         setPitch(l, spec)
@@ -1001,7 +986,7 @@ def setArticulationsByDuration(voice, start, stop, long, min, short):
                 l.articulations = short
 
 
-def clearAllArticulations(leaves, start = 0, stop = None):
+def clearAllArticulations(leaves, start=0, stop=None):
     '''Clear articulations from leaves.
     '''
 
@@ -1069,7 +1054,7 @@ def applyArtificialHarmonic(voice, *args):
             add_artificial_harmonic(l, diatonicInterval)
 
 
-def hpartition_notes_only(leaves, cut = (0,), gap = (0,)):
+def hpartition_notes_only(leaves, cut=(0,), gap=(0,)):
     '''Note runs only.
     '''
 
@@ -1092,7 +1077,7 @@ def hpartition_notes_only(leaves, cut = (0,), gap = (0,)):
     return result
 
 
-def hpartition_rest_terminated(leaves, cut = (0,), gap = (0,)):
+def hpartition_rest_terminated(leaves, cut=(0,), gap=(0,)):
     '''Rest-terminated note runs.
     '''
 
@@ -1434,7 +1419,7 @@ def applyCoverSpanner(voice, *args):
         raise ValueError('can not apply cover spanner.')
 
 
-def makeBreaksVoice(durationPairs, yOffsets, alignmentOffsets, start = 0):
+def makeBreaksVoice(durationPairs, yOffsets, alignmentOffsets, start=0):
     '''Return page- and line-breaking skip voice;
     start at system start to allow first page title.
 
@@ -1601,8 +1586,8 @@ def makeViolinGroup(*staves):
 
 
 def crossStavesDown(voice, start, stop, bp, target,
-    includes = [], excludes = [],
-    topBeamPositions = None, bottomBeamPositions = None):
+    includes=[], excludes=[],
+    topBeamPositions=None, bottomBeamPositions=None):
     '''target is a reference to an actual Staff instance.
 
     TODO: run octavate at some time other than cross-determination time.
