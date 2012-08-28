@@ -4,6 +4,8 @@ from abjad.tools import sequencetools
 
 def sectionalize(n, ratio):
     '''
+    >>> from baca import util
+
     >>> util.sectionalize(20, (1, 1, 1))
     [6, 1, 6, 1, 6]
 
@@ -12,6 +14,8 @@ def sectionalize(n, ratio):
 
     >>> util.sectionalize(97, (1, 1, 2))
     [24, 1, 24, 1, 47]
+
+    Return list.
     '''
 
     parts = mathtools.partition_integer_by_ratio(n - (len(ratio) - 1), ratio)
