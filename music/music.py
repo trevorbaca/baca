@@ -112,7 +112,7 @@ def effectiveDurations(m):
 
     Return list of durations.
     '''
-    return [l.prolated_duration for l in list(leaftools.iterate_leaves_forward_in_expr(m))]
+    return [l.prolated_duration for l in list(leaftools.iterate_leaves_in_expr(m))]
 
 
 def effectiveDuration(m):
@@ -569,7 +569,7 @@ def makeMeasures(m, meters):
     durations = [fractions.Fraction(*meter) for meter in meters]
     #voices = instances(m, 'Voice')
     #for v in voices:
-    for v in componenttools.iterate_components_forward_in_expr(m, klass=voicetools.Voice):
+    for v in componenttools.iterate_components_in_expr(m, klass=voicetools.Voice):
         #assert v.duration.prolated == sum(durations, fractions.Fraction(0))
         assert v.prolated_duration == sum(durations, fractions.Fraction(0))
         d = 0
@@ -1539,7 +1539,7 @@ def reddenSections(measuresVoice, sectionTuples, startMeasure=1):
     Return none.
     '''
 
-    measureSkips = list(skiptools.iterate_skips_forward_in_expr(measuresVoice))
+    measureSkips = list(skiptools.iterate_skips_in_expr(measuresVoice))
 
     for n, start, stop, description in sectionTuples:
         if start >= startMeasure:
