@@ -1523,7 +1523,18 @@ def reddenSections(measuresVoice, sectionTuples, startMeasure=1):
                 \time 10/8
                 \once \override Score.BarLine #'color = #red
                 \once \override Score.SpanBar #'color = #red
-                s1 * 5/4 ^ \markup { \fontsize #2 \with-color #red \italic { 1. I } }
+                s1 * 5/4
+                    ^ \markup {
+                        \fontsize
+                            #2
+                            \with-color
+                                red
+                                \italic
+                                    {
+                                        1.
+                                        I
+                                    }
+                        }
             }
             {
                 s1 * 5/4
@@ -1532,14 +1543,25 @@ def reddenSections(measuresVoice, sectionTuples, startMeasure=1):
                 \time 9/8
                 \once \override Score.BarLine #'color = #red
                 \once \override Score.SpanBar #'color = #red
-                s1 * 9/8 ^ \markup { \fontsize #2 \with-color #red \italic { 2. II } }
+                s1 * 9/8
+                    ^ \markup {
+                        \fontsize
+                            #2
+                            \with-color
+                                red
+                                \italic
+                                    {
+                                        2.
+                                        II
+                                    }
+                        }
             }
         }
 
     Return none.
     '''
 
-    measureSkips = list(skiptools.iterate_skips_in_expr(measuresVoice))
+    measureSkips = list(iterationtools.iterate_skips_in_expr(measuresVoice))
 
     for n, start, stop, description in sectionTuples:
         if start >= startMeasure:
