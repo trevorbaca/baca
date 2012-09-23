@@ -112,7 +112,7 @@ def effectiveDurations(m):
 
     Return list of durations.
     '''
-    return [l.prolated_duration for l in list(leaftools.iterate_leaves_in_expr(m))]
+    return [l.prolated_duration for l in list(iterationtools.iterate_leaves_in_expr(m))]
 
 
 def effectiveDuration(m):
@@ -181,7 +181,7 @@ def nest(measures, outer, inner):
         tuplet = divide.pair(o, (measure_numerator, measure_denominator))
         #print tuplet
         #dd = writtenDurations([measuretools.Measure([divide.pair(o, (m[0], m[1]))])])
-        tie_chains = list(iterate.tie_chains_forward_in(tuplet.leaves))
+        tie_chains = list(iterationtools.terate_tie_chains_in_expr(tuplet.leaves))
         dd = [tietools.get_duration_written(x) for x in tie_chains]
         body = []
         for j, d in enumerate(dd):
@@ -569,7 +569,7 @@ def makeMeasures(m, meters):
     durations = [fractions.Fraction(*meter) for meter in meters]
     #voices = instances(m, 'Voice')
     #for v in voices:
-    for v in componenttools.iterate_components_in_expr(m, klass=voicetools.Voice):
+    for v in iterationtools.iterate_components_in_expr(m, klass=voicetools.Voice):
         #assert v.duration.prolated == sum(durations, fractions.Fraction(0))
         assert v.prolated_duration == sum(durations, fractions.Fraction(0))
         d = 0
