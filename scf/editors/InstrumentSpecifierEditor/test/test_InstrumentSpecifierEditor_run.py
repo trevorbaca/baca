@@ -13,19 +13,19 @@ def test_InstrumentSpecifierEditor_run_01():
     specifiers.InstrumentSpecifier(
         instrument=instrumenttools.FrenchHorn(
             instrument_name='horn',
-            instrument_name_markup=markuptools.Markup(
-                'Horn'
-                ),
+            instrument_name_markup=markuptools.Markup((
+                'Horn',
+                )),
             short_instrument_name='hn.',
-            short_instrument_name_markup=markuptools.Markup(
-                'Hn.'
-                )
+            short_instrument_name_markup=markuptools.Markup((
+                'Hn.',
+                ))
             ),
         name='foo'
         )
     '''
 
-    assert editor.target.format == "specifiers.InstrumentSpecifier(\n\tinstrument=instrumenttools.FrenchHorn(\n\t\tinstrument_name='horn',\n\t\tinstrument_name_markup=markuptools.Markup(\n\t\t\t('Horn',)\n\t\t\t),\n\t\tshort_instrument_name='hn.',\n\t\tshort_instrument_name_markup=markuptools.Markup(\n\t\t\t('Hn.',)\n\t\t\t)\n\t\t),\n\tname='foo'\n\t)"
+    assert editor.target.format == "specifiers.InstrumentSpecifier(\n\tinstrument=instrumenttools.FrenchHorn(\n\t\tinstrument_name='horn',\n\t\tinstrument_name_markup=markuptools.Markup((\n\t\t\t'Horn',\n\t\t\t)),\n\t\tshort_instrument_name='hn.',\n\t\tshort_instrument_name_markup=markuptools.Markup((\n\t\t\t'Hn.',\n\t\t\t))\n\t\t),\n\tname='foo'\n\t)"
 
 
 def test_InstrumentSpecifierEditor_run_02():

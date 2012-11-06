@@ -114,7 +114,7 @@ class UserInputGetter(MenuSectionAggregator):
         execs.append('from abjad import *')
         execs.append('value = Duration({})')
         self.execs[-1] = execs
-        self.tests.append(durationtools.is_duration_token)
+        self.tests.append(predicates.is_duration_token)
 
     def append_dynamic(self, spaced_attribute_name, default=None):
         message = 'value for {!r} must successfully initialize dynamic mark.'

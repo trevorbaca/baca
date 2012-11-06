@@ -4,12 +4,12 @@ import py.test
 
 
 def test_music_coruscate_01():
-    '''Uniform signal and no cut / no dilation;
+    '''Uniform talea and no cut / no dilation;
     result are unscaled beamed tuplets.
     '''
 
-    signal, cut, dilation = [[1]], [[0]], [[0]]
-    t = Container(music.coruscate(signal, cut, [4, 8, 8], dilation, 32))
+    talea, cut, dilation = [[1]], [[0]], [[0]]
+    t = Container(music.coruscate(talea, cut, [4, 8, 8], dilation, 32))
 
     r'''
     {
@@ -87,11 +87,11 @@ def test_music_coruscate_01():
 
 
 def test_music_coruscate_02():
-    '''Uniform signal with some cut / no dilation; result are unscaled tuplets with cuts.
+    '''Uniform talea with some cut / no dilation; result are unscaled tuplets with cuts.
     '''
 
-    signal, cut, dilation = [[1]], [[0, 0, 0, 1]], [[0]]
-    t = Container(music.coruscate(signal, cut, [4, 4, 4, 4], dilation, 32))
+    talea, cut, dilation = [[1]], [[0, 0, 0, 1]], [[0]]
+    t = Container(music.coruscate(talea, cut, [4, 4, 4, 4], dilation, 32))
 
     r'''
         \set stemLeftBeamCount = #0
@@ -145,12 +145,12 @@ def test_music_coruscate_02():
 
 
 def test_music_coruscate_03():
-    '''Uniform signal / no cut with some dilation;
+    '''Uniform talea / no cut with some dilation;
     result are even tuplets, some scaled, some not.
     '''
 
-    signal, cut, dilation = [[1]], [[0]], [[0, 3, 3]]
-    t = Container(music.coruscate(signal, cut, [4, 4, 4], dilation, 32))
+    talea, cut, dilation = [[1]], [[0]], [[0, 3, 3]]
+    t = Container(music.coruscate(talea, cut, [4, 4, 4], dilation, 32))
     '''
         \set stemLeftBeamCount = #0
         \set stemRightBeamCount = #3
@@ -239,12 +239,12 @@ def test_music_coruscate_03():
 
 
 def test_music_coruscate_04():
-    '''Varied signal / no cut / no dilation ... with neat fit;
+    '''Varied talea / no cut / no dilation ... with neat fit;
     gives splotchy but unscaled tuplets.
     '''
 
-    signal, cut, dilation = [[1, 3]], [[0]], [[0]]
-    t = Container(music.coruscate(signal, cut, [4, 4, 4], dilation, 32))
+    talea, cut, dilation = [[1, 3]], [[0]], [[0]]
+    t = Container(music.coruscate(talea, cut, [4, 4, 4], dilation, 32))
     '''
         \set stemLeftBeamCount = #0
         \set stemRightBeamCount = #3
@@ -272,7 +272,7 @@ def test_music_coruscate_04():
 
 
 def test_music_coruscate_05():
-    '''Varied signal / no cut / no dilation ... with uneven fit;
+    '''Varied talea / no cut / no dilation ... with uneven fit;
     gives scaled and sploty tuplets.
     '''
 
@@ -309,7 +309,7 @@ def test_music_coruscate_05():
 
 
 def test_music_coruscate_06():
-    '''Negative signal is allowed; negative elements congeal.
+    '''Negative talea is allowed; negative elements congeal.
     '''
 
     t = Container(music.coruscate([[-1]], [[0]], [4, 4, 4], [[0]], 32))
@@ -361,9 +361,9 @@ def test_music_coruscate_07():
 
 
 def test_music_coruscate_08():
-    '''Zero-valued signal not allowed.
+    '''Zero-valued talea not allowed.
     '''
 
-    signal, cut, dilation = [[0]], [[0]], [[0]]
+    talea, cut, dilation = [[0]], [[0]], [[0]]
 
-    assert py.test.raises(AssertionError, 'music.coruscate(signal, cut, [4, 4, 4], dilation, 32)')
+    assert py.test.raises(AssertionError, 'music.coruscate(talea, cut, [4, 4, 4], dilation, 32)')

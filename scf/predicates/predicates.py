@@ -45,6 +45,13 @@ def is_constellation_circuit_id_pair(expr):
 def is_direction_string(expr):
     return expr in ('up', 'down')
 
+def is_duration_token(expr):
+    try:
+        durationtools.Duration(expr)
+        return True
+    except:
+        return False
+
 def is_dynamic_token(expr):
     try:
         result = contexttools.DynamicMark(expr)

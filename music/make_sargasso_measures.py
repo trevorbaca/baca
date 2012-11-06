@@ -100,8 +100,8 @@ def make_sargasso_measures(measure_denominator, measure_numerator_talea,
         meter_base_unit = meter_multiplier * fractions.Fraction(
             min(measure_divisions), measure_division_denominator)
         meter_denominator = meter_base_unit.denominator
-        meter_token = durationtools.rational_to_duration_pair_with_multiple_of_specified_integer_denominator(
-            measure_duration, meter_denominator)
+        meter_token = mathtools.NonreducedFraction(measure_duration).with_multiple_of_denominator(
+            meter_denominator)
         meter_tokens.append(meter_token)
     #print meter_tokens
 
@@ -112,7 +112,7 @@ def make_sargasso_measures(measure_denominator, measure_numerator_talea,
 
     measures = []
     for meter_token, division_token in zip(meter_tokens, division_tokens):
-        leaves = leaftools.make_leaves_from_note_value_signal(division_token, measure_division_denominator)
+        leaves = leaftools.make_leaves_from_talea(division_token, measure_division_denominator)
         measure = measuretools.Measure(meter_token, leaves)
         measures.append(measure)
     #print measures
