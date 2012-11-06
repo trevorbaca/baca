@@ -1,4 +1,4 @@
-from abjad.tools import timetokentools
+from abjad.tools import rhythmmakertools
 import scf
 
 
@@ -7,7 +7,7 @@ def test_TokenBurnishedSignalFilledTimeTokenMakerEditor_run_01():
     editor = scf.editors.TokenBurnishedSignalFilledTimeTokenMakerEditor()
     editor.run(user_input='1 [1, 1, 2, 4] 32 [0] [-1] [0] [-1] [2] [1] q', is_autoadvancing=True)
     
-    maker = timetokentools.TokenBurnishedSignalFilledTimeTokenMaker(
+    maker = rhythmmakertools.TokenBurnishedTaleaFilledRhythmMaker(
         [1, 1, 2, 4],
         32,
         prolation_addenda=[0],

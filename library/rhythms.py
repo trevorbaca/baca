@@ -1,5 +1,5 @@
 from abjad.tools import sequencetools
-from abjad.tools import timetokentools
+from abjad.tools import rhythmmakertools
 import baca
 __all__ = []
 
@@ -8,7 +8,7 @@ __all__ = []
 pattern, denominator, prolation_addenda  = [1], 64, []
 lefts, middles, rights = [0], [0], [0]
 left_lengths, right_lengths = [1], [2]
-sixty_fourths = timetokentools.OutputBurnishedSignalFilledTimeTokenMaker(
+sixty_fourths = rhythmmakertools.OutputBurnishedTaleaFilledRhythmMaker(
    pattern, denominator, prolation_addenda,
    lefts, middles, rights,
    left_lengths, right_lengths)

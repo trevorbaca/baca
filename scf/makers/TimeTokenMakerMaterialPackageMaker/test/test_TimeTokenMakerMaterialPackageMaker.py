@@ -1,8 +1,8 @@
-from abjad.tools import timetokentools
+from abjad.tools import rhythmmakertools
 import scf
 
 
-def test_TimeTokenMakerMaterialPackageMaker_01():
+def test_RhythmMakerMaterialPackageMaker_01():
 
     studio = scf.studio.Studio()
     assert not studio.package_exists('materials.testtimetokenmaker')
@@ -13,9 +13,9 @@ def test_TimeTokenMakerMaterialPackageMaker_01():
             '[-1, 2, -3, 4] 16 [2, 3] [6] b default '
             'q '
             )
-        mpp = scf.makers.TimeTokenMakerMaterialPackageMaker('materials.testtimetokenmaker')
+        mpp = scf.makers.RhythmMakerMaterialPackageMaker('materials.testtimetokenmaker')
         assert mpp.directory_contents == ['__init__.py', 'output_material.py', 'tags.py']
-        maker = timetokentools.SignalFilledTimeTokenMaker(
+        maker = rhythmmakertools.TaleaFilledRhythmMaker(
             [-1, 2, -3, 4],
             16,
             prolation_addenda=[2, 3],
