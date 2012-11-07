@@ -1,10 +1,10 @@
 from abjad.tools import rhythmmakertools
 from scf import getters
-from scf.editors.TimeTokenMakerEditor import TimeTokenMakerEditor
+from scf.editors.RhythmMakerEditor import RhythmMakerEditor
 from scf.editors.TargetManifest import TargetManifest
 
 
-class NoteFilledTimeTokenMakerEditor(TimeTokenMakerEditor):
+class NoteFilledRhythmMakerEditor(RhythmMakerEditor):
 
     ### CLASS ATTRIBUTES ###
 

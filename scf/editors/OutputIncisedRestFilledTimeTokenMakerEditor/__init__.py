@@ -1,1 +1,1 @@
-from  OutputIncisedRestFilledTimeTokenMakerEditor import OutputIncisedRestFilledTimeTokenMakerEditor
+from  OutputIncisedRestFilledRhythmMakerEditor import OutputIncisedRestFilledRhythmMakerEditor

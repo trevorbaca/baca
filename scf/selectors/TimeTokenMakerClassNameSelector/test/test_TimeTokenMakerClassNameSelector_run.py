@@ -1,8 +1,8 @@
 import scf
 
 
-def test_TimeTokenMakerClassNameSelector_run_01():
+def test_RhythmMakerClassNameSelector_run_01():
 
-    selector = scf.selectors.TimeTokenMakerClassNameSelector()
+    selector = scf.selectors.RhythmMakerClassNameSelector()
 
     assert selector.run(user_input='notefilled') == 'NoteFilledRhythmMaker'

@@ -2,9 +2,9 @@ from abjad.tools import rhythmmakertools
 import scf
 
 
-def test_OutputBurnishedSignalFilledTimeTokenMakerEditor_run_01():
+def test_OutputBurnishedTaleaFilledRhythmMakerEditor_run_01():
 
-    editor = scf.editors.OutputBurnishedSignalFilledTimeTokenMakerEditor()
+    editor = scf.editors.OutputBurnishedTaleaFilledRhythmMakerEditor()
     editor.run(user_input='1 [1] 16 [2] [0] [-1] [0] [1] [1] q', is_autoadvancing=True)
 
     maker = rhythmmakertools.OutputBurnishedTaleaFilledRhythmMaker([1], 16,

@@ -1,1 +1,1 @@
-from  TokenIncisedNoteFilledTimeTokenMakerEditor import TokenIncisedNoteFilledTimeTokenMakerEditor
+from  TokenIncisedNoteFilledRhythmMakerEditor import TokenIncisedNoteFilledRhythmMakerEditor

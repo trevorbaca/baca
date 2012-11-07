@@ -1,1 +1,1 @@
-from TimeTokenMakerEditor import TimeTokenMakerEditor
+from RhythmMakerEditor import RhythmMakerEditor

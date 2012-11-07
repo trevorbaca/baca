@@ -1,1 +1,1 @@
-from  NoteFilledTimeTokenMakerEditor import NoteFilledTimeTokenMakerEditor
+from  NoteFilledRhythmMakerEditor import NoteFilledRhythmMakerEditor

@@ -2,7 +2,7 @@ from scf.selectors.HandlerClassNameSelector import HandlerClassNameSelector
 import os
 
 
-class TimeTokenMakerClassNameSelector(HandlerClassNameSelector):
+class RhythmMakerClassNameSelector(HandlerClassNameSelector):
 
     ### CLASS ATTRIBUTES ###
     

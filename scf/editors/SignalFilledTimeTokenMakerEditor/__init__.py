@@ -1,1 +1,1 @@
-from SignalFilledTimeTokenMakerEditor import SignalFilledTimeTokenMakerEditor
+from TaleaFilledRhythmMakerEditor import TaleaFilledRhythmMakerEditor

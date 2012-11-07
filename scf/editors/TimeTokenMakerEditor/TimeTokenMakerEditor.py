@@ -1,7 +1,7 @@
 from scf.editors.InteractiveEditor import InteractiveEditor
 
 
-class TimeTokenMakerEditor(InteractiveEditor):
+class RhythmMakerEditor(InteractiveEditor):
     
     ### READ-ONLY PROPERTIES ###
 

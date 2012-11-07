@@ -1,1 +1,1 @@
-from TimeTokenMakerCreationWizard import TimeTokenMakerCreationWizard
+from RhythmMakerCreationWizard import RhythmMakerCreationWizard

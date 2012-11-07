@@ -1,7 +1,7 @@
 from scf.selectors.MaterialPackageSelector import MaterialPackageSelector
 
 
-class TimeTokenMakerPackageSelector(MaterialPackageSelector):
+class RhythmMakerPackageSelector(MaterialPackageSelector):
 
     ### CLASS ATTRIBUTES ###
 

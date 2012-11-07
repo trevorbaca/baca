@@ -1,6 +1,6 @@
 def get_time_token_maker_editor(target=None, session=None):
-    from scf.wizards.TimeTokenMakerCreationWizard import TimeTokenMakerCreationWizard
+    from scf.wizards.RhythmMakerCreationWizard import RhythmMakerCreationWizard
     if target:
-        wizard = TimeTokenMakerCreationWizard()
+        wizard = RhythmMakerCreationWizard()
         time_token_maker_editor = wizard.get_handler_editor(target._class_name, target=target)
         return time_token_maker_editor

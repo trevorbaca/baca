@@ -1,1 +1,1 @@
-from  TokenBurnishedSignalFilledTimeTokenMakerEditor import TokenBurnishedSignalFilledTimeTokenMakerEditor
+from  TokenBurnishedTaleaFilledRhythmMakerEditor import TokenBurnishedTaleaFilledRhythmMakerEditor
