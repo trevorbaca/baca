@@ -2,7 +2,7 @@ from abjad.tools import rhythmmakertools
 import scf
 
 
-def test_OutputBurnishedTaleaFilledRhythmMakerEditor_01():
+def test_DivisionBurnishedTaleaFilledRhythmMakerEditor_01():
 
     editor = scf.editors.DivisionBurnishedTaleaFilledRhythmMakerEditor()
     editor.run(user_input='1 [1, 1, 2, 4] 32 [0] [-1] [0] [-1] [2] [1] q', is_autoadvancing=True)
