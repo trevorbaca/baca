@@ -37,7 +37,7 @@ class SargassoMeasureMaterialPackageMaker(FunctionInputMaterialPackageMaker):
         ('measure_numerator_talea', sequencetools.all_are_nonnegative_integers),
         ('measure_division_denominator', mathtools.is_nonnegative_integer_power_of_two),
         ('measure_division_talea', sequencetools.all_are_nonnegative_integers),
-        ('total_duration', durationtools.is_duration_token, 'value = Duration({})'),
+        ('total_duration', predicates.is_duration_token, 'value = Duration({})'),
         ('measures_are_scaled', predicates.is_boolean),
         ('measures_are_split', predicates.is_boolean),
         ('measures_are_shuffled', predicates.is_boolean),
