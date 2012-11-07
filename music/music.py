@@ -451,7 +451,8 @@ def stellate(k, s, t, d, b, span='from duration', rests=True):
     denominators = copy.copy(k)
     pairs = zip(signatures, denominators)
     #tuplets = [divide.pair(pair[0], (pair[1], d)) for pair in pairs]
-    tuplets = [tuplettools.make_tuplet_from_proportions_and_pair(
+    #tuplets = [tuplettools.make_tuplet_from_proportions_and_pair(
+    tuplets = [tuplettools.make_tuplet_from_nonreduced_ratio_and_nonreduced_fraction(
         pair[0], (pair[1], d)) for pair in pairs]
 
     if span == 'from duration':
@@ -544,7 +545,8 @@ def coruscate(n, s, t, z, d, rests=True):
 
     pairs = zip(signatures, t)
     #result = [divide.pair(pair[0], (pair[1], d)) for pair in pairs]
-    result = [tuplettools.make_tuplet_from_proportions_and_pair(
+    #result = [tuplettools.make_tuplet_from_proportions_and_pair(
+    result = [tuplettools.make_tuplet_from_nonreduced_ratio_and_nonreduced_fraction(
         pair[0], (pair[1], d)) for pair in pairs]
 
     for i, element in enumerate(result):
@@ -1517,6 +1519,8 @@ def reddenSections(measuresVoice, sectionTuples, startMeasure=1):
         >>> measuresVoice = makeMeasuresVoice([(10, 8), (10, 8), (9, 8)])
         >>> reddenSections(measuresVoice, [(1, 1, 2, 'I'), (2, 3, 3, 'II')])
 
+    ::
+
         >>> f(measuresVoice)
         \context Voice = "measures voice" {
             {
@@ -1528,7 +1532,7 @@ def reddenSections(measuresVoice, sectionTuples, startMeasure=1):
                         \fontsize
                             #2
                             \with-color
-                                red
+                                #red
                                 \italic
                                     {
                                         1.
@@ -1548,7 +1552,7 @@ def reddenSections(measuresVoice, sectionTuples, startMeasure=1):
                         \fontsize
                             #2
                             \with-color
-                                red
+                                #red
                                 \italic
                                     {
                                         2.
