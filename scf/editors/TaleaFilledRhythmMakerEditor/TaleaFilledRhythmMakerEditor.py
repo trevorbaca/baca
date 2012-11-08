@@ -10,7 +10,7 @@ class TaleaFilledRhythmMakerEditor(RhythmMakerEditor):
 
     target_manifest = TargetManifest(rhythmmakertools.TaleaFilledRhythmMaker,
         ('talea', None, 'ta', getters.get_nonzero_integers, True),
-        ('denominator', None, 'de', getters.get_positive_integer_power_of_two, True),
+        ('talea_denominator', None, 'de', getters.get_positive_integer_power_of_two, True),
         ('prolation_addenda', None, 'ad', getters.get_integers, False),
         ('secondary_divisions', None, 'sd', getters.get_integers, False),
         )

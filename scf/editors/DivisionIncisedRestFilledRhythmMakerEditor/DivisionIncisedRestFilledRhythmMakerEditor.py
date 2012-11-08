@@ -13,5 +13,5 @@ class DivisionIncisedRestFilledRhythmMakerEditor(RhythmMakerEditor):
         ('prefix_lengths', None, 'pl', getters.get_nonnegative_integers, True),
         ('suffix_signal', None, 'ss', getters.get_nonzero_integers, True),
         ('suffix_lengths', None, 'sl', getters.get_nonnegative_integers, True),
-        ('denominator', None, 'de', getters.get_positive_integer_power_of_two, True),
+        ('talea_denominator', None, 'de', getters.get_positive_integer_power_of_two, True),
         )
