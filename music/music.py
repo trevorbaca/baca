@@ -413,7 +413,7 @@ def stellate(k, s, t, d, b, span='from duration', rests=True):
     duration 1/d;
     beams b.
 
-    s = [[0]] signals zero-prolation;
+    s = [[0]] indicates zero-prolation;
     t = [[1]] leaves output unripped.
 
     TODO: prevent from-duration span from giving incorrect nibs.
@@ -486,16 +486,16 @@ def stellate(k, s, t, d, b, span='from duration', rests=True):
 
 
 def coruscate(n, s, t, z, d, rests=True):
-    '''Coruscate signal n;
+    '''Coruscate talea n;
     return list of fixed-duration tuplets.
 
-    Input signal n (2d, passed to helianthate);
+    Input talea n (2d, passed to helianthate);
     cut s (2d, passed to helianthate);
     fit t (list);
     dilation z (2d, passed to helianthate);
     duration 1/d.
 
-    n = [[1]] gives uniform signal;
+    n = [[1]] gives uniform talea;
     s = [[0]] gives no cut;
     z = [[0]] gives no dilation.
 
@@ -506,10 +506,10 @@ def coruscate(n, s, t, z, d, rests=True):
     debug = False
     #from beamtools import beamRunsByDuration
 
-    # zero-valued signals not allowed
-    signal = util.helianthate(n, 1, 1)
-    signal = sequencetools.flatten_sequence(signal)
-    assert all(signal)
+    # zero-valued taleas not allowed
+    talea = util.helianthate(n, 1, 1)
+    talea = sequencetools.flatten_sequence(talea)
+    assert all(talea)
 
     cut = util.helianthate(s, 1, 1)
     cut = sequencetools.flatten_sequence(cut)
@@ -524,9 +524,9 @@ def coruscate(n, s, t, z, d, rests=True):
         new = []
         while mathtools.weight(new) < element:
             if cut[j % len(cut)] == 0:
-                new.append(signal[j % len(signal)])
+                new.append(talea[j % len(talea)])
             elif cut[j % len(cut)] == 1:
-                new.append(-signal[j % len(signal)])
+                new.append(-talea[j % len(talea)])
             else:
                 raise ValueError
             j += 1
