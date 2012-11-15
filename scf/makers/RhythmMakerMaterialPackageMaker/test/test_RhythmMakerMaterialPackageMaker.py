@@ -9,7 +9,7 @@ def test_RhythmMakerMaterialPackageMaker_01():
     try:
         studio.run(user_input=
             'materials maker rhythm testrhythmmaker default '
-            'testrhythmmaker omi taleafilledrhythmmaker '
+            'testrhythmmaker omi talearhythmmaker '
             '[-1, 2, -3, 4] 16 [2, 3] [6] b default '
             'q '
             )

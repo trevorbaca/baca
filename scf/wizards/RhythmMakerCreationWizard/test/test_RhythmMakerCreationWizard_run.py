@@ -5,7 +5,7 @@ import scf
 def test_RhythmMakerCreationWizard_run_01():
 
     wizard = scf.wizards.RhythmMakerCreationWizard()
-    wizard.run(user_input='taleafilledrhythmmaker [-1, 2, -3, 4] 16 [2, 3] [6] b')
+    wizard.run(user_input='talearhythmmaker [-1, 2, -3, 4] 16 [2, 3] [6] b')
 
     maker = rhythmmakertools.TaleaRhythmMaker(
         [-1, 2, -3, 4], 
