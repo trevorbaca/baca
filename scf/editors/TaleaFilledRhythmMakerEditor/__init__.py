@@ -1,1 +1,1 @@
-from TaleaFilledRhythmMakerEditor import TaleaFilledRhythmMakerEditor
+from TaleaRhythmMakerEditor import TaleaRhythmMakerEditor

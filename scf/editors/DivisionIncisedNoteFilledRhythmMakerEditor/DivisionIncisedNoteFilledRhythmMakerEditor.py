@@ -4,11 +4,11 @@ from scf.editors.TargetManifest import TargetManifest
 from scf import getters
 
 
-class DivisionIncisedNoteFilledRhythmMakerEditor(RhythmMakerEditor):
+class DivisionIncisedNoteRhythmMakerEditor(RhythmMakerEditor):
 
     ### CLASS ATTRIBUTES ###
 
-    target_manifest = TargetManifest(rhythmmakertools.DivisionIncisedNoteFilledRhythmMaker,
+    target_manifest = TargetManifest(rhythmmakertools.DivisionIncisedNoteRhythmMaker,
         ('prefix_talea', None, 'ps', getters.get_nonzero_integers, True),
         ('prefix_lengths', None, 'pl', getters.get_nonnegative_integers, True),
         ('suffix_talea', None, 'ss', getters.get_nonzero_integers, True),

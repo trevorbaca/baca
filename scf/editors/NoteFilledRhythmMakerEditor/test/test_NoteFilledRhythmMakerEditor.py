@@ -3,11 +3,11 @@ import handlertools
 import scf
 
 
-def test_NoteFilledRhythmMakerEditor_01():
+def test_NoteRhythmMakerEditor_01():
 
-    editor = scf.editors.NoteFilledRhythmMakerEditor()
+    editor = scf.editors.NoteRhythmMakerEditor()
     editor.run(user_input='q', is_autoadvancing=True)
 
-    maker = rhythmmakertools.NoteFilledRhythmMaker()
+    maker = rhythmmakertools.NoteRhythmMaker()
 
     assert editor.target == maker

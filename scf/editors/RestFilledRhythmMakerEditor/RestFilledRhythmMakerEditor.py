@@ -4,9 +4,9 @@ from scf.editors.TargetManifest import TargetManifest
 from scf import getters
 
 
-class RestFilledRhythmMakerEditor(RhythmMakerEditor):
+class RestRhythmMakerEditor(RhythmMakerEditor):
 
     ### CLASS ATTRIBUTES ###
 
-    target_manifest = TargetManifest(rhythmmakertools.RestFilledRhythmMaker,
+    target_manifest = TargetManifest(rhythmmakertools.RestRhythmMaker,
         )

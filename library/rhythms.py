@@ -8,7 +8,7 @@ __all__ = []
 pattern, denominator, prolation_addenda  = [1], 64, []
 lefts, middles, rights = [0], [0], [0]
 left_lengths, right_lengths = [1], [2]
-sixty_fourths = rhythmmakertools.OutputBurnishedTaleaFilledRhythmMaker(
+sixty_fourths = rhythmmakertools.OutputBurnishedTaleaRhythmMaker(
    pattern, denominator, prolation_addenda,
    lefts, middles, rights,
    left_lengths, right_lengths)

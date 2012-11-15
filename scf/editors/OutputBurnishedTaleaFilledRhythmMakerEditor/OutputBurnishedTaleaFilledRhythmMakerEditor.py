@@ -4,11 +4,11 @@ from scf.editors.TargetManifest import TargetManifest
 from scf import getters
 
 
-class OutputBurnishedTaleaFilledRhythmMakerEditor(RhythmMakerEditor):
+class OutputBurnishedTaleaRhythmMakerEditor(RhythmMakerEditor):
 
     ### CLASS ATTRIBUTES ###
 
-    target_manifest = TargetManifest(rhythmmakertools.OutputBurnishedTaleaFilledRhythmMaker,
+    target_manifest = TargetManifest(rhythmmakertools.OutputBurnishedTaleaRhythmMaker,
         ('talea', None, 'ta', getters.get_nonzero_integers, True),
         ('talea_denominator', None, 'de', getters.get_positive_integer_power_of_two, True),
         ('prolation_addenda', None, 'ad', getters.get_integers, False),

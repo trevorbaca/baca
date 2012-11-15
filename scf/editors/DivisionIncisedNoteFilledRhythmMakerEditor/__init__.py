@@ -1,1 +1,1 @@
-from  DivisionIncisedNoteFilledRhythmMakerEditor import DivisionIncisedNoteFilledRhythmMakerEditor
+from  DivisionIncisedNoteRhythmMakerEditor import DivisionIncisedNoteRhythmMakerEditor

@@ -1,1 +1,1 @@
-from  DivisionBurnishedTaleaFilledRhythmMakerEditor import DivisionBurnishedTaleaFilledRhythmMakerEditor
+from  DivisionBurnishedTaleaRhythmMakerEditor import DivisionBurnishedTaleaRhythmMakerEditor

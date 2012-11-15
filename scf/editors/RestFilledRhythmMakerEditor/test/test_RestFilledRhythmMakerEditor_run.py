@@ -2,11 +2,11 @@ from abjad.tools import rhythmmakertools
 import scf
 
 
-def test_RestFilledRhythmMakerEditor_run_01():
+def test_RestRhythmMakerEditor_run_01():
 
-    editor = scf.editors.RestFilledRhythmMakerEditor()
+    editor = scf.editors.RestRhythmMakerEditor()
     editor.run(user_input='q', is_autoadvancing=True)
 
-    maker = rhythmmakertools.RestFilledRhythmMaker()
+    maker = rhythmmakertools.RestRhythmMaker()
 
     assert editor.target == maker

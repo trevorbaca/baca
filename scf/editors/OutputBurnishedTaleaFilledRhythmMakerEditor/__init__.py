@@ -1,1 +1,1 @@
-from  OutputBurnishedTaleaFilledRhythmMakerEditor import OutputBurnishedTaleaFilledRhythmMakerEditor
+from  OutputBurnishedTaleaRhythmMakerEditor import OutputBurnishedTaleaRhythmMakerEditor

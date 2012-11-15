@@ -15,7 +15,7 @@ def test_RhythmMakerMaterialPackageMaker_01():
             )
         mpp = scf.makers.RhythmMakerMaterialPackageMaker('materials.testrhythmmaker')
         assert mpp.directory_contents == ['__init__.py', 'output_material.py', 'tags.py']
-        maker = rhythmmakertools.TaleaFilledRhythmMaker(
+        maker = rhythmmakertools.TaleaRhythmMaker(
             [-1, 2, -3, 4],
             16,
             prolation_addenda=[2, 3],
