@@ -2,7 +2,7 @@ from abc import ABCMeta
 from abc import abstractmethod
 from abjad.tools import durationtools
 from fractions import Fraction
-from handlertools.Handler import Handler
+from experimental.tools.handlertools.Handler import Handler
 
 
 class DynamicHandler(Handler):

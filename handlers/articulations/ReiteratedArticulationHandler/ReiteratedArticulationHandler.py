@@ -2,7 +2,7 @@ from abjad.tools import leaftools
 from abjad.tools import marktools
 from abjad.tools import sequencetools
 from abjad.tools.notetools.Note import Note
-from handlertools.articulations.ArticulationHandler import ArticulationHandler
+from experimental.tools.handlertools.articulations.ArticulationHandler import ArticulationHandler
 
 
 class ReiteratedArticulationHandler(ArticulationHandler):

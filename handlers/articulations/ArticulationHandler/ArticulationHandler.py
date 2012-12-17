@@ -2,7 +2,7 @@ from abc import ABCMeta
 from abc import abstractmethod
 from abjad.tools import durationtools
 from abjad.tools import pitchtools
-from handlertools.Handler import Handler
+from experimental.tools.handlertools.Handler import Handler
 
 
 class ArticulationHandler(Handler):
