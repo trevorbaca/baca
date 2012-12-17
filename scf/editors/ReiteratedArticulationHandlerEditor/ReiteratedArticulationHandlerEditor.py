@@ -1,7 +1,7 @@
+from experimental.tools import handlertools
 from scf import getters
 from scf.editors.ArticulationHandlerEditor import ArticulationHandlerEditor
 from scf.editors.TargetManifest import TargetManifest
-import handlertools
 
 
 class ReiteratedArticulationHandlerEditor(ArticulationHandlerEditor):

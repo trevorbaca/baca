@@ -1,7 +1,7 @@
+from experimental.tools import handlertools
 from scf import getters
 from scf.editors.DynamicHandlerEditor import DynamicHandlerEditor
 from scf.editors.TargetManifest import TargetManifest
-import handlertools
 
 
 class TerracedDynamicsHandlerEditor(DynamicHandlerEditor):

@@ -1,7 +1,7 @@
+from experimental.tools.handlertools.articulations.ArticulationHandler import ArticulationHandler
 from scf.editors.get_articulation_handler_editor import get_articulation_handler_editor
 from scf.makers.MaterialPackageMaker import MaterialPackageMaker
 from scf.wizards.ArticulationHandlerCreationWizard import ArticulationHandlerCreationWizard
-from handlertools.articulations.ArticulationHandler import ArticulationHandler
 
 
 class ArticulationHandlerMaterialPackageMaker(MaterialPackageMaker):

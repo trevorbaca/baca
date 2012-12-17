@@ -1,7 +1,7 @@
 from scf.editors.get_dynamic_handler_editor import get_dynamic_handler_editor
 from scf.makers.MaterialPackageMaker import MaterialPackageMaker
 from scf.wizards.DynamicHandlerCreationWizard import DynamicHandlerCreationWizard
-from handlertools.dynamics.DynamicHandler import DynamicHandler
+from experimental.tools.handlertools.dynamics.DynamicHandler import DynamicHandler
 
 
 class DynamicHandlerMaterialPackageMaker(MaterialPackageMaker):
