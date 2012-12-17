@@ -1,5 +1,5 @@
 from abjad import *
-import handlertools
+from experimental.tools import handlertools
 import scf
 
 
@@ -10,8 +10,8 @@ def test_ArticulationHandlerCreationWziard_run_01():
 
     handler = handlertools.articulations.ReiteratedArticulationHandler(
         articulation_list=['^', '.'],
-        minimum_prolated_duration=Duration(1, 64),
-        maximum_prolated_duration=Duration(1, 4),
+        minimum_duration=Duration(1, 64),
+        maximum_duration=Duration(1, 4),
         minimum_written_pitch=pitchtools.NamedChromaticPitch('c'),
         maximum_written_pitch=pitchtools.NamedChromaticPitch("c''''"),
         )

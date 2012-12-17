@@ -1,6 +1,6 @@
 from abjad.tools import leaftools
 from abjad.tools import pitchtools
-from handlertools.pitch.PitchHandler import PitchHandler
+from experimental.tools.handlertools.pitch.PitchHandler import PitchHandler
 
 
 class OctaveTranspositionHandler(PitchHandler):

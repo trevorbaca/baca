@@ -1,5 +1,5 @@
 from abjad import *
-import handlertools
+from experimental.tools import handlertools
 import scf
 
 
@@ -10,7 +10,7 @@ def test_NoteAndChordHairpinHandlerEditor_run_01():
 
     handler = handlertools.dynamics.NoteAndChordHairpinHandler(
         hairpin_token=('p', '<', 'f'),
-        minimum_prolated_duration=Duration(1, 8),
+        minimum_duration=Duration(1, 8),
         )
 
     assert editor.target == handler

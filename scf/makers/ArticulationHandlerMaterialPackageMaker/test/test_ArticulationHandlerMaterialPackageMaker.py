@@ -1,5 +1,5 @@
 from abjad import *
-import handlertools
+from experimental.tools import handlertools
 import scf
 
 
@@ -18,8 +18,8 @@ def test_ArticulationHandlerMaterialPackageMaker_01():
         assert mpp.directory_contents == ['__init__.py', 'output_material.py', 'tags.py']
         handler = handlertools.articulations.ReiteratedArticulationHandler(
             articulation_list=['^', '.'],
-            minimum_prolated_duration=Duration(1, 64),
-            maximum_prolated_duration=Duration(1, 4),
+            minimum_duration=Duration(1, 64),
+            maximum_duration=Duration(1, 4),
             minimum_written_pitch=pitchtools.NamedChromaticPitch('c'),
             maximum_written_pitch=pitchtools.NamedChromaticPitch("c''''"),
             )

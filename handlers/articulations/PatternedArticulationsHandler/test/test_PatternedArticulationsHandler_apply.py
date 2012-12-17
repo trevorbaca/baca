@@ -1,5 +1,5 @@
 from abjad import *
-import handlertools
+from experimental.tools import handlertools
 
 
 def test_PatternedArticulationsHandler_apply_01():

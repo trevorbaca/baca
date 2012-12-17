@@ -5,11 +5,11 @@ import handlertools
 
 red_marcati = handlertools.articulations.ReiteratedArticulationHandler(
 	articulation_list=['^', '.'],
-	minimum_prolated_duration=durationtools.Duration(
+	minimum_duration=durationtools.Duration(
 		1,
 		64
 		),
-	maximum_prolated_duration=durationtools.Duration(
+	maximum_duration=durationtools.Duration(
 		1,
 		4
 		),

@@ -298,7 +298,7 @@ class MenuSection(MenuObject):
         note that entries may be both numbered and keyed.
 
         BODIES. Bodies are those things shown in each entry;
-        bodies are mandatory and every entry must be supplied with a body.
+        bodies are positional and every entry must be supplied with a body.
 
         RESULT. Result is the thing ultimately returned by Menu.run().
 

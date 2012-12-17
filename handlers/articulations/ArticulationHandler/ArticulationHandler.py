@@ -2,7 +2,7 @@ from abc import ABCMeta
 from abc import abstractmethod
 from abjad.tools import durationtools
 from abjad.tools import pitchtools
-from handlertools.Handler import Handler
+from experimental.tools.handlertools.Handler import Handler
 
 
 class ArticulationHandler(Handler):
@@ -15,20 +15,20 @@ class ArticulationHandler(Handler):
 
     @abstractmethod
     def __init__(self, 
-        minimum_prolated_duration=None, 
-        maximum_prolated_duration=None,
+        minimum_duration=None, 
+        maximum_duration=None,
         minimum_written_pitch=None, 
         maximum_written_pitch=None):
-        if minimum_prolated_duration is None:
-            self.minimum_prolated_duration = minimum_prolated_duration
+        if minimum_duration is None:
+            self.minimum_duration = minimum_duration
         else:
-            self.minimum_prolated_duration = durationtools.Duration(
-                *durationtools.duration_token_to_duration_pair(minimum_prolated_duration))
-        if maximum_prolated_duration is None:
-            self.maximum_prolated_duration = maximum_prolated_duration
+            self.minimum_duration = durationtools.Duration(
+                *durationtools.duration_token_to_duration_pair(minimum_duration))
+        if maximum_duration is None:
+            self.maximum_duration = maximum_duration
         else:
-            self.maximum_prolated_duration = durationtools.Duration(
-                *durationtools.duration_token_to_duration_pair(maximum_prolated_duration))
+            self.maximum_duration = durationtools.Duration(
+                *durationtools.duration_token_to_duration_pair(maximum_duration))
         if minimum_written_pitch is None:
             self.minimum_written_pitch = minimum_written_pitch
         else:
