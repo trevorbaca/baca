@@ -39,4 +39,4 @@ TODO
 
 17. Consider keyword backtracking protocol to replace self.push_backtrack() / self.pop_backtrack().
 
-18. Distinguish mandatory editor parameters from keyword editor parameters.
+18. Distinguish positional editor parameters from keyword editor parameters.

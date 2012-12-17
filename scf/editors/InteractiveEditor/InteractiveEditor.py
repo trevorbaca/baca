@@ -68,24 +68,24 @@ class InteractiveEditor(SCFObject):
 
     # TODO: deprecate and use two more specific labels instead
 #    @property
-#    def target_mandatory_attribute_names(self):
+#    def target_positional_attribute_names(self):
 #        result = []
 #        if hasattr(self, 'target_manifest'):
-#            result.extend(self.target_manifest.mandatory_attribute_names)
+#            result.extend(self.target_manifest.positional_attribute_names)
 #        return result
 
     @property
-    def target_mandatory_initializer_argument_names(self):
+    def target_positional_initializer_argument_names(self):
         result = []
         if hasattr(self, 'target_manifest'):
-            result.extend(self.target_manifest.mandatory_initializer_argument_names)
+            result.extend(self.target_manifest.positional_initializer_argument_names)
         return result
 
     @property
-    def target_mandatory_initializer_retrievable_attribute_names(self):
+    def target_positional_initializer_retrievable_attribute_names(self):
         result = []
         if hasattr(self, 'target_manifest'):
-            result.extend(self.target_manifest.mandatory_initializer_retrievable_attribute_names)
+            result.extend(self.target_manifest.positional_initializer_retrievable_attribute_names)
         return result
 
     @property
@@ -158,8 +158,8 @@ class InteractiveEditor(SCFObject):
 
     def copy_target_attributes_to_memory(self):
         self.initialize_attributes_in_memory()
-        #for attribute_name in self.target_mandatory_attribute_names:
-        for attribute_name in self.target_mandatory_initializer_retrievable_attribute_names:
+        #for attribute_name in self.target_positional_attribute_names:
+        for attribute_name in self.target_positional_initializer_retrievable_attribute_names:
             attribute_value = getattr(self.target, attribute_name, None)
             if attribute_value is not None:
                 attribute_name = \
@@ -194,8 +194,8 @@ class InteractiveEditor(SCFObject):
 
     def initialize_target_from_attributes_in_memory(self):
         args, kwargs = [], {}
-        #for attribute_name in self.target_mandatory_attribute_names:
-        for attribute_name in self.target_mandatory_initializer_argument_names:
+        #for attribute_name in self.target_positional_attribute_names:
+        for attribute_name in self.target_positional_initializer_argument_names:
             if attribute_name in self.attributes_in_memory:
                 args.append(self.attributes_in_memory.get(attribute_name))
         for attribute_name in self.target_keyword_attribute_names:

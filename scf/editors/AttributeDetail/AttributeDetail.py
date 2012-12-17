@@ -9,22 +9,22 @@ class AttributeDetail(object):
     def __init__(self, *args, **kwargs):
         is_null = False
         if len(args) == 0:
-            name = retrievable_name = human_readable_name = menu_key = editor_callable = is_mandatory = None
+            name = retrievable_name = human_readable_name = menu_key = editor_callable = is_positional = None
             is_null = True
         elif len(args) == 3:
             name, menu_key, editor_callable = args
             human_readable_name = None
-            is_mandatory = True
+            is_positional = True
             retrievable_name = name
         elif len(args) == 4:
             name, human_readable_name, menu_key, editor_callable = args
-            is_mandatory = True
+            is_positional = True
             retrievable_name = name
         elif len(args) == 5:
-            name, human_readable_name, menu_key, editor_callable, is_mandatory = args
+            name, human_readable_name, menu_key, editor_callable, is_positional = args
             retrievable_name = name
         elif len(args) == 6:
-            name, retrievable_name, human_readable_name, menu_key, editor_callable, is_mandatory = args
+            name, retrievable_name, human_readable_name, menu_key, editor_callable, is_positional = args
         else:
             raise ValueError('can not parse attribute detail {!r}.'.format(args)) 
         if not human_readable_name and name:
@@ -34,7 +34,7 @@ class AttributeDetail(object):
         self.human_readable_name = human_readable_name 
         self.menu_key = menu_key
         self.editor_callable = editor_callable
-        self.is_mandatory = is_mandatory
+        self.is_positional = is_positional
         self.allow_none = kwargs.get('allow_none', True)
         self.is_null = is_null
 

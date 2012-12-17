@@ -61,32 +61,32 @@ class TargetManifest(object):
     def keyword_attribute_names(self):
         result = []
         for attribute_detail in self.attribute_details:
-            if not attribute_detail.is_mandatory:
+            if not attribute_detail.is_positional:
                 result.append(attribute_detail.name)
         return result
 
     # TODO: deprecate and use two more specifier labels instead
 #    @property
-#    def mandatory_attribute_names(self):
+#    def positional_attribute_names(self):
 #        result = []
 #        for attribute_detail in self.attribute_details:
-#            if attribute_detail.is_mandatory:
+#            if attribute_detail.is_positional:
 #                result.append(attribute_detail.name)
 #        return result
 
     @property
-    def mandatory_initializer_retrievable_attribute_names(self):
+    def positional_initializer_retrievable_attribute_names(self):
         result = []
         for attribute_detail in self.attribute_details:
-            if attribute_detail.is_mandatory:
+            if attribute_detail.is_positional:
                 result.append(attribute_detail.retrievable_name)
         return result
 
     @property
-    def mandatory_initializer_argument_names(self):
+    def positional_initializer_argument_names(self):
         result = []
         for attribute_detail in self.attribute_details:
-            if attribute_detail.is_mandatory:
+            if attribute_detail.is_positional:
                 result.append(attribute_detail.name)
         return result
 

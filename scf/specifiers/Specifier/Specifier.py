@@ -23,7 +23,7 @@ class Specifier(AbjadObject):
         if self is other:
             return True
         if isinstance(other, type(self)):
-            if self._mandatory_argument_values == other._mandatory_argument_values:
+            if self._positional_argument_values == other._positional_argument_values:
                 if self._keyword_argument_name_value_strings == other._keyword_argument_name_value_strings:
                     return True
         return False
