@@ -147,6 +147,7 @@ class MaterialPackageMaker(MaterialPackageProxy):
             lines = output_material._get_tools_package_qualified_repr_pieces(is_indented=True)
         else:
             lines = [repr(output_material)]
+        lines = list(lines)
         lines[0] = '{} = {}'.format(self.material_underscored_name, lines[0])
         lines = [line + '\n' for line in lines]
         return lines
