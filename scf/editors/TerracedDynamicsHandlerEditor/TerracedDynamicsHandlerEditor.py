@@ -10,5 +10,5 @@ class TerracedDynamicsHandlerEditor(DynamicHandlerEditor):
 
     target_manifest = TargetManifest(handlertools.dynamics.TerracedDynamicsHandler,
         ('dynamics', None, 'dy', getters.get_dynamics, True),
-        ('minimum_prolated_duration', None, 'md', getters.get_duration, True),
+        ('minimum_duration', None, 'md', getters.get_duration, True),
     )

@@ -11,8 +11,8 @@ def test_ReiteratedArticulationHandlerEditor_run_01():
 
     handler = handlertools.articulations.ReiteratedArticulationHandler(
         articulation_list=['.', '^'], 
-        minimum_prolated_duration=Duration(1, 16), 
-        maximum_prolated_duration=Duration(1, 8), 
+        minimum_duration=Duration(1, 16), 
+        maximum_duration=Duration(1, 8), 
         minimum_written_pitch=pitchtools.NamedChromaticPitch("cs''"), 
         maximum_written_pitch=pitchtools.NamedChromaticPitch("c'''"),
         )

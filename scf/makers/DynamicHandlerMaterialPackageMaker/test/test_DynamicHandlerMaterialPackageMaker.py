@@ -18,7 +18,7 @@ def test_DynamicHandlerMaterialPackageMaker_01():
         assert mpp.directory_contents == ['__init__.py', 'output_material.py', 'tags.py']
         handler = handlertools.dynamics.ReiteratedDynamicHandler(
             dynamic_name='f',
-            minimum_prolated_duration=Duration(1, 16),
+            minimum_duration=Duration(1, 16),
             )
         assert mpp.output_material == handler
     finally:

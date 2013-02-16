@@ -112,7 +112,7 @@ def effectiveDurations(m):
 
     Return list of durations.
     '''
-    return [l.prolated_duration for l in list(iterationtools.iterate_leaves_in_expr(m))]
+    return [l.duration for l in list(iterationtools.iterate_leaves_in_expr(m))]
 
 
 def effectiveDuration(m):
@@ -557,7 +557,7 @@ def coruscate(n, s, t, z, d, rests=True):
         #ComplexBeam(element, [element.duration.pair])
         #BeamComplex(element, [element.duration.pair])
         #BeamComplexDurated(element.leaves, [element.duration.prolated])
-        beamtools.DuratedComplexBeamSpanner(element.leaves, [element.prolated_duration])
+        beamtools.DuratedComplexBeamSpanner(element.leaves, [element.duration])
 
     return result
 
@@ -573,13 +573,13 @@ def makeMeasures(m, meters):
     #for v in voices:
     for v in iterationtools.iterate_components_in_expr(m, klass=voicetools.Voice):
         #assert v.duration.prolated == sum(durations, fractions.Fraction(0))
-        assert v.prolated_duration == sum(durations, fractions.Fraction(0))
+        assert v.duration == sum(durations, fractions.Fraction(0))
         d = 0
         #measure = measuretoools.Measure(meters[d], [])
         measure = measuretools.Measure(meters[d], [])
         for x in v[ : ]:
             measure.append(x)
-            if measure.prolated_duration >= durations[d]:
+            if measure.duration >= durations[d]:
                 v[d : 2 * d + len(measure) - 1] = [measure]
                 d += 1
                 if d == len(durations):
