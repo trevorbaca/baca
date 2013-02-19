@@ -1,1 +1,0 @@
-from  ObjectInventoryEditor import ObjectInventoryEditor

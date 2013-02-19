@@ -1,1 +1,0 @@
-from PerformerEditor import PerformerEditor

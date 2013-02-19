@@ -1,8 +1,0 @@
-#! /usr/bin/env python
-
-'''Shell script equivalent of iotools.log() in Abjad.'''
-
-import os
-
-lily_log = os.path.join('~', '.abjad', 'output', 'lily.log')
-os.system('vi %s' % lily_log)

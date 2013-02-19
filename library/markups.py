@@ -1,5 +1,5 @@
 from abjad.tools import markuptools
-from baca.handlertools.articulations import *
+from baca.handlertools import *
 import baca
 __all__ = []
 

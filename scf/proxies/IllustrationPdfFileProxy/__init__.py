@@ -1,1 +1,0 @@
-from IllustrationPdfFileProxy import IllustrationPdfFileProxy

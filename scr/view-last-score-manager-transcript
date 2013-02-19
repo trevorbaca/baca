@@ -1,0 +1,8 @@
+#! /usr/bin/env python
+import os
+
+
+output_directory = '/Users/trevorbaca/.scoremanagertools/output'
+file_name = os.listdir(output_directory)[-1]
+file_path = os.path.join(output_directory, file_name)
+os.system('vim {}'.format(file_path))

@@ -54,13 +54,17 @@ next_lilypond_filename = os.path.join(LILYPONDTEST, next_lilypond_filename)
 
 start_directory = os.path.abspath('.')
 os.chdir(LILYPONDTEST)
-lilypond_version = os.popen('lily-version').read()
+#lilypond_version = os.popen('lily-version').read()
+result = os.popen('lilypond --version').readlines()                             
+first_line = result[0]                                                          
+first_line = first_line.strip('\n')                                             
+lilypond_version = first_line.split(' ')[-1]                                             
 next_lilypond_file = file(next_lilypond_filename, 'w')
 next_lilypond_file.write(r'\version "%s"' % lilypond_version  + '\n')
 next_lilypond_file.write(r'\include "english.ly"' + '\n')
 next_lilypond_file.write('\n\n')
 next_lilypond_file.close()
 
-os.system('vi +$ %s' % next_lilypond_filename)
+os.system('vim +$ %s' % next_lilypond_filename)
 os.system('lily %s' % next_lilypond_filename)
 os.chdir(start_directory)

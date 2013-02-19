@@ -1,10 +1,11 @@
-from abjad import *
-from abjad.tools import sequencetools
-import baca
 import os
+import baca
+from abjad import *
 
 
+# TODO: make into class
 def make_zagged_pitch_classes(pc_cells, division_cells, grouping_counts):
+    from experimental.tools import musicexpressiontools
     pc_cells = baca.util.helianthate(pc_cells, -1, 1)
     division_cells = baca.util.helianthate(division_cells, -1, 1)
     division_cells = sequencetools.flatten_sequence(division_cells, depth=1)
@@ -14,10 +15,13 @@ def make_zagged_pitch_classes(pc_cells, division_cells, grouping_counts):
         parts = sequencetools.partition_sequence_by_ratio_of_lengths(pc_segment, division_cells[i])
         tmp.extend(parts)
     pc_cells = tmp
-    pc_cells = sequencetools.partition_sequence_cyclically_by_counts_with_overhang(pc_cells, grouping_counts)
+    pc_cells = sequencetools.partition_sequence_by_counts(
+        pc_cells, grouping_counts, cyclic=True, overhang=True)
     pc_cells = [sequencetools.join_subsequences(x) for x in pc_cells]
-    pc_cells = sequencetools.partition_sequence_cyclically_by_counts_with_overhang(pc_cells, grouping_counts)
+    pc_cells = sequencetools.partition_sequence_by_counts(
+        pc_cells, grouping_counts, cyclic=True, overhang=True)
     material = sequencetools.CyclicTree(pc_cells)
+    material = musicexpressiontools.StatalServer(material)
     return material
 
 
@@ -31,15 +35,15 @@ def make_illustration_from_output_material(material, **kwargs):
 
     stylesheet = os.path.join(os.environ.get('SCFPATH'), 'stylesheets', 'rhythm_letter_16.ly')
     illustration.file_initial_user_includes.append(stylesheet)
-    
-    voice.engraver_consists.add('Horizontal_bracket_engraver')
+
+    voice.engraver_consists.append('Horizontal_bracket_engraver')
     for level in (1, 2):
         level_sizes = []
         for x in material.iterate_at_level(level):
             size = len(list(x.iterate_payload()))
             level_sizes.append(size)
-        for part in sequencetools.partition_sequence_once_by_counts_without_overhang(
-            voice.leaves, level_sizes):
+        for part in sequencetools.partition_sequence_by_counts(
+            voice.leaves, level_sizes, cyclic=False, overhang=False):
             spannertools.HorizontalBracketSpanner(part)
     cur_group = 0
     for leaf in voice.leaves:
@@ -50,7 +54,6 @@ def make_illustration_from_output_material(material, **kwargs):
                 markuptools.Markup(r'\bold { %s }' % cur_group, 'up')(leaf)
                 cur_group += 1
     bar_line = scoretools.add_double_bar_to_end_of_score(score)
-    spanner = spannertools.Spanner(voice.leaves)
 
     score.override.bar_line.stencil = False
     score.override.flag.stencil = False
