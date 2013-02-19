@@ -1,7 +1,7 @@
 from scf import getters
 from scf import selectors
 from scf import wizards
-from abjad.tools.instrumenttools._Instrument import _Instrument
+from abjad.tools.instrumenttools.Instrument import Instrument
 from abjad.tools import instrumenttools
 from scf.editors.ClefMarkInventoryEditor import ClefMarkInventoryEditor
 from scf.editors.InteractiveEditor import InteractiveEditor
@@ -12,7 +12,7 @@ class InstrumentEditor(InteractiveEditor):
 
     ### CLASS ATTRIBUTES ###
 
-    target_manifest = TargetManifest(_Instrument,
+    target_manifest = TargetManifest(Instrument,
         ('instrument_name', 'in', getters.get_string),
         ('instrument_name_markup', 'im', getters.get_markup),
         ('short_instrument_name',  'sn', getters.get_string),

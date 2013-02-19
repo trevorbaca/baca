@@ -1,5 +1,5 @@
 from abjad.tools import instrumenttools
-from abjad.tools.instrumenttools._Instrument import _Instrument
+from abjad.tools.instrumenttools.Instrument import Instrument
 from scf import selectors
 from scf.wizards.InstrumentCreationWizard import InstrumentCreationWizard
 from scf.wizards.Wizard import Wizard
@@ -28,7 +28,7 @@ class InstrumentSelectionWizard(Wizard):
                 self.pop_breadcrumb()
                 self.restore_breadcrumbs(cache=cache)
                 return 
-            if isinstance(result, _Instrument):
+            if isinstance(result, Instrument):
                 self.pop_breadcrumb()
                 self.restore_breadcrumbs(cache=cache)
                 self.target = result

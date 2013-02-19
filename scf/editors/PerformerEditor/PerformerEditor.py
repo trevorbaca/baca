@@ -1,6 +1,6 @@
 from abjad.tools import instrumenttools
 from abjad.tools import scoretools
-from abjad.tools.instrumenttools._Instrument import _Instrument
+from abjad.tools.instrumenttools.Instrument import Instrument
 from scf import getters
 from scf import wizards
 from scf.editors.ListEditor import ListEditor
@@ -12,7 +12,7 @@ class PerformerEditor(ListEditor):
 
     ### CLASS ATTRIBUTES ###
 
-    item_class = _Instrument
+    item_class = Instrument
     item_creator_class = wizards.InstrumentCreationWizard
     item_creator_class_kwargs = {'is_ranged': True}
     item_editor_class = InstrumentEditor
