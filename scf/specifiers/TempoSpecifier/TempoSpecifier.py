@@ -8,8 +8,8 @@ class TempoSpecifier(ParameterSpecifier):
     def __init__(self, description=None, name=None, source=None):
         ParameterSpecifier.__init__(self, description=description, name=name, source=source)
 
-    ### READ-ONLY PRIVATE PROPERTIES ###
+    ### READ-ONLY PUBLIC PROPERTIES ###
 
     @property
-    def _one_line_menuing_summary(self):
+    def one_line_menuing_summary(self):
         return self.name

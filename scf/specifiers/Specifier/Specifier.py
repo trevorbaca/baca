@@ -1,5 +1,4 @@
-from abc import ABCMeta
-from abc import abstractproperty
+import abc
 from abjad.tools import iotools
 from abjad.tools.abctools.AbjadObject import AbjadObject
 
@@ -8,7 +7,7 @@ class Specifier(AbjadObject):
     
     ### CLASS ATTRIBUTES ###
 
-    __metaclass__ = ABCMeta
+    __metaclass__ = abc.ABCMeta
 
     ### INITIALIZER ###
 
@@ -50,5 +49,6 @@ class Specifier(AbjadObject):
     def human_readable_class_name(self):
         return iotools.uppercamelcase_to_space_delimited_lowercase(self.class_name)
 
+    @abc.abstractproperty
     def one_line_menuing_summary(self):
         pass
