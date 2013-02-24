@@ -6,11 +6,9 @@ from scf import specifiers
 
 music_specifier = specifiers.MusicSpecifier([
 	specifiers.MusicContributionSpecifier(
+		[specifiers.InstrumentSpecifier(instrument=instrumenttools.Violin())],
 		name='green violin pizzicati',
-		description='upper register violin pizzicati',
-		instrument_specifier=specifiers.InstrumentSpecifier(
-			instrument=instrumenttools.Violin()
-			)
+		description='upper register violin pizzicati'
 		)
 	],
 	name='green music'
