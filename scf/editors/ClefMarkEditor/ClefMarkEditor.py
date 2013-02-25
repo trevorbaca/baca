@@ -10,4 +10,4 @@ class ClefMarkEditor(InteractiveEditor):
 
     target_manifest = TargetManifest(contexttools.ClefMark,
         ('clef_name', 'nm', getters.get_string),
-        )        
+        )

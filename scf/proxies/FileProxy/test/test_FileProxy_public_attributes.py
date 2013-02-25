@@ -19,7 +19,7 @@ def test_FileProxy_public_attributes_01():
     assert file_proxy.short_name_without_extension is None
     assert file_proxy.svn_add_command is None
     assert file_proxy.temporary_asset_short_name == 'temporary_file.txt'
-        
+
 
 def test_FileProxy_public_attributes_02():
     '''With path.
@@ -28,7 +28,7 @@ def test_FileProxy_public_attributes_02():
     short_name = 'clean_letter_14.ly'
     path_name = os.path.join(os.environ.get('SCFPATH'), 'stylesheets', short_name)
     file_proxy = scf.proxies.FileProxy(path_name)
-    
+
     assert file_proxy.file_lines
     assert file_proxy.generic_class_name == 'file'
     assert file_proxy.human_readable_name == short_name

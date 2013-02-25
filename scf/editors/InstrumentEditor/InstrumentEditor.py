@@ -19,7 +19,7 @@ class InstrumentEditor(InteractiveEditor):
         ('short_instrument_name_markup', 'sm', getters.get_markup),
         ('pitch_range', 'range', 'rg', getters.get_symbolic_pitch_range_string),
         ('all_clefs', 'clefs', 'cf', ClefMarkInventoryEditor),
-        is_keyed=True, 
+        is_keyed=True,
         )
 
     ### READ-ONLY PUBLIC PROPERTIES ###
@@ -43,7 +43,7 @@ class InstrumentEditor(InteractiveEditor):
                 self.target = instruments[0]
             else:
                 self.target = None
-    
+
     def handle_main_menu_result(self, result):
         if result == 'tprd':
             if self.session.display_pitch_ranges_with_numbered_pitches:

@@ -5,8 +5,8 @@ from scf.menuing.MenuObject import MenuObject
 
 class MenuSection(MenuObject):
 
-    def __init__(self, is_hidden=False, is_internally_keyed=False, is_keyed=True, 
-        is_numbered=False, is_parenthetically_numbered=False, is_ranged=False, 
+    def __init__(self, is_hidden=False, is_internally_keyed=False, is_keyed=True,
+        is_numbered=False, is_parenthetically_numbered=False, is_ranged=False,
         is_read_only=False, session=None, where=None, title=None):
         MenuObject.__init__(self, session=session, where=where, title=title)
         self._is_hidden = is_hidden
@@ -290,7 +290,7 @@ class MenuSection(MenuObject):
         elif isinstance(expr, tuple) and len(expr) in (0, 2, 3, 4):
             return True
         return False
-        
+
     def make_menu_lines(self):
         '''KEYS. Keys are optionally shown in parentheses in each entry;
         keys are designed to be textual instead of numeric;
@@ -307,7 +307,7 @@ class MenuSection(MenuObject):
         2. If key exists, textual user input checked for exact match against key.
         3. Textual user input checked for 3-char match against body.
         4. Otherwise, no match found.
-        
+
         Return value resolution:
         Keyed entries (numbered or not) supply key as return value.
         Nonkeyed entries (always numbered) supply body as return value.

@@ -104,12 +104,12 @@ class MenuObject(SCFObject):
         section.append(('score', 'score'))
         section.append(('studio', 'studio'))
         section.append(('tm', 'toggle menu'))
-        section.append(('where', 'show menu client')) 
+        section.append(('where', 'show menu client'))
         return section
 
     def make_is_integer_in_range(self, start=None, stop=None, allow_none=False):
         return lambda expr: (expr is None and allow_none) or \
-            (predicates.is_integer(expr) and 
+            (predicates.is_integer(expr) and
             (start is None or start <= expr) and
             (stop is None or expr <= stop))
 

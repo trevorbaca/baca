@@ -116,7 +116,7 @@ class ListEditor(InteractiveEditor):
             InteractiveEditor.handle_main_menu_result(self, result)
 
     def make_main_menu(self):
-        menu, attribute_management_section = self.make_menu(where=self.where(), 
+        menu, attribute_management_section = self.make_menu(where=self.where(),
             is_keyed=getattr(self.target_manifest, 'is_keyed', False))
         attribute_management_section.tokens = self.target_attribute_tokens
         attribute_management_section.show_existing_values = True

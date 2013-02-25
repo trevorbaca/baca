@@ -13,6 +13,6 @@ def test_MenuSection_default_index_01():
     assert section.default_index is None
     assert py.test.raises(ValueError, 'section.default_index = -1')
     assert py.test.raises(ValueError, 'section.default_index = 99')
-    
+
     section.default_index = 2
     assert section.default_index == 2

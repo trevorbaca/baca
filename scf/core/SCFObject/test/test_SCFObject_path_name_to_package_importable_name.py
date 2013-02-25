@@ -27,6 +27,6 @@ def test_SCFObject_path_name_to_package_importable_name_03():
 
     path = os.path.join(os.environ.get('SCORES'), 'aracilik', 'foo')
     assert scf_object.path_name_to_package_importable_name(path) == 'aracilik.foo'
-    
+
     path = os.path.join(os.environ.get('SCORES'), 'aracilik', 'foo.py')
     assert scf_object.path_name_to_package_importable_name(path) == 'aracilik.foo'

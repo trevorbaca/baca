@@ -85,7 +85,7 @@ def is_markup_token(expr):
         return isinstance(result, markuptools.Markup)
     except:
         return False
-        
+
 def is_named_chromatic_pitch(expr):
     return isinstance(expr, pitchtools.NamedChromaticPitch)
 

@@ -2,7 +2,7 @@ from scf.core.SCFObject import SCFObject
 
 
 class InteractiveEditor(SCFObject):
-    
+
     ### INITIALIZER ###
 
     def __init__(self, session=None, target=None):
@@ -13,7 +13,7 @@ class InteractiveEditor(SCFObject):
         self.initialize_attributes_in_memory()
         if not hasattr(self, 'target_manifest'):
             raise Exception(self)
-    
+
     ### SPECIAL METHODS ###
 
     def __repr__(self):
@@ -24,7 +24,7 @@ class InteractiveEditor(SCFObject):
         return '{}({})'.format(self.class_name, summary)
 
     ### READ-ONLY PUBLIC PROPERTIES ###
-    
+
     @property
     def attributes_in_memory(self):
         return self._attributes_in_memory
@@ -107,7 +107,7 @@ class InteractiveEditor(SCFObject):
     ### PUBLIC METHODS ###
 
     def attribute_name_to_menu_key(self, attribute_name, menu_keys):
-        found_menu_key = False        
+        found_menu_key = False
         attribute_parts = attribute_name.split('_')
         i = 1
         while True:
@@ -207,7 +207,7 @@ class InteractiveEditor(SCFObject):
             pass
 
     def make_main_menu(self):
-        menu, section = self.make_menu(where=self.where(), 
+        menu, section = self.make_menu(where=self.where(),
             is_keyed=self.target_manifest.is_keyed, is_parenthetically_numbered=True)
         section.tokens = self.target_attribute_tokens
         section.show_existing_values = True
@@ -240,7 +240,7 @@ class InteractiveEditor(SCFObject):
 
     def menu_key_to_delegated_editor_kwargs(self, menu_key):
         return {}
-        
+
     def menu_key_to_existing_value(self, menu_key):
         attribute_name = self.target_manifest.menu_key_to_attribute_name(menu_key)
         return getattr(self.target, attribute_name, None)

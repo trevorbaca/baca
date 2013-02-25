@@ -38,7 +38,7 @@ def test_OctaveTranspositionMappingInventoryMaterialPackageMaker_02():
             'materials.testoctavetrans')
         assert mpp.directory_contents == ['__init__.py', 'output_material.py', 'tags.py']
         mapping_1 = pitchtools.OctaveTranspositionMapping([('[A0, C4)', 15), ('[C4, C8)', 27)])
-        mapping_2 = pitchtools.OctaveTranspositionMapping([('[A0, C8]', -18)]) 
+        mapping_2 = pitchtools.OctaveTranspositionMapping([('[A0, C8]', -18)])
         inventory = pitchtools.OctaveTranspositionMappingInventory([mapping_1, mapping_2])
         assert mpp.output_material == inventory
     finally:

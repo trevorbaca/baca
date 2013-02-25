@@ -6,7 +6,7 @@ import os
 
 
 class Session(SCFObject):
-    
+
     ### INITIALIZER ###
 
     def __init__(self, user_input=None):
@@ -77,7 +77,7 @@ class Session(SCFObject):
     def current_chunks_package_importable_name(self):
         if self.is_in_score:
             return self.dot_join([
-                self.current_score_package_short_name, 
+                self.current_score_package_short_name,
                 self.score_internal_chunks_package_importable_name_infix])
         else:
             return self.score_external_chunks_package_importable_name
@@ -91,7 +91,7 @@ class Session(SCFObject):
     def current_materials_package_importable_name(self):
         if self.is_in_score:
             return self.dot_join([
-                self.current_score_package_short_name, 
+                self.current_score_package_short_name,
                 self.score_internal_materials_package_importable_name_infix])
         else:
             return self.score_external_materials_package_importable_name
@@ -107,7 +107,7 @@ class Session(SCFObject):
         if self.is_in_score:
             return ScorePackageProxy(
                 score_package_short_name=self.current_score_package_short_name, session=self)
-    
+
     @property
     def current_score_path_name(self):
         if self.is_in_score:
@@ -175,7 +175,7 @@ class Session(SCFObject):
     def output_directory(self):
         return os.environ.get('SCFOUTPUT')
 
-    @property   
+    @property
     def scores_to_show(self):
         return self._scores_to_show
 
@@ -337,7 +337,7 @@ class Session(SCFObject):
             not self.backtracking_stack:
             self.is_backtracking_locally = False
             return True
-            
+
     def clean_up(self):
         if self.dump_transcript:
             self.complete_transcript.write_to_disk(self.output_directory)

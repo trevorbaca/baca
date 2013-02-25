@@ -4,7 +4,7 @@ from abjad.tools.abctools.AbjadObject import AbjadObject
 
 
 class Specifier(AbjadObject):
-    
+
     ### CLASS ATTRIBUTES ###
 
     __metaclass__ = abc.ABCMeta
@@ -31,7 +31,7 @@ class Specifier(AbjadObject):
 #
 #    @property
 #    def _keyword_argument_names(self):
-#        '''Defined by hand so that this tuple is inheritable by subclasses. 
+#        '''Defined by hand so that this tuple is inheritable by subclasses.
 #        Is there a way to derive this programmatically *and* be inheritable by subclasses?
 #        '''
 #        return tuple(sorted([

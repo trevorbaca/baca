@@ -18,7 +18,7 @@ def test_Studio_score_navigation_02():
     studio.run(user_input='next q')
     studio.ts == (4,)
     assert studio.session.current_score_package_short_name == 'archipel'
-     
+
     studio.run(user_input='prev q')
     studio.ts == (4,)
     assert studio.session.current_score_package_short_name == 'sekka'

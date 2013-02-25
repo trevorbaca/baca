@@ -25,7 +25,7 @@ def test_Session_read_only_properties_01():
 
     assert session.current_score_package_proxy is None
     assert session.current_score_path_name is None
-    
+
     assert session.current_specifiers_package_importable_name == \
         os.path.basename(os.environ.get('SCFSPECIFIERSPATH'))
     assert session.current_specifiers_package_path_name == os.environ.get('SCFSPECIFIERSPATH')
@@ -67,5 +67,5 @@ def test_Session_read_only_properties_02():
     assert session.current_specifiers_package_importable_name == 'foo.mus.specifiers'
     assert session.current_specifiers_package_path_name == \
         os.path.join(os.environ.get('SCORES'), 'foo', 'mus', 'specifiers')
-    
+
     assert session.is_in_score

@@ -4,7 +4,7 @@ from scf.proxies.FileProxy import FileProxy
 class ParsableFileProxy(FileProxy):
 
     def __init__(self, path_name=None, session=None):
-        FileProxy.__init__(self, path_name=path_name, session=session)    
+        FileProxy.__init__(self, path_name=path_name, session=session)
         self.encoding_directives = []
         self.docstring_lines = []
         self.setup_statements = []

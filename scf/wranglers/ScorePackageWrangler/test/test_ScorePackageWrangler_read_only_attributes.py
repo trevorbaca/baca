@@ -59,4 +59,4 @@ def test_ScorePackageWrangler_read_only_attributes_08():
     '''Other read-only attributes.
     '''
 
-    assert 'Lidércfény (2008)' in wrangler.visible_score_titles_with_years 
+    assert 'Lidércfény (2008)' in wrangler.visible_score_titles_with_years

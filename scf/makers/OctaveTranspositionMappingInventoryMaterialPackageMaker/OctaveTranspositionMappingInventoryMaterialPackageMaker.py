@@ -10,7 +10,7 @@ class OctaveTranspositionMappingInventoryMaterialPackageMaker(InventoryMaterialP
 
     generic_output_name = 'octave transposition mapping inventory'
     illustration_maker = staticmethod(make_illustration_from_output_material)
-    output_material_checker = staticmethod(lambda x: isinstance(x, 
+    output_material_checker = staticmethod(lambda x: isinstance(x,
         pitchtools.OctaveTranspositionMappingInventory))
     output_material_editor = OctaveTranspositionMappingInventoryEditor
     output_material_maker = pitchtools.OctaveTranspositionMappingInventory

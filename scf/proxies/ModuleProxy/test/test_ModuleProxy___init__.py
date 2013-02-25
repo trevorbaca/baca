@@ -6,5 +6,5 @@ def test_ModuleProxy___init___01():
     '''
 
     module_proxy = scf.proxies.ModuleProxy()
-    
+
     assert isinstance(module_proxy, scf.proxies.ModuleProxy)

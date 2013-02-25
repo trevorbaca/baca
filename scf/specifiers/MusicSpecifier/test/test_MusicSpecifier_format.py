@@ -21,7 +21,7 @@ def test_MusicSpecifier_format_02():
     assert repr(specifier) == "MusicSpecifier([], name='foo')"
     assert specifier._storage_format == "specifiers.MusicSpecifier([],\n\tname='foo'\n\t)"
 
-    
+
 def test_MusicSpecifier_format_03():
     '''Populated. Without keywords.
     '''
@@ -80,7 +80,7 @@ def test_MusicSpecifier_format_04():
         name='blue music'
         )
     '''
-    
+
     assert repr(ms) == "MusicSpecifier([MusicContributionSpecifier([ArticulationSpecifier(articulation_handler_name='foo articulations')]), MusicContributionSpecifier([ArticulationSpecifier(articulation_handler_name='bar articulations')])], name='blue music')"
 
     assert ms._storage_format == "specifiers.MusicSpecifier([\n\tspecifiers.MusicContributionSpecifier([\n\t\tspecifiers.ArticulationSpecifier(\n\t\t\tarticulation_handler_name='foo articulations'\n\t\t\t)\n\t\t]),\n\tspecifiers.MusicContributionSpecifier([\n\t\tspecifiers.ArticulationSpecifier(\n\t\t\tarticulation_handler_name='bar articulations'\n\t\t\t)\n\t\t])\n\t],\n\tname='blue music'\n\t)"

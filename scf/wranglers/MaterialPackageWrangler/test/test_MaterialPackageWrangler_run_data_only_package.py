@@ -4,7 +4,7 @@ import scf
 def test_MaterialPackageWrangler_run_data_only_package_01():
     '''Make data package. Delete package.
     '''
-    
+
     studio = scf.studio.Studio()
     assert not studio.package_exists('materials.testnumbers')
 
@@ -85,7 +85,7 @@ def test_MaterialPackageWrangler_run_data_only_package_03():
 
 def test_MaterialPackageWrangler_run_data_only_package_04():
     '''Make data package. Create output material.
-    Delete package." 
+    Delete package."
     '''
 
     studio = scf.studio.Studio()

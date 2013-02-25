@@ -6,7 +6,7 @@ def test_DivisionBurnishedTaleaRhythmMakerEditor_01():
 
     editor = scf.editors.DivisionBurnishedTaleaRhythmMakerEditor()
     editor.run(user_input='1 [1, 1, 2, 4] 32 [0] [-1] [0] [-1] [2] [1] q', is_autoadvancing=True)
-    
+
     maker = rhythmmakertools.DivisionBurnishedTaleaRhythmMaker(
         [1, 1, 2, 4],
         32,

@@ -27,7 +27,7 @@ class InstrumentSelectionWizard(Wizard):
             if self.backtrack():
                 self.pop_breadcrumb()
                 self.restore_breadcrumbs(cache=cache)
-                return 
+                return
             if isinstance(result, Instrument):
                 self.pop_breadcrumb()
                 self.restore_breadcrumbs(cache=cache)

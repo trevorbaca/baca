@@ -12,7 +12,7 @@ class MusicSpecifierModuleProxy(ModuleProxy):
         self._editor = self.editor_class(target=self.target_in_memory, session=self.session)
         self.target_lines = []
         #self.conditionally_make_empty_asset()
-        #self.parse() 
+        #self.parse()
 
     ### CLASS ATTRIUBTES ###
 
@@ -115,6 +115,6 @@ class MusicSpecifierModuleProxy(ModuleProxy):
         self.setup_statements[:] = self.conditionally_add_terminal_newlines(
             self.target_in_memory.storage_module_import_statements)[:]
         self.target_lines[:] = self.conditionally_add_terminal_newlines(
-            self.prepend_target_name(   
+            self.prepend_target_name(
                 self.target_in_memory._get_tools_package_qualified_repr_pieces(is_indented=True)))
         ModuleProxy.write_to_disk(self)

@@ -110,7 +110,7 @@ def test_Studio_10():
     studio = scf.studio.Studio()
     studio.run(user_input='Mon perf stu q')
     ts_2 = studio.ts
-    
+
     assert ts_1 == ts_2
 
 
@@ -125,5 +125,5 @@ def test_Studio_11():
     studio = scf.studio.Studio()
     studio.run(user_input='Mon perf sco q')
     ts_2 = studio.ts
-    
+
     assert ts_1 == ts_2

@@ -6,7 +6,7 @@ import scf
 def test_MaterialPackageProxy_read_only_attributes_01():
     '''Data-only package.
     '''
-    
+
     mpp = scf.proxies.MaterialPackageProxy('materials.red_numbers')
     assert     mpp.breadcrumb == 'red numbers'
     assert not mpp.has_illustration_builder_module
@@ -28,14 +28,14 @@ def test_MaterialPackageProxy_read_only_attributes_01():
     assert     mpp.illustration_pdf_file_name is None
     assert     mpp.illustration_pdf_file_proxy is None
     # TODO:
-    #assert not mpp.is_changed   
+    #assert not mpp.is_changed
     assert     mpp.is_data_only
     assert     mpp.is_handmade
     assert     mpp.material_definition == [1, 2, 3, 4, 5]
     assert     mpp.material_definition_module_file_name == \
         '/Users/trevorbaca/Documents/baca/materials/red_numbers/material_definition.py'
     assert     mpp.material_definition_module_importable_name == \
-        'materials.red_numbers.material_definition' 
+        'materials.red_numbers.material_definition'
     assert     mpp.material_definition_module_proxy is not None
     assert     mpp.material_package_directory == \
         '/Users/trevorbaca/Documents/baca/materials/red_numbers'
@@ -80,7 +80,7 @@ def test_MaterialPackageProxy_read_only_attributes_02():
     assert     mpp.has_output_material
     assert     mpp.has_output_material_module
     assert     mpp.has_user_input_module
-    assert     mpp.has_user_input_wrapper_on_disk        
+    assert     mpp.has_user_input_wrapper_on_disk
     assert     mpp.has_user_input_wrapper_in_memory
     assert     mpp.illustration is not None
     assert     mpp.illustration_builder_module_file_name is None
@@ -93,7 +93,7 @@ def test_MaterialPackageProxy_read_only_attributes_02():
         '/Users/trevorbaca/Documents/baca/materials/red_sargasso_measures/illustration.pdf'
     assert     mpp.illustration_pdf_file_proxy is not None
     # TODO:
-    #assert not mpp.is_changed   
+    #assert not mpp.is_changed
     assert not mpp.is_data_only
     assert not mpp.is_handmade
     assert     mpp.is_makermade
@@ -160,7 +160,7 @@ def test_MaterialPackageProxy_read_only_attributes_03():
         '/Users/trevorbaca/Documents/baca/materials/red_notes/illustration.pdf'
     assert     mpp.illustration_pdf_file_proxy is not None
     # TODO:
-    #assert not mpp.is_changed   
+    #assert not mpp.is_changed
     assert not mpp.is_data_only
     assert     mpp.is_handmade
     assert not mpp.is_makermade

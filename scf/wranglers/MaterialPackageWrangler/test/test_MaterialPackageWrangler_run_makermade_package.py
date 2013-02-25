@@ -6,7 +6,7 @@ import py
 def test_MaterialPackageWrangler_run_makermade_package_01():
     '''Make makermade package. Delete package.
     '''
-    
+
     studio = scf.studio.Studio()
     assert not studio.package_exists('materials.testsargasso')
 
@@ -18,7 +18,7 @@ def test_MaterialPackageWrangler_run_makermade_package_01():
         assert mpp.is_makermade
         assert mpp.directory_contents == ['__init__.py', 'tags.py', 'user_input.py']
         assert mpp.has_initializer
-        assert not mpp.has_output_material_module 
+        assert not mpp.has_output_material_module
         assert mpp.has_user_input_module
         assert not mpp.initializer_has_output_material_safe_import_statement
         assert not mpp.parent_initializer_has_output_material_safe_import_statement
@@ -31,7 +31,7 @@ def test_MaterialPackageWrangler_run_makermade_package_01():
 def test_MaterialPackageWrangler_run_makermade_package_02():
     '''Make score-resident makermade package. Delete package.
     '''
-    
+
     studio = scf.studio.Studio()
     assert not studio.package_exists('betoerung.mus.materials.testsargasso')
 
@@ -43,7 +43,7 @@ def test_MaterialPackageWrangler_run_makermade_package_02():
         assert mpp.is_makermade
         assert mpp.directory_contents == ['__init__.py', 'tags.py', 'user_input.py']
         assert mpp.has_initializer
-        assert not mpp.has_output_material_module 
+        assert not mpp.has_output_material_module
         assert mpp.has_user_input_module
         assert not mpp.initializer_has_output_material_safe_import_statement
         assert not mpp.parent_initializer_has_output_material_safe_import_statement
@@ -102,7 +102,7 @@ def test_MaterialPackageWrangler_run_makermade_package_02():
 #        assert mpp.directory_contents == ['__init__.py', 'material_definition.py']
 #        assert mpp.has_readable_initializer
 #        assert mpp.has_readable_material_definition_module
-#        assert not mpp.has_output_material_module 
+#        assert not mpp.has_output_material_module
 #        assert not mpp.has_illustration_builder_module
 #        assert not mpp.initializer_has_output_material_safe_import_statement
 #        assert not mpp.parent_initializer_has_output_material_safe_import_statement
@@ -115,7 +115,7 @@ def test_MaterialPackageWrangler_run_makermade_package_02():
 #
 #def test_MaterialPackageWrangler_run_makermade_package_05():
 #    '''Make makermade package. Create output material.
-#    Delete package." 
+#    Delete package."
 #    '''
 #
 #    studio = scf.studio.Studio()
@@ -129,7 +129,7 @@ def test_MaterialPackageWrangler_run_makermade_package_02():
 #        assert studio.package_exists('materials.testsargasso')
 #        mpp = scf.makers.SargassoMeasureMaterialPackageMaker('materials.testsargasso')
 #        assert mpp.is_makermade and not mpp.is_data_only
-#        assert mpp.directory_contents == ['__init__.py', 
+#        assert mpp.directory_contents == ['__init__.py',
 #            'illustration_builder.py', 'material_definition.py', 'output_material.py']
 #        assert mpp.has_readable_initializer
 #        assert mpp.has_user_finalized_material_definition_module
@@ -191,7 +191,7 @@ def test_MaterialPackageWrangler_run_makermade_package_02():
 #        assert mpp.directory_contents == ['__init__.py', 'material_definition.py']
 #        assert mpp.has_readable_initializer
 #        assert mpp.has_readable_material_definition_module
-#        assert not mpp.has_output_material_module 
+#        assert not mpp.has_output_material_module
 #        assert not mpp.has_illustration_builder_module
 #        assert not mpp.initializer_has_output_material_safe_import_statement
 #        assert not mpp.parent_initializer_has_output_material_safe_import_statement
@@ -222,7 +222,7 @@ def test_MaterialPackageWrangler_run_makermade_package_02():
 #        assert mpp.directory_contents == ['__init__.py', 'material_definition.py']
 #        assert mpp.has_readable_initializer
 #        assert mpp.has_user_finalized_material_definition_module
-#        assert not mpp.has_output_material_module 
+#        assert not mpp.has_output_material_module
 #        assert not mpp.has_illustration_builder_module
 #        assert not mpp.initializer_has_output_material_safe_import_statement
 #        assert not mpp.parent_initializer_has_output_material_safe_import_statement
@@ -295,7 +295,7 @@ def test_MaterialPackageWrangler_run_makermade_package_02():
 #
 #
 #def test_MaterialPackageWrangler_run_makermade_package_11():
-#    '''Make makermade package. Copy canned material definition module. 
+#    '''Make makermade package. Copy canned material definition module.
 #    Make output data. Make PDF. Remove package.
 #    '''
 #
@@ -313,9 +313,9 @@ def test_MaterialPackageWrangler_run_makermade_package_02():
 #        mpp = scf.makers.SargassoMeasureMaterialPackageMaker('materials.testsargasso')
 #        assert mpp.is_makermade and not mpp.is_data_only
 #        assert mpp.directory_contents == [
-#            '__init__.py', 'illustration.ly', 'illustration.pdf', 
+#            '__init__.py', 'illustration.ly', 'illustration.pdf',
 #            'illustration_builder.py', 'material_definition.py', 'output_material.py']
-#        assert mpp.has_readable_initializer        
+#        assert mpp.has_readable_initializer
 #        assert mpp.has_user_finalized_material_definition_module
 #        assert mpp.has_readable_output_material_module
 #        assert mpp.has_user_finalized_illustration_builder_module

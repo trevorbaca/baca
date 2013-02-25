@@ -8,8 +8,8 @@ import os
 class MaterialPackageMakerWrangler(PackageWrangler):
 
     def __init__(self, session=None):
-        PackageWrangler.__init__(self, 
-            score_external_asset_container_importable_names=[self.makers_package_importable_name], 
+        PackageWrangler.__init__(self,
+            score_external_asset_container_importable_names=[self.makers_package_importable_name],
             score_internal_asset_container_importable_name_infix=None,
             session=session)
 
@@ -46,7 +46,7 @@ class MaterialPackageMakerWrangler(PackageWrangler):
             material_package_proxy = material_package_maker_class(
                 package_importable_name, session=self.session)
         return material_package_proxy
-            
+
     def handle_main_menu_result(self, result):
         if result == 'new':
             self.make_asset_interactively()
@@ -79,7 +79,7 @@ class MaterialPackageMakerWrangler(PackageWrangler):
     # TODO: implement MaterialPackageProxyClassFile object to model and customize these settings
     def make_asset_class_file(self, package_short_name, generic_output_name):
         class_file_name = os.path.join(
-            self.list_score_external_asset_container_importable_names()[0], 
+            self.list_score_external_asset_container_importable_names()[0],
             package_short_name, package_short_name + '.py')
         class_file = file(class_file_name, 'w')
         lines = []
@@ -131,14 +131,14 @@ class MaterialPackageMakerWrangler(PackageWrangler):
     # TODO: change to boilerplate file stored in material_package_maker package
     def make_asset_initializer(self, package_short_name):
         initializer_file_name = os.path.join(
-            self.list_score_external_asset_container_importable_names()[0], 
+            self.list_score_external_asset_container_importable_names()[0],
             package_short_name, '__init__.py')
         initializer = file(initializer_file_name, 'w')
         line = 'from abjad.tools import importtools\n'
         initializer.write(line)
         initializer.write('\n')
         initializer.write("importtools.import_structured_package(__path__[0], globals(), 'baca')\n")
-        initializer.close() 
+        initializer.close()
 
     def make_asset_interactively(self):
         getter = self.make_getter(where=self.where())
@@ -149,7 +149,7 @@ class MaterialPackageMakerWrangler(PackageWrangler):
             return
         material_package_maker_class_name, generic_output_product_name = result
         material_package_maker_directory = os.path.join(
-            self.list_score_external_asset_container_importable_names[0], 
+            self.list_score_external_asset_container_importable_names[0],
             material_package_maker_class_name)
         os.mkdir(material_package_maker_directory)
         self.make_asset_initializer(material_package_maker_class_name)
@@ -169,7 +169,7 @@ class MaterialPackageMakerWrangler(PackageWrangler):
         stylesheet.paper_block.markup_system_spacing = layouttools.make_spacing_vector(0, 0, 12, 0)
         stylesheet.paper_block.system_system_spacing = layouttools.make_spacing_vector(0, 0, 10, 0)
         stylesheet_file_name = os.path.join(
-            self.list_score_external_asset_container_importable_names()[0], 
+            self.list_score_external_asset_container_importable_names()[0],
             package_short_name, 'stylesheet.ly')
         stylesheet_file_pointer = file(stylesheet_file_name, 'w')
         stylesheet_file_pointer.write(stylesheet.format)

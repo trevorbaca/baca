@@ -3,7 +3,7 @@ import os
 
 
 class FileProxy(AssetProxy):
-    
+
     ### CLASS ATTRIBUTES ###
 
     generic_class_name = 'file'

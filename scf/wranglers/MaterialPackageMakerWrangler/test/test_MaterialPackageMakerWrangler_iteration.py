@@ -18,11 +18,11 @@ def test_MaterialPackageMakerWrangler_iteration_03():
 
     assert 'scf.makers.PitchRangeInventoryMaterialPackageMaker' in \
         wrangler.list_asset_importable_names()
-    
+
 
 def test_MaterialPackageMakerWrangler_iteration_04():
 
-    assert ('scf.makers.PitchRangeInventoryMaterialPackageMaker', 
+    assert ('scf.makers.PitchRangeInventoryMaterialPackageMaker',
         'pitch range inventory material package maker') in wrangler.make_visible_asset_menu_tokens()
 
 

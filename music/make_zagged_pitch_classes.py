@@ -31,7 +31,7 @@ def make_illustration_from_output_material(material, **kwargs):
 
     stylesheet = os.path.join(os.environ.get('SCFPATH'), 'stylesheets', 'rhythm_letter_16.ly')
     illustration.file_initial_user_includes.append(stylesheet)
-    
+
     voice.engraver_consists.add('Horizontal_bracket_engraver')
     for level in (1, 2):
         level_sizes = []

@@ -8,7 +8,7 @@ def test_MaterialPackageProxy_screenscrapes_01():
 
     studio = scf.studio.Studio()
     studio.run(user_input='all las m black q')
-    
+
     assert studio.transcript[-2] == \
     ['Las manos m\xc3\xa1gicas - materials - black pcs',
       '',

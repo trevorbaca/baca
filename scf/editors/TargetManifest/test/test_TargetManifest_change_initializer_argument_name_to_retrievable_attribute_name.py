@@ -17,5 +17,5 @@ def test_TargetManifest_change_initializer_argument_name_to_retrievable_attribut
 
     editor = scf.editors.MarkupEditor()
 
-    assert py.test.raises(Exception, 
+    assert py.test.raises(Exception,
         "editor.target_manifest.change_initializer_argument_name_to_retrievable_attribute_name('asdfasdf')")

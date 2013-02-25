@@ -147,7 +147,7 @@ class Menu(MenuSectionAggregator):
             assert isinstance(explicit_title, (str, type(None)))
             self._explicit_title = explicit_title
         return property(**locals())
-    
+
     ### PUBLIC METHODS ###
 
     def change_user_input_to_directive(self, user_input):
@@ -198,14 +198,14 @@ class Menu(MenuSectionAggregator):
             result.append(entry)
         return result
 
-    def make_section(self, is_hidden=False, is_internally_keyed=False, is_keyed=True, 
+    def make_section(self, is_hidden=False, is_internally_keyed=False, is_keyed=True,
         is_numbered=False, is_parenthetically_numbered=False, is_ranged=False):
         assert not (is_numbered and self.has_numbered_section)
         assert not (is_parenthetically_numbered and self.has_numbered_section)
         assert not (is_ranged and self.has_ranged_section)
-        section = MenuSection(is_hidden=is_hidden, is_internally_keyed=is_internally_keyed, 
-            is_keyed=is_keyed, is_numbered=is_numbered, 
-            is_parenthetically_numbered=is_parenthetically_numbered, is_ranged=is_ranged, 
+        section = MenuSection(is_hidden=is_hidden, is_internally_keyed=is_internally_keyed,
+            is_keyed=is_keyed, is_numbered=is_numbered,
+            is_parenthetically_numbered=is_parenthetically_numbered, is_ranged=is_ranged,
             session=self.session, where=self.where)
         self.sections.append(section)
         return section

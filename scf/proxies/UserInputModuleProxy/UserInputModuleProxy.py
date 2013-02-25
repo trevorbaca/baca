@@ -17,7 +17,7 @@ class UserInputModuleProxy(ModuleProxy):
         if user_input_wrapper is not None:
             return user_input_wrapper.is_complete
         return False
-        
+
     @property
     def sections(self):
         return (
@@ -26,7 +26,7 @@ class UserInputModuleProxy(ModuleProxy):
             (self.setup_statements, True, 2),
             (self.user_input_wrapper_lines, False, 0),
             )
-            
+
     ### PUBLIC METHODS ###
 
     def parse(self):
@@ -84,4 +84,4 @@ class UserInputModuleProxy(ModuleProxy):
             user_input_wrapper_in_memory.user_input_module_import_statements)[:]
         self.user_input_wrapper_lines[:] = self.conditionally_add_terminal_newlines(
             user_input_wrapper_in_memory.formatted_lines)
-        ModuleProxy.write_to_disk(self) 
+        ModuleProxy.write_to_disk(self)

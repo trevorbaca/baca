@@ -13,6 +13,6 @@ def test_getters_01():
 def test_getters_02():
     '''Allow none.
     '''
-    
+
     getter = getters.get_duration('foo bar')
     assert getter.run(user_input='None') is None

@@ -10,7 +10,7 @@ class RhythmSpecifier(ParameterSpecifier):
         self.time_token_maker_package_importable_name = time_token_maker_package_importable_name
 
     ### READ-ONLY PROPERTIES ###
-    
+
     @property
     def one_line_menuing_summary(self):
         return self.name or self.time_token_maker_package_importable_name

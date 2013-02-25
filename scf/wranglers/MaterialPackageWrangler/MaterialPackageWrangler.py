@@ -10,9 +10,9 @@ class MaterialPackageWrangler(PackageWrangler):
 
     def __init__(self, session=None):
         from scf.wranglers.MaterialPackageMakerWrangler import MaterialPackageMakerWrangler
-        PackageWrangler.__init__(self, 
+        PackageWrangler.__init__(self,
             score_external_asset_container_importable_names= \
-                [self.score_external_materials_package_importable_name], 
+                [self.score_external_materials_package_importable_name],
             score_internal_asset_container_importable_name_infix= \
                 self.score_internal_materials_package_importable_name_infix,
             session=session)
@@ -33,10 +33,10 @@ class MaterialPackageWrangler(PackageWrangler):
     def get_asset_proxy(self, package_importable_name):
         return self.material_package_maker_wrangler.get_asset_proxy(package_importable_name)
 
-    def get_appropriate_material_package_proxy(self, 
+    def get_appropriate_material_package_proxy(self,
         material_package_maker_class_name, material_package_importable_name):
         import scf
-        if material_package_maker_class_name is None: 
+        if material_package_maker_class_name is None:
             material_package_proxy = scf.proxies.MaterialPackageProxy(
                 material_package_importable_name, session=self.session)
         else:
@@ -81,7 +81,7 @@ class MaterialPackageWrangler(PackageWrangler):
         else:
             material_package_proxy = self.get_asset_proxy(result)
             material_package_proxy.run()
-        
+
     def make_asset_interactively(self):
         return NotImplemented
 
@@ -130,7 +130,7 @@ class MaterialPackageWrangler(PackageWrangler):
         hidden_section.append(('profile', 'profile packages'))
         return menu
 
-    def make_makermade_material_package(self, 
+    def make_makermade_material_package(self,
         material_package_importable_name, material_package_maker_class_name, tags=None):
         tags = tags or {}
         command = 'from scf.makers import {} as material_package_maker_class'.format(
@@ -184,7 +184,7 @@ class MaterialPackageWrangler(PackageWrangler):
     def make_numeric_sequence_package(self, package_importable_name):
         tags = {'is_numeric_sequence': True}
         self.make_data_package(package_importable_name, tags=tags)
-        
+
     def make_numeric_sequence_package_interactively(self, user_input=None):
         tags = {'is_numeric_sequence': True}
         self.make_data_package_interactively(tags=tags, user_input=user_input)

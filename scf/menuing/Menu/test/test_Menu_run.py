@@ -289,7 +289,7 @@ def test_Menu_run_06():
     assert result is None
 
     '''Bodies returned instead of keys.'''
-    
+
     section_1.return_value_attribute = 'body'
 
     menu.session.reinitialize()
@@ -386,7 +386,7 @@ def test_Menu_run_07():
     assert result is None
 
     '''Bodies returned instead of keys.'''
-    
+
     section_1.return_value_attribute = 'body'
 
     menu.session.reinitialize()
@@ -475,7 +475,7 @@ def test_Menu_run_08():
     assert result is None
 
     '''Bodies returned instead of keys.'''
-    
+
     section_1.return_value_attribute = 'body'
 
     menu.session.reinitialize()
@@ -570,7 +570,7 @@ def test_Menu_run_09():
     assert result is None
 
     '''Bodies returned instead of keys.'''
-    
+
     section_1.return_value_attribute = 'body'
 
     menu.session.reinitialize()
@@ -620,7 +620,7 @@ def test_Menu_run_10():
     section_1.append(('add', 'first command'))
     section_1.append(('rm', 'second command'))
     section_1.append(('mod', 'third command'))
-    result = menu.run(user_input='foo') 
+    result = menu.run(user_input='foo')
 
     assert menu.transcript[-2] == \
     ['Location',
@@ -665,7 +665,7 @@ def test_Menu_run_10():
     assert result == ['add', 'mod', 'rm']
 
     '''Bodies returned instead of keys.'''
-    
+
     section_1.return_value_attribute = 'body'
 
     menu.session.reinitialize()

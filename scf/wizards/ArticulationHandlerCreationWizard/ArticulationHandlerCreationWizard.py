@@ -10,7 +10,7 @@ class ArticulationHandlerCreationWizard(HandlerCreationWizard):
     handler_editor_class_name_suffix = 'Editor'
 
     ### READ-ONLY PUBLIC PROPERTIES ###
-    
+
     @property
     def breadcrumb(self):
         return 'articulation handler creation wizard'

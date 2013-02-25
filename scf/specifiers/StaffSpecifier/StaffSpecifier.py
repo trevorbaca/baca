@@ -10,7 +10,7 @@ class StaffSpecifier(ParameterSpecifier):
         self.staff_handler_name = staff_handler_name
 
     ### READ-ONLY PUBLIC PROPERTIES ###
-    
+
     @property
     def one_line_menuing_summary(self):
         return self.name or self.staff_handler_name

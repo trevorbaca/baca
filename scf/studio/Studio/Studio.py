@@ -106,7 +106,7 @@ class Studio(SCFObject):
             self.score_package_wrangler.profile_visible_assets()
         elif result in self.score_package_wrangler.list_visible_asset_short_names():
             self.edit_score_interactively(result)
-    
+
     def handle_svn_menu_result(self, result):
         '''Return true to exit the svn menu.
         '''
@@ -208,7 +208,7 @@ class Studio(SCFObject):
 
     def run_py_test_all(self, prompt=True):
         proc = subprocess.Popen(
-            'py.test {} {}'.format(self.path_name, self.score_package_wrangler.path_name), 
+            'py.test {} {}'.format(self.path_name, self.score_package_wrangler.path_name),
             shell=True, stdout=subprocess.PIPE)
         lines = [line.strip() for line in proc.stdout.readlines()]
         if lines:

@@ -2,7 +2,7 @@ import collections
 
 
 class UserInputWrapper(collections.OrderedDict):
-    
+
     def __init__(self, *arg):
         collections.OrderedDict.__init__(self, *arg)
         self._user_input_module_import_statements = []

@@ -6,7 +6,7 @@ def test_MaterialPackageWrangler_make_handmade_material_package_01():
 
     wrangler = scf.wranglers.MaterialPackageWrangler()
     assert not wrangler.package_exists('materials.testnotes')
-    
+
 
     try:
         wrangler.make_handmade_material_package('materials.testnotes')
@@ -40,7 +40,7 @@ def test_MaterialPackageWrangler_make_handmade_material_package_03():
 
     wrangler = scf.wranglers.MaterialPackageWrangler()
     assert not wrangler.package_exists('materials.testnotes')
-    
+
 
     try:
         wrangler.make_handmade_material_package_interactively(user_input='testnotes q')
@@ -59,7 +59,7 @@ def test_MaterialPackageWrangler_make_handmade_material_package_04():
 
     wrangler = scf.wranglers.MaterialPackageWrangler()
     assert not wrangler.package_exists('materials.testnotes')
-    
+
 
     try:
         tags = {'color': 'red', 'is_colored': True}

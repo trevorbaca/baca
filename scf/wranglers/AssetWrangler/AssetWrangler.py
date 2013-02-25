@@ -10,9 +10,9 @@ import os
 class AssetWrangler(SCFObject):
     __metaclass__ = ABCMeta
 
-    def __init__(self, 
-        score_external_asset_container_importable_names=None, 
-        score_internal_asset_container_importable_name_infix=None, 
+    def __init__(self,
+        score_external_asset_container_importable_names=None,
+        score_internal_asset_container_importable_name_infix=None,
         session=None):
         SCFObject.__init__(self, session=session)
         if score_external_asset_container_importable_names:
@@ -75,7 +75,7 @@ class AssetWrangler(SCFObject):
     def current_asset_container_importable_name(self):
         if self.session.is_in_score:
             return self.dot_join([
-                self.session.current_score_package_short_name, 
+                self.session.current_score_package_short_name,
                 self.score_internal_asset_container_importable_name_infix])
         elif self.list_score_external_asset_container_importable_names():
             return self.list_score_external_asset_container_importable_names()[0]
@@ -114,7 +114,7 @@ class AssetWrangler(SCFObject):
         pass
 
     ### PUBLIC METHODS ###
-    
+
     def conditionally_make_asset_container_packages(self, is_interactive=False):
         self.conditionally_make_score_external_asset_container_package()
         self.conditionally_make_score_internal_asset_container_packages()
@@ -148,12 +148,12 @@ class AssetWrangler(SCFObject):
 
     def list_asset_container_human_readable_names(self, head=None):
         result = []
-        result.extend(self.list_score_external_asset_container_human_readable_names(head=head))    
-        result.extend(self.list_score_internal_asset_container_human_readable_names(head=head))    
+        result.extend(self.list_score_external_asset_container_human_readable_names(head=head))
+        result.extend(self.list_score_internal_asset_container_human_readable_names(head=head))
         return result
 
     def list_asset_container_importable_names(self, head=None):
-        result = [] 
+        result = []
         result.extend(self.list_score_external_asset_container_importable_names(head=head))
         result.extend(self.list_score_internal_asset_container_importable_names(head=head))
         return result
@@ -206,7 +206,7 @@ class AssetWrangler(SCFObject):
             if head is None or importable_name.startswith(head):
                 result.append(importable_name)
         return result
-    
+
     def list_score_external_asset_container_path_names(self, head=None):
         result = []
         for importable_name in self.list_score_external_asset_container_importable_names(head=head):
@@ -266,7 +266,7 @@ class AssetWrangler(SCFObject):
         for package_importable_name in \
             self.list_score_internal_asset_container_importable_names(head=head):
             result.append(self.package_importable_name_to_path_name(package_importable_name))
-        return result            
+        return result
 
     def list_score_internal_asset_container_proxies(self, head=None):
         result = []
@@ -374,10 +374,10 @@ class AssetWrangler(SCFObject):
             head=head, infinitival_phrase='to rename')
         self.pop_backtrack()
         if self.backtrack():
-            return 
+            return
         asset_proxy = self.get_asset_proxy(asset_importable_name)
         asset_proxy.rename_interactively()
-        
+
     def run(self, cache=False, clear=True, head=None, rollback=None, user_input=None):
         self.assign_user_input(user_input=user_input)
         breadcrumb = self.pop_breadcrumb(rollback=rollback)

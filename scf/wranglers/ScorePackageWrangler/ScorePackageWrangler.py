@@ -7,8 +7,8 @@ import os
 class ScorePackageWrangler(PackageWrangler):
 
     def __init__(self, session=None):
-        PackageWrangler.__init__(self, 
-            score_external_asset_container_importable_names=[], 
+        PackageWrangler.__init__(self,
+            score_external_asset_container_importable_names=[],
             score_internal_asset_container_importable_name_infix=None,
             session=session)
 
@@ -37,7 +37,7 @@ class ScorePackageWrangler(PackageWrangler):
 
     def handle_main_menu_result(self):
         self.print_not_yet_implemented()
-        
+
     def list_visible_asset_path_names(self, head=None):
         result = []
         for visible_asset_proxy in self.list_visible_asset_proxies(head=head):

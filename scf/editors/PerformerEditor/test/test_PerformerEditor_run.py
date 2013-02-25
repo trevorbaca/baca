@@ -9,7 +9,7 @@ def test_PerformerEditor_run_01():
     studio = scf.studio.Studio()
     studio.run(user_input='1 setup performers 1 q')
     assert studio.ts == (10, (1, 7))
-    
+
     studio.run(user_input='1 setup performers 1 b q')
     assert studio.ts == (12, (1, 7), (6, 10))
 

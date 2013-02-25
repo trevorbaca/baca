@@ -18,7 +18,7 @@ class StylesheetFileProxy(FileProxy):
 
     def fix(self):
         self.print_not_yet_implemented()
-        
+
     def handle_main_menu_result(self, result):
         assert isinstance(result, str)
         if result == 'cp':

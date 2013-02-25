@@ -21,7 +21,7 @@ def test_OctaveTranspositionMappingEditor_run_02():
         'add source (F#4, C8] target 26 done done done ')
 
     mapping = pitchtools.OctaveTranspositionMapping(
-            [('[A0, F#4]', 22), ('(F#4, C8]', 26)], 
+            [('[A0, F#4]', 22), ('(F#4, C8]', 26)],
             name='piccolo second octave')
 
     assert editor.target == mapping

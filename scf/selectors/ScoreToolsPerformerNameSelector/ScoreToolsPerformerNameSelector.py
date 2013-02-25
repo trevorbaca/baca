@@ -26,7 +26,7 @@ class ScoreToolsPerformerNameSelector(Selector):
         section.tokens = self.make_menu_tokens(head=head)
         section.return_value_attribute = 'body'
         return menu
-        
+
     def make_menu_tokens(self, head=None):
         performer_names, performer_abbreviations = [], []
         performer_pairs = scoretools.list_primary_performer_names()

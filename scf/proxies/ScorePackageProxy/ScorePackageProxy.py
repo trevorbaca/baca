@@ -166,10 +166,10 @@ class ScorePackageProxy(PackageProxy):
             self.mus_proxy,
             )
 
-    @property   
+    @property
     def untitled_indicator(self):
         return '(untitled score)'
-        
+
     ### READ / WRITE PUBLIC PROPERTIES ###
 
     @apply
@@ -384,9 +384,9 @@ class ScorePackageProxy(PackageProxy):
         self.print_not_yet_implemented()
 
     def make_setup_menu(self):
-        setup_menu, section = self.make_menu(where=self.where(), 
+        setup_menu, section = self.make_menu(where=self.where(),
             is_parenthetically_numbered=True, is_keyed=False)
-        section.tokens = self.setup_value_menu_tokens 
+        section.tokens = self.setup_value_menu_tokens
         section.return_value_attribute = 'key'
         return setup_menu
 
@@ -465,7 +465,7 @@ class ScorePackageProxy(PackageProxy):
             if self.backtrack():
                 return
             self.session.is_backtracking_locally = True
-        
+
     def summarize_chunks(self):
         chunks = self.chunk_wrangler.package_underscored_names
         lines = []

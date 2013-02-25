@@ -43,7 +43,7 @@ def test_ScorePackageProxy_read_only_attributes_01():
 
     assert score_proxy.score_package_wranglers == (
         scf.wranglers.ChunkPackageWrangler(),
-        scf.wranglers.MaterialPackageWrangler())    
+        scf.wranglers.MaterialPackageWrangler())
 
     assert score_proxy.top_level_directory_proxies == (
         scf.proxies.DistDirectoryProxy('manos'),

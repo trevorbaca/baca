@@ -13,7 +13,7 @@ import types
 
 
 class SCFObject(object):
-    
+
     def __init__(self, session=None):
         from scf.core.Session import Session
         self._session = session or Session()
@@ -228,7 +228,7 @@ class SCFObject(object):
             terminated_lines.append(line)
         terminated_lines = type(lines)(terminated_lines)
         return terminated_lines
-        
+
     def conditionally_clear_terminal(self):
         if self.session.is_displayable:
             iotools.clear_terminal()
@@ -347,7 +347,7 @@ class SCFObject(object):
             default = ''
         readline.set_startup_hook(lambda: readline.insert_text(default))
         try:
-            return self.handle_raw_input(prompt, include_chevron=include_chevron, 
+            return self.handle_raw_input(prompt, include_chevron=include_chevron,
                 include_newline=include_newline, prompt_character=prompt_character,
                 capitalize_prompt=capitalize_prompt)
         finally:
@@ -396,13 +396,13 @@ class SCFObject(object):
         import scf
         return scf.menuing.UserInputGetter(where=where, session=self.session)
 
-    def make_menu(self, is_hidden=False, is_internally_keyed=False, is_keyed=True, 
+    def make_menu(self, is_hidden=False, is_internally_keyed=False, is_keyed=True,
         is_numbered=False, is_parenthetically_numbered=False, is_ranged=False, where=None):
         import scf
         menu = scf.menuing.Menu(where=where, session=self.session)
         section = menu.make_section(
-            is_hidden=is_hidden, is_internally_keyed=is_internally_keyed, is_keyed=is_keyed, 
-            is_numbered=is_numbered, is_parenthetically_numbered=is_parenthetically_numbered, 
+            is_hidden=is_hidden, is_internally_keyed=is_internally_keyed, is_keyed=is_keyed,
+            is_numbered=is_numbered, is_parenthetically_numbered=is_parenthetically_numbered,
             is_ranged=is_ranged)
         return menu, section
 
@@ -435,7 +435,7 @@ class SCFObject(object):
             directory_parts = [self.scores_directory_name] + package_importable_name_parts[:]
         directory = os.path.join(*directory_parts)
         return directory
-    
+
     def path_name_to_human_readable_base_name(self, path_name):
         path_name = path_name.rstrip(os.path.sep)
         base_name = os.path.basename(path_name)
@@ -471,7 +471,7 @@ class SCFObject(object):
             return string + 'es'
         else:
             return string + 's'
-        
+
     def pop_backtrack(self):
         return self.session.backtracking_stack.pop()
 

@@ -21,12 +21,12 @@ class PerformerEditor(ListEditor):
         ('name', 'nm', getters.get_string),
         target_attribute_name='name',
         )
-    
+
     ### READ-ONLY PUBLIC PROPERTIES ###
 
     @property
     def items(self):
-        return self.target.instruments 
+        return self.target.instruments
 
     ### PUBLIC METHODS ###
 

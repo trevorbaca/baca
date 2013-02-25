@@ -54,11 +54,11 @@ class DirectoryProxy(AssetProxy):
                 if not short_name.endswith('.pyc'):
                     result.append(short_name)
         return result
-            
+
     @property
     def svn_add_command(self):
         return 'cd {} && svn-add-all'.format(self.path_name)
-    
+
     ### PUBLIC METHODS ###
 
     def conditionally_make_empty_asset(self, is_interactive=False):

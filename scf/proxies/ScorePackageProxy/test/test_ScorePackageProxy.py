@@ -47,7 +47,7 @@ def test_ScorePackageProxy_03():
 def test_ScorePackageProxy_04():
     '''User 'studio' input results in return to studio main menu.
     '''
-    
+
     studio = scf.studio.Studio()
     studio.run(user_input="l'arch studio q")
 

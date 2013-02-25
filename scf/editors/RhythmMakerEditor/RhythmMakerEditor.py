@@ -2,7 +2,7 @@ from scf.editors.InteractiveEditor import InteractiveEditor
 
 
 class RhythmMakerEditor(InteractiveEditor):
-    
+
     ### READ-ONLY PROPERTIES ###
 
     @property

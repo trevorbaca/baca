@@ -14,7 +14,7 @@ class MusicSpecifier(Specifier, ObjectInventory):
         'from scf import specifiers',
         ]
 
-    ### INITIALIZER ### 
+    ### INITIALIZER ###
 
     def __init__(self, contributions, description=None, name=None, source=None):
         ObjectInventory.__init__(self, contributions)
@@ -34,7 +34,7 @@ class MusicSpecifier(Specifier, ObjectInventory):
     @property
     def _item_class(self):
         return MusicContributionSpecifer
-    
+
     ### PUBLIC READ-ONLY PROPERTIES ###
 
     @property

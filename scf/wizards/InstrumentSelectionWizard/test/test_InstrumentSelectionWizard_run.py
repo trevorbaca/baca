@@ -6,7 +6,7 @@ def test_InstrumentSelectionWizard_run_01():
 
     wizard = scf.wizards.InstrumentSelectionWizard()
     wizard.session.current_score_package_short_name = 'betoerung'
-    
+
     assert wizard.run(user_input='hor') == instrumenttools.FrenchHorn()
     assert wizard.run(user_input='other xyl') == instrumenttools.Xylophone()
 

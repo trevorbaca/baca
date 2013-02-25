@@ -6,7 +6,7 @@ import os
 def make_illustration_from_output_material(output_material, **kwargs):
 
     meter_tokens = [
-        (2, 8), (3, 8), (4, 8), (5, 8), 
+        (2, 8), (3, 8), (4, 8), (5, 8),
         (2, 16), (3, 16), (4, 16), (5, 16),
         (2, 4), (2, 4), (2, 4), (2, 4),
         ]
@@ -22,10 +22,10 @@ def make_illustration_from_output_material(output_material, **kwargs):
     stylesheet = os.path.join(os.environ.get('SCFPATH'), 'stylesheets', 'rhythm_letter_16.ly')
     illustration.file_initial_user_includes.append(stylesheet)
     scoretools.add_double_bar_to_end_of_score(score)
-    
+
     if 'title' in kwargs:
         illustration.header_block.title = markuptools.Markup(kwargs.get('title'))
     if 'subtitle' in kwargs:
         illustration.header_block.subtitle = markuptools.Markup(kwargs.get('subtitle'))
-    
+
     return illustration

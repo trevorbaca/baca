@@ -33,6 +33,6 @@ def test_InstrumentationEditor_move_performer_02():
     editor.run(user_input=
         'add accordionist default add bassist default add bassoonist bassoon move 1 2 move 2 3 q')
     assert editor.target == InstrumentationSpecifier([
-        Performer(name='bassist', instruments=[Contrabass()]), 
-        Performer(name='bassoonist', instruments=[Bassoon()]), 
+        Performer(name='bassist', instruments=[Contrabass()]),
+        Performer(name='bassoonist', instruments=[Bassoon()]),
         Performer(name='accordionist', instruments=[Accordion()])])

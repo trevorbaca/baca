@@ -100,7 +100,7 @@ class PackageProxy(DirectoryProxy, ImportableAssetProxy):
             if not key.startswith('_'):
                 result.append(imported_package_vars[key])
         return result
-        
+
     @property
     def tags_file_name(self):
         return os.path.join(self.path_name, 'tags.py')

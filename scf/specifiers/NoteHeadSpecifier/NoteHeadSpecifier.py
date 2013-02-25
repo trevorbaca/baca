@@ -10,7 +10,7 @@ class NoteHeadSpecifier(ParameterSpecifier):
         self.note_head_handler_name = note_head_handler_name
 
     ### READ-ONLY PROPERITES ###
-    
+
     @property
     def one_line_menuing_summary(self):
         return self.name or self.note_head_handler_name

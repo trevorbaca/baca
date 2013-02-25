@@ -106,7 +106,7 @@ class UserInputGetter(MenuSectionAggregator):
         message = "value for {!r} must be 'up or 'down'."
         self.append_something(spaced_attribute_name, message, default=default)
         self.tests.append(predicates.is_direction_string)
-        
+
     def append_duration(self, spaced_attribute_name, default=None):
         message = 'value for {!r} must be duration.'
         self.append_something(spaced_attribute_name, message, default=default)
@@ -151,7 +151,7 @@ class UserInputGetter(MenuSectionAggregator):
         self.append_something(spaced_attribute_name, message, default=default)
         self.tests.append(predicates.is_integer)
 
-    def append_integer_in_range(self, spaced_attribute_name, 
+    def append_integer_in_range(self, spaced_attribute_name,
         start=None, stop=None, allow_none=False, default=None):
         message = 'value for {!r} must be integer between {} and {}, inclusive.'
         self.append_something(spaced_attribute_name, message, (start, stop), default=default)
@@ -224,7 +224,7 @@ class UserInputGetter(MenuSectionAggregator):
         self.execs[-1] = execs
         self.tests.append(predicates.is_pitch_range_or_none)
 
-    def append_something(self, spaced_attribute_name, message, 
+    def append_something(self, spaced_attribute_name, message,
         additional_message_arguments=None, default=None, include_chevron=True):
         assert isinstance(spaced_attribute_name, str)
         self.prompts.append(spaced_attribute_name)
@@ -381,7 +381,7 @@ class UserInputGetter(MenuSectionAggregator):
             default = str(self.defaults[self.prompt_index])
             include_chevron = self.chevrons[self.prompt_index]
             prompt = self.indent_and_number_prompt(prompt)
-            user_response = self.handle_raw_input_with_default(prompt, default=default, 
+            user_response = self.handle_raw_input_with_default(prompt, default=default,
                 include_chevron=include_chevron, include_newline=self.include_newlines,
                 prompt_character=self.prompt_character, capitalize_prompt=self.capitalize_prompts)
             if user_response is None:
@@ -435,7 +435,7 @@ class UserInputGetter(MenuSectionAggregator):
 
     def store_value(self, user_response):
         assert isinstance(user_response, str)
-        if self.allow_none and user_response in ('', 'None'): 
+        if self.allow_none and user_response in ('', 'None'):
             value = None
         else:
             if self.try_to_store_value_from_argument_list(user_response):

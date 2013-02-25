@@ -31,7 +31,7 @@ def test_SCFObject_read_only_attributes_01():
     assert scf_object.spaced_class_name == 's c f object'
     assert scf_object.score_external_materials_package_importable_name == 'materials'
 
-    
+
     path = os.path.join(os.environ.get('SCFPATH'), 'stylesheets')
     assert scf_object.stylesheets_directory_name == path
 

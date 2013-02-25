@@ -2,7 +2,7 @@ from scf.editors.InteractiveEditor import InteractiveEditor
 
 
 class ParameterSpecifierEditor(InteractiveEditor):
-    
+
     ### READ-ONLY PUBLIC PROPERTIES ###
 
     @property

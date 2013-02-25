@@ -4,7 +4,7 @@ from scf.selectors.Selector import Selector
 class TempoMarkSelector(Selector):
 
     ### CLASS ATTRIBUTES ###
-    
+
     target_human_readable_name = 'tempo'
 
     ### PUBLIC METHODS ###

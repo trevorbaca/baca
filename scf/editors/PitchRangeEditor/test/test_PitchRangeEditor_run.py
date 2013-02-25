@@ -6,7 +6,7 @@ import scf
 def test_PitchRangeEditor_run_01():
 
     editor = scf.editors.PitchRangeEditor()
-    editor.run(user_input="1 [F#3, C5) q") 
+    editor.run(user_input="1 [F#3, C5) q")
     assert editor.target == pitchtools.PitchRange('[F#3, C5)')
 
     editor = scf.editors.PitchRangeEditor()
@@ -17,7 +17,7 @@ def test_PitchRangeEditor_run_01():
 def test_PitchRangeEditor_run_02():
     '''Quit, score, studio & junk all work.
 
-    Note that back doesn't yet work here 
+    Note that back doesn't yet work here
     because 'b' interprets as named chromatic pitch.
     '''
 

@@ -16,7 +16,7 @@ class MaterialPackageMaker(MaterialPackageProxy):
     output_material_module_import_statements = []
 
     ### INITIALIZER ###
-    
+
     def __init__(self, package_importable_name=None, session=None):
         MaterialPackageProxy.__init__(self, package_importable_name=package_importable_name, session=session)
         self._user_input_wrapper_in_memory = self._initialize_user_input_wrapper_in_memory()
@@ -47,7 +47,7 @@ class MaterialPackageMaker(MaterialPackageProxy):
     def illustration(self):
         output_material = self.output_material_module_proxy.import_output_material_safely()
         kwargs = {}
-        kwargs['title'] = self.human_readable_name 
+        kwargs['title'] = self.human_readable_name
         if self.session.is_in_score:
             kwargs['subtitle'] = '({})'.format(self.session.current_score_package_proxy.title)
         illustration = self.illustration_maker(output_material, **kwargs)
@@ -83,7 +83,7 @@ class MaterialPackageMaker(MaterialPackageProxy):
         test = test_tuple[1]
         if len(test_tuple) == 3:
             exec_string = test_tuple[2]
-        else:   
+        else:
             exec_string = 'value = {}'
         if self.session.use_current_user_input_values_as_default:
             default = current_value
@@ -101,7 +101,7 @@ class MaterialPackageMaker(MaterialPackageProxy):
         new_value = getter.run()
         if self.backtrack():
             return
-        self.user_input_wrapper_in_memory[key] = new_value 
+        self.user_input_wrapper_in_memory[key] = new_value
         self.user_input_module_proxy.write_user_input_wrapper_to_disk(self.user_input_wrapper_in_memory)
 
     def initialize_empty_user_input_wrapper(self):

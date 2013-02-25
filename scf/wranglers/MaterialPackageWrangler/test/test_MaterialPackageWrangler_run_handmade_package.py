@@ -6,7 +6,7 @@ import py
 def test_MaterialPackageWrangler_run_handmade_package_01():
     '''Make handmade package. Delete package.
     '''
-    
+
     studio = scf.studio.Studio()
     assert not studio.package_exists('materials.testnotes')
 
@@ -18,7 +18,7 @@ def test_MaterialPackageWrangler_run_handmade_package_01():
         assert mpp.directory_contents == ['__init__.py', 'material_definition.py', 'tags.py']
         assert mpp.has_readable_initializer
         assert mpp.has_readable_material_definition_module
-        assert not mpp.has_output_material_module 
+        assert not mpp.has_output_material_module
         assert not mpp.has_illustration_builder_module
         assert not mpp.initializer_has_output_material_safe_import_statement
         assert not mpp.parent_initializer_has_output_material_safe_import_statement
@@ -77,7 +77,7 @@ def test_MaterialPackageWrangler_run_handmade_package_03():
         assert mpp.directory_contents == ['__init__.py', 'material_definition.py', 'tags.py']
         assert mpp.has_readable_initializer
         assert mpp.has_readable_material_definition_module
-        assert not mpp.has_output_material_module 
+        assert not mpp.has_output_material_module
         assert not mpp.has_illustration_builder_module
         assert not mpp.initializer_has_output_material_safe_import_statement
         assert not mpp.parent_initializer_has_output_material_safe_import_statement
@@ -90,7 +90,7 @@ def test_MaterialPackageWrangler_run_handmade_package_03():
 
 def test_MaterialPackageWrangler_run_handmade_package_04():
     '''Make handmade package. Create output material.
-    Delete package." 
+    Delete package."
     '''
 
     studio = scf.studio.Studio()
@@ -104,7 +104,7 @@ def test_MaterialPackageWrangler_run_handmade_package_04():
         assert studio.package_exists('materials.testnotes')
         mpp = scf.proxies.MaterialPackageProxy('materials.testnotes')
         assert mpp.is_handmade and not mpp.is_data_only
-        assert mpp.directory_contents == ['__init__.py', 
+        assert mpp.directory_contents == ['__init__.py',
             'illustration_builder.py', 'material_definition.py', 'output_material.py', 'tags.py']
         assert mpp.has_readable_initializer
         assert mpp.has_user_finalized_material_definition_module
@@ -166,7 +166,7 @@ def test_MaterialPackageWrangler_run_handmade_package_06():
         assert mpp.directory_contents == ['__init__.py', 'material_definition.py', 'tags.py']
         assert mpp.has_readable_initializer
         assert mpp.has_readable_material_definition_module
-        assert not mpp.has_output_material_module 
+        assert not mpp.has_output_material_module
         assert not mpp.has_illustration_builder_module
         assert not mpp.initializer_has_output_material_safe_import_statement
         assert not mpp.parent_initializer_has_output_material_safe_import_statement
@@ -197,7 +197,7 @@ def test_MaterialPackageWrangler_run_handmade_package_07():
         assert mpp.directory_contents == ['__init__.py', 'material_definition.py', 'tags.py']
         assert mpp.has_readable_initializer
         assert mpp.has_user_finalized_material_definition_module
-        assert not mpp.has_output_material_module 
+        assert not mpp.has_output_material_module
         assert not mpp.has_illustration_builder_module
         assert not mpp.initializer_has_output_material_safe_import_statement
         assert not mpp.parent_initializer_has_output_material_safe_import_statement
@@ -270,7 +270,7 @@ def test_MaterialPackageWrangler_run_handmade_package_09():
 
 
 def test_MaterialPackageWrangler_run_handmade_package_10():
-    '''Make handmade package. Copy canned material definition module. 
+    '''Make handmade package. Copy canned material definition module.
     Make output data. Make PDF. Remove package.
     '''
 
@@ -288,9 +288,9 @@ def test_MaterialPackageWrangler_run_handmade_package_10():
         mpp = scf.proxies.MaterialPackageProxy('materials.testnotes')
         assert mpp.is_handmade and not mpp.is_data_only
         assert mpp.directory_contents == [
-            '__init__.py', 'illustration.ly', 'illustration.pdf', 
+            '__init__.py', 'illustration.ly', 'illustration.pdf',
             'illustration_builder.py', 'material_definition.py', 'output_material.py', 'tags.py']
-        assert mpp.has_readable_initializer        
+        assert mpp.has_readable_initializer
         assert mpp.has_user_finalized_material_definition_module
         assert mpp.has_readable_output_material_module
         assert mpp.has_user_finalized_illustration_builder_module

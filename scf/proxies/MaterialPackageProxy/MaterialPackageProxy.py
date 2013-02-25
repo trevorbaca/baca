@@ -308,14 +308,14 @@ class MaterialPackageProxy(PackageProxy):
     def output_material(self):
         if self.has_readable_output_material_module:
             return self.output_material_module_proxy.import_output_material()
-    
+
     @property
     def output_material_module_body_lines(self):
         if self.should_have_material_definition_module:
             return self.output_material_module_import_statements_and_output_material_module_body_lines[1]
 
     @property
-    def output_material_module_file_name(self): 
+    def output_material_module_file_name(self):
         if self.should_have_output_material_module:
             return os.path.join(self.path_name, 'output_material.py')
 
@@ -410,10 +410,10 @@ class MaterialPackageProxy(PackageProxy):
             return StylesheetFileProxy(self.stylesheet_file_name, session=self.session)
 
     @property
-    def user_input_module_file_name(self): 
+    def user_input_module_file_name(self):
         if self.should_have_user_input_module:
             return os.path.join(self.path_name, 'user_input.py')
-    
+
     @property
     def user_input_module_importable_name(self):
         if self.should_have_user_input_module:
@@ -425,13 +425,13 @@ class MaterialPackageProxy(PackageProxy):
             if not self.has_user_input_module:
                 file(self.user_input_module_file_name, 'w').write('')
             return UserInputModuleProxy(self.user_input_module_importable_name, session=self.session)
-    
+
     ### PUBLIC METHODS ###
 
     def add_material_to_material_initializer(self):
         self.initializer_file_proxy.add_safe_import_statement(
             'output_material', self.material_underscored_name)
-        
+
     def add_material_to_materials_initializer(self):
         parent_package = PackageProxy(self.parent_package_importable_name, session=self.session)
         parent_package.initializer_file_proxy.add_safe_import_statement(
@@ -468,7 +468,7 @@ class MaterialPackageProxy(PackageProxy):
             output_material_module_body_lines = self.make_output_material_module_body_lines(
                 output_material_handler.target)
         else:
-            line = '{} = {}'.format(self.material_underscored_name, 
+            line = '{} = {}'.format(self.material_underscored_name,
                 self.get_tools_package_qualified_repr(output_material_handler.target))
             output_material_module_body_lines = [line]
         self.write_output_material_to_disk(
@@ -479,7 +479,7 @@ class MaterialPackageProxy(PackageProxy):
     def handle_main_menu_result(self, result):
         assert isinstance(result, str)
         if result == 'uic':
-            self.clear_user_input_wrapper(prompt=False)    
+            self.clear_user_input_wrapper(prompt=False)
         elif result == 'uid':
             self.remove_user_input_module(prompt=True)
         elif result == 'uil':
@@ -580,7 +580,7 @@ class MaterialPackageProxy(PackageProxy):
         self.make_main_menu_section_for_illustration_pdf(menu, hidden_section)
         self.make_main_menu_section_for_hidden_entries(menu)
         return menu
-    
+
     def make_main_menu_section_for_hidden_entries(self, main_menu):
         hidden_section = main_menu.make_section(is_hidden=True)
         hidden_section.append(('rm', 'delete package'))
@@ -630,11 +630,11 @@ class MaterialPackageProxy(PackageProxy):
     def make_main_menu_section_for_initializer(self, main_menu, hidden_section):
         if not self.has_initializer:
             section = main_menu.make_section()
-            section.title = '(Note: package has no initializer.)' 
+            section.title = '(Note: package has no initializer.)'
             section.append(('inr', 'initializer - restore'))
         elif not self.has_readable_initializer:
             section = main_menu.make_section()
-            section.title = '(Note: package has invalid initializer.)' 
+            section.title = '(Note: package has invalid initializer.)'
             section.append(('inr', 'initializer - restore'))
         hidden_section.append(('inv', 'view package initializer'))
         hidden_section.append(('incanned', 'copy canned package initializer'))
@@ -767,7 +767,7 @@ class MaterialPackageProxy(PackageProxy):
             parent_initializer_pyc_file_name = self.parent_initializer_file_name + 'c'
             if os.path.exists(parent_initializer_pyc_file_name):
                 os.remove(parent_initializer_pyc_file_name)
-        
+
     def remove_user_input_module(self, prompt=True):
         if self.has_user_input_module:
             self.user_input_module_proxy.remove()
@@ -859,7 +859,7 @@ class MaterialPackageProxy(PackageProxy):
         iotools.write_expr_to_pdf(illustration, self.illustration_pdf_file_name, print_status=False)
         self.proceed('PDF written to disk.', is_interactive=prompt)
 
-    def write_output_material_to_disk(self, output_material_module_import_statements=None, 
+    def write_output_material_to_disk(self, output_material_module_import_statements=None,
         output_material_module_body_lines=None, prompt=True):
         self.remove_material_from_materials_initializer()
         self.overwrite_output_material_module()

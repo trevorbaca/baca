@@ -12,7 +12,7 @@ def test_InstrumentCreationWizard_run_01():
 def test_InstrumentCreationWizard_run_02():
 
     wizard = scf.wizards.InstrumentCreationWizard()
-    wizard.run(user_input='untuned vibraslap') 
+    wizard.run(user_input='untuned vibraslap')
     vibraslap = instrumenttools.UntunedPercussion(
         instrument_name='vibraslap',
         short_instrument_name='vibraslap')

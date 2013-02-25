@@ -3,9 +3,9 @@ from scf.core.SCFObject import SCFObject
 
 class Selector(SCFObject):
 
-    def __init__(self, is_keyed=False, is_numbered=False, 
+    def __init__(self, is_keyed=False, is_numbered=False,
         is_parenthetically_numbered=True, is_ranged=False, items=None, session=None):
-        SCFObject.__init__(self, session=session) 
+        SCFObject.__init__(self, session=session)
         self.is_keyed = is_keyed
         self.is_numbered = is_numbered
         self.is_parenthetically_numbered = is_parenthetically_numbered
@@ -17,7 +17,7 @@ class Selector(SCFObject):
     @property
     def breadcrumb(self):
         if getattr(self, 'explicit_breadcrumb', None):
-            return self.explicit_breadcrumb    
+            return self.explicit_breadcrumb
         elif hasattr(self, 'target_human_readable_name'):
             return 'select {}:'.format(self.target_human_readable_name)
         else:
@@ -43,7 +43,7 @@ class Selector(SCFObject):
         return result
 
     def make_main_menu(self, head=None):
-        menu, section = self.make_menu(where=self.where(), 
+        menu, section = self.make_menu(where=self.where(),
             is_keyed=self.is_keyed,
             is_numbered=self.is_numbered,
             is_parenthetically_numbered=self.is_parenthetically_numbered,

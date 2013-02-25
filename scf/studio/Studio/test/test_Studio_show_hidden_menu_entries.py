@@ -4,7 +4,7 @@ import scf
 def test_Studio_show_hidden_menu_entries_01():
 
     studio = scf.studio.Studio()
-    studio.run(user_input='hidden q')    
+    studio.run(user_input='hidden q')
     assert studio.transcript[-2] == \
      ['     back (b)',
       '     exec statement (exec)',

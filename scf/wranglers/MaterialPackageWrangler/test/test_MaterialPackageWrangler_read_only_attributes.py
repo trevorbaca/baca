@@ -64,7 +64,7 @@ def test_MaterialPackageWrangler_read_only_attributes_07():
     assert wrangler.temporary_asset_path_name == \
         '/Users/trevorbaca/Documents/baca/materials/__temporary_package'
     assert wrangler.temporary_asset_short_name == '__temporary_package'
-    
+
 
 def test_MaterialPackageWrangler_read_only_attributes_08():
     '''In-score wrangler.
@@ -74,7 +74,7 @@ def test_MaterialPackageWrangler_read_only_attributes_08():
     wrangler = studio.material_package_wrangler
     wrangler.session.current_score_package_short_name = 'aracilik'
     assert wrangler.session.is_in_score
-    
+
     assert 'aracilik.mus.materials' in wrangler.list_asset_container_importable_names()
     assert wrangler.current_asset_container_importable_name == 'aracilik.mus.materials'
     assert wrangler.temporary_asset_importable_name == 'aracilik.mus.materials.__temporary_package'

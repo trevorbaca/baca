@@ -7,8 +7,8 @@ import os
 class StylesheetFileWrangler(PackageWrangler):
 
     def __init__(self, session=None):
-        PackageWrangler.__init__(self, 
-            score_external_asset_container_importable_names=[self.stylesheets_package_importable_name], 
+        PackageWrangler.__init__(self,
+            score_external_asset_container_importable_names=[self.stylesheets_package_importable_name],
             score_internal_asset_container_importable_name_infix=None,
             session=session)
 
@@ -37,10 +37,10 @@ class StylesheetFileWrangler(PackageWrangler):
         if result == 'new':
             self.make_asset_interactively()
         else:
-            stylesheet_file_name = os.path.join(self.stylesheets_directory_name, result)  
+            stylesheet_file_name = os.path.join(self.stylesheets_directory_name, result)
             stylesheet_proxy = StylesheetFileProxy(stylesheet_file_name, session=self.session)
             stylesheet_proxy.run()
-         
+
     # TODO: write test
     def make_asset_interactively(self):
         getter = self.make_getter(where=self.where())

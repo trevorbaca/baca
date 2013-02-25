@@ -70,13 +70,13 @@ class ModuleProxy(ParsableFileProxy, ImportableAssetProxy):
             return os.path.join(self.parent_package_directory_name, '__init__.py')
 
     ### PUBLIC METHODS ###
-    
+
     def human_readable_name_to_asset_short_name(self, human_readable_name):
         asset_short_name = ParsableFileProxy.human_readable_name_to_asset_short_name(
             self, human_readable_name)
         asset_short_name += '.py'
         return asset_short_name
-    
+
     def run_abjad(self, prompt=True):
         os.system('abjad {}'.format(self.path_name))
         self.proceed('file executed', is_interactive=prompt)

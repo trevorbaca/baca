@@ -11,7 +11,7 @@ def test_DirectoryProxy_read_only_attributes_01():
 
 
 def test_DirectoryProxy_read_only_attributes_02():
-    
+
     directory_proxy_1 = scf.proxies.DirectoryProxy('/Users/trevorbaca/Documents/baca/scf')
     directory_proxy_2 = scf.proxies.DirectoryProxy('/Users/trevorbaca/Documents/baca/scf')
     directory_proxy_3 = scf.proxies.DirectoryProxy('/Users/trevorbaca/Documents/baca')

@@ -26,12 +26,12 @@ class AttributeDetail(object):
         elif len(args) == 6:
             name, retrievable_name, human_readable_name, menu_key, editor_callable, is_positional = args
         else:
-            raise ValueError('can not parse attribute detail {!r}.'.format(args)) 
+            raise ValueError('can not parse attribute detail {!r}.'.format(args))
         if not human_readable_name and name:
             human_readable_name = name.replace('_', ' ')
         self.name = name
         self.retrievable_name = retrievable_name
-        self.human_readable_name = human_readable_name 
+        self.human_readable_name = human_readable_name
         self.menu_key = menu_key
         self.editor_callable = editor_callable
         self.is_positional = is_positional
@@ -51,12 +51,12 @@ class AttributeDetail(object):
 
     def get_editor(self, attribute_spaced_name, existing_value, session=None, **kwargs):
         if isinstance(self.editor_callable, types.FunctionType):
-            editor = self.editor_callable(attribute_spaced_name, 
+            editor = self.editor_callable(attribute_spaced_name,
                 session=session, existing_value=existing_value, allow_none=self.allow_none, **kwargs)
         elif issubclass(self.editor_callable, InteractiveEditor):
             editor = self.editor_callable(session=session, target=existing_value, **kwargs)
         elif issubclass(self.editor_callable, Selector):
-            editor = self.editor_callable(session=session, **kwargs) 
+            editor = self.editor_callable(session=session, **kwargs)
         elif issubclass(self.editor_callable, Wizard):
             editor = self.editor_callable(session=session, target=existing_value, **kwargs)
         else:

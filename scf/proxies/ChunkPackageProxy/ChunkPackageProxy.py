@@ -9,7 +9,7 @@ class ChunkPackageProxy(PackageProxy):
         self.score_template = score_template
 
     ### READ-ONLY PUBLIC PROPERTIES ###
-    
+
     @property
     def breadcrumb(self):
         return self.human_readable_name

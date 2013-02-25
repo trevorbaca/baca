@@ -54,7 +54,7 @@ class TargetManifest(object):
         result.append('{}({},'.format(type(self).__name__, self.target_class.__name__))
         for attribute_detail in self.attribute_details:
             result.append('\t{!r},'.format(attribute_detail))
-        result.append('\t)') 
+        result.append('\t)')
         return result
 
     @property
@@ -112,8 +112,8 @@ class TargetManifest(object):
     def menu_key_to_attribute_name(self, menu_key):
         attribute_detail = self.menu_key_to_attribute_detail(menu_key)
         if attribute_detail:
-            return attribute_detail.name 
-    
+            return attribute_detail.name
+
     def menu_key_to_editor(self, menu_key, existing_value, session=None, **kwargs):
         attribute_spaced_name = self.menu_key_to_human_readable_attribute_name(menu_key)
         attribute_detail = self.menu_key_to_attribute_detail(menu_key)

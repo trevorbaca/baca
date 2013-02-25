@@ -16,7 +16,7 @@ def test_Specifier_format_01():
     '''
 
     specifier = ConcreteSpecifier()
-    
+
     assert repr(specifier) == 'ConcreteSpecifier()'
     assert specifier._storage_format == 'specialtools.ConcreteSpecifier()'
 
@@ -26,6 +26,6 @@ def test_Specifier_format_02():
     '''
 
     specifier = ConcreteSpecifier(name='foo')
-    
+
     assert repr(specifier) == "ConcreteSpecifier(name='foo')"
     assert specifier._storage_format == "specialtools.ConcreteSpecifier(\n\tname='foo'\n\t)"

@@ -3,10 +3,10 @@ from scf.specifiers.ParameterSpecifier import ParameterSpecifier
 
 class PitchClassSpecifier(ParameterSpecifier):
 
-    def __init__(self, 
+    def __init__(self,
         description=None,
         name=None,
-        pitch_class_reservoir=None, 
+        pitch_class_reservoir=None,
         pitch_class_reservoir_helper=None,
         pitch_class_transform=None,
         source=None,

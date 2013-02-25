@@ -5,7 +5,7 @@ from scf.selectors.Selector import Selector
 class InstrumentToolsUntunedPercussionNameSelector(Selector):
 
     ### CLASS ATTRIBUES ###
-    
+
     target_human_readable_name = 'untuned percussion'
 
     ### PUBLIC METHODS ###

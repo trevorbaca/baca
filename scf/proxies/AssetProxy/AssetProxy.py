@@ -59,7 +59,7 @@ class AssetProxy(SCFObject):
             return False
         else:
             return True
-        
+
     @property
     def parent_directory_name(self):
         if self.path_name:
@@ -123,7 +123,7 @@ class AssetProxy(SCFObject):
         asset_short_name = human_readable_name.lower()
         asset_short_name = asset_short_name.replace(' ', '_')
         return asset_short_name
-    
+
     @abstractmethod
     def profile(self):
         pass

@@ -46,8 +46,8 @@ def test_OctaveTranspositionMappingInventoryEditor_run_03():
 
     inventory = pitchtools.OctaveTranspositionMappingInventory(
         [pitchtools.OctaveTranspositionMapping(
-            [('[A0, C8]', 14)], 
-            name='piccolo strict first octave')], 
+            [('[A0, C8]', 14)],
+            name='piccolo strict first octave')],
         name='mapping inventory'
         )
 

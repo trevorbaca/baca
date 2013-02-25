@@ -58,7 +58,7 @@ class PerformerCreationWizard(Wizard):
         self.restore_breadcrumbs(cache=cache)
 
     def make_performer_configuration_menu(self, performer):
-        menu, section = self.make_menu(where=self.where(), is_parenthetically_numbered=True, is_ranged=True) 
+        menu, section = self.make_menu(where=self.where(), is_parenthetically_numbered=True, is_ranged=True)
         section.title = 'select instruments'
         likely_instruments = performer.likely_instruments_based_on_performer_name
         likely_instrument_names = [x().instrument_name for x in likely_instruments]

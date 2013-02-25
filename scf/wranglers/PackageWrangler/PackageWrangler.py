@@ -24,7 +24,7 @@ class PackageWrangler(ImportableAssetWrangler):
     @property
     def temporary_asset_short_name(self):
         return '__temporary_package'
-    
+
     ### PUBLIC METHODS ###
 
     def handle_main_menu_result(self, result):
