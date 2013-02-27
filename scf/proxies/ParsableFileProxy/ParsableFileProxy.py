@@ -30,6 +30,7 @@ class ParsableFileProxy(FileProxy):
     # TODO: move down to ModuleProxy?
     @property
     def is_exceptionless(self):
+        #self.execute_file_lines()
         try:
             self.execute_file_lines()
             return True
@@ -65,6 +66,7 @@ class ParsableFileProxy(FileProxy):
             file_pointer = open(self.path_name, 'r')
             file_contents_string = file_pointer.read()
             file_pointer.close()
+            #print file_contents_string
             exec(file_contents_string)
 
     # TODO: move up to FileProxy
