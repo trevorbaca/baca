@@ -8,7 +8,7 @@ def test_ReiteratedDynamicHandlerEditor_run_01():
     editor = scf.editors.ReiteratedDynamicHandlerEditor()
     editor.run(user_input="1 f Duration(1, 8) q", is_autoadvancing=True)
 
-    handler = handlertools.dynamics.ReiteratedDynamicHandler(
+    handler = handlertools.ReiteratedDynamicHandler(
         dynamic_name='f',
         minimum_duration=Duration(1, 8),
         )

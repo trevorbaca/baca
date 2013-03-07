@@ -8,7 +8,7 @@ class PatternedArticulationsHandlerEditor(ArticulationHandlerEditor):
 
     ### CLASS ATTRIBUTES ###
 
-    target_manifest = TargetManifest(handlertools.articulations.PatternedArticulationsHandler,
+    target_manifest = TargetManifest(handlertools.PatternedArticulationsHandler,
         ('articulation_lists', None, 'al', getters.get_lists, False),
         ('minimum_duration', None, 'nd', getters.get_duration, False),
         ('maximum_duration', None, 'xd', getters.get_duration, False),

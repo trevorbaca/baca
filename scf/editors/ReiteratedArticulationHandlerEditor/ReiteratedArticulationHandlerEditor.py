@@ -8,7 +8,7 @@ class ReiteratedArticulationHandlerEditor(ArticulationHandlerEditor):
 
     ### CLASS ATTRIBUTES ###
 
-    target_manifest = TargetManifest(handlertools.articulations.ReiteratedArticulationHandler,
+    target_manifest = TargetManifest(handlertools.ReiteratedArticulationHandler,
         ('articulation_list', None, 'al', getters.get_articulations, False),
         ('minimum_duration', None, 'nd', getters.get_duration, False),
         ('maximum_duration', None, 'xd', getters.get_duration, False),

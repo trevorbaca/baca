@@ -8,7 +8,7 @@ class NoteAndChordHairpinsHandlerEditor(DynamicHandlerEditor):
 
     ### CLASS ATTRIBUTES ###
 
-    target_manifest = TargetManifest(handlertools.dynamics.NoteAndChordHairpinsHandler,
+    target_manifest = TargetManifest(handlertools.NoteAndChordHairpinsHandler,
         ('hairpin_tokens', None, 'ht', getters.get_hairpin_tokens, True),
         ('minimum_duration', None, 'md', getters.get_duration, True),
     )

@@ -16,7 +16,7 @@ def test_ArticulationHandlerMaterialPackageMaker_01():
             )
         mpp = scf.makers.ArticulationHandlerMaterialPackageMaker('materials.testarticulationhandler')
         assert mpp.directory_contents == ['__init__.py', 'output_material.py', 'tags.py']
-        handler = handlertools.articulations.ReiteratedArticulationHandler(
+        handler = handlertools.ReiteratedArticulationHandler(
             articulation_list=['^', '.'],
             minimum_duration=Duration(1, 64),
             maximum_duration=Duration(1, 4),

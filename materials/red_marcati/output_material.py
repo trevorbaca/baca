@@ -3,7 +3,7 @@ from abjad.tools import pitchtools
 import handlertools
 
 
-red_marcati = handlertools.articulations.ReiteratedArticulationHandler(
+red_marcati = handlertools.ReiteratedArticulationHandler(
 	articulation_list=['^', '.'],
 	minimum_duration=durationtools.Duration(
 		1,

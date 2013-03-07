@@ -10,13 +10,13 @@ def test_DynamicHandlerMaterialPackageMaker_01():
     try:
         studio.run(user_input=
             'materials maker dynamic testdynamichandler default '
-            'testdynamichandler omi reiterated '
+            'testdynamichandler omi reiterateddynamic '
             'f (1, 16) done default '
             'q '
             )
         mpp = scf.makers.DynamicHandlerMaterialPackageMaker('materials.testdynamichandler')
         assert mpp.directory_contents == ['__init__.py', 'output_material.py', 'tags.py']
-        handler = handlertools.dynamics.ReiteratedDynamicHandler(
+        handler = handlertools.ReiteratedDynamicHandler(
             dynamic_name='f',
             minimum_duration=Duration(1, 16),
             )

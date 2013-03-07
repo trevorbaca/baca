@@ -1,5 +1,5 @@
 from abjad.tools import sequencetools
-from baca.handlertools.dynamics import *
+from baca.handlertools import *
 import baca
 __all__ = []
 

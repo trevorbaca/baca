@@ -8,7 +8,7 @@ class ReiteratedDynamicHandlerEditor(DynamicHandlerEditor):
 
     ### CLASS ATTRIBUTES ###
 
-    target_manifest = TargetManifest(handlertools.dynamics.ReiteratedDynamicHandler,
+    target_manifest = TargetManifest(handlertools.ReiteratedDynamicHandler,
         ('dynamic_name', None, 'dy', getters.get_dynamic, True),
         ('minimum_duration', None, 'md', getters.get_duration, True),
     )
