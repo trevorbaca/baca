@@ -1,3 +1,4 @@
+import os
 from abjad.tools import iotools
 from abjad.tools import markuptools
 from abjad.tools import mathtools
@@ -14,7 +15,6 @@ from scf.proxies.StylesheetFileProxy import StylesheetFileProxy
 from scf.wranglers.StylesheetFileWrangler import StylesheetFileWrangler
 from scf.proxies.UserInputModuleProxy import UserInputModuleProxy
 from scf.helpers import safe_import
-import os
 
 
 class MaterialPackageProxy(PackageProxy):

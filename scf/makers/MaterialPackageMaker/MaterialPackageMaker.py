@@ -1,7 +1,7 @@
-from scf.proxies.MaterialPackageProxy import MaterialPackageProxy
-from scf.editors.UserInputWrapper import UserInputWrapper
 import copy
 import os
+from scf.proxies.MaterialPackageProxy import MaterialPackageProxy
+from scf.editors.UserInputWrapper import UserInputWrapper
 
 
 class MaterialPackageMaker(MaterialPackageProxy):
@@ -139,7 +139,7 @@ class MaterialPackageMaker(MaterialPackageProxy):
 
     def make_output_material_from_user_input_wrapper_in_memory(self):
         output_material = self.output_material_maker(*self.user_input_wrapper_in_memory.list_values())
-        assert type(self).output_material_checker(output_material)
+        assert type(self).output_material_checker(output_material), repr(output_material)
         return output_material
 
     def make_output_material_module_body_lines(self, output_material):
