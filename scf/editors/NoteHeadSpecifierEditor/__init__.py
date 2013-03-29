@@ -1,1 +1,0 @@
-from NoteHeadSpecifierEditor import NoteHeadSpecifierEditor

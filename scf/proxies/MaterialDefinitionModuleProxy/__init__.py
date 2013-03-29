@@ -1,1 +1,0 @@
-from MaterialDefinitionModuleProxy import MaterialDefinitionModuleProxy

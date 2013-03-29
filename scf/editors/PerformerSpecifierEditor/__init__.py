@@ -1,1 +1,0 @@
-from PerformerSpecifierEditor import PerformerSpecifierEditor

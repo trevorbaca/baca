@@ -1,1 +1,0 @@
-from IllustrationBuilderModuleProxy import IllustrationBuilderModuleProxy

@@ -1,1 +1,0 @@
-from ImportableAssetProxy import ImportableAssetProxy
