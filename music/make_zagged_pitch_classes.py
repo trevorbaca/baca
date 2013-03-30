@@ -1,8 +1,9 @@
 import os
-from abjad import *
 import baca
+from abjad import *
 
 
+# TODO: make into class
 def make_zagged_pitch_classes(pc_cells, division_cells, grouping_counts):
     from experimental.tools import specificationtools
     pc_cells = baca.util.helianthate(pc_cells, -1, 1)
