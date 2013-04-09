@@ -2,7 +2,7 @@
 import os
 
 
-output_directory = '/Users/trevorbaca/.scf/output'
+output_directory = '/Users/trevorbaca/.scftools/output'
 file_name = os.listdir(output_directory)[-1]
 file_path = os.path.join(output_directory, file_name)
 os.system('vi {}'.format(file_path))

@@ -1,6 +1,6 @@
 from make_illustration_from_output_material import make_illustration_from_output_material
-from scf.editors.ConstellationCircuitSelectionEditor import ConstellationCircuitSelectionEditor
-from scf.makers.MaterialPackageMaker import MaterialPackageMaker
+from baca.music.editors.ConstellationCircuitSelectionEditor import ConstellationCircuitSelectionEditor
+from scftools.makers.MaterialPackageMaker import MaterialPackageMaker
 
 
 class ConstellationCircuitSelectionMaterialPackageMaker(MaterialPackageMaker):

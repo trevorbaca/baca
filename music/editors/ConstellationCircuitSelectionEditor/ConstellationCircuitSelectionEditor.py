@@ -1,5 +1,5 @@
-from scf import menuing
-from scf.editors.ListEditor import ListEditor
+from scftools import menuing
+from scftools.editors.ListEditor import ListEditor
 
 
 class ConstellationCircuitSelectionEditor(ListEditor):
