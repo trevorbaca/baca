@@ -1,2 +1,3 @@
 from ConstellationCircuitSelectionMaterialPackageMaker import \
     ConstellationCircuitSelectionMaterialPackageMaker
+from ZaggedPitchClassMaterialPackageMaker import ZaggedPitchClassMaterialPackageMaker
