@@ -1,5 +1,5 @@
 import py
-import scftools
+from experimental.tools import scftools
 
 
 def test_ConstellationCircuitSelectionMaterialPackageMaker_01():

@@ -1,6 +1,5 @@
 import py
-import scftools
-from scftools.editors import UserInputWrapper
+from experimental.tools import scftools
 py.test.skip('REMOVE ME')
 
 
@@ -18,7 +17,7 @@ def test_ZaggedPitchClassMaterialPackageMaker_01():
         mpp = scftools.makers.ZaggedPitchClassMaterialPackageMaker(
             'materials.testzagged')
         assert mpp.directory_contents == ['__init__.py', 'tags.py', 'user_input.py']
-        user_input_wrapper = UserInputWrapper([
+        user_input_wrapper = scftools.editors.UserInputWrapper([
             ('pc_cells', None),
             ('division_cells', None),
             ('grouping_counts', None)])
@@ -45,7 +44,7 @@ def test_ZaggedPitchClassMaterialPackageMaker_02():
         mpp = scftools.makers.ZaggedPitchClassMaterialPackageMaker(
             'materials.testzagged')
         assert mpp.directory_contents == ['__init__.py', 'tags.py', 'user_input.py']
-        user_input_wrapper = UserInputWrapper([
+        user_input_wrapper = scftools.editors.UserInputWrapper([
             ('pc_cells', [[0, 7, 2, 10], [9, 6, 1, 8]]),
             ('division_cells', [[[1], [1], [1], [1, 1, 1]]]),
             ('grouping_counts', [1, 1, 2, 3])])
