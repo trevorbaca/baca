@@ -1,5 +1,5 @@
 import py
-from experimental.tools import scftools
+from experimental.tools import scoremanagementtools
 py.test.skip('REMOVE ME')
 
 
@@ -7,17 +7,17 @@ def test_ZaggedPitchClassMaterialPackageMaker_01():
     '''Emtpy wrapper.
     '''
 
-    studio = scftools.studio.Studio()
+    studio = scoremanagementtools.studio.Studio()
     assert not studio.package_exists('materials.testzagged')
     try:
         studio.run(user_input=
             'materials maker zagged testzagged default '
             'q'
             )
-        mpp = scftools.makers.ZaggedPitchClassMaterialPackageMaker(
+        mpp = scoremanagementtools.makers.ZaggedPitchClassMaterialPackageMaker(
             'materials.testzagged')
         assert mpp.directory_contents == ['__init__.py', 'tags.py', 'user_input.py']
-        user_input_wrapper = scftools.editors.UserInputWrapper([
+        user_input_wrapper = scoremanagementtools.editors.UserInputWrapper([
             ('pc_cells', None),
             ('division_cells', None),
             ('grouping_counts', None)])
@@ -31,7 +31,7 @@ def test_ZaggedPitchClassMaterialPackageMaker_02():
     '''Populate wrapper.
     '''
 
-    studio = scftools.studio.Studio()
+    studio = scoremanagementtools.studio.Studio()
     assert not studio.package_exists('materials.testzagged')
     try:
         studio.run(user_input=
@@ -41,10 +41,10 @@ def test_ZaggedPitchClassMaterialPackageMaker_02():
             '[1, 1, 2, 3] '
             'q'
             )
-        mpp = scftools.makers.ZaggedPitchClassMaterialPackageMaker(
+        mpp = scoremanagementtools.makers.ZaggedPitchClassMaterialPackageMaker(
             'materials.testzagged')
         assert mpp.directory_contents == ['__init__.py', 'tags.py', 'user_input.py']
-        user_input_wrapper = scftools.editors.UserInputWrapper([
+        user_input_wrapper = scoremanagementtools.editors.UserInputWrapper([
             ('pc_cells', [[0, 7, 2, 10], [9, 6, 1, 8]]),
             ('division_cells', [[[1], [1], [1], [1, 1, 1]]]),
             ('grouping_counts', [1, 1, 2, 3])])

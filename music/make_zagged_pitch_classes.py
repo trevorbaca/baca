@@ -5,7 +5,7 @@ from abjad import *
 
 # TODO: make into class
 def make_zagged_pitch_classes(pc_cells, division_cells, grouping_counts):
-    from experimental.tools import specificationtools
+    from experimental.tools import musicexpressiontools
     pc_cells = baca.util.helianthate(pc_cells, -1, 1)
     division_cells = baca.util.helianthate(division_cells, -1, 1)
     division_cells = sequencetools.flatten_sequence(division_cells, depth=1)
@@ -21,7 +21,7 @@ def make_zagged_pitch_classes(pc_cells, division_cells, grouping_counts):
     pc_cells = sequencetools.partition_sequence_by_counts(
         pc_cells, grouping_counts, cyclic=True, overhang=True)
     material = sequencetools.CyclicTree(pc_cells)
-    material = specificationtools.StatalServer(material)
+    material = musicexpressiontools.StatalServer(material)
     return material
 
 

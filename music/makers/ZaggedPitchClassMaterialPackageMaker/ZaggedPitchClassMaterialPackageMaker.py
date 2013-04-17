@@ -1,8 +1,8 @@
 from abjad.tools import sequencetools
 from baca.music.make_zagged_pitch_classes import make_illustration_from_output_material
 from baca.music.make_zagged_pitch_classes import make_zagged_pitch_classes
-from experimental.tools import specificationtools
-from experimental.tools.scftools.makers.FunctionInputMaterialPackageMaker import \
+from experimental.tools import musicexpressiontools
+from experimental.tools.scoremanagementtools.makers.FunctionInputMaterialPackageMaker import \
     FunctionInputMaterialPackageMaker
 
 
@@ -12,11 +12,11 @@ class ZaggedPitchClassMaterialPackageMaker(FunctionInputMaterialPackageMaker):
 
     generic_output_name = 'zagged pitch-classes'
     illustration_maker = staticmethod(make_illustration_from_output_material)
-    output_material_checker = staticmethod(lambda x: isinstance(x, specificationtools.StatalServer))
+    output_material_checker = staticmethod(lambda x: isinstance(x, musicexpressiontools.StatalServer))
     output_material_maker = staticmethod(make_zagged_pitch_classes)
     output_material_module_import_statements = [
         'from abjad.tools import sequencetools',
-        'from experimental.tools import specificationtools',
+        'from experimental.tools import musicexpressiontools',
         ]
 
     user_input_demo_values = [
