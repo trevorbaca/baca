@@ -2,7 +2,7 @@ from abjad.tools import sequencetools
 from baca.music.make_zagged_pitch_classes import make_illustration_from_output_material
 from baca.music.make_zagged_pitch_classes import make_zagged_pitch_classes
 from experimental.tools import musicexpressiontools
-from experimental.tools.scoremanagertools.makers.FunctionInputMaterialPackageMaker import \
+from experimental.tools.scoremanagertools.materialpackagemakers.FunctionInputMaterialPackageMaker import \
     FunctionInputMaterialPackageMaker
 
 

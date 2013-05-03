@@ -14,7 +14,7 @@ def test_ZaggedPitchClassMaterialPackageMaker_01():
             'materials maker zagged testzagged default '
             'q'
             )
-        mpp = scoremanagertools.makers.ZaggedPitchClassMaterialPackageMaker(
+        mpp = scoremanagertools.materialpackagemakers.ZaggedPitchClassMaterialPackageMaker(
             'materials.testzagged')
         assert mpp.directory_contents == ['__init__.py', 'tags.py', 'user_input.py']
         user_input_wrapper = scoremanagertools.editors.UserInputWrapper([
@@ -41,7 +41,7 @@ def test_ZaggedPitchClassMaterialPackageMaker_02():
             '[1, 1, 2, 3] '
             'q'
             )
-        mpp = scoremanagertools.makers.ZaggedPitchClassMaterialPackageMaker(
+        mpp = scoremanagertools.materialpackagemakers.ZaggedPitchClassMaterialPackageMaker(
             'materials.testzagged')
         assert mpp.directory_contents == ['__init__.py', 'tags.py', 'user_input.py']
         user_input_wrapper = scoremanagertools.editors.UserInputWrapper([
