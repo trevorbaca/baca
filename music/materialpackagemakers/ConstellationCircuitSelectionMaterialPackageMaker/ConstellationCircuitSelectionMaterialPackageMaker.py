@@ -15,6 +15,6 @@ class ConstellationCircuitSelectionMaterialPackageMaker(MaterialPackageMaker):
     ### PUBLIC METHODS ###
 
     def run_first_time(self):
-        self.session.is_autoadding = True
-        self.run(user_input='omi')
-        self.session.is_autoadding = False
+        self._session.is_autoadding = True
+        self._run(user_input='omi')
+        self._session.is_autoadding = False
