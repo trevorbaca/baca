@@ -1,6 +1,8 @@
 from make_illustration_from_output_material import make_illustration_from_output_material
-from baca.music.editors.ConstellationCircuitSelectionEditor import ConstellationCircuitSelectionEditor
-from experimental.tools.scoremanagertools.materialpackagemakers.MaterialPackageMaker import MaterialPackageMaker
+from baca.score_manager.editors.ConstellationCircuitSelectionEditor import \
+    ConstellationCircuitSelectionEditor
+from experimental.tools.scoremanagertools.materialpackagemakers.MaterialPackageMaker import \
+    MaterialPackageMaker
 
 
 class ConstellationCircuitSelectionMaterialPackageMaker(MaterialPackageMaker):
