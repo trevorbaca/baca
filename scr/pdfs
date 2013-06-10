@@ -3,7 +3,8 @@
 import os
 import sys
 
-## parse input arguments
+
+# parse input arguments
 if len(sys.argv) == 1:
    directory = '.'
 elif len(sys.argv) == 2:
@@ -12,22 +13,22 @@ else:
    print 'usage: pdfs [directory]'
    sys.exit(1)
 
-## clear terminal
+# clear terminal
 os.system('clear')
 
-## walk specified directory (defaulting to curdir) and collect pdfs
+# walk specified directory (defaulting to curdir) and collect pdfs
 pdfs = []
 for dirpath, dirnames, filenames in os.walk(directory):
    new_pdfs = [x for x in filenames if x.endswith('.pdf')]
    new_pdfs = [os.path.join(dirpath, x) for x in new_pdfs]
    pdfs.extend(new_pdfs)
 
-## open and print name of every pdf collected
+# open and print name of every pdf collected
 for pdf in pdfs:
    print pdf
    os.system('open %s' % pdf)
 
-## print summary total
+# print summary total
 if len(pdfs) == 0:
    print 'No PDFs to open.'
 elif len(pdfs) == 1:
@@ -35,5 +36,5 @@ elif len(pdfs) == 1:
 else:
    print '%s PDFs opened.' % len(pdfs)
 
-## print blank line
+# print blank line
 print ''
