@@ -8,4 +8,4 @@ import os
 os.system('clear')
 glob_string = os.path.join('/', 'Users', 'trevorbaca', '.abjad', 'output', '*.ly')
 last = glob.glob(glob_string)[-1]
-os.system('vi %s' % last)
+os.system('vim %s' % last)

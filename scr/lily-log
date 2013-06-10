@@ -5,4 +5,4 @@
 import os
 
 lily_log = os.path.join('~', '.abjad', 'output', 'lily.log')
-os.system('vi %s' % lily_log)
+os.system('vim %s' % lily_log)

@@ -13,6 +13,6 @@ last_lilypond_filename = sorted(lilypond_files)[-1]
 
 start_directory = os.path.abspath('.')
 os.chdir(LILYPONDTEST)
-os.system('vi + %s' % last_lilypond_filename)
+os.system('vim + %s' % last_lilypond_filename)
 os.system('lily %s' % last_lilypond_filename)
 os.chdir(start_directory)

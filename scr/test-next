@@ -61,6 +61,6 @@ next_lilypond_file.write(r'\include "english.ly"' + '\n')
 next_lilypond_file.write('\n\n')
 next_lilypond_file.close()
 
-os.system('vi +$ %s' % next_lilypond_filename)
+os.system('vim +$ %s' % next_lilypond_filename)
 os.system('lily %s' % next_lilypond_filename)
 os.chdir(start_directory)
