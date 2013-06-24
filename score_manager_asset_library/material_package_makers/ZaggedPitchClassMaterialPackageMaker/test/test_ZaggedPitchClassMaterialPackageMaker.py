@@ -10,7 +10,7 @@ def test_ZaggedPitchClassMaterialPackageMaker_01():
     studio = scoremanagertools.studio.Studio()
     assert not studio.package_exists('materials.testzagged')
     try:
-        studio.run(user_input=
+        studio.run(pending_user_input=
             'materials maker zagged testzagged default '
             'q'
             )
@@ -23,7 +23,7 @@ def test_ZaggedPitchClassMaterialPackageMaker_01():
             ('grouping_counts', None)])
         assert mpp.user_input_wrapper_in_memory == user_input_wrapper
     finally:
-        studio.run(user_input='m testzagged del remove default q')
+        studio.run(pending_user_input='m testzagged del remove default q')
         assert not studio.package_exists('materials.testzagged')
 
 
@@ -34,7 +34,7 @@ def test_ZaggedPitchClassMaterialPackageMaker_02():
     studio = scoremanagertools.studio.Studio()
     assert not studio.package_exists('materials.testzagged')
     try:
-        studio.run(user_input=
+        studio.run(pending_user_input=
             'materials maker zagged testzagged default '
             'testzagged uip 1 [[0, 7, 2, 10], [9, 6, 1, 8]] '
             '[[[1], [1], [1], [1, 1, 1]]] '
@@ -50,5 +50,5 @@ def test_ZaggedPitchClassMaterialPackageMaker_02():
             ('grouping_counts', [1, 1, 2, 3])])
         assert mpp.user_input_wrapper_in_memory == user_input_wrapper
     finally:
-        studio.run(user_input='m testzagged del remove default q')
+        studio.run(pending_user_input='m testzagged del remove default q')
         assert not studio.package_exists('materials.testzagged')
