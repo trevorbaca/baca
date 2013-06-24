@@ -1,4 +1,6 @@
 from experimental import *
+import py
+py.test.skip('FIXME: CC mpm not included in list of mp makers.')
 
 
 def test_ConstellationCircuitSelectionMaterialPackageMaker_01():
@@ -13,9 +15,11 @@ def test_ConstellationCircuitSelectionMaterialPackageMaker_01():
             )
         mpp = scoremanagertools.materialpackagemakers.ListMaterialPackageMaker(
             'experimental.tools.scoremanagertools.materialpackages.testconst')
-        assert mpp.list_directory() == ['__init__.py', 'output_material.py', 'tags.py']
+        assert mpp.list_directory() == [
+            '__init__.py', 'output_material.py', 'tags.py']
         assert mpp.output_material == [(1, 18), (2, 48)]
     finally:
-        score_manager._run(pending_user_input='m testconst del remove default q')
+        score_manager._run(pending_user_input=
+            'm testconst del remove default q')
         assert not score_manager.configuration.packagesystem_path_exists(
             'experimental.tools.scoremanagertools.materialpackages.testconst')
