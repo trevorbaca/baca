@@ -569,10 +569,9 @@ def makeMeasures(m, meters):
     '''
 
     durations = [fractions.Fraction(*meter) for meter in meters]
-    #voices = instances(m, 'Voice')
-    #for v in voices:
-    for v in iterationtools.iterate_components_in_expr(m, klass=voicetools.Voice):
-        #assert v.duration.prolated == sum(durations, fractions.Fraction(0))
+    for v in iterationtools.iterate_components_in_expr(
+        m, component_class=voicetools.Voice,
+        ):
         assert v.duration == sum(durations, fractions.Fraction(0))
         d = 0
         #measure = measuretoools.Measure(meters[d], [])
