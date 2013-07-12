@@ -1,21 +1,16 @@
-#! /bin/sh
+#! /usr/bin/env python
+import os
+import sys
 
-clear
-/Applications/LilyPond.app/Contents/Resources/bin/lilypond -dno-point-and-click $1
-#rm ${1:0:${#1}-3}".ps"
-open ${1:0:${#1}-3}".pdf"
 
-if [ -f ${1:0:${#1}-3}".pdf" ]
-then
-   open ${1:0:${#1}-3}".pdf"
-fi
+os.system('clear')
 
-if [ -f ${1:0:${#1}}".pdf" ]
-then
-   open ${1:0:${#1}}".pdf"
-fi
+path = '/Applications/LilyPond.app/Contents/Resources/bin/lilypond' 
+command = '{} -dno-point-and-click {}'
+command = command.format(path, sys.argv[1])
+os.system(command)
 
-if [ -f ${1:0:${#1}-3}".midi" ]
-then
-   open ${1:0:${#1}-3}".midi"
-fi
+base_file_name, extension = os.path.splitext(sys.argv[1])
+pdf_file_name = base_file_name + '.pdf'
+command = 'open {}'.format(pdf_file_name)
+os.system(command)

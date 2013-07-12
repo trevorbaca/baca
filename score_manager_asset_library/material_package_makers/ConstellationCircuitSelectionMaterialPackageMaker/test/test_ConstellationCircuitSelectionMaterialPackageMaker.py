@@ -1,6 +1,6 @@
+import pytest
 from experimental import *
-import py
-py.test.skip('FIXME: CC mpm not included in list of mp makers.')
+pytest.skip('FIXME: CC mpm not included in list of mp makers.')
 
 
 def test_ConstellationCircuitSelectionMaterialPackageMaker_01():

@@ -1,1 +1,1 @@
-clear && abjad $BACA/tmp/abjad_tmp.py
+clear && abjad ~/.abjad/abjad_tmp.py

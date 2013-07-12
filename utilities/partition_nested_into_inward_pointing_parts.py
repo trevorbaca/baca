@@ -1,27 +1,38 @@
 from abjad.tools import sequencetools
 
 
-def partition_nested_into_inward_pointing_parts(l, target = 'negative'):
-    '''Partition integers into canonic parts using a special
+def partition_nested_into_inward_pointing_parts(l, target='negative'):
+    '''Partitions integers into canonic parts using a special
     inward-pointing orientation.
 
-    abjad> l = [[1, 1, 5]]
-    abjad> util.partition_nested_into_inward_pointing_parts(l)
-    [[1, 1, 5]]
+        >>> from baca import utilities
 
-    abjad> l = [[1, 1, -5]]
-    abjad> util.partition_nested_into_inward_pointing_parts(l)
-    [[1, 1, 1, -4]]
+    ::
 
-    abjad> l = [[1], [5], [5, 1], [1, 5], [5, 5], [1, 5, 1]]
-    abjad> util.partition_nested_into_inward_pointing_parts(
-        l, target = 'positive')
-    [[1], [4, 1], [4, 1, 1], [1, 1, 4], [4, 1, 1, 4], [1, 4, 1, 1]]
+        >>> l = [[1, 1, 5]]
+        >>> utilities.partition_nested_into_inward_pointing_parts(l)
+        [[1, 1, 5]]
 
-    abjad> l = [[1, 1, -5]]
-    abjad> util.partition_nested_into_inward_pointing_parts(
-        l, target = 'positive')
-    [[1, 1, -5]]
+    ::
+
+        >>> l = [[1, 1, -5]]
+        >>> utilities.partition_nested_into_inward_pointing_parts(l)
+        [[1, 1, 1, -4]]
+
+    ::
+
+        >>> l = [[1], [5], [5, 1], [1, 5], [5, 5], [1, 5, 1]]
+        >>> utilities.partition_nested_into_inward_pointing_parts(
+        ...    l, target='positive')
+        [[1], [4, 1], [4, 1, 1], [1, 1, 4], [4, 1, 1, 4], [1, 4, 1, 1]]
+
+    ::
+
+        >>> l = [[1, 1, -5]]
+        >>> utilities.partition_nested_into_inward_pointing_parts(
+        ...    l, target='positive')
+        [[1, 1, -5]]
+
     '''
 
     result = []

@@ -1,3 +1,7 @@
-from abjad.tools import importtools
+from abjad.tools import systemtools
 
-importtools.import_structured_package(__path__[0], globals(), 'baca')
+systemtools.ImportManager.import_structured_package(
+    __path__[0], 
+    globals(), 
+    package_root_name='baca',
+    )

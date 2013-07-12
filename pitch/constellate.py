@@ -1,11 +1,9 @@
-from abjad.tools.chordtools import Chord
-from abjad.tools.notetools.Note import Note
-from abjad.tools import pitchtools
-from abjad.tools import sequencetools
+from abjad import *
 
 
-def constellate(pitch_number_lists, pitch_range, flatten = True):
-    '''Return outer product of octave transpositions of pitch_number_lists in pitch_range.
+def constellate(pitch_number_lists, pitch_range, flatten=True):
+    '''Return outer product of octave transpositions of 
+    pitch_number_lists in pitch_range.
     '''
 
     if not isinstance(pitch_range, pitchtools.PitchRange):

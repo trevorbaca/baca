@@ -19,7 +19,7 @@ def make_illustration_from_output_material(output_material, **kwargs):
 
     stylesheet = os.path.join(os.environ.get('SCFPATH'), 'stylesheets', 'rhythm_letter_16.ly')
     illustration.file_initial_user_includes.append(stylesheet)
-    scoretools.add_double_bar_to_end_of_score(score)
+    score.add_double_bar()
 
     score.override.bar_line.transparent = True
     score.override.rest.transparent = True

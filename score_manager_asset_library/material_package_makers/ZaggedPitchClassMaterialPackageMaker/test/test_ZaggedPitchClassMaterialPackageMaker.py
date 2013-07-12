@@ -1,10 +1,10 @@
-import py
-from experimental.tools import scoremanagertools
-py.test.skip('REMOVE ME')
+import pytest
+from experimental import *
+pytest.skip('REMOVE ME')
 
 
 def test_ZaggedPitchClassMaterialPackageMaker_01():
-    '''Emtpy wrapper.
+    '''Empty wrapper.
     '''
 
     studio = scoremanagertools.studio.Studio()

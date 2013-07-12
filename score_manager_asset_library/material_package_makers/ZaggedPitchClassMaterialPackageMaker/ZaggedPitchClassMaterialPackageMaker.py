@@ -15,7 +15,7 @@ class ZaggedPitchClassMaterialPackageMaker(FunctionInputMaterialPackageMaker):
     output_material_checker = staticmethod(lambda x: isinstance(x, musicexpressiontools.StatalServer))
     output_material_maker = staticmethod(make_zagged_pitch_classes)
     output_material_module_import_statements = [
-        'from abjad.tools import sequencetools',
+        'from abjad.tools import datastructuretools',
         'from experimental.tools import musicexpressiontools',
         ]
 

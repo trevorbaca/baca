@@ -7,8 +7,11 @@ accents = baca.handlertools.ReiteratedArticulationHandler(['accent'])
 __all__.append('accents')
 
 
-pattern = [['upbow', 'upbow', 'downbow'], ['upbow', 'upbow', 'downbow', 'downbow']]
-pattern = baca.util.helianthate(pattern, 1, 1)
+pattern = [
+    ['upbow', 'upbow', 'downbow'], 
+    ['upbow', 'upbow', 'downbow', 'downbow'],
+    ]
+pattern = baca.utilities.helianthate(pattern, 1, 1)
 pattern = sequencetools.flatten_sequence(pattern)
 pattern = [[x] for x in pattern]
 serration_bow_strokes = baca.handlertools.PatternedArticulationsHandler(pattern)

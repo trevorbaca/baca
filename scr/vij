@@ -1,2 +1,2 @@
-vim $BACA/tmp/abjad_tmp.py
-clear && abjad $BACA/tmp/abjad_tmp.py
+vim ~/.abjad/abjad_tmp.py
+clear && abjad ~/.abjad/abjad_tmp.py

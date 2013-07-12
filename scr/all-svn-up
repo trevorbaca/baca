@@ -7,7 +7,8 @@ os.system('clear')
 dirs = (
    '/Users/trevorbaca/Documents/abjad',
    '/Users/trevorbaca/Documents/friends',
-   '/Users/trevorbaca/Documents/harvard',)
+   '/Users/trevorbaca/Documents/harvard',
+   )
 
 for dir in dirs:
    name = dir.split('/')[-1]
@@ -15,11 +16,11 @@ for dir in dirs:
    os.system('svn up %s' % dir)
    print ''
 
-others = os.listdir(os.getenv('OTHER'))
+others = os.listdir(os.getenv('MISCELLANEOUS'))
 others = [x for x in others if not x.startswith('.')]
 for other in others:
    print '%s ...' % other
-   repository = os.path.join(os.getenv('OTHER'), other)
+   repository = os.path.join(os.getenv('MISCELLANEOUS'), other)
    os.system('svn up %s' % repository)
    print ''
 

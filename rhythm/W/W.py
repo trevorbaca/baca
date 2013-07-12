@@ -1,20 +1,22 @@
-from abjad.tools import mathtools
-from abjad.tools import sequencetools
+from abjad import *
 
 
-class W(sequencetools.Matrix):
-    '''W-rhythm::
+class W(datastructuretools.Matrix):
+    '''W-rhythm.
+
+    ::
 
         abjad> baca.rhythm.W((10, 8), (3, 3, 6, 10), 3)
         W(3x22)
 
-    Return W-rhythm object.
     '''
+
+    ### INITIALIZER ###
 
     def __init__(self, measure_numerators, talea, n_voices):
         measures = self._measures = self._make_nested_measure_lists(
             measure_numerators, talea, n_voices)
-        sequencetools.Matrix.__init__(self, columns = measures)
+        datastructuretools.Matrix.__init__(self, columns = measures)
 
     ### PRIVATE METHODS ###
 
@@ -40,7 +42,7 @@ class W(sequencetools.Matrix):
             *args, cyclic=True, overhang=True)
         return all_measure_divisions
 
-    ### READ-ONLY PUBLIC PROPERTIES ###
+    ### PUBLIC PROPERTIES ###
 
     @property
     def measures(self):

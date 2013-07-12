@@ -1,9 +1,8 @@
-from abjad.tools.chordtools import Chord
-from abjad.tools import pitchtools
+from abjad import *
 from baca.pitch.constellate import constellate
 
 
-'''Each constellation must be an (ordered) list rather than
+r'''Each constellation must be an (ordered) list rather than
 an (unordered) set because lists are not hashable.
 '''
 
