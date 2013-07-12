@@ -419,7 +419,7 @@ def stellate(k, s, t, d, b, span='from duration', rests=True):
     TODO: prevent from-duration span from giving incorrect nibs.
     '''
 
-    #from beamtools import beamRunsByDuration
+    #from spannertools import beamRunsByDuration
 
     if t == [[0]]:
         print 't == [[0]] will cause an infinite loop.'
@@ -477,7 +477,7 @@ def stellate(k, s, t, d, b, span='from duration', rests=True):
         #ComplexBeam(sublist, durations, span = span)
         #BeamComplex(sublist, durations, span = span)
         #BeamComplexDurated(sublist, durations, span = span)
-        beamtools.DuratedComplexBeamSpanner(sublist, durations, span = span)
+        spannertools.DuratedComplexBeamSpanner(sublist, durations, span = span)
         i += 1
     dummy_container[:] = []
     tuplets = sequencetools.flatten(tuplets)
@@ -504,7 +504,7 @@ def coruscate(n, s, t, z, d, rests=True):
     '''
 
     debug = False
-    #from beamtools import beamRunsByDuration
+    #from spannertools import beamRunsByDuration
 
     # zero-valued taleas not allowed
     talea = util.helianthate(n, 1, 1)
@@ -557,7 +557,7 @@ def coruscate(n, s, t, z, d, rests=True):
         #ComplexBeam(element, [element.duration.pair])
         #BeamComplex(element, [element.duration.pair])
         #BeamComplexDurated(element.leaves, [element.duration.prolated])
-        beamtools.DuratedComplexBeamSpanner(element.leaves, [element.duration])
+        spannertools.DuratedComplexBeamSpanner(element.leaves, [element.duration])
 
     return result
 
