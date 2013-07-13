@@ -181,13 +181,12 @@ def nest(measures, outer, inner):
         tuplet = divide.pair(o, (measure_numerator, measure_denominator))
         #print tuplet
         #dd = writtenDurations([measuretools.Measure([divide.pair(o, (m[0], m[1]))])])
-        tie_chains = list(iterationtools.terate_tie_chains_in_expr(tuplet.leaves))
-        dd = [tietools.get_duration_written(x) for x in tie_chains]
+        tie_chains = list(iterationtools.iterate_tie_chains_in_expr(
+            tuplet.leaves))
+        dd = [x.written_duration for x in tie_chains]
         body = []
         for j, d in enumerate(dd):
-            #if o[j] > 0:
             if 0 < o[j]:
-                #body.append(divide.pair(n[j], (d.n, d.d)))
                 body.append(divide.pair(n[j], (d._n, d._d)))
             else:
                 body.append(restools.Rest(d))
