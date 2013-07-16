@@ -107,7 +107,7 @@ def effectiveDurations(m):
 
         >>> tuplet = Tuplet((2, 3), "c'16 c'16 c'16")
 
-        >>> effectiveDurations(tuplet.leaves)
+        >>> effectiveDurations(tuplet.select_leaves())
         [Duration(1, 24), Duration(1, 24), Duration(1, 24)]
 
     Return list of durations.
@@ -123,7 +123,7 @@ def effectiveDuration(m):
             >>> effectiveDuration(tuplet)
             Duration(1, 8)
 
-            >>> effectiveDuration(tuplet.leaves)
+            >>> effectiveDuration(tuplet.select_leaves())
             Duration(1, 8)
 
     Return duration.
@@ -182,7 +182,7 @@ def nest(measures, outer, inner):
         #print tuplet
         #dd = writtenDurations([measuretools.Measure([divide.pair(o, (m[0], m[1]))])])
         tie_chains = list(iterationtools.iterate_tie_chains_in_expr(
-            tuplet.leaves))
+            tuplet.select_leaves()))
         dd = [x.written_duration for x in tie_chains]
         body = []
         for j, d in enumerate(dd):
@@ -472,7 +472,7 @@ def stellate(k, s, t, d, b, span='from duration', rests=True):
             sublist[0][0].formatter.right.append(
                 r'_ \markup \fontsize #6 { %s }' % i)
         durations = [tuplet.duration.prolated for tuplet in sublist]
-        #beamRunsByDuration(tmp.leaves, durations, span = span)
+        #beamRunsByDuration(tmp.select_leaves(), durations, span = span)
         #ComplexBeam(sublist, durations, span = span)
         #BeamComplex(sublist, durations, span = span)
         #BeamComplexDurated(sublist, durations, span = span)
@@ -555,8 +555,8 @@ def coruscate(n, s, t, z, d, rests=True):
         #beamRunsByDuration(element, [element.duration.pair])
         #ComplexBeam(element, [element.duration.pair])
         #BeamComplex(element, [element.duration.pair])
-        #BeamComplexDurated(element.leaves, [element.duration.prolated])
-        spannertools.DuratedComplexBeamSpanner(element.leaves, [element.duration])
+        #BeamComplexDurated(element.select_leaves(), [element.duration.prolated])
+        spannertools.DuratedComplexBeamSpanner(element.select_leaves(), [element.duration])
 
     return result
 
@@ -768,7 +768,7 @@ def octavateIterator(voice, start, stop, base):
     '''Octavate leaves from start to stop according to base.
     '''
 
-    leaves = voice.leaves
+    leaves = voice.select_leaves()
     for l in leaves[start : stop + 1]:
         octavate(l, base)
 
@@ -831,20 +831,20 @@ def setPitch(l, spec=0):
 
 
 def setPitchIterator(voice, start, stop, spec=0):
-    leaves = voice.leaves
+    leaves = voice.select_leaves()
     for l in leaves[start : stop + 1]:
         setPitch(l, spec)
 
 
 def clonePitches(voice, start, stop, offset):
-    leaves = voice.leaves
+    leaves = voice.select_leaves()
     for i, l in enumerate(leaves[start : stop + 1]):
         if isinstance(l, notetools.Note):
             l.pitch = leaves[start + i + offset].pitch.pair
 
 
 def setPitchesByPitchCycle(voice, start, stop, pcyc):
-    leaves = voice.leaves
+    leaves = voice.select_leaves()
     for j, l in enumerate(leaves[start : stop + 1]):
         i = j + start
         p = pcyc[j % len(pcyc)]
@@ -932,7 +932,7 @@ def setArticulations(voice, articulations, *args, **kwargs):
     '''Iterate leaves and set articulations.
     '''
 
-    leaves = voice.leaves
+    leaves = voice.select_leaves()
 
     if len(args) == 0:
         start = 0
@@ -965,7 +965,7 @@ def setArticulationsByPitch(voice, start, stop, articulations, min):
     '''Set articulations on notes & chord where safe pitch number is at least min.
     '''
 
-    leaves = voice.leaves
+    leaves = voice.select_leaves()
     for l in leaves[start : stop + 1]:
         if isinstance(l, (notetools.Note, chordtools.Chord)) and spget(l) >= min:
             l.articulations = articulations
@@ -976,7 +976,7 @@ def setArticulationsByDuration(voice, start, stop, long, min, short):
     at least min, else set short articulations.
     '''
 
-    leaves = voice.leaves
+    leaves = voice.select_leaves()
     min = fractions.Fraction(*min)
     for l in leaves[start : stop + 1]:
         if isinstance(l, (notetools.Note, chordtools.Chord)):
@@ -1001,7 +1001,7 @@ def appendArticulations(voice, articulations, *args, **kwargs):
     '''Iterate leaves and append articulations.
     '''
 
-    leaves = voice.leaves
+    leaves = voice.select_leaves()
     if len(args) == 0:
         start = 0
         stop = len(leaves)
@@ -1040,7 +1040,7 @@ def clear_dynamics(expr):
 
 
 def applyArtificialHarmonic(voice, *args):
-    leaves = voice.leaves
+    leaves = voice.select_leaves()
     from abjad.tools.harmonics import add_artificial_harmonic
     if len(args) == 2:
         start, diatonicInterval = args
@@ -1110,39 +1110,39 @@ def partitionLeaves(leaves, type='notes and rests', cut=(0,), gap=(0,)):
 
     >>> t = Tuplet((8, 9), "c'16 c'16 r16 r16 c'16 c'16 r16 r16 r16")
 
-    >>> partitionLeaves(t.leaves)
+    >>> partitionLeaves(t.select_leaves())
     [[Note("c'16"), Note("c'16")], [Rest('r16'), Rest('r16')], [Note("c'16"), Note("c'16")], [Rest('r16'), Rest('r16'), Rest('r16')]]
 
-    >>> partitionLeaves(t.leaves, type='notes only')
+    >>> partitionLeaves(t.select_leaves(), type='notes only')
     [[Note("c'16"), Note("c'16")], [Note("c'16"), Note("c'16")]]
 
-    >>> partitionLeaves(t.leaves, type='rests only')
+    >>> partitionLeaves(t.select_leaves(), type='rests only')
     [[Rest('r16'), Rest('r16')], [Rest('r16'), Rest('r16'), Rest('r16')]]
 
-    >>> partitionLeaves(t.leaves, type='rest-terminated')
+    >>> partitionLeaves(t.select_leaves(), type='rest-terminated')
     [[Note("c'16"), Note("c'16"), Rest('r16')], [Note("c'16"), Note("c'16"), Rest('r16')]]
 
-    >>> music.partitionLeaves(t.leaves, type='rest-gapped')
+    >>> music.partitionLeaves(t.select_leaves(), type='rest-gapped')
     [([Note("c'16"), Note("c'16"), Rest('r16')],), ([Note("c'16"), Note("c'16"), Rest('r16')],)]
 
-    >>> music.partitionLeaves(t.leaves, type='rest-gapped', gap=(2, 18))
+    >>> music.partitionLeaves(t.select_leaves(), type='rest-gapped', gap=(2, 18))
     [([Note("c'16"), Note("c'16"), Rest('r16')], [Note("c'16"), Note("c'16"), Rest('r16')])]
 
-    >>> partitionLeaves(t.leaves, type='paired notes')
+    >>> partitionLeaves(t.select_leaves(), type='paired notes')
     [([Note("c'16"), Note("c'16")],), ([Note("c'16"), Note("c'16")],)]
 
-    >>> partitionLeaves(t.leaves, type='paired notes', gap=(2, 18))
+    >>> partitionLeaves(t.select_leaves(), type='paired notes', gap=(2, 18))
     [([Note("c'16"), Note("c'16")], [Note("c'16"), Note("c'16")])]
 
     >>> t = Container("c'16 r16 c'16 r8. c'16 r16 r16 c'16")
 
-    >>> partitionLeaves(t.leaves, type='cut notes', cut=(1, 16))
+    >>> partitionLeaves(t.select_leaves(), type='cut notes', cut=(1, 16))
     [[Note("c'16"), Rest('r16'), Note("c'16")], [Note("c'16")], [Note("c'16")]]
 
-    >>> partitionLeaves(t.leaves, type='cut paired notes', cut=(1, 16), gap=(2, 16))
+    >>> partitionLeaves(t.select_leaves(), type='cut paired notes', cut=(1, 16), gap=(2, 16))
     [([Note("c'16"), Rest('r16'), Note("c'16")],), ([Note("c'16")], [Note("c'16")])]
 
-    >>> partitionLeaves(t.leaves, type='cut paired notes', cut=(1, 16), gap=(3, 16))
+    >>> partitionLeaves(t.select_leaves(), type='cut paired notes', cut=(1, 16), gap=(3, 16))
     [([Note("c'16"), Rest('r16'), Note("c'16")], [Note("c'16")]), ([Note("c'16")],)]
 
     Return list of components.
@@ -1326,19 +1326,19 @@ def segmentLeaves(leaves, cut=(0,), gap=(0,)):
 
     >>> t = Container("c'16 r16 c'16 r8 c'16 r16 c'16 r8. c'16 r16 c'16")
 
-    >>> segmentLeaves(t.leaves)
+    >>> segmentLeaves(t.select_leaves())
     [([Note("c'16")],), ([Note("c'16")],), ([Note("c'16")],), ([Note("c'16")],), ([Note("c'16")],), ([Note("c'16")],)]
 
-    >>> segmentLeaves(t.leaves, (1, 16))
+    >>> segmentLeaves(t.select_leaves(), (1, 16))
     [([Note("c'16"), Rest('r16'), Note("c'16")],), ([Note("c'16"), Rest('r16'), Note("c'16")],), ([Note("c'16"), Rest('r16'), Note("c'16")],)]
 
-    >>> segmentLeaves(t.leaves, (2, 16))
+    >>> segmentLeaves(t.select_leaves(), (2, 16))
     [([Note("c'16"), Rest('r16'), Note("c'16"), Rest('r8'), Note("c'16"), Rest('r16'), Note("c'16")],), ([Note("c'16"), Rest('r16'), Note("c'16")],)]
 
-    >>> segmentLeaves(t.leaves, (3, 16))
+    >>> segmentLeaves(t.select_leaves(), (3, 16))
     [([Note("c'16"), Rest('r16'), Note("c'16"), Rest('r8'), Note("c'16"), Rest('r16'), Note("c'16"), Rest('r8.'), Note("c'16"), Rest('r16'), Note("c'16")],)]
 
-    >>> segmentLeaves(t.leaves, (1, 16), (3, 16))
+    >>> segmentLeaves(t.select_leaves(), (1, 16), (3, 16))
     [([Note("c'16"), Rest('r16'), Note("c'16")], [Note("c'16"), Rest('r16'), Note("c'16")]), ([Note("c'16"), Rest('r16'), Note("c'16")],)]
 
     Return list of components.
@@ -1390,7 +1390,7 @@ def trimEmptyLists(l):
 ### TODO - encapsulate this into some type of class;    ###
 ###        possibly TextSpanner or special CoverSpanner ###
 def applyCoverSpanner(voice, *args):
-    leaves = voice.leaves
+    leaves = voice.select_leaves()
     if len(args) == 1:
         i = args[0]
         leaves[i].formatter.right.append(
@@ -1617,7 +1617,7 @@ def crossStavesDown(voice, start, stop, bp, target,
     TODO: run octavate at some time other than cross-determination time.
     '''
 
-    leaves = voice.leaves
+    leaves = voice.select_leaves()
     for j, l in enumerate(leaves[start : stop + 1]):
         i = start + j
         if isinstance(l, notetools.Note):
