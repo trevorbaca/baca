@@ -1041,7 +1041,6 @@ def clear_dynamics(expr):
 
 def applyArtificialHarmonic(voice, *args):
     leaves = voice.select_leaves()
-    from abjad.tools.harmonics import add_artificial_harmonic
     if len(args) == 2:
         start, diatonicInterval = args
         stop = start
@@ -1051,7 +1050,7 @@ def applyArtificialHarmonic(voice, *args):
         raise ValueError
     for l in leaves[start : stop + 1]:
         if isinstance(l, notetools.Note):
-            add_artificial_harmonic(l, diatonicInterval)
+            l.add_artificial_harmonic(diatonicInterval)
 
 
 def hpartition_notes_only(leaves, cut=(0,), gap=(0,)):
