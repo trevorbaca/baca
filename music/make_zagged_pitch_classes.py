@@ -53,7 +53,7 @@ def make_illustration_from_output_material(material, **kwargs):
             if brackets[1][0] is leaf:
                 markuptools.Markup(r'\bold { %s }' % cur_group, 'up')(leaf)
                 cur_group += 1
-    bar_line = scoretools.add_double_bar_to_end_of_score(score)
+    bar_line = score.add_double_bar()
 
     score.override.bar_line.stencil = False
     score.override.flag.stencil = False
