@@ -5,7 +5,7 @@ import copy
 import fractions
 import math
 import re
-from abjad.tools import *
+from abjad import *
 from baca import util
 
 
@@ -449,9 +449,7 @@ def stellate(k, s, t, d, b, span='from duration', rests=True):
 
     denominators = copy.copy(k)
     pairs = zip(signatures, denominators)
-    #tuplets = [divide.pair(pair[0], (pair[1], d)) for pair in pairs]
-    #tuplets = [tuplettools.make_tuplet_from_proportions_and_pair(
-    tuplets = [tuplettools.make_tuplet_from_nonreduced_ratio_and_nonreduced_fraction(
+    tuplets = [Tuplet.from_ratio_and_nonreduced_fraction(
         pair[0], (pair[1], d)) for pair in pairs]
 
     if span == 'from duration':
@@ -543,9 +541,7 @@ def coruscate(n, s, t, z, d, rests=True):
     if debug: print signatures
 
     pairs = zip(signatures, t)
-    #result = [divide.pair(pair[0], (pair[1], d)) for pair in pairs]
-    #result = [tuplettools.make_tuplet_from_proportions_and_pair(
-    result = [tuplettools.make_tuplet_from_nonreduced_ratio_and_nonreduced_fraction(
+    result = [Tuplet.from_ratio_and_nonreduced_fraction(
         pair[0], (pair[1], d)) for pair in pairs]
 
     for i, element in enumerate(result):
