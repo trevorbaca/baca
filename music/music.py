@@ -1458,7 +1458,7 @@ def makeBreaksVoice(durationPairs, yOffsets, alignmentOffsets, start=0):
             skip = skiptools.Skip(p)
         except (ValueError, AssignabilityError):
             skip = skiptools.Skip((1, 1))
-            skip.duration_multiplier = durationtools.Duration(p)
+            skip.lilypond_duration_multiplier = durationtools.Duration(p)
         breaks.append(skip)
     for i, b in enumerate(breaks):
         cyclicPosition = (start + i) % len(yOffsets)
@@ -1505,7 +1505,7 @@ def makeMeasuresVoice(durationPairs):
     measures = []
     for pair in durationPairs:
         skip = skiptools.Skip((1, 1))
-        skip.duration_multiplier = durationtools.Duration(pair)
+        skip.lilypond_duration_multiplier = durationtools.Duration(pair)
         measure = measuretools.Measure(pair, [skip])
         measures.append(measure)
     voice = voicetools.Voice(measures)
