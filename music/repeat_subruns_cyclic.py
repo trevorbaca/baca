@@ -1,5 +1,4 @@
-from abjad.tools.notetools.Note import Note
-from abjad.tools import componenttools
+from abjad import *
 
 
 # TODO: Rename to repeat_subruns_to_count() to match Abjad sequencetools.
@@ -36,5 +35,6 @@ def repeat_subruns_cyclic(notes, pairs, history=False):
         instructions.append(instruction)
 
     for index, new_notes, reps in reversed(sorted(instructions)):
-        notes[index:index] = \
-            componenttools.copy_components_and_detach_spanners(new_notes, reps)
+        new_notes = selectiontools.ContiguousSelection(new_notes)
+        new_notes = new_notes.copy_and_fracture_crossing_spanners(n=reps)
+        notes[index:index] = new_notes
