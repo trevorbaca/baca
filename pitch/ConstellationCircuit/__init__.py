@@ -1,7 +1,8 @@
 #from ConstellationCircuit import ConstellationCircuit
 from abjad.tools import importtools
 
-importtools.import_structured_package(
+importtools.ImportManager.import_structured_package(
     __path__[0],
     globals(),
-    package_root_name='baca')
+    package_root_name='baca',
+    )

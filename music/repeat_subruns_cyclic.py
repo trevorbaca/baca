@@ -36,5 +36,5 @@ def repeat_subruns_cyclic(notes, pairs, history=False):
 
     for index, new_notes, reps in reversed(sorted(instructions)):
         new_notes = selectiontools.ContiguousSelection(new_notes)
-        new_notes = new_notes.copy_and_fracture_crossing_spanners(n=reps)
+        new_notes = new_notes.copy(n=reps)
         notes[index:index] = new_notes
