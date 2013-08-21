@@ -113,7 +113,7 @@ def effectiveDurations(m):
     Return list of durations.
     '''
     return [
-        more(l).get_duration() 
+        inspect(l).get_duration() 
         for l in list(iterationtools.iterate_leaves_in_expr(m))
         ]
 
@@ -146,7 +146,7 @@ def fill(l, positions):
 
     for i, m in enumerate(l):
         if (i + 1) in positions:
-            n, d = more(m).get_duration().pair
+            n, d = inspect(m).get_duration().pair
             parts = mathtools.partition_integer_into_canonic_parts(n)
             l[i] = measuretools.Measure(
                 m.meter.pair,
@@ -224,7 +224,7 @@ def trill(l, p=False, indices='all', d=fractions.Fraction(0)):
         if hasattr(element, 'scaledDuration'):
             sd = element.scaledDuration
         else:
-            sd = more(element).get_duration()
+            sd = inspect(element).get_duration()
         if isinstance(element, notetools.Note) and i in indices and sd >= d:
             #if p:
             #  element.before.append(r'\pitchedTrill')
@@ -251,7 +251,7 @@ def grace(l,
         if hasattr(element, 'scaledDuration'):
             sd = element.scaledDuration
         else:
-            sd = more(element).get_duration()
+            sd = inspect(element).get_duration()
 
         if check and hasattr(element, 'grace'):
             ck = False
@@ -323,7 +323,7 @@ def breaks(signatures, durations, pages, verticals, staves=None):
             for measure in range(line):
                 d = durations[total]
                 s = skiptools.Skip((1))
-                more(s).get_duration().multiplier = d
+                inspect(s).get_duration().multiplier = d
                 tabs = ''.join(['\t'] * int(math.ceil((10 - len(s.body)) / 3.0)))
                 result.append(s)
                 result[-1].directives.before.append(signatures[total] + '\t')
@@ -369,7 +369,7 @@ class Subdivide(object):
             if n > 0:
                 denominator = int(2 ** (n + 2))
                 quotient = \
-                    more(node).get_duration() / fractions.Fraction(1, denominator)
+                    inspect(node).get_duration() / fractions.Fraction(1, denominator)
                 if quotient.d == 1 and quotient.n > 1:
                     new = expression.Expression(
                         [notetools.Note(0, 1, denominator) for x in range(quotient.n)])
@@ -396,8 +396,8 @@ def subdivide(m, positions):
 class FiveRemover(object):
     def visit(self, node):
         if isinstance(node, notetools.Note) and \
-            more(node).get_duration().n == 5:
-            denominator = more(node).get_duration().d
+            inspect(node).get_duration().n == 5:
+            denominator = inspect(node).get_duration().d
             return expression.Expression(
                 [notetools.Note(0, 4, denominator), notetools.Note(0, 1, denominator)])
         else:
@@ -474,7 +474,7 @@ def stellate(k, s, t, d, b, span='from duration', rests=True):
             #print i, sublist
             sublist[0][0].formatter.right.append(
                 r'_ \markup \fontsize #6 { %s }' % i)
-        durations = [more(tuplet).get_duration() for tuplet in sublist]
+        durations = [inspect(tuplet).get_duration() for tuplet in sublist]
         #beamRunsByDuration(tmp.select_leaves(), durations, span = span)
         #ComplexBeam(sublist, durations, span = span)
         #BeamComplex(sublist, durations, span = span)
@@ -553,12 +553,12 @@ def coruscate(n, s, t, z, d, rests=True):
         if debug:
             element.music[0].right.append(r'_ \markup \fontsize #6 { %s }' % i)
         #beam(element)
-        #beamRunsByDuration(element, [more(element).get_duration().pair])
-        #ComplexBeam(element, [more(element).get_duration().pair])
-        #BeamComplex(element, [more(element).get_duration().pair])
+        #beamRunsByDuration(element, [inspect(element).get_duration().pair])
+        #ComplexBeam(element, [inspect(element).get_duration().pair])
+        #BeamComplex(element, [inspect(element).get_duration().pair])
         spannertools.DuratedComplexBeamSpanner(
             element.select_leaves(), 
-            [more(element).get_duration()],
+            [inspect(element).get_duration()],
             )
 
     return result
@@ -574,13 +574,13 @@ def makeMeasures(m, meters):
     for v in iterationtools.iterate_components_in_expr(
         m, component_class=voicetools.Voice,
         ):
-        assert more(v).get_duration() == sum(durations, fractions.Fraction(0))
+        assert inspect(v).get_duration() == sum(durations, fractions.Fraction(0))
         d = 0
         #measure = measuretoools.Measure(meters[d], [])
         measure = measuretools.Measure(meters[d], [])
         for x in v[ : ]:
             measure.append(x)
-            if more(measure).get_duration() >= durations[d]:
+            if inspect(measure).get_duration() >= durations[d]:
                 v[d : 2 * d + len(measure) - 1] = [measure]
                 d += 1
                 if d == len(durations):
@@ -698,7 +698,7 @@ def setLeafStartTimes(expr, offset=fractions.Fraction(0)):
     cur = fractions.Fraction(*offset.pair)
     for l in instances(expr, 'Leaf'):
         l.start = cur
-        cur += more(l).get_duration()
+        cur += inspect(l).get_duration()
 
 
 def rankLeavesTimewise(exprList, name='Leaf'):
@@ -983,7 +983,7 @@ def setArticulationsByDuration(voice, start, stop, long, min, short):
     min = fractions.Fraction(*min)
     for l in leaves[start : stop + 1]:
         if isinstance(l, (notetools.Note, chordtools.Chord)):
-            if more(l).get_duration() >= min:
+            if inspect(l).get_duration() >= min:
                 l.articulations = long
             else:
                 l.articulations = short
@@ -1322,7 +1322,7 @@ def partitionLeaves(leaves, type='notes and rests', cut=(0,), gap=(0,)):
 
 
 def segmentLeaves(leaves, cut=(0,), gap=(0,)):
-    '''Partition leaves into segments each of one or more stages;
+    '''Partition leaves into segments each of one or inspect stages;
     include rests of duration less than or equal to cut in each stage;
     rests of duration greater than or equal to gap begin new stages.
 
