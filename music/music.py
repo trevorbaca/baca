@@ -454,7 +454,7 @@ def stellate(k, s, t, d, b, span='from duration', rests=True):
 
     denominators = copy.copy(k)
     pairs = zip(signatures, denominators)
-    tuplets = [Tuplet.from_ratio_and_nonreduced_fraction(
+    tuplets = [Tuplet.from_nonreduced_ratio_and_nonreduced_fraction(
         pair[0], (pair[1], d)) for pair in pairs]
 
     if span == 'from duration':
@@ -546,7 +546,7 @@ def coruscate(n, s, t, z, d, rests=True):
     if debug: print signatures
 
     pairs = zip(signatures, t)
-    result = [Tuplet.from_ratio_and_nonreduced_fraction(
+    result = [Tuplet.from_nonreduced_ratio_and_nonreduced_fraction(
         pair[0], (pair[1], d)) for pair in pairs]
 
     for i, element in enumerate(result):
