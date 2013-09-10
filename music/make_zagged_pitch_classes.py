@@ -1,6 +1,7 @@
 import os
 import baca
 from abjad import *
+from experimental import *
 
 
 # TODO: make into class
@@ -9,7 +10,7 @@ def make_zagged_pitch_classes(pc_cells, division_cells, grouping_counts):
     pc_cells = baca.util.helianthate(pc_cells, -1, 1)
     division_cells = baca.util.helianthate(division_cells, -1, 1)
     division_cells = sequencetools.flatten_sequence(division_cells, depth=1)
-    division_cells = sequencetools.CyclicTuple(division_cells)
+    division_cells = datastructuretools.CyclicTuple(division_cells)
     tmp = []
     for i, pc_segment in enumerate(pc_cells):
         parts = sequencetools.partition_sequence_by_ratio_of_lengths(pc_segment, division_cells[i])
@@ -20,12 +21,13 @@ def make_zagged_pitch_classes(pc_cells, division_cells, grouping_counts):
     pc_cells = [sequencetools.join_subsequences(x) for x in pc_cells]
     pc_cells = sequencetools.partition_sequence_by_counts(
         pc_cells, grouping_counts, cyclic=True, overhang=True)
-    material = sequencetools.CyclicTree(pc_cells)
+    material = datastructuretools.CyclicPayloadTree(pc_cells)
     material = musicexpressiontools.StatalServer(material)
     return material
 
 
-def make_illustration_from_output_material(material, **kwargs):
+def make_illustration_from_output_material(statal_server, **kwargs):
+    material = statal_server.cyclic_tree
     pcs = list(material.iterate_payload())
     leaves = leaftools.make_leaves(pcs, [Duration(1, 8)])
     voice = Voice(leaves)
@@ -33,7 +35,11 @@ def make_illustration_from_output_material(material, **kwargs):
     score = Score([staff])
     illustration = lilypondfiletools.make_basic_lilypond_file(score)
 
-    stylesheet = os.path.join(os.environ.get('SCFPATH'), 'stylesheets', 'rhythm_letter_16.ly')
+    configuration = scoremanagertools.scoremanager.ScoreManagerConfiguration()
+    stylesheet = os.path.join(
+        configuration.built_in_stylesheets_directory_path,
+        'rhythm-letter-16.ly',
+        )
     illustration.file_initial_user_includes.append(stylesheet)
 
     voice.engraver_consists.append('Horizontal_bracket_engraver')
@@ -43,16 +49,23 @@ def make_illustration_from_output_material(material, **kwargs):
             size = len(list(x.iterate_payload()))
             level_sizes.append(size)
         for part in sequencetools.partition_sequence_by_counts(
-            voice.leaves, level_sizes, cyclic=False, overhang=False):
+            voice.select_leaves(), 
+            level_sizes, 
+            cyclic=False, 
+            overhang=False,
+            ):
             spannertools.HorizontalBracketSpanner(part)
-    cur_group = 0
-    for leaf in voice.leaves:
-        brackets = list(spannertools.get_spanners_attached_to_component(
-            leaf, klass=spannertools.HorizontalBracketSpanner))
+    current_group = 0
+    for leaf in voice.select_leaves():
+        spanner_classes = spannertools.HorizontalBracketSpanner
+        brackets = inspect(leaf).get_spanners(spanner_classes)
+        brackets = tuple(brackets)
         if brackets[0][0] is leaf:
             if brackets[1][0] is leaf:
-                markuptools.Markup(r'\bold { %s }' % cur_group, 'up')(leaf)
-                cur_group += 1
+                string = r'\bold {{ {} }}'.format(current_group)
+                markup = markuptools.Markup(string, Up)
+                markup.attach(leaf)
+                current_group += 1
     bar_line = score.add_double_bar()
 
     score.override.bar_line.stencil = False
@@ -62,10 +75,13 @@ def make_illustration_from_output_material(material, **kwargs):
     score.override.time_signature.stencil = False
 
     if 'title' in kwargs:
-        illustration.header_block.title = markuptools.Markup(kwargs.get('title'))
+        markup = markuptools.Markup(kwargs.get('title'))
+        illustration.header_block.title = markup
     if 'subtitle' in kwargs:
-        illustration.header_block.subtitle = markuptools.Markup(kwargs.get('subtitle'))
-
-    contexttools.set_accidental_style_on_sequential_contexts_in_expr(score, 'forget')
+        markup = markuptools.Markup(kwargs.get('subtitle'))
+        illustration.header_block.subtitle = markup
+    command = marktools.LilyPondCommandMark('accidentalStyle forget')
+    illustration.layout_block.append(command)
+    score.override.note_head.color = 'red'
 
     return illustration
