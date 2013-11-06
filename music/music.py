@@ -25,7 +25,7 @@ def splitPitches(pitches, split=-1):
 
         for register in ('treble', 'bass'):
             if len(components[register]) == 0:
-                components[register] = skiptools.Skip((1, 4))
+                components[register] = scoretools.Skip((1, 4))
             elif len(components[register]) == 1:
                 components[register] = Note(components[register], (1, 4))
             else:
@@ -41,7 +41,7 @@ def makeFixedLayoutVoice(d, systems, alignments, offsets):
 
     v = Voice([], name = 'layout voice')
     for system in range(systems):
-        new = skiptools.Skip(*d)
+        new = scoretools.Skip(*d)
         offset = offsets[system % len(offsets)]
         offset = "(Y-offset . %s)" % offset
         text = r'\overrideProperty #"Score.NonMusicalPaperColumn"'
@@ -314,7 +314,7 @@ def breaks(signatures, durations, pages, verticals, staves=None):
         for l, line in enumerate(page):
             for measure in range(line):
                 d = durations[total]
-                s = skiptools.Skip((1))
+                s = scoretools.Skip((1))
                 inspect(s).get_duration().multiplier = d
                 tabs = ''.join(['\t'] * int(math.ceil((10 - len(s.body)) / 3.0)))
                 result.append(s)
@@ -1444,9 +1444,9 @@ def makeBreaksVoice(durationPairs, yOffsets, alignmentOffsets, start=0):
     breaks = []
     for p in durationPairs:
         try:
-            skip = skiptools.Skip(p)
+            skip = scoretools.Skip(p)
         except (ValueError, AssignabilityError):
-            skip = skiptools.Skip((1, 1))
+            skip = scoretools.Skip((1, 1))
             skip.lilypond_duration_multiplier = Duration(p)
         breaks.append(skip)
     for i, b in enumerate(breaks):
@@ -1493,7 +1493,7 @@ def makeMeasuresVoice(durationPairs):
 
     measures = []
     for pair in durationPairs:
-        skip = skiptools.Skip((1, 1))
+        skip = scoretools.Skip((1, 1))
         skip.lilypond_duration_multiplier = Duration(pair)
         measure = Measure(pair, [skip])
         measures.append(measure)
@@ -1559,13 +1559,13 @@ def reddenSections(measuresVoice, sectionTuples, startMeasure=1):
     for n, start, stop, description in sectionTuples:
         if start >= startMeasure:
             string = r'\fontsize #2 \with-color #red \italic { %s. %s }'
-            string = string.format(n, description)
+            string %= (n, description)
             markup = markuptools.Markup(string, direction=Up)
             try:
                 ms = measureSkips[start - startMeasure]
-                ms.override.score.bar_line.color = 'red'
-                ms.override.score.span_bar.color = 'red'
-                markup(ms)
+                override(ms).score.bar_line.color = 'red'
+                override(ms).score.span_bar.color = 'red'
+                attach(markup, ms)
             except:
                 pass
 

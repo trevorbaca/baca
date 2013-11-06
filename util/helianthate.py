@@ -6,17 +6,18 @@ def helianthate(sequence, outer_index_of_rotation, inner_index_of_rotation):
     '''Rotate inner_index_of_rotation lists and outer_index_of_rotation 
     list simultaneously and accumulate results until identity.
 
-    >>> sequence = [[1, 2, 3], [4, 5], [6, 7, 8]]
-    >>> util.helianthate(sequence, -1, 1)
-    [1, 2, 3, 4, 5, 6, 7, 8, 5, 4, 8, 6, 7, 3, 1, 2, 7, 8,
-        6, 2, 3, 1, 4, 5, 1, 2, 3, 5, 4, 6, 7, 8, 4, 5, 8, 6, 7, 3, 1,
-        2, 7, 8, 6, 2, 3, 1, 5, 4]
+    ::
 
-    >>> sequence = [[1, 2, 3], [4, 5], [6, 7, 8]]
-    >>> util.helianthate(sequence, -1, 1, flattened = False)
-    [[1, 2, 3], [4, 5], [6, 7, 8], [5, 4], [8, 6, 7], [3, 1, 2], [7, 8, 6],
-        [2, 3, 1], [4, 5], [1, 2, 3], [5, 4], [6, 7, 8], [4, 5], [8, 6, 7],
-        [3, 1, 2], [7, 8, 6], [2, 3, 1], [5, 4]]
+        >>> import baca
+
+    ::
+
+        >>> sequence = [[1, 2, 3], [4, 5], [6, 7, 8]]
+        >>> baca.util.helianthate(sequence, -1, 1)
+        [[1, 2, 3], [4, 5], [6, 7, 8], [5, 4], [8, 6, 7], [3, 1, 2], [7, 8, 6],
+            [2, 3, 1], [4, 5], [1, 2, 3], [5, 4], [6, 7, 8], [4, 5], [8, 6, 7],
+            [3, 1, 2], [7, 8, 6], [2, 3, 1], [5, 4]]
+
     '''
     from abjad.tools import scoretools
 
