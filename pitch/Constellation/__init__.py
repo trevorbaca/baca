@@ -1,7 +1,7 @@
 #from Constellation import Constellation
-from abjad.tools import importtools
+from abjad.tools import systemtools
 
-importtools.ImportManager.import_structured_package(
+systemtools.ImportManager.import_structured_package(
     __path__[0],
     globals(),
     package_root_name='baca',
