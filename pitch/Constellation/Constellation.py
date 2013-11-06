@@ -1,21 +1,13 @@
-from abjad.tools.chordtools import Chord
-from abjad.tools import chordtools
-from abjad.tools import iotools
-from abjad.tools import lilypondfiletools
-from abjad.tools import markuptools
-from abjad.tools import pitchtools
-from abjad.tools import schemetools
-from abjad.tools import scoretools
-from abjad.tools import sequencetools
+from abjad import *
 from baca.pitch.constellate import constellate
-from fractions import Fraction
 
 
 class Constellation(object):
 
     def __init__(self, circuit, partitioned_generator_chromatic_pitch_numbers):
         self._circuit = circuit
-        self._partitioned_generator_chromatic_pitch_numbers = partitioned_generator_chromatic_pitch_numbers
+        self._partitioned_generator_chromatic_pitch_numbers = \
+            partitioned_generator_chromatic_pitch_numbers
         self._constellate_partitioned_generator_chromatic_pitch_numbers()
         self._chord_duration = Fraction(1, 4)
         self._chords = []
@@ -23,10 +15,6 @@ class Constellation(object):
     ### SPECIAL METHODS ###
 
     def __contains__(self, chord):
-#      for pnl in self._pitch_number_lists:
-#         if tuple(pnl) == chord.numbers:
-#            return True
-#      return False
         return chord in self._pitch_number_lists
 
     def __getitem__(self, i):
@@ -44,12 +32,13 @@ class Constellation(object):
     def _color_map(self):
         pitches = self._partitioned_generator_chromatic_pitch_numbers
         colors = ['red', 'blue', 'green']
-        return pitchtools.NumberedChromaticPitchClassColorMap(pitches, colors)
+        return pitchtools.NumberedPitchClassColorMap(pitches, colors)
 
     @property
     def _colored_generator(self):
         generator_chord = self.generator_chord
-        chordtools.color_chord_note_heads_by_pitch_class_color_map(generator_chord, self._color_map)
+        chordtools.color_chord_note_heads_by_pitch_class_color_map(
+            generator_chord, self._color_map)
         return generator_chord
 
     @property
@@ -64,7 +53,9 @@ class Constellation(object):
 
     @property
     def _generator_chromatic_pitch_numbers(self):
-        return list(sorted(sequencetools.flatten_sequence(self._partitioned_generator_chromatic_pitch_numbers)))
+        sequence = sequencetools.flatten_sequence(
+            self._partitioned_generator_chromatic_pitch_numbers)
+        return list(sorted(sequence))
 
     @property
     def _next(self):
@@ -89,26 +80,29 @@ class Constellation(object):
         return next_constellation
 
     def _constellate_partitioned_generator_chromatic_pitch_numbers(self):
-        self._pitch_number_lists = constellate(self._partitioned_generator_chromatic_pitch_numbers, self.pitch_range)
+        self._pitch_number_lists = constellate(
+            self._partitioned_generator_chromatic_pitch_numbers, 
+            self.pitch_range,
+            )
 
     def _label_chord(self, chord):
         chord_number = self.get_number_of_chord(chord)
         label = '%s-%s' % (self._constellation_number, chord_number)
-        #if not getattr(chord, '_already_ed', None):
-        #   chord.markup.up.append(label)
-        #   chord._already_labeled = True
         markuptools.Markup(label)(chord)
 
     def _make_lilypond_file_and_score_from_chords(self, chords):
-        score, treble, bass = scoretools.make_piano_sketch_score_from_leaves(chords)
+        score, treble, bass = \
+            scoretools.make_piano_sketch_score_from_leaves(chords)
         score.override.text_script.staff_padding = 10
-        score.set.proportional_notation_duration = schemetools.SchemeMoment(1, 30)
+        score.set.proportional_notation_duration = \
+            schemetools.SchemeMoment(1, 30)
         lilypond_file = lilypondfiletools.make_basic_lilypond_file(score)
         lilypond_file.default_paper_size = 'letter', 'landscape'
         lilypond_file.global_staff_size = 18
         lilypond_file.layout_block.indent = 0
         lilypond_file.layout_block.ragged_right = True
-        lilypond_file.paper_block.system_system_spacing = schemetools.SchemeVector(
+        lilypond_file.paper_block.system_system_spacing = \
+            schemetools.SchemeVector(
             schemetools.SchemePair('basic_distance', 0),
             schemetools.SchemePair('minimum_distance', 0),
             schemetools.SchemePair('padding', 12),
@@ -117,7 +111,8 @@ class Constellation(object):
         return lilypond_file, score
 
     def _show_chords(self, chords):
-        lilypond_file, score = self._make_lilypond_file_and_score_from_chords(chords)
+        lilypond_file, score = \
+            self._make_lilypond_file_and_score_from_chords(chords)
         iotools.show(lilypond_file)
 
     ### READ-ONLY PUBLIC PROPERTIES ###
@@ -158,7 +153,9 @@ class Constellation(object):
 
     def get_number_of_chord(self, chord):
         chord = Chord(chord, (1, 4))
-        chromatic_pitch_numbers = [x.chromatic_pitch_number for x in chord.written_pitches]
+        chromatic_pitch_numbers = [
+            x.chromatic_pitch_number for x in chord.written_pitches
+            ]
         for pnl_index, pnl in enumerate(self):
             if pnl == chromatic_pitch_numbers:
                 pnl_number = pnl_index + 1
@@ -181,7 +178,8 @@ class Constellation(object):
     def make_labeled_colored_chords(self):
         result = self.make_labeled_chords()
         for chord in result:
-            chordtools.color_chord_note_heads_by_pitch_class_color_map(chord, self._color_map)
+            chordtools.color_chord_note_heads_by_pitch_class_color_map(
+            chord, self._color_map)
         return result
 
     def show_colored_generator_chord(self):
