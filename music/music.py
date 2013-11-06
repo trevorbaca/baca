@@ -467,7 +467,9 @@ def stellate(k, s, t, d, b, span='from duration', rests=True):
             sublist[0][0].formatter.right.append(
                 r'_ \markup \fontsize #6 { %s }' % i)
         durations = [inspect(tuplet).get_duration() for tuplet in sublist]
-        spannertools.DuratedComplexBeamSpanner(sublist, durations, span=span)
+        spanner = spannertools.DuratedComplexBeamSpanner(
+            durations=durations, span=span)
+        attach(spanner, sublist)
         i += 1
     dummy_container[:] = []
     tuplets = sequencetools.flatten(tuplets)
@@ -544,10 +546,10 @@ def coruscate(n, s, t, z, d, rests=True):
     for i, element in enumerate(result):
         if debug:
             element.music[0].right.append(r'_ \markup \fontsize #6 { %s }' % i)
-        spannertools.DuratedComplexBeamSpanner(
-            element.select_leaves(), 
-            [inspect(element).get_duration()],
+        spanner = spannertools.DuratedComplexBeamSpanner(
+            durations=[inspect(element).get_duration()],
             )
+        attach(spanner, element.select_leaves()) 
 
     return result
 
@@ -1376,8 +1378,8 @@ def trimEmptyLists(l):
         else:
             break
 
-### TODO - encapsulate this into some type of class;    ###
-###        possibly TextSpanner or special CoverSpanner ###
+# TODO - encapsulate this into some type of class;
+#        possibly TextSpanner
 def applyCoverSpanner(voice, *args):
     leaves = voice.select_leaves()
     if len(args) == 1:

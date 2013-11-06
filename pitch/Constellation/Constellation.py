@@ -4,11 +4,11 @@ from baca.pitch.constellate import constellate
 
 class Constellation(object):
 
-    def __init__(self, circuit, partitioned_generator_chromatic_pitch_numbers):
+    def __init__(self, circuit, partitioned_generator_pitch_numbers):
         self._circuit = circuit
-        self._partitioned_generator_chromatic_pitch_numbers = \
-            partitioned_generator_chromatic_pitch_numbers
-        self._constellate_partitioned_generator_chromatic_pitch_numbers()
+        self._partitioned_generator_pitch_numbers = \
+            partitioned_generator_pitch_numbers
+        self._constellate_partitioned_generator_pitch_numbers()
         self._chord_duration = Fraction(1, 4)
         self._chords = []
 
@@ -30,7 +30,7 @@ class Constellation(object):
 
     @property
     def _color_map(self):
-        pitches = self._partitioned_generator_chromatic_pitch_numbers
+        pitches = self._partitioned_generator_pitch_numbers
         colors = ['red', 'blue', 'green']
         return pitchtools.NumberedPitchClassColorMap(pitches, colors)
 
@@ -52,9 +52,9 @@ class Constellation(object):
         return self.get_number_of_chord(self.generator_chord)
 
     @property
-    def _generator_chromatic_pitch_numbers(self):
+    def _generator_pitch_numbers(self):
         sequence = sequencetools.flatten_sequence(
-            self._partitioned_generator_chromatic_pitch_numbers)
+            self._partitioned_generator_pitch_numbers)
         return list(sorted(sequence))
 
     @property
@@ -79,16 +79,17 @@ class Constellation(object):
         next_constellation = self._circuit._constellations[next_idx]
         return next_constellation
 
-    def _constellate_partitioned_generator_chromatic_pitch_numbers(self):
+    def _constellate_partitioned_generator_pitch_numbers(self):
         self._pitch_number_lists = constellate(
-            self._partitioned_generator_chromatic_pitch_numbers, 
+            self._partitioned_generator_pitch_numbers, 
             self.pitch_range,
             )
 
     def _label_chord(self, chord):
         chord_number = self.get_number_of_chord(chord)
         label = '%s-%s' % (self._constellation_number, chord_number)
-        markuptools.Markup(label)(chord)
+        markup = markuptools.Markup(label)
+        attach(markup, chord)
 
     def _make_lilypond_file_and_score_from_chords(self, chords):
         score, treble, bass = \
@@ -123,14 +124,14 @@ class Constellation(object):
 
     @property
     def generator_chord(self):
-        pitch_numbers = self._generator_chromatic_pitch_numbers
+        pitch_numbers = self._generator_pitch_numbers
         generator_chord = Chord(pitch_numbers, (1, 4))
         self._label_chord(generator_chord)
         return generator_chord
 
     @property
-    def partitioned_generator_chromatic_pitch_numbers(self):
-        return self._partitioned_generator_chromatic_pitch_numbers
+    def partitioned_generator_pitch_numbers(self):
+        return self._partitioned_generator_pitch_numbers
 
     @property
     def pitch_range(self):
@@ -138,7 +139,7 @@ class Constellation(object):
 
     @property
     def pivot_chord(self):
-        next_pitch_number_list = self._next._generator_chromatic_pitch_numbers
+        next_pitch_number_list = self._next._generator_pitch_numbers
         pivot_chord = Chord(next_pitch_number_list, (1, 4))
         self._label_chord(pivot_chord)
         return pivot_chord
@@ -153,11 +154,9 @@ class Constellation(object):
 
     def get_number_of_chord(self, chord):
         chord = Chord(chord, (1, 4))
-        chromatic_pitch_numbers = [
-            x.chromatic_pitch_number for x in chord.written_pitches
-            ]
+        pitch_numbers = [x.pitch_number for x in chord.written_pitches]
         for pnl_index, pnl in enumerate(self):
-            if pnl == chromatic_pitch_numbers:
+            if pnl == pitch_numbers:
                 pnl_number = pnl_index + 1
                 return pnl_number
         raise ValueError('%s not in %s' % (chord, self))
