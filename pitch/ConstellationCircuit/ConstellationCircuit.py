@@ -1,10 +1,5 @@
-from abjad.tools import iotools
-from abjad.tools import lilypondfiletools
-from abjad.tools import schemetools
-from abjad.tools import scoretools
-from abjad.tools import sequencetools
+from abjad import *
 from baca.pitch.Constellation import Constellation
-from fractions import Fraction
 
 
 class ConstellationCircuit(object):
@@ -23,7 +18,7 @@ class ConstellationCircuit(object):
         return len(self._constellations)
 
     def __repr__(self):
-        return '%s(%s)' % (type(self).__name__, len(self))
+        return '{}({})'.format(type(self).__name__, len(self))
 
     ### PRIVATE PROPERTIES ###
 
@@ -53,31 +48,32 @@ class ConstellationCircuit(object):
 
     def _constellate_partitioned_generator_pnls(self):
         self._constellations = []
-        for i, partitioned_generator_pnl in enumerate(self._partitioned_generator_pnls):
+        enumeration = enumerate(self._partitioned_generator_pnls)
+        for i, partitioned_generator_pnl in enumeration:
             constellation_number = i + 1
             constellation = Constellation(self, partitioned_generator_pnl)
             self._constellations.append(constellation)
 
     def _make_lilypond_file_and_score_from_chords(self, chords):
-        score, treble, bass = scoretools.make_piano_sketch_score_from_leaves(chords)
+        result = scoretools.make_piano_sketch_score_from_leaves(chords)
+        score, treble, bass = result
         score.override.text_script.staff_padding = 10
-        score.set.proportional_notation_duration = schemetools.SchemeMoment(1, 30)
+        moment = schemetools.SchemeMoment(1, 30)
+        score.set.proportional_notation_duration = moment
         lilypond_file = lilypondfiletools.make_basic_lilypond_file(score)
         lilypond_file.default_paper_size = 'letter', 'landscape'
         lilypond_file.global_staff_size = 18
         lilypond_file.layout_block.indent = 0
         lilypond_file.layout_block.ragged_right = True
-        lilypond_file.paper_block.system_system_spacing = schemetools.SchemeVector(
-            schemetools.SchemePair('basic_distance', 0),
-            schemetools.SchemePair('minimum_distance', 0),
-            schemetools.SchemePair('padding', 12),
-            schemetools.SchemePair('stretchability', 0))
+        vector = layouttools.make_spacing_vetor(0, 0, 12, 0)
+        lilypond_file.paper_block.system_system_spacing = vector
         lilypond_file.paper_block.top_margin = 24
         return lilypond_file, score
 
     def _show_chords(self, chords):
-        lilypond_file, score = self._make_lilypond_file_and_score_from_chords(chords)
-        iotools.show(lilypond_file)
+        result = self._make_lilypond_file_and_score_from_chords(chords)
+        lilypond_file, score = result
+        show(lilypond_file)
 
     ### READ-ONLY PUBLIC PROPERTIES ###
 

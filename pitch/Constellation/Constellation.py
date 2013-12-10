@@ -114,7 +114,7 @@ class Constellation(object):
     def _show_chords(self, chords):
         lilypond_file, score = \
             self._make_lilypond_file_and_score_from_chords(chords)
-        iotools.show(lilypond_file)
+        show(lilypond_file)
 
     ### READ-ONLY PUBLIC PROPERTIES ###
 

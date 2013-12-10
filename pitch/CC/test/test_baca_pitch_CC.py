@@ -2,8 +2,6 @@ from abjad import *
 import baca
 
 
-## TEST OVERRIDES ##
-
 def test_baca_pitch_CC_01():
     r'''Test __getitem__.
     '''
@@ -25,8 +23,6 @@ def test_baca_pitch_CC_02():
     assert len(baca.pitch.CC) == 8
 
 
-## TEST PRIVATE PROPERTIES ##
-
 def test_baca_pitch_CC_03():
     r'''Test generator numbers.
     '''
@@ -42,8 +38,6 @@ def test_baca_pitch_CC_04():
     numbers = [80, 75, 60, 73, 117, 69, 108, 99]
     assert baca.pitch.CC._pivot_chord_numbers == numbers
 
-
-## TEST PUBLIC METHODS ##
 
 def test_baca_pitch_CC_05():
     r'''Test get signature one.
@@ -69,15 +63,13 @@ def test_baca_pitch_CCa06():
     assert baca.pitch.CC.get(1, 4) is baca.pitch.CC[0][3]
 
 
-## TEST PUBLIC PROPERTIES ##
-
 def test_baca_pitch_CC_07():
     r'''Test generators.
     '''
 
     staff = Staff(baca.pitch.CC.generator_chords)
 
-    assert testtools.compare(
+    assert systemtools.TestManager.compare(
         staff,
         r"""
         \new Staff {
@@ -107,7 +99,7 @@ def test_baca_pitch_CC_09():
 
     staff = Staff(baca.pitch.CC.pivot_chords)
 
-    assert testtools.compare(
+    assert systemtools.TestManager.compare(
         staff,
         r"""
         \new Staff {

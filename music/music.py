@@ -3,7 +3,6 @@ r'''Music-generation functions used in Čáry, Sekka and Lidércfény.
 '''
 
 import copy
-import fractions
 import math
 import re
 from abjad import *
@@ -99,22 +98,24 @@ def changeslice(expr, visitor):
         return visitor.visit(expr)
 
 
-def effectiveDurations(m):
-    r'''List the effective durations of the leaves in m.
+def effectiveDurations(expr):
+    r'''List the effective durations of the leaves in `expr`.
+
+    ::
 
         >>> from baca.music import *
 
-        >>> tuplet = Tuplet((2, 3), "c'16 c'16 c'16")
+    ::
 
-        >>> effectiveDurations(tuplet.select_leaves())
+        >>> tuplet = Tuplet((2, 3), "c'16 c'16 c'16")
+        >>> effectiveDurations(tuplet)
         [Duration(1, 24), Duration(1, 24), Duration(1, 24)]
 
-    Return list of durations.
+    Returns list.
     '''
-    return [
-        inspect(l).get_duration() 
-        for l in list(iterationtools.iterate_leaves_in_expr(m))
-        ]
+    leaves = iterate(expr).by_class(scoretools.Leaf)
+    durations = [inspect(leaf).get_duration() for leaf in leaves]
+    return durations
 
 
 def effectiveDuration(m):
@@ -175,22 +176,19 @@ def nest(measures, outer, inner):
         m = measures[i]
         o = outer[i]
         n = inner[i]
-        #print i, m, o, n
         measure_numerator, measure_denominator = m
         tuplet = divide.pair(o, (measure_numerator, measure_denominator))
-        #print tuplet
-        #dd = writtenDurations([Measure([divide.pair(o, (m[0], m[1]))])])
-        tie_chains = list(iterationtools.iterate_tie_chains_in_expr(
-            tuplet.select_leaves()))
-        dd = [x.written_duration for x in tie_chains]
+        leaves = tuplet.select_leaves()
+        logical_ties = iterate(leaves).by_logical_tie()
+        durations = [x.written_duration for x in logical_ties]
         body = []
-        for j, d in enumerate(dd):
+        for j, duration in enumerate(durations):
             if 0 < o[j]:
-                body.append(divide.pair(n[j], (d._n, d._d)))
+                body.append(divide.pair(n[j], duration.pair))
             else:
-                body.append(Rest(d))
-        t = tuplettools.FixedDurationTuplet(m, body)
-        result.append(Measure(m, [t]))
+                body.append(Rest(duration))
+        tuplet = scoretools.FixedDurationTuplet(m, body)
+        result.append(Measure(m, [tuplet]))
     return result
 
 
@@ -467,7 +465,7 @@ def stellate(k, s, t, d, b, span='from duration', rests=True):
             sublist[0][0].formatter.right.append(
                 r'_ \markup \fontsize #6 { %s }' % i)
         durations = [inspect(tuplet).get_duration() for tuplet in sublist]
-        spanner = spannertools.DuratedComplexBeamSpanner(
+        spanner = spannertools.DuratedComplexBeam(
             durations=durations, span=span)
         attach(spanner, sublist)
         i += 1
@@ -546,7 +544,7 @@ def coruscate(n, s, t, z, d, rests=True):
     for i, element in enumerate(result):
         if debug:
             element.music[0].right.append(r'_ \markup \fontsize #6 { %s }' % i)
-        spanner = spannertools.DuratedComplexBeamSpanner(
+        spanner = spannertools.DuratedComplexBeam(
             durations=[inspect(element).get_duration()],
             )
         attach(spanner, element.select_leaves()) 
@@ -554,28 +552,26 @@ def coruscate(n, s, t, z, d, rests=True):
     return result
 
 
-def makeMeasures(m, meters):
-    r'''For each voice in m,
+def makeMeasures(expr, meters):
+    r'''For each voice in expr,
     press contents into measures
     according to meters.
     '''
 
-    durations = [Fraction(*meter) for meter in meters]
-    for v in iterationtools.iterate_voices_in_expr(m):
-        assert inspect(v).get_duration() == sum(durations, Duration(0))
-        d = 0
-        #measure = measuretoools.Measure(meters[d], [])
-        measure = Measure(meters[d], [])
-        for x in v[ : ]:
-            measure.append(x)
-            if inspect(measure).get_duration() >= durations[d]:
-                v[d : 2 * d + len(measure) - 1] = [measure]
-                d += 1
-                if d == len(durations):
+    durations = [Duration(*meter) for meter in meters]
+    for voice in iterate(expr).by_class(Voice):
+        assert inspect(voice).get_duration() == sum(durations, Duration(0))
+        meter_index = 0
+        measure = Measure(meters[meter_index], [])
+        for component in voice[:]:
+            measure.append(component)
+            if inspect(measure).get_duration() >= durations[meter_index]:
+                voice[meter_index:2*meter_index+len(measure)-1] = [measure]
+                meter_index += 1
+                if meter_index == len(durations):
                     break
                 else:
-                    #measure = Measure(meters[d], [])
-                    measure = Measure(meters[d], [])
+                    measure = Measure(meters[meter_index], [])
 
 
 def recombineVoices(target, s, insert, t, loci):
@@ -1436,6 +1432,7 @@ def makeBreaksVoice(durationPairs, yOffsets, alignmentOffsets, start=0):
         (alignment-offsets . (0 -36 -48)))
         s1 * 9/8 \\bar "" \\pageBreak
     }
+
     '''
 
     if not isinstance(yOffsets, list):
@@ -1447,7 +1444,8 @@ def makeBreaksVoice(durationPairs, yOffsets, alignmentOffsets, start=0):
             skip = scoretools.Skip(p)
         except (ValueError, AssignabilityError):
             skip = scoretools.Skip((1, 1))
-            skip.lilypond_duration_multiplier = Duration(p)
+            multiplier = Multiplier(p)
+            attach(multiplier, skip)
         breaks.append(skip)
     for i, b in enumerate(breaks):
         cyclicPosition = (start + i) % len(yOffsets)
@@ -1456,12 +1454,6 @@ def makeBreaksVoice(durationPairs, yOffsets, alignmentOffsets, start=0):
             curBreak = r'\pageBreak'
         else:
             curBreak = r'\break'
-#        b.formatter.before.extend([
-#            r'\overrideProperty #"Score.NonMusicalPaperColumn" ',
-#            "#'line-break-system-details",
-#            "#'((Y-offset . %s)" % curYOffset,
-#            '(alignment-offsets . (%s)))' % alignmentOffsets])
-#        b.formatter.right.extend([r'\bar ""', curBreak])
     voice = Voice(breaks)
     voice.name = 'breaks voice'
     return voice
@@ -1488,13 +1480,14 @@ def makeMeasuresVoice(durationPairs):
         }
     }
 
-    Return voice.
+    Returns voice.
     '''
 
     measures = []
     for pair in durationPairs:
         skip = scoretools.Skip((1, 1))
-        skip.lilypond_duration_multiplier = Duration(pair)
+        multiplier = Multiplier(pair)
+        attach(multiplier, skip)
         measure = Measure(pair, [skip])
         measures.append(measure)
     voice = Voice(measures)
@@ -1502,8 +1495,8 @@ def makeMeasuresVoice(durationPairs):
     return voice
 
 
-def reddenSections(measuresVoice, sectionTuples, startMeasure=1):
-    r'''Redden section bars and label sections in red.
+def reddenSections(measuresVoice, sectionTuples, start_measure=1):
+    r'''Reddens section bars and labels sections in red.
 
         >>> measuresVoice = makeMeasuresVoice([(10, 8), (10, 8), (9, 8)])
         >>> reddenSections(measuresVoice, [(1, 1, 2, 'I'), (2, 3, 3, 'II')])
@@ -1551,23 +1544,20 @@ def reddenSections(measuresVoice, sectionTuples, startMeasure=1):
             }
         }
 
-    Return none.
+    Returns none.
     '''
-
-    measureSkips = list(iterationtools.iterate_skips_in_expr(measuresVoice))
-
+    skips = iterate(measuresVoice).by_class(scoretools.Skip)
+    skips = list(skips)
     for n, start, stop, description in sectionTuples:
-        if start >= startMeasure:
-            string = r'\fontsize #2 \with-color #red \italic { %s. %s }'
-            string %= (n, description)
+        if start_measure <= start:
+            string = r'\fontsize #2 \with-color #red \italic {{ {}. {} }}'
+            string = string.format(n, description)
             markup = markuptools.Markup(string, direction=Up)
-            try:
-                ms = measureSkips[start - startMeasure]
-                override(ms).score.bar_line.color = 'red'
-                override(ms).score.span_bar.color = 'red'
-                attach(markup, ms)
-            except:
-                pass
+            skip_index = start - start_measure
+            skip = skips[skip_index]
+            override(skip).score.bar_line.color = 'red'
+            override(skip).score.span_bar.color = 'red'
+            attach(markup, skip)
 
 
 def trimVoices(expr, nMeasures):

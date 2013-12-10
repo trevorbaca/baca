@@ -1,4 +1,4 @@
-import py.test
+import pytest
 from abjad import *
 from baca import music
 
@@ -11,7 +11,7 @@ def test_music_coruscate_01():
     talea, cut, dilation = [[1]], [[0]], [[0]]
     t = Container(music.coruscate(talea, cut, [4, 8, 8], dilation, 32))
 
-    assert testtools.compare(
+    assert systemtools.TestManager.compare(
         t,
         r'''
         {
@@ -97,7 +97,7 @@ def test_music_coruscate_02():
     t = Container(music.coruscate(talea, cut, [4, 4, 4, 4], dilation, 32))
 
     # TODO: make work again
-    testtools.compare(
+    systemtools.TestManager.compare(
         t,
         r'''
             \set stemLeftBeamCount = #0
@@ -158,7 +158,7 @@ def test_music_coruscate_03():
     t = Container(music.coruscate(talea, cut, [4, 4, 4], dilation, 32))
 
     # TODO: make work again
-    testtools.compare(
+    systemtools.TestManager.compare(
         t,
         '''
             \set stemLeftBeamCount = #0
@@ -255,7 +255,7 @@ def test_music_coruscate_04():
     t = Container(music.coruscate(talea, cut, [4, 4, 4], dilation, 32))
 
     # TOOD: make work again
-    testtools.compare(
+    systemtools.TestManager.compare(
         t,
         r'''
             \set stemLeftBeamCount = #0
@@ -290,7 +290,7 @@ def test_music_coruscate_05():
     t = Container(music.coruscate([[2, 3]], [[0]], [4, 4, 4], [[0]], 32))
 
     # TODO: make work again
-    testtools.compare(
+    systemtools.TestManager.compare(
         t,
         r'''
         \times 4/5 {
@@ -327,7 +327,7 @@ def test_music_coruscate_06():
 
     t = Container(music.coruscate([[-1]], [[0]], [4, 4, 4], [[0]], 32))
 
-    assert testtools.compare(
+    assert systemtools.TestManager.compare(
         t,
         r'''
         {
@@ -349,11 +349,10 @@ def test_music_coruscate_07():
     r'''Tie-valued rests split apart.
     '''
 
-    t = Container(music.coruscate([[-1]], [[0]], [4, 4, 5], [[0]], 32))
+    container = Container(music.coruscate([[-1]], [[0]], [4, 4, 5], [[0]], 32))
 
-    assert testtools.compare(
-
-        t,
+    assert systemtools.TestManager.compare(
+        container,
         r'''
         {
             {
@@ -378,4 +377,4 @@ def test_music_coruscate_08():
     talea, cut, dilation = [[0]], [[0]], [[0]]
 
     statement = 'music.coruscate(talea, cut, [4, 4, 4], dilation, 32)'
-    assert py.test.raises(AssertionError, statement)
+    assert pytest.raises(AssertionError, statement)
