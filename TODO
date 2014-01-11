@@ -1,23 +1,18 @@
 1.  Remove remaining instrumenttools functions.
 
-2.  Remind Josiah to send Frederico Llach's mail to Hans.
+2.  Remove scoretools.make_repeated_notes() from all tests.
 
-3.  Change archipel.code to somethine else.
-    There's a standard library module named code.
-
-4.  Remove scoretools.make_repeated_notes() from all tests.
-
-6.  Modernize baca/music/music.py in all respects.
+3.  Modernize baca/music/music.py in all respects.
     Port Čáry, Sekka and Lidércfény forward at the same time.
 
-6.  Write doc tests for baca utilities.
+4.  Write doc tests for baca utilities.
 
-7.  Set up HTML API for baca utilities.
+5.  Set up HTML API for baca utilities.
 
-8.  Search for Mark in all baca (and all scores) and replace.
+6.  Search for Mark in all baca (and all scores) and replace.
     Search for 'mark' in all baca (and all scores) and replace.
 
-9.  Search for leaftools, notetools, chordtools, resttools, skiptools, 
+7.  Search for leaftools, notetools, chordtools, resttools, skiptools, 
     resttools, tuplettools, stafftools, voicetools, iterationtools, 
     contexttools, marktools, timerelationtools in all baca (and all scores) 
     and replace.
