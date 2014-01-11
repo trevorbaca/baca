@@ -1,5 +1,5 @@
-from baca.util.get_parent_directory import get_parent_directory
 import os
+from baca.utilities.get_parent_directory import get_parent_directory
 
 
 def cache_output(output, output_file_name, location):

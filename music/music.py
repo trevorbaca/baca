@@ -6,7 +6,7 @@ import copy
 import math
 import re
 from abjad import *
-from baca import util
+from baca import utilities
 
 
 def splitPitches(pitches, split=-1):
@@ -423,21 +423,21 @@ def stellate(k, s, t, d, b, span='from duration', rests=True):
 
     debug = False
 
-    prolation = util.helianthate(s, 1, 1)
+    prolation = utilities.helianthate(s, 1, 1)
     prolation = sequencetools.flatten_sequence(prolation)
     numerators = \
         sequencetools.increase_sequence_elements_cyclically_by_addenda(
         k, prolation)
-    mask = util.helianthate(t, 1, 1)
+    mask = utilities.helianthate(t, 1, 1)
     mask = sequencetools.flatten_sequence(mask)
     mask = sequencetools.repeat_to_weight(mask, mathtools.weight(numerators))
-    mask = util.replace_nested_elements_with_unary_subruns(mask)
+    mask = utilities.replace_nested_elements_with_unary_subruns(mask)
     signatures = sequencetools.split_sequence_once_by_weights_with_overhang(
         mask, numerators)
     for i, signature in enumerate(signatures):
         if signature == [1]:
             signatures[i] = [-1]
-    signatures = util.partition_nested_into_canonic_parts(signatures)
+    signatures = utilities.partition_nested_into_canonic_parts(signatures)
 
     if not rests:
         part_counts = [len(x) for x in signatures]
@@ -496,14 +496,14 @@ def coruscate(n, s, t, z, d, rests=True):
     debug = False
 
     # zero-valued taleas not allowed
-    talea = util.helianthate(n, 1, 1)
+    talea = utilities.helianthate(n, 1, 1)
     talea = sequencetools.flatten_sequence(talea)
     assert all(talea)
 
-    cut = util.helianthate(s, 1, 1)
+    cut = utilities.helianthate(s, 1, 1)
     cut = sequencetools.flatten_sequence(cut)
 
-    dilation = util.helianthate(z, 1, 1)
+    dilation = utilities.helianthate(z, 1, 1)
     dilation = sequencetools.flatten_sequence(dilation)
     fit = \
         sequencetools.increase_sequence_elements_cyclically_by_addenda(
@@ -526,7 +526,7 @@ def coruscate(n, s, t, z, d, rests=True):
         return list(
         sequencetools.sum_consecutive_sequence_elements_by_sign(x, sign=[-1]))
     signatures = [helper(signature) for signature in signatures]
-    signatures = util.partition_nested_into_canonic_parts(signatures)
+    signatures = utilities.partition_nested_into_canonic_parts(signatures)
 
     if not rests:
         part_counts = [len(x) for x in signatures]

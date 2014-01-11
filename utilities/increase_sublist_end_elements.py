@@ -1,6 +1,7 @@
 def increase_sublist_end_elements(l, s):
-    '''Add elements in s to the first and last elements of
+    '''Adds elements in s to the first and last elements of
     corresponding sublists in l.
+
     That is:
 
         l[0][0] += s[0-1] and l[0][-1] += s[0+1]
@@ -14,11 +15,12 @@ def increase_sublist_end_elements(l, s):
     Any middle elements in the sublists of l are left untouched.
 
     abjad> l = [[2, 2, 2], [2, 2], [2, 2, 2]]
-    abjad> util.increase_sublist_end_elements(l, [1, 5, 10])
+    abjad> utilities.increase_sublist_end_elements(l, [1, 5, 10])
     [[12, 2, 7], [3, 12], [7, 2, 3]]
 
     Note too that there is special handling of 1-element sublists in l:
-    ie, 1-element sublists are left untouched.'''
+    ie, 1-element sublists are left untouched.
+    '''
 
     assert len(l) == len(s)
     assert isinstance(l, list)

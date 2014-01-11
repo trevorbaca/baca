@@ -1,32 +1,23 @@
-0.  Move sounding_pitch and sound_pitches from leaf 
-    to inspect().get_sounding_pitch() and inspect().get_sounding_pitches().
+1.  Remove remaining instrumenttools functions.
 
-1.  Move grace and after_grace properties from leaf to inspector.
+2.  Remind Josiah to send Frederico Llach's mail to Hans.
 
-2.  Remove remaining instrumenttools functions.
-
-3.  Remind Josiah to send Frederico Llach's mail to Hans.
-
-4.  Change archipel.code to somethine else.
+3.  Change archipel.code to somethine else.
     There's a standard library module named code.
 
-5.  Kill scoretools.set_always_format_time_signature_of_mesures_in_expr().
-    Remove completely.
-    Remove scoretools.make_repeated_notes() from all tests.
+4.  Remove scoretools.make_repeated_notes() from all tests.
 
-6.  Change baca.util to baca.utilities to avoid abbreviation.
-
-7.  Modernize baca/music/music.py in all respects.
+6.  Modernize baca/music/music.py in all respects.
     Port Čáry, Sekka and Lidércfény forward at the same time.
 
-8.  Write doc tests for baca utilities.
+6.  Write doc tests for baca utilities.
 
-9.  Set up HTML API for baca utilities.
+7.  Set up HTML API for baca utilities.
 
-10. Search for Mark in all baca (and all scores) and replace.
+8.  Search for Mark in all baca (and all scores) and replace.
     Search for 'mark' in all baca (and all scores) and replace.
 
-11. Search for leaftools, notetools, chordtools, resttools, skiptools, 
+9.  Search for leaftools, notetools, chordtools, resttools, skiptools, 
     resttools, tuplettools, stafftools, voicetools, iterationtools, 
     contexttools, marktools, timerelationtools in all baca (and all scores) 
     and replace.

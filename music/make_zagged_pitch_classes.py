@@ -1,19 +1,21 @@
 import os
 import baca
-from abjad import *
 from experimental import *
 
 
 # TODO: make into class
 def make_zagged_pitch_classes(pc_cells, division_cells, grouping_counts):
     from experimental.tools import musicexpressiontools
-    pc_cells = baca.util.helianthate(pc_cells, -1, 1)
-    division_cells = baca.util.helianthate(division_cells, -1, 1)
+    pc_cells = baca.utilities.helianthate(pc_cells, -1, 1)
+    division_cells = baca.utilities.helianthate(division_cells, -1, 1)
     division_cells = sequencetools.flatten_sequence(division_cells, depth=1)
     division_cells = datastructuretools.CyclicTuple(division_cells)
     tmp = []
     for i, pc_segment in enumerate(pc_cells):
-        parts = sequencetools.partition_sequence_by_ratio_of_lengths(pc_segment, division_cells[i])
+        parts = sequencetools.partition_sequence_by_ratio_of_lengths(
+            pc_segment, 
+            division_cells[i],
+            )
         tmp.extend(parts)
     pc_cells = tmp
     pc_cells = sequencetools.partition_sequence_by_counts(

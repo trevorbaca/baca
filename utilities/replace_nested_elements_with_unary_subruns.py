@@ -1,18 +1,18 @@
 def replace_nested_elements_with_unary_subruns(l):
-    '''Replace positive integers with 1-sequences.
+    '''Replaces positive integers with 1-sequences.
     flat or nested w.
 
-    >>> from baca import util
+    >>> from baca import utilities
 
     >>> l = [1, 2, 2, -4]
-    >>> util.replace_nested_elements_with_unary_subruns(l)
+    >>> utilities.replace_nested_elements_with_unary_subruns(l)
     [1, 1, 1, 1, 1, -4]
 
     >>> w = [[1, 3, -4], [1, 2, -2, -4]]
-    >>> util.replace_nested_elements_with_unary_subruns(w)
+    >>> utilities.replace_nested_elements_with_unary_subruns(w)
     [[1, 1, 1, 1, -4], [1, 1, 1, -2, -4]]
 
-    Return newly constructed list.
+    Returns newly constructed list.
     '''
 
     result = []
