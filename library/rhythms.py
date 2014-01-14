@@ -1,17 +1,14 @@
-from abjad.tools import sequencetools
-from abjad.tools import rhythmmakertools
+from abjad import *
 import baca
 __all__ = []
 
 
-
-pattern, denominator, prolation_addenda  = [1], 64, []
-lefts, middles, rights = [0], [0], [0]
-left_lengths, right_lengths = [1], [2]
-sixty_fourths = rhythmmakertools.OutputBurnishedTaleaRhythmMaker(
-    pattern, denominator, prolation_addenda,
-    lefts, middles, rights,
-    left_lengths, right_lengths)
+sixty_fourths = rhythmmakertools.TaleaRhythmMaker(
+    talea=(1,), 
+    talea_denominator=64, 
+    burnish_output=True,
+    beam_each_cell=True,
+    )
 sixty_fourths.beam = True
 sixty_fourths.name = 'sixty_fourths'
 __all__.append(sixty_fourths.name)
