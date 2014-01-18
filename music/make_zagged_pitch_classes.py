@@ -60,7 +60,7 @@ def make_illustration_from_output_material(statal_server, **kwargs):
     current_group = 0
     for leaf in voice.select_leaves():
         spanner_classes = spannertools.HorizontalBracketSpanner
-        brackets = inspect(leaf).get_spanners(spanner_classes)
+        brackets = inspect_(leaf).get_spanners(spanner_classes)
         brackets = tuple(brackets)
         if brackets[0][0] is leaf:
             if brackets[1][0] is leaf:

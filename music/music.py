@@ -114,7 +114,7 @@ def effectiveDurations(expr):
     Returns list.
     '''
     leaves = iterate(expr).by_class(scoretools.Leaf)
-    durations = [inspect(leaf).get_duration() for leaf in leaves]
+    durations = [inspect_(leaf).get_duration() for leaf in leaves]
     return durations
 
 
@@ -146,7 +146,7 @@ def fill(l, positions):
 
     for i, m in enumerate(l):
         if (i + 1) in positions:
-            n, d = inspect(m).get_duration().pair
+            n, d = inspect_(m).get_duration().pair
             parts = mathtools.partition_integer_into_canonic_parts(n)
             l[i] = Measure(
                 m.meter.pair,
@@ -214,7 +214,7 @@ def trill(l, p=False, indices='all', d=Fraction(0)):
         if hasattr(element, 'scaledDuration'):
             sd = element.scaledDuration
         else:
-            sd = inspect(element).get_duration()
+            sd = inspect_(element).get_duration()
         if isinstance(element, Note) and i in indices and sd >= d:
             #if p:
             #  element.before.append(r'\pitchedTrill')
@@ -241,7 +241,7 @@ def grace(l,
         if hasattr(element, 'scaledDuration'):
             sd = element.scaledDuration
         else:
-            sd = inspect(element).get_duration()
+            sd = inspect_(element).get_duration()
 
         if check and hasattr(element, 'grace'):
             ck = False
@@ -313,7 +313,7 @@ def breaks(signatures, durations, pages, verticals, staves=None):
             for measure in range(line):
                 d = durations[total]
                 s = scoretools.Skip((1))
-                inspect(s).get_duration().multiplier = d
+                inspect_(s).get_duration().multiplier = d
                 tabs = ''.join(['\t'] * int(math.ceil((10 - len(s.body)) / 3.0)))
                 result.append(s)
                 result[-1].directives.before.append(signatures[total] + '\t')
@@ -363,7 +363,7 @@ class Subdivide(object):
             if n > 0:
                 denominator = int(2 ** (n + 2))
                 quotient = \
-                    inspect(node).get_duration() / Fraction(1, denominator)
+                    inspect_(node).get_duration() / Fraction(1, denominator)
                 if quotient.d == 1 and quotient.n > 1:
                     new = expression.Expression(
                         [Note(0, 1, denominator) for x in range(quotient.n)])
@@ -390,8 +390,8 @@ def subdivide(m, positions):
 class FiveRemover(object):
     def visit(self, node):
         if isinstance(node, Note) and \
-            inspect(node).get_duration().n == 5:
-            denominator = inspect(node).get_duration().d
+            inspect_(node).get_duration().n == 5:
+            denominator = inspect_(node).get_duration().d
             return expression.Expression(
                 [Note(0, 4, denominator), Note(0, 1, denominator)])
         else:
@@ -464,7 +464,7 @@ def stellate(k, s, t, d, b, span='from duration', rests=True):
         if debug:
             sublist[0][0].formatter.right.append(
                 r'_ \markup \fontsize #6 { %s }' % i)
-        durations = [inspect(tuplet).get_duration() for tuplet in sublist]
+        durations = [inspect_(tuplet).get_duration() for tuplet in sublist]
         spanner = spannertools.DuratedComplexBeam(
             durations=durations, span=span)
         attach(spanner, sublist)
@@ -545,7 +545,7 @@ def coruscate(n, s, t, z, d, rests=True):
         if debug:
             element.music[0].right.append(r'_ \markup \fontsize #6 { %s }' % i)
         spanner = spannertools.DuratedComplexBeam(
-            durations=[inspect(element).get_duration()],
+            durations=[inspect_(element).get_duration()],
             )
         attach(spanner, element.select_leaves()) 
 
@@ -560,12 +560,12 @@ def makeMeasures(expr, meters):
 
     durations = [Duration(*meter) for meter in meters]
     for voice in iterate(expr).by_class(Voice):
-        assert inspect(voice).get_duration() == sum(durations, Duration(0))
+        assert inspect_(voice).get_duration() == sum(durations, Duration(0))
         meter_index = 0
         measure = Measure(meters[meter_index], [])
         for component in voice[:]:
             measure.append(component)
-            if inspect(measure).get_duration() >= durations[meter_index]:
+            if inspect_(measure).get_duration() >= durations[meter_index]:
                 voice[meter_index:2*meter_index+len(measure)-1] = [measure]
                 meter_index += 1
                 if meter_index == len(durations):
@@ -683,7 +683,7 @@ def setLeafStartTimes(expr, offset=Fraction(0)):
     cur = Fraction(*offset.pair)
     for l in instances(expr, 'Leaf'):
         l.start = cur
-        cur += inspect(l).get_duration()
+        cur += inspect_(l).get_duration()
 
 
 def rankLeavesTimewise(exprList, name='Leaf'):
@@ -968,7 +968,7 @@ def setArticulationsByDuration(voice, start, stop, long, min, short):
     min = Fraction(*min)
     for l in leaves[start : stop + 1]:
         if isinstance(l, (Note, Chord)):
-            if inspect(l).get_duration() >= min:
+            if inspect_(l).get_duration() >= min:
                 l.articulations = long
             else:
                 l.articulations = short
