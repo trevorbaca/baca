@@ -28,7 +28,8 @@ def repeat_subruns_cyclic(notes, pairs, history=False):
         new_notes = []
         for i in range(pair[0], pair[0] + pair[1]):
             source = notes[i % len_notes]
-            new_note = Note(abs(source.written_pitch), source.written_duration)
+            pitch_number = source.written_pitch.pitch_number
+            new_note = Note(pitch_number, source.written_duration)
             new_notes.append(new_note)
         reps = pair[-1]
         instruction = (pair[0] + pair[1], new_notes, reps)

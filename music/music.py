@@ -1411,7 +1411,7 @@ def makeBreaksVoice(durationPairs, yOffsets, alignmentOffsets, start=0):
     start at system start to allow first page title.
 
     >>> makeBreaksVoice([(10, 8), (10, 8), (9, 8)], [20, 120], [0, -36, -48], 1)
-    Voice-"breaks voice"{3}
+    Voice('s1 * 5/4 s1 * 5/4 s1 * 9/8')
 
     >>> f(_) # doctest: +SKIP
     % breaks voice
@@ -1463,7 +1463,7 @@ def makeMeasuresVoice(durationPairs):
     r'''Return measure and time signature skip voice.
 
     >>> makeMeasuresVoice([(10, 8), (10, 8), (9, 8)])
-    Voice-"measures voice"{3}
+    <Voice-"measures voice"{3}>
 
     >>> f(_)
     \context Voice = "measures voice" {

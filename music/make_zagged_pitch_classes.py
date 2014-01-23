@@ -44,7 +44,7 @@ def make_illustration_from_output_material(statal_server, **kwargs):
         )
     illustration.file_initial_user_includes.append(stylesheet)
 
-    voice.engraver_consists.append('Horizontal_bracket_engraver')
+    voice.consists_commands.append('Horizontal_bracket_engraver')
     for level in (1, 2):
         level_sizes = []
         for x in material.iterate_at_level(level):
