@@ -520,7 +520,7 @@ def coruscate(n, s, t, z, d, rests=True):
         signatures.append(new)
     def helper(x):
         return list(
-        sequencetools.sum_consecutive_sequence_elements_by_sign(x, sign=[-1]))
+        sequencetools.sum_consecutive_elements_by_sign(x, sign=[-1]))
     signatures = [helper(signature) for signature in signatures]
     signatures = utilities.partition_nested_into_canonic_parts(signatures)
 
@@ -1623,19 +1623,19 @@ def crossStavesUp(leaves, start, stop, bp, target):
                 octavate(l, base = (-28, 4))
 
 
-def map_sequence_elements_to_numbered_sublists(sequence):
+def map_elements_to_numbered_sublists(sequence):
     '''Maps `sequence` elements to numbered sublists.
 
     ::
 
         >>> sequence = [1, 2, -3, -4, 5]
-        >>> map_sequence_elements_to_numbered_sublists(sequence)
+        >>> map_elements_to_numbered_sublists(sequence)
         [[1], [2, 3], [-4, -5, -6], [-7, -8, -9, -10], [11, 12, 13, 14, 15]]
 
     ::
 
         >>> sequence = [1, 0, -3, -4, 5]
-        >>> map_sequence_elements_to_numbered_sublists(sequence)
+        >>> map_elements_to_numbered_sublists(sequence)
         [[1], [], [-2, -3, -4], [-5, -6, -7, -8], [9, 10, 11, 12, 13]]
 
     Note that numbering starts at ``1``.

@@ -27,6 +27,5 @@ def sectionalize(n, ratio):
     '''
 
     parts = mathtools.partition_integer_by_ratio(n - (len(ratio) - 1), ratio)
-    result = sequencetools.splice_new_elements_between_sequence_elements(
-        parts, [1])
+    result = sequencetools.splice_between_elements(parts, [1])
     return result
