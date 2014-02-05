@@ -38,7 +38,7 @@ class ChunkArray(list):
     ### PRIVATE METHODS ###
 
     def _update_chunk_pointers(self):
-        for left, right in sequencetools.iterate_sequence_nwise_strict(self):
+        for left, right in sequencetools.iterate_sequence_nwise(self):
             left.next_chunk = right
             right.prev_chunk = left
         if len(self):
