@@ -425,9 +425,7 @@ def stellate(k, s, t, d, b, span='from duration', rests=True):
 
     prolation = utilities.helianthate(s, 1, 1)
     prolation = sequencetools.flatten_sequence(prolation)
-    numerators = \
-        sequencetools.increase_sequence_elements_cyclically_by_addenda(
-        k, prolation)
+    numerators = sequencetools.increase_elements(k, prolation)
     mask = utilities.helianthate(t, 1, 1)
     mask = sequencetools.flatten_sequence(mask)
     mask = sequencetools.repeat_to_weight(mask, mathtools.weight(numerators))
@@ -505,9 +503,7 @@ def coruscate(n, s, t, z, d, rests=True):
 
     dilation = utilities.helianthate(z, 1, 1)
     dilation = sequencetools.flatten_sequence(dilation)
-    fit = \
-        sequencetools.increase_sequence_elements_cyclically_by_addenda(
-        t, dilation)
+    fit = sequencetools.increase_elements(t, dilation)
 
     j = 0
     signatures = []

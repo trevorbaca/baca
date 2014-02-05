@@ -1,4 +1,4 @@
-from abjad.tools import sequencetools
+from abjad.tools import mathtools
 from baca.music.make_zagged_pitch_classes import make_illustration_from_output_material
 from baca.music.make_zagged_pitch_classes import make_zagged_pitch_classes
 from experimental.tools import musicexpressiontools
@@ -28,5 +28,5 @@ class ZaggedPitchClassMaterialPackageMaker(FunctionInputMaterialPackageMaker):
     user_input_tests = [
         ('pc_cells', list),
         ('division_cells', list),
-        ('grouping_counts', sequencetools.all_are_nonnegative_integers),
+        ('grouping_counts', mathtools.all_are_nonnegative_integers),
         ]
