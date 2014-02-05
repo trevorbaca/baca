@@ -1,7 +1,7 @@
 from abjad import *
 
 
-def intaglio(l, s, t = 1):
+def intaglio(l, s, t=1):
     '''Repeats s and weight-partition according to l.
 
         >>> from baca import utilities
@@ -50,7 +50,7 @@ def intaglio(l, s, t = 1):
 
     result = []
 
-    result = sequencetools.repeat_sequence_to_weight_exactly(s, sum(l))
+    result = sequencetools.repeat_sequence_to_weight(s, sum(l))
     result = sequencetools.split_sequence_by_weights(
         result, 
         l, 
