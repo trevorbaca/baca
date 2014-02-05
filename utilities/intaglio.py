@@ -51,7 +51,7 @@ def intaglio(l, s, t=1):
     result = []
 
     result = sequencetools.repeat_sequence_to_weight(s, sum(l))
-    result = sequencetools.split_sequence_by_weights(
+    result = sequencetools.split_sequence(
         result, 
         l, 
         cyclic=False, 

@@ -33,7 +33,7 @@ class W(datastructuretools.Matrix):
         all_measure_divisions = sequencetools.repeat_sequence_to_weight(
             talea, lcm)
         args = (all_measure_weights, all_measure_divisions)
-        all_measure_divisions = sequencetools.split_sequence_by_weights(
+        all_measure_divisions = sequencetools.split_sequence(
             *args, cyclic=False, overhang=True)
         all_measure_divisions = sequencetools.flatten_sequence(all_measure_divisions)
         args = (all_measure_divisions, all_measure_weights)
