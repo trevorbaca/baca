@@ -37,8 +37,12 @@ class W(datastructuretools.Matrix):
             *args, cyclic=False, overhang=True)
         all_measure_divisions = sequencetools.flatten_sequence(all_measure_divisions)
         args = (all_measure_divisions, all_measure_weights)
-        all_measure_divisions = sequencetools.partition_sequence_by_weights_exactly(
-            all_measure_divisions, all_measure_weights, cyclic=False, overhang=True)
+        all_measure_divisions = sequencetools.partition_sequence_by_weights(
+            all_measure_divisions, 
+            all_measure_weights, 
+            cyclic=False, 
+            overhang=True,
+            )
         args = (all_measure_divisions, [n_voices])
         all_measure_divisions = sequencetools.partition_sequence_by_counts(
             *args, cyclic=True, overhang=True)
