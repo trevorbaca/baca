@@ -28,15 +28,21 @@ class W(datastructuretools.Matrix):
         lcm = mathtools.least_common_multiple(*args)
         part_measure_weights = [n_voices * [x] for x in measure_numerators]
         part_measure_weights = sequencetools.flatten_sequence(part_measure_weights)
-        all_measure_weights = sequencetools.repeat_sequence_to_weight_exactly(part_measure_weights, lcm)
-        all_measure_divisions = sequencetools.repeat_sequence_to_weight_exactly(talea, lcm)
+        all_measure_weights = sequencetools.repeat_sequence_to_weight(
+            part_measure_weights, lcm)
+        all_measure_divisions = sequencetools.repeat_sequence_to_weight(
+            talea, lcm)
         args = (all_measure_weights, all_measure_divisions)
-        all_measure_divisions = sequencetools.split_sequence_by_weights(
+        all_measure_divisions = sequencetools.split_sequence(
             *args, cyclic=False, overhang=True)
         all_measure_divisions = sequencetools.flatten_sequence(all_measure_divisions)
         args = (all_measure_divisions, all_measure_weights)
-        all_measure_divisions = sequencetools.partition_sequence_by_weights_exactly(
-            all_measure_divisions, all_measure_weights, cyclic=False, overhang=True)
+        all_measure_divisions = sequencetools.partition_sequence_by_weights(
+            all_measure_divisions, 
+            all_measure_weights, 
+            cyclic=False, 
+            overhang=True,
+            )
         args = (all_measure_divisions, [n_voices])
         all_measure_divisions = sequencetools.partition_sequence_by_counts(
             *args, cyclic=True, overhang=True)
