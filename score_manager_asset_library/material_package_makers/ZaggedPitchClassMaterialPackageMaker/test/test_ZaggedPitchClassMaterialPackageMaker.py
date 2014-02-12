@@ -7,17 +7,17 @@ def test_ZaggedPitchClassMaterialPackageMaker_01():
     '''Empty wrapper.
     '''
 
-    studio = scoremanagertools.studio.Studio()
+    studio = scoremanager.studio.Studio()
     assert not studio.package_exists('materials.testzagged')
     try:
         studio.run(pending_user_input=
             'materials maker zagged testzagged default '
             'q'
             )
-        mpp = scoremanagertools.materialpackagemakers.ZaggedPitchClassMaterialPackageMaker(
+        mpp = scoremanager.materialpackagemakers.ZaggedPitchClassMaterialPackageMaker(
             'materials.testzagged')
         assert mpp.directory_contents == ['__init__.py', 'tags.py', 'user_input.py']
-        user_input_wrapper = scoremanagertools.editors.UserInputWrapper([
+        user_input_wrapper = scoremanager.editors.UserInputWrapper([
             ('pc_cells', None),
             ('division_cells', None),
             ('grouping_counts', None)])
@@ -31,7 +31,7 @@ def test_ZaggedPitchClassMaterialPackageMaker_02():
     '''Populate wrapper.
     '''
 
-    studio = scoremanagertools.studio.Studio()
+    studio = scoremanager.studio.Studio()
     assert not studio.package_exists('materials.testzagged')
     try:
         studio.run(pending_user_input=
@@ -41,10 +41,10 @@ def test_ZaggedPitchClassMaterialPackageMaker_02():
             '[1, 1, 2, 3] '
             'q'
             )
-        mpp = scoremanagertools.materialpackagemakers.ZaggedPitchClassMaterialPackageMaker(
+        mpp = scoremanager.materialpackagemakers.ZaggedPitchClassMaterialPackageMaker(
             'materials.testzagged')
         assert mpp.directory_contents == ['__init__.py', 'tags.py', 'user_input.py']
-        user_input_wrapper = scoremanagertools.editors.UserInputWrapper([
+        user_input_wrapper = scoremanager.editors.UserInputWrapper([
             ('pc_cells', [[0, 7, 2, 10], [9, 6, 1, 8]]),
             ('division_cells', [[[1], [1], [1], [1, 1, 1]]]),
             ('grouping_counts', [1, 1, 2, 3])])

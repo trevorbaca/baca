@@ -1,7 +1,7 @@
 from make_illustration_from_output_material import make_illustration_from_output_material
 from baca.score_manager_asset_library.editors.ConstellationCircuitSelectionEditor import \
     ConstellationCircuitSelectionEditor
-from experimental.tools.scoremanagertools.materialpackagemakers.MaterialPackageMaker import \
+from experimental.tools.scoremanager.materialpackagemakers.MaterialPackageMaker import \
     MaterialPackageMaker
 
 

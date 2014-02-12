@@ -3,7 +3,7 @@ from experimental import *
 
 def test_score_manager_environment_01():
 
-    score_manager = scoremanagertools.scoremanager.ScoreManager()
+    score_manager = scoremanager.core.ScoreManager()
     score_manager._run('q')
 
     main_menu_lines = score_manager._session.io_transcript[0][1]

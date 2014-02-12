@@ -37,7 +37,7 @@ def make_illustration_from_output_material(statal_server, **kwargs):
     score = Score([staff])
     illustration = lilypondfiletools.make_basic_lilypond_file(score)
 
-    configuration = scoremanagertools.scoremanager.ScoreManagerConfiguration()
+    configuration = scoremanager.core.ScoreManagerConfiguration()
     stylesheet = os.path.join(
         configuration.built_in_stylesheets_directory_path,
         'rhythm-letter-16.ly',
