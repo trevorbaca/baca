@@ -1,15 +1,14 @@
-from experimental import *
+# -*- encoding: utf-8 -*-
+from abjad import *
+import scoremanager
+score_manager = scoremanager.core.ScoreManager(is_test=False)
 
 
 def test_score_manager_environment_01():
 
-    score_manager = scoremanagertools.scoremanager.ScoreManager()
-    score_manager._run('q')
+    input_ = 'q'
+    score_manager._run(input_=input_)
+    contents = score_manager._transcript.contents
 
-    main_menu_lines = score_manager._session.io_transcript[0][1]
-    sekka_menu_line_without_number = 'Sekka (2007)'
-    for line in main_menu_lines:
-        if sekka_menu_line_without_number in line:
-            break
-    else:
-        raise Exception('Sekka not found.')
+    assert '5: Chrysanthemums (1995)' in contents
+    assert '21: Zeit (1998)' in contents
