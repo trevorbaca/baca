@@ -1,5 +1,5 @@
 from experimental.tools import scoremanager
-from experimental.tools.scoremanager.editors.ListEditor import ListEditor
+from scoremanager.editors.ListEditor import ListEditor
 
 
 class ConstellationCircuitSelectionEditor(ListEditor):

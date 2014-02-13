@@ -2,11 +2,11 @@ from abjad.tools import mathtools
 from baca.music.make_zagged_pitch_classes import make_illustration_from_output_material
 from baca.music.make_zagged_pitch_classes import make_zagged_pitch_classes
 from experimental.tools import musicexpressiontools
-from experimental.tools.scoremanager.materialpackagemakers.FunctionInputMaterialPackageMaker import \
-    FunctionInputMaterialPackageMaker
+from scoremanager.materialpackagemanagers.FunctionInputMaterialPackageManager import \
+    FunctionInputMaterialPackageManager
 
 
-class ZaggedPitchClassMaterialPackageMaker(FunctionInputMaterialPackageMaker):
+class ZaggedPitchClassMaterialPackageManager(FunctionInputMaterialPackageManager):
 
     ### CLASS ATTRIBUTES ###
 

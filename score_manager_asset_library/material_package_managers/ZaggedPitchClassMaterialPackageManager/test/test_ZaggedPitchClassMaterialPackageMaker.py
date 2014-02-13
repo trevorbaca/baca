@@ -3,7 +3,7 @@ from experimental import *
 pytest.skip('REMOVE ME')
 
 
-def test_ZaggedPitchClassMaterialPackageMaker_01():
+def test_ZaggedPitchClassMaterialPackageManager_01():
     '''Empty wrapper.
     '''
 
@@ -14,7 +14,7 @@ def test_ZaggedPitchClassMaterialPackageMaker_01():
             'materials maker zagged testzagged default '
             'q'
             )
-        mpp = scoremanager.materialpackagemakers.ZaggedPitchClassMaterialPackageMaker(
+        mpp = scoremanager.materialpackagemanagers.ZaggedPitchClassMaterialPackageManager(
             'materials.testzagged')
         assert mpp.directory_contents == ['__init__.py', 'tags.py', 'user_input.py']
         user_input_wrapper = scoremanager.editors.UserInputWrapper([
@@ -27,7 +27,7 @@ def test_ZaggedPitchClassMaterialPackageMaker_01():
         assert not studio.package_exists('materials.testzagged')
 
 
-def test_ZaggedPitchClassMaterialPackageMaker_02():
+def test_ZaggedPitchClassMaterialPackageManager_02():
     '''Populate wrapper.
     '''
 
@@ -41,7 +41,7 @@ def test_ZaggedPitchClassMaterialPackageMaker_02():
             '[1, 1, 2, 3] '
             'q'
             )
-        mpp = scoremanager.materialpackagemakers.ZaggedPitchClassMaterialPackageMaker(
+        mpp = scoremanager.materialpackagemanagers.ZaggedPitchClassMaterialPackageManager(
             'materials.testzagged')
         assert mpp.directory_contents == ['__init__.py', 'tags.py', 'user_input.py']
         user_input_wrapper = scoremanager.editors.UserInputWrapper([
