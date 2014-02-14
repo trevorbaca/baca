@@ -1,4 +1,4 @@
-from experimental import *
+import scoremanager
 
 
 def test_score_manager_environment_01():
