@@ -1,35 +1,34 @@
 #! /usr/bin/env python
+r'''Name: test-next
+Author: Trevor Baca
+Creation: 2008-11-29
+Revision: 2
 
-###  Name: test-next
-###  Author: Trevor Baca
-###  Creation: 2008-11-29
-###  Revision: 2
-###  
-###  Summary: Some directory on the system is supposed to be designated
-###  as the LilyPond test directory under the name LILYPONDTEST.
-###  The LilyPond test directory should be used for opening
-###  small LilyPond test files with a couple of lines of code
-###  per file to test small bits of syntax, snippets from larger
-###  pieces, or examples from mail or the web.
-###  Files in the LilyPond test directory should all carry
-###  four-digit numeric names with the .ly extension appended,
-###  such as 0000.ly, 0001.ly, 0002.ly, etc.
-###
-###  This 'next' script inspects the LilyPond test directory
-###  and creates the next LilyPond test file in numeric order.
-###  Version specification is added automatically.
-###  The \include "english.ly" note entry specification is, too.
-###
-###  Boundary cases: when LILYPONDTEST contains no four-digit numeric 
-###  filenames, this 'next' script opens 0000.ly.
-###
-###  When LILYPONDTEST contains file 9999.ly, this 'next' script
-###  wraps around and opens 0000.ly; note that this means that
-###  this script *overwrites* files starting after the ten thousandth.
-###
-###  Nonnumeric files in LILYPONDTEST are allowed; 
-###  this script ignores them.
+Summary: Some directory on the system is supposed to be designated
+as the LilyPond test directory under the name LILYPONDTEST.
+The LilyPond test directory should be used for opening
+small LilyPond test files with a couple of lines of code
+per file to test small bits of syntax, snippets from larger
+pieces, or examples from mail or the web.
+Files in the LilyPond test directory should all carry
+four-digit numeric names with the .ly extension appended,
+such as 0000.ly, 0001.ly, 0002.ly, etc.
 
+This 'next' script inspects the LilyPond test directory
+and creates the next LilyPond test file in numeric order.
+Version specification is added automatically.
+The \include "english.ly" note entry specification is, too.
+
+Boundary cases: when LILYPONDTEST contains no four-digit numeric 
+filenames, this 'next' script opens 0000.ly.
+
+When LILYPONDTEST contains file 9999.ly, this 'next' script
+wraps around and opens 0000.ly; note that this means that
+this script *overwrites* files starting after the ten thousandth.
+
+Nonnumeric files in LILYPONDTEST are allowed; 
+this script ignores them.
+'''
 import os
 import re
 
@@ -54,7 +53,6 @@ next_lilypond_filename = os.path.join(LILYPONDTEST, next_lilypond_filename)
 
 start_directory = os.path.abspath('.')
 os.chdir(LILYPONDTEST)
-#lilypond_version = os.popen('lily-version').read()
 result = os.popen('lilypond --version').readlines()                             
 first_line = result[0]                                                          
 first_line = first_line.strip('\n')                                             

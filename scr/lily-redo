@@ -1,11 +1,12 @@
 #! /usr/bin/env python
-
-'''No equivalent in Abjad.'''
-
+r'''No equivalent in Abjad.
+'''
 import glob
 import os
 
+
 os.system('clear')
-glob_string = os.path.join('/', 'Users', 'trevorbaca', '.abjad', 'output', '*.ly')
+glob_string = os.path.join(
+    '/', 'Users', 'trevorbaca', '.abjad', 'output', '*.ly')
 last = glob.glob(glob_string)[-1]
 os.system('lily %s' % last)

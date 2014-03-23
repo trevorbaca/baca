@@ -1,9 +1,8 @@
 #! /usr/bin/env python
 import os
 import sys
-
-
 os.system('clear')
+
 
 path = '/Applications/LilyPond.app/Contents/Resources/bin/lilypond' 
 command = '{} -dno-point-and-click {}'

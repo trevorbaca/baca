@@ -1,8 +1,7 @@
 #! /usr/bin/env python
-# revision 1
-
 import os
 import re
+
 
 LILYPONDTEST = os.environ.get('LILYPONDTEST')
 pattern = re.compile('\d{4,4}.ly')
