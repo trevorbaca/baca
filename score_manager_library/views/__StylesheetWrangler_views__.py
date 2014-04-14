@@ -9,12 +9,20 @@ view_inventory=datastructuretools.TypedOrderedDict(
             'flamingo',
             iotools.View(
                 [
-                    'gebiete-miscellaneous (Gebiete)',
-                    'meters (Manifolds)',
-                    'traiettorie-header (Traiettorie inargentate)',
+                    'gebiete-miscellaneous.ily (Gebiete)',
+                    'meters.ily (Manifolds)',
+                    'traiettorie-header.ily (Traiettorie inargentate)',
                     ]
                 ),
             ),
-        ],
-    item_class=iotools.View,
+        (
+            'chocolate',
+            iotools.View(
+                [
+                    'clean-letter-14.ily (Abjad)',
+                    'clean-letter-16.ily (Abjad)',
+                    ]
+                ),
+            ),
+        ]
     )

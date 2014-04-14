@@ -3,5 +3,4 @@ import collections
 
 
 metadata = collections.OrderedDict([
-    ('StylesheetWrangler_view_name', 'flamingo'),
     ])
