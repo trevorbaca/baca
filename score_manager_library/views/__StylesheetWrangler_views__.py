@@ -6,6 +6,15 @@ from scoremanager import iotools
 view_inventory=datastructuretools.TypedOrderedDict(
     [
         (
+            'chocolate',
+            iotools.View(
+                [
+                    'clean-letter-14.ily (Abjad)',
+                    'clean-letter-16.ily (Abjad)',
+                    ]
+                ),
+            ),
+        (
             'flamingo',
             iotools.View(
                 [
@@ -16,12 +25,9 @@ view_inventory=datastructuretools.TypedOrderedDict(
                 ),
             ),
         (
-            'chocolate',
+            'traiettorie',
             iotools.View(
-                [
-                    'clean-letter-14.ily (Abjad)',
-                    'clean-letter-16.ily (Abjad)',
-                    ]
+                ['traiettorie*']
                 ),
             ),
         ]

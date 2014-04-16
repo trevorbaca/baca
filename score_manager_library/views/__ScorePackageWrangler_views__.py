@@ -6,9 +6,9 @@ from scoremanager import iotools
 view_inventory=datastructuretools.TypedOrderedDict(
     [
         (
-            'front cover',
+            'cary & sekka',
             iotools.View(
-                ['.*front-cover.pdf']
+                ['\xc4\x8c\xc3\xa1ry (2006)', 'Sekka (2007)']
                 ),
             ),
         ]
