@@ -8,7 +8,7 @@ command = '{} -dno-point-and-click {}'
 command = command.format(path, sys.argv[1])
 os.system(command)
 
-base_file_name, extension = os.path.splitext(sys.argv[1])
-pdf_file_name = base_file_name + '.pdf'
-command = 'open {}'.format(pdf_file_name)
-os.system(command)
+#base_file_name, extension = os.path.splitext(sys.argv[1])
+#pdf_file_name = base_file_name + '.pdf'
+#command = 'open {}'.format(pdf_file_name)
+#os.system(command)
