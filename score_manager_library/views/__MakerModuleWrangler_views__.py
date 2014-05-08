@@ -5,5 +5,11 @@ from scoremanager import iotools
 
 view_inventory=datastructuretools.TypedOrderedDict(
     [
+        (
+            'foo',
+            iotools.View(
+                ['betoerung score template (Bet\xc3\xb6rung)']
+                ),
+            ),
         ]
     )

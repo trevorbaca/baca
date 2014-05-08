@@ -7,7 +7,7 @@ metadata = collections.OrderedDict([
     ('DistributionFileWrangler_view_name', None),
     ('MakerModuleWrangler_view_name', None),
     ('MaterialPackageWrangler_view_name', None),
-    ('ScorePackageWrangler_view_name', '_test'),
+    ('ScorePackageWrangler_view_name', None),
     ('SegmentPackageWrangler_view_name', None),
     ('StylesheetWrangler_view_name', None),
     ])
