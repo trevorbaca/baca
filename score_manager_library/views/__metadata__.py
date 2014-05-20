@@ -5,6 +5,7 @@ import collections
 metadata = collections.OrderedDict([
     ('BuildFileWrangler_view_name', None),
     ('DistributionFileWrangler_view_name', None),
+    ('MakerFileWrangler_view_name', None),
     ('MakerModuleWrangler_view_name', None),
     ('MaterialPackageWrangler_view_name', None),
     ('ScorePackageWrangler_view_name', None),
