@@ -7,7 +7,7 @@ score_manager = scoremanager.core.ScoreManager(is_test=False)
 def test_score_manager_environment_01():
 
     input_ = 'q'
-    score_manager._run(pending_input=input_)
+    score_manager._run(input_=input_)
     contents = score_manager._transcript.contents
 
     assert '5: Chrysanthemums (1995)' in contents
