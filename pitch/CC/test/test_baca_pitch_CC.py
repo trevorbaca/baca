@@ -90,7 +90,7 @@ def test_baca_pitch_CC_08():
     r'''Test pitch range.
     '''
 
-    assert baca.pitch.CC.pitch_range == pitchtools.PitchRange(-39, 48)
+    assert baca.pitch.CC.pitch_range == pitchtools.PitchRange('[A0, C8]')
 
 
 def test_baca_pitch_CC_09():

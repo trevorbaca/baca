@@ -12,6 +12,6 @@ starting_partitions = [
     [[-10, -2, 5, 15, 25], [-1, 7, 18, 20], [0, 28, 33]],
     [[-12, 17, 27, 37], [-1, 7, 18, 21], [2, 10, 16, 20]]]
 
-total_range = pitchtools.PitchRange((-39, 'inclusive'), (48, 'inclusive'))
+total_range = pitchtools.PitchRange('[A0, C8]')
 
 CC = ConstellationCircuit(starting_partitions, total_range)

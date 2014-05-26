@@ -11,4 +11,4 @@ def test_score_manager_environment_01():
     contents = score_manager._transcript.contents
 
     assert '5: Chrysanthemums (1995)' in contents
-    assert '22: Zeit (1998)' in contents
+    assert '21: Zeit (1998)' in contents
