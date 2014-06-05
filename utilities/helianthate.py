@@ -23,8 +23,8 @@ def helianthate(sequence, outer_index_of_rotation, inner_index_of_rotation):
         message = 'function not defined for score components.'
         raise TypeError(message)
 
-    start = sequence[:]
-    result = sequence[:]
+    start = list(sequence[:])
+    result = list(sequence[:])
 
     assert isinstance(outer_index_of_rotation, int), repr(
         outer_index_of_rotation)

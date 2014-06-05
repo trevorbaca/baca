@@ -1,9 +1,9 @@
 from abjad.tools import systemtools
 
+
 systemtools.ImportManager.import_structured_package(
     __path__[0], 
     globals(), 
-    package_root_name='baca',
     )
 
 ## must be done manually because C, CC, D are neither functions nor classes
