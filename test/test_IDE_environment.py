@@ -1,10 +1,10 @@
 # -*- encoding: utf-8 -*-
 from abjad import *
 import scoremanager
-score_manager = scoremanager.core.AbjadIDE(is_test=False)
+score_manager = scoremanager.idetools.AbjadIDE(is_test=False)
 
 
-def test_score_manager_environment_01():
+def test_IDE_environment_01():
 
     input_ = 'q'
     score_manager._run(input_=input_)

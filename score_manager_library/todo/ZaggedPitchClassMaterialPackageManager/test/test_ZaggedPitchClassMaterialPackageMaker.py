@@ -3,7 +3,7 @@ from experimental import *
 pytest.skip('REMOVE ME')
 
 
-def test_ZaggedPitchClassMaterialPackageManager_01():
+def test_ZaggedPitchClassMaterialPackageMaker_01():
     '''Empty wrapper.
     '''
 
@@ -27,7 +27,7 @@ def test_ZaggedPitchClassMaterialPackageManager_01():
         assert not studio.package_exists('materials.testzagged')
 
 
-def test_ZaggedPitchClassMaterialPackageManager_02():
+def test_ZaggedPitchClassMaterialPackageMaker_02():
     '''Populate wrapper.
     '''
 

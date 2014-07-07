@@ -2,7 +2,7 @@
 import baca
 
 
-def test_repeat_runs_in_sequence_to_count_01():
+def test_music_repeat_runs_in_sequence_to_count_01():
 
     sequence_1 = range(20)
     sequence_2 = baca.music.repeat_runs_in_sequence_to_count(sequence_1, [(0, 2, 10)])
@@ -10,7 +10,7 @@ def test_repeat_runs_in_sequence_to_count_01():
     assert sequence_2 == [0, 1, (0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1), 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19]
 
 
-def test_repeat_runs_in_sequence_to_count_02():
+def test_music_repeat_runs_in_sequence_to_count_02():
 
     sequence_1 = range(20)
     sequence_2 = baca.music.repeat_runs_in_sequence_to_count(sequence_1, [(0, 2, 5), (10, 2, 5)])
@@ -18,7 +18,7 @@ def test_repeat_runs_in_sequence_to_count_02():
     assert sequence_2 == [0, 1, (0, 1, 0, 1, 0, 1, 0, 1, 0, 1), 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, (10, 11, 10, 11, 10, 11, 10, 11, 10, 11), 12, 13, 14, 15, 16, 17, 18, 19]
 
 
-def test_repeat_runs_in_sequence_to_count_03():
+def test_music_repeat_runs_in_sequence_to_count_03():
 
     sequence_1 = range(20)
     sequence_2 = baca.music.repeat_runs_in_sequence_to_count(sequence_1, [(18, 4, 2)])
@@ -26,7 +26,7 @@ def test_repeat_runs_in_sequence_to_count_03():
     assert sequence_2 == [0, 1, (18, 19, 0, 1, 18, 19, 0, 1), 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19]
 
 
-def test_repeat_runs_in_sequence_to_count_04():
+def test_music_repeat_runs_in_sequence_to_count_04():
 
     sequence_1 = range(20)
     sequence_2 = baca.music.repeat_runs_in_sequence_to_count(sequence_1, [(18, 8, 2)])

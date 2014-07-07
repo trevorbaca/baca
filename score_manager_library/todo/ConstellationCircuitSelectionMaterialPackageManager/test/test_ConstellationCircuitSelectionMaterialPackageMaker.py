@@ -3,7 +3,7 @@ from experimental import *
 pytest.skip('FIXME: CC mpm not included in list of mp makers.')
 
 
-def test_ConstellationCircuitSelectionMaterialPackageManager_01():
+def test_ConstellationCircuitSelectionMaterialPackageMaker_01():
 
     score_manager = scoremanager.score.AbjadIDE()
     assert not score_manager.configuration.packagesystem_path_exists(
