@@ -24,7 +24,7 @@ def rotate_nested(l, outer, inner):
 
     '''
 
-    assert isinstance(l, list)
+    assert isinstance(l, (list, tuple))
     assert all([isinstance(x, list) for x in l])
     assert isinstance(inner, (int, long))
     assert isinstance(outer, (int, long))

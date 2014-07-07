@@ -15,14 +15,15 @@ class ZaggedPitchClassMaker(AbjadObject):
     ### CLASS ATTRIBUTES ###
 
     __slots__ = (
-        '_division_counts',
-        '_grouping_cells',
+        '_division_cells',
+        '_grouping_counts',
         '_pc_cells',
         )
 
     ### INITIALIZER ###
 
     def __init__(
+        self,
         pc_cells=None,
         division_cells=None,
         grouping_counts=None,
@@ -159,6 +160,11 @@ class ZaggedPitchClassMaker(AbjadObject):
         from scoremanager import idetools
         return systemtools.AttributeManifest(
             systemtools.AttributeDetail(
+                name='pc_cells',
+                command='pc',
+                editor=idetools.getters.get_lists,
+                ),
+            systemtools.AttributeDetail(
                 name='division_cells',
                 command='dc',
                 editor=idetools.getters.get_lists,
@@ -167,11 +173,6 @@ class ZaggedPitchClassMaker(AbjadObject):
                 name='grouping_counts',
                 command='gc',
                 editor=idetools.getters.get_nonnegative_integers,
-                ),
-            systemtools.AttributeDetail(
-                name='pc_cells',
-                command='pc',
-                editor=idetools.getters.get_lists,
                 ),
             )
 
