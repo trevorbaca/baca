@@ -3,7 +3,6 @@ import baca
 from experimental import *
 
 
-# TODO: make into class
 def make_zagged_pitch_classes(pc_cells, division_cells, grouping_counts):
     from experimental.tools import musicexpressiontools
     pc_cells = baca.utilities.helianthate(pc_cells, -1, 1)
