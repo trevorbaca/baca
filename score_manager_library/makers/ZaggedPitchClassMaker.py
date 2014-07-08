@@ -1,14 +1,10 @@
 # -*- encoding: utf-8 -*-
-from abjad.tools import datastructuretools
-from abjad.tools import durationtools
-from abjad.tools import lilypondfiletools
-from abjad.tools import scoretools
-from abjad.tools.abctools.AbjadObject import AbjadObject
+from abjad import *
 from scoremanager import idetools
 import baca
 
 
-class ZaggedPitchClassMaker(AbjadObject):
+class ZaggedPitchClassMaker(abctools.AbjadObject):
     r'''Zagged pitch-class maker.
     '''
 
@@ -71,9 +67,10 @@ class ZaggedPitchClassMaker(AbjadObject):
             cyclic=True, 
             overhang=True,
             )
-        material = datastructuretools.CyclicPayloadTree(pc_cells)
-        material = datastructuretools.StatalServer(material)
-        return material
+        #material = datastructuretools.CyclicPayloadTree(pc_cells)
+        #material = datastructuretools.StatalServer(material)
+        #return material
+        return pc_cells
 
     def __eq__(self, expr):
         r'''Is true when `expr` is a zagged pitch-class with type and 
