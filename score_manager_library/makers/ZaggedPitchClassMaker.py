@@ -67,10 +67,11 @@ class ZaggedPitchClassMaker(abctools.AbjadObject):
             cyclic=True, 
             overhang=True,
             )
-        #material = datastructuretools.CyclicPayloadTree(pc_cells)
-        #material = datastructuretools.StatalServer(material)
-        #return material
-        return pc_cells
+        material = pitchtools.PitchClassTree(
+            items=pc_cells,
+            item_class=pitchtools.NumberedPitchClass,
+            )
+        return material
 
     def __eq__(self, expr):
         r'''Is true when `expr` is a zagged pitch-class with type and 
@@ -88,66 +89,6 @@ class ZaggedPitchClassMaker(abctools.AbjadObject):
         from abjad.tools import systemtools
         hash_values = systemtools.StorageFormatManager.get_hash_values(self)
         return hash(hash_values)
-
-    def __illustrate__(self, **kwargs):
-        r'''Illustrates zagged pitch-class maker.
-
-        Returns LilyPond file.
-        '''
-        statal_server = self()
-        material = statal_server.cyclic_tree
-        pcs = list(material.iterate_payload())
-        leaves = scoretools.make_leaves(pcs, [durationtools.Duration(1, 8)])
-        voice = scoretools.Voice(leaves)
-        staff = scoretools.Staff([voice])
-        score = scoretools.Score([staff])
-        lilypond_file = lilypondfiletools.make_basic_lilypond_file(score)
-        configuration = idetools.Configuration()
-        stylesheet = os.path.join(
-            configuration.abjad_stylesheets_directory,
-            'rhythm-letter-16.ly',
-            )
-        lilypond_file.file_initial_user_includes.append(stylesheet)
-        voice.consists_commands.append('Horizontal_bracket_engraver')
-        for level in (1, 2):
-            level_sizes = []
-            for x in material.iterate_at_level(level):
-                size = len(list(x.iterate_payload()))
-                level_sizes.append(size)
-            for part in sequencetools.partition_sequence_by_counts(
-                voice.select_leaves(), 
-                level_sizes, 
-                cyclic=False, 
-                overhang=False,
-                ):
-                spannertools.HorizontalBracketSpanner(part)
-        current_group = 0
-        for leaf in voice.select_leaves():
-            spanner_classes = spannertools.HorizontalBracketSpanner
-            brackets = inspect_(leaf).get_spanners(spanner_classes)
-            brackets = tuple(brackets)
-            if brackets[0][0] is leaf:
-                if brackets[1][0] is leaf:
-                    string = r'\bold {{ {} }}'.format(current_group)
-                    markup = markuptools.Markup(string, Up)
-                    markup.attach(leaf)
-                    current_group += 1
-        bar_line = score.add_double_bar()
-        score.override.bar_line.stencil = False
-        score.override.flag.stencil = False
-        score.override.stem.stencil = False
-        score.override.text_script.staff_padding = 3
-        score.override.time_signature.stencil = False
-        if 'title' in kwargs:
-            markup = markuptools.Markup(kwargs.get('title'))
-            lilypond_file.header_block.title = markup
-        if 'subtitle' in kwargs:
-            markup = markuptools.Markup(kwargs.get('subtitle'))
-            lilypond_file.header_block.subtitle = markup
-        command = marktools.LilyPondCommandMark('accidentalStyle forget')
-        lilypond_file.layout_block.append(command)
-        score.override.note_head.color = 'red'
-        return lilypond_file
 
     ### PRIVATE PROPERTIES ###
 
