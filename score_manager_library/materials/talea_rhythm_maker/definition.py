@@ -13,11 +13,6 @@ talea_rhythm_maker = rhythmmakertools.TaleaRhythmMaker(
         beam_each_division=True,
         beam_divisions_together=True,
         ),
-    burnish_specifier=rhythmmakertools.BurnishSpecifier(
-        burnish_divisions=False,
-        burnish_output=False,
-        lefts=(),
-        ),
     duration_spelling_specifier=rhythmmakertools.DurationSpellingSpecifier(
         decrease_durations_monotonically=True,
         forbidden_written_duration=durationtools.Duration(1, 2),
