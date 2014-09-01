@@ -71,7 +71,6 @@ class ZaggedPitchClassMaker(abctools.AbjadObject):
             items=pc_cells,
             item_class=pitchtools.NumberedPitchClass,
             )
-        material = [material]
         return material
 
     def __eq__(self, expr):
