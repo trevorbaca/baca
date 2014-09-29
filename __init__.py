@@ -1,3 +1,4 @@
+import library
 import music
 import pitch
 import rhythm

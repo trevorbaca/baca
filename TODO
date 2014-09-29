@@ -22,3 +22,5 @@
 9.  Create public read-only properties for rhythm-maker input variables.
 
 10. Make all rhythm-maker properties read-only.
+
+11. Eventually move baca/rhythm and baca/pitch into baca/library.
