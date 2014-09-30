@@ -36,15 +36,18 @@ class ZaggedPitchClassMaker(abctools.AbjadObject):
             -1, 
             1,
             )
-        division_ratios = baca.utilities.helianthate(
-            self.division_ratios, 
-            -1, 
-            1,
-            )
-        division_ratios = sequencetools.flatten_sequence(
-            division_ratios, 
-            depth=1,
-            )
+        if self.division_ratios is None:
+            division_ratios = [[1]]
+        else:
+            division_ratios = baca.utilities.helianthate(
+                self.division_ratios, 
+                -1, 
+                1,
+                )
+            division_ratios = sequencetools.flatten_sequence(
+                division_ratios, 
+                depth=1,
+                )
         division_ratios = datastructuretools.CyclicTuple(division_ratios)
         tmp = []
         for i, pc_segment in enumerate(pc_cells):
@@ -54,16 +57,17 @@ class ZaggedPitchClassMaker(abctools.AbjadObject):
                 )
             tmp.extend(parts)
         pc_cells = tmp
+        grouping_counts = self.grouping_counts or [1]
         pc_cells = sequencetools.partition_sequence_by_counts(
             pc_cells, 
-            self.grouping_counts, 
+            grouping_counts, 
             cyclic=True, 
             overhang=True,
             )
         pc_cells = [sequencetools.join_subsequences(x) for x in pc_cells]
         pc_cells = sequencetools.partition_sequence_by_counts(
             pc_cells, 
-            self.grouping_counts, 
+            grouping_counts, 
             cyclic=True, 
             overhang=True,
             )
