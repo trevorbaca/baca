@@ -11,7 +11,7 @@ class ZaggedPitchClassMaker(abctools.AbjadObject):
     ### CLASS ATTRIBUTES ###
 
     __slots__ = (
-        '_division_cells',
+        '_division_ratios',
         '_grouping_counts',
         '_pc_cells',
         )
@@ -21,11 +21,11 @@ class ZaggedPitchClassMaker(abctools.AbjadObject):
     def __init__(
         self,
         pc_cells=None,
-        division_cells=None,
+        division_ratios=None,
         grouping_counts=None,
         ):
         self._pc_cells = pc_cells
-        self._division_cells = division_cells
+        self._division_ratios = division_ratios
         self._grouping_counts = grouping_counts
 
     ### SPECIAL METHODS ###
@@ -36,21 +36,21 @@ class ZaggedPitchClassMaker(abctools.AbjadObject):
             -1, 
             1,
             )
-        division_cells = baca.utilities.helianthate(
-            self.division_cells, 
+        division_ratios = baca.utilities.helianthate(
+            self.division_ratios, 
             -1, 
             1,
             )
-        division_cells = sequencetools.flatten_sequence(
-            division_cells, 
+        division_ratios = sequencetools.flatten_sequence(
+            division_ratios, 
             depth=1,
             )
-        division_cells = datastructuretools.CyclicTuple(division_cells)
+        division_ratios = datastructuretools.CyclicTuple(division_ratios)
         tmp = []
         for i, pc_segment in enumerate(pc_cells):
             parts = sequencetools.partition_sequence_by_ratio_of_lengths(
                 pc_segment, 
-                division_cells[i],
+                division_ratios[i],
                 )
             tmp.extend(parts)
         pc_cells = tmp
@@ -103,8 +103,8 @@ class ZaggedPitchClassMaker(abctools.AbjadObject):
                 editor=idetools.getters.get_lists,
                 ),
             systemtools.AttributeDetail(
-                name='division_cells',
-                command='dc',
+                name='division_ratios',
+                command='dr',
                 editor=idetools.getters.get_lists,
                 ),
             systemtools.AttributeDetail(
@@ -118,7 +118,7 @@ class ZaggedPitchClassMaker(abctools.AbjadObject):
     def _input_demo_values(self):
         return [
         ('pc_cells', [[0, 7, 2, 10], [9, 6, 1, 8], [5, 4, 2, 11, 10, 9]]),
-        ('division_cells', 
+        ('division_ratios', 
             [[[1], [1], [1], [1, 1]], [[1], [1], [1], [1, 1, 1], [1, 1, 1]]]),
         ('grouping_counts', [1, 1, 2, 3]),
         ]
@@ -128,12 +128,12 @@ class ZaggedPitchClassMaker(abctools.AbjadObject):
     ### PUBLIC PROPERTIES ###
 
     @property
-    def division_cells(self):
+    def division_ratios(self):
         r'''Gets division cells of maker.
 
         Returns list of lists.
         '''
-        return self._division_cells
+        return self._division_ratios
 
     @property
     def grouping_counts(self):
