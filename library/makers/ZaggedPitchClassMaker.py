@@ -6,6 +6,13 @@ import baca
 
 class ZaggedPitchClassMaker(abctools.AbjadObject):
     r'''Zagged pitch-class maker.
+
+    Object-oriented extension to helianthation.
+
+    Same as helianthation when `division_ratios` and `grouping_counts` are
+    none.
+
+    Extensions provided by `division_ratios` and `grouping_counts`.
     '''
 
     ### CLASS ATTRIBUTES ###
@@ -36,9 +43,12 @@ class ZaggedPitchClassMaker(abctools.AbjadObject):
             -1, 
             1,
             )
+        prototype = (tuple, mathtools.Ratio)
         if self.division_ratios is None:
             division_ratios = [[1]]
-        else:
+        elif all(isinstance(_, prototype) for _ in self.division_ratios):
+            division_ratios = self.division_ratios
+        elif all(isinstance(_, list) for _ in self.division_ratios):
             division_ratios = baca.utilities.helianthate(
                 self.division_ratios, 
                 -1, 
@@ -48,15 +58,16 @@ class ZaggedPitchClassMaker(abctools.AbjadObject):
                 division_ratios, 
                 depth=1,
                 )
+        division_ratios = [mathtools.Ratio(_) for _ in division_ratios]
         division_ratios = datastructuretools.CyclicTuple(division_ratios)
-        tmp = []
-        for i, pc_segment in enumerate(pc_cells):
+        pc_cells_copy = pc_cells[:]
+        pc_cells = []
+        for i, pc_segment in enumerate(pc_cells_copy):
             parts = sequencetools.partition_sequence_by_ratio_of_lengths(
                 pc_segment, 
                 division_ratios[i],
                 )
-            tmp.extend(parts)
-        pc_cells = tmp
+            pc_cells.extend(parts)
         grouping_counts = self.grouping_counts or [1]
         pc_cells = sequencetools.partition_sequence_by_counts(
             pc_cells, 
@@ -64,13 +75,14 @@ class ZaggedPitchClassMaker(abctools.AbjadObject):
             cyclic=True, 
             overhang=True,
             )
-        pc_cells = [sequencetools.join_subsequences(x) for x in pc_cells]
-        pc_cells = sequencetools.partition_sequence_by_counts(
-            pc_cells, 
-            grouping_counts, 
-            cyclic=True, 
-            overhang=True,
-            )
+        # this block was uncommented during krummzeit
+        #pc_cells = [sequencetools.join_subsequences(x) for x in pc_cells]
+        #pc_cells = sequencetools.partition_sequence_by_counts(
+        #    pc_cells, 
+        #    grouping_counts, 
+        #    cyclic=True, 
+        #    overhang=True,
+        #    )
         material = pitchtools.PitchClassTree(
             items=pc_cells,
             item_class=pitchtools.NumberedPitchClass,
@@ -109,7 +121,7 @@ class ZaggedPitchClassMaker(abctools.AbjadObject):
             systemtools.AttributeDetail(
                 name='division_ratios',
                 command='dr',
-                editor=idetools.getters.get_lists,
+                editor=idetools.getters.get_list,
                 ),
             systemtools.AttributeDetail(
                 name='grouping_counts',
