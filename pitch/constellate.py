@@ -11,10 +11,11 @@ def constellate(pitch_number_lists, pitch_range, flatten=True):
 
     transposition_list = []
     for pnl in pitch_number_lists:
-        transpositions = pitchtools.list_octave_transpositions_of_pitch_carrier_within_pitch_range(pnl, pitch_range)
+        transpositions = pitch_range.list_octave_transpositions(pnl)
         transposition_list.append(transpositions)
 
-    result = list(sequencetools.yield_outer_product_of_sequences(transposition_list))
+    result = sequencetools.yield_outer_product_of_sequences(transposition_list)
+    result = list(result)
 
     if flatten:
         for i, part in enumerate(result):

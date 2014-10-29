@@ -3,7 +3,6 @@ from abjad.tools import datastructuretools
 from abjad.tools import sequencetools
 
 
-# TODO: remove from public API altogether
 def insert_and_transpose_nested_subruns_in_pitch_class_number_list(
     notes,
     subrun_tokens,
@@ -13,10 +12,11 @@ def insert_and_transpose_nested_subruns_in_pitch_class_number_list(
 
     ::
 
+        >>> import baca
         >>> notes = [Note(p, (1, 4)) for p in [0, 2, 7, 9, 5, 11, 4]]
         >>> subrun_tokens = [(0, [2, 4]), (4, [3, 1])]
-        >>> pitchtools.insert_and_transpose_nested_subruns_in_pitch_class_number_list(
-        ... notes, subrun_tokens)
+        >>> baca.music.insert_and_transpose_nested_subruns_in_pitch_class_number_list(
+        ...     notes, subrun_tokens)
 
         >>> t = []
         >>> for x in notes:
@@ -84,7 +84,8 @@ def insert_and_transpose_nested_subruns_in_pitch_class_number_list(
         pairs = _make_index_length_pairs(subrun_token)
         for anchor_index, subrun_length in pairs:
             anchor_note = notes[anchor_index % len_notes]
-            anchor_pitch = pitchtools.get_named_pitch_from_pitch_carrier(anchor_note)
+            anchor_pitch = pitchtools.NamedPitch.from_pitch_carrier(
+                anchor_note)
             anchor_written_duration = anchor_note.written_duration
             source_start_index = anchor_index + 1
             source_stop_index = source_start_index + subrun_length + 1
@@ -107,8 +108,8 @@ def _get_intervals_in_subrun(subrun_source):
     result = [0]
     for first, second in sequencetools.iterate_sequence_nwise(
         subrun_source):
-        first_pitch = pitchtools.get_named_pitch_from_pitch_carrier(first)
-        second_pitch = pitchtools.get_named_pitch_from_pitch_carrier(second)
+        first_pitch = pitchtools.NamedPitch.from_pitch_carrier(first)
+        second_pitch = pitchtools.NamedPitch.from_pitch_carrier(second)
         interval = pitchtools.NumberedPitch(second_pitch).pitch_number - \
             pitchtools.NumberedPitch(first_pitch).pitch_number
         result.append(interval + result[-1])
