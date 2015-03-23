@@ -17,10 +17,4 @@
     contexttools, marktools, timerelationtools in all baca (and all scores) 
     and replace.
 
-8.  Store rhythm-maker iterable variables as tuples instead of lists.
-
-9.  Create public read-only properties for rhythm-maker input variables.
-
-10. Make all rhythm-maker properties read-only.
-
-11. Eventually move baca/rhythm and baca/pitch into baca/library.
+8.  Eventually move baca/rhythm and baca/pitch into baca/library.
