@@ -131,9 +131,13 @@ def test_ZaggedPitchClassMaker_02():
                 [
                     pitchtools.NumberedPitchClass(3),
                     pitchtools.NumberedPitchClass(4),
+                    ],
+                [
                     pitchtools.NumberedPitchClass(4),
                     pitchtools.NumberedPitchClass(3),
                     ],
+                ],
+            [
                 [
                     pitchtools.NumberedPitchClass(2),
                     pitchtools.NumberedPitchClass(0),
@@ -145,6 +149,8 @@ def test_ZaggedPitchClassMaker_02():
                     pitchtools.NumberedPitchClass(1),
                     pitchtools.NumberedPitchClass(2),
                     pitchtools.NumberedPitchClass(0),
+                    ],
+                [
                     pitchtools.NumberedPitchClass(3),
                     pitchtools.NumberedPitchClass(4),
                     ],
@@ -154,10 +160,14 @@ def test_ZaggedPitchClassMaker_02():
                     pitchtools.NumberedPitchClass(4),
                     pitchtools.NumberedPitchClass(3),
                     ],
+                ],
+            [
                 [
                     pitchtools.NumberedPitchClass(0),
                     pitchtools.NumberedPitchClass(1),
                     pitchtools.NumberedPitchClass(2),
+                    ],
+                [
                     pitchtools.NumberedPitchClass(2),
                     pitchtools.NumberedPitchClass(0),
                     pitchtools.NumberedPitchClass(1),
@@ -173,6 +183,8 @@ def test_ZaggedPitchClassMaker_02():
                 [
                     pitchtools.NumberedPitchClass(4),
                     pitchtools.NumberedPitchClass(3),
+                    ],
+                [
                     pitchtools.NumberedPitchClass(1),
                     pitchtools.NumberedPitchClass(2),
                     pitchtools.NumberedPitchClass(0),
