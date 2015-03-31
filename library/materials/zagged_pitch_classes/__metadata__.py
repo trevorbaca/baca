@@ -1,7 +1,9 @@
 # -*- encoding: utf-8 -*-
-import collections
+from abjad import *
 
 
-metadata = collections.OrderedDict([
-    ('output_material_class_name', 'PitchClassTree'),
-    ])
+metadata = datastructuretools.TypedOrderedDict(
+    [
+        ('output_material_class_name', 'PitchClassTree'),
+        ]
+    )

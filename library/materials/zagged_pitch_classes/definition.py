@@ -9,7 +9,7 @@ zagged_pitch_classes = baca.makers.ZaggedPitchClassMaker(
         [3, 5, 6, 7],
         [9, 10, 0, 8],
         ),
-    division_cells=(
+    division_ratios=(
         [
             [1],
             [1],
