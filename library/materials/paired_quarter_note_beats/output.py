@@ -5,7 +5,7 @@ from abjad.tools import rhythmmakertools
 from experimental.tools import makertools
 
 
-quarter_note_beat_groups = makertools.BeatGroupDivisionMaker(
+paired_quarter_note_beats = makertools.BeatGroupDivisionMaker(
     beat_grouper=rhythmmakertools.BeatGrouper(
         counts=[2],
         fuse_remainder=True,
