@@ -2,4 +2,4 @@
 from experimental.tools import makertools
 
 
-measure_divisions = makertools.DivisionMaker()
+full_measure_divisions = makertools.DivisionMaker()
