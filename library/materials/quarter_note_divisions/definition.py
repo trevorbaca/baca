@@ -3,7 +3,7 @@ from abjad import *
 from experimental import *
 
 
-quarter_divisions = makertools.DivisionMaker(
+quarter_note_divisions = makertools.DivisionMaker(
     cyclic=True,
     pattern=[(1, 4)],
     pattern_rotation_index=0,
