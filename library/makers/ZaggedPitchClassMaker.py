@@ -23,6 +23,8 @@ class ZaggedPitchClassMaker(abctools.AbjadObject):
         '_pc_cells',
         )
 
+    _call_before_persisting_to_disk = True
+
     ### INITIALIZER ###
 
     def __init__(
