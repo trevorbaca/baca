@@ -6,7 +6,7 @@ metadata = datastructuretools.TypedOrderedDict(
     [
         (
             'output_material_class_name',
-            'DuratedBeatMaker',
+            'BeatGroupDivisionMaker',
             ),
         ]
     )
