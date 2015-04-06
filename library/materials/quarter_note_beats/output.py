@@ -8,6 +8,7 @@ from experimental.tools import makertools
 quarter_note_beats = makertools.BeatGroupDivisionMaker(
     beat_grouper=rhythmmakertools.BeatGrouper(
         counts=[1],
+        fuse_assignable_total_duration=False,
         fuse_remainder=False,
         remainder_direction=Right,
         ),
