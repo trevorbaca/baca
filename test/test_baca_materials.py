@@ -10,7 +10,7 @@ from abjad.tools import systemtools
 boilerplate_path = ide.idetools.Configuration().boilerplate_directory
 boilerplate_path = os.path.join(boilerplate_path, '__output_material__.py')
 
-materials_path = os.path.join(baca.library.__path__[0], 'materials')
+materials_path = os.path.join(baca.__path__[0], 'materials')
 abbreviations_path = os.path.join(materials_path, 'abbreviations.py')
 miscellaneous_materials_path = os.path.join(materials_path, 'miscellaneous.py')
 

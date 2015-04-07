@@ -8,7 +8,7 @@ def test_ZaggedPitchClassMaker_01():
     and grouping counts are both none.
     '''
 
-    maker = baca.library.makers.ZaggedPitchClassMaker(
+    maker = baca.makers.ZaggedPitchClassMaker(
         pc_cells=[
             [0, 1, 2],
             [3, 4],
@@ -107,7 +107,7 @@ def test_ZaggedPitchClassMaker_02():
     r'''Groups helianthated cells.
     '''
 
-    maker = baca.library.makers.ZaggedPitchClassMaker(
+    maker = baca.makers.ZaggedPitchClassMaker(
         pc_cells=[
             [0, 1, 2],
             [3, 4],
@@ -199,7 +199,7 @@ def test_ZaggedPitchClassMaker_03():
     division. Each cell is of length two after division.
     '''
 
-    maker = baca.library.makers.ZaggedPitchClassMaker(
+    maker = baca.makers.ZaggedPitchClassMaker(
         pc_cells=[
             [0, 1, 2, 3],
             [4, 5, 6, 7],
