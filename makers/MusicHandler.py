@@ -22,13 +22,13 @@ class MusicHandler(abctools.AbjadObject):
         ::
 
             >>> print(format(handler))
-            baca.library.makers.MusicHandler(
-                scope=baca.library.makers.SimpleScope(
+            baca.makers.MusicHandler(
+                scope=baca.makers.SimpleScope(
                     context_name='Violin Music Voice',
                     stages=(1, 4),
                     ),
                 specifiers=[
-                    baca.library.makers.DisplacementSpecifier(
+                    baca.makers.DisplacementSpecifier(
                         displacements=datastructuretools.CyclicTuple(
                             [0, 0, 0, 0, 1, 1, 1, 1]
                             ),
@@ -72,7 +72,7 @@ class MusicHandler(abctools.AbjadObject):
             ::
 
                 >>> print(format(handler.scope))
-                baca.library.makers.SimpleScope(
+                baca.makers.SimpleScope(
                     context_name='Violin Music Voice',
                     stages=(1, 4),
                     )

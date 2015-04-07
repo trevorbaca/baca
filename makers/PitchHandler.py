@@ -17,13 +17,13 @@ class PitchHandler(abctools.AbjadObject):
         ::
 
             >>> print(format(handler))
-            baca.library.makers.PitchHandler(
-                scope=baca.library.makers.CompoundScope(
-                    baca.library.makers.SimpleScope(
+            baca.makers.PitchHandler(
+                scope=baca.makers.CompoundScope(
+                    baca.makers.SimpleScope(
                         context_name='Flute Music Voice',
                         stages=(1, 4),
                         ),
-                    baca.library.makers.SimpleScope(
+                    baca.makers.SimpleScope(
                         context_name='Piano Music Voice',
                         stages=(1, 4),
                         )
@@ -66,12 +66,12 @@ class PitchHandler(abctools.AbjadObject):
             ::
 
                 >>> print(format(handler.scope))
-                baca.library.makers.CompoundScope(
-                    baca.library.makers.SimpleScope(
+                baca.makers.CompoundScope(
+                    baca.makers.SimpleScope(
                         context_name='Flute Music Voice',
                         stages=(1, 4),
                         ),
-                    baca.library.makers.SimpleScope(
+                    baca.makers.SimpleScope(
                         context_name='Piano Music Voice',
                         stages=(1, 4),
                         )

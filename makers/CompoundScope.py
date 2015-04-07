@@ -20,20 +20,20 @@ class CompoundScope(abctools.AbjadObject):
         ::
 
             >>> print(format(scope, 'storage'))
-            baca.library.makers.CompoundScope(
-                baca.library.makers.SimpleScope(
+            baca.makers.CompoundScope(
+                baca.makers.SimpleScope(
                     context_name='Piano Music Voice',
                     stages=(5, 9),
                     ),
-                baca.library.makers.SimpleScope(
+                baca.makers.SimpleScope(
                     context_name='Clarinet Music Voice',
                     stages=(7, 12),
                     ),
-                baca.library.makers.SimpleScope(
+                baca.makers.SimpleScope(
                     context_name='Violin Music Voice',
                     stages=(8, 12),
                     ),
-                baca.library.makers.SimpleScope(
+                baca.makers.SimpleScope(
                     context_name='Oboe Music Voice',
                     stages=(9, 12),
                     )

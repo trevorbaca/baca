@@ -19,7 +19,7 @@ class DisplacementSpecifier(abctools.AbjadObject):
         ::
             
             >>> print(format(specifier))
-            baca.library.makers.DisplacementSpecifier(
+            baca.makers.DisplacementSpecifier(
                 displacements=datastructuretools.CyclicTuple(
                     [0, 0, 0, 1, 1, 0, 0, 0, -1, 1, 1, 2, 2]
                     ),

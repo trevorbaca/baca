@@ -18,7 +18,7 @@ class SimpleScope(abctools.AbjadObject):
         ::
 
             >>> print(format(scope, 'storage'))
-            baca.library.makers.SimpleScope(
+            baca.makers.SimpleScope(
                 context_name='Violin Music Voice',
                 stages=(1, 9),
                 )
