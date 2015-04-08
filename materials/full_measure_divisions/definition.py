@@ -3,4 +3,4 @@ from abjad import *
 from experimental import *
 
 
-full_measure_divisions = makertools.DivisionMaker(pattern=None)
+full_measure_divisions = makertools.SplitDivisionMaker(pattern=None)
