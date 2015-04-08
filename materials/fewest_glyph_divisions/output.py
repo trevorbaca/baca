@@ -12,7 +12,7 @@ fewest_glyph_divisions = makertools.BeatGroupDivisionMaker(
         fuse_remainder=True,
         remainder_direction=Left,
         ),
-    beat_maker=rhythmmakertools.DuratedBeatMaker(
+    beat_maker=rhythmmakertools.SplitByBeatsDivisionCallback(
         compound_beat_duration=durationtools.Duration(3, 8),
         fuse_remainder=True,
         remainder_direction=Right,

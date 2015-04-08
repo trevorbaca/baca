@@ -7,7 +7,7 @@ quarter_note_beats = makertools.BeatGroupDivisionMaker(
     beat_grouper=rhythmmakertools.BeatGrouper(
         counts=[1],
     ),
-    beat_maker=rhythmmakertools.DuratedBeatMaker(
+    beat_maker=rhythmmakertools.SplitByBeatsDivisionCallback(
         compound_beat_duration=Duration(3, 8),
         fuse_remainder=True,
         remainder_direction=Right,
