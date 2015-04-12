@@ -9,7 +9,7 @@ sixteenth_note_accelerandi = rhythmmakertools.AccelerandoRhythmMaker(
         beam_divisions_together=False,
         use_feather_beams=True,
         ),
-    interpolation_specifier=rhythmmakertools.InterpolationSpecifier(
+    interpolation_specifiers=rhythmmakertools.InterpolationSpecifier(
         start_duration=durationtools.Duration(1, 16),
         stop_duration=durationtools.Duration(1, 32),
         written_duration=durationtools.Duration(1, 16),
