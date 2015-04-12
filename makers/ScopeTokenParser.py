@@ -1,4 +1,5 @@
 # -*- encoding: utf-8 -*-
+import collections
 from abjad import *
 
 
@@ -56,14 +57,22 @@ class ScopeTokenParser(abctools.AbjadObject):
 
     def _to_simple_scopes(self, scope_token):
         from baca import makers
-        assert isinstance(scope_token, tuple), scope_token
-        assert len(scope_token) == 2, scope_token
+        if not isinstance(scope_token, collections.Sequence):
+            message = 'scope token {!r} must be sequence.'
+            message = message.format(scope_token)
+            raise Exception(message)
+        if not len(scope_token) == 2:
+            message = 'scope {!r} must have length 2.'
+            message = message.format(scope_token)
+            raise Exception(message)
         context_names, stage_pairs = scope_token
-        assert isinstance(context_names, (str, list)), context_names
         if isinstance(context_names, str):
             context_names = [context_names]
-        assert isinstance(context_names, list), context_names
-        assert all(isinstance(_, str) for _ in context_names), context_names
+        if (not isinstance(context_names, collections.Sequence) or
+            not all(isinstance(_, str) for _ in context_names)):
+            message = 'context names {!r} must be sequence of strings.'
+            message = message.format(context_names)
+            raise Exception(message)
         if isinstance(stage_pairs, int):
             stage_pairs = [(stage_pairs, stage_pairs)]
         elif self._is_stage_pair(stage_pairs):
