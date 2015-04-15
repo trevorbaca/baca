@@ -9,12 +9,12 @@ class CompoundScope(abctools.AbjadObject):
     
         ::
 
-            >>> from baca import makers
-            >>> scope = makers.CompoundScope(
-            ...     makers.SimpleScope('Piano Music Voice', (5, 9)),
-            ...     makers.SimpleScope('Clarinet Music Voice', (7, 12)),
-            ...     makers.SimpleScope('Violin Music Voice', (8, 12)),
-            ...     makers.SimpleScope('Oboe Music Voice', (9, 12)),
+            >>> import baca
+            >>> scope = baca.makers.CompoundScope(
+            ...     baca.makers.SimpleScope('Piano Music Voice', (5, 9)),
+            ...     baca.makers.SimpleScope('Clarinet Music Voice', (7, 12)),
+            ...     baca.makers.SimpleScope('Violin Music Voice', (8, 12)),
+            ...     baca.makers.SimpleScope('Oboe Music Voice', (9, 12)),
             ...     )
 
         ::
