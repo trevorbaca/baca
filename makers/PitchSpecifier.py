@@ -1,9 +1,10 @@
 # -*- encoding: utf-8 -*-
+import collections
 from abjad import *
 
 
 class PitchSpecifier(abctools.AbjadObject):
-    r'''baca pitch specifier.
+    r'''Pitch specifier.
 
     ..  container:: example
 
@@ -36,6 +37,7 @@ class PitchSpecifier(abctools.AbjadObject):
 
     __slots__ = (
         '_counts',
+        '_mutates_score',
         '_operators',
         '_reverse',
         '_source',
@@ -57,6 +59,8 @@ class PitchSpecifier(abctools.AbjadObject):
         if counts is not None:
             assert mathtools.all_are_positive_integers(counts), repr(counts)
         self._counts = counts
+        # because chords sometimes replace notes
+        self._mutates_score = True
         if operators is not None:
             operators = tuple(operators)
         self._operators = operators
@@ -64,15 +68,21 @@ class PitchSpecifier(abctools.AbjadObject):
         self._reverse = reverse
         if isinstance(source, str):
             self._use_exact_spelling = True
-        elif (isinstance(source, (list, tuple)) and 
+        elif (isinstance(source, collections.Iterable) and 
             isinstance(source[0], pitchtools.NamedPitch)):
+            self._use_exact_spelling = True
+        elif (isinstance(source, collections.Iterable) and 
+            isinstance(source[0], pitchtools.Segment)):
+            self._use_exact_spelling = True
+        elif (isinstance(source, collections.Iterable) and 
+            isinstance(source[0], pitchtools.Set)):
             self._use_exact_spelling = True
         else:
             self._use_exact_spelling = False
         if source is not None:
             if isinstance(source, str):
                 source = source.split()
-            source = [pitchtools.NamedPitch(_) for _ in source]
+                source = [pitchtools.NamedPitch(_) for _ in source]
             source = datastructuretools.CyclicTuple(source)
         self._source = source
         assert isinstance(start_index, int), repr(start_index)
@@ -100,18 +110,35 @@ class PitchSpecifier(abctools.AbjadObject):
             current_logical_tie_index = 0
             for logical_tie in logical_ties:
                 index = absolute_start_index + current_logical_tie_index
-                pitch_class = source[index]
+                pitch_expression = source[index]
                 if self.operators:
                     for operator_ in self.operators:
-                        pitch_class = operator_(pitch_class)
-                if self._use_exact_spelling:
-                    pitch = pitch_class
-                    assert isinstance(pitch, pitchtools.NamedPitch), pitch
+                        pitch_expression = operator_(pitch_expression)
+                if isinstance(pitch_expression, pitchtools.Pitch):
+                    if self._use_exact_spelling:
+                        pitch = pitch_expression
+                        assert isinstance(pitch, pitchtools.NamedPitch), pitch
+                    else:
+                        pitch_expression = pitchtools.NumberedPitchClass(
+                            pitch_expression)
+                        pitch = pitchtools.NamedPitch(pitch_expression)
+                elif isinstance(pitch_expression, pitchtools.Segment):
+                    pitch = pitch_expression
                 else:
-                    pitch_class = pitchtools.NumberedPitchClass(pitch_class)
-                    pitch = pitchtools.NamedPitch(pitch_class)
+                    message = 'must be pitch or pitch segment: {!r}.'
+                    message = message.format(pitch_expression)
+                    raise Exception(message)
                 for note in logical_tie:
-                    note.written_pitch = pitch
+                    if isinstance(pitch, pitchtools.Pitch):
+                        note.written_pitch = pitch
+                    elif isinstance(pitch, pitchtools.PitchSegment):
+                        assert isinstance(pitch, collections.Iterable)
+                        chord = Chord(pitch, note.written_duration)
+                        mutate(note).replace(chord)
+                    else:
+                        message = 'must be pitch or pitch segment: {!r}.'
+                        message = message.format(pitch)
+                        raise Exception(message)
                 current_count -= 1
                 if current_count == 0:
                     current_logical_tie_index += 1
@@ -123,9 +150,9 @@ class PitchSpecifier(abctools.AbjadObject):
                 for note in logical_tie:
                     for operator_ in self.operators:
                         written_pitch = note.written_pitch
-                        pitch_class = written_pitch.numbered_pitch_class
-                        pitch_class = operator_(pitch_class)
-                        written_pitch = pitchtools.NamedPitch(pitch_class)
+                        pitch_expression = written_pitch.numbered_pitch_class
+                        pitch_expression = operator_(pitch_expression)
+                        written_pitch = pitchtools.NamedPitch(pitch_expression)
                         note.written_pitch = written_pitch
 
     ### PRIVATE PROPERTIES ###

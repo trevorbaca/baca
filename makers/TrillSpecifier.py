@@ -7,6 +7,8 @@ class TrillSpecifier(abctools.AbjadObject):
 
     ..  container:: example
 
+        **Example 1.** Trills all notes a quarter note in duratin or greater:
+
         ::
 
             >>> import baca
@@ -19,6 +21,7 @@ class TrillSpecifier(abctools.AbjadObject):
             
             >>> print(format(specifier))
             baca.makers.TrillSpecifier(
+                is_harmonic=False,
                 minimum_written_duration=durationtools.Duration(1, 4),
                 )
 
@@ -29,6 +32,8 @@ class TrillSpecifier(abctools.AbjadObject):
     __slots__ = (
         '_deposit_annotations',
         '_forbidden_annotations',
+        '_is_harmonic',
+        '_interval',
         '_maximum_written_duration',
         '_minimum_written_duration',
         '_pitch',
@@ -40,6 +45,8 @@ class TrillSpecifier(abctools.AbjadObject):
         self,
         deposit_annotations=None,
         forbidden_annotations=None,
+        interval=None,
+        is_harmonic=False,
         minimum_written_duration=None,
         maximum_written_duration=None,
         pitch=None,
@@ -53,6 +60,8 @@ class TrillSpecifier(abctools.AbjadObject):
             assert all(isinstance(_, str) for _ in forbidden_annotations)
             forbidden_annotations = tuple(forbidden_annotations)
         self._forbidden_annotations = forbidden_annotations
+        self._interval = interval
+        self._is_harmonic = bool(is_harmonic)
         if minimum_written_duration is not None:
             minimum_written_duration = durationtools.Duration(
                 minimum_written_duration)
@@ -78,7 +87,11 @@ class TrillSpecifier(abctools.AbjadObject):
             if self.maximum_written_duration is not None:
                 if self.maximum_written_duration <= written_duration :
                     continue
-            spanner = spannertools.TrillSpanner(pitch=self.pitch)
+            spanner = spannertools.TrillSpanner(
+                interval=self.interval,
+                is_harmonic=self.is_harmonic,
+                pitch=self.pitch,
+                )
             leaves = []
             for note in logical_tie:
                 leaves.append(note)
@@ -90,7 +103,8 @@ class TrillSpecifier(abctools.AbjadObject):
             if skip_spanner:
                 continue
             next_leaf = inspect_(leaves[-1]).get_leaf(1)
-            leaves.append(next_leaf)
+            if next_leaf is not None:
+                leaves.append(next_leaf)
             attach(spanner, leaves)
 
     def _has_forbidden_annotation(self, leaf):
@@ -119,6 +133,31 @@ class TrillSpecifier(abctools.AbjadObject):
         Set to annotations or none.
         '''
         return self._forbidden_annotations
+
+    @property
+    def interval(self):
+        r'''Gets interval of trill specifier.
+
+        Defaults to none.
+
+        Set to interval or none.
+
+        Returns interval or none.
+        '''
+        return self._interval
+
+    @property
+    def is_harmonic(self):
+        r'''Is true when trill pitch note head should format as a white
+        diamond. Otherwise false.
+
+        Defaults to false.
+
+        Set to true or false.
+
+        Returns true or false.
+        '''
+        return self._is_harmonic
 
     @property
     def maximum_written_duration(self):
