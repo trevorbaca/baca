@@ -7,20 +7,37 @@ class GlissandoSpecifier(abctools.AbjadObject):
 
     ..  container:: example
 
-        Initializes with boolean patterns:
+        **Example 1.** Initializes from a single pattern:
 
         ::
 
             >>> import baca
             >>> specifier = baca.makers.GlissandoSpecifier(
+            ...     patterns=rhythmmakertools.select_all(),
+            ...     )
+
+        ::
+            
+            >>> print(format(specifier))
+            baca.makers.GlissandoSpecifier(
+                patterns=(
+                    rhythmmakertools.BooleanPattern(
+                        indices=(0,),
+                        period=1,
+                        ),
+                    ),
+                )
+
+    ..  container:: example
+
+        **Example 2.** Initializes from multiple patterns:
+
+        ::
+
+            >>> specifier = baca.makers.GlissandoSpecifier(
             ...     patterns=[
-            ...         rhythmmakertools.BooleanPattern(
-            ...             indices=[0, 1],
-            ...             period=2,
-            ...             ),
-            ...         rhythmmakertools.BooleanPattern(
-            ...             indices=[0],
-            ...             ),
+            ...         rhythmmakertools.select_first(1),
+            ...         rhythmmakertools.select_last(1),
             ...         ],
             ...     )
 
@@ -30,11 +47,10 @@ class GlissandoSpecifier(abctools.AbjadObject):
             baca.makers.GlissandoSpecifier(
                 patterns=(
                     rhythmmakertools.BooleanPattern(
-                        indices=(0, 1),
-                        period=2,
+                        indices=(0,),
                         ),
                     rhythmmakertools.BooleanPattern(
-                        indices=(0,),
+                        indices=(-1,),
                         ),
                     ),
                 )
@@ -57,6 +73,7 @@ class GlissandoSpecifier(abctools.AbjadObject):
         if isinstance(patterns, rhythmmakertools.BooleanPattern):
             patterns = (patterns,)
         if patterns is not None:
+            patterns = tuple(patterns)
             prototype = rhythmmakertools.BooleanPattern
             assert all(isinstance(_, prototype) for _ in patterns)
         self._patterns = patterns
@@ -64,14 +81,18 @@ class GlissandoSpecifier(abctools.AbjadObject):
     ### SPECIAL METHODS ###
 
     def __call__(self, logical_ties, timespan):
-        total_logical_ties = len(logical_ties)
-        for i, logical_tie in enumerate(logical_ties):
-            assert logical_tie.is_trivial, repr(logical_tie)
-            for durations in self.patterns:
-                if durations.matches_index(i, total_logical_ties):
-                    first_leaf = logical_tie.head
-                    next_leaf = inspect_(first_leaf).get_leaf(1)
-                    leaves = [first_leaf, next_leaf]
+        logical_tie_count = len(logical_ties)
+        note_or_chord = (scoretools.Note, scoretools.Chord)
+        for index, logical_tie in enumerate(logical_ties):
+            for pattern in self.patterns:
+                if pattern.matches_index(index, logical_tie_count):
+                    last_leaf = logical_tie.tail
+                    if not isinstance(last_leaf, note_or_chord):
+                        continue
+                    next_leaf = inspect_(last_leaf).get_leaf(1)
+                    if not isinstance(next_leaf, note_or_chord):
+                        continue
+                    leaves = [last_leaf, next_leaf]
                     attach(spannertools.Glissando(), leaves)
 
     ### PUBLIC PROPERTIES ###
