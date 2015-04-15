@@ -11,12 +11,12 @@
 
 5.  Set up HTML API for baca utilities.
 
-6.  Search for Mark in all baca (and all scores) and replace.
+6.  Set up HTML API for baca makers.
+
+7.  Search for Mark in all baca (and all scores) and replace.
     Search for 'mark' in all baca (and all scores) and replace.
 
-7.  Search for leaftools, notetools, chordtools, resttools, skiptools, 
+8.  Search for leaftools, notetools, chordtools, resttools, skiptools, 
     resttools, tuplettools, stafftools, voicetools, iterationtools, 
     contexttools, marktools, timerelationtools in all baca (and all scores) 
     and replace.
-
-8.  Eventually move baca/rhythm and baca/pitch into baca/library.
