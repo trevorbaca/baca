@@ -54,8 +54,9 @@ class GlissandoSpecifier(abctools.AbjadObject):
         patterns=None,
         ):
         from abjad.tools import pitchtools
+        if isinstance(patterns, rhythmmakertools.BooleanPattern):
+            patterns = (patterns,)
         if patterns is not None:
-            patterns = tuple(patterns)
             prototype = rhythmmakertools.BooleanPattern
             assert all(isinstance(_, prototype) for _ in patterns)
         self._patterns = patterns
