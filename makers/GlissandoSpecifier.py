@@ -82,18 +82,32 @@ class GlissandoSpecifier(abctools.AbjadObject):
 
     def __call__(self, logical_ties, timespan):
         logical_tie_count = len(logical_ties)
-        note_or_chord = (scoretools.Note, scoretools.Chord)
         for index, logical_tie in enumerate(logical_ties):
-            for pattern in self.patterns:
+            for pattern in reversed(self.patterns):
                 if pattern.matches_index(index, logical_tie_count):
-                    last_leaf = logical_tie.tail
-                    if not isinstance(last_leaf, note_or_chord):
-                        continue
-                    next_leaf = inspect_(last_leaf).get_leaf(1)
-                    if not isinstance(next_leaf, note_or_chord):
-                        continue
-                    leaves = [last_leaf, next_leaf]
-                    attach(spannertools.Glissando(), leaves)
+                    self._apply_pattern(pattern, logical_tie)
+                    break
+
+    ### PRIVATE METHODS ###
+
+    def _apply_pattern(self , pattern, logical_tie):
+        if isinstance(pattern, rhythmmakertools.SilenceMask):
+            return
+        make_glissando_prototype = (
+            rhythmmakertools.BooleanPattern,
+            rhythmmakertools.SustainMask,
+            )
+        assert isinstance(pattern, make_glissando_prototype)
+        note_or_chord = (scoretools.Note, scoretools.Chord)
+        if isinstance(pattern, make_glissando_prototype):
+            last_leaf = logical_tie.tail
+            if not isinstance(last_leaf, note_or_chord):
+                return
+            next_leaf = inspect_(last_leaf).get_leaf(1)
+            if not isinstance(next_leaf, note_or_chord):
+                return
+            leaves = [last_leaf, next_leaf]
+            attach(spannertools.Glissando(), leaves)
 
     ### PUBLIC PROPERTIES ###
 

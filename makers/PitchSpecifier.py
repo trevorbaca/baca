@@ -4,7 +4,7 @@ from abjad import *
 
 
 class PitchSpecifier(abctools.AbjadObject):
-    r'''baca pitch specifier.
+    r'''Pitch specifier.
 
     ..  container:: example
 
@@ -37,6 +37,7 @@ class PitchSpecifier(abctools.AbjadObject):
 
     __slots__ = (
         '_counts',
+        '_mutates_score',
         '_operators',
         '_reverse',
         '_source',
@@ -58,6 +59,8 @@ class PitchSpecifier(abctools.AbjadObject):
         if counts is not None:
             assert mathtools.all_are_positive_integers(counts), repr(counts)
         self._counts = counts
+        # because chords sometimes replace notes
+        self._mutates_score = True
         if operators is not None:
             operators = tuple(operators)
         self._operators = operators
