@@ -33,6 +33,7 @@ class TrillSpecifier(abctools.AbjadObject):
         '_deposit_annotations',
         '_forbidden_annotations',
         '_is_harmonic',
+        '_interval',
         '_maximum_written_duration',
         '_minimum_written_duration',
         '_pitch',
@@ -44,6 +45,7 @@ class TrillSpecifier(abctools.AbjadObject):
         self,
         deposit_annotations=None,
         forbidden_annotations=None,
+        interval=None,
         is_harmonic=False,
         minimum_written_duration=None,
         maximum_written_duration=None,
@@ -58,6 +60,7 @@ class TrillSpecifier(abctools.AbjadObject):
             assert all(isinstance(_, str) for _ in forbidden_annotations)
             forbidden_annotations = tuple(forbidden_annotations)
         self._forbidden_annotations = forbidden_annotations
+        self._interval = interval
         self._is_harmonic = bool(is_harmonic)
         if minimum_written_duration is not None:
             minimum_written_duration = durationtools.Duration(
@@ -85,6 +88,7 @@ class TrillSpecifier(abctools.AbjadObject):
                 if self.maximum_written_duration <= written_duration :
                     continue
             spanner = spannertools.TrillSpanner(
+                interval=self.interval,
                 is_harmonic=self.is_harmonic,
                 pitch=self.pitch,
                 )
@@ -128,6 +132,18 @@ class TrillSpecifier(abctools.AbjadObject):
         Set to annotations or none.
         '''
         return self._forbidden_annotations
+
+    @property
+    def interval(self):
+        r'''Gets interval of trill specifier.
+
+        Defaults to none.
+
+        Set to interval or none.
+
+        Returns interval or none.
+        '''
+        return self._interval
 
     @property
     def is_harmonic(self):
