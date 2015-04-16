@@ -103,7 +103,8 @@ class TrillSpecifier(abctools.AbjadObject):
             if skip_spanner:
                 continue
             next_leaf = inspect_(leaves[-1]).get_leaf(1)
-            leaves.append(next_leaf)
+            if next_leaf is not None:
+                leaves.append(next_leaf)
             attach(spanner, leaves)
 
     def _has_forbidden_annotation(self, leaf):
