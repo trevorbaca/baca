@@ -1,9 +1,10 @@
+# -*- encoding: utf-8 -*-
 from abjad import *
 
 
-# TODO: Rename to repeat_subruns_to_count() to match Abjad sequencetools.
+# TODO: rename to repeat_subruns_to_count() to match sequencetools.
 def repeat_subruns_cyclic(notes, pairs, history=False):
-    '''Repeat components according to pairs.
+    '''Repeat notes according to pairs.
 
     ::
 
@@ -23,24 +24,23 @@ def repeat_subruns_cyclic(notes, pairs, history=False):
 
     Return list of components.
     '''
-
     assert all([isinstance(x, Note) for x in notes])
     assert isinstance(pairs, list)
     assert all([len(x) == 3 for x in pairs])
-
     instructions = []
     len_notes = len(notes)
     for pair in reversed(pairs):
         new_notes = []
         for i in range(pair[0], pair[0] + pair[1]):
-            source = notes[i % len_notes]
+            source = notes[i%len_notes]
             pitch_number = source.written_pitch.pitch_number
             new_note = Note(pitch_number, source.written_duration)
+            if history:
+                attach(history, new_note)
             new_notes.append(new_note)
         reps = pair[-1]
         instruction = (pair[0] + pair[1], new_notes, reps)
         instructions.append(instruction)
-
     for index, new_notes, reps in reversed(sorted(instructions)):
         new_notes = selectiontools.ContiguousSelection(new_notes)
         new_notes = mutate(new_notes).copy(n=reps)
