@@ -6,11 +6,11 @@ import copy
 import math
 import re
 from abjad import *
-from baca import utilities
+import baca
 
 
-def splitPitches(pitches, split=-1):
-    r'''Split list of probably aggregates into treble and bass.
+def split_pitches(pitches, split=-1):
+    r'''Splits list of probably aggregates into treble and bass.
     '''
 
     for sublist in pitches:
@@ -33,7 +33,7 @@ def splitPitches(pitches, split=-1):
     return components['treble'], components['bass']
 
 
-def makeFixedLayoutVoice(d, systems, alignments, offsets):
+def make_fixed_layout_voice(d, systems, alignments, offsets):
 
     alignment = ' '.join([str(n) for n in alignments])
     alignment = "(alignment-offsets . (%s))" % alignment
@@ -82,16 +82,16 @@ def change(expr, visitor):
         return visitor.visit(expr)
 
 
-def changeslice(expr, visitor):
+def change_slice(expr, visitor):
     if isinstance(expr, list):
         for x in expr[:]:
-            expr[expr.index(x):(expr.index(x)+1)] = changeslice(x, visitor)
+            expr[expr.index(x):(expr.index(x)+1)] = change_slice(x, visitor)
         return expr
     elif hasattr(expr, 'music'):
         for m in expr.music[:]:
             #print 'into   ', m
             expr.music[expr.music.index(m):(expr.music.index(m)+1)] = \
-                changeslice(m, visitor)
+                change_slice(m, visitor)
             #print 'out of ', m
         return [expr]
     else:
@@ -423,19 +423,19 @@ def stellate(k, s, t, d, b, span='from duration', rests=True):
 
     debug = False
 
-    prolation = utilities.helianthate(s, 1, 1)
+    prolation = baca.utilities.helianthate(s, 1, 1)
     prolation = sequencetools.flatten_sequence(prolation)
     numerators = sequencetools.increase_elements(k, prolation)
-    mask = utilities.helianthate(t, 1, 1)
+    mask = baca.utilities.helianthate(t, 1, 1)
     mask = sequencetools.flatten_sequence(mask)
     mask = sequencetools.repeat_to_weight(mask, mathtools.weight(numerators))
-    mask = utilities.replace_nested_elements_with_unary_subruns(mask)
+    mask = baca.utilities.replace_nested_elements_with_unary_subruns(mask)
     signatures = sequencetools.split_sequence_once_by_weights_with_overhang(
         mask, numerators)
     for i, signature in enumerate(signatures):
         if signature == [1]:
             signatures[i] = [-1]
-    signatures = utilities.partition_nested_into_canonic_parts(signatures)
+    signatures = baca.utilities.partition_nested_into_canonic_parts(signatures)
 
     if not rests:
         part_counts = [len(x) for x in signatures]
@@ -494,14 +494,14 @@ def coruscate(n, s, t, z, d, rests=True):
     debug = False
 
     # zero-valued taleas not allowed
-    talea = utilities.helianthate(n, 1, 1)
+    talea = baca.utilities.helianthate(n, 1, 1)
     talea = sequencetools.flatten_sequence(talea)
     assert all(talea)
 
-    cut = utilities.helianthate(s, 1, 1)
+    cut = baca.utilities.helianthate(s, 1, 1)
     cut = sequencetools.flatten_sequence(cut)
 
-    dilation = utilities.helianthate(z, 1, 1)
+    dilation = baca.utilities.helianthate(z, 1, 1)
     dilation = sequencetools.flatten_sequence(dilation)
     fit = sequencetools.increase_elements(t, dilation)
 
@@ -522,7 +522,7 @@ def coruscate(n, s, t, z, d, rests=True):
         return list(
         sequencetools.sum_consecutive_elements_by_sign(x, sign=[-1]))
     signatures = [helper(signature) for signature in signatures]
-    signatures = utilities.partition_nested_into_canonic_parts(signatures)
+    signatures = baca.utilities.partition_nested_into_canonic_parts(signatures)
 
     if not rests:
         part_counts = [len(x) for x in signatures]
