@@ -1,7 +1,6 @@
 # -*- encoding: utf-8 -*-
 r'''Music-generation functions used in Čáry, Sekka and Lidércfény.
 '''
-
 import copy
 import math
 import re
@@ -34,10 +33,10 @@ def split_pitches(pitches, split=-1):
 
 
 def make_fixed_layout_voice(d, systems, alignments, offsets):
-
+    r'''Makes fixed layout voice.
+    '''
     alignment = ' '.join([str(n) for n in alignments])
     alignment = "(alignment-offsets . (%s))" % alignment
-
     v = Voice([], name = 'layout voice')
     for system in range(systems):
         new = scoretools.Skip(*d)
@@ -53,7 +52,6 @@ def make_fixed_layout_voice(d, systems, alignments, offsets):
         else:
             new.right.append(r'\break')
         v.music.append(new)
-
     return v
 
 
@@ -98,52 +96,10 @@ def change_slice(expr, visitor):
         return visitor.visit(expr)
 
 
-def effectiveDurations(expr):
-    r'''List the effective durations of the leaves in `expr`.
-
-    ::
-
-        >>> from baca.music import *
-
-    ::
-
-        >>> tuplet = Tuplet((2, 3), "c'16 c'16 c'16")
-        >>> effectiveDurations(tuplet)
-        [Duration(1, 24), Duration(1, 24), Duration(1, 24)]
-
-    Returns list.
-    '''
-    leaves = iterate(expr).by_class(scoretools.Leaf)
-    durations = [inspect_(leaf).get_duration() for leaf in leaves]
-    return durations
-
-
-def effectiveDuration(m):
-    r'''Sum the effective durations of the leaves in m.
-
-            >>> tuplet = Tuplet((2, 3), "c'16 c'16 c'16")
-
-            >>> effectiveDuration(tuplet)
-            Duration(1, 8)
-
-            >>> effectiveDuration(tuplet.select_leaves())
-            Duration(1, 8)
-
-    Return duration.
-    '''
-
-    if m == []:
-        return Fraction(0)
-    else:
-        return sum(effectiveDurations(m), Fraction(0))
-
-
 def fill(l, positions):
-    r'''Fill in 1-indexed measures with middle C.
+    r'''Fills in 1-indexed measures with middle C.
     '''
-
     result = []
-
     for i, m in enumerate(l):
         if (i + 1) in positions:
             n, d = inspect_(m).get_duration().pair
@@ -154,11 +110,9 @@ def fill(l, positions):
 
 
 def blank(l, positions):
-    r'''Blank out 1-indexed measures.
+    r'''Blanks out 1-indexed measures.
     '''
-
     result = []
-
     for i, m in enumerate(l):
         if (i + 1) in positions:
             rests = scoretools.make_rests(m.contents_duration)
@@ -167,9 +121,8 @@ def blank(l, positions):
 
 
 def nest(measures, outer, inner):
-    r'''Structure time.
+    r'''Structures time.
     '''
-
     inner = sequencetools.partition_by_lengths(inner, [len(x) for x in outer])
     result = []
     for i in range(len(measures)):
@@ -193,7 +146,7 @@ def nest(measures, outer, inner):
 
 
 def trill(l, p=False, indices='all', d=Fraction(0)):
-    r'''Cyclically trill notes at indices with scaled duration >= d.
+    r'''Cyclically trills notes at indices with scaled duration >= d.
 
     When p is set, cyclically applies pitches in p.
 
@@ -207,7 +160,6 @@ def trill(l, p=False, indices='all', d=Fraction(0)):
     '''
     if indices == 'all':
         indices = range(len(instances(l, 'Leaf')))
-
     for i, element in enumerate(instances(l, 'Leaf')):
         #if (i - 1) in indices:
         #  element.after.append(r'\stopTrillSpan')
@@ -224,30 +176,30 @@ def trill(l, p=False, indices='all', d=Fraction(0)):
             element.trill = True
 
 
-def grace(l,
-    k='Leaf', indices='all',
-    m='Note', dm=(0, 1), check=True,
-    s=[[Note(0, (1, 16))]], cyclic=True):
-
+def grace(
+    l,
+    k='Leaf',
+    indices='all',
+    m='Note',
+    dm=(0, 1),
+    check=True,
+    s=[[Note(0, (1, 16))]],
+    cyclic=True,
+    ):
     if indices == 'all':
         indices = range(len(instances(l, k)))
-
     dm = Fraction(*dm)
-
     candidate = 0
-
     for i, element in enumerate(instances(l, k)):
 
         if hasattr(element, 'scaledDuration'):
             sd = element.scaledDuration
         else:
             sd = inspect_(element).get_duration()
-
         if check and hasattr(element, 'grace'):
             ck = False
         else:
             ck = True
-
         if i in indices and isinstance(element, m) and sd >= dm and ck:
             new = 0
             if cyclic:
@@ -256,12 +208,10 @@ def grace(l,
                 new = s[candidate]
             if new != 0:
                 element.grace = clean(new)
-
             candidate += 1
 
 
 def color(l, p):
-
     i = 0
     for n in instances(l, 'Note'):
         try:
@@ -291,7 +241,6 @@ def untrill(l):
 
 
 def ungrace(l, keep='first', length=1):
-
     for element in instances(l, 'Leaf'):
         if hasattr(element, 'grace'):
             if keep == 'first':
@@ -381,16 +330,15 @@ class Subdivide(object):
 
 
 def subdivide(m, positions):
-    r'''Subdivide leaves in m by according to positions.
+    r'''Subdivides leaves in m by according to positions.
     '''
-
     change(m, Subdivide(positions))
 
 
 class FiveRemover(object):
     def visit(self, node):
-        if isinstance(node, Note) and \
-            inspect_(node).get_duration().n == 5:
+        if (isinstance(node, Note) and
+            inspect_(node).get_duration().n == 5):
             denominator = inspect_(node).get_duration().d
             return expression.Expression(
                 [Note(0, 4, denominator), Note(0, 1, denominator)])
@@ -403,7 +351,7 @@ def unfive(music):
 
 
 def stellate(k, s, t, d, b, span='from duration', rests=True):
-    r'''Make running tuplets.
+    r'''Makes running tuplets.
 
     Numerators k + s;
     denominators k;
@@ -416,13 +364,10 @@ def stellate(k, s, t, d, b, span='from duration', rests=True):
 
     TODO: prevent from-duration span from giving incorrect nibs.
     '''
-
     if t == [[0]]:
         print 't == [[0]] will cause an infinite loop.'
         raise ValueError
-
     debug = False
-
     prolation = baca.utilities.helianthate(s, 1, 1)
     prolation = sequencetools.flatten_sequence(prolation)
     numerators = sequencetools.increase_elements(k, prolation)
@@ -436,25 +381,20 @@ def stellate(k, s, t, d, b, span='from duration', rests=True):
         if signature == [1]:
             signatures[i] = [-1]
     signatures = baca.utilities.partition_nested_into_canonic_parts(signatures)
-
     if not rests:
         part_counts = [len(x) for x in signatures]
         signatures = sequencetools.flatten(signatures)
         signatures = [abs(x) for x in signatures]
         signatures = \
             sequencetools.partition_by_lengths(signatures, part_counts)
-
     denominators = copy.copy(k)
     pairs = zip(signatures, denominators)
     tuplets = [Tuplet.from_nonreduced_ratio_and_nonreduced_fraction(
         pair[0], (pair[1], d)) for pair in pairs]
-
     if span == 'from duration':
         span = int(math.log(d, 2)) - 3
-
     if isinstance(span, int) and span < 1:
         span = None
-
     dummy_container = Container(tuplets)
     tuplets = sequencetools.partition_by_lengths(
         tuplets, b, cyclic=True, overhang=True)
@@ -469,13 +409,12 @@ def stellate(k, s, t, d, b, span='from duration', rests=True):
         i += 1
     dummy_container[:] = []
     tuplets = sequencetools.flatten(tuplets)
-
     return tuplets
 
 
 def coruscate(n, s, t, z, d, rests=True):
-    r'''Coruscate talea n;
-    return list of fixed-duration tuplets.
+    r'''Coruscates talea n;
+    returns list of fixed-duration tuplets.
 
     Input talea n (2d, passed to helianthate);
     cut s (2d, passed to helianthate);
@@ -490,21 +429,16 @@ def coruscate(n, s, t, z, d, rests=True):
     Length of result equals length of fit.
     Coruscated lines contain no span beams.
     '''
-
     debug = False
-
     # zero-valued taleas not allowed
     talea = baca.utilities.helianthate(n, 1, 1)
     talea = sequencetools.flatten_sequence(talea)
     assert all(talea)
-
     cut = baca.utilities.helianthate(s, 1, 1)
     cut = sequencetools.flatten_sequence(cut)
-
     dilation = baca.utilities.helianthate(z, 1, 1)
     dilation = sequencetools.flatten_sequence(dilation)
     fit = sequencetools.increase_elements(t, dilation)
-
     j = 0
     signatures = []
     for i, element in enumerate(fit):
@@ -523,20 +457,16 @@ def coruscate(n, s, t, z, d, rests=True):
         sequencetools.sum_consecutive_elements_by_sign(x, sign=[-1]))
     signatures = [helper(signature) for signature in signatures]
     signatures = baca.utilities.partition_nested_into_canonic_parts(signatures)
-
     if not rests:
         part_counts = [len(x) for x in signatures]
         signatures = sequencetools.flatten(signatures)
         signatures = [abs(x) for x in signatures]
         signatures = \
             sequencetools.partition_by_lengths(signatures, part_counts)
-
     if debug: print signatures
-
     pairs = zip(signatures, t)
     result = [Tuplet.from_nonreduced_ratio_and_nonreduced_fraction(
         pair[0], (pair[1], d)) for pair in pairs]
-
     for i, element in enumerate(result):
         if debug:
             element.music[0].right.append(r'_ \markup \fontsize #6 { %s }' % i)
@@ -544,16 +474,13 @@ def coruscate(n, s, t, z, d, rests=True):
             durations=[inspect_(element).get_duration()],
             )
         attach(spanner, element.select_leaves()) 
-
     return result
 
 
-def makeMeasures(expr, meters):
-    r'''For each voice in expr,
-    press contents into measures
+def make_measures(expr, meters):
+    r'''For each voice in expr, presses contents into measures
     according to meters.
     '''
-
     durations = [Duration(*meter) for meter in meters]
     for voice in iterate(expr).by_class(Voice):
         assert inspect_(voice).get_duration() == sum(durations, Duration(0))
@@ -578,14 +505,11 @@ def recombineVoices(target, s, insert, t, loci):
     with the parts of each (partitioned) insert voice
     according to the positions in loci.
     '''
-
     targetVoices = instances(target, 'Voice')
     insertVoices = instances(insert, 'Voice')
-
     if len(targetVoices) != len(insertVoices):
         print 'ERROR: target voices and insert voices do not match.'
         raise ValueError
-
 #   for i in range(n):
 #      tgtm = targetVoices[i].music
 #      insm = insertVoices[i].music
@@ -599,29 +523,21 @@ def recombineVoices(target, s, insert, t, loci):
 #      print insm
 #      replace(tgtm, loci, insm)
 #      sequencetools.flatten(tgtm)
-
     def P(n, s):
         return partition(
             range(n), s, cyclic=True, overhang=True, action='new')
-
     def makeIndexPairs(n, s):
         return sequencetools.pairwise(
             sequencetools.cumulative_sums_zero(
             [len(part) for part in P(n, s)]))
-
     targetIndexPairs = makeIndexPairs(len(targetVoices[0]), s)
     insertIndexPairs = makeIndexPairs(len(insertVoices[0]), t)
-
-    #print targetIndexPairs
-    #print insertIndexPairs
-
     if len(insertIndexPairs) < len(loci):
         print 'ERROR: insert partitions into only %s parts;' \
             % len(insertIndexPairs)
         print '         not enough to fill the %s loci specified.' \
             % len(loci)
         print ''
-
     for targetVoice, insertVoice in zip(targetVoices, insertVoices):
         for j, locus in enumerate(reversed(sorted(loci))):
             first, last = insertIndexPairs[len(loci) - 1 - j]
@@ -631,13 +547,10 @@ def recombineVoices(target, s, insert, t, loci):
 
 
 def rippleVoices(m, s):
-    r'''Repeat voice elements in m
-    according to s.
+    r'''Repeat voice elements in m according to s.
     '''
-
     spec = dict(s)
     voices = instances(m, 'Voice')
-
     for v in voices:
         for i in reversed(range(len(v))):
             if spec.has_key(i):
@@ -660,7 +573,6 @@ def copyMusicList(ll, i=None, j=None):
     fracture external and preserve internal spanners;
     return new list.
     '''
-
     if i is None and j is None:
         source = ll[ : ]
     else:
@@ -683,16 +595,15 @@ def setLeafStartTimes(expr, offset=Fraction(0)):
 
 
 def rankLeavesTimewise(exprList, name='Leaf'):
-    r'''Sets 'timewise' attribute on each of the leaves in the expr in exprList.
+    r'''Sets 'timewise' attribute on each of the leaves in the expr in 
+    exprList.
 
     Can be list of Voices, list of Staves, list of anything with leaves;
     order of expr in exprList matters;
     absolute start times must be already set on all leaves.
-    r'''
-
+    '''
     result = []
     leafLists = [instances(expr, name) for expr in exprList]
-
     #print 'starting ...'
     #cur = 0
     while len(leafLists) > 0:
@@ -706,17 +617,15 @@ def rankLeavesTimewise(exprList, name='Leaf'):
                 if len(leafList) == 0:
                     leafLists.remove(leafList)
                 break
-
     for i, l in enumerate(result):
         l.timewise = i
 
 
 def spget(arg):
-    r'''Get lowest pitch in either note or chord.
+    r'''Gets lowest pitch in either note or chord.
 
-    Otherwrise return none.
+    Otherwise returns none.
     '''
-
     if isinstance(arg, Note):
         return arg.pitch.number
     elif isinstance(arg, Chord):
@@ -726,17 +635,13 @@ def spget(arg):
 
 
 def octavate(n, base=(-4, 30)):
-    r'''Octavate a single note.
+    r'''Octavates a single note.
     '''
-
     if not isinstance(Note):
         return
-
     assert hasattr(n, 'core')
     assert isinstance(n.core, list)
-
     lower, upper = base
-
     p = spget(n)
     if upper < p <= upper + 12:
         Octavation(n, 1)
@@ -749,9 +654,8 @@ def octavate(n, base=(-4, 30)):
 
 
 def octavateIterator(voice, start, stop, base):
-    r'''Octavate leaves from start to stop according to base.
+    r'''Octavates leaves from start to stop according to base.
     '''
-
     leaves = voice.select_leaves()
     for l in leaves[start : stop + 1]:
         octavate(l, base)
@@ -760,10 +664,8 @@ def octavateIterator(voice, start, stop, base):
 def setPitch(l, spec=0):
     r'''Sets l.pitch based on l.core.
     '''
-
     if not isinstance(l, Note):
         return
-
     # setPitch(l, 'core'):
     if spec == 'core':
         #p = l.core[0]
@@ -801,10 +703,8 @@ def setPitch(l, spec=0):
                     break
         else:
             raise ValueError
-
     else:
         raise ValueError
-
     if len(pp) == 1:
         #l.pitch = pitch.Pitch(pp[0] + transposition)
         l.pitch = pp[0] + transposition
@@ -836,21 +736,19 @@ def setPitchesByPitchCycle(voice, start, stop, pcyc):
 
 
 def splitHands(l):
-    r'''Split list of numbers l into upper and lower.
+    r'''Splits list of numbers l into upper and lower.
     First-round approximation for piano music.
     '''
-
     # within a 10th
     if max(l) - min(l) <= 14:
         upper = l[:]
         lower = []
-
     else:
         mid = (max(l) - min(l)) / 2 + min(l)
         upper = [n for n in l if n >= mid]
         lower = [n for n in l if n < mid]
-
     return upper, lower
+
 
 ### TODO - come back and make this work;
 ###        or, just completely reimplement
@@ -861,7 +759,6 @@ def setPitchesBySplitHands(leaves, start, stop, crossLeaves):
     places lower of two chords in LH;
     uses splitHands as helper.
     '''
-
     for j, l in enumerate(leaves[start : stop + 1]):
         i = start + j
         if isinstance(l, Note):
@@ -912,11 +809,9 @@ def setPitchesBySplitHands(leaves, start, stop, crossLeaves):
 
 
 def setArticulations(voice, articulations, *args, **kwargs):
-    r'''Iterate leaves and set articulations.
+    r'''Iterates leaves and sets articulations.
     '''
-
     leaves = voice.select_leaves()
-
     if len(args) == 0:
         start = 0
         stop = len(leaves)
@@ -926,14 +821,11 @@ def setArticulations(voice, articulations, *args, **kwargs):
         start, stop = args
     else:
         raise ValueError
-
     leafSlice = leaves[start : stop + 1]
-
     if kwargs.has_key('exclude'):
         exclude = kwargs['exclude']
     else:
         exclude = True
-
     for l in leafSlice:
         if instance(l, (Note, Chord)) or not exclude:
             if isinstance(articulations, str):
@@ -945,10 +837,9 @@ def setArticulations(voice, articulations, *args, **kwargs):
 
 
 def setArticulationsByPitch(voice, start, stop, articulations, min):
-    r'''Set articulations on notes & chord where safe pitch number 
+    r'''Sets articulations on notes & chord where safe pitch number 
     is at least min.
     '''
-
     leaves = voice.select_leaves()
     for l in leaves[start : stop + 1]:
         if isinstance(l, (Note, Chord)) and spget(l) >= min:
@@ -956,10 +847,9 @@ def setArticulationsByPitch(voice, start, stop, articulations, min):
 
 
 def setArticulationsByDuration(voice, start, stop, long, min, short):
-    r'''Set long articulations on leaves where effective duration is
+    r'''Sets long articulations on leaves where effective duration is
     at least min, else set short articulations.
     '''
-
     leaves = voice.select_leaves()
     min = Fraction(*min)
     for l in leaves[start : stop + 1]:
@@ -971,12 +861,10 @@ def setArticulationsByDuration(voice, start, stop, long, min, short):
 
 
 def clearAllArticulations(leaves, start=0, stop=None):
-    r'''Clear articulations from leaves.
+    r'''Clears articulations from leaves.
     '''
-
     if isinstance(stop, int):
         stop += 1
-
     for l in instances(leaves[start : stop], 'Leaf'):
         l.articulations = []
 
@@ -984,7 +872,6 @@ def clearAllArticulations(leaves, start=0, stop=None):
 def appendArticulations(voice, articulations, *args, **kwargs):
     r'''Iterate leaves and append articulations.
     '''
-
     leaves = voice.select_leaves()
     if len(args) == 0:
         start = 0
@@ -995,14 +882,11 @@ def appendArticulations(voice, articulations, *args, **kwargs):
         start, stop = args
     else:
         raise ValueError
-
     leafSlice = leaves[start : stop + 1]
-
     if kwargs.has_key('exclude'):
         exclude = kwargs['exclude']
     else:
         exclude = True
-
     for l in leaves:
         if isinstance(l, (Note, Chord)) or not exclude:
             if isinstance(articulations, str):
@@ -1015,9 +899,8 @@ def appendArticulations(voice, articulations, *args, **kwargs):
 
 
 def clear_dynamics(expr):
-    r'''Clear both dynamics and hairpins from leaves in expr.
+    r'''Clears dynamics and hairpins from leaves in expr.
     '''
-
     for l in instances(expr, 'Leaf'):
         l.dynamics = None
         l.dynamics.unspan()
@@ -1040,7 +923,6 @@ def applyArtificialHarmonic(voice, *args):
 def hpartition_notes_only(leaves, cut=(0,), gap=(0,)):
     r'''Note runs only.
     '''
-
     cut = Fraction(*cut)
     gap = Fraction(*gap)
     result = [[]]
@@ -1063,7 +945,6 @@ def hpartition_notes_only(leaves, cut=(0,), gap=(0,)):
 def hpartition_rest_terminated(leaves, cut=(0,), gap=(0,)):
     r'''Rest-terminated note runs.
     '''
-
     cut = Fraction(*cut)
     gap = Fraction(*gap)
     result = [[]]
@@ -1086,543 +967,6 @@ def hpartition_rest_terminated(leaves, cut=(0,), gap=(0,)):
     return result
 
 
-def partitionLeaves(leaves, type='notes and rests', cut=(0,), gap=(0,)):
-    r'''Partition leaf list leaves into sublists.
-
-    Chunking suitable for repeated hairpin application.
-
-    >>> t = Tuplet((8, 9), "c'16 c'16 r16 r16 c'16 c'16 r16 r16 r16")
-
-    >>> partitionLeaves(t.select_leaves())
-    [[Note("c'16"), Note("c'16")], [Rest('r16'), Rest('r16')], [Note("c'16"), Note("c'16")], [Rest('r16'), Rest('r16'), Rest('r16')]]
-
-    >>> partitionLeaves(t.select_leaves(), type='notes only')
-    [[Note("c'16"), Note("c'16")], [Note("c'16"), Note("c'16")]]
-
-    >>> partitionLeaves(t.select_leaves(), type='rests only')
-    [[Rest('r16'), Rest('r16')], [Rest('r16'), Rest('r16'), Rest('r16')]]
-
-    >>> partitionLeaves(t.select_leaves(), type='rest-terminated')
-    [[Note("c'16"), Note("c'16"), Rest('r16')], [Note("c'16"), Note("c'16"), Rest('r16')]]
-
-    >>> music.partitionLeaves(t.select_leaves(), type='rest-gapped')
-    [([Note("c'16"), Note("c'16"), Rest('r16')],), ([Note("c'16"), Note("c'16"), Rest('r16')],)]
-
-    >>> music.partitionLeaves(t.select_leaves(), type='rest-gapped', gap=(2, 18))
-    [([Note("c'16"), Note("c'16"), Rest('r16')], [Note("c'16"), Note("c'16"), Rest('r16')])]
-
-    >>> partitionLeaves(t.select_leaves(), type='paired notes')
-    [([Note("c'16"), Note("c'16")],), ([Note("c'16"), Note("c'16")],)]
-
-    >>> partitionLeaves(t.select_leaves(), type='paired notes', gap=(2, 18))
-    [([Note("c'16"), Note("c'16")], [Note("c'16"), Note("c'16")])]
-
-    >>> t = Container("c'16 r16 c'16 r8. c'16 r16 r16 c'16")
-
-    >>> partitionLeaves(t.select_leaves(), type='cut notes', cut=(1, 16))
-    [[Note("c'16"), Rest('r16'), Note("c'16")], [Note("c'16")], [Note("c'16")]]
-
-    >>> partitionLeaves(t.select_leaves(), type='cut paired notes', cut=(1, 16), gap=(2, 16))
-    [([Note("c'16"), Rest('r16'), Note("c'16")],), ([Note("c'16")], [Note("c'16")])]
-
-    >>> partitionLeaves(t.select_leaves(), type='cut paired notes', cut=(1, 16), gap=(3, 16))
-    [([Note("c'16"), Rest('r16'), Note("c'16")], [Note("c'16")]), ([Note("c'16")],)]
-
-    Return list of components.
-    '''
-
-    cut = Fraction(*cut)
-    gap = Fraction(*gap)
-    result = [[]]
-
-    if type == 'notes and rests':
-        for l in leaves:
-            lastChunk = result[-1]
-            if len(lastChunk) == 0:
-                lastChunk.append(l)
-            else:
-                lastLeaf = lastChunk[-1]
-                if isinstance(lastLeaf, Note) == isinstance(l, Note):
-                    lastChunk.append(l)
-                else:
-                    result.append([l])
-
-    elif type == 'notes only':
-        for l in leaves:
-            lastChunk = result[-1]
-            if isinstance(l, Note):
-                lastChunk.append(l)
-            else:
-                if len(lastChunk) > 0:
-                    result.append([])
-        if result[-1] == []:
-            result.pop()
-
-    elif type == 'cut notes':
-        firstResult = partitionLeaves(leaves, type = 'notes and rests')
-        if not isinstance(firstResult[0][0], Note):
-            firstResult.pop(0)
-        result = [firstResult.pop(0)]
-        for chunk in firstResult:
-            lastChunk = result[-1]
-            if isinstance(chunk[0], Note):
-                # empty
-                if len(lastChunk) == 0:
-                    lastChunk.extend(chunk)
-                # note-terminated
-                elif isinstance(lastChunk[-1], Note):
-                    result.append(chunk)
-                # rest-terminated
-                else:
-                    lastChunk.extend(chunk)
-            else:
-                if effectiveDuration(chunk) <= cut:
-                    lastChunk.extend(chunk)
-                else:
-                    result.append([])
-        if result[-1] == []:
-            result.pop()
-
-    elif type == 'cut paired notes':
-        firstResult = partitionLeaves(leaves, type = 'notes and rests')
-        if not isinstance(firstResult[0][0], Note):
-            firstResult.pop(0)
-        result = [[[]]]
-        for chunk in firstResult:
-            lastPair = result[-1]
-            lastChunk = lastPair[-1]
-            if isinstance(chunk[0], Note):
-                lastChunk.extend(chunk)
-            else:
-                if effectiveDuration(chunk) <= cut:
-                    lastChunk.extend(chunk)
-                elif cut < effectiveDuration(chunk) <= gap:
-                    if len(lastPair) == 1:
-                        lastPair.append([])
-                    elif len(lastPair) == 2:
-                        result.append([[]])
-                    else:
-                        raise Exception
-                elif effectiveDuration(chunk) > gap:
-                    result.append([[]])
-                else:
-                    raise Exception
-        lastChunk = result[-1][-1]
-        for m in reversed(lastChunk):
-            if not isinstance(m, Note):
-                lastChunk.pop(-1)
-            else:
-                break
-        for i, sublist in enumerate(result):
-            result[i] = tuple(sublist)
-
-    elif type == 'rests only':
-        for l in leaves:
-            lastChunk = result[-1]
-            if isinstance(l, Rest):
-                lastChunk.append(l)
-            else:
-                if len(lastChunk) > 0:
-                    result.append([])
-        if result[-1] == []:
-            result.pop()
-
-    elif type == 'rest-terminated':
-        for l in leaves:
-            lastChunk = result[-1]
-            if isinstance(l, Note):
-                if len(lastChunk) == 0:
-                    lastChunk.append(l)
-                else:
-                    lastLeaf = lastChunk[-1]
-                    if isinstance(lastLeaf, Note):
-                        lastChunk.append(l)
-                    else:
-                        result.append([l])
-            elif isinstance(l, Rest):
-                if len(lastChunk) > 0:
-                    lastLeaf = lastChunk[-1]
-                    if isinstance(lastLeaf, Note):
-                        lastChunk.append(l)
-
-    # the gap input parameter is the duration of rest run to bridge over;
-    # accepting gap = (0,) makes rest-gapped return like rest-terminated
-    elif type == 'rest-gapped':
-        firstResult = partitionLeaves(leaves, type = 'notes and rests')
-        if not isinstance(firstResult[0][0], Note):
-            firstResult.pop(0)
-        result = [[firstResult.pop(0)]]
-        bridged = False
-        bridgeNext = False
-        for chunk in firstResult:
-            if not isinstance(chunk[0], Note):
-                result[-1][-1].append(chunk[0])
-                if effectiveDuration(chunk) <= gap:
-                    if not bridged:
-                        bridgeNext = True
-            else:
-                if bridgeNext:
-                    result[-1].append(chunk)
-                    bridged = True
-                    bridgeNext = False
-                else:
-                    result.append([chunk])
-                    bridged = False
-                    bridgeNext = False
-        for i, sublist in enumerate(result):
-            result[i] = tuple(sublist)
-
-    elif type == 'paired notes':
-        firstResult = partitionLeaves(leaves, type = 'notes and rests')
-        if not isinstance(firstResult[0][0], Note):
-            firstResult.pop(0)
-        result = [[firstResult.pop(0)]]
-        bridged = False
-        bridgeNext = False
-        for chunk in firstResult:
-            if not isinstance(chunk[0], Note):
-                if effectiveDuration(chunk) <= gap:
-                    if not bridged:
-                        bridgeNext = True
-            else:
-                if bridgeNext:
-                    result[-1].append(chunk)
-                    bridged = True
-                    bridgeNext = False
-                else:
-                    result.append([chunk])
-                    bridged = False
-                    bridgeNext = False
-        for i, sublist in enumerate(result):
-            result[i] = tuple(sublist)
-
-    else:
-        raise ValueError
-
-    return result
-
-
-def segmentLeaves(leaves, cut=(0,), gap=(0,)):
-    r'''Partition leaves into segments each of one or inspect stages;
-    include rests of duration less than or equal to cut in each stage;
-    rests of duration greater than or equal to gap begin new stages.
-
-    >>> t = Container("c'16 r16 c'16 r8 c'16 r16 c'16 r8. c'16 r16 c'16")
-
-    >>> segmentLeaves(t.select_leaves())
-    [([Note("c'16")],), ([Note("c'16")],), ([Note("c'16")],), ([Note("c'16")],), ([Note("c'16")],), ([Note("c'16")],)]
-
-    >>> segmentLeaves(t.select_leaves(), (1, 16))
-    [([Note("c'16"), Rest('r16'), Note("c'16")],), ([Note("c'16"), Rest('r16'), Note("c'16")],), ([Note("c'16"), Rest('r16'), Note("c'16")],)]
-
-    >>> segmentLeaves(t.select_leaves(), (2, 16))
-    [([Note("c'16"), Rest('r16'), Note("c'16"), Rest('r8'), Note("c'16"), Rest('r16'), Note("c'16")],), ([Note("c'16"), Rest('r16'), Note("c'16")],)]
-
-    >>> segmentLeaves(t.select_leaves(), (3, 16))
-    [([Note("c'16"), Rest('r16'), Note("c'16"), Rest('r8'), Note("c'16"), Rest('r16'), Note("c'16"), Rest('r8.'), Note("c'16"), Rest('r16'), Note("c'16")],)]
-
-    >>> segmentLeaves(t.select_leaves(), (1, 16), (3, 16))
-    [([Note("c'16"), Rest('r16'), Note("c'16")], [Note("c'16"), Rest('r16'), Note("c'16")]), ([Note("c'16"), Rest('r16'), Note("c'16")],)]
-
-    Return list of components.
-    '''
-
-    cut = Fraction(*cut)
-    gap = Fraction(*gap)
-    parts = partitionLeaves(leaves)
-    if not isinstance(parts[0][0], Note):
-        parts.pop(0)
-    segments = [[[]]]
-    for part in parts:
-        segment = segments[-1]
-        stage = segment[-1]
-        if isinstance(part[0], Note):
-            stage.extend(part)
-        else:
-            if effectiveDuration(part) <= cut:
-                stage.extend(part)
-            elif cut < effectiveDuration(part) < gap:
-                segment.append([])
-            elif effectiveDuration(part) >= gap:
-                segments.append([[]])
-            else:
-                raise Exception
-    trimEmptyLists(segments[-1])
-    trimEmptyLists(segments)
-    trimRests(segments[-1][-1])
-    for i, sublist in enumerate(segments):
-        segments[i] = tuple(sublist)
-    return segments
-
-
-def trimRests(leaves):
-    for l in reversed(leaves):
-        #if isinstance(l, rest):
-        if isinstance(l, Rest):
-            leaves.pop(-1)
-        else:
-            break
-
-def trimEmptyLists(l):
-    for x in reversed(l):
-        if x == []:
-            l.pop(-1)
-        else:
-            break
-
-# TODO - encapsulate this into some type of class;
-#        possibly TextSpanner
-def applyCoverSpanner(voice, *args):
-    leaves = voice.select_leaves()
-    if len(args) == 1:
-        i = args[0]
-        leaves[i].formatter.right.append(
-            r'^ \markup { \italic \fontsize #2 "coperta" }')
-    elif len(args) == 2:
-        start, stop = args
-        leaves[start].formatter.before.extend([
-            r"\once \override TextSpanner #'bound-details #'left-broken " +
-                r"#'X = #8",
-            r"\once \override TextSpanner #'dash-fraction = #0.25",
-            r"\once \override TextSpanner #'dash-period = #1",
-            r"\once \override TextSpanner #'bound-details #'left " + \
-                r"""#'text = \markup { \italic \fontsize #2 "coperta " }""",
-            r"\once \override TextSpanner #'bound-details #'left " + \
-                r"#'stencil-align-dir-y = #CENTER",
-            r"\once \override TextSpanner #'bound-details #'right-broken " +
-                r"#'text = ##f",
-            r"\once \override TextSpanner #'bound-details #'right " +
-                r"#'text = #(markup #:draw-line '(0 . -1))",
-            r"\once \override TextSpanner #'staff-padding = #6",
-            r"\once \override TextSpanner #'extra-offset = #'(0 . -2.5)"
-            ])
-        leaves[start].formatter.right.append(r'\startTextSpan')
-        leaves[stop].formatter.right.append(r'\stopTextSpan')
-    else:
-        raise ValueError('can not apply cover spanner.')
-
-
-def makeBreaksVoice(durationPairs, yOffsets, alignmentOffsets, start=0):
-    r'''Return page- and line-breaking skip voice;
-    start at system start to allow first page title.
-
-    >>> makeBreaksVoice([(10, 8), (10, 8), (9, 8)], [20, 120], [0, -36, -48], 1)
-    Voice('s1 * 5/4 s1 * 5/4 s1 * 9/8')
-
-    >>> f(_) # doctest: +SKIP
-    % breaks voice
-    \\new Voice {
-        \\overrideProperty #"Score.NonMusicalPaperColumn"
-        #'line-break-system-details
-        #'((Y-offset . 120)
-        (alignment-offsets . (0 -36 -48)))
-        s1 * 5/4 \\bar "" \\pageBreak
-        \\overrideProperty #"Score.NonMusicalPaperColumn"
-        #'line-break-system-details
-        #'((Y-offset . 20)
-        (alignment-offsets . (0 -36 -48)))
-        s1 * 5/4 \\bar "" \\break
-        \\overrideProperty #"Score.NonMusicalPaperColumn"
-        #'line-break-system-details
-        #'((Y-offset . 120)
-        (alignment-offsets . (0 -36 -48)))
-        s1 * 9/8 \\bar "" \\pageBreak
-    }
-
-    '''
-
-    if not isinstance(yOffsets, list):
-        yOffsets = [yOffsets]
-    alignmentOffsets = ' '.join([str(x) for x in alignmentOffsets])
-    breaks = []
-    for p in durationPairs:
-        try:
-            skip = scoretools.Skip(p)
-        except (ValueError, AssignabilityError):
-            skip = scoretools.Skip((1, 1))
-            multiplier = Multiplier(p)
-            attach(multiplier, skip)
-        breaks.append(skip)
-    for i, b in enumerate(breaks):
-        cyclicPosition = (start + i) % len(yOffsets)
-        curYOffset = yOffsets[cyclicPosition]
-        if cyclicPosition == len(yOffsets) - 1:
-            curBreak = r'\pageBreak'
-        else:
-            curBreak = r'\break'
-    voice = Voice(breaks)
-    voice.name = 'breaks voice'
-    return voice
-
-
-def makeMeasuresVoice(durationPairs):
-    r'''Return measure and time signature skip voice.
-
-    >>> makeMeasuresVoice([(10, 8), (10, 8), (9, 8)])
-    <Voice-"measures voice"{3}>
-
-    >>> f(_)
-    \context Voice = "measures voice" {
-        {
-            \time 10/8
-            s1 * 5/4
-        }
-        {
-            s1 * 5/4
-        }
-        {
-            \time 9/8
-            s1 * 9/8
-        }
-    }
-
-    Returns voice.
-    '''
-
-    measures = []
-    for pair in durationPairs:
-        skip = scoretools.Skip((1, 1))
-        multiplier = Multiplier(pair)
-        attach(multiplier, skip)
-        measure = Measure(pair, [skip])
-        measures.append(measure)
-    voice = Voice(measures)
-    voice.name = 'measures voice'
-    return voice
-
-
-def reddenSections(measuresVoice, sectionTuples, start_measure=1):
-    r'''Reddens section bars and labels sections in red.
-
-        >>> measuresVoice = makeMeasuresVoice([(10, 8), (10, 8), (9, 8)])
-        >>> reddenSections(measuresVoice, [(1, 1, 2, 'I'), (2, 3, 3, 'II')])
-
-    ::
-
-        >>> f(measuresVoice)
-        \context Voice = "measures voice" {
-            {
-                \time 10/8
-                \once \override Score.BarLine #'color = #red
-                \once \override Score.SpanBar #'color = #red
-                s1 * 5/4
-                    ^ \markup {
-                        \fontsize
-                            #2
-                            \with-color
-                                #red
-                                \italic
-                                    {
-                                        1.
-                                        I
-                                    }
-                        }
-            }
-            {
-                s1 * 5/4
-            }
-            {
-                \time 9/8
-                \once \override Score.BarLine #'color = #red
-                \once \override Score.SpanBar #'color = #red
-                s1 * 9/8
-                    ^ \markup {
-                        \fontsize
-                            #2
-                            \with-color
-                                #red
-                                \italic
-                                    {
-                                        2.
-                                        II
-                                    }
-                        }
-            }
-        }
-
-    Returns none.
-    '''
-    skips = iterate(measuresVoice).by_class(scoretools.Skip)
-    skips = list(skips)
-    for n, start, stop, description in sectionTuples:
-        if start_measure <= start:
-            string = r'\fontsize #2 \with-color #red \italic {{ {}. {} }}'
-            string = string.format(n, description)
-            markup = markuptools.Markup(string, direction=Up)
-            skip_index = start - start_measure
-            skip = skips[skip_index]
-            override(skip).score.bar_line.color = 'red'
-            override(skip).score.span_bar.color = 'red'
-            attach(markup, skip)
-
-
-def trimVoices(expr, nMeasures):
-    r'''Find each voice in expr and trim to n measures;
-    useful for rendering only the first n measures of a score;
-    accommodates attack, nucleus, release and reference contexts.
-    '''
-
-    customVoiceContexts = [
-        'attack voice', 
-        'nucleus voice', 
-        'release voice', 
-        'reference voice',
-        ]
-    voices = instances(expr, 'Voice') + scoretools.find(
-        expr, *customVoiceContexts)
-    for v in voices:
-        v.music = v.music[:nMeasures]
-
-
-def makeFluteGroup(*staves):
-    r'''Group staves together with 'Flute' id and 'flute group' name.
-    '''
-
-    return container.Container(list(staves),
-        id = 'Flute', name = 'flute group')
-
-
-def makeViolinGroup(*staves):
-    r'''Group staves together with 'Violin' id and 'violin group' name.
-    '''
-
-    return container.Container(list(staves),
-        id = 'Violin', name = 'violin group')
-
-
-def crossStavesDown(voice, start, stop, bp, target,
-    includes=[], excludes=[],
-    topBeamPositions=None, bottomBeamPositions=None):
-    r'''target is a reference to an actual Staff instance.
-
-    TODO: run octavate at some time other than cross-determination time.
-    '''
-
-    leaves = voice.select_leaves()
-    for j, l in enumerate(leaves[start : stop + 1]):
-        i = start + j
-        if isinstance(l, Note):
-            #if (l.safePitchNumber >= bp or i in includes) and i not in excludes:
-            if (spget(l) >= bp or i in includes) and i not in excludes:
-                l.staff = target
-            else:
-                octavate(l, base = (-4, 30))
-
-
-def crossStavesUp(leaves, start, stop, bp, target):
-    r'''target is a reference to an actual Staff instance.
-
-    TODO: run octavate at some time other than cross-determination time.
-    '''
-
-    for i, l in enumerate(leaves[start : stop + 1]):
-        if l.note:
-            if l.pitch.number > bp:
-                l.staff = target
-            else:
-                octavate(l, base = (-28, 4))
-
-
 def map_elements_to_numbered_sublists(sequence):
     '''Maps `sequence` elements to numbered sublists.
 
@@ -1642,21 +986,16 @@ def map_elements_to_numbered_sublists(sequence):
 
     Returns newly constructed list of lists.
     '''
-
     if not isinstance(sequence, list):
         raise TypeError
-
     if not all(isinstance(x, (int, long)) for x in sequence):
         raise ValueError
-
     result = []
     current = 1
-
     for length in sequence:
         abs_length = abs(length)
         part = range(current, current + abs_length)
         part = [mathtools.sign(length) * x for x in part]
         result.append(part)
         current += abs_length
-
     return result
