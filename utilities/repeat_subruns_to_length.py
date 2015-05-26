@@ -2,8 +2,7 @@
 from abjad import *
 
 
-# TODO: rename to repeat_subruns_to_count() to match sequencetools.
-def repeat_subruns_cyclic(notes, pairs, history=False):
+def repeat_subruns_to_length(notes, pairs, history=False):
     '''Repeat notes according to pairs.
 
     ::
@@ -13,7 +12,7 @@ def repeat_subruns_cyclic(notes, pairs, history=False):
     ::
 
         >>> l = [Note(n, (1, 4)) for n in [0, 2, 4, 5, 7, 9, 11]]
-        >>> baca.utilities.repeat_subruns_cyclic(l, [(0, 4, 1), (2, 4, 1)])
+        >>> baca.utilities.repeat_subruns_to_length(l, [(0, 4, 1), (2, 4, 1)])
 
     ::
 

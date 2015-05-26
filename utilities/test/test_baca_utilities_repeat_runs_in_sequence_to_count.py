@@ -2,7 +2,7 @@
 import baca
 
 
-def test_music_repeat_runs_in_sequence_to_count_01():
+def test_baca_utilities_repeat_runs_in_sequence_to_count_01():
 
     sequence_1 = range(20)
     sequence_2 = baca.utilities.repeat_runs_in_sequence_to_count(
@@ -17,7 +17,7 @@ def test_music_repeat_runs_in_sequence_to_count_01():
         ]
 
 
-def test_music_repeat_runs_in_sequence_to_count_02():
+def test_baca_utilities_repeat_runs_in_sequence_to_count_02():
 
     sequence_1 = range(20)
     sequence_2 = baca.utilities.repeat_runs_in_sequence_to_count(
@@ -34,7 +34,7 @@ def test_music_repeat_runs_in_sequence_to_count_02():
         ]
 
 
-def test_music_repeat_runs_in_sequence_to_count_03():
+def test_baca_utilities_repeat_runs_in_sequence_to_count_03():
 
     sequence_1 = range(20)
     sequence_2 = baca.utilities.repeat_runs_in_sequence_to_count(
@@ -49,7 +49,7 @@ def test_music_repeat_runs_in_sequence_to_count_03():
         ]
 
 
-def test_music_repeat_runs_in_sequence_to_count_04():
+def test_baca_utilities_repeat_runs_in_sequence_to_count_04():
 
     sequence_1 = range(20)
     sequence_2 = baca.utilities.repeat_runs_in_sequence_to_count(
