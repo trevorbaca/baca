@@ -5,15 +5,21 @@ from abjad import *
 def repeat_subruns_cyclic(notes, pairs, history=False):
     '''Repeat components according to pairs.
 
-    >>> from baca import music
+    ::
 
-    >>> l = [Note(n, (1, 4)) for n in [0, 2, 4, 5, 7, 9, 11]]
-    >>> music.repeat_subruns_cyclic(l, [(0, 4, 1), (2, 4, 1)])
+        >>> import baca
 
-    >>> l
-    [Note("c'4"), Note("d'4"), Note("e'4"), Note("f'4"), Note("c'4"), 
-     Note("d'4"), Note("e'4"), Note("f'4"), Note("g'4"), Note("a'4"), 
-     Note("e'4"), Note("f'4"), Note("g'4"), Note("a'4"), Note("b'4")]
+    ::
+
+        >>> l = [Note(n, (1, 4)) for n in [0, 2, 4, 5, 7, 9, 11]]
+        >>> baca.utilities.repeat_subruns_cyclic(l, [(0, 4, 1), (2, 4, 1)])
+
+    ::
+
+        >>> l
+        [Note("c'4"), Note("d'4"), Note("e'4"), Note("f'4"), Note("c'4"), 
+        Note("d'4"), Note("e'4"), Note("f'4"), Note("g'4"), Note("a'4"), 
+        Note("e'4"), Note("f'4"), Note("g'4"), Note("a'4"), Note("b'4")]
 
     Return list of components.
     '''

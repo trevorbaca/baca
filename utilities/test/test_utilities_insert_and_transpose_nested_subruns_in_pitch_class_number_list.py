@@ -1,13 +1,13 @@
 # -*- encoding: utf-8 -*-
-import baca
 from abjad import *
+import baca
 
 
 def test_insert_and_transpose_nested_subruns_in_pitch_class_number_list_01():
 
     notes = [Note(p, (1, 4)) for p in [0, 2, 7, 9, 5, 11, 4]]
     subrun_tokens = [(0, [2, 4]), (4, [3, 1])]
-    baca.music.insert_and_transpose_nested_subruns_in_pitch_class_number_list(
+    baca.utilities.insert_and_transpose_nested_subruns_in_pitch_class_number_list(
         notes, subrun_tokens)
 
     "Inserts are shown in the innermost pairs of brackets below."
