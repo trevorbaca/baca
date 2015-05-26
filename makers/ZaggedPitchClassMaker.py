@@ -1,6 +1,6 @@
 # -*- encoding: utf-8 -*-
 from abjad import *
-from ide import idetools
+from ide.tools import idetools
 import baca
 
 
