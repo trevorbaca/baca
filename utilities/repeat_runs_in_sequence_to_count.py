@@ -71,8 +71,6 @@ def repeat_runs_in_sequence_to_count(sequence, tokens):
         this function should wrap around the ened of `sequence` whenever
         ``len(sequence) < start + length`` or not.
 
-    .. todo:: Reimplement this function to return a generator.
-
     Generalizations of this function would include functions to repeat subruns
     in `sequence` to not only a certain count, as implemented here, but to a
     certain length, weight or sum. That is,
@@ -81,15 +79,12 @@ def repeat_runs_in_sequence_to_count(sequence, tokens):
     ``sequencetools.repeat_subruns_to_sum()``.
     '''
     from abjad.tools import scoretools
-
     assert isinstance(sequence, list)
     assert all(not isinstance(x, scoretools.Component) for x in sequence)
     assert isinstance(tokens, list)
     assert all(len(x) == 3 for x in tokens)
-
     len_l = len(sequence)
     instructions = []
-
     for start, length, count in tokens:
         new_slice = []
         stop = start + length
@@ -98,14 +93,11 @@ def repeat_runs_in_sequence_to_count(sequence, tokens):
         index = stop % len_l
         instruction = (index, new_slice, count)
         instructions.append(instruction)
-
     result = sequence[:]
-
     for index, new_slice, count in reversed(sorted(instructions)):
         insert = []
         for i in range(count):
             insert.extend(new_slice)
         insert = tuple(insert)
         result.insert(index, insert)
-
     return result
