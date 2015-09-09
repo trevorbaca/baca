@@ -1,0 +1,15 @@
+1.  Remove remaining instrumenttools functions.
+
+2.  Remove scoretools.make_repeated_notes() from all tests.
+
+3.  Modernize baca/music/music.py in all respects.
+    Port Čáry, Sekka and Lidércfény forward at the same time.
+
+4.  Write doc tests for baca utilities.
+
+5.  Set up HTML API for baca utilities.
+
+6.  Set up HTML API for baca makers.
+
+7.  Search for Mark in all baca (and all scores) and replace.
+    Search for 'mark' in all baca (and all scores) and replace.
