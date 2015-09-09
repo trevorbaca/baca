@@ -82,7 +82,7 @@ class PitchSpecifier(abctools.AbjadObject):
         if source is not None:
             if isinstance(source, str):
                 source = source.split()
-                source = [pitchtools.NamedPitch(_) for _ in source]
+            source = [pitchtools.NamedPitch(_) for _ in source]
             source = datastructuretools.CyclicTuple(source)
         self._source = source
         assert isinstance(start_index, int), repr(start_index)
