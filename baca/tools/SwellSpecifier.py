@@ -1,0 +1,163 @@
+# -*- coding: utf-8 -*-
+from abjad import *
+
+
+class SwellSpecifier(abctools.AbjadObject):
+    r'''Swell specifier.
+
+    ..  container:: example
+
+        **Example 1.** Initializes swell specifier:
+
+        ::
+
+            >>> import baca
+
+        ::
+
+            >>> specifier = baca.tools.SwellSpecifier(
+            ...     start_count=2,
+            ...     start_token='niente < p',
+            ...     stop_count=2,
+            ...     stop_token='p > niente',
+            ...     )
+
+        ::
+            
+            >>> print(format(specifier))
+            baca.tools.SwellSpecifier(
+                start_count=2,
+                start_token='niente < p',
+                stop_count=2,
+                stop_token='p > niente',
+                )
+
+    '''
+
+    ### CLASS VARIABLES ##
+
+    __slots__ = (
+        '_start_count',
+        '_start_token',
+        '_stop_count',
+        '_stop_token',
+        )
+
+    ### INITIALIZER ###
+
+    def __init__(
+        self,
+        start_count=None,
+        start_token=None,
+        stop_count=None,
+        stop_token=None,
+        ):
+        assert 0 < start_count, repr(start_count)
+        assert isinstance(start_token, str), repr(start_token)
+        assert 0 < stop_count, repr(stop_count)
+        assert isinstance(stop_token, str), repr(stop_token)
+        self._start_count = start_count
+        self._start_token = start_token
+        self._stop_count = stop_count
+        self._stop_token = stop_token
+
+    ### SPECIAL METHODS ###
+
+    def __call__(self, leaves):
+        r'''Calls swell specifier on `leaves`.
+
+        ..  container::
+
+            **Example 1.**
+    
+            ::
+
+                >>> specifier = baca.tools.SwellSpecifier(
+                ...     start_count=2,
+                ...     start_token='niente < p',
+                ...     stop_count=2,
+                ...     stop_token='p > niente',
+                ...     )
+
+            ::
+
+                >>> staff = Staff("c'4 d' e' f'")
+                >>> leaves = list(iterate(staff).by_leaf())
+                >>> specifier(leaves)
+
+            ::
+
+                >>> f(staff)
+                \new Staff {
+                    \once \override Hairpin #'circled-tip = ##t
+                    c'4 \<
+                    d'4 \p
+                    \once \override Hairpin #'circled-tip = ##t
+                    e'4 \> \p
+                    f'4 \!
+                }
+
+        Returns none.
+        '''
+        if len(leaves) < self.minimum_leaf_count:
+            message = 'specifier requires at least {} leaves: {!r}.'
+            message = message.format(self.minimum_leaf_count, leaves)
+            raise Exception(message)
+        start_hairpin = spannertools.Hairpin(self.start_token)
+        start_leaves = leaves[:self.start_count]
+        attach(start_hairpin, start_leaves)
+        stop_hairpin = spannertools.Hairpin(self.stop_token)
+        stop_leaves = leaves[-self.stop_count:]
+        attach(stop_hairpin, stop_leaves)
+
+    ### PUBLIC PROPERTIES ###
+
+    @property
+    def minimum_leaf_count(self):
+        r'''Gets minimum leaf count.
+
+        Defined equal to start count + stop count - 1.
+
+        Returns positive integer.
+        '''
+        return self.start_count + self.stop_count - 1
+
+    @property
+    def start_count(self):
+        r'''Gets start count.
+
+        Set to positive integer or none.
+
+        Returns positive integer or none.
+        '''
+        return self._start_count
+
+    @property
+    def start_token(self):
+        r'''Gets start token.
+
+        Set to string or none.
+
+        Returns string or none.
+        '''
+        return self._start_token
+
+    @property
+    def stop_count(self):
+        r'''Gets stop count.
+
+        Set to positive integer or none.
+
+        Returns positive integer or none.
+        '''
+        return self._stop_count
+
+    @property
+    def stop_token(self):
+        r'''Gets stop token.
+
+        Set to string or none.
+
+        Returns string or none.
+        '''
+        return self._stop_token

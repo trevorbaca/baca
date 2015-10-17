@@ -1,0 +1,163 @@
+0.  Apply any OS updates with (Apple menu > App Store ... > Updates).
+
+1.  Change to abjad directory, run all tests and run 'ajv api -M'.
+    Change to the experimental directory, run all tests and run 'ajv api -X'.
+    Change to the IDE directory, run all tests and run 'ajv api -I'.
+
+2.  Decide the title of the score.
+    Decide the name of the score package.
+
+3.  Use IDE (new) to create the score package.
+    Need check and see if this populates score metadata or not.
+
+4.  Edit score metadata by hand with (meta).
+    For example:
+    metadata = datastructuretools.TypedOrderedDict(
+        [
+            ('catalog_number', 'AWN-018'),
+            ('composer', 'Ba\xc4\x8da'),
+            ('forces_tagline', 'for eight players'),
+            ('paper_dimensions', '17 x 11 in'),
+            ('price', '\\$80 / \\euro 72'),
+            ('title', 'Fabergé Investigations'),
+            ('year', 2016),
+            ]
+        )
+
+5.  Quit the IDE.
+    Edit ~/.profile and add score package navigation aliases.
+    For example:
+        export FABERGE=$SCORES/faberge
+        alias fabx="clear; cd $FABERGE/faberge"
+        alias fab="fabx; start-abjad-ide fab"
+    Restart the terminal.
+
+6.  Change to score package score directory in all three terminal windows.
+    Save terminal windows as a group.
+    Use window group when terminal starts.
+    Restart the terminal.
+
+7.  Create new to-do.txt file with (ee > new > to-do.txt).
+
+8.  Create new stages.txt file with (ee > new > stages.txt).
+
+9.  Define the score stages.
+    Commit with (ci).
+
+10. Copy an existing score template with (oo > cp).
+    Edit ScoreTemplate.py by hand.
+    Build score template in score order.
+    Make only one (master) score template per score.
+    Run (dt).
+
+11. Copy an existing instruments package with (mm > cp).
+    Edit instruments/definition.py by hand.
+    Build ordered dictionary in score order.
+    Run (dfk).
+    Eventually run (pdfm).
+
+12. Copy an existing tempi package with (mm > cp).
+    Edit tempi/definition.py by hand.
+    Structure tempi package alphabetically by tempo name.
+    Run (dfk).
+    Eventually run (pdfm).
+
+13. Copy an existing time signatures package with (mm > cp).
+    Edit time_signatures/definition.py by hand.
+    Run (dfk).
+    Eventually run (pdfm).
+
+14. Change to the stylesheets directory with (yy).
+    Leave IDE-generated nonfirst-segment.ily as is.
+
+15. Copy existing default-instrument-names.ily with (yy > cp).
+    Edit default-instrument-names.ily by hand.
+    Define default instrument names in score order.
+    Insert blank lines between pairs of definitions.
+    Define only one default instrument name per player; ignore doublings.
+    (No method exists to check LilyPond stylesheet edits.)
+    (Probably IDE can create default-instrument-names.ily automatically.)
+
+16. Replace IDE-generated stylesheet.ily with existing stylesheet.ily.
+    Copy existing stylesheet.ily with (yy > cp).
+    Edit stylesheet.ily by hand.
+    Define generic contexts first; then define score contexts in score order.
+    Make sure stylesheet includes ...
+        \override TextScript.font-name = #"Palatino"
+    ... in the Score context to stop LaTeX's pdfpages fl ligature problems.
+    (No method exists to check LilyPond stylesheet edits.)
+    (Eventually create much of stylesheet.ily from ScoreTemplate.py.)
+
+17. If parts will be produced:
+    Copy existing parts.ily with (yy > cp).
+    Edit parts.ily by hand.
+    Probably no editing will be required.
+
+18. Copy existing abbreviations file with (mm > cp).
+    Edit __abbreviations__.py by hand.
+    Abbreviate voices in score order.
+    Run (!python __abbreviations__.py).
+    Commit changes to score package:
+    "Made score template, instruments and stylesheet."
+
+19. Create all segments with yet-to-be-implemented (gg > setup).
+    To define 'name' by hand:
+        metadata = collections.OrderedDict([
+            ('name', 'K'),
+            ])
+    To create segments by hand:
+    (gg > new > segment__introduction > meta > define 'name' by hand)
+    (gg > new > segment_a > meta > define 'name' by hand)
+    ...
+    (gg > new > segment_q > meta > define 'name' by hand)
+
+20. Define stub version of first segment with (#introduction).
+    Copy definition.py with (cp).
+    Edit introduction/definition.py by hand.
+    Define segment-maker; do not define time or color.
+    Run (pdfm) repeatedly until PDF renders successfully.
+    Check title typography; edit stylesheet.ily with (@sty).
+    Check (lpg) to make sure no errors or warnings appear in LilyPong log.
+    
+21. Define stub version of nonfirst segment with (#A).
+    Copy definition.py with (cp).
+    Edit introduction/definition.py by hand.
+    Define segment-maker; do not define time or color.
+    Supply enough time signatures to create two pages of music or more.
+    This will allow stylesheet footer-checking when stub score is built, below.
+    Run (pdfm) repeatedly until PDF renders successfully.
+    Make sure that no blue-colored default instrument names appear.
+    Check (lpg) to make sure no errors or warnings appear in LilyPong log.
+
+22. Build stub version of score with yet-to-be-implemented (bb > setup).
+    (Until then: 
+        !trash assets
+        !trash segments
+        !trash parts.ily
+        !trash segments.ily
+        lyc > rf
+        fcg > pg > mg > bcg > sg
+        Edit music.ly by hand; comment-out not-yet-created segments
+        fci > pi > mi > bci > si
+        )
+    Run (lyc > mi > si). Debug as necessary.
+    Call (score.pdf) to inspect stub score.
+    Check footers on pages two and greater; edit (@sty) as necessary.
+
+23. Go to score directory with (ss).
+    Run (dt).
+    Run (pt).
+    Use (ci) to commit changes to score package: "Built stub segments."
+    Quit the IDE.
+
+24. In the termainl, change to baca package with (cdb).
+    Run 'ajv doctest; py.test -rf'.
+    Commit changes to baca package.
+
+25. Change to _docs package with (cds > _docs).
+    Run build_scores_api.py.
+    Commit changes to _docs package: "Rebuilt docs."
+
+26. Change to abjad directory, run all tests and run 'ajv api -M'.
+    Change to the experimental directory, run all tests and run 'ajv api -X'.
+    Change to the IDE directory, run all tests and run 'ajv api -I'.

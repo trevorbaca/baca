@@ -1,0 +1,570 @@
+# -*- coding: utf-8 -*-
+import collections
+from abjad import *
+
+
+# TODO: write comprehensive tests
+class PitchSpecifier(abctools.AbjadObject):
+    r'''Pitch specifier.
+
+    ..  container:: example
+
+        **Example 1.** Makes pitch specifier from pitch numbers:
+
+        ::
+
+            >>> import baca
+            >>> specifier = baca.tools.PitchSpecifier(
+            ...     source=[19, 13, 15, 16, 17, 23],
+            ...     )
+
+        ::
+
+            >>> print(format(specifier))
+            baca.tools.PitchSpecifier(
+                source=datastructuretools.CyclicTuple(
+                    [
+                        pitchtools.NamedPitch("g''"),
+                        pitchtools.NamedPitch("cs''"),
+                        pitchtools.NamedPitch("ef''"),
+                        pitchtools.NamedPitch("e''"),
+                        pitchtools.NamedPitch("f''"),
+                        pitchtools.NamedPitch("b''"),
+                        ]
+                    ),
+                )
+
+    ..  container:: example
+
+        **Example 2.** Makes empty pitch specifier:
+
+        ::
+
+            >>> import baca
+            >>> specifier = baca.tools.PitchSpecifier()
+
+        ::
+
+            >>> print(format(specifier))
+            baca.tools.PitchSpecifier()
+
+    '''
+
+    ### CLASS VARIABLES ###
+
+    __slots__ = (
+        '_acyclic',
+        '_counts',
+        '_mutates_score',
+        '_operators',
+        '_repetition_intervals',
+        '_reverse',
+        '_source',
+        '_start_index',
+        '_use_exact_spelling',
+        )
+
+    ### INITIALIZER ###
+
+    def __init__(
+        self,
+        acyclic=None,
+        counts=None,
+        operators=None,
+        repetition_intervals=None,
+        reverse=None,
+        source=None,
+        start_index=None,
+        ):
+        from abjad.tools import pitchtools
+        if acyclic is not None:
+            acyclic = bool(acyclic)
+        self._acyclic = acyclic
+        if counts is not None:
+            assert mathtools.all_are_positive_integers(counts), repr(counts)
+        self._counts = counts
+        # because chords sometimes replace notes
+        self._mutates_score = True
+        if operators is not None:
+            operators = tuple(operators)
+        self._operators = operators
+        self._repetition_intervals = repetition_intervals
+        if reverse is not None:
+            reverse = bool(reverse)
+        self._reverse = reverse
+        if isinstance(source, str):
+            self._use_exact_spelling = True
+        elif (isinstance(source, collections.Iterable) and 
+            isinstance(source[0], pitchtools.NamedPitch)):
+            self._use_exact_spelling = True
+        elif (isinstance(source, collections.Iterable) and 
+            isinstance(source[0], pitchtools.Segment)):
+            self._use_exact_spelling = True
+        elif (isinstance(source, collections.Iterable) and 
+            isinstance(source[0], pitchtools.Set)):
+            self._use_exact_spelling = True
+        else:
+            self._use_exact_spelling = False
+        if source is not None:
+            if isinstance(source, str):
+                source = source.split()
+            source_  = []
+            for element in source:
+                try:
+                    element = pitchtools.NamedPitch(element)
+                except ValueError:
+                    pass
+                source_.append(element)
+            source = source_
+            source = datastructuretools.CyclicTuple(source)
+        self._source = source
+        if start_index is not None:
+            assert isinstance(start_index, int), repr(start_index)
+        self._start_index = start_index
+
+    ### SPECIAL METHODS ###
+
+    def __call__(self, logical_ties):
+        r'''Calls pitch specifier on `logical_ties`.
+
+        ..  todo:: Write comprehensive tests.
+
+        Returns none.
+        '''
+        counts = self.counts or [1]
+        counts = datastructuretools.CyclicTuple(counts)
+        start_index = self.start_index
+        if start_index is None:
+            start_index = 0
+        if self.source:
+            source_length = len(self.source)
+            logical_tie_count = len(logical_ties)
+            if self.acyclic and source_length < logical_tie_count:
+                message = 'only {} pitches for {} logical ties: {!r} and {!r}.'
+                message = message.format(
+                    source_length, 
+                    logical_tie_count, 
+                    self,
+                    logical_ties,
+                    )
+                raise Exception(message)
+            if 0 <= start_index:
+                absolute_start_index = start_index
+            else:
+                absolute_start_index = source_length - abs(start_index) + 1
+            source = self.source
+            if self.reverse:
+                source = reversed(source)
+                source = datastructuretools.CyclicTuple(source)
+                absolute_start_index = source_length - absolute_start_index - 1
+            current_count_index = 0
+            current_count = counts[current_count_index]
+            current_logical_tie_index = 0
+            source_length = len(self.source)
+            for logical_tie in logical_ties:
+                index = absolute_start_index + current_logical_tie_index
+                pitch_expression = source[index]
+                repetition_count = index // len(self.source)
+                if (self.repetition_intervals is not None and
+                    0 < repetition_count):
+                    repetition_intervals = datastructuretools.CyclicTuple(
+                        self.repetition_intervals)
+                    repetition_intervals = repetition_intervals[
+                        :repetition_count]
+                    repetition_interval = sum(repetition_intervals)
+                    if isinstance(repetition_interval, int):
+                        pitch_number = pitch_expression.pitch_number
+                        pitch_number += repetition_interval
+                        pitch_expression = type(pitch_expression)(pitch_number)
+                    else:
+                        message = 'named repetition intervals'
+                        message += ' not yet implemented.'
+                        raise NotImplementedError(message)
+                if self.operators:
+                    for operator_ in self.operators:
+                        pitch_expression = operator_(pitch_expression)
+                if isinstance(pitch_expression, pitchtools.Pitch):
+                    if self._use_exact_spelling:
+                        pitch = pitch_expression
+                        assert isinstance(pitch, pitchtools.NamedPitch), pitch
+                    else:
+                        pitch_expression = pitchtools.NumberedPitch(
+                            pitch_expression)
+                        pitch = pitchtools.NamedPitch(pitch_expression)
+                elif isinstance(pitch_expression, pitchtools.Segment):
+                    pitch = pitch_expression
+                else:
+                    message = 'must be pitch or pitch segment: {!r}.'
+                    message = message.format(pitch_expression)
+                    raise Exception(message)
+                for note in logical_tie:
+                    if isinstance(pitch, pitchtools.Pitch):
+                        note.written_pitch = pitch
+                    elif isinstance(pitch, pitchtools.PitchSegment):
+                        assert isinstance(pitch, collections.Iterable)
+                        chord = Chord(pitch, note.written_duration)
+                        mutate(note).replace(chord)
+                    else:
+                        message = 'must be pitch or pitch segment: {!r}.'
+                        message = message.format(pitch)
+                        raise Exception(message)
+                current_count -= 1
+                if current_count == 0:
+                    current_logical_tie_index += 1
+                    current_count_index += 1
+                    current_count = counts[current_count_index]
+        else:
+            assert self.operators, repr(self.operators)
+            for logical_tie in logical_ties:
+                for note in logical_tie:
+                    for operator_ in self.operators:
+                        written_pitch = note.written_pitch
+                        pitch_expression = written_pitch.numbered_pitch_class
+                        pitch_expression = operator_(pitch_expression)
+                        written_pitch = pitchtools.NamedPitch(pitch_expression)
+                        note.written_pitch = written_pitch
+
+    ### PUBLIC PROPERTIES ###
+
+    @property
+    def acyclic(self):
+        r'''Is true when pitch specifier reads pitches once only.
+
+        Defaults to none.
+
+        Set to true, false or none.
+
+        Returns true, false or none.
+        '''
+        return self._acyclic
+
+    @property
+    def counts(self):
+        r'''Gets counts of pitch specifier.
+
+        ..  container:: example
+
+            **Example 1.** Gets counts:
+
+            ::
+
+                >>> specifier = baca.tools.PitchSpecifier(
+                ...     counts=[20, 12, 12, 6],
+                ...     operators=[
+                ...         pitchtools.Inversion(),
+                ...         pitchtools.Transposition(2),
+                ...         ],
+                ...     source=[19, 13, 15, 16, 17, 23],
+                ...     )
+
+            ::
+
+                >>> specifier.counts
+                [20, 12, 12, 6]
+
+        Defaults to none.
+
+        Set to positive integers or none.
+
+        Returns positive integers or none.
+        '''
+        return self._counts
+
+    @property
+    def operators(self):
+        r'''Gets operators.
+
+        ..  container:: example
+
+            **Example 1.** Gets operators:
+
+            ::
+
+                >>> specifier = baca.tools.PitchSpecifier(
+                ...     operators=[
+                ...         pitchtools.Inversion(),
+                ...         pitchtools.Transposition(2),
+                ...         ],
+                ...     source=[19, 13, 15, 16, 17, 23],
+                ...     )
+
+            ::
+
+                >>> specifier.operators
+                (Inversion(), Transposition(index=2))
+
+        Defaults to none.
+
+        Set to operators or none.
+
+        Returns operators or none.
+        '''
+        return self._operators
+
+    @property
+    def repetition_intervals(self):
+        r'''Gets repetition intervals.
+
+
+        ..  container:: example
+
+            **Example 1.** With no repetition intervals:
+
+            ::
+
+                >>> specifier = baca.tools.PitchSpecifier(
+                ...     source=[0, 1, 2, 3],
+                ...     )
+
+            ::
+
+                >>> specifier.repetition_intervals is None
+                True
+
+            ::
+
+                >>> for index in range(12):
+                ...     pitch = specifier.get_pitch(index)
+                ...     pitch.pitch_number
+                0
+                1
+                2
+                3
+                0
+                1
+                2
+                3
+                0
+                1
+                2
+                3
+
+        ..  container:: example
+
+            **Example 2.** With fixed repetition interval:
+
+            ::
+
+                >>> specifier = baca.tools.PitchSpecifier(
+                ...     repetition_intervals=[12],
+                ...     source=[0, 1, 2, 3],
+                ...     )
+
+            ::
+
+                >>> specifier.repetition_intervals
+                [12]
+
+            ::
+
+                >>> for index in range(12):
+                ...     pitch = specifier.get_pitch(index)
+                ...     pitch.pitch_number
+                0
+                1
+                2
+                3
+                12
+                13
+                14
+                15
+                24
+                25
+                26
+                27
+
+        ..  container:: example
+
+            **Example 3.** With patterned repetition intervals:
+
+            ::
+
+                >>> specifier = baca.tools.PitchSpecifier(
+                ...     repetition_intervals=[12, 1],
+                ...     source=[0, 1, 2, 3],
+                ...     )
+
+            ::
+
+                >>> specifier.repetition_intervals
+                [12, 1]
+
+            ::
+
+                >>> for index in range(12):
+                ...     pitch = specifier.get_pitch(index)
+                ...     pitch.pitch_number
+                0
+                1
+                2
+                3
+                12
+                13
+                14
+                15
+                13
+                14
+                15
+                16
+
+        Defaults to none.
+
+        Set to intervals or none.
+
+        Returns intervals or none.
+        '''
+        return self._repetition_intervals
+
+    @property
+    def reverse(self):
+        r'''Is true when pitch specifier should read pitches in reverse.
+
+        ..  container:: example
+
+            **Example 1.** Reverses pitch specifier:
+
+            ::
+
+                >>> specifier = baca.tools.PitchSpecifier(
+                ...     reverse=True,
+                ...     source=[19, 13, 15, 16, 17, 23],
+                ...     start_index=-1,
+                ...     )
+
+            ::
+
+                >>> specifier.reverse
+                True
+
+        Defaults to none.
+
+        Set to true, false or none.
+
+        Returns true, false or none.
+        '''
+        return self._reverse
+
+    @property
+    def source(self):
+        r'''Gets source.
+
+        ..  container:: example
+
+            **Example 1.** Gets source:
+
+            ::
+
+                >>> specifier = baca.tools.PitchSpecifier(
+                ...     source=[19, 13, 15, 16, 17, 23],
+                ...     )
+
+            ::
+
+                >>> for pitch in specifier.source:
+                ...     pitch
+                NamedPitch("g''")
+                NamedPitch("cs''")
+                NamedPitch("ef''")
+                NamedPitch("e''")
+                NamedPitch("f''")
+                NamedPitch("b''")
+
+        Defaults to none.
+
+        Set to pitch source or none.
+
+        Returns pitch source or none.
+        '''
+        return self._source
+
+
+    @property
+    def start_index(self):
+        r'''Gets start index.
+
+        ..  container:: example
+
+            **Example 1.** Gets start index:
+
+            ::
+
+                >>> specifier = baca.tools.PitchSpecifier(
+                ...     reverse=True,
+                ...     source=[19, 13, 15, 16, 17, 23],
+                ...     start_index=-1,
+                ...     )
+
+            ::
+
+                >>> specifier.start_index
+                -1
+
+        Defaults to none.
+
+        Set to integer or none.
+
+        Returns integer or none.
+        '''
+        return self._start_index
+
+    ### PUBLIC METHODS ###
+
+    def get_pitch(self, index):
+        r'''Gets pitch at index.
+
+        ..  container:: example
+
+            **Example 1.** Gets pitches:
+
+            ::
+                
+                >>> specifier = baca.tools.PitchSpecifier(
+                ...     source=[12, 13, 14, 15]
+                ...     )
+
+            ::
+
+                >>> for index in range(12):
+                ...     specifier.get_pitch(index)
+                NamedPitch("c''")
+                NamedPitch("cs''")
+                NamedPitch("d''")
+                NamedPitch("ef''")
+                NamedPitch("c''")
+                NamedPitch("cs''")
+                NamedPitch("d''")
+                NamedPitch("ef''")
+                NamedPitch("c''")
+                NamedPitch("cs''")
+                NamedPitch("d''")
+                NamedPitch("ef''")
+
+        Returns pitch.
+        '''
+        if not self.source:
+            message = 'no source pitches.'
+            raise Exception(message)
+        if self.acyclic:
+            source = list(self.source)
+        else:
+            source = datastructuretools.CyclicTuple(self.source)
+        start_index = self.start_index or 0
+        index += start_index
+        pitch_expression = source[index]
+        repetition_count = index // len(self.source)
+        if self.repetition_intervals is not None and 0 < repetition_count:
+            repetition_intervals = datastructuretools.CyclicTuple(
+                self.repetition_intervals)
+            repetition_intervals = repetition_intervals[:repetition_count]
+            repetition_interval = sum(repetition_intervals)
+            if isinstance(repetition_interval, int):
+                pitch_number = pitch_expression.pitch_number
+                pitch_number += repetition_interval
+                pitch_expression = type(pitch_expression)(pitch_number)
+            else:
+                message = 'named repetition intervals not yet implemented.'
+                raise NotImplementedError(message)
+        if self.operators:
+            for operator_ in self.operators:
+                pitch_expression = operator_(pitch_expression)
+        return pitch_expression
