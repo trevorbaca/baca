@@ -1,9 +1,13 @@
 # -*- coding: utf-8 -*-
-from abjad import *
+from abjad.tools import abctools
 
 
 class ScopedSpecifier(abctools.AbjadObject):
     r'''Scoped specifier.
+
+    ::
+
+        >>> import baca
 
     ..  container:: example
 
@@ -11,7 +15,6 @@ class ScopedSpecifier(abctools.AbjadObject):
 
         ::
 
-            >>> import baca
             >>> specifier = baca.tools.ScopedSpecifier(
             ...     ('Violin Music Voice', (1, 4)),
             ...     baca.tools.PitchSpecifier(
@@ -23,11 +26,11 @@ class ScopedSpecifier(abctools.AbjadObject):
 
             >>> print(format(specifier))
             baca.tools.ScopedSpecifier(
-                baca.tools.SimpleScope(
+                scope=baca.tools.SimpleScope(
                     voice_name='Violin Music Voice',
                     stages=(1, 4),
                     ),
-                baca.tools.PitchSpecifier(
+                specifier=baca.tools.PitchSpecifier(
                     source=datastructuretools.CyclicTuple(
                         [
                             pitchtools.NamedPitch("g'"),
@@ -38,8 +41,9 @@ class ScopedSpecifier(abctools.AbjadObject):
                             pitchtools.NamedPitch("b'"),
                             ]
                         ),
-                    )
+                    ),
                 )
+
 
     ..  container:: example
 
@@ -61,7 +65,7 @@ class ScopedSpecifier(abctools.AbjadObject):
 
             >>> print(format(specifier))
             baca.tools.ScopedSpecifier(
-                baca.tools.CompoundScope(
+                scope=baca.tools.CompoundScope(
                     simple_scopes=(
                         baca.tools.SimpleScope(
                             voice_name='Violin Music Voice',
@@ -73,7 +77,7 @@ class ScopedSpecifier(abctools.AbjadObject):
                             ),
                         ),
                     ),
-                baca.tools.PitchSpecifier(
+                specifier=baca.tools.PitchSpecifier(
                     source=datastructuretools.CyclicTuple(
                         [
                             pitchtools.NamedPitch("g'"),
@@ -84,8 +88,9 @@ class ScopedSpecifier(abctools.AbjadObject):
                             pitchtools.NamedPitch("b'"),
                             ]
                         ),
-                    )
+                    ),
                 )
+
 
     ..  container:: example
 
@@ -95,7 +100,7 @@ class ScopedSpecifier(abctools.AbjadObject):
 
             >>> specifier = baca.tools.ScopedSpecifier(
             ...     ('Violin Music Voice', (1, 4)),
-            ...     baca.tools.DisplacementSpecifier(
+            ...     baca.tools.OctaveDisplacementSpecifier(
             ...         displacements=[0, 0, 0, 0, 1, 1, 1, 1],
             ...         ),
             ...     )
@@ -104,20 +109,22 @@ class ScopedSpecifier(abctools.AbjadObject):
 
             >>> print(format(specifier))
             baca.tools.ScopedSpecifier(
-                baca.tools.SimpleScope(
+                scope=baca.tools.SimpleScope(
                     voice_name='Violin Music Voice',
                     stages=(1, 4),
                     ),
-                baca.tools.DisplacementSpecifier(
+                specifier=baca.tools.OctaveDisplacementSpecifier(
                     displacements=datastructuretools.CyclicTuple(
                         [0, 0, 0, 0, 1, 1, 1, 1]
                         ),
-                    )
+                    ),
                 )
 
     '''
 
     ### CLASS VARIABLES ###
+
+    __documentation_section__ = 'Segment-maker components'
 
     __slots__ = (
         '_scope',
@@ -126,7 +133,7 @@ class ScopedSpecifier(abctools.AbjadObject):
 
     ### INITIALIZER ###
 
-    def __init__(self, scope, specifier):
+    def __init__(self, scope=None, specifier=None):
         import baca
         if isinstance(scope, tuple):
             scope = baca.tools.SimpleScope(*scope)

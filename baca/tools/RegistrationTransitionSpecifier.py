@@ -1,60 +1,141 @@
 # -*- coding: utf-8 -*-
-from abjad import *
+from abjad.tools import abctools
+from abjad.tools import pitchtools
+from abjad.tools import timespantools
 
 
 class RegistrationTransitionSpecifier(abctools.AbjadObject):
     r'''Registration transition specifier.
 
+    ::
+
+        >>> import baca
+
     ..  container:: example
 
-        Starts at the octave of C4 and then transitions to the octave of C5:
+        **Example 1.** Starts at the octave of C4 and then transitions to the
+        octave of C5:
 
-        ::
-
-            >>> import baca
-            >>> specifier = baca.tools.RegistrationTransitionSpecifier(
-            ...     start_registration=pitchtools.Registration(
-            ...         [('[A0, C8]', 0)],
-            ...          ),
-            ...     stop_registration=pitchtools.Registration(
-            ...         [('[A0, C8]', 12)],
-            ...         ),
+            >>> segment_maker = baca.tools.SegmentMaker(
+            ...     score_template=baca.tools.ViolinSoloScoreTemplate(),
+            ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
             ...     )
 
         ::
-            
-            >>> print(format(specifier))
-            baca.tools.RegistrationTransitionSpecifier(
-                start_registration=pitchtools.Registration(
-                    [
-                        pitchtools.RegistrationComponent(
-                            source_pitch_range=pitchtools.PitchRange(
-                                range_string='[A0, C8]',
-                                ),
-                            target_octave_start_pitch=pitchtools.NumberedPitch(0),
-                            ),
-                        ]
-                    ),
-                stop_registration=pitchtools.Registration(
-                    [
-                        pitchtools.RegistrationComponent(
-                            source_pitch_range=pitchtools.PitchRange(
-                                range_string='[A0, C8]',
-                                ),
-                            target_octave_start_pitch=pitchtools.NumberedPitch(12),
-                            ),
-                        ]
-                    ),
-                )
+
+            >>> specifiers = segment_maker.append_specifiers(
+            ...     ('vn', baca.tools.stages(1)),
+            ...     [
+            ...         baca.pitch.pitches('C4 D4 E4 F4'),
+            ...         baca.rhythm.make_even_run_rhythm_specifier(),
+            ...         baca.tools.RegistrationTransitionSpecifier(
+            ...             start_registration=pitchtools.Registration(
+            ...                 [('[A0, C8]', 0)],
+            ...                 ),
+            ...             stop_registration=pitchtools.Registration(
+            ...                 [('[A0, C8]', 12)],
+            ...                 ),
+            ...             ),
+            ...         ],
+            ...     )
+
+        ::
+
+            >>> result = segment_maker(is_doc_example=True)
+            >>> lilypond_file, segment_metadata = result
+            >>> show(lilypond_file) # doctest: +SKIP
+
+        ..  doctest::
+
+            >>> score = lilypond_file.score_block.items[0]
+            >>> f(score)
+            \context Score = "Score" <<
+                \tag violin
+                \context TimeSignatureContext = "Time Signature Context" <<
+                    \context TimeSignatureContextMultimeasureRests = "Time Signature Context Multimeasure Rests" {
+                        {
+                            \time 4/8
+                            R1 * 1/2
+                        }
+                        {
+                            \time 3/8
+                            R1 * 3/8
+                        }
+                        {
+                            \time 4/8
+                            R1 * 1/2
+                        }
+                        {
+                            \time 3/8
+                            R1 * 3/8
+                        }
+                    }
+                    \context TimeSignatureContextSkips = "Time Signature Context Skips" {
+                        {
+                            \time 4/8
+                            s1 * 1/2
+                        }
+                        {
+                            \time 3/8
+                            s1 * 3/8
+                        }
+                        {
+                            \time 4/8
+                            s1 * 1/2
+                        }
+                        {
+                            \time 3/8
+                            s1 * 3/8
+                        }
+                    }
+                >>
+                \context MusicContext = "Music Context" <<
+                    \tag violin
+                    \context ViolinMusicStaff = "Violin Music Staff" {
+                        \clef "treble"
+                        \context ViolinMusicVoice = "Violin Music Voice" {
+                            {
+                                c'8 [
+                                d'8
+                                e'8
+                                f'8 ]
+                            }
+                            {
+                                c''8 [
+                                d''8
+                                e''8 ]
+                            }
+                            {
+                                f''8 [
+                                c''8
+                                d''8
+                                e''8 ]
+                            }
+                            {
+                                f''8 [
+                                c''8
+                                d''8 ]
+                                \bar "|"
+                            }
+                        }
+                    }
+                >>
+            >>
 
     '''
 
     ### CLASS VARIABLES ##
 
+    __documentation_section__ = 'Specifiers'
+
     __slots__ = (
         '_start_registration',
         '_stop_registration',
         )
+
+    _include_selection_timespan = True
+
+    _selector_type = 'logical ties'
 
     ### INITIALIZER ###
 
@@ -73,6 +154,10 @@ class RegistrationTransitionSpecifier(abctools.AbjadObject):
 
     # TODO: extend SegmentMaker to pass timespan in here
     def __call__(self, logical_ties, timespan):
+        r'''Calls registration transition specifier.
+
+        Returns none.
+        '''
         for logical_tie in logical_ties:
             offset = logical_tie.get_timespan().start_offset
             registration = self._make_interpolated_registration(
@@ -129,16 +214,20 @@ class RegistrationTransitionSpecifier(abctools.AbjadObject):
 
     @property
     def start_registration(self):
-        r'''Gets start registration of registration transition specifier.
+        r'''Gets start registration.
 
         Set to registration.
+
+        Returns registration.
         '''
         return self._start_registration
 
     @property
     def stop_registration(self):
-        r'''Gets stop registration of registration transition specifier.
+        r'''Gets stop registration.
 
         Set to registration.
+
+        Returns registration.
         '''
         return self._stop_registration

@@ -1,18 +1,28 @@
 # -*- coding: utf-8 -*-
 import baca
-from abjad import *
+from abjad.tools import abctools
+from abjad.tools import durationtools
+from abjad.tools import expressiontools
+from abjad.tools import indicatortools
+from abjad.tools import instrumenttools
+from abjad.tools import mathtools
+from abjad.tools import rhythmmakertools
+from abjad.tools import scoretools
+from abjad.tools import selectiontools
+from abjad.tools import sequencetools
+from abjad.tools.topleveltools import inspect_
 
 
 class RhythmSpecifier(abctools.AbjadObject):
-    r'''Unscoped rhythm specifier.
+    r'''Rhythm specifier.
+
+    ::
+
+        >>> import baca
 
     ..  container:: example
 
         **Example 1.** Specifies rhythm:
-
-        ::
-
-            >>> import baca
 
         ::
 
@@ -58,6 +68,8 @@ class RhythmSpecifier(abctools.AbjadObject):
     '''
 
     ### CLASS ATTRIBUTES ###
+
+    __documentation_section__ = 'Specifiers'
 
     __slots__ = (
         '_clef', # remove
@@ -144,7 +156,7 @@ class RhythmSpecifier(abctools.AbjadObject):
         if start_offset is not None:
             assert isinstance(start_offset, durationtools.Offset)
         music, start_offset = self._make_rhythm(time_signatures, start_offset)
-        assert isinstance(music, (tuple, list, Voice)), repr(music)
+        assert isinstance(music, (tuple, list, scoretools.Voice)), repr(music)
         first_leaf = self._get_first_leaf(music)
         last_leaf = self._get_last_leaf(music)
         prototype = instrumenttools.Percussion
@@ -156,16 +168,17 @@ class RhythmSpecifier(abctools.AbjadObject):
                 scope=Staff,
                 )
         if self.clef is not None:
-            attach(self.clef, first_leaf, scope=Staff)
+            attach(self.clef, first_leaf, scope=scoretools.Staff)
+        pitched_prototype = (scoretools.Note, scoretools.Chord)
         if self.staff_line_count is not None:
             self._set_staff_line_count(first_leaf, self.staff_line_count)
-        elif self.clef == Clef('percussion'):
+        elif self.clef == indicatortools.Clef('percussion'):
             self._set_staff_line_count(first_leaf, 1)
-        if self.tie_first and isinstance(first_leaf, (Note, Chord)):
+        if self.tie_first and isinstance(first_leaf, pitched_prototype):
             attach('tie to me', first_leaf)
             if self._use_messiaen_style_ties:
                 attach('use messiaen style ties', first_leaf)
-        if self.tie_last and isinstance(last_leaf, (Note, Chord)):
+        if self.tie_last and isinstance(last_leaf, pitched_prototype):
             attach('tie from me', last_leaf)
             if self._use_messiaen_style_ties:
                 attach('use messiaen style ties', last_leaf)
@@ -256,7 +269,7 @@ class RhythmSpecifier(abctools.AbjadObject):
     def _durations_to_divisions(durations, start_offset):
         divisions = [durationtools.Division(_) for _ in durations]
         durations = [_.duration for _ in divisions]
-        start_offset = Offset(start_offset)
+        start_offset = durationtools.Offset(start_offset)
         durations.insert(0, start_offset)
         start_offsets = mathtools.cumulative_sums(durations)[1:-1]
         assert len(divisions) == len(start_offsets)
@@ -308,7 +321,7 @@ class RhythmSpecifier(abctools.AbjadObject):
         import baca
         if self.division_expression is not None:
             divisions = self.division_expression(divisions)
-            if not isinstance(divisions, Sequence):
+            if not isinstance(divisions, sequencetools.Sequence):
                 message = 'must be division sequence: {!r}.'
                 message = message.format(divisions)
                 raise Exception(message)
@@ -360,8 +373,8 @@ class RhythmSpecifier(abctools.AbjadObject):
         if not self.rhythm_overwrites:
             return selections, start_offset
         dummy_measures = scoretools.make_spacer_skip_measures(time_signatures)
-        dummy_time_signature_voice = Voice(dummy_measures)
-        dummy_music_voice = Voice()
+        dummy_time_signature_voice = scoretools.Voice(dummy_measures)
+        dummy_music_voice = scoretools.Voice()
         dummy_music_voice.extend(selections)
         dummy_staff = Staff([dummy_time_signature_voice, dummy_music_voice])
         dummy_staff.is_simultaneous = True

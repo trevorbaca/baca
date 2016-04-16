@@ -1,9 +1,13 @@
 # -*- coding: utf-8 -*-
-from abjad import *
+from abjad.tools import abctools
 
 
 class SpecifierWrapper(abctools.AbjadObject):
     r'''Specifier wrapper.
+
+    ::
+
+        >>> import baca
 
     ..  container:: example
 
@@ -12,20 +16,14 @@ class SpecifierWrapper(abctools.AbjadObject):
 
         ::
 
-            >>> import baca
-
-        ::
-
             >>> specifier_wrapper = baca.tools.SpecifierWrapper(
             ...     specifier=Dynamic('p'),
-            ...     scope_to_leaves=True,
             ...     )
 
         ::
             
             >>> print(format(specifier_wrapper))
             baca.tools.SpecifierWrapper(
-                scope_to_leaves=True,
                 specifier=indicatortools.Dynamic(
                     name='p',
                     ),
@@ -35,9 +33,10 @@ class SpecifierWrapper(abctools.AbjadObject):
 
     ### CLASS VARIABLES ##
 
+    __documentation_section__ = 'Segment-maker components'
+
     __slots__ = (
         '_prototype',
-        '_scope_to_leaves',
         '_specifier',
         '_start_index',
         '_stop_index',
@@ -50,7 +49,6 @@ class SpecifierWrapper(abctools.AbjadObject):
     def __init__(
         self,
         prototype=None,
-        scope_to_leaves=None,
         specifier=None,
         start_index=None,
         stop_index=None,
@@ -58,7 +56,7 @@ class SpecifierWrapper(abctools.AbjadObject):
         with_previous_leaf=None,
         ):
         self._prototype = prototype
-        self._scope_to_leaves = scope_to_leaves
+        assert specifier is not None, repr(specifier)
         self._specifier = specifier
         self._start_index = start_index
         self._stop_index = stop_index
@@ -76,17 +74,6 @@ class SpecifierWrapper(abctools.AbjadObject):
         Returns prototype, list of classes or none.
         '''
         return self._prototype
-
-    @property
-    def scope_to_leaves(self):
-        r'''Is true when specifier should use leaves (rather than logical
-        ties).
-
-        Set to true, false or none.
-
-        Returns true, false or none.
-        '''
-        return self._scope_to_leaves
 
     @property
     def specifier(self):

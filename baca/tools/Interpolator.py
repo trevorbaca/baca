@@ -1,36 +1,40 @@
 # -*- coding: utf-8 -*-
 import fractions
-from abjad.tools.abctools.AbjadValueObject import AbjadValueObject
+from abjad.tools import abctools
 
 
-class Interpolation(AbjadValueObject):
-    r'''Interpolation.
+class Interpolator(abctools.AbjadObject):
+    r'''Interpolator.
     
+    ::
+
+        >>> import baca
+
     ..  container:: example
+
+        **Example 1.** Interpolates linearly from -5 up to 5:
 
         ::
 
-            >>> import baca
+            >>> Interpolator = baca.tools.Interpolator
+            >>> interpolate_linear = baca.tools.Interpolator.interpolate_linear
+            >>> for count in range(8):
+            ...     result = Interpolator.interpolate_linear(-5, 5, count)
+            ...     print(count, result)
+            0 []
+            1 [-5]
+            2 [-5, 5]
+            3 [-5, 0, 5]
+            4 [-5, Fraction(-5, 3), Fraction(5, 3), 5]
+            5 [-5, Fraction(-5, 2), 0, Fraction(5, 2), 5]
+            6 [-5, -3, -1, 1, 3, 5]
+            7 [-5, Fraction(-10, 3), Fraction(-5, 3), 0, Fraction(5, 3), Fraction(10, 3), 5]
 
     '''
 
-    ### INITIALIZER ###
+    ### CLASS VARIABLES ###
 
-    def __init__(
-        self,
-        ):
-        pass
-
-    ### SPECIAL METHODS ###
-
-    def __call__(self, numbers=None):
-        r'''Calls interpolation on `numbers`.
-
-        Returns list of numbers.
-        '''
-        pass
-
-    ### PUBLIC PROPERTIES ###
+    __documentation_section__ = 'Utility classes'
 
     ### PUBLIC METHODS ###
 
@@ -44,10 +48,10 @@ class Interpolation(AbjadValueObject):
 
             ::
 
-                >>> Interpolation = baca.tools.Interpolation
-                >>> interpolate_linear = baca.tools.Interpolation.interpolate_linear
+                >>> Interpolator = baca.tools.Interpolator
+                >>> interpolate_linear = baca.tools.Interpolator.interpolate_linear
                 >>> for count in range(8):
-                ...     result = Interpolation.interpolate_linear(-5, 5, count)
+                ...     result = Interpolator.interpolate_linear(-5, 5, count)
                 ...     print(count, result)
                 0 []
                 1 [-5]
@@ -64,10 +68,10 @@ class Interpolation(AbjadValueObject):
 
             ::
 
-                >>> Interpolation = baca.tools.Interpolation
-                >>> interpolate_linear = baca.tools.Interpolation.interpolate_linear
+                >>> Interpolator = baca.tools.Interpolator
+                >>> interpolate_linear = baca.tools.Interpolator.interpolate_linear
                 >>> for count in range(8):
-                ...     result = Interpolation.interpolate_linear(2, 1, count)
+                ...     result = Interpolator.interpolate_linear(2, 1, count)
                 ...     print(count, result)
                 0 []
                 1 [2]

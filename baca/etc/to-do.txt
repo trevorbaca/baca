@@ -1,11 +1,9 @@
 DEVELOPMENT TO-DO
 
-0.  Update Travis tests so that scores fail when segments do not interpret.
+1.  Update Travis tests so that scores fail when segments do not interpret.
 
-1.  Merge StageSpecifier, TempoMap, SpacingSpecifier, VoltaMap into
+2.  Merge StageSpecifier, TempoSpecifier, SpacingSpecifier, VoltaSpecifier into
     SegmentGlobalSpecifier
-
-2.  Make notation show up in baca api so tests can be authored
 
 3.  Include markup, rhythm, dynamics and other library modules in Bača api
 
@@ -90,7 +88,7 @@ DEVELOPMENT TO-DO
 21. Write segment clock time to disk.
     Then implement an IDE feature to calculate complete score clock time.
 
-22. Implement some time of CompoundSpecifier. CompoundSpecifier will know
+22. Implement some type of CompoundSpecifier. CompoundSpecifier will know
     how to apply music to a series of divisions that optionally contain
     *discontiguities*. This means that a CompoundSpecifier can be configured
     a single time (possibly behind a factory function implemented in the tools

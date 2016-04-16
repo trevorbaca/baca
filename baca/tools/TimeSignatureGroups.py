@@ -1,16 +1,23 @@
 # -*- coding: utf-8 -*-
 from abjad.tools import abctools
-from abjad import *
+from abjad.tools import durationtools
+from abjad.tools import indicatortools
+from abjad.tools import lilypondfiletools
+from abjad.tools import markuptools
+from abjad.tools import schemetools
+from abjad.tools import scoretools
+from abjad.tools import spannertools
+from abjad.tools.topleveltools import attach
+from abjad.tools.topleveltools import override
+from abjad.tools.topleveltools import set_
 
 
 class TimeSignatureGroups(abctools.AbjadObject):
     r'''Time signature groups.
 
-    ..  container:: example
+    ::
 
-        ::
-
-            >>> import baca
+        >>> import baca
 
     ..  container:: example
 
@@ -50,13 +57,21 @@ class TimeSignatureGroups(abctools.AbjadObject):
 
     '''
 
+    ### CLASS VARIABLES ###
+
+    __documentation_section__ = 'Output products'
+
+    __slots__ = (
+        '_groups',
+        )
+
     ### INITIALIZER ###
 
     def __init__(self, groups):
         prototype = indicatortools.TimeSignature
         for group in groups:
             assert all(isinstance(_, prototype) for _ in group), repr(group)
-        self.groups = groups
+        self._groups = groups
 
     ### SPECIAL METHODS ###
 
@@ -127,21 +142,16 @@ class TimeSignatureGroups(abctools.AbjadObject):
                 }
             >>
 
-        ::
-
-            >>> note = Note("c'4")
-            >>> show(note) # doctest: +SKIP
-
         Returns LilyPond file.
         ''' 
-        staff = Staff()
+        staff = scoretools.Staff()
         staff.consists_commands.append('Horizontal_bracket_engraver')
         for group_index, group in enumerate(self.groups):
             measure_group = self._make_measure_group(group)
             spanner = spannertools.HorizontalBracketSpanner()
             attach(spanner, measure_group)
             staff.extend(measure_group)
-            markup = Markup(group_index, direction=Up)
+            markup = markuptools.Markup(group_index, direction=Up)
             markup = markup.smaller()
             markup = markup.circle()
             attach(markup, measure_group[0])
@@ -154,23 +164,32 @@ class TimeSignatureGroups(abctools.AbjadObject):
         override(staff).rest.transparent = True
         override(staff).text_script.extra_offset = (slide, 0)
         override(staff).text_script.staff_padding = 4.5
-        score = Score([staff])
+        score = scoretools.Score([staff])
         moment = schemetools.SchemeMoment((1, 8))
         set_(score).proportional_notation_duration = moment
         lilypond_file = lilypondfiletools.make_basic_lilypond_file(score)
         lilypond_file.header_block.tagline = markuptools.Markup.null()
         return lilypond_file
 
-
     ### PRIVATE METHODS ###
 
     def _make_measure_group(self, group):
         measure_group = []
         for time_signature in group:
-            multiplier = Multiplier(time_signature.duration)
-            rest = Rest(Duration(1))
+            multiplier = durationtools.Multiplier(time_signature.duration)
+            rest = scoretools.Rest(durationtools.Duration(1))
             attach(multiplier, rest)
-            measure = Measure(time_signature, [rest])
+            measure = scoretools.Measure(time_signature, [rest])
             measure.always_format_time_signature = True
             measure_group.append(measure)
         return measure_group
+
+    ### PUBLIC PROPERTIES ###
+
+    @property
+    def groups(self):
+        r'''Gets groups.
+
+        Returns list of time signature lists.
+        '''
+        return self._groups

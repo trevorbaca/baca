@@ -1,40 +1,147 @@
 # -*- coding: utf-8 -*-
-from abjad import *
+import copy
+from abjad.tools import abctools
+from abjad.tools import scoretools
+from abjad.tools import spannertools
+from abjad.tools.topleveltools import attach
 
 
 class SwellSpecifier(abctools.AbjadObject):
     r'''Swell specifier.
 
+    ::
+
+        >>> import baca
+
     ..  container:: example
 
-        **Example 1.** Initializes swell specifier:
+        **Example 1.** 
 
         ::
 
-            >>> import baca
 
-        ::
-
-            >>> specifier = baca.tools.SwellSpecifier(
-            ...     start_count=2,
-            ...     start_token='niente < p',
-            ...     stop_count=2,
-            ...     stop_token='p > niente',
+            >>> segment_maker = baca.tools.SegmentMaker(
+            ...     score_template=baca.tools.ViolinSoloScoreTemplate(),
+            ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
             ...     )
 
         ::
-            
-            >>> print(format(specifier))
-            baca.tools.SwellSpecifier(
-                start_count=2,
-                start_token='niente < p',
-                stop_count=2,
-                stop_token='p > niente',
-                )
+
+            >>> specifiers = segment_maker.append_specifiers(
+            ...     ('vn', baca.tools.stages(1)),
+            ...     [
+            ...         baca.pitch.pitches('E4'),
+            ...         baca.rhythm.make_even_run_rhythm_specifier(),
+            ...         handlertools.HairpinHandler(
+            ...             hairpin_tokens=[
+            ...                 baca.tools.SwellSpecifier(
+            ...                     start_count=2,
+            ...                     start_token='niente < p',
+            ...                     stop_count=2,
+            ...                     stop_token='p > niente',
+            ...                     ),
+            ...                 ],
+            ...             span=[4, 3],
+            ...             ),
+            ...         ],
+            ...     )
+
+        ::
+
+            >>> result = segment_maker(is_doc_example=True)
+            >>> lilypond_file, segment_metadata = result
+            >>> show(lilypond_file) # doctest: +SKIP
+
+        ..  doctest::
+
+            >>> score = lilypond_file.score_block.items[0]
+            >>> f(score)
+            \context Score = "Score" <<
+                \tag violin
+                \context TimeSignatureContext = "Time Signature Context" <<
+                    \context TimeSignatureContextMultimeasureRests = "Time Signature Context Multimeasure Rests" {
+                        {
+                            \time 4/8
+                            R1 * 1/2
+                        }
+                        {
+                            \time 3/8
+                            R1 * 3/8
+                        }
+                        {
+                            \time 4/8
+                            R1 * 1/2
+                        }
+                        {
+                            \time 3/8
+                            R1 * 3/8
+                        }
+                    }
+                    \context TimeSignatureContextSkips = "Time Signature Context Skips" {
+                        {
+                            \time 4/8
+                            s1 * 1/2
+                        }
+                        {
+                            \time 3/8
+                            s1 * 3/8
+                        }
+                        {
+                            \time 4/8
+                            s1 * 1/2
+                        }
+                        {
+                            \time 3/8
+                            s1 * 3/8
+                        }
+                    }
+                >>
+                \context MusicContext = "Music Context" <<
+                    \tag violin
+                    \context ViolinMusicStaff = "Violin Music Staff" {
+                        \clef "treble"
+                        \context ViolinMusicVoice = "Violin Music Voice" {
+                            {
+                                \once \override Hairpin #'circled-tip = ##t
+                                e'8 \< [
+                                e'8 \p
+                                \once \override Hairpin #'circled-tip = ##t
+                                e'8 \> \p
+                                e'8 \! ]
+                            }
+                            {
+                                \once \override Hairpin #'circled-tip = ##t
+                                e'8 \< [
+                                \once \override Hairpin #'circled-tip = ##t
+                                e'8 \p \> \p
+                                e'8 \! ]
+                            }
+                            {
+                                \once \override Hairpin #'circled-tip = ##t
+                                e'8 \< [
+                                e'8 \p
+                                \once \override Hairpin #'circled-tip = ##t
+                                e'8 \> \p
+                                e'8 \! ]
+                            }
+                            {
+                                \once \override Hairpin #'circled-tip = ##t
+                                e'8 \< [
+                                \once \override Hairpin #'circled-tip = ##t
+                                e'8 \p \> \p
+                                e'8 \! ]
+                                \bar "|"
+                            }
+                        }
+                    }
+                >>
+            >>
 
     '''
 
     ### CLASS VARIABLES ##
+
+    __documentation_section__ = 'Specifiers'
 
     __slots__ = (
         '_start_count',
@@ -64,49 +171,33 @@ class SwellSpecifier(abctools.AbjadObject):
     ### SPECIAL METHODS ###
 
     def __call__(self, leaves):
-        r'''Calls swell specifier on `leaves`.
-
-        ..  container::
-
-            **Example 1.**
-    
-            ::
-
-                >>> specifier = baca.tools.SwellSpecifier(
-                ...     start_count=2,
-                ...     start_token='niente < p',
-                ...     stop_count=2,
-                ...     stop_token='p > niente',
-                ...     )
-
-            ::
-
-                >>> staff = Staff("c'4 d' e' f'")
-                >>> leaves = list(iterate(staff).by_leaf())
-                >>> specifier(leaves)
-
-            ::
-
-                >>> f(staff)
-                \new Staff {
-                    \once \override Hairpin #'circled-tip = ##t
-                    c'4 \<
-                    d'4 \p
-                    \once \override Hairpin #'circled-tip = ##t
-                    e'4 \> \p
-                    f'4 \!
-                }
+        r'''Calls swell specifier.
 
         Returns none.
         '''
+        start_hairpin = spannertools.Hairpin(
+            self.start_token,
+            include_rests=True,
+            )
         if len(leaves) < self.minimum_leaf_count:
-            message = 'specifier requires at least {} leaves: {!r}.'
-            message = message.format(self.minimum_leaf_count, leaves)
-            raise Exception(message)
-        start_hairpin = spannertools.Hairpin(self.start_token)
+            #message = 'specifier requires at least {} leaves: {!r}.'
+            #message = message.format(self.minimum_leaf_count, leaves)
+            #raise Exception(message)
+            if len(leaves) == 0:
+                return
+            for leaf in leaves:
+                if isinstance(leaf, (scoretools.Note, scoretools.Chord)):
+                    lone_dynamic = start_hairpin.stop_dynamic
+                    lone_dynamic = copy.copy(lone_dynamic)
+                    attach(lone_dynamic, leaf)
+                    break
+            return
         start_leaves = leaves[:self.start_count]
         attach(start_hairpin, start_leaves)
-        stop_hairpin = spannertools.Hairpin(self.stop_token)
+        stop_hairpin = spannertools.Hairpin(
+            self.stop_token,
+            include_rests=True,
+            )
         stop_leaves = leaves[-self.stop_count:]
         attach(stop_hairpin, stop_leaves)
 

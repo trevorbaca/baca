@@ -1,7 +1,8 @@
 # -*- coding: utf-8 -*-
+from abjad.tools import abctools
 
 
-class Counter(object):
+class Counter(abctools.AbjadObject):
     r'''Counter.
 
     ..  container:: example
@@ -67,6 +68,8 @@ class Counter(object):
     '''
 
     ### CLASS VARIABLES ###
+
+    __documentation_section__ = 'Utility classes'
 
     __slots__ = (
         '_current',

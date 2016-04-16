@@ -1,9 +1,13 @@
 # -*- coding: utf-8 -*-
 from abjad.tools import abctools
+from abjad.tools import datastructuretools
+from abjad.tools import pitchtools
+from abjad.tools import scoretools
+from abjad.tools import selectiontools
 
 
-class RegistrationSpecifier(abctools.AbjadObject):
-    r"""Registration specifier.
+class OctaveDisplacementSpecifier(abctools.AbjadObject):
+    r"""Octave displacement specifier.
 
     ::
 
@@ -25,12 +29,10 @@ class RegistrationSpecifier(abctools.AbjadObject):
             >>> specifiers = segment_maker.append_specifiers(
             ...     ('vn', baca.tools.stages(1)),
             ...     [
-            ...         baca.pitch.pitches('G4 G4 G4 G4 Eb4 Eb4 Eb4'),
+            ...         baca.pitch.pitches('G4'),
             ...         baca.rhythm.make_even_run_rhythm_specifier(),
-            ...         baca.tools.RegistrationSpecifier(
-            ...             registration=pitchtools.Registration(
-            ...                 [('[A0, C4)', 15), ('[C4, C8)', 27)],
-            ...                 ),
+            ...         baca.tools.OctaveDisplacementSpecifier(
+            ...             displacements=[0, 0, 1, 1, 0, 0, -1, -1, 2, 2],
             ...             ),
             ...         ],
             ...     )
@@ -91,26 +93,26 @@ class RegistrationSpecifier(abctools.AbjadObject):
                         \clef "treble"
                         \context ViolinMusicVoice = "Violin Music Voice" {
                             {
-                                g'''8 [
-                                g'''8
-                                g'''8
-                                g'''8 ]
+                                g'8 [
+                                g'8
+                                g''8
+                                g''8 ]
                             }
                             {
-                                ef'''8 [
-                                ef'''8
-                                ef'''8 ]
+                                g'8 [
+                                g'8
+                                g8 ]
                             }
                             {
-                                g'''8 [
+                                g8 [
                                 g'''8
                                 g'''8
-                                g'''8 ]
+                                g'8 ]
                             }
                             {
-                                ef'''8 [
-                                ef'''8
-                                ef'''8 ]
+                                g'8 [
+                                g''8
+                                g''8 ]
                                 \bar "|"
                             }
                         }
@@ -125,7 +127,7 @@ class RegistrationSpecifier(abctools.AbjadObject):
     __documentation_section__ = 'Specifiers'
 
     __slots__ = (
-        '_registration',
+        '_displacements',
         )
 
     _selector_type = 'logical ties'
@@ -134,48 +136,61 @@ class RegistrationSpecifier(abctools.AbjadObject):
 
     def __init__(
         self,
-        registration=None,
+        displacements=None,
         ):
         from abjad.tools import pitchtools
-        prototype = (type(None), pitchtools.Registration)
-        assert isinstance(registration, prototype), repr(registration)
-        self._registration = registration
+        displacements = tuple(displacements)
+        assert self._is_octave_displacement_vector(displacements)
+        displacements = datastructuretools.CyclicTuple(displacements)
+        self._displacements = displacements
 
     ### SPECIAL METHODS ###
 
     def __call__(self, logical_ties):
-        r'''Calls registration specifier.
+        r'''Calls displacement specifier.
 
         Returns none.
         '''
-        for logical_tie in logical_ties:
+        for i, logical_tie in enumerate(logical_ties):
+            assert isinstance(logical_tie, selectiontools.LogicalTie)
+            displacement = self.displacements[i]
+            interval = pitchtools.NumberedInterval(displacement * 12)
             for note in logical_tie:
-                written_pitch = self.registration([note.written_pitch])
+                assert isinstance(note, scoretools.Note), repr(note)
+                written_pitch = note.written_pitch
+                written_pitch += interval
                 note.written_pitch = written_pitch
+
+    ### PRIVATE METHODS ###
+
+    def _is_octave_displacement_vector(self, expr):
+        if isinstance(expr, (tuple, list)):
+            if all(isinstance(_, int) for _ in expr):
+                return True
+        return False
 
     ### PUBLIC PROPERTIES ###
 
     @property
-    def registration(self):
-        r'''Gets registration.
+    def displacements(self):
+        r'''Gets displacements.
 
         ..  container:: example
 
             ::
 
-                >>> specifier = baca.tools.RegistrationSpecifier(
-                ...     registration=pitchtools.Registration(
-                ...         [('[A0, C4)', 15), ('[C4, C8)', 27)],
-                ...         ),
+        
+                >>> specifier = baca.tools.OctaveDisplacementSpecifier(
+                ...     displacements=[0, 0, 0, 1, 1, 0, 0, 0, -1, 1, 1, 2, 2],
                 ...     )
 
             ::
 
-                >>> specifier.registration
-                Registration([('[A0, C4)', 15), ('[C4, C8)', 27)])
+                >>> specifier.displacements
+                CyclicTuple([0, 0, 0, 1, 1, 0, 0, 0, -1, 1, 1, 2, 2])
 
-        Set to registration or none.
+        Set to integers or none.
 
-        Returns registration or none.
+        Returns cyclic tuple or none.
         '''
-        return self._registration
+        return self._displacements

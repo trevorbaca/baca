@@ -14,21 +14,122 @@ from abjad.tools.topleveltools import set_
 class SpacingSpecifier(AbjadObject):
     r'''Spacing specifier.
 
+    ::
+
+        >>> import baca
+
     ..  container:: example
 
         **Example 1.** Default spacing specifier:
 
         ::
-            >>> import baca
+
+            >>> segment_maker = baca.tools.SegmentMaker(
+            ...     score_template=baca.tools.ViolinSoloScoreTemplate(),
+            ...     spacing_specifier=baca.tools.SpacingSpecifier(),
+            ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
+            ...     )
 
         ::
 
-            >>> specifier = baca.tools.SpacingSpecifier()
+            >>> specifiers = segment_maker.append_specifiers(
+            ...     ('vn', baca.tools.stages(1)),
+            ...     [
+            ...         baca.pitch.pitches('E4'),
+            ...         baca.rhythm.make_even_run_rhythm_specifier(),
+            ...         ],
+            ...     )
 
         ::
 
-            >>> print(format(specifier))
-            baca.tools.SpacingSpecifier()
+            >>> result = segment_maker(is_doc_example=True)
+            >>> lilypond_file, segment_metadata = result
+            >>> show(lilypond_file) # doctest: +SKIP
+
+        ..  doctest::
+
+            >>> score = lilypond_file.score_block.items[0]
+            >>> f(score)
+            \context Score = "Score" <<
+                \tag violin
+                \context TimeSignatureContext = "Time Signature Context" <<
+                    \context TimeSignatureContextMultimeasureRests = "Time Signature Context Multimeasure Rests" {
+                        {
+                            \time 4/8
+                            R1 * 1/2
+                        }
+                        {
+                            \time 3/8
+                            R1 * 3/8
+                        }
+                        {
+                            \time 4/8
+                            R1 * 1/2
+                        }
+                        {
+                            \time 3/8
+                            R1 * 3/8
+                        }
+                    }
+                    \context TimeSignatureContextSkips = "Time Signature Context Skips" {
+                        {
+                            \time 4/8
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 8)
+                            \newSpacingSection
+                            s1 * 1/2
+                        }
+                        {
+                            \time 3/8
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 8)
+                            \newSpacingSection
+                            s1 * 3/8
+                        }
+                        {
+                            \time 4/8
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 8)
+                            \newSpacingSection
+                            s1 * 1/2
+                        }
+                        {
+                            \time 3/8
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 8)
+                            \newSpacingSection
+                            s1 * 3/8
+                        }
+                    }
+                >>
+                \context MusicContext = "Music Context" <<
+                    \tag violin
+                    \context ViolinMusicStaff = "Violin Music Staff" {
+                        \clef "treble"
+                        \context ViolinMusicVoice = "Violin Music Voice" {
+                            {
+                                e'8 [
+                                e'8
+                                e'8
+                                e'8 ]
+                            }
+                            {
+                                e'8 [
+                                e'8
+                                e'8 ]
+                            }
+                            {
+                                e'8 [
+                                e'8
+                                e'8
+                                e'8 ]
+                            }
+                            {
+                                e'8 [
+                                e'8
+                                e'8 ]
+                                \bar "|"
+                            }
+                        }
+                    }
+                >>
+            >>
 
     ..  container:: example
 
@@ -36,24 +137,122 @@ class SpacingSpecifier(AbjadObject):
 
         ::
 
-            >>> specifier = baca.tools.SpacingSpecifier(
-            ...     fermata_measure_width=Duration(1, 4), 
-            ...     minimum_width=Duration(1, 12),
-            ...     multiplier=Multiplier(5, 2),
+            >>> segment_maker = baca.tools.SegmentMaker(
+            ...     score_template=baca.tools.ViolinSoloScoreTemplate(),
+            ...     spacing_specifier=baca.tools.SpacingSpecifier(
+            ...         fermata_measure_width=Duration(1, 4), 
+            ...         minimum_width=Duration(1, 12),
+            ...         multiplier=Multiplier(5, 2),
+            ...         ),
+            ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
             ...     )
 
         ::
 
-            >>> print(format(specifier))
-            baca.tools.SpacingSpecifier(
-                fermata_measure_width=durationtools.Duration(1, 4),
-                minimum_width=durationtools.Duration(1, 12),
-                multiplier=durationtools.Multiplier(5, 2),
-                )
+            >>> specifiers = segment_maker.append_specifiers(
+            ...     ('vn', baca.tools.stages(1)),
+            ...     [
+            ...         baca.pitch.pitches('E4'),
+            ...         baca.rhythm.make_even_run_rhythm_specifier(),
+            ...         ],
+            ...     )
+
+        ::
+
+            >>> result = segment_maker(is_doc_example=True)
+            >>> lilypond_file, segment_metadata = result
+            >>> show(lilypond_file) # doctest: +SKIP
+
+        ..  doctest::
+
+            >>> score = lilypond_file.score_block.items[0]
+            >>> f(score)
+            \context Score = "Score" <<
+                \tag violin
+                \context TimeSignatureContext = "Time Signature Context" <<
+                    \context TimeSignatureContextMultimeasureRests = "Time Signature Context Multimeasure Rests" {
+                        {
+                            \time 4/8
+                            R1 * 1/2
+                        }
+                        {
+                            \time 3/8
+                            R1 * 3/8
+                        }
+                        {
+                            \time 4/8
+                            R1 * 1/2
+                        }
+                        {
+                            \time 3/8
+                            R1 * 3/8
+                        }
+                    }
+                    \context TimeSignatureContextSkips = "Time Signature Context Skips" {
+                        {
+                            \time 4/8
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 30)
+                            \newSpacingSection
+                            s1 * 1/2
+                        }
+                        {
+                            \time 3/8
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 30)
+                            \newSpacingSection
+                            s1 * 3/8
+                        }
+                        {
+                            \time 4/8
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 30)
+                            \newSpacingSection
+                            s1 * 1/2
+                        }
+                        {
+                            \time 3/8
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 30)
+                            \newSpacingSection
+                            s1 * 3/8
+                        }
+                    }
+                >>
+                \context MusicContext = "Music Context" <<
+                    \tag violin
+                    \context ViolinMusicStaff = "Violin Music Staff" {
+                        \clef "treble"
+                        \context ViolinMusicVoice = "Violin Music Voice" {
+                            {
+                                e'8 [
+                                e'8
+                                e'8
+                                e'8 ]
+                            }
+                            {
+                                e'8 [
+                                e'8
+                                e'8 ]
+                            }
+                            {
+                                e'8 [
+                                e'8
+                                e'8
+                                e'8 ]
+                            }
+                            {
+                                e'8 [
+                                e'8
+                                e'8 ]
+                                \bar "|"
+                            }
+                        }
+                    }
+                >>
+            >>
 
     '''
 
     ### CLASS VARIABLES ###
+
+    __documentation_section__ = 'Specifiers'
 
     __slots__ = (
         '_fermata_measure_width',

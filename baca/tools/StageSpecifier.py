@@ -1,17 +1,17 @@
 # -*- coding: utf-8 -*-
-from abjad.tools.abctools.AbjadObject import AbjadObject
+from abjad.tools import abctools
 
 
-class StageSpecifier(AbjadObject):
+class StageSpecifier(abctools.AbjadObject):
     r'''Stage specifier.
+
+    ::
+
+        >>> import baca
 
     ..  container:: example
 
         **Example 1.** Counts with a single explicit time signature mixed in:
-
-        ::
-
-            >>> import baca
 
         ::
 
@@ -67,6 +67,8 @@ class StageSpecifier(AbjadObject):
     '''
 
     ### CLASS VARIABLES ###
+
+    __documentation_section__ = 'Specifiers'
 
     __slots__ = (
         '_items',

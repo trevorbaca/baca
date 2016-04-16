@@ -1,16 +1,20 @@
 # -*- coding: utf-8 -*-
 import copy
+from abjad.tools import abctools
 from abjad.tools import indicatortools
 from abjad.tools import scoretools
 from abjad.tools import selectiontools
 from abjad.tools import spannertools
-from abjad.tools.abctools.AbjadObject import AbjadObject
 from abjad.tools.topleveltools import attach
 from abjad.tools.topleveltools import iterate
 
 
-class TransitionSpecifier(AbjadObject):
+class TransitionSpecifier(abctools.AbjadObject):
     r'''Transition specifier.
+
+    ::
+
+        >>> import baca
 
     ..  container:: example
 
@@ -18,42 +22,141 @@ class TransitionSpecifier(AbjadObject):
 
         ::
 
-            >>> import baca
-
-        ::
-
-            >>> start_markup = Markup('ord.').upright()
-            >>> stop_markup = Markup('pont.').upright()
-            >>> specifier = baca.tools.TransitionSpecifier(
-            ...     start_markup=start_markup,
-            ...     stop_markup=stop_markup,
+            >>> segment_maker = baca.tools.SegmentMaker(
+            ...     score_template=baca.tools.ViolinSoloScoreTemplate(),
+            ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
             ...     )
 
         ::
 
-            >>> print(format(specifier))
-            baca.tools.TransitionSpecifier(
-                start_markup=markuptools.Markup(
-                    contents=(
-                        markuptools.MarkupCommand(
-                            'upright',
-                            'ord.'
-                            ),
-                        ),
-                    ),
-                stop_markup=markuptools.Markup(
-                    contents=(
-                        markuptools.MarkupCommand(
-                            'upright',
-                            'pont.'
-                            ),
-                        ),
-                    ),
-                )
+            >>> specifiers = segment_maker.append_specifiers(
+            ...     ('vn', baca.tools.stages(1)),
+            ...     [
+            ...         baca.pitch.pitches('E4 F4'),
+            ...         baca.rhythm.make_even_run_rhythm_specifier(),
+            ...         baca.tools.TransitionSpecifier(
+            ...             start_markup=baca.markup.ord_(),
+            ...             stop_markup=baca.markup.pont(),
+            ...             ),
+            ...         ],
+            ...     )
+
+        ::
+
+            >>> result = segment_maker(is_doc_example=True)
+            >>> lilypond_file, segment_metadata = result
+            >>> show(lilypond_file) # doctest: +SKIP
+
+        ..  doctest::
+
+            >>> score = lilypond_file.score_block.items[0]
+            >>> f(score)
+            \context Score = "Score" <<
+                \tag violin
+                \context TimeSignatureContext = "Time Signature Context" <<
+                    \context TimeSignatureContextMultimeasureRests = "Time Signature Context Multimeasure Rests" {
+                        {
+                            \time 4/8
+                            R1 * 1/2
+                        }
+                        {
+                            \time 3/8
+                            R1 * 3/8
+                        }
+                        {
+                            \time 4/8
+                            R1 * 1/2
+                        }
+                        {
+                            \time 3/8
+                            R1 * 3/8
+                        }
+                    }
+                    \context TimeSignatureContextSkips = "Time Signature Context Skips" {
+                        {
+                            \time 4/8
+                            s1 * 1/2
+                        }
+                        {
+                            \time 3/8
+                            s1 * 3/8
+                        }
+                        {
+                            \time 4/8
+                            s1 * 1/2
+                        }
+                        {
+                            \time 3/8
+                            s1 * 3/8
+                        }
+                    }
+                >>
+                \context MusicContext = "Music Context" <<
+                    \tag violin
+                    \context ViolinMusicStaff = "Violin Music Staff" {
+                        \clef "treble"
+                        \context ViolinMusicVoice = "Violin Music Voice" {
+                            {
+                                \once \override TextSpanner.arrow-width = 0.25
+                                \once \override TextSpanner.bound-details.left-broken.text = ##f
+                                \once \override TextSpanner.bound-details.left.stencil-align-dir-y = #center
+                                \once \override TextSpanner.bound-details.left.text = \markup {
+                                    \concat
+                                        {
+                                            \override
+                                                #'(font-name . "Palatino")
+                                                \whiteout
+                                                    \upright
+                                                        ord.
+                                            \hspace
+                                                #0.5
+                                        }
+                                    }
+                                \once \override TextSpanner.bound-details.right-broken.arrow = ##f
+                                \once \override TextSpanner.bound-details.right-broken.padding = 0
+                                \once \override TextSpanner.bound-details.right.arrow = ##t
+                                \once \override TextSpanner.bound-details.right.padding = 1.75
+                                \once \override TextSpanner.bound-details.right.stencil-align-dir-y = #center
+                                \once \override TextSpanner.dash-fraction = 0.25
+                                \once \override TextSpanner.dash-period = 1.5
+                                e'8 [ \startTextSpan
+                                f'8
+                                e'8
+                                f'8 ]
+                            }
+                            {
+                                e'8 [
+                                f'8
+                                e'8 ]
+                            }
+                            {
+                                f'8 [
+                                e'8
+                                f'8
+                                e'8 ]
+                            }
+                            {
+                                f'8 [
+                                e'8
+                                f'8 ] \stopTextSpan ^ \markup {
+                                    \override
+                                        #'(font-name . "Palatino")
+                                        \whiteout
+                                            \upright
+                                                pont.
+                                    }
+                                \bar "|"
+                            }
+                        }
+                    }
+                >>
+            >>
 
     '''
 
     ### CLASS VARIABLES ###
+
+    __documentation_section__ = 'Specifiers'
 
     __slots__ = (
         '_solid',
@@ -79,7 +182,7 @@ class TransitionSpecifier(AbjadObject):
     ### SPECIAL METHODS ###
 
     def __call__(self, components):
-        r'''Calls transition specifier on `components`.
+        r'''Calls transition specifier.
 
         Returns none.
         '''

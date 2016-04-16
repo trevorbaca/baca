@@ -1,20 +1,83 @@
 # -*- coding: utf-8 -*-
-from abjad import *
 import baca
+from abjad.tools import abctools
+from abjad.tools import datastructuretools
+from abjad.tools import mathtools
+from abjad.tools import pitchtools
+from abjad.tools import sequencetools
 
 
 class ZaggedPitchClassMaker(abctools.AbjadObject):
     r'''Zagged pitch-class maker.
 
-    Object-oriented extension to helianthation.
+    ::
 
-    Same as helianthation when `division_ratios` and `grouping_counts` are
-    none.
+        >>> import baca
 
-    Extensions provided by `division_ratios` and `grouping_counts`.
+    ..  container:: example
+
+        **Example.**
+
+        ::
+
+            >>> maker = baca.tools.ZaggedPitchClassMaker(
+            ...     pc_cells=[
+            ...         [7, 1, 3, 4, 5, 11],
+            ...         [3, 5, 6, 7],
+            ...         [9, 10, 0, 8],
+            ...         ],
+            ...     division_ratios=[
+            ...         [[1], [1], [1], [1, 1]],
+            ...         [[1], [1], [1], [1, 1, 1], [1, 1, 1]],
+            ...         ],
+            ...         grouping_counts=[1, 1, 1, 2, 3],
+            ...     )
+
+        ::
+
+            >>> indigo_pitch_classes = maker()
+            >>> for x in indigo_pitch_classes: x
+            PitchClassTree([[NumberedPitchClass(7), NumberedPitchClass(1), NumberedPitchClass(3), NumberedPitchClass(4), NumberedPitchClass(5), NumberedPitchClass(11)]])
+            PitchClassTree([[NumberedPitchClass(3), NumberedPitchClass(5), NumberedPitchClass(6), NumberedPitchClass(7)]])
+            PitchClassTree([[NumberedPitchClass(9), NumberedPitchClass(10), NumberedPitchClass(0), NumberedPitchClass(8)]])
+            PitchClassTree([[NumberedPitchClass(7), NumberedPitchClass(3)], [NumberedPitchClass(5), NumberedPitchClass(6)]])
+            PitchClassTree([[NumberedPitchClass(8), NumberedPitchClass(9), NumberedPitchClass(10), NumberedPitchClass(0)], [NumberedPitchClass(11), NumberedPitchClass(7), NumberedPitchClass(1), NumberedPitchClass(3), NumberedPitchClass(4), NumberedPitchClass(5)], [NumberedPitchClass(0), NumberedPitchClass(8), NumberedPitchClass(9), NumberedPitchClass(10)]])
+            PitchClassTree([[NumberedPitchClass(5), NumberedPitchClass(11)]])
+            PitchClassTree([[NumberedPitchClass(7), NumberedPitchClass(1)]])
+            PitchClassTree([[NumberedPitchClass(3), NumberedPitchClass(4)]])
+            PitchClassTree([[NumberedPitchClass(6)], [NumberedPitchClass(7), NumberedPitchClass(3)]])
+            PitchClassTree([[NumberedPitchClass(5)], [NumberedPitchClass(4), NumberedPitchClass(5)], [NumberedPitchClass(11), NumberedPitchClass(7)]])
+            PitchClassTree([[NumberedPitchClass(1), NumberedPitchClass(3)]])
+            PitchClassTree([[NumberedPitchClass(5), NumberedPitchClass(6), NumberedPitchClass(7), NumberedPitchClass(3)]])
+            PitchClassTree([[NumberedPitchClass(10), NumberedPitchClass(0), NumberedPitchClass(8), NumberedPitchClass(9)]])
+            PitchClassTree([[NumberedPitchClass(3), NumberedPitchClass(5), NumberedPitchClass(6), NumberedPitchClass(7)], [NumberedPitchClass(9)]])
+            PitchClassTree([[NumberedPitchClass(10), NumberedPitchClass(0)], [NumberedPitchClass(8)], [NumberedPitchClass(3), NumberedPitchClass(4), NumberedPitchClass(5)]])
+            PitchClassTree([[NumberedPitchClass(11), NumberedPitchClass(7), NumberedPitchClass(1)]])
+            PitchClassTree([[NumberedPitchClass(8), NumberedPitchClass(9), NumberedPitchClass(10), NumberedPitchClass(0)]])
+            PitchClassTree([[NumberedPitchClass(1), NumberedPitchClass(3), NumberedPitchClass(4), NumberedPitchClass(5), NumberedPitchClass(11), NumberedPitchClass(7)]])
+            PitchClassTree([[NumberedPitchClass(7), NumberedPitchClass(3), NumberedPitchClass(5), NumberedPitchClass(6)], [NumberedPitchClass(7), NumberedPitchClass(1), NumberedPitchClass(3), NumberedPitchClass(4), NumberedPitchClass(5), NumberedPitchClass(11)]])
+            PitchClassTree([[NumberedPitchClass(6), NumberedPitchClass(7)], [NumberedPitchClass(3), NumberedPitchClass(5)], [NumberedPitchClass(0), NumberedPitchClass(8), NumberedPitchClass(9), NumberedPitchClass(10)]])
+            PitchClassTree([[NumberedPitchClass(5), NumberedPitchClass(6), NumberedPitchClass(7), NumberedPitchClass(3)]])
+            PitchClassTree([[NumberedPitchClass(10)]])
+            PitchClassTree([[NumberedPitchClass(0), NumberedPitchClass(8)]])
+            PitchClassTree([[NumberedPitchClass(9)], [NumberedPitchClass(11), NumberedPitchClass(7)]])
+            PitchClassTree([[NumberedPitchClass(1), NumberedPitchClass(3)], [NumberedPitchClass(4), NumberedPitchClass(5)], [NumberedPitchClass(9), NumberedPitchClass(10), NumberedPitchClass(0), NumberedPitchClass(8)]])
+            PitchClassTree([[NumberedPitchClass(5), NumberedPitchClass(11), NumberedPitchClass(7), NumberedPitchClass(1), NumberedPitchClass(3), NumberedPitchClass(4)]])
+            PitchClassTree([[NumberedPitchClass(3), NumberedPitchClass(5), NumberedPitchClass(6), NumberedPitchClass(7)]])
+            PitchClassTree([[NumberedPitchClass(4), NumberedPitchClass(5), NumberedPitchClass(11), NumberedPitchClass(7), NumberedPitchClass(1), NumberedPitchClass(3)]])
+            PitchClassTree([[NumberedPitchClass(7)], [NumberedPitchClass(3), NumberedPitchClass(5)]])
+            PitchClassTree([[NumberedPitchClass(6)], [NumberedPitchClass(8)], [NumberedPitchClass(9), NumberedPitchClass(10)]])
+            PitchClassTree([[NumberedPitchClass(0)]])
+            PitchClassTree([[NumberedPitchClass(6), NumberedPitchClass(7), NumberedPitchClass(3), NumberedPitchClass(5)]])
+            PitchClassTree([[NumberedPitchClass(0), NumberedPitchClass(8), NumberedPitchClass(9), NumberedPitchClass(10)]])
+            PitchClassTree([[NumberedPitchClass(3), NumberedPitchClass(4), NumberedPitchClass(5), NumberedPitchClass(11), NumberedPitchClass(7), NumberedPitchClass(1)], [NumberedPitchClass(10), NumberedPitchClass(0), NumberedPitchClass(8), NumberedPitchClass(9)]])
+            PitchClassTree([[NumberedPitchClass(1), NumberedPitchClass(3), NumberedPitchClass(4)], [NumberedPitchClass(5), NumberedPitchClass(11), NumberedPitchClass(7)], [NumberedPitchClass(5), NumberedPitchClass(6), NumberedPitchClass(7), NumberedPitchClass(3)]])
+
     '''
 
     ### CLASS ATTRIBUTES ###
+
+    __documentation_section__ = 'Makers'
 
     __slots__ = (
         '_division_ratios',
@@ -39,6 +102,10 @@ class ZaggedPitchClassMaker(abctools.AbjadObject):
     ### SPECIAL METHODS ###
 
     def __call__(self):
+        r'''Calls zagged pitch-class maker.
+
+        Returns pitch-class tree.
+        '''
         pc_cells = baca.tools.helianthate(
             self.pc_cells, 
             -1, 

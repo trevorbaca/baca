@@ -1,16 +1,16 @@
 # -*- coding: utf-8 -*-
 import baca
-from abjad import *
+from abjad.tools import abctools
 
 
 class SimpleScope(abctools.AbjadObject):
     r'''SimpleScope.
 
+    ::
+
+        >>> import baca
+
     ..  container:: example
-
-        ::
-
-            >>> import baca
 
         ::
 
@@ -30,6 +30,8 @@ class SimpleScope(abctools.AbjadObject):
     '''
 
     ### CLASS VARIABLES ###
+
+    __documentation_section__ = 'Segment-maker components'
 
     __slots__ = (
         '_voice_name',

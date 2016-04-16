@@ -99,3 +99,6 @@ def trill_quarter_notes():
         forbidden_annotations=['color fingering', 'color microtone'],
         minimum_written_duration=durationtools.Duration(1, 4),
         )
+
+def two_line_staff():
+    return spannertools.StaffLinesSpanner(lines=2)

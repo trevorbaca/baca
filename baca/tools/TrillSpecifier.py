@@ -1,33 +1,114 @@
 # -*- coding: utf-8 -*-
-from abjad import *
+from abjad.tools import abctools
+from abjad.tools import durationtools
+from abjad.tools import scoretools
+from abjad.tools import spannertools
+from abjad.tools.topleveltools import attach
+from abjad.tools.topleveltools import inspect_
 
 
 class TrillSpecifier(abctools.AbjadObject):
     r'''Trill specifier.
 
+    ::
+
+        >>> import baca
+
     ..  container:: example
 
-        **Example 1.** Trills all notes a quarter note in duration or greater:
+        **Example 1.** Trills notes a quarter note in duration or greater:
 
         ::
 
-            >>> import baca
-            >>> specifier = baca.tools.TrillSpecifier(
-            ...     minimum_written_duration=Duration(1, 4),
-            ...     maximum_written_duration=None,
+            >>> segment_maker = baca.tools.SegmentMaker(
+            ...     score_template=baca.tools.ViolinSoloScoreTemplate(),
+            ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
             ...     )
 
         ::
-            
-            >>> print(format(specifier))
-            baca.tools.TrillSpecifier(
-                is_harmonic=False,
-                minimum_written_duration=durationtools.Duration(1, 4),
-                )
+
+            >>> specifiers = segment_maker.append_specifiers(
+            ...     ('vn', baca.tools.stages(1)),
+            ...     [
+            ...         baca.pitch.pitches('E4 F4'),
+            ...         baca.rhythm.make_messiaen_note_rhythm_specifier(),
+            ...         baca.tools.TrillSpecifier(
+            ...             minimum_written_duration=Duration(1, 4),
+            ...             maximum_written_duration=None,
+            ...             ),
+            ...         ],
+            ...     )
+
+        ::
+
+            >>> result = segment_maker(is_doc_example=True)
+            >>> lilypond_file, segment_metadata = result
+            >>> show(lilypond_file) # doctest: +SKIP
+
+        ..  doctest::
+
+            >>> score = lilypond_file.score_block.items[0]
+            >>> f(score)
+            \context Score = "Score" <<
+                \tag violin
+                \context TimeSignatureContext = "Time Signature Context" <<
+                    \context TimeSignatureContextMultimeasureRests = "Time Signature Context Multimeasure Rests" {
+                        {
+                            \time 4/8
+                            R1 * 1/2
+                        }
+                        {
+                            \time 3/8
+                            R1 * 3/8
+                        }
+                        {
+                            \time 4/8
+                            R1 * 1/2
+                        }
+                        {
+                            \time 3/8
+                            R1 * 3/8
+                        }
+                    }
+                    \context TimeSignatureContextSkips = "Time Signature Context Skips" {
+                        {
+                            \time 4/8
+                            s1 * 1/2
+                        }
+                        {
+                            \time 3/8
+                            s1 * 3/8
+                        }
+                        {
+                            \time 4/8
+                            s1 * 1/2
+                        }
+                        {
+                            \time 3/8
+                            s1 * 3/8
+                        }
+                    }
+                >>
+                \context MusicContext = "Music Context" <<
+                    \tag violin
+                    \context ViolinMusicStaff = "Violin Music Staff" {
+                        \clef "treble"
+                        \context ViolinMusicVoice = "Violin Music Voice" {
+                            e'2 \startTrillSpan
+                            f'4. \stopTrillSpan \startTrillSpan
+                            e'2 \stopTrillSpan \startTrillSpan
+                            f'4. \stopTrillSpan \stopTrillSpan \startTrillSpan
+                            \bar "|"
+                        }
+                    }
+                >>
+            >>
 
     '''
 
     ### CLASS VARIABLES ##
+
+    __documentation_section__ = 'Specifiers'
 
     __slots__ = (
         '_deposit_annotations',
@@ -46,7 +127,7 @@ class TrillSpecifier(abctools.AbjadObject):
         deposit_annotations=None,
         forbidden_annotations=None,
         interval=None,
-        is_harmonic=False,
+        is_harmonic=None,
         minimum_written_duration=None,
         maximum_written_duration=None,
         pitch=None,
@@ -61,7 +142,8 @@ class TrillSpecifier(abctools.AbjadObject):
             forbidden_annotations = tuple(forbidden_annotations)
         self._forbidden_annotations = forbidden_annotations
         self._interval = interval
-        self._is_harmonic = bool(is_harmonic)
+        assert isinstance(is_harmonic, (bool, type(None)))
+        self._is_harmonic = is_harmonic
         if minimum_written_duration is not None:
             minimum_written_duration = durationtools.Duration(
                 minimum_written_duration)
@@ -77,6 +159,12 @@ class TrillSpecifier(abctools.AbjadObject):
     ### SPECIAL METHODS ###
 
     def __call__(self, logical_ties):
+        r'''Calls trill specifier.
+
+        Returns none.
+        '''
+        if isinstance(logical_ties[0], scoretools.Leaf):
+            logical_ties = [selectiontools.LogicalTie(_) for _ in logical_ties]
         for logical_tie in logical_ties:
             written_duration = durationtools.Duration(0)
             for note in logical_tie:

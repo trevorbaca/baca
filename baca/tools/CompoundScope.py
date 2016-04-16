@@ -1,18 +1,20 @@
 # -*- coding: utf-8 -*-
 import collections
-from abjad import *
+from abjad.tools import abctools
+from abjad.tools import scoretools
+from abjad.tools.topleveltools import inspect_
 
 
 class CompoundScope(abctools.AbjadObject):
     r'''Compound scope.
 
+    ::
+
+        >>> import baca
+
     ..  container:: example
     
         **Example 1.** Makes four-part compound scope:
-
-        ::
-
-            >>> import baca
 
         ::
 
@@ -64,6 +66,8 @@ class CompoundScope(abctools.AbjadObject):
 
     ### CLASS VARIABLES ###
 
+    __documentation_section__ = 'Segment-maker components'
+
     __slots__ = (
         '_simple_scopes',
         '_timespan_map',
@@ -91,7 +95,7 @@ class CompoundScope(abctools.AbjadObject):
         if self._timespan_map is None:
             message = 'must construct timespan map first.'
             raise Exception(message)
-        voice = inspect_(component).get_parentage().get_first(Voice)
+        voice = inspect_(component).get_parentage().get_first(scoretools.Voice)
         component_timespan = inspect_(component).get_timespan()
         for voice_name, scope_timespan in self._timespan_map:
             if voice_name == voice.name:
@@ -114,7 +118,7 @@ class CompoundScope(abctools.AbjadObject):
         return False
 
     @classmethod
-    def _to_compound_scope(class_, scope):
+    def _to_compound_scope(class_, scope, score_template=None):
         import baca
         if isinstance(scope, baca.tools.SimpleScope):
             scope = baca.tools.CompoundScope(scope)
@@ -122,13 +126,19 @@ class CompoundScope(abctools.AbjadObject):
             pass
         # single scope token
         elif isinstance(scope, tuple):
-            simple_scopes = class_._to_simple_scopes(scope)    
+            simple_scopes = class_._to_simple_scopes(
+                scope,
+                score_template=score_template,
+                )
             scope = baca.tools.CompoundScope(simple_scopes)
         # list of scope tokens
         elif isinstance(scope, list):
             simple_scopes = []
             for scope_token in scope:
-                result = class_._to_simple_scopes(scope_token)
+                result = class_._to_simple_scopes(
+                    scope_token,
+                    score_template=score_template,
+                    )
                 simple_scopes.extend(result)
             assert all(
                 isinstance(_, baca.tools.SimpleScope) for _ in simple_scopes)
@@ -143,7 +153,7 @@ class CompoundScope(abctools.AbjadObject):
         return compound_scope
 
     @classmethod
-    def _to_simple_scopes(class_, scope_token):
+    def _to_simple_scopes(class_, scope_token, score_template=None):
         import baca
         if not isinstance(scope_token, collections.Sequence):
             message = 'scope token {!r} must be sequence.'
@@ -187,6 +197,12 @@ class CompoundScope(abctools.AbjadObject):
             class_._is_stage_pair(_) for _ in stage_pairs), stage_pairs
         simple_scopes = []
         for voice_name in voice_names:
+            if (score_template is not None and
+                hasattr(score_template, 'voice_abbreviations')):
+                voice_name = score_template.voice_abbreviations.get(
+                    voice_name,
+                    voice_name,
+                    )
             for stage_pair in stage_pairs:
                 simple_scope = baca.tools.SimpleScope(voice_name, stage_pair)
                 simple_scopes.append(simple_scope)

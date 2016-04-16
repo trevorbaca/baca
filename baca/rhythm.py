@@ -52,6 +52,11 @@ def make_fused_tuplet_monad_rhythm_specifier(tuplet_ratio=None):
             ),
         )
 
+def make_even_run_rhythm_specifier():
+    return baca.tools.RhythmSpecifier(
+        rhythm_maker=rhythmmakertools.EvenRunRhythmMaker()
+        )
+
 def make_messiaen_note_rhythm_specifier():
     return baca.tools.RhythmSpecifier(
         rewrite_meter=True,

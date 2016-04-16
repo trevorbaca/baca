@@ -8,6 +8,8 @@ class DivisionSequence(Sequence):
 
     ### CLASS VARIABLES ###
 
+    __documentation_section__ = 'Segment-maker components'
+
     __slots__ = (
         )
 

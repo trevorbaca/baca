@@ -5,13 +5,13 @@ from abjad.tools.expressiontools.Expression import Expression
 class MeasureExpression(Expression):
     r'''Measure expression.
 
+    ::
+
+        >>> import baca
+
     ..  container:: example
 
         **Example 1.** Selects measures from indices 2 to 4:
-
-        ::
-
-            >>> import baca
 
         ::
 
@@ -29,7 +29,7 @@ class MeasureExpression(Expression):
 
     ### CLASS VARIABLES ###
 
-    __documentation_section__ = None
+    __documentation_section__ = 'Segment-maker components'
 
     __slots__ = (
         '_start_number',

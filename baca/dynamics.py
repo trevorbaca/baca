@@ -27,20 +27,6 @@ def make_effort_dynamic(dynamic_name, direction=Down):
     markup = new(markup, direction=direction)
     return markup
 
-def make_hairpin(
-    descriptor=None,
-    include_following_rest=None,
-    start=None,
-    stop=None,
-    ):
-    import baca
-    return baca.tools.HairpinSpecifier(
-        descriptor=descriptor,
-        include_following_rest=include_following_rest,
-        start=start,
-        stop=stop,
-        )
-
 def make_hairpins(
     hairpin_tokens, 
     enchain_hairpins=None,
@@ -88,7 +74,7 @@ def make_possibile_dynamic(dynamic_name, direction=Down):
     markup = new(markup, direction=direction)
     return markup
 
-def make_reiterated_dynamic(dynamic_text):
+def make_reiterated_dynamic(dynamic_name):
     return handlertools.ReiteratedDynamicHandler(
         dynamic_name=dynamic_name,
         )

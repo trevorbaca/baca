@@ -106,6 +106,8 @@ class DivisionSequenceExpression(SequenceExpression):
 
     ### CLASS VARIALBES ###
 
+    __documentation_section__ = 'Segment-maker components'
+
     __slots__ = (
         )
 

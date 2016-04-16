@@ -3,33 +3,305 @@ import copy
 import os
 import time
 import baca
-from abjad import *
+from abjad.tools import datastructuretools
+from abjad.tools import durationtools
+from abjad.tools import expressiontools
+from abjad.tools import handlertools
+from abjad.tools import indicatortools
+from abjad.tools import instrumenttools
+from abjad.tools import lilypondfiletools
+from abjad.tools import markuptools
+from abjad.tools import mathtools
+from abjad.tools import rhythmmakertools
+from abjad.tools import scoretools
+from abjad.tools import selectiontools
+from abjad.tools import sequencetools
+from abjad.tools import spannertools
+from abjad.tools import templatetools
+from abjad.tools import timespantools
+from abjad.tools.topleveltools import attach
+from abjad.tools.topleveltools import detach
+from abjad.tools.topleveltools import inspect_
+from abjad.tools.topleveltools import iterate
+from abjad.tools.topleveltools import new
+from abjad.tools.topleveltools import select
+from abjad.tools.topleveltools import set_
 from experimental.tools import makertools
 
 
 class SegmentMaker(makertools.SegmentMaker):
     r'''Segment-maker.
 
+    ::
+
+        >>> import baca
+
     ..  container:: example
 
-        **Example 1.** Default segment-maker:
+        **Example 1.** With empty input:
 
         ::
 
-            >>> import baca
+            >>> segment_maker = baca.tools.SegmentMaker(
+            ...     score_template=baca.tools.ViolinSoloScoreTemplate(),
+            ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
+            ...     )
 
         ::
 
-            >>> segment_maker = baca.tools.SegmentMaker()
+            >>> result = segment_maker(is_doc_example=True)
+            >>> lilypond_file, segment_metadata = result
+            >>> show(lilypond_file) # doctest: +SKIP
+
+        ..  doctest::
+
+            >>> score = lilypond_file.score_block.items[0]
+            >>> f(score)
+            \context Score = "Score" <<
+                \tag violin
+                \context TimeSignatureContext = "Time Signature Context" <<
+                    \context TimeSignatureContextMultimeasureRests = "Time Signature Context Multimeasure Rests" {
+                        {
+                            \time 4/8
+                            R1 * 1/2
+                        }
+                        {
+                            \time 3/8
+                            R1 * 3/8
+                        }
+                        {
+                            \time 4/8
+                            R1 * 1/2
+                        }
+                        {
+                            \time 3/8
+                            R1 * 3/8
+                        }
+                    }
+                    \context TimeSignatureContextSkips = "Time Signature Context Skips" {
+                        {
+                            \time 4/8
+                            s1 * 1/2
+                        }
+                        {
+                            \time 3/8
+                            s1 * 3/8
+                        }
+                        {
+                            \time 4/8
+                            s1 * 1/2
+                        }
+                        {
+                            \time 3/8
+                            s1 * 3/8
+                        }
+                    }
+                >>
+                \context MusicContext = "Music Context" <<
+                    \tag violin
+                    \context ViolinMusicStaff = "Violin Music Staff" {
+                        \clef "treble"
+                        \context ViolinMusicVoice = "Violin Music Voice" {
+                            R1 * 1/2
+                            R1 * 3/8
+                            R1 * 1/2
+                            R1 * 3/8
+                            \bar "|"
+                        }
+                    }
+                >>
+            >>
+
+    ..  container:: example
+
+        **Example 2.** With notes:
 
         ::
 
-            >>> print(format(segment_maker))
-            baca.tools.SegmentMaker()
+            >>> segment_maker = baca.tools.SegmentMaker(
+            ...     score_template=baca.tools.ViolinSoloScoreTemplate(),
+            ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
+            ...     )
+
+        ::
+
+            >>> specifiers = segment_maker.append_specifiers(
+            ...     ('vn', baca.tools.stages(1)),
+            ...     baca.rhythm.make_messiaen_note_rhythm_specifier(),
+            ...     )
+
+        ::
+
+            >>> result = segment_maker(is_doc_example=True)
+            >>> lilypond_file, segment_metadata = result
+            >>> show(lilypond_file) # doctest: +SKIP
+
+        ..  doctest::
+
+            >>> score = lilypond_file.score_block.items[0]
+            >>> f(score)
+            \context Score = "Score" <<
+                \tag violin
+                \context TimeSignatureContext = "Time Signature Context" <<
+                    \context TimeSignatureContextMultimeasureRests = "Time Signature Context Multimeasure Rests" {
+                        {
+                            \time 4/8
+                            R1 * 1/2
+                        }
+                        {
+                            \time 3/8
+                            R1 * 3/8
+                        }
+                        {
+                            \time 4/8
+                            R1 * 1/2
+                        }
+                        {
+                            \time 3/8
+                            R1 * 3/8
+                        }
+                    }
+                    \context TimeSignatureContextSkips = "Time Signature Context Skips" {
+                        {
+                            \time 4/8
+                            s1 * 1/2
+                        }
+                        {
+                            \time 3/8
+                            s1 * 3/8
+                        }
+                        {
+                            \time 4/8
+                            s1 * 1/2
+                        }
+                        {
+                            \time 3/8
+                            s1 * 3/8
+                        }
+                    }
+                >>
+                \context MusicContext = "Music Context" <<
+                    \tag violin
+                    \context ViolinMusicStaff = "Violin Music Staff" {
+                        \clef "treble"
+                        \context ViolinMusicVoice = "Violin Music Voice" {
+                            c'2
+                            c'4.
+                            c'2
+                            c'4.
+                            \bar "|"
+                        }
+                    }
+                >>
+            >>
+
+    ..  container:: example
+
+        **Example 3.** Labels logical ties:
+
+        ::
+
+            >>> segment_maker = baca.tools.SegmentMaker(
+            ...     score_template=baca.tools.ViolinSoloScoreTemplate(),
+            ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
+            ...     )
+
+        ::
+
+            >>> specifiers = segment_maker.append_specifiers(
+            ...     ('vn', baca.tools.stages(1)),
+            ...     [
+            ...         baca.rhythm.make_messiaen_note_rhythm_specifier(),
+            ...         label().with_indices(),
+            ...         ],
+            ...     )
+
+        ::
+
+            >>> result = segment_maker(is_doc_example=True)
+            >>> lilypond_file, segment_metadata = result
+            >>> show(lilypond_file) # doctest: +SKIP
+
+        ..  doctest::
+
+            >>> score = lilypond_file.score_block.items[0]
+            >>> f(score)
+            \context Score = "Score" <<
+                \tag violin
+                \context TimeSignatureContext = "Time Signature Context" <<
+                    \context TimeSignatureContextMultimeasureRests = "Time Signature Context Multimeasure Rests" {
+                        {
+                            \time 4/8
+                            R1 * 1/2
+                        }
+                        {
+                            \time 3/8
+                            R1 * 3/8
+                        }
+                        {
+                            \time 4/8
+                            R1 * 1/2
+                        }
+                        {
+                            \time 3/8
+                            R1 * 3/8
+                        }
+                    }
+                    \context TimeSignatureContextSkips = "Time Signature Context Skips" {
+                        {
+                            \time 4/8
+                            s1 * 1/2
+                        }
+                        {
+                            \time 3/8
+                            s1 * 3/8
+                        }
+                        {
+                            \time 4/8
+                            s1 * 1/2
+                        }
+                        {
+                            \time 3/8
+                            s1 * 3/8
+                        }
+                    }
+                >>
+                \context MusicContext = "Music Context" <<
+                    \tag violin
+                    \context ViolinMusicStaff = "Violin Music Staff" {
+                        \clef "treble"
+                        \context ViolinMusicVoice = "Violin Music Voice" {
+                            c'2
+                                ^ \markup {
+                                    \small
+                                        0
+                                    }
+                            c'4.
+                                ^ \markup {
+                                    \small
+                                        1
+                                    }
+                            c'2
+                                ^ \markup {
+                                    \small
+                                        2
+                                    }
+                            c'4.
+                                ^ \markup {
+                                    \small
+                                        3
+                                    }
+                            \bar "|"
+                        }
+                    }
+                >>
+            >>
 
     '''
 
     ### CLASS ATTRIBUTES ###
+
+    __documentation_section__ = 'Segment-maker components'
 
     __slots__ = (
         '_cached_leaves_with_rests',
@@ -43,17 +315,38 @@ class SegmentMaker(makertools.SegmentMaker):
         '_label_clock_time',
         '_label_stage_numbers',
         '_measures_per_stage',
+        '_print_segment_duration',
+        '_print_timings',
         '_rehearsal_letter',
         '_scoped_specifiers',
         '_score',
         '_score_package',
+        '_score_template',
         '_spacing_map',
         '_spacing_specifier',
         '_stages',
-        '_tempo_map',
+        '_tempo_specifier',
         '_time_signatures',
         '_transpose_score',
-        '_volta_map',
+        '_volta_specifier',
+        )
+
+    _string_trio_stylesheet_path = os.path.join(
+        '..',
+        '..',
+        '..',
+        '..',
+        'source',
+        '_stylesheets',
+        'string-trio-stylesheet.ily',
+        )
+
+    _score_package_stylesheet_path = os.path.join(
+        '..', '..', 'stylesheets', 'stylesheet.ily',
+        )
+
+    _score_package_nonfirst_stylesheet_path = os.path.join(
+        '..', '..', 'stylesheets', 'nonfirst-segment.ily',
         )
 
     ### INITIALIZER ###
@@ -66,14 +359,17 @@ class SegmentMaker(makertools.SegmentMaker):
         label_clock_time=None,
         label_stage_numbers=None,
         measures_per_stage=None,
+        print_segment_duration=None,
+        print_timings=None,
         rehearsal_letter=None,
         score_package=None,
+        score_template=None,
         spacing_map=None,
         spacing_specifier=None,
-        tempo_map=None,
+        tempo_specifier=None,
         time_signatures=None,
         transpose_score=None,
-        volta_map=None,
+        volta_specifier=None,
         ):
         superclass = super(SegmentMaker, self)
         superclass.__init__()
@@ -92,24 +388,30 @@ class SegmentMaker(makertools.SegmentMaker):
         assert isinstance(label_stage_numbers, (bool, type(None)))
         self._label_stage_numbers = label_stage_numbers
         self._measures_per_stage = measures_per_stage
+        self._print_segment_duration = print_segment_duration
+        self._print_timings = print_timings
         self._rehearsal_letter = rehearsal_letter
         self._scoped_specifiers = []
         self._initialize_time_signatures(time_signatures)
         self._score_package = score_package
+        if score_template is not None:
+            assert isinstance(score_template, baca.tools.ScoreTemplate)
+        self._score_template = score_template
         self._spacing_map = spacing_map
         if spacing_specifier is not None:
             assert isinstance(spacing_specifier, baca.tools.SpacingSpecifier)
         self._spacing_specifier = spacing_specifier
-        self._tempo_map = tempo_map
+        self._tempo_specifier = tempo_specifier
         if transpose_score is not None:
             transpose_score = bool(transpose_score)
         self._transpose_score = transpose_score
-        self._volta_map = volta_map
+        self._volta_specifier = volta_specifier
 
     ### SPECIAL METHODS ###
 
     def __call__(
         self, 
+        is_doc_example=None,
         segment_metadata=None,
         previous_segment_metadata=None,
         ):
@@ -124,7 +426,7 @@ class SegmentMaker(makertools.SegmentMaker):
         self._make_score()
         self._remove_score_template_start_instruments()
         self._remove_score_template_start_clefs()
-        self._make_lilypond_file()
+        self._make_lilypond_file(is_doc_example=is_doc_example)
         self._populate_time_signature_context()
         self._label_stage_numbers_()
         self._interpret_rhythm_specifiers()
@@ -134,7 +436,7 @@ class SegmentMaker(makertools.SegmentMaker):
         self._attach_first_segment_default_instruments()
         self._attach_first_segment_default_clefs()
         self._apply_previous_segment_end_settings()
-        #self._apply_spacing_specifier()
+        self._apply_spacing_specifier()
         self._make_volta_containers()
         self._label_clock_time_()
         #self._move_instruments_from_notes_back_to_rests()
@@ -144,8 +446,8 @@ class SegmentMaker(makertools.SegmentMaker):
         self._add_final_barline()
         self._add_final_markup()
         self._check_well_formedness()
-        self._update_segment_metadata(self.score_package.materials)
-        self._print_approximate_duration_in_seconds()
+        self._update_segment_metadata()
+        self._print_segment_duration_()
         return self.lilypond_file, self._segment_metadata
 
     ### PRIVATE PROPERTIES ###
@@ -157,9 +459,12 @@ class SegmentMaker(makertools.SegmentMaker):
     ### PRIVATE METHODS ###
 
     def _add_final_barline(self):
-        abbreviation = '|'
-        if self._is_last_segment():
-            abbreviation = '|.'
+        if isinstance(self.final_barline, str):
+            abbreviation = self.final_barline
+        else:
+            abbreviation = '|'
+            if self._is_last_segment():
+                abbreviation = '|.'
         self._score.add_final_bar_line(
             abbreviation=abbreviation, 
             to_each_voice=True,
@@ -174,45 +479,47 @@ class SegmentMaker(makertools.SegmentMaker):
             )
 
     def _apply_first_and_last_ties(self, voice):
+        dummy_tie = spannertools.Tie()
         for current_leaf in iterate(voice).by_leaf():
-            if not Tie._attachment_test(current_leaf):
+            if not dummy_tie._attachment_test(current_leaf):
                 continue
             if inspect_(current_leaf).has_indicator('tie to me'):
                 previous_leaf = inspect_(current_leaf).get_leaf(-1)
-                if Tie._attachment_test(previous_leaf):
+                if dummy_tie._attachment_test(previous_leaf):
                     previous_logical_tie = inspect_(previous_leaf).get_logical_tie()
                     if current_leaf not in previous_logical_tie:
                         current_logical_tie = inspect_(current_leaf).get_logical_tie()
                         leaves = previous_logical_tie + current_logical_tie
-                        detach(Tie, previous_leaf)
-                        detach(Tie, current_leaf)
+                        detach(spannertools.Tie, previous_leaf)
+                        detach(spannertools.Tie, current_leaf)
                         inspector = inspect_(current_leaf)
                         use_messiaen_style_ties = inspector.has_indicator(
                             'use messiaen style ties')
-                        tie = Tie(
+                        tie = spannertools.Tie(
                             use_messiaen_style_ties=use_messiaen_style_ties)
                         attach(tie, leaves)
                 detach('tie to me', current_leaf)
             if inspect_(current_leaf).has_indicator('tie from me'):
                 next_leaf = inspect_(current_leaf).get_leaf(1)
-                if Tie._attachment_test(next_leaf):
+                if spannertools.Tie._attachment_test(next_leaf):
                     current_logical_tie = inspect_(current_leaf).get_logical_tie()
                     if next_leaf not in current_logical_tie:
                         next_logical_tie = inspect_(next_leaf).get_logical_tie()
                         leaves = current_logical_tie + next_logical_tie
-                        detach(Tie, current_leaf)
-                        detach(Tie, next_leaf)
+                        detach(spannertools.Tie, current_leaf)
+                        detach(spannertools.Tie, next_leaf)
                         inspector = inspect_(current_leaf)
                         use_messiaen_style_ties = inspector.has_indicator(
                             'use messiaen style ties')
-                        tie = Tie(
+                        tie = spannertools.Tie(
                             use_messiaen_style_ties=use_messiaen_style_ties)
                         attach(tie, leaves)
                 detach('tie from me', current_leaf)
 
     def _apply_previous_segment_end_settings(self):
-        materials_package = self.score_package.materials
         if self._is_first_segment():
+            return
+        if self.score_package is None:
             return
         if not self._previous_segment_metadata:
             message = 'can not find previous metadata before segment {}.'
@@ -237,7 +544,7 @@ class SegmentMaker(makertools.SegmentMaker):
                 continue
             previous_instrument = self._get_instrument_by_name(
                 previous_instrument_name, 
-                materials_package,
+                self.score_package.materials,
                 )
             if previous_instrument is None:
                 message = 'can not previous instrument for {}.'
@@ -253,16 +560,16 @@ class SegmentMaker(makertools.SegmentMaker):
             message = message.format(self._get_segment_identifier())
             raise Exception(message)
             return
-        for staff in iterate(self._score).by_class(Staff):
+        for staff in iterate(self._score).by_class(scoretools.Staff):
             previous_clef_name = previous_clefs.get(staff.name)
             if not previous_clef_name:
                 continue
             first_leaf = inspect_(staff).get_leaf(0)
-            prototype = Clef
-            clef = inspect_(first_leaf).get_effective(Clef)
+            prototype = indicatortools.Clef
+            clef = inspect_(first_leaf).get_effective(prototype)
             if clef is not None:
                 continue
-            clef = Clef(previous_clef_name)
+            clef = indicatortools.Clef(previous_clef_name)
             attach(clef, staff)
 
     def _apply_spacing_specifier(self):
@@ -277,7 +584,7 @@ class SegmentMaker(makertools.SegmentMaker):
             raise Exception(message)
 
     def _attach_fermatas(self):
-        if not self.tempo_map:
+        if not self.tempo_specifier:
             return
         context = self._score['Time Signature Context Multimeasure Rests']
         directive_prototype = (
@@ -285,14 +592,14 @@ class SegmentMaker(makertools.SegmentMaker):
             indicatortools.BreathMark,
             )
         rest_prototype = scoretools.MultimeasureRest
-        for stage_number, directive in self.tempo_map:
+        for stage_number, directive in self.tempo_specifier:
             if not isinstance(directive, directive_prototype):
                 continue
             assert 0 < stage_number <= self.stage_count
             result = self._stage_number_to_measure_indices(stage_number)
             start_measure_index, stop_measure_index = result
             start_measure = context[start_measure_index]
-            assert isinstance(start_measure, Measure), start_measure
+            assert isinstance(start_measure, scoretools.Measure), start_measure
             start_skip = start_measure[0]
             assert isinstance(start_skip, rest_prototype), start_skip
             fermata_y_offset = None
@@ -313,7 +620,7 @@ class SegmentMaker(makertools.SegmentMaker):
                     message = 'unknown fermata command: {!r}.'
                     message = message.format(directive.command)
                     raise Exception(message)
-                directive = Markup.musicglyph(string)
+                directive = markuptools.Markup.musicglyph(string)
             else:
                 directive = new(directive)
             attach(directive, start_skip)
@@ -333,23 +640,25 @@ class SegmentMaker(makertools.SegmentMaker):
         cached_clefs = self._cached_score_template_start_clefs
         previous_clefs = self._previous_segment_metadata.get(
             'end_clefs_by_staff', datastructuretools.TypedOrderedDict())
-        for staff in iterate(self._score).by_class(Staff):
-            if inspect_(staff).has_indicator(Clef):
+        prototype = indicatortools.Clef
+        for staff in iterate(self._score).by_class(scoretools.Staff):
+            if inspect_(staff).has_indicator(prototype):
                 continue
             first_leaf = inspect_(staff).get_leaf(0)
             if (first_leaf is None or
-                not inspect_(first_leaf).has_indicator(Clef)):
+                not inspect_(first_leaf).has_indicator(prototype)):
                 clef_name = previous_clefs.get(staff.name)
                 if clef_name is None:
                     clef_name = cached_clefs.get(staff.name)
                 # TODO: remove if-clause
                 if clef_name is not None:
-                    clef = Clef(clef_name)
+                    clef = indicatortools.Clef(clef_name)
                     attach(clef, staff)
 
     def _attach_first_segment_default_instruments(self):
-        score_package = self.score_package
         if not self._is_first_segment():
+            return
+        if self.score_package is None:
             return
         cached_instruments = self._cached_score_template_start_instruments
         previous_instruments = self._previous_segment_metadata.get(
@@ -372,7 +681,7 @@ class SegmentMaker(makertools.SegmentMaker):
                 instrument_name = previous_instruments.get(context.name)
                 if instrument_name is None:
                     instrument_name = cached_instruments.get(context.name)
-                instrument = score_package.materials.instruments[
+                instrument = self.score_package.materials.instruments[
                     instrument_name]
                 instrument = copy.deepcopy(instrument)
                 instrument._default_scope = context.context_name
@@ -383,7 +692,7 @@ class SegmentMaker(makertools.SegmentMaker):
             return
         letter_number = None
         if self.rehearsal_letter is None:
-            segment_number = self._segment_metadata['segment_number']
+            segment_number = self._get_segment_number()
             letter_number = segment_number - 1
         elif isinstance(self.rehearsal_letter, str):
             assert len(self.rehearsal_letter) == 1
@@ -397,13 +706,13 @@ class SegmentMaker(makertools.SegmentMaker):
         attach(rehearsal_mark, first_leaf)
 
     def _attach_tempo_indicators(self):
-        if not self.tempo_map:
+        if not self.tempo_specifier:
             return
         context = self._score['Time Signature Context Skips']
         # TODO: adjust TempoSpanner to make this possible:
         #attach(spannertools.TempoSpanner(), context)
         skips = list(iterate(context).by_class(scoretools.Leaf))
-        left_broken_text = Markup().null()
+        left_broken_text = markuptools.Markup().null()
         left_broken_text._direction = None
         tempo_spanner = spannertools.TempoSpanner(
             left_broken_padding=0,
@@ -411,12 +720,12 @@ class SegmentMaker(makertools.SegmentMaker):
             start_with_parenthesized_tempo=False,
             )
         attach(tempo_spanner, skips)
-        for stage_number, directive in self.tempo_map:
+        for stage_number, directive in self.tempo_specifier:
             self._assert_valid_stage_number(stage_number)
             result = self._stage_number_to_measure_indices(stage_number)
             start_measure_index, stop_measure_index = result
             start_measure = context[start_measure_index]
-            assert isinstance(start_measure, Measure), start_measure
+            assert isinstance(start_measure, scoretools.Measure), start_measure
             start_skip = start_measure[0]
             prototype = (scoretools.Skip, scoretools.MultimeasureRest)
             assert isinstance(start_skip, prototype), start_skip
@@ -469,7 +778,7 @@ class SegmentMaker(makertools.SegmentMaker):
         compound_scope._timespan_map = timespan_map
         voice_names = [_[0] for _ in timespan_map]
         topmost_components = []
-        for voice in iterate(self._score).by_class(Voice):
+        for voice in iterate(self._score).by_class(scoretools.Voice):
             if 'Context' in voice.__class__.__name__:
                 continue
             result = iterate(voice).by_topmost_logical_ties_and_components()
@@ -521,12 +830,13 @@ class SegmentMaker(makertools.SegmentMaker):
 
     def _get_end_clefs(self):
         result = datastructuretools.TypedOrderedDict()
-        staves = iterate(self._score).by_class(Staff)
+        staves = iterate(self._score).by_class(scoretools.Staff)
         staves = [_ for _ in staves if _.is_semantic]
         staves.sort(key=lambda x: x.name)
+        prototype = indicatortools.Clef
         for staff in staves:
             last_leaf = inspect_(staff).get_leaf(-1)
-            clef = inspect_(last_leaf).get_effective(Clef)
+            clef = inspect_(last_leaf).get_effective(prototype)
             if clef:
                 result[staff.name] = clef.name
             else:
@@ -549,24 +859,25 @@ class SegmentMaker(makertools.SegmentMaker):
             result[context.name] = instrument.instrument_name
         return result
 
-    def _get_end_settings(self, materials_package):
+    def _get_end_settings(self):
         end_settings = {}
         end_settings['end_clefs_by_staff'] = self._get_end_clefs()
         end_settings['end_instruments_by_context'] = \
             self._get_end_instruments()
-        end_settings['end_tempo'] = self._get_end_tempo_indication(
-            materials_package,
-            )
+        end_settings['end_tempo'] = self._get_end_tempo_name()
         end_settings['end_time_signature'] = self._get_end_time_signature()
         return end_settings
 
-    def _get_end_tempo_indication(self, materials_package):
+    def _get_end_tempo_name(self):
         context = self._score['Time Signature Context Skips']
         last_leaf = inspect_(context).get_leaf(-1)
-        effective_tempo = inspect_(last_leaf).get_effective(Tempo)
+        prototype = indicatortools.Tempo
+        effective_tempo = inspect_(last_leaf).get_effective(prototype)
         if not effective_tempo:
             return
-        tempi = materials_package.tempi
+        if self.score_package is None:
+            return
+        tempi = self.score_package.materials.tempi
         for tempo_name, tempo in tempi.items():
             if tempo == effective_tempo:
                 break
@@ -579,7 +890,8 @@ class SegmentMaker(makertools.SegmentMaker):
     def _get_end_time_signature(self):
         context = self._score['Time Signature Context Skips']
         last_measure = context[-1]
-        time_signature = inspect_(last_measure).get_effective(TimeSignature)
+        prototype = indicatortools.TimeSignature
+        time_signature = inspect_(last_measure).get_effective(prototype)
         if not time_signature:
             return
         string = str(time_signature)
@@ -599,12 +911,12 @@ class SegmentMaker(makertools.SegmentMaker):
         result = self._stage_number_to_measure_indices(start_stage)
         start_measure_index, stop_measure_index = result
         start_measure = context[start_measure_index]
-        assert isinstance(start_measure, Measure), start_measure
+        assert isinstance(start_measure, scoretools.Measure), start_measure
         start_offset = inspect_(start_measure).get_timespan().start_offset
         result = self._stage_number_to_measure_indices(stop_stage)
         start_measure_index, stop_measure_index = result
         stop_measure = context[stop_measure_index]
-        assert isinstance(stop_measure, Measure), stop_measure
+        assert isinstance(stop_measure, scoretools.Measure), stop_measure
         stop_offset = inspect_(stop_measure).get_timespan().stop_offset
         return start_offset, stop_offset
 
@@ -619,7 +931,7 @@ class SegmentMaker(makertools.SegmentMaker):
         return instrument
 
     def _get_rehearsal_letter(self):
-        segment_number = self._segment_metadata['segment_number']
+        segment_number = self._get_segment_number()
         if segment_number == 1:
             return ''
         segment_index = segment_number - 1
@@ -659,8 +971,11 @@ class SegmentMaker(makertools.SegmentMaker):
         segment_name = self._segment_metadata.get('segment_name')
         if segment_name is not None:
             return segment_name
-        segment_number = self._segment_metadata['segment_number']
+        segment_number = self._get_segment_number()
         return segment_number
+
+    def _get_segment_number(self):
+        return self._segment_metadata.get('segment_number', 1)
 
     def _get_stage_numbers(self, expr):
         if isinstance(expr, baca.tools.StageExpression):
@@ -673,6 +988,15 @@ class SegmentMaker(makertools.SegmentMaker):
             message = message.format(expr)
             raise TypeError(message)
         return stage_start_number, stage_stop_number
+
+    def _get_stylesheet_includes(self, is_doc_example=None):
+        if is_doc_example:
+            return [self._string_trio_stylesheet_path]
+        includes = []
+        includes.append(self._score_package_stylesheet_path)
+        if 1 < self._get_segment_number():
+            includes.append(self._score_package_nonfirst_stylesheet_path)
+        return includes
 
     def _get_time_signatures(self, start_stage=None, stop_stage=None):
         import baca
@@ -720,11 +1044,11 @@ class SegmentMaker(makertools.SegmentMaker):
         start_offsets = mathtools.cumulative_sums(durations)
         segment_duration = start_offsets[-1]
         start_offsets = start_offsets[:-1]
-        start_offsets = [Offset(_) for _ in start_offsets]
+        start_offsets = [durationtools.Offset(_) for _ in start_offsets]
         assert len(start_offsets) == len(self.time_signatures)
         pairs = zip(start_offsets, self.time_signatures)
         result = []
-        previous_stop_offset = Offset(0)
+        previous_stop_offset = durationtools.Offset(0)
         for contribution in contributions:
             if contribution.start_offset < previous_stop_offset:
                 raise Exception
@@ -810,12 +1134,12 @@ class SegmentMaker(makertools.SegmentMaker):
         leaf_indicator_prototype = (
             indicatortools.Clef,
             instrumenttools.Instrument,
+            markuptools.Markup,
             )
         note_indicator_prototype = (
             indicatortools.Dynamic,
             indicatortools.LilyPondCommand,
             indicatortools.LaissezVibrer,
-            markuptools.Markup,
             )
         attach_leaf_prototype = (
             note_indicator_prototype,
@@ -823,7 +1147,6 @@ class SegmentMaker(makertools.SegmentMaker):
             )
         needs_logical_ties_prototype = (
             baca.tools.GlissandoSpecifier,
-            baca.tools.HairpinSpecifier,
             baca.tools.PitchSpecifier,
             baca.tools.TrillSpecifier,
             handlertools.Handler,
@@ -843,7 +1166,7 @@ class SegmentMaker(makertools.SegmentMaker):
             compound_scope = scoped_specifier.scope
             stages = None
         leaves = None
-        if is_wrapped and specifier_wrapper.scope_to_leaves:
+        if is_wrapped:
             leaves = self._scope_to_leaves(scoped_specifier.scope)
             if specifier_wrapper.prototype is not None:
                 prototype = specifier_wrapper.prototype
@@ -886,18 +1209,46 @@ class SegmentMaker(makertools.SegmentMaker):
                 include_rests=True
                 )
             logical_ties_with_rests = result[0]
+            if not logical_ties_with_rests:
+                message = '{!r} selects no logical ties with rests.'
+                message = message.format(scoped_specifier)
+                raise Exception(message)
         elif isinstance(specifier, needs_logical_ties_prototype):
             result = self._compound_scope_to_logical_ties(compound_scope)
             logical_ties = result[0]
+            if not logical_ties:
+                message = '{!r} selects no logical ties.'
+                message = message.format(scoped_specifier)
+                raise Exception(message)
         elif getattr(specifier, '_selector_type', None) == 'logical ties':
             result = self._compound_scope_to_logical_ties(compound_scope)
             logical_ties = result[0]
+            if not logical_ties:
+                message = '{!r} selects no logical ties.'
+                message = message.format(scoped_specifier)
+                raise Exception(message)
         elif isinstance(specifier, expression_prototype):
             pass
         else:
             message = 'what type of specifier is {!r}?'
-            message = message.format(specifier)
+            message += '\nIn scoped specifier {!r}.'
+            message = message.format(specifier, scoped_specifier)
             raise TypeError(message)
+        if getattr(specifier, '_include_selection_timespan', False):
+            if leaves:
+                first = leaves[0]
+                last = leaves[-1]
+            elif logical_ties:
+                first = logical_ties[0].head
+                last = logical_ties[-1][-1]
+            else:
+                raise Exception('must have leaves or logical ties.')
+            start_offset = inspect_(first).get_timespan().start_offset
+            stop_offset = inspect_(last).get_timespan().stop_offset
+            timespan = timespantools.Timespan(
+                start_offset=start_offset,
+                stop_offset=stop_offset,
+                )
         if leaves:
             if isinstance(specifier, attach_leaf_prototype):
                 attach(specifier, leaves[0])
@@ -938,7 +1289,13 @@ class SegmentMaker(makertools.SegmentMaker):
         elif isinstance(specifier, handlertools.Handler):
             specifier(logical_ties)
         else:
-            specifier(logical_ties)
+            if getattr(specifier, '_include_selection_timespan', False):
+                specifier(logical_ties, timespan)
+            else:
+                specifier(logical_ties)
+        if getattr(specifier, '_mutates_score', False):
+            self._cached_leaves_with_rests = None
+            self._cached_leaves_without_rests = None
 
     def _interpret_scoped_specifiers(self):
         start = time.time()
@@ -946,16 +1303,17 @@ class SegmentMaker(makertools.SegmentMaker):
             self._interpret_scoped_specifier(scoped_specifier)
         stop = time.time()
         total = int(stop - start)
-        message = 'total scoped specifier time {} seconds ...'
-        message = message.format(total)
-        print(message)
+        if self.print_timings:
+            message = 'total scoped specifier time {} seconds ...'
+            message = message.format(total)
+            print(message)
 
     def _is_first_segment(self):
-        segment_number = self._segment_metadata.get('segment_number')
+        segment_number = self._get_segment_number()
         return segment_number == 1
 
     def _is_last_segment(self):
-        segment_number = self._segment_metadata.get('segment_number')
+        segment_number = self._get_segment_number()
         segment_count = self._segment_metadata.get('segment_count')
         return segment_number == segment_count
 
@@ -974,7 +1332,7 @@ class SegmentMaker(makertools.SegmentMaker):
 
     def _label_instrument_changes(self):
         prototype = instrumenttools.Instrument
-        for staff in iterate(self._score).by_class(Staff):
+        for staff in iterate(self._score).by_class(scoretools.Staff):
             leaves = iterate(staff).by_class(scoretools.Leaf)
             for leaf_index, leaf in enumerate(leaves):
                 instruments = inspect_(leaf).get_indicators(prototype)
@@ -987,7 +1345,7 @@ class SegmentMaker(makertools.SegmentMaker):
                     result = inspect_(previous_leaf).get_effective(prototype)
                     previous_instrument = result
                 elif (leaf_index == 0 and 
-                    1 < self._segment_metadata.get('segment_number')):
+                    1 < self._get_segment_number()):
                     instrument = self._get_previous_instrument(staff.name)
                     previous_instrument = instrument
                 else:
@@ -1007,7 +1365,7 @@ class SegmentMaker(makertools.SegmentMaker):
             start_measure_index, stop_measure_index = result
             base = self._get_name() or self._get_rehearsal_letter()
             string = '[{}.{}]'.format(base, stage_number)
-            markup = Markup(string)
+            markup = markuptools.Markup(string)
             markup = markup.with_color('blue')
             markup = markup.fontsize(-3)
             start_measure = context[start_measure_index]
@@ -1032,28 +1390,30 @@ class SegmentMaker(makertools.SegmentMaker):
 
     def _make_intercalated_rests(self, start_offset, stop_offset, pairs):
         duration = stop_offset - start_offset
-        rest = scoretools.MultimeasureRest(Duration(1))
-        multiplier = Multiplier(duration)
+        rest = scoretools.MultimeasureRest(durationtools.Duration(1))
+        multiplier = durationtools.Multiplier(duration)
         attach(multiplier, rest)
         selection = select(rest)
         return selection
 
-    def _make_lilypond_file(self):
-        includes = []
-        includes.append(
-            os.path.join('..', '..', 'stylesheets', 'stylesheet.ily'))
-        if 1 < self._segment_metadata['segment_number']:
-            includes.append(
-                os.path.join('..', '..', 'stylesheets', 'nonfirst-segment.ily'))
+    def _make_lilypond_file(self, is_doc_example=None):
+        includes = self._get_stylesheet_includes(is_doc_example=is_doc_example)
         lilypond_file = lilypondfiletools.make_basic_lilypond_file(
             music=self._score,
             date_time_token=False,
             includes=includes,
             use_relative_includes=True,
             )
+        block_names = ('layout', 'paper')
         for item in lilypond_file.items[:]:
-            if getattr(item, 'name', None) in ('header', 'layout', 'paper'):
+            if getattr(item, 'name', None) in block_names:
                 lilypond_file.items.remove(item)
+        if not is_doc_example:
+            #block_names = ('header', 'layout', 'paper')
+            block_names = ('header',)
+            for item in lilypond_file.items[:]:
+                if getattr(item, 'name', None) in block_names:
+                    lilypond_file.items.remove(item)
         self._lilypond_file = lilypond_file
             
     def _make_multimeasure_rest_filled_measures(self, time_signatures=None):
@@ -1061,8 +1421,8 @@ class SegmentMaker(makertools.SegmentMaker):
         time_signatures = time_signatures or self.time_signatures
         for time_signature in time_signatures:
             time_signature = indicatortools.TimeSignature(time_signature)
-            rest = scoretools.MultimeasureRest(Duration(1))
-            multiplier = Multiplier(time_signature.duration)
+            rest = scoretools.MultimeasureRest(durationtools.Duration(1))
+            multiplier = durationtools.Multiplier(time_signature.duration)
             attach(multiplier, rest)
             measure = scoretools.Measure(
                 time_signature,
@@ -1142,15 +1502,10 @@ class SegmentMaker(makertools.SegmentMaker):
         return selections
 
     def _make_score(self):
-        tools_module_dictionary = self.score_package.tools.__dict__
-        score_template_class = tools_module_dictionary['ScoreTemplate']
-        score_template = score_template_class()
-        score = score_template()
+        score = self.score_template()
         first_bar_number = self._segment_metadata.get('first_bar_number')
         if first_bar_number is not None:
             set_(score).current_bar_number = first_bar_number
-        else:
-            override(score).bar_number.transparent = True
         self._score = score
 
     def _make_skip_filled_measures(self, time_signatures=None):
@@ -1168,7 +1523,7 @@ class SegmentMaker(makertools.SegmentMaker):
             result = self._stage_number_to_measure_indices(stage_number)
             start_measure_index, stop_measure_index = result
             start_measure = context[start_measure_index]
-            assert isinstance(start_measure, Measure), start_measure
+            assert isinstance(start_measure, scoretools.Measure), start_measure
             start_skip = start_measure[0]
             assert isinstance(start_skip, scoretools.Skip), start_skip
             command = indicatortools.LilyPondCommand('newSpacingSection')
@@ -1177,13 +1532,13 @@ class SegmentMaker(makertools.SegmentMaker):
             set_(start_skip).score.proportional_notation_duration = moment
 
     def _make_volta_containers(self):
-        if not self.volta_map:
+        if not self.volta_specifier:
             return
         context = self._score['Time Signature Context Skips']
         measures = context[:]
         for measure in measures:
-            assert isinstance(measure, Measure), repr(measure)
-        for expression in self.volta_map:
+            assert isinstance(measure, scoretools.Measure), repr(measure)
+        for expression in self.volta_specifier:
             if isinstance(expression, baca.tools.MeasureExpression):
                 measure_start_number = expression.start_number
                 measure_stop_number = expression.stop_number
@@ -1204,7 +1559,7 @@ class SegmentMaker(makertools.SegmentMaker):
                 message = message.format(expression)
                 raise NotImplementedError(message)
             volta_measures = measures[measure_start_number:measure_stop_number]
-            container = Container(volta_measures)
+            container = scoretools.Container(volta_measures)
             command = indicatortools.Repeat()
             attach(command, container)
 
@@ -1239,7 +1594,9 @@ class SegmentMaker(makertools.SegmentMaker):
         measures = self._make_multimeasure_rest_filled_measures()
         context.extend(measures)
 
-    def _print_approximate_duration_in_seconds(self):
+    def _print_segment_duration_(self):
+        if not self.print_segment_duration:
+            return
         context = self._score['Time Signature Context Skips']
         current_tempo = None
         leaves = iterate(context).by_class(scoretools.Leaf)
@@ -1248,7 +1605,7 @@ class SegmentMaker(makertools.SegmentMaker):
         is_trending = False
         for i, leaf in enumerate(leaves):
             duration = inspect_(leaf).get_duration()
-            tempi = inspect_(leaf).get_indicators(Tempo)
+            tempi = inspect_(leaf).get_indicators(indicatortools.Tempo)
             if tempi:
                 current_tempo = tempi[0]
                 for measure_summary in measure_summaries[tempo_index:]:
@@ -1268,7 +1625,7 @@ class SegmentMaker(makertools.SegmentMaker):
                 next_tempo, 
                 ]
             measure_summaries.append(measure_summary)
-        total_duration = Duration(0)
+        total_duration = durationtools.Duration(0)
         for measure_summary in measure_summaries:
             duration, current_tempo, is_trending, next_tempo = measure_summary
             if is_trending and current_tempo is not None:
@@ -1292,15 +1649,15 @@ class SegmentMaker(makertools.SegmentMaker):
     def _remove_score_template_start_clefs(self):
         dictionary = datastructuretools.TypedOrderedDict()
         self._cached_score_template_start_clefs = dictionary
+        prototype = indicatortools.Clef
         for context in iterate(self._score).by_class(scoretools.Context):
-            if not inspect_(context).has_indicator(Clef):
+            if not inspect_(context).has_indicator(prototype):
                 continue
-            clef = inspect_(context).get_indicator(Clef)
+            clef = inspect_(context).get_indicator(prototype)
             self._cached_score_template_start_clefs[context.name] = clef.name
-            detach(Clef, context)
+            detach(indicatortools.Clef, context)
 
     def _remove_score_template_start_instruments(self):
-        materials_package = self.score_package.materials
         dictionary = datastructuretools.TypedOrderedDict()
         self._cached_score_template_start_instruments = dictionary
         for context in iterate(self._score).by_class(scoretools.Context):
@@ -1344,8 +1701,9 @@ class SegmentMaker(makertools.SegmentMaker):
             previous_leaf = inspect_(leaf).get_leaf(-1)
             if previous_leaf is None:
                 continue
-            if inspect_(previous_leaf).get_duration() < Duration(1, 8):
-                string = r"shape #'((0 . 0) (0 . 0) (0 . 0) (0 . 0)) RepeatTie"
+            minimum_duration = durationtools.Duration(1, 8)
+            if inspect_(previous_leaf).get_duration() < minimum_duration:
+                string = r"shape #'((2 . 0) (1 . 0) (0.5 . 0) (0 . 0)) RepeatTie"
                 command = indicatortools.LilyPondCommand(string)
                 attach(command, leaf)
 
@@ -1385,9 +1743,10 @@ class SegmentMaker(makertools.SegmentMaker):
     def _transpose_instruments(self):
         if not self.transpose_score:
             return
-        for voice in iterate(self._score).by_class(Voice):
+        pitched_prototype = (scoretools.Note, scoretools.Chord)
+        for voice in iterate(self._score).by_class(scoretools.Voice):
             for leaf in iterate(voice).by_class(scoretools.Leaf):
-                if not isinstance(leaf, (Note, Chord)):
+                if not isinstance(leaf, pitched_prototype):
                     continue
                 inspector = inspect_(leaf)
                 prototype = instrumenttools.Instrument
@@ -1404,19 +1763,25 @@ class SegmentMaker(makertools.SegmentMaker):
                     written_pitch_number = sounding_pitch_number - i
                     leaf.written_pitch = written_pitch_number
 
-    def _unpack_scopes(self, scopes):
-        prototype = (baca.tools.SimpleScope, baca.tools.CompoundScope)
-        if isinstance(scopes, prototype):
+    def _unpack_scopes(self, scopes, score_template=None):
+        scope_prototype = (baca.tools.SimpleScope, baca.tools.CompoundScope)
+        if isinstance(scopes, scope_prototype):
             scopes = [scopes]
         elif isinstance(scopes, tuple):
-            scopes = baca.tools.CompoundScope._to_simple_scopes(scopes)
+            scopes = baca.tools.CompoundScope._to_simple_scopes(
+                scopes,
+                score_template=score_template,
+                )
         elif isinstance(scopes, list):
             scopes__ = []
             for scope in scopes:
-                if isinstance(scope, prototype):
+                if isinstance(scope, scope_prototype):
                     scopes___.append(scope)
                 elif isinstance(scope, tuple):
-                    scopes_ = baca.tools.CompoundScope._to_simple_scopes(scope)
+                    scopes_ = baca.tools.CompoundScope._to_simple_scopes(
+                        scope,
+                        score_template=score_template,
+                        )
                     scopes__.extend(scopes_)
                 else:
                     message = 'list must contain only scopes and tuples: {!r}.'
@@ -1428,13 +1793,18 @@ class SegmentMaker(makertools.SegmentMaker):
             message = message.format(scopes)
             raise TypeError(message)
         assert isinstance(scopes, list), repr(scopes)
-        assert all(isinstance(_, prototype) for _ in scopes), repr(scopes)
+        assert all(isinstance(_, scope_prototype) for _ in scopes), repr(
+            scopes)
         return scopes
 
-    def _update_segment_metadata(self, materials_package):
+    def _update_segment_metadata(self):
         self._segment_metadata['measure_count'] = self.measure_count
-        end_settings = self._get_end_settings(materials_package)
+        end_settings = self._get_end_settings()
         self._segment_metadata.update(end_settings)
+        class_ = type(self._segment_metadata)
+        items = sorted(self._segment_metadata.items())
+        segment_metadata = class_(items)
+        self._segment_metadata = segment_metadata
 
     ### PUBLIC PROPERTIES ###
 
@@ -1442,9 +1812,9 @@ class SegmentMaker(makertools.SegmentMaker):
     def final_barline(self):
         r'''Is true when final barline should appear.
 
-        Set to true or false.
+        Set to true, false, none or explicit barline string.
 
-        Returns true or false.
+        Returns true, false, none or explicit barline string.
         '''
         return self._final_barline
 
@@ -1504,11 +1874,38 @@ class SegmentMaker(makertools.SegmentMaker):
     def measures_per_stage(self):
         r'''Gets measures per stage.
 
-        Set to list of positive integers.
+        Groups all measures into a single stage when `measures_per_stage` is
+        none.
 
-        Returns list of positive integers.
+        Set to list of positive integers or none.
+
+        Returns list of positive integers or none.
         '''
+        if self._measures_per_stage is None:
+            return [len(self.time_signatures)]
         return self._measures_per_stage
+
+    @property
+    def print_segment_duration(self):
+        r'''Is true when segment-maker should print approximate segment
+        duration in seconds. Otherwise false.
+
+        Set to true, false or none.
+
+        Returns true, false or none.
+        '''
+        return self._print_segment_duration
+
+    @property
+    def print_timings(self):
+        r'''Is true when segment-maker should print interpret timings.
+        Otherwise false.
+
+        Set to true, false or none.
+
+        Returns true, false or none.
+        '''
+        return self._print_timings
 
     @property
     def rehearsal_letter(self):
@@ -1543,6 +1940,22 @@ class SegmentMaker(makertools.SegmentMaker):
         return self._score_package
 
     @property
+    def score_template(self):
+        r'''Gets score template.
+
+        Returns ``self.score_template()`` when ``self.score_template`` is not
+        none.
+
+        Returns ``self.score_package.tools.ScoreTemplate()`` when
+        ``self.score_template`` is none.
+
+        Returns score template.
+        '''
+        if self._score_template is not None:
+            return self._score_template
+        return self.score_package.tools.ScoreTemplate()
+
+    @property
     def spacing_map(self):
         r'''Gets spacing map.
 
@@ -1566,19 +1979,23 @@ class SegmentMaker(makertools.SegmentMaker):
     def stage_count(self):
         r'''Gets stage count.
 
+        Defined equal to 1 when `self.measures_per_stage` is none.
+
         Returns nonnegative integer.
         '''
+        if self.measures_per_stage is None:
+            return 1
         return len(self.measures_per_stage)
 
     @property
-    def tempo_map(self):
-        r'''Gets tempo map.
+    def tempo_specifier(self):
+        r'''Gets tempo specifier.
 
-        Set to tempo map.
+        Set to tempo specifier.
 
-        Returns tempo map.
+        Returns tempo specifier.
         '''
-        return self._tempo_map
+        return self._tempo_specifier
 
     @property
     def time_signatures(self):
@@ -1604,14 +2021,14 @@ class SegmentMaker(makertools.SegmentMaker):
         return self._transpose_score
 
     @property
-    def volta_map(self):
-        r'''Gets volta map.
+    def volta_specifier(self):
+        r'''Gets volta specifier.
 
-        Set to volta map.
+        Set to volta specifier.
 
-        Returns volta map.
+        Returns volta specifier.
         '''
-        return self._volta_map
+        return self._volta_specifier
 
     ### PUBLIC METHODS ###
 
@@ -1649,13 +2066,20 @@ class SegmentMaker(makertools.SegmentMaker):
 
         Returns scoped specifiers.
         '''
-        scopes = self._unpack_scopes(scopes)
+        scopes = self._unpack_scopes(
+            scopes,
+            score_template=self.score_template,
+            )
         if not isinstance(specifiers, (tuple, list)):
             specifiers = [specifiers]
         assert isinstance(specifiers, (tuple, list)), repr(specifiers)
         specifiers_ = []
         for scope in scopes:
             for specifier in specifiers:
+                if specifier is None:
+                    message = '{!r} contains none-valued specifier.'
+                    message = message.format(scope)
+                    raise Exception(message)
                 default_scope = None
                 if isinstance(specifier, instrumenttools.Instrument):
                     default_scope = specifier._default_scope
@@ -1689,6 +2113,8 @@ class SegmentMaker(makertools.SegmentMaker):
 
         Returns none.
         '''
+        if self.measures_per_stage is None:
+            return
         if not sum(self.measures_per_stage) == self.measure_count:
             message = 'measures per stage {} do not match measure count {}.'
             message = message.format(

@@ -1,63 +1,242 @@
 # -*- coding: utf-8 -*-
-from abjad import *
+from abjad.tools import abctools
+from abjad.tools import patterntools
+from abjad.tools import rhythmmakertools
+from abjad.tools import scoretools
+from abjad.tools import spannertools
+from abjad.tools.topleveltools import attach
+from abjad.tools.topleveltools import inspect_
 
 
 class GlissandoSpecifier(abctools.AbjadObject):
     r'''Glissando specifier.
 
+    ::
+
+        >>> import baca
+
     ..  container:: example
 
-        **Example 1.** Initializes from a single pattern:
+        **Example 1.** Selects all logical ties:
 
         ::
 
-            >>> import baca
-            >>> specifier = baca.tools.GlissandoSpecifier(
-            ...     patterns=patterntools.select_all(),
+            >>> segment_maker = baca.tools.SegmentMaker(
+            ...     score_template=baca.tools.ViolinSoloScoreTemplate(),
+            ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
             ...     )
 
         ::
-            
-            >>> print(format(specifier))
-            baca.tools.GlissandoSpecifier(
-                patterns=(
-                    patterntools.Pattern(
-                        indices=(0,),
-                        period=1,
-                        ),
-                    ),
-                )
 
-    ..  container:: example
-
-        **Example 2.** Initializes from multiple patterns:
-
-        ::
-
-            >>> specifier = baca.tools.GlissandoSpecifier(
-            ...     patterns=[
-            ...         patterntools.select_first(1),
-            ...         patterntools.select_last(1),
+            >>> specifiers = segment_maker.append_specifiers(
+            ...     ('vn', baca.tools.stages(1)),
+            ...     [
+            ...         baca.pitch.pitches('E4 D5 F4 E5 G4 F5'),
+            ...         baca.rhythm.make_even_run_rhythm_specifier(),
+            ...         baca.tools.GlissandoSpecifier(
+            ...             patterns=patterntools.select_all(),
+            ...             ),
             ...         ],
             ...     )
 
         ::
-            
-            >>> print(format(specifier))
-            baca.tools.GlissandoSpecifier(
-                patterns=(
-                    patterntools.Pattern(
-                        indices=(0,),
-                        ),
-                    patterntools.Pattern(
-                        indices=(-1,),
-                        ),
-                    ),
-                )
+
+            >>> result = segment_maker(is_doc_example=True)
+            >>> lilypond_file, segment_metadata = result
+            >>> show(lilypond_file) # doctest: +SKIP
+
+        ..  doctest::
+
+            >>> score = lilypond_file.score_block.items[0]
+            >>> f(score)
+            \context Score = "Score" <<
+                \tag violin
+                \context TimeSignatureContext = "Time Signature Context" <<
+                    \context TimeSignatureContextMultimeasureRests = "Time Signature Context Multimeasure Rests" {
+                        {
+                            \time 4/8
+                            R1 * 1/2
+                        }
+                        {
+                            \time 3/8
+                            R1 * 3/8
+                        }
+                        {
+                            \time 4/8
+                            R1 * 1/2
+                        }
+                        {
+                            \time 3/8
+                            R1 * 3/8
+                        }
+                    }
+                    \context TimeSignatureContextSkips = "Time Signature Context Skips" {
+                        {
+                            \time 4/8
+                            s1 * 1/2
+                        }
+                        {
+                            \time 3/8
+                            s1 * 3/8
+                        }
+                        {
+                            \time 4/8
+                            s1 * 1/2
+                        }
+                        {
+                            \time 3/8
+                            s1 * 3/8
+                        }
+                    }
+                >>
+                \context MusicContext = "Music Context" <<
+                    \tag violin
+                    \context ViolinMusicStaff = "Violin Music Staff" {
+                        \clef "treble"
+                        \context ViolinMusicVoice = "Violin Music Voice" {
+                            {
+                                e'8 \glissando [
+                                d''8 \glissando
+                                f'8 \glissando
+                                e''8 ] \glissando
+                            }
+                            {
+                                g'8 \glissando [
+                                f''8 \glissando
+                                e'8 ] \glissando
+                            }
+                            {
+                                d''8 \glissando [
+                                f'8 \glissando
+                                e''8 \glissando
+                                g'8 ] \glissando
+                            }
+                            {
+                                f''8 \glissando [
+                                e'8 \glissando
+                                d''8 ]
+                                \bar "|"
+                            }
+                        }
+                    }
+                >>
+            >>
+
+    ..  container:: example
+
+        **Example 2.** Selects first and last logical ties:
+
+        ::
+
+            >>> segment_maker = baca.tools.SegmentMaker(
+            ...     score_template=baca.tools.ViolinSoloScoreTemplate(),
+            ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
+            ...     )
+
+        ::
+
+            >>> specifiers = segment_maker.append_specifiers(
+            ...     ('vn', baca.tools.stages(1)),
+            ...     [
+            ...         baca.pitch.pitches('E4 D5 F4 E5 G4 F5'),
+            ...         baca.rhythm.make_even_run_rhythm_specifier(),
+            ...         baca.tools.GlissandoSpecifier(
+            ...             patterns=[
+            ...                 patterntools.select_first(1),
+            ...                 patterntools.select_last(2),
+            ...                 ],
+            ...             ),
+            ...         ],
+            ...     )
+
+        ::
+
+            >>> result = segment_maker(is_doc_example=True)
+            >>> lilypond_file, segment_metadata = result
+            >>> show(lilypond_file) # doctest: +SKIP
+
+        ..  doctest::
+
+            >>> score = lilypond_file.score_block.items[0]
+            >>> f(score)
+            \context Score = "Score" <<
+                \tag violin
+                \context TimeSignatureContext = "Time Signature Context" <<
+                    \context TimeSignatureContextMultimeasureRests = "Time Signature Context Multimeasure Rests" {
+                        {
+                            \time 4/8
+                            R1 * 1/2
+                        }
+                        {
+                            \time 3/8
+                            R1 * 3/8
+                        }
+                        {
+                            \time 4/8
+                            R1 * 1/2
+                        }
+                        {
+                            \time 3/8
+                            R1 * 3/8
+                        }
+                    }
+                    \context TimeSignatureContextSkips = "Time Signature Context Skips" {
+                        {
+                            \time 4/8
+                            s1 * 1/2
+                        }
+                        {
+                            \time 3/8
+                            s1 * 3/8
+                        }
+                        {
+                            \time 4/8
+                            s1 * 1/2
+                        }
+                        {
+                            \time 3/8
+                            s1 * 3/8
+                        }
+                    }
+                >>
+                \context MusicContext = "Music Context" <<
+                    \tag violin
+                    \context ViolinMusicStaff = "Violin Music Staff" {
+                        \clef "treble"
+                        \context ViolinMusicVoice = "Violin Music Voice" {
+                            {
+                                e'8 \glissando [
+                                d''8
+                                f'8
+                                e''8 ]
+                            }
+                            {
+                                g'8 [
+                                f''8
+                                e'8 ]
+                            }
+                            {
+                                d''8 [
+                                f'8
+                                e''8
+                                g'8 ]
+                            }
+                            {
+                                f''8 [
+                                e'8 \glissando
+                                d''8 ]
+                                \bar "|"
+                            }
+                        }
+                    }
+                >>
+            >>
 
     '''
 
     ### CLASS VARIABLES ##
+
+    __documentation_section__ = 'Specifiers'
 
     __slots__ = (
         '_patterns',
@@ -119,7 +298,7 @@ class GlissandoSpecifier(abctools.AbjadObject):
 
     @property
     def patterns(self):
-        r'''Gets patterns of glissando specifier.
+        r'''Gets patterns.
 
         ..  container:: example
 
@@ -143,6 +322,8 @@ class GlissandoSpecifier(abctools.AbjadObject):
                 >>> specifier.patterns
                 (Pattern(indices=(0, 1), period=2), Pattern(indices=(0,)))
 
-        Set to boolean patterns or none.
+        Set to patterns or none.
+
+        Returns tuple of patterns or none.
         '''
         return self._patterns

@@ -1,24 +1,26 @@
 # -*- coding: utf-8 -*-
 from abjad.tools import handlertools
-from abjad.tools.markuptools import Markup
+from abjad.tools import markuptools
 
 
 ### factory functions ###
 
-def make_markup(string, direction=Up, is_new=True):
+def make_markup(string, direction=Up, is_new=True, whiteout=True):
     if not is_new:
         string = '({})'.format(string)
-    markup = Markup(string, direction=direction)
+    markup = markuptools.Markup(string, direction=direction)
     markup = markup.upright()
+    if whiteout:
+        markup = markup.whiteout()
     return markup
 
 def make_markup_lines(strings, direction=Up):
     assert isinstance(strings, list), repr(strings)
     lines = []
     for string in strings:
-        line = Markup(string).line()
+        line = markuptools.Markup(string).line()
         lines.append(line)
-    markup = Markup.column(lines, direction=Up)
+    markup = markuptools.Markup.column(lines, direction=Up)
     return markup
 
 def make_two_part_transition_markup(
@@ -40,11 +42,168 @@ def make_two_part_transition_markup(
     composite_string = composite_string.format(string_1, string_2)
     return make_markup(composite_string)
 
+### private functions ###
+
+def _make_instrument_name_markup(string, space, column=True):
+    parts = string.split()
+    if len(parts) == 1:
+        markup = markuptools.Markup(parts[0]).hcenter_in(space)
+    elif column:
+        markups = [markuptools.Markup(_) for _ in parts]
+        markup = markuptools.Markup.center_column(markups, direction=None)
+        markup = markup.hcenter_in(space)
+    else:
+        markups = [markuptools.Markup(_) for _ in parts]
+        markup = markuptools.Markup.line(*markups)
+        markup = markup.hcenter_in(space)
+    return markup
+
+def make_instrument_name_markup(string, column=True):
+    r'''Makes instrument name markup.
+
+    ::
+
+        >>> import baca
+
+    ..  container:: example
+
+        **Example 1.** Makes instrument name markup in column:
+
+        ::
+
+            >>> markup = baca.markup.make_instrument_name_markup('Eng. horn')
+
+        ::
+
+            >>> show(markup) # doctest: +SKIP
+
+        ..  doctest::
+
+            >>> f(markup)
+            \markup {
+                \hcenter-in
+                    #16
+                    \center-column
+                        {
+                            Eng.
+                            horn
+                        }
+                }
+
+    ..  container:: example
+
+        **Example 2.** Makes instrument name markup in line:
+
+        ::
+
+            >>> markup = baca.markup.make_instrument_name_markup(
+            ...     'Violin 1',
+            ...     column=False,
+            ...     )
+
+        ::
+
+            >>> show(markup) # doctest: +SKIP
+
+        ..  doctest::
+
+            >>> f(markup)
+            \markup {
+                \hcenter-in
+                    #16
+                    \line
+                        {
+                            Violin
+                            1
+                        }
+                }
+    
+    Centers markup horizontally in 16 spaces.
+
+    Returns markup.
+    '''
+    return _make_instrument_name_markup(
+        string, 
+        16,
+        column=column,
+        )
+
+def make_short_instrument_name_markup(string, column=True):
+    r'''Makes short instrument name markup.
+
+    ..  container:: example
+
+        **Example 1.** Makes short instrument name markup in column:
+
+        ::
+
+            >>> markup = baca.markup.make_short_instrument_name_markup(
+            ...     'Eng. hn.',
+            ...     )
+
+        ::
+
+            >>> show(markup) # doctest: +SKIP
+
+        ..  doctest::
+
+            >>> f(markup)
+            \markup {
+                \hcenter-in
+                    #10
+                    \center-column
+                        {
+                            Eng.
+                            hn.
+                        }
+                }
+
+    ..  container:: example
+
+        **Example 2.** Makes short instrument name markup in line:
+
+        ::
+
+            >>> markup = baca.markup.make_short_instrument_name_markup(
+            ...     'Vn. 1',
+            ...     column=False,
+            ...     )
+
+        ::
+
+            >>> show(markup) # doctest: +SKIP
+
+        ..  doctest::
+
+            >>> f(markup)
+            \markup {
+                \hcenter-in
+                    #10
+                    \line
+                        {
+                            Vn.
+                            1
+                        }
+                }
+    
+    Centers markup horizontally in 10 spaces.
+
+    Returns markup.
+    '''
+    return _make_instrument_name_markup(
+        string, 
+        10,
+        column=column,
+        )
+
 ### library ###
 
 def accent_changes_of_direction():
     string = 'accent changes of direction noticeably at each attack'
     return make_markup(string)
+
+def airtone():
+    return make_markup('airtone')
 
 def allow_bowing_to_convey_accelerando():
     return make_markup('allow bowing to convey accelerando')
@@ -80,6 +239,9 @@ def FB():
 def FB_flaut():
     return make_markup('FB flaut.')
 
+def fluttertongue():
+    return make_markup('fluttertongue')
+
 def full_bow_strokes():
     return make_markup('full bow strokes')
 
@@ -102,25 +264,27 @@ def lv_possibile():
     return make_markup('l.v. possibile')
 
 def make_boxed_markup(string, whiteout=True):
-    markup = Markup(string, direction=Up)
+    markup = markuptools.Markup(string, direction=Up)
     markup = markup.box().override(('box-padding', 0.5))
     if whiteout:
         markup = markup.whiteout()
     return markup
 
-def make_boxed_markup_lines(strings, direction=Up):
+def make_boxed_markup_lines(strings, direction=Up, whiteout=True):
     assert isinstance(strings, list), repr(strings)
     lines = []
     for string in strings:
-        line = Markup(string).line()
+        line = markuptools.Markup(string).line()
         lines.append(line)
-    markup = Markup.column(lines, direction=Up)
+    markup = markuptools.Markup.column(lines, direction=Up)
     markup = markup.box().override(('box-padding', 0.5))
+    if whiteout:
+        markup = markup.whiteout()
     return markup
 
 def make_boxed_repeat_count(count):
     string = 'x{}'.format(count)
-    markup = Markup(string, direction=Up)
+    markup = markuptools.Markup(string, direction=Up)
     markup = markup.sans().bold().fontsize(6).upright()
     markup = markup.box().override(('box-padding', 0.5))
     return markup
@@ -207,6 +371,12 @@ def MP_XFB_flaut():
 def non_flautando():
     return make_markup('non flautando')
 
+def non_flutt():
+    return make_markup('non flutt.')
+
+def non_spazz():
+    return make_markup('non spazz.')
+
 def nut():
     return make_markup('nut')
 
@@ -288,6 +458,9 @@ def PO_XFB_flaut():
 
 def pochiss_pont(is_new=True):
     return make_markup('pochiss. pont.', is_new=is_new)
+
+def pochiss_scratch(is_new=True):
+    return make_markup('pochiss. scratch', is_new=is_new)
 
 def pochiss_vib():
     return make_markup('pochiss. vib.')
@@ -385,10 +558,11 @@ def senza_vib():
     return make_markup('senza vib.')
 
 def sparse_clicks():
-    first_line = Markup('sparse, individual clicks with extremely slow bow')
+    first_line = markuptools.Markup(
+        'sparse, individual clicks with extremely slow bow')
     first_line = first_line.line()
-    second_line = Markup('(1-2/sec. in irregular rhythm)').line()
-    markup = Markup.column([first_line, second_line], direction=Up)
+    second_line = markuptools.Markup('(1-2/sec. in irregular rhythm)').line()
+    markup = markuptools.Markup.column([first_line, second_line], direction=Up)
     return markup
 
 def spazz():
@@ -454,6 +628,9 @@ def tasto_plus_poco_vib(
         first_is_new=first_is_new,
         second_is_new=second_is_new,
         )
+
+def tasto_poss(is_new=True):
+    return make_markup('tasto poss.', is_new=is_new)
 
 def tasto_senza_vib():
     return make_markup('tasto + senza vib.')

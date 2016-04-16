@@ -1,56 +1,133 @@
 # -*- coding: utf-8 -*-
 import collections
-from abjad import *
+from abjad.tools import abctools
+from abjad.tools import datastructuretools
+from abjad.tools import mathtools
+from abjad.tools import pitchtools
+from abjad.tools import scoretools
+from abjad.tools import selectiontools
+from abjad.tools.topleveltools import mutate
 
 
 # TODO: write comprehensive tests
 class PitchSpecifier(abctools.AbjadObject):
     r'''Pitch specifier.
 
+    ::
+
+        >>> import baca
+
     ..  container:: example
 
-        **Example 1.** Makes pitch specifier from pitch numbers:
+        **Example 1.** With pitch numbers:
 
         ::
 
-            >>> import baca
-            >>> specifier = baca.tools.PitchSpecifier(
-            ...     source=[19, 13, 15, 16, 17, 23],
+            >>> segment_maker = baca.tools.SegmentMaker(
+            ...     score_template=baca.tools.ViolinSoloScoreTemplate(),
+            ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
             ...     )
 
         ::
 
-            >>> print(format(specifier))
-            baca.tools.PitchSpecifier(
-                source=datastructuretools.CyclicTuple(
-                    [
-                        pitchtools.NamedPitch("g''"),
-                        pitchtools.NamedPitch("cs''"),
-                        pitchtools.NamedPitch("ef''"),
-                        pitchtools.NamedPitch("e''"),
-                        pitchtools.NamedPitch("f''"),
-                        pitchtools.NamedPitch("b''"),
-                        ]
-                    ),
-                )
-
-    ..  container:: example
-
-        **Example 2.** Makes empty pitch specifier:
+            >>> specifiers = segment_maker.append_specifiers(
+            ...     ('vn', baca.tools.stages(1)),
+            ...     [
+            ...         baca.rhythm.make_even_run_rhythm_specifier(),
+            ...         baca.tools.PitchSpecifier(
+            ...             source=[19, 13, 15, 16, 17, 23],
+            ...             ),
+            ...         ],
+            ...     )
 
         ::
 
-            >>> import baca
-            >>> specifier = baca.tools.PitchSpecifier()
+            >>> result = segment_maker(is_doc_example=True)
+            >>> lilypond_file, segment_metadata = result
+            >>> show(lilypond_file) # doctest: +SKIP
 
-        ::
+        ..  doctest::
 
-            >>> print(format(specifier))
-            baca.tools.PitchSpecifier()
+            >>> score = lilypond_file.score_block.items[0]
+            >>> f(score)
+            \context Score = "Score" <<
+                \tag violin
+                \context TimeSignatureContext = "Time Signature Context" <<
+                    \context TimeSignatureContextMultimeasureRests = "Time Signature Context Multimeasure Rests" {
+                        {
+                            \time 4/8
+                            R1 * 1/2
+                        }
+                        {
+                            \time 3/8
+                            R1 * 3/8
+                        }
+                        {
+                            \time 4/8
+                            R1 * 1/2
+                        }
+                        {
+                            \time 3/8
+                            R1 * 3/8
+                        }
+                    }
+                    \context TimeSignatureContextSkips = "Time Signature Context Skips" {
+                        {
+                            \time 4/8
+                            s1 * 1/2
+                        }
+                        {
+                            \time 3/8
+                            s1 * 3/8
+                        }
+                        {
+                            \time 4/8
+                            s1 * 1/2
+                        }
+                        {
+                            \time 3/8
+                            s1 * 3/8
+                        }
+                    }
+                >>
+                \context MusicContext = "Music Context" <<
+                    \tag violin
+                    \context ViolinMusicStaff = "Violin Music Staff" {
+                        \clef "treble"
+                        \context ViolinMusicVoice = "Violin Music Voice" {
+                            {
+                                g''8 [
+                                cs''8
+                                ef''8
+                                e''8 ]
+                            }
+                            {
+                                f''8 [
+                                b''8
+                                g''8 ]
+                            }
+                            {
+                                cs''8 [
+                                ef''8
+                                e''8
+                                f''8 ]
+                            }
+                            {
+                                b''8 [
+                                g''8
+                                cs''8 ]
+                                \bar "|"
+                            }
+                        }
+                    }
+                >>
+            >>
 
     '''
 
     ### CLASS VARIABLES ###
+
+    __documentation_section__ = 'Specifiers'
 
     __slots__ = (
         '_acyclic',
@@ -70,13 +147,13 @@ class PitchSpecifier(abctools.AbjadObject):
         self,
         acyclic=None,
         counts=None,
+        mutates_score=None,
         operators=None,
         repetition_intervals=None,
         reverse=None,
         source=None,
         start_index=None,
         ):
-        from abjad.tools import pitchtools
         if acyclic is not None:
             acyclic = bool(acyclic)
         self._acyclic = acyclic
@@ -84,7 +161,8 @@ class PitchSpecifier(abctools.AbjadObject):
             assert mathtools.all_are_positive_integers(counts), repr(counts)
         self._counts = counts
         # because chords sometimes replace notes
-        self._mutates_score = True
+        #self._mutates_score = True
+        self._mutates_score = mutates_score
         if operators is not None:
             operators = tuple(operators)
         self._operators = operators
@@ -131,6 +209,12 @@ class PitchSpecifier(abctools.AbjadObject):
 
         Returns none.
         '''
+        if not logical_ties:
+            message = '{!r} has no logical ties.'
+            message = message.format(self)
+            raise Exception(message)
+        if isinstance(logical_ties[0], scoretools.Leaf):
+            logical_ties = [selectiontools.LogicalTie(_) for _ in logical_ties]
         counts = self.counts or [1]
         counts = datastructuretools.CyclicTuple(counts)
         start_index = self.start_index
@@ -202,7 +286,8 @@ class PitchSpecifier(abctools.AbjadObject):
                         note.written_pitch = pitch
                     elif isinstance(pitch, pitchtools.PitchSegment):
                         assert isinstance(pitch, collections.Iterable)
-                        chord = Chord(pitch, note.written_duration)
+                        chord = scoretools.Chord(pitch, note.written_duration)
+                        # TODO: check and make sure *overrides* are preserved!
                         mutate(note).replace(chord)
                     else:
                         message = 'must be pitch or pitch segment: {!r}.'
@@ -269,6 +354,18 @@ class PitchSpecifier(abctools.AbjadObject):
         Returns positive integers or none.
         '''
         return self._counts
+
+    @property
+    def mutates_score(self):
+        r'''Gets score mutation flag.
+
+        Set to true, false or none.
+
+        Set to true to cause segment-maker to recache all leaves in score.
+
+        Returns true, false or none.
+        '''
+        return self._mutates_score
 
     @property
     def operators(self):

@@ -1,50 +1,153 @@
 # -*- coding: utf-8 -*-
 import itertools
-from abjad import *
+from abjad.tools import abctools
+from abjad.tools import datastructuretools
+from abjad.tools import indicatortools
+from abjad.tools import mathtools
+from abjad.tools.topleveltools import attach
 
 
 class ColorFingeringSpecifier(abctools.AbjadObject):
     r'''ColorFingeringSpecifier specifier.
 
+    ::
+
+        >>> import baca
+
     ..  container:: example
 
-        Initializes with boolean number_lists:
+        **Example 1.** Initializes with number lists:
 
         ::
 
-            >>> import baca
-            >>> specifier = baca.tools.ColorFingeringSpecifier(
-            ...     number_lists=(
-            ...         [0, 1, 2, 1],
-            ...         ),
+            >>> segment_maker = baca.tools.SegmentMaker(
+            ...     score_template=baca.tools.ViolinSoloScoreTemplate(),
+            ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
             ...     )
 
         ::
-            
-            >>> print(format(specifier))
-            baca.tools.ColorFingeringSpecifier(
-                number_lists=(
-                    [0, 1, 2, 1],
-                    ),
-                )
 
+            >>> specifiers = segment_maker.append_specifiers(
+            ...     ('vn', baca.tools.stages(1)),
+            ...     [
+            ...         baca.pitch.pitches('E4'),
+            ...         baca.rhythm.make_messiaen_note_rhythm_specifier(),
+            ...         baca.tools.ColorFingeringSpecifier(
+            ...             number_lists=([0, 1, 2, 1],),
+            ...             ),
+            ...         ],
+            ...     )
+
+        ::
+
+            >>> result = segment_maker(is_doc_example=True)
+            >>> lilypond_file, segment_metadata = result
+            >>> show(lilypond_file) # doctest: +SKIP
+
+        ..  doctest::
+
+            >>> score = lilypond_file.score_block.items[0]
+            >>> f(score)
+            \context Score = "Score" <<
+                \tag violin
+                \context TimeSignatureContext = "Time Signature Context" <<
+                    \context TimeSignatureContextMultimeasureRests = "Time Signature Context Multimeasure Rests" {
+                        {
+                            \time 4/8
+                            R1 * 1/2
+                        }
+                        {
+                            \time 3/8
+                            R1 * 3/8
+                        }
+                        {
+                            \time 4/8
+                            R1 * 1/2
+                        }
+                        {
+                            \time 3/8
+                            R1 * 3/8
+                        }
+                    }
+                    \context TimeSignatureContextSkips = "Time Signature Context Skips" {
+                        {
+                            \time 4/8
+                            s1 * 1/2
+                        }
+                        {
+                            \time 3/8
+                            s1 * 3/8
+                        }
+                        {
+                            \time 4/8
+                            s1 * 1/2
+                        }
+                        {
+                            \time 3/8
+                            s1 * 3/8
+                        }
+                    }
+                >>
+                \context MusicContext = "Music Context" <<
+                    \tag violin
+                    \context ViolinMusicStaff = "Violin Music Staff" {
+                        \clef "treble"
+                        \context ViolinMusicVoice = "Violin Music Voice" {
+                            e'2
+                            e'4.
+                                ^ \markup {
+                                    \override
+                                        #'(circle-padding . 0.25)
+                                        \circle
+                                            \finger
+                                                1
+                                    }
+                            e'2
+                                ^ \markup {
+                                    \override
+                                        #'(circle-padding . 0.25)
+                                        \circle
+                                            \finger
+                                                2
+                                    }
+                            e'4.
+                                ^ \markup {
+                                    \override
+                                        #'(circle-padding . 0.25)
+                                        \circle
+                                            \finger
+                                                1
+                                    }
+                            \bar "|"
+                        }
+                    }
+                >>
+            >>
+            
     '''
 
     ### CLASS VARIABLES ##
 
+    __documentation_section__ = 'Specifiers'
+
     __slots__ = (
+        '_by_pitch_run',
         '_deposit_annotations',
         '_number_lists',
         )
+
+    _selector_type = 'logical ties'
 
     ### INITIALIZER ###
 
     def __init__(
         self,
+        by_pitch_run=None,
         deposit_annotations=None,
         number_lists=None,
         ):
         from abjad.tools import pitchtools
+        self._by_pitch_run = by_pitch_run
         if deposit_annotations is not None:
             deposit_annotations = tuple(deposit_annotations)
         self._deposit_annotations = deposit_annotations
@@ -57,28 +160,42 @@ class ColorFingeringSpecifier(abctools.AbjadObject):
     ### SPECIAL METHODS ###
 
     def __call__(self, logical_ties):
+        r'''Calls color fingering specifier.
+
+        Returns none.
+        '''
         if self.number_lists is None:
             return
         number_lists = datastructuretools.CyclicTuple(self.number_lists)
-        number_list_index = 0
-        pairs = itertools.groupby(
-            logical_ties,
-            lambda _: _.head.written_pitch,
-            )
-        for key, values in pairs:
-            values = list(values)
-            if len(values) == 1:
-                continue
-            number_list = number_lists[number_list_index]
+        if not self.by_pitch_run:
+            assert len(self.number_lists) == 1
+            number_list = self.number_lists[0]
             number_list = datastructuretools.CyclicTuple(number_list)
-            for i, logical_tie in enumerate(values):
+            for i, logical_tie in enumerate(logical_ties):
                 number = number_list[i]
-                note = logical_tie.head
                 if not number == 0:
                     fingering = indicatortools.ColorFingering(number)
                     attach(fingering, logical_tie.head)
                 self._attach_deposit_annotations(logical_tie.head)
-            number_list_index += 1
+        else:
+            number_list_index = 0
+            pairs = itertools.groupby(
+                logical_ties,
+                lambda _: _.head.written_pitch,
+                )
+            for key, values in pairs:
+                values = list(values)
+                if len(values) == 1 and not self.by_pitch_run:
+                    continue
+                number_list = number_lists[number_list_index]
+                number_list = datastructuretools.CyclicTuple(number_list)
+                for i, logical_tie in enumerate(values):
+                    number = number_list[i]
+                    if not number == 0:
+                        fingering = indicatortools.ColorFingering(number)
+                        attach(fingering, logical_tie.head)
+                    self._attach_deposit_annotations(logical_tie.head)
+                number_list_index += 1
 
     ### PRIVATE METHODS ###
 
@@ -90,6 +207,333 @@ class ColorFingeringSpecifier(abctools.AbjadObject):
             attach(annotation, note)
 
     ### PUBLIC PROPERTIES ###
+
+    @property
+    def by_pitch_run(self):
+        r'''Is true when fingerings attach by pitch run. Is false when
+        fingerings attach to every note.
+
+        ..  container:: example
+
+            **Example 1.** Attaches color fingerings to every note:
+
+            ::
+
+                >>> segment_maker = baca.tools.SegmentMaker(
+                ...     score_template=baca.tools.ViolinSoloScoreTemplate(),
+                ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
+                ...     )
+
+            ::
+
+                >>> specifiers = segment_maker.append_specifiers(
+                ...     ('vn', baca.tools.stages(1)),
+                ...     [
+                ...         baca.pitch.pitches('C4 D4 E4 F4'),
+                ...         baca.rhythm.make_messiaen_note_rhythm_specifier(),
+                ...         baca.tools.ColorFingeringSpecifier(
+                ...             number_lists=([0, 1, 2, 1],),
+                ...             ),
+                ...         ],
+                ...     )
+
+            ::
+
+                >>> result = segment_maker(is_doc_example=True)
+                >>> lilypond_file, segment_metadata = result
+                >>> show(lilypond_file) # doctest: +SKIP
+
+            ..  doctest::
+
+                >>> score = lilypond_file.score_block.items[0]
+                >>> f(score)
+                \context Score = "Score" <<
+                    \tag violin
+                    \context TimeSignatureContext = "Time Signature Context" <<
+                        \context TimeSignatureContextMultimeasureRests = "Time Signature Context Multimeasure Rests" {
+                            {
+                                \time 4/8
+                                R1 * 1/2
+                            }
+                            {
+                                \time 3/8
+                                R1 * 3/8
+                            }
+                            {
+                                \time 4/8
+                                R1 * 1/2
+                            }
+                            {
+                                \time 3/8
+                                R1 * 3/8
+                            }
+                        }
+                        \context TimeSignatureContextSkips = "Time Signature Context Skips" {
+                            {
+                                \time 4/8
+                                s1 * 1/2
+                            }
+                            {
+                                \time 3/8
+                                s1 * 3/8
+                            }
+                            {
+                                \time 4/8
+                                s1 * 1/2
+                            }
+                            {
+                                \time 3/8
+                                s1 * 3/8
+                            }
+                        }
+                    >>
+                    \context MusicContext = "Music Context" <<
+                        \tag violin
+                        \context ViolinMusicStaff = "Violin Music Staff" {
+                            \clef "treble"
+                            \context ViolinMusicVoice = "Violin Music Voice" {
+                                c'2
+                                d'4.
+                                    ^ \markup {
+                                        \override
+                                            #'(circle-padding . 0.25)
+                                            \circle
+                                                \finger
+                                                    1
+                                        }
+                                e'2
+                                    ^ \markup {
+                                        \override
+                                            #'(circle-padding . 0.25)
+                                            \circle
+                                                \finger
+                                                    2
+                                        }
+                                f'4.
+                                    ^ \markup {
+                                        \override
+                                            #'(circle-padding . 0.25)
+                                            \circle
+                                                \finger
+                                                    1
+                                        }
+                                \bar "|"
+                            }
+                        }
+                    >>
+                >>
+
+        ..  container:: example
+
+            **Example 2.** Attaches color fingerings by pitch run:
+
+            ::
+
+                >>> segment_maker = baca.tools.SegmentMaker(
+                ...     score_template=baca.tools.ViolinSoloScoreTemplate(),
+                ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
+                ...     )
+
+            ::
+
+                >>> specifiers = segment_maker.append_specifiers(
+                ...     ('vn', baca.tools.stages(1)),
+                ...     [
+                ...         baca.pitch.pitches('C4 D4 D4 D4 E4 F4 F4'),
+                ...         baca.rhythm.make_even_run_rhythm_specifier(),
+                ...         baca.tools.ColorFingeringSpecifier(
+                ...             by_pitch_run=True,
+                ...             number_lists=([1, 2, 1],),
+                ...             ),
+                ...         ],
+                ...     )
+
+            ::
+
+                >>> result = segment_maker(is_doc_example=True)
+                >>> lilypond_file, segment_metadata = result
+                >>> show(lilypond_file) # doctest: +SKIP
+
+            ..  doctest::
+
+                >>> score = lilypond_file.score_block.items[0]
+                >>> f(score)
+                \context Score = "Score" <<
+                    \tag violin
+                    \context TimeSignatureContext = "Time Signature Context" <<
+                        \context TimeSignatureContextMultimeasureRests = "Time Signature Context Multimeasure Rests" {
+                            {
+                                \time 4/8
+                                R1 * 1/2
+                            }
+                            {
+                                \time 3/8
+                                R1 * 3/8
+                            }
+                            {
+                                \time 4/8
+                                R1 * 1/2
+                            }
+                            {
+                                \time 3/8
+                                R1 * 3/8
+                            }
+                        }
+                        \context TimeSignatureContextSkips = "Time Signature Context Skips" {
+                            {
+                                \time 4/8
+                                s1 * 1/2
+                            }
+                            {
+                                \time 3/8
+                                s1 * 3/8
+                            }
+                            {
+                                \time 4/8
+                                s1 * 1/2
+                            }
+                            {
+                                \time 3/8
+                                s1 * 3/8
+                            }
+                        }
+                    >>
+                    \context MusicContext = "Music Context" <<
+                        \tag violin
+                        \context ViolinMusicStaff = "Violin Music Staff" {
+                            \clef "treble"
+                            \context ViolinMusicVoice = "Violin Music Voice" {
+                                {
+                                    c'8 [
+                                        ^ \markup {
+                                            \override
+                                                #'(circle-padding . 0.25)
+                                                \circle
+                                                    \finger
+                                                        1
+                                            }
+                                    d'8
+                                        ^ \markup {
+                                            \override
+                                                #'(circle-padding . 0.25)
+                                                \circle
+                                                    \finger
+                                                        1
+                                            }
+                                    d'8
+                                        ^ \markup {
+                                            \override
+                                                #'(circle-padding . 0.25)
+                                                \circle
+                                                    \finger
+                                                        2
+                                            }
+                                    d'8 ]
+                                        ^ \markup {
+                                            \override
+                                                #'(circle-padding . 0.25)
+                                                \circle
+                                                    \finger
+                                                        1
+                                            }
+                                }
+                                {
+                                    e'8 [
+                                        ^ \markup {
+                                            \override
+                                                #'(circle-padding . 0.25)
+                                                \circle
+                                                    \finger
+                                                        1
+                                            }
+                                    f'8
+                                        ^ \markup {
+                                            \override
+                                                #'(circle-padding . 0.25)
+                                                \circle
+                                                    \finger
+                                                        1
+                                            }
+                                    f'8 ]
+                                        ^ \markup {
+                                            \override
+                                                #'(circle-padding . 0.25)
+                                                \circle
+                                                    \finger
+                                                        2
+                                            }
+                                }
+                                {
+                                    c'8 [
+                                        ^ \markup {
+                                            \override
+                                                #'(circle-padding . 0.25)
+                                                \circle
+                                                    \finger
+                                                        1
+                                            }
+                                    d'8
+                                        ^ \markup {
+                                            \override
+                                                #'(circle-padding . 0.25)
+                                                \circle
+                                                    \finger
+                                                        1
+                                            }
+                                    d'8
+                                        ^ \markup {
+                                            \override
+                                                #'(circle-padding . 0.25)
+                                                \circle
+                                                    \finger
+                                                        2
+                                            }
+                                    d'8 ]
+                                        ^ \markup {
+                                            \override
+                                                #'(circle-padding . 0.25)
+                                                \circle
+                                                    \finger
+                                                        1
+                                            }
+                                }
+                                {
+                                    e'8 [
+                                        ^ \markup {
+                                            \override
+                                                #'(circle-padding . 0.25)
+                                                \circle
+                                                    \finger
+                                                        1
+                                            }
+                                    f'8
+                                        ^ \markup {
+                                            \override
+                                                #'(circle-padding . 0.25)
+                                                \circle
+                                                    \finger
+                                                        1
+                                            }
+                                    f'8 ]
+                                        ^ \markup {
+                                            \override
+                                                #'(circle-padding . 0.25)
+                                                \circle
+                                                    \finger
+                                                        2
+                                            }
+                                    \bar "|"
+                                }
+                            }
+                        }
+                    >>
+                >>
+
+        Set to true, false or none.
+
+        Returns true, false or none.
+        '''
+        return self._by_pitch_run
 
     @property
     def deposit_annotations(self):

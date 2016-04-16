@@ -1,40 +1,137 @@
 # -*- coding: utf-8 -*-
 import copy
 import itertools
-from abjad import *
+from abjad.tools import abctools
+from abjad.tools import datastructuretools
+from abjad.tools import pitchtools
 
 
 class MicrotonalDeviationSpecifier(abctools.AbjadObject):
-    r'''MicrotonalDeviationSpecifier specifier.
+    r'''Microtonal deviation specifier.
+
+    ::
+
+        >>> import baca
 
     ..  container:: example
 
+        **Example 1.** With alternating up- and down-quatertones:
+
         ::
 
-            >>> import baca
-            >>> specifier = baca.tools.MicrotonalDeviationSpecifier(
-            ...     number_lists=(
-            ...         [0, 0.5, 0, -0.5],
-            ...         ),
+            >>> segment_maker = baca.tools.SegmentMaker(
+            ...     score_template=baca.tools.ViolinSoloScoreTemplate(),
+            ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
             ...     )
 
         ::
-            
-            >>> print(format(specifier))
-            baca.tools.MicrotonalDeviationSpecifier(
-                number_lists=(
-                    [0, 0.5, 0, -0.5],
-                    ),
-                )
+
+            >>> specifiers = segment_maker.append_specifiers(
+            ...     ('vn', baca.tools.stages(1)),
+            ...     [
+            ...         baca.pitch.pitches('E4'),
+            ...         baca.rhythm.make_even_run_rhythm_specifier(),
+            ...         baca.tools.MicrotonalDeviationSpecifier(
+            ...             number_lists=([0, 0.5, 0, -0.5],),
+            ...             ),
+            ...         ],
+            ...     )
+
+        ::
+
+            >>> result = segment_maker(is_doc_example=True)
+            >>> lilypond_file, segment_metadata = result
+            >>> show(lilypond_file) # doctest: +SKIP
+
+        ..  doctest::
+
+            >>> score = lilypond_file.score_block.items[0]
+            >>> f(score)
+            \context Score = "Score" <<
+                \tag violin
+                \context TimeSignatureContext = "Time Signature Context" <<
+                    \context TimeSignatureContextMultimeasureRests = "Time Signature Context Multimeasure Rests" {
+                        {
+                            \time 4/8
+                            R1 * 1/2
+                        }
+                        {
+                            \time 3/8
+                            R1 * 3/8
+                        }
+                        {
+                            \time 4/8
+                            R1 * 1/2
+                        }
+                        {
+                            \time 3/8
+                            R1 * 3/8
+                        }
+                    }
+                    \context TimeSignatureContextSkips = "Time Signature Context Skips" {
+                        {
+                            \time 4/8
+                            s1 * 1/2
+                        }
+                        {
+                            \time 3/8
+                            s1 * 3/8
+                        }
+                        {
+                            \time 4/8
+                            s1 * 1/2
+                        }
+                        {
+                            \time 3/8
+                            s1 * 3/8
+                        }
+                    }
+                >>
+                \context MusicContext = "Music Context" <<
+                    \tag violin
+                    \context ViolinMusicStaff = "Violin Music Staff" {
+                        \clef "treble"
+                        \context ViolinMusicVoice = "Violin Music Voice" {
+                            {
+                                e'8 [
+                                eqs'8
+                                e'8
+                                eqf'8 ]
+                            }
+                            {
+                                e'8 [
+                                eqs'8
+                                e'8 ]
+                            }
+                            {
+                                eqf'8 [
+                                e'8
+                                eqs'8
+                                e'8 ]
+                            }
+                            {
+                                eqf'8 [
+                                e'8
+                                eqs'8 ]
+                                \bar "|"
+                            }
+                        }
+                    }
+                >>
+            >>
 
     '''
 
     ### CLASS VARIABLES ##
 
+    __documentation_section__ = 'Specifiers'
+
     __slots__ = (
         '_deposit_annotations',
         '_number_lists',
         )
+
+    _selector_type = 'logical ties'
 
     ### INITIALIZER ###
 
@@ -56,6 +153,10 @@ class MicrotonalDeviationSpecifier(abctools.AbjadObject):
     ### SPECIAL METHODS ###
 
     def __call__(self, logical_ties):
+        r'''Calls microtonal deviation specifier.
+
+        Returns none.
+        '''
         if self.number_lists is None:
             return
         number_lists = datastructuretools.CyclicTuple(self.number_lists)
@@ -110,7 +211,7 @@ class MicrotonalDeviationSpecifier(abctools.AbjadObject):
 
     @property
     def number_lists(self):
-        r'''Gets number lists of color fingering specifier.
+        r'''Gets number lists.
 
         ..  container:: example
 
@@ -127,6 +228,8 @@ class MicrotonalDeviationSpecifier(abctools.AbjadObject):
                 >>> specifier.number_lists
                 ([0, 1, 2, 1],)
 
-        Set to nested list of nonnegative integers or none.
+        Set to number lists or none.
+
+        Returns tuple of number lists or none.
         '''
         return self._number_lists

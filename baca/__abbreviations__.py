@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
-from abjad.tools import scoretools
 import baca
+from abjad.tools import scoretools
 
 
 def stages(stage_start_number, stage_stop_number=None):
