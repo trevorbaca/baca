@@ -193,7 +193,7 @@ class RhythmSpecifier(abctools.AbjadObject):
     @property
     def _default_division_maker(self):
         import experimental
-        division_maker = experimental.makertools.DivisionMaker()
+        division_maker = baca.tools.DivisionMaker()
         return division_maker
 
     @property

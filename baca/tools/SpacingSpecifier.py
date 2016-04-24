@@ -20,14 +20,13 @@ class SpacingSpecifier(AbjadObject):
 
     ..  container:: example
 
-        **Example 1.** Default spacing specifier:
+        **Example 1.** No spacing specifier:
 
         ::
 
             >>> segment_maker = baca.tools.SegmentMaker(
             ...     score_template=baca.tools.ViolinSoloScoreTemplate(),
-            ...     spacing_specifier=baca.tools.SpacingSpecifier(),
-            ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
+            ...     time_signatures=[(8, 16), (4, 8), (2, 4), (1, 2)],
             ...     )
 
         ::
@@ -35,8 +34,10 @@ class SpacingSpecifier(AbjadObject):
             >>> specifiers = segment_maker.append_specifiers(
             ...     ('vn', baca.tools.stages(1)),
             ...     [
-            ...         baca.pitch.pitches('E4'),
-            ...         baca.rhythm.make_even_run_rhythm_specifier(),
+            ...         baca.pitch.pitches('E4 F4'),
+            ...         baca.tools.RhythmSpecifier(
+            ...             rhythm_maker=rhythmmakertools.EvenRunRhythmMaker(),
+            ...             ),
             ...         ],
             ...     )
 
@@ -55,46 +56,38 @@ class SpacingSpecifier(AbjadObject):
                 \context TimeSignatureContext = "Time Signature Context" <<
                     \context TimeSignatureContextMultimeasureRests = "Time Signature Context Multimeasure Rests" {
                         {
+                            \time 8/16
+                            R1 * 1/2
+                        }
+                        {
                             \time 4/8
                             R1 * 1/2
                         }
                         {
-                            \time 3/8
-                            R1 * 3/8
-                        }
-                        {
-                            \time 4/8
+                            \time 2/4
                             R1 * 1/2
                         }
                         {
-                            \time 3/8
-                            R1 * 3/8
+                            \time 1/2
+                            R1 * 1/2
                         }
                     }
                     \context TimeSignatureContextSkips = "Time Signature Context Skips" {
                         {
-                            \time 4/8
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 8)
-                            \newSpacingSection
+                            \time 8/16
                             s1 * 1/2
                         }
                         {
-                            \time 3/8
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 8)
-                            \newSpacingSection
-                            s1 * 3/8
-                        }
-                        {
                             \time 4/8
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 8)
-                            \newSpacingSection
                             s1 * 1/2
                         }
                         {
-                            \time 3/8
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 8)
-                            \newSpacingSection
-                            s1 * 3/8
+                            \time 2/4
+                            s1 * 1/2
+                        }
+                        {
+                            \time 1/2
+                            s1 * 1/2
                         }
                     }
                 >>
@@ -104,26 +97,27 @@ class SpacingSpecifier(AbjadObject):
                         \clef "treble"
                         \context ViolinMusicVoice = "Violin Music Voice" {
                             {
-                                e'8 [
-                                e'8
-                                e'8
-                                e'8 ]
+                                e'16 [
+                                f'16
+                                e'16
+                                f'16
+                                e'16
+                                f'16
+                                e'16
+                                f'16 ]
                             }
                             {
                                 e'8 [
+                                f'8
                                 e'8
-                                e'8 ]
+                                f'8 ]
                             }
                             {
-                                e'8 [
-                                e'8
-                                e'8
-                                e'8 ]
+                                e'4
+                                f'4
                             }
                             {
-                                e'8 [
-                                e'8
-                                e'8 ]
+                                e'2
                                 \bar "|"
                             }
                         }
@@ -133,18 +127,14 @@ class SpacingSpecifier(AbjadObject):
 
     ..  container:: example
 
-        **Example 2.** Custom spacing specifier:
+        **Example 2.** Null spacing specifier:
 
         ::
 
             >>> segment_maker = baca.tools.SegmentMaker(
             ...     score_template=baca.tools.ViolinSoloScoreTemplate(),
-            ...     spacing_specifier=baca.tools.SpacingSpecifier(
-            ...         fermata_measure_width=Duration(1, 4), 
-            ...         minimum_width=Duration(1, 12),
-            ...         multiplier=Multiplier(5, 2),
-            ...         ),
-            ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
+            ...     spacing_specifier=baca.tools.SpacingSpecifier(),
+            ...     time_signatures=[(8, 16), (4, 8), (2, 4), (1, 2)],
             ...     )
 
         ::
@@ -152,8 +142,10 @@ class SpacingSpecifier(AbjadObject):
             >>> specifiers = segment_maker.append_specifiers(
             ...     ('vn', baca.tools.stages(1)),
             ...     [
-            ...         baca.pitch.pitches('E4'),
-            ...         baca.rhythm.make_even_run_rhythm_specifier(),
+            ...         baca.pitch.pitches('E4 F4'),
+            ...         baca.tools.RhythmSpecifier(
+            ...             rhythm_maker=rhythmmakertools.EvenRunRhythmMaker(),
+            ...             ),
             ...         ],
             ...     )
 
@@ -172,46 +164,46 @@ class SpacingSpecifier(AbjadObject):
                 \context TimeSignatureContext = "Time Signature Context" <<
                     \context TimeSignatureContextMultimeasureRests = "Time Signature Context Multimeasure Rests" {
                         {
+                            \time 8/16
+                            R1 * 1/2
+                        }
+                        {
                             \time 4/8
                             R1 * 1/2
                         }
                         {
-                            \time 3/8
-                            R1 * 3/8
-                        }
-                        {
-                            \time 4/8
+                            \time 2/4
                             R1 * 1/2
                         }
                         {
-                            \time 3/8
-                            R1 * 3/8
+                            \time 1/2
+                            R1 * 1/2
                         }
                     }
                     \context TimeSignatureContextSkips = "Time Signature Context Skips" {
                         {
-                            \time 4/8
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 30)
+                            \time 8/16
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 16)
                             \newSpacingSection
                             s1 * 1/2
                         }
                         {
-                            \time 3/8
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 30)
-                            \newSpacingSection
-                            s1 * 3/8
-                        }
-                        {
                             \time 4/8
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 30)
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 8)
                             \newSpacingSection
                             s1 * 1/2
                         }
                         {
-                            \time 3/8
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 30)
+                            \time 2/4
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 4)
                             \newSpacingSection
-                            s1 * 3/8
+                            s1 * 1/2
+                        }
+                        {
+                            \time 1/2
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 2)
+                            \newSpacingSection
+                            s1 * 1/2
                         }
                     }
                 >>
@@ -221,26 +213,386 @@ class SpacingSpecifier(AbjadObject):
                         \clef "treble"
                         \context ViolinMusicVoice = "Violin Music Voice" {
                             {
-                                e'8 [
-                                e'8
-                                e'8
-                                e'8 ]
+                                e'16 [
+                                f'16
+                                e'16
+                                f'16
+                                e'16
+                                f'16
+                                e'16
+                                f'16 ]
                             }
                             {
                                 e'8 [
+                                f'8
                                 e'8
-                                e'8 ]
+                                f'8 ]
+                            }
+                            {
+                                e'4
+                                f'4
+                            }
+                            {
+                                e'2
+                                \bar "|"
+                            }
+                        }
+                    }
+                >>
+            >>
+
+    ..  container:: example
+
+        **Example 3.** Measurewise proportional spacing based on minimum
+        duration per measure:
+
+        ::
+
+            >>> segment_maker = baca.tools.SegmentMaker(
+            ...     score_template=baca.tools.ViolinSoloScoreTemplate(),
+            ...     spacing_specifier=baca.tools.SpacingSpecifier(
+            ...         multiplier=Multiplier(1),
+            ...         ),
+            ...     time_signatures=[(8, 16), (4, 8), (2, 4), (1, 2)],
+            ...     )
+
+        ::
+
+            >>> specifiers = segment_maker.append_specifiers(
+            ...     ('vn', baca.tools.stages(1)),
+            ...     [
+            ...         baca.pitch.pitches('E4 F4'),
+            ...         baca.tools.RhythmSpecifier(
+            ...             rhythm_maker=rhythmmakertools.EvenRunRhythmMaker(),
+            ...             ),
+            ...         ],
+            ...     )
+
+        ::
+
+            >>> result = segment_maker(is_doc_example=True)
+            >>> lilypond_file, segment_metadata = result
+            >>> show(lilypond_file) # doctest: +SKIP
+
+        ..  doctest::
+
+            >>> score = lilypond_file.score_block.items[0]
+            >>> f(score)
+            \context Score = "Score" <<
+                \tag violin
+                \context TimeSignatureContext = "Time Signature Context" <<
+                    \context TimeSignatureContextMultimeasureRests = "Time Signature Context Multimeasure Rests" {
+                        {
+                            \time 8/16
+                            R1 * 1/2
+                        }
+                        {
+                            \time 4/8
+                            R1 * 1/2
+                        }
+                        {
+                            \time 2/4
+                            R1 * 1/2
+                        }
+                        {
+                            \time 1/2
+                            R1 * 1/2
+                        }
+                    }
+                    \context TimeSignatureContextSkips = "Time Signature Context Skips" {
+                        {
+                            \time 8/16
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 16)
+                            \newSpacingSection
+                            s1 * 1/2
+                        }
+                        {
+                            \time 4/8
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 8)
+                            \newSpacingSection
+                            s1 * 1/2
+                        }
+                        {
+                            \time 2/4
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 4)
+                            \newSpacingSection
+                            s1 * 1/2
+                        }
+                        {
+                            \time 1/2
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 2)
+                            \newSpacingSection
+                            s1 * 1/2
+                        }
+                    }
+                >>
+                \context MusicContext = "Music Context" <<
+                    \tag violin
+                    \context ViolinMusicStaff = "Violin Music Staff" {
+                        \clef "treble"
+                        \context ViolinMusicVoice = "Violin Music Voice" {
+                            {
+                                e'16 [
+                                f'16
+                                e'16
+                                f'16
+                                e'16
+                                f'16
+                                e'16
+                                f'16 ]
                             }
                             {
                                 e'8 [
+                                f'8
                                 e'8
-                                e'8
-                                e'8 ]
+                                f'8 ]
+                            }
+                            {
+                                e'4
+                                f'4
+                            }
+                            {
+                                e'2
+                                \bar "|"
+                            }
+                        }
+                    }
+                >>
+            >>
+
+    ..  container:: example
+
+        **Example 4.** Measurewise proportional spacing based on twice the
+        minimum duration per measure:
+
+        ::
+
+            >>> segment_maker = baca.tools.SegmentMaker(
+            ...     score_template=baca.tools.ViolinSoloScoreTemplate(),
+            ...     spacing_specifier=baca.tools.SpacingSpecifier(
+            ...         multiplier=Multiplier(2),
+            ...         ),
+            ...     time_signatures=[(8, 16), (4, 8), (2, 4), (1, 2)],
+            ...     )
+
+        ::
+
+            >>> specifiers = segment_maker.append_specifiers(
+            ...     ('vn', baca.tools.stages(1)),
+            ...     [
+            ...         baca.pitch.pitches('E4 F4'),
+            ...         baca.tools.RhythmSpecifier(
+            ...             rhythm_maker=rhythmmakertools.EvenRunRhythmMaker(),
+            ...             ),
+            ...         ],
+            ...     )
+
+        ::
+
+            >>> result = segment_maker(is_doc_example=True)
+            >>> lilypond_file, segment_metadata = result
+            >>> show(lilypond_file) # doctest: +SKIP
+
+        ..  doctest::
+
+            >>> score = lilypond_file.score_block.items[0]
+            >>> f(score)
+            \context Score = "Score" <<
+                \tag violin
+                \context TimeSignatureContext = "Time Signature Context" <<
+                    \context TimeSignatureContextMultimeasureRests = "Time Signature Context Multimeasure Rests" {
+                        {
+                            \time 8/16
+                            R1 * 1/2
+                        }
+                        {
+                            \time 4/8
+                            R1 * 1/2
+                        }
+                        {
+                            \time 2/4
+                            R1 * 1/2
+                        }
+                        {
+                            \time 1/2
+                            R1 * 1/2
+                        }
+                    }
+                    \context TimeSignatureContextSkips = "Time Signature Context Skips" {
+                        {
+                            \time 8/16
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 32)
+                            \newSpacingSection
+                            s1 * 1/2
+                        }
+                        {
+                            \time 4/8
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 16)
+                            \newSpacingSection
+                            s1 * 1/2
+                        }
+                        {
+                            \time 2/4
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 8)
+                            \newSpacingSection
+                            s1 * 1/2
+                        }
+                        {
+                            \time 1/2
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 4)
+                            \newSpacingSection
+                            s1 * 1/2
+                        }
+                    }
+                >>
+                \context MusicContext = "Music Context" <<
+                    \tag violin
+                    \context ViolinMusicStaff = "Violin Music Staff" {
+                        \clef "treble"
+                        \context ViolinMusicVoice = "Violin Music Voice" {
+                            {
+                                e'16 [
+                                f'16
+                                e'16
+                                f'16
+                                e'16
+                                f'16
+                                e'16
+                                f'16 ]
                             }
                             {
                                 e'8 [
+                                f'8
                                 e'8
-                                e'8 ]
+                                f'8 ]
+                            }
+                            {
+                                e'4
+                                f'4
+                            }
+                            {
+                                e'2
+                                \bar "|"
+                            }
+                        }
+                    }
+                >>
+            >>
+
+    ..  container:: example
+
+        **Example 5.** Measurewise proportional spacing based on twice the
+        minimum duration per measure with minimum width equal to an eighth
+        note:
+
+        ::
+
+            >>> segment_maker = baca.tools.SegmentMaker(
+            ...     score_template=baca.tools.ViolinSoloScoreTemplate(),
+            ...     spacing_specifier=baca.tools.SpacingSpecifier(
+            ...         multiplier=Multiplier(2),
+            ...         minimum_width=Duration(1, 8),
+            ...         ),
+            ...     time_signatures=[(8, 16), (4, 8), (2, 4), (1, 2)],
+            ...     )
+
+        ::
+
+            >>> specifiers = segment_maker.append_specifiers(
+            ...     ('vn', baca.tools.stages(1)),
+            ...     [
+            ...         baca.pitch.pitches('E4 F4'),
+            ...         baca.tools.RhythmSpecifier(
+            ...             rhythm_maker=rhythmmakertools.EvenRunRhythmMaker(),
+            ...             ),
+            ...         ],
+            ...     )
+
+        ::
+
+            >>> result = segment_maker(is_doc_example=True)
+            >>> lilypond_file, segment_metadata = result
+            >>> show(lilypond_file) # doctest: +SKIP
+
+        ..  doctest::
+
+            >>> score = lilypond_file.score_block.items[0]
+            >>> f(score)
+            \context Score = "Score" <<
+                \tag violin
+                \context TimeSignatureContext = "Time Signature Context" <<
+                    \context TimeSignatureContextMultimeasureRests = "Time Signature Context Multimeasure Rests" {
+                        {
+                            \time 8/16
+                            R1 * 1/2
+                        }
+                        {
+                            \time 4/8
+                            R1 * 1/2
+                        }
+                        {
+                            \time 2/4
+                            R1 * 1/2
+                        }
+                        {
+                            \time 1/2
+                            R1 * 1/2
+                        }
+                    }
+                    \context TimeSignatureContextSkips = "Time Signature Context Skips" {
+                        {
+                            \time 8/16
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 32)
+                            \newSpacingSection
+                            s1 * 1/2
+                        }
+                        {
+                            \time 4/8
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 16)
+                            \newSpacingSection
+                            s1 * 1/2
+                        }
+                        {
+                            \time 2/4
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 16)
+                            \newSpacingSection
+                            s1 * 1/2
+                        }
+                        {
+                            \time 1/2
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 16)
+                            \newSpacingSection
+                            s1 * 1/2
+                        }
+                    }
+                >>
+                \context MusicContext = "Music Context" <<
+                    \tag violin
+                    \context ViolinMusicStaff = "Violin Music Staff" {
+                        \clef "treble"
+                        \context ViolinMusicVoice = "Violin Music Voice" {
+                            {
+                                e'16 [
+                                f'16
+                                e'16
+                                f'16
+                                e'16
+                                f'16
+                                e'16
+                                f'16 ]
+                            }
+                            {
+                                e'8 [
+                                f'8
+                                e'8
+                                f'8 ]
+                            }
+                            {
+                                e'4
+                                f'4
+                            }
+                            {
+                                e'2
                                 \bar "|"
                             }
                         }
@@ -287,39 +639,24 @@ class SpacingSpecifier(AbjadObject):
     ### SPECIAL METHODS ###
 
     def __call__(self, segment_maker):
-        r'''Calls spacing specifier on `segment_maker`.
-
-        Operates in place.
+        r'''Calls spacing specifier.
 
         Returns none.
         '''
         score = segment_maker._score
-        measure_timespans = {}
         skip_context = score['Time Signature Context Skips']
-        for skip in skip_context:
-            measure_timespan = inspect_(skip).get_timespan()
-            measure_timespans[measure_timespan] = []
-        # nested loop can be optimized with bisect()
-        for leaf in iterate(score).by_leaf():
-            leaf_timespan = inspect_(leaf).get_timespan()
-            for measure_timespan in measure_timespans:
-                if leaf_timespan.starts_during_timespan(measure_timespan):
-                    leaf_duration = leaf_timespan.duration
-                    measure_timespans[measure_timespan].append(leaf_duration)
-                    break
-            else:
-                message = 'what measure does leaf {!r} start in?'
-                message = message.format(leaf)
-                raise Exception(message)
+        leaves = iterate(score).by_leaf()
+        minimum_leaf_durations_by_measure = \
+            self._get_minimum_leaf_durations_by_measure(skip_context, leaves)
         fermata_start_offsets = segment_maker._fermata_start_offsets
-        for skip in iterate(skip_context).by_leaf(scoretools.Skip):
+        skips = iterate(skip_context).by_leaf(scoretools.Skip)
+        for measure_index, skip in enumerate(skips):
             measure_timespan = inspect_(skip).get_timespan()
             if (self.fermata_measure_width is not None and
                 measure_timespan.start_offset in fermata_start_offsets):
                 duration = self.fermata_measure_width
             else:
-                durations = measure_timespans[measure_timespan]
-                duration = min(durations)
+                duration = minimum_leaf_durations_by_measure[measure_index]
                 if self.minimum_width is not None:
                     if self.minimum_width < duration:
                         duration = self.minimum_width
@@ -329,6 +666,42 @@ class SpacingSpecifier(AbjadObject):
             attach(command, skip)
             moment = schemetools.SchemeMoment(duration)
             set_(skip).score.proportional_notation_duration = moment
+
+    ### PRIVATE METHODS ###
+
+    def _get_minimum_leaf_durations_by_measure(self, skip_context, leaves):
+        measure_timespans = []
+        leaf_durations_by_measure = []
+        for skip in skip_context:
+            measure_timespan = inspect_(skip).get_timespan()
+            measure_timespans.append(measure_timespan)
+            leaf_durations_by_measure.append([])
+        leaf_timespans = set()
+        leaf_count = 0
+        for leaf in leaves:
+            leaf_timespan = inspect_(leaf).get_timespan()
+            leaf_timespans.add(leaf_timespan)
+            leaf_count += 1
+        measure_index = 0
+        measure_timespan = measure_timespans[measure_index]
+        leaf_timespans = list(leaf_timespans)
+        leaf_timespans.sort(key=lambda _: _.start_offset)
+        start_offset = 0
+        for leaf_timespan in leaf_timespans:
+            leaf_duration = leaf_timespan.duration
+            assert start_offset <= leaf_timespan.start_offset
+            start_offset = leaf_timespan.start_offset
+            if leaf_timespan.starts_during_timespan(measure_timespan):
+                leaf_durations_by_measure[measure_index].append(leaf_duration)
+            else:
+                measure_index += 1
+                measure_timespan = measure_timespans[measure_index]
+                assert leaf_timespan.starts_during_timespan(measure_timespan)
+                leaf_durations_by_measure[measure_index].append(leaf_duration)
+        minimum_leaf_durations_by_measure = [
+            min(_) for _ in leaf_durations_by_measure
+            ]
+        return minimum_leaf_durations_by_measure
 
     ### PUBLIC PROPERTIES ###
 

@@ -1,28 +1,27 @@
 # -*- coding: utf-8 -*-
-from abjad.tools import handlertools
-from abjad.tools.markuptools import Markup
+from abjad.tools import markuptools
 from abjad.tools.topleveltools import new
 
 
 def make_ancora_dynamic(dynamic_name, direction=Down):
-    markup = Markup(dynamic_name).dynamic()
-    markup += Markup('ancora').upright()
+    markup = markuptools.Markup(dynamic_name).dynamic()
+    markup += markuptools.Markup('ancora').upright()
     markup = new(markup, direction=direction)
     return markup
 
 def make_dynamic(dynamic_name, direction=Down):
-    markup = Markup(dynamic_name, direction=direction).dynamic()
+    markup = markuptools.Markup(dynamic_name, direction=direction).dynamic()
     return markup
 
 def make_effort_dynamic(dynamic_name, direction=Down):
     # overriding font-name to false makes sure that
     # the LilyPond \dynamic command works correctly
     # in the case that TextScript.font-name is overridden score-globally
-    left_quotes = Markup('“').italic().larger()
-    dynamic_markup = Markup(dynamic_name)
+    left_quotes = markuptools.Markup('“').italic().larger()
+    dynamic_markup = markuptools.Markup(dynamic_name)
     dynamic_markup = dynamic_markup.override(('font-name', False))
     dynamic_markup = dynamic_markup.dynamic()
-    right_quotes = Markup('”').italic().larger()
+    right_quotes = markuptools.Markup('”').italic().larger()
     markup = left_quotes + dynamic_markup + right_quotes
     markup = new(markup, direction=direction)
     return markup
@@ -35,6 +34,7 @@ def make_hairpins(
     omit_lone_note_dynamic=None,
     span='contiguous notes and chords',
     ):
+    import baca
     hairpin_tokens_ = []
     for hairpin_token in hairpin_tokens:
         if isinstance(hairpin_token, str):
@@ -42,7 +42,7 @@ def make_hairpins(
             hairpin_token = tuple(hairpin_token)
         hairpin_tokens_.append(hairpin_token)
     hairpin_tokens = hairpin_tokens_
-    return handlertools.HairpinHandler(
+    return baca.tools.HairpinHandler(
         enchain_hairpins=enchain_hairpins,
         flare=flare,
         hairpin_tokens=hairpin_tokens,
@@ -69,12 +69,13 @@ def make_niente_swell_specifiers(dynamics):
     return swell_specifiers
 
 def make_possibile_dynamic(dynamic_name, direction=Down):
-    markup = Markup(dynamic_name).dynamic()
-    markup += Markup('possibile').upright()
+    markup = markuptools.Markup(dynamic_name).dynamic()
+    markup += markuptools.Markup('possibile').upright()
     markup = new(markup, direction=direction)
     return markup
 
 def make_reiterated_dynamic(dynamic_name):
-    return handlertools.ReiteratedDynamicHandler(
+    import baca
+    return baca.tools.ReiteratedDynamicHandler(
         dynamic_name=dynamic_name,
         )

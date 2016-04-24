@@ -32,7 +32,7 @@ class SwellSpecifier(abctools.AbjadObject):
             ...     [
             ...         baca.pitch.pitches('E4'),
             ...         baca.rhythm.make_even_run_rhythm_specifier(),
-            ...         handlertools.HairpinHandler(
+            ...         baca.tools.HairpinHandler(
             ...             hairpin_tokens=[
             ...                 baca.tools.SwellSpecifier(
             ...                     start_count=2,

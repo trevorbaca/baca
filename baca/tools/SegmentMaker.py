@@ -6,7 +6,6 @@ import baca
 from abjad.tools import datastructuretools
 from abjad.tools import durationtools
 from abjad.tools import expressiontools
-from abjad.tools import handlertools
 from abjad.tools import indicatortools
 from abjad.tools import instrumenttools
 from abjad.tools import lilypondfiletools
@@ -1125,7 +1124,7 @@ class SegmentMaker(makertools.SegmentMaker):
             is_wrapped = True
         contiguous_leaf_prototype = (
             baca.tools.TransitionSpecifier,
-            handlertools.OverrideHandler,
+            baca.tools.OverrideHandler,
             )
         expression_prototype = (
             expressiontools.LabelExpression,
@@ -1149,7 +1148,7 @@ class SegmentMaker(makertools.SegmentMaker):
             baca.tools.GlissandoSpecifier,
             baca.tools.PitchSpecifier,
             baca.tools.TrillSpecifier,
-            handlertools.Handler,
+            baca.tools.Handler,
             spannertools.Spanner,
             )
         needs_logical_ties_prototype += note_indicator_prototype
@@ -1286,7 +1285,7 @@ class SegmentMaker(makertools.SegmentMaker):
             topmost_components = result[0]
             selection = select(topmost_components)
             specifier(selection)
-        elif isinstance(specifier, handlertools.Handler):
+        elif isinstance(specifier, baca.tools.Handler):
             specifier(logical_ties)
         else:
             if getattr(specifier, '_include_selection_timespan', False):

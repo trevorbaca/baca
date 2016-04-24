@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-from abjad.tools import handlertools
 from abjad.tools import markuptools
 
 
@@ -315,7 +314,8 @@ def make_pos_ord_fractional_scratch(numerator, denominator):
     return make_markup(string)
 
 def make_repeated_markup(markups):
-    return handlertools.RepeatedMarkupHandler(
+    import baca
+    return baca.tools.RepeatedMarkupHandler(
         markups=markups,
         )
 

@@ -28,8 +28,8 @@ class DivisionSequence(Sequence):
 
         Returns new division sequence.
         '''
-        from experimental import makertools
-        maker = makertools.SplitByDurationsDivisionCallback(
+        import baca
+        maker = baca.tools.SplitByDurationsDivisionCallback(
             compound_meter_multiplier=compound_meter_multiplier,
             cyclic=cyclic,
             durations=durations,
