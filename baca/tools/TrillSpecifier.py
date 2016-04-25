@@ -2,6 +2,7 @@
 from abjad.tools import abctools
 from abjad.tools import durationtools
 from abjad.tools import scoretools
+from abjad.tools import selectiontools
 from abjad.tools import spannertools
 from abjad.tools.topleveltools import attach
 from abjad.tools.topleveltools import inspect_

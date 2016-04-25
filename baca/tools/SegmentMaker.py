@@ -2,6 +2,7 @@
 import copy
 import os
 import time
+import traceback
 import baca
 from abjad.tools import datastructuretools
 from abjad.tools import durationtools
@@ -23,6 +24,7 @@ from abjad.tools.topleveltools import detach
 from abjad.tools.topleveltools import inspect_
 from abjad.tools.topleveltools import iterate
 from abjad.tools.topleveltools import new
+from abjad.tools.topleveltools import override
 from abjad.tools.topleveltools import select
 from abjad.tools.topleveltools import set_
 from experimental.tools import makertools
@@ -523,14 +525,14 @@ class SegmentMaker(makertools.SegmentMaker):
         if not self._previous_segment_metadata:
             message = 'can not find previous metadata before segment {}.'
             message = message.format(self._get_segment_identifier())
-            raise Exception(message)
+            print(message)
             return
         key = 'end_instruments_by_context'
         previous_instruments = self._previous_segment_metadata.get(key)
         if not previous_instruments:
             message = 'can not find previous instruments before segment {}.'
             message = message.format(self._get_segment_identifier())
-            raise Exception(message)
+            print(message)
             return
         for context in iterate(self._score).by_class(scoretools.Context):
             previous_instrument_name = previous_instruments.get(context.name)
@@ -557,7 +559,7 @@ class SegmentMaker(makertools.SegmentMaker):
         if not previous_clefs:
             message = 'can not find previous clefs before segment {}.'
             message = message.format(self._get_segment_identifier())
-            raise Exception(message)
+            print(message)
             return
         for staff in iterate(self._score).by_class(scoretools.Staff):
             previous_clef_name = previous_clefs.get(staff.name)
@@ -572,9 +574,31 @@ class SegmentMaker(makertools.SegmentMaker):
             attach(clef, staff)
 
     def _apply_spacing_specifier(self):
+        start_time = time.time()
         if self.spacing_specifier is None:
             return
         self.spacing_specifier(self)
+        stop_time = time.time()
+        total_time = int(stop_time - start_time)
+        if self.print_timings:
+            message = 'total spacing specifier time {} seconds ...'
+            message = message.format(total_time)
+            print(message)
+        if 3 < total_time:
+            message = 'spacing specifier application took {} seconds!'
+            message = message.format(total_time)
+            raise Exception(message)
+
+    def _apply_specifier_to_selection(self, specifier, selection, timespan):
+        if hasattr(specifier, '__call__'):
+            if timespan:
+                specifier(selection, timespan)
+            else:
+                specifier(selection)
+        elif isinstance(specifier, spannertools.Spanner):
+            attach(copy.copy(specifier), selection)
+        else:
+            attach(specifier, selection[0])
 
     def _assert_valid_stage_number(self, stage_number):
         if not 1 <= stage_number <= self.stage_count:
@@ -740,6 +764,7 @@ class SegmentMaker(makertools.SegmentMaker):
 
     def _compound_scope_to_logical_ties(
         self, 
+        scoped_specifier,
         compound_scope,
         include_rests=False,
         ):
@@ -763,9 +788,15 @@ class SegmentMaker(makertools.SegmentMaker):
         start_offset = min(_.start_offset for _ in timespans)
         stop_offset = max(_.stop_offset for _ in timespans)
         timespan = timespantools.Timespan(start_offset, stop_offset)
-        return logical_ties, timespan
+        if not logical_ties:
+            message = '{!r} selects no logical ties.'
+            message = message.format(scoped_specifier)
+            raise Exception(message)
+        return select(logical_ties), timespan
 
     def _compound_scope_to_topmost_components(self, compound_scope):
+        r'''Use for label expressions.
+        '''
         timespan_map, timespans = [], []
         for scope in compound_scope.simple_scopes:
             result = self._get_stage_numbers(scope.stages)
@@ -791,7 +822,7 @@ class SegmentMaker(makertools.SegmentMaker):
         start_offset = min(_.start_offset for _ in timespans)
         stop_offset = max(_.stop_offset for _ in timespans)
         timespan = timespantools.Timespan(start_offset, stop_offset)
-        return topmost_components, timespan
+        return select(topmost_components), timespan
 
     def _contributions_do_not_overlap(self, contributions):
         previous_stop_offset = 0
@@ -804,6 +835,57 @@ class SegmentMaker(makertools.SegmentMaker):
             stop_offset = start_offset + duration
             previous_stop_offset = stop_offset
         return True
+
+    def _evaluate_selector(
+        self,
+        scoped_specifier,
+        compound_scope,
+        specifier_wrapper,
+        specifier,
+        ):
+        if specifier_wrapper is not None:
+            leaves = self._scope_to_leaves(scoped_specifier.scope)
+            leaves = list(leaves)
+            if specifier_wrapper.prototype is not None:
+                prototype = specifier_wrapper.prototype
+                leaves = [_ for _ in leaves if isinstance(_, prototype)]
+            start_index = specifier_wrapper.start_index
+            stop_index = specifier_wrapper.stop_index
+            leaves = leaves[start_index:stop_index]
+            if specifier_wrapper.with_previous_leaf:
+                first_leaf = leaves[0]
+                inspector = inspect_(first_leaf)
+                previous_leaf = inspector.get_leaf(-1)
+                if previous_leaf is None:
+                    message = 'previous leaf is none: {!r}.'
+                    message = message.format(scoped_specifier)
+                    raise Exception(message)
+                leaves.insert(0, previous_leaf)
+            if specifier_wrapper.with_next_leaf:
+                last_leaf = leaves[-1]
+                inspector = inspect_(last_leaf)
+                next_leaf = inspector.get_leaf(1)
+                if next_leaf is None:
+                    message = 'next leaf is none: {!r}.'
+                    message = message.format(scoped_specifier)
+                    raise Exception(message)
+                leaves.append(next_leaf)
+            selection = select(leaves)
+        else:
+            result = self._compound_scope_to_logical_ties(
+                scoped_specifier,
+                compound_scope,
+                )
+            selection = result[0]
+        assert isinstance(selection, selectiontools.Selection), repr(selection)
+        if not selection:
+            message = '{!r} selects nothing.'
+            message = message.format(scoped_specifier)
+            raise Exception(message)
+        timespan = None
+        if getattr(specifier, '_include_selection_timespan', False):
+            timespan = self._selection_to_timespan(selection)
+        return selection, timespan
 
     def _get_cached_leaves(self, include_rests=False):
         if include_rests:
@@ -1019,6 +1101,11 @@ class SegmentMaker(makertools.SegmentMaker):
             )
         return contribution
 
+    def _handle_mutator(self, specifier):
+        if getattr(specifier, '_mutates_score', False):
+            self._cached_leaves_with_rests = None
+            self._cached_leaves_without_rests = None
+
     def _hide_fermata_measure_staff_lines(self):
         for leaf in iterate(self._score).by_leaf():
             start_offset = inspect_(leaf).get_timespan().start_offset
@@ -1114,197 +1201,32 @@ class SegmentMaker(makertools.SegmentMaker):
 
     def _interpret_scoped_specifier(self, scoped_specifier):
         assert not isinstance(scoped_specifier.specifier, (list, tuple))
-        specifier = scoped_specifier.specifier
+        result = self._unwrap_scoped_specifier(scoped_specifier)
+        compound_scope, specifier_wrapper, specifier = result
         if isinstance(specifier, baca.tools.RhythmSpecifier):
             return
-        is_wrapped = False
-        if isinstance(specifier, baca.tools.SpecifierWrapper):
-            specifier_wrapper = specifier
-            specifier = specifier_wrapper.specifier
-            is_wrapped = True
-        contiguous_leaf_prototype = (
-            baca.tools.TransitionSpecifier,
-            baca.tools.OverrideHandler,
+        selection, timespan = self._evaluate_selector(
+            scoped_specifier,
+            compound_scope,
+            specifier_wrapper,
+            specifier,
             )
-        expression_prototype = (
-            expressiontools.LabelExpression,
-            expressiontools.SequenceExpression,
-            )
-        leaf_indicator_prototype = (
-            indicatortools.Clef,
-            instrumenttools.Instrument,
-            markuptools.Markup,
-            )
-        note_indicator_prototype = (
-            indicatortools.Dynamic,
-            indicatortools.LilyPondCommand,
-            indicatortools.LaissezVibrer,
-            )
-        attach_leaf_prototype = (
-            note_indicator_prototype,
-            leaf_indicator_prototype,
-            )
-        needs_logical_ties_prototype = (
-            baca.tools.GlissandoSpecifier,
-            baca.tools.PitchSpecifier,
-            baca.tools.TrillSpecifier,
-            baca.tools.Handler,
-            spannertools.Spanner,
-            )
-        needs_logical_ties_prototype += note_indicator_prototype
-        needs_logical_ties_with_rests_prototype = ()
-        needs_logical_ties_with_rests_prototype += \
-            leaf_indicator_prototype
-        needs_logical_ties_with_rests_prototype += \
-            contiguous_leaf_prototype
-        if isinstance(scoped_specifier.scope, baca.tools.SimpleScope):
-            simple_scope = scoped_specifier.scope
-            compound_scope = baca.tools.CompoundScope([simple_scope])
-            stages = scoped_specifier.scope.stages
-        else:
-            compound_scope = scoped_specifier.scope
-            stages = None
-        leaves = None
-        if is_wrapped:
-            leaves = self._scope_to_leaves(scoped_specifier.scope)
-            if specifier_wrapper.prototype is not None:
-                prototype = specifier_wrapper.prototype
-                leaves = [_ for _ in leaves if isinstance(_, prototype)]
-            start_index = specifier_wrapper.start_index
-            stop_index = specifier_wrapper.stop_index
-            leaves = leaves[start_index:stop_index]
-            if specifier_wrapper.with_previous_leaf:
-                first_leaf = leaves[0]
-                inspector = inspect_(first_leaf)
-                previous_leaf = inspector.get_leaf(-1)
-                if previous_leaf is None:
-                    message = 'previous leaf is none: {!r}.'
-                    message = message.format(scoped_specifier)
-                    raise Exception(message)
-                leaves.insert(0, previous_leaf)
-            if specifier_wrapper.with_next_leaf:
-                last_leaf = leaves[-1]
-                inspector = inspect_(last_leaf)
-                next_leaf = inspector.get_leaf(1)
-                if next_leaf is None:
-                    message = 'next leaf is none: {!r}.'
-                    message = message.format(scoped_specifier)
-                    raise Exception(message)
-                leaves.append(next_leaf)
-            stage_expression = stages
-            start_index = stage_expression.component_start_index
-            stop_index = stage_expression.component_stop_index
-            leaves = leaves[start_index:stop_index]
-        elif (isinstance(stages, baca.tools.StageExpression) and 
-            stages._prototype is scoretools.Leaf):
-            leaves = self._scope_to_leaves(scoped_specifier.scope)
-            stage_expression = stages
-            start_index = stage_expression.component_start_index
-            stop_index = stage_expression.component_stop_index
-            leaves = leaves[start_index:stop_index]
-        elif isinstance(specifier, needs_logical_ties_with_rests_prototype):
-            result = self._compound_scope_to_logical_ties(
-                compound_scope,
-                include_rests=True
-                )
-            logical_ties_with_rests = result[0]
-            if not logical_ties_with_rests:
-                message = '{!r} selects no logical ties with rests.'
-                message = message.format(scoped_specifier)
-                raise Exception(message)
-        elif isinstance(specifier, needs_logical_ties_prototype):
-            result = self._compound_scope_to_logical_ties(compound_scope)
-            logical_ties = result[0]
-            if not logical_ties:
-                message = '{!r} selects no logical ties.'
-                message = message.format(scoped_specifier)
-                raise Exception(message)
-        elif getattr(specifier, '_selector_type', None) == 'logical ties':
-            result = self._compound_scope_to_logical_ties(compound_scope)
-            logical_ties = result[0]
-            if not logical_ties:
-                message = '{!r} selects no logical ties.'
-                message = message.format(scoped_specifier)
-                raise Exception(message)
-        elif isinstance(specifier, expression_prototype):
-            pass
-        else:
-            message = 'what type of specifier is {!r}?'
-            message += '\nIn scoped specifier {!r}.'
-            message = message.format(specifier, scoped_specifier)
-            raise TypeError(message)
-        if getattr(specifier, '_include_selection_timespan', False):
-            if leaves:
-                first = leaves[0]
-                last = leaves[-1]
-            elif logical_ties:
-                first = logical_ties[0].head
-                last = logical_ties[-1][-1]
-            else:
-                raise Exception('must have leaves or logical ties.')
-            start_offset = inspect_(first).get_timespan().start_offset
-            stop_offset = inspect_(last).get_timespan().stop_offset
-            timespan = timespantools.Timespan(
-                start_offset=start_offset,
-                stop_offset=stop_offset,
-                )
-        if leaves:
-            if isinstance(specifier, attach_leaf_prototype):
-                attach(specifier, leaves[0])
-            elif isinstance(specifier, spannertools.Spanner):
-                assert not len(specifier), repr(specifier)
-                attach(copy.copy(specifier), leaves)
-            else:
-                specifier(leaves)
-        elif isinstance(specifier, baca.tools.PitchSpecifier):
-            specifier(logical_ties)
-        elif isinstance(specifier, note_indicator_prototype):
-            if not logical_ties:
-                message = 'no logical ties to which to attach specifier'
-                message += ' {!r} belonging to specifier {!r}.'
-                message = message.format(specifier, scoped_specifier)
-                raise Exception(message)
-            attach(specifier, logical_ties[0].head)
-        elif isinstance(specifier, leaf_indicator_prototype):
-            if not logical_ties_with_rests:
-                message = 'no logical ties to which to attach specifier'
-                message += ' {!r} belonging to specifier {!r}.'
-                message = message.format(specifier, scoped_specifier)
-                raise Exception(message)
-            attach(specifier, logical_ties_with_rests[0].head)
-        elif isinstance(specifier, spannertools.Spanner):
-            spanner = specifier
-            assert not len(spanner)
-            spanner = copy.deepcopy(spanner)
-            leaves = self._logical_ties_to_leaves(logical_ties)
-            attach(spanner, leaves)
-        elif isinstance(specifier, contiguous_leaf_prototype):
-            specifier(logical_ties_with_rests)
-        elif isinstance(specifier, expression_prototype):
-            result = self._compound_scope_to_topmost_components(compound_scope)
-            topmost_components = result[0]
-            selection = select(topmost_components)
-            specifier(selection)
-        elif isinstance(specifier, baca.tools.Handler):
-            specifier(logical_ties)
-        else:
-            if getattr(specifier, '_include_selection_timespan', False):
-                specifier(logical_ties, timespan)
-            else:
-                specifier(logical_ties)
-        if getattr(specifier, '_mutates_score', False):
-            self._cached_leaves_with_rests = None
-            self._cached_leaves_without_rests = None
+        try:
+            self._apply_specifier_to_selection(specifier, selection, timespan)
+        except:
+            traceback.print_exc()
+            raise Exception(scoped_specifier)
+        self._handle_mutator(specifier)
 
     def _interpret_scoped_specifiers(self):
-        start = time.time()
+        start_time = time.time()
         for scoped_specifier in self.scoped_specifiers:
             self._interpret_scoped_specifier(scoped_specifier)
-        stop = time.time()
-        total = int(stop - start)
+        stop_time = time.time()
+        total_time = int(stop_time - start_time)
         if self.print_timings:
             message = 'total scoped specifier time {} seconds ...'
-            message = message.format(total)
+            message = message.format(total_time)
             print(message)
 
     def _is_first_segment(self):
@@ -1369,17 +1291,6 @@ class SegmentMaker(makertools.SegmentMaker):
             markup = markup.fontsize(-3)
             start_measure = context[start_measure_index]
             attach(markup, start_measure)
-
-    def _logical_ties_to_leaves(self, logical_ties):
-        first_note = logical_ties[0].head
-        last_note = logical_ties[-1][-1]
-        leaves = []
-        current_leaf = first_note
-        while current_leaf is not last_note:
-            leaves.append(current_leaf)
-            current_leaf = inspect_(current_leaf).get_leaf(1)
-        leaves.append(last_note)
-        return leaves
 
     def _make_instrument_change_markup(self, instrument):
         string = 'to {}'.format(instrument.instrument_name)
@@ -1686,7 +1597,24 @@ class SegmentMaker(makertools.SegmentMaker):
                 leaves.append(leaf)
             elif leaves:
                 break
-        return leaves 
+        return select(leaves )
+
+    def _selection_to_timespan(self, selection):
+            if isinstance(selection[0], selectiontools.LogicalTie):
+                first = selection[0].head
+            else:
+                first = selection[0]
+            if isinstance(selection[-1], selectiontools.LogicalTie):
+                last = selection[-1][-1]
+            else:
+                last = selection[-1]
+            start_offset = inspect_(first).get_timespan().start_offset
+            stop_offset = inspect_(last).get_timespan().stop_offset
+            timespan = timespantools.Timespan(
+                start_offset=start_offset,
+                stop_offset=stop_offset,
+                )
+            return timespan
 
     def _shorten_long_repeat_ties(self):
         leaves = iterate(self._score).by_class(scoretools.Leaf)
@@ -1795,6 +1723,19 @@ class SegmentMaker(makertools.SegmentMaker):
         assert all(isinstance(_, scope_prototype) for _ in scopes), repr(
             scopes)
         return scopes
+
+    def _unwrap_scoped_specifier(self, scoped_specifier):
+        specifier_wrapper = None
+        specifier = scoped_specifier.specifier
+        if isinstance(specifier, baca.tools.SpecifierWrapper):
+            specifier_wrapper = specifier
+            specifier = specifier_wrapper.specifier
+        if isinstance(scoped_specifier.scope, baca.tools.SimpleScope):
+            simple_scope = scoped_specifier.scope
+            compound_scope = baca.tools.CompoundScope([simple_scope])
+        else:
+            compound_scope = scoped_specifier.scope
+        return compound_scope, specifier_wrapper, specifier
 
     def _update_segment_metadata(self):
         self._segment_metadata['measure_count'] = self.measure_count
@@ -2031,35 +1972,6 @@ class SegmentMaker(makertools.SegmentMaker):
 
     ### PUBLIC METHODS ###
 
-    def copy_specifier(self, scoped_offset, target_scope, **kwargs):
-        r'''Copies rhythm specifier.
-        
-        Gets rhythm specifier defined at `scoped_offset`.
-        
-        Makes new rhythm specifier with `target_scope` and optional
-        `kwargs`.
-
-        Appends rhythm specifier to segment-maker.
-
-        Returns rhythm specifier.
-        '''
-        _voice_name, _stage = scoped_offset
-        rhythm_specifier = self._get_rhythm_specifier(_voice_name, _stage)
-        rhythm_specifier = copy.deepcopy(rhythm_specifier)
-        assert isinstance(rhythm_specifier, baca.tools.ScopedSpecifier)
-        if target_scope is None:
-            target_scope = rhythm_specifier.scope
-        else:
-            target_scope = baca.tools.SimpleScope(*target_scope)
-        rhythm_specifier = rhythm_specifier.specifier
-        new_rhythm_specifier = new(rhythm_specifier, **kwargs)
-        new_scoped_specifier = baca.tools.ScopedSpecifier(
-            target_scope,
-            new_rhythm_specifier,
-            )
-        self.scoped_specifiers.append(new_scoped_specifier)
-        return new_scoped_specifier
-
     def append_specifiers(self, scopes, specifiers, **kwargs):
         r'''Appends each specifier in `specifiers` to each scope in `scopes`.
 
@@ -2092,6 +2004,35 @@ class SegmentMaker(makertools.SegmentMaker):
                 self.scoped_specifiers.append(specifier_)
                 specifiers_.append(specifier_)
         return specifiers_
+
+    def copy_specifier(self, scoped_offset, target_scope, **kwargs):
+        r'''Copies rhythm specifier.
+        
+        Gets rhythm specifier defined at `scoped_offset`.
+        
+        Makes new rhythm specifier with `target_scope` and optional
+        `kwargs`.
+
+        Appends rhythm specifier to segment-maker.
+
+        Returns rhythm specifier.
+        '''
+        _voice_name, _stage = scoped_offset
+        rhythm_specifier = self._get_rhythm_specifier(_voice_name, _stage)
+        rhythm_specifier = copy.deepcopy(rhythm_specifier)
+        assert isinstance(rhythm_specifier, baca.tools.ScopedSpecifier)
+        if target_scope is None:
+            target_scope = rhythm_specifier.scope
+        else:
+            target_scope = baca.tools.SimpleScope(*target_scope)
+        rhythm_specifier = rhythm_specifier.specifier
+        new_rhythm_specifier = new(rhythm_specifier, **kwargs)
+        new_scoped_specifier = baca.tools.ScopedSpecifier(
+            target_scope,
+            new_rhythm_specifier,
+            )
+        self.scoped_specifiers.append(new_scoped_specifier)
+        return new_scoped_specifier
 
     def validate_measure_count(self, measure_count):
         r'''Validates measure count.

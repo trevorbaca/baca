@@ -8,5 +8,5 @@ from baca import pitch
 from baca import pitch_old
 from baca import rhythm
 from baca import rhythm_old
+from baca import select_
 from baca import spanners
-from baca import __abbreviations__

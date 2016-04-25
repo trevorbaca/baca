@@ -615,15 +615,6 @@ class FuseByCountsDivisionCallback(AbjadValueObject):
     ### PUBLIC PROPERTIES ###
 
     @property
-    def cyclic(self):
-        r'''Is true when hypermeasure division maker should treat measure 
-        counts cyclically. Otherwise false.
-
-        Set to true or false.
-        '''
-        return self._cyclic
-
-    @property
     def counts(self):
         r'''Gets measure counts of hypermeasure division maker.
 
@@ -632,6 +623,15 @@ class FuseByCountsDivisionCallback(AbjadValueObject):
         Or set to infinity.
         '''
         return self._counts
+
+    @property
+    def cyclic(self):
+        r'''Is true when hypermeasure division maker should treat measure 
+        counts cyclically. Otherwise false.
+
+        Set to true or false.
+        '''
+        return self._cyclic
 
     @property
     def secondary_division_maker(self):

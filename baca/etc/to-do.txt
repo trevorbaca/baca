@@ -5,7 +5,7 @@ DEVELOPMENT TO-DO
 2.  Merge StageSpecifier, TempoSpecifier, SpacingSpecifier, VoltaSpecifier into
     SegmentGlobalSpecifier
 
-3.  Include markup, rhythm, dynamics and other library modules in Bača api
+3.  Include markup, rhythm, dynamics and other library modules in Bača API.
 
 4.  Come up with a way to pitch a chord through arbitrarily many contexts
     at one time. This will simplify the folowing:
@@ -62,33 +62,31 @@ DEVELOPMENT TO-DO
 11. Find a way to attach boxed [x6] markup as a rehearsal markup
     in the TimeSignatureContext.
 
-12. Move handlertools out of mainline and into Bača.
-
-13. Write combinatorial selector studies with visual output.
+12. Write combinatorial selector studies with visual output.
     Create a 10-measure score.
     Select every combination of everything within the 10-measure score.
 
-14. Allow 'Gtqs4', 'Gqs4', 'Gqf4', 'Gtqf4'  for 'G#+4', 'G+4', 'G~4', 'Gb~4'.
+13. Allow 'Gtqs4', 'Gqs4', 'Gqf4', 'Gtqf4'  for 'G#+4', 'G+4', 'G~4', 'Gb~4'.
 
-15. Add well-formedness check for overlapping trill spanners.
+14. Add well-formedness check for overlapping trill spanners.
 
-16. Implement something to allow the first note of a segment to be
+15. Implement something to allow the first note of a segment to be
     forcibly tied-into.
 
-17. Consider turning off markup parser in Markup.__init__().
+16. Consider turning off markup parser in Markup.__init__().
     Allow for markup parser in Markup.parse().
 
-18. Build full-bow-up and full-bow-down glyphs.
+17. Build full-bow-up and full-bow-down glyphs.
 
-19. Integrate flared hairpins into Akasha.
+18. Integrate flared hairpins into Akasha.
 
-20. Add DurationSpellingSpecifier.use_full_measure_rests property.
+19. Add DurationSpellingSpecifier.use_full_measure_rests property.
     Then consult this property when RhythmSpecifier.rewrite_meter is true.
 
-21. Write segment clock time to disk.
+20. Write segment clock time to disk.
     Then implement an IDE feature to calculate complete score clock time.
 
-22. Implement some type of CompoundSpecifier. CompoundSpecifier will know
+21. Implement some type of CompoundSpecifier. CompoundSpecifier will know
     how to apply music to a series of divisions that optionally contain
     *discontiguities*. This means that a CompoundSpecifier can be configured
     a single time (possibly behind a factory function implemented in the tools
@@ -102,14 +100,14 @@ DEVELOPMENT TO-DO
     persistent momento to allow for a CompoundSpecifier to be used between
     segments.
 
-23. Use CompoundSpecifier to implement baca.pitch.natural_harmonics().
+22. Use CompoundSpecifier to implement baca.pitch.natural_harmonics().
     The factory function will return a CompoundSpecifier that joins
     PitchSpecifier and OverrideHandler.
 
-24. Cache segment logical ties and possibly also leaves during specifier
+23. Cache segment logical ties and possibly also leaves during specifier
     interpretation. This should be the first optimization.
 
-25. Implement something to allow for specifiers attaching to *subselections*.
+24. Implement something to allow for specifiers attaching to *subselections*.
     This will change these settings ...
         segment_maker.append_specifiers(
             (vn_2, stages(16, 17)),
@@ -142,44 +140,39 @@ DEVELOPMENT TO-DO
             )
     ... instead.
 
-26. Write letter to LilyPond list. Ask if there is a way to make ottava
+25. Write letter to LilyPond list. Ask if there is a way to make ottava
     spanners extend to the same end-of-measure point as do trill spanners.
     See the trills in segment [K] of Akasha for an example.
 
-27. Implement a Partial class. Possibly also implement a HarmonicSpectrum class
+26. Implement a Partial class. Possibly also implement a HarmonicSpectrum class
     with a __show__() method that can illustrate many partials in any harmonic
     spectrum.
 
-28. Cache specifer objects during specifier interpretation. Then compare
+27. Cache specifer objects during specifier interpretation. Then compare
     each new (uninterpreted) specifier against all the specifiers that have
     already been interpreted. Raise an exception when two specifiers of the
     same type overlap in scope. This will, for example, altert when two
     OverrideHandlers have been set against overlapping scopes in the same
     segment.
 
-29. Find out if there's a way to put white-out behind markup.
-    Do this for essentially all markup. Start at the beginning of [N] in
-    Akasha.
+28. Teach SpacingSpecifier algorithm about barline-crossing tuplets.
 
-30. Extend SpacingSpecifier to allow for manual overrides.
-    Teach SpacingSpecifier algorithm about barline-crossing tuplets.
-
-31. Do ...
+29. Do ...
         \override TextScript.font-name = #"Palatino"
     ... in the global stylesheet of every score.
     There is a danger of 'fl' and other ligature combinations going completely
     missing when using LaTeX's pdfpages package together with the default
     LilyPond text font.
 
-32. Rename Akasha segment directories to segment__intro, segment_a, segment_b,
+30. Rename Akasha segment directories to segment__intro, segment_a, segment_b,
     etc.
 
-33. Implement a comprehensive dynamics regime.
+31. Implement a comprehensive dynamics regime.
     Will replace all dynamic handlers in handlertools.
     Integrate with selectors.
     Write extensive tests to show swells, patterned hairpins, everything.
 
-34. Make RhythmSpecifier.rewrite_meter work when
+32. Make RhythmSpecifier.rewrite_meter work when
     RhythmSpecifier.division_expression selects only part of a stage.
     Example:
         baca.tools.RhythmSpecifier(
@@ -191,26 +184,24 @@ DEVELOPMENT TO-DO
             rhythm_maker=rhythmmakertools.NoteRhythmMaker(),
             )
 
-35. Optimize SpacingSpecifier.__call__().
+33. Optimize SegmentMaker generally.
 
-36. Optimize SegmentMaker generally.
-
-37. Make one-line staff spanner attach to rests in violin measure one
+34. Make one-line staff spanner attach to rests in violin measure one
     in Ikribu.
 
-38. Figure out a way to include effort dynamics in hairpin chains.
+35. Figure out a way to include effort dynamics in hairpin chains.
 
-39. Sound a bell if (long-running) interpretation ends without rendering
+36. Sound a bell if (long-running) interpretation ends without rendering
     output.
 
-40. Remove remaining instrumenttools functions.
+37. Remove remaining instrumenttools functions.
 
-41. Remove scoretools.make_repeated_notes() from all tests.
+38. Remove scoretools.make_repeated_notes() from all tests.
 
-42. Modernize baca/music/music.py in all respects.
+39. Modernize baca/music/music.py in all respects.
     Port Čáry, Sekka and Lidércfény forward at the same time.
 
-43. Write doc tests for baca utilities.
+40. Write doc tests for baca utilities.
 
-44. Search for Mark in all baca (and all scores) and replace.
+41. Search for Mark in all baca (and all scores) and replace.
     Search for 'mark' in all baca (and all scores) and replace.

@@ -182,8 +182,6 @@ class ClusterSpecifier(abctools.AbjadObject):
 
     _mutates_score = True
 
-    _selector_type = 'logical ties'
-
     ### INITIALIZER ###
 
     def __init__(

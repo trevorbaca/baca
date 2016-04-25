@@ -230,6 +230,44 @@ class PartitionDivisionCallback(AbjadValueObject):
             )
         return result
 
+    def __format__(self, format_specification=''):
+        r'''Formats beat callback.
+
+        ..  container:: example
+
+            ::
+
+                >>> callback = baca.tools.PartitionDivisionCallback()
+                >>> print(format(callback))
+                baca.tools.PartitionDivisionCallback(
+                    fuse_assignable_total_duration=False,
+                    append_remainder=False,
+                    remainder_direction=Right,
+                    )
+
+        Returns string.
+        '''
+        return AbjadValueObject.__format__(
+            self,
+            format_specification=format_specification,
+            )
+
+    def __repr__(self):
+        r'''Gets interpreter representation of beat callback.
+
+        ..  container:: example
+
+            ::
+
+                >>> baca.tools.PartitionDivisionCallback()
+                PartitionDivisionCallback(fuse_assignable_total_duration=False, append_remainder=False, remainder_direction=Right)
+
+        Returns string.
+        '''
+        return AbjadValueObject.__repr__(self)
+
+    ### PRIVATE METHODS ###
+
     def _beat_list_to_grouped_beat_list(self, beat_list):
         assert isinstance(beat_list, (list, tuple)), repr(beat_list)
         beat_list_ = []
@@ -285,43 +323,134 @@ class PartitionDivisionCallback(AbjadValueObject):
                 grouped_beat_list.append(remainder)
         return grouped_beat_list
 
-    def __format__(self, format_specification=''):
-        r'''Formats beat callback.
-
-        ..  container:: example
-
-            ::
-
-                >>> callback = baca.tools.PartitionDivisionCallback()
-                >>> print(format(callback))
-                baca.tools.PartitionDivisionCallback(
-                    fuse_assignable_total_duration=False,
-                    append_remainder=False,
-                    remainder_direction=Right,
-                    )
-
-        Returns string.
-        '''
-        return AbjadValueObject.__format__(
-            self,
-            format_specification=format_specification,
-            )
-
-    def __repr__(self):
-        r'''Gets interpreter representation of beat callback.
-
-        ..  container:: example
-
-            ::
-
-                >>> baca.tools.PartitionDivisionCallback()
-                PartitionDivisionCallback(fuse_assignable_total_duration=False, append_remainder=False, remainder_direction=Right)
-
-        Returns string.
-        '''
-        return AbjadValueObject.__repr__(self)
-
     ### PUBLIC PROPERTIES ###
+
+    @property
+    def append_remainder(self):
+        r'''Is true when remainder beat group should fuse to next closest beat
+        group. Otherwise false.
+
+        ..  container:: example
+
+            **Example 1.** Groups beats into pairs. Remainder at right.
+            Does not fuse remainder:
+
+            ::
+
+                >>> callback = baca.tools.PartitionDivisionCallback(
+                ...     counts=[2],
+                ...     append_remainder=False,
+                ...     remainder_direction=Right,
+                ...     )
+
+            ::
+
+                >>> beat_list = 5 * [(1, 4)]
+                >>> grouped_beat_lists = callback([beat_list])
+                >>> grouped_beat_lists[0]
+                [[Division((1, 4)), Division((1, 4))], [Division((1, 4)), Division((1, 4))], [Division((1, 4))]]
+                >>> [len(beat_group) for beat_group in _]
+                [2, 2, 1]
+
+            ::
+
+                >>> beat_list = 6 * [(1, 4)]
+                >>> grouped_beat_lists = callback([beat_list])
+                >>> grouped_beat_lists[0]
+                [[Division((1, 4)), Division((1, 4))], [Division((1, 4)), Division((1, 4))], [Division((1, 4)), Division((1, 4))]]
+                >>> [len(beat_group) for beat_group in _]
+                [2, 2, 2]
+
+            ::
+
+                >>> beat_list = 7 * [(1, 4)]
+                >>> grouped_beat_lists = callback([beat_list])
+                >>> grouped_beat_lists[0]
+                [[Division((1, 4)), Division((1, 4))], [Division((1, 4)), Division((1, 4))], [Division((1, 4)), Division((1, 4))], [Division((1, 4))]]
+                >>> [len(beat_group) for beat_group in _]
+                [2, 2, 2, 1]
+
+            ::
+
+                >>> beat_list = 8 * [(1, 4)]
+                >>> grouped_beat_lists = callback([beat_list])
+                >>> grouped_beat_lists[0]
+                [[Division((1, 4)), Division((1, 4))], [Division((1, 4)), Division((1, 4))], [Division((1, 4)), Division((1, 4))], [Division((1, 4)), Division((1, 4))]]
+                >>> [len(beat_group) for beat_group in _]
+                [2, 2, 2, 2]
+
+            ::
+
+                >>> beat_list = 9 * [(1, 4)]
+                >>> grouped_beat_lists = callback([beat_list])
+                >>> grouped_beat_lists[0]
+                [[Division((1, 4)), Division((1, 4))], [Division((1, 4)), Division((1, 4))], [Division((1, 4)), Division((1, 4))], [Division((1, 4)), Division((1, 4))], [Division((1, 4))]]
+                >>> [len(beat_group) for beat_group in _]
+                [2, 2, 2, 2, 1]
+
+        ..  container:: example
+
+            **Example 2.** Groups beats into groups of two. Remainder at right.
+            Fuses remainder to nearest group:
+
+            ::
+
+                >>> callback = baca.tools.PartitionDivisionCallback(
+                ...     counts=[2],
+                ...     append_remainder=True,
+                ...     remainder_direction=Right,
+                ...     )
+
+            ::
+
+                >>> beat_list = 5 * [(1, 4)]
+                >>> grouped_beat_lists = callback([beat_list])
+                >>> grouped_beat_lists[0]
+                [[Division((1, 4)), Division((1, 4))], [Division((1, 4)), Division((1, 4)), Division((1, 4))]]
+                >>> [len(beat_group) for beat_group in _]
+                [2, 3]
+
+            ::
+
+                >>> beat_list = 6 * [(1, 4)]
+                >>> grouped_beat_lists = callback([beat_list])
+                >>> grouped_beat_lists[0]
+                [[Division((1, 4)), Division((1, 4))], [Division((1, 4)), Division((1, 4))], [Division((1, 4)), Division((1, 4))]]
+                >>> [len(beat_group) for beat_group in _]
+                [2, 2, 2]
+
+            ::
+
+                >>> beat_list = 7 * [(1, 4)]
+                >>> grouped_beat_lists = callback([beat_list])
+                >>> grouped_beat_lists[0]
+                [[Division((1, 4)), Division((1, 4))], [Division((1, 4)), Division((1, 4))], [Division((1, 4)), Division((1, 4)), Division((1, 4))]]
+                >>> [len(beat_group) for beat_group in _]
+                [2, 2, 3]
+
+            ::
+
+                >>> beat_list = 8 * [(1, 4)]
+                >>> grouped_beat_lists = callback([beat_list])
+                >>> grouped_beat_lists[0]
+                [[Division((1, 4)), Division((1, 4))], [Division((1, 4)), Division((1, 4))], [Division((1, 4)), Division((1, 4))], [Division((1, 4)), Division((1, 4))]]
+                >>> [len(beat_group) for beat_group in _]
+                [2, 2, 2, 2]
+
+            ::
+
+                >>> beat_list = 9 * [(1, 4)]
+                >>> grouped_beat_lists = callback([beat_list])
+                >>> grouped_beat_lists[0]
+                [[Division((1, 4)), Division((1, 4))], [Division((1, 4)), Division((1, 4))], [Division((1, 4)), Division((1, 4))], [Division((1, 4)), Division((1, 4)), Division((1, 4))]]
+                >>> [len(beat_group) for beat_group in _]
+                [2, 2, 2, 3]
+
+        Defaults to false.
+
+        Set to true or false.
+        '''
+        return self._append_remainder
 
     @property
     def counts(self):
@@ -507,133 +636,6 @@ class PartitionDivisionCallback(AbjadValueObject):
         Set to true or false.
         '''
         return self._fuse_assignable_total_duration
-
-    @property
-    def append_remainder(self):
-        r'''Is true when remainder beat group should fuse to next closest beat
-        group. Otherwise false.
-
-        ..  container:: example
-
-            **Example 1.** Groups beats into pairs. Remainder at right.
-            Does not fuse remainder:
-
-            ::
-
-                >>> callback = baca.tools.PartitionDivisionCallback(
-                ...     counts=[2],
-                ...     append_remainder=False,
-                ...     remainder_direction=Right,
-                ...     )
-
-            ::
-
-                >>> beat_list = 5 * [(1, 4)]
-                >>> grouped_beat_lists = callback([beat_list])
-                >>> grouped_beat_lists[0]
-                [[Division((1, 4)), Division((1, 4))], [Division((1, 4)), Division((1, 4))], [Division((1, 4))]]
-                >>> [len(beat_group) for beat_group in _]
-                [2, 2, 1]
-
-            ::
-
-                >>> beat_list = 6 * [(1, 4)]
-                >>> grouped_beat_lists = callback([beat_list])
-                >>> grouped_beat_lists[0]
-                [[Division((1, 4)), Division((1, 4))], [Division((1, 4)), Division((1, 4))], [Division((1, 4)), Division((1, 4))]]
-                >>> [len(beat_group) for beat_group in _]
-                [2, 2, 2]
-
-            ::
-
-                >>> beat_list = 7 * [(1, 4)]
-                >>> grouped_beat_lists = callback([beat_list])
-                >>> grouped_beat_lists[0]
-                [[Division((1, 4)), Division((1, 4))], [Division((1, 4)), Division((1, 4))], [Division((1, 4)), Division((1, 4))], [Division((1, 4))]]
-                >>> [len(beat_group) for beat_group in _]
-                [2, 2, 2, 1]
-
-            ::
-
-                >>> beat_list = 8 * [(1, 4)]
-                >>> grouped_beat_lists = callback([beat_list])
-                >>> grouped_beat_lists[0]
-                [[Division((1, 4)), Division((1, 4))], [Division((1, 4)), Division((1, 4))], [Division((1, 4)), Division((1, 4))], [Division((1, 4)), Division((1, 4))]]
-                >>> [len(beat_group) for beat_group in _]
-                [2, 2, 2, 2]
-
-            ::
-
-                >>> beat_list = 9 * [(1, 4)]
-                >>> grouped_beat_lists = callback([beat_list])
-                >>> grouped_beat_lists[0]
-                [[Division((1, 4)), Division((1, 4))], [Division((1, 4)), Division((1, 4))], [Division((1, 4)), Division((1, 4))], [Division((1, 4)), Division((1, 4))], [Division((1, 4))]]
-                >>> [len(beat_group) for beat_group in _]
-                [2, 2, 2, 2, 1]
-
-        ..  container:: example
-
-            **Example 2.** Groups beats into groups of two. Remainder at right.
-            Fuses remainder to nearest group:
-
-            ::
-
-                >>> callback = baca.tools.PartitionDivisionCallback(
-                ...     counts=[2],
-                ...     append_remainder=True,
-                ...     remainder_direction=Right,
-                ...     )
-
-            ::
-
-                >>> beat_list = 5 * [(1, 4)]
-                >>> grouped_beat_lists = callback([beat_list])
-                >>> grouped_beat_lists[0]
-                [[Division((1, 4)), Division((1, 4))], [Division((1, 4)), Division((1, 4)), Division((1, 4))]]
-                >>> [len(beat_group) for beat_group in _]
-                [2, 3]
-
-            ::
-
-                >>> beat_list = 6 * [(1, 4)]
-                >>> grouped_beat_lists = callback([beat_list])
-                >>> grouped_beat_lists[0]
-                [[Division((1, 4)), Division((1, 4))], [Division((1, 4)), Division((1, 4))], [Division((1, 4)), Division((1, 4))]]
-                >>> [len(beat_group) for beat_group in _]
-                [2, 2, 2]
-
-            ::
-
-                >>> beat_list = 7 * [(1, 4)]
-                >>> grouped_beat_lists = callback([beat_list])
-                >>> grouped_beat_lists[0]
-                [[Division((1, 4)), Division((1, 4))], [Division((1, 4)), Division((1, 4))], [Division((1, 4)), Division((1, 4)), Division((1, 4))]]
-                >>> [len(beat_group) for beat_group in _]
-                [2, 2, 3]
-
-            ::
-
-                >>> beat_list = 8 * [(1, 4)]
-                >>> grouped_beat_lists = callback([beat_list])
-                >>> grouped_beat_lists[0]
-                [[Division((1, 4)), Division((1, 4))], [Division((1, 4)), Division((1, 4))], [Division((1, 4)), Division((1, 4))], [Division((1, 4)), Division((1, 4))]]
-                >>> [len(beat_group) for beat_group in _]
-                [2, 2, 2, 2]
-
-            ::
-
-                >>> beat_list = 9 * [(1, 4)]
-                >>> grouped_beat_lists = callback([beat_list])
-                >>> grouped_beat_lists[0]
-                [[Division((1, 4)), Division((1, 4))], [Division((1, 4)), Division((1, 4))], [Division((1, 4)), Division((1, 4))], [Division((1, 4)), Division((1, 4)), Division((1, 4))]]
-                >>> [len(beat_group) for beat_group in _]
-                [2, 2, 2, 3]
-
-        Defaults to false.
-
-        Set to true or false.
-        '''
-        return self._append_remainder
 
     @property
     def remainder_direction(self):

@@ -135,8 +135,6 @@ class RegistrationTransitionSpecifier(abctools.AbjadObject):
 
     _include_selection_timespan = True
 
-    _selector_type = 'logical ties'
-
     ### INITIALIZER ###
 
     def __init__(

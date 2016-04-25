@@ -130,8 +130,6 @@ class OctaveDisplacementSpecifier(abctools.AbjadObject):
         '_displacements',
         )
 
-    _selector_type = 'logical ties'
-
     ### INITIALIZER ###
 
     def __init__(

@@ -54,7 +54,7 @@ class OverrideHandler(Handler):
     ### SPECIAL METHODS ###
 
     def __call__(self, expr):
-        r'''Calls handler on `expr`.
+        r'''Calls handler.
 
         Returns none.
         '''

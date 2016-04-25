@@ -317,21 +317,6 @@ class RhythmSpecifier(abctools.AbjadObject):
             return self.rhythm_maker
         return self._default_rhythm_maker
 
-    def _select_divisions(self, divisions, start_offset):
-        import baca
-        if self.division_expression is not None:
-            divisions = self.division_expression(divisions)
-            if not isinstance(divisions, sequencetools.Sequence):
-                message = 'must be division sequence: {!r}.'
-                message = message.format(divisions)
-                raise Exception(message)
-        new_start_offset = divisions[0].start_offset
-        contribution = baca.tools.Contribution(
-            payload=divisions,
-            start_offset=new_start_offset,
-            )
-        return contribution
-
     def _make_rhythm(self, time_signatures, start_offset):
         rhythm_maker = self._get_rhythm_maker()
         if isinstance(rhythm_maker, selectiontools.Selection):
@@ -410,6 +395,21 @@ class RhythmSpecifier(abctools.AbjadObject):
         music = dummy_music_voice[:]
         return dummy_music_voice, start_offset
 
+    def _select_divisions(self, divisions, start_offset):
+        import baca
+        if self.division_expression is not None:
+            divisions = self.division_expression(divisions)
+            if not isinstance(divisions, sequencetools.Sequence):
+                message = 'must be division sequence: {!r}.'
+                message = message.format(divisions)
+                raise Exception(message)
+        new_start_offset = divisions[0].start_offset
+        contribution = baca.tools.Contribution(
+            payload=divisions,
+            start_offset=new_start_offset,
+            )
+        return contribution
+
     def _set_staff_line_count(self, first_leaf, staff_line_count):
         command = indicatortools.LilyPondCommand('stopStaff')
         attach(command, first_leaf)
@@ -431,16 +431,6 @@ class RhythmSpecifier(abctools.AbjadObject):
         return self._clef
 
     @property
-    def division_maker(self):
-        r'''Gets division maker.
-
-        Set to none or division maker.
-
-        Returns none or division maker.
-        '''
-        return self._division_maker
-
-    @property
     def division_expression(self):
         r'''Gets division callbacks.
 
@@ -449,6 +439,16 @@ class RhythmSpecifier(abctools.AbjadObject):
         Returns none or division selector.
         '''
         return self._division_expression
+
+    @property
+    def division_maker(self):
+        r'''Gets division maker.
+
+        Set to none or division maker.
+
+        Returns none or division maker.
+        '''
+        return self._division_maker
 
     @property
     def instrument(self):

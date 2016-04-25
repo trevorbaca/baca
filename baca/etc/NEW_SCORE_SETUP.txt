@@ -1,14 +1,19 @@
 0.  Apply any OS updates with (Apple menu > App Store ... > Updates).
 
-1.  Change to abjad directory, run all tests and run 'ajv api -M'.
-    Change to the experimental directory, run all tests and run 'ajv api -X'.
-    Change to the IDE directory, run all tests and run 'ajv api -I'.
+1.  Change to abjad directory.
+    Run "pip install -e .".
+    Run "ajv api -M; ajv doctest; py.test -rf".
+    Change to the experimental directory.
+    Run "ajv api -X; ajv doctest; py.test -rf".
+    Change to the IDE directory.
+    Run "pip install -e .".
+    Run "ajv api -I; ajv doctest; py.test -rf".
 
 2.  Decide the title of the score.
     Decide the name of the score package.
 
 3.  Use IDE (new) to create the score package.
-    Need check and see if this populates score metadata or not.
+    [Need to check and see if this populates score metadata or not.]
 
 4.  Edit score metadata by hand with (meta).
     For example:
@@ -41,24 +46,24 @@
 
 8.  Create new stages.txt file with (ee > new > stages.txt).
 
-9.  Define the score stages.
+9.  Edit stages.txt and define score stages verbally.
     Commit with (ci).
 
 10. Copy an existing score template with (oo > cp).
     Edit ScoreTemplate.py by hand.
-    Build score template in score order.
+    Define instruments in score order.
     Make only one (master) score template per score.
     Run (dt).
 
 11. Copy an existing instruments package with (mm > cp).
     Edit instruments/definition.py by hand.
-    Build ordered dictionary in score order.
+    Define instruments in score order.
     Run (dfk).
     Eventually run (pdfm).
 
 12. Copy an existing tempi package with (mm > cp).
     Edit tempi/definition.py by hand.
-    Structure tempi package alphabetically by tempo name.
+    Define tempi alphabetically by tempo name.
     Run (dfk).
     Eventually run (pdfm).
 
@@ -70,7 +75,7 @@
 14. Change to the stylesheets directory with (yy).
     Leave IDE-generated nonfirst-segment.ily as is.
 
-15. Copy existing default-instrument-names.ily with (yy > cp).
+15. Copy an existing default-instrument-names.ily with (yy > cp).
     Edit default-instrument-names.ily by hand.
     Define default instrument names in score order.
     Insert blank lines between pairs of definitions.
@@ -95,10 +100,12 @@
 
 18. Copy existing abbreviations file with (mm > cp).
     Edit __abbreviations__.py by hand.
-    Abbreviate voices in score order.
+    Define voices in score order.
     Run (!python __abbreviations__.py).
+    Run (dt).
+    Run (pt).
     Commit changes to score package:
-    "Made score template, instruments and stylesheet."
+    "Defined score template, instruments and stylesheet."
 
 19. Create all segments with yet-to-be-implemented (gg > setup).
     To define 'name' by hand:
@@ -111,21 +118,30 @@
     ...
     (gg > new > segment_q > meta > define 'name' by hand)
 
-20. Define stub version of first segment with (#introduction).
-    Copy definition.py with (cp).
+20. Define stub version of first segment.
+    Go to (%introduction).
+    Copy an existing definition.py with (cp).
     Edit introduction/definition.py by hand.
-    Define segment-maker; do not define time or color.
+    Define segment-maker.
+    Do not define time or color.
     Run (pdfm) repeatedly until PDF renders successfully.
-    Check title typography; edit stylesheet.ily with (@sty).
+    Check title typography.
+    Edit stylesheet.ily with (@sty).
+    Check instrument names and short instrument names.
+    Edit materials/instruments/definition.py with (@instr).
     Check (lpg) to make sure no errors or warnings appear in LilyPong log.
     
-21. Define stub version of nonfirst segment with (#A).
-    Copy definition.py with (cp).
+21. Define stub version of nonfirst segment.
+    Go to (%A).
+    Copy an existing definition.py with (cp).
     Edit introduction/definition.py by hand.
-    Define segment-maker; do not define time or color.
-    Supply enough time signatures to create two pages of music or more.
-    This will allow stylesheet footer-checking when stub score is built, below.
+    Define segment-maker.
+    Do not define time or color.
+    Supply enough time signatures to create two (or more) pages of music.
+    This will allow stylesheet footer-checking when stub score is built.
     Run (pdfm) repeatedly until PDF renders successfully.
+    Footers will not appear in the output PDF.
+    But footers will appear when stub score is built.
     Make sure that no blue-colored default instrument names appear.
     Check (lpg) to make sure no errors or warnings appear in LilyPong log.
 
@@ -150,14 +166,17 @@
     Use (ci) to commit changes to score package: "Built stub segments."
     Quit the IDE.
 
-24. In the termainl, change to baca package with (cdb).
+24. In the terminal, change to baca package with (cdb).
     Run 'ajv doctest; py.test -rf'.
     Commit changes to baca package.
 
-25. Change to _docs package with (cds > _docs).
+25. Change to _docs package with (cds > cd _docs).
     Run build_scores_api.py.
     Commit changes to _docs package: "Rebuilt docs."
 
-26. Change to abjad directory, run all tests and run 'ajv api -M'.
-    Change to the experimental directory, run all tests and run 'ajv api -X'.
-    Change to the IDE directory, run all tests and run 'ajv api -I'.
+26. Change to the abjad directory.
+    Run "ajv api -M; ajv doctest; py.test -rf".
+    Change to the experimental directory.
+    Run "ajv api -X; ajv doctest; py.test -rf".
+    Change to the IDE directory.
+    Run "ajv api -I; ajv doctest; py.test -rf".

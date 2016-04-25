@@ -132,8 +132,6 @@ class StemTremoloSpecifier(abctools.AbjadObject):
         '_patterns',
         )
 
-    _selector_type = 'logical ties'
-
     ### INITIALIZER ###
 
     def __init__(

@@ -128,8 +128,6 @@ class RegistrationSpecifier(abctools.AbjadObject):
         '_registration',
         )
 
-    _selector_type = 'logical ties'
-
     ### INITIALIZER ###
 
     def __init__(

@@ -131,8 +131,6 @@ class MicrotonalDeviationSpecifier(abctools.AbjadObject):
         '_number_lists',
         )
 
-    _selector_type = 'logical ties'
-
     ### INITIALIZER ###
 
     def __init__(
